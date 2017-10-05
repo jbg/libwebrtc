@@ -51,6 +51,24 @@
       "revId": "1ef96895022feee426306b4c370ce0b2abc61bd9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2848b342_cc3f6bc7",
+        "filename": "pc/mediasession_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3717,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-05T03:51:49Z",
+      "side": 1,
+      "message": "Many of the existing tests are too complex, agreed, but I don\u0027t think the test infrastructure itself has problems. The only weird thing is that it sets hard-coded codec lists (e.g. kAudioCodecs1) in the constructor (which I\u0027d like to fix, and clearly goes against testing guidelines).\n\nAnyway: going with the principles of behavior-driven testing (https://engdoc.corp.google.com/eng/doc/devguide/coding/testing/unit-testing-best-practices.md?cl\u003dhead#behavior-testing), I\u0027d say it\u0027s valuable to have a test for \"RTX added in a re-offer\", and a test for \"Different H264 profiles treated as distinct codecs\", but not necessarily the combination of the two.\n\nHowever, I don\u0027t see *any* test here currently that deals with H264 profiles. So here\u0027s a bug to add them: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d8345",
+      "parentUuid": "f920b0ad_2f3c401d",
+      "revId": "1ef96895022feee426306b4c370ce0b2abc61bd9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
