@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5edf39cc_62274ba8",
+        "filename": "rtc_base/sigslotrepeater.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-05T10:59:47Z",
+      "side": 1,
+      "message": "Do these convenience(?) aliases need to be public? \n\nMight be clearer to settle on either |typedef| (like here) or |using| (like in the template below).",
+      "range": {
+        "startLine": 33,
+        "startChar": 10,
+        "endLine": 33,
+        "endChar": 35
+      },
+      "revId": "9a4abad97cc40f6a6189052c4f8a6ddf8a9e3fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
