@@ -45,6 +45,30 @@
       "revId": "1491f6ec1a2a73f142f9e7ba352e8e745e7514f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52a02499_94e76153",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-10-05T12:49:50Z",
+      "side": 1,
+      "message": "Comment is a bit confusing to me - video_frame.h is already in the API. It seems the real problem is it adds transitive deps on system_wrappers etc (video_frame_api may need to be split into an api and impl pair).",
+      "parentUuid": "dbb8d314_cef83cf1",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 1
+      },
+      "revId": "1491f6ec1a2a73f142f9e7ba352e8e745e7514f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
