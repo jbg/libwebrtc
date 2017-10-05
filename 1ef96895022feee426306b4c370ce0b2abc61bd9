@@ -69,6 +69,24 @@
       "revId": "1ef96895022feee426306b4c370ce0b2abc61bd9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68584a0b_39c9a9d5",
+        "filename": "pc/mediasession_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3717,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-05T15:20:03Z",
+      "side": 1,
+      "message": "Re test structure, I was just suggesting that we could factor out complex non-public methods like NegotiateCodecs into its own component to make the tests more simple and clear.\n\nRe behavior-driven testing, agreed, I was just trying to emulate the situation that triggered the bug in question and didn\u0027t know what the culprit could be.\n\nI\u0027ll abandon this CL and look forward to tests with H264 profiles :)",
+      "parentUuid": "2848b342_cc3f6bc7",
+      "revId": "1ef96895022feee426306b4c370ce0b2abc61bd9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
