@@ -253,16 +253,6 @@ void SrtpTransport::ResetParams() {
   LOG(LS_INFO) << "The params in SRTP transport are reset.";
 }
 
-void SrtpTransport::SetEncryptedHeaderExtensionIds(
-    cricket::ContentSource source,
-    const std::vector<int>& extension_ids) {
-  if (source == cricket::CS_LOCAL) {
-    recv_encrypted_header_extension_ids_ = extension_ids;
-  } else {
-    send_encrypted_header_extension_ids_ = extension_ids;
-  }
-}
-
 void SrtpTransport::CreateSrtpSessions() {
   send_session_.reset(new cricket::SrtpSession());
   recv_session_.reset(new cricket::SrtpSession());

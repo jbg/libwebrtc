@@ -115,11 +115,18 @@ class SrtpTransport : public RtpTransportInternal {
 
   void ResetParams();
 
-  // Set the header extension ids that should be encrypted for the given source.
+  // Set the header extension ids that should be encrypted.
   // This method doesn't immediately update the SRTP session with the new IDs,
   // and you need to call SetRtpParams for that to happen.
-  void SetEncryptedHeaderExtensionIds(cricket::ContentSource source,
-                                      const std::vector<int>& extension_ids);
+  void SetSendEncryptedHeaderExtensionIds(
+      const std::vector<int>& send_extension_ids) {
+    send_encrypted_header_extension_ids_ = send_extension_ids;
+  }
+
+  void SetRecvEncryptedHeaderExtensionIds(
+      const std::vector<int>& recv_extension_ids) {
+    recv_encrypted_header_extension_ids_ = recv_extension_ids;
+  }
 
   // If external auth is enabled, SRTP will write a dummy auth tag that then
   // later must get replaced before the packet is sent out. Only supported for
