@@ -358,8 +358,9 @@ def UpdateDepsFile(deps_filename, old_cr_revision, new_cr_revision,
       logging.warning('roll-dep-svn: %s', stderr)
 
 
-def _IsTreeClean():
-  stdout, _ = _RunCommand(['git', 'status', '--porcelain'])
+def _IsTreeClean(working_dir=None):
+  stdout, _ = _RunCommand(['git', 'status', '--porcelain'],
+                          working_dir=working_dir)
   if len(stdout) == 0:
     return True
 
