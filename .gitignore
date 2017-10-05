@@ -44,7 +44,9 @@
 /mojo
 /out
 /testing
-/third_party
+/third_party/**/*
+!/third_party/external-spl_sqrt_floor
+!/third_party/external-spl_sqrt_floor/*
 /tools
 /tools_webrtc/android/profiling/flamegraph
 /tools_webrtc/android/profiling/simpleperf
