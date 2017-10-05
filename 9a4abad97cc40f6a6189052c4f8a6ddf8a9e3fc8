@@ -22,6 +22,30 @@
       "revId": "9a4abad97cc40f6a6189052c4f8a6ddf8a9e3fc8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a440d28a_a5776d6b",
+        "filename": "rtc_base/sigslotrepeater.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-05T16:14:15Z",
+      "side": 1,
+      "message": "Made private.",
+      "parentUuid": "5edf39cc_62274ba8",
+      "range": {
+        "startLine": 33,
+        "startChar": 10,
+        "endLine": 33,
+        "endChar": 35
+      },
+      "revId": "9a4abad97cc40f6a6189052c4f8a6ddf8a9e3fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
