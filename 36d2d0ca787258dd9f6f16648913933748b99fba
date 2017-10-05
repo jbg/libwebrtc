@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad6dff67_e334bc04",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-05T04:01:23Z",
+      "side": 1,
+      "message": "It\u0027s not ideal to have so many duplicated methods here.\nI tried the idea of making an RtpTransportInternalAdapter(we already have RtpTransportAdapter for ORTC) and it is not straightforward for DtlsSrtpTransport to use the adapter pattern.\n\nFor example, \n\nAssuming we have:\nRtpTransport |r|;\n\nThe base class RtpTransportAdapter keeps a pointer of |r| (not owned) and implements the methods using |r|.\n\nSrtpTransport subclasses RtpTransportAdapter owning |r| and it also keeps a raw pointer of |r| \n\nDtlsSrtpTransport subclasses RtpTransportAdapter owning an SrtpTransport |s| which owns |r|,\nand because DtlsSrtpTransport is a subclass, it also keeps a raw pointer of |r|. \n\nWe need to make sure three objects using the same |r| underneath.\n\n\nThe DtlsSrtpTransport don\u0027t have to implement the RtpTransportInternal again with this method but the ownership management is just not simple enough. Do you think we should still do it or did I miss something here?\n\nIn addition, since DtlsSrtpTransport has so many overlapped methods with SrtpTransport, does it make sense for DtlsSrtpTransport to be a subclass of SrtpTransport meaning a special kind of SrtpTransport with extra capabilities (extracting keys from DtlsTransport.)?",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
