@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "515663ce_21b517cb",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-05T20:12:55Z",
+      "side": 1,
+      "message": "Oh, we actually have a handy function for this already. :-)\n\n   x509_chain_ \u003d X509_chain_up_ref(chain);",
+      "revId": "0073731ec1ed0baa8f15dd9d35cd2f8daaf73854",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1569d42_5012a08c",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-05T20:12:55Z",
+      "side": 1,
+      "message": "What I was getting at with the previous comment is that a syntax error should probably be fatal to the whole thing, not silently truncate the chain. Thus it seems better to check the error here.\n\n(Though there is another question which is whether this function should continue parsing or not, since this changes public API slightly. WebRTC folks?)",
+      "revId": "0073731ec1ed0baa8f15dd9d35cd2f8daaf73854",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c6deb1_e784c6b1",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-05T20:12:55Z",
+      "side": 1,
+      "message": "Hrm. A ToDER function would typically only serialize one certificate, not concatenate several. DER is length-delimited, but it is very uncommon to just blindly concatenate the DER representations, whereas it is a little less uncommon for PEM. For instance, TLS sends each certificate in a separate protocol unit.\n\nThis is a question for WebRTC folks for what SSLCertificate::ToDER is supposed to return at all. Judging by FakeSSLCertificate, it seems both ToDER *and* ToPEMString return a single certificate, not the chain. (Part of this is a symptom of WebRTC having not a great API here. An SSLCertificate is sometimes just one certificate and sometimes a chain.)",
+      "revId": "0073731ec1ed0baa8f15dd9d35cd2f8daaf73854",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63642136_aa3be962",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-05T20:12:55Z",
+      "side": 1,
+      "message": "(This isn\u0027t really truncated anymore now that that code was removed.)",
+      "revId": "0073731ec1ed0baa8f15dd9d35cd2f8daaf73854",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
