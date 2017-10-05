@@ -119,17 +119,17 @@ rtc_source_set("mock_common_audio") {
 rtc_source_set("common_audio_c_arm_asm") {
   visibility = [ ":*" ]  # Only targets in this file can depend on this.
   sources = []
+  deps = []
   if (current_cpu == "arm") {
-    sources += [
-      "signal_processing/complex_bit_reverse_arm.S",
-      "signal_processing/spl_sqrt_floor_arm.S",
-    ]
+    sources += [ "signal_processing/complex_bit_reverse_arm.S" ]
 
     if (arm_version >= 7) {
       sources += [ "signal_processing/filter_ar_fast_q12_armv7.S" ]
     } else {
       sources += [ "signal_processing/filter_ar_fast_q12.c" ]
     }
+
+    deps += [ "//third_party/external-spl_sqrt_floor:arm" ]
   }
 }
 
@@ -186,6 +186,14 @@ rtc_source_set("common_audio_c") {
     "vad/vad_sp.h",
     "vad/webrtc_vad.c",
   ]
+  deps = [
+    ":common_audio_c_arm_asm",
+    ":common_audio_cc",
+    "..:webrtc_common",
+    "../rtc_base:compile_assert_c",
+    "../rtc_base:rtc_base_approved",
+    "../system_wrappers:system_wrappers",
+  ]
 
   if (current_cpu == "mipsel") {
     sources += [
@@ -197,11 +205,11 @@ rtc_source_set("common_audio_c") {
       "signal_processing/include/spl_inl_mips.h",
       "signal_processing/min_max_operations_mips.c",
       "signal_processing/resample_by_2_mips.c",
-      "signal_processing/spl_sqrt_floor_mips.c",
     ]
     if (mips_dsp_rev > 0) {
       sources += [ "signal_processing/vector_scaling_operations_mips.c" ]
     }
+    deps += [ "//third_party/external-spl_sqrt_floor:mips" ]
   } else {
     sources += [ "signal_processing/complex_fft.c" ]
   }
@@ -210,8 +218,8 @@ rtc_source_set("common_audio_c") {
     sources += [
       "signal_processing/complex_bit_reverse.c",
       "signal_processing/filter_ar_fast_q12.c",
-      "signal_processing/spl_sqrt_floor.c",
     ]
+    deps += [ "//third_party/external-spl_sqrt_floor:c" ]
   }
 
   if (is_win) {
@@ -219,14 +227,6 @@ rtc_source_set("common_audio_c") {
   }
 
   public_configs = [ ":common_audio_config" ]
-  deps = [
-    ":common_audio_c_arm_asm",
-    ":common_audio_cc",
-    "..:webrtc_common",
-    "../rtc_base:compile_assert_c",
-    "../rtc_base:rtc_base_approved",
-    "../system_wrappers:system_wrappers",
-  ]
 }
 
 rtc_source_set("common_audio_cc") {
