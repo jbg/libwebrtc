@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6abc49f2_1e1fbde5",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-06T12:37:17Z",
+      "side": 1,
+      "message": "nit, \"...number of channels...\"",
+      "revId": "961ea16c7e6ae60ab2ea092ec79b06395b1c1429",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
