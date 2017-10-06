@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2423d9ea_b1b47a3c",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-06T12:27:14Z",
+      "side": 1,
+      "message": "Given the methods and their documentation, this class name is oddly specific. Just \"LogOutput\" maybe?",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "9b263363efbfd9ffabbb16e2a8dd6a77e66b893f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
