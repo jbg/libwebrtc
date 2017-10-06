@@ -46,6 +46,30 @@
       "revId": "9b263363efbfd9ffabbb16e2a8dd6a77e66b893f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2100f743_19a71354",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-06T12:43:38Z",
+      "side": 1,
+      "message": "Well, I guess that a too-specific name is less harmful than a too-generic one. So go ahead with the current name for now.",
+      "parentUuid": "262364cb_93870f0b",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "9b263363efbfd9ffabbb16e2a8dd6a77e66b893f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
