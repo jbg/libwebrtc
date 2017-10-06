@@ -22,6 +22,30 @@
       "revId": "9b263363efbfd9ffabbb16e2a8dd6a77e66b893f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262364cb_93870f0b",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-06T12:29:00Z",
+      "side": 1,
+      "message": "Sounds deceptively minimalistic for me, I\u0027m afraid. This is only to be used for the RtcEventLog; I cannot comment whether this would be a good interface for any other kind of output. Wdyt?",
+      "parentUuid": "2423d9ea_b1b47a3c",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "9b263363efbfd9ffabbb16e2a8dd6a77e66b893f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
