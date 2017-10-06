@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e5df21a_5e0f0cf4",
+        "filename": "pc/sdputils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-06T04:16:44Z",
+      "side": 1,
+      "message": "nit: We typically don\u0027t forward-declare things in the webrtc codebase, preferring to just include files as needed.",
+      "revId": "d1e66ff337a4336c6818759f121f99fe9edba6c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
