@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81d8027a_6cdb26d6",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-06T16:08:34Z",
+      "side": 1,
+      "message": "Why does this need its own build target? Seems like it could go in libjingle_peerconnection_api.\n\nAlso, why use \"libjingle\" for new build targets?",
+      "revId": "8081073677a0c770dd1cc7baa2cf718437ae2bf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
