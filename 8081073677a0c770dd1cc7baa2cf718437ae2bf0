@@ -16,6 +16,24 @@
       "revId": "8081073677a0c770dd1cc7baa2cf718437ae2bf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02cbf9f9_e3c94531",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-06T16:58:43Z",
+      "side": 1,
+      "message": "It could, but do we want the log to depend on peerconnection_api? Well it already does, but don\u0027t you think we\u0027d like to move in the other direction?\n\nThe main reason you were added as a reviewer was to settle the libjingle_ prefix question, I think. :)",
+      "parentUuid": "81d8027a_6cdb26d6",
+      "revId": "8081073677a0c770dd1cc7baa2cf718437ae2bf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
