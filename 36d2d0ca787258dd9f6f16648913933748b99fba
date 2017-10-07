@@ -16,6 +16,75 @@
       "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca3a296e_8dfbdc89",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-07T18:28:53Z",
+      "side": 1,
+      "message": "I still don\u0027t understand the problem with the adapter approach. If every object in the stack calls methods of the object below, then they\u0027ll naturally all use the same |r|. Maybe you could show me the issue in person?\n\nAs for subclassing SrtpTransport: I don\u0027t think that\u0027s a good idea. We don\u0027t *want* DtlsSrtpTransport to expose \"SetRtpParams\"/etc., the idea is that it handles that internally.",
+      "parentUuid": "ad6dff67_e334bc04",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a93fad2_c61f9ebe",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-07T18:28:53Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be public, does it?",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28886a15_8984965f",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-07T18:28:53Z",
+      "side": 1,
+      "message": "This should connect to SignalDtlsState, so that keys will be applied once the DTLS handshake is done.",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0c3acea_85f53e16",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-07T18:28:53Z",
+      "side": 1,
+      "message": "Does this need to be public? It could be called internally when a different DTLS transport is set, right?",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
