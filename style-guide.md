@@ -93,6 +93,78 @@ instead of       | use
 [gn-templ]: https://chromium.googlesource.com/chromium/src/tools/gn/+/HEAD/docs/language.md#Templates
 [gn-target]: https://chromium.googlesource.com/chromium/src/tools/gn/+/HEAD/docs/language.md#Targets
 
+### `public` and `sources`: Be private by default, public when necessary
+
+The files that belong to a build target can be listed in either
+`public` or `sources`; the former makes the files available to other
+build targets, while the latter makes them private to the current
+build target. As a special case, if a build target has `sources` but
+not `public`, all files are made available to other build targtes.
+(Documentation: [`public`][gn-public-doc],
+[`sources`][gn-sources-doc].)
+
+[gn-public-doc]: https://chromium.googlesource.com/chromium/src/+/HEAD/tools/gn/docs/reference.md#public
+[gn-sources-doc]: https://chromium.googlesource.com/chromium/src/+/HEAD/tools/gn/docs/reference.md#sources
+
+#### Rule
+
+Prefer to make files private. Make them public when necessary.
+
+* *Always* have a `public` list in each build target that has files,
+  even if it’s an empty list (otherwise, we trigger the special case
+  mentioned above).
+* Put all `.cc` files and the like in `sources`, since other targets
+  have no business touching them.
+* Put headers in `public` or `sources` depending on whether other
+  build targets need to use them.
+
+Examples:
+
+```
+rtc_source_set("foo") {
+  public = [
+    "foo.h",             # This header may be used by other targets.
+  ]
+  sources = [
+    "foo.cc",
+    "foo_internal.cc",
+    "foo_internal.h",    # This header is private to the "foo" target.
+  ]
+}
+
+rtc_test("foo_test") {
+  public = []            # Tests don't need to have public files!
+  sources = [
+    "foo_unittest.cc"
+  ]
+  deps = [ ":foo" ]
+}
+```
+
+### `visibility`: Be restrictive by default
+
+By default, any build target can depend on any other build target. If
+you set the `visibility` of a target, only those targets that match
+one of the patterns in the `visibility` list may depend on it
+([documentation][gn-visibility-doc]).
+
+[gn-visibility-doc]: https://chromium.googlesource.com/chromium/src/+/HEAD/tools/gn/docs/reference.md#visibility
+
+If most targets in a `BUILD.gn` file should have the same visibility,
+you can declare a `visibility` list at file scope; it will be the
+default visibility for all subsequent build targets in that file.
+
+#### Rule
+
+Prefer to reduce the visibility of build targets as much as possible,
+as long as this doesn't make things unduly inconvenient. For example:
+
+* If a target is used only by one or a tiny number of other targets,
+  prefer to list them explicitly: `visibility = [ ":foo", ":bar" ]`
+* If a target is used only by targets in the same `BUILD.gn` file:
+  `visibility = [ ":*" ]`. (This is often useful as a file-scoped
+  default.)
+
 ### Conditional compilation with the C preprocessor
 
 Avoid using the C preprocessor to conditionally enable or disable
