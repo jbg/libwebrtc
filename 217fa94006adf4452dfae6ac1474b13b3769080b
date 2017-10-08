@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dde7d082_2decde64",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "Could use a comment summarizing the purpose of the test.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8a470b4_59793d8f",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "Could use a comment describing what kind of chain is being created.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d41a48_53d8741e",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "nit: What does \"int\" mean? Intermediate? Would prefer to just spell it out.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6e17740_7ffa65b9",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "nit: Would prefer if, instead of this being a member variable, it was created in the individual tests that need it using a helper method. For example, \"MakeX509Chain\" (given variable number of certificate strings as input). Otherwise, the tests are relying on assumptions that can\u0027t be found in the test itself, which harms test readability. See: https://engdoc.corp.google.com/eng/doc/devguide/coding/testing/unit-testing-best-practices.md?cl\u003dhead#setUp\n\nIn that case, you wouldn\u0027t actually need a test fixture, and could just use \"TEST\" instead of \"TEST_F\".",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bba3692d_6681c5b9",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "nit: These tests could use more descriptive names, and/or comments above them explaining them. For example, this could be \"NullChainReturnedForLeafCertificate\".",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e912361_1d7b7ea5",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "nit: The expected value should go first. This produces the correct output in the log when the test fails. Needs to be fixed below as well.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66762374_d7a9b8a9",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "nit: Couldn\u0027t this just be \"OpenSSLCertificate certificate(x509s);\"? What benefit does the unique_ptr provide? Same question for tests below.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50311e97_019fda2b",
+        "filename": "rtc_base/opensslidentity_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "nit: This is right to be an ASSERT, since the test will crash if it\u0027s not true, but the ASSERTs below should be EXPECTs.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "556c99e3_5519b11c",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "Should have a comment summarizing this test/explaining the motivation.",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c789e70a_f06a52f7",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-08T21:54:08Z",
+      "side": 1,
+      "message": "Similar comments as in the other test file; should put the expected value first, and should use EXPECT for things that won\u0027t crash the test if false (in this case, the third ASSERT).",
+      "revId": "217fa94006adf4452dfae6ac1474b13b3769080b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
