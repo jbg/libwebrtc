@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "248c155d_798f477d",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-09T08:02:22Z",
+      "side": 1,
+      "message": "Yes, empty only for test and executable, I\u0027d say. And not really useful there, except to avoid having to make the style rule more complex by having exceptions.",
+      "parentUuid": "1209d20e_8266e734",
+      "range": {
+        "startLine": 114,
+        "startChar": 68,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58e5c4ad_f3774ca4",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "16ee16a6_df1f3de2",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-09T08:02:22Z",
+      "side": 1,
+      "message": "Hmmm... good point. I guess the answer is that they need to be in `public`, since GN doesn\u0027t have an analog to C++\u0027s friend declarations.\n\nIf you want to keep the header private badly enough (e.g. because this is an API target), you can accomplish this by having all the \"meat\"---including the unit-testees---in a separate internal target where all or most files are in `public`, and let the API target #include stuff from there.\n\nI guess the generalized point here is that since if it merits its own header file, it merits unit tests, the set of non-public headers in any target should be empty, unless the target is a test target that contains its own unit tests. And if an API target gets complex enough that we need to unit test its internal stuff, we should extract an internal target that does all the work.\n\nThis was an excellent question, which seems to demonstrate that the distinction between public and private files is not useful. :-| It could turn into a more formal limit on how much implementation we should allow in API targets, though (answer: little enough that you don\u0027t need to unit test its internals).",
+      "parentUuid": "58e5c4ad_f3774ca4",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b32bb098_a5cbdf0c",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -83,6 +131,30 @@
       "writtenOn": "2017-10-09T07:17:36Z",
       "side": 1,
       "message": "Does it really matter for tests? I thought we had some other rules in place which prevent non-test targets from depending on test targets, but I don\u0027t really know how gn or our rtc_*-templates work.\n\nI\u0027m afraid this is clutter which will be easy to forget and hard get get consistently used.",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fdaead0_7e298235",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-09T08:02:22Z",
+      "side": 1,
+      "message": "You\u0027re thinking of the `testonly` boolean: https://chromium.googlesource.com/chromium/src/+/HEAD/tools/gn/docs/reference.md#testonly\n\nAnd no, it\u0027s not particularly useful for tests. But this is what it would look like if we applied this rule consistently.",
+      "parentUuid": "b32bb098_a5cbdf0c",
       "range": {
         "startLine": 136,
         "startChar": 0,
