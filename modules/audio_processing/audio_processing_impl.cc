@@ -505,6 +505,15 @@ int AudioProcessingImpl::InitializeLocked() {
                       capture_audiobuffer_num_channels,
                       formats_.api_format.output_stream().num_frames()));
 
+  if (config_.residual_echo_detector.enabled) {
+    capture_.capture_audio_rd.reset(
+        new AudioBuffer(formats_.api_format.input_stream().num_frames(),
+                        formats_.api_format.input_stream().num_channels(),
+                        capture_nonlocked_.capture_processing_format.num_frames(),
+                        capture_audiobuffer_num_channels,
+                        formats_.api_format.output_stream().num_frames()));
+  }
+
   public_submodules_->echo_cancellation->Initialize(
       proc_sample_rate_hz(), num_reverse_channels(), num_output_channels(),
       num_proc_channels());
@@ -589,6 +598,15 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
   capture_nonlocked_.capture_processing_format =
       StreamConfig(capture_processing_rate);
 
+  int capture_processing_rd_rate = FindNativeProcessRateToUse(
+      std::min(formats_.api_format.input_stream().sample_rate_hz(),
+               formats_.api_format.output_stream().sample_rate_hz()),
+      submodule_states_.CaptureMultiBandSubModulesActive() ||
+      submodule_states_.RenderMultiBandSubModulesActive() || config_residual_echo_detector.band_split_analysis);
+
+  capture_nonlocked_.capture_processing_rd_format =
+      StreamConfig(capture_processing_rd_rate);
+
   int render_processing_rate;
   if (!config_.echo_canceller3.enabled) {
     render_processing_rate = FindNativeProcessRateToUse(
@@ -599,6 +617,24 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
   } else {
     render_processing_rate = capture_processing_rate;
   }
+
+  int render_processing_rd_rate;
+  if (!config_.echo_canceller3.enabled) {
+    render_processing_rate = FindNativeProcessRateToUse(
+        std::min(formats_.api_format.reverse_input_stream().sample_rate_hz(),
+                 formats_.api_format.reverse_output_stream().sample_rate_hz()),
+        submodule_states_.CaptureMultiBandSubModulesActive() ||
+            submodule_states_.RenderMultiBandSubModulesActive());
+
+    render_processing_rate = FindNativeProcessRateToUse(
+        std::min(formats_.api_format.reverse_input_stream().sample_rate_hz(),
+                 formats_.api_format.reverse_output_stream().sample_rate_hz()),
+        submodule_states_.CaptureMultiBandSubModulesActive() ||
+        submodule_states_.RenderMultiBandSubModulesActive());
+  } else {
+    render_processing_rd_rate = capture_processing_rate;
+  }
+
 
   // TODO(aluebs): Remove this restriction once we figure out why the 3-band
   // splitting filter degrades the AEC performance.
@@ -1117,6 +1153,9 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
     RecordUnprocessedCaptureStream(*frame);
   }
 
+  if (config_.residual_echo_detector.enabled) {
+    capture_.capture_audio_rd->DeinterleaveFrom(frame);
+  }
   capture_.capture_audio->DeinterleaveFrom(frame);
   RETURN_ON_ERR(ProcessCaptureStreamLocked());
   capture_.capture_audio->InterleaveTo(

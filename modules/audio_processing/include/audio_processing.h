@@ -260,6 +260,7 @@ class AudioProcessing : public rtc::RefCountInterface {
     } level_controller;
     struct ResidualEchoDetector {
       bool enabled = true;
+      bool band_split_analysis = false;
     } residual_echo_detector;
 
     struct HighPassFilter {

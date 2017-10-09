@@ -344,6 +344,8 @@ class AudioProcessingImpl : public AudioProcessing {
     std::vector<Point> array_geometry;
     SphericalPointf target_direction;
     std::unique_ptr<AudioBuffer> capture_audio;
+    std::unique_ptr<AudioBuffer> capture_audio_rd;
+
     // Only the rate and samples fields of capture_processing_format_ are used
     // because the capture processing number of channels is mutable and is
     // tracked by the capture_audio_.
