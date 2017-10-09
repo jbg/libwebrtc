@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1209d20e_8266e734",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-09T07:57:44Z",
+      "side": 1,
+      "message": "When public would be empty? rtc_test and rtc_executable that shouldn\u0027t be depend on anyway.\nFor source_set/library public unlikely will ever be empty.",
+      "range": {
+        "startLine": 114,
+        "startChar": 68,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58e5c4ad_f3774ca4",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2017-10-09T07:17:36Z",
       "side": 1,
       "message": "How to deal with unit tests involving foo_internal.h? I imagine that\u0027s a common and desired thing to have.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c7341a0_ca9d42ed",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-09T07:57:44Z",
+      "side": 1,
+      "message": "that might be a reason to move foo_internal into own target:\n\nrtc_source_set(\"foo_internal\") {\n  public \u003d [\"foo_internal.h\"]\n  sources \u003d [\"foo_internal.cc\"]\n  visibility \u003d [\":foo\", \":foo_internal_tests\"]\n}",
+      "parentUuid": "58e5c4ad_f3774ca4",
       "range": {
         "startLine": 131,
         "startChar": 0,
