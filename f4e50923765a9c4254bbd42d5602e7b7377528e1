@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "c34200b0_c72d1c9e",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-09T09:27:23Z",
+      "side": 1,
+      "message": "No, extracting a non-public target will work---you just have to move enough stuff into it. Something like\n\n  rtc_source_set(\"foo_internal\") {\n    public \u003d [\"foo_internal.h\"]\n    sources \u003d [\"foo_internal.cc\"]\n    visibility \u003d [\":foo\", \":foo_tests\"]\n  }\n\n  rtc_source_set(\"foo\") {\n    public \u003d [\"foo.h\"]\n    sources \u003d [\"foo.cc\"]\n    deps \u003d [\":foo_internal\"]\n  }\n\n  rtc_source_set(\"foo_tests\") {\n    sources \u003d [\"foo_internal.cc\"]\n    deps \u003d [\":foo\", \":foo_internal\"]\n  }\n\nwhere foo_internal.h/.cc contains only nonpublic functions, foo.h/.cc contains only public functions, and the latter may call the former but not the other way around (which may mean that some public functions are thin wrappers around some nonpublic functions).\n\nIf there is some type that both foo and foo_internal needs to use, it has to go in a separate public target. I\u0027ve encountered exactly this situation with Opus: public functions, a large body of nonpublic functions, and a config struct that both need to use.",
+      "parentUuid": "79f8dfb5_9f025051",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b32bb098_a5cbdf0c",
         "filename": "style-guide.md",
         "patchSetId": 1
