@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e26e4619_d748f583",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T12:13:23Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem to be a pointer to rtc::scoped_refptr but rather raw AudioProcessing pointer (I think this is good, just change the comment)",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b5e48ca_afe0d9ce",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T12:13:23Z",
+      "side": 1,
+      "message": "Hmm, we have implemented rest of similar cases with a concrete class that holds the pointer instead of an interface. Maybe we should do it here as well for consistency?",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3e4b412_ce09a514",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T12:13:23Z",
+      "side": 1,
+      "message": "Pointer to a unique pointer? What is the point of a unique pointer if you have to manually delete it anyway?",
+      "range": {
+        "startLine": 15,
+        "startChar": 19,
+        "endLine": 15,
+        "endChar": 63
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a97e823_0c05e91c",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/AudioProcessingTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T12:13:23Z",
+      "side": 1,
+      "message": "nit: literal comments",
+      "range": {
+        "startLine": 45,
+        "startChar": 71,
+        "endLine": 45,
+        "endChar": 75
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18563f63_5e9be2ac",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T12:13:23Z",
+      "side": 1,
+      "message": "wait the comment before said this is already a unique pointer?",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0072e3ce_d97994e5",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T12:13:23Z",
+      "side": 1,
+      "message": "nit: literal comments",
+      "range": {
+        "startLine": 42,
+        "startChar": 30,
+        "endLine": 42,
+        "endChar": 37
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
