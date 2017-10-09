@@ -38,6 +38,9 @@
     },
     {
       "app": "voice_engine_unittests"
+    },
+    {
+      "app": "webrtc_perf_tests"
     }
   ]
 }
