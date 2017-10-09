@@ -181,8 +181,10 @@ void GainToNoAudibleEcho(
                                          : config.param.gain_mask.m3);
 
   for (size_t k = 0; k < gain->size(); ++k) {
-    RTC_DCHECK_LE(0.f, nearend_masking_margin * nearend[k]);
-    if (echo[k] <= nearend_masking_margin * nearend[k]) {
+    const float unity_gain_masker = std::max(nearend[k], masker[k]);
+    RTC_DCHECK_LE(0.f, nearend_masking_margin * unity_gain_masker);
+    if (echo[k] <= nearend_masking_margin * unity_gain_masker ||
+        unity_gain_masker <= 0.f) {
       (*gain)[k] = 1.f;
     } else {
       (*gain)[k] = config.param.gain_mask.m1 * masker[k] * one_by_echo[k];
@@ -203,7 +205,9 @@ void MaskingPower(const AudioProcessing::Config::EchoCanceller3& config,
                   const std::array<float, kFftLengthBy2Plus1>& gain,
                   std::array<float, kFftLengthBy2Plus1>* masker) {
   std::array<float, kFftLengthBy2Plus1> side_band_masker;
+  float max_band_masker = 0.f;
   for (size_t k = 0; k < gain.size(); ++k) {
+    max_band_masker = std::max(max_band_masker, nearend[k] * gain[k]);
     side_band_masker[k] = nearend[k] * gain[k] + comfort_noise[k];
     (*masker)[k] =
         comfort_noise[k] + config.param.gain_mask.m4 * last_masker[k];
@@ -212,7 +216,14 @@ void MaskingPower(const AudioProcessing::Config::EchoCanceller3& config,
   // Apply masking only between lower frequency bands.
   RTC_DCHECK_LT(kUpperAccurateBandPlus1, gain.size());
   for (size_t k = 1; k < kUpperAccurateBandPlus1; ++k) {
-    (*masker)[k] += 0.1f * (side_band_masker[k - 1] + side_band_masker[k + 1]);
+    (*masker)[k] += config.param.gain_mask.m5 *
+                    (side_band_masker[k - 1] + side_band_masker[k + 1]);
+  }
+
+  // Add full-band masking as a minimum value for the masker.
+  for (size_t k = 0; k < gain.size(); ++k) {
+    (*masker)[k] =
+        std::max((*masker)[k], max_band_masker * config.param.gain_mask.m6);
   }
 }
 
