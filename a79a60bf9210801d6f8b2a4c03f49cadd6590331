@@ -22,6 +22,30 @@
       "revId": "a79a60bf9210801d6f8b2a4c03f49cadd6590331",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0715f14c_e9887eb3",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-09T10:26:05Z",
+      "side": 1,
+      "message": "Thanks! Great find!\nDone",
+      "parentUuid": "66a5aaad_04a930e8",
+      "range": {
+        "startLine": 49,
+        "startChar": 61,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "a79a60bf9210801d6f8b2a4c03f49cadd6590331",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
