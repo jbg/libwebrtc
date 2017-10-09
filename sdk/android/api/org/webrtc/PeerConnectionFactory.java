@@ -185,12 +185,18 @@ public class PeerConnectionFactory {
 
   public PeerConnectionFactory(
       Options options, VideoEncoderFactory encoderFactory, VideoDecoderFactory decoderFactory) {
+    this(options, encoderFactory, decoderFactory, null /* audioProcessing */);
+  }
+
+  public PeerConnectionFactory(Options options, VideoEncoderFactory encoderFactory,
+      VideoDecoderFactory decoderFactory, AudioProcessing audioProcessing) {
     if (!NativeLibrary.isLoaded() || ContextUtils.getApplicationContext() == null) {
       throw new IllegalStateException(
           "PeerConnectionFactory.initialize was not called before creating a "
           + "PeerConnectionFactory.");
     }
-    nativeFactory = nativeCreatePeerConnectionFactory(options, encoderFactory, decoderFactory);
+    nativeFactory = nativeCreatePeerConnectionFactory(options, encoderFactory, decoderFactory,
+        audioProcessing == null ? 0 : audioProcessing.nativePointer);
     if (nativeFactory == 0) {
       throw new RuntimeException("Failed to initialize PeerConnectionFactory!");
     }
@@ -334,8 +340,8 @@ public class PeerConnectionFactory {
     Logging.d(TAG, "onSignalingThreadReady");
   }
 
-  private static native long nativeCreatePeerConnectionFactory(
-      Options options, VideoEncoderFactory encoderFactory, VideoDecoderFactory decoderFactory);
+  private static native long nativeCreatePeerConnectionFactory(Options options,
+      VideoEncoderFactory encoderFactory, VideoDecoderFactory decoderFactory, long audioProcessing);
 
   private static native long nativeCreateObserver(PeerConnection.Observer observer);
 
