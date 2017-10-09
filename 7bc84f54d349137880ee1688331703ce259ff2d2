@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "45350e24_a89376ef",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T11:45:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fda3603_cc70f7f3",
+      "range": {
+        "startLine": 161,
+        "startChar": 23,
+        "endLine": 161,
+        "endChar": 62
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e721f8c5_801bfb8f",
         "filename": "tools_webrtc/android/release_aar.py",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a73c88f8_3dbca881",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T11:45:09Z",
+      "side": 1,
+      "message": "Done. According to the documentation the exception should be passed to logging.exception",
+      "parentUuid": "e721f8c5_801bfb8f",
+      "range": {
+        "startLine": 177,
+        "startChar": 4,
+        "endLine": 177,
+        "endChar": 41
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bb272191_7cca0a70",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T11:45:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0437eb43_56262da2",
+      "range": {
+        "startLine": 178,
+        "startChar": 19,
+        "endLine": 178,
+        "endChar": 33
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "734c1a21_d11c7955",
         "filename": "tools_webrtc/android/release_aar.py",
         "patchSetId": 4
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "69d725ed_c34cd091",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T11:45:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "734c1a21_d11c7955",
+      "range": {
+        "startLine": 180,
+        "startChar": 16,
+        "endLine": 180,
+        "endChar": 28
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b8e7041_23580505",
         "filename": "tools_webrtc/android/release_aar.py",
         "patchSetId": 4
@@ -114,6 +210,30 @@
       "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c3b0f8f_c88904c5",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-09T11:45:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b8e7041_23580505",
+      "range": {
+        "startLine": 189,
+        "startChar": 31,
+        "endLine": 189,
+        "endChar": 56
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
