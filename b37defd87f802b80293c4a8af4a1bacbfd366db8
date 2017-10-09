@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f884708_ec84da8b",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "So this CL doesn\u0027t actually allow custom AudioProcessing injection, just custom PostProcessing injection? If so the CL title should be updated. Is there a plan to support this in the future though?",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1950bd88_830b9b47",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "Sorry if I missed this, but is there a reason this is called release instead of dispose?",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2f6f6c7_22e3c256",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "Should we think about introducing a class to collect the PeerConnectionFactory arguments so we don\u0027t end up with a lot of constructors? Not something that needs to be resolved in this CL, just wanted to bring it up. See also: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d7913",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d45f3e8d_365c1b48",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "Is there an advantage to making this an interface that returns a native pointer, instead of a class that wraps a native pointer like AudioProcessing is? Is there ever a situation where the native pointer will change during the object\u0027s lifetime?",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "195363ab_f55e90a5",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "webrtc::PostProcessing?",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fc9f7b2_6af8d1b5",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/AudioProcessingTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "Could use a comment. Like \"Test that a PeerConnectionFactory can be constructed with a null PostProcessing interface without crashing.\" Assuming that\u0027s what it\u0027s intending to be testing.",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4df4f932_06e20f25",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-09T23:26:45Z",
+      "side": 1,
+      "message": "This takes ownership of the object returned by getNativePointer? If you go with this, it should be made very clear in a comment in PostProcessing.java. And maybe consider renaming it to \"PostProcessingFactory\".\n\nBut I think it would be better to let the application/API client retain ownership of the PostProcessing interface. In the webrtc-core group we decided this is how we want to handle injectable modules in general (I still need to add this to an \"API design guidelines\" document, and create said document).\n\nNote that if you don\u0027t want to change the C++ AudioProcessing API, you can change the ownership model at the JNI level by doing this:\n\n// Proxy that can be deleted without deleting the underlying PostProcessing instance.\nclass PostProcessingProxy : public PostProcessing {\n public:\n  PostProcessingProxy(PostProcessing* p) : p_(p) {}\n  void Initialize(int sample_rate_hz, int num_channels) override {\n    p_-\u003eInitialize(sample_rate_hz, num_channels);\n  }\n  void Process(AudioBuffer* audio) override {\n    p_-\u003eProcess(audio);\n  }\n  std::string ToString() const {\n    return p_-\u003eToString();\n  }\n\n private:\n  PostProcessing* p_;\n};\n\n...\n\nauto post_processor \u003d rtc::MakeUnique\u003cPostProcessingProxy\u003e(\n    reinterpret_cast\u003cPostProcessing*\u003e(jpost_processor));\n\n...",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
