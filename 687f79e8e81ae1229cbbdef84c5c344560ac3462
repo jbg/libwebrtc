@@ -1,0 +1,347 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cc25acc_d087272c",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "packet_to_insert or something more descriptive?",
+      "range": {
+        "startLine": 50,
+        "startChar": 9,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3452aeac_237cf8c3",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "Looks like we\u0027re checking for decreased?",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 45
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "868a4bbe_02176746",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "++num_packets_",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2716b5aa_bdf62b7d",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "-should",
+      "range": {
+        "startLine": 115,
+        "startChar": 42,
+        "endLine": 115,
+        "endChar": 48
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccd93271_4a946129",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "within",
+      "range": {
+        "startLine": 119,
+        "startChar": 7,
+        "endLine": 119,
+        "endChar": 14
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cca413e_e4422e8d",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "--num_packets_",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91b56333_51062aee",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "I would probably switch this around to remove the negation.\n\nif (stream_info-\u003epacket_queue.empty()) {\n  ..\n} else {\n  ..\n}",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dd149d8_466e2fc5",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "Check that there are no existing priorities for this ssrc before adding a new one.",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673bdc81_346bbd24",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "size_packets_ instead?",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66aaddae_7f8f8fa9",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "size_bytes_",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed558bbd_edb45077",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "Add {}",
+      "range": {
+        "startLine": 169,
+        "startChar": 13,
+        "endLine": 169,
+        "endChar": 14
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7e73017_8c504051",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "Is this the current size in bytes? In that case, maybe call it size_bytes?",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e38129ee_9ff9b0bc",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "I\u0027d prefer a less generic name than StreamInfo.",
+      "range": {
+        "startLine": 89,
+        "startChar": 9,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a682835_156f8a5e",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "size_bytes?",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 16
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7358464_a4d1b7d5",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "Comment on what the purpose of this is.",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf17ca9c_24acbc69",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "It seems like we\u0027re not being consistent about which members are initialized here and which are initialized in the ctor initializer list, e.g., Packet::ssrc above is initialized in the initializer list.",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "921cec3a_4b4c44af",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-09T07:19:36Z",
+      "side": 1,
+      "message": "StreamPrioKey",
+      "range": {
+        "startLine": 117,
+        "startChar": 21,
+        "endLine": 117,
+        "endChar": 33
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
