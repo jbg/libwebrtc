@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0964db4c_ef4c8e71",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Changed pkt -\u003e packet and packet -\u003e packet_to_insert.",
+      "parentUuid": "7cc25acc_d087272c",
+      "range": {
+        "startLine": 50,
+        "startChar": 9,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3452aeac_237cf8c3",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-10-09T07:19:36Z",
       "side": 1,
       "message": "Looks like we\u0027re checking for decreased?",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 45
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54f4e72e_43d7d965",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Yes, the priorities are defined like this:\n\n  enum Priority {\n    kHighPriority \u003d 0,\n    kNormalPriority \u003d 2,\n    kLowPriority \u003d 3,\n  };",
+      "parentUuid": "3452aeac_237cf8c3",
       "range": {
         "startLine": 66,
         "startChar": 36,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "baab4bd2_f4e4bd1b",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "I think it looks better to use (+\u003d) consistently, instead of one (++) and then one (+\u003d). WDYT?",
+      "parentUuid": "868a4bbe_02176746",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2716b5aa_bdf62b7d",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "c9fe960c_56cbb5d8",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2716b5aa_bdf62b7d",
+      "range": {
+        "startLine": 115,
+        "startChar": 42,
+        "endLine": 115,
+        "endChar": 48
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccd93271_4a946129",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -108,6 +198,30 @@
       "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc6f1e36_a80fe7ca",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccd93271_4a946129",
+      "range": {
+        "startLine": 119,
+        "startChar": 7,
+        "endLine": 119,
+        "endChar": 14
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +259,24 @@
     },
     {
       "key": {
+        "uuid": "31978675_104f2e46",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91b56333_51062aee",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8dd149d8_466e2fc5",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -156,6 +288,24 @@
       "writtenOn": "2017-10-09T07:19:36Z",
       "side": 1,
       "message": "Check that there are no existing priorities for this ssrc before adding a new one.",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "566ae265_73560f92",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "I have no efficient way of doing that. Maybe we can discuss it offline.",
+      "parentUuid": "8dd149d8_466e2fc5",
       "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -179,6 +329,24 @@
     },
     {
       "key": {
+        "uuid": "49acf581_039bdeaf",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "673bdc81_346bbd24",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66aaddae_7f8f8fa9",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -193,6 +361,24 @@
       "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "476457f9_ce4a79ce",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66aaddae_7f8f8fa9",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -242,6 +428,30 @@
     },
     {
       "key": {
+        "uuid": "b47d753d_b72a300c",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "This Packet struct is pretty much a copy of the Packet struct from PacketQueue. I agree size_bytes is better but for the sake of testing this class behind a field trial it is easier to just leave it for now.",
+      "parentUuid": "c7e73017_8c504051",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e38129ee_9ff9b0bc",
         "filename": "modules/pacing/packet_queue2.h",
         "patchSetId": 2
@@ -265,6 +475,30 @@
     },
     {
       "key": {
+        "uuid": "e002a2c2_cd764691",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e38129ee_9ff9b0bc",
+      "range": {
+        "startLine": 89,
+        "startChar": 9,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a682835_156f8a5e",
         "filename": "modules/pacing/packet_queue2.h",
         "patchSetId": 2
@@ -276,6 +510,30 @@
       "writtenOn": "2017-10-09T07:19:36Z",
       "side": 1,
       "message": "size_bytes?",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 16
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "750efa56_07c61e4f",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-09T09:14:36Z",
+      "side": 1,
+      "message": "I had a hard time naming this variable. I think the closest but also very misleading name is |bytes_sent|, but since it\u0027s not actually the number of bytes sent I don\u0027t think it\u0027s a good name.",
+      "parentUuid": "6a682835_156f8a5e",
       "range": {
         "startLine": 94,
         "startChar": 11,
