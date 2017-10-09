@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "79f8dfb5_9f025051",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-09T08:56:20Z",
+      "side": 1,
+      "message": "Danil\u0027s suggestion looks reasonable. And \"visibility\" is related to C++ friends. If we do it this way, then we\u0027ll have very few \"locally non-public\" header files.\n\nBut I\u0027m not sure it will work. It seems likely that the code in foo_internal will depend on things declared in foo.h, but if we let the foo_internal target depends on the foo target, that gets circular. Typically, only foo.cc but not foo.h would depend on foo_internal.h. So we could split things even more and put foo.h and foo.cc in separate targets, but that violates other gn style rules.\n\nMaybe it\u0027s best to attempt to convert a few of our existing targets first, to see what works out in practice, before trying to formulate the general rules?\n\nI would also be happy with some generally relaxed rules for tests, saying that it\u0027s ok for a test to include any private header files it needs, but that might not be kosher with gn? Or to generally accept a circular dependency between foo and foo_internal.",
+      "parentUuid": "16ee16a6_df1f3de2",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b32bb098_a5cbdf0c",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -155,6 +179,30 @@
       "side": 1,
       "message": "You\u0027re thinking of the `testonly` boolean: https://chromium.googlesource.com/chromium/src/+/HEAD/tools/gn/docs/reference.md#testonly\n\nAnd no, it\u0027s not particularly useful for tests. But this is what it would look like if we applied this rule consistently.",
       "parentUuid": "b32bb098_a5cbdf0c",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78303e26_c08bb444",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-09T08:56:20Z",
+      "side": 1,
+      "message": "If it has no benefits for tests, I\u0027d lean towards not applying the rule there.",
+      "parentUuid": "9fdaead0_7e298235",
       "range": {
         "startLine": 136,
         "startChar": 0,
