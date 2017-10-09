@@ -239,7 +239,7 @@ TEST(TaskQueueTest, PostAndReuse) {
     Event* const event_;
   };
 
-  std::unique_ptr<QueuedTask> task(
+  std::unique_ptr<ReusedTask> task(
       new ReusedTask(&call_count, &reply_queue, &event));
 
   post_queue.PostTask(std::move(task));
@@ -258,6 +258,54 @@ TEST(TaskQueueTest, PostAndReplyLambda) {
                               [&event]() { event.Set(); }, &reply_queue);
   EXPECT_TRUE(event.Wait(1000));
   EXPECT_TRUE(my_flag);
+}
+
+TEST(TaskQueueTest, PostMoveOnlyClosure) {
+  struct State {
+    explicit State(Event* event) : event(event) {}
+    ~State() { event->Set(); }
+    Event* event;
+  };
+  struct MoveOnlyClosure {
+    void operator()() { state.reset(); }
+
+    std::unique_ptr<State> state;
+  };
+
+  static const char kPostQueue[] = "PostMoveOnly";
+  Event event(false, false);
+  std::unique_ptr<State> state(new State(&event));
+
+  TaskQueue post_queue(kPostQueue);
+  post_queue.PostTask(MoveOnlyClosure{std::move(state)});
+
+  EXPECT_TRUE(event.Wait(1000));
+}
+
+TEST(TaskQueueTest, PostMoveOnlyCleanup) {
+  struct State {
+    explicit State(Event* event) : event(event) {}
+    ~State() { event->Set(); }
+    Event* event;
+  };
+  struct MoveOnlyClosure {
+    void operator()() { state.reset(); }
+
+    std::unique_ptr<State> state;
+  };
+
+  static const char kPostQueue[] = "PostMoveOnly";
+  Event event_run(false, false);
+  Event event_done(false, false);
+  std::unique_ptr<State> state_run(new State(&event_run));
+  std::unique_ptr<State> state_done(new State(&event_done));
+
+  TaskQueue post_queue(kPostQueue);
+  post_queue.PostTask(rtc::NewClosure(MoveOnlyClosure{std::move(state_run)},
+                                      MoveOnlyClosure{std::move(state_done)}));
+
+  EXPECT_TRUE(event_done.Wait(1000));
+  EXPECT_TRUE(event_run.Wait(0));
 }
 
 // This test covers a particular bug that we had in the libevent implementation
