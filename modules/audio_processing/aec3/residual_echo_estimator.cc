@@ -106,9 +106,8 @@ void ResidualEchoEstimator::Estimate(
   RenderNoisePower(render_buffer, &X2_noise_floor_, &X2_noise_floor_counter_);
 
   // Estimate the residual echo power.
-  const bool use_linear_echo_power =
-      aec_state.UsableLinearEstimate() && using_subtractor_output;
-  if (use_linear_echo_power && !aec_state.HeadsetDetected()) {
+
+  if (aec_state.LinearEchoEstimate()) {
     RTC_DCHECK(aec_state.FilterDelay());
     const int filter_delay = *aec_state.FilterDelay();
     LinearEstimate(S2_linear, aec_state.Erle(), filter_delay, R2);
