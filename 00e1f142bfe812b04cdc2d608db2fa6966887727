@@ -25,6 +25,53 @@
     },
     {
       "key": {
+        "uuid": "bfddd8eb_d9279c9d",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Thanks, fixed.",
+      "parentUuid": "e26e4619_d748f583",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19f8963f_6adaabf4",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Do we have some convention re: allowing/documenting nullable values? I can\u0027t find anything in the Google/Chromium Java style guides.",
+      "range": {
+        "startLine": 199,
+        "startChar": 7,
+        "endLine": 199,
+        "endChar": 67
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b5e48ca_afe0d9ce",
         "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
         "patchSetId": 5
@@ -36,6 +83,30 @@
       "writtenOn": "2017-10-09T12:13:23Z",
       "side": 1,
       "message": "Hmm, we have implemented rest of similar cases with a concrete class that holds the pointer instead of an interface. Maybe we should do it here as well for consistency?",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23fd2977_c9ee5c7c",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Good point. I\u0027m ok with that, although it itches to impose more restrictions on users.\n\nWould it be better to drop this class entirely and have AudioProcessing\u0027s constructor take the raw native pointer value? On the one hand, PostProcessing.java is not much more than a glorified wrapper of the pointer. On the other hand, this class allows users to hide all JNI stuff behind their PostProcessing implementation.",
+      "parentUuid": "9b5e48ca_afe0d9ce",
       "range": {
         "startLine": 14,
         "startChar": 17,
@@ -71,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "f43d19d9_81637a09",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Updating the comment (to return a raw pointer), also adding a comment in AudioProcessing that it takes ownership of PostProcessing.",
+      "parentUuid": "f3e4b412_ce09a514",
+      "range": {
+        "startLine": 15,
+        "startChar": 19,
+        "endLine": 15,
+        "endChar": 63
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a97e823_0c05e91c",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/AudioProcessingTest.java",
         "patchSetId": 5
@@ -91,6 +186,30 @@
       "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "171af24c_acc94e10",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/AudioProcessingTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Thanks! Done.",
+      "parentUuid": "8a97e823_0c05e91c",
+      "range": {
+        "startLine": 45,
+        "startChar": 71,
+        "endLine": 45,
+        "endChar": 75
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "d0f9d198_1f0c9919",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Yes, the interface comment is in error. Changed.",
+      "parentUuid": "18563f63_5e9be2ac",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0072e3ce_d97994e5",
         "filename": "sdk/android/src/jni/pc/audio_jni.cc",
         "patchSetId": 5
@@ -137,6 +280,30 @@
       "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "316c702c_eddaeeeb",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-09T14:58:35Z",
+      "side": 1,
+      "message": "Thanks! Done.",
+      "parentUuid": "0072e3ce_d97994e5",
+      "range": {
+        "startLine": 42,
+        "startChar": 30,
+        "endLine": 42,
+        "endChar": 37
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
