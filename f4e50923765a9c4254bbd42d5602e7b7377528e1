@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58e5c4ad_f3774ca4",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-09T07:17:36Z",
+      "side": 1,
+      "message": "How to deal with unit tests involving foo_internal.h? I imagine that\u0027s a common and desired thing to have.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b32bb098_a5cbdf0c",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-09T07:17:36Z",
+      "side": 1,
+      "message": "Does it really matter for tests? I thought we had some other rules in place which prevent non-test targets from depending on test targets, but I don\u0027t really know how gn or our rtc_*-templates work.\n\nI\u0027m afraid this is clutter which will be easy to forget and hard get get consistently used.",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
