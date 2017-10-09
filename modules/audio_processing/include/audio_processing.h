@@ -272,7 +272,11 @@ class AudioProcessing : public rtc::RefCountInterface {
     // does not yet have the desired behavior.
     struct EchoCanceller3 {
       struct Param {
-        struct Erle {
+        struct Delay {
+          int default_delay = 5;
+        } delay
+
+            struct Erle {
           float min = 1.f;
           float max_l = 8.f;
           float max_h = 1.5f;
