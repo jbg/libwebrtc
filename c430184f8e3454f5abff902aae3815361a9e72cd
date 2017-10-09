@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81c6d084_cc7d7f7b",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-09T09:57:41Z",
+      "side": 1,
+      "message": "The name of the constant m7 is chosen to work with another CL being reviewed.",
+      "revId": "c430184f8e3454f5abff902aae3815361a9e72cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
