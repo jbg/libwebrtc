@@ -64,6 +64,7 @@ constexpr size_t kRenderDelayBufferSize =
     (3 * kDownsampledRenderBufferSize) / (4 * kSubBlockSize);
 
 constexpr size_t kMinEchoPathDelayBlocks = 5;
+constexpr size_t kInitialEchoPathDelayBlocks = 30;
 constexpr size_t kMaxApiCallsJitterBlocks = 26;
 constexpr size_t kRenderTransferQueueSize = kMaxApiCallsJitterBlocks / 2;
 static_assert(2 * kRenderTransferQueueSize >= kMaxApiCallsJitterBlocks,

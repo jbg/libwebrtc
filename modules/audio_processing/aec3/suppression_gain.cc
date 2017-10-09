@@ -112,6 +112,7 @@ void UpdateMaxGainIncrease(
     const AudioProcessing::Config::EchoCanceller3& config,
     size_t no_saturation_counter,
     bool low_noise_render,
+    bool nonlinear_echo_power,
     const std::array<float, kFftLengthBy2Plus1>& last_echo,
     const std::array<float, kFftLengthBy2Plus1>& echo,
     const std::array<float, kFftLengthBy2Plus1>& last_gain,
@@ -125,7 +126,14 @@ void UpdateMaxGainIncrease(
   float min_decreasing;
 
   auto& param = config.param.gain_updates;
-  if (low_noise_render) {
+  if (nonlinear_echo_power) {
+    max_increasing = 1.5f;
+    max_decreasing = 1.5f;
+    rate_increasing = 1.2f;
+    rate_decreasing = 1.2f;
+    min_increasing = 1.1f;
+    min_decreasing = 1.1f;
+  } else if (low_noise_render) {
     max_increasing = param.low_noise.max_inc;
     max_decreasing = param.low_noise.max_dec;
     rate_increasing = param.low_noise.rate_inc;
@@ -182,10 +190,15 @@ void GainToNoAudibleEcho(
 
   for (size_t k = 0; k < gain->size(); ++k) {
     RTC_DCHECK_LE(0.f, nearend_masking_margin * nearend[k]);
-    if (echo[k] <= nearend_masking_margin * nearend[k]) {
+    const float unity_gain_masker = std::max(nearend[k], masker[k]);
+    if (echo[k] <= nearend_masking_margin * unity_gain_masker ||
+        unity_gain_masker <= 0.f) {
       (*gain)[k] = 1.f;
     } else {
-      (*gain)[k] = config.param.gain_mask.m1 * masker[k] * one_by_echo[k];
+      (*gain)[k] = std::max(0.f, (1.f - echo[k] / unity_gain_masker) /
+                                     (1.f - nearend_masking_margin));
+      (*gain)[k] = std::max(
+          config.param.gain_mask.m1 * masker[k] * one_by_echo[k], (*gain)[k]);
     }
 
     (*gain)[k] = std::min(std::max((*gain)[k], min_gain[k]), max_gain[k]);
@@ -203,16 +216,22 @@ void MaskingPower(const AudioProcessing::Config::EchoCanceller3& config,
                   const std::array<float, kFftLengthBy2Plus1>& gain,
                   std::array<float, kFftLengthBy2Plus1>* masker) {
   std::array<float, kFftLengthBy2Plus1> side_band_masker;
+  float max_band_masker = 0.f;
   for (size_t k = 0; k < gain.size(); ++k) {
+    max_band_masker = std::max(max_band_masker, nearend[k] * gain[k]);
     side_band_masker[k] = nearend[k] * gain[k] + comfort_noise[k];
     (*masker)[k] =
-        comfort_noise[k] + config.param.gain_mask.m4 * last_masker[k];
+        comfort_noise[k] + config.param.gain_mask.m3 * last_masker[k];
   }
 
   // Apply masking only between lower frequency bands.
   RTC_DCHECK_LT(kUpperAccurateBandPlus1, gain.size());
   for (size_t k = 1; k < kUpperAccurateBandPlus1; ++k) {
-    (*masker)[k] += 0.1f * (side_band_masker[k - 1] + side_band_masker[k + 1]);
+    (*masker)[k] += 0.3f * (side_band_masker[k - 1] + side_band_masker[k + 1]);
+  }
+
+  for (size_t k = 0; k < gain.size(); ++k) {
+    (*masker)[k] = std::max((*masker)[k], max_band_masker * 0.0001f);
   }
 }
 
@@ -240,6 +259,7 @@ void SuppressionGain::LowerBandGain(
     bool low_noise_render,
     const rtc::Optional<int>& narrow_peak_band,
     bool saturated_echo,
+    bool nonlinear_echo_power,
     const std::array<float, kFftLengthBy2Plus1>& nearend,
     const std::array<float, kFftLengthBy2Plus1>& echo,
     const std::array<float, kFftLengthBy2Plus1>& comfort_noise,
@@ -274,22 +294,50 @@ void SuppressionGain::LowerBandGain(
   std::array<float, kFftLengthBy2Plus1> max_gain;
   for (size_t k = 0; k < gain->size(); ++k) {
     max_gain[k] =
-        std::min(std::max(last_gain_[k] * gain_increase_[k],
-                          config_.param.gain_updates.floor_first_increase),
-                 1.f);
+        std::min(std::max(last_gain_[k] * gain_increase_[k], 0.0001f), 1.f);
   }
 
-  // Iteratively compute the gain required to attenuate the echo to a non
-  // noticeable level.
-  gain->fill(0.f);
-  for (int k = 0; k < 2; ++k) {
-    std::array<float, kFftLengthBy2Plus1> masker;
-    MaskingPower(config_, nearend, comfort_noise, last_masker_, *gain, &masker);
-    GainToNoAudibleEcho(config_, low_noise_render, saturated_echo, nearend,
-                        echo, masker, min_gain, max_gain, one_by_echo, gain);
-    AdjustForExternalFilters(gain);
-    if (narrow_peak_band) {
-      NarrowBandAttenuation(*narrow_peak_band, gain);
+  if (!nonlinear_echo_power) {
+    // Iteratively compute the gain required to attenuate the echo to a non
+    // noticeable level.
+    gain->fill(0.f);
+    for (int k = 0; k < 2; ++k) {
+      std::array<float, kFftLengthBy2Plus1> masker;
+      MaskingPower(config_, nearend, comfort_noise, last_masker_, *gain,
+                   &masker);
+      GainToNoAudibleEcho(config_, low_noise_render, saturated_echo, nearend,
+                          echo, masker, min_gain, max_gain, one_by_echo, gain);
+      AdjustForExternalFilters(gain);
+      if (narrow_peak_band) {
+        NarrowBandAttenuation(*narrow_peak_band, gain);
+      }
+    }
+  } else {
+    gain->fill(0.f);
+    for (int j = 0; j < 2; ++j) {
+      std::array<float, kFftLengthBy2Plus1> masker;
+      MaskingPower(config_, nearend, comfort_noise, last_masker_, *gain,
+                   &masker);
+      for (size_t k = 0; k < gain->size(); ++k) {
+        if (0.01f * nearend[k] > echo[k] || nearend[k] <= 0.f) {
+          (*gain)[k] = 1.f;
+        } else {
+          (*gain)[k] =
+              std::max(0.f, (1.f - echo[k] / nearend[k]) / (1.f - 0.01f));
+          (*gain)[k] =
+              std::max(0.001f * masker[k] * one_by_echo[k], (*gain)[k]);
+        }
+      }
+
+      AdjustForExternalFilters(gain);
+      if (narrow_peak_band) {
+        NarrowBandAttenuation(*narrow_peak_band, gain);
+      }
+
+      for (size_t k = 0; k < gain->size(); ++k) {
+        (*gain)[k] = std::min(max_gain[k], std::max(min_gain[k], (*gain)[k]));
+        (*gain)[k] = std::max(0.f, std::min(1.f, (*gain)[k]));
+      }
     }
   }
 
@@ -298,10 +346,12 @@ void SuppressionGain::LowerBandGain(
 
   // Update the allowed maximum gain increase.
   UpdateMaxGainIncrease(config_, no_saturation_counter_, low_noise_render,
-                        last_echo_, echo, last_gain_, *gain, &gain_increase_);
+                        nonlinear_echo_power, last_echo_, echo, last_gain_,
+                        *gain, &gain_increase_);
 
   // Store data required for the gain computation of the next block.
   std::copy(echo.begin(), echo.end(), last_echo_.begin());
+
   std::copy(gain->begin(), gain->end(), last_gain_.begin());
   MaskingPower(config_, nearend, comfort_noise, last_masker_, *gain,
                &last_masker_);
@@ -326,6 +376,7 @@ void SuppressionGain::GetGain(
     bool saturated_echo,
     const std::vector<std::vector<float>>& render,
     bool force_zero_gain,
+    bool nonlinear_echo_power,
     float* high_bands_gain,
     std::array<float, kFftLengthBy2Plus1>* low_band_gain) {
   RTC_DCHECK(high_bands_gain);
@@ -345,8 +396,9 @@ void SuppressionGain::GetGain(
   // Compute gain for the lower band.
   const rtc::Optional<int> narrow_peak_band =
       render_signal_analyzer.NarrowPeakBand();
-  LowerBandGain(low_noise_render, narrow_peak_band, saturated_echo, nearend,
-                echo, comfort_noise, low_band_gain);
+  LowerBandGain(low_noise_render, narrow_peak_band, saturated_echo,
+                nonlinear_echo_power, nearend, echo, comfort_noise,
+                low_band_gain);
 
   // Compute the gain for the upper bands.
   *high_bands_gain =
