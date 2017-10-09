@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fda3603_cc70f7f3",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-10-09T11:23:50Z",
+      "side": 1,
+      "message": "Maybe make this more explicit, like \u0027%s not found in the build file\u0027 % ARR_PROJECT_DEPENDENCY",
+      "range": {
+        "startLine": 161,
+        "startChar": 23,
+        "endLine": 161,
+        "endChar": 62
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e721f8c5_801bfb8f",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-10-09T11:23:50Z",
+      "side": 1,
+      "message": "Probably log the error, I reckon that will help you later: \n\nlogging.exception(e)",
+      "range": {
+        "startLine": 177,
+        "startChar": 4,
+        "endLine": 177,
+        "endChar": 41
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0437eb43_56262da2",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-10-09T11:23:50Z",
+      "side": 1,
+      "message": "Nit: two spaces before inline comment. Also it\u0027s really \"clean or tests failed\"",
+      "range": {
+        "startLine": 178,
+        "startChar": 19,
+        "endLine": 178,
+        "endChar": 33
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "734c1a21_d11c7955",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-10-09T11:23:50Z",
+      "side": 1,
+      "message": "Nit: two spaces before inline comment",
+      "range": {
+        "startLine": 180,
+        "startChar": 16,
+        "endLine": 180,
+        "endChar": 28
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b8e7041_23580505",
+        "filename": "tools_webrtc/android/release_aar.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-10-09T11:23:50Z",
+      "side": 1,
+      "message": "Nit: two spaces before inline comment",
+      "range": {
+        "startLine": 189,
+        "startChar": 31,
+        "endLine": 189,
+        "endChar": 56
+      },
+      "revId": "7bc84f54d349137880ee1688331703ce259ff2d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
