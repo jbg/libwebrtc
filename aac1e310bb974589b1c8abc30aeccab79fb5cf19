@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60f0930c_6d0fc8b0",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-10T15:51:42Z",
+      "side": 1,
+      "message": "I added this target to prevent various tools in audio_processing from depending on neteq (through the neteq_tools target), which would require them to add field_trial as a dependency.",
+      "range": {
+        "startLine": 1174,
+        "startChar": 0,
+        "endLine": 1174,
+        "endChar": 14
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
