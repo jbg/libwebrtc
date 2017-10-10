@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "626bd40e_cc1987b4",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2017-10-10T08:01:59Z",
+      "side": 1,
+      "message": "Isn\u0027t it better to talk about headers instead of files? Something like:\n\nHeader files that belong to a build target can be listed in either\n`public` or `sources`; the former makes the files available to other\nbuild targets, while the latter makes them private to the current\nbuild target.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 13
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1209d20e_8266e734",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -37,6 +60,30 @@
       "side": 1,
       "message": "Yes, empty only for test and executable, I\u0027d say. And not really useful there, except to avoid having to make the style rule more complex by having exceptions.",
       "parentUuid": "1209d20e_8266e734",
+      "range": {
+        "startLine": 114,
+        "startChar": 68,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ca62ce6_aa66e3c0",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2017-10-10T08:01:59Z",
+      "side": 1,
+      "message": "Since we use GN templates (we don\u0027t directly use executable but rtc_executable, see https://cs.chromium.org/chromium/src/third_party/webrtc/webrtc.gni?l\u003d304\u0026rcl\u003d92ea95e34af5966555903026f45164afbd7e2088) maybe we can add a default or (probably better) add a check that for some targets types public is [].",
+      "parentUuid": "248c155d_798f477d",
       "range": {
         "startLine": 114,
         "startChar": 68,
@@ -168,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "295744dc_a6a16617",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2017-10-10T08:01:59Z",
+      "side": 1,
+      "message": "I agree with everything you said. This is a great discussion.\nDo you expect to have a lot of this internal/private stuff in our targets? If yes, this sounds like a very long task to achieve but maybe we can start to adopt the style guide for new targets and refactor old targets when they get modified.",
+      "parentUuid": "c34200b0_c72d1c9e",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b32bb098_a5cbdf0c",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -232,6 +303,53 @@
         "startChar": 0,
         "endLine": 136,
         "endChar": 65
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67fba050_b3aa252c",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2017-10-10T08:01:59Z",
+      "side": 1,
+      "message": "If we decide to use public consistently I will look at the templates and maybe we can set a default for rtc_test.",
+      "parentUuid": "78303e26_c08bb444",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30621b79_0d566fbf",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2017-10-10T08:01:59Z",
+      "side": 1,
+      "message": "I think this will help a lot in keeping things under control. Probably even more than public vs sources (but I hope we will be able to also use public correctly).",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 56
       },
       "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
