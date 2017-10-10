@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4895cc5c_a9d66d48",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-10-10T13:04:24Z",
+      "side": 1,
+      "message": "missed one reformatting",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cd6babe_74db0111",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-10-10T13:04:24Z",
+      "side": 1,
+      "message": "We generally don\u0027t handle OOM conditions so you shouldn\u0027t here either. We rely on the client to set_new_handler if it is interested in not exit()ing.",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5eb55ea_e6c07a85",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-10-10T13:04:24Z",
+      "side": 1,
+      "message": "unnecessary",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23c79ab6_8f0a6820",
+        "filename": "modules/audio_device/audio_device_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-10-10T13:04:24Z",
+      "side": 1,
+      "message": "What is id_ useful for?",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
