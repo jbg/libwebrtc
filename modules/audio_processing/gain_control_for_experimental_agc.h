@@ -66,7 +66,8 @@ class GainControlForExperimentalAgc : public GainControl,
  private:
   std::unique_ptr<ApmDataDumper> data_dumper_;
   GainControl* real_gain_control_;
-  int volume_;
+  int last_suggested_volume_;
+  int last_real_volume_;
   rtc::CriticalSection* crit_capture_;
   static int instance_counter_;
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(GainControlForExperimentalAgc);
