@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b3a6cbd4_c8fcf10e",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-10T18:18:35Z",
+      "side": 1,
+      "message": "This approach works. I\u0027ll use it in next patch.",
+      "parentUuid": "ca3a296e_8dfbdc89",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a93fad2_c61f9ebe",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 2
@@ -51,6 +69,24 @@
       "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ad5549d_76417543",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-10T18:18:35Z",
+      "side": 1,
+      "message": "No, it doesn\u0027t if DtlsSrtpTransport handles everything internally.",
+      "parentUuid": "0a93fad2_c61f9ebe",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "531338a2_f0df1dd9",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-10T18:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28886a15_8984965f",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c3acea_85f53e16",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 2
@@ -85,6 +139,24 @@
       "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "018e9dee_44dbf652",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-10T18:18:35Z",
+      "side": 1,
+      "message": "Yeah, you are right.",
+      "parentUuid": "f0c3acea_85f53e16",
+      "revId": "36d2d0ca787258dd9f6f16648913933748b99fba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
