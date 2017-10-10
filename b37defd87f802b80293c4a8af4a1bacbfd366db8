@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "037b6c3b_eaaa3c88",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-10T07:56:06Z",
+      "side": 1,
+      "message": "It was probably named release because it is reference counted. However, since we seem to use dispose elsewhere, I think naming it dispose makes sense. We use name release where it is possible for the application to also retain a copy.",
+      "parentUuid": "1950bd88_830b9b47",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2f6f6c7_22e3c256",
         "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2017-10-09T23:26:45Z",
       "side": 1,
       "message": "Should we think about introducing a class to collect the PeerConnectionFactory arguments so we don\u0027t end up with a lot of constructors? Not something that needs to be resolved in this CL, just wanted to bring it up. See also: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d7913",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48bfbc20_0b6c293f",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-10T07:56:06Z",
+      "side": 1,
+      "message": "We have used builder pattern in similar situations.",
+      "parentUuid": "a2f6f6c7_22e3c256",
       "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
