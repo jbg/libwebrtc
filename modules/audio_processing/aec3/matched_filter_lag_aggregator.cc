@@ -19,6 +19,8 @@ MatchedFilterLagAggregator::MatchedFilterLagAggregator(
     : data_dumper_(data_dumper), lag_updates_in_a_row_(num_lag_estimates, 0) {
   RTC_DCHECK(data_dumper);
   RTC_DCHECK_LT(0, num_lag_estimates);
+  histogram_.fill(0);
+  histogram_data_.fill(0);
 }
 
 MatchedFilterLagAggregator::~MatchedFilterLagAggregator() = default;
@@ -27,6 +29,10 @@ void MatchedFilterLagAggregator::Reset() {
   candidate_ = 0;
   candidate_counter_ = 0;
   std::fill(lag_updates_in_a_row_.begin(), lag_updates_in_a_row_.end(), 0.f);
+  histogram_.fill(0);
+  histogram_data_.fill(0);
+  histogram_data_index_ = 0;
+  filled_histogram_ = false;
 }
 
 rtc::Optional<size_t> MatchedFilterLagAggregator::Aggregate(
@@ -62,8 +68,43 @@ rtc::Optional<size_t> MatchedFilterLagAggregator::Aggregate(
         (candidate_ == lag_estimates[best_lag_estimate_index].lag)
             ? candidate_counter_ + 1
             : 0;
-    candidate_ = lag_estimates[best_lag_estimate_index].lag;
+    //    candidate_ = lag_estimates[best_lag_estimate_index].lag;
   }
+
+  float best_accuracy = 0.f;
+  int best_k = -1;
+  for (size_t k = 0; k < lag_estimates.size(); ++k) {
+    if (lag_estimates[k].updated && lag_estimates[k].reliable) {
+      if (lag_estimates[k].accuracy > best_accuracy) {
+        best_accuracy = lag_estimates[k].accuracy;
+        best_k = static_cast<int>(k);
+      }
+    }
+  }
+
+  if (best_k != -1) {
+    RTC_DCHECK_GT(histogram_.size(), histogram_data_[histogram_data_index_]);
+    RTC_DCHECK_LE(0, histogram_data_[histogram_data_index_]);
+    --histogram_[histogram_data_[histogram_data_index_]];
+
+    histogram_data_[histogram_data_index_] = lag_estimates[best_k].lag;
+
+    RTC_DCHECK_GT(histogram_.size(), histogram_data_[histogram_data_index_]);
+    RTC_DCHECK_LE(0, histogram_data_[histogram_data_index_]);
+    ++histogram_[histogram_data_[histogram_data_index_]];
+
+    histogram_data_index_ = (histogram_data_index_ + 1) % histogram_data_.size();
+    filled_histogram_ = filled_histogram_ || histogram_data_index_ == 0;
+
+
+    const int candidate = std::distance(histogram_.begin(), std::max_element(histogram_.begin(), histogram_.end()));
+
+    if (histogram_[candidate] > 50 && candidate_counter_ >= 15) {
+      printf(" %d %zu\n", candidate, candidate_);
+    }
+  }
+
+
 
   return candidate_counter_ >= 15 ? rtc::Optional<size_t>(candidate_)
                                   : rtc::Optional<size_t>();
