@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "55cf2236_a8aef170",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-10T14:29:39Z",
+      "side": 1,
+      "message": "Yes, it would, added a TODO to improve the warning when that support will be close.",
+      "parentUuid": "8ead073d_a264769d",
+      "range": {
+        "startLine": 53,
+        "startChar": 36,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edec5acb_7cb1e251",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5128d68_3d7b2ce6",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-10T14:29:39Z",
+      "side": 1,
+      "message": "I do not know any good reasons to pass data at all.\n\ndata should always be same as buffer_ (same value as passed to Create function that cause this callback).\nI considered (several times) to change PacketReadyCallback interface: either pass length only, or replace interface altogether with singe std::function\u003cvoid(size_t)\u003e or rtc::FunctionView\u003cvoid(size_t)\u003e or rtc::FunctionView\u003cvoid(rtc::CopyOnWriteBuffer)\u003e\n\nBut benefits so far seem too small and code to touch too large.",
+      "parentUuid": "edec5acb_7cb1e251",
+      "range": {
+        "startLine": 51,
+        "startChar": 21,
+        "endLine": 51,
+        "endChar": 28
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "de16a4e5_4464c75f",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-10T14:29:39Z",
+      "side": 1,
+      "message": "Next CL in addition to Sending, it will do rescheduling.\nTODO added",
+      "parentUuid": "ff0db215_0de3ed52",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 45
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e54e87d_f553663f",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 5
@@ -91,6 +163,30 @@
       "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bae7be9f_b2b85224",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-10T14:29:39Z",
+      "side": 1,
+      "message": "Yes, but not in near future.\nshort-term other rtcp messages will be added here: sdes, remb and other rtcp message that make sense to send by receiver.",
+      "parentUuid": "2e54e87d_f553663f",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
