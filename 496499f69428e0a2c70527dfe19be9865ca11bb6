@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "240aa915_d163274b",
+        "filename": "rtc_base/histogram_percentile_counter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-10-10T11:29:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52db6bc2_8d7e1be6",
+      "range": {
+        "startLine": 30,
+        "startChar": 63,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2d052d8_5e74789a",
         "filename": "rtc_base/histogram_percentile_counter.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c4849cd_6fd30e8a",
+        "filename": "rtc_base/histogram_percentile_counter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-10-10T11:29:11Z",
+      "side": 1,
+      "message": "Done. Had to change the logic below a bit.",
+      "parentUuid": "a2d052d8_5e74789a",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "27564704_5cd47cfc",
+        "filename": "rtc_base/histogram_percentile_counter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-10-10T11:29:11Z",
+      "side": 1,
+      "message": "This yields \"error: [chromium-style] Complex destructor has an inline body\". Added \u003ddefault to .cc file.",
+      "parentUuid": "eb70a961_86eb43e1",
+      "range": {
+        "startLine": 31,
+        "startChar": 32,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a6a21db_b9de0b43",
         "filename": "rtc_base/histogram_percentile_counter_unittest.cc",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "162da8d6_e66dca27",
+        "filename": "rtc_base/histogram_percentile_counter_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-10-10T11:29:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a6a21db_b9de0b43",
+      "range": {
+        "startLine": 32,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
