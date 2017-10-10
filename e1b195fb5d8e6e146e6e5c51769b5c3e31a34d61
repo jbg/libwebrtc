@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4126545b_3f5c67a4",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-10T13:53:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4895cc5c_a9d66d48",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2cd6babe_74db0111",
         "filename": "modules/audio_device/audio_device_impl.cc",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40b1241e_0b18ee83",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-10T13:53:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2cd6babe_74db0111",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5a838451_c9d907fb",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-10T13:53:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b5eb55ea_e6c07a85",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23c79ab6_8f0a6820",
         "filename": "modules/audio_device/audio_device_impl.h",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2017-10-10T13:04:24Z",
       "side": 1,
       "message": "What is id_ useful for?",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c080900d_a8b86bd1",
+        "filename": "modules/audio_device/audio_device_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-10T13:53:26Z",
+      "side": 1,
+      "message": "Legacy reasons. It was used originally to denote in logs what VoiceEngine instance and ADM belonged to. A global pointer was used to keep track if this id and it does not feel safe to remove the id here. OK?",
+      "parentUuid": "23c79ab6_8f0a6820",
       "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
