@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead073d_a264769d",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-10T13:59:26Z",
+      "side": 1,
+      "message": "If we only have send streams, we wouldn\u0027t generate any receiver reports, right?\n\nWoudl make sense to allow a null receive_statistics pointer for this case.",
+      "range": {
+        "startLine": 53,
+        "startChar": 36,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edec5acb_7cb1e251",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-10T13:59:26Z",
+      "side": 1,
+      "message": "Any good reason this interface doesn\u0027t have a const data pointer?",
+      "range": {
+        "startLine": 51,
+        "startChar": 21,
+        "endLine": 51,
+        "endChar": 28
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff0db215_0de3ed52",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-10T13:59:26Z",
+      "side": 1,
+      "message": "Why this wrapper?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 45
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e54e87d_f553663f",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-10T13:59:26Z",
+      "side": 1,
+      "message": "Do you intend to add sender reports here?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "38426946ec0cbe93727aad00084537fda17e4ee3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
