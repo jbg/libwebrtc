@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "788d919f_c32c1d5b",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-10T10:56:35Z",
+      "side": 1,
+      "message": "nit: {} for if/else",
+      "range": {
+        "startLine": 170,
+        "startChar": 51,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "8afef78fb253710a7b5bddd931d5e72b1c1d1367",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14886451_376c0ebe",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-10T10:56:35Z",
+      "side": 1,
+      "message": "Looks like these two can be const?",
+      "range": {
+        "startLine": 86,
+        "startChar": 17,
+        "endLine": 86,
+        "endChar": 0
+      },
+      "revId": "8afef78fb253710a7b5bddd931d5e72b1c1d1367",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
