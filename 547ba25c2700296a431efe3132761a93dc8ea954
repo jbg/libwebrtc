@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "104ac41e_236f8c53",
+        "filename": "test/frame_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-10-10T12:20:42Z",
+      "side": 1,
+      "message": "num_squares",
+      "range": {
+        "startLine": 36,
+        "startChar": 45,
+        "endLine": 36,
+        "endChar": 55
+      },
+      "revId": "547ba25c2700296a431efe3132761a93dc8ea954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
