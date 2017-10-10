@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "87a95fda_712fdffb",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-10T16:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd01e41_c4fb91ab",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 45
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "868a4bbe_02176746",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -170,6 +194,24 @@
       "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d723f823_7f013d89",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-10T16:06:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2326df32_41546825",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -372,6 +414,24 @@
     },
     {
       "key": {
+        "uuid": "73857260_815d50df",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-10T16:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "373ef1a9_79648c23",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "673bdc81_346bbd24",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -465,6 +525,30 @@
     },
     {
       "key": {
+        "uuid": "1add45ff_32e660ca",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-10T16:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed558bbd_edb45077",
+      "range": {
+        "startLine": 169,
+        "startChar": 13,
+        "endLine": 169,
+        "endChar": 14
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7e73017_8c504051",
         "filename": "modules/pacing/packet_queue2.h",
         "patchSetId": 2
@@ -524,6 +608,30 @@
       "side": 1,
       "message": "I don\u0027t know, it\u0027s not code shared with any other class and it doesn\u0027t make reviewing easier. Why not change it?",
       "parentUuid": "b47d753d_b72a300c",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55501066_b97fc3a2",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-10T16:06:30Z",
+      "side": 1,
+      "message": "It will become clear in the upcoming CL :)",
+      "parentUuid": "4f0345c3_3c4e81b5",
       "range": {
         "startLine": 55,
         "startChar": 11,
