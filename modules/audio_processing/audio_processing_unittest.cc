@@ -306,6 +306,7 @@ std::string OutputFilePath(const std::string& name,
 void ClearTempFiles() {
   for (auto& kv : temp_filenames)
     remove(kv.second.c_str());
+  temp_filenames.clear();
 }
 
 void OpenFileAndReadMessage(const std::string& filename, MessageLite* msg) {
@@ -2681,6 +2682,7 @@ TEST_P(AudioProcessingTest, Formats) {
       fclose(ref_file);
     }
   }
+  ClearTempFiles();
 }
 
 #if defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
