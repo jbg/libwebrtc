@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "bfd01e41_c4fb91ab",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-10T12:21:03Z",
+      "side": 1,
+      "message": "Ok, but for anyone who\u0027s reading the code it may look like a bug. Should we express the comment differently? Maybe not.",
+      "parentUuid": "54f4e72e_43d7d965",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 45
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "868a4bbe_02176746",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -125,6 +149,24 @@
       "side": 1,
       "message": "I think it looks better to use (+\u003d) consistently, instead of one (++) and then one (+\u003d). WDYT?",
       "parentUuid": "868a4bbe_02176746",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2326df32_41546825",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-10T12:21:03Z",
+      "side": 1,
+      "message": "To me it\u0027s weird to do +\u003d 1, but I\u0027m not feeling strongly... :)",
+      "parentUuid": "baab4bd2_f4e4bd1b",
       "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -312,6 +354,24 @@
     },
     {
       "key": {
+        "uuid": "373ef1a9_79648c23",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-10T12:21:03Z",
+      "side": 1,
+      "message": "Does it have to be efficient? Maybe it\u0027s fine to loop through linearly under a DCHECK?",
+      "parentUuid": "566ae265_73560f92",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "673bdc81_346bbd24",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
@@ -440,6 +500,30 @@
       "side": 1,
       "message": "This Packet struct is pretty much a copy of the Packet struct from PacketQueue. I agree size_bytes is better but for the sake of testing this class behind a field trial it is easier to just leave it for now.",
       "parentUuid": "c7e73017_8c504051",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f0345c3_3c4e81b5",
+        "filename": "modules/pacing/packet_queue2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-10T12:21:03Z",
+      "side": 1,
+      "message": "I don\u0027t know, it\u0027s not code shared with any other class and it doesn\u0027t make reviewing easier. Why not change it?",
+      "parentUuid": "b47d753d_b72a300c",
       "range": {
         "startLine": 55,
         "startChar": 11,
