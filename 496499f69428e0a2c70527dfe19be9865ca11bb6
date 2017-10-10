@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52db6bc2_8d7e1be6",
+        "filename": "rtc_base/histogram_percentile_counter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-10T11:07:21Z",
+      "side": 1,
+      "message": "nit: declare value in for statement?",
+      "range": {
+        "startLine": 30,
+        "startChar": 63,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2d052d8_5e74789a",
+        "filename": "rtc_base/histogram_percentile_counter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-10T11:07:21Z",
+      "side": 1,
+      "message": "Still not really a fan of int here, because of the casts necessary and the fact that (possibly) sizeof(int) \u003c sizeof(size_t).",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb70a961_86eb43e1",
+        "filename": "rtc_base/histogram_percentile_counter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-10T11:07:21Z",
+      "side": 1,
+      "message": "nit: put next to ctor and \u003d default;",
+      "range": {
+        "startLine": 31,
+        "startChar": 32,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a6a21db_b9de0b43",
+        "filename": "rtc_base/histogram_percentile_counter_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-10T11:07:21Z",
+      "side": 1,
+      "message": "nit: foreach loop?",
+      "range": {
+        "startLine": 32,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "496499f69428e0a2c70527dfe19be9865ca11bb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
