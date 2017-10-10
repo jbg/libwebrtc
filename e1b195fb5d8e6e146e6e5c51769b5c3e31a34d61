@@ -139,6 +139,24 @@
       "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac9cb936_d6bfda15",
+        "filename": "modules/audio_device/audio_device_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-10-10T19:36:44Z",
+      "side": 1,
+      "message": "Sure, let\u0027s do it in a separate CL. I think one of my recent CLs removed the use of it in VoE.",
+      "parentUuid": "c080900d_a8b86bd1",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
