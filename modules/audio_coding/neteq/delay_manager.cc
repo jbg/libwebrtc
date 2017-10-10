@@ -20,6 +20,7 @@
 #include "modules/include/module_common_types.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/safe_conversions.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -31,7 +32,7 @@ DelayManager::DelayManager(size_t max_packets_in_buffer,
       iat_vector_(kMaxIat + 1, 0),
       iat_factor_(0),
       tick_timer_(tick_timer),
-      base_target_level_(4),  // In Q0 domain.
+      base_target_level_(4),                   // In Q0 domain.
       target_level_(base_target_level_ << 8),  // In Q8 domain.
       packet_len_ms_(0),
       streaming_mode_(false),
@@ -43,7 +44,9 @@ DelayManager::DelayManager(size_t max_packets_in_buffer,
       iat_cumulative_sum_(0),
       max_iat_cumulative_sum_(0),
       peak_detector_(*peak_detector),
-      last_pack_cng_or_dtmf_(1) {
+      last_pack_cng_or_dtmf_(1),
+      frame_length_change_experiment_(
+          field_trial::IsEnabled("WebRTC-Audio-NetEqFramelengthExperiment")) {
   assert(peak_detector);  // Should never be NULL.
   Reset();
 }
@@ -298,6 +301,37 @@ int DelayManager::SetPacketAudioLength(int length_ms) {
     LOG_F(LS_ERROR) << "length_ms = " << length_ms;
     return -1;
   }
+  if (frame_length_change_experiment_ && packet_len_ms_ != length_ms) {
+    const int old_packet_length = packet_len_ms_;
+    // Stretch or compress the histogram if the frame length has changed.
+    IATVector new_iat_vector(iat_vector_.size(), 0);
+    int scale_factor = 1;
+    if (old_packet_length > length_ms) {
+      // When the stretching the histogram, the bins should be scaled, to ensure
+      // the histogram still sums to one.
+      scale_factor = old_packet_length / length_ms;
+    }
+    int acc = 0;
+    int time_counter = 0;
+    size_t new_histogram_idx = 0;
+    for (size_t i = 0; i < iat_vector_.size(); i++) {
+      acc += iat_vector_[i];
+      time_counter += old_packet_length;
+      bool reset_acc = false;
+      while (time_counter >= length_ms) {
+        new_iat_vector[new_histogram_idx] += acc / scale_factor;
+        new_histogram_idx =
+            std::min(new_histogram_idx + 1, new_iat_vector.size() - 1);
+        reset_acc = true;
+        time_counter -= length_ms;
+      }
+      if (reset_acc) {
+        acc = 0;
+      }
+    }
+    iat_vector_ = new_iat_vector;
+  }
+
   packet_len_ms_ = length_ms;
   peak_detector_.SetPacketAudioLength(packet_len_ms_);
   packet_iat_stopwatch_ = tick_timer_->GetNewStopwatch();
