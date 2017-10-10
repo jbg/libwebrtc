@@ -25,22 +25,24 @@ namespace webrtc {
 
 SrtpTransport::SrtpTransport(bool rtcp_mux_enabled,
                              const std::string& content_name)
-    : content_name_(content_name),
-      rtp_transport_(rtc::MakeUnique<RtpTransport>(rtcp_mux_enabled)) {
+    : RtpTransportInternalAdapter(
+          rtc::MakeUnique<RtpTransport>(rtcp_mux_enabled)),
+      content_name_(content_name) {
   ConnectToRtpTransport();
 }
 
 SrtpTransport::SrtpTransport(std::unique_ptr<RtpTransportInternal> transport,
                              const std::string& content_name)
-    : content_name_(content_name), rtp_transport_(std::move(transport)) {
+    : RtpTransportInternalAdapter(std::move(transport)),
+      content_name_(content_name) {
   ConnectToRtpTransport();
 }
 
 void SrtpTransport::ConnectToRtpTransport() {
-  rtp_transport_->SignalPacketReceived.connect(
+  owned_transport_->SignalPacketReceived.connect(
       this, &SrtpTransport::OnPacketReceived);
-  rtp_transport_->SignalReadyToSend.connect(this,
-                                            &SrtpTransport::OnReadyToSend);
+  owned_transport_->SignalReadyToSend.connect(this,
+                                              &SrtpTransport::OnReadyToSend);
 }
 
 bool SrtpTransport::SendRtpPacket(rtc::CopyOnWriteBuffer* packet,
@@ -125,8 +127,8 @@ bool SrtpTransport::SendPacket(bool rtcp,
 
   // Update the length of the packet now that we've added the auth tag.
   packet->SetSize(len);
-  return rtcp ? rtp_transport_->SendRtcpPacket(packet, updated_options, flags)
-              : rtp_transport_->SendRtpPacket(packet, updated_options, flags);
+  return rtcp ? owned_transport_->SendRtcpPacket(packet, updated_options, flags)
+              : owned_transport_->SendRtpPacket(packet, updated_options, flags);
 }
 
 void SrtpTransport::OnPacketReceived(bool rtcp,
@@ -251,16 +253,6 @@ void SrtpTransport::ResetParams() {
   send_rtcp_session_ = nullptr;
   recv_rtcp_session_ = nullptr;
   LOG(LS_INFO) << "The params in SRTP transport are reset.";
-}
-
-void SrtpTransport::SetEncryptedHeaderExtensionIds(
-    cricket::ContentSource source,
-    const std::vector<int>& extension_ids) {
-  if (source == cricket::CS_LOCAL) {
-    recv_encrypted_header_extension_ids_ = extension_ids;
-  } else {
-    send_encrypted_header_extension_ids_ = extension_ids;
-  }
 }
 
 void SrtpTransport::CreateSrtpSessions() {
