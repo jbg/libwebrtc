@@ -170,10 +170,11 @@ class TaskQueue::Impl : public RefCountInterface {
   bool IsCurrent() const;
 
   template <class Closure,
-            typename std::enable_if<
-                std::is_copy_constructible<Closure>::value>::type* = nullptr>
-  void PostTask(const Closure& closure) {
-    PostTask(std::unique_ptr<QueuedTask>(new ClosureTask<Closure>(closure)));
+            typename std::enable_if<!std::is_convertible<
+                Closure,
+                std::unique_ptr<QueuedTask>>::value>::type* = nullptr>
+  void PostTask(Closure&& closure) {
+    PostTask(NewClosure(std::forward<Closure>(clousre)));
   }
 
   void PostTask(std::unique_ptr<QueuedTask> task);
