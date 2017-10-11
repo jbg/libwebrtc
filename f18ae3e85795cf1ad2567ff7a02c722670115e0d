@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a257d0b_5e3c01cc",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T11:26:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct. See http://en.cppreference.com/w/cpp/container/map/erase. \"References and iterators to the erased elements are invalidated.\" So, doing post-increment on it after erasing it seems wrong. I think the correct way to do it is to change this line to\n\n it \u003d temp_filenames.erase(it);  // Resets it to the element following the last removed element.",
+      "range": {
+        "startLine": 317,
+        "startChar": 6,
+        "endLine": 317,
+        "endChar": 33
+      },
+      "revId": "f18ae3e85795cf1ad2567ff7a02c722670115e0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
