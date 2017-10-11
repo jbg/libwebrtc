@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdf79d3a_02845dc2",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-11T13:15:09Z",
+      "side": 0,
+      "message": "Also note this is the only assignment to this variable.",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 45
+      },
+      "revId": "4af736696133f6b9f94b3524c7cc5156579a9929",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

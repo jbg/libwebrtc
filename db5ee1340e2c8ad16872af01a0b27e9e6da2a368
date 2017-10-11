@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c5cf321_bfd4c058",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-11T13:15:09Z",
+      "side": 1,
+      "message": "This TODO is unrelated to this cl, so deleted in next patch set.\n\nBut I\u0027d still appreciate comments.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 80
+      },
+      "revId": "db5ee1340e2c8ad16872af01a0b27e9e6da2a368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
