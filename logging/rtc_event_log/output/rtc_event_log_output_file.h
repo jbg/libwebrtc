@@ -41,6 +41,8 @@ class RtcEventLogOutputFile final : public RtcEventLogOutput {
 
   bool Write(const std::string& output) override;
 
+  void Close() override;
+
  private:
   // IsActive() can be called either from outside or from inside, but we don't
   // want to incur the overhead of a virtual function call if called from inside

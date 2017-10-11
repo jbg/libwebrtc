@@ -68,11 +68,7 @@ RtcEventLogOutputFile::RtcEventLogOutputFile(rtc::PlatformFile file,
 }
 
 RtcEventLogOutputFile::~RtcEventLogOutputFile() {
-  if (file_) {
-    RTC_DCHECK(IsActiveInternal());
-    file_->CloseFile();
-    file_.reset();
-  }
+  Close();
 }
 
 bool RtcEventLogOutputFile::IsActive() const {
@@ -104,6 +100,14 @@ bool RtcEventLogOutputFile::Write(const std::string& output) {
   }
 
   return written;
+}
+
+void RtcEventLogOutputFile::Close() {
+  if (file_) {
+    RTC_DCHECK(IsActiveInternal());
+    file_->CloseFile();
+    file_.reset();
+  }
 }
 
 bool RtcEventLogOutputFile::IsActiveInternal() const {

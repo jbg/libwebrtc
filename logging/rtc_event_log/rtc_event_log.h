@@ -49,7 +49,7 @@ class RtcEventLog {
 
   // Starts logging to a given output. The output might be limited in size,
   // and may close itself once it has reached the maximum size.
-  virtual bool StartLogging(std::unique_ptr<RtcEventLogOutput> output) = 0;
+  virtual bool StartLogging(RtcEventLogOutput* output) = 0;
 
   // Stops logging to file and waits until the file has been closed, after
   // which it would be permissible to read and/or modify it.
@@ -62,9 +62,7 @@ class RtcEventLog {
 // No-op implementation is used if flag is not set, or in tests.
 class RtcEventLogNullImpl : public RtcEventLog {
  public:
-  bool StartLogging(std::unique_ptr<RtcEventLogOutput> output) override {
-    return false;
-  }
+  bool StartLogging(RtcEventLogOutput* output) override { return false; }
   void StopLogging() override {}
   void Log(std::unique_ptr<RtcEvent> event) override {}
 };

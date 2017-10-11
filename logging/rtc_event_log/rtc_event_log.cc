@@ -83,7 +83,7 @@ class RtcEventLogImpl final : public RtcEventLog {
 
   // TODO(eladalon): We should change these name to reflect that what we're
   // actually starting/stopping is the output of the log, not the log itself.
-  bool StartLogging(std::unique_ptr<RtcEventLogOutput> output) override;
+  bool StartLogging(RtcEventLogOutput* output) override;
   void StopLogging() override;
 
   void Log(std::unique_ptr<RtcEvent> event) override;
@@ -124,7 +124,7 @@ class RtcEventLogImpl final : public RtcEventLog {
   size_t written_bytes_ RTC_ACCESS_ON(task_queue_);
 
   std::unique_ptr<RtcEventLogEncoder> event_encoder_ RTC_ACCESS_ON(task_queue_);
-  std::unique_ptr<RtcEventLogOutput> event_output_ RTC_ACCESS_ON(task_queue_);
+  RtcEventLogOutput* event_output_ RTC_ACCESS_ON(task_queue_);
 
   // Keep this last to ensure it destructs first, or else tasks living on the
   // queue might access other members after they've been torn down.
@@ -138,6 +138,7 @@ RtcEventLogImpl::RtcEventLogImpl(
     : max_size_bytes_(std::numeric_limits<decltype(max_size_bytes_)>::max()),
       written_bytes_(0),
       event_encoder_(std::move(event_encoder)),
+      event_output_(nullptr),
       task_queue_("rtc_event_log") {}
 
 RtcEventLogImpl::~RtcEventLogImpl() {
@@ -150,7 +151,7 @@ RtcEventLogImpl::~RtcEventLogImpl() {
   RTC_DCHECK_GE(count, 0);
 }
 
-bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output) {
+bool RtcEventLogImpl::StartLogging(RtcEventLogOutput* output) {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&owner_sequence_checker_);
 
   if (!output->IsActive()) {
@@ -166,16 +167,14 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output) {
   // to comply with LogToOutput()'s signature - but it's a small problem.
   RtcEventLoggingStarted start_event;
 
-  auto start = [this, start_event](std::unique_ptr<RtcEventLogOutput> output) {
+  task_queue_.PostTask([this, start_event, output]() {
     RTC_DCHECK_RUN_ON(&task_queue_);
     RTC_DCHECK(output->IsActive());
-    event_output_ = std::move(output);
+    RTC_DCHECK(!event_output_);
+    event_output_ = output;
     LogToOutput(rtc::MakeUnique<RtcEventLoggingStarted>(start_event));
     LogEventsFromMemoryToOutput();
-  };
-
-  task_queue_.PostTask(rtc::MakeUnique<ResourceOwningTask<RtcEventLogOutput>>(
-      std::move(output), start));
+  });
 
   return true;
 }
@@ -311,7 +310,10 @@ void RtcEventLogImpl::LogToOutput(std::unique_ptr<RtcEvent> event) {
 void RtcEventLogImpl::StopOutput() {
   max_size_bytes_ = std::numeric_limits<decltype(max_size_bytes_)>::max();
   written_bytes_ = 0;
-  event_output_.reset();
+  if (event_output_) {
+    event_output_->Close();
+    event_output_ = nullptr;
+  }
 }
 
 void RtcEventLogImpl::StopLoggingInternal() {
