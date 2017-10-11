@@ -157,6 +157,24 @@
       "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbe9ae16_eee4fa1d",
+        "filename": "modules/audio_device/audio_device_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-11T09:27:32Z",
+      "side": 1,
+      "message": "Will do. Still used in VoE BTW.\n\nshared_-\u003eset_audio_device(AudioDeviceModule::Create(\n        VoEId(shared_-\u003einstance_id(), -1),",
+      "parentUuid": "ac9cb936_d6bfda15",
+      "revId": "e1b195fb5d8e6e146e6e5c51769b5c3e31a34d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

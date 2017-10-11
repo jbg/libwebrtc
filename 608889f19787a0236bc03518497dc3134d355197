@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "084c36b2_11fc9673",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-11T09:27:32Z",
+      "side": 1,
+      "message": "Legacy. It is an ad-hoc way to test if PA is supported:\n- create and see if Init() works,\n- if not, revert to ALSA instead.\n\nActually, this might be a good time to revert this automatic fallback\nsince ALSA is being deprecated anyhow.",
+      "parentUuid": "e70aa470_8ce2a490",
+      "range": {
+        "startLine": 211,
+        "startChar": 23,
+        "endLine": 211,
+        "endChar": 27
+      },
+      "revId": "608889f19787a0236bc03518497dc3134d355197",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e25bbe98_317c390d",
         "filename": "modules/audio_device/audio_device_impl.cc",
         "patchSetId": 12
@@ -39,6 +63,24 @@
       "revId": "608889f19787a0236bc03518497dc3134d355197",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f75de0a_beb260a1",
+        "filename": "modules/audio_device/audio_device_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-11T09:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e25bbe98_317c390d",
+      "revId": "608889f19787a0236bc03518497dc3134d355197",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
