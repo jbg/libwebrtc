@@ -1813,12 +1813,12 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
         << "!";
   }
 
+  std::unique_ptr<RtcEventLogOutput> output;
   if (!params.logging.rtc_event_log_name.empty()) {
     event_log_ = RtcEventLog::Create(clock_, RtcEventLog::EncodingType::Legacy);
-    bool event_log_started =
-        event_log_->StartLogging(rtc::MakeUnique<RtcEventLogOutputFile>(
-            params.logging.rtc_event_log_name, RtcEventLog::kUnlimitedOutput));
-    RTC_DCHECK(event_log_started);
+    output = rtc::MakeUnique<RtcEventLogOutputFile>(
+        params.logging.rtc_event_log_name, RtcEventLog::kUnlimitedOutput);
+    RTC_DCHECK(event_log_->StartLogging(output.get()));
   }
 
   Call::Config call_config(event_log_.get());

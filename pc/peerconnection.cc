@@ -2557,14 +2557,19 @@ bool PeerConnection::StartRtcEventLog_w(rtc::PlatformFile file,
                               ? RtcEventLog::kUnlimitedOutput
                               : rtc::saturated_cast<size_t>(max_size_bytes);
 
-  return event_log_->StartLogging(
-      rtc::MakeUnique<RtcEventLogOutputFile>(file, max_size));
+  RTC_CHECK(!owned_rtc_event_log_output_);
+  owned_rtc_event_log_output_ =
+      rtc::MakeUnique<RtcEventLogOutputFile>(file, max_size);
+  return event_log_->StartLogging(owned_rtc_event_log_output_.get());
 }
 
 void PeerConnection::StopRtcEventLog_w() {
-  if (event_log_) {
-    event_log_->StopLogging();
+  if (!event_log_) {
+    return;
   }
+
+  RTC_CHECK(owned_rtc_event_log_output_);
+  event_log_->StopLogging();
 }
 
 }  // namespace webrtc

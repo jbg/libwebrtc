@@ -32,6 +32,9 @@ class RtcEventLogOutput {
   // after the first time |false| is returned. Write() may not be called on
   // an inactive output sink.
   virtual bool Write(const std::string& output) = 0;
+
+  // Closes the output. It is guaranteed to be inactive after this returns.
+  virtual void Close() = 0;
 };
 
 }  // namespace webrtc

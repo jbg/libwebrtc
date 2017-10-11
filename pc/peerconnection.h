@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "api/peerconnectioninterface.h"
+#include "api/rtceventlogoutput.h"
 #include "api/turncustomizer.h"
 #include "pc/iceserverparsing.h"
 #include "pc/peerconnectionfactory.h"
@@ -510,6 +511,13 @@ class PeerConnection : public PeerConnectionInterface,
   std::vector<
       rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>>
       receivers_;
+
+  // The RtcEventLogOutput is owned either by the hosting application, or by
+  // PeerConnection, depending on where it was created (which in turn depends
+  // on which version of StartRtcEventLog was called).
+  // TODO(eladalon): The other version of StartRtcEventLog is added in another
+  // CL. Remove this illuminating TODO once this is done.
+  std::unique_ptr<RtcEventLogOutput> owned_rtc_event_log_output_;
 };
 
 }  // namespace webrtc

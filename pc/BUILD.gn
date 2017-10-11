@@ -171,6 +171,7 @@ rtc_static_library("peerconnection") {
     ":rtc_pc_base",
     "..:webrtc_common",
     "../api:call_api",
+    "../api:libjingle_logging_api",
     "../api:optional",
     "../api:rtc_stats_api",
     "../api/video_codecs:video_codecs_api",
