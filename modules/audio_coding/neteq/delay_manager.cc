@@ -20,6 +20,7 @@
 #include "modules/include/module_common_types.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/safe_conversions.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -31,7 +32,7 @@ DelayManager::DelayManager(size_t max_packets_in_buffer,
       iat_vector_(kMaxIat + 1, 0),
       iat_factor_(0),
       tick_timer_(tick_timer),
-      base_target_level_(4),  // In Q0 domain.
+      base_target_level_(4),                   // In Q0 domain.
       target_level_(base_target_level_ << 8),  // In Q8 domain.
       packet_len_ms_(0),
       streaming_mode_(false),
@@ -43,7 +44,9 @@ DelayManager::DelayManager(size_t max_packets_in_buffer,
       iat_cumulative_sum_(0),
       max_iat_cumulative_sum_(0),
       peak_detector_(*peak_detector),
-      last_pack_cng_or_dtmf_(1) {
+      last_pack_cng_or_dtmf_(1),
+      frame_length_change_experiment_(
+          field_trial::IsEnabled("WebRTC-Audio-NetEqFramelengthExperiment")) {
   assert(peak_detector);  // Should never be NULL.
   Reset();
 }
@@ -298,6 +301,10 @@ int DelayManager::SetPacketAudioLength(int length_ms) {
     LOG_F(LS_ERROR) << "length_ms = " << length_ms;
     return -1;
   }
+  if (frame_length_change_experiment_ && packet_len_ms_ != length_ms) {
+    iat_vector_ = ScaleHistogram(iat_vector_, packet_len_ms_, length_ms);
+  }
+
   packet_len_ms_ = length_ms;
   peak_detector_.SetPacketAudioLength(packet_len_ms_);
   packet_iat_stopwatch_ = tick_timer_->GetNewStopwatch();
@@ -376,6 +383,52 @@ void DelayManager::LastDecodedWasCngOrDtmf(bool it_was) {
 
 void DelayManager::RegisterEmptyPacket() {
   ++last_seq_no_;
+}
+
+DelayManager::IATVector DelayManager::ScaleHistogram(const IATVector& histogram,
+                                                     int old_packet_length,
+                                                     int new_packet_length) {
+  // Stretch or compress the histogram if the frame length has changed.
+  IATVector new_iat_vector(histogram.size(), 0);
+  int scale_factor = 1;
+  if (old_packet_length > new_packet_length) {
+    // When stretching the histogram, the bins should be scaled, to ensure the
+    // histogram still sums to one.
+    scale_factor = old_packet_length / new_packet_length;
+  }
+  int acc = 0;
+  int time_counter = 0;
+  size_t new_histogram_idx = 0;
+  for (size_t i = 0; i < histogram.size(); i++) {
+    acc += histogram[i];
+    time_counter += old_packet_length;
+    bool reset_acc = false;
+    const int scaled_acc = acc / scale_factor;
+    while (time_counter >= new_packet_length) {
+      new_iat_vector[new_histogram_idx] += scaled_acc;
+      new_histogram_idx =
+          std::min(new_histogram_idx + 1, new_iat_vector.size() - 1);
+      reset_acc = true;
+      time_counter -= new_packet_length;
+    }
+    if (reset_acc) {
+      acc = 0;
+    }
+  }
+  // During histogram compression, it is possible to reach the end of the input
+  // histogram before having read enough entries to start writing to the output,
+  // in that case we should still write the leftover part that was read.
+  if (acc > 0) {
+    // This can only happen during histogram compression, so acc doesn't have to
+    // be scaled.
+    while (time_counter >= 0) {
+      new_iat_vector[new_histogram_idx] += acc;
+      new_histogram_idx =
+          std::min(new_histogram_idx + 1, new_iat_vector.size() - 1);
+      time_counter -= new_packet_length;
+    }
+  }
+  return new_iat_vector;
 }
 
 bool DelayManager::SetMinimumDelay(int delay_ms) {
