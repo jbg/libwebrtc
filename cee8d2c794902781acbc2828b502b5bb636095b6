@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e823e50_018ca96c",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-11T06:51:10Z",
+      "side": 1,
+      "message": "At 60 fps, |kMaxEncodedFrameWindowMs| corresponds to 48 frames, so settings |kMaxEncodedFrameMapSize| to 150 lgtm.",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 36
+      },
+      "revId": "cee8d2c794902781acbc2828b502b5bb636095b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
