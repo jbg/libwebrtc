@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b788688c_4b4964e6",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2573,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-11T17:17:02Z",
+      "side": 1,
+      "message": "This feels to me confusing and brittle; that\u0027s one reason why I prefer not making this change.",
+      "range": {
+        "startLine": 2570,
+        "startChar": 0,
+        "endLine": 2573,
+        "endChar": 38
+      },
+      "revId": "654006011b4324324d5e63391afd6ad8e78119d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
