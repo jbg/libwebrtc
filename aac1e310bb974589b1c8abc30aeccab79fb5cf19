@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "cb19a354_a18dcca7",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-11T12:30:30Z",
+      "side": 1,
+      "message": "It looks like it\u0027s not needed (and I should have tested that).",
+      "parentUuid": "c139d921_f339a635",
+      "range": {
+        "startLine": 1184,
+        "startChar": 49,
+        "endLine": 1184,
+        "endChar": 50
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f56827a3_ed81710c",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 1
@@ -92,6 +116,30 @@
       "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "703ba0f6_cc4b82c3",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-11T12:30:30Z",
+      "side": 1,
+      "message": "Done, and I found a subtle bug, so that was definitely useful!",
+      "parentUuid": "f56827a3_ed81710c",
+      "range": {
+        "startLine": 304,
+        "startChar": 6,
+        "endLine": 304,
+        "endChar": 37
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fd781195_b232e76d",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-11T12:30:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7ff425b_db56c737",
+      "range": {
+        "startLine": 310,
+        "startChar": 14,
+        "endLine": 310,
+        "endChar": 17
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "842e17b7_c7034ba8",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 1
@@ -138,6 +210,30 @@
       "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "196794e3_88248b21",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-11T12:30:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "842e17b7_c7034ba8",
+      "range": {
+        "startLine": 322,
+        "startChar": 45,
+        "endLine": 322,
+        "endChar": 63
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
