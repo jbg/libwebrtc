@@ -146,8 +146,9 @@ class PeerConnection : public PeerConnectionInterface,
 
   RTCError SetBitrate(const BitrateParameters& bitrate) override;
 
-  bool StartRtcEventLog(rtc::PlatformFile file,
-                        int64_t max_size_bytes) override;
+  RTC_DEPRECATED bool StartRtcEventLog(rtc::PlatformFile file,
+                                       int64_t max_size_bytes) override;
+  bool StartRtcEventLog(RtcEventLogOutput* output) override;
   void StopRtcEventLog() override;
 
   void Close() override;
@@ -443,8 +444,12 @@ class PeerConnection : public PeerConnectionInterface,
       webrtc::TurnCustomizer* turn_customizer);
 
   // Starts recording an RTC event log using the supplied platform file.
+  bool StartRtcEventLogToFile_w(rtc::PlatformFile file, int64_t max_size_bytes);
+
+  // Starts output of an RTC event log to the given output object.
   // This function should only be called from the worker thread.
-  bool StartRtcEventLog_w(rtc::PlatformFile file, int64_t max_size_bytes);
+  bool StartRtcEventLogToOutput_w(RtcEventLogOutput* output);
+
   // Stops recording an RTC event log.
   // This function should only be called from the worker thread.
   void StopRtcEventLog_w();
@@ -515,8 +520,6 @@ class PeerConnection : public PeerConnectionInterface,
   // The RtcEventLogOutput is owned either by the hosting application, or by
   // PeerConnection, depending on where it was created (which in turn depends
   // on which version of StartRtcEventLog was called).
-  // TODO(eladalon): The other version of StartRtcEventLog is added in another
-  // CL. Remove this illuminating TODO once this is done.
   std::unique_ptr<RtcEventLogOutput> owned_rtc_event_log_output_;
 };
 

@@ -1308,8 +1308,14 @@ PeerConnection::GetRemoteAudioSSLCertificate() {
 bool PeerConnection::StartRtcEventLog(rtc::PlatformFile file,
                                       int64_t max_size_bytes) {
   return worker_thread()->Invoke<bool>(
-      RTC_FROM_HERE, rtc::Bind(&PeerConnection::StartRtcEventLog_w, this, file,
-                               max_size_bytes));
+      RTC_FROM_HERE, rtc::Bind(&PeerConnection::StartRtcEventLogToFile_w, this,
+                               file, max_size_bytes));
+}
+
+bool PeerConnection::StartRtcEventLog(RtcEventLogOutput* output) {
+  return worker_thread()->Invoke<bool>(
+      RTC_FROM_HERE,
+      rtc::Bind(&PeerConnection::StartRtcEventLogToOutput_w, this, output));
 }
 
 void PeerConnection::StopRtcEventLog() {
@@ -2546,8 +2552,8 @@ bool PeerConnection::ReconfigurePortAllocator_n(
       turn_customizer);
 }
 
-bool PeerConnection::StartRtcEventLog_w(rtc::PlatformFile file,
-                                        int64_t max_size_bytes) {
+bool PeerConnection::StartRtcEventLogToFile_w(rtc::PlatformFile file,
+                                              int64_t max_size_bytes) {
   if (!event_log_) {
     return false;
   }
@@ -2560,6 +2566,14 @@ bool PeerConnection::StartRtcEventLog_w(rtc::PlatformFile file,
   RTC_CHECK(!owned_rtc_event_log_output_);
   owned_rtc_event_log_output_ =
       rtc::MakeUnique<RtcEventLogOutputFile>(file, max_size);
+  return event_log_->StartLogging(owned_rtc_event_log_output_.get());
+}
+
+bool PeerConnection::StartRtcEventLogToOutput_w(RtcEventLogOutput* output) {
+  RTC_CHECK(!owned_rtc_event_log_output_);
+  if (!event_log_) {
+    return false;
+  }
   return event_log_->StartLogging(owned_rtc_event_log_output_.get());
 }
 
