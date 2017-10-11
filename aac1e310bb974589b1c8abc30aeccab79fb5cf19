@@ -22,6 +22,122 @@
       "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2096aa0a_749fe5c9",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T06:46:31Z",
+      "side": 1,
+      "message": "Good.",
+      "parentUuid": "60f0930c_6d0fc8b0",
+      "range": {
+        "startLine": 1174,
+        "startChar": 0,
+        "endLine": 1174,
+        "endChar": 14
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c139d921_f339a635",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T06:46:31Z",
+      "side": 1,
+      "message": "Did you verify that this suppression is needed?",
+      "range": {
+        "startLine": 1184,
+        "startChar": 49,
+        "endLine": 1184,
+        "endChar": 50
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f56827a3_ed81710c",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T06:46:31Z",
+      "side": 1,
+      "message": "I would like to see a unit test for this rescaling. I suggest\n* Break out the code inside this if statement to a separate method. Make it public for testability.\n* Keep this if statement, but all it should do inside the body is invoke the rescale method.\n* Write a couple of unit tests that test scaling both up and down.",
+      "range": {
+        "startLine": 304,
+        "startChar": 6,
+        "endLine": 304,
+        "endChar": 37
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7ff425b_db56c737",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T06:46:31Z",
+      "side": 1,
+      "message": "\"When _the_ stretching...\" -\u003e \"When stretching...\"",
+      "range": {
+        "startLine": 310,
+        "startChar": 14,
+        "endLine": 310,
+        "endChar": 17
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "842e17b7_c7034ba8",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T06:46:31Z",
+      "side": 1,
+      "message": "Do the division outside the while loop.",
+      "range": {
+        "startLine": 322,
+        "startChar": 45,
+        "endLine": 322,
+        "endChar": 63
+      },
+      "revId": "aac1e310bb974589b1c8abc30aeccab79fb5cf19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
