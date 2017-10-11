@@ -335,4 +335,56 @@ TEST_F(DelayManagerTest, Failures) {
   EXPECT_FALSE(dm_->SetMaximumDelay(60));
 }
 
+// Test if the histogram is stretched correctly if the packet size is decreased.
+TEST(DelayManagerIATScalingTest, StretchTest) {
+  using IATVector = DelayManager::IATVector;
+  // Test a straightforward 60ms to 20ms change.
+  IATVector iat = {12, 0, 0, 0, 0, 0};
+  IATVector expected_result = {4, 4, 4, 0, 0, 0};
+  IATVector stretched_iat = DelayManager::ScaleHistogram(iat, 60, 20);
+  EXPECT_EQ(stretched_iat, expected_result);
+
+  // Test an example where the last bin in the stretched histogram should
+  // contain the sum of the elements that don't fit into the new histogram.
+  iat = {18, 15, 12, 9, 6, 3, 0};
+  expected_result = {6, 6, 6, 5, 5, 5, 30};
+  stretched_iat = DelayManager::ScaleHistogram(iat, 60, 20);
+  EXPECT_EQ(stretched_iat, expected_result);
+
+  // Test a 120ms to 60ms change.
+  iat = {18, 16, 14, 4, 0};
+  expected_result = {9, 9, 8, 8, 18};
+  stretched_iat = DelayManager::ScaleHistogram(iat, 120, 60);
+  EXPECT_EQ(stretched_iat, expected_result);
+
+  // Test a 120ms to 20ms change.
+  iat = {18, 12, 0, 0, 0, 0, 0, 0};
+  expected_result = {3, 3, 3, 3, 3, 3, 2, 10};
+  stretched_iat = DelayManager::ScaleHistogram(iat, 120, 20);
+  EXPECT_EQ(stretched_iat, expected_result);
+}
+
+// Test if the histogram is compressed correctly if the packet size is
+// increased.
+TEST(DelayManagerIATScalingTest, CompressionTest) {
+  using IATVector = DelayManager::IATVector;
+  // Test a 20 to 60 ms change.
+  IATVector iat = {12, 11, 10, 3, 2, 1};
+  IATVector expected_result = {33, 6, 0, 0, 0, 0};
+  IATVector stretched_iat = DelayManager::ScaleHistogram(iat, 20, 60);
+  EXPECT_EQ(stretched_iat, expected_result);
+
+  // Test a 60ms to 120ms change.
+  iat = {18, 16, 14, 4, 1};
+  expected_result = {34, 18, 1, 0, 0};
+  stretched_iat = DelayManager::ScaleHistogram(iat, 60, 120);
+  EXPECT_EQ(stretched_iat, expected_result);
+
+  // Test a 20ms to 120ms change.
+  iat = {18, 12, 5, 4, 4, 3, 5, 1};
+  expected_result = {46, 6, 0, 0, 0, 0, 0, 0};
+  stretched_iat = DelayManager::ScaleHistogram(iat, 20, 120);
+  EXPECT_EQ(stretched_iat, expected_result);
+}
+
 }  // namespace webrtc
