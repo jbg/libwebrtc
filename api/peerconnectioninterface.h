@@ -79,6 +79,7 @@
 #include "api/jsep.h"
 #include "api/mediastreaminterface.h"
 #include "api/rtcerror.h"
+#include "api/rtceventlogoutput.h"
 #include "api/rtpreceiverinterface.h"
 #include "api/rtpsenderinterface.h"
 #include "api/stats/rtcstatscollectorcallback.h"
@@ -795,11 +796,14 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   // operation fails the file will be closed. The logging will stop
   // automatically after 10 minutes have passed, or when the StopRtcEventLog
   // function is called.
-  // TODO(ivoc): Make this pure virtual when Chrome is updated.
+  // TODO(eladalon): Deprecate and remove this.
   virtual bool StartRtcEventLog(rtc::PlatformFile file,
                                 int64_t max_size_bytes) {
     return false;
   }
+
+  // Start RtcEventLog using an existing output-sink.
+  virtual bool StartRtcEventLog(RtcEventLogOutput* output) { return false; }
 
   // Stops logging the RtcEventLog.
   // TODO(ivoc): Make this pure virtual when Chrome is updated.
