@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c4f819f_51af8f0c",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "Since you are using new_packet_length in a division with it later on:\n\n RTC_DCHECK_GT(new_packet_length, 0)",
+      "range": {
+        "startLine": 390,
+        "startChar": 57,
+        "endLine": 390,
+        "endChar": 74
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83c1cb57_afc49d48",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "Confusion regarding variable names. The old histogram is called histogram. The new one is called new_iat_vector, which in turn is index with new_histogram_idx.",
+      "range": {
+        "startLine": 392,
+        "startChar": 11,
+        "endLine": 392,
+        "endChar": 26
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d5140c2_eba7c308",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "DCHECK that the new and old histograms are equal size (to make sure you did not accidentally modify it).",
+      "range": {
+        "startLine": 430,
+        "startChar": 2,
+        "endLine": 430,
+        "endChar": 3
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b60437c_9ed67c7d",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "Before returning, I wonder if we can DCHECK that the sum of the vector remains unchanged. How about this?\n\n RTC_DCHECK_EQ(accumulate(histogram.begin(), histogram.end(), 0),\n               accumulate(new_iat_vector.begin(), new_iat_vector.end(), 0));",
+      "range": {
+        "startLine": 431,
+        "startChar": 2,
+        "endLine": 431,
+        "endChar": 23
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "313b5751_ce9c7051",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "Add tests for something odd, too, like 70 to 40 and/or 30 to 20.",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 1
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78c73b73_0caa18ae",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "Nit: Sticking with your nomenclature, this should be compressed_iat.",
+      "range": {
+        "startLine": 374,
+        "startChar": 12,
+        "endLine": 374,
+        "endChar": 21
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23637981_b189959b",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-11T14:59:34Z",
+      "side": 1,
+      "message": "Again, add odd ratios.",
+      "range": {
+        "startLine": 388,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 1
+      },
+      "revId": "6d1c689c75bf7cbc82e8acd3959a100014d21845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
