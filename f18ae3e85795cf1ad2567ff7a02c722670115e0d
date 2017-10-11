@@ -22,6 +22,30 @@
       "revId": "f18ae3e85795cf1ad2567ff7a02c722670115e0d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37bbca5f_3f278157",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2017-10-11T11:35:14Z",
+      "side": 1,
+      "message": "The incrementation will happen before the erase, but the erase function will get the value before incrementation. But what you wrote also works.\n\nHere is a stackoverflow reference:\nhttps://stackoverflow.com/a/8234813",
+      "parentUuid": "2a257d0b_5e3c01cc",
+      "range": {
+        "startLine": 317,
+        "startChar": 6,
+        "endLine": 317,
+        "endChar": 33
+      },
+      "revId": "f18ae3e85795cf1ad2567ff7a02c722670115e0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
