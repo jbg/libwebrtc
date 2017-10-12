@@ -36,6 +36,12 @@ instead of                          | use
 
 See [the source](webrtc/api/array_view.h) for more detailed docs.
 
+### Forward declarations
+
+WebRTC follows the [Google][goog-style] C++ style guide with respect
+to forward declarations. Avoid using forward declarations where
+possible; just `#include` the headers you need.
+
 ## **C**
 
 There’s a substantial chunk of legacy C code in WebRTC, and a lot of
