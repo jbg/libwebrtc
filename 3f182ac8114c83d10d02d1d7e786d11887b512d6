@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "8991f483_5fae986b",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T09:47:16Z",
+      "side": 1,
+      "message": "sgtm. Maybe make [Google C++ style guide] point to the entire guide, and [forward declarations] point to the proper section?",
+      "parentUuid": "ed8c2006_0d24cb9e",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 39
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c29f5f49_884bb358",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "side": 1,
       "message": "It is more often one check guide to check \u0027what to do\u0027, less often \u0027why exactly\u0027\nso may be:\nAvoid using forwad declaration...\n\u003cempty line\u003e\nWebrtc follow the google style...",
       "parentUuid": "c29f5f49_884bb358",
+      "range": {
+        "startLine": 42,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efc09b3e_20ec34f9",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T09:47:16Z",
+      "side": 1,
+      "message": "It\u0027s only about 20 words in total, so I\u0027d say that presenting things in the logical order (first \"we use the Google rule\", then \"that rule is to avoid forward decls\") is more important than presenting the conclusion first so that people can skip the last 10 words if they\u0027re not interested in the why.\n\nI\u0027ve thought about this for some of the longer rule texts, though, and we might want to consider stealing the Google guide\u0027s Summary+Definition+Pros+Cons+Decision structure, for example. We should probably do that in a separate CL that reformats the whole guide in one go, though.",
+      "parentUuid": "78899a04_1c8ce4df",
       "range": {
         "startLine": 42,
         "startChar": 25,
