@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ec59460_5669ba5d",
+        "filename": "rtc_base/histogram_percentile_counter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-12T08:58:43Z",
+      "side": 1,
+      "message": "nit: this one too :)",
+      "range": {
+        "startLine": 31,
+        "startChar": 32,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "300462829ba565dc44029143183f5bdd615783fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
