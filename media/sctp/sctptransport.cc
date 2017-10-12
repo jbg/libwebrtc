@@ -46,7 +46,7 @@ namespace {
 // take off 80 bytes for DTLS/TURN/TCP/IP overhead.
 static constexpr size_t kSctpMtu = 1200;
 
-// The size of the SCTP association send buffer.  256kB, the usrsctp default.
+// The size of the SCTP association send buffer. 256kB, the usrsctp default.
 static constexpr int kSendBufferSize = 262144;
 
 // Set the initial value of the static SCTP Data Engines reference count.
