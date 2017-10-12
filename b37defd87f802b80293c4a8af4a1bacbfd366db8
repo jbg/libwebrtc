@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "78b28631_251f0d10",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "Right, I had forgotten about that. Yes, we should add that to the Java API. Added sketch in sakal@\u0027s comment.",
+      "parentUuid": "3f884708_ec84da8b",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1950bd88_830b9b47",
         "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
         "patchSetId": 6
@@ -51,6 +69,24 @@
       "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bb22095_a7a2b8d8",
+        "filename": "sdk/android/api/org/webrtc/AudioProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "sgtm, fixed.",
+      "parentUuid": "037b6c3b_eaaa3c88",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "d4a9f829_decd79ca",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48bfbc20_0b6c293f",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d45f3e8d_365c1b48",
         "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
         "patchSetId": 6
@@ -100,6 +154,24 @@
       "writtenOn": "2017-10-09T23:26:45Z",
       "side": 1,
       "message": "Is there an advantage to making this an interface that returns a native pointer, instead of a class that wraps a native pointer like AudioProcessing is? Is there ever a situation where the native pointer will change during the object\u0027s lifetime?",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0873dfb0_3a97bc7c",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "An interface doesn\u0027t lock the user to a superclass, that\u0027s all. I\u0027m not very committed to this choice. Why use a class instead, is it for consistency with the rest of the API?",
+      "parentUuid": "d45f3e8d_365c1b48",
       "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -123,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "0edeba5e_4a27e0ae",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "Yup. Same for AudioProcessing mentioned in the AudioProcessing.java class. I\u0027ll update the comments.",
+      "parentUuid": "195363ab_f55e90a5",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fc9f7b2_6af8d1b5",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/AudioProcessingTest.java",
         "patchSetId": 6
@@ -140,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "f698156b_b662abf5",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/AudioProcessingTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fc9f7b2_6af8d1b5",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4df4f932_06e20f25",
         "filename": "sdk/android/src/jni/pc/audio_jni.cc",
         "patchSetId": 6
@@ -151,6 +259,24 @@
       "writtenOn": "2017-10-09T23:26:45Z",
       "side": 1,
       "message": "This takes ownership of the object returned by getNativePointer? If you go with this, it should be made very clear in a comment in PostProcessing.java. And maybe consider renaming it to \"PostProcessingFactory\".\n\nBut I think it would be better to let the application/API client retain ownership of the PostProcessing interface. In the webrtc-core group we decided this is how we want to handle injectable modules in general (I still need to add this to an \"API design guidelines\" document, and create said document).\n\nNote that if you don\u0027t want to change the C++ AudioProcessing API, you can change the ownership model at the JNI level by doing this:\n\n// Proxy that can be deleted without deleting the underlying PostProcessing instance.\nclass PostProcessingProxy : public PostProcessing {\n public:\n  PostProcessingProxy(PostProcessing* p) : p_(p) {}\n  void Initialize(int sample_rate_hz, int num_channels) override {\n    p_-\u003eInitialize(sample_rate_hz, num_channels);\n  }\n  void Process(AudioBuffer* audio) override {\n    p_-\u003eProcess(audio);\n  }\n  std::string ToString() const {\n    return p_-\u003eToString();\n  }\n\n private:\n  PostProcessing* p_;\n};\n\n...\n\nauto post_processor \u003d rtc::MakeUnique\u003cPostProcessingProxy\u003e(\n    reinterpret_cast\u003cPostProcessing*\u003e(jpost_processor));\n\n...",
+      "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd87002_b6d55fe4",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-12T10:54:32Z",
+      "side": 1,
+      "message": "Hm, I fail to see why a user\u0027s Java code should manually track the lifetime of objects they hand over to us. This forces a C++ memory model onto Java.\n\nIf the users want to talk to their injectees, they can use this proxy wrapper, or keep the data they want to share in a shared_ptr within the injectee implementation. If the user doesn\u0027t want that, they can stop thinking about the object the moment they hand it over.\n\nBy your and sakal@\u0027s comments, I\u0027d go with a factory. More fleshed out thought under sakal@\u0027s comment.",
+      "parentUuid": "4df4f932_06e20f25",
       "revId": "b37defd87f802b80293c4a8af4a1bacbfd366db8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
