@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79f22929_c13a6b57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T08:17:34Z",
+      "side": 1,
+      "message": "\"over the Chromium guide in this case:\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 56,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c29f5f49_884bb358",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T08:17:34Z",
+      "side": 1,
+      "message": "Maybe like this, so as to not imply that the summary here is authoritative:\n\n\"tl;dr: Avoid using forward declarations where possible, and just `#include` the headers you need instead.\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
