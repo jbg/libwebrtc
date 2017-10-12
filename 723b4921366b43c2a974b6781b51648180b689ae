@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bebbf236_65295028",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5254
+      },
+      "writtenOn": "2017-10-12T11:47:15Z",
+      "side": 1,
+      "message": "Yup, quite right. I\u0027ve collapsed them. Also needed to be move them to fix building problems.",
+      "parentUuid": "80c812ad_d6ca7b5a",
+      "range": {
+        "startLine": 528,
+        "startChar": 14,
+        "endLine": 528,
+        "endChar": 15
+      },
+      "revId": "723b4921366b43c2a974b6781b51648180b689ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07581dfa_b495fd40",
         "filename": "sdk/objc/Framework/UnitTests/Info.plist",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-10-12T08:43:01Z",
       "side": 1,
       "message": "We already have two .plist files that are used for testing, one in examples/objc and one in test/ios. Instead of adding a third, can we use one of the existing ones? Maybe you can move it to some better location.",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 5
+      },
+      "revId": "723b4921366b43c2a974b6781b51648180b689ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ccf9af4_b9d740fb",
+        "filename": "sdk/objc/Framework/UnitTests/Info.plist",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5254
+      },
+      "writtenOn": "2017-10-12T11:47:15Z",
+      "side": 1,
+      "message": "Oh I didn\u0027t know about the one in test/ios. Thanks!\nI\u0027ll use that one.",
+      "parentUuid": "07581dfa_b495fd40",
       "range": {
         "startLine": 1,
         "startChar": 2,
