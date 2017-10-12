@@ -8,22 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "sdk/android/src/jni/pc/audio_jni.h"
+package org.webrtc;
 
-namespace webrtc {
-namespace jni {
-
-rtc::scoped_refptr<AudioDecoderFactory> CreateAudioDecoderFactory() {
-  return nullptr;
+/** Java wrapper for a webrtc::PostProcesing module. */
+public interface PostProcessing {
+  // Returns a pointer to a webrtc::PostProcessing instance.
+  public long getNativePointer();
 }
-
-rtc::scoped_refptr<AudioEncoderFactory> CreateAudioEncoderFactory() {
-  return nullptr;
-}
-
-rtc::scoped_refptr<AudioProcessing> CreateAudioProcessing() {
-  return nullptr;
-}
-
-}  // namespace jni
-}  // namespace webrtc
