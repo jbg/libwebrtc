@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb960090_b5a23045",
+        "filename": "examples/objc/AppRTCMobile/RTCVideoCodecInfo+Fullname.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-12T11:28:40Z",
+      "side": 1,
+      "message": "Maybe call this humanReadableDescription? Also, a comment that the purpose of this function is to propagate the H264 profile params to the string would be nice. Is it better to move this function into ARDSettingsViewController directly?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "d94fbb5e76432b09773fa589865dcae3e587d830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d8b6edd_8698ee66",
+        "filename": "examples/objc/AppRTCMobile/RTCVideoCodecInfo+Fullname.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-12T11:28:40Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this function. Let\u0027s ignore clients that have already stored a string.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 45
+      },
+      "revId": "d94fbb5e76432b09773fa589865dcae3e587d830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
