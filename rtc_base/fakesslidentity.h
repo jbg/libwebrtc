@@ -44,6 +44,7 @@ class FakeSSLCertificate : public rtc::SSLCertificate {
   std::string ToPEMString() const override {
     return data_;
   }
+  std::string ToPEMChainString() const override { return data_; }
   void ToDER(Buffer* der_buffer) const override {
     std::string der_string;
     RTC_CHECK(SSLIdentity::PemToDer(kPemTypeCertificate, data_, &der_string));

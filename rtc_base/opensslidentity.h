@@ -16,6 +16,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "rtc_base/checks.h"
 #include "rtc_base/constructormagic.h"
@@ -36,8 +37,7 @@ class OpenSSLKeyPair {
   static OpenSSLKeyPair* Generate(const KeyParams& key_params);
   // Constructs a key pair from the private key PEM string. This must not result
   // in missing public key parameters. Returns null on error.
-  static OpenSSLKeyPair* FromPrivateKeyPEMString(
-      const std::string& pem_string);
+  static OpenSSLKeyPair* FromPrivateKeyPEMString(const std::string& pem_string);
 
   virtual ~OpenSSLKeyPair();
 
@@ -62,22 +62,29 @@ class OpenSSLKeyPair {
 class OpenSSLCertificate : public SSLCertificate {
  public:
   // Caller retains ownership of the X509 object.
-  explicit OpenSSLCertificate(X509* x509) : x509_(x509) {
-    AddReference();
-  }
+  explicit OpenSSLCertificate(X509* x509);
+
+  // Caller retains owership of STACK_OF(X509).
+  explicit OpenSSLCertificate(STACK_OF(X509) * chain);
 
   static OpenSSLCertificate* Generate(OpenSSLKeyPair* key_pair,
                                       const SSLIdentityParams& params);
   static OpenSSLCertificate* FromPEMString(const std::string& pem_string);
+  // Creates certificate from string, if there are multiple
+  // certificates, the chain is built based on the order.
+  static OpenSSLCertificate* FromPEMChainString(const std::string& pem_string);
 
   ~OpenSSLCertificate() override;
 
   OpenSSLCertificate* GetReference() const override;
 
-  X509* x509() const { return x509_; }
+  X509* x509() const { return GetLeafCertificate(); }
+  X509* GetX509Reference() const;
 
   std::string ToPEMString() const override;
+  std::string ToPEMChainString() const override;
   void ToDER(Buffer* der_buffer) const override;
+  // Both operators only check leaf certificate and ignore chaining.
   bool operator==(const OpenSSLCertificate& other) const;
   bool operator!=(const OpenSSLCertificate& other) const;
 
@@ -100,9 +107,10 @@ class OpenSSLCertificate : public SSLCertificate {
   int64_t CertificateExpirationTime() const override;
 
  private:
-  void AddReference() const;
+  void AddReference(X509* x509) const;
+  X509* GetLeafCertificate() const;
 
-  X509* x509_;
+  STACK_OF(X509) * x509_stack_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(OpenSSLCertificate);
 };
@@ -117,6 +125,8 @@ class OpenSSLIdentity : public SSLIdentity {
   static OpenSSLIdentity* GenerateForTest(const SSLIdentityParams& params);
   static SSLIdentity* FromPEMStrings(const std::string& private_key,
                                      const std::string& certificate);
+  static SSLIdentity* FromPEMChainStrings(const std::string& private_key,
+                                          const std::string& certificate);
   ~OpenSSLIdentity() override;
 
   const OpenSSLCertificate& certificate() const override;
@@ -140,7 +150,6 @@ class OpenSSLIdentity : public SSLIdentity {
 
   RTC_DISALLOW_COPY_AND_ASSIGN(OpenSSLIdentity);
 };
-
 
 }  // namespace rtc
 
