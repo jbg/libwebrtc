@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e81e2beb_c5424f44",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-12T13:19:35Z",
+      "side": 1,
+      "message": "What is the client doesn\u0027t want AudioProcessing? I would prefer the client to be forced to pass it in.",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 3
+      },
+      "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a4a161ec_cb43ba40",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-12T13:19:35Z",
+      "side": 1,
+      "message": "We haven\u0027t adopted any conventions on this in WebRTC Java code so far.",
+      "parentUuid": "f3c5f56e_3d0bec4d",
+      "range": {
+        "startLine": 199,
+        "startChar": 7,
+        "endLine": 199,
+        "endChar": 67
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b5e48ca_afe0d9ce",
         "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
         "patchSetId": 5
@@ -155,6 +179,30 @@
       "side": 1,
       "message": "sakal@ said:\n\"\"\"\nI think we have three design options here now:\n1. Rename PostProcessing to PostProcessingFactory and getNativePointer to createNativePostProcessing. Whoever calls this method takes ownership of the object.\n2. Do as Taylor suggested and let the application own the PostProcessing either by modifying the interface or using a proxy class. I think in this case it might be worth considering reference counting so the object can\u0027t be freed from Java while the native code is still using it.\n3. Make PostProcessing a concrete class and make it clear that when it is passed to AudioProcessing, ownership is transferred.\n\nI would be okay with any of these approaches. I have slight preference for option 2 because it matches how handle other similar objects in Java.\n\"\"\"\n\n#1 sounds good, and fits well with the existing PeerConnectionFactory constructor.\nHow to add support for a default implementation? What about this:\n\npublic interface PostProcessingFactory {\n  // caller takes ownership\n  public long createNativePostProcessing();\n}\n\npublic interface AudioProcessingFactory {\n  // caller takes ownership\n  public long createNativeAudioProcessing();\n}\n\npublic class DefaultAudioProcessingFactory implements AudioProcessingFactory {\n  public DefaultAudioProcessingFactory(PostProcessingFactory postProcessingFactory) {\n    this.postProcessingFactory \u003d postProcessingFactory;\n  }\n  public long createNativeAudioProcessing(...) {\n    return nativeCreateAudioProcessing(\n      postProcessingFactory.createNativePostProcessing());\n  }\n  private PostProcessingFactory postProcessingFactory;\n\n  private static native long nativeCreateAudioProcessing(long postProcessing);\n}",
       "parentUuid": "23fd2977_c9ee5c7c",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d88fb1d8_6b0f3d20",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-12T13:19:35Z",
+      "side": 1,
+      "message": "This looks nice and sgtm.\n\nTaylor, what do you think?",
+      "parentUuid": "7705f0cb_1e9ee14c",
       "range": {
         "startLine": 14,
         "startChar": 17,
