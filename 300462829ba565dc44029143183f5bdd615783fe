@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "dfdb7d0a_e8d1630b",
+        "filename": "rtc_base/histogram_percentile_counter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T09:20:46Z",
+      "side": 1,
+      "message": "Some docs here? Just a few sentences that explain what the class does...",
+      "revId": "300462829ba565dc44029143183f5bdd615783fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8715224e_8f094e81",
+        "filename": "rtc_base/histogram_percentile_counter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T09:20:46Z",
+      "side": 1,
+      "message": "Declare `i` in the for loop? Or make it a fancy C++11 for loop...",
+      "revId": "300462829ba565dc44029143183f5bdd615783fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ec59460_5669ba5d",
         "filename": "rtc_base/histogram_percentile_counter_unittest.cc",
         "patchSetId": 6
