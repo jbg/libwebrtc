@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "111531aa_6334f8ed",
+        "filename": "rtc_base/histogram_percentile_counter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T09:55:46Z",
+      "side": 1,
+      "message": "How things are stored internally isn\u0027t that interesting, so no need to mention it here. And the boundary thing is already documented with the constructor.",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 24,
+        "endChar": 60
+      },
+      "revId": "e7337157ab7056e5bfd72d451fc70543adf42bcf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3110f013_7827b4b6",
+        "filename": "rtc_base/histogram_percentile_counter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T09:55:46Z",
+      "side": 1,
+      "message": "This should be uint32_t, since that\u0027s what you use for values. (You\u0027ll need to convert it to size_t in the implementation because that\u0027s what std::vector wants, but if you do it with size_t{x} where x is an uint32_t, the compiler will scream bloody murder if the conversion isn\u0027t compile-time guaranteed to always work losslessly.)",
+      "range": {
+        "startLine": 29,
+        "startChar": 38,
+        "endLine": 29,
+        "endChar": 44
+      },
+      "revId": "e7337157ab7056e5bfd72d451fc70543adf42bcf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
