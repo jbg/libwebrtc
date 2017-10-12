@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d1fbe6dd_a18b2522",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-12T18:23:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79f22929_c13a6b57",
+      "range": {
+        "startLine": 9,
+        "startChar": 56,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed8c2006_0d24cb9e",
         "filename": "style-guide.md",
         "patchSetId": 1
@@ -69,6 +93,30 @@
       "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dca3849_02bd1ebb",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-12T18:23:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8991f483_5fae986b",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 39
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +188,30 @@
       "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0820abb0_1cb73b1a",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-12T18:23:12Z",
+      "side": 1,
+      "message": "Added \"in summary\". I think this enough for any reasonable person to understand, we can reformat the rest of the rules in a follow up CL as mentioned.",
+      "parentUuid": "efc09b3e_20ec34f9",
+      "range": {
+        "startLine": 42,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
