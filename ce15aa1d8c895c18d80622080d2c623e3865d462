@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e277f096_ab65d6a8",
+        "filename": "rtc_base/histogram_percentile_counter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-12T10:34:36Z",
+      "side": 1,
+      "message": "Consider doing\n\n  histogram_low_(size_t{long_tail_boundary})\n\ninstead, since that will make the compiler complain if some uint32_t values can\u0027t be represented in size_t. See https://google.github.io/styleguide/cppguide.html#Casting\n\nIt\u0027ll work just the same in practice since unit32_t does in fact fit in size_t for all platforms that we target, but it\u0027s nice when reading the code to know that the compiler has your back.",
+      "revId": "ce15aa1d8c895c18d80622080d2c623e3865d462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
