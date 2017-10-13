@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d712b5ee_ddfd5df8",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-13T10:38:52Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "85f6bea2_2b040eb6",
+      "range": {
+        "startLine": 395,
+        "startChar": 5,
+        "endLine": 395,
+        "endChar": 71
+      },
+      "revId": "1537bcc6f553028fd9e86f26a30bd8ec0e8e9183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c71c1c9b_f1e1a69b",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-10-13T08:46:26Z",
       "side": 1,
       "message": "// The histogram should be stretched. \n\n(Comment matching the one at the beginning of the else clause.)",
+      "range": {
+        "startLine": 397,
+        "startChar": 5,
+        "endLine": 397,
+        "endChar": 45
+      },
+      "revId": "1537bcc6f553028fd9e86f26a30bd8ec0e8e9183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a22a5b8_c3fb0e32",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-13T10:38:52Z",
+      "side": 1,
+      "message": "No longer necessary since the two cases were merged.",
+      "parentUuid": "c71c1c9b_f1e1a69b",
       "range": {
         "startLine": 397,
         "startChar": 5,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e3d670c6_0eb04433",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-13T10:38:52Z",
+      "side": 1,
+      "message": "I removed the if-else, so this is automatic.",
+      "parentUuid": "6853a523_ff636560",
+      "range": {
+        "startLine": 398,
+        "startChar": 8,
+        "endLine": 398,
+        "endChar": 11
+      },
+      "revId": "1537bcc6f553028fd9e86f26a30bd8ec0e8e9183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9eefad23_d2e92f4b",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2017-10-13T08:46:26Z",
       "side": 1,
       "message": "The if and else clauses seem very similar. The only difference I can spot is that the if clause has \n\n while (time_counter \u003e\u003d new_packet_length)\n\nwhen the else clause has \n\n if (time_counter \u003e\u003d new_packet_length)\n\nSince in the else clause, old_packet_length \u003c\u003d new_packet_length, which means that time_counter will always be smaller than 2 * new_packet_length. This should mean that even if we had a while instead of an if, it would only do at most one lap, since we\u0027re reducing by new_packet_length.\n\nCan you consolidate the two?",
+      "range": {
+        "startLine": 422,
+        "startChar": 4,
+        "endLine": 422,
+        "endChar": 8
+      },
+      "revId": "1537bcc6f553028fd9e86f26a30bd8ec0e8e9183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddd7096a_3ee1a7c3",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-10-13T10:38:52Z",
+      "side": 1,
+      "message": "Done, that\u0027s how it originally worked, but when I improved the algorithm to handle scaling by any rational number I thought it would be easier to work on the code in two separate cases so I didn\u0027t have to think about two use cases at the same time, but it looks like the code came out very similar anyway. I just removed the else section and everything still works :-)",
+      "parentUuid": "9eefad23_d2e92f4b",
       "range": {
         "startLine": 422,
         "startChar": 4,
