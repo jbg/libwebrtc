@@ -22,14 +22,12 @@ if (rtc_include_ilbc) {
 if (rtc_include_opus) {
   audio_codec_deps += [ ":webrtc_opus" ]
 }
-if (!build_with_mozilla) {
-  if (current_cpu == "arm") {
-    audio_codec_deps += [ ":isac_fix" ]
-  } else {
-    audio_codec_deps += [ ":isac" ]
-  }
-  audio_codec_deps += [ ":g722" ]
+if (current_cpu == "arm") {
+  audio_codec_deps += [ ":isac_fix" ]
+} else {
+  audio_codec_deps += [ ":isac" ]
 }
+audio_codec_deps += [ ":g722" ]
 if (!build_with_mozilla && !build_with_chromium) {
   audio_codec_deps += [ ":red" ]
 }
@@ -1013,6 +1011,7 @@ rtc_static_library("neteq") {
     ":audio_coding_module_typedefs",
     ":cng",
     ":g711",
+    ":g722",
     ":isac_fix",
     ":neteq_decoder_enum",
     ":pcm16b",
@@ -1036,16 +1035,12 @@ rtc_static_library("neteq") {
     defines += [ "WEBRTC_CODEC_OPUS" ]
     deps += [ ":webrtc_opus" ]
   }
-  if (!build_with_mozilla) {
-    if (current_cpu == "arm") {
-      defines += [ "WEBRTC_CODEC_ISACFX" ]
-      deps += [ ":isac_fix" ]
-    } else {
-      defines += [ "WEBRTC_CODEC_ISAC" ]
-      deps += [ ":isac" ]
-    }
-    defines += [ "WEBRTC_CODEC_G722" ]
-    deps += [ ":g722" ]
+  if (current_cpu == "arm") {
+    defines += [ "WEBRTC_CODEC_ISACFX" ]
+    deps += [ ":isac_fix" ]
+  } else {
+    defines += [ "WEBRTC_CODEC_ISAC" ]
+    deps += [ ":isac" ]
   }
 }
 

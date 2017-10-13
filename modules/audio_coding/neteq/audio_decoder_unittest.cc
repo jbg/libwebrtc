@@ -645,11 +645,6 @@ const bool has_isac_swb = true;
 #else
 const bool has_isac_swb = false;
 #endif
-#ifdef WEBRTC_CODEC_G722
-const bool has_g722 = true;
-#else
-const bool has_g722 = false;
-#endif
 #ifdef WEBRTC_CODEC_OPUS
 const bool has_opus = true;
 #else
@@ -674,8 +669,8 @@ TEST(AudioDecoder, CodecSupported) {
   EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderPCM16Bswb32kHz_2ch));
   EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderPCM16Bswb48kHz_2ch));
   EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderPCM16B_5ch));
-  EXPECT_EQ(has_g722, CodecSupported(NetEqDecoder::kDecoderG722));
-  EXPECT_EQ(has_g722, CodecSupported(NetEqDecoder::kDecoderG722_2ch));
+  EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderG722));
+  EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderG722_2ch));
   EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderRED));
   EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderAVT));
   EXPECT_TRUE(CodecSupported(NetEqDecoder::kDecoderAVT16kHz));

@@ -14,9 +14,7 @@
 
 #include "modules/audio_coding/codecs/g711/audio_decoder_pcm.h"
 #include "rtc_base/checks.h"
-#ifdef WEBRTC_CODEC_G722
 #include "modules/audio_coding/codecs/g722/audio_decoder_g722.h"
-#endif
 #ifdef WEBRTC_CODEC_ILBC
 #include "modules/audio_coding/codecs/ilbc/audio_decoder_ilbc.h"
 #endif
@@ -59,10 +57,8 @@ bool CodecSupported(NetEqDecoder codec_type) {
     case NetEqDecoder::kDecoderPCM16Bswb32kHz_2ch:
     case NetEqDecoder::kDecoderPCM16Bswb48kHz_2ch:
     case NetEqDecoder::kDecoderPCM16B_5ch:
-#ifdef WEBRTC_CODEC_G722
     case NetEqDecoder::kDecoderG722:
     case NetEqDecoder::kDecoderG722_2ch:
-#endif
 #ifdef WEBRTC_CODEC_OPUS
     case NetEqDecoder::kDecoderOpus:
     case NetEqDecoder::kDecoderOpus_2ch:
