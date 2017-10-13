@@ -14,9 +14,7 @@
 
 #include <algorithm>
 #include <limits>
-#include <memory>
 #include <utility>
-#include <vector>
 
 #include "api/video/i420_buffer.h"
 #include "common_types.h"  // NOLINT(build/include)
@@ -136,18 +134,6 @@ int GetElapsedTimeMicroseconds(int64_t start_ns, int64_t stop_ns) {
 }
 
 }  // namespace
-
-const char* ExcludeFrameTypesToStr(ExcludeFrameTypes e) {
-  switch (e) {
-    case kExcludeOnlyFirstKeyFrame:
-      return "ExcludeOnlyFirstKeyFrame";
-    case kExcludeAllKeyFrames:
-      return "ExcludeAllKeyFrames";
-    default:
-      RTC_NOTREACHED();
-      return "Unknown";
-  }
-}
 
 VideoProcessor::VideoProcessor(webrtc::VideoEncoder* encoder,
                                webrtc::VideoDecoder* decoder,
