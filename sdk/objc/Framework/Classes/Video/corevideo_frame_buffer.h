@@ -31,7 +31,7 @@ class CoreVideoFrameBuffer : public VideoFrameBuffer {
                        int crop_y);
   ~CoreVideoFrameBuffer() override;
 
-  CVPixelBufferRef pixel_buffer() { return pixel_buffer_; }
+  CVPixelBufferRef pixel_buffer();
 
   // Returns true if the internal pixel buffer needs to be cropped.
   bool RequiresCropping() const;
@@ -47,18 +47,8 @@ class CoreVideoFrameBuffer : public VideoFrameBuffer {
   int height() const override;
   rtc::scoped_refptr<I420BufferInterface> ToI420() override;
 
-  CVPixelBufferRef pixel_buffer_;
-  // buffer_width/height is the actual pixel buffer resolution. The
-  // width_/height_ is the resolution we will scale to in ToI420(). Cropping
-  // happens before scaling, so: buffer_width >= crop_width >= width().
-  const int width_;
-  const int height_;
-  const int buffer_width_;
-  const int buffer_height_;
-  const int crop_width_;
-  const int crop_height_;
-  const int crop_x_;
-  const int crop_y_;
+  class Impl;
+  std::unique_ptr<Impl> impl_;
 };
 
 }  // namespace webrtc
