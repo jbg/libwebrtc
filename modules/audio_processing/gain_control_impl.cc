@@ -98,7 +98,8 @@ GainControlImpl::GainControlImpl(rtc::CriticalSection* crit_render,
       limiter_enabled_(true),
       target_level_dbfs_(3),
       compression_gain_db_(9),
-      analog_capture_level_(0),
+      suggested_analog_capture_level_(0),
+      reported_analog_capture_level_(0),
       was_analog_level_set_(false),
       stream_is_saturated_(false) {
   RTC_DCHECK(crit_render);
@@ -146,7 +147,7 @@ int GainControlImpl::AnalyzeCaptureAudio(AudioBuffer* audio) {
   if (mode_ == kAdaptiveAnalog) {
     int capture_channel = 0;
     for (auto& gain_controller : gain_controllers_) {
-      gain_controller->set_capture_level(analog_capture_level_);
+      gain_controller->set_capture_level(suggested_analog_capture_level_);
       int err = WebRtcAgc_AddMic(
           gain_controller->state(), audio->split_bands(capture_channel),
           audio->num_bands(), audio->num_frames_per_band());
@@ -163,7 +164,7 @@ int GainControlImpl::AnalyzeCaptureAudio(AudioBuffer* audio) {
       int err = WebRtcAgc_VirtualMic(
           gain_controller->state(), audio->split_bands(capture_channel),
           audio->num_bands(), audio->num_frames_per_band(),
-          analog_capture_level_, &capture_level_out);
+          suggested_analog_capture_level_, &capture_level_out);
 
       gain_controller->set_capture_level(capture_level_out);
 
@@ -223,12 +224,12 @@ int GainControlImpl::ProcessCaptureAudio(AudioBuffer* audio,
   RTC_DCHECK_LT(0ul, *num_proc_channels_);
   if (mode_ == kAdaptiveAnalog) {
     // Take the analog level to be the average across the handles.
-    analog_capture_level_ = 0;
+    suggested_analog_capture_level_ = 0;
     for (auto& gain_controller : gain_controllers_) {
-      analog_capture_level_ += gain_controller->get_capture_level();
+      suggested_analog_capture_level_ += gain_controller->get_capture_level();
     }
 
-    analog_capture_level_ /= (*num_proc_channels_);
+    suggested_analog_capture_level_ /= (*num_proc_channels_);
   }
 
   was_analog_level_set_ = false;
@@ -249,19 +250,21 @@ int GainControlImpl::set_stream_analog_level(int level) {
   if (level < minimum_capture_level_ || level > maximum_capture_level_) {
     return AudioProcessing::kBadParameterError;
   }
-  analog_capture_level_ = level;
+  reported_analog_capture_level_ = suggested_analog_capture_level_ = level;
 
   return AudioProcessing::kNoError;
+}
+
+int GainControlImpl::last_stream_analog_level() const {
+  rtc::CritScope cs(crit_capture_);
+  return reported_analog_capture_level_;
 }
 
 int GainControlImpl::stream_analog_level() {
   rtc::CritScope cs(crit_capture_);
   data_dumper_->DumpRaw("gain_control_stream_analog_level", 1,
-                        &analog_capture_level_);
-  // TODO(ajm): enable this assertion?
-  //RTC_DCHECK_EQ(kAdaptiveAnalog, mode_);
-
-  return analog_capture_level_;
+                        &suggested_analog_capture_level_);
+  return suggested_analog_capture_level_;
 }
 
 int GainControlImpl::Enable(bool enable) {
@@ -407,7 +410,8 @@ void GainControlImpl::Initialize(size_t num_proc_channels, int sample_rate_hz) {
       gain_controller.reset(new GainController());
     }
     gain_controller->Initialize(minimum_capture_level_, maximum_capture_level_,
-                                mode_, *sample_rate_hz_, analog_capture_level_);
+                                mode_, *sample_rate_hz_,
+                                suggested_analog_capture_level_);
   }
 
   Configure();

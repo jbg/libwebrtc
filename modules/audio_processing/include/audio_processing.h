@@ -991,6 +991,11 @@ class GainControl {
   // users responsibility to apply this level.
   virtual int stream_analog_level() = 0;
 
+  // In contrast to |stream_analog_level()|, this returns the last
+  // |level| reported through |set_stream_analog_level(level)|, and
+  // not the internally suggested new analog level.
+  virtual int last_stream_analog_level() const = 0;
+
   enum Mode {
     // Adaptive mode intended for use if an analog volume control is available
     // on the capture device. It will require the user to provide coupling
