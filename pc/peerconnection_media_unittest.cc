@@ -194,7 +194,7 @@ TEST_F(PeerConnectionMediaUnitTest, FailToSetRemoteOfferAfterLocalOfferSet) {
   std::string error;
   ASSERT_FALSE(caller->SetRemoteDescription(std::move(offer), &error));
   EXPECT_EQ(
-      "Failed to set remote offer sdp: Called in wrong state: STATE_SENTOFFER",
+      "Failed to set remote offer sdp: Called in wrong state: HAVE_LOCAL_OFFER",
       error);
 }
 
@@ -208,7 +208,7 @@ TEST_F(PeerConnectionMediaUnitTest, FailToSetLocalOfferAfterRemoteOfferSet) {
   ASSERT_FALSE(callee->SetLocalDescription(std::move(offer), &error));
   EXPECT_EQ(
       "Failed to set local offer sdp: Called in wrong state: "
-      "STATE_RECEIVEDOFFER",
+      "HAVE_REMOTE_OFFER",
       error);
 }
 
@@ -221,9 +221,8 @@ TEST_F(PeerConnectionMediaUnitTest, FailToSetRemoteAnswerWithoutOffer) {
 
   std::string error;
   ASSERT_FALSE(caller->SetRemoteDescription(std::move(answer), &error));
-  EXPECT_EQ(
-      "Failed to set remote answer sdp: Called in wrong state: STATE_INIT",
-      error);
+  EXPECT_EQ("Failed to set remote answer sdp: Called in wrong state: STABLE",
+            error);
 }
 
 TEST_F(PeerConnectionMediaUnitTest, FailToSetLocalAnswerWithoutOffer) {
@@ -235,7 +234,7 @@ TEST_F(PeerConnectionMediaUnitTest, FailToSetLocalAnswerWithoutOffer) {
 
   std::string error;
   ASSERT_FALSE(caller->SetLocalDescription(std::move(answer), &error));
-  EXPECT_EQ("Failed to set local answer sdp: Called in wrong state: STATE_INIT",
+  EXPECT_EQ("Failed to set local answer sdp: Called in wrong state: STABLE",
             error);
 }
 
