@@ -16,6 +16,24 @@
       "revId": "87b8b9458be53dc59d4f6d2b007072b77f3b2fc5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98724205_b44dfbc0",
+        "filename": "pc/webrtcsession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-13T23:56:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f67290b4_cc101fe8",
+      "revId": "87b8b9458be53dc59d4f6d2b007072b77f3b2fc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
