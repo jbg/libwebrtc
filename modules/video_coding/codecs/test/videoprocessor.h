@@ -49,9 +49,6 @@ enum ExcludeFrameTypes {
   kExcludeAllKeyFrames
 };
 
-// Returns a string representation of the enum value.
-const char* ExcludeFrameTypesToStr(ExcludeFrameTypes e);
-
 // Test configuration for a test run.
 struct TestConfig {
   // Plain name of YUV file to process without file extension.
@@ -82,6 +79,10 @@ struct TestConfig {
   // If set to false, the maximum number of available cores will be used.
   bool use_single_core = false;
 
+  // Should cpu usage be measured?
+  // If set to true, the encoding will run in real-time.
+  bool measure_cpu = false;
+
   // If > 0: forces the encoder to create a keyframe every Nth frame.
   // Note that the encoder may create a keyframe in other locations in addition
   // to this setting. Forcing key frames may also affect encoder planning
@@ -89,8 +90,7 @@ struct TestConfig {
   // produce an expensive key frame.
   int keyframe_interval = 0;
 
-  // The codec settings to use for the test (target bitrate, video size,
-  // framerate and so on). This struct should be filled in using the
+  // Codec settings to use. This struct should be filled in using the
   // VideoCodingModule::Codec() method.
   webrtc::VideoCodec codec_settings;
 
@@ -126,8 +126,7 @@ struct TestConfig {
 // Video Engine, where signaling would request a retransmit of the lost packets,
 // since they're so important.
 //
-// Note this class is not thread safe in any way and is meant for simple testing
-// purposes.
+// Note this class is not thread safe and is meant for simple testing purposes.
 class VideoProcessor {
  public:
   VideoProcessor(webrtc::VideoEncoder* encoder,
