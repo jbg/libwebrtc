@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65d3973b_ab3012f0",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Potentially need to disconnect from old one.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce04c0bc_83ee207e",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "This should reset the params of |srtp_transport_|, and potentially set up SRTP again, like BaseChannel currently does in SetTransports_n.\n\nAlso, I\u0027m now realizing that these \"SetRt[c]pDtlsTransport\" methods may need to be combined. Suppose bundling and RTCP muxing are negotiated, so we\u0027re switching from using \"video RTP/video RTCP\" to just \"audio RTP\" transport\". We don\u0027t want to reset/re-setup SRTP each time one of the transports is changed, just when both are changed together.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b03b12dc_b0c8e9f0",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Maybe rename this to \"DtlsHandshakesDone,\" to make it more clear what it\u0027s actually checking? Also, at the level of this class, we need to check both rtp_dtls_transport_ and potentially rtcp_dtls_transport_, if non-null and mux is disabled. The code in BaseChannel before would only call MaybeSetupDtlsSrtp in ChannelWritable_n, which is only called if RTP and RTCP transports are writable (or just RTP is, but mux is enabled).",
+      "range": {
+        "startLine": 81,
+        "startChar": 24,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "647e29ee_021253e2",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Is this meant to be a TODO?",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b4c7bf_6f21dc45",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Don\u0027t have to do this in this CL, but just FYI, this would be a good place to use some new sigslot advice I\u0027m working on: https://webrtc-review.googlesource.com/c/src/+/8140\n\nBasically: We\u0027d turn SignalPacketReceived/SignalReadyToSend into virtual methods that return signals. Then the implementation in this subclass would be:\n\nsigslot::signal\u003cbool\u003e\u0026 DtlsSrtpTransport::SignalReadyToSend() {\n  return owned_transport_-\u003eSignalReadyToSend();\n}\n\nThen we don\u0027t need the boilerplate code to receive signals and pass them along. SrtpTransport and RtpTransport would need to declare their signals as member variables though, and return them.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a248acf1_5bdae6b6",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "nit: I\u0027d remove the extra newlines, maybe just putting a newline between the callback (\"OnDtlsState\"...) methods and methods above.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11ecd3a7_69e782a4",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Why do these need to be stored? Seems like it would be simpler to just call \"rtp_dtls_transport_-\u003edtls_state()\", to avoid having to keep the two in sync.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d827780f_3fb4a65e",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "As opposed to doing all this setup in the constructor, I\u0027d prefer making helper methods like:\n\n* MakeFakeDtlsTransport (would make fake ICE and DTLS)\n* MakeDtlsSrtpTransport (given fake DTLS transport, possibly one for RTCP)\n\nAnd maybe have a lightweight helper class to receive the signals? Something that would allow you to write:\n\nTransportObserver observer1(dtls_srtp_transport1);\n...\nEXPECT_EQ(0, memcmp(observer1.last_recv_packet1_.data(), kPcmuFrame, rtp_len));\n\nThat would allow the tests to do more flexible things, and would put more of the logic in the tests themselves.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9454b13_b002d850",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Similar to the suggestion above, I think it would be better to make the helper methods more granular, to make it more obvious what\u0027s going on in the tests themselves. For example, we could have \"CompleteDtlsHandshake(DtlsTransportInternal* transport1, DtlsTransportInternal* transport2)\", and SetRtcpMuxEnabled would be called by the test itself.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6f97f3a_2134146d",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "Some more specific tests that probably would be worthwhile:\n\n* When DTLS handshakes complete, SRTP set up (can send packets end-to-end). I guess this is what the above test is testing, but may want to make that more clear.\n* If transports are set after they *already* finished their handshake, SRTP is set up.\n* If transports are changed, previous SRTP context is reset, and SRTP is re-setup once the new transports\u0027 handshakes complete.\n* If RTCP muxing is enabled, SRTP is set up as soon as the RTP DTLS handshake is finished.\n* If RTCP muxing isn\u0027t enabled, it waits for both.\n* If only the RTP DTLS handshake finished, and *then* RTCP muxing is enabled, SRTP is set up.\n* Encrypted header extensions being updated\n* SignalDtlsSrtpSetupFailure is called when there\u0027s a failure (simulated with a fake SrtpTransport?)\n* SignalReadyToSend called when expected\n\nThat\u0027s all I can think of at the moment. Though I guess we can go easy on the tests that involve \"SetRt[c]pDtlsTransport\", since it\u0027s expected that after more refactoring, those methods will go away (and there will be a fixed relationship between RTP transport and underlying transports, made at construction time).\n\nKeep in mind that these tests will ultimately be replacing the tests in channel_unittest.cc (since this class is taking over logic that used to be in BaseChannel), so writing good tests here is a worthwhile endeavor; that test infrastructure has been a pain point for a while.",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ed82d1_a4da18ea",
+        "filename": "pc/rtptransportinternaladapter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T16:25:00Z",
+      "side": 1,
+      "message": "May want a brief comment explaining the purpose of this class and how it\u0027s intended to be used. Also, may want to own the transport in the subclass (that way DtlsSrtpTransport could avoid the static_cast).",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
