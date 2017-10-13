@@ -24,7 +24,8 @@ GainControlForExperimentalAgc::GainControlForExperimentalAgc(
     rtc::CriticalSection* crit_capture)
     : data_dumper_(new ApmDataDumper(instance_counter_)),
       real_gain_control_(gain_control),
-      volume_(0),
+      last_suggested_volume_(0),
+      last_reported_volume_(0),
       crit_capture_(crit_capture) {
   instance_counter_++;
 }
@@ -43,15 +44,20 @@ int GainControlForExperimentalAgc::set_stream_analog_level(int level) {
   rtc::CritScope cs_capture(crit_capture_);
   data_dumper_->DumpRaw("experimental_gain_control_set_stream_analog_level", 1,
                         &level);
-  volume_ = level;
+  last_reported_volume_ = level;
   return AudioProcessing::kNoError;
 }
 
 int GainControlForExperimentalAgc::stream_analog_level() {
   rtc::CritScope cs_capture(crit_capture_);
   data_dumper_->DumpRaw("experimental_gain_control_stream_analog_level", 1,
-                        &volume_);
-  return volume_;
+                        &last_suggested_volume_);
+  return last_suggested_volume_;
+}
+
+int GainControlForExperimentalAgc::last_stream_analog_level() const {
+  rtc::CritScope cs_capture(crit_capture_);
+  return last_reported_volume_;
 }
 
 int GainControlForExperimentalAgc::set_mode(Mode mode) {
@@ -105,12 +111,12 @@ bool GainControlForExperimentalAgc::stream_is_saturated() const {
 
 void GainControlForExperimentalAgc::SetMicVolume(int volume) {
   rtc::CritScope cs_capture(crit_capture_);
-  volume_ = volume;
+  last_suggested_volume_ = volume;
 }
 
 int GainControlForExperimentalAgc::GetMicVolume() {
   rtc::CritScope cs_capture(crit_capture_);
-  return volume_;
+  return last_reported_volume_;
 }
 
 void GainControlForExperimentalAgc::Initialize() {
