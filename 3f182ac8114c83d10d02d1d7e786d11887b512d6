@@ -236,6 +236,30 @@
       "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9357d0b8_0893c398",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T17:17:56Z",
+      "side": 1,
+      "message": "What can I do to upgrade the \"sgtm\" to an \"lgtm\"? :)",
+      "parentUuid": "c763cd7c_93b9957d",
+      "range": {
+        "startLine": 42,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "3f182ac8114c83d10d02d1d7e786d11887b512d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
