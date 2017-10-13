@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d8e468a_f4e1c087",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "nit: May make more sense to check signal_ice_candidates_ before calling SendIceMessage.",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff368228_dad6b4b6",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2761,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "them to",
+      "range": {
+        "startLine": 2761,
+        "startChar": 60,
+        "endLine": 2761,
+        "endChar": 67
+      },
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a23915cb_cda4aa8a",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2800,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "Can you add a comment mentioning that this is removing the default interface that was added by the test infrastructure above?",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97c5ee5b_9a229763",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2805,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "I think this should add both an IPv4 and IPv6 address, since one of the purposes of the test was to make sure IPv6 is preferred if enabled.",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcee94b4_4f1bfb50",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2817,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "This may be a test where it would make sense to use rtc::FakeClock and the \"SIMULATED_WAIT\" macros, so that you don\u0027t actually have to wait the 30 (15 in our implementation) seconds for ICE to time out.",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e0f8193_eb27546b",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2831,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "Since the port allocator flags are an intrinsic part of the test, it would be ideal if the tests didn\u0027t have to call this explicitly (or if they called GetParam here, to make it obvious that this is the parameter).",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dacb0be9_2b88f6ad",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2838,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "Can this be done by setting a fake delay in the virtual network? That may be better, since I\u0027d really like to get rid of \"set_step_delay\".",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad13d8b9_bbd45c37",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2859,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "I didn\u0027t even know about ElementsAre; this is pretty slick.",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09f5c14e_52797c13",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2913,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T23:27:12Z",
+      "side": 1,
+      "message": "Comment about how when IPv6 is enabled, it should be preferred over IPv4?",
+      "revId": "4f09f94b3af330da88c29c4747dcd015679ab455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
