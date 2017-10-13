@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "d6ebb9f1_783895b6",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T00:21:13Z",
+      "side": 1,
+      "message": "That makes sense. Though if it\u0027s expected that only one instance will ever be created by the factory, it may be simpler to just have it transfer ownership of a PostProcessing instance it holds, rather than create an arbitrary number of instances. That\u0027s a pretty minor distinction though; you probably know better than me what makes the most sense.\n\nBy the way, we\u0027re revisiting the \"inject by raw pointer\" decision, so you can forget about that for the time being.",
+      "parentUuid": "d88fb1d8_6b0f3d20",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3e4b412_ce09a514",
         "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
         "patchSetId": 5

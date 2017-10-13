@@ -46,6 +46,30 @@
       "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd2dbce5_73db2c35",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T00:21:13Z",
+      "side": 1,
+      "message": "Right, that\u0027s the case where you have a video-only or datachannel-only application, for example.",
+      "parentUuid": "c5392527_04ce497c",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 3
+      },
+      "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
