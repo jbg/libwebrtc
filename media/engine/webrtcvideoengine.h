@@ -302,7 +302,6 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
           const rtc::Optional<VideoCodecSettings>& codec_settings);
       webrtc::VideoSendStream::Config config;
       VideoOptions options;
-      int max_bitrate_bps;
       bool conference_mode;
       rtc::Optional<VideoCodecSettings> codec_settings;
       // Sent resolutions + bitrates etc. by the underlying VideoSendStream,
