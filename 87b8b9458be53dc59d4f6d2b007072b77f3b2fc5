@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f67290b4_cc101fe8",
+        "filename": "pc/webrtcsession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-13T22:41:35Z",
+      "side": 1,
+      "message": "This still does allow remote descriptions to change the count (only in an initial offer); should that be prevented as well? It\u0027s related to the CreateAnswer race condition bug I mentioned.",
+      "revId": "87b8b9458be53dc59d4f6d2b007072b77f3b2fc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
