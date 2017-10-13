@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e6b0d2c_8605b211",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "if (call_timestamp) {",
+      "range": {
+        "startLine": 1836,
+        "startChar": 23,
+        "endLine": 1836,
+        "endChar": 32
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6222290f_0d5a90e0",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "We want to replace SequenceNumberUnwrapper with SeqNumUnwrapper, so please use that one instead.",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddf9c8dc_494460ac",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5814b2fb_8678d5d8",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 1869,
+        "startChar": 22,
+        "endLine": 1869,
+        "endChar": 31
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1285b0f_7210b163",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "Maybe use a smaller gap like 50 or 100?",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04c34d5c_d5fd7322",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 1883,
+        "startChar": 25,
+        "endLine": 1883,
+        "endChar": 34
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89d01bcd_07a518c8",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1908,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "emplace(rtp_packet.timestamp, \u0026rtp_packet);",
+      "range": {
+        "startLine": 1908,
+        "startChar": 27,
+        "endLine": 1908,
+        "endChar": 33
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0a08b3a_366fee51",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 1920,
+        "startChar": 26,
+        "endLine": 1920,
+        "endChar": 35
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27b1aa3d_3e409b9d",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1951,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 1951,
+        "startChar": 36,
+        "endLine": 1951,
+        "endChar": 45
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b6273d1_fb2c84c8",
+        "filename": "rtc_tools/event_log_visualizer/triage_notifications.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T10:25:39Z",
+      "side": 1,
+      "message": "WDYT about having a direction instead of a Incoming/OutgoingRtpReceiveGapTime?",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
