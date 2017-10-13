@@ -27,11 +27,12 @@
 #import "ARDAppEngineClient.h"
 #import "ARDJoinResponse.h"
 #import "ARDMessageResponse.h"
-#import "ARDSDPUtils.h"
 #import "ARDSettingsModel.h"
 #import "ARDSignalingMessage.h"
 #import "ARDTURNClient+Internal.h"
 #import "ARDUtilities.h"
+#import "ARDVideoDecoderFactory.h"
+#import "ARDVideoEncoderFactory.h"
 #import "ARDWebSocketChannel.h"
 #import "RTCIceCandidate+JSON.h"
 #import "RTCSessionDescription+JSON.h"
@@ -163,7 +164,6 @@ static int const kKbpsMultiplier = 1000;
 }
 
 - (void)configure {
-  _factory = [[RTCPeerConnectionFactory alloc] init];
   _messageQueue = [NSMutableArray array];
   _iceServers = [NSMutableArray array];
   _fileLogger = [[RTCFileLogger alloc] init];
@@ -217,6 +217,12 @@ static int const kKbpsMultiplier = 1000;
   _settings = settings;
   _isLoopback = isLoopback;
   self.state = kARDAppClientStateConnecting;
+
+  ARDVideoDecoderFactory *decoderFactory = [[ARDVideoDecoderFactory alloc] init];
+  ARDVideoEncoderFactory *encoderFactory = [[ARDVideoEncoderFactory alloc] init];
+  encoderFactory.preferredCodec = [settings currentVideoCodecSettingFromStore];
+  _factory = [[RTCPeerConnectionFactory alloc] initWithEncoderFactory:encoderFactory
+                                                       decoderFactory:decoderFactory];
 
 #if defined(WEBRTC_IOS)
   if (kARDAppClientEnableTracing) {
@@ -442,20 +448,15 @@ static int const kKbpsMultiplier = 1000;
       [_delegate appClient:self didError:sdpError];
       return;
     }
-    // Prefer codec from settings if available.
-    RTCSessionDescription *sdpPreferringCodec =
-        [ARDSDPUtils descriptionForDescription:sdp
-                           preferredVideoCodec:[_settings currentVideoCodecSettingFromStore]];
     __weak ARDAppClient *weakSelf = self;
-    [_peerConnection setLocalDescription:sdpPreferringCodec
+    [_peerConnection setLocalDescription:sdp
                        completionHandler:^(NSError *error) {
-      ARDAppClient *strongSelf = weakSelf;
-      [strongSelf peerConnection:strongSelf.peerConnection
-          didSetSessionDescriptionWithError:error];
-    }];
+                         ARDAppClient *strongSelf = weakSelf;
+                         [strongSelf peerConnection:strongSelf.peerConnection
+                             didSetSessionDescriptionWithError:error];
+                       }];
     ARDSessionDescriptionMessage *message =
-        [[ARDSessionDescriptionMessage alloc]
-            initWithDescription:sdpPreferringCodec];
+        [[ARDSessionDescriptionMessage alloc] initWithDescription:sdp];
     [self sendSignalingMessage:message];
     [self setMaxBitrateForPeerConnectionVideoSender];
   });
@@ -596,17 +597,13 @@ static int const kKbpsMultiplier = 1000;
       ARDSessionDescriptionMessage *sdpMessage =
           (ARDSessionDescriptionMessage *)message;
       RTCSessionDescription *description = sdpMessage.sessionDescription;
-      // Prefer codec from settings if available.
-      RTCSessionDescription *sdpPreferringCodec =
-          [ARDSDPUtils descriptionForDescription:description
-                             preferredVideoCodec:[_settings currentVideoCodecSettingFromStore]];
       __weak ARDAppClient *weakSelf = self;
-      [_peerConnection setRemoteDescription:sdpPreferringCodec
+      [_peerConnection setRemoteDescription:description
                           completionHandler:^(NSError *error) {
-        ARDAppClient *strongSelf = weakSelf;
-        [strongSelf peerConnection:strongSelf.peerConnection
-            didSetSessionDescriptionWithError:error];
-      }];
+                            ARDAppClient *strongSelf = weakSelf;
+                            [strongSelf peerConnection:strongSelf.peerConnection
+                                didSetSessionDescriptionWithError:error];
+                          }];
       break;
     }
     case kARDSignalingMessageTypeCandidate: {
