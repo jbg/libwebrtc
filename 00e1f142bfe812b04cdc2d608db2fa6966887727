@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "f2d11e0a_a57c16b5",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-13T14:08:36Z",
+      "side": 1,
+      "message": "Thank you, good to know. I\u0027ll keep this behavior, to be consistent with the codec factories.",
+      "parentUuid": "a4a161ec_cb43ba40",
+      "range": {
+        "startLine": 199,
+        "startChar": 7,
+        "endLine": 199,
+        "endChar": 67
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b5e48ca_afe0d9ce",
         "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
         "patchSetId": 5
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "That makes sense. Though if it\u0027s expected that only one instance will ever be created by the factory, it may be simpler to just have it transfer ownership of a PostProcessing instance it holds, rather than create an arbitrary number of instances. That\u0027s a pretty minor distinction though; you probably know better than me what makes the most sense.\n\nBy the way, we\u0027re revisiting the \"inject by raw pointer\" decision, so you can forget about that for the time being.",
       "parentUuid": "d88fb1d8_6b0f3d20",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "00e1f142bfe812b04cdc2d608db2fa6966887727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50602214_06fce06c",
+        "filename": "sdk/android/api/org/webrtc/PostProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-13T14:08:36Z",
+      "side": 1,
+      "message": "I\u0027d rather have a factory-like implementation that passes along the value of nativeCreateX in a getNativePointer(), so that the class doesn\u0027t have to own a C++ object at any point. The only-get-once property isn\u0027t enforced today, anyway, with a package-protected final members. If we want to, it can easily be enforced here in the create/get method:\nif (alreadyHandedOver) throw new AppropriateException();\n\nBut perhaps this is a bigger discussion, for when webrtc-core has converged on a C++ API layer convention. I\u0027ll anyway update the CL with the (call-multiple-times-if-you-want) factory version, as it\u0027s good for now and fits with the codecs.",
+      "parentUuid": "d6ebb9f1_783895b6",
       "range": {
         "startLine": 14,
         "startChar": 17,

@@ -94,6 +94,30 @@
       "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28bce5fc_ce924059",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-13T14:08:36Z",
+      "side": 1,
+      "message": "I take it to mean I\u0027ll leave the check in, for now, since this is how today\u0027s JNI layer handles the switch between media and no media support? An alternative is to move the decision into the Java layer and default to creating an APM there, but that\u0027ll give us an additional JNI call and we\u0027ll need to support the DefaultAudioProcessingFactory class for datachannel_only builds (i.e. defining a JNI function in null_audio_jni.cc).\n\nIf we keep check in this layer, nit: I could move this check into CreateMediaEngine, to get rid of the CreateAudioProcessing function. Preferences?",
+      "parentUuid": "f47c676f_e08b113a",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 3
+      },
+      "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
