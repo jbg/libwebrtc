@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0096d0b4_f8d98f1c",
+        "filename": "modules/audio_device/include/fake_audio_device.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-13T09:59:22Z",
+      "side": 1,
+      "message": "Just a thought: Can you put something like CHECK(false) in the body of these two methods, and have everything still work? I\u0027m pretty sure that ought to work, or else we have a problem.",
+      "revId": "00f9f7b1f514a5df210de62f70ec8eec1b98a7c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df5d43bb_086a0601",
+        "filename": "rtc_base/refcount.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-13T09:59:22Z",
+      "side": 1,
+      "message": "colon instead?",
+      "range": {
+        "startLine": 37,
+        "startChar": 78,
+        "endLine": 37,
+        "endChar": 79
+      },
+      "revId": "00f9f7b1f514a5df210de62f70ec8eec1b98a7c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
