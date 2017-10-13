@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "075f6c41_0755b98d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-13T13:57:50Z",
+      "side": 1,
+      "message": "Please wait with this change. This has quite a big impact on the AEC behavior and needs to be carefully tested.",
+      "range": {
+        "startLine": 1175,
+        "startChar": 6,
+        "endLine": 1175,
+        "endChar": 25
+      },
+      "revId": "2c511e44e0b01788575ccfa082cc3d10985c8152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2cab9d4_59ea023e",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-13T13:57:50Z",
+      "side": 1,
+      "message": "I don\u0027t think we should extend the GainControl API further. Also, even though stated in the comments, I think it is confusing to have different methods stream_analog_level() last_stream_analog_level(). I think it should be possible to accomplish the same thing stream_analog_level() solely. But I may be missing the reason for why this is required.",
+      "range": {
+        "startLine": 997,
+        "startChar": 14,
+        "endLine": 997,
+        "endChar": 38
+      },
+      "revId": "2c511e44e0b01788575ccfa082cc3d10985c8152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
