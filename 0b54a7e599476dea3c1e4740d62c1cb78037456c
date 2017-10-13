@@ -70,6 +70,30 @@
       "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f47c676f_e08b113a",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-13T07:23:06Z",
+      "side": 1,
+      "message": "I would still prefer to remove this. The null solution is not very clean and I would like to move away from it in the long term. Hopefully, when all the components are injected, we could have separate so-files for different components or just have the client compile a so-file themselves from the static libraries they need.",
+      "parentUuid": "fd2dbce5_73db2c35",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 3
+      },
+      "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
