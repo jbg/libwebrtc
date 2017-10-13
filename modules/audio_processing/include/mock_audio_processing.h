@@ -64,6 +64,7 @@ class MockGainControl : public GainControl {
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_METHOD1(set_stream_analog_level, int(int level));
   MOCK_METHOD0(stream_analog_level, int());
+  MOCK_CONST_METHOD0(last_stream_analog_level, int());
   MOCK_METHOD1(set_mode, int(Mode mode));
   MOCK_CONST_METHOD0(mode, Mode());
   MOCK_METHOD1(set_target_level_dbfs, int(int level));

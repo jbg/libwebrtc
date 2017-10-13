@@ -44,6 +44,7 @@ class GainControlForExperimentalAgc : public GainControl,
   bool is_enabled() const override;
   int set_stream_analog_level(int level) override;
   int stream_analog_level() override;
+  int last_stream_analog_level() const override;
   int set_mode(Mode mode) override;
   Mode mode() const override;
   int set_target_level_dbfs(int level) override;
@@ -66,7 +67,8 @@ class GainControlForExperimentalAgc : public GainControl,
  private:
   std::unique_ptr<ApmDataDumper> data_dumper_;
   GainControl* real_gain_control_;
-  int volume_;
+  int last_suggested_volume_;
+  int last_reported_volume_;
   rtc::CriticalSection* crit_capture_;
   static int instance_counter_;
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(GainControlForExperimentalAgc);
