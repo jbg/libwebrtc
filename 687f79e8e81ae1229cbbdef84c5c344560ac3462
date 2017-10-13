@@ -450,6 +450,24 @@
     },
     {
       "key": {
+        "uuid": "302014e4_0c9dea11",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-10-13T11:27:53Z",
+      "side": 1,
+      "message": "It should not be a problem, so I would like to keep it as a CHECK until after the field trial is done.",
+      "parentUuid": "73d571ec_209816eb",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "673bdc81_346bbd24",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2
