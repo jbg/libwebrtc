@@ -11,6 +11,7 @@
 #ifndef MODULES_INCLUDE_MODULE_H_
 #define MODULES_INCLUDE_MODULE_H_
 
+#include "rtc_base/refcount.h"
 #include "typedefs.h"  // NOLINT(build/include)
 
 namespace webrtc {
