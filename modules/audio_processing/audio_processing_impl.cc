@@ -1173,9 +1173,10 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   }
 
   if (private_submodules_->echo_controller) {
-    // TODO(peah): Reactivate analogue AGC gain detection once the analogue AGC
-    // issues have been addressed.
-    capture_.echo_path_gain_change = false;
+    const int new_agc_level = gain_control()->last_stream_analog_level();
+    capture_.echo_path_gain_change =
+        abs(capture_.previous_agc_level - new_agc_level) > 5;
+    capture_.previous_agc_level = new_agc_level;
     private_submodules_->echo_controller->AnalyzeCapture(capture_buffer);
   }
 

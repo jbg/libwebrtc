@@ -55,6 +55,7 @@ class GainControlImpl : public GainControl {
   // GainControl implementation.
   int Enable(bool enable) override;
   int set_stream_analog_level(int level) override;
+  int last_stream_analog_level() const override;
   int set_mode(Mode mode) override;
   int set_target_level_dbfs(int level) override;
   int target_level_dbfs() const override;
@@ -80,7 +81,8 @@ class GainControlImpl : public GainControl {
   bool limiter_enabled_ RTC_GUARDED_BY(crit_capture_);
   int target_level_dbfs_ RTC_GUARDED_BY(crit_capture_);
   int compression_gain_db_ RTC_GUARDED_BY(crit_capture_);
-  int analog_capture_level_ RTC_GUARDED_BY(crit_capture_);
+  int suggested_analog_capture_level_ RTC_GUARDED_BY(crit_capture_);
+  int reported_analog_capture_level_ RTC_GUARDED_BY(crit_capture_);
   bool was_analog_level_set_ RTC_GUARDED_BY(crit_capture_);
   bool stream_is_saturated_ RTC_GUARDED_BY(crit_capture_);
 
