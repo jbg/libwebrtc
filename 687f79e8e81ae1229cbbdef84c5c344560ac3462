@@ -432,6 +432,24 @@
     },
     {
       "key": {
+        "uuid": "73d571ec_209816eb",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-13T10:03:51Z",
+      "side": 1,
+      "message": "But if it\u0027s seen as inefficient I would prefer DCHECK.",
+      "parentUuid": "73857260_815d50df",
+      "revId": "687f79e8e81ae1229cbbdef84c5c344560ac3462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "673bdc81_346bbd24",
         "filename": "modules/pacing/packet_queue2.cc",
         "patchSetId": 2

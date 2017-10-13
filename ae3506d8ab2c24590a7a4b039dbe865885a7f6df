@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82939455_72e12be7",
+        "filename": "modules/pacing/packet_queue2.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-13T10:03:51Z",
+      "side": 1,
+      "message": "uses",
+      "range": {
+        "startLine": 69,
+        "startChar": 33,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "ae3506d8ab2c24590a7a4b039dbe865885a7f6df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
