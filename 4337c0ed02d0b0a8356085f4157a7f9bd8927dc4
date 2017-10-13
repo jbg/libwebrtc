@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0ce9e46_31b51040",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-13T00:05:36Z",
+      "side": 1,
+      "message": "Change to |256 * 1024| while you\u0027re at it?",
+      "revId": "4337c0ed02d0b0a8356085f4157a7f9bd8927dc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db2e4fd8_23283b61",
+        "filename": "pc/srtpsession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-13T00:05:36Z",
+      "side": 1,
+      "message": "nit: |g_libsrtp_usage_count \u003d\u003d 0| might be clearer in this case because it\u0027s a number/count. Also would be symmetric with the condition in the decrement method.",
+      "revId": "4337c0ed02d0b0a8356085f4157a7f9bd8927dc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
