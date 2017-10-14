@@ -785,6 +785,11 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   // to the provided value.
   virtual RTCError SetBitrate(const BitrateParameters& bitrate) = 0;
 
+  // Enable/disable playout of received audio streams. Enabled by default. Note
+  // that even if playout is enabled, streams will only be played out if the
+  // appropriate SDP is also applied.
+  virtual void SetAudioPlayout(bool playout) {}
+
   // Returns the current SignalingState.
   virtual SignalingState signaling_state() = 0;
   virtual IceConnectionState ice_connection_state() = 0;

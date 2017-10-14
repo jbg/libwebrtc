@@ -3209,6 +3209,42 @@ TEST_F(PeerConnectionIntegrationTest, RemoveAndAddTrackWithNewStreamId) {
                                   kMaxWaitForFramesMs);
 }
 
+// Test that if audio playout is disabled via the |SetAudioPlayout| method, then
+// incoming audio is still processed and statistics are generated.
+TEST_F(PeerConnectionIntegrationTest,
+       DisableAudioPlayoutStillGeneratesAudioStats) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+
+  // Set up audio-only call.
+  caller()->AddAudioOnlyMediaStream();
+  callee()->AddAudioOnlyMediaStream();
+  caller()->pc()->SetAudioPlayout(false);
+
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+
+  ExpectNewFramesReceivedWithWait(kDefaultExpectedAudioFrameCount, 0,
+                                  kDefaultExpectedAudioFrameCount, 0,
+                                  kMaxWaitForFramesMs);
+
+  auto report = caller()->NewGetStats();
+  auto track_stats_list =
+      report->GetStatsOfType<webrtc::RTCMediaStreamTrackStats>();
+  const webrtc::RTCMediaStreamTrackStats* remote_track_stats = nullptr;
+  for (const auto* track_stats : track_stats_list) {
+    if (track_stats->remote_source.is_defined() &&
+        *track_stats->remote_source) {
+      remote_track_stats = track_stats;
+      break;
+    }
+  }
+
+  ASSERT_TRUE(remote_track_stats->total_audio_energy.is_defined());
+  EXPECT_LT(0.0, *remote_track_stats->total_audio_energy);
+  LOG(LS_INFO) << "\n\n" << *remote_track_stats->total_audio_energy << "\n\n";
+}
+
 }  // namespace
 
 #endif  // if !defined(THREAD_SANITIZER)
