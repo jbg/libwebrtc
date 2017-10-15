@@ -70,16 +70,19 @@ void TransmitMixer::GetSendCodecInfo(int* max_sample_rate,
        it.Increment()) {
     Channel* channel = it.GetChannel();
     if (channel->Sending()) {
-      CodecInst codec;
-      // TODO(ossu): Investigate how this could happen. b/62909493
-      if (channel->GetSendCodec(codec) == 0) {
-        *max_sample_rate = std::max(*max_sample_rate, codec.plfreq);
-        *max_channels = std::max(*max_channels, codec.channels);
-      } else {
-        LOG(LS_WARNING) << "Unable to get send codec for channel "
-                        << channel->ChannelId();
-        RTC_NOTREACHED();
-      }
+      channel->ModifyEncoder([&](std::unique_ptr<AudioEncoder>* encoder) {
+        if (*encoder) {
+          *max_sample_rate =
+              std::max(*max_sample_rate, (*encoder)->SampleRateHz());
+          *max_channels = std::max(*max_channels, (*encoder)->NumChannels());
+        } else {
+          // TODO(ossu): Investigate how this could happen. b/62909493
+          // TODO(ossu): That bug is fixed...
+          LOG(LS_WARNING) << "Unable to get send codec for channel "
+                          << channel->ChannelId();
+          RTC_NOTREACHED();
+        }
+      });
     }
   }
 }
