@@ -75,15 +75,13 @@ constexpr int kEchoPathChangeCounterMax = 2 * kNumBlocksPerSecond;
 
 int AecState::instance_count_ = 0;
 
-AecState::AecState(const AudioProcessing::Config::EchoCanceller3& config)
+AecState::AecState(const EchoCanceller3Config& config)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
-      erle_estimator_(config.param.erle.min,
-                      config.param.erle.max_l,
-                      config.param.erle.max_h),
+      erle_estimator_(config.erle.min, config.erle.max_l, config.erle.max_h),
       echo_path_change_counter_(kEchoPathChangeCounterInitial),
       config_(config),
-      reverb_decay_(config_.param.ep_strength.default_len) {}
+      reverb_decay_(config_.ep_strength.default_len) {}
 
 AecState::~AecState() = default;
 
@@ -131,8 +129,8 @@ void AecState::Update(const std::vector<std::array<float, kFftLengthBy2Plus1>>&
   const float x_energy = std::inner_product(x.begin(), x.end(), x.begin(), 0.f);
 
   const bool active_render_block =
-      x_energy > (config_.param.render_levels.active_render_limit *
-                  config_.param.render_levels.active_render_limit) *
+      x_energy > (config_.render_levels.active_render_limit *
+                  config_.render_levels.active_render_limit) *
                      kFftLengthBy2;
   if (active_render_block) {
     render_received_ = true;
@@ -260,8 +258,7 @@ void AecState::UpdateReverb(
 
       // Limit the estimated reverb_decay_ to the maximum one needed in practice
       // to minimize the impact of incorrect estimates.
-      reverb_decay_ =
-          std::min(config_.param.ep_strength.default_len, reverb_decay_);
+      reverb_decay_ = std::min(config_.ep_strength.default_len, reverb_decay_);
     }
     reverb_decay_to_test_ = 0.9f;
     reverb_decay_candidate_residual_ = -1.f;
@@ -269,7 +266,7 @@ void AecState::UpdateReverb(
 
   // For noisy impulse responses, assume a fixed tail length.
   if (tail_power > 0.0005f) {
-    reverb_decay_ = config_.param.ep_strength.default_len;
+    reverb_decay_ = config_.ep_strength.default_len;
   }
   data_dumper_->DumpRaw("aec3_reverb_decay", reverb_decay_);
   data_dumper_->DumpRaw("aec3_tail_power", tail_power);

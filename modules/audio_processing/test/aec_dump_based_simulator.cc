@@ -474,7 +474,8 @@ void AecDumpBasedSimulator::HandleMessage(
     }
 
     if (settings_.use_aec3) {
-      apm_config.echo_canceller3.enabled = *settings_.use_aec3;
+      // TODO(gustaf): Fix AEC3 integration.
+      // apm_config.echo_canceller3.enabled = *settings_.use_aec3;
     }
 
     if (settings_.use_lc) {
