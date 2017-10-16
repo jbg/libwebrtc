@@ -747,14 +747,18 @@ if (is_ios || is_mac) {
 
     rtc_static_library("corevideoframebuffer_objc") {
       sources = [
-        "objc/Framework/Classes/Video/corevideo_frame_buffer.cc",
+        "objc/Framework/Classes/Video/RTCI420Buffer+Private.h",
         "objc/Framework/Classes/Video/corevideo_frame_buffer.h",
+        "objc/Framework/Classes/Video/corevideo_frame_buffer.mm",
+        "objc/Framework/Headers/WebRTC/RTCVideoFrameBuffer.h",
       ]
 
       deps = [
         "../common_video",
         "../rtc_base:rtc_base_approved",
       ]
+
+      public_configs = [ ":common_config_objc" ]
 
       if (!build_with_chromium && is_clang) {
         # Suppress warnings from the Chromium Clang plugin
