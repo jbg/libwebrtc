@@ -118,6 +118,30 @@
       "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "979a921c_e2b1377d",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-16T11:10:12Z",
+      "side": 1,
+      "message": "I would prefer if the new interface didn\u0027t create audio processing if null is passed. You can achieve this by creating two separate native JNI methods. I guess we should also then deprecate the old interface and have people move over.",
+      "parentUuid": "28bce5fc_ce924059",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 3
+      },
+      "revId": "0b54a7e599476dea3c1e4740d62c1cb78037456c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
