@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9991bd80_c9c10d2c",
+        "filename": "examples/objc/AppRTCMobile/ios/RTCVideoCodecInfo+HumanReadable.m",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T09:32:05Z",
+      "side": 1,
+      "message": "I would like to use the function webrtc::H264::ParseProfileLevelId() https://cs.chromium.org/chromium/src/third_party/webrtc/media/base/h264_profile_level_id.h?rcl\u003d589ae45d0fa79e4d637bb21ce6bb0696f74db448\u0026l\u003d58 to parse the string and get an enum and match on that instead to make this a bit more robust.",
+      "range": {
+        "startLine": 15,
+        "startChar": 14,
+        "endLine": 15,
+        "endChar": 38
+      },
+      "revId": "844fbd82d508403c8f02e1614c5014584ca07ef8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "269824cf_0630dfa4",
+        "filename": "examples/objc/AppRTCMobile/ios/RTCVideoCodecInfo+HumanReadable.m",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T09:32:05Z",
+      "side": 1,
+      "message": "This is Constrained Baseline.",
+      "range": {
+        "startLine": 23,
+        "startChar": 19,
+        "endLine": 23,
+        "endChar": 20
+      },
+      "revId": "844fbd82d508403c8f02e1614c5014584ca07ef8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
