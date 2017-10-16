@@ -16,6 +16,24 @@
       "revId": "02a389eb12ebbd215085c0e28bea1e24c12a6f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ffbd68b_65011791",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T21:03:33Z",
+      "side": 1,
+      "message": "Yes indeed!",
+      "parentUuid": "c9a1f6f7_4bc5cb90",
+      "revId": "02a389eb12ebbd215085c0e28bea1e24c12a6f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
