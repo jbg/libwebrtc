@@ -37,6 +37,121 @@
     },
     {
       "key": {
+        "uuid": "f8d1d151_f35d98e9",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCCameraVideoCapturer.m",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T13:31:56Z",
+      "side": 1,
+      "message": "Do we need to set this at all? What happens if we don\u0027t set it?",
+      "range": {
+        "startLine": 400,
+        "startChar": 2,
+        "endLine": 400,
+        "endChar": 96
+      },
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "145e7a86_0ffde098",
+        "filename": "sdk/objc/Framework/Classes/Video/RTCCVPixelBuffer.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T13:31:56Z",
+      "side": 1,
+      "message": "If this logic is moved to a separate method, I think we should do the same for the NV12 case. Also, I would like to have the Lock/Unlock in the same scope so it\u0027s easy to verify.",
+      "range": {
+        "startLine": 165,
+        "startChar": 12,
+        "endLine": 165,
+        "endChar": 29
+      },
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "577d7c32_a09ff69a",
+        "filename": "sdk/objc/Framework/Classes/Video/corevideo_frame_buffer.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T13:31:56Z",
+      "side": 1,
+      "message": "Move this into the webrtc namespace.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e30b90c1_99540a6d",
+        "filename": "sdk/objc/Framework/Classes/Video/corevideo_frame_buffer.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T13:31:56Z",
+      "side": 1,
+      "message": "This should be marked explicit.",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "855a3598_443423bc",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-16T13:31:56Z",
+      "side": 1,
+      "message": "Name this as a constant, i.e. kNv12PixelFormat.",
+      "range": {
+        "startLine": 63,
+        "startChar": 13,
+        "endLine": 63,
+        "endChar": 28
+      },
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e20c967a_e2a785cf",
         "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
         "patchSetId": 3
