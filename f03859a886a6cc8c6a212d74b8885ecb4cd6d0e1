@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "02252332_c2d35661",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCCameraVideoCapturer.m",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-10-16T13:00:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b67ae0a_83210f19",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e20c967a_e2a785cf",
         "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ff55977_02cbbd74",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-10-16T13:00:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e20c967a_e2a785cf",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c091bbfa_42679ee2",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-10-16T13:00:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f109862_dc840e3c",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03646c20_3d3fada2",
         "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
         "patchSetId": 3
@@ -67,6 +121,24 @@
       "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53f2b6eb_6a4c1180",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-10-16T13:00:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03646c20_3d3fada2",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
