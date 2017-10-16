@@ -12,6 +12,7 @@
 #define MODULES_AUDIO_DEVICE_INCLUDE_FAKE_AUDIO_DEVICE_H_
 
 #include "modules/audio_device/include/audio_device.h"
+#include "rtc_base/checks.h"
 
 namespace webrtc {
 
@@ -19,8 +20,13 @@ class FakeAudioDeviceModule : public AudioDeviceModule {
  public:
   FakeAudioDeviceModule() {}
   virtual ~FakeAudioDeviceModule() {}
-  virtual int32_t AddRef() const { return 0; }
-  virtual int32_t Release() const { return 0; }
+
+  // TODO(nisse): Fix all users of this class to managed references using
+  // scoped_refptr. Current code doesn't always use refcounting for this class.
+  virtual void AddRef() const {}
+  virtual rtc::RefCountReleaseStatus Release() const {
+    return rtc::RefCountReleaseStatus::kDroppedLastRef;
+  }
 
  private:
   virtual int32_t RegisterAudioCallback(AudioTransport* audioCallback) {
