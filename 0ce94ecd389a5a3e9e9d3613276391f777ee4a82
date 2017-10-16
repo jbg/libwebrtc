@@ -22,6 +22,30 @@
       "revId": "0ce94ecd389a5a3e9e9d3613276391f777ee4a82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27f0f56b_c897aa60",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2017-10-16T11:10:00Z",
+      "side": 1,
+      "message": "Good point! Fixed.",
+      "parentUuid": "6c11e869_74d9107d",
+      "range": {
+        "startLine": 377,
+        "startChar": 50,
+        "endLine": 377,
+        "endChar": 54
+      },
+      "revId": "0ce94ecd389a5a3e9e9d3613276391f777ee4a82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
