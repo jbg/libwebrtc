@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b67ae0a_83210f19",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCCameraVideoCapturer.m",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5254
+      },
+      "writtenOn": "2017-10-16T12:28:55Z",
+      "side": 1,
+      "message": "__Totally unrelated to the CL, but writing it down so that we don\u0027t forget__\nWould be nice to get some performance measurements on this",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e20c967a_e2a785cf",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5254
+      },
+      "writtenOn": "2017-10-16T12:28:55Z",
+      "side": 1,
+      "message": "Would be nice to extract this to separate method for readability.",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f109862_dc840e3c",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5254
+      },
+      "writtenOn": "2017-10-16T12:28:55Z",
+      "side": 1,
+      "message": "nit: nil for Foundation objects, nullptr for CF objects and cpp pointers",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03646c20_3d3fada2",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5254
+      },
+      "writtenOn": "2017-10-16T12:28:55Z",
+      "side": 1,
+      "message": "Literals to the rescue?\n compressionSessionPixelFormats \u003d @[(NSNumber *)pixelFormats)];",
+      "revId": "f03859a886a6cc8c6a212d74b8885ecb4cd6d0e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
