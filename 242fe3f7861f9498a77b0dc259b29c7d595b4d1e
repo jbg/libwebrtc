@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a4baca3_a85735d1",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2017-10-16T11:35:53Z",
+      "side": 1,
+      "message": "See comment below: ModifyEncoder adds synchronization and should be avoided.",
+      "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3ccc668_3c97e262",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2017-10-16T11:35:53Z",
+      "side": 1,
+      "message": "Yeah. I don\u0027t think this can happen. IIRC, it was more of a belts-and-suspenders thing when trying to fix that bug. I wonder if now may be the time to turn this back into a CHECK? Same for the one below.",
+      "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "886211bc_c58d9944",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2017-10-16T11:35:53Z",
+      "side": 1,
+      "message": "This calls adds a lock (per channel) to a very sensitive code path. I did this myself a few months ago and the effect on power-constrained devices was real bad.\n\nI propose you expose a (cached) AudioCodecInfo sort of how GetSendCodec used to work, so that this can be run without synchronization.",
+      "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
