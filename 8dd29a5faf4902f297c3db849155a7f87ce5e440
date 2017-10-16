@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4383730_1a64ed2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-16T13:53:10Z",
+      "side": 1,
+      "message": "The title is a bit vague.",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38b77f12_055af883",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-16T13:53:10Z",
+      "side": 1,
+      "message": "I would keep my TODO about C++14; it would be more elegant, IMHO, to switch it to that once we can. Or do you think this wouldn\u0027t work then, either?",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "607fe387_f58dd8ee",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-16T13:53:10Z",
+      "side": 1,
+      "message": "nit:\nPeerConnection * const pc;\n?",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d23d432_68e3c411",
+        "filename": "rtc_base/messagehandler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-16T13:53:10Z",
+      "side": 1,
+      "message": "You should probably get someone else to review this part.",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
