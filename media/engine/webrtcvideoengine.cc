@@ -1521,7 +1521,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::VideoSendStreamParameters::
         const rtc::Optional<VideoCodecSettings>& codec_settings)
     : config(std::move(config)),
       options(options),
-      max_bitrate_bps(max_bitrate_bps),
       conference_mode(false),
       codec_settings(codec_settings) {}
 
@@ -1813,10 +1812,6 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
     parameters_.config.rtp.extensions = *params.rtp_header_extensions;
     recreate_stream = true;
   }
-  if (params.max_bandwidth_bps) {
-    parameters_.max_bitrate_bps = *params.max_bandwidth_bps;
-    ReconfigureEncoder();
-  }
   if (params.conference_mode) {
     parameters_.conference_mode = *params.conference_mode;
   }
@@ -1920,18 +1915,10 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
     encoder_config.number_of_streams = 1;
   }
 
-  int stream_max_bitrate = parameters_.max_bitrate_bps;
-  if (rtp_parameters_.encodings[0].max_bitrate_bps) {
-    stream_max_bitrate =
-        webrtc::MinPositive(*(rtp_parameters_.encodings[0].max_bitrate_bps),
-                            parameters_.max_bitrate_bps);
-  }
-
+  encoder_config.max_bitrate_bps = -1;
   int codec_max_bitrate_kbps;
-  if (codec.GetParam(kCodecParamMaxBitrate, &codec_max_bitrate_kbps)) {
-    stream_max_bitrate = codec_max_bitrate_kbps * 1000;
-  }
-  encoder_config.max_bitrate_bps = stream_max_bitrate;
+  if (codec.GetParam(kCodecParamMaxBitrate, &codec_max_bitrate_kbps))
+    encoder_config.max_bitrate_bps = codec_max_bitrate_kbps * 1000;
 
   int max_qp = kDefaultQpMax;
   codec.GetParam(kCodecParamMaxQuantization, &max_qp);
