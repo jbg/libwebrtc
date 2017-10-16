@@ -24,8 +24,7 @@
 const int64_t kNanosecondsPerSecond = 1000000000;
 
 static inline BOOL IsMediaSubTypeSupported(FourCharCode mediaSubType) {
-  return (mediaSubType == kCVPixelFormatType_420YpCbCr8PlanarFullRange ||
-          mediaSubType == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange);
+  return [[RTCCVPixelBuffer supportedPixelFormats] containsObject:@(mediaSubType)];
 }
 
 @interface RTCCameraVideoCapturer ()<AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -387,14 +386,18 @@ static inline BOOL IsMediaSubTypeSupported(FourCharCode mediaSubType) {
 
 - (void)setupVideoDataOutput {
   NSAssert(_videoDataOutput == nil, @"Setup video data output called twice.");
-  // Make the capturer output NV12. Ideally we want I420 but that's not
-  // currently supported on iPhone / iPad.
   AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-  videoDataOutput.videoSettings = @{
-    (NSString *)
-    // TODO(denicija): Remove this color conversion and use the original capture format directly.
-    kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-  };
+
+  // `videoDataOutput.availableVideoCVPixelFormatTypes` returns the pixel formats supported by the
+  // device with the most efficient output format first. Find the first format that we support.
+  NSSet<NSNumber *> *supportedPixelFormats = [RTCCVPixelBuffer supportedPixelFormats];
+  NSMutableOrderedSet *availablePixelFormats =
+      [NSMutableOrderedSet orderedSetWithArray:videoDataOutput.availableVideoCVPixelFormatTypes];
+  [availablePixelFormats intersectSet:supportedPixelFormats];
+  NSNumber *pixelFormat = availablePixelFormats.firstObject;
+  NSAssert(pixelFormat, @"Output device has no supported formats.");
+
+  videoDataOutput.videoSettings = @{(NSString *)kCVPixelBufferPixelFormatTypeKey : pixelFormat};
   videoDataOutput.alwaysDiscardsLateVideoFrames = NO;
   [videoDataOutput setSampleBufferDelegate:self queue:self.frameQueue];
   _videoDataOutput = videoDataOutput;
