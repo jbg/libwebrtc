@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c11e869_74d9107d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-16T10:59:44Z",
+      "side": 1,
+      "message": "Please use static_cast\u003cbool\u003e(echo_control_factory_) . The reason, (I think) is that it is more explicit, in the sense that it states the intention more clearly, and allows the compiler to catch unintentional misuse of the huge power of the C-style cast.",
+      "range": {
+        "startLine": 377,
+        "startChar": 50,
+        "endLine": 377,
+        "endChar": 54
+      },
+      "revId": "0ce94ecd389a5a3e9e9d3613276391f777ee4a82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
