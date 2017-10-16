@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9a1f6f7_4bc5cb90",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-16T20:41:37Z",
+      "side": 1,
+      "message": "Should include \u003cutility\u003e?",
+      "revId": "02a389eb12ebbd215085c0e28bea1e24c12a6f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
