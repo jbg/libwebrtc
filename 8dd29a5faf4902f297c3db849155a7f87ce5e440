@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e7c9ec26_96394a43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T18:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4383730_1a64ed2f",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38b77f12_055af883",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fdfa0ab_f651565b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T18:25:47Z",
+      "side": 1,
+      "message": "You\u0027re right---now that Invoke() accepts move-only callbacks, the comment has become correct. :-)\n\nFixed.",
+      "parentUuid": "38b77f12_055af883",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "73cf14a4_bc381249",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T18:25:47Z",
+      "side": 1,
+      "message": "Sure---it causes the functor to be move-constructible but no longer move-assignable, but apparently the implementation doesn\u0027t need it.",
+      "parentUuid": "607fe387_f58dd8ee",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d23d432_68e3c411",
         "filename": "rtc_base/messagehandler.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "807ec483_23544cd4",
+        "filename": "rtc_base/messagehandler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T18:25:47Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "4d23d432_68e3c411",
+      "revId": "8dd29a5faf4902f297c3db849155a7f87ce5e440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
