@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "caead4f4_b0ad1ede",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T23:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a4baca3_a85735d1",
+      "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3ccc668_3c97e262",
         "filename": "voice_engine/channel.cc",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "3c0cb7a9_3378d00b",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T23:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3ccc668_3c97e262",
+      "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "886211bc_c58d9944",
         "filename": "voice_engine/transmit_mixer.cc",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b61dbb38_c6b2c416",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-16T23:55:43Z",
+      "side": 1,
+      "message": "Done. Although I save just what I need---the sample rate and #channels---in a bespoke struct, since I only have an AudioEncoder, not an AudioEncoderFactory.",
+      "parentUuid": "886211bc_c58d9944",
+      "revId": "242fe3f7861f9498a77b0dc259b29c7d595b4d1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
