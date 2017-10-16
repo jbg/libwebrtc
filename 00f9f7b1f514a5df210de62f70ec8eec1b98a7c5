@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce281543_6353b30e",
+        "filename": "modules/audio_device/include/fake_audio_device.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-16T08:40:08Z",
+      "side": 1,
+      "message": "\u003e I\u0027m adding RTC_NOTREACHED (which is an RTC_DCHECK, not RTC_CHECK).\n\nAnd it doesn\u0027t work... Example failure:\n\n$ ./out/Debug/low_bandwidth_audio_test --gtest_filter\u003dLowBandwidthAudioTest.GoodNetworkHighBitrate\nNote: Google Test filter \u003d LowBandwidthAudioTest.GoodNetworkHighBitrate\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 1 test from 1 test case.\n[----------] Global test environment set-up.\n[----------] 1 test from LowBandwidthAudioTest\n[ RUN      ] LowBandwidthAudioTest.GoodNetworkHighBitrate\n\n\n#\n# Fatal error in ../../modules/audio_device/include/fake_audio_device.h, line 26\n# last system error: 2\n# Check failed: false\n\nThe problem is VoEBaseImpl::Init, which takes a AudioDeviceModule* as argument, and calls\n\n    // Use the already existing external ADM implementation.\n    shared_-\u003eset_audio_device(external_adm);\n\nAnd the set_audio_device accepts a scoped_refptr, so we get an implicit conversion, and a call to AddRef which crashes in the RTC_NOTREACHED.\n\nAnd the comment for VoEBase::Init says that the adm argument is a refcounted module, despite argument being typed as a raw pointer. \n\nI\u0027d prefer to leave fixing that for some other cl, and for now just drop the RTC_UNREACHED().\n\nBTW, do you know the difference between \n\nmodules/audio_device/include/fake_audio_device.h\ntest/fake_audio_device.h\n\n? (Or rather, what the two classes are intended for? I see that the former has dummy implementations of all methods, while the latter implements some kind of audio processing).\n\nWhich one of them should the low-bandwidth audio tests be using?",
+      "parentUuid": "36950658_dbd994d9",
+      "revId": "00f9f7b1f514a5df210de62f70ec8eec1b98a7c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "df5d43bb_086a0601",
         "filename": "rtc_base/refcount.h",
         "patchSetId": 17
