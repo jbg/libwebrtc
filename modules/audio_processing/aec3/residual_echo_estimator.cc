@@ -79,8 +79,7 @@ constexpr float kHeadsetEchoPathGain = 0.0005f;
 
 }  // namespace
 
-ResidualEchoEstimator::ResidualEchoEstimator(
-    const AudioProcessing::Config::EchoCanceller3& config)
+ResidualEchoEstimator::ResidualEchoEstimator(const EchoCanceller3Config& config)
     : config_(config) {
   Reset();
 }
@@ -189,11 +188,11 @@ void ResidualEchoEstimator::NonLinearEstimate(
     std::array<float, kFftLengthBy2Plus1>* R2) {
   // Choose gains.
   const float echo_path_gain_lf =
-      headset_detected ? kHeadsetEchoPathGain : config_.param.ep_strength.lf;
+      headset_detected ? kHeadsetEchoPathGain : config_.ep_strength.lf;
   const float echo_path_gain_mf =
-      headset_detected ? kHeadsetEchoPathGain : config_.param.ep_strength.mf;
+      headset_detected ? kHeadsetEchoPathGain : config_.ep_strength.mf;
   const float echo_path_gain_hf =
-      headset_detected ? kHeadsetEchoPathGain : config_.param.ep_strength.hf;
+      headset_detected ? kHeadsetEchoPathGain : config_.ep_strength.hf;
 
   // Compute preliminary residual echo.
   std::transform(
