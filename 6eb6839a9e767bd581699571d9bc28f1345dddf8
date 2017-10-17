@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "488eaed6_5f48c651",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-17T13:10:28Z",
+      "side": 1,
+      "message": "What happens when we reach the end of the buffer?",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49d86f4c_6dbee25d",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-17T13:10:28Z",
+      "side": 1,
+      "message": "I still find this interface a bit strange. But I understand you don\u0027t want to refactor it in this cl.",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 20
+      },
+      "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f2083e4_b333f5a2",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-17T13:10:28Z",
+      "side": 1,
+      "message": "Naming is a little confusing, one would half expect ForceReceiverReport too.\n\nMaybe \"TransmitReport\" or \"ProduceReport\" or \"GenerateReport\"?\n\nAnd I\u0027d prefer not to have a ForceFoo public method without a public Foo method.",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
