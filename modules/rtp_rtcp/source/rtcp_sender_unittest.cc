@@ -502,14 +502,11 @@ TEST_F(RtcpSenderTest, RembStatus) {
   const std::vector<uint32_t> kSsrcs = {kRemoteSsrc, kRemoteSsrc + 1};
   rtcp_sender_->SetRTCPStatus(RtcpMode::kReducedSize);
 
-  EXPECT_FALSE(rtcp_sender_->REMB());
   rtcp_sender_->SendRTCP(feedback_state(), kRtcpRr);
   ASSERT_EQ(1, parser()->receiver_report()->num_packets());
   EXPECT_EQ(0, parser()->remb()->num_packets());
 
-  rtcp_sender_->SetREMBStatus(true);
-  EXPECT_TRUE(rtcp_sender_->REMB());
-  rtcp_sender_->SetREMBData(kBitrate, kSsrcs);
+  rtcp_sender_->SetRemb(kBitrate, kSsrcs);
   rtcp_sender_->SendRTCP(feedback_state(), kRtcpRr);
   ASSERT_EQ(2, parser()->receiver_report()->num_packets());
   EXPECT_EQ(1, parser()->remb()->num_packets());
@@ -520,8 +517,7 @@ TEST_F(RtcpSenderTest, RembStatus) {
   EXPECT_EQ(2, parser()->remb()->num_packets());
 
   // Turn off remb. rtcp_sender no longer should send it.
-  rtcp_sender_->SetREMBStatus(false);
-  EXPECT_FALSE(rtcp_sender_->REMB());
+  rtcp_sender_->UnsetRemb();
   rtcp_sender_->SendRTCP(feedback_state(), kRtcpRr);
   ASSERT_EQ(4, parser()->receiver_report()->num_packets());
   EXPECT_EQ(2, parser()->remb()->num_packets());
@@ -533,7 +529,7 @@ TEST_F(RtcpSenderTest, SendRemb) {
   ssrcs.push_back(kRemoteSsrc);
   ssrcs.push_back(kRemoteSsrc + 1);
   rtcp_sender_->SetRTCPStatus(RtcpMode::kReducedSize);
-  rtcp_sender_->SetREMBData(kBitrate, ssrcs);
+  rtcp_sender_->SetRemb(kBitrate, ssrcs);
   EXPECT_EQ(0, rtcp_sender_->SendRTCP(feedback_state(), kRtcpRemb));
   EXPECT_EQ(1, parser()->remb()->num_packets());
   EXPECT_EQ(kSenderSsrc, parser()->remb()->sender_ssrc());
@@ -547,25 +543,12 @@ TEST_F(RtcpSenderTest, RembIncludedInCompoundPacketIfEnabled) {
   std::vector<uint32_t> ssrcs;
   ssrcs.push_back(kRemoteSsrc);
   rtcp_sender_->SetRTCPStatus(RtcpMode::kCompound);
-  rtcp_sender_->SetREMBStatus(true);
-  EXPECT_TRUE(rtcp_sender_->REMB());
-  rtcp_sender_->SetREMBData(kBitrate, ssrcs);
+  rtcp_sender_->SetRemb(kBitrate, ssrcs);
   EXPECT_EQ(0, rtcp_sender_->SendRTCP(feedback_state(), kRtcpReport));
   EXPECT_EQ(1, parser()->remb()->num_packets());
   // REMB should be included in each compound packet.
   EXPECT_EQ(0, rtcp_sender_->SendRTCP(feedback_state(), kRtcpReport));
   EXPECT_EQ(2, parser()->remb()->num_packets());
-}
-
-TEST_F(RtcpSenderTest, RembNotIncludedInCompoundPacketIfNotEnabled) {
-  const int kBitrate = 261011;
-  std::vector<uint32_t> ssrcs;
-  ssrcs.push_back(kRemoteSsrc);
-  rtcp_sender_->SetRTCPStatus(RtcpMode::kCompound);
-  rtcp_sender_->SetREMBData(kBitrate, ssrcs);
-  EXPECT_FALSE(rtcp_sender_->REMB());
-  EXPECT_EQ(0, rtcp_sender_->SendRTCP(feedback_state(), kRtcpReport));
-  EXPECT_EQ(0, parser()->remb()->num_packets());
 }
 
 TEST_F(RtcpSenderTest, SendXrWithVoipMetric) {
@@ -757,7 +740,7 @@ TEST_F(RtcpSenderTest, SendCompoundPliRemb) {
   std::vector<uint32_t> ssrcs;
   ssrcs.push_back(kRemoteSsrc);
   rtcp_sender_->SetRTCPStatus(RtcpMode::kCompound);
-  rtcp_sender_->SetREMBData(kBitrate, ssrcs);
+  rtcp_sender_->SetRemb(kBitrate, ssrcs);
   std::set<RTCPPacketType> packet_types;
   packet_types.insert(kRtcpRemb);
   packet_types.insert(kRtcpPli);

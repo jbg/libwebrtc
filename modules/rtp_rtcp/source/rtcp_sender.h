@@ -120,11 +120,8 @@ class RTCPSender {
                            int32_t nackSize = 0,
                            const uint16_t* nackList = 0);
 
-  bool REMB() const;
-
-  void SetREMBStatus(bool enable);
-
-  void SetREMBData(uint32_t bitrate, const std::vector<uint32_t>& ssrcs);
+  void UnsetRemb();
+  void SetRemb(uint64_t bitrate_bps, std::vector<uint32_t> ssrc);
 
   bool TMMBR() const;
 
@@ -199,7 +196,6 @@ class RTCPSender {
   rtc::CriticalSection critical_section_rtcp_sender_;
   bool using_nack_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
   bool sending_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
-  bool remb_enabled_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
 
   int64_t next_time_to_send_rtcp_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
 
