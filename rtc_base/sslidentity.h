@@ -229,6 +229,11 @@ class SSLIdentity {
   static SSLIdentity* FromPEMStrings(const std::string& private_key,
                                      const std::string& certificate);
 
+  // Construct an identity from a private key and a certificate. If
+  // certifcate contain chains, the chain will be parsed.
+  static SSLIdentity* FromPEMChainStrings(const std::string& private_key,
+                                          const std::string& certificate);
+
   virtual ~SSLIdentity() {}
 
   // Returns a new SSLIdentity object instance wrapping the same
