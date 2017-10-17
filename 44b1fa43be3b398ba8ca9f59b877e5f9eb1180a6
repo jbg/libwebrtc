@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5301f478_5f624207",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-10-17T19:51:23Z",
+      "side": 0,
+      "message": "The equivalent test after this change would be to check that we don\u0027t include some arbitrary bogus REMB if we have never called SetRemb(). Looking at the names of the tests in this file, I don\u0027t find one that covers this. Perhaps you could modify this one to do so?",
+      "revId": "44b1fa43be3b398ba8ca9f59b877e5f9eb1180a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
