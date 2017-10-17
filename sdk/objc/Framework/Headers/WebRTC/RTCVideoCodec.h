@@ -15,6 +15,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString *const kVideoCodecVp8Name = @"VP8";
+static NSString *const kVideoCodecVp9Name = @"VP9";
+static NSString *const kVideoCodecH264Name = @"H264";
+static NSString *const kLevel31ConstrainedHigh = @"640c1f";
+static NSString *const kLevel31ConstrainedBaseline = @"42e01f";
+
 /** Represents an encoded frame's type. */
 typedef NS_ENUM(NSUInteger, RTCFrameType) {
   RTCFrameTypeEmptyFrame = 0,
