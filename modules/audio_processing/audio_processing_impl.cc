@@ -603,7 +603,7 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
       StreamConfig(capture_processing_rate);
 
   int render_processing_rate;
-  if (!config_.echo_canceller3.enabled) {
+  if (!capture_nonlocked_.echo_controller_enabled) {
     render_processing_rate = FindNativeProcessRateToUse(
         std::min(formats_.api_format.reverse_input_stream().sample_rate_hz(),
                  formats_.api_format.reverse_output_stream().sample_rate_hz()),
@@ -616,7 +616,7 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
   // TODO(aluebs): Remove this restriction once we figure out why the 3-band
   // splitting filter degrades the AEC performance.
   if (render_processing_rate > kSampleRate32kHz &&
-      !config_.echo_canceller3.enabled) {
+      !capture_nonlocked_.echo_controller_enabled) {
     render_processing_rate = submodule_states_.RenderMultiBandProcessingActive()
                                  ? kSampleRate32kHz
                                  : kSampleRate16kHz;
@@ -691,17 +691,6 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
 
   LOG(LS_INFO) << "Highpass filter activated: "
                << config_.high_pass_filter.enabled;
-
-  // Inject EchoCanceller3 if requested.
-  if (config.echo_canceller3.enabled && !echo_control_factory_) {
-    capture_nonlocked_.echo_controller_enabled =
-        config_.echo_canceller3.enabled;
-    echo_control_factory_ = std::unique_ptr<EchoControlFactory>(
-        new EchoCanceller3Factory(config.echo_canceller3));
-    InitializeEchoController();
-    LOG(LS_INFO) << "Echo canceller 3 activated: "
-                 << capture_nonlocked_.echo_controller_enabled;
-  }
 
   config_ok = GainController2::Validate(config_.gain_controller2);
   if (!config_ok) {
