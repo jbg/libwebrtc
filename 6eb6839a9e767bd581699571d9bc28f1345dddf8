@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6c4d1a55_6d41c793",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-17T19:38:01Z",
+      "side": 1,
+      "message": "OnPacketReady callback is called and index_ is set to zero starting new rtcp message.\ncomment added.",
+      "parentUuid": "488eaed6_5f48c651",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49d86f4c_6dbee25d",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7b2c78ec_ff895d4c",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-17T19:38:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49d86f4c_6dbee25d",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 20
+      },
+      "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f2083e4_b333f5a2",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
         "patchSetId": 6
@@ -68,6 +116,30 @@
       "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cf088c7_a753a1f9",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-17T19:38:01Z",
+      "side": 1,
+      "message": "yep, using Force doesn\u0027t seem right, renamed and extended comment.\n(keeping plan to add SendReducedSizePacket in future)\n\nSendReport removed for now, will introduce later, when needed.",
+      "parentUuid": "4f2083e4_b333f5a2",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "6eb6839a9e767bd581699571d9bc28f1345dddf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
