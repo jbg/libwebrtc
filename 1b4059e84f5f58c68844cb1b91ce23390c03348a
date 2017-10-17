@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ab3988a_518fceb0",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/test_data_generation.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2017-10-17T15:19:15Z",
+      "side": 0,
+      "message": "This has been moved inside Simulator since the creation must happen before TestDataGenerator is used (in order to compute the annotations).",
+      "range": {
+        "startLine": 130,
+        "startChar": 53,
+        "endLine": 130,
+        "endChar": 0
+      },
+      "revId": "1b4059e84f5f58c68844cb1b91ce23390c03348a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
