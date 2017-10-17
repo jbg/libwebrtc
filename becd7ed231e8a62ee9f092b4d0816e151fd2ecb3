@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d8f17db_2b6ee521",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-17T13:33:46Z",
+      "side": 1,
+      "message": "And it affects counters.retransmitted, passed to this callback.",
+      "range": {
+        "startLine": 59,
+        "startChar": 17,
+        "endLine": 59,
+        "endChar": 36
+      },
+      "revId": "becd7ed231e8a62ee9f092b4d0816e151fd2ecb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0fed607_7cf1c12c",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-17T13:33:46Z",
+      "side": 1,
+      "message": "This is where the retransmitted flag is used.",
+      "range": {
+        "startLine": 71,
+        "startChar": 19,
+        "endLine": 71,
+        "endChar": 32
+      },
+      "revId": "becd7ed231e8a62ee9f092b4d0816e151fd2ecb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
