@@ -14,6 +14,9 @@
 #include "api/peerconnectioninterface.h"
 #include "media/base/mediaengine.h"
 #include "modules/utility/include/jvm_android.h"
+// We don't depend on the audio processing module implementation.
+// The user may pass in a nullptr.
+#include "modules/audio_processing/include/audio_processing.h"  // nogncheck
 #include "rtc_base/event_tracer.h"
 #include "rtc_base/stringutils.h"
 #include "rtc_base/thread.h"
@@ -139,7 +142,8 @@ JNI_FUNCTION_DECLARATION(
     jclass,
     jobject joptions,
     jobject jencoder_factory,
-    jobject jdecoder_factory) {
+    jobject jdecoder_factory,
+    jlong native_audio_processor) {
   // talk/ assumes pretty widely that the current Thread is ThreadManager'd, but
   // ThreadManager only WrapCurrentThread()s the thread where it is first
   // created.  Since the semantics around when auto-wrapping happens in
@@ -185,12 +189,17 @@ JNI_FUNCTION_DECLARATION(
 
   AudioDeviceModule* adm = nullptr;
   rtc::scoped_refptr<AudioMixer> audio_mixer = nullptr;
+  rtc::scoped_refptr<AudioProcessing> audio_processor =
+      reinterpret_cast<AudioProcessing*>(native_audio_processor);
+  if (!audio_processor) {
+    audio_processor = CreateAudioProcessing();
+  }
   std::unique_ptr<CallFactoryInterface> call_factory(CreateCallFactory());
   std::unique_ptr<RtcEventLogFactoryInterface> rtc_event_log_factory(
       CreateRtcEventLogFactory());
   std::unique_ptr<cricket::MediaEngineInterface> media_engine(CreateMediaEngine(
       adm, audio_encoder_factory, audio_decoder_factory, video_encoder_factory,
-      video_decoder_factory, audio_mixer));
+      video_decoder_factory, audio_mixer, audio_processor));
 
   rtc::scoped_refptr<PeerConnectionFactoryInterface> factory(
       CreateModularPeerConnectionFactory(
