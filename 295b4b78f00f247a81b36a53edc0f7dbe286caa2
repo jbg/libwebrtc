@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9c68dac_4feb0c9f",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-18T12:04:31Z",
+      "side": 1,
+      "message": "I think you can define this lambda in-place, where it is used in the count_if.",
+      "range": {
+        "startLine": 734,
+        "startChar": 7,
+        "endLine": 734,
+        "endChar": 17
+      },
+      "revId": "295b4b78f00f247a81b36a53edc0f7dbe286caa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
