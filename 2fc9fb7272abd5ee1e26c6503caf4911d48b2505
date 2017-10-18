@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c9b56f5_432047a3",
+        "filename": "modules/audio_coding/neteq/audio_vector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-18T18:18:11Z",
+      "side": 1,
+      "message": "If you want to have the comment on a separate line like this, consider adding blank lines before 286 and after 287, so that it\u0027s clear that the comment applies to just this one line. (But I\u0027d say it makes more sense to just keep it on the same line, even if it causes a line wrap.)",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 15
+      },
+      "revId": "2fc9fb7272abd5ee1e26c6503caf4911d48b2505",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
