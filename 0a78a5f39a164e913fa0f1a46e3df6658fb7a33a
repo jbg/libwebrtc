@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4056964_1d672f12",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-18T09:59:19Z",
+      "side": 1,
+      "message": "I think you can skip 465, and just pass true here.\nAlternatively, if it adds readability, you could make the enable_aec3 a constant (constref) but my suggestion is to just pass true",
+      "range": {
+        "startLine": 466,
+        "startChar": 51,
+        "endLine": 466,
+        "endChar": 62
+      },
+      "revId": "0a78a5f39a164e913fa0f1a46e3df6658fb7a33a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eb3d112_665a0203",
+        "filename": "test/fuzzers/audio_processing_fuzzer_configs.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-18T09:59:19Z",
+      "side": 1,
+      "message": "I think you can discard the comment. That is basically just stating the if-statement on 45 so it is not adding anything.",
+      "revId": "0a78a5f39a164e913fa0f1a46e3df6658fb7a33a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
