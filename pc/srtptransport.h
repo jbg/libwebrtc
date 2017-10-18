@@ -15,7 +15,7 @@
 #include <string>
 #include <utility>
 
-#include "pc/rtptransportinternal.h"
+#include "pc/rtptransportinternaladapter.h"
 #include "pc/srtpfilter.h"
 #include "pc/srtpsession.h"
 #include "rtc_base/checks.h"
@@ -24,39 +24,12 @@ namespace webrtc {
 
 // This class will eventually be a wrapper around RtpTransportInternal
 // that protects and unprotects sent and received RTP packets.
-class SrtpTransport : public RtpTransportInternal {
+class SrtpTransport : public RtpTransportInternalAdapter {
  public:
   SrtpTransport(bool rtcp_mux_enabled, const std::string& content_name);
 
-  SrtpTransport(std::unique_ptr<RtpTransportInternal> transport,
+  SrtpTransport(std::unique_ptr<RtpTransportInternal> rtp_transport,
                 const std::string& content_name);
-
-  void SetRtcpMuxEnabled(bool enable) override {
-    rtp_transport_->SetRtcpMuxEnabled(enable);
-  }
-
-  rtc::PacketTransportInternal* rtp_packet_transport() const override {
-    return rtp_transport_->rtp_packet_transport();
-  }
-
-  void SetRtpPacketTransport(rtc::PacketTransportInternal* rtp) override {
-    rtp_transport_->SetRtpPacketTransport(rtp);
-  }
-
-  PacketTransportInterface* GetRtpPacketTransport() const override {
-    return rtp_transport_->GetRtpPacketTransport();
-  }
-
-  rtc::PacketTransportInternal* rtcp_packet_transport() const override {
-    return rtp_transport_->rtcp_packet_transport();
-  }
-  void SetRtcpPacketTransport(rtc::PacketTransportInternal* rtcp) override {
-    rtp_transport_->SetRtcpPacketTransport(rtcp);
-  }
-
-  PacketTransportInterface* GetRtcpPacketTransport() const override {
-    return rtp_transport_->GetRtcpPacketTransport();
-  }
 
   bool SendRtpPacket(rtc::CopyOnWriteBuffer* packet,
                      const rtc::PacketOptions& options,
@@ -66,29 +39,9 @@ class SrtpTransport : public RtpTransportInternal {
                       const rtc::PacketOptions& options,
                       int flags) override;
 
-  bool IsWritable(bool rtcp) const override {
-    return rtp_transport_->IsWritable(rtcp);
-  }
-
   // The transport becomes active if the send_session_ and recv_session_ are
   // created.
   bool IsActive() const;
-
-  bool HandlesPayloadType(int payload_type) const override {
-    return rtp_transport_->HandlesPayloadType(payload_type);
-  }
-
-  void AddHandledPayloadType(int payload_type) override {
-    rtp_transport_->AddHandledPayloadType(payload_type);
-  }
-
-  RTCError SetParameters(const RtpTransportParameters& parameters) override {
-    return rtp_transport_->SetParameters(parameters);
-  }
-
-  RtpTransportParameters GetParameters() const override {
-    return rtp_transport_->GetParameters();
-  }
 
   // TODO(zstein): Remove this when we remove RtpTransportAdapter.
   RtpTransportAdapter* GetInternal() override { return nullptr; }
@@ -115,11 +68,18 @@ class SrtpTransport : public RtpTransportInternal {
 
   void ResetParams();
 
-  // Set the header extension ids that should be encrypted for the given source.
+  // Set the header extension ids that should be encrypted.
   // This method doesn't immediately update the SRTP session with the new IDs,
   // and you need to call SetRtpParams for that to happen.
-  void SetEncryptedHeaderExtensionIds(cricket::ContentSource source,
-                                      const std::vector<int>& extension_ids);
+  void SetSendEncryptedHeaderExtensionIds(
+      const std::vector<int>& send_extension_ids) {
+    send_encrypted_header_extension_ids_ = send_extension_ids;
+  }
+
+  void SetRecvEncryptedHeaderExtensionIds(
+      const std::vector<int>& recv_extension_ids) {
+    recv_encrypted_header_extension_ids_ = recv_extension_ids;
+  }
 
   // If external auth is enabled, SRTP will write a dummy auth tag that then
   // later must get replaced before the packet is sent out. Only supported for
