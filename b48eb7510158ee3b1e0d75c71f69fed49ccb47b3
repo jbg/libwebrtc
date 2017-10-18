@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fc49fc7_b4776e0c",
+        "filename": "modules/audio_coding/neteq/neteq_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-18T12:20:13Z",
+      "side": 1,
+      "message": "In tests, there\u0027s ~never any reason to DCHECK instead of CHECK. So use rtc::checked_cast for all these conversions.",
+      "range": {
+        "startLine": 548,
+        "startChar": 35,
+        "endLine": 548,
+        "endChar": 36
+      },
+      "revId": "b48eb7510158ee3b1e0d75c71f69fed49ccb47b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
