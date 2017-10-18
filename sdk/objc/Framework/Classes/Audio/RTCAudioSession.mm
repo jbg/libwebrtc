@@ -105,25 +105,33 @@ NSString * const kRTCAudioSessionOutputVolumeSelector = @"outputVolume";
 }
 
 - (NSString *)description {
-  NSString *format =
-      @"RTCAudioSession: {\n"
-       "  category: %@\n"
-       "  categoryOptions: %ld\n"
-       "  mode: %@\n"
-       "  isActive: %d\n"
-       "  sampleRate: %.2f\n"
-       "  IOBufferDuration: %f\n"
-       "  outputNumberOfChannels: %ld\n"
-       "  inputNumberOfChannels: %ld\n"
-       "  outputLatency: %f\n"
-       "  inputLatency: %f\n"
-       "  outputVolume: %f\n"
-       "}";
+  NSString *format = @"RTCAudioSession: {\n"
+                      "  category: %@\n"
+                      "  categoryOptions: %ld\n"
+                      "  mode: %@\n"
+                      "  isActive: %d\n"
+                      "  sampleRate: %.2f\n"
+                      "  IOBufferDuration: %f\n"
+                      "  outputNumberOfChannels: %ld\n"
+                      "  inputNumberOfChannels: %ld\n"
+                      "  outputLatency: %f\n"
+                      "  inputLatency: %f\n"
+                      "  outputVolume: %f\n"
+                      "  inputGain: %f\n"
+                      "}";
   NSString *description = [NSString stringWithFormat:format,
-      self.category, (long)self.categoryOptions, self.mode,
-      self.isActive, self.sampleRate, self.IOBufferDuration,
-      self.outputNumberOfChannels, self.inputNumberOfChannels,
-      self.outputLatency, self.inputLatency, self.outputVolume];
+                                                     self.category,
+                                                     (long)self.categoryOptions,
+                                                     self.mode,
+                                                     self.isActive,
+                                                     self.sampleRate,
+                                                     self.IOBufferDuration,
+                                                     self.outputNumberOfChannels,
+                                                     self.inputNumberOfChannels,
+                                                     self.outputLatency,
+                                                     self.inputLatency,
+                                                     self.outputVolume,
+                                                     self.inputGain];
   return description;
 }
 
@@ -377,6 +385,14 @@ NSString * const kRTCAudioSessionOutputVolumeSelector = @"outputVolume";
     return NO;
   }
   return [self.session setCategory:category withOptions:options error:outError];
+}
+
+- (BOOL)setCategory:(NSString *)category
+              error:(NSError **)outError {
+  if (![self checkLock:outError]) {
+    return NO;
+  }
+  return [self.session setCategory:category error:outError];
 }
 
 - (BOOL)setMode:(NSString *)mode error:(NSError **)outError {

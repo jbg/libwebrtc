@@ -207,6 +207,8 @@ RTC_EXPORT
 - (BOOL)setCategory:(NSString *)category
         withOptions:(AVAudioSessionCategoryOptions)options
               error:(NSError **)outError;
+- (BOOL)setCategory:(NSString *)category
+              error:(NSError **)outError;
 - (BOOL)setMode:(NSString *)mode error:(NSError **)outError;
 - (BOOL)setInputGain:(float)gain error:(NSError **)outError;
 - (BOOL)setPreferredSampleRate:(double)sampleRate error:(NSError **)outError;
