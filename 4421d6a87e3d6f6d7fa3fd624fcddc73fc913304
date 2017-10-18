@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f593428_9758862f",
+        "filename": "common_audio/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-10-18T10:14:36Z",
+      "side": 1,
+      "message": "Is this only requested by //:webrtc_tests? (same for the other one).\n\nI think it is good enough to have \"*\" though. I am just curious to understand if we can lock uni tests down to maybe 1/2 umbrella targets.",
+      "range": {
+        "startLine": 368,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 25
+      },
+      "revId": "4421d6a87e3d6f6d7fa3fd624fcddc73fc913304",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
