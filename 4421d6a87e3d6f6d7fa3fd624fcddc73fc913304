@@ -22,6 +22,30 @@
       "revId": "4421d6a87e3d6f6d7fa3fd624fcddc73fc913304",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69404bac_b2da8df2",
+        "filename": "common_audio/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-18T20:04:42Z",
+      "side": 1,
+      "message": "I don\u0027t know, but I\u0027ll bet you\u0027re right. The dependency graph for unit test targets probably looks like a tree, with each target being depended on by just one other target.\n\nI also think that \"*\" is good enough, though. I don\u0027t feel the same urge to lock down test code as I feel for production code, especially since we have `testonly`.",
+      "parentUuid": "2f593428_9758862f",
+      "range": {
+        "startLine": 368,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 25
+      },
+      "revId": "4421d6a87e3d6f6d7fa3fd624fcddc73fc913304",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
