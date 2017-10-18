@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "568594de_bef1b8bb",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d3973b_ab3012f0",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce04c0bc_83ee207e",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "284135f3_569024fa",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "This is a good point and it makes me realize that we may need more work when connecting the RTP layer transports and the BaseChannel.\nIf eventually we want to remove SetTransport(s) methods and p2p layer transports from the BaseChannel, then (Srtp/DtlsSrtp)RtpTransport objects would be responsible for taking caring of the signals from P2P layer transports and fire relevant signals for the BaseChannel. So maybe we need to add more stuff to RtpTransportInternal such as SignalWritableState, SignalCandidatePairChanged etc. We can do it in separate CLs though. Does it make sense?",
+      "parentUuid": "ce04c0bc_83ee207e",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "67f45ba3_f7aa06db",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b03b12dc_b0c8e9f0",
+      "range": {
+        "startLine": 81,
+        "startChar": 24,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "647e29ee_021253e2",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 4
@@ -73,6 +133,24 @@
       "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36ac5c7_ddf6a1d1",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "647e29ee_021253e2",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "936e8d2d_d11a6a51",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c1b4c7bf_6f21dc45",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a248acf1_5bdae6b6",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 4
@@ -107,6 +203,24 @@
       "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcda4ba9_59bd4ef0",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a248acf1_5bdae6b6",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "0c969b41_63580441",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Ah, yes, you are right.",
+      "parentUuid": "11ecd3a7_69e782a4",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d827780f_3fb4a65e",
         "filename": "pc/dtlssrtptransport_unittest.cc",
         "patchSetId": 4
@@ -141,6 +273,24 @@
       "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdc3b2c6_11063da7",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d827780f_3fb4a65e",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "38fe54a8_0632a482",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9454b13_b002d850",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6f97f3a_2134146d",
         "filename": "pc/dtlssrtptransport_unittest.cc",
         "patchSetId": 4
@@ -178,6 +346,24 @@
     },
     {
       "key": {
+        "uuid": "ab560527_cef4eb85",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "All Done except the SignalDtlsSrtpSetupFailure because it\u0027s not straightforward to make a FakeSrtpTransport since there is no interface for SrtpTransport and I don\u0027t want to subclass a real SrtpTransport.\n\nI can make an SrtpTransportInternal in a separate CL.",
+      "parentUuid": "d6f97f3a_2134146d",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2ed82d1_a4da18ea",
         "filename": "pc/rtptransportinternaladapter.h",
         "patchSetId": 4
@@ -192,6 +378,24 @@
       "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2a7e014_02ad5429",
+        "filename": "pc/rtptransportinternaladapter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2ed82d1_a4da18ea",
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

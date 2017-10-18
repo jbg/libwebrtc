@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfc7352b_51a9a313",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-18T21:58:14Z",
+      "side": 1,
+      "message": "RtpTransportInternalAdapter takes the raw pointer and the DtlsSrtpTransport owns the |srtp_transport|.",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 46
+      },
+      "revId": "4aa209a829c2f6834d7d547fa18589b0f470a4b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
