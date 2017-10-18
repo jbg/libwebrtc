@@ -57,6 +57,7 @@ static const AudioUnitElement kOutputBus = 0;
 
 // Returns the automatic gain control (AGC) state on the processed microphone
 // signal. Should be on by default for Voice Processing audio units.
+/*
 static OSStatus GetAGCState(AudioUnit audio_unit, UInt32* enabled) {
   RTC_DCHECK(audio_unit);
   UInt32 size = sizeof(*enabled);
@@ -69,6 +70,7 @@ static OSStatus GetAGCState(AudioUnit audio_unit, UInt32* enabled) {
   RTCLog(@"VPIO unit AGC: %u", static_cast<unsigned int>(*enabled));
   return result;
 }
+*/
 
 VoiceProcessingAudioUnit::VoiceProcessingAudioUnit(
     VoiceProcessingAudioUnitObserver* observer)
@@ -85,11 +87,14 @@ const UInt32 VoiceProcessingAudioUnit::kBytesPerSample = 2;
 bool VoiceProcessingAudioUnit::Init() {
   RTC_DCHECK_EQ(state_, kInitRequired);
 
+  // kAudioUnitSubType_VoiceProcessingIO
+  // kAudioUnitSubType_RemoteIO
+
   // Create an audio component description to identify the Voice Processing
   // I/O audio unit.
   AudioComponentDescription vpio_unit_description;
   vpio_unit_description.componentType = kAudioUnitType_Output;
-  vpio_unit_description.componentSubType = kAudioUnitSubType_VoiceProcessingIO;
+  vpio_unit_description.componentSubType = kAudioUnitSubType_RemoteIO;
   vpio_unit_description.componentManufacturer = kAudioUnitManufacturer_Apple;
   vpio_unit_description.componentFlags = 0;
   vpio_unit_description.componentFlagsMask = 0;
@@ -253,6 +258,7 @@ bool VoiceProcessingAudioUnit::Initialize(Float64 sample_rate) {
   // to be absolutely sure that the AGC is enabled since we have seen cases
   // where only zeros are recorded and a disabled AGC could be one of the
   // reasons why it happens.
+  /*
   int agc_was_enabled_by_default = 0;
   UInt32 agc_is_enabled = 0;
   result = GetAGCState(vpio_unit_, &agc_is_enabled);
@@ -304,6 +310,7 @@ bool VoiceProcessingAudioUnit::Initialize(Float64 sample_rate) {
   RTC_HISTOGRAM_BOOLEAN("WebRTC.Audio.BuiltInAGCIsEnabled", agc_is_enabled);
   RTCLog(@"WebRTC.Audio.BuiltInAGCIsEnabled: %u",
          static_cast<unsigned int>(agc_is_enabled));
+  */
 
   state_ = kInitialized;
   return true;
@@ -403,6 +410,7 @@ OSStatus VoiceProcessingAudioUnit::NotifyGetPlayoutData(
     UInt32 bus_number,
     UInt32 num_frames,
     AudioBufferList* io_data) {
+  // RTCLog(@"NotifyGetPlayoutData: %d", num_frames);
   return observer_->OnGetPlayoutData(flags, time_stamp, bus_number, num_frames,
                                      io_data);
 }
@@ -413,6 +421,7 @@ OSStatus VoiceProcessingAudioUnit::NotifyDeliverRecordedData(
     UInt32 bus_number,
     UInt32 num_frames,
     AudioBufferList* io_data) {
+  // RTCLog(@"NotifyDeliverRecordedData: %d", num_frames);
   return observer_->OnDeliverRecordedData(flags, time_stamp, bus_number,
                                           num_frames, io_data);
 }

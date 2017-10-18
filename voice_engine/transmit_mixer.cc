@@ -101,7 +101,7 @@ TransmitMixer::PrepareDemux(const void* audioSamples,
                        samplesPerSec);
 
     // --- Near-end audio processing.
-    ProcessAudio(totalDelayMS, clockDrift, currentMicLevel, keyPressed);
+    // ProcessAudio(totalDelayMS, clockDrift, currentMicLevel, keyPressed);
 
     if (swap_stereo_channels_ && stereo_codec_)
       // Only bother swapping if we're using a stereo codec.

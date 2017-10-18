@@ -33,6 +33,7 @@
   RTCVideoTrack *_remoteVideoTrack;
   ARDCaptureController *_captureController;
   AVAudioSessionPortOverride _portOverride;
+  int _count;
 }
 
 @synthesize videoCallView = _videoCallView;
@@ -48,6 +49,7 @@
 
     _client = [[ARDAppClient alloc] initWithDelegate:self];
     [_client connectToRoomWithId:room settings:settingsModel isLoopback:isLoopback];
+    _count = 0;
   }
   return self;
 }
@@ -160,6 +162,18 @@
 - (void)videoCallViewDidEnableStats:(ARDVideoCallView *)view {
   _client.shouldGetStats = YES;
   _videoCallView.statsView.hidden = NO;
+}
+
+- (void)videoCallViewDidDebug:(ARDVideoCallView *)view {
+  NSLog(@"Debug button pressed: %d", ++_count);
+
+  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  RTCLog(@"%@", session);
+
+  [session lockForConfiguration];
+
+
+  [session unlockForConfiguration];
 }
 
 #pragma mark - RTCAudioSessionDelegate

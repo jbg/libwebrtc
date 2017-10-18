@@ -53,11 +53,24 @@
   // everything we can.
   NSError *error = nil;
 
+  /*
   if (self.category != configuration.category ||
       self.categoryOptions != configuration.categoryOptions) {
     NSError *categoryError = nil;
     if (![self setCategory:configuration.category
                withOptions:configuration.categoryOptions
+                     error:&categoryError]) {
+      RTCLogError(@"Failed to set category: %@",
+                  categoryError.localizedDescription);
+      error = categoryError;
+    } else {
+      RTCLog(@"Set category to: %@", configuration.category);
+    }
+  } */
+
+  if (self.category != configuration.category) {
+    NSError *categoryError = nil;
+    if (![self setCategory:configuration.category
                      error:&categoryError]) {
       RTCLogError(@"Failed to set category: %@",
                   categoryError.localizedDescription);
@@ -79,6 +92,7 @@
   }
 
   // Sometimes category options don't stick after setting mode.
+  /*
   if (self.categoryOptions != configuration.categoryOptions) {
     NSError *categoryError = nil;
     if (![self setCategory:configuration.category
@@ -91,7 +105,7 @@
       RTCLog(@"Set category options to: %ld",
              (long)configuration.categoryOptions);
     }
-  }
+  }*/
 
   if (self.preferredSampleRate != configuration.sampleRate) {
     NSError *sampleRateError = nil;

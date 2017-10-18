@@ -30,6 +30,9 @@
 // Called when stats are enabled by triple tapping.
 - (void)videoCallViewDidEnableStats:(ARDVideoCallView *)view;
 
+// Called when the debug button is pressed.
+- (void)videoCallViewDidDebug:(ARDVideoCallView *)view;
+
 @end
 
 // Video call view that shows local and remote video, provides a label to
