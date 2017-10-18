@@ -30,6 +30,7 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_routeChangeButton;
   UIButton *_cameraSwitchButton;
   UIButton *_hangupButton;
+  UIButton *_debugButton;
   CGSize _remoteVideoSize;
 }
 
@@ -93,6 +94,16 @@ static CGFloat const kStatusBarHeight = 20;
                       action:@selector(onHangup:)
             forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_hangupButton];
+
+    _debugButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _debugButton.backgroundColor = [UIColor whiteColor];
+    _debugButton.layer.cornerRadius = kButtonSize / 2;
+    _debugButton.layer.masksToBounds = YES;
+    [_debugButton setTitle:@"Debug" forState:UIControlStateNormal];
+    [_debugButton addTarget:self
+                     action:@selector(onDebug:)
+           forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_debugButton];
 
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _statusLabel.font = [UIFont fontWithName:@"Roboto" size:16];
@@ -168,6 +179,12 @@ static CGFloat const kStatusBarHeight = 20;
       CGRectGetMaxX(routeChangeFrame) + kButtonPadding;
   _routeChangeButton.frame = routeChangeFrame;
 
+  // Place debug button above hangup button.
+  CGRect debugButtonFrame = _hangupButton.frame;
+  debugButtonFrame.origin.y =
+      CGRectGetMinY(debugButtonFrame) - CGRectGetHeight(_hangupButton.frame) - kButtonPadding;
+  _debugButton.frame = debugButtonFrame;
+
   [_statusLabel sizeToFit];
   _statusLabel.center =
       CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
@@ -194,6 +211,10 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)onHangup:(id)sender {
   [_delegate videoCallViewDidHangup:self];
+}
+
+- (void)onDebug:(id)sender {
+  [_delegate videoCallViewDidDebug:self];
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {

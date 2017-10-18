@@ -764,6 +764,7 @@ void AudioDeviceIOS::SetupAudioBuffersForActiveAudioSession() {
 
 bool AudioDeviceIOS::CreateAudioUnit() {
   RTC_DCHECK(!audio_unit_);
+  RTCLog(@"CreateAudioUnit");
 
   audio_unit_.reset(new VoiceProcessingAudioUnit(this));
   if (!audio_unit_->Init()) {
@@ -922,6 +923,8 @@ bool AudioDeviceIOS::InitPlayOrRecord() {
     ConfigureAudioSession();
     SetupAudioBuffersForActiveAudioSession();
     audio_unit_->Initialize(playout_parameters_.sample_rate());
+  } else {
+    RTCLogWarning(@"Not ready to start play or record yet.");
   }
 
   // Release the lock.
