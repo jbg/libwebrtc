@@ -45,6 +45,8 @@
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial.h"
 
+namespace webrtc {
+
 namespace {
 
 using webrtc::DataChannel;
@@ -239,9 +241,27 @@ bool SafeSetError(webrtc::RTCError error, webrtc::RTCError* error_out) {
   return error.ok();
 }
 
-}  // namespace
+std::string GetSignalingStateString(
+    PeerConnectionInterface::SignalingState state) {
+  switch (state) {
+    case PeerConnectionInterface::kStable:
+      return "STABLE";
+    case PeerConnectionInterface::kHaveLocalOffer:
+      return "HAVE_LOCAL_OFFER";
+    case PeerConnectionInterface::kHaveLocalPrAnswer:
+      return "HAVE_LOCAL_PRANSWER";
+    case PeerConnectionInterface::kHaveRemoteOffer:
+      return "HAVE_REMOTE_OFFER";
+    case PeerConnectionInterface::kHaveRemotePrAnswer:
+      return "HAVE_REMOTE_PRANSWER";
+    case PeerConnectionInterface::kClosed:
+      return "CLOSED";
+  }
+  RTC_NOTREACHED();
+  return "";
+}
 
-namespace webrtc {
+}  // namespace
 
 bool PeerConnectionInterface::RTCConfiguration::operator==(
     const PeerConnectionInterface::RTCConfiguration& o) const {
@@ -401,10 +421,12 @@ PeerConnection::PeerConnection(PeerConnectionFactory* factory,
       signaling_state_(kStable),
       ice_connection_state_(kIceConnectionNew),
       ice_gathering_state_(kIceGatheringNew),
+      ice_connection_receiving_(true),
       rtcp_cname_(GenerateRtcpCname()),
       local_streams_(StreamCollection::Create()),
       remote_streams_(StreamCollection::Create()),
-      call_(std::move(call)) {}
+      call_(std::move(call)),
+      session_(nullptr) {}
 
 PeerConnection::~PeerConnection() {
   TRACE_EVENT0("webrtc", "PeerConnection::~PeerConnection");
@@ -474,44 +496,26 @@ bool PeerConnection::Initialize(
     return false;
   }
 
-  owned_session_.reset(new WebRtcSession(
-      call_.get(), factory_->channel_manager(), configuration.media_config,
-      event_log_.get(), network_thread(), worker_thread(), signaling_thread(),
-      port_allocator_.get(),
-      std::unique_ptr<cricket::TransportController>(
-          factory_->CreateTransportController(
-              port_allocator_.get(),
-              configuration.redetermine_role_on_ice_restart)),
-      factory_->CreateSctpTransportInternalFactory()));
+  owned_session_.reset(
+      new WebRtcSession(this,
+                        std::unique_ptr<cricket::TransportController>(
+                            factory_->CreateTransportController(
+                                port_allocator_.get(),
+                                configuration.redetermine_role_on_ice_restart)),
+                        factory_->CreateSctpTransportInternalFactory()));
   session_ = owned_session_.get();
 
   stats_.reset(new StatsCollector(this));
   stats_collector_ = RTCStatsCollector::Create(this);
 
+  // Need to set configuration before initialization WebRtcSession because it
+  // will reach back to fetch the media config.
+  configuration_ = configuration;
+
   // Initialize the WebRtcSession. It creates transport channels etc.
   session_->Initialize(factory_->options(), std::move(cert_generator),
                        configuration, this);
 
-  // Register PeerConnection as receiver of local ice candidates.
-  // All the callbacks will be posted to the application from PeerConnection.
-  session_->RegisterIceObserver(this);
-  session_->SignalState.connect(this, &PeerConnection::OnSessionStateChange);
-  session_->SignalVoiceChannelCreated.connect(
-      this, &PeerConnection::OnVoiceChannelCreated);
-  session_->SignalVoiceChannelDestroyed.connect(
-      this, &PeerConnection::OnVoiceChannelDestroyed);
-  session_->SignalVideoChannelCreated.connect(
-      this, &PeerConnection::OnVideoChannelCreated);
-  session_->SignalVideoChannelDestroyed.connect(
-      this, &PeerConnection::OnVideoChannelDestroyed);
-  session_->SignalDataChannelCreated.connect(
-      this, &PeerConnection::OnDataChannelCreated);
-  session_->SignalDataChannelDestroyed.connect(
-      this, &PeerConnection::OnDataChannelDestroyed);
-  session_->SignalDataChannelOpenMessage.connect(
-      this, &PeerConnection::OnDataChannelOpenMessage);
-
-  configuration_ = configuration;
   return true;
 }
 
@@ -1249,7 +1253,7 @@ void PeerConnection::RegisterUMAObserver(UMAObserver* observer) {
   uma_observer_ = observer;
 
   if (session_) {
-    session_->set_metrics_observer(uma_observer_);
+    session_->transport_controller()->SetMetricsObserver(uma_observer_);
   }
 
   // Send information about IPv4/IPv6 status.
@@ -1398,35 +1402,6 @@ void PeerConnection::Close() {
     // The event log must outlive call (and any other object that uses it).
     event_log_.reset();
   });
-}
-
-void PeerConnection::OnSessionStateChange(WebRtcSession* /*session*/,
-                                          WebRtcSession::State state) {
-  switch (state) {
-    case WebRtcSession::STATE_INIT:
-      ChangeSignalingState(PeerConnectionInterface::kStable);
-      break;
-    case WebRtcSession::STATE_SENTOFFER:
-      ChangeSignalingState(PeerConnectionInterface::kHaveLocalOffer);
-      break;
-    case WebRtcSession::STATE_SENTPRANSWER:
-      ChangeSignalingState(PeerConnectionInterface::kHaveLocalPrAnswer);
-      break;
-    case WebRtcSession::STATE_RECEIVEDOFFER:
-      ChangeSignalingState(PeerConnectionInterface::kHaveRemoteOffer);
-      break;
-    case WebRtcSession::STATE_RECEIVEDPRANSWER:
-      ChangeSignalingState(PeerConnectionInterface::kHaveRemotePrAnswer);
-      break;
-    case WebRtcSession::STATE_INPROGRESS:
-      ChangeSignalingState(PeerConnectionInterface::kStable);
-      break;
-    case WebRtcSession::STATE_CLOSED:
-      ChangeSignalingState(PeerConnectionInterface::kClosed);
-      break;
-    default:
-      break;
-  }
 }
 
 void PeerConnection::OnMessage(rtc::Message* msg) {
@@ -1600,14 +1575,23 @@ void PeerConnection::RemoveVideoTrack(VideoTrackInterface* track,
   senders_.erase(sender);
 }
 
-void PeerConnection::OnIceConnectionStateChange(
-    PeerConnectionInterface::IceConnectionState new_state) {
+void PeerConnection::SetIceConnectionState(IceConnectionState new_state) {
   RTC_DCHECK(signaling_thread()->IsCurrent());
+  if (ice_connection_state_ == new_state) {
+    return;
+  }
+
   // After transitioning to "closed", ignore any additional states from
-  // WebRtcSession (such as "disconnected").
+  // TransportController (such as "disconnected").
   if (IsClosed()) {
     return;
   }
+
+  LOG(LS_INFO) << "Changing IceConnectionState " << ice_connection_state_
+               << " => " << new_state;
+  RTC_DCHECK(ice_connection_state_ !=
+             PeerConnectionInterface::kIceConnectionClosed);
+
   ice_connection_state_ = new_state;
   observer_->OnIceConnectionChange(ice_connection_state_);
 }
@@ -1640,16 +1624,27 @@ void PeerConnection::OnIceCandidatesRemoved(
   observer_->OnIceCandidatesRemoved(candidates);
 }
 
-void PeerConnection::OnIceConnectionReceivingChange(bool receiving) {
+void PeerConnection::SetIceConnectionReceiving(bool receiving) {
   RTC_DCHECK(signaling_thread()->IsCurrent());
   if (IsClosed()) {
     return;
   }
+  if (ice_connection_receiving_ == receiving) {
+    return;
+  }
+  ice_connection_receiving_ = receiving;
   observer_->OnIceConnectionReceivingChange(receiving);
 }
 
 void PeerConnection::ChangeSignalingState(
     PeerConnectionInterface::SignalingState signaling_state) {
+  RTC_DCHECK(signaling_thread()->IsCurrent());
+  if (signaling_state_ == signaling_state) {
+    return;
+  }
+  LOG(LS_INFO) << "Session: " << session_id()
+               << " Old state: " << GetSignalingStateString(signaling_state_)
+               << " New state: " << GetSignalingStateString(signaling_state);
   signaling_state_ = signaling_state;
   if (signaling_state == kClosed) {
     ice_connection_state_ = kIceConnectionClosed;
@@ -2580,6 +2575,14 @@ bool PeerConnection::ReconfigurePortAllocator_n(
   return port_allocator_->SetConfiguration(
       stun_servers, turn_servers, candidate_pool_size, prune_turn_ports,
       turn_customizer);
+}
+
+cricket::ChannelManager* PeerConnection::channel_manager() const {
+  return factory_->channel_manager();
+}
+
+MetricsObserverInterface* PeerConnection::metrics_observer() const {
+  return uma_observer_;
 }
 
 bool PeerConnection::StartRtcEventLog_w(
