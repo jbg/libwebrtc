@@ -22,6 +22,30 @@
       "revId": "47aa0eab6cf9143f0c043830503781ec7370e127",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d20f080_de7d193e",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-10-19T13:48:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b115b67_a2718caf",
+      "range": {
+        "startLine": 481,
+        "startChar": 36,
+        "endLine": 481,
+        "endChar": 49
+      },
+      "revId": "47aa0eab6cf9143f0c043830503781ec7370e127",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
