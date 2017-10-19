@@ -69,6 +69,17 @@ void RtpTransport::SetRtcpPacketTransport(
                  rtcp_packet_transport_ && rtcp_packet_transport_->writable());
 }
 
+void RtpTransport::ConnectRtpIceTransport(cricket::IceTransportInternal* rtp) {
+  rtp->SignalNetworkRouteChanged.connect(this,
+                                         &RtpTransport::OnNetworkRouteChange);
+}
+
+void RtpTransport::ConnectRtcpIceTransport(
+    cricket::IceTransportInternal* rtcp) {
+  rtcp->SignalNetworkRouteChanged.connect(this,
+                                          &RtpTransport::OnNetworkRouteChange);
+}
+
 bool RtpTransport::IsWritable(bool rtcp) const {
   rtc::PacketTransportInternal* transport = rtcp && !rtcp_mux_enabled_
                                                 ? rtcp_packet_transport_
@@ -159,6 +170,12 @@ RtpTransportAdapter* RtpTransport::GetInternal() {
 
 void RtpTransport::OnReadyToSend(rtc::PacketTransportInternal* transport) {
   SetReadyToSend(transport == rtcp_packet_transport_, true);
+}
+
+void RtpTransport::OnNetworkRouteChange(
+    cricket::IceTransportInternal* ice_transport,
+    rtc::NetworkRoute network_route) {
+  SignalNetworkRouteChanged(ice_transport, network_route);
 }
 
 void RtpTransport::SetReadyToSend(bool rtcp, bool ready) {

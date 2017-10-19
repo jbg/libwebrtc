@@ -50,6 +50,9 @@ class RtpTransport : public RtpTransportInternal {
   PacketTransportInterface* GetRtpPacketTransport() const override;
   PacketTransportInterface* GetRtcpPacketTransport() const override;
 
+  void ConnectRtpIceTransport(cricket::IceTransportInternal* rtp) override;
+  void ConnectRtcpIceTransport(cricket::IceTransportInternal* rtcp) override;
+
   // TODO(zstein): Use these RtcpParameters for configuration elsewhere.
   RTCError SetParameters(const RtpTransportParameters& parameters) override;
   RtpTransportParameters GetParameters() const override;
@@ -76,6 +79,8 @@ class RtpTransport : public RtpTransportInternal {
   bool HandlesPacket(const uint8_t* data, size_t len);
 
   void OnReadyToSend(rtc::PacketTransportInternal* transport);
+  void OnNetworkRouteChange(cricket::IceTransportInternal* ice_transport,
+                            rtc::NetworkRoute network_route);
 
   // Updates "ready to send" for an individual channel and fires
   // SignalReadyToSend.
