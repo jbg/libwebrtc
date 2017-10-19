@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d66942e_9e44c8c1",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-19T08:31:47Z",
+      "side": 0,
+      "message": "Nice to get rid of this!",
+      "revId": "ac7be135640e78ab6008f5e9fc5817dae0d27487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
