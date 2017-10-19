@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2a1aa5b_2814f150",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-19T08:42:42Z",
+      "side": 1,
+      "message": "Is there a reason not to use an int here?",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 10
+      },
+      "revId": "6b6afef6c437ea8dd65c1623cbc8025bf2dea3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b0fd9c2_4063a889",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-19T08:42:42Z",
+      "side": 1,
+      "message": "Remove. That method doesn\u0027t exist any more: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/include/video_coding.h?l\u003d70\u0026rcl\u003d8a958528b2caa663de0b571e40fd62d34d503340",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 97,
+        "endChar": 39
+      },
+      "revId": "6b6afef6c437ea8dd65c1623cbc8025bf2dea3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
