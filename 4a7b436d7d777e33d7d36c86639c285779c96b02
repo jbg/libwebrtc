@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a1cefb7_efa2d732",
+        "filename": "rtc_base/opensslidentity.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-19T22:15:59Z",
+      "side": 1,
+      "message": "I don\u0027t see this implemented. Not sure it\u0027s necessary though.",
+      "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbcb1c97_e1deeb59",
+        "filename": "rtc_base/sslidentity.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-19T22:15:59Z",
+      "side": 1,
+      "message": "Can we remove GetChain from this CL? Or if not, add a TODO to remove it, mention that it\u0027s unimplemented, and that you should use GetPeerSSLCertChain instead?",
+      "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89dbb314_35c44188",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-19T22:15:59Z",
+      "side": 1,
+      "message": "This should be in a standalone test, named something like \"GetPeerCertChainWithOneCertificate\".",
+      "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
