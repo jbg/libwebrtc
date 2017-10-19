@@ -14,8 +14,9 @@
 #include <memory>
 #include <string>
 
-#include "pc/webrtcsession.h"
 #include "media/sctp/sctptransportinternal.h"
+#include "pc/test/mock_peerconnection.h"
+#include "pc/webrtcsession.h"
 #include "test/gmock.h"
 
 namespace webrtc {
@@ -26,16 +27,9 @@ class MockWebRtcSession : public webrtc::WebRtcSession {
   // methods don't use any override declarations, and we want to avoid
   // warnings from -Winconsistent-missing-override. See
   // http://crbug.com/428099.
-  explicit MockWebRtcSession(cricket::ChannelManager* channel_manager,
-                             const cricket::MediaConfig& media_config)
-      : WebRtcSession(nullptr /* Call */,
-            channel_manager,
-            media_config,
-            nullptr, // event_log
-            rtc::Thread::Current(),
-            rtc::Thread::Current(),
-            rtc::Thread::Current(),
-            nullptr,
+  explicit MockWebRtcSession(PeerConnection* pc)
+      : WebRtcSession(
+            pc,
             std::unique_ptr<cricket::TransportController>(
                 new cricket::TransportController(
                     rtc::Thread::Current(),
@@ -51,7 +45,7 @@ class MockWebRtcSession : public webrtc::WebRtcSession {
   MOCK_METHOD2(GetLocalTrackIdBySsrc, bool(uint32_t, std::string*));
   MOCK_METHOD2(GetRemoteTrackIdBySsrc, bool(uint32_t, std::string*));
   MOCK_METHOD0(GetCallStats, Call::Stats());
-  MOCK_METHOD1(GetStats,
+  MOCK_METHOD1(GetSessionStats,
                std::unique_ptr<SessionStats>(const ChannelNamePairs&));
   MOCK_METHOD2(GetLocalCertificate,
                bool(const std::string& transport_name,
