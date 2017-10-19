@@ -16,6 +16,24 @@
       "revId": "70ea7a0ffd2d1c45d4ab4c59530646eb81200cfe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2390cad1_1cf607c5",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-19T10:39:35Z",
+      "side": 1,
+      "message": "\u003e It seems strange that task_queue_posix.h isn\u0027t included here.\n\nAgree. Fixed now.",
+      "parentUuid": "81506659_57c1add7",
+      "revId": "70ea7a0ffd2d1c45d4ab4c59530646eb81200cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
