@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "04cf9c7f_cb789aae",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/DefaultAudioProcessingFactoryTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-19T07:44:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25f3e50c_6c6d2d39",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "7a56d160f7748f2c5cf9b3e094bb21ca7e90fdf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb5aabae_9299e0be",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/DefaultAudioProcessingFactoryTest.java",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e5aec5db_2ac1cb53",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/DefaultAudioProcessingFactoryTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-19T07:44:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5aabae_9299e0be",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 11
+      },
+      "revId": "7a56d160f7748f2c5cf9b3e094bb21ca7e90fdf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3e34d83_c7b8660e",
         "filename": "sdk/android/src/jni/pc/audio_jni.cc",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "7a56d160f7748f2c5cf9b3e094bb21ca7e90fdf9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63f7425b_fb0821aa",
+        "filename": "sdk/android/src/jni/pc/audio_jni.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-19T07:44:05Z",
+      "side": 1,
+      "message": "Done.\nI added defaultaudioprocessingfactory_jni.cc to the audio_jni build target, which means that DefaultAudioProcessingFactory.java will not function properly unless WebRTC is compiled with audio. This mirrors how PeerConnectionFactory.createVideoSource cannot access nativeCreateVideoTrack without video_jni.",
+      "parentUuid": "c3e34d83_c7b8660e",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "7a56d160f7748f2c5cf9b3e094bb21ca7e90fdf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

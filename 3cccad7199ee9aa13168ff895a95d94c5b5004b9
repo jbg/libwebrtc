@@ -22,6 +22,30 @@
       "revId": "3cccad7199ee9aa13168ff895a95d94c5b5004b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed870c97_15cf0995",
+        "filename": "sdk/android/api/org/webrtc/PostProcessingFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-19T07:44:05Z",
+      "side": 1,
+      "message": "It\u0027s an optional submodule. It mirrors the behavior of the C++ code: pass in nullptr, and no webrtc::PostProcessing module is used. We could, alternatively, have more constructors here. Is that preferable?\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_processing/include/audio_processing.h?dr\u0026l\u003d382",
+      "parentUuid": "6a3e8ef1_483cf91f",
+      "range": {
+        "startLine": 16,
+        "startChar": 88,
+        "endLine": 17,
+        "endChar": 12
+      },
+      "revId": "3cccad7199ee9aa13168ff895a95d94c5b5004b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
