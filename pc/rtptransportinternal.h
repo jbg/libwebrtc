@@ -12,6 +12,8 @@
 #define PC_RTPTRANSPORTINTERNAL_H_
 
 #include "api/ortc/rtptransportinterface.h"
+#include "p2p/base/icetransportinternal.h"
+#include "rtc_base/networkroute.h"
 #include "rtc_base/sigslot.h"
 
 namespace rtc {
@@ -41,6 +43,9 @@ class RtpTransportInternal : public RtpTransportInterface,
   virtual rtc::PacketTransportInternal* rtcp_packet_transport() const = 0;
   virtual void SetRtcpPacketTransport(rtc::PacketTransportInternal* rtcp) = 0;
 
+  virtual void SetIceRtpTransport(cricket::IceTransportInternal* rtp) = 0;
+  virtual void SetIceRtcpTransport(cricket::IceTransportInternal* rtcp) = 0;
+
   // Called whenever a transport's ready-to-send state changes. The argument
   // is true if all used transports are ready to send. This is more specific
   // than just "writable"; it means the last send didn't return ENOTCONN.
@@ -51,6 +56,9 @@ class RtpTransportInternal : public RtpTransportInterface,
   // The first argument is true for RTCP packets and false for RTP packets.
   sigslot::signal3<bool, rtc::CopyOnWriteBuffer*, const rtc::PacketTime&>
       SignalPacketReceived;
+
+  sigslot::signal2<cricket::IceTransportInternal*, rtc::NetworkRoute>
+      SignalNetworkRouteChanged;
 
   virtual bool IsWritable(bool rtcp) const = 0;
 

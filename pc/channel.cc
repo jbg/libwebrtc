@@ -402,6 +402,8 @@ void BaseChannel::ConnectToDtlsTransport(DtlsTransportInternal* transport) {
   transport->SignalSentPacket.connect(this, &BaseChannel::SignalSentPacket_n);
   transport->ice_transport()->SignalSelectedCandidatePairChanged.connect(
       this, &BaseChannel::OnSelectedCandidatePairChanged);
+  transport->ice_transport()->SignalNetworkRouteChanged.connect(
+      this, &BaseChannel::OnNetworkRouteChanged);
 }
 
 void BaseChannel::DisconnectFromDtlsTransport(
@@ -615,6 +617,29 @@ void BaseChannel::OnSelectedCandidatePairChanged(
 
     UpdateTransportOverhead();
   }
+  invoker_.AsyncInvoke<void>(
+      RTC_FROM_HERE, worker_thread_,
+      Bind(&MediaChannel::OnNetworkRouteChanged, media_channel_, transport_name,
+           network_route));
+}
+
+void BaseChannel::OnNetworkRouteChanged(
+    cricket::IceTransportInternal* ice_transport,
+    rtc::NetworkRoute network_route) {
+  RTC_DCHECK((rtp_dtls_transport_ &&
+              ice_transport == rtp_dtls_transport_->ice_transport()) ||
+             (rtcp_dtls_transport_ &&
+              ice_transport == rtcp_dtls_transport_->ice_transport()));
+  RTC_DCHECK(network_thread_->IsCurrent());
+  std::string transport_name = ice_transport->transport_name();
+
+  if (network_route.transport_overhead_per_packet) {
+    invoker_.AsyncInvoke<void>(
+        RTC_FROM_HERE, worker_thread_,
+        Bind(&MediaChannel::OnTransportOverheadChanged, media_channel_,
+             network_route.transport_overhead_per_packet));
+  }
+
   invoker_.AsyncInvoke<void>(
       RTC_FROM_HERE, worker_thread_,
       Bind(&MediaChannel::OnNetworkRouteChanged, media_channel_, transport_name,

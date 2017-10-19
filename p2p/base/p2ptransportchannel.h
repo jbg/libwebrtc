@@ -345,6 +345,8 @@ class P2PTransportChannel : public IceTransportInternal,
   // Sets the receiving state, signaling if necessary.
   void set_receiving(bool receiving);
 
+  int GetIceTransportOverhead();
+
   std::string transport_name_;
   int component_;
   PortAllocator* allocator_;

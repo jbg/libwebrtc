@@ -243,11 +243,18 @@ class BaseChannel
 
   void OnDtlsState(DtlsTransportInternal* transport, DtlsTransportState state);
 
+  // TODO(zhihuang): Remove this method (and related methods:
+  // UpdateTransportOverhead(), GetTransportOverhead()) once the BaseChannel
+  // doesn't need to handle the signals from the ICE transport directly.
   void OnSelectedCandidatePairChanged(
       IceTransportInternal* ice_transport,
       CandidatePairInterface* selected_candidate_pair,
       int last_sent_packet_id,
       bool ready_to_send);
+  // This method is not currently used and it would be called when the
+  // BaseChannel start handling the signal from RTP layer transport.
+  void OnNetworkRouteChanged(IceTransportInternal* ice_transport,
+                             rtc::NetworkRoute network_route);
 
   bool PacketIsRtcp(const rtc::PacketTransportInternal* transport,
                     const char* data,
