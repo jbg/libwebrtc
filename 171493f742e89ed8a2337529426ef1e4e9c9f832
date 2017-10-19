@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "196788fc_c4036c3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-19T02:49:11Z",
+      "side": 1,
+      "message": "nit: I\u0027ve always seen people spell it \"flaky\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "171493f742e89ed8a2337529426ef1e4e9c9f832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4073daba_2d48bf4d",
+        "filename": "pc/remoteaudiosource.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-19T02:49:11Z",
+      "side": 1,
+      "message": "I\u0027d say \"possibly\".",
+      "range": {
+        "startLine": 149,
+        "startChar": 10,
+        "endLine": 149,
+        "endChar": 16
+      },
+      "revId": "171493f742e89ed8a2337529426ef1e4e9c9f832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
