@@ -243,11 +243,13 @@ class BaseChannel
 
   void OnDtlsState(DtlsTransportInternal* transport, DtlsTransportState state);
 
-  void OnSelectedCandidatePairChanged(
-      IceTransportInternal* ice_transport,
-      CandidatePairInterface* selected_candidate_pair,
-      int last_sent_packet_id,
-      bool ready_to_send);
+  // void OnSelectedCandidatePairChanged(
+  //     IceTransportInternal* ice_transport,
+  //     CandidatePairInterface* selected_candidate_pair,
+  //     int last_sent_packet_id,
+  //     bool ready_to_send);
+  void OnNetworkRouteChanged(IceTransportInternal* ice_transport,
+                             rtc::NetworkRoute network_route);
 
   bool PacketIsRtcp(const rtc::PacketTransportInternal* transport,
                     const char* data,
@@ -363,7 +365,7 @@ class BaseChannel
   void SignalSentPacket_w(const rtc::SentPacket& sent_packet);
   bool IsReadyToSendMedia_n() const;
   void CacheRtpAbsSendTimeHeaderExtension_n(int rtp_abs_sendtime_extn_id);
-  int GetTransportOverheadPerPacket() const;
+  // int GetTransportOverheadPerPacket() const;
   void UpdateTransportOverhead();
   // Wraps the existing RtpTransport in an SrtpTransport.
   void EnableSrtpTransport_n();
@@ -410,6 +412,7 @@ class BaseChannel
   MediaContentDirection local_content_direction_ = MD_INACTIVE;
   MediaContentDirection remote_content_direction_ = MD_INACTIVE;
   CandidatePairInterface* selected_candidate_pair_;
+  rtc::NetworkRoute network_route_;
 };
 
 // VoiceChannel is a specialization that adds support for early media, DTMF,

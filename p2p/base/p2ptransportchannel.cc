@@ -1455,9 +1455,20 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
   } else {
     LOG_J(LS_INFO, this) << "No selected connection";
   }
-  SignalSelectedCandidatePairChanged(this, selected_connection_,
-                                     last_sent_packet_id_,
-                                     ReadyToSend(selected_connection_));
+
+  rtc::NetworkRoute network_route;
+  if (selected_connection_) {
+    int rtp_transport_overhead_per_packet = GetIceTransportOverhead();
+    network_route.connected = ReadyToSend(selected_connection_);
+    network_route.local_network_id =
+        selected_connection_->local_candidate().network_id();
+    network_route.remote_network_id =
+        selected_connection_->remote_candidate().network_id();
+    network_route.last_sent_packet_id = last_sent_packet_id_;
+    network_route.rtp_overhead_per_packet = rtp_transport_overhead_per_packet;
+    network_route.srtp_overhead_per_packet = 0;
+  }
+  SignalNetworkRouteChanged(this, network_route);
 }
 
 // Warning: UpdateState should eventually be called whenever a connection
@@ -2133,6 +2144,29 @@ int P2PTransportChannel::SampleRegatherAllNetworksInterval() {
   auto interval = config_.regather_all_networks_interval_range;
   RTC_DCHECK(interval);
   return rand_.Rand(interval->min(), interval->max());
+}
+
+int P2PTransportChannel::GetIceTransportOverhead() {
+  if (!selected_connection_)
+    return 0;
+
+  int transport_overhead_per_packet = 0;
+
+  constexpr int kIpv4Overhaed = 20;
+  constexpr int kIpv6Overhaed = 40;
+  transport_overhead_per_packet +=
+      selected_connection_->local_candidate().address().family() == AF_INET
+          ? kIpv4Overhaed
+          : kIpv6Overhaed;
+
+  constexpr int kUdpOverhaed = 8;
+  constexpr int kTcpOverhaed = 20;
+  transport_overhead_per_packet +=
+      selected_connection_->local_candidate().protocol() == TCP_PROTOCOL_NAME
+          ? kTcpOverhaed
+          : kUdpOverhaed;
+
+  return transport_overhead_per_packet;
 }
 
 }  // namespace cricket

@@ -22,14 +22,17 @@ struct NetworkRoute {
   uint16_t local_network_id;
   uint16_t remote_network_id;
   int last_sent_packet_id;  // Last packet id sent on the PREVIOUS route.
+  int rtp_overhead_per_packet;
+  int srtp_overhead_per_packet;
 
   NetworkRoute()
       : connected(false),
         local_network_id(0),
         remote_network_id(0),
-        last_sent_packet_id(-1) {}
+        last_sent_packet_id(-1),
+        rtp_overhead_per_packet(0),
+        srtp_overhead_per_packet(0) {}
 
-  // The route is connected if the local and remote network ids are provided.
   NetworkRoute(bool connected,
                uint16_t local_net_id,
                uint16_t remote_net_id,
@@ -37,7 +40,27 @@ struct NetworkRoute {
       : connected(connected),
         local_network_id(local_net_id),
         remote_network_id(remote_net_id),
-        last_sent_packet_id(last_packet_id) {}
+        last_sent_packet_id(last_packet_id),
+        rtp_overhead_per_packet(0),
+        srtp_overhead_per_packet(0) {}
+
+  // The route is connected if the local and remote network ids are provided.
+  NetworkRoute(bool connected,
+               uint16_t local_net_id,
+               uint16_t remote_net_id,
+               int last_packet_id,
+               int rtp_overhead,
+               int srtp_overhead)
+      : connected(connected),
+        local_network_id(local_net_id),
+        remote_network_id(remote_net_id),
+        last_sent_packet_id(last_packet_id),
+        rtp_overhead_per_packet(rtp_overhead),
+        srtp_overhead_per_packet(srtp_overhead) {}
+
+  int transport_overhead_per_packet() {
+    return rtp_overhead_per_packet + srtp_overhead_per_packet;
+  }
 
   // |last_sent_packet_id| does not affect the NetworkRoute comparison.
   bool operator==(const NetworkRoute& nr) const {
