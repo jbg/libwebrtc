@@ -70,6 +70,30 @@
       "revId": "3cccad7199ee9aa13168ff895a95d94c5b5004b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8a856de_62e51c74",
+        "filename": "sdk/android/api/org/webrtc/PostProcessingFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-10-19T12:46:37Z",
+      "side": 1,
+      "message": "Hm, I have removed this part of the comment. (I was going for the \"prefer empty objects to null\" practice but then I shouldn\u0027t have allowed the DefaultAudioProcessingFactory to take null in its constructor.)\n\nAt the moment, this means users can pass in a 0-returning factory without triggering any errors, but it is not part of the contract set by the comment: \"Dynamically allocates a webrtc::PostProcessing instance and returns a pointer to it\" does not leave room for the method to return 0.\n\nDo you prefer this to be realized in code too? With a check (in DefaultAPFactory.createNative()) along the lines of this:\n{\n  long ppPtr \u003d 0;\n  if (ppfactory !\u003d null) {\n    ppPtr \u003d ppfactory.createNative();\n    if (ppPtr \u003d\u003d 0) throw new NullPointerException();\n  }\n  // use ppPtr to create a native webrtc::AudioProcessing.\n}",
+      "parentUuid": "35065e8d_c50b385a",
+      "range": {
+        "startLine": 16,
+        "startChar": 88,
+        "endLine": 17,
+        "endChar": 12
+      },
+      "revId": "3cccad7199ee9aa13168ff895a95d94c5b5004b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
