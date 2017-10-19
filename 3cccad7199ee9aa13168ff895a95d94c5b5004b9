@@ -46,6 +46,30 @@
       "revId": "3cccad7199ee9aa13168ff895a95d94c5b5004b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35065e8d_c50b385a",
+        "filename": "sdk/android/api/org/webrtc/PostProcessingFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-10-19T10:35:50Z",
+      "side": 1,
+      "message": "But can\u0027t the client simply pass null as the PostProcessingFactory to DefaultAudioProcessingFactory?",
+      "parentUuid": "ed870c97_15cf0995",
+      "range": {
+        "startLine": 16,
+        "startChar": 88,
+        "endLine": 17,
+        "endChar": 12
+      },
+      "revId": "3cccad7199ee9aa13168ff895a95d94c5b5004b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
