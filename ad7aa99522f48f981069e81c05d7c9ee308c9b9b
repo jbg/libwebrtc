@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30227ae7_2cd89852",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-19T12:27:10Z",
+      "side": 1,
+      "message": "I actually prefer to be explicit.",
+      "parentUuid": "8e6b0d2c_8605b211",
+      "range": {
+        "startLine": 1836,
+        "startChar": 23,
+        "endLine": 1836,
+        "endChar": 32
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6222290f_0d5a90e0",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2017-10-13T10:25:39Z",
       "side": 1,
       "message": "We want to replace SequenceNumberUnwrapper with SeqNumUnwrapper, so please use that one instead.",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7b9be7d_50a442b6",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-19T12:27:10Z",
+      "side": 1,
+      "message": "In that case, should it be moved somewhere else? Most parts of the code can\u0027t include things in video_coding by default.",
+      "parentUuid": "6222290f_0d5a90e0",
       "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -93,6 +135,24 @@
       "writtenOn": "2017-10-13T10:25:39Z",
       "side": 1,
       "message": "Maybe use a smaller gap like 50 or 100?",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7b2a82b_885a4ae1",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-19T12:27:10Z",
+      "side": 1,
+      "message": "The intention is to catch jumps that are not caused by packet loss. It is not entirely unreasonable to lose 50-100 packets.",
+      "parentUuid": "e1285b0f_7210b163",
       "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
