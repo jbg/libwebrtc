@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9d378ea_5343dbba",
+        "filename": "pc/remoteaudiosource.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-20T06:43:55Z",
+      "side": 1,
+      "message": "Despite your fix to thread.cc, I don\u0027t think it\u0027s clear which thread the destructor will be called on (assuming we allow arbitrary threads to handle scoped_refptrs to this object). But I think one could argue that accessing audio_observers_ and sinks_ below should be safe even if it happens that it is some other thread which drops the last reference and triggers destruction.\n\nBut we\u0027ll get back to that if we see any failures of this DCHECK.",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 12
+      },
+      "revId": "3b80aace615be848a6e9dd47f60ab449b711f16e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
