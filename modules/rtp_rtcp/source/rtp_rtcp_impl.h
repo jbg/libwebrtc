@@ -161,8 +161,7 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   int32_t RemoveMixedCNAME(uint32_t ssrc) override;
 
   // Get RoundTripTime.
-  int32_t RTT(uint32_t remote_ssrc,
-              int64_t* rtt,
+  int32_t RTT(int64_t* rtt,
               int64_t* avg_rtt,
               int64_t* min_rtt,
               int64_t* max_rtt) const override;

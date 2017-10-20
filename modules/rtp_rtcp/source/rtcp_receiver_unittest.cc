@@ -210,8 +210,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesRTT) {
   const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
   int64_t rtt_ms = 0;
-  EXPECT_EQ(
-      -1, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
+  EXPECT_EQ(-1, rtcp_receiver_.RTT(&rtt_ms, nullptr, nullptr, nullptr));
 
   uint32_t sent_ntp = CompactNtp(system_clock_.CurrentNtpTime());
   system_clock_.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
@@ -228,8 +227,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesRTT) {
   EXPECT_CALL(bandwidth_observer_, OnReceivedRtcpReceiverReport(_, _, _));
   InjectRtcpPacket(sr);
 
-  EXPECT_EQ(
-      0, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
+  EXPECT_EQ(0, rtcp_receiver_.RTT(&rtt_ms, nullptr, nullptr, nullptr));
   EXPECT_NEAR(kRttMs, rtt_ms, 1);
 }
 
@@ -240,8 +238,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
   const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
   int64_t rtt_ms = 0;
-  EXPECT_EQ(
-      -1, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
+  EXPECT_EQ(-1, rtcp_receiver_.RTT(&rtt_ms, nullptr, nullptr, nullptr));
 
   uint32_t sent_ntp = CompactNtp(system_clock_.CurrentNtpTime());
   system_clock_.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
@@ -259,8 +256,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
               OnReceivedRtcpReceiverReport(SizeIs(1), _, _));
   InjectRtcpPacket(sr);
 
-  EXPECT_EQ(
-      0, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
+  EXPECT_EQ(0, rtcp_receiver_.RTT(&rtt_ms, nullptr, nullptr, nullptr));
   EXPECT_EQ(1, rtt_ms);
 }
 
@@ -488,8 +484,7 @@ TEST_F(RtcpReceiverTest, GetRtt) {
   const uint32_t kSentCompactNtp = 0x1234;
   const uint32_t kDelayCompactNtp = 0x222;
   // No report block received.
-  EXPECT_EQ(
-      -1, rtcp_receiver_.RTT(kSenderSsrc, nullptr, nullptr, nullptr, nullptr));
+  EXPECT_EQ(-1, rtcp_receiver_.RTT(nullptr, nullptr, nullptr, nullptr));
 
   rtcp::ReportBlock rb;
   rb.SetMediaSsrc(kReceiverMainSsrc);
@@ -506,8 +501,7 @@ TEST_F(RtcpReceiverTest, GetRtt) {
   InjectRtcpPacket(rr);
 
   EXPECT_EQ(now, rtcp_receiver_.LastReceivedReportBlockMs());
-  EXPECT_EQ(
-      0, rtcp_receiver_.RTT(kSenderSsrc, nullptr, nullptr, nullptr, nullptr));
+  EXPECT_EQ(0, rtcp_receiver_.RTT(nullptr, nullptr, nullptr, nullptr));
 }
 
 // Ij packets are ignored.

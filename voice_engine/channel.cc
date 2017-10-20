@@ -428,8 +428,7 @@ int32_t Channel::OnReceivedPayloadData(const uint8_t* payloadData,
   }
 
   int64_t round_trip_time = 0;
-  _rtpRtcpModule->RTT(rtp_receiver_->SSRC(), &round_trip_time, NULL, NULL,
-                      NULL);
+  _rtpRtcpModule->RTT(&round_trip_time, nullptr, nullptr, nullptr);
 
   std::vector<uint16_t> nack_list = audio_coding_->GetNackList(round_trip_time);
   if (!nack_list.empty()) {
@@ -1005,7 +1004,7 @@ bool Channel::IsPacketRetransmitted(const RTPHeader& header,
     return false;
   // Check if this is a retransmission.
   int64_t min_rtt = 0;
-  _rtpRtcpModule->RTT(rtp_receiver_->SSRC(), NULL, NULL, &min_rtt, NULL);
+  _rtpRtcpModule->RTT(nullptr, nullptr, &min_rtt, nullptr);
   return !in_order && statistician->IsRetransmitOfOldPacket(header, min_rtt);
 }
 
@@ -1620,8 +1619,7 @@ int64_t Channel::GetRTT(bool allow_associate_channel) const {
   int64_t avg_rtt = 0;
   int64_t max_rtt = 0;
   int64_t min_rtt = 0;
-  if (_rtpRtcpModule->RTT(remoteSSRC, &rtt, &avg_rtt, &min_rtt, &max_rtt) !=
-      0) {
+  if (_rtpRtcpModule->RTT(&rtt, &avg_rtt, &min_rtt, &max_rtt) != 0) {
     return 0;
   }
   return rtt;

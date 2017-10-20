@@ -285,8 +285,7 @@ class RtpRtcp : public Module {
 
   // Returns current RTT (round-trip time) estimate.
   // Returns -1 on failure else 0.
-  virtual int32_t RTT(uint32_t remote_ssrc,
-                      int64_t* rtt,
+  virtual int32_t RTT(int64_t* rtt,
                       int64_t* avg_rtt,
                       int64_t* min_rtt,
                       int64_t* max_rtt) const = 0;

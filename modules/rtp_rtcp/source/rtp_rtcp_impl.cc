@@ -181,19 +181,12 @@ void ModuleRtpRtcpImpl::Process() {
     // Process RTT if we have received a report block and we haven't
     // processed RTT for at least |kRtpRtcpRttProcessTimeMs| milliseconds.
     if (rtcp_receiver_.LastReceivedReportBlockMs() > last_rtt_process_time_ &&
-        process_rtt) {
-      std::vector<RTCPReportBlock> receive_blocks;
-      rtcp_receiver_.StatisticsReceived(&receive_blocks);
-      int64_t max_rtt = 0;
-      for (std::vector<RTCPReportBlock>::iterator it = receive_blocks.begin();
-           it != receive_blocks.end(); ++it) {
-        int64_t rtt = 0;
-        rtcp_receiver_.RTT(it->sender_ssrc, &rtt, NULL, NULL, NULL);
-        max_rtt = (rtt > max_rtt) ? rtt : max_rtt;
-      }
+        process_rtt && rtt_stats_) {
+      int64_t last_rtt_ms = 0;
+      rtcp_receiver_.RTT(&last_rtt_ms, nullptr, nullptr, nullptr);
       // Report the rtt.
-      if (rtt_stats_ && max_rtt != 0)
-        rtt_stats_->OnRttUpdate(max_rtt);
+      if (last_rtt_ms != 0)
+        rtt_stats_->OnRttUpdate(last_rtt_ms);
     }
 
     // Verify receiver reports are delivered and the reported sequence number
@@ -434,8 +427,7 @@ bool ModuleRtpRtcpImpl::SendOutgoingData(
   if (expected_retransmission_time_ms == 0) {
     // No rtt available (|kRtpRtcpRttProcessTimeMs| not yet passed?), so try to
     // poll avg_rtt_ms directly from rtcp receiver.
-    if (rtcp_receiver_.RTT(rtcp_receiver_.RemoteSSRC(), nullptr,
-                           &expected_retransmission_time_ms, nullptr,
+    if (rtcp_receiver_.RTT(nullptr, &expected_retransmission_time_ms, nullptr,
                            nullptr) == -1) {
       expected_retransmission_time_ms = kDefaultExpectedRetransmissionTimeMs;
     }
@@ -519,12 +511,11 @@ int32_t ModuleRtpRtcpImpl::RemoteNTP(
 }
 
 // Get RoundTripTime.
-int32_t ModuleRtpRtcpImpl::RTT(const uint32_t remote_ssrc,
-                               int64_t* rtt,
+int32_t ModuleRtpRtcpImpl::RTT(int64_t* rtt,
                                int64_t* avg_rtt,
                                int64_t* min_rtt,
                                int64_t* max_rtt) const {
-  int32_t ret = rtcp_receiver_.RTT(remote_ssrc, rtt, avg_rtt, min_rtt, max_rtt);
+  int32_t ret = rtcp_receiver_.RTT(rtt, avg_rtt, min_rtt, max_rtt);
   if (rtt && *rtt == 0) {
     // Try to get RTT from RtcpRttStats class.
     *rtt = rtt_ms();
@@ -731,7 +722,7 @@ bool ModuleRtpRtcpImpl::TimeToSendFullNackList(int64_t now) const {
   // Use RTT from RtcpRttStats class if provided.
   int64_t rtt = rtt_ms();
   if (rtt == 0) {
-    rtcp_receiver_.RTT(rtcp_receiver_.RemoteSSRC(), NULL, &rtt, NULL, NULL);
+    rtcp_receiver_.RTT(nullptr, &rtt, nullptr, nullptr);
   }
 
   const int64_t kStartUpRttMs = 100;
@@ -845,9 +836,9 @@ void ModuleRtpRtcpImpl::OnReceivedNack(
   }
   // Use RTT from RtcpRttStats class if provided.
   int64_t rtt = rtt_ms();
-  if (rtt == 0) {
-    rtcp_receiver_.RTT(rtcp_receiver_.RemoteSSRC(), NULL, &rtt, NULL, NULL);
-  }
+  if (rtt == 0)
+    rtcp_receiver_.RTT(nullptr, &rtt, nullptr, nullptr);
+
   rtp_sender_->OnReceivedNack(nack_sequence_numbers, rtt);
 }
 
