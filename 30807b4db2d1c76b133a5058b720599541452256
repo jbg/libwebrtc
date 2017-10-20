@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d12072a7_af7dfe4c",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-20T12:57:17Z",
+      "side": 1,
+      "message": "As far as I understand, C++11 guarantees that the initialization is thread safe,\nif several threads race to call this function first, only the winner of the race will execute the initialization, and the others will wait until initialization is complete.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 38
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
