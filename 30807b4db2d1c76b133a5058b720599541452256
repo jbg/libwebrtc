@@ -22,6 +22,30 @@
       "revId": "30807b4db2d1c76b133a5058b720599541452256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97be010d_61c5d830",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-10-20T17:33:11Z",
+      "side": 1,
+      "message": "Yes, this is true. And you can declare this variable as \"static const\".",
+      "parentUuid": "d12072a7_af7dfe4c",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 38
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
