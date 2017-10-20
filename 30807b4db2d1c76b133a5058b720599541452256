@@ -46,6 +46,29 @@
       "revId": "30807b4db2d1c76b133a5058b720599541452256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac6ee08d_bf5564be",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-20T21:09:55Z",
+      "side": 1,
+      "message": "Since the initialization in GetTlsIndex() is thread safe, each call is going to have to pay for the use of a mutex or similar. So maybe it\u0027s better to call it once in the constructor, and store the result in a const member variable?",
+      "range": {
+        "startLine": 189,
+        "startChar": 14,
+        "endLine": 189,
+        "endChar": 27
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
