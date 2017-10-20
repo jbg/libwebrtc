@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d6ee59c7_4eb8b291",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-20T17:09:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "196788fc_c4036c3f",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "171493f742e89ed8a2337529426ef1e4e9c9f832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4073daba_2d48bf4d",
         "filename": "pc/remoteaudiosource.cc",
         "patchSetId": 3

@@ -22,6 +22,30 @@
       "revId": "3b80aace615be848a6e9dd47f60ab449b711f16e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23e9d3fb_ff5cc26f",
+        "filename": "pc/remoteaudiosource.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-20T17:09:05Z",
+      "side": 1,
+      "message": "From our investigation it looked like the destructor wasn\u0027t actually running on a different thread; rather, it was being run in the main thread after it had cleared its status as the current thread. So the thread manager had the current thread \u003d\u003d null and the DCHECK failed.",
+      "parentUuid": "d9d378ea_5343dbba",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 12
+      },
+      "revId": "3b80aace615be848a6e9dd47f60ab449b711f16e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
