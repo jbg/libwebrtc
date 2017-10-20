@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "299a41e9_5f0eaafa",
+        "filename": "test/fuzzers/ulpfec_receiver_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-20T13:45:45Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "5069eff9992b10115fc477976a1dac26bfe7552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daaeaced_68604fec",
+        "filename": "test/fuzzers/ulpfec_receiver_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-20T13:45:45Z",
+      "side": 1,
+      "message": "Optional: You may want to use ByteReader::ReadLittleEndian():\n\n uint32_t ulpfec_ssrc \u003d ByteReader\u003cuint32_t\u003e::ReadLittleEndian(data);",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 36
+      },
+      "revId": "5069eff9992b10115fc477976a1dac26bfe7552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bed39b6_b805efeb",
+        "filename": "test/fuzzers/ulpfec_receiver_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-20T13:45:45Z",
+      "side": 1,
+      "message": "Please, add a comment that you are overwriting the sequence number and SSRC fields in the RTP header.",
+      "range": {
+        "startLine": 57,
+        "startChar": 6,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "5069eff9992b10115fc477976a1dac26bfe7552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27ef2769_44add9db",
+        "filename": "test/fuzzers/ulpfec_receiver_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-20T13:45:45Z",
+      "side": 1,
+      "message": "Make it a unique_ptr instead.",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 18
+      },
+      "revId": "5069eff9992b10115fc477976a1dac26bfe7552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
