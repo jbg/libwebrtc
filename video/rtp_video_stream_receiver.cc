@@ -525,7 +525,7 @@ bool RtpVideoStreamReceiver::DeliverRtcp(const uint8_t* rtcp_packet,
   rtp_rtcp_->IncomingRtcpPacket(rtcp_packet, rtcp_packet_length);
 
   int64_t rtt = 0;
-  rtp_rtcp_->RTT(rtp_receiver_->SSRC(), &rtt, nullptr, nullptr, nullptr);
+  rtp_rtcp_->RTT(&rtt, nullptr, nullptr, nullptr);
   if (rtt == 0) {
     // Waiting for valid rtt.
     return true;
@@ -609,7 +609,7 @@ bool RtpVideoStreamReceiver::IsPacketRetransmitted(const RTPHeader& header,
     return false;
   // Check if this is a retransmission.
   int64_t min_rtt = 0;
-  rtp_rtcp_->RTT(config_.rtp.remote_ssrc, nullptr, nullptr, &min_rtt, nullptr);
+  rtp_rtcp_->RTT(nullptr, nullptr, &min_rtt, nullptr);
   return !in_order &&
       statistician->IsRetransmitOfOldPacket(header, min_rtt);
 }

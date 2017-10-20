@@ -86,12 +86,6 @@ struct RTCPReceiver::TmmbrInformation {
 
 struct RTCPReceiver::ReportBlockWithRtt {
   RTCPReportBlock report_block;
-
-  int64_t last_rtt_ms = 0;
-  int64_t min_rtt_ms = 0;
-  int64_t max_rtt_ms = 0;
-  int64_t sum_rtt_ms = 0;
-  size_t num_rtts = 0;
 };
 
 struct RTCPReceiver::LastFirStatus {
@@ -170,37 +164,26 @@ void RTCPReceiver::SetSsrcs(uint32_t main_ssrc,
   registered_ssrcs_ = registered_ssrcs;
 }
 
-int32_t RTCPReceiver::RTT(uint32_t remote_ssrc,
-                          int64_t* last_rtt_ms,
+int32_t RTCPReceiver::RTT(int64_t* last_rtt_ms,
                           int64_t* avg_rtt_ms,
                           int64_t* min_rtt_ms,
                           int64_t* max_rtt_ms) const {
   rtc::CritScope lock(&rtcp_receiver_lock_);
 
-  auto it = received_report_blocks_.find(main_ssrc_);
-  if (it == received_report_blocks_.end())
-    return -1;
-
-  auto it_info = it->second.find(remote_ssrc);
-  if (it_info == it->second.end())
-    return -1;
-
-  const ReportBlockWithRtt* report_block = &it_info->second;
-
-  if (report_block->num_rtts == 0)
+  if (num_rtts_ == 0)
     return -1;
 
   if (last_rtt_ms)
-    *last_rtt_ms = report_block->last_rtt_ms;
+    *last_rtt_ms = last_rtt_ms_;
 
   if (avg_rtt_ms)
-    *avg_rtt_ms = report_block->sum_rtt_ms / report_block->num_rtts;
+    *avg_rtt_ms = sum_rtt_ms_ / num_rtts_;
 
   if (min_rtt_ms)
-    *min_rtt_ms = report_block->min_rtt_ms;
+    *min_rtt_ms = min_rtt_ms_;
 
   if (max_rtt_ms)
-    *max_rtt_ms = report_block->max_rtt_ms;
+    *max_rtt_ms = max_rtt_ms_;
 
   return 0;
 }
@@ -490,16 +473,15 @@ void RTCPReceiver::HandleReportBlock(const ReportBlock& report_block,
     uint32_t rtt_ntp = receive_time_ntp - delay_ntp - send_time_ntp;
     // Convert to 1/1000 seconds (milliseconds).
     rtt_ms = CompactNtpRttToMs(rtt_ntp);
-    if (rtt_ms > report_block_info->max_rtt_ms)
-      report_block_info->max_rtt_ms = rtt_ms;
+    if (rtt_ms > max_rtt_ms_)
+      max_rtt_ms_ = rtt_ms;
 
-    if (report_block_info->num_rtts == 0 ||
-        rtt_ms < report_block_info->min_rtt_ms)
-      report_block_info->min_rtt_ms = rtt_ms;
+    if (num_rtts_ == 0 || rtt_ms < min_rtt_ms_)
+      min_rtt_ms_ = rtt_ms;
 
-    report_block_info->last_rtt_ms = rtt_ms;
-    report_block_info->sum_rtt_ms += rtt_ms;
-    ++report_block_info->num_rtts;
+    last_rtt_ms_ = rtt_ms;
+    sum_rtt_ms_ += rtt_ms;
+    ++num_rtts_;
   }
 
   TRACE_COUNTER_ID1(TRACE_DISABLED_BY_DEFAULT("webrtc_rtp"), "RR_RTT",

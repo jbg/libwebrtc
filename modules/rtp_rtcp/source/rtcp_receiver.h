@@ -80,8 +80,7 @@ class RTCPReceiver {
   bool LastReceivedXrReferenceTimeInfo(rtcp::ReceiveTimeInfo* info) const;
 
   // Get rtt.
-  int32_t RTT(uint32_t remote_ssrc,
-              int64_t* last_rtt_ms,
+  int32_t RTT(int64_t* last_rtt_ms,
               int64_t* avg_rtt_ms,
               int64_t* min_rtt_ms,
               int64_t* max_rtt_ms) const;
@@ -239,6 +238,12 @@ class RTCPReceiver {
   std::map<uint32_t, TmmbrInformation> tmmbr_infos_
       RTC_GUARDED_BY(rtcp_receiver_lock_);
 
+
+  int64_t last_rtt_ms_  RTC_GUARDED_BY(rtcp_receiver_lock_)= 0;
+  int64_t min_rtt_ms_  RTC_GUARDED_BY(rtcp_receiver_lock_)= 0;
+  int64_t max_rtt_ms_  RTC_GUARDED_BY(rtcp_receiver_lock_)= 0;
+  int64_t sum_rtt_ms_  RTC_GUARDED_BY(rtcp_receiver_lock_)= 0;
+  size_t num_rtts_ RTC_GUARDED_BY(rtcp_receiver_lock_) = 0;
   ReportBlockMap received_report_blocks_ RTC_GUARDED_BY(rtcp_receiver_lock_);
   std::map<uint32_t, LastFirStatus> last_fir_
       RTC_GUARDED_BY(rtcp_receiver_lock_);
