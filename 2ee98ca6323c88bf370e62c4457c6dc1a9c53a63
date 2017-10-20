@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "f0ba3239_035436a6",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "This means the DtlsTransport has local certificates. I think we might still need this because we can set the DtlsTransport and call MaybeSetupDtlsSrtp() before the certificate is ready.",
+      "parentUuid": "40545178_deffb24f",
+      "range": {
+        "startLine": 81,
+        "startChar": 24,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "647e29ee_021253e2",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 4

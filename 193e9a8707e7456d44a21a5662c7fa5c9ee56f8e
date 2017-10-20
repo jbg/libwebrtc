@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "35857270_e6f5d5c7",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Right, I missed that.",
+      "parentUuid": "c06aad48_b9cfa761",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a489edb9_164ecc63",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18f1f126_3266a030",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Yep. Done.",
+      "parentUuid": "a489edb9_164ecc63",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "09c5a470_0e390b34",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Yes, that\u0027s allowed. https://google.github.io/styleguide/cppguide.html#Variable_Comments",
+      "parentUuid": "79699bdd_46c2a208",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a563ae4d_f8832a19",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2017-10-20T01:09:43Z",
       "side": 1,
       "message": "This wouldn\u0027t be necessary if SrtpTransport did it automatically, inside its SetSendEncryptedHeaderExtensionIds. Remind me of the reason why we don\u0027t do that? Is it because, in the case of setting SDP that contains both new header extensions and new keys, this would result in extra libsrtp API calls? If so, it would probably be better to combine the two methods (for setting keys and header extensions IDs). What do you think?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c63d8bb0_d49c31be",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "SetSend/RecvEncryptedHeader just caches the new value and doesn\u0027t update the SRTP session until SetRtp/RtcpParams is called.\n\nFor SDES, when setting the header extension IDs, the crypto params may not be available at that moment and the IDs need to be cached somewhere. \n\nAre you suggesting that when setting the header extensions IDs, set the new IDs and RTP/RTCP params at the same time? Then we need to know the new negotiated crypto params before calling this method, correct?",
+      "parentUuid": "a563ae4d_f8832a19",
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "c2038ed5_c60d9180",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a96c075_1266a29f",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a72e58d_031d2bbf",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 6
@@ -101,6 +191,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "095c4e21_f0df08a6",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "OK. I\u0027ll cache the writable state of DtlsSrtpTransport and only fire the SignalWritableState(false) when the writable state changes from writable to not-writable. Does it make sense?",
+      "parentUuid": "9a72e58d_031d2bbf",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "dd4a2f1d_ff2346fb",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Yeah, I agree.",
+      "parentUuid": "d6af8405_1d5c9e7e",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26266d7a_64074a92",
         "filename": "pc/dtlssrtptransport_unittest.cc",
         "patchSetId": 6
@@ -135,6 +261,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01d9d34b_b762361d",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "It seems that the ProtectRtp/Rtcp would changed the data in the buffer so I made an extra copy.",
+      "parentUuid": "26266d7a_64074a92",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +305,30 @@
     },
     {
       "key": {
+        "uuid": "c2313670_d2d2a62e",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "OK, let me make it less confusing.",
+      "parentUuid": "22918a31_255750ed",
+      "range": {
+        "startLine": 268,
+        "startChar": 1,
+        "endLine": 272,
+        "endChar": 49
+      },
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "301724ee_60889671",
         "filename": "pc/dtlssrtptransport_unittest.cc",
         "patchSetId": 6
@@ -175,6 +343,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "479dc75d_45312c75",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "301724ee_60889671",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -195,6 +381,24 @@
     },
     {
       "key": {
+        "uuid": "6a487d62_36b029b1",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Because the MakeDtlsSrtpTransports helper doesn\u0027t set the DTLS transports. The idea was to set the DTLS transports in each test case but that seems to be confusing. I\u0027ll change it.",
+      "parentUuid": "b3f12332_ee2b885e",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40b5ed0_0c5e567d",
         "filename": "pc/dtlssrtptransport_unittest.cc",
         "patchSetId": 6
@@ -209,6 +413,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83105580_343547e9",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b5ed0_0c5e567d",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -229,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "9a187d9d_da7d7484",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "I\u0027ll move these to the helper function.",
+      "parentUuid": "17e51a6f_d9445fbb",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36a5c655_28106e8a",
         "filename": "pc/dtlssrtptransport_unittest.cc",
         "patchSetId": 6
@@ -240,6 +480,24 @@
       "writtenOn": "2017-10-20T01:09:43Z",
       "side": 1,
       "message": "I\u0027m assuming the values of 1 and 4 come from kPcmuFrameWithExtensions? If so, they should be in their own constants (or one constant, for the array of extension IDs).",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c5d58ac_8cf31beb",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "This is how we used the header extension id before. Do you want me to make it a constant or something like that?",
+      "parentUuid": "36a5c655_28106e8a",
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -263,6 +521,24 @@
     },
     {
       "key": {
+        "uuid": "794ff3a7_c1ed03f1",
+        "filename": "pc/rtptransportinternaladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c5442d_7b185d1f",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab95776e_99d89092",
         "filename": "pc/rtptransportinternaladapter.h",
         "patchSetId": 6
@@ -277,6 +553,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5015b325_db70b9fc",
+        "filename": "pc/rtptransportinternaladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-20T23:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab95776e_99d89092",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
