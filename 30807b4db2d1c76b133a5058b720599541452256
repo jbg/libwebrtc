@@ -93,6 +93,30 @@
       "revId": "30807b4db2d1c76b133a5058b720599541452256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bed1663_db39311e",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-20T21:28:33Z",
+      "side": 1,
+      "message": "That shouldn\u0027t be a problem—it\u0027s a constant whose value is the same everywhere in the process, right? The member variables are just to give each object its own copy, so that we can read it without mutexes or atomics.",
+      "parentUuid": "c37a4aae_f05b2e33",
+      "range": {
+        "startLine": 189,
+        "startChar": 14,
+        "endLine": 189,
+        "endChar": 27
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
