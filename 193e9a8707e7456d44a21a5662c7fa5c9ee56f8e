@@ -1,0 +1,282 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c06aad48_b9cfa761",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "This isn\u0027t necessarily true... A provisional answer enables RTCP mux but doesn\u0027t remove the RTCP transport yet, correct?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a489edb9_164ecc63",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "Would \"IsActive\" be a more reliable thing to check here?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79699bdd_46c2a208",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "nit: Does our style guide allow:\n\nSetDtlsTransport(/*rtcp\u003d*/true, rtcp_dtls_transport)?\n\nI think that would be more clear here.",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a563ae4d_f8832a19",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "This wouldn\u0027t be necessary if SrtpTransport did it automatically, inside its SetSendEncryptedHeaderExtensionIds. Remind me of the reason why we don\u0027t do that? Is it because, in the case of setting SDP that contains both new header extensions and new keys, this would result in extra libsrtp API calls? If so, it would probably be better to combine the two methods (for setting keys and header extensions IDs). What do you think?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a96c075_1266a29f",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "Can you add a comment saying \"This would only be possible if using BUNDLE but not rtcp-mux, which isn\u0027t allowed according to the BUNDLE spec.\"\n\nI always forget why this check exists until I think about it.",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a72e58d_031d2bbf",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "This could result in multiple SignalWritableState(false)s in a row. Will this cause any issues? May want to at least document in the header that defines the signal that this may happen. Or fix it by doing what BaseChannel currently does, and cache the state.",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6af8405_1d5c9e7e",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "Just a thought: we probably will want to do the same thing to test SrtpTransport itself. So, at some point, it would probably make sense to move this to a \"test utils\" file.",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26266d7a_64074a92",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "nit: Are two variables needed, if they\u0027re \"copy-on-write\" and contain the same data?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22918a31_255750ed",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "I\u0027m confused about this test; it\u0027s setting the same transports it already has, and setting the same mux policy it already had. My intent was for the test to set *different* underlying transports.\n\nThe real world example is the case where the \"video\" channel starts using the \"audio\" transport, which is already writable, because the DTLS handshake finished before the SDP answer (that finishes BUNDLE negotiation) was received.",
+      "range": {
+        "startLine": 268,
+        "startChar": 1,
+        "endLine": 272,
+        "endChar": 49
+      },
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "301724ee_60889671",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "This should pass in both RTP and RTCP transports. The point of the test is \"if you *have* an RTCP transport, but RTCP muxing is enabled (the pr-answer case), you can set up DTLS-SRTP with just the RTP transport\u0027s handshake finishes\".",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f12332_ee2b885e",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "Why is calling SetDtlsTransports needed here?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40b5ed0_0c5e567d",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "Ideally there should be some verification in between these two points, that packets *can\u0027t* be sent/received yet. Just checking IsActive is probably enough.",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e51a6f_d9445fbb",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "Why are these SetDtlsTransports calls needed?",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36a5c655_28106e8a",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "I\u0027m assuming the values of 1 and 4 come from kPcmuFrameWithExtensions? If so, they should be in their own constants (or one constant, for the array of extension IDs).",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c5442d_7b185d1f",
+        "filename": "pc/rtptransportinternaladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "\"implementing\"",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab95776e_99d89092",
+        "filename": "pc/rtptransportinternaladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-20T01:09:43Z",
+      "side": 1,
+      "message": "nit: \"Owned\"",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
