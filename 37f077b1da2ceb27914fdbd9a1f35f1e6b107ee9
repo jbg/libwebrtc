@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8710c44_41170185",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2017-10-20T13:37:38Z",
+      "side": 1,
+      "message": "Duplicated code.\nSuggestion: use a variable and put 5 or 2 in it depending on SaturatingEchoPath(), then calculate usable_linear_estimate once.",
+      "revId": "37f077b1da2ceb27914fdbd9a1f35f1e6b107ee9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
