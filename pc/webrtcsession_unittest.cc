@@ -2772,25 +2772,6 @@ TEST_F(WebRtcSessionTest, TestCombinedAudioVideoBweConstraint) {
   EXPECT_EQ(rtc::Optional<bool>(true), audio_options.combined_audio_video_bwe);
 }
 
-#ifdef HAVE_QUIC
-TEST_P(WebRtcSessionTest, TestNegotiateQuic) {
-  configuration_.enable_quic = true;
-  InitWithDtls(GetParam());
-  EXPECT_TRUE(session_->data_channel_type() == cricket::DCT_QUIC);
-  SessionDescriptionInterface* offer = CreateOffer();
-  ASSERT_TRUE(offer);
-  ASSERT_TRUE(offer->description());
-  SetLocalDescriptionWithoutError(offer);
-  cricket::MediaSessionOptions options;
-  GetOptionsForAnswer(&options);
-  SessionDescriptionInterface* answer =
-      CreateRemoteAnswer(offer, options, cricket::SEC_DISABLED);
-  ASSERT_TRUE(answer);
-  ASSERT_TRUE(answer->description());
-  SetRemoteDescriptionWithoutError(answer);
-}
-#endif  // HAVE_QUIC
-
 // Tests that RTX codec is removed from the answer when it isn't supported
 // by local side.
 TEST_F(WebRtcSessionTest, TestRtxRemovedByCreateAnswer) {
