@@ -15,6 +15,7 @@
 #include <string>
 #include <utility>
 
+#include "p2p/base/icetransportinternal.h"
 #include "pc/rtptransportinternal.h"
 #include "pc/srtpfilter.h"
 #include "pc/srtpsession.h"
@@ -56,6 +57,14 @@ class SrtpTransport : public RtpTransportInternal {
 
   PacketTransportInterface* GetRtcpPacketTransport() const override {
     return rtp_transport_->GetRtcpPacketTransport();
+  }
+
+  void ConnectRtpIceTransport(cricket::IceTransportInternal* rtp) override {
+    rtp_transport_->ConnectRtpIceTransport(rtp);
+  }
+
+  void ConnectRtcpIceTransport(cricket::IceTransportInternal* rtcp) override {
+    rtp_transport_->ConnectRtcpIceTransport(rtcp);
   }
 
   bool SendRtpPacket(rtc::CopyOnWriteBuffer* packet,
@@ -159,8 +168,9 @@ class SrtpTransport : public RtpTransportInternal {
   void OnPacketReceived(bool rtcp,
                         rtc::CopyOnWriteBuffer* packet,
                         const rtc::PacketTime& packet_time);
-
   void OnReadyToSend(bool ready) { SignalReadyToSend(ready); }
+  void OnNetworkRouteChanged(cricket::IceTransportInternal* ice_transport,
+                             rtc::NetworkRoute network_route);
 
   bool ProtectRtp(void* data, int in_len, int max_len, int* out_len);
 

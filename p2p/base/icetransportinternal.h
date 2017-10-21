@@ -18,6 +18,7 @@
 #include "p2p/base/jseptransport.h"
 #include "p2p/base/packettransportinternal.h"
 #include "p2p/base/transportdescription.h"
+#include "rtc_base/networkroute.h"
 #include "rtc_base/stringencode.h"
 
 namespace webrtc {
@@ -120,14 +121,11 @@ class IceTransportInternal : public rtc::PacketTransportInternal {
   // indicates where and how we are currently sending media.
   sigslot::signal2<IceTransportInternal*, const Candidate&> SignalRouteChange;
 
-  // Signalled when the current selected candidate pair has changed.
+  // Signalled when the current network route has changed.
   // The first parameter is the transport that signals the event.
-  // The second parameter is the new selected candidate pair. The third
-  // parameter is the last packet id sent on the previous candidate pair.
-  // The fourth parameter is a boolean which is true if the Transport
-  // is ready to send with this candidate pair.
-  sigslot::signal4<IceTransportInternal*, CandidatePairInterface*, int, bool>
-      SignalSelectedCandidatePairChanged;
+  // The second parameter is the new network route with rtp transport overhead.
+  sigslot::signal2<IceTransportInternal*, rtc::NetworkRoute>
+      SignalNetworkRouteChanged;
 
   // Invoked when there is conflict in the ICE role between local and remote
   // agents.
