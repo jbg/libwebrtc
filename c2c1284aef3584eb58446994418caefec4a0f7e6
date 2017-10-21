@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9fde3e9_4084512f",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "nit: \"RTP\". Though I don\u0027t know if \"RTP\" is a relevant term, here. Really this is the overhead at the IP level and above.",
+      "range": {
+        "startLine": 126,
+        "startChar": 56,
+        "endLine": 126,
+        "endChar": 59
+      },
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54b28da6_3aca8db1",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "Can we remove the IceTransportInternal arg, and move this signal to PacketTransportInternal?",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "523aff7d_57862501",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2154,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "\"Overhead\"",
+      "range": {
+        "startLine": 2154,
+        "startChar": 16,
+        "endLine": 2154,
+        "endChar": 29
+      },
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb20c9a_4988acb7",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "I\u0027d rephrase this as \"An overhead of 0 means that no candidate pair is selected.\"",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14e3614e_e9869b44",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "If RtpTransportInternal is responsible for updating the overhead, is this still needed?",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06837490_63788baf",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "Would it be possible to merge OnTransportOverheadChanged and OnNetworkRouteChanged in this CL?",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1303de8e_1f7fcbfd",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "It\u0027s SrtpTransport that would do this, though, since it\u0027s SRTP that adds overhead. So can\u0027t this change be made already?",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62bc78d3_cbe9adfc",
+        "filename": "pc/rtptransportinternal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "Why is this pure virtual? Can\u0027t it be called internally by the classes that need to?",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f932cf37_29d2f237",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be SetSend? How is this code working right now?",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77b12c6f_71d10979",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-21T01:41:06Z",
+      "side": 1,
+      "message": "Why does this need separate overhead fields? I\u0027d just have one called \"transport_overhead\" and define it as the per-packet overhead introduced by the underlying transport, at the IP level and above.",
+      "revId": "c2c1284aef3584eb58446994418caefec4a0f7e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
