@@ -22,6 +22,30 @@
       "revId": "f4c1d6889d2706aade06b4e4febc4510cf955780",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d03870d2_0d31deb5",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-23T07:51:59Z",
+      "side": 1,
+      "message": "Right, so there are two instantiations of AcknowledgedBitRateEstimator, and two types of logging.\n\nIn the normal visualization case, we want to plot the state of the AcknowledgedBitrateEstimator. We could do this by extending the API of the SendSideCongestionController, but that doesn\u0027t seem correct as it exposes implementation details. This leaves us with creating a separate instance that we can access from outside the congestion controller.\n\nThe other type of logging is BWE_TEST_LOGGING_PLOT which prints a string to stdout if BWE_TEST_LOGGING_COMPILE_TIME_ENABLE is defined. The output can then be parsed by plot_dynamics.py. Note that only one type of plotting can be used at a time; the normal visualization, which expects python plot commands, wont work if BWE_TEST_LOGGING_COMPILE_TIME_ENABLE is defined. Building the visualizer with BWE_TEST_LOGGING_COMPILE_TIME_ENABLE is only useful to simulate the bwe based on the packets and plotting the internal state. We could conceivably add a boolean to the AcknowledgedBitrateEstimator constructor and do something like\nif (bwe_test_logging)\n  BWE_TEST_LOGGING_PLOT(...)\nHowever, I\u0027d prefer not to do that since it deviates from the convention. The general expectation is that BWE_TEST_LOGGING_COMPILE_TIME_ENABLE controls whether the internal state is printed.",
+      "parentUuid": "60bd9fff_be017d82",
+      "range": {
+        "startLine": 1176,
+        "startChar": 12,
+        "endLine": 1176,
+        "endChar": 48
+      },
+      "revId": "f4c1d6889d2706aade06b4e4febc4510cf955780",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
