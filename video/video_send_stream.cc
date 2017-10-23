@@ -719,18 +719,26 @@ VideoSendStreamImpl::VideoSendStreamImpl(
             field_trial::FindFullName(
                 AlrDetector::kScreenshareProbingBweExperimentName)
                 .empty());
-  rtc::Optional<AlrDetector::AlrExperimentSettings> alr_settings;
-  if (content_type == VideoEncoderConfig::ContentType::kScreen) {
-    alr_settings = AlrDetector::ParseAlrSettingsFromFieldTrial(
-        AlrDetector::kScreenshareProbingBweExperimentName);
-  } else {
-    alr_settings = AlrDetector::ParseAlrSettingsFromFieldTrial(
-        AlrDetector::kStrictPacingAndProbingExperimentName);
-  }
-  if (alr_settings) {
-    transport->send_side_cc()->EnablePeriodicAlrProbing(true);
-    transport->pacer()->SetPacingFactor(alr_settings->pacing_factor);
-    transport->pacer()->SetQueueTimeLimit(alr_settings->max_paced_queue_time);
+  // If send-side BWE is enabled, check if we should apply updated probing and
+  // pacing settings.
+  if (std::find_if(config_->rtp.extensions.begin(),
+                   config_->rtp.extensions.end(), [](const RtpExtension& ext) {
+                     return ext.uri ==
+                            RtpExtension::kTransportSequenceNumberUri;
+                   }) != config_->rtp.extensions.end()) {
+    rtc::Optional<AlrDetector::AlrExperimentSettings> alr_settings;
+    if (content_type == VideoEncoderConfig::ContentType::kScreen) {
+      alr_settings = AlrDetector::ParseAlrSettingsFromFieldTrial(
+          AlrDetector::kScreenshareProbingBweExperimentName);
+    } else {
+      alr_settings = AlrDetector::ParseAlrSettingsFromFieldTrial(
+          AlrDetector::kStrictPacingAndProbingExperimentName);
+    }
+    if (alr_settings) {
+      transport->send_side_cc()->EnablePeriodicAlrProbing(true);
+      transport->pacer()->SetPacingFactor(alr_settings->pacing_factor);
+      transport->pacer()->SetQueueTimeLimit(alr_settings->max_paced_queue_time);
+    }
   }
 
   if (config_->periodic_alr_bandwidth_probing) {
