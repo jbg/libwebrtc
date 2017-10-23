@@ -406,6 +406,16 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     CandidateNetworkPolicy candidate_network_policy =
         kCandidateNetworkPolicyAll;
 
+    // When specified, we'll only allocate the STUN candidate
+    // for the public interface as seen by regular http traffic
+    // and the HOST candidate associated with the default local interface.
+    bool disable_adapter_enumeration = false;
+
+    // When specified along with disable_adapter_enumeration, the
+    // default local candidate mentioned above will not be allocated. Only the
+    // STUN candidate will be.
+    bool disable_default_local_candidate = false;
+
     // The maximum number of packets that can be stored in the NetEq audio
     // jitter buffer. Can be reduced to lower tolerated audio latency.
     int audio_jitter_buffer_max_packets = kAudioJitterBufferMaxPackets;

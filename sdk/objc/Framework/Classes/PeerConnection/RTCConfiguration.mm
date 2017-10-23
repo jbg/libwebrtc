@@ -28,6 +28,8 @@
 @synthesize rtcpMuxPolicy = _rtcpMuxPolicy;
 @synthesize tcpCandidatePolicy = _tcpCandidatePolicy;
 @synthesize candidateNetworkPolicy = _candidateNetworkPolicy;
+@synthesize disableAdapterEnumeration = _disableAdapterEnumeration;
+@synthesize disableDefaultLocalCandidate = _disableDefaultLocalCandidate;
 @synthesize continualGatheringPolicy = _continualGatheringPolicy;
 @synthesize maxIPv6Networks = _maxIPv6Networks;
 @synthesize audioJitterBufferMaxPackets = _audioJitterBufferMaxPackets;
@@ -70,6 +72,8 @@
         config.tcp_candidate_policy];
     _candidateNetworkPolicy = [[self class]
         candidateNetworkPolicyForNativePolicy:config.candidate_network_policy];
+    _disableAdapterEnumeration = config.disable_adapter_enumeration;
+    _disableDefaultLocalCandidate = config.disable_default_local_candidate;
     webrtc::PeerConnectionInterface::ContinualGatheringPolicy nativePolicy =
     config.continual_gathering_policy;
     _continualGatheringPolicy =
@@ -103,13 +107,16 @@
   return
       [NSString stringWithFormat:
                     @"RTCConfiguration: "
-                    @"{\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%@\n%@\n%d\n}\n",
+                    @"{\n%@\n%@\n%@\n%@\n%@\n%@\n%d\n%d\n%@\n"
+                    @"%d\n%d\n%d\n%d\n%d\n%d\n%d\n%@\n%@\n%d\n}\n",
                     _iceServers,
                     [[self class] stringForTransportPolicy:_iceTransportPolicy],
                     [[self class] stringForBundlePolicy:_bundlePolicy],
                     [[self class] stringForRtcpMuxPolicy:_rtcpMuxPolicy],
                     [[self class] stringForTcpCandidatePolicy:_tcpCandidatePolicy],
                     [[self class] stringForCandidateNetworkPolicy:_candidateNetworkPolicy],
+                    _disableAdapterEnumeration,
+                    _disableDefaultLocalCandidate,
                     [[self class] stringForContinualGatheringPolicy:_continualGatheringPolicy],
                     _audioJitterBufferMaxPackets,
                     _audioJitterBufferFastAccelerate,
@@ -144,6 +151,8 @@
       [[self class] nativeTcpCandidatePolicyForPolicy:_tcpCandidatePolicy];
   nativeConfig->candidate_network_policy = [[self class]
       nativeCandidateNetworkPolicyForPolicy:_candidateNetworkPolicy];
+  nativeConfig->disable_adapter_enumeration = _disableAdapterEnumeration;
+  nativeConfig->disable_default_local_candidate = _disableDefaultLocalCandidate;
   nativeConfig->continual_gathering_policy = [[self class]
       nativeContinualGatheringPolicyForPolicy:_continualGatheringPolicy];
   nativeConfig->max_ipv6_networks = _maxIPv6Networks;

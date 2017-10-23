@@ -39,6 +39,8 @@
   config.rtcpMuxPolicy = RTCRtcpMuxPolicyNegotiate;
   config.tcpCandidatePolicy = RTCTcpCandidatePolicyDisabled;
   config.candidateNetworkPolicy = RTCCandidateNetworkPolicyLowCost;
+  config.disableAdapterEnumeration = YES;
+  config.disableDefaultLocalCandidate = YES;
   const int maxPackets = 60;
   const int timeout = 1;
   const int interval = 2;
@@ -121,6 +123,8 @@
   EXPECT_EQ(config.rtcpMuxPolicy, newConfig.rtcpMuxPolicy);
   EXPECT_EQ(config.tcpCandidatePolicy, newConfig.tcpCandidatePolicy);
   EXPECT_EQ(config.candidateNetworkPolicy, newConfig.candidateNetworkPolicy);
+  EXPECT_EQ(config.disableAdapterEnumeration, newConfig.disableAdapterEnumeration);
+  EXPECT_EQ(config.disableDefaultLocalCandidate, newConfig.disableDefaultLocalCandidate);
   EXPECT_EQ(config.audioJitterBufferMaxPackets, newConfig.audioJitterBufferMaxPackets);
   EXPECT_EQ(config.audioJitterBufferFastAccelerate, newConfig.audioJitterBufferFastAccelerate);
   EXPECT_EQ(config.iceConnectionReceivingTimeout, newConfig.iceConnectionReceivingTimeout);
