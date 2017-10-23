@@ -16,6 +16,24 @@
       "revId": "8818237538740b3b5ebdab869f4844355348be9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f135ed7_4dc0e59d",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-23T08:00:51Z",
+      "side": 1,
+      "message": "Both CHECK and DCHECK are for trapping conditions that should never occur---they only differ in whether they actually perform the check in production builds or not.\n\nIn this particular case, I chose CHECK because ossu@ *thought* that the problem was gone, and I figured that it would be best to get a clear pointer to this line if he was wrong.\n\nHmm. It would be nice to be able to add some sort of annotation that says to downgrade this to a DCHECK in x months, and have some sort of system automatically start complaining when the deadline arrives...",
+      "parentUuid": "2c37654b_d4d1e273",
+      "revId": "8818237538740b3b5ebdab869f4844355348be9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
