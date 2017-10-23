@@ -313,7 +313,6 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   int64_t RtcpReportInterval();
   void SetRtcpReceiverSsrcs(uint32_t main_ssrc);
 
-  void set_rtt_ms(int64_t rtt_ms);
   int64_t rtt_ms() const;
 
   bool TimeToSendFullNackList(int64_t now) const;
@@ -346,10 +345,6 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
 
   PacketLossStats send_loss_stats_;
   PacketLossStats receive_loss_stats_;
-
-  // The processed RTT from RtcpRttStats.
-  rtc::CriticalSection critical_section_rtt_;
-  int64_t rtt_ms_;
 };
 
 }  // namespace webrtc
