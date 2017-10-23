@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9c76a603_ddd6467f",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-23T06:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97be010d_61c5d830",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 38
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac6ee08d_bf5564be",
         "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
         "patchSetId": 1
