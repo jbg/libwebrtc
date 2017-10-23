@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f2850493_2f5de2c2",
+        "filename": "rtc_base/opensslidentity.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-10-23T18:51:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a1cefb7_efa2d732",
+      "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fbcb1c97_e1deeb59",
         "filename": "rtc_base/sslidentity.h",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e8e30910_ac232cb2",
+        "filename": "rtc_base/sslidentity.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-10-23T18:51:47Z",
+      "side": 1,
+      "message": "Add a comment.",
+      "parentUuid": "fbcb1c97_e1deeb59",
+      "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89dbb314_35c44188",
         "filename": "rtc_base/sslstreamadapter_unittest.cc",
         "patchSetId": 8
@@ -47,6 +83,24 @@
       "writtenOn": "2017-10-19T22:15:59Z",
       "side": 1,
       "message": "This should be in a standalone test, named something like \"GetPeerCertChainWithOneCertificate\".",
+      "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec0ced7e_6e9485ff",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-10-23T18:51:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89dbb314_35c44188",
       "revId": "4a7b436d7d777e33d7d36c86639c285779c96b02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
