@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60bd9fff_be017d82",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-23T06:32:26Z",
+      "side": 1,
+      "message": "I guess this is important, but I don\u0027t quite understand this comment.\n\nThere\u0027s a AcknowledgedBitRateEstimator inside SendSideCongetstionController, which is used unconditionally. So where\u0027s the correspnding #if BWE_TEST_LOGGING_COMPILE_TIME_ENABLE?\n\nIs it possible to use the same object in both cases, and just control whether or not its state is logged?",
+      "range": {
+        "startLine": 1176,
+        "startChar": 12,
+        "endLine": 1176,
+        "endChar": 48
+      },
+      "revId": "f4c1d6889d2706aade06b4e4febc4510cf955780",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
