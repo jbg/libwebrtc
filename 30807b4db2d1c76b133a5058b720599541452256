@@ -189,6 +189,30 @@
       "revId": "30807b4db2d1c76b133a5058b720599541452256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f2cdfb0_ca449284",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-23T09:09:24Z",
+      "side": 1,
+      "message": "Tried caching it in a member.\n\nBut since the main use is in the static method OnMagImageScalingCallback, benefit is small, the member variable can be used in only one place, ScreenCapturerWinMagnifier::CaptureImage. So I\u0027m going to back out that change.",
+      "parentUuid": "7f120000_22138425",
+      "range": {
+        "startLine": 189,
+        "startChar": 14,
+        "endLine": 189,
+        "endChar": 27
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
