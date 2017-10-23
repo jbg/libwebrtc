@@ -38,6 +38,8 @@ CHROMIUM_LOG_TEMPLATE = CHROMIUM_SRC_URL + '/+log/%s'
 CHROMIUM_FILE_TEMPLATE = CHROMIUM_SRC_URL + '/+/%s/%s'
 
 COMMIT_POSITION_RE = re.compile('^Cr-Commit-Position: .*#([0-9]+).*$')
+ORIGINAL_COMMIT_POSITION_RE = re.compile(
+    '^Cr-Original-Commit-Position: .*#([0-9]+).*$')
 CLANG_REVISION_RE = re.compile(r'^CLANG_REVISION = \'(\d+)\'$')
 ROLL_BRANCH_NAME = 'roll_chromium_revision'
 
@@ -89,8 +91,14 @@ def ParseRemoteCrDepsFile(revision):
 
 def ParseCommitPosition(commit_message):
   for line in reversed(commit_message.splitlines()):
+    print "---- LINE: ", line.strip()
     m = COMMIT_POSITION_RE.match(line.strip())
+    print m.group(1)
+    if not m:
+      print "NOT HERE"
+      m = ORIGINAL_COMMIT_POSITION_RE.match(line.strip())
     if m:
+      print "HERE"
       return m.group(1)
   logging.error('Failed to parse commit position id from:\n%s\n',
                 commit_message)
@@ -465,6 +473,7 @@ def main():
   current_cr_rev = webrtc_deps['vars']['chromium_revision']
 
   current_commit_pos = ParseCommitPosition(ReadRemoteCrCommit(current_cr_rev))
+  print "parsing new cr rev: ", new_cr_rev
   new_commit_pos = ParseCommitPosition(ReadRemoteCrCommit(new_cr_rev))
 
   new_cr_deps = ParseRemoteCrDepsFile(new_cr_rev)
