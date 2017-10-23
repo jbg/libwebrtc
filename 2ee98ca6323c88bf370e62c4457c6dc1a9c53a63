@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "5753d795_7680d33d",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-23T16:41:29Z",
+      "side": 1,
+      "message": "I believe MaybeSetupDtlsSrtp needs to check if the DTLS state is \"complete\" though, or that it\u0027s writable, in which case we definitely finished generating a certificate.",
+      "parentUuid": "f0ba3239_035436a6",
+      "range": {
+        "startLine": 81,
+        "startChar": 24,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "2ee98ca6323c88bf370e62c4457c6dc1a9c53a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "647e29ee_021253e2",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 4

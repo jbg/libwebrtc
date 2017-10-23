@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "7c6807ff_13d12095",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-23T16:41:29Z",
+      "side": 1,
+      "message": "I think we\u0027re describing the same problem. Basically, what we *want* is:\n\n* For SDES, both encrypted header extension IDs and crypto params set at the same time, to save libsrtp calls.\n* For DTLS-SRTP, encrypted header extensions IDs are cached when SDP is first set, then applied once the DTLS handshake is finished. Or applied immediately, if encrypted header IDs change and SRTP is already set up.\n\nWhat\u0027s not ideal is how you need to call \"SetSendEncryptedHeaderExtensionIds\", then later call \"SetRtpParams\" for it to take effect. It\u0027s a larger API surface and it\u0027s not very intuitive. It would be cleaner if the two methods were combined, at least for the \"SrtpTransportInternal\" interface.\n\nIf I\u0027m still not making sense, let\u0027s talk in person. It\u0027s not that important though, it\u0027s something that could be improved later.",
+      "parentUuid": "c63d8bb0_d49c31be",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a96c075_1266a29f",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 6
@@ -276,6 +294,24 @@
       "side": 1,
       "message": "It seems that the ProtectRtp/Rtcp would changed the data in the buffer so I made an extra copy.",
       "parentUuid": "26266d7a_64074a92",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b1ad276_307a379d",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-23T16:41:29Z",
+      "side": 1,
+      "message": "Ah... Because it\u0027s taking the CopyOnWriteBuffer by pointer? That seems like a misuse of the CopyOnWriteBuffer class in the first place. The idea of CopyOnWriteBuffer, as I understood it, is that you can make cheap copies all over the place, and only when the data is modified is a new \"real\" copy made. We should have a TODO and/or bug to fix this, or do it in a quick standalone CL.",
+      "parentUuid": "01d9d34b_b762361d",
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -498,6 +534,24 @@
       "side": 1,
       "message": "This is how we used the header extension id before. Do you want me to make it a constant or something like that?",
       "parentUuid": "36a5c655_28106e8a",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3808be6_332c6f1b",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-23T16:41:29Z",
+      "side": 1,
+      "message": "That\u0027s what I was thinking. Right now someone reading the test may think \"where do the values of 1 and 4 come from? Are they random?\" But if they were constants, you could look where they\u0027re declared and see that they\u0027re related to kPcmuFrameWithExtensions.",
+      "parentUuid": "8c5d58ac_8cf31beb",
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
