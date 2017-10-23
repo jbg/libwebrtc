@@ -263,6 +263,8 @@ bool PeerConnectionInterface::RTCConfiguration::operator==(
     rtc::Optional<bool> enable_dtls_srtp;
     TcpCandidatePolicy tcp_candidate_policy;
     CandidateNetworkPolicy candidate_network_policy;
+    bool disable_adapter_enumeration;
+    bool disable_default_local_candidate;
     int audio_jitter_buffer_max_packets;
     bool audio_jitter_buffer_fast_accelerate;
     int ice_connection_receiving_timeout;
@@ -287,6 +289,8 @@ bool PeerConnectionInterface::RTCConfiguration::operator==(
          rtcp_mux_policy == o.rtcp_mux_policy &&
          tcp_candidate_policy == o.tcp_candidate_policy &&
          candidate_network_policy == o.candidate_network_policy &&
+         disable_adapter_enumeration == o.disable_adapter_enumeration &&
+         disable_default_local_candidate == o.disable_default_local_candidate &&
          audio_jitter_buffer_max_packets == o.audio_jitter_buffer_max_packets &&
          audio_jitter_buffer_fast_accelerate ==
              o.audio_jitter_buffer_fast_accelerate &&
@@ -2583,6 +2587,17 @@ bool PeerConnection::InitializePortAllocator_n(
       kCandidateNetworkPolicyLowCost) {
     portallocator_flags |= cricket::PORTALLOCATOR_DISABLE_COSTLY_NETWORKS;
     LOG(LS_INFO) << "Do not gather candidates on high-cost networks";
+  }
+
+  if (configuration.disable_adapter_enumeration) {
+    portallocator_flags |= cricket::PORTALLOCATOR_DISABLE_ADAPTER_ENUMERATION;
+    LOG(LS_INFO) << "Do not enumerate network adapters";
+  }
+
+  if (configuration.disable_default_local_candidate) {
+    portallocator_flags |=
+      cricket::PORTALLOCATOR_DISABLE_DEFAULT_LOCAL_CANDIDATE;
+    LOG(LS_INFO) << "Do not allocate a default local candidate";
   }
 
   port_allocator_->set_flags(portallocator_flags);
