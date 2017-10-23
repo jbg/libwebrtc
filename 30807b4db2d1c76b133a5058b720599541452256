@@ -237,6 +237,30 @@
       "revId": "30807b4db2d1c76b133a5058b720599541452256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "587944d2_6c3cad1f",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-23T10:29:27Z",
+      "side": 1,
+      "message": "I think I\u0027ll leave that optimization to the compiler. It should have al clues it need; the definition is in the same compilation unit, and GetTlsIndex returns the value of a static const variable. So it should be free to omit synchronization for the second call, right?",
+      "parentUuid": "69c9ecd8_af930691",
+      "range": {
+        "startLine": 189,
+        "startChar": 14,
+        "endLine": 189,
+        "endChar": 27
+      },
+      "revId": "30807b4db2d1c76b133a5058b720599541452256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
