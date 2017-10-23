@@ -56,6 +56,7 @@ class RTCPReceiver {
                RtcpIntraFrameObserver* rtcp_intra_frame_observer,
                TransportFeedbackObserver* transport_feedback_observer,
                VideoBitrateAllocationObserver* bitrate_allocation_observer,
+               RtcpRttStats* rtt_observer,
                ModuleRtpRtcp* owner);
   virtual ~RTCPReceiver();
 
@@ -87,7 +88,6 @@ class RTCPReceiver {
               int64_t* max_rtt_ms) const;
 
   void SetRtcpXrRrtrStatus(bool enable);
-  bool GetAndResetXrRrRtt(int64_t* rtt_ms);
 
   // Get statistics.
   int32_t StatisticsReceived(std::vector<RTCPReportBlock>* receiveBlocks) const;
@@ -162,7 +162,8 @@ class RTCPReceiver {
                                     const rtcp::Rrtr& rrtr)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(rtcp_receiver_lock_);
 
-  void HandleXrDlrrReportBlock(const rtcp::ReceiveTimeInfo& rti)
+  void HandleXrDlrrReportBlock(const rtcp::ReceiveTimeInfo& rti,
+                               PacketInformation* packet_information)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(rtcp_receiver_lock_);
 
   void HandleXrTargetBitrate(uint32_t ssrc,
@@ -214,6 +215,7 @@ class RTCPReceiver {
   RtcpIntraFrameObserver* const rtcp_intra_frame_observer_;
   TransportFeedbackObserver* const transport_feedback_observer_;
   VideoBitrateAllocationObserver* const bitrate_allocation_observer_;
+  RtcpRttStats* const rtt_observer_;
 
   rtc::CriticalSection rtcp_receiver_lock_;
   uint32_t main_ssrc_ RTC_GUARDED_BY(rtcp_receiver_lock_);
@@ -232,7 +234,6 @@ class RTCPReceiver {
   NtpTime last_received_xr_ntp_;
   // Estimated rtt, zero when there is no valid estimate.
   bool xr_rrtr_status_ RTC_GUARDED_BY(rtcp_receiver_lock_);
-  int64_t xr_rr_rtt_ms_;
 
   int64_t oldest_tmmbr_info_ms_ RTC_GUARDED_BY(rtcp_receiver_lock_);
   // Mapped by remote ssrc.

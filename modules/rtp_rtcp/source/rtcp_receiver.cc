@@ -109,6 +109,7 @@ RTCPReceiver::RTCPReceiver(
     RtcpIntraFrameObserver* rtcp_intra_frame_observer,
     TransportFeedbackObserver* transport_feedback_observer,
     VideoBitrateAllocationObserver* bitrate_allocation_observer,
+    RtcpRttStats* rtt_observer,
     ModuleRtpRtcp* owner)
     : clock_(clock),
       receiver_only_(receiver_only),
@@ -117,11 +118,11 @@ RTCPReceiver::RTCPReceiver(
       rtcp_intra_frame_observer_(rtcp_intra_frame_observer),
       transport_feedback_observer_(transport_feedback_observer),
       bitrate_allocation_observer_(bitrate_allocation_observer),
+      rtt_observer_(rtt_observer),
       main_ssrc_(0),
       remote_ssrc_(0),
       remote_sender_rtp_time_(0),
       xr_rrtr_status_(false),
-      xr_rr_rtt_ms_(0),
       oldest_tmmbr_info_ms_(0),
       last_received_rb_ms_(0),
       last_increased_sequence_number_ms_(0),
@@ -208,17 +209,6 @@ int32_t RTCPReceiver::RTT(uint32_t remote_ssrc,
 void RTCPReceiver::SetRtcpXrRrtrStatus(bool enable) {
   rtc::CritScope lock(&rtcp_receiver_lock_);
   xr_rrtr_status_ = enable;
-}
-
-bool RTCPReceiver::GetAndResetXrRrRtt(int64_t* rtt_ms) {
-  RTC_DCHECK(rtt_ms);
-  rtc::CritScope lock(&rtcp_receiver_lock_);
-  if (xr_rr_rtt_ms_ == 0) {
-    return false;
-  }
-  *rtt_ms = xr_rr_rtt_ms_;
-  xr_rr_rtt_ms_ = 0;
-  return true;
 }
 
 bool RTCPReceiver::NTP(uint32_t* received_ntp_secs,
@@ -670,7 +660,6 @@ void RTCPReceiver::HandleBye(const CommonHeader& rtcp_block) {
 
   last_fir_.erase(bye.sender_ssrc());
   received_cnames_.erase(bye.sender_ssrc());
-  xr_rr_rtt_ms_ = 0;
 }
 
 void RTCPReceiver::HandleXr(const CommonHeader& rtcp_block,
@@ -685,7 +674,7 @@ void RTCPReceiver::HandleXr(const CommonHeader& rtcp_block,
     HandleXrReceiveReferenceTime(xr.sender_ssrc(), *xr.rrtr());
 
   for (const rtcp::ReceiveTimeInfo& time_info : xr.dlrr().sub_blocks())
-    HandleXrDlrrReportBlock(time_info);
+    HandleXrDlrrReportBlock(time_info, packet_information);
 
   if (xr.target_bitrate()) {
     HandleXrTargetBitrate(xr.sender_ssrc(), *xr.target_bitrate(),
@@ -700,7 +689,9 @@ void RTCPReceiver::HandleXrReceiveReferenceTime(uint32_t sender_ssrc,
   last_received_xr_ntp_ = clock_->CurrentNtpTime();
 }
 
-void RTCPReceiver::HandleXrDlrrReportBlock(const rtcp::ReceiveTimeInfo& rti) {
+void RTCPReceiver::HandleXrDlrrReportBlock(
+    const rtcp::ReceiveTimeInfo& rti,
+    PacketInformation* packet_information) {
   if (registered_ssrcs_.count(rti.ssrc) == 0)  // Not to us.
     return;
 
@@ -719,7 +710,7 @@ void RTCPReceiver::HandleXrDlrrReportBlock(const rtcp::ReceiveTimeInfo& rti) {
   uint32_t now_ntp = CompactNtp(clock_->CurrentNtpTime());
 
   uint32_t rtt_ntp = now_ntp - delay_ntp - send_time_ntp;
-  xr_rr_rtt_ms_ = CompactNtpRttToMs(rtt_ntp);
+  packet_information->rtt_ms = CompactNtpRttToMs(rtt_ntp);
 }
 
 void RTCPReceiver::HandleXrTargetBitrate(
@@ -919,6 +910,11 @@ void RTCPReceiver::TriggerCallbacksFromRtcpPacket(
     // Might trigger a OnReceivedBandwidthEstimateUpdate.
     NotifyTmmbrUpdated();
   }
+  // Notify about rtt before other callbacks to provide most recent rtt for
+  // calculations that depend on it.
+  if (rtt_observer_ && packet_information.rtt_ms > 0)
+    rtt_observer_->OnRttUpdate(packet_information.rtt_ms);
+
   uint32_t local_ssrc;
   std::set<uint32_t> registered_ssrcs;
   {
