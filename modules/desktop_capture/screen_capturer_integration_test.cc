@@ -287,7 +287,7 @@ class ScreenCapturerIntegrationTest : public testing::Test {
 #if defined(WEBRTC_WIN)
 // ScreenCapturerWinGdi randomly returns blank screen, the root cause is still
 // unknown. Bug, https://bugs.chromium.org/p/webrtc/issues/detail?id=6843.
-#define MAYBE_CaptureUpdatedRegion DISABLED_CaptureUpdatedRegion
+#define MAYBE_CaptureUpdatedRegion CaptureUpdatedRegion
 #else
 #define MAYBE_CaptureUpdatedRegion CaptureUpdatedRegion
 #endif
@@ -298,7 +298,7 @@ TEST_F(ScreenCapturerIntegrationTest, MAYBE_CaptureUpdatedRegion) {
 #if defined(WEBRTC_WIN)
 // ScreenCapturerWinGdi randomly returns blank screen, the root cause is still
 // unknown. Bug, https://bugs.chromium.org/p/webrtc/issues/detail?id=6843.
-#define MAYBE_TwoCapturers DISABLED_TwoCapturers
+#define MAYBE_TwoCapturers TwoCapturers
 #else
 #define MAYBE_TwoCapturers TwoCapturers
 #endif
@@ -313,7 +313,7 @@ TEST_F(ScreenCapturerIntegrationTest, MAYBE_TwoCapturers) {
 // Windows cannot capture contents on VMs hosted in GCE. See bug
 // https://bugs.chromium.org/p/webrtc/issues/detail?id=8153.
 TEST_F(ScreenCapturerIntegrationTest,
-       DISABLED_CaptureUpdatedRegionWithDirectxCapturer) {
+       CaptureUpdatedRegionWithDirectxCapturer) {
   if (!CreateDirectxCapturer()) {
     return;
   }
@@ -321,7 +321,7 @@ TEST_F(ScreenCapturerIntegrationTest,
   TestCaptureUpdatedRegion();
 }
 
-TEST_F(ScreenCapturerIntegrationTest, DISABLED_TwoDirectxCapturers) {
+TEST_F(ScreenCapturerIntegrationTest, TwoDirectxCapturers) {
   if (!CreateDirectxCapturer()) {
     return;
   }
@@ -332,7 +332,7 @@ TEST_F(ScreenCapturerIntegrationTest, DISABLED_TwoDirectxCapturers) {
 }
 
 TEST_F(ScreenCapturerIntegrationTest,
-       DISABLED_CaptureUpdatedRegionWithMagnifierCapturer) {
+       CaptureUpdatedRegionWithMagnifierCapturer) {
   // On Windows 8 or later, magnifier APIs return a frame with a border on test
   // environment, so disable these tests.
   // Bug https://bugs.chromium.org/p/webrtc/issues/detail?id=6844
@@ -345,7 +345,7 @@ TEST_F(ScreenCapturerIntegrationTest,
   TestCaptureUpdatedRegion();
 }
 
-TEST_F(ScreenCapturerIntegrationTest, DISABLED_TwoMagnifierCapturers) {
+TEST_F(ScreenCapturerIntegrationTest, TwoMagnifierCapturers) {
   // On Windows 8 or later, magnifier APIs return a frame with a border on test
   // environment, so disable these tests.
   // Bug https://bugs.chromium.org/p/webrtc/issues/detail?id=6844
@@ -361,7 +361,7 @@ TEST_F(ScreenCapturerIntegrationTest, DISABLED_TwoMagnifierCapturers) {
 }
 
 TEST_F(ScreenCapturerIntegrationTest,
-       DISABLED_MaybeCaptureUpdatedRegionWithDirectxCapturer) {
+       MaybeCaptureUpdatedRegionWithDirectxCapturer) {
   if (!rtc::IsWindows8OrLater()) {
     // ScreenCapturerWinGdi randomly returns blank screen, the root cause is
     // still unknown. Bug,
