@@ -986,10 +986,10 @@ void VideoSendStreamTest::TestPacketFragmentationSize(VideoFormat format,
       // Increase frame size for next encoded frame, in the context of the
       // encoder thread.
       if (!use_fec_ &&
-          current_size_frame_.Value() < static_cast<int32_t>(stop_size_)) {
+          current_size_frame_.load() < static_cast<int32_t>(stop_size_)) {
         ++current_size_frame_;
       }
-      encoder_.SetFrameSize(static_cast<size_t>(current_size_frame_.Value()));
+      encoder_.SetFrameSize(static_cast<size_t>(current_size_frame_.load()));
     }
 
     Call::Config GetSenderCallConfig() override {
@@ -1070,7 +1070,7 @@ void VideoSendStreamTest::TestPacketFragmentationSize(VideoFormat format,
     bool fec_packet_received_;
 
     size_t current_size_rtp_;
-    Atomic32 current_size_frame_;
+    std::atomic<int32_t> current_size_frame_;
   };
 
   // Don't auto increment if FEC is used; continue sending frame size until
