@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef702a8_4da9745c",
+        "filename": "audio/null_audio_poller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-23T13:49:46Z",
+      "side": 1,
+      "message": "A fixed rate should work but a much more common sample rate on Android is 48000. It should lead to less risk of dynamic issues using 48000 instead. 44000 should not be used since it is not a valid sample rate. 44100 could be used but I recommend 48000.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 9
+      },
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
