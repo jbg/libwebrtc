@@ -351,9 +351,6 @@ TEST_F(RtpRtcpImplTest, Rtt) {
       sender_.impl_->RTT(kReceiverSsrc+1, &rtt, &avg_rtt, &min_rtt, &max_rtt));
 
   // Verify RTT from rtt_stats config.
-  EXPECT_EQ(0, sender_.rtt_stats_.LastProcessedRtt());
-  EXPECT_EQ(0, sender_.impl_->rtt_ms());
-  sender_.impl_->Process();
   EXPECT_NEAR(2 * kOneWayNetworkDelayMs, sender_.rtt_stats_.LastProcessedRtt(),
               1);
   EXPECT_NEAR(2 * kOneWayNetworkDelayMs, sender_.impl_->rtt_ms(), 1);
@@ -378,9 +375,6 @@ TEST_F(RtpRtcpImplTest, RttForReceiverOnly) {
   EXPECT_EQ(0, sender_.impl_->SendRTCP(kRtcpReport));
 
   // Verify RTT.
-  EXPECT_EQ(0, receiver_.rtt_stats_.LastProcessedRtt());
-  EXPECT_EQ(0, receiver_.impl_->rtt_ms());
-  receiver_.impl_->Process();
   EXPECT_NEAR(2 * kOneWayNetworkDelayMs,
               receiver_.rtt_stats_.LastProcessedRtt(), 1);
   EXPECT_NEAR(2 * kOneWayNetworkDelayMs, receiver_.impl_->rtt_ms(), 1);
