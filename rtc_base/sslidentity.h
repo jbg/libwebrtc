@@ -68,7 +68,8 @@ class SSLCertificate {
   std::unique_ptr<SSLCertificate> GetUniqueReference() const;
 
   // Provides the cert chain, or null. The chain includes a copy of each
-  // certificate, excluding the leaf.
+  // certificate, excluding the leaf. This is depreacted. Please use
+  // SSLStreamAdapter::GetPeerSSLCertChain.
   virtual std::unique_ptr<SSLCertChain> GetChain() const = 0;
 
   // Returns a PEM encoded string representation of the certificate.
