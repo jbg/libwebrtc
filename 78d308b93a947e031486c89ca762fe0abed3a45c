@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "489bcaea_138e871c",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-23T08:27:29Z",
+      "side": 1,
+      "message": "Can you do this in the constructor instead? Code is easier to read if you don\u0027t have to reason about multiple states...\n\nIdeally, you\u0027d set it directly with a default member initializer:\n\n  const DWORD tls_index_ \u003d GetTlsIndex();",
+      "revId": "78d308b93a947e031486c89ca762fe0abed3a45c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
