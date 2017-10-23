@@ -82,6 +82,8 @@ RTC_EXPORT
 @property(nonatomic, assign) RTCRtcpMuxPolicy rtcpMuxPolicy;
 @property(nonatomic, assign) RTCTcpCandidatePolicy tcpCandidatePolicy;
 @property(nonatomic, assign) RTCCandidateNetworkPolicy candidateNetworkPolicy;
+@property(nonatomic, assign) BOOL disableAdapterEnumeration;
+@property(nonatomic, assign) BOOL disableDefaultLocalCandidate;
 @property(nonatomic, assign)
     RTCContinualGatheringPolicy continualGatheringPolicy;
 
