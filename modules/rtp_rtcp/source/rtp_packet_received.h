@@ -10,6 +10,9 @@
 #ifndef MODULES_RTP_RTCP_SOURCE_RTP_PACKET_RECEIVED_H_
 #define MODULES_RTP_RTCP_SOURCE_RTP_PACKET_RECEIVED_H_
 
+#include <string>
+#include <utility>
+
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/rtp_rtcp/source/rtp_packet.h"
 #include "system_wrappers/include/ntp_time.h"
@@ -44,11 +47,21 @@ class RtpPacketReceived : public RtpPacket {
     payload_type_frequency_ = value;
   }
 
+  // Additional data bound to the RTP packet for use in application code.
+  // outside of WebRTC. Not to be confused with RTP header extension.
+  const std::string& application_extension() const {
+    return application_extension_;
+  }
+  void set_application_extension(std::string application_extension) {
+    application_extension_ = std::move(application_extension);
+  }
+
  private:
   NtpTime capture_time_;
   int64_t arrival_time_ms_ = 0;
   int payload_type_frequency_ = 0;
   bool recovered_ = false;
+  std::string application_extension_;
 };
 
 }  // namespace webrtc
