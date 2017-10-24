@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb5862ad_507ebd69",
+        "filename": "video/transport_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T07:20:07Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we to this, rather than a plain store. (And similarly for Disable below).",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "def8cce4_6ef9cb36",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T07:20:07Z",
+      "side": 1,
+      "message": "Karl suggested using a single access to the atomic variable, and maybe using a less strict memory ordering. Doesn\u0027t have to be done for this cl, though.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 74
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "901917cf_58b8cb51",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T07:20:07Z",
+      "side": 1,
+      "message": "Prefer plain int over int32_t here.",
+      "range": {
+        "startLine": 289,
+        "startChar": 14,
+        "endLine": 289,
+        "endChar": 21
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
