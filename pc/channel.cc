@@ -607,13 +607,6 @@ void BaseChannel::OnNetworkRouteChanged(rtc::NetworkRoute network_route) {
   network_route_ = network_route;
   std::string transport_name = rtp_dtls_transport_->transport_name();
 
-  if (network_route.transport_overhead_per_packet()) {
-    invoker_.AsyncInvoke<void>(
-        RTC_FROM_HERE, worker_thread_,
-        Bind(&MediaChannel::OnTransportOverheadChanged, media_channel_,
-             network_route.transport_overhead_per_packet()));
-  }
-
   invoker_.AsyncInvoke<void>(
       RTC_FROM_HERE, worker_thread_,
       Bind(&MediaChannel::OnNetworkRouteChanged, media_channel_, transport_name,
