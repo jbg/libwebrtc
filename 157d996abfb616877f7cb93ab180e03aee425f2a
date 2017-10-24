@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae33050d_193caa11",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_received.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-24T08:49:46Z",
+      "side": 1,
+      "message": "may be instead of this note name the field \u0027application_data\u0027\n(https://testing.googleblog.com/2017/07/code-health-to-comment-or-not-to-comment.html)\n\nwith such a name it might be reasonable to use byte array: rtc::Buffer instead of std::string.\n(but set and retrieve as rtc::ArrayView\u003cconst uint8_t\u003e)",
+      "range": {
+        "startLine": 51,
+        "startChar": 24,
+        "endLine": 51,
+        "endChar": 69
+      },
+      "revId": "157d996abfb616877f7cb93ab180e03aee425f2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
