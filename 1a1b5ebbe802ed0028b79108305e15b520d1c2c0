@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f636919c_1149c663",
+        "filename": "test/direct_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-24T08:13:49Z",
+      "side": 1,
+      "message": "rtc::make_unique",
+      "range": {
+        "startLine": 49,
+        "startChar": 29,
+        "endLine": 49,
+        "endChar": 39
+      },
+      "revId": "1a1b5ebbe802ed0028b79108305e15b520d1c2c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d732c766_c05aca85",
+        "filename": "test/direct_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-10-24T08:13:49Z",
+      "side": 1,
+      "message": "fake_network_pipe_ or fake_network_ instead. No need to specify that it\u0027s a pointer.",
+      "range": {
+        "startLine": 79,
+        "startChar": 35,
+        "endLine": 79,
+        "endChar": 52
+      },
+      "revId": "1a1b5ebbe802ed0028b79108305e15b520d1c2c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
