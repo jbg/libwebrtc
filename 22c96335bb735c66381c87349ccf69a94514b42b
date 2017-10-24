@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe9a45cc_8190365a",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_received.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T11:56:37Z",
+      "side": 1,
+      "message": "An ArrayView doesn\u0027t own its data. And in this case, I think RtpPacketReceived should have an owned copy. Is std::basic_string\u003cuint8_t\u003e a suitable type?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "22c96335bb735c66381c87349ccf69a94514b42b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
