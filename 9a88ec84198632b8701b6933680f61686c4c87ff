@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67a4d79b_54a7af7b",
+        "filename": "rtc_base/sslstreamadapter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-24T01:06:12Z",
+      "side": 1,
+      "message": "The second sentence of this comment should be deleted; if you want the entire chain, you need the method below.",
+      "revId": "9a88ec84198632b8701b6933680f61686c4c87ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "043feaa0_2fd36a81",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-24T01:06:12Z",
+      "side": 1,
+      "message": "nit: Should be capitalized like \"CertChain\" consistently",
+      "revId": "9a88ec84198632b8701b6933680f61686c4c87ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
