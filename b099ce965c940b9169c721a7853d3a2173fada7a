@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "602a8f82_5887e4e1",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_received.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-24T12:46:29Z",
+      "side": 1,
+      "message": "nit: vector also has assign method, might be considered nicer:\napplication_data_.assign(data.begin(), data.end());",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 69
+      },
+      "revId": "b099ce965c940b9169c721a7853d3a2173fada7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
