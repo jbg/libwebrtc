@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3e07742_6736cbe2",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_received.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T13:05:34Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s better to keep |\u003d default| even if moved to the .cc file.",
+      "range": {
+        "startLine": 20,
+        "startChar": 39,
+        "endLine": 20,
+        "endChar": 2
+      },
+      "revId": "49d2e9f53a87462816e51e5bac241910e10e38db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
