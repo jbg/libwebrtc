@@ -22,6 +22,30 @@
       "revId": "22c96335bb735c66381c87349ccf69a94514b42b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "493bbb38_1ba7a9b6",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_received.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-24T12:14:31Z",
+      "side": 1,
+      "message": "yes, do not use rtc::ArrayView for storing.\nstd::basic_string\u003cuint8_t would work, \nbut rtc::Buffer or std::vector\u003cuint8_t\u003e might be better for storing.",
+      "parentUuid": "fe9a45cc_8190365a",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "22c96335bb735c66381c87349ccf69a94514b42b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
