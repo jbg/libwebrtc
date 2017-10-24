@@ -58,7 +58,7 @@ struct NetworkRoute {
         rtp_overhead_per_packet(rtp_overhead),
         srtp_overhead_per_packet(srtp_overhead) {}
 
-  int transport_overhead_per_packet() {
+  int transport_overhead_per_packet() const {
     return rtp_overhead_per_packet + srtp_overhead_per_packet;
   }
 
