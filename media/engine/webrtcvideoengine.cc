@@ -1463,12 +1463,8 @@ void WebRtcVideoChannel::OnNetworkRouteChanged(
     const std::string& transport_name,
     const rtc::NetworkRoute& network_route) {
   call_->OnNetworkRouteChanged(transport_name, network_route);
-}
-
-void WebRtcVideoChannel::OnTransportOverheadChanged(
-    int transport_overhead_per_packet) {
-  call_->OnTransportOverheadChanged(webrtc::MediaType::VIDEO,
-                                    transport_overhead_per_packet);
+  call_->OnTransportOverheadChanged(
+      webrtc::MediaType::VIDEO, network_route.transport_overhead_per_packet());
 }
 
 void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
