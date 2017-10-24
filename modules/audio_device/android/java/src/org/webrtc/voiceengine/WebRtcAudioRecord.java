@@ -99,6 +99,7 @@ public class WebRtcAudioRecord {
       assertTrue(audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING);
 
       long lastTime = System.nanoTime();
+      long count = 0;
       while (keepAlive) {
         int bytesRead = audioRecord.read(byteBuffer, byteBuffer.capacity());
         if (bytesRead == byteBuffer.capacity()) {
@@ -111,6 +112,7 @@ public class WebRtcAudioRecord {
           // in case they've been unregistered after stopRecording() returned.
           if (keepAlive) {
             nativeDataIsRecorded(bytesRead, nativeAudioRecord);
+            count++;
           }
         } else {
           String errorMessage = "AudioRecord.read failed: " + bytesRead;
@@ -120,6 +122,13 @@ public class WebRtcAudioRecord {
             reportWebRtcAudioRecordError(errorMessage);
           }
         }
+
+        // Wait approx. one second.
+        if (count == 100) {
+          Logging.d(TAG, "Restarting the AEC....");
+          effects.restartAEC();
+        }
+
         if (DEBUG) {
           long nowTime = System.nanoTime();
           long durationInMs = TimeUnit.NANOSECONDS.toMillis((nowTime - lastTime));

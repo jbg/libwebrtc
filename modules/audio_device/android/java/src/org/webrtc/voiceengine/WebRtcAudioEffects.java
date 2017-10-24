@@ -196,6 +196,18 @@ public class WebRtcAudioEffects {
     return true;
   }
 
+  public void restartAEC() {
+    assertTrue(aec != null);
+    if (isAcousticEchoCancelerSupported()) {
+      if (aec.setEnabled(false) == AudioEffect.SUCCESS) {
+        Logging.e(TAG, "AcousticEchoCanceler is now disabled");
+      }
+      if (aec.setEnabled(true) == AudioEffect.SUCCESS) {
+        Logging.e(TAG, "AcousticEchoCanceler is now enabled");
+      }
+    }
+  }
+
   public void enable(int audioSession) {
     Logging.d(TAG, "enable(audioSession=" + audioSession + ")");
     assertTrue(aec == null);
