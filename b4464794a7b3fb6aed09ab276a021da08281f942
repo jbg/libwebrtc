@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "d6826319_6de51f0f",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-24T22:18:05Z",
+      "side": 1,
+      "message": "An atomic is not cleaner up on lines 989-992, where we do not one, not two, but three separate operations on current_size_frame_. If we had a regular int and a mutex, we could just do the whole thing protected by the mutex, but with an atomic, we\u0027re left trying to figure out exactly what could go wrong if the threads interleave in interesting ways.\n\nMy advice is to just do\n\n  rtc::CriticalSection mutex_;\n  int current_size_frame_ RTC_GUARDED_BY(mutex_);\n\nand let the compiler tell you in which functions you need to grab the mutex.\n\nOtherwise, please replace the three atomic operations on lines 989-992 with something that doesn\u0027t have holes. A load followed by a looping compare_exchange_weak should work, I think?",
+      "parentUuid": "93d70c5e_0045e381",
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "def8cce4_6ef9cb36",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
