@@ -17,6 +17,7 @@
 // This is included for PacketOptions.
 #include "api/ortc/packettransportinterface.h"
 #include "rtc_base/asyncpacketsocket.h"
+#include "rtc_base/networkroute.h"
 #include "rtc_base/sigslot.h"
 #include "rtc_base/socket.h"
 
@@ -90,6 +91,10 @@ class PacketTransportInternal : public virtual webrtc::PacketTransportInterface,
   // Signalled each time a packet is sent on this channel.
   sigslot::signal2<PacketTransportInternal*, const rtc::SentPacket&>
       SignalSentPacket;
+
+  // Signalled when the current network route has changed.
+  // The parameter is the new network route with transport overhead.
+  sigslot::signal1<rtc::NetworkRoute> SignalNetworkRouteChanged;
 
  protected:
   PacketTransportInternal* GetInternal() override { return this; }
