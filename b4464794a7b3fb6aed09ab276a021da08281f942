@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5a288a2b_936fedc5",
+        "filename": "video/transport_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5061
+      },
+      "writtenOn": "2017-10-24T21:23:45Z",
+      "side": 1,
+      "message": "Done. Could be that Atomic32 doesn\u0027t have assignment operator and I translated it to std::atomic verbatim :)",
+      "parentUuid": "77085ebf_d003a9c1",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1bc03ea8_14d4d623",
         "filename": "video/transport_adapter.cc",
         "patchSetId": 4
@@ -66,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "3d8773fb_8396bff4",
+        "filename": "video/transport_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5061
+      },
+      "writtenOn": "2017-10-24T21:23:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bc03ea8_14d4d623",
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9caafb97_17da7ce5",
         "filename": "video/video_send_stream_tests.cc",
         "patchSetId": 4
@@ -77,6 +119,24 @@
       "writtenOn": "2017-10-24T10:51:22Z",
       "side": 1,
       "message": "I don\u0027t see why we should use an atomic here, as opposed to just using a regular int protected by a mutex. It\u0027s a test, so it\u0027s hardly performance critical...",
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93d70c5e_0045e381",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 5061
+      },
+      "writtenOn": "2017-10-24T21:23:45Z",
+      "side": 1,
+      "message": "I\u0027m not very familiar with the code here so I\u0027m not sure which sections should be locked... Also I feel like it\u0027s cleaner to use std::atomic than using int and wrapping it with mutex?",
+      "parentUuid": "9caafb97_17da7ce5",
       "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -130,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "bdfeeb5e_e49b9153",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5061
+      },
+      "writtenOn": "2017-10-24T21:23:45Z",
+      "side": 1,
+      "message": "\u003e Karl suggested using a single access to the atomic variable, and maybe using a less strict\n\u003e memory ordering. Doesn\u0027t have to be done for this cl, though.\n\nSounds like memory_order_release on ++posted_frames_waiting_for_encode_ and memory_order_acquire on --posted_frames_waiting_for_encode_? TBH I\u0027m don\u0027t know much about memory order...\n\n\u003e I would appreciate if you merged these two ops, though. As in\n\u003e \n\u003e   const int posted_frames_waiting_for_encode \u003d\n\u003e       video_stream_encoder_-\u003eposted_frames_waiting_for_encode_.fetch_sub(1);\n\u003e   RTC_DCHECK_GT(posted_frames_waiting_for_encode, 0);\n\u003e   if (posted_frames_waiting_for_encode \u003d\u003d 1) {\n\u003e \n\u003e (I feel it\u0027s a nice touch to use the named methods rather than the operators, since that makes it clear we\u0027re dealing with an atomic.)\n\nDone.",
+      "parentUuid": "961fec7c_caa54d94",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 74
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "901917cf_58b8cb51",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 4
@@ -150,6 +234,30 @@
       "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0ab549a_c0232322",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5061
+      },
+      "writtenOn": "2017-10-24T21:23:45Z",
+      "side": 1,
+      "message": "Done. Alternatively we could also use std::atomic_int",
+      "parentUuid": "901917cf_58b8cb51",
+      "range": {
+        "startLine": 289,
+        "startChar": 14,
+        "endLine": 289,
+        "endChar": 21
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
