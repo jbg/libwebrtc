@@ -205,6 +205,30 @@
     },
     {
       "key": {
+        "uuid": "daeab393_a700ccb3",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1908,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-24T13:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89d01bcd_07a518c8",
+      "range": {
+        "startLine": 1908,
+        "startChar": 27,
+        "endLine": 1908,
+        "endChar": 33
+      },
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0a08b3a_366fee51",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 1
@@ -262,6 +286,24 @@
       "writtenOn": "2017-10-13T10:25:39Z",
       "side": 1,
       "message": "WDYT about having a direction instead of a Incoming/OutgoingRtpReceiveGapTime?",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f9e365d_f9938799",
+        "filename": "rtc_tools/event_log_visualizer/triage_notifications.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-10-24T13:29:38Z",
+      "side": 1,
+      "message": "I\u0027ve tried, but it doesn\u0027t look very nice. There are basically 4 different combinations; incoming vs outgoing stream and receive times vs send time. We are currently warning about outgoing send and incoming receive so we would have to add at least 2 booleans to unify the classes.",
+      "parentUuid": "7b6273d1_fb2c84c8",
       "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
