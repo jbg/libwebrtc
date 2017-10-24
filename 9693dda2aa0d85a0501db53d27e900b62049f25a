@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c08a0619_10086b00",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-24T11:14:13Z",
+      "side": 1,
+      "message": "Can we add a DCHECK for this?",
+      "range": {
+        "startLine": 93,
+        "startChar": 21,
+        "endLine": 93,
+        "endChar": 38
+      },
+      "revId": "9693dda2aa0d85a0501db53d27e900b62049f25a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d35263ae_e4096e31",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-24T11:14:13Z",
+      "side": 1,
+      "message": "Might as well remove the Init() and Release() methods and just have the code in the ctor/dtor?",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 145,
+        "endChar": 9
+      },
+      "revId": "9693dda2aa0d85a0501db53d27e900b62049f25a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
