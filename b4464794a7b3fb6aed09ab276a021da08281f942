@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "88f20f3d_1fcff810",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-24T23:29:17Z",
+      "side": 1,
+      "message": "Thanks. Atomics are like light sabers---pretty and extremely cool, but often not the right weapon to choose because of the high risk that you\u0027ll cut your own arms off.",
+      "parentUuid": "1f3affc6_2992d670",
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "def8cce4_6ef9cb36",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
