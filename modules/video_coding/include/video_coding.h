@@ -74,77 +74,6 @@ class VideoCodingModule : public Module {
   // DEPRECATED.
   static VideoCodingModule* Create(Clock* clock, EventFactory* event_factory);
 
-  /*
-  *   Sender
-  */
-
-  // Registers a codec to be used for encoding. Calling this
-  // API multiple times overwrites any previously registered codecs.
-  //
-  // NOTE: Must be called on the thread that constructed the VCM instance.
-  //
-  // Input:
-  //      - sendCodec      : Settings for the codec to be registered.
-  //      - numberOfCores  : The number of cores the codec is allowed
-  //                         to use.
-  //      - maxPayloadSize : The maximum size each payload is allowed
-  //                                to have. Usually MTU - overhead.
-  //
-  // Return value      : VCM_OK, on success.
-  //                     < 0,    on error.
-  virtual int32_t RegisterSendCodec(const VideoCodec* sendCodec,
-                                    uint32_t numberOfCores,
-                                    uint32_t maxPayloadSize) = 0;
-
-  // Register an external encoder object. This can not be used together with
-  // external decoder callbacks.
-  //
-  // Input:
-  //      - externalEncoder : Encoder object to be used for encoding frames
-  //      inserted
-  //                          with the AddVideoFrame API.
-  //      - payloadType     : The payload type bound which this encoder is bound
-  //      to.
-  //
-  // Return value      : VCM_OK, on success.
-  //                     < 0,    on error.
-  // TODO(pbos): Remove return type when unused elsewhere.
-  virtual int32_t RegisterExternalEncoder(VideoEncoder* externalEncoder,
-                                          uint8_t payloadType,
-                                          bool internalSource = false) = 0;
-
-  // API to get currently configured encoder target bitrate in bits/s.
-  //
-  // Return value      : 0,   on success.
-  //                     < 0, on error.
-  virtual int Bitrate(unsigned int* bitrate) const = 0;
-
-  // API to get currently configured encoder target frame rate.
-  //
-  // Return value      : 0,   on success.
-  //                     < 0, on error.
-  virtual int FrameRate(unsigned int* framerate) const = 0;
-
-  // Sets the parameters describing the send channel. These parameters are
-  // inputs to the
-  // Media Optimization inside the VCM and also specifies the target bit rate
-  // for the
-  // encoder. Bit rate used by NACK should already be compensated for by the
-  // user.
-  //
-  // Input:
-  //      - target_bitrate        : The target bitrate for VCM in bits/s.
-  //      - lossRate              : Fractions of lost packets the past second.
-  //                                (loss rate in percent = 100 * packetLoss /
-  //                                255)
-  //      - rtt                   : Current round-trip time in ms.
-  //
-  // Return value      : VCM_OK, on success.
-  //                     < 0,         on error.
-  virtual int32_t SetChannelParameters(uint32_t target_bitrate,
-                                       uint8_t lossRate,
-                                       int64_t rtt) = 0;
-
   // Sets the parameters describing the receive channel. These parameters are
   // inputs to the
   // Media Optimization inside the VCM.
@@ -159,13 +88,6 @@ class VideoCodingModule : public Module {
   //                     < 0,    on error.
   virtual int32_t SetReceiveChannelParameters(int64_t rtt) = 0;
 
-  // Deprecated: This method currently does not have any effect.
-  // Register a video protection callback which will be called to deliver
-  // the requested FEC rate and NACK status (on/off).
-  // TODO(perkj): Remove once no projects use it.
-  virtual int32_t RegisterProtectionCallback(
-      VCMProtectionCallback* protection) = 0;
-
   // Enable or disable a video protection method.
   //
   // Input:
@@ -177,45 +99,6 @@ class VideoCodingModule : public Module {
   //                     < 0,    on error.
   virtual int32_t SetVideoProtection(VCMVideoProtection videoProtection,
                                      bool enable) = 0;
-
-  // Add one raw video frame to the encoder. This function does all the
-  // necessary
-  // processing, then decides what frame type to encode, or if the frame should
-  // be
-  // dropped. If the frame should be encoded it passes the frame to the encoder
-  // before it returns.
-  //
-  // Input:
-  //      - videoFrame        : Video frame to encode.
-  //      - codecSpecificInfo : Extra codec information, e.g., pre-parsed
-  //      in-band signaling.
-  //
-  // Return value      : VCM_OK, on success.
-  //                     < 0,    on error.
-  virtual int32_t AddVideoFrame(
-      const VideoFrame& videoFrame,
-      const CodecSpecificInfo* codecSpecificInfo = NULL) = 0;
-
-  // Next frame encoded should be an intra frame (keyframe).
-  //
-  // Return value      : VCM_OK, on success.
-  //                     < 0,    on error.
-  virtual int32_t IntraFrameRequest(size_t stream_index) = 0;
-
-  // Frame Dropper enable. Can be used to disable the frame dropping when the
-  // encoder
-  // over-uses its bit rate. This API is designed to be used when the encoded
-  // frames
-  // are supposed to be stored to an AVI file, or when the I420 codec is used
-  // and the
-  // target bit rate shouldn't affect the frame rate.
-  //
-  // Input:
-  //      - enable            : True to enable the setting, false to disable it.
-  //
-  // Return value      : VCM_OK, on success.
-  //                     < 0,    on error.
-  virtual int32_t EnableFrameDropper(bool enable) = 0;
 
   /*
   *   Receiver
@@ -410,8 +293,6 @@ class VideoCodingModule : public Module {
   // delayed by at least desired_delay_ms.
   virtual int SetMinReceiverDelay(int desired_delay_ms) = 0;
 
-  virtual void RegisterPostEncodeImageCallback(
-      EncodedImageCallback* post_encode_callback) = 0;
   // Releases pending decode calls, permitting faster thread shutdown.
   virtual void TriggerDecoderShutdown() = 0;
 };
