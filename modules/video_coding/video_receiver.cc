@@ -374,8 +374,7 @@ int32_t VideoReceiver::IncomingPacket(const uint8_t* incomingPayload,
 }
 
 // Minimum playout delay (used for lip-sync). This is the minimum delay required
-// to sync with audio. Not included in  VideoCodingModule::Delay()
-// Defaults to 0 ms.
+// to sync with audio. Defaults to 0 ms.
 int32_t VideoReceiver::SetMinimumPlayoutDelay(uint32_t minPlayoutDelayMs) {
   _timing->set_min_playout_delay(minPlayoutDelayMs);
   return VCM_OK;
@@ -394,17 +393,17 @@ int32_t VideoReceiver::Delay() const {
 }
 
 int VideoReceiver::SetReceiverRobustnessMode(
-    VideoCodingModule::ReceiverRobustness robustnessMode,
+    ReceiverRobustness robustnessMode,
     VCMDecodeErrorMode decode_error_mode) {
   RTC_DCHECK(construction_thread_.CalledOnValidThread());
   // TODO(tommi): This method must only be called when the decoder thread
   // is not running and we don't need to hold this lock.
   rtc::CritScope cs(&receive_crit_);
   switch (robustnessMode) {
-    case VideoCodingModule::kNone:
+    case ReceiverRobustness::kNone:
       _receiver.SetNackMode(kNoNack, -1, -1);
       break;
-    case VideoCodingModule::kHardNack:
+    case ReceiverRobustness::kHardNack:
       // Always wait for retransmissions (except when decoding with errors).
       _receiver.SetNackMode(kNack, -1, -1);
       break;
