@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "327e3f0c_afabeb31",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T13:00:46Z",
+      "side": 1,
+      "message": "I take it rtcp::ReceiverReport represents a complete RTCP packet,\nwhich is then encapsulated inside a \"compound RTCP packet\"?\n\nDoes a compound RTCP packet carry any headers or structure of its own, or is it just the concatenation of one or more RTCP packets in a single UDP packet?",
+      "range": {
+        "startLine": 88,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 21
+      },
+      "revId": "0f6d8dd6cf880bc398bb611cfe3ef0914258b15e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7552b59_ae5a053c",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-24T13:00:46Z",
+      "side": 1,
+      "message": "Maybe strike \"Full\" from the name.",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "0f6d8dd6cf880bc398bb611cfe3ef0914258b15e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
