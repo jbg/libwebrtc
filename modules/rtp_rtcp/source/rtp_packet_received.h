@@ -18,9 +18,10 @@ namespace webrtc {
 // Class to hold rtp packet with metadata for receiver side.
 class RtpPacketReceived : public RtpPacket {
  public:
-  RtpPacketReceived() = default;
-  explicit RtpPacketReceived(const ExtensionManager* extensions)
-      : RtpPacket(extensions) {}
+  RtpPacketReceived();
+  explicit RtpPacketReceived(const ExtensionManager* extensions);
+
+  ~RtpPacketReceived();
 
   // TODO(danilchap): Remove this function when all code update to use RtpPacket
   // directly. Function is there just for easier backward compatibilty.
@@ -44,11 +45,21 @@ class RtpPacketReceived : public RtpPacket {
     payload_type_frequency_ = value;
   }
 
+  // Additional data bound to the RTP packet for use in application code,
+  // outside of WebRTC.
+  rtc::ArrayView<const uint8_t> application_data() const {
+    return application_data_;
+  }
+  void set_application_data(rtc::ArrayView<const uint8_t> application_data) {
+    application_data_ = application_data;
+  }
+
  private:
   NtpTime capture_time_;
   int64_t arrival_time_ms_ = 0;
   int payload_type_frequency_ = 0;
   bool recovered_ = false;
+  rtc::ArrayView<const uint8_t> application_data_;
 };
 
 }  // namespace webrtc
