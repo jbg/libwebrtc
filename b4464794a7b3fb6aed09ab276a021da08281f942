@@ -25,6 +25,64 @@
     },
     {
       "key": {
+        "uuid": "77085ebf_d003a9c1",
+        "filename": "video/transport_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-24T10:51:22Z",
+      "side": 1,
+      "message": "+1. We want to unconditionally set it to true, so why would a plain store not do?",
+      "parentUuid": "cb5862ad_507ebd69",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bc03ea8_14d4d623",
+        "filename": "video/transport_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-24T10:51:22Z",
+      "side": 1,
+      "message": "And same here.",
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9caafb97_17da7ce5",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-24T10:51:22Z",
+      "side": 1,
+      "message": "I don\u0027t see why we should use an atomic here, as opposed to just using a regular int protected by a mutex. It\u0027s a test, so it\u0027s hardly performance critical...",
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "def8cce4_6ef9cb36",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
@@ -36,6 +94,30 @@
       "writtenOn": "2017-10-24T07:20:07Z",
       "side": 1,
       "message": "Karl suggested using a single access to the atomic variable, and maybe using a less strict memory ordering. Doesn\u0027t have to be done for this cl, though.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 74
+      },
+      "revId": "b4464794a7b3fb6aed09ab276a021da08281f942",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "961fec7c_caa54d94",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-24T10:51:22Z",
+      "side": 1,
+      "message": "I would appreciate if you merged these two ops, though. As in\n\n  const int posted_frames_waiting_for_encode \u003d\n      video_stream_encoder_-\u003eposted_frames_waiting_for_encode_.fetch_sub(1);\n  RTC_DCHECK_GT(posted_frames_waiting_for_encode, 0);\n  if (posted_frames_waiting_for_encode \u003d\u003d 1) {\n\n(I feel it\u0027s a nice touch to use the named methods rather than the operators, since that makes it clear we\u0027re dealing with an atomic.)",
+      "parentUuid": "def8cce4_6ef9cb36",
       "range": {
         "startLine": 145,
         "startChar": 0,
