@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "41e9d281_236e8e09",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-24T10:59:52Z",
+      "side": 1,
+      "message": "Not without a major refactoring of the test infrastructure, to allow mocking of it....",
+      "parentUuid": "900ae9d5_9c8668a3",
+      "revId": "7377da8974824e528bb0a8b6f2081849b1342215",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f5f7361_6ea59064",
         "filename": "video/video_send_stream.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "7377da8974824e528bb0a8b6f2081849b1342215",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f703040_965f69e7",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-10-24T10:59:52Z",
+      "side": 1,
+      "message": "Moved to helper function.",
+      "parentUuid": "8f5f7361_6ea59064",
+      "revId": "7377da8974824e528bb0a8b6f2081849b1342215",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
