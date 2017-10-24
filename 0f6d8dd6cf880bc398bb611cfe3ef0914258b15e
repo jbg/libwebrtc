@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6dfaec09_47277487",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-24T15:11:14Z",
+      "side": 1,
+      "message": "I\u0027ve explicitly mention RFC5506 section 2 for definitions and added a todo here, since this function doesn\u0027t (yet) send compound packet as it is defined.\n\nrtcp::ReceiverReport represents an RTCP packet.\ncompound RTCP packet has no own structure - it is just the concatenation of several RTCP packets in single UDP packet:\nconcatenated RTCP packets started with SR or RR followed by SDES and, maybe, more RTCP packets called compound RTCP packet.\nconcatenated RTCP packets that does not start with SR/RR is called reduced-size RTCP packet.",
+      "parentUuid": "327e3f0c_afabeb31",
+      "range": {
+        "startLine": 88,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 21
+      },
+      "revId": "0f6d8dd6cf880bc398bb611cfe3ef0914258b15e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7552b59_ae5a053c",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "0f6d8dd6cf880bc398bb611cfe3ef0914258b15e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b836d439_87aef0fe",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-24T15:11:14Z",
+      "side": 1,
+      "message": "Done,\nDouble checked terminology from https://tools.ietf.org/html/rfc5506#section-2\nYou right, Full should be dropped, I understood definition of compound packet incorrectly.",
+      "parentUuid": "b7552b59_ae5a053c",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "0f6d8dd6cf880bc398bb611cfe3ef0914258b15e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
