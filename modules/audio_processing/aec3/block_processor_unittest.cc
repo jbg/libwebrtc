@@ -47,7 +47,9 @@ void RunBasicSetupAndApiCallTest(int sample_rate_hz) {
 }
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
-void RunRenderBlockSizeVerificationTest(int sample_rate_hz) {
+// TODO(gustaf): Re-enable the test once the issue with memory leaks during
+// DEATH tests on test bots has been fixed.
+void DISABLED_RunRenderBlockSizeVerificationTest(int sample_rate_hz) {
   std::unique_ptr<BlockProcessor> block_processor(
       BlockProcessor::Create(EchoCanceller3Config(), sample_rate_hz));
   std::vector<std::vector<float>> block(
