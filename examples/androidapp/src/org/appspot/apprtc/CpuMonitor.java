@@ -225,8 +225,7 @@ class CpuMonitor {
 
   private void init() {
     try {
-      FileReader fin = new FileReader("/sys/devices/system/cpu/present");
-      try {
+      try (FileReader fin = new FileReader("/sys/devices/system/cpu/present")) {
         BufferedReader reader = new BufferedReader(fin);
         Scanner scanner = new Scanner(reader).useDelimiter("[-\n]");
         scanner.nextInt(); // Skip leading number 0.
@@ -234,8 +233,6 @@ class CpuMonitor {
         scanner.close();
       } catch (Exception e) {
         Log.e(TAG, "Cannot do CPU stats due to /sys/devices/system/cpu/present parsing problem");
-      } finally {
-        fin.close();
       }
     } catch (FileNotFoundException e) {
       Log.e(TAG, "Cannot do CPU stats since /sys/devices/system/cpu/present is missing");
@@ -438,12 +435,9 @@ class CpuMonitor {
   private long readFreqFromFile(String fileName) {
     long number = 0;
     try {
-      BufferedReader reader = new BufferedReader(new FileReader(fileName));
-      try {
+      try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
         String line = reader.readLine();
         number = parseLong(line);
-      } finally {
-        reader.close();
       }
     } catch (FileNotFoundException e) {
       // CPU core is off, so file with its scaling frequency .../cpufreq/scaling_cur_freq
@@ -474,8 +468,7 @@ class CpuMonitor {
     long systemTime = 0;
     long idleTime = 0;
     try {
-      BufferedReader reader = new BufferedReader(new FileReader("/proc/stat"));
-      try {
+      try (BufferedReader reader = new BufferedReader(new FileReader("/proc/stat"))) {
         // line should contain something like this:
         // cpu  5093818 271838 3512830 165934119 101374 447076 272086 0 0 0
         //       user    nice  system     idle   iowait  irq   softirq
@@ -496,8 +489,6 @@ class CpuMonitor {
       } catch (Exception e) {
         Log.e(TAG, "Problems parsing /proc/stat", e);
         return null;
-      } finally {
-        reader.close();
       }
     } catch (FileNotFoundException e) {
       Log.e(TAG, "Cannot open /proc/stat for reading", e);
