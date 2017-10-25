@@ -305,10 +305,8 @@ void TaskQueue::Impl::PostDelayedTask(std::unique_ptr<QueuedTask> task,
   // and WPARAM is 32bits in 32bit builds.  Otherwise, we could pass the
   // task pointer and timestamp as LPARAM and WPARAM.
   auto* task_info = new DelayedTaskInfo(milliseconds, std::move(task));
-  if (!::PostThreadMessage(thread_.GetThreadRef(), WM_QUEUE_DELAYED_TASK, 0,
-                           reinterpret_cast<LPARAM>(task_info))) {
-    delete task_info;
-  }
+  RTC_CHECK(::PostThreadMessage(thread_.GetThreadRef(), WM_QUEUE_DELAYED_TASK,
+                                0, reinterpret_cast<LPARAM>(task_info)));
 }
 
 void TaskQueue::Impl::PostTaskAndReply(std::unique_ptr<QueuedTask> task,
@@ -317,15 +315,15 @@ void TaskQueue::Impl::PostTaskAndReply(std::unique_ptr<QueuedTask> task,
   QueuedTask* task_ptr = task.release();
   QueuedTask* reply_task_ptr = reply.release();
   DWORD reply_thread_id = reply_queue->thread_.GetThreadRef();
+  // TODO(nisse): Leaks |task| and |reply| if the TaskQueue is
+  // destroyed before the task is run. We need to new task to have ownership.
   PostTask([task_ptr, reply_task_ptr, reply_thread_id]() {
     if (task_ptr->Run())
       delete task_ptr;
     // If the thread's message queue is full, we can't queue the task and will
     // have to drop it (i.e. delete).
-    if (!::PostThreadMessage(reply_thread_id, WM_RUN_TASK, 0,
-                             reinterpret_cast<LPARAM>(reply_task_ptr))) {
-      delete reply_task_ptr;
-    }
+    RTC_CHECK(::PostThreadMessage(reply_thread_id, WM_RUN_TASK, 0,
+                                  reinterpret_cast<LPARAM>(reply_task_ptr)));
   });
 }
 
