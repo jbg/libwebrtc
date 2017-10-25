@@ -16,6 +16,24 @@
       "revId": "37f077b1da2ceb27914fdbd9a1f35f1e6b107ee9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d29855f4_59833911",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-10-25T00:51:17Z",
+      "side": 1,
+      "message": "That is a good suggestion, but it is also the || vs \u0026\u0026 lurking in the converged_filter || SufficientFilterUpdates() expression.\n\nI\u0027ll keep it as it is now, and make this better in the CL for cleaning up this code.",
+      "parentUuid": "e8710c44_41170185",
+      "revId": "37f077b1da2ceb27914fdbd9a1f35f1e6b107ee9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
