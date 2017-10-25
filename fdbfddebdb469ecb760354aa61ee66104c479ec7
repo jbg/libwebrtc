@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddcd0a55_6b90ed5a",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-25T01:22:49Z",
+      "side": 1,
+      "message": "Should this be removed?",
+      "range": {
+        "startLine": 426,
+        "startChar": 2,
+        "endLine": 427,
+        "endChar": 42
+      },
+      "revId": "fdbfddebdb469ecb760354aa61ee66104c479ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
