@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24d218e6_2dbad438",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-25T09:28:09Z",
+      "side": 1,
+      "message": "Do we care about supporting non-linux? If so we need to check for EINTR on all syscalls and retry.",
+      "range": {
+        "startLine": 365,
+        "startChar": 8,
+        "endLine": 365,
+        "endChar": 13
+      },
+      "revId": "559b354fe5a507dbe17146c488fa8436c8b5f43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e6eba94_b0d0b65a",
+        "filename": "rtc_base/task_queue_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-25T09:28:09Z",
+      "side": 1,
+      "message": "What happens if the reply task queue is destroyed in the mean time? If we\u0027re really unlucky,\nthe thread id might have been reused for an unrelated thread.\n\nWe could probably support task queues being destroyed regardless of reply-task relations,\nby taking advantage of the fact that TaskQueue::Impl is reference counted.",
+      "range": {
+        "startLine": 325,
+        "startChar": 34,
+        "endLine": 325,
+        "endChar": 49
+      },
+      "revId": "559b354fe5a507dbe17146c488fa8436c8b5f43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
