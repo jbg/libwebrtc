@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55b915b5_efa39667",
+        "filename": "test/fuzzers/audio_processing_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2017-10-25T11:06:49Z",
+      "side": 0,
+      "message": "Not anymore, apparently!",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "7275e184390794aff127003ed91a1c92ed1f13a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
