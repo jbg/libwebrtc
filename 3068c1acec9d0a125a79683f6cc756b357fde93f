@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "acbac47e_e023ae44",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "Please add comment about the fact that audio processing is kept alive for the false state.\n\nPerhaps not in this CL but is there any chance that we could add a possibility to disable playout without the extra step of keeping audio processing alive? It seems like a rather unique thing and I assume that the main benefit of this CL is to allow the user to control playout timing better and not necessarily to also keep audio processing alive.",
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ef702a8_4da9745c",
         "filename": "audio/null_audio_poller.cc",
         "patchSetId": 1
@@ -19,6 +36,108 @@
         "endLine": 21,
         "endChar": 9
       },
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26927618_e664a475",
+        "filename": "audio/null_audio_poller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "Fixed and known size. Can be pre-allocated instead.",
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06df5913_3475d57e",
+        "filename": "call/audio_state.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "It was this type of comment I asked for in the PC interface ;-)",
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afe4248b_5d010794",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3243,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "\"Set up audio-call where playout is disabled on caller\u0027s side\".",
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd10c563_051660c4",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3253,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "\"playout level\" feels a bit vague. Please emphasize that it is the audio device which should be inactivated for playout.",
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f92eb37_1eab5bd7",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3292,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "..where playout is disabled but audio-processing is active...",
+      "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34c071c1_09fa0fd2",
+        "filename": "voice_engine/voe_base_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-10-25T09:57:04Z",
+      "side": 1,
+      "message": "Pleas add an INFO debug with state so we can track if/when this API is called.\nGiven that playout can be affected in more than one way it adds value to know\nwhen and how this API is called.",
       "revId": "3068c1acec9d0a125a79683f6cc756b357fde93f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
