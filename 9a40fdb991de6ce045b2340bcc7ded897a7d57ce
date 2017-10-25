@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b06d9bae_ce02ec9f",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-25T11:11:48Z",
+      "side": 1,
+      "message": "No, it returns 0 on success, -1 on error.",
+      "parentUuid": "f3add8a0_b764ec15",
+      "range": {
+        "startLine": 353,
+        "startChar": 14,
+        "endLine": 353,
+        "endChar": 16
+      },
+      "revId": "9a40fdb991de6ce045b2340bcc7ded897a7d57ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bdb1ad6a_f4e7b325",
         "filename": "rtc_base/task_queue_win.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "9a40fdb991de6ce045b2340bcc7ded897a7d57ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47a0bf0e_100db847",
+        "filename": "rtc_base/task_queue_win.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-25T11:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdb1ad6a_f4e7b325",
+      "range": {
+        "startLine": 319,
+        "startChar": 47,
+        "endLine": 319,
+        "endChar": 49
+      },
+      "revId": "9a40fdb991de6ce045b2340bcc7ded897a7d57ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
