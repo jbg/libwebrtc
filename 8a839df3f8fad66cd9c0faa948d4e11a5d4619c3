@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "af39d243_2e51d988",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2159,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "nit: I think these could be more robust as a separate method with a switch. Like this:\n\nswitch (candidate.address().family()) {\n  case AF_INET:  // IPv4\n    return 20;\n  case AF_INET6:  // IPv6\n    return 40;\n  default:\n     RTC_NOTREACHED();\n}\n\nThen this function could just be (for example):\n\nreturn GetNetworkLayerOverhead(selected_connection_-\u003elocal_candidate()) + GetTransportLayerOverhead(selected_connection_-\u003elocal_candidate())",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ed23c2f_d5ecaa4d",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "Will this also need to handle TLS? (At least we should DCHECK if it\u0027s not TCP or UDP).",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e229b3_86272b70",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "This could use a comment.",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21d7962a_e031d215",
+        "filename": "pc/channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "Is this in preparation for a future CL? I don\u0027t see it being used anywhere.",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71fe07d0_f7d3497b",
         "filename": "pc/srtptransport.cc",
         "patchSetId": 5
@@ -22,6 +90,64 @@
       "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2707110c_607e9ef8",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "It looks like you could get rid of |srtp_overhead_per_packet| by caching the NetworkRoute as it was received from the layer below (i.e., without any SRTP overhead added in). Then whenever you need to signal up the network route change, create a copy of the NetworkRoute and add the SRTP overhead to the copy (in fact, this could be factored out in to a separate method so that the duplication between this and OnNetworkRouteChanged can be eliminated).",
+      "parentUuid": "71fe07d0_f7d3497b",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 3
+      },
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f869ed07_e1192153",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "Perhaps document here that a value of 0 indicates that there is no selected connection? Or maybe have a more direct indicator of such?",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12929be7_600222cb",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-25T21:35:54Z",
+      "side": 1,
+      "message": "What are your thoughts on removing all but the default constructor and requiring callers to set the fields individually? I think it might be more clear since they will be named and then we don\u0027t have to provide a bunch of constructors.\n\n(Although maybe save deleting the existing constructor for another CL if you don\u0027t want to get a video/ reviewer.)",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
