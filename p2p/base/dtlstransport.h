@@ -194,6 +194,7 @@ class DtlsTransport : public DtlsTransportInternal {
   void OnReadyToSend(rtc::PacketTransportInternal* transport);
   void OnReceivingState(rtc::PacketTransportInternal* transport);
   void OnDtlsEvent(rtc::StreamInterface* stream_, int sig, int err);
+  void OnNetworkRouteChanged(rtc::NetworkRoute network_route);
   bool SetupDtls();
   void MaybeStartDtls();
   bool HandleDtlsPacket(const char* data, size_t size);

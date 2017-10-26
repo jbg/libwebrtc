@@ -21,15 +21,20 @@ struct NetworkRoute {
   bool connected;
   uint16_t local_network_id;
   uint16_t remote_network_id;
-  int last_sent_packet_id;  // Last packet id sent on the PREVIOUS route.
+  // Last packet id sent on the PREVIOUS route.
+  int last_sent_packet_id;
+  // An overhead of 0 means that no network route is selected.
+  int transport_overhead_per_packet;
 
   NetworkRoute()
       : connected(false),
         local_network_id(0),
         remote_network_id(0),
-        last_sent_packet_id(-1) {}
+        last_sent_packet_id(-1),
+        transport_overhead_per_packet(0) {}
 
   // The route is connected if the local and remote network ids are provided.
+  // TODO(zhihuang): Remove this and let the caller set the fields explicitly.
   NetworkRoute(bool connected,
                uint16_t local_net_id,
                uint16_t remote_net_id,
@@ -37,7 +42,8 @@ struct NetworkRoute {
       : connected(connected),
         local_network_id(local_net_id),
         remote_network_id(remote_net_id),
-        last_sent_packet_id(last_packet_id) {}
+        last_sent_packet_id(last_packet_id),
+        transport_overhead_per_packet(0) {}
 
   // |last_sent_packet_id| does not affect the NetworkRoute comparison.
   bool operator==(const NetworkRoute& nr) const {

@@ -1213,26 +1213,26 @@ class ChannelTest : public testing::Test, public sigslot::has_slots<> {
 
     media_channel1->set_num_network_route_changes(0);
     network_thread_->Invoke<void>(RTC_FROM_HERE, [this] {
+      rtc::NetworkRoute network_route;
       // The transport channel becomes disconnected.
-      fake_rtp_dtls_transport1_->ice_transport()
-          ->SignalSelectedCandidatePairChanged(
-              fake_rtp_dtls_transport1_->ice_transport(), nullptr, -1, false);
+      fake_rtp_dtls_transport1_->ice_transport()->SignalNetworkRouteChanged(
+          network_route);
     });
     WaitForThreads();
     EXPECT_EQ(1, media_channel1->num_network_route_changes());
     EXPECT_FALSE(media_channel1->last_network_route().connected);
     media_channel1->set_num_network_route_changes(0);
 
+    constexpr int kTransportOverheadPerPacket = 28;  // Ipv4(20) + UDP(8).
     network_thread_->Invoke<void>(RTC_FROM_HERE, [this] {
-      // The transport channel becomes connected.
-      rtc::SocketAddress local_address("192.168.1.1", 1000 /* port number */);
-      rtc::SocketAddress remote_address("192.168.1.2", 2000 /* port number */);
-      auto candidate_pair = cricket::FakeCandidatePair::Create(
-          local_address, kLocalNetId, remote_address, kRemoteNetId);
-      fake_rtp_dtls_transport1_->ice_transport()
-          ->SignalSelectedCandidatePairChanged(
-              fake_rtp_dtls_transport1_->ice_transport(), candidate_pair.get(),
-              kLastPacketId, true);
+      rtc::NetworkRoute network_route;
+      network_route.connected = true;
+      network_route.local_network_id = kLocalNetId;
+      network_route.remote_network_id = kRemoteNetId;
+      network_route.last_sent_packet_id = kLastPacketId;
+      network_route.transport_overhead_per_packet = kTransportOverheadPerPacket;
+      fake_rtp_dtls_transport1_->ice_transport()->SignalNetworkRouteChanged(
+          network_route);
     });
     WaitForThreads();
     EXPECT_EQ(1, media_channel1->num_network_route_changes());
@@ -1241,7 +1241,6 @@ class ChannelTest : public testing::Test, public sigslot::has_slots<> {
     EXPECT_EQ(expected_network_route, media_channel1->last_network_route());
     EXPECT_EQ(kLastPacketId,
               media_channel1->last_network_route().last_sent_packet_id);
-    constexpr int kTransportOverheadPerPacket = 28;  // Ipv4(20) + UDP(8).
     EXPECT_EQ(kTransportOverheadPerPacket,
               media_channel1->transport_overhead_per_packet());
   }
