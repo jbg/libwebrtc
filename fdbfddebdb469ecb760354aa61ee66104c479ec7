@@ -22,6 +22,30 @@
       "revId": "fdbfddebdb469ecb760354aa61ee66104c479ec7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da41ff42_b09fb24f",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-26T23:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddcd0a55_6b90ed5a",
+      "range": {
+        "startLine": 426,
+        "startChar": 2,
+        "endLine": 427,
+        "endChar": 42
+      },
+      "revId": "fdbfddebdb469ecb760354aa61ee66104c479ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
