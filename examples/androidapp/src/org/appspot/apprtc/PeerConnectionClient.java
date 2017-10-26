@@ -720,6 +720,7 @@ public class PeerConnectionClient {
     return rootEglBase.getEglBaseContext();
   }
 
+  @SuppressWarnings("deprecation") // TODO(sakal): getStats is deprecated.
   private void getStats() {
     if (peerConnection == null || isError) {
       return;
