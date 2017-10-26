@@ -143,6 +143,7 @@ public class ThreadUtils {
     return result;
   }
 
+  @SuppressWarnings("WaitNotInLoop")
   public static void waitUninterruptibly(final Object object) {
     executeUninterruptibly(new BlockingOperation() {
       @Override
