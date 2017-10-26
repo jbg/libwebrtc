@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1479c902_894d8f68",
+        "filename": "modules/rtp_rtcp/source/rtp_format_vp8.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-26T09:19:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c76ab43_e51b4b32",
+      "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0442d0e_7b7eb0ce",
         "filename": "modules/rtp_rtcp/source/rtp_format_vp8.h",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "8d1281e6_f2f88bc7",
+        "filename": "modules/rtp_rtcp/source/rtp_format_vp8.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-26T09:19:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0442d0e_7b7eb0ce",
+      "range": {
+        "startLine": 66,
+        "startChar": 24,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4cc0bcaa_5b66204f",
         "filename": "modules/rtp_rtcp/source/rtp_format_vp8.h",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2017-10-26T08:46:30Z",
       "side": 1,
       "message": "may be rename parameter to first_packet_in_frame or first_packet",
+      "range": {
+        "startLine": 92,
+        "startChar": 24,
+        "endLine": 92,
+        "endChar": 45
+      },
+      "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a23c08f_1983e8c1",
+        "filename": "modules/rtp_rtcp/source/rtp_format_vp8.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-26T09:19:29Z",
+      "side": 1,
+      "message": "Renamed to first_packet, to match the renamed InfoStruct::first_packet.",
+      "parentUuid": "4cc0bcaa_5b66204f",
       "range": {
         "startLine": 92,
         "startChar": 24,
@@ -85,6 +151,30 @@
       "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b4ffea_345bf562",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-10-26T09:19:29Z",
+      "side": 1,
+      "message": "I think it\u0027s currently ignored for everything but h.264, and we might add a comment on that everywhere in the call chain... Do you think it\u0027s helpful with a comment specifically for VP8 here? What should we say?",
+      "parentUuid": "6dcf009c_6fadb0b0",
+      "range": {
+        "startLine": 376,
+        "startChar": 61,
+        "endLine": 376,
+        "endChar": 74
+      },
+      "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
