@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1aa82bd_022cb4eb",
+        "filename": "rtc_base/opensslidentity.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T02:40:25Z",
+      "side": 1,
+      "message": "nit: Couldn\u0027t we get rid of certificate_, and replace every reference to certificate_ with \"cert_chain_.Get(0)\"?",
+      "revId": "3fdfa0bfe4136488cd230387cc6c960a33ec5108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "574116fb_52ca5ba3",
+        "filename": "rtc_base/sslstreamadapter_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T02:40:25Z",
+      "side": 1,
+      "message": "nit: \"more than one certificate.\"",
+      "revId": "3fdfa0bfe4136488cd230387cc6c960a33ec5108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
