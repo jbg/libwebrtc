@@ -345,6 +345,14 @@ class P2PTransportChannel : public IceTransportInternal,
   // Sets the receiving state, signaling if necessary.
   void set_receiving(bool receiving);
 
+  // Get the network layer overhead per packet based on the IP address family of
+  // the candidate.
+  int GetNetworkLayerOverhead(const Candidate& candidate);
+  // Get the transport layer overhead per packet based on the protocol.
+  int GetTransportLayerOverhead(const Candidate& candidate);
+  // Network layer overhead + transport layer overhead.
+  int GetIceTransportOverhead();
+
   std::string transport_name_;
   int component_;
   PortAllocator* allocator_;

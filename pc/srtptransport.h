@@ -15,6 +15,7 @@
 #include <string>
 #include <utility>
 
+#include "p2p/base/icetransportinternal.h"
 #include "pc/rtptransportinternal.h"
 #include "pc/srtpfilter.h"
 #include "pc/srtpsession.h"
@@ -159,8 +160,8 @@ class SrtpTransport : public RtpTransportInternal {
   void OnPacketReceived(bool rtcp,
                         rtc::CopyOnWriteBuffer* packet,
                         const rtc::PacketTime& packet_time);
-
   void OnReadyToSend(bool ready) { SignalReadyToSend(ready); }
+  void OnNetworkRouteChanged(rtc::NetworkRoute network_route);
 
   bool ProtectRtp(void* data, int in_len, int max_len, int* out_len);
 
@@ -178,6 +179,10 @@ class SrtpTransport : public RtpTransportInternal {
 
   bool UnprotectRtcp(void* data, int in_len, int* out_len);
 
+  bool HasSelectedNetworkRoute() {
+    return network_route_.transport_overhead_per_packet;
+  }
+
   const std::string content_name_;
   std::unique_ptr<RtpTransportInternal> rtp_transport_;
 
@@ -189,6 +194,8 @@ class SrtpTransport : public RtpTransportInternal {
   std::vector<int> send_encrypted_header_extension_ids_;
   std::vector<int> recv_encrypted_header_extension_ids_;
   bool external_auth_enabled_ = false;
+
+  rtc::NetworkRoute network_route_;
 
   int rtp_abs_sendtime_extn_id_ = -1;
 };

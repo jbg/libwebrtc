@@ -174,6 +174,8 @@ BaseChannel::BaseChannel(rtc::Thread* worker_thread,
   // channel to signal.
   rtp_transport_->SignalPacketReceived.connect(this,
                                                &BaseChannel::OnPacketReceived);
+  rtp_transport_->SignalNetworkRouteChanged.connect(
+      this, &BaseChannel::OnNetworkRouteChanged);
   LOG(LS_INFO) << "Created channel for " << content_name;
 }
 
@@ -346,6 +348,9 @@ void BaseChannel::SetTransport_n(
     DtlsTransportInternal* new_dtls_transport,
     rtc::PacketTransportInternal* new_packet_transport) {
   RTC_DCHECK(network_thread_->IsCurrent());
+  if (new_dtls_transport) {
+    RTC_DCHECK(new_dtls_transport == new_packet_transport);
+  }
   DtlsTransportInternal*& old_dtls_transport =
       rtcp ? rtcp_dtls_transport_ : rtp_dtls_transport_;
   rtc::PacketTransportInternal* old_packet_transport =
@@ -400,21 +405,14 @@ void BaseChannel::ConnectToDtlsTransport(DtlsTransportInternal* transport) {
   transport->SignalWritableState.connect(this, &BaseChannel::OnWritableState);
   transport->SignalDtlsState.connect(this, &BaseChannel::OnDtlsState);
   transport->SignalSentPacket.connect(this, &BaseChannel::SignalSentPacket_n);
-  transport->ice_transport()->SignalSelectedCandidatePairChanged.connect(
-      this, &BaseChannel::OnSelectedCandidatePairChanged);
 }
 
 void BaseChannel::DisconnectFromDtlsTransport(
     DtlsTransportInternal* transport) {
   RTC_DCHECK(network_thread_->IsCurrent());
-  OnSelectedCandidatePairChanged(transport->ice_transport(), nullptr, -1,
-                                 false);
-
   transport->SignalWritableState.disconnect(this);
   transport->SignalDtlsState.disconnect(this);
   transport->SignalSentPacket.disconnect(this);
-  transport->ice_transport()->SignalSelectedCandidatePairChanged.disconnect(
-      this);
 }
 
 void BaseChannel::ConnectToPacketTransport(
@@ -594,27 +592,23 @@ void BaseChannel::OnDtlsState(DtlsTransportInternal* transport,
   }
 }
 
-void BaseChannel::OnSelectedCandidatePairChanged(
-    IceTransportInternal* ice_transport,
-    CandidatePairInterface* selected_candidate_pair,
-    int last_sent_packet_id,
-    bool ready_to_send) {
-  RTC_DCHECK((rtp_dtls_transport_ &&
-              ice_transport == rtp_dtls_transport_->ice_transport()) ||
-             (rtcp_dtls_transport_ &&
-              ice_transport == rtcp_dtls_transport_->ice_transport()));
+void BaseChannel::OnNetworkRouteChanged(rtc::NetworkRoute network_route) {
   RTC_DCHECK(network_thread_->IsCurrent());
-  selected_candidate_pair_ = selected_candidate_pair;
-  std::string transport_name = ice_transport->transport_name();
-  rtc::NetworkRoute network_route;
-  if (selected_candidate_pair) {
-    network_route = rtc::NetworkRoute(
-        ready_to_send, selected_candidate_pair->local_candidate().network_id(),
-        selected_candidate_pair->remote_candidate().network_id(),
-        last_sent_packet_id);
-
-    UpdateTransportOverhead();
+  // No need to update the network route if we are using a plain packet
+  // transport without ICE.
+  if (!rtp_dtls_transport_) {
+    return;
   }
+
+  std::string transport_name = rtp_dtls_transport_->transport_name();
+
+  if (network_route.transport_overhead_per_packet) {
+    invoker_.AsyncInvoke<void>(
+        RTC_FROM_HERE, worker_thread_,
+        Bind(&MediaChannel::OnTransportOverheadChanged, media_channel_,
+             network_route.transport_overhead_per_packet));
+  }
+
   invoker_.AsyncInvoke<void>(
       RTC_FROM_HERE, worker_thread_,
       Bind(&MediaChannel::OnNetworkRouteChanged, media_channel_, transport_name,
@@ -902,9 +896,8 @@ bool BaseChannel::SetupDtlsSrtp_n(bool rtcp) {
 
   if (!ret) {
     LOG(LS_WARNING) << "DTLS-SRTP key installation failed";
-  } else {
-    UpdateTransportOverhead();
   }
+
   return ret;
 }
 
@@ -1008,6 +1001,7 @@ void BaseChannel::EnableSrtpTransport_n() {
   if (srtp_transport_ == nullptr) {
     rtp_transport_->SignalReadyToSend.disconnect(this);
     rtp_transport_->SignalPacketReceived.disconnect(this);
+    rtp_transport_->SignalNetworkRouteChanged.disconnect(this);
 
     auto transport = rtc::MakeUnique<webrtc::SrtpTransport>(
         std::move(rtp_transport_), content_name_);
@@ -1018,6 +1012,8 @@ void BaseChannel::EnableSrtpTransport_n() {
         this, &BaseChannel::OnTransportReadyToSend);
     rtp_transport_->SignalPacketReceived.connect(
         this, &BaseChannel::OnPacketReceived);
+    rtp_transport_->SignalNetworkRouteChanged.connect(
+        this, &BaseChannel::OnNetworkRouteChanged);
     LOG(LS_INFO) << "Wrapping RtpTransport in SrtpTransport.";
   }
 }
@@ -1637,47 +1633,6 @@ void BaseChannel::UpdateMediaSendRecvState() {
   invoker_.AsyncInvoke<void>(
       RTC_FROM_HERE, worker_thread_,
       Bind(&BaseChannel::UpdateMediaSendRecvState_w, this));
-}
-
-int BaseChannel::GetTransportOverheadPerPacket() const {
-  RTC_DCHECK(network_thread_->IsCurrent());
-
-  if (!selected_candidate_pair_)
-    return 0;
-
-  int transport_overhead_per_packet = 0;
-
-  constexpr int kIpv4Overhaed = 20;
-  constexpr int kIpv6Overhaed = 40;
-  transport_overhead_per_packet +=
-      selected_candidate_pair_->local_candidate().address().family() == AF_INET
-          ? kIpv4Overhaed
-          : kIpv6Overhaed;
-
-  constexpr int kUdpOverhaed = 8;
-  constexpr int kTcpOverhaed = 20;
-  transport_overhead_per_packet +=
-      selected_candidate_pair_->local_candidate().protocol() ==
-              TCP_PROTOCOL_NAME
-          ? kTcpOverhaed
-          : kUdpOverhaed;
-
-  if (srtp_active()) {
-    int srtp_overhead = 0;
-    if (srtp_transport_->GetSrtpOverhead(&srtp_overhead))
-      transport_overhead_per_packet += srtp_overhead;
-  }
-
-  return transport_overhead_per_packet;
-}
-
-void BaseChannel::UpdateTransportOverhead() {
-  int transport_overhead_per_packet = GetTransportOverheadPerPacket();
-  if (transport_overhead_per_packet)
-    invoker_.AsyncInvoke<void>(
-        RTC_FROM_HERE, worker_thread_,
-        Bind(&MediaChannel::OnTransportOverheadChanged, media_channel_,
-             transport_overhead_per_packet));
 }
 
 void VoiceChannel::UpdateMediaSendRecvState_w() {
