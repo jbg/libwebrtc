@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "466cd323_791ebd7c",
+        "filename": "rtc_base/java/src/org/webrtc/ThreadUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-10-26T14:01:10Z",
+      "side": 1,
+      "message": "File an issue for this because it looks pretty serious as the whole concept of this function is broken. I don\u0027t think it\u0027s widely used.",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 3
+      },
+      "revId": "1a374b1f822f940e87caa97bd33494cea0d0bf8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
