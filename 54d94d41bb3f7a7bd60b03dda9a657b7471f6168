@@ -175,6 +175,30 @@
       "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9780e6f_c0ea0bbb",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-10-26T09:27:08Z",
+      "side": 1,
+      "message": "since it is not specific for vp8, then better not to mention it.\n\nlikely better without comment.",
+      "parentUuid": "52b4ffea_345bf562",
+      "range": {
+        "startLine": 376,
+        "startChar": 61,
+        "endLine": 376,
+        "endChar": 74
+      },
+      "revId": "54d94d41bb3f7a7bd60b03dda9a657b7471f6168",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
