@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "dff77b57_3504698a",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "If \"TLS_PROTOCOL_NAME\" isn\u0027t used anywhere, let\u0027s remove it.",
+      "parentUuid": "db573da6_ba275cf6",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32e229b3_86272b70",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 5

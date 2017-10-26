@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a000c0ae_8863f466",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "Can you add a TODO to update the chromium remoting code to use the new SignalNetworkRouteChanged? It looks like that\u0027s the only thing using this.",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "494cb60a_0088d1f1",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 7
@@ -22,6 +39,132 @@
       "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3cffaa1_c2af6c2f",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "\"ssltcp\" is used for \"fake\" TLS connections (see OPT_TLS_FAKE). I don\u0027t know if it\u0027s even used anymore, which would explain why no one noticed this.",
+      "parentUuid": "494cb60a_0088d1f1",
+      "range": {
+        "startLine": 2160,
+        "startChar": 6,
+        "endLine": 2160,
+        "endChar": 50
+      },
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51898574_0c7e2dd4",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "nit: These can all be const methods.",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d9e8e8_63370082",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "Don\u0027t we also need a method that returns a NetworkRoute? Suppose BaseChannel starts using a different, already-connected PacketTransport as a result of BUNDLE negotiation. How does it know the new NetworkRoute if it never fires a signal?\n\nI think doing this (at the RtpTransport level as well) would let you get rid of the \"network_route_\" caching. Also, the NetworkRoute wouldn\u0027t need to be an argument to the signal; the argument could just be a PacketTransportInternal pointer, matching the pattern of SignalWritableState/SignalReadyToSend/SignalReceivingState.",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcc361d9_b4a28554",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "It would be ideal if this were added as a virtual method that returns a reference to a signal. See this guidance (in review still): https://webrtc-review.googlesource.com/c/src/+/8140/2/style-guide.md\n\nThough it may be better to change all the signals in this class in one CL, for consistency. So this is ok for now; just giving you a heads up that we may start using a new pattern soon.",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d266616_54169cb2",
+        "filename": "pc/channel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "Why not? Don\u0027t we want the correct overhead if, say, just doing SRTP on top of UDP?",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a635aa24_1ce4edf7",
+        "filename": "pc/rtptransport.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "I don\u0027t understand this part. Don\u0027t we want to fire SignalNetworkRouteChanged *after* setting the new transport, with the overhead introduced by the new transport?",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "169439d7_30fb82b7",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 1,
+      "message": "I still think this comment should clarify more what this variable represents (overhead in bytes from IP layer and above).",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

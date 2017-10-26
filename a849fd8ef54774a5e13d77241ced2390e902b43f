@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df21a642_5decea1a",
+        "filename": "pc/channel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1227,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-26T04:24:02Z",
+      "side": 0,
+      "message": "nit: Any reason why this comment was removed?",
+      "revId": "a849fd8ef54774a5e13d77241ced2390e902b43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
