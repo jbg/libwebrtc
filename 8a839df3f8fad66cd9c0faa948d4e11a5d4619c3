@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "953cbf4d_644d0baa",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2159,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af39d243_2e51d988",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed23c2f_d5ecaa4d",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db573da6_ba275cf6",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "I think maybe we should add SSLTCP_PROTOCOL_NAME here but it seems that TLS_PROTOCOL_NAME is not used anywhere. TLS should based on UDP here I think.",
+      "parentUuid": "6ed23c2f_d5ecaa4d",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "27bde5ca_3353930c",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32e229b3_86272b70",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21d7962a_e031d215",
         "filename": "pc/channel.h",
         "patchSetId": 5
@@ -67,6 +121,24 @@
       "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "191fb44c_26fe4d42",
+        "filename": "pc/channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "21d7962a_e031d215",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "3a6552ff_6f061b7f",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2707110c_607e9ef8",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 3
+      },
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f869ed07_e1192153",
         "filename": "rtc_base/networkroute.h",
         "patchSetId": 5
@@ -134,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "c333dc06_77203481",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f869ed07_e1192153",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12929be7_600222cb",
         "filename": "rtc_base/networkroute.h",
         "patchSetId": 5
@@ -148,6 +262,24 @@
       "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0d4ebc3_6873f94d",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "This is good point. We don\u0027t need the new Ctor here. I\u0027ll leave to TODO here to remove the existing Ctors expect the default one.",
+      "parentUuid": "12929be7_600222cb",
+      "revId": "8a839df3f8fad66cd9c0faa948d4e11a5d4619c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

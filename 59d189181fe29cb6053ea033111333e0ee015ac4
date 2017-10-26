@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "494cb60a_0088d1f1",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-26T03:39:16Z",
+      "side": 1,
+      "message": "Not sure why we didn\u0027t add this before though.",
+      "range": {
+        "startLine": 2160,
+        "startChar": 6,
+        "endLine": 2160,
+        "endChar": 50
+      },
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
