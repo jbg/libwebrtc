@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "067115f1_312890ee",
+        "filename": "infra/config/cq.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5015
+      },
+      "writtenOn": "2017-10-27T17:58:07Z",
+      "side": 1,
+      "message": "CQ recently implemented a default for this field (which is the name of the outer builder), so this is unnecessary",
+      "revId": "81679c46e2698c6646265d6b898389e4518cf62b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c76825f_2279b36c",
+        "filename": "infra/config/cq.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5015
+      },
+      "writtenOn": "2017-10-27T17:58:07Z",
+      "side": 1,
+      "message": "i\u0027ve created https://chrome-infra-auth.appspot.com/auth/groups/project-webrtc-luci-dogfood group and added. You have permissions to add other people.\nPlease \"project-webrtc-luci-dogfood\" here",
+      "range": {
+        "startLine": 74,
+        "startChar": 39,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "81679c46e2698c6646265d6b898389e4518cf62b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
