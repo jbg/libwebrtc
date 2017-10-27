@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0c0d893_45b8d71b",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-27T23:44:37Z",
+      "side": 1,
+      "message": "This is still missing the error-handling I mentioned previously. Here, just use this:\n\n  std::vector\u003cstd::unique_ptr\u003cSSLCertificate\u003e\u003e certs;\n  while (true) {\n    X509* x509 \u003d PEM_read_bio_X509(bio,  nullptr, nullptr, const_cast\u003cchar*\u003e(\"\\0\"));\n    if (x509 \u003d\u003d nullptr) {\n      uint32_t err \u003d ERR_peek_error();\n      if (ERR_GET_LIB(err) \u003d\u003d ERR_LIB_PEM \u0026\u0026\n          ERR_GET_REASON(err) \u003d\u003d PEM_R_NO_START_LINE) {\n        break;\n      }\n      LOG(LS_ERROR) \u003c\u003c \"Failed to parse certificate from PEM string.\";\n      BIO_free(bio);\n      return nullptr;\n    }\n    certs.emplace_back(new OpenSSLCertificate(x509));\n  }\n  BIO_free(bio);\n  if (certs.empty()) {\n    LOG(LS_ERROR) \u003c\u003c \"Found no certificates in PEM string.\";\n    return nullptr;\n  }",
+      "revId": "9863f836b33019c9c04e32500c0b834330e48de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24da547d_769feb80",
+        "filename": "rtc_base/opensslstreamadapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-27T23:44:37Z",
+      "side": 1,
+      "message": "Since this is already BoringSSL-specific code, you can write this:\n\nfor (X509 *cert : chain) {\n  cert_chain.emplace_bach(new OpenSSLCertificate(cert));\n}\n\nBasically, you should never let me near C++. I\u0027ll make terrible things like this work. :-) BoringSSL also has a bssl::UniquePtr\u003cX509\u003e and whatnot which I\u0027d totally convert you all to using were it not for your OpenSSL support requirement...",
+      "revId": "9863f836b33019c9c04e32500c0b834330e48de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7efa2d4_34a3297d",
+        "filename": "rtc_base/sslidentity.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-27T23:44:37Z",
+      "side": 1,
+      "message": "deprecated\n\n(Perhaps this should just say \"Returns null. This is deprecated. Please use SSLStreamAdapter::GetPeerSSLCertChain\".)",
+      "range": {
+        "startLine": 71,
+        "startChar": 46,
+        "endLine": 71,
+        "endChar": 56
+      },
+      "revId": "9863f836b33019c9c04e32500c0b834330e48de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ba045e3_85fe0357",
+        "filename": "rtc_base/sslstreamadapter.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-10-27T23:44:37Z",
+      "side": 1,
+      "message": "Nit: Worth clarifying whether this does or doesn\u0027t include the leaf.",
+      "revId": "9863f836b33019c9c04e32500c0b834330e48de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
