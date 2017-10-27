@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec150679_28ed913b",
+        "filename": "modules/rtp_rtcp/source/rtp_format_vp8.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-10-27T07:50:01Z",
+      "side": 1,
+      "message": "You may want to mark fragmentation as unused.\n\n const RTPFragmentationHeader* /*fragmentation*/) {",
+      "range": {
+        "startLine": 180,
+        "startChar": 34,
+        "endLine": 180,
+        "endChar": 47
+      },
+      "revId": "ef5a6cbc0baa6ef416d2284b50221c1b577b14e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
