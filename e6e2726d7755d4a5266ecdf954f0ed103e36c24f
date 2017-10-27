@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a2d02d7_0a304468",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-27T20:58:57Z",
+      "side": 1,
+      "message": "nit: May make the code cleaner to have a private \"leaf_certificate\" helper method that does this, since it\u0027s needed in a couple places.",
+      "revId": "e6e2726d7755d4a5266ecdf954f0ed103e36c24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6db69f42_2ed60109",
+        "filename": "rtc_base/opensslidentity.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-10-27T20:58:57Z",
+      "side": 1,
+      "message": "Should delete this code instead of just commenting it out.",
+      "revId": "e6e2726d7755d4a5266ecdf954f0ed103e36c24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
