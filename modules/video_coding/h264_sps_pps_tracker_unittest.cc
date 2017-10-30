@@ -21,6 +21,25 @@ namespace video_coding {
 
 namespace {
 const uint8_t start_code[] = {0, 0, 0, 1};
+
+void ExpectSpsPpsIdr(const RTPVideoHeaderH264& codec_header) {
+  bool contains_sps = false;
+  bool contains_pps = false;
+  bool contains_idr = false;
+  for (const auto& nalu : codec_header.nalus) {
+    if (nalu.type == H264::NaluType::kSps) {
+      contains_sps = true;
+    } else if (nalu.type == H264::NaluType::kPps) {
+      contains_pps = true;
+    } else if (nalu.type == H264::NaluType::kIdr) {
+      contains_idr = true;
+    }
+  }
+  EXPECT_TRUE(contains_sps);
+  EXPECT_TRUE(contains_pps);
+  EXPECT_TRUE(contains_idr);
+}
+
 }  // namespace
 
 class TestH264SpsPpsTracker : public ::testing::Test {
@@ -264,10 +283,14 @@ TEST_F(TestH264SpsPpsTracker, SpsPpsOutOfBand) {
   AddIdr(&idr_packet, 0);
   idr_packet.dataPtr = kData;
   idr_packet.sizeBytes = sizeof(kData);
+  EXPECT_EQ(1u, idr_packet.video_header.codecHeader.H264.nalus_length);
   EXPECT_EQ(H264SpsPpsTracker::kInsert,
             tracker_.CopyAndFixBitstream(&idr_packet));
+  EXPECT_EQ(3u, idr_packet.video_header.codecHeader.H264.nalus_length);
   EXPECT_EQ(320, idr_packet.width);
   EXPECT_EQ(240, idr_packet.height);
+  ExpectSpsPpsIdr(idr_packet.video_header.codecHeader.H264);
+
   if (idr_packet.dataPtr != kData) {
     // In case CopyAndFixBitStream() prepends SPS/PPS nalus to the packet, it
     // uses new uint8_t[] to allocate memory. Caller of CopyAndFixBitStream()
