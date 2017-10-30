@@ -24,6 +24,7 @@
 #include "api/video_codecs/video_encoder_factory.h"
 #include "call/call.h"
 #include "common_video/h264/profile_level_id.h"
+#include "media/base/codec.h"
 #include "media/engine/constants.h"
 #include "media/engine/internaldecoderfactory.h"
 #include "media/engine/internalencoderfactory.h"
@@ -36,6 +37,8 @@
 #include "media/engine/webrtcmediaengine.h"
 #include "media/engine/webrtcvideoencoderfactory.h"
 #include "media/engine/webrtcvoiceengine.h"
+#include "modules/video_coding/codecs/stereo/include/stereo_decoder_adapter.h"
+#include "modules/video_coding/codecs/stereo/include/stereo_encoder_adapter.h"
 #include "rtc_base/copyonwritebuffer.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/stringutils.h"
@@ -68,7 +71,8 @@ class EncoderFactoryAdapter {
   virtual ~EncoderFactoryAdapter() {}
 
   virtual AllocatedEncoder CreateVideoEncoder(
-      const VideoCodec& codec) const = 0;
+      const VideoCodec& codec,
+      bool is_stereo_codec) const = 0;
 
   virtual std::vector<VideoCodec> GetSupportedCodecs() const = 0;
 };
@@ -79,7 +83,8 @@ class DecoderFactoryAdapter {
 
   virtual std::unique_ptr<webrtc::VideoDecoder> CreateVideoDecoder(
       const VideoCodec& codec,
-      const VideoDecoderParams& decoder_params) const = 0;
+      const VideoDecoderParams& decoder_params,
+      bool is_stereo_codec) const = 0;
 };
 
 namespace {
@@ -99,12 +104,14 @@ class CricketEncoderFactoryAdapter : public EncoderFactoryAdapter {
         external_encoder_factory_(std::move(external_encoder_factory)) {}
 
  private:
-  AllocatedEncoder CreateVideoEncoder(const VideoCodec& codec) const override;
+  AllocatedEncoder CreateVideoEncoder(const VideoCodec& codec,
+                                      bool is_stereo_codec) const override;
 
   std::vector<VideoCodec> GetSupportedCodecs() const override;
 
   const std::unique_ptr<WebRtcVideoEncoderFactory> internal_encoder_factory_;
   const std::unique_ptr<WebRtcVideoEncoderFactory> external_encoder_factory_;
+  std::unique_ptr<WebRtcVideoEncoderFactory> stereo_encoder_factory_;
 };
 
 class CricketDecoderFactoryAdapter : public DecoderFactoryAdapter {
@@ -117,10 +124,12 @@ class CricketDecoderFactoryAdapter : public DecoderFactoryAdapter {
  private:
   std::unique_ptr<webrtc::VideoDecoder> CreateVideoDecoder(
       const VideoCodec& codec,
-      const VideoDecoderParams& decoder_params) const override;
+      const VideoDecoderParams& decoder_params,
+      bool is_stereo_codec) const override;
 
   const std::unique_ptr<WebRtcVideoDecoderFactory> internal_decoder_factory_;
   const std::unique_ptr<WebRtcVideoDecoderFactory> external_decoder_factory_;
+  std::unique_ptr<WebRtcVideoDecoderFactory> stereo_decoder_factory_;
 };
 
 // Wraps webrtc::VideoEncoderFactory into common EncoderFactoryAdapter
@@ -132,7 +141,8 @@ class WebRtcEncoderFactoryAdapter : public EncoderFactoryAdapter {
       : encoder_factory_(std::move(encoder_factory)) {}
 
  private:
-  AllocatedEncoder CreateVideoEncoder(const VideoCodec& codec) const override {
+  AllocatedEncoder CreateVideoEncoder(const VideoCodec& codec,
+                                      bool is_stereo_codec) const override {
     if (!encoder_factory_)
       return AllocatedEncoder();
     const webrtc::SdpVideoFormat format(codec.name, codec.params);
@@ -168,7 +178,8 @@ class WebRtcDecoderFactoryAdapter : public DecoderFactoryAdapter {
  private:
   std::unique_ptr<webrtc::VideoDecoder> CreateVideoDecoder(
       const VideoCodec& codec,
-      const VideoDecoderParams& decoder_params) const override {
+      const VideoDecoderParams& decoder_params,
+      bool is_stereo_codec) const override {
     return decoder_factory_
                ? decoder_factory_->CreateVideoDecoder(
                      webrtc::SdpVideoFormat(codec.name, codec.params))
@@ -544,6 +555,14 @@ std::vector<VideoCodec> AssignPayloadTypesAndAddAssociatedRtxCodecs(
       if (payload_type > kLastDynamicPayloadType)
         break;
     }
+
+    if (CodecNamesEq(codec.name, kVp9CodecName)) {
+      output_codecs.push_back(
+          VideoCodec::CreateStereoCodec(payload_type, codec));
+      ++payload_type;
+      if (payload_type > kLastDynamicPayloadType)
+        break;
+    }
   }
   return output_codecs;
 }
@@ -571,12 +590,11 @@ std::vector<VideoCodec> CricketEncoderFactoryAdapter::GetSupportedCodecs()
   return AssignPayloadTypesAndAddAssociatedRtxCodecs(codecs);
 }
 
-WebRtcVideoChannel::WebRtcVideoChannel(
-    webrtc::Call* call,
-    const MediaConfig& config,
-    const VideoOptions& options,
-    const EncoderFactoryAdapter* encoder_factory,
-    const DecoderFactoryAdapter* decoder_factory)
+WebRtcVideoChannel::WebRtcVideoChannel(webrtc::Call* call,
+                                       const MediaConfig& config,
+                                       const VideoOptions& options,
+                                       EncoderFactoryAdapter* encoder_factory,
+                                       DecoderFactoryAdapter* decoder_factory)
     : VideoMediaChannel(config),
       call_(call),
       unsignalled_ssrc_handler_(&default_unsignalled_ssrc_handler_),
@@ -607,6 +625,9 @@ WebRtcVideoChannel::SelectSendVideoCodec(
       encoder_factory_->GetSupportedCodecs();
   // Select the first remote codec that is supported locally.
   for (const VideoCodecSettings& remote_mapped_codec : remote_mapped_codecs) {
+    // HARDCODE TO ALPHA
+    if (!cricket::VideoCodec::IsStereoCodec(remote_mapped_codec.codec))
+      continue;
     // For H264, we will limit the encode level to the remote offered level
     // regardless if level asymmetry is allowed or not. This is strictly not
     // following the spec in https://tools.ietf.org/html/rfc6184#section-8.2.2
@@ -616,6 +637,24 @@ WebRtcVideoChannel::SelectSendVideoCodec(
       return rtc::Optional<VideoCodecSettings>(remote_mapped_codec);
   }
   // No remote codec was supported.
+  return rtc::Optional<VideoCodecSettings>();
+}
+
+rtc::Optional<WebRtcVideoChannel::VideoCodecSettings>
+WebRtcVideoChannel::SelectStereoAssociatedVideoCodec(
+    const std::vector<VideoCodecSettings>& remote_mapped_codecs) const {
+  const std::vector<VideoCodec> local_supported_codecs =
+      encoder_factory_->GetSupportedCodecs();
+
+  // Select the first remote codec that is supported locally.
+  for (const VideoCodecSettings& remote_mapped_codec : remote_mapped_codecs) {
+    // HARDCODE TO VP9
+    if (!CodecNamesEq(remote_mapped_codec.codec.name.c_str(), kVp9CodecName))
+      continue;
+    if (!cricket::VideoCodec::IsStereoCodec(remote_mapped_codec.codec) &&
+        FindMatchingCodec(local_supported_codecs, remote_mapped_codec.codec))
+      return rtc::Optional<VideoCodecSettings>(remote_mapped_codec);
+  }
   return rtc::Optional<VideoCodecSettings>();
 }
 
@@ -663,6 +702,19 @@ bool WebRtcVideoChannel::GetChangedSendParameters(
   if (!selected_send_codec) {
     LOG(LS_ERROR) << "No video codecs supported.";
     return false;
+  }
+
+  if (VideoCodec::IsStereoCodec(selected_send_codec->codec)) {
+    rtc::Optional<VideoCodecSettings> associated_codec_settings =
+        SelectStereoAssociatedVideoCodec(MapCodecs(params.codecs));
+    LOG(LS_ERROR) << __func__ << associated_codec_settings->codec.ToString();
+    if (!associated_codec_settings) {
+      LOG(LS_ERROR)
+          << "Stereo codec is not associated with any supported codec.";
+      return false;
+    }
+    associated_codec_settings->stereo_codec.emplace(selected_send_codec->codec);
+    selected_send_codec = associated_codec_settings;
   }
 
   // Never enable sending FlexFEC, unless we are in the experiment.
@@ -1537,7 +1589,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::WebRtcVideoSendStream(
     const StreamParams& sp,
     webrtc::VideoSendStream::Config config,
     const VideoOptions& options,
-    const EncoderFactoryAdapter* encoder_factory,
+    EncoderFactoryAdapter* encoder_factory,
     bool enable_cpu_overuse_detection,
     int max_bitrate_bps,
     const rtc::Optional<VideoCodecSettings>& codec_settings,
@@ -1687,7 +1739,30 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetSsrcs() const {
 
 EncoderFactoryAdapter::AllocatedEncoder
 CricketEncoderFactoryAdapter::CreateVideoEncoder(
-    const VideoCodec& codec) const {
+    const VideoCodec& codec,
+    bool is_stereo_codec) const {
+  if (is_stereo_codec) {
+    if (external_encoder_factory_ != nullptr &&
+        FindMatchingCodec(external_encoder_factory_->supported_codecs(),
+                          codec)) {
+      std::unique_ptr<webrtc::VideoEncoder> stereo_encoder(
+          new webrtc::StereoEncoderAdapter(external_encoder_factory_.get()));
+      return AllocatedEncoder(std::move(stereo_encoder),
+                              true /* is_hardware_accelerated */,
+                              false /* is_external */);
+    }
+    if (FindMatchingCodec(internal_encoder_factory_->supported_codecs(),
+                          codec)) {
+      std::unique_ptr<webrtc::VideoEncoder> stereo_encoder(
+          new webrtc::StereoEncoderAdapter(internal_encoder_factory_.get()));
+      return AllocatedEncoder(std::move(stereo_encoder),
+                              false /* is_hardware_accelerated */,
+                              false /* is_external */);
+    }
+    RTC_NOTREACHED();
+    return AllocatedEncoder();
+  }
+
   // Try creating external encoder.
   if (external_encoder_factory_ != nullptr &&
       FindMatchingCodec(external_encoder_factory_->supported_codecs(), codec)) {
@@ -1743,6 +1818,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec(
   parameters_.encoder_config = CreateVideoEncoderConfig(codec_settings.codec);
   RTC_DCHECK_GT(parameters_.encoder_config.number_of_streams, 0);
 
+  const bool is_stereo_codec = codec_settings.stereo_codec.has_value();
+
   // Do not re-create encoders of the same type. We can't overwrite
   // |allocated_encoder_| immediately, because we need to release it after the
   // RecreateWebRtcStream() call.
@@ -1750,7 +1827,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec(
   if (force_encoder_allocation || !allocated_encoder_ ||
       allocated_codec_ != codec_settings.codec) {
     EncoderFactoryAdapter::AllocatedEncoder new_allocated_encoder =
-        encoder_factory_->CreateVideoEncoder(codec_settings.codec);
+        encoder_factory_->CreateVideoEncoder(codec_settings.codec,
+                                             is_stereo_codec);
     new_encoder = std::unique_ptr<webrtc::VideoEncoder>(
         std::move(new_allocated_encoder.encoder));
     parameters_.config.encoder_settings.encoder = new_encoder.get();
@@ -1761,8 +1839,13 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec(
   } else {
     new_encoder = std::move(allocated_encoder_);
   }
-  parameters_.config.encoder_settings.payload_name = codec_settings.codec.name;
-  parameters_.config.encoder_settings.payload_type = codec_settings.codec.id;
+  VideoCodec payload_codec = is_stereo_codec
+                                 ? codec_settings.stereo_codec.value()
+                                 : codec_settings.codec;
+  parameters_.config.encoder_settings.payload_name = payload_codec.name;
+  parameters_.config.encoder_settings.payload_type = payload_codec.id;
+  parameters_.config.encoder_settings.stereo_associated_payload_name =
+      codec_settings.codec.name;
   parameters_.config.rtp.ulpfec = codec_settings.ulpfec;
   parameters_.config.rtp.flexfec.payload_type =
       codec_settings.flexfec_payload_type;
@@ -2005,6 +2088,7 @@ VideoSenderInfo WebRtcVideoChannel::WebRtcVideoSendStream::GetVideoSenderInfo(
   for (uint32_t ssrc : parameters_.config.rtp.ssrcs)
     info.add_ssrc(ssrc);
 
+  // TODO(emircan): Add stereo codec case.
   if (parameters_.codec_settings) {
     info.codec_name = parameters_.codec_settings->codec.name;
     info.codec_payload_type = rtc::Optional<int>(
@@ -2131,7 +2215,7 @@ WebRtcVideoChannel::WebRtcVideoReceiveStream::WebRtcVideoReceiveStream(
     webrtc::Call* call,
     const StreamParams& sp,
     webrtc::VideoReceiveStream::Config config,
-    const DecoderFactoryAdapter* decoder_factory,
+    DecoderFactoryAdapter* decoder_factory,
     bool default_stream,
     const std::vector<VideoCodecSettings>& recv_codecs,
     const webrtc::FlexfecReceiveStream::Config& flexfec_config)
@@ -2185,7 +2269,16 @@ WebRtcVideoChannel::WebRtcVideoReceiveStream::GetFirstPrimarySsrc() const {
 std::unique_ptr<webrtc::VideoDecoder>
 CricketDecoderFactoryAdapter::CreateVideoDecoder(
     const VideoCodec& codec,
-    const VideoDecoderParams& decoder_params) const {
+    const VideoDecoderParams& decoder_params,
+    bool is_stereo_codec) const {
+  if (is_stereo_codec) {
+    // We can't use an external decoder because we do not have a way of merging
+    // two images currently.
+    std::unique_ptr<webrtc::VideoDecoder> internal_decoder(
+        new webrtc::StereoDecoderAdapter(internal_decoder_factory_.get()));
+    return internal_decoder;
+  }
+
   if (external_decoder_factory_ != nullptr) {
     std::unique_ptr<webrtc::VideoDecoder> external_decoder =
         CreateScopedVideoDecoder(external_decoder_factory_.get(), codec,
@@ -2214,19 +2307,21 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::ConfigureCodecs(
   config_.decoders.clear();
   config_.rtp.rtx_associated_payload_types.clear();
   for (const auto& recv_codec : recv_codecs) {
+    const bool is_stereo_codec =
+        cricket::VideoCodec::IsStereoCodec(recv_codec.codec);
     webrtc::SdpVideoFormat video_format(recv_codec.codec.name,
                                         recv_codec.codec.params);
     std::unique_ptr<webrtc::VideoDecoder> new_decoder;
 
     auto it = old_decoders->find(video_format);
-    if (it != old_decoders->end()) {
+    if (it != old_decoders->end() && !is_stereo_codec) {
       new_decoder = std::move(it->second);
       old_decoders->erase(it);
     }
 
     if (!new_decoder) {
-      new_decoder = decoder_factory_->CreateVideoDecoder(recv_codec.codec,
-                                                         {stream_params_.id});
+      new_decoder = decoder_factory_->CreateVideoDecoder(
+          recv_codec.codec, {stream_params_.id}, is_stereo_codec);
     }
 
     webrtc::VideoReceiveStream::Decoder decoder;
