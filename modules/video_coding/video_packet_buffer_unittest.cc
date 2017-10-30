@@ -27,8 +27,10 @@ namespace video_coding {
 class TestPacketBuffer : public ::testing::Test,
                          public OnReceivedFrameCallback {
  protected:
-  TestPacketBuffer()
-      : rand_(0x7732213),
+  TestPacketBuffer() : TestPacketBuffer("") {}
+  explicit TestPacketBuffer(std::string field_trials)
+      : scoped_field_trials_(field_trials),
+        rand_(0x7732213),
         clock_(new SimulatedClock(0)),
         packet_buffer_(
             PacketBuffer::Create(clock_.get(), kStartSize, kMaxSize, this)) {}
@@ -80,6 +82,8 @@ class TestPacketBuffer : public ::testing::Test,
 
   static constexpr int kStartSize = 16;
   static constexpr int kMaxSize = 64;
+
+  const test::ScopedFieldTrials scoped_field_trials_;
 
   Random rand_;
   std::unique_ptr<SimulatedClock> clock_;
@@ -428,10 +432,10 @@ class TestPacketBufferH264 : public TestPacketBuffer,
  protected:
   TestPacketBufferH264() : TestPacketBufferH264(GetParam()) {}
   explicit TestPacketBufferH264(bool sps_pps_idr_is_keyframe)
-      : sps_pps_idr_is_keyframe_(sps_pps_idr_is_keyframe),
-        scoped_field_trials_(sps_pps_idr_is_keyframe_
-                                 ? "WebRTC-SpsPpsIdrIsH264Keyframe/Enabled/"
-                                 : "") {}
+      : TestPacketBuffer(sps_pps_idr_is_keyframe
+                             ? "WebRTC-SpsPpsIdrIsH264Keyframe/Enabled/"
+                             : ""),
+        sps_pps_idr_is_keyframe_(sps_pps_idr_is_keyframe) {}
 
   bool InsertH264(uint16_t seq_num,           // packet sequence number
                   IsKeyFrame keyframe,        // is keyframe
@@ -468,7 +472,6 @@ class TestPacketBufferH264 : public TestPacketBuffer,
   }
 
   const bool sps_pps_idr_is_keyframe_;
-  const test::ScopedFieldTrials scoped_field_trials_;
 };
 
 INSTANTIATE_TEST_CASE_P(SpsPpsIdrIsKeyframe,
