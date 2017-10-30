@@ -41,6 +41,8 @@ void SrtpTransport::ConnectToRtpTransport() {
       this, &SrtpTransport::OnPacketReceived);
   rtp_transport_->SignalReadyToSend.connect(this,
                                             &SrtpTransport::OnReadyToSend);
+  rtp_transport_->SignalNetworkRouteChanged.connect(
+      this, &SrtpTransport::OnNetworkRouteChanged);
 }
 
 bool SrtpTransport::SendRtpPacket(rtc::CopyOnWriteBuffer* packet,
@@ -53,6 +55,83 @@ bool SrtpTransport::SendRtcpPacket(rtc::CopyOnWriteBuffer* packet,
                                    const rtc::PacketOptions& options,
                                    int flags) {
   return SendPacket(true, packet, options, flags);
+}
+
+bool SrtpTransport::SetRtpParams(int send_cs,
+                                 const uint8_t* send_key,
+                                 int send_key_len,
+                                 int recv_cs,
+                                 const uint8_t* recv_key,
+                                 int recv_key_len) {
+  // If parameters are being set for the first time, we should create new SRTP
+  // sessions and call "SetSend/SetRecv". Otherwise we should call
+  // "UpdateSend"/"UpdateRecv" on the existing sessions, which will internally
+  // call "srtp_update".
+  bool new_sessions = false;
+  if (!send_session_) {
+    RTC_DCHECK(!recv_session_);
+    CreateSrtpSessions();
+    new_sessions = true;
+  }
+  send_session_->SetEncryptedHeaderExtensionIds(
+      send_encrypted_header_extension_ids_);
+  bool ret = new_sessions
+                 ? send_session_->SetSend(send_cs, send_key, send_key_len)
+                 : send_session_->UpdateSend(send_cs, send_key, send_key_len);
+  if (!ret) {
+    ResetParams();
+    return false;
+  }
+
+  recv_session_->SetEncryptedHeaderExtensionIds(
+      recv_encrypted_header_extension_ids_);
+  ret = new_sessions
+            ? recv_session_->SetRecv(recv_cs, recv_key, recv_key_len)
+            : recv_session_->UpdateRecv(recv_cs, recv_key, recv_key_len);
+  if (!ret) {
+    ResetParams();
+    return false;
+  }
+
+  LOG(LS_INFO) << "SRTP " << (new_sessions ? "updated" : "activated")
+               << " with negotiated parameters:"
+               << " send cipher_suite " << send_cs << " recv cipher_suite "
+               << recv_cs;
+
+  RTC_DCHECK(IsActive());
+  RTC_DCHECK(rtp_packet_transport());
+  OnNetworkRouteChanged(rtp_packet_transport()->GetNetworkRoute());
+  return true;
+}
+
+bool SrtpTransport::SetRtcpParams(int send_cs,
+                                  const uint8_t* send_key,
+                                  int send_key_len,
+                                  int recv_cs,
+                                  const uint8_t* recv_key,
+                                  int recv_key_len) {
+  // This can only be called once, but can be safely called after
+  // SetRtpParams
+  if (send_rtcp_session_ || recv_rtcp_session_) {
+    LOG(LS_ERROR) << "Tried to set SRTCP Params when filter already active";
+    return false;
+  }
+
+  send_rtcp_session_.reset(new cricket::SrtpSession());
+  if (!send_rtcp_session_->SetRecv(send_cs, send_key, send_key_len)) {
+    return false;
+  }
+
+  recv_rtcp_session_.reset(new cricket::SrtpSession());
+  if (!recv_rtcp_session_->SetRecv(recv_cs, recv_key, recv_key_len)) {
+    return false;
+  }
+
+  LOG(LS_INFO) << "SRTCP activated with negotiated parameters:"
+               << " send cipher_suite " << send_cs << " recv cipher_suite "
+               << recv_cs;
+
+  return true;
 }
 
 bool SrtpTransport::SendPacket(bool rtcp,
@@ -129,6 +208,37 @@ bool SrtpTransport::SendPacket(bool rtcp,
               : rtp_transport_->SendRtpPacket(packet, updated_options, flags);
 }
 
+bool SrtpTransport::IsActive() const {
+  return send_session_ && recv_session_;
+}
+
+void SrtpTransport::ResetParams() {
+  send_session_ = nullptr;
+  recv_session_ = nullptr;
+  send_rtcp_session_ = nullptr;
+  recv_rtcp_session_ = nullptr;
+  LOG(LS_INFO) << "The params in SRTP transport are reset.";
+}
+
+void SrtpTransport::SetEncryptedHeaderExtensionIds(
+    cricket::ContentSource source,
+    const std::vector<int>& extension_ids) {
+  if (source == cricket::CS_LOCAL) {
+    recv_encrypted_header_extension_ids_ = extension_ids;
+  } else {
+    send_encrypted_header_extension_ids_ = extension_ids;
+  }
+}
+
+void SrtpTransport::CreateSrtpSessions() {
+  send_session_.reset(new cricket::SrtpSession());
+  recv_session_.reset(new cricket::SrtpSession());
+
+  if (external_auth_enabled_) {
+    send_session_->EnableExternalAuth();
+  }
+}
+
 void SrtpTransport::OnPacketReceived(bool rtcp,
                                      rtc::CopyOnWriteBuffer* packet,
                                      const rtc::PacketTime& packet_time) {
@@ -168,108 +278,17 @@ void SrtpTransport::OnPacketReceived(bool rtcp,
   SignalPacketReceived(rtcp, packet, packet_time);
 }
 
-bool SrtpTransport::SetRtpParams(int send_cs,
-                                 const uint8_t* send_key,
-                                 int send_key_len,
-                                 int recv_cs,
-                                 const uint8_t* recv_key,
-                                 int recv_key_len) {
-  // If parameters are being set for the first time, we should create new SRTP
-  // sessions and call "SetSend/SetRecv". Otherwise we should call
-  // "UpdateSend"/"UpdateRecv" on the existing sessions, which will internally
-  // call "srtp_update".
-  bool new_sessions = false;
-  if (!send_session_) {
-    RTC_DCHECK(!recv_session_);
-    CreateSrtpSessions();
-    new_sessions = true;
+void SrtpTransport::OnNetworkRouteChanged(rtc::NetworkRoute network_route) {
+  // Only update the SrtpTransport overhead when there is a selected network
+  // route.
+  if (HasSelectedNetworkRoute(network_route)) {
+    int srtp_overhead = 0;
+    if (IsActive()) {
+      GetSrtpOverhead(&srtp_overhead);
+    }
+    network_route.transport_overhead_per_packet += srtp_overhead;
   }
-  send_session_->SetEncryptedHeaderExtensionIds(
-      send_encrypted_header_extension_ids_);
-  bool ret = new_sessions
-                 ? send_session_->SetSend(send_cs, send_key, send_key_len)
-                 : send_session_->UpdateSend(send_cs, send_key, send_key_len);
-  if (!ret) {
-    ResetParams();
-    return false;
-  }
-
-  recv_session_->SetEncryptedHeaderExtensionIds(
-      recv_encrypted_header_extension_ids_);
-  ret = new_sessions
-            ? recv_session_->SetRecv(recv_cs, recv_key, recv_key_len)
-            : recv_session_->UpdateRecv(recv_cs, recv_key, recv_key_len);
-  if (!ret) {
-    ResetParams();
-    return false;
-  }
-
-  LOG(LS_INFO) << "SRTP " << (new_sessions ? "updated" : "activated")
-               << " with negotiated parameters:"
-               << " send cipher_suite " << send_cs << " recv cipher_suite "
-               << recv_cs;
-  return true;
-}
-
-bool SrtpTransport::SetRtcpParams(int send_cs,
-                                  const uint8_t* send_key,
-                                  int send_key_len,
-                                  int recv_cs,
-                                  const uint8_t* recv_key,
-                                  int recv_key_len) {
-  // This can only be called once, but can be safely called after
-  // SetRtpParams
-  if (send_rtcp_session_ || recv_rtcp_session_) {
-    LOG(LS_ERROR) << "Tried to set SRTCP Params when filter already active";
-    return false;
-  }
-
-  send_rtcp_session_.reset(new cricket::SrtpSession());
-  if (!send_rtcp_session_->SetRecv(send_cs, send_key, send_key_len)) {
-    return false;
-  }
-
-  recv_rtcp_session_.reset(new cricket::SrtpSession());
-  if (!recv_rtcp_session_->SetRecv(recv_cs, recv_key, recv_key_len)) {
-    return false;
-  }
-
-  LOG(LS_INFO) << "SRTCP activated with negotiated parameters:"
-               << " send cipher_suite " << send_cs << " recv cipher_suite "
-               << recv_cs;
-
-  return true;
-}
-
-bool SrtpTransport::IsActive() const {
-  return send_session_ && recv_session_;
-}
-
-void SrtpTransport::ResetParams() {
-  send_session_ = nullptr;
-  recv_session_ = nullptr;
-  send_rtcp_session_ = nullptr;
-  recv_rtcp_session_ = nullptr;
-  LOG(LS_INFO) << "The params in SRTP transport are reset.";
-}
-
-void SrtpTransport::SetEncryptedHeaderExtensionIds(
-    cricket::ContentSource source,
-    const std::vector<int>& extension_ids) {
-  if (source == cricket::CS_LOCAL) {
-    recv_encrypted_header_extension_ids_ = extension_ids;
-  } else {
-    send_encrypted_header_extension_ids_ = extension_ids;
-  }
-}
-
-void SrtpTransport::CreateSrtpSessions() {
-  send_session_.reset(new cricket::SrtpSession());
-  recv_session_.reset(new cricket::SrtpSession());
-
-  if (external_auth_enabled_) {
-    send_session_->EnableExternalAuth();
-  }
+  SignalNetworkRouteChanged(network_route);
 }
 
 bool SrtpTransport::ProtectRtp(void* p, int in_len, int max_len, int* out_len) {

@@ -120,6 +120,7 @@ DtlsTransport::DtlsTransport(IceTransportInternal* ice_transport,
       ssl_role_(rtc::SSL_CLIENT),
       ssl_max_version_(rtc::SSL_PROTOCOL_DTLS_12),
       crypto_options_(crypto_options) {
+  RTC_DCHECK(ice_transport_);
   ice_transport_->SignalWritableState.connect(this,
                                               &DtlsTransport::OnWritableState);
   ice_transport_->SignalReadPacket.connect(this, &DtlsTransport::OnReadPacket);
@@ -128,6 +129,8 @@ DtlsTransport::DtlsTransport(IceTransportInternal* ice_transport,
                                             &DtlsTransport::OnReadyToSend);
   ice_transport_->SignalReceivingState.connect(
       this, &DtlsTransport::OnReceivingState);
+  ice_transport_->SignalNetworkRouteChanged.connect(
+      this, &DtlsTransport::OnNetworkRouteChanged);
 }
 
 DtlsTransport::~DtlsTransport() {}
@@ -568,6 +571,11 @@ void DtlsTransport::OnDtlsEvent(rtc::StreamInterface* dtls, int sig, int err) {
       set_dtls_state(DTLS_TRANSPORT_FAILED);
     }
   }
+}
+
+void DtlsTransport::OnNetworkRouteChanged(
+    rtc::PacketTransportInternal* transport) {
+  SignalNetworkRouteChanged(transport);
 }
 
 void DtlsTransport::MaybeStartDtls() {

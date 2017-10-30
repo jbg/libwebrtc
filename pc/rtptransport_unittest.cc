@@ -19,6 +19,10 @@ namespace webrtc {
 
 constexpr bool kMuxDisabled = false;
 constexpr bool kMuxEnabled = true;
+constexpr uint16_t kLocalNetId = 1;
+constexpr uint16_t kRemoteNetId = 2;
+constexpr int kLastPacketId = 100;
+constexpr int kTransportOverheadPerPacket = 28;  // Ipv4(20) + UDP(8).
 
 TEST(RtpTransportTest, SetRtcpParametersCantDisableRtcpMux) {
   RtpTransport transport(kMuxDisabled);
@@ -56,12 +60,21 @@ class SignalObserver : public sigslot::has_slots<> {
  public:
   explicit SignalObserver(RtpTransport* transport) {
     transport->SignalReadyToSend.connect(this, &SignalObserver::OnReadyToSend);
+    transport->SignalNetworkRouteChanged.connect(
+        this, &SignalObserver::OnNetworkRouteChanged);
   }
+
   bool ready() const { return ready_; }
   void OnReadyToSend(bool ready) { ready_ = ready; }
 
+  rtc::NetworkRoute network_route() { return network_route_; }
+  void OnNetworkRouteChanged(rtc::NetworkRoute network_route) {
+    network_route_ = network_route;
+  }
+
  private:
   bool ready_ = false;
+  rtc::NetworkRoute network_route_;
 };
 
 TEST(RtpTransportTest, SettingRtcpAndRtpSignalsReady) {
@@ -126,6 +139,35 @@ TEST(RtpTransportTest, EnablingRtcpMuxSignalsReady) {
 
   transport.SetRtcpMuxEnabled(true);
   EXPECT_TRUE(observer.ready());
+}
+
+// Tests the SignalNetworkRoute is fired when setting a packet transport.
+TEST(RtpTransportTest, SetRtpTransportWithNetworkRouteChanged) {
+  RtpTransport transport(kMuxDisabled);
+  SignalObserver observer(&transport);
+  rtc::FakePacketTransport fake_rtp("fake_rtp");
+
+  rtc::NetworkRoute network_route;
+  EXPECT_EQ(network_route, observer.network_route());
+
+  // Set a non-null RTP transport with a new network route.
+  network_route.connected = true;
+  network_route.local_network_id = kLocalNetId;
+  network_route.remote_network_id = kRemoteNetId;
+  network_route.last_sent_packet_id = kLastPacketId;
+  network_route.transport_overhead_per_packet = kTransportOverheadPerPacket;
+  fake_rtp.SetNetworkRoute(network_route);
+  transport.SetRtpPacketTransport(&fake_rtp);
+  EXPECT_EQ(network_route, observer.network_route());
+  EXPECT_EQ(kTransportOverheadPerPacket,
+            observer.network_route().transport_overhead_per_packet);
+  EXPECT_EQ(kLastPacketId, observer.network_route().last_sent_packet_id);
+
+  // Set a null RTP transport.
+  transport.SetRtpPacketTransport(nullptr);
+  EXPECT_EQ(rtc::NetworkRoute(), observer.network_route());
+  EXPECT_EQ(0, observer.network_route().transport_overhead_per_packet);
+  EXPECT_EQ(-1, observer.network_route().last_sent_packet_id);
 }
 
 class SignalCounter : public sigslot::has_slots<> {

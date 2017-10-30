@@ -31,15 +31,26 @@ void RtpTransport::SetRtpPacketTransport(
   if (rtp_packet_transport_) {
     rtp_packet_transport_->SignalReadyToSend.disconnect(this);
     rtp_packet_transport_->SignalReadPacket.disconnect(this);
+    rtp_packet_transport_->SignalNetworkRouteChanged.disconnect(this);
   }
   if (new_packet_transport) {
     new_packet_transport->SignalReadyToSend.connect(
         this, &RtpTransport::OnReadyToSend);
     new_packet_transport->SignalReadPacket.connect(this,
                                                    &RtpTransport::OnReadPacket);
+    new_packet_transport->SignalNetworkRouteChanged.connect(
+        this, &RtpTransport::OnNetworkRouteChange);
   }
-  rtp_packet_transport_ = new_packet_transport;
 
+  // When enabling bundle or setting a new packet transport, the network route
+  // should be updated.
+  rtc::NetworkRoute network_route;
+  if (new_packet_transport) {
+    network_route = new_packet_transport->GetNetworkRoute();
+  }
+  SignalNetworkRouteChanged(network_route);
+
+  rtp_packet_transport_ = new_packet_transport;
   // Assumes the transport is ready to send if it is writable. If we are wrong,
   // ready to send will be updated the next time we try to send.
   SetReadyToSend(false,
@@ -54,12 +65,17 @@ void RtpTransport::SetRtcpPacketTransport(
   if (rtcp_packet_transport_) {
     rtcp_packet_transport_->SignalReadyToSend.disconnect(this);
     rtcp_packet_transport_->SignalReadPacket.disconnect(this);
+    rtcp_packet_transport_->SignalNetworkRouteChanged.disconnect(this);
+    rtc::NetworkRoute network_route;
+    SignalNetworkRouteChanged(network_route);
   }
   if (new_packet_transport) {
     new_packet_transport->SignalReadyToSend.connect(
         this, &RtpTransport::OnReadyToSend);
     new_packet_transport->SignalReadPacket.connect(this,
                                                    &RtpTransport::OnReadPacket);
+    new_packet_transport->SignalNetworkRouteChanged.connect(
+        this, &RtpTransport::OnNetworkRouteChange);
   }
   rtcp_packet_transport_ = new_packet_transport;
 
@@ -159,6 +175,13 @@ RtpTransportAdapter* RtpTransport::GetInternal() {
 
 void RtpTransport::OnReadyToSend(rtc::PacketTransportInternal* transport) {
   SetReadyToSend(transport == rtcp_packet_transport_, true);
+}
+
+void RtpTransport::OnNetworkRouteChange(
+    rtc::PacketTransportInternal* transport) {
+  RTC_DCHECK(transport);
+  auto network_route = transport->GetNetworkRoute();
+  SignalNetworkRouteChanged(network_route);
 }
 
 void RtpTransport::SetReadyToSend(bool rtcp, bool ready) {

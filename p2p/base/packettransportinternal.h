@@ -17,6 +17,7 @@
 // This is included for PacketOptions.
 #include "api/ortc/packettransportinterface.h"
 #include "rtc_base/asyncpacketsocket.h"
+#include "rtc_base/networkroute.h"
 #include "rtc_base/sigslot.h"
 #include "rtc_base/socket.h"
 
@@ -66,6 +67,9 @@ class PacketTransportInternal : public virtual webrtc::PacketTransportInterface,
   // Returns the most recent error that occurred on this channel.
   virtual int GetError() = 0;
 
+  // Returns the current network route with transport overhead.
+  virtual NetworkRoute GetNetworkRoute() const = 0;
+
   // Emitted when the writable state, represented by |writable()|, changes.
   sigslot::signal1<PacketTransportInternal*> SignalWritableState;
 
@@ -90,6 +94,9 @@ class PacketTransportInternal : public virtual webrtc::PacketTransportInterface,
   // Signalled each time a packet is sent on this channel.
   sigslot::signal2<PacketTransportInternal*, const rtc::SentPacket&>
       SignalSentPacket;
+
+  // Signalled when the current network route has changed.
+  sigslot::signal1<PacketTransportInternal*> SignalNetworkRouteChanged;
 
  protected:
   PacketTransportInternal* GetInternal() override { return this; }

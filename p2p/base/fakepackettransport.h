@@ -88,6 +88,11 @@ class FakePacketTransport : public PacketTransportInternal {
 
   const CopyOnWriteBuffer* last_sent_packet() { return &last_sent_packet_; }
 
+  NetworkRoute GetNetworkRoute() const override { return network_route_; }
+  void SetNetworkRoute(rtc::NetworkRoute network_route) {
+    network_route_ = network_route;
+  }
+
  private:
   void set_writable(bool writable) {
     if (writable_ == writable) {
@@ -124,6 +129,8 @@ class FakePacketTransport : public PacketTransportInternal {
   int async_delay_ms_ = 0;
   bool writable_ = false;
   bool receiving_ = false;
+
+  rtc::NetworkRoute network_route_;
 };
 
 }  // namespace rtc
