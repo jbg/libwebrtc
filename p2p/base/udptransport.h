@@ -64,6 +64,8 @@ class UdpTransport : public rtc::PacketTransportInternal,
 
   int GetError() override { return send_error_; }
 
+  rtc::NetworkRoute GetNetworkRoute() const override;
+
  protected:
   PacketTransportInternal* GetInternal() override { return this; }
 
@@ -76,6 +78,8 @@ class UdpTransport : public rtc::PacketTransportInternal,
   void OnSocketSentPacket(rtc::AsyncPacketSocket* socket,
                           const rtc::SentPacket& packet);
   bool IsLocalConsistent();
+  int GetTransportOverhead() const;
+
   std::string transport_name_;
   int send_error_ = 0;
   std::unique_ptr<rtc::AsyncPacketSocket> socket_;

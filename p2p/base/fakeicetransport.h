@@ -194,6 +194,11 @@ class FakeIceTransport : public IceTransportInternal {
   bool GetOption(rtc::Socket::Option opt, int* value) override { return true; }
   int GetError() override { return 0; }
 
+  rtc::NetworkRoute GetNetworkRoute() const override { return network_route_; }
+  void SetNetworkRoute(rtc::NetworkRoute network_route) {
+    network_route_ = network_route;
+  }
+
  private:
   void set_writable(bool writable) {
     if (writable_ == writable) {
@@ -244,6 +249,7 @@ class FakeIceTransport : public IceTransportInternal {
   bool receiving_ = false;
   bool combine_outgoing_packets_ = false;
   rtc::CopyOnWriteBuffer send_packet_;
+  rtc::NetworkRoute network_route_;
 };
 
 }  // namespace cricket

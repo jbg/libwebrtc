@@ -1455,9 +1455,17 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
   } else {
     LOG_J(LS_INFO, this) << "No selected connection";
   }
-  SignalSelectedCandidatePairChanged(this, selected_connection_,
-                                     last_sent_packet_id_,
-                                     ReadyToSend(selected_connection_));
+
+  if (selected_connection_) {
+    network_route_.connected = ReadyToSend(selected_connection_);
+    network_route_.local_network_id =
+        selected_connection_->local_candidate().network_id();
+    network_route_.remote_network_id =
+        selected_connection_->remote_candidate().network_id();
+    network_route_.last_sent_packet_id = last_sent_packet_id_;
+    network_route_.transport_overhead_per_packet = GetIceTransportOverhead();
+  }
+  SignalNetworkRouteChanged(this);
 }
 
 // Warning: UpdateState should eventually be called whenever a connection
@@ -2133,6 +2141,35 @@ int P2PTransportChannel::SampleRegatherAllNetworksInterval() {
   auto interval = config_.regather_all_networks_interval_range;
   RTC_DCHECK(interval);
   return rand_.Rand(interval->min(), interval->max());
+}
+
+int P2PTransportChannel::GetNetworkLayerOverhead(
+    const Candidate& candidate) const {
+  switch (candidate.address().family()) {
+    case AF_INET:  // IPv4
+      return 20;
+    case AF_INET6:  // IPv6
+      return 40;
+    default:
+      RTC_NOTREACHED();
+  }
+}
+
+int P2PTransportChannel::GetTransportLayerOverhead(
+    const Candidate& candidate) const {
+  if (candidate.protocol() == TCP_PROTOCOL_NAME ||
+      candidate.protocol() == SSLTCP_PROTOCOL_NAME) {
+    return 20;
+  }
+  return 8;
+}
+
+int P2PTransportChannel::GetIceTransportOverhead() const {
+  if (!selected_connection_)
+    return 0;
+
+  return GetNetworkLayerOverhead(selected_connection_->local_candidate()) +
+         GetTransportLayerOverhead(selected_connection_->local_candidate());
 }
 
 }  // namespace cricket
