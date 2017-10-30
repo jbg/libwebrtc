@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "32d23b83_df11657e",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-10-30T21:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39f65e48_1f981440",
+      "revId": "85aab1f9e59b2138a4e7cedf0dedd5b189f4a4e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b88e13f3_5d4afa70",
         "filename": "rtc_base/opensslstreamadapter.cc",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2017-10-30T20:16:11Z",
       "side": 1,
       "message": "Nit: unused now",
+      "revId": "85aab1f9e59b2138a4e7cedf0dedd5b189f4a4e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afc282a6_6b77c765",
+        "filename": "rtc_base/opensslstreamadapter.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-10-30T21:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b88e13f3_5d4afa70",
       "revId": "85aab1f9e59b2138a4e7cedf0dedd5b189f4a4e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
