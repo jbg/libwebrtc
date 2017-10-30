@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3efe6b23_66832fc9",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a000c0ae_8863f466",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "494cb60a_0088d1f1",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 7
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "a6e28476_fc7fd63f",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Shall we just remove it or keep it here?",
+      "parentUuid": "b3cffaa1_c2af6c2f",
+      "range": {
+        "startLine": 2160,
+        "startChar": 6,
+        "endLine": 2160,
+        "endChar": 50
+      },
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51898574_0c7e2dd4",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 7
@@ -83,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "7b31ad93_910a6b1a",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51898574_0c7e2dd4",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6d9e8e8_63370082",
         "filename": "p2p/base/packettransportinternal.h",
         "patchSetId": 7
@@ -94,6 +154,24 @@
       "writtenOn": "2017-10-26T04:24:02Z",
       "side": 1,
       "message": "Don\u0027t we also need a method that returns a NetworkRoute? Suppose BaseChannel starts using a different, already-connected PacketTransport as a result of BUNDLE negotiation. How does it know the new NetworkRoute if it never fires a signal?\n\nI think doing this (at the RtpTransport level as well) would let you get rid of the \"network_route_\" caching. Also, the NetworkRoute wouldn\u0027t need to be an argument to the signal; the argument could just be a PacketTransportInternal pointer, matching the pattern of SignalWritableState/SignalReadyToSend/SignalReceivingState.",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b19c02fc_0650b3fa",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Agreed. This is a good point.\nThis CL should be equivalent to the existing code. \n- The signal is fired when selected candidate pair changed from the ICE transport.\n- Explicitly call OnSignalCandiatePairChanged when disconnect from the existing transport.\n\nThen the question is how does it work before? Does it mean we assume that the bundling is always enabled before the candidate pair are selected?",
+      "parentUuid": "a6d9e8e8_63370082",
       "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -117,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "5df0cb40_dc57f0af",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fcc361d9_b4a28554",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d266616_54169cb2",
         "filename": "pc/channel.cc",
         "patchSetId": 7
@@ -131,6 +227,24 @@
       "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d748beb_e8de8e1a",
+        "filename": "pc/channel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "You are right. Maybe we don\u0027t need to update the actual \"route\" but the overhead should be updated. I missed that.",
+      "parentUuid": "6d266616_54169cb2",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "4a247273_f2dca5bb",
+        "filename": "pc/rtptransport.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Agreed. I\u0027ll add a test to cover this case.",
+      "parentUuid": "a635aa24_1ce4edf7",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "169439d7_30fb82b7",
         "filename": "rtc_base/networkroute.h",
         "patchSetId": 7
@@ -165,6 +297,24 @@
       "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59e72ead_eb418ae1",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-10-30T19:25:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169439d7_30fb82b7",
+      "revId": "59d189181fe29cb6053ea033111333e0ee015ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
