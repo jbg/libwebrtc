@@ -398,6 +398,7 @@ if (rtc_include_tests) {
       "../../common_video:common_video",
       "../../logging:rtc_event_log_api",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base:rtc_base_tests_utils",
       "../../rtc_base:rtc_task_queue",
       "../../system_wrappers:system_wrappers",
       "../../test:field_trial",

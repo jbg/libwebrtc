@@ -10,6 +10,7 @@
 
 #include "modules/rtp_rtcp/source/rtcp_transceiver_impl.h"
 
+#include <limits>
 #include <utility>
 #include <vector>
 
@@ -17,9 +18,12 @@
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtcp_packet.h"
+#include "modules/rtp_rtcp/source/rtcp_packet/common_header.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/receiver_report.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/report_block.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/sdes.h"
+#include "modules/rtp_rtcp/source/rtcp_packet/sender_report.h"
+#include "modules/rtp_rtcp/source/time_util.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/ptr_util.h"
 #include "rtc_base/task_queue.h"
@@ -76,6 +80,31 @@ RtcpTransceiverImpl::RtcpTransceiverImpl(const RtcpTransceiverConfig& config)
 
 RtcpTransceiverImpl::~RtcpTransceiverImpl() = default;
 
+void RtcpTransceiverImpl::ReceivePacket(rtc::ArrayView<const uint8_t> packet) {
+  rtcp::CommonHeader rtcp_block;
+  const uint8_t* const packet_begin = packet.data();
+  const uint8_t* const packet_end = packet.data() + packet.size();
+  for (const uint8_t* next_block = packet_begin; next_block != packet_end;
+       next_block = rtcp_block.NextPacket()) {
+    ptrdiff_t remaining_blocks_size = packet_end - next_block;
+    RTC_DCHECK_GT(remaining_blocks_size, 0);
+    if (!rtcp_block.Parse(next_block, remaining_blocks_size))
+      break;
+
+    switch (rtcp_block.type()) {
+      case rtcp::SenderReport::kPacketType: {
+        rtcp::SenderReport sr;
+        if (!sr.Parse(rtcp_block))
+          break;
+        LastSenderReport& last_report = remote_senders_[sr.sender_ssrc()];
+        last_report.local_time_us = rtc::TimeMicros();
+        last_report.remote_compact_ntp_time = CompactNtp(sr.ntp());
+        break;
+      }
+    }
+  }
+}
+
 void RtcpTransceiverImpl::SendCompoundPacket() {
   SendPacket();
   if (config_.schedule_periodic_compound_packets)
@@ -127,8 +156,24 @@ void RtcpTransceiverImpl::SendPacket() {
     std::vector<rtcp::ReportBlock> report_blocks =
         config_.receive_statistics->RtcpReportBlocks(
             rtcp::ReceiverReport::kMaxNumberOfReportBlocks);
-    // TODO(danilchap): Fill in LastSr/DelayLastSr fields of report blocks
-    // when RtcpTransceiver handles incoming sender reports.
+    for (rtcp::ReportBlock& report_block : report_blocks) {
+      auto it = remote_senders_.find(report_block.source_ssrc());
+      if (it == remote_senders_.end())
+        continue;
+      const LastSenderReport& last_sender_report = it->second;
+      int64_t delay_us = rtc::TimeMicros() - last_sender_report.local_time_us;
+      if (delay_us < 0)  // Time went backwards?
+        continue;
+      constexpr int kCompactNtpPerSec = 0x10000;
+      constexpr uint32_t kMaxDelayValue = std::numeric_limits<uint32_t>::max();
+      constexpr int kMaxDelayS = kMaxDelayValue / kCompactNtpPerSec;
+      constexpr int64_t kMaxDelayUs = kMaxDelayS * rtc::kNumMicrosecsPerSec;
+      if (delay_us > kMaxDelayUs)
+        continue;
+      report_block.SetLastSr(last_sender_report.remote_compact_ntp_time);
+      report_block.SetDelayLastSr(delay_us * kCompactNtpPerSec /
+                                  rtc::kNumMicrosecsPerSec);
+    }
     rr.SetReportBlocks(std::move(report_blocks));
   }
   sender.AppendPacket(rr);
