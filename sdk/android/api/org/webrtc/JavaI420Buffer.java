@@ -20,24 +20,29 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
   private final ByteBuffer dataY;
   private final ByteBuffer dataU;
   private final ByteBuffer dataV;
+  private final ByteBuffer dataA;
   private final int strideY;
   private final int strideU;
   private final int strideV;
+  private final int strideA;
   private final Runnable releaseCallback;
   private final Object refCountLock = new Object();
 
   private int refCount;
 
   private JavaI420Buffer(int width, int height, ByteBuffer dataY, int strideY, ByteBuffer dataU,
-      int strideU, ByteBuffer dataV, int strideV, Runnable releaseCallback) {
+      int strideU, ByteBuffer dataV, int strideV, ByteBuffer dataA, int strideA,
+      Runnable releaseCallback) {
     this.width = width;
     this.height = height;
     this.dataY = dataY;
     this.dataU = dataU;
     this.dataV = dataV;
+    this.dataA = dataA;
     this.strideY = strideY;
     this.strideU = strideU;
     this.strideV = strideV;
+    this.strideA = strideA;
     this.releaseCallback = releaseCallback;
 
     this.refCount = 1;
@@ -45,7 +50,8 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
 
   /** Wraps existing ByteBuffers into JavaI420Buffer object without copying the contents. */
   public static JavaI420Buffer wrap(int width, int height, ByteBuffer dataY, int strideY,
-      ByteBuffer dataU, int strideU, ByteBuffer dataV, int strideV, Runnable releaseCallback) {
+      ByteBuffer dataU, int strideU, ByteBuffer dataV, int strideV, ByteBuffer dataA, int strideA,
+      Runnable releaseCallback) {
     if (dataY == null || dataU == null || dataV == null) {
       throw new IllegalArgumentException("Data buffers cannot be null.");
     }
@@ -58,6 +64,8 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
     dataY = dataY.slice();
     dataU = dataU.slice();
     dataV = dataV.slice();
+    if (dataA != null)
+      dataA = dataA.slice();
 
     final int chromaHeight = (height + 1) / 2;
     final int minCapacityY = strideY * height;
@@ -73,8 +81,8 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
       throw new IllegalArgumentException("V-buffer must be at least " + minCapacityV + " bytes.");
     }
 
-    return new JavaI420Buffer(
-        width, height, dataY, strideY, dataU, strideU, dataV, strideV, releaseCallback);
+    return new JavaI420Buffer(width, height, dataY, strideY, dataU, strideU, dataV, strideV, dataA,
+        strideA, releaseCallback);
   }
 
   /** Allocates an empty I420Buffer suitable for an image of the given dimensions. */
@@ -84,8 +92,9 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
     int yPos = 0;
     int uPos = yPos + width * height;
     int vPos = uPos + strideUV * chromaHeight;
+    int aPos = vPos + strideUV * chromaHeight;
 
-    ByteBuffer buffer = ByteBuffer.allocateDirect(width * height + 2 * strideUV * chromaHeight);
+    ByteBuffer buffer = ByteBuffer.allocateDirect(2 * width * height + 2 * strideUV * chromaHeight);
 
     buffer.position(yPos);
     buffer.limit(uPos);
@@ -96,11 +105,15 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
     ByteBuffer dataU = buffer.slice();
 
     buffer.position(vPos);
-    buffer.limit(vPos + strideUV * chromaHeight);
+    buffer.limit(aPos);
     ByteBuffer dataV = buffer.slice();
 
-    return new JavaI420Buffer(
-        width, height, dataY, width, dataU, strideUV, dataV, strideUV, null /* releaseCallback */);
+    buffer.position(aPos);
+    buffer.limit(aPos + width * height);
+    ByteBuffer dataA = buffer.slice();
+
+    return new JavaI420Buffer(width, height, dataY, width, dataU, strideUV, dataV, strideUV, dataA,
+        width, null /* releaseCallback */);
   }
 
   @Override
@@ -132,6 +145,12 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
   }
 
   @Override
+  public ByteBuffer getDataA() {
+    // Return a slice to prevent relative reads from changing the position.
+    return dataA.slice();
+  }
+
+  @Override
   public int getStrideY() {
     return strideY;
   }
@@ -144,6 +163,11 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
   @Override
   public int getStrideV() {
     return strideV;
+  }
+
+  @Override
+  public int getStrideA() {
+    return strideA;
   }
 
   @Override

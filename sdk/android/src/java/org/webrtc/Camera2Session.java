@@ -12,6 +12,7 @@ package org.webrtc;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -28,12 +29,27 @@ import android.util.Range;
 import android.view.Surface;
 import android.view.WindowManager;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.webrtc.CameraEnumerationAndroid.CaptureFormat;
 
 @TargetApi(21)
 class Camera2Session implements CameraSession {
+  static {
+    System.loadLibrary("AppRTCMobile_jni");
+  }
+
+  private native int nativeTestJniFunc(int i);
+  private native int nativeFabbyVideoSegment(long info_ptr, int texture_id, int width, int height,
+      int camera_angle, int camera_facing, byte[] mask);
+  // mask_texture stores mask_texture_id, width, height
+  private native int nativeFabbyVideoSegment2(long info_ptr, int texture_id, int width, int height,
+      int camera_angle, int camera_facing, int[] mask_texture);
+  private native long nativeInitFabbyVideoSegmenter(AssetManager manager, String path);
+  private native void nativeDestroyFabbyVideoSegmenter(long segmenter_handle);
+  private long segmenter_handle;
+
   private static final String TAG = "Camera2Session";
 
   private static final Histogram camera2StartTimeMsHistogram =
@@ -152,6 +168,9 @@ class Camera2Session implements CameraSession {
   }
 
   private class CaptureSessionCallback extends CameraCaptureSession.StateCallback {
+    private int counter = 0;
+    private long last_date = 0;
+
     @Override
     public void onConfigureFailed(CameraCaptureSession session) {
       checkIsOnCameraThread();
@@ -229,9 +248,42 @@ class Camera2Session implements CameraSession {
                   RendererCommon.rotateTextureMatrix(transformMatrix, -cameraOrientation);
 
               if (videoFrameEmitTrialEnabled) {
-                VideoFrame.Buffer buffer = surfaceTextureHelper.createTextureBuffer(
+                byte[] mask = new byte[captureFormat.width * captureFormat.height];
+                for (int i = 0; i < mask.length; i++) mask[i] = (byte) 0xFF;
+                // int[] mask_texture = new int[4];
+
+                counter++;
+                if (counter >= 50) {
+                  if (segmenter_handle == 0) {
+                    synchronized (EglBase.lock) {
+                      segmenter_handle = nativeInitFabbyVideoSegmenter(
+                          applicationContext.getAssets(), "video.eaf");
+                    }
+                    Logging.e("Qiang Chen", "Segmenter Ptr: " + segmenter_handle);
+                  }
+                } else {
+                  Logging.e("Qiang Chen", "Frame Count: " + counter);
+                }
+
+                if (counter % 100 == 0) {
+                  long date = System.currentTimeMillis();
+
+                  long x = date - last_date;
+                  Logging.e("Qiang Chen", "FPS " + (100 * 1000 / x));
+
+                  last_date = date;
+                }
+
+                if (segmenter_handle != 0) {
+                  nativeFabbyVideoSegment(segmenter_handle, oesTextureId, captureFormat.width,
+                      captureFormat.height, getDeviceOrientation(), 0, mask);
+                  // Logging.e("Qiang Chen", "Mask Texture: "+mask_texture[0] +" "+mask_texture[1]
+                  // +"x"+mask_texture[2]);
+                }
+                VideoFrame.Buffer buffer = surfaceTextureHelper.createTextureBufferWithAlpha(
                     captureFormat.width, captureFormat.height,
-                    RendererCommon.convertMatrixToAndroidGraphicsMatrix(transformMatrix));
+                    RendererCommon.convertMatrixToAndroidGraphicsMatrix(transformMatrix), mask);
+
                 final VideoFrame frame = new VideoFrame(buffer, rotation, timestampNs);
                 events.onFrameCaptured(Camera2Session.this, frame);
                 frame.release();
@@ -330,6 +382,7 @@ class Camera2Session implements CameraSession {
     this.width = width;
     this.height = height;
     this.framerate = framerate;
+    this.segmenter_handle = 0;
 
     start();
   }
@@ -398,6 +451,11 @@ class Camera2Session implements CameraSession {
     Logging.d(TAG, "Stop camera2 session on camera " + cameraId);
     checkIsOnCameraThread();
     if (state != SessionState.STOPPED) {
+      if (segmenter_handle != 0) {
+        nativeDestroyFabbyVideoSegmenter(segmenter_handle);
+        segmenter_handle = 0;
+      }
+
       final long stopStartTime = System.nanoTime();
       state = SessionState.STOPPED;
       stopInternal();

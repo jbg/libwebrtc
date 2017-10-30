@@ -140,7 +140,7 @@ public class YuvConverter {
     // buffer.  Add one row at the bottom to compensate for this.  There will never be data in the
     // extra row, but now other code does not have to deal with v stride * v height exceeding the
     // buffer's capacity.
-    final int size = stride * (height + uvHeight + 1);
+    final int size = stride * (2 * height + uvHeight + 1);
     ByteBuffer buffer = JniCommon.allocateNativeByteBuffer(size);
     convert(buffer, width, height, stride, textureBuffer.getTextureId(),
         RendererCommon.convertMatrixFromAndroidGraphicsMatrix(textureBuffer.getTransformMatrix()),
@@ -150,6 +150,7 @@ public class YuvConverter {
     final int uPos = yPos + stride * height;
     // Rows of U and V alternate in the buffer, so V data starts after the first row of U.
     final int vPos = uPos + stride / 2;
+    int aPos = yPos + stride * height + stride * uvHeight;
 
     buffer.position(yPos);
     buffer.limit(yPos + stride * height);
@@ -163,9 +164,27 @@ public class YuvConverter {
     buffer.limit(vPos + stride * uvHeight);
     ByteBuffer dataV = buffer.slice();
 
+    buffer.position(aPos);
+    buffer.limit(aPos + stride * height);
+    ByteBuffer dataA = buffer.slice();
+
+    // Test Alpha Channel.
+    byte[] mask = textureBuffer.getMask();
+    final boolean set_alpha = (mask != null && mask.length >= width * height);
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        int i = y * stride + x;
+        if (set_alpha) {
+          dataA.put(i, mask[y * width + x]);
+        } else {
+          dataA.put(i, (byte) 0xFF);
+        }
+      }
+    }
+
     // SurfaceTextureHelper uses the same stride for Y, U, and V data.
-    return JavaI420Buffer.wrap(width, height, dataY, stride, dataU, stride, dataV, stride,
-        () -> { JniCommon.freeNativeByteBuffer(buffer); });
+    return JavaI420Buffer.wrap(width, height, dataY, stride, dataU, stride, dataV, stride, dataA,
+        stride, () -> { JniCommon.freeNativeByteBuffer(buffer); });
   }
 
   /** Deprecated, use convert(TextureBuffer). */
@@ -270,6 +289,13 @@ public class YuvConverter {
     final int frameBufferWidth = stride / 4;
     final int frameBufferHeight = total_height;
     textureFrameBuffer.setSize(frameBufferWidth, frameBufferHeight);
+
+    shader.useProgram();
+    // Initialize vertex shader attributes.
+    shader.setVertexAttribArray("in_pos", 2, DEVICE_RECTANGLE);
+    // If the width is not a multiple of 4 pixels, the texture
+    // will be scaled up slightly and clipped at the right border.
+    shader.setVertexAttribArray("in_tc", 2, TEXTURE_RECTANGLE);
 
     // Bind our framebuffer.
     GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, textureFrameBuffer.getFrameBufferId());
