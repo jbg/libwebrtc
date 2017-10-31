@@ -141,6 +141,24 @@
       "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac9850e7_7c4faa74",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-31T20:51:04Z",
+      "side": 1,
+      "message": "Oh. No, if using that constructor caused crashes, making it unavailable doesn\u0027t count as a breaking change, I\u0027d say. :-)\n\nHmm. The bug isn\u0027t really in this class, is it? It\u0027s ContentInfos that shouldn\u0027t be copyable either. Maybe post a bug about it?\n\nEither way, this is good for this CL.",
+      "parentUuid": "ecc8f269_6cc4be10",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
