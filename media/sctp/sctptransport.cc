@@ -666,10 +666,9 @@ bool SctpTransport::OpenSctpSocket() {
 
   UsrSctpWrapper::IncrementUsrSctpUsageCount();
 
-  // If kSendBufferSize isn't reflective of reality, we log an error, but we
-  // still have to do something reasonable here.  Look up what the buffer's
-  // real size is and set our threshold to something reasonable.
-  static const int kSendThreshold = usrsctp_sysctl_get_sctp_sendspace() / 2;
+  // Change the send threshold to 0 so that the |SendThresholdCallback| will be
+  // called whenever there is room in the send buffer.
+  static const int kSendThreshold = 0;
 
   sock_ = usrsctp_socket(
       AF_CONN, SOCK_STREAM, IPPROTO_SCTP, &UsrSctpWrapper::OnSctpInboundPacket,
