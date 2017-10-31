@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94363b36_6d075cbc",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-31T12:58:12Z",
+      "side": 1,
+      "message": "This class contains a std::string and a std::vector\u003cstd::string\u003e, meaning that before this change, moving was considerably cheaper than copying. After this change, move isn\u0027t available so we\u0027ll fall back to copying.\n\nIn cases like this, seriously consider adding a move constructor as well.",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4150c65c_34dcf782",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-31T12:58:12Z",
+      "side": 1,
+      "message": "Hmm. Why a private copy constructor?",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
