@@ -159,6 +159,24 @@
       "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75eab218_11329631",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-31T22:25:52Z",
+      "side": 1,
+      "message": "Filed a bug for this: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d8483",
+      "parentUuid": "ac9850e7_7c4faa74",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
