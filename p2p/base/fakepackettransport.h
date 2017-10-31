@@ -60,6 +60,7 @@ class FakePacketTransport : public PacketTransportInternal {
 
   // Fake PacketTransportInternal implementation.
   std::string debug_name() const override { return debug_name_; }
+  const std::string& transport_name() const override { return debug_name_; }
   bool writable() const override { return writable_; }
   bool receiving() const override { return receiving_; }
   int SendPacket(const char* data,
@@ -87,6 +88,11 @@ class FakePacketTransport : public PacketTransportInternal {
   int GetError() override { return 0; }
 
   const CopyOnWriteBuffer* last_sent_packet() { return &last_sent_packet_; }
+
+  NetworkRoute GetNetworkRoute() const override { return network_route_; }
+  void SetNetworkRoute(rtc::NetworkRoute network_route) {
+    network_route_ = network_route;
+  }
 
  private:
   void set_writable(bool writable) {
@@ -124,6 +130,8 @@ class FakePacketTransport : public PacketTransportInternal {
   int async_delay_ms_ = 0;
   bool writable_ = false;
   bool receiving_ = false;
+
+  rtc::NetworkRoute network_route_;
 };
 
 }  // namespace rtc

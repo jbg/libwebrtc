@@ -43,8 +43,6 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
 
   virtual DtlsTransportState dtls_state() const = 0;
 
-  virtual const std::string& transport_name() const = 0;
-
   virtual int component() const = 0;
 
   virtual bool IsDtlsActive() const = 0;
