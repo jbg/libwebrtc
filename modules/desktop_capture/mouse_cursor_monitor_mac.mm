@@ -239,10 +239,10 @@ void MouseCursorMonitorMac::Capture() {
     }
   }
   // Convert Density Independent Pixel to physical pixel.
-  position = DesktopVector(round(position.x() * scale),
-                           round(position.y() * scale));
   // TODO(zijiehe): Remove this overload.
-  callback_->OnMouseCursorPosition(state, position);
+  callback_->OnMouseCursorPosition(state,
+      DesktopVector(round(position.x() * scale),
+                    round(position.y() * scale)));
   callback_->OnMouseCursorPosition(
       position.subtract(configuration.bounds.top_left()));
 }
