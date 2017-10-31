@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ecc1df42_f5f5644f",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-31T17:23:53Z",
+      "side": 1,
+      "message": "One unfortunate side effect of providing a move constructor is that it deletes the implicit copy-assignment operator, so then that has to be specified explicitly. We end up with:\n\n  explicit ContentGroup(const std::string\u0026 semantics);\n  ContentGroup(const ContentGroup\u0026);\n  ContentGroup(ContentGroup\u0026\u0026);\n  ContentGroup\u0026 operator\u003d(const ContentGroup\u0026);\n  ContentGroup\u0026 operator\u003d(ContentGroup\u0026\u0026);\n  ~ContentGroup();\n\nTo get everything that was included implicitly before. I went ahead and added all of those, but it is quite wordy :(",
+      "parentUuid": "94363b36_6d075cbc",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4150c65c_34dcf782",
         "filename": "p2p/base/sessiondescription.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a2e452b_d8792d7b",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-10-31T17:23:53Z",
+      "side": 1,
+      "message": "There\u0027s a |Copy| method in this class which does a deep copy of the SessionDescription. It uses the copy constructor to do a shallow copy, then goes through and makes clones of the heap-allocated pointers (see sessiondescription.cc:116).",
+      "parentUuid": "4150c65c_34dcf782",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
