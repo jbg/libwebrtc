@@ -11,6 +11,7 @@
 #ifndef MODULES_RTP_RTCP_SOURCE_RTCP_TRANSCEIVER_IMPL_H_
 #define MODULES_RTP_RTCP_SOURCE_RTCP_TRANSCEIVER_IMPL_H_
 
+#include <map>
 #include <memory>
 #include <string>
 
@@ -29,16 +30,25 @@ class RtcpTransceiverImpl {
   explicit RtcpTransceiverImpl(const RtcpTransceiverConfig& config);
   ~RtcpTransceiverImpl();
 
+  // Handles incoming rtcp packet.
+  void ReceivePacket(rtc::ArrayView<const uint8_t> packet);
+
   // Sends RTCP packets starting with a sender or receiver report.
   void SendCompoundPacket();
 
  private:
+  struct LastSenderReport {
+    int64_t local_time_us;
+    uint32_t remote_compact_ntp_time;
+  };
+
   void ReschedulePeriodicCompoundPackets(int64_t delay_ms);
   // Sends RTCP packets.
   void SendPacket();
 
   const RtcpTransceiverConfig config_;
 
+  std::map<uint32_t, LastSenderReport> remote_senders_;
   rtc::WeakPtrFactory<RtcpTransceiverImpl> ptr_factory_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RtcpTransceiverImpl);
