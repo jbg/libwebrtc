@@ -15,11 +15,15 @@
 
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_geometry.h"
+#include "rtc_base/scoped_ref_ptr.h"
 
 namespace webrtc {
 
 #if defined(USE_X11)
 class XAtomCache;
+#endif
+#if defined(WEBRTC_MAC)
+class DesktopConfigurationMonitor;
 #endif
 
 // An interface to return the id of the visible window under a certain point.
@@ -38,6 +42,9 @@ class WindowFinder {
   struct Options {
 #if defined(USE_X11)
     XAtomCache* cache = nullptr;
+#endif
+#if defined(WEBRTC_MAC)
+    rtc::scoped_refptr<DesktopConfigurationMonitor> configuration_monitor;
 #endif
   };
 
