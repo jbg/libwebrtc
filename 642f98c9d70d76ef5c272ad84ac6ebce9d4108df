@@ -33,6 +33,24 @@
       "revId": "642f98c9d70d76ef5c272ad84ac6ebce9d4108df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e34789c_544f150c",
+        "filename": "modules/video_coding/video_packet_buffer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-10-31T13:29:47Z",
+      "side": 1,
+      "message": "Yes that would be more natural, but I need to set the field trial before creating |packet_buffer_|.",
+      "parentUuid": "c03445f5_c3e47c6b",
+      "revId": "642f98c9d70d76ef5c272ad84ac6ebce9d4108df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
