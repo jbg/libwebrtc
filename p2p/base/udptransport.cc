@@ -86,6 +86,12 @@ int UdpTransport::SendPacket(const char* data,
   return result;
 }
 
+rtc::NetworkRoute UdpTransport::GetNetworkRoute() const {
+  rtc::NetworkRoute network_route;
+  network_route.transport_overhead_per_packet = GetTransportOverhead();
+  return network_route;
+}
+
 void UdpTransport::OnSocketReadPacket(rtc::AsyncPacketSocket* socket,
                                       const char* data,
                                       size_t len,
@@ -99,6 +105,18 @@ void UdpTransport::OnSocketSentPacket(rtc::AsyncPacketSocket* socket,
                                       const rtc::SentPacket& packet) {
   RTC_DCHECK_EQ(socket_.get(), socket);
   SignalSentPacket(this, packet);
+}
+
+int UdpTransport::GetTransportOverhead() const {
+  constexpr int kUdpOverhead = 8;
+  switch (GetLocalAddress().family()) {
+    case AF_INET:
+      return kUdpOverhead + 20;
+    case AF_INET6:
+      return kUdpOverhead + 40;
+    default:
+      RTC_NOTREACHED();
+  }
 }
 
 }  // namespace cricket

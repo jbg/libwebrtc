@@ -31,8 +31,11 @@ class FakeDtlsTransport : public DtlsTransportInternal {
         transport_name_(ice_transport->transport_name()),
         component_(ice_transport->component()),
         dtls_fingerprint_("", nullptr, 0) {
+    RTC_DCHECK(ice_transport_);
     ice_transport_->SignalReadPacket.connect(
         this, &FakeDtlsTransport::OnIceTransportReadPacket);
+    ice_transport_->SignalNetworkRouteChanged.connect(
+        this, &FakeDtlsTransport::OnNetworkRouteChanged);
   }
 
   // If this constructor is called, a new fake ICE transport will be created,
@@ -45,6 +48,8 @@ class FakeDtlsTransport : public DtlsTransportInternal {
     ice_transport_ = owned_ice_transport_.get();
     ice_transport_->SignalReadPacket.connect(
         this, &FakeDtlsTransport::OnIceTransportReadPacket);
+    ice_transport_->SignalNetworkRouteChanged.connect(
+        this, &FakeDtlsTransport::OnNetworkRouteChanged);
   }
 
   ~FakeDtlsTransport() override {
@@ -201,6 +206,13 @@ class FakeDtlsTransport : public DtlsTransportInternal {
   }
   int GetError() override { return ice_transport_->GetError(); }
 
+  rtc::NetworkRoute GetNetworkRoute() const override {
+    return ice_transport_->GetNetworkRoute();
+  }
+  void SetNetworkRoute(rtc::NetworkRoute network_route) {
+    ice_transport_->SetNetworkRoute(network_route);
+  }
+
  private:
   void OnIceTransportReadPacket(PacketTransportInternal* ice_,
                                 const char* data,
@@ -227,6 +239,10 @@ class FakeDtlsTransport : public DtlsTransportInternal {
       SignalReadyToSend(this);
     }
     SignalWritableState(this);
+  }
+
+  void OnNetworkRouteChanged(rtc::PacketTransportInternal* transport) {
+    SignalNetworkRouteChanged(transport);
   }
 
   FakeIceTransport* ice_transport_;

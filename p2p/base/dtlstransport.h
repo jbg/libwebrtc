@@ -169,6 +169,10 @@ class DtlsTransport : public DtlsTransportInternal {
 
   int GetError() override { return ice_transport_->GetError(); }
 
+  rtc::NetworkRoute GetNetworkRoute() const override {
+    return ice_transport_->GetNetworkRoute();
+  }
+
   int SetOption(rtc::Socket::Option opt, int value) override {
     return ice_transport_->SetOption(opt, value);
   }
@@ -194,6 +198,7 @@ class DtlsTransport : public DtlsTransportInternal {
   void OnReadyToSend(rtc::PacketTransportInternal* transport);
   void OnReceivingState(rtc::PacketTransportInternal* transport);
   void OnDtlsEvent(rtc::StreamInterface* stream_, int sig, int err);
+  void OnNetworkRouteChanged(rtc::PacketTransportInternal* transport);
   bool SetupDtls();
   void MaybeStartDtls();
   bool HandleDtlsPacket(const char* data, size_t size);
