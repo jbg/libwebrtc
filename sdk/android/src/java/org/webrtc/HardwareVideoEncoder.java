@@ -567,14 +567,31 @@ class HardwareVideoEncoder implements VideoEncoder {
   /**
    * Enumeration of supported YUV color formats used for MediaCodec's input.
    */
-  private static enum YuvFormat {
+  private enum YuvFormat {
     I420 {
       @Override
       void fillBuffer(ByteBuffer inputBuffer, VideoFrame.Buffer buffer) {
         VideoFrame.I420Buffer i420 = buffer.toI420();
-        inputBuffer.put(i420.getDataY());
-        inputBuffer.put(i420.getDataU());
-        inputBuffer.put(i420.getDataV());
+
+        final int height = i420.getHeight();
+        final int width = i420.getWidth();
+        final int chromaHeight = (height + 1) / 2;
+        final int chromaWidth = (width + 1) / 2;
+
+        final int startY = 0;
+        final int startU = height * width;
+        final int startV = startU + chromaHeight * chromaWidth;
+
+        inputBuffer.position(startY);
+        final ByteBuffer dstY = inputBuffer.slice();
+        inputBuffer.position(startU);
+        final ByteBuffer dstU = inputBuffer.slice();
+        inputBuffer.position(startV);
+        final ByteBuffer dstV = inputBuffer.slice();
+
+        YuvHelper.I420Copy(i420.getDataY(), i420.getStrideY(), i420.getDataU(), i420.getStrideU(),
+            i420.getDataV(), i420.getStrideV(), dstY, width, dstU, chromaWidth, dstV, chromaWidth,
+            width, height);
         i420.release();
       }
     },
@@ -582,16 +599,21 @@ class HardwareVideoEncoder implements VideoEncoder {
       @Override
       void fillBuffer(ByteBuffer inputBuffer, VideoFrame.Buffer buffer) {
         VideoFrame.I420Buffer i420 = buffer.toI420();
-        inputBuffer.put(i420.getDataY());
 
-        // Interleave the bytes from the U and V portions, starting with U.
-        ByteBuffer u = i420.getDataU();
-        ByteBuffer v = i420.getDataV();
-        int i = 0;
-        while (u.hasRemaining() && v.hasRemaining()) {
-          inputBuffer.put(u.get());
-          inputBuffer.put(v.get());
-        }
+        final int height = i420.getHeight();
+        final int width = i420.getWidth();
+        final int chromaWidth = (width + 1) / 2;
+
+        final int startY = 0;
+        final int startUV = height * width;
+
+        inputBuffer.position(startY);
+        final ByteBuffer dstY = inputBuffer.slice();
+        inputBuffer.position(startUV);
+        final ByteBuffer dstUV = inputBuffer.slice();
+
+        YuvHelper.I420ToNV12(i420.getDataY(), i420.getStrideY(), i420.getDataU(), i420.getStrideU(),
+            i420.getDataV(), i420.getStrideV(), dstY, width, dstUV, chromaWidth * 2, width, height);
         i420.release();
       }
     };
