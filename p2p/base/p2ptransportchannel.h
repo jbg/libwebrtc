@@ -129,6 +129,8 @@ class P2PTransportChannel : public IceTransportInternal,
   int receiving_timeout() const { return config_.receiving_timeout; }
   int check_receiving_interval() const { return check_receiving_interval_; }
 
+  rtc::NetworkRoute GetNetworkRoute() const override { return network_route_; }
+
   // Helper method used only in unittest.
   rtc::DiffServCodePoint DefaultDscpValue() const;
 
@@ -345,6 +347,14 @@ class P2PTransportChannel : public IceTransportInternal,
   // Sets the receiving state, signaling if necessary.
   void set_receiving(bool receiving);
 
+  // Get the network layer overhead per packet based on the IP address family of
+  // the candidate.
+  int GetNetworkLayerOverhead(const Candidate& candidate) const;
+  // Get the transport layer overhead per packet based on the protocol.
+  int GetTransportLayerOverhead(const Candidate& candidate) const;
+  // Network layer overhead + transport layer overhead.
+  int GetIceTransportOverhead() const;
+
   std::string transport_name_;
   int component_;
   PortAllocator* allocator_;
@@ -401,6 +411,8 @@ class P2PTransportChannel : public IceTransportInternal,
   bool writable_ = false;
 
   webrtc::MetricsObserverInterface* metrics_observer_ = nullptr;
+
+  rtc::NetworkRoute network_route_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(P2PTransportChannel);
 };
