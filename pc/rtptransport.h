@@ -76,6 +76,7 @@ class RtpTransport : public RtpTransportInternal {
   bool HandlesPacket(const uint8_t* data, size_t len);
 
   void OnReadyToSend(rtc::PacketTransportInternal* transport);
+  void OnNetworkRouteChange(rtc::PacketTransportInternal* transport);
 
   // Updates "ready to send" for an individual channel and fires
   // SignalReadyToSend.
