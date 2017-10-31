@@ -15,6 +15,11 @@
 
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_geometry.h"
+#include "rtc_base/scoped_ref_ptr.h"
+
+#if defined(WEBRTC_MAC)
+#include "modules/desktop_capture/mac/desktop_configuration_monitor.h"
+#endif
 
 namespace webrtc {
 
@@ -35,9 +40,17 @@ class WindowFinder {
   // starts from (0, 0).
   virtual WindowId GetWindowUnderPoint(DesktopVector point) = 0;
 
-  struct Options {
+  struct Options final {
+    Options() = default;
+    ~Options() = default;
+    Options(const Options& other) = default;
+    Options(Options&& other) = default;
+
 #if defined(USE_X11)
     XAtomCache* cache = nullptr;
+#endif
+#if defined(WEBRTC_MAC)
+    rtc::scoped_refptr<DesktopConfigurationMonitor> configuration_monitor;
 #endif
   };
 
