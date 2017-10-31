@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "85cf0e2d_38a1aaad",
+        "filename": "infra/config/cq.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2017-10-31T16:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "067115f1_312890ee",
+      "revId": "81679c46e2698c6646265d6b898389e4518cf62b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c76825f_2279b36c",
         "filename": "infra/config/cq.cfg",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "81679c46e2698c6646265d6b898389e4518cf62b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2af667e9_7fb06a0b",
+        "filename": "infra/config/cq.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2017-10-31T16:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c76825f_2279b36c",
+      "range": {
+        "startLine": 74,
+        "startChar": 39,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "81679c46e2698c6646265d6b898389e4518cf62b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
