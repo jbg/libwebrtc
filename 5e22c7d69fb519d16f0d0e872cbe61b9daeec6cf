@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d9de72c5_184a9ff2",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-31T19:05:22Z",
+      "side": 1,
+      "message": "Yes, but it follows the common advice that if you need to manually define at least one of those five (copy/move construction/assignment and destructor), you should define (or delete) all five. Usually that\u0027s in the context of writing non-default implementations, but I find that the advice works just as well when you just want the default implementations non-inlined.",
+      "parentUuid": "ecc1df42_f5f5644f",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4150c65c_34dcf782",
         "filename": "p2p/base/sessiondescription.h",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "There\u0027s a |Copy| method in this class which does a deep copy of the SessionDescription. It uses the copy constructor to do a shallow copy, then goes through and makes clones of the heap-allocated pointers (see sessiondescription.cc:116).",
       "parentUuid": "4150c65c_34dcf782",
+      "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b9e4d02_afbc754b",
+        "filename": "p2p/base/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-31T19:05:22Z",
+      "side": 1,
+      "message": "OK---but why private? The copy constructor used to be implicit (and thus public), but you\u0027re changing it to private.",
+      "parentUuid": "1a2e452b_d8792d7b",
       "revId": "5e22c7d69fb519d16f0d0e872cbe61b9daeec6cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false

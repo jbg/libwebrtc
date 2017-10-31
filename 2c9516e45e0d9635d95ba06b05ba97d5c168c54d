@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a5ae41c_a6836503",
+        "filename": "p2p/base/sessiondescription.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-10-31T19:05:22Z",
+      "side": 1,
+      "message": "Suggestion: Eliminate the four blank lines between the defaulted methods.",
+      "revId": "2c9516e45e0d9635d95ba06b05ba97d5c168c54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
