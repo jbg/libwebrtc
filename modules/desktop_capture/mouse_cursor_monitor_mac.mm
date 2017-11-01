@@ -122,17 +122,7 @@ void MouseCursorMonitorMac::Capture() {
   MacDesktopConfiguration configuration =
       configuration_monitor_->desktop_configuration();
   configuration_monitor_->Unlock();
-  float scale = 1.0f;
-
-  // Find the dpi to physical pixel scale for the screen where the mouse cursor
-  // is.
-  for (MacDisplayConfigurations::iterator it = configuration.displays.begin();
-       it != configuration.displays.end(); ++it) {
-    if (it->bounds.Contains(position)) {
-      scale = it->dip_to_pixel_scale;
-      break;
-    }
-  }
+  float scale = GetScaleFactorAtPosition(configuration, position);
 
   CaptureImage(scale);
 
