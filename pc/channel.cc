@@ -1044,8 +1044,11 @@ bool BaseChannel::SetSrtp_n(const std::vector<CryptoParams>& cryptos,
     EnableSrtpTransport_n();
   }
   if (srtp_transport_) {
-    srtp_transport_->SetEncryptedHeaderExtensionIds(src,
-                                                    encrypted_extension_ids);
+    src == cricket::CS_LOCAL
+        ? srtp_transport_->SetRecvEncryptedHeaderExtensionIds(
+              encrypted_extension_ids)
+        : srtp_transport_->SetSendEncryptedHeaderExtensionIds(
+              encrypted_extension_ids);
   }
   switch (action) {
     case CA_OFFER:

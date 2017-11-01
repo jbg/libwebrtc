@@ -305,19 +305,15 @@ class SrtpTransportTest : public testing::Test, public sigslot::has_slots<> {
                                             int key2_len,
                                             const std::string& cs_name) {
     std::vector<int> encrypted_headers;
-    encrypted_headers.push_back(1);
+    encrypted_headers.push_back(kHeaderExtensionIDs[0]);
     // Don't encrypt header ids 2 and 3.
-    encrypted_headers.push_back(4);
+    encrypted_headers.push_back(kHeaderExtensionIDs[1]);
     EXPECT_EQ(key1_len, key2_len);
     EXPECT_EQ(cs_name, rtc::SrtpCryptoSuiteToName(cs));
-    srtp_transport1_->SetEncryptedHeaderExtensionIds(cricket::CS_LOCAL,
-                                                     encrypted_headers);
-    srtp_transport1_->SetEncryptedHeaderExtensionIds(cricket::CS_REMOTE,
-                                                     encrypted_headers);
-    srtp_transport2_->SetEncryptedHeaderExtensionIds(cricket::CS_LOCAL,
-                                                     encrypted_headers);
-    srtp_transport2_->SetEncryptedHeaderExtensionIds(cricket::CS_REMOTE,
-                                                     encrypted_headers);
+    srtp_transport1_->SetRecvEncryptedHeaderExtensionIds(encrypted_headers);
+    srtp_transport1_->SetSendEncryptedHeaderExtensionIds(encrypted_headers);
+    srtp_transport2_->SetRecvEncryptedHeaderExtensionIds(encrypted_headers);
+    srtp_transport2_->SetSendEncryptedHeaderExtensionIds(encrypted_headers);
     EXPECT_TRUE(
         srtp_transport1_->SetRtpParams(cs, key1, key1_len, cs, key2, key2_len));
     EXPECT_TRUE(
