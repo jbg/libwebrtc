@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "27c804f1_46cedbd7",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-01T21:21:55Z",
+      "side": 1,
+      "message": "Made a separate CL for this. https://webrtc-review.googlesource.com/c/src/+/15860",
+      "parentUuid": "7c6807ff_13d12095",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a96c075_1266a29f",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 6
@@ -312,6 +330,24 @@
       "side": 1,
       "message": "Ah... Because it\u0027s taking the CopyOnWriteBuffer by pointer? That seems like a misuse of the CopyOnWriteBuffer class in the first place. The idea of CopyOnWriteBuffer, as I understood it, is that you can make cheap copies all over the place, and only when the data is modified is a new \"real\" copy made. We should have a TODO and/or bug to fix this, or do it in a quick standalone CL.",
       "parentUuid": "01d9d34b_b762361d",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de214ddf_1848d500",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-01T21:21:55Z",
+      "side": 1,
+      "message": "Ack. Will do it in a separate CL.",
+      "parentUuid": "7b1ad276_307a379d",
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -555,6 +591,24 @@
       "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c87dd659_64a2d224",
+        "filename": "pc/dtlssrtptransport_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-01T21:21:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3808be6_332c6f1b",
+      "revId": "193e9a8707e7456d44a21a5662c7fa5c9ee56f8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
