@@ -24,10 +24,13 @@ class WrappedNativeI420Buffer implements VideoFrame.I420Buffer {
   private final int strideU;
   private final ByteBuffer dataV;
   private final int strideV;
+  private final ByteBuffer dataA;
+  private final int strideA;
   private final long nativeBuffer;
 
   WrappedNativeI420Buffer(int width, int height, ByteBuffer dataY, int strideY, ByteBuffer dataU,
-      int strideU, ByteBuffer dataV, int strideV, long nativeBuffer) {
+      int strideU, ByteBuffer dataV, int strideV, ByteBuffer dataA, int strideA,
+      long nativeBuffer) {
     this.width = width;
     this.height = height;
     this.dataY = dataY;
@@ -36,6 +39,8 @@ class WrappedNativeI420Buffer implements VideoFrame.I420Buffer {
     this.strideU = strideU;
     this.dataV = dataV;
     this.strideV = strideV;
+    this.dataA = dataA;
+    this.strideA = strideA;
     this.nativeBuffer = nativeBuffer;
 
     retain();
@@ -70,6 +75,12 @@ class WrappedNativeI420Buffer implements VideoFrame.I420Buffer {
   }
 
   @Override
+  public ByteBuffer getDataA() {
+    // Return a slice to prevent relative reads from changing the position.
+    return dataA.slice();
+  }
+
+  @Override
   public int getStrideY() {
     return strideY;
   }
@@ -82,6 +93,11 @@ class WrappedNativeI420Buffer implements VideoFrame.I420Buffer {
   @Override
   public int getStrideV() {
     return strideV;
+  }
+
+  @Override
+  public int getStrideA() {
+    return strideA;
   }
 
   @Override

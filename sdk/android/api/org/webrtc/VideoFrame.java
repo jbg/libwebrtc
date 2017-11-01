@@ -80,10 +80,12 @@ public class VideoFrame {
      * implementations must return a new ByteBuffer or slice for each call.
      */
     ByteBuffer getDataV();
+    ByteBuffer getDataA();
 
     int getStrideY();
     int getStrideU();
     int getStrideV();
+    int getStrideA();
   }
 
   /**
@@ -107,6 +109,7 @@ public class VideoFrame {
 
     Type getType();
     int getTextureId();
+    byte[] getMask();
 
     /**
      * Retrieve the transform matrix associated with the frame. This transform matrix maps 2D
@@ -190,7 +193,7 @@ public class VideoFrame {
       buffer.retain();
       return JavaI420Buffer.wrap(buffer.getWidth(), buffer.getHeight(), dataY.slice(),
           buffer.getStrideY(), dataU.slice(), buffer.getStrideU(), dataV.slice(),
-          buffer.getStrideV(), buffer::release);
+          buffer.getStrideV(), null, 0, buffer::release);
     }
 
     JavaI420Buffer newBuffer = JavaI420Buffer.allocate(scaleWidth, scaleHeight);

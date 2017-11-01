@@ -330,4 +330,29 @@ public class SurfaceTextureHelper {
           }
         });
   }
+
+  public TextureBuffer createTextureBufferWithAlpha(
+      int width, int height, Matrix transformMatrix, byte[] alpha_mask) {
+    return new TextureBufferImpl(width, height, TextureBuffer.Type.OES, oesTextureId,
+        transformMatrix, this, alpha_mask, new Runnable() {
+          @Override
+          public void run() {
+            returnTextureFrame();
+          }
+        });
+  }
+
+  // TODO (Qiang Chen): Stream Texture Information Down
+  // Here is a hack, we just plug Mask Texture into RGB Texture to see whether it can be hardware
+  // encoded.
+  public TextureBuffer createTextureBufferWithAlpha(
+      int width, int height, Matrix transformMatrix, int[] mask_texture) {
+    return new TextureBufferImpl(mask_texture[1], mask_texture[2], TextureBuffer.Type.RGB,
+        mask_texture[0], transformMatrix, this, new Runnable() {
+          @Override
+          public void run() {
+            returnTextureFrame();
+          }
+        });
+  }
 }

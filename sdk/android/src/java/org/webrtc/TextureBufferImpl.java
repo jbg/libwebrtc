@@ -27,17 +27,24 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
   private final Runnable releaseCallback;
   private final Object refCountLock = new Object();
   private int refCount;
+  private byte[] mask;
 
   public TextureBufferImpl(int width, int height, Type type, int id, Matrix transformMatrix,
-      SurfaceTextureHelper surfaceTextureHelper, Runnable releaseCallback) {
+      SurfaceTextureHelper surfaceTextureHelper, byte[] mask, Runnable releaseCallback) {
     this.width = width;
     this.height = height;
     this.type = type;
     this.id = id;
     this.transformMatrix = transformMatrix;
     this.surfaceTextureHelper = surfaceTextureHelper;
+    this.mask = mask;
     this.releaseCallback = releaseCallback;
     this.refCount = 1; // Creator implicitly holds a reference.
+  }
+
+  public TextureBufferImpl(int width, int height, Type type, int id, Matrix transformMatrix,
+      SurfaceTextureHelper surfaceTextureHelper, Runnable releaseCallback) {
+    this(width, height, type, id, transformMatrix, surfaceTextureHelper, null, releaseCallback);
   }
 
   @Override
@@ -66,8 +73,15 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
   }
 
   @Override
+  public byte[] getMask() {
+    return mask;
+  }
+
+  @Override
   public VideoFrame.I420Buffer toI420() {
-    return surfaceTextureHelper.textureToYuv(this);
+    VideoFrame.I420Buffer result = surfaceTextureHelper.textureToYuv(this);
+
+    return result;
   }
 
   @Override
@@ -93,9 +107,26 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
     Matrix newMatrix = new Matrix(transformMatrix);
     newMatrix.postScale(cropWidth / (float) width, cropHeight / (float) height);
     newMatrix.postTranslate(cropX / (float) width, cropY / (float) height);
+    byte[] new_mask = null;
+    if (mask != null) {
+      if (cropX == 0 && cropY == 0 && cropWidth == width && cropHeight == height
+          && scaleWidth == width && scaleHeight == height) {
+        new_mask = mask;
+      } else {
+        new_mask = new byte[scaleWidth * scaleHeight];
+        for (int y = 0; y < scaleHeight; y++) {
+          for (int x = 0; x < scaleWidth; x++) {
+            int x_map = Math.round(cropX + cropWidth * (x / (float) scaleWidth));
+            int y_map = Math.round(cropY + cropHeight * (y / (float) scaleHeight));
 
-    return new TextureBufferImpl(
-        scaleWidth, scaleHeight, type, id, newMatrix, surfaceTextureHelper, new Runnable() {
+            new_mask[y * scaleWidth + x] = mask[y_map * width + x_map];
+          } // end for x
+        } // end for y
+      } // end if
+    }
+
+    return new TextureBufferImpl(scaleWidth, scaleHeight, type, id, newMatrix, surfaceTextureHelper,
+        new_mask, new Runnable() {
           @Override
           public void run() {
             release();
