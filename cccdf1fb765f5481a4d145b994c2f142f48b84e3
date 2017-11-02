@@ -16,6 +16,24 @@
       "revId": "cccdf1fb765f5481a4d145b994c2f142f48b84e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "239d8718_12dfbf6a",
+        "filename": "voice_engine/include/voe_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-02T13:23:03Z",
+      "side": 1,
+      "message": "Yeah, I didn\u0027t want to start changing things here---I was afraid I\u0027d get stuck and be here all day...\n\nMentioned that I removed the default values.",
+      "parentUuid": "db4d87f9_ff0cda85",
+      "revId": "cccdf1fb765f5481a4d145b994c2f142f48b84e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
