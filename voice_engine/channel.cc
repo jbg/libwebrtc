@@ -548,6 +548,13 @@ AudioMixer::Source::AudioFrameInfo Channel::GetAudioFrameWithInfo(
     }
   }
 
+  {
+    rtc::CritScope lock(&video_sync_lock_);
+    RTC_HISTOGRAM_COUNTS_1000(
+        "WebRTC.Audio.ReceiverDelayEstimateMs",
+        audio_coding_->FilteredCurrentDelayMs() + playout_delay_ms_);
+  }
+
   return muted ? AudioMixer::Source::AudioFrameInfo::kMuted
                : AudioMixer::Source::AudioFrameInfo::kNormal;
 }
