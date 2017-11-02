@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3265c5fc_31eac1f9",
+        "filename": "sdk/android/api/org/webrtc/YuvHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-02T09:36:51Z",
+      "side": 1,
+      "message": "Comment that the ByteBuffers needs to be direct.",
+      "range": {
+        "startLine": 18,
+        "startChar": 13,
+        "endLine": 18,
+        "endChar": 22
+      },
+      "revId": "f6b9eb58f93f9e1434cc9f5ee85da3286e187c1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a33e5fbe_a6ebe70a",
+        "filename": "sdk/android/api/org/webrtc/YuvHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-02T09:36:51Z",
+      "side": 1,
+      "message": "I think the most common case (or the only case) we will use is when the destination buffer is packed. Can you add helper functions for that? I.e. calculating the offsets and slicing the buffers.",
+      "range": {
+        "startLine": 19,
+        "startChar": 28,
+        "endLine": 19,
+        "endChar": 36
+      },
+      "revId": "f6b9eb58f93f9e1434cc9f5ee85da3286e187c1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c475b178_fb10f48f",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-02T09:36:51Z",
+      "side": 1,
+      "message": "I know you didn\u0027t change it in this CL, but I\u0027m very confused about the name. |inputBuffer| is actually the output buffer of this function?",
+      "range": {
+        "startLine": 573,
+        "startChar": 33,
+        "endLine": 573,
+        "endChar": 44
+      },
+      "revId": "f6b9eb58f93f9e1434cc9f5ee85da3286e187c1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
