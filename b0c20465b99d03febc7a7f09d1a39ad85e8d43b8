@@ -16,6 +16,24 @@
       "revId": "b0c20465b99d03febc7a7f09d1a39ad85e8d43b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01515cac_e7125ecc",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-02T14:03:40Z",
+      "side": 1,
+      "message": "Good point. I added those too.",
+      "parentUuid": "07fc254f_f590f3ce",
+      "revId": "b0c20465b99d03febc7a7f09d1a39ad85e8d43b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
