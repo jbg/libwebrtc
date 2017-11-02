@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49242a98_37425774",
+        "filename": "media/engine/fakewebrtccall.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-02T09:48:29Z",
+      "side": 1,
+      "message": "I\u0027ve noticed that we have many of these \"fake\" classes in media/engine/ that actually serve the same purpose as mocks and would be more suited to be implemented using Google mock.\n\nI know I\u0027m annoying, but could you implement this class using gmock instead and update the tests? I think it would be nicer and than we can use this class as an example for others to follow.\n\nWhat do you think?",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "be4ad23835ad7d777c4423646adb6f22b8f32bbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
