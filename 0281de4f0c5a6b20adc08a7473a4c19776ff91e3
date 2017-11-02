@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46b8579a_7690fa5a",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-02T11:01:39Z",
+      "side": 1,
+      "message": "I think it makes sense to store this in a class member, and only look up the status of the field_trial once when the class is created, since it is a somewhat computationally costly operation.",
+      "range": {
+        "startLine": 879,
+        "startChar": 6,
+        "endLine": 879,
+        "endChar": 28
+      },
+      "revId": "0281de4f0c5a6b20adc08a7473a4c19776ff91e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
