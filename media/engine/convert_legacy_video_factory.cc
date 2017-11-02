@@ -31,6 +31,16 @@ namespace cricket {
 
 namespace {
 
+bool IsFormatSupported(
+    const std::vector<webrtc::SdpVideoFormat>& supported_formats,
+    const webrtc::SdpVideoFormat& format) {
+  for (const webrtc::SdpVideoFormat& supported_format : supported_formats) {
+    if (CodecNamesEq(format.name, supported_format.name))
+      return true;
+  }
+  return false;
+}
+
 class EncoderAdapter : public webrtc::VideoEncoderFactory {
  public:
   explicit EncoderAdapter(
@@ -138,11 +148,17 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
  public:
   explicit DecoderAdapter(
       std::unique_ptr<WebRtcVideoDecoderFactory> external_decoder_factory)
-      : internal_decoder_factory_(new InternalDecoderFactory()),
-        external_decoder_factory_(std::move(external_decoder_factory)) {}
+      : external_decoder_factory_(std::move(external_decoder_factory)) {}
 
   std::unique_ptr<webrtc::VideoDecoder> CreateVideoDecoder(
       const webrtc::SdpVideoFormat& format) override {
+    std::unique_ptr<webrtc::VideoDecoder> internal_decoder;
+    webrtc::InternalDecoderFactory internal_decoder_factory;
+    if (IsFormatSupported(internal_decoder_factory.GetSupportedFormats(),
+                          format)) {
+      internal_decoder = internal_decoder_factory.CreateVideoDecoder(format);
+    }
+
     const VideoCodec codec(format);
     const VideoDecoderParams params = {};
     if (external_decoder_factory_ != nullptr) {
@@ -150,16 +166,16 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
           CreateScopedVideoDecoder(external_decoder_factory_.get(), codec,
                                    params);
       if (external_decoder) {
-        webrtc::VideoCodecType type =
-            webrtc::PayloadStringToCodecType(codec.name);
-        std::unique_ptr<webrtc::VideoDecoder> internal_decoder(
+        if (!internal_decoder)
+          return external_decoder;
+        // Both external and internal decoder available - create fallback
+        // wrapper.
+        return std::unique_ptr<webrtc::VideoDecoder>(
             new webrtc::VideoDecoderSoftwareFallbackWrapper(
-                type, std::move(external_decoder)));
-        return internal_decoder;
+                std::move(internal_decoder), std::move(external_decoder)));
       }
     }
-    std::unique_ptr<webrtc::VideoDecoder> internal_decoder(
-        internal_decoder_factory_->CreateVideoDecoderWithParams(codec, params));
+
     return internal_decoder;
   }
 
@@ -170,7 +186,6 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
   }
 
  private:
-  const std::unique_ptr<WebRtcVideoDecoderFactory> internal_decoder_factory_;
   const std::unique_ptr<WebRtcVideoDecoderFactory> external_decoder_factory_;
 };
 
