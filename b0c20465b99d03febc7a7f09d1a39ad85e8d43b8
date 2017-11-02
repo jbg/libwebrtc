@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07fc254f_f590f3ce",
+        "filename": "voice_engine/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-11-02T13:27:33Z",
+      "side": 1,
+      "message": "Is it irrelevant how a and b results in c or would it make sense to track a, b and c?",
+      "revId": "b0c20465b99d03febc7a7f09d1a39ad85e8d43b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
