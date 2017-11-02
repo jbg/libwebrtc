@@ -1469,7 +1469,9 @@ ANAStats Channel::GetANAStatistics() const {
 
 uint32_t Channel::GetDelayEstimate() const {
   rtc::CritScope lock(&video_sync_lock_);
-  return audio_coding_->FilteredCurrentDelayMs() + playout_delay_ms_;
+  uint32_t delay = audio_coding_->FilteredCurrentDelayMs() + playout_delay_ms_;
+  RTC_HISTOGRAM_COUNTS_1000("WebRTC.Audio.ReceiverDelayEstimateMs", delay);
+  return delay;
 }
 
 int Channel::SetMinimumPlayoutDelay(int delayMs) {
