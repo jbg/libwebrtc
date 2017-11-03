@@ -220,8 +220,8 @@ VoiceChannel* ChannelManager::CreateVoiceChannel_w(
       rtc::WrapUnique(media_channel), rtcp_packet_transport == nullptr,
       srtp_required);
   voice_channel->set_mid(rtc::Optional<std::string>(content_name));
-  voice_channel->Init_w(rtp_dtls_transport, rtcp_dtls_transport,
-                        rtp_packet_transport, rtcp_packet_transport);
+  voice_channel->SetTransports(rtp_dtls_transport, rtcp_dtls_transport,
+                               rtp_packet_transport, rtcp_packet_transport);
 
   VoiceChannel* voice_channel_ptr = voice_channel.get();
   voice_channels_.push_back(std::move(voice_channel));
@@ -312,8 +312,8 @@ VideoChannel* ChannelManager::CreateVideoChannel_w(
       rtc::WrapUnique(media_channel), rtcp_packet_transport == nullptr,
       srtp_required);
   video_channel->set_mid(rtc::Optional<std::string>(content_name));
-  video_channel->Init_w(rtp_dtls_transport, rtcp_dtls_transport,
-                        rtp_packet_transport, rtcp_packet_transport);
+  video_channel->SetTransports(rtp_dtls_transport, rtcp_dtls_transport,
+                               rtp_packet_transport, rtcp_packet_transport);
 
   VideoChannel* video_channel_ptr = video_channel.get();
   video_channels_.push_back(std::move(video_channel));
@@ -372,8 +372,8 @@ RtpDataChannel* ChannelManager::CreateRtpDataChannel(
       worker_thread_, network_thread_, signaling_thread,
       rtc::WrapUnique(media_channel), rtcp_transport == nullptr, srtp_required);
   data_channel->set_mid(rtc::Optional<std::string>(content_name));
-  data_channel->Init_w(rtp_transport, rtcp_transport, rtp_transport,
-                       rtcp_transport);
+  data_channel->SetTransports(rtp_transport, rtcp_transport, rtp_transport,
+                              rtcp_transport);
 
   RtpDataChannel* data_channel_ptr = data_channel.get();
   data_channels_.push_back(std::move(data_channel));

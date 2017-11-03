@@ -301,8 +301,9 @@ class ChannelTest : public testing::Test, public sigslot::has_slots<> {
     if (!channel->NeedsRtcpTransport()) {
       fake_rtcp_dtls_transport = nullptr;
     }
-    channel->Init_w(fake_rtp_dtls_transport, fake_rtcp_dtls_transport,
-                    fake_rtp_packet_transport, fake_rtcp_packet_transport);
+    channel->SetTransports(fake_rtp_dtls_transport, fake_rtcp_dtls_transport,
+                           fake_rtp_packet_transport,
+                           fake_rtcp_packet_transport);
     return channel;
   }
 
@@ -2223,8 +2224,8 @@ std::unique_ptr<cricket::VideoChannel> ChannelTest<VideoTraits>::CreateChannel(
   if (!channel->NeedsRtcpTransport()) {
     fake_rtcp_dtls_transport = nullptr;
   }
-  channel->Init_w(fake_rtp_dtls_transport, fake_rtcp_dtls_transport,
-                  fake_rtp_packet_transport, fake_rtcp_packet_transport);
+  channel->SetTransports(fake_rtp_dtls_transport, fake_rtcp_dtls_transport,
+                         fake_rtp_packet_transport, fake_rtcp_packet_transport);
   return channel;
 }
 
@@ -3515,8 +3516,8 @@ std::unique_ptr<cricket::RtpDataChannel> ChannelTest<DataTraits>::CreateChannel(
   if (!channel->NeedsRtcpTransport()) {
     fake_rtcp_dtls_transport = nullptr;
   }
-  channel->Init_w(fake_rtp_dtls_transport, fake_rtcp_dtls_transport,
-                  fake_rtp_packet_transport, fake_rtcp_packet_transport);
+  channel->SetTransports(fake_rtp_dtls_transport, fake_rtcp_dtls_transport,
+                         fake_rtp_packet_transport, fake_rtcp_packet_transport);
   return channel;
 }
 
@@ -3859,24 +3860,27 @@ class BaseChannelDeathTest : public testing::Test {
 };
 
 TEST_F(BaseChannelDeathTest, SetTransportsWithNullRtpTransport) {
-  voice_channel_.Init_w(&fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
-                        &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
+  voice_channel_.SetTransports(
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
   cricket::FakeDtlsTransport new_rtcp_transport(
       "bar", cricket::ICE_CANDIDATE_COMPONENT_RTCP);
   EXPECT_DEATH(voice_channel_.SetTransports(nullptr, &new_rtcp_transport), "");
 }
 
 TEST_F(BaseChannelDeathTest, SetTransportsWithMissingRtcpTransport) {
-  voice_channel_.Init_w(&fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
-                        &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
+  voice_channel_.SetTransports(
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
   cricket::FakeDtlsTransport new_rtp_transport(
       "bar", cricket::ICE_CANDIDATE_COMPONENT_RTP);
   EXPECT_DEATH(voice_channel_.SetTransports(&new_rtp_transport, nullptr), "");
 }
 
 TEST_F(BaseChannelDeathTest, SetTransportsWithUnneededRtcpTransport) {
-  voice_channel_.Init_w(&fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
-                        &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
+  voice_channel_.SetTransports(
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
   // Activate RTCP muxing, simulating offer/answer negotiation.
   cricket::AudioContentDescription content;
   content.set_rtcp_mux(true);
@@ -3895,8 +3899,9 @@ TEST_F(BaseChannelDeathTest, SetTransportsWithUnneededRtcpTransport) {
 // This test will probably go away if/when we move the transport name out of
 // the transport classes and into their parent classes.
 TEST_F(BaseChannelDeathTest, SetTransportsWithMismatchingTransportNames) {
-  voice_channel_.Init_w(&fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
-                        &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
+  voice_channel_.SetTransports(
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
   cricket::FakeDtlsTransport new_rtp_transport(
       "bar", cricket::ICE_CANDIDATE_COMPONENT_RTP);
   cricket::FakeDtlsTransport new_rtcp_transport(
@@ -3909,8 +3914,9 @@ TEST_F(BaseChannelDeathTest, SetTransportsWithMismatchingTransportNames) {
 // Not expected to support going from DtlsTransportInternal to
 // PacketTransportInternal.
 TEST_F(BaseChannelDeathTest, SetTransportsDtlsToNonDtls) {
-  voice_channel_.Init_w(&fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
-                        &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
+  voice_channel_.SetTransports(
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_,
+      &fake_rtp_dtls_transport_, &fake_rtcp_dtls_transport_);
   EXPECT_DEATH(
       voice_channel_.SetTransports(
           static_cast<rtc::PacketTransportInternal*>(&fake_rtp_dtls_transport_),
@@ -3922,8 +3928,8 @@ TEST_F(BaseChannelDeathTest, SetTransportsDtlsToNonDtls) {
 // Not expected to support going from PacketTransportInternal to
 // DtlsTransportInternal.
 TEST_F(BaseChannelDeathTest, SetTransportsNonDtlsToDtls) {
-  voice_channel_.Init_w(nullptr, nullptr, &fake_rtp_dtls_transport_,
-                        &fake_rtcp_dtls_transport_);
+  voice_channel_.SetTransports(nullptr, nullptr, &fake_rtp_dtls_transport_,
+                               &fake_rtcp_dtls_transport_);
   EXPECT_DEATH(voice_channel_.SetTransports(&fake_rtp_dtls_transport_,
                                             &fake_rtp_dtls_transport_),
                "");
