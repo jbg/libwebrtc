@@ -15,6 +15,9 @@
 #include "rtc_base/logging.h"
 #include "sdk/android/src/jni/classreferenceholder.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace {
 // MediaCodec wants resolution to be divisible by 2.
 const int kRequiredResolutionAlignment = 2;

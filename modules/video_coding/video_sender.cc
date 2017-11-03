@@ -320,7 +320,7 @@ int32_t VideoSender::AddVideoFrame(const VideoFrame& videoFrame,
       buffer_type == VideoFrameBuffer::Type::kI420 ||
       (buffer_type == VideoFrameBuffer::Type::kNative &&
        _encoder->SupportsNativeHandle());
-  if (!is_buffer_type_supported) {
+  if (!is_buffer_type_supported && false) {
     // This module only supports software encoding.
     // TODO(pbos): Offload conversion from the encoder thread.
     rtc::scoped_refptr<I420BufferInterface> converted_buffer(
