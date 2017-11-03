@@ -77,10 +77,10 @@ std::string RTCTransportStatsIDFromTransportChannel(
 }
 
 std::string RTCTransportStatsIDFromBaseChannel(
-    const std::map<std::string, std::string>& proxy_to_transport,
+    const std::map<std::string, std::string>& transceiver_id_to_transport,
     const cricket::BaseChannel& base_channel) {
-  auto proxy_it = proxy_to_transport.find(base_channel.content_name());
-  if (proxy_it == proxy_to_transport.cend())
+  auto proxy_it = transceiver_id_to_transport.find(base_channel.id());
+  if (proxy_it == transceiver_id_to_transport.cend())
     return "";
   return RTCTransportStatsIDFromTransportChannel(
       proxy_it->second, cricket::ICE_CANDIDATE_COMPONENT_RTP);
@@ -959,7 +959,7 @@ void RTCStatsCollector::ProduceRTPStreamStats_n(
   // Audio
   if (track_media_info_map.voice_media_info()) {
     std::string transport_id = RTCTransportStatsIDFromBaseChannel(
-        session_stats.proxy_to_transport, *pc_->voice_channel());
+        session_stats.transceiver_id_to_transport, *pc_->voice_channel());
     RTC_DCHECK(!transport_id.empty());
     // Inbound
     for (const cricket::VoiceReceiverInfo& voice_receiver_info :
@@ -1021,7 +1021,7 @@ void RTCStatsCollector::ProduceRTPStreamStats_n(
   // Video
   if (track_media_info_map.video_media_info()) {
     std::string transport_id = RTCTransportStatsIDFromBaseChannel(
-        session_stats.proxy_to_transport, *pc_->video_channel());
+        session_stats.transceiver_id_to_transport, *pc_->video_channel());
     RTC_DCHECK(!transport_id.empty());
     // Inbound
     for (const cricket::VideoReceiverInfo& video_receiver_info :

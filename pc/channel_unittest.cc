@@ -296,8 +296,8 @@ class ChannelTest : public testing::Test, public sigslot::has_slots<> {
     rtc::Thread* signaling_thread = rtc::Thread::Current();
     auto channel = rtc::MakeUnique<typename T::Channel>(
         worker_thread, network_thread, signaling_thread, engine, std::move(ch),
-        cricket::CN_AUDIO, (flags & RTCP_MUX_REQUIRED) != 0,
-        (flags & SECURE) != 0);
+        (flags & RTCP_MUX_REQUIRED) != 0, (flags & SECURE) != 0);
+    channel->set_mid(rtc::Optional<std::string>(cricket::CN_AUDIO));
     if (!channel->NeedsRtcpTransport()) {
       fake_rtcp_dtls_transport = nullptr;
     }
@@ -2218,8 +2218,8 @@ std::unique_ptr<cricket::VideoChannel> ChannelTest<VideoTraits>::CreateChannel(
   rtc::Thread* signaling_thread = rtc::Thread::Current();
   auto channel = rtc::MakeUnique<cricket::VideoChannel>(
       worker_thread, network_thread, signaling_thread, std::move(ch),
-      cricket::CN_VIDEO, (flags & RTCP_MUX_REQUIRED) != 0,
-      (flags & SECURE) != 0);
+      (flags & RTCP_MUX_REQUIRED) != 0, (flags & SECURE) != 0);
+  channel->set_mid(rtc::Optional<std::string>(cricket::CN_VIDEO));
   if (!channel->NeedsRtcpTransport()) {
     fake_rtcp_dtls_transport = nullptr;
   }
@@ -3510,8 +3510,8 @@ std::unique_ptr<cricket::RtpDataChannel> ChannelTest<DataTraits>::CreateChannel(
   rtc::Thread* signaling_thread = rtc::Thread::Current();
   auto channel = rtc::MakeUnique<cricket::RtpDataChannel>(
       worker_thread, network_thread, signaling_thread, std::move(ch),
-      cricket::CN_DATA, (flags & RTCP_MUX_REQUIRED) != 0,
-      (flags & SECURE) != 0);
+      (flags & RTCP_MUX_REQUIRED) != 0, (flags & SECURE) != 0);
+  channel->set_mid(rtc::Optional<std::string>(cricket::CN_DATA));
   if (!channel->NeedsRtcpTransport()) {
     fake_rtcp_dtls_transport = nullptr;
   }
@@ -3848,7 +3848,6 @@ class BaseChannelDeathTest : public testing::Test {
                        rtc::MakeUnique<cricket::FakeVoiceMediaChannel>(
                            nullptr,
                            cricket::AudioOptions()),
-                       cricket::CN_AUDIO,
                        false,
                        true) {}
 

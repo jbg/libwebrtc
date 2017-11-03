@@ -217,8 +217,9 @@ VoiceChannel* ChannelManager::CreateVoiceChannel_w(
 
   auto voice_channel = rtc::MakeUnique<VoiceChannel>(
       worker_thread_, network_thread_, signaling_thread, media_engine_.get(),
-      rtc::WrapUnique(media_channel), content_name,
-      rtcp_packet_transport == nullptr, srtp_required);
+      rtc::WrapUnique(media_channel), rtcp_packet_transport == nullptr,
+      srtp_required);
+  voice_channel->set_mid(rtc::Optional<std::string>(content_name));
   voice_channel->Init_w(rtp_dtls_transport, rtcp_dtls_transport,
                         rtp_packet_transport, rtcp_packet_transport);
 
@@ -308,8 +309,9 @@ VideoChannel* ChannelManager::CreateVideoChannel_w(
 
   auto video_channel = rtc::MakeUnique<VideoChannel>(
       worker_thread_, network_thread_, signaling_thread,
-      rtc::WrapUnique(media_channel), content_name,
-      rtcp_packet_transport == nullptr, srtp_required);
+      rtc::WrapUnique(media_channel), rtcp_packet_transport == nullptr,
+      srtp_required);
+  video_channel->set_mid(rtc::Optional<std::string>(content_name));
   video_channel->Init_w(rtp_dtls_transport, rtcp_dtls_transport,
                         rtp_packet_transport, rtcp_packet_transport);
 
@@ -368,8 +370,8 @@ RtpDataChannel* ChannelManager::CreateRtpDataChannel(
 
   auto data_channel = rtc::MakeUnique<RtpDataChannel>(
       worker_thread_, network_thread_, signaling_thread,
-      rtc::WrapUnique(media_channel), content_name, rtcp_transport == nullptr,
-      srtp_required);
+      rtc::WrapUnique(media_channel), rtcp_transport == nullptr, srtp_required);
+  data_channel->set_mid(rtc::Optional<std::string>(content_name));
   data_channel->Init_w(rtp_transport, rtcp_transport, rtp_transport,
                        rtcp_transport);
 

@@ -81,7 +81,6 @@ class BaseChannel
               rtc::Thread* network_thread,
               rtc::Thread* signaling_thread,
               std::unique_ptr<MediaChannel> media_channel,
-              const std::string& content_name,
               bool rtcp_mux_required,
               bool srtp_required);
   virtual ~BaseChannel();
@@ -95,10 +94,26 @@ class BaseChannel
 
   rtc::Thread* worker_thread() const { return worker_thread_; }
   rtc::Thread* network_thread() const { return network_thread_; }
-  const std::string& content_name() const { return content_name_; }
+
+  // A persistent, unique identifier for this transceiver. Guaranteed to always
+  // return the same value.
+  std::string id() const { return id_; }
+
+  // The mid identifying this transceiver's m= line in the most recently set
+  // local/remote description. If the transceiver is added before a session
+  // description has been set (e.g., by a call to
+  // |PeerConnection::AddTransceiver|), the mid will be absent. Likewise, if the
+  // most recent session description has rejected this m= line, or no longer
+  // includes it, the transceiver will be stopped and the mid cleared.
+  // The mid may change later if the transceiver is re-used (see JSEP for more
+  // details).
+  rtc::Optional<std::string> mid() const { return mid_; }
+  void set_mid(const rtc::Optional<std::string>& new_mid) { mid_ = new_mid; }
+
   // TODO(deadbeef): This is redundant; remove this.
   const std::string& transport_name() const { return transport_name_; }
   bool enabled() const { return enabled_; }
+  std::string debug_name() const;
 
   // This function returns true if we are using SDES.
   bool sdes_active() const { return sdes_negotiator_.IsActive(); }
@@ -373,7 +388,8 @@ class BaseChannel
   rtc::Thread* const signaling_thread_;
   rtc::AsyncInvoker invoker_;
 
-  const std::string content_name_;
+  const std::string id_;  // Unique identified for this RtpTransceiver.
+  rtc::Optional<std::string> mid_;
   std::unique_ptr<ConnectionMonitor> connection_monitor_;
 
   // Won't be set when using raw packet transports. SDP-specific thing.
@@ -421,7 +437,6 @@ class VoiceChannel : public BaseChannel {
                rtc::Thread* signaling_thread,
                MediaEngineInterface* media_engine,
                std::unique_ptr<VoiceMediaChannel> channel,
-               const std::string& content_name,
                bool rtcp_mux_required,
                bool srtp_required);
   ~VoiceChannel();
@@ -536,7 +551,6 @@ class VideoChannel : public BaseChannel {
                rtc::Thread* network_thread,
                rtc::Thread* signaling_thread,
                std::unique_ptr<VideoMediaChannel> media_channel,
-               const std::string& content_name,
                bool rtcp_mux_required,
                bool srtp_required);
   ~VideoChannel();
@@ -613,7 +627,6 @@ class RtpDataChannel : public BaseChannel {
                  rtc::Thread* network_thread,
                  rtc::Thread* signaling_thread,
                  std::unique_ptr<DataMediaChannel> channel,
-                 const std::string& content_name,
                  bool rtcp_mux_required,
                  bool srtp_required);
   ~RtpDataChannel();
