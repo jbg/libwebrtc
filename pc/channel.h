@@ -85,10 +85,6 @@ class BaseChannel
               bool rtcp_mux_required,
               bool srtp_required);
   virtual ~BaseChannel();
-  void Init_w(DtlsTransportInternal* rtp_dtls_transport,
-              DtlsTransportInternal* rtcp_dtls_transport,
-              rtc::PacketTransportInternal* rtp_packet_transport,
-              rtc::PacketTransportInternal* rtcp_packet_transport);
   // Deinit may be called multiple times and is simply ignored if it's already
   // done.
   void Deinit();
@@ -120,6 +116,10 @@ class BaseChannel
   void SetTransports(DtlsTransportInternal* rtp_dtls_transport,
                      DtlsTransportInternal* rtcp_dtls_transport);
   void SetTransports(rtc::PacketTransportInternal* rtp_packet_transport,
+                     rtc::PacketTransportInternal* rtcp_packet_transport);
+  void SetTransports(DtlsTransportInternal* rtp_dtls_transport,
+                     DtlsTransportInternal* rtcp_dtls_transport,
+                     rtc::PacketTransportInternal* rtp_packet_transport,
                      rtc::PacketTransportInternal* rtcp_packet_transport);
   // Channel control
   bool SetLocalContent(const MediaContentDescription* content,
@@ -353,10 +353,6 @@ class BaseChannel
   void AddHandledPayloadType(int payload_type);
 
  private:
-  void InitNetwork_n(DtlsTransportInternal* rtp_dtls_transport,
-                     DtlsTransportInternal* rtcp_dtls_transport,
-                     rtc::PacketTransportInternal* rtp_packet_transport,
-                     rtc::PacketTransportInternal* rtcp_packet_transport);
   void DisconnectTransportChannels_n();
   void SignalSentPacket_n(rtc::PacketTransportInternal* transport,
                           const rtc::SentPacket& sent_packet);
@@ -617,10 +613,6 @@ class RtpDataChannel : public BaseChannel {
                  bool rtcp_mux_required,
                  bool srtp_required);
   ~RtpDataChannel();
-  void Init_w(DtlsTransportInternal* rtp_dtls_transport,
-              DtlsTransportInternal* rtcp_dtls_transport,
-              rtc::PacketTransportInternal* rtp_packet_transport,
-              rtc::PacketTransportInternal* rtcp_packet_transport);
 
   virtual bool SendData(const SendDataParams& params,
                         const rtc::CopyOnWriteBuffer& payload,
