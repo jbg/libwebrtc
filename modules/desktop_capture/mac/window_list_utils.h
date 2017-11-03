@@ -52,16 +52,40 @@ std::string GetWindowTitle(CFDictionaryRef window);
 // be retrieved, this function returns kNullWindowId.
 WindowId GetWindowId(CFDictionaryRef window);
 
+// Returns the scale factor / dip-pixel scale at |position|. |position| is in
+// *unscaled* system coordinate, i.e. the primary monitor always starts from
+// (0, 0). If |position| is out of the system display, this function returns 1.
+float GetScaleFactorAtPosition(const MacDesktopConfiguration& desktop_config,
+                               DesktopVector position);
+
+// Scales the |rect| according to the scale factor / dip-pixel scale of |rect|.
+// Typically |rect| is the area of a window. |rect| is in *unscaled* system
+// coordinate, i.e. the primary monitor always starts from (0, 0). If |rect| is
+// out of the system display, this function returns |rect|.
+DesktopRect ApplyScaleFactorOfRect(
+    const MacDesktopConfiguration& desktop_config,
+    DesktopRect rect);
+
 // Returns the bounds of |window|. If |window| is not a window or the bounds
 // cannot be retrieved, this function returns an empty DesktopRect. The returned
 // DesktopRect is in system coordinate, i.e. the primary monitor always starts
 // from (0, 0).
 DesktopRect GetWindowBounds(CFDictionaryRef window);
 
+// Same as GetWindowBounds(CFDictionaryRef), but this function stretches the
+// result with the scale factor.
+DesktopRect GetWindowBounds(const MacDesktopConfiguration& desktop_config,
+                            CFDictionaryRef window);
+
 // Returns the bounds of window with |id|. If |id| does not represent a window
 // or the bounds cannot be retrieved, this function returns an empty
 // DesktopRect. The returned DesktopRect is in system coordinates.
 DesktopRect GetWindowBounds(CGWindowID id);
+
+// Same as GetWindowBounds(CGWindowID), but this function stretches the result
+// with the scale factor.
+DesktopRect GetWindowBounds(const MacDesktopConfiguration& desktop_config,
+                            CGWindowID id);
 
 }  // namespace webrtc
 
