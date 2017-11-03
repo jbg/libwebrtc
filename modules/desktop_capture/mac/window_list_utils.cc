@@ -227,6 +227,60 @@ WindowId GetWindowId(CFDictionaryRef window) {
   return id;
 }
 
+float GetScaleFactorAtPosition(const MacDesktopConfiguration& desktop_config,
+                               DesktopVector position) {
+  // Find the dpi to physical pixel scale for the screen where the mouse cursor
+  // is.
+  for (auto it = desktop_config.displays.begin();
+       it != desktop_config.displays.end(); ++it) {
+    if (it->bounds.Contains(position)) {
+      return it->dip_to_pixel_scale;
+    }
+  }
+  return 1;
+}
+
+DesktopRect ApplyScaleFactorOfRect(
+    const MacDesktopConfiguration& desktop_config,
+    DesktopRect rect) {
+  // TODO(http://crbug.com/778049): How does Mac OSX decide the scale factor
+  // if one window is across two monitors with different DPIs.
+  float scales[] = {
+      GetScaleFactorAtPosition(desktop_config, rect.top_left()),
+      GetScaleFactorAtPosition(
+            desktop_config, DesktopVector(rect.right(), rect.top())),
+      GetScaleFactorAtPosition(
+            desktop_config, DesktopVector(rect.left(), rect.bottom())),
+      GetScaleFactorAtPosition(
+            desktop_config, DesktopVector(rect.right(), rect.bottom())),
+  };
+  // We prefer the scale at top-left;
+  float position_scale = scales[0];
+  // If the scale at top-left is 1, usually it means the top-left of the window
+  // is out of the display, we choose another one.
+  for (int i = 0; i < 4; i++) {
+    if (position_scale == 1 && scales[i] != 1) {
+      position_scale = scales[i];
+      break;
+    }
+  }
+  // We prefer the scale at bottom-right;
+  float size_scale = scales[3];
+  // If the scale at bottom-right is 1, usually it means the top-left of the
+  // window is out of the display, we choose another one.
+  for (int i = 0; i < 4; i++) {
+    if (size_scale == 1 && scales[i] != 1) {
+      size_scale = scales[i];
+      break;
+    }
+  }
+
+  return DesktopRect::MakeXYWH(rect.left() * position_scale,
+                               rect.top() * position_scale,
+                               rect.width() * size_scale,
+                               rect.height() * size_scale);
+}
+
 DesktopRect GetWindowBounds(CFDictionaryRef window) {
   CFDictionaryRef window_bounds = reinterpret_cast<CFDictionaryRef>(
       CFDictionaryGetValue(window, kCGWindowBounds));
@@ -245,6 +299,12 @@ DesktopRect GetWindowBounds(CFDictionaryRef window) {
                                gc_window_rect.size.height);
 }
 
+DesktopRect GetWindowBounds(const MacDesktopConfiguration& desktop_config,
+                            CFDictionaryRef window) {
+  DesktopRect rect = GetWindowBounds(window);
+  return ApplyScaleFactorOfRect(desktop_config, rect);
+}
+
 DesktopRect GetWindowBounds(CGWindowID id) {
   DesktopRect result;
   if (GetWindowRef(id,
@@ -254,6 +314,12 @@ DesktopRect GetWindowBounds(CGWindowID id) {
     return result;
   }
   return DesktopRect();
+}
+
+DesktopRect GetWindowBounds(const MacDesktopConfiguration& desktop_config,
+                            CGWindowID id) {
+  DesktopRect rect = GetWindowBounds(id);
+  return ApplyScaleFactorOfRect(desktop_config, rect);
 }
 
 }  // namespace webrtc
