@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f170c14_bae5deb3",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-03T23:02:32Z",
+      "side": 1,
+      "message": "|SetInterface| would be called everytime |SetTransports| is called even when the interface didn\u0027t change and it would set the same thing again (For example, enable bundling). I guess that\u0027s why the function was called |init| before.\n\nOne work around is just calling the |SetTransports_n| directly in other |SetTransports| methods.\n\nBut it doesn\u0027t really matter once my work is done and the BaseChannel don\u0027t have to know about P2P layer transports anymore.",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 259,
+        "endChar": 0
+      },
+      "revId": "6bb3aafb89fc8ed5c180dd2287d61ecd0ff97782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
