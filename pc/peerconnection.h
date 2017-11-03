@@ -41,12 +41,14 @@ class RTCStatsCollectorCallback;
 // TODO(pthatcher): Think of a better name for this.  We already have
 // a TransportStats in transport.h.  Perhaps TransportsStats?
 struct SessionStats {
-  std::map<std::string, std::string> proxy_to_transport;
+  // Maps RtpTransceiver IDs to transport names.
+  std::map<std::string, std::string> transceiver_id_to_transport;
+  // TransportStats by transport names.
   std::map<std::string, cricket::TransportStats> transport_stats;
 };
 
 struct ChannelNamePair {
-  std::string content_name;
+  std::string transceiver_id;
   std::string transport_name;
 };
 

@@ -3167,15 +3167,10 @@ void PeerConnection::StopRtcEventLog_w() {
 
 cricket::BaseChannel* PeerConnection::GetChannel(
     const std::string& content_name) {
-  if (voice_channel() && voice_channel()->content_name() == content_name) {
-    return voice_channel();
-  }
-  if (video_channel() && video_channel()->content_name() == content_name) {
-    return video_channel();
-  }
-  if (rtp_data_channel() &&
-      rtp_data_channel()->content_name() == content_name) {
-    return rtp_data_channel();
+  for (auto* channel : Channels()) {
+    if (channel->mid() && *channel->mid() == content_name) {
+      return channel;
+    }
   }
   return nullptr;
 }
@@ -3596,31 +3591,30 @@ bool PeerConnection::EnableBundle(const cricket::ContentGroup& bundle) {
   }
   const std::string& transport_name = *first_content_name;
 
-  auto maybe_set_transport = [this, bundle,
-                              transport_name](cricket::BaseChannel* ch) {
-    if (!ch || !bundle.HasContentName(ch->content_name())) {
-      return true;
+  for (auto* channel : Channels()) {
+    if (!channel->mid() || !bundle.HasContentName(*channel->mid())) {
+      continue;
     }
 
-    std::string old_transport_name = ch->transport_name();
+    std::string old_transport_name = channel->transport_name();
     if (old_transport_name == transport_name) {
-      LOG(LS_INFO) << "BUNDLE already enabled for " << ch->content_name()
-                   << " on " << transport_name << ".";
-      return true;
+      LOG(LS_INFO) << "BUNDLE already enabled for " << *channel->mid() << " on "
+                   << transport_name << ".";
+      continue;
     }
 
     cricket::DtlsTransportInternal* rtp_dtls_transport =
         transport_controller_->CreateDtlsTransport(
             transport_name, cricket::ICE_CANDIDATE_COMPONENT_RTP);
-    bool need_rtcp = (ch->rtcp_dtls_transport() != nullptr);
+    bool need_rtcp = (channel->rtcp_dtls_transport() != nullptr);
     cricket::DtlsTransportInternal* rtcp_dtls_transport = nullptr;
     if (need_rtcp) {
       rtcp_dtls_transport = transport_controller_->CreateDtlsTransport(
           transport_name, cricket::ICE_CANDIDATE_COMPONENT_RTCP);
     }
 
-    ch->SetTransports(rtp_dtls_transport, rtcp_dtls_transport);
-    LOG(LS_INFO) << "Enabled BUNDLE for " << ch->content_name() << " on "
+    channel->SetTransports(rtp_dtls_transport, rtcp_dtls_transport);
+    LOG(LS_INFO) << "Enabled BUNDLE for " << *channel->mid() << " on "
                  << transport_name << ".";
     transport_controller_->DestroyDtlsTransport(
         old_transport_name, cricket::ICE_CANDIDATE_COMPONENT_RTP);
@@ -3630,14 +3624,8 @@ bool PeerConnection::EnableBundle(const cricket::ContentGroup& bundle) {
       transport_controller_->DestroyDtlsTransport(
           old_transport_name, cricket::ICE_CANDIDATE_COMPONENT_RTCP);
     }
-    return true;
-  };
-
-  if (!maybe_set_transport(voice_channel()) ||
-      !maybe_set_transport(video_channel()) ||
-      !maybe_set_transport(rtp_data_channel())) {
-    return false;
   }
+
   // For SCTP, transport creation/deletion happens here instead of in the
   // object itself.
   if (sctp_transport_) {
@@ -3796,7 +3784,7 @@ std::vector<ChannelNamePair> PeerConnection::GetChannelNamePairs() const {
   std::vector<ChannelNamePair> channel_name_pairs;
   for (auto* channel : Channels()) {
     ChannelNamePair pair;
-    pair.content_name = channel->content_name();
+    pair.transceiver_id = channel->id();
     pair.transport_name = channel->transport_name();
     channel_name_pairs.emplace_back(std::move(pair));
   }
@@ -3806,7 +3794,9 @@ std::vector<ChannelNamePair> PeerConnection::GetChannelNamePairs() const {
     RTC_DCHECK(sctp_transport_name_);
 
     ChannelNamePair pair;
-    pair.content_name = *sctp_content_name_;
+    // TODO(steveanton): Data channels should be reporting stats in a different
+    // way.
+    pair.transceiver_id = *sctp_content_name_;
     pair.transport_name = *sctp_transport_name_;
     channel_name_pairs.emplace_back(std::move(pair));
   }
@@ -3823,14 +3813,14 @@ std::unique_ptr<SessionStats> PeerConnection::GetSessionStats(
 
   auto session_stats = rtc::MakeUnique<SessionStats>();
   for (const auto& channel_name_pair : channel_name_pairs) {
-    const std::string& content_name = channel_name_pair.content_name;
+    const std::string& transceiver_id = channel_name_pair.transceiver_id;
     const std::string& transport_name = channel_name_pair.transport_name;
 
     cricket::TransportStats transport_stats;
     if (!transport_controller_->GetStats(transport_name, &transport_stats)) {
       return nullptr;
     }
-    session_stats->proxy_to_transport[content_name] = transport_name;
+    session_stats->transceiver_id_to_transport[transceiver_id] = transport_name;
     session_stats->transport_stats[transport_name] = std::move(transport_stats);
   }
 
