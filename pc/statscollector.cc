@@ -753,7 +753,7 @@ void StatsCollector::ExtractSessionInfo() {
   // the proxy map directly from the session stats.
   // As is, if GetStats() failed, we could be using old (incorrect?) proxy
   // data.
-  proxy_to_transport_ = stats->proxy_to_transport;
+  transceiver_id_to_transport_ = stats->transceiver_id_to_transport;
 
   for (const auto& transport_iter : stats->transport_stats) {
     // Attempt to get a copy of the certificates from the transport and
@@ -850,11 +850,10 @@ void StatsCollector::ExtractVoiceInfo() {
   RTC_DCHECK(pc_->signaling_thread()->IsCurrent());
 
   for (cricket::VoiceChannel* voice_channel : pc_->voice_channels()) {
-    const std::string& mid = voice_channel->content_name();
-
     cricket::VoiceMediaInfo voice_info;
     if (!voice_channel->GetStats(&voice_info)) {
-      LOG(LS_ERROR) << "Failed to get voice channel stats (" << mid << ").";
+      LOG(LS_ERROR) << "Failed to get voice channel stats ("
+                    << voice_channel->id() << ").";
       return;
     }
 
@@ -863,11 +862,11 @@ void StatsCollector::ExtractVoiceInfo() {
     // reports.
     rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
 
-    StatsReport::Id transport_id(
-        GetTransportIdFromProxy(proxy_to_transport_, mid));
+    StatsReport::Id transport_id(GetTransportIdFromProxy(
+        transceiver_id_to_transport_, voice_channel->id()));
     if (!transport_id.get()) {
-      LOG(LS_ERROR) << "Failed to get transport name for proxy (" << mid
-                    << ").";
+      LOG(LS_ERROR) << "Failed to get transport name for proxy ("
+                    << voice_channel->id() << ").";
       return;
     }
 
@@ -885,11 +884,10 @@ void StatsCollector::ExtractVideoInfo(
   RTC_DCHECK(pc_->signaling_thread()->IsCurrent());
 
   for (cricket::VideoChannel* video_channel : pc_->video_channels()) {
-    const std::string& mid = video_channel->content_name();
-
     cricket::VideoMediaInfo video_info;
     if (!video_channel->GetStats(&video_info)) {
-      LOG(LS_ERROR) << "Failed to get video channel stats (" << mid << ").";
+      LOG(LS_ERROR) << "Failed to get video channel stats ("
+                    << video_channel->id() << ").";
       return;
     }
 
@@ -898,11 +896,11 @@ void StatsCollector::ExtractVideoInfo(
     // reports.
     rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
 
-    StatsReport::Id transport_id(
-        GetTransportIdFromProxy(proxy_to_transport_, mid));
+    StatsReport::Id transport_id(GetTransportIdFromProxy(
+        transceiver_id_to_transport_, video_channel->id()));
     if (!transport_id.get()) {
-      LOG(LS_ERROR) << "Failed to get transport name for proxy (" << mid
-                    << ").";
+      LOG(LS_ERROR) << "Failed to get transport name for proxy ("
+                    << video_channel->id() << ").";
       return;
     }
 
