@@ -174,7 +174,10 @@ BaseChannel::BaseChannel(rtc::Thread* worker_thread,
   // channel to signal.
   rtp_transport_->SignalPacketReceived.connect(this,
                                                &BaseChannel::OnPacketReceived);
-  LOG(LS_INFO) << "Created channel for " << content_name;
+
+  if (rtcp_mux_required_) {
+    rtcp_mux_filter_.SetActive();
+  }
 }
 
 BaseChannel::~BaseChannel() {
@@ -217,35 +220,6 @@ void BaseChannel::DisconnectTransportChannels_n() {
   network_thread_->Clear(this);
 }
 
-void BaseChannel::Init_w(DtlsTransportInternal* rtp_dtls_transport,
-                         DtlsTransportInternal* rtcp_dtls_transport,
-                         rtc::PacketTransportInternal* rtp_packet_transport,
-                         rtc::PacketTransportInternal* rtcp_packet_transport) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
-    return InitNetwork_n(rtp_dtls_transport, rtcp_dtls_transport,
-                         rtp_packet_transport, rtcp_packet_transport);
-  });
-
-  // Both RTP and RTCP channels should be set, we can call SetInterface on
-  // the media channel and it can set network options.
-  media_channel_->SetInterface(this);
-}
-
-void BaseChannel::InitNetwork_n(
-    DtlsTransportInternal* rtp_dtls_transport,
-    DtlsTransportInternal* rtcp_dtls_transport,
-    rtc::PacketTransportInternal* rtp_packet_transport,
-    rtc::PacketTransportInternal* rtcp_packet_transport) {
-  RTC_DCHECK(network_thread_->IsCurrent());
-  SetTransports_n(rtp_dtls_transport, rtcp_dtls_transport, rtp_packet_transport,
-                  rtcp_packet_transport);
-
-  if (rtcp_mux_required_) {
-    rtcp_mux_filter_.SetActive();
-  }
-}
-
 void BaseChannel::Deinit() {
   RTC_DCHECK(worker_thread_->IsCurrent());
   media_channel_->SetInterface(NULL);
@@ -258,18 +232,31 @@ void BaseChannel::Deinit() {
 
 void BaseChannel::SetTransports(DtlsTransportInternal* rtp_dtls_transport,
                                 DtlsTransportInternal* rtcp_dtls_transport) {
-  network_thread_->Invoke<void>(
-      RTC_FROM_HERE,
-      Bind(&BaseChannel::SetTransports_n, this, rtp_dtls_transport,
-           rtcp_dtls_transport, rtp_dtls_transport, rtcp_dtls_transport));
+  SetTransports(rtp_dtls_transport, rtcp_dtls_transport, rtp_dtls_transport,
+                rtcp_dtls_transport);
 }
 
 void BaseChannel::SetTransports(
     rtc::PacketTransportInternal* rtp_packet_transport,
     rtc::PacketTransportInternal* rtcp_packet_transport) {
-  network_thread_->Invoke<void>(
-      RTC_FROM_HERE, Bind(&BaseChannel::SetTransports_n, this, nullptr, nullptr,
-                          rtp_packet_transport, rtcp_packet_transport));
+  SetTransports(nullptr, nullptr, rtp_packet_transport, rtcp_packet_transport);
+}
+
+void BaseChannel::SetTransports(
+    DtlsTransportInternal* rtp_dtls_transport,
+    DtlsTransportInternal* rtcp_dtls_transport,
+    rtc::PacketTransportInternal* rtp_packet_transport,
+    rtc::PacketTransportInternal* rtcp_packet_transport) {
+  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+    return SetTransports_n(rtp_dtls_transport, rtcp_dtls_transport,
+                           rtp_packet_transport, rtcp_packet_transport);
+  });
+
+  worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+    // Both RTP and RTCP channels should be set, we can call SetInterface on
+    // the media channel and it can set network options.
+    media_channel_->SetInterface(this);
+  });
 }
 
 void BaseChannel::SetTransports_n(
@@ -2116,7 +2103,12 @@ RtpDataChannel::RtpDataChannel(rtc::Thread* worker_thread,
                   std::move(media_channel),
                   content_name,
                   rtcp_mux_required,
-                  srtp_required) {}
+                  srtp_required) {
+  this->media_channel()->SignalDataReceived.connect(
+      this, &RtpDataChannel::OnDataReceived);
+  this->media_channel()->SignalReadyToSend.connect(
+      this, &RtpDataChannel::OnDataChannelReadyToSend);
+}
 
 RtpDataChannel::~RtpDataChannel() {
   TRACE_EVENT0("webrtc", "RtpDataChannel::~RtpDataChannel");
@@ -2125,20 +2117,6 @@ RtpDataChannel::~RtpDataChannel() {
   DisableMedia_w();
 
   Deinit();
-}
-
-void RtpDataChannel::Init_w(
-    DtlsTransportInternal* rtp_dtls_transport,
-    DtlsTransportInternal* rtcp_dtls_transport,
-    rtc::PacketTransportInternal* rtp_packet_transport,
-    rtc::PacketTransportInternal* rtcp_packet_transport) {
-  BaseChannel::Init_w(rtp_dtls_transport, rtcp_dtls_transport,
-                      rtp_packet_transport, rtcp_packet_transport);
-
-  media_channel()->SignalDataReceived.connect(this,
-                                              &RtpDataChannel::OnDataReceived);
-  media_channel()->SignalReadyToSend.connect(
-      this, &RtpDataChannel::OnDataChannelReadyToSend);
 }
 
 bool RtpDataChannel::SendData(const SendDataParams& params,
