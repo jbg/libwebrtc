@@ -60,33 +60,45 @@ public final class WebRtcAudioUtils {
 
   // Call these methods if any hardware based effect shall be replaced by a
   // software based version provided by the WebRTC stack instead.
-  public static synchronized void setWebRtcBasedAcousticEchoCanceler(boolean enable) {
-    useWebRtcBasedAcousticEchoCanceler = enable;
+  public static void setWebRtcBasedAcousticEchoCanceler(boolean enable) {
+    synchronized (WebRtcAudioUtils.class) {
+      useWebRtcBasedAcousticEchoCanceler = enable;
+    }
   }
-  public static synchronized void setWebRtcBasedNoiseSuppressor(boolean enable) {
-    useWebRtcBasedNoiseSuppressor = enable;
+  public static void setWebRtcBasedNoiseSuppressor(boolean enable) {
+    synchronized (WebRtcAudioUtils.class) {
+      useWebRtcBasedNoiseSuppressor = enable;
+    }
   }
-  public static synchronized void setWebRtcBasedAutomaticGainControl(boolean enable) {
+  public static void setWebRtcBasedAutomaticGainControl(boolean enable) {
     // TODO(henrika): deprecated; remove when no longer used by any client.
-    Logging.w(TAG, "setWebRtcBasedAutomaticGainControl() is deprecated");
+    synchronized (WebRtcAudioUtils.class) {
+      Logging.w(TAG, "setWebRtcBasedAutomaticGainControl() is deprecated");
+    }
   }
 
-  public static synchronized boolean useWebRtcBasedAcousticEchoCanceler() {
-    if (useWebRtcBasedAcousticEchoCanceler) {
-      Logging.w(TAG, "Overriding default behavior; now using WebRTC AEC!");
+  public static boolean useWebRtcBasedAcousticEchoCanceler() {
+    synchronized (WebRtcAudioUtils.class) {
+      if (useWebRtcBasedAcousticEchoCanceler) {
+        Logging.w(TAG, "Overriding default behavior; now using WebRTC AEC!");
+      }
+      return useWebRtcBasedAcousticEchoCanceler;
     }
-    return useWebRtcBasedAcousticEchoCanceler;
   }
-  public static synchronized boolean useWebRtcBasedNoiseSuppressor() {
-    if (useWebRtcBasedNoiseSuppressor) {
-      Logging.w(TAG, "Overriding default behavior; now using WebRTC NS!");
+  public static boolean useWebRtcBasedNoiseSuppressor() {
+    synchronized (WebRtcAudioUtils.class) {
+      if (useWebRtcBasedNoiseSuppressor) {
+        Logging.w(TAG, "Overriding default behavior; now using WebRTC NS!");
+      }
+      return useWebRtcBasedNoiseSuppressor;
     }
-    return useWebRtcBasedNoiseSuppressor;
   }
   // TODO(henrika): deprecated; remove when no longer used by any client.
-  public static synchronized boolean useWebRtcBasedAutomaticGainControl() {
-    // Always return true here to avoid trying to use any built-in AGC.
-    return true;
+  public static boolean useWebRtcBasedAutomaticGainControl() {
+    synchronized (WebRtcAudioUtils.class) {
+      // Always return true here to avoid trying to use any built-in AGC.
+      return true;
+    }
   }
 
   // Returns true if the device supports an audio effect (AEC or NS).
@@ -110,17 +122,23 @@ public final class WebRtcAudioUtils {
   // Call this method if the default handling of querying the native sample
   // rate shall be overridden. Can be useful on some devices where the
   // available Android APIs are known to return invalid results.
-  public static synchronized void setDefaultSampleRateHz(int sampleRateHz) {
-    isDefaultSampleRateOverridden = true;
-    defaultSampleRateHz = sampleRateHz;
+  public static void setDefaultSampleRateHz(int sampleRateHz) {
+    synchronized (WebRtcAudioUtils.class) {
+      isDefaultSampleRateOverridden = true;
+      defaultSampleRateHz = sampleRateHz;
+    }
   }
 
-  public static synchronized boolean isDefaultSampleRateOverridden() {
-    return isDefaultSampleRateOverridden;
+  public static boolean isDefaultSampleRateOverridden() {
+    synchronized (WebRtcAudioUtils.class) {
+      return isDefaultSampleRateOverridden;
+    }
   }
 
-  public static synchronized int getDefaultSampleRateHz() {
-    return defaultSampleRateHz;
+  public static int getDefaultSampleRateHz() {
+    synchronized (WebRtcAudioUtils.class) {
+      return defaultSampleRateHz;
+    }
   }
 
   public static List<String> getBlackListedModelsForAecUsage() {

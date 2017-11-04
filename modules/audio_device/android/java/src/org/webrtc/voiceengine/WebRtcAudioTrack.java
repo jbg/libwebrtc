@@ -50,10 +50,12 @@ public class WebRtcAudioTrack {
   // This method overrides the default usage attribute and allows the user
   // to set it to something else than AudioAttributes.USAGE_VOICE_COMMUNICATION.
   // NOTE: calling this method will most likely break existing VoIP tuning.
-  public static synchronized void setAudioTrackUsageAttribute(int usage) {
-    Logging.w(TAG, "Default usage attribute is changed from: "
-        + DEFAULT_USAGE + " to " + usage);
-    usageAttribute = usage;
+  public static void setAudioTrackUsageAttribute(int usage) {
+    synchronized (WebRtcAudioTrack.class) {
+      Logging.w(TAG, "Default usage attribute is changed from: "
+          + DEFAULT_USAGE + " to " + usage);
+      usageAttribute = usage;
+    }
   }
 
   private static int getDefaultUsageAttribute() {
