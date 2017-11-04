@@ -48,27 +48,37 @@ public class WebRtcAudioManager {
   // specified in WebRtcAudioUtils.BLACKLISTED_OPEN_SL_ES_MODELS.
   // Allows an app to take control over which devices to exclude from using
   // the OpenSL ES audio output path
-  public static synchronized void setBlacklistDeviceForOpenSLESUsage(boolean enable) {
-    blacklistDeviceForOpenSLESUsageIsOverridden = true;
-    blacklistDeviceForOpenSLESUsage = enable;
+  public static void setBlacklistDeviceForOpenSLESUsage(boolean enable) {
+    synchronized (WebRtcAudioManager.class) {
+      blacklistDeviceForOpenSLESUsageIsOverridden = true;
+      blacklistDeviceForOpenSLESUsage = enable;
+    }
   }
 
   // Call these methods to override the default mono audio modes for the specified direction(s)
   // (input and/or output).
-  public static synchronized void setStereoOutput(boolean enable) {
-    Logging.w(TAG, "Overriding default output behavior: setStereoOutput(" + enable + ')');
-    useStereoOutput = enable;
+  public static void setStereoOutput(boolean enable) {
+    synchronized (WebRtcAudioManager.class) {
+      Logging.w(TAG, "Overriding default output behavior: setStereoOutput(" + enable + ')');
+      useStereoOutput = enable;
+    }
   }
-  public static synchronized void setStereoInput(boolean enable) {
-    Logging.w(TAG, "Overriding default input behavior: setStereoInput(" + enable + ')');
-    useStereoInput = enable;
+  public static void setStereoInput(boolean enable) {
+    synchronized (WebRtcAudioManager.class) {
+      Logging.w(TAG, "Overriding default input behavior: setStereoInput(" + enable + ')');
+      useStereoInput = enable;
+    }
   }
 
-  public static synchronized boolean getStereoOutput() {
-    return useStereoOutput;
+  public static boolean getStereoOutput() {
+    synchronized (WebRtcAudioManager.class) {
+      return useStereoOutput;
+    }
   }
-  public static synchronized boolean getStereoInput() {
-    return useStereoInput;
+  public static boolean getStereoInput() {
+    synchronized (WebRtcAudioManager.class) {
+      return useStereoInput;
+    }
   }
 
   // Default audio data format is PCM 16 bit per sample.
