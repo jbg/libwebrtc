@@ -61,6 +61,10 @@ deps = {
     'url': Var('chromium_git') + '/android_tools.git' + '@' + 'ca0bd083872ad925881736fe2bedc3ff855e08f5',
     'condition': 'checkout_android',
   },
+  'src/third_party/auto': {
+    'url': Var('chromium_git') + '/auto.git' + '@' + 'd0cc6d63e5a1e8d825bf8bf775b0473466b47a22',
+    'condition': 'checkout_android',
+  },
   'src/third_party/boringssl/src':
     Var('boringssl_git') + '/boringssl.git' + '@' +  Var('boringssl_revision'),
   'src/third_party/catapult':
