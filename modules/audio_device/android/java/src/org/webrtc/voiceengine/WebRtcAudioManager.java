@@ -48,9 +48,11 @@ public class WebRtcAudioManager {
   // specified in WebRtcAudioUtils.BLACKLISTED_OPEN_SL_ES_MODELS.
   // Allows an app to take control over which devices to exclude from using
   // the OpenSL ES audio output path
-  public static synchronized void setBlacklistDeviceForOpenSLESUsage(boolean enable) {
-    blacklistDeviceForOpenSLESUsageIsOverridden = true;
-    blacklistDeviceForOpenSLESUsage = enable;
+  public static void setBlacklistDeviceForOpenSLESUsage(boolean enable) {
+    synchronized (WebRtcAudioManager.class) {
+      blacklistDeviceForOpenSLESUsageIsOverridden = true;
+      blacklistDeviceForOpenSLESUsage = enable;
+    }
   }
 
   // Call these methods to override the default mono audio modes for the specified direction(s)
