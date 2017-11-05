@@ -22,6 +22,76 @@
       "revId": "6bb3aafb89fc8ed5c180dd2287d61ecd0ff97782",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2746b2a6_3a73b066",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T05:35:27Z",
+      "side": 1,
+      "message": "I agree, except there is a change the media_channel_ won\u0027t function correctly if it\u0027s interface isn\u0027t set.  It\u0027s probably safer to do this after construction rather than in SetTransports.",
+      "parentUuid": "1f170c14_bae5deb3",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 259,
+        "endChar": 0
+      },
+      "revId": "6bb3aafb89fc8ed5c180dd2287d61ecd0ff97782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bea919f7_a73ac1fb",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T05:35:27Z",
+      "side": 1,
+      "message": "The media_channel() can only be accessed on the worker thread, but the RtpDataChannel is created on the signaling thread.  So I think this is going to cause a problem.  We need to do a thread hop to set these.",
+      "range": {
+        "startLine": 2110,
+        "startChar": 55,
+        "endLine": 2110,
+        "endChar": 0
+      },
+      "revId": "6bb3aafb89fc8ed5c180dd2287d61ecd0ff97782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19b1f328_25282284",
+        "filename": "pc/channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T05:35:27Z",
+      "side": 1,
+      "message": "Should this one be private?  If it\u0027s public, it seems to conflict with the comment above.",
+      "range": {
+        "startLine": 123,
+        "startChar": 74,
+        "endLine": 123,
+        "endChar": 0
+      },
+      "revId": "6bb3aafb89fc8ed5c180dd2287d61ecd0ff97782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
