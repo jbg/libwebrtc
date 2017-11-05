@@ -1,0 +1,245 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b006e73b_a4975bcf",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "That seems odd.  Why are we receiving when we clearly haven\u0027t received anything yet?",
+      "range": {
+        "startLine": 422,
+        "startChar": 38,
+        "endLine": 422,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35808035_ece2dcce",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "Can you convert most of these to be initialized at the declaration site instead of in the constructor?  It\u0027s so much cleaner and easier to not forget.",
+      "range": {
+        "startLine": 427,
+        "startChar": 26,
+        "endLine": 427,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fab0f746_9fc9b674",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "I know this is temporary, but, yuck.",
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "040cbe7b_d1a71cc2",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "initialization \u003d\u003e initializing",
+      "range": {
+        "startLine": 509,
+        "startChar": 52,
+        "endLine": 509,
+        "endChar": 53
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bda8a6f8_20f83dbe",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1668,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "Should we DCHECK and log here like we do for a state change?",
+      "range": {
+        "startLine": 1668,
+        "startChar": 40,
+        "endLine": 1668,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d695b5f2_68d4dfe5",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "Ice \u003d\u003e ICE\nhave \u003d\u003e has\nfound \u003d\u003e gathered",
+      "range": {
+        "startLine": 284,
+        "startChar": 39,
+        "endLine": 284,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14ac160d_aa2bbc18",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure what value this last sentence offers.",
+      "range": {
+        "startLine": 430,
+        "startChar": 51,
+        "endLine": 430,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9d4976f_524da048",
+        "filename": "pc/webrtcsession.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "It would make me feel better to call SetIceRole(cricket::ICEROLE_CONTROLLED) instead of relying on the default here.",
+      "range": {
+        "startLine": 680,
+        "startChar": 38,
+        "endLine": 680,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb137da_a0eaa534",
+        "filename": "pc/webrtcsession.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "This might read better:\n\ninitial_offerer_.emplace(action \u003d\u003d kOffer);\nif (*initial_offerer_) {\n  transport_controller_-\u003eSetIceRole(cricket::ICEROLE_CONTROLLING);\n}",
+      "range": {
+        "startLine": 681,
+        "startChar": 5,
+        "endLine": 681,
+        "endChar": 0
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f30b6054_318cbbc7",
+        "filename": "pc/webrtcsession.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "Yuck yuck yuck.  Please make as temporary as possible.",
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ed2e8ee_53586d46",
+        "filename": "pc/webrtcsession.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-05T05:00:51Z",
+      "side": 1,
+      "message": "Might as well rename sid_ to session_id_ to match.",
+      "range": {
+        "startLine": 106,
+        "startChar": 54,
+        "endLine": 106,
+        "endChar": 55
+      },
+      "revId": "633ab0f9e45fb1620a45f8c513033bdbd4d022d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
