@@ -1,0 +1,359 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcc85065_df30ac38",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "It would be better to make this an rtc::Optional.",
+      "range": {
+        "startLine": 1468,
+        "startChar": 41,
+        "endLine": 1468,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854c8240_326f9a04",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2148,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "I would call this GetIpOverhead.",
+      "range": {
+        "startLine": 2148,
+        "startChar": 49,
+        "endLine": 2148,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cb9ed0c_0ab645cc",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2149,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Pass in the family rather than the whole candidate.",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe5e4727_b28b44e2",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "And I\u0027d call this GetProtocolOverhead.  And pass in the protocol rather than the whole candidate.",
+      "range": {
+        "startLine": 2160,
+        "startChar": 51,
+        "endLine": 2160,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55de1667_624244e9",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Call this GetOverhead and pass in a candidate.  Then, at the one call site, make it GetOverhead(selected_connection_-\u003elocal_candidate()).",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b034dc95_15081d04",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Why not just network_route()?",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d11bfbb_1e4b6d97",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "This would be much better with an rtc::Optional.  This is kind of gross.",
+      "range": {
+        "startLine": 705,
+        "startChar": 54,
+        "endLine": 705,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d96f7de9_e49ca1f9",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "It\u0027s the same as the debug_name, so if there\u0027s a real use for it, then we should get rid of debug_name().",
+      "range": {
+        "startLine": 37,
+        "startChar": 45,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d523c796_55e4e20a",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "What is it used for?",
+      "range": {
+        "startLine": 39,
+        "startChar": 56,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82a324a3_984d3316",
+        "filename": "p2p/base/udptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "This is duplicate with the other code.  We should have this logic in one place used by both.",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fc67ef2_fac7edc0",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Another place where an rtc::Optional would make sense.",
+      "range": {
+        "startLine": 599,
+        "startChar": 52,
+        "endLine": 599,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3af5539_c5c2b913",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Can we just merge OnNetworkRouteChanged and OnTransportOverheadChanged?",
+      "range": {
+        "startLine": 609,
+        "startChar": 27,
+        "endLine": 609,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5db7bf60_52c68d5f",
+        "filename": "pc/rtptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Why do we switch from the transport name being on the transport to being in the signal?  Why don\u0027t we just stick it in the rtc::NetworkRoute and get rid of both places of transport_name?",
+      "range": {
+        "startLine": 37,
+        "startChar": 51,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6493959b_fed58123",
+        "filename": "pc/rtptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Why do we switch from signal that contains a transport that has a network route to a signal which contains a network route?  Can we just have a signal that contains a network route everywhere?",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac3e3cdb_7a1fdcd6",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Use an rtc::Optional :).",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2afd8aa2_d0b7cf21",
+        "filename": "pc/srtptransport.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Just inline this.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 72
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b262554_98fef437",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-05T06:05:50Z",
+      "side": 1,
+      "message": "Just call it packet_overhead, and don\u0027t do the \"0 means no route\" thing.",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
