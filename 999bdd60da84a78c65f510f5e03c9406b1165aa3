@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e00c47d2_7f75f380",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "\"it\" needs to be ++, it cannot be a const.",
+      "parentUuid": "4417e304_4e614dba",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 234,
+        "endChar": 11
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5107424c_c39fb04f",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 14
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-06T19:07:08Z",
       "side": 1,
       "message": "AFAIK, windows cannot span monitors on macOS. You can note that here in place of the TODO.",
+      "range": {
+        "startLine": 247,
+        "startChar": 62,
+        "endLine": 247,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9971f9ad_51590e3d",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "It\u0027s still possible, but I doubt most of the users won\u0027t use this functionality. This is also the reason I believe that returning an inaccurate window bounds from GetWindowBounds() if |window| spans multiple monitors is not a big deal.\n\nhttps://www.google.com/search?newwindow\u003d1\u0026biw\u003d917\u0026bih\u003d1065\u0026ei\u003ddcMAWuLBGIe9jwTO6biIDQ\u0026q\u003dspan+a+window+between+two+monitors+mac+os+x\u0026oq\u003dspan+a+window+between+two+monitors+mac+os+x\u0026gs_l\u003dpsy-ab.3...44250.49738.0.49978.20.17.3.0.0.0.128.1432.14j2.16.0....0...1.1.64.psy-ab..2.0.0....0.hAowwLDrEIU",
+      "parentUuid": "5107424c_c39fb04f",
       "range": {
         "startLine": 247,
         "startChar": 62,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "091ca729_c17c5811",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "Not really, even spanning windows between multiple monitors is not enabled, users can still move a window out of the display. In the case, GetScaleFactorAtPosition() returns 1. Imagine the scenario that 2 or 3 corners of a window are out of the display, we need to choose the one which is inside of the display. I would definitely return a boolean value from GetScaleFactorAtPosition(). But returning 1.0 is also good enough for us to make the decision here.",
+      "parentUuid": "24f8a7f4_ab2ff0df",
+      "range": {
+        "startLine": 257,
+        "startChar": 37,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58e01600_6db93a60",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 14
@@ -82,6 +154,30 @@
       "writtenOn": "2017-11-06T19:07:08Z",
       "side": 1,
       "message": "(0,0) is not a useful reference point if you want to stress that the coordinate system is not scaled :) Elsewhere, we make extensive use of DIPs (device-independent pixels) as a unit; is that what you mean here? If so, then use that; if not, then maybe \"physical pixels\" is the right term, here and elsewhere.",
+      "range": {
+        "startLine": 57,
+        "startChar": 3,
+        "endLine": 57,
+        "endChar": 9
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eb1d4dc_91ed5eb8",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "Here we have 4 (2x2) different coordinate systems.\n - Unscaled (DIP, ditto) system coordinate.\n - Scaled (physical pixels, ditto) system coordinate.\n - Unscaled full-screen coordinate.\n - Scaled full-screen coordinate.\nHere \"the primary monitor always starts from (0, 0)\" explained that system coordinate is used, \"*unscaled*\" explained that DIP coordinate is used. But DIP coordinate is not widely used in the implementation, so only this function accepts unscaled / DIP coordinate.\n\nI will update the comment to make it more clear.",
+      "parentUuid": "58e01600_6db93a60",
       "range": {
         "startLine": 57,
         "startChar": 3,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "61269353_f022912d",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "Done. This function has been removed from head file.\n\nRegarding to your question about overlapping multiple monitors, this function cannot handle it. And after discussing with Brave Yao, we believe this is not a big deal. Overlapping multiple monitors is disabled on Mac OSX by default.",
+      "parentUuid": "dedbab69_b65c76ac",
+      "range": {
+        "startLine": 64,
+        "startChar": 59,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d841bb5f_9d76942f",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 14
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "23ddda53_3e43f968",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "You may find the use of this function in window_capturer_mac.mm.\nBut in general, the functions in this file are all \"project\" / \"internal\".",
+      "parentUuid": "d841bb5f_9d76942f",
+      "range": {
+        "startLine": 73,
+        "startChar": 52,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8b99f3a_13b5eac6",
         "filename": "modules/desktop_capture/window_capturer_mac.mm",
         "patchSetId": 14
@@ -151,6 +295,30 @@
       "writtenOn": "2017-11-06T19:07:08Z",
       "side": 1,
       "message": "Under what circumstances is confiuration_monitor_ null? It seems that the linked bug will not be fixed in this situation.",
+      "range": {
+        "startLine": 216,
+        "startChar": 60,
+        "endLine": 216,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0de1306_6ecaf4cc",
+        "filename": "modules/desktop_capture/window_capturer_mac.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-06T22:55:39Z",
+      "side": 1,
+      "message": "That\u0027s a problem of the design of DesktopCaptureOptions and MacDesktopConfiguration. It allows a nullptr to be set as DesktopCaptureOptions::configuration_monitor(). In the case, we cannot evaluate the dip to physical pixel scale.\n\nI cannot understand why MacDesktopConfiguration is not a singleton or why DesktopCaptureOptions provides a set_configuration_monitor() function at the first place. We may fix it later. But before that, unfortunately we need to support the scenario.",
+      "parentUuid": "f8b99f3a_13b5eac6",
       "range": {
         "startLine": 216,
         "startChar": 60,
