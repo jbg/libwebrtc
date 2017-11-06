@@ -22,6 +22,30 @@
       "revId": "7797a812aa2a8d1243d5f0a01c5e0de932b59051",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65298dcc_74102721",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-06T08:36:29Z",
+      "side": 0,
+      "message": "We should not need this check. If encodeParams-\u003eencoder is nil, sending a message to it is a no-op.",
+      "parentUuid": "e39c020e_b4571825",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 35
+      },
+      "revId": "7797a812aa2a8d1243d5f0a01c5e0de932b59051",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
