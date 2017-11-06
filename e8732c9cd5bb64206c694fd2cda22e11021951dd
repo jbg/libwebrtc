@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "113f256c_0a487489",
+        "filename": "media/engine/convert_legacy_video_factory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-06T16:43:04Z",
+      "side": 1,
+      "message": "No, not really. I changed it so it compares H264 profiles as well.",
+      "parentUuid": "d98fef11_d84aadaf",
+      "revId": "e8732c9cd5bb64206c694fd2cda22e11021951dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fef76e21_bf773547",
         "filename": "media/engine/internaldecoderfactory.cc",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "e8732c9cd5bb64206c694fd2cda22e11021951dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47bf9e04_bc0b3588",
+        "filename": "media/engine/internaldecoderfactory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-06T16:43:04Z",
+      "side": 1,
+      "message": "I changed so that we check profiles when comparing.",
+      "parentUuid": "fef76e21_bf773547",
+      "revId": "e8732c9cd5bb64206c694fd2cda22e11021951dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
