@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab50c99e_0f81b926",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T23:18:01Z",
+      "side": 1,
+      "message": "DIP should always be capitalized.",
+      "range": {
+        "startLine": 55,
+        "startChar": 15,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0661411_74835bbd",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T23:18:01Z",
+      "side": 1,
+      "message": "favor",
+      "range": {
+        "startLine": 66,
+        "startChar": 50,
+        "endLine": 66,
+        "endChar": 55
+      },
+      "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c0a28cf_0a3a99e3",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T23:18:01Z",
+      "side": 1,
+      "message": "favor",
+      "range": {
+        "startLine": 78,
+        "startChar": 50,
+        "endLine": 78,
+        "endChar": 55
+      },
+      "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

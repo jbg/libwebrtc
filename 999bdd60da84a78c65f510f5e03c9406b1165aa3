@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d8d3fded_68897980",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T23:18:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e00c47d2_7f75f380",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 234,
+        "endChar": 11
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5107424c_c39fb04f",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 14
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "Not really, even spanning windows between multiple monitors is not enabled, users can still move a window out of the display. In the case, GetScaleFactorAtPosition() returns 1. Imagine the scenario that 2 or 3 corners of a window are out of the display, we need to choose the one which is inside of the display. I would definitely return a boolean value from GetScaleFactorAtPosition(). But returning 1.0 is also good enough for us to make the decision here.",
       "parentUuid": "24f8a7f4_ab2ff0df",
+      "range": {
+        "startLine": 257,
+        "startChar": 37,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75717b92_4627c403",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T23:18:01Z",
+      "side": 1,
+      "message": "I was actually referring to the fact that you prefer the top-left corner for |position_scale| and the bottom-right corner for |size_scale|. It seems like an arbitrary distinction, especially since this only really works if the rect is on a single monitor, and it you just set both variables in the first loop, then you could get rid of the second one.",
+      "parentUuid": "091ca729_c17c5811",
       "range": {
         "startLine": 257,
         "startChar": 37,
