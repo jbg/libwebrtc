@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c496eafd_63243b1e",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-06T08:23:57Z",
+      "side": 1,
+      "message": "The original code from master.cfg is\n\nc[\u0027builders\u0027].append(\n  {\n    \u0027name\u0027: \u0027presubmit\u0027,\n    \u0027factory\u0027: m_annotator.BaseFactory(\u0027run_presubmit\u0027,\n                                       {\u0027repo_name\u0027: \u0027webrtc\u0027,\n                                        \u0027runhooks\u0027: True}),\n    \u0027slavebuilddir\u0027: \u0027linux64\u0027,\n  }\n)\n\nI think the above does the same thing, but I\u0027m not sure (and also not sure how to test it).",
+      "revId": "cbe20ca394928c855891e84ee4d228e2e808e573",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
