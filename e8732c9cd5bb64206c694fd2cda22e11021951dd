@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d98fef11_d84aadaf",
+        "filename": "media/engine/convert_legacy_video_factory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-06T09:10:18Z",
+      "side": 1,
+      "message": "Is it safe to just compare the names?",
+      "revId": "e8732c9cd5bb64206c694fd2cda22e11021951dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef76e21_bf773547",
+        "filename": "media/engine/internaldecoderfactory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-06T09:10:18Z",
+      "side": 1,
+      "message": "If we don\u0027t care about profiles when checking if a format is supported, does it make sense to add every profile to the supported format list?",
+      "revId": "e8732c9cd5bb64206c694fd2cda22e11021951dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
