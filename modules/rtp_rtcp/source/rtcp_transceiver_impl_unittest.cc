@@ -38,6 +38,11 @@ class MockReceiveStatisticsProvider : public webrtc::ReceiveStatisticsProvider {
   MOCK_METHOD1(RtcpReportBlocks, std::vector<ReportBlock>(size_t));
 };
 
+// On some systems task queue might be slow, instead of guessing right
+// grace period, use very large timeout.
+// Use finite timeout to fail tests rather than hang them.
+const int kAlmostForeverMs = 1000;
+
 // Helper to wait for an rtcp packet produced on a different thread/task queue.
 class FakeRtcpTransport : public webrtc::Transport {
  public:
@@ -51,15 +56,20 @@ class FakeRtcpTransport : public webrtc::Transport {
     return true;
   }
 
-  // Returns true if packet was received by this transport before timeout,
-  bool WaitPacket(int64_t timeout_ms) { return sent_rtcp_.Wait(timeout_ms); }
+  // Returns true when packet was received by the transport.
+  bool WaitPacket() {
+    // Normally packet should be sent fast, long before the timeout.
+    bool packet_sent = sent_rtcp_.Wait(kAlmostForeverMs);
+    // Disallow tests to wait almost forever for no packets.
+    EXPECT_TRUE(packet_sent);
+    // Return wait result even though it is expected to be true, so that
+    // individual tests can EXPECT on it for better error message.
+    return packet_sent;
+  }
 
  private:
   rtc::Event sent_rtcp_;
 };
-
-// Posting delayed tasks doesn't promise high precision.
-constexpr int64_t kTaskQueuePrecisionMs = 15;
 
 TEST(RtcpTransceiverImplTest, DelaysSendingFirstCompondPacket) {
   rtc::TaskQueue queue("rtcp");
@@ -72,8 +82,7 @@ TEST(RtcpTransceiverImplTest, DelaysSendingFirstCompondPacket) {
 
   int64_t started_ms = rtc::TimeMillis();
   queue.PostTask([&] { rtcp_transceiver.emplace(config); });
-  EXPECT_TRUE(transport.WaitPacket(config.initial_report_delay_ms +
-                                   kTaskQueuePrecisionMs));
+  EXPECT_TRUE(transport.WaitPacket());
 
   EXPECT_GE(rtc::TimeMillis() - started_ms, config.initial_report_delay_ms);
 
@@ -83,7 +92,7 @@ TEST(RtcpTransceiverImplTest, DelaysSendingFirstCompondPacket) {
     rtcp_transceiver.reset();
     done.Set();
   });
-  ASSERT_TRUE(done.Wait(/*milliseconds=*/100));
+  ASSERT_TRUE(done.Wait(kAlmostForeverMs));
 }
 
 TEST(RtcpTransceiverImplTest, PeriodicallySendsPackets) {
@@ -97,11 +106,9 @@ TEST(RtcpTransceiverImplTest, PeriodicallySendsPackets) {
   rtc::Optional<RtcpTransceiverImpl> rtcp_transceiver;
   queue.PostTask([&] { rtcp_transceiver.emplace(config); });
 
-  EXPECT_TRUE(transport.WaitPacket(config.initial_report_delay_ms +
-                                   kTaskQueuePrecisionMs));
+  EXPECT_TRUE(transport.WaitPacket());
   int64_t time_of_1st_packet_ms = rtc::TimeMillis();
-  EXPECT_TRUE(
-      transport.WaitPacket(config.report_period_ms + kTaskQueuePrecisionMs));
+  EXPECT_TRUE(transport.WaitPacket());
   int64_t time_of_2nd_packet_ms = rtc::TimeMillis();
 
   EXPECT_GE(time_of_2nd_packet_ms - time_of_1st_packet_ms,
@@ -113,7 +120,7 @@ TEST(RtcpTransceiverImplTest, PeriodicallySendsPackets) {
     rtcp_transceiver.reset();
     done.Set();
   });
-  ASSERT_TRUE(done.Wait(/*milliseconds=*/100));
+  ASSERT_TRUE(done.Wait(kAlmostForeverMs));
 }
 
 TEST(RtcpTransceiverImplTest, SendCompoundPacketDelaysPeriodicSendPackets) {
@@ -128,17 +135,25 @@ TEST(RtcpTransceiverImplTest, SendCompoundPacketDelaysPeriodicSendPackets) {
   queue.PostTask([&] { rtcp_transceiver.emplace(config); });
 
   // Wait for first packet.
-  EXPECT_TRUE(transport.WaitPacket(config.initial_report_delay_ms +
-                                   kTaskQueuePrecisionMs));
-  // Wait half-period time for next one - it shouldn't be sent.
-  EXPECT_FALSE(transport.WaitPacket(config.report_period_ms / 2));
-  // Send packet now.
-  queue.PostTask([&] { rtcp_transceiver->SendCompoundPacket(); });
-  EXPECT_TRUE(transport.WaitPacket(/*timeout_ms=*/1));
+  EXPECT_TRUE(transport.WaitPacket());
+  // Send non periodic one after half period.
+  rtc::Event non_periodic(false, false);
+  queue.PostDelayedTask(
+      [&] {
+        rtcp_transceiver->SendCompoundPacket();
+        non_periodic.Set();
+      },
+      config.report_period_ms / 2);
+  // Though non-periodic packet is scheduled just in between periodic, due to
+  // small period and task queue flakiness it migth end-up 1ms after next
+  // periodic packet. To be sure duration after non-periodic packet is tested
+  // wait for transport after ensuring non-periodic packet was sent.
+  EXPECT_TRUE(non_periodic.Wait(kAlmostForeverMs));
+  EXPECT_TRUE(transport.WaitPacket());
   int64_t time_of_non_periodic_packet_ms = rtc::TimeMillis();
-  // Next packet should be sent at least after period_ms.
-  EXPECT_TRUE(
-      transport.WaitPacket(config.report_period_ms + kTaskQueuePrecisionMs));
+  // Wait for next periodic packet.
+  EXPECT_TRUE(transport.WaitPacket());
+
   EXPECT_GE(rtc::TimeMillis() - time_of_non_periodic_packet_ms,
             config.report_period_ms);
 
@@ -148,7 +163,7 @@ TEST(RtcpTransceiverImplTest, SendCompoundPacketDelaysPeriodicSendPackets) {
     rtcp_transceiver.reset();
     done.Set();
   });
-  ASSERT_TRUE(done.Wait(/*milliseconds=*/100));
+  ASSERT_TRUE(done.Wait(kAlmostForeverMs));
 }
 
 TEST(RtcpTransceiverImplTest, SendsMinimalCompoundPacket) {
