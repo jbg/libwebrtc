@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4417e304_4e614dba",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "const auto\u0026",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 234,
+        "endChar": 11
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5107424c_c39fb04f",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "AFAIK, windows cannot span monitors on macOS. You can note that here in place of the TODO.",
+      "range": {
+        "startLine": 247,
+        "startChar": 62,
+        "endLine": 247,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24f8a7f4_ab2ff0df",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "I think this logic can be simplified if you know that the window can\u0027t span monitors.",
+      "range": {
+        "startLine": 257,
+        "startChar": 37,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58e01600_6db93a60",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "(0,0) is not a useful reference point if you want to stress that the coordinate system is not scaled :) Elsewhere, we make extensive use of DIPs (device-independent pixels) as a unit; is that what you mean here? If so, then use that; if not, then maybe \"physical pixels\" is the right term, here and elsewhere.",
+      "range": {
+        "startLine": 57,
+        "startChar": 3,
+        "endLine": 57,
+        "endChar": 9
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dedbab69_b65c76ac",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "Is rect constrained to not overlapping multiple monitors? If so, you should state that here, perhaps by strengthening the statement \"typically |rect| is the area of a window\". Or perhaps this method should not be exposed in the header at all, and the public interface should take a window rather than a rect (or get rid of it, if it\u0027s only called by GetWindowBounds)?",
+      "range": {
+        "startLine": 64,
+        "startChar": 59,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d841bb5f_9d76942f",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "Do you need these non-scaling overloads in the long term? If they\u0027re only needed until deps are rolled into Chromium, then please mark them deprecated.",
+      "range": {
+        "startLine": 73,
+        "startChar": 52,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8b99f3a_13b5eac6",
+        "filename": "modules/desktop_capture/window_capturer_mac.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2017-11-06T19:07:08Z",
+      "side": 1,
+      "message": "Under what circumstances is confiuration_monitor_ null? It seems that the linked bug will not be fixed in this situation.",
+      "range": {
+        "startLine": 216,
+        "startChar": 60,
+        "endLine": 216,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
