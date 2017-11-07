@@ -16,6 +16,24 @@
       "revId": "cbe20ca394928c855891e84ee4d228e2e808e573",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d638767b_58fdb991",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5015
+      },
+      "writtenOn": "2017-11-07T08:33:52Z",
+      "side": 1,
+      "message": "yeah, it does the same thing\nno way to test it, sorry",
+      "parentUuid": "c496eafd_63243b1e",
+      "revId": "cbe20ca394928c855891e84ee4d228e2e808e573",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
