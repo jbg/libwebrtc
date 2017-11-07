@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aa7b32c7_ef2017d6",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-07T09:55:28Z",
+      "side": 1,
+      "message": "it is increased from 25ms to 1000ms by this CL.\nmoved kReportPeriodMs constant nearby to show that Almost forever is 100x more than expected. Hope it is enough even for slowest tests.",
+      "parentUuid": "0d2b5e32_edc8c1fd",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "784b48ed5c0c35aa9fe6f5cd07b04bc41d3947f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f4fa04e_ca55bf6b",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-07T07:42:41Z",
       "side": 1,
       "message": "This comparison still looks potentially flaky. To make it robust, time_of_non_periodic_packet would need to read the clock prior to the PostDelayedTask call which schedules the periodic packet. The rescheduling is done by SendCompoundPacket, right? So moving the reading of the clock inside the above task, prior to that call, might work.\n\nI was also thinking of read the clock prior to the PostDelayedTask in this function, then we could check that the interval is \u003e\u003d 3*report_period_ms/2? That seems to almost work, but fail in case the above task is scheduled late.\n\nMaybe it would also help to increase report_period_ms for the test, 10ms is uncomfortably close to traditional scheduler granularity.",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 63
+      },
+      "revId": "784b48ed5c0c35aa9fe6f5cd07b04bc41d3947f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02af7a2a_236fa58e",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-07T09:55:28Z",
+      "side": 1,
+      "message": "Hm, you right, thank you! Same applies to previous test.\nasync tests, specially with real clock,are hard to make right. There is a good reason they should be avoided.\nmoved taking time_of_non_periodic_packet_ms just before SendCompoundPacket.\n\ncomparing with 1.5 period will make expectation less readable, would prefer to avoid that.\n\nAs long as there are bots that have high granularity, small period should be ok:\nIt may cause tests pass for wrong reason on some slow system, but fast bots still should catch bugs. (And slow bots will catch different kind of bugs)",
+      "parentUuid": "7f4fa04e_ca55bf6b",
       "range": {
         "startLine": 157,
         "startChar": 0,
