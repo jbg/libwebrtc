@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6007551d_1c2f4165",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-07T10:17:43Z",
+      "side": 1,
+      "message": "Isn\u0027t it possible that packet already sent at this point? I think it\u0027s safer to move it inside the above task, just prior to the construction (via the emplace call).",
+      "range": {
+        "startLine": 115,
+        "startChar": 10,
+        "endLine": 115,
+        "endChar": 40
+      },
+      "revId": "aa03dca6ca0f871ae23541463fa0f4ea3e504572",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
