@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "48e7ebd4_e2d007ce",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-07T01:15:41Z",
+      "side": 1,
+      "message": "Got your point. Done.",
+      "parentUuid": "75717b92_4627c403",
+      "range": {
+        "startLine": 257,
+        "startChar": 37,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "999bdd60da84a78c65f510f5e03c9406b1165aa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58e01600_6db93a60",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 14

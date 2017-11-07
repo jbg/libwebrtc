@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d3fc22c5_70ab4d95",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-07T01:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab50c99e_0f81b926",
+      "range": {
+        "startLine": 55,
+        "startChar": 15,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0661411_74835bbd",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 15
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3e0db250_fead8307",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-07T01:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0661411_74835bbd",
+      "range": {
+        "startLine": 66,
+        "startChar": 50,
+        "endLine": 66,
+        "endChar": 55
+      },
+      "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c0a28cf_0a3a99e3",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 15
@@ -68,6 +116,30 @@
       "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d970c6a2_2664c614",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-11-07T01:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c0a28cf_0a3a99e3",
+      "range": {
+        "startLine": 78,
+        "startChar": 50,
+        "endLine": 78,
+        "endChar": 55
+      },
+      "revId": "7b9a8f90eff0afed452fe49a6118da995a0a61cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
