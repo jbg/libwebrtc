@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d2b5e32_edc8c1fd",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-07T07:42:41Z",
+      "side": 1,
+      "message": "If it\u0027s intended to be \"very large\", maybe increase beyond 1s? 5s or 10s might be reasonable. Tests might be slowed down considerably if run on valgrind or other simulators.",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "784b48ed5c0c35aa9fe6f5cd07b04bc41d3947f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f4fa04e_ca55bf6b",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-07T07:42:41Z",
+      "side": 1,
+      "message": "This comparison still looks potentially flaky. To make it robust, time_of_non_periodic_packet would need to read the clock prior to the PostDelayedTask call which schedules the periodic packet. The rescheduling is done by SendCompoundPacket, right? So moving the reading of the clock inside the above task, prior to that call, might work.\n\nI was also thinking of read the clock prior to the PostDelayedTask in this function, then we could check that the interval is \u003e\u003d 3*report_period_ms/2? That seems to almost work, but fail in case the above task is scheduled late.\n\nMaybe it would also help to increase report_period_ms for the test, 10ms is uncomfortably close to traditional scheduler granularity.",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 63
+      },
+      "revId": "784b48ed5c0c35aa9fe6f5cd07b04bc41d3947f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
