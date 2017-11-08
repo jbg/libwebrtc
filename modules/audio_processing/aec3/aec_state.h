@@ -18,6 +18,7 @@
 #include "api/array_view.h"
 #include "api/optional.h"
 #include "modules/audio_processing/aec3/aec3_common.h"
+#include "modules/audio_processing/aec3/drift_detector.h"
 #include "modules/audio_processing/aec3/echo_path_variability.h"
 #include "modules/audio_processing/aec3/erl_estimator.h"
 #include "modules/audio_processing/aec3/erle_estimator.h"
@@ -169,6 +170,7 @@ class AecState {
   bool initial_state_ = true;
   bool linear_echo_estimate_ = false;
   bool sufficient_filter_updates_ = false;
+  DriftDetector drift_detector_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(AecState);
 };

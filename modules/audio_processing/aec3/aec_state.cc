@@ -56,7 +56,8 @@ AecState::AecState(const EchoCanceller3Config& config)
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
       erle_estimator_(config.erle.min, config.erle.max_l, config.erle.max_h),
       config_(config),
-      reverb_decay_(config_.ep_strength.default_len) {
+      reverb_decay_(config_.ep_strength.default_len),
+      drift_detector_(2 * 60 * kNumBlocksPerSecond) {
   max_render_.fill(0.f);
 }
 
