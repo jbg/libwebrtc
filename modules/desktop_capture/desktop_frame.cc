@@ -82,6 +82,31 @@ void DesktopFrame::MoveFrameInfoFrom(DesktopFrame* other) {
   set_top_left(other->top_left());
 }
 
+bool DesktopFrame::EqualTo(const DesktopFrame& other,
+                           const DesktopRect& rect) const {
+  RTC_DCHECK(DesktopRect::MakeSize(size()).ContainsRect(rect));
+  RTC_DCHECK(DesktopRect::MakeSize(other.size()).ContainsRect(rect));
+
+  const int byte_count_per_row = rect.width() * kBytesPerPixel;
+  const uint8_t* src = GetFrameDataAtPos(rect.top_left());
+  const uint8_t* dst = other.GetFrameDataAtPos(rect.top_left());
+  for (int i = 0; i < rect.height(); i++) {
+    if (memcmp(src, dst, byte_count_per_row) != 0) {
+      return false;
+    }
+    src += stride();
+    dst += other.stride();
+  }
+  return true;
+}
+
+bool DesktopFrame::EqualTo(const DesktopFrame& other) const {
+  if (!size().equals(other.size())) {
+    return false;
+  }
+  return EqualTo(other, DesktopRect::MakeSize(size()));
+}
+
 BasicDesktopFrame::BasicDesktopFrame(DesktopSize size)
     : DesktopFrame(size, kBytesPerPixel * size.width(),
                    new uint8_t[kBytesPerPixel * size.width() * size.height()],
