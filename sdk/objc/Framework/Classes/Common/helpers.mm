@@ -8,7 +8,6 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-
 #import <Foundation/Foundation.h>
 #import <sys/sysctl.h>
 #if defined(WEBRTC_IOS)
@@ -40,16 +39,15 @@ NSString* NSStringFromStdString(const std::string& stdString) {
 
 std::string StdStringFromNSString(NSString* nsString) {
   NSData* charData = [nsString dataUsingEncoding:NSUTF8StringEncoding];
-  return std::string(reinterpret_cast<const char*>([charData bytes]),
-                     [charData length]);
+  return std::string(reinterpret_cast<const char*>([charData bytes]), [charData length]);
 }
 
 bool CheckAndLogError(BOOL success, NSError* error) {
   if (!success) {
-    NSString* msg =
-        [NSString stringWithFormat:@"Error: %ld, %@, %@", (long)error.code,
-                                   error.localizedDescription,
-                                   error.localizedFailureReason];
+    NSString* msg = [NSString stringWithFormat:@"Error: %ld, %@, %@",
+                                               (long)error.code,
+                                               error.localizedDescription,
+                                               error.localizedFailureReason];
     LOG(LS_ERROR) << StdStringFromNSString(msg);
     return false;
   }
@@ -108,8 +106,7 @@ int GetProcessID() {
 }
 
 std::string GetOSVersionString() {
-  NSString* osVersion =
-      [NSProcessInfo processInfo].operatingSystemVersionString;
+  NSString* osVersion = [NSProcessInfo processInfo].operatingSystemVersionString;
   return StdStringFromNSString(osVersion);
 }
 
@@ -117,8 +114,8 @@ int GetProcessorCount() {
   return [NSProcessInfo processInfo].processorCount;
 }
 
-#if defined(__IPHONE_9_0) && defined(__IPHONE_OS_VERSION_MAX_ALLOWED) \
-    && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+#if defined(__IPHONE_9_0) && defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && \
+    __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
 bool GetLowPowerModeEnabled() {
   if (isOperatingSystemAtLeastVersion(9.0)) {
     // lowPoweredModeEnabled is only available on iOS9+.
@@ -132,4 +129,3 @@ bool GetLowPowerModeEnabled() {
 
 }  // namespace ios
 }  // namespace webrtc
-
