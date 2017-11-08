@@ -33,19 +33,16 @@ const char kCandidateSdpName[] = "candidate";
 const char kSessionDescriptionTypeName[] = "type";
 const char kSessionDescriptionSdpName[] = "sdp";
 
-#define DTLS_ON  true
+#define DTLS_ON true
 #define DTLS_OFF false
 
 class DummySetSessionDescriptionObserver
     : public webrtc::SetSessionDescriptionObserver {
  public:
   static DummySetSessionDescriptionObserver* Create() {
-    return
-        new rtc::RefCountedObject<DummySetSessionDescriptionObserver>();
+    return new rtc::RefCountedObject<DummySetSessionDescriptionObserver>();
   }
-  virtual void OnSuccess() {
-    LOG(INFO) << __FUNCTION__;
-  }
+  virtual void OnSuccess() { LOG(INFO) << __FUNCTION__; }
   virtual void OnFailure(const std::string& error) {
     LOG(INFO) << __FUNCTION__ << " " << error;
   }
@@ -56,10 +53,7 @@ class DummySetSessionDescriptionObserver
 };
 
 Conductor::Conductor(PeerConnectionClient* client, MainWindow* main_wnd)
-  : peer_id_(-1),
-    loopback_(false),
-    client_(client),
-    main_wnd_(main_wnd) {
+    : peer_id_(-1), loopback_(false), client_(client), main_wnd_(main_wnd) {
   client_->RegisterObserver(this);
   main_wnd->RegisterObserver(this);
 }
@@ -86,15 +80,14 @@ bool Conductor::InitializePeerConnection() {
       webrtc::CreateBuiltinAudioDecoderFactory());
 
   if (!peer_connection_factory_.get()) {
-    main_wnd_->MessageBox("Error",
-        "Failed to initialize PeerConnectionFactory", true);
+    main_wnd_->MessageBox("Error", "Failed to initialize PeerConnectionFactory",
+                          true);
     DeletePeerConnection();
     return false;
   }
 
   if (!CreatePeerConnection(DTLS_ON)) {
-    main_wnd_->MessageBox("Error",
-        "CreatePeerConnection failed", true);
+    main_wnd_->MessageBox("Error", "CreatePeerConnection failed", true);
     DeletePeerConnection();
   }
   AddStreams();
@@ -286,7 +279,7 @@ void Conductor::OnMessageFromPeer(int peer_id, const std::string& message) {
         webrtc::CreateSessionDescription(type, sdp, &error));
     if (!session_description) {
       LOG(WARNING) << "Can't parse received session description message. "
-          << "SdpParseError was: " << error.description;
+                   << "SdpParseError was: " << error.description;
       return;
     }
     LOG(INFO) << " Received session description :" << message;
@@ -314,7 +307,7 @@ void Conductor::OnMessageFromPeer(int peer_id, const std::string& message) {
         webrtc::CreateIceCandidate(sdp_mid, sdp_mlineindex, sdp, &error));
     if (!candidate.get()) {
       LOG(WARNING) << "Can't parse received candidate message. "
-          << "SdpParseError was: " << error.description;
+                   << "SdpParseError was: " << error.description;
       return;
     }
     if (!peer_connection_->AddIceCandidate(candidate.get())) {
@@ -332,8 +325,8 @@ void Conductor::OnMessageSent(int err) {
 }
 
 void Conductor::OnServerConnectionFailure() {
-    main_wnd_->MessageBox("Error", ("Failed to connect to " + server_).c_str(),
-                          true);
+  main_wnd_->MessageBox("Error", ("Failed to connect to " + server_).c_str(),
+                        true);
 }
 
 //
@@ -357,8 +350,8 @@ void Conductor::ConnectToPeer(int peer_id) {
   RTC_DCHECK(peer_id != -1);
 
   if (peer_connection_.get()) {
-    main_wnd_->MessageBox("Error",
-        "We only support connecting to one peer at a time", true);
+    main_wnd_->MessageBox(
+        "Error", "We only support connecting to one peer at a time", true);
     return;
   }
 
@@ -410,9 +403,8 @@ void Conductor::AddStreams() {
 
   rtc::scoped_refptr<webrtc::VideoTrackInterface> video_track(
       peer_connection_factory_->CreateVideoTrack(
-          kVideoLabel,
-          peer_connection_factory_->CreateVideoSource(OpenVideoCaptureDevice(),
-                                                      NULL)));
+          kVideoLabel, peer_connection_factory_->CreateVideoSource(
+                           OpenVideoCaptureDevice(), NULL)));
   main_wnd_->StartLocalRenderer(video_track);
 
   rtc::scoped_refptr<webrtc::MediaStreamInterface> stream =
@@ -489,8 +481,7 @@ void Conductor::UIThreadCallback(int msg_id, void* data) {
 
     case NEW_STREAM_ADDED: {
       webrtc::MediaStreamInterface* stream =
-          reinterpret_cast<webrtc::MediaStreamInterface*>(
-          data);
+          reinterpret_cast<webrtc::MediaStreamInterface*>(data);
       webrtc::VideoTrackVector tracks = stream->GetVideoTracks();
       // Only render the first track.
       if (!tracks.empty()) {
@@ -504,8 +495,7 @@ void Conductor::UIThreadCallback(int msg_id, void* data) {
     case STREAM_REMOVED: {
       // Remote peer stopped sending a stream.
       webrtc::MediaStreamInterface* stream =
-          reinterpret_cast<webrtc::MediaStreamInterface*>(
-          data);
+          reinterpret_cast<webrtc::MediaStreamInterface*>(data);
       stream->Release();
       break;
     }
@@ -541,7 +531,7 @@ void Conductor::OnSuccess(webrtc::SessionDescriptionInterface* desc) {
 }
 
 void Conductor::OnFailure(const std::string& error) {
-    LOG(LERROR) << error;
+  LOG(LERROR) << error;
 }
 
 void Conductor::SendMessage(const std::string& json_object) {
