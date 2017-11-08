@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dd99256_2367c963",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-08T18:06:30Z",
+      "side": 1,
+      "message": "Instead of making copies, may I suggest:\n\n|desc_temp-\u003etype()| for the line below.\n|remote_description()-\u003etype() or description()| for the rest of the files.\n\nAlso can leave a comment that after the call to the helper function the remote_description() should be the session description that was passed in.",
+      "range": {
+        "startLine": 1523,
+        "startChar": 0,
+        "endLine": 1525,
+        "endChar": 35
+      },
+      "revId": "b469ea8288e0b6a9a94bcf1d9cb5e9586e3a4ac7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
