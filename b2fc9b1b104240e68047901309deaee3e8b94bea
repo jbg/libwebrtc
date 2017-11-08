@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a26af69_ff6289b0",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-08T13:28:38Z",
+      "side": 0,
+      "message": "In this case I think the format is less readable though.",
+      "range": {
+        "startLine": 1092,
+        "startChar": 0,
+        "endLine": 1104,
+        "endChar": 80
+      },
+      "revId": "b2fc9b1b104240e68047901309deaee3e8b94bea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
