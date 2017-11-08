@@ -12,10 +12,12 @@
 #define MODULES_DESKTOP_CAPTURE_DESKTOP_FRAME_GENERATOR_H_
 
 #include <memory>
+#include <vector>
 
 #include "modules/desktop_capture/desktop_frame.h"
 #include "modules/desktop_capture/desktop_geometry.h"
 #include "modules/desktop_capture/desktop_region.h"
+#include "modules/desktop_capture/rgba_color.h"
 #include "modules/desktop_capture/shared_memory.h"
 
 namespace webrtc {
@@ -55,20 +57,20 @@ class PainterDesktopFrameGenerator final : public DesktopFrameGenerator {
   // call.
   DesktopSize* size();
 
-  // Decides whether BaseDesktopFrameGenerator returns a frame in next Capture()
-  // callback. If return_frame_ is true, BaseDesktopFrameGenerator will create a
-  // frame according to both size_ and SharedMemoryFactory input, and uses
-  // Paint() function to paint it.
+  // Decides whether PainterDesktopFrameGenerator returns a frame in next
+  // Capture() callback. If |return_frame_| is true,
+  // PainterDesktopFrameGenerator will create a frame according to both |size_|
+  // and SharedMemoryFactory input, and uses Paint() function to paint it.
   void set_return_frame(bool return_frame);
 
-  // Decides whether MockScreenCapturer returns a frame with updated regions.
-  // MockScreenCapturer will keep DesktopFrame::updated_region() empty if this
-  // field is false.
+  // Decides whether PainterDesktopFrameGenerator returns a frame with updated
+  // regions. PainterDesktopFrameGenerator will keep
+  // DesktopFrame::updated_region() empty if this field is false.
   void set_provide_updated_region_hints(bool provide_updated_region_hints);
 
-  // Decides whether MockScreenCapturer randomly enlarges updated regions in the
-  // DesktopFrame. Set this field to true to simulate an inaccurate updated
-  // regions' return from OS APIs.
+  // Decides whether PainterDesktopFrameGenerator randomly enlarges updated
+  // regions in the DesktopFrame. Set this field to true to simulate an
+  // inaccurate return of updated regions from OS APIs.
   void set_enlarge_updated_region(bool enlarge_updated_region);
 
   // The range to enlarge a updated region if |enlarge_updated_region_| is true.
@@ -76,9 +78,9 @@ class PainterDesktopFrameGenerator final : public DesktopFrameGenerator {
   // |enlarge_updated_region_| will be ignored.
   void set_enlarge_range(int enlarge_range);
 
-  // Decides whether BaseDesktopFrameGenerator randomly add some updated regions
-  // in the DesktopFrame. Set this field to true to simulate an inaccurate
-  // updated regions' return from OS APIs.
+  // Decides whether PainterDesktopFrameGenerator randomly add some updated
+  // regions in the DesktopFrame. Set this field to true to simulate an
+  // inaccurate return of updated regions from OS APIs.
   void set_add_random_updated_region(bool add_random_updated_region);
 
   // Sets the painter object to do the real painting work, if no |painter_| has
@@ -97,6 +99,31 @@ class PainterDesktopFrameGenerator final : public DesktopFrameGenerator {
   DesktopFramePainter* painter_;
 };
 
+// An implementation of DesktopFramePainter to paint predefined colors on each
+// rectangle of updated_region(), and white elsewhere.
+class ColorfulDesktopFramePainter final : public DesktopFramePainter {
+ public:
+  ColorfulDesktopFramePainter();
+  ~ColorfulDesktopFramePainter() override;
+
+  // The colorful regions of the frame which will be returned in next Paint()
+  // call. ColorfulDesktopFramePainter will draw a white frame with predefined
+  // colors in each rectangle in the |updated_region_|. Each Paint() call
+  // consumes |updated_region_|.
+  DesktopRegion* updated_region();
+
+  // Allows consumers to modify the colors used by this painter.
+  std::vector<RgbaColor>* colors();
+
+  // DesktopFramePainter interface.
+  bool Paint(DesktopFrame* frame, DesktopRegion* updated_region) override;
+
+ private:
+  // If |colors_| is empty, painter uses black.
+  std::vector<RgbaColor> colors_;
+  DesktopRegion updated_region_;
+};
+
 // An implementation of DesktopFramePainter to paint black on
 // mutable_updated_region(), and white elsewhere.
 class BlackWhiteDesktopFramePainter final : public DesktopFramePainter {
@@ -105,15 +132,15 @@ class BlackWhiteDesktopFramePainter final : public DesktopFramePainter {
   ~BlackWhiteDesktopFramePainter() override;
 
   // The black regions of the frame which will be returned in next Paint()
-  // call. BlackWhiteDesktopFramePainter will draw a white frame, with black
-  // in the updated_region_. Each Paint() call will consume updated_region_.
+  // call. BlackWhiteDesktopFramePainter will draw a white frame with black in
+  // the |updated_region_|. Each Paint() call will consume |updated_region_|.
   DesktopRegion* updated_region();
 
   // DesktopFramePainter interface.
   bool Paint(DesktopFrame* frame, DesktopRegion* updated_region) override;
 
  private:
-  DesktopRegion updated_region_;
+  ColorfulDesktopFramePainter painter_;
 };
 
 }  // namespace webrtc
