@@ -1520,9 +1520,12 @@ void PeerConnection::SetRemoteDescription(
 
   // Takes the ownership of |desc| regardless of the result.
   std::unique_ptr<SessionDescriptionInterface> desc_temp(desc);
+  std::string desc_type = desc->type();
+  std::unique_ptr<cricket::SessionDescription> remote_desc(
+      desc->description()->Copy());
 
   if (IsClosed()) {
-    std::string error = "Failed to set remote " + desc->type() +
+    std::string error = "Failed to set remote " + desc_type +
                         " sdp: Called in wrong state: STATE_CLOSED";
     LOG(LS_ERROR) << error;
     PostSetSessionDescriptionFailure(observer, error);
@@ -1545,15 +1548,16 @@ void PeerConnection::SetRemoteDescription(
     AllocateSctpSids(role);
   }
 
-  const cricket::SessionDescription* remote_desc = desc->description();
-  const cricket::ContentInfo* audio_content = GetFirstAudioContent(remote_desc);
-  const cricket::ContentInfo* video_content = GetFirstVideoContent(remote_desc);
+  const cricket::ContentInfo* audio_content =
+      GetFirstAudioContent(remote_desc.get());
+  const cricket::ContentInfo* video_content =
+      GetFirstVideoContent(remote_desc.get());
   const cricket::AudioContentDescription* audio_desc =
-      GetFirstAudioContentDescription(remote_desc);
+      GetFirstAudioContentDescription(remote_desc.get());
   const cricket::VideoContentDescription* video_desc =
-      GetFirstVideoContentDescription(remote_desc);
+      GetFirstVideoContentDescription(remote_desc.get());
   const cricket::DataContentDescription* data_desc =
-      GetFirstDataContentDescription(remote_desc);
+      GetFirstDataContentDescription(remote_desc.get());
 
   // Check if the descriptions include streams, just in case the peer supports
   // MSID, but doesn't indicate so with "a=msid-semantic".
@@ -1626,7 +1630,7 @@ void PeerConnection::SetRemoteDescription(
   signaling_thread()->Post(RTC_FROM_HERE, this,
                            MSG_SET_SESSIONDESCRIPTION_SUCCESS, msg);
 
-  if (desc->type() == SessionDescriptionInterface::kAnswer) {
+  if (desc_type == SessionDescriptionInterface::kAnswer) {
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
     network_thread()->Invoke<void>(
