@@ -33,8 +33,7 @@ enum AVFoundationVideoCapturerMessageType : uint32_t {
 };
 
 AVFoundationVideoCapturer::AVFoundationVideoCapturer() : _capturer(nil) {
-  _capturer =
-      [[RTCAVFoundationVideoCapturerInternal alloc] initWithCapturer:this];
+  _capturer = [[RTCAVFoundationVideoCapturerInternal alloc] initWithCapturer:this];
 
   std::set<cricket::VideoFormat> front_camera_video_formats =
       GetSupportedVideoFormatsForDevice([_capturer frontCaptureDevice]);
@@ -49,10 +48,11 @@ AVFoundationVideoCapturer::AVFoundationVideoCapturer() : _capturer(nil) {
     intersection_video_formats.assign(back_camera_video_formats.begin(),
                                       back_camera_video_formats.end());
   } else {
-    std::set_intersection(
-        front_camera_video_formats.begin(), front_camera_video_formats.end(),
-        back_camera_video_formats.begin(), back_camera_video_formats.end(),
-        std::back_inserter(intersection_video_formats));
+    std::set_intersection(front_camera_video_formats.begin(),
+                          front_camera_video_formats.end(),
+                          back_camera_video_formats.begin(),
+                          back_camera_video_formats.end(),
+                          std::back_inserter(intersection_video_formats));
   }
   SetSupportedFormats(intersection_video_formats);
 }
@@ -61,8 +61,7 @@ AVFoundationVideoCapturer::~AVFoundationVideoCapturer() {
   _capturer = nil;
 }
 
-cricket::CaptureState AVFoundationVideoCapturer::Start(
-    const cricket::VideoFormat& format) {
+cricket::CaptureState AVFoundationVideoCapturer::Start(const cricket::VideoFormat& format) {
   if (!_capturer) {
     LOG(LS_ERROR) << "Failed to create AVFoundation capturer.";
     return cricket::CaptureState::CS_FAILED;
@@ -119,10 +118,9 @@ void AVFoundationVideoCapturer::AdaptOutputFormat(int width, int height, int fps
   video_adapter()->OnOutputFormatRequest(format);
 }
 
-void AVFoundationVideoCapturer::CaptureSampleBuffer(
-    CMSampleBufferRef sample_buffer, VideoRotation rotation) {
-  if (CMSampleBufferGetNumSamples(sample_buffer) != 1 ||
-      !CMSampleBufferIsValid(sample_buffer) ||
+void AVFoundationVideoCapturer::CaptureSampleBuffer(CMSampleBufferRef sample_buffer,
+                                                    VideoRotation rotation) {
+  if (CMSampleBufferGetNumSamples(sample_buffer) != 1 || !CMSampleBufferIsValid(sample_buffer) ||
       !CMSampleBufferDataIsReady(sample_buffer)) {
     return;
   }
@@ -143,10 +141,16 @@ void AVFoundationVideoCapturer::CaptureSampleBuffer(
   int crop_y;
   int64_t translated_camera_time_us;
 
-  if (!AdaptFrame(captured_width, captured_height,
+  if (!AdaptFrame(captured_width,
+                  captured_height,
                   rtc::TimeNanos() / rtc::kNumNanosecsPerMicrosec,
-                  rtc::TimeMicros(), &adapted_width, &adapted_height,
-                  &crop_width, &crop_height, &crop_x, &crop_y,
+                  rtc::TimeMicros(),
+                  &adapted_width,
+                  &adapted_height,
+                  &crop_width,
+                  &crop_height,
+                  &crop_x,
+                  &crop_y,
                   &translated_camera_time_us)) {
     return;
   }
@@ -173,7 +177,8 @@ void AVFoundationVideoCapturer::CaptureSampleBuffer(
   }
 
   OnFrame(webrtc::VideoFrame(buffer, rotation, translated_camera_time_us),
-          captured_width, captured_height);
+          captured_width,
+          captured_height);
 }
 
 }  // namespace webrtc

@@ -74,7 +74,7 @@ int32_t VideoDecoderSoftwareFallbackWrapper::Decode(
     const RTPFragmentationHeader* fragmentation,
     const CodecSpecificInfo* codec_specific_info,
     int64_t render_time_ms) {
-    TRACE_EVENT0("webrtc", "VideoDecoderSoftwareFallbackWrapper::Decode");
+  TRACE_EVENT0("webrtc", "VideoDecoderSoftwareFallbackWrapper::Decode");
   // Try initializing and decoding with the provided decoder on every keyframe
   // or when there's no fallback decoder. This is the normal case.
   if (use_hw_decoder_ || input_image._frameType == kVideoFrameKey) {
@@ -87,7 +87,7 @@ int32_t VideoDecoderSoftwareFallbackWrapper::Decode(
     }
     if (hw_decoder_initialized_) {
       ret = hw_decoder_->Decode(input_image, missing_frames, fragmentation,
-                             codec_specific_info, render_time_ms);
+                                codec_specific_info, render_time_ms);
     }
     if (ret == WEBRTC_VIDEO_CODEC_OK) {
       if (!use_hw_decoder_) {
