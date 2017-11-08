@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa0f68ac_29233b85",
+        "filename": "modules/video_coding/media_optimization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-11-08T09:38:19Z",
+      "side": 1,
+      "message": "VideoStreamEncoder",
+      "range": {
+        "startLine": 53,
+        "startChar": 5,
+        "endLine": 53,
+        "endChar": 15
+      },
+      "revId": "cfc222ef734eaf794ce2cbb4ee5f2884ef77b767",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab8fccbf_6b89d4b2",
+        "filename": "modules/video_coding/utility/frame_dropper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-11-08T09:38:19Z",
+      "side": 1,
+      "message": "In code search, the only subclass I can find is the MockFrameDropper, which is not used. While you are at it, would you mind removing that class and making the methods here non-virtual?",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 18
+      },
+      "revId": "cfc222ef734eaf794ce2cbb4ee5f2884ef77b767",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9e5cc68_1ac9f9a0",
+        "filename": "modules/video_coding/utility/frame_dropper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-11-08T09:38:19Z",
+      "side": 1,
+      "message": "I can\u0027t find any other reference to this. Remove?",
+      "range": {
+        "startLine": 30,
+        "startChar": 25,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "cfc222ef734eaf794ce2cbb4ee5f2884ef77b767",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
