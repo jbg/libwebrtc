@@ -104,6 +104,15 @@ class DesktopFrame {
   // DesktopFrameWithCursor.
   void MoveFrameInfoFrom(DesktopFrame* other);
 
+  // Compares this DesktopFrame with another one, returns true if the RGBA data
+  // within |rect| are identical. This function asserts |rect| is inside of both
+  // |this| and |other|.
+  bool EqualTo(const DesktopFrame& other, const DesktopRect& rect) const;
+
+  // Compares this DesktopFrame with another one, returns true if both the size
+  // of two DesktopFrames and the RGBA data within them are identical.
+  bool EqualTo(const DesktopFrame& other) const;
+
  protected:
   DesktopFrame(DesktopSize size,
                int stride,
