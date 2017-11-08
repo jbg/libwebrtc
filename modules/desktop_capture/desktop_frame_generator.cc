@@ -77,23 +77,13 @@ void PaintRect(DesktopFrame* frame, DesktopRect rect, RgbaColor rgba_color) {
   }
 }
 
-// Paints pixels in |region| of |frame| to |color|.
-void PaintRegion(DesktopFrame* frame,
-                 DesktopRegion* region,
-                 RgbaColor rgba_color) {
-  region->IntersectWith(DesktopRect::MakeSize(frame->size()));
-  for (DesktopRegion::Iterator it(*region); !it.IsAtEnd(); it.Advance()) {
-    PaintRect(frame, it.rect(), rgba_color);
-  }
-}
-
 }  // namespace
 
-DesktopFrameGenerator::DesktopFrameGenerator() {}
-DesktopFrameGenerator::~DesktopFrameGenerator() {}
+DesktopFrameGenerator::DesktopFrameGenerator() = default;
+DesktopFrameGenerator::~DesktopFrameGenerator() = default;
 
-DesktopFramePainter::DesktopFramePainter() {}
-DesktopFramePainter::~DesktopFramePainter() {}
+DesktopFramePainter::DesktopFramePainter() = default;
+DesktopFramePainter::~DesktopFramePainter() = default;
 
 PainterDesktopFrameGenerator::PainterDesktopFrameGenerator()
     : size_(1024, 768),
@@ -103,7 +93,7 @@ PainterDesktopFrameGenerator::PainterDesktopFrameGenerator()
       enlarge_range_(20),
       add_random_updated_region_(false),
       painter_(nullptr) {}
-PainterDesktopFrameGenerator::~PainterDesktopFrameGenerator() {}
+PainterDesktopFrameGenerator::~PainterDesktopFrameGenerator() = default;
 
 std::unique_ptr<DesktopFrame> PainterDesktopFrameGenerator::GetNextFrame(
     SharedMemoryFactory* factory) {
@@ -164,20 +154,51 @@ void PainterDesktopFrameGenerator::set_desktop_frame_painter(
   painter_ = painter;
 }
 
-BlackWhiteDesktopFramePainter::BlackWhiteDesktopFramePainter() {}
-BlackWhiteDesktopFramePainter::~BlackWhiteDesktopFramePainter() {}
+ColorfulDesktopFramePainter::ColorfulDesktopFramePainter() = default;
+ColorfulDesktopFramePainter::~ColorfulDesktopFramePainter() = default;
+
+DesktopRegion* ColorfulDesktopFramePainter::updated_region() {
+  return &updated_region_;
+}
+
+std::vector<RgbaColor>* ColorfulDesktopFramePainter::colors() {
+  return &colors_;
+}
+
+bool ColorfulDesktopFramePainter::Paint(DesktopFrame* frame,
+                                        DesktopRegion* updated_region) {
+  RTC_DCHECK(updated_region->is_empty());
+  memset(frame->data(), 0, frame->stride() * frame->size().height());
+
+  updated_region_.IntersectWith(DesktopRect::MakeSize(frame->size()));
+  size_t color_index = 0;
+  for (DesktopRegion::Iterator it(updated_region_);
+       !it.IsAtEnd();
+       it.Advance(), color_index++) {
+    if (color_index == colors_.size()) {
+      color_index = 0;
+    }
+    RgbaColor color = RgbaColor(0xFFFFFFFF);
+    if (color_index < colors_.size()) {
+      color = colors_[color_index];
+    }
+    PaintRect(frame, it.rect(), color);
+  }
+
+  updated_region_.Swap(updated_region);
+  return true;
+}
+
+BlackWhiteDesktopFramePainter::BlackWhiteDesktopFramePainter() = default;
+BlackWhiteDesktopFramePainter::~BlackWhiteDesktopFramePainter() = default;
 
 DesktopRegion* BlackWhiteDesktopFramePainter::updated_region() {
-  return &updated_region_;
+  return painter_.updated_region();
 }
 
 bool BlackWhiteDesktopFramePainter::Paint(DesktopFrame* frame,
                                           DesktopRegion* updated_region) {
-  RTC_DCHECK(updated_region->is_empty());
-  memset(frame->data(), 0, frame->stride() * frame->size().height());
-  PaintRegion(frame, &updated_region_, RgbaColor(0xFFFFFFFF));
-  updated_region_.Swap(updated_region);
-  return true;
+  return painter_.Paint(frame, updated_region);
 }
 
 }  // namespace webrtc
