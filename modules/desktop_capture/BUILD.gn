@@ -116,6 +116,11 @@ if (rtc_include_tests) {
       # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
       suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
     }
+    if (rtc_build_libvpx) {
+      sources += [
+        "vpx_image_unittest.cc",
+      ]
+    }
   }
 
   source_set("screen_drawer") {
@@ -346,6 +351,17 @@ rtc_static_library("desktop_capture_generic") {
 
   if (use_desktop_capture_differ_sse2) {
     deps += [ ":desktop_capture_differ_sse2" ]
+  }
+
+  public_deps = []
+
+  if (rtc_build_libvpx) {
+    sources += [
+      "vpx_image.cc",
+      "vpx_image.h",
+    ]
+
+    public_deps += [ rtc_libvpx_dir ]
   }
 }
 
