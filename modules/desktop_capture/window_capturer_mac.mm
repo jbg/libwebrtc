@@ -8,21 +8,21 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <assert.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <Cocoa/Cocoa.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include <assert.h>
 
 #include <utility>
 
 #include "modules/desktop_capture/desktop_capture_options.h"
 #include "modules/desktop_capture/desktop_capturer.h"
 #include "modules/desktop_capture/desktop_frame.h"
-#include "modules/desktop_capture/window_finder_mac.h"
 #include "modules/desktop_capture/mac/desktop_configuration.h"
 #include "modules/desktop_capture/mac/desktop_configuration_monitor.h"
 #include "modules/desktop_capture/mac/full_screen_chrome_window_detector.h"
 #include "modules/desktop_capture/mac/window_list_utils.h"
+#include "modules/desktop_capture/window_finder_mac.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/macutils.h"
@@ -36,8 +36,7 @@ namespace {
 bool IsWindowValid(CGWindowID id) {
   CFArrayRef window_id_array =
       CFArrayCreate(nullptr, reinterpret_cast<const void**>(&id), 1, nullptr);
-  CFArrayRef window_array =
-      CGWindowListCreateDescriptionFromArray(window_id_array);
+  CFArrayRef window_array = CGWindowListCreateDescriptionFromArray(window_id_array);
   bool valid = window_array && CFArrayGetCount(window_array);
   CFRelease(window_id_array);
   CFRelease(window_array);
@@ -47,10 +46,9 @@ bool IsWindowValid(CGWindowID id) {
 
 class WindowCapturerMac : public DesktopCapturer {
  public:
-  explicit WindowCapturerMac(rtc::scoped_refptr<FullScreenChromeWindowDetector>
-                                 full_screen_chrome_window_detector,
-                             rtc::scoped_refptr<DesktopConfigurationMonitor>
-                                 configuration_monitor);
+  explicit WindowCapturerMac(
+      rtc::scoped_refptr<FullScreenChromeWindowDetector> full_screen_chrome_window_detector,
+      rtc::scoped_refptr<DesktopConfigurationMonitor> configuration_monitor);
   ~WindowCapturerMac() override;
 
   // DesktopCapturer interface.
@@ -67,8 +65,7 @@ class WindowCapturerMac : public DesktopCapturer {
   // The window being captured.
   CGWindowID window_id_ = 0;
 
-  const rtc::scoped_refptr<FullScreenChromeWindowDetector>
-      full_screen_chrome_window_detector_;
+  const rtc::scoped_refptr<FullScreenChromeWindowDetector> full_screen_chrome_window_detector_;
 
   const rtc::scoped_refptr<DesktopConfigurationMonitor> configuration_monitor_;
 
@@ -78,11 +75,9 @@ class WindowCapturerMac : public DesktopCapturer {
 };
 
 WindowCapturerMac::WindowCapturerMac(
-    rtc::scoped_refptr<FullScreenChromeWindowDetector>
-        full_screen_chrome_window_detector,
+    rtc::scoped_refptr<FullScreenChromeWindowDetector> full_screen_chrome_window_detector,
     rtc::scoped_refptr<DesktopConfigurationMonitor> configuration_monitor)
-    : full_screen_chrome_window_detector_(
-          std::move(full_screen_chrome_window_detector)),
+    : full_screen_chrome_window_detector_(std::move(full_screen_chrome_window_detector)),
       configuration_monitor_(std::move(configuration_monitor)),
       window_finder_(configuration_monitor_) {}
 
@@ -93,23 +88,20 @@ bool WindowCapturerMac::GetSourceList(SourceList* sources) {
 }
 
 bool WindowCapturerMac::SelectSource(SourceId id) {
-  if (!IsWindowValid(id))
-    return false;
+  if (!IsWindowValid(id)) return false;
   window_id_ = id;
   return true;
 }
 
 bool WindowCapturerMac::FocusOnSelectedSource() {
-  if (!window_id_)
-    return false;
+  if (!window_id_) return false;
 
   CGWindowID ids[1];
   ids[0] = window_id_;
   CFArrayRef window_id_array =
       CFArrayCreate(nullptr, reinterpret_cast<const void**>(&ids), 1, nullptr);
 
-  CFArrayRef window_array =
-      CGWindowListCreateDescriptionFromArray(window_id_array);
+  CFArrayRef window_array = CGWindowListCreateDescriptionFromArray(window_id_array);
   if (!window_array || 0 == CFArrayGetCount(window_array)) {
     // Could not find the window. It might have been closed.
     LOG(LS_INFO) << "Window not found";
@@ -117,19 +109,18 @@ bool WindowCapturerMac::FocusOnSelectedSource() {
     return false;
   }
 
-  CFDictionaryRef window = reinterpret_cast<CFDictionaryRef>(
-      CFArrayGetValueAtIndex(window_array, 0));
-  CFNumberRef pid_ref = reinterpret_cast<CFNumberRef>(
-      CFDictionaryGetValue(window, kCGWindowOwnerPID));
+  CFDictionaryRef window =
+      reinterpret_cast<CFDictionaryRef>(CFArrayGetValueAtIndex(window_array, 0));
+  CFNumberRef pid_ref =
+      reinterpret_cast<CFNumberRef>(CFDictionaryGetValue(window, kCGWindowOwnerPID));
 
   int pid;
   CFNumberGetValue(pid_ref, kCFNumberIntType, &pid);
 
   // TODO(jiayl): this will bring the process main window to the front. We
   // should find a way to bring only the window to the front.
-  bool result =
-      [[NSRunningApplication runningApplicationWithProcessIdentifier: pid]
-          activateWithOptions: NSApplicationActivateIgnoringOtherApps];
+  bool result = [[NSRunningApplication runningApplicationWithProcessIdentifier:pid]
+      activateWithOptions:NSApplicationActivateIgnoringOtherApps];
 
   CFRelease(window_id_array);
   CFRelease(window_array);
@@ -165,13 +156,13 @@ void WindowCapturerMac::CaptureFrame() {
     CGWindowID full_screen_window =
         full_screen_chrome_window_detector_->FindFullScreenWindow(window_id_);
 
-    if (full_screen_window != kCGNullWindowID)
-      on_screen_window = full_screen_window;
+    if (full_screen_window != kCGNullWindowID) on_screen_window = full_screen_window;
   }
 
-  CGImageRef window_image = CGWindowListCreateImage(
-      CGRectNull, kCGWindowListOptionIncludingWindow,
-      on_screen_window, kCGWindowImageBoundsIgnoreFraming);
+  CGImageRef window_image = CGWindowListCreateImage(CGRectNull,
+                                                    kCGWindowListOptionIncludingWindow,
+                                                    on_screen_window,
+                                                    kCGWindowImageBoundsIgnoreFraming);
 
   if (!window_image) {
     callback_->OnCaptureResult(Result::ERROR_TEMPORARY, nullptr);
@@ -190,21 +181,20 @@ void WindowCapturerMac::CaptureFrame() {
   int height = CGImageGetHeight(window_image);
   CGDataProviderRef provider = CGImageGetDataProvider(window_image);
   CFDataRef cf_data = CGDataProviderCopyData(provider);
-  std::unique_ptr<DesktopFrame> frame(
-      new BasicDesktopFrame(DesktopSize(width, height)));
+  std::unique_ptr<DesktopFrame> frame(new BasicDesktopFrame(DesktopSize(width, height)));
 
   int src_stride = CGImageGetBytesPerRow(window_image);
   const uint8_t* src_data = CFDataGetBytePtr(cf_data);
   for (int y = 0; y < height; ++y) {
-    memcpy(frame->data() + frame->stride() * y, src_data + src_stride * y,
+    memcpy(frame->data() + frame->stride() * y,
+           src_data + src_stride * y,
            DesktopFrame::kBytesPerPixel * width);
   }
 
   CFRelease(cf_data);
   CFRelease(window_image);
 
-  frame->mutable_updated_region()->SetRect(
-      DesktopRect::MakeSize(frame->size()));
+  frame->mutable_updated_region()->SetRect(DesktopRect::MakeSize(frame->size()));
   DesktopVector top_left;
   if (configuration_monitor_) {
     configuration_monitor_->Lock();
@@ -228,9 +218,8 @@ void WindowCapturerMac::CaptureFrame() {
 // static
 std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateRawWindowCapturer(
     const DesktopCaptureOptions& options) {
-  return std::unique_ptr<DesktopCapturer>(
-      new WindowCapturerMac(options.full_screen_chrome_window_detector(),
-                            options.configuration_monitor()));
+  return std::unique_ptr<DesktopCapturer>(new WindowCapturerMac(
+      options.full_screen_chrome_window_detector(), options.configuration_monitor()));
 }
 
 }  // namespace webrtc
