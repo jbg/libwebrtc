@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7038e3ca_2dbb8125",
+        "filename": "rtc_base/weak_ptr_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-09T18:25:44Z",
+      "side": 0,
+      "message": "weak ptr initiated here",
+      "range": {
+        "startLine": 229,
+        "startChar": 46,
+        "endLine": 229,
+        "endChar": 0
+      },
+      "revId": "7501b1c3d11097cba92e72c89b0267a617eec4de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9e0c45d_f6aaac62",
+        "filename": "rtc_base/weak_ptr_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-09T18:25:44Z",
+      "side": 0,
+      "message": "and used here - same thread.",
+      "range": {
+        "startLine": 230,
+        "startChar": 42,
+        "endLine": 230,
+        "endChar": 0
+      },
+      "revId": "7501b1c3d11097cba92e72c89b0267a617eec4de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
