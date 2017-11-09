@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f07001fa_587d5895",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-09T09:14:34Z",
+      "side": 1,
+      "message": "So\n\n  for m in ...; do\n    for d in media_file video_capture audio_device; do\n      cd modules/$d\n      git grep -l $m | grep -E \"\\.(cc|h|m|mm)$\" | xargs sed -i \"1 s/$/ /\"\n      cd ../..\n    done\n  done\n  git cl format --full\n\n?",
+      "revId": "d74c953f93128c2e572d00a1c51338bd4bc94487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
