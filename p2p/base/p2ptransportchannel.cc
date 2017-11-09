@@ -18,6 +18,7 @@
 #include "api/umametrics.h"
 #include "p2p/base/candidatepairinterface.h"
 #include "p2p/base/common.h"
+#include "p2p/base/p2phelper.h"
 #include "p2p/base/relayport.h"  // For RELAY_PORT_TYPE.
 #include "p2p/base/stunport.h"   // For STUN_PORT_TYPE.
 #include "rtc_base/checks.h"
@@ -1077,6 +1078,10 @@ bool P2PTransportChannel::GetStats(ConnectionInfos *infos) {
   return true;
 }
 
+rtc::Optional<rtc::NetworkRoute> P2PTransportChannel::network_route() const {
+  return network_route_;
+}
+
 rtc::DiffServCodePoint P2PTransportChannel::DefaultDscpValue() const {
   OptionMap::const_iterator it = options_.find(rtc::Socket::OPT_DSCP);
   if (it == options_.end()) {
@@ -1462,6 +1467,7 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
   // destroyed, so don't use it.
   Connection* old_selected_connection = selected_connection_;
   selected_connection_ = conn;
+  network_route_.reset();
   if (selected_connection_) {
     ++nomination_;
     if (old_selected_connection) {
@@ -1480,12 +1486,21 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
         PresumedWritable(selected_connection_)) {
       SignalReadyToSend(this);
     }
+
+    network_route_.emplace(rtc::NetworkRoute());
+    network_route_->connected = ReadyToSend(selected_connection_);
+    network_route_->local_network_id =
+        selected_connection_->local_candidate().network_id();
+    network_route_->remote_network_id =
+        selected_connection_->remote_candidate().network_id();
+    network_route_->last_sent_packet_id = last_sent_packet_id_;
+    network_route_->packet_overhead =
+        GetOverhead(selected_connection_->local_candidate());
   } else {
     LOG_J(LS_INFO, this) << "No selected connection";
   }
-  SignalSelectedCandidatePairChanged(this, selected_connection_,
-                                     last_sent_packet_id_,
-                                     ReadyToSend(selected_connection_));
+
+  SignalNetworkRouteChanged(transport_name(), network_route_);
 }
 
 // Warning: UpdateState should eventually be called whenever a connection
@@ -2161,6 +2176,14 @@ int P2PTransportChannel::SampleRegatherAllNetworksInterval() {
   auto interval = config_.regather_all_networks_interval_range;
   RTC_DCHECK(interval);
   return rand_.Rand(interval->min(), interval->max());
+}
+
+int P2PTransportChannel::GetOverhead(const Candidate& candidate) const {
+  if (!selected_connection_)
+    return 0;
+
+  return GetIpOverhead(candidate.address().family()) +
+         GetProtocolOverhead(candidate.protocol());
 }
 
 }  // namespace cricket
