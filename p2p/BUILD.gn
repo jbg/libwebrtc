@@ -38,6 +38,8 @@ rtc_static_library("rtc_p2p") {
     "base/jseptransport.h",
     "base/p2pconstants.cc",
     "base/p2pconstants.h",
+    "base/p2phelper.cc",
+    "base/p2phelper.h",
     "base/p2ptransportchannel.cc",
     "base/p2ptransportchannel.h",
     "base/packetlossestimator.cc",

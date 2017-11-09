@@ -26,7 +26,7 @@ void IceTransportInternal::SetRemoteIceCredentials(const std::string& ice_ufrag,
   SetRemoteIceParameters(IceParameters(ice_ufrag, ice_pwd, false));
 }
 
-std::string IceTransportInternal::debug_name() const {
+std::string IceTransportInternal::transport_id() const {
   return transport_name() + " " + rtc::ToString(component());
 }
 
