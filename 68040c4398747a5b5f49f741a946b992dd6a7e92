@@ -22,6 +22,30 @@
       "revId": "68040c4398747a5b5f49f741a946b992dd6a7e92",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce562fa4_eed508ba",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-09T07:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a74235cb_d1adb9ec",
+      "range": {
+        "startLine": 273,
+        "startChar": 32,
+        "endLine": 273,
+        "endChar": 36
+      },
+      "revId": "68040c4398747a5b5f49f741a946b992dd6a7e92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
