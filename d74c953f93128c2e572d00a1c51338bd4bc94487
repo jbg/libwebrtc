@@ -16,6 +16,24 @@
       "revId": "d74c953f93128c2e572d00a1c51338bd4bc94487",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d13a207_cb422508",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-09T09:32:15Z",
+      "side": 1,
+      "message": "Yeah, just laziness. :-)\n\nI will update the commit message so it will be less verbose.",
+      "parentUuid": "f07001fa_587d5895",
+      "revId": "d74c953f93128c2e572d00a1c51338bd4bc94487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
