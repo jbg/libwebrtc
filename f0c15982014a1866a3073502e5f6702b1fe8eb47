@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2499fc69_9bb8cbc7",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcc85065_df30ac38",
+      "range": {
+        "startLine": 1468,
+        "startChar": 41,
+        "endLine": 1468,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "854c8240_326f9a04",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 15
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ff532be6_ac76bb71",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2148,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "854c8240_326f9a04",
+      "range": {
+        "startLine": 2148,
+        "startChar": 49,
+        "endLine": 2148,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cb9ed0c_0ab645cc",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 15
@@ -62,6 +110,24 @@
       "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88054e97_b71cebeb",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2149,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cb9ed0c_0ab645cc",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "c01e3b98_b5a5198d",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe5e4727_b28b44e2",
+      "range": {
+        "startLine": 2160,
+        "startChar": 51,
+        "endLine": 2160,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55de1667_624244e9",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 15
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "ee9048b7_71a2750e",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55de1667_624244e9",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b034dc95_15081d04",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 15
@@ -119,6 +227,24 @@
       "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62dda77b_2d8b16bd",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b034dc95_15081d04",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "05229e2e_9b25eb22",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d11bfbb_1e4b6d97",
+      "range": {
+        "startLine": 705,
+        "startChar": 54,
+        "endLine": 705,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d96f7de9_e49ca1f9",
         "filename": "p2p/base/packettransportinternal.h",
         "patchSetId": 15
@@ -156,6 +306,30 @@
       "writtenOn": "2017-11-05T06:05:50Z",
       "side": 1,
       "message": "It\u0027s the same as the debug_name, so if there\u0027s a real use for it, then we should get rid of debug_name().",
+      "range": {
+        "startLine": 37,
+        "startChar": 45,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "023f58fb_65faca38",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "For Ice/DtlsTransport, debug_name \u003d transport_name + component. \nFor UdpTransport, debug_name \u003d transport_name.",
+      "parentUuid": "d96f7de9_e49ca1f9",
       "range": {
         "startLine": 37,
         "startChar": 45,
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "5ffa4454_1b83ac6b",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "When the network route changes, the RtpTransport needs to know which p2p layer transport changes using transport_name().\n\nI realized that maybe we should use debug_name instead because it would be different in RTP and RTCP. The OnNetworkRouteChange method (https://cs.chromium.org/chromium/src/third_party/webrtc/media/base/mediachannel.h?type\u003dcs\u0026l\u003d415) in MediaChannel only takes the |transport_name| and RTP/RTCP transports use the same name, so it would be a problem when not using RTCP-muxing.\n\nMaybe we can rename the \"debug_name\" to \"transport_id\"?\n\nAnother option would be populating the |component| through signal as well but in that way, we still need to create an unique string for RTP and RTCP transports.",
+      "parentUuid": "d523c796_55e4e20a",
+      "range": {
+        "startLine": 39,
+        "startChar": 56,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82a324a3_984d3316",
         "filename": "p2p/base/udptransport.cc",
         "patchSetId": 15
@@ -211,6 +409,30 @@
       "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a76f095_da9b1ff7",
+        "filename": "p2p/base/udptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82a324a3_984d3316",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -237,6 +459,30 @@
     },
     {
       "key": {
+        "uuid": "ed5e7e03_21e76c3f",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fc67ef2_fac7edc0",
+      "range": {
+        "startLine": 599,
+        "startChar": 52,
+        "endLine": 599,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3af5539_c5c2b913",
         "filename": "pc/channel.cc",
         "patchSetId": 15
@@ -257,6 +503,30 @@
       "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80b24b69_26333c50",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "I had a separate CL for that (https://webrtc-review.googlesource.com/c/src/+/15200)",
+      "parentUuid": "f3af5539_c5c2b913",
+      "range": {
+        "startLine": 609,
+        "startChar": 27,
+        "endLine": 609,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -300,6 +570,48 @@
     },
     {
       "key": {
+        "uuid": "dabda13f_0a2f557d",
+        "filename": "pc/rtptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "The BaseChannel needs to know which transport changed and tell the mediachannel to update the network_route so we may want the transport id (transport_name + component)",
+      "parentUuid": "5db7bf60_52c68d5f",
+      "range": {
+        "startLine": 37,
+        "startChar": 51,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7240b14_658c64a1",
+        "filename": "pc/rtptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6493959b_fed58123",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac3e3cdb_7a1fdcd6",
         "filename": "pc/srtptransport.cc",
         "patchSetId": 15
@@ -314,6 +626,24 @@
       "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42b11ee8_d8de7901",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3e3cdb_7a1fdcd6",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -340,6 +670,30 @@
     },
     {
       "key": {
+        "uuid": "a395ca9f_a3c6c16a",
+        "filename": "pc/srtptransport.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "2afd8aa2_d0b7cf21",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 72
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b262554_98fef437",
         "filename": "rtc_base/networkroute.h",
         "patchSetId": 15
@@ -354,6 +708,24 @@
       "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e261f1c6_f8c6de78",
+        "filename": "rtc_base/networkroute.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-09T18:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b262554_98fef437",
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
