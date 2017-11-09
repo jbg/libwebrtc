@@ -18,7 +18,7 @@
 #include "rtc_base/logsinks.h"
 
 NSString *const kDefaultLogDirName = @"webrtc_logs";
-NSUInteger const kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
+NSUInteger const kDefaultMaxFileSize = 10 * 1024 * 1024;  // 10MB.
 const char *kRTCFileLoggerRotatingLogPrefix = "rotating_log";
 
 @implementation RTCFileLogger {
@@ -33,20 +33,14 @@ const char *kRTCFileLoggerRotatingLogPrefix = "rotating_log";
 @synthesize shouldDisableBuffering = _shouldDisableBuffering;
 
 - (instancetype)init {
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(
-      NSDocumentDirectory, NSUserDomainMask, YES);
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentsDirPath = [paths firstObject];
-  NSString *defaultDirPath =
-      [documentsDirPath stringByAppendingPathComponent:kDefaultLogDirName];
-  return [self initWithDirPath:defaultDirPath
-                   maxFileSize:kDefaultMaxFileSize];
+  NSString *defaultDirPath = [documentsDirPath stringByAppendingPathComponent:kDefaultLogDirName];
+  return [self initWithDirPath:defaultDirPath maxFileSize:kDefaultMaxFileSize];
 }
 
-- (instancetype)initWithDirPath:(NSString *)dirPath
-                    maxFileSize:(NSUInteger)maxFileSize {
-  return [self initWithDirPath:dirPath
-                   maxFileSize:maxFileSize
-                  rotationType:RTCFileLoggerTypeCall];
+- (instancetype)initWithDirPath:(NSString *)dirPath maxFileSize:(NSUInteger)maxFileSize {
+  return [self initWithDirPath:dirPath maxFileSize:maxFileSize rotationType:RTCFileLoggerTypeCall];
 }
 
 - (instancetype)initWithDirPath:(NSString *)dirPath
@@ -88,21 +82,15 @@ const char *kRTCFileLoggerRotatingLogPrefix = "rotating_log";
   }
   switch (_rotationType) {
     case RTCFileLoggerTypeApp:
-      _logSink.reset(
-          new rtc::FileRotatingLogSink(_dirPath.UTF8String,
-                                       kRTCFileLoggerRotatingLogPrefix,
-                                       _maxFileSize,
-                                       _maxFileSize / 10));
+      _logSink.reset(new rtc::FileRotatingLogSink(
+          _dirPath.UTF8String, kRTCFileLoggerRotatingLogPrefix, _maxFileSize, _maxFileSize / 10));
       break;
     case RTCFileLoggerTypeCall:
-      _logSink.reset(
-          new rtc::CallSessionFileRotatingLogSink(_dirPath.UTF8String,
-                                                  _maxFileSize));
+      _logSink.reset(new rtc::CallSessionFileRotatingLogSink(_dirPath.UTF8String, _maxFileSize));
       break;
   }
   if (!_logSink->Init()) {
-    LOG(LS_ERROR) << "Failed to open log files at path: "
-                  << _dirPath.UTF8String;
+    LOG(LS_ERROR) << "Failed to open log files at path: " << _dirPath.UTF8String;
     _logSink.reset();
     return;
   }
@@ -129,13 +117,12 @@ const char *kRTCFileLoggerRotatingLogPrefix = "rotating_log";
   if (_hasStarted) {
     return nil;
   }
-  NSMutableData* logData = [NSMutableData data];
+  NSMutableData *logData = [NSMutableData data];
   std::unique_ptr<rtc::FileRotatingStream> stream;
-  switch(_rotationType) {
+  switch (_rotationType) {
     case RTCFileLoggerTypeApp:
       stream.reset(
-          new rtc::FileRotatingStream(_dirPath.UTF8String,
-                                      kRTCFileLoggerRotatingLogPrefix));
+          new rtc::FileRotatingStream(_dirPath.UTF8String, kRTCFileLoggerRotatingLogPrefix));
       break;
     case RTCFileLoggerTypeCall:
       stream.reset(new rtc::CallSessionFileRotatingStream(_dirPath.UTF8String));
@@ -151,10 +138,9 @@ const char *kRTCFileLoggerRotatingLogPrefix = "rotating_log";
   size_t read = 0;
   // Allocate memory using malloc so we can pass it direcly to NSData without
   // copying.
-  std::unique_ptr<uint8_t[]> buffer(static_cast<uint8_t*>(malloc(bufferSize)));
+  std::unique_ptr<uint8_t[]> buffer(static_cast<uint8_t *>(malloc(bufferSize)));
   stream->ReadAll(buffer.get(), bufferSize, &read, nullptr);
-  logData = [[NSMutableData alloc] initWithBytesNoCopy:buffer.release()
-                                                length:read];
+  logData = [[NSMutableData alloc] initWithBytesNoCopy:buffer.release() length:read];
   return logData;
 }
 
