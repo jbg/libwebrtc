@@ -1518,9 +1518,6 @@ void PeerConnection::SetRemoteDescription(
     return;
   }
 
-  // Takes the ownership of |desc| regardless of the result.
-  std::unique_ptr<SessionDescriptionInterface> desc_temp(desc);
-
   if (IsClosed()) {
     std::string error = "Failed to set remote " + desc->type() +
                         " sdp: Called in wrong state: STATE_CLOSED";
@@ -1533,10 +1530,14 @@ void PeerConnection::SetRemoteDescription(
   // streams that might be removed by updating the session description.
   stats_->UpdateStats(kStatsOutputLevelStandard);
   std::string error;
-  if (!SetRemoteDescription(std::move(desc_temp), &error)) {
+  // Takes the ownership of |desc| regardless of the result. On success,
+  // |remote_description()| is updated to reflect the |desc| that was passed in.
+  if (!SetRemoteDescription(std::unique_ptr<SessionDescriptionInterface>(desc),
+                            &error)) {
     PostSetSessionDescriptionFailure(observer, error);
     return;
   }
+  RTC_DCHECK_EQ(remote_description(), desc);
 
   // If setting the description decided our SSL role, allocate any necessary
   // SCTP sids.
@@ -1545,19 +1546,20 @@ void PeerConnection::SetRemoteDescription(
     AllocateSctpSids(role);
   }
 
-  const cricket::SessionDescription* remote_desc = desc->description();
-  const cricket::ContentInfo* audio_content = GetFirstAudioContent(remote_desc);
-  const cricket::ContentInfo* video_content = GetFirstVideoContent(remote_desc);
+  const cricket::ContentInfo* audio_content =
+      GetFirstAudioContent(remote_description()->description());
+  const cricket::ContentInfo* video_content =
+      GetFirstVideoContent(remote_description()->description());
   const cricket::AudioContentDescription* audio_desc =
-      GetFirstAudioContentDescription(remote_desc);
+      GetFirstAudioContentDescription(remote_description()->description());
   const cricket::VideoContentDescription* video_desc =
-      GetFirstVideoContentDescription(remote_desc);
+      GetFirstVideoContentDescription(remote_description()->description());
   const cricket::DataContentDescription* data_desc =
-      GetFirstDataContentDescription(remote_desc);
+      GetFirstDataContentDescription(remote_description()->description());
 
   // Check if the descriptions include streams, just in case the peer supports
   // MSID, but doesn't indicate so with "a=msid-semantic".
-  if (remote_desc->msid_supported() ||
+  if (remote_description()->description()->msid_supported() ||
       (audio_desc && !audio_desc->streams().empty()) ||
       (video_desc && !video_desc->streams().empty())) {
     remote_peer_supports_msid_ = true;
@@ -1626,7 +1628,7 @@ void PeerConnection::SetRemoteDescription(
   signaling_thread()->Post(RTC_FROM_HERE, this,
                            MSG_SET_SESSIONDESCRIPTION_SUCCESS, msg);
 
-  if (desc->type() == SessionDescriptionInterface::kAnswer) {
+  if (remote_description()->type() == SessionDescriptionInterface::kAnswer) {
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
     network_thread()->Invoke<void>(
