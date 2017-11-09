@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdcd0334_05a9a4fd",
+        "filename": "rtc_base/memory_usage.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-09T08:23:51Z",
+      "side": 1,
+      "message": "In this case we cannot use clang-format.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 18
+      },
+      "revId": "729bce4048b5b588846484046d1204e1f70b09eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2145e37f_fe55cb78",
+        "filename": "sdk/android/src/jni/androidmediaencoder_jni.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-09T08:23:51Z",
+      "side": 1,
+      "message": "This is a bad indentation. TODO: fix manually.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 4
+      },
+      "revId": "729bce4048b5b588846484046d1204e1f70b09eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
