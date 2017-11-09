@@ -22,6 +22,30 @@
       "revId": "b469ea8288e0b6a9a94bcf1d9cb5e9586e3a4ac7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dafe0d6_1037c628",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-09T10:42:39Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t realize desc lived on as remote_description() for the duration of the function. There is nothing wrong with the existing code if the helper function guarantees this on success.\n\nThe problem I faced in the follow-up was that having changed desc from a raw pointer to an std::unique_ptr, it was no longer safe to use if after it was moved (due to internal pointer being reset). I saw that the code was using desc after its ownership was passed to the helper function and thought the bug was using a deleted object, but the bug was using a reset pointer. In the existing code the raw pointer was never reset even though ownership was passed, and so using it was fine - though it is relying on an assumption about the object not being deleted despite ownership being passed.\n\nThe safest thing to do is not rely on a raw pointer after ownership is passed, so using remote_description() as suggested I think is the right approach, even though it is not necessary to do until my follow-up CL changes desc to an std::unique_ptr.\n\nI updated the code to use remote_description() after ownership is passed. Up to you if we want to land this or do it in the follow-up when it is necessary.",
+      "parentUuid": "1dd99256_2367c963",
+      "range": {
+        "startLine": 1523,
+        "startChar": 0,
+        "endLine": 1525,
+        "endChar": 35
+      },
+      "revId": "b469ea8288e0b6a9a94bcf1d9cb5e9586e3a4ac7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
