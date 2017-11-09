@@ -13,6 +13,7 @@
 #include <string>
 #include <utility>  // For std::move.
 
+#include "p2p/base/p2phelper.h"
 #include "rtc_base/asyncpacketsocket.h"
 #include "rtc_base/asyncudpsocket.h"
 #include "rtc_base/logging.h"
@@ -63,7 +64,7 @@ rtc::SocketAddress UdpTransport::GetRemoteAddress() const {
   return remote_address_;
 }
 
-std::string UdpTransport::debug_name() const {
+std::string UdpTransport::transport_id() const {
   return transport_name_;
 }
 
@@ -95,6 +96,12 @@ int UdpTransport::SendPacket(const char* data,
   return result;
 }
 
+rtc::Optional<rtc::NetworkRoute> UdpTransport::network_route() const {
+  rtc::NetworkRoute network_route;
+  network_route.packet_overhead = GetTransportOverhead();
+  return rtc::Optional<rtc::NetworkRoute>(network_route);
+}
+
 int UdpTransport::SetOption(rtc::Socket::Option opt, int value) {
   return 0;
 }
@@ -120,6 +127,11 @@ void UdpTransport::OnSocketSentPacket(rtc::AsyncPacketSocket* socket,
                                       const rtc::SentPacket& packet) {
   RTC_DCHECK_EQ(socket_.get(), socket);
   SignalSentPacket(this, packet);
+}
+
+int UdpTransport::GetTransportOverhead() const {
+  constexpr int kUdpOverhead = 8;
+  return kUdpOverhead + GetIpOverhead(GetLocalAddress().family());
 }
 
 }  // namespace cricket

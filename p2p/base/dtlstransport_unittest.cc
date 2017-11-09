@@ -359,7 +359,7 @@ class DtlsTestClient : public sigslot::has_slots<> {
   // Transport channel callbacks
   void OnTransportChannelWritableState(
       rtc::PacketTransportInternal* transport) {
-    LOG(LS_INFO) << name_ << ": Channel '" << transport->debug_name()
+    LOG(LS_INFO) << name_ << ": Channel '" << transport->transport_id()
                  << "' is writable";
   }
 

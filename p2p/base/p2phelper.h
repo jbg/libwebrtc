@@ -7,17 +7,19 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#ifndef P2P_BASE_P2PHELPER_H_
+#define P2P_BASE_P2PHELPER_H_
 
-#include "p2p/base/dtlstransportinternal.h"
+#include <cstdlib>
+#include <string>
 
+// This head contains helper methods used in different types of transports.
 namespace cricket {
 
-DtlsTransportInternal::DtlsTransportInternal() = default;
+int GetIpOverhead(int addr_family);
 
-DtlsTransportInternal::~DtlsTransportInternal() = default;
-
-std::string DtlsTransportInternal::transport_id() const {
-  return transport_name() + " " + rtc::ToString(component());
-}
+int GetProtocolOverhead(const std::string& protocol);
 
 }  // namespace cricket
+
+#endif  // P2P_BASE_P2PHELPER_H_

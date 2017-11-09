@@ -56,6 +56,10 @@ class IceTransportInternal : public rtc::PacketTransportInternal {
 
   virtual int component() const = 0;
 
+  // The identification of this transport. The IDs of RTP and RTCP transports
+  // are different.
+  std::string transport_id() const override;
+
   virtual IceRole GetIceRole() const = 0;
 
   virtual void SetIceRole(IceRole role) = 0;
@@ -111,20 +115,13 @@ class IceTransportInternal : public rtc::PacketTransportInternal {
   sigslot::signal2<IceTransportInternal*, const Candidates&>
       SignalCandidatesRemoved;
 
-  // Deprecated by SignalSelectedCandidatePairChanged
+  // Deprecated by PacketTransportInternal::SignalNetworkRouteChanged.
   // This signal occurs when there is a change in the way that packets are
   // being routed, i.e. to a different remote location. The candidate
   // indicates where and how we are currently sending media.
+  // TODO(zhihuang): Update the Chrome remoting to use the new
+  // SignalNetworkRouteChanged.
   sigslot::signal2<IceTransportInternal*, const Candidate&> SignalRouteChange;
-
-  // Signalled when the current selected candidate pair has changed.
-  // The first parameter is the transport that signals the event.
-  // The second parameter is the new selected candidate pair. The third
-  // parameter is the last packet id sent on the previous candidate pair.
-  // The fourth parameter is a boolean which is true if the Transport
-  // is ready to send with this candidate pair.
-  sigslot::signal4<IceTransportInternal*, CandidatePairInterface*, int, bool>
-      SignalSelectedCandidatePairChanged;
 
   // Invoked when there is conflict in the ICE role between local and remote
   // agents.
@@ -135,9 +132,6 @@ class IceTransportInternal : public rtc::PacketTransportInternal {
 
   // Invoked when the transport is being destroyed.
   sigslot::signal1<IceTransportInternal*> SignalDestroyed;
-
-  // Debugging description of this transport.
-  std::string debug_name() const override;
 };
 
 }  // namespace cricket
