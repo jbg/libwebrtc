@@ -14,15 +14,14 @@
 #include <string>
 #include <vector>
 
+#include "api/optional.h"
 // This is included for PacketOptions.
 #include "api/ortc/packettransportinterface.h"
+#include "p2p/base/port.h"
 #include "rtc_base/asyncpacketsocket.h"
+#include "rtc_base/networkroute.h"
 #include "rtc_base/sigslot.h"
 #include "rtc_base/socket.h"
-
-namespace cricket {
-class TransportChannel;
-}
 
 namespace rtc {
 struct PacketOptions;
@@ -32,8 +31,10 @@ struct SentPacket;
 class PacketTransportInternal : public virtual webrtc::PacketTransportInterface,
                                 public sigslot::has_slots<> {
  public:
-  // Identify the object for logging and debug purpose.
-  virtual std::string debug_name() const = 0;
+  // The ID this transport. When RTCP-muxing is not enabled, the RTP transport
+  // and RTCP transport can have the same transport name and |transport_id()|
+  // can be used to identify the transport.
+  virtual std::string transport_id() const = 0;
 
   // The transport has been established.
   virtual bool writable() const = 0;
@@ -66,6 +67,9 @@ class PacketTransportInternal : public virtual webrtc::PacketTransportInterface,
   // Returns the most recent error that occurred on this channel.
   virtual int GetError() = 0;
 
+  // Returns the current network route with transport overhead.
+  virtual rtc::Optional<NetworkRoute> network_route() const = 0;
+
   // Emitted when the writable state, represented by |writable()|, changes.
   sigslot::signal1<PacketTransportInternal*> SignalWritableState;
 
@@ -90,6 +94,10 @@ class PacketTransportInternal : public virtual webrtc::PacketTransportInterface,
   // Signalled each time a packet is sent on this channel.
   sigslot::signal2<PacketTransportInternal*, const rtc::SentPacket&>
       SignalSentPacket;
+
+  // Signalled when the current network route has changed.
+  sigslot::signal2<const std::string&, rtc::Optional<rtc::NetworkRoute>>
+      SignalNetworkRouteChanged;
 
  protected:
   PacketTransportInternal();

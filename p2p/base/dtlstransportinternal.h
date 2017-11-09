@@ -47,6 +47,10 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
 
   virtual int component() const = 0;
 
+  // Use the combination of |transport_name()| and |component()| as the ID of
+  // this transport.
+  std::string transport_id() const override;
+
   virtual bool IsDtlsActive() const = 0;
 
   virtual bool GetSslRole(rtc::SSLRole* role) const = 0;
@@ -92,9 +96,6 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
 
   // Emitted whenever the Dtls handshake failed on some transport channel.
   sigslot::signal1<rtc::SSLHandshakeError> SignalDtlsHandshakeError;
-
-  // Debugging description of this transport.
-  std::string debug_name() const override;
 
  protected:
   DtlsTransportInternal();
