@@ -33,20 +33,6 @@ bool CalculateFrequency(int64_t ntp_ms1,
   return true;
 }
 
-// Detects if there has been a wraparound between |old_timestamp| and
-// |new_timestamp|, and compensates by adding 2^32 if that is the case.
-bool CompensateForWrapAround(uint32_t new_timestamp,
-                             uint32_t old_timestamp,
-                             int64_t* compensated_timestamp) {
-  int64_t wraps = CheckForWrapArounds(new_timestamp, old_timestamp);
-  if (wraps < 0) {
-    // Reordering, don't use this packet.
-    return false;
-  }
-  *compensated_timestamp = new_timestamp + (wraps << 32);
-  return true;
-}
-
 bool Contains(const std::list<RtpToNtpEstimator::RtcpMeasurement>& measurements,
               const RtpToNtpEstimator::RtcpMeasurement& other) {
   for (const auto& measurement : measurements) {
@@ -57,30 +43,34 @@ bool Contains(const std::list<RtpToNtpEstimator::RtcpMeasurement>& measurements,
 }
 }  // namespace
 
+
 RtpToNtpEstimator::RtcpMeasurement::RtcpMeasurement(uint32_t ntp_secs,
                                                     uint32_t ntp_frac,
-                                                    uint32_t timestamp)
-    : ntp_time(ntp_secs, ntp_frac), rtp_timestamp(timestamp) {}
+                                                    int64_t unwrapped_timestamp)
+    : ntp_time(ntp_secs, ntp_frac),
+      unwrapped_rtp_timestamp(unwrapped_timestamp) {}
 
 bool RtpToNtpEstimator::RtcpMeasurement::IsEqual(
     const RtcpMeasurement& other) const {
   // Use || since two equal timestamps will result in zero frequency and in
   // RtpToNtpMs, |rtp_timestamp_ms| is estimated by dividing by the frequency.
-  return (ntp_time == other.ntp_time) || (rtp_timestamp == other.rtp_timestamp);
+  return (ntp_time == other.ntp_time) ||
+         (unwrapped_rtp_timestamp == other.unwrapped_rtp_timestamp);
 }
 
 // Class for converting an RTP timestamp to the NTP domain.
-RtpToNtpEstimator::RtpToNtpEstimator() : consecutive_invalid_samples_(0) {}
+RtpToNtpEstimator::RtpToNtpEstimator()
+    : consecutive_invalid_samples_(0),
+      params_calculated_(false),
+      wrap_arounds_(0) {}
 RtpToNtpEstimator::~RtpToNtpEstimator() {}
 
 void RtpToNtpEstimator::UpdateParameters() {
   if (measurements_.size() != kNumRtcpReportsToUse)
     return;
 
-  int64_t timestamp_new = measurements_.front().rtp_timestamp;
-  int64_t timestamp_old = measurements_.back().rtp_timestamp;
-  if (!CompensateForWrapAround(timestamp_new, timestamp_old, &timestamp_new))
-    return;
+  int64_t timestamp_new = measurements_.front().unwrapped_rtp_timestamp;
+  int64_t timestamp_old = measurements_.back().unwrapped_rtp_timestamp;
 
   int64_t ntp_ms_new = measurements_.front().ntp_time.ToMs();
   int64_t ntp_ms_old = measurements_.back().ntp_time.ToMs();
@@ -90,7 +80,7 @@ void RtpToNtpEstimator::UpdateParameters() {
     return;
   }
   params_.offset_ms = timestamp_new - params_.frequency_khz * ntp_ms_new;
-  params_.calculated = true;
+  params_calculated_ = true;
 }
 
 bool RtpToNtpEstimator::UpdateMeasurements(uint32_t ntp_secs,
@@ -99,7 +89,10 @@ bool RtpToNtpEstimator::UpdateMeasurements(uint32_t ntp_secs,
                                            bool* new_rtcp_sr) {
   *new_rtcp_sr = false;
 
-  RtcpMeasurement new_measurement(ntp_secs, ntp_frac, rtp_timestamp);
+  int64_t unwrapped_rtp_timestamp = Unwrap(rtp_timestamp);
+
+  RtcpMeasurement new_measurement(ntp_secs, ntp_frac, unwrapped_rtp_timestamp);
+
   if (Contains(measurements_, new_measurement)) {
     // RTCP SR report already added.
     return true;
@@ -109,25 +102,17 @@ bool RtpToNtpEstimator::UpdateMeasurements(uint32_t ntp_secs,
 
   int64_t ntp_ms_new = new_measurement.ntp_time.ToMs();
   bool invalid_sample = false;
-  for (const auto& measurement : measurements_) {
-    if (ntp_ms_new <= measurement.ntp_time.ToMs()) {
-      // Old report.
+  if (!measurements_.empty()) {
+    if (ntp_ms_new <= measurements_.back().ntp_time.ToMs()) {
       invalid_sample = true;
-      break;
-    }
-    int64_t timestamp_new = new_measurement.rtp_timestamp;
-    if (!CompensateForWrapAround(timestamp_new, measurement.rtp_timestamp,
-                                 &timestamp_new)) {
-      invalid_sample = true;
-      break;
-    }
-    if (timestamp_new <= measurement.rtp_timestamp) {
-      RTC_LOG(LS_WARNING)
+    } else if (unwrapped_rtp_timestamp <=
+               measurements_.back().unwrapped_rtp_timestamp) {
+      LOG(LS_WARNING)
           << "Newer RTCP SR report with older RTP timestamp, dropping";
       invalid_sample = true;
-      break;
     }
   }
+
   if (invalid_sample) {
     ++consecutive_invalid_samples_;
     if (consecutive_invalid_samples_ < kMaxInvalidSamples) {
@@ -136,6 +121,7 @@ bool RtpToNtpEstimator::UpdateMeasurements(uint32_t ntp_secs,
     RTC_LOG(LS_WARNING) << "Multiple consecutively invalid RTCP SR reports, "
                            "clearing measurements.";
     measurements_.clear();
+    params_calculated_ = false;
   }
   consecutive_invalid_samples_ = 0;
 
@@ -153,18 +139,13 @@ bool RtpToNtpEstimator::UpdateMeasurements(uint32_t ntp_secs,
 
 bool RtpToNtpEstimator::Estimate(int64_t rtp_timestamp,
                                  int64_t* rtp_timestamp_ms) const {
-  if (!params_.calculated || measurements_.empty())
+  if (!params_calculated_ || measurements_.empty())
     return false;
 
-  uint32_t rtp_timestamp_old = measurements_.back().rtp_timestamp;
-  int64_t rtp_timestamp_unwrapped;
-  if (!CompensateForWrapAround(rtp_timestamp, rtp_timestamp_old,
-                               &rtp_timestamp_unwrapped)) {
-    return false;
-  }
+  int64_t rtp_timestamp_unwrapped = Unwrap(rtp_timestamp);
 
-  // params_.calculated should not be true unless params_.frequency_khz has been
-  // set to something non-zero.
+  // params_calculated_ should not be true unless ms params_.frequency_khz has
+  // been calculated to something non zero.
   RTC_DCHECK_NE(params_.frequency_khz, 0.0);
   double rtp_ms =
       (static_cast<double>(rtp_timestamp_unwrapped) - params_.offset_ms) /
@@ -176,6 +157,16 @@ bool RtpToNtpEstimator::Estimate(int64_t rtp_timestamp,
 
   *rtp_timestamp_ms = rtp_ms;
   return true;
+}
+
+int64_t RtpToNtpEstimator::Unwrap(uint32_t rtp_timestamp) const {
+  if (!lastWrapTimestamp_) {
+    lastWrapTimestamp_.emplace(rtp_timestamp);
+    return rtp_timestamp;
+  }
+  wrap_arounds_ += CheckForWrapArounds(rtp_timestamp, *lastWrapTimestamp_);
+  lastWrapTimestamp_.emplace(rtp_timestamp);
+  return rtp_timestamp + (wrap_arounds_ << 32);
 }
 
 int CheckForWrapArounds(uint32_t new_timestamp, uint32_t old_timestamp) {

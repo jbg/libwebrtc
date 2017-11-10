@@ -13,6 +13,7 @@
 
 #include <list>
 
+#include "api/optional.h"
 #include "system_wrappers/include/ntp_time.h"
 #include "typedefs.h"  // NOLINT(build/include)
 
@@ -27,18 +28,19 @@ class RtpToNtpEstimator {
 
   // RTP and NTP timestamp pair from a RTCP SR report.
   struct RtcpMeasurement {
-    RtcpMeasurement(uint32_t ntp_secs, uint32_t ntp_frac, uint32_t timestamp);
+    RtcpMeasurement(uint32_t ntp_secs,
+                    uint32_t ntp_frac,
+                    int64_t unwrapped_timestamp);
     bool IsEqual(const RtcpMeasurement& other) const;
 
     NtpTime ntp_time;
-    uint32_t rtp_timestamp;
+    int64_t unwrapped_rtp_timestamp;
   };
 
   // Estimated parameters from RTP and NTP timestamp pairs in |measurements_|.
   struct Parameters {
-    double frequency_khz = 0.0;
-    double offset_ms = 0.0;
-    bool calculated = false;
+    double frequency_khz;
+    double offset_ms;
   };
 
   // Updates measurements with RTP/NTP timestamp pair from a RTCP sender report.
@@ -52,16 +54,30 @@ class RtpToNtpEstimator {
   // Returns true on success, false otherwise.
   bool Estimate(int64_t rtp_timestamp, int64_t* rtp_timestamp_ms) const;
 
-  const Parameters& params() const { return params_; }
+  const rtc::Optional<Parameters> params() const {
+    rtc::Optional<Parameters> res;
+    if (params_calculated_) {
+      res.emplace(params_);
+    }
+    return res;
+  }
 
   static const int kMaxInvalidSamples = 3;
 
  private:
   void UpdateParameters();
+  int64_t Unwrap(uint32_t rtp_timestamp) const;
 
   int consecutive_invalid_samples_;
   std::list<RtcpMeasurement> measurements_;
   Parameters params_;
+  bool params_calculated_;
+  // Number of wrap arounds for the last timestamp. Mutable because Unwrap have
+  // to adjust it.
+  mutable int64_t wrap_arounds_;
+  // Last timestamp used in Unwrap. Mutable for the same
+  // reason.
+  mutable rtc::Optional<int64_t> lastWrapTimestamp_;
 };
 
 // Returns:
