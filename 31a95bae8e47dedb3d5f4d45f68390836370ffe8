@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a189e23_5ed90c56",
+        "filename": "rtc_base/numerics/moving_median_filter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T13:00:33Z",
+      "side": 1,
+      "message": "This loop gives n log n complexity. Can\u0027t we add a Reset method to PercentileFilter instead?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 37
+      },
+      "revId": "31a95bae8e47dedb3d5f4d45f68390836370ffe8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc5befc6_8c1cfaf6",
+        "filename": "system_wrappers/include/rtp_to_ntp_estimator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T13:00:33Z",
+      "side": 1,
+      "message": "Using 64 bits makes little sense; the upper 32 will never be used for anything, right?",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 17
+      },
+      "revId": "31a95bae8e47dedb3d5f4d45f68390836370ffe8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "010c63bb_0e11fcdd",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T13:00:33Z",
+      "side": 1,
+      "message": "Note that this old code is not standard C(++). Cast to a signed type is implementation defined when the value to be converted is out-of-range.\n\nSee https://stackoverflow.com/questions/50605/signed-to-unsigned-conversion-in-c-is-it-always-safe",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 66
+      },
+      "revId": "31a95bae8e47dedb3d5f4d45f68390836370ffe8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
