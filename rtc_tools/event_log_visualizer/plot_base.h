@@ -18,6 +18,10 @@
 namespace webrtc {
 namespace plotting {
 
+enum class LineStyle { kNone, kLine, kStep, kBar };
+
+enum class PointStyle { kNone, kHighlight };
+
 enum PlotStyle {
   LINE_GRAPH,
   LINE_DOT_GRAPH,
@@ -33,23 +37,31 @@ struct TimeSeriesPoint {
 };
 
 struct TimeSeries {
-  TimeSeries() = default;
-  TimeSeries(const char* label, PlotStyle style) : label(label), style(style) {}
-  TimeSeries(const std::string& label, PlotStyle style)
-      : label(label), style(style) {}
+  TimeSeries() = default;  // TODO(terelius): Remove the default constructor.
+  TimeSeries(const char* label,
+             LineStyle line_style,
+             PointStyle point_style = PointStyle::kNone)
+      : label(label), line_style(line_style), point_style(point_style) {}
+  TimeSeries(const std::string& label,
+             LineStyle line_style,
+             PointStyle point_style = PointStyle::kNone)
+      : label(label), line_style(line_style), point_style(point_style) {}
   TimeSeries(TimeSeries&& other)
       : label(std::move(other.label)),
-        style(other.style),
+        line_style(other.line_style),
+        point_style(other.point_style),
         points(std::move(other.points)) {}
   TimeSeries& operator=(TimeSeries&& other) {
     label = std::move(other.label);
-    style = other.style;
+    line_style = other.line_style;
+    point_style = other.point_style;
     points = std::move(other.points);
     return *this;
   }
 
   std::string label;
-  PlotStyle style;
+  LineStyle line_style = LineStyle::kLine;
+  PointStyle point_style = PointStyle::kNone;
   std::vector<TimeSeriesPoint> points;
 };
 
