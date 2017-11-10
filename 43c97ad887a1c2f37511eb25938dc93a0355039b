@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee005c98_bdf03b0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T12:16:58Z",
+      "side": 1,
+      "message": "Missing \u0027r\u0027. If I can guess right what\u0027s meant, maybe \"connecting lines\" would be clearer then \"linear interpolation\".",
+      "range": {
+        "startLine": 7,
+        "startChar": 69,
+        "endLine": 7,
+        "endChar": 81
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70f0a962_b6410e90",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T12:16:58Z",
+      "side": 1,
+      "message": "Please add a comment explaining the meaning of these values.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9bee432_ed594f8c",
+        "filename": "rtc_tools/event_log_visualizer/plot_protobuf.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T12:16:58Z",
+      "side": 1,
+      "message": "Is there a one-to-one map between LineStyle and ChartStyle, or is there something more subtle?",
+      "range": {
+        "startLine": 35,
+        "startChar": 68,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "250ee931_d2ed1bf9",
+        "filename": "rtc_tools/event_log_visualizer/plot_python.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-10T12:16:58Z",
+      "side": 1,
+      "message": "Is this commented out code really useful?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
