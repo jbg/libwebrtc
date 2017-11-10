@@ -22,6 +22,30 @@
       "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c44f8826_629f1a73",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-11-10T17:37:19Z",
+      "side": 1,
+      "message": "Sadly, it creates a circular dependency system_wrappers-\u003emodule_api-\u003eapi:video_frame_api-\u003esystem_wrappers.\n\nOne solution I see would be to move TimestampUnwrapper to rtc_base first. But this is opposite to the direction of slimming the API, which webrtc is apparently moving in now. \n\nAnother solution would be to create a separate target in modules for that class separately. WDYT?",
+      "parentUuid": "57b5c019_7047b47e",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
