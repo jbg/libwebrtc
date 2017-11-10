@@ -389,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "13e89ee3_c4c99d36",
+        "filename": "p2p/base/packettransportinternal.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "OnNetworkRouteChange doesn\u0027t need to know the difference between components.  It can just rest the BWE every time.  It doesn\u0027t really matter.",
+      "parentUuid": "5ffa4454_1b83ac6b",
+      "range": {
+        "startLine": 39,
+        "startChar": 56,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "f0c15982014a1866a3073502e5f6702b1fe8eb47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82a324a3_984d3316",
         "filename": "p2p/base/udptransport.cc",
         "patchSetId": 15

@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af79df59_a86611c5",
+        "filename": "p2p/base/p2phelper.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "Oh... I guess not.\n\nWell, if it relies on port.h, why not just put it in port.h?",
+      "range": {
+        "startLine": 13,
+        "startChar": 77,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10cdd193_9db9c076",
+        "filename": "p2p/base/p2phelper.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "Could this go in rtc_base/nethelpers.h?",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7710039f_f12c94f9",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "So nice!  Might as well just inline it at the call site, though.",
+      "range": {
+        "startLine": 2183,
+        "startChar": 51,
+        "endLine": 2183,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e851383f_baeea7be",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "If it switches to null/unset, isn\u0027t that still a switch?",
+      "range": {
+        "startLine": 704,
+        "startChar": 42,
+        "endLine": 704,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eee54c0_ccd8b543",
+        "filename": "pc/channel.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "Why do two AsyncInvokes?  Can\u0027t you stick it in just one?",
+      "range": {
+        "startLine": 606,
+        "startChar": 69,
+        "endLine": 606,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c004ba01_e0087420",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T19:27:58Z",
+      "side": 1,
+      "message": "Uh.... why is this in here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 52,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
