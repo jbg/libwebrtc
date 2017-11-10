@@ -16,6 +16,24 @@
       "revId": "d4fcfb8ba14a70be73e708aa9a1d8992c0af0157",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23c59b64_4c984586",
+        "filename": "api/audio_codecs/audio_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-10T13:23:56Z",
+      "side": 0,
+      "message": "Right. Yeah, the pre-submit check notified me of this but I agree that is is so tiny that probably a deprecation e-mail is not useful.\n\nBut I can send it if you prefer. Maybe with just a 1 week deprecation period?",
+      "parentUuid": "f1fd88b5_127e343e",
+      "revId": "d4fcfb8ba14a70be73e708aa9a1d8992c0af0157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
