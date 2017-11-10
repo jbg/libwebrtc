@@ -265,15 +265,15 @@ TEST(UpdateRtcpMeasurementTests, VerifyParameters) {
   EXPECT_TRUE(
       estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
   EXPECT_TRUE(new_sr);
-  EXPECT_FALSE(estimator.params().calculated);
+  EXPECT_FALSE(estimator.params());
   // Add second report, parameters should be calculated.
   ntp_frac += kOneMsInNtpFrac;
   timestamp += kTimestampTicksPerMs;
   EXPECT_TRUE(
       estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
-  EXPECT_TRUE(estimator.params().calculated);
-  EXPECT_DOUBLE_EQ(90.0, estimator.params().frequency_khz);
-  EXPECT_NE(0.0, estimator.params().offset_ms);
+  EXPECT_TRUE(estimator.params());
+  EXPECT_DOUBLE_EQ(90.0, estimator.params()->frequency_khz);
+  EXPECT_NE(0.0, estimator.params()->offset_ms);
 }
 
 TEST(RtpToNtpTests, FailsForNoParameters) {
@@ -286,7 +286,7 @@ TEST(RtpToNtpTests, FailsForNoParameters) {
       estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
   EXPECT_TRUE(new_sr);
   // Parameters are not calculated, conversion of RTP to NTP time should fail.
-  EXPECT_FALSE(estimator.params().calculated);
+  EXPECT_FALSE(estimator.params());
   int64_t timestamp_ms = -1;
   EXPECT_FALSE(estimator.Estimate(timestamp, &timestamp_ms));
 }
