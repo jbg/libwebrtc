@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c737715a_2150a043",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-11-10T14:46:57Z",
+      "side": 1,
+      "message": "Do we have any idea how often this is used in AudioOptions?\n\nCan you remove the field altogether?\n\n(same goes for playout_sample_rate)",
+      "revId": "ec999e86e8ca5a7253b9d865d2565e7f0ab1387f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
