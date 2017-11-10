@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e3f4e6c_643c422b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-10T15:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee005c98_bdf03b0c",
+      "range": {
+        "startLine": 7,
+        "startChar": 69,
+        "endLine": 7,
+        "endChar": 81
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f0a962_b6410e90",
         "filename": "rtc_tools/event_log_visualizer/plot_base.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e5e07b28_be32d266",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-10T15:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f0a962_b6410e90",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9bee432_ed594f8c",
         "filename": "rtc_tools/event_log_visualizer/plot_protobuf.cc",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-10T12:16:58Z",
       "side": 1,
       "message": "Is there a one-to-one map between LineStyle and ChartStyle, or is there something more subtle?",
+      "range": {
+        "startLine": 35,
+        "startChar": 68,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1345347d_476f2b3d",
+        "filename": "rtc_tools/event_log_visualizer/plot_protobuf.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-10T15:35:16Z",
+      "side": 1,
+      "message": "Yes, currently it is.\n\nChartStyle comes from the protobuf. LineStyle is used both when outputting to a protobuf, but also when outputting to python.",
+      "parentUuid": "b9bee432_ed594f8c",
       "range": {
         "startLine": 35,
         "startChar": 68,
@@ -91,6 +163,30 @@
       "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69da5733_221e514d",
+        "filename": "rtc_tools/event_log_visualizer/plot_python.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-10T15:35:16Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "250ee931_d2ed1bf9",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "43c97ad887a1c2f37511eb25938dc93a0355039b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
