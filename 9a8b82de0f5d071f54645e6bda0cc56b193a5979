@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57b5c019_7047b47e",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-10T15:35:12Z",
+      "side": 1,
+      "message": "in webrtc/modules/include/module_common_types.h there\u0027s already a TimestampUnwrapper utility class. Can you re-use that one instead?",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
