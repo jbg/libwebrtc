@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7d54201_11e929df",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T18:39:51Z",
+      "side": 1,
+      "message": "Is this an accurate log statement?  Shouldn\u0027t we log that a VoiceChannel has been created?",
+      "range": {
+        "startLine": 1448,
+        "startChar": 58,
+        "endLine": 1448,
+        "endChar": 0
+      },
+      "revId": "c3091418cef1291570159934f2f9e51d0c6d3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f22cc7_97a782df",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T18:39:51Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 1863,
+        "startChar": 58,
+        "endLine": 1863,
+        "endChar": 0
+      },
+      "revId": "c3091418cef1291570159934f2f9e51d0c6d3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eda9ca8d_a4dddf3a",
+        "filename": "pc/channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T18:39:51Z",
+      "side": 1,
+      "message": "Since the BaseChannel isn\u0027t a Transceiver (yet), should we call this transceiver_id() for now?",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "c3091418cef1291570159934f2f9e51d0c6d3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0fe98a6_c038a6b9",
+        "filename": "pc/channelmanager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T18:39:51Z",
+      "side": 1,
+      "message": "It feels weird that we set the mid before calling Init_w.",
+      "range": {
+        "startLine": 314,
+        "startChar": 67,
+        "endLine": 314,
+        "endChar": 0
+      },
+      "revId": "c3091418cef1291570159934f2f9e51d0c6d3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bb2e72b_1280f671",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3169,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T18:39:51Z",
+      "side": 1,
+      "message": "Can we change this to be GetChannel(mid)?",
+      "range": {
+        "startLine": 3169,
+        "startChar": 38,
+        "endLine": 3169,
+        "endChar": 0
+      },
+      "revId": "c3091418cef1291570159934f2f9e51d0c6d3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35294f80_f4a2c0af",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3594,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T18:39:51Z",
+      "side": 1,
+      "message": "It should be GetChannels() or channels(), but not Channels()",
+      "range": {
+        "startLine": 3594,
+        "startChar": 36,
+        "endLine": 3594,
+        "endChar": 0
+      },
+      "revId": "c3091418cef1291570159934f2f9e51d0c6d3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
