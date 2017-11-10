@@ -132,6 +132,9 @@ class VideoSender {
   EncoderParameters encoder_params_ RTC_GUARDED_BY(params_crit_);
   bool encoder_has_internal_source_ RTC_GUARDED_BY(params_crit_);
   std::vector<FrameType> next_frame_types_ RTC_GUARDED_BY(params_crit_);
+  int count_;
+  int64_t l_time_;
+  Clock* clock_;
 };
 
 class VideoReceiver : public Module {

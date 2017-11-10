@@ -65,6 +65,7 @@ RtpFrameObject::RtpFrameObject(PacketBuffer* packet_buffer,
   // NOTE! EncodedImage::_size is the size of the buffer (think capacity of
   //       an std::vector) and EncodedImage::_length is the actual size of
   //       the bitstream (think size of an std::vector).
+
   if (codec_type_ == kVideoCodecH264)
     _size = frame_size + EncodedImage::kBufferPaddingBytesH264;
   else
