@@ -145,11 +145,20 @@ class AudioDeviceModule : public rtc::RefCountInterface {
   // Playout delay
   virtual int32_t PlayoutDelay(uint16_t* delayMS) const = 0;
 
-  // Native sample rate controls (samples/sec)
-  virtual int32_t SetRecordingSampleRate(const uint32_t samplesPerSec) = 0;
-  virtual int32_t RecordingSampleRate(uint32_t* samplesPerSec) const = 0;
-  virtual int32_t SetPlayoutSampleRate(const uint32_t samplesPerSec) = 0;
-  virtual int32_t PlayoutSampleRate(uint32_t* samplesPerSec) const = 0;
+  // Deprected. Don't use.
+  // TODO(henrika): remove these methods.
+  virtual int32_t SetRecordingSampleRate(const uint32_t samplesPerSec) {
+    return -1;
+  }
+  virtual int32_t RecordingSampleRate(uint32_t* samplesPerSec) const {
+    return -1;
+  }
+  virtual int32_t SetPlayoutSampleRate(const uint32_t samplesPerSec) {
+    return -1;
+  }
+  virtual int32_t PlayoutSampleRate(uint32_t* samplesPerSec) const {
+    return -1;
+  }
 
   // Mobile device specific functions
   virtual int32_t SetLoudspeakerStatus(bool enable) = 0;
