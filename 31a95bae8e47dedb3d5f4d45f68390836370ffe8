@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "59470e01_9042ad26",
+        "filename": "rtc_base/numerics/moving_median_filter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-10T13:05:13Z",
+      "side": 1,
+      "message": "Yes, that would be nicer.",
+      "parentUuid": "9a189e23_5ed90c56",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 37
+      },
+      "revId": "31a95bae8e47dedb3d5f4d45f68390836370ffe8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc5befc6_8c1cfaf6",
         "filename": "system_wrappers/include/rtp_to_ntp_estimator.h",
         "patchSetId": 2
