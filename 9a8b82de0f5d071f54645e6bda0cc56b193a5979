@@ -46,6 +46,30 @@
       "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6749534d_cb60f593",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-10T18:19:10Z",
+      "side": 1,
+      "message": "Hm, that might work.\nnisse@, kwiberg@, WDYT? It feels dumb to keep this logic duplicated in more places. We have already cleaned this up in a few places with the Unwrapper classes, and some of them have had subtle bugs...",
+      "parentUuid": "c44f8826_629f1a73",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
