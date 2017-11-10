@@ -1,0 +1,372 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e1ada98_d3eb53d5",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "It\u0027s confusing that UpdateWritableState also maybe sets up DTLS-SRTP.\n\nMaybe it just needs a better name.  Maybe UpdateWritableStateAndMaybeSetupDtlsSrtp.  Then you wouldn\u0027t need the comment.",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73b63d7e_e5cc0dd4",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Don\u0027t you need to UpdateWritableState also?",
+      "range": {
+        "startLine": 70,
+        "startChar": 25,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7eb6abc_5c3c1d7a",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Should probably just call this IsDtlsActive()",
+      "range": {
+        "startLine": 92,
+        "startChar": 44,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d2f1ef2_352b6a4a",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "I think the way you modeled this with writable() looked nicer:\n\n  auto rtp_packet_transport \u003d srtp_transport_-\u003ertp_packet_transport();\n  auto rtcp_packet_transport \u003d\n      rtcp_mux_enabled() ? nullptr : srtp_transport_-\u003ertcp_packet_transport();\n\n  return (rtp_packet_transport \u0026\u0026 rtp_packet_transport-\u003eIsDtlsActive() \u0026\u0026\n      (!rtcp_packet_transport || rtcp_packet_transport-\u003eIsDtlsActive()));",
+      "range": {
+        "startLine": 98,
+        "startChar": 73,
+        "endLine": 98,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc164973_1ef07871",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Same here with IsDtlsActive: make IsDtlsConnected() and use the same logic from above.\n\nThen this method is:\n\nreturn IsDtlsActive() \u0026\u0026 IsDtlsConnected();",
+      "range": {
+        "startLine": 113,
+        "startChar": 75,
+        "endLine": 113,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11bdd636_73fc7b40",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Shouldn\u0027t SetupDtlsSrtp fire the failure so that all calls to it will fire the failure?",
+      "range": {
+        "startLine": 126,
+        "startChar": 39,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf1d3cea_50d8d4d2",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Could you break up this method into 2: one for extraction, which doesn\u0027t need the rtcp bool, and one for setting.  Then you could have something like this:\n\nExtractParams(\u0026params)\nSetRtpParams(params)\n\nor\n\n\nExtractParams(\u0026params)\nSetRtcpParams(params)",
+      "range": {
+        "startLine": 201,
+        "startChar": 3,
+        "endLine": 201,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bcc231c_257133a2",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "I think it would be more readable to just inline this.",
+      "range": {
+        "startLine": 234,
+        "startChar": 80,
+        "endLine": 234,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36bc0d34_ac1c956a",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Instead of passing in an rtcp bool like this, I think it would be cleaner to have SetRtpDtlsTransport and SetRtcpDtlsTransport just like we have SetRtpPacketTransport and SetRtcpPacketTransport.  Those could be implemented with a common SetDtlsTransport like this:\n\nvoid DtlsSrtpTransport::SetDtlsTransport(new_dtls_transport, old_dtls_trasnport) {\n  if (*old_dtls_transport) {\n    *old_dtls_transport-\u003eSignalDtlsState.disconnect(this);\n    *old_dtls_transport-\u003eSignalWritableState.disconnect(this);\n  }\n\n  *old_dtls_transport \u003d new_dtls_transport;\n\n  // This would only be possible if using BUNDLE but not rtcp-mux, which isn\u0027t\n  // allowed according to the BUNDLE spec.\n  if (rtcp \u0026\u0026 new_dtls_transport) {\n    RTC_CHECK(!(IsActive()))\n        \u003c\u003c \"Setting RTCP for DTLS/SRTP after the DTLS is active \"\n        \u003c\u003c \"should never happen.\";\n  }\n\n  if (new_dtls_transport) {\n    new_dtls_transport-\u003eSignalDtlsState.connect(\n        this, \u0026DtlsSrtpTransport::OnDtlsState);\n    new_dtls_transport-\u003eSignalWritableState.connect(\n        this, \u0026DtlsSrtpTransport::OnWritableState);\n  }\n}\n\nvoid SetRtpDtlsTransport(new_dtls_transport) {\n  SetDtlsTransport(new_dtls_transport, \u0026rtp_dtls_transport_);\n}\n\nvoid SetRtcpDtlsTransport(new_dtls_transport) {\n  SetDtlsTransport(new_dtls_transport, \u0026rtcp_dtls_transport_);\n}\n\n\nAnd then in use:\n\n\nSetRtpDtlsTransport(rtp_dtls_trasnport);\nSetRtpPacketTransport(rtp_dtls_trasnport);\nif (rtcp_dtls_transport) {\n  RTC_CHECK(!IsActive());\n}\nSetRtcpDtlsTransport(rtcp_dtls_transport, \u0026rtcp_dtls_transport_);\nSetRtcpPacketTransport(rtcp_dtls_transport);",
+      "range": {
+        "startLine": 239,
+        "startChar": 57,
+        "endLine": 239,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fde68a75_3d6947b5",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Wouldn\u0027t srtp_transport_-\u003ertcp_packet_transport() already be null if rtcp_mux is enabled?",
+      "range": {
+        "startLine": 272,
+        "startChar": 78,
+        "endLine": 272,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb498f42_63b71a04",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "You should move the common writable_ changing logic into a SetWritableState method.\n\nThen this is just:\n\nbool writable \u003d rtp_packet_transport \u0026\u0026 rtp_packet_transport-\u003ewritable() \u0026\u0026\n                (!rtcp_packet_transport || rtcp_packet_transport-\u003ewritable())\nif (writable) {\n  MaybeSetupDtlsSrtp();\n}\nSetWritable(writable);\n\n\nIn fact, it would be nice to have IsDtlsWritable and then say:\n\nbool writable \u003d IsDtlsWritable();\nif (writable) {\n  MaybeSetupDtlsSrtp();\n}\nSetWritable(writable);",
+      "range": {
+        "startLine": 286,
+        "startChar": 5,
+        "endLine": 286,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a9bcdb_a792575a",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Can you make it clear in the comment that this is intended to be used as an RtpTransport?  And can you make it clear that it wraps both DtlsTransports and an SrtpTransport?",
+      "range": {
+        "startLine": 25,
+        "startChar": 54,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1af6025_7673247e",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "When muxing, should the second variable be the same as the first or null?",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d1be313_179328a1",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Why does the constructor take in SrtpTransport but then the DtlsTransports are given later?  And why is the SrtpTransport owned but the DtlsTransports aren\u0027t?",
+      "range": {
+        "startLine": 33,
+        "startChar": 78,
+        "endLine": 33,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14c5af1d_5cd9deff",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Why do these need to be exposed?",
+      "range": {
+        "startLine": 45,
+        "startChar": 31,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e84dba2_76791064",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-10T21:51:15Z",
+      "side": 1,
+      "message": "Is this supposed to be \"override\"?",
+      "range": {
+        "startLine": 52,
+        "startChar": 57,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
