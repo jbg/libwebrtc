@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1fd88b5_127e343e",
+        "filename": "api/audio_codecs/audio_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-10T13:07:35Z",
+      "side": 0,
+      "message": "Removing this forward declaration is technically an API change, but it\u0027s so tiny you can probably sneak it in...",
+      "revId": "d4fcfb8ba14a70be73e708aa9a1d8992c0af0157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
