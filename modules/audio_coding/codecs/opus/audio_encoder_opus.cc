@@ -329,6 +329,24 @@ rtc::Optional<int> AudioEncoderOpusImpl::GetNewComplexity(
   }
 }
 
+rtc::Optional<int> AudioEncoderOpusImpl::GetNewBandwidth(
+    const AudioEncoderOpusConfig& config,
+    OpusEncInst* inst) {
+  constexpr int kMinWidebandBitrate = 8000;
+  constexpr int kMaxNarrowbandBitrate = 9000;
+  RTC_DCHECK(config.IsOk());
+  const int bitrate = GetBitrateBps(config);
+  const int bandwidth = WebRtcOpus_GetBandwidth(inst);
+  RTC_DCHECK_GE(bandwidth, 0);
+  if (bitrate > kMaxNarrowbandBitrate && bandwidth < OPUS_BANDWIDTH_WIDEBAND) {
+    return rtc::Optional<int>(OPUS_BANDWIDTH_WIDEBAND);
+  } else if (bitrate < kMinWidebandBitrate &&
+             bandwidth > OPUS_BANDWIDTH_NARROWBAND) {
+    return rtc::Optional<int>(OPUS_BANDWIDTH_NARROWBAND);
+  }
+  return rtc::Optional<int>();
+}
+
 class AudioEncoderOpusImpl::PacketLossFractionSmoother {
  public:
   explicit PacketLossFractionSmoother()
@@ -375,6 +393,8 @@ AudioEncoderOpusImpl::AudioEncoderOpusImpl(
     : payload_type_(payload_type),
       send_side_bwe_with_overhead_(
           webrtc::field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
+      adjust_opus_bandwidth_(
+          webrtc::field_trial::IsEnabled("WebRTC-AdjustOpusBandwidth")),
       packet_loss_rate_(0.0),
       inst_(nullptr),
       packet_loss_fraction_smoother_(new PacketLossFractionSmoother()),
@@ -662,6 +682,11 @@ bool AudioEncoderOpusImpl::RecreateEncoderInstance(
   // window.
   complexity_ = GetNewComplexity(config).value_or(config.complexity);
   RTC_CHECK_EQ(0, WebRtcOpus_SetComplexity(inst_, complexity_));
+  const auto bandwidth = adjust_opus_bandwidth_ ? GetNewBandwidth(config, inst_)
+                                                : rtc::Optional<int>();
+  if (bandwidth) {
+    RTC_CHECK_EQ(0, WebRtcOpus_SetBandwidth(inst_, *bandwidth));
+  }
   if (config.dtx_enabled) {
     RTC_CHECK_EQ(0, WebRtcOpus_EnableDtx(inst_));
   } else {
@@ -716,6 +741,12 @@ void AudioEncoderOpusImpl::SetTargetBitrate(int bits_per_second) {
   if (new_complexity && complexity_ != *new_complexity) {
     complexity_ = *new_complexity;
     RTC_CHECK_EQ(0, WebRtcOpus_SetComplexity(inst_, complexity_));
+  }
+  const auto bandwidth = adjust_opus_bandwidth_
+                             ? GetNewBandwidth(config_, inst_)
+                             : rtc::Optional<int>();
+  if (bandwidth) {
+    RTC_CHECK_EQ(0, WebRtcOpus_SetBandwidth(inst_, *bandwidth));
   }
 }
 
