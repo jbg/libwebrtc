@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0c95c2a2_61b6fff2",
+        "filename": "p2p/base/p2phelper.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-11T00:38:35Z",
+      "side": 1,
+      "message": "I don\u0027t think it make much sense to make the UdpTransport depend on port.h since it doesn\u0027t actually need port except two const strings.\n\nWe can move the constants to nethelper.h and let the port depend on nethelper though.",
+      "parentUuid": "af79df59_a86611c5",
+      "range": {
+        "startLine": 13,
+        "startChar": 77,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "10cdd193_9db9c076",
         "filename": "p2p/base/p2phelper.h",
         "patchSetId": 23
@@ -45,6 +69,30 @@
       "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3461b0e_e2365876",
+        "filename": "p2p/base/p2phelper.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-11T00:38:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10cdd193_9db9c076",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ffdafc12_d4194b07",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-11T00:38:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7710039f_f12c94f9",
+      "range": {
+        "startLine": 2183,
+        "startChar": 51,
+        "endLine": 2183,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e851383f_baeea7be",
         "filename": "p2p/base/p2ptransportchannel_unittest.cc",
         "patchSetId": 23
@@ -91,6 +163,30 @@
       "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b49dadc7_503630a5",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-11T00:38:35Z",
+      "side": 1,
+      "message": "When the remote side\u0027s network failed, it would fire a signal with unset network route but that shouldn\u0027t trigger the local side to switch connection. I\u0027ll leave a comment to make it clear.",
+      "parentUuid": "e851383f_baeea7be",
+      "range": {
+        "startLine": 704,
+        "startChar": 42,
+        "endLine": 704,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d5268f77_0f20d7f6",
+        "filename": "pc/channel.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-11T00:38:35Z",
+      "side": 1,
+      "message": "Yeah, sure. It will come in the follow up CL which merges these two methods in MediaChannel. https://webrtc-review.googlesource.com/c/src/+/15200",
+      "parentUuid": "3eee54c0_ccd8b543",
+      "range": {
+        "startLine": 606,
+        "startChar": 69,
+        "endLine": 606,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c004ba01_e0087420",
         "filename": "pc/srtptransport.cc",
         "patchSetId": 23
@@ -137,6 +257,30 @@
       "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fd484a7_8a0a3f56",
+        "filename": "pc/srtptransport.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-11T00:38:35Z",
+      "side": 1,
+      "message": "I just moved the methods to match the order of declarations. I can revert this unrelated change though.",
+      "parentUuid": "c004ba01_e0087420",
+      "range": {
+        "startLine": 66,
+        "startChar": 52,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "1a8d5e1923f56ad0c022e605fdd5dc79640fbaee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
