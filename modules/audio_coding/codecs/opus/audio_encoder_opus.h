@@ -43,6 +43,12 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   static rtc::Optional<int> GetNewComplexity(
       const AudioEncoderOpusConfig& config);
 
+  // Returns empty if the the current bandwidth coincides with the desired one.
+  // Otherwise returns the desired bandwidth.
+  static rtc::Optional<int> GetNewBandwidth(
+      const AudioEncoderOpusConfig& config,
+      OpusEncInst* inst);
+
   using AudioNetworkAdaptorCreator =
       std::function<std::unique_ptr<AudioNetworkAdaptor>(const std::string&,
                                                          RtcEventLog*)>;
@@ -148,6 +154,7 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   AudioEncoderOpusConfig config_;
   const int payload_type_;
   const bool send_side_bwe_with_overhead_;
+  const bool adjust_opus_bandwidth_;
   float packet_loss_rate_;
   std::vector<int16_t> input_buffer_;
   OpusEncInst* inst_;
