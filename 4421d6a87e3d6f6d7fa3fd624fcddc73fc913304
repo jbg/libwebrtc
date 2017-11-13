@@ -46,6 +46,29 @@
       "revId": "4421d6a87e3d6f6d7fa3fd624fcddc73fc913304",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ba82fa2_a1a2e3e8",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-13T13:46:04Z",
+      "side": 1,
+      "message": "I think it is better to avoid conditional visibility and fall back on the more relaxed value (in this case \"*\"). These targets are already safe since they are testonly.\n\nI am taking care of this in https://webrtc-review.googlesource.com/c/src/+/14902, so after it lands this CL should be updated.",
+      "range": {
+        "startLine": 1273,
+        "startChar": 0,
+        "endLine": 1278,
+        "endChar": 5
+      },
+      "revId": "4421d6a87e3d6f6d7fa3fd624fcddc73fc913304",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
