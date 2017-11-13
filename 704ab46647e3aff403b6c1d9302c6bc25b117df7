@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e5193a8_51ae76dc",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "Comparing with WebRtcOpus_SetComplexity above, that one is always called, even if the complexity did not change. Is there any penalty for setting the same bandwidth over and over again? If not, you could simplify the code a bit by not caring what the current bandwidth is (for instance the GetNewBandwidth method won\u0027t need the encoder instance).",
+      "range": {
+        "startLine": 688,
+        "startChar": 20,
+        "endLine": 688,
+        "endChar": 63
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf1c3194_8050faa5",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "adjust_bandwidth_ seems enough. Opus is implied.",
+      "range": {
+        "startLine": 157,
+        "startChar": 20,
+        "endLine": 157,
+        "endChar": 24
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15caec7_cc3b41cf",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "This test is a bit of a mixed bag, from what I see. It looks like it is going to test AudioEncoderOpus, but it interfaces lower layers.\n\nWhat I am missing is a test that uses AudioEncoderOpus from the outside. Since the new functionality is controlled by a field trial, I think you will have to manipulate the settings using webrtc::test::ScopedFieldTrials.",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 53
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f403eeb_f7940a64",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "Nit: constexpr",
+      "range": {
+        "startLine": 493,
+        "startChar": 2,
+        "endLine": 493,
+        "endChar": 7
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e2a6bf4_5f811640",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 496,
+        "startChar": 2,
+        "endLine": 496,
+        "endChar": 7
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fce295b_9b68cae9",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "Why do you have to encode? Can\u0027t you just apply new bandwidths repeatedly?",
+      "range": {
+        "startLine": 512,
+        "startChar": 2,
+        "endLine": 514,
+        "endChar": 42
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2184e4c2_9fb124c7",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "I assume you cannot make this a const parameter, because opus_encoder_ctl is not a const function, right?",
+      "range": {
+        "startLine": 231,
+        "startChar": 32,
+        "endLine": 231,
+        "endChar": 43
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8873fe42_5d53d20b",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "I would prefer an early fail here.\n\n if (!inst) {\n   return -1;\n }\n\n // The rest of the code, with less indentation.",
+      "range": {
+        "startLine": 232,
+        "startChar": 2,
+        "endLine": 232,
+        "endChar": 11
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79afb9e_0ca4009d",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "Any constraints on what value this can take?",
+      "range": {
+        "startLine": 247,
+        "startChar": 10,
+        "endLine": 247,
+        "endChar": 19
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bc11c9b_59bf8b57",
+        "filename": "modules/audio_coding/codecs/opus/opus_speed_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 6
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35d11ebd_c441a876",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "std::unique_ptr, please",
+      "range": {
+        "startLine": 465,
+        "startChar": 2,
+        "endLine": 465,
+        "endChar": 10
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d634d053_ea9d8459",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-13T08:49:17Z",
+      "side": 1,
+      "message": "complexities -\u003e bandwidths",
+      "range": {
+        "startLine": 472,
+        "startChar": 47,
+        "endLine": 472,
+        "endChar": 59
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
