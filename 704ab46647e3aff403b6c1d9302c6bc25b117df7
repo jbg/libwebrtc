@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "3122564c_fc975bb7",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 5619
+      },
+      "writtenOn": "2017-11-13T14:51:51Z",
+      "side": 1,
+      "message": "Is there a reason why forcing new bandwidth is required here but not every time target bitrate is changed?",
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf1c3194_8050faa5",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 2
