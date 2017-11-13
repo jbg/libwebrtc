@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8300bf36_518ea85f",
+        "filename": "rtc_base/nethelper.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-13T18:28:18Z",
+      "side": 1,
+      "message": "Looks like you\u0027re hitting the build error at this point:\n\n../../rtc_base/nethelper.cc:32:1: error: control may reach end of non-void function [-Werror,-Wreturn-type]\n\nJust need to add a dummy `return 0;` at the end to satisfy the compiler.",
+      "revId": "e6ffdad2fec9526aeb02090529cfe7a536611e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
