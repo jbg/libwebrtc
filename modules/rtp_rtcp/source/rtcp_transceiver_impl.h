@@ -54,6 +54,8 @@ class RtcpTransceiverImpl {
     NtpTime remote_sent_time;
   };
 
+  NtpTime CurrentNtpTime();
+
   void HandleReceivedPacket(const rtcp::CommonHeader& rtcp_packet_header);
 
   void ReschedulePeriodicCompoundPackets(int64_t delay_ms);

@@ -17,6 +17,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtcp_packet.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/common_header.h"
+#include "modules/rtp_rtcp/source/rtcp_packet/extended_reports.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/receiver_report.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/report_block.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/sdes.h"
@@ -25,6 +26,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/ptr_util.h"
 #include "rtc_base/task_queue.h"
+#include "rtc_base/timeutils.h"
 
 namespace webrtc {
 namespace {
@@ -67,10 +69,17 @@ class PacketSender : public rtcp::RtcpPacket::PacketReadyCallback {
   uint8_t buffer_[IP_PACKET_SIZE];
 };
 
+RtcpTransceiverConfig SetDefaultValues(const RtcpTransceiverConfig& config) {
+  RtcpTransceiverConfig result = config;
+  if (result.clock == nullptr)
+    result.clock = Clock::GetRealTimeClock();
+  return result;
+}
+
 }  // namespace
 
 RtcpTransceiverImpl::RtcpTransceiverImpl(const RtcpTransceiverConfig& config)
-    : config_(config), ptr_factory_(this) {
+    : config_(SetDefaultValues(config)), ptr_factory_(this) {
   RTC_CHECK(config_.Validate());
   if (config_.schedule_periodic_compound_packets)
     ReschedulePeriodicCompoundPackets(config_.initial_report_delay_ms);
@@ -112,6 +121,12 @@ void RtcpTransceiverImpl::UnsetRemb() {
   remb_.reset();
 }
 
+NtpTime RtcpTransceiverImpl::CurrentNtpTime() {
+  // TODO(bugs.webrtc.org/8239): Calculate ntp time using rtc::TimeUTCMicros
+  // when all rtp streams use RtcpTransceiver.
+  return config_.clock->CurrentNtpTime();
+}
+
 void RtcpTransceiverImpl::HandleReceivedPacket(
     const rtcp::CommonHeader& rtcp_packet_header) {
   switch (rtcp_packet_header.type()) {
@@ -123,6 +138,22 @@ void RtcpTransceiverImpl::HandleReceivedPacket(
           last_received_sender_reports_[sender_report.sender_ssrc()];
       last.local_received_time_us = rtc::TimeMicros();
       last.remote_sent_time = sender_report.ntp();
+      break;
+    }
+    case rtcp::ExtendedReports::kPacketType: {
+      rtcp::ExtendedReports xr;
+      if (!xr.Parse(rtcp_packet_header))
+        return;
+      if (config_.calculate_rtt_with_rrtr && xr.dlrr()) {
+        uint32_t receive_time_ntp = CompactNtp(CurrentNtpTime());
+        for (const rtcp::ReceiveTimeInfo& rti : xr.dlrr().sub_blocks()) {
+          uint32_t rtt_ntp =
+              receive_time_ntp - rti.delay_since_last_rr - rti.last_rr;
+          int64_t rtt_ms = CompactNtpRttToMs(rtt_ntp);
+          if (config_.rtt_callback)
+            config_.rtt_callback->OnRttUpdate(rtt_ms);
+        }
+      }
       break;
     }
   }
@@ -181,6 +212,16 @@ void RtcpTransceiverImpl::SendPacket() {
   if (remb_) {
     remb_->SetSenderSsrc(sender_ssrc);
     sender.AppendPacket(*remb_);
+  }
+  if (config_.calculate_rtt_with_rrtr) {
+    rtcp::ExtendedReports xr;
+    xr.SetSenderSsrc(sender_ssrc);
+
+    rtcp::Rrtr rrtr;
+    rrtr.SetNtp(CurrentNtpTime());
+    xr.SetRrtr(rrtr);
+
+    sender.AppendPacket(xr);
   }
 
   sender.Send();

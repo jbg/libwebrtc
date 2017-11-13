@@ -13,7 +13,9 @@
 
 #include <string>
 
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/task_queue.h"
+#include "system_wrappers/include/clock.h"
 
 namespace webrtc {
 class ReceiveStatisticsProvider;
@@ -51,6 +53,16 @@ struct RtcpTransceiverConfig {
   // Rtcp report block generator for outgoing receiver reports.
   ReceiveStatisticsProvider* receive_statistics = nullptr;
 
+  // All rtcp implementations in an rtp session should use same ntp clock.
+  // TODO(bugs.webrtc.org/8239): Remove when RtcpTransceiverImpl::CurrentNtpTime
+  // calculates NtpTime without this clock.
+  Clock* clock = nullptr;
+
+  //
+  // Global callback. Should outlive RtcpTransceiver.
+  //
+  RtcpRttStats* rtt_callback = nullptr;
+
   //
   // Tuning parameters.
   //
@@ -64,6 +76,8 @@ struct RtcpTransceiverConfig {
   // Flags for features and experiments.
   //
   bool schedule_periodic_compound_packets = true;
+  // Send rrtr messages to calculate rtt.
+  bool calculate_rtt_with_rrtr = false;
 };
 
 }  // namespace webrtc
