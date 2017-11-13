@@ -209,20 +209,19 @@ void AudioSendStream::ConfigureStream(
       new_ids.transport_sequence_number != old_ids.transport_sequence_number) {
     if (!first_time) {
       channel_proxy->ResetSenderCongestionControlObjects();
-      stream->bandwidth_observer_.reset();
+      stream->bandwidth_observer_ = nullptr;
     }
 
     if (new_ids.transport_sequence_number != 0) {
       channel_proxy->EnableSendTransportSequenceNumber(
           new_ids.transport_sequence_number);
       stream->transport_->send_side_cc()->EnablePeriodicAlrProbing(true);
-      stream->bandwidth_observer_.reset(stream->transport_->send_side_cc()
-                                            ->GetBitrateController()
-                                            ->CreateRtcpBandwidthObserver());
+      stream->bandwidth_observer_ =
+          stream->transport_->send_side_cc()->GetBitrateController();
     }
 
     channel_proxy->RegisterSenderCongestionControlObjects(
-        stream->transport_, stream->bandwidth_observer_.get());
+        stream->transport_, stream->bandwidth_observer_);
   }
 
   if (!ReconfigureSendCodec(stream, new_config)) {
