@@ -22,6 +22,30 @@
       "revId": "f8950d78370e5b0c8cdd699bf1c058529d2ef630",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e0f825_384c89b5",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-13T10:58:32Z",
+      "side": 1,
+      "message": "A socket pair, created with the socketpair() syscall, is almost the same thing as a pipe, it\u0027s just that the two endpoints look like sockets (usually AF_UNIX sockets, not sure if AF_INET socket pairs are possible or ever useful). So one can use the more flexible send and sendmsg syscalls instead of plain write.",
+      "parentUuid": "5db7d971_ce3f0b61",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "f8950d78370e5b0c8cdd699bf1c058529d2ef630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

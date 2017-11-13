@@ -22,6 +22,30 @@
       "revId": "9da7c7480ba15080f14e91c955351e6b037507f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e84b8f6e_b99aa3bc",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-13T10:58:32Z",
+      "side": 0,
+      "message": "\u003e This isn\u0027t exactly dropping the task silently because the destructor of the task, does run and the caller can definitely handle that situation.\n\nA task could have some \"has run\" flag which the destructor could check. I see no really easy way for the caller f PostTask to check that though. It would involve the task holding a pointer to a flag somewhere outside of the task (since when the caller checks it, the Task may have been destroyed already). Which has lifetime issues, since Task destruction may happen late. And coordination with the Task\u0027s run method may need additional synchronization, something which goes against the point of using Tasks in the first place.\n\nIf we really want to allow intermittent failure (in contrast to failure because the TaskQueue is being shutdown), I think the only reasonable way to handle that is with a return value from PostTask.\n\n\u003e What\u0027s the behavior in Chromium as far as this goes?\n\nI\u0027m not 100% sure, but from my digging, it looked like the implementation of SingleThreadedTaskRunner we use in Chromium (the one associated with base::Thread) can only fail at thread shutdown time. I.e., no intermittent failures.",
+      "parentUuid": "4b286e1f_9e5ce153",
+      "range": {
+        "startLine": 351,
+        "startChar": 11,
+        "endLine": 351,
+        "endChar": 18
+      },
+      "revId": "9da7c7480ba15080f14e91c955351e6b037507f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
