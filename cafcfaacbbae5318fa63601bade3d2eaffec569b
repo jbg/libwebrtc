@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "113289e5_1bf99086",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:09:23Z",
+      "side": 1,
+      "message": "Also, maybe initialize the value to the current time at construction, thereby making the more-complicated rtc::Optional, with its value_or, etc., no longer necessary?",
+      "parentUuid": "9d5b03e5_750b88cf",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da4130d6_06f8e361",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -138,6 +156,91 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "event_output_ \u0026\u0026 event_output_-\u003eIsActive()",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d145f184_925e6e05",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:09:23Z",
+      "side": 1,
+      "message": "nit: s/don\u0027t/can\u0027t\n(As it stands, it seems to indicate that you\u0027re preventing this. But of course, you\u0027re just [\"just\"] guaranteeing it.)",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5060e5d0_0e6f4831",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:09:23Z",
+      "side": 1,
+      "message": "Move this to the end of the function, to get a more accurate reading? Or is this intentional, to prevent drift? If so, perhaps a comment?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb6cf3e2_1ed1ac62",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:09:23Z",
+      "side": 1,
+      "message": "Is this comment still completely accurate?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c17963a4_fcb81ab5",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:09:23Z",
+      "side": 1,
+      "message": "nit: The purpose of |config_events_written_| is not trivial. Perhaps a comment about it where it\u0027s defined?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2f26551_c8dcf45b",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:09:23Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s better style. :-)",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
