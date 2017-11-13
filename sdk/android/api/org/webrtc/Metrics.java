@@ -48,17 +48,19 @@ public class Metrics {
     public final Map<Integer, Integer> samples =
         new HashMap<Integer, Integer>(); // <value, # of events>
 
-    public HistogramInfo(int min, int max, int bucketCount) {
+    HistogramInfo(int min, int max, int bucketCount) {
       this.min = min;
       this.max = max;
       this.bucketCount = bucketCount;
     }
 
+    @CalledByNative
     public void addSample(int value, int numEvents) {
       samples.put(value, numEvents);
     }
   }
 
+  @CalledByNative
   private void add(String name, HistogramInfo info) {
     map.put(name, info);
   }
@@ -66,14 +68,25 @@ public class Metrics {
   // Enables gathering of metrics (which can be fetched with getAndReset()).
   // Must be called before PeerConnectionFactory is created.
   public static void enable() {
-    nativeEnable();
+    enableNative();
   }
 
   // Gets and clears native histograms.
   public static Metrics getAndReset() {
-    return nativeGetAndReset();
+    return getAndResetNative();
   }
 
-  private static native void nativeEnable();
-  private static native Metrics nativeGetAndReset();
+  // TODO(bugs.webrtc.org/8278): Add a way to generate JNI code for constructors directly.
+  @CalledByNative
+  static Metrics createMetrics() {
+    return new Metrics();
+  }
+
+  @CalledByNative
+  static HistogramInfo createHistogramInfo(int min, int max, int bucketCount) {
+    return new HistogramInfo(min, max, bucketCount);
+  }
+
+  private static native void enableNative();
+  private static native Metrics getAndResetNative();
 }
