@@ -94,6 +94,30 @@
       "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6abd9d7e_34840332",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-13T08:30:24Z",
+      "side": 1,
+      "message": "And if it\u0027s not intimately tied to RTP, it should move to somewhere under rtc_base (but perhaps in a separate cl).",
+      "parentUuid": "e9bd22e9_d4c21446",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
