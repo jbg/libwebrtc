@@ -1,0 +1,231 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4d4f9f9_8f1f89e0",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "I don\u0027t think I\u0027ve landed anything that makes use of this yet (although I have some of those up for your review). You could try removing this completely, running the Chrome trybots, and if they pass, you could just get rid of this version in this very CL.",
+      "range": {
+        "startLine": 828,
+        "startChar": 0,
+        "endLine": 834,
+        "endChar": 3
+      },
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58df01af_a2072aa6",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "Wasn\u0027t it enough to define RtcEventLog?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06176ff4_742bc7fd",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "nit: num_config_events_written_ or similar? At first I had expected this to be a container.",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d5b03e5_750b88cf",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "nit: Missing underscore at the end of a member variable\u0027s name.",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da4130d6_06f8e361",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "1. Underscore.\n2. is_?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aad33efb_267714fc",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "Remove the hard-coded value?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d17238af_6f639d92",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "I think it would be good to RTC_CHECK() that (output_period_ms \u003d\u003d kImmediateOutput || output_period_ms \u003e 0).",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "317800ca_d0586dd7",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "event_output_ \u0026\u0026 event_output_-\u003eIsActive()",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48423e26_bb15139e",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "nit: I personally prefer \"+\u003d 1\", but that\u0027s unfortunately not the coding-style. But perhaps you could prepend the ++? I know it doesn\u0027t make a difference for efficiency in this context, but it feels nicer. Also, it reads in my mind as \"increment X\", rather than \"you know X? Increment it.\"",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbdb6bfa_eba98850",
+        "filename": "logging/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "Hopefully we could get rid of this with my suggestion about removing the deprecated functions in this CL.",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f24c318_fa5da593",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "const",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45e769da_07e4a737",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "It\u0027s probably a bit funny that we have documentation for the private functions, but not the public ones. Do you think we should take this opportunity to rectify this anomaly, only for this function, and also had an explanation of |output_period_ms|?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6615cb89_4e5b13ef",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T14:38:10Z",
+      "side": 1,
+      "message": "nit: I think it would now be good to create an intermediate variable for the output, to increase readability.",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
