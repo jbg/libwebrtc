@@ -18,6 +18,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/optional.h"
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.h"
 #include "logging/rtc_event_log/events/rtc_event_logging_started.h"
 #include "logging/rtc_event_log/events/rtc_event_logging_stopped.h"
@@ -28,6 +29,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/ptr_util.h"
 #include "rtc_base/safe_conversions.h"
+#include "rtc_base/safe_minmax.h"
 #include "rtc_base/sequenced_task_checker.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread_annotations.h"
@@ -87,12 +89,15 @@ class RtcEventLogImpl final : public RtcEventLog {
 
   // TODO(eladalon): We should change these name to reflect that what we're
   // actually starting/stopping is the output of the log, not the log itself.
-  bool StartLogging(std::unique_ptr<RtcEventLogOutput> output) override;
+  bool StartLogging(std::unique_ptr<RtcEventLogOutput> output,
+                    int64_t output_period_ms) override;
   void StopLogging() override;
 
   void Log(std::unique_ptr<RtcEvent> event) override;
 
  private:
+  enum : int64_t { kImmediateOutput = 0 };
+
   // Appends an event to the output protobuf string, returning true on success.
   // Fails and returns false in case the limit on output size prevents the
   // event from being added; in this case, the output string is left unchanged.
@@ -113,6 +118,8 @@ class RtcEventLogImpl final : public RtcEventLog {
 
   void StopLoggingInternal() RTC_RUN_ON(&task_queue_);
 
+  void ScheduleOutput() RTC_RUN_ON(&task_queue_);
+
   // Make sure that the event log is "managed" - created/destroyed, as well
   // as started/stopped - from the same thread/task-queue.
   rtc::SequencedTaskChecker owner_sequence_checker_;
@@ -130,6 +137,11 @@ class RtcEventLogImpl final : public RtcEventLog {
   std::unique_ptr<RtcEventLogEncoder> event_encoder_ RTC_ACCESS_ON(task_queue_);
   std::unique_ptr<RtcEventLogOutput> event_output_ RTC_ACCESS_ON(task_queue_);
 
+  size_t config_events_written_ RTC_ACCESS_ON(task_queue_);
+  int64_t output_period_ms_ RTC_ACCESS_ON(task_queue_);
+  rtc::Optional<int64_t> last_output_ms RTC_ACCESS_ON(task_queue_);
+  bool output_scheduled RTC_ACCESS_ON(task_queue_);
+
   // Keep this last to ensure it destructs first, or else tasks living on the
   // queue might access other members after they've been torn down.
   rtc::TaskQueue task_queue_;
@@ -142,6 +154,9 @@ RtcEventLogImpl::RtcEventLogImpl(
     : max_size_bytes_(std::numeric_limits<decltype(max_size_bytes_)>::max()),
       written_bytes_(0),
       event_encoder_(std::move(event_encoder)),
+      config_events_written_(0),
+      output_period_ms_(5000),
+      output_scheduled(false),
       task_queue_("rtc_event_log") {}
 
 RtcEventLogImpl::~RtcEventLogImpl() {
@@ -154,7 +169,8 @@ RtcEventLogImpl::~RtcEventLogImpl() {
   RTC_DCHECK_GE(count, 0);
 }
 
-bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output) {
+bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
+                                   int64_t output_period_ms) {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&owner_sequence_checker_);
 
   if (!output->IsActive()) {
@@ -174,6 +190,7 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output) {
     RTC_DCHECK_RUN_ON(&task_queue_);
     RTC_DCHECK(output->IsActive());
     event_output_ = std::move(output);
+    config_events_written_ = 0;
     LogToOutput(rtc::MakeUnique<RtcEventLoggingStarted>(start_event));
     LogEventsFromMemoryToOutput();
   };
@@ -193,6 +210,8 @@ void RtcEventLogImpl::StopLogging() {
 
   task_queue_.PostTask([this, &output_stopped]() {
     RTC_DCHECK_RUN_ON(&task_queue_);
+    if (event_output_)
+      LogEventsFromMemoryToOutput();
     StopLoggingInternal();
     output_stopped.Set();
   });
@@ -207,15 +226,43 @@ void RtcEventLogImpl::Log(std::unique_ptr<RtcEvent> event) {
 
   auto event_handler = [this](std::unique_ptr<RtcEvent> unencoded_event) {
     RTC_DCHECK_RUN_ON(&task_queue_);
-    if (event_output_) {
-      LogToOutput(std::move(unencoded_event));
-    } else {
-      LogToMemory(std::move(unencoded_event));
-    }
+    LogToMemory(std::move(unencoded_event));
+    ScheduleOutput();
   };
 
   task_queue_.PostTask(rtc::MakeUnique<ResourceOwningTask<RtcEvent>>(
       std::move(event), event_handler));
+}
+
+void RtcEventLogImpl::ScheduleOutput() {
+  if (history_.size() >= kMaxEventsInHistory) {
+    // We have to emergency drain the buffer. We can't wait for the scheduled
+    // output task because there might be other event incoming before that.
+    LogEventsFromMemoryToOutput();
+    return;
+  }
+
+  if (event_output_ && event_output_->IsActive()) {
+    if (!output_scheduled) {
+      output_scheduled = true;
+      auto output_task = [this]() {
+        RTC_DCHECK_RUN_ON(&task_queue_);
+        if (event_output_ && event_output_->IsActive()) {
+          LogEventsFromMemoryToOutput();
+        }
+        output_scheduled = false;
+      };
+      if (output_period_ms_ == kImmediateOutput) {
+        task_queue_.PostTask(output_task);
+      } else {
+        int64_t now_ms = rtc::TimeMillis();
+        int64_t time_since_output_ms = now_ms - last_output_ms.value_or(now_ms);
+        uint32_t delay = rtc::SafeClamp(
+            output_period_ms_ - time_since_output_ms, 0, output_period_ms_);
+        task_queue_.PostDelayedTask(output_task, delay);
+      }
+    }
+  }
 }
 
 bool RtcEventLogImpl::AppendEventToString(const RtcEvent& event,
@@ -239,14 +286,13 @@ bool RtcEventLogImpl::AppendEventToString(const RtcEvent& event,
 }
 
 void RtcEventLogImpl::LogToMemory(std::unique_ptr<RtcEvent> event) {
-  RTC_DCHECK(!event_output_);
-
   std::deque<std::unique_ptr<RtcEvent>>& container =
       event->IsConfigEvent() ? config_history_ : history_;
   const size_t container_max_size =
       event->IsConfigEvent() ? kMaxEventsInConfigHistory : kMaxEventsInHistory;
 
   if (container.size() >= container_max_size) {
+    RTC_DCHECK(!event_output_);  // Don't lose events if we have an output.
     container.pop_front();
   }
   container.push_back(std::move(event));
@@ -254,17 +300,19 @@ void RtcEventLogImpl::LogToMemory(std::unique_ptr<RtcEvent> event) {
 
 void RtcEventLogImpl::LogEventsFromMemoryToOutput() {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
+  last_output_ms.emplace(rtc::TimeMillis());
 
   std::string output_string;
 
   // Serialize the config information for all old streams, including streams
   // which were already logged to previous outputs.
   bool appended = true;
-  for (auto& event : config_history_) {
-    if (!AppendEventToString(*event, &output_string)) {
-      appended = false;
+  while (config_events_written_ < config_history_.size()) {
+    appended = AppendEventToString(*config_history_[config_events_written_],
+                                   &output_string);
+    if (!appended)
       break;
-    }
+    config_events_written_++;
   }
 
   // Serialize the events in the event queue.
