@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90554c47_629c1e15",
+        "filename": "video/video_quality_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-13T10:20:12Z",
+      "side": 1,
+      "message": "Receive",
+      "range": {
+        "startLine": 141,
+        "startChar": 55,
+        "endLine": 141,
+        "endChar": 63
+      },
+      "revId": "58602eda3534607e38242ff142ad7495f90d6948",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
