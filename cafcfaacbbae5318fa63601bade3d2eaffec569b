@@ -145,6 +145,23 @@
     },
     {
       "key": {
+        "uuid": "4a7f6ab7_9bc567d5",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:44:54Z",
+      "side": 1,
+      "message": "I\u0027ve now realized that this will prevent us getting rid of the old one. We might want to do that anyway. TODO on me?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "317800ca_d0586dd7",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -156,6 +173,23 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "event_output_ \u0026\u0026 event_output_-\u003eIsActive()",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "212f8700_4a7b1143",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:44:54Z",
+      "side": 1,
+      "message": "Sorry, my mistake - for conditions, only check event_output_. IsActive we should only DCHECK on for everything except Start().\n\nAs per offline discussion, yes, it would probably be possible to get rid of IsActive() in a separate CL, if we guarantee we never pass in an inactive output.",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -275,6 +309,23 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "Hopefully we could get rid of this with my suggestion about removing the deprecated functions in this CL.",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46ab520d_4b086c23",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-13T15:44:54Z",
+      "side": 1,
+      "message": "I see we\u0027re going to have endless hours of fun over the need to \"randomize\" the seeds to a PRNG. :-)",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
