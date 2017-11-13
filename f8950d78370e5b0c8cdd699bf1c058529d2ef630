@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5db7d971_ce3f0b61",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2017-11-13T10:31:17Z",
+      "side": 1,
+      "message": "This sounds like an alternative to using pipes and not for using sigmask() or signal(). Is this the right place for the comment?",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "f8950d78370e5b0c8cdd699bf1c058529d2ef630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

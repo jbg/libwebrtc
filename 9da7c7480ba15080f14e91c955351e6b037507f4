@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b286e1f_9e5ce153",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2017-11-13T10:31:17Z",
+      "side": 0,
+      "message": "This isn\u0027t exactly dropping the task silently because the destructor of the task, does run and the caller can definitely handle that situation.\n\nWhat\u0027s the behavior in Chromium as far as this goes?",
+      "range": {
+        "startLine": 351,
+        "startChar": 11,
+        "endLine": 351,
+        "endChar": 18
+      },
+      "revId": "9da7c7480ba15080f14e91c955351e6b037507f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
