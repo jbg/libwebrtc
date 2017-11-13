@@ -118,6 +118,30 @@
       "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "037b864e_f683bb88",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-11-13T10:48:25Z",
+      "side": 1,
+      "message": "For now this unwrapper class in modules/ is separated in it\u0027s own file and build target. It may be moved to rtc_base in the future CL. There was some unexpected problem (this class never wraps below zero). Some tests had to be updated and additional sanity check is introduced in RtpToNtpEstimator.",
+      "parentUuid": "6abd9d7e_34840332",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "9a8b82de0f5d071f54645e6bda0cc56b193a5979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
