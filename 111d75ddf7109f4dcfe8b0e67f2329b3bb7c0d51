@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "37341f61_81e0b31a",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-14T17:51:47Z",
+      "side": 1,
+      "message": "Can you add a brief method comment?",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4b0bfc93_65fbf735",
         "filename": "api/rtpreceiverinterface.h",
         "patchSetId": 1
@@ -19,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2f4c174e_98d35883",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-14T17:51:47Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure what the best practices are for returning things by reference in an API. The plus side is it saves a copy. The down side is it adds a constraint on the lifetime of the variable; adds a constraint on what thread the variable lives on; and requires the caller to know the lifetime of whatever the reference is pointing to. In this case, it\u0027s just a vector of pointers so it would be cheap to copy, so I\u0027d recommend just leaving it as is.",
+      "parentUuid": "4b0bfc93_65fbf735",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3aaf26b_c9114577",
         "filename": "ortc/ortcrtpreceiveradapter.cc",
         "patchSetId": 1
@@ -30,6 +65,41 @@
       "writtenOn": "2017-11-14T12:31:22Z",
       "side": 1,
       "message": "I\u0027ll add a TODO here to know about and handle the streams, but I don\u0027t know how streams come into play with ORTC. For now I don\u0027t think ORTC needs to know about it?",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f69f9d5_bf89daa4",
+        "filename": "ortc/ortcrtpreceiveradapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-14T17:51:47Z",
+      "side": 1,
+      "message": "A brief search of \"MediaStream\" in the ORTC spec doesn\u0027t come up with anything. My understanding is the concept of streams is mostly relevant for SDP, so it would make sense that ORTC doesn\u0027t have that concept.",
+      "parentUuid": "b3aaf26b_c9114577",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c579e9_f67cc7b4",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-14T17:51:47Z",
+      "side": 1,
+      "message": "Not sure if it would improve the error message here, but gmock has fancy matchers that will often give better error messages. For example, this could be written as:\n\nEXPECT_THAT(callee-\u003eobserver()-\u003eadd_track_events_[0].streams(), ElementsAre(callee-\u003eobserver()-\u003eadd_track_events_[0].receiver-\u003estreams()));\n\n(See https://github.com/google/googletest/blob/master/googlemock/docs/CheatSheet.md for a full list)\n\n(Also, perhaps time to break out `callee-\u003eobserver()-\u003eadd_track_events[0]` as a local variable :)",
       "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
