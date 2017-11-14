@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8b0c71d_dfac2e96",
+        "filename": "api/optional_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-14T10:43:09Z",
+      "side": 1,
+      "message": "doesn\u0027t it test other way around: AssignToNulloptFromFull",
+      "range": {
+        "startLine": 262,
+        "startChar": 27,
+        "endLine": 262,
+        "endChar": 50
+      },
+      "revId": "c0c4816958d9da70566445f84b0c619e0b64a376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
