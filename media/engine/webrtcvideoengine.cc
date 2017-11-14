@@ -563,6 +563,14 @@ std::vector<VideoCodec> AssignPayloadTypesAndAddAssociatedRtxCodecs(
       if (payload_type > kLastDynamicPayloadType)
         break;
     }
+
+    if (CodecNamesEq(codec.name, kVp9CodecName)) {
+      output_codecs.push_back(
+          VideoCodec::CreateStereoCodec(payload_type, codec));
+      ++payload_type;
+      if (payload_type > kLastDynamicPayloadType)
+        break;
+    }
   }
   return output_codecs;
 }
@@ -605,6 +613,9 @@ WebRtcVideoChannel::SelectSendVideoCodec(
       AssignPayloadTypesAndAddAssociatedRtxCodecs(encoder_factory_);
   // Select the first remote codec that is supported locally.
   for (const VideoCodecSettings& remote_mapped_codec : remote_mapped_codecs) {
+    // HARDCODE TO ALPHA
+    if (!cricket::VideoCodec::IsStereoCodec(remote_mapped_codec.codec))
+      continue;
     // For H264, we will limit the encode level to the remote offered level
     // regardless if level asymmetry is allowed or not. This is strictly not
     // following the spec in https://tools.ietf.org/html/rfc6184#section-8.2.2
@@ -1717,6 +1728,10 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec(
   }
   parameters_.config.encoder_settings.payload_name = codec_settings.codec.name;
   parameters_.config.encoder_settings.payload_type = codec_settings.codec.id;
+  VideoCodec associated_codec =
+      VideoCodec::GetStereoAssociatedCodec(codec_settings.codec);
+  parameters_.config.encoder_settings.stereo_associated_payload_name =
+      associated_codec.name;
   parameters_.config.rtp.ulpfec = codec_settings.ulpfec;
   parameters_.config.rtp.flexfec.payload_type =
       codec_settings.flexfec_payload_type;
