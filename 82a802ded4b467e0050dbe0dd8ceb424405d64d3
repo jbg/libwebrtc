@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "26fab451_80b6c35f",
+        "filename": "sdk/android/api/org/webrtc/SurfaceTextureHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-14T12:03:26Z",
+      "side": 1,
+      "message": "The JNI generation script needs explicit imports of the referenced classes. \n\nThe exact error message is this if you are curious:\n\"SyntaxError: Inner class (EglBase.Context) can not be used directly by JNI. Please import the outer class.\"",
+      "parentUuid": "f816d0f1_e62e5fd9",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "82a802ded4b467e0050dbe0dd8ceb424405d64d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "21cf7872_a71a4041",
         "filename": "sdk/android/src/jni/surfacetexturehelper_jni.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "82a802ded4b467e0050dbe0dd8ceb424405d64d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbd8565f_eef5ff70",
+        "filename": "sdk/android/src/jni/surfacetexturehelper_jni.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-14T12:03:26Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "21cf7872_a71a4041",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 80
+      },
+      "revId": "82a802ded4b467e0050dbe0dd8ceb424405d64d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
