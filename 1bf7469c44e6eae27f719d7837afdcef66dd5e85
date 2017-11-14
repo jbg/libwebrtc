@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3cd5076_7e2f6743",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-11-14T09:15:54Z",
+      "side": 1,
+      "message": "can measurements_.empty check be removed",
+      "range": {
+        "startLine": 143,
+        "startChar": 51,
+        "endLine": 143,
+        "endChar": 0
+      },
+      "revId": "1bf7469c44e6eae27f719d7837afdcef66dd5e85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
