@@ -21,5 +21,7 @@ void* FunctionThatDoesNothingImpl(void* x) {
 
 #endif
 
+NulloptArg nullopt_arg;
+
 }  // namespace optional_internal
 }  // namespace rtc
