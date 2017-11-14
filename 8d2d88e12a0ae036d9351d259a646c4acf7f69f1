@@ -46,6 +46,30 @@
       "revId": "8d2d88e12a0ae036d9351d259a646c4acf7f69f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34089142_196f86c5",
+        "filename": "modules/video_coding/generic_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-14T14:46:32Z",
+      "side": 1,
+      "message": "\u003e I believe, throttling is not as good because we might miss important information on how frequently it happens. I want to be able to distinguish if it happens several times during the call or several times in a row.\n\nI meant after it has happened 100 times, we should still log every 100th or something, so we can see if it keeps happening or if it stops? Anyway, up to you.\n\n\u003e Done resetting it in InitEncoder (or rather, in VCMEncodedFrameCallback::Reset, which is called from InitEncode).\n\nI don\u0027t see it?",
+      "parentUuid": "2ccce137_78858ce7",
+      "range": {
+        "startLine": 246,
+        "startChar": 52,
+        "endLine": 246,
+        "endChar": 0
+      },
+      "revId": "8d2d88e12a0ae036d9351d259a646c4acf7f69f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
