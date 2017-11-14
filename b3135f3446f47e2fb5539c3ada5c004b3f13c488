@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "887033e2_f0a1eebf",
+        "filename": "common_audio/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-14T13:55:51Z",
+      "side": 1,
+      "message": "This interface needs a target of its own; if I put it in fir_filter_factory we get a circular dep with common_audio_neon.",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 30
+      },
+      "revId": "b3135f3446f47e2fb5539c3ada5c004b3f13c488",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b98e1df6_51bf249d",
+        "filename": "common_audio/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-14T13:55:51Z",
+      "side": 1,
+      "message": "Maybe it\u0027s a good idea to merge the _sse2 and neon targets into this new bigger target, but perhaps it\u0027s better if one of you does that. At least the circular dep will be gone which makes things easier to work with.",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 38
+      },
+      "revId": "b3135f3446f47e2fb5539c3ada5c004b3f13c488",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b15dc98_c05a4ab8",
+        "filename": "common_audio/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-14T13:55:51Z",
+      "side": 1,
+      "message": "We really want to be in a state where .h and .cc files live in the same target, so I tried to fix some of that in this CL.",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 25
+      },
+      "revId": "b3135f3446f47e2fb5539c3ada5c004b3f13c488",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
