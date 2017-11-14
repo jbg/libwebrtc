@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f816d0f1_e62e5fd9",
+        "filename": "sdk/android/api/org/webrtc/SurfaceTextureHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-14T10:00:47Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "82a802ded4b467e0050dbe0dd8ceb424405d64d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21cf7872_a71a4041",
+        "filename": "sdk/android/src/jni/surfacetexturehelper_jni.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-14T10:00:47Z",
+      "side": 1,
+      "message": "useless",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 80
+      },
+      "revId": "82a802ded4b467e0050dbe0dd8ceb424405d64d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
