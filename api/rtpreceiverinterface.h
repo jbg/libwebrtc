@@ -94,6 +94,11 @@ class RtpReceiverObserverInterface {
 class RtpReceiverInterface : public rtc::RefCountInterface {
  public:
   virtual rtc::scoped_refptr<MediaStreamTrackInterface> track() const = 0;
+  // TODO(hbos): Make pure virtual as soon as Chromium's mock implements this.
+  virtual std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams()
+      const {
+    return std::vector<rtc::scoped_refptr<MediaStreamInterface>>();
+  }
 
   // Audio or video receiver?
   virtual cricket::MediaType media_type() const = 0;
@@ -130,6 +135,8 @@ class RtpReceiverInterface : public rtc::RefCountInterface {
 BEGIN_SIGNALING_PROXY_MAP(RtpReceiver)
   PROXY_SIGNALING_THREAD_DESTRUCTOR()
   PROXY_CONSTMETHOD0(rtc::scoped_refptr<MediaStreamTrackInterface>, track)
+  PROXY_CONSTMETHOD0(std::vector<rtc::scoped_refptr<MediaStreamInterface>>,
+                     streams)
   PROXY_CONSTMETHOD0(cricket::MediaType, media_type)
   PROXY_CONSTMETHOD0(std::string, id)
   PROXY_CONSTMETHOD0(RtpParameters, GetParameters);
