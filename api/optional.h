@@ -26,6 +26,16 @@
 
 namespace rtc {
 
+// Specification:
+// http://en.cppreference.com/w/cpp/utility/optional/nullopt_t
+struct nullopt_t {
+  constexpr explicit nullopt_t(int) {}
+};
+
+// Specification:
+// http://en.cppreference.com/w/cpp/utility/optional/nullopt
+constexpr nullopt_t nullopt(0);
+
 namespace optional_internal {
 
 #if RTC_HAS_ASAN
@@ -100,11 +110,16 @@ class Optional final {
   // Construct an empty Optional.
   Optional() : has_value_(false), empty_('\0') { PoisonValue(); }
 
+  Optional(rtc::nullopt_t)  // NOLINT(runtime/explicit)
+      : Optional() {}
+
   // Construct an Optional that contains a value.
-  explicit Optional(const T& value) : has_value_(true) {
+  Optional(const T& value)  // NOLINT(runtime/explicit)
+      : has_value_(true) {
     new (&value_) T(value);
   }
-  explicit Optional(T&& value) : has_value_(true) {
+  Optional(T&& value)  // NOLINT(runtime/explicit)
+      : has_value_(true) {
     new (&value_) T(std::move(value));
   }
 
@@ -132,6 +147,11 @@ class Optional final {
       value_.~T();
     else
       UnpoisonValue();
+  }
+
+  Optional& operator=(rtc::nullopt_t) {
+    reset();
+    return *this;
   }
 
   // Copy assignment. Uses T's copy assignment if both sides have a value, T's
@@ -274,6 +294,14 @@ class Optional final {
     return opt.has_value_ && value == opt.value_;
   }
 
+  friend bool operator==(const Optional& opt, rtc::nullopt_t) {
+    return !opt.has_value_;
+  }
+
+  friend bool operator==(rtc::nullopt_t, const Optional& opt) {
+    return !opt.has_value_;
+  }
+
   friend bool operator!=(const Optional& m1, const Optional& m2) {
     return m1.has_value_ && m2.has_value_ ? m1.value_ != m2.value_
                                           : m1.has_value_ != m2.has_value_;
@@ -283,6 +311,14 @@ class Optional final {
   }
   friend bool operator!=(const T& value, const Optional& opt) {
     return !opt.has_value_ || value != opt.value_;
+  }
+
+  friend bool operator!=(const Optional& opt, rtc::nullopt_t) {
+    return opt.has_value_;
+  }
+
+  friend bool operator!=(rtc::nullopt_t, const Optional& opt) {
+    return opt.has_value_;
   }
 
  private:
