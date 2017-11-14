@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19f32339_db900492",
+        "filename": "modules/video_coding/generic_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-14T13:07:59Z",
+      "side": 1,
+      "message": "Can we just throttle it instead? Printing the warning if num_messages_ % 100 \u003d\u003d 0 or something?\nAlso, might want to reset these counters on InitEncode?",
+      "range": {
+        "startLine": 246,
+        "startChar": 52,
+        "endLine": 246,
+        "endChar": 0
+      },
+      "revId": "8d2d88e12a0ae036d9351d259a646c4acf7f69f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
