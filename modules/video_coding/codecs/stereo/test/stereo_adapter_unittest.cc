@@ -101,8 +101,16 @@ TEST_F(TestStereoAdapter, EncodeDecodeI420Frame) {
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
   ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
-  EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
-            decoder_->Decode(encoded_frame, false, nullptr));
+  EXPECT_EQ(kVideoCodecStereo, codec_specific_info.codecType);
+  EXPECT_EQ(kVideoCodecVP9,
+            codec_specific_info.codecSpecific.stereo.associatedCodecType);
+  EXPECT_EQ(0, codec_specific_info.codecSpecific.stereo.frameIndex);
+  EXPECT_EQ(1, codec_specific_info.codecSpecific.stereo.frameCount);
+  EXPECT_EQ(0ull, codec_specific_info.codecSpecific.stereo.pictureIndex);
+
+  EXPECT_EQ(
+      WEBRTC_VIDEO_CODEC_OK,
+      decoder_->Decode(encoded_frame, false, nullptr, &codec_specific_info));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
   ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
@@ -117,13 +125,15 @@ TEST_F(TestStereoAdapter, EncodeDecodeI420AFrame) {
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
   ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
-  EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
-            decoder_->Decode(encoded_frame, false, nullptr));
-  std::unique_ptr<VideoFrame> decoded_frame;
-  rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
-  ASSERT_TRUE(decoded_frame);
-  EXPECT_GT(I420PSNR(yuva_frame.get(), decoded_frame.get()), 36);
+  EXPECT_EQ(kVideoCodecStereo, codec_specific_info.codecType);
+  EXPECT_EQ(kVideoCodecVP9,
+            codec_specific_info.codecSpecific.stereo.associatedCodecType);
+  EXPECT_EQ(1, codec_specific_info.codecSpecific.stereo.frameIndex);
+  EXPECT_EQ(2, codec_specific_info.codecSpecific.stereo.frameCount);
+  EXPECT_EQ(0ull, codec_specific_info.codecSpecific.stereo.pictureIndex);
+  EXPECT_EQ(
+      WEBRTC_VIDEO_CODEC_OK,
+      decoder_->Decode(encoded_frame, false, nullptr, &codec_specific_info));
 }
 
 }  // namespace webrtc
