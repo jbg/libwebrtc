@@ -113,14 +113,11 @@ int32_t StereoDecoderAdapter::Decode(
     const RTPFragmentationHeader* /*fragmentation*/,
     const CodecSpecificInfo* codec_specific_info,
     int64_t render_time_ms) {
-  // TODO(emircan): Read |codec_specific_info->stereoInfo| to split frames.
-  int32_t rv =
-      decoders_[kYUVStream]->Decode(input_image, missing_frames, nullptr,
-                                    codec_specific_info, render_time_ms);
-  if (rv)
-    return rv;
-  rv = decoders_[kAXXStream]->Decode(input_image, missing_frames, nullptr,
-                                     codec_specific_info, render_time_ms);
+  const CodecSpecificInfoStereo& stereo_info =
+      codec_specific_info->codecSpecific.stereo;
+  RTC_DCHECK_LT(static_cast<int>(stereo_info.frameIndex), decoders_.size());
+  int32_t rv = decoders_[stereo_info.frameIndex]->Decode(
+      input_image, missing_frames, nullptr, nullptr, render_time_ms);
   return rv;
 }
 
