@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee09c27d_e6774801",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e1ada98_d3eb53d5",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73b63d7e_e5cc0dd4",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "aa7a8dedc01539521038f9097585392af8838d25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81afbae3_46dcb9cb",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Yeah, should do that.",
+      "parentUuid": "73b63d7e_e5cc0dd4",
+      "range": {
+        "startLine": 70,
+        "startChar": 25,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3b3d1280_4ac939fe",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7eb6abc_5c3c1d7a",
+      "range": {
+        "startLine": 92,
+        "startChar": 44,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d2f1ef2_352b6a4a",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 10
@@ -91,6 +163,30 @@
       "revId": "aa7a8dedc01539521038f9097585392af8838d25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb305fb7_9796a388",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "rtp_packet_transport from SrtpTransport is a PacketTransportInternal* rather than a DtlsTransport* and IsDtlsActive() is not available. This is why I store the DtlsTransport* separately here so that we can avoid downcasting.\n\nI can do something similar here.",
+      "parentUuid": "3d2f1ef2_352b6a4a",
+      "range": {
+        "startLine": 98,
+        "startChar": 73,
+        "endLine": 98,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "0ad88a0e_239a2f5b",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc164973_1ef07871",
+      "range": {
+        "startLine": 113,
+        "startChar": 75,
+        "endLine": 113,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11bdd636_73fc7b40",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 10
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "843a390c_40ccc046",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "11bdd636_73fc7b40",
+      "range": {
+        "startLine": 126,
+        "startChar": 39,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf1d3cea_50d8d4d2",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 10
@@ -151,6 +295,30 @@
       "writtenOn": "2017-11-10T21:51:15Z",
       "side": 1,
       "message": "Could you break up this method into 2: one for extraction, which doesn\u0027t need the rtcp bool, and one for setting.  Then you could have something like this:\n\nExtractParams(\u0026params)\nSetRtpParams(params)\n\nor\n\n\nExtractParams(\u0026params)\nSetRtcpParams(params)",
+      "range": {
+        "startLine": 201,
+        "startChar": 3,
+        "endLine": 201,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5aabe2d9_5759451f",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "ExtractParams still needs to know which DtlsTransport to use, RTP or RTCP.\n\nIf the point is to get rid of the rtcp bool,\nthen I think we can do this:\n\nSetupRtpDtlsSrtp {\n  GetCachedHeaderExtensionId\n  ExtractParams(rtp_dtls_transport, \u0026param)\n  SetRtpParams\n}\n\nSetupRtcpDtlsSrtp {\n  GetCacheHeaderExtensionId\n  ExtractParams(rtcp_dtls_transport, \u0026param)\n  SetRtcpParms\n}\n\nMaybeSetupDtlsSrtp {\n  SetupRtpDtlsSrtp\n  SetupRtcpDtlsSrtp\n}\n\nSetEncryptedHeaderExtensionId() {\n  CacheHeaderExtensionId\n  // Call this method to update the SrtpSession\n  // This extra layer of abstraction can help to reduce duplicated code.\n  SetupRtpDtlsSrtp\n\n}\n\n\nDoes it make sense?",
+      "parentUuid": "bf1d3cea_50d8d4d2",
       "range": {
         "startLine": 201,
         "startChar": 3,
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "b745f94a_ab2307b4",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bcc231c_257133a2",
+      "range": {
+        "startLine": 234,
+        "startChar": 80,
+        "endLine": 234,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36bc0d34_ac1c956a",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 10
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "e4e49793_f0c17996",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36bc0d34_ac1c956a",
+      "range": {
+        "startLine": 239,
+        "startChar": 57,
+        "endLine": 239,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fde68a75_3d6947b5",
         "filename": "pc/dtlssrtptransport.cc",
         "patchSetId": 10
@@ -220,6 +436,30 @@
       "writtenOn": "2017-11-10T21:51:15Z",
       "side": 1,
       "message": "Wouldn\u0027t srtp_transport_-\u003ertcp_packet_transport() already be null if rtcp_mux is enabled?",
+      "range": {
+        "startLine": 272,
+        "startChar": 78,
+        "endLine": 272,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91adc591_957ef314",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "I think in PrAnswer, the rtcp_mux_enabled() could be true and rtcp_packet_transport() is non-null.",
+      "parentUuid": "fde68a75_3d6947b5",
       "range": {
         "startLine": 272,
         "startChar": 78,
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "cc843105_c6d33344",
+        "filename": "pc/dtlssrtptransport.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "This is nicer! Done.",
+      "parentUuid": "eb498f42_63b71a04",
+      "range": {
+        "startLine": 286,
+        "startChar": 5,
+        "endLine": 286,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57a9bcdb_a792575a",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 10
@@ -278,6 +542,30 @@
     },
     {
       "key": {
+        "uuid": "4013a3b0_81724b34",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57a9bcdb_a792575a",
+      "range": {
+        "startLine": 25,
+        "startChar": 54,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1af6025_7673247e",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 10
@@ -289,6 +577,30 @@
       "writtenOn": "2017-11-10T21:51:15Z",
       "side": 1,
       "message": "When muxing, should the second variable be the same as the first or null?",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "608f6bf2_f30120ee",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "In current implementation, it should be null.",
+      "parentUuid": "e1af6025_7673247e",
       "range": {
         "startLine": 31,
         "startChar": 43,
@@ -324,6 +636,30 @@
     },
     {
       "key": {
+        "uuid": "d4bbfbe5_715b1f8b",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "One reason is for bundling and we need it to reset the DtlsTransport. The SrtpTransport/RtpTransport only have setters for PacketTransport and the DtlsSrtpTransport needs the DtlsTransport.\n\nWe are using \"transport\" for both RTP level transport and P2P level transport which could be confusing.",
+      "parentUuid": "2d1be313_179328a1",
+      "range": {
+        "startLine": 33,
+        "startChar": 78,
+        "endLine": 33,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c5af1d_5cd9deff",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 10
@@ -347,6 +683,30 @@
     },
     {
       "key": {
+        "uuid": "7f7e7946_7b98792f",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "With recent refactoring on BaseChannel, we don\u0027t need these anymore.",
+      "parentUuid": "14c5af1d_5cd9deff",
+      "range": {
+        "startLine": 45,
+        "startChar": 31,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e84dba2_76791064",
         "filename": "pc/dtlssrtptransport.h",
         "patchSetId": 10
@@ -358,6 +718,30 @@
       "writtenOn": "2017-11-10T21:51:15Z",
       "side": 1,
       "message": "Is this supposed to be \"override\"?",
+      "range": {
+        "startLine": 52,
+        "startChar": 57,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "aa7a8dedc01539521038f9097585392af8838d25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "187f4913_52bfcca6",
+        "filename": "pc/dtlssrtptransport.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-14T18:39:03Z",
+      "side": 1,
+      "message": "In current implementation, it\u0027s not part of RtpTransportInternal interface because it means \"The SrtpTransport is ready to protect packets.\". So it\u0027s not supposed to be override.",
+      "parentUuid": "3e84dba2_76791064",
       "range": {
         "startLine": 52,
         "startChar": 57,
