@@ -22,6 +22,30 @@
       "revId": "8d2d88e12a0ae036d9351d259a646c4acf7f69f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ccce137_78858ce7",
+        "filename": "modules/video_coding/generic_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2017-11-14T13:14:16Z",
+      "side": 1,
+      "message": "I believe, throttling is not as good because we might miss important information on how frequently it happens. I want to be able to distinguish if it happens several times during the call or several times in a row.\n\nDone resetting it in InitEncoder (or rather, in VCMEncodedFrameCallback::Reset, which is called from InitEncode).",
+      "parentUuid": "19f32339_db900492",
+      "range": {
+        "startLine": 246,
+        "startChar": 52,
+        "endLine": 246,
+        "endChar": 0
+      },
+      "revId": "8d2d88e12a0ae036d9351d259a646c4acf7f69f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
