@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b80fad32_a9f841a0",
+        "filename": "sdk/android/api/org/webrtc/Metrics.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-14T12:16:34Z",
+      "side": 1,
+      "message": "Is it hard to support this? If it can be done a few days, maybe we should wait with this CL until it is implemented.",
+      "revId": "e6e731457aff80a5bc91cb21c33bbb650537d70b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
