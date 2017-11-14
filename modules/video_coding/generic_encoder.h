@@ -96,6 +96,8 @@ class VCMEncodedFrameCallback : public EncodedImageCallback {
   int64_t last_timing_frame_time_ms_ RTC_GUARDED_BY(timing_params_lock_);
   VideoCodec::TimingFrameTriggerThresholds timing_frames_thresholds_
       RTC_GUARDED_BY(timing_params_lock_);
+  size_t reordered_frames_logged_messages_ RTC_GUARDED_BY(timing_params_lock_);
+  size_t stalled_encoder_logged_messages_ RTC_GUARDED_BY(timing_params_lock_);
 
   // Experiment groups parsed from field trials for realtime video ([0]) and
   // screenshare ([1]). 0 means no group specified. Positive values are
