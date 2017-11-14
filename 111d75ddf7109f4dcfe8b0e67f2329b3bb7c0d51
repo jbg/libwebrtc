@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b0bfc93_65fbf735",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-14T12:31:22Z",
+      "side": 1,
+      "message": "I could make this const std::vector\u003c...\u003e\u0026 but I can\u0027t return a reference to a local variable so I\u0027d have to have some temporary empty vector variable that I return. Makes sense if I remove the default implementation in a follow-up?",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3aaf26b_c9114577",
+        "filename": "ortc/ortcrtpreceiveradapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-14T12:31:22Z",
+      "side": 1,
+      "message": "I\u0027ll add a TODO here to know about and handle the streams, but I don\u0027t know how streams come into play with ORTC. For now I don\u0027t think ORTC needs to know about it?",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
