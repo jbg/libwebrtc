@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35493b44_fb2e9a9f",
+        "filename": "video/send_statistics_proxy_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-11-15T15:31:51Z",
+      "side": 1,
+      "message": "Is the reason that we are expecting false here that the implementation name is not \"libvpx\"?",
+      "range": {
+        "startLine": 1934,
+        "startChar": 30,
+        "endLine": 1934,
+        "endChar": 65
+      },
+      "revId": "2836f1e4202ed7369ca17968e8b5562de6f1b5ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd795c5e_0395eae4",
+        "filename": "video/send_statistics_proxy_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-11-15T15:31:51Z",
+      "side": 1,
+      "message": "Maybe add \u003e1 \"EXPECT_TRUE(statistics_proxy_-\u003eGetStats().has_entered_low_resolution)\" lines here too? To ensure that the flag doesn\u0027t toggle.",
+      "range": {
+        "startLine": 1973,
+        "startChar": 30,
+        "endLine": 1973,
+        "endChar": 49
+      },
+      "revId": "2836f1e4202ed7369ca17968e8b5562de6f1b5ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
