@@ -734,6 +734,7 @@ struct VideoSenderInfo : public MediaSenderInfo {
         avg_encode_ms(0),
         encode_usage_percent(0),
         frames_encoded(0),
+        has_entered_low_resolution(false),
         content_type(webrtc::VideoContentType::UNSPECIFIED) {}
 
   std::vector<SsrcGroup> ssrc_groups;
@@ -754,6 +755,7 @@ struct VideoSenderInfo : public MediaSenderInfo {
   int avg_encode_ms;
   int encode_usage_percent;
   uint32_t frames_encoded;
+  bool has_entered_low_resolution;
   rtc::Optional<uint64_t> qp_sum;
   webrtc::VideoContentType content_type;
 };
