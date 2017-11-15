@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "f892595e_2feefdea",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Yes, removed. This was left behind when I was moving some things around.",
+      "parentUuid": "58df01af_a2072aa6",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06176ff4_742bc7fd",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -56,6 +74,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c905e75_0a8654e8",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06176ff4_742bc7fd",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "1dcf31c6_222cb348",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "113289e5_1bf99086",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da4130d6_06f8e361",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -105,6 +159,24 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "1. Underscore.\n2. is_?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0410c6_aa5634cc",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Added the underscore. I prefer not adding the is_ prefix.",
+      "parentUuid": "da4130d6_06f8e361",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -128,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "c486efd1_f6663980",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "It should be initialized to something imo. I\u0027ve changed to kImmediateOutput.",
+      "parentUuid": "aad33efb_267714fc",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d17238af_6f639d92",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -139,6 +229,24 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "I think it would be good to RTC_CHECK() that (output_period_ms \u003d\u003d kImmediateOutput || output_period_ms \u003e 0).",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1583b00_18ed4b0f",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Added a DCHECK. CHECK seems excessive.",
+      "parentUuid": "d17238af_6f639d92",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -162,6 +270,24 @@
     },
     {
       "key": {
+        "uuid": "bffd28ab_da825d7a",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a7f6ab7_9bc567d5",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "317800ca_d0586dd7",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -173,6 +299,24 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "event_output_ \u0026\u0026 event_output_-\u003eIsActive()",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efffe7d0_9370b93b",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Added a DCHECK for IsActive as discussed offline.",
+      "parentUuid": "317800ca_d0586dd7",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -196,6 +340,24 @@
     },
     {
       "key": {
+        "uuid": "658e014b_01c309ce",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "212f8700_4a7b1143",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d145f184_925e6e05",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -210,6 +372,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02739661_eaf1512c",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done. (s/Don\u0027t/Shouldn\u0027t/)",
+      "parentUuid": "d145f184_925e6e05",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -247,6 +427,24 @@
     },
     {
       "key": {
+        "uuid": "e3f73332_bab843da",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done. Rewritten.",
+      "parentUuid": "fb6cf3e2_1ed1ac62",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c17963a4_fcb81ab5",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -261,6 +459,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b11f5c8_c65489f3",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done. Added a comment here because this is the only place it is used (except for initialization).",
+      "parentUuid": "c17963a4_fcb81ab5",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -281,6 +497,24 @@
     },
     {
       "key": {
+        "uuid": "ba099c0d_fb432383",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d2f26551_c8dcf45b",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48423e26_bb15139e",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -295,6 +529,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a2fdce3_10632653",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48423e26_bb15139e",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -346,6 +598,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b30c327_04504b08",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T16:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f24c318_fa5da593",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
