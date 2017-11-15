@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67f818d4_497efdee",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "prefer to follow style guide for names in new structures:\n(https://google.github.io/styleguide/cppguide.html#Variable_Names)\n\nstruct RtpVideoHeaderStereo {\n  associated_codec_type;\n  frame_index;\n  frame_count;  // btw, what does this mean, i.e. how is it different to frame_index?\n  picture_index;\n}",
+      "range": {
+        "startLine": 50,
+        "startChar": 29,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57f11a7e_5c8146f8",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "use current year in new files",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e327729_e28287f5",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "prefer to put constants inside an unnamed namespace instead of marking them as static.\nprefer to use constexpr over const for them.",
+      "range": {
+        "startLine": 21,
+        "startChar": 50,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6054d139_be9e1d48",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "what rv stand for?\nsince you check it is always true, why you need the variable?\nRTC_CHECK(packetizer_.NextPacket(packet));\n...\nreturn true;",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6696080c_893aef46",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "this will increase payload size beyond what was passed in constructor as max_payload_len.\nMay be do not rely on RtpPacketizerGeneric, but re-implement everything you need from it. There is no complicated code there.\nResult code likely be simpler and there will be no unnecessary memcpy",
+      "range": {
+        "startLine": 57,
+        "startChar": 70,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbb7fb43_7d188866",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "kStereoHeaderLength might be different on different computers (architectures) e.g. due to different memory alignment, different representation of enum (it usually mapped as int that can be different size).\nendianess can be different too.\n\nUse exact number of bytes to put on the wire and exact endianess (e.g. with ByteReader\u003cint_type\u003e::ReadBigEndian)",
+      "range": {
+        "startLine": 63,
+        "startChar": 32,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b73c162_fa399b3c",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "do not use assert,\nuse RTC_DCHECK(parsed_payload) instead.",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 8
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "171080cd_a5655fbc",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "check payload_data_length before reading from payload_data.\nThis data comes from the wire, so can\u0027t be trusted.",
+      "range": {
+        "startLine": 99,
+        "startChar": 32,
+        "endLine": 99,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6c11db4_b422ac1b",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "use current year in new files",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57b891b7_937e7a33",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "does it have to be in the header file?\nMay be move into unnamed namespace in .cc file instead of introducing extra nesting namespace",
+      "range": {
+        "startLine": 21,
+        "startChar": 44,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35cfade8_eb36f24b",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "Please add unittests for RtpPacketizerStereo and RtpDepacketizer",
+      "range": {
+        "startLine": 24,
+        "startChar": 50,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f914c001_25828abe",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "use override instead of virtual",
+      "range": {
+        "startLine": 31,
+        "startChar": 33,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9161496_3c264c18",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "why GetProtectionType and GetStorageType belong to the Packetizer?",
+      "range": {
+        "startLine": 42,
+        "startChar": 37,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80757087_566cb91d",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-15T13:28:59Z",
+      "side": 1,
+      "message": "use override instead of virtual, put implementation (even if it is default) into .cc file",
+      "range": {
+        "startLine": 60,
+        "startChar": 37,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "352f5759bbe8394283200f68241dfcf32ceb32d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
