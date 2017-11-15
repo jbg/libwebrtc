@@ -76,6 +76,8 @@ TEST_F(PeerConnectionRtpTest, AddTrackWithoutStreamFiresOnAddTrack) {
   EXPECT_TRUE(
       callee->observer()->add_track_events_[0].streams[0]->FindAudioTrack(
           "audio_track"));
+  EXPECT_EQ(callee->observer()->add_track_events_[0].streams,
+            callee->observer()->add_track_events_[0].receiver->streams());
 }
 
 TEST_F(PeerConnectionRtpTest, AddTrackWithStreamFiresOnAddTrack) {
@@ -95,6 +97,8 @@ TEST_F(PeerConnectionRtpTest, AddTrackWithStreamFiresOnAddTrack) {
   EXPECT_TRUE(
       callee->observer()->add_track_events_[0].streams[0]->FindAudioTrack(
           "audio_track"));
+  EXPECT_EQ(callee->observer()->add_track_events_[0].streams,
+            callee->observer()->add_track_events_[0].receiver->streams());
 }
 
 TEST_F(PeerConnectionRtpTest, RemoveTrackWithoutStreamFiresOnRemoveTrack) {
