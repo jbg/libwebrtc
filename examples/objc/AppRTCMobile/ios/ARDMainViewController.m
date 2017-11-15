@@ -41,6 +41,10 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   BOOL _useManualAudio;
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskAll;
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   if ([[[NSProcessInfo processInfo] arguments] containsObject:loopbackLaunchProcessArgument]) {

@@ -23,6 +23,46 @@
   return [AVCaptureVideoPreviewLayer class];
 }
 
+- (void)addOrientationObserver
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                            selector:@selector(orientationChanged:)
+                                                name:UIDeviceOrientationDidChangeNotification
+                                              object:nil];
+}
+
+- (void)removeOrientationObserver
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UIDeviceOrientationDidChangeNotification
+                                                object:nil];
+}
+
+- (instancetype)initWithFrame:(CGRect)aRect
+{
+  self = [super initWithFrame:aRect];
+  if (self)
+  {
+      [self addOrientationObserver];
+  }
+  return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder*)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
+  if (self)
+  {
+      [self addOrientationObserver];
+  }
+  return self;
+}
+
+- (void)dealloc
+{
+    [self removeOrientationObserver];
+}
+
 - (void)setCaptureSession:(AVCaptureSession *)captureSession {
   if (_captureSession == captureSession) {
     return;
@@ -34,6 +74,10 @@
     [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeCaptureSession
                                  block:^{
       previewLayer.session = captureSession;
+      [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeMain
+                               block:^{
+        [self setCorrectVideoOrientation];
+      }];
     }];
   }];
 }
@@ -42,6 +86,10 @@
   [super layoutSubviews];
 
   // Update the video orientation based on the device orientation.
+  [self setCorrectVideoOrientation];
+}
+
+-(void)orientationChanged:(NSNotification *)notif {
   [self setCorrectVideoOrientation];
 }
 
