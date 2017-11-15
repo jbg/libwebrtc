@@ -277,7 +277,7 @@
       'x64', 'no_rtc_tests'
     ],
     'memcheck_release_bot_x64': [
-      'memcheck', 'gn', 'openh264_release_bot', 'x64', 'use_default_libcxx',
+      'memcheck', 'gn', 'openh264_release_bot', 'x64',
       'no_lld'
     ],
 
@@ -502,9 +502,5 @@
     'x86': {
       'gn_args': 'target_cpu="x86"',
     },
-
-    'use_default_libcxx': {
-      'gn_args': 'use_custom_libcxx=false',
-    }
   },
 }
