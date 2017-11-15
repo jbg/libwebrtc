@@ -434,6 +434,24 @@
     },
     {
       "key": {
+        "uuid": "c0ba6964_e8866ed0",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T17:27:00Z",
+      "side": 1,
+      "message": "Since the output period controls when we start outputing, I think it is more correct to take the measurement at the start of the function. However, I don\u0027t think this is important enough to comment on. Nothing bad will happen if the measurement is taken at the end of the function.",
+      "parentUuid": "5060e5d0_0e6f4831",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb6cf3e2_1ed1ac62",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -623,6 +641,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90d113a0_c70cd348",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T17:27:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "46ab520d_4b086c23",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
