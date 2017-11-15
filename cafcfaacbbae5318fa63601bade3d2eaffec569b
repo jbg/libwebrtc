@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7967e277_07584f3c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T17:21:38Z",
+      "side": 1,
+      "message": "Done. Uploaded as a separate patchset.",
+      "parentUuid": "f4d4f9f9_8f1f89e0",
+      "range": {
+        "startLine": 828,
+        "startChar": 0,
+        "endLine": 834,
+        "endChar": 3
+      },
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58df01af_a2072aa6",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -567,6 +591,24 @@
     },
     {
       "key": {
+        "uuid": "8466e792_47c95dde",
+        "filename": "logging/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T17:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbdb6bfa_eba98850",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46ab520d_4b086c23",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
         "patchSetId": 2
@@ -630,6 +672,24 @@
       "writtenOn": "2017-11-13T14:38:10Z",
       "side": 1,
       "message": "It\u0027s probably a bit funny that we have documentation for the private functions, but not the public ones. Do you think we should take this opportunity to rectify this anomaly, only for this function, and also had an explanation of |output_period_ms|?",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dfaffbe_0ee23d84",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-15T17:21:38Z",
+      "side": 1,
+      "message": "I can do it if you want, but most of the other public functions do not have documentation whereas the private functions do. I assume that this is because the public functions implement the peerconnectioninterface (which is documented).",
+      "parentUuid": "45e769da_07e4a737",
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
