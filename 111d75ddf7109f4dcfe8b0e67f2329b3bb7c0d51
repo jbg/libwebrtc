@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "06ae9779_6cf502e8",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-15T12:59:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37341f61_81e0b31a",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b0bfc93_65fbf735",
         "filename": "api/rtpreceiverinterface.h",
         "patchSetId": 1
@@ -51,6 +69,24 @@
       "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9622a1a8_c826a011",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-15T12:59:52Z",
+      "side": 1,
+      "message": "That makes sense, agreed.",
+      "parentUuid": "2f4c174e_98d35883",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "caf61a5e_cf29430e",
+        "filename": "ortc/ortcrtpreceiveradapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-15T12:59:52Z",
+      "side": 1,
+      "message": "Ack, then no associated set of streams makes sense in ORTC, no comment added.",
+      "parentUuid": "7f69f9d5_bf89daa4",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22c579e9_f67cc7b4",
         "filename": "pc/peerconnection_rtp_unittest.cc",
         "patchSetId": 1
@@ -103,6 +157,24 @@
       "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d996fdc6_f8ca863d",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-15T12:59:52Z",
+      "side": 1,
+      "message": "Using EXPECT_THAT did not actually improve the error message, with EXPECT_THAT:\n\nValue of: callee-\u003eobserver()-\u003eadd_track_events_[0].streams\nExpected: has 1 element that is equal to 8-byte object \u003c10-60 17-02 00-00 00-00\u003e\n  Actual: { 8-byte object \u003c10-60 17-02 00-00 00-00\u003e, 8-byte object \u003c00-00 00-00 00-00 00-00\u003e }, which has 2 elements\n\nWith EXPECT_EQ:\n\n      Expected: callee-\u003eobserver()-\u003eadd_track_events_[0].streams\n      Which is: { 8-byte object \u003cD0-3F C9-03 00-00 00-00\u003e, 8-byte object \u003c00-00 00-00 00-00 00-00\u003e }\nTo be equal to: callee-\u003eobserver()-\u003eadd_track_events_[0].receiver-\u003estreams()\n      Which is: { 8-byte object \u003cD0-3F C9-03 00-00 00-00\u003e }\n\nThe bit about the second argument being \"callee-\u003eobserver()-\u003eadd_track_events_[0].receiver-\u003estreams()\" was cut away when using EXPECT_THAT, the only new information by EXPECT_THAT was that the size of the arrays.\n\nStill using EXPECT_EQ unless EXPECT_THAT is the recommended way to do this nowadays.\n\nLocal variable for it: Done.",
+      "parentUuid": "22c579e9_f67cc7b4",
+      "revId": "111d75ddf7109f4dcfe8b0e67f2329b3bb7c0d51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
