@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aae99fd6_f2c16b35",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-11-15T02:50:01Z",
+      "side": 1,
+      "message": "This should be:\n\n  BIO* bio \u003d BIO_new_mem_buf(certificate_chain.data(), certificate_chain.size());\n\nThis avoids the unnecessary const_cast and avoids truncating strings that have embedded NULs.\n\nThis appears to be an issue throughout WebRTC, so it might be better to do this separately and uniformly as a follow-up change.",
+      "revId": "e4262b27c8642c78355e2d03ae1e9634e0947f50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e1e3401_15ed358a",
+        "filename": "rtc_base/opensslidentity.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-11-15T02:50:01Z",
+      "side": 1,
+      "message": "std::unique_ptr\u003cOpenSSLKeyPair\u003e and std::unique_ptr\u003cSSLCertChain\u003e. (The line above should also use unique_ptr.",
+      "revId": "e4262b27c8642c78355e2d03ae1e9634e0947f50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
