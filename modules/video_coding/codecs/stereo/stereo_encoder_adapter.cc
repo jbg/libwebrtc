@@ -44,6 +44,18 @@ class StereoEncoderAdapter::AdapterEncodedImageCallback
   const AlphaCodecStream stream_idx_;
 };
 
+// Holds the encoded image info.
+struct StereoEncoderAdapter::ImageStereoInfo {
+  ImageStereoInfo(uint64_t picture_index, uint8_t frame_count)
+      : picture_index(picture_index), frame_count(frame_count) {}
+  uint64_t picture_index;
+  uint8_t frame_count;
+  uint8_t encoded_count = 0;
+
+ private:
+  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(ImageStereoInfo);
+};
+
 StereoEncoderAdapter::StereoEncoderAdapter(VideoEncoderFactory* factory)
     : factory_(factory), encoded_complete_callback_(nullptr) {}
 
@@ -83,15 +95,18 @@ int StereoEncoderAdapter::Encode(const VideoFrame& input_image,
   if (!encoded_complete_callback_) {
     return WEBRTC_VIDEO_CODEC_UNINITIALIZED;
   }
-  // Encode YUV
-  int rv = encoders_[kYUVStream]->Encode(input_image, codec_specific_info,
-                                         frame_types);
-  if (rv)
-    return rv;
 
   const bool has_alpha = input_image.video_frame_buffer()->type() ==
                          VideoFrameBuffer::Type::kI420A;
-  if (!has_alpha)
+  image_stereo_info_.emplace(
+      std::piecewise_construct, std::forward_as_tuple(input_image.timestamp()),
+      std::forward_as_tuple(picture_index_++,
+                            has_alpha ? kAlphaCodecStreams : 1));
+
+  // Encode YUV
+  int rv = encoders_[kYUVStream]->Encode(input_image, codec_specific_info,
+                                         frame_types);
+  if (rv || !has_alpha)
     return rv;
 
   // Encode AXX
@@ -160,10 +175,25 @@ EncodedImageCallback::Result StereoEncoderAdapter::OnEncodedImage(
     const EncodedImage& encodedImage,
     const CodecSpecificInfo* codecSpecificInfo,
     const RTPFragmentationHeader* fragmentation) {
-  if (stream_idx == kAXXStream)
-    return EncodedImageCallback::Result(EncodedImageCallback::Result::OK);
+  const VideoCodecType associated_coded_type = codecSpecificInfo->codecType;
+  const auto& image_stereo_info_itr =
+      image_stereo_info_.find(encodedImage._timeStamp);
+  RTC_DCHECK(image_stereo_info_itr != image_stereo_info_.end());
+  ImageStereoInfo& image_stereo_info = image_stereo_info_itr->second;
+  const auto frame_count = image_stereo_info.frame_count;
+  const auto picture_index = image_stereo_info.picture_index;
+  if (++image_stereo_info.encoded_count == frame_count)
+    image_stereo_info_.erase(image_stereo_info_itr);
 
-  // TODO(emircan): Fill |codec_specific_info| with stereo parameters.
+  CodecSpecificInfo* codec_info =
+      const_cast<CodecSpecificInfo*>(codecSpecificInfo);
+  codec_info->codecType = kVideoCodecStereo;
+  codec_info->codec_name = "stereo";
+  codec_info->codecSpecific.stereo.associatedCodecType = associated_coded_type;
+  codec_info->codecSpecific.stereo.frameIndex = stream_idx;
+  codec_info->codecSpecific.stereo.frameCount = frame_count;
+  codec_info->codecSpecific.stereo.pictureIndex = picture_index;
+
   encoded_complete_callback_->OnEncodedImage(encodedImage, codecSpecificInfo,
                                              fragmentation);
   return EncodedImageCallback::Result(EncodedImageCallback::Result::OK);
