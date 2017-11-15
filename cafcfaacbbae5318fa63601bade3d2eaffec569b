@@ -207,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "20559105_a3fb9371",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3c0410c6_aa5634cc",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aad33efb_267714fc",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -242,6 +260,24 @@
     },
     {
       "key": {
+        "uuid": "8afa604d_793b6ad2",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c486efd1_f6663980",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d17238af_6f639d92",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 2
@@ -274,6 +310,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86ce2aed_e32834d8",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f1583b00_18ed4b0f",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -344,6 +398,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "016c8d36_1c739234",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "efffe7d0_9370b93b",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -449,6 +521,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24bb43d3_09eef5b2",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "I\u0027m okay with either, provided that it\u0027s intentional; I just wanted to make sure you\u0027re getting exactly what you expect.",
+      "parentUuid": "c0ba6964_e8866ed0",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -729,6 +819,24 @@
       "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4059f0f1_2dbecbdc",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "That\u0027s probably the reason. Sounds like a good enough reason; please forget I\u0027d said anything.",
+      "parentUuid": "8dfaffbe_0ee23d84",
+      "revId": "cafcfaacbbae5318fa63601bade3d2eaffec569b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {

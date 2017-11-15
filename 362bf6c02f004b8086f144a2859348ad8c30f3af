@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f17189aa_aea56337",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Still used?",
+      "revId": "362bf6c02f004b8086f144a2859348ad8c30f3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7366d10f_54a35e5c",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "362bf6c02f004b8086f144a2859348ad8c30f3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f798bb_da45d48b",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "nit: Just a thought; if we took out the check for event_output_, we could reduce the indentation of this function, while (imho) maintaining clarity. And I think it makes sense to only ScheduleOutput() when you have an |event_output_|, so we\u0027re not making a compromise there.",
+      "revId": "362bf6c02f004b8086f144a2859348ad8c30f3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "811a7957_70ff6a51",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "Don\u0027t we want this to also only be called if |event_output_| is not-null?",
+      "revId": "362bf6c02f004b8086f144a2859348ad8c30f3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d684138_901f292d",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-15T18:53:46Z",
+      "side": 1,
+      "message": "In the case that we never assign an |event_output_|, because Start() was never called, but the history is nevertheless filled to capacity by calls to Log(), this DCHECK should fail, right? Meaning we probably want to write a unit-tests that would fail in that case, then fix this (as per comment above), and keep the unit-test. Or maybe I\u0027m confused?",
+      "revId": "362bf6c02f004b8086f144a2859348ad8c30f3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
