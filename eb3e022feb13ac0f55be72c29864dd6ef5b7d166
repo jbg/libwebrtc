@@ -22,6 +22,30 @@
       "revId": "eb3e022feb13ac0f55be72c29864dd6ef5b7d166",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "238dbed8_351dab94",
+        "filename": "pc/channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2017-11-15T17:28:11Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "f0b3f8a7_5a9cd4e8",
+      "range": {
+        "startLine": 119,
+        "startChar": 29,
+        "endLine": 119,
+        "endChar": 33
+      },
+      "revId": "eb3e022feb13ac0f55be72c29864dd6ef5b7d166",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
