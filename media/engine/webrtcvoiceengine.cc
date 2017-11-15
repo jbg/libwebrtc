@@ -626,22 +626,14 @@ bool WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
   apm()->SetExtraOptions(config);
   apm()->ApplyConfig(apm_config);
 
+  // TODO(henrika): remove usage of these ad-hoc options. A client shall not
+  // be able to affect such native audio settings at this level.
   if (options.recording_sample_rate) {
-    RTC_LOG(LS_INFO) << "Recording sample rate is "
-                     << *options.recording_sample_rate;
-    if (adm()->SetRecordingSampleRate(*options.recording_sample_rate)) {
-      RTC_LOG(LS_WARNING) << "SetRecordingSampleRate("
-                          << *options.recording_sample_rate << ") failed.";
-    }
+    RTC_LOG(LS_ERROR) << *options.recording_sample_rate << " is not supported";
   }
 
   if (options.playout_sample_rate) {
-    RTC_LOG(LS_INFO) << "Playout sample rate is "
-                     << *options.playout_sample_rate;
-    if (adm()->SetPlayoutSampleRate(*options.playout_sample_rate)) {
-      RTC_LOG(LS_WARNING) << "SetPlayoutSampleRate("
-                          << *options.playout_sample_rate << ") failed.";
-    }
+    RTC_LOG(LS_ERROR) << *options.playout_sample_rate << " is not supported";
   }
   return true;
 }
