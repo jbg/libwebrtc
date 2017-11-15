@@ -16,6 +16,24 @@
       "revId": "756cfbd99f9a9e431df7af335358e4863cd632a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "124c4c19_eee63c9e",
+        "filename": "audio/audio_send_stream.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2017-11-15T16:27:12Z",
+      "side": 1,
+      "message": "Yes, I updated to using a local variable where it\u0027s used.",
+      "parentUuid": "263f3681_4b1ddc7e",
+      "revId": "756cfbd99f9a9e431df7af335358e4863cd632a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
