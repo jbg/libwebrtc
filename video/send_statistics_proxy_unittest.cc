@@ -1867,7 +1867,8 @@ class ForcedFallbackTest : public SendStatisticsProxyTest {
 class ForcedFallbackDisabled : public ForcedFallbackTest {
  public:
   ForcedFallbackDisabled()
-      : ForcedFallbackTest("WebRTC-VP8-Forced-Fallback-Encoder-v2/Disabled/") {}
+      : ForcedFallbackTest("WebRTC-VP8-Forced-Fallback-Encoder-v2/Disabled-1," +
+                           std::to_string(kWidth * kHeight) + ",3/") {}
 };
 
 class ForcedFallbackEnabled : public ForcedFallbackTest {
@@ -1886,6 +1887,7 @@ TEST_F(ForcedFallbackEnabled, StatsNotUpdatedIfMinRunTimeHasNotPassed) {
 
 TEST_F(ForcedFallbackEnabled, StatsUpdated) {
   InsertEncodedFrames(kMinFrames, kFrameIntervalMs);
+  EXPECT_FALSE(statistics_proxy_->GetStats().has_entered_low_resolution);
   statistics_proxy_.reset();
   EXPECT_EQ(1, metrics::NumSamples(kPrefix + "FallbackTimeInPercent.Vp8"));
   EXPECT_EQ(1, metrics::NumEvents(kPrefix + "FallbackTimeInPercent.Vp8", 0));
@@ -1924,12 +1926,43 @@ TEST_F(ForcedFallbackDisabled, StatsNotUpdatedIfNoFieldTrial) {
   EXPECT_EQ(0, metrics::NumSamples(kPrefix + "FallbackChangesPerMinute.Vp8"));
 }
 
+TEST_F(ForcedFallbackDisabled, EnteredLowResolutionSetIfAtMaxPixels) {
+  InsertEncodedFrames(1, kFrameIntervalMs);
+  EXPECT_TRUE(statistics_proxy_->GetStats().has_entered_low_resolution);
+}
+
+TEST_F(ForcedFallbackEnabled, EnteredLowResolutionNotSetIfEnabled) {
+  InsertEncodedFrames(1, kFrameIntervalMs);
+  EXPECT_FALSE(statistics_proxy_->GetStats().has_entered_low_resolution);
+}
+
+TEST_F(ForcedFallbackDisabled, EnteredLowResolutionNotSetIfAboveMaxPixels) {
+  encoded_image_._encodedWidth = kWidth + 1;
+  InsertEncodedFrames(1, kFrameIntervalMs);
+  EXPECT_FALSE(statistics_proxy_->GetStats().has_entered_low_resolution);
+}
+
+TEST_F(ForcedFallbackDisabled, EnteredLowResolutionNotSetIfLibvpx) {
+  codec_info_.codec_name = "libvpx";
+  InsertEncodedFrames(1, kFrameIntervalMs);
+  EXPECT_FALSE(statistics_proxy_->GetStats().has_entered_low_resolution);
+}
+
+TEST_F(ForcedFallbackDisabled,
+       EnteredLowResolutionSetIfOnMinPixelLimitReached) {
+  encoded_image_._encodedWidth = kWidth + 1;
+  statistics_proxy_->OnMinPixelLimitReached();
+  InsertEncodedFrames(1, kFrameIntervalMs);
+  EXPECT_TRUE(statistics_proxy_->GetStats().has_entered_low_resolution);
+}
+
 TEST_F(ForcedFallbackEnabled, OneFallbackEvent) {
   // One change. Video: 20000 ms, fallback: 5000 ms (25%).
   InsertEncodedFrames(15, 1000);
   codec_info_.codec_name = "libvpx";
   InsertEncodedFrames(5, 1000);
 
+  EXPECT_TRUE(statistics_proxy_->GetStats().has_entered_low_resolution);
   statistics_proxy_.reset();
   EXPECT_EQ(1, metrics::NumSamples(kPrefix + "FallbackTimeInPercent.Vp8"));
   EXPECT_EQ(1, metrics::NumEvents(kPrefix + "FallbackTimeInPercent.Vp8", 25));
@@ -1966,6 +1999,7 @@ TEST_F(ForcedFallbackEnabled, NoFallbackIfAboveMaxPixels) {
   codec_info_.codec_name = "libvpx";
   InsertEncodedFrames(kMinFrames, kFrameIntervalMs);
 
+  EXPECT_FALSE(statistics_proxy_->GetStats().has_entered_low_resolution);
   statistics_proxy_.reset();
   EXPECT_EQ(0, metrics::NumSamples(kPrefix + "FallbackTimeInPercent.Vp8"));
   EXPECT_EQ(0, metrics::NumSamples(kPrefix + "FallbackChangesPerMinute.Vp8"));
@@ -1976,6 +2010,7 @@ TEST_F(ForcedFallbackEnabled, FallbackIfAtMaxPixels) {
   codec_info_.codec_name = "libvpx";
   InsertEncodedFrames(kMinFrames, kFrameIntervalMs);
 
+  EXPECT_TRUE(statistics_proxy_->GetStats().has_entered_low_resolution);
   statistics_proxy_.reset();
   EXPECT_EQ(1, metrics::NumSamples(kPrefix + "FallbackTimeInPercent.Vp8"));
   EXPECT_EQ(1, metrics::NumSamples(kPrefix + "FallbackChangesPerMinute.Vp8"));
