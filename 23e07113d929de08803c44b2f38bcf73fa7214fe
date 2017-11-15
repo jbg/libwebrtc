@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8695a7f_17813915",
+        "filename": "examples/objc/AppRTCMobile/ios/ARDMainViewController.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-15T12:19:49Z",
+      "side": 1,
+      "message": "Do we need to support all interface orientations in the MainViewController?",
+      "revId": "23e07113d929de08803c44b2f38bcf73fa7214fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32a3b297_3e36d9f7",
+        "filename": "sdk/objc/Framework/Classes/UI/RTCCameraPreviewView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-15T12:19:49Z",
+      "side": 1,
+      "message": "Follow the style in the rest of the file with { on same line. Same for the other methods below. Also make sure to match the indentation width.",
+      "revId": "23e07113d929de08803c44b2f38bcf73fa7214fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e12193bd_2a607b9a",
+        "filename": "sdk/objc/Framework/Classes/UI/RTCCameraPreviewView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-15T12:19:49Z",
+      "side": 1,
+      "message": "Move the add/remove observer methods down to the \"#pragma mark Private\" section.",
+      "revId": "23e07113d929de08803c44b2f38bcf73fa7214fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58ada4a7_f8aa8d64",
+        "filename": "sdk/objc/Framework/Classes/UI/RTCCameraPreviewView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2017-11-15T12:19:49Z",
+      "side": 1,
+      "message": "Unnecessary abbreviation",
+      "range": {
+        "startLine": 92,
+        "startChar": 44,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "23e07113d929de08803c44b2f38bcf73fa7214fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
