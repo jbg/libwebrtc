@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "263f3681_4b1ddc7e",
+        "filename": "audio/audio_send_stream.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-11-15T14:32:42Z",
+      "side": 1,
+      "message": "It looks like this is only used transitively in ConfigureStream(). Can we remove the field completely?",
+      "revId": "756cfbd99f9a9e431df7af335358e4863cd632a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
