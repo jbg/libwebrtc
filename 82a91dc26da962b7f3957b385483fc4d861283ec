@@ -22,6 +22,30 @@
       "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acb0bbf9_57b87eb0",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/WebSocketChannelClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-16T13:31:47Z",
+      "side": 1,
+      "message": "Regardless of the comment and variable name, they only use the List interface. I\u0027m sure this will work. We could argue about updating the comments and variable names, but I don\u0027t think it\u0027s worth the time, especially not since this code is in the example folder.",
+      "parentUuid": "2164b9d0_02948351",
+      "range": {
+        "startLine": 52,
+        "startChar": 47,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
