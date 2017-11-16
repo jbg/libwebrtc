@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0731416_5a232b93",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-16T11:05:17Z",
+      "side": 1,
+      "message": "Not a fan on mutable :(\nAny way we can avoid it? Temporary copy somewhere?",
+      "range": {
+        "startLine": 53,
+        "startChar": 39,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "29b3b8c2430c61f30f38ece7607e4865f367f746",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33906db9_816b9d45",
+        "filename": "modules/video_coding/generic_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-16T11:05:17Z",
+      "side": 1,
+      "message": "nit: should this be 100 like below? In any case a named constant for these would be nice.\nI also still think doing something like\nif (incorrect_capture_time_logged_messages_ \u003c\u003d 10 ||\n    incorrect_capture_time_logged_messages_ % X \u003d\u003d 300) {\n  ...\n}\nSo that we still get notifications once in a while about the current state.",
+      "range": {
+        "startLine": 314,
+        "startChar": 62,
+        "endLine": 314,
+        "endChar": 0
+      },
+      "revId": "29b3b8c2430c61f30f38ece7607e4865f367f746",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
