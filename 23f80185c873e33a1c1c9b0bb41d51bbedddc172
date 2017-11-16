@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7880bfa1_5abcf708",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-11-16T11:57:47Z",
+      "side": 1,
+      "message": "Please keep your changes to the point. I understand the intention here is to make the code more readable, but bear in mind:\n\n1. You run the risk of introducing bugs every time you change the logic.\n2. It takes more time for the reviewer to go through and make sure the code works the same.\n3. In C++, named variables can be harder for the compiler to optimize out. Most likely not the case with a bool, but...\n4. More philosophically, *naming is hard*, so it isn\u0027t certain that you actually make the code more readable for everyone. \"has_transport_sequence_number\" e.g., requires the reader to have your context. What \"has\" a transport sequence number?",
+      "revId": "23f80185c873e33a1c1c9b0bb41d51bbedddc172",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "336dd207_a7042e4d",
         "filename": "modules/bitrate_controller/bitrate_controller_unittest.cc",
         "patchSetId": 5
