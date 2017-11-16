@@ -88,7 +88,7 @@ VideoReceiveStream::VideoReceiveStream(
       decode_thread_(&DecodeThreadFunction,
                      this,
                      "DecodingThread",
-                     rtc::kHighestPriority),
+                     rtc::kNormalPriority),
       call_stats_(call_stats),
       rtp_receive_statistics_(ReceiveStatistics::Create(clock_)),
       timing_(new VCMTiming(clock_)),

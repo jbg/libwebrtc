@@ -479,6 +479,7 @@ rtc_static_library("rtc_base_generic") {
   deps = [
     "..:webrtc_common",
     "../api:optional",
+    "../system_wrappers:field_trial_api",
   ]
   public_deps = [
     ":rtc_base_approved",
