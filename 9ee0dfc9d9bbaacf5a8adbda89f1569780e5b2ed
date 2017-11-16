@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcfe0401_b4714c96",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-16T11:07:40Z",
+      "side": 1,
+      "message": "Might be easier to understand if you change this to 8 and the 2 above to 7. That way the sscanf can be:\n \"-%d,%d,%d\"",
+      "range": {
+        "startLine": 116,
+        "startChar": 68,
+        "endLine": 116,
+        "endChar": 77
+      },
+      "revId": "9ee0dfc9d9bbaacf5a8adbda89f1569780e5b2ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33ff2c8d_7306f8a6",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-16T11:07:40Z",
+      "side": 1,
+      "message": "Can\u0027t this read out of bounds if the supplied codec_name is shorter than VP8? Maybe use strncmp?",
+      "range": {
+        "startLine": 797,
+        "startChar": 6,
+        "endLine": 797,
+        "endChar": 53
+      },
+      "revId": "9ee0dfc9d9bbaacf5a8adbda89f1569780e5b2ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
