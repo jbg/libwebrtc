@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "55e7a8c8_7618c936",
+        "filename": "modules/audio_coding/audio_network_adaptor/fec_controller_rplr_based_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2017-11-16T14:34:42Z",
+      "side": 1,
+      "message": "Changed it to a ternary.",
+      "parentUuid": "cbe6009a_4f8a0b19",
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "512ce698_84e327e9",
         "filename": "modules/audio_coding/codecs/cng/audio_encoder_cng_unittest.cc",
         "patchSetId": 1
@@ -296,6 +314,24 @@
       "side": 1,
       "message": "Yes, although I\u0027d say comparison with rtc::nullopt is even better, since other types could also have .has_value() methods.\n\nIt\u0027s a pity we don\u0027t control EXPECT_*. Then we could make the compiler catch these things...",
       "parentUuid": "9d4a4bbc_fa4a425e",
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0a733be_84a80b6a",
+        "filename": "modules/audio_coding/neteq/packet_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2017-11-16T14:34:42Z",
+      "side": 1,
+      "message": "Seems like EXPECT_EQ works with nullopt but EXPECT_CALL doesn\u0027t. I\u0027ve updated these per your suggestion.",
+      "parentUuid": "d1330eb7_f63f64a2",
       "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
