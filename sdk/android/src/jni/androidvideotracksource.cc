@@ -15,6 +15,9 @@
 #include "rtc_base/logging.h"
 #include "sdk/android/src/jni/classreferenceholder.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace {
 // MediaCodec wants resolution to be divisible by 2.
 const int kRequiredResolutionAlignment = 2;
@@ -34,7 +37,8 @@ AndroidVideoTrackSource::AndroidVideoTrackSource(
           jni,
           j_surface_texture_helper)),
       video_buffer_factory_(jni),
-      is_screencast_(is_screencast) {
+      is_screencast_(is_screencast),
+      clock_(Clock::GetRealTimeClock())  {
   LOG(LS_INFO) << "AndroidVideoTrackSource ctor";
   camera_thread_checker_.DetachFromThread();
 
@@ -166,7 +170,12 @@ void AndroidVideoTrackSource::OnFrameCaptured(JNIEnv* jni,
                                               VideoRotation rotation,
                                               jobject j_video_frame_buffer) {
   RTC_DCHECK(camera_thread_checker_.CalledOnValidThread());
-
+  count_++;
+  if (count_%100==0) {
+     int64_t c_time = clock_->TimeInMilliseconds();
+     ALOGE("Qiang Chen AndroidVideoTrackSource OnFrameCaptured FPS: %lld", 100*1000/(c_time - l_time_));
+     l_time_ = c_time;
+  }
   int64_t camera_time_us = timestamp_ns / rtc::kNumNanosecsPerMicrosec;
   int64_t translated_camera_time_us =
       timestamp_aligner_.TranslateTimestamp(camera_time_us, rtc::TimeMicros());

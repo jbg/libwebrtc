@@ -164,7 +164,7 @@ public class VideoRenderer {
         buffer = backingBuffer;
       } else if (yuvFrame) {
         buffer = JavaI420Buffer.wrap(width, height, yuvPlanes[0], yuvStrides[0], yuvPlanes[1],
-            yuvStrides[1], yuvPlanes[2], yuvStrides[2],
+            yuvStrides[1], yuvPlanes[2], yuvStrides[2], null, 0,
             () -> { VideoRenderer.renderFrameDone(this); });
       } else {
         // Note: surfaceTextureHelper being null means calling toI420 will crash.

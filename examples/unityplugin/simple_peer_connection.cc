@@ -407,7 +407,6 @@ void SimplePeerConnection::AddStreams(bool audio_only) {
   std::string id = audio_track->id();
   stream->AddTrack(audio_track);
 
-  if (!audio_only) {
 #if defined(WEBRTC_ANDROID)
     JNIEnv* env = webrtc::jni::GetEnv();
     jclass pc_factory_class =
@@ -421,13 +420,14 @@ void SimplePeerConnection::AddStreams(bool audio_only) {
     RTC_DCHECK(texture_helper != nullptr)
         << "Cannot get the Surface Texture Helper.";
 
-    rtc::scoped_refptr<AndroidVideoTrackSource> source(
-        new rtc::RefCountedObject<AndroidVideoTrackSource>(
+    rtc::scoped_refptr<webrtc::jni::AndroidVideoTrackSource> source(
+        new rtc::RefCountedObject<webrtc::jni::AndroidVideoTrackSource>(
             g_signaling_thread.get(), env, texture_helper, false));
     rtc::scoped_refptr<webrtc::VideoTrackSourceProxy> proxy_source =
         webrtc::VideoTrackSourceProxy::Create(g_signaling_thread.get(),
                                               g_worker_thread.get(), source);
 
+    if (!audio_only) {
     // link with VideoCapturer (Camera);
     jmethodID link_camera_method = webrtc::jni::GetStaticMethodID(
         env, pc_factory_class, "LinkCamera",
@@ -437,7 +437,7 @@ void SimplePeerConnection::AddStreams(bool audio_only) {
                                     (jlong)proxy_source.get(), texture_helper);
     CHECK_EXCEPTION(env);
     g_camera = (jobject)env->NewGlobalRef(camera_tmp);
-
+    }
     rtc::scoped_refptr<webrtc::VideoTrackInterface> video_track(
         g_peer_connection_factory->CreateVideoTrack(kVideoLabel,
                                                     proxy_source.release()));
@@ -457,7 +457,7 @@ void SimplePeerConnection::AddStreams(bool audio_only) {
       stream->GetVideoTracks()[0]->AddOrUpdateSink(local_video_observer_.get(),
                                                    rtc::VideoSinkWants());
     }
-  }
+  
 
   if (!peer_connection_->AddStream(stream)) {
     LOG(LS_ERROR) << "Adding stream to PeerConnection failed";

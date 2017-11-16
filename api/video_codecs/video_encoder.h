@@ -191,5 +191,6 @@ class VideoEncoder {
   virtual bool SupportsNativeHandle() const;
   virtual const char* ImplementationName() const;
 };
+
 }  // namespace webrtc
 #endif  // API_VIDEO_CODECS_VIDEO_ENCODER_H_

@@ -120,7 +120,7 @@ class TemporalLayersChecker;
 class TemporalLayersFactory {
  public:
   TemporalLayersFactory() : listener_(nullptr) {}
-  virtual ~TemporalLayersFactory() {}
+  virtual ~TemporalLayersFactory();
   virtual TemporalLayers* Create(int simulcast_id,
                                  int temporal_layers,
                                  uint8_t initial_tl0_pic_idx) const;
@@ -134,6 +134,8 @@ class TemporalLayersFactory {
       uint8_t initial_tl0_pic_idx) const;
 
   void SetListener(TemporalLayersListener* listener);
+
+  virtual void Test(const char* str) const;
 
  protected:
   TemporalLayersListener* listener_;
