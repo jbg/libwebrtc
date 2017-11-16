@@ -517,8 +517,7 @@ void JavaToNativeRTCConfiguration(
   if (!IsNull(jni, j_ice_check_min_interval)) {
     int ice_check_min_interval_value =
         jni->CallIntMethod(j_ice_check_min_interval, int_value_id);
-    rtc_config->ice_check_min_interval =
-        rtc::Optional<int>(ice_check_min_interval_value);
+    rtc_config->ice_check_min_interval = ice_check_min_interval_value;
   }
   rtc_config->disable_ipv6_on_wifi =
       GetBooleanField(jni, j_rtc_config, j_disable_ipv6_on_wifi_id);
@@ -571,14 +570,14 @@ void JavaToNativeRtpParameters(JNIEnv* jni,
     if (!IsNull(jni, j_bitrate)) {
       int bitrate_value = jni->CallIntMethod(j_bitrate, int_value_id);
       CHECK_EXCEPTION(jni) << "error during CallIntMethod";
-      encoding.max_bitrate_bps = rtc::Optional<int>(bitrate_value);
+      encoding.max_bitrate_bps = bitrate_value;
     }
     jobject j_ssrc =
         GetNullableObjectField(jni, j_encoding_parameters, ssrc_id);
     if (!IsNull(jni, j_ssrc)) {
       jlong ssrc_value = jni->CallLongMethod(j_ssrc, long_value_id);
       CHECK_EXCEPTION(jni) << "error during CallLongMethod";
-      encoding.ssrc = rtc::Optional<uint32_t>(ssrc_value);
+      encoding.ssrc = ssrc_value;
     }
     parameters->encodings.push_back(encoding);
   }
@@ -605,14 +604,14 @@ void JavaToNativeRtpParameters(JNIEnv* jni,
     if (!IsNull(jni, j_clock_rate)) {
       int clock_rate_value = jni->CallIntMethod(j_clock_rate, int_value_id);
       CHECK_EXCEPTION(jni) << "error during CallIntMethod";
-      codec.clock_rate = rtc::Optional<int>(clock_rate_value);
+      codec.clock_rate = clock_rate_value;
     }
     jobject j_num_channels =
         GetNullableObjectField(jni, j_codec, num_channels_id);
     if (!IsNull(jni, j_num_channels)) {
       int num_channels_value = jni->CallIntMethod(j_num_channels, int_value_id);
       CHECK_EXCEPTION(jni) << "error during CallIntMethod";
-      codec.num_channels = rtc::Optional<int>(num_channels_value);
+      codec.num_channels = num_channels_value;
     }
     parameters->codecs.push_back(codec);
   }
