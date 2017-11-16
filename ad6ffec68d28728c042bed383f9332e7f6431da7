@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b8d2734_0b63c524",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-16T12:07:36Z",
+      "side": 1,
+      "message": "There\u0027s {std,absl}::make_optional...",
+      "range": {
+        "startLine": 620,
+        "startChar": 17,
+        "endLine": 620,
+        "endChar": 41
+      },
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "512ce698_84e327e9",
+        "filename": "modules/audio_coding/codecs/cng/audio_encoder_cng_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-16T12:07:36Z",
+      "side": 1,
+      "message": "Why change the type? And why not nullopt?",
+      "range": {
+        "startLine": 224,
+        "startChar": 46,
+        "endLine": 224,
+        "endChar": 67
+      },
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5724b55a_746f6630",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-16T12:07:36Z",
+      "side": 1,
+      "message": "Again...",
+      "range": {
+        "startLine": 103,
+        "startChar": 46,
+        "endLine": 103,
+        "endChar": 67
+      },
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df16058c_bc3c6e09",
+        "filename": "modules/audio_coding/neteq/packet_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-16T12:07:36Z",
+      "side": 1,
+      "message": "Hmm. The tests are less verbose now, but it\u0027s harder to see what they do. I think I preferred them with rtc::Optional written out. (And on line 471, EXPECT_EQ with rtc::nullopt would have been nice.)\n\nI\u0027m not really suggesting that you roll back all these changes, though---it\u0027s not that big a deal.",
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
