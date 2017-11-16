@@ -25,6 +25,46 @@
     },
     {
       "key": {
+        "uuid": "f86da2b8_fb21efad",
+        "filename": "modules/audio_coding/acm2/rent_a_codec.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-16T12:15:33Z",
+      "side": 1,
+      "message": "I assume this part cannot be changed because the ternary-expression\u0027s \"then\" part determines the expression\u0027s type?",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 57,
+        "endChar": 39
+      },
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aff0526_2bb910f8",
+        "filename": "modules/audio_coding/audio_network_adaptor/fec_controller_rplr_based_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-16T12:15:33Z",
+      "side": 1,
+      "message": "nit: Would look nicer with a ternary expression now, I think?",
+      "revId": "ad6ffec68d28728c042bed383f9332e7f6431da7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "512ce698_84e327e9",
         "filename": "modules/audio_coding/codecs/cng/audio_encoder_cng_unittest.cc",
         "patchSetId": 1
