@@ -13,6 +13,7 @@
 #if defined(WEBRTC_WIN)
 #include <comdef.h>
 #elif defined(WEBRTC_POSIX)
+#include <sys/resource.h>
 #include <time.h>
 #endif
 
@@ -23,8 +24,12 @@
 #include "rtc_base/stringutils.h"
 #include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace rtc {
+namespace {
+const char kLowPriorityRtcThreadFieldtrial[] = "WebRTC-LowPriorityRtcThread";
+}
 
 ThreadManager* ThreadManager::Instance() {
   RTC_DEFINE_STATIC_LOCAL(ThreadManager, thread_manager, ());
@@ -300,6 +305,13 @@ void* Thread::PreRun(void* pv) {
   ThreadInit* init = static_cast<ThreadInit*>(pv);
   ThreadManager::Instance()->SetCurrentThread(init->thread);
   rtc::SetCurrentThreadName(init->thread->name_.c_str());
+#if defined(WEBRTC_POSIX)
+  if (webrtc::field_trial::IsEnabled(kLowPriorityRtcThreadFieldtrial)) {
+    int ret = setpriority(PRIO_PROCESS, 0 /* who */, 1 /* prio */);
+    RTC_LOG(LS_INFO) << "SetPriority " << init->thread->name_ << ": -> 1 ret "
+                     << ret;
+  }
+#endif
   if (init->runnable) {
     init->runnable->Run(init->thread);
   } else {
