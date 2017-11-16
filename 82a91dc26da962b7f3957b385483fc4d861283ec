@@ -46,6 +46,30 @@
       "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36c6e826_bb11a0c8",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/WebSocketChannelClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2017-11-16T13:33:48Z",
+      "side": 1,
+      "message": "It will work for sure, just wanted to mention this because there\u0027s a theoretical chance of getting worse performance.",
+      "parentUuid": "acb0bbf9_57b87eb0",
+      "range": {
+        "startLine": 52,
+        "startChar": 47,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
