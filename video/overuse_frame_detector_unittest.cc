@@ -21,6 +21,8 @@
 
 namespace webrtc {
 
+#if 0
+
 using ::testing::InvokeWithoutArgs;
 
 namespace {
@@ -479,5 +481,6 @@ TEST_F(OveruseFrameDetectorTest, LimitsMaxFrameInterval) {
     overuse_detector_->CheckForOveruse();
   }
 }
+#endif
 
 }  // namespace webrtc
