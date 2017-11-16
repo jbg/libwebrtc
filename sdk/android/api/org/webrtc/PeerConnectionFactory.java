@@ -118,8 +118,8 @@ public class PeerConnectionFactory {
   public static void initialize(InitializationOptions options) {
     ContextUtils.initialize(options.applicationContext);
     NativeLibrary.initialize(options.nativeLibraryLoader);
-    nativeInitializeAndroidGlobals(options.applicationContext, options.enableVideoHwAcceleration);
     initializeFieldTrials(options.fieldTrials);
+    nativeInitializeAndroidGlobals(options.applicationContext, options.enableVideoHwAcceleration);
     if (options.enableInternalTracer) {
       initializeInternalTracer();
     }
