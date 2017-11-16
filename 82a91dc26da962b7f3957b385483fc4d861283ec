@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f29e314e_a3b6be9c",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RoomParametersFetcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-16T14:14:02Z",
+      "side": 1,
+      "message": "nit: I don\u0027t see this used",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2164b9d0_02948351",
         "filename": "examples/androidapp/src/org/appspot/apprtc/WebSocketChannelClient.java",
         "patchSetId": 2
@@ -94,6 +117,52 @@
       "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcf8f12b_b3d76178",
+        "filename": "sdk/android/api/org/webrtc/MediaStream.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-16T14:14:02Z",
+      "side": 1,
+      "message": "I am a bit scared about the changes here. IIRC removing tracks triggers callbacks in WebRTC code and those could call removeTrack on this object.",
+      "range": {
+        "startLine": 66,
+        "startChar": 14,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae181ebb_7c37e3eb",
+        "filename": "sdk/android/api/org/webrtc/MediaStream.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-16T14:14:02Z",
+      "side": 1,
+      "message": "removeTrack used to also remove the video track from preservedVideoTracks",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 24
+      },
+      "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
