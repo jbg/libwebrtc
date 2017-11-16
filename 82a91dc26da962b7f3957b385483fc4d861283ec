@@ -70,6 +70,30 @@
       "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5264b1e_0f8a8d98",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/WebSocketChannelClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-16T13:56:47Z",
+      "side": 1,
+      "message": "I think this is kind of negligible, and if get a performance difference, I think it will be positive (trusting the warnings that says ArrayList is more performant than LinkedList in basically all cases).",
+      "parentUuid": "36c6e826_bb11a0c8",
+      "range": {
+        "startLine": 52,
+        "startChar": 47,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "82a91dc26da962b7f3957b385483fc4d861283ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
