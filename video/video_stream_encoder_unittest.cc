@@ -63,6 +63,8 @@ class TestBuffer : public webrtc::I420Buffer {
   rtc::Event* const event_;
 };
 
+// TODO(nisse): Seems to exist only for testing OnTargetFramerateUpdated. If
+// that method is no longer needed, delete this class.
 class CpuOveruseDetectorProxy : public OveruseFrameDetector {
  public:
   CpuOveruseDetectorProxy(const CpuOveruseOptions& options,
@@ -75,12 +77,6 @@ class CpuOveruseDetectorProxy : public OveruseFrameDetector {
                              metrics_observer),
         last_target_framerate_fps_(-1) {}
   virtual ~CpuOveruseDetectorProxy() {}
-
-  void OnTargetFramerateUpdated(int framerate_fps) override {
-    rtc::CritScope cs(&lock_);
-    last_target_framerate_fps_ = framerate_fps;
-    OveruseFrameDetector::OnTargetFramerateUpdated(framerate_fps);
-  }
 
   int GetLastTargetFramerate() {
     rtc::CritScope cs(&lock_);
