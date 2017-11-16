@@ -48,7 +48,9 @@ class EncodedImage {
   uint32_t _timeStamp = 0;
   // NTP time of the capture time in local timebase in milliseconds.
   int64_t ntp_time_ms_ = 0;
-  int64_t capture_time_ms_ = 0;
+  // Because some encoders don't preserve capture_timestamp_ms_ it may be
+  // restored in GenericEncoder.
+  mutable int64_t capture_time_ms_ = 0;
   FrameType _frameType = kVideoFrameDelta;
   uint8_t* _buffer;
   size_t _length;

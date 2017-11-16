@@ -14,6 +14,7 @@
 
 #include "api/optional.h"
 #include "api/video/i420_buffer.h"
+#include "modules/include/module_common_types_public.h"
 #include "modules/pacing/alr_detector.h"
 #include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/media_optimization.h"
@@ -82,7 +83,8 @@ int32_t VCMGenericEncoder::Encode(const VideoFrame& frame,
     RTC_DCHECK(frame_type == kVideoFrameKey || frame_type == kVideoFrameDelta);
 
   for (size_t i = 0; i < streams_or_svc_num_; ++i)
-    vcm_encoded_frame_callback_->OnEncodeStarted(frame.render_time_ms(), i);
+    vcm_encoded_frame_callback_->OnEncodeStarted(frame.timestamp(),
+                                                 frame.render_time_ms(), i);
 
   return encoder_->Encode(frame, codec_specific, &frame_types);
 }
@@ -184,6 +186,7 @@ VCMEncodedFrameCallback::VCMEncodedFrameCallback(
       framerate_(1),
       last_timing_frame_time_ms_(-1),
       timing_frames_thresholds_({-1, 0}),
+      incorrect_capture_time_logged_messages_(0),
       reordered_frames_logged_messages_(0),
       stalled_encoder_logged_messages_(0) {
   rtc::Optional<AlrDetector::AlrExperimentSettings> experiment_settings =
@@ -220,7 +223,8 @@ void VCMEncodedFrameCallback::OnFrameRateChanged(size_t framerate) {
   framerate_ = framerate;
 }
 
-void VCMEncodedFrameCallback::OnEncodeStarted(int64_t capture_time_ms,
+void VCMEncodedFrameCallback::OnEncodeStarted(uint32_t rtp_timestamp,
+                                              int64_t capture_time_ms,
                                               size_t simulcast_svc_idx) {
   if (internal_source_) {
     return;
@@ -252,7 +256,7 @@ void VCMEncodedFrameCallback::OnEncodeStarted(int64_t capture_time_ms,
     timing_frames_info_[simulcast_svc_idx].encode_start_list.pop_front();
   }
   timing_frames_info_[simulcast_svc_idx].encode_start_list.emplace_back(
-      capture_time_ms, rtc::TimeMillis());
+      rtp_timestamp, capture_time_ms, rtc::TimeMillis());
 }
 
 EncodedImageCallback::Result VCMEncodedFrameCallback::OnEncodedImage(
@@ -288,24 +292,42 @@ EncodedImageCallback::Result VCMEncodedFrameCallback::OnEncodedImage(
           &timing_frames_info_[simulcast_svc_idx].encode_start_list;
       // Skip frames for which there was OnEncodeStarted but no OnEncodedImage
       // call. These are dropped by encoder internally.
+      // Because some hardware encoders don't preserve capture timestamp we use
+      // RTP timestamps here.
       while (!encode_start_list->empty() &&
-             encode_start_list->front().capture_time_ms <
-                 encoded_image.capture_time_ms_) {
+             IsNewerTimestamp(encoded_image._timeStamp,
+                              encode_start_list->front().rtp_timestamp)) {
         post_encode_callback_->OnDroppedFrame(DropReason::kDroppedByEncoder);
         encode_start_list->pop_front();
       }
       if (encode_start_list->size() > 0 &&
-          encode_start_list->front().capture_time_ms ==
-              encoded_image.capture_time_ms_) {
+          encode_start_list->front().rtp_timestamp ==
+              encoded_image._timeStamp) {
         encode_start_ms.emplace(
             encode_start_list->front().encode_start_time_ms);
+        if (encoded_image.capture_time_ms_ !=
+            encode_start_list->front().capture_time_ms) {
+          // Force correct capture timestamp.
+          encoded_image.capture_time_ms_ =
+              encode_start_list->front().capture_time_ms;
+          ++incorrect_capture_time_logged_messages_;
+          if (incorrect_capture_time_logged_messages_ <= 10) {
+            RTC_LOG(LS_WARNING)
+                << "Encoder is not preserving capture timestamps.";
+            if (incorrect_capture_time_logged_messages_ == 10) {
+              RTC_LOG(LS_WARNING) << "Too many log messages. Further incorrect "
+                                     "timestamps warnings will not be printed.";
+            }
+          }
+        }
         encode_start_list->pop_front();
       } else {
         ++reordered_frames_logged_messages_;
         if (reordered_frames_logged_messages_ <= 100) {
           RTC_LOG(LS_WARNING)
               << "Frame with no encode started time recordings. "
-                 "Encoder may be reordering frames.";
+                 "Encoder may be reordering frames "
+                 "or not preserving RTP timestamps.";
           if (reordered_frames_logged_messages_ == 100) {
             RTC_LOG(LS_WARNING) << "Too many log messages. Further frames "
                                    "reordering warnings will not be printed.";
