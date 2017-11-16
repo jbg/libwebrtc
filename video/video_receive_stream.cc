@@ -34,6 +34,7 @@
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/ptr_util.h"
+#include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial.h"
@@ -215,6 +216,7 @@ void VideoReceiveStream::Start() {
   call_stats_->RegisterStatsObserver(video_stream_decoder_.get());
 
   process_thread_->RegisterModule(&video_receiver_, RTC_FROM_HERE);
+  video_receiver_.DecoderThreadStarting();
 
   // Start the decode thread
   decode_thread_.Start();
@@ -237,6 +239,7 @@ void VideoReceiveStream::Stop() {
     video_receiver_.TriggerDecoderShutdown();
 
     decode_thread_.Stop();
+    video_receiver_.DecoderThreadStopped();
     // Deregister external decoders so they are no longer running during
     // destruction. This effectively stops the VCM since the decoder thread is
     // stopped, the VCM is deregistered and no asynchronous decoder threads are
@@ -407,13 +410,28 @@ bool VideoReceiveStream::Decode() {
   std::unique_ptr<video_coding::FrameObject> frame;
   // TODO(philipel): Call NextFrame with |keyframe_required| argument when
   //                 downstream project has been fixed.
-  video_coding::FrameBuffer::ReturnReason res =
-      frame_buffer_->NextFrame(wait_ms, &frame);
+  video_coding::FrameBuffer::ReturnReason res;
 
-  if (res == video_coding::FrameBuffer::ReturnReason::kStopped) {
-    video_receiver_.DecodingStopped();
+#if defined(WEBRTC_ANDROID)
+  // This is a temporary workaround for video capture on Android in order to
+  // deliver asynchronously delivered frames, on the decoder thread.
+  // More details here:
+  // https://bugs.chromium.org/p/webrtc/issues/detail?id=7361
+  static const int kPollIntervalMs = 10;
+  int time_remaining = kMaxWaitForFrameMs;
+  do {
+    res = frame_buffer_->NextFrame(kPollIntervalMs, &frame);
+    if (res != video_coding::FrameBuffer::ReturnReason::kTimeout)
+      break;
+    time_remaining -= kPollIntervalMs;
+    video_receiver_.PollDecodedFrames();
+  } while (time_remaining > 0);
+#else
+  res = frame_buffer_->NextFrame(kMaxWaitForFrameMs, &frame);
+#endif
+
+  if (res == video_coding::FrameBuffer::ReturnReason::kStopped)
     return false;
-  }
 
   if (frame) {
     int64_t now_ms = clock_->TimeInMilliseconds();
@@ -456,6 +474,7 @@ bool VideoReceiveStream::Decode() {
       RequestKeyFrame();
     }
   }
+
   return true;
 }
 }  // namespace internal
