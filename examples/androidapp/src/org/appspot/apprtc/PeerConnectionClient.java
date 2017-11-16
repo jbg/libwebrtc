@@ -95,6 +95,12 @@ public class PeerConnectionClient {
   private static final String VIDEO_FRAME_EMIT_FIELDTRIAL =
       PeerConnectionFactory.VIDEO_FRAME_EMIT_TRIAL + "/" + PeerConnectionFactory.TRIAL_ENABLED
       + "/";
+  private static final String ANDROID_THREAD_PRIORITY_FIELDTRIAL =
+      "WebRTC-AndroidThreadPriority/Enabled/";
+  private static final String LOW_PRIORITY_PROCESS_THREAD_FIELDTRIAL =
+      "WebRTC-LowPriorityProcessThread/Enabled/";
+  private static final String LOW_PRIORITY_RTC_THREAD_PRIORITY_FIELDTRIAL =
+      "WebRTC-LowPriorityRtcThread/Enabled/";
   private static final String AUDIO_CODEC_PARAM_BITRATE = "maxaveragebitrate";
   private static final String AUDIO_ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation";
   private static final String AUDIO_AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl";
@@ -394,6 +400,10 @@ public class PeerConnectionClient {
       Log.d(TAG, "Disable WebRTC AGC field trial.");
     }
     fieldTrials += VIDEO_FRAME_EMIT_FIELDTRIAL;
+
+    fieldTrials += ANDROID_THREAD_PRIORITY_FIELDTRIAL;
+    fieldTrials += LOW_PRIORITY_PROCESS_THREAD_FIELDTRIAL;
+    fieldTrials += LOW_PRIORITY_RTC_THREAD_PRIORITY_FIELDTRIAL;
 
     // Check preferred video codec.
     preferredVideoCodec = VIDEO_CODEC_VP8;
