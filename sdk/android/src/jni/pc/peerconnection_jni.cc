@@ -369,15 +369,15 @@ JNI_FUNCTION_DECLARATION(jboolean,
   jmethodID int_value_id = GetMethodID(jni, j_integer_class, "intValue", "()I");
   if (!IsNull(jni, j_min)) {
     int min_value = jni->CallIntMethod(j_min, int_value_id);
-    params.min_bitrate_bps = rtc::Optional<int>(min_value);
+    params.min_bitrate_bps = min_value;
   }
   if (!IsNull(jni, j_current)) {
     int current_value = jni->CallIntMethod(j_current, int_value_id);
-    params.current_bitrate_bps = rtc::Optional<int>(current_value);
+    params.current_bitrate_bps = current_value;
   }
   if (!IsNull(jni, j_max)) {
     int max_value = jni->CallIntMethod(j_max, int_value_id);
-    params.max_bitrate_bps = rtc::Optional<int>(max_value);
+    params.max_bitrate_bps = max_value;
   }
   return ExtractNativePC(jni, j_pc)->SetBitrate(params).ok();
 }
