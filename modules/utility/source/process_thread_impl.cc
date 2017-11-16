@@ -15,6 +15,7 @@
 #include "rtc_base/task_queue.h"
 #include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 namespace {
@@ -23,6 +24,8 @@ namespace {
 // a callback right away.  When this is set, no call to TimeUntilNextProcess
 // should be made, but Process() should be called directly.
 const int64_t kCallProcessImmediately = -1;
+const char kLowPriorityProcessThreadFieldtrial[] =
+    "WebRTC-LowPriorityProcessThread";
 
 int64_t GetNextCallbackTime(Module* module, int64_t time_now) {
   int64_t interval = module->TimeUntilNextProcess();
@@ -72,6 +75,9 @@ void ProcessThreadImpl::Start() {
   thread_.reset(
       new rtc::PlatformThread(&ProcessThreadImpl::Run, this, thread_name_));
   thread_->Start();
+  if (field_trial::IsEnabled(kLowPriorityProcessThreadFieldtrial)) {
+    thread_->SetPriority(rtc::kLowPriority);
+  }
 }
 
 void ProcessThreadImpl::Stop() {
