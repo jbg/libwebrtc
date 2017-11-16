@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40e59a85_645e6bc0",
+        "filename": "sdk/android/src/jni/pc/mediastream_jni.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-16T10:20:00Z",
+      "side": 1,
+      "message": "Unrelated, but in terms of CHECKing we don\u0027t do crazy things with MediaStream in Java, it would make more sense to throw an exception if MediaStream.dispose() is called more than once.",
+      "revId": "b8148d28a29e2e6abdc923776e7cb936f8bacd9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
