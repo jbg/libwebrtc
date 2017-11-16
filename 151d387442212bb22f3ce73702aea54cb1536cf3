@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60bd25cf_d12284c1",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-16T17:57:15Z",
+      "side": 1,
+      "message": "nit: I think it would be clearer to check both existence and activity here. Otherwise, you\u0027re giving the false impression that when this line is reached, existence without activity would be OK, and that only if the history is not full, activity is also demanded.",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4db41d0b_540e4073",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-16T17:57:15Z",
+      "side": 1,
+      "message": "Could we make the maximum either public in the class under test? Or make the test a friend of the class under test? I feel that such a comment, especially with \"probably\", is undesirable.",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5532266_e0d55f33",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-16T17:57:15Z",
+      "side": 1,
+      "message": "Perhaps you could also keep copies of the events you\u0027re logging in a vector, then compare the read events to the events which you remember you\u0027ve written? That might be a bit cleaner.",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
