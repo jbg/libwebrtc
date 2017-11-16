@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2d64e5bc_0a7fe061",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-11-16T13:10:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcfe0401_b4714c96",
+      "range": {
+        "startLine": 116,
+        "startChar": 68,
+        "endLine": 116,
+        "endChar": 77
+      },
+      "revId": "9ee0dfc9d9bbaacf5a8adbda89f1569780e5b2ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33ff2c8d_7306f8a6",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-16T11:07:40Z",
       "side": 1,
       "message": "Can\u0027t this read out of bounds if the supplied codec_name is shorter than VP8? Maybe use strncmp?",
+      "range": {
+        "startLine": 797,
+        "startChar": 6,
+        "endLine": 797,
+        "endChar": 53
+      },
+      "revId": "9ee0dfc9d9bbaacf5a8adbda89f1569780e5b2ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc3c0632_ccc4d263",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-11-16T13:10:06Z",
+      "side": 1,
+      "message": "Compares until characters differ or a terminating null-character is reached. I believe codec_name always should have a terminating null-character.",
+      "parentUuid": "33ff2c8d_7306f8a6",
       "range": {
         "startLine": 797,
         "startChar": 6,
