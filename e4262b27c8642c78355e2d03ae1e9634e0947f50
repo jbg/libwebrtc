@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2dfec416_4ade2db8",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-11-16T05:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aae99fd6_f2c16b35",
+      "revId": "e4262b27c8642c78355e2d03ae1e9634e0947f50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e1e3401_15ed358a",
         "filename": "rtc_base/opensslidentity.h",
         "patchSetId": 18
