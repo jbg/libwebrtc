@@ -16,6 +16,24 @@
       "revId": "e2473ae315fcda3d39110bf1510465d365a42804",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64fc2272_bb4decd5",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-11-17T09:07:42Z",
+      "side": 1,
+      "message": "Yes, if an external ADM is given, which we expect in that case. Anyhow, I\u0027ll move the condition inside the conditional compilation section.",
+      "parentUuid": "308b2e7b_939b9c39",
+      "revId": "e2473ae315fcda3d39110bf1510465d365a42804",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
