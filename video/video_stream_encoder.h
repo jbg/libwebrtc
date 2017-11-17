@@ -34,6 +34,7 @@
 #include "video/overuse_frame_detector.h"
 #include "call/video_send_stream.h"
 
+#include "system_wrappers/include/clock.h"
 namespace webrtc {
 
 class SendStatisticsProxy;
@@ -297,6 +298,9 @@ class VideoStreamEncoder : public rtc::VideoSinkInterface<VideoFrame>,
   // All public methods are proxied to |encoder_queue_|. It must must be
   // destroyed first to make sure no tasks are run that use other members.
   rtc::TaskQueue encoder_queue_;
+
+  int count_;
+  int64_t l_time_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(VideoStreamEncoder);
 };

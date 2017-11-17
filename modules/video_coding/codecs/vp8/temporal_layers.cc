@@ -21,6 +21,9 @@
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/field_trial.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace webrtc {
 
 TemporalLayersChecker::TemporalLayersChecker(int num_temporal_layers,

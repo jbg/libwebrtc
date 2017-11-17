@@ -53,6 +53,8 @@ public class VideoFrame {
      */
     Buffer cropAndScale(
         int cropX, int cropY, int cropWidth, int cropHeight, int scaleWidth, int scaleHeight);
+
+    Buffer spawnMask();
   }
 
   /**
@@ -80,10 +82,12 @@ public class VideoFrame {
      * implementations must return a new ByteBuffer or slice for each call.
      */
     ByteBuffer getDataV();
+    ByteBuffer getDataA();
 
     int getStrideY();
     int getStrideU();
     int getStrideV();
+    int getStrideA();
   }
 
   /**
@@ -107,6 +111,10 @@ public class VideoFrame {
 
     Type getType();
     int getTextureId();
+    byte[] getMask();
+    int getMaskTextureId();
+    int getMaskWidth();
+    int getMaskHeight();
 
     /**
      * Retrieve the transform matrix associated with the frame. This transform matrix maps 2D
@@ -114,6 +122,7 @@ public class VideoFrame {
      * the coordinate that should be used to sample that location from the buffer.
      */
     public Matrix getTransformMatrix();
+    public Matrix getMaskTransform();
   }
 
   private final Buffer buffer;
@@ -190,7 +199,7 @@ public class VideoFrame {
       buffer.retain();
       return JavaI420Buffer.wrap(buffer.getWidth(), buffer.getHeight(), dataY.slice(),
           buffer.getStrideY(), dataU.slice(), buffer.getStrideU(), dataV.slice(),
-          buffer.getStrideV(), buffer::release);
+          buffer.getStrideV(), null, 0, buffer::release);
     }
 
     JavaI420Buffer newBuffer = JavaI420Buffer.allocate(scaleWidth, scaleHeight);

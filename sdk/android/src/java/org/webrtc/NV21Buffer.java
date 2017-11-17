@@ -46,6 +46,11 @@ public class NV21Buffer implements VideoFrame.Buffer {
   }
 
   @Override
+  public VideoFrame.Buffer spawnMask() {
+    return null;
+  }
+
+  @Override
   public void retain() {
     synchronized (refCountLock) {
       ++refCount;

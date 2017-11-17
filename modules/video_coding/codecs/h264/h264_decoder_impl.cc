@@ -294,11 +294,11 @@ int32_t H264DecoderImpl::Decode(const EncodedImage& input_image,
     ReportError();
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
-  if (codec_specific_info &&
-      codec_specific_info->codecType != kVideoCodecH264) {
-    ReportError();
-    return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
-  }
+//   if (codec_specific_info &&
+//       codec_specific_info->codecType != kVideoCodecH264) {
+//     ReportError();
+//     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
+//   }
 
   // FFmpeg requires padding due to some optimized bitstream readers reading 32
   // or 64 bits at once and could read over the end. See avcodec_decode_video2.

@@ -23,6 +23,7 @@
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/field_trial.h"
 
+#include "modules/video_coding/codecs/vp8/temporal_layers.h"
 namespace webrtc {
 
 VCMGenericEncoder::VCMGenericEncoder(
@@ -59,6 +60,7 @@ int32_t VCMGenericEncoder::InitEncode(const VideoCodec* settings,
       settings->timing_frame_thresholds);
   vcm_encoded_frame_callback_->OnFrameRateChanged(settings->maxFramerate);
 
+  settings->VP8().tl_factory ->Test("VCMGenericEncoder");
   if (encoder_->InitEncode(settings, number_of_cores, max_payload_size) != 0) {
     LOG(LS_ERROR) << "Failed to initialize the encoder associated with "
                      "payload name: "

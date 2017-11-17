@@ -22,7 +22,7 @@
 #include "rtc_base/timestampaligner.h"
 #include "sdk/android/src/jni/native_handle_impl.h"
 #include "sdk/android/src/jni/surfacetexturehelper_jni.h"
-
+#include "system_wrappers/include/clock.h"
 namespace webrtc {
 namespace jni {
 
@@ -88,6 +88,9 @@ class AndroidVideoTrackSource : public rtc::AdaptedVideoTrackSource {
   const bool is_screencast_;
 
   jmethodID j_crop_and_scale_id_;
+  Clock* clock_;
+  int64_t l_time_;
+  int count_;
 };
 
 }  // namespace jni

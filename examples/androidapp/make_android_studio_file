@@ -1,0 +1,3 @@
+~/work/WebRTC/src/build/android/gradle/generate_gradle.py --output-directory ~/work/WebRTC/src/out/Android --target "//examples:AppRTCMobile" --use-gradle-process-resources --split-projects --canary
+
+ln -sf ~/work/WebRTC/src/examples/androidapp/src/jni/lib/libfabby-sdk.so ~/work/WebRTC/src/out/Android/gradle/examples/AppRTCMobile/symlinked-libs/armeabi/libfabby-sdk.so

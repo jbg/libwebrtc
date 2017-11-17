@@ -11,6 +11,9 @@
 package org.webrtc;
 
 import android.graphics.Matrix;
+
+import org.w3c.dom.Text;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -23,10 +26,16 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
   private final Type type;
   private final int id;
   private final Matrix transformMatrix;
+
   private final SurfaceTextureHelper surfaceTextureHelper;
   private final Runnable releaseCallback;
   private final Object refCountLock = new Object();
   private int refCount;
+  private byte[] mask;
+  private int mask_texture_id;
+  private int mask_width;
+  private int mask_height;
+  private Matrix mask_transform;
 
   public TextureBufferImpl(int width, int height, Type type, int id, Matrix transformMatrix,
       SurfaceTextureHelper surfaceTextureHelper, Runnable releaseCallback) {
@@ -38,6 +47,21 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
     this.surfaceTextureHelper = surfaceTextureHelper;
     this.releaseCallback = releaseCallback;
     this.refCount = 1; // Creator implicitly holds a reference.
+    this.mask = null;
+    this.mask_texture_id = -1;
+    this.mask_width = 0;
+    this.mask_height = 0;
+  }
+
+  public TextureBufferImpl(int width, int height, Type type, int id, Matrix transformMatrix,
+                           SurfaceTextureHelper surfaceTextureHelper,
+                           int mask_texture_id, int mask_width, int mask_height, Matrix maskTransform,
+                           Runnable releaseCallback) {
+    this(width, height, type, id, transformMatrix, surfaceTextureHelper, releaseCallback);
+    this.mask_texture_id = mask_texture_id;
+    this.mask_width = mask_width;
+    this.mask_height = mask_height;
+    this.mask_transform = maskTransform;
   }
 
   @Override
@@ -66,8 +90,27 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
   }
 
   @Override
+  public byte[] getMask() {
+    return mask;
+  }
+
+  @Override
+  public int getMaskTextureId() {return mask_texture_id;}
+
+  @Override
+  public Matrix getMaskTransform() {return mask_transform;}
+
+  @Override
+  public int getMaskWidth() {return mask_width;}
+
+  @Override
+  public int getMaskHeight() {return mask_height;}
+
+  @Override
   public VideoFrame.I420Buffer toI420() {
-    return surfaceTextureHelper.textureToYuv(this);
+    VideoFrame.I420Buffer result = surfaceTextureHelper.textureToYuv(this);
+
+    return result;
   }
 
   @Override
@@ -94,12 +137,34 @@ class TextureBufferImpl implements VideoFrame.TextureBuffer {
     newMatrix.postScale(cropWidth / (float) width, cropHeight / (float) height);
     newMatrix.postTranslate(cropX / (float) width, cropY / (float) height);
 
-    return new TextureBufferImpl(
-        scaleWidth, scaleHeight, type, id, newMatrix, surfaceTextureHelper, new Runnable() {
-          @Override
-          public void run() {
-            release();
-          }
-        });
+    Matrix newMaskTransform = new Matrix(mask_transform);
+    newMaskTransform.postScale(cropWidth / (float) width, cropHeight / (float) height);
+    newMaskTransform.postTranslate(cropX / (float) width, cropY / (float) height);
+
+
+    return new TextureBufferImpl(scaleWidth, scaleHeight, type, id, newMatrix, surfaceTextureHelper,
+            mask_texture_id, mask_width, mask_height, newMaskTransform, new Runnable() {
+      @Override
+      public void run() {
+        release();
+      }
+    });
+
+  }
+
+  @Override
+  public VideoFrame.Buffer spawnMask() {
+    if (mask_texture_id == -1) return null;
+
+    retain();
+    int mask_id = mask_texture_id;
+    mask_texture_id = -1;
+    return new TextureBufferImpl(width, height, Type.RGB, mask_id, mask_transform, surfaceTextureHelper,
+            -1, 0, 0, mask_transform, new Runnable() {
+      @Override
+      public void run() {
+        release();
+      }
+    });
   }
 }

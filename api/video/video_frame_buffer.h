@@ -70,6 +70,8 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
   I444BufferInterface* GetI444();
   const I444BufferInterface* GetI444() const;
 
+  virtual rtc::scoped_refptr<VideoFrameBuffer> SpawnMask();
+
  protected:
   ~VideoFrameBuffer() override {}
 };
@@ -97,10 +99,14 @@ class PlanarYuvBuffer : public VideoFrameBuffer {
 
 class I420BufferInterface : public PlanarYuvBuffer {
  public:
-  Type type() const final;
+  Type type() const override;
 
   int ChromaWidth() const final;
   int ChromaHeight() const final;
+
+  bool HasAlpha() const;
+  virtual const uint8_t* DataA() const;
+  virtual int StrideA() const;
 
   rtc::scoped_refptr<I420BufferInterface> ToI420() final;
 

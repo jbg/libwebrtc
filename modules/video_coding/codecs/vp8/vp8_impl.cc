@@ -37,6 +37,8 @@
 #include "system_wrappers/include/field_trial.h"
 #include "system_wrappers/include/metrics.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
 namespace webrtc {
 namespace {
 
@@ -362,11 +364,17 @@ void VP8EncoderImpl::SetupTemporalLayers(int num_streams,
                                          const VideoCodec& codec) {
   RTC_DCHECK(codec.VP8().tl_factory != nullptr);
   const TemporalLayersFactory* tl_factory = codec.VP8().tl_factory;
+
+  ALOGE("Qiang Chen VP8EncoderImpl::SetupTemporalLayers %ld %d %d %d", (long)(tl_factory), num_streams, num_temporal_layers, (int)(tl0_pic_idx_[0]));
   if (num_streams == 1) {
-    temporal_layers_.emplace_back(
-        tl_factory->Create(0, num_temporal_layers, tl0_pic_idx_[0]));
+    ALOGE("Qiang Chen VP8EncoderImpl::SetupTemporalLayers Before Create");
+    auto xxx = tl_factory->Create(0, num_temporal_layers, tl0_pic_idx_[0]);
+    ALOGE("Qiang Chen VP8EncoderImpl::SetupTemporalLayers created Temporal Layer");
+    temporal_layers_.emplace_back(xxx);
+    ALOGE("Qiang Chen VP8EncoderImpl::SetupTemporalLayers inserted Temporal Layer");
     temporal_layers_checkers_.emplace_back(
         tl_factory->CreateChecker(0, num_temporal_layers, tl0_pic_idx_[0]));
+
   } else {
     for (int i = 0; i < num_streams; ++i) {
       RTC_CHECK_GT(num_temporal_layers, 0);
@@ -383,6 +391,7 @@ void VP8EncoderImpl::SetupTemporalLayers(int num_streams,
 int VP8EncoderImpl::InitEncode(const VideoCodec* inst,
                                int number_of_cores,
                                size_t /*maxPayloadSize */) {
+  ALOGE("Qiang Chen VP8EncoderImpl::InitEncode %s %d %d %d %d", inst->plName, inst->plType, inst->codecType, inst->VP8().complexity, inst->VP8().keyFrameInterval);
   if (inst == NULL) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
@@ -409,7 +418,6 @@ int VP8EncoderImpl::InitEncode(const VideoCodec* inst,
 
   int number_of_streams = NumberOfStreams(*inst);
   bool doing_simulcast = (number_of_streams > 1);
-
   if (doing_simulcast &&
       (!ValidSimulcastResolutions(*inst, number_of_streams) ||
        !ValidSimulcastTemporalLayers(*inst, number_of_streams))) {
@@ -426,7 +434,6 @@ int VP8EncoderImpl::InitEncode(const VideoCodec* inst,
   number_of_cores_ = number_of_cores;
   timestamp_ = 0;
   codec_ = *inst;
-
   // Code expects simulcastStream resolutions to be correct, make sure they are
   // filled even when there are no simulcast layers.
   if (codec_.numberOfSimulcastStreams == 0) {

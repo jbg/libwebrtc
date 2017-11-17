@@ -21,6 +21,9 @@
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/clock.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace webrtc {
 namespace {
 bool TemporalLayersConfigured(const std::vector<VideoStream>& streams) {
@@ -39,24 +42,28 @@ bool VideoCodecInitializer::SetupCodec(
     bool nack_enabled,
     VideoCodec* codec,
     std::unique_ptr<VideoBitrateAllocator>* bitrate_allocator) {
-  *codec =
-      VideoEncoderConfigToVideoCodec(config, streams, settings.payload_name,
-                                     settings.payload_type, nack_enabled);
-
+  *codec = VideoEncoderConfigToVideoCodec(
+      config, streams, settings.payload_name, settings.payload_type,
+      settings.stereo_associated_payload_name, nack_enabled);
+  ALOGE("Qiang Chen VideoCodecInitializer::SetupCodec %s %d %d %d %d", codec->plName, codec->plType, codec->codecType, codec->VP8()->complexity, codec->VP8()->keyFrameInterval);
   std::unique_ptr<TemporalLayersFactory> tl_factory;
   switch (codec->codecType) {
-    case kVideoCodecVP8: {
+    case kVideoCodecVP8: 
+    case kVideoCodecStereo:{
       if (!codec->VP8()->tl_factory) {
         if (codec->mode == kScreensharing &&
             (codec->numberOfSimulcastStreams > 1 ||
              (codec->numberOfSimulcastStreams == 1 &&
               codec->VP8()->numberOfTemporalLayers == 2))) {
           // Conference mode temporal layering for screen content.
+          ALOGE("Qiang Chen VideoCodecInitializer::SetupCodec Init Factory: ScreenShareTLF");
           tl_factory.reset(new ScreenshareTemporalLayersFactory());
         } else {
           // Standard video temporal layers.
+          ALOGE("Qiang Chen VideoCodecInitializer::SetupCodec Init Factory: Default TLF");
           tl_factory.reset(new TemporalLayersFactory());
         }
+        ALOGE("Qiang Chen VideoCodecInitializer::SetupCodec Set factory %s %d %d %ld", codec->plName, codec->plType, codec->codecType, (long)(tl_factory.get()));
         codec->VP8()->tl_factory = tl_factory.get();
       }
       break;
@@ -79,7 +86,8 @@ VideoCodecInitializer::CreateBitrateAllocator(
   std::unique_ptr<VideoBitrateAllocator> rate_allocator;
 
   switch (codec.codecType) {
-    case kVideoCodecVP8: {
+    case kVideoCodecVP8:
+    case kVideoCodecStereo: {
       // Set up default VP8 temporal layer factory, if not provided.
       rate_allocator.reset(
           new SimulcastRateAllocator(codec, std::move(tl_factory)));
@@ -97,6 +105,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     const std::vector<VideoStream>& streams,
     const std::string& payload_name,
     int payload_type,
+    const std::string& stereo_associated_payload_name,
     bool nack_enabled) {
   static const int kEncoderMinBitrateKbps = 30;
   RTC_DCHECK(!streams.empty());
@@ -105,6 +114,13 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
   VideoCodec video_codec;
   memset(&video_codec, 0, sizeof(video_codec));
   video_codec.codecType = PayloadStringToCodecType(payload_name);
+
+  ALOGE("Qiang Chen VideoCodecInitializer::VideoEncoderConfigToVideoCodec %s", stereo_associated_payload_name.c_str());
+  const bool is_stereo_codec = video_codec.codecType == kVideoCodecStereo;
+  if (is_stereo_codec) {
+    video_codec.codecType =
+        PayloadStringToCodecType(stereo_associated_payload_name);
+  }
 
   switch (config.content_type) {
     case VideoEncoderConfig::ContentType::kRealtimeVideo:
@@ -238,6 +254,10 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
 
   RTC_DCHECK_GT(streams[0].max_framerate, 0);
   video_codec.maxFramerate = streams[0].max_framerate;
+
+  if (is_stereo_codec)
+    video_codec.codecType = kVideoCodecStereo;
+
   return video_codec;
 }
 

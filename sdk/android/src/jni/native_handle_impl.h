@@ -79,8 +79,7 @@ class AndroidTextureBuffer : public AndroidVideoFrameBuffer {
                        const rtc::Callback0<void>& no_longer_used);
   ~AndroidTextureBuffer();
 
-  NativeHandleImpl native_handle_impl() const;
-
+  NativeHandleImpl native_handle_impl() const;  
  private:
   Type type() const override;
   int width() const override;
@@ -126,13 +125,15 @@ class AndroidVideoBuffer : public AndroidVideoFrameBuffer {
                      int width,
                      int height,
                      jobject j_video_frame_buffer);
+
   ~AndroidVideoBuffer() override;
 
   jobject video_frame_buffer() const;
 
+  rtc::scoped_refptr<VideoFrameBuffer> SpawnMask() override;
+
   // Returns an instance of VideoRenderer.I420Frame (deprecated)
   jobject ToJavaI420Frame(JNIEnv* jni, int rotation);
-
  private:
   Type type() const override;
   int width() const override;

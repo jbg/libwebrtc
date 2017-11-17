@@ -32,6 +32,9 @@
 #include "video/overuse_frame_detector.h"
 #include "video/send_statistics_proxy.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace webrtc {
 
 namespace {
@@ -145,7 +148,7 @@ class VideoStreamEncoder::EncodeTask : public rtc::QueuedTask {
     RTC_DCHECK_GT(posted_frames_waiting_for_encode, 0);
     if (posted_frames_waiting_for_encode == 1) {
       video_stream_encoder_->EncodeVideoFrame(frame_, time_when_posted_us_);
-    } else {
+    } else {      
       // There is a newer frame in flight. Do not encode this frame.
       LOG(LS_VERBOSE)
           << "Incoming frame dropped due to that the encoder is blocked.";
@@ -594,10 +597,11 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   codec.expect_encode_from_texture = last_frame_info_->is_texture;
   max_framerate_ = codec.maxFramerate;
   RTC_DCHECK_LE(max_framerate_, kMaxFramerateFps);
-
+  ALOGE("Qiang Chen VideoStreamEncoder::RegisterCodec %s %d %d", codec.plName, codec.plType, codec.codecType);
   bool success = video_sender_.RegisterSendCodec(
                      &codec, number_of_cores_,
                      static_cast<uint32_t>(max_data_payload_length_)) == VCM_OK;
+  ALOGE("Qiang Chen VideoStreamEncoder::RegisterCodec success=%d", success);
   if (!success) {
     LOG(LS_ERROR) << "Failed to configure encoder.";
     rate_allocator_.reset();
@@ -663,6 +667,7 @@ void VideoStreamEncoder::ConfigureQualityScaler() {
 
 void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
   RTC_DCHECK_RUNS_SERIALIZED(&incoming_frame_race_checker_);
+  
   VideoFrame incoming_frame = video_frame;
 
   // Local time in webrtc time base.
@@ -745,7 +750,6 @@ void VideoStreamEncoder::TraceFrameDropEnd() {
 void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                                           int64_t time_when_posted_us) {
   RTC_DCHECK_RUN_ON(&encoder_queue_);
-
   if (pre_encode_callback_)
     pre_encode_callback_->OnFrame(video_frame);
 
@@ -815,6 +819,13 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                           "Encode");
 
   overuse_detector_->FrameCaptured(out_frame, time_when_posted_us);
+
+  count_++;
+  if (count_%100==0) {
+     int64_t c_time = clock_->TimeInMilliseconds();
+     ALOGE("Qiang Chen VideoStreamEncoder EncodeVideoFrame FPS: %lld", 100*1000/(c_time - l_time_));
+     l_time_ = c_time;
+  }
 
   video_sender_.AddVideoFrame(out_frame, nullptr);
 }

@@ -24,6 +24,9 @@
 #include "sdk/android/src/jni/wrapped_native_i420_buffer.h"
 #include "system_wrappers/include/aligned_malloc.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace webrtc {
 namespace jni {
 
@@ -60,10 +63,12 @@ class AndroidVideoI420Buffer : public I420BufferInterface {
   const uint8_t* DataY() const override { return data_y_; }
   const uint8_t* DataU() const override { return data_u_; }
   const uint8_t* DataV() const override { return data_v_; }
+  const uint8_t* DataA() const override { return data_a_; }
 
   int StrideY() const override { return stride_y_; }
   int StrideU() const override { return stride_u_; }
   int StrideV() const override { return stride_v_; }
+  int StrideA() const override { return stride_a_; }
 
   int width() const override { return width_; }
   int height() const override { return height_; }
@@ -77,9 +82,11 @@ class AndroidVideoI420Buffer : public I420BufferInterface {
   const uint8_t* data_y_;
   const uint8_t* data_u_;
   const uint8_t* data_v_;
+  const uint8_t* data_a_;
   int stride_y_;
   int stride_u_;
   int stride_v_;
+  int stride_a_;
 };
 
 rtc::scoped_refptr<AndroidVideoI420Buffer>
@@ -123,12 +130,16 @@ AndroidVideoI420Buffer::AndroidVideoI420Buffer(JNIEnv* jni,
       j_video_frame_i420_buffer_class, "getDataU", "()Ljava/nio/ByteBuffer;");
   jmethodID j_get_data_v_id = jni->GetMethodID(
       j_video_frame_i420_buffer_class, "getDataV", "()Ljava/nio/ByteBuffer;");
+  jmethodID j_get_data_a_id = jni->GetMethodID(
+      j_video_frame_i420_buffer_class, "getDataA", "()Ljava/nio/ByteBuffer;");
   jmethodID j_get_stride_y_id =
       jni->GetMethodID(j_video_frame_i420_buffer_class, "getStrideY", "()I");
   jmethodID j_get_stride_u_id =
       jni->GetMethodID(j_video_frame_i420_buffer_class, "getStrideU", "()I");
   jmethodID j_get_stride_v_id =
       jni->GetMethodID(j_video_frame_i420_buffer_class, "getStrideV", "()I");
+  jmethodID j_get_stride_a_id =
+      jni->GetMethodID(j_video_frame_i420_buffer_class, "getStrideA", "()I");
 
   jobject j_data_y =
       jni->CallObjectMethod(j_video_frame_buffer, j_get_data_y_id);
@@ -136,6 +147,8 @@ AndroidVideoI420Buffer::AndroidVideoI420Buffer(JNIEnv* jni,
       jni->CallObjectMethod(j_video_frame_buffer, j_get_data_u_id);
   jobject j_data_v =
       jni->CallObjectMethod(j_video_frame_buffer, j_get_data_v_id);
+  jobject j_data_a =
+      jni->CallObjectMethod(j_video_frame_buffer, j_get_data_a_id);
 
   data_y_ = static_cast<const uint8_t*>(jni->GetDirectBufferAddress(j_data_y));
   data_u_ = static_cast<const uint8_t*>(jni->GetDirectBufferAddress(j_data_u));
@@ -144,6 +157,15 @@ AndroidVideoI420Buffer::AndroidVideoI420Buffer(JNIEnv* jni,
   stride_y_ = jni->CallIntMethod(j_video_frame_buffer, j_get_stride_y_id);
   stride_u_ = jni->CallIntMethod(j_video_frame_buffer, j_get_stride_u_id);
   stride_v_ = jni->CallIntMethod(j_video_frame_buffer, j_get_stride_v_id);
+
+  if (j_data_a) {
+    data_a_ =
+        static_cast<const uint8_t*>(jni->GetDirectBufferAddress(j_data_a));
+    stride_a_ = jni->CallIntMethod(j_video_frame_buffer, j_get_stride_a_id);
+  } else {
+    data_a_ = nullptr;
+    stride_a_ = 0;
+  }
 }
 
 AndroidVideoI420Buffer::~AndroidVideoI420Buffer() {
@@ -398,6 +420,25 @@ rtc::scoped_refptr<I420BufferInterface> AndroidVideoBuffer::ToI420() {
   // we are assumed to take the ownership of.
   return AndroidVideoI420Buffer::WrapReference(jni, j_release_id_, width_,
                                                height_, j_i420_buffer);
+}
+
+
+rtc::scoped_refptr<VideoFrameBuffer> AndroidVideoBuffer::SpawnMask() {
+  JNIEnv* jni = AttachCurrentThreadIfNeeded();
+  ScopedLocalRefFrame local_ref_frame(jni);
+
+  jclass j_video_frame_buffer_class =
+      FindClass(jni, "org/webrtc/VideoFrame$Buffer");
+  jmethodID j_spawn_mask_id =
+      jni->GetMethodID(j_video_frame_buffer_class, "spawnMask",
+                       "()Lorg/webrtc/VideoFrame$Buffer;");
+  jobject j_mask_buffer = 
+      jni->CallObjectMethod(*j_video_frame_buffer_, j_spawn_mask_id);
+  
+  if (j_mask_buffer == nullptr) return nullptr;
+
+  return AndroidVideoBuffer::WrapReference(jni, j_release_id_, width_, height_, j_mask_buffer);
+
 }
 
 jobject AndroidVideoBuffer::ToJavaI420Frame(JNIEnv* jni, int rotation) {

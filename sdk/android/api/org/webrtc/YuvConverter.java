@@ -128,7 +128,55 @@ public class YuvConverter {
   }
 
   /** Converts the texture buffer to I420. */
-  public I420Buffer convert(TextureBuffer textureBuffer) {
+  public I420Buffer convert(TextureBuffer textureBuffer, boolean leave_alpha_size) {
+    final int width = textureBuffer.getWidth();
+    final int height = textureBuffer.getHeight();
+
+    // SurfaceTextureHelper requires a stride that is divisible by 8.  Round width up.
+    // See SurfaceTextureHelper for details on the size and format.
+    final int stride = ((width + 7) / 8) * 8;
+    final int uvHeight = (height + 1) / 2;
+    // Due to the layout used by SurfaceTextureHelper, vPos + stride * uvHeight would overrun the
+    // buffer.  Add one row at the bottom to compensate for this.  There will never be data in the
+    // extra row, but now other code does not have to deal with v stride * v height exceeding the
+    // buffer's capacity.
+    final int size = stride * (height + uvHeight + 1) * (leave_alpha_size ? 2 : 1);
+    ByteBuffer buffer = JniCommon.allocateNativeByteBuffer(size);
+    convert(buffer, width, height, stride, textureBuffer.getTextureId(),
+        RendererCommon.convertMatrixFromAndroidGraphicsMatrix(textureBuffer.getTransformMatrix()),
+        textureBuffer.getType());
+
+    final int yPos = 0;
+    final int uPos = yPos + stride * height;
+    // Rows of U and V alternate in the buffer, so V data starts after the first row of U.
+    final int vPos = uPos + stride / 2;
+    int aPos = yPos + stride * height + stride * uvHeight;
+
+    buffer.position(yPos);
+    buffer.limit(yPos + stride * height);
+    ByteBuffer dataY = buffer.slice();
+
+    buffer.position(uPos);
+    buffer.limit(uPos + stride * uvHeight);
+    ByteBuffer dataU = buffer.slice();
+
+    buffer.position(vPos);
+    buffer.limit(vPos + stride * uvHeight);
+    ByteBuffer dataV = buffer.slice();
+
+    ByteBuffer dataA = null;
+    if (leave_alpha_size) {
+      buffer.position(aPos);
+      buffer.limit(aPos + stride * (height + uvHeight));
+      dataA = buffer.slice();
+    }
+
+    // SurfaceTextureHelper uses the same stride for Y, U, and V data.
+    return JavaI420Buffer.wrap(width, height, dataY, stride, dataU, stride, dataV, stride, dataA,
+        stride, () -> { JniCommon.freeNativeByteBuffer(buffer); });
+  }
+
+  public I420Buffer convertRedToY(TextureBuffer textureBuffer) {
     final int width = textureBuffer.getWidth();
     final int height = textureBuffer.getHeight();
 
@@ -142,9 +190,9 @@ public class YuvConverter {
     // buffer's capacity.
     final int size = stride * (height + uvHeight + 1);
     ByteBuffer buffer = JniCommon.allocateNativeByteBuffer(size);
-    convert(buffer, width, height, stride, textureBuffer.getTextureId(),
-        RendererCommon.convertMatrixFromAndroidGraphicsMatrix(textureBuffer.getTransformMatrix()),
-        textureBuffer.getType());
+    convertRedToY(buffer, width, height, stride, textureBuffer.getTextureId(),
+            RendererCommon.convertMatrixFromAndroidGraphicsMatrix(textureBuffer.getTransformMatrix()),
+            textureBuffer.getType());
 
     final int yPos = 0;
     final int uPos = yPos + stride * height;
@@ -164,8 +212,8 @@ public class YuvConverter {
     ByteBuffer dataV = buffer.slice();
 
     // SurfaceTextureHelper uses the same stride for Y, U, and V data.
-    return JavaI420Buffer.wrap(width, height, dataY, stride, dataU, stride, dataV, stride,
-        () -> { JniCommon.freeNativeByteBuffer(buffer); });
+    return JavaI420Buffer.wrap(width, height, dataY, stride, dataU, stride, dataV, stride, null,
+            stride, () -> { JniCommon.freeNativeByteBuffer(buffer); });
   }
 
   /** Deprecated, use convert(TextureBuffer). */
@@ -207,7 +255,7 @@ public class YuvConverter {
     shader.setVertexAttribArray("in_tc", 2, TEXTURE_RECTANGLE);
   }
 
-  private void convert(ByteBuffer buf, int width, int height, int stride, int srcTextureId,
+  public void convert(ByteBuffer buf, int width, int height, int stride, int srcTextureId,
       float[] transformMatrix, TextureBuffer.Type textureType) {
     threadChecker.checkIsOnValidThread();
     if (released) {
@@ -271,6 +319,13 @@ public class YuvConverter {
     final int frameBufferHeight = total_height;
     textureFrameBuffer.setSize(frameBufferWidth, frameBufferHeight);
 
+    shader.useProgram();
+    // Initialize vertex shader attributes.
+    shader.setVertexAttribArray("in_pos", 2, DEVICE_RECTANGLE);
+    // If the width is not a multiple of 4 pixels, the texture
+    // will be scaled up slightly and clipped at the right border.
+    shader.setVertexAttribArray("in_tc", 2, TEXTURE_RECTANGLE);
+
     // Bind our framebuffer.
     GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, textureFrameBuffer.getFrameBufferId());
     GlUtil.checkNoGLES2Error("glBindFramebuffer");
@@ -315,6 +370,96 @@ public class YuvConverter {
     // the texture updated from the camera.
     GLES20.glBindTexture(textureType.getGlTarget(), 0);
   }
+
+  public void convertRedToY(ByteBuffer buf, int width, int height, int stride, int srcTextureId,
+                      float[] transformMatrix, TextureBuffer.Type textureType) {
+    threadChecker.checkIsOnValidThread();
+    if (released) {
+      throw new IllegalStateException("YuvConverter.convert called on released object");
+    }
+    if (textureType != shaderTextureType) {
+      initShader(textureType);
+    }
+
+    if (stride % 8 != 0) {
+      throw new IllegalArgumentException("Invalid stride, must be a multiple of 8");
+    }
+    if (stride < width) {
+      throw new IllegalArgumentException("Invalid stride, must >= width");
+    }
+
+    int y_width = (width + 3) / 4;
+    int uv_width = (width + 7) / 8;
+    int uv_height = (height + 1) / 2;
+
+    int total_height = height + uv_height;
+    int size = stride * total_height;
+
+    if (buf.capacity() < size) {
+      throw new IllegalArgumentException("YuvConverter.convert called with too small buffer");
+    }
+    // Produce a frame buffer starting at top-left corner, not
+    // bottom-left.
+    transformMatrix =
+            RendererCommon.multiplyMatrices(transformMatrix, RendererCommon.verticalFlipMatrix());
+
+    final int frameBufferWidth = stride / 4;
+    final int frameBufferHeight = total_height;
+    textureFrameBuffer.setSize(frameBufferWidth, frameBufferHeight);
+
+    shader.useProgram();
+    // Initialize vertex shader attributes.
+    shader.setVertexAttribArray("in_pos", 2, DEVICE_RECTANGLE);
+    // If the width is not a multiple of 4 pixels, the texture
+    // will be scaled up slightly and clipped at the right border.
+    shader.setVertexAttribArray("in_tc", 2, TEXTURE_RECTANGLE);
+
+    // Bind our framebuffer.
+    GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, textureFrameBuffer.getFrameBufferId());
+    GlUtil.checkNoGLES2Error("glBindFramebuffer");
+
+    GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+    GLES20.glBindTexture(textureType.getGlTarget(), srcTextureId);
+    GLES20.glUniformMatrix4fv(texMatrixLoc, 1, false, transformMatrix, 0);
+
+    // Draw Red To Y
+    GLES20.glViewport(0, 0, y_width, height);
+    // Matrix * (1;0;0;0) / width. Note that opengl uses column major order.
+    GLES20.glUniform2f(xUnitLoc, transformMatrix[0] / width, transformMatrix[1] / width);
+    // Y'UV444 to RGB888, see
+    // https://en.wikipedia.org/wiki/YUV#Y.27UV444_to_RGB888_conversion.
+    // We use the ITU-R coefficients for U and V */
+    GLES20.glUniform4f(coeffsLoc, 1f, 0f, 0f, 0f);
+    GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+
+    // Draw U (const value 0x80)
+    GLES20.glViewport(0, height, uv_width, uv_height);
+    // Matrix * (1;0;0;0) / (width / 2). Note that opengl uses column major order.
+    GLES20.glUniform2f(
+            xUnitLoc, 2.0f * transformMatrix[0] / width, 2.0f * transformMatrix[1] / width);
+    GLES20.glUniform4f(coeffsLoc, 0f, 0f, 0f, 0.5f);
+    GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+
+    // Draw V (const value 0x80)
+    GLES20.glViewport(stride / 8, height, uv_width, uv_height);
+    GLES20.glUniform4f(coeffsLoc, 0f, 0f, 0f, 0.5f);
+    GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+
+
+    GLES20.glReadPixels(
+            0, 0, frameBufferWidth, frameBufferHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, buf);
+
+    GlUtil.checkNoGLES2Error("YuvConverter.convert");
+
+    // Restore normal framebuffer.
+    GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+
+    // Unbind texture. Reportedly needed on some devices to get
+    // the texture updated from the camera.
+    GLES20.glBindTexture(textureType.getGlTarget(), 0);
+  }
+
 
   public void release() {
     threadChecker.checkIsOnValidThread();
