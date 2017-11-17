@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "95ab16d9_2254993c",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-17T15:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60bd25cf_d12284c1",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffebb174_68b98d77",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 6
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c5582032_0abd8949",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-17T15:52:41Z",
+      "side": 1,
+      "message": "From a philosophical standpoint, any comment involving the reason for a test failure would have to use the word \u0027probably\u0027.\n\nNeither would work directly; the history limit isn\u0027t a private member, it is in an anonymous namespace. If we change this, I think we should also consider whether the user should be able to set it. (It would make sense to shorten the history on devices where memory is scarce.) Let\u0027s have that discussion outside this CL.",
+      "parentUuid": "4db41d0b_540e4073",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5532266_e0d55f33",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
         "patchSetId": 6
@@ -82,6 +118,24 @@
       "writtenOn": "2017-11-16T17:57:15Z",
       "side": 1,
       "message": "Perhaps you could also keep copies of the events you\u0027re logging in a vector, then compare the read events to the events which you remember you\u0027ve written? That might be a bit cleaner.",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "548c4214_2e8ff756",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-17T15:52:41Z",
+      "side": 1,
+      "message": "We\u0027d still have to figure out which the first element written is, and searching the list of stored events seems ugly and inefficient. This might be easier once we have found a good solution to the question above.",
+      "parentUuid": "b5532266_e0d55f33",
       "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
