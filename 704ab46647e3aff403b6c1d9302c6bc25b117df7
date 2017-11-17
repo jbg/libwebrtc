@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "0fb506b9_bd63630e",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T18:53:16Z",
+      "side": 1,
+      "message": "That is ok, as implemented the bandwidth only depends on the bitrate, so it isn\u0027t necessary to trigger when other codec parameters are updated.",
+      "parentUuid": "8f5f0a59_f2432bec",
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf1c3194_8050faa5",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 2
