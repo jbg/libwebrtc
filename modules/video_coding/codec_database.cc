@@ -18,6 +18,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 
+#include "modules/video_coding/codecs/vp8/temporal_layers.h"
 namespace {
 const size_t kDefaultPayloadSize = 1440;
 }
@@ -134,6 +135,7 @@ bool VCMCodecDataBase::SetSendCodec(const VideoCodec* send_codec,
     reset_required = RequiresEncoderReset(new_send_codec);
   }
 
+  //new_send_codec.codecType = kVideoCodecVP8;
   memcpy(&send_codec_, &new_send_codec, sizeof(send_codec_));
 
   if (!reset_required) {
@@ -147,6 +149,7 @@ bool VCMCodecDataBase::SetSendCodec(const VideoCodec* send_codec,
   ptr_encoder_.reset(new VCMGenericEncoder(
       external_encoder_, encoded_frame_callback_, internal_source_));
   encoded_frame_callback_->SetInternalSource(internal_source_);
+  send_codec_.VP8()->tl_factory->Test("codec_database");
   if (ptr_encoder_->InitEncode(&send_codec_, number_of_cores_,
                                max_payload_size_) < 0) {
     LOG(LS_ERROR) << "Failed to initialize video encoder.";
@@ -257,6 +260,7 @@ bool VCMCodecDataBase::RequiresEncoderReset(const VideoCodec& new_send_codec) {
       break;
     // Unknown codec type, reset just to be sure.
     case kVideoCodecUnknown:
+    case kVideoCodecStereo:
       return true;
   }
 

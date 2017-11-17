@@ -24,6 +24,9 @@
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/clock.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace webrtc {
 namespace vcm {
 
@@ -44,6 +47,7 @@ VideoSender::VideoSender(Clock* clock,
   // construction. This is currently how this class is being used by at least
   // one external project (diffractor).
   sequenced_checker_.Detach();
+  clock_ = Clock::GetRealTimeClock();
 }
 
 VideoSender::~VideoSender() {}
@@ -282,6 +286,12 @@ int32_t VideoSender::RegisterProtectionCallback(
 // Add one raw video frame to the encoder, blocking.
 int32_t VideoSender::AddVideoFrame(const VideoFrame& videoFrame,
                                    const CodecSpecificInfo* codecSpecificInfo) {
+  count_++;
+  if (count_%100==0) {
+     int64_t c_time = clock_->TimeInMilliseconds();
+     ALOGE("Qiang Chen VideoSender AddVideoFrame FPS: %lld", 100*1000/(c_time - l_time_));
+     l_time_ = c_time;
+  }
   EncoderParameters encoder_params;
   std::vector<FrameType> next_frame_types;
   bool encoder_has_internal_source = false;
@@ -295,7 +305,8 @@ int32_t VideoSender::AddVideoFrame(const VideoFrame& videoFrame,
   if (_encoder == nullptr)
     return VCM_UNINITIALIZED;
   SetEncoderParameters(encoder_params, encoder_has_internal_source);
-  if (_mediaOpt.DropFrame()) {
+  if (false && _mediaOpt.DropFrame()) {
+    ALOGE("Qiang Chen VideoSender AddVideoFrame Drop");
     LOG(LS_VERBOSE) << "Drop Frame "
                     << "target bitrate "
                     << encoder_params.target_bitrate.get_sum_bps()

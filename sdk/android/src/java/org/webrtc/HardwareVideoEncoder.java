@@ -148,6 +148,7 @@ class HardwareVideoEncoder implements VideoEncoder {
 
   @Override
   public VideoCodecStatus initEncode(Settings settings, Callback callback) {
+    Logging.e("Qiang Chen","Java InitEncode " + codecName + " x " +codecType.name());
     encodeThreadChecker.checkIsOnValidThread();
 
     this.callback = callback;
@@ -189,6 +190,8 @@ class HardwareVideoEncoder implements VideoEncoder {
       format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, keyFrameIntervalSec);
       if (codecType == VideoCodecType.H264) {
         String profileLevelId = params.get(VideoCodecInfo.H264_FMTP_PROFILE_LEVEL_ID);
+
+        Logging.e("Qiang Chen","Java InitEncode "+(profileLevelId!=null?profileLevelId.toString():"No Prof"));
         if (profileLevelId == null) {
           profileLevelId = VideoCodecInfo.H264_CONSTRAINED_BASELINE_3_1;
         }
@@ -295,7 +298,6 @@ class HardwareVideoEncoder implements VideoEncoder {
 
     if (outputBuilders.size() > MAX_ENCODER_Q_SIZE) {
       // Too many frames in the encoder.  Drop this frame.
-      Logging.e(TAG, "Dropped frame, encoder queue full");
       return VideoCodecStatus.NO_OUTPUT; // See webrtc bug 2887.
     }
 
@@ -474,6 +476,7 @@ class HardwareVideoEncoder implements VideoEncoder {
     try {
       MediaCodec.BufferInfo info = new MediaCodec.BufferInfo();
       int index = codec.dequeueOutputBuffer(info, DEQUEUE_OUTPUT_BUFFER_TIMEOUT_US);
+
       if (index < 0) {
         return;
       }

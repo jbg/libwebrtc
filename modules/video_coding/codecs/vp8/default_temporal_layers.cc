@@ -27,6 +27,9 @@
 #include "vpx/vp8cx.h"
 #include "vpx/vpx_encoder.h"
 
+#include <android/log.h>
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace webrtc {
 
 TemporalLayers::FrameConfig::FrameConfig()
@@ -420,11 +423,20 @@ TemporalLayers* TemporalLayersFactory::Create(
     int simulcast_id,
     int temporal_layers,
     uint8_t initial_tl0_pic_idx) const {
+  ALOGE("Qiang Chen TemporalLayersFactory::Create %ld", (long)this);
   TemporalLayers* tl =
       new DefaultTemporalLayers(temporal_layers, initial_tl0_pic_idx);
   if (listener_ && !ExcludeOnTemporalLayersCreated(temporal_layers))
     listener_->OnTemporalLayersCreated(simulcast_id, tl);
   return tl;
+}
+
+void TemporalLayersFactory::Test(const char* str) const{
+  ALOGE("Qiang Chen TemporalLayersFactory::Test %ld from %s", (long)this, str);
+}
+
+TemporalLayersFactory::~TemporalLayersFactory() {
+  ALOGE("Qiang Chen TemporalLayersFactory::~ %ld", (long)this);
 }
 
 std::unique_ptr<TemporalLayersChecker> TemporalLayersFactory::CreateChecker(

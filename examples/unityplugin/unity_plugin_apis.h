@@ -19,9 +19,11 @@
 typedef void (*I420FRAMEREADY_CALLBACK)(const uint8_t* data_y,
                                         const uint8_t* data_u,
                                         const uint8_t* data_v,
+                                        const uint8_t* data_a,
                                         int stride_y,
                                         int stride_u,
                                         int stride_v,
+                                        int stride_a,
                                         uint32_t width,
                                         uint32_t height);
 typedef void (*LOCALDATACHANNELREADY_CALLBACK)();

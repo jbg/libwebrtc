@@ -75,6 +75,8 @@ namespace jni {
 #define ALOGW LOG_TAG(rtc::LS_WARNING, TAG_ENCODER)
 #define ALOGE LOG_TAG(rtc::LS_ERROR, TAG_ENCODER)
 
+#define ALOGX(...) __android_log_print(ANDROID_LOG_ERROR, "AppRTCMobile", __VA_ARGS__)
+
 namespace {
 // Maximum time limit between incoming frames before requesting a key frame.
 const size_t kFrameDiffThresholdMs = 350;
@@ -408,6 +410,7 @@ MediaCodecVideoEncoder::MediaCodecVideoEncoder(JNIEnv* jni,
 int32_t MediaCodecVideoEncoder::InitEncode(const VideoCodec* codec_settings,
                                            int32_t /* number_of_cores */,
                                            size_t /* max_payload_size */) {
+  ALOGX("AndroidMediaEncoder_JNI InitEncode");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&encoder_queue_checker_);
   if (codec_settings == NULL) {
     ALOGE << "NULL VideoCodec instance";
@@ -676,6 +679,7 @@ int32_t MediaCodecVideoEncoder::Encode(
     const VideoFrame& frame,
     const CodecSpecificInfo* /* codec_specific_info */,
     const std::vector<FrameType>* frame_types) {
+  ALOGX("AndroidMediaEncoder_JNI Encode");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&encoder_queue_checker_);
   if (sw_fallback_required_)
     return WEBRTC_VIDEO_CODEC_FALLBACK_SOFTWARE;
