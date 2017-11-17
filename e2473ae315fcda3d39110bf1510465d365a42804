@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "308b2e7b_939b9c39",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-11-17T09:04:23Z",
+      "side": 1,
+      "message": "Does it pass if WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE is undefined?",
+      "revId": "e2473ae315fcda3d39110bf1510465d365a42804",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
