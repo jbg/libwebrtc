@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "081a864b_6528d937",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-11-17T01:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "189a5ba7_db1c27d3",
+      "revId": "dce893549733eb1f40f4e2a619f97f658eb7aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "218ec924_55ec8a68",
         "filename": "rtc_base/opensslidentity.cc",
         "patchSetId": 21
@@ -30,6 +48,24 @@
       "writtenOn": "2017-11-17T00:20:56Z",
       "side": 1,
       "message": "Nit: Template parameter deduction means that you can actually just write WrapUnique(...) without the explicit parameter.",
+      "revId": "dce893549733eb1f40f4e2a619f97f658eb7aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a98cf01c_c5e6d1b7",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5673
+      },
+      "writtenOn": "2017-11-17T01:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "218ec924_55ec8a68",
       "revId": "dce893549733eb1f40f4e2a619f97f658eb7aa1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
