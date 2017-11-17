@@ -93,6 +93,30 @@
       "revId": "9ee0dfc9d9bbaacf5a8adbda89f1569780e5b2ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "226fc10e_ca469f5a",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-17T10:37:58Z",
+      "side": 1,
+      "message": "Ok, if that\u0027s the case it\u0027s fine. I thought codec_name could be controlled from SDP in such a way that the one generating the SDP could remove the null character, but maybe not.",
+      "parentUuid": "bc3c0632_ccc4d263",
+      "range": {
+        "startLine": 797,
+        "startChar": 6,
+        "endLine": 797,
+        "endChar": 53
+      },
+      "revId": "9ee0dfc9d9bbaacf5a8adbda89f1569780e5b2ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
