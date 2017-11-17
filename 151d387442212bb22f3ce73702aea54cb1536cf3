@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ffebb174_68b98d77",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2017-11-17T09:58:28Z",
+      "side": 1,
+      "message": "Is there some way we avoid passing |this| to the lambda? since it\u0027s an async task, it feels unsafe to use a raw pointer like that (for some reason I\u0027m also thinking that use of |this| for lambdas is discouraged, I might be wrong about that).",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4db41d0b_540e4073",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
         "patchSetId": 6
