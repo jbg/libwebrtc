@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "8f5f0a59_f2432bec",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 5619
+      },
+      "writtenOn": "2017-11-17T11:15:22Z",
+      "side": 1,
+      "message": "Sorry, I meant to say that there are additional codec parameters updated at ApplyAudioNetworkAdaptor and it could be SetTargetBitrate will not be called together with the other changes.",
+      "parentUuid": "ab498ecf_bfdaa684",
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf1c3194_8050faa5",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 2
