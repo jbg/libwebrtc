@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b7bfe5c_6076c57c",
+        "filename": "modules/audio_coding/codecs/opus/opus_bandwidth_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-17T10:02:33Z",
+      "side": 1,
+      "message": "This looks like 50 seconds to me...",
+      "range": {
+        "startLine": 26,
+        "startChar": 65,
+        "endLine": 26,
+        "endChar": 68
+      },
+      "revId": "acc482d606ab3eca5c769ba0a0fe144ec02d7ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "931f00a5_a27db135",
+        "filename": "modules/audio_coding/codecs/opus/opus_bandwidth_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-17T10:02:33Z",
+      "side": 1,
+      "message": "Nice! I like this class.",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "acc482d606ab3eca5c769ba0a0fe144ec02d7ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e854713_37e55a14",
+        "filename": "modules/audio_coding/codecs/opus/opus_bandwidth_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-17T10:02:33Z",
+      "side": 1,
+      "message": "Strictly speaking, you could move these to be declared inside the loop, where they are used.\n\n AudioEncoder::EncodedInfo encoder_info \u003d encoder-\u003eEncode(...);\n int decoder_info \u003d decoder-\u003eDecode(...);",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 19
+      },
+      "revId": "acc482d606ab3eca5c769ba0a0fe144ec02d7ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd1617c9_b00a3300",
+        "filename": "modules/audio_coding/codecs/opus/opus_bandwidth_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-17T10:02:33Z",
+      "side": 1,
+      "message": "I think you should only decode when the encoded size is \u003e 0. That is, move the Decode call inside this if statement.",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "acc482d606ab3eca5c769ba0a0fe144ec02d7ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51ab8e01_538416ae",
+        "filename": "modules/audio_coding/codecs/opus/opus_bandwidth_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-17T10:02:33Z",
+      "side": 1,
+      "message": "I think I would ASSERT_TRUE this.",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 13
+      },
+      "revId": "acc482d606ab3eca5c769ba0a0fe144ec02d7ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
