@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "588f8e50_0dc4af3e",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-17T10:54:28Z",
+      "side": 1,
+      "message": "I don\u0027t see any easy way around it. Please note that the task is posted to a TaskQueue which itself is owned by the event log, so |this| should always outlive the tasks stored on |task_queue_|. For what it\u0027s worth, the existing code is already binding |this|: https://webrtc-review.googlesource.com/c/src/+/22600/6/logging/rtc_event_log/rtc_event_log.cc#191\n\nI\u0027ve looked at the google and chromium guidelines and I can\u0027t find anything that discourages binding to |this|, but they point out the potential life-time issues when binding to pointers. They do discourage implicitly binding to |this| or other unmanaged pointers via [\u0026]() and \n[\u003d]().",
+      "parentUuid": "ffebb174_68b98d77",
+      "revId": "151d387442212bb22f3ce73702aea54cb1536cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4db41d0b_540e4073",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
         "patchSetId": 6
