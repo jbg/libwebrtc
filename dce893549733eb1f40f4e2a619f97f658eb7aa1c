@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "189a5ba7_db1c27d3",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-11-17T00:20:56Z",
+      "side": 1,
+      "message": "Nit: certs.push_back(std::move(certificate)); is the same thing and avoids the brief unowned pointer.",
+      "revId": "dce893549733eb1f40f4e2a619f97f658eb7aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "218ec924_55ec8a68",
+        "filename": "rtc_base/opensslidentity.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2017-11-17T00:20:56Z",
+      "side": 1,
+      "message": "Nit: Template parameter deduction means that you can actually just write WrapUnique(...) without the explicit parameter.",
+      "revId": "dce893549733eb1f40f4e2a619f97f658eb7aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
