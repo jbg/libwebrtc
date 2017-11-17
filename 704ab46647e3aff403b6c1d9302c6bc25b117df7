@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a83413e6_0d046f04",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "WebRtcOpus_SetComplexity is always called only because it uses value_or() with a default value. I don\u0027t think this applies in the bandwidth case. GetNewBandwidth method would still need the encoder instance to implement the hysteresis (or we would need to duplicate the bandwidth state in this class, since it can change internally under certain circumstances). Plus if we force GetNewBandwidth to always return a value (GetNewComplexity returns an Optional) we would need to re-implement the whole logic for all different bandwidths, including superwideband and fullband and wouldn\u0027t profit if opus improves those. I think we should leave it as is, but if you feel strongly about changing it, I am happy to do so.",
+      "parentUuid": "1e5193a8_51ae76dc",
+      "range": {
+        "startLine": 688,
+        "startChar": 20,
+        "endLine": 688,
+        "endChar": 63
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3122564c_fc975bb7",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2017-11-13T14:51:51Z",
       "side": 1,
       "message": "Is there a reason why forcing new bandwidth is required here but not every time target bitrate is changed?",
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab498ecf_bfdaa684",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "I might be missing something, but I thought this is called whenever the bitrate changes. Is that not the case?",
+      "parentUuid": "3122564c_fc975bb7",
       "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "68ad2a2f_ee440987",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf1c3194_8050faa5",
+      "range": {
+        "startLine": 157,
+        "startChar": 20,
+        "endLine": 157,
+        "endChar": 24
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c15caec7_cc3b41cf",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 2
@@ -85,6 +151,30 @@
       "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d769bad_ffb19204",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "You are completely right, this is a unittest for GetNewBandwidth (as ConfigComplexityAdaptation is for GetNewComplexity). I added a opus_bandwidth_unittest.cc for for AudioEncoderOpus from the outside.",
+      "parentUuid": "c15caec7_cc3b41cf",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 53
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "c5b95553_e2b1b745",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f403eeb_f7940a64",
+      "range": {
+        "startLine": 493,
+        "startChar": 2,
+        "endLine": 493,
+        "endChar": 7
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2a6bf4_5f811640",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 2
@@ -131,6 +245,30 @@
       "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e253bee_5d3d9699",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2a6bf4_5f811640",
+      "range": {
+        "startLine": 496,
+        "startChar": 2,
+        "endLine": 496,
+        "endChar": 7
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "e1b55d06_75cbb8d6",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Opus actually has some logic in the encoder that goes from the user_bandwidth (the one you set) to the bandwidth (the one used and returned), so it is necessary to call an encode in between. I added a comment to clarify this.",
+      "parentUuid": "8fce295b_9b68cae9",
+      "range": {
+        "startLine": 512,
+        "startChar": 2,
+        "endLine": 514,
+        "endChar": 42
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2184e4c2_9fb124c7",
         "filename": "modules/audio_coding/codecs/opus/opus_interface.c",
         "patchSetId": 2
@@ -177,6 +339,30 @@
       "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5d992d_f6e1ef02",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Right, opus_encoder_ctl receives a non-const instance.",
+      "parentUuid": "2184e4c2_9fb124c7",
+      "range": {
+        "startLine": 231,
+        "startChar": 32,
+        "endLine": 231,
+        "endChar": 43
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -203,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "2f58453a_3dc762b4",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8873fe42_5d53d20b",
+      "range": {
+        "startLine": 232,
+        "startChar": 2,
+        "endLine": 232,
+        "endChar": 11
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b79afb9e_0ca4009d",
         "filename": "modules/audio_coding/codecs/opus/opus_interface.h",
         "patchSetId": 2
@@ -223,6 +433,30 @@
       "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cc264f0_15275e3b",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Added the list of valid bandwidths.",
+      "parentUuid": "b79afb9e_0ca4009d",
+      "range": {
+        "startLine": 247,
+        "startChar": 10,
+        "endLine": 247,
+        "endChar": 19
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -249,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "79284868_b3d29f7e",
+        "filename": "modules/audio_coding/codecs/opus/opus_speed_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bc11c9b_59bf8b57",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 6
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35d11ebd_c441a876",
         "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
         "patchSetId": 2
@@ -272,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "419e02da_1ebe4d70",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35d11ebd_c441a876",
+      "range": {
+        "startLine": 465,
+        "startChar": 2,
+        "endLine": 465,
+        "endChar": 10
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d634d053_ea9d8459",
         "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
         "patchSetId": 2
@@ -292,6 +574,30 @@
       "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "066ffb60_a6ab76c1",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 6046
+      },
+      "writtenOn": "2017-11-17T04:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d634d053_ea9d8459",
+      "range": {
+        "startLine": 472,
+        "startChar": 47,
+        "endLine": 472,
+        "endChar": 59
+      },
+      "revId": "704ab46647e3aff403b6c1d9302c6bc25b117df7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
