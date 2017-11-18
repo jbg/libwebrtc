@@ -22,9 +22,7 @@
 namespace webrtc {
 namespace jni {
 
-// Wraps a Java decoder and delegates all calls to it. Passes
-// VideoDecoderWrapperCallback to the decoder on InitDecode. Wraps the received
-// frames to AndroidVideoBuffer.
+// Wraps a Java decoder and delegates all calls to it.
 class VideoDecoderWrapper : public VideoDecoder {
  public:
   VideoDecoderWrapper(JNIEnv* jni, jobject decoder);
@@ -52,6 +50,7 @@ class VideoDecoderWrapper : public VideoDecoder {
 
   // Wraps the frame to a AndroidVideoBuffer and passes it to the callback.
   void OnDecodedFrame(JNIEnv* jni,
+                      jobject j_caller,
                       jobject jframe,
                       jobject jdecode_time_ms,
                       jobject jqp);
@@ -72,8 +71,6 @@ class VideoDecoderWrapper : public VideoDecoder {
 
   rtc::Optional<uint8_t> ParseQP(const EncodedImage& input_image);
 
-  std::string GetImplementationName(JNIEnv* jni) const;
-
   VideoCodec codec_settings_;
   int32_t number_of_cores_;
 
@@ -86,29 +83,6 @@ class VideoDecoderWrapper : public VideoDecoder {
   DecodedImageCallback* callback_;
 
   const ScopedGlobalRef<jobject> decoder_;
-  const ScopedGlobalRef<jclass> encoded_image_class_;
-  const ScopedGlobalRef<jclass> frame_type_class_;
-  const ScopedGlobalRef<jclass> settings_class_;
-  const ScopedGlobalRef<jclass> video_frame_class_;
-  const ScopedGlobalRef<jclass> video_codec_status_class_;
-  const ScopedGlobalRef<jclass> integer_class_;
-
-  jmethodID encoded_image_constructor_;
-  jmethodID settings_constructor_;
-
-  jfieldID empty_frame_field_;
-  jfieldID video_frame_key_field_;
-  jfieldID video_frame_delta_field_;
-
-  jmethodID video_frame_get_timestamp_ns_method_;
-
-  jmethodID init_decode_method_;
-  jmethodID release_method_;
-  jmethodID decode_method_;
-  jmethodID get_prefers_late_decoding_method_;
-  jmethodID get_implementation_name_method_;
-
-  jmethodID get_number_method_;
 
   jobject ConvertEncodedImageToJavaEncodedImage(JNIEnv* jni,
                                                 const EncodedImage& image);
