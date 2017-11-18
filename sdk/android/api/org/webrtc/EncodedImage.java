@@ -12,6 +12,8 @@ package org.webrtc;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
+import org.webrtc.EncodedImage;
+import org.webrtc.EncodedImage.FrameType;
 
 /**
  * An encoded frame from a video stream. Used as an input for decoders and as an output for
@@ -124,5 +126,24 @@ public class EncodedImage {
       return new EncodedImage(buffer, encodedWidth, encodedHeight, captureTimeNs, frameType,
           rotation, completeFrame, qp);
     }
+  }
+
+  @CalledByNative
+  static EncodedImage Create(ByteBuffer buffer, int encodedWidth, int encodedHeight,
+      long captureTimeNs, EncodedImage.FrameType frameType, int rotation, boolean completeFrame,
+      Integer qp) {
+    return new EncodedImage(
+        buffer, encodedWidth, encodedHeight, captureTimeNs, frameType, rotation, completeFrame, qp);
+  }
+
+  // TODO(magjed): Re-use from both encoder and decoder.
+  @CalledByNative
+  static EncodedImage.FrameType createFrameType(int nativeIndex) {
+    for (EncodedImage.FrameType type : EncodedImage.FrameType.values()) {
+      if (type.getNative() == nativeIndex) {
+        return type;
+      }
+    }
+    throw new IllegalArgumentException("Unknown native frame type: " + nativeIndex);
   }
 }
