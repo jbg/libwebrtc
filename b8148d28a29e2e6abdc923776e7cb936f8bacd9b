@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1db5b80d_92c42181",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-11-19T05:51:47Z",
+      "side": 1,
+      "message": "If we only need the track_id, then I think similarly we only need the stream ids, not the whole stream object.",
+      "range": {
+        "startLine": 54,
+        "startChar": 68,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "b8148d28a29e2e6abdc923776e7cb936f8bacd9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40e59a85_645e6bc0",
         "filename": "sdk/android/src/jni/pc/mediastream_jni.cc",
         "patchSetId": 4
