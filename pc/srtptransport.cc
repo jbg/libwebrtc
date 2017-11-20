@@ -26,14 +26,21 @@ namespace webrtc {
 
 SrtpTransport::SrtpTransport(bool rtcp_mux_enabled,
                              const std::string& content_name)
-    : content_name_(content_name),
-      rtp_transport_(rtc::MakeUnique<RtpTransport>(rtcp_mux_enabled)) {
+    : RtpTransportInternalAdapter(new RtpTransport(rtcp_mux_enabled)),
+      content_name_(content_name) {
+  // Own the raw pointer |transport| from the base class.
+  rtp_transport_.reset(transport_);
+  RTC_DCHECK(rtp_transport_);
   ConnectToRtpTransport();
 }
 
-SrtpTransport::SrtpTransport(std::unique_ptr<RtpTransportInternal> transport,
-                             const std::string& content_name)
-    : content_name_(content_name), rtp_transport_(std::move(transport)) {
+SrtpTransport::SrtpTransport(
+    std::unique_ptr<RtpTransportInternal> rtp_transport,
+    const std::string& content_name)
+    : RtpTransportInternalAdapter(rtp_transport.get()),
+      content_name_(content_name),
+      rtp_transport_(std::move(rtp_transport)) {
+  RTC_DCHECK(rtp_transport_);
   ConnectToRtpTransport();
 }
 
@@ -44,6 +51,9 @@ void SrtpTransport::ConnectToRtpTransport() {
                                             &SrtpTransport::OnReadyToSend);
   rtp_transport_->SignalNetworkRouteChanged.connect(
       this, &SrtpTransport::OnNetworkRouteChanged);
+  rtp_transport_->SignalWritableState.connect(this,
+                                              &SrtpTransport::OnWritableState);
+  rtp_transport_->SignalSentPacket.connect(this, &SrtpTransport::OnSentPacket);
 }
 
 bool SrtpTransport::SendRtpPacket(rtc::CopyOnWriteBuffer* packet,
