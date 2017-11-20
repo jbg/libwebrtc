@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5400a2_7268b983",
+        "filename": "sdk/android/api/org/webrtc/EncodedImage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T10:30:11Z",
+      "side": 1,
+      "message": "Can you move to this FrameType subclass and name it like fromNativeIndex? Note that it doesn\u0027t actually create any objects.",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4150639b_ff854d61",
+        "filename": "sdk/android/src/jni/classreferenceholder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T10:30:11Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 51
+      },
+      "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d886c934_5a07e6e6",
+        "filename": "sdk/android/src/jni/encodedimage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T10:30:11Z",
+      "side": 1,
+      "message": "Maybe we don\u0027t want to use this naming convention?",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
