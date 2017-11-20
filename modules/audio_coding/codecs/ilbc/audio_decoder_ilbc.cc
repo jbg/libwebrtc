@@ -60,7 +60,7 @@ std::vector<AudioDecoder::ParseResult> AudioDecoderIlbcImpl::ParsePayload(
   size_t bytes_per_frame;
   int timestamps_per_frame;
   if (payload.size() >= 950) {
-    RTC_LOG(LS_WARNING)
+    RTC_DLOG(LS_WARNING)
         << "AudioDecoderIlbcImpl::ParsePayload: Payload too large";
     return results;
   }
@@ -73,7 +73,7 @@ std::vector<AudioDecoder::ParseResult> AudioDecoderIlbcImpl::ParsePayload(
     bytes_per_frame = 50;
     timestamps_per_frame = 240;
   } else {
-    RTC_LOG(LS_WARNING)
+    RTC_DLOG(LS_WARNING)
         << "AudioDecoderIlbcImpl::ParsePayload: Invalid payload";
     return results;
   }
