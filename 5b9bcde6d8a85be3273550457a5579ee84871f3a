@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee7184a5_51916f55",
+        "filename": "test/fake_audio_device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-20T11:58:04Z",
+      "side": 1,
+      "message": "RTC_GUARDED_BY(lock_)?",
+      "revId": "5b9bcde6d8a85be3273550457a5579ee84871f3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
