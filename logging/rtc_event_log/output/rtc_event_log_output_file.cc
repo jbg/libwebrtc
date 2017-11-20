@@ -54,7 +54,7 @@ RtcEventLogOutputFile::RtcEventLogOutputFile(rtc::PlatformFile file,
     // Even though we failed to open a FILE*, the file is still open
     // and needs to be closed.
     if (!rtc::ClosePlatformFile(file)) {
-      RTC_LOG(LS_ERROR) << "Can't close file.";
+      RTC_DLOG(LS_ERROR) << "Can't close file.";
     }
     file_.reset();
     return;
@@ -90,7 +90,7 @@ bool RtcEventLogOutputFile::Write(const std::string& output) {
       written_bytes_ + output.length() <= max_size_bytes_) {
     written = file_->Write(output.c_str(), output.size());
     if (!written) {
-      RTC_LOG(LS_ERROR) << "FileWrapper failed to write WebRtcEventLog file.";
+      RTC_DLOG(LS_ERROR) << "FileWrapper failed to write WebRtcEventLog file.";
     }
   } else {
     RTC_LOG(LS_VERBOSE) << "Max file size reached.";
