@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "a785de77_caa9b2a2",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-20T23:46:33Z",
+      "side": 1,
+      "message": "I realized increasing the |payload_size| to accomodate for the header without changing |payload_data| is dangerous as we might be reading/copying uninitialized data. Then, I thought of a refactor that can get rid of memcpy as well:\n- Instead of front, append HeaderBit to the end of payload so that we can use SetPayloadSize().\n- Instead of first, append Header to the last packet. We can accomodate for it by adding it to |last_packet_reduction_len_|.\nWDYT?",
+      "parentUuid": "b805dae5_71a1fbba",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2eb45626_7b7b3db1",
         "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
         "patchSetId": 6
