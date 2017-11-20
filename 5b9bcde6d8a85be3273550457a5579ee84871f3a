@@ -16,6 +16,24 @@
       "revId": "5b9bcde6d8a85be3273550457a5579ee84871f3a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51719032_093859dc",
+        "filename": "test/fake_audio_device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-11-20T12:06:45Z",
+      "side": 1,
+      "message": "I\u0027m going to skip it in this case, since the usages that need updating will change from relying on VoE::Initialize() to call ADM::Init() to calling ADM::Init() just before the call to VoE.",
+      "parentUuid": "ee7184a5_51916f55",
+      "revId": "5b9bcde6d8a85be3273550457a5579ee84871f3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
