@@ -91,12 +91,17 @@ class FakeDtlsTransport : public DtlsTransportInternal {
       dest_ = dest;
       if (local_cert_ && dest_->local_cert_) {
         do_dtls_ = true;
+        RTC_LOG(LS_INFO) << "FakeDtlsTransport is doing DTLS";
+      } else {
+        do_dtls_ = false;
+        RTC_LOG(LS_INFO) << "FakeDtlsTransport is not doing DTLS";
       }
       SetWritable(true);
       if (!asymmetric) {
         dest->SetDestination(this, true);
       }
       dtls_state_ = DTLS_TRANSPORT_CONNECTED;
+      SignalDtlsState(this, dtls_state_);
       ice_transport_->SetDestination(
           static_cast<FakeIceTransport*>(dest->ice_transport()), asymmetric);
     } else {
@@ -136,6 +141,7 @@ class FakeDtlsTransport : public DtlsTransportInternal {
   }
   bool SetLocalCertificate(
       const rtc::scoped_refptr<rtc::RTCCertificate>& certificate) override {
+    do_dtls_ = true;
     local_cert_ = certificate;
     return true;
   }
