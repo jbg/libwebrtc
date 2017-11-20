@@ -33,6 +33,16 @@ public class EncodedImage {
     public int getNative() {
       return nativeIndex;
     }
+
+    @CalledByNative("FrameType")
+    static FrameType fromNativeIndex(int nativeIndex) {
+      for (FrameType type : FrameType.values()) {
+        if (type.getNative() == nativeIndex) {
+          return type;
+        }
+      }
+      throw new IllegalArgumentException("Unknown native frame type: " + nativeIndex);
+    }
   }
 
   public final ByteBuffer buffer;
@@ -124,5 +134,13 @@ public class EncodedImage {
       return new EncodedImage(buffer, encodedWidth, encodedHeight, captureTimeNs, frameType,
           rotation, completeFrame, qp);
     }
+  }
+
+  // TODO(bugs.webrtc.org/8551) Remove.
+  @CalledByNative
+  static EncodedImage create(ByteBuffer buffer, int encodedWidth, int encodedHeight,
+      long captureTimeNs, FrameType frameType, int rotation, boolean completeFrame, Integer qp) {
+    return new EncodedImage(
+        buffer, encodedWidth, encodedHeight, captureTimeNs, frameType, rotation, completeFrame, qp);
   }
 }
