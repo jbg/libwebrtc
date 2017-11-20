@@ -425,4 +425,45 @@ TEST(TaskQueueTest, PostALot) {
   EXPECT_EQ(kTaskCount, tasks_cleaned_up);
 }
 
+
+// TODO(bugs.webrtc.org/8173): Fix the libevent and win implementations.
+#if defined(WEBRTC_LINUX) || defined(WEBRTC_ANDROID) || defined(WEBRTC_WIN)
+#define MAYBE_PostTooMuch DISABLED_PostTooMuch
+#else
+#define MAYBE_PostTooMuch PostTooMuch
+#endif
+
+// Test that tasks that are pending at TQ destruction, don't run.
+TEST(TaskQueueTest, MAYBE_PostTooMuch) {
+  Event started(false, false), tq_deleted(false, false);
+
+  int tasks_executed = 0;
+  int tasks_cleaned_up = 0;
+  static const int kTaskCount = 100;
+
+  {
+    static const char kQueueName[] = "PostTooMuch";
+    TaskQueue queue(kQueueName);
+
+    // Post one task that we use to signal back that the TQ can be deleted.
+    queue.PostTask([&started]() { started.Set(); });
+
+    // Second task that we use to delay the subsequent tasks. This task
+    // will run, but the subsequent ones should not.
+    queue.PostTask([&tq_deleted]() { tq_deleted.Wait(100); });
+
+    for (int i = 0; i < kTaskCount; ++i) {
+      queue.PostTask(NewClosure([&tasks_executed]() { ++tasks_executed; },
+                                [&tasks_cleaned_up]() { ++tasks_cleaned_up; }));
+    }
+    started.Wait(Event::kForever);
+  }
+  tq_deleted.Set();
+
+  // None of the tasks posted in the loop, should have run.
+  EXPECT_EQ(0, tasks_executed);
+  // All of them should have been deleted.
+  EXPECT_EQ(kTaskCount, tasks_cleaned_up);
+}
+
 }  // namespace rtc
