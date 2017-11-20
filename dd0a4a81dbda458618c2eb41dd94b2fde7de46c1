@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8fbeb852_3bc72f8e",
+        "filename": "sdk/android/api/org/webrtc/EncodedImage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-20T13:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e5400a2_7268b983",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4150639b_ff854d61",
         "filename": "sdk/android/src/jni/classreferenceholder.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2ae39863_ca9a6699",
+        "filename": "sdk/android/src/jni/classreferenceholder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-20T13:30:49Z",
+      "side": 1,
+      "message": "No, removed. I think we have other unused classes in this file, but I was planning to leave it until we stop using this class together and nuke everything in one go.",
+      "parentUuid": "4150639b_ff854d61",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 51
+      },
+      "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d886c934_5a07e6e6",
         "filename": "sdk/android/src/jni/encodedimage.h",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "929fd2eb_a6c69713",
+        "filename": "sdk/android/src/jni/encodedimage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-20T13:30:49Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "d886c934_5a07e6e6",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "dd0a4a81dbda458618c2eb41dd94b2fde7de46c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
