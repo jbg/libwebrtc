@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8439474_b270fac0",
+        "filename": "sdk/android/api/org/webrtc/EncodedImage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T13:55:07Z",
+      "side": 1,
+      "message": "nit: lower case",
+      "range": {
+        "startLine": 141,
+        "startChar": 22,
+        "endLine": 141,
+        "endChar": 28
+      },
+      "revId": "7ff179dd94113cf59ed92c9d167cefc54d8ff345",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4ba23c3_d8cc0f24",
+        "filename": "sdk/android/src/jni/videocodecstatus.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T13:55:07Z",
+      "side": 1,
+      "message": "nit: Maybe name this different also?",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 39
+      },
+      "revId": "7ff179dd94113cf59ed92c9d167cefc54d8ff345",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "740fd575_c0ef7049",
+        "filename": "sdk/android/src/jni/videodecoderwrapper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T13:55:07Z",
+      "side": 1,
+      "message": "nit: Can you follow the same naming convention for all parameters?",
+      "range": {
+        "startLine": 52,
+        "startChar": 30,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "7ff179dd94113cf59ed92c9d167cefc54d8ff345",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b9949e8_ed41968c",
+        "filename": "sdk/android/src/jni/videoframe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-20T13:55:07Z",
+      "side": 1,
+      "message": "nit: Maybe change name?",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 38
+      },
+      "revId": "7ff179dd94113cf59ed92c9d167cefc54d8ff345",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
