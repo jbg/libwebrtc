@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3024140c_3a3704af",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "neighbor headers use a bit of pseudo-graphic to describe how a header looks like on the wire.\ne.g. RtpPacketizerVp8::WriteHeaderAndPayload in rtp_format_vp8.cc, several functions in rtp_format_vp9.cc\ntop of the rtp_packet.cc, all through rtp_header_extensions.cc\n\nMay be reformat this comment to something similar",
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afc079b6_8b35e850",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "https://google.github.io/styleguide/cppguide.html#Unnamed_Namespaces_and_Static_Variables\nrecommended style of this comment is\n// namespace",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 23
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d28cb1ae_6c1df760",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "if kStereoHeader is attached just to first packet (i.e. once per frame), then may be you should add it to payload_size (in SetPayloadData) rather than subtract from the payload length available per packet.",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb45626_7b7b3db1",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "may be better to RTC_CHECK_GT(max_payload_len_, kMinExpectedMaxPayloadLen);\n\nmaking too low payload length problem of the caller",
+      "range": {
+        "startLine": 44,
+        "startChar": 62,
+        "endLine": 44,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d59aa96b_876756d9",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "look like all you need to save is payload, so may be\nrtc::ArrayView\u003cconst uint8_t\u003e payload_ptr \u003d packet.payload();\nrtc::Buffer payload(payload_ptr.data(), payload_ptr.size()); or std::vector\u003cuint8_t\u003e(payload_ptr.begin(), payload_ptr.end());\n\nThat make extra memcpy more visible rather than hidden and saves from copiying other fields of the RtpPacketToSend.",
+      "range": {
+        "startLine": 73,
+        "startChar": 79,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07487893_70a44f44",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "do not use NULL:\neither RTC_DCHECK(parsed_payload) or RTC_DCHECK(parsed_payload !\u003d nullptr);",
+      "range": {
+        "startLine": 110,
+        "startChar": 37,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "658c8898_e831d43d",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "what happens if incoming buffer contained value 42?",
+      "range": {
+        "startLine": 128,
+        "startChar": 71,
+        "endLine": 128,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33785bc3_68a970ca",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "do not DCHECK incoming raw packet from network is well formed.",
+      "range": {
+        "startLine": 145,
+        "startChar": 68,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "612fea2f_6b991664",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 20,
+        "startChar": 68,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "488cbfd0_6feebbc6",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "if you name it const, make it const (or better constexpr).\nAnd initialize.\n(you should avoid global mutable values anyway, even in tests)",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4910e8b4_a57722ce",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "_ is not an allowed character in test name\nhttps://github.com/google/googletest/blob/master/googletest/docs/FAQ.md#why-should-not-test-case-names-and-test-names-contain-underscore",
+      "range": {
+        "startLine": 67,
+        "startChar": 51,
+        "endLine": 67,
+        "endChar": 52
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "604e2303_865ceb6d",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-20T16:12:16Z",
+      "side": 1,
+      "message": "why extract all packets but test first packet only?",
+      "range": {
+        "startLine": 90,
+        "startChar": 42,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
