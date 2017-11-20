@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "21e5ad13_8fbcb1e3",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-20T11:28:16Z",
+      "side": 1,
+      "message": "But the receiver interface already has |track| by reference, not id. Here the argument is track_id, but the constructor creates a new AudioTrack using that id, and implements |track| to return that track.\n\nIf you want to know the track ID you have to do |receiver-\u003etrack()-\u003eid()|.\n\nDo you want streams to be by ID even though track is by reference? This would result in the following code for usage of the APIs:\n\n// Get track by reference.\nauto track \u003d receiver-\u003etrack();\n// Get streams by IDs.\nstd::vector\u003crtc::scoped_refptr\u003cMediaStreamInterface\u003e\u003e streams;\nfor (const auto\u0026 stream_id : receiver-\u003estream_ids()) {\n  streams.push_back(pc.remote_streams().find(stream_id));\n}\n\nTo be clear, is this what you prefer, or did you think the receiver exposed track by its ID and wanted to be consistent?\n\nIf this wasn\u0027t a misunderstanding and you really do prefer stream_ids() I will implement it, otherwise I will keep streams() which I prefer. Awaiting feedback.",
+      "parentUuid": "1db5b80d_92c42181",
+      "range": {
+        "startLine": 54,
+        "startChar": 68,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "b8148d28a29e2e6abdc923776e7cb936f8bacd9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40e59a85_645e6bc0",
         "filename": "sdk/android/src/jni/pc/mediastream_jni.cc",
         "patchSetId": 4
