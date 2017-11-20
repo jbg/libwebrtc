@@ -49,9 +49,9 @@ void RtxReceiveStream::OnRtpPacket(const RtpPacketReceived& rtx_packet) {
 
   auto it = associated_payload_types_.find(rtx_packet.PayloadType());
   if (it == associated_payload_types_.end()) {
-    RTC_LOG(LS_VERBOSE) << "Unknown payload type "
-                        << static_cast<int>(rtx_packet.PayloadType())
-                        << " on rtx ssrc " << rtx_packet.Ssrc();
+    RTC_DLOG(LS_VERBOSE) << "Unknown payload type "
+                         << static_cast<int>(rtx_packet.PayloadType())
+                         << " on rtx ssrc " << rtx_packet.Ssrc();
     return;
   }
   RtpPacketReceived media_packet;

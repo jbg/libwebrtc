@@ -527,7 +527,7 @@ void Call::UpdateSendHistograms(int64_t first_sent_packet_ms) {
   if (send_bitrate_stats.num_samples > kMinRequiredPeriodicSamples) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.EstimatedSendBitrateInKbps",
                                 send_bitrate_stats.average);
-    RTC_LOG(LS_INFO) << "WebRTC.Call.EstimatedSendBitrateInKbps, "
+    RTC_DLOG(LS_INFO) << "WebRTC.Call.EstimatedSendBitrateInKbps, "
                      << send_bitrate_stats.ToString();
   }
   AggregatedStats pacer_bitrate_stats =
@@ -535,7 +535,7 @@ void Call::UpdateSendHistograms(int64_t first_sent_packet_ms) {
   if (pacer_bitrate_stats.num_samples > kMinRequiredPeriodicSamples) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.PacerBitrateInKbps",
                                 pacer_bitrate_stats.average);
-    RTC_LOG(LS_INFO) << "WebRTC.Call.PacerBitrateInKbps, "
+    RTC_DLOG(LS_INFO) << "WebRTC.Call.PacerBitrateInKbps, "
                      << pacer_bitrate_stats.ToString();
   }
 }
@@ -557,7 +557,7 @@ void Call::UpdateReceiveHistograms() {
   if (video_bytes_per_sec.num_samples > kMinRequiredPeriodicSamples) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.VideoBitrateReceivedInKbps",
                                 video_bytes_per_sec.average * 8 / 1000);
-    RTC_LOG(LS_INFO) << "WebRTC.Call.VideoBitrateReceivedInBps, "
+    RTC_DLOG(LS_INFO) << "WebRTC.Call.VideoBitrateReceivedInBps, "
                      << video_bytes_per_sec.ToStringWithMultiplier(8);
   }
   AggregatedStats audio_bytes_per_sec =
@@ -565,7 +565,7 @@ void Call::UpdateReceiveHistograms() {
   if (audio_bytes_per_sec.num_samples > kMinRequiredPeriodicSamples) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.AudioBitrateReceivedInKbps",
                                 audio_bytes_per_sec.average * 8 / 1000);
-    RTC_LOG(LS_INFO) << "WebRTC.Call.AudioBitrateReceivedInBps, "
+    RTC_DLOG(LS_INFO) << "WebRTC.Call.AudioBitrateReceivedInBps, "
                      << audio_bytes_per_sec.ToStringWithMultiplier(8);
   }
   AggregatedStats rtcp_bytes_per_sec =
@@ -573,7 +573,7 @@ void Call::UpdateReceiveHistograms() {
   if (rtcp_bytes_per_sec.num_samples > kMinRequiredPeriodicSamples) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.RtcpBitrateReceivedInBps",
                                 rtcp_bytes_per_sec.average * 8);
-    RTC_LOG(LS_INFO) << "WebRTC.Call.RtcpBitrateReceivedInBps, "
+    RTC_DLOG(LS_INFO) << "WebRTC.Call.RtcpBitrateReceivedInBps, "
                      << rtcp_bytes_per_sec.ToStringWithMultiplier(8);
   }
   AggregatedStats recv_bytes_per_sec =
@@ -581,7 +581,7 @@ void Call::UpdateReceiveHistograms() {
   if (recv_bytes_per_sec.num_samples > kMinRequiredPeriodicSamples) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.BitrateReceivedInKbps",
                                 recv_bytes_per_sec.average * 8 / 1000);
-    RTC_LOG(LS_INFO) << "WebRTC.Call.BitrateReceivedInBps, "
+    RTC_DLOG(LS_INFO) << "WebRTC.Call.BitrateReceivedInBps, "
                      << recv_bytes_per_sec.ToStringWithMultiplier(8);
   }
 }
@@ -985,8 +985,8 @@ void Call::UpdateCurrentBitrateConfig(const rtc::Optional<int>& new_start) {
   if (updated.min_bitrate_bps == config_.bitrate_config.min_bitrate_bps &&
       updated.max_bitrate_bps == config_.bitrate_config.max_bitrate_bps &&
       !new_start) {
-    RTC_LOG(LS_VERBOSE) << "WebRTC.Call.UpdateCurrentBitrateConfig: "
-                        << "nothing to update";
+    RTC_DLOG(LS_VERBOSE) << "WebRTC.Call.UpdateCurrentBitrateConfig: "
+                         << "nothing to update";
     return;
   }
 
@@ -998,10 +998,10 @@ void Call::UpdateCurrentBitrateConfig(const rtc::Optional<int>& new_start) {
     updated.start_bitrate_bps = -1;
   }
 
-  RTC_LOG(INFO) << "WebRTC.Call.UpdateCurrentBitrateConfig: "
-                << "calling SetBweBitrates with args ("
-                << updated.min_bitrate_bps << ", " << updated.start_bitrate_bps
-                << ", " << updated.max_bitrate_bps << ")";
+  RTC_DLOG(INFO) << "WebRTC.Call.UpdateCurrentBitrateConfig: "
+                 << "calling SetBweBitrates with args ("
+                 << updated.min_bitrate_bps << ", " << updated.start_bitrate_bps
+                 << ", " << updated.max_bitrate_bps << ")";
   transport_send_->send_side_cc()->SetBweBitrates(updated.min_bitrate_bps,
                                                   updated.start_bitrate_bps,
                                                   updated.max_bitrate_bps);
@@ -1095,7 +1095,7 @@ void Call::OnNetworkRouteChanged(const std::string& transport_name,
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
   // Check if the network route is connected.
   if (!network_route.connected) {
-    RTC_LOG(LS_INFO) << "Transport " << transport_name << " is disconnected";
+    RTC_DLOG(LS_INFO) << "Transport " << transport_name << " is disconnected";
     // TODO(honghaiz): Perhaps handle this in SignalChannelNetworkState and
     // consider merging these two methods.
     return;
@@ -1350,8 +1350,8 @@ PacketReceiver::DeliveryStatus Call::DeliverRtp(MediaType media_type,
   ReadLockScoped read_lock(*receive_crit_);
   auto it = receive_rtp_config_.find(parsed_packet.Ssrc());
   if (it == receive_rtp_config_.end()) {
-    RTC_LOG(LS_ERROR) << "receive_rtp_config_ lookup failed for ssrc "
-                      << parsed_packet.Ssrc();
+    RTC_DLOG(LS_ERROR) << "receive_rtp_config_ lookup failed for ssrc "
+                       << parsed_packet.Ssrc();
     // Destruction of the receive stream, including deregistering from the
     // RtpDemuxer, is not protected by the |receive_crit_| lock. But
     // deregistering in the |receive_rtp_config_| map is protected by that lock.
@@ -1416,8 +1416,8 @@ void Call::OnRecoveredPacket(const uint8_t* packet, size_t length) {
   ReadLockScoped read_lock(*receive_crit_);
   auto it = receive_rtp_config_.find(parsed_packet.Ssrc());
   if (it == receive_rtp_config_.end()) {
-    RTC_LOG(LS_ERROR) << "receive_rtp_config_ lookup failed for ssrc "
-                      << parsed_packet.Ssrc();
+    RTC_DLOG(LS_ERROR) << "receive_rtp_config_ lookup failed for ssrc "
+                       << parsed_packet.Ssrc();
     // Destruction of the receive stream, including deregistering from the
     // RtpDemuxer, is not protected by the |receive_crit_| lock. But
     // deregistering in the |receive_rtp_config_| map is protected by that lock.
