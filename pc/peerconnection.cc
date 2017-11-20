@@ -2048,30 +2048,31 @@ void PeerConnection::OnMessage(rtc::Message* msg) {
 void PeerConnection::CreateAudioReceiver(MediaStreamInterface* stream,
                                          const std::string& track_id,
                                          uint32_t ssrc) {
+  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams;
+  streams.push_back(rtc::scoped_refptr<MediaStreamInterface>(stream));
   rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>
       receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
           signaling_thread(),
-          new AudioRtpReceiver(track_id, ssrc, voice_channel()));
+          new AudioRtpReceiver(track_id, streams, ssrc, voice_channel()));
   stream->AddTrack(
       static_cast<AudioTrackInterface*>(receiver->internal()->track().get()));
   receivers_.push_back(receiver);
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams;
-  streams.push_back(rtc::scoped_refptr<MediaStreamInterface>(stream));
   observer_->OnAddTrack(receiver, streams);
 }
 
 void PeerConnection::CreateVideoReceiver(MediaStreamInterface* stream,
                                          const std::string& track_id,
                                          uint32_t ssrc) {
+  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams;
+  streams.push_back(rtc::scoped_refptr<MediaStreamInterface>(stream));
   rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>
       receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
-          signaling_thread(), new VideoRtpReceiver(track_id, worker_thread(),
-                                                   ssrc, video_channel()));
+          signaling_thread(),
+          new VideoRtpReceiver(track_id, streams, worker_thread(), ssrc,
+                               video_channel()));
   stream->AddTrack(
       static_cast<VideoTrackInterface*>(receiver->internal()->track().get()));
   receivers_.push_back(receiver);
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams;
-  streams.push_back(rtc::scoped_refptr<MediaStreamInterface>(stream));
   observer_->OnAddTrack(receiver, streams);
 }
 
