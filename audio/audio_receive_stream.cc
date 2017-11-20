@@ -135,13 +135,13 @@ void AudioReceiveStream::Start() {
 
   int error = SetVoiceEnginePlayout(true);
   if (error != 0) {
-    RTC_LOG(LS_ERROR) << "AudioReceiveStream::Start failed with error: "
+    RTC_DLOG(LS_ERROR) << "AudioReceiveStream::Start failed with error: "
                       << error;
     return;
   }
 
   if (!audio_state()->mixer()->AddSource(this)) {
-    RTC_LOG(LS_ERROR) << "Failed to add source to mixer.";
+    RTC_DLOG(LS_ERROR) << "Failed to add source to mixer.";
     SetVoiceEnginePlayout(false);
     return;
   }
