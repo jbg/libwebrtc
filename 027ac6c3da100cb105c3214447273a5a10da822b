@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c6be9ba_c29b5856",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Put this in the initializer list?",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da600ba3_c2193d87",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Is it not possible to use the rtp_transport_ for this? Then there\u0027s no need to check if it\u0027s DTLS or SDES?",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b819c135_fb2001dd",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51565c07_d55f8f12",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Remove debug statements (here and below).",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74be6cb6_58fb0524",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62a69b23_c60275d4",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Just auto would be fine here and below (since MakeUnique spells out the type).",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1faee680_2b4be052",
+        "filename": "pc/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-21T01:59:34Z",
+      "side": 1,
+      "message": "Just do:\n\ncached_recv_extension_ids_ \u003d std::move(extension_ids);",
+      "revId": "027ac6c3da100cb105c3214447273a5a10da822b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
