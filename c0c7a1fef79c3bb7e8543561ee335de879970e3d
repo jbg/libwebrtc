@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "012719cc_c20e672d",
+        "filename": "rtc_base/task_queue_gcd.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "Would it perhaps be better to land this with some active killswitch, and only remove the killswitch when the fixes have been landed for all platforms? The concern that this intends to address is that, a programmer working on Mac and relying on the documentation of TQ could end up not realizing that this is not true for Linux/Windows yet, and end up writing and debugging code which works as expected on his system, but not elsewhere.",
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d7f8864_8b8b90a0",
+        "filename": "rtc_base/task_queue_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "Is the test really about posting too much? Not about the non-execution of pending tasks during destruction?",
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14b18e93_d6f6b1e3",
+        "filename": "rtc_base/task_queue_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "This being a unit-test, we don\u0027t care about performance as much - so do we perhaps want to make these atomics, to assuage any concerns a reader might have about correctness, be those concerns merited or not?",
+      "range": {
+        "startLine": 440,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 27
+      },
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f5924a4_d4d436fa",
+        "filename": "rtc_base/task_queue_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "Same question as line 437.",
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c934ec1c_2af8dd20",
+        "filename": "rtc_base/task_queue_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "1. Would it perhaps make sense to merge these two into a single task, for test simplicity\u0027s sake?\n2. Is 100ms not too low, risking flakiness?",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 453,
+        "endChar": 62
+      },
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "307a1295_2fac4e0f",
+        "filename": "rtc_base/task_queue_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "nit: I was told that the style-guide mandates the use of size_t for loop indices (barring case-specific reasons to the contrary).",
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "442b3120_053d4828",
+        "filename": "rtc_base/task_queue_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-11-21T12:41:49Z",
+      "side": 1,
+      "message": "I\u0027ve not seen this version of NewClosure before (good to know!), so I looked up its implementation and documentation. It reads:\n  // Extends ClosureTask to also allow specifying cleanup code.\n  // This is useful when using lambdas if guaranteeing cleanup, even if a task\n  // was dropped (queue is too full), is required.\nThis comment is unclear about whether cleanup runs in the case that the closure was executed, IMHO. Shall I file a separate bug, or is this ambiguity an artifact of my thinking?",
+      "revId": "c0c7a1fef79c3bb7e8543561ee335de879970e3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
