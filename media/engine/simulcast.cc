@@ -169,14 +169,17 @@ int GetTotalMaxBitrateBps(const std::vector<webrtc::VideoStream>& streams) {
   return total_max_bitrate_bps;
 }
 
-std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_streams,
-                                                    int width,
-                                                    int height,
-                                                    int max_bitrate_bps,
-                                                    int max_qp,
-                                                    int max_framerate,
-                                                    bool is_screencast) {
+std::vector<webrtc::VideoStream> GetSimulcastConfig(
+    size_t max_streams,
+    const std::vector<bool>& active_simulcast_layers,
+    int width,
+    int height,
+    int max_bitrate_bps,
+    int max_qp,
+    int max_framerate,
+    bool is_screencast) {
   size_t num_simulcast_layers;
+
   if (is_screencast) {
     if (UseSimulcastScreenshare()) {
       num_simulcast_layers =
@@ -197,8 +200,19 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_streams,
     }
     num_simulcast_layers = max_streams;
   }
+
+  size_t num_active_simulcast_layers = std::count(
+      active_simulcast_layers.cbegin(), active_simulcast_layers.cend(), true);
+  if (!is_screencast) {
+    // TODO(zstein): warn - this currently breaks
+    // SetSendCodecsWith2SimulcastStreams (num_simulcast_layers will be 1... not
+    // sure why yet)
+    // RTC_DCHECK_EQ(num_simulcast_layers, active_simulcast_layers.size());
+  }
+
   std::vector<webrtc::VideoStream> streams;
-  streams.resize(num_simulcast_layers);
+  streams.resize(is_screencast ? num_simulcast_layers
+                               : num_active_simulcast_layers);
 
   if (is_screencast) {
     ScreenshareLayerConfig config = ScreenshareLayerConfig::GetDefault();
@@ -249,18 +263,22 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_streams,
     // Add simulcast sub-streams from lower resolution to higher resolutions.
     // Add simulcast streams, from highest resolution (|s| = number_streams -1)
     // to lowest resolution at |s| = 0.
+    size_t i = num_active_simulcast_layers - 1;
     for (size_t s = num_simulcast_layers - 1;; --s) {
-      streams[s].width = width;
-      streams[s].height = height;
-      // TODO(pbos): Fill actual temporal-layer bitrate thresholds.
-      streams[s].max_qp = max_qp;
-      streams[s].temporal_layer_thresholds_bps.resize(
-          kDefaultConferenceNumberOfTemporalLayers[s] - 1);
-      streams[s].max_bitrate_bps = FindSimulcastMaxBitrateBps(width, height);
-      streams[s].target_bitrate_bps =
-          FindSimulcastTargetBitrateBps(width, height);
-      streams[s].min_bitrate_bps = FindSimulcastMinBitrateBps(width, height);
-      streams[s].max_framerate = max_framerate;
+      if (active_simulcast_layers[i]) {
+        streams[i].width = width;
+        streams[i].height = height;
+        // TODO(pbos): Fill actual temporal-layer bitrate thresholds.
+        streams[i].max_qp = max_qp;
+        streams[i].temporal_layer_thresholds_bps.resize(
+            kDefaultConferenceNumberOfTemporalLayers[s] - 1);
+        streams[i].max_bitrate_bps = FindSimulcastMaxBitrateBps(width, height);
+        streams[i].target_bitrate_bps =
+            FindSimulcastTargetBitrateBps(width, height);
+        streams[i].min_bitrate_bps = FindSimulcastMinBitrateBps(width, height);
+        streams[i].max_framerate = max_framerate;
+        --i;
+      }
 
       width /= 2;
       height /= 2;

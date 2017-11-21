@@ -1874,6 +1874,8 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
        (!UseSimulcastScreenshare() || !parameters_.conference_mode))) {
     encoder_config.number_of_streams = 1;
   }
+  encoder_config.active_simulcast_layers.resize(
+      encoder_config.number_of_streams, true);
 
   int stream_max_bitrate = parameters_.max_bitrate_bps;
   if (rtp_parameters_.encodings[0].max_bitrate_bps) {
@@ -2591,8 +2593,9 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   if (encoder_config.number_of_streams > 1 ||
       (CodecNamesEq(codec_name_, kVp8CodecName) && is_screencast_ &&
        conference_mode_)) {
-    return GetSimulcastConfig(encoder_config.number_of_streams, width, height,
-                              encoder_config.max_bitrate_bps, max_qp_,
+    return GetSimulcastConfig(encoder_config.number_of_streams,
+                              encoder_config.active_simulcast_layers, width,
+                              height, encoder_config.max_bitrate_bps, max_qp_,
                               max_framerate_, is_screencast_);
   }
 
