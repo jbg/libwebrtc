@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08238519_34b052a7",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "I wouldn\u0027t mind keeping this as an RTC_LOG_F. This falls into the category of \"events outside of the control of the immediately surrounding code\", like failed decryption, etc.",
+      "range": {
+        "startLine": 548,
+        "startChar": 4,
+        "endLine": 548,
+        "endChar": 14
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e5cc61c_f95ce081",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1419,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "range": {
+        "startLine": 1419,
+        "startChar": 6,
+        "endLine": 1419,
+        "endChar": 14
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44fe5006_026344ea",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "range": {
+        "startLine": 1423,
+        "startChar": 6,
+        "endLine": 1423,
+        "endChar": 14
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa8c5dd3_8d94c2ab",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "range": {
+        "startLine": 1456,
+        "startChar": 6,
+        "endLine": 1456,
+        "endChar": 14
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3f19411_9a24c638",
+        "filename": "modules/audio_coding/neteq/packet_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 12
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d253ad24_913fc406",
+        "filename": "modules/audio_coding/neteq/red_payload_splitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "range": {
+        "startLine": 103,
+        "startChar": 10,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "429b8418_8ff6b495",
+        "filename": "modules/audio_coding/neteq/red_payload_splitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-21T13:58:27Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "range": {
+        "startLine": 122,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 14
+      },
+      "revId": "d58b7c4b06a6611481852d91a0507f2113691792",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
