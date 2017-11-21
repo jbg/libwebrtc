@@ -146,11 +146,18 @@ static std::unique_ptr<QueuedTask> NewClosure(Closure&& closure,
 //
 // A note on destruction:
 //
+// !!! Warning: See TODO below. !!!
 // When a TaskQueue is deleted, pending tasks will not be executed but they will
 // be deleted.  The deletion of tasks may happen asynchronously after the
 // TaskQueue itself has been deleted or it may happen synchronously while the
 // TaskQueue instance is being deleted.  This may vary from one OS to the next
 // so assumptions about lifetimes of pending tasks should not be made.
+//
+// TODO(eladalon): The comment below does not currently hold true; deleting
+// a TaskQueue blocks until all pending tasks are executed, not just the
+// currently running task. Tommi has the fix pending, but does not currently
+// intend to land them before we've had time to compare behavior with Chrome.
+// See: https://crbug.com/webrtc/8173
 class RTC_LOCKABLE TaskQueue {
  public:
   // TaskQueue priority levels. On some platforms these will map to thread
