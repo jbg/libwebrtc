@@ -39,8 +39,6 @@ deps = {
   # in base/third_party/libevent is solved.
   'src/base':
     Var('chromium_git') + '/chromium/src/base' + '@' + 'b2b46604dd911da5544bb571d21f771192f11475',
-  'src/build':
-    Var('chromium_git') + '/chromium/src/build' + '@' + '6167734e03a9644bf0f9f3c8ca1f516659d311ae',
   'src/buildtools':
     Var('chromium_git') + '/chromium/buildtools.git' + '@' + '461b345a815c1c745ac0534a6a4bd52d123abe68',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
