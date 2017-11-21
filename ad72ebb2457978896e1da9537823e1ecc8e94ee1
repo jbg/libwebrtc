@@ -155,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "d1b872e3_0091cb20",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-21T18:56:30Z",
+      "side": 1,
+      "message": "appending header to the end looks noticeable cleaner, I like the idea.\ndo not see any disadvantages.",
+      "parentUuid": "a785de77_caa9b2a2",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "ad72ebb2457978896e1da9537823e1ecc8e94ee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb45626_7b7b3db1",
         "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
         "patchSetId": 6

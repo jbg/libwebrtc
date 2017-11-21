@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "091d476c_4af956d6",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-21T18:56:30Z",
+      "side": 1,
+      "message": "beware of vp9svc: it sets marker bit only in last spatial layer.\nprefer to remember result of SetPayloadData for number of packets to determine last one",
+      "range": {
+        "startLine": 72,
+        "startChar": 44,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "531fd666_edf1769c",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-21T18:56:30Z",
+      "side": 1,
+      "message": "do not test that it is same as before, juts test padded_payload_ptr is not nullptr\n(though most of the time it is true, current implementation doesn\u0027t guarantee pointer will stay the same, but it guarantees to keep the payload)\n\nprobably ok to RTC_CHECK(padded_payload_ptr) since you you\u0027ve reserved the extra space",
+      "range": {
+        "startLine": 81,
+        "startChar": 42,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cc6452e_ca1fabec",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-21T18:56:30Z",
+      "side": 1,
+      "message": "prefer warning,\nerror should indicate a bug in code. invalid incoming data shouldn\u0027t be higher than warning",
+      "range": {
+        "startLine": 129,
+        "startChar": 14,
+        "endLine": 129,
+        "endChar": 22
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56fa9e56_0e96ae43",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-21T18:56:30Z",
+      "side": 1,
+      "message": "avoid dependency on order of the codec types.\n\nmay it is better to store and transfer payload_type instead of codec type?\n\nfor now might be better to list all supported codec types explicitly:\nswitch (associated_codec_type) {\n  case kRtpVideoVp8:\n  case kRtpVideoVp9:\n  case kRtpVideoVpH264:\n    break;\n  default:\n    LOG(WARNING);\n    return false;\n}",
+      "range": {
+        "startLine": 135,
+        "startChar": 69,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a639e5ef_ef970fdd",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-21T18:56:30Z",
+      "side": 1,
+      "message": "may be \nif (!depacketizer_.Parse(...))\n  return false;",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 14
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
