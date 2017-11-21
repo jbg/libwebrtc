@@ -125,8 +125,6 @@ class MediaConstraintsInterface {
   // stripped by Chrome before passed down to Libjingle.
   static const char kInternalConstraintPrefix[];
 
- protected:
-  // Dtor protected as objects shouldn't be deleted via this interface
   virtual ~MediaConstraintsInterface() {}
 };
 
