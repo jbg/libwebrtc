@@ -72,6 +72,10 @@ void FileWrapper::CloseFile() {
 
 int FileWrapper::Rewind() {
   rtc::CritScope lock(&lock_);
+  if (!loop_) {
+    return -1;
+  }
+
   if (file_ != nullptr) {
     position_ = 0;
     return fseek(file_, 0, SEEK_SET);
@@ -100,6 +104,13 @@ bool FileWrapper::OpenFile(const char* file_name_utf8, bool read_only) {
 
   file_ = FileOpen(file_name_utf8, read_only);
   return file_ != nullptr;
+}
+
+bool FileWrapper::OpenFile(const char* file_name_utf8,
+                           bool read_only,
+                           bool loop) {
+  loop_ = loop;
+  return OpenFile(file_name_utf8, read_only);
 }
 
 bool FileWrapper::OpenFromFileHandle(FILE* handle) {

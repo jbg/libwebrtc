@@ -46,6 +46,9 @@ class FileWrapper : public InStream, public OutStream {
   // Opens a file in read or write mode, decided by the read_only parameter.
   bool OpenFile(const char* file_name_utf8, bool read_only);
 
+  // If loop=false, the file can't be rewinded
+  bool OpenFile(const char* file_name_utf8, bool read_only, bool loop);
+
   // Initializes the wrapper from an existing handle.  The wrapper
   // takes ownership of |handle| and closes it in CloseFile().
   bool OpenFromFileHandle(FILE* handle);
@@ -56,6 +59,9 @@ class FileWrapper : public InStream, public OutStream {
   // is hit. Pass zero to use an unlimited size.
   // TODO(tommi): Could we move this out into a separate class?
   void SetMaxFileSize(size_t bytes);
+
+  // If loop=true, it means the file can be rewinded, and vice versa
+  void SetLoop(bool loop) { loop_ = loop; }
 
   // Flush any pending writes.  Note: Flushing when closing, is not required.
   int Flush();
@@ -70,6 +76,8 @@ class FileWrapper : public InStream, public OutStream {
 
   void CloseFileImpl();
   int FlushImpl();
+
+  bool loop_ = true;
 
   // TODO(tommi): Remove the lock.
   rtc::CriticalSection lock_;

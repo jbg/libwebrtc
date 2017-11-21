@@ -286,7 +286,7 @@ int32_t MediaFileImpl::StartPlayingAudioFile(const char* fileName,
     return -1;
   }
 
-  if (!inputStream->OpenFile(fileName, true)) {
+  if (!inputStream->OpenFile(fileName, true, loop)) {
     delete inputStream;
     RTC_LOG(LS_ERROR) << "Could not open input file " << fileName;
     return -1;
