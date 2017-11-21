@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d880773d_b6886f30",
+        "filename": "common_audio/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-21T13:56:09Z",
+      "side": 1,
+      "message": "After making rtc_test publicly visible by default we can remove this.",
+      "range": {
+        "startLine": 388,
+        "startChar": 4,
+        "endLine": 388,
+        "endChar": 25
+      },
+      "revId": "f271175dbc987e739155ea27c142dd17fe34f47b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0efe7e29_3b7882a2",
+        "filename": "voice_engine/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-11-21T13:56:09Z",
+      "side": 1,
+      "message": "After making rtc_test publicly visible by default we can remove this.",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "f271175dbc987e739155ea27c142dd17fe34f47b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
