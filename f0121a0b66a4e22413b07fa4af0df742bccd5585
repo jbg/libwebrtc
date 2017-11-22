@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcece8d2_c02f0423",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-22T12:21:19Z",
+      "side": 1,
+      "message": "may be expand this box to make visually obvious it is more than one byte, e.g.\n//      +-+-+-+-+-+-+-+-+-+\n//      |  picture_index  | (optional)\n//      |    (64 bits)    |\n//      +-+-+-+-+-+-+-+-+-+",
+      "range": {
+        "startLine": 32,
+        "startChar": 38,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "f0121a0b66a4e22413b07fa4af0df742bccd5585",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
