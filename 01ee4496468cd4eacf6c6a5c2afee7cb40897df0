@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42accd7a_49b5ab01",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-22T16:16:11Z",
+      "side": 1,
+      "message": "Do we want to refer to the VP9 directly, or the rtx VP9? Also, we will run out of payload types soon if we are supposed to add corresponding stereo codecs for every real codec.\n\nAre you planning to use anything other than VP9 for your stereo support? Can\u0027t you call this codec \"stereo-vp9\" and make it completely external instead?",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 5
+      },
+      "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
