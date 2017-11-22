@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9fd3b651_446a1415",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-22T07:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "091d476c_4af956d6",
+      "range": {
+        "startLine": 72,
+        "startChar": 44,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "531fd666_edf1769c",
         "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "f1584bf5458271835aca041cf157645482b6d985",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0662442_5d15180f",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-22T07:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "531fd666_edf1769c",
+      "range": {
+        "startLine": 81,
+        "startChar": 42,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b9cc5a6a_af8f3eda",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-22T07:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cc6452e_ca1fabec",
+      "range": {
+        "startLine": 129,
+        "startChar": 14,
+        "endLine": 129,
+        "endChar": 22
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56fa9e56_0e96ae43",
         "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "a8e32a25_de3ff647",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-22T07:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56fa9e56_0e96ae43",
+      "range": {
+        "startLine": 135,
+        "startChar": 69,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a639e5ef_ef970fdd",
         "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
         "patchSetId": 8
@@ -105,6 +201,30 @@
       "writtenOn": "2017-11-21T18:56:30Z",
       "side": 1,
       "message": "may be \nif (!depacketizer_.Parse(...))\n  return false;",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 14
+      },
+      "revId": "f1584bf5458271835aca041cf157645482b6d985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5143549d_76ad6dec",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-22T07:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a639e5ef_ef970fdd",
       "range": {
         "startLine": 155,
         "startChar": 0,
