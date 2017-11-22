@@ -15,6 +15,7 @@
 #include <cstring>
 
 #include "rtc_base/arraysize.h"
+#include "rtc_base/stringutils.h"
 
 namespace webrtc {
 namespace H264 {
@@ -115,6 +116,14 @@ static constexpr LevelConstraint kLevelConstraints[] = {
     {983040, 3684, webrtc::H264::kLevel5_1},
     {2073600, 3684, webrtc::H264::kLevel5_2},
 };
+
+bool CodecNamesEq(const std::string& name1, const char* name2) {
+  return _stricmp(name1.c_str(), name2) == 0;
+}
+
+bool CodecNamesEq(const std::string& name1, const std::string& name2) {
+  return CodecNamesEq(name1, name2.c_str()) == 0;
+}
 
 }  // anonymous namespace
 
@@ -293,6 +302,29 @@ void GenerateProfileLevelIdForAnswer(
   // Set the resulting profile-level-id in the answer parameters.
   (*answer_params)[kProfileLevelId] = *ProfileLevelIdToString(
       ProfileLevelId(local_profile_level_id->profile, answer_level));
+}
+
+bool IsSameH264Profile(const CodecParameterMap& params1,
+                       const CodecParameterMap& params2) {
+  const rtc::Optional<webrtc::H264::ProfileLevelId> profile_level_id =
+      webrtc::H264::ParseSdpProfileLevelId(params1);
+  const rtc::Optional<webrtc::H264::ProfileLevelId> other_profile_level_id =
+      webrtc::H264::ParseSdpProfileLevelId(params2);
+  // Compare H264 profiles, but not levels.
+  return profile_level_id && other_profile_level_id &&
+         profile_level_id->profile == other_profile_level_id->profile;
+}
+
+bool IsSameFormat(const std::string& name1,
+                  const CodecParameterMap& params1,
+                  const std::string& name2,
+                  const CodecParameterMap& params2) {
+  // If different names (case insensitive), then not same formats.
+  if (!CodecNamesEq(name1, name2))
+    return false;
+  // For every format besides H264, comparing names is enough.
+  return CodecNamesEq(name1, "H264") ? IsSameH264Profile(params1, params2)
+                                     : true;
 }
 
 }  // namespace H264

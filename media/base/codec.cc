@@ -21,17 +21,6 @@
 
 namespace cricket {
 
-static bool IsSameH264Profile(const CodecParameterMap& params1,
-                              const CodecParameterMap& params2) {
-  const rtc::Optional<webrtc::H264::ProfileLevelId> profile_level_id =
-      webrtc::H264::ParseSdpProfileLevelId(params1);
-  const rtc::Optional<webrtc::H264::ProfileLevelId> other_profile_level_id =
-      webrtc::H264::ParseSdpProfileLevelId(params2);
-  // Compare H264 profiles, but not levels.
-  return profile_level_id && other_profile_level_id &&
-         profile_level_id->profile == other_profile_level_id->profile;
-}
-
 FeedbackParams::FeedbackParams() = default;
 
 bool FeedbackParam::operator==(const FeedbackParam& other) const {
@@ -258,9 +247,7 @@ bool VideoCodec::operator==(const VideoCodec& c) const {
 bool VideoCodec::Matches(const VideoCodec& other) const {
   if (!Codec::Matches(other))
     return false;
-  if (CodecNamesEq(name.c_str(), kH264CodecName))
-    return IsSameH264Profile(params, other.params);
-  return true;
+  return webrtc::H264::IsSameFormat(name, params, other.name, other.params);
 }
 
 VideoCodec VideoCodec::CreateRtxCodec(int rtx_payload_type,
@@ -355,13 +342,11 @@ const VideoCodec* FindMatchingCodec(
     const std::vector<VideoCodec>& supported_codecs,
     const VideoCodec& codec) {
   for (const VideoCodec& supported_codec : supported_codecs) {
-    if (!CodecNamesEq(codec.name, supported_codec.name))
-      continue;
-    if (CodecNamesEq(codec.name.c_str(), kH264CodecName) &&
-        !IsSameH264Profile(codec.params, supported_codec.params)) {
-      continue;
+    if (webrtc::H264::IsSameFormat(codec.name, codec.params,
+                                   supported_codec.name,
+                                   supported_codec.params)) {
+      return &supported_codec;
     }
-    return &supported_codec;
   }
   return nullptr;
 }
