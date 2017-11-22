@@ -22,6 +22,30 @@
       "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c504b1be_40bf20fd",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-22T23:52:05Z",
+      "side": 1,
+      "message": "There will be only one payload added called \"stereo\". Associated codec(VPX-H264) that comes with it is going to be specified by a param, see codec.cc.\n\nI am going to add other types than VP9 as well. But for the first CL, I want to just do one, to keep the CL small and avoid SDP negotiation, mismatch issues. I can add all if you wish in the first run as well.",
+      "parentUuid": "42accd7a_49b5ab01",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 5
+      },
+      "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
