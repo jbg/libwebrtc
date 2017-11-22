@@ -1566,7 +1566,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::WebRtcVideoSendStream(
       stream_(nullptr),
       encoder_sink_(nullptr),
       parameters_(std::move(config), options, max_bitrate_bps, codec_settings),
-      rtp_parameters_(CreateRtpParametersWithOneEncoding()),
+      rtp_parameters_(CreateRtpParametersWithEncodings(sp)),
       sending_(false) {
   parameters_.config.rtp.max_packet_size = kVideoMtu;
   parameters_.conference_mode = send_params.conference_mode;
@@ -1575,7 +1575,10 @@ WebRtcVideoChannel::WebRtcVideoSendStream::WebRtcVideoSendStream(
 
   // ValidateStreamParams should prevent this from happening.
   RTC_CHECK(!parameters_.config.rtp.ssrcs.empty());
-  rtp_parameters_.encodings[0].ssrc = parameters_.config.rtp.ssrcs[0];
+  for (size_t i = 0; i < parameters_.config.rtp.ssrcs.size(); ++i) {
+    // TODO(zstein): Check that parameters_ only contains the primary SSRCs.
+    rtp_parameters_.encodings[i].ssrc = parameters_.config.rtp.ssrcs[i];
+  }
 
   // RTX.
   sp.GetFidSsrcs(parameters_.config.rtp.ssrcs,
@@ -1799,6 +1802,7 @@ bool WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
     return false;
   }
 
+  // TODO(zstein): Check other encodings.
   bool reconfigure_encoder = new_parameters.encodings[0].max_bitrate_bps !=
                              rtp_parameters_.encodings[0].max_bitrate_bps;
   rtp_parameters_ = new_parameters;
@@ -1821,11 +1825,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetRtpParameters() const {
 bool WebRtcVideoChannel::WebRtcVideoSendStream::ValidateRtpParameters(
     const webrtc::RtpParameters& rtp_parameters) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  if (rtp_parameters.encodings.size() != 1) {
-    RTC_LOG(LS_ERROR)
-        << "Attempted to set RtpParameters without exactly one encoding";
-    return false;
-  }
+  // TODO(zstein): Validate all encodings.
   if (rtp_parameters.encodings[0].ssrc != rtp_parameters_.encodings[0].ssrc) {
     RTC_LOG(LS_ERROR) << "Attempted to set RtpParameters with modified SSRC";
     return false;
@@ -1836,8 +1836,12 @@ bool WebRtcVideoChannel::WebRtcVideoSendStream::ValidateRtpParameters(
 void WebRtcVideoChannel::WebRtcVideoSendStream::UpdateSendState() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   // TODO(deadbeef): Need to handle more than one encoding in the future.
-  RTC_DCHECK(rtp_parameters_.encodings.size() == 1u);
-  if (sending_ && rtp_parameters_.encodings[0].active) {
+  // RTC_DCHECK(rtp_parameters_.encodings.size() == 1u);
+  // TODO(zstein): Check other encodings
+  bool has_active_encoding = std::any_of(
+      rtp_parameters_.encodings.cbegin(), rtp_parameters_.encodings.cend(),
+      [](webrtc::RtpEncodingParameters x) { return x.active; });
+  if (sending_ && has_active_encoding) {
     RTC_DCHECK(stream_ != nullptr);
     stream_->Start();
   } else {
@@ -1874,8 +1878,11 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
        (!UseSimulcastScreenshare() || !parameters_.conference_mode))) {
     encoder_config.number_of_streams = 1;
   }
+  encoder_config.active_simulcast_layers.resize(
+      encoder_config.number_of_streams, true);
 
   int stream_max_bitrate = parameters_.max_bitrate_bps;
+  // TODO(zstein): Check other encodings?
   if (rtp_parameters_.encodings[0].max_bitrate_bps) {
     stream_max_bitrate =
         webrtc::MinPositive(*(rtp_parameters_.encodings[0].max_bitrate_bps),
@@ -2591,8 +2598,9 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   if (encoder_config.number_of_streams > 1 ||
       (CodecNamesEq(codec_name_, kVp8CodecName) && is_screencast_ &&
        conference_mode_)) {
-    return GetSimulcastConfig(encoder_config.number_of_streams, width, height,
-                              encoder_config.max_bitrate_bps, max_qp_,
+    return GetSimulcastConfig(encoder_config.number_of_streams,
+                              encoder_config.active_simulcast_layers, width,
+                              height, encoder_config.max_bitrate_bps, max_qp_,
                               max_framerate_, is_screencast_);
   }
 

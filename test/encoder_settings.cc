@@ -73,6 +73,7 @@ void FillEncoderConfiguration(size_t num_streams,
   RTC_DCHECK_LE(num_streams, DefaultVideoStreamFactory::kMaxNumberOfStreams);
 
   configuration->number_of_streams = num_streams;
+  configuration->active_simulcast_layers.resize(num_streams, true);
   configuration->video_stream_factory =
       new rtc::RefCountedObject<DefaultVideoStreamFactory>();
   configuration->max_bitrate_bps = 0;

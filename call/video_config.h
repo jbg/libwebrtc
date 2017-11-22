@@ -146,6 +146,8 @@ class VideoEncoderConfig {
   // Max number of encoded VideoStreams to produce.
   size_t number_of_streams;
 
+  std::vector<bool> active_simulcast_layers;
+
  private:
   // Access to the copy constructor is private to force use of the Copy()
   // method for those exceptional cases where we do use it.
