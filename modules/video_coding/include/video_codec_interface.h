@@ -73,11 +73,19 @@ struct CodecSpecificInfoH264 {
   H264PacketizationMode packetization_mode;
 };
 
+struct CodecSpecificInfoStereo {
+  VideoCodecType associated_codec_type;
+  uint8_t frame_index;
+  uint8_t frame_count;
+  uint64_t picture_index;
+};
+
 union CodecSpecificInfoUnion {
   CodecSpecificInfoGeneric generic;
   CodecSpecificInfoVP8 VP8;
   CodecSpecificInfoVP9 VP9;
   CodecSpecificInfoH264 H264;
+  CodecSpecificInfoStereo stereo;
 };
 
 // Note: if any pointers are added to this struct or its sub-structs, it

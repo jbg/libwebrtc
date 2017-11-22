@@ -113,14 +113,20 @@ int32_t StereoDecoderAdapter::Decode(
     const RTPFragmentationHeader* /*fragmentation*/,
     const CodecSpecificInfo* codec_specific_info,
     int64_t render_time_ms) {
-  // TODO(emircan): Read |codec_specific_info->stereoInfo| to split frames.
-  int32_t rv =
-      decoders_[kYUVStream]->Decode(input_image, missing_frames, nullptr,
-                                    codec_specific_info, render_time_ms);
-  if (rv)
-    return rv;
-  rv = decoders_[kAXXStream]->Decode(input_image, missing_frames, nullptr,
-                                     codec_specific_info, render_time_ms);
+  const CodecSpecificInfoStereo& stereo_info =
+      codec_specific_info->codecSpecific.stereo;
+  RTC_DCHECK_LT(static_cast<int>(stereo_info.frame_index), decoders_.size());
+  if (stereo_info.frame_count == 1) {
+    RTC_DCHECK_EQ(static_cast<int>(stereo_info.frame_index), 0);
+    RTC_DCHECK(decoded_data_.find(input_image._timeStamp) ==
+               decoded_data_.end());
+    decoded_data_.emplace(std::piecewise_construct,
+                          std::forward_as_tuple(input_image._timeStamp),
+                          std::forward_as_tuple(kAXXStream));
+  }
+
+  int32_t rv = decoders_[stereo_info.frame_index]->Decode(
+      input_image, missing_frames, nullptr, nullptr, render_time_ms);
   return rv;
 }
 
@@ -179,6 +185,11 @@ void StereoDecoderAdapter::MergeAlphaImages(
     VideoFrame* alpha_decodedImage,
     const rtc::Optional<int32_t>& alpha_decode_time_ms,
     const rtc::Optional<uint8_t>& alpha_qp) {
+  if (!alpha_decodedImage->timestamp()) {
+    decoded_complete_callback_->Decoded(*decodedImage, decode_time_ms, qp);
+    return;
+  }
+
   rtc::scoped_refptr<webrtc::I420BufferInterface> yuv_buffer =
       decodedImage->video_frame_buffer()->ToI420();
   rtc::scoped_refptr<webrtc::I420BufferInterface> alpha_buffer =
