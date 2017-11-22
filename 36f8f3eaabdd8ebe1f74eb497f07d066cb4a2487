@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60a98c02_cd2e7433",
+        "filename": "api/mediaconstraintsinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-22T16:19:07Z",
+      "side": 0,
+      "message": "Why is this allowed now?",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "36f8f3eaabdd8ebe1f74eb497f07d066cb4a2487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
