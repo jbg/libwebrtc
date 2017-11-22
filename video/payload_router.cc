@@ -81,6 +81,31 @@ void CopyCodecSpecific(const CodecSpecificInfo* info, RTPVideoHeader* rtp) {
       rtp->codecHeader.H264.packetization_mode =
           info->codecSpecific.H264.packetization_mode;
       return;
+    case kVideoCodecStereo: {
+      rtp->codec = kRtpVideoStereo;
+      RtpVideoCodecTypes associated_codec_type = kRtpVideoNone;
+      switch (info->codecSpecific.stereo.associated_codec_type) {
+        case kVideoCodecVP8:
+          associated_codec_type = kRtpVideoVp8;
+          break;
+        case kVideoCodecVP9:
+          associated_codec_type = kRtpVideoVp9;
+          break;
+        case kVideoCodecH264:
+          associated_codec_type = kRtpVideoH264;
+          break;
+        default:
+          RTC_NOTREACHED();
+      }
+      rtp->codecHeader.stereo.associated_codec_type = associated_codec_type;
+      rtp->codecHeader.stereo.frame_index =
+          info->codecSpecific.stereo.frame_index;
+      rtp->codecHeader.stereo.frame_count =
+          info->codecSpecific.stereo.frame_count;
+      rtp->codecHeader.stereo.picture_index =
+          info->codecSpecific.stereo.picture_index;
+      return;
+    }
     case kVideoCodecGeneric:
       rtp->codec = kRtpVideoGeneric;
       rtp->simulcastIdx = info->codecSpecific.generic.simulcast_idx;
