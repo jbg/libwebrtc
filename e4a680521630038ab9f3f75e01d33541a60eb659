@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d35eda72_2fd7ad3e",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-11-23T13:45:10Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be nicer to return an rtc::Optional\u003cuint32_t\u003e? Same applies to the BitrateController. (I\u0027m ok with having this if it is an intermediate step while refactoring.)",
+      "range": {
+        "startLine": 94,
+        "startChar": 15,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "e4a680521630038ab9f3f75e01d33541a60eb659",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
