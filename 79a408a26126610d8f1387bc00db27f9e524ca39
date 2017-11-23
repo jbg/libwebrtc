@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d2de8730_022ccff4",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7132cc08_24dad1f0",
+      "range": {
+        "startLine": 313,
+        "startChar": 63,
+        "endLine": 313,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a58f387_6502f239",
         "filename": "pc/channel.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "388c4248_82ada054",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a58f387_6502f239",
+      "range": {
+        "startLine": 801,
+        "startChar": 35,
+        "endLine": 801,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a620060_528850fe",
         "filename": "pc/channel.cc",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-22T18:11:07Z",
       "side": 1,
       "message": "It seems like the more specific pointer (dtls_srtp_transport_ or sdes_transport_) should be the owned/unique_ptr one and the less specific (rtp_transport_) should be the unowned/bare one.",
+      "range": {
+        "startLine": 833,
+        "startChar": 40,
+        "endLine": 833,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f22840d1_7cad1f4d",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "If we don\u0027t use either DTLS-SRTP or SDES (EnableSdes and EnableDtlsSrtp are never called, like RCS), the BaseChannel needs to own the RtpTransport. \nIf we do it this way, then we would need three unique_ptrs and one raw pointer.\n\nunique_ptr\u003cDtlsSrtpTransport\u003e dtls_srtp_transport_;  // Only one of the three unique_ptrs is non-null.\nunique_ptr\u003cSrtpTransport\u003e sdes_transport_;\nunique_ptr\u003cRtpTransport\u003e owned_rtp_transport_;  // This is not used directly, just used to manage the pointer\u0027s life time.\nRtpTransportInternal*  rtp_transport_;\n\nDoes it make sense to you?",
+      "parentUuid": "1a620060_528850fe",
       "range": {
         "startLine": 833,
         "startChar": 40,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "1883fc2f_2caa64d6",
+        "filename": "pc/channel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9923ecf4_87166296",
+      "range": {
+        "startLine": 1158,
+        "startChar": 51,
+        "endLine": 1158,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd67d04a_867c939a",
         "filename": "pc/channel.h",
         "patchSetId": 4
@@ -114,6 +210,30 @@
       "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45d2dfc4_dbda5918",
+        "filename": "pc/channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "You mean protected? It can be private. Done.",
+      "parentUuid": "bd67d04a_867c939a",
+      "range": {
+        "startLine": 212,
+        "startChar": 25,
+        "endLine": 212,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "a4754daa_e0134b54",
+        "filename": "pc/channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80f656ce_5c23b4d2",
+      "range": {
+        "startLine": 395,
+        "startChar": 60,
+        "endLine": 395,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "781626f5_04c46685",
         "filename": "pc/channel.h",
         "patchSetId": 4
@@ -160,6 +304,30 @@
       "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eab1822_e60ccaac",
+        "filename": "pc/channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-23T00:25:14Z",
+      "side": 1,
+      "message": "No, this can be removed.",
+      "parentUuid": "781626f5_04c46685",
+      "range": {
+        "startLine": 403,
+        "startChar": 28,
+        "endLine": 403,
+        "endChar": 0
+      },
+      "revId": "79a408a26126610d8f1387bc00db27f9e524ca39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
