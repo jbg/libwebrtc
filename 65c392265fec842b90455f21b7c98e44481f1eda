@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54949c12_57be406f",
+        "filename": "api/mediastreaminterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-23T15:35:29Z",
+      "side": 0,
+      "message": "aec_quality_min was removed here, even though it is not included in AudioProcessingStats. This is done because this stat is always set to -1, and it is not calculated anywhere in the code (nor was it at any point in the last couple of years). I don\u0027t think it makes sense to keep a stat around that is never set, so I removed it.",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 42
+      },
+      "revId": "65c392265fec842b90455f21b7c98e44481f1eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b76ae95_cb863dbd",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-23T15:35:29Z",
+      "side": 0,
+      "message": "This has moved to audio_processing_statistics.cc",
+      "range": {
+        "startLine": 1560,
+        "startChar": 0,
+        "endLine": 1565,
+        "endChar": 73
+      },
+      "revId": "65c392265fec842b90455f21b7c98e44481f1eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b6b8fd1_4ef650ba",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-23T15:35:29Z",
+      "side": 0,
+      "message": "I moved this struct to its own file and build target (see audio_processing_statistics.{h,cc}), because I didn\u0027t want to introduce a dependency on the AudioProcessing build target in all of the places where this is used.",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 569,
+        "endChar": 31
+      },
+      "revId": "65c392265fec842b90455f21b7c98e44481f1eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
