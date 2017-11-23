@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a606e128_754ec400",
+        "filename": "api/mediaconstraintsinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T18:45:09Z",
+      "side": 1,
+      "message": "Now that this is public, consider moving this much further up, where most readers will think to look for it: https://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "revId": "def996c6f082ce7219787b27669dea5c92b51dc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
