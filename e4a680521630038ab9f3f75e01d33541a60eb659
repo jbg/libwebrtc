@@ -22,6 +22,30 @@
       "revId": "e4a680521630038ab9f3f75e01d33541a60eb659",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cadd181_f0057e87",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2017-11-23T17:38:20Z",
+      "side": 1,
+      "message": "Even better would be to not provide this interface at all, the value should be reported using an observer interface, like the target bitrate. Here I\u0027m just trying to do a minimal change that will allow me to remove the BitrateControllerImpl dependency in a later stage without breaking downstream.",
+      "parentUuid": "d35eda72_2fd7ad3e",
+      "range": {
+        "startLine": 94,
+        "startChar": 15,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "e4a680521630038ab9f3f75e01d33541a60eb659",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
