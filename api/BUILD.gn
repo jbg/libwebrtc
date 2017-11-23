@@ -38,7 +38,6 @@ rtc_static_library("libjingle_peerconnection_api") {
   sources = [
     "candidate.cc",
     "candidate.h",
-    "cryptoparams.h",
     "datachannelinterface.h",
     "dtmfsenderinterface.h",
     "jsep.h",
@@ -149,8 +148,6 @@ rtc_source_set("libjingle_logging_api") {
 
 rtc_source_set("ortc_api") {
   sources = [
-    "ortc/mediadescription.cc",
-    "ortc/mediadescription.h",
     "ortc/ortcfactoryinterface.h",
     "ortc/ortcrtpreceiverinterface.h",
     "ortc/ortcrtpsenderinterface.h",
@@ -363,7 +360,6 @@ if (rtc_include_tests) {
     sources = [
       "array_view_unittest.cc",
       "optional_unittest.cc",
-      "ortc/mediadescription_unittest.cc",
       "ortc/sessiondescription_unittest.cc",
       "rtcerror_unittest.cc",
       "rtpparameters_unittest.cc",

@@ -12,6 +12,6 @@
 #ifndef MEDIA_BASE_CRYPTOPARAMS_H_
 #define MEDIA_BASE_CRYPTOPARAMS_H_
 
-#include "api/cryptoparams.h"
+#include "p2p/base/cryptoparams.h"
 
 #endif  // MEDIA_BASE_CRYPTOPARAMS_H_

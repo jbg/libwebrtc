@@ -27,6 +27,7 @@ rtc_static_library("rtc_p2p") {
     "base/basicpacketsocketfactory.h",
     "base/candidatepairinterface.h",
     "base/common.h",
+    "base/cryptoparams.h",
     "base/dtlstransport.cc",
     "base/dtlstransport.h",
     "base/dtlstransportinternal.cc",
