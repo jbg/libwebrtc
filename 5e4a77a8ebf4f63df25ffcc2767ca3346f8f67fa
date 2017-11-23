@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "49065958_ed1a31c8",
+        "filename": "sdk/android/src/jni/pc/mediaconstraints_jni.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-23T10:19:55Z",
+      "side": 1,
+      "message": "Yes, this is just copied from the old code. I updated it now.",
+      "parentUuid": "2b19f90c_e240d652",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 4
+      },
+      "revId": "5e4a77a8ebf4f63df25ffcc2767ca3346f8f67fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddbf872f_4bebf41e",
         "filename": "sdk/android/src/jni/pc/peerconnection_jni.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "5e4a77a8ebf4f63df25ffcc2767ca3346f8f67fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9412bb22_a45f11df",
+        "filename": "sdk/android/src/jni/pc/peerconnection_jni.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-23T10:19:55Z",
+      "side": 1,
+      "message": "Yes, we can. That\u0027s better.",
+      "parentUuid": "ddbf872f_4bebf41e",
+      "range": {
+        "startLine": 129,
+        "startChar": 52,
+        "endLine": 129,
+        "endChar": 67
+      },
+      "revId": "5e4a77a8ebf4f63df25ffcc2767ca3346f8f67fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

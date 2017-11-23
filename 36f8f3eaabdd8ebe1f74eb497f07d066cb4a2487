@@ -22,6 +22,30 @@
       "revId": "36f8f3eaabdd8ebe1f74eb497f07d066cb4a2487",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c63f016_24ce5b02",
+        "filename": "api/mediaconstraintsinterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-23T10:19:55Z",
+      "side": 0,
+      "message": "This is super old code. I\u0027m assuming this was a mistake to begin with. Making the dtor protected makes it impossible to put the base interface in an std::unique_ptr. I don\u0027t want to expose the specific implementation we have on Android, it makes no sense.",
+      "parentUuid": "60a98c02_cd2e7433",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "36f8f3eaabdd8ebe1f74eb497f07d066cb4a2487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
