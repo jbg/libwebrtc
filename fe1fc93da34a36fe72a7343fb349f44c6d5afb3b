@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88a8e8ec_ed5d0616",
+        "filename": "sdk/android/src/jni/videodecoderwrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-23T15:50:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be VideoDecoder_Settings? Same for other similar classes.",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "fe1fc93da34a36fe72a7343fb349f44c6d5afb3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

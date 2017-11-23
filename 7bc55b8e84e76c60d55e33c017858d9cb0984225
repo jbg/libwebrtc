@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ba8f9aa_0b8538e5",
+        "filename": "sdk/android/api/org/webrtc/EncodedImage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-23T15:50:26Z",
+      "side": 0,
+      "message": "Please remove import as well.",
+      "range": {
+        "startLine": 16,
+        "startChar": 18,
+        "endLine": 16,
+        "endChar": 30
+      },
+      "revId": "7bc55b8e84e76c60d55e33c017858d9cb0984225",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
