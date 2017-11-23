@@ -208,7 +208,6 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
                              const rtc::NetworkRoute& network_route) override;
   void OnReadyToSend(bool ready) override;
   bool GetStats(VoiceMediaInfo* info) override;
-
   // SSRC=0 will set the audio sink on the latest unsignaled stream, future or
   // current. Only one stream at a time will use the sink.
   void SetRawAudioSink(

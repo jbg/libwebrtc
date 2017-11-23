@@ -928,10 +928,10 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
     return muted_;
   }
 
-  webrtc::AudioSendStream::Stats GetStats() const {
+  webrtc::AudioSendStream::Stats GetStats(bool has_remote_tracks) const {
     RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
     RTC_DCHECK(stream_);
-    return stream_->GetStats();
+    return stream_->GetStats(has_remote_tracks);
   }
 
   // Starts the sending by setting ourselves as a sink to the AudioSource to
@@ -2205,7 +2205,8 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
   // Get SSRC and stats for each sender.
   RTC_DCHECK_EQ(info->senders.size(), 0U);
   for (const auto& stream : send_streams_) {
-    webrtc::AudioSendStream::Stats stats = stream.second->GetStats();
+    webrtc::AudioSendStream::Stats stats =
+        stream.second->GetStats(recv_streams_.size() > 0);
     VoiceSenderInfo sinfo;
     sinfo.add_ssrc(stats.local_ssrc);
     sinfo.bytes_sent = stats.bytes_sent;
@@ -2230,6 +2231,7 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
         stats.residual_echo_likelihood_recent_max;
     sinfo.typing_noise_detected = (send_ ? stats.typing_noise_detected : false);
     sinfo.ana_statistics = stats.ana_statistics;
+    sinfo.apm_statistics = stats.apm_statistics;
     info->senders.push_back(sinfo);
   }
 
