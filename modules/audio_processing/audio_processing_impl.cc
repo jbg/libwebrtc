@@ -1616,6 +1616,7 @@ AudioProcessing::AudioProcessingStats AudioProcessingImpl::GetStatistics(
           rtc::Optional<double>(ec_metrics.echo_return_loss);
       stats.echo_return_loss_enhancement =
           rtc::Optional<double>(ec_metrics.echo_return_loss_enhancement);
+      stats.delay_ms = rtc::Optional<int>(ec_metrics.delay_ms);
     } else if (public_submodules_->echo_cancellation->GetMetrics(&metrics) ==
                Error::kNoError) {
       if (metrics.divergent_filter_fraction != -1.0f) {
