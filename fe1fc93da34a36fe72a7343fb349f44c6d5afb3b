@@ -22,6 +22,30 @@
       "revId": "fe1fc93da34a36fe72a7343fb349f44c6d5afb3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5458e05b_a67002dd",
+        "filename": "sdk/android/src/jni/videodecoderwrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-23T15:56:58Z",
+      "side": 1,
+      "message": "Unfortunately, the script generates this name without the base class name included. So it\u0027s working as intended...",
+      "parentUuid": "88a8e8ec_ed5d0616",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "fe1fc93da34a36fe72a7343fb349f44c6d5afb3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
