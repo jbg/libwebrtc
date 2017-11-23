@@ -46,6 +46,30 @@
       "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96f6df7e_3865fa1a",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-23T15:38:48Z",
+      "side": 1,
+      "message": "Ok, cool, then it will work to inject this externally with the current API. One question, if you only have the codec name and specify \"H264\", how do you know which profile you want to use?",
+      "parentUuid": "c504b1be_40bf20fd",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 5
+      },
+      "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
