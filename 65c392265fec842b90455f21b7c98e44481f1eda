@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6fffcafb_271eb6e6",
+        "filename": "api/mediastreaminterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 0,
+      "message": "I agree, but this is an API change---see the nearby comment.",
+      "parentUuid": "54949c12_57be406f",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 42
+      },
+      "revId": "65c392265fec842b90455f21b7c98e44481f1eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6b76ae95_cb863dbd",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1

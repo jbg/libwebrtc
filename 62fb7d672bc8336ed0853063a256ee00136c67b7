@@ -22,6 +22,155 @@
       "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b77d142_32da0115",
+        "filename": "api/mediastreaminterface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "Wait... do we now have AudioProcessorStatistics, AudioProcessorStats, *and* AudioProcessingStats? :-)",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d8d4ff2_97472778",
+        "filename": "api/mediastreaminterface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "ossu@ has fixed the rtc::Optional constructor---it\u0027s no longer `explicit`, so you don\u0027t have to mention it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0630a5d_efe60f07",
+        "filename": "api/mediastreaminterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "This is an API change---you\u0027ll break any client that accesses the old fields in this struct.\n\nUnless (0) you\u0027re confident that no one is using it, the safe way is to either (1) add the new field, and announce that the old fields are going away in two weeks, or (2) leave the old struct alone, make a new struct and a new function to return it, and announce that the old struct and its function is going away in two weeks. (0) is of course best, but if that\u0027s not the case, (1) seems like the better option.",
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe6a6d3e_93f82474",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "Consider assigning the TODO to a bug instead. (You do have a bug for getting rid of the old stats, right?)",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 16
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "072f8eb1_00459153",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "Did you forget to tell git about these files?",
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccbef703_082d99ce",
+        "filename": "pc/rtcstatscollector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "As I said earlier, just 42.0 here.",
+      "range": {
+        "startLine": 1520,
+        "startChar": 6,
+        "endLine": 1520,
+        "endChar": 33
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1787671_9eb60911",
+        "filename": "pc/statscollector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-23T19:44:37Z",
+      "side": 1,
+      "message": "Same here...",
+      "range": {
+        "startLine": 95,
+        "startChar": 46,
+        "endLine": 95,
+        "endChar": 67
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
