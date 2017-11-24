@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f3f70c18_c580ee02",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T12:08:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb390093_a6d1e8b0",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e9bb1fb_016fcce2",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-24T11:00:37Z",
       "side": 1,
       "message": "x.size(), so that you don\u0027t have to repeat yourself",
+      "range": {
+        "startLine": 36,
+        "startChar": 30,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab00ec94_ac212df1",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T12:08:55Z",
+      "side": 1,
+      "message": "It is not immediately clear to me from the declaration of SetData that the length of the ArrayView is equal to max_elements.",
+      "parentUuid": "0e9bb1fb_016fcce2",
       "range": {
         "startLine": 36,
         "startChar": 30,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ece2b5bb_b6eb2c25",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T12:08:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd2f9064_498da8e6",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 18
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbf9e72c_273b0d8b",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8512b617_fe0271da",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T12:08:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbf9e72c_273b0d8b",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "81ba2bc9_5eb05cc6",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T12:08:55Z",
+      "side": 1,
+      "message": "Same as above: is this guaranteed?",
+      "parentUuid": "d3fffe8e_249da9d2",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 60
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4320ba1_72c7b1ac",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 2
@@ -128,6 +248,30 @@
       "writtenOn": "2017-11-24T11:00:37Z",
       "side": 1,
       "message": "You can get rid of these three lines if you write the return statement on line 50 like this:\n\n  return fread(x.data(), 1, x.size(), file) \u003d\u003d x.size() ? x.size() : 0;",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 3
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afb5304e_d9423a6c",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T12:08:55Z",
+      "side": 1,
+      "message": "But this is AppendData. If I return 0, this means that 0 elements were appended. But the buffer will still not be empty because of that. I want it to be empty.",
+      "parentUuid": "b4320ba1_72c7b1ac",
       "range": {
         "startLine": 52,
         "startChar": 2,
