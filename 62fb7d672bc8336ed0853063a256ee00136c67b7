@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "4fe31752_48946834",
+        "filename": "api/mediastreaminterface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "Well, we have those 3 and AudioProcessingStatistics as well :-) Hopefully I can get rid of 2 of them soon though.",
+      "parentUuid": "5b77d142_32da0115",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3d8d4ff2_97472778",
         "filename": "api/mediastreaminterface.cc",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2017-11-23T19:44:37Z",
       "side": 1,
       "message": "ossu@ has fixed the rtc::Optional constructor---it\u0027s no longer `explicit`, so you don\u0027t have to mention it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdd42ca7_a14ba10b",
+        "filename": "api/mediastreaminterface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "Oh that\u0027s great, I wasn\u0027t aware of that. Fixed.",
+      "parentUuid": "3d8d4ff2_97472778",
       "range": {
         "startLine": 25,
         "startChar": 6,
@@ -88,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "04ea7c8d_cf325c3c",
+        "filename": "api/mediastreaminterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "That is true, but I added this struct to the API 4 days ago, see: https://webrtc-review.googlesource.com/c/src/+/17942 so I don\u0027t think it is in use anywhere yet.\nThe reason I thought it would be better to change it, is so that we won\u0027t have to make any changes in chrome when we add/remove APM stats in the future (because it copies the whole AudioProcessingStats struct around instead of individual values). As far as I\u0027m aware this interface is only used to get stats from the APM in Chromium (which is outside of WebRTC).",
+      "parentUuid": "d0630a5d_efe60f07",
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe6a6d3e_93f82474",
         "filename": "call/audio_send_stream.h",
         "patchSetId": 1
@@ -99,6 +165,30 @@
       "writtenOn": "2017-11-23T19:44:37Z",
       "side": 1,
       "message": "Consider assigning the TODO to a bug instead. (You do have a bug for getting rid of the old stats, right?)",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 16
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4161c34d_55ea1c2a",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "I do now, and I assigned this todo to the bug.",
+      "parentUuid": "fe6a6d3e_93f82474",
       "range": {
         "startLine": 61,
         "startChar": 12,
@@ -128,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "7e7fb74c_173215ec",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "Oops, indeed I did. Added them.",
+      "parentUuid": "072f8eb1_00459153",
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ccbef703_082d99ce",
         "filename": "pc/rtcstatscollector_unittest.cc",
         "patchSetId": 1
@@ -151,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "28029db9_08a2f643",
+        "filename": "pc/rtcstatscollector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccbef703_082d99ce",
+      "range": {
+        "startLine": 1520,
+        "startChar": 6,
+        "endLine": 1520,
+        "endChar": 33
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1787671_9eb60911",
         "filename": "pc/statscollector_unittest.cc",
         "patchSetId": 1
@@ -171,6 +303,30 @@
       "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e26499ee_ca8e2152",
+        "filename": "pc/statscollector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T09:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1787671_9eb60911",
+      "range": {
+        "startLine": 95,
+        "startChar": 46,
+        "endLine": 95,
+        "endChar": 67
+      },
+      "revId": "62fb7d672bc8336ed0853063a256ee00136c67b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
