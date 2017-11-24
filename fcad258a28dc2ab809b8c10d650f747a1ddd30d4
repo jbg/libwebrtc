@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5ac0814c_c1d398b6",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T10:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3df6472_0015c1dd",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52d5506f_9bd9a3b9",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "8f13eb83_ff449fbd",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T10:29:29Z",
+      "side": 1,
+      "message": "Much better. Thanks!",
+      "parentUuid": "52d5506f_9bd9a3b9",
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c43fa225_903a201c",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 1
@@ -56,6 +98,24 @@
       "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30ae3ba4_753a2f34",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T10:29:29Z",
+      "side": 1,
+      "message": "I thought it worked better with unique_ptr and emplace_back. I have now changed that.",
+      "parentUuid": "c43fa225_903a201c",
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -79,6 +139,30 @@
       "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a347af52_81b9475c",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-11-24T10:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b22255a_419dfce3",
+      "range": {
+        "startLine": 127,
+        "startChar": 7,
+        "endLine": 127,
+        "endChar": 12
+      },
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
