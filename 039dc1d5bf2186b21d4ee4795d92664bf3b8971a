@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb390093_a6d1e8b0",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T11:00:37Z",
+      "side": 1,
+      "message": "Or just `\u0026`---this lambda only lives for the duration of the SetData() call.",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e9bb1fb_016fcce2",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T11:00:37Z",
+      "side": 1,
+      "message": "x.size(), so that you don\u0027t have to repeat yourself",
+      "range": {
+        "startLine": 36,
+        "startChar": 30,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd2f9064_498da8e6",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T11:00:37Z",
+      "side": 1,
+      "message": "return rtc::Buffer();",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 18
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbf9e72c_273b0d8b",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T11:00:37Z",
+      "side": 1,
+      "message": "\u0026",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3fffe8e_249da9d2",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T11:00:37Z",
+      "side": 1,
+      "message": "x.size()",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 60
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4320ba1_72c7b1ac",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T11:00:37Z",
+      "side": 1,
+      "message": "You can get rid of these three lines if you write the return statement on line 50 like this:\n\n  return fread(x.data(), 1, x.size(), file) \u003d\u003d x.size() ? x.size() : 0;",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 3
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
