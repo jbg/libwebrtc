@@ -14,6 +14,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "api/audio_codecs/audio_encoder.h"
@@ -27,6 +28,7 @@
 #include "media/base/streamparams.h"
 #include "media/base/videosinkinterface.h"
 #include "media/base/videosourceinterface.h"
+#include "rtc_base/asyncpacketsocket.h"
 #include "rtc_base/basictypes.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/copyonwritebuffer.h"
@@ -36,8 +38,7 @@
 #include "rtc_base/sigslot.h"
 #include "rtc_base/socket.h"
 #include "rtc_base/window.h"
-// TODO(juberti): re-evaluate this include
-#include "pc/audiomonitor.h"
+
 
 namespace rtc {
 class RateLimiter;
@@ -1016,7 +1017,9 @@ class VoiceMediaChannel : public MediaChannel {
                             const AudioOptions* options,
                             AudioSource* source) = 0;
   // Gets current energy levels for all incoming streams.
-  virtual bool GetActiveStreams(AudioInfo::StreamList* actives) = 0;
+  typedef std::vector<std::pair<uint32_t, int> > StreamList;
+  virtual bool GetActiveStreams(
+      StreamList* actives) = 0;
   // Get the current energy level of the stream sent to the speaker.
   virtual int GetOutputLevel() = 0;
   // Set speaker output volume of the specified ssrc.
