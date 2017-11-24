@@ -446,12 +446,13 @@ TEST(AudioSendStreamTest, GetStats) {
   EXPECT_EQ(static_cast<int32_t>(kSpeechInputLevel), stats.audio_level);
   EXPECT_EQ(kTotalInputEnergy, stats.total_input_energy);
   EXPECT_EQ(kTotalInputDuration, stats.total_input_duration);
-  EXPECT_EQ(-1, stats.aec_quality_min);
-  EXPECT_EQ(kEchoDelayMedian, stats.echo_delay_median_ms);
-  EXPECT_EQ(kEchoDelayStdDev, stats.echo_delay_std_ms);
-  EXPECT_EQ(kEchoReturnLoss, stats.echo_return_loss);
-  EXPECT_EQ(kEchoReturnLossEnhancement, stats.echo_return_loss_enhancement);
-  EXPECT_EQ(kResidualEchoLikelihood, stats.residual_echo_likelihood);
+  EXPECT_EQ(kEchoDelayMedian, stats.apm_statistics.delay_median_ms);
+  EXPECT_EQ(kEchoDelayStdDev, stats.apm_statistics.delay_standard_deviation_ms);
+  EXPECT_EQ(kEchoReturnLoss, stats.apm_statistics.echo_return_loss);
+  EXPECT_EQ(kEchoReturnLossEnhancement,
+            stats.apm_statistics.echo_return_loss_enhancement);
+  EXPECT_EQ(kResidualEchoLikelihood,
+            stats.apm_statistics.residual_echo_likelihood);
   EXPECT_TRUE(stats.typing_noise_detected);
 }
 
