@@ -16,6 +16,24 @@
       "revId": "def996c6f082ce7219787b27669dea5c92b51dc5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7019727_b45e78d7",
+        "filename": "api/mediaconstraintsinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-24T10:23:14Z",
+      "side": 1,
+      "message": "I followed the recommendation in that link now \"prefer the following order: types (including typedef, using, and nested structs and classes), constants, factory functions, constructors, assignment operators, destructor, all other methods, data members.\", which means I should move the other methods after the destructor.",
+      "parentUuid": "a606e128_754ec400",
+      "revId": "def996c6f082ce7219787b27669dea5c92b51dc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
