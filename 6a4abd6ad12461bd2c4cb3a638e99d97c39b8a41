@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ca31582_a57f4362",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-24T08:38:37Z",
+      "side": 1,
+      "message": "I kind of agree that stereo isn\u0027t a great name since this is more flexible than that. If anyone has a better suggestion that would be nice. :)",
+      "range": {
+        "startLine": 51,
+        "startChar": 21,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5050be15_e40397c3",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-24T08:38:37Z",
+      "side": 1,
+      "message": "Seems like a pretty large type for a picture index. I think we\u0027re using 16 bits for VP8 and VP9.",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 23
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeedf351_dc5501ed",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-24T08:38:37Z",
+      "side": 1,
+      "message": "Change this to decoded_image while at it.",
+      "range": {
+        "startLine": 182,
+        "startChar": 16,
+        "endLine": 182,
+        "endChar": 28
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cba47e3_153aa130",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-24T08:38:37Z",
+      "side": 1,
+      "message": "_image",
+      "range": {
+        "startLine": 188,
+        "startChar": 20,
+        "endLine": 188,
+        "endChar": 25
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aea4e2d_dc42c804",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-11-24T08:38:37Z",
+      "side": 1,
+      "message": "How can we avoid const casts?\n\nMaybe better to just make a copy of the CodecSpecificInfo",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 56
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
