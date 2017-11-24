@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3df6472_0015c1dd",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T09:30:34Z",
+      "side": 1,
+      "message": "rtc::Buffer is already a very small class that points to a heap block. Just return it by value.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d5506f_9bd9a3b9",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T09:30:34Z",
+      "side": 1,
+      "message": "Try this instead:\n\n  1. Create an empty Buffer.\n  2. Use this to write the 8 bytes to it: https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/buffer.h?rcl\u003dd7e251378b4aea7e43261e1a756a29445b891f2e\u0026l\u003d228\n  3. Use this to append the remaining bytes to it: https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/buffer.h?rcl\u003dd7e251378b4aea7e43261e1a756a29445b891f2e\u0026l\u003d282",
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c43fa225_903a201c",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T09:30:34Z",
+      "side": 1,
+      "message": "Is there a good reason for not defining a struct instead?",
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b22255a_419dfce3",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T09:30:34Z",
+      "side": 1,
+      "message": "const?",
+      "range": {
+        "startLine": 127,
+        "startChar": 7,
+        "endLine": 127,
+        "endChar": 12
+      },
+      "revId": "fcad258a28dc2ab809b8c10d650f747a1ddd30d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
