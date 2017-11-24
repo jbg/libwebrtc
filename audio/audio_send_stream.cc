@@ -277,6 +277,11 @@ void AudioSendStream::SetMuted(bool muted) {
 }
 
 webrtc::AudioSendStream::Stats AudioSendStream::GetStats() const {
+  return GetStats(true);
+}
+
+webrtc::AudioSendStream::Stats AudioSendStream::GetStats(
+    bool has_remote_tracks) const {
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   webrtc::AudioSendStream::Stats stats;
   stats.local_ssrc = config_.rtp.ssrc;
@@ -340,6 +345,8 @@ webrtc::AudioSendStream::Stats AudioSendStream::GetStats() const {
       static_cast<internal::AudioState*>(audio_state_.get());
   stats.typing_noise_detected = audio_state->typing_noise_detected();
   stats.ana_statistics = channel_proxy_->GetANAStatistics();
+  stats.apm_statistics =
+      audio_state_->audio_processing()->GetStatistics(has_remote_tracks);
 
   return stats;
 }

@@ -22,6 +22,7 @@
 #include "api/optional.h"
 #include "api/rtpparameters.h"
 #include "call/rtp_config.h"
+#include "modules/audio_processing/include/audio_processing_statistics.h"
 #include "rtc_base/scoped_ref_ptr.h"
 #include "typedefs.h"  // NOLINT(build/include)
 
@@ -55,6 +56,10 @@ class AudioSendStream {
     double total_input_energy = 0.0;
     double total_input_duration = 0.0;
     float aec_quality_min = -1.0f;
+    // The stats below come from APM and are deprecated, use apm_statistics
+    // instead.
+    // TODO(bugs.webrtc.org/8572): Remove these APM stats once everything is
+    //                             switched over to apm_statistics.
     int32_t echo_delay_median_ms = -1;
     int32_t echo_delay_std_ms = -1;
     int32_t echo_return_loss = -100;
@@ -62,7 +67,9 @@ class AudioSendStream {
     float residual_echo_likelihood = -1.0f;
     float residual_echo_likelihood_recent_max = -1.0f;
     bool typing_noise_detected = false;
+
     ANAStats ana_statistics;
+    AudioProcessingStats apm_statistics;
   };
 
   struct Config {
@@ -157,6 +164,8 @@ class AudioSendStream {
   virtual void SetMuted(bool muted) = 0;
 
   virtual Stats GetStats() const = 0;
+
+  virtual Stats GetStats(bool has_remote_tracks) const = 0;
 };
 }  // namespace webrtc
 
