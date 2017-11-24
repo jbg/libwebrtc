@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "cdd0674a_4eb6de50",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-24T09:47:40Z",
+      "side": 1,
+      "message": "Maybe it\u0027s safer to default to false to ensure we get valid stats? But true would be the old behavior, so maybe safer. Up to you.",
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f130adc_44191c79",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-24T09:47:40Z",
+      "side": 1,
+      "message": "TODO(ivoc): ... \u003clink\u003e.\nnit: Remove the indentation of the second line.\n\nWith the old and new stats collectors wired up to use apm_statistics, can we not remove these now? Are they used anywhere? If that includes removing other code paths too then it makes sense to do in a follow-up though.",
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5de5dd19_eab16bae",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-24T09:47:40Z",
+      "side": 1,
+      "message": "nit: Remove blank line?",
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6749e0ec_82c68f4e",
         "filename": "media/base/mediachannel.h",
         "patchSetId": 2
@@ -19,6 +70,40 @@
         "endLine": 628,
         "endChar": 15
       },
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d86aa96_622f46c4",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-24T09:47:40Z",
+      "side": 1,
+      "message": "Link to bug?\nnit: Remove the indentation of the second line.",
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29f2a0c7_9062432c",
+        "filename": "pc/statscollector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-11-24T09:47:40Z",
+      "side": 1,
+      "message": "For the AddFloat cases, should we do static_cast\u003cfloat\u003e to make the double -\u003e float conversion explicit? What does the styleguide say?",
       "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
