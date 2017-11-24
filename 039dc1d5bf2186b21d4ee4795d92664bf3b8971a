@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "e00f024c_e713b751",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T12:19:02Z",
+      "side": 1,
+      "message": "It\u0027s the most obvious way to arrange things, and they are in fact arranged that way. But you\u0027re right, it isn\u0027t actually documented. I\u0027ll fix that.",
+      "parentUuid": "ab00ec94_ac212df1",
+      "range": {
+        "startLine": 36,
+        "startChar": 30,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd2f9064_498da8e6",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 2
@@ -140,6 +164,23 @@
       "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32f6c789_7c01f282",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T12:19:02Z",
+      "side": 1,
+      "message": "Oh---CHECK that len \u003e\u003d kRtpDumpHeaderLength, or something similar? Otherwise len - kRtpDumpHeaderLength below will become a very large positive value...",
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
@@ -237,6 +278,30 @@
     },
     {
       "key": {
+        "uuid": "96bb85fc_64b26a11",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T12:19:02Z",
+      "side": 1,
+      "message": "Yes. I\u0027ll fix the docs.",
+      "parentUuid": "81ba2bc9_5eb05cc6",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 60
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4320ba1_72c7b1ac",
         "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
         "patchSetId": 2
@@ -272,6 +337,30 @@
       "side": 1,
       "message": "But this is AppendData. If I return 0, this means that 0 elements were appended. But the buffer will still not be empty because of that. I want it to be empty.",
       "parentUuid": "b4320ba1_72c7b1ac",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 3
+      },
+      "revId": "039dc1d5bf2186b21d4ee4795d92664bf3b8971a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a36118ff_75297c67",
+        "filename": "modules/audio_coding/neteq/tools/rtp_jitter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-24T12:19:02Z",
+      "side": 1,
+      "message": "Ah, you\u0027re right.",
+      "parentUuid": "afb5304e_d9423a6c",
       "range": {
         "startLine": 52,
         "startChar": 2,
