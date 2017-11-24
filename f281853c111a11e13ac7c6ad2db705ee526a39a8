@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "724dbb34_9ef7cc1c",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-24T12:16:35Z",
+      "side": 0,
+      "message": "This piece of code apparently felt AudioInfo had a good definition of a \"stream list\", but it doesn\u0027t have anything else to do with AudioMonitor or AudioInfo, nor does there appear to be a requirement that the two stay in sync. I just copied the definition.",
+      "range": {
+        "startLine": 1019,
+        "startChar": 32,
+        "endLine": 1019,
+        "endChar": 62
+      },
+      "revId": "f281853c111a11e13ac7c6ad2db705ee526a39a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f683eb6_8aed5b84",
         "filename": "media/base/mediaengine.cc",
         "patchSetId": 1
