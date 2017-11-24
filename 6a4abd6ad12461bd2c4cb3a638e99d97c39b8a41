@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c2edc372_ac4439ab",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "+1\nSomething like MultiChannel or Multiplex maybe?",
+      "parentUuid": "6ca31582_a57f4362",
+      "range": {
+        "startLine": 51,
+        "startChar": 21,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5050be15_e40397c3",
         "filename": "modules/include/module_common_types.h",
         "patchSetId": 12
@@ -41,6 +65,75 @@
         "startChar": 2,
         "endLine": 55,
         "endChar": 23
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5874baf_e49436f7",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "Can we break these three indices out into a separate structs so we can use it both here and in codec specific info etc, without having to reference rtp?",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dcea302_31e1f192",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_stereo.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "What \"next\" means wasn\u0027t immediately apparent to me. Maybe |num_packets_remaining_| ?\nAlso, check that it\u0027s \u003e 0 before decrementing.",
+      "range": {
+        "startLine": 75,
+        "startChar": 29,
+        "endLine": 75,
+        "endChar": 46
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "960b0dfa_11f663fe",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "Not sure the boilerplate from emplace piecewice_construct is worth it over readability here? :)",
+      "range": {
+        "startLine": 125,
+        "startChar": 61,
+        "endLine": 125,
+        "endChar": 0
       },
       "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
@@ -94,6 +187,92 @@
     },
     {
       "key": {
+        "uuid": "125cf000_3d679651",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "move to initializer list",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99120a49_2b7bd72c",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "Could you add some comments elaborating on the expected behavior with or without alpha here?",
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df3496c_a01fb85e",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "So essentially if you have two encoders you report double the framerate in order for each encoder to reduce the bitrate by half so we meet our bitrate target?\nWhich means half our bitrate goes to the alpha-channel? :/",
+      "range": {
+        "startLine": 149,
+        "startChar": 52,
+        "endLine": 149,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8be9dd89_8b4619bf",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "nit: prefer actual type to auto when it\u0027s a simple type",
+      "range": {
+        "startLine": 184,
+        "startChar": 61,
+        "endLine": 184,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6aea4e2d_dc42c804",
         "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
         "patchSetId": 12
@@ -110,6 +289,75 @@
         "startChar": 0,
         "endLine": 189,
         "endChar": 56
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7682412f_f8e70fec",
+        "filename": "modules/video_coding/codecs/test/video_codec_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "nit: wait_for_encoded_frames_threshold_.emplace(num_frames);",
+      "range": {
+        "startLine": 96,
+        "startChar": 70,
+        "endLine": 96,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "232a7f5a_712a93f9",
+        "filename": "modules/video_coding/codecs/test/video_codec_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "remove temporary",
+      "range": {
+        "startLine": 102,
+        "startChar": 57,
+        "endLine": 102,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "309072d4_16e21d09",
+        "filename": "modules/video_coding/codecs/test/video_codec_test.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-24T13:37:31Z",
+      "side": 1,
+      "message": "Why optional, maybe just int set to 1 by default?",
+      "range": {
+        "startLine": 110,
+        "startChar": 55,
+        "endLine": 110,
+        "endChar": 0
       },
       "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
