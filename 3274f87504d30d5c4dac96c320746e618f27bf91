@@ -243,6 +243,24 @@
     },
     {
       "key": {
+        "uuid": "c2304dd2_a0c24fc6",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-11-24T15:43:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure how new the feature is, but kwiberg sent an e-mail about it recently, with some situations where it would be a good idea to use it.",
+      "parentUuid": "0aa8e51e_ea29aad2",
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29f2a0c7_9062432c",
         "filename": "pc/statscollector.cc",
         "patchSetId": 2
