@@ -261,6 +261,24 @@
     },
     {
       "key": {
+        "uuid": "c2da9aa5_be7f68bf",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-25T18:58:35Z",
+      "side": 1,
+      "message": "It\u0027s not a new feature---you\u0027ve always been able to write whatever text you want inside the parentheses. My mail just tried to establish that \"bugs.webrtc.org/1337\" is often a very useful thing to put there.",
+      "parentUuid": "c2304dd2_a0c24fc6",
+      "revId": "3274f87504d30d5c4dac96c320746e618f27bf91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29f2a0c7_9062432c",
         "filename": "pc/statscollector.cc",
         "patchSetId": 2
