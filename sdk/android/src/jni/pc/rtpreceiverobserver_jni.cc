@@ -23,7 +23,7 @@ void RtpReceiverObserverJni::OnFirstPacketReceived(
       jni, GetObjectClass(jni, *j_observer_global_), "onFirstPacketReceived",
       "(Lorg/webrtc/MediaStreamTrack$MediaType;)V");
   // Get the Java version of media type.
-  jobject JavaMediaType = NativeToJavaMediaType(jni, media_type);
+  jobject JavaMediaType = JavaFromNative(jni, media_type);
   // Trigger the callback function.
   jni->CallVoidMethod(*j_observer_global_, j_on_first_packet_received_mid,
                       JavaMediaType);

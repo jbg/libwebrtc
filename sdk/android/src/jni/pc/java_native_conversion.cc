@@ -21,11 +21,11 @@ namespace jni {
 
 namespace {
 
-jobject NativeToJavaCandidate(JNIEnv* env,
-                              const std::string& sdp_mid,
-                              int sdp_mline_index,
-                              const std::string& sdp,
-                              const std::string server_url) {
+jobject JavaFromNative(JNIEnv* env,
+                       const std::string& sdp_mid,
+                       int sdp_mline_index,
+                       const std::string& sdp,
+                       const std::string server_url) {
   return Java_IceCandidate_Constructor(
       env, JavaStringFromStdString(env, sdp_mid), sdp_mline_index,
       JavaStringFromStdString(env, sdp),
@@ -34,7 +34,8 @@ jobject NativeToJavaCandidate(JNIEnv* env,
 
 }  // namespace
 
-jobject NativeToJavaMediaType(JNIEnv* jni, cricket::MediaType media_type) {
+template <>
+jobject JavaFromNative(JNIEnv* jni, const cricket::MediaType& media_type) {
   jclass j_media_type_class =
       FindClass(jni, "org/webrtc/MediaStreamTrack$MediaType");
 
@@ -85,36 +86,26 @@ cricket::Candidate JavaToNativeCandidate(JNIEnv* jni, jobject j_candidate) {
   return candidate;
 }
 
-jobject NativeToJavaCandidate(JNIEnv* env,
-                              const cricket::Candidate& candidate) {
+template <>
+jobject JavaFromNative(JNIEnv* env, const cricket::Candidate& candidate) {
   std::string sdp = SdpSerializeCandidate(candidate);
   RTC_CHECK(!sdp.empty()) << "got an empty ICE candidate";
   // sdp_mline_index is not used, pass an invalid value -1.
-  return NativeToJavaCandidate(env, candidate.transport_name(),
-                               -1 /* sdp_mline_index */, sdp,
-                               "" /* server_url */);
+  return JavaFromNative(env, candidate.transport_name(),
+                        -1 /* sdp_mline_index */, sdp, "" /* server_url */);
 }
 
-jobject NativeToJavaCandidate(JNIEnv* env,
-                              const IceCandidateInterface& candidate) {
+template <>
+jobject JavaFromNative(JNIEnv* env, const IceCandidateInterface& candidate) {
   std::string sdp;
   RTC_CHECK(candidate.ToString(&sdp)) << "got so far: " << sdp;
-  return NativeToJavaCandidate(env, candidate.sdp_mid(),
-                               candidate.sdp_mline_index(), sdp,
-                               candidate.candidate().url());
+  return JavaFromNative(env, candidate.sdp_mid(), candidate.sdp_mline_index(),
+                        sdp, candidate.candidate().url());
 }
 
-jobjectArray NativeToJavaCandidateArray(
-    JNIEnv* jni,
-    const std::vector<cricket::Candidate>& candidates) {
-  jobjectArray java_candidates =
-      Java_IceCandidate_createArray(jni, candidates.size());
-  int i = 0;
-  for (const cricket::Candidate& candidate : candidates) {
-    jobject j_candidate = NativeToJavaCandidate(jni, candidate);
-    jni->SetObjectArrayElement(java_candidates, i++, j_candidate);
-  }
-  return java_candidates;
+template <>
+jclass GetCorrespondingJavaClass<cricket::Candidate>(JNIEnv* env) {
+  return org_webrtc_IceCandidate_clazz(env);
 }
 
 SessionDescriptionInterface* JavaToNativeSessionDescription(JNIEnv* jni,
@@ -603,9 +594,8 @@ jobject NativeToJavaRtpParameters(JNIEnv* jni,
     CHECK_EXCEPTION(jni) << "error during NewObject";
     jni->SetBooleanField(j_encoding_parameters, active_id, encoding.active);
     CHECK_EXCEPTION(jni) << "error during SetBooleanField";
-    jni->SetObjectField(
-        j_encoding_parameters, bitrate_id,
-        JavaIntegerFromOptionalInt(jni, encoding.max_bitrate_bps));
+    jni->SetObjectField(j_encoding_parameters, bitrate_id,
+                        JavaFromNative(jni, encoding.max_bitrate_bps));
     if (encoding.ssrc) {
       jobject j_ssrc_value = jni->NewObject(long_class, long_ctor,
                                             static_cast<jlong>(*encoding.ssrc));
@@ -644,13 +634,12 @@ jobject NativeToJavaRtpParameters(JNIEnv* jni,
     jni->SetObjectField(j_codec, name_id,
                         JavaStringFromStdString(jni, codec.name));
     CHECK_EXCEPTION(jni) << "error during SetObjectField";
-    jni->SetObjectField(j_codec, kind_id,
-                        NativeToJavaMediaType(jni, codec.kind));
+    jni->SetObjectField(j_codec, kind_id, JavaFromNative(jni, codec.kind));
     CHECK_EXCEPTION(jni) << "error during SetObjectField";
     jni->SetObjectField(j_codec, clock_rate_id,
-                        JavaIntegerFromOptionalInt(jni, codec.clock_rate));
+                        JavaFromNative(jni, codec.clock_rate));
     jni->SetObjectField(j_codec, num_channels_id,
-                        JavaIntegerFromOptionalInt(jni, codec.num_channels));
+                        JavaFromNative(jni, codec.num_channels));
     jboolean added = jni->CallBooleanMethod(j_codecs, codecs_add, j_codec);
     CHECK_EXCEPTION(jni) << "error during CallBooleanMethod";
     RTC_CHECK(added);

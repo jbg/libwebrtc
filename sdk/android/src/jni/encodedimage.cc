@@ -17,14 +17,21 @@
 namespace webrtc {
 namespace jni {
 
-jobject NativeToJavaFrameType(JNIEnv* env, FrameType frame_type) {
+template <>
+jclass GetCorrespondingJavaClass<FrameType>(JNIEnv* env) {
+  return org_webrtc_EncodedImage_00024FrameType_clazz(env);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const FrameType& frame_type) {
   return Java_FrameType_fromNativeIndex(env, frame_type);
 }
 
-jobject NativeToJavaEncodedImage(JNIEnv* jni, const EncodedImage& image) {
+template <>
+jobject JavaFromNative(JNIEnv* jni, const EncodedImage& image) {
   jobject buffer = jni->NewDirectByteBuffer(image._buffer, image._length);
-  jobject frame_type = NativeToJavaFrameType(jni, image._frameType);
-  jobject qp = (image.qp_ == -1) ? nullptr : JavaIntegerFromInt(jni, image.qp_);
+  jobject frame_type = JavaFromNative(jni, image._frameType);
+  jobject qp = (image.qp_ == -1) ? nullptr : JavaFromNative(jni, image.qp_);
   return Java_EncodedImage_Constructor(
       jni, buffer, image._encodedWidth, image._encodedHeight,
       image.capture_time_ms_ * rtc::kNumNanosecsPerMillisec, frame_type,
