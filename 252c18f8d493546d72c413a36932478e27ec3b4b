@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2226306b_83d057c3",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-25T21:13:29Z",
+      "side": 1,
+      "message": "Should we put this in an defined(WEBRTC_ANDROID) as well?",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 20
+      },
+      "revId": "252c18f8d493546d72c413a36932478e27ec3b4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
