@@ -105,7 +105,7 @@ int32_t VideoDecoderWrapper::Decode(
       qp_parsing_enabled_ ? ParseQP(input_image) : rtc::nullopt;
   frame_extra_infos_.push_back(frame_extra_info);
 
-  jobject jinput_image = NativeToJavaEncodedImage(jni, input_image);
+  jobject jinput_image = JavaFromNative(jni, input_image);
   jobject ret = Java_VideoDecoder_decode(jni, *decoder_, jinput_image, nullptr);
   return HandleReturnCode(jni, ret);
 }

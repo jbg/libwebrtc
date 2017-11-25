@@ -15,6 +15,7 @@
 
 #include "rtc_base/ptr_util.h"
 #include "sdk/android/src/jni/classreferenceholder.h"
+#include "sdk/android/src/jni/jni_helpers.h"
 #include "sdk/android/src/jni/pc/datachannel.h"
 #include "sdk/android/src/jni/pc/java_native_conversion.h"
 
@@ -63,7 +64,7 @@ void PeerConnectionObserverJni::OnIceCandidate(
     const IceCandidateInterface* candidate) {
   JNIEnv* env = AttachCurrentThreadIfNeeded();
   ScopedLocalRefFrame local_ref_frame(env);
-  jobject j_candidate = NativeToJavaCandidate(env, *candidate);
+  jobject j_candidate = JavaFromNative(env, *candidate);
 
   jmethodID m = GetMethodID(env, *j_observer_class_, "onIceCandidate",
                             "(Lorg/webrtc/IceCandidate;)V");
@@ -73,12 +74,13 @@ void PeerConnectionObserverJni::OnIceCandidate(
 
 void PeerConnectionObserverJni::OnIceCandidatesRemoved(
     const std::vector<cricket::Candidate>& candidates) {
-  ScopedLocalRefFrame local_ref_frame(jni());
-  jobjectArray candidates_array = NativeToJavaCandidateArray(jni(), candidates);
-  jmethodID m = GetMethodID(jni(), *j_observer_class_, "onIceCandidatesRemoved",
+  JNIEnv* env = AttachCurrentThreadIfNeeded();
+  ScopedLocalRefFrame local_ref_frame(env);
+  jobject candidates_array = JavaFromNative(env, candidates);
+  jmethodID m = GetMethodID(env, *j_observer_class_, "onIceCandidatesRemoved",
                             "([Lorg/webrtc/IceCandidate;)V");
-  jni()->CallVoidMethod(*j_observer_global_, m, candidates_array);
-  CHECK_EXCEPTION(jni()) << "Error during CallVoidMethod";
+  env->CallVoidMethod(*j_observer_global_, m, candidates_array);
+  CHECK_EXCEPTION(env) << "Error during CallVoidMethod";
 }
 
 void PeerConnectionObserverJni::OnSignalingChange(
@@ -376,14 +378,14 @@ jobject PeerConnectionObserverJni::GetOrCreateJavaStream(
 jobjectArray PeerConnectionObserverJni::NativeToJavaMediaStreamArray(
     JNIEnv* jni,
     const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams) {
-  jobjectArray java_streams =
-      jni->NewObjectArray(streams.size(), *j_media_stream_class_, nullptr);
-  CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-  for (size_t i = 0; i < streams.size(); ++i) {
-    jobject j_stream = GetOrCreateJavaStream(streams[i]);
-    jni->SetObjectArrayElement(java_streams, i, j_stream);
-  }
-  return java_streams;
+  // Bind |this| (std::bind is not allowed yet).
+  auto to_java_stream_closure =
+      [this](JNIEnv* env,
+             const rtc::scoped_refptr<MediaStreamInterface>& stream) {
+        return GetOrCreateJavaStream(stream);
+      };
+  return JavaArrayFromNative(jni, *j_media_stream_class_,
+                             to_java_stream_closure, streams);
 }
 
 }  // namespace jni
