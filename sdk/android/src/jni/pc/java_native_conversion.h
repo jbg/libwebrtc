@@ -32,18 +32,16 @@ namespace jni {
 
 cricket::MediaType JavaToNativeMediaType(JNIEnv* jni, jobject j_media_type);
 
-jobject NativeToJavaMediaType(JNIEnv* jni, cricket::MediaType media_type);
+template <>
+jobject JavaFromNative(JNIEnv* jni, const cricket::MediaType& media_type);
 
 cricket::Candidate JavaToNativeCandidate(JNIEnv* jni, jobject j_candidate);
 
-jobject NativeToJavaCandidate(JNIEnv* env, const cricket::Candidate& candidate);
+template <>
+jobject JavaFromNative(JNIEnv* env, const cricket::Candidate& candidate);
 
-jobject NativeToJavaCandidate(JNIEnv* env,
-                              const IceCandidateInterface& candidate);
-
-jobjectArray NativeToJavaCandidateArray(
-    JNIEnv* jni,
-    const std::vector<cricket::Candidate>& candidates);
+template <>
+jobject JavaFromNative(JNIEnv* env, const IceCandidateInterface& candidate);
 
 SessionDescriptionInterface* JavaToNativeSessionDescription(JNIEnv* jni,
                                                             jobject j_sdp);

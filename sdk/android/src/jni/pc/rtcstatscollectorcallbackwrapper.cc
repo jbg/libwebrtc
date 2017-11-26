@@ -21,11 +21,83 @@
 namespace webrtc {
 namespace jni {
 
+namespace {
+
+template <typename T>
+jobject StatsMemberToJava(JNIEnv* env, const RTCStatsMemberInterface& member) {
+  return JavaFromNative(env, *member.cast_to<RTCStatsMember<T>>());
+}
+
+template <typename T>
+jobject StatsMemberToJavaArray(JNIEnv* env,
+                               const RTCStatsMemberInterface& member) {
+  return JavaArrayFromNative(env,
+                             *member.cast_to<RTCStatsMember<std::vector<T>>>());
+}
+
+typedef jobject (*MemberConvertFunction)(JNIEnv* jni,
+                                         const RTCStatsMemberInterface& member);
+
+MemberConvertFunction GetConvertFunction(
+    const RTCStatsMemberInterface& member) {
+  switch (member.type()) {
+    case RTCStatsMemberInterface::kBool:
+      return &StatsMemberToJava<bool>;
+
+    case RTCStatsMemberInterface::kInt32:
+      return &StatsMemberToJava<int32_t>;
+
+    case RTCStatsMemberInterface::kUint32:
+      return &StatsMemberToJava<uint32_t>;
+
+    case RTCStatsMemberInterface::kInt64:
+      return &StatsMemberToJava<int64_t>;
+
+    case RTCStatsMemberInterface::kUint64:
+      return &StatsMemberToJava<uint64_t>;
+
+    case RTCStatsMemberInterface::kDouble:
+      return &StatsMemberToJava<double>;
+
+    case RTCStatsMemberInterface::kString:
+      return &StatsMemberToJava<std::string>;
+
+    case RTCStatsMemberInterface::kSequenceBool:
+      return &StatsMemberToJavaArray<bool>;
+
+    case RTCStatsMemberInterface::kSequenceInt32:
+      return &StatsMemberToJavaArray<int32_t>;
+
+    case RTCStatsMemberInterface::kSequenceUint32:
+      return &StatsMemberToJavaArray<uint32_t>;
+
+    case RTCStatsMemberInterface::kSequenceInt64:
+      return &StatsMemberToJavaArray<int64_t>;
+
+    case RTCStatsMemberInterface::kSequenceUint64:
+      return &StatsMemberToJavaArray<uint64_t>;
+
+    case RTCStatsMemberInterface::kSequenceDouble:
+      return &StatsMemberToJavaArray<double>;
+
+    case RTCStatsMemberInterface::kSequenceString:
+      return &StatsMemberToJavaArray<std::string>;
+  }
+  RTC_NOTREACHED();
+  return nullptr;
+}
+
+}  // namespace
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const RTCStatsMemberInterface& member) {
+  return GetConvertFunction(member)(env, member);
+}
+
 RTCStatsCollectorCallbackWrapper::RTCStatsCollectorCallbackWrapper(
     JNIEnv* jni,
     jobject j_callback)
     : j_callback_global_(jni, j_callback),
-      j_callback_class_(jni, GetObjectClass(jni, j_callback)),
       j_linked_hash_map_class_(FindClass(jni, "java/util/LinkedHashMap")),
       j_linked_hash_map_ctor_(
           GetMethodID(jni, j_linked_hash_map_class_, "<init>", "()V")),
@@ -33,20 +105,7 @@ RTCStatsCollectorCallbackWrapper::RTCStatsCollectorCallbackWrapper(
           jni,
           j_linked_hash_map_class_,
           "put",
-          "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")),
-      j_boolean_class_(FindClass(jni, "java/lang/Boolean")),
-      j_boolean_ctor_(GetMethodID(jni, j_boolean_class_, "<init>", "(Z)V")),
-      j_integer_class_(jni->FindClass("java/lang/Integer")),
-      j_long_class_(FindClass(jni, "java/lang/Long")),
-      j_long_ctor_(GetMethodID(jni, j_long_class_, "<init>", "(J)V")),
-      j_big_integer_class_(FindClass(jni, "java/math/BigInteger")),
-      j_big_integer_ctor_(GetMethodID(jni,
-                                      j_big_integer_class_,
-                                      "<init>",
-                                      "(Ljava/lang/String;)V")),
-      j_double_class_(FindClass(jni, "java/lang/Double")),
-      j_double_ctor_(GetMethodID(jni, j_double_class_, "<init>", "(D)V")),
-      j_string_class_(FindClass(jni, "java/lang/String")) {}
+          "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")) {}
 
 void RTCStatsCollectorCallbackWrapper::OnStatsDelivered(
     const rtc::scoped_refptr<const RTCStatsReport>& report) {
@@ -90,7 +149,7 @@ jobject RTCStatsCollectorCallbackWrapper::StatsToJava(JNIEnv* jni,
     // Create a local reference frame for each member as well.
     ScopedLocalRefFrame local_ref_frame(jni);
     jstring j_name = JavaStringFromStdString(jni, member->name());
-    jobject j_member = MemberToJava(jni, member);
+    jobject j_member = JavaFromNative(jni, *member);
     jni->CallObjectMethod(j_members, j_linked_hash_map_put_, j_name, j_member);
     CHECK_EXCEPTION(jni) << "error during CallObjectMethod";
   }
@@ -98,152 +157,6 @@ jobject RTCStatsCollectorCallbackWrapper::StatsToJava(JNIEnv* jni,
       Java_RTCStats_create(jni, stats.timestamp_us(), j_type, j_id, j_members);
   CHECK_EXCEPTION(jni) << "error during NewObject";
   return j_stats;
-}
-
-jobject RTCStatsCollectorCallbackWrapper::MemberToJava(
-    JNIEnv* jni,
-    const RTCStatsMemberInterface* member) {
-  switch (member->type()) {
-    case RTCStatsMemberInterface::kBool: {
-      jobject value = jni->NewObject(j_boolean_class_, j_boolean_ctor_,
-                                     *member->cast_to<RTCStatsMember<bool>>());
-      CHECK_EXCEPTION(jni) << "error during NewObject";
-      return value;
-    }
-    case RTCStatsMemberInterface::kInt32: {
-      return JavaIntegerFromInt(jni,
-                                *member->cast_to<RTCStatsMember<int32_t>>());
-    }
-    case RTCStatsMemberInterface::kUint32: {
-      jobject value =
-          jni->NewObject(j_long_class_, j_long_ctor_,
-                         (jlong)*member->cast_to<RTCStatsMember<uint32_t>>());
-      CHECK_EXCEPTION(jni) << "error during NewObject";
-      return value;
-    }
-    case RTCStatsMemberInterface::kInt64: {
-      jobject value =
-          jni->NewObject(j_long_class_, j_long_ctor_,
-                         *member->cast_to<RTCStatsMember<int64_t>>());
-      CHECK_EXCEPTION(jni) << "error during NewObject";
-      return value;
-    }
-    case RTCStatsMemberInterface::kUint64: {
-      jobject value =
-          jni->NewObject(j_big_integer_class_, j_big_integer_ctor_,
-                         JavaStringFromStdString(jni, member->ValueToString()));
-      CHECK_EXCEPTION(jni) << "error during NewObject";
-      return value;
-    }
-    case RTCStatsMemberInterface::kDouble: {
-      jobject value =
-          jni->NewObject(j_double_class_, j_double_ctor_,
-                         *member->cast_to<RTCStatsMember<double>>());
-      CHECK_EXCEPTION(jni) << "error during NewObject";
-      return value;
-    }
-    case RTCStatsMemberInterface::kString: {
-      return JavaStringFromStdString(
-          jni, *member->cast_to<RTCStatsMember<std::string>>());
-    }
-    case RTCStatsMemberInterface::kSequenceBool: {
-      const std::vector<bool>& values =
-          *member->cast_to<RTCStatsMember<std::vector<bool>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_boolean_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jobject value =
-            jni->NewObject(j_boolean_class_, j_boolean_ctor_, values[i]);
-        jni->SetObjectArrayElement(j_values, i, value);
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-    case RTCStatsMemberInterface::kSequenceInt32: {
-      const std::vector<int32_t>& values =
-          *member->cast_to<RTCStatsMember<std::vector<int32_t>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_integer_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jni->SetObjectArrayElement(j_values, i,
-                                   JavaIntegerFromInt(jni, values[i]));
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-    case RTCStatsMemberInterface::kSequenceUint32: {
-      const std::vector<uint32_t>& values =
-          *member->cast_to<RTCStatsMember<std::vector<uint32_t>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_long_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jobject value = jni->NewObject(j_long_class_, j_long_ctor_, values[i]);
-        jni->SetObjectArrayElement(j_values, i, value);
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-    case RTCStatsMemberInterface::kSequenceInt64: {
-      const std::vector<int64_t>& values =
-          *member->cast_to<RTCStatsMember<std::vector<int64_t>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_long_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jobject value = jni->NewObject(j_long_class_, j_long_ctor_, values[i]);
-        jni->SetObjectArrayElement(j_values, i, value);
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-    case RTCStatsMemberInterface::kSequenceUint64: {
-      const std::vector<uint64_t>& values =
-          *member->cast_to<RTCStatsMember<std::vector<uint64_t>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_big_integer_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jobject value = jni->NewObject(
-            j_big_integer_class_, j_big_integer_ctor_,
-            JavaStringFromStdString(jni, rtc::ToString(values[i])));
-        jni->SetObjectArrayElement(j_values, i, value);
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-    case RTCStatsMemberInterface::kSequenceDouble: {
-      const std::vector<double>& values =
-          *member->cast_to<RTCStatsMember<std::vector<double>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_double_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jobject value =
-            jni->NewObject(j_double_class_, j_double_ctor_, values[i]);
-        jni->SetObjectArrayElement(j_values, i, value);
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-    case RTCStatsMemberInterface::kSequenceString: {
-      const std::vector<std::string>& values =
-          *member->cast_to<RTCStatsMember<std::vector<std::string>>>();
-      jobjectArray j_values =
-          jni->NewObjectArray(values.size(), j_string_class_, nullptr);
-      CHECK_EXCEPTION(jni) << "error during NewObjectArray";
-      for (size_t i = 0; i < values.size(); ++i) {
-        jni->SetObjectArrayElement(j_values, i,
-                                   JavaStringFromStdString(jni, values[i]));
-        CHECK_EXCEPTION(jni) << "error during SetObjectArrayElement";
-      }
-      return j_values;
-    }
-  }
-  RTC_NOTREACHED();
-  return nullptr;
 }
 
 }  // namespace jni

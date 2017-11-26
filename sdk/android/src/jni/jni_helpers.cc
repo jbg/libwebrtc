@@ -15,7 +15,12 @@
 #include <unistd.h>
 #include <vector>
 
+#include "rtc_base/stringencode.h"
+#include "sdk/android/generated_external_classes_jni/jni/BigInteger_jni.h"
+#include "sdk/android/generated_external_classes_jni/jni/Boolean_jni.h"
+#include "sdk/android/generated_external_classes_jni/jni/Double_jni.h"
 #include "sdk/android/generated_external_classes_jni/jni/Integer_jni.h"
+#include "sdk/android/generated_external_classes_jni/jni/Long_jni.h"
 #include "sdk/android/src/jni/class_loader.h"
 #include "sdk/android/src/jni/classreferenceholder.h"
 
@@ -281,15 +286,6 @@ rtc::Optional<int32_t> JavaIntegerToOptionalInt(JNIEnv* jni, jobject integer) {
   return JNI_Integer::Java_Integer_intValue(jni, integer);
 }
 
-jobject JavaIntegerFromOptionalInt(JNIEnv* jni,
-                                   const rtc::Optional<int32_t>& optional_int) {
-  return optional_int ? JavaIntegerFromInt(jni, *optional_int) : nullptr;
-}
-
-jobject JavaIntegerFromInt(JNIEnv* jni, int32_t i) {
-  return JNI_Integer::Java_Integer_ConstructorJLI_I(jni, i);
-}
-
 // Return the (singleton) Java Enum object corresponding to |index|;
 jobject JavaEnumFromIndex(JNIEnv* jni, jclass state_class,
                           const std::string& state_class_name, int index) {
@@ -451,6 +447,79 @@ jobject Iterable::Iterator::operator*() {
 bool Iterable::Iterator::AtEnd() const {
   RTC_CHECK(thread_checker_.CalledOnValidThread());
   return jni_ == nullptr || IsNull(jni_, iterator_);
+}
+
+template <>
+jclass GetCorrespondingJavaClass<bool>(JNIEnv* env) {
+  return java_lang_Boolean_clazz(env);
+}
+
+template <>
+jclass GetCorrespondingJavaClass<int32_t>(JNIEnv* env) {
+  return java_lang_Integer_clazz(env);
+}
+
+template <>
+jclass GetCorrespondingJavaClass<uint32_t>(JNIEnv* env) {
+  return java_lang_Long_clazz(env);
+}
+
+template <>
+jclass GetCorrespondingJavaClass<int64_t>(JNIEnv* env) {
+  return java_lang_Long_clazz(env);
+}
+
+template <>
+jclass GetCorrespondingJavaClass<uint64_t>(JNIEnv* env) {
+  return java_math_BigInteger_clazz(env);
+}
+
+template <>
+jclass GetCorrespondingJavaClass<std::string>(JNIEnv* env) {
+  // TODO(magjed): Remove this class when we can generate it from String.class
+  // directly (the script currently chokes on that class).
+  return FindClass(env, "java/lang/String");
+}
+
+template <>
+jclass GetCorrespondingJavaClass<double>(JNIEnv* env) {
+  return java_lang_Double_clazz(env);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const bool& b) {
+  return JNI_Boolean::Java_Boolean_ConstructorJLB_Z(env, b);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const int32_t& i) {
+  return JNI_Integer::Java_Integer_ConstructorJLI_I(env, i);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const uint32_t& u) {
+  return JNI_Long::Java_Long_ConstructorJLLO_J(env, u);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const int64_t& i) {
+  return JNI_Long::Java_Long_ConstructorJLLO_J(env, i);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const uint64_t& u) {
+  return JNI_BigInteger::Java_BigInteger_ConstructorJMBI_JLS(
+      env, JavaStringFromStdString(env, rtc::ToString(u)));
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const std::string& native) {
+  return JavaStringFromStdString(env, native);
+}
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const double& d) {
+  return JNI_Double::Java_Double_ConstructorJLD_D(env, d);
 }
 
 }  // namespace jni

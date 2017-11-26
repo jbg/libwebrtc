@@ -13,8 +13,8 @@
 
 #include <jni.h>
 
-#include "api/video/video_rotation.h"
 #include "common_types.h"  // NOLINT(build/include)
+#include "sdk/android/src/jni/jni_helpers.h"
 
 namespace webrtc {
 
@@ -22,8 +22,10 @@ class EncodedImage;
 
 namespace jni {
 
-jobject NativeToJavaFrameType(JNIEnv* env, FrameType frame_type);
-jobject NativeToJavaEncodedImage(JNIEnv* jni, const EncodedImage& image);
+template <>
+jobject JavaFromNative(JNIEnv* env, const FrameType& frame_type);
+template <>
+jobject JavaFromNative(JNIEnv* jni, const EncodedImage& image);
 
 }  // namespace jni
 }  // namespace webrtc
