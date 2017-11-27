@@ -563,6 +563,11 @@ class AudioProcessing : public rtc::RefCountInterface {
     float residual_echo_likelihood = -1.0f;
     // Maximum residual echo likelihood from the last time period.
     float residual_echo_likelihood_recent_max = -1.0f;
+
+    // The instantaneous delay estimate produced in the AEC. The unit is in
+    // milliseconds and the value is the instantaneous value at the time of the
+    // call to |GetStatistics()|.
+    int delay_ms;
   };
 
   // TODO(ivoc): Make this pure virtual when all subclasses have been updated.
@@ -912,6 +917,7 @@ class EchoControl {
   struct Metrics {
     double echo_return_loss;
     double echo_return_loss_enhancement;
+    int delay_ms;
   };
 
   // Collect current metrics from the echo controller.
