@@ -15,7 +15,10 @@
 #include <unistd.h>
 #include <vector>
 
+#include "sdk/android/generated_external_classes_jni/jni/Boolean_jni.h"
+#include "sdk/android/generated_external_classes_jni/jni/Double_jni.h"
 #include "sdk/android/generated_external_classes_jni/jni/Integer_jni.h"
+#include "sdk/android/generated_external_classes_jni/jni/Long_jni.h"
 #include "sdk/android/src/jni/class_loader.h"
 #include "sdk/android/src/jni/classreferenceholder.h"
 
@@ -281,13 +284,25 @@ rtc::Optional<int32_t> JavaIntegerToOptionalInt(JNIEnv* jni, jobject integer) {
   return JNI_Integer::Java_Integer_intValue(jni, integer);
 }
 
-jobject JavaIntegerFromOptionalInt(JNIEnv* jni,
-                                   const rtc::Optional<int32_t>& optional_int) {
-  return optional_int ? JavaIntegerFromInt(jni, *optional_int) : nullptr;
+jobject OptionalIntToJavaInteger(JNIEnv* jni,
+                                 const rtc::Optional<int32_t>& optional_int) {
+  return optional_int ? NativeToJavaInteger(jni, *optional_int) : nullptr;
 }
 
-jobject JavaIntegerFromInt(JNIEnv* jni, int32_t i) {
+jobject NativeToJavaInteger(JNIEnv* jni, int32_t i) {
   return JNI_Integer::Java_Integer_ConstructorJLI_I(jni, i);
+}
+
+jobject NativeToJavaBoolean(JNIEnv* env, bool b) {
+  return JNI_Boolean::Java_Boolean_ConstructorJLB_Z(env, b);
+}
+
+jobject NativeToJavaLong(JNIEnv* env, int64_t u) {
+  return JNI_Long::Java_Long_ConstructorJLLO_J(env, u);
+}
+
+jobject NativeToJavaDouble(JNIEnv* env, double d) {
+  return JNI_Double::Java_Double_ConstructorJLD_D(env, d);
 }
 
 // Return the (singleton) Java Enum object corresponding to |index|;
@@ -451,6 +466,39 @@ jobject Iterable::Iterator::operator*() {
 bool Iterable::Iterator::AtEnd() const {
   RTC_CHECK(thread_checker_.CalledOnValidThread());
   return jni_ == nullptr || IsNull(jni_, iterator_);
+}
+
+jobjectArray NativeToJavaIntegerArray(JNIEnv* env,
+                                      const std::vector<int32_t>& container) {
+  return JavaArrayFromNative(env, container, java_lang_Integer_clazz(env),
+                             &NativeToJavaInteger);
+}
+
+jobjectArray NativeToJavaBooleanArray(JNIEnv* env,
+                                      const std::vector<bool>& container) {
+  return JavaArrayFromNative(env, container, java_lang_Boolean_clazz(env),
+                             &NativeToJavaBoolean);
+}
+
+jobjectArray NativeToJavaDoubleArray(JNIEnv* env,
+                                     const std::vector<double>& container) {
+  return JavaArrayFromNative(env, container, java_lang_Double_clazz(env),
+                             &NativeToJavaDouble);
+}
+
+jobjectArray NativeToJavaLongArray(JNIEnv* env,
+                                   const std::vector<int64_t>& container) {
+  return JavaArrayFromNative(env, container, java_lang_Long_clazz(env),
+                             &NativeToJavaLong);
+}
+
+jobjectArray NativeToJavaStringArray(
+    JNIEnv* env,
+    const std::vector<std::string>& container) {
+  // TODO(magjed): Remove this class when we can generate it from String.class
+  // directly (the script currently chokes on that class).
+  return JavaArrayFromNative(env, container, FindClass(env, "java/lang/String"),
+                             &JavaStringFromStdString);
 }
 
 }  // namespace jni
