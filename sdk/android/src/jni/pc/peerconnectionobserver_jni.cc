@@ -16,6 +16,7 @@
 #include "rtc_base/ptr_util.h"
 #include "sdk/android/generated_peerconnection_jni/jni/MediaStream_jni.h"
 #include "sdk/android/src/jni/classreferenceholder.h"
+#include "sdk/android/src/jni/jni_helpers.h"
 #include "sdk/android/src/jni/pc/datachannel.h"
 #include "sdk/android/src/jni/pc/java_native_conversion.h"
 
@@ -48,7 +49,7 @@ void PeerConnectionObserverJni::OnIceCandidate(
     const IceCandidateInterface* candidate) {
   JNIEnv* env = AttachCurrentThreadIfNeeded();
   ScopedLocalRefFrame local_ref_frame(env);
-  jobject j_candidate = NativeToJavaCandidate(env, *candidate);
+  jobject j_candidate = JavaFromNative(env, *candidate);
 
   jmethodID m = GetMethodID(env, *j_observer_class_, "onIceCandidate",
                             "(Lorg/webrtc/IceCandidate;)V");
@@ -58,12 +59,13 @@ void PeerConnectionObserverJni::OnIceCandidate(
 
 void PeerConnectionObserverJni::OnIceCandidatesRemoved(
     const std::vector<cricket::Candidate>& candidates) {
-  ScopedLocalRefFrame local_ref_frame(jni());
-  jobjectArray candidates_array = NativeToJavaCandidateArray(jni(), candidates);
-  jmethodID m = GetMethodID(jni(), *j_observer_class_, "onIceCandidatesRemoved",
+  JNIEnv* env = AttachCurrentThreadIfNeeded();
+  ScopedLocalRefFrame local_ref_frame(env);
+  jobjectArray candidates_array = JavaArrayFromNative(env, candidates);
+  jmethodID m = GetMethodID(env, *j_observer_class_, "onIceCandidatesRemoved",
                             "([Lorg/webrtc/IceCandidate;)V");
-  jni()->CallVoidMethod(*j_observer_global_, m, candidates_array);
-  CHECK_EXCEPTION(jni()) << "Error during CallVoidMethod";
+  env->CallVoidMethod(*j_observer_global_, m, candidates_array);
+  CHECK_EXCEPTION(env) << "Error during CallVoidMethod";
 }
 
 void PeerConnectionObserverJni::OnSignalingChange(

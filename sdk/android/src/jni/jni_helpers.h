@@ -110,11 +110,6 @@ std::vector<std::string> JavaToStdVectorStrings(JNIEnv* jni, jobject list);
 
 rtc::Optional<int32_t> JavaIntegerToOptionalInt(JNIEnv* jni, jobject integer);
 
-jobject JavaIntegerFromOptionalInt(JNIEnv* jni,
-                                   const rtc::Optional<int32_t>& optional_int);
-
-jobject JavaIntegerFromInt(JNIEnv* jni, int32_t i);
-
 // Return the (singleton) Java Enum object corresponding to |index|;
 jobject JavaEnumFromIndex(JNIEnv* jni, jclass state_class,
                           const std::string& state_class_name, int index);
@@ -227,6 +222,75 @@ class Iterable {
 
   RTC_DISALLOW_COPY_AND_ASSIGN(Iterable);
 };
+
+// This is the base template declaration for all conversions from native C++
+// types to Java objects. It takes a const ref argument, even though the type
+// might be a primitive type like int, in order to be consistent.
+// This helper file only provides implementation for the primitive types and
+// strings, and other files provide implementations for more specific types.
+template <typename T>
+jobject JavaFromNative(JNIEnv* env, const T& t);
+
+template <>
+jobject JavaFromNative(JNIEnv* env, const bool& b);
+template <>
+jobject JavaFromNative(JNIEnv* env, const int32_t& i);
+template <>
+jobject JavaFromNative(JNIEnv* env, const uint32_t& u);
+template <>
+jobject JavaFromNative(JNIEnv* env, const int64_t& i);
+template <>
+jobject JavaFromNative(JNIEnv* env, const uint64_t& u);
+template <>
+jobject JavaFromNative(JNIEnv* env, const std::string& s);
+template <>
+jobject JavaFromNative(JNIEnv* env, const double& d);
+
+// Helper template conversion for converting rtc::Optional<T> types. It relies
+// on JavaFromNative() being implemented for type T.
+template <typename T>
+jobject JavaFromNative(JNIEnv* env, const rtc::Optional<T>& optional_t) {
+  return optional_t ? JavaFromNative(env, *optional_t) : nullptr;
+}
+
+// This is the base template declaration for getting the corresponding Java
+// class given a native type. This is needed when creating Java arrays. This
+// helper file only provides implementation for the primitive types and strings,
+// and other files provide implementations for more specific types.
+template <typename T>
+jclass GetCorrespondingJavaClass(JNIEnv* env);
+
+template <>
+jclass GetCorrespondingJavaClass<bool>(JNIEnv* env);
+template <>
+jclass GetCorrespondingJavaClass<int32_t>(JNIEnv* env);
+template <>
+jclass GetCorrespondingJavaClass<uint32_t>(JNIEnv* env);
+template <>
+jclass GetCorrespondingJavaClass<int64_t>(JNIEnv* env);
+template <>
+jclass GetCorrespondingJavaClass<uint64_t>(JNIEnv* env);
+template <>
+jclass GetCorrespondingJavaClass<std::string>(JNIEnv* env);
+
+// Helper function for converting std::vector<T> into a Java array. It relies on
+// JavaFromNative() and GetCorrespondingJavaClass<T>() being implemented for
+// type T.
+template <typename T>
+jobjectArray JavaArrayFromNative(JNIEnv* env, const std::vector<T>& container) {
+  jobjectArray j_container = env->NewObjectArray(
+      container.size(), GetCorrespondingJavaClass<T>(env), nullptr);
+  int i = 0;
+  for (const T& element : container) {
+    jobject j_element = JavaFromNative(env, element);
+    env->SetObjectArrayElement(j_container, i, j_element);
+    // Delete local ref immediately since we might create a lot of local
+    // references in this loop.
+    env->DeleteLocalRef(j_element);
+    ++i;
+  }
+  return j_container;
+}
 
 }  // namespace jni
 }  // namespace webrtc
