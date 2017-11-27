@@ -121,12 +121,7 @@ int32_t VideoEncoderWrapper::Encode(
   ScopedLocalRefFrame local_ref_frame(jni);
 
   // Construct encode info.
-  jobjectArray j_frame_types =
-      jni->NewObjectArray(frame_types->size(), *frame_type_class_, nullptr);
-  for (size_t i = 0; i < frame_types->size(); ++i) {
-    jobject j_frame_type = NativeToJavaFrameType(jni, (*frame_types)[i]);
-    jni->SetObjectArrayElement(j_frame_types, i, j_frame_type);
-  }
+  jobjectArray j_frame_types = NativeToJavaFrameTypeArray(jni, *frame_types);
   jobject encode_info = Java_EncodeInfo_Constructor(jni, j_frame_types);
 
   FrameExtraInfo info;

@@ -108,12 +108,14 @@ std::string JavaToStdString(JNIEnv* jni, const jstring& j_string);
 // return a new vector of UTF-8 native strings.
 std::vector<std::string> JavaToStdVectorStrings(JNIEnv* jni, jobject list);
 
+jobject NativeToJavaInteger(JNIEnv* jni, int32_t i);
+jobject NativeToJavaBoolean(JNIEnv* env, bool b);
+jobject NativeToJavaLong(JNIEnv* env, int64_t u);
+jobject NativeToJavaDouble(JNIEnv* env, double d);
+
+jobject OptionalIntToJavaInteger(JNIEnv* jni,
+                                 const rtc::Optional<int32_t>& optional_int);
 rtc::Optional<int32_t> JavaIntegerToOptionalInt(JNIEnv* jni, jobject integer);
-
-jobject JavaIntegerFromOptionalInt(JNIEnv* jni,
-                                   const rtc::Optional<int32_t>& optional_int);
-
-jobject JavaIntegerFromInt(JNIEnv* jni, int32_t i);
 
 // Return the (singleton) Java Enum object corresponding to |index|;
 jobject JavaEnumFromIndex(JNIEnv* jni, jclass state_class,
@@ -227,6 +229,37 @@ class Iterable {
 
   RTC_DISALLOW_COPY_AND_ASSIGN(Iterable);
 };
+
+// Helper function for converting std::vector<T> into a Java array.
+template <typename T, typename Convert>
+jobjectArray JavaArrayFromNative(JNIEnv* env,
+                                 const std::vector<T>& container,
+                                 jclass clazz,
+                                 Convert convert) {
+  jobjectArray j_container =
+      env->NewObjectArray(container.size(), clazz, nullptr);
+  int i = 0;
+  for (const T& element : container) {
+    jobject j_element = convert(env, element);
+    env->SetObjectArrayElement(j_container, i, j_element);
+    // Delete local ref immediately since we might create a lot of local
+    // references in this loop.
+    env->DeleteLocalRef(j_element);
+    ++i;
+  }
+  return j_container;
+}
+
+jobjectArray NativeToJavaIntegerArray(JNIEnv* env,
+                                      const std::vector<int32_t>& container);
+jobjectArray NativeToJavaBooleanArray(JNIEnv* env,
+                                      const std::vector<bool>& container);
+jobjectArray NativeToJavaLongArray(JNIEnv* env,
+                                   const std::vector<int64_t>& container);
+jobjectArray NativeToJavaDoubleArray(JNIEnv* env,
+                                     const std::vector<double>& container);
+jobjectArray NativeToJavaStringArray(JNIEnv* env,
+                                     const std::vector<std::string>& container);
 
 }  // namespace jni
 }  // namespace webrtc
