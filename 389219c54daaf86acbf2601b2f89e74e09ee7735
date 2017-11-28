@@ -22,6 +22,30 @@
       "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d7f9373_8c0c4b51",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 5846
+      },
+      "writtenOn": "2017-11-28T11:52:43Z",
+      "side": 1,
+      "message": "Hello.\n\nWhich existing RTCConfiguration option are you talking about?\n\nThis new option doesn\u0027t disable intranet. It tells the code to not try to enumerate and probe the interfaces, and instead use the default one (whatever is the default for the OS). In case of iOS it works, because it stops trying to access the link-local interface, and starts using the right interface quicker.",
+      "parentUuid": "7692db51_5b6028bd",
+      "range": {
+        "startLine": 693,
+        "startChar": 9,
+        "endLine": 693,
+        "endChar": 36
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
