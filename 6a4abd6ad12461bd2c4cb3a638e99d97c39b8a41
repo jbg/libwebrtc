@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "02013d76_86bc8f5f",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-28T09:01:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "14c3b417_88123f76",
+      "range": {
+        "startLine": 51,
+        "startChar": 21,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5050be15_e40397c3",
         "filename": "modules/include/module_common_types.h",
         "patchSetId": 12
@@ -472,6 +496,30 @@
       "side": 1,
       "message": "Yes. Additionally, it is there to temporarily hack the duration calculated, see below link in addition to the comments. I need to change the interface for SetRateAllocation(bitrate, framerate, durationMultiplier), so that I can report the correct vals and divide bitrate here in the future.\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc?rcl\u003d09819ec373448c539934273d970ba05e4e402573\u0026l\u003d552",
       "parentUuid": "2df3496c_a01fb85e",
+      "range": {
+        "startLine": 149,
+        "startChar": 52,
+        "endLine": 149,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0767fd54_36834c10",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-28T09:01:58Z",
+      "side": 1,
+      "message": "I see. The durationMultiplier seems weird to me. Could we make it flexible structure in the same manner as we do for bitrate instead? But let\u0027s discuss that on another channel :)",
+      "parentUuid": "2bb9a719_01997899",
       "range": {
         "startLine": 149,
         "startChar": 52,

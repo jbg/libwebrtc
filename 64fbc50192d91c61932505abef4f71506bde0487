@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12edcf1b_4c948517",
+        "filename": "modules/video_coding/codecs/test/video_codec_test.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-28T09:01:58Z",
+      "side": 1,
+      "message": "nit: assign in initializer list instead",
+      "revId": "64fbc50192d91c61932505abef4f71506bde0487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31ae7c9e_3274949d",
+        "filename": "modules/video_coding/encoded_frame.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-28T09:01:58Z",
+      "side": 1,
+      "message": "Should be able to do just\n _codecSpecificInfo.codecSpecific.stereo.indices \u003d header-\u003ecodecHeader.stereo.indices;\n...right?",
+      "range": {
+        "startLine": 219,
+        "startChar": 61,
+        "endLine": 219,
+        "endChar": 0
+      },
+      "revId": "64fbc50192d91c61932505abef4f71506bde0487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17f64628_caacf56f",
+        "filename": "video/payload_router.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-11-28T09:01:58Z",
+      "side": 1,
+      "message": "rtp-\u003ecodecHeader.stereo.indices \u003d info-\u003ecodecSpecific.stereo.indices;",
+      "range": {
+        "startLine": 106,
+        "startChar": 59,
+        "endLine": 106,
+        "endChar": 0
+      },
+      "revId": "64fbc50192d91c61932505abef4f71506bde0487",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
