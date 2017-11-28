@@ -532,6 +532,30 @@
     },
     {
       "key": {
+        "uuid": "95ef62c7_ef0a9fce",
+        "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-28T17:46:36Z",
+      "side": 1,
+      "message": "Sure. We can just pass in SetRateAllocation(bitrate, framerate, duration) then. With that we can divide bitrate in whatever percentage we want. It is added in DDoc in planned CLs.\n\nI didn\u0027t expect duration to be important, but SW encoders are implemented synchronously and when duration is 1s/30, encode cannot keep up with input. Every other frame gets dropped.",
+      "parentUuid": "0767fd54_36834c10",
+      "range": {
+        "startLine": 149,
+        "startChar": 52,
+        "endLine": 149,
+        "endChar": 0
+      },
+      "revId": "6a4abd6ad12461bd2c4cb3a638e99d97c39b8a41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8be9dd89_8b4619bf",
         "filename": "modules/video_coding/codecs/stereo/stereo_encoder_adapter.cc",
         "patchSetId": 12
