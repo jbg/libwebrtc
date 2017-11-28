@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa581c5f_c228b351",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-28T12:39:07Z",
+      "side": 1,
+      "message": "nit: I am not sure having this helper method is worth it.\n\nHow about we instead make all NativeToJavaInteger etc. take rtc::Optionals? Concrete values can be implicitly cast to rtc::Optional.",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 32
+      },
+      "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79e50713_a3709bac",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-28T12:39:07Z",
+      "side": 1,
+      "message": "nit: NativeToJavaObjectArray to follow the naming convention.",
+      "range": {
+        "startLine": 235,
+        "startChar": 13,
+        "endLine": 235,
+        "endChar": 32
+      },
+      "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "600b5be8_4813a6b8",
+        "filename": "sdk/android/src/jni/pc/statsobserver_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-28T12:39:07Z",
+      "side": 1,
+      "message": "nit: NativeToJavaStatsReportValueArray",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
