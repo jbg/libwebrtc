@@ -52,6 +52,11 @@ struct RtcpTransceiverConfig {
   // Rtcp report block generator for outgoing receiver reports.
   ReceiveStatisticsProvider* receive_statistics = nullptr;
 
+  //
+  // Global callback. Should outlive RtcpTransceiver.
+  //
+  RtcpRttStats* rtt_observer = nullptr;
+
   // Configures if sending should
   //  enforce compound packets: https://tools.ietf.org/html/rfc4585#section-3.1
   //  or allow reduced size packets: https://tools.ietf.org/html/rfc5506
@@ -70,6 +75,8 @@ struct RtcpTransceiverConfig {
   // Flags for features and experiments.
   //
   bool schedule_periodic_compound_packets = true;
+  // Send rrtr blocks in extended report rtcp packets to calculate rtt.
+  bool calculate_rtt_with_rrtr = false;
 };
 
 }  // namespace webrtc
