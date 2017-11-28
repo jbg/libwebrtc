@@ -46,6 +46,30 @@
       "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8623417_c5288d96",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 5846
+      },
+      "writtenOn": "2017-11-28T12:01:08Z",
+      "side": 1,
+      "message": "This new option corresponds to the PORTALLOCATOR_DISABLE_ADAPTER_ENUMERATION option of the portallocator.h. It was not exposed via RTCConfiguration before.\n\nSome other port allocator options were exposed (for example PORTALLOCATOR_DISABLE_TCP corresponds to the tcp_candidate_policy), but this controls a different thing - how the network interface is selected.",
+      "parentUuid": "9d7f9373_8c0c4b51",
+      "range": {
+        "startLine": 693,
+        "startChar": 9,
+        "endLine": 693,
+        "endChar": 36
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
