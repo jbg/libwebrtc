@@ -22,6 +22,30 @@
       "revId": "3106556e60c6a895465d7e533176eeb0ef60645e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac56b49d_b5b8d649",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-28T16:53:51Z",
+      "side": 1,
+      "message": "I don\u0027t see how this is important. There is no natural ordering for these declarations and the style guide does not have any requirement for this.",
+      "parentUuid": "6622fd23_51b1a4a7",
+      "range": {
+        "startLine": 252,
+        "startChar": 13,
+        "endLine": 252,
+        "endChar": 37
+      },
+      "revId": "3106556e60c6a895465d7e533176eeb0ef60645e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
