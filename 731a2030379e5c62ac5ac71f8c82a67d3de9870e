@@ -16,6 +16,24 @@
       "revId": "731a2030379e5c62ac5ac71f8c82a67d3de9870e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "316da479_d1418a30",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-11-28T14:46:25Z",
+      "side": 1,
+      "message": "Yes, exactly. I\u0027ll remove the extra space at least.",
+      "parentUuid": "00ac820f_a1bc9266",
+      "revId": "731a2030379e5c62ac5ac71f8c82a67d3de9870e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
