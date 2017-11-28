@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba05e684_a84ecc1a",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-28T14:06:33Z",
+      "side": 1,
+      "message": "This CL did not add it, just changed the name of it. I prefer to keep it. Making all functions take rtc::Optional introduces too much nullability I feel.",
+      "parentUuid": "aa581c5f_c228b351",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 32
+      },
+      "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79e50713_a3709bac",
         "filename": "sdk/android/src/jni/jni_helpers.h",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f205c9d9_654c7e04",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-28T14:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79e50713_a3709bac",
+      "range": {
+        "startLine": 235,
+        "startChar": 13,
+        "endLine": 235,
+        "endChar": 32
+      },
+      "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "600b5be8_4813a6b8",
         "filename": "sdk/android/src/jni/pc/statsobserver_jni.cc",
         "patchSetId": 7
@@ -68,6 +116,30 @@
       "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6311cc0_b8bfd68e",
+        "filename": "sdk/android/src/jni/pc/statsobserver_jni.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-28T14:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "600b5be8_4813a6b8",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "ecccdfa4ac9f703466cac94a112d875b4b4c1330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
