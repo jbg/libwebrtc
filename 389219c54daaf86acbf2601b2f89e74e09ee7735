@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7692db51_5b6028bd",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2017-11-28T00:53:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is the right solution to this problem; this will prevent direct intranet connectivity. Also, I think the functionality you are trying to provide here is already controlled by a separate RTCConfiguration option.",
+      "range": {
+        "startLine": 693,
+        "startChar": 9,
+        "endLine": 693,
+        "endChar": 36
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
