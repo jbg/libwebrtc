@@ -63,6 +63,7 @@ class RtcpTransceiverImpl {
   void CreateCompoundPacket(PacketSender* sender);
   // Sends RTCP packets.
   void SendPeriodicCompoundPacket();
+  void SendImmediateFeedback(const rtcp::RtcpPacket& rtcp_packet);
   void SendImmediateFeedback(
       rtc::FunctionView<void(PacketSender*)> append_feedback);
   // Generate Report Blocks to be send in Sender or Receiver Report.
