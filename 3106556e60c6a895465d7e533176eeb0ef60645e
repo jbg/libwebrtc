@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6622fd23_51b1a4a7",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-28T14:54:04Z",
+      "side": 1,
+      "message": "nit: At least match the order of definitions with the order of the declarations.",
+      "range": {
+        "startLine": 252,
+        "startChar": 13,
+        "endLine": 252,
+        "endChar": 37
+      },
+      "revId": "3106556e60c6a895465d7e533176eeb0ef60645e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
