@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00ac820f_a1bc9266",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-28T14:12:51Z",
+      "side": 1,
+      "message": "1. As of C++11, you don\u0027t need the spaces between the closing greater-than signs.\n\n2. It\u0027s better (because it\u0027s more readable) to use `using` instead:\n\n  using StreamList \u003d std::vector\u003cstd::pair\u003cuint32_t, int\u003e\u003e;\n\n3. It would be much better to replace the std::pair with a struct, so that guessing what the two members mean isn\u0027t so hard. I recognize that such a change doesn\u0027t belong is this CL, though---I assume you\u0027re just duplicating a typedef in a file that you don\u0027t want to #include anymore because it would cause a circular dependency?",
+      "revId": "731a2030379e5c62ac5ac71f8c82a67d3de9870e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
