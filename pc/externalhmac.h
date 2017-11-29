@@ -49,19 +49,19 @@ srtp_err_status_t external_hmac_alloc(srtp_auth_t** a,
 
 srtp_err_status_t external_hmac_dealloc(srtp_auth_t* a);
 
-srtp_err_status_t external_hmac_init(ExternalHmacContext* state,
+srtp_err_status_t external_hmac_init(void* state,
                                      const uint8_t* key,
                                      int key_len);
 
-srtp_err_status_t external_hmac_start(ExternalHmacContext* state);
+srtp_err_status_t external_hmac_start(void* /*state*/);
 
-srtp_err_status_t external_hmac_update(ExternalHmacContext* state,
-                                       const uint8_t* message,
-                                       int msg_octets);
+srtp_err_status_t external_hmac_update(void* /*state*/,
+                                       const uint8_t* /*message*/,
+                                       int /*msg_octets*/);
 
-srtp_err_status_t external_hmac_compute(ExternalHmacContext* state,
-                                        const void* message,
-                                        int msg_octets,
+srtp_err_status_t external_hmac_compute(void* /*state*/,
+                                        const uint8_t* /*message*/,
+                                        int /*msg_octets*/,
                                         int tag_len,
                                         uint8_t* result);
 
