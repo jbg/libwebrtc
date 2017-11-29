@@ -46,6 +46,30 @@
       "revId": "3106556e60c6a895465d7e533176eeb0ef60645e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc838424_a9a3a1c8",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-11-29T08:22:27Z",
+      "side": 1,
+      "message": "I think you may have misunderstood. I generally prefer having methods in the same order in the header file as the source file. Here they are in order NativeToJavaLongArray, NativeToJavaDoubleArray. In the source file they are in order NativeToJavaDoubleArray, NativeToJavaLongArray.\n\nYes, this is not super important (hence a nit) but I think it makes it easier to navigate the source files.",
+      "parentUuid": "ac56b49d_b5b8d649",
+      "range": {
+        "startLine": 252,
+        "startChar": 13,
+        "endLine": 252,
+        "endChar": 37
+      },
+      "revId": "3106556e60c6a895465d7e533176eeb0ef60645e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
