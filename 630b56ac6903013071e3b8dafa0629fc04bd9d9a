@@ -22,6 +22,30 @@
       "revId": "630b56ac6903013071e3b8dafa0629fc04bd9d9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5a8561e_08b5dd69",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4386,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-11-29T18:03:39Z",
+      "side": 1,
+      "message": "Yes, I agree it\u0027s confusing between content_name and mid since they are the same thing but have different names. I can\u0027t think of any reason why we couldn\u0027t just do a global rename of content_name --\u003e mid. Any thoughts?",
+      "parentUuid": "013eed4c_cbd38436",
+      "range": {
+        "startLine": 4386,
+        "startChar": 47,
+        "endLine": 4386,
+        "endChar": 50
+      },
+      "revId": "630b56ac6903013071e3b8dafa0629fc04bd9d9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
