@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "be276e24_6e982f35",
+        "filename": "video/picture_id_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-11-29T10:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ef03f85_eb44eb1b",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 23
+      },
+      "revId": "1f28a8482c233b140149a948a241d2fedc2df3ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd4dea62_4a2311fe",
         "filename": "video/picture_id_tests.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ed82875f_7adbbe61",
+        "filename": "video/picture_id_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-11-29T10:30:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd4dea62_4a2311fe",
+      "range": {
+        "startLine": 365,
+        "startChar": 40,
+        "endLine": 365,
+        "endChar": 60
+      },
+      "revId": "1f28a8482c233b140149a948a241d2fedc2df3ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b49f9e6_d59a4c24",
         "filename": "video/picture_id_tests.cc",
         "patchSetId": 4
@@ -59,6 +107,24 @@
       "writtenOn": "2017-11-28T20:08:02Z",
       "side": 1,
       "message": "Add ContinuousAfterReconfigureVp9?",
+      "revId": "1f28a8482c233b140149a948a241d2fedc2df3ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e35fa524_c50086f1",
+        "filename": "video/picture_id_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-11-29T10:30:58Z",
+      "side": 1,
+      "message": "Yes. Will add it in a separate CL (some changes are needed, VCMCodecDataBase::RequiresEncoderReset is false right now).",
+      "parentUuid": "8b49f9e6_d59a4c24",
       "revId": "1f28a8482c233b140149a948a241d2fedc2df3ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
