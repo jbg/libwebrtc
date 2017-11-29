@@ -36,6 +36,8 @@ using ::webrtc::MockTransport;
 using ::webrtc::NtpTime;
 using ::webrtc::RtcpTransceiverConfig;
 using ::webrtc::RtcpTransceiverImpl;
+using ::webrtc::SaturatedUsToCompactNtp;
+using ::webrtc::TimeMicrosToNtp;
 using ::webrtc::rtcp::ReportBlock;
 using ::webrtc::rtcp::SenderReport;
 using ::webrtc::test::RtcpPacketParser;
@@ -43,6 +45,12 @@ using ::webrtc::test::RtcpPacketParser;
 class MockReceiveStatisticsProvider : public webrtc::ReceiveStatisticsProvider {
  public:
   MOCK_METHOD1(RtcpReportBlocks, std::vector<ReportBlock>(size_t));
+};
+
+class MockRtcpRttStats : public webrtc::RtcpRttStats {
+ public:
+  MOCK_METHOD1(OnRttUpdate, void(int64_t));
+  MOCK_CONST_METHOD0(LastProcessedRtt, int64_t());
 };
 
 // Since some tests will need to wait for this period, make it small to avoid
@@ -580,6 +588,96 @@ TEST(RtcpTransceiverImplTest, KeyFrameRequestCreatesReducedSizePacket) {
   // Test sent packet is reduced size by expecting absense of receiver report.
   EXPECT_EQ(transport.num_packets(), 1);
   EXPECT_EQ(rtcp_parser.receiver_report()->num_packets(), 0);
+}
+
+TEST(RtcpTransceiverImplTest, SendsXrRrtrWhenEnabled) {
+  const uint32_t kSenderSsrc = 4321;
+  rtc::ScopedFakeClock clock;
+  RtcpTransceiverConfig config;
+  config.feedback_ssrc = kSenderSsrc;
+  config.schedule_periodic_compound_packets = false;
+  RtcpPacketParser rtcp_parser;
+  RtcpParserTransport transport(&rtcp_parser);
+  config.outgoing_transport = &transport;
+  config.calculate_rtt_with_rrtr = true;
+  RtcpTransceiverImpl rtcp_transceiver(config);
+
+  rtcp_transceiver.SendCompoundPacket();
+  NtpTime ntp_time_now = TimeMicrosToNtp(rtc::TimeMicros());
+
+  EXPECT_GT(rtcp_parser.xr()->num_packets(), 0);
+  EXPECT_EQ(rtcp_parser.xr()->sender_ssrc(), kSenderSsrc);
+  ASSERT_TRUE(rtcp_parser.xr()->rrtr());
+  EXPECT_EQ(rtcp_parser.xr()->rrtr()->ntp(), ntp_time_now);
+}
+
+TEST(RtcpTransceiverImplTest, SendsNoXrRrtrWhenDisabled) {
+  RtcpTransceiverConfig config;
+  config.schedule_periodic_compound_packets = false;
+  RtcpPacketParser rtcp_parser;
+  RtcpParserTransport transport(&rtcp_parser);
+  config.outgoing_transport = &transport;
+  config.calculate_rtt_with_rrtr = false;
+  RtcpTransceiverImpl rtcp_transceiver(config);
+
+  rtcp_transceiver.SendCompoundPacket();
+
+  EXPECT_EQ(transport.num_packets(), 1);
+  // Extended reports rtcp packet might be included for another reason,
+  // but it shouldn't contain rrtr block.
+  EXPECT_FALSE(rtcp_parser.xr()->rrtr());
+}
+
+TEST(RtcpTransceiverImplTest, CalculatesRoundTripTimeOnDlrr) {
+  // https://tools.ietf.org/html/rfc3611#section-4.4
+  const uint32_t kSenderSsrc = 4321;
+  MockRtcpRttStats rtt_observer;
+  MockTransport null_transport;
+  RtcpTransceiverConfig config;
+  config.feedback_ssrc = kSenderSsrc;
+  config.schedule_periodic_compound_packets = false;
+  config.outgoing_transport = &null_transport;
+  config.calculate_rtt_with_rrtr = true;
+  config.rtt_observer = &rtt_observer;
+  RtcpTransceiverImpl rtcp_transceiver(config);
+
+  int64_t time_us = 12345678;
+  webrtc::rtcp::ReceiveTimeInfo rti;
+  rti.ssrc = kSenderSsrc;
+  rti.last_rr = CompactNtp(TimeMicrosToNtp(time_us));
+  rti.delay_since_last_rr = SaturatedUsToCompactNtp(10 * 1000);
+  webrtc::rtcp::ExtendedReports xr;
+  xr.AddDlrrItem(rti);
+  auto raw_packet = xr.Build();
+
+  EXPECT_CALL(rtt_observer, OnRttUpdate(100 /* rtt_ms */));
+  rtcp_transceiver.ReceivePacket(raw_packet, time_us + 110 * 1000);
+}
+
+TEST(RtcpTransceiverImplTest, IgnoresUnknownSsrcInDlrr) {
+  // https://tools.ietf.org/html/rfc3611#section-4.4
+  const uint32_t kSenderSsrc = 4321;
+  const uint32_t kUnknownSsrc = 4322;
+  MockRtcpRttStats rtt_observer;
+  MockTransport null_transport;
+  RtcpTransceiverConfig config;
+  config.feedback_ssrc = kSenderSsrc;
+  config.schedule_periodic_compound_packets = false;
+  config.outgoing_transport = &null_transport;
+  config.calculate_rtt_with_rrtr = true;
+  config.rtt_observer = &rtt_observer;
+  RtcpTransceiverImpl rtcp_transceiver(config);
+
+  int64_t time_us = 12345678;
+  webrtc::rtcp::ReceiveTimeInfo rti;
+  rti.ssrc = kUnknownSsrc;
+  rti.last_rr = CompactNtp(TimeMicrosToNtp(time_us));
+  webrtc::rtcp::ExtendedReports xr;
+  xr.AddDlrrItem(rti);
+  auto raw_packet = xr.Build();
+
+  EXPECT_CALL(rtt_observer, OnRttUpdate(_)).Times(0);
+  rtcp_transceiver.ReceivePacket(raw_packet, time_us + 100000);
 }
 
 }  // namespace
