@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e58680ae_34cdd754",
+        "filename": "pc/externalhmac.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-29T10:26:07Z",
+      "side": 1,
+      "message": "Only tangentially related to your change, but it\u0027d be great if you could comment out the names of unused arguments while you\u0027re changing these lines:\n\n  srtp_err_status_t external_hmac_start(void* /*state*/) {\n\nIt would make both the code and the change easier to read.",
+      "range": {
+        "startLine": 120,
+        "startChar": 38,
+        "endLine": 120,
+        "endChar": 49
+      },
+      "revId": "06168192cdebe63eec236cfce878a62a2268eaea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c844b5ea_a63279a5",
+        "filename": "pc/externalhmac.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-11-29T10:26:07Z",
+      "side": 1,
+      "message": "We put these in a struct-of-function-pointers whose fields use void* and not ExternalHmacContext* for the state argument, is that it? So after making this change, the function signatures match the signatures of the struct fields where we store pointers to them?",
+      "revId": "06168192cdebe63eec236cfce878a62a2268eaea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
