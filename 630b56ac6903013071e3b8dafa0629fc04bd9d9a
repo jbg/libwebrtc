@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "013eed4c_cbd38436",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4386,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-11-29T07:38:43Z",
+      "side": 1,
+      "message": "The concepts of \"content_name\", \"mid\" and \"transport_name\" could be a little bit confusing. Maybe add a comment for it? \"content_name\" used to be the ID for BaseChannels in PlanB SDP. Maybe we should get rid of the \"content_name\" in BaseChannel and use mid instead?",
+      "range": {
+        "startLine": 4386,
+        "startChar": 47,
+        "endLine": 4386,
+        "endChar": 50
+      },
+      "revId": "630b56ac6903013071e3b8dafa0629fc04bd9d9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
