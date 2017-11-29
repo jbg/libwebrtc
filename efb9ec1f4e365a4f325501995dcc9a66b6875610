@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdb9ed28_803bbe04",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-29T07:48:37Z",
+      "side": 1,
+      "message": "Since an RTCP PLI message carries only a single ssrc(?), it makes sense to me to stay close to that in this interface and not implement additional features.\n\nHowever, this has the drawback that if we want to send PLI for several ssrcs at the same time, we\u0027ll now emit one RTCP-over-UDP packet (possibly a full \"compound packet\") for each. I\u0027m not sure if that is a problem? If we need to do something about that, I think the right interface is to have methods like AddPictureLossIndication, AddNack, ..., which builds up a packet without sending it on the wire, and some Send/Flush method which emits a packet including all added messages.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "efb9ec1f4e365a4f325501995dcc9a66b6875610",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
