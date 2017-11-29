@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "069cd527_a7bf9a14",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-29T12:34:47Z",
+      "side": 1,
+      "message": "nit: Drop extra //-lines, for consistency with surrounding comments.",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 4
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e94bc6f_5eaba691",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-29T12:34:47Z",
+      "side": 1,
+      "message": "Include the expansions of the rrtr and dlrr acronyms in the comment. Could also mention the relation to rtt_observer.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 75
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b5a0938_8d147994",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-29T12:34:47Z",
+      "side": 1,
+      "message": "Do I get this right, that this conversion to \"compact ntp\" is needed to get correct 32-bit wraparound when computing rtt_ntp a few lines below? Might deserve a comment.",
+      "range": {
+        "startLine": 207,
+        "startChar": 32,
+        "endLine": 207,
+        "endChar": 42
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0891d76f_bf443c09",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-29T12:34:47Z",
+      "side": 1,
+      "message": "This callback will be invoked on the rtcp task queue. What\u0027s the intended receiver of the callback? Some internal method which returns quickly?",
+      "range": {
+        "startLine": 215,
+        "startChar": 28,
+        "endLine": 215,
+        "endChar": 39
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4174e0ae_3550a34b",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-29T12:34:47Z",
+      "side": 1,
+      "message": "What is this method for? It seems unused in this cl.",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 37
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
