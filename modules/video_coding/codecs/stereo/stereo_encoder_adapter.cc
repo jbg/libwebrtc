@@ -74,13 +74,18 @@ int StereoEncoderAdapter::InitEncode(const VideoCodec* inst,
   // It is more expensive to encode 0x00, so use 0x80 instead.
   std::fill(stereo_dummy_planes_.begin(), stereo_dummy_planes_.end(), 0x80);
 
+  RTC_DCHECK_EQ(kVideoCodecStereo, inst->codecType);
+  RTC_DCHECK(inst->associatedCodecType.has_value());
+  VideoCodec settings = *inst;
+  settings.codecType = *inst->associatedCodecType;
+  const SdpVideoFormat format(CodecTypeToPayloadString(settings.codecType));
   for (size_t i = 0; i < kAlphaCodecStreams; ++i) {
-    const SdpVideoFormat format("VP9");
     std::unique_ptr<VideoEncoder> encoder =
         factory_->CreateVideoEncoder(format);
-    const int rv = encoder->InitEncode(inst, number_of_cores, max_payload_size);
+    const int rv =
+        encoder->InitEncode(&settings, number_of_cores, max_payload_size);
     if (rv) {
-      RTC_LOG(LS_ERROR) << "Failed to create stere codec index " << i;
+      RTC_LOG(LS_ERROR) << "Failed to create stereo codec index " << i;
       return rv;
     }
     adapter_callbacks_.emplace_back(new AdapterEncodedImageCallback(

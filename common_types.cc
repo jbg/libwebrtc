@@ -100,6 +100,8 @@ VideoCodec::VideoCodec()
       timing_frame_thresholds({0, 0}),
       codec_specific_() {}
 
+VideoCodec::~VideoCodec() = default;
+
 VideoCodecVP8* VideoCodec::VP8() {
   RTC_DCHECK_EQ(codecType, kVideoCodecVP8);
   return &codec_specific_.VP8;
@@ -137,6 +139,7 @@ static const char* kPayloadNameI420 = "I420";
 static const char* kPayloadNameRED = "RED";
 static const char* kPayloadNameULPFEC = "ULPFEC";
 static const char* kPayloadNameGeneric = "Generic";
+static const char* kPayloadNameStereo = "Stereo";
 
 static bool CodecNamesEq(const char* name1, const char* name2) {
   return _stricmp(name1, name2) == 0;
@@ -156,10 +159,15 @@ const char* CodecTypeToPayloadString(VideoCodecType type) {
       return kPayloadNameRED;
     case kVideoCodecULPFEC:
       return kPayloadNameULPFEC;
-    default:
-      // Unrecognized codecs default to generic.
+    case kVideoCodecStereo:
+      return kPayloadNameStereo;
+    // Other codecs default to generic.
+    case kVideoCodecFlexfec:
+    case kVideoCodecGeneric:
+    case kVideoCodecUnknown:
       return kPayloadNameGeneric;
   }
+  return kPayloadNameGeneric;
 }
 
 VideoCodecType PayloadStringToCodecType(const std::string& name) {
@@ -175,6 +183,8 @@ VideoCodecType PayloadStringToCodecType(const std::string& name) {
     return kVideoCodecRED;
   if (CodecNamesEq(name.c_str(), kPayloadNameULPFEC))
     return kVideoCodecULPFEC;
+  if (CodecNamesEq(name.c_str(), kPayloadNameStereo))
+    return kVideoCodecStereo;
   return kVideoCodecGeneric;
 }
 

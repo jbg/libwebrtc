@@ -529,6 +529,7 @@ enum VideoCodecMode { kRealtimeVideo, kScreensharing };
 class VideoCodec {
  public:
   VideoCodec();
+  ~VideoCodec();
 
   // Public variables. TODO(hta): Make them private with accessors.
   VideoCodecType codecType;
@@ -552,6 +553,9 @@ class VideoCodec {
 
   VideoCodecMode mode;
   bool expect_encode_from_texture;
+
+  // Only used for stereo codec.
+  rtc::Optional<VideoCodecType> associatedCodecType;
 
   // Timing frames configuration. There is delay of delay_ms between two
   // consequent timing frames, excluding outliers. Frame is always made a

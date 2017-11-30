@@ -39,6 +39,22 @@ bool VideoCodecInitializer::SetupCodec(
     bool nack_enabled,
     VideoCodec* codec,
     std::unique_ptr<VideoBitrateAllocator>* bitrate_allocator) {
+  if (settings.stereo_associated_payload_name.has_value()) {
+    VideoSendStream::Config::EncoderSettings associated_codec_settings =
+        settings;
+    associated_codec_settings.payload_name =
+        *settings.stereo_associated_payload_name;
+    associated_codec_settings.stereo_associated_payload_name.reset();
+    if (!SetupCodec(config, associated_codec_settings, streams, nack_enabled,
+                    codec, bitrate_allocator)) {
+      RTC_LOG(LS_ERROR) << "Failed to create stereo encoder configuration.";
+      return false;
+    }
+    codec->associatedCodecType = codec->codecType;
+    codec->codecType = kVideoCodecStereo;
+    return true;
+  }
+
   *codec =
       VideoEncoderConfigToVideoCodec(config, streams, settings.payload_name,
                                      settings.payload_type, nack_enabled);
