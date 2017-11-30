@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "d8cf12f4_c3a33456",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-30T12:14:39Z",
+      "side": 1,
+      "message": "\"dlrr\" in the name is still somewhat mysterious without further context...\n\nI have had a quick look at the rfc, and I think I understand roughly what it\u0027s for. Some questions:\n\n1. Do we have any use for the RTT based on DLRR, if the callback is NULL? If not, we don\u0027t need a separate bool flag.\n\n2. This config flag controls both processing of received DLRR, and transmission of RRTR. But if I understood this correctly, there\u0027s little point in sending RRTR if we are a media sender and can expect to get DLSR (delay since sender report)? And whether or not we\u0027re a media sender isn\u0027t a construction time property. And then we don\u0027t yet do any DLSR, is that something you plan to do soon?\n\n3. Maybe I\u0027m missing something, but I don\u0027t see the code to send DLRR in response to RTRR. It would make some sense to me to have that in the same cl, with some kind of end-to-end test of this signalling.",
+      "parentUuid": "39e59bbc_4d99a504",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 75
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b5a0938_8d147994",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 8

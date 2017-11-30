@@ -1,0 +1,28 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4a7e334_38fb98c5",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-30T12:14:39Z",
+      "side": 1,
+      "message": "\u003e That is one of the guarantee would like to provide: all callbacks happen on the TaskQueue. (added comment to the configuration)\n\nMakes sense to me, good that you documented that.\n\n\u003e Preferably it returns quickly (e.g. PostTask to another queue if need long processing), but not sure why this expectation is required.\n\nIf it\u0027s ultimately passed to the application, then service of the task queue will depend on the application being well-behaved. Which, if I\u0027ve understood things correctly, is why old code uses the signal thread to invoke various callbacks.\n\nBut that concern might not apply at all in this layer of the code.",
+      "parentUuid": "b8a33fc2_07b3369b",
+      "range": {
+        "startLine": 215,
+        "startChar": 28,
+        "endLine": 215,
+        "endChar": 39
+      },
+      "revId": "a06569f2f4d69f5cfbee31541fec9db324da75ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
