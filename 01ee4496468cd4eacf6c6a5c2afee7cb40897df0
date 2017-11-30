@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6aaec966_e4b900a2",
+        "filename": "media/engine/convert_legacy_video_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-30T09:47:22Z",
+      "side": 1,
+      "message": "Chromium is not using this file anymore. You should be able to do this in the Chromium factory directly.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42accd7a_49b5ab01",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 2
@@ -85,6 +108,30 @@
       "side": 1,
       "message": "Good point. I will make it refer to payload int instead of codec name. That would make life easier.",
       "parentUuid": "96f6df7e_3865fa1a",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 5
+      },
+      "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb974729_4e906837",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-11-30T09:47:22Z",
+      "side": 1,
+      "message": "The problem is that external factories don\u0027t have access to the payload types. Assigning payload types is something WebRTC is responsible for at the moment. So you wouldn\u0027t be able to inject an external codec referencing another payload type with the current API.",
+      "parentUuid": "6d35eeb6_4caaa495",
       "range": {
         "startLine": 567,
         "startChar": 0,
