@@ -83,6 +83,18 @@ std::string VideoSendStream::Config::ToString() const {
   return ss.str();
 }
 
+VideoSendStream::Config::EncoderSettings::EncoderSettings() = default;
+VideoSendStream::Config::EncoderSettings::EncoderSettings(
+    const EncoderSettings&) = default;
+VideoSendStream::Config::EncoderSettings::EncoderSettings(
+    std::string payload_name,
+    int payload_type,
+    VideoEncoder* encoder)
+    : payload_name(std::move(payload_name)),
+      payload_type(payload_type),
+      encoder(encoder) {}
+VideoSendStream::Config::EncoderSettings::~EncoderSettings() = default;
+
 std::string VideoSendStream::Config::EncoderSettings::ToString() const {
   std::stringstream ss;
   ss << "{payload_name: " << payload_name;

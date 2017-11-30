@@ -252,11 +252,40 @@ bool VideoCodec::Matches(const VideoCodec& other) const {
   return true;
 }
 
+// static
 VideoCodec VideoCodec::CreateRtxCodec(int rtx_payload_type,
                                       int associated_payload_type) {
   VideoCodec rtx_codec(rtx_payload_type, kRtxCodecName);
   rtx_codec.SetParam(kCodecParamAssociatedPayloadType, associated_payload_type);
   return rtx_codec;
+}
+
+// static
+VideoCodec VideoCodec::CreateStereoCodec(int stereo_payload_type,
+                                         int associated_payload_type) {
+  VideoCodec stereo_codec(stereo_payload_type, kStereoCodecName);
+  stereo_codec.SetParam(kCodecParamAssociatedPayloadType,
+                        associated_payload_type);
+  return stereo_codec;
+}
+
+// static
+rtc::Optional<std::string> VideoCodec::GetStereoAssociatedCodecName(
+    const VideoCodec& codec) {
+  if (!VideoCodec::IsStereoCodec(codec))
+    return rtc::nullopt;
+
+  std::string associated_codec_name;
+  if (!codec.GetParam(kCodecParamAssociatedCodecName, &associated_codec_name)) {
+    RTC_LOG(LS_WARNING) << "Stereo codec is missing an associated codec type.";
+    return rtc::nullopt;
+  }
+  return associated_codec_name;
+}
+
+// static
+bool VideoCodec::IsStereoCodec(const VideoCodec& codec) {
+  return CodecNamesEq(codec.name.c_str(), kStereoCodecName);
 }
 
 VideoCodec::CodecType VideoCodec::GetCodecType() const {

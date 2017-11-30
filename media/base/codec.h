@@ -202,6 +202,12 @@ struct VideoCodec : public Codec {
   static VideoCodec CreateRtxCodec(int rtx_payload_type,
                                    int associated_payload_type);
 
+  static VideoCodec CreateStereoCodec(int stereo_payload_type,
+                                      int associated_payload_type);
+  static rtc::Optional<std::string> GetStereoAssociatedCodecName(
+      const VideoCodec& codec);
+  static bool IsStereoCodec(const VideoCodec& codec);
+
   enum CodecType {
     CODEC_VIDEO,
     CODEC_RED,
