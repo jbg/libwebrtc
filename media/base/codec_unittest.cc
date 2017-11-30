@@ -266,6 +266,16 @@ TEST(CodecTest, TestCreateRtxCodec) {
   EXPECT_EQ(120, associated_payload_type);
 }
 
+TEST(CodecTest, TestCreateStereoCodec) {
+  VideoCodec rtx_codec = VideoCodec::CreateStereoCodec(96, 120);
+  EXPECT_EQ(96, rtx_codec.id);
+  EXPECT_EQ(VideoCodec::CODEC_VIDEO, rtx_codec.GetCodecType());
+  int associated_payload_type;
+  ASSERT_TRUE(rtx_codec.GetParam(kCodecParamAssociatedPayloadType,
+                                 &associated_payload_type));
+  EXPECT_EQ(120, associated_payload_type);
+}
+
 TEST(CodecTest, TestValidateCodecFormat) {
   const VideoCodec codec(96, "V");
   ASSERT_TRUE(codec.ValidateCodecFormat());
