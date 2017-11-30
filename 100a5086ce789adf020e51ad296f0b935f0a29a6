@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bbd0c109_78c50748",
+        "filename": "media/base/codec_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-30T21:47:22Z",
+      "side": 1,
+      "message": "Renamed.",
+      "parentUuid": "72b37f20_5dd4ebbb",
+      "revId": "100a5086ce789adf020e51ad296f0b935f0a29a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e64aa438_3c1f697e",
         "filename": "media/base/mediaconstants.cc",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2017-11-30T17:26:50Z",
       "side": 1,
       "message": "Is this to attempt to simplify things, by referring to a name instead of payload type? That may not always work though. You may have two codecs with the same name. I think you\u0027ll need to use apt ultimately.",
+      "revId": "100a5086ce789adf020e51ad296f0b935f0a29a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8bbdbdc_e527d81b",
+        "filename": "media/base/mediaconstants.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-30T21:47:22Z",
+      "side": 1,
+      "message": "Yes, my goal was to use only \"apt\" but there were two missing links that I couldn\u0027t find a solution but to use this. I am open to your suggestions how to replace.\n- VideoCodecInitializer::SetupCodec() initializes the codec for the underlying encoder implementation and requires codec name. WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec() passes the codec name by filling |encoder_settings|. However, we do not have a way of converting from payload int to codec name there. Last point that I saw such convertion possible is in MergeCodecs() of mediasession.cc. Hence I set this param there.\n- On the receiver end, how can we convert from payload int to the actual codec name? See CreateDecoderVideoCodec() in video_receive_stream.cc where that is necessary.",
+      "parentUuid": "e64aa438_3c1f697e",
       "revId": "100a5086ce789adf020e51ad296f0b935f0a29a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "55b88ac0_222618fd",
+        "filename": "media/engine/stereocodecfactory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-30T21:47:22Z",
+      "side": 1,
+      "message": "- That is not known.\n- Since we have multiple encoder sessions and HW encoders mostly support one session at a time, we usually fall back to software. I thought this would be safe call there.",
+      "parentUuid": "6622404e_5f84a0c2",
+      "revId": "100a5086ce789adf020e51ad296f0b935f0a29a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "000b9ca1_0db2f4f2",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 9
@@ -67,6 +121,24 @@
       "revId": "100a5086ce789adf020e51ad296f0b935f0a29a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c00f679d_aba40dc2",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-30T21:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "000b9ca1_0db2f4f2",
+      "revId": "100a5086ce789adf020e51ad296f0b935f0a29a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
