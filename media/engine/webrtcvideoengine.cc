@@ -239,6 +239,16 @@ std::vector<VideoCodec> AssignPayloadTypesAndDefaultCodecs(
       if (payload_type > kLastDynamicPayloadType)
         break;
     }
+
+    if (VideoCodec::IsStereoCodec(codec)) {
+      int associated_codec_id = -1;
+      for (const auto& output_codec : output_codecs) {
+        if (CodecNamesEq(output_codec.name, kVp9CodecName))
+          associated_codec_id = codec.id;
+      }
+      output_codecs.push_back(
+          VideoCodec::CreateStereoCodec(payload_type, associated_codec_id));
+    }
   }
   return output_codecs;
 }
@@ -1719,6 +1729,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec(
   }
   parameters_.config.encoder_settings.payload_name = codec_settings.codec.name;
   parameters_.config.encoder_settings.payload_type = codec_settings.codec.id;
+  parameters_.config.encoder_settings.stereo_associated_payload_name =
+      VideoCodec::GetStereoAssociatedCodecName(codec_settings.codec);
   parameters_.config.rtp.ulpfec = codec_settings.ulpfec;
   parameters_.config.rtp.flexfec.payload_type =
       codec_settings.flexfec_payload_type;
