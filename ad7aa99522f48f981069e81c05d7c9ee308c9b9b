@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "247ce153_4763c1d8",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-11-30T10:39:18Z",
+      "side": 1,
+      "message": "I think it should be moved to base, I could do it in another CL if you like.",
+      "parentUuid": "a7b9be7d_50a442b6",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ddf9c8dc_494460ac",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 1
