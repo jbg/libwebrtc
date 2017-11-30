@@ -70,6 +70,30 @@
       "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d35eeb6_4caaa495",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-11-30T03:31:43Z",
+      "side": 1,
+      "message": "Good point. I will make it refer to payload int instead of codec name. That would make life easier.",
+      "parentUuid": "96f6df7e_3865fa1a",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 5
+      },
+      "revId": "01ee4496468cd4eacf6c6a5c2afee7cb40897df0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
