@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "03972529_5b2b8ed9",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-30T11:49:00Z",
+      "side": 1,
+      "message": "Done (will introduce to make it section-like comment (like Tuning parameters or Flags) if there will be more global callbacks",
+      "parentUuid": "069cd527_a7bf9a14",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 4
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e94bc6f_5eaba691",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39e59bbc_4d99a504",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-30T11:49:00Z",
+      "side": 1,
+      "message": "that made comment too large in my opinion, so instead I unmentioned rrtr and dlrr and made comment more generic (but kept the link where reader can find technical details)\n\nchange the name of the experiment too",
+      "parentUuid": "2e94bc6f_5eaba691",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 75
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "889100c8_b330a7d6",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-30T11:49:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b5a0938_8d147994",
+      "range": {
+        "startLine": 207,
+        "startChar": 32,
+        "endLine": 207,
+        "endChar": 42
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0891d76f_bf443c09",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "b8a33fc2_07b3369b",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-30T11:49:00Z",
+      "side": 1,
+      "message": "That is one of the guarantee would like to provide: all callbacks happen on the TaskQueue. (added comment to the configuration)\n\nPreferably it returns quickly (e.g. PostTask to another queue if need long processing), but not sure why this expectation is required.\nIf it turn out to be a problem, I\u0027ll consider adding another TaskQueue* for_callbacks to the configuration.",
+      "parentUuid": "0891d76f_bf443c09",
+      "range": {
+        "startLine": 215,
+        "startChar": 28,
+        "endLine": 215,
+        "endChar": 39
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4174e0ae_3550a34b",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
         "patchSetId": 8
@@ -114,6 +210,30 @@
       "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cb5c8cb_6defb058",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-30T11:49:00Z",
+      "side": 1,
+      "message": "It is pure virtual in the webrtc::RtcpRttStats interface, so have to add it to the mock.\nFor some reason missed this mock already defined in dedicated file. including that one instead.",
+      "parentUuid": "4174e0ae_3550a34b",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 37
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
