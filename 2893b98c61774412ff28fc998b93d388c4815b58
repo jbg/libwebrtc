@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "6f7973f6_654ab284",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-11-30T13:03:08Z",
+      "side": 1,
+      "message": "unmentioned dlrr in the flag name.\n\nI\u0027m planing a bit ahead here:\n1. RttObserver is how RtcpTransceiver is used (in fact it would be odd to use RtcpTransciver and ignore rtt altogether).\nflag is what to put into rtcp messages on the wire. Prefer to keep that split (but added a warning to Config::Validate it would be odd to use one without another).\n\nWhen calculating RTT using SenderReports is fully implemented, same rtt_observer will be used to report it.\n\n2. It is something I definitely plan when will start adding features for rtp sender. \u0027Soon\u0027 is hope. In particular it will make sense not to send rrtr if there is at least one sender i.e. if sender report was generated, not receiver report. (added a TODO)\n\n3. That is sender feature too. It will be very similar to how current RtcpTransceiver react to sender report by adding last_rr and delay to report blocks. Since all sender specific feature are currently missing, do not see why add TODO for this particular one.\n\nEnd-to-end test would be challenging to write: It would make sense to have 2 different clocks for 2 transceivers representing different endpoints.",
+      "parentUuid": "d8cf12f4_c3a33456",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 75
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b5a0938_8d147994",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 8
