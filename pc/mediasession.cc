@@ -699,6 +699,16 @@ static bool IsRtxCodec(const C& codec) {
 }
 
 template <class C>
+static bool IsStereoCodecx(const C& codec) {
+  return STR_CASE_CMP(codec.name.c_str(), kStereoCodecName) == 0;
+}
+
+template <class C>
+static bool HasAssociatedCodec(const C& codec) {
+  return IsRtxCodec<C>(codec) || IsStereoCodecx<C>(codec);
+}
+
+template <class C>
 static bool ContainsFlexfecCodec(const std::vector<C>& codecs) {
   for (const auto& codec : codecs) {
     if (IsFlexfecCodec(codec)) {
@@ -782,7 +792,7 @@ static void NegotiateCodecs(const std::vector<C>& local_codecs,
     if (FindMatchingCodec(local_codecs, offered_codecs, ours, &theirs)) {
       C negotiated = ours;
       negotiated.IntersectFeedbackParams(theirs);
-      if (IsRtxCodec(negotiated)) {
+      if (HasAssociatedCodec(negotiated)) {
         const auto apt_it =
             theirs.params.find(kCodecParamAssociatedPayloadType);
         // FindMatchingCodec shouldn't return something with no apt value.
@@ -830,7 +840,7 @@ static bool FindMatchingCodec(const std::vector<C>& codecs1,
                           }) != codecs1.end());
   for (const C& potential_match : codecs2) {
     if (potential_match.Matches(codec_to_match)) {
-      if (IsRtxCodec(codec_to_match)) {
+      if (HasAssociatedCodec(codec_to_match)) {
         int apt_value_1 = 0;
         int apt_value_2 = 0;
         if (!codec_to_match.GetParam(kCodecParamAssociatedPayloadType,
@@ -893,7 +903,7 @@ static void MergeCodecs(const std::vector<C>& reference_codecs,
                         UsedPayloadTypes* used_pltypes) {
   // Add all new codecs that are not RTX codecs.
   for (const C& reference_codec : reference_codecs) {
-    if (!IsRtxCodec(reference_codec) &&
+    if (!HasAssociatedCodec(reference_codec) &&
         !FindMatchingCodec<C>(reference_codecs, *offered_codecs,
                               reference_codec, nullptr)) {
       C codec = reference_codec;
@@ -904,7 +914,7 @@ static void MergeCodecs(const std::vector<C>& reference_codecs,
 
   // Add all new RTX codecs.
   for (const C& reference_codec : reference_codecs) {
-    if (IsRtxCodec(reference_codec) &&
+    if (HasAssociatedCodec(reference_codec) &&
         !FindMatchingCodec<C>(reference_codecs, *offered_codecs,
                               reference_codec, nullptr)) {
       C rtx_codec = reference_codec;
@@ -925,6 +935,10 @@ static void MergeCodecs(const std::vector<C>& reference_codecs,
 
       rtx_codec.params[kCodecParamAssociatedPayloadType] =
           rtc::ToString(matching_codec.id);
+      if (IsStereoCodecx(reference_codec)) {
+        rtx_codec.params[kCodecParamAssociatedCodecName] =
+            rtc::ToString(matching_codec.name);
+      }
       used_pltypes->FindAndSetIdUsed(&rtx_codec);
       offered_codecs->push_back(rtx_codec);
     }

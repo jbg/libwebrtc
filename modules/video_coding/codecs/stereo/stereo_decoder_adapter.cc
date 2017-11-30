@@ -89,10 +89,12 @@ StereoDecoderAdapter::~StereoDecoderAdapter() {
 
 int32_t StereoDecoderAdapter::InitDecode(const VideoCodec* codec_settings,
                                          int32_t number_of_cores) {
+  RTC_DCHECK_EQ(kVideoCodecStereo, codec_settings->codecType);
+  RTC_DCHECK(codec_settings->associatedCodecType.has_value());
   VideoCodec settings = *codec_settings;
-  settings.codecType = kVideoCodecVP9;
+  settings.codecType = *codec_settings->associatedCodecType;
+  const SdpVideoFormat format(CodecTypeToPayloadString(settings.codecType));
   for (size_t i = 0; i < kAlphaCodecStreams; ++i) {
-    const SdpVideoFormat format("VP9");
     std::unique_ptr<VideoDecoder> decoder =
         factory_->CreateVideoDecoder(format);
     const int32_t rv = decoder->InitDecode(&settings, number_of_cores);

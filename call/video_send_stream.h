@@ -108,17 +108,19 @@ class VideoSendStream {
     std::string ToString() const;
 
     struct EncoderSettings {
-      EncoderSettings() = default;
+      EncoderSettings();
+      EncoderSettings(const EncoderSettings&);
       EncoderSettings(std::string payload_name,
                       int payload_type,
-                      VideoEncoder* encoder)
-          : payload_name(std::move(payload_name)),
-            payload_type(payload_type),
-            encoder(encoder) {}
+                      VideoEncoder* encoder);
+      ~EncoderSettings();
+
       std::string ToString() const;
 
       std::string payload_name;
       int payload_type = -1;
+
+      rtc::Optional<std::string> stereo_associated_payload_name;
 
       // TODO(sophiechang): Delete this field when no one is using internal
       // sources anymore.

@@ -15,6 +15,7 @@
 
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
+#include "media/base/codec.h"
 #include "media/base/h264_profile_level_id.h"
 #include "media/engine/internaldecoderfactory.h"
 #include "media/engine/internalencoderfactory.h"
@@ -26,6 +27,8 @@
 #include "media/engine/vp8_encoder_simulcast_proxy.h"
 #include "media/engine/webrtcvideodecoderfactory.h"
 #include "media/engine/webrtcvideoencoderfactory.h"
+#include "modules/video_coding/codecs/stereo/include/stereo_decoder_adapter.h"
+#include "modules/video_coding/codecs/stereo/include/stereo_encoder_adapter.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/ptr_util.h"
 
@@ -103,6 +106,13 @@ class EncoderAdapter : public webrtc::VideoEncoderFactory {
 
   webrtc::VideoEncoderFactory::CodecInfo QueryVideoEncoder(
       const webrtc::SdpVideoFormat& format) const override {
+    if (VideoCodec::IsStereoCodec(VideoCodec(format))) {
+      webrtc::VideoEncoderFactory::CodecInfo info;
+      info.has_internal_source = false;
+      info.is_hardware_accelerated = false;
+      return info;
+    }
+
     if (IsFormatSupported(external_encoder_factory_->GetSupportedFormats(),
                           format)) {
       return external_encoder_factory_->QueryVideoEncoder(format);
@@ -119,6 +129,12 @@ class EncoderAdapter : public webrtc::VideoEncoderFactory {
 
   std::unique_ptr<webrtc::VideoEncoder> CreateVideoEncoder(
       const webrtc::SdpVideoFormat& format) override {
+    // Try creating stereo encoder.
+    if (VideoCodec::IsStereoCodec(VideoCodec(format))) {
+      return std::unique_ptr<webrtc::VideoEncoder>(
+          new webrtc::StereoEncoderAdapter(this));
+    }
+
     // Try creating internal encoder.
     std::unique_ptr<webrtc::VideoEncoder> internal_encoder;
     if (IsFormatSupported(internal_encoder_factory_->GetSupportedFormats(),
@@ -181,6 +197,14 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
 
   std::unique_ptr<webrtc::VideoDecoder> CreateVideoDecoder(
       const webrtc::SdpVideoFormat& format) override {
+    const VideoCodec codec(format);
+
+    // Try creating stereo decoder.
+    if (VideoCodec::IsStereoCodec(codec)) {
+      return std::unique_ptr<webrtc::VideoDecoder>(
+          new webrtc::StereoDecoderAdapter(this));
+    }
+
     std::unique_ptr<webrtc::VideoDecoder> internal_decoder;
     webrtc::InternalDecoderFactory internal_decoder_factory;
     if (IsFormatSupported(internal_decoder_factory.GetSupportedFormats(),
@@ -188,7 +212,6 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
       internal_decoder = internal_decoder_factory.CreateVideoDecoder(format);
     }
 
-    const VideoCodec codec(format);
     const VideoDecoderParams params = {};
     if (external_decoder_factory_ != nullptr) {
       std::unique_ptr<webrtc::VideoDecoder> external_decoder =
