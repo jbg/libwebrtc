@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "b8350d9b_3e0712a7",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-11-30T13:50:14Z",
+      "side": 1,
+      "message": "\u003e flag is what to put into rtcp messages on the wire. Prefer to keep that split (but added a warning to Config::Validate it would be odd to use one without another).\n\nMaybe drop \"calculate\" from the name then. Suggest |enable_receiver_only_rtt_measurement| or (to stay closer to rfc terminology) |enable_non_sender_rtt_measurement|.\n\n\u003e End-to-end test would be challenging to write: It would make sense to have 2 different clocks for 2 transceivers representing different endpoints.\n\nIt might help to have \"current time\" as input to all methods that handle time, instead of calling rtc::TimeMicros. But that\u0027s to be sorted out later.",
+      "parentUuid": "6f7973f6_654ab284",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 75
+      },
+      "revId": "2893b98c61774412ff28fc998b93d388c4815b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b5a0938_8d147994",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 8
