@@ -26,28 +26,3 @@ class MediaFileTest : public testing::Test {
   }
   webrtc::MediaFile* media_file_;
 };
-
-#if defined(WEBRTC_ANDROID) || defined(WEBRTC_IOS)
-#define MAYBE_StartPlayingAudioFileWithoutError \
-  DISABLED_StartPlayingAudioFileWithoutError
-#else
-#define MAYBE_StartPlayingAudioFileWithoutError \
-  StartPlayingAudioFileWithoutError
-#endif
-TEST_F(MediaFileTest, MAYBE_StartPlayingAudioFileWithoutError) {
-  // TODO(leozwang): Use hard coded filename here, we want to
-  // loop through all audio files in future
-  const std::string audio_file =
-      webrtc::test::ResourcePath("voice_engine/audio_tiny48", "wav");
-  ASSERT_EQ(0, media_file_->StartPlayingAudioFile(
-      audio_file.c_str(),
-      0,
-      false,
-      webrtc::kFileFormatWavFile));
-
-  ASSERT_EQ(true, media_file_->IsPlaying());
-
-  webrtc::SleepMs(1);
-
-  ASSERT_EQ(0, media_file_->StopPlaying());
-}
