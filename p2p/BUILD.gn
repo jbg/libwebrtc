@@ -84,6 +84,8 @@ rtc_static_library("rtc_p2p") {
     "client/basicportallocator.h",
     "client/socketmonitor.cc",
     "client/socketmonitor.h",
+    "logging/icelogger.cc",
+    "logging/icelogger.h",
   ]
 
   defines = []

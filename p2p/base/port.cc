@@ -18,6 +18,7 @@
 
 #include "p2p/base/common.h"
 #include "p2p/base/portallocator.h"
+#include "p2p/logging/icelogger.h"
 #include "rtc_base/base64.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/crc32.h"
@@ -92,6 +93,10 @@ const int64_t kForgetPacketAfter = 30000;  // 30 seconds
 }  // namespace
 
 namespace cricket {
+
+// ICE structured logging
+using IceLogger = webrtc::icelog::IceLogger;
+using IceLogConnectionState = webrtc::icelog::IceConnectionState;
 
 // TODO(ronghuawu): Use "local", "srflx", "prflx" and "relay". But this requires
 // the signaling part be updated correspondingly as well.
@@ -1269,6 +1274,9 @@ void Connection::UpdateState(int64_t now) {
                          << now - last_data_received_
                          << " rtt=" << rtt;
     set_write_state(STATE_WRITE_UNRELIABLE);
+    IceLogger::Instance()->LogConnectionStateChange(
+        this, IceLogConnectionState::kWritable,
+        IceLogConnectionState::kWriteUnreliable);
   }
   if ((write_state_ == STATE_WRITE_UNRELIABLE ||
        write_state_ == STATE_WRITE_INIT) &&
@@ -1458,6 +1466,8 @@ void Connection::OnConnectionRequestResponse(ConnectionRequest* request,
   packet_loss_estimator_.ReceivedResponse(request->id(), time_received);
 
   stats_.recv_ping_responses++;
+
+  IceLogger::Instance()->LogConnectionPingResponseReceived(this);
 
   MaybeUpdateLocalCandidate(request, response);
 }
