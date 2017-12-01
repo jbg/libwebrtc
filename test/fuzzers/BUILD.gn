@@ -409,3 +409,14 @@ webrtc_fuzzer_test("audio_processing_fuzzer") {
     "../../rtc_base:rtc_base_approved",
   ]
 }
+
+webrtc_fuzzer_test("webrtc_cng_fuzzer") {
+  sources = [
+    "webrtc_cng_fuzzer.cc",
+  ]
+  deps = [
+    "../../api:array_view",
+    "../../modules/audio_coding:cng",
+    "../../rtc_base:rtc_base_approved",
+  ]
+}
