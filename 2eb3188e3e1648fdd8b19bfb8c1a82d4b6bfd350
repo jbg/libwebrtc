@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c624225f_bfded68c",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-12-01T13:42:18Z",
+      "side": 0,
+      "message": "This CL also removes these include_dirs in the else branch.\n\nIt is not clear to me if the else branch is right or not but I think it isn\u0027t. If $rtc_build_libyuv is false it is not possible to guess anything regarding the location of libyuv headers.",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 48
+      },
+      "revId": "2eb3188e3e1648fdd8b19bfb8c1a82d4b6bfd350",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7d18ae9_06b8c7d9",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-12-01T13:42:18Z",
+      "side": 0,
+      "message": "This was also risky to have.",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "2eb3188e3e1648fdd8b19bfb8c1a82d4b6bfd350",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a092ee7_5a669e24",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-12-01T13:42:18Z",
+      "side": 0,
+      "message": "This is not strictly related to libyuv but it was easy to get rid of it since the only missing dependency is :tools_unittests.",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 3
+      },
+      "revId": "2eb3188e3e1648fdd8b19bfb8c1a82d4b6bfd350",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
