@@ -31,6 +31,7 @@
 #include "p2p/base/icetransportinternal.h"
 #include "p2p/base/portallocator.h"
 #include "p2p/base/portinterface.h"
+#include "p2p/logging/icelogger.h"
 #include "rtc_base/asyncpacketsocket.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/random.h"
@@ -403,6 +404,8 @@ class P2PTransportChannel : public IceTransportInternal,
   webrtc::MetricsObserverInterface* metrics_observer_ = nullptr;
 
   rtc::Optional<rtc::NetworkRoute> network_route_;
+
+  webrtc::icelog::IceLogger* ice_logger_ = nullptr;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(P2PTransportChannel);
 };

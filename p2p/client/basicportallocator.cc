@@ -23,6 +23,7 @@
 #include "p2p/base/tcpport.h"
 #include "p2p/base/turnport.h"
 #include "p2p/base/udpport.h"
+#include "p2p/logging/icelogger.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
@@ -91,6 +92,9 @@ int ComparePort(const cricket::Port* a, const cricket::Port* b) {
 }  // namespace
 
 namespace cricket {
+
+using IceLogger = webrtc::icelog::IceLogger;
+
 const uint32_t DISABLE_ALL_PHASES =
     PORTALLOCATOR_DISABLE_UDP | PORTALLOCATOR_DISABLE_TCP |
     PORTALLOCATOR_DISABLE_STUN | PORTALLOCATOR_DISABLE_RELAY;
@@ -815,6 +819,8 @@ void BasicPortAllocatorSession::OnCandidateReady(
         << "Discarding candidate because port is already done gathering.";
     return;
   }
+
+  IceLogger::Instance()->LogCandidateGathered(port, c);
 
   // Mark that the port has a pairable candidate, either because we have a
   // usable candidate from the port, or simply because the port is bound to the

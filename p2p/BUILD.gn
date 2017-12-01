@@ -7,6 +7,7 @@
 # be found in the AUTHORS file in the root of the source tree.
 
 import("../webrtc.gni")
+import("//third_party/protobuf/proto_library.gni")
 
 group("p2p") {
   public_deps = [
@@ -83,17 +84,25 @@ rtc_static_library("rtc_p2p") {
     "client/basicportallocator.h",
     "client/socketmonitor.cc",
     "client/socketmonitor.h",
+    "logging/icelogger.cc",
+    "logging/icelogger.h",
   ]
 
   defines = []
 
   deps = [
+    ":ice_log",
     "../api:libjingle_peerconnection_api",
     "../api:optional",
     "../api:ortc_api",
     "../rtc_base:rtc_base",
+    "../system_wrappers",
     "../system_wrappers:field_trial_api",
   ]
+
+  if (rtc_enable_protobuf) {
+    defines += [ "ENABLE_ICE_LOG_WITH_PROTOBUF" ]
+  }
 
   public_configs = [ ":rtc_p2p_inherited_config" ]
 
@@ -220,5 +229,38 @@ if (rtc_include_tests) {
       "//testing/gtest",
     ]
     defines = [ "GTEST_RELATIVE_PATH" ]
+  }
+}
+
+rtc_static_library("ice_log") {
+  sources = [
+    "logging/icelogtype.cc",
+    "logging/icelogtype.h",
+    "logging/stringifiedenum.cc",
+    "logging/stringifiedenum.h",
+  ]
+
+  defines = []
+
+  if (rtc_enable_protobuf) {
+    defines += [ "ENABLE_ICE_LOG_WITH_PROTOBUF" ]
+  }
+
+  deps = [
+    "..:webrtc_common",
+    "../rtc_base:rtc_base",
+  ]
+
+  public_deps = [
+    ":ice_log_proto",
+  ]
+}
+
+if (rtc_enable_protobuf) {
+  proto_library("ice_log_proto") {
+    sources = [
+      "logging/keyvaluepair.proto",
+    ]
+    proto_out_dir = "p2p/logging"
   }
 }
