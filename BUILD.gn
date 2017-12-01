@@ -298,7 +298,7 @@ if (!build_with_chromium) {
   if (rtc_include_tests) {
     # Target to build all the WebRTC tests (but not examples or tools).
     # Executable in order to get a target that links all WebRTC code.
-    rtc_executable("webrtc_tests") {
+    rtc_static_library("webrtc_tests") {
       testonly = true
 
       # Only the root target should depend on this.
