@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6abf0d76_c5ff8135",
+        "filename": "video/overuse_frame_detector_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-12-01T10:02:17Z",
+      "side": 1,
+      "message": "nit: EXPECT_NEAR ?",
+      "range": {
+        "startLine": 328,
+        "startChar": 32,
+        "endLine": 328,
+        "endChar": 0
+      },
+      "revId": "15541f5adc7ced9cd94c6b556e3bcd2b84c851bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
