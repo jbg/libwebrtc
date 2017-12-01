@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3205875e_b2c67c81",
+        "filename": "logging/ice_log/icelogtype.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2017-12-01T01:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eec3d47_637521ef",
+      "revId": "64f480c7fa4de81a05ba704f76065ae44884c735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cfcc485_6d5b0a16",
         "filename": "logging/ice_log/icelogtype.cc",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "64f480c7fa4de81a05ba704f76065ae44884c735",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc877022_66321443",
+        "filename": "logging/ice_log/icelogtype.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2017-12-01T01:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cfcc485_6d5b0a16",
+      "revId": "64f480c7fa4de81a05ba704f76065ae44884c735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "575f7ecb_d339267e",
+        "filename": "logging/ice_log/icelogtype.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2017-12-01T01:14:00Z",
+      "side": 1,
+      "message": "1. value_str_ is set to an empty string in the implementation.\n2. Thanks for spotting this. It was meant a tip for callers about the side effect.",
+      "parentUuid": "6f275bb6_ed140688",
+      "revId": "64f480c7fa4de81a05ba704f76065ae44884c735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86de9010_59f83400",
         "filename": "logging/ice_log/icelogtype.h",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "64f480c7fa4de81a05ba704f76065ae44884c735",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1f58d12_31fbd48f",
+        "filename": "logging/ice_log/icelogtype.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2017-12-01T01:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86de9010_59f83400",
+      "revId": "64f480c7fa4de81a05ba704f76065ae44884c735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
