@@ -120,6 +120,24 @@
     },
     {
       "key": {
+        "uuid": "59b1cec3_308d7bbe",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-01T11:55:00Z",
+      "side": 1,
+      "message": "I\u0027ve moved it to rtc_base/numerics. I still think we should replace calls to the old IsNewer and Unwrapper with AheadOf and SeqNumUnwapper and then rename AheadOf to IsNewer. That\u0027s left as future work though.",
+      "parentUuid": "247ce153_4763c1d8",
+      "revId": "ad7aa99522f48f981069e81c05d7c9ee308c9b9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ddf9c8dc_494460ac",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 1
