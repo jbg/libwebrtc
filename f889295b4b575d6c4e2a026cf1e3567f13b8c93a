@@ -22,6 +22,30 @@
       "revId": "f889295b4b575d6c4e2a026cf1e3567f13b8c93a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2864f77e_cef229cf",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-01T16:51:31Z",
+      "side": 1,
+      "message": "Hmm. I suppose this variable is there because you can replace libyuv with something else? It looks like other targets use this variable in this way, so let\u0027s do that for now and maybe clean it up later.",
+      "parentUuid": "edc7769c_40a976df",
+      "range": {
+        "startLine": 237,
+        "startChar": 5,
+        "endLine": 237,
+        "endChar": 20
+      },
+      "revId": "f889295b4b575d6c4e2a026cf1e3567f13b8c93a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
