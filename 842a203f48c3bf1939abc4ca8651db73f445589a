@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d13223d_6ee19fcb",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-02T00:36:45Z",
+      "side": 1,
+      "message": "It seems like you need a DestroyChannelOfTransceiver(transceiver), since that\u0027s so common.",
+      "range": {
+        "startLine": 860,
+        "startChar": 34,
+        "endLine": 860,
+        "endChar": 0
+      },
+      "revId": "842a203f48c3bf1939abc4ca8651db73f445589a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff5240be_8152ab45",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4298,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-02T00:36:45Z",
+      "side": 1,
+      "message": "It seems like you still need a DestroyRtpDataChannel() that does these three things, since it\u0027s repeated.",
+      "range": {
+        "startLine": 4298,
+        "startChar": 34,
+        "endLine": 4298,
+        "endChar": 0
+      },
+      "revId": "842a203f48c3bf1939abc4ca8651db73f445589a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68d11a10_adb33a7e",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-02T00:36:45Z",
+      "side": 1,
+      "message": "DestroyChannel is probably sufficient.",
+      "range": {
+        "startLine": 769,
+        "startChar": 57,
+        "endLine": 769,
+        "endChar": 0
+      },
+      "revId": "842a203f48c3bf1939abc4ca8651db73f445589a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
