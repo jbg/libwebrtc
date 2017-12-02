@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "203b9b36_0cf6d09b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-02T00:52:02Z",
+      "side": 1,
+      "message": "Since SessionDescriptionInterface is in the API directory, I think we should do the following:\n\n1.  Make SessionDescriptionInterface::type() an enum of kOffer/kPrAnswer/kAnswer.  \n2.  Use that enum everywhere, replacing the users of the strings, cricket::ContentAction, and the Action you are replacing here.",
+      "range": {
+        "startLine": 538,
+        "startChar": 60,
+        "endLine": 538,
+        "endChar": 0
+      },
+      "revId": "91cd276dcddb620ed02abc6f68292ea60bbdf1de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
