@@ -105,18 +105,11 @@ static rtc::IPAddress GetIPAddressFromJava(JNIEnv* jni, jobject j_ip_address) {
   return rtc::IPAddress(ip6_addr);
 }
 
-static void GetIPAddressesFromJava(JNIEnv* jni,
-                                   jobjectArray j_ip_addresses,
-                                   std::vector<rtc::IPAddress>* ip_addresses) {
-  ip_addresses->clear();
-  size_t num_addresses = jni->GetArrayLength(j_ip_addresses);
-  CHECK_EXCEPTION(jni) << "Error during GetArrayLength";
-  for (size_t i = 0; i < num_addresses; ++i) {
-    jobject j_ip_address = jni->GetObjectArrayElement(j_ip_addresses, i);
-    CHECK_EXCEPTION(jni) << "Error during GetObjectArrayElement";
-    rtc::IPAddress ip = GetIPAddressFromJava(jni, j_ip_address);
-    ip_addresses->push_back(ip);
-  }
+static std::vector<rtc::IPAddress> GetIPAddressesFromJava(
+    JNIEnv* env,
+    jobjectArray j_ip_addresses) {
+  return JavaToNativeVector<rtc::IPAddress>(env, j_ip_addresses,
+                                            &GetIPAddressFromJava);
 }
 
 static NetworkInformation GetNetworkInformationFromJava(
@@ -131,7 +124,7 @@ static NetworkInformation GetNetworkInformationFromJava(
       jni, Java_NetworkInformation_getConnectionType(jni, j_network_info));
   jobjectArray j_ip_addresses =
       Java_NetworkInformation_getIpAddresses(jni, j_network_info);
-  GetIPAddressesFromJava(jni, j_ip_addresses, &network_info.ip_addresses);
+  network_info.ip_addresses = GetIPAddressesFromJava(jni, j_ip_addresses);
   return network_info;
 }
 
@@ -363,13 +356,9 @@ void AndroidNetworkMonitor::NotifyOfActiveNetworkList(
     JNIEnv* env,
     jobject j_caller,
     jobjectArray j_network_infos) {
-  std::vector<NetworkInformation> network_infos;
-  size_t num_networks = env->GetArrayLength(j_network_infos);
-  for (size_t i = 0; i < num_networks; ++i) {
-    jobject j_network_info = env->GetObjectArrayElement(j_network_infos, i);
-    CHECK_EXCEPTION(env) << "Error during GetObjectArrayElement";
-    network_infos.push_back(GetNetworkInformationFromJava(env, j_network_info));
-  }
+  std::vector<NetworkInformation> network_infos =
+      JavaToNativeVector<NetworkInformation>(env, j_network_infos,
+                                             &GetNetworkInformationFromJava);
   SetNetworkInfos(network_infos);
 }
 

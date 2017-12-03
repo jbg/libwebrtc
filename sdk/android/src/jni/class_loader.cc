@@ -15,6 +15,7 @@
 
 #include "rtc_base/checks.h"
 #include "sdk/android/generated_base_jni/jni/WebRtcClassLoader_jni.h"
+#include "sdk/android/generated_external_classes_jni/jni/ClassLoader_jni.h"
 
 // Abort the process if |jni| has a Java exception pending. This macros uses the
 // comma operator to execute ExceptionDescribe and ExceptionClear ignoring their
@@ -30,34 +31,21 @@ namespace {
 
 class ClassLoader {
  public:
-  explicit ClassLoader(JNIEnv* env) {
-    class_loader_class_ = reinterpret_cast<jclass>(
-        env->NewGlobalRef(env->FindClass("java/lang/ClassLoader")));
-    CHECK_EXCEPTION(env);
-    load_class_method_ =
-        env->GetMethodID(class_loader_class_, "loadClass",
-                         "(Ljava/lang/String;)Ljava/lang/Class;");
-    CHECK_EXCEPTION(env);
-    class_loader_ =
-        env->NewGlobalRef(Java_WebRtcClassLoader_getClassLoader(env));
-    CHECK_EXCEPTION(env);
-  }
+  explicit ClassLoader(JNIEnv* env)
+      : class_loader_(Java_WebRtcClassLoader_getClassLoader(env)) {}
 
   jclass FindClass(JNIEnv* env, const char* c_name) {
     // ClassLoader.loadClass expects a classname with components separated by
     // dots instead of the slashes that JNIEnv::FindClass expects.
     std::string name(c_name);
     std::replace(name.begin(), name.end(), '/', '.');
-    jstring jstr = env->NewStringUTF(name.c_str());
-    const jclass clazz = static_cast<jclass>(
-        env->CallObjectMethod(class_loader_, load_class_method_, jstr));
-    CHECK_EXCEPTION(env);
-    return clazz;
+    return static_cast<jclass>(
+        JNI_ClassLoader::Java_ClassLoader_loadClassJLC_JLS(
+            env, class_loader_, NativeToJavaString(env, name))
+            .obj());
   }
 
  private:
-  jclass class_loader_class_;
-  jmethodID load_class_method_;
   jobject class_loader_;
 };
 
