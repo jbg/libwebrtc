@@ -77,7 +77,7 @@ void RenderNoisePower(
 }  // namespace
 
 ResidualEchoEstimator::ResidualEchoEstimator(const EchoCanceller3Config& config)
-    : config_(config) {
+    : config_(config), S2_old_(config_.filter.length_blocks) {
   Reset();
 }
 

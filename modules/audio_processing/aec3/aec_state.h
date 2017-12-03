@@ -114,8 +114,7 @@ class AecState {
   // Updates the aec state.
   void Update(const std::vector<std::array<float, kFftLengthBy2Plus1>>&
                   adaptive_filter_frequency_response,
-              const std::array<float, kAdaptiveFilterTimeDomainLength>&
-                  adaptive_filter_impulse_response,
+              const std::vector<float>& adaptive_filter_impulse_response,
               bool converged_filter,
               const rtc::Optional<size_t>& external_delay_samples,
               const RenderBuffer& render_buffer,
@@ -141,8 +140,7 @@ class AecState {
     bool inaudible_echo_ = false;
   };
 
-  void UpdateReverb(const std::array<float, kAdaptiveFilterTimeDomainLength>&
-                        impulse_response);
+  void UpdateReverb(const std::vector<float>& impulse_response);
 
   static int instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
@@ -156,7 +154,6 @@ class AecState {
   bool capture_signal_saturation_ = false;
   bool echo_saturation_ = false;
   bool transparent_mode_ = false;
-  std::array<float, kAdaptiveFilterLength> max_render_;
   size_t max_render_index_ = 0;
   bool force_zero_gain_ = false;
   bool render_received_ = false;
@@ -169,6 +166,7 @@ class AecState {
   float reverb_decay_candidate_residual_ = -1.f;
   EchoAudibility echo_audibility_;
   const EchoCanceller3Config config_;
+  std::vector<float> max_render_;
   float reverb_decay_;
   bool saturating_echo_path_ = false;
   int saturating_echo_path_counter_ = 0;
