@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e718107_4f16361d",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5241
+      },
+      "writtenOn": "2017-12-04T14:00:38Z",
+      "side": 0,
+      "message": "Oh, did we not initialize |thread_| on POSIX before? Good to have that fixed.",
+      "revId": "7eaf2f980fa3347dfd41555bea7c00c727c8af02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

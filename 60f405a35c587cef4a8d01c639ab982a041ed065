@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "756593e9_d19bb21e",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5241
+      },
+      "writtenOn": "2017-12-04T14:00:38Z",
+      "side": 1,
+      "message": "Any problems that |owned_| was set to false here? What\u0027s the reason for moving that to above?",
+      "revId": "60f405a35c587cef4a8d01c639ab982a041ed065",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f6043f6_8be558d4",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5241
+      },
+      "writtenOn": "2017-12-04T14:00:38Z",
+      "side": 1,
+      "message": "Seems like it\u0027s also used to ensure that functions are called from the same thread, regardless of whether the mentioned variables are accessed or not. Comment on that to clarify?",
+      "revId": "60f405a35c587cef4a8d01c639ab982a041ed065",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6847d695_eb9e8704",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5241
+      },
+      "writtenOn": "2017-12-04T14:00:38Z",
+      "side": 1,
+      "message": "Nit: or",
+      "range": {
+        "startLine": 294,
+        "startChar": 19,
+        "endLine": 294,
+        "endChar": 22
+      },
+      "revId": "60f405a35c587cef4a8d01c639ab982a041ed065",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
