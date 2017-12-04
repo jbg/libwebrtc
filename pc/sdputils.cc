@@ -26,7 +26,7 @@ std::unique_ptr<SessionDescriptionInterface> CloneSessionDescription(
 
 std::unique_ptr<SessionDescriptionInterface> CloneSessionDescriptionAsType(
     const SessionDescriptionInterface* sdesc,
-    const std::string& type) {
+    SdpType type) {
   RTC_DCHECK(sdesc);
   auto clone = rtc::MakeUnique<JsepSessionDescription>(type);
   clone->Initialize(sdesc->description()->Copy(), sdesc->session_id(),
