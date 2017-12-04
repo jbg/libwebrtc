@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "870915d3_ab0a5a73",
+        "filename": "modules/media_file/media_file_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2017-12-04T10:48:19Z",
+      "side": 1,
+      "message": "Can be removed.",
+      "revId": "6f42589a371e8e9f75cb307b2c891f5eed2ecca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
