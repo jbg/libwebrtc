@@ -1565,7 +1565,7 @@ AudioProcessing::AudioProcessingStatistics AudioProcessing::GetStatistics()
 
 // TODO(ivoc): Remove this when GetStatistics() becomes pure virtual.
 AudioProcessingStats AudioProcessing::GetStatistics(
-    bool has_remote_tracks) const {
+    bool has_remote_tracks) {
   return AudioProcessingStats();
 }
 
@@ -1605,7 +1605,7 @@ AudioProcessing::AudioProcessingStatistics AudioProcessingImpl::GetStatistics()
 }
 
 AudioProcessingStats AudioProcessingImpl::GetStatistics(
-    bool has_remote_tracks) const {
+    bool has_remote_tracks) {
   AudioProcessingStats stats;
   if (has_remote_tracks) {
     EchoCancellation::Metrics metrics;
@@ -1651,6 +1651,11 @@ AudioProcessingStats AudioProcessingImpl::GetStatistics(
         stats.delay_standard_deviation_ms = rtc::Optional<int32_t>(delay_std);
       }
     }
+  }
+  {
+    rtc::CritScope cs_capture(&crit_capture_);
+    RmsLevel::Levels levels = capture_input_rms_.AverageAndPeak();
+    stats.audio_level = rtc::Optional<int32_t>(levels.peak);
   }
   return stats;
 }

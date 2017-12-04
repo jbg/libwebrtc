@@ -200,7 +200,7 @@ class MockAudioProcessing : public AudioProcessing {
 
   MOCK_METHOD0(UpdateHistogramsOnCallEnd, void());
   MOCK_CONST_METHOD0(GetStatistics, AudioProcessingStatistics());
-  MOCK_CONST_METHOD1(GetStatistics, AudioProcessingStats(bool));
+  MOCK_METHOD1(GetStatistics, AudioProcessingStats(bool));
   virtual MockEchoCancellation* echo_cancellation() const {
     return echo_cancellation_.get();
   }
