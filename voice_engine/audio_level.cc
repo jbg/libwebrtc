@@ -37,7 +37,7 @@ int8_t AudioLevel::Level() const {
 
 int16_t AudioLevel::LevelFullRange() const {
   rtc::CritScope cs(&crit_sect_);
-  return current_level_full_range_;
+  return abs_max_;
 }
 
 void AudioLevel::Clear() {

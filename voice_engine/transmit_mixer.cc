@@ -94,6 +94,12 @@ TransmitMixer::PrepareDemux(const void* audioSamples,
                        nChannels,
                        samplesPerSec);
 
+    // This is a temporary hack to measure the signal level before instead of
+    // after processing.
+    // --- Measure audio level of speech before all processing.
+    double sample_duration = static_cast<double>(nSamples) / samplesPerSec;
+    _audioLevel.ComputeLevel(_audioFrame, sample_duration);
+
     // --- Near-end audio processing.
     ProcessAudio(totalDelayMS, clockDrift, currentMicLevel, keyPressed);
 
@@ -105,10 +111,6 @@ TransmitMixer::PrepareDemux(const void* audioSamples,
 #if WEBRTC_VOICE_ENGINE_TYPING_DETECTION
     TypingDetection(keyPressed);
 #endif
-
-    // --- Measure audio level of speech after all processing.
-    double sample_duration = static_cast<double>(nSamples) / samplesPerSec;
-    _audioLevel.ComputeLevel(_audioFrame, sample_duration);
 
     return 0;
 }
@@ -145,7 +147,15 @@ int8_t TransmitMixer::AudioLevel() const
 int16_t TransmitMixer::AudioLevelFullRange() const
 {
     // Speech + file level [0,32767]
-    return _audioLevel.LevelFullRange();
+    const int16_t level = _audioLevel.LevelFullRange();
+    // Normalize to the max level.
+    const float norm_level = level / 32767.0;
+    // 20log_10(x^0.5) = 10log_10(x)
+    const float dBFS = 10.f * log10(norm_level);
+    RTC_DCHECK_LE(dBFS, 0.f);
+    // For rounding subtract 0.5 (because rounding truncates toward zero, and
+    // this is a negative number).
+    return static_cast<int16_t>(dBFS - 0.5f);
 }
 
 double TransmitMixer::GetTotalInputEnergy() const {
