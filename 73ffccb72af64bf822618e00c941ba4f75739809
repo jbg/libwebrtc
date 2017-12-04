@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "706931e9_e08429f2",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-04T08:50:52Z",
+      "side": 1,
+      "message": "nit: Could you remove these unnecessary public qualifiers while you are at it?",
+      "range": {
+        "startLine": 76,
+        "startChar": 32,
+        "endLine": 76,
+        "endChar": 38
+      },
+      "revId": "73ffccb72af64bf822618e00c941ba4f75739809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ac116a7_c302aba9",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-04T08:50:52Z",
+      "side": 1,
+      "message": "nit: For methods that are pure forwards, we could just have the methods itself be a native method, wdyt?",
+      "range": {
+        "startLine": 392,
+        "startChar": 11,
+        "endLine": 392,
+        "endChar": 33
+      },
+      "revId": "73ffccb72af64bf822618e00c941ba4f75739809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca9dd6bf_9044675e",
+        "filename": "sdk/android/src/jni/pc/peerconnection_jni.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-04T08:50:52Z",
+      "side": 1,
+      "message": "Use JNI generation for this, maybe add a helper method for converting vector to ArrayList?",
+      "range": {
+        "startLine": 295,
+        "startChar": 46,
+        "endLine": 295,
+        "endChar": 65
+      },
+      "revId": "73ffccb72af64bf822618e00c941ba4f75739809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d62e28b6_93cb5afe",
+        "filename": "sdk/android/src/jni/pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-04T08:50:52Z",
+      "side": 1,
+      "message": "nit: I think we could have this check in the Java code.",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 34
+      },
+      "revId": "73ffccb72af64bf822618e00c941ba4f75739809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d3dedca_71c6c068",
+        "filename": "sdk/android/src/jni/pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-04T08:50:52Z",
+      "side": 1,
+      "message": "nit: Can you make this return RtpParameters instead?",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 27
+      },
+      "revId": "73ffccb72af64bf822618e00c941ba4f75739809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
