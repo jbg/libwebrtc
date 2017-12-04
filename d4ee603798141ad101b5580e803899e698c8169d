@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cac724a1_38801ab6",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:01:42Z",
+      "side": 1,
+      "message": "Maybe DCHECK on samplesPerSec to avoid division by zero?",
+      "revId": "d4ee603798141ad101b5580e803899e698c8169d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d50942e6_1f2b1fc0",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:01:42Z",
+      "side": 1,
+      "message": "To avoid an issue with LevelFullRange (wrongly) producing negative values, you can add\nRTC_DCHECK_LE(0.f, level);",
+      "range": {
+        "startLine": 150,
+        "startChar": 24,
+        "endLine": 150,
+        "endChar": 25
+      },
+      "revId": "d4ee603798141ad101b5580e803899e698c8169d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b3e834c_beb8c06e",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:01:42Z",
+      "side": 1,
+      "message": "This division is not needed.\n\nYou can compute it as \nconstexpr float kdBFsOffset \u003d ????; // ???? \u003d 20*log10f(32768.f);\ndBFS \u003d 20.f * log10f(level) - kdBFsOffset;",
+      "range": {
+        "startLine": 152,
+        "startChar": 37,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "d4ee603798141ad101b5580e803899e698c8169d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32a77afb_0fb69982",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:01:42Z",
+      "side": 1,
+      "message": "Maybe a comment to motivate the min value of -127 dBFS?",
+      "revId": "d4ee603798141ad101b5580e803899e698c8169d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f5d1c8d_844aad4e",
+        "filename": "voice_engine/transmit_mixer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:01:42Z",
+      "side": 1,
+      "message": "I think you should use log10f, since all the values involved are floats.",
+      "range": {
+        "startLine": 156,
+        "startChar": 20,
+        "endLine": 156,
+        "endChar": 25
+      },
+      "revId": "d4ee603798141ad101b5580e803899e698c8169d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
