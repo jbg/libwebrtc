@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0ca4c77_11b7db9c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1658,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:36:13Z",
+      "side": 1,
+      "message": "Not sure the explicit creation of an Optional is needed anymore.",
+      "range": {
+        "startLine": 1658,
+        "startChar": 28,
+        "endLine": 1658,
+        "endChar": 36
+      },
+      "revId": "568e7d40d451bd1da968aafb803aa7aa2eb37e76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c3e217_4f197c24",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2017-12-04T15:36:13Z",
+      "side": 1,
+      "message": "Why is this change needed?",
+      "range": {
+        "startLine": 109,
+        "startChar": 9,
+        "endLine": 109,
+        "endChar": 10
+      },
+      "revId": "568e7d40d451bd1da968aafb803aa7aa2eb37e76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
