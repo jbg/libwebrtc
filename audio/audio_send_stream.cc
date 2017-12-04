@@ -319,7 +319,8 @@ webrtc::AudioSendStream::Stats AudioSendStream::GetStats(
   ScopedVoEInterface<VoEBase> base(voice_engine());
   RTC_DCHECK(base->transmit_mixer());
   stats.audio_level = base->transmit_mixer()->AudioLevelFullRange();
-  RTC_DCHECK_LE(0, stats.audio_level);
+  RTC_LOG(INFO) << "___: " << stats.audio_level;
+  // RTC_DCHECK_LE(0, stats.audio_level);
 
   stats.total_input_energy = base->transmit_mixer()->GetTotalInputEnergy();
   stats.total_input_duration = base->transmit_mixer()->GetTotalInputDuration();

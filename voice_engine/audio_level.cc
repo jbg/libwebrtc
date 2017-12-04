@@ -37,7 +37,7 @@ int8_t AudioLevel::Level() const {
 
 int16_t AudioLevel::LevelFullRange() const {
   rtc::CritScope cs(&crit_sect_);
-  return current_level_full_range_;
+  return abs_max_;
 }
 
 void AudioLevel::Clear() {
@@ -73,7 +73,7 @@ void AudioLevel::ComputeLevel(const AudioFrame& audioFrame, double duration) {
     abs_max_ = abs_value;
 
   // Update level approximately 10 times per second
-  if (count_++ == kUpdateFrequency) {
+  if (count_++ == 10 * kUpdateFrequency) {
     current_level_full_range_ = abs_max_;
 
     count_ = 0;
@@ -91,7 +91,7 @@ void AudioLevel::ComputeLevel(const AudioFrame& audioFrame, double duration) {
     current_level_ = kPermutation[position];
 
     // Decay the absolute maximum (divide by 4)
-    abs_max_ >>= 2;
+    abs_max_ >>= 1;
   }
 
   // See the description for "totalAudioEnergy" in the WebRTC stats spec
