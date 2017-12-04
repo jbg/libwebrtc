@@ -10,10 +10,6 @@
 
 #include "modules/video_coding/codec_database.h"
 
-#include "modules/video_coding/codecs/h264/include/h264.h"
-#include "modules/video_coding/codecs/i420/include/i420.h"
-#include "modules/video_coding/codecs/vp8/include/vp8.h"
-#include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "modules/video_coding/internal_defines.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -23,31 +19,6 @@ const size_t kDefaultPayloadSize = 1440;
 }
 
 namespace webrtc {
-
-// Create an internal Decoder given a codec type
-static std::unique_ptr<VCMGenericDecoder> CreateDecoder(VideoCodecType type) {
-  switch (type) {
-    case kVideoCodecVP8:
-      return std::unique_ptr<VCMGenericDecoder>(
-          new VCMGenericDecoder(VP8Decoder::Create()));
-    case kVideoCodecVP9:
-      return std::unique_ptr<VCMGenericDecoder>(
-          new VCMGenericDecoder(VP9Decoder::Create()));
-    case kVideoCodecI420:
-      return std::unique_ptr<VCMGenericDecoder>(
-          new VCMGenericDecoder(new I420Decoder()));
-    case kVideoCodecH264:
-      if (H264Decoder::IsSupported()) {
-        return std::unique_ptr<VCMGenericDecoder>(
-            new VCMGenericDecoder(H264Decoder::Create()));
-      }
-      break;
-    default:
-      break;
-  }
-  RTC_LOG(LS_WARNING) << "No internal decoder of this type exists.";
-  return std::unique_ptr<VCMGenericDecoder>();
-}
 
 VCMDecoderMapItem::VCMDecoderMapItem(VideoCodec* settings,
                                      int number_of_cores,
@@ -405,19 +376,10 @@ std::unique_ptr<VCMGenericDecoder> VCMCodecDataBase::CreateAndInitDecoder(
                       << static_cast<int>(payload_type);
     return nullptr;
   }
-  std::unique_ptr<VCMGenericDecoder> ptr_decoder;
   const VCMExtDecoderMapItem* external_dec_item =
       FindExternalDecoderItem(payload_type);
-  if (external_dec_item) {
-    // External codec.
-    ptr_decoder.reset(new VCMGenericDecoder(
-        external_dec_item->external_decoder_instance, true));
-  } else {
-    // Create decoder.
-    ptr_decoder = CreateDecoder(decoder_item->settings->codecType);
-  }
-  if (!ptr_decoder)
-    return nullptr;
+  std::unique_ptr<VCMGenericDecoder> ptr_decoder(new VCMGenericDecoder(
+      external_dec_item->external_decoder_instance, true /* external */));
 
   // Copy over input resolutions to prevent codec reinitialization due to
   // the first frame being of a different resolution than the database values.
@@ -455,9 +417,7 @@ const VCMDecoderMapItem* VCMCodecDataBase::FindDecoderItem(
 const VCMExtDecoderMapItem* VCMCodecDataBase::FindExternalDecoderItem(
     uint8_t payload_type) const {
   ExternalDecoderMap::const_iterator it = dec_external_map_.find(payload_type);
-  if (it != dec_external_map_.end()) {
-    return (*it).second;
-  }
-  return nullptr;
+  RTC_CHECK(it != dec_external_map_.end());
+  return it->second;
 }
 }  // namespace webrtc
