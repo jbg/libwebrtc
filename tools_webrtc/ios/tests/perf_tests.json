@@ -2,7 +2,10 @@
   "tests": [
     {
       "app": "webrtc_perf_tests",
-      "bot_id": "build15-a7",
+      "test args": [
+        "--perf_results_json_path=Documents/"
+      ],
+      "bot_id": "build16-a7",
       "pool": "WebRTC"
     }
   ]
