@@ -248,7 +248,8 @@ void Thread::SafeWrapCurrent() {
 }
 
 void Thread::Join() {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  // TODO(tommi): Enable these checks once downstream issues have been solved.
+  // RTC_DCHECK_RUN_ON(&thread_checker_);
   if (!IsRunning())
     return;
 
@@ -268,7 +269,7 @@ void Thread::Join() {
   pthread_join(thread_, nullptr);
   thread_ = 0;
 #endif
-  thread_checker_.DetachFromThread();
+  // thread_checker_.DetachFromThread();
 }
 
 bool Thread::SetAllowBlockingCalls(bool allow) {
@@ -322,10 +323,11 @@ bool Thread::IsOwned() {
 }
 
 void Thread::Stop() {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  // TODO(tommi): Enable these checks once downstream issues have been solved.
+  // RTC_DCHECK_RUN_ON(&thread_checker_);
   MessageQueue::Quit();
   Join();
-  thread_checker_.DetachFromThread();
+  // thread_checker_.DetachFromThread();
 }
 
 void Thread::Send(const Location& posted_from,
