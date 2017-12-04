@@ -16,6 +16,24 @@
       "revId": "7eaf2f980fa3347dfd41555bea7c00c727c8af02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6aa4a883_03bee97e",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2017-12-04T14:18:52Z",
+      "side": 0,
+      "message": "Ack. indeed there were a few places where we could have ended up in an undetermined state.",
+      "parentUuid": "8e718107_4f16361d",
+      "revId": "7eaf2f980fa3347dfd41555bea7c00c727c8af02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
