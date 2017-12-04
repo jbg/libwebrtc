@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2db3a5c_b8ec8076",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5241
+      },
+      "writtenOn": "2017-12-04T14:36:54Z",
+      "side": 1,
+      "message": "Hmm, |owned_| was never set to true before (apart from at construction). Was that a bug now fixed? Just so we don\u0027t introduce one.",
+      "revId": "4cb8770749eb8462ee16e7de34e0e146f24033e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
