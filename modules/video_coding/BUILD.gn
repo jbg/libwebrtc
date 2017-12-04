@@ -265,11 +265,9 @@ rtc_static_library("webrtc_stereo") {
   ]
 }
 
-rtc_static_library("webrtc_vp8") {
+# This target includes VP8 files that may be used for any VP8 codec, internal SW or external HW.
+rtc_static_library("webrtc_vp8_helpers") {
   sources = [
-    "codecs/vp8/default_temporal_layers.cc",
-    "codecs/vp8/default_temporal_layers.h",
-    "codecs/vp8/include/vp8.h",
     "codecs/vp8/include/vp8_common_types.h",
     "codecs/vp8/screenshare_layers.cc",
     "codecs/vp8/screenshare_layers.h",
@@ -277,6 +275,34 @@ rtc_static_library("webrtc_vp8") {
     "codecs/vp8/simulcast_rate_allocator.h",
     "codecs/vp8/temporal_layers.cc",
     "codecs/vp8/temporal_layers.h",
+  ]
+
+  if (!build_with_chromium && is_clang) {
+    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
+    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  deps = [
+    ":video_coding_utility",
+    "..:module_api",
+    "../..:webrtc_common",
+    "../../api/video_codecs:video_codecs_api",
+    "../../common_video",
+    "../../rtc_base:rtc_base_approved",
+    "../../system_wrappers",
+  ]
+  if (rtc_build_libvpx) {
+    deps += [ rtc_libvpx_dir ]
+  }
+}
+
+# This target includes the internal SW codec.
+rtc_static_library("webrtc_vp8") {
+  sources = [
+    "codecs/vp8/default_temporal_layers.cc",
+    "codecs/vp8/default_temporal_layers.h",
+    "codecs/vp8/include/vp8.h",
+    "codecs/vp8/include/vp8_common_types.h",
     "codecs/vp8/vp8_impl.cc",
     "codecs/vp8/vp8_impl.h",
   ]
@@ -289,16 +315,18 @@ rtc_static_library("webrtc_vp8") {
     suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
   }
 
+  public_deps = [
+    ":webrtc_vp8_helpers",
+  ]
+
   deps = [
     ":video_coding_utility",
     "..:module_api",
     "../..:webrtc_common",
     "../../api:optional",
-    "../../api/video_codecs:video_codecs_api",
     "../../common_video",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_numerics",
-    "../../rtc_base:sequenced_task_checker",
     "../../system_wrappers",
   ]
   if (rtc_build_libvpx) {
@@ -352,6 +380,7 @@ if (rtc_include_tests) {
         "../../api/video_codecs:video_codecs_api",
         "../../media:rtc_audio_video",
         "../../modules:module_api",
+        "../../rtc_base:rtc_base_approved",
         "../../sdk:common_objc",
         "../../sdk:peerconnection_objc",
         "../../sdk:peerconnectionfactory_objc",
@@ -476,6 +505,7 @@ if (rtc_include_tests) {
       "../../api:video_frame_api_i420",
       "../../common_video",
       "../../media:rtc_audio_video",
+      "../../media:rtc_internal_video_codecs",
       "../../media:rtc_media_base",
       "../../rtc_base:rtc_base_approved",
       "../../rtc_base:rtc_base_tests_utils",
