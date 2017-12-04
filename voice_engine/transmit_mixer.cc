@@ -94,6 +94,12 @@ TransmitMixer::PrepareDemux(const void* audioSamples,
                        nChannels,
                        samplesPerSec);
 
+    // This is a temporary hack to measure the signal level before instead of
+    // after processing.
+    // --- Measure audio level of speech before all processing.
+    double sample_duration = static_cast<double>(nSamples) / samplesPerSec;
+    _audioLevel.ComputeLevel(_audioFrame, sample_duration);
+
     // --- Near-end audio processing.
     ProcessAudio(totalDelayMS, clockDrift, currentMicLevel, keyPressed);
 
@@ -105,10 +111,6 @@ TransmitMixer::PrepareDemux(const void* audioSamples,
 #if WEBRTC_VOICE_ENGINE_TYPING_DETECTION
     TypingDetection(keyPressed);
 #endif
-
-    // --- Measure audio level of speech after all processing.
-    double sample_duration = static_cast<double>(nSamples) / samplesPerSec;
-    _audioLevel.ComputeLevel(_audioFrame, sample_duration);
 
     return 0;
 }
