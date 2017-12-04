@@ -16,6 +16,24 @@
       "revId": "4cb8770749eb8462ee16e7de34e0e146f24033e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4fe06dc_1b1f5b43",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2017-12-04T15:12:10Z",
+      "side": 1,
+      "message": "Yes it\u0027s one of those inconsistencies that\u0027s now been fixed.",
+      "parentUuid": "b2db3a5c_b8ec8076",
+      "revId": "4cb8770749eb8462ee16e7de34e0e146f24033e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
