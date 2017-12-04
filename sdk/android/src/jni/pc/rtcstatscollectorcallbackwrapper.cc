@@ -97,20 +97,35 @@ jobject MemberToJava(JNIEnv* env, const RTCStatsMemberInterface& member) {
   return nullptr;
 }
 
+jobject StatsToJava(JNIEnv* env, const RTCStats& stats) {
+  jobject j_members =
+      NativeToJavaMap(env, stats.Members(),
+                      [](JNIEnv* env, const RTCStatsMemberInterface* member) {
+                        return std::pair<jobject, jobject>(
+                            NativeToJavaString(env, member->name()),
+                            MemberToJava(env, *member));
+                      });
+  return Java_RTCStats_create(env, stats.timestamp_us(),
+                              NativeToJavaString(env, stats.type()),
+                              NativeToJavaString(env, stats.id()), j_members);
+}
+
+jobject ReportToJava(JNIEnv* env,
+                     const rtc::scoped_refptr<const RTCStatsReport>& report) {
+  jobject j_stats_map =
+      NativeToJavaMap(env, *report, [](JNIEnv* env, const RTCStats& stats) {
+        return std::pair<jobject, jobject>(NativeToJavaString(env, stats.id()),
+                                           StatsToJava(env, stats));
+      });
+  return Java_RTCStatsReport_create(env, report->timestamp_us(), j_stats_map);
+}
+
 }  // namespace
 
 RTCStatsCollectorCallbackWrapper::RTCStatsCollectorCallbackWrapper(
     JNIEnv* jni,
     jobject j_callback)
-    : j_callback_global_(jni, j_callback),
-      j_linked_hash_map_class_(FindClass(jni, "java/util/LinkedHashMap")),
-      j_linked_hash_map_ctor_(
-          GetMethodID(jni, j_linked_hash_map_class_, "<init>", "()V")),
-      j_linked_hash_map_put_(GetMethodID(
-          jni,
-          j_linked_hash_map_class_,
-          "put",
-          "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")) {}
+    : j_callback_global_(jni, j_callback) {}
 
 void RTCStatsCollectorCallbackWrapper::OnStatsDelivered(
     const rtc::scoped_refptr<const RTCStatsReport>& report) {
@@ -119,49 +134,6 @@ void RTCStatsCollectorCallbackWrapper::OnStatsDelivered(
   jobject j_report = ReportToJava(jni, report);
   Java_RTCStatsCollectorCallback_onStatsDelivered(jni, *j_callback_global_,
                                                   j_report);
-}
-
-jobject RTCStatsCollectorCallbackWrapper::ReportToJava(
-    JNIEnv* jni,
-    const rtc::scoped_refptr<const RTCStatsReport>& report) {
-  jobject j_stats_map =
-      jni->NewObject(j_linked_hash_map_class_, j_linked_hash_map_ctor_);
-  CHECK_EXCEPTION(jni) << "error during NewObject";
-  for (const RTCStats& stats : *report) {
-    // Create a local reference frame for each RTCStats, since there is a
-    // maximum number of references that can be created in one frame.
-    ScopedLocalRefFrame local_ref_frame(jni);
-    jstring j_id = NativeToJavaString(jni, stats.id());
-    jobject j_stats = StatsToJava(jni, stats);
-    jni->CallObjectMethod(j_stats_map, j_linked_hash_map_put_, j_id, j_stats);
-    CHECK_EXCEPTION(jni) << "error during CallObjectMethod";
-  }
-  jobject j_report =
-      Java_RTCStatsReport_create(jni, report->timestamp_us(), j_stats_map);
-  return j_report;
-}
-
-jobject RTCStatsCollectorCallbackWrapper::StatsToJava(JNIEnv* jni,
-                                                      const RTCStats& stats) {
-  jstring j_type = NativeToJavaString(jni, stats.type());
-  jstring j_id = NativeToJavaString(jni, stats.id());
-  jobject j_members =
-      jni->NewObject(j_linked_hash_map_class_, j_linked_hash_map_ctor_);
-  for (const RTCStatsMemberInterface* member : stats.Members()) {
-    if (!member->is_defined()) {
-      continue;
-    }
-    // Create a local reference frame for each member as well.
-    ScopedLocalRefFrame local_ref_frame(jni);
-    jstring j_name = NativeToJavaString(jni, member->name());
-    jobject j_member = MemberToJava(jni, *member);
-    jni->CallObjectMethod(j_members, j_linked_hash_map_put_, j_name, j_member);
-    CHECK_EXCEPTION(jni) << "error during CallObjectMethod";
-  }
-  jobject j_stats =
-      Java_RTCStats_create(jni, stats.timestamp_us(), j_type, j_id, j_members);
-  CHECK_EXCEPTION(jni) << "error during NewObject";
-  return j_stats;
 }
 
 }  // namespace jni
