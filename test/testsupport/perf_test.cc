@@ -11,6 +11,7 @@
 #include "test/testsupport/perf_test.h"
 #include "rtc_base/criticalsection.h"
 
+#include <iomanip>
 #include <stdio.h>
 #include <map>
 #include <sstream>
@@ -55,6 +56,7 @@ class PerfResultsLogger {
                  const std::string& units,
                  const bool important) {
     std::ostringstream value_stream;
+    value_stream << std::fixed;
     value_stream << value;
     PrintResultsImpl(graph_name, trace_name, value_stream.str(), units,
                      important);
@@ -79,6 +81,7 @@ class PerfResultsLogger {
                      important);
 
     std::ostringstream json_stream;
+    value_stream << std::fixed;
     json_stream << '"' << trace_name << R"(":{)";
     json_stream << R"("type":"list_of_scalars",)";
     json_stream << R"("values":[)" << mean << "],";
@@ -93,6 +96,7 @@ class PerfResultsLogger {
                      const std::string& units,
                      const bool important) {
     std::ostringstream value_stream;
+    value_stream << std::fixed;
     value_stream << '[';
     OutputListToStream(&value_stream, values);
     value_stream << ']';
