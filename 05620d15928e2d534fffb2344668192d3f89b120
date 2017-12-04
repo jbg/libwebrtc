@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7db68af7_dcdcedda",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-04T07:52:33Z",
+      "side": 1,
+      "message": "Does the \u0027webrtc_\u0027 prefix signify anything other than that the fuzzer fuzzes in WebRTC? Since this directory is part of the third_party/webrtc/ project, that\u0027s already clear. None of the other fuzzers have the prefix.",
+      "range": {
+        "startLine": 413,
+        "startChar": 20,
+        "endLine": 413,
+        "endChar": 27
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a3d15e4_dd3a67ec",
+        "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-04T07:52:33Z",
+      "side": 1,
+      "message": "Nit: There is already a bunch of ever so slightly different ways to generate fuzzed primitives and arrays of various types and sizes among the existing fuzzers, this adds yet another one. In the best of all possible worlds, we\u0027d outsource this to a helper class.\n\nExamples: ParseSequence in audio_processing_fuzzer.cc and FuzzData in neteq_signal_fuzzer.cc.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/test/fuzzers/",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e36f07_eda9d1de",
+        "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-04T07:52:33Z",
+      "side": 1,
+      "message": "Perhaps defining the lambda function outside of the loop might save a few cycles, since this function will be run a lot.",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 30
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "036170ab_06d116b4",
+        "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-04T07:52:33Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem like the lambda function accesses any outside variable. If not, the \u0027\u0026\u0027 should be removed.",
+      "range": {
+        "startLine": 62,
+        "startChar": 34,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
