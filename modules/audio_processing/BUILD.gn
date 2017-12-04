@@ -247,6 +247,8 @@ rtc_static_library("audio_processing") {
     "../../audio/utility:audio_frame_operations",
     "../../rtc_base:gtest_prod",
     "../../rtc_base:protobuf_utils",
+    "../../system_wrappers:cpu_features_api",
+    "../../system_wrappers:metrics_api",
     "../audio_coding:isac",
   ]
   public_deps = [
@@ -574,6 +576,7 @@ if (rtc_include_tests) {
       "../../rtc_base:protobuf_utils",
       "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
+      "../../system_wrappers:cpu_features_api",
       "../../system_wrappers:system_wrappers",
       "../../test:test_support",
       "../audio_coding:neteq_input_audio_tools",

@@ -124,6 +124,7 @@ rtc_static_library("audio_coding") {
   }
 
   deps = audio_coding_deps + [
+           "../../system_wrappers:metrics_api",
            "..:module_api",
            "../../api:array_view",
            "../../api/audio_codecs:audio_codecs_api",
@@ -661,6 +662,7 @@ rtc_source_set("isac_fix_c") {
     "../../rtc_base:compile_assert_c",
     "../../rtc_base:rtc_base_approved",
     "../../system_wrappers",
+    "../../system_wrappers:cpu_features_api",
   ]
 
   public_deps = [
@@ -797,6 +799,7 @@ rtc_static_library("webrtc_opus") {
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_numerics",
     "../../system_wrappers",
+    "../../system_wrappers:field_trial_api",
   ]
   public_deps = [
     ":webrtc_opus_c",
@@ -905,6 +908,7 @@ rtc_static_library("audio_network_adaptor") {
     "../../rtc_base:protobuf_utils",
     "../../rtc_base:rtc_base_approved",
     "../../system_wrappers",
+    "../../system_wrappers:field_trial_api",
   ]
 
   if (rtc_enable_protobuf) {
@@ -1017,6 +1021,8 @@ rtc_static_library("neteq") {
     "../../rtc_base:gtest_prod",
     "../../rtc_base:rtc_base_approved",
     "../../system_wrappers",
+    "../../system_wrappers:field_trial_api",
+    "../../system_wrappers:metrics_api",
   ]
 }
 
@@ -1292,6 +1298,7 @@ if (rtc_include_tests) {
       "../../api/audio_codecs/opus:audio_encoder_opus",
       "../../rtc_base:protobuf_utils",
       "../../rtc_base:rtc_base_approved",
+      "../../system_wrappers:field_trial_api",
       "../../system_wrappers:system_wrappers",
       "../../test:test_support",
     ]
@@ -2051,6 +2058,7 @@ if (rtc_include_tests) {
       "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
       "../../rtc_base:rtc_base_tests_utils",
+      "../../system_wrappers:cpu_features_api",
       "../../system_wrappers:system_wrappers",
       "../../test:audio_codec_mocks",
       "../../test:field_trial",

@@ -187,6 +187,7 @@ rtc_static_library("peerconnection") {
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
     "../stats",
+    "../system_wrappers:field_trial_api",
     "../system_wrappers:system_wrappers",
   ]
 
