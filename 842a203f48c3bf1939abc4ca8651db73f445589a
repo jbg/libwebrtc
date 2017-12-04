@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0a2cb07c_8f892922",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-04T18:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d13223d_6ee19fcb",
+      "range": {
+        "startLine": 860,
+        "startChar": 34,
+        "endLine": 860,
+        "endChar": 0
+      },
+      "revId": "842a203f48c3bf1939abc4ca8651db73f445589a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5240be_8152ab45",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "703ecf34_61fc53dd",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4298,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-04T18:44:30Z",
+      "side": 1,
+      "message": "Added DestroyDataChannel which covers RtpDataChannel and SCTP data channel since the logic is duplicated for both.",
+      "parentUuid": "ff5240be_8152ab45",
+      "range": {
+        "startLine": 4298,
+        "startChar": 34,
+        "endLine": 4298,
+        "endChar": 0
+      },
+      "revId": "842a203f48c3bf1939abc4ca8651db73f445589a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68d11a10_adb33a7e",
         "filename": "pc/peerconnection.h",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2017-12-02T00:36:45Z",
       "side": 1,
       "message": "DestroyChannel is probably sufficient.",
+      "range": {
+        "startLine": 769,
+        "startChar": 57,
+        "endLine": 769,
+        "endChar": 0
+      },
+      "revId": "842a203f48c3bf1939abc4ca8651db73f445589a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc3c8bf0_f325c6ff",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-04T18:44:30Z",
+      "side": 1,
+      "message": "I\u0027d like to keep it as BaseChannel since (AFAIK) it only has one definition and Channel can mean many things (though it should be fairly clear from the signature and presence in PeerConnection). Plus colloquially it seems like everyone calls it BaseChannel rather than Channel.",
+      "parentUuid": "68d11a10_adb33a7e",
       "range": {
         "startLine": 769,
         "startChar": 57,
