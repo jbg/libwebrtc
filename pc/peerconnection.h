@@ -550,14 +550,6 @@ class PeerConnection : public PeerConnectionInterface,
   cricket::ChannelManager* channel_manager() const;
   MetricsObserverInterface* metrics_observer() const;
 
-  // Indicates the type of SessionDescription in a call to SetLocalDescription
-  // and SetRemoteDescription.
-  enum Action {
-    kOffer,
-    kPrAnswer,
-    kAnswer,
-  };
-
   enum class SessionError {
     kNone,       // No error.
     kContent,    // Error in BaseChannel SetLocalContent/SetRemoteContent.
@@ -615,8 +607,7 @@ class PeerConnection : public PeerConnectionInterface,
   // Updates the error state, signaling if necessary.
   void SetSessionError(SessionError error, const std::string& error_desc);
 
-  RTCError UpdateSessionState(Action action, cricket::ContentSource source);
-  Action GetAction(const std::string& type);
+  RTCError UpdateSessionState(SdpType type, cricket::ContentSource source);
   // Push the media parts of the local or remote session description
   // down to all of the channels.
   RTCError PushdownMediaDescription(cricket::ContentAction action,
@@ -702,13 +693,15 @@ class PeerConnection : public PeerConnectionInterface,
   RTCError ValidateSessionDescription(const SessionDescriptionInterface* sdesc,
                                       cricket::ContentSource source);
 
-  // Check if a call to SetLocalDescription is acceptable with |action|.
-  bool ExpectSetLocalDescription(Action action);
-  // Check if a call to SetRemoteDescription is acceptable with |action|.
-  bool ExpectSetRemoteDescription(Action action);
+  // Check if a call to SetLocalDescription is acceptable with a session
+  // description of the given type.
+  bool ExpectSetLocalDescription(SdpType type);
+  // Check if a call to SetRemoteDescription is acceptable with a session
+  // description of the given type.
+  bool ExpectSetRemoteDescription(SdpType type);
   // Verifies a=setup attribute as per RFC 5763.
   bool ValidateDtlsSetupAttribute(const cricket::SessionDescription* desc,
-                                  Action action);
+                                  SdpType type);
 
   // Returns true if we are ready to push down the remote candidate.
   // |remote_desc| is the new remote description, or NULL if the current remote
