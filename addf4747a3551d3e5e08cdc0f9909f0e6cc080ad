@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19d36ea4_1ba77435",
+        "filename": "media/base/codec.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-04T14:30:40Z",
+      "side": 1,
+      "message": "I prefer to have these static helper functions in some stereo file instead.",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 53
+      },
+      "revId": "addf4747a3551d3e5e08cdc0f9909f0e6cc080ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82c74e9f_39399971",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-04T14:30:40Z",
+      "side": 1,
+      "message": "I still want the codec to be added externally and not change anything in this file.",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 5
+      },
+      "revId": "addf4747a3551d3e5e08cdc0f9909f0e6cc080ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
