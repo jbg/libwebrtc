@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f8aba783_8d2d60f0",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-04T13:03:34Z",
+      "side": 1,
+      "message": "I used it because the component that the fuzzer tests is located in [...]/webrtc_cng.{cc|h}. So, I thought it made sense. Now when I think of it, those files are perhaps incorrectly named, since the classes they declare and define are called ComfortNoiseDecoder and ComfortNoiseEncoder (in the same file). So many wrongs...\nI renamed this to comfort_noise_decoder_fuzzer.",
+      "parentUuid": "7db68af7_dcdcedda",
+      "range": {
+        "startLine": 413,
+        "startChar": 20,
+        "endLine": 413,
+        "endChar": 27
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a3d15e4_dd3a67ec",
         "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-04T07:52:33Z",
       "side": 1,
       "message": "Nit: There is already a bunch of ever so slightly different ways to generate fuzzed primitives and arrays of various types and sizes among the existing fuzzers, this adds yet another one. In the best of all possible worlds, we\u0027d outsource this to a helper class.\n\nExamples: ParseSequence in audio_processing_fuzzer.cc and FuzzData in neteq_signal_fuzzer.cc.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/test/fuzzers/",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "406e44ee_426ef63e",
+        "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-04T13:03:34Z",
+      "side": 1,
+      "message": "Fixed. Took the code from neteq_signal_fuzzer.cc and put it in fuzz_data_helper.",
+      "parentUuid": "6a3d15e4_dd3a67ec",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -91,6 +139,54 @@
       "revId": "05620d15928e2d534fffb2344668192d3f89b120",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "044bca34_3cd222bb",
+        "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-04T13:03:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e36f07_eda9d1de",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 30
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1593c12_3d127247",
+        "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-04T13:03:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "036170ab_06d116b4",
+      "range": {
+        "startLine": 62,
+        "startChar": 34,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

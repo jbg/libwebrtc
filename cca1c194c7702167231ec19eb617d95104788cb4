@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a15cb7a_7311a298",
+        "filename": "test/fuzzers/fuzz_data_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-04T13:03:34Z",
+      "side": 1,
+      "message": "This class is broken out of neteq_signal_fuzzer.cc.",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "cca1c194c7702167231ec19eb617d95104788cb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46f1535b_44148154",
+        "filename": "test/fuzzers/fuzz_data_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-04T13:03:34Z",
+      "side": 1,
+      "message": "This method is new, and is taken from the first iteration of the fuzzer being added.",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 45
+      },
+      "revId": "cca1c194c7702167231ec19eb617d95104788cb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
