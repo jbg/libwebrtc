@@ -50,6 +50,7 @@ class HighPassFilter;
 class LevelEstimator;
 class NoiseSuppression;
 class PostProcessing;
+class PreProcessing;
 class VoiceDetection;
 
 // Use to enable the extended filter mode in the AEC, along with robustness
@@ -318,10 +319,21 @@ class AudioProcessing : public rtc::RefCountInterface {
   RTC_DEPRECATED
   static AudioProcessing* Create(const webrtc::Config& config,
                                  NonlinearBeamformer* beamformer);
+
+  // Deprecated. Use the Create below, with nullptr PreProcessing.
+  // RTC_DEPRECATED
   // Allows passing in optional user-defined processing modules.
   static AudioProcessing* Create(
       const webrtc::Config& config,
       std::unique_ptr<PostProcessing> capture_post_processor,
+      std::unique_ptr<EchoControlFactory> echo_control_factory,
+      NonlinearBeamformer* beamformer);
+
+  // Allows passing in optional user-defined processing modules.
+  static AudioProcessing* Create(
+      const webrtc::Config& config,
+      std::unique_ptr<PostProcessing> capture_post_processor,
+      std::unique_ptr<PreProcessing> render_pre_processor,
       std::unique_ptr<EchoControlFactory> echo_control_factory,
       NonlinearBeamformer* beamformer);
   ~AudioProcessing() override {}
@@ -1126,6 +1138,20 @@ class PostProcessing {
   virtual std::string ToString() const = 0;
 
   virtual ~PostProcessing() {}
+};
+
+// Interface for a pre processing submodule. Process is called on
+// render signal before band-split.
+class PreProcessing {
+ public:
+  // (Re-)Initializes the submodule.
+  virtual void Initialize(int sample_rate_hz, int num_channels) = 0;
+  // Processes the given capture or render signal.
+  virtual void Process(AudioBuffer* audio) = 0;
+  // Returns a string representation of the module state.
+  virtual std::string ToString() const = 0;
+
+  virtual ~PreProcessing() {}
 };
 
 // The voice activity detection (VAD) component analyzes the stream to
