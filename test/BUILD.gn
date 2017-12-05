@@ -167,6 +167,7 @@ rtc_source_set("test_support") {
   }
 
   if (is_ios && !build_with_chromium) {
+    sources += [ "ios_test_main.mm" ]
     deps += [ "../sdk:common_objc" ]
   }
 
