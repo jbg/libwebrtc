@@ -45,6 +45,9 @@ struct AudioProcessingStats {
   // Maximum residual echo likelihood from the last time period.
   rtc::Optional<double> residual_echo_likelihood_recent_max;
 
+  // Audio level before processing.
+  rtc::Optional<int32_t> audio_level;
+
   // The instantaneous delay estimate produced in the AEC. The unit is in
   // milliseconds and the value is the instantaneous value at the time of the
   // call to |GetStatistics()|.
