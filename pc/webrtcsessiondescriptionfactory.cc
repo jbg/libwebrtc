@@ -252,7 +252,7 @@ void WebRtcSessionDescriptionFactory::CreateAnswer(
     PostCreateSessionDescriptionFailed(observer, error);
     return;
   }
-  if (pc_->remote_description()->type() != JsepSessionDescription::kOffer) {
+  if (pc_->remote_description()->type() != SdpType::kOffer) {
     error += " failed because remote_description is not an offer.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailed(observer, error);

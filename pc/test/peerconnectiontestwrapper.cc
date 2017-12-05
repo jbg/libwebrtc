@@ -12,6 +12,7 @@
 #include <utility>
 
 #include "p2p/base/fakeportallocator.h"
+#include "pc/sdputils.h"
 #include "pc/test/fakeperiodicvideocapturer.h"
 #include "pc/test/fakertccertificategenerator.h"
 #include "pc/test/mockpeerconnectionobservers.h"
@@ -32,6 +33,7 @@ using webrtc::MediaConstraintsInterface;
 using webrtc::MediaStreamInterface;
 using webrtc::MockSetSessionDescriptionObserver;
 using webrtc::PeerConnectionInterface;
+using webrtc::SdpType;
 using webrtc::SessionDescriptionInterface;
 using webrtc::VideoTrackInterface;
 
@@ -126,7 +128,8 @@ void PeerConnectionTestWrapper::OnSuccess(SessionDescriptionInterface* desc) {
   EXPECT_TRUE(desc->ToString(&sdp));
 
   RTC_LOG(LS_INFO) << "PeerConnectionTestWrapper " << name_ << ": "
-                   << desc->type() << " sdp created: " << sdp;
+                   << webrtc::SdpTypeToString(desc->type())
+                   << " sdp created: " << sdp;
 
   // Give the user a chance to modify sdp for testing.
   SignalOnSdpCreated(&sdp);
@@ -150,36 +153,38 @@ void PeerConnectionTestWrapper::CreateAnswer(
 }
 
 void PeerConnectionTestWrapper::ReceiveOfferSdp(const std::string& sdp) {
-  SetRemoteDescription(SessionDescriptionInterface::kOffer, sdp);
+  SetRemoteDescription(SdpType::kOffer, sdp);
   CreateAnswer(NULL);
 }
 
 void PeerConnectionTestWrapper::ReceiveAnswerSdp(const std::string& sdp) {
-  SetRemoteDescription(SessionDescriptionInterface::kAnswer, sdp);
+  SetRemoteDescription(SdpType::kAnswer, sdp);
 }
 
-void PeerConnectionTestWrapper::SetLocalDescription(const std::string& type,
+void PeerConnectionTestWrapper::SetLocalDescription(SdpType type,
                                                     const std::string& sdp) {
   RTC_LOG(LS_INFO) << "PeerConnectionTestWrapper " << name_
-                   << ": SetLocalDescription " << type << " " << sdp;
+                   << ": SetLocalDescription " << webrtc::SdpTypeToString(type)
+                   << " " << sdp;
 
   rtc::scoped_refptr<MockSetSessionDescriptionObserver>
       observer(new rtc::RefCountedObject<
                    MockSetSessionDescriptionObserver>());
   peer_connection_->SetLocalDescription(
-      observer, webrtc::CreateSessionDescription(type, sdp, NULL));
+      observer, webrtc::CreateSessionDescription(type, sdp).release());
 }
 
-void PeerConnectionTestWrapper::SetRemoteDescription(const std::string& type,
+void PeerConnectionTestWrapper::SetRemoteDescription(SdpType type,
                                                      const std::string& sdp) {
   RTC_LOG(LS_INFO) << "PeerConnectionTestWrapper " << name_
-                   << ": SetRemoteDescription " << type << " " << sdp;
+                   << ": SetRemoteDescription " << webrtc::SdpTypeToString(type)
+                   << " " << sdp;
 
   rtc::scoped_refptr<MockSetSessionDescriptionObserver>
       observer(new rtc::RefCountedObject<
                    MockSetSessionDescriptionObserver>());
   peer_connection_->SetRemoteDescription(
-      observer, webrtc::CreateSessionDescription(type, sdp, NULL));
+      observer, webrtc::CreateSessionDescription(type, sdp).release());
 }
 
 void PeerConnectionTestWrapper::AddIceCandidate(const std::string& sdp_mid,

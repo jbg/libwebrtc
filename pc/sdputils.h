@@ -29,6 +29,9 @@ std::unique_ptr<SessionDescriptionInterface> CloneSessionDescriptionAsType(
     const SessionDescriptionInterface* sdesc,
     SdpType type);
 
+// Returns an unspecified string form of the given SDP type.
+const char* SdpTypeToString(SdpType type);
+
 // Function that takes a single session description content with its
 // corresponding transport and produces a boolean.
 typedef std::function<bool(const cricket::ContentInfo*,

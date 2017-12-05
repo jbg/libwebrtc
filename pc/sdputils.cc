@@ -37,6 +37,18 @@ std::unique_ptr<SessionDescriptionInterface> CloneSessionDescriptionAsType(
   return std::move(clone);
 }
 
+const char* SdpTypeToString(SdpType type) {
+  switch (type) {
+    case SdpType::kOffer:
+      return "offer";
+    case SdpType::kPrAnswer:
+      return "pranswer";
+    case SdpType::kAnswer:
+      return "answer";
+  }
+  return "";
+}
+
 bool SdpContentsAll(SdpContentPredicate pred,
                     const cricket::SessionDescription* desc) {
   RTC_DCHECK(desc);
