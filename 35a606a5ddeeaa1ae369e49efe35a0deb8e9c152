@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "144790e8_b9a1cb64",
+        "filename": "common_types.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-05T10:03:52Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be necessary. For other injectable video codecs, we just use kPayloadNameGeneric. What code would actually rely on this?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 32
+      },
+      "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "754fe435_cd27faf5",
+        "filename": "media/base/mediaconstants.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-05T10:03:52Z",
+      "side": 1,
+      "message": "You should be able to move this into stereocodecfactory.cc.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dca1aaeb_315f6243",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-05T10:03:52Z",
+      "side": 1,
+      "message": "The video codec factories get the SdpVideoFormat in CreateEncoder/CreateDecoder. You can pass those into the ctor of StereoDecoderAdapter/StereoEncoderAdapter and parse out the associated codec name instead of relying on a hardcoded constant.",
+      "range": {
+        "startLine": 96,
+        "startChar": 31,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
