@@ -3488,14 +3488,14 @@ RTCError PeerConnection::UpdateSessionState(SdpType type,
   RTC_DCHECK(session_error() == SessionError::kNone);
   std::string td_err;
   if (type == SdpType::kOffer) {
-    RTCError error = PushdownTransportDescription(source, cricket::CA_OFFER);
+    RTCError error = PushdownTransportDescription(source, SdpType::kOffer);
     if (!error.ok()) {
       return error;
     }
     ChangeSignalingState(source == cricket::CS_LOCAL
                              ? PeerConnectionInterface::kHaveLocalOffer
                              : PeerConnectionInterface::kHaveRemoteOffer);
-    error = PushdownMediaDescription(cricket::CA_OFFER, source);
+    error = PushdownMediaDescription(SdpType::kOffer, source);
     if (!error.ok()) {
       SetSessionError(SessionError::kContent, error.message());
     }
@@ -3503,7 +3503,7 @@ RTCError PeerConnection::UpdateSessionState(SdpType type,
       LOG_AND_RETURN_ERROR(RTCErrorType::INTERNAL_ERROR, GetSessionErrorMsg());
     }
   } else if (type == SdpType::kPrAnswer) {
-    RTCError error = PushdownTransportDescription(source, cricket::CA_PRANSWER);
+    RTCError error = PushdownTransportDescription(source, SdpType::kPrAnswer);
     if (!error.ok()) {
       return error;
     }
@@ -3511,7 +3511,7 @@ RTCError PeerConnection::UpdateSessionState(SdpType type,
     ChangeSignalingState(source == cricket::CS_LOCAL
                              ? PeerConnectionInterface::kHaveLocalPrAnswer
                              : PeerConnectionInterface::kHaveRemotePrAnswer);
-    error = PushdownMediaDescription(cricket::CA_PRANSWER, source);
+    error = PushdownMediaDescription(SdpType::kPrAnswer, source);
     if (!error.ok()) {
       SetSessionError(SessionError::kContent, error.message());
     }
@@ -3536,13 +3536,13 @@ RTCError PeerConnection::UpdateSessionState(SdpType type,
     }
     // Only push down the transport description after enabling BUNDLE; we don't
     // want to push down a description on a transport about to be destroyed.
-    RTCError error = PushdownTransportDescription(source, cricket::CA_ANSWER);
+    RTCError error = PushdownTransportDescription(source, SdpType::kAnswer);
     if (!error.ok()) {
       return error;
     }
     EnableChannels();
     ChangeSignalingState(PeerConnectionInterface::kStable);
-    error = PushdownMediaDescription(cricket::CA_ANSWER, source);
+    error = PushdownMediaDescription(SdpType::kAnswer, source);
     if (!error.ok()) {
       SetSessionError(SessionError::kContent, error.message());
     }
@@ -3554,7 +3554,7 @@ RTCError PeerConnection::UpdateSessionState(SdpType type,
 }
 
 RTCError PeerConnection::PushdownMediaDescription(
-    cricket::ContentAction action,
+    SdpType type,
     cricket::ContentSource source) {
   const SessionDescription* sdesc =
       (source == cricket::CS_LOCAL ? local_description() : remote_description())
@@ -3573,8 +3573,8 @@ RTCError PeerConnection::PushdownMediaDescription(
       std::string error;
       bool success =
           (source == cricket::CS_LOCAL)
-              ? channel->SetLocalContent(content_desc, action, &error)
-              : channel->SetRemoteContent(content_desc, action, &error);
+              ? channel->SetLocalContent(content_desc, type, &error)
+              : channel->SetRemoteContent(content_desc, type, &error);
       if (!success) {
         LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER, std::move(error));
       }
@@ -3609,7 +3609,7 @@ bool PeerConnection::PushdownSctpParameters_n(cricket::ContentSource source) {
 
 RTCError PeerConnection::PushdownTransportDescription(
     cricket::ContentSource source,
-    cricket::ContentAction action) {
+    SdpType type) {
   RTC_DCHECK_RUN_ON(signaling_thread());
 
   const SessionDescriptionInterface* sdesc =
@@ -3622,10 +3622,10 @@ RTCError PeerConnection::PushdownTransportDescription(
     bool success;
     if (source == cricket::CS_LOCAL) {
       success = transport_controller_->SetLocalTransportDescription(
-          tinfo.content_name, tinfo.description, action, &error);
+          tinfo.content_name, tinfo.description, type, &error);
     } else {
       success = transport_controller_->SetRemoteTransportDescription(
-          tinfo.content_name, tinfo.description, action, &error);
+          tinfo.content_name, tinfo.description, type, &error);
     }
     if (!success) {
       LOG_AND_RETURN_ERROR(

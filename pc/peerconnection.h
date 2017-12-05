@@ -610,12 +610,12 @@ class PeerConnection : public PeerConnectionInterface,
   RTCError UpdateSessionState(SdpType type, cricket::ContentSource source);
   // Push the media parts of the local or remote session description
   // down to all of the channels.
-  RTCError PushdownMediaDescription(cricket::ContentAction action,
+  RTCError PushdownMediaDescription(SdpType type,
                                     cricket::ContentSource source);
   bool PushdownSctpParameters_n(cricket::ContentSource source);
 
   RTCError PushdownTransportDescription(cricket::ContentSource source,
-                                        cricket::ContentAction action);
+                                        SdpType type);
 
   // Returns true and the TransportInfo of the given |content_name|
   // from |description|. Returns false if it's not available.

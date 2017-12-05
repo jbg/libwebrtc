@@ -59,6 +59,7 @@ using webrtc::JsepSessionDescription;
 using webrtc::RtpExtension;
 using webrtc::RtpTransceiverDirection;
 using webrtc::SdpParseError;
+using webrtc::SdpType;
 using webrtc::SessionDescriptionInterface;
 
 typedef std::vector<AudioCodec> AudioCodecs;
@@ -769,7 +770,7 @@ static const char kDummyMid[] = "dummy_mid";
 static const int kDummyIndex = 123;
 
 // Misc
-static webrtc::SdpType kDummyType = webrtc::SdpType::kOffer;
+static webrtc::SdpType kDummyType = SdpType::kOffer;
 
 // Helper functions
 
@@ -1555,7 +1556,7 @@ class WebRtcSdpTest : public testing::Test {
   bool TestDeserializeRejected(bool audio_rejected, bool video_rejected) {
     std::string new_sdp = kSdpString;
     ReplaceRejected(audio_rejected, video_rejected, &new_sdp);
-    JsepSessionDescription new_jdesc(webrtc::SdpType::kOffer);
+    JsepSessionDescription new_jdesc(SdpType::kOffer);
     EXPECT_TRUE(SdpDeserialize(new_sdp, &new_jdesc));
 
     audio_desc_ = static_cast<AudioContentDescription*>(
@@ -1584,11 +1585,11 @@ class WebRtcSdpTest : public testing::Test {
   void TestDeserializeExtmap(bool session_level, bool media_level,
       bool encrypted) {
     AddExtmap(encrypted);
-    JsepSessionDescription new_jdesc(webrtc::SdpType::kOffer);
+    JsepSessionDescription new_jdesc(SdpType::kOffer);
     ASSERT_TRUE(new_jdesc.Initialize(desc_.Copy(),
                                      jdesc_.session_id(),
                                      jdesc_.session_version()));
-    JsepSessionDescription jdesc_with_extmap(webrtc::SdpType::kOffer);
+    JsepSessionDescription jdesc_with_extmap(SdpType::kOffer);
     std::string sdp_with_extmap = kSdpString;
     if (session_level) {
       InjectAfter(kSessionTime,
