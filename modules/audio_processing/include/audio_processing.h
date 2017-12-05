@@ -570,7 +570,7 @@ class AudioProcessing : public rtc::RefCountInterface {
 
   // This returns the stats as optionals and it will replace the regular
   // GetStatistics.
-  virtual AudioProcessingStats GetStatistics(bool has_remote_tracks) const;
+  virtual AudioProcessingStats GetStatistics(bool has_remote_tracks);
 
   // These provide access to the component interfaces and should never return
   // NULL. The pointers will be valid for the lifetime of the APM instance.

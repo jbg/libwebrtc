@@ -202,9 +202,7 @@ void ExtractStats(const cricket::VoiceSenderInfo& info, StatsReport* report) {
       info.total_input_duration }
   };
 
-  RTC_DCHECK_GE(info.audio_level, 0);
   const IntForAdd ints[] = {
-    { StatsReport::kStatsValueNameAudioInputLevel, info.audio_level},
     { StatsReport::kStatsValueNameJitterReceived, info.jitter_ms },
     { StatsReport::kStatsValueNamePacketsLost, info.packets_lost },
     { StatsReport::kStatsValueNamePacketsSent, info.packets_sent },
@@ -219,6 +217,7 @@ void ExtractStats(const cricket::VoiceSenderInfo& info, StatsReport* report) {
       report->AddInt(i.name, i.value);
     }
   }
+  report->AddInt(StatsReport::kStatsValueNameAudioInputLevel, info.audio_level);
   report->AddString(StatsReport::kStatsValueNameMediaType, "audio");
   if (info.ana_statistics.bitrate_action_counter) {
     report->AddInt(StatsReport::kStatsValueNameAnaBitrateActionCounter,
