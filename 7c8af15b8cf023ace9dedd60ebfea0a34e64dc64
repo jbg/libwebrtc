@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4f24287_60d56615",
+        "filename": "sdk/android/src/jni/pc/java_native_conversion.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-12-05T23:19:29Z",
+      "side": 1,
+      "message": "the return type doesn\u0027t match",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "7c8af15b8cf023ace9dedd60ebfea0a34e64dc64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c00d1ec_33f98839",
+        "filename": "sdk/android/src/jni/pc/java_native_conversion.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-12-05T23:19:29Z",
+      "side": 1,
+      "message": "Can it just be:\nRTC_CHECK(sdp_type_maybe) \u003c\u003c \"...\"?",
+      "range": {
+        "startLine": 100,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "7c8af15b8cf023ace9dedd60ebfea0a34e64dc64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
