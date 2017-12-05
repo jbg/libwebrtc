@@ -176,6 +176,20 @@ rtc_source_set("test_support") {
 }
 
 if (rtc_include_tests) {
+  if (is_ios) {
+    rtc_source_set("test_main_objc") {
+      testonly = true
+      visibility = [ ":test_main" ]
+      sources = [
+        "test_main.mm",
+      ]
+      deps = [
+        "..:webrtc_common",
+        "../sdk:common_objc",
+      ]
+    }
+  }
+
   rtc_source_set("test_main") {
     testonly = true
     sources = [
@@ -192,6 +206,9 @@ if (rtc_include_tests) {
       "//testing/gmock",
       "//testing/gtest",
     ]
+    if (is_ios) {
+      deps += [ ":test_main_objc" ]
+    }
   }
 
   rtc_source_set("video_test_support") {
