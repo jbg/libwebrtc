@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "398210ae_df720048",
+        "filename": "sdk/android/src/jni/pc/java_native_conversion.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2017-12-05T23:34:23Z",
+      "side": 1,
+      "message": "nit: Maybe leave a comment about the ownership transfer here.",
+      "range": {
+        "startLine": 108,
+        "startChar": 68,
+        "endLine": 108,
+        "endChar": 75
+      },
+      "revId": "4a695025f082f6dad9967f268816971bd4d1b2e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
