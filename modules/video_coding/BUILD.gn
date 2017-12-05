@@ -91,11 +91,9 @@ rtc_static_library("video_coding") {
   deps = [
     ":codec_globals_headers",
     ":video_coding_utility",
-    ":webrtc_h264",
-    ":webrtc_i420",
-    ":webrtc_stereo",
+
+    # TODO(bugs.webrtc.org/7925): Remove dependency to VP8 SW codec.
     ":webrtc_vp8",
-    ":webrtc_vp9",
     "..:module_api",
     "..:module_api_public",
     "../..:webrtc_common",
