@@ -224,6 +224,7 @@ rtc_static_library("video_jni") {
     "../../rtc_base:rtc_task_queue",
     "../../rtc_base:sequenced_task_checker",
     "../../rtc_base:weak_ptr",
+    "../../system_wrappers:field_trial_api",
     "../../system_wrappers:system_wrappers",
   ]
 }
@@ -370,6 +371,7 @@ rtc_static_library("peerconnection_jni") {
     "../../rtc_base:rtc_base",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_task_queue",
+    "../../system_wrappers:field_trial_api",
     "../../system_wrappers:system_wrappers",
   ]
 }
@@ -407,6 +409,7 @@ rtc_static_library("libjingle_peerconnection_metrics_default_jni") {
     "../../pc:peerconnection",
     "../../system_wrappers",
     "../../system_wrappers:field_trial_default",
+    "../../system_wrappers:metrics_api",
     "../../system_wrappers:metrics_default",
   ]
 }
