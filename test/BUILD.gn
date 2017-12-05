@@ -119,8 +119,10 @@ if (is_ios) {
     sources = [
       "ios/test_support.h",
       "ios/test_support.mm",
+      "ios_test_main.mm",
     ]
     deps = [
+      "../rtc_base:rtc_base_approved",
       "../sdk:common_objc",
     ]
   }
