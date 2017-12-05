@@ -10,7 +10,9 @@
 
 #import <UIKit/UIKit.h>
 
+#include "rtc_base/file.h"
 #include "test/ios/test_support.h"
+#include "test/testsupport/perf_test.h"
 
 #import "sdk/objc/Framework/Classes/Common/RTCUIApplicationStatusObserver.h"
 
@@ -90,6 +92,13 @@ static char **g_argv;
 }
 
 @end
+
+namespace webrtc {
+namespace test {
+// Defined in iosfileutils.mm.  No header file to discourage use elsewhere.
+std::string IOSDocumentDirectory();
+}  // namespace test
+}  // namespace webrtc
 namespace rtc {
 namespace test {
 
@@ -101,6 +110,13 @@ void InitTestSuite(int (*test_suite)(void), int argc, char *argv[]) {
 
 void RunTestsFromIOSApp() {
   @autoreleasepool {
+    std::string perf_results_json_path = (
+        webrtc::test::IOSDocumentDirectory() + "/perf_result.json");
+    std::string json_results = webrtc::test::GetPerfResultsJSON();
+    rtc::File json_file = rtc::File::Open(perf_results_json_path);
+    json_file.Write(reinterpret_cast<const uint8_t*>(json_results.c_str()),
+                    json_results.size());
+    json_file.Close();
     exit(UIApplicationMain(g_argc, g_argv, nil, @"WebRtcUnitTestDelegate"));
   }
 }
