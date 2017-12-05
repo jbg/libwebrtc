@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "283e840b_4446759b",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-05T16:52:32Z",
+      "side": 1,
+      "message": "There is a DCHECK on line 74. Remove one of them?",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0aafe655_c3f6c4ea",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-05T16:52:32Z",
+      "side": 1,
+      "message": "Remove this function and call IsActive instead?",
+      "range": {
+        "startLine": 105,
+        "startChar": 28,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
