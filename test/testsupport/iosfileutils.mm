@@ -57,6 +57,18 @@ std::string IOSOutputPath()  {
   }
 }
 
+std::string IOSDocumentDirectory() {
+  NSString* fileName = @"perf_result.json";
+  NSArray<NSString*>* outputDirectories = NSSearchPathForDirectoriesInDomains(
+      NSDocumentDirectory, NSUserDomainMask, YES);
+  if ([outputDirectories count] == 0) {
+    return ".";
+  }
+  NSString* outputPath =
+      [outputDirectories[0] stringByAppendingPathComponent:fileName];
+  return StdStringFromNSString(outputPath);
+}
+
 }  // namespace test
 }  // namespace webrtc
 
