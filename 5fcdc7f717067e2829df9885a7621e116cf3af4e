@@ -144,6 +144,30 @@
       "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bf79969_61053f72",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-05T23:12:06Z",
+      "side": 1,
+      "message": "Checked again - it\u0027s already documented:\n  // IsActive() can be called either from outside or from inside, but we don\u0027t\n  // want to incur the overhead of a virtual function call if called from inside\n  // some other function of this class.\nMight not hurt to replicate the comment here, though, or to have a shorter comment here.",
+      "parentUuid": "b155a58d_59710fcd",
+      "range": {
+        "startLine": 105,
+        "startChar": 28,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
