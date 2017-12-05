@@ -12,6 +12,7 @@
 #define LOGGING_RTC_EVENT_LOG_OUTPUT_RTC_EVENT_LOG_OUTPUT_FILE_H_
 
 #include <stddef.h>
+#include <stdio.h>
 
 #include <memory>
 #include <string>
@@ -20,8 +21,6 @@
 #include "rtc_base/platform_file.h"  // Can't neatly forward PlatformFile.
 
 namespace webrtc {
-
-class FileWrapper;
 
 class RtcEventLogOutputFile final : public RtcEventLogOutput {
  public:
@@ -52,7 +51,7 @@ class RtcEventLogOutputFile final : public RtcEventLogOutput {
   // rather than duplicate it.
   const size_t max_size_bytes_;
   size_t written_bytes_{0};
-  std::unique_ptr<FileWrapper> file_;
+  FILE* file_;
 };
 
 }  // namespace webrtc
