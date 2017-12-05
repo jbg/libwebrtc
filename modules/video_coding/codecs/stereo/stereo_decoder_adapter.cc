@@ -16,6 +16,7 @@
 #include "common_video/include/video_frame.h"
 #include "common_video/include/video_frame_buffer.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
+#include "media/base/mediaconstants.h"
 #include "rtc_base/keep_ref_until_done.h"
 #include "rtc_base/logging.h"
 
@@ -89,10 +90,12 @@ StereoDecoderAdapter::~StereoDecoderAdapter() {
 
 int32_t StereoDecoderAdapter::InitDecode(const VideoCodec* codec_settings,
                                          int32_t number_of_cores) {
+  RTC_DCHECK_EQ(kVideoCodecStereo, codec_settings->codecType);
   VideoCodec settings = *codec_settings;
-  settings.codecType = kVideoCodecVP9;
+  settings.codecType =
+      PayloadStringToCodecType(cricket::kStereoAssociatedCodecName);
+  const SdpVideoFormat format(cricket::kStereoAssociatedCodecName);
   for (size_t i = 0; i < kAlphaCodecStreams; ++i) {
-    const SdpVideoFormat format("VP9");
     std::unique_ptr<VideoDecoder> decoder =
         factory_->CreateVideoDecoder(format);
     const int32_t rv = decoder->InitDecode(&settings, number_of_cores);

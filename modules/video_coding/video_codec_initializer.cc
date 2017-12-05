@@ -12,6 +12,7 @@
 
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/include/video_bitrate_allocator.h"
+#include "media/base/mediaconstants.h"
 #include "modules/video_coding/codecs/vp8/screenshare_layers.h"
 #include "modules/video_coding/codecs/vp8/simulcast_rate_allocator.h"
 #include "modules/video_coding/codecs/vp8/temporal_layers.h"
@@ -39,6 +40,20 @@ bool VideoCodecInitializer::SetupCodec(
     bool nack_enabled,
     VideoCodec* codec,
     std::unique_ptr<VideoBitrateAllocator>* bitrate_allocator) {
+  if (PayloadStringToCodecType(settings.payload_name) == kVideoCodecStereo) {
+    VideoSendStream::Config::EncoderSettings associated_codec_settings =
+        settings;
+    associated_codec_settings.payload_name =
+        cricket::kStereoAssociatedCodecName;
+    if (!SetupCodec(config, associated_codec_settings, streams, nack_enabled,
+                    codec, bitrate_allocator)) {
+      RTC_LOG(LS_ERROR) << "Failed to create stereo encoder configuration.";
+      return false;
+    }
+    codec->codecType = kVideoCodecStereo;
+    return true;
+  }
+
   *codec =
       VideoEncoderConfigToVideoCodec(config, streams, settings.payload_name,
                                      settings.payload_type, nack_enabled);

@@ -22,6 +22,7 @@
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/h264/profile_level_id.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
+#include "media/base/mediaconstants.h"
 #include "modules/rtp_rtcp/include/rtp_receiver.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/utility/include/process_thread.h"
@@ -59,6 +60,12 @@ VideoCodec CreateDecoderVideoCodec(const VideoReceiveStream::Decoder& decoder) {
     *(codec.H264()) = VideoEncoder::GetDefaultH264Settings();
     codec.H264()->profile =
         H264::ParseSdpProfileLevelId(decoder.codec_params)->profile;
+  } else if (codec.codecType == kVideoCodecStereo) {
+    VideoReceiveStream::Decoder associated_decoder = decoder;
+    associated_decoder.payload_name = cricket::kStereoAssociatedCodecName;
+    VideoCodec associated_codec = CreateDecoderVideoCodec(associated_decoder);
+    associated_codec.codecType = kVideoCodecStereo;
+    return associated_codec;
   }
 
   codec.width = 320;

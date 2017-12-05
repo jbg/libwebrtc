@@ -2,6 +2,7 @@ include_rules = [
   "+vpx",
   "+call",
   "+common_video",
+  "+media/base",
   "+system_wrappers",
   "+rtc_tools",
 ]
@@ -12,7 +13,6 @@ specific_include_rules = {
     "+sdk",
   ],
   "(.*test\.cc|.*test\.h|.*test\.mm)": [
-     "+media/base",
      "+media/engine",
      "+sdk",
   ],

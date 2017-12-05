@@ -31,6 +31,10 @@ extern const char kRedCodecName[];
 extern const char kUlpfecCodecName[];
 extern const char kFlexfecCodecName[];
 
+// Used for stereo only.
+extern const char kStereoCodecName[];
+extern const char* kStereoAssociatedCodecName;
+
 extern const char kFlexfecFmtpRepairWindow[];
 
 // Codec parameters

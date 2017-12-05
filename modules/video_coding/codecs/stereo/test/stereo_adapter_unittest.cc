@@ -44,6 +44,7 @@ class TestStereoAdapter : public VideoCodecTest {
     codec_settings.codecType = webrtc::kVideoCodecVP9;
     codec_settings.VP9()->numberOfTemporalLayers = 1;
     codec_settings.VP9()->numberOfSpatialLayers = 1;
+    codec_settings.codecType = webrtc::kVideoCodecStereo;
     return codec_settings;
   }
 
