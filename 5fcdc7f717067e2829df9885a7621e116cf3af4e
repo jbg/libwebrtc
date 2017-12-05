@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "ded42079_601fd61f",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-05T23:09:30Z",
+      "side": 1,
+      "message": "UTF8-\u003ewchar? Really, or was char-\u003ewchar meant?",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a72cc68_85eb518b",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-05T23:09:30Z",
+      "side": 1,
+      "message": "Would it perhaps be better to DCHECK that it is not invalid?",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5714cd4_93961136",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-05T23:09:30Z",
+      "side": 1,
+      "message": "Remove this dangling return statement?",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "283e840b_4446759b",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
@@ -25,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "96046d9c_d9a140a9",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-05T23:09:30Z",
+      "side": 1,
+      "message": "Removing this if-block would be more in line with the documentation.\n\"Write() may not be called on an inactive output sink.\"\nIf we DCHECK, the return value has a simpler meaning of \"success/failure\", rather than \"success/failure-or-illegal-call\".",
+      "parentUuid": "283e840b_4446759b",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0aafe655_c3f6c4ea",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
@@ -36,6 +111,30 @@
       "writtenOn": "2017-12-05T16:52:32Z",
       "side": 1,
       "message": "Remove this function and call IsActive instead?",
+      "range": {
+        "startLine": 105,
+        "startChar": 28,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b155a58d_59710fcd",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-05T23:09:30Z",
+      "side": 1,
+      "message": "Not sure you want to do this. I did this so as to avoid an unnecessary virtual function call. Maybe add a comment explaining this instead?",
+      "parentUuid": "0aafe655_c3f6c4ea",
       "range": {
         "startLine": 105,
         "startChar": 28,
