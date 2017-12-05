@@ -139,6 +139,11 @@ rtc_source_set("test_support") {
     "testsupport/unittest_utils.h",
   ]
 
+  if (is_ios) {
+    sources += [ "ios_test_main.mm" ]
+    deps += [ "../sdk:common_objc" ]
+  }
+
   public_deps = [
     ":fileutils",
   ]
