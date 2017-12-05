@@ -21,6 +21,13 @@
 #if defined(WEBRTC_IOS)
 #include "test/ios/test_support.h"
 
+namespace webrtc {
+namespace test {
+// Defined in iosfileutils.mm.  No header file to discourage use elsewhere.
+std::string IOSDocumentDirectory();
+}  // namespace test
+}  // namespace webrtc
+
 DEFINE_string(NSTreatUnknownArgumentsAsOpen, "",
     "Intentionally ignored flag intended for iOS simulator.");
 DEFINE_string(ApplePersistenceIgnoreState, "",
@@ -74,9 +81,15 @@ int main(int argc, char* argv[]) {
   int exit_code = RUN_ALL_TESTS();
 
   std::string perf_results_json_path = FLAG_perf_results_json_path;
+#if defined(WEBRTC_IOS)
+  perf_results_json_path = (
+      webrtc::test::IOSDocumentDirectory() + "/perf_result.json");
+#endif
   if (perf_results_json_path != "") {
     std::string json_results = webrtc::test::GetPerfResultsJSON();
     rtc::File json_file = rtc::File::Open(perf_results_json_path);
+    printf("LEMUR\n\n%s\n%s\n\n", json_results.c_str(),
+           perf_results_json_path.c_str());
     json_file.Write(reinterpret_cast<const uint8_t*>(json_results.c_str()),
                     json_results.size());
     json_file.Close();
