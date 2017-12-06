@@ -238,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "73b072d4_f9031cad",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-06T11:48:03Z",
+      "side": 1,
+      "message": "\u003e Where does the old Write() check IsActiveInternal() a second time after the DCHECK?\n\nIn the old case, the !IsActiveInternal case corresponds to file_ in this class being non-null, but it points to a FileWrapper with FileWrapper::file_ (another FILE*) which is null. And FileWrapper::Write includes the check\n\n  if (file_ \u003d\u003d nullptr)\n    return false;\n\nThat check is then folded into this class when the wrapping of the FILE* is removed.\n\nSo Write on an inactive RtcEventLogOutputFile would trigger a DCHECK, if enabled, otherwise, do nothing, not crash, and return false. And that behavior is intended to be unchanged as of patchset #5.",
+      "parentUuid": "579d6d0c_a2832fb1",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0aafe655_c3f6c4ea",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
