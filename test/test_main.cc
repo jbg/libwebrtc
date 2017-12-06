@@ -75,11 +75,7 @@ int main(int argc, char* argv[]) {
 
   std::string perf_results_json_path = FLAG_perf_results_json_path;
   if (perf_results_json_path != "") {
-    std::string json_results = webrtc::test::GetPerfResultsJSON();
-    rtc::File json_file = rtc::File::Open(perf_results_json_path);
-    json_file.Write(reinterpret_cast<const uint8_t*>(json_results.c_str()),
-                    json_results.size());
-    json_file.Close();
+    webrtc::test::WritePerfResults(perf_results_json_path);
   }
 
   return exit_code;

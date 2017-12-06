@@ -10,6 +10,7 @@
 
 #include "test/testsupport/perf_test.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/file.h"
 
 #include <stdio.h>
 #include <map>
@@ -152,6 +153,14 @@ void ClearPerfResults() {
 
 std::string GetPerfResultsJSON() {
   return GetPerfResultsLogger().ToJSON();
+}
+
+void WritePerfResults(const std::string& output_path) {
+  std::string json_results = GetPerfResultsJSON();
+  rtc::File json_file = rtc::File::Create(output_path);
+  json_file.Write(reinterpret_cast<const uint8_t*>(json_results.c_str()),
+                  json_results.size());
+  json_file.Close();
 }
 
 void PrintResult(const std::string& measurement,
