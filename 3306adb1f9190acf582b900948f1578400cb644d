@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "593a3d40_6ab684ac",
+        "filename": "test/ios/test_support.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2017-12-06T14:19:14Z",
+      "side": 1,
+      "message": "Can\u0027t we just declare this as webrtc::test::IOSDocumentDirectory() to have less noise in the code?",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 32
+      },
+      "revId": "3306adb1f9190acf582b900948f1578400cb644d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19190086_18a560c6",
+        "filename": "test/ios_test_main.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2017-12-06T14:19:14Z",
+      "side": 1,
+      "message": "This file should almost certainly not be named ios_test_main as it does not contain a main function.",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "3306adb1f9190acf582b900948f1578400cb644d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deb0fa53_283b7f27",
+        "filename": "test/ios_test_main.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2017-12-06T14:19:14Z",
+      "side": 1,
+      "message": "this is not used here.",
+      "range": {
+        "startLine": 20,
+        "startChar": 19,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "3306adb1f9190acf582b900948f1578400cb644d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d96ee81_d19fe692",
+        "filename": "test/ios_test_main.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2017-12-06T14:19:14Z",
+      "side": 1,
+      "message": "No need for this variable, just use the string literal directly.",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "3306adb1f9190acf582b900948f1578400cb644d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "261cda2a_8ed16c93",
+        "filename": "test/ios_test_main.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2017-12-06T14:19:14Z",
+      "side": 1,
+      "message": "You explicitly append \"perf_result.json\" to the path where this function is used. Given the function\u0027s name it should probably not do this.",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "3306adb1f9190acf582b900948f1578400cb644d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
