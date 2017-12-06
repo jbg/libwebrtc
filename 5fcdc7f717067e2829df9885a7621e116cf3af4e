@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e8bc99ba_20af0e84",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-06T10:11:04Z",
+      "side": 1,
+      "message": "Thanks for elaborating.",
+      "parentUuid": "78648414_790446dc",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a72cc68_85eb518b",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
@@ -69,6 +87,24 @@
       "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896c9038_c38b5df4",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-06T10:11:04Z",
+      "side": 1,
+      "message": "Ah, right - I\u0027ve missed that there\u0027s now a ctor where you call CreatePlatformFile() and then forward the result to this ctor.",
+      "parentUuid": "bb431484_5e047110",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -178,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "579d6d0c_a2832fb1",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-06T10:11:04Z",
+      "side": 1,
+      "message": "Where does the old Write() check IsActiveInternal() a second time after the DCHECK? I don\u0027t see that. What I do see is that on line 91 (old version of the file), it dereferences |file_| using operator-\u003e, after it DCHECKed that its\u0027 valid (using IsActiveInternal).",
+      "parentUuid": "804da35a_f42e8d42",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0aafe655_c3f6c4ea",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
@@ -270,6 +330,30 @@
       "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf9a1070_2390ae25",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-06T10:11:04Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "dc05fa2d_4f9a74fc",
+      "range": {
+        "startLine": 105,
+        "startChar": 28,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
