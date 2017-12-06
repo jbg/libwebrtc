@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "674d311a_3534a824",
+        "filename": "test/ios/test_support.mm",
+        "patchSetId": 29
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5028
+      },
+      "writtenOn": "2017-12-06T16:38:10Z",
+      "side": 1,
+      "message": "If I output the JSON before running the application, I get an empty JSON file.\nIf I do this, I don\u0027t get a JSON file at all.\n\nDo you know what I\u0027m doing wrong?",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 75
+      },
+      "revId": "b36c190613b226a49811adc852ed29515829cd7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
