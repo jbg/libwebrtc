@@ -10,7 +10,9 @@
 
 #import <UIKit/UIKit.h>
 
+#include "rtc_base/file.h"
 #include "test/ios/test_support.h"
+#include "test/testsupport/perf_test.h"
 
 #import "sdk/objc/Framework/Classes/Common/RTCUIApplicationStatusObserver.h"
 
@@ -100,7 +102,20 @@ void InitTestSuite(int (*test_suite)(void), int argc, char *argv[]) {
 }
 
 void RunTestsFromIOSApp() {
+  using webrtc::ios::StdStringFromNSString;
+
   @autoreleasepool {
+    // Stores data into a json file under the app's document directory.
+    NSString* fileName = @"perf_result.json";
+    NSArray<NSString*>* outputDirectories = NSSearchPathForDirectoriesInDomains(
+        NSDocumentDirectory, NSUserDomainMask, YES);
+    if ([outputDirectories count] == 0) {
+      return false;
+    }
+    NSString* outputPath =
+        [outputDirectories[0] stringByAppendingPathComponent:fileName];
+
+    webrtc::test::WritePerfResults(StdStringFromNSString(outputPath));
     exit(UIApplicationMain(g_argc, g_argv, nil, @"WebRtcUnitTestDelegate"));
   }
 }
