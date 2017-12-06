@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ddfd363_a041b196",
+        "filename": "pc/externalhmac.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-06T10:14:17Z",
+      "side": 1,
+      "message": "Sorry, I know I didn\u0027t say this, but comment out the arguments only in the definition, not in the declaration. In declarations, all arguments are always unused, so there\u0027s no need to comment out their names---they\u0027re all essentially comments already. Also, that the implementation ignores one of its arguments is an implementation detail that doesn\u0027t belong in the declaration.",
+      "revId": "a182eaf60d3cd0327203904954a18cfeb7ee17b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
