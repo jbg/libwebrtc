@@ -11,8 +11,10 @@
 #import <UIKit/UIKit.h>
 
 #include "test/ios/test_support.h"
+#include "test/testsupport/perf_test.h"
 
 #import "sdk/objc/Framework/Classes/Common/RTCUIApplicationStatusObserver.h"
+#include "sdk/objc/Framework/Classes/Common/helpers.h"
 
 // Springboard will kill any iOS app that fails to check in after launch within
 // a given time. Starting a UIApplication before invoking TestSuite::Run
@@ -85,6 +87,18 @@ static char **g_argv;
   // things can think the app crashed even on a zero exit status).
   UIApplication *application = [UIApplication sharedApplication];
   [application _terminateWithStatus:exitStatus];
+
+  // Stores data into a json file under the app's document directory.
+  NSString* fileName = @"perf_result.json";
+  NSArray<NSString*>* outputDirectories = NSSearchPathForDirectoriesInDomains(
+      NSDocumentDirectory, NSUserDomainMask, YES);
+  if ([outputDirectories count] != 0) {
+    NSString* outputPath =
+        [outputDirectories[0] stringByAppendingPathComponent:fileName];
+
+    webrtc::test::WritePerfResults(
+        webrtc::ios::StdStringFromNSString(outputPath));
+  }
 
   exit(exitStatus);
 }
