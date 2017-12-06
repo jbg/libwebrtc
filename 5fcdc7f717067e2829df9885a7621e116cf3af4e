@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "78648414_790446dc",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-06T08:56:33Z",
+      "side": 1,
+      "message": "As I understand it, our convention is that char* filenames always are utf-8. And if you check the windows version of CreatePlatformFile, it\u0027s implemented as \n\n         ::CreateFile(ToUtf16(path).c_str(), ...);\n\nand ToUtf16 is implemented as a call to ::MultiByteToWideChar(CP_UTF8, ...).\n                                                              ^^^^^^^\n\nI\u0027m blissfully ignorant of most windows details, but it seems like windows functions that take a char* for the filename (both standard C functions like fopen, and windows system calls) interpret the string according to current locale, and convert to unicode in a different way.\n\nUnlike unix/posix, where the only characters that the system cares about in a filename are \u0027\\0\u0027 and \u0027/\u0027, the rest are just arbitrary bytes. Then it\u0027s up to applications to agree on charset, and today, utf-8 is what almost everyone is using. (Even if I have a few old files lying around with filenames which only make sense when interpreted as iso-8859-1 aka latin-1).",
+      "parentUuid": "ded42079_601fd61f",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8a72cc68_85eb518b",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-05T23:09:30Z",
       "side": 1,
       "message": "Would it perhaps be better to DCHECK that it is not invalid?",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb431484_5e047110",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-06T08:56:33Z",
+      "side": 1,
+      "message": "No, then calls to RtcEventLogOutputFile::RtcEventLogOutputFile(const std::string\u0026 file_name) would crash if file open (done by rtc::CretePlatformFile) fails.\n\nThe comment above is intended to explain that, suggestions on how to make it clearer are appreciated.",
+      "parentUuid": "8a72cc68_85eb518b",
       "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d2a91a0_f3e194c4",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-06T08:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5714cd4_93961136",
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +142,30 @@
       "side": 1,
       "message": "Removing this if-block would be more in line with the documentation.\n\"Write() may not be called on an inactive output sink.\"\nIf we DCHECK, the return value has a simpler meaning of \"success/failure\", rather than \"success/failure-or-illegal-call\".",
       "parentUuid": "283e840b_4446759b",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "804da35a_f42e8d42",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-06T08:56:33Z",
+      "side": 1,
+      "message": "The old code, if I understood it correctly, has the DCHECK, and then it returns false if the file isn\u0027t active (i.e., was never opened successfully, or suffered a write failure). Which is somewhat bad style.\n\nWe have too options:\n\n1. Delete the if, and access file_ unconditionally. Then we will crash if file_ \u003d\u003d nullptr, and the DCHECK makes no sense, it should either be a CHECK (to crash with a friendlier error message) or deleted. Has some purity advantage.\n\n2. Delete the DCHECK. Then checking IsActive after construction becomes mandatory, which is somewhat inconvenient for callers. It might be friendlier to make Write a return-false NOP operation after any failure (both open failure and write failure).\n\nI\u0027m happy to change the behavior if you agree on what\u0027s the right change. You just have to decide on the semantics of the interface. I think (2) agrees with current documentation of RtcEventLogOutput.",
+      "parentUuid": "96046d9c_d9a140a9",
       "range": {
         "startLine": 79,
         "startChar": 7,
@@ -159,6 +237,30 @@
       "side": 1,
       "message": "Checked again - it\u0027s already documented:\n  // IsActive() can be called either from outside or from inside, but we don\u0027t\n  // want to incur the overhead of a virtual function call if called from inside\n  // some other function of this class.\nMight not hurt to replicate the comment here, though, or to have a shorter comment here.",
       "parentUuid": "b155a58d_59710fcd",
+      "range": {
+        "startLine": 105,
+        "startChar": 28,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc05fa2d_4f9a74fc",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-06T08:56:33Z",
+      "side": 1,
+      "message": "Added a one-line comment here.",
+      "parentUuid": "8bf79969_61053f72",
       "range": {
         "startLine": 105,
         "startChar": 28,
