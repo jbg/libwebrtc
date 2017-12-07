@@ -321,12 +321,12 @@ webrtc_fuzzer_test("neteq_signal_fuzzer") {
     "neteq_signal_fuzzer.cc",
   ]
   deps = [
+    ":fuzz_data_helper",
     "../../api:array_view",
     "../../modules/audio_coding:neteq",
     "../../modules/audio_coding:neteq_test_tools",
     "../../modules/audio_coding:neteq_tools_minimal",
     "../../modules/audio_coding:pcm16b",
-    "../../modules/rtp_rtcp",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_base_tests_utils",
   ]
@@ -408,4 +408,28 @@ webrtc_fuzzer_test("audio_processing_fuzzer") {
     "../../modules/audio_processing",
     "../../rtc_base:rtc_base_approved",
   ]
+}
+
+webrtc_fuzzer_test("comfort_noise_decoder_fuzzer") {
+  sources = [
+    "comfort_noise_decoder_fuzzer.cc",
+  ]
+  deps = [
+    ":fuzz_data_helper",
+    "../../api:array_view",
+    "../../modules/audio_coding:cng",
+    "../../rtc_base:rtc_base_approved",
+  ]
+}
+
+rtc_static_library("fuzz_data_helper") {
+  sources = [
+    "fuzz_data_helper.cc",
+    "fuzz_data_helper.h",
+  ]
+  deps = [
+    "../../api:array_view",
+    "../../modules/rtp_rtcp",
+  ]
+  visibility = [ ":*" ]  # Only targets in this file can depend on this.
 }
