@@ -674,8 +674,24 @@ bool ScreenCapturerMac::RegisterRefreshAndMoveHandlers() {
             ScreenRefresh(count, rects, display_origin);
           }
         };
+
+    const size_t properties_size = 1;
+    const CFTypeRef properties_keys[properties_size] = {kCGDisplayStreamShowCursor};
+    const CFTypeRef properties_values[properties_size] = {kCFBooleanFalse};
+    CFDictionaryRef properties_dict = CFDictionaryCreate(kCFAllocatorDefault,
+                                                         properties_keys,
+                                                         properties_values,
+                                                         properties_size,
+                                                         &kCFTypeDictionaryKeyCallBacks,
+                                                         &kCFTypeDictionaryValueCallBacks);
+
     CGDisplayStreamRef display_stream = CGDisplayStreamCreate(
-        display_id, pixel_width, pixel_height, 'BGRA', nullptr, handler);
+        display_id, pixel_width, pixel_height, 'BGRA', properties_dict, handler);
+
+    if (properties_dict) {
+      CFRelease(properties_dict);
+      properties_dict = nullptr;
+    }
 
     if (display_stream) {
       CGError error = CGDisplayStreamStart(display_stream);
