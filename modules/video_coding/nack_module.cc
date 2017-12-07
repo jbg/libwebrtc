@@ -28,6 +28,14 @@ const int kProcessFrequency = 50;
 const int kProcessIntervalMs = 1000 / kProcessFrequency;
 const int kMaxReorderedPackets = 128;
 const int kNumReorderingBuckets = 10;
+
+// Mininum time between nack retries
+const int64_t kMinRetryIntervalMs = 5;
+// Max time to delay before allowing another nack attempt.
+const int64_t kMaxRetryIntervalMs = 1500;
+// Upper bound on link-delay considered for exponential backoff.
+const int64_t kMaxExpBackoffFactorMs = 50;
+
 }  // namespace
 
 NackModule::NackInfo::NackInfo()
@@ -232,7 +240,16 @@ std::vector<uint16_t> NackModule::GetNackBatch(NackFilterOptions options) {
       continue;
     }
 
-    if (consider_timestamp && it->second.sent_at_time + rtt_ms_ <= now_ms) {
+    int64_t resend_delay = std::max(rtt_ms_, kMinRetryIntervalMs);
+    if (it->second.retries > 1) {
+      int64_t exponential_backoff_ms =
+          std::min(rtt_ms_, kMaxExpBackoffFactorMs) *
+          (1 << (it->second.retries - 1));
+      resend_delay = std::max(resend_delay, exponential_backoff_ms);
+    }
+    resend_delay = std::min(kMaxRetryIntervalMs, resend_delay);
+    if (consider_timestamp &&
+        it->second.sent_at_time + resend_delay <= now_ms) {
       nack_batch.emplace_back(it->second.seq_num);
       ++it->second.retries;
       it->second.sent_at_time = now_ms;
