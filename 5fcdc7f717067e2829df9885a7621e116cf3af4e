@@ -262,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "1a03d43e_3c71a248",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-07T08:39:26Z",
+      "side": 1,
+      "message": "Discussed offline, and decided to go with (2). I was a confused by the old code\u0027s use of is_open(), when in fact the case that file_ !\u003d nullptr and !file_-\u003eis_open shouldn\u0027t happen.\n\nSo deleted the check from the Write method, and simplified the logic a bit, eliminating a few local variables.",
+      "parentUuid": "73b072d4_f9031cad",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "5fcdc7f717067e2829df9885a7621e116cf3af4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0aafe655_c3f6c4ea",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 4
