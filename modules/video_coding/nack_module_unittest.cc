@@ -26,6 +26,8 @@ class TestNackModule : public ::testing::Test,
         nack_module_(clock_.get(), this, this),
         keyframes_requested_(0) {}
 
+  void SetUp() override { nack_module_.UpdateRtt(kDefaultRttMs); }
+
   void SendNack(const std::vector<uint16_t>& sequence_numbers) override {
     sent_nacks_.insert(sent_nacks_.end(), sequence_numbers.begin(),
                        sequence_numbers.end());
@@ -33,6 +35,7 @@ class TestNackModule : public ::testing::Test,
 
   void RequestKeyFrame() override { ++keyframes_requested_; }
 
+  static constexpr int64_t kDefaultRttMs = 20;
   std::unique_ptr<SimulatedClock> clock_;
   NackModule nack_module_;
   std::vector<uint16_t> sent_nacks_;
@@ -172,6 +175,8 @@ TEST_F(TestNackModule, ResendNack) {
   EXPECT_EQ(2, sent_nacks_[0]);
 
   // Default RTT is 100
+  nack_module_.UpdateRtt(100);
+
   clock_->AdvanceTimeMilliseconds(99);
   nack_module_.Process();
   EXPECT_EQ(1u, sent_nacks_.size());
@@ -180,15 +185,22 @@ TEST_F(TestNackModule, ResendNack) {
   nack_module_.Process();
   EXPECT_EQ(2u, sent_nacks_.size());
 
+  // Exponential backoff will trigger, try after 2xRTT.
   nack_module_.UpdateRtt(50);
   clock_->AdvanceTimeMilliseconds(100);
   nack_module_.Process();
   EXPECT_EQ(3u, sent_nacks_.size());
 
+  // Exponential backoff again, try after 4x RTT.
   clock_->AdvanceTimeMilliseconds(50);
+  nack_module_.Process();
+  EXPECT_EQ(3u, sent_nacks_.size());
+
+  clock_->AdvanceTimeMilliseconds(150);
   nack_module_.Process();
   EXPECT_EQ(4u, sent_nacks_.size());
 
+  // Packet received, no more retransmissions expected.
   packet.seqNum = 2;
   nack_module_.OnReceivedPacket(packet);
   clock_->AdvanceTimeMilliseconds(50);
@@ -206,12 +218,13 @@ TEST_F(TestNackModule, ResendPacketMaxRetries) {
   EXPECT_EQ(2, sent_nacks_[0]);
 
   for (size_t retries = 1; retries < 10; ++retries) {
-    clock_->AdvanceTimeMilliseconds(100);
+    // Exponential backoff, so that we don't reject NACK because of time.
+    clock_->AdvanceTimeMilliseconds((1 << retries) * kDefaultRttMs);
     nack_module_.Process();
     EXPECT_EQ(retries + 1, sent_nacks_.size());
   }
 
-  clock_->AdvanceTimeMilliseconds(100);
+  clock_->AdvanceTimeMilliseconds((1 << 10) * kDefaultRttMs);
   nack_module_.Process();
   EXPECT_EQ(10u, sent_nacks_.size());
 }
@@ -314,4 +327,56 @@ TEST_F(TestNackModule, PacketNackCount) {
   EXPECT_EQ(0, nack_module_.OnReceivedPacket(packet));
 }
 
+TEST_F(TestNackModule, ExponentialBackoff) {
+  VCMPacket packet;
+  packet.seqNum = 0;
+  EXPECT_EQ(0, nack_module_.OnReceivedPacket(packet));
+  packet.seqNum = 2;
+  EXPECT_EQ(0, nack_module_.OnReceivedPacket(packet));
+  EXPECT_EQ(1u, sent_nacks_.size());
+
+  // Set a default RTT of 100ms.
+  nack_module_.UpdateRtt(100);
+
+  // First retry has no exponential backoff.
+  clock_->AdvanceTimeMilliseconds(99);
+  nack_module_.Process();
+  EXPECT_EQ(1u, sent_nacks_.size());
+  clock_->AdvanceTimeMilliseconds(1);
+  nack_module_.Process();
+  EXPECT_EQ(2u, sent_nacks_.size());
+
+  // Second retry exponential backoff kicks in, but RTT is capped at 50ms for
+  // this backoff, so 2x50 means it has no effect.
+  clock_->AdvanceTimeMilliseconds(99);
+  nack_module_.Process();
+  EXPECT_EQ(2u, sent_nacks_.size());
+  clock_->AdvanceTimeMilliseconds(1);
+  nack_module_.Process();
+  EXPECT_EQ(3u, sent_nacks_.size());
+
+  // Exponential backoff now 4x50.
+  clock_->AdvanceTimeMilliseconds(199);
+  nack_module_.Process();
+  EXPECT_EQ(3u, sent_nacks_.size());
+  clock_->AdvanceTimeMilliseconds(1);
+  nack_module_.Process();
+  EXPECT_EQ(4u, sent_nacks_.size());
+
+  // Two more times...
+  clock_->AdvanceTimeMilliseconds(400);
+  nack_module_.Process();
+  EXPECT_EQ(5u, sent_nacks_.size());
+  clock_->AdvanceTimeMilliseconds(800);
+  nack_module_.Process();
+  EXPECT_EQ(6u, sent_nacks_.size());
+
+  // Max retry interval is capped at 1500ms, reducing next backoff of 1600.
+  clock_->AdvanceTimeMilliseconds(1499);
+  nack_module_.Process();
+  EXPECT_EQ(6u, sent_nacks_.size());
+  clock_->AdvanceTimeMilliseconds(1);
+  nack_module_.Process();
+  EXPECT_EQ(7u, sent_nacks_.size());
+}
 }  // namespace webrtc
