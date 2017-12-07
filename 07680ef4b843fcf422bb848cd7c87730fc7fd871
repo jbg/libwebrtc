@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "be943c28_abe5579d",
+        "filename": "pc/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-07T21:30:52Z",
+      "side": 0,
+      "message": "adjust_agc_delta should die from the lower level code as well.  This is all just testing irrelevant stuff that should die.  Remove it from the unit tests if you need it.  Remove it from the voice engine if you need to.  Kill as much as you can.",
+      "parentUuid": "76c99cdb_58fb4b68",
+      "range": {
+        "startLine": 1494,
+        "startChar": 0,
+        "endLine": 1496,
+        "endChar": 3
+      },
+      "revId": "07680ef4b843fcf422bb848cd7c87730fc7fd871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "84eb8034_84e99e3b",
         "filename": "pc/mediasession.h",
         "patchSetId": 1
