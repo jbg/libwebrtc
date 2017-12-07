@@ -46,6 +46,30 @@
       "revId": "b32c473770a0cc116341b889ff6fe58aef1c4530",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa0cc8e7_575ab29d",
+        "filename": "sdk/android/api/org/webrtc/VideoEncoderFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T13:29:27Z",
+      "side": 0,
+      "message": "Good point.",
+      "parentUuid": "11020a70_07e6bb73",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 8
+      },
+      "revId": "b32c473770a0cc116341b889ff6fe58aef1c4530",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
