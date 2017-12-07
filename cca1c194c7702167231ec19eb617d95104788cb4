@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "cb672d76_a765e7cd",
+        "filename": "test/fuzzers/fuzz_data_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-07T07:53:27Z",
+      "side": 1,
+      "message": "nit: This comment mentions FuzzSignalInput with no context (it\u0027s from neteq_signal_fuzzer), may need to be updated.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 78
+      },
+      "revId": "cca1c194c7702167231ec19eb617d95104788cb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a1dfe6e_ee453258",
+        "filename": "test/fuzzers/fuzz_data_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-07T07:53:27Z",
+      "side": 1,
+      "message": "Very loose thought / nit: All existing callers of SelectOneOf have arrays but must explicitly wrap them in rtc::ArrayViews. I think the function could be overloaded (or changed, but then it can\u0027t be used with arrays in dynamic memory) to the below, to get rid of that.\ntemplate \u003ctypename T, size_t N\u003e\n  T SelectOneOf(const T (\u0026select_from)[N]) { ... }",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 54
+      },
+      "revId": "cca1c194c7702167231ec19eb617d95104788cb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46f1535b_44148154",
         "filename": "test/fuzzers/fuzz_data_helper.h",
         "patchSetId": 3

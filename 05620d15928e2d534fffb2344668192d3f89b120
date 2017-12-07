@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8fd7fbaf_bf4799d5",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2017-12-07T07:53:27Z",
+      "side": 1,
+      "message": "Oh, that made a lot of sense too. Thanks for clarifying.",
+      "parentUuid": "f8aba783_8d2d60f0",
+      "range": {
+        "startLine": 413,
+        "startChar": 20,
+        "endLine": 413,
+        "endChar": 27
+      },
+      "revId": "05620d15928e2d534fffb2344668192d3f89b120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a3d15e4_dd3a67ec",
         "filename": "test/fuzzers/webrtc_cng_fuzzer.cc",
         "patchSetId": 2
