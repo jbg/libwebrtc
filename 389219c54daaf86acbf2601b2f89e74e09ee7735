@@ -70,6 +70,30 @@
       "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d1575f_b1d15698",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2017-12-07T20:39:28Z",
+      "side": 1,
+      "message": "Thanks for your patience. I had to go review the Chromium code to understand how this situation is handled in Chromium, which is trying to solve a similar problem. As it turns out, Chromium injects its own NetworkManager where it controls enumeration via the enumeration_permission function, which is admittedly awkward for typical WebRTC applications.\n\nAnyway, let\u0027s take a step back. \n1) It\u0027s not clear to me that having a link-local address is actually a problem - connectivity will still proceed on the other addresses.\n2) If we believe that optimizing away link-local candidates is a useful optimization, I would focus on solving that problem, rather than disabling enumeration entirely. Disabling enumeration is designed for a different purpose and has several downsides (e.g. preventing p2p connectivity for users on the same network).\n3) If, regardless, we think there\u0027s a good reason to expose this for its intended purpose (i.e., controlling which addresses are exposed to the app), it should be global, and therefore an option on PeerConnectionFactory::Options rather than on an individual PeerConnection.",
+      "parentUuid": "e8623417_c5288d96",
+      "range": {
+        "startLine": 693,
+        "startChar": 9,
+        "endLine": 693,
+        "endChar": 36
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
