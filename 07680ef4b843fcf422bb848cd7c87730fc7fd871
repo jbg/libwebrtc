@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "606eb9b7_0ff7e51e",
+        "filename": "pc/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-07T19:50:18Z",
+      "side": 0,
+      "message": "I tried to remove it but ran into a lot of test failures that I couldn\u0027t figure out.. I\u0027ll give it a try once more and see what happens.",
+      "parentUuid": "7945d236_99a6069f",
+      "range": {
+        "startLine": 1494,
+        "startChar": 0,
+        "endLine": 1496,
+        "endChar": 3
+      },
+      "revId": "07680ef4b843fcf422bb848cd7c87730fc7fd871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84eb8034_84e99e3b",
         "filename": "pc/mediasession.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-07T19:46:51Z",
       "side": 0,
       "message": "Looks like this is used internally.",
+      "range": {
+        "startLine": 213,
+        "startChar": 7,
+        "endLine": 213,
+        "endChar": 22
+      },
+      "revId": "07680ef4b843fcf422bb848cd7c87730fc7fd871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5987c6b1_d6b70507",
+        "filename": "pc/mediasession.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-07T19:50:18Z",
+      "side": 0,
+      "message": "Not any more, removed the last use yesterday.",
+      "parentUuid": "84eb8034_84e99e3b",
       "range": {
         "startLine": 213,
         "startChar": 7,
