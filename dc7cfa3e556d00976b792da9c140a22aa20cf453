@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "da4b06dc_b753fb91",
+        "filename": "sdk/android/src/jni/jni_helpers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "I agree but I think it\u0027s low priority since we only have one use for it so far and it\u0027s already contained in jni_helpers. Let\u0027s postpone that work.",
+      "parentUuid": "f1d21798_2a7d8452",
+      "range": {
+        "startLine": 339,
+        "startChar": 35,
+        "endLine": 339,
+        "endChar": 54
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ba7b32f_8ecf0c0f",
         "filename": "sdk/android/src/jni/jni_helpers.h",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e6e39f7_6729167b",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "Yes, but the generated JNI files are implementation files that I can\u0027t include from headers, so I need to include them from the .cc file. But since the helper functions are templates, I need to have the definition here, creating the need for these simple Java classes.\n\nAlso, in one place they had a more complex need - they would make a check on the element and sometimes not add it to the Java list, and then they need to use this builder class directly.",
+      "parentUuid": "9ba7b32f_8ecf0c0f",
+      "range": {
+        "startLine": 281,
+        "startChar": 6,
+        "endLine": 281,
+        "endChar": 21
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "f6f33c74_ed6cee73",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7797ce23_d6ad2ee3",
+      "range": {
+        "startLine": 285,
+        "startChar": 10,
+        "endLine": 285,
+        "endChar": 21
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f77c2af_73a2ec37",
         "filename": "sdk/android/src/jni/pc/androidnetworkmonitor_jni.cc",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6a6c64d_af417e35",
+        "filename": "sdk/android/src/jni/pc/androidnetworkmonitor_jni.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "Done, but this is an unrelated change.",
+      "parentUuid": "7f77c2af_73a2ec37",
+      "range": {
+        "startLine": 88,
+        "startChar": 22,
+        "endLine": 88,
+        "endChar": 42
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "fb6715b2_e0194c68",
+        "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25d734f6_f1a67385",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 19
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85f72734_eaa3e423",
         "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
         "patchSetId": 8
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "caf96287_e3d9e1ac",
+        "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85f72734_eaa3e423",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 20
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9da240fa_cb1c1f26",
         "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
         "patchSetId": 8
@@ -160,6 +304,30 @@
       "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aad6447d_9d724883",
+        "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 1,
+      "message": "I only take scoped_refptr by-value when I want to snatch the ref with a .release() call.",
+      "parentUuid": "9da240fa_cb1c1f26",
+      "range": {
+        "startLine": 115,
+        "startChar": 21,
+        "endLine": 115,
+        "endChar": 75
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

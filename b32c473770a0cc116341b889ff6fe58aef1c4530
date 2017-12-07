@@ -22,6 +22,30 @@
       "revId": "b32c473770a0cc116341b889ff6fe58aef1c4530",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11020a70_07e6bb73",
+        "filename": "sdk/android/api/org/webrtc/VideoEncoderFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:13:37Z",
+      "side": 0,
+      "message": "Because it\u0027s an interface, and it\u0027s implicitly public already.\n\nYou gave me review feedback in a previous CL to remove public on an interface for an unrelated change, so I thought I might do it directly this time to save review time.",
+      "parentUuid": "23208dac_ed41e260",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 8
+      },
+      "revId": "b32c473770a0cc116341b889ff6fe58aef1c4530",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
