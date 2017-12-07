@@ -140,6 +140,30 @@
       "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a52bb941_47d7efe1",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T16:10:51Z",
+      "side": 1,
+      "message": "Yes, \u0027stereo\u0027 is the name, but the SdpVideoFormat also carries a |parameters| string key value map. You used to set a param kCodecParamAssociatedCodecName -\u003e \"VP9\". You can still do that and then extract that parameter here.",
+      "parentUuid": "151ba061_427e2203",
+      "range": {
+        "startLine": 96,
+        "startChar": 31,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
