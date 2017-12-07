@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23208dac_ed41e260",
+        "filename": "sdk/android/api/org/webrtc/VideoEncoderFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 0,
+      "message": "Why is this not public anymore?",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 8
+      },
+      "revId": "b32c473770a0cc116341b889ff6fe58aef1c4530",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

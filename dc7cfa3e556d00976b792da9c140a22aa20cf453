@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1d21798_2a7d8452",
+        "filename": "sdk/android/src/jni/jni_helpers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "Maybe we should create JavaToNativeMap?",
+      "range": {
+        "startLine": 339,
+        "startChar": 35,
+        "endLine": 339,
+        "endChar": 54
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ba7b32f_8ecf0c0f",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "nit: I don\u0027t really think these helpers are worth it. All the methods are just a single line and they are only called from a single place?",
+      "range": {
+        "startLine": 281,
+        "startChar": 6,
+        "endLine": 281,
+        "endChar": 21
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7797ce23_d6ad2ee3",
+        "filename": "sdk/android/src/jni/jni_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "nit: name java_list and include implementation in the header?",
+      "range": {
+        "startLine": 285,
+        "startChar": 10,
+        "endLine": 285,
+        "endChar": 21
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f77c2af_73a2ec37",
+        "filename": "sdk/android/src/jni/pc/androidnetworkmonitor_jni.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "nit: JavaToNativeIPAddress",
+      "range": {
+        "startLine": 88,
+        "startChar": 22,
+        "endLine": 88,
+        "endChar": 42
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25d734f6_f1a67385",
+        "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "nit: NativeToJavaRTCStats",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 19
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85f72734_eaa3e423",
+        "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "nit: NativeToJavaRTCStatsReport",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 20
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9da240fa_cb1c1f26",
+        "filename": "sdk/android/src/jni/pc/rtcstatscollectorcallbackwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-07T10:19:46Z",
+      "side": 1,
+      "message": "Hmm, I wonder if it is better to take a const reference to a scoped_refptr or just pass it by value. You did the opposite earlier.",
+      "range": {
+        "startLine": 115,
+        "startChar": 21,
+        "endLine": 115,
+        "endChar": 75
+      },
+      "revId": "dc7cfa3e556d00976b792da9c140a22aa20cf453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
