@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6354752_ef1e3503",
+        "filename": "sdk/android/src/jni/pc/java_native_conversion.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-07T13:12:36Z",
+      "side": 1,
+      "message": "nit: Can you return a unique_ptr here and do the release for the call sites instead? It would be nice to keep it in std::unique_ptrs as far as possible.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 28
+      },
+      "revId": "07680ef4b843fcf422bb848cd7c87730fc7fd871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
