@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe7a595c_8502b1d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-07T08:56:42Z",
+      "side": 1,
+      "message": "I couldn\u0027t have said it better myself.",
+      "revId": "d5d435c86d95aaa6c3cf11ca2a8af7c9f18fce35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46bff397_b395a824",
+        "filename": "modules/audio_coding/neteq/tools/rtp_encode.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-07T08:56:42Z",
+      "side": 1,
+      "message": "It\u0027s probably more readable if you use AudioEncoderOpus::Config instead of auto.",
+      "range": {
+        "startLine": 199,
+        "startChar": 6,
+        "endLine": 199,
+        "endChar": 10
+      },
+      "revId": "d5d435c86d95aaa6c3cf11ca2a8af7c9f18fce35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3a19a22_fdd75916",
+        "filename": "modules/audio_coding/neteq/tools/rtp_encode.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-07T08:56:42Z",
+      "side": 1,
+      "message": "Here too.",
+      "range": {
+        "startLine": 210,
+        "startChar": 6,
+        "endLine": 210,
+        "endChar": 10
+      },
+      "revId": "d5d435c86d95aaa6c3cf11ca2a8af7c9f18fce35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
