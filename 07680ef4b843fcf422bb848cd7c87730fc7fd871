@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "76c99cdb_58fb4b68",
+        "filename": "pc/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-07T20:13:32Z",
+      "side": 0,
+      "message": "OK, I think I understand this time:\n\nhttps://codesearch.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtcvoiceengine.cc?q\u003dwebrtcvoiceengine.cc\u0026dr\u0026l\u003d321\n\nSets the adjust_agc_delta to 0, which fills in the optional so when this if statement is hit\n\nhttps://codesearch.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtcvoiceengine.cc?q\u003dwebrtcvoiceengine.cc\u0026dr\u0026l\u003d493\n\nIt is always true (since adjust_agc_delta is not nullopt) and calls SetAgcConfig. (Note that the other properties here are not initialized in ::Init so don\u0027t cause this same behavior.)\n\nThe expectation in the unit tests is:\n\nhttps://codesearch.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtcvoiceengine_unittest.cc?l\u003d211\n\nBut with the removal of adjust_agc_delta, the SetAgcConfig function is not called so those three functions are never called.\n\nNow, I don\u0027t know if it\u0027s important for those functions to get called. It certainly seems like an accident, but the unit tests actually do test for it. I think someone more familiar with the WebRtcVoiceEngine would have to chime in here.",
+      "parentUuid": "1ebf452b_a5f011eb",
+      "range": {
+        "startLine": 1494,
+        "startChar": 0,
+        "endLine": 1496,
+        "endChar": 3
+      },
+      "revId": "07680ef4b843fcf422bb848cd7c87730fc7fd871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "84eb8034_84e99e3b",
         "filename": "pc/mediasession.h",
         "patchSetId": 1
