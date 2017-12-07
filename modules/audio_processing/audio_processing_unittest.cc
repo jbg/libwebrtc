@@ -2912,9 +2912,9 @@ TEST(ApmConfiguration, EnablePostProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.
   webrtc::Config webrtc_config;
   auto mock_post_processor_ptr =
-      new testing::NiceMock<test::MockPostProcessing>();
+      new testing::NiceMock<test::MockCustomProcessing>();
   auto mock_post_processor =
-      std::unique_ptr<PostProcessing>(mock_post_processor_ptr);
+      std::unique_ptr<CustomProcessing>(mock_post_processor_ptr);
   rtc::scoped_refptr<AudioProcessing> apm = AudioProcessing::Create(
       webrtc_config, std::move(mock_post_processor), nullptr, nullptr);
 
@@ -2923,6 +2923,24 @@ TEST(ApmConfiguration, EnablePostProcessing) {
   SetFrameSampleRate(&audio, AudioProcessing::NativeRate::kSampleRate16kHz);
 
   EXPECT_CALL(*mock_post_processor_ptr, Process(testing::_)).Times(1);
+  apm->ProcessStream(&audio);
+}
+
+TEST(ApmConfiguration, EnablePreProcessing) {
+  // Verify that apm uses a capture post processing module if one is provided.
+  webrtc::Config webrtc_config;
+  auto mock_pre_processor_ptr =
+      new testing::NiceMock<test::MockCustomProcessing>();
+  auto mock_pre_processor =
+      std::unique_ptr<CustomProcessing>(mock_pre_processor_ptr);
+  rtc::scoped_refptr<AudioProcessing> apm = AudioProcessing::Create(
+      webrtc_config, nullptr, std::move(mock_pre_processor), nullptr, nullptr);
+
+  AudioFrame audio;
+  audio.num_channels_ = 1;
+  SetFrameSampleRate(&audio, AudioProcessing::NativeRate::kSampleRate16kHz);
+
+  EXPECT_CALL(*mock_pre_processor_ptr, Process(testing::_)).Times(1);
   apm->ProcessStream(&audio);
 }
 
