@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b09ecc6a_0b53b2da",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-07T09:03:47Z",
+      "side": 1,
+      "message": "1. Sorry, I seem to have been confused for a second. Ignore my previous comment.\n2. However, I wonder - does fwrite() gracefully handle zero length inputs?",
+      "parentUuid": "50bb1779_78c4c799",
+      "revId": "baa4adbf986f7a9fd2fc4952a8c84b97e0b6a5cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd84bcfb_5a679523",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.h",
         "patchSetId": 6
