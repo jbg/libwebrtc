@@ -16,6 +16,24 @@
       "revId": "5388deca686133a5718bd423ead0d21c524170e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4164b9e_ca7c44b7",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-08T13:07:04Z",
+      "side": 1,
+      "message": "counters below expect int. need to convert either here (once), or each time length passed to a counter (2 times).\n\nAdded comment and moved closer to where it is used.",
+      "parentUuid": "09814367_bb2bc469",
+      "revId": "5388deca686133a5718bd423ead0d21c524170e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
