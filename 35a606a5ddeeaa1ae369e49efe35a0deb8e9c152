@@ -188,6 +188,30 @@
       "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42c19933_dfc30f72",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-08T10:31:14Z",
+      "side": 1,
+      "message": "PS12 does not pass it in as a kCodecParamAssociatedCodecName parameter, it creates a new SdpVideoFormat with a new name. I think we should either pass in the SdpVideoFormat we get from CreateVideoDecoder unmodified to the decoder, or if you want to go with the approach of sending in the SdpVideoFormat for the associated video codec, you should look it up in the list of supported formats so that we keep all parameters. Now you are just using SdpVideoFormat to pass in a string, which I don\u0027t think we should do.",
+      "parentUuid": "20da529d_1d0a837e",
+      "range": {
+        "startLine": 96,
+        "startChar": 31,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
