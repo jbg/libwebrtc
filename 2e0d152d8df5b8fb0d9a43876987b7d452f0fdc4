@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bdd8c2c_69aa624c",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-08T19:33:33Z",
+      "side": 1,
+      "message": "This variable seems not necessary, you do not need it to initialize the two arrays later.",
+      "range": {
+        "startLine": 678,
+        "startChar": 17,
+        "endLine": 678,
+        "endChar": 32
+      },
+      "revId": "2e0d152d8df5b8fb0d9a43876987b7d452f0fdc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76a3afbc_59818a7d",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-08T19:33:33Z",
+      "side": 1,
+      "message": "You may use const void* to avoid a cast later.",
+      "range": {
+        "startLine": 679,
+        "startChar": 10,
+        "endLine": 679,
+        "endChar": 19
+      },
+      "revId": "2e0d152d8df5b8fb0d9a43876987b7d452f0fdc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13a602d8_ab93f63c",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-08T19:33:33Z",
+      "side": 1,
+      "message": "static const",
+      "range": {
+        "startLine": 679,
+        "startChar": 4,
+        "endLine": 679,
+        "endChar": 9
+      },
+      "revId": "2e0d152d8df5b8fb0d9a43876987b7d452f0fdc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a71878d0_e4d15d73",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-08T19:33:33Z",
+      "side": 1,
+      "message": "Indeed you can embed these two arrays directly into the function call here without declaring two arrays above.",
+      "range": {
+        "startLine": 682,
+        "startChar": 57,
+        "endLine": 682,
+        "endChar": 99
+      },
+      "revId": "2e0d152d8df5b8fb0d9a43876987b7d452f0fdc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac639958_99ffe8b4",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-08T19:33:33Z",
+      "side": 1,
+      "message": "const void**\n\nNo space between void and **\nhttps://cs.chromium.org/search/?q\u003d%22void**%22+lang:c%2B%2B\u0026sq\u003dpackage:chromium\u0026type\u003dcs\nv.s.\nhttps://cs.chromium.org/search/?q\u003d%22void+**%22+lang:c%2B%2B\u0026sq\u003dpackage:chromium\u0026type\u003dcs",
+      "range": {
+        "startLine": 683,
+        "startChar": 68,
+        "endLine": 683,
+        "endChar": 81
+      },
+      "revId": "2e0d152d8df5b8fb0d9a43876987b7d452f0fdc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6e33034_3b38e5be",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-08T19:33:33Z",
+      "side": 1,
+      "message": "You may try base::ScopedCFTypeRef\u003c\u003e to avoid manually CFRelease.",
+      "range": {
+        "startLine": 691,
+        "startChar": 8,
+        "endLine": 691,
+        "endChar": 23
+      },
+      "revId": "2e0d152d8df5b8fb0d9a43876987b7d452f0fdc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
