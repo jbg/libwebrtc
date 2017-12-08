@@ -733,16 +733,6 @@ int32_t AudioDeviceMac::StereoPlayout(bool& enabled) const {
   return 0;
 }
 
-int32_t AudioDeviceMac::SetAGC(bool enable) {
-  _AGC = enable;
-
-  return 0;
-}
-
-bool AudioDeviceMac::AGC() const {
-  return _AGC;
-}
-
 int32_t AudioDeviceMac::MicrophoneVolumeIsAvailable(bool& available) {
   bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
 

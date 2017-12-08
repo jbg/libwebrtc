@@ -129,10 +129,6 @@ public:
     virtual int32_t StopRecording();
     virtual bool Recording() const;
 
-    // Microphone Automatic Gain Control (AGC)
-    virtual int32_t SetAGC(bool enable);
-    virtual bool AGC() const;
-
     // Audio mixer initialization
     virtual int32_t InitSpeaker();
     virtual bool SpeakerIsInitialized() const;
