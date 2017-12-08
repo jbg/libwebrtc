@@ -1323,7 +1323,9 @@ PacketReceiver::DeliveryStatus Call::DeliverRtcp(MediaType media_type,
 PacketReceiver::DeliveryStatus Call::DeliverRtp(MediaType media_type,
                                                 rtc::CopyOnWriteBuffer packet,
                                                 const PacketTime& packet_time) {
-  int length = packet.size();
+  // RateCounters expect input parameter as int, save it as int,
+  // instead of converting each time it is passed to RateCounter::Add below.
+  int length = static_cast<int>(packet.size());
   TRACE_EVENT0("webrtc", "Call::DeliverRtp");
 
   RtpPacketReceived parsed_packet;
