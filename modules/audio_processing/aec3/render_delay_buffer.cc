@@ -28,8 +28,6 @@
 namespace webrtc {
 namespace {
 
-constexpr int kBufferHeadroom = kAdaptiveFilterLength;
-
 class RenderDelayBufferImpl final : public RenderDelayBuffer {
  public:
   RenderDelayBufferImpl(const EchoCanceller3Config& config, size_t num_bands);
@@ -41,7 +39,7 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
   void SetDelay(size_t delay) override;
   size_t Delay() const override { return delay_; }
   size_t MaxDelay() const override {
-    return blocks_.buffer.size() - 1 - kBufferHeadroom;
+    return blocks_.buffer.size() - 1 - buffer_headroom_;
   }
   size_t MaxApiJitter() const override { return max_api_jitter_; }
   const RenderBuffer& GetRenderBuffer() const override {
@@ -74,6 +72,7 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
   size_t capture_call_counter_ = 0;
   std::vector<float> render_ds_;
   int render_calls_in_a_row_ = 0;
+  const int buffer_headroom_;
 
   void UpdateBuffersWithLatestBlock(size_t previous_write);
   void IncreaseRead();
@@ -102,13 +101,17 @@ RenderDelayBufferImpl::RenderDelayBufferImpl(const EchoCanceller3Config& config,
       spectra_(blocks_.buffer.size(), kFftLengthBy2Plus1),
       ffts_(blocks_.buffer.size()),
       delay_(min_echo_path_delay_blocks_),
-      echo_remover_buffer_(kAdaptiveFilterLength, &blocks_, &spectra_, &ffts_),
+      echo_remover_buffer_(config.filter.length_blocks,
+                           &blocks_,
+                           &spectra_,
+                           &ffts_),
       low_rate_(GetDownSampledBufferSize(config.delay.down_sampling_factor,
                                          config.delay.num_filters)),
       render_decimator_(config.delay.down_sampling_factor),
       zero_block_(num_bands, std::vector<float>(kBlockSize, 0.f)),
       fft_(),
-      render_ds_(sub_block_size_, 0.f) {
+      render_ds_(sub_block_size_, 0.f),
+      buffer_headroom_(config.filter.length_blocks) {
   RTC_DCHECK_EQ(blocks_.buffer.size(), ffts_.buffer.size());
   RTC_DCHECK_EQ(spectra_.buffer.size(), ffts_.buffer.size());
   Reset();
