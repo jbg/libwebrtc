@@ -337,6 +337,10 @@ rtc_static_library("desktop_capture_generic") {
   if (use_desktop_capture_differ_sse2) {
     deps += [ ":desktop_capture_differ_sse2" ]
   }
+
+  if (is_mac) {
+    deps += [ "../../sdk:common_objc" ]
+  }
 }
 
 if (use_desktop_capture_differ_sse2) {
