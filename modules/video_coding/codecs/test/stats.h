@@ -21,7 +21,8 @@ namespace test {
 // Statistics for one processed frame.
 struct FrameStatistic {
   explicit FrameStatistic(int frame_number) : frame_number(frame_number) {}
-  const int frame_number = 0;
+  int frame_number = 0;
+  uint32_t rtp_timestamp = 0;
 
   // Encoding.
   int64_t encode_start_ns = 0;
@@ -29,11 +30,16 @@ struct FrameStatistic {
   bool encoding_successful = false;
   int encode_time_us = 0;
   int bitrate_kbps = 0;
+  size_t target_bitrate_kbps = 0;
   size_t encoded_frame_size_bytes = 0;
   webrtc::FrameType frame_type = kVideoFrameDelta;
 
+  // Layering.
+  size_t temporal_layer_idx = 0;
+  size_t simulcast_svc_idx = 0;
+
   // H264 specific.
-  rtc::Optional<size_t> max_nalu_length;
+  size_t max_nalu_size_bytes = 0;
 
   // Decoding.
   int64_t decode_start_ns = 0;
