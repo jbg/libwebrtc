@@ -44,10 +44,10 @@ std::unique_ptr<VideoBitrateAllocator> CreateBitrateAllocator(
                                                     std::move(tl_factory)));
 }
 
-rtc::Optional<size_t> GetMaxNaluLength(const EncodedImage& encoded_frame,
-                                       const TestConfig& config) {
+size_t GetMaxNaluSize(const EncodedImage& encoded_frame,
+                      const TestConfig& config) {
   if (config.codec_settings.codecType != kVideoCodecH264)
-    return rtc::nullopt;
+    return 0;
 
   std::vector<webrtc::H264::NaluIndex> nalu_indices =
       webrtc::H264::FindNaluIndices(encoded_frame._buffer,
@@ -55,11 +55,11 @@ rtc::Optional<size_t> GetMaxNaluLength(const EncodedImage& encoded_frame,
 
   RTC_CHECK(!nalu_indices.empty());
 
-  size_t max_length = 0;
+  size_t max_size = 0;
   for (const webrtc::H264::NaluIndex& index : nalu_indices)
-    max_length = std::max(max_length, index.payload_size);
+    max_size = std::max(max_size, index.payload_size);
 
-  return max_length;
+  return max_size;
 }
 
 int GetElapsedTimeMicroseconds(int64_t start_ns, int64_t stop_ns) {
@@ -174,6 +174,7 @@ void VideoProcessor::ProcessFrame() {
 
   // Create frame statistics object used for aggregation at end of test run.
   FrameStatistic* frame_stat = stats_->AddFrame();
+  frame_stat->rtp_timestamp = rtp_timestamp;
 
   // For the highest measurement accuracy of the encode time, the start/stop
   // time recordings should wrap the Encode call as tightly as possible.
@@ -185,9 +186,10 @@ void VideoProcessor::ProcessFrame() {
 void VideoProcessor::SetRates(int bitrate_kbps, int framerate_fps) {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&sequence_checker_);
   config_.codec_settings.maxFramerate = framerate_fps;
-  int set_rates_result = encoder_->SetRateAllocation(
-      bitrate_allocator_->GetAllocation(bitrate_kbps * 1000, framerate_fps),
-      framerate_fps);
+  bitrate_allocation_ =
+      bitrate_allocator_->GetAllocation(bitrate_kbps * 1000, framerate_fps);
+  const int set_rates_result =
+      encoder_->SetRateAllocation(bitrate_allocation_, framerate_fps);
   RTC_DCHECK_GE(set_rates_result, 0)
       << "Failed to update encoder with new rate " << bitrate_kbps << ".";
   ++rate_update_index_;
@@ -244,13 +246,16 @@ void VideoProcessor::FrameEncoded(webrtc::VideoCodecType codec,
   frame_stat->encoding_successful = true;
   frame_stat->encoded_frame_size_bytes = encoded_image._length;
   frame_stat->frame_type = encoded_image._frameType;
+  frame_stat->temporal_layer_idx = config_.TemporalLayerForFrame(frame_number);
   frame_stat->qp = encoded_image.qp_;
   frame_stat->bitrate_kbps = static_cast<int>(
       encoded_image._length * config_.codec_settings.maxFramerate * 8 / 1000);
+  frame_stat->target_bitrate_kbps =
+      bitrate_allocation_.GetSpatialLayerSum(0) / 1000;
   frame_stat->total_packets =
       encoded_image._length / config_.networking_config.packet_size_in_bytes +
       1;
-  frame_stat->max_nalu_length = GetMaxNaluLength(encoded_image, config_);
+  frame_stat->max_nalu_size_bytes = GetMaxNaluSize(encoded_image, config_);
 
   // Make a raw copy of |encoded_image| to feed to the decoder.
   size_t copied_buffer_size = encoded_image._length +

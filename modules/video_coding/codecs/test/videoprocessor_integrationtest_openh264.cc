@@ -58,12 +58,12 @@ TEST_F(VideoProcessorIntegrationTestOpenH264, Process0PercentPacketLoss) {
   config_.SetCodecSettings(kVideoCodecH264, 1, false, false, true, false,
                            kResilienceOn, kCifWidth, kCifHeight);
 
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFrames + 1}};
+  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFrames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {2, 60, 20, 10, 20, 0, 1}};
+      {5, 1, 0, 0.1, 0.2, 0.1, 0, 1}};
 
-  QualityThresholds quality_thresholds(35.0, 25.0, 0.93, 0.70);
+  std::vector<QualityThresholds> quality_thresholds = {{37, 35, 0.93, 0.91}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -79,15 +79,15 @@ TEST_F(VideoProcessorIntegrationTestOpenH264, ProcessNoLossSingleNalUnit) {
   config_.SetCodecSettings(kVideoCodecH264, 1, false, false, true, false,
                            kResilienceOn, kCifWidth, kCifHeight);
 
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFrames + 1}};
+  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFrames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {2, 60, 30, 10, 20, 0, 1}};
+      {5, 1, 0, 0.1, 0.2, 0.1, 0, 1}};
 
-  QualityThresholds quality_thresholds(35.0, 25.0, 0.93, 0.70);
+  std::vector<QualityThresholds> quality_thresholds = {{37, 35, 0.93, 0.91}};
 
-  BitstreamThresholds bs_thresholds(
-      config_.networking_config.max_payload_size_in_bytes);
+  BitstreamThresholds bs_thresholds = {
+      config_.networking_config.max_payload_size_in_bytes};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, &bs_thresholds,
