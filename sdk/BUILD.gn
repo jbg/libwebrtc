@@ -824,6 +824,7 @@ if (is_ios || is_mac) {
         "$rtc_libyuv_dir",
         "../api/video_codecs:video_codecs_api",
         "../common_video",
+        "../media:rtc_internal_video_codecs",
         "../media:rtc_media",
         "../media:rtc_media_base",
         "../modules:module_api",
