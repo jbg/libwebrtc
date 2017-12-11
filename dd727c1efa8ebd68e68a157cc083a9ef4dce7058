@@ -22,6 +22,29 @@
       "revId": "dd727c1efa8ebd68e68a157cc083a9ef4dce7058",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "820ca988_ea481f3d",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-11T20:55:04Z",
+      "side": 1,
+      "message": "I believe std::string() is preferred to avoid unnecessary instructions in the constructor.\n\nhttps://cs.chromium.org/search/?q\u003dstd::string%5C(%5C)\u0026sq\u003dpackage:chromium\u0026type\u003dcs\nv.s.\nhttps://cs.chromium.org/search/?q\u003d%5B%5C(,%5D.%5C%22%5C%22+lang:C%2B%2B+-file:.*_unittest%5C.cc+-file:.*_test.cc\u0026sq\u003dpackage:chromium\u0026type\u003dcs\n\nThough lots of people do not follow the rule.\n\n\nP.S. It\u0027s weird that webrtc/sdk:common_config_objc requires \"-Wmissing-field-initializers\" flag.",
+      "range": {
+        "startLine": 449,
+        "startChar": 4,
+        "endLine": 449,
+        "endChar": 37
+      },
+      "revId": "dd727c1efa8ebd68e68a157cc083a9ef4dce7058",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
