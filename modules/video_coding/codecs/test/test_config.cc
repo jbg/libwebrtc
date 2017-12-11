@@ -42,6 +42,8 @@ std::string CodecSpecificToString(const webrtc::VideoCodec& codec) {
       ss << "\n  Resilience        : " << codec.VP9().resilienceOn;
       ss << "\n  # temporal layers : "
          << static_cast<int>(codec.VP9().numberOfTemporalLayers);
+      ss << "\n  # simulcast streams  : "
+         << static_cast<int>(codec.numberOfSimulcastStreams);
       ss << "\n  Denoising         : " << codec.VP9().denoisingOn;
       ss << "\n  Frame dropping    : " << codec.VP9().frameDroppingOn;
       ss << "\n  Key frame interval: " << codec.VP9().keyFrameInterval;
@@ -118,6 +120,14 @@ int TestConfig::NumberOfTemporalLayers() const {
     return codec_settings.VP8().numberOfTemporalLayers;
   } else if (codec_settings.codecType == kVideoCodecVP9) {
     return codec_settings.VP9().numberOfTemporalLayers;
+  } else {
+    return 1;
+  }
+}
+
+int TestConfig::NumberOfSpatialLayers() const {
+  if (codec_settings.codecType == kVideoCodecVP9) {
+    return codec_settings.VP9().numberOfSpatialLayers;
   } else {
     return 1;
   }

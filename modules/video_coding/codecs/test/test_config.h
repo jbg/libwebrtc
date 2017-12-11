@@ -53,6 +53,7 @@ struct TestConfig {
 
   int NumberOfCores() const;
   int NumberOfTemporalLayers() const;
+  int NumberOfSpatialLayers() const;
   int TemporalLayerForFrame(int frame_idx) const;
   std::vector<FrameType> FrameTypeForFrame(int frame_idx) const;
   std::string ToString() const;

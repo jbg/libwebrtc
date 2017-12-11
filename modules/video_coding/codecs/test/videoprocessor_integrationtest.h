@@ -46,25 +46,18 @@ struct RateProfile {
 // frames, after a rate update is made to the encoder, for the encoder to reach
 // |kMaxBitrateMismatchPercent| of new target rate.
 struct RateControlThresholds {
-  int max_num_dropped_frames;
-  int max_key_framesize_mismatch_percent;
-  int max_delta_framesize_mismatch_percent;
-  int max_bitrate_mismatch_percent;
-  int max_num_frames_to_hit_target;
-  int num_spatial_resizes;
-  int num_key_frames;
+  float max_avg_bitrate_mismatch_percent;
+  float max_time_to_reach_target_bitrate_sec;
+  float max_avg_framerate_mismatch_percent;
+  float max_avg_buffer_level_sec;
+  float max_max_key_frame_delay_sec;
+  float max_max_delta_frame_delay_sec;
+  size_t max_num_spatial_resizes;
+  size_t max_num_key_frames;
 };
 
 // Thresholds for the quality metrics.
 struct QualityThresholds {
-  QualityThresholds(double min_avg_psnr,
-                    double min_min_psnr,
-                    double min_avg_ssim,
-                    double min_min_ssim)
-      : min_avg_psnr(min_avg_psnr),
-        min_min_psnr(min_min_psnr),
-        min_avg_ssim(min_avg_ssim),
-        min_min_ssim(min_min_ssim) {}
   double min_avg_psnr;
   double min_min_psnr;
   double min_avg_ssim;
@@ -72,9 +65,7 @@ struct QualityThresholds {
 };
 
 struct BitstreamThresholds {
-  explicit BitstreamThresholds(size_t max_nalu_length)
-      : max_nalu_length(max_nalu_length) {}
-  size_t max_nalu_length;
+  size_t max_max_nalu_size_bytes;
 };
 
 // Should video files be saved persistently to disk for post-run visualization?
@@ -107,7 +98,7 @@ class VideoProcessorIntegrationTest : public testing::Test {
   void ProcessFramesAndMaybeVerify(
       const std::vector<RateProfile>& rate_profiles,
       const std::vector<RateControlThresholds>* rc_thresholds,
-      const QualityThresholds* quality_thresholds,
+      const std::vector<QualityThresholds>* quality_thresholds,
       const BitstreamThresholds* bs_thresholds,
       const VisualizationParams* visualization_params);
 
@@ -121,53 +112,6 @@ class VideoProcessorIntegrationTest : public testing::Test {
   class CpuProcessTime;
   static const int kMaxNumTemporalLayers = 3;
 
-  struct TestResults {
-    int KeyFrameSizeMismatchPercent() const {
-      if (num_key_frames == 0) {
-        return -1;
-      }
-      return 100 * sum_key_framesize_mismatch / num_key_frames;
-    }
-    int DeltaFrameSizeMismatchPercent(int i) const {
-      return 100 * sum_delta_framesize_mismatch_layer[i] / num_frames_layer[i];
-    }
-    int BitrateMismatchPercent(float target_kbps) const {
-      return 100 * std::fabs(kbps - target_kbps) / target_kbps;
-    }
-    int BitrateMismatchPercent(int i, float target_kbps_layer) const {
-      return 100 * std::fabs(kbps_layer[i] - target_kbps_layer) /
-          target_kbps_layer;
-    }
-    int num_frames = 0;
-    int num_frames_layer[kMaxNumTemporalLayers] = {0};
-    int num_key_frames = 0;
-    int num_frames_to_hit_target = 0;
-    float sum_framesize_kbits = 0.0f;
-    float sum_framesize_kbits_layer[kMaxNumTemporalLayers] = {0};
-    float kbps = 0.0f;
-    float kbps_layer[kMaxNumTemporalLayers] = {0};
-    float sum_key_framesize_mismatch = 0.0f;
-    float sum_delta_framesize_mismatch_layer[kMaxNumTemporalLayers] = {0};
-  };
-
-  struct TargetRates {
-    int kbps;
-    int fps;
-    float kbps_layer[kMaxNumTemporalLayers];
-    float fps_layer[kMaxNumTemporalLayers];
-    float framesize_kbits_layer[kMaxNumTemporalLayers];
-    float key_framesize_kbits_initial;
-    float key_framesize_kbits;
-  };
-
-  struct QualityMetrics {
-    int num_decoded_frames = 0;
-    double total_psnr = 0.0;
-    double total_ssim = 0.0;
-    double min_psnr = std::numeric_limits<double>::max();
-    double min_ssim = std::numeric_limits<double>::max();
-  };
-
   void CreateEncoderAndDecoder();
   void DestroyEncoderAndDecoder();
   void SetUpAndInitObjects(rtc::TaskQueue* task_queue,
@@ -176,26 +120,29 @@ class VideoProcessorIntegrationTest : public testing::Test {
                            const VisualizationParams* visualization_params);
   void ReleaseAndCloseObjects(rtc::TaskQueue* task_queue);
 
-  // Rate control metrics.
-  void ResetRateControlMetrics(int rate_update_index,
-                               const std::vector<RateProfile>& rate_profiles);
-  void SetRatesPerTemporalLayer();
-  void UpdateRateControlMetrics(int frame_number);
-  void PrintRateControlMetrics(
-      int rate_update_index,
-      const std::vector<int>& num_dropped_frames,
-      const std::vector<int>& num_spatial_resizes) const;
-  void VerifyRateControlMetrics(
-      int rate_update_index,
+  void ProcessAllFrames(rtc::TaskQueue* task_queue,
+                        const std::vector<RateProfile>& rate_profiles);
+  void AnalyzeAllFrames(
+      const std::vector<RateProfile>& rate_profiles,
       const std::vector<RateControlThresholds>* rc_thresholds,
-      const std::vector<int>& num_dropped_frames,
-      const std::vector<int>& num_spatial_resizes) const;
+      const std::vector<QualityThresholds>* quality_thresholds,
+      const BitstreamThresholds* bs_thresholds);
 
-  void VerifyBitstream(int frame_number,
-                       const BitstreamThresholds& bs_thresholds);
+  std::vector<FrameStatistic> ExtractLayerStats(
+      const int target_spatial_layer_number,
+      const int target_temporal_layer_number,
+      const int first_frame_number,
+      const int last_frame_number,
+      const bool combine_layers);
 
-  void UpdateQualityMetrics(int frame_number);
-  void VerifyQualityMetrics(const QualityThresholds& quality_thresholds);
+  void AnalyzeAndPrintStats(const std::vector<FrameStatistic>& stats,
+                            const float target_bitrate_kbps,
+                            const float target_framerate_fps,
+                            const float input_duration_sec,
+                            const RateControlThresholds* rc_thresholds,
+                            const QualityThresholds* quality_thresholds,
+                            const BitstreamThresholds* bs_thresholds);
+  void PrintFrameByFrameStats(const std::vector<FrameStatistic>& stats);
 
   void PrintSettings() const;
 
@@ -213,14 +160,6 @@ class VideoProcessorIntegrationTest : public testing::Test {
   Stats stats_;
   std::unique_ptr<VideoProcessor> processor_;
   std::unique_ptr<CpuProcessTime> cpu_process_time_;
-
-  // Quantities updated for every encoded frame.
-  TestResults actual_;
-
-  // Rates set for every encoder rate update.
-  TargetRates target_;
-
-  QualityMetrics quality_;
 };
 
 }  // namespace test

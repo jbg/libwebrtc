@@ -23,8 +23,8 @@ const VideoCodecType kVideoCodecType[] = {kVideoCodecVP8};
 const bool kHwCodec[] = {false};
 
 // Codec settings.
-const bool kResilienceOn = false;
 const int kNumTemporalLayers = 1;
+const bool kResilienceOn = kNumTemporalLayers > 1;
 const bool kDenoisingOn = false;
 const bool kErrorConcealmentOn = false;
 const bool kSpatialResizeOn = false;
@@ -72,7 +72,7 @@ class VideoProcessorIntegrationTestParameterized
                              kSpatialResizeOn, kResilienceOn, width, height);
 
     std::vector<RateProfile> rate_profiles = {
-        {bitrate_, framerate, kNumFrames + 1}};
+        {bitrate_, framerate, kNumFrames}};
 
     ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
                                 &kVisualizationParams);

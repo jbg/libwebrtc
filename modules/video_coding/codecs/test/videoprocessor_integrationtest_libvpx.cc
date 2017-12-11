@@ -83,32 +83,12 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, Process0PercentPacketLossVP9) {
                            kResilienceOn, kCifWidth, kCifHeight);
   config_.num_frames = kNumFramesShort;
 
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort + 1}};
+  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {0, 40, 20, 10, 20, 0, 1}};
+      {5, 1, 0, 0.1, 0.3, 0.1, 0, 1}};
 
-  QualityThresholds quality_thresholds(37.0, 36.0, 0.93, 0.92);
-
-  ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                              &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
-}
-
-// VP9: Run with 5% packet loss and fixed bitrate. Quality should be a bit
-// lower. One key frame (first frame only) in sequence.
-TEST_F(VideoProcessorIntegrationTestLibvpx, Process5PercentPacketLossVP9) {
-  config_.networking_config.packet_loss_probability = 0.05f;
-  config_.num_frames = kNumFramesShort;
-  config_.SetCodecSettings(kVideoCodecVP9, 1, false, false, true, false,
-                           kResilienceOn, kCifWidth, kCifHeight);
-
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort + 1}};
-
-  std::vector<RateControlThresholds> rc_thresholds = {
-      {0, 40, 20, 10, 20, 0, 1}};
-
-  QualityThresholds quality_thresholds(17.0, 14.0, 0.45, 0.36);
+  std::vector<QualityThresholds> quality_thresholds = {{37, 36, 0.94, 0.92}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -126,13 +106,17 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ProcessNoLossChangeBitRateVP9) {
   std::vector<RateProfile> rate_profiles = {
       {200, 30, 100},  // target_kbps, input_fps, frame_index_rate_update
       {700, 30, 200},
-      {500, 30, kNumFramesLong + 1}};
+      {500, 30, kNumFramesLong}};
 
-  std::vector<RateControlThresholds> rc_thresholds = {{0, 35, 20, 20, 35, 0, 1},
-                                                      {2, 0, 20, 20, 60, 0, 0},
-                                                      {0, 0, 25, 20, 40, 0, 0}};
+  std::vector<RateControlThresholds> rc_thresholds = {
+      {5, 1, 0, 0.1, 0.5, 0.1, 0, 1},
+      // TODO(ssilkin): Set framerate mismatch to zero after b/70326721 is
+      // fixed.
+      {15, 2, 1, 0.1, 0.5, 0.1, 0, 0},
+      {10, 1, 0, 0.2, 0.5, 0.1, 0, 0}};
 
-  QualityThresholds quality_thresholds(35.5, 30.0, 0.90, 0.85);
+  std::vector<QualityThresholds> quality_thresholds = {
+      {35, 33, 0.90, 0.88}, {38, 35, 0.95, 0.91}, {36, 34, 0.93, 0.90}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -154,14 +138,15 @@ TEST_F(VideoProcessorIntegrationTestLibvpx,
   std::vector<RateProfile> rate_profiles = {
       {100, 24, 100},  // target_kbps, input_fps, frame_index_rate_update
       {100, 15, 200},
-      {100, 10, kNumFramesLong + 1}};
+      {100, 10, kNumFramesLong}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {45, 50, 95, 15, 45, 0, 1},
-      {20, 0, 50, 10, 30, 0, 0},
-      {5, 0, 30, 5, 25, 0, 0}};
+      {10, 2, 20, 0.4, 0.5, 0.2, 0, 1},
+      {5, 2, 0, 0.2, 0.5, 0.2, 0, 0},
+      {3, 2, 0, 0.2, 0.5, 0.3, 0, 0}};
 
-  QualityThresholds quality_thresholds(31.5, 18.0, 0.80, 0.43);
+  std::vector<QualityThresholds> quality_thresholds = {
+      {33, 32, 0.89, 0.87}, {34, 32, 0.90, 0.87}, {34, 32, 0.90, 0.87}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -174,12 +159,12 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ProcessNoLossDenoiserOnVP9) {
                            kResilienceOn, kCifWidth, kCifHeight);
   config_.num_frames = kNumFramesShort;
 
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort + 1}};
+  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {0, 40, 20, 10, 20, 0, 1}};
+      {5, 1, 0, 0.1, 0.3, 0.1, 0, 1}};
 
-  QualityThresholds quality_thresholds(36.8, 35.8, 0.92, 0.91);
+  std::vector<QualityThresholds> quality_thresholds = {{38, 36, 0.95, 0.94}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -194,12 +179,12 @@ TEST_F(VideoProcessorIntegrationTestLibvpx,
   config_.SetCodecSettings(kVideoCodecVP9, 1, false, false, true, true,
                            kResilienceOn, kCifWidth, kCifHeight);
 
-  std::vector<RateProfile> rate_profiles = {{50, 30, kNumFramesLong + 1}};
+  std::vector<RateProfile> rate_profiles = {{50, 30, kNumFramesLong}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {228, 70, 160, 15, 80, 1, 1}};
+      {15, 3, 70, 0.8, 0.5, 0.3, 1, 1}};
 
-  QualityThresholds quality_thresholds(24.0, 13.0, 0.65, 0.37);
+  std::vector<QualityThresholds> quality_thresholds = {{28, 25, 0.80, 0.65}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -219,52 +204,12 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ProcessZeroPacketLoss) {
                            kResilienceOn, kCifWidth, kCifHeight);
   config_.num_frames = kNumFramesShort;
 
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort + 1}};
+  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {0, 40, 20, 10, 15, 0, 1}};
+      {5, 1, 0, 0.1, 0.2, 0.1, 0, 1}};
 
-  QualityThresholds quality_thresholds(34.95, 33.0, 0.90, 0.89);
-
-  ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                              &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
-}
-
-// VP8: Run with 5% packet loss and fixed bitrate. Quality should be a bit
-// lower. One key frame (first frame only) in sequence.
-TEST_F(VideoProcessorIntegrationTestLibvpx, Process5PercentPacketLoss) {
-  config_.networking_config.packet_loss_probability = 0.05f;
-  config_.SetCodecSettings(kVideoCodecVP8, 1, false, true, true, false,
-                           kResilienceOn, kCifWidth, kCifHeight);
-  config_.num_frames = kNumFramesShort;
-
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort + 1}};
-
-  std::vector<RateControlThresholds> rc_thresholds = {
-      {0, 40, 20, 10, 15, 0, 1}};
-
-  QualityThresholds quality_thresholds(20.0, 16.0, 0.60, 0.40);
-
-  ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                              &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
-}
-
-// VP8: Run with 10% packet loss and fixed bitrate. Quality should be lower.
-// One key frame (first frame only) in sequence.
-TEST_F(VideoProcessorIntegrationTestLibvpx, Process10PercentPacketLoss) {
-  config_.networking_config.packet_loss_probability = 0.1f;
-  config_.SetCodecSettings(kVideoCodecVP8, 1, false, true, true, false,
-                           kResilienceOn, kCifWidth, kCifHeight);
-  config_.num_frames = kNumFramesShort;
-
-  std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort + 1}};
-
-  std::vector<RateControlThresholds> rc_thresholds = {
-      {0, 40, 20, 10, 15, 0, 1}};
-
-  QualityThresholds quality_thresholds(19.0, 16.0, 0.50, 0.35);
+  std::vector<QualityThresholds> quality_thresholds = {{37, 35, 0.93, 0.91}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -301,13 +246,15 @@ TEST_F(VideoProcessorIntegrationTestLibvpx,
   std::vector<RateProfile> rate_profiles = {
       {200, 30, 100},  // target_kbps, input_fps, frame_index_rate_update
       {800, 30, 200},
-      {500, 30, kNumFramesLong + 1}};
+      {500, 30, kNumFramesLong}};
 
-  std::vector<RateControlThresholds> rc_thresholds = {{0, 45, 20, 10, 15, 0, 1},
-                                                      {0, 0, 25, 20, 10, 0, 0},
-                                                      {0, 0, 25, 15, 10, 0, 0}};
+  std::vector<RateControlThresholds> rc_thresholds = {
+      {5, 1, 0, 0.1, 0.2, 0.1, 0, 1},
+      {15, 1, 0, 0.1, 0.2, 0.1, 0, 0},
+      {15, 1, 0, 0.3, 0.2, 0.1, 0, 0}};
 
-  QualityThresholds quality_thresholds(34.0, 32.0, 0.85, 0.80);
+  std::vector<QualityThresholds> quality_thresholds = {
+      {33, 32, 0.89, 0.88}, {38, 36, 0.94, 0.93}, {35, 34, 0.92, 0.91}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -337,14 +284,15 @@ TEST_F(VideoProcessorIntegrationTestLibvpx,
   std::vector<RateProfile> rate_profiles = {
       {80, 24, 100},  // target_kbps, input_fps, frame_index_rate_update
       {80, 15, 200},
-      {80, 10, kNumFramesLong + 1}};
+      {80, 10, kNumFramesLong}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
-      {40, 20, 75, 15, 60, 0, 1},
-      {10, 0, 25, 10, 35, 0, 0},
-      {0, 0, 20, 10, 15, 0, 0}};
+      {10, 2, 20, 0.4, 0.3, 0.1, 0, 1},
+      {5, 2, 5, 0.3, 0.3, 0.1, 0, 0},
+      {4, 2, 1, 0.2, 0.3, 0.2, 0, 0}};
 
-  QualityThresholds quality_thresholds(31.0, 22.0, 0.80, 0.65);
+  std::vector<QualityThresholds> quality_thresholds = {
+      {31, 30, 0.87, 0.86}, {32, 31, 0.89, 0.86}, {32, 30, 0.87, 0.82}};
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
@@ -369,12 +317,14 @@ TEST_F(VideoProcessorIntegrationTestLibvpx,
                            kResilienceOn, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {{200, 30, 150},
-                                            {400, 30, kNumFramesLong + 1}};
+                                            {400, 30, kNumFramesLong}};
 
-  std::vector<RateControlThresholds> rc_thresholds = {{0, 20, 30, 10, 10, 0, 1},
-                                                      {0, 0, 30, 15, 10, 0, 0}};
+  std::vector<RateControlThresholds> rc_thresholds = {
+      {5, 1, 0, 0.1, 0.2, 0.1, 0, 1}, {10, 2, 0, 0.1, 0.2, 0.1, 0, 1}};
 
-  QualityThresholds quality_thresholds(32.5, 30.0, 0.85, 0.80);
+  std::vector<QualityThresholds> quality_thresholds = {
+      {32, 30, 0.88, 0.85},
+      {33, 30, 0.89, 0.83}};  // TODO(ssilkin): Unexpected min SSIM drop.
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
