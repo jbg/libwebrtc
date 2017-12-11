@@ -18,6 +18,7 @@ import android.media.MediaFormat;
 import android.os.Build;
 import android.os.SystemClock;
 import android.view.Surface;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -364,7 +365,7 @@ public class MediaCodecVideoDecoder {
 
   private void release() {
     Logging.d(TAG, "Java releaseDecoder. Total number of dropped frames: " + droppedFrames);
-    checkOnMediaCodecThread();
+    // This is called on the codec thread or it is stopped when this is called.
 
     // Run Mediacodec stop() and release() on separate thread since sometime
     // Mediacodec.stop() may hang.

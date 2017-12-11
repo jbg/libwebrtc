@@ -42,6 +42,11 @@ class VideoDecoderSoftwareFallbackWrapper : public VideoDecoder {
   int32_t Release() override;
   bool PrefersLateDecoding() const override;
 
+#if defined(WEBRTC_ANDROID)
+  // See https://bugs.chromium.org/p/webrtc/issues/detail?id=7361
+  void PollDecodedFrames() override;
+#endif
+
   const char* ImplementationName() const override;
 
  private:
