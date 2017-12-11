@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee8cd46_07647336",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2017-12-11T15:13:16Z",
+      "side": 1,
+      "message": "It\u0027s strange that presubmit acts up, because the dependency on common_objc is correctly added in BUILD.gn.",
+      "range": {
+        "startLine": 38,
+        "startChar": 44,
+        "endLine": 38,
+        "endChar": 60
+      },
+      "revId": "dd727c1efa8ebd68e68a157cc083a9ef4dce7058",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
