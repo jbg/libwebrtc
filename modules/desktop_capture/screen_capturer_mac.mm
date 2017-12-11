@@ -35,6 +35,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/macutils.h"
 #include "rtc_base/timeutils.h"
+#include "sdk/objc/Framework/Classes/Common/scoped_cftyperef.h"
 
 namespace webrtc {
 
@@ -674,8 +675,17 @@ bool ScreenCapturerMac::RegisterRefreshAndMoveHandlers() {
             ScreenRefresh(count, rects, display_origin);
           }
         };
+
+    rtc::ScopedCFTypeRef<CFTypeRef> properties_dict(
+        CFDictionaryCreate(kCFAllocatorDefault,
+                           (const void* []){kCGDisplayStreamShowCursor},
+                           (const void* []){kCFBooleanFalse},
+                           1,
+                           &kCFTypeDictionaryKeyCallBacks,
+                           &kCFTypeDictionaryValueCallBacks));
+
     CGDisplayStreamRef display_stream = CGDisplayStreamCreate(
-        display_id, pixel_width, pixel_height, 'BGRA', nullptr, handler);
+        display_id, pixel_width, pixel_height, 'BGRA', properties_dict.get(), handler);
 
     if (display_stream) {
       CGError error = CGDisplayStreamStart(display_stream);
