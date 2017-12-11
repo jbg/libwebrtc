@@ -174,8 +174,10 @@ if (is_mac) {
     deps = [
       ":desktop_capture_generic",
       ":primitives",
+      "..:common_config",
       "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
+      "../../sdk:common_objc",
     ]
     libs = [
       "AppKit.framework",
