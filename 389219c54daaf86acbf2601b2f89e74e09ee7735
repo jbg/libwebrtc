@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "a228c64d_be8c53dd",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-11T22:19:53Z",
+      "side": 1,
+      "message": "Regular http traffic?  This doesn\u0027t mean much outside the context of the browser (a native API).\nWhy not just say we\u0027ll only use the default local interface?",
+      "range": {
+        "startLine": 410,
+        "startChar": 63,
+        "endLine": 410,
+        "endChar": 0
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b482111a_94402b2b",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-11T22:19:53Z",
+      "side": 1,
+      "message": "How is is different than using IceTransportsType \u003d\u003d kNoHost?",
+      "range": {
+        "startLine": 417,
+        "startChar": 49,
+        "endLine": 417,
+        "endChar": 0
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7692db51_5b6028bd",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 5
