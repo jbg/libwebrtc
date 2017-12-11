@@ -212,6 +212,30 @@
       "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9089e86a_94b3f04c",
+        "filename": "modules/video_coding/codecs/stereo/stereo_decoder_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2017-12-11T06:54:16Z",
+      "side": 1,
+      "message": "Got it. I made it use kCodecParamAssociatedCodecName param and extract then. GetSupportedFormats() isn\u0027t implemented for legacy factory so it wouldn\u0027t work right now.",
+      "parentUuid": "42c19933_dfc30f72",
+      "range": {
+        "startLine": 96,
+        "startChar": 31,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "35a606a5ddeeaa1ae369e49efe35a0deb8e9c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
