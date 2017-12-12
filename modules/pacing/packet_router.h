@@ -72,11 +72,10 @@ class PacketRouter : public PacedSender::PacketSender,
 
   // Ensures remote party notified of the receive bitrate limit no larger than
   // |bitrate_bps|.
-  void SetMaxDesiredReceiveBitrate(uint32_t bitrate_bps);
+  void SetMaxDesiredReceiveBitrate(int bitrate_bps);
 
   // Send REMB feedback.
-  virtual bool SendRemb(uint32_t bitrate_bps,
-                        const std::vector<uint32_t>& ssrcs);
+  bool SendRemb(int bitrate_bps, std::vector<uint32_t> ssrcs);
 
   // Send transport feedback packet to send-side.
   bool SendTransportFeedback(rtcp::TransportFeedback* packet) override;
@@ -99,10 +98,10 @@ class PacketRouter : public PacedSender::PacketSender,
   rtc::CriticalSection remb_crit_;
   // The last time a REMB was sent.
   int64_t last_remb_time_ms_ RTC_GUARDED_BY(remb_crit_);
-  uint32_t last_send_bitrate_bps_ RTC_GUARDED_BY(remb_crit_);
+  int last_send_bitrate_bps_ RTC_GUARDED_BY(remb_crit_);
   // The last bitrate update.
-  uint32_t bitrate_bps_ RTC_GUARDED_BY(remb_crit_);
-  uint32_t max_bitrate_bps_ RTC_GUARDED_BY(remb_crit_);
+  int bitrate_bps_ RTC_GUARDED_BY(remb_crit_);
+  int max_bitrate_bps_ RTC_GUARDED_BY(remb_crit_);
 
   // Candidates for the REMB module can be RTP sender/receiver modules, with
   // the sender modules taking precedence.
