@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bea2ccf_28543a1e",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-12T15:23:10Z",
+      "side": 1,
+      "message": "https://cs.chromium.org/chromium/src/third_party/webrtc/api/video/video_frame.cc?q\u003dvideo_frame.cc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d29\n\ntimestamp_us_ is initialized from render_time_ms in VideoFrame ctor argument. Instead of passing kNoRenderTime to ctor we can pass timestamp_MS. Then we don\u0027t need set_timestamp_us() call below.",
+      "range": {
+        "startLine": 173,
+        "startChar": 29,
+        "endLine": 173,
+        "endChar": 42
+      },
+      "revId": "5f332fc1a338cc0204742e6a4d19bf7a6ff518a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
