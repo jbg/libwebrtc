@@ -163,6 +163,14 @@ void FuzzOneInputTest(const uint8_t* data, size_t size) {
 
 void FuzzOneInput(const uint8_t* data, size_t size) {
   test::FuzzOneInputTest(data, size);
+  {
+    // TODO(https://bugs.chromium.org/p/webrtc/issues/detail?id=8644): This
+    // should be removed when the experimental NetEq fix is either made
+    // permanent or removed.
+    test::ScopedFieldTrials override_field_trials(
+        "WebRTC-Audio-NetEqFramelengthExperiment/Enabled/");
+    test::FuzzOneInputTest(data, size);
+  }
 }
 
 }  // namespace webrtc
