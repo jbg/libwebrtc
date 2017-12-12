@@ -8,8 +8,6 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <fstream>
-
 #include "rtc_base/flags.h"
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/metrics_default.h"
@@ -77,9 +75,7 @@ int main(int argc, char* argv[]) {
   std::string chartjson_result_file = FLAG_chartjson_result_file;
   if (chartjson_result_file != "") {
     std::string json_results = webrtc::test::GetPerfResultsJSON();
-    std::fstream json_file(chartjson_result_file, std::fstream::out);
-    json_file << json_results;
-    json_file.close();
+    webrtc::test::WritePerfResults(chartjson_result_file);
   }
 
   return exit_code;
