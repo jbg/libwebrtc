@@ -11,6 +11,7 @@
 #include "modules/audio_processing/test/audio_processing_simulator.h"
 
 #include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -28,6 +29,274 @@
 namespace webrtc {
 namespace test {
 namespace {
+
+EchoCanceller3Config ParseAec3Parameters(const std::string& filename) {
+  EchoCanceller3Config cfg;
+  std::ifstream f(filename.c_str());
+  std::string s;
+  std::cout << "Custom AEC parameters:" << std::endl;
+  while (std::getline(f, s)) {
+    s.erase(std::remove(s.begin(), s.end(), ' '), s.end());
+    if (s.size() == 0 || s[0] == ';' || s[0] == '#') {
+      continue;
+    }
+    size_t colon_index = s.find(':');
+    if (colon_index == std::string::npos) {
+      continue;
+    }
+
+    std::string name = s.substr(0, colon_index);
+    std::string value = s.substr(colon_index + 1);
+    value.erase(std::remove(value.begin(), value.end(), 'f'), value.end());
+    value.erase(std::remove(value.begin(), value.end(), '{'), value.end());
+    value.erase(std::remove(value.begin(), value.end(), '}'), value.end());
+    value.erase(std::remove(value.begin(), value.end(), ';'), value.end());
+
+    if (name == "delay_default_delay") {
+      cfg.delay.default_delay = std::stoi(value);
+      std::cout << "default_delay:" << cfg.delay.default_delay << std::endl;
+      continue;
+    }
+
+    if (name == "delay_down_sampling_factor") {
+      cfg.delay.down_sampling_factor = std::stoi(value);
+      std::cout << "delay_down_sampling_factor:"
+                << cfg.delay.down_sampling_factor << std::endl;
+      continue;
+    }
+
+    if (name == "delay_num_filters") {
+      cfg.delay.num_filters = std::stoi(value);
+      std::cout << "delay_num_filters:" << cfg.delay.num_filters << std::endl;
+      continue;
+    }
+
+    if (name == "delay_api_call_jitter_blocks") {
+      cfg.delay.api_call_jitter_blocks = std::stoi(value);
+      std::cout << "delay_api_call_jitter_blocks:"
+                << cfg.delay.api_call_jitter_blocks << std::endl;
+      continue;
+    }
+
+    if (name == "delay_min_echo_path_delay_blocks") {
+      cfg.delay.min_echo_path_delay_blocks = std::stoi(value);
+      std::cout << "delay_min_echo_path_delay_blocks:"
+                << cfg.delay.min_echo_path_delay_blocks << std::endl;
+      continue;
+    }
+
+    if (name == "erle_min") {
+      cfg.erle.min = std::stof(value);
+      std::cout << "erle_min:" << cfg.erle.min << std::endl;
+      continue;
+    }
+
+    if (name == "erle_max_l") {
+      cfg.erle.max_l = std::stof(value);
+      std::cout << "erle_max_l:" << cfg.erle.max_l << std::endl;
+      continue;
+    }
+
+    if (name == "erle_max_h") {
+      cfg.erle.max_h = std::stof(value);
+      std::cout << "erle_max_h:" << cfg.erle.max_h << std::endl;
+      continue;
+    }
+
+    if (name == "ep_strength_lf") {
+      cfg.ep_strength.lf = std::stof(value);
+      std::cout << "ep_strength_lf:" << cfg.ep_strength.lf << std::endl;
+      continue;
+    }
+    if (name == "ep_strength_mf") {
+      cfg.ep_strength.mf = std::stof(value);
+      std::cout << "ep_strength_mf:" << cfg.ep_strength.mf << std::endl;
+      continue;
+    }
+    if (name == "ep_strength_hf") {
+      cfg.ep_strength.hf = std::stof(value);
+      std::cout << "ep_strength_hf:" << cfg.ep_strength.hf << std::endl;
+      continue;
+    }
+    if (name == "ep_strength_default_len") {
+      cfg.ep_strength.default_len = std::stof(value);
+      std::cout << "ep_strength_default_len:" << cfg.ep_strength.default_len
+                << std::endl;
+      continue;
+    }
+    if (name == "ep_strength_echo_can_saturate") {
+      cfg.ep_strength.echo_can_saturate = value == "true" ? true : false;
+      std::cout << "ep_strength_echo_can_saturate:"
+                << cfg.ep_strength.echo_can_saturate << std::endl;
+      continue;
+    }
+
+    if (name == "ep_strength_bounded_erl") {
+      cfg.ep_strength.bounded_erl = value == "true" ? true : false;
+      std::cout << "ep_strength_bounded_erl:" << cfg.ep_strength.bounded_erl
+                << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m1") {
+      cfg.gain_mask.m1 = std::stof(value);
+      std::cout << "gain_mask_m1:" << cfg.gain_mask.m1 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m2") {
+      cfg.gain_mask.m2 = std::stof(value);
+      std::cout << "gain_mask_m2:" << cfg.gain_mask.m2 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m3") {
+      cfg.gain_mask.m3 = std::stof(value);
+      std::cout << "gain_mask_m3:" << cfg.gain_mask.m3 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m4") {
+      cfg.gain_mask.m4 = std::stof(value);
+      std::cout << "gain_mask_m4:" << cfg.gain_mask.m4 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m5") {
+      cfg.gain_mask.m5 = std::stof(value);
+      std::cout << "gain_mask_m5:" << cfg.gain_mask.m5 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m6") {
+      cfg.gain_mask.m6 = std::stof(value);
+      std::cout << "gain_mask_m6:" << cfg.gain_mask.m6 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m7") {
+      cfg.gain_mask.m7 = std::stof(value);
+      std::cout << "gain_mask_m7:" << cfg.gain_mask.m7 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m8") {
+      cfg.gain_mask.m8 = std::stof(value);
+      std::cout << "gain_mask_m8:" << cfg.gain_mask.m8 << std::endl;
+      continue;
+    }
+
+    if (name == "gain_mask_m9") {
+      cfg.gain_mask.m9 = std::stof(value);
+      std::cout << "gain_mask_m9:" << cfg.gain_mask.m9 << std::endl;
+      continue;
+    }
+
+    if (name == "echo_audibility_low_render_limit") {
+      cfg.echo_audibility.low_render_limit = std::stof(value);
+      std::cout << "echo_audibility_low_render_limit:"
+                << cfg.echo_audibility.low_render_limit << std::endl;
+      continue;
+    }
+
+    if (name == "echo_audibility_normal_render_limit") {
+      cfg.echo_audibility.normal_render_limit = std::stof(value);
+      std::cout << "echo_audibility_normal_render_limit:"
+                << cfg.echo_audibility.normal_render_limit << std::endl;
+      continue;
+    }
+
+    if (name == "render_levels_active_render_limit") {
+      cfg.render_levels.active_render_limit = std::stof(value);
+      std::cout << "render_levels_active_render_limit:"
+                << cfg.render_levels.active_render_limit << std::endl;
+      continue;
+    }
+
+    if (name == "render_levels_poor_excitation_render_limit") {
+      cfg.render_levels.poor_excitation_render_limit = std::stof(value);
+      std::cout << "render_levels_poor_excitation_render_limit:"
+                << cfg.render_levels.poor_excitation_render_limit << std::endl;
+      continue;
+    }
+
+    if (name == "gain_updates_low_noise" || name == "gain_updates_normal" ||
+        name == "gain_updates_saturation" || name == "gain_updates_nonlinear") {
+      EchoCanceller3Config::GainUpdates::GainChanges gc;
+      size_t comma_index = value.find(',');
+      if (comma_index == std::string::npos) {
+        std::cout << "Error: wrong format for gain_updates" << std::endl;
+      }
+      gc.max_inc = std::stof(value.substr(0, comma_index));
+
+      value = value.substr(comma_index + 1);
+      comma_index = value.find(',');
+      if (comma_index == std::string::npos) {
+        std::cout << "Error: wrong format for gain_updates" << std::endl;
+      }
+      gc.max_dec = std::stof(value.substr(0, comma_index));
+
+      value = value.substr(comma_index + 1);
+      comma_index = value.find(',');
+      if (comma_index == std::string::npos) {
+        std::cout << "Error: wrong format for gain_updates" << std::endl;
+      }
+      gc.rate_inc = std::stof(value.substr(0, comma_index));
+
+      value = value.substr(comma_index + 1);
+      comma_index = value.find(',');
+      if (comma_index == std::string::npos) {
+        std::cout << "Error: wrong format for gain_updates" << std::endl;
+      }
+      gc.rate_dec = std::stof(value.substr(0, comma_index));
+
+      value = value.substr(comma_index + 1);
+      comma_index = value.find(',');
+      if (comma_index == std::string::npos) {
+        std::cout << "Error: wrong format for gain_updates" << std::endl;
+      }
+      gc.min_inc = std::stof(value.substr(0, comma_index));
+
+      value = value.substr(comma_index + 1);
+      comma_index = value.find(',');
+      if (comma_index == std::string::npos) {
+        std::cout << "Error: wrong format for gain_updates" << std::endl;
+      }
+      gc.min_dec = std::stof(value.substr(0, comma_index));
+
+      std::cout << name << ":{" << gc.max_inc << ", " << gc.max_dec << ", "
+                << gc.rate_inc << ", " << gc.rate_dec << ", " << gc.min_inc
+                << ", " << gc.min_dec << "}" << std::endl;
+
+      if (name == "gain_updates_low_noise") {
+        cfg.gain_updates.low_noise = gc;
+      } else if (name == "gain_updates_normal") {
+        cfg.gain_updates.normal = gc;
+      } else if (name == "gain_updates_saturation") {
+        cfg.gain_updates.saturation = gc;
+      } else if (name == "gain_updates_nonlinear") {
+        cfg.gain_updates.nonlinear = gc;
+      } else {
+        RTC_NOTREACHED();
+      }
+
+      continue;
+    }
+
+    if (name == "gain_updates_floor_first_increase") {
+      cfg.gain_updates.floor_first_increase = std::stof(value);
+      std::cout << "gain_updates_floor_first_increase:"
+                << cfg.gain_updates.floor_first_increase << std::endl;
+      continue;
+    }
+
+    std::cout << "Error: wrong format AEC3 settings file" << std::endl;
+    std::cout << "on the line " << s << std::endl;
+    RTC_NOTREACHED();
+  }
+
+  return cfg;
+}
 
 void CopyFromAudioFrame(const AudioFrame& src, ChannelBuffer<float>* dest) {
   RTC_CHECK_EQ(src.num_channels_, dest->num_channels());
@@ -325,7 +594,11 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
     apm_config.gain_controller2.fixed_gain_db = settings_.agc2_fixed_gain_db;
   }
   if (settings_.use_aec3 && *settings_.use_aec3) {
-    echo_control_factory.reset(new EchoCanceller3Factory());
+    EchoCanceller3Config cfg;
+    if (settings_.aec3_settings_filename) {
+      cfg = ParseAec3Parameters(*settings_.aec3_settings_filename);
+    }
+    echo_control_factory.reset(new EchoCanceller3Factory(cfg));
   }
   if (settings_.use_lc) {
     apm_config.level_controller.enabled = *settings_.use_lc;
