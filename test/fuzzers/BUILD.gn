@@ -96,6 +96,17 @@ webrtc_fuzzer_test("h264_bitstream_parser_fuzzer") {
   ]
 }
 
+webrtc_fuzzer_test("forward_error_correction_fuzzer") {
+  sources = [
+    "forward_error_correction_fuzzer.cc",
+  ]
+  deps = [
+    "../../modules/rtp_rtcp",
+    "../../rtc_base:rtc_base_approved",
+  ]
+  libfuzzer_options = [ "max_len=5000" ]
+}
+
 webrtc_fuzzer_test("flexfec_header_reader_fuzzer") {
   sources = [
     "flexfec_header_reader_fuzzer.cc",
