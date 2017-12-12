@@ -132,7 +132,6 @@ if (is_ios || is_mac) {
 
       deps = [
         ":common_objc",
-        "$rtc_libyuv_dir",
         "../api:libjingle_peerconnection_api",
         "../api:video_frame_api",
         "../api:video_frame_api_i420",
@@ -300,7 +299,6 @@ if (is_ios || is_mac) {
         ":corevideoframebuffer_objc",
         ":peerconnectionfactory_objc",
         ":video_objc",
-        "$rtc_libyuv_dir",
         "../api:video_frame_api",
         "../media:rtc_media_base",
         "../pc:libjingle_peerconnection",
@@ -767,7 +765,6 @@ if (is_ios || is_mac) {
       ]
 
       deps = [
-        "$rtc_libyuv_dir",
         "../api:video_frame_api_i420",
         "../common_video",
         "../rtc_base:rtc_base_approved",
@@ -821,7 +818,6 @@ if (is_ios || is_mac) {
         ":video_objc",
         ":video_toolbox_cc",
         ":videotracksource_objc",
-        "$rtc_libyuv_dir",
         "../api/video_codecs:video_codecs_api",
         "../common_video",
         "../media:rtc_media",
