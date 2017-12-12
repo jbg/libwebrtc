@@ -45,6 +45,30 @@
       "revId": "dd727c1efa8ebd68e68a157cc083a9ef4dce7058",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9397b20_52c71242",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2017-12-12T09:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "820ca988_ea481f3d",
+      "range": {
+        "startLine": 449,
+        "startChar": 4,
+        "endLine": 449,
+        "endChar": 37
+      },
+      "revId": "dd727c1efa8ebd68e68a157cc083a9ef4dce7058",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
