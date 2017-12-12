@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d38cedb_89028a80",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-12-12T10:16:10Z",
+      "side": 0,
+      "message": "This dependency is not needed if https://chromium-review.googlesource.com/c/libyuv/libyuv/+/822112 lands.\n\nWebRTC was using public_deps to depend on libyuv because libyuv was not using all_dependent_configs, when we switched to only private deps I had to add these fake dependencies to get the include_dir, but that should be provided by libyuv itself through the dependency on :video_quality_analysis.",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "2e27d1cf5e77eab094368dd101ee182270a3687b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
