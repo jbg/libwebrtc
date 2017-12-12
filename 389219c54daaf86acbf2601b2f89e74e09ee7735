@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bc16c0a0_b52bc8e7",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5846
+      },
+      "writtenOn": "2017-12-12T10:04:00Z",
+      "side": 1,
+      "message": "This comment was copied verbatim from the doc comment of PORTALLOCATOR_DISABLE_ADAPTER_ENUMERATION as this option mirrors PORTALLOCATOR_DISABLE_ADAPTER_ENUMERATION. I agree that the wording is ridiculously complicated.",
+      "parentUuid": "a228c64d_be8c53dd",
+      "range": {
+        "startLine": 410,
+        "startChar": 63,
+        "endLine": 410,
+        "endChar": 0
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b482111a_94402b2b",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-11T22:19:53Z",
       "side": 1,
       "message": "How is is different than using IceTransportsType \u003d\u003d kNoHost?",
+      "range": {
+        "startLine": 417,
+        "startChar": 49,
+        "endLine": 417,
+        "endChar": 0
+      },
+      "revId": "389219c54daaf86acbf2601b2f89e74e09ee7735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ee291fe_0ae731ee",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5846
+      },
+      "writtenOn": "2017-12-12T10:04:00Z",
+      "side": 1,
+      "message": "It seems that PORTALLOCATOR_DISABLE_ADAPTER_ENUMERATION is applied at the beginning of the candidate gathering, while kNoHost becomes a part of PortAllocator::candidate_filter(), and gets applied at some point later, e.g. when the hosts are already resolved.",
+      "parentUuid": "b482111a_94402b2b",
       "range": {
         "startLine": 417,
         "startChar": 49,
