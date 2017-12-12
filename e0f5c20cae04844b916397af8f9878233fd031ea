@@ -1,0 +1,475 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a9168ac_531c80a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Agree that we should remove these. This could have been its own CL, however.\n\nAfter the tests have been removed, please create a followup CL that deletes NetworkingConfig and PacketManipulator + all the corresponding unit tests and mocks.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2a7f642_6be75fd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "mention that this is only for h264_max_nalu_size?",
+      "range": {
+        "startLine": 18,
+        "startChar": 30,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d91b5a6_81214f7c",
+        "filename": "modules/video_coding/codecs/test/stats.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "... and then we don\u0027t need to do this.",
+      "range": {
+        "startLine": 25,
+        "startChar": 22,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8459eeb0_7671fdac",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Might as well take the time to make this a size_t.",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 5
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1819cb7_6a145016",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "This is not codec specific. Move to ::ToString.",
+      "range": {
+        "startLine": 46,
+        "startChar": 12,
+        "endLine": 46,
+        "endChar": 61
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99083dba_cc72f5c7",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Should this be get_sum_kbps() ?",
+      "range": {
+        "startLine": 254,
+        "startChar": 26,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50e93234_1ca7fcbb",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure this order is thread safe w.r.t the usage of |stats_|. But I think you could call ReleaseAndCloseObjects before AnalyzeAllFrames?",
+      "range": {
+        "startLine": 184,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 38
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7281e475_e9967a23",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "After moving the increment step, we can change this to be a for loop with |frame_number| just having the scope of the loop.",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 43
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5de2fd7e_d556a430",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Is there a benefit to this special task, rather than just posting a sync task after all the ProcessFrame tasks have been posted? Then you could get rid of the if clause.",
+      "range": {
+        "startLine": 221,
+        "startChar": 6,
+        "endLine": 221,
+        "endChar": 42
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a1a16e6_5db85f3b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Move to TestConfig?",
+      "range": {
+        "startLine": 252,
+        "startChar": 13,
+        "endLine": 252,
+        "endChar": 38
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4678121_fb114cce",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Add newline after?",
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18b58ea9_ecbc492b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Is this coming in a followup CL?",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 338,
+        "endChar": 69
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5569ce0e_b9a3e0f6",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "See comment in .h file.",
+      "range": {
+        "startLine": 547,
+        "startChar": 4,
+        "endLine": 547,
+        "endChar": 9
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "716fc98e_bd72e5a9",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Define as a constant at the top of the file.",
+      "range": {
+        "startLine": 583,
+        "startChar": 68,
+        "endLine": 583,
+        "endChar": 75
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c04379a_14099041",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Add newline after?",
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9430327_cf713e28",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Nice collection of EXPECTs!",
+      "range": {
+        "startLine": 690,
+        "startChar": 2,
+        "endLine": 690,
+        "endChar": 22
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9eb2bd7_29f84b46",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Update.",
+      "range": {
+        "startLine": 45,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 51
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8365827f_2084feb2",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "No need to use const for primitive types in signatures. Here and below.",
+      "range": {
+        "startLine": 132,
+        "startChar": 6,
+        "endLine": 132,
+        "endChar": 11
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77115a67_512831b2",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Make TODOs imperative: \"TODO(ssilkin): Investigate why we have this SSIM drop.\", or even better (if it is a semi-serious problem): file a bug and write \"TODO(bugs.webrtc.org/1234): Investigate this SSIM drop.\"",
+      "range": {
+        "startLine": 327,
+        "startChar": 30,
+        "endLine": 327,
+        "endChar": 73
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6f870ab_ecaa3438",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_openh264.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Remove now or when you remove PacketManipulator.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c9c4c89_74b41b25",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_openh264.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2017-12-12T12:01:16Z",
+      "side": 1,
+      "message": "Then you can rename this too.",
+      "range": {
+        "startLine": 57,
+        "startChar": 46,
+        "endLine": 57,
+        "endChar": 71
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
