@@ -64,8 +64,6 @@ rtc_static_library("video_quality_analysis") {
     "frame_analyzer/video_quality_analysis.h",
   ]
   deps = [
-    "$rtc_libyuv_dir",
-
     # TODO(bugs.webrtc.org/6828): api:optional should be a dependency
     # of rtc_base:rtc_base_approved_generic but that causes a circular
     # dependency. In order to fix the chromium build on MSVC64 (dbg)
@@ -73,6 +71,7 @@ rtc_static_library("video_quality_analysis") {
     # symbols it needs.
     "../api:optional",
     "../common_video",
+    "//third_party/libyuv",
   ]
 }
 
@@ -84,7 +83,6 @@ rtc_executable("frame_analyzer") {
   deps = [
     ":command_line_parser",
     ":video_quality_analysis",
-    "$rtc_libyuv_dir",
     "//build/win:default_exe_manifest",
   ]
 }
@@ -100,7 +98,6 @@ if (!build_with_chromium) {
     deps = [
       ":command_line_parser",
       ":video_quality_analysis",
-      "$rtc_libyuv_dir",
       "//build/win:default_exe_manifest",
     ]
   }
@@ -113,7 +110,6 @@ if (!build_with_chromium) {
 
     deps = [
       ":video_quality_analysis",
-      "$rtc_libyuv_dir",
     ]
   }
 
@@ -138,9 +134,9 @@ if (!build_with_chromium) {
 
     deps = [
       ":command_line_parser",
-      "$rtc_libyuv_dir",
       "../common_video",
       "//build/win:default_exe_manifest",
+      "//third_party/libyuv",
     ]
   }
 
@@ -332,7 +328,6 @@ if (rtc_include_tests) {
       ":frame_editing_lib",
       ":reference_less_video_analysis_lib",
       ":video_quality_analysis",
-      "$rtc_libyuv_dir",
       "../common_video:common_video",
       "../rtc_base",
       "../test:test_main",
