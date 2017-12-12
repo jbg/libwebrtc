@@ -1163,6 +1163,7 @@ struct EchoCanceller3Config {
     float shadow_rate = 0.5f;
     float leakage_converged = 0.01f;
     float leakage_diverged = 1.f / 60.f;
+    float error_floor = 0.1f;
     float main_noise_gate = 220075344.f;
     float shadow_noise_gate = 220075344.f;
   } filter;
