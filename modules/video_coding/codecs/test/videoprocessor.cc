@@ -166,9 +166,12 @@ void VideoProcessor::ProcessFrame() {
   // want to use capture timestamps in the IVF files.
   const uint32_t rtp_timestamp = (frame_number + 1) * kRtpClockRateHz /
                                  config_.codec_settings.maxFramerate;
+  const int64_t timestamp_us = (frame_number + 1) * rtc::kNumMicrosecsPerSec /
+                               config_.codec_settings.maxFramerate;
   rtp_timestamp_to_frame_num_[rtp_timestamp] = frame_number;
   input_frames_[frame_number] = rtc::MakeUnique<VideoFrame>(
       buffer, rtp_timestamp, kNoRenderTime, webrtc::kVideoRotation_0);
+  input_frames_[frame_number]->set_timestamp_us(timestamp_us);
 
   std::vector<FrameType> frame_types = config_.FrameTypeForFrame(frame_number);
 
