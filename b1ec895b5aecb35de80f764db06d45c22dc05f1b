@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8571ea28_3691e3de",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-12-13T11:58:10Z",
+      "side": 1,
+      "message": "saturated_cast not needed any more.",
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
