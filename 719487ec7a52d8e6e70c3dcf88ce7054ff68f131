@@ -34,6 +34,24 @@
       "revId": "719487ec7a52d8e6e70c3dcf88ce7054ff68f131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caa64e12_ae82abe7",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2739,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-13T14:07:26Z",
+      "side": 0,
+      "message": "What I do here is actually identical to what\u0027s been done on other platforms as well where the mic volume is set on the audio thread. I avoid calling SetCurrentMicLevel() on the AudioDeviceBuffer and it means that RecordedDataIsAvailable() will always be called with 0 as current_mic_level_ which will be fed to the analog AGC and then ignored.\n\nFYI, I have removed the if (AGC()) { } parts on Linux and Mac as well.",
+      "parentUuid": "c7ab257b_4a47af3d",
+      "revId": "719487ec7a52d8e6e70c3dcf88ce7054ff68f131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
