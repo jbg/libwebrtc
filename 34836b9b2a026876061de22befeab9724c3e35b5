@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "211e89cd_89e0b519",
+        "filename": "call/video_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-13T23:01:25Z",
+      "side": 1,
+      "message": "This could really use a better name. \n\nRight now, our code has two things that are almost exactly the same thing:\n\nSimulcastStream (has resolution and max bitrate)\nSpatialLayer (has scaling factor and target bitrate)\n\n\nRtpEncodingParameters is tied to what the RTP taxonomy calls an \"EncodedStream\" (\"encoding\" is just a shorter version of that).  A SimulcastStream in this layer of the code is an EncodedStream (and should really be renamed EncodedStream).  Meanwhile, a SpatialLayer is also almost exactly the same thing except the EncodedStreams can depend on one another and thus are called EncodedStreams or DependentStreams.\n\nIdeally, we would have one EncodedStreamConfig (or EncodedStreamParameters) that replaced both SimulcastStream and SpatialLayer and contains the scale, the max bitrate, and the relative bitrate (aka bitrate priority).\n\n\n\n\nI\u0027m not sure what would be better right now between:\n\na.  Use SpatialLayer by adding max bitrate and bitrate priority.\nb.  Use SimulcastStream by adding scaling factor and bitrate priority.\nC.  Add a new EncodedStreamConfig with a comment that it should replace SimulcastStream and SpatialLayer.\n\n\nBut if you do add something, I\u0027d suggest EncodedStreamConfig or EncodedStreamParameters as a name.",
+      "range": {
+        "startLine": 54,
+        "startChar": 36,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "34836b9b2a026876061de22befeab9724c3e35b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "761dc1c9_6a6e6e89",
+        "filename": "call/video_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-13T23:01:25Z",
+      "side": 1,
+      "message": "And this would be either encoded_streams or maybe simulcast_layers.",
+      "range": {
+        "startLine": 163,
+        "startChar": 63,
+        "endLine": 163,
+        "endChar": 0
+      },
+      "revId": "34836b9b2a026876061de22befeab9724c3e35b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
