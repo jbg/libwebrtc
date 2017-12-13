@@ -117,6 +117,30 @@
       "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e95c2ba_3be9ccf4",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T13:06:37Z",
+      "side": 1,
+      "message": "I think I would still prefer to delete the local variable receive_bitrate_bps, and replace the below std::min with an if, if there\u0027s not neater way to get it right.",
+      "parentUuid": "09a84cad_b5c76c55",
+      "range": {
+        "startLine": 169,
+        "startChar": 10,
+        "endLine": 169,
+        "endChar": 32
+      },
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
