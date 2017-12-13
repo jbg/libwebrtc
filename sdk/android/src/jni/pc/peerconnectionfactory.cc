@@ -439,10 +439,14 @@ JNI_FUNCTION_DECLARATION(jlong,
                          jlong factory,
                          jobject j_rtc_config,
                          jobject j_constraints,
-                         jlong observer_p) {
+                         jlong observer_p,
+                         jlong portallocator_p) {
   rtc::scoped_refptr<PeerConnectionFactoryInterface> f(
       reinterpret_cast<PeerConnectionFactoryInterface*>(
           factoryFromJava(factory)));
+
+  std::unique_ptr<cricket::PortAllocator> portAllocator(
+      reinterpret_cast<cricket::PortAllocator*>(portallocator_p));
 
   PeerConnectionInterface::RTCConfiguration rtc_config(
       PeerConnectionInterface::RTCConfigurationType::kAggressive);
@@ -466,8 +470,8 @@ JNI_FUNCTION_DECLARATION(jlong,
       reinterpret_cast<PeerConnectionObserverJni*>(observer_p);
   observer->SetConstraints(JavaToNativeMediaConstraints(jni, j_constraints));
   CopyConstraintsIntoRtcConfiguration(observer->constraints(), &rtc_config);
-  rtc::scoped_refptr<PeerConnectionInterface> pc(
-      f->CreatePeerConnection(rtc_config, nullptr, nullptr, observer));
+  rtc::scoped_refptr<PeerConnectionInterface> pc(f->CreatePeerConnection(
+      rtc_config, std::move(portAllocator), nullptr, observer));
   return (jlong)pc.release();
 }
 
