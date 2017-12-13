@@ -220,17 +220,26 @@ public class PeerConnectionFactory {
   }
 
   public PeerConnection createPeerConnection(PeerConnection.RTCConfiguration rtcConfig,
-      MediaConstraints constraints, PeerConnection.Observer observer) {
+      MediaConstraints constraints, PeerConnection.Observer observer, PortAllocator portAllocator) {
     long nativeObserver = createNativeObserver(observer);
     if (nativeObserver == 0) {
       return null;
     }
-    long nativePeerConnection =
-        createNativePeerConnection(nativeFactory, rtcConfig, constraints, nativeObserver);
+    long nativePortAllocator = 0;
+    if (portAllocator != null) {
+      nativePortAllocator = portAllocator.release();
+    }
+    long nativePeerConnection = createNativePeerConnection(
+        nativeFactory, rtcConfig, constraints, nativeObserver, nativePortAllocator);
     if (nativePeerConnection == 0) {
       return null;
     }
     return new PeerConnection(nativePeerConnection, nativeObserver);
+  }
+
+  public PeerConnection createPeerConnection(PeerConnection.RTCConfiguration rtcConfig,
+      MediaConstraints constraints, PeerConnection.Observer observer) {
+    return createPeerConnection(rtcConfig, constraints, observer, null);
   }
 
   public PeerConnection createPeerConnection(List<PeerConnection.IceServer> iceServers,
@@ -324,6 +333,10 @@ public class PeerConnectionFactory {
     invokeNativeThreadsCallbacks(nativeFactory);
   }
 
+  public long getNativePointer() {
+    return nativeFactory;
+  }
+
   private static void printStackTrace(Thread thread, String threadName) {
     if (thread != null) {
       StackTraceElement[] stackTraces = thread.getStackTrace();
@@ -370,7 +383,8 @@ public class PeerConnectionFactory {
   private static native long createNativeObserver(PeerConnection.Observer observer);
 
   private static native long createNativePeerConnection(long nativeFactory,
-      PeerConnection.RTCConfiguration rtcConfig, MediaConstraints constraints, long nativeObserver);
+      PeerConnection.RTCConfiguration rtcConfig, MediaConstraints constraints, long nativeObserver,
+      long nativePortAllocator);
 
   private static native long createNativeLocalMediaStream(long nativeFactory, String label);
 

@@ -11,6 +11,7 @@ include_rules = [
   "+modules/utility/include/jvm_android.h",
   "+modules/video_coding",
   "+pc",
+  "+p2p/base",
   "+system_wrappers/include",
   "+voice_engine/include/voe_base.h",
 ]
