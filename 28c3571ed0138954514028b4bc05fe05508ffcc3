@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48d198c3_c7ebf99e",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-13T11:43:35Z",
+      "side": 0,
+      "message": "Remove the _AGC field and internal calls to AGC() too.\n\nThere\u0027s also a get_mic_volume_counter_ms_ field to remove.",
+      "range": {
+        "startLine": 743,
+        "startChar": 9,
+        "endLine": 743,
+        "endChar": 13
+      },
+      "revId": "28c3571ed0138954514028b4bc05fe05508ffcc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb20e37_8ece6170",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-13T11:43:35Z",
+      "side": 0,
+      "message": "Remove the _AGC field and internal references to AGC() and _AGC.",
+      "range": {
+        "startLine": 1289,
+        "startChar": 9,
+        "endLine": 1289,
+        "endChar": 13
+      },
+      "revId": "28c3571ed0138954514028b4bc05fe05508ffcc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
