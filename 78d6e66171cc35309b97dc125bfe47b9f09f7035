@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "894719b9_3ccd2fa6",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T09:41:05Z",
+      "side": 1,
+      "message": "Consistency with SetRemb makes sense. But maybe we need to think about the right type to represent bitrates? I guess we\u0027re unlikely to sustain more than 2^31 bit/s (appr. 2Gbps) anytime soon, but we don\u0027t want things to break down if, e.g, we probe capacity over a 10Gbps network. Alternatives might be int64_t, long (not sure what\u0027s the general preference is with regards to types with explicit bit size) or float.",
+      "range": {
+        "startLine": 75,
+        "startChar": 35,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6baa2f_ef3e748b",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T09:41:05Z",
+      "side": 1,
+      "message": "Will callers typically be able to use move when passing the ssrc vector? Or will we need to make a copy anyway?",
+      "range": {
+        "startLine": 78,
+        "startChar": 33,
+        "endLine": 78,
+        "endChar": 60
+      },
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
