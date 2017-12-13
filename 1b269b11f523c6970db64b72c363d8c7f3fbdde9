@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2c2c5a8_426f5d37",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "Since RtcEventLogEncoder is an implementation detail, and only temporarily an interface (until we remove the legacy sub-class and keep only one sub-class around), I think this hard-coding of deque as the container is not too bad.",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "453645d6_c059fbfe",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "Add a TODO for fixing the inefficiency of repeatedly extending a string?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "252ba18c_c3b9992a",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "I\u0027m not clear on the style guidelines for #including header files which are vicariously included. Specifically, here you override, so the header file that contains the overridden function, is bound to be including \u003cdeque\u003e, whether directly or indirectly. Do we have a guideline I could follow?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37e1cf39_5abba64c",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "Isn\u0027t the type here size_t?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "322ca370_4c90af87",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "nit: const auto?",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 37
+      },
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c66c8bcb_40ffea0c",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "In addition to logging start/stop separately, we also have to separate calls for config-events and non-config-events. That both means more messages sent to the output - which in Chrome\u0027s case is another process - as well as limits the potential efficiency of any compression that the encoder might do. Would the added code complexity required for avoiding this not be worth the trouble? Perhaps config-events are too infrequent to have a significant effect? If so, perhaps it would be good to leave a comment about this for future developers?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87373ad5_d27d2332",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "Could you please remove this comment?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7345942_31ccad28",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-13T15:21:49Z",
+      "side": 1,
+      "message": "Might it be good to have a comment that explains that WriteToOutput() *might* fail, but that we\u0027ll not get notified of this, and therefore we allow events to be lost?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
