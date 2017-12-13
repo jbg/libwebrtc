@@ -16,6 +16,24 @@
       "revId": "719487ec7a52d8e6e70c3dcf88ce7054ff68f131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7ab257b_4a47af3d",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2739,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-13T13:49:53Z",
+      "side": 0,
+      "message": "Let me run some tests and get back. I think we are OK as is.",
+      "parentUuid": "26627623_415e45db",
+      "revId": "719487ec7a52d8e6e70c3dcf88ce7054ff68f131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
