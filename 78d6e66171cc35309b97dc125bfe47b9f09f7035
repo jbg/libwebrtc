@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "78e8f82d_e168a807",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T10:03:10Z",
+      "side": 1,
+      "message": "\u003e As far as I know 2Gbit is about 100 more than maximum bitrate webrtc probes for.\n\u003e So I consider using int64 for bitrate preliminary.\n\nI agree it\u0027s not urgent, we can discuss that for some later cl.",
+      "parentUuid": "75445edb_13e04c4d",
+      "range": {
+        "startLine": 75,
+        "startChar": 35,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca6baa2f_ef3e748b",
         "filename": "modules/pacing/packet_router.h",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "I expect callers can usually move the vector.\nCurrently it is copied because OnReceiveBitrateChanged has only const reference to it.\nThat doesn\u0027t seem hard to change (in a different CL)\n\nOn the other side this list suppose to be small, uint32_t is trivial, so copy is not that expensive.",
       "parentUuid": "ca6baa2f_ef3e748b",
+      "range": {
+        "startLine": 78,
+        "startChar": 33,
+        "endLine": 78,
+        "endChar": 60
+      },
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f024310_0e86b9d5",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T10:03:10Z",
+      "side": 1,
+      "message": "\u003e I expect callers can usually move the vector.\n\u003e Currently it is copied because OnReceiveBitrateChanged has only const reference to it.\n\u003e That doesn\u0027t seem hard to change (in a different CL)\n\nSounds good then.\n \n\u003e On the other side this list suppose to be small, uint32_t is trivial, so copy is not that expensive.\n\nIt\u0027s still expensive compared to just passing a single pointer.",
+      "parentUuid": "fdcfd9e6_e0b94e67",
       "range": {
         "startLine": 78,
         "startChar": 33,
