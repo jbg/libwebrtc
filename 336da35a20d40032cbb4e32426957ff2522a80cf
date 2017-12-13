@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b181c673_eed864fe",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-13T09:09:55Z",
+      "side": 1,
+      "message": "Suffice to say \n TODO(bugs.webrtc.org/8644)\ninstead of the long url.",
+      "range": {
+        "startLine": 167,
+        "startChar": 7,
+        "endLine": 167,
+        "endChar": 69
+      },
+      "revId": "336da35a20d40032cbb4e32426957ff2522a80cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e33971c_9f9e51fa",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-13T09:09:55Z",
+      "side": 1,
+      "message": "Also, add the same TODO to the production code where the experiment is picked up.",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 13
+      },
+      "revId": "336da35a20d40032cbb4e32426957ff2522a80cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
