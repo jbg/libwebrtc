@@ -34,6 +34,47 @@
       "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23ebc3c0_1e9c3ab7",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T12:19:33Z",
+      "side": 1,
+      "message": "\u003e I\u0027ll keep static_cast though to be explicit about the cast and motivate extra variable.\n\nI think static_cast signals that something potentially dangerous is going on. I think a comment is more appropriate if you want to point out why you do a perfectly safe conversion.",
+      "parentUuid": "cc20b569_0a031dd2",
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64e6f2f5_56dbf985",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-13T12:19:33Z",
+      "side": 1,
+      "message": "Since now last_send_bitrate_bps_ and bitrate_bps_ are int64_t, I don\u0027t think you need receive_bitrate_bps_ at all, you could use bitrate_bps directly and rely on automatic conversion.",
+      "range": {
+        "startLine": 169,
+        "startChar": 10,
+        "endLine": 169,
+        "endChar": 32
+      },
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
