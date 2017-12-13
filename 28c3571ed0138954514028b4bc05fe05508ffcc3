@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "66945b30_44a99da2",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-13T12:52:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "48d198c3_c7ebf99e",
+      "range": {
+        "startLine": 743,
+        "startChar": 9,
+        "endLine": 743,
+        "endChar": 13
+      },
+      "revId": "28c3571ed0138954514028b4bc05fe05508ffcc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccb20e37_8ece6170",
         "filename": "modules/audio_device/win/audio_device_core_win.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "28c3571ed0138954514028b4bc05fe05508ffcc3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8db72ee1_e3b30fa4",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-13T12:52:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ccb20e37_8ece6170",
+      "range": {
+        "startLine": 1289,
+        "startChar": 9,
+        "endLine": 1289,
+        "endChar": 13
+      },
+      "revId": "28c3571ed0138954514028b4bc05fe05508ffcc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
