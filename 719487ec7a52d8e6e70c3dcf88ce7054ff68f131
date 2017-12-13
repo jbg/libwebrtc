@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26627623_415e45db",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2739,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-13T13:18:16Z",
+      "side": 0,
+      "message": "DoGetCaptureVolumeThread() will IIUC get the volume which is pushed to RecordedDataIsAvailable(), so this changes things a little more than previously.",
+      "revId": "719487ec7a52d8e6e70c3dcf88ce7054ff68f131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
