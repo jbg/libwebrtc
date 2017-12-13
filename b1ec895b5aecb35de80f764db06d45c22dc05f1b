@@ -141,6 +141,30 @@
       "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc68c2c_e2d286fc",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-13T13:23:58Z",
+      "side": 1,
+      "message": "tried, looks less nice to me than an extra static_cast. (there is a branch where uint32_t bitrate_bps need to be assigned to int64_t max_bitrate_bps_. That mean a not so safe cast, it is easy to prove to a human it will not overflow, it is harder to prove that to compiler)",
+      "parentUuid": "0e95c2ba_3be9ccf4",
+      "range": {
+        "startLine": 169,
+        "startChar": 10,
+        "endLine": 169,
+        "endChar": 32
+      },
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
