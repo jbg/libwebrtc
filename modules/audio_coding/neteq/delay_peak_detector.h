@@ -66,6 +66,8 @@ class DelayPeakDetector {
   int peak_detection_threshold_;
   const TickTimer* tick_timer_;
   std::unique_ptr<TickTimer::Stopwatch> peak_period_stopwatch_;
+  // TODO(bugs.webrtc.org/8644): This should be removed when the experimental
+  // NetEq fix is either made permanent or removed.
   const bool frame_length_change_experiment_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DelayPeakDetector);

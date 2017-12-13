@@ -313,6 +313,7 @@ webrtc_fuzzer_test("neteq_rtp_fuzzer") {
     "../../modules/rtp_rtcp",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_base_tests_utils",
+    "../../test:field_trial",
   ]
 }
 

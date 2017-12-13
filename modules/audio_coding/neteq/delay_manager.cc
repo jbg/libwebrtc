@@ -395,8 +395,6 @@ DelayManager::IATVector DelayManager::ScaleHistogram(const IATVector& histogram,
     return histogram;
   }
   RTC_DCHECK_GT(new_packet_length, 0);
-  RTC_DCHECK_EQ(old_packet_length % 10, 0);
-  RTC_DCHECK_EQ(new_packet_length % 10, 0);
   IATVector new_histogram(histogram.size(), 0);
   int acc = 0;
   int time_counter = 0;

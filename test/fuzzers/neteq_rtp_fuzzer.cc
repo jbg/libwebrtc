@@ -18,6 +18,7 @@
 #include "modules/audio_coding/neteq/tools/encode_neteq_input.h"
 #include "modules/audio_coding/neteq/tools/neteq_test.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
+#include "test/field_trial.h"
 
 namespace webrtc {
 namespace test {
@@ -162,7 +163,19 @@ void FuzzOneInputTest(const uint8_t* data, size_t size) {
 }  // namespace test
 
 void FuzzOneInput(const uint8_t* data, size_t size) {
+  static bool initialize_field_trials = false;
+  if (!initialize_field_trials) {
+    test::InitFieldTrialsFromString("");
+    initialize_field_trials = true;
+  }
   test::FuzzOneInputTest(data, size);
+  {
+    // TODO(bugs.webrtc.org/8644): This should be removed when the experimental
+    // NetEq fix is either made permanent or removed.
+    test::ScopedFieldTrials override_field_trials(
+        "WebRTC-Audio-NetEqFramelengthExperiment/Enabled/");
+    test::FuzzOneInputTest(data, size);
+  }
 }
 
 }  // namespace webrtc

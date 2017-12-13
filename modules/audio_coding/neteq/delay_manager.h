@@ -172,6 +172,8 @@ class DelayManager {
   std::unique_ptr<TickTimer::Stopwatch> max_iat_stopwatch_;
   DelayPeakDetector& peak_detector_;
   int last_pack_cng_or_dtmf_;
+  // TODO(bugs.webrtc.org/8644): This should be removed when the experimental
+  // NetEq fix is either made permanent or removed.
   const bool frame_length_change_experiment_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DelayManager);
