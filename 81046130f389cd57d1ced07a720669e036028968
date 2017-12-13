@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8889229_517bccb2",
+        "filename": "test/ios/test_support.mm",
+        "patchSetId": 41
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-13T12:06:53Z",
+      "side": 1,
+      "message": "Does the thread executing this run on the same thread as runTests? If so, you need a mutex or at least something that memory-barriers the reads and writes on the above. It should work because the old vars appear to work, but it\u0027s good to make sure.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 1
+      },
+      "revId": "81046130f389cd57d1ced07a720669e036028968",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
