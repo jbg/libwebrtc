@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "509a86b6_a0c91120",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-12-13T10:16:06Z",
+      "side": 1,
+      "message": "Minor thing, but don\u0027t you think it\u0027s better to only copy |ssrcs| if you need to?",
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "894719b9_3ccd2fa6",
         "filename": "modules/pacing/packet_router.h",
         "patchSetId": 2
@@ -60,6 +77,30 @@
       "writtenOn": "2017-12-13T10:03:10Z",
       "side": 1,
       "message": "\u003e As far as I know 2Gbit is about 100 more than maximum bitrate webrtc probes for.\n\u003e So I consider using int64 for bitrate preliminary.\n\nI agree it\u0027s not urgent, we can discuss that for some later cl.",
+      "parentUuid": "75445edb_13e04c4d",
+      "range": {
+        "startLine": 75,
+        "startChar": 35,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2733b3_2c865b69",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-12-13T10:16:06Z",
+      "side": 1,
+      "message": "I can\u0027t remember which class, but I know there are places where int64_t is needed to not overflow when calculating bitrates.\n\nNote that some applications use bitrates upwards of 50 Mbps, and I know they want to increase that as well. Combine this with probing we might send at 100-200 Mbps",
       "parentUuid": "75445edb_13e04c4d",
       "range": {
         "startLine": 75,
