@@ -51,6 +51,22 @@ struct VideoStream {
   std::vector<int> temporal_layer_thresholds_bps;
 };
 
+struct RtpEncodingParametersSubset {
+  RtpEncodingParametersSubset();
+  RtpEncodingParametersSubset(const RtpEncodingParametersSubset& other);
+  ~RtpEncodingParametersSubset();
+
+  // TODO(bugs.webrtc.org/8630): Support bitrate_priority per-simulcast layer.
+  double bitrate_priority;
+  // TODO(bugs.webrtc.org/8655): Support max_bitrate_bps per-simulcast layer.
+  rtc::Optional<int> max_bitrate_bps;
+  // TODO(bugs.webrtc.org/8654): Support scale_resolution_down_by per-simulcast
+  // layer.
+  double scale_resolution_down_by;
+  // TODO(bugs.webrtc.org/8653): Support active per-simulcast layer.
+  bool active;
+};
+
 class VideoEncoderConfig {
  public:
   // These are reference counted to permit copying VideoEncoderConfig and be
@@ -142,6 +158,9 @@ class VideoEncoderConfig {
   // unless the estimated bandwidth indicates that the link can handle it.
   int min_transmit_bitrate_bps;
   int max_bitrate_bps;
+
+  // A subset of the encoding parameters for one rtp sender.
+  std::vector<RtpEncodingParametersSubset> rtp_encoding_params;
 
   // Max number of encoded VideoStreams to produce.
   size_t number_of_streams;
