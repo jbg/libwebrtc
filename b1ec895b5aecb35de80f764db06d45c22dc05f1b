@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "bf18b79e_f3bf620d",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-13T12:37:45Z",
+      "side": 1,
+      "message": "of all explicit casts static_cast seems like safest one: \u0027nothing dangerous is going here, I just got type A while need type B but there is a well-defined conversion from type A to type B\u0027.\n\nAdded a TODO comment as an explanation for the cast.",
+      "parentUuid": "23ebc3c0_1e9c3ab7",
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64e6f2f5_56dbf985",
         "filename": "modules/pacing/packet_router.cc",
         "patchSetId": 4
@@ -75,6 +93,30 @@
       "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09a84cad_b5c76c55",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-13T12:37:45Z",
+      "side": 1,
+      "message": "there is an std::min below between input parameter and int64_t max_bitrate_bps_\nit would look ugly if parameters are of different types.\n(rtc::SafeMin can\u0027t help since SafeMin\u003cuint32_t, int64_t\u003e \u003d\u003d int64_t)",
+      "parentUuid": "64e6f2f5_56dbf985",
+      "range": {
+        "startLine": 169,
+        "startChar": 10,
+        "endLine": 169,
+        "endChar": 32
+      },
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
