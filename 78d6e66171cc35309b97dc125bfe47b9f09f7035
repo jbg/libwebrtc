@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c1f0f5ce_947949a6",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-13T11:51:14Z",
+      "side": 1,
+      "message": "hm, you right, I can pass ssrcs by value to SendRemb when OnReceiveBitrateChanged will take it by value too. Until then, do not see downsides to keep passing ssrcs by const\u0026 to SendRemb",
+      "parentUuid": "509a86b6_a0c91120",
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "894719b9_3ccd2fa6",
         "filename": "modules/pacing/packet_router.h",
         "patchSetId": 2
@@ -102,6 +120,30 @@
       "side": 1,
       "message": "I can\u0027t remember which class, but I know there are places where int64_t is needed to not overflow when calculating bitrates.\n\nNote that some applications use bitrates upwards of 50 Mbps, and I know they want to increase that as well. Combine this with probing we might send at 100-200 Mbps",
       "parentUuid": "75445edb_13e04c4d",
+      "range": {
+        "startLine": 75,
+        "startChar": 35,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "78d6e66171cc35309b97dc125bfe47b9f09f7035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1e9b911_e55adec8",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-13T11:51:14Z",
+      "side": 1,
+      "message": "\"When in doubt, choose a larger type.\"\nint64_t it is then.\n(also updated RtcpTransceiver to use int64_t for bitrate)",
+      "parentUuid": "df2733b3_2c865b69",
       "range": {
         "startLine": 75,
         "startChar": 35,
