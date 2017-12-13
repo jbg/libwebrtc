@@ -16,6 +16,24 @@
       "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc20b569_0a031dd2",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-13T12:07:58Z",
+      "side": 1,
+      "message": "Thanks! somehow I missed that.\nI\u0027ll keep static_cast though to be explicit about the cast and motivate extra variable.",
+      "parentUuid": "8571ea28_3691e3de",
+      "revId": "b1ec895b5aecb35de80f764db06d45c22dc05f1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
