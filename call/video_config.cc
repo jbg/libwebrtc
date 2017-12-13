@@ -49,6 +49,11 @@ std::string VideoStream::ToString() const {
   return ss.str();
 }
 
+RtpEncodingParametersSubset::RtpEncodingParametersSubset() {}
+RtpEncodingParametersSubset::RtpEncodingParametersSubset(
+    const RtpEncodingParametersSubset& other) = default;
+RtpEncodingParametersSubset::~RtpEncodingParametersSubset() {}
+
 VideoEncoderConfig::VideoEncoderConfig()
     : content_type(ContentType::kRealtimeVideo),
       encoder_specific_settings(nullptr),
