@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b23f45f_b6ffd6c5",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-13T09:18:45Z",
+      "side": 1,
+      "message": "This I did not know about. Nice.",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 40
+      },
+      "revId": "be761d019ea1afaf8c5127752b43ad4cd128ba24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e31164e5_a5c50469",
+        "filename": "test/fuzzers/forward_error_correction_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-13T09:18:45Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "be761d019ea1afaf8c5127752b43ad4cd128ba24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
