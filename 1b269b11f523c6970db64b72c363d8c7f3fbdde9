@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "440e4333_b0a8df87",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-14T18:05:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "164932af_b238a160",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "252ba18c_c3b9992a",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.h",
         "patchSetId": 1
@@ -104,6 +122,24 @@
       "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "786e8dae_2fa0aede",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-14T18:05:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aa28a1fb_4c8a3733",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -256,6 +292,24 @@
       "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c98f4a3a_69bc7160",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-14T18:05:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d30cd1d_50f50d54",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {

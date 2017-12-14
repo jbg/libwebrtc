@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dfde3c8_0e068ccf",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-14T18:05:49Z",
+      "side": 1,
+      "message": "nit: Perhaps \"then one batch of events might still be missing from both logs\"? Just a thought.",
+      "range": {
+        "startLine": 308,
+        "startChar": 66,
+        "endLine": 310,
+        "endChar": 47
+      },
+      "revId": "a5e7c344b32fbeae96658ed87725309570c3a88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c52bc77_62ca4f93",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-14T18:05:49Z",
+      "side": 1,
+      "message": "nit: I don\u0027t like the style, but that might be subjective; I am not sure what the style guide says.",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 34
+      },
+      "revId": "a5e7c344b32fbeae96658ed87725309570c3a88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
