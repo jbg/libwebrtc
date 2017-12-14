@@ -56,6 +56,11 @@ void VPrintError(const char* format, va_list args) {
 #endif
 }
 
+#if __GNUC__
+void PrintError(const char* format, ...)
+    __attribute__((__format__ (__printf__, 1, 2)));
+#endif
+
 void PrintError(const char* format, ...) {
   va_list args;
   va_start(args, format);
@@ -111,7 +116,7 @@ NO_RETURN FatalMessage::~FatalMessage() {
   fflush(stdout);
   fflush(stderr);
   stream_ << std::endl << "#" << std::endl;
-  PrintError(stream_.str().c_str());
+  PrintError("%s", stream_.str().c_str());
   DumpBacktrace();
   fflush(stderr);
   abort();
