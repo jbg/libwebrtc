@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a9364ee3_62595937",
+        "filename": "call/video_config.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2017-12-14T19:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcc09eec_b15ed8a7",
+      "range": {
+        "startLine": 150,
+        "startChar": 60,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "3e7cd22af9d1579dce9be2d318bacbdf5cea3d34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df75779d_a63b84cb",
         "filename": "call/video_config.h",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-14T03:03:54Z",
       "side": 1,
       "message": "This makes sense to me.  Maybe just make it clear that this is configuration from the application, which can then be modified by video_stream_factory before being passed further down.  \n\nMaybe VideoStreamFactory ought to be called SimulcastLayerModifier.\n\nBut I\u0027m not the owner of the directory :).",
+      "range": {
+        "startLine": 151,
+        "startChar": 44,
+        "endLine": 151,
+        "endChar": 0
+      },
+      "revId": "3e7cd22af9d1579dce9be2d318bacbdf5cea3d34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43000f33_d25371eb",
+        "filename": "call/video_config.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2017-12-14T19:43:21Z",
+      "side": 1,
+      "message": "Sounds good, I tried to make this clear in the comment.\n\nI think as a short term solution we can store the values we need in VideoEncoderConfig.simulcast_streams(VideoStreams) - active, max_bitrate, etc.. Renaming the factory would make sense here too. What it\u0027s really doing is using the width/height information to fill in values for the VideoStreams that aren\u0027t known without the resolution.\n\nPossible longer term solution:\n-Store EncoderStreamFactory member variables in a VideoEncoderConfig\n-Store VideoStreams in VideoEncoderConfig\n-When we reconfigure the encoder and have the width/height we can call video_encoder_config.UpdateSimulcastLayers(), which could do the update that CreateEncoderStreams currently is doing\n-Merge the SimulcastStream and VideoStream structs and rename them to SimulcastLayerConfig\n\nFor now it\u0027s probably best just to go with the short term I mentioned above, with possibly a renaming of the factory.\n\nI\u0027d like to hear Stefan\u0027s thoughts on this.",
+      "parentUuid": "df75779d_a63b84cb",
       "range": {
         "startLine": 151,
         "startChar": 44,
