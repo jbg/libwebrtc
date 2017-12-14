@@ -36,6 +36,7 @@
 #include "rtc_base/macutils.h"
 #include "rtc_base/timeutils.h"
 #include "sdk/objc/Framework/Classes/Common/scoped_cftyperef.h"
+#include "system_wrappers/include/rw_lock_wrapper.h"
 
 namespace webrtc {
 
@@ -311,6 +312,11 @@ class ScreenCapturerMac : public DesktopCapturer {
   // all display streams have been destroyed..
   DisplayStreamManager* display_stream_manager_;
 
+  // Most recent IOSurface that contains a capture of the screen.
+  // A lock protecting |invalid_region_| across threads.
+  std::unique_ptr<RWLockWrapper> io_surface_lock_;
+  rtc::ScopedCFTypeRef<IOSurfaceRef> io_surface_;
+
   RTC_DISALLOW_COPY_AND_ASSIGN(ScreenCapturerMac);
 };
 
@@ -339,7 +345,8 @@ ScreenCapturerMac::ScreenCapturerMac(
     rtc::scoped_refptr<DesktopConfigurationMonitor> desktop_config_monitor,
     bool detect_updated_region)
     : detect_updated_region_(detect_updated_region),
-      desktop_config_monitor_(desktop_config_monitor) {
+      desktop_config_monitor_(desktop_config_monitor),
+      io_surface_lock_(RWLockWrapper::CreateRWLock()) {
   display_stream_manager_ = new DisplayStreamManager;
 }
 
@@ -365,6 +372,12 @@ void ScreenCapturerMac::ReleaseBuffers() {
   // Instead, mark them as "needs update"; next time the buffers are used by
   // the capturer, they will be recreated if necessary.
   queue_.Reset();
+
+  WriteLockScoped scoped_io_surface_lock(*io_surface_lock_);
+  if (io_surface_) {
+    IOSurfaceDecrementUseCount(io_surface_.get());
+    io_surface_ = nullptr;
+  }
 }
 
 void ScreenCapturerMac::Start(Callback* callback) {
@@ -537,18 +550,60 @@ bool ScreenCapturerMac::CgBlit(const DesktopFrame& frame, const DesktopRegion& r
       }
     }
 
-    // Create an image containing a snapshot of the display.
-    CGImageRef image = CGDisplayCreateImage(display_config.id);
-    if (!image) {
-      if (excluded_image)
-        CFRelease(excluded_image);
-      continue;
+    const uint8_t* display_base_address = 0;
+    int src_bytes_per_row = 0;
+    int bytes_per_pixel = 0;
+    int image_width = 0;
+    int image_height = 0;
+    CGImageRef image = nullptr;
+    CFDataRef data = nullptr;
+
+    rtc::ScopedCFTypeRef<IOSurfaceRef> io_surface;
+    {
+      WriteLockScoped scoped_io_surface_lock(*io_surface_lock_);
+      io_surface = io_surface_;
+      if (io_surface) IOSurfaceIncrementUseCount(io_surface.get());
+    }
+
+    if (io_surface) {
+      IOReturn status = IOSurfaceLock(io_surface.get(), 0, nullptr);
+      if (status != kIOReturnSuccess) {
+        RTC_LOG(LS_ERROR) << "Failed lock the IOSurface " << status;
+        IOSurfaceDecrementUseCount(io_surface.get());
+        continue;
+      }
+
+      display_base_address = reinterpret_cast<uint8_t*>(IOSurfaceGetBaseAddress(io_surface.get()));
+      src_bytes_per_row = IOSurfaceGetBytesPerRow(io_surface.get());
+      bytes_per_pixel = IOSurfaceGetBytesPerElement(io_surface.get());
+
+      image_width = IOSurfaceGetWidth(io_surface.get());
+      image_height = IOSurfaceGetHeight(io_surface.get());
+    } else {
+      // Create an image containing a snapshot of the display.
+      image = CGDisplayCreateImage(display_config.id);
+      if (!image) {
+        if (excluded_image) CFRelease(excluded_image);
+        continue;
+      }
+
+      // Request access to the raw pixel data via the image's DataProvider.
+      CGDataProviderRef provider = CGImageGetDataProvider(image);
+      data = CGDataProviderCopyData(provider);
+      assert(data);
+
+      display_base_address = CFDataGetBytePtr(data);
+      src_bytes_per_row = CGImageGetBytesPerRow(image);
+
+      image_width = CGImageGetWidth(image);
+      image_height = CGImageGetHeight(image);
+
+      bytes_per_pixel = CGImageGetBitsPerPixel(image) / 8;
     }
 
     // Verify that the image has 32-bit depth.
-    int bits_per_pixel = CGImageGetBitsPerPixel(image);
-    if (bits_per_pixel / 8 != DesktopFrame::kBytesPerPixel) {
-      RTC_LOG(LS_ERROR) << "CGDisplayCreateImage() returned imaged with " << bits_per_pixel
+    if (bytes_per_pixel != DesktopFrame::kBytesPerPixel) {
+      RTC_LOG(LS_ERROR) << "CGDisplayCreateImage() returned imaged with " << 8 * bytes_per_pixel
                         << " bits per pixel. Only 32-bit depth is supported.";
       CFRelease(image);
       if (excluded_image)
@@ -556,18 +611,9 @@ bool ScreenCapturerMac::CgBlit(const DesktopFrame& frame, const DesktopRegion& r
       return false;
     }
 
-    // Request access to the raw pixel data via the image's DataProvider.
-    CGDataProviderRef provider = CGImageGetDataProvider(image);
-    CFDataRef data = CGDataProviderCopyData(provider);
-    assert(data);
-
-    const uint8_t* display_base_address = CFDataGetBytePtr(data);
-    int src_bytes_per_row = CGImageGetBytesPerRow(image);
-
     // |image| size may be different from display_bounds in case the screen was
     // resized recently.
-    copy_region.IntersectWith(
-        DesktopRect::MakeWH(CGImageGetWidth(image), CGImageGetHeight(image)));
+    copy_region.IntersectWith(DesktopRect::MakeWH(image_width, image_height));
 
     // Copy the dirty region from the display buffer into our desktop buffer.
     uint8_t* out_ptr = frame.GetFrameDataAtPos(display_bounds.top_left());
@@ -576,8 +622,13 @@ bool ScreenCapturerMac::CgBlit(const DesktopFrame& frame, const DesktopRegion& r
                DesktopFrame::kBytesPerPixel, i.rect());
     }
 
-    CFRelease(data);
-    CFRelease(image);
+    if (io_surface) {
+      IOSurfaceUnlock(io_surface.get(), 0, nullptr);
+      IOSurfaceDecrementUseCount(io_surface.get());
+    }
+
+    if (data) CFRelease(data);
+    if (image) CFRelease(image);
 
     if (excluded_image) {
       CGDataProviderRef provider = CGImageGetDataProvider(excluded_image);
@@ -673,6 +724,13 @@ bool ScreenCapturerMac::RegisterRefreshAndMoveHandlers() {
             // According to CGDisplayStream.h, it's safe to call
             // CGDisplayStreamStop() from within the callback.
             ScreenRefresh(count, rects, display_origin);
+          }
+
+          WriteLockScoped scoped_io_surface_lock(*io_surface_lock_);
+          if (io_surface_) IOSurfaceDecrementUseCount(io_surface_.get());
+          if (frame_surface) {
+            io_surface_.reset(frame_surface, rtc::RetainPolicy::RETAIN);
+            IOSurfaceIncrementUseCount(io_surface_.get());
           }
         };
 
