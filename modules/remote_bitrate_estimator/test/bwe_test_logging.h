@@ -277,7 +277,12 @@ class Logging {
   void SetGlobalContext(const char* name);
   void SetGlobalEnable(bool enabled);
 
-  void Log(const char format[], ...);
+  void Log(const char format[], ...)
+#if defined(__GNUC__)
+      // Note: Implicit |this| argument counts as the first argument.
+      __attribute__((__format__(__printf__, 2, 3)))
+#endif
+      ;  // NOLINT
   void Plot(int figure, const std::string& name, double value);
   void Plot(int figure,
             const std::string& name,

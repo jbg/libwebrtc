@@ -72,7 +72,11 @@ typedef struct {
 static NSString *const SRWebSocketAppendToSecKeyString = @"258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
 
 static inline int32_t validate_dispatch_data_partial_string(NSData *data);
-static inline void SRFastLog(NSString *format, ...);
+static inline void SRFastLog(NSString *format, ...)
+#if defined(__GNUC__)
+    __attribute__((__format__(__printf__, 1, 2)))
+#endif
+    ;
 
 @interface NSData (SRWebSocket)
 

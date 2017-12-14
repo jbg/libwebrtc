@@ -131,6 +131,11 @@ std::string ListArray(const uint16_t* array, int num_elems) {
   return result.str();
 }
 
+#if defined(__GNUC__)
+void DebugSctpPrintf(const char* format, ...)
+    __attribute__((__format__(__printf__, 1, 2)));
+#endif
+
 // Helper for logging SCTP messages.
 void DebugSctpPrintf(const char* format, ...) {
 #if RTC_DCHECK_IS_ON
