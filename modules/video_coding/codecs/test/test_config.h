@@ -53,6 +53,7 @@ struct TestConfig {
 
   int NumberOfCores() const;
   int NumberOfTemporalLayers() const;
+  int NumberOfSpatialLayers() const;
   int TemporalLayerForFrame(int frame_idx) const;
   std::vector<FrameType> FrameTypeForFrame(int frame_idx) const;
   std::string ToString() const;
@@ -70,7 +71,7 @@ struct TestConfig {
   std::string output_filename;
 
   // Number of frames to process.
-  int num_frames = 0;
+  size_t num_frames = 0;
 
   // Configurations related to networking.
   NetworkingConfig networking_config;
@@ -96,7 +97,7 @@ struct TestConfig {
   // to this setting. Forcing key frames may also affect encoder planning
   // optimizations in a negative way, since it will suddenly be forced to
   // produce an expensive key frame.
-  int keyframe_interval = 0;
+  size_t keyframe_interval = 0;
 
   // Codec settings to use.
   webrtc::VideoCodec codec_settings;
@@ -118,6 +119,9 @@ struct TestConfig {
 
   // Custom checker that will be called for each frame.
   const EncodedFrameChecker* encoded_frame_checker = nullptr;
+
+  // Print out frame level stats.
+  bool print_frame_level_stats = 0;
 };
 
 }  // namespace test
