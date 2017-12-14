@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f6622521_91ec49cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "CL for removing packet loss tests - https://webrtc-review.googlesource.com/c/src/+/32303 (already merged)\n\nI will delete packet loss related stuff in next CL.",
+      "parentUuid": "4a9168ac_531c80a5",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2a7f642_6be75fd0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c805c86a_ae46118b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2a7f642_6be75fd0",
+      "range": {
+        "startLine": 18,
+        "startChar": 30,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bb555bea_8ad18332",
+        "filename": "modules/video_coding/codecs/test/stats.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d91b5a6_81214f7c",
+      "range": {
+        "startLine": 25,
+        "startChar": 22,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8459eeb0_7671fdac",
         "filename": "modules/video_coding/codecs/test/stats.h",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d10f503_4a4d6e9d",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8459eeb0_7671fdac",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 5
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "43abeb21_e98afa89",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1819cb7_6a145016",
+      "range": {
+        "startLine": 46,
+        "startChar": 12,
+        "endLine": 46,
+        "endChar": 61
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99083dba_cc72f5c7",
         "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f44fc40_a5267d79",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "I will change this to GetSpatialLayerSum(simulcast_svc_idx) in next CL that will bring simulcast/spatial layering.",
+      "parentUuid": "99083dba_cc72f5c7",
+      "range": {
+        "startLine": 254,
+        "startChar": 26,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "8ec89b95_a08ca176",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "I put ReleaseAndCloseObjects before AnalyzeAllFrames call.",
+      "parentUuid": "50e93234_1ca7fcbb",
+      "range": {
+        "startLine": 184,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 38
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7281e475_e9967a23",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
         "patchSetId": 2
@@ -183,6 +351,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80331530_e4726e35",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7281e475_e9967a23",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 43
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "bdc5f099_6b71da9c",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5de2fd7e_d556a430",
+      "range": {
+        "startLine": 221,
+        "startChar": 6,
+        "endLine": 221,
+        "endChar": 42
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1a16e6_5db85f3b",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
         "patchSetId": 2
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "17a88cdd_6931e47d",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a1a16e6_5db85f3b",
+      "range": {
+        "startLine": 252,
+        "startChar": 13,
+        "endLine": 252,
+        "endChar": 38
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4678121_fb114cce",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
         "patchSetId": 2
@@ -246,6 +486,24 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58a1d0bf_42351bc2",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4678121_fb114cce",
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -272,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "e3fbb9b5_535127bb",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "yep.",
+      "parentUuid": "18b58ea9_ecbc492b",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 338,
+        "endChar": 69
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5569ce0e_b9a3e0f6",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
         "patchSetId": 2
@@ -292,6 +574,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7244b761_edb5944d",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5569ce0e_b9a3e0f6",
+      "range": {
+        "startLine": 547,
+        "startChar": 4,
+        "endLine": 547,
+        "endChar": 9
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -318,6 +624,30 @@
     },
     {
       "key": {
+        "uuid": "02f1c5a3_ee7bbc4a",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "716fc98e_bd72e5a9",
+      "range": {
+        "startLine": 583,
+        "startChar": 68,
+        "endLine": 583,
+        "endChar": 75
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c04379a_14099041",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
         "patchSetId": 2
@@ -332,6 +662,24 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88a85bb9_f696c344",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c04379a_14099041",
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -358,6 +706,30 @@
     },
     {
       "key": {
+        "uuid": "f4af1235_d82f72b8",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a9430327_cf713e28",
+      "range": {
+        "startLine": 690,
+        "startChar": 2,
+        "endLine": 690,
+        "endChar": 22
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9eb2bd7_29f84b46",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
         "patchSetId": 2
@@ -378,6 +750,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60682d8a_b53c26c2",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "I removed this part of comment. I think new thresholds are more understandable and names are descriptive.",
+      "parentUuid": "c9eb2bd7_29f84b46",
+      "range": {
+        "startLine": 45,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 51
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -404,6 +800,30 @@
     },
     {
       "key": {
+        "uuid": "27b940e6_fbd86d8d",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8365827f_2084feb2",
+      "range": {
+        "startLine": 132,
+        "startChar": 6,
+        "endLine": 132,
+        "endChar": 11
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77115a67_512831b2",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
         "patchSetId": 2
@@ -424,6 +844,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dff20524_a6bf0ec9",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "I checked decoded video. SSIM drops on high motion scene with complex background (trees). This is expected. I replaced TODO comment with explanation.",
+      "parentUuid": "77115a67_512831b2",
+      "range": {
+        "startLine": 327,
+        "startChar": 30,
+        "endLine": 327,
+        "endChar": 73
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -450,6 +894,30 @@
     },
     {
       "key": {
+        "uuid": "d9b0f9ae_6736af1c",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_openh264.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "These descriptions are not very useful. I removed them and updated test names.",
+      "parentUuid": "d6f870ab_ecaa3438",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c9c4c89_74b41b25",
         "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_openh264.cc",
         "patchSetId": 2
@@ -470,6 +938,30 @@
       "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5a281f8_8b8a7a8b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_openh264.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T09:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c9c4c89_74b41b25",
+      "range": {
+        "startLine": 57,
+        "startChar": 46,
+        "endLine": 57,
+        "endChar": 71
+      },
+      "revId": "e0f5c20cae04844b916397af8f9878233fd031ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
