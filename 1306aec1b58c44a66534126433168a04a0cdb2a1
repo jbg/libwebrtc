@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8524c54_b31494fe",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-12-14T10:48:37Z",
+      "side": 1,
+      "message": "what if numberOfSpatialLayer is 0?",
+      "range": {
+        "startLine": 130,
+        "startChar": 54,
+        "endLine": 130,
+        "endChar": 0
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
