@@ -16,6 +16,24 @@
       "revId": "d2f0f4c27914d600501f0160c8c7af4c497f0dd2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8d61181_a03db80d",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2017-12-14T15:19:31Z",
+      "side": 1,
+      "message": "Not sure, the comment indicates that senders/receivers might access stats_collector_, so there might introduce a race? StopAndDestroyChannels is somewhat complex, so I don\u0027t think it\u0027s trivial to ensure it\u0027s safe.",
+      "parentUuid": "7a06f1ee_66e522ce",
+      "revId": "d2f0f4c27914d600501f0160c8c7af4c497f0dd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
