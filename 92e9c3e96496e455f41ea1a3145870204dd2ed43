@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d5b7b5c8_314bde66",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T16:11:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93710713_afa82b2a",
+      "revId": "92e9c3e96496e455f41ea1a3145870204dd2ed43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a48b6d6b_eeb3cdb6",
         "filename": "rtc_base/scoped_ref_ptr.h",
         "patchSetId": 2
