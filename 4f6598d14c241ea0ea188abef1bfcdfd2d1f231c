@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a38a6dc_072d54ce",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T21:29:34Z",
+      "side": 1,
+      "message": "Oh, something I should have pointed out already: The style guide says functions should have CamelCase names.",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "4f6598d14c241ea0ea188abef1bfcdfd2d1f231c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31375065_b627de00",
+        "filename": "sdk/android/src/jni/pc/rtpreceiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T21:29:34Z",
+      "side": 1,
+      "message": "You no longer null the track() pointer. Need to do something like\n\n  rtc::scoped_refptr\u003cwebrtc::MediaStreamTrackInterface\u003e track;\n  using std::swap;\n  swap(track,\n       reinterpret_cast\u003cRtpReceiverInterface*\u003e(j_rtp_receiver_pointer)-\u003etrack());\n  track.get()-\u003eAddRef();\n  return jlongFromPointer(track.get());\n\nUnless you know that you don\u0027t have to null it?",
+      "revId": "4f6598d14c241ea0ea188abef1bfcdfd2d1f231c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
