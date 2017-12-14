@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e382041_2f872712",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c2c2c5a8_426f5d37",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "453645d6_c059fbfe",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.cc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-13T15:21:49Z",
       "side": 1,
       "message": "Add a TODO for fixing the inefficiency of repeatedly extending a string?",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "164932af_b238a160",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Done.\n\nPlease note that it is a fairly minor inefficiency. By repeatedly reallocating, the write cost roughly doubles compared to no reallocations. But string writes are likely dominated by the encode time, at least for the new encoder, so the total time would not double. IT is also not clear how to allocate the correct size from teh start. We could loop over all the events and ask what size each will be, but that would force us to inspect each element twice instead.",
+      "parentUuid": "453645d6_c059fbfe",
       "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aa28a1fb_4c8a3733",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "I agree that it seems unnecessary since we are only instantiating an interface, but git cl lint complains without it.",
+      "parentUuid": "252ba18c_c3b9992a",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37e1cf39_5abba64c",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fca9c6aa_01f87061",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Yes. Thanks.",
+      "parentUuid": "37e1cf39_5abba64c",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "06115896_c73206e0",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "322ca370_4c90af87",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 37
+      },
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c66c8bcb_40ffea0c",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 1
@@ -107,6 +203,24 @@
       "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "877dfd5c_2367a53f",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Done as discussed offline.",
+      "parentUuid": "c66c8bcb_40ffea0c",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "5d30cd1d_50f50d54",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Expanded the comment in accordance with your suggestion below instead.",
+      "parentUuid": "87373ad5_d27d2332",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a7345942_31ccad28",
         "filename": "logging/rtc_event_log/rtc_event_log.cc",
         "patchSetId": 1
@@ -141,6 +273,24 @@
       "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db472339_cc80ec72",
+        "filename": "logging/rtc_event_log/rtc_event_log.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2017-12-14T17:57:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7345942_31ccad28",
+      "revId": "1b269b11f523c6970db64b72c363d8c7f3fbdde9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
