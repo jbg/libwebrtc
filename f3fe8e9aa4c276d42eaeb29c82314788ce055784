@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0faff153_14636073",
+        "filename": "rtc_base/stringencode.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-12-14T18:18:12Z",
+      "side": 0,
+      "message": "TODO to remove this as well when httpcommon.cc is removed? It looks like it\u0027s the only user.",
+      "revId": "f3fe8e9aa4c276d42eaeb29c82314788ce055784",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
