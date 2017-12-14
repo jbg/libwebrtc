@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "93710713_afa82b2a",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T14:10:46Z",
+      "side": 1,
+      "message": "We don\u0027t want other WebRTC files to use this method, so just make a namespace called something like rtc::scoped_refptr_impl.",
+      "revId": "92e9c3e96496e455f41ea1a3145870204dd2ed43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a48b6d6b_eeb3cdb6",
         "filename": "rtc_base/scoped_ref_ptr.h",
         "patchSetId": 2
