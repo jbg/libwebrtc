@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5be75572_ffa12ae8",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-14T16:31:29Z",
+      "side": 1,
+      "message": "deallocate observer and continue destroying objects that are used to monitor rtcp.\nI\u0027m still working of good use of this callback, but it seems better than to have a blocking \u0027RemoveMediaReceiverObserver\u0027 or no callback.\n\nYes, if ptr is invalidated, RtcpTransceiverImpl is destryoed (or about to be destroyed) so no more callbaks will be made and it is safe to deallocate the observer.",
+      "parentUuid": "da7433d9_b0f52243",
+      "range": {
+        "startLine": 73,
+        "startChar": 15,
+        "endLine": 73,
+        "endChar": 31
+      },
+      "revId": "e72bab660ce6386f024eaf261a293404150636a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b1ac1cb4_e9b28060",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "727cb182_d267077a",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-14T16:31:29Z",
+      "side": 1,
+      "message": "Considered.... and renamed.",
+      "parentUuid": "b1ac1cb4_e9b28060",
+      "range": {
+        "startLine": 37,
+        "startChar": 7,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "e72bab660ce6386f024eaf261a293404150636a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75086834_9a957424",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_unittest.cc",
         "patchSetId": 5
@@ -68,6 +116,30 @@
       "revId": "e72bab660ce6386f024eaf261a293404150636a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af8caef3_2730814f",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2017-12-14T16:31:29Z",
+      "side": 1,
+      "message": "running tsan....\nit is indeed very racy. Thank you!\n\nReplaced WaitPostedTask with waiting for an Event (WaitPostedTask works badly when one of tasks posts another task, e.g. reply).\n\ntsan doesn\u0027t complain now.",
+      "parentUuid": "75086834_9a957424",
+      "range": {
+        "startLine": 145,
+        "startChar": 51,
+        "endLine": 145,
+        "endChar": 59
+      },
+      "revId": "e72bab660ce6386f024eaf261a293404150636a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
