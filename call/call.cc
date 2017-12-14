@@ -10,6 +10,7 @@
 
 #include <string.h>
 #include <algorithm>
+#include <deque>
 #include <map>
 #include <memory>
 #include <set>
@@ -55,8 +56,10 @@
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/cpu_info.h"
+#include "system_wrappers/include/field_trial.h"
 #include "system_wrappers/include/metrics.h"
 #include "system_wrappers/include/rw_lock_wrapper.h"
+#include "test/fake_network_pipe.h"
 #include "video/call_stats.h"
 #include "video/send_delay_stats.h"
 #include "video/stats_counter.h"
@@ -156,9 +159,195 @@ std::unique_ptr<rtclog::StreamConfig> CreateRtcLogStreamConfig(
   return rtclog_config;
 }
 
+bool ParseConfigParam(std::string exp_name, int* field) {
+  std::string group = field_trial::FindFullName(exp_name);
+  if (group == "")
+    return false;
+
+  return (sscanf(group.c_str(), "%d", field) == 1);
+}
+
+rtc::Optional<webrtc::FakeNetworkPipe::Config> ParseDegradationConfig(
+    bool send) {
+  std::string exp_prefix = "WebRTCFakeNetwork";
+  if (send) {
+    exp_prefix += "Send";
+  } else {
+    exp_prefix += "Receive";
+  }
+
+  webrtc::FakeNetworkPipe::Config config;
+  bool configured = false;
+  configured |=
+      ParseConfigParam(exp_prefix + "DelayMs", &config.queue_delay_ms);
+  configured |= ParseConfigParam(exp_prefix + "DelayStdDevMs",
+                                 &config.delay_standard_deviation_ms);
+  int queue_length = 0;
+  if (ParseConfigParam(exp_prefix + "QueueLength", &queue_length)) {
+    RTC_CHECK_GE(queue_length, 0);
+    config.queue_length_packets = queue_length;
+    configured = true;
+  }
+  configured |=
+      ParseConfigParam(exp_prefix + "CapacityKbps", &config.link_capacity_kbps);
+  configured |=
+      ParseConfigParam(exp_prefix + "LossPercent", &config.loss_percent);
+  int allow_reordering = 0;
+  if (ParseConfigParam(exp_prefix + "AllowReordering", &allow_reordering)) {
+    config.allow_reordering = true;
+    configured = true;
+  }
+  configured |= ParseConfigParam(exp_prefix + "AvgBurstLossLength",
+                                 &config.avg_burst_loss_length);
+  return configured ? rtc::Optional<webrtc::FakeNetworkPipe::Config>(config)
+                    : rtc::nullopt;
+}
 }  // namespace
 
 namespace internal {
+class Call;
+// When emulating a constrained receive-link, this stub that is registered as a
+// callback from FakeNetworkPipe, just used to foward the packets to private
+// Call::DoDeliverPacket().
+class InternalPacketReceiver : public PacketReceiver {
+ public:
+  explicit InternalPacketReceiver(Call* call) : call_(call) {}
+  ~InternalPacketReceiver() override = default;
+
+  PacketReceiver::DeliveryStatus DeliverPacket(
+      MediaType media_type,
+      rtc::CopyOnWriteBuffer packet,
+      const PacketTime& packet_time) override;
+
+ private:
+  Call* const call_;
+};
+
+// This proxy is used when emulating a degraded send-link. It contains a
+// FakeNetworkPipe and keeps track of which packets are in flight in that
+// link, so that we can adjust send-time when OnSentPacket() callback is
+// triggered. Without this adjustment, the bandiwdth estimator will not be
+// aware of the delay induced.
+class SendDegradationProxy : public Transport {
+ public:
+  SendDegradationProxy(const webrtc::FakeNetworkPipe::Config& config,
+                       Clock* clock)
+      : config_(config), transport_(nullptr), clock_(clock) {}
+  ~SendDegradationProxy() override = default;
+
+  void SetTransport(Transport* transport, ProcessThread* process_thread) {
+    if (transport == nullptr) {
+      process_thread->DeRegisterModule(fake_pipe_.get());
+      fake_pipe_.reset();
+      transport_ = nullptr;
+      return;
+    }
+
+    if (transport_) {
+      RTC_CHECK_EQ(transport_, transport);
+    } else {
+      transport_ = transport;
+      send_transport_ = rtc::MakeUnique<SendTransportWrapper>(this, transport_);
+      fake_pipe_ = rtc::MakeUnique<FakeNetworkPipe>(clock_, config_,
+                                                    send_transport_.get());
+      process_thread->RegisterModule(fake_pipe_.get(), RTC_FROM_HERE);
+    }
+  }
+
+  bool SendRtp(const uint8_t* packet,
+               size_t length,
+               const PacketOptions& options) override {
+    if (!fake_pipe_)
+      return false;
+    int64_t time_now = clock_->TimeInMilliseconds();
+    if (fake_pipe_->SendRtp(packet, length, options)) {
+      // Only remember enqueue time if packet was not dropped.
+      rtc::CritScope cs(&delay_crit_);
+      // Cull window of old delay timings.
+      // TODO(sprang): Figure out why we sometimes send the same packet id
+      // multiple times. If possible, fix and then erase map entry in
+      // GetPacketDelay() and get rid of |delay_timing_window_|.
+      while (delay_timing_.size() > 100) {
+        delay_timing_.erase(delay_timing_window_.front());
+        delay_timing_window_.pop_front();
+      }
+
+      auto it = delay_timing_.emplace(options.packet_id, time_now);
+      RTC_DCHECK(it.second);
+      delay_timing_window_.push_back(it.first);
+    }
+    // Don't tell webrtc we dropped it...
+    return true;
+  }
+
+  bool SendRtcp(const uint8_t* packet, size_t length) override {
+    if (!fake_pipe_)
+      return false;
+    fake_pipe_->SendRtcp(packet, length);
+    return true;
+  }
+
+  void MarkSendTime(int packet_id) {
+    rtc::CritScope cs(&delay_crit_);
+    auto it = delay_timing_.find(packet_id);
+    RTC_DCHECK(it != delay_timing_.end());
+    it->second.queue_end_time = clock_->TimeInMilliseconds();
+  }
+
+  int64_t GetPacketDelay(const rtc::SentPacket& sent_packet) {
+    if (sent_packet.packet_id == -1)
+      return 0;
+
+    rtc::CritScope cs(&delay_crit_);
+    auto it = delay_timing_.find(sent_packet.packet_id);
+    if (it == delay_timing_.end())
+      return 0;
+
+    return it->second.queue_end_time - it->second.queue_start_time;
+  }
+
+ private:
+  class SendTransportWrapper : public Transport {
+   public:
+    explicit SendTransportWrapper(SendDegradationProxy* proxy,
+                                  Transport* wrapped_transport)
+        : proxy_(proxy), wrapped_transport_(wrapped_transport) {}
+    ~SendTransportWrapper() override = default;
+
+    bool SendRtp(const uint8_t* packet,
+                 size_t length,
+                 const PacketOptions& options) override {
+      proxy_->MarkSendTime(options.packet_id);
+      return wrapped_transport_->SendRtp(packet, length, options);
+    }
+
+    bool SendRtcp(const uint8_t* packet, size_t length) override {
+      return wrapped_transport_->SendRtcp(packet, length);
+    }
+
+   private:
+    SendDegradationProxy* const proxy_;
+    Transport* const wrapped_transport_;
+  };
+  struct FakeDelayTiming {
+    explicit FakeDelayTiming(int64_t start_time)
+        : queue_start_time(start_time), queue_end_time(0) {}
+    int64_t queue_start_time = 0;
+    int64_t queue_end_time = 0;
+  };
+
+  const webrtc::FakeNetworkPipe::Config config_;
+  Transport* transport_;
+  Clock* const clock_;
+  std::unique_ptr<webrtc::FakeNetworkPipe> fake_pipe_;
+  std::unique_ptr<SendTransportWrapper> send_transport_;
+
+  // Map from packet id to when it was enqueue on the fake network and when it
+  // left it.
+  rtc::CriticalSection delay_crit_;
+  std::map<int, FakeDelayTiming> delay_timing_ RTC_GUARDED_BY(&delay_crit_);
+  std::deque<std::map<int, FakeDelayTiming>::iterator> delay_timing_window_;
+};
 
 class Call : public webrtc::Call,
              public PacketReceiver,
@@ -238,6 +427,9 @@ class Call : public webrtc::Call,
                                  uint32_t max_padding_bitrate_bps) override;
 
  private:
+  DeliveryStatus DoDeliverPacket(MediaType media_type,
+                                 rtc::CopyOnWriteBuffer packet,
+                                 const PacketTime& packet_time);
   DeliveryStatus DeliverRtcp(MediaType media_type, const uint8_t* packet,
                              size_t length);
   DeliveryStatus DeliverRtp(MediaType media_type,
@@ -296,19 +488,24 @@ class Call : public webrtc::Call,
   // single mapping from ssrc to a more abstract receive stream, with
   // accessor methods for all configuration we need at this level.
   struct ReceiveRtpConfig {
-    ReceiveRtpConfig() = default;  // Needed by std::map
-    ReceiveRtpConfig(const std::vector<RtpExtension>& extensions,
-                     bool use_send_side_bwe)
-        : extensions(extensions), use_send_side_bwe(use_send_side_bwe) {}
+    explicit ReceiveRtpConfig(const webrtc::AudioReceiveStream::Config& config)
+        : extensions(config.rtp.extensions),
+          use_send_side_bwe(UseSendSideBwe(config)) {}
+    explicit ReceiveRtpConfig(const webrtc::VideoReceiveStream::Config& config)
+        : extensions(config.rtp.extensions),
+          use_send_side_bwe(UseSendSideBwe(config)) {}
+    explicit ReceiveRtpConfig(const FlexfecReceiveStream::Config& config)
+        : extensions(config.rtp_header_extensions),
+          use_send_side_bwe(UseSendSideBwe(config)) {}
 
     // Registered RTP header extensions for each stream. Note that RTP header
     // extensions are negotiated per track ("m= line") in the SDP, but we have
     // no notion of tracks at the Call level. We therefore store the RTP header
     // extensions per SSRC instead, which leads to some storage overhead.
-    RtpHeaderExtensionMap extensions;
+    const RtpHeaderExtensionMap extensions;
     // Set if both RTP extension the RTCP feedback message needed for
     // send side BWE are negotiated.
-    bool use_send_side_bwe = false;
+    const bool use_send_side_bwe;
   };
   std::map<uint32_t, ReceiveRtpConfig> receive_rtp_config_
       RTC_GUARDED_BY(receive_crit_);
@@ -375,8 +572,25 @@ class Call : public webrtc::Call,
   // min >= 0, start != 0, max == -1 || max > 0
   Config::BitrateConfig base_bitrate_config_;
 
+  // Optional FakeNetworkPipe that simulates a degraded network performance.
+  // This is intended only to make it easier to facilitate manual full stack
+  // testing. We're assuming all VideoSendStreams will actually share the same
+  // underlying Transport.
+  std::unique_ptr<webrtc::FakeNetworkPipe> degraded_receive_transport_;
+  friend class InternalPacketReceiver;
+  InternalPacketReceiver internal_packet_receiver_;
+  rtc::Optional<SendDegradationProxy> degraded_send_transport_;
+
   RTC_DISALLOW_COPY_AND_ASSIGN(Call);
 };
+
+PacketReceiver::DeliveryStatus InternalPacketReceiver::DeliverPacket(
+    MediaType media_type,
+    rtc::CopyOnWriteBuffer packet,
+    const PacketTime& packet_time) {
+  return call_->DoDeliverPacket(media_type, std::move(packet), packet_time);
+}
+
 }  // namespace internal
 
 std::string Call::Stats::ToString(int64_t time_ms) const {
@@ -431,7 +645,8 @@ Call::Call(const Call::Config& config,
       video_send_delay_stats_(new SendDelayStats(clock_)),
       start_ms_(clock_->TimeInMilliseconds()),
       worker_queue_("call_worker_queue"),
-      base_bitrate_config_(config.bitrate_config) {
+      base_bitrate_config_(config.bitrate_config),
+      internal_packet_receiver_(this) {
   RTC_DCHECK(config.event_log != nullptr);
   RTC_DCHECK_GE(config.bitrate_config.min_bitrate_bps, 0);
   RTC_DCHECK_GE(config.bitrate_config.start_bitrate_bps,
@@ -462,6 +677,24 @@ Call::Call(const Call::Config& config,
   module_process_thread_->RegisterModule(&receive_side_cc_, RTC_FROM_HERE);
   module_process_thread_->RegisterModule(transport_send_->send_side_cc(),
                                          RTC_FROM_HERE);
+
+  rtc::Optional<webrtc::FakeNetworkPipe::Config> send_degradation_config =
+      ParseDegradationConfig(true);
+  if (send_degradation_config) {
+    // Can't construct the FakeNetworkPipe until we have a Transport instance,
+    // which only happens when we create a VideoSendStream. So only store the
+    // config for now.
+    degraded_send_transport_.emplace(send_degradation_config.value(), clock_);
+  }
+
+  rtc::Optional<webrtc::FakeNetworkPipe::Config> receive_degradation_config =
+      ParseDegradationConfig(false);
+  if (receive_degradation_config) {
+    degraded_receive_transport_ = rtc::MakeUnique<webrtc::FakeNetworkPipe>(
+        clock_, *receive_degradation_config);
+    degraded_receive_transport_->SetReceiver(&internal_packet_receiver_);
+  }
+
   module_process_thread_->Start();
 }
 
@@ -667,8 +900,7 @@ webrtc::AudioReceiveStream* Call::CreateAudioReceiveStream(
       config_.audio_state, event_log_);
   {
     WriteLockScoped write_lock(*receive_crit_);
-    receive_rtp_config_[config.rtp.remote_ssrc] =
-        ReceiveRtpConfig(config.rtp.extensions, UseSendSideBwe(config));
+    receive_rtp_config_.emplace(config.rtp.remote_ssrc, config);
     audio_receive_streams_.insert(receive_stream);
 
     ConfigureSync(config.sync_group);
@@ -725,6 +957,12 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
         CreateRtcLogStreamConfig(config, ssrc_index)));
   }
 
+  if (degraded_send_transport_) {
+    degraded_send_transport_->SetTransport(config.send_transport,
+                                           module_process_thread_.get());
+    config.send_transport = &degraded_send_transport_.value();
+  }
+
   // TODO(mflodman): Base the start bitrate on a current bandwidth estimate, if
   // the call has already started.
   // Copy ssrcs from |config| since |config| is moved.
@@ -770,6 +1008,11 @@ void Call::DestroyVideoSendStream(webrtc::VideoSendStream* send_stream) {
       }
     }
     video_send_streams_.erase(send_stream_impl);
+    if (video_send_streams_.empty() && degraded_send_transport_) {
+      // No more FakeNetworkPipes, delete the instance we have (if any).
+      degraded_send_transport_->SetTransport(nullptr,
+                                             module_process_thread_.get());
+    }
   }
   RTC_CHECK(send_stream_impl != nullptr);
 
@@ -799,8 +1042,6 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
       module_process_thread_.get(), call_stats_.get());
 
   const webrtc::VideoReceiveStream::Config& config = receive_stream->config();
-  ReceiveRtpConfig receive_config(config.rtp.extensions,
-                                  UseSendSideBwe(config));
   {
     WriteLockScoped write_lock(*receive_crit_);
     if (config.rtp.rtx_ssrc) {
@@ -808,9 +1049,9 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
       // stream. Since the transport_send_cc negotiation is per payload
       // type, we may get an incorrect value for the rtx stream, but
       // that is unlikely to matter in practice.
-      receive_rtp_config_[config.rtp.rtx_ssrc] = receive_config;
+      receive_rtp_config_.emplace(config.rtp.rtx_ssrc, config);
     }
-    receive_rtp_config_[config.rtp.remote_ssrc] = receive_config;
+    receive_rtp_config_.emplace(config.rtp.remote_ssrc, config);
     video_receive_streams_.insert(receive_stream);
     ConfigureSync(config.sync_group);
   }
@@ -873,8 +1114,7 @@ FlexfecReceiveStream* Call::CreateFlexfecReceiveStream(
 
     RTC_DCHECK(receive_rtp_config_.find(config.remote_ssrc) ==
                receive_rtp_config_.end());
-    receive_rtp_config_[config.remote_ssrc] =
-        ReceiveRtpConfig(config.rtp_header_extensions, UseSendSideBwe(config));
+    receive_rtp_config_.emplace(config.remote_ssrc, config);
   }
 
   // TODO(brandtr): Store config in RtcEventLog here.
@@ -1158,9 +1398,19 @@ void Call::UpdateAggregateNetworkState() {
 }
 
 void Call::OnSentPacket(const rtc::SentPacket& sent_packet) {
-  video_send_delay_stats_->OnSentPacket(sent_packet.packet_id,
-                                        clock_->TimeInMilliseconds());
-  transport_send_->send_side_cc()->OnSentPacket(sent_packet);
+  if (degraded_send_transport_) {
+    int64_t delay_offset =
+        degraded_send_transport_->GetPacketDelay(sent_packet);
+    rtc::SentPacket updated_packet = sent_packet;
+    updated_packet.send_time_ms -= delay_offset;
+    transport_send_->send_side_cc()->OnSentPacket(updated_packet);
+    video_send_delay_stats_->OnSentPacket(
+        sent_packet.packet_id, clock_->TimeInMilliseconds() - delay_offset);
+  } else {
+    transport_send_->send_side_cc()->OnSentPacket(sent_packet);
+    video_send_delay_stats_->OnSentPacket(sent_packet.packet_id,
+                                          clock_->TimeInMilliseconds());
+  }
 }
 
 void Call::OnNetworkChanged(uint32_t target_bitrate_bps,
@@ -1397,6 +1647,22 @@ PacketReceiver::DeliveryStatus Call::DeliverPacket(
     MediaType media_type,
     rtc::CopyOnWriteBuffer packet,
     const PacketTime& packet_time) {
+  if (degraded_receive_transport_) {
+    PacketReceiver::DeliveryStatus status =
+        degraded_receive_transport_->DeliverPacket(
+            media_type, std::move(packet), packet_time);
+    // This is not optimal, but without it we make a mess of the expectations of
+    // which thread is delivering the packets...
+    degraded_receive_transport_->Process();
+    return status;
+  }
+  return DoDeliverPacket(media_type, std::move(packet), packet_time);
+}
+
+PacketReceiver::DeliveryStatus Call::DoDeliverPacket(
+    MediaType media_type,
+    rtc::CopyOnWriteBuffer packet,
+    const PacketTime& packet_time) {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
   if (RtpHeaderParser::IsRtcp(packet.cdata(), packet.size()))
     return DeliverRtcp(media_type, packet.cdata(), packet.size());
@@ -1421,7 +1687,7 @@ void Call::OnRecoveredPacket(const uint8_t* packet, size_t length) {
     // deregistering in the |receive_rtp_config_| map is protected by that lock.
     // So by not passing the packet on to demuxing in this case, we prevent
     // incoming packets to be passed on via the demuxer to a receive stream
-    // which is being torned down.
+    // which is being torn down.
     return;
   }
   parsed_packet.IdentifyExtensions(it->second.extensions);

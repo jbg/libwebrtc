@@ -427,17 +427,18 @@ TEST(DemuxerImplTest, Demuxing) {
   MockReceiver mock_receiver;
   demuxer.SetReceiver(&mock_receiver);
 
-  std::vector<uint8_t> data(kPacketSize);
+  rtc::CopyOnWriteBuffer data(kPacketSize);
   data[1] = kVideoPayloadType;
   std::unique_ptr<NetworkPacket> packet(
-      new NetworkPacket(&data[0], kPacketSize, kTimeNow, kArrivalTime));
+      new NetworkPacket(data, kTimeNow, kArrivalTime, rtc::nullopt, false,
+                        MediaType::ANY, rtc::nullopt));
   EXPECT_CALL(mock_receiver, DeliverPacket(MediaType::VIDEO, _, _))
       .WillOnce(Return(PacketReceiver::DELIVERY_OK));
   demuxer.DeliverPacket(packet.get(), PacketTime());
 
   data[1] = kAudioPayloadType;
-  packet.reset(
-      new NetworkPacket(&data[0], kPacketSize, kTimeNow, kArrivalTime));
+  packet.reset(new NetworkPacket(data, kTimeNow, kArrivalTime, rtc::nullopt,
+                                 false, MediaType::ANY, rtc::nullopt));
   EXPECT_CALL(mock_receiver, DeliverPacket(MediaType::AUDIO, _, _))
       .WillOnce(Return(PacketReceiver::DELIVERY_OK));
   demuxer.DeliverPacket(packet.get(), PacketTime());

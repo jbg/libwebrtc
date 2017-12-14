@@ -2137,6 +2137,8 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
     loopback_renderers.clear();
 
     DestroyCalls();
+
+    fake_audio_device.reset();
   });
 }
 
