@@ -68,6 +68,20 @@
 namespace rtc {
 
 template <class T>
+class scoped_refptr;
+
+}  // namespace rtc
+
+namespace webrtc_internal {
+
+template <class T>
+T* scoped_refptr_release(rtc::scoped_refptr<T>* ref);
+
+}  // namespace webrtc_internal
+
+namespace rtc {
+
+template <class T>
 class scoped_refptr {
  public:
   scoped_refptr() : ptr_(nullptr) {}
@@ -89,10 +103,12 @@ class scoped_refptr {
   }
 
   // Move constructors.
-  scoped_refptr(scoped_refptr<T>&& r) : ptr_(r.release()) {}
+  scoped_refptr(scoped_refptr<T>&& r)
+      : ptr_(webrtc_internal::scoped_refptr_release(&r)) {}
 
   template <typename U>
-  scoped_refptr(scoped_refptr<U>&& r) : ptr_(r.release()) {}
+  scoped_refptr(scoped_refptr<U>&& r)
+      : ptr_(webrtc_internal::scoped_refptr_release(&r)) {}
 
   ~scoped_refptr() {
     if (ptr_)
@@ -102,17 +118,6 @@ class scoped_refptr {
   T* get() const { return ptr_; }
   operator T*() const { return ptr_; }
   T* operator->() const { return ptr_; }
-
-  // Release a pointer.
-  // The return value is the current pointer held by this object.
-  // If this object holds a null pointer, the return value is null.
-  // After this operation, this object will hold a null pointer,
-  // and will not own the object any more.
-  T* release() {
-    T* retVal = ptr_;
-    ptr_ = nullptr;
-    return retVal;
-  }
 
   scoped_refptr<T>& operator=(T* p) {
     // AddRef first so that self assignment should work
@@ -155,9 +160,22 @@ class scoped_refptr {
   }
 
  protected:
+  friend T* webrtc_internal::scoped_refptr_release<T>(scoped_refptr<T>* ref);
+
   T* ptr_;
 };
 
 }  // namespace rtc
+
+namespace webrtc_internal {
+
+template <class T>
+T* scoped_refptr_release(rtc::scoped_refptr<T>* ref) {
+  T* p = ref->ptr_;
+  ref->ptr_ = nullptr;
+  return p;
+};
+
+}  // namespace webrtc_internal
 
 #endif  // RTC_BASE_SCOPED_REF_PTR_H_

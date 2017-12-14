@@ -163,13 +163,17 @@ void Conductor::EnsureStreamingUI() {
 void Conductor::OnAddStream(
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream) {
   RTC_LOG(INFO) << __FUNCTION__ << " " << stream->label();
-  main_wnd_->QueueUIThreadCallback(NEW_STREAM_ADDED, stream.release());
+  // Corresponding Release() in Conductor::UIThreadCallback.
+  stream.get()->AddRef();
+  main_wnd_->QueueUIThreadCallback(NEW_STREAM_ADDED, stream.get());
 }
 
 void Conductor::OnRemoveStream(
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream) {
   RTC_LOG(INFO) << __FUNCTION__ << " " << stream->label();
-  main_wnd_->QueueUIThreadCallback(STREAM_REMOVED, stream.release());
+  // Corresponding Release() in Conductor::UIThreadCallback.
+  stream.get()->AddRef();
+  main_wnd_->QueueUIThreadCallback(STREAM_REMOVED, stream.get());
 }
 
 void Conductor::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {

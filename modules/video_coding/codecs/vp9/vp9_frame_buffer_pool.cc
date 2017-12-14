@@ -115,9 +115,9 @@ int32_t Vp9FrameBufferPool::VpxGetFrameBuffer(void* user_priv,
   // Store Vp9FrameBuffer* in |priv| for use in VpxReleaseFrameBuffer.
   // This also makes vpx_codec_get_frame return images with their |fb_priv| set
   // to |buffer| which is important for external reference counting.
-  // Release from refptr so that the buffer's |ref_count_| remains 1 when
-  // |buffer| goes out of scope.
-  fb->priv = static_cast<void*>(buffer.release());
+  // Corresponding Release() call in VpxReleaseFrameBuffer below.
+  buffer.get()->AddRef();
+  fb->priv = static_cast<void*>(buffer.get());
   return 0;
 }
 
