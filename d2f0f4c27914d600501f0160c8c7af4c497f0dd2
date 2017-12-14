@@ -34,6 +34,24 @@
       "revId": "d2f0f4c27914d600501f0160c8c7af4c497f0dd2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81ca7c69_412d8904",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-12-14T15:39:59Z",
+      "side": 1,
+      "message": "Hmm, that comment only applies to the legacy stats collector (stats_) which you\u0027re not moving.\n\nI don\u0027t think it applies to the new one yet. It probably should in the future, but if the sender/receiver is every updated to call RTCStatsCollector I\u0027ll make sure this isn\u0027t done with raw pointers or assumptions about which ref counted object is destroyed first.\n\nSo go ahead and move it, it\u0027s only hiding bad design staying there. Fingers crossed.",
+      "parentUuid": "e8d61181_a03db80d",
+      "revId": "d2f0f4c27914d600501f0160c8c7af4c497f0dd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
