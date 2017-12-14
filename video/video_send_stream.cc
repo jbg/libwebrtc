@@ -244,7 +244,8 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
                             public webrtc::OverheadObserver,
                             public webrtc::VCMProtectionCallback,
                             public VideoStreamEncoder::EncoderSink,
-                            public VideoBitrateAllocationObserver {
+                            public VideoBitrateAllocationObserver,
+                            public webrtc::PacketFeedbackObserver {
  public:
   VideoSendStreamImpl(
       SendStatisticsProxy* stats_proxy,
@@ -282,6 +283,11 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
                                    size_t byte_limit);
 
   void SetTransportOverhead(size_t transport_overhead_per_packet);
+
+  // From PacketFeedbackObserver.
+  void OnPacketAdded(uint32_t ssrc, uint16_t seq_num) override;
+  void OnPacketFeedbackVector(
+      const std::vector<PacketFeedback>& packet_feedback_vector) override;
 
  private:
   class CheckEncoderActivityTask;
@@ -323,7 +329,6 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   void SignalEncoderActive();
 
   const bool send_side_bwe_with_overhead_;
-
   SendStatisticsProxy* const stats_proxy_;
   const VideoSendStream::Config* const config_;
   std::map<uint32_t, RtpState> suspended_ssrcs_;
@@ -337,6 +342,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
       RTC_GUARDED_BY(encoder_activity_crit_sect_);
 
   CallStats* const call_stats_;
+  rtc::CriticalSection loss_vector_crit_sect_;
   RtpTransportControllerSendInterface* const transport_;
   BitrateAllocator* const bitrate_allocator_;
 
@@ -354,7 +360,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
 
   VideoStreamEncoder* const video_stream_encoder_;
   EncoderRtcpFeedback encoder_feedback_;
-  ProtectionBitrateCalculator protection_bitrate_calculator_;
+  ProtectionBitrateCalculatorDefault protection_bitrate_calculator_;
 
   RtcpBandwidthObserver* const bandwidth_observer_;
   // RtpRtcp modules, declared here as they use other members on construction.
@@ -586,7 +592,6 @@ VideoSendStream::VideoSendStream(
     // Only signal target bitrate for screenshare streams, for now.
     video_stream_encoder_->SetBitrateObserver(send_stream_.get());
   }
-
   ReconfigureVideoEncoder(std::move(encoder_config));
 }
 
@@ -812,6 +817,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
         config_->encoder_settings.payload_type,
         config_->encoder_settings.payload_name.c_str());
   }
+  // Signal congestion controller this object is ready for OnPacket* callbacks.
+  transport_->send_side_cc()->RegisterPacketFeedbackObserver(this);
 
   RTC_DCHECK(config_->encoder_settings.encoder);
   RTC_DCHECK_GE(config_->encoder_settings.payload_type, 0);
@@ -1316,6 +1323,19 @@ void VideoSendStreamImpl::SetTransportOverhead(
   for (RtpRtcp* rtp_rtcp : rtp_rtcp_modules_) {
     rtp_rtcp->SetMaxRtpPacketSize(rtp_packet_size);
   }
+}
+
+void VideoSendStreamImpl::OnPacketAdded(uint32_t ssrc, uint16_t seq_num) {}
+
+void VideoSendStreamImpl::OnPacketFeedbackVector(
+    const std::vector<PacketFeedback>& packet_feedback_vector) {
+  rtc::CritScope lock(&loss_vector_crit_sect_);
+  std::vector<uint8_t> loss_mask_vector;
+  for (const PacketFeedback& packet : packet_feedback_vector) {
+    const bool lost = packet.arrival_time_ms == PacketFeedback::kNotReceived;
+    loss_mask_vector.push_back(lost == true ? 1 : 0);
+  }
+  protection_bitrate_calculator_.SetLossMaskVector(loss_mask_vector);
 }
 
 }  // namespace internal
