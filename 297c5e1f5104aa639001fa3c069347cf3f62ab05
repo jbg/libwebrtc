@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "65a5df71_8d524173",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T09:28:42Z",
+      "side": 1,
+      "message": "I think so. As a general rule, if you\u0027re in a .cc file, just try to put things in an unnamed namespace, and if it compiles, it worked.",
+      "parentUuid": "75a74aef_4b097d3c",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "297c5e1f5104aa639001fa3c069347cf3f62ab05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ac4ec85_e1812a00",
         "filename": "rtc_base/checks.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "297c5e1f5104aa639001fa3c069347cf3f62ab05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4626747_ab6e8a02",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T09:28:42Z",
+      "side": 1,
+      "message": "I agree that it\u0027s better to not hide it in a convenience macro, since we don\u0027t use it often.",
+      "parentUuid": "4ac4ec85_e1812a00",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "297c5e1f5104aa639001fa3c069347cf3f62ab05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
