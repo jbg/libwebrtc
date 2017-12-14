@@ -51,6 +51,29 @@ RtcpTransceiver::~RtcpTransceiver() {
   RTC_CHECK(!rtcp_transceiver_) << "Task queue is too busy to handle rtcp";
 }
 
+void RtcpTransceiver::AddMediaReceiverObserver(
+    uint32_t remote_ssrc,
+    MediaReceiverRtcpObserver* observer) {
+  rtc::WeakPtr<RtcpTransceiverImpl> ptr = ptr_;
+  task_queue_->PostTask([ptr, remote_ssrc, observer] {
+    if (ptr)
+      ptr->AddMediaReceiverObserver(remote_ssrc, observer);
+  });
+}
+
+void RtcpTransceiver::RemoveMediaReceiverObserver(
+    uint32_t remote_ssrc,
+    MediaReceiverRtcpObserver* observer,
+    std::unique_ptr<rtc::QueuedTask> on_removed) {
+  rtc::WeakPtr<RtcpTransceiverImpl> ptr = ptr_;
+  task_queue_->PostTaskAndReply(rtc::NewClosure([ptr, remote_ssrc, observer] {
+                                  if (ptr)
+                                    ptr->RemoveMediaReceiverObserver(
+                                        remote_ssrc, observer);
+                                }),
+                                std::move(on_removed));
+}
+
 void RtcpTransceiver::ReceivePacket(rtc::CopyOnWriteBuffer packet) {
   rtc::WeakPtr<RtcpTransceiverImpl> ptr = ptr_;
   int64_t now_us = rtc::TimeMicros();
