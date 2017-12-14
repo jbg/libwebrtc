@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3870741a_312ff76d",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-14T15:18:23Z",
+      "side": 1,
+      "message": "Why the static bool? Is this a common pattern in the code base?",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 46
+      },
+      "revId": "9a6d8b9ad589e95e155d6e54d873dfa29fea0702",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
