@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da7433d9_b0f52243",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T15:51:22Z",
+      "side": 1,
+      "message": "This is probably the first use I\u0027ve seen of PostTaskAndReply.\n\nTypical use of on_removed would be to deallocate the observer? \nAnd the reply task will be posted even in the case that the weak ptr is invalidated.",
+      "range": {
+        "startLine": 73,
+        "startChar": 15,
+        "endLine": 73,
+        "endChar": 31
+      },
+      "revId": "e72bab660ce6386f024eaf261a293404150636a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1ac1cb4_e9b28060",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T15:51:22Z",
+      "side": 1,
+      "message": "Could consider adding Rtcp in the name, to match the class name. But a bit redundant given the class the method belongs to.",
+      "range": {
+        "startLine": 37,
+        "startChar": 7,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "e72bab660ce6386f024eaf261a293404150636a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75086834_9a957424",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T15:51:22Z",
+      "side": 1,
+      "message": "Looks like a potential tsan violation to modify the pointer on the thread backing the task queue, and check it below on the main test thread.",
+      "range": {
+        "startLine": 145,
+        "startChar": 51,
+        "endLine": 145,
+        "endChar": 59
+      },
+      "revId": "e72bab660ce6386f024eaf261a293404150636a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
