@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b00d8423_a64b7c13",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T15:34:09Z",
+      "side": 1,
+      "message": "I\u0027d strike \"Module\" from the name of this private method and the ones below with \"RembModule\" in their names.",
+      "range": {
+        "startLine": 242,
+        "startChar": 19,
+        "endLine": 242,
+        "endChar": 41
+      },
+      "revId": "810d1290e316c08e36afbbd53f3ef94ef6b10c54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
