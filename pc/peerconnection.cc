@@ -726,13 +726,16 @@ PeerConnection::~PeerConnection() {
   TRACE_EVENT0("webrtc", "PeerConnection::~PeerConnection");
   RTC_DCHECK_RUN_ON(signaling_thread());
 
+  if (stats_collector_) {
+    stats_collector_->WaitForPendingRequest();
+  }
+
   StopAndDestroyChannels();
 
   // Destroy stats after stopping all transceivers because the senders/receivers
   // will update the stats collector before stopping.
   stats_.reset(nullptr);
   if (stats_collector_) {
-    stats_collector_->WaitForPendingRequest();
     stats_collector_ = nullptr;
   }
 
