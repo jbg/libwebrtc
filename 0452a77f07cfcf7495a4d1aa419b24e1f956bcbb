@@ -22,6 +22,30 @@
       "revId": "0452a77f07cfcf7495a4d1aa419b24e1f956bcbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11b2664e_d0a7a5f1",
+        "filename": "modules/remote_bitrate_estimator/test/metric_recorder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T12:51:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b9c10d1b_283a53af",
+      "range": {
+        "startLine": 327,
+        "startChar": 7,
+        "endLine": 327,
+        "endChar": 14
+      },
+      "revId": "0452a77f07cfcf7495a4d1aa419b24e1f956bcbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
