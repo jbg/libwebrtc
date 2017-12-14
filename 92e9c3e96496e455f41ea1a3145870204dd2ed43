@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a48b6d6b_eeb3cdb6",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T13:57:39Z",
+      "side": 1,
+      "message": "Missing instantiation here made earlier compilation attempts fail.",
+      "range": {
+        "startLine": 163,
+        "startChar": 50,
+        "endLine": 163,
+        "endChar": 54
+      },
+      "revId": "92e9c3e96496e455f41ea1a3145870204dd2ed43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
