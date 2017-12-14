@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2118b576_cb788c94",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T10:12:37Z",
+      "side": 1,
+      "message": "Moved VPrintError, PrintError and DumpBacktrace into the anonymous namespace.",
+      "parentUuid": "65a5df71_8d524173",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "297c5e1f5104aa639001fa3c069347cf3f62ab05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ac4ec85_e1812a00",
         "filename": "rtc_base/checks.cc",
         "patchSetId": 1
