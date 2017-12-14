@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9c10d1b_283a53af",
+        "filename": "modules/remote_bitrate_estimator/test/metric_recorder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T12:06:25Z",
+      "side": 1,
+      "message": "I think this fixes a real bug on 32-bit platforms where long is 32 bits.",
+      "range": {
+        "startLine": 327,
+        "startChar": 7,
+        "endLine": 327,
+        "endChar": 14
+      },
+      "revId": "0452a77f07cfcf7495a4d1aa419b24e1f956bcbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
