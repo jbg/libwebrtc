@@ -69,24 +69,25 @@ void PacketRouter::RemoveSendRtpModule(RtpRtcp* rtp_module) {
   rtp_send_modules_.erase(it);
 }
 
-void PacketRouter::AddReceiveRtpModule(RtpRtcp* rtp_module,
+void PacketRouter::AddReceiveRtpModule(RtcpFeedbackSenderInterface* rtcp_module,
                                        bool remb_candidate) {
   rtc::CritScope cs(&modules_crit_);
   RTC_DCHECK(std::find(rtp_receive_modules_.begin(), rtp_receive_modules_.end(),
-                       rtp_module) == rtp_receive_modules_.end());
+                       rtcp_module) == rtp_receive_modules_.end());
 
-  rtp_receive_modules_.push_back(rtp_module);
+  rtp_receive_modules_.push_back(rtcp_module);
 
   if (remb_candidate) {
-    AddRembModuleCandidate(rtp_module, false);
+    AddRembModuleCandidate(rtcp_module, false);
   }
 }
 
-void PacketRouter::RemoveReceiveRtpModule(RtpRtcp* rtp_module) {
+void PacketRouter::RemoveReceiveRtpModule(
+    RtcpFeedbackSenderInterface* rtcp_module) {
   rtc::CritScope cs(&modules_crit_);
-  MaybeRemoveRembModuleCandidate(rtp_module, /* sender = */ false);
-  const auto& it = std::find(rtp_receive_modules_.begin(),
-                             rtp_receive_modules_.end(), rtp_module);
+  MaybeRemoveRembModuleCandidate(rtcp_module, /* sender = */ false);
+  auto it = std::find(rtp_receive_modules_.begin(), rtp_receive_modules_.end(),
+                      rtcp_module);
   RTC_DCHECK(it != rtp_receive_modules_.end());
   rtp_receive_modules_.erase(it);
 }
@@ -229,18 +230,19 @@ bool PacketRouter::SendTransportFeedback(rtcp::TransportFeedback* packet) {
     if (rtp_module->SendFeedbackPacket(*packet))
       return true;
   }
-  for (auto* rtp_module : rtp_receive_modules_) {
-    packet->SetSenderSsrc(rtp_module->SSRC());
-    if (rtp_module->SendFeedbackPacket(*packet))
+  for (auto* rtcp_module : rtp_receive_modules_) {
+    packet->SetSenderSsrc(rtcp_module->SSRC());
+    if (rtcp_module->SendFeedbackPacket(*packet))
       return true;
   }
   return false;
 }
 
-void PacketRouter::AddRembModuleCandidate(RtpRtcp* candidate_module,
-                                          bool sender) {
+void PacketRouter::AddRembModuleCandidate(
+    RtcpFeedbackSenderInterface* candidate_module,
+    bool sender) {
   RTC_DCHECK(candidate_module);
-  std::vector<RtpRtcp*>& candidates =
+  std::vector<RtcpFeedbackSenderInterface*>& candidates =
       sender ? sender_remb_candidates_ : receiver_remb_candidates_;
   RTC_DCHECK(std::find(candidates.cbegin(), candidates.cend(),
                        candidate_module) == candidates.cend());
@@ -248,10 +250,11 @@ void PacketRouter::AddRembModuleCandidate(RtpRtcp* candidate_module,
   DetermineActiveRembModule();
 }
 
-void PacketRouter::MaybeRemoveRembModuleCandidate(RtpRtcp* candidate_module,
-                                                  bool sender) {
+void PacketRouter::MaybeRemoveRembModuleCandidate(
+    RtcpFeedbackSenderInterface* candidate_module,
+    bool sender) {
   RTC_DCHECK(candidate_module);
-  std::vector<RtpRtcp*>& candidates =
+  std::vector<RtcpFeedbackSenderInterface*>& candidates =
       sender ? sender_remb_candidates_ : receiver_remb_candidates_;
   auto it = std::find(candidates.begin(), candidates.end(), candidate_module);
 
@@ -278,7 +281,7 @@ void PacketRouter::DetermineActiveRembModule() {
   // When adding the first sender module, we should change the active REMB
   // module to be that. Otherwise, we remain with the current active module.
 
-  RtpRtcp* new_active_remb_module;
+  RtcpFeedbackSenderInterface* new_active_remb_module;
 
   if (!sender_remb_candidates_.empty()) {
     new_active_remb_module = sender_remb_candidates_.front();
