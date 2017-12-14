@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0ed3eb0_b0ba9a57",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T12:21:03Z",
+      "side": 1,
+      "message": "Rename member variable?",
+      "range": {
+        "startLine": 97,
+        "startChar": 44,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "69b5926953a7a8451c155b1dbb761fc0cfb2e6cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca0c9a56_42416917",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T12:21:03Z",
+      "side": 1,
+      "message": "Comment on overall purpose. In particular, is this intended as a temporary thing (at least SSRC() probably doesn\u0027t belong here long-term)? If so, TODO linking to the bug.\n\nAlso name of the class is a bit confusing. It *is* about sending Rtcp feedback, but it\u0027s also associated with receive streams.\n\nWould it be ok to strike Sender from the name, or will that cause confusion with classes receiving RTCP feedback?\n\nIdeally, maybe we could use the same interface for passing RTCP feedback around on both send and receive side? On media receive side, media receiver calls methods in the interface, and RtcpTransceiver implements the interface and emits packets over the wire. On the media send side, RtcpTransciever gets feedback off the wire, and calls methods in the interface to inform the send stream or some observer, which also implements the interface?\n\nIt would be analogous to the MediaReceiverRtcpObserver interface you added the other day, but handle the rtcp messages going in the opposite direction.",
+      "range": {
+        "startLine": 409,
+        "startChar": 6,
+        "endLine": 409,
+        "endChar": 33
+      },
+      "revId": "69b5926953a7a8451c155b1dbb761fc0cfb2e6cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
