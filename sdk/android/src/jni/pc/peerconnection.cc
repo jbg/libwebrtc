@@ -66,9 +66,10 @@ jobject NativeToJavaRtpSender(JNIEnv* env,
                               rtc::scoped_refptr<RtpSenderInterface> sender) {
   if (!sender)
     return nullptr;
+  sender.get()->AddRef();
   // Sender is now owned by the Java object, and will be freed from
   // RtpSender.dispose(), called by PeerConnection.dispose() or getSenders().
-  return Java_RtpSender_Constructor(env, jlongFromPointer(sender.release()));
+  return Java_RtpSender_Constructor(env, jlongFromPointer(sender.get()));
 }
 
 PeerConnectionInterface::IceServers JavaToNativeIceServers(
@@ -276,16 +277,18 @@ void PeerConnectionObserverJni::AddNativeAudioTrackToJavaStream(
     rtc::scoped_refptr<AudioTrackInterface> track,
     jobject j_stream) {
   JNIEnv* env = AttachCurrentThreadIfNeeded();
+  track.get()->AddRef();
   Java_MediaStream_addNativeAudioTrack(env, j_stream,
-                                       jlongFromPointer(track.release()));
+                                       jlongFromPointer(track.get()));
 }
 
 void PeerConnectionObserverJni::AddNativeVideoTrackToJavaStream(
     rtc::scoped_refptr<VideoTrackInterface> track,
     jobject j_stream) {
   JNIEnv* env = AttachCurrentThreadIfNeeded();
+  track.get()->AddRef();
   Java_MediaStream_addNativeVideoTrack(env, j_stream,
-                                       jlongFromPointer(track.release()));
+                                       jlongFromPointer(track.get()));
 }
 
 void PeerConnectionObserverJni::OnAudioTrackAddedToStream(

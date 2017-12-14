@@ -45,9 +45,9 @@ class RtpReceiverObserverJni : public RtpReceiverObserverInterface {
 jobject NativeToJavaRtpReceiver(
     JNIEnv* env,
     rtc::scoped_refptr<RtpReceiverInterface> receiver) {
+  receiver.get()->AddRef();
   // Receiver is now owned by Java object, and will be freed from there.
-  return Java_RtpReceiver_Constructor(env,
-                                      jlongFromPointer(receiver.release()));
+  return Java_RtpReceiver_Constructor(env, jlongFromPointer(receiver.get()));
 }
 
 JavaRtpReceiverGlobalOwner::JavaRtpReceiverGlobalOwner(JNIEnv* env,
@@ -68,10 +68,10 @@ JNI_FUNCTION_DECLARATION(jlong,
                          jclass,
                          jlong j_rtp_receiver_pointer,
                          jlong j_track_pointer) {
-  return jlongFromPointer(
-      reinterpret_cast<RtpReceiverInterface*>(j_rtp_receiver_pointer)
-          ->track()
-          .release());
+  rtc::scoped_refptr<webrtc::MediaStreamTrackInterface> track(
+      reinterpret_cast<RtpReceiverInterface*>(j_rtp_receiver_pointer)->track());
+  track.get()->AddRef();
+  return jlongFromPointer(track.get());
 }
 
 JNI_FUNCTION_DECLARATION(jboolean,

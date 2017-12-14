@@ -282,10 +282,11 @@ jlong CreatePeerConnectionFactoryForJava(
   if (has_options) {
     factory->SetOptions(options);
   }
+  factory.get()->AddRef();
   OwnedFactoryAndThreads* owned_factory = new OwnedFactoryAndThreads(
       std::move(network_thread), std::move(worker_thread),
       std::move(signaling_thread), legacy_video_encoder_factory,
-      legacy_video_decoder_factory, network_monitor_factory, factory.release());
+      legacy_video_decoder_factory, network_monitor_factory, factory.get());
   owned_factory->InvokeJavaCallbacksOnFactoryThreads();
   return jlongFromPointer(owned_factory);
 }
@@ -352,7 +353,8 @@ JNI_FUNCTION_DECLARATION(jlong,
       factoryFromJava(native_factory));
   rtc::scoped_refptr<MediaStreamInterface> stream(
       factory->CreateLocalMediaStream(JavaToStdString(jni, label)));
-  return (jlong)stream.release();
+  stream.get()->AddRef();
+  return (jlong)stream.get();
 }
 
 JNI_FUNCTION_DECLARATION(jlong,
@@ -369,7 +371,8 @@ JNI_FUNCTION_DECLARATION(jlong,
   CopyConstraintsIntoAudioOptions(constraints.get(), &options);
   rtc::scoped_refptr<AudioSourceInterface> source(
       factory->CreateAudioSource(options));
-  return (jlong)source.release();
+  source.get()->AddRef();
+  return (jlong)source.get();
 }
 
 JNI_FUNCTION_DECLARATION(jlong,
@@ -384,7 +387,8 @@ JNI_FUNCTION_DECLARATION(jlong,
   rtc::scoped_refptr<AudioTrackInterface> track(factory->CreateAudioTrack(
       JavaToStdString(jni, id),
       reinterpret_cast<AudioSourceInterface*>(native_source)));
-  return (jlong)track.release();
+  track.get()->AddRef();
+  return (jlong)track.get();
 }
 
 JNI_FUNCTION_DECLARATION(jboolean,
@@ -468,7 +472,8 @@ JNI_FUNCTION_DECLARATION(jlong,
   CopyConstraintsIntoRtcConfiguration(observer->constraints(), &rtc_config);
   rtc::scoped_refptr<PeerConnectionInterface> pc(
       f->CreatePeerConnection(rtc_config, nullptr, nullptr, observer));
-  return (jlong)pc.release();
+  pc.get()->AddRef();
+  return (jlong)pc.get();
 }
 
 }  // namespace jni

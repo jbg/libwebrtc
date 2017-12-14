@@ -29,7 +29,8 @@ JNI_FUNCTION_DECLARATION(
       AudioProcessing::Create(webrtc::Config(), std::move(post_processor),
                               nullptr /* echo_control_factory */,
                               nullptr /* beamformer */);
-  return jlongFromPointer(audio_processing.release());
+  audio_processing.get()->AddRef();
+  return jlongFromPointer(audio_processing.get());
 }
 
 }  // namespace jni

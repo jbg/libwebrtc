@@ -82,9 +82,10 @@ DataChannelInit JavaToNativeDataChannelInit(JNIEnv* env, jobject j_init) {
 jobject WrapNativeDataChannel(
     JNIEnv* env,
     rtc::scoped_refptr<DataChannelInterface> channel) {
+  channel.get()->AddRef();
   // Channel is now owned by Java object, and will be freed from there.
-  return channel ? Java_DataChannel_Constructor(
-                       env, jlongFromPointer(channel.release()))
+  return channel ? Java_DataChannel_Constructor(env,
+                                                jlongFromPointer(channel.get()))
                  : nullptr;
 }
 

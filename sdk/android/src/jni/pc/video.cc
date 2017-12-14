@@ -91,7 +91,8 @@ JNI_FUNCTION_DECLARATION(jlong,
       VideoTrackSourceProxy::Create(factory->signaling_thread(),
                                     factory->worker_thread(), source);
 
-  return (jlong)proxy_source.release();
+  proxy_source.get()->AddRef();
+  return (jlong)proxy_source.get();
 }
 
 JNI_FUNCTION_DECLARATION(jlong,
@@ -106,7 +107,8 @@ JNI_FUNCTION_DECLARATION(jlong,
   rtc::scoped_refptr<VideoTrackInterface> track(factory->CreateVideoTrack(
       JavaToStdString(jni, id),
       reinterpret_cast<VideoTrackSourceInterface*>(native_source)));
-  return (jlong)track.release();
+  track.get()->AddRef();
+  return (jlong)track.get();
 }
 
 JNI_FUNCTION_DECLARATION(

@@ -30,10 +30,10 @@ JNI_FUNCTION_DECLARATION(jlong,
                          JNIEnv* jni,
                          jclass,
                          jlong j_rtp_sender_pointer) {
-  return jlongFromPointer(
-      reinterpret_cast<RtpSenderInterface*>(j_rtp_sender_pointer)
-          ->track()
-          .release());
+  rtc::scoped_refptr<MediaStreamTrackInterface> track(
+      reinterpret_cast<RtpSenderInterface*>(j_rtp_sender_pointer)->track());
+  track.get()->AddRef();
+  return jlongFromPointer(track.get());
 }
 
 JNI_FUNCTION_DECLARATION(jlong,
@@ -41,10 +41,11 @@ JNI_FUNCTION_DECLARATION(jlong,
                          JNIEnv* jni,
                          jclass,
                          jlong j_rtp_sender_pointer) {
-  return jlongFromPointer(
+  rtc::scoped_refptr<DtmfSenderInterface> dtmf_sender(
       reinterpret_cast<RtpSenderInterface*>(j_rtp_sender_pointer)
-          ->GetDtmfSender()
-          .release());
+          ->GetDtmfSender());
+  dtmf_sender.get()->AddRef();
+  return jlongFromPointer(dtmf_sender.get());
 }
 
 JNI_FUNCTION_DECLARATION(jboolean,
