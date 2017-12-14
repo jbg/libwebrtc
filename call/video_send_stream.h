@@ -18,6 +18,7 @@
 
 #include "api/call/transport.h"
 #include "api/rtpparameters.h"
+#include "api/rtp_headers.h"
 #include "call/rtp_config.h"
 #include "call/video_config.h"
 #include "common_types.h"  // NOLINT(build/include)
