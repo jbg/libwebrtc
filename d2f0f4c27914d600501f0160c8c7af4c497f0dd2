@@ -52,6 +52,24 @@
       "revId": "d2f0f4c27914d600501f0160c8c7af4c497f0dd2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2eb6f1e_0f70de49",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2017-12-14T15:42:46Z",
+      "side": 1,
+      "message": "Oh and can you add a comment saying we are doing this before StopAndDestroyChannels() because the stats collector is using the channels, for future reference.",
+      "parentUuid": "81ca7c69_412d8904",
+      "revId": "d2f0f4c27914d600501f0160c8c7af4c497f0dd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
