@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "db2c25e8_2fa08012",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T13:54:03Z",
+      "side": 1,
+      "message": "No, I don\u0027t think that\u0027s an improvement.\n\nProblem is that name of this member, and methods like AddReceiveRtpModule, still suggest that they want an \"rtp module\" (which usually means an RtpRtcp object), when they now work with a different and more abstract interface.\n\nrtcp_feedback_senders_ would be more consistent, but on the other hand, renaming the AddReceiveRtpModule method might also be confusing. \n\nI guess you can leave as is for now, if you don\u0027t see any obviously better names.",
+      "parentUuid": "443b4500_e95197d3",
+      "range": {
+        "startLine": 97,
+        "startChar": 44,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "69b5926953a7a8451c155b1dbb761fc0cfb2e6cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca0c9a56_42416917",
         "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
         "patchSetId": 4
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "comment added, hope this interface is temporary.\n\nit is about sending rtcp feedback, it doesn\u0027t have to be associated with receive streams (in particular RtpRtcp that used by sender streams also implements same interface).\n\nbtw, SSRC is not too hard to remove from this interface, you think it would be better to do it before this CL?\n\nFeedback from the wire likely look better with different interfaces, specially the name would be less confusing with \u0027Receive\u0027 or \u0027On\u0027 prefix rather than \u0027Send\u0027.\ne.g. previous two interfaces (PacketFeedbackObserver and TransportFeedbackObserver) are used by media senders to handle incoming TransportFeedback packets (and outgoing rtp packets).",
       "parentUuid": "ca0c9a56_42416917",
+      "range": {
+        "startLine": 409,
+        "startChar": 6,
+        "endLine": 409,
+        "endChar": 33
+      },
+      "revId": "69b5926953a7a8451c155b1dbb761fc0cfb2e6cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10f44448_860eea64",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T13:54:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9e519645_0b7ba36a",
       "range": {
         "startLine": 409,
         "startChar": 6,
