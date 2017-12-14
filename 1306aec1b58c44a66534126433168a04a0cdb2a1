@@ -22,6 +22,30 @@
       "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98165e4a_f0bfa49d",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2017-12-14T13:17:10Z",
+      "side": 1,
+      "message": "Currently it is always 1 (see GetDefaultVp9Settings). In next CL I will add corresponding argument to SetCodecSettings() and check for valid range.",
+      "parentUuid": "d8524c54_b31494fe",
+      "range": {
+        "startLine": 130,
+        "startChar": 54,
+        "endLine": 130,
+        "endChar": 0
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
