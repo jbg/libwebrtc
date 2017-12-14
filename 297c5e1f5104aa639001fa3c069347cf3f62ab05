@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75a74aef_4b097d3c",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T09:16:38Z",
+      "side": 1,
+      "message": "Most or all of this could go in the anonymous namespace, right?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "297c5e1f5104aa639001fa3c069347cf3f62ab05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ac4ec85_e1812a00",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T09:16:38Z",
+      "side": 1,
+      "message": "We could define a macro for this in some header file, but I don\u0027t think it\u0027s worth the effort if this is the only use.\n\nI don\u0027t know if we have other printf-style functions, but if we have, it would be good to annotate those too.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "297c5e1f5104aa639001fa3c069347cf3f62ab05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
