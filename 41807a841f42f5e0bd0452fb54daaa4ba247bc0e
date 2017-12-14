@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "58b4f3ae_6fc6a5a0",
+        "filename": "examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T12:47:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d7cdcc08_1eb8503d",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 49
+      },
+      "revId": "41807a841f42f5e0bd0452fb54daaa4ba247bc0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5896e3e8_8d729e83",
         "filename": "examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
         "patchSetId": 1
@@ -71,6 +95,24 @@
       "writtenOn": "2017-12-14T12:06:25Z",
       "side": 1,
       "message": "It turned out it could be written as\n\n#if ...\n__attribute__(...)\n#endif\nvoid foo(...);\n\nwhich doesn\u0027t break layout too badly.",
+      "parentUuid": "7a896d72_249a62dd",
+      "revId": "41807a841f42f5e0bd0452fb54daaa4ba247bc0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11f40ab8_5a50f82c",
+        "filename": "examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-14T12:47:53Z",
+      "side": 1,
+      "message": "Sounds like a good idea, provided it works---will there always be parentheses around the commas in the argument?\n\nI think it may make sense to put this in a new file (e.g. rtc_base/gcc_attribute.h), and also probably move our other gcc attribute macros there (and implement them in terms of this new macro).",
       "parentUuid": "7a896d72_249a62dd",
       "revId": "41807a841f42f5e0bd0452fb54daaa4ba247bc0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
