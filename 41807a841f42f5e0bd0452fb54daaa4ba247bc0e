@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d7cdcc08_1eb8503d",
+        "filename": "examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T11:04:37Z",
+      "side": 1,
+      "message": "According to gcc docs (https://gcc.gnu.org/onlinedocs/gcc-7.2.0/gcc/Common-Function-Attributes.html#Common-Function-Attributes),\n\nFor Objective-C dialects, NSString (or __NSString__) is recognized in the same context. Declarations including these format attributes are parsed for correct syntax, however the result of checking of such format strings is not yet defined, and is not carried out by this version of the compiler.\n\nBut xcode for mac and ios dislikes it:\n\n../../examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m:77:20: error: format argument not a string type\n    __attribute__((__format__(__printf__, 1, 2)))\n                   ^                      ~\n1 error generated.\n\nI imagine it is unlikely to be useful to compile this file using gcc, so I\u0027ll guess I\u0027ll have to just delete this annotation (rather then adding something to exclude clang).",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 49
+      },
+      "revId": "41807a841f42f5e0bd0452fb54daaa4ba247bc0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5896e3e8_8d729e83",
         "filename": "examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
         "patchSetId": 1
@@ -13,6 +36,24 @@
       "writtenOn": "2017-12-14T10:54:37Z",
       "side": 1,
       "message": "I\u0027m very partial to not using #ifdef in a way that messes with the normal line layout, since that makes things hard to read. Would you consider doing something like this instead?\n\n  #if defined(__GNUC__)\n  static inline void SRFastLog(NSString *format, ...)\n      __attribute__((__format__(__printf__, 1, 2)));\n  #else\n  static inline void SRFastLog(NSString *format, ...);\n  #endif\n\nYou don\u0027t have to say yes.",
+      "revId": "41807a841f42f5e0bd0452fb54daaa4ba247bc0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a896d72_249a62dd",
+        "filename": "examples/objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-14T11:04:37Z",
+      "side": 1,
+      "message": "What do you think about adding a generic\n\n#if defined(__GNUC__)\n#define RTC_GCC_ATTRIBUTE(list) __attribute__(list)\n#else\n#define RTC_GCC_ATTRIBUTE(list)\n#endif\n\neither locally or in some header, and use that? Or one could even try something like\n\n#if !defined(__GNUC__)\n#define __attribute__(list)\n#endif\n\nbut it\u0027s somewhat ugly to define any identifiers starting with underscore.",
+      "parentUuid": "5896e3e8_8d729e83",
       "revId": "41807a841f42f5e0bd0452fb54daaa4ba247bc0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
