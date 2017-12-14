@@ -26,6 +26,7 @@ namespace webrtc {
 struct VideoStream {
   VideoStream();
   ~VideoStream();
+  VideoStream(const VideoStream& other);
   std::string ToString() const;
 
   size_t width;
@@ -37,6 +38,9 @@ struct VideoStream {
   int max_bitrate_bps;
 
   int max_qp;
+
+  // TODO(bugs.webrtc.org/8653): Support active per-simulcast layer.
+  bool active;
 
   // Bitrate thresholds for enabling additional temporal layers. Since these are
   // thresholds in between layers, we have one additional layer. One threshold
@@ -142,6 +146,9 @@ class VideoEncoderConfig {
   // unless the estimated bandwidth indicates that the link can handle it.
   int min_transmit_bitrate_bps;
   int max_bitrate_bps;
+
+  // A subset of the encoding parameters for one rtp sender.
+  std::vector<VideoStream> simulcast_layers;
 
   // Max number of encoded VideoStreams to produce.
   size_t number_of_streams;
