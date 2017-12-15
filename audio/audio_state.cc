@@ -32,6 +32,7 @@ AudioState::AudioState(const AudioState::Config& config)
                        config_.audio_device_module.get()) {
   process_thread_checker_.DetachFromThread();
   RTC_DCHECK(config_.audio_mixer);
+  RTC_DCHECK(config_.audio_device_module);
 }
 
 AudioState::~AudioState() {
@@ -61,6 +62,19 @@ void AudioState::AddSendingStream(webrtc::AudioSendStream* stream,
   properties.sample_rate_hz = sample_rate_hz;
   properties.num_channels = num_channels;
   UpdateAudioTransportWithSendingStreams();
+
+  // Start recording, if enabled.
+  auto* adm = config_.audio_device_module.get();
+  if (!adm->Recording()) {
+    if (adm->InitRecording() != 0) {
+      RTC_LOG_F(LS_ERROR) << "Failed to initialize recording";
+      return;
+    }
+    if (recording_enabled_ && adm->StartRecording() != 0) {
+      RTC_LOG_F(LS_ERROR) << "Failed to start recording";
+      return;
+    }
+  }
 }
 
 void AudioState::RemoveSendingStream(webrtc::AudioSendStream* stream) {
@@ -68,6 +82,11 @@ void AudioState::RemoveSendingStream(webrtc::AudioSendStream* stream) {
   auto count = sending_streams_.erase(stream);
   RTC_DCHECK_EQ(1, count);
   UpdateAudioTransportWithSendingStreams();
+  if (recording_enabled_ && sending_streams_.empty()) {
+    if (config_.audio_device_module->StopRecording() != 0) {
+      RTC_LOG_F(LS_ERROR) << "Failed to stop recording";
+    }
+  }
 }
 
 void AudioState::SetPlayout(bool enabled) {
@@ -97,7 +116,22 @@ void AudioState::SetRecording(bool enabled) {
   // Will stop/start recording of the underlying device, if necessary, and
   // remember the setting for when it receives subsequent calls of
   // StartPlayout.
-  voe_base_->SetRecording(enabled);
+  if (recording_enabled_ != enabled) {
+    recording_enabled_ = enabled;
+    // If there are no channels attempting to record out yet, there's nothing to
+    // be done; we should be in a "not recording" state either way.
+    if (!sending_streams_.empty()) {
+      if (enabled) {
+        if (config_.audio_device_module->StartRecording() != 0) {
+          RTC_LOG(LS_ERROR) << "SetRecording(true) failed to start recording";
+        }
+      } else {
+        if (config_.audio_device_module->StopRecording() != 0) {
+          RTC_LOG(LS_ERROR) << "SetRecording(false) failed to stop recording";
+        }
+      }
+    }
+  }
 }
 
 AudioState::Stats AudioState::GetAudioInputStats() const {
