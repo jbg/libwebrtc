@@ -150,8 +150,8 @@ void ResidualEchoEstimator::Estimate(
     if (aec_state.ExternalDelay() && aec_state.FilterDelay() &&
         aec_state.SaturatedEcho()) {
       AddEchoReverb(*R2, aec_state.SaturatedEcho(),
-                    std::min(static_cast<size_t>(config_.filter.length_blocks),
-                             delay.value_or(config_.filter.length_blocks)),
+                    std::min(static_cast<size_t>(kAdaptiveFilterLength),
+                             delay.value_or(kAdaptiveFilterLength)),
                     aec_state.ReverbDecay(), R2);
     }
   }

@@ -691,7 +691,7 @@ CFStringRef ExtractProfile(webrtc::SdpVideoFormat videoFormat) {
               timestamp:(uint32_t)timestamp
                rotation:(RTCVideoRotation)rotation {
   if (status != noErr) {
-    RTC_LOG(LS_ERROR) << "H264 encode failed.";
+    RTC_LOG(LS_ERROR) << "H264 encode failed due to:" << status;
     return;
   }
   if (infoFlags & kVTEncodeInfo_FrameDropped) {

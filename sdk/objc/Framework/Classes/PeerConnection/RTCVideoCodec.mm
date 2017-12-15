@@ -16,11 +16,71 @@
 
 #include "media/base/mediaconstants.h"
 
+#if defined(WEBRTC_IOS)
+#include "WebRTC/UIDevice+RTCDevice.h"
+#endif
+
 NSString *const kRTCVideoCodecVp8Name = @(cricket::kVp8CodecName);
 NSString *const kRTCVideoCodecVp9Name = @(cricket::kVp9CodecName);
 NSString *const kRTCVideoCodecH264Name = @(cricket::kH264CodecName);
 NSString *const kRTCLevel31ConstrainedHigh = @"640c1f";
 NSString *const kRTCLevel31ConstrainedBaseline = @"42e01f";
+NSString *const kRTCLevel41ConstrainedHigh = @"640c29";
+NSString *const kRTCLevel41ConstrainedBaseline = @"42e029";
+NSString *const kRTCLevel52ConstrainedHigh = @"640c34";
+NSString *const kRTCLevel52ConstrainedBaseline = @"42e034";
+
+NSString *getOptimalBaselineRTCLevelForDevice() {
+#if defined(WEBRTC_IOS)
+  // First let's get major and minor revision of the device.
+  // This way newer devices will always have a good profile.
+  // This also reduces error rate, since we do not have to check for every device.
+  NSString *machineName = [UIDevice machineName];
+  NSCharacterSet *numberCharset =
+      [NSCharacterSet characterSetWithCharactersInString:@"0123456789-"];
+  NSScanner *machineNameScanner = [NSScanner scannerWithString:machineName];
+
+  int major = 0;
+  int minor = 0;
+
+  while (![machineNameScanner isAtEnd]) {
+    [machineNameScanner scanUpToCharactersFromSet:numberCharset intoString:NULL];
+    if (major == 0) {
+      [machineNameScanner scanInt:&major];
+    } else if (minor == 0) {
+      [machineNameScanner scanInt:&minor];
+    }
+  }
+
+  if ([machineName hasPrefix:@"iPhone"]) {
+    if (major >= 6) {
+      // iPhone 5S and above
+      return kRTCLevel52ConstrainedHigh;
+    } else if (major >= 4) {
+      // iPhone 4S and above
+      return kRTCLevel41ConstrainedBaseline;
+    } else {
+      return kRTCLevel31ConstrainedBaseline;
+    }
+  }
+
+  if ([machineName hasPrefix:@"iPad"]) {
+    if (major >= 5) {
+      // iPad Air 2 and above and iPad Mini 4 and above
+      return kRTCLevel52ConstrainedBaseline;
+    } else if (major >= 4) {
+      // TODO(Leonardo Galli): Add full list as well as iPod. Also test all of these to make sure
+      // they are correct.
+      return kRTCLevel41ConstrainedBaseline;
+    } else {
+      return kRTCLevel31ConstrainedBaseline;
+    }
+  }
+#endif  // END WEBRTC_IOS
+  // NOTE: This should probably be implemented similarely for osx.
+
+  return kRTCLevel31ConstrainedBaseline;
+}
 
 @implementation RTCVideoCodecInfo
 

@@ -155,6 +155,7 @@ class AecState {
   bool echo_saturation_ = false;
   bool transparent_mode_ = false;
   float previous_max_sample_ = 0.f;
+  std::array<float, kAdaptiveFilterLength> max_render_;
   bool force_zero_gain_ = false;
   bool render_received_ = false;
   size_t force_zero_gain_counter_ = 0;

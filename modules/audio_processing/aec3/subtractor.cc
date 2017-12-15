@@ -65,26 +65,12 @@ Subtractor::~Subtractor() = default;
 
 void Subtractor::HandleEchoPathChange(
     const EchoPathVariability& echo_path_variability) {
-  const auto full_reset = [&]() {
+  if (echo_path_variability.delay_change) {
     main_filter_.HandleEchoPathChange();
     shadow_filter_.HandleEchoPathChange();
     G_main_.HandleEchoPathChange(echo_path_variability);
     G_shadow_.HandleEchoPathChange();
     converged_filter_ = false;
-  };
-
-  // TODO(peah): Add delay-change specific reset behavior.
-  if ((echo_path_variability.delay_change ==
-       EchoPathVariability::DelayAdjustment::kBufferFlush) ||
-      (echo_path_variability.delay_change ==
-       EchoPathVariability::DelayAdjustment::kDelayReset)) {
-    full_reset();
-  } else if (echo_path_variability.delay_change ==
-             EchoPathVariability::DelayAdjustment::kNewDetectedDelay) {
-    full_reset();
-  } else if (echo_path_variability.delay_change ==
-             EchoPathVariability::DelayAdjustment::kBufferReadjustment) {
-    full_reset();
   }
 }
 

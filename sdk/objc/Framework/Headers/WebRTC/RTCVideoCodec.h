@@ -20,6 +20,12 @@ RTC_EXPORT extern NSString *const kRTCVideoCodecVp9Name;
 RTC_EXPORT extern NSString *const kRTCVideoCodecH264Name;
 RTC_EXPORT extern NSString *const kRTCLevel31ConstrainedHigh;
 RTC_EXPORT extern NSString *const kRTCLevel31ConstrainedBaseline;
+RTC_EXPORT extern NSString *const kRTCLevel41ConstrainedHigh;
+RTC_EXPORT extern NSString *const kRTCLevel41ConstrainedBaseline;
+RTC_EXPORT extern NSString *const kRTCLevel52ConstrainedHigh;
+RTC_EXPORT extern NSString *const kRTCLevel52ConstrainedBaseline;
+
+RTC_EXPORT extern NSString *getOptimalBaselineRTCLevelForDevice();
 
 /** Represents an encoded frame's type. */
 typedef NS_ENUM(NSUInteger, RTCFrameType) {

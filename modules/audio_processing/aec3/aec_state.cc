@@ -63,24 +63,14 @@ AecState::~AecState() = default;
 
 void AecState::HandleEchoPathChange(
     const EchoPathVariability& echo_path_variability) {
-  const auto full_reset = [&]() {
+  if (echo_path_variability.AudioPathChanged()) {
     blocks_since_last_saturation_ = 0;
     usable_linear_estimate_ = false;
     echo_leakage_detected_ = false;
     capture_signal_saturation_ = false;
     echo_saturation_ = false;
     previous_max_sample_ = 0.f;
-    std::fill(max_render_.begin(), max_render_.end(), 0.f);
-    force_zero_gain_counter_ = 0;
-    blocks_with_filter_adaptation_ = 0;
-    blocks_with_strong_render_ = 0;
-    initial_state_ = true;
-    capture_block_counter_ = 0;
-    linear_echo_estimate_ = false;
-    sufficient_filter_updates_ = false;
-    render_received_ = false;
-    force_zero_gain_ = true;
-  };
+    max_render_.fill(0.f);
 
   // TODO(peah): Refine the reset scheme according to the type of gain and
   // delay adjustment.
