@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c749d7be_522e87dd",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2017-12-15T11:41:07Z",
+      "side": 1,
+      "message": "Oskar: have you already sent out a PSA?\nIf yes I can take care of updating downstream projects and remove it.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 1
+      },
+      "revId": "c7b5743e2d3afeea5d5a676556864c921e8c8a4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
