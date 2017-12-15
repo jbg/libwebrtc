@@ -32,6 +32,7 @@ AudioState::AudioState(const AudioState::Config& config)
                        config_.audio_device_module.get()) {
   process_thread_checker_.DetachFromThread();
   RTC_DCHECK(config_.audio_mixer);
+  RTC_DCHECK(config_.audio_device_module);
 }
 
 AudioState::~AudioState() {
@@ -61,6 +62,18 @@ void AudioState::AddSendingStream(webrtc::AudioSendStream* stream,
   properties.sample_rate_hz = sample_rate_hz;
   properties.num_channels = num_channels;
   UpdateAudioTransportWithSendingStreams();
+
+  // Start recording, if enabled.
+  auto* adm = config_.audio_device_module.get();
+  if (!adm->Recording()) {
+    if (adm->InitRecording() != 0) {
+      RTC_DLOG_F(LS_ERROR) << "Failed to initialize recording";
+      return;
+    }
+    if (recording_enabled_) {
+      adm->StartRecording();
+    }
+  }
 }
 
 void AudioState::RemoveSendingStream(webrtc::AudioSendStream* stream) {
@@ -68,6 +81,9 @@ void AudioState::RemoveSendingStream(webrtc::AudioSendStream* stream) {
   auto count = sending_streams_.erase(stream);
   RTC_DCHECK_EQ(1, count);
   UpdateAudioTransportWithSendingStreams();
+  if (sending_streams_.empty()) {
+    config_.audio_device_module->StopRecording();
+  }
 }
 
 void AudioState::SetPlayout(bool enabled) {
@@ -97,7 +113,16 @@ void AudioState::SetRecording(bool enabled) {
   // Will stop/start recording of the underlying device, if necessary, and
   // remember the setting for when it receives subsequent calls of
   // StartPlayout.
-  voe_base_->SetRecording(enabled);
+  if (recording_enabled_ != enabled) {
+    recording_enabled_ = enabled;
+    if (!sending_streams_.empty()) {
+      if (enabled) {
+        config_.audio_device_module->StartRecording();
+      } else {
+        config_.audio_device_module->StopRecording();
+      }
+    }
+  }
 }
 
 AudioState::Stats AudioState::GetAudioInputStats() const {
