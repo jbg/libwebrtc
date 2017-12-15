@@ -39,6 +39,24 @@
       "revId": "4f6598d14c241ea0ea188abef1bfcdfd2d1f231c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d8b2862_5c02bd43",
+        "filename": "sdk/android/src/jni/pc/rtpreceiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2017-12-15T08:27:29Z",
+      "side": 1,
+      "message": "It\u0027s a local variable, with a refcount Release when it goes out of scope. No nulling needed,\n as far as I understand. (Which is why changes like this do add extra refcount updates. As far as I understand, the changed functions aren\u0027t performance critical).\n\nAnd the underlying RtpReceiver keeps its reference to the track both before and after this change (and the track() method is even const, so it\u0027s unlikely that it will move the return value, but I haven\u0027t checked).",
+      "parentUuid": "31375065_b627de00",
+      "revId": "4f6598d14c241ea0ea188abef1bfcdfd2d1f231c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
