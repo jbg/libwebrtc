@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c36aec9d_f227365a",
+        "filename": "modules/video_coding/protection_bitrate_calculator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T14:16:35Z",
+      "side": 1,
+      "message": "OnLossMask is probably better after all, since it\u0027s no longer a feedback vector... Sorry",
+      "revId": "286c41efe3154a27d635c9419bfbdbf273ff7060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd9f5351_7def94bc",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T14:16:35Z",
+      "side": 1,
+      "message": "Add a comment that lost feedbacks arent considered to be lost packets. Possibly change type to a vector of bools?",
+      "revId": "286c41efe3154a27d635c9419bfbdbf273ff7060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
