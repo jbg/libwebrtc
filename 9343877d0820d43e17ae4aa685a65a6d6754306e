@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6149acfa_7aa2c6ba",
+        "filename": "modules/video_coding/protection_bitrate_calculator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T10:30:36Z",
+      "side": 1,
+      "message": "Maybe something like OnPacketFeedbackVector or OnLossMaskVector",
+      "range": {
+        "startLine": 55,
+        "startChar": 15,
+        "endLine": 55,
+        "endChar": 32
+      },
+      "revId": "9343877d0820d43e17ae4aa685a65a6d6754306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "799e1f84_e2663f39",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T10:30:36Z",
+      "side": 1,
+      "message": "What is this crit guarding? Should use RTC_GUARDED_BY macro to ensure it does what it should.",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 46
+      },
+      "revId": "9343877d0820d43e17ae4aa685a65a6d6754306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "957b886e_a3da28a5",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T10:30:36Z",
+      "side": 1,
+      "message": "AFAICT this isn\u0027t needed since there are no members modified below?",
+      "range": {
+        "startLine": 1336,
+        "startChar": 2,
+        "endLine": 1336,
+        "endChar": 47
+      },
+      "revId": "9343877d0820d43e17ae4aa685a65a6d6754306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2d8a7c9_63752062",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1340,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T10:30:36Z",
+      "side": 1,
+      "message": "Should we filter out feedback about the SSRCs which this VideoSendStream doesn\u0027t produce?",
+      "range": {
+        "startLine": 1340,
+        "startChar": 4,
+        "endLine": 1340,
+        "endChar": 53
+      },
+      "revId": "9343877d0820d43e17ae4aa685a65a6d6754306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "232ea6a3_6ac0845d",
+        "filename": "video/video_send_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-15T10:30:36Z",
+      "side": 1,
+      "message": "Is this include needed here? Maybe we can move it to the .cc file",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 71
+      },
+      "revId": "9343877d0820d43e17ae4aa685a65a6d6754306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
