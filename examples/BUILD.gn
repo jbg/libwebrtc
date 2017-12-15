@@ -503,6 +503,7 @@ if (is_linux || is_win) {
     deps = [
       "../api:video_frame_api_i420",
       "../rtc_base:checks",
+      "../rtc_base:stringutils",
     ]
     if (is_win) {
       sources += [
@@ -563,6 +564,7 @@ if (is_linux || is_win) {
     deps = [
       "..:webrtc_common",
       "../rtc_base:rtc_base_approved",
+      "../rtc_base:stringutils",
       "../rtc_tools:command_line_parser",
     ]
     if (!build_with_chromium && is_clang) {
@@ -721,6 +723,7 @@ if (!build_with_chromium) {
       "../rtc_base:checks",
       "../rtc_base:rtc_base",
       "../rtc_base:rtc_base_approved",
+      "../rtc_base:stringutils",
       "../system_wrappers:field_trial_default",
     ]
   }
