@@ -16,6 +16,24 @@
       "revId": "45ee3246d866eff9bb1b12afca9174b8a3c6c9f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13ea9c4a_c3b84b08",
+        "filename": "system_wrappers/include/ntp_time.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-15T13:40:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf52692c_4700b38f",
+      "revId": "45ee3246d866eff9bb1b12afca9174b8a3c6c9f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
