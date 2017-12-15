@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf52692c_4700b38f",
+        "filename": "system_wrappers/include/ntp_time.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-15T11:38:32Z",
+      "side": 1,
+      "message": "Can these two be dchecked_cast? It looks like the answer is yes, since value_ is uint64_t and kFractionsPerSecond is 2^32.",
+      "revId": "45ee3246d866eff9bb1b12afca9174b8a3c6c9f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
