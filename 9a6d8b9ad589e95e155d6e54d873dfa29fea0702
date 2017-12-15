@@ -22,6 +22,30 @@
       "revId": "9a6d8b9ad589e95e155d6e54d873dfa29fea0702",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a985966_faba005d",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2017-12-15T11:48:41Z",
+      "side": 1,
+      "message": "Is there another pattern that\u0027s more appropriate? The only other option I can think of is a global, and I\u0027m not sure if that would be better.\n\nI made this so the InitFieldTrialsFromString is called only once, as calling it more than once results in a crash (and the FuzzOneInput function is called repeatedly while fuzzing). I thought of putting the call to InitFieldTrialsFromString in the general initialization code for fuzzers in webrtc_fuzzer_main.cc file, but then I decided against it because we probably want to eventually remove this again, and that will be simpler if the changes are confined to this file, instead of spread out.",
+      "parentUuid": "3870741a_312ff76d",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 46
+      },
+      "revId": "9a6d8b9ad589e95e155d6e54d873dfa29fea0702",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
