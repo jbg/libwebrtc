@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c4b9886_32ade208",
+        "filename": "common_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-15T09:01:55Z",
+      "side": 0,
+      "message": "The deleted code here moves to rtp_rtcp/includes/rtp_rtcp_defines.h. That one is also a dumping ground for structs, but at least this code moves into a more appropriate module and out of the api.",
+      "range": {
+        "startLine": 688,
+        "startChar": 0,
+        "endLine": 688,
+        "endChar": 65
+      },
+      "revId": "b6f9e6c979cd6e2e95f1d4cf357f4d91aba9f69c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
