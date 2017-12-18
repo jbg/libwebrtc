@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8de0acbc_f8eedcec",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-18T12:32:21Z",
+      "side": 1,
+      "message": "Yes it is still needed. This code will (like its predecessor in VoEBase) enable recording once a stream is enabled for sending.",
+      "parentUuid": "92c08e74_b94561db",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79d75418_daf7ef69",
         "filename": "audio/audio_state.cc",
         "patchSetId": 5
