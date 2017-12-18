@@ -354,19 +354,6 @@ TEST(AudioReceiveStreamTest, SetGain) {
   recv_stream.SetGain(0.765f);
 }
 
-TEST(AudioReceiveStreamTest, StreamShouldNotBeAddedToMixerWhenVoEReturnsError) {
-  ConfigHelper helper;
-  internal::AudioReceiveStream recv_stream(
-      helper.rtp_stream_receiver_controller(),
-      helper.packet_router(),
-      helper.config(), helper.audio_state(), helper.event_log());
-
-  EXPECT_CALL(helper.voice_engine(), StartPlayout(_)).WillOnce(Return(-1));
-  EXPECT_CALL(*helper.audio_mixer(), AddSource(_)).Times(0);
-
-  recv_stream.Start();
-}
-
 TEST(AudioReceiveStreamTest, StreamShouldBeAddedToMixerOnStart) {
   ConfigHelper helper;
   internal::AudioReceiveStream recv_stream(
@@ -374,8 +361,8 @@ TEST(AudioReceiveStreamTest, StreamShouldBeAddedToMixerOnStart) {
       helper.packet_router(),
       helper.config(), helper.audio_state(), helper.event_log());
 
-  EXPECT_CALL(helper.voice_engine(), StartPlayout(_)).WillOnce(Return(0));
-  EXPECT_CALL(helper.voice_engine(), StopPlayout(_));
+  EXPECT_CALL(*helper.channel_proxy(), StartPlayout()).Times(1);
+  EXPECT_CALL(*helper.channel_proxy(), StopPlayout()).Times(1);
   EXPECT_CALL(*helper.audio_mixer(), AddSource(&recv_stream))
       .WillOnce(Return(true));
 
