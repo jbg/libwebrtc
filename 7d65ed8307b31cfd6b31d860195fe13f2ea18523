@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da3e19bf_cfe9809f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2017-12-18T20:31:59Z",
+      "side": 1,
+      "message": "nit: ends up",
+      "range": {
+        "startLine": 9,
+        "startChar": 197,
+        "endLine": 9,
+        "endChar": 203
+      },
+      "revId": "7d65ed8307b31cfd6b31d860195fe13f2ea18523",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
