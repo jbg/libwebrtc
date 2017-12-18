@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "623faf7a_af03d384",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-18T09:09:45Z",
+      "side": 1,
+      "message": "I would prefer something more descriptive: i.e. Camera.open(cameraId) returned null",
+      "range": {
+        "startLine": 73,
+        "startChar": 44,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "d47fd08ec00edff2e0d9c1f4b504fc86453ed5b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
