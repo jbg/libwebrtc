@@ -19,7 +19,7 @@ if (is_win) {
 }
 
 group("base") {
-  public_deps = [
+  deps = [
     ":rtc_base",
     ":rtc_base_approved",
     ":rtc_task_queue",
@@ -27,7 +27,7 @@ group("base") {
     ":weak_ptr",
   ]
   if (is_android) {
-    public_deps += [ ":base_java" ]
+    deps += [ ":base_java" ]
   }
 }
 
@@ -379,8 +379,6 @@ if (is_mac && !build_with_chromium) {
 rtc_source_set("rtc_task_queue") {
   deps = [
     ":rtc_base_approved",
-  ]
-  public_deps = [
     ":rtc_task_queue_api",
   ]
 
@@ -445,6 +443,7 @@ rtc_static_library("sequenced_task_checker") {
     ":checks",
     ":rtc_base_approved",
     ":rtc_task_queue",
+    ":rtc_task_queue_api",
   ]
 }
 
@@ -493,7 +492,7 @@ rtc_source_set("rtc_json") {
     "json.h",
   ]
   if (rtc_build_json) {
-    public_deps = [
+    deps = [
       "//third_party/jsoncpp",
     ]
   } else {
@@ -864,8 +863,6 @@ rtc_source_set("rtc_base_tests_utils") {
     ":stringutils",
     "../test:field_trial",
     "../test:test_support",
-  ]
-  public_deps = [
     "//testing/gmock",
     "//testing/gtest",
   ]
@@ -884,9 +881,6 @@ if (rtc_include_tests) {
       ":rtc_base_tests_utils",
       "../test:field_trial",
       "../test:test_support",
-    ]
-
-    public_deps = [
       "//testing/gmock",
       "//testing/gtest",
     ]
@@ -972,6 +966,7 @@ if (rtc_include_tests) {
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
       ":rtc_task_queue",
+      ":rtc_task_queue_api",
       ":safe_compare",
       ":stringutils",
       "../api:array_view",
@@ -991,6 +986,7 @@ if (rtc_include_tests) {
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
       ":rtc_task_queue",
+      ":rtc_task_queue_api",
       "../test:test_support",
     ]
   }
@@ -1006,6 +1002,7 @@ if (rtc_include_tests) {
       ":rtc_base_approved",
       ":rtc_base_tests_main",
       ":rtc_task_queue",
+      ":rtc_task_queue_api",
       ":sequenced_task_checker",
       "../test:test_support",
     ]
@@ -1022,6 +1019,7 @@ if (rtc_include_tests) {
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
       ":rtc_task_queue",
+      ":rtc_task_queue_api",
       ":weak_ptr",
       "../test:test_support",
     ]
@@ -1096,14 +1094,12 @@ if (rtc_include_tests) {
     }
     deps = [
       ":checks",
+      ":rtc_base",
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
       ":stringutils",
       "../api:optional",
       "../test:test_support",
-    ]
-    public_deps = [
-      ":rtc_base",
     ]
     configs += [ ":rtc_base_unittests_config" ]
     if (build_with_chromium) {
