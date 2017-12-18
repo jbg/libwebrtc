@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7872f97c_fd968de1",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-18T12:08:50Z",
+      "side": 1,
+      "message": "This is just trying to preserve the previous behavior - not improve on it. This code should eventually be removed and responsibility to enable recording moved to the app.\n\nDid you want me to add a comment? I don\u0027t think that is warranted.",
+      "parentUuid": "f8ad7fe0_06e120bf",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79d75418_daf7ef69",
         "filename": "audio/audio_state.cc",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7829810e_2e48742b",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-18T12:08:50Z",
+      "side": 1,
+      "message": "No, this is more readable. The above was mostly to avoid hard-to-read linebreaks.",
+      "parentUuid": "79d75418_daf7ef69",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea67e958_e7a9fb51",
         "filename": "video/video_quality_test.cc",
         "patchSetId": 5
@@ -50,6 +86,24 @@
       "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f1ea27_8403e3c6",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-18T12:08:50Z",
+      "side": 1,
+      "message": "Won\u0027t change since this is a test. Also, the audio is from a fake ADM so saying it is recorded isn\u0027t strictly correct.",
+      "parentUuid": "ea67e958_e7a9fb51",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +127,30 @@
       "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1cd554f_8f64e6a3",
+        "filename": "voice_engine/channel_proxy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2017-12-18T12:08:50Z",
+      "side": 1,
+      "message": "AudioReceiveStream\u0027s ctor resolves the ID to a pointer which is given to ChannelProxy.",
+      "parentUuid": "2d1105ed_ca3fad16",
+      "range": {
+        "startLine": 337,
+        "startChar": 2,
+        "endLine": 337,
+        "endChar": 5
+      },
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
