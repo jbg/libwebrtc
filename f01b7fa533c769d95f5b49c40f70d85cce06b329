@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afd4509f_ba426ab4",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-12-18T21:01:04Z",
+      "side": 1,
+      "message": "Could use some comments. For example, explaining that the factory must be disposed after the PeerConnection (I\u0027d assume).",
+      "revId": "f01b7fa533c769d95f5b49c40f70d85cce06b329",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
