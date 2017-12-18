@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8ad7fe0_06e120bf",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-18T11:52:42Z",
+      "side": 1,
+      "message": "Please explain the relation (time) with https://cs.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtcvoiceengine.cc?q\u003dwebrtcvoice\u0026sq\u003dpackage:chromium\u0026l\u003d1751",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79d75418_daf7ef69",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-18T11:52:42Z",
+      "side": 1,
+      "message": "Perhaps do as above:\nauto* adm \u003d config_.audio_device_module.get();",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea67e958_e7a9fb51",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-18T11:52:42Z",
+      "side": 1,
+      "message": "\"Start sending recorded audio\". Just an idea.",
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d1105ed_ca3fad16",
+        "filename": "voice_engine/channel_proxy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-18T11:52:42Z",
+      "side": 1,
+      "message": "Just a question. Where is it decided which channel who shall start sending? Channel IDs are no longer used.",
+      "range": {
+        "startLine": 337,
+        "startChar": 2,
+        "endLine": 337,
+        "endChar": 5
+      },
+      "revId": "9cabfcdeae6cc60b8108b7a780ebcb91d6cda142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

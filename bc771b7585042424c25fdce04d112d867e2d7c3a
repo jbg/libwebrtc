@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd370443_1bc7bce4",
+        "filename": "voice_engine/voe_base_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2017-12-18T11:52:42Z",
+      "side": 0,
+      "message": "Does not feel related. Was it not used before perhaps?",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 6
+      },
+      "revId": "bc771b7585042424c25fdce04d112d867e2d7c3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
