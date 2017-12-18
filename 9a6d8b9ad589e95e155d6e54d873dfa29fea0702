@@ -46,6 +46,30 @@
       "revId": "9a6d8b9ad589e95e155d6e54d873dfa29fea0702",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c65e701_434b334e",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2017-12-18T10:28:39Z",
+      "side": 1,
+      "message": "After having been educated offline, I now understand that this is needed since the fuzzer binary lives for many rounds of fuzzing (with different input data), while the field trials should only be initialized once. Looks good.",
+      "parentUuid": "5a985966_faba005d",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 46
+      },
+      "revId": "9a6d8b9ad589e95e155d6e54d873dfa29fea0702",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
