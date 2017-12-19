@@ -185,6 +185,7 @@ if (is_mac) {
       "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
       "../../sdk:common_objc",
+      "../../system_wrappers:system_wrappers",
     ]
     libs = [
       "AppKit.framework",
