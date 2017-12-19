@@ -323,6 +323,8 @@ if (is_ios || is_mac) {
         "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Native.h",
         "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions+Private.h",
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoCodecH264.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoCodecVP8.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoCodecVP9.mm",
@@ -375,6 +377,8 @@ if (is_ios || is_mac) {
         "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Native.h",
         "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions+Private.h",
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
       ]
 
       public_configs = [ ":common_config_objc" ]
@@ -480,6 +484,7 @@ if (is_ios || is_mac) {
         "objc/Framework/Headers/WebRTC/RTCMetricsSampleInfo.h",
         "objc/Framework/Headers/WebRTC/RTCPeerConnection.h",
         "objc/Framework/Headers/WebRTC/RTCPeerConnectionFactory.h",
+        "objc/Framework/Headers/WebRTC/RTCPeerConnectionFactoryOptions.h",
         "objc/Framework/Headers/WebRTC/RTCRtpCodecParameters.h",
         "objc/Framework/Headers/WebRTC/RTCRtpEncodingParameters.h",
         "objc/Framework/Headers/WebRTC/RTCRtpParameters.h",
@@ -686,6 +691,7 @@ if (is_ios || is_mac) {
           "objc/Framework/Headers/WebRTC/RTCMetricsSampleInfo.h",
           "objc/Framework/Headers/WebRTC/RTCPeerConnection.h",
           "objc/Framework/Headers/WebRTC/RTCPeerConnectionFactory.h",
+          "objc/Framework/Headers/WebRTC/RTCPeerConnectionFactoryOptions.h",
           "objc/Framework/Headers/WebRTC/RTCRtpCodecParameters.h",
           "objc/Framework/Headers/WebRTC/RTCRtpEncodingParameters.h",
           "objc/Framework/Headers/WebRTC/RTCRtpParameters.h",
