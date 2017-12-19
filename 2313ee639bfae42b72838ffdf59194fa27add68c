@@ -46,6 +46,30 @@
       "revId": "2313ee639bfae42b72838ffdf59194fa27add68c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "071ea0f9_f01700c7",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-19T08:52:11Z",
+      "side": 1,
+      "message": "You can run \"git cl format\". This should fix the file automatically. The header looks normal to me. Can you paste the error?",
+      "parentUuid": "a3310d38_ffbed0b8",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 12
+      },
+      "revId": "2313ee639bfae42b72838ffdf59194fa27add68c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
