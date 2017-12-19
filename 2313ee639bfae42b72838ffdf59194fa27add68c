@@ -22,6 +22,30 @@
       "revId": "2313ee639bfae42b72838ffdf59194fa27add68c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3310d38_ffbed0b8",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2017-12-19T08:48:29Z",
+      "side": 1,
+      "message": "That is why I introduced variable, to make next line shorter. It is still fail presubmit, but it is not the longest line in file. BTW, presubmit complains on licence in the header, but I don\u0027t under stand why.\nI can eliminate this variable, but I\u0027ll have to introduce string concatenation then. Is that ok?",
+      "parentUuid": "b20719d2_2a1c170e",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 12
+      },
+      "revId": "2313ee639bfae42b72838ffdf59194fa27add68c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

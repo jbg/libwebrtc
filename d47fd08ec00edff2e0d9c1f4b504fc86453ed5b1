@@ -22,6 +22,30 @@
       "revId": "d47fd08ec00edff2e0d9c1f4b504fc86453ed5b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a55619d1_62ee8bdc",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2017-12-19T08:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "623faf7a_af03d384",
+      "range": {
+        "startLine": 73,
+        "startChar": 44,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "d47fd08ec00edff2e0d9c1f4b504fc86453ed5b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
