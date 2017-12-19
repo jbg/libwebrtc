@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b20719d2_2a1c170e",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-19T08:44:19Z",
+      "side": 1,
+      "message": "nit: This line is too long (it should have failed presubmit, did you skip it?).\n\nI also don\u0027t see a need for a variable but I don\u0027t really care if you keep it.",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 12
+      },
+      "revId": "2313ee639bfae42b72838ffdf59194fa27add68c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
