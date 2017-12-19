@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39faf413_4be33988",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-19T22:36:40Z",
+      "side": 1,
+      "message": "The lock should not be necessary. See my comments in https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d8646#c5.",
+      "revId": "3ddf5e3db96d36fb30deeeeabf7fec106d95e366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

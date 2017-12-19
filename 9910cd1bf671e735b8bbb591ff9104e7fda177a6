@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "700ba920_46f8a80a",
+        "filename": "system_wrappers/source/rw_lock.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-19T22:36:40Z",
+      "side": 1,
+      "message": "Returns nullptr from RWLock*::Create() function indicates a very serious kernel error or misuse of pthread_* functions. It\u0027s intentionally for the consumers to crash in the situation.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 38
+      },
+      "revId": "9910cd1bf671e735b8bbb591ff9104e7fda177a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e860eb0_9eefcfa8",
+        "filename": "system_wrappers/source/rw_lock.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-19T22:36:40Z",
+      "side": 1,
+      "message": "In general, SleepMs() is *not* allowed in the production code. (https://cs.chromium.org/search/?q\u003dsleepms+third_party/webrtc/\u0026sq\u003dpackage:chromium\u0026type\u003dcs)\nI see only reasonable use of SleepMs() in video or audio playback.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "9910cd1bf671e735b8bbb591ff9104e7fda177a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d901dfe_6d8575f2",
+        "filename": "system_wrappers/source/rw_lock.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2017-12-19T22:36:40Z",
+      "side": 1,
+      "message": "This recursive function call will eventually use all stack and trigger stack overflow exception.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "9910cd1bf671e735b8bbb591ff9104e7fda177a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
