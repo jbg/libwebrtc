@@ -10,6 +10,7 @@
 
 #import "RTCPeerConnectionFactory+Native.h"
 #import "RTCPeerConnectionFactory+Private.h"
+#import "RTCPeerConnectionFactoryOptions+Private.h"
 
 #import "NSString+StdString.h"
 #import "RTCAVFoundationVideoSource+Private.h"
@@ -240,6 +241,13 @@
                                       configuration:configuration
                                         constraints:constraints
                                            delegate:delegate];
+}
+
+- (void)setOptions:(RTCPeerConnectionFactoryOptions *)options {
+  RTC_DCHECK(options != nil);
+  if (options != nil) {
+    _nativeFactory->SetOptions(options.nativeOptions);
+  }
 }
 
 - (BOOL)startAecDumpWithFilePath:(NSString *)filePath
