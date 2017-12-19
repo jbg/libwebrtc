@@ -36,6 +36,7 @@
 #include "rtc_base/macutils.h"
 #include "rtc_base/timeutils.h"
 #include "sdk/objc/Framework/Classes/Common/scoped_cftyperef.h"
+#include "system_wrappers/include/rw_lock_wrapper.h"
 
 namespace webrtc {
 
@@ -48,20 +49,33 @@ namespace {
 // destroy itself once it's done.
 class DisplayStreamManager {
  public:
-  int GetUniqueId() { return ++unique_id_generator_; }
-  void DestroyStream(int unique_id) {
-    auto it = display_stream_wrappers_.find(unique_id);
-    RTC_CHECK(it != display_stream_wrappers_.end());
-    RTC_CHECK(!it->second.active);
-    CFRelease(it->second.stream);
-    display_stream_wrappers_.erase(it);
+  DisplayStreamManager() : rw_lock_(RWLockWrapper::CreateRWLock()) {}
+  void ReaderLock() { rw_lock_->AcquireLockShared(); }
+  void ReaderUnlock() { rw_lock_->ReleaseLockShared(); }
 
-    if (ready_for_self_destruction_ && display_stream_wrappers_.empty())
+  int GetUniqueId() {
+    WriteLockScoped scoped_display_stream_manager_lock(*rw_lock_);
+    return ++unique_id_generator_;
+  }
+  void DestroyStream(int unique_id) {
+    bool finalize;
+    {
+      WriteLockScoped scoped_display_stream_manager_lock(*rw_lock_);
+      auto it = display_stream_wrappers_.find(unique_id);
+      RTC_CHECK(it != display_stream_wrappers_.end());
+      RTC_CHECK(!it->second.active);
+      CFRelease(it->second.stream);
+      display_stream_wrappers_.erase(it);
+      finalize = ready_for_self_destruction_ && display_stream_wrappers_.empty();
+    }
+    if (finalize) {
       delete this;
+    }
   }
 
   void SaveStream(int unique_id,
                   CGDisplayStreamRef stream) {
+    WriteLockScoped scoped_display_stream_manager_lock(*rw_lock_);
     RTC_CHECK(unique_id <= unique_id_generator_);
     DisplayStreamWrapper wrapper;
     wrapper.stream = stream;
@@ -69,6 +83,7 @@ class DisplayStreamManager {
   }
 
   void UnregisterActiveStreams() {
+    WriteLockScoped scoped_display_stream_manager_lock(*rw_lock_);
     for (auto& pair : display_stream_wrappers_) {
       DisplayStreamWrapper& wrapper = pair.second;
       if (wrapper.active) {
@@ -83,14 +98,20 @@ class DisplayStreamManager {
   }
 
   void PrepareForSelfDestruction() {
-    ready_for_self_destruction_ = true;
-
-    if (display_stream_wrappers_.empty())
+    bool finalize;
+    {
+      WriteLockScoped scoped_display_stream_manager_lock(*rw_lock_);
+      ready_for_self_destruction_ = true;
+      finalize = display_stream_wrappers_.empty();
+    }
+    if (finalize) {
       delete this;
+    }
   }
 
   // Once the DisplayStreamManager is ready for destruction, the
   // ScreenCapturerMac is no longer present. Any updates should be ignored.
+  // Note: not thread-safe! Call ReaderLock() and ReaderUnlock() manually.
   bool ShouldIgnoreUpdates() { return ready_for_self_destruction_; }
 
  private:
@@ -106,6 +127,7 @@ class DisplayStreamManager {
   std::map<int, DisplayStreamWrapper> display_stream_wrappers_;
   int unique_id_generator_ = 0;
   bool ready_for_self_destruction_ = false;
+  std::unique_ptr<RWLockWrapper> rw_lock_;
 };
 
 // Standard Mac displays have 72dpi, but we report 96dpi for
@@ -659,9 +681,6 @@ bool ScreenCapturerMac::RegisterRefreshAndMoveHandlers() {
             return;
           }
 
-          if (manager->ShouldIgnoreUpdates())
-            return;
-
           // Only pay attention to frame updates.
           if (status != kCGDisplayStreamFrameStatusFrameComplete)
             return;
@@ -672,7 +691,12 @@ bool ScreenCapturerMac::RegisterRefreshAndMoveHandlers() {
           if (count != 0) {
             // According to CGDisplayStream.h, it's safe to call
             // CGDisplayStreamStop() from within the callback.
-            ScreenRefresh(count, rects, display_origin);
+            manager->ReaderLock();
+            bool screen_capturer_mac_invalidated = manager->ShouldIgnoreUpdates();
+            if (!screen_capturer_mac_invalidated) {
+              ScreenRefresh(count, rects, display_origin);
+            }
+            manager->ReaderUnlock();
           }
         };
 
