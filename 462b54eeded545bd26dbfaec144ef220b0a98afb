@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6cf0bff1_2f03c0a4",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-20T20:32:56Z",
+      "side": 1,
+      "message": "Now you shouldnt need this lock",
+      "range": {
+        "startLine": 1345,
+        "startChar": 19,
+        "endLine": 1345,
+        "endChar": 58
+      },
+      "revId": "462b54eeded545bd26dbfaec144ef220b0a98afb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
