@@ -547,7 +547,6 @@ public class PeerConnection {
 
   private final List<MediaStream> localStreams = new ArrayList<>();
   private final long nativePeerConnection;
-  private final long nativeObserver;
   private List<RtpSender> senders = new ArrayList<>();
   private List<RtpReceiver> receivers = new ArrayList<>();
 
@@ -556,12 +555,11 @@ public class PeerConnection {
    * their PeerConnection creation in JNI.
    */
   public PeerConnection(NativePeerConnectionFactory factory) {
-    this(factory.createNativePeerConnection(), 0 /* nativeObserver */);
+    this(factory.createNativePeerConnection());
   }
 
-  PeerConnection(long nativePeerConnection, long nativeObserver) {
+  PeerConnection(long nativePeerConnection) {
     this.nativePeerConnection = nativePeerConnection;
-    this.nativeObserver = nativeObserver;
   }
 
   // JsepInterface.
@@ -592,7 +590,7 @@ public class PeerConnection {
   public native void setAudioRecording(boolean recording);
 
   public boolean setConfiguration(RTCConfiguration config) {
-    return setNativeConfiguration(config, nativeObserver);
+    return setNativeConfiguration(config);
   }
 
   public boolean addIceCandidate(IceCandidate candidate) {
@@ -752,10 +750,7 @@ public class PeerConnection {
       receiver.dispose();
     }
     receivers.clear();
-    JniCommon.nativeReleaseRef(nativePeerConnection);
-    if (nativeObserver != 0) {
-      freeNativePeerConnectionObserver(nativeObserver);
-    }
+    freeNativeOwnedPeerConnection(nativePeerConnection);
   }
 
   @CalledByNative
@@ -764,9 +759,9 @@ public class PeerConnection {
   }
 
   public static native long createNativePeerConnectionObserver(Observer observer);
-  public static native void freeNativePeerConnectionObserver(long nativeObserver);
+  public static native void freeNativeOwnedPeerConnection(long nativePeerConnection);
 
-  private native boolean setNativeConfiguration(RTCConfiguration config, long nativeObserver);
+  private native boolean setNativeConfiguration(RTCConfiguration config);
 
   private native boolean addNativeIceCandidate(
       String sdpMid, int sdpMLineIndex, String iceCandidateSdp);
