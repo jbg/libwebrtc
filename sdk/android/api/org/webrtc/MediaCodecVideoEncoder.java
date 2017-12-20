@@ -176,8 +176,10 @@ public class MediaCodecVideoEncoder {
       "OMX.qcom.", Build.VERSION_CODES.KITKAT, BitrateAdjustmentType.NO_ADJUSTMENT);
   private static final MediaCodecProperties exynosH264HwProperties = new MediaCodecProperties(
       "OMX.Exynos.", Build.VERSION_CODES.LOLLIPOP, BitrateAdjustmentType.FRAMERATE_ADJUSTMENT);
-  private static final MediaCodecProperties[] h264HwList =
-      new MediaCodecProperties[] {qcomH264HwProperties, exynosH264HwProperties};
+  private static final MediaCodecProperties mtkH264HwProperties = new MediaCodecProperties(
+      "OMX.MTK", Build.VERSION_CODES.LOLLIPOP, BitrateAdjustmentType.FRAMERATE_ADJUSTMENT);
+  private static final MediaCodecProperties[] h264HwList = new MediaCodecProperties[] {
+      qcomH264HwProperties, exynosH264HwProperties, mtkH264HwProperties};
 
   // List of supported HW H.264 high profile encoders.
   private static final MediaCodecProperties exynosH264HighProfileHwProperties =
