@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "62debf61_e2446d15",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-20T11:00:16Z",
+      "side": 1,
+      "message": "You can do this in a rebase on your CL.",
+      "parentUuid": "94d1a4f9_5754c853",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 767,
+        "endChar": 82
+      },
+      "revId": "0e6c261c1105a5b190f5bc2e96154f75e645b949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "055bbfec_3b60197d",
         "filename": "sdk/android/src/jni/pc/peerconnection.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "0e6c261c1105a5b190f5bc2e96154f75e645b949",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de82d2a1_78bc554f",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-20T11:00:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "055bbfec_3b60197d",
+      "range": {
+        "startLine": 448,
+        "startChar": 9,
+        "endLine": 448,
+        "endChar": 16
+      },
+      "revId": "0e6c261c1105a5b190f5bc2e96154f75e645b949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
