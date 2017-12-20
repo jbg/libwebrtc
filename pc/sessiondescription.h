@@ -48,22 +48,37 @@ extern const char kMediaProtocolTcpDtlsSctp[];
 // Options to control how session descriptions are generated.
 const int kAutoBandwidth = -1;
 
-// Describes a session content. Individual content types inherit from
-// this class.  Analagous to a <jingle><content><description> or
-// <session><description>.
-class ContentDescription {
- public:
-  virtual ~ContentDescription() {}
-  virtual ContentDescription* Copy() const = 0;
-};
+class AudioContentDescription;
+class VideoContentDescription;
+class DataContentDescription;
 
-// "content" (as used in XEP-0166) descriptions for voice and video.
-class MediaContentDescription : public ContentDescription {
+// Describes a session description media section. There are subclasses for each
+// media type (audio, video, data) that will have additional information.
+class MediaContentDescription {
  public:
-  MediaContentDescription() {}
+  MediaContentDescription() = default;
+  virtual ~MediaContentDescription() = default;
 
   virtual MediaType type() const = 0;
+
+  // Try to cast this media description to an AudioContentDescription. Returns
+  // nullptr if the cast fails.
+  virtual AudioContentDescription* as_audio() { return nullptr; }
+  virtual const AudioContentDescription* as_audio() const { return nullptr; }
+
+  // Try to cast this media description to a VideoContentDescription. Returns
+  // nullptr if the cast fails.
+  virtual VideoContentDescription* as_video() { return nullptr; }
+  virtual const VideoContentDescription* as_video() const { return nullptr; }
+
+  // Try to cast this media description to a DataContentDescription. Returns
+  // nullptr if the cast fails.
+  virtual DataContentDescription* as_data() { return nullptr; }
+  virtual const DataContentDescription* as_data() const { return nullptr; }
+
   virtual bool has_codecs() const = 0;
+
+  virtual MediaContentDescription* Copy() const = 0;
 
   // |protocol| is the expected media transport protocol, such as RTP/AVPF,
   // RTP/SAVPF or SCTP/DTLS.
@@ -183,6 +198,10 @@ class MediaContentDescription : public ContentDescription {
   rtc::SocketAddress connection_address_;
 };
 
+// TODO(bugs.webrtc.org/8620): Remove this alias once downstream projects have
+// updated.
+using ContentDescription = MediaContentDescription;
+
 template <class C>
 class MediaContentDescriptionImpl : public MediaContentDescription {
  public:
@@ -233,6 +252,8 @@ class AudioContentDescription : public MediaContentDescriptionImpl<AudioCodec> {
     return new AudioContentDescription(*this);
   }
   virtual MediaType type() const { return MEDIA_TYPE_AUDIO; }
+  virtual AudioContentDescription* as_audio() { return this; }
+  virtual const AudioContentDescription* as_audio() const { return this; }
 };
 
 class VideoContentDescription : public MediaContentDescriptionImpl<VideoCodec> {
@@ -241,6 +262,8 @@ class VideoContentDescription : public MediaContentDescriptionImpl<VideoCodec> {
     return new VideoContentDescription(*this);
   }
   virtual MediaType type() const { return MEDIA_TYPE_VIDEO; }
+  virtual VideoContentDescription* as_video() { return this; }
+  virtual const VideoContentDescription* as_video() const { return this; }
 };
 
 class DataContentDescription : public MediaContentDescriptionImpl<DataCodec> {
@@ -251,6 +274,8 @@ class DataContentDescription : public MediaContentDescriptionImpl<DataCodec> {
     return new DataContentDescription(*this);
   }
   virtual MediaType type() const { return MEDIA_TYPE_DATA; }
+  virtual DataContentDescription* as_data() { return this; }
+  virtual const DataContentDescription* as_data() const { return this; }
 
   bool use_sctpmap() const { return use_sctpmap_; }
   void set_use_sctpmap(bool enable) { use_sctpmap_ = enable; }
@@ -259,9 +284,9 @@ class DataContentDescription : public MediaContentDescriptionImpl<DataCodec> {
   bool use_sctpmap_ = true;
 };
 
-// Analagous to a <jingle><content> or <session><description>.
-// name = name of <content name="...">
-// type = xmlns of <content>
+// Represents a session description section. Most information about the section
+// is stored in the description, usually as a MediaContentDescription.
+// TODO(bugs.webrtc.org/8620): Rename to MediaSection.
 struct ContentInfo {
   ContentInfo() {}
   ContentInfo(const std::string& name,
@@ -283,12 +308,40 @@ struct ContentInfo {
         rejected(rejected),
         bundle_only(bundle_only),
         description(description) {}
+
+  // Alias for |name|.
+  std::string mid() const { return name; }
+
+  // Returns true if this section represents a media section. A media section is
+  // one that has details about audio, video or data.
+  bool is_media() const {
+    return type == NS_JINGLE_RTP || type == NS_JINGLE_DRAFT_SCTP;
+  }
+
+  // Returns the media information in this section. Only valid if the section is
+  // marked as having media (see |is_media|);
+  MediaContentDescription* media_description() {
+    RTC_CHECK(is_media());
+    return static_cast<MediaContentDescription*>(description);
+  }
+  const MediaContentDescription* media_description() const {
+    RTC_CHECK(is_media());
+    return static_cast<const MediaContentDescription*>(description);
+  }
+  void set_media_description(MediaContentDescription* description) {
+    RTC_CHECK(is_media());
+    this->description = description;
+  }
+
+  // TODO(bugs.webrtc.org/8520): Rename this to mid.
   std::string name;
   std::string type;
   bool rejected = false;
   bool bundle_only = false;
+  // TODO(bugs.webrtc.org/8520): Make private and access through getters.
   ContentDescription* description = nullptr;
 };
+using MediaSection = ContentInfo;
 
 typedef std::vector<std::string> ContentNames;
 
@@ -344,6 +397,9 @@ class SessionDescription {
   // Content accessors.
   const ContentInfos& contents() const { return contents_; }
   ContentInfos& contents() { return contents_; }
+  // Alias for |contents|.
+  const std::vector<MediaSection>& media_sections() const { return contents_; }
+  std::vector<MediaSection>& media_sections() { return contents_; }
   const ContentInfo* GetContentByName(const std::string& name) const;
   ContentInfo* GetContentByName(const std::string& name);
   const ContentDescription* GetContentDescriptionByName(
