@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d5cf8afb_5ae5e3cb",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2017-12-20T14:00:05Z",
+      "side": 1,
+      "message": "Done.\nRemoved if check, left RTCD_CHECK and added nonnull in method signature to indicate for users of this class that it required to pass non-null value.",
+      "parentUuid": "f5ecfbe5_1b39c0dc",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 3
+      },
+      "revId": "cb68a99e6cc32c6a2d4db08574a6e033dbca3c6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5662690f_5465f326",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "cb68a99e6cc32c6a2d4db08574a6e033dbca3c6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23fb9945_c4b0c37d",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2017-12-20T14:00:05Z",
+      "side": 1,
+      "message": "Done.\nAdded local helper function to set bits.",
+      "parentUuid": "5662690f_5465f326",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 3
+      },
+      "revId": "cb68a99e6cc32c6a2d4db08574a6e033dbca3c6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
