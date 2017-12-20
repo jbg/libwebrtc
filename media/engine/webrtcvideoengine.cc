@@ -1554,7 +1554,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::WebRtcVideoSendStream(
       stream_(nullptr),
       encoder_sink_(nullptr),
       parameters_(std::move(config), options, max_bitrate_bps, codec_settings),
-      rtp_parameters_(CreateRtpParametersWithOneEncoding()),
+      rtp_parameters_(CreateRtpParametersWithEncodings(sp)),
       sending_(false) {
   parameters_.config.rtp.max_packet_size = kVideoMtu;
   parameters_.conference_mode = send_params.conference_mode;
@@ -1823,8 +1823,7 @@ bool WebRtcVideoChannel::WebRtcVideoSendStream::ValidateRtpParameters(
 
 void WebRtcVideoChannel::WebRtcVideoSendStream::UpdateSendState() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  // TODO(deadbeef): Need to handle more than one encoding in the future.
-  RTC_DCHECK(rtp_parameters_.encodings.size() == 1u);
+  // TODO(zstein): Check if active changed for any encoding
   if (sending_ && rtp_parameters_.encodings[0].active) {
     RTC_DCHECK(stream_ != nullptr);
     stream_->Start();
@@ -2597,6 +2596,7 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   stream.min_bitrate_bps = GetMinVideoBitrateBps();
   stream.target_bitrate_bps = stream.max_bitrate_bps = max_bitrate_bps;
   stream.max_qp = max_qp_;
+  stream.active = true;
 
   if (CodecNamesEq(codec_name_, kVp9CodecName) && !is_screencast_) {
     stream.temporal_layer_thresholds_bps.resize(GetDefaultVp9TemporalLayers() -
