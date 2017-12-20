@@ -96,8 +96,7 @@ void ResidualEchoEstimator::Estimate(
 
   // Estimate the residual echo power.
   if (aec_state.UsableLinearEstimate()) {
-    RTC_DCHECK(aec_state.FilterDelay());
-    const int filter_delay = *aec_state.FilterDelay();
+    const int filter_delay = aec_state.FilterDelay();
     LinearEstimate(S2_linear, aec_state.Erle(), filter_delay, R2);
     AddEchoReverb(S2_linear, aec_state.SaturatedEcho(), filter_delay,
                   aec_state.ReverbDecay(), R2);
@@ -111,7 +110,7 @@ void ResidualEchoEstimator::Estimate(
     // Estimate the echo generating signal power.
     std::array<float, kFftLengthBy2Plus1> X2;
     if (aec_state.FilterDelay()) {
-      const int delay_use = static_cast<int>(*aec_state.FilterDelay());
+      const int delay_use = aec_state.FilterDelay();
 
       // Computes the spectral power over the blocks surrounding the delay.
       constexpr int kKnownDelayRenderWindowSize = 5;
