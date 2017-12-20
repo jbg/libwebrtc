@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4976b8b_17c7032a",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-20T00:11:51Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure that this point you can just delete ContentDescription and alias ContentDescription to MediaContentDescription (or rename MediaContentDescription to just ContentDescription and alist MediaContentDescription to that).",
+      "range": {
+        "startLine": 54,
+        "startChar": 26,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "214db3dc78b2fb25d042c5fbcbfab6ab61e1f214",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
