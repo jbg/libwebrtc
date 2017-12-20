@@ -102,6 +102,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     "../rtc_base:deprecation",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:sequenced_task_checker",
     "../rtc_base:stringutils",
   ]
   if (is_nacl) {
