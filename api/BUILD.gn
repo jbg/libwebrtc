@@ -96,6 +96,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     "../modules/audio_processing:audio_processing_statistics",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:sequenced_task_checker",
   ]
 
   # This is needed until bugs.webrtc.org/7504 is removed so this target can
