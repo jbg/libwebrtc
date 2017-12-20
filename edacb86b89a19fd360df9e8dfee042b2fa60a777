@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e20a2807_dfe1e36f",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2017-12-20T12:54:51Z",
+      "side": 1,
+      "message": "Could shortened to:\nblocks_with_active_render_ +\u003d active_render_block;",
+      "revId": "edacb86b89a19fd360df9e8dfee042b2fa60a777",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
