@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b44933ad_f021bc09",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-20T22:11:52Z",
+      "side": 1,
+      "message": "Since ContentDescription was removed and aliased to MediaContentDescription there\u0027s no need for these type casting methods so I\u0027ve removed them.\n\nRenaming all uses of ContentDescription to MediaContentDescription (and removing the static_casts) will be done in a follow-up CL.",
+      "parentUuid": "b23027e5_38e4e730",
+      "range": {
+        "startLine": 325,
+        "startChar": 62,
+        "endLine": 325,
+        "endChar": 0
+      },
+      "revId": "9a5963fa5f9a330514166a0d9e8059877cf890ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2dbe9e0_11520f14",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-20T02:29:38Z",
       "side": 1,
       "message": "Can we add an is_rtp() and is_sctp() here, along with a constructor (or static method) that is chooses between rtp and sctp rather than passing in a string? \n\nIf we so, we can change the 8 or so places that look at this or pass it in and change them to use those instead, and then get rid of those strings.",
+      "range": {
+        "startLine": 338,
+        "startChar": 19,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "9a5963fa5f9a330514166a0d9e8059877cf890ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2520b3de_5e3dfc3a",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-20T22:11:52Z",
+      "side": 1,
+      "message": "Replaced the type string with a new enum MediaProtocolType. I think it should be safe since no one outside of WebRTC assumes it is a string. But I\u0027ll see how the trybots feel about that one.",
+      "parentUuid": "c2dbe9e0_11520f14",
       "range": {
         "startLine": 338,
         "startChar": 19,
