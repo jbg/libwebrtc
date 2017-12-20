@@ -93,6 +93,30 @@
       "revId": "9a5963fa5f9a330514166a0d9e8059877cf890ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39a368d1_8f8421d5",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2017-12-20T22:16:37Z",
+      "side": 1,
+      "message": "Oh, that\u0027s smart to keep the name but change the type.\n\nI expect it will work.",
+      "parentUuid": "2520b3de_5e3dfc3a",
+      "range": {
+        "startLine": 338,
+        "startChar": 19,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "9a5963fa5f9a330514166a0d9e8059877cf890ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
