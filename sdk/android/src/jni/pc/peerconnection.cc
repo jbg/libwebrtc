@@ -57,8 +57,9 @@ namespace jni {
 namespace {
 
 PeerConnectionInterface* ExtractNativePC(JNIEnv* jni, jobject j_pc) {
-  return reinterpret_cast<PeerConnectionInterface*>(
-      Java_PeerConnection_getNativePeerConnection(jni, j_pc));
+  return reinterpret_cast<OwnedPeerConnection*>(
+             Java_PeerConnection_getNativePeerConnection(jni, j_pc))
+      ->pc();
 }
 
 PeerConnectionInterface::IceServers JavaToNativeIceServers(
@@ -287,12 +288,6 @@ void PeerConnectionObserverJni::OnAddTrack(
                            NativeToJavaMediaStreamArray(env, streams));
 }
 
-void PeerConnectionObserverJni::SetConstraints(
-    std::unique_ptr<MediaConstraintsInterface> constraints) {
-  RTC_CHECK(!constraints_.get()) << "constraints already set!";
-  constraints_ = std::move(constraints);
-}
-
 // If the NativeToJavaStreamsMap contains the stream, return it.
 // Otherwise, create a new Java MediaStream.
 JavaMediaStream& PeerConnectionObserverJni::GetOrCreateJavaStream(
@@ -322,6 +317,19 @@ jobjectArray PeerConnectionObserverJni::NativeToJavaMediaStreamArray(
   return java_streams;
 }
 
+OwnedPeerConnection::OwnedPeerConnection(
+    rtc::scoped_refptr<PeerConnectionInterface> peer_connection,
+    std::unique_ptr<PeerConnectionObserver> observer,
+    std::unique_ptr<MediaConstraintsInterface> constraints)
+    : peer_connection_(peer_connection),
+      observer_(std::move(observer)),
+      constraints_(std::move(constraints)) {}
+
+OwnedPeerConnection::~OwnedPeerConnection() {
+  // Ensure that PeerConnection is destroyed before the observer.
+  peer_connection_ = nullptr;
+}
+
 JNI_FUNCTION_DECLARATION(jlong,
                          PeerConnection_createNativePeerConnectionObserver,
                          JNIEnv* jni,
@@ -331,12 +339,11 @@ JNI_FUNCTION_DECLARATION(jlong,
 }
 
 JNI_FUNCTION_DECLARATION(void,
-                         PeerConnection_freeNativePeerConnectionObserver,
+                         PeerConnection_freeNativeOwnedPeerConnection,
                          JNIEnv*,
                          jclass,
                          jlong j_p) {
-  PeerConnectionObserver* p = reinterpret_cast<PeerConnectionObserver*>(j_p);
-  delete p;
+  delete reinterpret_cast<OwnedPeerConnection*>(j_p);
 }
 
 JNI_FUNCTION_DECLARATION(jobject,
@@ -442,19 +449,18 @@ JNI_FUNCTION_DECLARATION(jboolean,
                          PeerConnection_setNativeConfiguration,
                          JNIEnv* jni,
                          jobject j_pc,
-                         jobject j_rtc_config,
-                         jlong native_observer) {
+                         jobject j_rtc_config) {
   // Need to merge constraints into RTCConfiguration again, which are stored
-  // in the observer object.
-  PeerConnectionObserverJni* observer =
-      reinterpret_cast<PeerConnectionObserverJni*>(native_observer);
+  // in the OwnedPeerConnection object.
+  OwnedPeerConnection* owned_pc = reinterpret_cast<OwnedPeerConnection*>(
+      Java_PeerConnection_getNativePeerConnection(jni, j_pc));
   PeerConnectionInterface::RTCConfiguration rtc_config(
       PeerConnectionInterface::RTCConfigurationType::kAggressive);
   JavaToNativeRTCConfiguration(jni, j_rtc_config, &rtc_config);
-  if (observer && observer->constraints()) {
-    CopyConstraintsIntoRtcConfiguration(observer->constraints(), &rtc_config);
+  if (owned_pc->constraints()) {
+    CopyConstraintsIntoRtcConfiguration(owned_pc->constraints(), &rtc_config);
   }
-  return ExtractNativePC(jni, j_pc)->SetConfiguration(rtc_config);
+  return owned_pc->pc()->SetConfiguration(rtc_config);
 }
 
 JNI_FUNCTION_DECLARATION(jboolean,
