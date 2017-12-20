@@ -22,6 +22,30 @@
       "revId": "214db3dc78b2fb25d042c5fbcbfab6ab61e1f214",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a99afcc_59409f07",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2017-12-20T00:35:27Z",
+      "side": 1,
+      "message": "Sure, I think the best move would be to remove ContentDescription then alias MediaContentDescription as ContentDescription. I\u0027ll do that in a follow-up CL to leave this CL entirely mechanical.",
+      "parentUuid": "f4976b8b_17c7032a",
+      "range": {
+        "startLine": 54,
+        "startChar": 26,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "214db3dc78b2fb25d042c5fbcbfab6ab61e1f214",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
