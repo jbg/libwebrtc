@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5ecfbe5_1b39c0dc",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-20T10:34:23Z",
+      "side": 1,
+      "message": "nit: According to the style guide, you should not both check something and then handle the case. So do either:\nRTC_DCHECK(options !\u003d nil);\n_nativeFactory-\u003eSetOptions(options.nativeOptions);\nor:\nif (options !\u003d nil) {\n  _nativeFactory-\u003eSetOptions(options.nativeOptions);\n}",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 3
+      },
+      "revId": "cb68a99e6cc32c6a2d4db08574a6e033dbca3c6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5662690f_5465f326",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-20T10:34:23Z",
+      "side": 1,
+      "message": "Can you make a simple local helper function for this since you use it in five places? Something like this:\nvoid SetNetworkBit(PeerConnectionFactoryInterface::Options* options, rtc::AdapterType type, bool ignore);",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 3
+      },
+      "revId": "cb68a99e6cc32c6a2d4db08574a6e033dbca3c6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
