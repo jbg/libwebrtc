@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbc2a38c_ca924275",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-20T12:00:38Z",
+      "side": 1,
+      "message": "Why have you changed code related to audio?",
+      "range": {
+        "startLine": 66,
+        "startChar": 5,
+        "endLine": 66,
+        "endChar": 46
+      },
+      "revId": "47b9008fd4e24bd94fcb72eb1a6ff4e380a33c81",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c2d546_de901e2e",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCVideoCodecH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-20T12:00:38Z",
+      "side": 1,
+      "message": "I\u0027m afraid this logic will add latency. Can\u0027t we just have a hardcoded table with devices and supported profiles? I guess we can use this code locally to generate such a table.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 74
+      },
+      "revId": "47b9008fd4e24bd94fcb72eb1a6ff4e380a33c81",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
