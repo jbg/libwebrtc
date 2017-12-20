@@ -435,6 +435,8 @@ JNI_FUNCTION_DECLARATION(jlong,
   rtc::scoped_refptr<PeerConnectionFactoryInterface> f(
       reinterpret_cast<PeerConnectionFactoryInterface*>(
           factoryFromJava(factory)));
+  std::unique_ptr<PeerConnectionObserver> observer(
+      reinterpret_cast<PeerConnectionObserver*>(observer_p));
 
   PeerConnectionInterface::RTCConfiguration rtc_config(
       PeerConnectionInterface::RTCConfigurationType::kAggressive);
@@ -454,60 +456,15 @@ JNI_FUNCTION_DECLARATION(jlong,
     rtc_config.certificates.push_back(certificate);
   }
 
-  PeerConnectionObserverJni* observer =
-      reinterpret_cast<PeerConnectionObserverJni*>(observer_p);
+  std::unique_ptr<MediaConstraintsInterface> constraints;
   if (j_constraints != nullptr) {
-    observer->SetConstraints(JavaToNativeMediaConstraints(jni, j_constraints));
-    CopyConstraintsIntoRtcConfiguration(observer->constraints(), &rtc_config);
+    constraints = JavaToNativeMediaConstraints(jni, j_constraints);
+    CopyConstraintsIntoRtcConfiguration(constraints.get(), &rtc_config);
   }
   rtc::scoped_refptr<PeerConnectionInterface> pc(
-      f->CreatePeerConnection(rtc_config, nullptr, nullptr, observer));
-  return jlongFromPointer(pc.release());
-}
-
-JNI_FUNCTION_DECLARATION(jlong,
-                         PeerConnectionFactory_createNativeVideoSource,
-                         JNIEnv* jni,
-                         jclass,
-                         jlong native_factory,
-                         jobject j_surface_texture_helper,
-                         jboolean is_screencast) {
-  OwnedFactoryAndThreads* factory =
-      reinterpret_cast<OwnedFactoryAndThreads*>(native_factory);
-  return jlongFromPointer(CreateVideoSource(
-      jni, factory->signaling_thread(), factory->worker_thread(),
-      j_surface_texture_helper, is_screencast));
-}
-
-JNI_FUNCTION_DECLARATION(jlong,
-                         PeerConnectionFactory_createNativeVideoTrack,
-                         JNIEnv* jni,
-                         jclass,
-                         jlong native_factory,
-                         jstring id,
-                         jlong native_source) {
-  rtc::scoped_refptr<PeerConnectionFactoryInterface> factory(
-      factoryFromJava(native_factory));
-  rtc::scoped_refptr<VideoTrackInterface> track(factory->CreateVideoTrack(
-      JavaToStdString(jni, id),
-      reinterpret_cast<VideoTrackSourceInterface*>(native_source)));
-  return jlongFromPointer(track.release());
-}
-
-JNI_FUNCTION_DECLARATION(
-    void,
-    PeerConnectionFactory_setNativeVideoHwAccelerationOptions,
-    JNIEnv* jni,
-    jclass,
-    jlong native_factory,
-    jobject local_egl_context,
-    jobject remote_egl_context) {
-  OwnedFactoryAndThreads* owned_factory =
-      reinterpret_cast<OwnedFactoryAndThreads*>(native_factory);
-  SetEglContext(jni, owned_factory->legacy_encoder_factory(),
-                local_egl_context);
-  SetEglContext(jni, owned_factory->legacy_decoder_factory(),
-                remote_egl_context);
+      f->CreatePeerConnection(rtc_config, nullptr, nullptr, observer.get()));
+  return jlongFromPointer(
+      new OwnedPeerConnection(pc, std::move(observer), std::move(constraints)));
 }
 
 }  // namespace jni
