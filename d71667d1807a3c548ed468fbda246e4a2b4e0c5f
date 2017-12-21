@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2455d20c_db8ed8c1",
+        "filename": "rtc_base/zero_memory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-21T10:18:44Z",
+      "side": 1,
+      "message": "This implementation looks good.",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e180786_e0300818",
+        "filename": "rtc_base/zero_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-21T10:18:44Z",
+      "side": 1,
+      "message": "Add an overload\n\n  void ExplicitZeroMemory(rtc::ArrayView\u003cT\u003e a);\n\nthat uses enable_if to only kick in if T is non-const and trivial? That way it\u0027ll be useful without being dangerous.",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "522ceb9f_349be51d",
+        "filename": "rtc_base/zero_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-21T10:18:44Z",
+      "side": 1,
+      "message": "I don\u0027t like this overload, because storing sensitive info in a std::string isn\u0027t safe---when you work with it, the string can reallocate its buffer, and it\u0027s under no obligation to securely wipe its old buffer.",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4967f15a_c1b284c6",
+        "filename": "rtc_base/zero_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-21T10:18:44Z",
+      "side": 1,
+      "message": "This overload is bad for the same reason the std::string overload is bad. If we want an rtc::Buffer that securely wipes its memory, we need to build that feature into rtc::Buffer.",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e1ce5f_ab5238fd",
+        "filename": "rtc_base/zero_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-21T10:18:44Z",
+      "side": 1,
+      "message": "I don\u0027t like this one either. :-) Here, the problem is that it\u0027s going to be too easy for the caller to not realize that it\u0027s a shallow as opposed to deep zeroing. Safer to force callers to do\n\n  ExplicitZeroMemory(\u0026x, sizeof(x));\n\nsince then there will be no confusion.",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2834fe26_b5fb3d93",
+        "filename": "rtc_base/zero_memory_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2017-12-21T10:18:44Z",
+      "side": 1,
+      "message": "Add a function that zeros a stack array that goes out of scope immediately after, so that the compiler is given an opportunity to optimize the zeroing out? It\u0027ll be useful not as a runtime test, but we can look at the generated code and verify that it seems to do the right thing.",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
