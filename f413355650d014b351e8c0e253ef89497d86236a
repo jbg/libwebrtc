@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "789677e9_765f03d9",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2017-12-21T12:02:23Z",
+      "side": 1,
+      "message": "Unrelated to your CL, I wonder if we should change this to post it as a task instead. Seems like that way we can get rid of a lock inside ProtectionBitrateCalculatorDefault.",
+      "range": {
+        "startLine": 1021,
+        "startChar": 2,
+        "endLine": 1021,
+        "endChar": 71
+      },
+      "revId": "f413355650d014b351e8c0e253ef89497d86236a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
