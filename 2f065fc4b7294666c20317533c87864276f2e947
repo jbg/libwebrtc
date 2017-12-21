@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d92d7bf_3cdf42f1",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-21T11:51:22Z",
+      "side": 0,
+      "message": "Why have you moved this?",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 63
+      },
+      "revId": "2f065fc4b7294666c20317533c87864276f2e947",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

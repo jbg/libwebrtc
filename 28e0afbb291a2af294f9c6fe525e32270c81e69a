@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46bc9d3f_a5150ac3",
+        "filename": "sdk/android/api/org/webrtc/NativePeerConnectionFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-21T11:51:22Z",
+      "side": 1,
+      "message": "This will force clients to include sdk/android/src/jni/pc/peerconnection.h. Maybe you should make a nested Java class here instead:\nstatic class PeerConnectionAndObserver {\n  long nativePeerConnection;\n  long nativePeerConnectionObserver;\n}",
+      "range": {
+        "startLine": 16,
+        "startChar": 26,
+        "endLine": 16,
+        "endChar": 50
+      },
+      "revId": "28e0afbb291a2af294f9c6fe525e32270c81e69a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbdac901_c6cc6cce",
+        "filename": "sdk/android/src/jni/pc/peerconnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2017-12-21T11:51:22Z",
+      "side": 1,
+      "message": "Why is this ctor definition in the header but not the other one?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 57
+      },
+      "revId": "28e0afbb291a2af294f9c6fe525e32270c81e69a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
