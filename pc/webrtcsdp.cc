@@ -44,7 +44,6 @@
 using cricket::AudioContentDescription;
 using cricket::Candidate;
 using cricket::Candidates;
-using cricket::ContentDescription;
 using cricket::ContentInfo;
 using cricket::CryptoParams;
 using cricket::DataContentDescription;
@@ -640,13 +639,9 @@ void CreateTracksFromSsrcInfos(const SsrcInfoVec& ssrc_infos,
 
 void GetMediaStreamLabels(const ContentInfo* content,
                           std::set<std::string>* labels) {
-  const MediaContentDescription* media_desc =
-      static_cast<const MediaContentDescription*>(
-          content->description);
-  const cricket::StreamParamsVec& streams =  media_desc->streams();
-  for (cricket::StreamParamsVec::const_iterator it = streams.begin();
-       it != streams.end(); ++it) {
-    labels->insert(it->sync_label);
+  for (const StreamParams& stream_params :
+       content->media_description()->streams()) {
+    labels->insert(stream_params.sync_label);
   }
 }
 
@@ -830,8 +825,7 @@ std::string SdpSerialize(const JsepSessionDescription& jdesc,
   int mline_index = -1;
   for (cricket::ContentInfos::const_iterator it = desc->contents().begin();
        it != desc->contents().end(); ++it) {
-    const MediaContentDescription* mdesc =
-      static_cast<const MediaContentDescription*>(it->description);
+    const MediaContentDescription* mdesc = it->media_description();
     std::vector<Candidate> candidates;
     GetCandidatesByMindex(jdesc, ++mline_index, &candidates);
     BuildMediaDescription(&*it, desc->GetTransportInfoByName(it->name),
@@ -1216,10 +1210,8 @@ void BuildMediaDescription(const ContentInfo* content_info,
   // http://google-styleguide.googlecode.com/svn/
   // trunk/cppguide.xml?showone=Streams#Streams
   std::ostringstream os;
-  const MediaContentDescription* media_desc =
-      static_cast<const MediaContentDescription*>(
-          content_info->description);
-  RTC_DCHECK(media_desc != NULL);
+  const MediaContentDescription* media_desc = content_info->media_description();
+  RTC_DCHECK(media_desc);
 
   int sctp_port = cricket::kSctpDefaultPort;
 
