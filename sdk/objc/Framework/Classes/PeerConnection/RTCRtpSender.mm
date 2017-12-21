@@ -11,6 +11,7 @@
 #import "RTCRtpSender+Private.h"
 
 #import "NSString+StdString.h"
+#import "RTCDtmfSender+Private.h"
 #import "RTCMediaStreamTrack+Private.h"
 #import "RTCRtpParameters+Private.h"
 #import "WebRTC/RTCLogging.h"
@@ -50,6 +51,15 @@
   if (!_nativeRtpSender->SetTrack(track.nativeTrack)) {
     RTCLogError(@"RTCRtpSender(%p): Failed to set track %@", self, track);
   }
+}
+
+- (RTCDtmfSender *)dtmfSender {
+  rtc::scoped_refptr<webrtc::DtmfSenderInterface> nativeDtmfSender(
+      _nativeRtpSender->GetDtmfSender());
+  if (nativeDtmfSender) {
+    return [[RTCDtmfSender alloc] initWithNativeDtmfSender:nativeDtmfSender];
+  }
+  return nil;
 }
 
 - (NSString *)description {
