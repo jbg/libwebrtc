@@ -37,4 +37,15 @@ webrtc::RtpParameters CreateRtpParametersWithOneEncoding() {
   return parameters;
 }
 
+webrtc::RtpParameters CreateRtpParametersWithEncodings(StreamParams sp) {
+  std::vector<uint32_t> primary_ssrcs;
+  sp.GetPrimarySsrcs(&primary_ssrcs);
+  int encoding_count = primary_ssrcs.size();
+
+  std::vector<webrtc::RtpEncodingParameters> encodings(encoding_count);
+  webrtc::RtpParameters parameters;
+  parameters.encodings = encodings;
+  return parameters;
+}
+
 };  // namespace cricket

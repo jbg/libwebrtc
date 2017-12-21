@@ -182,6 +182,7 @@ class DataEngineInterface {
 };
 
 webrtc::RtpParameters CreateRtpParametersWithOneEncoding();
+webrtc::RtpParameters CreateRtpParametersWithEncodings(StreamParams sp);
 
 }  // namespace cricket
 
