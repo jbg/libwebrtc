@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a3c77651_a8495d70",
+        "filename": "rtc_base/zero_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5889
+      },
+      "writtenOn": "2017-12-21T21:04:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e180786_e0300818",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "522ceb9f_349be51d",
         "filename": "rtc_base/zero_memory.h",
         "patchSetId": 1
@@ -50,6 +68,24 @@
       "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "747d7a1c_f3513dfd",
+        "filename": "rtc_base/zero_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5889
+      },
+      "writtenOn": "2017-12-21T21:04:48Z",
+      "side": 1,
+      "message": "Right, I removed this overload and the others below.",
+      "parentUuid": "522ceb9f_349be51d",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -101,6 +137,24 @@
       "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4abed8b_0aeddc91",
+        "filename": "rtc_base/zero_memory_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5889
+      },
+      "writtenOn": "2017-12-21T21:04:48Z",
+      "side": 1,
+      "message": "I did that, however for me (Ubuntu Linux), the call to ExplicitZeroMemory and the memset inside are always there, no matter if the __asm__ optimization breaking is in place or not. So the compiler (at least for me) doesn\u0027t seem to be able to optimize it away.",
+      "parentUuid": "2834fe26_b5fb3d93",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
