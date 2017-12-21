@@ -22,6 +22,30 @@
       "revId": "2f065fc4b7294666c20317533c87864276f2e947",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db1ebd78_914a4c32",
+        "filename": "sdk/android/src/jni/pc/peerconnectionfactory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2017-12-21T12:07:48Z",
+      "side": 0,
+      "message": "I moved in the beginning to make sure we never leak. Previously we leaked for example if we failed to generate certificate.",
+      "parentUuid": "7d92d7bf_3cdf42f1",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 63
+      },
+      "revId": "2f065fc4b7294666c20317533c87864276f2e947",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
