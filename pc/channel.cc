@@ -1421,8 +1421,7 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
   RTC_DCHECK(worker_thread() == rtc::Thread::Current());
   RTC_LOG(LS_INFO) << "Setting local voice description";
 
-  const AudioContentDescription* audio =
-      static_cast<const AudioContentDescription*>(content);
+  const AudioContentDescription* audio = content->as_audio();
   RTC_DCHECK(audio != NULL);
   if (!audio) {
     SafeSetError("Can't find audio content in local description.", error_desc);
@@ -1470,8 +1469,7 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
   RTC_DCHECK(worker_thread() == rtc::Thread::Current());
   RTC_LOG(LS_INFO) << "Setting remote voice description";
 
-  const AudioContentDescription* audio =
-      static_cast<const AudioContentDescription*>(content);
+  const AudioContentDescription* audio = content->as_audio();
   RTC_DCHECK(audio != NULL);
   if (!audio) {
     SafeSetError("Can't find audio content in remote description.", error_desc);
@@ -1700,8 +1698,7 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
   RTC_DCHECK(worker_thread() == rtc::Thread::Current());
   RTC_LOG(LS_INFO) << "Setting local video description";
 
-  const VideoContentDescription* video =
-      static_cast<const VideoContentDescription*>(content);
+  const VideoContentDescription* video = content->as_video();
   RTC_DCHECK(video != NULL);
   if (!video) {
     SafeSetError("Can't find video content in local description.", error_desc);
@@ -1749,8 +1746,7 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
   RTC_DCHECK(worker_thread() == rtc::Thread::Current());
   RTC_LOG(LS_INFO) << "Setting remote video description";
 
-  const VideoContentDescription* video =
-      static_cast<const VideoContentDescription*>(content);
+  const VideoContentDescription* video = content->as_video();
   RTC_DCHECK(video != NULL);
   if (!video) {
     SafeSetError("Can't find video content in remote description.", error_desc);
@@ -1901,8 +1897,7 @@ bool RtpDataChannel::SetLocalContent_w(const MediaContentDescription* content,
   RTC_DCHECK(worker_thread() == rtc::Thread::Current());
   RTC_LOG(LS_INFO) << "Setting local data description";
 
-  const DataContentDescription* data =
-      static_cast<const DataContentDescription*>(content);
+  const DataContentDescription* data = content->as_data();
   RTC_DCHECK(data != NULL);
   if (!data) {
     SafeSetError("Can't find data content in local description.", error_desc);
@@ -1953,8 +1948,7 @@ bool RtpDataChannel::SetRemoteContent_w(const MediaContentDescription* content,
   TRACE_EVENT0("webrtc", "RtpDataChannel::SetRemoteContent_w");
   RTC_DCHECK(worker_thread() == rtc::Thread::Current());
 
-  const DataContentDescription* data =
-      static_cast<const DataContentDescription*>(content);
+  const DataContentDescription* data = content->as_data();
   RTC_DCHECK(data != NULL);
   if (!data) {
     SafeSetError("Can't find data content in remote description.", error_desc);
