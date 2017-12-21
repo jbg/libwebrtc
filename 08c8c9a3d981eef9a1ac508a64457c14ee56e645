@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "215db830_687927fb",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCRtpSender.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-12-21T18:40:11Z",
+      "side": 1,
+      "message": "This will return a new Obj-C wrapper object every time it\u0027s called. That may be surprising. Would it be possible to create the wrapper object at RTCRtpSender init time?",
+      "revId": "08c8c9a3d981eef9a1ac508a64457c14ee56e645",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7044c53_cfb66f9b",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2017-12-21T18:40:11Z",
+      "side": 1,
+      "message": "The C++ documentation contains a lot more detail. Should it be pointed to, at least?",
+      "revId": "08c8c9a3d981eef9a1ac508a64457c14ee56e645",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
