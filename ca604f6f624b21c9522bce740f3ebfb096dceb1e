@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6d61889_c89bc3bd",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-12-21T14:19:41Z",
+      "side": 1,
+      "message": "Don\u0027t you have to move the fake network pipe out from test?",
+      "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38a220b7_3608d56b",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2017-12-21T14:19:41Z",
+      "side": 1,
+      "message": "WDYT about copying this logic to the SendDegradationProxy::SendRtp function, and then simply do nothing in this function if |degraded_send_transport_| is used.\n\nThis way transport_send_-\u003eOnSentPacket and video_send_delay_stats_-\u003eOnSentPacket is called as soon as the packet is sent (actually handed off to the FakeNetworkPipe), and the signal from the actual send event is intercepted and discarded.\n\nThis way you would not need |delay_timing_| and |delay_timing_window_|.",
+      "range": {
+        "startLine": 1410,
+        "startChar": 0,
+        "endLine": 1412,
+        "endChar": 72
+      },
+      "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
