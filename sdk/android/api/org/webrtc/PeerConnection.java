@@ -759,7 +759,7 @@ public class PeerConnection {
   }
 
   @CalledByNative
-  long getNativePeerConnection() {
+  public long getNativePeerConnection() {
     return nativePeerConnection;
   }
 
