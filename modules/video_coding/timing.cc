@@ -62,9 +62,6 @@ void VCMTiming::UpdateHistograms() const {
   if (elapsed_sec < metrics::kMinRunTimeInSeconds) {
     return;
   }
-  RTC_HISTOGRAM_COUNTS_100(
-      "WebRTC.Video.DecodedFramesPerSecond",
-      static_cast<int>((num_decoded_frames_ / elapsed_sec) + 0.5f));
   RTC_HISTOGRAM_PERCENTAGE(
       "WebRTC.Video.DelayedFramesToRenderer",
       num_delayed_decoded_frames_ * 100 / num_decoded_frames_);
