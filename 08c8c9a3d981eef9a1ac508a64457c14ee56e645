@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "91464b5c_91e0ec8c",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCRtpSender.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2017-12-22T09:26:51Z",
+      "side": 1,
+      "message": "Done.\nInitialized RTCDtmfSender once in constructor.",
+      "parentUuid": "215db830_687927fb",
+      "revId": "08c8c9a3d981eef9a1ac508a64457c14ee56e645",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7044c53_cfb66f9b",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "08c8c9a3d981eef9a1ac508a64457c14ee56e645",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854a3982_0e1b049b",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2017-12-22T09:26:51Z",
+      "side": 1,
+      "message": "Done.\nCopied more documentation from webrtc/src/api/dtmfsenderinterface.h",
+      "parentUuid": "d7044c53_cfb66f9b",
+      "revId": "08c8c9a3d981eef9a1ac508a64457c14ee56e645",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
