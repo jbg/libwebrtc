@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.view.Surface;
 import android.view.WindowManager;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -77,7 +76,7 @@ class Camera1Session implements CameraSession {
 
     try {
       camera.setPreviewTexture(surfaceTextureHelper.getSurfaceTexture());
-    } catch (IOException e) {
+    } catch (Throwable e) {
       camera.release();
       callback.onFailure(FailureType.ERROR, e.getMessage());
       return;
