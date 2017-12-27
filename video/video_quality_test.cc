@@ -51,6 +51,7 @@
 #include "test/statistics.h"
 #include "test/testsupport/fileutils.h"
 #include "test/testsupport/frame_writer.h"
+#include "test/testsupport/perf_test.h"
 #include "test/testsupport/test_artifacts.h"
 #include "test/vcm_capturer.h"
 #include "test/video_renderer.h"
@@ -796,37 +797,64 @@ class VideoAnalyzer : public PacketReceiver,
   void PrintResults() {
     StopMeasuringCpuProcessTime();
     rtc::CritScope crit(&comparison_lock_);
-    PrintResult("psnr", psnr_, " dB");
-    PrintResult("ssim", ssim_, " score");
-    PrintResult("sender_time", sender_time_, " ms");
-    PrintResult("receiver_time", receiver_time_, " ms");
-    PrintResult("total_delay_incl_network", end_to_end_, " ms");
-    PrintResult("time_between_rendered_frames", rendered_delta_, " ms");
-    PrintResult("encode_frame_rate", encode_frame_rate_, " fps");
-    PrintResult("encode_time", encode_time_ms_, " ms");
-    PrintResult("media_bitrate", media_bitrate_bps_, " bps");
-    PrintResult("fec_bitrate", fec_bitrate_bps_, " bps");
-    PrintResult("send_bandwidth", send_bandwidth_bps_, " bps");
+    webrtc::test::PrintResultMeanAndError(
+        "psnr", "", test_label_.c_str(), psnr_.Mean(),
+        psnr_.StandardDeviation(), "dB", false);
+    webrtc::test::PrintResultMeanAndError(
+        "ssim", "", test_label_.c_str(), ssim_.Mean(),
+        ssim_.StandardDeviation(), "score", false);
+    webrtc::test::PrintResultMeanAndError(
+        "sender_time", "", test_label_.c_str(), sender_time_.Mean(),
+        sender_time_.StandardDeviation(), "ms", false);
+    webrtc::test::PrintResultMeanAndError(
+        "receiver_time", "", test_label_.c_str(), receiver_time_.Mean(),
+        receiver_time_.StandardDeviation(), "ms", false);
+    webrtc::test::PrintResultMeanAndError(
+        "total_delay_incl_network", "", test_label_.c_str(), end_to_end_.Mean(),
+        end_to_end_.StandardDeviation(), "ms", false);
+    webrtc::test::PrintResultMeanAndError(
+        "time_between_rendered_frames", "", test_label_.c_str(),
+        rendered_delta_.Mean(), rendered_delta_.StandardDeviation(), "ms",
+        false);
+    webrtc::test::PrintResultMeanAndError(
+        "encode_frame_rate", "", test_label_.c_str(), encode_frame_rate_.Mean(),
+        encode_frame_rate_.StandardDeviation(), "fps", false);
+    webrtc::test::PrintResultMeanAndError(
+        "encode_time", "", test_label_.c_str(), encode_time_ms_.Mean(),
+        encode_time_ms_.StandardDeviation(), "ms", false);
+    webrtc::test::PrintResultMeanAndError(
+        "media_bitrate", "", test_label_.c_str(), media_bitrate_bps_.Mean(),
+        media_bitrate_bps_.StandardDeviation(), "bps", false);
+    webrtc::test::PrintResultMeanAndError(
+        "fec_bitrate", "", test_label_.c_str(), fec_bitrate_bps_.Mean(),
+        fec_bitrate_bps_.StandardDeviation(), "bps", false);
+    webrtc::test::PrintResultMeanAndError(
+        "send_bandwidth", "", test_label_.c_str(), send_bandwidth_bps_.Mean(),
+        send_bandwidth_bps_.StandardDeviation(), " bps", false);
 
     if (worst_frame_) {
-      printf("RESULT min_psnr: %s = %lf dB\n", test_label_.c_str(),
-             worst_frame_->psnr);
+      webrtc::test::PrintResult("min_psnr", "", test_label_.c_str(),
+                                worst_frame_->psnr, "dB", false);
     }
 
     if (receive_stream_ != nullptr) {
-      PrintResult("decode_time", decode_time_ms_, " ms");
+      webrtc::test::PrintResultMeanAndError(
+          "decode_time", "", test_label_.c_str(), decode_time_ms_.Mean(),
+          decode_time_ms_.StandardDeviation(), "ms", false);
     }
 
-    printf("RESULT dropped_frames: %s = %d frames\n", test_label_.c_str(),
-           dropped_frames_);
-    printf("RESULT cpu_usage: %s = %lf %%\n", test_label_.c_str(),
-           GetCpuUsagePercent());
+    webrtc::test::PrintResult("dropped_frames", "", test_label_.c_str(),
+                              dropped_frames_, "frames", false);
+    webrtc::test::PrintResult("cpu_usage", "", test_label_.c_str(),
+                              GetCpuUsagePercent(), "%", false);
 
 #if defined(WEBRTC_WIN)
       // On Linux and Mac in Resident Set some unused pages may be counted.
       // Therefore this metric will depend on order in which tests are run and
       // will be flaky.
-    PrintResult("memory_usage", memory_usage_, " bytes");
+    webrtc::test::PrintResultMeanAndError(
+        "memory_usage", "", memory_usage_.Mean(),
+        memory_usage_.StandardDeviation(), " bytes");
 #endif
 
     // Saving only the worst frame for manual analysis. Intention here is to
@@ -904,17 +932,6 @@ class VideoAnalyzer : public PacketReceiver,
     }
     end_to_end_.AddSample(comparison.render_time_ms - comparison.input_time_ms);
     encoded_frame_size_.AddSample(comparison.encoded_frame_size);
-  }
-
-  void PrintResult(const char* result_type,
-                   test::Statistics stats,
-                   const char* unit) {
-    printf("RESULT %s: %s = {%f, %f}%s\n",
-           result_type,
-           test_label_.c_str(),
-           stats.Mean(),
-           stats.StandardDeviation(),
-           unit);
   }
 
   void PrintSamplesToFile(void) {
