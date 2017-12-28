@@ -11,7 +11,6 @@
 package org.webrtc;
 
 import android.content.Context;
-import org.webrtc.Logging;
 
 /**
  * Class for storing the application context and retrieving it in a static context. Similar to
@@ -26,6 +25,7 @@ public class ContextUtils {
    * by PeerConnectionFactory.initialize. The application context must be set before creating
    * a PeerConnectionFactory and must not be modified while it is alive.
    */
+  @CalledByNative
   public static void initialize(Context applicationContext) {
     if (applicationContext == null) {
       throw new IllegalArgumentException(

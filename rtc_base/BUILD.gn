@@ -1143,6 +1143,14 @@ if (is_android) {
     jni_generator_include = "//rtc_base/jni/jni_generator_helper.h"
   }
 
+  generate_jni("generated_contextutils_jni") {
+    sources = [
+      "java/src/org/webrtc/ContextUtils.java",
+    ]
+    jni_package = ""
+    jni_generator_include = "//rtc_base/jni/jni_generator_helper.h"
+  }
+
   generate_jar_jni("generated_external_classes_jni") {
     classes = [
       "java/lang/Integer.class",

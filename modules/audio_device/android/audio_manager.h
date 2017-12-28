@@ -21,8 +21,7 @@
 #include "modules/audio_device/audio_device_config.h"
 #include "modules/audio_device/audio_device_generic.h"
 #include "modules/audio_device/include/audio_device_defines.h"
-#include "modules/utility/include/helpers_android.h"
-#include "modules/utility/include/jvm_android.h"
+#include "rtc_base/jni/scoped_java_ref.h"
 #include "rtc_base/thread_checker.h"
 
 namespace webrtc {
@@ -41,8 +40,8 @@ class AudioManager {
   // parts that are associated with this call.
   class JavaAudioManager {
    public:
-    JavaAudioManager(NativeRegistration* native_registration,
-                     std::unique_ptr<GlobalRef> audio_manager);
+    explicit JavaAudioManager(
+        const jni::ScopedJavaLocalRef<jobject>& audio_manager);
     ~JavaAudioManager();
 
     bool Init();
@@ -51,11 +50,9 @@ class AudioManager {
     bool IsDeviceBlacklistedForOpenSLESUsage();
 
    private:
-    std::unique_ptr<GlobalRef> audio_manager_;
-    jmethodID init_;
-    jmethodID dispose_;
-    jmethodID is_communication_mode_enabled_;
-    jmethodID is_device_blacklisted_for_open_sles_usage_;
+    JNIEnv* const env_;
+    rtc::ThreadChecker thread_checker_;
+    jni::ScopedJavaGlobalRef<jobject> audio_manager_;
   };
 
   AudioManager();
@@ -121,51 +118,28 @@ class AudioManager {
   // webrtc::kHighLatencyModeDelayEstimateInMilliseconds.
   int GetDelayEstimateInMilliseconds() const;
 
- private:
   // Called from Java side so we can cache the native audio parameters.
   // This method will be called by the WebRtcAudioManager constructor, i.e.
   // on the same thread that this object is created on.
-  static void JNICALL CacheAudioParameters(JNIEnv* env,
-                                           jobject obj,
-                                           jint sample_rate,
-                                           jint output_channels,
-                                           jint input_channels,
-                                           jboolean hardware_aec,
-                                           jboolean hardware_agc,
-                                           jboolean hardware_ns,
-                                           jboolean low_latency_output,
-                                           jboolean low_latency_input,
-                                           jboolean pro_audio,
-                                           jint output_buffer_size,
-                                           jint input_buffer_size,
-                                           jlong native_audio_manager);
-  void OnCacheAudioParameters(JNIEnv* env,
-                              jint sample_rate,
-                              jint output_channels,
-                              jint input_channels,
-                              jboolean hardware_aec,
-                              jboolean hardware_agc,
-                              jboolean hardware_ns,
-                              jboolean low_latency_output,
-                              jboolean low_latency_input,
-                              jboolean pro_audio,
-                              jint output_buffer_size,
-                              jint input_buffer_size);
+  void CacheAudioParameters(JNIEnv* env,
+                            const jni::JavaParamRef<jobject>& j_caller,
+                            jint sample_rate,
+                            jint output_channels,
+                            jint input_channels,
+                            jboolean hardware_aec,
+                            jboolean hardware_agc,
+                            jboolean hardware_ns,
+                            jboolean low_latency_output,
+                            jboolean low_latency_input,
+                            jboolean pro_audio,
+                            jint output_buffer_size,
+                            jint input_buffer_size);
 
+ private:
   // Stores thread ID in the constructor.
   // We can then use ThreadChecker::CalledOnValidThread() to ensure that
   // other methods are called from the same thread.
   rtc::ThreadChecker thread_checker_;
-
-  // Calls AttachCurrentThread() if this thread is not attached at construction.
-  // Also ensures that DetachCurrentThread() is called at destruction.
-  AttachCurrentThreadIfNeeded attach_thread_if_needed_;
-
-  // Wraps the JNI interface pointer and methods associated with it.
-  std::unique_ptr<JNIEnvironment> j_environment_;
-
-  // Contains factory method for creating the Java object.
-  std::unique_ptr<NativeRegistration> j_native_registration_;
 
   // Wraps the Java specific parts of the AudioManager.
   std::unique_ptr<AudioManager::JavaAudioManager> j_audio_manager_;

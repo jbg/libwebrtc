@@ -11,11 +11,7 @@ import("../../webrtc.gni")
 rtc_static_library("utility") {
   sources = [
     "include/audio_frame_operations.h",
-    "include/helpers_android.h",
-    "include/jvm_android.h",
     "include/process_thread.h",
-    "source/helpers_android.cc",
-    "source/jvm_android.cc",
     "source/process_thread_impl.cc",
     "source/process_thread_impl.h",
   ]
@@ -41,6 +37,17 @@ rtc_static_library("utility") {
     "../../system_wrappers",
     "../media_file",
   ]
+
+  if (is_android) {
+    sources += [
+      "include/jvm_android.h",
+      "source/jvm_android.cc",
+    ]
+    deps += [
+      "../../rtc_base:base_jni",
+      "../../rtc_base:generated_contextutils_jni",
+    ]
+  }
 }
 
 rtc_source_set("mock_process_thread") {
