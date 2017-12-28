@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89f1386a_08460807",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-12-28T10:29:37Z",
+      "side": 1,
+      "message": "nit: s/process/Process",
+      "range": {
+        "startLine": 97,
+        "startChar": 69,
+        "endLine": 97,
+        "endChar": 0
+      },
+      "revId": "888598ce4ca81655a0370c48a8c9d43a22442faf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8c25f99_419ef30d",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-12-28T10:29:37Z",
+      "side": 1,
+      "message": "Maybe move the upper bound to a variable for readability.\nAlso prefer pre-increment operator, and avoid Yoda conditions, just for consistency.",
+      "range": {
+        "startLine": 100,
+        "startChar": 67,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "888598ce4ca81655a0370c48a8c9d43a22442faf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54a16c2_b716d6da",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-12-28T10:29:37Z",
+      "side": 1,
+      "message": "Looks like the +265 is a noop?",
+      "range": {
+        "startLine": 114,
+        "startChar": 66,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "888598ce4ca81655a0370c48a8c9d43a22442faf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2af5d2b3_2c2a9ac5",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2017-12-28T10:29:37Z",
+      "side": 1,
+      "message": "Probably easier to read as\n\nif (next_scale !\u003d 0) {\n  last_scale \u003d next_scale;\n}",
+      "revId": "888598ce4ca81655a0370c48a8c9d43a22442faf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
