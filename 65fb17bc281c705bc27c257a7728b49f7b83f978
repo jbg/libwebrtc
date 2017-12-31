@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9a94ed4_a5cff401",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-31T12:55:48Z",
+      "side": 1,
+      "message": "Should... implies this function returns true or false; _ChooseCQMode is a better name IMO.",
+      "range": {
+        "startLine": 406,
+        "startChar": 4,
+        "endLine": 406,
+        "endChar": 15
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67896984_1ae716fb",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-31T12:55:48Z",
+      "side": 1,
+      "message": "Aren\u0027t dry_run \u003d\u003d true and commit_queue \u003d\u003d 1 the same thing? You should only need one var here.\n\nOr wait, actually, maybe the confusion here is between a CQ dry run and a dry run of this script. Let\u0027s try to avoid using the term CQ dry run here, then.\n\nWhat if you remove the dry_run variable from _UploadCl and move it to the caller instead, e.g.\n\ncommit_queue_mode \u003d _ChooseCQMode(...)\n...\nif not dry_run:\n  _UploadCl(commit_queue_mode)\n\nand change the comment for 1: below to \"Run trybots but do not commit\".",
+      "range": {
+        "startLine": 414,
+        "startChar": 14,
+        "endLine": 414,
+        "endChar": 38
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da16ac0b_eb7dc555",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2017-12-31T12:55:48Z",
+      "side": 1,
+      "message": "Note for future: don\u0027t use default args if there isn\u0027t an immediate need for them.",
+      "range": {
+        "startLine": 414,
+        "startChar": 23,
+        "endLine": 414,
+        "endChar": 37
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
