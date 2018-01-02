@@ -164,6 +164,30 @@
       "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7226d16c_887becc3",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2018-01-02T10:56:49Z",
+      "side": 1,
+      "message": "That established pattern is wrong, in that case. It\u0027s one thing if it\u0027s an inheritance hierarchy (where we should obey the Liskov Substitution Principle), but these are just functions. Please remove the variable in the other places it\u0027s unused.\n\nRenaming dry_run is acceptable, or you can just follow my suggestion. I prefer my suggestion since --dry-run is pretty established among our scripts.",
+      "parentUuid": "95f808cf_a7bf1789",
+      "range": {
+        "startLine": 414,
+        "startChar": 14,
+        "endLine": 414,
+        "endChar": 38
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
