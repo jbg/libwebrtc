@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bac61996_d1975f62",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCDtmfSender.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-02T11:53:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "207d94ba_cbf5ad22",
+      "range": {
+        "startLine": 29,
+        "startChar": 19,
+        "endLine": 29,
+        "endChar": 43
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4b44bef_6370ca48",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCDtmfSender.mm",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "54c15715_de6feeb5",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCDtmfSender.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-02T11:53:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b44bef_6370ca48",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 48
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14c0e871_b65a3a1e",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25629944_e96eafc7",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-02T11:53:26Z",
+      "side": 1,
+      "message": "I\u0027m not sure, if I\u0027ve correctly understood what you\u0027ve asked here, but I\u0027ve moved this into \"RTCDtmfSender+Private.h\". This resulted in hiding `@interface RTCDtmfSender` from SDK and now `RTCDtmfSender` is exposed as protocol from `RTCRtpSender`.\nBTW, the same \"pattern\": protocol + interface in public header is also presented in `RTCRtpSender` \u0026 `RTCRtpReceived`. And if I\u0027ve got you correctly they also might be moved (as separate merge request) to corresponding private header and exposed as protocol in SDK.",
+      "parentUuid": "14c0e871_b65a3a1e",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
