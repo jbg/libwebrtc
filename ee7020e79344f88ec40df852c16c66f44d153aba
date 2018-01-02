@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "207d94ba_cbf5ad22",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCDtmfSender.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-02T09:30:37Z",
+      "side": 1,
+      "message": "I would prefer:\nint durationMs \u003d static_cast\u003cint\u003e(duration * rtc::kNumMillisecsPerSec);\nand similar below.",
+      "range": {
+        "startLine": 29,
+        "startChar": 19,
+        "endLine": 29,
+        "endChar": 43
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4b44bef_6370ca48",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCDtmfSender.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-02T09:30:37Z",
+      "side": 1,
+      "message": "Here I would prefer:\nreturn static_cast\u003cNSTimeInterval\u003e(_nativeDtmfSender-\u003eduration()) / rtc::kNumMillisecsPerSec;",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 48
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14c0e871_b65a3a1e",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-02T09:30:37Z",
+      "side": 1,
+      "message": "Can we move this to RTCDtmfSender+Private.h instead?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
