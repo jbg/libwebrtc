@@ -31,6 +31,7 @@
 #endif
 #import <WebRTC/RTCFieldTrials.h>
 #import <WebRTC/RTCFileLogger.h>
+#import <WebRTC/RTCCallbackLogger.h>
 #import <WebRTC/RTCIceCandidate.h>
 #import <WebRTC/RTCIceServer.h>
 #import <WebRTC/RTCIntervalRange.h>
