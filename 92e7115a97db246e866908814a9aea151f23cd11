@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36a8c358_e51f654d",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-01-02T09:43:16Z",
+      "side": 1,
+      "message": "File naming might be misleading. wdyt about renaming:\naudio_processing_fuzzer --\u003e audio_processing_fuzzer_helper\naudio_processing_fuzzer_configs --\u003e audio_processing_configs_fuzzer",
+      "range": {
+        "startLine": 425,
+        "startChar": 5,
+        "endLine": 425,
+        "endChar": 28
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "318e1fdc_6addc17a",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-01-02T09:43:16Z",
+      "side": 1,
+      "message": "aecm --\u003e aec2",
+      "range": {
+        "startLine": 462,
+        "startChar": 8,
+        "endLine": 462,
+        "endChar": 9
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "070aef30_ad76fe1b",
+        "filename": "test/fuzzers/audio_processing_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-01-02T09:43:16Z",
+      "side": 1,
+      "message": "We seem to allow stereo on the next line, is this comment still accurate?",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f885cd0_6cd93aa4",
+        "filename": "test/fuzzers/audio_processing_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-01-02T09:43:16Z",
+      "side": 1,
+      "message": "The intermingled float_frame and fixed_frame handling is somewhat confusing, consider putting them in separate functions and having a single check (like below).\nThis also avoids doing unnecessary work, which is good since this code runs on every while loop iteration of every FuzzAudioProcessing call.\n\nif (is_float) {\n  GenerateFloatFrame(input_rate, output_rate, fuzz_data, \u0026fixed_frame);\n  apm_return_code \u003d apm-\u003eProcessStream(...);\n} else {\n  // ...\n}",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
