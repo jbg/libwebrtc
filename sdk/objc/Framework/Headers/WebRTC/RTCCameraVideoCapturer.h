@@ -38,9 +38,10 @@ RTC_EXPORT
 // output. Otherwise, the format returned by `preferredOutputPixelFormat` will be used.
 - (void)startCaptureWithDevice:(AVCaptureDevice *)device
                         format:(AVCaptureDeviceFormat *)format
-                           fps:(NSInteger)fps;
+                           fps:(NSInteger)fps
+             completionHandler:(nullable void (^)(NSError*))completionHandler;
 // Stops the capture session asynchronously.
-- (void)stopCapture;
+- (void)stopCaptureWithCompletionHandler:(nullable void (^)(NSError*))completionHandler;
 
 @end
 
