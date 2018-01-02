@@ -650,6 +650,8 @@ def CommonChecks(input_api, output_api):
   """Checks common to both upload and commit."""
   results = []
   # Filter out files that are in objc or ios dirs from being cpplint-ed since
+  results.extend(CheckOrphanHeaders(input_api, output_api))
+  return results
   # they do not follow C++ lint rules.
   black_list = input_api.DEFAULT_BLACK_LIST + (
     r".*\bobjc[\\\/].*",
@@ -756,7 +758,7 @@ def CheckOrphanHeaders(input_api, output_api):
     from check_orphan_headers import IsHeaderInBuildGn
 
   for f in input_api.AffectedSourceFiles(input_api.FilterSourceFile):
-    if f.LocalPath().endswith('.h') and f.Action() == 'A':
+    if f.LocalPath().endswith('.h'):
       file_path = os.path.abspath(f.LocalPath())
       root_dir = os.getcwd()
       gn_file_path = GetBuildGnPathFromFilePath(file_path, os.path.exists,
