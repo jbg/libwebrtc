@@ -140,6 +140,30 @@
       "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95f808cf_a7bf1789",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-01-02T08:25:32Z",
+      "side": 1,
+      "message": "What may help is to rename the `dry_run` parameter everywhere, but not sure what name. \"skip_commit\"? \"do_commit\"?",
+      "parentUuid": "1f191b1f_a65580fa",
+      "range": {
+        "startLine": 414,
+        "startChar": 14,
+        "endLine": 414,
+        "endChar": 38
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
