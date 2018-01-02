@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f615976_9f1b903b",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-02T09:37:54Z",
+      "side": 1,
+      "message": "This has to be passed in as a pointer according to the style guide.",
+      "range": {
+        "startLine": 17,
+        "startChar": 18,
+        "endLine": 17,
+        "endChar": 75
+      },
+      "revId": "454461da5eefbb0156cdc4d82c4db7c64e4e9753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be6aad93_ff6db174",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-02T09:37:54Z",
+      "side": 1,
+      "message": "Add \"// namespace\" here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "454461da5eefbb0156cdc4d82c4db7c64e4e9753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
