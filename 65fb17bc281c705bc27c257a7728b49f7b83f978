@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cb85c610_9a5634db",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-01-02T08:20:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d9a94ed4_a5cff401",
+      "range": {
+        "startLine": 406,
+        "startChar": 4,
+        "endLine": 406,
+        "endChar": 15
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67896984_1ae716fb",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 4
@@ -68,6 +92,54 @@
       "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4db213_66c8abf6",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-01-02T08:20:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "da16ac0b_eb7dc555",
+      "range": {
+        "startLine": 414,
+        "startChar": 23,
+        "endLine": 414,
+        "endChar": 37
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f191b1f_a65580fa",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-01-02T08:20:04Z",
+      "side": 1,
+      "message": "I agree with your suggested fix, but this program has an established pattern of passing this dry_run argument to a function (it\u0027s never used directly), so it would still be confusing in other places, possibly even more so due to inconsistency.",
+      "parentUuid": "67896984_1ae716fb",
+      "range": {
+        "startLine": 414,
+        "startChar": 14,
+        "endLine": 414,
+        "endChar": 38
+      },
+      "revId": "65fb17bc281c705bc27c257a7728b49f7b83f978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
