@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a34d6d50_6bccf0ac",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-02T10:43:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f615976_9f1b903b",
+      "range": {
+        "startLine": 17,
+        "startChar": 18,
+        "endLine": 17,
+        "endChar": 75
+      },
+      "revId": "454461da5eefbb0156cdc4d82c4db7c64e4e9753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be6aad93_ff6db174",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "454461da5eefbb0156cdc4d82c4db7c64e4e9753",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dec873bd_0ca4dcaa",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactoryOptions.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-02T10:43:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be6aad93_ff6db174",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "454461da5eefbb0156cdc4d82c4db7c64e4e9753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
