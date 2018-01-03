@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "297a25c6_674729bc",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-01-03T09:15:04Z",
+      "side": 1,
+      "message": "style nit: scaling_list_count \nOnly method names are normally camel case.",
+      "range": {
+        "startLine": 100,
+        "startChar": 63,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "e8ac803e840b5ca07cf2668693066e04c16b20bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b403ee51_bfadc039",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-01-03T09:15:04Z",
+      "side": 1,
+      "message": "nit: space after if\ntry running \"git cl format\" to have this be auto formatted according to style guide",
+      "range": {
+        "startLine": 118,
+        "startChar": 31,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "e8ac803e840b5ca07cf2668693066e04c16b20bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
