@@ -90,6 +90,19 @@ if (rtc_include_internal_audio_device && is_ios) {
   }
 }
 
+if (is_android) {
+  generate_jni("generated_voiceengine_jni") {
+    sources = [
+      "android/java/src/org/webrtc/voiceengine/BuildInfo.java",
+      "android/java/src/org/webrtc/voiceengine/WebRtcAudioManager.java",
+      "android/java/src/org/webrtc/voiceengine/WebRtcAudioRecord.java",
+      "android/java/src/org/webrtc/voiceengine/WebRtcAudioTrack.java",
+    ]
+    jni_package = ""
+    jni_generator_include = "//rtc_base/jni/jni_generator_helper.h"
+  }
+}
+
 rtc_source_set("audio_device_generic") {
   visibility = [
     ":audio_device",
@@ -173,6 +186,10 @@ rtc_source_set("audio_device_generic") {
         "android/opensles_player.h",
         "android/opensles_recorder.cc",
         "android/opensles_recorder.h",
+      ]
+      deps += [
+        ":generated_voiceengine_jni",
+        "../../rtc_base:base_jni",
       ]
       libs = [
         "log",

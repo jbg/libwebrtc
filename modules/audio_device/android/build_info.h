@@ -15,7 +15,7 @@
 #include <memory>
 #include <string>
 
-#include "modules/utility/include/jvm_android.h"
+#include "rtc_base/thread_checker.h"
 
 namespace webrtc {
 
@@ -39,8 +39,6 @@ enum SdkCode {
 // for device and Android build information.
 // The calling thread is attached to the JVM at construction if needed and a
 // valid Java environment object is also created.
-// All Get methods must be called on the creating thread. If not, the code will
-// hit RTC_DCHECKs when calling JNIEnvironment::JavaToStdString().
 class BuildInfo {
  public:
   BuildInfo();
@@ -63,21 +61,8 @@ class BuildInfo {
   SdkCode GetSdkVersion();
 
  private:
-  // Helper method which calls a static getter method with |name| and returns
-  // a string from Java.
-  std::string GetStringFromJava(const char* name);
-
-  // Ensures that this class can access a valid JNI interface pointer even
-  // if the creating thread was not attached to the JVM.
-  AttachCurrentThreadIfNeeded attach_thread_if_needed_;
-
-  // Provides access to the JNIEnv interface pointer and the JavaToStdString()
-  // method which is used to translate Java strings to std strings.
-  std::unique_ptr<JNIEnvironment> j_environment_;
-
-  // Holds the jclass object and provides access to CallStaticObjectMethod().
-  // Used by GetStringFromJava() during construction only.
-  JavaClass j_build_info_;
+  JNIEnv* const env_;
+  rtc::ThreadChecker thread_checker_;
 };
 
 }  // namespace webrtc
