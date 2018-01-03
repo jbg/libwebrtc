@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e26bfb70_28bda7cb",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-03T09:18:25Z",
+      "side": 1,
+      "message": "Why is the completion handler taking an error parameter if there is no possible error path?",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 89
+      },
+      "revId": "9a4c0f7966ecae8c28213da2b1e60338a87294d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ddaba44_85a26a1b",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCameraVideoCapturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-03T09:18:25Z",
+      "side": 1,
+      "message": "Please also add a backwards compatible method with the old signature that passes nil as the completion handler, so existing clients are not broken.",
+      "revId": "9a4c0f7966ecae8c28213da2b1e60338a87294d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c26af0f_7155cfad",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCameraVideoCapturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-03T09:18:25Z",
+      "side": 1,
+      "message": "Same for this method.",
+      "revId": "9a4c0f7966ecae8c28213da2b1e60338a87294d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
