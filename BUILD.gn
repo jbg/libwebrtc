@@ -244,6 +244,7 @@ config("common_config") {
         "-Wthread-safety",
         "-Winconsistent-missing-override",
         "-Wundef",
+        "-Wunused-result",
       ]
 
       # use_xcode_clang only refers to the iOS toolchain, host binaries use
