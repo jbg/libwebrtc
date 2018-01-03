@@ -61,8 +61,10 @@ float PeakLevel(const AudioBuffer& audio) {
   for (size_t k = 0; k < audio.num_channels(); ++k) {
     auto* channel_peak_level = std::max_element(
         audio.channels_const_f()[k],
-        audio.channels_const_f()[k] + audio.num_frames(),
-        [](float a, float b) { return std::abs(a) < std::abs(b); });
+        audio.channels_const_f()[k] + audio.num_frames(), [](float a, float b) {
+          RTC_CHECK(!std::isnan(b));
+          return std::abs(a) < std::abs(b);
+        });
     peak_level = std::max(*channel_peak_level, peak_level);
   }
   return peak_level;
