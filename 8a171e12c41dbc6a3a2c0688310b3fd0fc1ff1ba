@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38bdf242_bbc214be",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-04T13:39:42Z",
+      "side": 1,
+      "message": "nit: please keep these in alphabetic order",
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c34aa16_f353d51f",
+        "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-04T13:39:42Z",
+      "side": 1,
+      "message": "It\u0027s 2018! 🎉🎇 (applies to all new files in the CL)",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c67b7ec6_a247ec23",
+        "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-04T13:39:42Z",
+      "side": 1,
+      "message": "Is it safe to call the callback_handler_ on the same thread calling OnLogMessage? If the callback handler is potentially writing to some slow medium, perhaps it would be good to dispatch_async to a serial queue here.",
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94836213_97c5506e",
+        "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-04T13:39:42Z",
+      "side": 1,
+      "message": "This parameter seems to be called `line`, `message`, and `stats` in different contexts. Perhaps pick one for consistency?",
+      "range": {
+        "startLine": 34,
+        "startChar": 38,
+        "endLine": 34,
+        "endChar": 43
+      },
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4f9a237_fea3ec76",
+        "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-04T13:39:42Z",
+      "side": 1,
+      "message": "There is a function `RTCGetNativeLoggingSeverity` in `RTCLogging.mm`. Maybe that function could be exposed in the `RTCLogging.h` header and reused across RTCFileLogger and RTCCallbackLogger to avoid the duplication.",
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
