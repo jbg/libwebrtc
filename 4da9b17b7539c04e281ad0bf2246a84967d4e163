@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57adf842_a4b8726b",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-04T08:00:37Z",
+      "side": 1,
+      "message": "Isn\u0027t this diagnostic enabled by default (https://clang.llvm.org/docs/DiagnosticsReference.html#wunused-result)?",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 26
+      },
+      "revId": "4da9b17b7539c04e281ad0bf2246a84967d4e163",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
