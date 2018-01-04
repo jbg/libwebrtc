@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "312269ec_2c6eb6d4",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-01-04T17:54:15Z",
+      "side": 1,
+      "message": "By supporting multiple encodings here, if somebody using simulcast calls getRtpParameters/setRtpParameters then ValidateRtpParameters will return false:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtcvideoengine.cc?l\u003d1812\n\nI don\u0027t know if anybody using simulcast is calling this currently, so it might not be completely necessary to make this change. Are you planning on changing this with when you add more support for multiple encodings in another CL? Or is it best to add this change now now? Maybe changing the check to rtp_parameters.encodings.size() !\u003d rtp_parameters_.encodings.size(). \n\nI think you\u0027d have to update the unit test too if you made this change.",
+      "range": {
+        "startLine": 1557,
+        "startChar": 6,
+        "endLine": 1557,
+        "endChar": 21
+      },
+      "revId": "102c7c0b1014ac661ae9bb484bf1db183649cea4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
