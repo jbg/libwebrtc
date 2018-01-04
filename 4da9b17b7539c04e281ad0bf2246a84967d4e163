@@ -22,6 +22,30 @@
       "revId": "4da9b17b7539c04e281ad0bf2246a84967d4e163",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e8b27fc_0ac8fccd",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5028
+      },
+      "writtenOn": "2018-01-04T08:05:32Z",
+      "side": 1,
+      "message": "Looks like it is, wasn\u0027t aware of it. Thanks!",
+      "parentUuid": "57adf842_a4b8726b",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 26
+      },
+      "revId": "4da9b17b7539c04e281ad0bf2246a84967d4e163",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
