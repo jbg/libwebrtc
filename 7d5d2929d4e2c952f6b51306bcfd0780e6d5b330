@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46251051_1f95e759",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2571,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-01-04T18:32:57Z",
+      "side": 1,
+      "message": "CreateEncoderStreams is overridden in other places as well. I don\u0027t know if you want to do this now, but we\u0027ll probably have to add the active field in those places too. It\u0027s done in this test code:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/test/encoder_settings.cc?type\u003dcs\u0026q\u003dwebrtc/test/encoder_settings.cc\u0026l\u003d64\n\nAlso I think it\u0027s overridden in a downstream client.\n\nI can also make these changes if I break any tests due to changes I make in lower layers. Either way.",
+      "range": {
+        "startLine": 2571,
+        "startChar": 55,
+        "endLine": 2571,
+        "endChar": 75
+      },
+      "revId": "7d5d2929d4e2c952f6b51306bcfd0780e6d5b330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7956e8e_b19a2cce",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2600,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-01-04T18:32:57Z",
+      "side": 1,
+      "message": "Are you thinking of filling in true as a short term hard coded solution? I think that makes sense so I can make the changes in the lower layers. Maybe add a TODO?\n\nTo connect things I added simulcast_layers to the VideoEncoderConfig, so you can update which simulcast layers are active in CreateVideoEncoderConfig. Then the encoder_config passed into this function can be used to update the streams.active properly. I think you saw that CL, I just wanted to make sure you knew that\u0027s why I added that simulcast_layers in there.",
+      "revId": "7d5d2929d4e2c952f6b51306bcfd0780e6d5b330",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
