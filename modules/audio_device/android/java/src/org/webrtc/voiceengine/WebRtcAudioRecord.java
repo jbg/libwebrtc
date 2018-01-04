@@ -173,7 +173,7 @@ public class WebRtcAudioRecord {
   }
 
   private int initRecording(int sampleRate, int channels) {
-    Logging.d(TAG, "initRecording(sampleRate=" + sampleRate + ", channels=" + channels + ")");
+    Logging.d(TAG, "___initRecording(sampleRate=" + sampleRate + ", channels=" + channels + ")");
     if (audioRecord != null) {
       reportWebRtcAudioRecordInitError("InitRecording called twice without StopRecording.");
       return -1;
@@ -223,6 +223,7 @@ public class WebRtcAudioRecord {
     }
     logMainParameters();
     logMainParametersExtended();
+    Logging.d(TAG, "___initRecording");
     return framesPerBuffer;
   }
 
