@@ -140,6 +140,30 @@
       "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80f39949_9101c40c",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCDtmfSender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-05T10:46:54Z",
+      "side": 1,
+      "message": "Yes, you did what I wanted. I want to hide `@interface RTCDtmfSender` from the SDK since it\u0027s a private implementation detail.\nIf the same \u0027pattern\u0027 is used in other files, they should also be fixed so that any private class is hidden from the SDK.",
+      "parentUuid": "25629944_e96eafc7",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "ee7020e79344f88ec40df852c16c66f44d153aba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
