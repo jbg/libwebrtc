@@ -11,6 +11,7 @@
 #include "ortc/ortcrtpreceiveradapter.h"
 
 #include <utility>
+#include <vector>
 
 #include "media/base/mediaconstants.h"
 #include "ortc/rtptransportadapter.h"
@@ -148,18 +149,18 @@ void OrtcRtpReceiverAdapter::MaybeRecreateInternalReceiver() {
     // SSRC not changing; nothing to do.
     return;
   }
+  std::vector<rtc::scoped_refptr<MediaStreamInterface>> receiver_streams;
   internal_receiver_ = nullptr;
   switch (kind_) {
     case cricket::MEDIA_TYPE_AUDIO:
-      internal_receiver_ =
-          new AudioRtpReceiver(rtc::CreateRandomUuid(), {}, ssrc,
-                               rtp_transport_controller_->voice_channel());
+      internal_receiver_ = new rtc::RefCountedObject<AudioRtpReceiver>(
+          rtp_transport_controller_->worker_thread(), rtc::CreateRandomUuid(),
+          receiver_streams, ssrc, rtp_transport_controller_->voice_channel());
       break;
     case cricket::MEDIA_TYPE_VIDEO:
-      internal_receiver_ =
-          new VideoRtpReceiver(rtc::CreateRandomUuid(), {},
-                               rtp_transport_controller_->worker_thread(), ssrc,
-                               rtp_transport_controller_->video_channel());
+      internal_receiver_ = new rtc::RefCountedObject<VideoRtpReceiver>(
+          rtp_transport_controller_->worker_thread(), rtc::CreateRandomUuid(),
+          receiver_streams, ssrc, rtp_transport_controller_->video_channel());
       break;
     case cricket::MEDIA_TYPE_DATA:
       RTC_NOTREACHED();

@@ -213,9 +213,9 @@ class BaseChannel
     transport_name_ = transport_name;
   }
 
- protected:
   virtual MediaChannel* media_channel() const { return media_channel_.get(); }
 
+ protected:
   void SetTransports_n(DtlsTransportInternal* rtp_dtls_transport,
                        DtlsTransportInternal* rtcp_dtls_transport,
                        rtc::PacketTransportInternal* rtp_packet_transport,
@@ -490,21 +490,14 @@ class VoiceChannel : public BaseChannel {
   // The valid value for the |event| are 0 which corresponding to DTMF
   // event 0-9, *, #, A-D.
   bool InsertDtmf(uint32_t ssrc, int event_code, int duration);
-  bool SetOutputVolume(uint32_t ssrc, double volume);
   void SetRawAudioSink(uint32_t ssrc,
                        std::unique_ptr<webrtc::AudioSinkInterface> sink);
   webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const;
   bool SetRtpSendParameters(uint32_t ssrc,
                             const webrtc::RtpParameters& parameters);
-  webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const;
-  bool SetRtpReceiveParameters(uint32_t ssrc,
-                               const webrtc::RtpParameters& parameters);
 
   // Get statistics about the current media session.
   bool GetStats(VoiceMediaInfo* stats);
-
-  std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const;
-  std::vector<webrtc::RtpSource> GetSources_w(uint32_t ssrc) const;
 
   // Monitoring functions
   sigslot::signal2<VoiceChannel*, const std::vector<ConnectionInfo>&>

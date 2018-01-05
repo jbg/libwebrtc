@@ -1257,12 +1257,6 @@ bool VoiceChannel::InsertDtmf(uint32_t ssrc,
       Bind(&VoiceChannel::InsertDtmf_w, this, ssrc, event_code, duration));
 }
 
-bool VoiceChannel::SetOutputVolume(uint32_t ssrc, double volume) {
-  return InvokeOnWorker<bool>(
-      RTC_FROM_HERE,
-      Bind(&VoiceMediaChannel::SetOutputVolume, media_channel(), ssrc, volume));
-}
-
 void VoiceChannel::SetRawAudioSink(
     uint32_t ssrc,
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
@@ -1296,44 +1290,9 @@ bool VoiceChannel::SetRtpSendParameters_w(uint32_t ssrc,
   return media_channel()->SetRtpSendParameters(ssrc, parameters);
 }
 
-webrtc::RtpParameters VoiceChannel::GetRtpReceiveParameters(
-    uint32_t ssrc) const {
-  return worker_thread()->Invoke<webrtc::RtpParameters>(
-      RTC_FROM_HERE,
-      Bind(&VoiceChannel::GetRtpReceiveParameters_w, this, ssrc));
-}
-
-webrtc::RtpParameters VoiceChannel::GetRtpReceiveParameters_w(
-    uint32_t ssrc) const {
-  return media_channel()->GetRtpReceiveParameters(ssrc);
-}
-
-bool VoiceChannel::SetRtpReceiveParameters(
-    uint32_t ssrc,
-    const webrtc::RtpParameters& parameters) {
-  return InvokeOnWorker<bool>(
-      RTC_FROM_HERE,
-      Bind(&VoiceChannel::SetRtpReceiveParameters_w, this, ssrc, parameters));
-}
-
-bool VoiceChannel::SetRtpReceiveParameters_w(uint32_t ssrc,
-                                             webrtc::RtpParameters parameters) {
-  return media_channel()->SetRtpReceiveParameters(ssrc, parameters);
-}
-
 bool VoiceChannel::GetStats(VoiceMediaInfo* stats) {
   return InvokeOnWorker<bool>(RTC_FROM_HERE, Bind(&VoiceMediaChannel::GetStats,
                                                   media_channel(), stats));
-}
-
-std::vector<webrtc::RtpSource> VoiceChannel::GetSources(uint32_t ssrc) const {
-  return worker_thread()->Invoke<std::vector<webrtc::RtpSource>>(
-      RTC_FROM_HERE, Bind(&VoiceChannel::GetSources_w, this, ssrc));
-}
-
-std::vector<webrtc::RtpSource> VoiceChannel::GetSources_w(uint32_t ssrc) const {
-  RTC_DCHECK(worker_thread()->IsCurrent());
-  return media_channel()->GetSources(ssrc);
 }
 
 void VoiceChannel::StartMediaMonitor(int cms) {

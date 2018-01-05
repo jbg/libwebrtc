@@ -45,6 +45,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/ptr_util.h"
+#include "rtc_base/refcountedobject.h"
 #include "rtc_base/stringencode.h"
 #include "rtc_base/stringutils.h"
 #include "rtc_base/trace_event.h"
@@ -1277,6 +1278,7 @@ PeerConnection::CreateTransceiver(cricket::MediaType media_type) {
   rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>
       receiver;
   std::string receiver_id = rtc::CreateRandomUuid();
+  std::vector<rtc::scoped_refptr<MediaStreamInterface>> receiver_streams;
   // TODO(bugs.webrtc.org/7600): Initializing the sender/receiver with a null
   // channel prevents users from calling SetParameters on them, which is needed
   // to be in compliance with the spec.
@@ -1284,14 +1286,17 @@ PeerConnection::CreateTransceiver(cricket::MediaType media_type) {
     sender = RtpSenderProxyWithInternal<RtpSenderInternal>::Create(
         signaling_thread(), new AudioRtpSender(nullptr, stats_.get()));
     receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
-        signaling_thread(), new AudioRtpReceiver(receiver_id, {}, 0, nullptr));
+        signaling_thread(),
+        new rtc::RefCountedObject<AudioRtpReceiver>(
+            worker_thread(), receiver_id, receiver_streams, 0, nullptr));
   } else {
     RTC_DCHECK_EQ(cricket::MEDIA_TYPE_VIDEO, media_type);
     sender = RtpSenderProxyWithInternal<RtpSenderInternal>::Create(
         signaling_thread(), new VideoRtpSender(nullptr));
     receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
         signaling_thread(),
-        new VideoRtpReceiver(receiver_id, {}, worker_thread(), 0, nullptr));
+        new rtc::RefCountedObject<VideoRtpReceiver>(
+            worker_thread(), receiver_id, receiver_streams, 0, nullptr));
   }
   rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
       transceiver = RtpTransceiverProxyWithInternal<RtpTransceiver>::Create(
@@ -2714,8 +2719,9 @@ void PeerConnection::CreateAudioReceiver(
   rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>
       receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
           signaling_thread(),
-          new AudioRtpReceiver(remote_sender_info.sender_id, streams,
-                               remote_sender_info.first_ssrc, voice_channel()));
+          new rtc::RefCountedObject<AudioRtpReceiver>(
+              worker_thread(), remote_sender_info.sender_id, streams,
+              remote_sender_info.first_ssrc, voice_channel()));
   stream->AddTrack(
       static_cast<AudioTrackInterface*>(receiver->internal()->track().get()));
   GetAudioTransceiver()->internal()->AddReceiver(receiver);
@@ -2730,9 +2736,9 @@ void PeerConnection::CreateVideoReceiver(
   rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>
       receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
           signaling_thread(),
-          new VideoRtpReceiver(remote_sender_info.sender_id, streams,
-                               worker_thread(), remote_sender_info.first_ssrc,
-                               video_channel()));
+          new rtc::RefCountedObject<VideoRtpReceiver>(
+              worker_thread(), remote_sender_info.sender_id, streams,
+              remote_sender_info.first_ssrc, video_channel()));
   stream->AddTrack(
       static_cast<VideoTrackInterface*>(receiver->internal()->track().get()));
   GetVideoTransceiver()->internal()->AddReceiver(receiver);

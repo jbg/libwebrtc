@@ -28,33 +28,88 @@
 #include "pc/videotracksource.h"
 #include "rtc_base/basictypes.h"
 #include "rtc_base/sigslot.h"
+#include "rtc_base/thread_checker.h"
 
 namespace webrtc {
 
 // Internal class used by PeerConnection.
-class RtpReceiverInternal : public RtpReceiverInterface {
+class RtpReceiverInternal : public RtpReceiverInterface,
+                            public sigslot::has_slots<> {
  public:
   virtual void Stop() = 0;
+  virtual bool stopped() const = 0;
+
   // This SSRC is used as an identifier for the receiver between the API layer
   // and the WebRtcVideoEngine, WebRtcVoiceEngine layer.
-  virtual uint32_t ssrc() const = 0;
+  uint32_t ssrc() const { return ssrc_; }
+
+  // Partial RtpReceiverInterface implementation.
+  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams()
+      const override;
+  std::string id() const override;
+  RtpParameters GetParameters() const override;
+  bool SetParameters(const RtpParameters& parameters) override;
+  void SetObserver(RtpReceiverObserverInterface* observer) override;
+  std::vector<RtpSource> GetSources() const override;
+
+ protected:
+  RtpReceiverInternal(
+      rtc::Thread* worker_thread,
+      const std::string& id,
+      const std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams,
+      uint32_t ssrc,
+      cricket::BaseChannel* channel);
+  ~RtpReceiverInternal() override;
+
+  virtual RtpParameters GetParameters_w() const = 0;
+  virtual bool SetParameters_w(const RtpParameters& parameters) = 0;
+  virtual std::vector<RtpSource> GetSources_w() const = 0;
+
+  void SetChannelInternal(cricket::BaseChannel* channel);
+
+  void OnFirstPacketReceived(cricket::BaseChannel* channel);
+
+  rtc::Thread* const worker_thread_;
+  const std::string id_;
+  const std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_;
+  const uint32_t ssrc_;
+
+  cricket::BaseChannel* channel_ = nullptr;
+  // |media_channel_| is owned by |channel_|. Should only be accessed on the
+  // worker thread.
+  cricket::MediaChannel* media_channel_ = nullptr;
+  RtpReceiverObserverInterface* observer_ = nullptr;
+  bool received_first_packet_ = false;
 };
 
-class AudioRtpReceiver : public ObserverInterface,
-                         public AudioSourceInterface::AudioObserver,
-                         public rtc::RefCountedObject<RtpReceiverInternal>,
-                         public sigslot::has_slots<> {
+class AudioRtpReceiver : public RtpReceiverInternal,
+                         public ObserverInterface,
+                         public AudioSourceInterface::AudioObserver {
  public:
   // An SSRC of 0 will create a receiver that will match the first SSRC it
   // sees.
   // TODO(deadbeef): Use rtc::Optional, or have another constructor that
   // doesn't take an SSRC, and make this one DCHECK(ssrc != 0).
   AudioRtpReceiver(
-      const std::string& receiver_id,
-      std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams,
+      rtc::Thread* worker_thread,
+      const std::string& id,
+      const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams,
       uint32_t ssrc,
       cricket::VoiceChannel* channel);
-  virtual ~AudioRtpReceiver();
+
+  rtc::scoped_refptr<AudioTrackInterface> audio_track() const {
+    return track_.get();
+  }
+
+  void SetChannel(cricket::VoiceChannel* channel);
+
+  // RtpReceiverInterface implementation
+  rtc::scoped_refptr<MediaStreamTrackInterface> track() const override;
+  cricket::MediaType media_type() const override;
+
+  // RtpReceiverInternal implementation.
+  void Stop() override;
+  bool stopped() const override;
 
   // ObserverInterface implementation
   void OnChanged() override;
@@ -62,108 +117,76 @@ class AudioRtpReceiver : public ObserverInterface,
   // AudioSourceInterface::AudioObserver implementation
   void OnSetVolume(double volume) override;
 
-  rtc::scoped_refptr<AudioTrackInterface> audio_track() const {
-    return track_.get();
-  }
-
-  // RtpReceiverInterface implementation
-  rtc::scoped_refptr<MediaStreamTrackInterface> track() const override {
-    return track_.get();
-  }
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams()
-      const override {
-    return streams_;
-  }
-
-  cricket::MediaType media_type() const override {
-    return cricket::MEDIA_TYPE_AUDIO;
-  }
-
-  std::string id() const override { return id_; }
-
-  RtpParameters GetParameters() const override;
-  bool SetParameters(const RtpParameters& parameters) override;
+ protected:
+  ~AudioRtpReceiver() override;
 
   // RtpReceiverInternal implementation.
-  void Stop() override;
-  uint32_t ssrc() const override { return ssrc_; }
-
-  void SetObserver(RtpReceiverObserverInterface* observer) override;
-
-  // Does not take ownership.
-  // Should call SetChannel(nullptr) before |channel| is destroyed.
-  void SetChannel(cricket::VoiceChannel* channel);
-
-  std::vector<RtpSource> GetSources() const override;
+  RtpParameters GetParameters_w() const override;
+  bool SetParameters_w(const RtpParameters& parameters) override;
+  std::vector<RtpSource> GetSources_w() const override;
 
  private:
-  void Reconfigure();
-  void OnFirstPacketReceived(cricket::BaseChannel* channel);
+  cricket::VoiceMediaChannel* media_channel() const {
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    return static_cast<cricket::VoiceMediaChannel*>(media_channel_);
+  }
 
-  const std::string id_;
-  const uint32_t ssrc_;
-  cricket::VoiceChannel* channel_;
+  void Reconfigure();
+  bool SetOutputVolume(double volume);
+
   const rtc::scoped_refptr<AudioTrackInterface> track_;
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_;
   bool cached_track_enabled_;
   double cached_volume_ = 1;
   bool stopped_ = false;
-  RtpReceiverObserverInterface* observer_ = nullptr;
-  bool received_first_packet_ = false;
 };
 
-class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
-                         public sigslot::has_slots<> {
+class VideoRtpReceiver : public RtpReceiverInternal {
  public:
   // An SSRC of 0 will create a receiver that will match the first SSRC it
   // sees.
   VideoRtpReceiver(
-      const std::string& track_id,
-      std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams,
       rtc::Thread* worker_thread,
+      const std::string& id,
+      const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams,
       uint32_t ssrc,
       cricket::VideoChannel* channel);
-
-  virtual ~VideoRtpReceiver();
 
   rtc::scoped_refptr<VideoTrackInterface> video_track() const {
     return track_.get();
   }
 
+  void SetChannel(cricket::VideoChannel* channel);
+
   // RtpReceiverInterface implementation
   rtc::scoped_refptr<MediaStreamTrackInterface> track() const override {
     return track_.get();
   }
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams()
-      const override {
-    return streams_;
-  }
-
   cricket::MediaType media_type() const override {
     return cricket::MEDIA_TYPE_VIDEO;
   }
 
-  std::string id() const override { return id_; }
-
-  RtpParameters GetParameters() const override;
-  bool SetParameters(const RtpParameters& parameters) override;
-
   // RtpReceiverInternal implementation.
   void Stop() override;
-  uint32_t ssrc() const override { return ssrc_; }
+  bool stopped() const override;
 
-  void SetObserver(RtpReceiverObserverInterface* observer) override;
+ protected:
+  ~VideoRtpReceiver() override;
 
-  // Does not take ownership.
-  // Should call SetChannel(nullptr) before |channel| is destroyed.
-  void SetChannel(cricket::VideoChannel* channel);
+  // RtpReceiverInternal implementation.
+  RtpParameters GetParameters_w() const override;
+  bool SetParameters_w(const RtpParameters& parameters) override;
+  std::vector<RtpSource> GetSources_w() const override;
 
  private:
-  void OnFirstPacketReceived(cricket::BaseChannel* channel);
+  cricket::VideoChannel* channel() const {
+    return static_cast<cricket::VideoChannel*>(channel_);
+  }
 
-  std::string id_;
-  uint32_t ssrc_;
-  cricket::VideoChannel* channel_;
+  cricket::VideoMediaChannel* media_channel() const {
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    return static_cast<cricket::VideoMediaChannel*>(media_channel_);
+  }
+
   // |broadcaster_| is needed since the decoder can only handle one sink.
   // It might be better if the decoder can handle multiple sinks and consider
   // the VideoSinkWants.
@@ -172,10 +195,7 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   // the VideoRtpReceiver is stopped.
   rtc::scoped_refptr<VideoTrackSource> source_;
   rtc::scoped_refptr<VideoTrackInterface> track_;
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_;
   bool stopped_ = false;
-  RtpReceiverObserverInterface* observer_ = nullptr;
-  bool received_first_packet_ = false;
 };
 
 }  // namespace webrtc
