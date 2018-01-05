@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "235076df_99ced23d",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCameraVideoCapturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-05T09:01:11Z",
+      "side": 1,
+      "message": "Something strange happened with the formatting for this method, did you run `git cl format`?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 56
+      },
+      "revId": "46e88d48f8c056c49923751301c53a64f9bedac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
