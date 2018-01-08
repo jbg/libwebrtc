@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4da76ea4_295d7ecb",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCameraVideoCapturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-08T14:51:29Z",
+      "side": 1,
+      "message": "Oops missed this, but the trybots failed on this declaration not matching the implementation (this method should not take the NSError parameter).",
+      "revId": "a09d85eacfcc4f9135547fda5626381681bc5e29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
