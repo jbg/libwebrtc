@@ -317,16 +317,38 @@ if (is_ios || is_mac) {
       }
     }
 
-    rtc_static_library("peerconnectionfactory_objc") {
+    rtc_static_library("videocoding_objc") {
       sources = [
         "objc/Framework/Classes/PeerConnection/RTCDefaultVideoDecoderFactory.m",
         "objc/Framework/Classes/PeerConnection/RTCDefaultVideoEncoderFactory.m",
-        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Native.h",
-        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Private.h",
-        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoCodecH264.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoCodecVP8.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoCodecVP9.mm",
+      ]
+      deps = [
+        ":videotoolbox_objc",
+        ":videotracksource_objc",
+        "../modules/video_coding:webrtc_vp8",
+        "../modules/video_coding:webrtc_vp9",
+        "../rtc_base:rtc_base",
+        "../system_wrappers:field_trial_api",
+      ]
+
+      # TODO(mbonadei): check if this public_config is really needed.
+      public_configs = [ ":common_config_objc" ]
+
+      if (!build_with_chromium && is_clang) {
+        # Suppress warnings from the Chromium Clang plugin
+        # (bugs.webrtc.org/163).
+        suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+      }
+    }
+
+    rtc_static_library("peerconnectionfactory_objc") {
+      sources = [
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Native.h",
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory+Private.h",
+        "objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
       ]
 
       public_configs = [ ":common_config_objc" ]
@@ -338,26 +360,29 @@ if (is_ios || is_mac) {
       }
 
       deps = [
-        ":common_objc",
-        ":corevideoframebuffer_objc",
+        # ":common_objc",
+        # ":corevideoframebuffer_objc",
         ":peerconnectionfactory_base_objc",
-        ":video_objc",
-        ":videotoolbox_objc",
-        ":videotracksource_objc",
+
+        # ":video_objc",
+        # ":videotracksource_objc",
         "../api:libjingle_peerconnection_api",
-        "../api:peerconnection_and_implicit_call_api",
-        "../api:video_frame_api",
-        "../api/audio_codecs:builtin_audio_decoder_factory",
-        "../api/audio_codecs:builtin_audio_encoder_factory",
-        "../api/video_codecs:video_codecs_api",
-        "../media:rtc_audio_video",
-        "../media:rtc_media_base",
-        "../modules/video_coding:webrtc_vp8",
-        "../modules/video_coding:webrtc_vp9",
-        "../pc:create_pc_factory",
-        "../pc:peerconnection",
+
+        # "../api:peerconnection_and_implicit_call_api",
+
+        # "../api:video_frame_api",
+        # "../api/audio_codecs:builtin_audio_decoder_factory",
+        # "../api/audio_codecs:builtin_audio_encoder_factory",
+        # "../api/video_codecs:video_codecs_api",
+        # "../media:rtc_audio_video",
+        # "../media:rtc_media_base",
+        # "../modules/video_coding:webrtc_vp8",
+        # "../modules/video_coding:webrtc_vp9",
+        # "../pc:create_pc_factory",
+        # "../pc:peerconnection",
         "../rtc_base:rtc_base",
-        "../system_wrappers:field_trial_api",
+
+        # "../system_wrappers:field_trial_api",
       ]
     }
 
@@ -635,6 +660,7 @@ if (is_ios || is_mac) {
           ":common_objc",
           ":peerconnection_objc",
           ":peerconnectionfactory_objc",
+          ":videocoding_objc",
           ":videotoolbox_objc",
           ":videotracksource_objc",
           "../../system_wrappers:system_wrappers_default",
@@ -740,6 +766,7 @@ if (is_ios || is_mac) {
           ":audio_objc",
           ":peerconnection_objc",
           ":ui_objc",
+          ":videocoding_objc",
           "../rtc_base:rtc_base_approved",
           "../system_wrappers:field_trial_default",
           "../system_wrappers:metrics_default",

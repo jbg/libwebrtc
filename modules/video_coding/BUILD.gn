@@ -537,6 +537,7 @@ if (rtc_include_tests) {
         ":codec_test_objc",
         ":video_coding_modules_tests_resources_bundle_data",
         "../../media:rtc_media_base",
+        "../../sdk:videocoding_objc",
         "../../sdk:videotoolbox_objc",
       ]
     }
