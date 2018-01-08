@@ -245,7 +245,10 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         "../sdk:framework_objc",
       ]
     } else {
-      deps += [ "../sdk:peerconnection_objc" ]
+      deps += [
+        "../sdk:peerconnection_objc",
+        "../sdk:videocoding_objc",
+      ]
     }
     libs = [ "QuartzCore.framework" ]
   }
