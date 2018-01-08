@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "238f230f_663394f1",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-08T12:41:49Z",
+      "side": 1,
+      "message": "Can we remove these right away instead of commenting out?",
+      "range": {
+        "startLine": 363,
+        "startChar": 12,
+        "endLine": 363,
+        "endChar": 23
+      },
+      "revId": "27c27ba8f9ae1df2d3cd25a6569e1f38db52a919",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
