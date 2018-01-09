@@ -222,6 +222,7 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_streams,
     streams[0].width = width;
     streams[0].height = height;
     streams[0].max_qp = max_qp;
+    streams[0].active = true;
     streams[0].max_framerate = 5;
     streams[0].min_bitrate_bps = kMinVideoBitrateBps;
     streams[0].target_bitrate_bps = config.tl0_bitrate_kbps * 1000;
@@ -248,6 +249,7 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_streams,
       streams[1].width = width;
       streams[1].height = height;
       streams[1].max_qp = max_qp;
+      streams[1].active = true;
       streams[1].max_framerate = max_framerate;
       // Three temporal layers means two thresholds.
       streams[1].temporal_layer_thresholds_bps.resize(2);
@@ -268,6 +270,7 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_streams,
       streams[s].height = height;
       // TODO(pbos): Fill actual temporal-layer bitrate thresholds.
       streams[s].max_qp = max_qp;
+      streams[s].active = true;
       streams[s].temporal_layer_thresholds_bps.resize(
           kDefaultConferenceNumberOfTemporalLayers[s] - 1);
       streams[s].max_bitrate_bps = FindSimulcastMaxBitrateBps(width, height);
