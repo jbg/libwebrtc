@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "161ff47a_2bc423c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-09T10:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64b879d0_88703af4",
+      "range": {
+        "startLine": 9,
+        "startChar": 33,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "a2573082cdb3f1a49da63dba338eb68f72cd1256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "275ab988_6db80287",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-09T10:24:38Z",
       "side": 1,
       "message": "Mmmh, right... I think this is still possible though. The check only ensures that if a .h file is affected by a CL then the file must be listed in a BUILD.gn file but it is possible to file a CL that just removes the .h file from a BUILD.gn file without adding it to another BUILD.gn file.",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "a2573082cdb3f1a49da63dba338eb68f72cd1256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22582ae8_d3ae9b44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-09T10:29:56Z",
+      "side": 1,
+      "message": "Hmm, true. You can do that without touching the .h file. So I should trigger the check if a .gn file is modified as well?",
+      "parentUuid": "275ab988_6db80287",
       "range": {
         "startLine": 10,
         "startChar": 31,
