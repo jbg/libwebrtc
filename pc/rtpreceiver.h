@@ -50,6 +50,7 @@ class AudioRtpReceiver : public ObserverInterface,
   // TODO(deadbeef): Use rtc::Optional, or have another constructor that
   // doesn't take an SSRC, and make this one DCHECK(ssrc != 0).
   AudioRtpReceiver(
+      rtc::Thread* worker_thread,
       const std::string& receiver_id,
       std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams,
       uint32_t ssrc,
@@ -98,11 +99,14 @@ class AudioRtpReceiver : public ObserverInterface,
 
  private:
   void Reconfigure();
+  bool SetOutputVolume(double volume);
   void OnFirstPacketReceived(cricket::BaseChannel* channel);
 
+  rtc::Thread* const worker_thread_;
   const std::string id_;
   const uint32_t ssrc_;
-  cricket::VoiceChannel* channel_;
+  cricket::VoiceChannel* channel_ = nullptr;
+  cricket::VoiceMediaChannel* media_channel_ = nullptr;
   const rtc::scoped_refptr<AudioTrackInterface> track_;
   std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_;
   bool cached_track_enabled_;
@@ -118,9 +122,9 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   // An SSRC of 0 will create a receiver that will match the first SSRC it
   // sees.
   VideoRtpReceiver(
+      rtc::Thread* worker_thread,
       const std::string& track_id,
       std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams,
-      rtc::Thread* worker_thread,
       uint32_t ssrc,
       cricket::VideoChannel* channel);
 
@@ -160,10 +164,13 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
 
  private:
   void OnFirstPacketReceived(cricket::BaseChannel* channel);
+  bool SetSink(rtc::VideoSinkInterface<VideoFrame>* sink);
 
+  rtc::Thread* const worker_thread_;
   std::string id_;
   uint32_t ssrc_;
-  cricket::VideoChannel* channel_;
+  cricket::VideoChannel* channel_ = nullptr;
+  cricket::VideoMediaChannel* media_channel_ = nullptr;
   // |broadcaster_| is needed since the decoder can only handle one sink.
   // It might be better if the decoder can handle multiple sinks and consider
   // the VideoSinkWants.
