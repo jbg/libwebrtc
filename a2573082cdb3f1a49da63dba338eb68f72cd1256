@@ -93,6 +93,30 @@
       "revId": "a2573082cdb3f1a49da63dba338eb68f72cd1256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79ecd845_d7e8d5e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-09T10:36:53Z",
+      "side": 1,
+      "message": "I think that we should look at the diff and if a line that reference a .h file has been changed then we should check it. But that sounds complex and error prone.\nThe easiest thing to do is probably check that all the headers of the project are tracked by GN. We can do that in a presubmit check (slow but maybe we can run it in parallel) or as a step in a trybot. I think presubmit is better though.\nTrying to cover all the possible way a header can be removed from GN can be too complex for a check probably.",
+      "parentUuid": "22582ae8_d3ae9b44",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "a2573082cdb3f1a49da63dba338eb68f72cd1256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
