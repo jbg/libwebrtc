@@ -490,21 +490,12 @@ class VoiceChannel : public BaseChannel {
   // The valid value for the |event| are 0 which corresponding to DTMF
   // event 0-9, *, #, A-D.
   bool InsertDtmf(uint32_t ssrc, int event_code, int duration);
-  bool SetOutputVolume(uint32_t ssrc, double volume);
-  void SetRawAudioSink(uint32_t ssrc,
-                       std::unique_ptr<webrtc::AudioSinkInterface> sink);
   webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const;
   bool SetRtpSendParameters(uint32_t ssrc,
                             const webrtc::RtpParameters& parameters);
-  webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const;
-  bool SetRtpReceiveParameters(uint32_t ssrc,
-                               const webrtc::RtpParameters& parameters);
 
   // Get statistics about the current media session.
   bool GetStats(VoiceMediaInfo* stats);
-
-  std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const;
-  std::vector<webrtc::RtpSource> GetSources_w(uint32_t ssrc) const;
 
   // Monitoring functions
   sigslot::signal2<VoiceChannel*, const std::vector<ConnectionInfo>&>
@@ -524,9 +515,6 @@ class VoiceChannel : public BaseChannel {
   void GetActiveStreams_w(AudioInfo::StreamList* actives);
   webrtc::RtpParameters GetRtpSendParameters_w(uint32_t ssrc) const;
   bool SetRtpSendParameters_w(uint32_t ssrc, webrtc::RtpParameters parameters);
-  webrtc::RtpParameters GetRtpReceiveParameters_w(uint32_t ssrc) const;
-  bool SetRtpReceiveParameters_w(uint32_t ssrc,
-                                 webrtc::RtpParameters parameters);
   cricket::MediaType media_type() override { return cricket::MEDIA_TYPE_AUDIO; }
 
  private:
@@ -584,8 +572,6 @@ class VideoChannel : public BaseChannel {
     return static_cast<VideoMediaChannel*>(BaseChannel::media_channel());
   }
 
-  bool SetSink(uint32_t ssrc,
-               rtc::VideoSinkInterface<webrtc::VideoFrame>* sink);
   void FillBitrateInfo(BandwidthEstimationInfo* bwe_info);
   // Get statistics about the current media session.
   bool GetStats(VideoMediaInfo* stats);
@@ -606,9 +592,6 @@ class VideoChannel : public BaseChannel {
   webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const;
   bool SetRtpSendParameters(uint32_t ssrc,
                             const webrtc::RtpParameters& parameters);
-  webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const;
-  bool SetRtpReceiveParameters(uint32_t ssrc,
-                               const webrtc::RtpParameters& parameters);
   cricket::MediaType media_type() override { return cricket::MEDIA_TYPE_VIDEO; }
 
  private:
@@ -623,9 +606,6 @@ class VideoChannel : public BaseChannel {
   bool GetStats_w(VideoMediaInfo* stats);
   webrtc::RtpParameters GetRtpSendParameters_w(uint32_t ssrc) const;
   bool SetRtpSendParameters_w(uint32_t ssrc, webrtc::RtpParameters parameters);
-  webrtc::RtpParameters GetRtpReceiveParameters_w(uint32_t ssrc) const;
-  bool SetRtpReceiveParameters_w(uint32_t ssrc,
-                                 webrtc::RtpParameters parameters);
 
   void OnConnectionMonitorUpdate(
       ConnectionMonitor* monitor,
