@@ -168,17 +168,18 @@ class RtpSenderReceiverTest : public testing::Test,
 
   void CreateAudioRtpReceiver(
       std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams = {}) {
-    audio_rtp_receiver_ = new AudioRtpReceiver(
-        kAudioTrackId, std::move(streams), kAudioSsrc, voice_channel_);
+    audio_rtp_receiver_ =
+        new AudioRtpReceiver(rtc::Thread::Current(), kAudioTrackId,
+                             std::move(streams), kAudioSsrc, voice_channel_);
     audio_track_ = audio_rtp_receiver_->audio_track();
     VerifyVoiceChannelOutput();
   }
 
   void CreateVideoRtpReceiver(
       std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams = {}) {
-    video_rtp_receiver_ = new VideoRtpReceiver(
-        kVideoTrackId, std::move(streams), rtc::Thread::Current(), kVideoSsrc,
-        video_channel_);
+    video_rtp_receiver_ =
+        new VideoRtpReceiver(rtc::Thread::Current(), kVideoTrackId,
+                             std::move(streams), kVideoSsrc, video_channel_);
     video_track_ = video_rtp_receiver_->video_track();
     VerifyVideoChannelOutput();
   }
