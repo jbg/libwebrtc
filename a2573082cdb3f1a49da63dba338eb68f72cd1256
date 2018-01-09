@@ -117,6 +117,30 @@
       "revId": "a2573082cdb3f1a49da63dba338eb68f72cd1256",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40047c7b_65e78863",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-09T10:52:28Z",
+      "side": 1,
+      "message": "Yeah, I tried implementing it and it\u0027s really hard. I can detect GN changes but then I need to check each header that _should_ belong to that GN file, which is tricky today.\n\nThe most common case is that a header moves, and in that case at least the header guards must be updated, which will trigger the check. I think that\u0027s good enough. A major case we\u0027re not covering would be that a header is moving between targets in the same gn file and the dev forgets to add it to the new target.\n\nLet\u0027s keep it the way it is then, I\u0027ll update the CL desc.",
+      "parentUuid": "79ecd845_d7e8d5e3",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "a2573082cdb3f1a49da63dba338eb68f72cd1256",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
