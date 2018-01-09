@@ -16,6 +16,24 @@
       "revId": "7b6b40d2bb2e18bc04902ad396084ba2cffb6ae8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4aa52cca_b53b84cb",
+        "filename": "sdk/objc/Framework/UnitTests/RTCDoNotPutCPlusPlusInFrameworkHeaders_xctest.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-01-09T13:27:46Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f1ad423a_00349e2b",
+      "revId": "7b6b40d2bb2e18bc04902ad396084ba2cffb6ae8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
