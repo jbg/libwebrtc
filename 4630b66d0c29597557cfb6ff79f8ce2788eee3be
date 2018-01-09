@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "990373d5_a006d9be",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-01-09T17:33:29Z",
+      "side": 1,
+      "message": "I _think_ you only want to call this if transport_sequence_number is nonzero even the first time. (I see you added a check in ChannelProxy to make this alright, though).",
+      "revId": "4630b66d0c29597557cfb6ff79f8ce2788eee3be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
