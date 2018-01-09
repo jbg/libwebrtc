@@ -16,6 +16,24 @@
       "revId": "4630b66d0c29597557cfb6ff79f8ce2788eee3be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03d76c97_f290d58c",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-09T18:14:41Z",
+      "side": 1,
+      "message": "Very well, but do you have a more solid motivation than \"I _think_\"? :)\n\nvoe::Channel::EnableReceiveTransportSequenceNumber() already handled deregistering, so the fix seemed straightforward...",
+      "parentUuid": "990373d5_a006d9be",
+      "revId": "4630b66d0c29597557cfb6ff79f8ce2788eee3be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
