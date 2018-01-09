@@ -155,6 +155,24 @@
       "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2e0ed26_402504b5",
+        "filename": "rtc_base/zero_memory_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-09T09:45:35Z",
+      "side": 1,
+      "message": "I thought the motivation behind this entire CL was that some compiler had been observed to optimize memsets away?",
+      "parentUuid": "d4abed8b_0aeddc91",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
