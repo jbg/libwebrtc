@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7c6260a_7ab66e62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T01:34:35Z",
+      "side": 1,
+      "message": "Would be nice to have a brief description of why this is beneficial/where this is headed.",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3f1ee24_c1126d22",
+        "filename": "pc/remoteaudiosource.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T01:34:35Z",
+      "side": 1,
+      "message": "This is now more than \"may be null in tests;\" the transceiver may start with a null channel, right? So does RemoteAudioSource need a SetChannel method?",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32d6e193_5de1abde",
+        "filename": "pc/remoteaudiosource.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T01:34:35Z",
+      "side": 1,
+      "message": "Capturing lambdas aren\u0027t allowed by the chromium style guide, but given that this is a synchronous invocation I think it\u0027s fine. When we convert everything to TaskQueues we can deal with it.",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6adbed6_875dbf02",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T01:34:35Z",
+      "side": 1,
+      "message": "nit: Maybe replace these \"if (!channel_)\" statements with \"if (media_channel_)\", since that\u0027s what will actually be dereferenced?",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54ffc1dd_af88f767",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T01:34:35Z",
+      "side": 1,
+      "message": "Here\u0027s another example",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af0e4c58_99be8403",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T01:34:35Z",
+      "side": 1,
+      "message": "So the only interaction with BaseChannel is SignalFirstPacketReceived; have you thought about when this too can be removed? I guess it may stay this way for a while, until AudioRtpReceiver actually becomes part of the \"received packet\" path.",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
