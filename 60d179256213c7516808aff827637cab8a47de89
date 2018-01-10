@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1b3f7e9_60231b97",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCCameraVideoCapturer.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 6432
+      },
+      "writtenOn": "2018-01-10T15:11:20Z",
+      "side": 0,
+      "message": "Adding my comment here so it is visible on the revert as well. Each of these usages needs to have an if (completionHandler) around it since completionHandler is nullable. The usage on 119 and 123 will cause a crash.",
+      "range": {
+        "startLine": 144,
+        "startChar": 24,
+        "endLine": 144,
+        "endChar": 41
+      },
+      "revId": "60d179256213c7516808aff827637cab8a47de89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
