@@ -147,7 +147,6 @@ if (rtc_include_tests) {
       "../../logging:mocks",
       "../../rtc_base:checks",
       "../../rtc_base:gtest_prod",
-      "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
       "../../rtc_base:rtc_numerics",
       "../../system_wrappers",
@@ -166,6 +165,10 @@ if (rtc_include_tests) {
       "//testing/gmock",
       "//testing/gtest",
     ]
+
+    if (!build_with_mozilla) {
+      deps += [ "../../rtc_base:rtc_base" ]
+    }
   }
 
   rtc_source_set("remote_bitrate_estimator_perf_tests") {
@@ -213,7 +216,6 @@ if (rtc_include_tests) {
       ":remote_bitrate_estimator",
       "../..:webrtc_common",
       "../../rtc_base:checks",
-      "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
       "../../system_wrappers",
       "../../test:field_trial",
@@ -222,6 +224,9 @@ if (rtc_include_tests) {
       "../rtp_rtcp:rtp_rtcp_format",
       "//testing/gmock",
     ]
+    if (!build_with_mozilla) {
+      deps += [ "../../rtc_base:rtc_base" ]
+    }
     if (is_win) {
       cflags = [
         # TODO(kjellander): bugs.webrtc.org/261: Fix this warning.

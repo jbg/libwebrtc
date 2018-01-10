@@ -10,10 +10,15 @@ import("//build/config/linux/pkg_config.gni")
 import("../webrtc.gni")
 
 group("media") {
-  public_deps = [
-    ":rtc_media",
-    ":rtc_media_base",
-  ]
+  public_deps = []
+  if (!build_with_mozilla) {
+    public_deps += [
+      ":rtc_media",
+      ":rtc_media_base",
+    ]
+  } else {
+    public_deps += [ ":mozilla_rtc_media" ]
+  }
 }
 
 config("rtc_media_defines_config") {
@@ -50,6 +55,22 @@ rtc_source_set("rtc_h264_profile_id") {
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
   ]
+}
+
+if (build_with_mozilla) {
+  rtc_static_library("mozilla_rtc_media") {
+    defines = []
+    libs = []
+    deps = []
+    sources = [
+      "base/videoadapter.cc",
+      "base/videoadapter.h",
+      "base/videobroadcaster.cc",
+      "base/videobroadcaster.h",
+      "base/videosourcebase.cc",
+      "base/videosourcebase.h",
+    ]
+  }
 }
 
 rtc_static_library("rtc_media_base") {
@@ -115,11 +136,14 @@ rtc_static_library("rtc_media_base") {
     "../call:video_stream_api",
     "../common_video",
     "../modules/audio_processing:audio_processing_statistics",
-    "../p2p",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
     "../system_wrappers:field_trial_api",
   ]
+
+  if (!build_with_mozilla) {
+    deps += [ "../p2p" ]
+  }
 
   public_deps += [ ":rtc_h264_profile_id" ]
 

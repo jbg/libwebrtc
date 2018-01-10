@@ -113,7 +113,6 @@ rtc_static_library("video_coding") {
     "../../call:video_stream_api",
     "../../common_video",
     "../../rtc_base:checks",
-    "../../rtc_base:rtc_base",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_numerics",
     "../../rtc_base:rtc_task_queue",
@@ -125,6 +124,10 @@ rtc_static_library("video_coding") {
     "../rtp_rtcp:rtp_rtcp_format",
     "../utility:utility",
   ]
+
+  if (!build_with_mozilla) {
+    deps += [ "../../rtc_base:rtc_base" ]
+  }
 }
 
 rtc_source_set("video_codec_interface") {
@@ -250,10 +253,13 @@ rtc_static_library("webrtc_h264") {
     ]
     deps += [
       "../../common_video",
-      "../../media:rtc_media_base",
       "//third_party/ffmpeg:ffmpeg",
       "//third_party/openh264:encoder",
     ]
+
+    if (!build_with_mozilla) {
+      deps += [ "../../media:rtc_media_base" ]
+    }
   }
 }
 
@@ -377,6 +383,10 @@ rtc_static_library("webrtc_vp8") {
   ]
   if (rtc_build_libvpx) {
     deps += [ rtc_libvpx_dir ]
+  }
+
+  if (build_with_mozilla) {
+    include_dirs = [ "$rtc_libyuv_dir/include" ]
   }
 }
 
