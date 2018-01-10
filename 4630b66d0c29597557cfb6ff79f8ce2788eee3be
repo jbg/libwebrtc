@@ -34,6 +34,24 @@
       "revId": "4630b66d0c29597557cfb6ff79f8ce2788eee3be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70815f92_489a1d6c",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-01-10T13:49:47Z",
+      "side": 1,
+      "message": "Ahh, it\u0027s alright. The naming of it is a bit weird, when Enable sometimes means Disable, but I expect we\u0027ll address that in due time - e.g. when splitting Channel functionality into the respective send and receive streams.",
+      "parentUuid": "03d76c97_f290d58c",
+      "revId": "4630b66d0c29597557cfb6ff79f8ce2788eee3be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
