@@ -1,5 +1,5 @@
 /*
- *  Copyright 2004 The WebRTC Project Authors. All rights reserved.
+ *  Copyright 2018 The WebRTC Project Authors. All rights reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -12,13 +12,9 @@
 #define RTC_BASE_EVENT_H_
 
 #include "rtc_base/constructormagic.h"
-#if defined(WEBRTC_WIN)
-#include <windows.h>
-#elif defined(WEBRTC_POSIX)
-#include <pthread.h>
-#else
-#error "Must define either WEBRTC_WIN or WEBRTC_POSIX."
-#endif
+
+#include <condition_variable>
+#include <mutex>
 
 namespace rtc {
 
@@ -37,14 +33,11 @@ class Event {
   bool Wait(int milliseconds);
 
  private:
-#if defined(WEBRTC_WIN)
-  HANDLE event_handle_;
-#elif defined(WEBRTC_POSIX)
-  pthread_mutex_t event_mutex_;
-  pthread_cond_t event_cond_;
   const bool is_manual_reset_;
   bool event_status_;
-#endif
+
+  std::mutex event_mutex_;
+  std::condition_variable event_cond_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(Event);
 };
