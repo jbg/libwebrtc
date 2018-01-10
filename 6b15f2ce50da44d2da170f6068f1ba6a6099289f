@@ -155,6 +155,24 @@
       "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6dcaf87_0e8fa653",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-10T19:13:21Z",
+      "side": 1,
+      "message": "That\u0027s a good idea. It\u0027s not so funky; in the Qt world (where signals/slots come from), it\u0027s common for the object hooking up signals/slots to be different than the object that actually has the slot.\n\nThough we may want to consider different naming, since \"OnFoo\" usually implies it\u0027s a handler for an event of some private member. For example, it could be \"NotifyFirstPacketReceived\" instead. Not too important, just a thought.",
+      "parentUuid": "02a229bc_05305663",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
