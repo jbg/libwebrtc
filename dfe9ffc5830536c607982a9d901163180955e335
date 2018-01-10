@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5c39b01_cc51f94a",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-10T13:49:57Z",
+      "side": 0,
+      "message": "From the discussion in the bug, it seems the pthread_cond_timedwait_relative_np function is causing problems on some android versions. (And in addition, proper timeout logic needs the relative timeout to be updated for each call).\n\nSo an alternative approach might be to simply delete HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE and code enabled by it.\n\nCurrent git history only goes back to 2014, at which time it seems this code was copied from the talk tree. So it\u0027s unclear to me what problem was solved by introducing pthread_cond_timedwait_relative_np.",
+      "range": {
+        "startLine": 112,
+        "startChar": 14,
+        "endLine": 112,
+        "endChar": 48
+      },
+      "revId": "dfe9ffc5830536c607982a9d901163180955e335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
