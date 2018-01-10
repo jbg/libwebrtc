@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb55c669_3559537b",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-10T08:28:44Z",
+      "side": 1,
+      "message": "From what I\u0027ve read about condition variables, it\u0027s strongly recommended to always call wait inside a loop checking the condition.",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 22
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98df3995_f42483a7",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-10T08:28:44Z",
+      "side": 1,
+      "message": "If access to event_status is protected by the mutex, there\u0027s no need to also use std::atomic.",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
