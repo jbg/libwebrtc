@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1f504391_1f10102c",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-10T08:35:56Z",
+      "side": 1,
+      "message": "wait with predicate does while loop inside implementation, so no need explicit loop\nhttp://en.cppreference.com/w/cpp/thread/condition_variable/wait",
+      "parentUuid": "cb55c669_3559537b",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 22
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98df3995_f42483a7",
         "filename": "rtc_base/event.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-10T08:28:44Z",
       "side": 1,
       "message": "If access to event_status is protected by the mutex, there\u0027s no need to also use std::atomic.",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "213c593f_1e88404c",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-10T08:35:56Z",
+      "side": 1,
+      "message": "I used atomic here to ensure variable is not cached, nor read/write reordered, and to ensure reading most recent value.",
+      "parentUuid": "98df3995_f42483a7",
       "range": {
         "startLine": 38,
         "startChar": 20,
