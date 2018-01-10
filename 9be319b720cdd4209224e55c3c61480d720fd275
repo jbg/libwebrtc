@@ -141,6 +141,30 @@
       "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b4c13b0_c01892ea",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-10T12:32:12Z",
+      "side": 1,
+      "message": "Thanks for explanation, then I\u0027ll replace std::atomic\u003cbool\u003e with regular bool as it was in old implementation.",
+      "parentUuid": "8210fe13_f6928523",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
