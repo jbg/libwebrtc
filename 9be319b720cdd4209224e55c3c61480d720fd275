@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c6db66d7_82ba89c8",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-10T11:27:51Z",
+      "side": 1,
+      "message": "Ok then.",
+      "parentUuid": "1f504391_1f10102c",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 22
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98df3995_f42483a7",
         "filename": "rtc_base/event.h",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "I used atomic here to ensure variable is not cached, nor read/write reordered, and to ensure reading most recent value.",
       "parentUuid": "98df3995_f42483a7",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "9be319b720cdd4209224e55c3c61480d720fd275",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8210fe13_f6928523",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-10T11:27:51Z",
+      "side": 1,
+      "message": "\u003e I used atomic here to ensure variable is not cached, nor read/write reordered, and to ensure reading most recent value.\n\nIf that really is needed, I suspect something else is wrong. Operations on a mutex usually imply all memory barriers you need.",
+      "parentUuid": "213c593f_1e88404c",
       "range": {
         "startLine": 38,
         "startChar": 20,
