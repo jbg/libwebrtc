@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24fd60db_6203dfc7",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCCameraVideoCapturer.m",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 6432
+      },
+      "writtenOn": "2018-01-10T14:59:15Z",
+      "side": 1,
+      "message": "These need to have if(completionHandler) checks on them, since completionHandler is nullable. The usage on line 119 will cause a crash.",
+      "revId": "e23a9e8f418ad758bc1be5b53184b69ad1dab1c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
