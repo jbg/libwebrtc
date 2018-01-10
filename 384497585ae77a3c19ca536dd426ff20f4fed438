@@ -16,6 +16,24 @@
       "revId": "384497585ae77a3c19ca536dd426ff20f4fed438",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f3978f9_41e3071f",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-10T14:23:55Z",
+      "side": 1,
+      "message": "No, mine. Latest PS fixes it.",
+      "parentUuid": "8b5f2174_4e97704d",
+      "revId": "384497585ae77a3c19ca536dd426ff20f4fed438",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
