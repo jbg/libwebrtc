@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e2772f52_76d8a155",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-10T18:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7c6260a_7ab66e62",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3f1ee24_c1126d22",
         "filename": "pc/remoteaudiosource.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-10T01:34:35Z",
       "side": 1,
       "message": "This is now more than \"may be null in tests;\" the transceiver may start with a null channel, right? So does RemoteAudioSource need a SetChannel method?",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5f1c06_d889b74a",
+        "filename": "pc/remoteaudiosource.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-10T18:30:54Z",
+      "side": 1,
+      "message": "Yeah, I have a follow-up CL which fixes this as part of a larger change. Basically, I changed the RemoteAudioSource to have an explicit \"Start\" function instead of starting in the constructor.",
+      "parentUuid": "c3f1ee24_c1126d22",
       "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -98,6 +134,24 @@
       "writtenOn": "2018-01-10T01:34:35Z",
       "side": 1,
       "message": "So the only interaction with BaseChannel is SignalFirstPacketReceived; have you thought about when this too can be removed? I guess it may stay this way for a while, until AudioRtpReceiver actually becomes part of the \"received packet\" path.",
+      "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02a229bc_05305663",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-10T18:30:54Z",
+      "side": 1,
+      "message": "One idea is to expose the signal handler OnFirstPacketReceived in the internal interface then have RtpTransceiver responsible for hooking it up. It\u0027s a little funky but would let us remove BaseChannel from this class altogether. What do you think?",
+      "parentUuid": "af0e4c58_99be8403",
       "revId": "6b15f2ce50da44d2da170f6068f1ba6a6099289f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
