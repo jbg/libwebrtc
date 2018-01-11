@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc5fcb2c_013616b3",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-01-11T23:31:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure a DCHECK is enough.  I think we should do an early return like in OnSetVolume.",
+      "range": {
+        "startLine": 64,
+        "startChar": 29,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "6077675ab36a948f64c0acf3ec5d61e1156ae9c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cf50b97_589d72f4",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-01-11T23:31:21Z",
+      "side": 1,
+      "message": "Do we need this any more?",
+      "range": {
+        "startLine": 38,
+        "startChar": 36,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "6077675ab36a948f64c0acf3ec5d61e1156ae9c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64ce383a_5d23aec7",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-01-11T23:31:21Z",
+      "side": 1,
+      "message": "What does \"channel\" mean here?  Perhaps just say \"when the first packet has been received\" and stop there?",
+      "range": {
+        "startLine": 41,
+        "startChar": 34,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "6077675ab36a948f64c0acf3ec5d61e1156ae9c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
