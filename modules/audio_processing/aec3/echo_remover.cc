@@ -170,7 +170,7 @@ void EchoRemoverImpl::ProcessCapture(
                       &subtractor_output);
 
   // Compute spectra.
-  fft_.ZeroPaddedFft(y0, &Y);
+  fft_.ZeroPaddedFft(y0, Aec3Fft::Window::kHanning, &Y);
   LinearEchoPower(E_main, Y, &S2_linear);
   Y.Spectrum(optimization_, Y2);
 

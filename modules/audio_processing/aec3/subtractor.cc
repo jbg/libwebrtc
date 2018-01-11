@@ -22,21 +22,6 @@ namespace webrtc {
 
 namespace {
 
-const float kHanning64[64] = {
-    0.f,         0.00248461f, 0.00991376f, 0.0222136f,  0.03926189f,
-    0.06088921f, 0.08688061f, 0.11697778f, 0.15088159f, 0.1882551f,
-    0.22872687f, 0.27189467f, 0.31732949f, 0.36457977f, 0.41317591f,
-    0.46263495f, 0.51246535f, 0.56217185f, 0.61126047f, 0.65924333f,
-    0.70564355f, 0.75f,       0.79187184f, 0.83084292f, 0.86652594f,
-    0.89856625f, 0.92664544f, 0.95048443f, 0.96984631f, 0.98453864f,
-    0.99441541f, 0.99937846f, 0.99937846f, 0.99441541f, 0.98453864f,
-    0.96984631f, 0.95048443f, 0.92664544f, 0.89856625f, 0.86652594f,
-    0.83084292f, 0.79187184f, 0.75f,       0.70564355f, 0.65924333f,
-    0.61126047f, 0.56217185f, 0.51246535f, 0.46263495f, 0.41317591f,
-    0.36457977f, 0.31732949f, 0.27189467f, 0.22872687f, 0.1882551f,
-    0.15088159f, 0.11697778f, 0.08688061f, 0.06088921f, 0.03926189f,
-    0.0222136f,  0.00991376f, 0.00248461f, 0.f};
-
 void PredictionError(const Aec3Fft& fft,
                      const FftData& S,
                      rtc::ArrayView<const float> y,
@@ -58,12 +43,7 @@ void PredictionError(const Aec3Fft& fft,
   std::for_each(e->begin(), e->end(),
                 [](float& a) { a = rtc::SafeClamp(a, -32768.f, 32767.f); });
 
-  RTC_DCHECK_EQ(64, e->size());
-  RTC_DCHECK_LE(64, tmp.size());
-  std::transform(e->begin(), e->end(), std::begin(kHanning64), tmp.begin(),
-                 [](float a, float b) { return a * b; });
-
-  fft.ZeroPaddedFft(rtc::ArrayView<const float>(tmp.data(), 64), E);
+  fft.ZeroPaddedFft(*e, Aec3Fft::Window::kHanning, E);
 }
 
 }  // namespace
