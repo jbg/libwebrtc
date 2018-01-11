@@ -16,6 +16,24 @@
       "revId": "934e568606573f5ae491afcf6d22dffd0f583b5e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "721b2a48_0d602a8d",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-11T00:13:53Z",
+      "side": 1,
+      "message": "I have an upcoming CL for RtpSenders which will use these in a few more places :)",
+      "parentUuid": "ae4b7324_078bb16c",
+      "revId": "934e568606573f5ae491afcf6d22dffd0f583b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
