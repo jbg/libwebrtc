@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e484166f_c1b3df51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-11T13:22:04Z",
+      "side": 1,
+      "message": "Really? IIRC, these annotations were added because these files\u0027 build targets depend conditionally on the #included headers\u0027 build targets, but GN\u0027s #include scanner doesn\u0027t understand conditional #includes. So in cases where the preprocessor conditions are false, GN is able to see that we don\u0027t declare a dependency, but isn\u0027t able to see that we also don\u0027t use the #include.\n\nWhat changed?",
+      "revId": "1ac900d8d98f8f654e67f29f3675e2614ce55afc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
