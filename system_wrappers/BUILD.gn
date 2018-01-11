@@ -90,11 +90,6 @@ rtc_static_library("system_wrappers") {
     libs += [ "winmm.lib" ]
 
     cflags = [ "/wd4334" ]  # Ignore warning on shift operator promotion.
-
-    # Windows needs ../rtc_base:rtc_base due to include of
-    # webrtc/rtc_base/win32.h in source/clock.cc.
-    # TODO(kjellander): Remove (bugs.webrtc.org/6828)
-    deps += [ "../rtc_base:rtc_base" ]
   }
 
   if (is_win && is_clang) {
