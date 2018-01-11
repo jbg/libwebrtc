@@ -29,7 +29,6 @@
 #include "p2p/base/dtlstransportinternal.h"
 #include "p2p/base/packettransportinternal.h"
 #include "p2p/client/socketmonitor.h"
-#include "pc/audiomonitor.h"
 #include "pc/dtlssrtptransport.h"
 #include "pc/mediamonitor.h"
 #include "pc/mediasession.h"
@@ -505,14 +504,6 @@ class VoiceChannel : public BaseChannel {
   void StopMediaMonitor();
   sigslot::signal2<VoiceChannel*, const VoiceMediaInfo&> SignalMediaMonitor;
 
-  void StartAudioMonitor(int cms);
-  void StopAudioMonitor();
-  bool IsAudioMonitorRunning() const;
-  sigslot::signal2<VoiceChannel*, const AudioInfo&> SignalAudioMonitor;
-
-  int GetInputLevel_w();
-  int GetOutputLevel_w();
-  void GetActiveStreams_w(AudioInfo::StreamList* actives);
   webrtc::RtpParameters GetRtpSendParameters_w(uint32_t ssrc) const;
   bool SetRtpSendParameters_w(uint32_t ssrc, webrtc::RtpParameters parameters);
   cricket::MediaType media_type() override { return cricket::MEDIA_TYPE_AUDIO; }
@@ -538,13 +529,10 @@ class VoiceChannel : public BaseChannel {
       const std::vector<ConnectionInfo>& infos) override;
   void OnMediaMonitorUpdate(VoiceMediaChannel* media_channel,
                             const VoiceMediaInfo& info);
-  void OnAudioMonitorUpdate(AudioMonitor* monitor, const AudioInfo& info);
 
   static const int kEarlyMediaTimeout = 1000;
-  MediaEngineInterface* media_engine_;
   bool received_media_ = false;
   std::unique_ptr<VoiceMediaMonitor> media_monitor_;
-  std::unique_ptr<AudioMonitor> audio_monitor_;
 
   // Last AudioSendParameters sent down to the media_channel() via
   // SetSendParameters.

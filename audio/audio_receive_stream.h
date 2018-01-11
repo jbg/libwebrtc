@@ -52,7 +52,6 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
   void Start() override;
   void Stop() override;
   webrtc::AudioReceiveStream::Stats GetStats() const override;
-  int GetOutputLevel() const override;
   void SetSink(std::unique_ptr<AudioSinkInterface> sink) override;
   void SetGain(float gain) override;
   std::vector<webrtc::RtpSource> GetSources() const override;
