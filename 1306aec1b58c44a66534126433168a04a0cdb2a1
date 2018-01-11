@@ -117,6 +117,29 @@
     },
     {
       "key": {
+        "uuid": "ee705893_4cd0565d",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "I don\u0027t think this class serves a purpose after this CL. Better get rid of it and use a std::vector\u003cFrameStatistic\u003e directly in the caller. Could be done in a followup though.",
+      "range": {
+        "startLine": 66,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1a25c7c7_8d6bb00c",
         "filename": "modules/video_coding/codecs/test/stats.h",
         "patchSetId": 5
@@ -133,6 +156,29 @@
         "startChar": 28,
         "endLine": 80,
         "endChar": 0
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "061b20ad_09bfb4b3",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "No definition. Remove.",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 28
       },
       "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
@@ -256,6 +302,29 @@
     },
     {
       "key": {
+        "uuid": "b33532ef_0eae0add",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "Is this the (spatial) base layer allocation? Should we rename the field?",
+      "range": {
+        "startLine": 259,
+        "startChar": 14,
+        "endLine": 259,
+        "endChar": 33
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d553d654_313c74fa",
         "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
         "patchSetId": 5
@@ -276,6 +345,98 @@
       "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d16982b_8bba87db",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this?",
+      "range": {
+        "startLine": 231,
+        "startChar": 2,
+        "endLine": 231,
+        "endChar": 21
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8691a808_d7e14424",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "const size_t",
+      "range": {
+        "startLine": 553,
+        "startChar": 2,
+        "endLine": 553,
+        "endChar": 8
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de9f19de_8a91215b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "Nice to have all of these be consistent!",
+      "range": {
+        "startLine": 660,
+        "startChar": 43,
+        "endLine": 660,
+        "endChar": 45
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5b50a99_9ed07ad8",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_openh264.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-11T13:34:22Z",
+      "side": 1,
+      "message": "Much better name than before!",
+      "range": {
+        "startLine": 52,
+        "startChar": 46,
+        "endLine": 52,
+        "endChar": 65
+      },
+      "revId": "1306aec1b58c44a66534126433168a04a0cdb2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
