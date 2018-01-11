@@ -169,12 +169,14 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         ":AppRTCMobile_ios_frameworks",
         "../sdk:common_objc",
         "../system_wrappers:field_trial_default",
+        "../system_wrappers:runtime_enabled_features_default",
       ]
     } else {
       deps = [
         "../sdk:common_objc",
         "../system_wrappers:field_trial_default",
         "../system_wrappers:metrics_default",
+        "../system_wrappers:runtime_enabled_features_default",
       ]
     }
   }
@@ -554,6 +556,7 @@ if (is_linux || is_win) {
       "../rtc_base:rtc_json",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
+      "../system_wrappers:runtime_enabled_features_default",
       "//third_party/libyuv",
     ]
   }
@@ -592,6 +595,7 @@ if (is_linux || is_win) {
       "../rtc_base:rtc_base_approved",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
+      "../system_wrappers:runtime_enabled_features_default",
     ]
     if (!build_with_chromium && is_clang) {
       # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
@@ -610,6 +614,7 @@ if (is_linux || is_win) {
       "../rtc_base:rtc_base_approved",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
+      "../system_wrappers:runtime_enabled_features_default",
     ]
     if (!build_with_chromium && is_clang) {
       # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
@@ -628,6 +633,7 @@ if (is_linux || is_win) {
       "../rtc_base:rtc_base_approved",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
+      "../system_wrappers:runtime_enabled_features_default",
     ]
     if (!build_with_chromium && is_clang) {
       # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
@@ -684,6 +690,7 @@ if (is_win || is_android) {
       "../rtc_base:rtc_base",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
+      "../system_wrappers:runtime_enabled_features_default",
     ]
     if (is_android) {
       deps += [ "../sdk/android:libjingle_peerconnection_jni" ]
@@ -739,6 +746,7 @@ if (!build_with_chromium) {
       "../rtc_base:rtc_base_approved",
       "../rtc_base:stringutils",
       "../system_wrappers:field_trial_default",
+      "../system_wrappers:runtime_enabled_features_default",
     ]
   }
 }

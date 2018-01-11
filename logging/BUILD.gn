@@ -198,6 +198,7 @@ if (rtc_enable_protobuf) {
         "../rtc_base:rtc_base_approved",
         "../rtc_base:rtc_base_tests_utils",
         "../system_wrappers:metrics_default",
+        "../system_wrappers:runtime_enabled_features_default",
         "../test:test_support",
         "//testing/gmock",
         "//testing/gtest",
@@ -223,6 +224,7 @@ if (rtc_enable_protobuf) {
         "../rtc_base:rtc_base_approved",
         "../system_wrappers:field_trial_default",
         "../system_wrappers:metrics_default",
+        "../system_wrappers:runtime_enabled_features_default",
         "../test:rtp_test_utils",
       ]
       if (!build_with_chromium && is_clang) {
