@@ -16,6 +16,24 @@
       "revId": "1ac900d8d98f8f654e67f29f3675e2614ce55afc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2294939_bf078cb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-11T14:14:14Z",
+      "side": 1,
+      "message": "You are right, they are still needed on iOS and Android. I assumed the errors were about unlisted GN files, which I fixed for a bunch of isac files.",
+      "parentUuid": "e484166f_c1b3df51",
+      "revId": "1ac900d8d98f8f654e67f29f3675e2614ce55afc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
