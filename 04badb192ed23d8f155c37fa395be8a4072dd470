@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1c213e93_49f97357",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-01-11T15:11:57Z",
+      "side": 1,
+      "message": "I added a DCHECK.",
+      "parentUuid": "8467cdc5_4c271e58",
+      "range": {
+        "startLine": 1143,
+        "startChar": 25,
+        "endLine": 1143,
+        "endChar": 38
+      },
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3280bd48_54888582",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "eac1e648_30bdd29d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-01-11T15:11:57Z",
+      "side": 1,
+      "message": "As discussed offline, it\u0027s best to keep the flag for now, since the echo detector should never be null in this implementation.",
+      "parentUuid": "3280bd48_54888582",
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16900bed_00650a06",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -56,6 +98,24 @@
       "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ed7fe53_bfb29fac",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-01-11T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16900bed_00650a06",
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "ab38f65b_e24cb22c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-01-11T15:11:57Z",
+      "side": 1,
+      "message": "I added a DCHECK.",
+      "parentUuid": "d0ac0ef1_59d62dc9",
+      "range": {
+        "startLine": 1686,
+        "startChar": 43,
+        "endLine": 1686,
+        "endChar": 56
+      },
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f220212_c32a760e",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -96,6 +180,24 @@
       "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5affc486_7b80b7ef",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1724,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-01-11T15:11:57Z",
+      "side": 1,
+      "message": "I added a DCHECK.",
+      "parentUuid": "3f220212_c32a760e",
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +221,30 @@
       "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9a247b0_dfe0dbbb",
+        "filename": "modules/audio_processing/residual_echo_detector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-01-11T15:11:57Z",
+      "side": 1,
+      "message": "Yes indeed, that\u0027s the plan.",
+      "parentUuid": "0b126bfe_1036423b",
+      "range": {
+        "startLine": 180,
+        "startChar": 44,
+        "endLine": 180,
+        "endChar": 58
+      },
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
