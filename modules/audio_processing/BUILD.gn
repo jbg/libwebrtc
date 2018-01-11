@@ -826,6 +826,7 @@ if (rtc_include_tests) {
       "../../rtc_base:rtc_base_approved",
       "../../system_wrappers",
       "../../system_wrappers:metrics_default",
+      "../../system_wrappers:runtime_enabled_features_default",
       "../../test:test_support",
       "//testing/gtest",
     ]
@@ -844,6 +845,7 @@ if (rtc_include_tests) {
       "../../:typedefs",
       "../../system_wrappers",
       "../../system_wrappers:metrics_default",
+      "../../system_wrappers:runtime_enabled_features_default",
     ]
   }
 
@@ -859,6 +861,7 @@ if (rtc_include_tests) {
       "../../rtc_base:checks",
       "../../rtc_base:rtc_base_approved",
       "../../system_wrappers:metrics_default",
+      "../../system_wrappers:runtime_enabled_features_default",
     ]
   }
 
@@ -873,6 +876,7 @@ if (rtc_include_tests) {
         ":audioproc_test_utils",
         "../../rtc_base:rtc_base_approved",
         "../../system_wrappers:metrics_default",
+        "../../system_wrappers:runtime_enabled_features_default",
         "../../test:test_support",
         "//testing/gtest",
       ]
