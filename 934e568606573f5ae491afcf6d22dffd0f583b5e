@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae4b7324_078bb16c",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-11T00:12:35Z",
+      "side": 1,
+      "message": "nit: Since these are only called in one place, and they\u0027re Plan B specific, may want to just inline?",
+      "revId": "934e568606573f5ae491afcf6d22dffd0f583b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
