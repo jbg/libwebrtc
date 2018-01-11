@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a0bd929_7dd2be19",
+        "filename": "modules/audio_processing/aec3/aec3_fft.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-01-11T13:14:04Z",
+      "side": 1,
+      "message": "I think the coefficients of the Hanning window should not include the zeros. I think the window should be two samples wider so the zeros end up in kHanning64[-1] and kHanning64[64]. Not sure if I\u0027m clear or not.",
+      "revId": "642291ccd8a1f60214f0833a50738a462837f260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
