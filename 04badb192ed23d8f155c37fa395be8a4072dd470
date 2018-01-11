@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8467cdc5_4c271e58",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T12:57:51Z",
+      "side": 1,
+      "message": "The case of a null echo detector must be properly handled.",
+      "range": {
+        "startLine": 1143,
+        "startChar": 25,
+        "endLine": 1143,
+        "endChar": 38
+      },
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3280bd48_54888582",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T12:57:51Z",
+      "side": 1,
+      "message": "Can we avoid using the enabled flag by checking whether private_submodules_-\u003eecho_detector is null?",
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16900bed_00650a06",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T12:57:51Z",
+      "side": 1,
+      "message": "If you don\u0027t check the echo_detector value in the if-statement, you should add a DCHECK of the pointer value here I think.",
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0ac0ef1_59d62dc9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T12:57:51Z",
+      "side": 1,
+      "message": "The case where echo_detector is nullptr need to be properly handled.",
+      "range": {
+        "startLine": 1686,
+        "startChar": 43,
+        "endLine": 1686,
+        "endChar": 56
+      },
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f220212_c32a760e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1724,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T12:57:51Z",
+      "side": 1,
+      "message": "See above regarding the check on the pointer vs the check of enabled.",
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b126bfe_1036423b",
+        "filename": "modules/audio_processing/residual_echo_detector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T12:57:51Z",
+      "side": 1,
+      "message": "Are these included for future use?",
+      "range": {
+        "startLine": 180,
+        "startChar": 44,
+        "endLine": 180,
+        "endChar": 58
+      },
+      "revId": "04badb192ed23d8f155c37fa395be8a4072dd470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
