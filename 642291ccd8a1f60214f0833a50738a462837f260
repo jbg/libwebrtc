@@ -16,6 +16,24 @@
       "revId": "642291ccd8a1f60214f0833a50738a462837f260",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4444497a_5f416b43",
+        "filename": "modules/audio_processing/aec3/aec3_fft.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-01-11T14:02:34Z",
+      "side": 1,
+      "message": "I think you have a great point! I tested in a reverberant recording, and the results were possibly slightly better. But for now I\u0027ll keep the standard Hanning window",
+      "parentUuid": "7a0bd929_7dd2be19",
+      "revId": "642291ccd8a1f60214f0833a50738a462837f260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
