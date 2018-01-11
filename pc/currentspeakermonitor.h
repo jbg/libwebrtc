@@ -17,13 +17,21 @@
 #include <stdint.h>
 
 #include <map>
+#include <utility>
+#include <vector>
 
 #include "rtc_base/sigslot.h"
 
 namespace cricket {
 
-struct AudioInfo;
 struct MediaStreams;
+
+struct AudioInfo {
+  int input_level;
+  int output_level;
+  typedef std::vector<std::pair<uint32_t, int> > StreamList;
+  StreamList active_streams;  // ssrcs contributing to output_level
+};
 
 class AudioSourceContext {
  public:

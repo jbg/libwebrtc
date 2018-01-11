@@ -13,8 +13,8 @@
 #include <vector>
 
 #include "media/base/streamparams.h"
-#include "pc/audiomonitor.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/timeutils.h"
 
 namespace cricket {
 
