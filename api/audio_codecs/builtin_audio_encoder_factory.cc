@@ -18,11 +18,11 @@
 #include "api/audio_codecs/g711/audio_encoder_g711.h"
 #include "api/audio_codecs/g722/audio_encoder_g722.h"
 #if WEBRTC_USE_BUILTIN_ILBC
-#include "api/audio_codecs/ilbc/audio_encoder_ilbc.h"  // nogncheck
+#include "api/audio_codecs/ilbc/audio_encoder_ilbc.h"
 #endif
 #include "api/audio_codecs/isac/audio_encoder_isac.h"
 #if WEBRTC_USE_BUILTIN_OPUS
-#include "api/audio_codecs/opus/audio_encoder_opus.h"  // nogncheck
+#include "api/audio_codecs/opus/audio_encoder_opus.h"
 #endif
 
 namespace webrtc {

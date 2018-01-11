@@ -21,12 +21,12 @@
 #include "modules/audio_coding/codecs/ilbc/audio_encoder_ilbc.h"
 #endif
 #ifdef WEBRTC_CODEC_ISACFX
-#include "modules/audio_coding/codecs/isac/fix/include/audio_decoder_isacfix.h"  // nogncheck
-#include "modules/audio_coding/codecs/isac/fix/include/audio_encoder_isacfix.h"  // nogncheck
+#include "modules/audio_coding/codecs/isac/fix/include/audio_decoder_isacfix.h"
+#include "modules/audio_coding/codecs/isac/fix/include/audio_encoder_isacfix.h"
 #endif
 #ifdef WEBRTC_CODEC_ISAC
-#include "modules/audio_coding/codecs/isac/main/include/audio_decoder_isac.h"  // nogncheck
-#include "modules/audio_coding/codecs/isac/main/include/audio_encoder_isac.h"  // nogncheck
+#include "modules/audio_coding/codecs/isac/main/include/audio_decoder_isac.h"
+#include "modules/audio_coding/codecs/isac/main/include/audio_encoder_isac.h"
 #endif
 #ifdef WEBRTC_CODEC_OPUS
 #include "modules/audio_coding/codecs/opus/audio_encoder_opus.h"
