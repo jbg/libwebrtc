@@ -1,4 +1,4 @@
- /*
+/*
  *  Copyright (c) 2017 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
@@ -19,6 +19,8 @@
 namespace webrtc {
 namespace runtime_enabled_features {
 bool IsWebRtcDualStreamModeEnabled();
+
 }  // namespace runtime_enabled_features
 }  // namespace webrtc
+
 #endif  // SYSTEM_WRAPPERS_INCLUDE_RUNTIME_ENABLED_FEATURES_H_

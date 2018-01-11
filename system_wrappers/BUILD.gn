@@ -53,6 +53,7 @@ rtc_static_library("system_wrappers") {
     ":cpu_features_api",
     ":field_trial_api",
     ":metrics_api",
+    ":runtime_enabled_features_api",
     "..:webrtc_common",
     "../:typedefs",
     "../api:optional",
