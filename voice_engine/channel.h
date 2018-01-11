@@ -187,7 +187,6 @@ class Channel
   // Muting, Volume and Level.
   void SetInputMute(bool enable);
   void SetChannelOutputVolumeScaling(float scaling);
-  int GetSpeechOutputLevel() const;
   int GetSpeechOutputLevelFullRange() const;
   // See description of "totalAudioEnergy" in the WebRTC stats spec:
   // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
@@ -264,7 +263,6 @@ class Channel
   bool Playing() const { return channel_state_.Get().playing; }
   bool Sending() const { return channel_state_.Get().sending; }
   RtpRtcp* RtpRtcpModulePtr() const { return _rtpRtcpModule.get(); }
-  int8_t OutputEnergyLevel() const { return _outputAudioLevel.Level(); }
 
   // ProcessAndEncodeAudio() posts a task on the shared encoder task queue,
   // which in turn calls (on the queue) ProcessAndEncodeAudioOnTaskQueue() where
