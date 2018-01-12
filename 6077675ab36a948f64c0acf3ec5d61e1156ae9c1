@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a81e0134_5c59ecd1",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-12T00:14:21Z",
+      "side": 1,
+      "message": "Why? I disagree; this is just a helper method to do a worker thread invoke, and it relies on the calling method to have checked if media_channel_ is null beforehand (which they do).",
+      "parentUuid": "cc5fcb2c_013616b3",
+      "range": {
+        "startLine": 64,
+        "startChar": 29,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "6077675ab36a948f64c0acf3ec5d61e1156ae9c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7cf50b97_589d72f4",
         "filename": "pc/rtpreceiver.h",
         "patchSetId": 6
@@ -59,6 +83,30 @@
       "writtenOn": "2018-01-11T23:31:21Z",
       "side": 1,
       "message": "What does \"channel\" mean here?  Perhaps just say \"when the first packet has been received\" and stop there?",
+      "range": {
+        "startLine": 41,
+        "startChar": 34,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "6077675ab36a948f64c0acf3ec5d61e1156ae9c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "648aaae0_1f433365",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-12T00:14:21Z",
+      "side": 1,
+      "message": "Might as well be specific and say \"MediaChannel\". Remember that this isn\u0027t actually \"first packet received for the receiver\"; if we have two video receivers, the first video packet destined for *either* of them will cause them *both* to signal \"first packet received\" because (with Plan B) they share a MediaChannel. Hopefully after enough refactoring we can fix that, and then we can change the comment.",
+      "parentUuid": "64ce383a_5d23aec7",
       "range": {
         "startLine": 41,
         "startChar": 34,
