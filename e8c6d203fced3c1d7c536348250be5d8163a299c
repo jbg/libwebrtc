@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "178d7db4_109b780c",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-12T09:22:44Z",
+      "side": 1,
+      "message": "This file doesn\u0027t appear to exist.",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 44
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c750b682_f29b8dad",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-12T09:22:44Z",
+      "side": 1,
+      "message": "This one doesn\u0027t appear to exist either.",
+      "range": {
+        "startLine": 201,
+        "startChar": 24,
+        "endLine": 201,
+        "endChar": 50
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2b9733e_363f6e3e",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-12T09:22:44Z",
+      "side": 1,
+      "message": "Remove this include block, keep build_with_mozilla in the first big block, and move down the things that start depending on build_with_mozilla to the second declare_args block in this file.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95c2d3c0_c83f07a5",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-12T09:22:44Z",
+      "side": 1,
+      "message": "This makes the defaults less readable, which is unfortunate. I think it has to be done this way though. We can\u0027t do \nif (build_with_mozilla) {\n  rtc_build_json \u003d false\n  ...\n}\n\nbecause then it becomes impossible to override rtc_build_json individually.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 41
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

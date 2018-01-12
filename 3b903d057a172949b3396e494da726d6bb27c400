@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ee5c04e_0e667952",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-12T09:22:44Z",
+      "side": 0,
+      "message": "I was concerned about this at first, but the change is mozilla-only so you know better than me :)",
+      "range": {
+        "startLine": 856,
+        "startChar": 21,
+        "endLine": 856,
+        "endChar": 35
+      },
+      "revId": "3b903d057a172949b3396e494da726d6bb27c400",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
