@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f66b1e44_9f49c7fc",
+        "filename": "webrtc.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T12:05:56Z",
+      "side": 1,
+      "message": "Maybe we should use the public_headers variable here instead of sources? Don\u0027t know if it makes any difference but it seems more semantically correct.",
+      "range": {
+        "startLine": 447,
+        "startChar": 41,
+        "endLine": 447,
+        "endChar": 48
+      },
+      "revId": "c7049206120918f2b4a16881b55a10c67c906577",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
