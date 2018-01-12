@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ecc9ca2_5ea5b9c2",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "Move to webrtc.gni",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb7b4152_325871ef",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "Explicitly name required variables",
+      "range": {
+        "startLine": 40,
+        "startChar": 38,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a819f62_c991115c",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "make this a variable in the invoker to prevent duplication",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cea7b01_2f7a389d",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better to keep WebRTC/WebRTC.h for backwards-compat? Is there a good reason to change it?",
+      "range": {
+        "startLine": 60,
+        "startChar": 10,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcf57a76_c5caa016",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 0
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4574eca8_d1218b9e",
+        "filename": "sdk/objc/Framework/UnitTests/RTCDoNotPutCPlusPlusInFrameworkHeaders_xctest.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "Ditto about WebRTC/WebRTC.h",
+      "range": {
+        "startLine": 15,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aed768a2_1c6da99b",
+        "filename": "sdk/objc/generate_umbrella_header.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "Move this file to tools_webrtc/ios",
+      "range": {
+        "startLine": 1,
+        "startChar": 21,
+        "endLine": 1,
+        "endChar": 24
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9146de0a_5cac4afe",
+        "filename": "sdk/objc/generate_umbrella_header.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "This function should return an int to pass to sys.exit",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c42d1e7b_b9ac57bc",
+        "filename": "sdk/objc/generate_umbrella_header.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T09:39:06Z",
+      "side": 1,
+      "message": "The python way to do this is using `with`, e.g.\n\nwith open(args.out, \"w\") as outfile:\n  outfile.write(...)\n\nThen you don\u0027t need to remember to close it.",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
