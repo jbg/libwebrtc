@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "0c66e164_575b010e",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cec6cab_648f3aea",
+      "range": {
+        "startLine": 348,
+        "startChar": 8,
+        "endLine": 348,
+        "endChar": 9
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "178d7db4_109b780c",
         "filename": "call/BUILD.gn",
         "patchSetId": 1
@@ -62,6 +86,30 @@
       "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdfac31e_830b630a",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "178d7db4_109b780c",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 44
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "a1317cf1_768273c8",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7db5a323_fcccebfe",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 7
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2daec6ed_0a121df5",
         "filename": "media/BUILD.gn",
         "patchSetId": 1
@@ -102,6 +174,24 @@
       "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "652f4e66_de1ec079",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "I\u0027ll drop this change for now and include a separate build target as part of our next upstream import.",
+      "parentUuid": "2daec6ed_0a121df5",
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -128,6 +218,30 @@
     },
     {
       "key": {
+        "uuid": "7a84d969_17bcb6cc",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c750b682_f29b8dad",
+      "range": {
+        "startLine": 201,
+        "startChar": 24,
+        "endLine": 201,
+        "endChar": 50
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4dd7b5e8_9b2b313d",
         "filename": "modules/desktop_capture/BUILD.gn",
         "patchSetId": 1
@@ -151,6 +265,30 @@
     },
     {
       "key": {
+        "uuid": "a4f7b32a_24cd8c4b",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dd7b5e8_9b2b313d",
+      "range": {
+        "startLine": 376,
+        "startChar": 6,
+        "endLine": 376,
+        "endChar": 7
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baddcc0e_d49dc727",
         "filename": "modules/remote_bitrate_estimator/BUILD.gn",
         "patchSetId": 1
@@ -165,6 +303,24 @@
       "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b5ae0d4_e565caea",
+        "filename": "modules/remote_bitrate_estimator/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baddcc0e_d49dc727",
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -191,6 +347,30 @@
     },
     {
       "key": {
+        "uuid": "e91caae0_b9bb779f",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec45a17f_572ca980",
+      "range": {
+        "startLine": 170,
+        "startChar": 10,
+        "endLine": 170,
+        "endChar": 11
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c8edce_8fc5b4fd",
         "filename": "system_wrappers/BUILD.gn",
         "patchSetId": 1
@@ -211,6 +391,30 @@
       "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c22f26f_7e35d986",
+        "filename": "system_wrappers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c8edce_8fc5b4fd",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 9
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -237,6 +441,30 @@
     },
     {
       "key": {
+        "uuid": "cc67b597_c0c1af51",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2b9733e_363f6e3e",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95c2d3c0_c83f07a5",
         "filename": "webrtc.gni",
         "patchSetId": 1
@@ -248,6 +476,30 @@
       "writtenOn": "2018-01-12T09:22:44Z",
       "side": 1,
       "message": "This makes the defaults less readable, which is unfortunate. I think it has to be done this way though. We can\u0027t do \nif (build_with_mozilla) {\n  rtc_build_json \u003d false\n  ...\n}\n\nbecause then it becomes impossible to override rtc_build_json individually.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 41
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d870ef_3eda9e5b",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2018-01-12T19:52:10Z",
+      "side": 1,
+      "message": "I agree that this is ugly, but I was unable to find another way of setting these. If I attempt to have them default to true and then override them below, I get warnings about duplicate declarations.",
+      "parentUuid": "95c2d3c0_c83f07a5",
       "range": {
         "startLine": 97,
         "startChar": 0,
