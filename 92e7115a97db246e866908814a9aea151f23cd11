@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6dff277a_3d0a041e",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-01-12T13:19:37Z",
+      "side": 1,
+      "message": "Agree. Names were confusing. Now changed.",
+      "parentUuid": "36a8c358_e51f654d",
+      "range": {
+        "startLine": 425,
+        "startChar": 5,
+        "endLine": 425,
+        "endChar": 28
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "318e1fdc_6addc17a",
         "filename": "test/fuzzers/BUILD.gn",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-02T09:43:16Z",
       "side": 1,
       "message": "aecm --\u003e aec2",
+      "range": {
+        "startLine": 462,
+        "startChar": 8,
+        "endLine": 462,
+        "endChar": 9
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62f37bb2_08ca1247",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-01-12T13:19:37Z",
+      "side": 1,
+      "message": "Deleted extra targets after offline discussion",
+      "parentUuid": "318e1fdc_6addc17a",
       "range": {
         "startLine": 462,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "82db56f4_37552449",
+        "filename": "test/fuzzers/audio_processing_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-01-12T13:19:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "070aef30_ad76fe1b",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f885cd0_6cd93aa4",
         "filename": "test/fuzzers/audio_processing_fuzzer.cc",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "92e7115a97db246e866908814a9aea151f23cd11",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef0f4269_78aa3bd2",
+        "filename": "test/fuzzers/audio_processing_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-01-12T13:19:37Z",
+      "side": 1,
+      "message": "Sure, but we still need 4 cases for all combinations of is_float / is_capture.",
+      "parentUuid": "0f885cd0_6cd93aa4",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "92e7115a97db246e866908814a9aea151f23cd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
