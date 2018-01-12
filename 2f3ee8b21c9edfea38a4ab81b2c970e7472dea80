@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdf0b1aa_a2177980",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCFileVideoCapturer.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T10:17:29Z",
+      "side": 1,
+      "message": "Can you rewrite this to use rtc::ScopedCFRefType?",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 13
+      },
+      "revId": "2f3ee8b21c9edfea38a4ab81b2c970e7472dea80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dba0351c_1366679e",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoDecoderH264.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T10:17:29Z",
+      "side": 1,
+      "message": "Aslo, while here, maybe rewrite this with scopedCFRefType if you feel like it :D\n\nThen we can move the return closer to where the error occurred, simplifying the code a bit.",
+      "range": {
+        "startLine": 135,
+        "startChar": 6,
+        "endLine": 135,
+        "endChar": 15
+      },
+      "revId": "2f3ee8b21c9edfea38a4ab81b2c970e7472dea80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b4a0c05_1ba820fd",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoDecoderH264.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T10:17:29Z",
+      "side": 1,
+      "message": "!\u003d instead of \u003c. Don\u0027t assume the order.",
+      "range": {
+        "startLine": 137,
+        "startChar": 42,
+        "endLine": 137,
+        "endChar": 43
+      },
+      "revId": "2f3ee8b21c9edfea38a4ab81b2c970e7472dea80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9fd4577_8888c86b",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCVideoCodec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-01-12T10:17:29Z",
+      "side": 1,
+      "message": "Maybe this shouldn\u0027t be nullable? It should always be set to something, but may be 0 or -1 to signal invalid state.",
+      "range": {
+        "startLine": 54,
+        "startChar": 29,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "2f3ee8b21c9edfea38a4ab81b2c970e7472dea80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
