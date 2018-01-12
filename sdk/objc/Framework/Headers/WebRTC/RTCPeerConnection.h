@@ -212,7 +212,7 @@ RTC_EXPORT
 @interface RTCPeerConnection (DataChannel)
 
 /** Create a new data channel with the given label and configuration. */
-- (RTCDataChannel *)dataChannelForLabel:(NSString *)label
+- (nullable RTCDataChannel *)dataChannelForLabel:(NSString *)label
     configuration:(RTCDataChannelConfiguration *)configuration;
 
 @end

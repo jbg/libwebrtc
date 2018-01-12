@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  * RTCConfiguration struct representation of this RTCConfiguration. This is
  * needed to pass to the underlying C++ APIs.
  */
-- (webrtc::PeerConnectionInterface::RTCConfiguration *)
+- (nullable webrtc::PeerConnectionInterface::RTCConfiguration *)
     createNativeConfiguration;
 
 - (instancetype)initWithNativeConfiguration:
