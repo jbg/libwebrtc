@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "d7ccae95_e687f6da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "This is a good title, but it\u0027d be nice with one or more paragraphs more that detail what this change does, especially since it seems to be doing more than one thing.",
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cec6cab_648f3aea",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Invert condition to make it easier to read?",
+      "range": {
+        "startLine": 348,
+        "startChar": 8,
+        "endLine": 348,
+        "endChar": 9
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "178d7db4_109b780c",
         "filename": "call/BUILD.gn",
         "patchSetId": 1
@@ -25,6 +65,46 @@
     },
     {
       "key": {
+        "uuid": "7db5a323_fcccebfe",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Invert condition?",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 7
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2daec6ed_0a121df5",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Are these Mozilla files? If so, shouldn\u0027t the build target be declared in a BUILD.gn file in the Mozilla repo?",
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c750b682_f29b8dad",
         "filename": "modules/desktop_capture/BUILD.gn",
         "patchSetId": 1
@@ -41,6 +121,92 @@
         "startChar": 24,
         "endLine": 201,
         "endChar": 50
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dd7b5e8_9b2b313d",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Negate condition?",
+      "range": {
+        "startLine": 376,
+        "startChar": 6,
+        "endLine": 376,
+        "endChar": 7
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baddcc0e_d49dc727",
+        "filename": "modules/remote_bitrate_estimator/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Are you removing *all* deps on rtc_base? In that case, could you instead modify the rtc_base target so that it\u0027s empty (or doesn\u0027t contain the offending stuff) if build_with_mozilla? I have a feeling that would be better than to have dozens of these all over the place.",
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec45a17f_572ca980",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Invert condition...",
+      "range": {
+        "startLine": 170,
+        "startChar": 10,
+        "endLine": 170,
+        "endChar": 11
+      },
+      "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c8edce_8fc5b4fd",
+        "filename": "system_wrappers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-12T09:56:12Z",
+      "side": 1,
+      "message": "Invert condition...",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 9
       },
       "revId": "e8c6d203fced3c1d7c536348250be5d8163a299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
