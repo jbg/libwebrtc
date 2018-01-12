@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7775b622_013a7aef",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ecc9ca2_5ea5b9c2",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb7b4152_325871ef",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9025bc3_d13aacf8",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb7b4152_325871ef",
+      "range": {
+        "startLine": 40,
+        "startChar": 38,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e1f4d6a1_2358f1b6",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Realized it was actually possible to share the variable in the ios_framework_bundle_with_umbrella_header scope.",
+      "parentUuid": "7a819f62_c991115c",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3cea7b01_2f7a389d",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a16407e3_0af030f8",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "It\u0027s still imported as `WebRTC/WebRTC.h` when the framework is included in an app. But inside the framework bundle, the file is in `Headers/WebRTC.h`. Since we are generating the file into its final destination inside the framework bundle I don\u0027t think we shouldn\u0027t put it in a WebRTC subdirectory.",
+      "parentUuid": "3cea7b01_2f7a389d",
+      "range": {
+        "startLine": 60,
+        "startChar": 10,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "c3cc0be4_02a05865",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Yes it seems so, otherwise the target does not inherit the required configs.",
+      "parentUuid": "bcf57a76_c5caa016",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 0
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4574eca8_d1218b9e",
         "filename": "sdk/objc/Framework/UnitTests/RTCDoNotPutCPlusPlusInFrameworkHeaders_xctest.m",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75eea610_af8dde96",
+        "filename": "sdk/objc/Framework/UnitTests/RTCDoNotPutCPlusPlusInFrameworkHeaders_xctest.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "See other comment",
+      "parentUuid": "4574eca8_d1218b9e",
+      "range": {
+        "startLine": 15,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "9a566650_dc708020",
+        "filename": "sdk/objc/generate_umbrella_header.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aed768a2_1c6da99b",
+      "range": {
+        "startLine": 1,
+        "startChar": 21,
+        "endLine": 1,
+        "endChar": 24
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9146de0a_5cac4afe",
         "filename": "sdk/objc/generate_umbrella_header.py",
         "patchSetId": 1
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "13e37041_1a4a6f0b",
+        "filename": "sdk/objc/generate_umbrella_header.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Using explicit returns, like a caveman.",
+      "parentUuid": "9146de0a_5cac4afe",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42d1e7b_b9ac57bc",
         "filename": "sdk/objc/generate_umbrella_header.py",
         "patchSetId": 1
@@ -206,6 +398,30 @@
       "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8360bd1d_5242d71e",
+        "filename": "sdk/objc/generate_umbrella_header.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-12T11:51:49Z",
+      "side": 1,
+      "message": "Neat 👌",
+      "parentUuid": "c42d1e7b_b9ac57bc",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "4a52b89e6869123d94c6ba5b69cd99043dd4923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
