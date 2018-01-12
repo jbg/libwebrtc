@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23f85a2b_49ab31c3",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-12T10:41:54Z",
+      "side": 1,
+      "message": "I did a quick search in videoprocessor.cc and videoprocessor_integrationtest.cc, and I didn\u0027t see a use for this field. Maybe it can be removed? That would simplify the instantiation of this object, and further remove the need for the Stats class.",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "f0fc9666a0306532706141b71b7a15e118b157e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
