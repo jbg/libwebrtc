@@ -99,7 +99,7 @@ void decompressionOutputCallback(void *decoderRef,
 - (NSInteger)decode:(RTCEncodedImage *)inputImage
           missingFrames:(BOOL)missingFrames
     fragmentationHeader:(RTCRtpFragmentationHeader *)fragmentationHeader
-      codecSpecificInfo:(__nullable id<RTCCodecSpecificInfo>)info
+      codecSpecificInfo:(nullable id<RTCCodecSpecificInfo>)info
            renderTimeMs:(int64_t)renderTimeMs {
   RTC_DCHECK(inputImage.buffer);
 
@@ -127,11 +127,16 @@ void decompressionOutputCallback(void *decoderRef,
     if (inputFormat) {
       // Check if the video format has changed, and reinitialize decoder if
       // needed.
+      int resetDecompressionSessionError = WEBRTC_VIDEO_CODEC_OK;
       if (!CMFormatDescriptionEqual(inputFormat, _videoFormat)) {
         [self setVideoFormat:inputFormat];
-        [self resetDecompressionSession];
+        resetDecompressionSessionError = [self resetDecompressionSession];
       }
       CFRelease(inputFormat);
+
+      if (resetDecompressionSessionError < WEBRTC_VIDEO_CODEC_OK) {
+        return resetDecompressionSessionError;
+      }
     }
   }
   if (!_videoFormat) {
