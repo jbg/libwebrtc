@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fa3eccc_749d22fe",
+        "filename": "pc/currentspeakermonitor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-12T09:42:39Z",
+      "side": 1,
+      "message": "The API which returns a level from 0 to 9 is gone - how is this constant still being used?",
+      "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
