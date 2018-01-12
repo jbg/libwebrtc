@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ad02adb_fca38786",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-01-12T09:55:39Z",
+      "side": 1,
+      "message": "there",
+      "range": {
+        "startLine": 130,
+        "startChar": 59,
+        "endLine": 130,
+        "endChar": 62
+      },
+      "revId": "ebd994e6c81801a6153daefbf6eaaa9e85073085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d074f5c_d569737c",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-01-12T09:55:39Z",
+      "side": 1,
+      "message": "Nit: introduce time_between_frames_ms \u003d 1000 / *target_framerate_; \nUse here 9*time_between_frames_ms/10 instead. A bit more computations, but much more understandable. It takes time to understand there constant 900 here came from. Up to you.",
+      "range": {
+        "startLine": 136,
+        "startChar": 39,
+        "endLine": 136,
+        "endChar": 63
+      },
+      "revId": "ebd994e6c81801a6153daefbf6eaaa9e85073085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
