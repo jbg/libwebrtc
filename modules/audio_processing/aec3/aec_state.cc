@@ -78,6 +78,7 @@ void AecState::HandleEchoPathChange(
     render_received_ = false;
     force_zero_gain_ = true;
     blocks_with_active_render_ = 0;
+    initial_state_ = true;
   };
 
   // TODO(peah): Refine the reset scheme according to the type of gain and
@@ -153,12 +154,15 @@ void AecState::Update(
 
   // TODO(peah): Move?
   filter_has_had_time_to_converge_ =
-      blocks_with_proper_filter_adaptation_ >= 2 * kNumBlocksPerSecond;
+      blocks_with_proper_filter_adaptation_ >= 2.5 * kNumBlocksPerSecond;
+
+  initial_state_ =
+      blocks_with_proper_filter_adaptation_ < 5 * kNumBlocksPerSecond;
 
   // Flag whether the linear filter estimate is usable.
   usable_linear_estimate_ =
       !echo_saturation_ &&
-      (converged_filter || filter_has_had_time_to_converge_) &&
+      (converged_filter && filter_has_had_time_to_converge_) &&
       capture_block_counter_ >= 2 * kNumBlocksPerSecond && !TransparentMode();
 
   // After an amount of active render samples for which an echo should have been

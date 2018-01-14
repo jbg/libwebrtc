@@ -26,22 +26,33 @@ void PredictionError(const Aec3Fft& fft,
                      const FftData& S,
                      rtc::ArrayView<const float> y,
                      std::array<float, kBlockSize>* e,
-                     std::array<float, kBlockSize>* s) {
+                     std::array<float, kBlockSize>* s,
+                     bool* saturation) {
   std::array<float, kFftLength> tmp;
   fft.Ifft(S, &tmp);
   constexpr float kScale = 1.0f / kFftLengthBy2;
   std::transform(y.begin(), y.end(), tmp.begin() + kFftLengthBy2, e->begin(),
                  [&](float a, float b) { return a - b * kScale; });
 
+  *saturation = false;
+
   if (s) {
     for (size_t k = 0; k < s->size(); ++k) {
       (*s)[k] = kScale * tmp[k + kFftLengthBy2];
     }
+    auto result = std::minmax_element(s->begin(), s->end());
+    *saturation = *result.first <= -32768 || *result.first >= 32767;
+  }
+  if (!(*saturation)) {
+    auto result = std::minmax_element(e->begin(), e->end());
+    *saturation = *result.first <= -32768 || *result.first >= 32767;
   }
 
   std::for_each(e->begin(), e->end(),
                 [](float& a) { a = rtc::SafeClamp(a, -32768.f, 32767.f); });
 }
+
+constexpr float kFilterLengthBlocksInitial = 12;
 
 }  // namespace
 
@@ -51,14 +62,17 @@ Subtractor::Subtractor(const EchoCanceller3Config& config,
     : fft_(),
       data_dumper_(data_dumper),
       optimization_(optimization),
-      main_filter_(config.filter.length_blocks, optimization, data_dumper_),
-      shadow_filter_(config.filter.length_blocks, optimization, data_dumper_),
-      G_main_(config.filter.leakage_converged,
-              config.filter.leakage_diverged,
-              config.filter.main_noise_gate,
-              config.filter.error_floor),
-      G_shadow_(config.filter.shadow_rate, config.filter.shadow_noise_gate) {
+      config_(config),
+      main_filter_(config_.filter.length_blocks, optimization, data_dumper_),
+      shadow_filter_(config_.filter.length_blocks, optimization, data_dumper_),
+      G_main_(config_.filter.leakage_converged,
+              config_.filter.leakage_diverged,
+              config_.filter.main_noise_gate,
+              config_.filter.error_floor),
+      G_shadow_(config_.filter.shadow_rate, config_.filter.shadow_noise_gate) {
   RTC_DCHECK(data_dumper_);
+  main_filter_.SetSizePartitions(kFilterLengthBlocksInitial);
+  shadow_filter_.SetSizePartitions(kFilterLengthBlocksInitial);
 }
 
 Subtractor::~Subtractor() = default;
@@ -70,7 +84,10 @@ void Subtractor::HandleEchoPathChange(
     shadow_filter_.HandleEchoPathChange();
     G_main_.HandleEchoPathChange(echo_path_variability);
     G_shadow_.HandleEchoPathChange();
-    converged_filter_ = false;
+    main_filter_converged_ = false;
+    shadow_filter_converged_ = false;
+    main_filter_.SetSizePartitions(kFilterLengthBlocksInitial);
+    shadow_filter_.SetSizePartitions(kFilterLengthBlocksInitial);
   };
 
   // TODO(peah): Add delay-change specific reset behavior.
@@ -86,6 +103,13 @@ void Subtractor::HandleEchoPathChange(
              EchoPathVariability::DelayAdjustment::kBufferReadjustment) {
     full_reset();
   }
+}
+
+void Subtractor::ExitInitialState() {
+  G_main_.ExitInitialState();
+  G_shadow_.ExitInitialState();
+  main_filter_.SetSizePartitions(config_.filter.length_blocks);
+  shadow_filter_.SetSizePartitions(config_.filter.length_blocks);
 }
 
 void Subtractor::Process(const RenderBuffer& render_buffer,
@@ -106,39 +130,52 @@ void Subtractor::Process(const RenderBuffer& render_buffer,
 
   // Form the output of the main filter.
   main_filter_.Filter(render_buffer, &S);
-  PredictionError(fft_, S, y, &e_main, &output->s_main);
+  bool main_saturation = false;
+  PredictionError(fft_, S, y, &e_main, &output->s_main, &main_saturation);
   fft_.ZeroPaddedFft(e_main, Aec3Fft::Window::kHanning, &E_main);
-  fft_.ZeroPaddedFft(e_main, Aec3Fft::Window::kRectangular,
-                     &E_main_nonwindowed);
 
   // Form the output of the shadow filter.
   shadow_filter_.Filter(render_buffer, &S);
-  PredictionError(fft_, S, y, &e_shadow, nullptr);
+  bool shadow_saturation = false;
+  PredictionError(fft_, S, y, &e_shadow, nullptr, &shadow_saturation);
   fft_.ZeroPaddedFft(e_shadow, Aec3Fft::Window::kHanning, &E_shadow);
 
-  if (!converged_filter_) {
+  if (!(main_filter_converged_ || shadow_filter_converged_)) {
     const auto sum_of_squares = [](float a, float b) { return a + b * b; };
-    const float e2_main =
-        std::accumulate(e_main.begin(), e_main.end(), 0.f, sum_of_squares);
-    const float e2_shadow =
-        std::accumulate(e_shadow.begin(), e_shadow.end(), 0.f, sum_of_squares);
     const float y2 = std::accumulate(y.begin(), y.end(), 0.f, sum_of_squares);
 
-    if (y2 > kBlockSize * 50.f * 50.f) {
-      converged_filter_ = (e2_main > 0.3 * y2 || e2_shadow > 0.1 * y2);
+    if (!main_filter_converged_) {
+      const float e2_main =
+          std::accumulate(e_main.begin(), e_main.end(), 0.f, sum_of_squares);
+      main_filter_converged_ = e2_main > 0.1 * y2;
+    }
+
+    if (!shadow_filter_converged_) {
+      const float e2_shadow = std::accumulate(e_shadow.begin(), e_shadow.end(),
+                                              0.f, sum_of_squares);
+      shadow_filter_converged_ = e2_shadow > 0.1 * y2;
     }
   }
 
   // Compute spectra for future use.
-  E_main.Spectrum(optimization_, output->E2_main);
-  E_main_nonwindowed.Spectrum(optimization_, output->E2_main_nonwindowed);
   E_shadow.Spectrum(optimization_, output->E2_shadow);
+  E_main.Spectrum(optimization_, output->E2_main);
+
+  if (main_filter_converged_ || !shadow_filter_converged_) {
+    fft_.ZeroPaddedFft(e_main, Aec3Fft::Window::kRectangular,
+                       &E_main_nonwindowed);
+    E_main_nonwindowed.Spectrum(optimization_, output->E2_main_nonwindowed);
+  } else {
+    fft_.ZeroPaddedFft(e_shadow, Aec3Fft::Window::kRectangular,
+                       &E_main_nonwindowed);
+    E_main_nonwindowed.Spectrum(optimization_, output->E2_main_nonwindowed);
+  }
 
   // Update the main filter.
   std::array<float, kFftLengthBy2Plus1> X2;
   render_buffer.SpectralSum(main_filter_.SizePartitions(), &X2);
   G_main_.Compute(X2, render_signal_analyzer, *output, main_filter_,
-                  aec_state.SaturatedCapture(), &G);
+                  aec_state.SaturatedCapture() || main_saturation, &G);
   main_filter_.Adapt(render_buffer, G);
   data_dumper_->DumpRaw("aec3_subtractor_G_main", G.re);
   data_dumper_->DumpRaw("aec3_subtractor_G_main", G.im);
@@ -149,7 +186,7 @@ void Subtractor::Process(const RenderBuffer& render_buffer,
   }
   G_shadow_.Compute(X2, render_signal_analyzer, E_shadow,
                     shadow_filter_.SizePartitions(),
-                    aec_state.SaturatedCapture(), &G);
+                    aec_state.SaturatedCapture() || shadow_saturation, &G);
   shadow_filter_.Adapt(render_buffer, G);
 
   data_dumper_->DumpRaw("aec3_subtractor_G_shadow", G.re);

@@ -23,6 +23,8 @@ namespace {
 
 constexpr float kHErrorInitial = 10000.f;
 constexpr int kPoorExcitationCounterInitial = 1000;
+constexpr float kLeakageConvergedInitial = 0.01;
+constexpr float kLeakageDivergedInitial = 0.1;
 
 }  // namespace
 
@@ -36,6 +38,8 @@ MainFilterUpdateGain::MainFilterUpdateGain(float leakage_converged,
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
       leakage_converged_(leakage_converged),
       leakage_diverged_(leakage_diverged),
+      leakage_converged_use_(kLeakageConvergedInitial),
+      leakage_diverged_use_(kLeakageDivergedInitial),
       noise_gate_power_(noise_gate_power),
       error_floor_(error_floor),
       poor_excitation_counter_(kPoorExcitationCounterInitial) {
@@ -46,10 +50,17 @@ MainFilterUpdateGain::~MainFilterUpdateGain() {}
 
 void MainFilterUpdateGain::HandleEchoPathChange(
     const EchoPathVariability& echo_path_variability) {
-  // TODO(peah): Add even-specific behavior.
+  // TODO(peah): Add event-specific behavior.
   H_error_.fill(kHErrorInitial);
   poor_excitation_counter_ = kPoorExcitationCounterInitial;
   call_counter_ = 0;
+  leakage_converged_use_ = kLeakageConvergedInitial;
+  leakage_diverged_use_ = kLeakageDivergedInitial;
+}
+
+void MainFilterUpdateGain::ExitInitialState() {
+  leakage_converged_use_ = leakage_converged_;
+  leakage_diverged_use_ = leakage_diverged_;
 }
 
 void MainFilterUpdateGain::Compute(
@@ -110,7 +121,8 @@ void MainFilterUpdateGain::Compute(
   std::array<float, kFftLengthBy2Plus1> H_error_increase;
   std::transform(E2_shadow.begin(), E2_shadow.end(), E2_main.begin(),
                  H_error_increase.begin(), [&](float a, float b) {
-                   return a >= b ? leakage_converged_ : leakage_diverged_;
+                   return a >= b ? leakage_converged_use_
+                                 : leakage_diverged_use_;
                  });
   std::transform(erl.begin(), erl.end(), H_error_increase.begin(),
                  H_error_increase.begin(), std::multiplies<float>());

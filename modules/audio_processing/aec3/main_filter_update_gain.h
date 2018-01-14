@@ -37,6 +37,9 @@ class MainFilterUpdateGain {
   // Takes action in the case of a known echo path change.
   void HandleEchoPathChange(const EchoPathVariability& echo_path_variability);
 
+  // Exits the initial mode.
+  void ExitInitialState();
+
   // Computes the gain.
   void Compute(const std::array<float, kFftLengthBy2Plus1>& render_power,
                const RenderSignalAnalyzer& render_signal_analyzer,
@@ -50,6 +53,8 @@ class MainFilterUpdateGain {
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const float leakage_converged_;
   const float leakage_diverged_;
+  float leakage_converged_use_;
+  float leakage_diverged_use_;
   const float noise_gate_power_;
   const float error_floor_;
   std::array<float, kFftLengthBy2Plus1> H_error_;

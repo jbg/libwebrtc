@@ -26,6 +26,9 @@ class ShadowFilterUpdateGain {
   // Takes action in the case of a known echo path change.
   void HandleEchoPathChange();
 
+  // Exits the initial state.
+  void ExitInitialState();
+
   // Computes the gain.
   void Compute(const std::array<float, kFftLengthBy2Plus1>& render_power,
                const RenderSignalAnalyzer& render_signal_analyzer,
@@ -36,6 +39,7 @@ class ShadowFilterUpdateGain {
 
  private:
   const float rate_;
+  float rate_use_;
   const float noise_gate_power_;
   // TODO(peah): Check whether this counter should instead be initialized to a
   // large value.
