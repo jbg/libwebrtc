@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf0bcc3f_13ef2bac",
+        "filename": "tools_webrtc/ios/generate_umbrella_header.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-15T08:51:20Z",
+      "side": 1,
+      "message": "Nit: two blank lines before top-level classes or functions",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "4244d99e8a5e16e37f8db6dd4188809f975d443a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "194673f8_aa775870",
+        "filename": "tools_webrtc/ios/generate_umbrella_header.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-15T08:51:20Z",
+      "side": 1,
+      "message": "Perhaps \n\nimport datetime\n\n...\n*  Copyright %d The WebRTC ...\n\"\"\" % datetime.datetime.now().year)",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 22
+      },
+      "revId": "4244d99e8a5e16e37f8db6dd4188809f975d443a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
