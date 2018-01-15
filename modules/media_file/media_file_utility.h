@@ -98,37 +98,6 @@ private:
         int16_t nBlockAlign;
         int16_t nBitsPerSample;
     };
-    // Identifiers for preencoded files.
-    enum MediaFileUtility_CodecType
-    {
-        kCodecNoCodec  = 0,
-        kCodecIsac,
-        kCodecIsacSwb,
-        kCodecIsacLc,
-        kCodecL16_8Khz,
-        kCodecL16_16kHz,
-        kCodecL16_32Khz,
-        kCodecL16_48Khz,
-        kCodecPcmu,
-        kCodecPcma,
-        kCodecIlbc20Ms,
-        kCodecIlbc30Ms,
-        kCodecG722,
-        kCodecG722_1_32Kbps,
-        kCodecG722_1_24Kbps,
-        kCodecG722_1_16Kbps,
-        kCodecG722_1c_48,
-        kCodecG722_1c_32,
-        kCodecG722_1c_24,
-        kCodecAmr,
-        kCodecAmrWb,
-        kCodecG729,
-        kCodecG729_1,
-        kCodecG726_40,
-        kCodecG726_32,
-        kCodecG726_24,
-        kCodecG726_16
-    };
 
     // TODO (hellner): why store multiple formats. Just store either codec_info_
     //                 or _wavFormatObj and supply conversion functions.
@@ -143,7 +112,6 @@ private:
     uint32_t _playoutPositionMs;
 
     CodecInst codec_info_;
-    MediaFileUtility_CodecType _codecId;
 
     // The amount of bytes, on average, used for one audio sample.
     size_t _bytesPerSample;

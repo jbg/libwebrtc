@@ -49,7 +49,6 @@ ModuleFileUtility::ModuleFileUtility()
       _startPointInMs(0),
       _playoutPositionMs(0),
       codec_info_(),
-      _codecId(kCodecNoCodec),
       _bytesPerSample(0),
       _readPos(0),
       _reading(false),
@@ -218,13 +217,11 @@ int32_t ModuleFileUtility::InitWavCodec(uint32_t samplesPerSec,
   switch (formatTag) {
     case kWavFormatALaw:
       strcpy(codec_info_.plname, "PCMA");
-      _codecId = kCodecPcma;
       codec_info_.pltype = 8;
       codec_info_.pacsize = codec_info_.plfreq / 100;
       break;
     case kWavFormatMuLaw:
       strcpy(codec_info_.plname, "PCMU");
-      _codecId = kCodecPcmu;
       codec_info_.pltype = 0;
       codec_info_.pacsize = codec_info_.plfreq / 100;
       break;
@@ -232,34 +229,27 @@ int32_t ModuleFileUtility::InitWavCodec(uint32_t samplesPerSec,
       codec_info_.pacsize = (bitsPerSample * (codec_info_.plfreq / 100)) / 8;
       if (samplesPerSec == 8000) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_8Khz;
       } else if (samplesPerSec == 16000) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_16kHz;
       } else if (samplesPerSec == 32000) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_32Khz;
       }
       // Set the packet size for "odd" sampling frequencies so that it
       // properly corresponds to _readSizeBytes.
       else if (samplesPerSec == 11025) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_16kHz;
         codec_info_.pacsize = 110;
         codec_info_.plfreq = 11000;
       } else if (samplesPerSec == 22050) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_16kHz;
         codec_info_.pacsize = 220;
         codec_info_.plfreq = 22000;
       } else if (samplesPerSec == 44100) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_16kHz;
         codec_info_.pacsize = 440;
         codec_info_.plfreq = 44000;
       } else if (samplesPerSec == 48000) {
         strcpy(codec_info_.plname, "L16");
-        _codecId = kCodecL16_16kHz;
         codec_info_.pacsize = 480;
         codec_info_.plfreq = 48000;
       } else {
@@ -462,7 +452,6 @@ int32_t ModuleFileUtility::InitPCMReading(InStream& pcm,
     codec_info_.pacsize = 160;
     codec_info_.channels = 1;
     codec_info_.rate = 128000;
-    _codecId = kCodecL16_8Khz;
   } else if (freq == 16000) {
     strcpy(codec_info_.plname, "L16");
     codec_info_.pltype = -1;
@@ -470,7 +459,6 @@ int32_t ModuleFileUtility::InitPCMReading(InStream& pcm,
     codec_info_.pacsize = 320;
     codec_info_.channels = 1;
     codec_info_.rate = 256000;
-    _codecId = kCodecL16_16kHz;
   } else if (freq == 32000) {
     strcpy(codec_info_.plname, "L16");
     codec_info_.pltype = -1;
@@ -478,7 +466,6 @@ int32_t ModuleFileUtility::InitPCMReading(InStream& pcm,
     codec_info_.pacsize = 320;
     codec_info_.channels = 1;
     codec_info_.rate = 512000;
-    _codecId = kCodecL16_32Khz;
   } else if (freq == 48000) {
     strcpy(codec_info_.plname, "L16");
     codec_info_.pltype = -1;
@@ -486,7 +473,6 @@ int32_t ModuleFileUtility::InitPCMReading(InStream& pcm,
     codec_info_.pacsize = 480;
     codec_info_.channels = 1;
     codec_info_.rate = 768000;
-    _codecId = kCodecL16_48Khz;
   }
 
   // Readsize for 10ms of audio data (2 bytes per sample).
@@ -573,51 +559,6 @@ int32_t ModuleFileUtility::codec_info(CodecInst& codecInst) {
     return -1;
   }
   memcpy(&codecInst, &codec_info_, sizeof(CodecInst));
-  return 0;
-}
-
-int32_t ModuleFileUtility::set_codec_info(const CodecInst& codecInst) {
-  _codecId = kCodecNoCodec;
-  if (STR_CASE_CMP(codecInst.plname, "PCMU") == 0) {
-    _codecId = kCodecPcmu;
-  } else if (STR_CASE_CMP(codecInst.plname, "PCMA") == 0) {
-    _codecId = kCodecPcma;
-  } else if (STR_CASE_CMP(codecInst.plname, "L16") == 0) {
-    if (codecInst.plfreq == 8000) {
-      _codecId = kCodecL16_8Khz;
-    } else if (codecInst.plfreq == 16000) {
-      _codecId = kCodecL16_16kHz;
-    } else if (codecInst.plfreq == 32000) {
-      _codecId = kCodecL16_32Khz;
-    } else if (codecInst.plfreq == 48000) {
-      _codecId = kCodecL16_48Khz;
-    }
-  }
-#ifdef WEBRTC_CODEC_ILBC
-  else if (STR_CASE_CMP(codecInst.plname, "ilbc") == 0) {
-    if (codecInst.pacsize == 160) {
-      _codecId = kCodecIlbc20Ms;
-    } else if (codecInst.pacsize == 240) {
-      _codecId = kCodecIlbc30Ms;
-    }
-  }
-#endif
-#if (defined(WEBRTC_CODEC_ISAC) || defined(WEBRTC_CODEC_ISACFX))
-  else if (STR_CASE_CMP(codecInst.plname, "isac") == 0) {
-    if (codecInst.plfreq == 16000) {
-      _codecId = kCodecIsac;
-    } else if (codecInst.plfreq == 32000) {
-      _codecId = kCodecIsacSwb;
-    }
-  }
-#endif
-  else if (STR_CASE_CMP(codecInst.plname, "G722") == 0) {
-    _codecId = kCodecG722;
-  }
-  if (_codecId == kCodecNoCodec) {
-    return -1;
-  }
-  memcpy(&codec_info_, &codecInst, sizeof(CodecInst));
   return 0;
 }
 
