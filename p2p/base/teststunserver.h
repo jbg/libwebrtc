@@ -20,7 +20,7 @@ namespace cricket {
 // A test STUN server. Useful for unit tests.
 class TestStunServer : StunServer {
  public:
-  static TestStunServer* Create(rtc::Thread* thread,
+  static TestStunServer* Create(rtc::SocketServer* ss,
                                 const rtc::SocketAddress& addr);
 
   // Set a fake STUN address to return to the client.
