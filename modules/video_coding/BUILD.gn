@@ -682,6 +682,7 @@ if (rtc_include_tests) {
       "../../system_wrappers:field_trial_api",
       "../../system_wrappers:metrics_api",
       "../../system_wrappers:metrics_default",
+      "../../system_wrappers:runtime_enabled_features_default",
       "../../test:field_trial",
       "../../test:test_support",
       "../../test:video_test_common",
