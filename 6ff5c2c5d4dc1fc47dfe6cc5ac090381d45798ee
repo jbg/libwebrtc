@@ -39,6 +39,30 @@
       "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac79436a_cc5f0d14",
+        "filename": "pc/currentspeakermonitor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-15T08:55:10Z",
+      "side": 1,
+      "message": "Don\u0027t know - but if they weren\u0027t, it looks like CurrentSpeakerMonitor is useless once this CL is landed, so you might want to get rid of that too.",
+      "parentUuid": "fb327726_9a90a86e",
+      "range": {
+        "startLine": 71,
+        "startChar": 28,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
