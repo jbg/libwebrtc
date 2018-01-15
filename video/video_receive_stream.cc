@@ -49,7 +49,7 @@ VideoCodec CreateDecoderVideoCodec(const VideoReceiveStream::Decoder& decoder) {
   memset(&codec, 0, sizeof(codec));
 
   codec.plType = decoder.payload_type;
-  strncpy(codec.plName, decoder.payload_name.c_str(), sizeof(codec.plName));
+  strncpy(codec.plName, decoder.payload_name.c_str(), kPayloadNameSize - 1);
   codec.codecType = PayloadStringToCodecType(decoder.payload_name);
 
   if (codec.codecType == kVideoCodecVP8) {
@@ -66,7 +66,8 @@ VideoCodec CreateDecoderVideoCodec(const VideoReceiveStream::Decoder& decoder) {
     VideoCodec associated_codec = CreateDecoderVideoCodec(associated_decoder);
     associated_codec.codecType = kVideoCodecStereo;
     strncpy(associated_codec.plName, decoder.payload_name.c_str(),
-            sizeof(associated_codec.plName));
+            kPayloadNameSize - 1);
+    associated_codec.plName[kPayloadNameSize - 1] = 0;
     return associated_codec;
   }
 
