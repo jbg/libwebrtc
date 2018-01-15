@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c62fe8_62ea9b21",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 6043
+      },
+      "writtenOn": "2018-01-15T00:13:19Z",
+      "side": 1,
+      "message": "Spelling: Specified.",
+      "revId": "0246ea619a49c49d4c6a7bfb6fdde41f80882e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0214b458_5418b42e",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 6043
+      },
+      "writtenOn": "2018-01-15T00:13:19Z",
+      "side": 1,
+      "message": "Spelling: Initial.",
+      "revId": "0246ea619a49c49d4c6a7bfb6fdde41f80882e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14b9d14c_285a6c05",
+        "filename": "modules/audio_processing/aec3/main_filter_update_gain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6043
+      },
+      "writtenOn": "2018-01-15T00:13:19Z",
+      "side": 1,
+      "message": "Should these be configurable?",
+      "revId": "0246ea619a49c49d4c6a7bfb6fdde41f80882e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1772fc7_3092a4de",
+        "filename": "modules/audio_processing/aec3/main_filter_update_gain.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6043
+      },
+      "writtenOn": "2018-01-15T00:13:19Z",
+      "side": 1,
+      "message": "mode -\u003e state.",
+      "revId": "0246ea619a49c49d4c6a7bfb6fdde41f80882e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fb1c1c6_1e4f5958",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6043
+      },
+      "writtenOn": "2018-01-15T00:13:19Z",
+      "side": 1,
+      "message": "Do you need the full |config_| here, or just the |config_.filter.length_blocks|?",
+      "revId": "0246ea619a49c49d4c6a7bfb6fdde41f80882e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
