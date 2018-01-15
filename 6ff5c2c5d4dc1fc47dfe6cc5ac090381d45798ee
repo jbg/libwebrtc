@@ -16,6 +16,29 @@
       "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb327726_9a90a86e",
+        "filename": "pc/currentspeakermonitor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-15T07:50:30Z",
+      "side": 1,
+      "message": "kMaxAudioLevel is used below in this method. Can this be deleted too? It looks like it contains the main logic of CurrentSpeakerMonitor. It\u0027s connected to audio_source_context_-\u003eSignalAudioMonitor, which appears to be called only from currentspeakermonitor_unittest.cc.\n\nSo I\u0027m a bit confused, before this cl, was CurrentSpeakerMonitor wired up to AudioMonitor in some non-obvious way?",
+      "range": {
+        "startLine": 71,
+        "startChar": 28,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
