@@ -27,7 +27,6 @@ int32_t FakeDecoder::InitDecode(const VideoCodec* config,
 
 int32_t FakeDecoder::Decode(const EncodedImage& input,
                             bool missing_frames,
-                            const RTPFragmentationHeader* fragmentation,
                             const CodecSpecificInfo* codec_specific_info,
                             int64_t render_time_ms) {
   VideoFrame frame(I420Buffer::Create(config_.width, config_.height),
@@ -58,7 +57,6 @@ const char* FakeDecoder::ImplementationName() const {
 
 int32_t FakeH264Decoder::Decode(const EncodedImage& input,
                                 bool missing_frames,
-                                const RTPFragmentationHeader* fragmentation,
                                 const CodecSpecificInfo* codec_specific_info,
                                 int64_t render_time_ms) {
   uint8_t value = 0;
@@ -77,7 +75,6 @@ int32_t FakeH264Decoder::Decode(const EncodedImage& input,
   }
   return FakeDecoder::Decode(input,
                              missing_frames,
-                             fragmentation,
                              codec_specific_info,
                              render_time_ms);
 }

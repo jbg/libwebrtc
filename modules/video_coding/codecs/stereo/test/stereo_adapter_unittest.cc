@@ -121,7 +121,7 @@ TEST_F(TestStereoAdapter, EncodeDecodeI420Frame) {
 
   EXPECT_EQ(
       WEBRTC_VIDEO_CODEC_OK,
-      decoder_->Decode(encoded_frame, false, nullptr, &codec_specific_info));
+      decoder_->Decode(encoded_frame, false, &codec_specific_info));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
   ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
@@ -160,9 +160,9 @@ TEST_F(TestStereoAdapter, EncodeDecodeI420AFrame) {
   EXPECT_EQ(0ull, axx_info.codecSpecific.stereo.indices.picture_index);
 
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK, decoder_->Decode(encoded_frames[kYUVStream],
-                                                    false, nullptr, &yuv_info));
+                                                    false, &yuv_info));
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK, decoder_->Decode(encoded_frames[kAXXStream],
-                                                    false, nullptr, &axx_info));
+                                                    false, &axx_info));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
   ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));

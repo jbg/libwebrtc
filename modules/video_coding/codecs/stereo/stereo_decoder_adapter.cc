@@ -111,7 +111,6 @@ int32_t StereoDecoderAdapter::InitDecode(const VideoCodec* codec_settings,
 int32_t StereoDecoderAdapter::Decode(
     const EncodedImage& input_image,
     bool missing_frames,
-    const RTPFragmentationHeader* /*fragmentation*/,
     const CodecSpecificInfo* codec_specific_info,
     int64_t render_time_ms) {
   const CodecSpecificInfoStereo& stereo_info =
@@ -128,7 +127,7 @@ int32_t StereoDecoderAdapter::Decode(
   }
 
   int32_t rv = decoders_[stereo_info.indices.frame_index]->Decode(
-      input_image, missing_frames, nullptr, nullptr, render_time_ms);
+      input_image, missing_frames, nullptr, render_time_ms);
   return rv;
 }
 

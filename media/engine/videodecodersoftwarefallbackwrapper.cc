@@ -71,7 +71,6 @@ bool VideoDecoderSoftwareFallbackWrapper::InitFallbackDecoder() {
 int32_t VideoDecoderSoftwareFallbackWrapper::Decode(
     const EncodedImage& input_image,
     bool missing_frames,
-    const RTPFragmentationHeader* fragmentation,
     const CodecSpecificInfo* codec_specific_info,
     int64_t render_time_ms) {
     TRACE_EVENT0("webrtc", "VideoDecoderSoftwareFallbackWrapper::Decode");
@@ -86,7 +85,7 @@ int32_t VideoDecoderSoftwareFallbackWrapper::Decode(
           WEBRTC_VIDEO_CODEC_OK;
     }
     if (hw_decoder_initialized_) {
-      ret = hw_decoder_->Decode(input_image, missing_frames, fragmentation,
+      ret = hw_decoder_->Decode(input_image, missing_frames,
                              codec_specific_info, render_time_ms);
     }
     if (ret == WEBRTC_VIDEO_CODEC_OK) {
@@ -106,7 +105,7 @@ int32_t VideoDecoderSoftwareFallbackWrapper::Decode(
         return ret;
     }
   }
-  return fallback_decoder_->Decode(input_image, missing_frames, fragmentation,
+  return fallback_decoder_->Decode(input_image, missing_frames,
                                    codec_specific_info, render_time_ms);
 }
 
