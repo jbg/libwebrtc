@@ -22,6 +22,30 @@
       "revId": "c1e6b0c17ea506b23fac5c2f07501372cb37dbf3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7812eda3_1c885e24",
+        "filename": "rtc_base/signalthread.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-16T09:34:09Z",
+      "side": 1,
+      "message": "\u003e or better yet use some other primitive such as TaskQueue for AsyncResolver if we can.\n\nI made an attempt to delete it in https://codereview.webrtc.org/2915253002, using PlatformThread. But that was reverted due to some problems neither me or Taylor have had the time to track down.",
+      "parentUuid": "a255df81_b63a47b7",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "c1e6b0c17ea506b23fac5c2f07501372cb37dbf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
