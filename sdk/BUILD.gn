@@ -84,7 +84,9 @@ if (is_ios || is_mac) {
 
     if (!build_with_chromium) {
       sources += [
+        "objc/Framework/Classes/Common/RTCCallbackLogger.mm",
         "objc/Framework/Classes/Common/RTCFileLogger.mm",
+        "objc/Framework/Headers/WebRTC/RTCCallbackLogger.h",
         "objc/Framework/Headers/WebRTC/RTCFileLogger.h",
       ]
     }
@@ -734,8 +736,14 @@ if (is_ios || is_mac) {
         public_headers = common_objc_headers
 
         if (!build_with_chromium) {
-          sources += [ "objc/Framework/Headers/WebRTC/RTCFileLogger.h" ]
-          public_headers += [ "objc/Framework/Headers/WebRTC/RTCFileLogger.h" ]
+          sources += [
+            "objc/Framework/Headers/WebRTC/RTCCallbackLogger.h",
+            "objc/Framework/Headers/WebRTC/RTCFileLogger.h",
+          ]
+          public_headers += [
+            "objc/Framework/Headers/WebRTC/RTCFileLogger.h",
+            "objc/Framework/Headers/WebRTC/RTCCallbackLogger.h",
+          ]
         }
 
         ldflags = [
