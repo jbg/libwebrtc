@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6670b611_77ac43ea",
+        "filename": "test/fuzzers/audio_processing_configs_fuzzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-01-16T10:38:29Z",
+      "side": 1,
+      "message": "You should be able to encapsulate this function in an unnamed namespace.",
+      "revId": "62c5f4857d588b62f0d0338d1f75a28b7a3055d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b2a71d2_cc0a31b6",
+        "filename": "test/fuzzers/audio_processing_configs_fuzzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-01-16T10:38:29Z",
+      "side": 1,
+      "message": "I believe \"CreateApm\" is the correct capitalization.",
+      "range": {
+        "startLine": 17,
+        "startChar": 33,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "62c5f4857d588b62f0d0338d1f75a28b7a3055d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00e17e34_2dc5b4a4",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-01-16T10:38:29Z",
+      "side": 1,
+      "message": "Was this file renamed from another file, or should this be 2018?",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "62c5f4857d588b62f0d0338d1f75a28b7a3055d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b92b5c26_b8bf9a80",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-01-16T10:38:29Z",
+      "side": 1,
+      "message": "Does this really help?",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 56
+      },
+      "revId": "62c5f4857d588b62f0d0338d1f75a28b7a3055d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc10e2f0_939804f9",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-01-16T10:38:29Z",
+      "side": 1,
+      "message": "DCHECK that you won\u0027t end up outside the AudoiFrame\u0027s allocated memory.",
+      "range": {
+        "startLine": 51,
+        "startChar": 25,
+        "endLine": 51,
+        "endChar": 65
+      },
+      "revId": "62c5f4857d588b62f0d0338d1f75a28b7a3055d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c3c26cc_cde7971e",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-01-16T10:38:29Z",
+      "side": 1,
+      "message": "More than 1 byte is needed for each lap in the loop. But, I do appreciate that it is a lot of work to figure out the exact number, and the code will work anyway. Please, add a comment about that.",
+      "range": {
+        "startLine": 72,
+        "startChar": 33,
+        "endLine": 72,
+        "endChar": 34
+      },
+      "revId": "62c5f4857d588b62f0d0338d1f75a28b7a3055d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
