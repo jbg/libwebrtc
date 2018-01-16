@@ -27,34 +27,36 @@ std::string CodecSpecificToString(const webrtc::VideoCodec& codec) {
   std::stringstream ss;
   switch (codec.codecType) {
     case kVideoCodecVP8:
-      ss << "\n  Complexity        : " << codec.VP8().complexity;
-      ss << "\n  Resilience        : " << codec.VP8().resilience;
-      ss << "\n  # temporal layers : "
+      ss << "\n  Complexity          : " << codec.VP8().complexity;
+      ss << "\n  Resilience          : " << codec.VP8().resilience;
+      ss << "\n  # temporal layers   : "
          << static_cast<int>(codec.VP8().numberOfTemporalLayers);
-      ss << "\n  Denoising         : " << codec.VP8().denoisingOn;
-      ss << "\n  Error concealment : " << codec.VP8().errorConcealmentOn;
-      ss << "\n  Automatic resize  : " << codec.VP8().automaticResizeOn;
-      ss << "\n  Frame dropping    : " << codec.VP8().frameDroppingOn;
-      ss << "\n  Key frame interval: " << codec.VP8().keyFrameInterval;
+      ss << "\n  Denoising           : " << codec.VP8().denoisingOn;
+      ss << "\n  Error concealment   : " << codec.VP8().errorConcealmentOn;
+      ss << "\n  Automatic resize    : " << codec.VP8().automaticResizeOn;
+      ss << "\n  Frame dropping      : " << codec.VP8().frameDroppingOn;
+      ss << "\n  Key frame interval  : " << codec.VP8().keyFrameInterval;
       break;
     case kVideoCodecVP9:
-      ss << "\n  Complexity        : " << codec.VP9().complexity;
-      ss << "\n  Resilience        : " << codec.VP9().resilienceOn;
-      ss << "\n  # temporal layers : "
+      ss << "\n  Complexity          : " << codec.VP9().complexity;
+      ss << "\n  Resilience          : " << codec.VP9().resilienceOn;
+      ss << "\n  # temporal layers   : "
          << static_cast<int>(codec.VP9().numberOfTemporalLayers);
-      ss << "\n  Denoising         : " << codec.VP9().denoisingOn;
-      ss << "\n  Frame dropping    : " << codec.VP9().frameDroppingOn;
-      ss << "\n  Key frame interval: " << codec.VP9().keyFrameInterval;
-      ss << "\n  Adaptive QP mode  : " << codec.VP9().adaptiveQpMode;
-      ss << "\n  Automatic resize  : " << codec.VP9().automaticResizeOn;
-      ss << "\n  # spatial layers  : "
+      ss << "\n  # spatial layers    : "
          << static_cast<int>(codec.VP9().numberOfSpatialLayers);
-      ss << "\n  Flexible mode     : " << codec.VP9().flexibleMode;
+      ss << "\n  Denoising           : " << codec.VP9().denoisingOn;
+      ss << "\n  Frame dropping      : " << codec.VP9().frameDroppingOn;
+      ss << "\n  Key frame interval  : " << codec.VP9().keyFrameInterval;
+      ss << "\n  Adaptive QP mode    : " << codec.VP9().adaptiveQpMode;
+      ss << "\n  Automatic resize    : " << codec.VP9().automaticResizeOn;
+      ss << "\n  # spatial layers    : "
+         << static_cast<int>(codec.VP9().numberOfSpatialLayers);
+      ss << "\n  Flexible mode       : " << codec.VP9().flexibleMode;
       break;
     case kVideoCodecH264:
-      ss << "\n  Frame dropping    : " << codec.H264().frameDroppingOn;
-      ss << "\n  Key frame interval: " << codec.H264().keyFrameInterval;
-      ss << "\n  Profile           : " << codec.H264().profile;
+      ss << "\n  Frame dropping      : " << codec.H264().frameDroppingOn;
+      ss << "\n  Key frame interval  : " << codec.H264().keyFrameInterval;
+      ss << "\n  Profile             : " << codec.H264().profile;
       break;
     default:
       break;
@@ -123,6 +125,14 @@ int TestConfig::NumberOfTemporalLayers() const {
   }
 }
 
+int TestConfig::NumberOfSpatialLayers() const {
+  if (codec_settings.codecType == kVideoCodecVP9) {
+    return codec_settings.VP9().numberOfSpatialLayers;
+  } else {
+    return 1;
+  }
+}
+
 int TestConfig::TemporalLayerForFrame(int frame_idx) const {
   int tl = -1;
   switch (NumberOfTemporalLayers()) {
@@ -163,17 +173,19 @@ std::vector<FrameType> TestConfig::FrameTypeForFrame(int frame_idx) const {
 std::string TestConfig::ToString() const {
   std::string codec_type = CodecTypeToPayloadString(codec_settings.codecType);
   std::stringstream ss;
-  ss << "\n Filename         : " << filename;
-  ss << "\n # CPU cores used : " << NumberOfCores();
+  ss << "\n Filename             : " << filename;
+  ss << "\n # CPU cores used     : " << NumberOfCores();
   ss << "\n General:";
-  ss << "\n  Codec type        : " << codec_type;
-  ss << "\n  Start bitrate     : " << codec_settings.startBitrate << " kbps";
-  ss << "\n  Max bitrate       : " << codec_settings.maxBitrate << " kbps";
-  ss << "\n  Min bitrate       : " << codec_settings.minBitrate << " kbps";
-  ss << "\n  Width             : " << codec_settings.width;
-  ss << "\n  Height            : " << codec_settings.height;
-  ss << "\n  Max frame rate    : " << codec_settings.maxFramerate;
-  ss << "\n  QPmax             : " << codec_settings.qpMax;
+  ss << "\n  Codec type          : " << codec_type;
+  ss << "\n  Start bitrate       : " << codec_settings.startBitrate << " kbps";
+  ss << "\n  Max bitrate         : " << codec_settings.maxBitrate << " kbps";
+  ss << "\n  Min bitrate         : " << codec_settings.minBitrate << " kbps";
+  ss << "\n  Width               : " << codec_settings.width;
+  ss << "\n  Height              : " << codec_settings.height;
+  ss << "\n  Max frame rate      : " << codec_settings.maxFramerate;
+  ss << "\n  QPmax               : " << codec_settings.qpMax;
+  ss << "\n  # simulcast streams : "
+     << static_cast<int>(codec_settings.numberOfSimulcastStreams);
   ss << "\n " << codec_type << " specific: ";
   ss << CodecSpecificToString(codec_settings);
   return ss.str();
