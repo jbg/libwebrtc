@@ -101,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "1cf059ed_2d4f68c5",
+        "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-16T12:02:02Z",
+      "side": 1,
+      "message": "Yes, makes sense. But please add this to the documentation, perhaps in the header file doc for the `-start:` method, so it\u0027s obvious for users that they should dispatch potentially slow running callbacks to a queue.",
+      "parentUuid": "743a5a27_1a45b935",
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94836213_97c5506e",
         "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
         "patchSetId": 1
@@ -180,6 +198,24 @@
       "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32606509_ca8beeaf",
+        "filename": "sdk/objc/Framework/Classes/Common/RTCCallbackLogger.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-16T12:02:02Z",
+      "side": 1,
+      "message": "Ah, that function may need to be in a C++ header and can\u0027t be in the public API. Didn\u0027t think about that.\n\nIn that case, we could add a `RTCLogging+Native.h` header file like we have for some other C++ headers. But maybe that is overkill. We could also just let the code be like it is, I\u0027m fine either way.",
+      "parentUuid": "0491d5b9_9324e6bb",
+      "revId": "8a171e12c41dbc6a3a2c0688310b3fd0fc1ff1ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
