@@ -63,6 +63,30 @@
       "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b98d77f_254b41d1",
+        "filename": "pc/currentspeakermonitor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5501
+      },
+      "writtenOn": "2018-01-16T17:56:16Z",
+      "side": 1,
+      "message": "It\u0027s used in a downstream app via AudioSourceContext translating AudioInfo itself translated from GetStats values :) It was used in a transition away from using ChannelManager directly.\n\nWe can remove that as well; we have a replacement, it\u0027s just a part of a larger refactoring that is rolling out now. If you can wait until mid February, our last usage of cricket::CurrentSpeakerMonitor should be gone as a side-effect of deleting the pre-refactoring code.",
+      "parentUuid": "ac79436a_cc5f0d14",
+      "range": {
+        "startLine": 71,
+        "startChar": 28,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "6ff5c2c5d4dc1fc47dfe6cc5ac090381d45798ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
