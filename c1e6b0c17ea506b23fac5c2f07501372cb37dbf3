@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a255df81_b63a47b7",
+        "filename": "rtc_base/signalthread.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-01-16T09:17:52Z",
+      "side": 1,
+      "message": "drive by question (thanks for the cleanup btw) - is SignalThread used anywhere else than as a base class for AsyncResolver?\n\nIf so, I wonder if we should nail that down to avoid further use of the class. E.g by making the constructor private/protected and document or even \u0027friend\u0027 AsyncResolver. Then essentially move everything in this file over to AsyncResolver, or better yet use some other primitive such as TaskQueue for AsyncResolver if we can.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "c1e6b0c17ea506b23fac5c2f07501372cb37dbf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
