@@ -140,6 +140,30 @@
       "revId": "102c7c0b1014ac661ae9bb484bf1db183649cea4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c35f5ad0_a2e59ab3",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1812,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-01-17T22:18:32Z",
+      "side": 1,
+      "message": "Changed this in patch set 5 and verified that a test fails without it (WebRtcVideoChannelTest.SetRtpSendParametersPrioritySimulcastStreams).",
+      "parentUuid": "06112370_81abe89e",
+      "range": {
+        "startLine": 1812,
+        "startChar": 6,
+        "endLine": 1812,
+        "endChar": 20
+      },
+      "revId": "102c7c0b1014ac661ae9bb484bf1db183649cea4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
