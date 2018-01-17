@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75a1e79f_cad11689",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-17T14:45:35Z",
+      "side": 1,
+      "message": "Reviewers: just tell me what you think is best.\nMaybe ReadableWav::Seek() is better - less lines, less error-prone code, more efficient.",
+      "revId": "6fca994198f50600546bac52cb3fbc4389165d5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
