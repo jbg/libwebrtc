@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ee18bce_2df668f3",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5241
+      },
+      "writtenOn": "2018-01-17T09:22:19Z",
+      "side": 1,
+      "message": "Drive-by: These strings should be constants at a suitable place. Especially \"WebRtcDualStreamMode\", which is in three places in WebRTC + one place in Chromium. I\u0027ve required that in the Chromium CL, but as a follow-up to be able to land this before the cut.",
+      "revId": "4e78307bd517e42b2d87a2a8fc9d6ee6f8f033c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
