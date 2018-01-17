@@ -82,6 +82,8 @@ class RtpTransportInternal : public RtpTransportInterface,
   virtual bool HandlesPayloadType(int payload_type) const = 0;
 
   virtual void AddHandledPayloadType(int payload_type) = 0;
+
+  virtual bool IsSrtpActive() const = 0;
 };
 
 }  // namespace webrtc

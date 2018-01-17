@@ -111,7 +111,7 @@ class BaseChannel
   }
   // The following function returns true if we are using DTLS-based keying.
   bool dtls_active() const {
-    return dtls_srtp_transport_ && dtls_srtp_transport_->IsActive();
+    return dtls_srtp_transport_ && dtls_srtp_transport_->IsSrtpActive();
   }
   // This function returns true if using SRTP (DTLS-based keying or SDES).
   bool srtp_active() const { return sdes_active() || dtls_active(); }
