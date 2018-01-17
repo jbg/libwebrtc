@@ -117,6 +117,29 @@
       "revId": "102c7c0b1014ac661ae9bb484bf1db183649cea4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06112370_81abe89e",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1812,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-01-17T22:07:47Z",
+      "side": 1,
+      "message": "Should this be updated to rtp_parameters.encodings.size() !\u003d rtp_parameters_.encodings.size()? I think this will fail otherwise if somebody gets/sets parameters with the update from this CL.",
+      "range": {
+        "startLine": 1812,
+        "startChar": 6,
+        "endLine": 1812,
+        "endChar": 20
+      },
+      "revId": "102c7c0b1014ac661ae9bb484bf1db183649cea4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
