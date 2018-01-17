@@ -1852,6 +1852,7 @@ void VideoQualityTest::DestroyStreams() {
 }
 
 void VideoQualityTest::RunWithAnalyzer(const Params& params) {
+  rtc::LogMessage::SetLogToStderr(params.logging.logs);
   num_video_streams_ = params.call.dual_video ? 2 : 1;
   std::unique_ptr<test::LayerFilteringTransport> send_transport;
   std::unique_ptr<test::DirectTransport> recv_transport;
@@ -2066,6 +2067,7 @@ void VideoQualityTest::SetupAudio(int send_channel_id,
 }
 
 void VideoQualityTest::RunWithRenderers(const Params& params) {
+  rtc::LogMessage::SetLogToStderr(params.logging.logs);
   num_video_streams_ = params.call.dual_video ? 2 : 1;
   std::unique_ptr<test::LayerFilteringTransport> send_transport;
   std::unique_ptr<test::DirectTransport> recv_transport;
