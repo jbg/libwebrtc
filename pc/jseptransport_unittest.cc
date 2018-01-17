@@ -10,12 +10,14 @@
 #include "pc/jseptransport.h"
 
 #include <memory>
+#include <utility>
 
 #include "p2p/base/fakedtlstransport.h"
 #include "p2p/base/fakeicetransport.h"
 #include "rtc_base/fakesslidentity.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/network.h"
+#include "rtc_base/ptr_util.h"
 
 namespace cricket {
 
@@ -27,6 +29,11 @@ static const char kIcePwd1[] = "TESTICEPWD00000000000001";
 
 static const char kIceUfrag2[] = "TESTICEUFRAG0002";
 static const char kIcePwd2[] = "TESTICEPWD00000000000002";
+
+static const char kMid[] = "mid";
+
+const std::vector<CryptoParams> kDummyCryptos;
+const std::vector<int> kDummyExtensionIds;
 
 TransportDescription MakeTransportDescription(
     const char* ufrag,
@@ -54,10 +61,38 @@ class JsepTransportTest : public testing::Test, public sigslot::has_slots<> {
                                   component);
   }
 
+  void SetRtpTransport(SrtpType srtp_type) {
+    bool rtcp_mux_enabled = false;
+
+    switch (srtp_type) {
+      case SrtpType::kUnset:
+        return;
+      case SrtpType::kUnencrypted:
+        rtp_transport_ =
+            rtc::MakeUnique<webrtc::RtpTransport>(rtcp_mux_enabled);
+        break;
+      case SrtpType::kSdes:
+        rtp_transport_ =
+            rtc::MakeUnique<webrtc::SrtpTransport>(rtcp_mux_enabled);
+        break;
+      case SrtpType::kDtlsSrtp:
+        rtp_transport_ = rtc::MakeUnique<webrtc::DtlsSrtpTransport>(
+            rtc::MakeUnique<webrtc::SrtpTransport>(rtcp_mux_enabled));
+        break;
+      default:
+        RTC_NOTREACHED();
+        return;
+    }
+
+    transport_->SetRtpTransport(srtp_type, rtp_transport_.get());
+  }
+
   void DestroyChannel(int component) { transport_->RemoveChannel(component); }
 
   void RecreateTransport() {
-    transport_.reset(new JsepTransport("test content name", nullptr));
+    transport_.reset(new JsepTransport(kMid, nullptr));
+    transport_->SignalRtcpMuxFullyActive().connect(
+        this, &JsepTransportTest::OnRtcpMuxFullyActive);
   }
 
   bool IceCredentialsChanged(const std::string& old_ufrag,
@@ -67,10 +102,18 @@ class JsepTransportTest : public testing::Test, public sigslot::has_slots<> {
     return (old_ufrag != new_ufrag) || (old_pwd != new_pwd);
   }
 
+  void OnRtcpMuxFullyActive(const std::string& mid) {
+    rtcp_active_mid_ = std::move(mid);
+  }
+
+  rtc::Optional<std::string> rtcp_active_mid() { return rtcp_active_mid_; }
+
  protected:
   std::vector<std::unique_ptr<FakeDtlsTransport>> fake_dtls_transports_;
   std::vector<std::unique_ptr<FakeIceTransport>> fake_ice_transports_;
   std::unique_ptr<JsepTransport> transport_;
+  rtc::Optional<std::string> rtcp_active_mid_;
+  std::unique_ptr<webrtc::RtpTransportInternal> rtp_transport_;
 };
 
 // This test verifies transports are created with proper ICE ufrag/password
@@ -78,15 +121,17 @@ class JsepTransportTest : public testing::Test, public sigslot::has_slots<> {
 TEST_F(JsepTransportTest, TestIceTransportParameters) {
   EXPECT_TRUE(SetupFakeTransports(1));
   TransportDescription local_desc(kIceUfrag1, kIcePwd1);
-  ASSERT_TRUE(transport_->SetLocalTransportDescription(local_desc,
-                                                       SdpType::kOffer, NULL));
+  ASSERT_TRUE(transport_->SetLocalTransportDescription(
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_EQ(ICEMODE_FULL, fake_ice_transports_[0]->remote_ice_mode());
   EXPECT_EQ(kIceUfrag1, fake_ice_transports_[0]->ice_ufrag());
   EXPECT_EQ(kIcePwd1, fake_ice_transports_[0]->ice_pwd());
 
   TransportDescription remote_desc(kIceUfrag2, kIcePwd2);
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, NULL));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
   EXPECT_EQ(ICEMODE_FULL, fake_ice_transports_[0]->remote_ice_mode());
   EXPECT_EQ(kIceUfrag2, fake_ice_transports_[0]->remote_ice_ufrag());
   EXPECT_EQ(kIcePwd2, fake_ice_transports_[0]->remote_ice_pwd());
@@ -110,11 +155,13 @@ TEST_F(JsepTransportTest, TestDtlsTransportParameters) {
   TransportDescription local_desc = MakeTransportDescription(
       kIceUfrag1, kIcePwd1, local_cert, CONNECTIONROLE_ACTPASS);
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kOffer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   TransportDescription remote_desc = MakeTransportDescription(
       kIceUfrag2, kIcePwd2, remote_cert, CONNECTIONROLE_ACTIVE);
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // Verify that SSL role and remote fingerprint were set correctly based on
   // transport descriptions.
@@ -143,11 +190,13 @@ TEST_F(JsepTransportTest, TestDtlsTransportParametersWithPassiveAnswer) {
   TransportDescription local_desc = MakeTransportDescription(
       kIceUfrag1, kIcePwd1, local_cert, CONNECTIONROLE_ACTPASS);
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kOffer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   TransportDescription remote_desc = MakeTransportDescription(
       kIceUfrag2, kIcePwd2, remote_cert, CONNECTIONROLE_PASSIVE);
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // Verify that SSL role and remote fingerprint were set correctly based on
   // transport descriptions.
@@ -179,13 +228,15 @@ TEST_F(JsepTransportTest, TestTransportParametersAppliedToTwoComponents) {
   TransportDescription local_desc = MakeTransportDescription(
       kIceUfrag1, kIcePwd1, local_cert, CONNECTIONROLE_ACTPASS);
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kOffer, nullptr));
+      local_desc, /*rtcp_mux=*/false, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   TransportDescription remote_desc = MakeTransportDescription(
       kIceUfrag2, kIcePwd2, remote_cert, CONNECTIONROLE_ACTIVE);
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, nullptr));
+      remote_desc, /*rtcp_mux=*/false, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
-  for (int i = 0; i < 1; ++i) {
+  for (size_t i = 0; i < fake_ice_transports_.size(); ++i) {
     // Verify parameters of ICE transports.
     EXPECT_EQ(ICEMODE_FULL, fake_ice_transports_[i]->remote_ice_mode());
     EXPECT_EQ(kIceUfrag1, fake_ice_transports_[i]->ice_ufrag());
@@ -218,9 +269,11 @@ TEST_F(JsepTransportTest, NeedsIceRestart) {
   TransportDescription local_desc(kIceUfrag1, kIcePwd1);
   TransportDescription remote_desc(kIceUfrag1, kIcePwd1);
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kOffer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // Flag initially should be false.
   EXPECT_FALSE(transport_->NeedsIceRestart());
@@ -231,9 +284,11 @@ TEST_F(JsepTransportTest, NeedsIceRestart) {
 
   // Doing an identical offer/answer shouldn't clear the flag.
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kOffer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
   EXPECT_TRUE(transport_->NeedsIceRestart());
 
   // Doing an offer/answer that restarts ICE should clear the flag.
@@ -258,8 +313,9 @@ TEST_F(JsepTransportTest, TestGetStats) {
       std::vector<std::string>(), rtc::CreateRandomString(ICE_UFRAG_LENGTH),
       rtc::CreateRandomString(ICE_PWD_LENGTH), ICEMODE_FULL,
       CONNECTIONROLE_NONE, nullptr);
-  transport_->SetLocalTransportDescription(faketransport_desc, SdpType::kOffer,
-                                           nullptr);
+  transport_->SetLocalTransportDescription(
+      faketransport_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr);
   EXPECT_TRUE(transport_->GetStats(&stats));
   ASSERT_EQ(1U, stats.channel_stats.size());
   EXPECT_EQ(1, stats.channel_stats[0].component);
@@ -344,14 +400,18 @@ TEST_F(JsepTransportTest, DtlsRoleNegotiation) {
     // Set the offer first.
     if (param.local_type == SdpType::kOffer) {
       EXPECT_TRUE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
       EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
     } else {
       EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
       EXPECT_TRUE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
     }
     EXPECT_EQ(rtc::SSL_CLIENT, *transport_->GetSslRole());
   }
@@ -377,14 +437,18 @@ TEST_F(JsepTransportTest, DtlsRoleNegotiation) {
     // Set the offer first.
     if (param.local_type == SdpType::kOffer) {
       EXPECT_TRUE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
       EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
     } else {
       EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
       EXPECT_TRUE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
     }
     EXPECT_EQ(rtc::SSL_SERVER, *transport_->GetSslRole());
   }
@@ -426,14 +490,18 @@ TEST_F(JsepTransportTest, DtlsRoleNegotiation) {
     // Set the offer first.
     if (param.local_type == SdpType::kOffer) {
       EXPECT_TRUE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
       EXPECT_FALSE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
     } else {
       EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
       EXPECT_FALSE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
     }
   }
 
@@ -476,14 +544,18 @@ TEST_F(JsepTransportTest, DtlsRoleNegotiation) {
     // attempted to be applied, and not when the answer is applied.
     if (param.local_type == SdpType::kOffer) {
       EXPECT_TRUE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
       EXPECT_FALSE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
     } else {
       EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-          remote_desc, param.remote_type, nullptr));
+          remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.remote_type, nullptr));
       EXPECT_FALSE(transport_->SetLocalTransportDescription(
-          local_desc, param.local_type, nullptr));
+          local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+          param.local_type, nullptr));
     }
   }
 }
@@ -505,9 +577,11 @@ TEST_F(JsepTransportTest, ValidDtlsReofferFromAnswerer) {
       kIceUfrag2, kIcePwd2, certificate, CONNECTIONROLE_ACTIVE);
 
   EXPECT_TRUE(transport_->SetLocalTransportDescription(
-      local_offer, SdpType::kOffer, nullptr));
+      local_offer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_answer, SdpType::kAnswer, nullptr));
+      remote_answer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // We were actpass->active previously, now in the other direction it's
   // actpass->passive.
@@ -517,9 +591,11 @@ TEST_F(JsepTransportTest, ValidDtlsReofferFromAnswerer) {
       kIceUfrag1, kIcePwd1, certificate, CONNECTIONROLE_PASSIVE);
 
   EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_offer, SdpType::kOffer, nullptr));
+      remote_offer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_TRUE(transport_->SetLocalTransportDescription(
-      local_answer, SdpType::kAnswer, nullptr));
+      local_answer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 }
 
 // Test that a reoffer in the opposite direction fails if the role changes.
@@ -538,9 +614,11 @@ TEST_F(JsepTransportTest, InvalidDtlsReofferFromAnswerer) {
       kIceUfrag2, kIcePwd2, certificate, CONNECTIONROLE_ACTIVE);
 
   EXPECT_TRUE(transport_->SetLocalTransportDescription(
-      local_offer, SdpType::kOffer, nullptr));
+      local_offer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_answer, SdpType::kAnswer, nullptr));
+      remote_answer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // Changing role to passive here isn't allowed. Though for some reason this
   // only fails in SetLocalTransportDescription.
@@ -550,9 +628,11 @@ TEST_F(JsepTransportTest, InvalidDtlsReofferFromAnswerer) {
       kIceUfrag1, kIcePwd1, certificate, CONNECTIONROLE_ACTIVE);
 
   EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_offer, SdpType::kOffer, nullptr));
+      remote_offer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_FALSE(transport_->SetLocalTransportDescription(
-      local_answer, SdpType::kAnswer, nullptr));
+      local_answer, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 }
 
 // Test that a remote offer with the current negotiated role can be accepted.
@@ -574,9 +654,11 @@ TEST_F(JsepTransportTest, RemoteOfferWithCurrentNegotiatedDtlsRole) {
   // Normal initial offer/answer with "actpass" in the offer and "active" in
   // the answer.
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kOffer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kAnswer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // Sanity check that role was actually negotiated.
   rtc::Optional<rtc::SSLRole> role = transport_->GetSslRole();
@@ -586,9 +668,11 @@ TEST_F(JsepTransportTest, RemoteOfferWithCurrentNegotiatedDtlsRole) {
   // Subsequent offer with current negotiated role of "passive".
   remote_desc.connection_role = CONNECTIONROLE_PASSIVE;
   EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kOffer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kAnswer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 }
 
 // Test that a remote offer with the inverse of the current negotiated DTLS
@@ -616,9 +700,11 @@ TEST_F(JsepTransportTest, RemoteOfferThatChangesNegotiatedDtlsRole) {
   // Normal initial offer/answer with "actpass" in the offer and "active" in
   // the answer.
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kOffer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kAnswer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   // Sanity check that role was actually negotiated.
   rtc::Optional<rtc::SSLRole> role = transport_->GetSslRole();
@@ -631,9 +717,11 @@ TEST_F(JsepTransportTest, RemoteOfferThatChangesNegotiatedDtlsRole) {
   // attempted to be applied, and not when the answer is applied.
   remote_desc.connection_role = CONNECTIONROLE_ACTIVE;
   EXPECT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kOffer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   EXPECT_FALSE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kAnswer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 }
 
 // Testing that a legacy client that doesn't use the setup attribute will be
@@ -657,17 +745,93 @@ TEST_F(JsepTransportTest, TestDtlsSetupWithLegacyAsAnswerer) {
 
   local_desc.connection_role = CONNECTIONROLE_ACTPASS;
   ASSERT_TRUE(transport_->SetLocalTransportDescription(
-      local_desc, SdpType::kOffer, nullptr));
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
   // Use CONNECTIONROLE_NONE to simulate legacy endpoint.
   remote_desc.connection_role = CONNECTIONROLE_NONE;
   ASSERT_TRUE(transport_->SetRemoteTransportDescription(
-      remote_desc, SdpType::kAnswer, nullptr));
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
 
   rtc::Optional<rtc::SSLRole> role = transport_->GetSslRole();
   ASSERT_TRUE(role);
   // Since legacy answer ommitted setup atribute, and we offered actpass, we
   // should act as passive (server).
   EXPECT_EQ(rtc::SSL_SERVER, *role);
+}
+
+TEST_F(JsepTransportTest, TestSetRtcpMux) {
+  TransportDescription local_desc(kIceUfrag1, kIcePwd1);
+  TransportDescription remote_desc(kIceUfrag2, kIcePwd2);
+
+  SetRtpTransport(SrtpType::kDtlsSrtp);
+  auto* rtp_transport = transport_->GetRtpTransport();
+  ASSERT_TRUE(rtp_transport);
+  EXPECT_FALSE(rtp_transport->rtcp_mux_enabled());
+
+  ASSERT_TRUE(transport_->SetLocalTransportDescription(
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
+  ASSERT_TRUE(transport_->SetRemoteTransportDescription(
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
+
+  EXPECT_TRUE(rtp_transport->rtcp_mux_enabled());
+  ASSERT_TRUE(rtcp_active_mid());
+  EXPECT_EQ(*rtcp_active_mid(), kMid);
+}
+
+TEST_F(JsepTransportTest, TestSetRtcpMuxWithPrAnswer) {
+  TransportDescription local_desc(kIceUfrag1, kIcePwd1);
+  TransportDescription remote_desc(kIceUfrag2, kIcePwd2);
+
+  SetRtpTransport(SrtpType::kDtlsSrtp);
+  auto* rtp_transport = transport_->GetRtpTransport();
+  ASSERT_TRUE(rtp_transport);
+  EXPECT_FALSE(rtp_transport->rtcp_mux_enabled());
+
+  ASSERT_TRUE(transport_->SetLocalTransportDescription(
+      local_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kOffer, nullptr));
+  ASSERT_TRUE(transport_->SetRemoteTransportDescription(
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kPrAnswer, nullptr));
+  // PrAnswer will not fully activate the RTCP-mux.
+  EXPECT_TRUE(rtp_transport->rtcp_mux_enabled());
+  ASSERT_FALSE(rtcp_active_mid());
+
+  ASSERT_TRUE(transport_->SetRemoteTransportDescription(
+      remote_desc, /*rtcp_mux=*/true, kDummyCryptos, kDummyExtensionIds,
+      SdpType::kAnswer, nullptr));
+  ASSERT_TRUE(rtcp_active_mid());
+  EXPECT_EQ(*rtcp_active_mid(), kMid);
+}
+
+TEST_F(JsepTransportTest, TestSetupSdes) {
+  TransportDescription local_desc(kIceUfrag1, kIcePwd1);
+  TransportDescription remote_desc(kIceUfrag2, kIcePwd2);
+
+  SetRtpTransport(SrtpType::kSdes);
+  auto* rtp_transport = transport_->GetRtpTransport();
+  ASSERT_TRUE(rtp_transport);
+  EXPECT_FALSE(rtp_transport->IsSrtpActive());
+
+  std::vector<CryptoParams> crypto_params;
+  crypto_params.push_back(CryptoParams(1, rtc::CS_AES_CM_128_HMAC_SHA1_32,
+                                       "inline:" + rtc::CreateRandomString(40),
+                                       std::string()));
+  std::vector<int> extension_ids;
+  extension_ids.push_back(1);
+
+  ASSERT_TRUE(transport_->SetLocalTransportDescription(
+      local_desc, /*rtcp_mux=*/true, crypto_params, extension_ids,
+      SdpType::kOffer, nullptr));
+  EXPECT_FALSE(rtp_transport->IsSrtpActive());
+
+  ASSERT_TRUE(transport_->SetRemoteTransportDescription(
+      remote_desc, /*rtcp_mux=*/true, crypto_params, extension_ids,
+      SdpType::kAnswer, nullptr));
+  EXPECT_TRUE(rtp_transport->IsSrtpActive());
 }
 
 }  // namespace cricket
