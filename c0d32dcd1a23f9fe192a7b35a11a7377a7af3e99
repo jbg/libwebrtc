@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51252836_d7f43a59",
+        "filename": "system_wrappers/include/runtime_enabled_features.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-17T10:12:21Z",
+      "side": 1,
+      "message": "nit: I think I would prefer the name of the constant to be a prefix plus the actual string, e.g., |kFeatureNameWebrtcDualStreamMode|. (And you could probably drop either |Feature| or |Name| without any loss of clarity).",
+      "range": {
+        "startLine": 28,
+        "startChar": 18,
+        "endLine": 28,
+        "endChar": 44
+      },
+      "revId": "c0d32dcd1a23f9fe192a7b35a11a7377a7af3e99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
