@@ -33,6 +33,7 @@ class ReadableWavFile : public ReadableWav {
   virtual size_t Read(void* buf, size_t num_bytes) {
     return fread(buf, 1, num_bytes, file_);
   }
+  virtual bool Eof() { return feof(file_) != 0; }
 
  private:
   FILE* file_;
