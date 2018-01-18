@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d16f320e_95597ac0",
+        "filename": ".gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-18T14:32:49Z",
+      "side": 1,
+      "message": "Add a comment:\n\n# The SDK API level, in contrast, is set by build/android/AndroidManifest.xml.",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "4367092cd9a343c1a41ede6e1f0b8eee8887476a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
