@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37b13a82_1e741e91",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-01-18T08:59:13Z",
+      "side": 1,
+      "message": "why this change belong to this CL?\n\nlook like using rtt from inside RtpPacketHistory instead of (rtt + 5ms) from RTPSender is a different change.\n\n(as is it breaks case where min_elapsed_time_ms \u003d 0 meaning it should be ignored)",
+      "range": {
+        "startLine": 135,
+        "startChar": 63,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "c1fc77d8c48b776135811101bc5ece5420d192d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
