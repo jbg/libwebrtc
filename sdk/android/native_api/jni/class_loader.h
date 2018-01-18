@@ -14,18 +14,17 @@
 // workaround for this.
 // http://developer.android.com/training/articles/perf-jni.html#faq_FindClass
 
-#ifndef SDK_ANDROID_SRC_JNI_CLASS_LOADER_H_
-#define SDK_ANDROID_SRC_JNI_CLASS_LOADER_H_
+#ifndef SDK_ANDROID_NATIVE_API_JNI_CLASS_LOADER_H_
+#define SDK_ANDROID_NATIVE_API_JNI_CLASS_LOADER_H_
 
 #include <jni.h>
 
-#include "sdk/android/src/jni/scoped_java_ref.h"
+#include "sdk/android/native_api/jni/scoped_java_ref.h"
 
 namespace webrtc {
-namespace jni {
 
 // This method should be called from JNI_OnLoad and before any calls to
-// FindClass.
+// FindClass. This is normally called by InitAndroid.
 void InitClassLoader(JNIEnv* env);
 
 // This function is identical to JNIEnv::FindClass except that it works from any
@@ -36,7 +35,6 @@ void InitClassLoader(JNIEnv* env);
 // and should rarely be used manually.
 ScopedJavaLocalRef<jclass> GetClass(JNIEnv* env, const char* name);
 
-}  // namespace jni
 }  // namespace webrtc
 
-#endif  // SDK_ANDROID_SRC_JNI_CLASS_LOADER_H_
+#endif  // SDK_ANDROID_NATIVE_API_JNI_CLASS_LOADER_H_
