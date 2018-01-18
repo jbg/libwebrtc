@@ -22,6 +22,30 @@
       "revId": "c1fc77d8c48b776135811101bc5ece5420d192d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb80a0d2_70024439",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-01-18T16:25:09Z",
+      "side": 1,
+      "message": "Alright, we can do this change in a different cl. But removing min_elapsed_time will need to be done in several changes. I though when looking at the code that the only call sites that used 0 min elapsed time also set retransmit \u003d false, meaning it\u0027s ignored anyway.",
+      "parentUuid": "37b13a82_1e741e91",
+      "range": {
+        "startLine": 135,
+        "startChar": 63,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "c1fc77d8c48b776135811101bc5ece5420d192d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
