@@ -13,7 +13,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "sdk/android/generated_video_jni/jni/VideoFileRenderer_jni.h"
-#include "sdk/android/src/jni/scoped_java_ref.h"
+#include "sdk/android/native_api/jni/scoped_java_ref.h"
 #include "third_party/libyuv/include/libyuv/scale.h"
 
 namespace webrtc {
