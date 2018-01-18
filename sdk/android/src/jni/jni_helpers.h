@@ -24,7 +24,8 @@
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/refcount.h"
 #include "rtc_base/thread_checker.h"
-#include "sdk/android/src/jni/scoped_java_ref.h"
+#include "sdk/android/native_api/jni/scoped_java_ref.h"
+#include "sdk/android/src/jni/jvm.h"
 
 // Abort the process if |jni| has a Java exception pending.
 // This macros uses the comma operator to execute ExceptionDescribe
@@ -41,16 +42,6 @@
 
 namespace webrtc {
 namespace jni {
-
-jint InitGlobalJniVariables(JavaVM *jvm);
-
-// Return a |JNIEnv*| usable on this thread or NULL if this thread is detached.
-JNIEnv* GetEnv();
-
-JavaVM *GetJVM();
-
-// Return a |JNIEnv*| usable on this thread.  Attaches to |g_jvm| if necessary.
-JNIEnv* AttachCurrentThreadIfNeeded();
 
 // Return a |jlong| that will correctly convert back to |ptr|.  This is needed
 // because the alternative (of silently passing a 32-bit pointer to a vararg
