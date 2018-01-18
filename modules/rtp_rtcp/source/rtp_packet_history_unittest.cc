@@ -220,4 +220,81 @@ TEST_F(RtpPacketHistoryTest, FullExpansion) {
   }
 }
 
+TEST_F(RtpPacketHistoryTest, DontExpandIfPacketIsOldEnough) {
+  const size_t kSendSidePacketHistorySize = 600;
+  const int64_t kRttMs = 100;
+  hist_.SetStorePacketsStatus(true, kSendSidePacketHistorySize);
+  hist_.SetRtt(kRttMs);
+
+  // Fill up the buffer with packets.
+  for (size_t i = 0; i < kSendSidePacketHistorySize; ++i) {
+    std::unique_ptr<RtpPacketToSend> packet = CreateRtpPacket(kSeqNum + i);
+    hist_.PutRtpPacket(std::move(packet), kAllowRetransmission, false);
+    EXPECT_TRUE(hist_.GetPacketAndSetSendTime(kSeqNum + i, 100, false));
+  }
+
+  // Move clock forward past expiration time.
+  fake_clock_.AdvanceTimeMilliseconds(kRttMs * 3 + 1);
+
+  // Insert a new packet and check that the old one for this index has been
+  // overwritten.
+  std::unique_ptr<RtpPacketToSend> packet =
+      CreateRtpPacket(kSeqNum + kSendSidePacketHistorySize);
+  hist_.PutRtpPacket(std::move(packet), kAllowRetransmission, true);
+  EXPECT_FALSE(hist_.GetPacketAndSetSendTime(kSeqNum, kRttMs, true));
+}
+
+TEST_F(RtpPacketHistoryTest, ExpandIfPacketTooRecentlyTransmitted) {
+  const size_t kSendSidePacketHistorySize = 600;
+  const int64_t kRttMs = 100;
+  hist_.SetStorePacketsStatus(true, kSendSidePacketHistorySize);
+  hist_.SetRtt(kRttMs);
+
+  // Fill up the buffer with packets.
+  for (size_t i = 0; i < kSendSidePacketHistorySize; ++i) {
+    std::unique_ptr<RtpPacketToSend> packet = CreateRtpPacket(kSeqNum + i);
+    hist_.PutRtpPacket(std::move(packet), kAllowRetransmission, false);
+    EXPECT_TRUE(hist_.GetPacketAndSetSendTime(kSeqNum + i, kRttMs, false));
+  }
+
+  // Move clock forward to just before expiration time.
+  fake_clock_.AdvanceTimeMilliseconds(kRttMs * 3);
+
+  // Insert a new packet and verify that the old one for this index still
+  // exists - ie the buffer has been expanded.
+  std::unique_ptr<RtpPacketToSend> packet =
+      CreateRtpPacket(kSeqNum + kSendSidePacketHistorySize);
+  hist_.PutRtpPacket(std::move(packet), kAllowRetransmission, true);
+  EXPECT_TRUE(hist_.GetPacketAndSetSendTime(kSeqNum, kRttMs, true));
+}
+
+TEST_F(RtpPacketHistoryTest, UsesMaxRttAndMinElapsedTime) {
+  const int64_t kRttMs = 100;
+  hist_.SetStorePacketsStatus(true, 10);
+  hist_.SetRtt(kRttMs);
+
+  // Add an initial packet and mark it as sent and retransmitted once.
+  hist_.PutRtpPacket(CreateRtpPacket(kSeqNum), kAllowRetransmission, false);
+  EXPECT_TRUE(hist_.GetPacketAndSetSendTime(kSeqNum, 0, false));
+  fake_clock_.AdvanceTimeMilliseconds(kRttMs);
+  EXPECT_TRUE(hist_.GetPacketAndSetSendTime(kSeqNum, 0, true));
+
+  // Too soon according to both.
+  fake_clock_.AdvanceTimeMilliseconds(kRttMs - 1);
+  EXPECT_FALSE(hist_.GetPacketAndSetSendTime(kSeqNum, kRttMs, true));
+
+  fake_clock_.AdvanceTimeMilliseconds(1);
+
+  // OK according to RTT, but too soon according to min elapsed time.
+  EXPECT_FALSE(hist_.GetPacketAndSetSendTime(kSeqNum, kRttMs + 1, true));
+
+  // OK according to min elapsed time, but too soon according to RTT.
+  hist_.SetRtt(kRttMs + 1);
+  EXPECT_FALSE(hist_.GetPacketAndSetSendTime(kSeqNum, kRttMs, true));
+
+  // OK according to both.
+  hist_.SetRtt(kRttMs);
+  EXPECT_TRUE(hist_.GetPacketAndSetSendTime(kSeqNum, kRttMs, true));
+}
+
 }  // namespace webrtc
