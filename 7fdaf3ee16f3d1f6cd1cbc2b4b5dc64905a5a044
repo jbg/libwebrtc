@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "132f24b1_d72cd862",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-19T19:10:49Z",
+      "side": 1,
+      "message": "Talked offline about this. In Plan B code this only gets called when processing offers. It only becomes an issue if the caller is configured max BUNDLE and the answer does not have a BUNDLE group. For now it\u0027ll silently fail on both the caller and callee (i.e., stay with BUNDLE enabled).",
+      "parentUuid": "e80beae9_d0bf586b",
+      "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "852b13e2_015cc21b",
         "filename": "pc/peerconnection.h",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "18631222_99614453",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-19T19:10:49Z",
+      "side": 1,
+      "message": "Done. Didn\u0027t know we had those presubmit checks. Cool!",
+      "parentUuid": "852b13e2_015cc21b",
+      "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "669ccbf9_e7abbf9d",
         "filename": "pc/peerconnection_bundle_unittest.cc",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a61cea3_eac8b5e7",
+        "filename": "pc/peerconnection_bundle_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-19T19:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "669ccbf9_e7abbf9d",
+      "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
