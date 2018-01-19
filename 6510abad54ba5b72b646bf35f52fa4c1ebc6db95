@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d09c0c1_e05c60be",
+        "filename": "modules/video_coding/codecs/test/stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-19T13:44:51Z",
+      "side": 1,
+      "message": "Maybe it would be clearer to do \nconst size_t frame_number \u003d stats_size();\nrtp_timestamp_to_frame_num_[timestamp] \u003d frame_number;\nstats_.emplace_back(frame_number, timestamp);",
+      "revId": "6510abad54ba5b72b646bf35f52fa4c1ebc6db95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1829bf46_9143ea6e",
         "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
         "patchSetId": 3
