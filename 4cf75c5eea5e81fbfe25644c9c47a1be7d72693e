@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34c0b115_73513b73",
+        "filename": "examples/androidtests/video_quality_loopback_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-19T08:26:13Z",
+      "side": 1,
+      "message": "This function is strange. The way it reads now I would expect that it ensures that temp_dir exists, not matter what, but it rather returns something that exists. A better name would be\n\nCreateEmptyDir(suggested_dir)\n\nAnother way to do it is:\n\nif temp_dir:\n  Clean(temp_dir)\nelse:\n  temp_dir \u003d tempfile.mkdtemp()\n\nwhere you call EnsureExists now. On the other hand, the above creates an unfortunate mix of abstraction levels (if - else - tempfile.mkdtemp() are lower level abstractions than what the rest of the function is. So, I suggest you rename it to CreateEmptyDir.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 17
+      },
+      "revId": "4cf75c5eea5e81fbfe25644c9c47a1be7d72693e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eec39e2d_ac03fac9",
+        "filename": "examples/androidtests/video_quality_loopback_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-01-19T08:26:13Z",
+      "side": 1,
+      "message": "Nit: comments always end with . (apply throughout)",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 18
+      },
+      "revId": "4cf75c5eea5e81fbfe25644c9c47a1be7d72693e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
