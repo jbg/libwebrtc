@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e80beae9_d0bf586b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-19T18:40:37Z",
+      "side": 1,
+      "message": "Do you remember why this change was needed? A brief comment explaining this code may be helpful",
+      "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "852b13e2_015cc21b",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-19T18:40:37Z",
+      "side": 1,
+      "message": "nit: End name with \"ForTesting\", so that presubmit checks will catch it being used in production code.",
+      "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "669ccbf9_e7abbf9d",
+        "filename": "pc/peerconnection_bundle_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-19T18:40:37Z",
+      "side": 1,
+      "message": "May want to mention that GetTransceiversInternal(ForTesting?) can be removed too once this is done.",
+      "revId": "7fdaf3ee16f3d1f6cd1cbc2b4b5dc64905a5a044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
