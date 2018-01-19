@@ -12,23 +12,26 @@ package org.webrtc;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Can be used to save the video frames to file.
  */
 @JNINamespace("webrtc::jni")
-public class VideoFileRenderer implements VideoRenderer.Callbacks {
+public class VideoFileRenderer implements VideoRenderer.Callbacks, VideoSink {
   private static final String TAG = "VideoFileRenderer";
 
   private final HandlerThread renderThread;
-  private final Object handlerLock = new Object();
   private final Handler renderThreadHandler;
+  private final BlockingQueue<VideoFrame> queuedFrames = new LinkedBlockingQueue<>();
   private final FileOutputStream videoOutFile;
   private final String outputFileName;
   private final int outputFileWidth;
@@ -74,60 +77,66 @@ public class VideoFileRenderer implements VideoRenderer.Callbacks {
 
   @Override
   public void renderFrame(final VideoRenderer.I420Frame frame) {
-    renderThreadHandler.post(new Runnable() {
-      @Override
-      public void run() {
-        renderFrameOnRenderThread(frame);
-      }
-    });
+    queuedFrames.add(frame.toVideoFrame());
+
+    renderThreadHandler.post(this ::renderFramesOnRenderThread);
   }
 
-  // TODO(sakal): yuvConverter.convert is deprecated. This will be removed once this file is updated
-  // to implement VideoSink instead of VideoRenderer.Callbacks.
-  @SuppressWarnings("deprecation")
-  private void renderFrameOnRenderThread(VideoRenderer.I420Frame frame) {
-    final float frameAspectRatio = (float) frame.rotatedWidth() / (float) frame.rotatedHeight();
+  @Override
+  public void onFrame(VideoFrame frame) {
+    frame.retain();
+    queuedFrames.add(frame);
 
-    final float[] rotatedSamplingMatrix =
-        RendererCommon.rotateTextureMatrix(frame.samplingMatrix, frame.rotationDegree);
-    final float[] layoutMatrix = RendererCommon.getLayoutMatrix(
-        false, frameAspectRatio, (float) outputFileWidth / outputFileHeight);
-    final float[] texMatrix = RendererCommon.multiplyMatrices(rotatedSamplingMatrix, layoutMatrix);
+    renderThreadHandler.post(this ::renderFramesOnRenderThread);
+  }
 
-    try {
-      ByteBuffer buffer = JniCommon.nativeAllocateByteBuffer(outputFrameSize);
-      if (!frame.yuvFrame) {
-        yuvConverter.convert(outputFrameBuffer, outputFileWidth, outputFileHeight, outputFileWidth,
-            frame.textureId, texMatrix);
-
-        int stride = outputFileWidth;
-        byte[] data = outputFrameBuffer.array();
-        int offset = outputFrameBuffer.arrayOffset();
-
-        // Write Y
-        buffer.put(data, offset, outputFileWidth * outputFileHeight);
-
-        // Write U
-        for (int r = outputFileHeight; r < outputFileHeight * 3 / 2; ++r) {
-          buffer.put(data, offset + r * stride, stride / 2);
-        }
-
-        // Write V
-        for (int r = outputFileHeight; r < outputFileHeight * 3 / 2; ++r) {
-          buffer.put(data, offset + r * stride + stride / 2, stride / 2);
-        }
-      } else {
-        nativeI420Scale(frame.yuvPlanes[0], frame.yuvStrides[0], frame.yuvPlanes[1],
-            frame.yuvStrides[1], frame.yuvPlanes[2], frame.yuvStrides[2], frame.width, frame.height,
-            outputFrameBuffer, outputFileWidth, outputFileHeight);
-
-        buffer.put(outputFrameBuffer.array(), outputFrameBuffer.arrayOffset(), outputFrameSize);
-      }
-      buffer.rewind();
-      rawFrames.add(buffer);
-    } finally {
-      VideoRenderer.renderFrameDone(frame);
+  private void renderFramesOnRenderThread() {
+    VideoFrame frame;
+    while ((frame = queuedFrames.poll()) != null) {
+      renderFrameOnRenderThread(frame);
+      frame.release();
     }
+  }
+
+  private void renderFrameOnRenderThread(VideoFrame frame) {
+    final VideoFrame.Buffer buffer = frame.getBuffer();
+
+    final float frameAspectRatio =
+        (float) frame.getRotatedWidth() / (float) frame.getRotatedHeight();
+    final float fileAspectRation = (float) outputFileWidth / outputFileHeight;
+
+    // Calculate cropping to equalize the aspect ratio.
+    int cropWidth = frame.getRotatedWidth();
+    int cropHeight = frame.getRotatedHeight();
+    if (fileAspectRation > frameAspectRatio) {
+      cropHeight *= frameAspectRatio / fileAspectRation;
+    } else {
+      cropWidth *= fileAspectRation / frameAspectRatio;
+    }
+
+    if (frame.getRotation() % 180 != 0) {
+      int tmp = cropWidth;
+      cropWidth = cropHeight;
+      cropHeight = tmp;
+    }
+
+    int cropX = (buffer.getWidth() - cropWidth) / 2;
+    int cropY = (buffer.getHeight() - cropHeight) / 2;
+
+    final VideoFrame.Buffer scaledBuffer =
+        buffer.cropAndScale(cropX, cropY, cropWidth, cropHeight, outputFileWidth, outputFileHeight);
+
+    final VideoFrame.I420Buffer i420 = scaledBuffer.toI420();
+    scaledBuffer.release();
+
+    ByteBuffer byteBuffer = JniCommon.nativeAllocateByteBuffer(outputFrameSize);
+    YuvHelper.I420Rotate(i420.getDataY(), i420.getStrideY(), i420.getDataU(), i420.getStrideU(),
+        i420.getDataV(), i420.getStrideV(), byteBuffer, i420.getWidth(), i420.getHeight(),
+        frame.getRotation());
+    i420.release();
+
+    byteBuffer.rewind();
+    rawFrames.add(byteBuffer);
   }
 
   /**
@@ -135,14 +144,11 @@ public class VideoFileRenderer implements VideoRenderer.Callbacks {
    */
   public void release() {
     final CountDownLatch cleanupBarrier = new CountDownLatch(1);
-    renderThreadHandler.post(new Runnable() {
-      @Override
-      public void run() {
-        yuvConverter.release();
-        eglBase.release();
-        renderThread.quit();
-        cleanupBarrier.countDown();
-      }
+    renderThreadHandler.post(() -> {
+      yuvConverter.release();
+      eglBase.release();
+      renderThread.quit();
+      cleanupBarrier.countDown();
     });
     ThreadUtils.awaitUninterruptibly(cleanupBarrier);
     try {
@@ -157,15 +163,12 @@ public class VideoFileRenderer implements VideoRenderer.Callbacks {
         JniCommon.nativeFreeByteBuffer(buffer);
       }
       videoOutFile.close();
-      Logging.d(TAG, "Video written to disk as " + outputFileName + ". Number frames are "
-              + rawFrames.size() + " and the dimension of the frames are " + outputFileWidth + "x"
-              + outputFileHeight + ".");
+      Logging.d(TAG,
+          "Video written to disk as " + outputFileName + ". Number frames are " + rawFrames.size()
+              + " and the dimension of the frames are " + outputFileWidth + "x" + outputFileHeight
+              + ".");
     } catch (IOException e) {
       Logging.e(TAG, "Error writing video to disk", e);
     }
   }
-
-  public static native void nativeI420Scale(ByteBuffer srcY, int strideY, ByteBuffer srcU,
-      int strideU, ByteBuffer srcV, int strideV, int width, int height, ByteBuffer dst,
-      int dstWidth, int dstHeight);
 }
