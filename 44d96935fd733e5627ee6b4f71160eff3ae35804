@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48613f87_3b3f4f78",
+        "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-01-19T13:27:11Z",
+      "side": 1,
+      "message": "Please add a comment as to why we save the size of the last inserted packet.",
+      "revId": "44d96935fd733e5627ee6b4f71160eff3ae35804",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
