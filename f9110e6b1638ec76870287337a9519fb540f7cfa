@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fba3b0c_00caa1ec",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-19T19:27:44Z",
+      "side": 0,
+      "message": "I assume this is being removed because it means if the application calls RtpTransceiverInterface::Stop, the BaseChannel doesn\u0027t end up destroyed on applying a local answer? Or is it something else?",
+      "revId": "f9110e6b1638ec76870287337a9519fb540f7cfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
