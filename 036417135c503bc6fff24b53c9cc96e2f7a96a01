@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "930417bb_8a1bfc4f",
+        "filename": "rtc_base/sslstreamadapter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5889
+      },
+      "writtenOn": "2018-01-19T23:59:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure about the name, maybe use a more generic \"enable_insecure_crypto_ciphers\"?",
+      "range": {
+        "startLine": 91,
+        "startChar": 7,
+        "endLine": 91,
+        "endChar": 42
+      },
+      "revId": "036417135c503bc6fff24b53c9cc96e2f7a96a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
