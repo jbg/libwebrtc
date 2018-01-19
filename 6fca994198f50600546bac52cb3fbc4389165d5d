@@ -16,6 +16,24 @@
       "revId": "6fca994198f50600546bac52cb3fbc4389165d5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e720d7e3_6b5509f7",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-01-19T14:15:45Z",
+      "side": 1,
+      "message": "I think that it\u0027s better to skip the chunk data in some way that doesn\u0027t require a while-loop. Because of the reasons you mention.",
+      "parentUuid": "75a1e79f_cad11689",
+      "revId": "6fca994198f50600546bac52cb3fbc4389165d5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
