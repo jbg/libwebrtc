@@ -173,6 +173,24 @@
       "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ea466c6_7a574b4b",
+        "filename": "rtc_base/zero_memory_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5889
+      },
+      "writtenOn": "2018-01-19T20:33:57Z",
+      "side": 1,
+      "message": "Right, the compiler optimizes away calls to \"memset(buffer, 0, size)\" if \"buffer\" is not used afterwards. This can be seen in the new stack-buffer clearing test if \"memset\" is used instead of \"ExplicitZeroMemory\". The \"ExplicitZeroMemory\" is not optimized away, no matter if the \"__asm__\" block in it is present or not.\n\nSo the changes work as intended - but it seems the \"__asm__\" code is not required (at least in my tests on Linux with the current compiler). I would however keep it to prevent any future compiler optimizations to remove the code. This matches what BoringSSL does.\n\nWhat do you think?",
+      "parentUuid": "f2e0ed26_402504b5",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
