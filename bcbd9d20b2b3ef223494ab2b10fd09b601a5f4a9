@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "421f3fdb_635d73d8",
+        "filename": "pc/peerconnection_media_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-19T23:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6176bcd_c8f28276",
+      "revId": "bcbd9d20b2b3ef223494ab2b10fd09b601a5f4a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b8042fd2_74844141",
         "filename": "pc/peerconnection_media_unittest.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-19T19:27:44Z",
       "side": 1,
       "message": "Instead of using offer_to_receive_audio, you can just do AddTransceiver(initcricket::MEDIA_TYPE_AUDIO, recvonly_init).",
+      "revId": "bcbd9d20b2b3ef223494ab2b10fd09b601a5f4a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed614c61_f5d6951c",
+        "filename": "pc/peerconnection_media_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-19T23:13:42Z",
+      "side": 1,
+      "message": "I have a follow-up CL which implements offer_to_receive so these tests will exercise that legacy option handling.",
+      "parentUuid": "b8042fd2_74844141",
       "revId": "bcbd9d20b2b3ef223494ab2b10fd09b601a5f4a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true

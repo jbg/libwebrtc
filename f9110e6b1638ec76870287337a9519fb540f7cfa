@@ -16,6 +16,24 @@
       "revId": "f9110e6b1638ec76870287337a9519fb540f7cfa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af940b2e_0c763085",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-19T23:13:42Z",
+      "side": 0,
+      "message": "Yes, the BaseChannel doesn\u0027t get destroyed.",
+      "parentUuid": "3fba3b0c_00caa1ec",
+      "revId": "f9110e6b1638ec76870287337a9519fb540f7cfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
