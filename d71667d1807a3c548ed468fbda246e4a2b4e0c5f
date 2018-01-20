@@ -191,6 +191,24 @@
       "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ddfe995_e61658bd",
+        "filename": "rtc_base/zero_memory_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-20T10:50:53Z",
+      "side": 1,
+      "message": "I see. And I agree that it still makes sense to keep the asm block, as a belt-and-suspenders kind of thing.",
+      "parentUuid": "9ea466c6_7a574b4b",
+      "revId": "d71667d1807a3c548ed468fbda246e4a2b4e0c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
