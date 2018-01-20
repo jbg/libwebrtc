@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb2286aa_0b7d4d64",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Can this be folded into native_api_jni? The name common_jni is confusing when we also have base_jni etc.",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51a26710_0543a294",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Would it be easier to move these:\n    \"src/jni/class_loader.h\",\n    \"src/jni/classreferenceholder.h\",\n    \"src/jni/jni_common.cc\",\n    \"src/jni/jni_generator_helper.cc\",\n    \"src/jni/jni_generator_helper.h\",\n    \"src/jni/jni_helpers.cc\",\n    \"src/jni/jni_helpers.h\",\ninto native_base? And rename this target histogram_jni instead?",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 28
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98ae5a06_94600170",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "The naming here is confusing. We have native_api, native_api_base, native_api_jni. It\u0027s not clear what is what. Will native_api_base ever be used without native_api_jni?",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 22
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e4b1fa5_8808657c",
+        "filename": "sdk/android/native_api/base/init.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Unused?",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1303bf4a_ce553592",
+        "filename": "sdk/android/native_api/base/init.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Unused include?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef7a36e6_6bdff728",
+        "filename": "sdk/android/native_api/base/init.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Unnecessary include",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b22836f_df8a7993",
+        "filename": "sdk/android/native_api/base/init.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Should we merge this file with class_loader.h? I don\u0027t see when we would use class_loader without calling this function first.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09af09c4_8333f053",
+        "filename": "sdk/android/native_api/jni/class_loader.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Have you copy-pasted these? Don\u0027t you think the native targets will end up depending on jni_helpers.h anyway?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba6a476c_00c2385e",
+        "filename": "sdk/android/src/jni/class_loader.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-01-20T20:18:16Z",
+      "side": 1,
+      "message": "Have you checked if we actually have external usage of this file already, or can we remove it immediately?",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 69
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
