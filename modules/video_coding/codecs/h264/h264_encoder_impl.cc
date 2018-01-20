@@ -506,4 +506,8 @@ VideoEncoder::ScalingSettings H264EncoderImpl::GetScalingSettings() const {
   return VideoEncoder::ScalingSettings(true);
 }
 
+const char* H264EncoderImpl::ImplementationName() const override {
+  return "OpenH264Encoder";
+}
+
 }  // namespace webrtc

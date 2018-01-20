@@ -57,6 +57,8 @@ class H264EncoderImpl : public H264Encoder {
 
   VideoEncoder::ScalingSettings GetScalingSettings() const override;
 
+  const char* ImplementationName() const override;
+
   // Unsupported / Do nothing.
   int32_t SetChannelParameters(uint32_t packet_loss, int64_t rtt) override;
   int32_t SetPeriodicKeyFrames(bool enable) override;
