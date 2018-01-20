@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55002e9d_b415f5f4",
+        "filename": "pc/peerconnection_media_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-20T00:38:36Z",
+      "side": 1,
+      "message": "Isn\u0027t this actually \"stopped remote\"? It\u0027s verifying that when the caller stops its transceiver, that\u0027s reflected on the callee side.",
+      "revId": "6db1d9a2386129bd4b8dfd5de7ef7e88610e93ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "083cc549_fa900aec",
+        "filename": "pc/peerconnection_media_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-20T00:38:36Z",
+      "side": 1,
+      "message": "nit: Instead of having a parameterized test that will only run with one parameter, you could do:\n\nclass PeerConnectionMediaTestUnifiedPlan\n    : public PeerConnectionMediaBaseTest {\n protected:\n  PeerConnectionMediaTestUnifiedPlan() :\n       PeerConnectionMediaBaseTest(SdpSemantics::kUnifiedPlan) {}\n};\n\nAnd then \"TEST_F(PeerConnectionMediaTestUnifiedPlan, ...)\" here.",
+      "revId": "6db1d9a2386129bd4b8dfd5de7ef7e88610e93ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
