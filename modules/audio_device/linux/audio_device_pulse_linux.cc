@@ -163,17 +163,17 @@ AudioDeviceGeneric::InitStatus AudioDeviceLinuxPulse::Init() {
   }
 
   // RECORDING
-  _ptrThreadRec.reset(new rtc::PlatformThread(
-      RecThreadFunc, this, "webrtc_audio_module_rec_thread"));
+  _ptrThreadRec.reset(new rtc::PlatformThread(RecThreadFunc, this,
+                                              "webrtc_audio_module_rec_thread",
+                                              rtc::kRealtimePriority));
 
   _ptrThreadRec->Start();
-  _ptrThreadRec->SetPriority(rtc::kRealtimePriority);
 
   // PLAYOUT
   _ptrThreadPlay.reset(new rtc::PlatformThread(
-      PlayThreadFunc, this, "webrtc_audio_module_play_thread"));
+      PlayThreadFunc, this, "webrtc_audio_module_play_thread",
+      rtc::kRealtimePriority));
   _ptrThreadPlay->Start();
-  _ptrThreadPlay->SetPriority(rtc::kRealtimePriority);
 
   _initialized = true;
 
@@ -1980,12 +1980,14 @@ int32_t AudioDeviceLinuxPulse::ProcessRecordedData(int8_t* bufferData,
   return 0;
 }
 
-bool AudioDeviceLinuxPulse::PlayThreadFunc(void* pThis) {
-  return (static_cast<AudioDeviceLinuxPulse*>(pThis)->PlayThreadProcess());
+void AudioDeviceLinuxPulse::PlayThreadFunc(void* pThis) {
+  while (static_cast<AudioDeviceLinuxPulse*>(pThis)->PlayThreadProcess()) {
+  }
 }
 
-bool AudioDeviceLinuxPulse::RecThreadFunc(void* pThis) {
-  return (static_cast<AudioDeviceLinuxPulse*>(pThis)->RecThreadProcess());
+void AudioDeviceLinuxPulse::RecThreadFunc(void* pThis) {
+  while (static_cast<AudioDeviceLinuxPulse*>(pThis)->RecThreadProcess()) {
+  }
 }
 
 bool AudioDeviceLinuxPulse::PlayThreadProcess() {

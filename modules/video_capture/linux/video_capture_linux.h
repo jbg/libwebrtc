@@ -36,7 +36,7 @@ public:
 private:
     enum {kNoOfV4L2Bufffers=4};
 
-    static bool CaptureThread(void*);
+    static void CaptureThread(void*);
     bool CaptureProcess();
     bool AllocateVideoBuffers();
     bool DeAllocateVideoBuffers();
