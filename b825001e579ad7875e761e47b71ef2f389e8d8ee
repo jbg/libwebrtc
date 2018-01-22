@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f2b49853_7b4e3f22",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Thanks for the comment, I\u0027ve done some investigations.\n\nThere is a bug triggered when two (or more) wav files are read and the last one is incomplete (no \"fmt \" and/or \"data\" chunks - unlikely, but possible). You can see the problem running the unit test WavHeaderTest::ReadWavHeaderWithErrors():\n- in wav_header.cc, |header| always points to the same location in the stack\n- the test with kMissingFmtAndDataChunks is placed as last; hence, without initialization, the last part of |header| comes from kMissingDataChunk (which has the \"fmt \" chunk) and kNonZeroExtensionField (which also has the \"data\" chunk)\n- ReadWavHeader() therefore incorrectly reads data from previous calls\n\nWe can fix the bug in two ways: either we keep the initialization (safer) or we add a missing EOF check. For safety, I will keep the initialization and add the EOF checks. WDYT?",
+      "parentUuid": "de569cfe_e2e69bb7",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d26644b6_de54a1b8",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 5
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "83b3335c_8c11b1ce",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d26644b6_de54a1b8",
+      "range": {
+        "startLine": 188,
+        "startChar": 5,
+        "endLine": 188,
+        "endChar": 9
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9388a4f_b7c0d22a",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 5
@@ -56,6 +98,24 @@
       "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3f68d59_5a0eeda2",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9388a4f_b7c0d22a",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "b86db6a3_95cecea1",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "419db89c_4fab5940",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5e20737_60d7aee2",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 5
@@ -90,6 +168,24 @@
       "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "886eb510_13d80011",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Done and I also moved everything that is not declared in wav_header.h - which is also needed by FindWaveChunk() and ReadFmtChunkData().",
+      "parentUuid": "e5e20737_60d7aee2",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "443c9e73_cc86a1cb",
+        "filename": "common_audio/wav_header_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6c9a062_81a76649",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62989b84_ea3edd90",
         "filename": "common_audio/wav_header_unittest.cc",
         "patchSetId": 5
@@ -159,6 +279,30 @@
       "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16431f32_c244bca3",
+        "filename": "common_audio/wav_header_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-01-22T14:50:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62989b84_ea3edd90",
+      "range": {
+        "startLine": 385,
+        "startChar": 33,
+        "endLine": 385,
+        "endChar": 50
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
