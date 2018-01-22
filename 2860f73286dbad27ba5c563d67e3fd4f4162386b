@@ -46,6 +46,30 @@
       "revId": "2860f73286dbad27ba5c563d67e3fd4f4162386b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d1f2f98_ee85d9f0",
+        "filename": "sdk/android/src/jni/videoencoderwrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T11:20:04Z",
+      "side": 1,
+      "message": "We could. I recommended this way because I find the bind+lambda construction rather more complicated than this one.",
+      "parentUuid": "e53ad5fa_e0803dcd",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 17
+      },
+      "revId": "2860f73286dbad27ba5c563d67e3fd4f4162386b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
