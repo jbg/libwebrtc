@@ -38,7 +38,7 @@ class EventTimerPosix : public EventTimerWrapper {
  private:
   friend class EventTimerPosixTest;
 
-  static bool Run(void* obj);
+  static void Run(void* obj);
   bool Process();
   EventTypeWrapper Wait(timespec* end_at, bool reset_state);
 
