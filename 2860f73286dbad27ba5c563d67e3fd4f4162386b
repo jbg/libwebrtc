@@ -22,6 +22,30 @@
       "revId": "2860f73286dbad27ba5c563d67e3fd4f4162386b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e53ad5fa_e0803dcd",
+        "filename": "sdk/android/src/jni/videoencoderwrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-22T11:10:49Z",
+      "side": 1,
+      "message": "I am not sure I am following about passing it as a parameter to the lambda. Isn\u0027t the lambda invoked later by the TaskQueue?",
+      "parentUuid": "6c3e1b13_4aa4c15e",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 17
+      },
+      "revId": "2860f73286dbad27ba5c563d67e3fd4f4162386b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
