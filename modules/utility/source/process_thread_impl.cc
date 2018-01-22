@@ -165,8 +165,9 @@ void ProcessThreadImpl::DeRegisterModule(Module* module) {
 }
 
 // static
-bool ProcessThreadImpl::Run(void* obj) {
-  return static_cast<ProcessThreadImpl*>(obj)->Process();
+void ProcessThreadImpl::Run(void* obj) {
+  while (static_cast<ProcessThreadImpl*>(obj)->Process()) {
+  }
 }
 
 bool ProcessThreadImpl::Process() {
