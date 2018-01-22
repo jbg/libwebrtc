@@ -182,8 +182,9 @@ bool EventTimerPosix::StartTimer(bool periodic, unsigned long time_ms) {
   return true;
 }
 
-bool EventTimerPosix::Run(void* obj) {
-  return static_cast<EventTimerPosix*>(obj)->Process();
+void EventTimerPosix::Run(void* obj) {
+  while (static_cast<EventTimerPosix*>(obj)->Process()) {
+  }
 }
 
 bool EventTimerPosix::Process() {
