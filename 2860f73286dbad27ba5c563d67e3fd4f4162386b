@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c3e1b13_4aa4c15e",
+        "filename": "sdk/android/src/jni/videoencoderwrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T10:25:54Z",
+      "side": 1,
+      "message": "Only task_buffer is the problem because it is the only one using \"initialized lambda captures\"? Could we instead pass it in as a parameter to the lambda and use rtc::Bind?",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 17
+      },
+      "revId": "2860f73286dbad27ba5c563d67e3fd4f4162386b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
