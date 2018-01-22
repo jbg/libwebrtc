@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6ba1b5c_97f4b6bd",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-22T12:08:00Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like it\u0027s used?",
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d96fc7a_92ecf6c3",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-22T12:08:00Z",
+      "side": 1,
+      "message": "nit: Should this be `fileAspectRatio`?",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 32
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3f15dbe_562e4e7c",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-22T12:08:00Z",
+      "side": 1,
+      "message": "nit: In the division above you cast both parameters to float. I don\u0027t think it matters in java but maybe nice to be consistent?",
+      "range": {
+        "startLine": 95,
+        "startChar": 61,
+        "endLine": 95,
+        "endChar": 77
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8796187_b13ffd77",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-22T12:08:00Z",
+      "side": 1,
+      "message": "Maybe I\u0027m not following, but it seems that the i420 buffer already takes the frame rotation into account because of the scaledHeight/scaledWidth calculations above. Will sending the same rotation again apply the height/width switching twice?",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 27
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95ea184e_172f39be",
+        "filename": "sdk/android/api/org/webrtc/YuvHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-22T12:08:00Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right",
+      "range": {
+        "startLine": 74,
+        "startChar": 52,
+        "endLine": 74,
+        "endChar": 73
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7c35b95_8c823486",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/YuvHelperTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-22T12:08:00Z",
+      "side": 1,
+      "message": "Should the y plane stride also be the height to accommodate for the rotation?",
+      "range": {
+        "startLine": 136,
+        "startChar": 27,
+        "endLine": 136,
+        "endChar": 37
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
