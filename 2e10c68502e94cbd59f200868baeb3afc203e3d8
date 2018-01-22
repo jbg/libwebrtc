@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "67d07651_3077c616",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T13:15:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6ba1b5c_97f4b6bd",
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d96fc7a_92ecf6c3",
         "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
         "patchSetId": 4
@@ -65,6 +83,54 @@
     },
     {
       "key": {
+        "uuid": "64f5cc9b_adc76885",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T13:15:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d96fc7a_92ecf6c3",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 32
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cebe2079_12566ceb",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T13:15:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3f15dbe_562e4e7c",
+      "range": {
+        "startLine": 95,
+        "startChar": 61,
+        "endLine": 95,
+        "endChar": 77
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8796187_b13ffd77",
         "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
         "patchSetId": 4
@@ -85,6 +151,30 @@
       "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b8ee9e1_56fe3a04",
+        "filename": "sdk/android/api/org/webrtc/VideoFileRenderer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T13:15:48Z",
+      "side": 1,
+      "message": "I moved the logic about rotated frames earlier and added a comment. Hopefully this makes the code clearer.",
+      "parentUuid": "e8796187_b13ffd77",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 27
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "a049d663_edf426cd",
+        "filename": "sdk/android/api/org/webrtc/YuvHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T13:15:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95ea184e_172f39be",
+      "range": {
+        "startLine": 74,
+        "startChar": 52,
+        "endLine": 74,
+        "endChar": 73
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7c35b95_8c823486",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/YuvHelperTest.java",
         "patchSetId": 4
@@ -131,6 +245,30 @@
       "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2446d101_41082446",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/YuvHelperTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-22T13:15:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7c35b95_8c823486",
+      "range": {
+        "startLine": 136,
+        "startChar": 27,
+        "endLine": 136,
+        "endChar": 37
+      },
+      "revId": "2e10c68502e94cbd59f200868baeb3afc203e3d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
