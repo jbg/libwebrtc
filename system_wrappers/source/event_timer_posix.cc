@@ -150,7 +150,8 @@ EventTypeWrapper EventTimerPosix::Wait(timespec* end_at, bool reset_event) {
 
 rtc::PlatformThread* EventTimerPosix::CreateThread() {
   const char* kThreadName = "WebRtc_event_timer_thread";
-  return new rtc::PlatformThread(Run, this, kThreadName);
+  return new rtc::PlatformThread(Run, this, kThreadName,
+                                 rtc::kRealtimePriority);
 }
 
 bool EventTimerPosix::StartTimer(bool periodic, unsigned long time_ms) {
@@ -176,14 +177,14 @@ bool EventTimerPosix::StartTimer(bool periodic, unsigned long time_ms) {
   periodic_ = periodic;
   time_ms_ = time_ms;
   timer_thread_->Start();
-  timer_thread_->SetPriority(rtc::kRealtimePriority);
   pthread_mutex_unlock(&mutex_);
 
   return true;
 }
 
-bool EventTimerPosix::Run(void* obj) {
-  return static_cast<EventTimerPosix*>(obj)->Process();
+void EventTimerPosix::Run(void* obj) {
+  while (static_cast<EventTimerPosix*>(obj)->Process()) {
+  }
 }
 
 bool EventTimerPosix::Process() {
