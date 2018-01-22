@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de569cfe_e2e69bb7",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "Why initialize all fields?",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d26644b6_de54a1b8",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "Suggestion: \"FindWaveChunk\", since \"seek\" has a very specific meaning in the context of files.",
+      "range": {
+        "startLine": 188,
+        "startChar": 5,
+        "endLine": 188,
+        "endChar": 9
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9388a4f_b7c0d22a",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "Does this comment belong just before the function, since it explains what the function as a whole is doing?",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "419db89c_4fab5940",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "Can you put this function in an unnamed namespace?",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5e20737_60d7aee2",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "Can you put this function in an unnamed namespace?",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d497f406_3243ae7f",
+        "filename": "common_audio/wav_header.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "This is for addressing inside a file, so uint64_t?",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6c9a062_81a76649",
+        "filename": "common_audio/wav_header_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "Should this perhaps be called \"SeekForward\"?",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62989b84_ea3edd90",
+        "filename": "common_audio/wav_header_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-22T13:45:07Z",
+      "side": 1,
+      "message": "grammar",
+      "range": {
+        "startLine": 385,
+        "startChar": 33,
+        "endLine": 385,
+        "endChar": 50
+      },
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
