@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a69a3a8c_dee13b77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-23T10:49:06Z",
+      "side": 1,
+      "message": "I didn\u0027t understand the comment about EventTimerPosix, could you please clarify?",
+      "parentUuid": "845eb581_55f97f68",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "469f814fb6e8cc06385b561df43005c8872c04be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e00f6d4_e0f9a7cc",
         "filename": "modules/utility/source/process_thread_impl.cc",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-23T10:10:06Z",
       "side": 1,
       "message": "I\u0027m a bit confused, but to stick to the old behavior the body of this while loop should be a call to nanosleep(0) (or sched_yield, if that works better)?\n\nI\u0027m not familiar with this code though, I don\u0027t know if a yield call in this loop is important.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 3
+      },
+      "revId": "469f814fb6e8cc06385b561df43005c8872c04be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d90ee9e_6825ed11",
+        "filename": "modules/utility/source/process_thread_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2018-01-23T10:49:06Z",
+      "side": 1,
+      "message": "Yes, you are right, old code was calling some kind of \u0027yield\u0027 implementation between successive ProcessThreadImpl::Process() calls.\nBut there is not yet rtc::ThreadYield() function, but only inlined implementations of \u0027yield\u0027 with several #if depending on target platform.\n1. One inlined \u0027yield\u0027 implementation is inside platform_thread.cc https://webrtc.googlesource.com/src/+/master/rtc_base/platform_thread.cc#273,\n2. Another inlined implementation is inside criticalsection.cc https://webrtc.googlesource.com/src/+/master/rtc_base/criticalsection.cc#224 .\n\nIf you don\u0027t mind I can make changes directly to platform_thread.cc (and undo changes in PaltformThread users) and use sched_yield() for Android (it will resolve #8770 which is crucial for me). But what about criticalsection.cc? Maybe instead of fixing inlined implementation dedicated xplat function should be extracted? Or maybe sched_yield is already available on all platforms which targeted by WebRTC and nanosleep for yielding can be removed at all?\n\nNiels, which solution should be implemented, what do you think?",
+      "parentUuid": "2e00f6d4_e0f9a7cc",
       "range": {
         "startLine": 169,
         "startChar": 0,
