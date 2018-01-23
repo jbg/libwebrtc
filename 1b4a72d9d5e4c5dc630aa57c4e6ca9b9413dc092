@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0645a697_736223f9",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-23T10:43:52Z",
+      "side": 1,
+      "message": "Should we set codec_settings.simulcastStream and codec_settings.spatialLayers too? Or are the defaults OK?",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 97,
+        "endChar": 41
+      },
+      "revId": "1b4a72d9d5e4c5dc630aa57c4e6ca9b9413dc092",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
