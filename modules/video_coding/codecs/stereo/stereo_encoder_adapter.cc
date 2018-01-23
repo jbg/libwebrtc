@@ -186,26 +186,49 @@ EncodedImageCallback::Result StereoEncoderAdapter::OnEncodedImage(
     const EncodedImage& encodedImage,
     const CodecSpecificInfo* codecSpecificInfo,
     const RTPFragmentationHeader* fragmentation) {
-  const VideoCodecType associated_codec_type = codecSpecificInfo->codecType;
-  const auto& image_stereo_info_itr =
-      image_stereo_info_.find(encodedImage._timeStamp);
-  RTC_DCHECK(image_stereo_info_itr != image_stereo_info_.end());
-  ImageStereoInfo& image_stereo_info = image_stereo_info_itr->second;
-  const uint8_t frame_count = image_stereo_info.frame_count;
-  const uint16_t picture_index = image_stereo_info.picture_index;
-  if (++image_stereo_info.encoded_count == frame_count)
-    image_stereo_info_.erase(image_stereo_info_itr);
+  const auto& stashed_image_itr = stashed_images_.find(encodedImage._timeStamp);
+  const auto& stashed_image_next_itr = std::next(stashed_image_itr, 1);
+  RTC_DCHECK(stashed_image_itr != stashed_images_.end());
+  MultiplexImage& stashed_image = stashed_image_itr->second;
+  const uint8_t frame_count = stashed_image.component_count;
 
-  CodecSpecificInfo codec_info = *codecSpecificInfo;
-  codec_info.codecType = kVideoCodecStereo;
-  codec_info.codec_name = "stereo";
-  codec_info.codecSpecific.stereo.associated_codec_type = associated_codec_type;
-  codec_info.codecSpecific.stereo.indices.frame_index = stream_idx;
-  codec_info.codecSpecific.stereo.indices.frame_count = frame_count;
-  codec_info.codecSpecific.stereo.indices.picture_index = picture_index;
+  // Save the image
+  MultiplexImageComponent image_component;
+  image_component.component_index = stream_idx;
+  image_component.codec_type =
+      PayloadStringToCodecType(associated_format_.name);
+  image_component.encoded_image = encodedImage;
+  image_component.encoded_image._buffer = new uint8_t[encodedImage._length];
+  std::memcpy(image_component.encoded_image._buffer, encodedImage._buffer,
+              encodedImage._length);
 
-  encoded_complete_callback_->OnEncodedImage(encodedImage, &codec_info,
-                                             fragmentation);
+  stashed_image.image_components.push_back(image_component);
+
+  if (stashed_image.image_components.size() == frame_count) {
+    // Complete case
+    auto iter = stashed_images_.begin();
+    while (iter != stashed_images_.end() && iter != stashed_image_next_itr) {
+      // No image at all, skip.
+      if (iter->second.image_components.size() == 0)
+        continue;
+
+      // We have to send out those stashed frames, otherwise the delta frame
+      // dependency chain is broken.
+      if (combined_image_._buffer)
+        delete[] combined_image_._buffer;
+      combined_image_ =
+          MultiplexEncodedImagePacker::PackAndRelease(iter->second);
+
+      CodecSpecificInfo codec_info = *codecSpecificInfo;
+      codec_info.codecType = kVideoCodecStereo;
+      codec_info.codecSpecific.generic.simulcast_idx = 0;
+      encoded_complete_callback_->OnEncodedImage(combined_image_, &codec_info,
+                                                 fragmentation);
+      iter++;
+    }
+
+    stashed_images_.erase(stashed_images_.begin(), stashed_image_next_itr);
+  }
   return EncodedImageCallback::Result(EncodedImageCallback::Result::OK);
 }
 
