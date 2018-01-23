@@ -22,6 +22,30 @@
       "revId": "1b4a72d9d5e4c5dc630aa57c4e6ca9b9413dc092",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e38a4ea_d63dc25c",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-01-23T15:17:00Z",
+      "side": 1,
+      "message": "I was looking for right place to configure simulcast and somehow decided to do this in VideoProcessorIntegrationTest::SetUpAndInitObjects. But TestConfig::SetCodecSettings is more right place. Moved it here.\n\nConfiguring of spatial layering will be added later.",
+      "parentUuid": "0645a697_736223f9",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 97,
+        "endChar": 41
+      },
+      "revId": "1b4a72d9d5e4c5dc630aa57c4e6ca9b9413dc092",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
