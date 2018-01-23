@@ -326,6 +326,9 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   const bool audio_;
 
   const RtpKeepAliveConfig keepalive_config_;
+
+  const RtcpIntervalConfig rtcp_interval_config_;
+
   int64_t last_bitrate_process_time_;
   int64_t last_rtt_process_time_;
   int64_t next_process_time_;

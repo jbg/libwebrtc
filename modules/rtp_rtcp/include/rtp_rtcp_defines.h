@@ -41,6 +41,11 @@ const int kBogusRtpRateForAudioRtcp = 8000;
 // Minimum RTP header size in bytes.
 const uint8_t kRtpHeaderSize = 12;
 
+struct RtcpIntervalConfig final {
+  uint64_t video_interval_ms = 1000;
+  uint64_t audio_interval_ms = 5000;
+};
+
 struct AudioPayload {
   SdpAudioFormat format;
   uint32_t rate;

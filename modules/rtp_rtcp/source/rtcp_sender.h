@@ -80,7 +80,8 @@ class RTCPSender {
              ReceiveStatisticsProvider* receive_statistics,
              RtcpPacketTypeCounterObserver* packet_type_counter_observer,
              RtcEventLog* event_log,
-             Transport* outgoing_transport);
+             Transport* outgoing_transport,
+             RtcpIntervalConfig interval_config);
   virtual ~RTCPSender();
 
   RtcpMode Status() const;
@@ -193,6 +194,8 @@ class RTCPSender {
 
   RtcEventLog* const event_log_;
   Transport* const transport_;
+
+  RtcpIntervalConfig interval_config_;
 
   rtc::CriticalSection critical_section_rtcp_sender_;
   bool using_nack_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
