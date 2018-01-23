@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "845eb581_55f97f68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-23T10:10:06Z",
+      "side": 1,
+      "message": "Spelling, missing l.\n\nAlso it would be good if the class changed by the cl is EventTimerPosix.\n\nI change looks basically ok to me, but I think I would prefer to fix this with a patch to replace nanosleep(0) by sched_yield everywhere (possibly with a fallback to nanosleep if needed for portability).\n\nAnd then have a delete the deprecated constructor *without* any intended changes to behavior.",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "469f814fb6e8cc06385b561df43005c8872c04be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e00f6d4_e0f9a7cc",
+        "filename": "modules/utility/source/process_thread_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-23T10:10:06Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused, but to stick to the old behavior the body of this while loop should be a call to nanosleep(0) (or sched_yield, if that works better)?\n\nI\u0027m not familiar with this code though, I don\u0027t know if a yield call in this loop is important.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 3
+      },
+      "revId": "469f814fb6e8cc06385b561df43005c8872c04be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
