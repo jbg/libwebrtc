@@ -111,11 +111,12 @@ TEST(TestConfig, ToString_Vp8) {
   config.filename = "yuvfile";
   config.use_single_core = true;
 
-  config.SetCodecSettings(kVideoCodecVP8, 2, true,  // error_concealment_on,
-                          false,                    // denoising_on,
-                          false,                    // frame_dropper_on,
-                          true,                     // spatial_resize_on,
-                          false,                    // resilience_on,
+  config.SetCodecSettings(kVideoCodecVP8, 1, 1, 2,
+                          true,   // error_concealment_on,
+                          false,  // denoising_on,
+                          false,  // frame_dropper_on,
+                          true,   // spatial_resize_on,
+                          false,  // resilience_on,
                           320, 180);
   config.codec_settings.startBitrate = 400;
   config.codec_settings.maxBitrate = 500;
