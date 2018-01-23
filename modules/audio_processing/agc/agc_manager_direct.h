@@ -46,15 +46,13 @@ class AgcManagerDirect final {
   // outside that range will be clamped.
   AgcManagerDirect(GainControl* gctrl,
                    VolumeCallbacks* volume_callbacks,
-                   int startup_min_level,
-                   int clipped_level_min);
+                   int startup_min_level);
   // Dependency injection for testing. Don't delete |agc| as the memory is owned
   // by the manager.
   AgcManagerDirect(Agc* agc,
                    GainControl* gctrl,
                    VolumeCallbacks* volume_callbacks,
-                   int startup_min_level,
-                   int clipped_level_min);
+                   int startup_min_level);
   ~AgcManagerDirect();
 
   int Initialize();
@@ -100,7 +98,6 @@ class AgcManagerDirect final {
   bool check_volume_on_next_process_;
   bool startup_;
   int startup_min_level_;
-  const int clipped_level_min_;
 
   std::unique_ptr<DebugFile> file_preproc_;
   std::unique_ptr<DebugFile> file_postproc_;

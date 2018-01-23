@@ -112,21 +112,14 @@ static const int kAgcStartupMinVolume = 85;
 #else
 static const int kAgcStartupMinVolume = 0;
 #endif  // defined(WEBRTC_CHROMIUM_BUILD)
-static constexpr int kClippedLevelMin = 70;
 struct ExperimentalAgc {
   ExperimentalAgc() = default;
   explicit ExperimentalAgc(bool enabled) : enabled(enabled) {}
   ExperimentalAgc(bool enabled, int startup_min_volume)
       : enabled(enabled), startup_min_volume(startup_min_volume) {}
-  ExperimentalAgc(bool enabled, int startup_min_volume, int clipped_level_min)
-      : enabled(enabled),
-        startup_min_volume(startup_min_volume),
-        clipped_level_min(clipped_level_min) {}
   static const ConfigOptionID identifier = ConfigOptionID::kExperimentalAgc;
   bool enabled = true;
   int startup_min_volume = kAgcStartupMinVolume;
-  // Lowest microphone level that will be applied in response to clipping.
-  int clipped_level_min = kClippedLevelMin;
 };
 
 // Use to enable experimental noise suppression. It can be set in the

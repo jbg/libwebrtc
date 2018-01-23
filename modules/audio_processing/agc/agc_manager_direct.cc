@@ -28,6 +28,8 @@ namespace webrtc {
 
 namespace {
 
+// Lower bound for the gain when reduced in response to clipping.
+constexpr int kClippingLevelMin = 70;
 // Amount the microphone level is lowered with every clipping event.
 const int kClippedLevelStep = 15;
 // Proportion of clipped samples required to declare a clipping event.
@@ -114,8 +116,7 @@ class DebugFile {
 
 AgcManagerDirect::AgcManagerDirect(GainControl* gctrl,
                                    VolumeCallbacks* volume_callbacks,
-                                   int startup_min_level,
-                                   int clipped_level_min)
+                                   int startup_min_level)
     : agc_(new Agc()),
       gctrl_(gctrl),
       volume_callbacks_(volume_callbacks),
@@ -130,15 +131,13 @@ AgcManagerDirect::AgcManagerDirect(GainControl* gctrl,
       check_volume_on_next_process_(true),  // Check at startup.
       startup_(true),
       startup_min_level_(ClampLevel(startup_min_level)),
-      clipped_level_min_(clipped_level_min),
       file_preproc_(new DebugFile("agc_preproc.pcm")),
       file_postproc_(new DebugFile("agc_postproc.pcm")) {}
 
 AgcManagerDirect::AgcManagerDirect(Agc* agc,
                                    GainControl* gctrl,
                                    VolumeCallbacks* volume_callbacks,
-                                   int startup_min_level,
-                                   int clipped_level_min)
+                                   int startup_min_level)
     : agc_(agc),
       gctrl_(gctrl),
       volume_callbacks_(volume_callbacks),
@@ -153,7 +152,6 @@ AgcManagerDirect::AgcManagerDirect(Agc* agc,
       check_volume_on_next_process_(true),  // Check at startup.
       startup_(true),
       startup_min_level_(ClampLevel(startup_min_level)),
-      clipped_level_min_(clipped_level_min),
       file_preproc_(new DebugFile("agc_preproc.pcm")),
       file_postproc_(new DebugFile("agc_postproc.pcm")) {}
 
@@ -220,14 +218,14 @@ void AgcManagerDirect::AnalyzePreProcess(int16_t* audio,
                      << clipped_ratio;
     // Always decrease the maximum level, even if the current level is below
     // threshold.
-    SetMaxLevel(std::max(clipped_level_min_, max_level_ - kClippedLevelStep));
+    SetMaxLevel(std::max(kClippingLevelMin, max_level_ - kClippedLevelStep));
     RTC_HISTOGRAM_BOOLEAN("WebRTC.Audio.AgcClippingAdjustmentAllowed",
-                          level_ - kClippedLevelStep >= clipped_level_min_);
-    if (level_ > clipped_level_min_) {
+                          level_ - kClippedLevelStep >= kClippingLevelMin);
+    if (level_ > kClippingLevelMin) {
       // Don't try to adjust the level if we're already below the limit. As
       // a consequence, if the user has brought the level above the limit, we
       // will still not react until the postproc updates the level.
-      SetLevel(std::max(clipped_level_min_, level_ - kClippedLevelStep));
+      SetLevel(std::max(kClippingLevelMin, level_ - kClippedLevelStep));
       // Reset the AGC since the level has changed.
       agc_->Reset();
     }
@@ -305,13 +303,13 @@ void AgcManagerDirect::SetLevel(int new_level) {
 }
 
 void AgcManagerDirect::SetMaxLevel(int level) {
-  RTC_DCHECK_GE(level, clipped_level_min_);
+  RTC_DCHECK_GE(level, kClippingLevelMin);
   max_level_ = level;
   // Scale the |kSurplusCompressionGain| linearly across the restricted
   // level range.
   max_compression_gain_ =
       kMaxCompressionGain + std::floor((1.f * kMaxMicLevel - max_level_) /
-                                           (kMaxMicLevel - clipped_level_min_) *
+                                           (kMaxMicLevel - kClippingLevelMin) *
                                            kSurplusCompressionGain +
                                        0.5f);
   RTC_LOG(LS_INFO) << "[agc] max_level_=" << max_level_
