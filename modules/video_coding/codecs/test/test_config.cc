@@ -67,6 +67,8 @@ std::string CodecSpecificToString(const webrtc::VideoCodec& codec) {
 }  // namespace
 
 void TestConfig::SetCodecSettings(VideoCodecType codec_type,
+                                  size_t num_simulcast_streams,
+                                  size_t num_spatial_layers,
                                   size_t num_temporal_layers,
                                   bool error_concealment_on,
                                   bool denoising_on,
@@ -81,6 +83,19 @@ void TestConfig::SetCodecSettings(VideoCodecType codec_type,
   // DCHECK that they are set before initializing the codec instead.
   codec_settings.width = static_cast<uint16_t>(width);
   codec_settings.height = static_cast<uint16_t>(height);
+
+  RTC_CHECK(num_simulcast_streams >= 1 &&
+            num_simulcast_streams <= kMaxSimulcastStreams);
+  RTC_CHECK(num_spatial_layers >= 1 && num_spatial_layers <= kMaxSpatialLayers);
+
+  // Simulcast is only available with VP8.
+  RTC_CHECK(num_simulcast_streams < 2 || codec_type == kVideoCodecVP8);
+
+  // Spatial scalability is only available with VP9.
+  RTC_CHECK(num_spatial_layers < 2 || codec_type == kVideoCodecVP9);
+
+  codec_settings.numberOfSimulcastStreams =
+      static_cast<uint8_t>(num_simulcast_streams);
 
   switch (codec_settings.codecType) {
     case kVideoCodecVP8:
@@ -102,6 +117,8 @@ void TestConfig::SetCodecSettings(VideoCodecType codec_type,
       codec_settings.VP9()->frameDroppingOn = frame_dropper_on;
       codec_settings.VP9()->keyFrameInterval = kBaseKeyFrameInterval;
       codec_settings.VP9()->automaticResizeOn = spatial_resize_on;
+      codec_settings.VP9()->numberOfSpatialLayers =
+          static_cast<uint8_t>(num_spatial_layers);
       break;
     case kVideoCodecH264:
       codec_settings.H264()->frameDroppingOn = frame_dropper_on;
@@ -133,6 +150,10 @@ size_t TestConfig::NumberOfSpatialLayers() const {
   } else {
     return 1;
   }
+}
+
+size_t TestConfig::NumberOfSimulcastStreams() const {
+  return codec_settings.numberOfSimulcastStreams;
 }
 
 size_t TestConfig::TemporalLayerForFrame(size_t frame_idx) const {
