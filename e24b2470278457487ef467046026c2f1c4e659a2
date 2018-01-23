@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b0f89c3_2808f42a",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-23T10:09:01Z",
+      "side": 1,
+      "message": "here too.",
+      "range": {
+        "startLine": 70,
+        "startChar": 41,
+        "endLine": 70,
+        "endChar": 68
+      },
+      "revId": "e24b2470278457487ef467046026c2f1c4e659a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82fc2928_13ee78a8",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-23T10:09:01Z",
+      "side": 1,
+      "message": "Do we want to allow both 0 and 1 here?",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 43
+      },
+      "revId": "e24b2470278457487ef467046026c2f1c4e659a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b3941bf_05298be3",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-23T10:09:01Z",
+      "side": 1,
+      "message": "Move after automaticResizeOn, to be consistent with\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/common_types.h?l\u003d449\u0026rcl\u003ddb9e9d5486c40f4b78513fedc79b9b22ad3e5751",
+      "range": {
+        "startLine": 109,
+        "startChar": 28,
+        "endLine": 109,
+        "endChar": 49
+      },
+      "revId": "e24b2470278457487ef467046026c2f1c4e659a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08ec2ef7_205489dd",
+        "filename": "modules/video_coding/codecs/test/test_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-23T10:09:01Z",
+      "side": 1,
+      "message": "num_simulcast_streams\nnum_spatial_layers,\n\nfor consistency.",
+      "range": {
+        "startLine": 35,
+        "startChar": 31,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "e24b2470278457487ef467046026c2f1c4e659a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
