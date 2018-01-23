@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b0f5d4d_9554e7e8",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-01-23T15:30:58Z",
+      "side": 1,
+      "message": "Add period.",
+      "range": {
+        "startLine": 26,
+        "startChar": 49,
+        "endLine": 26,
+        "endChar": 66
+      },
+      "revId": "1551b9f105674af2705f05eb7848df4756c193c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
