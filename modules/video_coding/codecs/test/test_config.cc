@@ -67,6 +67,8 @@ std::string CodecSpecificToString(const webrtc::VideoCodec& codec) {
 }  // namespace
 
 void TestConfig::SetCodecSettings(VideoCodecType codec_type,
+                                  size_t number_of_simulcast_streams,
+                                  size_t number_of_spatial_layers,
                                   size_t num_temporal_layers,
                                   bool error_concealment_on,
                                   bool denoising_on,
@@ -82,6 +84,14 @@ void TestConfig::SetCodecSettings(VideoCodecType codec_type,
   codec_settings.width = static_cast<uint16_t>(width);
   codec_settings.height = static_cast<uint16_t>(height);
 
+  RTC_CHECK(number_of_simulcast_streams < 2 || codec_type == kVideoCodecVP8);
+  RTC_CHECK(number_of_spatial_layers < 2 || codec_type == kVideoCodecVP9);
+
+  codec_settings.numberOfSimulcastStreams =
+      number_of_simulcast_streams > 1
+          ? static_cast<uint8_t>(number_of_simulcast_streams)
+          : 0;
+
   switch (codec_settings.codecType) {
     case kVideoCodecVP8:
       codec_settings.VP8()->resilience =
@@ -96,6 +106,8 @@ void TestConfig::SetCodecSettings(VideoCodecType codec_type,
       break;
     case kVideoCodecVP9:
       codec_settings.VP9()->resilienceOn = resilience_on;
+      codec_settings.VP9()->numberOfSpatialLayers =
+          static_cast<uint8_t>(number_of_spatial_layers);
       codec_settings.VP9()->numberOfTemporalLayers =
           static_cast<uint8_t>(num_temporal_layers);
       codec_settings.VP9()->denoisingOn = denoising_on;
@@ -133,6 +145,10 @@ size_t TestConfig::NumberOfSpatialLayers() const {
   } else {
     return 1;
   }
+}
+
+size_t TestConfig::NumberOfSimulcastStreams() const {
+  return codec_settings.numberOfSimulcastStreams;
 }
 
 size_t TestConfig::TemporalLayerForFrame(size_t frame_idx) const {

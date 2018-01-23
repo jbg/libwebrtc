@@ -32,6 +32,8 @@ struct TestConfig {
   };
 
   void SetCodecSettings(VideoCodecType codec_type,
+                        size_t number_of_simulcast_streams,
+                        size_t number_of_spatial_layers,
                         size_t num_temporal_layers,
                         bool error_concealment_on,
                         bool denoising_on,
@@ -44,6 +46,7 @@ struct TestConfig {
   size_t NumberOfCores() const;
   size_t NumberOfTemporalLayers() const;
   size_t NumberOfSpatialLayers() const;
+  size_t NumberOfSimulcastStreams() const;
   size_t TemporalLayerForFrame(size_t frame_idx) const;
   std::vector<FrameType> FrameTypeForFrame(size_t frame_idx) const;
   std::string ToString() const;
