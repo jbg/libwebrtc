@@ -139,13 +139,15 @@ RTCPSender::RTCPSender(
     ReceiveStatisticsProvider* receive_statistics,
     RtcpPacketTypeCounterObserver* packet_type_counter_observer,
     RtcEventLog* event_log,
-    Transport* outgoing_transport)
+    Transport* outgoing_transport,
+    RtcpIntervalConfig interval_config)
     : audio_(audio),
       clock_(clock),
       random_(clock_->TimeInMicroseconds()),
       method_(RtcpMode::kOff),
       event_log_(event_log),
       transport_(outgoing_transport),
+      interval_config_(interval_config),
       using_nack_(false),
       sending_(false),
       next_time_to_send_rtcp_(0),
@@ -199,9 +201,11 @@ void RTCPSender::SetRTCPStatus(RtcpMode new_method) {
 
   if (method_ == RtcpMode::kOff && new_method != RtcpMode::kOff) {
     // When switching on, reschedule the next packet
+    int64_t interval_ms =
+        audio_ ? interval_config_.audio_interval_ms
+               : interval_config_.video_interval_ms;
     next_time_to_send_rtcp_ =
-      clock_->TimeInMilliseconds() +
-      (audio_ ? RTCP_INTERVAL_AUDIO_MS / 2 : RTCP_INTERVAL_VIDEO_MS / 2);
+        clock_->TimeInMilliseconds() + (interval_ms / 2);
   }
   method_ = new_method;
 }
@@ -793,7 +797,7 @@ void RTCPSender::PrepareReport(const FeedbackState& feedback_state) {
     }
 
     // generate next time to send an RTCP report
-    uint32_t minIntervalMs = RTCP_INTERVAL_AUDIO_MS;
+    uint32_t minIntervalMs = interval_config_.audio_interval_ms;
 
     if (!audio_) {
       if (sending_) {
@@ -802,8 +806,8 @@ void RTCPSender::PrepareReport(const FeedbackState& feedback_state) {
         if (send_bitrate_kbit != 0)
           minIntervalMs = 360000 / send_bitrate_kbit;
       }
-      if (minIntervalMs > RTCP_INTERVAL_VIDEO_MS)
-        minIntervalMs = RTCP_INTERVAL_VIDEO_MS;
+      if (minIntervalMs > interval_config_.video_interval_ms)
+        minIntervalMs = interval_config_.video_interval_ms;
     }
     // The interval between RTCP packets is varied randomly over the
     // range [1/2,3/2] times the calculated interval.

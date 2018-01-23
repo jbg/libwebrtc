@@ -56,6 +56,7 @@ class RTCPReceiver {
                RtcpIntraFrameObserver* rtcp_intra_frame_observer,
                TransportFeedbackObserver* transport_feedback_observer,
                VideoBitrateAllocationObserver* bitrate_allocation_observer,
+               RtcpIntervalConfig interval_config,
                ModuleRtpRtcp* owner);
   virtual ~RTCPReceiver();
 
@@ -214,6 +215,7 @@ class RTCPReceiver {
   RtcpIntraFrameObserver* const rtcp_intra_frame_observer_;
   TransportFeedbackObserver* const transport_feedback_observer_;
   VideoBitrateAllocationObserver* const bitrate_allocation_observer_;
+  RtcpIntervalConfig interval_config_;
 
   rtc::CriticalSection rtcp_receiver_lock_;
   uint32_t main_ssrc_ RTC_GUARDED_BY(rtcp_receiver_lock_);

@@ -109,6 +109,7 @@ RTCPReceiver::RTCPReceiver(
     RtcpIntraFrameObserver* rtcp_intra_frame_observer,
     TransportFeedbackObserver* transport_feedback_observer,
     VideoBitrateAllocationObserver* bitrate_allocation_observer,
+    RtcpIntervalConfig interval_config,
     ModuleRtpRtcp* owner)
     : clock_(clock),
       receiver_only_(receiver_only),
@@ -117,6 +118,7 @@ RTCPReceiver::RTCPReceiver(
       rtcp_intra_frame_observer_(rtcp_intra_frame_observer),
       transport_feedback_observer_(transport_feedback_observer),
       bitrate_allocation_observer_(bitrate_allocation_observer),
+      interval_config_(interval_config),
       main_ssrc_(0),
       remote_ssrc_(0),
       remote_sender_rtp_time_(0),
@@ -568,7 +570,7 @@ bool RTCPReceiver::UpdateTmmbrTimers() {
 
   int64_t now_ms = clock_->TimeInMilliseconds();
   // Use audio define since we don't know what interval the remote peer use.
-  int64_t timeout_ms = now_ms - 5 * RTCP_INTERVAL_AUDIO_MS;
+  int64_t timeout_ms = now_ms - 5 * interval_config_.audio_interval_ms;
 
   if (oldest_tmmbr_info_ms_ >= timeout_ms)
     return false;
@@ -1033,7 +1035,7 @@ std::vector<rtcp::TmmbItem> RTCPReceiver::TmmbrReceived() {
 
   int64_t now_ms = clock_->TimeInMilliseconds();
   // Use audio define since we don't know what interval the remote peer use.
-  int64_t timeout_ms = now_ms - 5 * RTCP_INTERVAL_AUDIO_MS;
+  int64_t timeout_ms = now_ms - 5 * interval_config_.audio_interval_ms;
 
   for (auto& kv : tmmbr_infos_) {
     for (auto it = kv.second.tmmbr.begin(); it != kv.second.tmmbr.end();) {
