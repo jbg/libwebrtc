@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2326d35f_f0b6c985",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-01-24T16:58:27Z",
+      "side": 1,
+      "message": "This changes the behaviour, but presumably we want to log the new value instead of the old one?",
+      "range": {
+        "startLine": 351,
+        "startChar": 22,
+        "endLine": 351,
+        "endChar": 32
+      },
+      "revId": "ff0fe2c92b73bc766629be1a125e5af9bb2d5072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
