@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5abb1355_abf283ec",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG but change to \"\u003c\u003c config.rtp.remote_ssrc\" instead of dumping config.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "441f2c3f_b1a08c53",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG but change to \"\u003c\u003c config.rtp.remote_ssrc\" instead of dumping config.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0494ed8a_887d2e70",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG but move down to AudioReceiveStream::ConfigureStream instead, similar to AudioSendStream.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caaeae14_5c1be96d",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG, but change to \"\u003c\u003c config_.rtp.ssrc\" instead of dumping the whole config.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27fe32f5_955d8cff",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG, but change to \"\u003c\u003c config_.rtp.ssrc\" instead of dumping the whole config.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78522f35_0a0a55d8",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG, and fix the logged function name.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c29e76cb_0e040c70",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep",
+      "range": {
+        "startLine": 262,
+        "startChar": 4,
+        "endLine": 262,
+        "endChar": 12
+      },
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c696818_00cf18e6",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep, since this is called from a PeerConnection API.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4cdf57e_7c2e25ba",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep, since this is called from a PeerConnection API.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43bb9650_7f8be401",
+        "filename": "audio/channel_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG - unclear whether this is logged at other levels.",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73f8c909_aec89362",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Hope that was a copy+paste error...",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7312c792_87208679",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-24T11:53:16Z",
+      "side": 1,
+      "message": "Thanks for fixing!",
+      "revId": "e8b6cf9a9aa690783ac301c735e9c1f9912549cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
