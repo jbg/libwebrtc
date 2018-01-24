@@ -102,7 +102,7 @@ AudioReceiveStream::AudioReceiveStream(
     std::unique_ptr<voe::ChannelProxy> channel_proxy)
     : audio_state_(audio_state),
       channel_proxy_(std::move(channel_proxy)) {
-  RTC_LOG(LS_INFO) << "AudioReceiveStream: " << config.ToString();
+  RTC_DLOG(LS_INFO) << "AudioReceiveStream: " << config.ToString();
   RTC_DCHECK(receiver_controller);
   RTC_DCHECK(packet_router);
   RTC_DCHECK(config.decoder_factory);
@@ -127,7 +127,7 @@ AudioReceiveStream::AudioReceiveStream(
 
 AudioReceiveStream::~AudioReceiveStream() {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RTC_LOG(LS_INFO) << "~AudioReceiveStream: " << config_.ToString();
+  RTC_DLOG(LS_INFO) << "~AudioReceiveStream: " << config_.ToString();
   Stop();
   channel_proxy_->DisassociateSendChannel();
   channel_proxy_->RegisterTransport(nullptr);
@@ -138,7 +138,8 @@ AudioReceiveStream::~AudioReceiveStream() {
 void AudioReceiveStream::Reconfigure(
     const webrtc::AudioReceiveStream::Config& config) {
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
-  RTC_LOG(LS_INFO) << "AudioReceiveStream::Reconfigure: " << config_.ToString();
+  RTC_DLOG(LS_INFO) << "AudioReceiveStream::Reconfigure: "
+                    << config_.ToString();
   ConfigureStream(this, config, false);
 }
 

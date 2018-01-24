@@ -51,7 +51,7 @@ void AudioState::AddReceivingStream(webrtc::AudioReceiveStream* stream) {
   receiving_streams_.insert(stream);
   if (!config_.audio_mixer->AddSource(
       static_cast<internal::AudioReceiveStream*>(stream))) {
-    RTC_LOG(LS_ERROR) << "Failed to add source to mixer.";
+    RTC_DLOG(LS_ERROR) << "Failed to add source to mixer.";
   }
 
   // Make sure playback is initialized; start playing if enabled.
@@ -110,7 +110,7 @@ void AudioState::RemoveSendingStream(webrtc::AudioSendStream* stream) {
 }
 
 void AudioState::SetPlayout(bool enabled) {
-  RTC_LOG(INFO) << "SetPlayout(" << enabled << ")";
+  RTC_DLOG(INFO) << "SetPlayout(" << enabled << ")";
   RTC_DCHECK(thread_checker_.CalledOnValidThread());
   if (playout_enabled_ != enabled) {
     playout_enabled_ = enabled;
@@ -128,7 +128,7 @@ void AudioState::SetPlayout(bool enabled) {
 }
 
 void AudioState::SetRecording(bool enabled) {
-  RTC_LOG(INFO) << "SetRecording(" << enabled << ")";
+  RTC_DLOG(INFO) << "SetRecording(" << enabled << ")";
   RTC_DCHECK(thread_checker_.CalledOnValidThread());
   if (recording_enabled_ != enabled) {
     recording_enabled_ = enabled;
