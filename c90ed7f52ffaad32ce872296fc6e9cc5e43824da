@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f475ebe_0f5aea5f",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-01-24T16:05:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d43b681_fa10b8d9",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 11
+      },
+      "revId": "c90ed7f52ffaad32ce872296fc6e9cc5e43824da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4f3096f_fa83d53a",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-18T15:54:00Z",
       "side": 1,
       "message": "if (!first_decoded_frame_time_ms_) ?\n\nI think it would be nicer to do the assignment of |first_decoded_frame_time_ms_| before the assignment of |last_decoded_frame_time_ms_|.",
+      "range": {
+        "startLine": 681,
+        "startChar": 6,
+        "endLine": 681,
+        "endChar": 32
+      },
+      "revId": "c90ed7f52ffaad32ce872296fc6e9cc5e43824da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81f49117_d69aeb7a",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-01-24T16:05:43Z",
+      "side": 1,
+      "message": "stats_.frames_decoded can be reset to 1 on line 658.\n\nMoved the assignment.",
+      "parentUuid": "f4f3096f_fa83d53a",
       "range": {
         "startLine": 681,
         "startChar": 6,
