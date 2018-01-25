@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "17ad053d_670369b0",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-25T08:50:22Z",
+      "side": 1,
+      "message": "Keep as RTC_LOG",
+      "revId": "ff0fe2c92b73bc766629be1a125e5af9bb2d5072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2326d35f_f0b6c985",
         "filename": "audio/audio_receive_stream.cc",
         "patchSetId": 2
@@ -19,6 +36,47 @@
         "endLine": 351,
         "endChar": 32
       },
+      "revId": "ff0fe2c92b73bc766629be1a125e5af9bb2d5072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c299c2f_4e7b5f33",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-25T08:50:22Z",
+      "side": 1,
+      "message": "Yes, the previous behaviour looks like an oversight, a.k.a. bug.",
+      "parentUuid": "2326d35f_f0b6c985",
+      "range": {
+        "startLine": 351,
+        "startChar": 22,
+        "endLine": 351,
+        "endChar": 32
+      },
+      "revId": "ff0fe2c92b73bc766629be1a125e5af9bb2d5072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1eeafb56_b09a3ab4",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-01-25T08:50:22Z",
+      "side": 1,
+      "message": "nit: align \"\u003c\u003c\" with line above ; you can use \"git cl format\" to check+fix these things",
       "revId": "ff0fe2c92b73bc766629be1a125e5af9bb2d5072",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
