@@ -65,6 +65,12 @@ enum class NominationMode {
                    // The details are described in P2PTransportChannel.
 };
 
+enum class WirelessNetworkPreference {
+  PREFER_WIFI,
+  PREFER_CELLULAR,
+  PREFER_EITHER,
+};
+
 // Information about ICE configuration.
 // TODO(deadbeef): Use rtc::Optional to represent unset values, instead of
 // -1.
@@ -115,6 +121,9 @@ struct IceConfig {
   // Measure in milliseconds.
   rtc::Optional<int> ice_check_min_interval;
 
+  WirelessNetworkPreference network_preference =
+      WirelessNetworkPreference::PREFER_EITHER;
+
   IceConfig();
   IceConfig(int receiving_timeout_ms,
             int backup_connection_ping_interval,
@@ -123,7 +132,8 @@ struct IceConfig {
             int stable_writable_connection_ping_interval_ms,
             bool presume_writable_when_fully_relayed,
             int regather_on_failed_networks_interval_ms,
-            int receiving_switching_delay_ms);
+            int receiving_switching_delay_ms,
+            WirelessNetworkPreference network_preference);
   ~IceConfig();
 };
 
