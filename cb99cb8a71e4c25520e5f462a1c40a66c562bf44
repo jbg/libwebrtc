@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ac658a_3afc9a4d",
+        "filename": "pc/statscollector_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-25T23:13:48Z",
+      "side": 1,
+      "message": "Wait... This test just reaches into the stats collector to add the report, instead of going through the fake PeerConnection? That seems less than ideal; can you leave a TODO to fix this?",
+      "revId": "cb99cb8a71e4c25520e5f462a1c40a66c562bf44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d166125_63297c50",
+        "filename": "pc/test/fakepeerconnectionforstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-25T23:13:48Z",
+      "side": 1,
+      "message": "Can you add a comment briefly summarizing how this class is intended to be used?",
+      "revId": "cb99cb8a71e4c25520e5f462a1c40a66c562bf44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
