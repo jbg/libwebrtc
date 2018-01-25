@@ -260,6 +260,12 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     GATHER_CONTINUALLY
   };
 
+  enum WirelessNetworkPreference {
+    PREFER_WIFI,
+    PREFER_CELLULAR,
+    PREFER_EITHER,
+  };
+
   enum class RTCConfigurationType {
     // A configuration that is safer to use, despite not having the best
     // performance. Currently this is the default configuration.
@@ -490,6 +496,9 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     // The object passed in must remain valid until PeerConnection::Close() is
     // called.
     webrtc::TurnCustomizer* turn_customizer = nullptr;
+
+    // Preferred network interface.
+    WirelessNetworkPreference network_preference = PREFER_EITHER;
 
     // Configure the SDP semantics used by this PeerConnection. Note that the
     // WebRTC 1.0 specification requires kUnifiedPlan semantics. The
