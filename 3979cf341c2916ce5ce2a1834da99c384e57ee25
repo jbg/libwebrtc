@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "622bc099_cc929e9c",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "The difference to native_api is that this is private. It cannot put into base_jni either because native_api_jni depends on it.",
+      "parentUuid": "fb2286aa_0b7d4d64",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51a26710_0543a294",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15bec888_2c5bb5fd",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "These files have a lot of deprecated and misnamed methods. I would like to avoid adding the to the new API. I will make follow-up CLs renaming / moving methods.",
+      "parentUuid": "51a26710_0543a294",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 28
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9f8fb13c_f68eb883",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "Added comments.",
+      "parentUuid": "98ae5a06_94600170",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 22
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e4b1fa5_8808657c",
         "filename": "sdk/android/native_api/base/init.cc",
         "patchSetId": 9
@@ -91,6 +163,30 @@
       "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1340c972_aa3071d6",
+        "filename": "sdk/android/native_api/base/init.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e4b1fa5_8808657c",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6f01211b_0e2440fa",
+        "filename": "sdk/android/native_api/base/init.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "Removed dependency to classreferenceholder and modified code.",
+      "parentUuid": "1303bf4a_ce553592",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef7a36e6_6bdff728",
         "filename": "sdk/android/native_api/base/init.h",
         "patchSetId": 9
@@ -137,6 +257,30 @@
       "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19c6e6c5_b66c1075",
+        "filename": "sdk/android/native_api/base/init.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef7a36e6_6bdff728",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "04363a49_7b72c87b",
+        "filename": "sdk/android/native_api/base/init.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "I don\u0027t find this natural. I would rather keep class_loader as an independent unit without many external dependencies. This method also initializes other stuff unrelated to class_loader.",
+      "parentUuid": "9b22836f_df8a7993",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09af09c4_8333f053",
         "filename": "sdk/android/native_api/jni/class_loader.cc",
         "patchSetId": 9
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "3d6119b2_619b9ce7",
+        "filename": "sdk/android/native_api/jni/class_loader.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "I moved method to java_types.h now and these are no longer copied.",
+      "parentUuid": "09af09c4_8333f053",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba6a476c_00c2385e",
         "filename": "sdk/android/src/jni/class_loader.h",
         "patchSetId": 9
@@ -206,6 +398,30 @@
       "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d192dcb1_084ed4d2",
+        "filename": "sdk/android/src/jni/class_loader.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-25T15:13:45Z",
+      "side": 1,
+      "message": "It is needed.",
+      "parentUuid": "ba6a476c_00c2385e",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 69
+      },
+      "revId": "3979cf341c2916ce5ce2a1834da99c384e57ee25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
