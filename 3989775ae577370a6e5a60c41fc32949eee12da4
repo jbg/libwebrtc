@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "44ca3720_669112a2",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-26T23:08:37Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "0d3c3b8d_e04def53",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6f09e08_7aebede7",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22f78a5b_735f76e8",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-26T23:08:37Z",
+      "side": 1,
+      "message": "Done. We have included all adapter types in the new patch and a_and_b_not_comparable is no longer necessary.",
+      "parentUuid": "a6f09e08_7aebede7",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f8a2d86c_c31581a8",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-26T23:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6740243d_94e2c6c2",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15c0c190_098c05a9",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bcb05e4_60584cae",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-26T23:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c0c190_098c05a9",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "b54969ff_c1f78b27",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-26T23:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d2092cd_44bba2fb",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "491fff3b_665c4b30",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 2
@@ -101,6 +191,24 @@
       "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cb33254_4f778114",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-26T23:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "491fff3b_665c4b30",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
