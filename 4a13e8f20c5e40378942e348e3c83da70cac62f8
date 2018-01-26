@@ -51,6 +51,24 @@
       "revId": "4a13e8f20c5e40378942e348e3c83da70cac62f8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10221c41_474d30fe",
+        "filename": "pc/test/fakepeerconnectionforstats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T20:49:46Z",
+      "side": 1,
+      "message": "This is a fake PeerConnection, and none of the methods the StatsCollector calls will touch the other threads, so I don\u0027t see how that would make any difference. I think we should rely on RTCStatsIntegration test for finding threading-related issues that can occur with a real PeerConnection (it\u0027s already succeeded in doing that in the past).",
+      "parentUuid": "27c2895f_233779cb",
+      "revId": "4a13e8f20c5e40378942e348e3c83da70cac62f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
