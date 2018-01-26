@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "45df5040_a8de1255",
+        "filename": "pc/statscollector_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-26T18:26:31Z",
+      "side": 1,
+      "message": "Went ahead and just modified the test now to use the fake to provide candidate info.",
+      "parentUuid": "a4ac658a_3afc9a4d",
+      "revId": "cb99cb8a71e4c25520e5f462a1c40a66c562bf44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d166125_63297c50",
         "filename": "pc/test/fakepeerconnectionforstats.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "cb99cb8a71e4c25520e5f462a1c40a66c562bf44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27a8f820_060499b5",
+        "filename": "pc/test/fakepeerconnectionforstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-01-26T18:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d166125_63297c50",
+      "revId": "cb99cb8a71e4c25520e5f462a1c40a66c562bf44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
