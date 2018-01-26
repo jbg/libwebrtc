@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f87b590_d1f0676e",
+        "filename": "pc/statscollector_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1669,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-01-26T15:10:21Z",
+      "side": 0,
+      "message": "Why was this test removed?",
+      "revId": "be5e208b3e10b8115ed5bc4096e8667256f1f194",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad4a74b2_c869eedd",
+        "filename": "pc/test/fakepeerconnectionforstats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-01-26T15:10:21Z",
+      "side": 1,
+      "message": "Can we use different threads to avoid different behaviors in test and production? Deadlocks and such.",
+      "revId": "4a13e8f20c5e40378942e348e3c83da70cac62f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
