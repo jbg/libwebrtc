@@ -61,6 +61,48 @@ cricket::PortInterface::CandidateOrigin GetOrigin(cricket::PortInterface* port,
     return cricket::PortInterface::ORIGIN_OTHER_PORT;
 }
 
+// TODO(qingsi) Use an enum to replace the following constants for all
+// comparision results.
+static constexpr int a_is_better = 1;
+static constexpr int b_is_better = -1;
+static constexpr int a_and_b_not_comparable = 0;
+static constexpr int a_and_b_equal = 0;
+
+bool LocalCandidateUsesWirelessNetwork(const cricket::Connection* conn) {
+  rtc::AdapterType network_type = conn->port()->Network()->type();
+  return network_type == rtc::ADAPTER_TYPE_WIFI ||
+         network_type == rtc::ADAPTER_TYPE_CELLULAR;
+}
+
+bool LocalCandidateUsesPreferredWirelessNetwork(
+    const cricket::Connection* conn,
+    rtc::Optional<rtc::AdapterType> network_preference) {
+  RTC_DCHECK(LocalCandidateUsesWirelessNetwork(conn));
+  rtc::AdapterType network_type = conn->port()->Network()->type();
+  return !(network_preference.has_value()) ||
+         (network_type == network_preference);
+}
+
+int CompareCandidatePairsUsingWirelessNetworkPreference(
+    const cricket::Connection* a,
+    const cricket::Connection* b,
+    rtc::Optional<rtc::AdapterType> network_preference) {
+  if (!LocalCandidateUsesWirelessNetwork(a) ||
+      !LocalCandidateUsesWirelessNetwork(b)) {
+    return a_and_b_not_comparable;
+  }
+  bool a_uses_preferred_network =
+      LocalCandidateUsesPreferredWirelessNetwork(a, network_preference);
+  bool b_uses_preferred_network =
+      LocalCandidateUsesPreferredWirelessNetwork(b, network_preference);
+  if (a_uses_preferred_network && !b_uses_preferred_network) {
+    return a_is_better;
+  } else if (!a_uses_preferred_network && b_uses_preferred_network) {
+    return b_is_better;
+  }
+  return a_and_b_equal;
+}
+
 }  // unnamed namespace
 
 namespace cricket {
@@ -98,9 +140,6 @@ static const int DEFAULT_REGATHER_ON_FAILED_NETWORKS_INTERVAL = 5 * 60 * 1000;
 
 static constexpr int DEFAULT_BACKUP_CONNECTION_PING_INTERVAL = 25 * 1000;
 
-static constexpr int a_is_better = 1;
-static constexpr int b_is_better = -1;
-
 bool IceCredentialsChanged(const std::string& old_ufrag,
                            const std::string& old_pwd,
                            const std::string& new_ufrag,
@@ -135,7 +174,8 @@ P2PTransportChannel::P2PTransportChannel(const std::string& transport_name,
               STRONG_AND_STABLE_WRITABLE_CONNECTION_PING_INTERVAL,
               true /* presume_writable_when_fully_relayed */,
               DEFAULT_REGATHER_ON_FAILED_NETWORKS_INTERVAL,
-              RECEIVING_SWITCHING_DELAY) {
+              RECEIVING_SWITCHING_DELAY,
+              rtc::nullopt) {
   uint32_t weak_ping_interval = ::strtoul(
       webrtc::field_trial::FindFullName("WebRTC-StunInterPacketDelay").c_str(),
       nullptr, 10);
@@ -223,7 +263,16 @@ bool P2PTransportChannel::ShouldSwitchSelectedConnection(
   if (new_connection->ComputeNetworkCost() >
           selected_connection_->ComputeNetworkCost() &&
       !new_connection->receiving()) {
-    return false;
+    int res = CompareCandidatePairsUsingWirelessNetworkPreference(
+        new_connection, selected_connection_, config_.network_preference);
+    if (res == b_is_better || res == a_and_b_equal ||
+        res == a_and_b_not_comparable) {
+      return false;
+    }
+    // When both the local candidates in the new and the selected candidate
+    // pairs use a wireless network, the network preference overrides the
+    // comparison result by the network cost. The comparison continues using
+    // other metrics.
   }
 
   rtc::Optional<int64_t> receiving_unchanged_threshold(
@@ -496,6 +545,14 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
     config_.ice_check_min_interval = config.ice_check_min_interval;
     RTC_LOG(LS_INFO) << "Set min ping interval to "
                      << *config_.ice_check_min_interval;
+  }
+
+  if (config_.network_preference != config.network_preference) {
+    config_.network_preference = config.network_preference;
+    RTC_LOG(LS_INFO) << "Set network preference to "
+                     << (config_.network_preference.has_value()
+                             ? config_.network_preference.value()
+                             : 0);
   }
 }
 
@@ -1233,11 +1290,16 @@ int P2PTransportChannel::CompareConnectionCandidates(
   // Prefer lower network cost.
   uint32_t a_cost = a->ComputeNetworkCost();
   uint32_t b_cost = b->ComputeNetworkCost();
+
+  int compare_a_b_by_network_preference =
+      CompareCandidatePairsUsingWirelessNetworkPreference(
+          a, b, config_.network_preference);
+
   // Smaller cost is better.
-  if (a_cost < b_cost) {
+  if (a_cost < b_cost && compare_a_b_by_network_preference != b_is_better) {
     return a_is_better;
   }
-  if (a_cost > b_cost) {
+  if (a_cost > b_cost && compare_a_b_by_network_preference != a_is_better) {
     return b_is_better;
   }
 

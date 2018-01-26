@@ -206,5 +206,24 @@ PeerConnectionInterface::TlsCertPolicy JavaToNativeTlsCertPolicy(
   return PeerConnectionInterface::kTlsCertPolicySecure;
 }
 
+rtc::Optional<rtc::AdapterType> JavaToNativeWirelessNetworkPreference(
+    JNIEnv* jni,
+    const JavaRef<jobject>& j_network_preference) {
+  std::string enum_name = GetJavaEnumName(jni, j_network_preference);
+  rtc::Optional<rtc::AdapterType> native_network_preference;
+  if (enum_name == "PREFER_WIFI")
+    return rtc::ADAPTER_TYPE_WIFI;
+
+  if (enum_name == "PREFER_CELLULAR")
+    return rtc::ADAPTER_TYPE_CELLULAR;
+
+  if (enum_name == "PREFER_EITHER")
+    return rtc::nullopt;
+
+  RTC_CHECK(false) << "Unexpected WirelessNetworkPreference enum_name "
+                   << enum_name;
+  return rtc::nullopt;
+}
+
 }  // namespace jni
 }  // namespace webrtc
