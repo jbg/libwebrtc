@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "844d489e_5ef56cae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-01-26T15:13:03Z",
+      "side": 1,
+      "message": "+1!\nI agree, whenever some implementation-detail changed we had to change a bunch of mock calls and it was not obvious why or readable what we were doing. A fake PC is so much better. Thanks for doing this. It\u0027s a shame I did the mock thing for RTCStatsCollector when I started from scratch and not fake PC.",
+      "revId": "4a13e8f20c5e40378942e348e3c83da70cac62f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad4a74b2_c869eedd",
         "filename": "pc/test/fakepeerconnectionforstats.h",
         "patchSetId": 3
