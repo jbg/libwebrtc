@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d3c3b8d_e04def53",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T02:15:27Z",
+      "side": 1,
+      "message": "I\u0027d suggest making this an \"rtc::Optional\u003crtc::AdapterType\u003e\". That way the API wouldn\u0027t be specific to wireless interfaces and we wouldn\u0027t need a new enum. An empty Optional would represent \"prefer either\" (or in other words, no preference). Thoughts?",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6f09e08_7aebede7",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T02:15:27Z",
+      "side": 1,
+      "message": "Do you expect we\u0027ll need to differentiate \"not comparable\" and \"equal\" in the future? If not, I\u0027d just use a_and_b_equal.",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6740243d_94e2c6c2",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T02:15:27Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem quite right. It works for the case where new_connection is more costly, but preferred; the \"new_connection-\u003ereceiving()\" requirement will be ignored.\n\nBut what about the case where the new connection is less costly, but *not* preferred? In that case, wouldn\u0027t we *want* to enforce the \"receiving()\" requirement, to avoid the spurious switch to an un-preferred network?\n\nI\u0027d suggest doing something like making a function that just does the \"network comparison\" part:\n\nint P2PTransportChannel::CompareConnectionNetworks(\n    const Connection* a,\n    const Connection* b) const {\n  int compare_a_b_by_network_preference \u003d\n      CompareCandidatePairsUsingWirelessNetworkPreference(\n          a, b, config_.network_preference);\n  if (compare_a_b_by_network_preferences !\u003d a_and_b_equal) {\n    return compare_a_b_by_network_preferences;\n  }\n  if (a_cost \u003c b_cost \u0026\u0026 compare_a_b_by_network_preference !\u003d b_is_better) {\n    return a_is_better;\n  }\n  if (a_cost \u003e b_cost \u0026\u0026 compare_a_b_by_network_preference !\u003d a_is_better) {\n    return b_is_better;\n  }\n  return a_and_b_equal;\n}\n\nAnd use it here like:\n\nif (CompareConnectionNetworks(new_connection, selected_connection) \u003d\u003d b_is_better) {\n  return false;\n}",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15c0c190_098c05a9",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T02:15:27Z",
+      "side": 1,
+      "message": "\"res !\u003d a_is_better\"?",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d2092cd_44bba2fb",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T02:15:27Z",
+      "side": 1,
+      "message": "Can you move this comment above the code it\u0027s describing",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "491fff3b_665c4b30",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-26T02:15:27Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused by this logic. If A is Wi-Fi and B is cell, and cell is preferred, then both these conditions would evaluate to false... And then Wi-Fi would win by priority, even though cell is preferred.\n\nWhy not just:\n\nif (compare_a_b_by_network_preferences !\u003d a_and_b_equal) {\n  return compare_a_b_by_network_preferences;\n}",
+      "revId": "3989775ae577370a6e5a60c41fc32949eee12da4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
