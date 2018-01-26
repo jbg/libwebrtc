@@ -14,8 +14,8 @@
 #include <map>
 #include <queue>
 #include <set>
-#include <vector>
 #include <utility>
+#include <vector>
 
 #include "modules/include/module_common_types.h"
 #include "modules/pacing/alr_detector.h"
@@ -46,11 +46,13 @@ const float PacedSender::kDefaultPaceMultiplier = 2.5f;
 
 PacedSender::PacedSender(const Clock* clock,
                          PacketSender* packet_sender,
-                         RtcEventLog* event_log) :
-    PacedSender(clock, packet_sender, event_log,
-                webrtc::field_trial::IsEnabled("WebRTC-RoundRobinPacing")
-                    ? rtc::MakeUnique<PacketQueue2>(clock)
-                    : rtc::MakeUnique<PacketQueue>(clock)) {}
+                         RtcEventLog* event_log)
+    : PacedSender(clock,
+                  packet_sender,
+                  event_log,
+                  webrtc::field_trial::IsEnabled("WebRTC-RoundRobinPacing")
+                      ? rtc::MakeUnique<PacketQueue2>(clock)
+                      : rtc::MakeUnique<PacketQueue>(clock)) {}
 
 PacedSender::PacedSender(const Clock* clock,
                          PacketSender* packet_sender,
@@ -69,6 +71,7 @@ PacedSender::PacedSender(const Clock* clock,
       max_padding_bitrate_kbps_(0u),
       pacing_bitrate_kbps_(0),
       time_last_update_us_(clock->TimeInMicroseconds()),
+      time_last_send_us_(clock->TimeInMicroseconds()),
       first_sent_packet_ms_(-1),
       packets_(std::move(packets)),
       packet_counter_(0),
@@ -152,7 +155,7 @@ void PacedSender::InsertPacket(RtpPacketSender::Priority priority,
                                bool retransmission) {
   rtc::CritScope cs(&critsect_);
   RTC_DCHECK(estimated_bitrate_bps_ > 0)
-        << "SetEstimatedBitrate must be called before InsertPacket.";
+      << "SetEstimatedBitrate must be called before InsertPacket.";
 
   int64_t now_ms = clock_->TimeInMilliseconds();
   prober_->OnIncomingPacket(bytes);
@@ -326,6 +329,29 @@ bool PacedSender::SendPacket(const PacketQueue::Packet& packet,
       packet.ssrc, packet.sequence_number, packet.capture_time_ms,
       packet.retransmission, pacing_info);
   critsect_.Enter();
+
+  int64_t time_now_us = clock_->TimeInMicroseconds();
+  int64_t time_since_last_send_us = time_now_us - time_last_send_us_;
+  time_last_send_us_ = time_now_us;
+
+  int64_t time_now_ms = time_now_us / 1000;
+  int64_t time_since_last_send_ms = time_since_last_send_us / 1000;
+
+  const int kSlowSendThreshold = 35;
+  const int kLongDelayThreshold = 35;
+  if (time_since_last_send_ms > kSlowSendThreshold) {
+    RTC_LOG(WARNING) << "Packet send took more than " << kSlowSendThreshold
+                     << "ms (" << time_since_last_send_ms << ")";
+  }
+
+  int64_t oldest_packet = packets_->OldestEnqueueTimeMs();
+  if (oldest_packet > 0) {
+    int64_t queue_delay = time_now_ms - oldest_packet;
+    if (queue_delay > kLongDelayThreshold) {
+      RTC_LOG(WARNING) << "Oldest packet is more than " << kLongDelayThreshold
+                       << "ms (" << queue_delay << ")";
+    }
+  }
 
   if (success) {
     if (packet.priority != kHighPriority || account_for_audio_) {

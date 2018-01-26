@@ -191,6 +191,7 @@ class PacedSender : public Pacer {
   uint32_t pacing_bitrate_kbps_ RTC_GUARDED_BY(critsect_);
 
   int64_t time_last_update_us_ RTC_GUARDED_BY(critsect_);
+  int64_t time_last_send_us_ RTC_GUARDED_BY(critsect_);
   int64_t first_sent_packet_ms_ RTC_GUARDED_BY(critsect_);
 
   const std::unique_ptr<PacketQueue> packets_ RTC_PT_GUARDED_BY(critsect_);
