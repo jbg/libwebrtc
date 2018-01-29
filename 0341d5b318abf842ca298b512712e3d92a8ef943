@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f980595_b2882fb2",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/ConnectActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-29T08:54:09Z",
+      "side": 1,
+      "message": "I interpret this comment to mean that we should always add this to the missingPermissions array?",
+      "revId": "0341d5b318abf842ca298b512712e3d92a8ef943",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
