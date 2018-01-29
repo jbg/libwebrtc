@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7284a1_ac9c8caf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-29T23:32:43Z",
+      "side": 1,
+      "message": "Should create a \"Feature\" bug for this. Doesn\u0027t need to be extremely detailed; we just need something so that this shows up when release notes are generated.",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fda552d0_7560cdd0",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-29T23:32:43Z",
+      "side": 1,
+      "message": "Can you add to this comment, something like: \"A candidate pair on a preferred network will be selected over one on an un-preferred network, regardless of priority or network cost.\"",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b6bae8d_c3495e02",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-29T23:32:43Z",
+      "side": 1,
+      "message": "nit: Is a network really preferred if the preference is empty? This may make more sense as \"if (network_preference.has_value() \u0026\u0026 network_type \u003d\u003d *network_preference)\"\n\nMay not end up making a difference though.",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b78c8d42_304b6abb",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-29T23:32:43Z",
+      "side": 1,
+      "message": "nit: \"not on a preferred network\", just to make the comment clear that we\u0027re talking about network preference.",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce105a6e_3b65463e",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-29T23:32:43Z",
+      "side": 1,
+      "message": "Ah... I forgot that AdapterType was a bit field, and isn\u0027t even an enum type in Java. This seems fine for now.",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
