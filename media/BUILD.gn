@@ -142,7 +142,17 @@ rtc_static_library("rtc_media_base") {
 rtc_static_library("rtc_constants") {
   defines = []
   libs = []
-  deps = []
+  deps = [
+    "../api:video_frame_api_i420",
+    "../call:call_interfaces",
+    "../modules/video_coding:video_coding_utility",
+    "../rtc_base:checks",
+    "../rtc_base:rtc_task_queue_api",
+    "../rtc_base:stringutils",
+    "../system_wrappers:field_trial_api",
+    "../system_wrappers:metrics_api",
+    "//third_party/libyuv",
+  ]
   sources = [
     "engine/constants.cc",
     "engine/constants.h",
@@ -235,6 +245,7 @@ rtc_static_library("rtc_audio_video") {
     "../modules/video_coding:video_codec_interface",
     "../modules/video_coding:video_coding",
     "../rtc_base:checks",
+    "../rtc_base:rtc_task_queue_api",
   ]
 
   sources = [
