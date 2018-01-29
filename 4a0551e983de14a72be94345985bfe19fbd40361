@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "228e9584_7334dabc",
+        "filename": "sdk/android/native_api/codecs/wrapper.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-29T10:39:07Z",
+      "side": 1,
+      "message": "Should all APIs that take Java objects and turn them into C++ objects be \"Wrap\u003cSomething\u003e\"? I have nothing against it, and we should probably name them the same way in the ObjC++ API. But I remember in `wrappednativecodec.cc` we called them e.g. `JavaToNativeVideoDecoder()`, partly because in that method it did not always wrap a codec, sometimes it unwrapped a native pointer instead. It also matches the naming in `java_types.h`. \"Wrap\" sounds a bit more generic, when reading it may not be clear what it\u0027s being wrapped in unless the context is clear. But I\u0027ll leave it to you.",
+      "revId": "4a0551e983de14a72be94345985bfe19fbd40361",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14f7cfd5_068048b8",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-01-29T10:39:07Z",
+      "side": 1,
+      "message": "Do these need to be in the public header if they are not supposed to be used?",
+      "revId": "4a0551e983de14a72be94345985bfe19fbd40361",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
