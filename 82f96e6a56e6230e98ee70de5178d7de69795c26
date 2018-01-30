@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fef3a2f_20881c5b",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-30T10:24:19Z",
+      "side": 0,
+      "message": "This RTC_DCHECK caused a compilation error, since it somehow collides with the RTC_RUN_ON declaration of this method. Unclear if that\u0027s how it\u0027s supposed to work?",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 569,
+        "endChar": 37
+      },
+      "revId": "82f96e6a56e6230e98ee70de5178d7de69795c26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
