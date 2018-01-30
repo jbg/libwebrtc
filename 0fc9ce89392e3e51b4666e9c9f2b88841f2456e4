@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ab9c2e60_1384e335",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-30T18:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e7284a1_ac9c8caf",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fda552d0_7560cdd0",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d0d6684_11fa759d",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-30T18:57:59Z",
+      "side": 1,
+      "message": "Done. I changed the wording slightly since the final selection may not be entirely based on the preference, like in the case a new candidate pair is not preferred but is receiving.",
+      "parentUuid": "fda552d0_7560cdd0",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "eade995d_37e60aed",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-30T18:57:59Z",
+      "side": 1,
+      "message": "Done. It does not make a difference in the way LocalCandidateUsesPreferredNetwork is used in CompareCandidatePairsByNetworkPreference, but I agree it makes the interpretation of empty preference more natural.",
+      "parentUuid": "8b6bae8d_c3495e02",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b78c8d42_304b6abb",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "65cc6726_6c202dcc",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-30T18:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b78c8d42_304b6abb",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce105a6e_3b65463e",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2018-01-29T23:32:43Z",
       "side": 1,
       "message": "Ah... I forgot that AdapterType was a bit field, and isn\u0027t even an enum type in Java. This seems fine for now.",
+      "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29300acf_23c66691",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-01-30T18:57:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ce105a6e_3b65463e",
       "revId": "0fc9ce89392e3e51b4666e9c9f2b88841f2456e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
