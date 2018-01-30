@@ -9,9 +9,9 @@
  */
 
 #include "lpc_analysis.h"
-#include "settings.h"
-#include "codec.h"
-#include "entropy_coding.h"
+#include "modules/audio_coding/codecs/isac/main/source/settings.h"
+#include "modules/audio_coding/codecs/isac/main/source/codec.h"
+#include "modules/audio_coding/codecs/isac/main/source/entropy_coding.h"
 
 #include <math.h>
 #include <string.h>

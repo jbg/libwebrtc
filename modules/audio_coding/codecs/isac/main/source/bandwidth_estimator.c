@@ -16,8 +16,8 @@
  *
  */
 
-#include "bandwidth_estimator.h"
-#include "settings.h"
+#include "modules/audio_coding/codecs/isac/main/source/bandwidth_estimator.h"
+#include "modules/audio_coding/codecs/isac/main/source/settings.h"
 #include "isac.h"
 #include "rtc_base/checks.h"
 
