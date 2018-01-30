@@ -46,6 +46,30 @@
       "revId": "1f5e98d97eca1b557d6299c87ec6642ba8b0ac46",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d7c26dc_26b8a0cf",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-30T14:02:44Z",
+      "side": 0,
+      "message": "Correcting myself: On my workstation, it seems that including \u003ccstdlib\u003e *does* define __GLIBCXX__ (as suggested by one of the comments). (It isn\u0027t defined by the compiler itself).\n\nHowever, it\u0027s apparently not defined on any of our bots. I imagine that\u0027s because our builds, even on linux, use clang\u0027s libc++ rather than the gnu libstdc++?\n\nHowever, since the code isn\u0027t used at all in standard builds, and comments suggests it was never really working well, it still seems reasonable to me to delete it.",
+      "parentUuid": "a34f0895_ae982f7f",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "1f5e98d97eca1b557d6299c87ec6642ba8b0ac46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
