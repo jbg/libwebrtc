@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "utility.h"
+#include "modules/audio_coding/codecs/isac/main/source/utility.h"
 
 /* function for reading audio data from PCM file */
 int

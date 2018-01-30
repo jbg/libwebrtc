@@ -19,8 +19,8 @@
 #include <iostream>
 
 /* include API */
-#include "isac.h"
-#include "utility.h"
+#include "modules/audio_coding/codecs/isac/main/source/isac.h"
+#include "modules/audio_coding/codecs/isac/main/source/utility.h"
 #include "rtc_base/format_macros.h"
 
 /* Defines */
