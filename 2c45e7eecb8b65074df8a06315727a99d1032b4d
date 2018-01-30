@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3da6fe8_13c2d3f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-30T19:56:24Z",
+      "side": 1,
+      "message": "Can you expand on the motivation for this CL? Namely, how we don\u0027t want to expose the full Call API, but at least need to expose CallFactory, which requires referencing Call::Config, which can\u0027t be forward declared if it\u0027s an inner class.",
+      "revId": "2c45e7eecb8b65074df8a06315727a99d1032b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
