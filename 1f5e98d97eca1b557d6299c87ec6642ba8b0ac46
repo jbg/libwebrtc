@@ -22,6 +22,30 @@
       "revId": "1f5e98d97eca1b557d6299c87ec6642ba8b0ac46",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a34f0895_ae982f7f",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-30T13:50:10Z",
+      "side": 0,
+      "message": "I made an experiment as cl https://webrtc-review.googlesource.com/c/src/+/46160.\n\nTrybots on that cl seem to indicate that this code is not included on any of our main platforms. Can we just delete it?",
+      "parentUuid": "b7ffa1d8_2eb486f7",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "1f5e98d97eca1b557d6299c87ec6642ba8b0ac46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
