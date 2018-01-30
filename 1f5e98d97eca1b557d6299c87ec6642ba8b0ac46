@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7ffa1d8_2eb486f7",
+        "filename": "rtc_base/checks.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-30T13:20:28Z",
+      "side": 0,
+      "message": "On what platforms is this condition expected to be true? On my gnu/linux workstation, neither g++ (version 6.3) or clang++ (version 3.9) seem to define __GLIBCXX__.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "1f5e98d97eca1b557d6299c87ec6642ba8b0ac46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
