@@ -304,6 +304,19 @@ public class PeerConnection {
   /** Java version of PeerConnectionInterface.CandidateNetworkPolicy */
   public enum CandidateNetworkPolicy { ALL, LOW_COST }
 
+  // TODO(qingsi): We may need to consolidate this enum with the constants
+  // of adapter types defined in PeerConnectionFactory.Options.
+  //
+  // Keep in syc with webrtc/rtc_base/network_constants.h
+  public enum NetworkPreference {
+    NONE,
+    ETHERNET,
+    WIFI,
+    CELLULAR,
+    VPN,
+    LOOPBACK,
+  }
+
   /** Java version of rtc::KeyType */
   public enum KeyType { RSA, ECDSA }
 
@@ -372,6 +385,8 @@ public class PeerConnection {
     // This is an optional wrapper for the C++ webrtc::TurnCustomizer.
     public TurnCustomizer turnCustomizer;
 
+    public NetworkPreference networkPreference;
+
     // TODO(deadbeef): Instead of duplicating the defaults here, we should do
     // something to pick up the defaults from C++. The Objective-C equivalent
     // of RTCConfiguration does that.
@@ -403,6 +418,7 @@ public class PeerConnection {
       screencastMinBitrate = null;
       combinedAudioVideoBwe = null;
       enableDtlsSrtp = null;
+      networkPreference = NetworkPreference.NONE;
     }
 
     @CalledByNative("RTCConfiguration")
@@ -543,6 +559,11 @@ public class PeerConnection {
     @CalledByNative("RTCConfiguration")
     Boolean getEnableDtlsSrtp() {
       return enableDtlsSrtp;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    NetworkPreference getNetworkPreference() {
+      return networkPreference;
     }
   };
 

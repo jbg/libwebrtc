@@ -94,7 +94,7 @@ public class PeerConnectionFactory {
   }
 
   public static class Options {
-    // Keep in sync with webrtc/rtc_base/network.h!
+    // Keep in sync with webrtc/rtc_base/network_constants.h!
     static final int ADAPTER_TYPE_UNKNOWN = 0;
     static final int ADAPTER_TYPE_ETHERNET = 1 << 0;
     static final int ADAPTER_TYPE_WIFI = 1 << 1;
