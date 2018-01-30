@@ -123,7 +123,7 @@
  * following two constants should agree with the array dimensions.
  *
  *----------------------------------------------------------------------*/
-#include "fft.h"
+#include "modules/audio_coding/codecs/isac/main/source/fft.h"
 
 #include <stdlib.h>
 #include <math.h>
