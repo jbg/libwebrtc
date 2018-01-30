@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "df47c8a3_952a7ee6",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-01-30T11:01:09Z",
+      "side": 1,
+      "message": "There are drawbacks to zero-initializing just as a safety precaution: it can often confuse the reader into thinking that the zeroing has a functional purpose, and it will prevent MemorySanitizer from finding that we use uninitialized memory.\n\nCan you zero the memory and call rtc::MsanMarkUninitialized on it afterwards? Or even better, package those two operations up as a function and put it in sanitizer.h, so that you can do something like\n\n  ChunkHeader c \u003d rtc::ZeroedUninitialized\u003cChunkHeader\u003e();\n\nDoes that sound at all useful?",
+      "parentUuid": "f2b49853_7b4e3f22",
+      "revId": "b825001e579ad7875e761e47b71ef2f389e8d8ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d26644b6_de54a1b8",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 5
