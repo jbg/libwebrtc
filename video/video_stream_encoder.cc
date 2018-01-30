@@ -566,7 +566,6 @@ void VideoStreamEncoder::ConfigureEncoderOnTaskQueue(
 }
 
 void VideoStreamEncoder::ReconfigureEncoder() {
-  RTC_DCHECK_RUN_ON(&encoder_queue_);
   RTC_DCHECK(pending_encoder_reconfiguration_);
   std::vector<VideoStream> streams =
       encoder_config_.video_stream_factory->CreateEncoderStreams(
