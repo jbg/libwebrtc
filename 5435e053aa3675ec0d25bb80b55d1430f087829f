@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9f569e9_16f5deb1",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-31T10:14:43Z",
+      "side": 1,
+      "message": "nit: sync",
+      "range": {
+        "startLine": 310,
+        "startChar": 13,
+        "endLine": 310,
+        "endChar": 16
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b185976_3895bcb3",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-31T10:14:43Z",
+      "side": 1,
+      "message": "nit: Maybe it would make sense to name this AdapterType to match C++?",
+      "range": {
+        "startLine": 311,
+        "startChar": 14,
+        "endLine": 311,
+        "endChar": 31
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37f1fd53_5037ca6b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-31T10:14:43Z",
+      "side": 1,
+      "message": "These constants are package local and I didn\u0027t find any usages in our code. Maybe they can be removed?",
+      "range": {
+        "startLine": 98,
+        "startChar": 21,
+        "endLine": 98,
+        "endChar": 41
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ddcc8e7_eaf656ad",
+        "filename": "sdk/android/src/jni/pc/icecandidate.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-31T10:14:43Z",
+      "side": 1,
+      "message": "The enum is defined in PeerConnection so I think this belongs to peerconnection.cc.",
+      "range": {
+        "startLine": 209,
+        "startChar": 32,
+        "endLine": 209,
+        "endChar": 61
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
