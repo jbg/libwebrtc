@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27257479_da924b82",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-31T12:31:05Z",
+      "side": 1,
+      "message": "Why do we need to use nogncheck? Is this causing a circular dependency?\n\nSame question about media/base/videocapturer.h and p2p/base/portallocator.h.",
+      "range": {
+        "startLine": 97,
+        "startChar": 68,
+        "endLine": 97,
+        "endChar": 80
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
