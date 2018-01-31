@@ -307,7 +307,6 @@ if (is_ios || is_mac) {
 
       deps = [
         ":common_objc",
-        ":corevideoframebuffer_objc",
         ":peerconnectionfactory_objc",
         ":video_objc",
         "../api:video_frame_api",
@@ -341,7 +340,6 @@ if (is_ios || is_mac) {
 
       deps += [
         ":common_objc",
-        ":corevideoframebuffer_objc",
         ":default_codec_factory_objc",
         ":peerconnectionfactory_base_objc",
         ":video_objc",
@@ -572,7 +570,6 @@ if (is_ios || is_mac) {
 
       deps = [
         ":common_objc",
-        ":corevideoframebuffer_objc",
         ":videotracksource_objc",
         "../api:libjingle_peerconnection_api",
         "../api:peerconnection_and_implicit_call_api",
@@ -846,9 +843,14 @@ if (is_ios || is_mac) {
 
     rtc_static_library("corevideoframebuffer_objc") {
       sources = [
-        "objc/Framework/Classes/Video/corevideo_frame_buffer.cc",
         "objc/Framework/Classes/Video/corevideo_frame_buffer.h",
+        "objc/Framework/Classes/Video/corevideo_frame_buffer.mm",
+        "objc/Framework/Headers/WebRTC/RTCVideoFrameBuffer.h",
       ]
+
+      configs += [ "..:common_objc" ]
+
+      public_configs = [ ":common_config_objc" ]
 
       deps = [
         "../api:video_frame_api_i420",
