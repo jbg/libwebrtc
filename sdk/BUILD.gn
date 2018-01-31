@@ -845,10 +845,16 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("corevideoframebuffer_objc") {
+      visibility = [ "*" ]
       sources = [
-        "objc/Framework/Classes/Video/corevideo_frame_buffer.cc",
         "objc/Framework/Classes/Video/corevideo_frame_buffer.h",
+        "objc/Framework/Classes/Video/corevideo_frame_buffer.mm",
+        "objc/Framework/Headers/WebRTC/RTCVideoFrameBuffer.h",
       ]
+
+      configs += [ "..:common_objc" ]
+
+      public_configs = [ ":common_config_objc" ]
 
       deps = [
         "../api:video_frame_api_i420",
