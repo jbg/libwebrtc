@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "642d5cf4_af9a44d1",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-31T18:53:44Z",
+      "side": 1,
+      "message": "Should leave a comment explaining that \"unknown\" means \"no preference\", not \"prefer adapters of unknown type\". Or could use \"null\" to represent \"no preference\".",
+      "revId": "c1c7cbe31b6f4153a42d69572237f8ad8592c994",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

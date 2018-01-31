@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "446a194a_7ec0b615",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-01-31T18:53:44Z",
+      "side": 1,
+      "message": "They\u0027re intended to be used for networkIgnoreMask right below; can you add them back and add a comment so we don\u0027t forget again?",
+      "parentUuid": "8913b164_95f33a02",
+      "range": {
+        "startLine": 98,
+        "startChar": 21,
+        "endLine": 98,
+        "endChar": 41
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ddcc8e7_eaf656ad",
         "filename": "sdk/android/src/jni/pc/icecandidate.cc",
         "patchSetId": 6
