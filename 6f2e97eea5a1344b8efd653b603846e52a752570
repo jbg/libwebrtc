@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94363797_51e650a9",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-01-31T10:55:51Z",
+      "side": 1,
+      "message": "Make this int64_t, or maybe use a dchecked_cast:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/numerics/safe_conversions.h?rcl\u003d1a2f20748581f7f3a9012598fa9e729f0b10fae2\u0026l\u003d40",
+      "range": {
+        "startLine": 798,
+        "startChar": 4,
+        "endLine": 798,
+        "endChar": 12
+      },
+      "revId": "6f2e97eea5a1344b8efd653b603846e52a752570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e7a8e46_c2b23f24",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-01-31T10:55:51Z",
+      "side": 1,
+      "message": "Possibly dchecked cast here and below too.",
+      "range": {
+        "startLine": 807,
+        "startChar": 26,
+        "endLine": 807,
+        "endChar": 60
+      },
+      "revId": "6f2e97eea5a1344b8efd653b603846e52a752570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65c7d957_a9b5e27a",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-01-31T10:55:51Z",
+      "side": 1,
+      "message": "int64_t since what you\u0027re returning is int64_t, and the method that calls this method also returns int64_t.",
+      "range": {
+        "startLine": 967,
+        "startChar": 0,
+        "endLine": 967,
+        "endChar": 8
+      },
+      "revId": "6f2e97eea5a1344b8efd653b603846e52a752570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
