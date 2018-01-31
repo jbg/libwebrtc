@@ -157,6 +157,7 @@ public class PeerConnectionClient {
   private AudioTrack localAudioTrack;
   private DataChannel dataChannel;
   private boolean dataChannelEnabled;
+  ParcelFileDescriptor aecDumpFileDescriptor;
 
   /**
    * Peer connection parameters.
@@ -654,7 +655,7 @@ public class PeerConnectionClient {
 
     if (peerConnectionParameters.aecDump) {
       try {
-        ParcelFileDescriptor aecDumpFileDescriptor =
+        aecDumpFileDescriptor =
             ParcelFileDescriptor.open(new File(Environment.getExternalStorageDirectory().getPath()
                                           + File.separator + "Download/audio.aecdump"),
                 ParcelFileDescriptor.MODE_READ_WRITE | ParcelFileDescriptor.MODE_CREATE
@@ -671,6 +672,14 @@ public class PeerConnectionClient {
   private void closeInternal() {
     if (factory != null && peerConnectionParameters.aecDump) {
       factory.stopAecDump();
+      if (aecDumpFileDescriptor != null) {
+        try {
+          aecDumpFileDescriptor.close();
+        } catch (IOException e) {
+          Log.e(TAG, "Can not close aecdump file", e);
+        }
+        aecDumpFileDescriptor = null;
+      }
     }
     Log.d(TAG, "Closing peer connection.");
     statsTimer.cancel();
