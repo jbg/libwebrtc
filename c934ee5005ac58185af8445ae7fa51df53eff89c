@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27b56e8d_2592be45",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-01-31T15:37:40Z",
+      "side": 1,
+      "message": "Native code takes ownership of the file. The correct fix here is to call detachFd instead of getFd.",
+      "range": {
+        "startLine": 663,
+        "startChar": 8,
+        "endLine": 663,
+        "endChar": 64
+      },
+      "revId": "c934ee5005ac58185af8445ae7fa51df53eff89c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
