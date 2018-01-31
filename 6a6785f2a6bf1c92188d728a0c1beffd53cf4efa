@@ -46,6 +46,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36614696_760d1919",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-31T12:42:40Z",
+      "side": 1,
+      "message": "Ok, I think we should understand if it is possible to untangle these circular dependencies before landing this cl, because nogncheck is a slippery slope.\n\nMaybe we can start with one header and see what happens if we remove nogncheck.",
+      "parentUuid": "141f7fc8_b3a97659",
+      "range": {
+        "startLine": 97,
+        "startChar": 68,
+        "endLine": 97,
+        "endChar": 80
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
