@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "525a2bf7_46d2c97c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-31T14:04:11Z",
+      "side": 1,
+      "message": "Right, qingsi@ landed https://webrtc-review.googlesource.com/c/src/+/43247 yesterday and it solves the problem. I had to revert it though because of a problem with a downstream project. I am in contact with him to try to re-land.\n\nRegarding module_api --\u003e libjingle_peerconnection_api it is because of api/rtp_headers.h. It is exposed by //api:libjingle_peerconnection_api which can be probably broken in smaller targets to reduce the probability of generating dependency cycles.",
+      "parentUuid": "29520c88_f2934dd0",
+      "range": {
+        "startLine": 97,
+        "startChar": 68,
+        "endLine": 97,
+        "endChar": 80
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93a25f31_8102124a",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -120,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "50aab2ff_daa0cb92",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-31T14:04:11Z",
+      "side": 1,
+      "message": "It look like //p2p:rtc_p2p wants to use:\n- api/umametrics.h\n- api/turncustomizer.h\n- api/candidate.h\n\n(maybe something else).",
+      "parentUuid": "93a25f31_8102124a",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 51
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6129913b_477f22d9",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -131,6 +179,30 @@
       "writtenOn": "2018-01-31T12:58:37Z",
       "side": 1,
       "message": "And this is the cycle\n\n  //api:libjingle_peerconnection_api -\u003e\n  //p2p:rtc_p2p -\u003e\n  //api:libjingle_peerconnection_api",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02a9b98b_8b05d981",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-01-31T14:04:11Z",
+      "side": 1,
+      "message": "Same as the previous comment.\n\nI have the feeling that //api:libjingle_peerconnection_api is too big and that it is too easy to depend on it, causing these circular dependencies.",
+      "parentUuid": "6129913b_477f22d9",
       "range": {
         "startLine": 100,
         "startChar": 40,
