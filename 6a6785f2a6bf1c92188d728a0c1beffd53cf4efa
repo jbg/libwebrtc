@@ -70,6 +70,76 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29520c88_f2934dd0",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-31T12:58:37Z",
+      "side": 1,
+      "message": "For rtc_event_log_factory_interface.h, we get the cycle\n\n  //modules:module_api -\u003e\n  //api:libjingle_peerconnection_api -\u003e\n  //logging:rtc_event_log_api -\u003e\n  //modules/remote_bitrate_estimator:remote_bitrate_estimator -\u003e\n  //modules:module_api\n\nI imagine the right link to break is rtc_event_log_api --\u003e remote_bitrate_estimator.\n\nAlso, the dependency module_api --\u003e libjingle_peerconnection_api look suspicious to me, but I haven\u0027t investigated what goes into module_api.\n\nAs was mentioned in a comment on the related (larger) cl https://webrtc-review.googlesource.com/c/src/+/40360, there\u0027s ongoing work by qingsi@ to reorganize the rtc_event_log_api target. So I hope this will be solved.",
+      "parentUuid": "36614696_760d1919",
+      "range": {
+        "startLine": 97,
+        "startChar": 68,
+        "endLine": 97,
+        "endChar": 80
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93a25f31_8102124a",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-31T12:58:37Z",
+      "side": 1,
+      "message": "Corresponds to the cycle\n\n  //api:libjingle_peerconnection_api -\u003e\n  //media:rtc_media_base -\u003e\n  //p2p:p2p -\u003e\n  //p2p:libstunprober -\u003e\n  //p2p:rtc_p2p -\u003e\n  //api:libjingle_peerconnection_api",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 51
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6129913b_477f22d9",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-01-31T12:58:37Z",
+      "side": 1,
+      "message": "And this is the cycle\n\n  //api:libjingle_peerconnection_api -\u003e\n  //p2p:rtc_p2p -\u003e\n  //api:libjingle_peerconnection_api",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
