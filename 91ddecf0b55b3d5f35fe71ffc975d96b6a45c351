@@ -16,6 +16,24 @@
       "revId": "91ddecf0b55b3d5f35fe71ffc975d96b6a45c351",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d55bfd43_ed914caf",
+        "filename": "pc/peerconnection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-01T18:58:43Z",
+      "side": 1,
+      "message": "Good catch. Fixed.",
+      "parentUuid": "4992cd07_edb4b500",
+      "revId": "91ddecf0b55b3d5f35fe71ffc975d96b6a45c351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
