@@ -308,6 +308,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ce4e01c_3ccb60a7",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-01T19:28:48Z",
+      "side": 1,
+      "message": "You\u0027re correct; it\u0027s part of the API, and I hope to replace it with just PacketSocketFactory (or something equivalent). In the meantime, is \"nogncheck\" acceptable? If not we could just move portallocator.h to the api directory.",
+      "parentUuid": "1fd5c46e_79640c5c",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
