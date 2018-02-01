@@ -655,7 +655,9 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetDefaultCodec());
     EXPECT_TRUE(SetSend(true));
     EXPECT_EQ(0, renderer_.num_rendered_frames());
-    channel_->OnPacketReceived(&packet1, rtc::PacketTime());
+    webrtc::RtpPacketReceived parsed_packet;
+    ASSERT_TRUE(parsed_packet.Parse(packet1));
+    channel_->OnPacketReceived(parsed_packet);
     EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
     EXPECT_TRUE(SendFrame());
     EXPECT_FRAME_WAIT(1, kVideoWidth, kVideoHeight, kTimeout);
