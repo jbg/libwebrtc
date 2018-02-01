@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9b8e1a_d2d32261",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T10:07:41Z",
+      "side": 1,
+      "message": "Let\u0027s add a backwards compatible target here:\n\n# TODO(mbonadei): Remove when the following CL is landed:\n# https://webrtc-review.googlesource.com/c/src/+/46900.\n# This is only a backwards compatible target.\nrtc_source_set(\"rtc_event_log_impl\") {\n  visibility \u003d [ \"*\" ]\n  deps \u003d [\n    \":rtc_event_log_impl_base\",\n  ]\n}\n\n(I can take care of it later).",
+      "revId": "b5860f05374d43f77742cefc5bb7b9bfee53b93c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
