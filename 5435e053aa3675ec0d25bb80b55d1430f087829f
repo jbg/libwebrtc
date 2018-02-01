@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "e6704033_ea63039d",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-01T18:39:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd51bee8_db3c2d32",
+      "range": {
+        "startLine": 98,
+        "startChar": 21,
+        "endLine": 98,
+        "endChar": 41
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ddcc8e7_eaf656ad",
         "filename": "sdk/android/src/jni/pc/icecandidate.cc",
         "patchSetId": 6
@@ -274,6 +298,30 @@
       "side": 1,
       "message": "Ack. Let\u0027s keep it here for consistency now then. I think we should move all the methods to peerconnection.cc though.",
       "parentUuid": "990a4070_520a3132",
+      "range": {
+        "startLine": 209,
+        "startChar": 32,
+        "endLine": 209,
+        "endChar": 61
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5eceec0f_f44a4db6",
+        "filename": "sdk/android/src/jni/pc/icecandidate.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-01T18:39:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0599ffc1_09be7dea",
       "range": {
         "startLine": 209,
         "startChar": 32,
