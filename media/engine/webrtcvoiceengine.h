@@ -178,8 +178,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   bool CanInsertDtmf() override;
   bool InsertDtmf(uint32_t ssrc, int event, int duration) override;
 
-  void OnPacketReceived(rtc::CopyOnWriteBuffer* packet,
-                        const rtc::PacketTime& packet_time) override;
+  // void OnPacketReceived(rtc::CopyOnWriteBuffer* packet,
+  //                       const rtc::PacketTime& packet_time) override;
+  void OnPacketReceived(
+      const webrtc::RtpPacketReceived& parsed_packet) override;
   void OnRtcpReceived(rtc::CopyOnWriteBuffer* packet,
                       const rtc::PacketTime& packet_time) override;
   void OnNetworkRouteChanged(const std::string& transport_name,
