@@ -22,6 +22,30 @@
       "revId": "be4ad23835ad7d777c4423646adb6f22b8f32bbc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da362d13_96a41fe8",
+        "filename": "media/engine/fakewebrtccall.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-01T13:02:43Z",
+      "side": 1,
+      "message": "Yes, agree that they are/should be treated as mocks instead of fakes. I took a stab at changing this class to a proper gMock-based class, but hit issues. In many of the tests, we don\u0027t have a reference to the class (to be used for the EXPECT_CALL\u0027s) before the action is taken on the mock. The reason is that we never explicitly create these classes, but that is rather done by the FakeCall class as part of the AddRecvStream call on WebRtcVideoChannel.\n\nIn the case of |GetNumAddedSecondarySinks| and |GetNumRemovedSecondarySinks|, I could change those methods to be MOCK_METHODs, but then I would only be able to verify changes to the state that happens after the object has been created in the first place. I.e., I wouldn\u0027t be able to check the default behaviour, which seems like something we want to do.\n\nLet me know if you have any idea how to solve this, otherwise I think we have to use the handcoded mocking functionality provided by the counters |num_added_secondary_sinks_|, |num_removed_secondary_sinks_|, and the flag |receiving_|.",
+      "parentUuid": "49242a98_37425774",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "be4ad23835ad7d777c4423646adb6f22b8f32bbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
