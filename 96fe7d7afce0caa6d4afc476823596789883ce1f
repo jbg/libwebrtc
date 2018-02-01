@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c46f99b9_1d859702",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T11:12:54Z",
+      "side": 1,
+      "message": "The most interesting part of this CL is the BUILD.gn file. I had to move some files around in order to break circular dependencies. This CL also discovered some undeclared dependencies (gn check doesn\u0027t check relative include paths and it doesn\u0027t print a warning).",
+      "range": {
+        "startLine": 626,
+        "startChar": 4,
+        "endLine": 626,
+        "endChar": 45
+      },
+      "revId": "96fe7d7afce0caa6d4afc476823596789883ce1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d751ce13_47ae1a7d",
+        "filename": "modules/audio_coding/codecs/isac/fix/source/arith_routines.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T11:12:54Z",
+      "side": 1,
+      "message": "I think this is a typo, the .c file is called arith_routines.c and the same goes for the isac/main code.",
+      "range": {
+        "startLine": 19,
+        "startChar": 54,
+        "endLine": 19,
+        "endChar": 69
+      },
+      "revId": "96fe7d7afce0caa6d4afc476823596789883ce1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
