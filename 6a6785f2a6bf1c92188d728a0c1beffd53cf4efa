@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "6a398a34_00e991f5",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T09:51:11Z",
+      "side": 1,
+      "message": "While thinking about the possibility of splitting the libjingle_peerconnection_api target I tried to understand why we need to depend on //media/rtc_media_base and it looks like it is only for cricket::VideoCapturer, but there is a TODO from Taylor and it seems that this should be removed from API: https://cs.chromium.org/chromium/src/third_party/webrtc/api/peerconnectioninterface.h?l\u003d1149\u0026rcl\u003d6daa27815625009de99edf4dfd939f4dcc48362f.\n\nMaybe this can be removed in another CL, before landing this one. Is that doable?",
+      "parentUuid": "50aab2ff_daa0cb92",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 51
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6129913b_477f22d9",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Same as the previous comment.\n\nI have the feeling that //api:libjingle_peerconnection_api is too big and that it is too easy to depend on it, causing these circular dependencies.",
       "parentUuid": "6129913b_477f22d9",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8467397_9f68f4ca",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T09:51:11Z",
+      "side": 1,
+      "message": "Looking more into this... Isn\u0027t cricket::PortAllocator part of the API?\nIt looks like it is a parameter of PeerConnectionFactoryInterface::CreatePeerConnection.",
+      "parentUuid": "02a9b98b_8b05d981",
       "range": {
         "startLine": 100,
         "startChar": 40,
