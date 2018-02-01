@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "fd51bee8_db3c2d32",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-01T09:31:11Z",
+      "side": 1,
+      "message": "Since they are not public they cannot be used outside the package? It is probably good idea to have them but we could combine it with the AdapterType enum. So you could do for example AdapterType.ETHERNET.getBitmask(). Just a comment though, feel free to land without addressing.",
+      "parentUuid": "a98c247c_feeab4a7",
+      "range": {
+        "startLine": 98,
+        "startChar": 21,
+        "endLine": 98,
+        "endChar": 41
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ddcc8e7_eaf656ad",
         "filename": "sdk/android/src/jni/pc/icecandidate.cc",
         "patchSetId": 6
@@ -235,6 +259,30 @@
       "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0599ffc1_09be7dea",
+        "filename": "sdk/android/src/jni/pc/icecandidate.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-01T09:31:11Z",
+      "side": 1,
+      "message": "Ack. Let\u0027s keep it here for consistency now then. I think we should move all the methods to peerconnection.cc though.",
+      "parentUuid": "990a4070_520a3132",
+      "range": {
+        "startLine": 209,
+        "startChar": 32,
+        "endLine": 209,
+        "endChar": 61
+      },
+      "revId": "5435e053aa3675ec0d25bb80b55d1430f087829f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

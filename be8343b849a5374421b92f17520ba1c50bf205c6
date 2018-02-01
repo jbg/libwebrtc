@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcaa5816_7dfdc9cf",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-01T09:31:11Z",
+      "side": 1,
+      "message": "nit: Move this below enableDtlsSrtp without whitespace. Let\u0027s keep the separate group C++ objects.",
+      "range": {
+        "startLine": 387,
+        "startChar": 4,
+        "endLine": 387,
+        "endChar": 41
+      },
+      "revId": "be8343b849a5374421b92f17520ba1c50bf205c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
