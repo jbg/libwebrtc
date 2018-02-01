@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bdd9034_9c3cbed2",
+        "filename": "modules/audio_coding/codecs/isac/fix/source/lpc_masking_model.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-01T11:23:10Z",
+      "side": 1,
+      "message": "Blank line here?",
+      "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcaa798c_e8d03742",
+        "filename": "modules/audio_coding/codecs/isac/main/source/crc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-01T11:23:10Z",
+      "side": 1,
+      "message": "Move before the other two?",
+      "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d22dea0_e11745df",
+        "filename": "modules/audio_coding/codecs/isac/main/source/transform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-01T11:23:10Z",
+      "side": 1,
+      "message": "Blank line?",
+      "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
