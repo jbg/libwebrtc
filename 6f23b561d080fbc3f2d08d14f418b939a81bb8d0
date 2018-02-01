@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f8a52ad8_cedbc37e",
+        "filename": "modules/audio_coding/codecs/isac/fix/source/lpc_masking_model.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T13:14:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bdd9034_9c3cbed2",
+      "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcaa798c_e8d03742",
         "filename": "modules/audio_coding/codecs/isac/main/source/crc.c",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a713212c_73cf2903",
+        "filename": "modules/audio_coding/codecs/isac/main/source/crc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T13:14:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcaa798c_e8d03742",
+      "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d22dea0_e11745df",
         "filename": "modules/audio_coding/codecs/isac/main/source/transform.c",
         "patchSetId": 9
@@ -50,6 +86,24 @@
       "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b8b387f_8136b29a",
+        "filename": "modules/audio_coding/codecs/isac/main/source/transform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-01T13:14:40Z",
+      "side": 1,
+      "message": "Done, I also moved it before the other two.",
+      "parentUuid": "8d22dea0_e11745df",
+      "revId": "6f23b561d080fbc3f2d08d14f418b939a81bb8d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
