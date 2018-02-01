@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55d1b448_569ed3ea",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-01T22:47:35Z",
+      "side": 1,
+      "message": "Why not preferred_network?",
+      "range": {
+        "startLine": 498,
+        "startChar": 55,
+        "endLine": 498,
+        "endChar": 0
+      },
+      "revId": "9a5c6f8f3fc8adefc69809c712e0466586f2a2d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f67487a_0459b5f0",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-01T22:47:35Z",
+      "side": 1,
+      "message": "This would be more clear:\n\nbool selected_network_better \u003d (b_is_better \u003d\u003d CompareCandidatePairNetworks(...));\nif (!new_connection-\u003ereceiving() \u0026\u0026 selected_network_better) {\n  return false;\n}\n\n\nThen it would match the comment.",
+      "revId": "9a5c6f8f3fc8adefc69809c712e0466586f2a2d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84fe6f81_02b9495d",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-01T22:47:35Z",
+      "side": 1,
+      "message": "Just \"by_network_pref\" would be sufficient.",
+      "range": {
+        "startLine": 1193,
+        "startChar": 41,
+        "endLine": 1193,
+        "endChar": 0
+      },
+      "revId": "9a5c6f8f3fc8adefc69809c712e0466586f2a2d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edf62b4c_c8e7a05f",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-01T22:47:35Z",
+      "side": 1,
+      "message": "Why not just say \"Java version of X\" like all the other comments?",
+      "range": {
+        "startLine": 307,
+        "startChar": 59,
+        "endLine": 307,
+        "endChar": 0
+      },
+      "revId": "9a5c6f8f3fc8adefc69809c712e0466586f2a2d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6da914_24b92496",
+        "filename": "sdk/android/src/jni/pc/icecandidate.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-01T22:47:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this return rtc::ADAPTER_TYPE_UNKNOWN?",
+      "range": {
+        "startLine": 215,
+        "startChar": 29,
+        "endLine": 215,
+        "endChar": 0
+      },
+      "revId": "9a5c6f8f3fc8adefc69809c712e0466586f2a2d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b172e0e7_469ad523",
+        "filename": "sdk/android/src/jni/pc/icecandidate.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-01T22:47:35Z",
+      "side": 1,
+      "message": "Please use {}s",
+      "range": {
+        "startLine": 231,
+        "startChar": 38,
+        "endLine": 231,
+        "endChar": 0
+      },
+      "revId": "9a5c6f8f3fc8adefc69809c712e0466586f2a2d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
