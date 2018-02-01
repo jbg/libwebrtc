@@ -14,8 +14,8 @@
  * contains the normalized lattice filter routines (MA and AR) for iSAC codec
  *
  */
-#include "settings.h"
-#include "codec.h"
+#include "modules/audio_coding/codecs/isac/main/source/settings.h"
+#include "modules/audio_coding/codecs/isac/main/source/codec.h"
 
 #include <math.h>
 #include <memory.h>
