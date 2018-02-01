@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0a46ef99_884b70ff",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1444,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-01T19:50:43Z",
+      "side": 1,
+      "message": "I asked this in the other CL and don\u0027t remember seeing an answer; why do we need both DeliverParsedRtp and DeliverParsedPacket? Couldn\u0027t DeliverParsedRtp do the DCHECK?",
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5d9ebdc_0dcc7b41",
+        "filename": "call/call.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-01T19:50:43Z",
+      "side": 1,
+      "message": "What about deprecating this? Would it make sense to give it a default implementation in this CL?",
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49850c1f_eb04c674",
+        "filename": "pc/channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-01T19:50:43Z",
+      "side": 1,
+      "message": "nit: This method is so short it could just be inlined. That would also make the RTCP/RTP code paths roughly symmetrical.",
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74e4a0d5_a589ebf8",
         "filename": "pc/srtptransport_unittest.cc",
         "patchSetId": 2
@@ -22,6 +73,30 @@
       "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad648e54_f5049093",
+        "filename": "pc/srtptransport_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-01T19:50:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "74e4a0d5_a589ebf8",
+      "range": {
+        "startLine": 178,
+        "startChar": 31,
+        "endLine": 178,
+        "endChar": 42
+      },
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
