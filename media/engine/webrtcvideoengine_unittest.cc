@@ -54,6 +54,8 @@ static const uint32_t kRtxSsrcs1[] = {4};
 static const uint32_t kFlexfecSsrc = 5;
 static const uint32_t kIncomingUnsignalledSsrc = 0xC0FFEE;
 static const uint32_t kDefaultRecvSsrc = 0;
+static uint8_t kRtpData[] = {0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 static const char kUnsupportedExtensionName[] =
     "urn:ietf:params:rtp-hdrext:unsupported";
@@ -3982,13 +3984,12 @@ TEST_F(WebRtcVideoChannelTest, DefaultReceiveStreamReconfiguresToUseRtx) {
   const std::vector<uint32_t> rtx_ssrcs = MAKE_VECTOR(kRtxSsrcs1);
 
   ASSERT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
-  const size_t kDataLength = 12;
-  uint8_t data[kDataLength];
-  memset(data, 0, sizeof(data));
-  rtc::SetBE32(&data[8], ssrcs[0]);
-  rtc::CopyOnWriteBuffer packet(data, kDataLength);
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
+
+  rtc::SetBE32(&kRtpData[8], ssrcs[0]);
+  rtc::CopyOnWriteBuffer packet(kRtpData, sizeof(kRtpData));
+  webrtc::RtpPacketReceived parsed_packet;
+  ASSERT_TRUE(parsed_packet.Parse(packet));
+  channel_->OnPacketReceived(parsed_packet);
 
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size())
       << "No default receive stream created.";
@@ -4141,15 +4142,13 @@ void WebRtcVideoChannelTest::TestReceiveUnsignaledSsrcPacket(
   EXPECT_TRUE(channel_->SetRecvParameters(recv_parameters_));
 
   ASSERT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
-  const size_t kDataLength = 12;
-  uint8_t data[kDataLength];
-  memset(data, 0, sizeof(data));
 
-  rtc::Set8(data, 1, payload_type);
-  rtc::SetBE32(&data[8], kIncomingUnsignalledSsrc);
-  rtc::CopyOnWriteBuffer packet(data, kDataLength);
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
+  rtc::Set8(kRtpData, 1, payload_type);
+  rtc::SetBE32(&kRtpData[8], kIncomingUnsignalledSsrc);
+  rtc::CopyOnWriteBuffer packet(kRtpData, sizeof(kRtpData));
+  webrtc::RtpPacketReceived parsed_packet;
+  ASSERT_TRUE(parsed_packet.Parse(packet));
+  channel_->OnPacketReceived(parsed_packet);
 
   if (expect_created_receive_stream) {
     EXPECT_EQ(1u, fake_call_->GetVideoReceiveStreams().size())
@@ -4223,8 +4222,9 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc+1;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
+  webrtc::RtpPacketReceived parsed_packet;
+  ASSERT_TRUE(parsed_packet.Parse(packet));
+  channel_->OnPacketReceived(parsed_packet);
   // VP8 packet should create default receive stream.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   FakeVideoReceiveStream* recv_stream =
@@ -4241,7 +4241,8 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc+2;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet2(data, sizeof(data));
-  channel_->OnPacketReceived(&packet2, packet_time);
+  ASSERT_TRUE(parsed_packet.Parse(packet2));
+  channel_->OnPacketReceived(parsed_packet);
   // VP9 packet should replace the default receive SSRC.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   recv_stream = fake_call_->GetVideoReceiveStreams()[0];
@@ -4258,7 +4259,8 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc+3;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet3(data, sizeof(data));
-  channel_->OnPacketReceived(&packet3, packet_time);
+  ASSERT_TRUE(parsed_packet.Parse(packet3));
+  channel_->OnPacketReceived(parsed_packet);
   // H264 packet should replace the default receive SSRC.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   recv_stream = fake_call_->GetVideoReceiveStreams()[0];
@@ -4285,15 +4287,15 @@ TEST_F(WebRtcVideoChannelTest,
   EXPECT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
 
   // Receive packet on an unsignaled SSRC.
-  uint8_t data[kMinRtpPacketLen];
   cricket::RtpHeader rtp_header;
   rtp_header.payload_type = GetEngineCodec("VP8").id;
   rtp_header.seq_num = rtp_header.timestamp = 0;
   rtp_header.ssrc = kSsrcs3[0];
-  cricket::SetRtpHeader(data, sizeof(data), rtp_header);
-  rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
+  cricket::SetRtpHeader(kRtpData, sizeof(kRtpData), rtp_header);
+  rtc::CopyOnWriteBuffer packet(kRtpData, sizeof(kRtpData));
+  webrtc::RtpPacketReceived parsed_packet;
+  ASSERT_TRUE(parsed_packet.Parse(packet));
+  channel_->OnPacketReceived(parsed_packet);
   // Default receive stream should be created.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   FakeVideoReceiveStream* recv_stream0 =
@@ -4309,9 +4311,10 @@ TEST_F(WebRtcVideoChannelTest,
 
   // Receive packet on a different unsignaled SSRC.
   rtp_header.ssrc = kSsrcs3[1];
-  cricket::SetRtpHeader(data, sizeof(data), rtp_header);
-  packet.SetData(data, sizeof(data));
-  channel_->OnPacketReceived(&packet, packet_time);
+  cricket::SetRtpHeader(kRtpData, sizeof(kRtpData), rtp_header);
+  packet.SetData(kRtpData, sizeof(kRtpData));
+  ASSERT_TRUE(parsed_packet.Parse(packet));
+  channel_->OnPacketReceived(parsed_packet);
   // New default receive stream should be created, but old stream should remain.
   ASSERT_EQ(2u, fake_call_->GetVideoReceiveStreams().size());
   EXPECT_EQ(recv_stream0, fake_call_->GetVideoReceiveStreams()[0]);
@@ -4740,8 +4743,9 @@ TEST_F(WebRtcVideoChannelTest, GetRtpReceiveParametersWithUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
+  webrtc::RtpPacketReceived parsed_packet;
+  ASSERT_TRUE(parsed_packet.Parse(packet));
+  channel_->OnPacketReceived(parsed_packet);
 
   // The |ssrc| member should still be unset.
   rtp_parameters = channel_->GetRtpReceiveParameters(0);

@@ -262,9 +262,10 @@ template <class Base> class RtpHelper : public Base {
   void set_recv_rtcp_parameters(const RtcpParameters& params) {
     recv_rtcp_parameters_ = params;
   }
-  virtual void OnPacketReceived(rtc::CopyOnWriteBuffer* packet,
-                                const rtc::PacketTime& packet_time) {
-    rtp_packets_.push_back(std::string(packet->data<char>(), packet->size()));
+  virtual void OnPacketReceived(
+      const webrtc::RtpPacketReceived& parsed_packet) {
+    rtp_packets_.push_back(
+        std::string(parsed_packet.Buffer().data<char>(), parsed_packet.size()));
   }
   virtual void OnRtcpReceived(rtc::CopyOnWriteBuffer* packet,
                               const rtc::PacketTime& packet_time) {

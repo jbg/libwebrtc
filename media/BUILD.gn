@@ -125,6 +125,7 @@ rtc_static_library("rtc_media_base") {
     "../call:video_stream_api",
     "../common_video",
     "../modules/audio_processing:audio_processing_statistics",
+    "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
     "../system_wrappers:field_trial_api",

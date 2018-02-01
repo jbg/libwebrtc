@@ -170,12 +170,12 @@ class SrtpTransportTest : public testing::Test, public sigslot::has_slots<> {
   }
 
   void TestSendRecvRtcpPacket(const std::string& cipher_suite_name) {
-    size_t rtcp_len = sizeof(kRtcpReport);
+    size_t rtcp_len = sizeof(::kRtcpReport);
     size_t packet_size =
         rtcp_len + 4 + rtc::rtcp_auth_tag_len(cipher_suite_name);
     rtc::Buffer rtcp_packet_buffer(packet_size);
     char* rtcp_packet_data = rtcp_packet_buffer.data<char>();
-    memcpy(rtcp_packet_data, kRtcpReport, rtcp_len);
+    memcpy(rtcp_packet_data, ::kRtcpReport, rtcp_len);
 
     rtc::CopyOnWriteBuffer rtcp_packet1to2(rtcp_packet_data, rtcp_len,
                                            packet_size);
