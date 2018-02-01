@@ -192,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "db7b700d_331878db",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-01T10:18:01Z",
+      "side": 1,
+      "message": "We have been working hard to migrate from cricket::VideoCapturer to webrtc::VideoTrackSource for application capturers we are aware of.\n\nBut we still use cricket::VideoCapturer internally in webrtc, for WebRtcVideoCapturer (media/engine/). As I understand it, the platform specific implementations from modules/video_capture is wrapped in a cricket::VideoCapturer which is then wrapped in a VideoCapturerTrackSource. So we have several layers of deprecated interfaces here.\n\nThe right way would most likely be to rip out the legacy interfaces and rewrite modules/video_capture/linux/video_capture_linux.cc and friends to implement VideoTrackSourceInterface directly, which is fair amount of work.",
+      "parentUuid": "6a398a34_00e991f5",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 51
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6129913b_477f22d9",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -251,6 +275,30 @@
       "side": 1,
       "message": "Looking more into this... Isn\u0027t cricket::PortAllocator part of the API?\nIt looks like it is a parameter of PeerConnectionFactoryInterface::CreatePeerConnection.",
       "parentUuid": "02a9b98b_8b05d981",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fd5c46e_79640c5c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-01T10:18:01Z",
+      "side": 1,
+      "message": "I also think it\u0027s part of the api. If I understood Taylor right, typical application use is to create a port BasicPortAllocator with a custom PacketSocketFactory, and it\u0027s desirable to change the PeerConnection interfaces so that the PacketSocketFactory is injectable instead.",
+      "parentUuid": "d8467397_9f68f4ca",
       "range": {
         "startLine": 100,
         "startChar": 40,
