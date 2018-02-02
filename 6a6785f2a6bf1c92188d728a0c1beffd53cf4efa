@@ -404,6 +404,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b22c1acc_42e718e0",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-02T19:14:52Z",
+      "side": 1,
+      "message": "I think it\u0027s likely we\u0027ll need to continue supporting datachannel-only builds. The right way to remove those \"//nogncheck\"s would be to continue separating the interface from the implementation. For example, MediaEngineInterface should be in a separate target from the implementations, WebRtcVoiceEngine and WebRtcVideoEngine.\n\nOr are there some \"//nogncheck\"s that are more stubborn?",
+      "parentUuid": "369c36ff_21ed9908",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
