@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "628953ae_3ace16e1",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1444,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2018-02-02T01:29:07Z",
+      "side": 1,
+      "message": "I think maybe we can get rid of both DeliverRtp and DeliverRtcp method. I\u0027ll merge DeliverRtcp to DeliverPacket, merge DeliverParsedRtp to DeliverParsedRtpPacket and remove the DeliverRtp.",
+      "parentUuid": "0a46ef99_884b70ff",
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5d9ebdc_0dcc7b41",
         "filename": "call/call.h",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "3a759bb6_9752cc17",
+        "filename": "call/call.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2018-02-02T01:29:07Z",
+      "side": 1,
+      "message": "We need this method to deliver RTCP packets.",
+      "parentUuid": "c5d9ebdc_0dcc7b41",
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49850c1f_eb04c674",
         "filename": "pc/channel.cc",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b4fae28_56b88d5a",
+        "filename": "pc/channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 5080
+      },
+      "writtenOn": "2018-02-02T01:29:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49850c1f_eb04c674",
+      "revId": "52ea0c677f79494243bfbc2927b7b12a0582de03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
