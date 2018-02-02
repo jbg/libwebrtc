@@ -216,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "413f109e_c9206f3c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-02T08:20:52Z",
+      "side": 1,
+      "message": "I see, thanks for the explanation. I am not sure what to do here.\nSplitting //api:libjingle_peerconnection_api into small targets, while it seems the right thing to do, it also seems needed only to workaround problems we are already trying to solve. Do we have a bug for the cricket::VideoCapturer --\u003e webrtc::VideoTrackSource migration?",
+      "parentUuid": "db7b700d_331878db",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 51
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6129913b_477f22d9",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -323,6 +347,30 @@
       "side": 1,
       "message": "You\u0027re correct; it\u0027s part of the API, and I hope to replace it with just PacketSocketFactory (or something equivalent). In the meantime, is \"nogncheck\" acceptable? If not we could just move portallocator.h to the api directory.",
       "parentUuid": "1fd5c46e_79640c5c",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d70df87_3309ba36",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-02T08:20:52Z",
+      "side": 1,
+      "message": "I would prefer to avoid \"nogncheck\" because it is easy to forget and if that happens it will be difficult to remove in the future (since it will allow dependencies to sneak in).\n\nMoving portallocator.h could be an option, I guess we can try on another CL and see if that is possible.\n\nAnyway, I would like to hear Patrik\u0027s opinion here. He is working hard to untangle circular dependencies and he could have some insights.",
+      "parentUuid": "1ce4e01c_3ccb60a7",
       "range": {
         "startLine": 100,
         "startChar": 40,
