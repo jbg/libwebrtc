@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4762a98d_b37ca102",
+        "filename": "modules/audio_coding/neteq/test/neteq_pcm16b_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-02T14:48:20Z",
+      "side": 1,
+      "message": "NetEqPcmuQualityTest -\u003e NetEqPcm16bQualityTest",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "396a80586bb4173dfd65f44c7b8cea60c26b05d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5c16923_3332f079",
+        "filename": "modules/audio_coding/neteq/test/neteq_pcm16b_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-02T14:48:20Z",
+      "side": 1,
+      "message": "NetEqPcmuQualityTest -\u003e NetEqPcm16bQualityTest",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 22
+      },
+      "revId": "396a80586bb4173dfd65f44c7b8cea60c26b05d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1ed7b92_18f409cc",
+        "filename": "modules/audio_coding/neteq/test/neteq_pcm16b_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-02T14:48:20Z",
+      "side": 1,
+      "message": "NetEqPcmuQualityTest -\u003e NetEqPcm16bQualityTest",
+      "range": {
+        "startLine": 77,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "396a80586bb4173dfd65f44c7b8cea60c26b05d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
