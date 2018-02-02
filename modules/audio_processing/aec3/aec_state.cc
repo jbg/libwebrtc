@@ -71,7 +71,7 @@ void AecState::HandleEchoPathChange(
     echo_saturation_ = false;
     previous_max_sample_ = 0.f;
     std::fill(max_render_.begin(), max_render_.end(), 0.f);
-    force_zero_gain_counter_ = 0;
+    force_zero_gain_counter_ = kNumBlocksPerSecond / 5;
     blocks_with_proper_filter_adaptation_ = 0;
     capture_block_counter_ = 0;
     filter_has_had_time_to_converge_ = false;
@@ -132,8 +132,14 @@ void AecState::Update(
   // Force zero echo suppression gain after an echo path change to allow at
   // least some render data to be collected in order to avoid an initial echo
   // burst.
-  force_zero_gain_ = ++force_zero_gain_counter_ < kNumBlocksPerSecond / 5;
+  if (force_zero_gain_counter_ > 0) {
+    --force_zero_gain_counter_;
+  }
+  if (blocks_with_active_render_ == 1) {
+    force_zero_gain_counter_ = 3 * kNumBlocksPerSecond / 2;
+  }
 
+  force_zero_gain_ = force_zero_gain_counter_ > 0;
 
   // Update the ERL and ERLE measures.
   if (converged_filter && capture_block_counter_ >= 2 * kNumBlocksPerSecond) {
