@@ -380,6 +380,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "369c36ff_21ed9908",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-02-02T15:34:09Z",
+      "side": 1,
+      "message": "Yes, the only legit use of //nogncheck is if headers are #ifdef\u0027d such that no cycles are formed; in that case we need to suppress the check because gn --check does not understand #ifdef. Using them to suppress circular dependencies is not OK. If we really, REALLY need to do that it\u0027s better to use check_includes \u003d false and extract a minimal source set with the offending files.\n\nSee https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d8733.\n\nFor removing the current //nogncheck entries: I\u0027ve tried removing them, but most of them are tech debt from when datachannel-only WebRTC were hacked into the codebase. Perhaps we will be able to remove datachannel-only WebRTC in the not too distant future, and then we can clean all the non legit //nogncheck up.",
+      "parentUuid": "4d70df87_3309ba36",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
