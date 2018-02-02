@@ -72,6 +72,7 @@ rtc_static_library("rtc_pc_base") {
     "../api:libjingle_peerconnection_api",
     "../api:optional",
     "../api:ortc_api",
+    "../call:rtp_receiver",
     "../common_video:common_video",
     "../media:rtc_data",
     "../media:rtc_h264_profile_id",

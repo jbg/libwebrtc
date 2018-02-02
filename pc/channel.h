@@ -268,9 +268,6 @@ class BaseChannel
   virtual void OnPacketReceived(bool rtcp,
                                 rtc::CopyOnWriteBuffer* packet,
                                 const rtc::PacketTime& packet_time);
-  void ProcessPacket(bool rtcp,
-                     const rtc::CopyOnWriteBuffer& packet,
-                     const rtc::PacketTime& packet_time);
 
   void EnableMedia_w();
   void DisableMedia_w();
@@ -356,6 +353,10 @@ class BaseChannel
   }
 
   void AddHandledPayloadType(int payload_type);
+
+  bool ParseRtpPacket(const rtc::CopyOnWriteBuffer& packet,
+                      const rtc::PacketTime& packet_time,
+                      webrtc::RtpPacketReceived* parsed_packet);
 
  private:
   void ConnectToRtpTransport();

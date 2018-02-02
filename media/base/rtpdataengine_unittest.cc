@@ -328,17 +328,19 @@ TEST_F(RtpDataMediaChannelTest, ReceiveData) {
     'a', 'b', 'c', 'd', 'e'
   };
   rtc::CopyOnWriteBuffer packet(data, sizeof(data));
+  webrtc::RtpPacketReceived parsed_packet;
+  ASSERT_TRUE(parsed_packet.Parse(packet));
 
   std::unique_ptr<cricket::RtpDataMediaChannel> dmc(CreateChannel());
 
   // SetReceived not called.
-  dmc->OnPacketReceived(&packet, rtc::PacketTime());
+  dmc->OnPacketReceived(parsed_packet);
   EXPECT_FALSE(HasReceivedData());
 
   dmc->SetReceive(true);
 
   // Unknown payload id
-  dmc->OnPacketReceived(&packet, rtc::PacketTime());
+  dmc->OnPacketReceived(parsed_packet);
   EXPECT_FALSE(HasReceivedData());
 
   cricket::DataCodec codec;
@@ -349,7 +351,7 @@ TEST_F(RtpDataMediaChannelTest, ReceiveData) {
   ASSERT_TRUE(dmc->SetRecvParameters(parameters));
 
   // Unknown stream
-  dmc->OnPacketReceived(&packet, rtc::PacketTime());
+  dmc->OnPacketReceived(parsed_packet);
   EXPECT_FALSE(HasReceivedData());
 
   cricket::StreamParams stream;
@@ -357,21 +359,8 @@ TEST_F(RtpDataMediaChannelTest, ReceiveData) {
   ASSERT_TRUE(dmc->AddRecvStream(stream));
 
   // Finally works!
-  dmc->OnPacketReceived(&packet, rtc::PacketTime());
+  dmc->OnPacketReceived(parsed_packet);
   EXPECT_TRUE(HasReceivedData());
   EXPECT_EQ("abcde", GetReceivedData());
   EXPECT_EQ(5U, GetReceivedDataLen());
-}
-
-TEST_F(RtpDataMediaChannelTest, InvalidRtpPackets) {
-  unsigned char data[] = {
-    0x80, 0x65, 0x00, 0x02
-  };
-  rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-
-  std::unique_ptr<cricket::RtpDataMediaChannel> dmc(CreateChannel());
-
-  // Too short
-  dmc->OnPacketReceived(&packet, rtc::PacketTime());
-  EXPECT_FALSE(HasReceivedData());
 }
