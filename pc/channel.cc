@@ -597,23 +597,21 @@ void BaseChannel::OnPacketReceived(bool rtcp,
     return;
   }
 
-  invoker_.AsyncInvoke<void>(
-      RTC_FROM_HERE, worker_thread_,
-      Bind(&BaseChannel::ProcessPacket, this, rtcp, *packet, packet_time));
-}
-
-void BaseChannel::ProcessPacket(bool rtcp,
-                                const rtc::CopyOnWriteBuffer& packet,
-                                const rtc::PacketTime& packet_time) {
-  RTC_DCHECK(worker_thread_->IsCurrent());
-
-  // Need to copy variable because OnRtcpReceived/OnPacketReceived
-  // requires non-const pointer to buffer. This doesn't memcpy the actual data.
-  rtc::CopyOnWriteBuffer data(packet);
   if (rtcp) {
-    media_channel_->OnRtcpReceived(&data, packet_time);
+    rtc::CopyOnWriteBuffer data(*packet);
+    invoker_.AsyncInvoke<void>(RTC_FROM_HERE, worker_thread_, [=]() mutable {
+      media_channel_->OnRtcpReceived(&data, packet_time);
+    });
+    return;
+  }
+
+  webrtc::RtpPacketReceived parsed_packet;
+  if (ParseRtpPacket(*packet, packet_time, &parsed_packet)) {
+    invoker_.AsyncInvoke<void>(RTC_FROM_HERE, worker_thread_, [=] {
+      media_channel_->OnPacketReceived(parsed_packet);
+    });
   } else {
-    media_channel_->OnPacketReceived(&data, packet_time);
+    RTC_LOG(LS_ERROR) << "Failed to parse the incoming RTP packet.";
   }
 }
 
@@ -1064,6 +1062,21 @@ void BaseChannel::OnMessage(rtc::Message *pmsg) {
 
 void BaseChannel::AddHandledPayloadType(int payload_type) {
   rtp_transport_->AddHandledPayloadType(payload_type);
+}
+
+bool BaseChannel::ParseRtpPacket(const rtc::CopyOnWriteBuffer& packet,
+                                 const rtc::PacketTime& packet_time,
+                                 webrtc::RtpPacketReceived* parsed_packet) {
+  if (!parsed_packet->Parse(std::move(packet))) {
+    return false;
+  }
+
+  if (packet_time.timestamp != -1) {
+    parsed_packet->set_arrival_time_ms((packet_time.timestamp + 500) / 1000);
+  } else {
+    parsed_packet->set_arrival_time_ms(-1);
+  }
+  return true;
 }
 
 void BaseChannel::FlushRtcpMessages_n() {

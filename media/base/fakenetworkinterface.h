@@ -170,8 +170,13 @@ class FakeNetworkInterface : public MediaChannel::NetworkInterface,
             msg->pdata);
     if (dest_) {
       if (msg->message_id == ST_RTP) {
-        dest_->OnPacketReceived(&msg_data->data(),
-                                rtc::CreatePacketTime(0));
+        webrtc::RtpPacketReceived parsed_packet;
+        auto data_buffer = *(&msg_data->data());
+        if (parsed_packet.Parse(data_buffer)) {
+          dest_->OnPacketReceived(parsed_packet);
+        } else {
+          RTC_LOG(LS_ERROR) << "Failed to parse the RTP packet.";
+        }
       } else {
         dest_->OnRtcpReceived(&msg_data->data(),
                               rtc::CreatePacketTime(0));
