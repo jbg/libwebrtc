@@ -30,10 +30,10 @@ class TestSimulcastEncoderAdapter : public TestVp8Simulcast {
   TestSimulcastEncoderAdapter() : factory_(new InternalEncoderFactory()) {}
 
  protected:
-  std::unique_ptr<VP8Encoder> CreateEncoder() override {
+  std::unique_ptr<VideoEncoder> CreateEncoder() override {
     return rtc::MakeUnique<SimulcastEncoderAdapter>(factory_.get());
   }
-  std::unique_ptr<VP8Decoder> CreateDecoder() override {
+  std::unique_ptr<VideoDecoder> CreateDecoder() override {
     return VP8Decoder::Create();
   }
 
@@ -250,7 +250,7 @@ class TestSimulcastEncoderAdapterFakeHelper {
 
   // Can only be called once as the SimulcastEncoderAdapter will take the
   // ownership of |factory_|.
-  VP8Encoder* CreateMockEncoderAdapter() {
+  VideoEncoder* CreateMockEncoderAdapter() {
     return new SimulcastEncoderAdapter(factory_.get());
   }
 
@@ -394,7 +394,7 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
 
  protected:
   std::unique_ptr<TestSimulcastEncoderAdapterFakeHelper> helper_;
-  std::unique_ptr<VP8Encoder> adapter_;
+  std::unique_ptr<VideoEncoder> adapter_;
   VideoCodec codec_;
   int last_encoded_image_width_;
   int last_encoded_image_height_;
