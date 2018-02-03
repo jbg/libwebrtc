@@ -22,6 +22,30 @@
       "revId": "036417135c503bc6fff24b53c9cc96e2f7a96a01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17c2b87c_f59e4b9b",
+        "filename": "rtc_base/sslstreamadapter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-03T00:01:54Z",
+      "side": 1,
+      "message": "This name is fine; could you move this below \"enable_gcm_crypto_suites\" though, just to keep the \"enable crypto suite\" flags together?",
+      "parentUuid": "930417bb_8a1bfc4f",
+      "range": {
+        "startLine": 91,
+        "startChar": 7,
+        "endLine": 91,
+        "endChar": 42
+      },
+      "revId": "036417135c503bc6fff24b53c9cc96e2f7a96a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
