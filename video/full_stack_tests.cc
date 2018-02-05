@@ -383,7 +383,7 @@ TEST_F(FullStackTest, ConferenceMotionHd2TLModerateLimits) {
       3000000, 3000000, false, "VP8", 2,
       -1,      0,       false, false, "ConferenceMotion_1280_720_50"};
   conf_motion_hd.analyzer = {"conference_motion_hd_2tl_moderate_limits", 0.0,
-                             0.0, kFullStackTestDurationSecs};
+                             0.0, 10};
   conf_motion_hd.pipe.queue_length_packets = 50;
   conf_motion_hd.pipe.loss_percent = 3;
   conf_motion_hd.pipe.queue_delay_ms = 100;
