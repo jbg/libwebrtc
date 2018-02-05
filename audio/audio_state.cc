@@ -116,7 +116,8 @@ void AudioState::SetPlayout(bool enabled) {
     playout_enabled_ = enabled;
     if (enabled) {
       null_audio_poller_.reset();
-      if (!receiving_streams_.empty()) {
+      if (!receiving_streams_.empty() &&
+          config_.audio_device_module->PlayoutIsInitialized()) {
         config_.audio_device_module->StartPlayout();
       }
     } else {
@@ -133,7 +134,8 @@ void AudioState::SetRecording(bool enabled) {
   if (recording_enabled_ != enabled) {
     recording_enabled_ = enabled;
     if (enabled) {
-      if (!sending_streams_.empty()) {
+      if (!sending_streams_.empty() &&
+          config_.audio_device_module->RecordingIsInitialized()) {
         config_.audio_device_module->StartRecording();
       }
     } else {
