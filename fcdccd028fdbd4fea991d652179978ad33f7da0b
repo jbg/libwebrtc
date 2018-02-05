@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c2af58a_55e5290c",
+        "filename": "modules/congestion_controller/goog_cc_network_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-02-05T16:07:17Z",
+      "side": 1,
+      "message": "Is this the fix? What is different from before?",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 9
+      },
+      "revId": "fcdccd028fdbd4fea991d652179978ad33f7da0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff37217_0be7a116",
+        "filename": "modules/congestion_controller/network_control/network_types.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-02-05T16:07:17Z",
+      "side": 1,
+      "message": "I wonder if it\u0027d be better to change these methods to ToString() to follow the pattern of other classes?",
+      "range": {
+        "startLine": 54,
+        "startChar": 16,
+        "endLine": 54,
+        "endChar": 26
+      },
+      "revId": "fcdccd028fdbd4fea991d652179978ad33f7da0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
