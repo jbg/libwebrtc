@@ -452,6 +452,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22e9347c_5f1eb59a",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-05T22:49:31Z",
+      "side": 1,
+      "message": "Right, the Obj-C and Java support for data-only builds was more hacked in and may take more work to solve. But I still expected it would eventually be solved by sufficiently modularizing things, and getting rid of the #ifdefs.",
+      "parentUuid": "90a698d7_f47d738d",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
