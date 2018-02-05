@@ -89,6 +89,7 @@ class NetEqTest {
 
   // Returns the statistics from NetEq.
   NetEqNetworkStatistics SimulationStats();
+  NetEqLifetimeStatistics LifetimeStats();
 
  private:
   void RegisterDecoders(const DecoderMap& codecs);

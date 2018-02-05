@@ -129,6 +129,7 @@ DEFINE_bool(pythonplot,
             false,
             "Generates a python script for plotting the delay profile");
 DEFINE_bool(help, false, "Prints this message");
+DEFINE_bool(concealment_periods, false, "Prints concealment periods");
 
 // Maps a codec type to a printable name string.
 std::string CodecName(NetEqDecoder codec) {
@@ -331,6 +332,23 @@ class StatsGetter : public NetEqGetAudioCallback {
     double max_waiting_time_ms = 0.0;
   };
 
+  struct ConcealmentPeriod {
+    uint64_t duration_ms;
+    size_t concealment_event_number;
+    int64_t time_from_previous_period_end_ms;
+
+    friend std::ostream& operator<<(
+        std::ostream& stream,
+        const ConcealmentPeriod& concealment_period) {
+      stream << "ConcealmentPeriod duration_ms:"
+             << concealment_period.duration_ms
+             << " event_number:" << concealment_period.concealment_event_number
+             << " time_from_previous_period_end_ms:"
+             << concealment_period.time_from_previous_period_end_ms << "\n";
+      return stream;
+    }
+  };
+
   // Takes a pointer to another callback object, which will be invoked after
   // this object finishes. This does not transfer ownership, and null is a
   // valid value.
@@ -353,6 +371,35 @@ class StatsGetter : public NetEqGetAudioCallback {
       RTC_CHECK_EQ(neteq->NetworkStatistics(&stats), 0);
       stats_.push_back(stats);
     }
+    NetEqLifetimeStatistics neteq_lifetime_stat =
+        neteq->GetLifetimeStatistics();
+    if (current_concealment_event_ != neteq_lifetime_stat.concealment_events) {
+      if (last_period_end_time_ms_ == 0) {
+        // Do not account for the first event to avoid start of the call skewing
+        last_period_end_time_ms_ = time_now_ms;
+        voice_concealed_samples_until_last_event_ =
+            neteq_lifetime_stat.voice_concealed_samples;
+        current_concealment_event_ = neteq_lifetime_stat.concealment_events;
+      } else {
+        ConcealmentPeriod concealment_period;
+        uint64_t last_event_voice_concealed_samples =
+            neteq_lifetime_stat.voice_concealed_samples -
+            voice_concealed_samples_until_last_event_;
+        RTC_CHECK_GT(last_event_voice_concealed_samples, 0);
+        concealment_period.duration_ms =
+            last_event_voice_concealed_samples / 48;
+        concealment_period.concealment_event_number =
+            current_concealment_event_;
+        concealment_period.time_from_previous_period_end_ms =
+            time_now_ms - last_period_end_time_ms_;
+        concealment_periods_.emplace_back(concealment_period);
+        voice_concealed_samples_until_last_event_ =
+            neteq_lifetime_stat.voice_concealed_samples;
+        current_concealment_event_ = neteq_lifetime_stat.concealment_events;
+        last_period_end_time_ms_ = time_now_ms;
+      }
+    }
+
     if (other_callback_) {
       other_callback_->AfterGetAudio(time_now_ms, audio_frame, muted, neteq);
     }
@@ -365,6 +412,14 @@ class StatsGetter : public NetEqGetAudioCallback {
                           return a + static_cast<double>(b.speech_expand_rate);
                         });
     return sum_speech_expand / 16384.0 / stats_.size();
+  }
+
+  const std::vector<ConcealmentPeriod>& ConcealmentPeriodsMs(
+      NetEqLifetimeStatistics neteq_lifetime_stat,
+      int64_t end_time_ms) {
+    // Do not account for the last concealment period to avoid potential end
+    // call skewing
+    return concealment_periods_;
   }
 
   Stats AverageStats() const {
@@ -416,6 +471,10 @@ class StatsGetter : public NetEqGetAudioCallback {
   NetEqGetAudioCallback* other_callback_;
   size_t counter_ = 0;
   std::vector<NetEqNetworkStatistics> stats_;
+  size_t current_concealment_event_ = 1;
+  uint64_t voice_concealed_samples_until_last_event_ = 0;
+  std::vector<ConcealmentPeriod> concealment_periods_;
+  int64_t last_period_end_time_ms_ = 0;
 };
 
 int RunTest(int argc, char* argv[]) {
@@ -668,7 +727,15 @@ int RunTest(int argc, char* argv[]) {
   printf("  max_waiting_time_ms: %f ms\n", stats.max_waiting_time_ms);
   printf("  current_buffer_size_ms: %f ms\n", stats.current_buffer_size_ms);
   printf("  preferred_buffer_size_ms: %f ms\n", stats.preferred_buffer_size_ms);
-
+  if (FLAG_concealment_periods) {
+    std::cout << " concealment_periods_ms:"
+              << "\n";
+    for (auto concealment_period : stats_getter.ConcealmentPeriodsMs(
+             test.LifetimeStats(), test_duration_ms))
+      std::cout << concealment_period;
+    std::cout << " end of concealment_periods_ms"
+              << "\n";
+  }
   return 0;
 }
 
