@@ -428,6 +428,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90a698d7_f47d738d",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-05T10:35:08Z",
+      "side": 1,
+      "message": "I think Patrik is referring to these: https://cs.chromium.org/chromium/src/third_party/webrtc/sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm?l\u003d30\u0026rcl\u003d3ff50fba59cb260067a4e1186b61a4792d4e8bb2.",
+      "parentUuid": "b22c1acc_42e718e0",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
