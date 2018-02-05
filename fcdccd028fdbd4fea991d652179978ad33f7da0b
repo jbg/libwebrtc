@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8bb81b4d_2bdf6da9",
+        "filename": "modules/congestion_controller/goog_cc_network_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-05T16:53:02Z",
+      "side": 1,
+      "message": "It only updates the field that actually has a value set. Whereas before the fields weren\u0027t optional and would therefore always have a value. This caused an unintentional reset of the pacing factor from the default value in GoogCc which is 2.5 to the default value of the struct which was 1.0.",
+      "parentUuid": "2c2af58a_55e5290c",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 9
+      },
+      "revId": "fcdccd028fdbd4fea991d652179978ad33f7da0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ff37217_0be7a116",
         "filename": "modules/congestion_controller/network_control/network_types.cc",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-05T16:07:17Z",
       "side": 1,
       "message": "I wonder if it\u0027d be better to change these methods to ToString() to follow the pattern of other classes?",
+      "range": {
+        "startLine": 54,
+        "startChar": 16,
+        "endLine": 54,
+        "endChar": 26
+      },
+      "revId": "fcdccd028fdbd4fea991d652179978ad33f7da0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b22655e5_28a747dd",
+        "filename": "modules/congestion_controller/network_control/network_types.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-05T16:53:02Z",
+      "side": 1,
+      "message": "If you don\u0027t add these, the testing framework will output a dump of raw memory when failing to match with the given matcher. Does gtest recognize ToString()?",
+      "parentUuid": "4ff37217_0be7a116",
       "range": {
         "startLine": 54,
         "startChar": 16,
