@@ -500,6 +500,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebcfefc7_7e7e07a2",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-06T18:22:24Z",
+      "side": 1,
+      "message": "\u003e But I take it those have to be fixed first\n\nIt sounds like that\u0027s what Mirko/Patrik would like. rtc_event_log_factory_interface.h\u0027s nogncheck can now be fixed by depending on rtc_event_log_api, and portallocator.h can probably be moved to api/ without much difficulty. videocapturer.h could be more problematic, as discussed earlier.\n\nBut couldn\u0027t that be left as a TODO? It\u0027s still better than \"peerconnection_and_implicit_call_api\" turning off check_includes completely, right?",
+      "parentUuid": "87967633_723461df",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
