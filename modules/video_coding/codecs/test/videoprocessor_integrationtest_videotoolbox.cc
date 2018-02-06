@@ -55,7 +55,7 @@ TEST_F(VideoProcessorIntegrationTestVideoToolbox,
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 TEST_F(VideoProcessorIntegrationTestVideoToolbox,
@@ -75,7 +75,7 @@ TEST_F(VideoProcessorIntegrationTestVideoToolbox,
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 }  // namespace test

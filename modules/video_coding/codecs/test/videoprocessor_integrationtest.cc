@@ -171,7 +171,8 @@ void VideoProcessorIntegrationTest::ProcessFramesAndMaybeVerify(
     const std::vector<RateControlThresholds>* rc_thresholds,
     const std::vector<QualityThresholds>* quality_thresholds,
     const BitstreamThresholds* bs_thresholds,
-    const VisualizationParams* visualization_params) {
+    const VisualizationParams* visualization_params,
+    std::vector<VideoLayerStats>* layer_stats) {
   RTC_DCHECK(!rate_profiles.empty());
   // The Android HW codec needs to be run on a task queue, so we simply always
   // run the test on a task queue.
@@ -187,7 +188,9 @@ void VideoProcessorIntegrationTest::ProcessFramesAndMaybeVerify(
   ReleaseAndCloseObjects(&task_queue);
 
   AnalyzeAllFrames(rate_profiles, rc_thresholds, quality_thresholds,
-                   bs_thresholds);
+                   bs_thresholds, layer_stats);
+
+  ClearStats();
 }
 
 void VideoProcessorIntegrationTest::ProcessAllFrames(
@@ -244,7 +247,8 @@ void VideoProcessorIntegrationTest::AnalyzeAllFrames(
     const std::vector<RateProfile>& rate_profiles,
     const std::vector<RateControlThresholds>* rc_thresholds,
     const std::vector<QualityThresholds>* quality_thresholds,
-    const BitstreamThresholds* bs_thresholds) {
+    const BitstreamThresholds* bs_thresholds,
+    std::vector<VideoLayerStats>* layer_stats) {
   const bool is_svc = config_.NumberOfSpatialLayers() > 1;
   const size_t number_of_simulcast_or_spatial_layers =
       std::max(std::size_t{1},
@@ -266,7 +270,7 @@ void VideoProcessorIntegrationTest::AnalyzeAllFrames(
     const float input_duration_sec =
         1.0 * number_of_frames / rate_profiles[rate_update_index].input_fps;
 
-    std::vector<FrameStatistic> overall_stats =
+    std::vector<FrameStatistic> overall_frame_stats =
         ExtractLayerStats(number_of_simulcast_or_spatial_layers - 1,
                           number_of_temporal_layers - 1, first_frame_number,
                           last_frame_number, true);
@@ -279,12 +283,12 @@ void VideoProcessorIntegrationTest::AnalyzeAllFrames(
         quality_thresholds ? &(*quality_thresholds)[rate_update_index]
                            : nullptr;
     AnalyzeAndPrintStats(
-        overall_stats, rate_profiles[rate_update_index].target_kbps,
+        overall_frame_stats, rate_profiles[rate_update_index].target_kbps,
         rate_profiles[rate_update_index].input_fps, input_duration_sec,
-        rc_threshold, quality_threshold, bs_thresholds);
+        rc_threshold, quality_threshold, bs_thresholds, nullptr);
 
     if (config_.print_frame_level_stats) {
-      PrintFrameLevelStats(overall_stats);
+      PrintFrameLevelStats(overall_frame_stats);
     }
 
     for (size_t spatial_layer_number = 0;
@@ -293,23 +297,24 @@ void VideoProcessorIntegrationTest::AnalyzeAllFrames(
       for (size_t temporal_layer_number = 0;
            temporal_layer_number < number_of_temporal_layers;
            ++temporal_layer_number) {
-        std::vector<FrameStatistic> layer_stats =
+        std::vector<FrameStatistic> layer_frame_stats =
             ExtractLayerStats(spatial_layer_number, temporal_layer_number,
                               first_frame_number, last_frame_number, is_svc);
 
-        const size_t target_bitrate_kbps = layer_stats[0].target_bitrate_kbps;
+        const size_t target_bitrate_kbps =
+            layer_frame_stats[0].target_bitrate_kbps;
         const float target_framerate_fps =
             1.0 * rate_profiles[rate_update_index].input_fps /
             (1 << (number_of_temporal_layers - temporal_layer_number - 1));
 
         printf("Spatial %zu temporal %zu:\n", spatial_layer_number,
                temporal_layer_number);
-        AnalyzeAndPrintStats(layer_stats, target_bitrate_kbps,
+        AnalyzeAndPrintStats(layer_frame_stats, target_bitrate_kbps,
                              target_framerate_fps, input_duration_sec, nullptr,
-                             nullptr, nullptr);
+                             nullptr, nullptr, layer_stats);
 
         if (config_.print_frame_level_stats) {
-          PrintFrameLevelStats(layer_stats);
+          PrintFrameLevelStats(layer_frame_stats);
         }
       }
     }
@@ -516,6 +521,10 @@ void VideoProcessorIntegrationTest::ReleaseAndCloseObjects(
   }
 }
 
+void VideoProcessorIntegrationTest::ClearStats() {
+  stats_.clear();
+}
+
 void VideoProcessorIntegrationTest::PrintSettings() const {
   printf("VideoProcessor settings\n==\n");
   printf(" Total # of frames      : %d",
@@ -535,14 +544,15 @@ void VideoProcessorIntegrationTest::PrintSettings() const {
 }
 
 void VideoProcessorIntegrationTest::AnalyzeAndPrintStats(
-    const std::vector<FrameStatistic>& stats,
+    const std::vector<FrameStatistic>& frame_stats,
     const float target_bitrate_kbps,
     const float target_framerate_fps,
     const float input_duration_sec,
     const RateControlThresholds* rc_thresholds,
     const QualityThresholds* quality_thresholds,
-    const BitstreamThresholds* bs_thresholds) {
-  const size_t num_input_frames = stats.size();
+    const BitstreamThresholds* bs_thresholds,
+    std::vector<VideoLayerStats>* layer_stats) {
+  const size_t num_input_frames = frame_stats.size();
   size_t num_dropped_frames = 0;
   size_t num_decoded_frames = 0;
   size_t num_spatial_resizes = 0;
@@ -565,19 +575,19 @@ void VideoProcessorIntegrationTest::AnalyzeAndPrintStats(
   Statistics qp;
 
   FrameStatistic last_successfully_decoded_frame(0, 0);
-  for (size_t frame_idx = 0; frame_idx < stats.size(); ++frame_idx) {
-    const FrameStatistic& frame_stat = stats[frame_idx];
+  for (size_t frame_idx = 0; frame_idx < frame_stats.size(); ++frame_idx) {
+    const FrameStatistic& frame_stat = frame_stats[frame_idx];
 
     const float time_since_first_input_sec =
         frame_idx == 0
             ? 0.0
-            : 1.0 * (frame_stat.rtp_timestamp - stats[0].rtp_timestamp) /
+            : 1.0 * (frame_stat.rtp_timestamp - frame_stats[0].rtp_timestamp) /
                   kRtpClockRateHz;
     const float time_since_last_input_sec =
         frame_idx == 0 ? 0.0
                        : 1.0 *
                              (frame_stat.rtp_timestamp -
-                              stats[frame_idx - 1].rtp_timestamp) /
+                              frame_stats[frame_idx - 1].rtp_timestamp) /
                              kRtpClockRateHz;
 
     // Testing framework uses constant input framerate. This guarantees even
@@ -649,10 +659,27 @@ void VideoProcessorIntegrationTest::AnalyzeAndPrintStats(
   const float max_delta_frame_delay_sec =
       8 * delta_frame_size_bytes.Max() / 1000 / target_bitrate_kbps;
 
+  if (layer_stats) {
+    if (encoded_bytes > 0) {
+      VideoLayerStats layer_stat;
+      layer_stat.bitrate_kbps = encoded_bitrate_kbps;
+      layer_stat.framerate_fps = encoded_framerate_fps;
+      layer_stat.width = last_successfully_decoded_frame.decoded_width;
+      layer_stat.height = last_successfully_decoded_frame.decoded_height;
+      layer_stat.encoding_framerate_fps = 1000000 / encoding_time_us.Mean();
+      layer_stat.decoding_framerate_fps = 1000000 / decoding_time_us.Mean();
+      layer_stat.psnr = psnr.Mean();
+      layer_stat.ssim = ssim.Mean();
+
+      layer_stats->push_back(layer_stat);
+    }
+  }
+
   printf("Frame width                    : %zu\n",
          last_successfully_decoded_frame.decoded_width);
   printf("Frame height                   : %zu\n",
          last_successfully_decoded_frame.decoded_height);
+  printf("Encoded bytes                  : %zu\n", encoded_bytes);
   printf("Target bitrate                 : %f kbps\n", target_bitrate_kbps);
   printf("Encoded bitrate                : %f kbps\n", encoded_bitrate_kbps);
   printf("Bitrate mismatch               : %f %%\n", bitrate_mismatch_percent);

@@ -50,6 +50,26 @@ class VideoProcessorIntegrationTestLibvpx
     config_.encoded_frame_checker = &qp_frame_checker_;
   }
 
+  void PrintVideoLayerStats(
+      const std::map<size_t, std::vector<VideoLayerStats>>&
+          bitrate_to_layer_stats) {
+    printf("\n%10s %10s %10s %10s %10s %10s %10s %10s %10s\n", "uplink",
+           "width", "height", "fps", "downlink", "psnr", "ssim", "enc_fps",
+           "dec_fps");
+
+    for (auto const& bitrate_stats : bitrate_to_layer_stats) {
+      const size_t uplink_kbps = bitrate_stats.first;
+      for (auto& layer_stats : bitrate_stats.second) {
+        printf("%10zu %10zu %10zu %10.2f %10zu %10.2f %10.2f %10.2f %10.2f\n",
+               uplink_kbps, layer_stats.width, layer_stats.height,
+               layer_stats.framerate_fps, layer_stats.bitrate_kbps,
+               layer_stats.psnr, layer_stats.ssim,
+               layer_stats.encoding_framerate_fps,
+               layer_stats.decoding_framerate_fps);
+      }
+    }
+  }
+
  private:
   // Verify that the QP parser returns the same QP as the encoder does.
   const class QpFrameChecker : public TestConfig::EncodedFrameChecker {
@@ -89,7 +109,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
@@ -111,7 +131,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
@@ -135,7 +155,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 TEST_F(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
@@ -152,7 +172,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 TEST_F(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
@@ -168,7 +188,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // TODO(marpan): Add temporal layer test for VP9, once changes are in
@@ -193,7 +213,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 #endif  // !defined(WEBRTC_IOS)
@@ -236,7 +256,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // Too slow to finish before timeout on iOS. See webrtc:4755.
@@ -274,7 +294,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // Too slow to finish before timeout on iOS. See webrtc:4755.
@@ -307,7 +327,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // Might be too slow on mobile platforms.
@@ -331,7 +351,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // Might be too slow on mobile platforms.
@@ -355,7 +375,58 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
+}
+
+const size_t kSvcBitratesKbps[] = {30,  50,  100,  200,  300, 400,
+                                   600, 800, 1200, 1800, 2500};
+
+TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SimulcastVp8RdPerf) {
+  config_.filename = "ConferenceMotion_1280_720_50";
+  config_.input_filename = ResourcePath(config_.filename, "yuv");
+  config_.num_frames = 300;
+  config_.SetCodecSettings(kVideoCodecVP8, 3, 1, 3, false, true, true, false,
+                           true, 1280, 720);
+
+  std::map<size_t, std::vector<VideoLayerStats>> bitrate_to_layer_stats;
+
+  for (auto bitrate_kbps : kSvcBitratesKbps) {
+    std::vector<RateProfile> rate_profiles = {
+        {bitrate_kbps, 30, config_.num_frames}};
+
+    std::vector<VideoLayerStats> layer_stats;
+
+    ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
+                                nullptr, &layer_stats);
+
+    bitrate_to_layer_stats[bitrate_kbps] = layer_stats;
+  }
+
+  PrintVideoLayerStats(bitrate_to_layer_stats);
+}
+
+TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SvcVp9RdPerf) {
+  config_.filename = "ConferenceMotion_1280_720_50";
+  config_.input_filename = ResourcePath(config_.filename, "yuv");
+  config_.num_frames = 300;
+  config_.SetCodecSettings(kVideoCodecVP9, 1, 3, 3, false, true, true, false,
+                           true, 1280, 720);
+
+  std::map<size_t, std::vector<VideoLayerStats>> bitrate_to_layer_stats;
+
+  for (auto bitrate_kbps : kSvcBitratesKbps) {
+    std::vector<RateProfile> rate_profiles = {
+        {bitrate_kbps, 30, config_.num_frames}};
+
+    std::vector<VideoLayerStats> layer_stats;
+
+    ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
+                                nullptr, &layer_stats);
+
+    bitrate_to_layer_stats[bitrate_kbps] = layer_stats;
+  }
+
+  PrintVideoLayerStats(bitrate_to_layer_stats);
 }
 
 }  // namespace test
