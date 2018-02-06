@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1770b0e_dc554cbf",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "Although this is technically correct, I would prefer another name to avoid confusion with the canceled_out variable above. Suggest voice_canceled_out.",
+      "range": {
+        "startLine": 197,
+        "startChar": 17,
+        "endLine": 197,
+        "endChar": 29
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9bb2655_f13267fe",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "This struct seems to register a single concealment event. Would it not be better to name it ConcealmentEvent?",
+      "range": {
+        "startLine": 335,
+        "startChar": 9,
+        "endLine": 335,
+        "endChar": 26
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02b0d567_f22e72c9",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "Make the following code easier to read by shortening the name. Instead of neteq_lifetime_stat, change to e.g., lifetime_stats.",
+      "range": {
+        "startLine": 374,
+        "startChar": 28,
+        "endLine": 374,
+        "endChar": 47
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a588e93_6951e7da",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "Make it shorter by using auto instead. And make it const.",
+      "range": {
+        "startLine": 374,
+        "startChar": 4,
+        "endLine": 374,
+        "endChar": 27
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d20f6e6b_f983c543",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "Avoid some code duplication by swapping it around like this:\n\n if (last_period_end_time_ms_ !\u003d 0) {\n   // Do all the stuff from your else clause, except the three last statements.\n }\n last_period_end_time_ms_ \u003d time_now_ms;\n voice_concealed_samples_until_last_event_ \u003d neteq_lifetime_stat.voice_concealed_samples;\n current_concealment_event_ \u003d neteq_lifetime_stat.concealment_events;",
+      "range": {
+        "startLine": 377,
+        "startChar": 6,
+        "endLine": 377,
+        "endChar": 40
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fd0a8f6_d24eef17",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "End comment sentence with a .",
+      "range": {
+        "startLine": 378,
+        "startChar": 73,
+        "endLine": 378,
+        "endChar": 80
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be8149c0_b1ca4374",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "You cannot assume 48 kHz sample rate here. You will have to look at audio_frame.sample_rate_hz_.",
+      "range": {
+        "startLine": 390,
+        "startChar": 49,
+        "endLine": 390,
+        "endChar": 51
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3de6cbf2_2b9cd845",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "This is a straight accessor method, and should be named concealment_period() to reflect that.",
+      "range": {
+        "startLine": 417,
+        "startChar": 40,
+        "endLine": 417,
+        "endChar": 59
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e14c816_f697d1ed",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "These arguments are not used.",
+      "range": {
+        "startLine": 418,
+        "startChar": 6,
+        "endLine": 419,
+        "endChar": 25
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eb41e5c_187f4f4f",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "Did you run \"git cl format\" on this CL?",
+      "range": {
+        "startLine": 736,
+        "startChar": 6,
+        "endLine": 737,
+        "endChar": 22
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f448e6d0_bda9e687",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T14:10:34Z",
+      "side": 1,
+      "message": "This method should be const declared.",
+      "range": {
+        "startLine": 92,
+        "startChar": 42,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "46dd9db3e59c689a266a210cfa695b0f2d06c19a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
