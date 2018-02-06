@@ -54,7 +54,7 @@ TEST_F(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsVp8) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 TEST_F(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsH264CBP) {
@@ -74,7 +74,7 @@ TEST_F(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsH264CBP) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // TODO(brandtr): Enable this test when we have trybots/buildbots with
@@ -100,7 +100,7 @@ TEST_F(VideoProcessorIntegrationTestMediaCodec,
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 }  // namespace test

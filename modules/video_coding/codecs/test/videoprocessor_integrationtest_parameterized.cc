@@ -83,7 +83,7 @@ class VideoProcessorIntegrationTestParameterized
         {bitrate_, framerate, kNumFrames}};
 
     ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
-                                &kVisualizationParams);
+                                &kVisualizationParams, nullptr);
   }
 
   const size_t bitrate_;
