@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d80592c_89209286",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T16:39:29Z",
+      "side": 1,
+      "message": "const auto",
+      "range": {
+        "startLine": 372,
+        "startChar": 4,
+        "endLine": 372,
+        "endChar": 8
+      },
+      "revId": "4d94ee9f95dbc386ec46cae57b1f2eb4790980e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
