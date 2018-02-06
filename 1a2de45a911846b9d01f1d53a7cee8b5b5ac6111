@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4865ce2e_53bbcc3f",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "How about storing the vector of VideoLayerStats structs here? Then you don\u0027t need to inject it, and it makes the signature simpler.",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 28
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2c4308b_873b027a",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "Wrap in anonymous namespace.",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 382,
+        "endChar": 63
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e60762ac_f386867b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "const auto",
+      "range": {
+        "startLine": 393,
+        "startChar": 7,
+        "endLine": 393,
+        "endChar": 11
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c66af41_1f106024",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "Do you need to inject this structure here? Maybe it would be cleaner to make it a member of VideoProcessorIntegrationTest, similar to |stats_|?",
+      "range": {
+        "startLine": 400,
+        "startChar": 42,
+        "endLine": 400,
+        "endChar": 53
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dec7d422_c7a1fc55",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "const auto",
+      "range": {
+        "startLine": 417,
+        "startChar": 7,
+        "endLine": 417,
+        "endChar": 11
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fd53302_d7ba9999",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_mediacodec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "Replace with nullptr, here and below.",
+      "range": {
+        "startLine": 57,
+        "startChar": 30,
+        "endLine": 57,
+        "endChar": 52
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58c79d52_447a04a6",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_videotoolbox.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-06T15:54:55Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "1a2de45a911846b9d01f1d53a7cee8b5b5ac6111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
