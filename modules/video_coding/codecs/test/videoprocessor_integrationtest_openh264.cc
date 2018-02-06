@@ -61,7 +61,7 @@ TEST_F(VideoProcessorIntegrationTestOpenH264, ConstantHighBitrate) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 // H264: Enable SingleNalUnit packetization mode. Encoder should split
@@ -84,7 +84,7 @@ TEST_F(VideoProcessorIntegrationTestOpenH264, SingleNalUnit) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, &bs_thresholds,
-                              kNoVisualizationParams);
+                              kNoVisualizationParams, nullptr);
 }
 
 #endif  // defined(WEBRTC_USE_H264)

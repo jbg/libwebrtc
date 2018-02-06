@@ -66,6 +66,17 @@ struct VisualizationParams {
   bool save_decoded_y4m;
 };
 
+struct VideoLayerStats {
+  size_t bitrate_kbps;
+  double framerate_fps;
+  size_t width;
+  size_t height;
+  double encoding_framerate_fps;
+  double decoding_framerate_fps;
+  double psnr;
+  double ssim;
+};
+
 // Integration test for video processor. It does rate control and frame quality
 // analysis using frame statistics collected by video processor and logs the
 // results. If thresholds are specified it checks that corresponding metrics
@@ -87,7 +98,8 @@ class VideoProcessorIntegrationTest : public testing::Test {
       const std::vector<RateControlThresholds>* rc_thresholds,
       const std::vector<QualityThresholds>* quality_thresholds,
       const BitstreamThresholds* bs_thresholds,
-      const VisualizationParams* visualization_params);
+      const VisualizationParams* visualization_params,
+      std::vector<VideoLayerStats>* layer_stats);
 
   // Config.
   TestConfig config_;
@@ -105,6 +117,7 @@ class VideoProcessorIntegrationTest : public testing::Test {
                            const int initial_framerate_fps,
                            const VisualizationParams* visualization_params);
   void ReleaseAndCloseObjects(rtc::TaskQueue* task_queue);
+  void ClearStats();
 
   void ProcessAllFrames(rtc::TaskQueue* task_queue,
                         const std::vector<RateProfile>& rate_profiles);
@@ -112,7 +125,8 @@ class VideoProcessorIntegrationTest : public testing::Test {
       const std::vector<RateProfile>& rate_profiles,
       const std::vector<RateControlThresholds>* rc_thresholds,
       const std::vector<QualityThresholds>* quality_thresholds,
-      const BitstreamThresholds* bs_thresholds);
+      const BitstreamThresholds* bs_thresholds,
+      std::vector<VideoLayerStats>* layer_stats);
 
   std::vector<FrameStatistic> ExtractLayerStats(
       size_t target_spatial_layer_number,
@@ -127,7 +141,8 @@ class VideoProcessorIntegrationTest : public testing::Test {
                             float input_duration_sec,
                             const RateControlThresholds* rc_thresholds,
                             const QualityThresholds* quality_thresholds,
-                            const BitstreamThresholds* bs_thresholds);
+                            const BitstreamThresholds* bs_thresholds,
+                            std::vector<VideoLayerStats>* layer_stats);
   void PrintFrameLevelStats(const std::vector<FrameStatistic>& stats) const;
 
   void PrintSettings() const;
