@@ -152,7 +152,8 @@ class AecState {
   float previous_max_sample_ = 0.f;
   bool force_zero_gain_ = false;
   bool render_received_ = false;
-  size_t force_zero_gain_counter_ = 0;
+  int force_zero_gain_counter_ = kNumBlocksPerSecond / 5;
+  bool active_render_seen_ = false;
   int filter_delay_ = 0;
   size_t blocks_since_last_saturation_ = 1000;
   float reverb_decay_to_test_ = 0.9f;
