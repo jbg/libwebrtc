@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc8f08e8_afe794b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T16:01:47Z",
+      "side": 1,
+      "message": "Add [MERGE TO M65] at the beginning of the title",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "9b88f9b79b24ec2d94f9d78e616669c10d418183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d6b853_1c9730e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-02-06T16:01:47Z",
+      "side": 1,
+      "message": "chromium:808364",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 11
+      },
+      "revId": "9b88f9b79b24ec2d94f9d78e616669c10d418183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
