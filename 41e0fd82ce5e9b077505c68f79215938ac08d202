@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3db4f173_ba6919a8",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-06T11:46:01Z",
+      "side": 1,
+      "message": "can you imagine different implementation than \": impl_(std::move(impl)) {}\"?\nIf not, may be inline it here.",
+      "range": {
+        "startLine": 170,
+        "startChar": 54,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "41e0fd82ce5e9b077505c68f79215938ac08d202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e522b5f9_14e1cc45",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-06T11:46:01Z",
+      "side": 1,
+      "message": "pass by value (avoids extra AddRef/Release)",
+      "range": {
+        "startLine": 170,
+        "startChar": 21,
+        "endLine": 170,
+        "endChar": 52
+      },
+      "revId": "41e0fd82ce5e9b077505c68f79215938ac08d202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
