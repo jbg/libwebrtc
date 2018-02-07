@@ -548,6 +548,99 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01ff74b5_5603dc2c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-07T09:55:08Z",
+      "side": 1,
+      "message": "I just deleted the nogncheck for rtc_event_log_factory_interface.h, since it\u0027s no longer needed.\n\nTaylor, can you take are of portallocator.h, and move it to api together with any of its dependencies that make sense there?",
+      "parentUuid": "f138dcbc_b9c67fb6",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fa9209d_b7153ce0",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-07T09:55:08Z",
+      "side": 1,
+      "message": "Delete now?",
+      "range": {
+        "startLine": 1159,
+        "startChar": 0,
+        "endLine": 1160,
+        "endChar": 17
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe9e547f_0953b7a5",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-07T09:55:08Z",
+      "side": 1,
+      "message": "Similarly, can this be made pure virtual? (Not sure what\u0027s the timeline of completely removing MediaConstraintsInterface).",
+      "range": {
+        "startLine": 1172,
+        "startChar": 56,
+        "endLine": 1172,
+        "endChar": 73
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe7c69c_848b7a84",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-07T09:55:08Z",
+      "side": 1,
+      "message": "Safe now?",
+      "range": {
+        "startLine": 1179,
+        "startChar": 2,
+        "endLine": 1179,
+        "endChar": 53
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
