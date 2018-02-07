@@ -524,6 +524,30 @@
       "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f138dcbc_b9c67fb6",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-07T07:28:50Z",
+      "side": 1,
+      "message": "\u003e But couldn\u0027t that be left as a TODO? It\u0027s still better than \"peerconnection_and_implicit_call_api\" turning off check_includes completely, right?\n\nIf we manage to reduce \"nogncheck\" from 3 to 1 then yes, I think it is fine to keep it only on videocapturer.h but we have to plan a way to remove this cycle. Patrik\u0027s advice was to pull the code that needs that dependency out of this build target and use check_includes\u003dfalse on that one. But this can be complex (maybe it isn\u0027t, I haven\u0027t looked into it), in that case \"nogncheck\" on that header can be ok in the short term.",
+      "parentUuid": "ebcfefc7_7e7e07a2",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
