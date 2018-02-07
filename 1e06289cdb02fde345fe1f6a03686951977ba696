@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9a742ba_e68da50a",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-07T12:48:41Z",
+      "side": 0,
+      "message": "Keeping this line results in the compilation error\n\n../../video/video_stream_encoder.cc:573:3: error: acquiring mutex \u0027encoder_queue_\u0027 that is already held [-Werror,-Wthread-safety-analysis]\n  RTC_DCHECK_RUN_ON(\u0026encoder_queue_);\n  ^\n../../rtc_base/thread_checker.h:169:35: note: expanded from macro \u0027RTC_DCHECK_RUN_ON\u0027\n  rtc::internal::AnnounceOnThread thread_announcer(thread_like_object); \\\n                                  ^\n../../video/video_stream_encoder.cc:644:1: error: expecting mutex \u0027encoder_queue_\u0027 to be held at the end of function [-Werror,-Wthread-safety-analysis]\n}\n^\n../../video/video_stream_encoder.h:144:29: note: mutex acquired here\n  void ReconfigureEncoder() RTC_RUN_ON(\u0026encoder_queue_);",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 37
+      },
+      "revId": "1e06289cdb02fde345fe1f6a03686951977ba696",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
