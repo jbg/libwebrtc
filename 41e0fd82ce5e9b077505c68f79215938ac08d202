@@ -45,6 +45,30 @@
       "revId": "41e0fd82ce5e9b077505c68f79215938ac08d202",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73d47a47_ac785a8a",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-02-07T16:17:33Z",
+      "side": 1,
+      "message": "Right, yes since we do need to create the scoped_refptr here.",
+      "parentUuid": "e522b5f9_14e1cc45",
+      "range": {
+        "startLine": 170,
+        "startChar": 21,
+        "endLine": 170,
+        "endChar": 52
+      },
+      "revId": "41e0fd82ce5e9b077505c68f79215938ac08d202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8454700_3426d716",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-02-07T16:17:33Z",
+      "side": 1,
+      "message": "We can also make this ctor protected to hide it and let an implementation on a platform that needs a factory method inherit TaskQueue just to be able to call this ctor... or if we inherit, just change impl_ here to be protected.\nwdyt?\n\nTaskQueue {\nprotected:\n impl_;\n}\n\nclass CustomTq: rtc::TaskQueue \nCustomTq(impl): impl_(impl)\n\nstd::unique_ptr\u003cTaskQueu\u003e Create(,,,)\n  scoped_refptr\u003c\u003e impl(...)\n  return std::make_unique\u003cCustomTq\u003e(impl);",
+      "range": {
+        "startLine": 170,
+        "startChar": 11,
+        "endLine": 170,
+        "endChar": 20
+      },
+      "revId": "865945e26f4d19b13ab2aef930f92233c43d42ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
