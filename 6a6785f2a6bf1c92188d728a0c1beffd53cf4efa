@@ -599,6 +599,30 @@
     },
     {
       "key": {
+        "uuid": "1a0e7ced_327f26bb",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T19:21:00Z",
+      "side": 1,
+      "message": "\u003e Patrik\u0027s advice was to pull the code that needs that dependency out of this build target and use check_includes\u003dfalse on that one\n\nWhich is why peerconnection_and_implicit_call_api was introduced in the first place. But I don\u0027t see why a \"check_includes\u003dfalse\" is preferable to a \"//nogncheck\"; I\u0027d actually assume it would be the other way around, since \"check_includes\u003dfalse\" could cause new circular dependencies to be introduced without realizing.\n\nAnyway, yes, I can look into moving portallocator.h.",
+      "parentUuid": "d7675aed_60ff83a2",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3fa9209d_b7153ce0",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
