@@ -647,6 +647,30 @@
     },
     {
       "key": {
+        "uuid": "60962993_92c820a9",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-02-07T20:47:47Z",
+      "side": 1,
+      "message": "\u003e Actually; moving portallocator.h to api/ would be a little counterproductive since we want to deprecate it. Can it be left as another TODO, referencing https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d7447?\n\nIt\u0027s fine with me. I mean, if this goes in the other direction I prefer to buy some technical debt with \"nogncheck\" instead of port something that will deprecated soon in the API.",
+      "parentUuid": "d14ca700_4bf4dabb",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3fa9209d_b7153ce0",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
