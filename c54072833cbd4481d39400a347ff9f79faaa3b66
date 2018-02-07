@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81e6b16b_2b237e68",
+        "filename": "rtc_base/flags.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-07T13:09:15Z",
+      "side": 1,
+      "message": "Please add a doc comment for this function.\n\nAlso, as currently defined it returns true if arg and flag are different, false if they\u0027re the same. Might it be better to swap that, and change the name to FlagEq or something?",
+      "revId": "c54072833cbd4481d39400a347ff9f79faaa3b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53d9edc2_e7952abb",
+        "filename": "rtc_base/flags.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-07T13:09:15Z",
+      "side": 1,
+      "message": "*arg !\u003d \u0027\\0\u0027 might be easier to read.",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "c54072833cbd4481d39400a347ff9f79faaa3b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4137d9e_858f0731",
+        "filename": "rtc_base/flags.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-07T13:09:15Z",
+      "side": 1,
+      "message": "*arg !\u003d \u0027\\0\u0027 might be easier to read.",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "c54072833cbd4481d39400a347ff9f79faaa3b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
