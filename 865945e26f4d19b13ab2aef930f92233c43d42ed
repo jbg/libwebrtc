@@ -22,6 +22,30 @@
       "revId": "865945e26f4d19b13ab2aef930f92233c43d42ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8631b2_1fa84884",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-07T16:43:20Z",
+      "side": 1,
+      "message": "using protect section is nice indication it is for implementers of the TaskQueue, not for users.\n\nit would also allow to avoid wrapping TaskQueue inside unique_ptr:\nclass CustomTaskQueue : rtc::TaskQueue {\n public:\n  CustomTaskQueue(name, custom_parameter) : TaskQueue(CreateImpl(name, custom_parameter)) {}\n private:\n  scoped_ref_ptr\u003crtc::TaskQueue::Impl\u003e CreateImpl(name, custom_parameter) {\n   do custom construction.\n  }\n};\n\nclass Owner {\n public:\n  Ownere() : tq_(name, custom_parameter) {}\n private:\n  CustomTaskQueue tq_;\n};\n\ndownside: TaskQueue has non-virtual destructor, so returning std::unique_ptr\u003cTaskQueue\u003e might be dangerous in that case.\n\n\nI think it would be better with public constructor.\nThen custom implementation can have public function that create scoped_ref_ptr\u003crtc::TaskQueue::Impl\u003e without reveling Impl. and TaskQueue then can be created without wrapping it into a unique_ptr, but still nothing will derive from it (TaskQueue can be final):\n\ncustom api:\nscoped_ref_ptr\u003crtc::TaskQueue::Impl\u003e CreateCustomTaskQueueImpl(custom_parameters);\n\ncustom user:\nTaskQueue tq(CreateCustomTaskQueueImpl(parameters));",
+      "parentUuid": "c8454700_3426d716",
+      "range": {
+        "startLine": 170,
+        "startChar": 11,
+        "endLine": 170,
+        "endChar": 20
+      },
+      "revId": "865945e26f4d19b13ab2aef930f92233c43d42ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
