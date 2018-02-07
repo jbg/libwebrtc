@@ -623,6 +623,30 @@
     },
     {
       "key": {
+        "uuid": "d14ca700_4bf4dabb",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T20:21:28Z",
+      "side": 1,
+      "message": "Actually; moving portallocator.h to api/ would be a little counterproductive since we want to deprecate it. Can it be left as another TODO, referencing https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d7447?",
+      "parentUuid": "1a0e7ced_327f26bb",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3fa9209d_b7153ce0",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -634,6 +658,30 @@
       "writtenOn": "2018-02-07T09:55:08Z",
       "side": 1,
       "message": "Delete now?",
+      "range": {
+        "startLine": 1159,
+        "startChar": 0,
+        "endLine": 1160,
+        "endChar": 17
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6441f9f_94c27070",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T20:21:28Z",
+      "side": 1,
+      "message": "No; as mentioned in the comment, there are fake/mock classes that would need to be updated.",
+      "parentUuid": "3fa9209d_b7153ce0",
       "range": {
         "startLine": 1159,
         "startChar": 0,
@@ -669,6 +717,30 @@
     },
     {
       "key": {
+        "uuid": "7b8e4b66_8c255759",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T20:21:28Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that just create an extra step for yourself when you want to remove it, as mentioned in your other CL? (https://webrtc-review.googlesource.com/c/src/+/49163#message-462c08d97b3abdd0b71e2f214ca1085406feaa5e)\n\nAnd no, it doesn\u0027t appear safe to make this pure virtual.",
+      "parentUuid": "fe9e547f_0953b7a5",
+      "range": {
+        "startLine": 1172,
+        "startChar": 56,
+        "endLine": 1172,
+        "endChar": 73
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ebe7c69c_848b7a84",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
@@ -680,6 +752,30 @@
       "writtenOn": "2018-02-07T09:55:08Z",
       "side": 1,
       "message": "Safe now?",
+      "range": {
+        "startLine": 1179,
+        "startChar": 2,
+        "endLine": 1179,
+        "endChar": 53
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1426fc23_5d24d02b",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T20:21:28Z",
+      "side": 1,
+      "message": "Doesn\u0027t appear so.",
+      "parentUuid": "ebe7c69c_848b7a84",
       "range": {
         "startLine": 1179,
         "startChar": 2,
