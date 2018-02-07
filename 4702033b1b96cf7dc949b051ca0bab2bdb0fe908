@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c379e526_f275bf0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-07T20:08:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "846af7aa_2d485010",
+      "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56dddd4e_11cf3f90",
         "filename": "pc/test/fakeperiodicvideocapturer.h",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "869163bf_c2a5ef39",
+        "filename": "pc/test/fakeperiodicvideocapturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-07T20:08:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56dddd4e_11cf3f90",
+      "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d3a7a2a_64a926b8",
         "filename": "pc/test/fakeperiodicvideocapturer.h",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2018-02-07T19:58:57Z",
       "side": 1,
       "message": "It took me a while to understand this comment. If I understand correctly, the issue is that Stop must be called on the worker thread, but the test may not have access to the worker thread. So another method is needed to stop frame delivery, which doesn\u0027t have the worker thread restriction? If that\u0027s correct, can you reword the comment to make it a bit more clear?",
+      "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c7697d_7c372d85",
+        "filename": "pc/test/fakeperiodicvideocapturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-07T20:08:49Z",
+      "side": 1,
+      "message": "I took a stab at rewriting:\n\n  // Workaround method for tests to allow stopping frame delivery directly.\n  // The |Start()| method expects to be called from the \"worker thread\" that\n  // is owned by the factory (think OrtcFactoryInterface or\n  // PeerConnectionFactoryInterface). That thread is not directly exposed,\n  // which can make it tricky for tests to inject calls on.\n  // So, in order to allow tests to stop frame delivery directly from the\n  // test thread, we expose this method publicly.",
+      "parentUuid": "7d3a7a2a_64a926b8",
       "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
