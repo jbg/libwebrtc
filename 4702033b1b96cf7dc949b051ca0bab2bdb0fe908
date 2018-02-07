@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "846af7aa_2d485010",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T19:58:57Z",
+      "side": 1,
+      "message": "Add newline between summary and paragraph below?",
+      "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56dddd4e_11cf3f90",
+        "filename": "pc/test/fakeperiodicvideocapturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T19:58:57Z",
+      "side": 1,
+      "message": "nit: \"worker thread thread\"",
+      "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d3a7a2a_64a926b8",
+        "filename": "pc/test/fakeperiodicvideocapturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-07T19:58:57Z",
+      "side": 1,
+      "message": "It took me a while to understand this comment. If I understand correctly, the issue is that Stop must be called on the worker thread, but the test may not have access to the worker thread. So another method is needed to stop frame delivery, which doesn\u0027t have the worker thread restriction? If that\u0027s correct, can you reword the comment to make it a bit more clear?",
+      "revId": "4702033b1b96cf7dc949b051ca0bab2bdb0fe908",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
