@@ -153,6 +153,8 @@ static std::unique_ptr<QueuedTask> NewClosure(Closure&& closure,
 // so assumptions about lifetimes of pending tasks should not be made.
 class RTC_LOCKABLE TaskQueue {
  public:
+  class Impl;
+
   // TaskQueue priority levels. On some platforms these will map to thread
   // priorities, on others such as Mac and iOS, GCD queue priorities.
   enum class Priority {
@@ -163,6 +165,10 @@ class RTC_LOCKABLE TaskQueue {
 
   explicit TaskQueue(const char* queue_name,
                      Priority priority = Priority::NORMAL);
+  // Only implemented on some platforms. Used for allowing
+  // custom |impl| implementations.
+  explicit TaskQueue(scoped_refptr<Impl> impl);
+
   ~TaskQueue();
 
   static TaskQueue* Current();
@@ -232,7 +238,6 @@ class RTC_LOCKABLE TaskQueue {
   }
 
  private:
-  class Impl;
   const scoped_refptr<Impl> impl_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(TaskQueue);
