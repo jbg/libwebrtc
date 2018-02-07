@@ -575,6 +575,30 @@
     },
     {
       "key": {
+        "uuid": "d7675aed_60ff83a2",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-02-07T14:46:01Z",
+      "side": 1,
+      "message": "I\u0027m not instituting a blanket ban on //nogncheck, and from the discussion above it sounds like using a //nogncheck is the right trade-off. Your call. I think we seem to agree where we should be heading :)",
+      "parentUuid": "01ff74b5_5603dc2c",
+      "range": {
+        "startLine": 100,
+        "startChar": 40,
+        "endLine": 100,
+        "endChar": 49
+      },
+      "revId": "6a6785f2a6bf1c92188d728a0c1beffd53cf4efa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3fa9209d_b7153ce0",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 2
