@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "398af24a_ebe7956a",
+        "filename": "modules/audio_device/android/audio_record_jni.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-02-08T13:17:23Z",
+      "side": 1,
+      "message": "nit: LS_WARNING\n\nAlso, we should stick to DLOG here.",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 19
+      },
+      "revId": "7a1f8c2a61b7d4cfdb09ae6557a77515b8bc0a44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f054ac0_903c548d",
+        "filename": "modules/audio_device/android/audio_track_jni.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-02-08T13:17:23Z",
+      "side": 1,
+      "message": "LS_WARNING + DLOG",
+      "revId": "7a1f8c2a61b7d4cfdb09ae6557a77515b8bc0a44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
