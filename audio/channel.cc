@@ -1209,9 +1209,7 @@ int Channel::GetRTPStatistics(CallStatistics& stats) {
   }
 
   stats.fractionLost = statistics.fraction_lost;
-  stats.cumulativeLost = statistics.packets_lost;
   stats.extendedMax = statistics.extended_highest_sequence_number;
-  stats.jitterSamples = statistics.jitter;
 
   // --- RTT
   stats.rttMs = GetRTT(true);
@@ -1222,9 +1220,12 @@ int Channel::GetRTPStatistics(CallStatistics& stats) {
   uint32_t packetsSent(0);
   size_t bytesReceived(0);
   uint32_t packetsReceived(0);
+  uint32_t packetsLost(0);
+  uint32_t jitter(0);
 
   if (statistician) {
-    statistician->GetDataCounters(&bytesReceived, &packetsReceived);
+    statistician->GetDataCounters(&bytesReceived, &packetsReceived,
+                                  &packetsLost, &jitter);
   }
 
   if (_rtpRtcpModule->DataCountersRTP(&bytesSent, &packetsSent) != 0) {
@@ -1237,6 +1238,8 @@ int Channel::GetRTPStatistics(CallStatistics& stats) {
   stats.packetsSent = packetsSent;
   stats.bytesReceived = bytesReceived;
   stats.packetsReceived = packetsReceived;
+  stats.cumulativeLost = packetsLost;
+  stats.jitterSamples = jitter;
 
   // --- Timestamps
   {

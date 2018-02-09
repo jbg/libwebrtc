@@ -35,7 +35,9 @@ class StreamStatisticianImpl : public StreamStatistician {
   bool GetStatistics(RtcpStatistics* statistics, bool reset) override;
   bool GetActiveStatisticsAndReset(RtcpStatistics* statistics);
   void GetDataCounters(size_t* bytes_received,
-                       uint32_t* packets_received) const override;
+                       uint32_t* packets_received,
+                       uint32_t* packets_lost,
+                       uint32_t* jitter) const override;
   void GetReceiveStreamDataCounters(
       StreamDataCounters* data_counters) const override;
   uint32_t BitrateReceived() const override;
@@ -80,9 +82,8 @@ class StreamStatisticianImpl : public StreamStatistician {
   StreamDataCounters receive_counters_;
 
   // Counter values when we sent the last report.
-  uint32_t last_report_inorder_packets_;
-  uint32_t last_report_old_packets_;
-  uint16_t last_report_seq_max_;
+  uint32_t last_report_received_packets_;
+  uint16_t last_report_extended_seq_max_;
   RtcpStatistics last_reported_statistics_;
 
   // stream_lock_ shouldn't be held when calling callbacks.
