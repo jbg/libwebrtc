@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "api/peerconnectioninterface.h"
+#include "call/call.h"
 #include "pc/datachannel.h"
 #include "pc/rtptransceiver.h"
 
