@@ -122,7 +122,11 @@ LogMessage::LogMessage(const char* file,
                        LogErrorContext err_ctx,
                        int err,
                        const char* module)
-    : severity_(sev), tag_(kLibjingle) {
+    : severity_(sev),  loggable_(true), tag_(kLibjingle){
+  if (sev < min_sev_) {
+    loggable_ = false;
+    return;
+  }
   if (timestamp_) {
     // Use SystemTimeMillis so that even if tests use fake clocks, the timestamp
     // in log messages represents the real system time.
@@ -198,6 +202,9 @@ LogMessage::LogMessage(const char* file,
 }
 
 LogMessage::~LogMessage() {
+  if (!loggable_){
+    return;
+  }
   if (!extra_.empty())
     print_stream_ << " : " << extra_;
   print_stream_ << std::endl;
