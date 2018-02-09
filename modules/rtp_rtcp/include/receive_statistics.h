@@ -37,9 +37,16 @@ class StreamStatistician {
  public:
   virtual ~StreamStatistician();
 
+  // If |reset| is true, re-calculates and returns RTCP statistics. Otherwise,
+  // returns statistics from the last generated report.
   virtual bool GetStatistics(RtcpStatistics* statistics, bool reset) = 0;
+
+  // Returns live counters (as opposed to "last generated report" values from
+  // GetStatistics).
   virtual void GetDataCounters(size_t* bytes_received,
-                               uint32_t* packets_received) const = 0;
+                               uint32_t* packets_received,
+                               uint32_t* packets_lost,
+                               uint32_t* jitter) const = 0;
 
   // Gets received stream data counters (includes reset counter values).
   virtual void GetReceiveStreamDataCounters(
