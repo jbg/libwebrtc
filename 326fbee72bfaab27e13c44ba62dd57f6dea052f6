@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57767af8_fc087501",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-02-09T12:45:52Z",
+      "side": 1,
+      "message": "Can this still be final?",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3686894f_99de1933",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-02-09T12:45:52Z",
+      "side": 1,
+      "message": "Do we know which on of these that can throw? Can we make the try scope a bit smaller?",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 95
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
