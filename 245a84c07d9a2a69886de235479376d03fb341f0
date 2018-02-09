@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2c091f3_d9f8c839",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-09T13:26:35Z",
+      "side": 1,
+      "message": "Is this still true? If so, two questions:\n\n1. Where does it happen?\n\n2. Is using the above constructor, without audio_mixer and audio_processing, equivalent to calling this method with null pointers for the last two arguments?",
+      "range": {
+        "startLine": 1266,
+        "startChar": 0,
+        "endLine": 1266,
+        "endChar": 78
+      },
+      "revId": "245a84c07d9a2a69886de235479376d03fb341f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43fe59a4_85559654",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-09T13:26:35Z",
+      "side": 1,
+      "message": "This is a bit curious. This declaration works, with only a forward declare of AudioMixer. But in order to call this method, even with a null AudioMixer, a complete declaration is required.\n\nI tried adding an include of api/audio/audio_mixer.h and corresponding dependency, but that results in the cycle\n\n  //modules:module_api -\u003e\n  //api:libjingle_peerconnection_api -\u003e\n  //api:audio_mixer_api -\u003e\n  //modules:module_api\n\nTo solve, \n\n1. audio_mixer_api shouldn\u0027t depend on module_api. Declaration of AudioFrame should mode elsewhere.\n\n2. module_api shouldn\u0027t depend on libjingle_peerconnection_api.",
+      "range": {
+        "startLine": 1278,
+        "startChar": 1,
+        "endLine": 1278,
+        "endChar": 47
+      },
+      "revId": "245a84c07d9a2a69886de235479376d03fb341f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
