@@ -224,6 +224,8 @@ class LogMessage {
   // The severity level of this message
   LoggingSeverity severity_;
 
+  bool loggable_;
+
   // The Android debug output tag.
   std::string tag_;
 
@@ -269,20 +271,13 @@ class LogMessageVoidify {
   void operator&(std::ostream&) { }
 };
 
-#define RTC_LOG_SEVERITY_PRECONDITION(sev) \
-  !(rtc::LogMessage::Loggable(sev)) \
-    ? (void) 0 \
-    : rtc::LogMessageVoidify() &
-
 #define RTC_LOG(sev) \
-  RTC_LOG_SEVERITY_PRECONDITION(rtc::sev) \
-    rtc::LogMessage(__FILE__, __LINE__, rtc::sev).stream()
+  rtc::LogMessage(__FILE__, __LINE__, rtc::sev).stream()
 
 // The _V version is for when a variable is passed in.  It doesn't do the
 // namespace concatenation.
 #define RTC_LOG_V(sev) \
-  RTC_LOG_SEVERITY_PRECONDITION(sev) \
-    rtc::LogMessage(__FILE__, __LINE__, sev).stream()
+  rtc::LogMessage(__FILE__, __LINE__, sev).stream()
 
 // The _F version prefixes the message with the current function name.
 #if (defined(__GNUC__) && !defined(NDEBUG)) || defined(WANT_PRETTY_LOG_F)
@@ -304,10 +299,9 @@ inline bool LogCheckLevel(LoggingSeverity sev) {
 }
 
 #define RTC_LOG_E(sev, ctx, err, ...) \
-  RTC_LOG_SEVERITY_PRECONDITION(rtc::sev) \
-    rtc::LogMessage(__FILE__, __LINE__, rtc::sev, \
-                    rtc::ERRCTX_ ## ctx, err , ##__VA_ARGS__)   \
-        .stream()
+  rtc::LogMessage(__FILE__, __LINE__, rtc::sev, \
+                  rtc::ERRCTX_ ## ctx, err , ##__VA_ARGS__)   \
+      .stream()
 
 #define RTC_LOG_T(sev) RTC_LOG(sev) << this << ": "
 
@@ -340,7 +334,6 @@ inline bool LogCheckLevel(LoggingSeverity sev) {
 #endif  // WEBRTC_WIN
 
 #define RTC_LOG_TAG(sev, tag)        \
-  RTC_LOG_SEVERITY_PRECONDITION(sev) \
   rtc::LogMessage(nullptr, 0, sev, tag).stream()
 
 #define RTC_PLOG(sev, err) \
