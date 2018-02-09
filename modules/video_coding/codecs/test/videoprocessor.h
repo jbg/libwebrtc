@@ -56,7 +56,7 @@ class VideoProcessor {
                  VideoDecoderList* decoders,
                  FrameReader* input_frame_reader,
                  const TestConfig& config,
-                 std::vector<Stats>* stats,
+                 Stats* stats,
                  IvfFileWriterList* encoded_frame_writers,
                  FrameWriterList* decoded_frame_writers);
   ~VideoProcessor();
@@ -237,7 +237,7 @@ class VideoProcessor {
       RTC_GUARDED_BY(sequence_checker_);
 
   // Statistics.
-  std::vector<Stats>* const stats_;
+  Stats* const stats_;
 
   rtc::SequencedTaskChecker sequence_checker_;
 
