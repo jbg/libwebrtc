@@ -28,6 +28,9 @@ const int kCifHeight = 288;
 const int kNumFramesShort = 100;
 #endif
 const int kNumFramesLong = 300;
+
+const size_t kSvcBitratesKbps[] = {30,  50,  100,  200,  300, 400,
+                                   600, 800, 1200, 1800, 2500};
 }  // namespace
 
 class VideoProcessorIntegrationTestLibvpx
@@ -42,6 +45,40 @@ class VideoProcessorIntegrationTestLibvpx
     config_.hw_encoder = false;
     config_.hw_decoder = false;
     config_.encoded_frame_checker = &qp_frame_checker_;
+  }
+
+  void PrintVideoStatistic(std::map<size_t, Stats>* bitrate_stats) {
+    printf("\n%10s %10s %10s %10s %10s %10s %10s %10s %10s\n", "uplink",
+           "width", "height", "fps", "downlink", "psnr", "ssim", "enc_fps",
+           "dec_fps");
+
+    const size_t num_simulcast_or_spatial_layers = std::max(
+        config_.NumberOfSimulcastStreams(), config_.NumberOfSpatialLayers());
+    const size_t num_temporal_layers = config_.NumberOfTemporalLayers();
+
+    for (auto& it : *bitrate_stats) {
+      const size_t uplink_kbps = it.first;
+
+      for (size_t spatial_layer_idx = 0;
+           spatial_layer_idx < num_simulcast_or_spatial_layers;
+           ++spatial_layer_idx) {
+        for (size_t temporal_layer_idx = 0;
+             temporal_layer_idx < num_temporal_layers; ++temporal_layer_idx) {
+          VideoStatistic video_stat = it.second.SliceAndCalcVideoStatistic(
+              0, config_.num_frames - 1, spatial_layer_idx, temporal_layer_idx,
+              uplink_kbps, 30, false);
+
+          if (video_stat.length_bytes > 0) {
+            printf(
+                "%10zu %10zu %10zu %10.2f %10zu %10.2f %10.2f %10.2f %10.2f\n",
+                uplink_kbps, video_stat.width, video_stat.height,
+                video_stat.framerate_fps, video_stat.bitrate_kbps,
+                video_stat.avg_psnr, video_stat.avg_ssim,
+                video_stat.encoding_speed_fps, video_stat.decoding_speed_fps);
+          }
+        }
+      }
+    }
   }
 
  private:
@@ -339,6 +376,50 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
 
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
                               &quality_thresholds, nullptr, nullptr);
+}
+
+TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SimulcastVP8RdPerf) {
+  config_.filename = "ConferenceMotion_1280_720_50";
+  config_.input_filename = ResourcePath(config_.filename, "yuv");
+  config_.num_frames = 300;
+  config_.SetCodecSettings(kVideoCodecVP8, 3, 1, 3, false, true, true, false,
+                           true, 1280, 720);
+
+  std::map<size_t, Stats> bitrate_stats;
+
+  for (const auto bitrate_kbps : kSvcBitratesKbps) {
+    std::vector<RateProfile> rate_profiles = {
+        {bitrate_kbps, 30, config_.num_frames}};
+
+    ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
+                                nullptr);
+
+    bitrate_stats[bitrate_kbps] = GetStats();
+  }
+
+  PrintVideoStatistic(&bitrate_stats);
+}
+
+TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SvcVP9RdPerf) {
+  config_.filename = "ConferenceMotion_1280_720_50";
+  config_.input_filename = ResourcePath(config_.filename, "yuv");
+  config_.num_frames = 300;
+  config_.SetCodecSettings(kVideoCodecVP9, 1, 3, 3, false, true, true, false,
+                           true, 1280, 720);
+
+  std::map<size_t, Stats> bitrate_stats;
+
+  for (const auto bitrate_kbps : kSvcBitratesKbps) {
+    std::vector<RateProfile> rate_profiles = {
+        {bitrate_kbps, 30, config_.num_frames}};
+
+    ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
+                                nullptr);
+
+    bitrate_stats[bitrate_kbps] = GetStats();
+  }
+
+  PrintVideoStatistic(&bitrate_stats);
 }
 
 }  // namespace test
