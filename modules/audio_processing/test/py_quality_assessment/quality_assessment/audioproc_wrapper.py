@@ -67,7 +67,7 @@ class AudioProcWrapper(object):
       return
 
     # Load configuration.
-    self._config = data_access.AudioProcConfigFile.Load(config_filepath)
+    self._config = data_access.JsonConfigFile.Load(config_filepath)
 
     # Set remaining parameters.
     if not os.path.exists(capture_input_filepath):

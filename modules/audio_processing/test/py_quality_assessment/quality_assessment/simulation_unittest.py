@@ -89,7 +89,7 @@ class TestApmModuleSimulator(unittest.TestCase):
 
     # Run all simulations.
     simulator.Run(
-        config_filepaths=config_files,
+        apm_config_filepaths=config_files,
         capture_input_filepaths=input_files,
         test_data_generator_names=test_data_generators,
         eval_score_names=eval_scores,
@@ -133,7 +133,7 @@ class TestApmModuleSimulator(unittest.TestCase):
 
     # The input files are created during the simulation.
     simulator.Run(
-        config_filepaths=['apm_configs/default.json'],
+        apm_config_filepaths=['apm_configs/default.json'],
         capture_input_filepaths=input_files,
         test_data_generator_names=['identity'],
         eval_score_names=['audio_level_peak'],
@@ -166,7 +166,7 @@ class TestApmModuleSimulator(unittest.TestCase):
 
     # Should work.
     simulator.Run(
-        config_filepaths=config_files,
+        apm_config_filepaths=config_files,
         capture_input_filepaths=input_files,
         test_data_generator_names=['identity'],
         eval_score_names=eval_scores,
@@ -175,7 +175,7 @@ class TestApmModuleSimulator(unittest.TestCase):
 
     # Warning expected.
     simulator.Run(
-        config_filepaths=config_files,
+        apm_config_filepaths=config_files,
         capture_input_filepaths=input_files,
         test_data_generator_names=['white_noise'],  # Not allowed with THD.
         eval_score_names=eval_scores,

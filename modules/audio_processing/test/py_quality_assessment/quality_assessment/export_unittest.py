@@ -51,7 +51,7 @@ class TestExport(unittest.TestCase):
             audioproc_wrapper.AudioProcWrapper.DEFAULT_APM_SIMULATOR_BIN_PATH),
         evaluator=evaluation.ApmModuleEvaluator())
     simulator.Run(
-        config_filepaths=['apm_configs/default.json'],
+        apm_config_filepaths=['apm_configs/default.json'],
         capture_input_filepaths=[
             os.path.join(self._tmp_path, 'pure_tone-440_1000.wav'),
             os.path.join(self._tmp_path, 'pure_tone-880_1000.wav'),

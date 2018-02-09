@@ -54,7 +54,7 @@ def _GenerateDefaultOverridden(config_override):
         config_filename))
     logging.debug('config file <%s> | %s', config_filepath, config)
 
-    data_access.AudioProcConfigFile.Save(config_filepath, config)
+    data_access.JsonConfigFile.Save(config_filepath, config)
     logging.info('config file created: <%s>', config_filepath)
 
 

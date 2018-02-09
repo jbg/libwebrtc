@@ -88,10 +88,10 @@ class Metadata(object):
       json.dump(filepaths, f)
 
 
-class AudioProcConfigFile(object):
-  """Data access to load/save APM simulator argument lists.
+class JsonConfigFile(object):
+  """Data access to load/save argument lists.
 
-  The arguments stored in the config files are used to control the APM flags.
+  The arguments stored in the config files are used to control simulation flags.
   """
 
   def __init__(self):
@@ -99,7 +99,7 @@ class AudioProcConfigFile(object):
 
   @classmethod
   def Load(cls, filepath):
-    """Loads a configuration file for an APM simulator.
+    """Loads a configuration file.
 
     Args:
       filepath: path to the configuration file.
@@ -112,7 +112,7 @@ class AudioProcConfigFile(object):
 
   @classmethod
   def Save(cls, filepath, config):
-    """Saves a configuration file for an APM simulator.
+    """Saves a configuration file.
 
     Args:
       filepath: path to the configuration file.

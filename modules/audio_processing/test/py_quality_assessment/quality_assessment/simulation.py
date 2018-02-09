@@ -20,6 +20,7 @@ from . import eval_scores
 from . import exceptions
 from . import input_mixer
 from . import input_signal_creator
+from . import qa_config
 from . import signal_processing
 from . import test_data_generation
 
@@ -41,7 +42,16 @@ class ApmModuleSimulator(object):
   _PREFIX_SCORE = 'score-'
 
   def __init__(self, test_data_generator_factory, evaluation_score_factory,
-               ap_wrapper, evaluator, external_vads=None):
+               ap_wrapper, evaluator, qa_config_filepath=None,
+               external_vads=None):
+    if qa_config_filepath is None:
+      self._qa_config = qa_config.Param.DEFAULT_CONFIG
+    else:
+      self._qa_config = data_access.JsonConfigFile.Load(qa_config_filepath)
+      if qa_config.Param.NAME not in self._qa_config:
+        self._qa_config[qa_config.Param.NAME] = self._ExtractFileName(
+            qa_config_filepath)
+
     if external_vads is None:
       external_vads = {}
     self._test_data_generator_factory = test_data_generator_factory
@@ -66,7 +76,7 @@ class ApmModuleSimulator(object):
     self._output_cache_path = None
     self._test_data_generators = None
     self._evaluation_score_workers = None
-    self._config_filepaths = None
+    self._apm_config_filepaths = None
     self._capture_input_filepaths = None
     self._render_input_filepaths = None
     self._echo_path_simulator_class = None
@@ -99,7 +109,7 @@ class ApmModuleSimulator(object):
   def GetPrefixScore(cls):
     return cls._PREFIX_SCORE
 
-  def Run(self, config_filepaths, capture_input_filepaths,
+  def Run(self, apm_config_filepaths, capture_input_filepaths,
           test_data_generator_names, eval_score_names, output_dir,
           render_input_filepaths=None, echo_path_simulator_name=(
               echo_path_simulation.NoEchoPathSimulator.NAME)):
@@ -111,7 +121,7 @@ class ApmModuleSimulator(object):
     equal. The two lists are used to form pairs of capture and render input.
 
     Args:
-      config_filepaths: set of APM configuration files to test.
+      apm_config_filepaths: set of APM configuration files to test.
       capture_input_filepaths: set of capture input audio track files to test.
       test_data_generator_names: set of test data generator names to test.
       eval_score_names: set of evaluation score names to test.
@@ -144,7 +154,8 @@ class ApmModuleSimulator(object):
                 name) in eval_score_names]
 
     # Set APM configuration file paths.
-    self._config_filepaths = self._CreatePathsCollection(config_filepaths)
+    self._apm_config_filepaths = self._CreatePathsCollection(
+        apm_config_filepaths)
 
     # Set probing signal file paths.
     if render_input_filepaths is None:
@@ -174,8 +185,8 @@ class ApmModuleSimulator(object):
     without_render_input = self._render_input_filepaths is None
 
     # Try different APM config files.
-    for config_name in self._config_filepaths:
-      config_filepath = self._config_filepaths[config_name]
+    for apm_config_name in self._apm_config_filepaths:
+      apm_config_filepath = self._apm_config_filepaths[apm_config_name]
 
       # Try different capture-render pairs.
       for capture_input_name in self._capture_input_filepaths:
@@ -209,13 +220,15 @@ class ApmModuleSimulator(object):
         for test_data_generators in self._test_data_generators:
           logging.info('APM config preset: <%s>, capture: <%s>, render: <%s>,'
                        'test data generator: <%s>,  echo simulator: <%s>',
-                       config_name, capture_input_name, render_input_name,
+                       apm_config_name, capture_input_name, render_input_name,
                        test_data_generators.NAME, echo_path_simulator.NAME)
 
           # Output path for the generated test data.
+          datagen_name = test_data_generators.NAME + '-' + self._qa_config[
+              qa_config.Param.NAME]
           test_data_cache_path = os.path.join(
               capture_annotations_cache_path,
-              self._PREFIX_TEST_DATA_GEN + test_data_generators.NAME)
+              self._PREFIX_TEST_DATA_GEN + datagen_name)
           data_access.MakeDirectory(test_data_cache_path)
           logging.debug('test data cache path: <%s>', test_data_cache_path)
 
@@ -230,18 +243,18 @@ class ApmModuleSimulator(object):
           # Full output path.
           output_path = os.path.join(
               self._base_output_path,
-              self._PREFIX_APM_CONFIG + config_name,
+              self._PREFIX_APM_CONFIG + apm_config_name,
               self._PREFIX_CAPTURE + capture_input_name,
               self._PREFIX_RENDER + render_input_name,
               self._PREFIX_ECHO_SIMULATOR + echo_path_simulator.NAME,
-              self._PREFIX_TEST_DATA_GEN + test_data_generators.NAME)
+              self._PREFIX_TEST_DATA_GEN + datagen_name)
           data_access.MakeDirectory(output_path)
           logging.debug('output path: <%s>', output_path)
 
           self._Simulate(test_data_generators, capture_input_filepath,
                          render_input_filepath, test_data_cache_path,
                          echo_test_data_cache_path, output_path,
-                         config_filepath, echo_path_simulator)
+                         apm_config_filepath, echo_path_simulator)
 
   @staticmethod
   def _CreateInputSignal(input_signal_filepath):
@@ -278,7 +291,7 @@ class ApmModuleSimulator(object):
 
   def _Simulate(self, test_data_generators, clean_capture_input_filepath,
                 render_input_filepath, test_data_cache_path,
-                echo_test_data_cache_path, output_path, config_filepath,
+                echo_test_data_cache_path, output_path, apm_config_filepath,
                 echo_path_simulator):
     """Runs a single set of simulation.
 
@@ -295,7 +308,7 @@ class ApmModuleSimulator(object):
       test_data_cache_path: path for the generated test audio track files.
       echo_test_data_cache_path: path for the echo simulator.
       output_path: base output path for the test data generator.
-      config_filepath: APM configuration file to test.
+      apm_config_filepath: APM configuration file to test.
       echo_path_simulator: EchoPathSimulator instance.
     """
     # Generate pairs of noisy input and reference signal files.
@@ -315,28 +328,28 @@ class ApmModuleSimulator(object):
     apm_input_metadata['test_data_gen_config'] = None
 
     # For each test data pair, simulate a call and evaluate.
-    for config_name in test_data_generators.config_names:
-      logging.info(' - test data generator config: <%s>', config_name)
-      apm_input_metadata['test_data_gen_config'] = config_name
+    for apm_config_name in test_data_generators.config_names:
+      logging.info(' - test data generator config: <%s>', apm_config_name)
+      apm_input_metadata['test_data_gen_config'] = apm_config_name
 
       # Paths to the test data generator output.
       # Note that the reference signal does not depend on the render input
       # which is optional.
       noisy_capture_input_filepath = (
-          test_data_generators.noisy_signal_filepaths[config_name])
+          test_data_generators.noisy_signal_filepaths[apm_config_name])
       reference_signal_filepath = (
-          test_data_generators.reference_signal_filepaths[config_name])
+          test_data_generators.reference_signal_filepaths[apm_config_name])
 
       # Output path for the evaluation (e.g., APM output file).
       evaluation_output_path = test_data_generators.apm_output_paths[
-          config_name]
+          apm_config_name]
 
       # Paths to the APM input signals.
       echo_path_filepath = echo_path_simulator.Simulate(
           echo_test_data_cache_path)
       apm_input_filepath = input_mixer.ApmInputMixer.Mix(
           echo_test_data_cache_path, noisy_capture_input_filepath,
-          echo_path_filepath)
+          echo_path_filepath, self._qa_config)
 
       # Extract annotations for the APM input mix.
       apm_input_basepath, apm_input_filename = os.path.split(
@@ -347,7 +360,7 @@ class ApmModuleSimulator(object):
 
       # Simulate a call using APM.
       self._audioproc_wrapper.Run(
-          config_filepath=config_filepath,
+          config_filepath=apm_config_filepath,
           capture_input_filepath=apm_input_filepath,
           render_input_filepath=render_input_filepath,
           output_path=evaluation_output_path)
@@ -417,6 +430,6 @@ class ApmModuleSimulator(object):
       filepaths_collection[name] = os.path.abspath(filepath)
     return filepaths_collection
 
-  @classmethod
-  def _ExtractFileName(cls, filepath):
+  @staticmethod
+  def _ExtractFileName(filepath):
     return os.path.splitext(os.path.split(filepath)[-1])[0]

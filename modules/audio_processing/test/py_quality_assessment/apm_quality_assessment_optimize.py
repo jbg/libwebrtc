@@ -87,7 +87,7 @@ def _ConfigurationAndScores(data_frame, params,
                                             params_to_optimize)
 
   for config_name in config_names:
-    config_json = data_access.AudioProcConfigFile.Load(
+    config_json = data_access.JsonConfigFile.Load(
         os.path.join(config_dir, config_name + ".json"))
     scores = {}
     data_cell = data_frame[data_frame.apm_config == config_name]

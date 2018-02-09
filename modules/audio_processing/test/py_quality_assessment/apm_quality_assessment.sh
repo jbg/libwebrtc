@@ -16,7 +16,6 @@ if [ -d "${POLQA_PATH}" ]; then
   echo "POLQA found in ${POLQA_PATH}"
 else
   echo "POLQA not found in ${POLQA_PATH}"
-  exit 1
 fi
 
 # Path to the Aechen IR database.
@@ -50,6 +49,9 @@ OUTPUT_PATH=output
 chmod +x apm_quality_assessment_gencfgs.py
 ./apm_quality_assessment_gencfgs.py
 
+QA_CONFIG_FILEPATH=qa_config.json
+echo "{\"speech_to_echo_db\": 15}" > qa_config.json
+
 # Customize APM configurations if needed.
 APM_CONFIGS=(apm_configs/*.json)
 
@@ -71,6 +73,7 @@ for capture_signal_filepath in "${CAPTURE_SIGNALS[@]}" ; do
     ./apm_quality_assessment.py \
         --polqa_path ${POLQA_PATH}\
         --air_db_path ${AECHEN_IR_DATABASE_PATH}\
+        --qa_config_file ${QA_CONFIG_FILEPATH}\
         -i ${capture_signal_filepath} \
         -o ${OUTPUT_PATH} \
         -t ${test_data_gen_name} \

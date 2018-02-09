@@ -75,7 +75,7 @@ def FilterScoresByParams(data_frame, filter_params, score_name, config_dir):
   config_names = data_frame['apm_config'].drop_duplicates().values.tolist()
 
   for config_name in config_names:
-    config_json = data_access.AudioProcConfigFile.Load(
+    config_json = data_access.JsonConfigFile.Load(
         os.path.join(config_dir, config_name + '.json'))
     data_with_config = data_frame[data_frame.apm_config == config_name]
     data_cell_scores = data_with_config[data_with_config.eval_score_name ==

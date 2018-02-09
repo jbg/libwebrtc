@@ -60,6 +60,10 @@ def _InstanceArgumentsParser():
                             'called'),
                       default=[_DEFAULT_CONFIG_FILE])
 
+  parser.add_argument('--qa_config_file', required=False,
+                      help='path to the settings file with QA module '
+                           'specific arguments.')
+
   parser.add_argument('-i', '--capture_input_files', nargs='+', required=True,
                       help='path to the capture input wav files (one or more)')
 
@@ -161,10 +165,11 @@ def main():
           polqa_tool_bin_path=os.path.join(args.polqa_path, _POLQA_BIN_NAME)),
       ap_wrapper=audioproc_wrapper.AudioProcWrapper(args.apm_sim_path),
       evaluator=evaluation.ApmModuleEvaluator(),
+      qa_config_filepath=args.qa_config_file,
       external_vads=external_vad.ExternalVad.ConstructVadDict(
           args.external_vad_paths, args.external_vad_names))
   simulator.Run(
-      config_filepaths=args.config_files,
+      apm_config_filepaths=args.config_files,
       capture_input_filepaths=args.capture_input_files,
       render_input_filepaths=args.render_input_files,
       echo_path_simulator_name=args.echo_path_simulator,

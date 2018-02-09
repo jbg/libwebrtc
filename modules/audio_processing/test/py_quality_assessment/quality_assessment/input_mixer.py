@@ -13,6 +13,7 @@ import logging
 import os
 
 from . import exceptions
+from . import qa_config
 from . import signal_processing
 
 
@@ -33,7 +34,8 @@ class ApmInputMixer(object):
     return cls._HARD_CLIPPING_LOG_MSG
 
   @classmethod
-  def Mix(cls, output_path, capture_input_filepath, echo_filepath):
+  def Mix(cls, output_path, capture_input_filepath, echo_filepath,
+          config=None):
     """Mixes capture and echo.
 
     Creates the overall capture input for APM by mixing the "echo-free" capture
@@ -54,12 +56,15 @@ class ApmInputMixer(object):
     Args:
       speech: AudioSegment instance.
       echo_path: AudioSegment instance or None.
+      config: Optional configuration.
 
     Returns:
       Path to the mix audio track file.
     """
     if echo_filepath is None:
       return capture_input_filepath
+    if config is None:
+      config = qa_config.Param.DEFAULT_CONFIG
 
     # Build the mix output file name as a function of the echo file name.
     # This ensures that if the internal parameters of the echo path simulator
@@ -83,7 +88,14 @@ class ApmInputMixer(object):
         raise exceptions.InputMixerException(
             'echo cannot be shorter than capture')
 
-      mix = echo_free_capture.overlay(echo)
+      speech_to_echo_db = 0
+      if qa_config.Param.SPEECH_TO_ECHO_DB in config:
+        speech_to_echo_db = config[qa_config.Param.SPEECH_TO_ECHO_DB]
+        logging.info('Mixing at custom speech-to-echo ratio %d dB',
+                     speech_to_echo_db)
+
+      mix = echo_free_capture + speech_to_echo_db
+      mix = mix.overlay(echo)
       signal_processing.SignalProcessingUtils.SaveWav(mix_filepath, mix)
 
     # Check if hard clipping occurs.
