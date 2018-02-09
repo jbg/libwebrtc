@@ -23,8 +23,6 @@ EVENT_START = \
 EVENT_END = 'OK ] CodecSettings/VideoProcessorIntegrationTestParameterized.'
 
 # Metrics to plot, tuple: (name to parse in file, label to use when plotting).
-BITRATE = ('Target bitrate', 'target bitrate (kbps)')
-FRAMERATE = ('Target framerate', 'fps')
 WIDTH = ('Width', 'width')
 HEIGHT = ('Height', 'height')
 FILENAME = ('Filename', 'clip')
@@ -36,19 +34,22 @@ CORES = ('# CPU cores used', 'CPU cores used')
 DENOISING = ('Denoising', 'denoising')
 RESILIENCE = ('Resilience', 'resilience')
 ERROR_CONCEALMENT = ('Error concealment', 'error concealment')
-QP = ('Avg QP', 'QP avg')
 CPU_USAGE = ('CPU usage %', 'CPU usage (%)')
-PSNR = ('Avg PSNR', 'PSNR (dB)')
-SSIM = ('Avg SSIM', 'SSIM')
-ENC_BITRATE = ('Encoded bitrate', 'encoded bitrate (kbps)')
-NUM_FRAMES = ('# input frames', 'num frames')
-NUM_DROPPED_FRAMES = ('# dropped frames', 'num dropped frames')
-TIME_TO_TARGET = ('Time to reach target bitrate',
+BITRATE = ('target_kbps', 'target bitrate (kbps)')
+FRAMERATE = ('input_fps', 'fps')
+QP = ('avg_qp', 'QP avg')
+PSNR = ('avg_psnr', 'PSNR (dB)')
+SSIM = ('avg_ssim', 'SSIM')
+ENC_BITRATE = ('bitrate_kbps', 'encoded bitrate (kbps)')
+NUM_FRAMES = ('num_input_frames', 'num frames')
+NUM_DROPPED_FRAMES = ('num_dropped_frames', 'num dropped frames')
+TIME_TO_TARGET = ('time_to_reach_target_bitrate_sec',
                   'time to reach target rate (sec)')
-ENCODE_TIME = ('Frame encoding time', 'encode time (us)')
-DECODE_TIME = ('Frame decoding time', 'decode time (us)')
-AVG_KEY_FRAME_SIZE = ('Avg key frame size', 'avg key frame size (bytes)')
-AVG_DELTA_FRAME_SIZE = ('Avg delta frame size', 'avg delta frame size (bytes)')
+ENCODE_TIME = ('frame_encoding_time_us', 'encode time (us)')
+DECODE_TIME = ('frame_decoding_time_us', 'decode time (us)')
+AVG_KEY_FRAME_SIZE = ('avg_key_frame_size_bytes', 'avg key frame size (bytes)')
+AVG_DELTA_FRAME_SIZE = ('avg_delta_frame_size_bytes',
+                        'avg delta frame size (bytes)')
 
 # Settings.
 SETTINGS = [
