@@ -744,6 +744,8 @@ class VideoAnalyzer : public PacketReceiver,
     PrintResult("ssim", ssim_, " score");
     PrintResult("sender_time", sender_time_, " ms");
     PrintResult("receiver_time", receiver_time_, " ms");
+    PrintResult("network_time", end_to_end_ - sender_time - receiver_time,
+                " ms");
     PrintResult("total_delay_incl_network", end_to_end_, " ms");
     PrintResult("time_between_rendered_frames", rendered_delta_, " ms");
     PrintResult("encode_frame_rate", encode_frame_rate_, " fps");
