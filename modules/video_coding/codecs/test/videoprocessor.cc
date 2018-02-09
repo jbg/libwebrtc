@@ -100,7 +100,7 @@ VideoProcessor::VideoProcessor(webrtc::VideoEncoder* encoder,
                                VideoDecoderList* decoders,
                                FrameReader* input_frame_reader,
                                const TestConfig& config,
-                               std::vector<Stats>* stats,
+                               Stats* stats,
                                IvfFileWriterList* encoded_frame_writers,
                                FrameWriterList* decoded_frame_writers)
     : config_(config),
@@ -190,7 +190,7 @@ void VideoProcessor::ProcessFrame() {
   for (size_t simulcast_svc_idx = 0;
        simulcast_svc_idx < num_simulcast_or_spatial_layers_;
        ++simulcast_svc_idx) {
-    stats_->at(simulcast_svc_idx).AddFrame(rtp_timestamp);
+    stats_->AddFrame(rtp_timestamp, simulcast_svc_idx);
   }
 
   // For the highest measurement accuracy of the encode time, the start/stop
@@ -200,7 +200,7 @@ void VideoProcessor::ProcessFrame() {
        simulcast_svc_idx < num_simulcast_or_spatial_layers_;
        ++simulcast_svc_idx) {
     FrameStatistic* frame_stat =
-        stats_->at(simulcast_svc_idx).GetFrame(frame_number);
+        stats_->GetFrame(frame_number, simulcast_svc_idx);
     frame_stat->encode_start_ns = encode_start_ns;
   }
 
@@ -211,7 +211,7 @@ void VideoProcessor::ProcessFrame() {
        simulcast_svc_idx < num_simulcast_or_spatial_layers_;
        ++simulcast_svc_idx) {
     FrameStatistic* frame_stat =
-        stats_->at(simulcast_svc_idx).GetFrame(frame_number);
+        stats_->GetFrame(frame_number, simulcast_svc_idx);
     frame_stat->encode_return_code = encode_return_code;
   }
 
@@ -225,7 +225,7 @@ void VideoProcessor::ProcessFrame() {
         EncodedImage& encoded_image = last_encoded_frames_[simulcast_svc_idx];
 
         FrameStatistic* frame_stat =
-            stats_->at(simulcast_svc_idx).GetFrame(frame_number);
+            stats_->GetFrame(frame_number, simulcast_svc_idx);
 
         if (encoded_frame_writers_) {
           RTC_CHECK(encoded_frame_writers_->at(simulcast_svc_idx)
@@ -300,9 +300,8 @@ void VideoProcessor::FrameEncoded(
       encoded_image._encodedWidth * encoded_image._encodedHeight;
   frame_wxh_to_simulcast_svc_idx_[frame_wxh] = simulcast_svc_idx;
 
-  FrameStatistic* frame_stat =
-      stats_->at(simulcast_svc_idx)
-          .GetFrameWithTimestamp(encoded_image._timeStamp);
+  FrameStatistic* frame_stat = stats_->GetFrameWithTimestamp(
+      encoded_image._timeStamp, simulcast_svc_idx);
   const size_t frame_number = frame_stat->frame_number;
 
   // Reordering is unexpected. Frames of different layers have the same value
@@ -327,10 +326,15 @@ void VideoProcessor::FrameEncoded(
   // TODO(ssilkin): Implement bitrate allocation for VP9 SVC. For now set
   // target for base layers equal to total target to avoid devision by zero
   // at analysis.
-  frame_stat->target_bitrate_kbps =
-      bitrate_allocation_.GetSpatialLayerSum(
-          codec == kVideoCodecVP9 ? 0 : simulcast_svc_idx) /
-      1000;
+  if (codec == kVideoCodecVP9) {
+    frame_stat->target_bitrate_kbps = bitrate_allocation_.get_sum_kbps();
+  } else {
+    frame_stat->target_bitrate_kbps =
+        (bitrate_allocation_.GetBitrate(simulcast_svc_idx, temporal_idx) +
+         500) /
+        1000;
+  }
+
   frame_stat->encoded_frame_size_bytes = encoded_image._length;
   frame_stat->frame_type = encoded_image._frameType;
   frame_stat->temporal_layer_idx = temporal_idx;
@@ -365,9 +369,8 @@ void VideoProcessor::FrameDecoded(const VideoFrame& decoded_frame) {
   const size_t simulcast_svc_idx =
       frame_wxh_to_simulcast_svc_idx_[decoded_frame.size()];
 
-  FrameStatistic* frame_stat =
-      stats_->at(simulcast_svc_idx)
-          .GetFrameWithTimestamp(decoded_frame.timestamp());
+  FrameStatistic* frame_stat = stats_->GetFrameWithTimestamp(
+      decoded_frame.timestamp(), simulcast_svc_idx);
   const size_t frame_number = frame_stat->frame_number;
 
   // Reordering is unexpected. Frames of different layers have the same value
@@ -379,9 +382,8 @@ void VideoProcessor::FrameDecoded(const VideoFrame& decoded_frame) {
     // a freeze at playback.
     for (size_t num_dropped_frames = 0; num_dropped_frames < frame_number;
          ++num_dropped_frames) {
-      const FrameStatistic* prev_frame_stat =
-          stats_->at(simulcast_svc_idx)
-              .GetFrame(frame_number - num_dropped_frames - 1);
+      const FrameStatistic* prev_frame_stat = stats_->GetFrame(
+          frame_number - num_dropped_frames - 1, simulcast_svc_idx);
       if (prev_frame_stat->decoding_successful) {
         break;
       }

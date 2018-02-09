@@ -62,6 +62,38 @@ struct FrameStatistic {
   float ssim = 0.0;
 };
 
+struct VideoStatistic {
+  std::string ToString() const;
+
+  size_t width = 0;
+  size_t height = 0;
+
+  size_t length_bytes = 0;
+  size_t bitrate_kbps = 0;
+  float framerate_fps = 0;
+
+  float encoding_speed_fps = 0.0f;
+  float decoding_speed_fps = 0.0f;
+
+  float avg_delay_sec = 0.0f;
+  float max_key_frame_delay_sec = 0.0f;
+  float max_delta_frame_delay_sec = 0.0f;
+  float time_to_reach_target_bitrate_sec = 0.0f;
+
+  float avg_qp = 0.0f;
+
+  size_t num_encoded_frames = 0;
+  size_t num_decoded_frames = 0;
+  size_t num_key_frames = 0;
+  size_t num_spatial_resizes = 0;
+  size_t max_nalu_size_bytes = 0;
+
+  float avg_psnr = 0.0f;
+  float min_psnr = 0.0f;
+  float avg_ssim = 0.0f;
+  float min_ssim = 0.0f;
+};
+
 // Statistics for a sequence of processed frames. This class is not thread safe.
 class Stats {
  public:
@@ -69,17 +101,31 @@ class Stats {
   ~Stats() = default;
 
   // Creates a FrameStatistic for the next frame to be processed.
-  FrameStatistic* AddFrame(size_t timestamp);
+  FrameStatistic* AddFrame(size_t timestamp, size_t spatial_layer_idx);
 
   // Returns the FrameStatistic corresponding to |frame_number| or |timestamp|.
-  FrameStatistic* GetFrame(size_t frame_number);
-  FrameStatistic* GetFrameWithTimestamp(size_t timestamp);
+  FrameStatistic* GetFrame(size_t frame_number, size_t spatial_layer_idx);
+  FrameStatistic* GetFrameWithTimestamp(size_t timestamp,
+                                        size_t spatial_layer_idx);
 
-  size_t size() const;
+  VideoStatistic SliceAndCalcVideoStatistic(size_t first_frame_num,
+                                            size_t last_frame_num,
+                                            size_t spatial_layer_idx,
+                                            size_t temporal_layer_idx,
+                                            size_t target_kbps,
+                                            float input_fps,
+                                            bool aggregate_spatial_layers);
+
+  FrameStatistic AggregateFrameStatistic(size_t frame_num,
+                                         size_t spatial_layer_idx);
+
+  size_t Size(size_t spatial_layer_idx);
+
+  void Clear();
 
  private:
-  std::vector<FrameStatistic> stats_;
-  std::map<size_t, size_t> rtp_timestamp_to_frame_num_;
+  std::map<size_t, std::vector<FrameStatistic>> layer_idx_to_stats_;
+  std::map<size_t, std::map<size_t, size_t>> rtp_timestamp_to_frame_num_;
 };
 
 }  // namespace test
