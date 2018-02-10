@@ -231,6 +231,8 @@ rtc_source_set("rtc_base_approved_generic") {
     "refcountedobject.h",
     "refcounter.h",
     "scoped_ref_ptr.h",
+    "sequenced_task_checker.h",
+    "sequenced_task_checker_impl.h",
     "string_to_number.cc",
     "string_to_number.h",
     "stringencode.cc",
@@ -438,14 +440,24 @@ rtc_source_set("rtc_task_queue_impl") {
       ]
     }
   }
+
+  sources += [ "sequenced_task_checker_impl.cc" ]
 }
 
+# TODO(tommi): Remove this target as it's a noop now.
 rtc_static_library("sequenced_task_checker") {
-  sources = [
-    "sequenced_task_checker.h",
-    "sequenced_task_checker_impl.cc",
-    "sequenced_task_checker_impl.h",
-  ]
+  sources = []
+  if (is_win) {
+    sources = [
+      "noop.cc",
+    ]
+  }
+  if (is_ios || is_mac) {
+    sources = [
+      "noop.mm",
+    ]
+  }
+
   deps = [
     ":checks",
     ":rtc_base_approved",
