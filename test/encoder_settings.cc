@@ -18,6 +18,7 @@
 #include "rtc_base/refcountedobject.h"
 #include "test/fake_decoder.h"
 
+#include <iostream>
 namespace webrtc {
 namespace test {
 
@@ -93,6 +94,7 @@ void FillEncoderConfiguration(size_t num_streams,
 
 VideoReceiveStream::Decoder CreateMatchingDecoder(
     const VideoSendStream::Config::EncoderSettings& encoder_settings) {
+  std::cout << __func__ << " " << encoder_settings.payload_name << std::endl;
   VideoReceiveStream::Decoder decoder;
   decoder.payload_type = encoder_settings.payload_type;
   decoder.payload_name = encoder_settings.payload_name;
