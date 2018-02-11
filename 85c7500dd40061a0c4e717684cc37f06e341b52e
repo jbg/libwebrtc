@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c1ce1e2_91ebbbc6",
+        "filename": "modules/video_coding/codecs/test/stats.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "What does this mean? I think we should keep the VideoProcessor as simple as possible, and let the Stats objects do any complex aggregations needed.",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 57
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03a6e9d9_521d1296",
+        "filename": "modules/video_coding/codecs/test/stats.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "Clear |rtp_timestamp_to_frame_num_| as well?",
+      "range": {
+        "startLine": 271,
+        "startChar": 5,
+        "endLine": 271,
+        "endChar": 19
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "766afcdf_e45fa3b3",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "How about |target_bitrate_kbps| and |input_framerate_fps|, to be consistent with L75-76?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 25
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdd5d97e_6d61058c",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "What length is this?",
+      "range": {
+        "startLine": 74,
+        "startChar": 9,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "216925bd_618600ac",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "Move next to the other quality metrics, below?",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 90,
+        "endChar": 22
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ee8887_85a7fd42",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "Did git cl format do this? Looks a bit weird.",
+      "range": {
+        "startLine": 334,
+        "startChar": 9,
+        "endLine": 335,
+        "endChar": 13
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18b675c8_3f05b669",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "Is this needed as a member function, vs. just calling stats_.Clear() at the one place where ClearStats() is called now?",
+      "range": {
+        "startLine": 507,
+        "startChar": 5,
+        "endLine": 507,
+        "endChar": 48
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fed10527_1d45fd2b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-11T07:51:19Z",
+      "side": 1,
+      "message": "Not used, remove.",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 20
+      },
+      "revId": "85c7500dd40061a0c4e717684cc37f06e341b52e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
