@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d61b33a_799a3aa0",
+        "filename": "modules/audio_processing/test/py_quality_assessment/apm_quality_assessment.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 65,
+        "startChar": 46,
+        "endLine": 65,
+        "endChar": 47
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "211aefad_f7b12972",
+        "filename": "modules/audio_processing/test/py_quality_assessment/apm_quality_assessment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "This looks like a too generic way of passing parameters. I\u0027m open to changes and I might have misunderstood your CL, but I would prefer to keep parameters specialized in order to simplify the cache handling - critical to allow parallelization.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16b4ce61_9254b156",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/data_access.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "This ok to keep :) Thanks!",
+      "range": {
+        "startLine": 91,
+        "startChar": 6,
+        "endLine": 91,
+        "endChar": 20
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38b7b6a0_385ddf24",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/input_mixer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "|echo_free_capture| is an AudioSegment instance, whereas I expected a number from |speech_to_echo_db|; so I don\u0027t get what this sum does. Plus, the correct way of mixing |echo_free_capture| and |echo| while enforcing target SNR is using signal_processing.SignalProcessingUtils.MixSignals()",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9ef12c7_3fd5c5a1",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/qa_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "add one space after :",
+      "range": {
+        "startLine": 25,
+        "startChar": 24,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5196479f_4de7173e",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/simulation.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "Not sure about this because of how caching works and since the test data generator does not need to know anything about the echo simulation.\n\nThe cache is hierarchical to avoid duplicated wav files. For instance, let\u0027s say that one test data generator adds white noise and then the echo simulator adds to the noisy (near-end) speech a processed version of the far-end enforcing the wanted echo-to-nearend SNR. What happens with your change? Do we get two identical copies of the noisy mixes for different echo simulation parameters? Also, note that changing the structure of the cache affects the possibilty to run APM-QA in parallel as done in the .sh script.\n\nI will check this better, but maybe it\u0027s good to have an offline discussion.",
+      "range": {
+        "startLine": 227,
+        "startChar": 10,
+        "endLine": 228,
+        "endChar": 35
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d83fab9f_421c1d4c",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/simulation.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "The comment above applies to this change as well.",
+      "range": {
+        "startLine": 231,
+        "startChar": 43,
+        "endLine": 231,
+        "endChar": 55
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d05b49a2_ed98c71b",
+        "filename": "modules/audio_processing/test/py_quality_assessment/quality_assessment/simulation.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-12T16:18:57Z",
+      "side": 1,
+      "message": "I guess that your primary goal here is passing the params for the echo mixing, right? If so, I think it\u0027s better to instantiate ApmInputMixer, initialize it with the desired echo-to-nearend SNR and then call Mix() on the object.\n\nAnd what if one wants to try more than one echo-to-nearend SNR?\nI think the best way to go here is doing what I\u0027ve done for the test data generator, that is assiging a code formatted as \"\u003ctest data gen name\u003e-\u003ctest data gen params serialized\u003e\" (or sth like this). This will help keeping the cache organized well.\n\nI will check how the echo simulator is currently implemented and if it could be better to directly modify it instead.",
+      "range": {
+        "startLine": 352,
+        "startChar": 28,
+        "endLine": 352,
+        "endChar": 45
+      },
+      "revId": "4e38709f00aaf6472a0535d3621bcf9e0aabf2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
