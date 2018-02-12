@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0664939a_b51a7834",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 6000
+      },
+      "writtenOn": "2018-02-12T22:15:03Z",
+      "side": 1,
+      "message": "captureFormat is used after the try/catch block, so I need to define this variable outside of that block and I\u0027m not sure how to make it final in that case.  Any idea?",
+      "parentUuid": "57767af8_fc087501",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3686894f_99de1933",
         "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-09T12:45:52Z",
       "side": 1,
       "message": "Do we know which on of these that can throw? Can we make the try scope a bit smaller?",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 95
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77af5a87_fda0dec9",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 6000
+      },
+      "writtenOn": "2018-02-12T22:15:03Z",
+      "side": 1,
+      "message": "In the crashes we see i production it is the first one `camera.getParameters()`.\n\nBut the other lines can also trigger RuntimeException according to the android doc.   \n\nI can catch the exception just in the first one if you prefer, it solves our specific issue at least.  wdyt?",
+      "parentUuid": "3686894f_99de1933",
       "range": {
         "startLine": 89,
         "startChar": 1,
