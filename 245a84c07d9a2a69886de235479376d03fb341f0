@@ -45,6 +45,30 @@
       "revId": "245a84c07d9a2a69886de235479376d03fb341f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd7de317_286afe87",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-12T11:45:13Z",
+      "side": 1,
+      "message": "Discussed off-line. Will try to move AudioFrame to api/audio, and un-inline its methods.",
+      "parentUuid": "43fe59a4_85559654",
+      "range": {
+        "startLine": 1278,
+        "startChar": 1,
+        "endLine": 1278,
+        "endChar": 47
+      },
+      "revId": "245a84c07d9a2a69886de235479376d03fb341f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
