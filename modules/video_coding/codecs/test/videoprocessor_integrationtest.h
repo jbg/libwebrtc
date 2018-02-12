@@ -114,21 +114,12 @@ class VideoProcessorIntegrationTest : public testing::Test {
       const std::vector<QualityThresholds>* quality_thresholds,
       const BitstreamThresholds* bs_thresholds);
 
-  std::vector<FrameStatistic> ExtractLayerStats(
-      size_t target_spatial_layer_number,
-      size_t target_temporal_layer_number,
-      size_t first_frame_number,
-      size_t last_frame_number,
-      bool combine_layers);
-
-  void AnalyzeAndPrintStats(const std::vector<FrameStatistic>& stats,
-                            float target_bitrate_kbps,
-                            float target_framerate_fps,
-                            float input_duration_sec,
+  void VerifyVideoStatistic(const VideoStatistic& video_stat,
                             const RateControlThresholds* rc_thresholds,
                             const QualityThresholds* quality_thresholds,
-                            const BitstreamThresholds* bs_thresholds);
-  void PrintFrameLevelStats(const std::vector<FrameStatistic>& stats) const;
+                            const BitstreamThresholds* bs_thresholds,
+                            size_t target_kbps,
+                            float input_fps);
 
   void PrintSettings(rtc::TaskQueue* task_queue) const;
 
@@ -140,7 +131,7 @@ class VideoProcessorIntegrationTest : public testing::Test {
   std::unique_ptr<FrameReader> source_frame_reader_;
   std::vector<std::unique_ptr<IvfFileWriter>> encoded_frame_writers_;
   std::vector<std::unique_ptr<FrameWriter>> decoded_frame_writers_;
-  std::vector<Stats> stats_;
+  Stats stats_;
   std::unique_ptr<VideoProcessor> processor_;
   std::unique_ptr<CpuProcessTime> cpu_process_time_;
 };

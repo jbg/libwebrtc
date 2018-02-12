@@ -35,7 +35,7 @@ class VideoProcessorIntegrationTestLibvpx
  protected:
   VideoProcessorIntegrationTestLibvpx() {
     config_.filename = "foreman_cif";
-    config_.input_filename = ResourcePath(config_.filename, "yuv");
+    config_.filepath = ResourcePath(config_.filename, "yuv");
     config_.num_frames = kNumFramesLong;
     // Only allow encoder/decoder to use single core, for predictability.
     config_.use_single_core = true;
@@ -303,8 +303,8 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
 #endif
 TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
   config_.filename = "ConferenceMotion_1280_720_50";
-  config_.input_filename = ResourcePath(config_.filename, "yuv");
-  config_.num_frames = 100;
+  config_.filepath = ResourcePath(config_.filename, "yuv");
+  config_.num_frames = 50;
   config_.SetCodecSettings(kVideoCodecVP8, 3, 1, 3, true, true, false,
                            kResilienceOn, 1280, 720);
 
@@ -326,7 +326,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
 #endif
 TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
   config_.filename = "ConferenceMotion_1280_720_50";
-  config_.input_filename = ResourcePath(config_.filename, "yuv");
+  config_.filepath = ResourcePath(config_.filename, "yuv");
   config_.num_frames = 100;
   config_.SetCodecSettings(kVideoCodecVP9, 1, 3, 3, true, true, false,
                            kResilienceOn, 1280, 720);
