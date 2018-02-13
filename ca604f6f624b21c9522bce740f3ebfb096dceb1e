@@ -39,6 +39,30 @@
       "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23c19a9f_aa14949d",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-13T15:43:37Z",
+      "side": 1,
+      "message": "And make the assumption that any extra delay within IPC in chrome etc won\u0027t affect the end result much? Could make sense.",
+      "parentUuid": "38a220b7_3608d56b",
+      "range": {
+        "startLine": 1410,
+        "startChar": 0,
+        "endLine": 1412,
+        "endChar": 72
+      },
+      "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
