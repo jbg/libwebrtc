@@ -18,13 +18,13 @@ namespace test {
 namespace {
 
 // Loop variables.
-const size_t kBitrates[] = {500};
+const size_t kBitrates[] = {1280};
 const VideoCodecType kVideoCodecType[] = {kVideoCodecVP8};
 const bool kHwCodec[] = {false};
 
 // Codec settings.
-const int kNumSpatialLayers = 1;
-const int kNumTemporalLayers = 1;
+const int kNumSpatialLayers = 3;
+const int kNumTemporalLayers = 3;
 const bool kResilienceOn = kNumSpatialLayers > 1 || kNumTemporalLayers > 1;
 const bool kDenoisingOn = false;
 const bool kSpatialResizeOn = false;
@@ -59,7 +59,7 @@ class VideoProcessorIntegrationTestParameterized
                size_t framerate,
                const std::string& filename) {
     config_.filename = filename;
-    config_.input_filename = ResourcePath(filename, "yuv");
+    config_.filepath = ResourcePath(filename, "yuv");
     config_.use_single_core = kUseSingleCore;
     config_.measure_cpu = kMeasureCpu;
     config_.hw_encoder = hw_codec_;
@@ -112,6 +112,10 @@ TEST_P(VideoProcessorIntegrationTestParameterized, Process_320x240_30fps) {
 
 TEST_P(VideoProcessorIntegrationTestParameterized, Process_352x288_30fps) {
   RunTest(352, 288, 30, "foreman_cif");
+}
+
+TEST_P(VideoProcessorIntegrationTestParameterized, Process_1280x720_30fps) {
+  RunTest(1280, 720, 30, "FourPeople_1280x720_30");
 }
 
 }  // namespace test
