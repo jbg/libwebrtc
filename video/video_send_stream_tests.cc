@@ -38,6 +38,7 @@
 #include "test/frame_generator.h"
 #include "test/frame_generator_capturer.h"
 #include "test/frame_utils.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/null_transport.h"
 #include "test/rtcp_packet_parser.h"
@@ -644,6 +645,9 @@ class FlexfecObserver : public test::EndToEndTest {
         header_extensions_enabled_(header_extensions_enabled) {}
 
   size_t GetNumFlexfecStreams() const override { return 1; }
+  size_t GetNumVideoStreams() const override { return num_video_streams_; }
+
+  void SetNumVideoStreams(size_t value) { num_video_streams_ = value; }
 
  private:
   Action OnSendRtp(const uint8_t* packet, size_t length) override {
@@ -656,7 +660,9 @@ class FlexfecObserver : public test::EndToEndTest {
     } else {
       EXPECT_EQ(VideoSendStreamTest::kFakeVideoSendPayloadType,
                 header.payloadType);
-      EXPECT_EQ(VideoSendStreamTest::kVideoSendSsrcs[0], header.ssrc);
+      EXPECT_THAT(testing::make_tuple(VideoSendStreamTest::kVideoSendSsrcs,
+                                      num_video_streams_),
+                  testing::Contains(header.ssrc));
       sent_media_ = true;
     }
 
@@ -719,11 +725,19 @@ class FlexfecObserver : public test::EndToEndTest {
   bool sent_media_;
   bool sent_flexfec_;
   bool header_extensions_enabled_;
+  size_t num_video_streams_ = 1;
 };
 
 TEST_F(VideoSendStreamTest, SupportsFlexfecVp8) {
   std::unique_ptr<VideoEncoder> encoder(VP8Encoder::Create());
   FlexfecObserver test(false, false, "VP8", encoder.get());
+  RunBaseTest(&test);
+}
+
+TEST_F(VideoSendStreamTest, SupportsFlexfecSimulcastVp8) {
+  std::unique_ptr<VideoEncoder> encoder(VP8Encoder::Create());
+  FlexfecObserver test(false, false, "VP8", encoder.get());
+  test.SetNumVideoStreams(2);
   RunBaseTest(&test);
 }
 
