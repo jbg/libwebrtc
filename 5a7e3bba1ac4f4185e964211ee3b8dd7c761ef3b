@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12a7c4e9_dbee7b11",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2705,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-13T18:24:21Z",
+      "side": 1,
+      "message": "nit: period at the end of comment. Also may I suggest: \"Send information about the requested SDP semantics.\"",
+      "revId": "5a7e3bba1ac4f4185e964211ee3b8dd7c761ef3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
