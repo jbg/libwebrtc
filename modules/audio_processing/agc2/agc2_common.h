@@ -11,10 +11,30 @@
 #ifndef MODULES_AUDIO_PROCESSING_AGC2_AGC2_COMMON_H_
 #define MODULES_AUDIO_PROCESSING_AGC2_AGC2_COMMON_H_
 
+#include <cmath>
+#include <vector>
+
+#include "rtc_base/basictypes.h"
+
 namespace webrtc {
 
 constexpr float kMinSampleValue = -32768.f;
 constexpr float kMaxSampleValue = 32767.f;
+
+constexpr double kInputLevelScaling = 32768.0;
+const double kMinDbfs = -20.0 * std::log10(32768.0);
+
+// Number of interpolation points for each region of the limiter.
+// These values have been tuned to limit the interpolated gain curve error given
+// the limiter parameters and allowing a maximum error of +/- 32768^-1.
+constexpr size_t kInterpolatedGainCurveKneePoints = 22;
+constexpr size_t kInterpolatedGainCurveBeyondKneePoints = 10;
+constexpr size_t kInterpolatedGainCurveTotalPoints =
+    kInterpolatedGainCurveKneePoints + kInterpolatedGainCurveBeyondKneePoints;
+
+double DbfsToLinear(const double level);
+
+double LinearToDbfs(const double level);
 
 // TODO(aleloi): add the other constants as more AGC2 components are
 // added.
