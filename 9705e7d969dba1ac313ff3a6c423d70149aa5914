@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f735058e_398acca1",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-13T13:40:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "392b7a15_619b3458",
+      "range": {
+        "startLine": 210,
+        "startChar": 2,
+        "endLine": 210,
+        "endChar": 11
+      },
+      "revId": "9705e7d969dba1ac313ff3a6c423d70149aa5914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8848ebc_41692e42",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 8
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "Also, when not running with MSan you\u0027ll be able to hit this, right?",
       "parentUuid": "a8848ebc_41692e42",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 3
+      },
+      "revId": "9705e7d969dba1ac313ff3a6c423d70149aa5914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc954066_bfe9081a",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-13T13:40:21Z",
+      "side": 1,
+      "message": "Yes - the test passes without msan because of this check.",
+      "parentUuid": "dba4d7c0_765fd8de",
       "range": {
         "startLine": 265,
         "startChar": 0,
