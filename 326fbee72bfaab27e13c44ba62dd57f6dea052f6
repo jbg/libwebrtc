@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d53295cc_70ccb179",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-02-13T10:20:56Z",
+      "side": 1,
+      "message": "Yes, but you can still declare a variable outside the scope as final without setting it if the compiler can understand that it will be assigned exactly once. Have you tried just declaring it as final and see if it compiles?",
+      "parentUuid": "0664939a_b51a7834",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3686894f_99de1933",
         "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
         "patchSetId": 1
@@ -93,6 +117,30 @@
       "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dfff5c6_33a7f1eb",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-02-13T10:20:56Z",
+      "side": 1,
+      "message": "Ok, let\u0027s keep it like this then.",
+      "parentUuid": "77af5a87_fda0dec9",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 95
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
