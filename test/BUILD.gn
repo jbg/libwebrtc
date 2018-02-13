@@ -494,8 +494,6 @@ rtc_source_set("direct_transport") {
   sources = [
     "direct_transport.cc",
     "direct_transport.h",
-    "fake_network_pipe.cc",
-    "fake_network_pipe.h",
   ]
   if (!build_with_chromium && is_clang) {
     # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
@@ -505,7 +503,6 @@ rtc_source_set("direct_transport") {
     "..:webrtc_common",
     "../:typedefs",
     "../api:transport_api",
-    "../call",
     "../call:call_interfaces",
     "../modules/rtp_rtcp",
     "../rtc_base:rtc_base_approved",
@@ -513,7 +510,30 @@ rtc_source_set("direct_transport") {
     "../system_wrappers",
   ]
   public_deps = [
+    ":fake_network",
     ":single_threaded_task_queue",
+  ]
+}
+
+rtc_source_set("fake_network") {
+  sources = [
+    "fake_network_pipe.cc",
+    "fake_network_pipe.h",
+  ]
+  if (!build_with_chromium && is_clang) {
+    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
+    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+  }
+  deps = [
+    "..:typedefs",
+    "..:webrtc_common",
+    "../api:transport_api",
+    "../call:call_interfaces",
+    "../modules:module_api",
+    "../modules/rtp_rtcp",
+    "../rtc_base:rtc_base_approved",
+    "../rtc_base:sequenced_task_checker",
+    "../system_wrappers",
   ]
 }
 
