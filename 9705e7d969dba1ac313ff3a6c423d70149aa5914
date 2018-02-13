@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8848ebc_41692e42",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-02-13T10:27:43Z",
+      "side": 1,
+      "message": "Note to the reviewer. I did check that with rtc::MsanZeroedUninitialized this is not required anymore. However, I prefer to keep this because (i) it\u0027s cheap, (ii) safer and (iii) logging is more informative.",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 3
+      },
+      "revId": "9705e7d969dba1ac313ff3a6c423d70149aa5914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
