@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "392b7a15_619b3458",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-13T11:18:24Z",
+      "side": 1,
+      "message": "Consider using auto here (and at other call sites).",
+      "range": {
+        "startLine": 210,
+        "startChar": 2,
+        "endLine": 210,
+        "endChar": 11
+      },
+      "revId": "9705e7d969dba1ac313ff3a6c423d70149aa5914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a8848ebc_41692e42",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 8
@@ -13,6 +36,30 @@
       "writtenOn": "2018-02-13T10:27:43Z",
       "side": 1,
       "message": "Note to the reviewer. I did check that with rtc::MsanZeroedUninitialized this is not required anymore. However, I prefer to keep this because (i) it\u0027s cheap, (ii) safer and (iii) logging is more informative.",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 3
+      },
+      "revId": "9705e7d969dba1ac313ff3a6c423d70149aa5914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dba4d7c0_765fd8de",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-13T11:18:24Z",
+      "side": 1,
+      "message": "Also, when not running with MSan you\u0027ll be able to hit this, right?",
+      "parentUuid": "a8848ebc_41692e42",
       "range": {
         "startLine": 265,
         "startChar": 0,
