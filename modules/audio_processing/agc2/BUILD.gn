@@ -10,9 +10,12 @@ import("../../../webrtc.gni")
 
 rtc_source_set("agc2") {
   sources = [
+    "agc2_common.cc",
     "agc2_common.h",
     "fixed_gain_controller.cc",
     "fixed_gain_controller.h",
+    "interpolated_gain_curve.cc",
+    "interpolated_gain_curve.h",
   ]
 
   configs += [ "..:apm_debug_dump" ]
@@ -22,6 +25,7 @@ rtc_source_set("agc2") {
     "..:float_audio_frame",
     "../../../api:array_view",
     "../../../rtc_base:checks",
+    "../../../rtc_base:gtest_prod",
     "../../../rtc_base:rtc_base_approved",
   ]
 }
@@ -31,7 +35,16 @@ rtc_source_set("fixed_digital_unittests") {
   configs += [ "..:apm_debug_dump" ]
 
   sources = [
+    "agc2_testing_common.cc",
+    "agc2_testing_common.h",
+    "agc2_testing_common_unittest.cc",
+    "compute_interpolated_gain_curve.cc",
+    "compute_interpolated_gain_curve.h",
     "fixed_gain_controller_unittest.cc",
+    "interpolated_gain_curve_unittest.cc",
+    "limiter.cc",
+    "limiter.h",
+    "limiter_unittest.cc",
     "vector_float_frame.cc",
     "vector_float_frame.h",
   ]
@@ -40,6 +53,8 @@ rtc_source_set("fixed_digital_unittests") {
     "..:apm_logging",
     "..:float_audio_frame",
     "../../../api:array_view",
+    "../../../rtc_base:checks",
+    "../../../rtc_base:rtc_base_approved",
     "../../../rtc_base:rtc_base_tests_utils",
   ]
 }
