@@ -1,0 +1,717 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "160bfbdf_d34bdc50",
+        "filename": "modules/audio_processing/agc2/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Can be removed?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 25
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b54672_01e95bdb",
+        "filename": "modules/audio_processing/agc2/agc2_common.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Don\u0027t our usual dBFS stats go from -127 to 0? This seems to suggest that -90 is the lowest value that makes sense.",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bb1116c_bea9efba",
+        "filename": "modules/audio_processing/agc2/agc2_common.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Can this be removed?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 43
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf46fa43_9a995e6c",
+        "filename": "modules/audio_processing/agc2/agc2_testing_common.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "This is for testing, right? Should this be inside the test namespace as well?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7fd4053_ca908cf1",
+        "filename": "modules/audio_processing/agc2/agc2_testing_common.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "parameters",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 17
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c93db0a5_79c78225",
+        "filename": "modules/audio_processing/agc2/agc2_testing_common_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Can be removed? Or alternatively: actually use it?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed146ca4_5ac5fbe2",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Add a check to test that m0 and m1 are not equal",
+      "range": {
+        "startLine": 47,
+        "startChar": 37,
+        "endLine": 47,
+        "endChar": 46
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e01c1881_38f1335a",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Would it be better to make splits where the error is equal on both sides? I think something like a binary search could probably find those points.",
+      "range": {
+        "startLine": 76,
+        "startChar": 19,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ec34d9e_84c35d4f",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Since kInterpolatedGainCurveBeyondKneePoints is a constexpr, you can use static_assert to make this a compile-time check.",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 55
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2d91b80_07783f71",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler to add operator\u003c to Interval instead?",
+      "range": {
+        "startLine": 92,
+        "startChar": 9,
+        "endLine": 92,
+        "endChar": 27
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e07526c_4f1d8c41",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "I don\u0027t find this comment particularly helpful. I suggest to either expand it by explaining what is being initialized and possibly how or just get rid of it.",
+      "range": {
+        "startLine": 98,
+        "startChar": 5,
+        "endLine": 98,
+        "endChar": 9
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abd32ba9_a387af50",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Since i is not used in the loop, I would prefer something like while (q.size() \u003c kInterpolatedGainCurveBeyondKneePoints)",
+      "range": {
+        "startLine": 106,
+        "startChar": 14,
+        "endLine": 106,
+        "endChar": 15
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2289232_1c20d4cd",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "static_assert",
+      "range": {
+        "startLine": 140,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 49
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c1d62a2_d12e9c73",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Add a check for x0 !\u003d x1.",
+      "range": {
+        "startLine": 161,
+        "startChar": 66,
+        "endLine": 161,
+        "endChar": 73
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c0ffbdd_fe62ae1b",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Has this been git cl formatted?",
+      "range": {
+        "startLine": 180,
+        "startChar": 6,
+        "endLine": 182,
+        "endChar": 48
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab969d8e_30b722a6",
+        "filename": "modules/audio_processing/agc2/compute_interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Please check that the m\u0027s are not equal.",
+      "range": {
+        "startLine": 209,
+        "startChar": 9,
+        "endLine": 210,
+        "endChar": 59
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66f70880_0710b4b4",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Is this useful? It looks like setting it to false will cause unittests to fail.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97f1657_359c3f6f",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Since the input level can only have 2^16 values, a lookup table could be used instead, right? Not sure if that\u0027s worth it for how often this function is called.",
+      "range": {
+        "startLine": 110,
+        "startChar": 3,
+        "endLine": 111,
+        "endChar": 49
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3acb72f_52b29df5",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "32768.0f",
+      "range": {
+        "startLine": 25,
+        "startChar": 43,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb1b4c1e_f72728b6",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "look ups",
+      "range": {
+        "startLine": 32,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 54
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce460322_aebe86bc",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 21
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b7abc8_a5399983",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "accurate estimates",
+      "range": {
+        "startLine": 32,
+        "startChar": 62,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6773389a_2c443370",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "expected",
+      "range": {
+        "startLine": 44,
+        "startChar": 15,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b85070e_686ba582",
+        "filename": "modules/audio_processing/agc2/interpolated_gain_curve.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Can these be constexpr?",
+      "range": {
+        "startLine": 71,
+        "startChar": 9,
+        "endLine": 71,
+        "endChar": 14
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f20b2677_275e2760",
+        "filename": "modules/audio_processing/agc2/limiter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Should this be a DCHECK since this is not test code?",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 14
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "623be95c_fd71f235",
+        "filename": "modules/audio_processing/agc2/limiter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "DCHECK for gain_curve_limiter_i1 !\u003d 0.",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 30
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0800e708_c33beb10",
+        "filename": "modules/audio_processing/agc2/limiter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Since all of these depend on constexprs, I would replace them with static_assert\u0027s to change them into compile-time checks.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 76
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ee4b440_d2739d32",
+        "filename": "modules/audio_processing/agc2/limiter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Can all the members of this class be static constexpr?",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 7
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d736576_0fdec46c",
+        "filename": "modules/audio_processing/agc2/limiter_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "Either remove or use it?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6cd086c_f598b759",
+        "filename": "modules/audio_processing/agc2/limiter_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "I wonder if the compiler would optimize this away?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "009d7ee8_8da2b4aa",
+        "filename": "modules/audio_processing/agc2/limiter_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-02-14T16:39:15Z",
+      "side": 1,
+      "message": "-90.f (same thing below 2 more times)",
+      "range": {
+        "startLine": 26,
+        "startChar": 21,
+        "endLine": 26,
+        "endChar": 24
+      },
+      "revId": "eb4471d2cb18d5c637f87eeae95ee8c8b832d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
