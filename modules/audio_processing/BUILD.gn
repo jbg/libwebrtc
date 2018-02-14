@@ -233,6 +233,7 @@ rtc_static_library("audio_processing") {
     "../../system_wrappers:cpu_features_api",
     "../../system_wrappers:field_trial_api",
     "../../system_wrappers:metrics_api",
+    "audio_generator:audio_generator",
     "vad",
   ]
 
@@ -583,6 +584,7 @@ if (rtc_include_tests) {
       "../../test:test_support",
       "../audio_coding:neteq_input_audio_tools",
       "aec_dump:mock_aec_dump_unittests",
+      "audio_generator:audio_generator_unittests",
       "test/conversational_speech:unittest",
       "vad:vad_unittests",
       "//testing/gtest",
