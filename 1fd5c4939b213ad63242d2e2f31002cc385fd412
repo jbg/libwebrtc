@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b75175a3_871b0a0a",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-14T01:32:53Z",
+      "side": 1,
+      "message": "Initialize these to 0 just in case someone forgets :)",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86a9ee79_de1c9749",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-14T01:32:53Z",
+      "side": 1,
+      "message": "Can remove the intermediate |offer| (same for below |answer|).",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc90971a_b4620682",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-14T01:32:53Z",
+      "side": 1,
+      "message": "Instead of this extra parameter just check if the sdp_semantics is kDefault.",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d5fc2b0_f26f5f2c",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-14T01:32:53Z",
+      "side": 1,
+      "message": "I like the improvement to ExpectNewFramesReceivedWithWait, but I think we can do even more here.\n\nWhat do you think about something like a rich expectation object?\n\nE.g.\n\nMediaExpectation expect;\nexpect.SomeVideoFromCaller();\nexpect.SomeAudioFromCaller();\nexpect.NoVideoFromCallee();\nexpect.NoAudioFromCallee();\nASSERT_TRUE(WaitForExpectedMedia(expect));\n\nSomeVideo would expect video frames on all active video tracks, same for SomeAudio.\nNoVideo would expect no video on all active video tracks.\nAny combinations (caller audio/caller video/callee audio/callee video) not listed would have no expectation.\n\nCan also have other helpers like \u0027BidirectionalVideo\u0027 and \u0027NoMediaFromCallee\u0027.\n\nTo address the issue we were running into with inactive video tracks breaking the min_video_frames_received_per_track metric, the long term fix is to check the track\u0027s muted state. But until then, we can just add some processing to SetRemoteDescription to remove any video frame renderers for transceiver\u0027s that do not have a recv direction. I think that would be enough to use min_video_frames_received_per_track again.",
+      "range": {
+        "startLine": 1136,
+        "startChar": 11,
+        "endLine": 1136,
+        "endChar": 30
+      },
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f17157_4a1eee76",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3512,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-14T01:32:53Z",
+      "side": 1,
+      "message": "Add ASSERT_EQ(2u, callee()-\u003epc()-\u003eGetTransceivers().size());",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb0afa4_f570bdc0",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-14T01:32:53Z",
+      "side": 1,
+      "message": "Change these 4 EXPECT_TRUEs to ASSERT_TRUEs.",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
