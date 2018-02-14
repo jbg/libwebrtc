@@ -17,7 +17,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import java.io.File;
 import java.io.IOException;
+import java.lang.Math;
 import java.nio.ByteBuffer;
+import java.nio.ShortBuffer;
 import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,7 +70,9 @@ import org.webrtc.VideoTrack;
 import org.webrtc.voiceengine.WebRtcAudioManager;
 import org.webrtc.voiceengine.WebRtcAudioRecord;
 import org.webrtc.voiceengine.WebRtcAudioRecord.AudioRecordStartErrorCode;
+import org.webrtc.voiceengine.WebRtcAudioRecord.AudioSamples;
 import org.webrtc.voiceengine.WebRtcAudioRecord.WebRtcAudioRecordErrorCallback;
+import org.webrtc.voiceengine.WebRtcAudioRecord.WebRtcAudioRecordSamplesReadyCallback;
 import org.webrtc.voiceengine.WebRtcAudioTrack;
 import org.webrtc.voiceengine.WebRtcAudioTrack.AudioTrackStartErrorCode;
 import org.webrtc.voiceengine.WebRtcAudioUtils;
@@ -119,6 +123,8 @@ public class PeerConnectionClient {
 
   private final PCObserver pcObserver = new PCObserver();
   private final SDPObserver sdpObserver = new SDPObserver();
+  private final WebRTCAudioRecordSamplesReadyCallback
+      audioRecordSamplesReadyCallback = new WebRTCAudioRecordSamplesReadyCallback();
 
   private final EglBase rootEglBase;
   private final Context appContext;
@@ -507,6 +513,8 @@ public class PeerConnectionClient {
         reportError(errorMessage);
       }
     });
+
+    WebRtcAudioRecord.setOnAudioSamplesReady(audioRecordSamplesReadyCallback);
 
     WebRtcAudioTrack.setErrorCallback(new WebRtcAudioTrack.ErrorCallback() {
       @Override
@@ -1335,6 +1343,53 @@ public class PeerConnectionClient {
 
     @Override
     public void onAddTrack(final RtpReceiver receiver, final MediaStream[] mediaStreams) {}
+  }
+
+  private class WebRTCAudioRecordSamplesReadyCallback implements WebRtcAudioRecordSamplesReadyCallback {
+    private double maxNormalizedSquaredSum = 0;
+
+    @Override
+    public void onWebRtcAudioRecordSamplesReady(AudioSamples samples) {
+      // samples.getChannelCount() is always one.
+      // sample format is always ENCODING_PCM_16BIT.
+      process(samples.getSampleRate(), samples.getData());
+    }
+
+    private short[] byteToShort(byte[] buffer) {
+      short[] sBuf = new short[buffer.length / 2];
+      ByteBuffer bb = ByteBuffer.wrap(buffer);
+      ShortBuffer sb = ((ByteBuffer) bb.rewind()).asShortBuffer();
+      while (sb.hasRemaining()) {
+        sBuf[sb.position()] = sb.get();
+      }
+      return sBuf;
+    }
+
+    private double[] normalizeData(short[] buffer) {
+      double[] arr = new double[buffer.length];
+      for (int i = 0; i < arr.length; i++) {
+        arr[i] = (double) buffer[i] / (Short.MAX_VALUE + 1);
+      }
+      return arr;
+    }
+
+    private double calculateSquaredSum(double[] data) {
+      double sum = 0;
+      for (double d : data) {
+        sum += d * d;
+      }
+      return sum;
+    }
+
+    private boolean process(int sampleRate, byte[] data) {
+      short[] shortData = byteToShort(data);
+      double[] normalizedData = normalizeData(shortData);
+      double squaredSum = calculateSquaredSum(normalizedData);
+      // maxNormalizedSquaredSum = Math.max(maxNormalizedSquaredSum, squaredSum);
+      // Log.d(TAG, "max level: " + maxNormalizedSquaredSum);
+      Log.d(TAG, "level: " + squaredSum);
+      return true;
+    }
   }
 
   // Implementation detail: handle offer creation/signaling and answer setting,
