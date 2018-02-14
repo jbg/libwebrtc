@@ -217,4 +217,9 @@
     <string name="pref_enable_rtceventlog_key">enable_rtceventlog_key</string>
     <string name="pref_enable_rtceventlog_title">Enable RtcEventLog.</string>
     <string name="pref_enable_rtceventlog_default">false</string>
+
+    <string name="pref_enable_rec_input_audio_to_file_key">enable_key</string>
+    <string name="pref_enable_rec_input_audio_to_file_title">Record input audio to file.</string>
+    <string name="pref_enable_rec_input_audio_to_file_dlg">Record input audio to file.</string>
+    <string name="pref_enable_rec_input_audio_to_file_default">false</string>
 </resources>
