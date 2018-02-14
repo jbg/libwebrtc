@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2af885ad_00115ee9",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-14T13:40:56Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment.",
+      "range": {
+        "startLine": 276,
+        "startChar": 18,
+        "endLine": 276,
+        "endChar": 55
+      },
+      "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53e9b675_6bfa9ab4",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1633,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-14T13:40:56Z",
+      "side": 1,
+      "message": "WDYT about copying this logic to InternalPacketReceiver::DeliverPacket and then simply intercept incoming packets in Call::DeliverPacket (like you already do)?\n\nThis way you don\u0027t need to split Call::DeliverPacket into Call::DeliverPacket and Call::DoDeliverPacket, and you don\u0027t need to make InternalPacketReceiver a friend of Call.",
+      "range": {
+        "startLine": 1629,
+        "startChar": 0,
+        "endLine": 1633,
+        "endChar": 64
+      },
+      "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cca9408a_67a77d14",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-14T13:40:56Z",
+      "side": 1,
+      "message": "I think we should move FakeNetworkPipe out of the test folder if we will use it in prod.",
+      "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
