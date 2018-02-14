@@ -49,10 +49,6 @@ deps = {
       '89af43c4d0506f69980f00dde78c97b2f81437f8',
     'condition': 'checkout_android',
   },
-  'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '09590114049a704b094058cd2a6747346821504c',
-    'condition': 'checkout_ios',
-  },
   'src/testing':
     Var('chromium_git') + '/chromium/src/testing' + '@' + '81576293e60c168fc2e7f4c719bedd614144e766',
   'src/third_party':
