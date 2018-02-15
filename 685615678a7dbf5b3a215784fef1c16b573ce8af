@@ -22,6 +22,30 @@
       "revId": "685615678a7dbf5b3a215784fef1c16b573ce8af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74c639d2_b34b34cf",
+        "filename": "media/engine/simulcast.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-15T07:47:37Z",
+      "side": 0,
+      "message": "Yes, I\u0027ll add that and investigate why it wasn\u0027t at least caught by out perf tests.\nSince this is blocking another issue I\u0027ll land this first though.",
+      "parentUuid": "83ea2f4e_b60081e3",
+      "range": {
+        "startLine": 280,
+        "startChar": 51,
+        "endLine": 280,
+        "endChar": 0
+      },
+      "revId": "685615678a7dbf5b3a215784fef1c16b573ce8af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
