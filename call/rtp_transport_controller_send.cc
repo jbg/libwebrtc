@@ -22,10 +22,6 @@ PacketRouter* RtpTransportControllerSend::packet_router() {
   return &packet_router_;
 }
 
-PacedSender* RtpTransportControllerSend::pacer() {
-  return &pacer_;
-}
-
 TransportFeedbackObserver*
 RtpTransportControllerSend::transport_feedback_observer() {
   return &send_side_cc_;
@@ -49,6 +45,15 @@ void RtpTransportControllerSend::SetKeepAliveConfig(
     const RtpKeepAliveConfig& config) {
   keepalive_ = config;
 }
+Module* RtpTransportControllerSend::GetPacerModule() {
+  return &pacer_;
+}
+void RtpTransportControllerSend::SetPacingFactor(float pacing_factor) {
+  pacer_.SetPacingFactor(pacing_factor);
+}
+void RtpTransportControllerSend::SetQueueTimeLimit(int limit_ms) {
+  pacer_.SetQueueTimeLimit(limit_ms);
+}
 Module* RtpTransportControllerSend::GetModule() {
   return &send_side_cc_;
 }
@@ -64,11 +69,11 @@ void RtpTransportControllerSend::DeRegisterPacketFeedbackObserver(
   send_side_cc_.DeRegisterPacketFeedbackObserver(observer);
 }
 void RtpTransportControllerSend::RegisterNetworkObserver(
-    SendSideCongestionController::Observer* observer) {
+    NetworkChangedObserver* observer) {
   send_side_cc_.RegisterNetworkObserver(observer);
 }
 void RtpTransportControllerSend::DeRegisterNetworkObserver(
-    SendSideCongestionController::Observer* observer) {
+    NetworkChangedObserver* observer) {
   send_side_cc_.DeRegisterNetworkObserver(observer);
 }
 void RtpTransportControllerSend::SetBweBitrates(int min_bitrate_bps,
@@ -85,8 +90,9 @@ void RtpTransportControllerSend::OnNetworkRouteChanged(
   send_side_cc_.OnNetworkRouteChanged(network_route, start_bitrate_bps,
                                       min_bitrate_bps, max_bitrate_bps);
 }
-void RtpTransportControllerSend::SignalNetworkState(NetworkState state) {
-  send_side_cc_.SignalNetworkState(state);
+void RtpTransportControllerSend::OnNetworkAvailability(bool network_available) {
+  send_side_cc_.SignalNetworkState(network_available ? kNetworkUp
+                                                     : kNetworkDown);
 }
 void RtpTransportControllerSend::SetTransportOverhead(
     size_t transport_overhead_bytes_per_packet) {

@@ -37,8 +37,6 @@ class FakeRtpTransportControllerSend
     return send_side_cc_;
   }
 
-  PacedSender* pacer() override { return paced_sender_; }
-
   RtpPacketSender* packet_sender() override { return paced_sender_; }
 
   const RtpKeepAliveConfig& keepalive_config() const override {
@@ -52,6 +50,13 @@ class FakeRtpTransportControllerSend
     keepalive_ = keepalive_config;
   }
 
+  Module* GetPacerModule() override { return paced_sender_; }
+  void SetPacingFactor(float pacing_factor) override {
+    paced_sender_->SetPacingFactor(pacing_factor);
+  }
+  void SetQueueTimeLimit(int limit_ms) override {
+    paced_sender_->SetQueueTimeLimit(limit_ms);
+  }
   Module* GetModule() override { return send_side_cc_; }
   CallStatsObserver* GetCallStatsObserver() override { return send_side_cc_; }
   void RegisterPacketFeedbackObserver(
@@ -62,12 +67,10 @@ class FakeRtpTransportControllerSend
       PacketFeedbackObserver* observer) override {
     send_side_cc_->DeRegisterPacketFeedbackObserver(observer);
   }
-  void RegisterNetworkObserver(
-      SendSideCongestionController::Observer* observer) override {
+  void RegisterNetworkObserver(NetworkChangedObserver* observer) override {
     send_side_cc_->RegisterNetworkObserver(observer);
   }
-  void DeRegisterNetworkObserver(
-      SendSideCongestionController::Observer* observer) override {
+  void DeRegisterNetworkObserver(NetworkChangedObserver* observer) override {
     send_side_cc_->RegisterNetworkObserver(observer);
   }
   void SetBweBitrates(int min_bitrate_bps,
@@ -83,8 +86,9 @@ class FakeRtpTransportControllerSend
     send_side_cc_->OnNetworkRouteChanged(network_route, start_bitrate_bps,
                                          min_bitrate_bps, max_bitrate_bps);
   }
-  void SignalNetworkState(NetworkState state) override {
-    send_side_cc_->SignalNetworkState(state);
+  void OnNetworkAvailability(bool network_available) override {
+    send_side_cc_->SignalNetworkState(network_available ? kNetworkUp
+                                                        : kNetworkDown);
   }
   void SetTransportOverhead(
       size_t transport_overhead_bytes_per_packet) override {

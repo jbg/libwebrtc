@@ -10,12 +10,18 @@
 
 #ifndef CALL_RTP_TRANSPORT_CONTROLLER_SEND_INTERFACE_H_
 #define CALL_RTP_TRANSPORT_CONTROLLER_SEND_INTERFACE_H_
+#include <stddef.h>
 #include <stdint.h>
-#include "modules/congestion_controller/include/send_side_congestion_controller.h"
 
+namespace rtc {
+struct SentPacket;
+struct NetworkRoute;
+}  // namespace rtc
 namespace webrtc {
 
 class CallStatsObserver;
+class NetworkChangedObserver;
+class Module;
 class PacedSender;
 class PacketFeedbackObserver;
 class PacketRouter;
@@ -52,7 +58,6 @@ class RtpTransportControllerSendInterface {
  public:
   virtual ~RtpTransportControllerSendInterface() {}
   virtual PacketRouter* packet_router() = 0;
-  virtual PacedSender* pacer() = 0;
   virtual TransportFeedbackObserver* transport_feedback_observer() = 0;
 
   virtual RtpPacketSender* packet_sender() = 0;
@@ -70,6 +75,10 @@ class RtpTransportControllerSendInterface {
   virtual void SetAllocatedSendBitrateLimits(int min_send_bitrate_bps,
                                              int max_padding_bitrate_bps) = 0;
 
+  virtual Module* GetPacerModule() = 0;
+  virtual void SetPacingFactor(float pacing_factor) = 0;
+  virtual void SetQueueTimeLimit(int limit_ms) = 0;
+
   virtual Module* GetModule() = 0;
   virtual CallStatsObserver* GetCallStatsObserver() = 0;
 
@@ -77,10 +86,8 @@ class RtpTransportControllerSendInterface {
       PacketFeedbackObserver* observer) = 0;
   virtual void DeRegisterPacketFeedbackObserver(
       PacketFeedbackObserver* observer) = 0;
-  virtual void RegisterNetworkObserver(
-      SendSideCongestionController::Observer* observer) = 0;
-  virtual void DeRegisterNetworkObserver(
-      SendSideCongestionController::Observer* observer) = 0;
+  virtual void RegisterNetworkObserver(NetworkChangedObserver* observer) = 0;
+  virtual void DeRegisterNetworkObserver(NetworkChangedObserver* observer) = 0;
   virtual void SetBweBitrates(int min_bitrate_bps,
                               int start_bitrate_bps,
                               int max_bitrate_bps) = 0;
@@ -88,7 +95,7 @@ class RtpTransportControllerSendInterface {
                                      int start_bitrate_bps,
                                      int min_bitrate_bps,
                                      int max_bitrate_bps) = 0;
-  virtual void SignalNetworkState(NetworkState state) = 0;
+  virtual void OnNetworkAvailability(bool network_available) = 0;
   virtual void SetTransportOverhead(
       size_t transport_overhead_bytes_per_packet) = 0;
   virtual RtcpBandwidthObserver* GetBandwidthObserver() = 0;

@@ -30,11 +30,7 @@ class RtpTransportControllerSend : public RtpTransportControllerSendInterface {
 
   // Implements RtpTransportControllerSendInterface
   PacketRouter* packet_router() override;
-  // TODO(holmer): Temporarily exposed, should be removed and the
-  // appropriate methods should be added to this class instead.
-  // In addition the PacedSender should be driven by this class, either
-  // by owning the process thread, or later by using a task queue.
-  PacedSender* pacer() override;
+
   TransportFeedbackObserver* transport_feedback_observer() override;
   RtpPacketSender* packet_sender() override;
   const RtpKeepAliveConfig& keepalive_config() const override;
@@ -43,16 +39,17 @@ class RtpTransportControllerSend : public RtpTransportControllerSendInterface {
                                      int max_padding_bitrate_bps) override;
 
   void SetKeepAliveConfig(const RtpKeepAliveConfig& config);
+  Module* GetPacerModule() override;
+  void SetPacingFactor(float pacing_factor) override;
+  void SetQueueTimeLimit(int limit_ms) override;
   Module* GetModule() override;
   CallStatsObserver* GetCallStatsObserver() override;
   void RegisterPacketFeedbackObserver(
       PacketFeedbackObserver* observer) override;
   void DeRegisterPacketFeedbackObserver(
       PacketFeedbackObserver* observer) override;
-  void RegisterNetworkObserver(
-      SendSideCongestionController::Observer* observer) override;
-  void DeRegisterNetworkObserver(
-      SendSideCongestionController::Observer* observer) override;
+  void RegisterNetworkObserver(NetworkChangedObserver* observer) override;
+  void DeRegisterNetworkObserver(NetworkChangedObserver* observer) override;
   void SetBweBitrates(int min_bitrate_bps,
                       int start_bitrate_bps,
                       int max_bitrate_bps) override;
@@ -60,7 +57,7 @@ class RtpTransportControllerSend : public RtpTransportControllerSendInterface {
                              int start_bitrate_bps,
                              int min_bitrate_bps,
                              int max_bitrate_bps) override;
-  void SignalNetworkState(NetworkState state) override;
+  void OnNetworkAvailability(bool network_available) override;
   void SetTransportOverhead(
       size_t transport_overhead_bytes_per_packet) override;
   RtcpBandwidthObserver* GetBandwidthObserver() override;

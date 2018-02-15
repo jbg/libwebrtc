@@ -35,6 +35,7 @@
 #include "logging/rtc_event_log/rtc_event_log.h"
 #include "logging/rtc_event_log/rtc_stream_config.h"
 #include "modules/bitrate_controller/include/bitrate_controller.h"
+#include "modules/congestion_controller/include/network_changed_observer.h"
 #include "modules/congestion_controller/include/receive_side_congestion_controller.h"
 #include "modules/rtp_rtcp/include/flexfec_receiver.h"
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
@@ -163,7 +164,7 @@ namespace internal {
 class Call : public webrtc::Call,
              public PacketReceiver,
              public RecoveredPacketReceiver,
-             public SendSideCongestionController::Observer,
+             public NetworkChangedObserver,
              public BitrateAllocator::LimitObserver {
  public:
   Call(const Call::Config& config,
@@ -453,7 +454,7 @@ Call::Call(const Call::Config& config,
   }
   transport_send->RegisterNetworkObserver(this);
   transport_send_ = std::move(transport_send);
-  transport_send_->SignalNetworkState(kNetworkDown);
+  transport_send_->OnNetworkAvailability(false);
   transport_send_->SetBweBitrates(config_.bitrate_config.min_bitrate_bps,
                                   config_.bitrate_config.start_bitrate_bps,
                                   config_.bitrate_config.max_bitrate_bps);
@@ -463,7 +464,8 @@ Call::Call(const Call::Config& config,
   // We have to attach the pacer to the pacer thread before starting the
   // module process thread to avoid a race accessing the process thread
   // both from the process thread and the pacer thread.
-  pacer_thread_->RegisterModule(transport_send_->pacer(), RTC_FROM_HERE);
+  pacer_thread_->RegisterModule(transport_send_->GetPacerModule(),
+                                RTC_FROM_HERE);
   pacer_thread_->RegisterModule(
       receive_side_cc_.GetRemoteBitrateEstimator(true), RTC_FROM_HERE);
   pacer_thread_->Start();
@@ -490,7 +492,7 @@ Call::~Call() {
   // the pacer thread is stopped.
   module_process_thread_->DeRegisterModule(transport_send_->GetModule());
   pacer_thread_->Stop();
-  pacer_thread_->DeRegisterModule(transport_send_->pacer());
+  pacer_thread_->DeRegisterModule(transport_send_->GetPacerModule());
   pacer_thread_->DeRegisterModule(
       receive_side_cc_.GetRemoteBitrateEstimator(true));
   module_process_thread_->DeRegisterModule(&receive_side_cc_);
@@ -1171,7 +1173,7 @@ void Call::UpdateAggregateNetworkState() {
   RTC_LOG(LS_INFO) << "UpdateAggregateNetworkState: aggregate_state="
                    << (aggregate_state == kNetworkUp ? "up" : "down");
 
-  transport_send_->SignalNetworkState(aggregate_state);
+  transport_send_->OnNetworkAvailability(aggregate_state == kNetworkUp);
 }
 
 void Call::OnSentPacket(const rtc::SentPacket& sent_packet) {
