@@ -188,6 +188,8 @@ void JavaToNativeRTCConfiguration(
       jni, Java_RTCConfiguration_getEnableDtlsSrtp(jni, j_rtc_config));
   rtc_config->network_preference =
       JavaToNativeNetworkPreference(jni, j_network_preference);
+  rtc_config->stun_keepalive_interval =
+      Java_RTCConfiguration_getStunKeepaliveInterval(jni, j_rtc_config);
 }
 
 rtc::KeyType GetRtcConfigKeyType(JNIEnv* env,

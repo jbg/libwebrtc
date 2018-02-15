@@ -129,6 +129,10 @@ class StatsReport {
     kStatsValueNameSentPingResponses,
     kStatsValueNameRecvPingRequests,
     kStatsValueNameRecvPingResponses,
+    kStatsValueNameSentStunKeepaliveRequests,
+    kStatsValueNameRecvStunKeepaliveResponses,
+    kStatsValueNameStunKeepaliveRtt,
+    kStatsValueNameStunKeepaliveRttVariance,
 
     // Internal StatsValue names.
     kStatsValueNameAccelerateRate,

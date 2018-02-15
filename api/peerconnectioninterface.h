@@ -510,6 +510,9 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     // cost.
     rtc::Optional<rtc::AdapterType> network_preference;
 
+    // Interval in milliseconds at which STUN keepalive ping will be sent.
+    int stun_keepalive_interval = kUndefined;
+
     // Configure the SDP semantics used by this PeerConnection. Note that the
     // WebRTC 1.0 specification requires kUnifiedPlan semantics. The
     // RtpTransceiver API is only available with kUnifiedPlan semantics.

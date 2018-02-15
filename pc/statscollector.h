@@ -97,7 +97,8 @@ class StatsCollector {
   // Helper method for creating IceCandidate report. |is_local| indicates
   // whether this candidate is local or remote.
   StatsReport* AddCandidateReport(const cricket::Candidate& candidate,
-                                  bool local);
+                                  bool local,
+                                  const cricket::PortStats* port_stats);
 
   // Adds a report for this certificate and every certificate in its chain, and
   // returns the leaf certificate's report (|cert|'s report).
