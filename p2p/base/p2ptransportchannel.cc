@@ -68,6 +68,10 @@ static constexpr int a_is_better = 1;
 static constexpr int b_is_better = -1;
 static constexpr int a_and_b_equal = 0;
 
+// The implementation of StunPort will choose an appropriate keepalive interval
+// if the configured value passed down from PeerConnection is undefined.
+const int kStunKeepaliveIntervalUndefined = -1;
+
 bool LocalCandidateUsesPreferredNetwork(
     const cricket::Connection* conn,
     rtc::Optional<rtc::AdapterType> network_preference) {
@@ -164,7 +168,8 @@ P2PTransportChannel::P2PTransportChannel(const std::string& transport_name,
               true /* presume_writable_when_fully_relayed */,
               DEFAULT_REGATHER_ON_FAILED_NETWORKS_INTERVAL,
               RECEIVING_SWITCHING_DELAY,
-              rtc::nullopt) {
+              rtc::nullopt,
+              kStunKeepaliveIntervalUndefined) {
   uint32_t weak_ping_interval = ::strtoul(
       webrtc::field_trial::FindFullName("WebRTC-StunInterPacketDelay").c_str(),
       nullptr, 10);
@@ -540,6 +545,19 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
                      << (config_.network_preference.has_value()
                              ? config_.network_preference.value()
                              : 0);
+  }
+
+  if (config_.stun_keepalive_interval != config.stun_keepalive_interval) {
+    config_.stun_keepalive_interval = config.stun_keepalive_interval;
+    for (PortInterface* port : ports_) {
+      if (config_.stun_keepalive_interval != kStunKeepaliveIntervalUndefined &&
+          (port->Type() == LOCAL_PORT_TYPE || port->Type() == STUN_PORT_TYPE)) {
+        reinterpret_cast<UDPPort*>(port)->set_stun_keepalive_delay(
+            config_.stun_keepalive_interval);
+      }
+    }
+    RTC_LOG(LS_INFO) << "Set network preference to "
+                     << config_.stun_keepalive_interval;
   }
 }
 
@@ -1124,15 +1142,31 @@ int P2PTransportChannel::SendPacket(const char *data, size_t len,
   return sent;
 }
 
-bool P2PTransportChannel::GetStats(ConnectionInfos *infos) {
+bool P2PTransportChannel::GetStats(ConnectionInfos* candidate_pair_stats_list,
+                                   CandidateStatsList* candidate_stats_list) {
   RTC_DCHECK(network_thread_ == rtc::Thread::Current());
-  // Gather connection infos.
-  infos->clear();
+  // Gather candidate and candidate pair stats.
+  candidate_stats_list->clear();
+  candidate_pair_stats_list->clear();
 
+  if (!allocator_sessions_.empty()) {
+    std::vector<PortInterface*> ports = allocator_session()->ReadyPorts();
+    for (auto* port : ports) {
+      auto candidates = port->Candidates();
+      for (auto candidate : candidates) {
+        CandidateStats candidate_stats;
+        candidate_stats.candidate = candidate;
+        port->GetStats(&candidate_stats.port_stats);
+        candidate_stats_list->push_back(std::move(candidate_stats));
+      }
+    }
+  }
+
+  // TODO(qingsi): Remove naming inconsistency for candidate pair/connection.
   for (Connection* connection : connections_) {
-    ConnectionInfo info = connection->stats();
-    info.best_connection = (selected_connection_ == connection);
-    infos->push_back(std::move(info));
+    ConnectionInfo candidate_pair_stats = connection->stats();
+    candidate_pair_stats.best_connection = (selected_connection_ == connection);
+    candidate_pair_stats_list->push_back(std::move(candidate_pair_stats));
     connection->set_reported(true);
   }
 

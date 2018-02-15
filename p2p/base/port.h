@@ -106,6 +106,38 @@ enum class IceCandidatePairState {
   // frozen because we have not implemented ICE freezing logic.
 };
 
+// Stats that we can return about the port of a connection.
+class PortStats {
+ public:
+  PortStats();
+  PortStats(const PortStats&);
+  ~PortStats();
+
+  PortStats& operator=(const PortStats& other);
+
+  size_t sent_stun_keepalive_request_total;
+  size_t recv_stun_keepalive_response_total;
+  // Moving average.
+  double stun_keepalive_rtt_ms;
+  // Moving average.
+  double stun_keepalive_rtt_ms_squared;
+};
+
+// Stats that we can return about a candidate.
+class CandidateStats {
+ public:
+  CandidateStats();
+  CandidateStats(const CandidateStats&);
+  ~CandidateStats();
+
+  Candidate candidate;
+  bool is_local;
+  // PortStats of the port where this candidate is gathered.
+  PortStats port_stats;
+};
+
+typedef std::vector<CandidateStats> CandidateStatsList;
+
 // Stats that we can return about the connections for a transport channel.
 // TODO(hta): Rename to ConnectionStats
 struct ConnectionInfo {
@@ -147,9 +179,11 @@ struct ConnectionInfo {
   uint64_t total_round_trip_time_ms;
   // https://w3c.github.io/webrtc-stats/#dom-rtcicecandidatepairstats-currentroundtriptime
   rtc::Optional<uint32_t> current_round_trip_time_ms;
+  // Port-level stats.
+  PortStats port_stats;
 };
 
-// Information about all the connections of a channel.
+// Information about all the candidate pairs of a channel.
 typedef std::vector<ConnectionInfo> ConnectionInfos;
 
 const char* ProtoToString(ProtocolType proto);
@@ -368,6 +402,8 @@ class Port : public PortInterface, public rtc::MessageHandler,
 
   int16_t network_cost() const { return network_cost_; }
 
+  void GetStats(PortStats* stats) override;
+
  protected:
   enum { MSG_DESTROY_IF_DEAD = 0, MSG_FIRST_AVAILABLE };
 
@@ -434,6 +470,8 @@ class Port : public PortInterface, public rtc::MessageHandler,
 
   // Extra work to be done in subclasses when a connection is destroyed.
   virtual void HandleConnectionDestroyed(Connection* conn) {}
+
+  PortStats stats_;
 
  private:
   void Construct();

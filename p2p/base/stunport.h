@@ -208,6 +208,7 @@ class UDPPort : public Port {
 
   // Below methods handles binding request responses.
   void OnStunBindingRequestSucceeded(
+      size_t rtt_ms,
       const rtc::SocketAddress& stun_server_addr,
       const rtc::SocketAddress& stun_reflected_addr);
   void OnStunBindingOrResolveRequestFailed(
