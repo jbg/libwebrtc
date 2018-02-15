@@ -193,6 +193,20 @@ static std::string ComputeFoundation(const std::string& type,
   return rtc::ToString<uint32_t>(rtc::ComputeCrc32(ost.str()));
 }
 
+PortStats::PortStats()
+    : stun_binding_requests_sent(0),
+      stun_binding_responses_received(0),
+      stun_binding_rtt_ms(0),
+      stun_binding_rtt_ms_squared(0) {}
+PortStats::PortStats(const PortStats&) = default;
+PortStats::~PortStats() = default;
+
+PortStats& PortStats::operator=(const PortStats& other) = default;
+
+CandidateStats::CandidateStats() : is_local(true) {}
+CandidateStats::CandidateStats(const CandidateStats&) = default;
+CandidateStats::~CandidateStats() = default;
+
 ConnectionInfo::ConnectionInfo()
     : best_connection(false),
       writable(false),
@@ -481,6 +495,10 @@ void Port::OnReadyToSend() {
   for (; iter != connections_.end(); ++iter) {
     iter->second->OnReadyToSend();
   }
+}
+
+void Port::GetStats(PortStats* stats) {
+  *stats = stats_;
 }
 
 size_t Port::AddPrflxCandidate(const Candidate& local) {
@@ -1428,7 +1446,7 @@ void Connection::ReceivedPingResponse(int rtt, const std::string& request_id) {
   set_write_state(STATE_WRITABLE);
   set_state(IceCandidatePairState::SUCCEEDED);
   if (rtt_samples_ > 0) {
-    rtt_ = (RTT_RATIO * rtt_ + rtt) / (RTT_RATIO + 1);
+    rtt_ = rtc::GetNextMovingAverage(rtt_, rtt, RTT_RATIO);
   } else {
     rtt_ = rtt;
   }
@@ -1696,6 +1714,7 @@ ConnectionInfo Connection::stats() {
   stats_.nominated = nominated();
   stats_.total_round_trip_time_ms = total_round_trip_time_ms_;
   stats_.current_round_trip_time_ms = current_round_trip_time_ms_;
+  port()->GetStats(&stats_.port_stats);
   return stats_;
 }
 
