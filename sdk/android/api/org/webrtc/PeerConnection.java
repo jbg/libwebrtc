@@ -381,6 +381,8 @@ public class PeerConnection {
     // Use "Unknown" to represent no preference of adapter types, not the
     // preference of adapters of unknown types.
     public AdapterType networkPreference;
+    // Interval in milliseconds at which STUN keepalive ping will be sent.
+    public int stunKeepaliveInterval;
 
     // This is an optional wrapper for the C++ webrtc::TurnCustomizer.
     public TurnCustomizer turnCustomizer;
@@ -417,6 +419,7 @@ public class PeerConnection {
       combinedAudioVideoBwe = null;
       enableDtlsSrtp = null;
       networkPreference = AdapterType.UNKNOWN;
+      stunKeepaliveInterval = -1;
     }
 
     @CalledByNative("RTCConfiguration")
@@ -562,6 +565,11 @@ public class PeerConnection {
     @CalledByNative("RTCConfiguration")
     AdapterType getNetworkPreference() {
       return networkPreference;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    int getStunKeepaliveInterval() {
+      return stunKeepaliveInterval;
     }
   };
 
