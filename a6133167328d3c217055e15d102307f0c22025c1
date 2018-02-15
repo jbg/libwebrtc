@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7b985113_08856efe",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc502704_032f7efc",
+      "range": {
+        "startLine": 513,
+        "startChar": 74,
+        "endLine": 513,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e57ec9d8_884e741e",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8e961fe8_51f60521",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "Ack. Will do.",
+      "parentUuid": "e57ec9d8_884e741e",
+      "range": {
+        "startLine": 514,
+        "startChar": 45,
+        "endLine": 514,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8314938b_64504e25",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2018-02-15T02:22:02Z",
       "side": 1,
       "message": "This value should be passed into the Port via the PortAllocator, not via the P2pTransportChannel.",
+      "range": {
+        "startLine": 563,
+        "startChar": 5,
+        "endLine": 563,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bc2d84c_ecd4db00",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "Ack. We need to support setting the value on the fly, and I find passing this value to Port via PortAllocatorSession is more straightforward since the session has the knowledge of all allocated ports. How do you think about using the session?",
+      "parentUuid": "8314938b_64504e25",
       "range": {
         "startLine": 563,
         "startChar": 5,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "580f39ef_cdf60b6d",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "Ack. Same as the above. How about using the session?",
+      "parentUuid": "bf462a1c_47d19f36",
+      "range": {
+        "startLine": 1151,
+        "startChar": 78,
+        "endLine": 1151,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "415ee2e6_a0f8fa6c",
         "filename": "p2p/base/port.h",
         "patchSetId": 4
@@ -105,6 +201,30 @@
       "writtenOn": "2018-02-15T02:22:02Z",
       "side": 1,
       "message": "This seems more like StunStats that are only relevant to STUN candidates.  I think that would make sense as an optional part of CandidateStats (TURN and HOST candidates wouldn\u0027t have it set).",
+      "range": {
+        "startLine": 109,
+        "startChar": 59,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89b61b0f_1e6a4f9a",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "I was thinking about the possibility of adding other stats in the future, and stats that are not applicable to certain type of ports are left to default/undefined values and can be ignored by the application. What do you think?",
+      "parentUuid": "415ee2e6_a0f8fa6c",
       "range": {
         "startLine": 109,
         "startChar": 59,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "631dbb65_1bded04f",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "When collecting the stats of candidate pairs, the original stats collector generates the reports of both the local and the remote candidates (StatsCollector::AddCandidateReport), as a sub-report of candidate pair report (ConnectionInfo), similar to what we do in RtcEventLog. This CL also tries to consolidate the candidate reports in candidate pair reports and the standalone candidate reports here (which exists without the premise of an existing remote peer).",
+      "parentUuid": "acea4d36_f1bfe756",
+      "range": {
+        "startLine": 134,
+        "startChar": 16,
+        "endLine": 134,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5c035141_46f31341",
         "filename": "p2p/base/stunport.cc",
         "patchSetId": 4
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "75e83264_8f83a5d7",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "Done. A related issue to the naming is UDPPort::SendStunBindingRequest is only used for sending keepalive pings in the current implementation though, and connectivity checks are sent using different port-level methods with its own RTT stats. I am a bit concerned if it would cause confusion (it did to me) whether connectivity check stats is also included in the STUN numbers above since they are both STUN pings.",
+      "parentUuid": "5c035141_46f31341",
+      "range": {
+        "startLine": 462,
+        "startChar": 46,
+        "endLine": 462,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b888e6d4_96cb5157",
         "filename": "p2p/base/stunport.cc",
         "patchSetId": 4
@@ -183,6 +351,30 @@
       "revId": "a6133167328d3c217055e15d102307f0c22025c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49b854f8_96631da6",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-15T18:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b888e6d4_96cb5157",
+      "range": {
+        "startLine": 467,
+        "startChar": 22,
+        "endLine": 467,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
