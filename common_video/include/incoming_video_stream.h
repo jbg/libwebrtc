@@ -11,7 +11,10 @@
 #ifndef COMMON_VIDEO_INCLUDE_INCOMING_VIDEO_STREAM_H_
 #define COMMON_VIDEO_INCLUDE_INCOMING_VIDEO_STREAM_H_
 
-#include "api/videosinkinterface.h"
+// TODO(nisse): api/videosinkinterface currently part of the large
+// api:libjingle_peerconnection_api, it needs to be split out into a smaller
+// video target.
+#include "api/videosinkinterface.h"  // nogncheck
 #include "common_video/video_render_frames.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/task_queue.h"
