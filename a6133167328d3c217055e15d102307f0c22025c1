@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc502704_032f7efc",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "In this context, it\u0027s not clear what \"STUN keepalive\" means.  Perhaps \"stun_candidate_keep_alive_interval\" would make sense, with a comment of \"the interval at which STUN candidates will resend STUN binding requests to keep NAT bindings open\"",
+      "range": {
+        "startLine": 513,
+        "startChar": 74,
+        "endLine": 513,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e57ec9d8_884e741e",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "Should we separate this change from the addition to stats to have 2 separate CLs for the two behavior changes?",
+      "range": {
+        "startLine": 514,
+        "startChar": 45,
+        "endLine": 514,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8314938b_64504e25",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "This value should be passed into the Port via the PortAllocator, not via the P2pTransportChannel.",
+      "range": {
+        "startLine": 563,
+        "startChar": 5,
+        "endLine": 563,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf462a1c_47d19f36",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "Candidate-level stats should be pulled out of the PortAllocator, not the P2pTransportChannel.",
+      "range": {
+        "startLine": 1151,
+        "startChar": 78,
+        "endLine": 1151,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "415ee2e6_a0f8fa6c",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "This seems more like StunStats that are only relevant to STUN candidates.  I think that would make sense as an optional part of CandidateStats (TURN and HOST candidates wouldn\u0027t have it set).",
+      "range": {
+        "startLine": 109,
+        "startChar": 59,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acea4d36_f1bfe756",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "Why would we even have stats for remote candidates?  It seems like we should leave this off and not have any stats for remote candidates.",
+      "range": {
+        "startLine": 134,
+        "startChar": 16,
+        "endLine": 134,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c035141_46f31341",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "Even though the purpose of the interval is a keep alive, the count is not of keep alives, but of binding requests and responses.  So I think all these things should be named stun_binding_requests_sent, stun_binding_responses_receieved, stun_binding_rtt, etc.",
+      "range": {
+        "startLine": 462,
+        "startChar": 46,
+        "endLine": 462,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b888e6d4_96cb5157",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-15T02:22:02Z",
+      "side": 1,
+      "message": "I don\u0027t like how this logic is duplicated with the one in p2ptransportchannel.  Can we make a simple RttCalculator class to avoid the duplicate logic?",
+      "range": {
+        "startLine": 467,
+        "startChar": 22,
+        "endLine": 467,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
