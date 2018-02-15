@@ -22,6 +22,30 @@
       "revId": "e5da6d8e1b5bddd5f62403cd0b801b66b4667d44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10fea7ce_14adc69e",
+        "filename": "common_video/include/incoming_video_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-02-15T15:00:37Z",
+      "side": 1,
+      "message": "I put videosinkinterface into api because it\u0027s used downstream, but the particular downstream user has a special agreement to use internal guts anyway so perhaps that was the wrong call. Do you mean you will move videosinkinterface.h out of api in a later cl then and fix the nogncheck? Otherwise you should not be adding //nognchecks.",
+      "parentUuid": "056d57e5_008878c1",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 49
+      },
+      "revId": "e5da6d8e1b5bddd5f62403cd0b801b66b4667d44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
