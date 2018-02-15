@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fe3ab20_bb73cfc8",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2018-02-15T19:45:11Z",
+      "side": 1,
+      "message": "Uncomment it?",
+      "range": {
+        "startLine": 1182,
+        "startChar": 15,
+        "endLine": 1182,
+        "endChar": 35
+      },
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
