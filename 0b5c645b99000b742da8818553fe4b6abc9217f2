@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "198374cc_9ed3d2b9",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-15T10:27:29Z",
+      "side": 1,
+      "message": "Remove this line?",
+      "revId": "0b5c645b99000b742da8818553fe4b6abc9217f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
