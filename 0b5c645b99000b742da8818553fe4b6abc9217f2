@@ -16,6 +16,24 @@
       "revId": "0b5c645b99000b742da8818553fe4b6abc9217f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b3784c3_b063d564",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-02-15T10:51:05Z",
+      "side": 1,
+      "message": "Woops, I didn\u0027t see this comment until after submitting. But you are right that it should be removed. I\u0027ll soon upload a new CL adding aec3_factory to the api. That CL can also remove \"deps \u003d []\" from echo_control and aec3_config.",
+      "parentUuid": "198374cc_9ed3d2b9",
+      "revId": "0b5c645b99000b742da8818553fe4b6abc9217f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
