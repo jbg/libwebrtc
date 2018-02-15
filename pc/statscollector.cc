@@ -670,10 +670,12 @@ StatsReport* StatsCollector::AddConnectionInfoReport(
     report->AddBoolean(b.name, b.value);
 
   report->AddId(StatsReport::kStatsValueNameChannelId, channel_report_id);
-  report->AddId(StatsReport::kStatsValueNameLocalCandidateId,
-                AddCandidateReport(info.local_candidate, true)->id());
-  report->AddId(StatsReport::kStatsValueNameRemoteCandidateId,
-                AddCandidateReport(info.remote_candidate, false)->id());
+  report->AddId(
+      StatsReport::kStatsValueNameLocalCandidateId,
+      AddCandidateReport(info.local_candidate, true, &(info.port_stats))->id());
+  report->AddId(
+      StatsReport::kStatsValueNameRemoteCandidateId,
+      AddCandidateReport(info.remote_candidate, false, nullptr)->id());
 
   const Int64ForAdd int64s[] = {
       {StatsReport::kStatsValueNameBytesReceived, info.recv_total_bytes},
@@ -709,15 +711,28 @@ StatsReport* StatsCollector::AddConnectionInfoReport(
 
 StatsReport* StatsCollector::AddCandidateReport(
     const cricket::Candidate& candidate,
-    bool local) {
+    bool local,
+    const cricket::PortStats* port_stats) {
   StatsReport::Id id(StatsReport::NewCandidateId(local, candidate.id()));
   StatsReport* report = reports_.Find(id);
   if (!report) {
     report = reports_.InsertNew(id);
     report->set_timestamp(stats_gathering_started_);
     if (local) {
+      RTC_DCHECK(port_stats);
       report->AddString(StatsReport::kStatsValueNameCandidateNetworkType,
                         AdapterTypeToStatsType(candidate.network_type()));
+      report->AddInt64(StatsReport::kStatsValueNameSentStunKeepaliveRequests,
+                       port_stats->sent_stun_keepalive_request_total);
+      report->AddInt64(StatsReport::kStatsValueNameRecvStunKeepaliveResponses,
+                       port_stats->recv_stun_keepalive_response_total);
+      report->AddFloat(StatsReport::kStatsValueNameStunKeepaliveRtt,
+                       port_stats->stun_keepalive_rtt_ms);
+      // std(X)^2 = E[X^2] - E[X]^2.
+      report->AddFloat(StatsReport::kStatsValueNameStunKeepaliveRttVariance,
+                       port_stats->stun_keepalive_rtt_ms_squared -
+                           port_stats->stun_keepalive_rtt_ms *
+                               port_stats->stun_keepalive_rtt_ms);
     }
     report->AddString(StatsReport::kStatsValueNameCandidateIPAddress,
                       candidate.address().ipaddr().ToString());
@@ -806,6 +821,12 @@ void StatsCollector::ExtractSessionInfo() {
         channel_report->AddString(
             StatsReport::kStatsValueNameDtlsCipher,
             rtc::SSLStreamAdapter::SslCipherSuiteToName(ssl_cipher_suite));
+      }
+
+      for (const cricket::CandidateStats& stats :
+           channel_iter.candidate_stats_list) {
+        AddCandidateReport(stats.candidate, stats.is_local,
+                           &(stats.port_stats));
       }
 
       int connection_id = 0;
