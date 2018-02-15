@@ -28,6 +28,7 @@ namespace cricket {
 class Connection;
 class IceMessage;
 class StunMessage;
+class PortStats;
 
 enum ProtocolType {
   PROTO_UDP,
@@ -124,6 +125,8 @@ class PortInterface {
   sigslot::signal1<const rtc::SentPacket&> SignalSentPacket;
 
   virtual std::string ToString() const = 0;
+
+  virtual void GetStats(PortStats* stats) = 0;
 
  protected:
   PortInterface();

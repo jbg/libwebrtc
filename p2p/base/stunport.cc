@@ -27,6 +27,7 @@ namespace cricket {
 // TODO(?): Move these to a common place (used in relayport too)
 const int KEEPALIVE_DELAY = 10 * 1000;  // 10 seconds - sort timeouts
 const int RETRY_TIMEOUT = 50 * 1000;    // 50 seconds
+const int RTT_RATIO = 3;                // 3 : 1, also see RTT_RATIO in port.cc
 
 // Handles a binding request sent to the STUN server.
 class StunBindingRequest : public StunRequest {
@@ -52,7 +53,7 @@ class StunBindingRequest : public StunRequest {
       RTC_LOG(LS_ERROR) << "Binding address has bad family";
     } else {
       rtc::SocketAddress addr(addr_attr->ipaddr(), addr_attr->port());
-      port_->OnStunBindingRequestSucceeded(server_addr_, addr);
+      port_->OnStunBindingRequestSucceeded(this->Elapsed(), server_addr_, addr);
     }
 
     // The keep-alive requests will be stopped after its lifetime has passed.
@@ -419,6 +420,7 @@ void UDPPort::SendStunBindingRequest(const rtc::SocketAddress& stun_addr) {
     if (IsCompatibleAddress(stun_addr)) {
       requests_.Send(
           new StunBindingRequest(this, stun_addr, rtc::TimeMillis()));
+      stats_.stun_binding_requests_sent++;
     } else {
       // Since we can't send stun messages to the server, we should mark this
       // port ready.
@@ -446,6 +448,7 @@ bool UDPPort::MaybeSetDefaultLocalAddress(rtc::SocketAddress* addr) const {
 }
 
 void UDPPort::OnStunBindingRequestSucceeded(
+    size_t rtt_ms,
     const rtc::SocketAddress& stun_server_addr,
     const rtc::SocketAddress& stun_reflected_addr) {
   if (bind_request_succeeded_servers_.find(stun_server_addr) !=
@@ -454,6 +457,13 @@ void UDPPort::OnStunBindingRequestSucceeded(
   }
   bind_request_succeeded_servers_.insert(stun_server_addr);
 
+  RTC_DCHECK(stats_.stun_binding_responses_received <
+             stats_.stun_binding_requests_sent);
+  stats_.stun_binding_responses_received++;
+  stats_.stun_binding_rtt_ms =
+      rtc::GetNextMovingAverage(stats_.stun_binding_rtt_ms, rtt_ms, RTT_RATIO);
+  stats_.stun_binding_rtt_ms_squared = rtc::GetNextMovingAverage(
+      stats_.stun_binding_rtt_ms_squared, rtt_ms * rtt_ms, RTT_RATIO);
   // If socket is shared and |stun_reflected_addr| is equal to local socket
   // address, or if the same address has been added by another STUN server,
   // then discarding the stun address.

@@ -1512,6 +1512,7 @@ bool PeerConnection::GetStats(StatsObserver* observer,
   return true;
 }
 
+// TODO(qingsi): Add the stats of STUN keepalives to the new GetStats.
 void PeerConnection::GetStats(RTCStatsCollectorCallback* callback) {
   RTC_DCHECK(stats_collector_);
   stats_collector_->GetStatsReport(callback);

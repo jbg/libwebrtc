@@ -244,7 +244,10 @@ class PortAllocatorSession : public sigslot::has_slots<> {
   virtual void RegatherOnFailedNetworks() {}
   // Re-gathers candidates on all networks.
   virtual void RegatherOnAllNetworks() {}
-
+  // Get candidate-level stats from all candidates on the ready ports and return
+  // the stats to the given list.
+  virtual void GetCandidateStatsListFromReadyPorts(
+      CandidateStatsList* candidate_stats_list);
   // Another way of getting the information provided by the signals below.
   //
   // Ports and candidates are not guaranteed to be in the same order as the
