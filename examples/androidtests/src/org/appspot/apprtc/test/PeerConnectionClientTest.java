@@ -344,6 +344,7 @@ public class PeerConnectionClientTest implements PeerConnectionEvents {
         "OPUS", /* audioCodec */
         false, /* noAudioProcessing */
         false, /* aecDump */
+        false, /* recInputAudioToFile */
         false /* useOpenSLES */, false /* disableBuiltInAEC */, false /* disableBuiltInAGC */,
         false /* disableBuiltInNS */, false /* enableLevelControl */, false /* disableWebRtcAGC */,
         false /* enableRtcEventLog */);
@@ -380,6 +381,7 @@ public class PeerConnectionClientTest implements PeerConnectionEvents {
         "OPUS", /* audioCodec */
         false, /* noAudioProcessing */
         false, /* aecDump */
+        false, /* recInputAudioToFile */
         false /* useOpenSLES */, false /* disableBuiltInAEC */, false /* disableBuiltInAGC */,
         false /* disableBuiltInNS */, false /* enableLevelControl */, false /* disableWebRtcAGC */,
         false /* enableRtcEventLog */);
