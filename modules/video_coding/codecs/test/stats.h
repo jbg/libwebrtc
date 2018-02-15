@@ -42,6 +42,7 @@ struct FrameStatistic {
   // Layering.
   size_t temporal_layer_idx = 0;
   size_t simulcast_svc_idx = 0;
+  bool inter_layer_predicted = false;
 
   // H264 specific.
   size_t max_nalu_size_bytes = 0;
@@ -62,6 +63,47 @@ struct FrameStatistic {
   float ssim = 0.0;
 };
 
+struct VideoStatistic {
+  std::string ToString(std::string prefix) const;
+
+  size_t target_bitrate_kbps = 0;
+  float input_framerate_fps = 0.0f;
+
+  size_t spatial_layer_idx = 0;
+  size_t temporal_layer_idx = 0;
+
+  size_t width = 0;
+  size_t height = 0;
+
+  size_t length_bytes = 0;
+  size_t bitrate_kbps = 0;
+  float framerate_fps = 0;
+
+  float enc_speed_fps = 0.0f;
+  float dec_speed_fps = 0.0f;
+
+  float avg_delay_sec = 0.0f;
+  float max_key_frame_delay_sec = 0.0f;
+  float max_delta_frame_delay_sec = 0.0f;
+  float time_to_reach_target_bitrate_sec = 0.0f;
+
+  float avg_key_frame_size_bytes = 0.0f;
+  float avg_delta_frame_size_bytes = 0.0f;
+  float avg_qp = 0.0f;
+
+  float avg_psnr = 0.0f;
+  float min_psnr = 0.0f;
+  float avg_ssim = 0.0f;
+  float min_ssim = 0.0f;
+
+  size_t num_input_frames = 0;
+  size_t num_encoded_frames = 0;
+  size_t num_decoded_frames = 0;
+  size_t num_key_frames = 0;
+  size_t num_spatial_resizes = 0;
+  size_t max_nalu_size_bytes = 0;
+};
+
 // Statistics for a sequence of processed frames. This class is not thread safe.
 class Stats {
  public:
@@ -69,17 +111,48 @@ class Stats {
   ~Stats() = default;
 
   // Creates a FrameStatistic for the next frame to be processed.
-  FrameStatistic* AddFrame(size_t timestamp);
+  FrameStatistic* AddFrame(size_t timestamp, size_t spatial_layer_idx);
 
   // Returns the FrameStatistic corresponding to |frame_number| or |timestamp|.
-  FrameStatistic* GetFrame(size_t frame_number);
-  FrameStatistic* GetFrameWithTimestamp(size_t timestamp);
+  FrameStatistic* GetFrame(size_t frame_number, size_t spatial_layer_idx);
+  FrameStatistic* GetFrameWithTimestamp(size_t timestamp,
+                                        size_t spatial_layer_idx);
 
-  size_t size() const;
+  std::vector<VideoStatistic> SliceAndCalcLayerVideoStatistic(
+      size_t first_frame_num,
+      size_t last_frame_num);
+
+  VideoStatistic SliceAndCalcAggregatedVideoStatistic(size_t first_frame_num,
+                                                      size_t last_frame_num);
+
+  size_t Size(size_t spatial_layer_idx);
+
+  void Clear();
 
  private:
-  std::vector<FrameStatistic> stats_;
-  std::map<size_t, size_t> rtp_timestamp_to_frame_num_;
+  FrameStatistic AggregateFrameStatistic(size_t frame_num,
+                                         size_t spatial_layer_idx,
+                                         bool aggregate_independent_layers);
+
+  size_t CalcLayerTargetBitrateKbps(size_t first_frame_num,
+                                    size_t last_frame_num,
+                                    size_t spatial_layer_idx,
+                                    size_t temporal_layer_idx,
+                                    bool aggregate_independent_layers);
+
+  VideoStatistic SliceAndCalcVideoStatistic(size_t first_frame_num,
+                                            size_t last_frame_num,
+                                            size_t spatial_layer_idx,
+                                            size_t temporal_layer_idx,
+                                            bool aggregate_independent_layers);
+
+  void GetNumberOfEncodedLayers(size_t first_frame_num,
+                                size_t last_frame_num,
+                                size_t* num_encoded_spatial_layers,
+                                size_t* num_encoded_temporal_layers);
+
+  std::map<size_t, std::vector<FrameStatistic>> layer_idx_to_stats_;
+  std::map<size_t, std::map<size_t, size_t>> rtp_timestamp_to_frame_num_;
 };
 
 }  // namespace test
