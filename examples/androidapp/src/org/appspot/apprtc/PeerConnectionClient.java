@@ -16,8 +16,12 @@ import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.Math;
 import java.nio.ByteBuffer;
+import java.nio.ShortBuffer;
 import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,7 +72,9 @@ import org.webrtc.VideoTrack;
 import org.webrtc.voiceengine.WebRtcAudioManager;
 import org.webrtc.voiceengine.WebRtcAudioRecord;
 import org.webrtc.voiceengine.WebRtcAudioRecord.AudioRecordStartErrorCode;
+import org.webrtc.voiceengine.WebRtcAudioRecord.AudioSamples;
 import org.webrtc.voiceengine.WebRtcAudioRecord.WebRtcAudioRecordErrorCallback;
+import org.webrtc.voiceengine.WebRtcAudioRecord.WebRtcAudioRecordSamplesReadyCallback;
 import org.webrtc.voiceengine.WebRtcAudioTrack;
 import org.webrtc.voiceengine.WebRtcAudioTrack.AudioTrackStartErrorCode;
 import org.webrtc.voiceengine.WebRtcAudioUtils;
@@ -119,6 +125,8 @@ public class PeerConnectionClient {
 
   private final PCObserver pcObserver = new PCObserver();
   private final SDPObserver sdpObserver = new SDPObserver();
+  private final WebRTCAudioRecordSamplesReadyCallback
+      audioRecordSamplesReadyCallback = new WebRTCAudioRecordSamplesReadyCallback();
 
   private final EglBase rootEglBase;
   private final Context appContext;
@@ -164,6 +172,8 @@ public class PeerConnectionClient {
   // Enable RtcEventLog.
   private RtcEventLog rtcEventLog;
 
+  private FileOutputStream audioOutputStream = null;
+
   /**
    * Peer connection parameters.
    */
@@ -204,6 +214,7 @@ public class PeerConnectionClient {
     public final String audioCodec;
     public final boolean noAudioProcessing;
     public final boolean aecDump;
+    public final boolean saveInputAudioToFile;
     public final boolean useOpenSLES;
     public final boolean disableBuiltInAEC;
     public final boolean disableBuiltInAGC;
@@ -216,22 +227,24 @@ public class PeerConnectionClient {
     public PeerConnectionParameters(boolean videoCallEnabled, boolean loopback, boolean tracing,
         int videoWidth, int videoHeight, int videoFps, int videoMaxBitrate, String videoCodec,
         boolean videoCodecHwAcceleration, boolean videoFlexfecEnabled, int audioStartBitrate,
-        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean useOpenSLES,
-        boolean disableBuiltInAEC, boolean disableBuiltInAGC, boolean disableBuiltInNS,
-        boolean enableLevelControl, boolean disableWebRtcAGCAndHPF, boolean enableRtcEventLog) {
+        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean saveInputAudioToFile,
+        boolean useOpenSLES, boolean disableBuiltInAEC, boolean disableBuiltInAGC,
+        boolean disableBuiltInNS, boolean enableLevelControl, boolean disableWebRtcAGCAndHPF,
+        boolean enableRtcEventLog) {
       this(videoCallEnabled, loopback, tracing, videoWidth, videoHeight, videoFps, videoMaxBitrate,
           videoCodec, videoCodecHwAcceleration, videoFlexfecEnabled, audioStartBitrate, audioCodec,
-          noAudioProcessing, aecDump, useOpenSLES, disableBuiltInAEC, disableBuiltInAGC,
-          disableBuiltInNS, enableLevelControl, disableWebRtcAGCAndHPF, enableRtcEventLog, null);
+          noAudioProcessing, aecDump, saveInputAudioToFile, useOpenSLES, disableBuiltInAEC,
+          disableBuiltInAGC, disableBuiltInNS, enableLevelControl, disableWebRtcAGCAndHPF,
+          enableRtcEventLog, null);
     }
 
     public PeerConnectionParameters(boolean videoCallEnabled, boolean loopback, boolean tracing,
         int videoWidth, int videoHeight, int videoFps, int videoMaxBitrate, String videoCodec,
         boolean videoCodecHwAcceleration, boolean videoFlexfecEnabled, int audioStartBitrate,
-        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean useOpenSLES,
-        boolean disableBuiltInAEC, boolean disableBuiltInAGC, boolean disableBuiltInNS,
-        boolean enableLevelControl, boolean disableWebRtcAGCAndHPF, boolean enableRtcEventLog,
-        DataChannelParameters dataChannelParameters) {
+        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean saveInputAudioToFile,
+        boolean useOpenSLES, boolean disableBuiltInAEC, boolean disableBuiltInAGC,
+        boolean disableBuiltInNS, boolean enableLevelControl, boolean disableWebRtcAGCAndHPF,
+        boolean enableRtcEventLog, DataChannelParameters dataChannelParameters) {
       this.videoCallEnabled = videoCallEnabled;
       this.loopback = loopback;
       this.tracing = tracing;
@@ -246,6 +259,7 @@ public class PeerConnectionClient {
       this.audioCodec = audioCodec;
       this.noAudioProcessing = noAudioProcessing;
       this.aecDump = aecDump;
+      this.saveInputAudioToFile = saveInputAudioToFile;
       this.useOpenSLES = useOpenSLES;
       this.disableBuiltInAEC = disableBuiltInAEC;
       this.disableBuiltInAGC = disableBuiltInAGC;
@@ -508,6 +522,12 @@ public class PeerConnectionClient {
       }
     });
 
+    // TODO(henrika): add comments...
+    if (peerConnectionParameters.saveInputAudioToFile) {
+      Log.d(TAG, "Enable recording of microphone input audio to file");
+      WebRtcAudioRecord.setOnAudioSamplesReady(audioRecordSamplesReadyCallback);
+    }
+
     WebRtcAudioTrack.setErrorCallback(new WebRtcAudioTrack.ErrorCallback() {
       @Override
       public void onWebRtcAudioTrackInitError(String errorMessage) {
@@ -678,6 +698,25 @@ public class PeerConnectionClient {
     }
 
     Log.d(TAG, "Peer connection created.");
+
+    // TODO(henrika): ____________________
+
+    Log.d(TAG, "saveInputAudioToFile: " + peerConnectionParameters.saveInputAudioToFile);
+
+    try {
+      audioOutputStream = new FileOutputStream(createRecordedAudioFile());
+    } catch (FileNotFoundException ex) {
+      //
+    }
+  }
+
+  /* Checks if external storage is available for read and write */
+  public boolean isExternalStorageWritable() {
+    String state = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED.equals(state)) {
+        return true;
+    }
+    return false;
   }
 
   private File createRtcEventLogOutputFile() {
@@ -686,6 +725,13 @@ public class PeerConnectionClient {
     final String outputFileName = "event_log_" + dateFormat.format(date) + ".log";
     return new File(
         appContext.getDir(RTCEVENTLOG_OUTPUT_DIR_NAME, Context.MODE_PRIVATE), outputFileName);
+  }
+
+  private File createRecordedAudioFile() {
+    final String recoredAudioFile = Environment.getExternalStorageDirectory().getPath()
+        + File.separator + "recorded_audio.pcm";
+    Log.d(TAG, "recoredAudioFile: " + recoredAudioFile);
+    return new File(recoredAudioFile);
   }
 
   private void maybeCreateAndStartRtcEventLog() {
@@ -739,6 +785,15 @@ public class PeerConnectionClient {
     if (videoSource != null) {
       videoSource.dispose();
       videoSource = null;
+    }
+    if (audioOutputStream != null) {
+      Log.d(TAG, "Closing file which contains recorded audio");
+      try {
+        audioOutputStream.close();
+      } catch (IOException ex) {
+        //
+      }
+      audioOutputStream = null;
     }
     localRender = null;
     remoteRenders = null;
@@ -1335,6 +1390,27 @@ public class PeerConnectionClient {
 
     @Override
     public void onAddTrack(final RtpReceiver receiver, final MediaStream[] mediaStreams) {}
+  }
+
+  // TODO(henrika):
+  private class WebRTCAudioRecordSamplesReadyCallback implements WebRtcAudioRecordSamplesReadyCallback {
+
+    @Override
+    public void onWebRtcAudioRecordSamplesReady(AudioSamples samples) {
+      executor.execute(new Runnable() {
+        @Override
+        public void run() {
+          if (audioOutputStream != null) {
+            // Log.d(TAG, "size: " + samples.getData().length);
+            try {
+              audioOutputStream.write(samples.getData());
+            } catch (IOException ex) {
+              //
+            }
+          }
+        }
+      });
+    }
   }
 
   // Implementation detail: handle offer creation/signaling and answer setting,
