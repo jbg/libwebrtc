@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "59ff4e4d_ab991d33",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-16T13:48:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "143159ec_23abd0d6",
+      "revId": "c9a4a9d4b3b2d139599e3b80df81957e883691db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03a22d9d_538db7f8",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "c9a4a9d4b3b2d139599e3b80df81957e883691db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adde1e60_98a60d46",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-16T13:48:02Z",
+      "side": 1,
+      "message": "It\u0027s set here:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/generic_encoder.cc?l\u003d377\n\nCurrently, it\u0027s set if the encoded frame size is at least 2.5 times the average frame for the configured encoder bitrate.",
+      "parentUuid": "03a22d9d_538db7f8",
+      "revId": "c9a4a9d4b3b2d139599e3b80df81957e883691db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
