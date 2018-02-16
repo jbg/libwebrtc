@@ -32,6 +32,7 @@
 #include "rtc_base/platform_file.h"
 #include "rtc_base/refcount.h"
 #include "rtc_base/scoped_ref_ptr.h"
+#include "system_wrappers/include/file_wrapper.h"
 #include "typedefs.h"  // NOLINT(build/include)
 
 namespace webrtc {
@@ -56,6 +57,7 @@ class LevelEstimator;
 class NoiseSuppression;
 class CustomProcessing;
 class VoiceDetection;
+class AudioGenerator;
 
 // webrtc:8665, addedd temporarily to avoid breaking dependencies.
 typedef CustomProcessing PostProcessing;
@@ -477,6 +479,16 @@ class AudioProcessing : public rtc::RefCountInterface {
   // attached, it's destructor is called. The d-tor may block until
   // all pending logging tasks are completed.
   virtual void DetachAecDump() = 0;
+
+  // Attaches provided webrtc::AudioGenerator for modifying playout audio.
+  // Calling this method when another AudioGenerator is attached replaces the
+  // active AudioGenerator with a new one.
+  virtual void AttachPlayoutAudioGenerator(
+      std::unique_ptr<AudioGenerator> audio_generator) = 0;
+
+  // If no AudioGenerator is attached, this has no effect. If an AecDump is
+  // attached, its destructor is called.
+  virtual void DetachPlayoutAudioGenerator() = 0;
 
   // Use to send UMA histograms at end of a call. Note that all histogram
   // specific member variables are reset.
@@ -1262,6 +1274,29 @@ class EchoCanceller3Factory : public EchoControlFactory {
  private:
   EchoCanceller3Config config_;
 };
+
+// Class that can be used as input sink for the APM.
+// Generates an infinite audio signal, [-1, 1] floating point values, in frames
+// of given, possibly varying dimensions and sample rate.
+class AudioGenerator {
+ public:
+  // Creates an AudioGenerator that Generates a predefined sequence of tone
+  // sweep and noise.
+  static std::unique_ptr<AudioGenerator> Create();
+  // Creates an AudioGenerator that reads the playout audio from a given WAV
+  // file.
+  static std::unique_ptr<AudioGenerator> Create(
+      std::unique_ptr<FileWrapper> input_audio_file);
+
+  virtual ~AudioGenerator() {}
+
+  // Generates the next frame of audio.
+  virtual void GenerateFrame(float* const* audio,
+                             size_t num_channels,
+                             size_t channel_size,
+                             size_t sample_rate_hz) = 0;
+};
+
 }  // namespace webrtc
 
 #endif  // MODULES_AUDIO_PROCESSING_INCLUDE_AUDIO_PROCESSING_H_
