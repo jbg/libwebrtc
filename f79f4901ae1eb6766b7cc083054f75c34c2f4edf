@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6fd82c3_c14b3aba",
+        "filename": "modules/video_coding/codecs/test/stats.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "target_bitrate_kbps",
+      "range": {
+        "startLine": 186,
+        "startChar": 22,
+        "endLine": 186,
+        "endChar": 33
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc030bc3_fd6181c9",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "Should we make these struct be named in plural? FrameStatistics and VideoStatistics.",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba9a025a_1dfbc32e",
+        "filename": "modules/video_coding/codecs/test/stats.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "See above.",
+      "range": {
+        "startLine": 66,
+        "startChar": 7,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb7aa65e_07ddc248",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 283,
+        "startChar": 11,
+        "endLine": 283,
+        "endChar": 22
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21059a99_bb207df5",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": ".",
+      "range": {
+        "startLine": 284,
+        "startChar": 10,
+        "endLine": 284,
+        "endChar": 19
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5881923a_8e388b75",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "I\u0027d move this next to |config_|.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 15
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da92e9d5_48fb4457",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "target_bitrate_kbps",
+      "range": {
+        "startLine": 123,
+        "startChar": 35,
+        "endLine": 123,
+        "endChar": 46
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce4a5505_eea09f20",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "input_framerate_fps",
+      "range": {
+        "startLine": 124,
+        "startChar": 34,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8939fa18_406e2559",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "Prefer to write out the type explicitly here. Also, no need to make it const, since a copy is made anyway.",
+      "range": {
+        "startLine": 369,
+        "startChar": 7,
+        "endLine": 369,
+        "endChar": 17
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adce209c_c13c1b1e",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_libvpx.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:44:18Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 391,
+        "startChar": 7,
+        "endLine": 391,
+        "endChar": 12
+      },
+      "revId": "f79f4901ae1eb6766b7cc083054f75c34c2f4edf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
