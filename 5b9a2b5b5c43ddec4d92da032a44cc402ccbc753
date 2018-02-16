@@ -305,6 +305,30 @@
     },
     {
       "key": {
+        "uuid": "ef846169_7d20a4f6",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-16T08:57:40Z",
+      "side": 1,
+      "message": "Ack. Will do.",
+      "parentUuid": "013e9039_194b3251",
+      "range": {
+        "startLine": 386,
+        "startChar": 15,
+        "endLine": 386,
+        "endChar": 45
+      },
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38a6b098_b7b7e34f",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 5
@@ -325,6 +349,30 @@
       "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ca4a3e8_ec232ce4",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-02-16T08:57:40Z",
+      "side": 1,
+      "message": "Ack. Sure, we will also use rtc::Optional in the native code to represent the equivalent in the next patch.",
+      "parentUuid": "38a6b098_b7b7e34f",
+      "range": {
+        "startLine": 423,
+        "startChar": 6,
+        "endLine": 423,
+        "endChar": 42
+      },
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
