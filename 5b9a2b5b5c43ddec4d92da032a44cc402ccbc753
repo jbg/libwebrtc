@@ -164,6 +164,24 @@
     },
     {
       "key": {
+        "uuid": "3592f1d4_cd6d56af",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2018-02-16T20:04:33Z",
+      "side": 1,
+      "message": "Good finding about the stats design guideline. \nCould we use a double-precision number for the total rtt?\nfloating number only has 7-digit precision and if the rtt changes significantly, it does not need a lot of packets to make it start to lose precision.",
+      "parentUuid": "73aacbc3_629276a7",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78eb37c7_ecaad248",
         "filename": "p2p/base/port.h",
         "patchSetId": 5
