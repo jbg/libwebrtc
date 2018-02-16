@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d03bcf6f_3d7168a7",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-16T14:48:16Z",
+      "side": 1,
+      "message": "Clarified a bit.",
+      "parentUuid": "2af885ad_00115ee9",
+      "range": {
+        "startLine": 276,
+        "startChar": 18,
+        "endLine": 276,
+        "endChar": 55
+      },
+      "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "53e9b675_6bfa9ab4",
         "filename": "call/call.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "446f3e01_65dc2ef8",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1633,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-16T14:48:16Z",
+      "side": 1,
+      "message": "I can remove DeDeliverPacket() and duplicate this code in InternalPacketReceiver, but it will still need to be a friend, as these are private as well.",
+      "parentUuid": "53e9b675_6bfa9ab4",
+      "range": {
+        "startLine": 1629,
+        "startChar": 0,
+        "endLine": 1633,
+        "endChar": 64
+      },
+      "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cca9408a_67a77d14",
         "filename": "test/BUILD.gn",
         "patchSetId": 2
@@ -59,6 +107,24 @@
       "writtenOn": "2018-02-14T13:40:56Z",
       "side": 1,
       "message": "I think we should move FakeNetworkPipe out of the test folder if we will use it in prod.",
+      "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7faedf78_7ffc5134",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-16T14:48:16Z",
+      "side": 1,
+      "message": "That would be nice. I tried to, but there\u0027s soo many inter-dependencies. I\u0027ll have to make FakeNetworkPipe module in that case, since I don\u0027t think it\u0027s worth moving it to rtc_base or api\nCan we do that in a follow-up?",
+      "parentUuid": "cca9408a_67a77d14",
       "revId": "e9df328a525d4dddf78f1847c1e4118c63d26093",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
