@@ -146,6 +146,24 @@
     },
     {
       "key": {
+        "uuid": "73aacbc3_629276a7",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T18:50:01Z",
+      "side": 1,
+      "message": "Overflow won\u0027t be an issue; loss of precision as numbers get large is a potential issue, but we have enough bits of precision that it would still take a long time for that to become noticeable.\n\nNote that there\u0027s already a totalRoundTripTime stat: https://www.w3.org/TR/webrtc-stats/#dom-rtcicecandidatepairstats-totalroundtriptime\n\nAnd this is because of the stats design guidelines: https://www.w3.org/TR/webrtc-stats/#guidelines-for-design-of-stats-objects\n\n\"In general, an application will not have overall control over how often stats are sampled, and the implementation cannot know what the intended use of the stats is. There is, by design, no control surface for the application to influence how stats are generated.\n\nTherefore, letting the implementation compute \"average\" rates is not a good idea, since that implies some averaging time interval that can\u0027t be set beforehand. Instead, the recommended approach is to count the number of measurements of a value and sum the measurements given even if the sum is meaningless in itself; the JS application can then compute averages over any desired time interval by calling getStats() twice, taking the difference of the two sums and dividing by the difference of the two counts.\"\n\nI understand that the moving average may be good enough for our use case. But with just a little extra code (on the application side, to take the diff between two getStats calls), we could have something that works for a broader range of use cases, and could be exposed on the web as well.",
+      "parentUuid": "4091dd67_9be90a20",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78eb37c7_ecaad248",
         "filename": "p2p/base/port.h",
         "patchSetId": 5
