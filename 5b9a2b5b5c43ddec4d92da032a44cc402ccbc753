@@ -128,6 +128,24 @@
     },
     {
       "key": {
+        "uuid": "4091dd67_9be90a20",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2018-02-16T00:48:38Z",
+      "side": 1,
+      "message": "Oh. By the way, even if you allow the app to choose the moving average factor, I am not sure which value is better than others. So it is likely most people will choose the default one anyway. So it does not appear to be very critical (to allow app to choose the moving average factor).",
+      "parentUuid": "f46dc1c6_59c50614",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78eb37c7_ecaad248",
         "filename": "p2p/base/port.h",
         "patchSetId": 5
