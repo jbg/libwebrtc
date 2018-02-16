@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49206869_6078fac8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:15:00Z",
+      "side": 1,
+      "message": "Maybe add the detail that we can (still) only support sending FlexFEC protecting a single SSRC.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceaa045a_46515cb1",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:15:00Z",
+      "side": 1,
+      "message": "Doing this seems a bit risky when the underlying object only supports protecting a single SSRC. Maybe you can add a check that (flexfec_protected_ssrcs.size() \u003d\u003d 1).\n\nIf the FlexfecSender were to be wired up such that it receives multiple SSRCs, we will hit this dcheck: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/flexfec_sender.cc?l\u003d105\u0026rcl\u003dae8a90a1d4dbaa47e40d78394824061ae0878ffc",
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d8e30a4_876341b8",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:15:00Z",
+      "side": 1,
+      "message": "Is this new method used?",
+      "range": {
+        "startLine": 648,
+        "startChar": 9,
+        "endLine": 648,
+        "endChar": 27
+      },
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5577c7_a5a8d8c5",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-16T18:15:00Z",
+      "side": 1,
+      "message": "Would it be nicer to add this to the ctor, and make the member const?",
+      "range": {
+        "startLine": 740,
+        "startChar": 2,
+        "endLine": 740,
+        "endChar": 29
+      },
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
