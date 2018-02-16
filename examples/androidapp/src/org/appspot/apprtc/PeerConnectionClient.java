@@ -11,11 +11,14 @@
 package org.appspot.apprtc;
 
 import android.content.Context;
+import android.media.AudioFormat;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -68,7 +71,9 @@ import org.webrtc.VideoTrack;
 import org.webrtc.voiceengine.WebRtcAudioManager;
 import org.webrtc.voiceengine.WebRtcAudioRecord;
 import org.webrtc.voiceengine.WebRtcAudioRecord.AudioRecordStartErrorCode;
+import org.webrtc.voiceengine.WebRtcAudioRecord.AudioSamples;
 import org.webrtc.voiceengine.WebRtcAudioRecord.WebRtcAudioRecordErrorCallback;
+import org.webrtc.voiceengine.WebRtcAudioRecord.WebRtcAudioRecordSamplesReadyCallback;
 import org.webrtc.voiceengine.WebRtcAudioTrack;
 import org.webrtc.voiceengine.WebRtcAudioTrack.AudioTrackStartErrorCode;
 import org.webrtc.voiceengine.WebRtcAudioUtils;
@@ -119,6 +124,8 @@ public class PeerConnectionClient {
 
   private final PCObserver pcObserver = new PCObserver();
   private final SDPObserver sdpObserver = new SDPObserver();
+  private final WebRTCAudioRecordSamplesReadyCallback
+      audioRecordSamplesReadyCallback = new WebRTCAudioRecordSamplesReadyCallback();
 
   private final EglBase rootEglBase;
   private final Context appContext;
@@ -163,6 +170,8 @@ public class PeerConnectionClient {
   private boolean dataChannelEnabled;
   // Enable RtcEventLog.
   private RtcEventLog rtcEventLog;
+  // Used to write raw input audio samples to an external file for debugging purposes.
+  private FileOutputStream rawAudioFileOutputStream = null;
 
   /**
    * Peer connection parameters.
@@ -204,6 +213,7 @@ public class PeerConnectionClient {
     public final String audioCodec;
     public final boolean noAudioProcessing;
     public final boolean aecDump;
+    public final boolean saveInputAudioToFile;
     public final boolean useOpenSLES;
     public final boolean disableBuiltInAEC;
     public final boolean disableBuiltInAGC;
@@ -216,22 +226,24 @@ public class PeerConnectionClient {
     public PeerConnectionParameters(boolean videoCallEnabled, boolean loopback, boolean tracing,
         int videoWidth, int videoHeight, int videoFps, int videoMaxBitrate, String videoCodec,
         boolean videoCodecHwAcceleration, boolean videoFlexfecEnabled, int audioStartBitrate,
-        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean useOpenSLES,
-        boolean disableBuiltInAEC, boolean disableBuiltInAGC, boolean disableBuiltInNS,
-        boolean enableLevelControl, boolean disableWebRtcAGCAndHPF, boolean enableRtcEventLog) {
+        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean saveInputAudioToFile,
+        boolean useOpenSLES, boolean disableBuiltInAEC, boolean disableBuiltInAGC,
+        boolean disableBuiltInNS, boolean enableLevelControl, boolean disableWebRtcAGCAndHPF,
+        boolean enableRtcEventLog) {
       this(videoCallEnabled, loopback, tracing, videoWidth, videoHeight, videoFps, videoMaxBitrate,
           videoCodec, videoCodecHwAcceleration, videoFlexfecEnabled, audioStartBitrate, audioCodec,
-          noAudioProcessing, aecDump, useOpenSLES, disableBuiltInAEC, disableBuiltInAGC,
-          disableBuiltInNS, enableLevelControl, disableWebRtcAGCAndHPF, enableRtcEventLog, null);
+          noAudioProcessing, aecDump, saveInputAudioToFile, useOpenSLES, disableBuiltInAEC,
+          disableBuiltInAGC, disableBuiltInNS, enableLevelControl, disableWebRtcAGCAndHPF,
+          enableRtcEventLog, null);
     }
 
     public PeerConnectionParameters(boolean videoCallEnabled, boolean loopback, boolean tracing,
         int videoWidth, int videoHeight, int videoFps, int videoMaxBitrate, String videoCodec,
         boolean videoCodecHwAcceleration, boolean videoFlexfecEnabled, int audioStartBitrate,
-        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean useOpenSLES,
-        boolean disableBuiltInAEC, boolean disableBuiltInAGC, boolean disableBuiltInNS,
-        boolean enableLevelControl, boolean disableWebRtcAGCAndHPF, boolean enableRtcEventLog,
-        DataChannelParameters dataChannelParameters) {
+        String audioCodec, boolean noAudioProcessing, boolean aecDump, boolean saveInputAudioToFile,
+        boolean useOpenSLES, boolean disableBuiltInAEC, boolean disableBuiltInAGC,
+        boolean disableBuiltInNS, boolean enableLevelControl, boolean disableWebRtcAGCAndHPF,
+        boolean enableRtcEventLog, DataChannelParameters dataChannelParameters) {
       this.videoCallEnabled = videoCallEnabled;
       this.loopback = loopback;
       this.tracing = tracing;
@@ -246,6 +258,7 @@ public class PeerConnectionClient {
       this.audioCodec = audioCodec;
       this.noAudioProcessing = noAudioProcessing;
       this.aecDump = aecDump;
+      this.saveInputAudioToFile = saveInputAudioToFile;
       this.useOpenSLES = useOpenSLES;
       this.disableBuiltInAEC = disableBuiltInAEC;
       this.disableBuiltInAGC = disableBuiltInAGC;
@@ -508,6 +521,22 @@ public class PeerConnectionClient {
       }
     });
 
+    // It is possible to save a copy in raw PCM format on a file by checking
+    // the "Save inut audio to file" checkbox in the Settings UI. A callback
+    // interface is set when this flag is enabled. As a result, a copy of recorded
+    // audio samples are provided to this client directly from the native audio
+    // layer in Java.
+    if (peerConnectionParameters.saveInputAudioToFile) {
+      if (!peerConnectionParameters.useOpenSLES) {
+        Log.d(TAG, "Enable recording of microphone input audio to file");
+        WebRtcAudioRecord.setOnAudioSamplesReady(audioRecordSamplesReadyCallback);
+      } else {
+        // TODO(henrika): ensure that the UI reflects that if OpenSL ES is selected,
+        // then the "Save inut audio to file" option shall be grayed out.
+        Log.e(TAG, "Recording of input audio is not supported for OpenSL ES");
+      }
+    }
+
     WebRtcAudioTrack.setErrorCallback(new WebRtcAudioTrack.ErrorCallback() {
       @Override
       public void onWebRtcAudioTrackInitError(String errorMessage) {
@@ -676,8 +705,16 @@ public class PeerConnectionClient {
         Log.e(TAG, "Can not open aecdump file", e);
       }
     }
-
     Log.d(TAG, "Peer connection created.");
+  }
+
+  /* Checks if external storage is available for read and write */
+  public boolean isExternalStorageWritable() {
+    String state = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED.equals(state)) {
+        return true;
+    }
+    return false;
   }
 
   private File createRtcEventLogOutputFile() {
@@ -739,6 +776,15 @@ public class PeerConnectionClient {
     if (videoSource != null) {
       videoSource.dispose();
       videoSource = null;
+    }
+    if (rawAudioFileOutputStream != null) {
+      Log.d(TAG, "Closing file which contains recorded audio");
+      try {
+        rawAudioFileOutputStream.close();
+      } catch (IOException ex) {
+        //
+      }
+      rawAudioFileOutputStream = null;
     }
     localRender = null;
     remoteRenders = null;
@@ -1335,6 +1381,65 @@ public class PeerConnectionClient {
 
     @Override
     public void onAddTrack(final RtpReceiver receiver, final MediaStream[] mediaStreams) {}
+  }
+
+  // Implements the WebRtcAudioRecordSamplesReadyCallback interface and writes
+  // recorded audio samples to an output file. This callback mechanism is not
+  // enabled by default but must be enabled explicitly.
+  private class WebRTCAudioRecordSamplesReadyCallback
+      implements WebRtcAudioRecordSamplesReadyCallback {
+    private long fileSizeInBytes = 0;
+
+    // Utilizes audio parameters to create a file name which contains sufficient
+    // information so that the file can be played using an external file player.
+    // Example: /sdcard/recorded_audio_16bits_48000Hz_mono.pcm.
+    private void openRawAudioOutputFile(int sampleRate, int channelCount) {
+      final String fileName = Environment.getExternalStorageDirectory().getPath()
+          + File.separator + "recorded_audio_16bits_"
+          + String.valueOf(sampleRate) + "Hz"
+          + ((channelCount == 1) ? "_mono" : "_stereo") + ".pcm";
+      final File outputFile = new File(fileName);
+      try {
+        rawAudioFileOutputStream = new FileOutputStream(outputFile);
+      } catch (FileNotFoundException e) {
+        reportError("Failed to open audio output file: " + e.getMessage());
+      }
+      Log.d(TAG, "Opened file for recording: " + fileName);
+    }
+
+    @Override
+    // Called when new audio samples are ready.
+    public void onWebRtcAudioRecordSamplesReady(AudioSamples samples) {
+      // The native audio layer on Android should use 16-bit PCM format.
+      if (samples.getAudioFormat() != AudioFormat.ENCODING_PCM_16BIT) {
+        reportError("Invalid audio format");
+        return;
+      }
+      // Open a new file for the first callback only.
+      if (rawAudioFileOutputStream == null) {
+        openRawAudioOutputFile(samples.getSampleRate(), samples.getChannelCount());
+        fileSizeInBytes = 0;
+      }
+      // Append the recorded 16-bit audio samples to the output file.
+      executor.execute(new Runnable() {
+        @Override
+        public void run() {
+          if (rawAudioFileOutputStream != null) {
+            try {
+              // Set a limit on max file size. 58348800 bytes corresponds to
+              // approximately 10 minutes of recording in mono at 48kHz.
+              if (fileSizeInBytes < 58348800L) {
+                // Writes samples.getData().length bytes to output stream.
+                rawAudioFileOutputStream.write(samples.getData());
+                fileSizeInBytes += samples.getData().length;
+              }
+            } catch (IOException e) {
+              reportError("Failed to write audio to file: " + e.getMessage());
+            }
+          }
+        }
+      });
+    }
   }
 
   // Implementation detail: handle offer creation/signaling and answer setting,
