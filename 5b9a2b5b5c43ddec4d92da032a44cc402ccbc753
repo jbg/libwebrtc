@@ -279,6 +279,52 @@
       "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "013e9039_194b3251",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T08:52:17Z",
+      "side": 1,
+      "message": "please add unit to the name of the field",
+      "range": {
+        "startLine": 386,
+        "startChar": 15,
+        "endLine": 386,
+        "endChar": 45
+      },
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38a6b098_b7b7e34f",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T08:52:17Z",
+      "side": 1,
+      "message": "Not nice, if this is optional, can we instead use Integer with null representing no value.",
+      "range": {
+        "startLine": 423,
+        "startChar": 6,
+        "endLine": 423,
+        "endChar": 42
+      },
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
