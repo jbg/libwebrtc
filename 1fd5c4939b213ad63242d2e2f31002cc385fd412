@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1fdecc51_bc87c24f",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-16T18:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b75175a3_871b0a0a",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86a9ee79_de1c9749",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "750ef6fd_ffc68eeb",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-16T18:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a9ee79_de1c9749",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc90971a_b4620682",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75254816_1478af3c",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-16T18:06:52Z",
+      "side": 1,
+      "message": "Sounds good, that\u0027s what I originally did here. \n\nI changed it to be more explicit because of a possible case where modified_config.sdp_semantics is PlanB (\u003d\u003d kDefault), but for some reason the sdp_semantics_ is not kDefault. Then we would be changing modified_config.sdp_semantics \u003d sdp_semantics_. This shouldn\u0027t be a problem as long as PeerConnectionIntegrationInteropTest initializes PeerConnectionIntegrationBaseTest with kDefault, it\u0027s just a bit weird because it sets modified_config.sdp_semantics \u003d sdp_semantics_ \u003d kDefault, which is already its value.\n\nAnyways, I changed it back.",
+      "parentUuid": "cc90971a_b4620682",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "f5396c42_c8826334",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-16T18:06:52Z",
+      "side": 1,
+      "message": "I created this object. The one thing is if you want to reuse expectations you need to set them again to reset the expect frames to the current frame count. The alternative is having an InitExpectations() type of function that is called every time we call ExpectNewFrames. This makes the object messier so I didn\u0027t go with this, and called out how expectations can\u0027t be reused in the class header. Let me know what you think.\n\nAlso I made a fix to remove the fake video renderers. It\u0027s not perfect but it is the same issue that by the time you can make the check to see that the transceiver isn\u0027t receiving you can\u0027t check it against the m section\u0027s direction because the transceiver is no longer associated. I thought it would be adequate for the test.",
+      "parentUuid": "3d5fc2b0_f26f5f2c",
+      "range": {
+        "startLine": 1136,
+        "startChar": 11,
+        "endLine": 1136,
+        "endChar": 30
+      },
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4f17157_4a1eee76",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "f4e3128d_f2a30228",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3512,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-16T18:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f17157_4a1eee76",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb0afa4_f570bdc0",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
@@ -107,6 +203,24 @@
       "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b00321d_e97e5f15",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-16T18:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb0afa4_f570bdc0",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
