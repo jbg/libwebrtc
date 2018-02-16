@@ -16,6 +16,23 @@
       "revId": "c9a4a9d4b3b2d139599e3b80df81957e883691db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03a22d9d_538db7f8",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-02-16T13:37:07Z",
+      "side": 1,
+      "message": "This seems to be the critical point for deciding what a huge frame is.\nBut I can\u0027t tell from the code what the definition is.\n\nkTriggeredBySize doesn\u0027t appear to be set anywhere in the present codebase.",
+      "revId": "c9a4a9d4b3b2d139599e3b80df81957e883691db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
