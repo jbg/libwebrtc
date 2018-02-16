@@ -22,6 +22,30 @@
       "revId": "eeaa9f39d2ba3455e3f856bc86e82f81c67ed440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa8ce411_9cd78adb",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-16T12:56:22Z",
+      "side": 1,
+      "message": "No, we still do not.\nProtecting just one stream when several are used.",
+      "parentUuid": "8d16f6ad_daac772d",
+      "range": {
+        "startLine": 109,
+        "startChar": 78,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "eeaa9f39d2ba3455e3f856bc86e82f81c67ed440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
