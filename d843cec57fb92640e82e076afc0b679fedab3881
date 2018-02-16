@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfc8f725_7a11b248",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-16T10:18:51Z",
+      "side": 1,
+      "message": "Are you sure that moving this header to another build target will not break users?",
+      "revId": "d843cec57fb92640e82e076afc0b679fedab3881",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
