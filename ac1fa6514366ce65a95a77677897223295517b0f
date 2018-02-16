@@ -16,6 +16,24 @@
       "revId": "ac1fa6514366ce65a95a77677897223295517b0f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "738b3ee0_df2e0650",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-16T17:54:09Z",
+      "side": 1,
+      "message": "Since no tests are testing for expected calls on the transport controller we do not currently need a mock. It would make sense to replace it with a mock if such tests are added in the future.",
+      "parentUuid": "46f45726_1f87d6cd",
+      "revId": "ac1fa6514366ce65a95a77677897223295517b0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
