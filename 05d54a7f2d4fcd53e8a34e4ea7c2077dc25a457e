@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd8d5e2d_5b36ed1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-02-16T23:21:11Z",
+      "side": 1,
+      "message": "Do you mean that Chromium roll will be broken until this change lands?\n\nAs it stands, I first understood it as \"Chromium most roll before this change lands\", and still not sure.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "05d54a7f2d4fcd53e8a34e4ea7c2077dc25a457e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
