@@ -327,6 +327,7 @@ void ExtractStats(const cricket::VideoSenderInfo& info, StatsReport* report) {
     { StatsReport::kStatsValueNamePacketsSent, info.packets_sent },
     { StatsReport::kStatsValueNamePlisReceived, info.plis_rcvd },
     { StatsReport::kStatsValueNameFramesEncoded, info.frames_encoded },
+    { StatsReport::kStatsValueHugeFramesSent, info.huge_frames_sent },
   };
 
   for (const auto& i : ints)
