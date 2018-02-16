@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b0703425_93be7ff4",
+        "filename": "examples/androidapp/res/values/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-16T14:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5b50fca_81237339",
+      "range": {
+        "startLine": 221,
+        "startChar": 18,
+        "endLine": 221,
+        "endChar": 58
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d5931d4_3c7b44bf",
         "filename": "examples/androidapp/src/org/appspot/apprtc/ConnectActivity.java",
         "patchSetId": 14
@@ -45,6 +69,30 @@
       "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c09f84a1_ad52426f",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/ConnectActivity.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-16T14:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d5931d4_3c7b44bf",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 33
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "ddd2b0cf_a70dab89",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-16T14:26:13Z",
+      "side": 1,
+      "message": "Not sure if I understand. That is exactly what I do here. You don\u0027t want it to be private?",
+      "parentUuid": "065545ea_b57848e9",
+      "range": {
+        "startLine": 1396,
+        "startChar": 16,
+        "endLine": 1396,
+        "endChar": 53
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4d63056_b3dbbe00",
         "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
         "patchSetId": 14
@@ -114,6 +186,30 @@
       "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01670c30_7712f08d",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-16T14:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4d63056_b3dbbe00",
+      "range": {
+        "startLine": 1438,
+        "startChar": 36,
+        "endLine": 1438,
+        "endChar": 45
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
