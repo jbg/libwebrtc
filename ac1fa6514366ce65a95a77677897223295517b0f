@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46f45726_1f87d6cd",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-02-16T16:06:29Z",
+      "side": 1,
+      "message": "I\u0027m not sure how the transport controller classes interrelate. Why do we not want to use a mock here, so we can test how the stream interacts with the transport?",
+      "revId": "ac1fa6514366ce65a95a77677897223295517b0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
