@@ -53,6 +53,8 @@ using Priority = TaskQueue::Priority;
 // An alternative to this approach is to ignore the signal for the whole
 // process:
 //   signal(SIGPIPE, SIG_IGN);
+// Another possible approach is to use socketpair rather than pipe,
+// and use the send syscall with flags MSG_NOSIGNAL | MSG_DONTWAIT.
 void IgnoreSigPipeSignalOnCurrentThread() {
   sigset_t sigpipe_mask;
   sigemptyset(&sigpipe_mask);
@@ -299,6 +301,8 @@ TaskQueue::Impl::Impl(const char* queue_name,
 TaskQueue::Impl::~Impl() {
   RTC_DCHECK(!IsCurrent());
   struct timespec ts;
+  // TODO(nisse): Instead of attempting to write, close the send side
+  // of the pipe, and the receive side will see EOF (i.e., read returning 0).
   char message = kQuit;
   while (write(wakeup_pipe_in_, &message, sizeof(message)) != sizeof(message)) {
     // The queue is full, so we have no choice but to wait and retry.
@@ -348,23 +352,21 @@ void TaskQueue::Impl::PostTask(std::unique_ptr<QueuedTask> task) {
   // as event_base_once to post tasks to the worker thread from a different
   // thread.  However, we can use it when posting from the worker thread itself.
   if (IsCurrent()) {
-    if (event_base_once(event_base_, -1, EV_TIMEOUT, &TaskQueue::Impl::RunTask,
-                        task.get(), nullptr) == 0) {
-      task.release();
-    }
+    RTC_CHECK_EQ(
+        0, event_base_once(event_base_, -1, EV_TIMEOUT,
+                           &TaskQueue::Impl::RunTask, task.release(), nullptr));
   } else {
-    QueuedTask* task_id = task.get();  // Only used for comparison.
     {
       CritScope lock(&pending_lock_);
       pending_.push_back(std::move(task));
     }
+    // TODO(nisse): We could refactor the receive code to not rely on
+    // one character written per task, and then failing to write
+    // because the pipe is full would be harmless.
     char message = kRunTask;
     if (write(wakeup_pipe_in_, &message, sizeof(message)) != sizeof(message)) {
-      RTC_LOG(WARNING) << "Failed to queue task.";
-      CritScope lock(&pending_lock_);
-      pending_.remove_if([task_id](std::unique_ptr<QueuedTask>& t) {
-        return t.get() == task_id;
-      });
+      RTC_LOG_ERR(WARNING) << "Failed to queue task.";
+      RTC_CHECK(false);
     }
   }
 }
@@ -380,7 +382,7 @@ void TaskQueue::Impl::PostDelayedTask(std::unique_ptr<QueuedTask> task,
     ctx->pending_timers_.push_back(timer);
     timeval tv = {rtc::dchecked_cast<int>(milliseconds / 1000),
                   rtc::dchecked_cast<int>(milliseconds % 1000) * 1000};
-    event_add(&timer->ev, &tv);
+    RTC_CHECK_EQ(event_add(&timer->ev, &tv), 0);
   } else {
     PostTask(std::unique_ptr<QueuedTask>(
         new SetTimerTask(std::move(task), milliseconds)));
