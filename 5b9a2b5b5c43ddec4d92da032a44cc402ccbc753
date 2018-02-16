@@ -110,6 +110,24 @@
     },
     {
       "key": {
+        "uuid": "f46dc1c6_59c50614",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2018-02-16T00:43:18Z",
+      "side": 1,
+      "message": "If I could choose, I would prefer just rtt_avg and rtt_stddev. \nI agree that it will have more flexibility if you provide total round trip time, but as the samples increases, the number may overflow or underflow (for floating number). \nAnd at this point, I think the exp-moving average appears to be sufficient. \n\nIf you really want to be flexible, I suggest allowing app to specify the moving average factor, and designate a special moving average factor (like 0, actually this is a natural choice) as the average of all previous values. With the average of all previous values, we can easily compute the total value (because the number of samples is just stun_binding_responses_received).",
+      "parentUuid": "7f108c42_594c1f00",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78eb37c7_ecaad248",
         "filename": "p2p/base/port.h",
         "patchSetId": 5
