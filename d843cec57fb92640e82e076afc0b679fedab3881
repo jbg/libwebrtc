@@ -16,6 +16,24 @@
       "revId": "d843cec57fb92640e82e076afc0b679fedab3881",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf3ff6a_2c9d06b0",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-16T12:45:29Z",
+      "side": 1,
+      "message": "We\u0027ll see what bots say. But I think it is unlikely to be using VideoSinkInterface without already depending on video_frame_api.",
+      "parentUuid": "bfc8f725_7a11b248",
+      "revId": "d843cec57fb92640e82e076afc0b679fedab3881",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
