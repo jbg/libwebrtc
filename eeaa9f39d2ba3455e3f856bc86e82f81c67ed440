@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d16f6ad_daac772d",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-16T12:12:53Z",
+      "side": 1,
+      "message": "So do we support multistream protection now?",
+      "range": {
+        "startLine": 109,
+        "startChar": 78,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "eeaa9f39d2ba3455e3f856bc86e82f81c67ed440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
