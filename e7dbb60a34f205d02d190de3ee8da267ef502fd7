@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5b50fca_81237339",
+        "filename": "examples/androidapp/res/values/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T12:10:40Z",
+      "side": 1,
+      "message": "nit: place under aecdump?",
+      "range": {
+        "startLine": 221,
+        "startChar": 18,
+        "endLine": 221,
+        "endChar": 58
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d5931d4_3c7b44bf",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/ConnectActivity.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T12:10:40Z",
+      "side": 1,
+      "message": "I am not sure these comments have actually that much value, consider removing them?",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 33
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c351dc65_8d4701f9",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T12:10:40Z",
+      "side": 1,
+      "message": "I think we should try to get rid of this constructor... Could you just update the tests to pass null as the last parameter while you are at it.",
+      "range": {
+        "startLine": 227,
+        "startChar": 4,
+        "endLine": 227,
+        "endChar": 96
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "065545ea_b57848e9",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T12:10:40Z",
+      "side": 1,
+      "message": "I think we could extract this to a separate class that implements WebRtcAudioRecordSamplesReadyCallback and streams it to an output stream.",
+      "range": {
+        "startLine": 1396,
+        "startChar": 16,
+        "endLine": 1396,
+        "endChar": 53
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4d63056_b3dbbe00",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-16T12:10:40Z",
+      "side": 1,
+      "message": "Make a constant?",
+      "range": {
+        "startLine": 1438,
+        "startChar": 36,
+        "endLine": 1438,
+        "endChar": 45
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
