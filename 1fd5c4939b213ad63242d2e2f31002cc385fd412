@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "2d4032cf_c2200ccf",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-16T18:58:23Z",
+      "side": 1,
+      "message": "To clarify, kDefault is not \u003d\u003d to kPlanB or kUnified Plan -- it\u0027s a separate enum member that gets interpreted by the PeerConnection as either Plan B or Unified Plan. So there shouldn\u0027t be any confusion between kDefault and the current effective default, kPlanB.",
+      "parentUuid": "75254816_1478af3c",
+      "revId": "1fd5c4939b213ad63242d2e2f31002cc385fd412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d5fc2b0_f26f5f2c",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
