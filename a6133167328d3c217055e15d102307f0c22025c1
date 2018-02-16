@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "82209e84_bd339e9d",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "I think Peter likely was thinking of passing this flag directly from PeerConnection to PortAllocator (in ReconfigurePortAllocator_n), instead of going through TransportController/JsepTransport/P2PTransportChannel.",
+      "parentUuid": "3bc2d84c_ecd4db00",
+      "range": {
+        "startLine": 563,
+        "startChar": 5,
+        "endLine": 563,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf462a1c_47d19f36",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 4
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "Ack. Same as the above. How about using the session?",
       "parentUuid": "bf462a1c_47d19f36",
+      "range": {
+        "startLine": 1151,
+        "startChar": 78,
+        "endLine": 1151,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58f402a8_7ffdd4cd",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Again, I imagine Peter was thinking of adding a PortAllocator::GetStats, instead of going through P2PTransportChannel at all.",
+      "parentUuid": "580f39ef_cdf60b6d",
       "range": {
         "startLine": 1151,
         "startChar": 78,

@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "3380635c_587076d6",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Should mention that units are milliseconds.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f6e796f_0eb5ed28",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Can this use rtc::Optional\u003cint\u003e instead of kUndefined?\n\nAlso, could move below ice_check_min_interval, just to group similar fields together.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a44fb673_557032e1",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "nit: If it\u0027s set back to Undefined (or an empty rtc::Optional, if you make that change), I\u0027d expect the ports to start using the default keepalive interval. Instead of it being treated as a no-op.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fe3ab20_bb73cfc8",
         "filename": "p2p/base/p2ptransportchannel_unittest.cc",
         "patchSetId": 5
@@ -19,6 +70,176 @@
         "endLine": 1182,
         "endChar": 35
       },
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3820873_aa1b7204",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "nit: Can you initialize these to 0 in the header? That\u0027s typically our style.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f108c42_594c1f00",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "I think the \"total round trip time\" approach is preferable to using a moving average, since that allows the application to decide itself how heavily to weight recent measurements relative to older measurements.\n\nAnd variance could be computed over any interval in the same way if we also had \"total round trip times squared\". Dunno why I didn\u0027t realize this earlier; I forgot that variance could be represented as E(X^2) - E(X)^2.\n\nSo for example, if the application wants \"variance over the last second\", they call getStats twice, 1 second apart, then do:\n\ntotal_rtt_diff \u003d new_stats.total_rtt - old_stats.total_rtt;\ntotal_rtt_squared_diff \u003d new_stats.total_rtt_squared - old_stats.total_rtt_squared;\nvariance \u003d total_rtt_squared_diff - (total_rtt_diff * total_rtt_diff);",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78eb37c7_ecaad248",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Do we need is_local? We don\u0027t gather any stats for remote candidates.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca7da84f_147aa1c3",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Is this used?",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae0da3bf_c06b4b19",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Since this is only updated by UDPPort, could move this member variable there (and make GetStats virtual, with default implementation doing nothing).",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9fa0d54_ee2391f8",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Would be better to increment this in UDPPort::OnSendPacket, since that\u0027s closer to where the request actually goes out.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01251250_f7d7837f",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "Doesn\u0027t need to be a size_t, can be an int like Elapsed() returns. Our style guide suggests using signed types unless there\u0027s a good reason not to.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2613e135_90d03033",
+        "filename": "p2p/client/basicportallocator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "I think a presubmit will complain about the reinterpret_cast. Could change to a static_cast, or make set_stun_keepalive_delay virtual.\n\nAlso, I think you only want STUN_PORT_TYPE, otherwise this will get TCPPorts as well...",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dd6067c_8ac24cb1",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "This TODO may be better located in rtcstats_objects.h, around RTCIceCandidateStats.",
+      "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e09383cb_6f9f03e2",
+        "filename": "pc/statscollector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-16T00:12:09Z",
+      "side": 1,
+      "message": "This seems to be using the port_stats field that\u0027s never filled",
       "revId": "5b9a2b5b5c43ddec4d92da032a44cc402ccbc753",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
