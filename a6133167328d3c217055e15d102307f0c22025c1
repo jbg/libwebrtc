@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "1356a85c_aee97ada",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-16T20:35:23Z",
+      "side": 1,
+      "message": "Yes I was.",
+      "parentUuid": "82209e84_bd339e9d",
+      "range": {
+        "startLine": 563,
+        "startChar": 5,
+        "endLine": 563,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf462a1c_47d19f36",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 4
@@ -238,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "ec434f5a_392f8c5e",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-16T20:35:23Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I was thinking.",
+      "parentUuid": "58f402a8_7ffdd4cd",
+      "range": {
+        "startLine": 1151,
+        "startChar": 78,
+        "endLine": 1151,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "415ee2e6_a0f8fa6c",
         "filename": "p2p/base/port.h",
         "patchSetId": 4
@@ -273,6 +321,30 @@
       "side": 1,
       "message": "I was thinking about the possibility of adding other stats in the future, and stats that are not applicable to certain type of ports are left to default/undefined values and can be ignored by the application. What do you think?",
       "parentUuid": "415ee2e6_a0f8fa6c",
+      "range": {
+        "startLine": 109,
+        "startChar": 59,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fa959ae_8385171a",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-16T20:35:23Z",
+      "side": 1,
+      "message": "I think we could approach that by having this be StunStats and later we could have XStats and YStats, etc, all optional things on CandidateStats.",
+      "parentUuid": "89b61b0f_1e6a4f9a",
       "range": {
         "startLine": 109,
         "startChar": 59,
@@ -332,6 +404,30 @@
     },
     {
       "key": {
+        "uuid": "b00ebf66_2d0a6c60",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-16T20:35:23Z",
+      "side": 1,
+      "message": "I think for now we should just focus on adding stats for local candidates and then worry about doing any kind of unification with candidate pair stats later.",
+      "parentUuid": "631dbb65_1bded04f",
+      "range": {
+        "startLine": 134,
+        "startChar": 16,
+        "endLine": 134,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5c035141_46f31341",
         "filename": "p2p/base/stunport.cc",
         "patchSetId": 4
@@ -367,6 +463,30 @@
       "side": 1,
       "message": "Done. A related issue to the naming is UDPPort::SendStunBindingRequest is only used for sending keepalive pings in the current implementation though, and connectivity checks are sent using different port-level methods with its own RTT stats. I am a bit concerned if it would cause confusion (it did to me) whether connectivity check stats is also included in the STUN numbers above since they are both STUN pings.",
       "parentUuid": "5c035141_46f31341",
+      "range": {
+        "startLine": 462,
+        "startChar": 46,
+        "endLine": 462,
+        "endChar": 0
+      },
+      "revId": "a6133167328d3c217055e15d102307f0c22025c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64ac658f_548560ed",
+        "filename": "p2p/base/stunport.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5660
+      },
+      "writtenOn": "2018-02-16T20:35:23Z",
+      "side": 1,
+      "message": "I think we should be very clear when something an ICE check and when something is a \"normal\" STUN binding request, which would mean moving away from terms like \"STUN ping\" which are ambiguous.",
+      "parentUuid": "75e83264_8f83a5d7",
       "range": {
         "startLine": 462,
         "startChar": 46,
