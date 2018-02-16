@@ -11,11 +11,21 @@
 #ifndef MODULES_AUDIO_PROCESSING_AGC2_AGC2_TESTING_COMMON_H_
 #define MODULES_AUDIO_PROCESSING_AGC2_AGC2_TESTING_COMMON_H_
 
+#include <vector>
+
+#include "rtc_base/basictypes.h"
+
 namespace webrtc {
 
 // Level Estimator test params.
 constexpr float kDecayMs = 500.f;
 
+// Limiter params.
+constexpr double kLimiterMaxInputLevel = 1.0;
+constexpr double kLimiterKneeSmoothness = 1.0;
+constexpr double kLimiterCompressionRatio = 5.0;
+
+std::vector<double> LinSpace(const double l, const double r, size_t num_points);
 }  // namespace webrtc
 
 #endif  // MODULES_AUDIO_PROCESSING_AGC2_AGC2_TESTING_COMMON_H_
