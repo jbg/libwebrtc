@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "143159ec_23abd0d6",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-02-16T13:35:01Z",
+      "side": 1,
+      "message": "why not uint32_t ?\nMixing signed/unsigned is not recommended.",
+      "revId": "c9a4a9d4b3b2d139599e3b80df81957e883691db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
