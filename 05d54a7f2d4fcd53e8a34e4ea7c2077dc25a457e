@@ -22,6 +22,30 @@
       "revId": "05d54a7f2d4fcd53e8a34e4ea7c2077dc25a457e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d20e2489_4aad897e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6757
+      },
+      "writtenOn": "2018-02-16T23:23:16Z",
+      "side": 1,
+      "message": "No, I mean that https://crrev.com/c/924114, which is in Chromium, needs to roll into webrtc for this CL to work on your CQ.",
+      "parentUuid": "cd8d5e2d_5b36ed1a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "05d54a7f2d4fcd53e8a34e4ea7c2077dc25a457e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
