@@ -101,9 +101,6 @@ class VideoStreamEncoder : public rtc::VideoSinkInterface<VideoFrame>,
 
   void SendKeyFrame();
 
-  // virtual to test EncoderStateFeedback with mocks.
-  virtual void OnReceivedIntraFrameRequest(size_t stream_index);
-
   void OnBitrateUpdated(uint32_t bitrate_bps,
                         uint8_t fraction_lost,
                         int64_t round_trip_time_ms);
