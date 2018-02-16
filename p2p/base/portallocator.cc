@@ -79,6 +79,20 @@ bool PortAllocatorSession::IsStopped() const {
   return false;
 }
 
+void PortAllocatorSession::GetCandidateStatsListFromReadyPorts(
+    CandidateStatsList* candidate_stats_list) {
+  auto ports = ReadyPorts();
+  for (auto* port : ports) {
+    auto candidates = port->Candidates();
+    for (auto candidate : candidates) {
+      CandidateStats candidate_stats;
+      candidate_stats.candidate = candidate;
+      port->GetStats(&candidate_stats.port_stats);
+      candidate_stats_list->push_back(std::move(candidate_stats));
+    }
+  }
+}
+
 uint32_t PortAllocatorSession::generation() {
   return generation_;
 }

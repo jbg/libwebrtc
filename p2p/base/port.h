@@ -106,6 +106,36 @@ enum class IceCandidatePairState {
   // frozen because we have not implemented ICE freezing logic.
 };
 
+// Stats that we can return about the port of a connection.
+class PortStats {
+ public:
+  PortStats() = default;
+  PortStats(const PortStats&) = default;
+  ~PortStats() = default;
+
+  PortStats& operator=(const PortStats& other);
+
+  int stun_binding_requests_sent = 0;
+  int stun_binding_responses_received = 0;
+  double stun_binding_rtt_ms_total = 0;
+  double stun_binding_rtt_ms_squared_total = 0;
+};
+
+// Stats that we can return about a candidate.
+class CandidateStats {
+ public:
+  CandidateStats();
+  CandidateStats(const CandidateStats&);
+  ~CandidateStats();
+
+  Candidate candidate;
+  bool is_local;
+  // PortStats of the port where this candidate is gathered.
+  PortStats port_stats;
+};
+
+typedef std::vector<CandidateStats> CandidateStatsList;
+
 // Stats that we can return about the connections for a transport channel.
 // TODO(hta): Rename to ConnectionStats
 struct ConnectionInfo {
@@ -147,9 +177,11 @@ struct ConnectionInfo {
   uint64_t total_round_trip_time_ms;
   // https://w3c.github.io/webrtc-stats/#dom-rtcicecandidatepairstats-currentroundtriptime
   rtc::Optional<uint32_t> current_round_trip_time_ms;
+  // Port-level stats.
+  PortStats port_stats;
 };
 
-// Information about all the connections of a channel.
+// Information about all the candidate pairs of a channel.
 typedef std::vector<ConnectionInfo> ConnectionInfos;
 
 const char* ProtoToString(ProtocolType proto);
@@ -367,6 +399,8 @@ class Port : public PortInterface, public rtc::MessageHandler,
   size_t AddPrflxCandidate(const Candidate& local);
 
   int16_t network_cost() const { return network_cost_; }
+
+  void GetStats(PortStats* stats) override {};
 
  protected:
   enum { MSG_DESTROY_IF_DEAD = 0, MSG_FIRST_AVAILABLE };
