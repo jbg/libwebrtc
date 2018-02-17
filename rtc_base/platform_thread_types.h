@@ -15,6 +15,7 @@
 #include <winsock2.h>
 #include <windows.h>
 #elif defined(WEBRTC_FUCHSIA)
+#include <zircon/process.h>
 #include <zircon/types.h>
 #elif defined(WEBRTC_POSIX)
 #include <pthread.h>
@@ -32,6 +33,21 @@ typedef pthread_t PlatformThreadRef;
 typedef pid_t PlatformThreadId;
 typedef pthread_t PlatformThreadRef;
 #endif
+
+// Retrieve the ID of the current thread.
+PlatformThreadId CurrentThreadId();
+
+// Retrieves a reference to the current thread. On Windows, this is the same
+// as CurrentThreadId. On other platforms it's the pthread_t returned by
+// pthread_self().
+PlatformThreadRef CurrentThreadRef();
+
+// Compares two thread identifiers for equality.
+bool IsThreadRefEqual(const PlatformThreadRef& a, const PlatformThreadRef& b);
+
+// Sets the current thread name.
+void SetCurrentThreadName(const char* name);
+
 }  // namespace rtc
 
 #endif  // RTC_BASE_PLATFORM_THREAD_TYPES_H_
