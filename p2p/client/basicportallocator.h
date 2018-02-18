@@ -68,6 +68,9 @@ class BasicPortAllocator : public PortAllocator {
     return relay_port_factory_;
   }
 
+  void GetCandidateStatsFromPooledSessions(
+      CandidateStatsList* candidate_stats_list) override;
+
  private:
   void Construct();
 
@@ -127,6 +130,8 @@ class BasicPortAllocatorSession : public PortAllocatorSession,
   bool CandidatesAllocationDone() const override;
   void RegatherOnFailedNetworks() override;
   void RegatherOnAllNetworks() override;
+  void SetStunKeepaliveIntervalForReadyPorts(
+      rtc::Optional<int> stun_keepalive_interval) override;
   void PruneAllPorts() override;
 
  protected:

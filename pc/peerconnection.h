@@ -253,6 +253,7 @@ class PeerConnection : public PeerConnectionInternal,
     return sctp_transport_name_;
   }
 
+  cricket::CandidateStatsList GetPooledCandidateStats() const override;
   std::map<std::string, std::string> GetTransportNamesByMid() const override;
   std::map<std::string, cricket::TransportStats> GetTransportStatsByNames(
       const std::set<std::string>& transport_names) override;
@@ -666,7 +667,8 @@ class PeerConnection : public PeerConnectionInternal,
       IceTransportsType type,
       int candidate_pool_size,
       bool prune_turn_ports,
-      webrtc::TurnCustomizer* turn_customizer);
+      webrtc::TurnCustomizer* turn_customizer,
+      rtc::Optional<int> stun_candidate_keepalive_interval);
 
   // Starts output of an RTC event log to the given output object.
   // This function should only be called from the worker thread.

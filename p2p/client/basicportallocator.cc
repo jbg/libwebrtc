@@ -226,6 +226,13 @@ void BasicPortAllocator::InitRelayPortFactory(
   }
 }
 
+void BasicPortAllocator::GetCandidateStatsFromPooledSessions(
+    CandidateStatsList* candidate_stats_list) {
+  for (const auto& session : pooled_sessions()) {
+    session->GetCandidateStatsFromReadyPorts(candidate_stats_list);
+  }
+}
+
 // BasicPortAllocatorSession
 BasicPortAllocatorSession::BasicPortAllocatorSession(
     BasicPortAllocator* allocator,
@@ -426,6 +433,17 @@ void BasicPortAllocatorSession::Regather(
     SignalIceRegathering(this, reason);
 
     DoAllocate(disable_equivalent_phases);
+  }
+}
+
+void BasicPortAllocatorSession::SetStunKeepaliveIntervalForReadyPorts(
+    rtc::Optional<int> stun_keepalive_interval) {
+  auto ports = ReadyPorts();
+  for (PortInterface* port : ports) {
+    if (port->Type() == STUN_PORT_TYPE) {
+      static_cast<UDPPort*>(port)->set_stun_keepalive_delay(
+          stun_keepalive_interval);
+    }
   }
 }
 
@@ -1357,6 +1375,8 @@ void AllocationSequence::CreateStunPorts() {
       session_->username(), session_->password(), config_->StunServers(),
       session_->allocator()->origin());
   if (port) {
+    port->set_stun_keepalive_delay(
+        session_->allocator()->stun_candidate_keepalive_interval());
     session_->AddAllocatedPort(port, this, true);
     // Since StunPort is not created using shared socket, |port| will not be
     // added to the dequeue.
@@ -1546,10 +1566,9 @@ void AllocationSequence::OnPortDestroyed(PortInterface* port) {
 }
 
 // PortConfiguration
-PortConfiguration::PortConfiguration(
-    const rtc::SocketAddress& stun_address,
-    const std::string& username,
-    const std::string& password)
+PortConfiguration::PortConfiguration(const rtc::SocketAddress& stun_address,
+                                     const std::string& username,
+                                     const std::string& password)
     : stun_address(stun_address), username(username), password(password) {
   if (!stun_address.IsNil())
     stun_servers.insert(stun_address);
