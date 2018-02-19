@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d95439e_6392d225",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T12:02:18Z",
+      "side": 1,
+      "message": "may be comment where it is defined as it is non-trival",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55efaabc_ac6cc192",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T12:02:18Z",
+      "side": 1,
+      "message": "close the namespace with comment\n // namespace internal",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd7f5be0_95cf31ed",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T12:02:18Z",
+      "side": 1,
+      "message": "why protected not private?\nprotected imply the function will be accessed by derived class,\n\nfriends has equal access to private section.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d0f6f0b_e040644a",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T12:02:18Z",
+      "side": 1,
+      "message": "I feel long term it might be better to change AnnounceOnThread to support SequenceTaskChecker (probably with some template meta-programming to avoid dependency), together with moving that helper class (with it\u0027s macros) to thread_annotation.h.\n\nInitially macros RTC_RUN_ON was put to thread_checker.h because otherwise there was conflict with another thread_annotation.h header. Since then macroses and header path were renamed with RTC_ prefix, so there shouldn\u0027t be that conflict any more.",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3109830e_fb053fb5",
+        "filename": "rtc_base/sequenced_task_checker_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T12:02:18Z",
+      "side": 1,
+      "message": "might be better to put to private section",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8f9c52_96e1a327",
+        "filename": "rtc_base/sequenced_task_checker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T12:02:18Z",
+      "side": 1,
+      "message": "instead of sorting in this header, put it back to the top and separate with an empty line.\nWill help to notice when header file will  miss some includes.\n(https://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes)",
+      "range": {
+        "startLine": 14,
+        "startChar": 19,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
