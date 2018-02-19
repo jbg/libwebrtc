@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "98d99af7_c4e8a526",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T19:29:57Z",
+      "side": 1,
+      "message": "It\u0027s \"Mask\" I don\u0027t like. I was thinking this part was used as a constraint, set by the application, and applied on the other (supposedly negotiated) set of values, but I\u0027m not sure.\n\nIf parts of this come from the SDP offer/answer, maybe check naming in the relevant specs?",
+      "parentUuid": "5c113c26_6f2aa855",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b261969_860389d5",
         "filename": "call/bitrate_config.h",
         "patchSetId": 2
