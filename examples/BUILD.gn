@@ -179,6 +179,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
 
     if (is_ios) {
       deps = [
+        "../sdk:common_objc",
         "../sdk:framework_objc",
         "../system_wrappers:field_trial_default",
         "../system_wrappers:runtime_enabled_features_default",
@@ -252,6 +253,11 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
     deps = [
       ":apprtc_common",
       ":socketrocket",
+      "../sdk:common_objc",
+      "../sdk:mediaconstraints_objc",
+      "../sdk:peerconnectionfactory_base_objc",
+      "../sdk:videocapture_objc",
+      "../sdk:videocodec_objc",
     ]
     if (is_ios) {
       deps += [
@@ -294,7 +300,13 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         ":AppRTCMobile_ios_frameworks",
         ":apprtc_common",
         ":apprtc_signaling",
+        "../sdk:audio_objc",
+        "../sdk:common_objc",
         "../sdk:framework_objc",
+        "../sdk:mediaconstraints_objc",
+        "../sdk:peerconnectionfactory_base_objc",
+        "../sdk:videocapture_objc",
+        "../sdk:videocodec_objc",
       ]
     }
 
@@ -314,6 +326,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         ":AppRTCMobile_ios_frameworks",
         ":AppRTCMobile_lib",
         "../sdk:framework_objc",
+        "../system_wrappers:metrics_default",
       ]
 
       if (target_cpu == "x86") {
@@ -378,7 +391,10 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         ":apprtc_signaling",
         "../sdk:default_codec_factory_objc",
         "../sdk:metal_objc",
+        "../sdk:peerconnectionfactory_base_objc",
         "../sdk:ui_objc",
+        "../sdk:videocapture_objc",
+        "../sdk:videocodec_objc",
         "../sdk:videocodec_objc",
         "../sdk:videotoolbox_objc",
       ]
@@ -458,8 +474,12 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         deps = [
           ":AppRTCMobile_ios_frameworks",
           ":AppRTCMobile_lib",
+          ":apprtc_signaling",
           "../rtc_base:rtc_base",
           "../sdk:framework_objc",
+          "../sdk:mediaconstraints_objc",
+          "../sdk:peerconnectionfactory_base_objc",
+          "../sdk:videocapture_objc",
           "//build/config/ios:xctest",
           "//third_party/ocmock",
         ]
@@ -471,6 +491,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
           "objc/AppRTCMobile/ios/main.m",
         ]
         deps = [
+          ":AppRTCMobile_lib",
           ":apprtcmobile_test_sources",
           "../sdk:framework_objc",
         ]
