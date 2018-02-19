@@ -178,6 +178,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
     public_configs = [ ":apprtc_common_config" ]
 
     if (is_ios) {
+      check_includes = false
       deps = [
         "../sdk:framework_objc",
         "../system_wrappers:field_trial_default",
@@ -254,6 +255,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
       ":socketrocket",
     ]
     if (is_ios) {
+      check_includes = false
       deps += [
         ":AppRTCMobile_ios_frameworks",
         "../sdk:framework_objc",
@@ -266,6 +268,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
 
   if (is_ios) {
     rtc_static_library("AppRTCMobile_lib") {
+      check_includes = false
       testonly = true
       sources = [
         "objc/AppRTCMobile/ios/ARDAppDelegate.h",
@@ -378,7 +381,10 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         ":apprtc_signaling",
         "../sdk:default_codec_factory_objc",
         "../sdk:metal_objc",
+        "../sdk:peerconnectionfactory_base_objc",
         "../sdk:ui_objc",
+        "../sdk:videocapture_objc",
+        "../sdk:videocodec_objc",
         "../sdk:videocodec_objc",
         "../sdk:videotoolbox_objc",
       ]
@@ -444,6 +450,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
     # TODO(kthelgason): compile xctests on mac when chromium supports it.
     if (is_ios) {
       rtc_source_set("apprtcmobile_test_sources") {
+        check_includes = false
         testonly = true
         include_dirs = [
           "objc/AppRTCMobile",
@@ -458,6 +465,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
         deps = [
           ":AppRTCMobile_ios_frameworks",
           ":AppRTCMobile_lib",
+          ":apprtc_signaling",
           "../rtc_base:rtc_base",
           "../sdk:framework_objc",
           "//build/config/ios:xctest",
@@ -471,6 +479,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
           "objc/AppRTCMobile/ios/main.m",
         ]
         deps = [
+          ":AppRTCMobile_lib",
           ":apprtcmobile_test_sources",
           "../sdk:framework_objc",
         ]
