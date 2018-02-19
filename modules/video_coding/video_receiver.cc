@@ -10,12 +10,14 @@
 
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/libyuv/include/webrtc_libyuv.h"
+#include "modules/utility/include/process_thread.h"
 #include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/jitter_buffer.h"
 #include "modules/video_coding/packet.h"
 #include "modules/video_coding/video_coding_impl.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
@@ -48,11 +50,16 @@ VideoReceiver::VideoReceiver(Clock* clock,
       pre_decode_image_callback_(pre_decode_image_callback),
       _receiveStatsTimer(1000, clock_),
       _retransmissionTimer(10, clock_),
-      _keyRequestTimer(500, clock_) {}
+      _keyRequestTimer(500, clock_) {
+  module_thread_.DetachFromThread();
+}
 
-VideoReceiver::~VideoReceiver() {}
+VideoReceiver::~VideoReceiver() {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+}
 
 void VideoReceiver::Process() {
+  RTC_DCHECK_RUN_ON(&module_thread_);
   // Receive-side statistics
 
   // TODO(philipel): Remove this if block when we know what to do with
@@ -107,7 +114,17 @@ void VideoReceiver::Process() {
   }
 }
 
+void VideoReceiver::ProcessThreadAttached(ProcessThread* process_thread) {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  if (process_thread) {
+    is_attached_to_process_thread_ = true;
+    process_thread_ = process_thread;
+  } else {
+    is_attached_to_process_thread_ = false;
+  }
+}
 int64_t VideoReceiver::TimeUntilNextProcess() {
+  RTC_DCHECK_RUN_ON(&module_thread_);
   int64_t timeUntilNextProcess = _receiveStatsTimer.TimeUntilProcess();
   if (_receiver.NackMode() != kNoNack) {
     // We need a Process call more often if we are relying on
@@ -122,6 +139,7 @@ int64_t VideoReceiver::TimeUntilNextProcess() {
 }
 
 int32_t VideoReceiver::SetReceiveChannelParameters(int64_t rtt) {
+  RTC_DCHECK_RUN_ON(&module_thread_);
   rtc::CritScope cs(&receive_crit_);
   _receiver.UpdateRtt(rtt);
   return 0;
@@ -165,7 +183,8 @@ int32_t VideoReceiver::SetVideoProtection(VCMVideoProtection videoProtection,
 // ready for rendering.
 int32_t VideoReceiver::RegisterReceiveCallback(
     VCMReceiveCallback* receiveCallback) {
-  RTC_DCHECK(construction_thread_.CalledOnValidThread());
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning());
   // TODO(tommi): Callback may be null, but only after the decoder thread has
   // been stopped. Use the signal we now get that tells us when the decoder
   // thread isn't running, to DCHECK that the method is never called while it
@@ -177,7 +196,8 @@ int32_t VideoReceiver::RegisterReceiveCallback(
 
 int32_t VideoReceiver::RegisterReceiveStatisticsCallback(
     VCMReceiveStatisticsCallback* receiveStats) {
-  RTC_DCHECK(construction_thread_.CalledOnValidThread());
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning() && !is_attached_to_process_thread_);
   rtc::CritScope cs(&process_crit_);
   _receiver.RegisterStatsCallback(receiveStats);
   _receiveStatsCallback = receiveStats;
@@ -187,7 +207,8 @@ int32_t VideoReceiver::RegisterReceiveStatisticsCallback(
 // Register an externally defined decoder object.
 void VideoReceiver::RegisterExternalDecoder(VideoDecoder* externalDecoder,
                                             uint8_t payloadType) {
-  RTC_DCHECK(construction_thread_.CalledOnValidThread());
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning());
   // TODO(tommi): This method must be called when the decoder thread is not
   // running.  Do we need a lock in that case?
   rtc::CritScope cs(&receive_crit_);
@@ -201,6 +222,8 @@ void VideoReceiver::RegisterExternalDecoder(VideoDecoder* externalDecoder,
 // Register a frame type request callback.
 int32_t VideoReceiver::RegisterFrameTypeCallback(
     VCMFrameTypeCallback* frameTypeCallback) {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning() && !is_attached_to_process_thread_);
   rtc::CritScope cs(&process_crit_);
   _frameTypeCallback = frameTypeCallback;
   return VCM_OK;
@@ -208,14 +231,39 @@ int32_t VideoReceiver::RegisterFrameTypeCallback(
 
 int32_t VideoReceiver::RegisterPacketRequestCallback(
     VCMPacketRequestCallback* callback) {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning() && !is_attached_to_process_thread_);
   rtc::CritScope cs(&process_crit_);
   _packetRequestCallback = callback;
   return VCM_OK;
 }
 
 void VideoReceiver::TriggerDecoderShutdown() {
-  RTC_DCHECK(construction_thread_.CalledOnValidThread());
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(IsDecoderThreadRunning());
   _receiver.TriggerDecoderShutdown();
+}
+
+void VideoReceiver::DecoderThreadStarting() {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning());
+  if (process_thread_ && !is_attached_to_process_thread_) {
+    process_thread_->RegisterModule(this, RTC_FROM_HERE);
+  }
+#if RTC_DCHECK_IS_ON
+  decoder_thread_is_running_ = true;
+#endif
+}
+
+void VideoReceiver::DecoderThreadStopped() {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(IsDecoderThreadRunning());
+  if (process_thread_ && is_attached_to_process_thread_) {
+    process_thread_->DeRegisterModule(this);
+  }
+#if RTC_DCHECK_IS_ON
+  decoder_thread_is_running_ = false;
+#endif
 }
 
 // Decode next frame, blocking.
@@ -433,7 +481,21 @@ void VideoReceiver::SetNackSettings(size_t max_nack_list_size,
 }
 
 int VideoReceiver::SetMinReceiverDelay(int desired_delay_ms) {
+  RTC_DCHECK_RUN_ON(&construction_thread_);
+  RTC_DCHECK(!IsDecoderThreadRunning());
+  // TODO(tommi): Is the method only used by tests? Maybe could be offered
+  // via a test only subclass?
+  // Info from Stefan: If it is indeed only used by tests I think it's just that
+  // it hasn't been cleaned up when the calling code was cleaned up.
   return _receiver.SetMinReceiverDelay(desired_delay_ms);
+}
+
+bool VideoReceiver::IsDecoderThreadRunning() {
+#if RTC_DCHECK_IS_ON
+  return decoder_thread_is_running_;
+#else
+  return true;
+#endif
 }
 
 }  // namespace vcm
