@@ -509,6 +509,7 @@ rtc_source_set("direct_transport") {
     "../call:call_interfaces",
     "../modules/rtp_rtcp",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
     "../rtc_base:sequenced_task_checker",
     "../system_wrappers",
   ]
@@ -526,6 +527,7 @@ rtc_source_set("single_threaded_task_queue") {
   deps = [
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue_api",
   ]
 }
 
@@ -548,6 +550,7 @@ rtc_source_set("fake_audio_device") {
     "../modules/audio_device:audio_device",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue_api",
     "../system_wrappers",
   ]
 }
