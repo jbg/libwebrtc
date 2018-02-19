@@ -23,6 +23,10 @@ namespace jni {
 std::unique_ptr<VideoDecoder> JavaToNativeVideoDecoder(
     JNIEnv* jni,
     const JavaRef<jobject>& j_decoder) {
+  if (IsNull(jni, j_decoder)) {
+    return nullptr;
+  }
+
   VideoDecoder* decoder;
   if (Java_WrappedNativeVideoDecoder_isInstanceOf(jni, j_decoder)) {
     jlong native_decoder =
@@ -38,6 +42,10 @@ std::unique_ptr<VideoDecoder> JavaToNativeVideoDecoder(
 std::unique_ptr<VideoEncoder> JavaToNativeVideoEncoder(
     JNIEnv* jni,
     const JavaRef<jobject>& j_encoder) {
+  if (IsNull(jni, j_encoder)) {
+    return nullptr;
+  }
+
   VideoEncoder* encoder;
   if (Java_WrappedNativeVideoEncoder_isInstanceOf(jni, j_encoder)) {
     jlong native_encoder =
