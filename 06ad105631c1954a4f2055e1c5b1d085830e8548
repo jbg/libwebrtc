@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c234cf19_831ec12d",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T07:44:34Z",
+      "side": 0,
+      "message": "Please drop corresponding dep from api/BUILD.gn too.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 33
+      },
+      "revId": "06ad105631c1954a4f2055e1c5b1d085830e8548",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
