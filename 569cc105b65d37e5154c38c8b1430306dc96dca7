@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b23a62d4_cf230abe",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-19T17:36:23Z",
+      "side": 1,
+      "message": "Renamed to BitrateConstraints.",
+      "parentUuid": "26b8afa0_ab94fe50",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f714661c_8f38a9a7",
         "filename": "call/bitrate_config.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-19T15:28:26Z",
       "side": 1,
       "message": "Maybe this is the right cl for a rename, to \"constraints\" or \"preferences\" something.",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c113c26_6f2aa855",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-19T17:36:23Z",
+      "side": 1,
+      "message": "A good thing to do in the future would be to merge these two as they have very similar properties. It\u0027s somewhat out of the scope for this work though, so will rename it to BitrateConstraintsMask for the time being. Is that ok?",
+      "parentUuid": "f714661c_8f38a9a7",
       "range": {
         "startLine": 31,
         "startChar": 7,
@@ -68,6 +116,30 @@
       "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a63d37a_472342bc",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-19T17:36:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b261969_860389d5",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 59
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
