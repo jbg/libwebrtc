@@ -215,8 +215,6 @@ rtc_source_set("rtc_base_approved_generic") {
     "pathutils.h",
     "platform_file.cc",
     "platform_file.h",
-    "platform_thread.cc",
-    "platform_thread.h",
     "platform_thread_types.cc",
     "platform_thread_types.h",
     "ptr_util.h",
@@ -240,9 +238,6 @@ rtc_source_set("rtc_base_approved_generic") {
     "swap_queue.h",
     "template_util.h",
     "thread_annotations.h",
-    "thread_checker.h",
-    "thread_checker_impl.cc",
-    "thread_checker_impl.h",
     "timestampaligner.cc",
     "timestampaligner.h",
     "timeutils.cc",
@@ -402,9 +397,17 @@ rtc_source_set("rtc_task_queue") {
 # depend on rtc_task_queue_api.
 rtc_source_set("rtc_task_queue_api") {
   sources = [
+    "platform_thread.h",
+    "sequenced_task_checker.h",
+    "sequenced_task_checker_impl.cc",
+    "sequenced_task_checker_impl.h",
     "task_queue.h",
+    "thread_checker.h",
+    "thread_checker_impl.cc",
+    "thread_checker_impl.h",
   ]
   deps = [
+    ":checks",
     ":rtc_base_approved",
   ]
 }
@@ -439,14 +442,24 @@ rtc_source_set("rtc_task_queue_impl") {
       ]
     }
   }
+
+  sources += [ "platform_thread.cc" ]
 }
 
+# TODO(tommi): Remove this target as it's a noop now.
 rtc_static_library("sequenced_task_checker") {
-  sources = [
-    "sequenced_task_checker.h",
-    "sequenced_task_checker_impl.cc",
-    "sequenced_task_checker_impl.h",
-  ]
+  sources = []
+  if (is_win) {
+    sources = [
+      "noop.cc",
+    ]
+  }
+  if (is_ios || is_mac) {
+    sources = [
+      "noop.mm",
+    ]
+  }
+
   deps = [
     ":checks",
     ":rtc_base_approved",
@@ -461,7 +474,9 @@ rtc_static_library("weak_ptr") {
   ]
   deps = [
     ":rtc_base_approved",
-    ":sequenced_task_checker",
+    ":rtc_task_queue",
+
+    # ":sequenced_task_checker",
   ]
 }
 
@@ -538,6 +553,7 @@ if (is_ios || is_mac) {
     ]
     deps = [
       ":rtc_base_generic",
+      ":rtc_task_queue",
     ]
     visibility = [ ":rtc_base" ]
   }
@@ -941,6 +957,7 @@ if (rtc_include_tests) {
       ":rtc_base",
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
+      ":rtc_task_queue",
       "../system_wrappers:system_wrappers",
       "../test:test_support",
       "//testing/gtest",

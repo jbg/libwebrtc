@@ -121,6 +121,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     "../rtc_base:deprecation",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
     "../rtc_base:stringutils",
   ]
 
@@ -348,6 +349,7 @@ if (rtc_include_tests) {
       "../media:rtc_media_base",
       "../rtc_base:checks",
       "../rtc_base:rtc_base_approved",
+      "../rtc_base:rtc_task_queue",
     ]
     if (!build_with_chromium && is_clang) {
       # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).

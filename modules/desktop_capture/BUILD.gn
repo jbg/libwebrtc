@@ -31,6 +31,7 @@ rtc_static_library("primitives") {
     "../..:webrtc_common",
     "../../:typedefs",
     "../../rtc_base:checks",
+    "../../rtc_base:rtc_task_queue",
   ]
 
   if (!build_with_mozilla) {
@@ -53,6 +54,7 @@ if (rtc_include_tests) {
         ":screen_drawer",
         "../../rtc_base:rtc_base",
         "../../rtc_base:rtc_base_approved",
+        "../../rtc_base:rtc_task_queue",
         "../../system_wrappers",
         "../../test:test_support",
         "../../test:video_test_support",
