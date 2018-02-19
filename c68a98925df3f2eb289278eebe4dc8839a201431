@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37d83309_be408b72",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:19:24Z",
+      "side": 1,
+      "message": "Needs a comment explaining the purpose of the class.",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "114d2378_19a4d5be",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:19:24Z",
+      "side": 1,
+      "message": "BitrateConfigMask is a curious name. Consider renaming in this or one of the follow up cls.\n\nMaybe BitrateConstraints or BitrateConfigConstraints, based on my vague understanding of how it is used. Or Preferences instead of Constraints if they\u0027re not strictly enforced.",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
