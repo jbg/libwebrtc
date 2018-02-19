@@ -238,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "b5f94a0d_e80f2eaf",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 6039
+      },
+      "writtenOn": "2018-02-19T14:04:22Z",
+      "side": 1,
+      "message": "Got it. Let me try to make such a change.",
+      "parentUuid": "08193f58_1d159040",
+      "range": {
+        "startLine": 1396,
+        "startChar": 16,
+        "endLine": 1396,
+        "endChar": 53
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4d63056_b3dbbe00",
         "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
         "patchSetId": 14
