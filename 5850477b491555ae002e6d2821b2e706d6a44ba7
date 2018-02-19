@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "6d23f5ed_5a0cede4",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T18:11:12Z",
+      "side": 1,
+      "message": "MaybeCreateFlexfecSender already has that check, flexfec_sender will be nullptr in that case.\nWith multistream-protection support this particular lines can be left unchanged.\n\ninstead added here (redundant, but helps to read) check flexfec_ssrc !\u003d nullptr",
+      "parentUuid": "ceaa045a_46515cb1",
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d8e30a4_876341b8",
         "filename": "video/video_send_stream_tests.cc",
         "patchSetId": 3
@@ -65,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "905652b7_f17ed3c6",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T18:11:12Z",
+      "side": 1,
+      "message": "yes, by base class, same as GetNumFlexfecStreams (it is an override too)",
+      "parentUuid": "8d8e30a4_876341b8",
+      "range": {
+        "startLine": 648,
+        "startChar": 9,
+        "endLine": 648,
+        "endChar": 27
+      },
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e5577c7_a5a8d8c5",
         "filename": "video/video_send_stream_tests.cc",
         "patchSetId": 3
@@ -76,6 +118,30 @@
       "writtenOn": "2018-02-16T18:15:00Z",
       "side": 1,
       "message": "Would it be nicer to add this to the ctor, and make the member const?",
+      "range": {
+        "startLine": 740,
+        "startChar": 2,
+        "endLine": 740,
+        "endChar": 29
+      },
+      "revId": "5850477b491555ae002e6d2821b2e706d6a44ba7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a302c8d3_b32db776",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-19T18:11:12Z",
+      "side": 1,
+      "message": "That would make other tests noisy, since there I would need to specify a parameter that doesn\u0027t matter.\nBut... that is more consistent with current style. Done.",
+      "parentUuid": "7e5577c7_a5a8d8c5",
       "range": {
         "startLine": 740,
         "startChar": 2,
