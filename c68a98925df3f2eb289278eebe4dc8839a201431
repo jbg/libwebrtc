@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3afb22d3_070d7ba1",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-19T16:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37d83309_be408b72",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "114d2378_19a4d5be",
         "filename": "call/rtp_bitrate_configurator.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a54e2d9b_6b2f515d",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-19T16:10:28Z",
+      "side": 1,
+      "message": "I agree that they have unfortunate naming. Not sure exactly how they are used though, so I\u0027d rather defer changing the names. If you have more insight you are more than welcome to produce a followup CL with that when my changes has landed.",
+      "parentUuid": "114d2378_19a4d5be",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
