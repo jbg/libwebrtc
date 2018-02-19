@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26b8afa0_ab94fe50",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:28:26Z",
+      "side": 1,
+      "message": "Consider carefully if this name is still appropriate when moved out to a broader scope. Are there other uses for a \"bit rate\" config, and if so, can we be a bit more specific here?",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f714661c_8f38a9a7",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:28:26Z",
+      "side": 1,
+      "message": "Maybe this is the right cl for a rename, to \"constraints\" or \"preferences\" something.",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b261969_860389d5",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:28:26Z",
+      "side": 1,
+      "message": "This TODO is 8 months old. Can it be deleted? (Probably best as a separate cl, to ease reverting).",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 59
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
