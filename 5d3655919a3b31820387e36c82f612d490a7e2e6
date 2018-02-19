@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "41e83103_b232b6f2",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-19T12:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d95439e_6392d225",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55efaabc_ac6cc192",
         "filename": "rtc_base/sequenced_task_checker.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0995e379_5dbe54a7",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-19T12:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55efaabc_ac6cc192",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0f04458c_e4a2c919",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-19T12:34:19Z",
+      "side": 1,
+      "message": "changed to private",
+      "parentUuid": "cd7f5be0_95cf31ed",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d0f6f0b_e040644a",
         "filename": "rtc_base/sequenced_task_checker.h",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2018-02-19T12:02:18Z",
       "side": 1,
       "message": "I feel long term it might be better to change AnnounceOnThread to support SequenceTaskChecker (probably with some template meta-programming to avoid dependency), together with moving that helper class (with it\u0027s macros) to thread_annotation.h.\n\nInitially macros RTC_RUN_ON was put to thread_checker.h because otherwise there was conflict with another thread_annotation.h header. Since then macroses and header path were renamed with RTC_ prefix, so there shouldn\u0027t be that conflict any more.",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a96ee00_1f5dddcf",
+        "filename": "rtc_base/sequenced_task_checker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-19T12:34:19Z",
+      "side": 1,
+      "message": "Agree. Indeed I did not want to make the dependency graph more complex than it already is with this change. More changes are coming.",
+      "parentUuid": "5d0f6f0b_e040644a",
       "range": {
         "startLine": 39,
         "startChar": 42,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9eaa19d9_02b64792",
+        "filename": "rtc_base/sequenced_task_checker_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-19T12:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3109830e_fb053fb5",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b8f9c52_96e1a327",
         "filename": "rtc_base/sequenced_task_checker_unittest.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "827b0e84_0e1f32b7",
+        "filename": "rtc_base/sequenced_task_checker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-19T12:34:19Z",
+      "side": 1,
+      "message": "ah, thanks for catching this. this was unintentional.",
+      "parentUuid": "2b8f9c52_96e1a327",
+      "range": {
+        "startLine": 14,
+        "startChar": 19,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "5d3655919a3b31820387e36c82f612d490a7e2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
