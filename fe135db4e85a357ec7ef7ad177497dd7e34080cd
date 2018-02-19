@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35164095_40bf77eb",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:09:14Z",
+      "side": 1,
+      "message": "I think RtpPacketReceived is a bit large to be passed by value (even if callers can use std::move). I\u0027d prefer of you can pass a const reference instead, like it is done downstream from Call. But then I\u0027d also like to have some plan for how to set payload_type_frequency at parse time.\n\nMy earlier plan for that was to let call pass unparsed packets to RtpStreamReceiverController, and configure that class with a payload_type --\u003e frequency map.",
+      "range": {
+        "startLine": 1347,
+        "startChar": 4,
+        "endLine": 1347,
+        "endChar": 35
+      },
+      "revId": "fe135db4e85a357ec7ef7ad177497dd7e34080cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f019b3f7_db98ce18",
+        "filename": "pc/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-19T15:09:14Z",
+      "side": 1,
+      "message": "I\u0027d like to understand why BaseChannel or MediaChannel needs the parsed packet.\n\nThe way I understand it, it used to be that the bundled case was implemented by BaseChannel or some close-by code parsing out the payload type from the RTP packet, looked up the payload type, and then routed it to either the WebrtcVideoEngine or WebrtcVoiceEngine. And the distinction is ultimately used for handling of unsignalled ssrc, to be able to create either a video channel or audio channel to receive that ssrc.\n\nHow much of that is still left? \n\nI would prefer to use the payload-type demux in the RtpDemuxer, where it is used downstream from Call, and wire that up to appropriate handing of unsignalled ssrcs in the WebrtcVideoEngine and WebrtcVoiceEngine.",
+      "range": {
+        "startLine": 609,
+        "startChar": 1,
+        "endLine": 609,
+        "endChar": 61
+      },
+      "revId": "fe135db4e85a357ec7ef7ad177497dd7e34080cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
