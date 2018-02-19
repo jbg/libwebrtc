@@ -214,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "08193f58_1d159040",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-19T13:52:56Z",
+      "side": 1,
+      "message": "I feel PeerConnectionClient is becoming too big if we don\u0027t split out functionality. No one else will likely use the class but it makes it more self-contained.\n\nI think a good exercise is to think if it would be possible to test the class. Testing this class would be very hard given that you would have mock the creation of files etc. On the other hand, if the class took an OutputStream, it would be simple to mock an OutputStream, pass it to the class and test that data is written when onWebRtcAudioRecordSamplesReady is called.",
+      "parentUuid": "bdd77ee4_02d4b381",
+      "range": {
+        "startLine": 1396,
+        "startChar": 16,
+        "endLine": 1396,
+        "endChar": 53
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4d63056_b3dbbe00",
         "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
         "patchSetId": 14
