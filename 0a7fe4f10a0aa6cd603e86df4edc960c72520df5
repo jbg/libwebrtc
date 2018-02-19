@@ -22,6 +22,30 @@
       "revId": "0a7fe4f10a0aa6cd603e86df4edc960c72520df5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87f97bc9_6034919e",
+        "filename": "modules/pacing/interval_budget.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-19T13:52:14Z",
+      "side": 1,
+      "message": "No, it\u0027s reasonable behavior that it will return 0 if no max is set, (equivalent to initializing max to infinity)",
+      "parentUuid": "413fe749_4ea90b7b",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "0a7fe4f10a0aa6cd603e86df4edc960c72520df5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
