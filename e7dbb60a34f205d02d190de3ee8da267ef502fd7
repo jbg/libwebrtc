@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "eb7a3277_afbd8db2",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-19T13:38:33Z",
+      "side": 1,
+      "message": "Yes, I meant moving it out of this class and making it more \"reusable to taking in any output stream\". (You probably also need to pass in an executor for posting.)",
+      "parentUuid": "ddd2b0cf_a70dab89",
+      "range": {
+        "startLine": 1396,
+        "startChar": 16,
+        "endLine": 1396,
+        "endChar": 53
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4d63056_b3dbbe00",
         "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
         "patchSetId": 14
