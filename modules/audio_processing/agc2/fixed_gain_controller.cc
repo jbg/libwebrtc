@@ -27,8 +27,8 @@ namespace {
 // Returns true when the gain factor is so close to 1 that it would
 // not affect int16 samples.
 bool CloseToOne(float gain_factor) {
-  return 1.f - 1.f / kMaxSampleValue <= gain_factor &&
-         gain_factor <= 1.f + 1.f / kMaxSampleValue;
+  return 1.f - 1.f / kMaxFloatS16Value <= gain_factor &&
+         gain_factor <= 1.f + 1.f / kMaxFloatS16Value;
 }
 }  // namespace
 
@@ -83,7 +83,7 @@ void FixedGainController::Process(AudioFrameView<float> signal) {
   for (size_t k = 0; k < signal.num_channels(); ++k) {
     rtc::ArrayView<float> channel_view = signal.channel(k);
     for (auto& sample : channel_view) {
-      sample = rtc::SafeClamp(sample, kMinSampleValue, kMaxSampleValue);
+      sample = rtc::SafeClamp(sample, kMinFloatS16Value, kMaxFloatS16Value);
     }
   }
 }
