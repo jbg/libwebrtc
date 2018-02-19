@@ -89,6 +89,11 @@ VideoEncoderSoftwareFallbackWrapper::VideoEncoderSoftwareFallbackWrapper(
 
 bool VideoEncoderSoftwareFallbackWrapper::InitFallbackEncoder() {
   RTC_LOG(LS_WARNING) << "Encoder falling back to software encoding.";
+  if (!fallback_encoder_) {
+    RTC_LOG(LS_WARNING) << "No fallback available.";
+    use_fallback_encoder_ = false;
+    return false;
+  }
 
   const int ret = fallback_encoder_->InitEncode(
       &codec_settings_, number_of_cores_, max_payload_size_);

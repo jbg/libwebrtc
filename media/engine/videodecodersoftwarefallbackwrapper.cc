@@ -55,8 +55,14 @@ int32_t VideoDecoderSoftwareFallbackWrapper::InitDecode(
 
 bool VideoDecoderSoftwareFallbackWrapper::InitFallbackDecoder() {
   RTC_LOG(LS_WARNING) << "Decoder falling back to software decoding.";
+  if (!fallback_decoder_) {
+    RTC_LOG(LS_WARNING) << "No fallback available.";
+    use_hw_decoder_ = true;
+    return false;
+  }
+
   if (fallback_decoder_->InitDecode(&codec_settings_, number_of_cores_) !=
-      WEBRTC_VIDEO_CODEC_OK) {
+          WEBRTC_VIDEO_CODEC_OK) {
     RTC_LOG(LS_ERROR) << "Failed to initialize software-decoder fallback.";
     use_hw_decoder_ = true;
     return false;
