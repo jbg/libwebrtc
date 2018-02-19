@@ -68,6 +68,9 @@ class BasicPortAllocator : public PortAllocator {
     return relay_port_factory_;
   }
 
+  void GetCandidateStatsFromPooledSessions(
+      CandidateStatsList* candidate_stats_list) override;
+
  private:
   void Construct();
 

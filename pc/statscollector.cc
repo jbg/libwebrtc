@@ -670,10 +670,12 @@ StatsReport* StatsCollector::AddConnectionInfoReport(
     report->AddBoolean(b.name, b.value);
 
   report->AddId(StatsReport::kStatsValueNameChannelId, channel_report_id);
+  cricket::CandidateStats local_candidate_stats(info.local_candidate);
+  cricket::CandidateStats remote_candidate_stats(info.remote_candidate);
   report->AddId(StatsReport::kStatsValueNameLocalCandidateId,
-                AddCandidateReport(info.local_candidate, true)->id());
+                AddCandidateReport(local_candidate_stats, true)->id());
   report->AddId(StatsReport::kStatsValueNameRemoteCandidateId,
-                AddCandidateReport(info.remote_candidate, false)->id());
+                AddCandidateReport(remote_candidate_stats, false)->id());
 
   const Int64ForAdd int64s[] = {
       {StatsReport::kStatsValueNameBytesReceived, info.recv_total_bytes},
@@ -708,8 +710,9 @@ StatsReport* StatsCollector::AddConnectionInfoReport(
 }
 
 StatsReport* StatsCollector::AddCandidateReport(
-    const cricket::Candidate& candidate,
+    const cricket::CandidateStats& candidate_stats,
     bool local) {
+  const auto& candidate = candidate_stats.candidate;
   StatsReport::Id id(StatsReport::NewCandidateId(local, candidate.id()));
   StatsReport* report = reports_.Find(id);
   if (!report) {
@@ -718,6 +721,18 @@ StatsReport* StatsCollector::AddCandidateReport(
     if (local) {
       report->AddString(StatsReport::kStatsValueNameCandidateNetworkType,
                         AdapterTypeToStatsType(candidate.network_type()));
+      if (candidate_stats.stun_stats.has_value()) {
+        const auto& stun_stats = candidate_stats.stun_stats.value();
+        report->AddInt64(StatsReport::kStatsValueNameSentStunKeepaliveRequests,
+                         stun_stats.stun_binding_requests_sent);
+        report->AddInt64(StatsReport::kStatsValueNameRecvStunKeepaliveResponses,
+                         stun_stats.stun_binding_responses_received);
+        report->AddFloat(StatsReport::kStatsValueNameStunKeepaliveRttTotal,
+                         stun_stats.stun_binding_rtt_ms_total);
+        report->AddFloat(
+            StatsReport::kStatsValueNameStunKeepaliveRttSquaredTotal,
+            stun_stats.stun_binding_rtt_ms_squared_total);
+      }
     }
     report->AddString(StatsReport::kStatsValueNameCandidateIPAddress,
                       candidate.address().ipaddr().ToString());
@@ -744,6 +759,13 @@ void StatsCollector::ExtractSessionInfo() {
   report->set_timestamp(stats_gathering_started_);
   report->AddBoolean(StatsReport::kStatsValueNameInitiator,
                      pc_->initial_offerer());
+
+  cricket::CandidateStatsList pooled_candidate_stats_list =
+      pc_->GetPooledCandidateStats();
+
+  for (const cricket::CandidateStats& stats : pooled_candidate_stats_list) {
+    AddCandidateReport(stats, true);
+  }
 
   std::set<std::string> transport_names;
   for (const auto& entry : pc_->GetTransportNamesByMid()) {
