@@ -226,6 +226,13 @@ void BasicPortAllocator::InitRelayPortFactory(
   }
 }
 
+void BasicPortAllocator::GetCandidateStatsFromPooledSessions(
+    CandidateStatsList* candidate_stats_list) {
+  for (const auto& session : pooled_sessions()) {
+    session->GetCandidateStatsFromReadyPorts(candidate_stats_list);
+  }
+}
+
 // BasicPortAllocatorSession
 BasicPortAllocatorSession::BasicPortAllocatorSession(
     BasicPortAllocator* allocator,
