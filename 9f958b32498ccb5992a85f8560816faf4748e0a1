@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2d8ae0e_bb00eefb",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-20T15:47:44Z",
+      "side": 1,
+      "message": "If this class is really useful, shouldn\u0027t it be living in rtc_base?",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94f635e2_4dca2afc",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-20T15:47:44Z",
+      "side": 1,
+      "message": "Specifying the size the backing buffer in hex is a little confusing imo :)",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
