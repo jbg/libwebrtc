@@ -22,6 +22,30 @@
       "revId": "fa4fe647ed45b5b03d07b44e936160eb53668ad4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a44f6dc9_b31df85e",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T09:56:19Z",
+      "side": 0,
+      "message": "It\u0027s used to check for races accessing a critical section. This is redundant and adds an unnecessary requirement on the calling code. (It creates the requirement that the pacer must run on the same thread/queue as remote bit rate estimator) Since it\u0027s very flaky in it\u0027s detection of racing behavior, it\u0027s hard to investigate the errors it causes.",
+      "parentUuid": "b0a7fda2_b17e7aed",
+      "range": {
+        "startLine": 94,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "fa4fe647ed45b5b03d07b44e936160eb53668ad4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
