@@ -22,6 +22,30 @@
       "revId": "3a4977097e5216fe5714db95eb1899387d1cc4be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05604dc8_91736c4c",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-20T19:57:20Z",
+      "side": 1,
+      "message": "I prefer this here. Wanted to error on the side of caution, that\u0027s why I had the access functions. Took them out.",
+      "parentUuid": "fc0eb3ad_06a7f04b",
+      "range": {
+        "startLine": 1088,
+        "startChar": 2,
+        "endLine": 1088,
+        "endChar": 5
+      },
+      "revId": "3a4977097e5216fe5714db95eb1899387d1cc4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
