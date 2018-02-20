@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "272d7c8b_fee13e17",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T16:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1672555_827ff0ff",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1385c1f_45452c7e",
         "filename": "modules/video_coding/video_coding_impl.h",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2018-02-20T16:08:33Z",
       "side": 1,
       "message": "Is there some thread annotation that can be used to only allow modification of a variable while holding a lock?",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4e77370_e7e9eddf",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T16:55:59Z",
+      "side": 1,
+      "message": "Not that we use in webrtc. A lock is not required to write to this variable though. The state and conditions that need to be met when writing, are however checked.",
+      "parentUuid": "c1385c1f_45452c7e",
       "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9578dfe0_04495831",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T16:55:59Z",
+      "side": 1,
+      "message": "This isn\u0027t duplicate state. This can be false while process_thread_ is non-null.\n\nConsider this function:\n\nvoid VideoReceiver::ProcessThreadAttached(ProcessThread* process_thread) {\n  RTC_DCHECK_RUN_ON(\u0026construction_thread_checker_);\n  if (process_thread) {\n    is_attached_to_process_thread_ \u003d true;\n    process_thread_ \u003d process_thread;\n  } else {\n    ** note that here, process_thread_ may still be valid ***\n    is_attached_to_process_thread_ \u003d false;\n  }\n}",
+      "parentUuid": "5bc9fa13_e46273e0",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f16103f3_ccb80122",
         "filename": "modules/video_coding/video_receiver.cc",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2018-02-20T16:08:33Z",
       "side": 1,
       "message": "Is this function supposed to be called only once? Then you could DCHECK that |process_thread_| is null. Otherwise you should move the |process_thread_| assignment out of the if/else statement.",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1e36924_53446ee6",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T16:55:59Z",
+      "side": 1,
+      "message": "See documentation for when this is called, here:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/include/module.h?rcl\u003d85904f4ee8b4526ff32dcff31183af1317af86eb\u0026l\u003d56\n\nIt can be called multiple times throughout the lifetime of a VideoReceiver instance.\nThe process_thread_ pointer isn\u0027t exactly the same thing as being attached to one. Their similar but represent different states and the process_thread_ pointer can be used to attach to the process thread when we\u0027re not attached. E.g. when the decoder thread is stopped and then started.",
+      "parentUuid": "f16103f3_ccb80122",
       "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ae188e6f_989488d3",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T16:55:59Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "85ab0483_6efcc73a",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "95a49985_b2191441",
         "filename": "modules/video_coding/video_receiver.cc",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2018-02-20T16:08:33Z",
       "side": 1,
       "message": "only need to look at |is_attached_to_process_thread_|",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41871112_55b17834",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T16:55:59Z",
+      "side": 1,
+      "message": "Start/Stop can be called more than once in VideoReceiveStream, so it\u0027s possible that we get detached and need to re-attach here. In order to keep a consistent state, it\u0027s important to not be attached to the module thread when the decoder thread isn\u0027t running.",
+      "parentUuid": "95a49985_b2191441",
       "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
