@@ -93,6 +93,30 @@
       "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d692293_229345a4",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-02-20T18:55:28Z",
+      "side": 1,
+      "message": "I think the Mask part is a misnomer. I originally called it BitrateConfigMask because my first implementation for each value was roughly mask.start.value_or(config.start). But the logic we ended up with for combining the two values is more complicated than that. I think BitratePreferences might be a better name now, but I wouldn\u0027t let that block this CL.",
+      "parentUuid": "a54e2d9b_6b2f515d",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

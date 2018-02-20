@@ -141,6 +141,30 @@
       "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52e3fe87_e064c1b0",
+        "filename": "call/rtp_bitrate_configurator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-02-20T18:55:28Z",
+      "side": 1,
+      "message": "Nice - I think these tests are easier to read than the CallBitrateTests with gmock.\nI also support removing most of the CallBitrateTest in a following CL (thanks for leaving them in for a round though - nice to know they still pass). The only thing they test that I don\u0027t see covered here is that SetBweBitrates is actually called on the transport controller. We probably only need a couple of cases there after this.",
+      "parentUuid": "42325ad2_d7ece826",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
