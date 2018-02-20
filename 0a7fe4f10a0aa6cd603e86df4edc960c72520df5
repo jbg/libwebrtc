@@ -46,6 +46,29 @@
       "revId": "0a7fe4f10a0aa6cd603e86df4edc960c72520df5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d0c26f3_6cf43cb4",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-02-20T09:29:27Z",
+      "side": 1,
+      "message": "Please \"deprecate\" the methods which we will remove later.",
+      "range": {
+        "startLine": 106,
+        "startChar": 7,
+        "endLine": 106,
+        "endChar": 21
+      },
+      "revId": "0a7fe4f10a0aa6cd603e86df4edc960c72520df5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
