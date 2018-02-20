@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc0eb3ad_06a7f04b",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-20T19:10:22Z",
+      "side": 1,
+      "message": "Could just make these all public fields instead of getters. It\u0027s test code so we don\u0027t need to be super rigorous about hiding fields.",
+      "range": {
+        "startLine": 1088,
+        "startChar": 2,
+        "endLine": 1088,
+        "endChar": 5
+      },
+      "revId": "3a4977097e5216fe5714db95eb1899387d1cc4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
