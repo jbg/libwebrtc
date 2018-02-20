@@ -117,6 +117,30 @@
       "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42325ad2_d7ece826",
+        "filename": "call/rtp_bitrate_configurator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T17:09:23Z",
+      "side": 1,
+      "message": "Yeah I figured it made sense to do it like that to show that the functionality did not change.",
+      "parentUuid": "e53d2a83_e0f7be5c",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
