@@ -262,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "02a20dcd_74bd635c",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-20T09:53:20Z",
+      "side": 1,
+      "message": "Thanks for the proposal. Agree that it makes the code more readable. Done now.\nThe new class owns the FileOutputStream since it also encapsulates the callback and needs to\nread at least one callback before the file name can be set.\nHope you like it.",
+      "parentUuid": "b5f94a0d_e80f2eaf",
+      "range": {
+        "startLine": 1396,
+        "startChar": 16,
+        "endLine": 1396,
+        "endChar": 53
+      },
+      "revId": "e7dbb60a34f205d02d190de3ee8da267ef502fd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4d63056_b3dbbe00",
         "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
         "patchSetId": 14
