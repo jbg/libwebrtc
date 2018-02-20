@@ -2263,6 +2263,7 @@ RTCError PeerConnection::ApplyRemoteDescription(
     }
     // Once all processing has finished, fire off callbacks.
     for (auto transceiver : receiving_transceivers) {
+      stats_->AddTrack(transceiver->receiver()->track());
       observer_->OnTrack(transceiver);
       observer_->OnAddTrack(transceiver->receiver(),
                             transceiver->receiver()->streams());
