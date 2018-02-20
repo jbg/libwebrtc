@@ -49,6 +49,87 @@
     },
     {
       "key": {
+        "uuid": "6e26a17e_64df0949",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-20T20:23:39Z",
+      "side": 1,
+      "message": "IIUC, Erik was talking about rtc_base/ (the directory), but you\u0027re talking about rtc_base (the build target). I agree that rtc_base (the build target) is the wrong place.\n\nI\u0027m not opposed to moving this sort of utility to rtc_base/ (the directory), but (1) it usually makes sense to have at least two users before moving something to a general utility pile, and (2) since this should not be in the API, it ought to go into rtc_base/some_subdir/ instead of directly under rtc_base/.",
+      "parentUuid": "faddc560_4c2edb44",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8f61e08_9c120b46",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-20T20:23:39Z",
+      "side": 1,
+      "message": "Is this type always std::string? Less confusing to spell that out, in that case.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 8
+      },
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30435a58_9d31eff6",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-20T20:23:39Z",
+      "side": 1,
+      "message": "It looks like you\u0027re recomputing the length of the existing buffer contents each time, instead of saving the length between Append calls.",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054c1838_b2163cc1",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-20T20:23:39Z",
+      "side": 1,
+      "message": "By doing this, you zero out the entire buffer on construction, which is sort of wasteful. Better to just zero out the first byte?",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94f635e2_4dca2afc",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 4
@@ -78,6 +159,24 @@
       "side": 1,
       "message": "hah, old habit :) rule of thumb that I use: 0x1000 \u003d\u003d 1 page (4096)",
       "parentUuid": "94f635e2_4dca2afc",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "991e48e8_e05e298d",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-20T20:23:39Z",
+      "side": 1,
+      "message": "I would write this as 8 * 1024. That way, it\u0027s obvious to ~everyone that it\u0027s 8 kB.",
+      "parentUuid": "611191e1_ae05b584",
       "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
