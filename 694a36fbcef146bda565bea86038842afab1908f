@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0aa6e27b_6b5d9652",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T10:00:00Z",
+      "side": 1,
+      "message": "please lets not use stringstream directly",
+      "range": {
+        "startLine": 129,
+        "startChar": 7,
+        "endLine": 129,
+        "endChar": 20
+      },
+      "revId": "694a36fbcef146bda565bea86038842afab1908f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
