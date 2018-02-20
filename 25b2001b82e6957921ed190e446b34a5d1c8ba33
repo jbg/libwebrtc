@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "8f8461c4_8604cb7a",
+        "filename": "call/call.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T09:30:00Z",
+      "side": 1,
+      "message": "One of your cls move the methods to a different class, right? Then you can do the rename in that cl.\n\nAgree that a name expressing the role is good, but when that isn\u0027t done, I\u0027d expect a SetFoo method to change an attribute of type Foo.",
+      "parentUuid": "3b69994b_1647c3e5",
+      "range": {
+        "startLine": 155,
+        "startChar": 15,
+        "endLine": 155,
+        "endChar": 31
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31c47548_dbe9a39c",
         "filename": "call/call.h",
         "patchSetId": 5

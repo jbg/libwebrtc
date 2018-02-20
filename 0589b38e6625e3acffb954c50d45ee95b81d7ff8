@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2d1d38c_ccdcb3db",
+        "filename": "call/bitrate_constraints.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T09:30:00Z",
+      "side": 1,
+      "message": "Missing \"n\".",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "0589b38e6625e3acffb954c50d45ee95b81d7ff8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
