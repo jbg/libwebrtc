@@ -15,6 +15,7 @@ from contextlib import contextmanager
 
 
 # Files and directories that are *skipped* by cpplint in the presubmit script.
+
 CPPLINT_BLACKLIST = [
   'api/video_codecs/video_decoder.h',
   'common_types.cc',
