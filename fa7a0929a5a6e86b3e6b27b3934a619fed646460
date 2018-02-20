@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "415d30c1_96d827c9",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-20T18:18:26Z",
+      "side": 1,
+      "message": "nit: Run \"git cl format\"",
+      "revId": "fa7a0929a5a6e86b3e6b27b3934a619fed646460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "452e4882_a02ed400",
+        "filename": "p2p/base/portallocator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-20T18:18:26Z",
+      "side": 1,
+      "message": "nit: This will produce a non-empty rtc::Optional\u003cStunStats\u003e even for non-STUN ports, which may be surprising. To fix this, could change GetStunStats to:\n\nvoid GetStunStats(rtc::Optional\u003cStunStats\u003e* stats)",
+      "revId": "fa7a0929a5a6e86b3e6b27b3934a619fed646460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "293bdc79_c4ffb287",
+        "filename": "p2p/client/basicportallocator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-20T18:18:26Z",
+      "side": 1,
+      "message": "nit: Could this be implemented in PortAllocator itself, since it manages pooled sessions?",
+      "revId": "fa7a0929a5a6e86b3e6b27b3934a619fed646460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

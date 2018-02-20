@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b0a4f36_7adc22ec",
+        "filename": "pc/statscollector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-20T18:18:26Z",
+      "side": 1,
+      "message": "Don\u0027t we still want this, for the non-pooled candidate stats?",
+      "revId": "489961791b43654622f0825208e8a257bc4f3ef2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
