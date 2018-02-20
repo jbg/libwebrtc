@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1672555_827ff0ff",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-20T16:08:33Z",
+      "side": 1,
+      "message": "Not sure if the is the standard way of naming ThreadCheckers, but |decoder_thread_| is kind of confusing, what about |decode_thread_checker_| instead?\n\nIf you decide to change it then please change |module_thread_| and |construction_thread_| as well.",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1385c1f_45452c7e",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-20T16:08:33Z",
+      "side": 1,
+      "message": "Is there some thread annotation that can be used to only allow modification of a variable while holding a lock?",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bc9fa13_e46273e0",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-20T16:08:33Z",
+      "side": 1,
+      "message": "Please add a comment as to why you have this duplicate state.",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f16103f3_ccb80122",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-20T16:08:33Z",
+      "side": 1,
+      "message": "Is this function supposed to be called only once? Then you could DCHECK that |process_thread_| is null. Otherwise you should move the |process_thread_| assignment out of the if/else statement.",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85ab0483_6efcc73a",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-20T16:08:33Z",
+      "side": 1,
+      "message": "|is_attached_to_process_thread_| is suppose to reflect whether |process_thread_| is non null, so this should never be true right?",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95a49985_b2191441",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-20T16:08:33Z",
+      "side": 1,
+      "message": "only need to look at |is_attached_to_process_thread_|",
+      "revId": "7ba6eac8821d5f07039de16527644c32d40f6965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
