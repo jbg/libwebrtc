@@ -93,6 +93,30 @@
       "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e53d2a83_e0f7be5c",
+        "filename": "call/rtp_bitrate_configurator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T16:13:11Z",
+      "side": 1,
+      "message": "That\u0027s a bit confusing. But I guess there\u0027s a point in not deleting the old copy of the tests in this cl, to be able to test that the new code is wired up correctly.",
+      "parentUuid": "6dc651a3_3299fdf6",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
