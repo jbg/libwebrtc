@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2dffe702_8ef3e2fa",
+        "filename": "call/bitrate_constraints.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T08:56:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0a36f214_ecabf26e",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 41
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e03d040_18904659",
         "filename": "call/call.h",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-20T08:36:19Z",
       "side": 1,
       "message": "You plan rename for followup cl?",
+      "range": {
+        "startLine": 155,
+        "startChar": 15,
+        "endLine": 155,
+        "endChar": 31
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b69994b_1647c3e5",
+        "filename": "call/call.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T08:56:33Z",
+      "side": 1,
+      "message": "I don\u0027t necessarily think this naming is wrong (conceptually it would make semantic sense to add more configuration parameters than the constraints, although probably not advisable).\n\nI think it would make sense to rename the methods to better reflect their role however. Maybe NegotiatedBitrateConstraints and ApplicationSpecificBitrateContraints. \n\nI think it\u0027ll be easier to fix this in followup CL if desired. WDYT?",
+      "parentUuid": "1e03d040_18904659",
       "range": {
         "startLine": 155,
         "startChar": 15,
@@ -68,6 +116,30 @@
       "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf309791_3e4e05ff",
+        "filename": "call/call.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T08:56:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "31c47548_dbe9a39c",
+      "range": {
+        "startLine": 161,
+        "startChar": 15,
+        "endLine": 161,
+        "endChar": 35
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
