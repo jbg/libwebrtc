@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b271c40_f6315e0c",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T12:19:39Z",
+      "side": 1,
+      "message": "Please rename this and the next method, either to something \"role-based\", or UpdateBitrateConstraints to simply match the type name.",
+      "range": {
+        "startLine": 34,
+        "startChar": 36,
+        "endLine": 34,
+        "endChar": 55
+      },
+      "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfab9f52_b875c49c",
+        "filename": "call/rtp_bitrate_configurator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T12:19:39Z",
+      "side": 1,
+      "message": "Excellent with new tests for this logic. \n\nI think these should be reviewed by someone more familiar with the intended behavior.",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
