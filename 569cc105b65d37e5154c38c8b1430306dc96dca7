@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b9b44f2c_53e99690",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T08:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b23a62d4_cf230abe",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f714661c_8f38a9a7",
         "filename": "call/bitrate_config.h",
         "patchSetId": 2
@@ -117,6 +141,30 @@
       "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd18fb36_e5c0047c",
+        "filename": "call/bitrate_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-20T08:19:48Z",
+      "side": 1,
+      "message": "Added a todo to merge the structs",
+      "parentUuid": "98d99af7_c4e8a526",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "569cc105b65d37e5154c38c8b1430306dc96dca7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
