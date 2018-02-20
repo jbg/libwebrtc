@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a36f214_ecabf26e",
+        "filename": "call/bitrate_constraints.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T08:36:19Z",
+      "side": 1,
+      "message": "Please update references to help the reader. |bitrate_config| is not nearby. The references to |SetBitrateConfig| and |SetBitrateConfigMask| need mention file or class (and should probably not use those names, given the renaming of the struct).\n\nI understand that it\u0027s a bit cumbersome to keep comments up-to-date when moving code around, but it is helpful if it is done right. Whenever renaming something, it\u0027s good to git grep for it in the code to also catch mention in comments.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 41
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e03d040_18904659",
+        "filename": "call/call.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T08:36:19Z",
+      "side": 1,
+      "message": "You plan rename for followup cl?",
+      "range": {
+        "startLine": 155,
+        "startChar": 15,
+        "endLine": 155,
+        "endChar": 31
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c47548_dbe9a39c",
+        "filename": "call/call.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-20T08:36:19Z",
+      "side": 1,
+      "message": "Likewise.",
+      "range": {
+        "startLine": 161,
+        "startChar": 15,
+        "endLine": 161,
+        "endChar": 35
+      },
+      "revId": "25b2001b82e6957921ed190e446b34a5d1c8ba33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
