@@ -22,6 +22,10 @@ struct PacketOptions {
   // A 16 bits positive id. Negative ids are invalid and should be interpreted
   // as packet_id not being set.
   int packet_id = -1;
+  // Additional data bound to the RTP packet for use in application code,
+  // outside of WebRTC.
+  uint8_t* application_data = nullptr;
+  size_t application_data_size = 0;
 };
 
 class Transport {
