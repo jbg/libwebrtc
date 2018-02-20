@@ -1371,6 +1371,7 @@ TEST_F(RTCStatsCollectorTest,
   expected_local_video_track_ssrc1.frame_width = 1234;
   expected_local_video_track_ssrc1.frame_height = 4321;
   expected_local_video_track_ssrc1.frames_sent = 11;
+  expected_local_video_track_ssrc1.huge_frames_sent = 0;
   ASSERT_TRUE(report->Get(expected_local_video_track_ssrc1.id()));
   EXPECT_EQ(expected_local_video_track_ssrc1,
             report->Get(expected_local_video_track_ssrc1.id())
