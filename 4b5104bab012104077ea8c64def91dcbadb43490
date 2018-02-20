@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec817aac_542619f3",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-20T16:12:24Z",
+      "side": 1,
+      "message": "This makes sense assuming https://github.com/w3c/webrtc-stats/issues/330 is resolved. Otherwise we need to discuss options like experimental stats with Origin Trials and Provisional Stats doc.",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a154b24b_17b0cb23",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-20T16:12:24Z",
+      "side": 1,
+      "message": "If the spec is updated before this lands I would like to see a link to the spec describing what this means. In any case you could say a huge frame is a frame that is 2.5 times bigger than the average encoded frame or something like that.",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f243196e_d0a2f20e",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-20T16:12:24Z",
+      "side": 1,
+      "message": "Not in this CL, but would hugeFramesReceived be useful for the remote case?",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61673f19_221ab5db",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-20T16:12:24Z",
+      "side": 1,
+      "message": "You TestMemberIsUndefined() twice. Remove the one that is not in the same order as the list in rtcstats_objects.h",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a36d0ff_ea7e45a8",
+        "filename": "pc/rtcstatscollector_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-20T16:12:24Z",
+      "side": 1,
+      "message": "Use a different value than 0 to avoid passing due to 0 being default.",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3111d00a_09c02d9b",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-20T16:12:24Z",
+      "side": 1,
+      "message": "It would make sense to have a spec link here too when spec is updated.",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
