@@ -101,6 +101,8 @@ class UDPPort : public Port {
   bool SupportsProtocol(const std::string& protocol) const override;
   ProtocolType GetProtocol() const override;
 
+  void GetStunStats(rtc::Optional<StunStats>* stats) override;
+
   void set_stun_keepalive_delay(int delay) {
     stun_keepalive_delay_ = delay;
   }
@@ -208,6 +210,7 @@ class UDPPort : public Port {
 
   // Below methods handles binding request responses.
   void OnStunBindingRequestSucceeded(
+      int rtt_ms,
       const rtc::SocketAddress& stun_server_addr,
       const rtc::SocketAddress& stun_reflected_addr);
   void OnStunBindingOrResolveRequestFailed(
@@ -241,6 +244,8 @@ class UDPPort : public Port {
   bool ready_;
   int stun_keepalive_delay_;
   int stun_keepalive_lifetime_ = INFINITE_LIFETIME;
+
+  StunStats stats_;
 
   // This is true by default and false when
   // PORTALLOCATOR_DISABLE_DEFAULT_LOCAL_CANDIDATE is specified.
