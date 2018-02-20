@@ -22,6 +22,29 @@
       "revId": "694a36fbcef146bda565bea86038842afab1908f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3c34d00_0b69a423",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-20T10:14:12Z",
+      "side": 1,
+      "message": "\"logStream\" doesn\u0027t follow the style guide either.  should be log_stream",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 279,
+        "endChar": 13
+      },
+      "revId": "694a36fbcef146bda565bea86038842afab1908f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
