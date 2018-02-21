@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2b411fc1_91974561",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-21T10:47:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ec817aac_542619f3",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a154b24b_17b0cb23",
         "filename": "media/base/mediachannel.h",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b198f42_4e7f4654",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-21T10:47:43Z",
+      "side": 1,
+      "message": "I would like to land this before the spec is updated, because I really want it to make to M66 and the cut will be soon. Added todo here.",
+      "parentUuid": "a154b24b_17b0cb23",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f7ccbb6e_f8db1c15",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-21T10:47:43Z",
+      "side": 1,
+      "message": "Not really, on the receive side this information is available from timing frames stats already reported.",
+      "parentUuid": "f243196e_d0a2f20e",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61673f19_221ab5db",
         "filename": "pc/rtcstats_integrationtest.cc",
         "patchSetId": 5
@@ -67,6 +121,24 @@
       "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56e2f325_d7e07c6c",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-21T10:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61673f19_221ab5db",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8bd3f204_a0f8981d",
+        "filename": "pc/rtcstatscollector_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-21T10:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a36d0ff_ea7e45a8",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3111d00a_09c02d9b",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 5
@@ -101,6 +191,24 @@
       "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b853563_86edcadc",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-21T10:47:43Z",
+      "side": 1,
+      "message": "Can we please land this before the stats are updated because of upcoming M66 cut?\n\nWe can add the link later, I will just leave the todo here for now.",
+      "parentUuid": "3111d00a_09c02d9b",
+      "revId": "4b5104bab012104077ea8c64def91dcbadb43490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
