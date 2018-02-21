@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bbd41088_cf9ca742",
+        "filename": "api/call/transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-02-21T14:11:14Z",
+      "side": 1,
+      "message": "Could you please clarify?\n\nIn RTPSender::SendToNetwork, bytes of the passed packet are sent via this interface immediately. I made sure to set application_data in PacketOptions immediately before that method is invoked. In addition, I copied it in BuildRtxPacket.\n\nSo I would argue that const uint8_t application_data is as unsafe as the const uint8_t* packet below.",
+      "parentUuid": "cc69202c_57c0dd8b",
+      "range": {
+        "startLine": 27,
+        "startChar": 44,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "50944f90_18fd6350",
         "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.cc",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "17913ba3_a079f060",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-02-21T14:11:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50944f90_18fd6350",
+      "range": {
+        "startLine": 22,
+        "startChar": 38,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "626f3d26_e9bdf14d",
         "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.h",
         "patchSetId": 6
@@ -68,6 +116,30 @@
       "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae6637a6_e8e92af5",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-02-21T14:11:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "626f3d26_e9bdf14d",
+      "range": {
+        "startLine": 27,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
