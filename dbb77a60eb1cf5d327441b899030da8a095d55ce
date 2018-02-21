@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b793668e_2b1a1bce",
+        "filename": "api/call/transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-21T15:25:49Z",
+      "side": 1,
+      "message": "sorry, nevermind.\ngot confused with another PacketOptions that is used after packet put to the socket.\nbut this PacketOptions only need to be propagated to webrtc::Transport.",
+      "parentUuid": "bbd41088_cf9ca742",
+      "range": {
+        "startLine": 27,
+        "startChar": 44,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50944f90_18fd6350",
         "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.cc",
         "patchSetId": 6
