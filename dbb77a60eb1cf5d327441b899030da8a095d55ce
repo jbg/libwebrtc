@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc69202c_57c0dd8b",
+        "filename": "api/call/transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-21T13:36:26Z",
+      "side": 1,
+      "message": "unfortunately that is not safe:\nPacket can be sent on another Thread/TaskQueue.\nspecially when pacer is involved.\nThere is no guarantee pointer still will be valid when PacketOptions reported back\n(e.g. if RtpPacketToSend is copied or moved, buffer will be reallocated)",
+      "range": {
+        "startLine": 27,
+        "startChar": 44,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50944f90_18fd6350",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-21T13:36:26Z",
+      "side": 1,
+      "message": "nit, prefer \"\u003d default\" instead of \"{}\"",
+      "range": {
+        "startLine": 22,
+        "startChar": 38,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "626f3d26_e9bdf14d",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_to_send.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-02-21T13:36:26Z",
+      "side": 1,
+      "message": "nit: put destructor after assign operator\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "range": {
+        "startLine": 27,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "dbb77a60eb1cf5d327441b899030da8a095d55ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
