@@ -46,7 +46,8 @@ class VideoProcessorIntegrationTestLibvpx
   }
 
   void PrintRdPerf(std::map<size_t, std::vector<VideoStatistics>> rd_stats) {
-    printf("\n%13s %7s %7s %13s %13s %7s %13s %13s\n", "uplink_kbps", "width",
+    printf("--> Summary\n");
+    printf("%13s %7s %7s %13s %13s %7s %13s %13s\n", "uplink_kbps", "width",
            "height", "downlink_kbps", "framerate_fps", "psnr", "enc_speed_fps",
            "dec_speed_fps");
     for (const auto& rd_stat : rd_stats) {
@@ -372,6 +373,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SimulcastVP8RdPerf) {
 
     ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
                                 nullptr);
+    printf("\n");
 
     rd_stats[bitrate_kbps] =
         stats_.SliceAndCalcLayerVideoStatistic(0, config_.num_frames - 1);
@@ -394,6 +396,7 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SvcVP9RdPerf) {
 
     ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr, nullptr,
                                 nullptr);
+    printf("\n");
 
     rd_stats[bitrate_kbps] =
         stats_.SliceAndCalcLayerVideoStatistic(0, config_.num_frames - 1);
