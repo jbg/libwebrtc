@@ -397,7 +397,6 @@ enum class VideoType {
 };
 
 // Video codec
-enum { kPayloadNameSize = 32 };
 enum { kMaxSimulcastStreams = 4 };
 enum { kMaxSpatialLayers = 5 };
 enum { kMaxTemporalStreams = 4 };
@@ -525,7 +524,6 @@ class VideoCodec {
 
   // Public variables. TODO(hta): Make them private with accessors.
   VideoCodecType codecType;
-  char plName[kPayloadNameSize];
   unsigned char plType;
 
   unsigned short width;
