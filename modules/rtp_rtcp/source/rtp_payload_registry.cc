@@ -30,9 +30,12 @@ bool PayloadIsCompatible(const RtpUtility::Payload& payload,
 
 bool PayloadIsCompatible(const RtpUtility::Payload& payload,
                          const VideoCodec& video_codec) {
+#if 0
+  // XXX
   if (!payload.typeSpecific.is_video() ||
       _stricmp(payload.name, video_codec.plName) != 0)
     return false;
+#endif
   // For H264, profiles must match as well.
   if (video_codec.codecType == kVideoCodecH264) {
     return video_codec.H264().profile ==
@@ -73,7 +76,11 @@ RtpUtility::Payload CreatePayloadType(const VideoCodec& video_codec) {
   p.videoCodecType = ConvertToRtpVideoCodecType(video_codec.codecType);
   if (video_codec.codecType == kVideoCodecH264)
     p.h264_profile = video_codec.H264().profile;
+#if 0
   return {video_codec.plName, PayloadUnion(p)};
+#else
+  return {"", PayloadUnion(p)};
+#endif
 }
 
 bool IsPayloadTypeValid(int8_t payload_type) {

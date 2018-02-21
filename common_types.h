@@ -397,7 +397,6 @@ enum class VideoType {
 };
 
 // Video codec
-enum { kPayloadNameSize = 32 };
 enum { kMaxSimulcastStreams = 4 };
 enum { kMaxSpatialLayers = 5 };
 enum { kMaxTemporalStreams = 4 };
@@ -486,6 +485,7 @@ enum VideoCodecType {
   kVideoCodecUnknown
 };
 
+// TODO(nisse): Delete.
 // Translates from name of codec to codec type and vice versa.
 const char* CodecTypeToPayloadString(VideoCodecType type);
 VideoCodecType PayloadStringToCodecType(const std::string& name);
@@ -525,7 +525,6 @@ class VideoCodec {
 
   // Public variables. TODO(hta): Make them private with accessors.
   VideoCodecType codecType;
-  char plName[kPayloadNameSize];
   unsigned char plType;
 
   unsigned short width;
