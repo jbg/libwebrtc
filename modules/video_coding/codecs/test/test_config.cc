@@ -195,7 +195,7 @@ std::vector<FrameType> TestConfig::FrameTypeForFrame(size_t frame_idx) const {
 std::string TestConfig::ToString() const {
   std::string codec_type = CodecTypeToPayloadString(codec_settings.codecType);
   std::stringstream ss;
-  ss << "\nfilename: " << filename;
+  ss << "filename: " << filename;
   ss << "\nwidth: " << codec_settings.width;
   ss << "\nheight: " << codec_settings.height;
   ss << "\nnum_frames: " << num_frames;
@@ -208,7 +208,7 @@ std::string TestConfig::ToString() const {
   ss << "\nmax_qp: " << codec_settings.qpMax;
   ss << "\nnum_simulcast_streams : "
      << static_cast<int>(codec_settings.numberOfSimulcastStreams);
-  ss << "\n" << codec_type << " specific: ";
+  ss << "\n" << codec_type << " specific";
   ss << CodecSpecificToString(codec_settings);
   return ss.str();
 }
