@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58d24390_86dac03b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T07:36:46Z",
+      "side": 1,
+      "message": "Could you explain how this change fixes any issue, it looks exactly the same as delegation to me?",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 5
+      },
+      "revId": "0dd1b0a4b2b2455ae10e75fe57c7822008ad7f9c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
