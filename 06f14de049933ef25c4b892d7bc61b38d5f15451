@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ad068aba_252a28b2",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-21T12:51:12Z",
+      "side": 1,
+      "message": "Yeah, there is a design bleed over from VideoReceiveStream here.\nThe process thread pointer could also be injected via the ctor and have it be a const pointer.\nThat\u0027s effectively how it works, but in this CL, the constructor isn\u0027t changed (or call sites).",
+      "parentUuid": "5137f82a_d08318ac",
+      "revId": "06f14de049933ef25c4b892d7bc61b38d5f15451",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1b62fd5b_90c4fe3d",
         "filename": "modules/video_coding/video_receiver.cc",
         "patchSetId": 9
@@ -47,6 +65,24 @@
       "writtenOn": "2018-02-21T11:44:07Z",
       "side": 1,
       "message": "Is it possible to put the whole function in the #if block? If not add RTC_NOTREACHED for clarity.",
+      "revId": "06f14de049933ef25c4b892d7bc61b38d5f15451",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feaff9a2_dbc96dd1",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-21T12:51:12Z",
+      "side": 1,
+      "message": "Unfortunately, putting the whole function in an #if block, results in something like this:\n\n../../modules/video_coding/video_receiver.cc:437:15: error: use of undeclared identifier \u0027IsDecoderThreadRunning\u0027; did you mean \u0027DecoderThreadStarting\u0027?\n  RTC_DCHECK(!IsDecoderThreadRunning());\n\nIf I add RTC_NOTREACHED in an else clause for !RTC_DCHECK_IS_ON, then that doesn\u0027t really do anything (since RTC_NOTREACHED is just a DCHECK).  I could use RTC_CHECK, but that actually causes the compiler to generate some code for it, so I\u0027d rather not do that and just always return true. If it ever were to be called, then always returning true shouldn\u0027t make a difference.",
+      "parentUuid": "1b62fd5b_90c4fe3d",
       "revId": "06f14de049933ef25c4b892d7bc61b38d5f15451",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
