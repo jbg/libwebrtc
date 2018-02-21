@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fd9de4a_55b65888",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-21T11:44:07Z",
+      "side": 1,
+      "message": "Add RTC_DCHECK(!process_thread_ || process_thread_ \u003d\u003d process_thread)",
+      "revId": "06f14de049933ef25c4b892d7bc61b38d5f15451",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5137f82a_d08318ac",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-21T11:44:07Z",
+      "side": 1,
+      "message": "This check looks like it\u0027s meant to catch the case when ProcessThreadAttached has been called with a non-null value, and then called again with a null value. Does it even make sense to use |process_thread_| in this case? How do we even know if it\u0027s still valid?\n\nI guess the restriction is that a module should never switch ProcessThread, but that restriction is not documented in module.h.",
+      "revId": "06f14de049933ef25c4b892d7bc61b38d5f15451",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b62fd5b_90c4fe3d",
+        "filename": "modules/video_coding/video_receiver.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-02-21T11:44:07Z",
+      "side": 1,
+      "message": "Is it possible to put the whole function in the #if block? If not add RTC_NOTREACHED for clarity.",
+      "revId": "06f14de049933ef25c4b892d7bc61b38d5f15451",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
