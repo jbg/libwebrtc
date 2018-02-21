@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8013a8a_f83ed7f2",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T07:04:17Z",
+      "side": 1,
+      "message": "nit: replace comments with JavaDoc",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 3
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57f32567_aab2e521",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T07:04:17Z",
+      "side": 1,
+      "message": "Should we reset fileSizeInBytes / unset setOnAudioSamplesReady?",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 18
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a364c809_8856501e",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T07:04:17Z",
+      "side": 1,
+      "message": "Is this safe? Can\u0027t the runnable scheduled in onWebRtcAudioRecordSamplesReady still be run?",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7729ffa3_92692ec7",
+        "filename": "examples/androidtests/src/org/appspot/apprtc/test/PeerConnectionClientTest.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T07:04:17Z",
+      "side": 1,
+      "message": "nit: /*D -\u003e /* d",
+      "range": {
+        "startLine": 351,
+        "startChar": 13,
+        "endLine": 351,
+        "endChar": 16
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
