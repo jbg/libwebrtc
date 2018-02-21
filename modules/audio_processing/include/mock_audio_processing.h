@@ -136,19 +136,21 @@ class MockVoiceDetection : public VoiceDetection {
   MOCK_CONST_METHOD0(frame_size_ms, int());
 };
 
-class MockAudioProcessing : public AudioProcessing {
+// The default mocks in gmock outputs warnings when methods are called without
+// EXPECT_CALL being set. To avoid theese warnings, MockAudioProcessing inherits
+// from NiceMock<NaggyMockAudioProcessing>
+class NaggyMockAudioProcessing : public AudioProcessing {
  public:
-  MockAudioProcessing()
+  NaggyMockAudioProcessing()
       : echo_cancellation_(new testing::NiceMock<MockEchoCancellation>()),
         echo_control_mobile_(new testing::NiceMock<MockEchoControlMobile>()),
         gain_control_(new testing::NiceMock<MockGainControl>()),
         high_pass_filter_(new testing::NiceMock<MockHighPassFilter>()),
         level_estimator_(new testing::NiceMock<MockLevelEstimator>()),
         noise_suppression_(new testing::NiceMock<MockNoiseSuppression>()),
-        voice_detection_(new testing::NiceMock<MockVoiceDetection>()) {
-  }
+        voice_detection_(new testing::NiceMock<MockVoiceDetection>()) {}
 
-  virtual ~MockAudioProcessing() {}
+  virtual ~NaggyMockAudioProcessing() {}
 
   MOCK_METHOD0(Initialize, int());
   MOCK_METHOD6(Initialize, int(int capture_input_sample_rate_hz,
@@ -235,6 +237,8 @@ class MockAudioProcessing : public AudioProcessing {
   std::unique_ptr<MockVoiceDetection> voice_detection_;
 };
 
+class MockAudioProcessing : public testing::NiceMock<NaggyMockAudioProcessing> {
+};
 }  // namespace test
 }  // namespace webrtc
 

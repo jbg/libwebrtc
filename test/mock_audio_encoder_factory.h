@@ -15,28 +15,36 @@
 #include <vector>
 
 #include "api/audio_codecs/audio_encoder_factory.h"
+#include "rtc_base/refcountedobject.h"
 #include "rtc_base/scoped_ref_ptr.h"
 #include "test/gmock.h"
 
 namespace webrtc {
 
-class MockAudioEncoderFactory : public AudioEncoderFactory {
+// The default mocks in gmock outputs warnings when methods are called without
+// EXPECT_CALL being set. To avoid theese warnings MockAudioEncoderFactory
+// inherits from NiceMock<NaggyMockAudioEncoderFactory>
+class NaggyMockAudioEncoderFactory : public AudioEncoderFactory {
  public:
   MOCK_METHOD0(GetSupportedEncoders, std::vector<AudioCodecSpec>());
   MOCK_METHOD1(QueryAudioEncoder,
                rtc::Optional<AudioCodecInfo>(const SdpAudioFormat& format));
 
+  MOCK_METHOD3(MakeAudioEncoderMock,
+               void(int payload_type,
+                    const SdpAudioFormat& format,
+                    std::unique_ptr<AudioEncoder>* return_value));
+};
+
+class MockAudioEncoderFactory
+    : public testing::NiceMock<NaggyMockAudioEncoderFactory> {
+ public:
   std::unique_ptr<AudioEncoder> MakeAudioEncoder(int payload_type,
                                                  const SdpAudioFormat& format) {
     std::unique_ptr<AudioEncoder> return_value;
     MakeAudioEncoderMock(payload_type, format, &return_value);
     return return_value;
   }
-  MOCK_METHOD3(MakeAudioEncoderMock,
-               void(int payload_type,
-                    const SdpAudioFormat& format,
-                    std::unique_ptr<AudioEncoder>* return_value));
-
   // Creates a MockAudioEncoderFactory with no formats and that may not be
   // invoked to create a codec - useful for initializing a voice engine, for
   // example.
