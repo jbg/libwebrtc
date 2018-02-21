@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "844415f0_a394ea80",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T12:06:25Z",
+      "side": 1,
+      "message": "How is it \"safe by design\"? I guess you are expected to call start/stop on the executor thread and that would make it safe since the variable is accessed only on a single thread? If so, could you add a comment that you are required to call these methods on the executor thread?",
+      "parentUuid": "c83dc206_4dbe93e3",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7729ffa3_92692ec7",
         "filename": "examples/androidtests/src/org/appspot/apprtc/test/PeerConnectionClientTest.java",
         "patchSetId": 19
