@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "96358b49_b38a514c",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-21T10:35:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8013a8a_f83ed7f2",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 3
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57f32567_aab2e521",
         "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
         "patchSetId": 19
@@ -45,6 +69,30 @@
       "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7adc4f3_27fa5cec",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-21T10:35:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57f32567_aab2e521",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 18
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c83dc206_4dbe93e3",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/RecordedAudioToFileController.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-21T10:35:32Z",
+      "side": 1,
+      "message": "Good comment. It is \"safe by design\" but I added a de-register step of callbacks to improve.\nThanks.",
+      "parentUuid": "a364c809_8856501e",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7729ffa3_92692ec7",
         "filename": "examples/androidtests/src/org/appspot/apprtc/test/PeerConnectionClientTest.java",
         "patchSetId": 19
@@ -82,6 +154,30 @@
       "writtenOn": "2018-02-21T07:04:17Z",
       "side": 1,
       "message": "nit: /*D -\u003e /* d",
+      "range": {
+        "startLine": 351,
+        "startChar": 13,
+        "endLine": 351,
+        "endChar": 16
+      },
+      "revId": "7960c9f01a71a8b88767c40ef96c7ba4818571dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f93d36f_192b59a7",
+        "filename": "examples/androidtests/src/org/appspot/apprtc/test/PeerConnectionClientTest.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-02-21T10:35:32Z",
+      "side": 1,
+      "message": "Fixed ;-)",
+      "parentUuid": "7729ffa3_92692ec7",
       "range": {
         "startLine": 351,
         "startChar": 13,
