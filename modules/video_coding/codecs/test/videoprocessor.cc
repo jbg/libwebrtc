@@ -17,6 +17,7 @@
 #include "api/video/i420_buffer.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/h264/h264_common.h"
+#include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/video_coding/codecs/vp8/simulcast_rate_allocator.h"
 #include "modules/video_coding/include/video_codec_initializer.h"
@@ -119,8 +120,6 @@ VideoProcessor::VideoProcessor(webrtc::VideoEncoder* encoder,
       last_encoded_frame_num_(0),
       last_encoded_simulcast_svc_idx_(0),
       last_decoded_frame_num_(0),
-      num_encoded_frames_(0),
-      num_decoded_frames_(0),
       stats_(stats) {
   RTC_CHECK(rtc::TaskQueue::Current())
       << "VideoProcessor must be run on a task queue.";
@@ -186,7 +185,7 @@ void VideoProcessor::ProcessFrame() {
 
   std::vector<FrameType> frame_types = config_.FrameTypeForFrame(frame_number);
 
-  // Create frame statistics object for all simulcast /spatial layers.
+  // Create frame statistics object for all simulcast/spatial layers.
   for (size_t simulcast_svc_idx = 0;
        simulcast_svc_idx < num_simulcast_or_spatial_layers_;
        ++simulcast_svc_idx) {
@@ -270,7 +269,7 @@ void VideoProcessor::FrameEncoded(
 
   // For the highest measurement accuracy of the encode time, the start/stop
   // time recordings should wrap the Encode call as tightly as possible.
-  int64_t encode_stop_ns = rtc::TimeNanos();
+  const int64_t encode_stop_ns = rtc::TimeNanos();
 
   const VideoCodecType codec = codec_specific.codecType;
   if (config_.encoded_frame_checker) {
@@ -311,8 +310,7 @@ void VideoProcessor::FrameEncoded(
   // Ensure SVC spatial layers are delivered in ascending order.
   if (config_.NumberOfSpatialLayers() > 1) {
     RTC_CHECK(simulcast_svc_idx > last_encoded_simulcast_svc_idx_ ||
-              frame_number != last_encoded_frame_num_ ||
-              num_encoded_frames_ == 0);
+              frame_number != last_encoded_frame_num_);
   }
 
   last_encoded_frame_num_ = frame_number;
@@ -356,8 +354,6 @@ void VideoProcessor::FrameEncoded(
     frame_stat->decode_return_code =
         decoders_->at(simulcast_idx)->Decode(encoded_image, false, nullptr);
   }
-
-  ++num_encoded_frames_;
 }
 
 void VideoProcessor::FrameDecoded(const VideoFrame& decoded_frame) {
@@ -365,7 +361,7 @@ void VideoProcessor::FrameDecoded(const VideoFrame& decoded_frame) {
 
   // For the highest measurement accuracy of the decode time, the start/stop
   // time recordings should wrap the Decode call as tightly as possible.
-  int64_t decode_stop_ns = rtc::TimeNanos();
+  const int64_t decode_stop_ns = rtc::TimeNanos();
 
   RTC_CHECK(frame_wxh_to_simulcast_svc_idx_.find(decoded_frame.size()) !=
             frame_wxh_to_simulcast_svc_idx_.end());
@@ -424,8 +420,6 @@ void VideoProcessor::FrameDecoded(const VideoFrame& decoded_frame) {
     WriteDecodedFrameToFile(&last_decoded_frame_buffers_[simulcast_svc_idx],
                             simulcast_svc_idx);
   }
-
-  ++num_decoded_frames_;
 }
 
 void VideoProcessor::CopyEncodedImage(const EncodedImage& encoded_image,

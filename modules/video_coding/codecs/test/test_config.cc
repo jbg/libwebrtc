@@ -12,6 +12,8 @@
 
 #include <sstream>
 
+#include "media/base/h264_profile_level_id.h"
+#include "media/base/mediaconstants.h"
 #include "media/engine/simulcast.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "rtc_base/checks.h"
@@ -87,6 +89,8 @@ void TestConfig::SetCodecSettings(VideoCodecType codec_type,
   RTC_CHECK(num_simulcast_streams >= 1 &&
             num_simulcast_streams <= kMaxSimulcastStreams);
   RTC_CHECK(num_spatial_layers >= 1 && num_spatial_layers <= kMaxSpatialLayers);
+  RTC_CHECK(num_temporal_layers >= 1 &&
+            num_temporal_layers <= kMaxTemporalStreams);
 
   // Simulcast is only available with VP8.
   RTC_CHECK(num_simulcast_streams < 2 || codec_type == kVideoCodecVP8);
@@ -136,26 +140,24 @@ void TestConfig::SetCodecSettings(VideoCodecType codec_type,
   }
 
   if (codec_settings.numberOfSimulcastStreams > 1) {
-    ConfigureSimulcast();
-  }
-}
+    const std::vector<webrtc::VideoStream> streams =
+        cricket::GetSimulcastConfig(codec_settings.numberOfSimulcastStreams,
+                                    codec_settings.width, codec_settings.height,
+                                    kMaxBitrateBps, kMaxQp, kMaxFramerateFps,
+                                    false);
 
-void TestConfig::ConfigureSimulcast() {
-  std::vector<webrtc::VideoStream> stream = cricket::GetSimulcastConfig(
-      codec_settings.numberOfSimulcastStreams, codec_settings.width,
-      codec_settings.height, kMaxBitrateBps, kMaxQp, kMaxFramerateFps, false);
-
-  for (size_t i = 0; i < stream.size(); ++i) {
-    SimulcastStream* ss = &codec_settings.simulcastStream[i];
-    ss->width = static_cast<uint16_t>(stream[i].width);
-    ss->height = static_cast<uint16_t>(stream[i].height);
-    ss->numberOfTemporalLayers = static_cast<unsigned char>(
-        stream[i].temporal_layer_thresholds_bps.size() + 1);
-    ss->maxBitrate = stream[i].max_bitrate_bps / 1000;
-    ss->targetBitrate = stream[i].target_bitrate_bps / 1000;
-    ss->minBitrate = stream[i].min_bitrate_bps / 1000;
-    ss->qpMax = stream[i].max_qp;
-    ss->active = true;
+    for (size_t i = 0; i < streams.size(); ++i) {
+      SimulcastStream* ss = &codec_settings.simulcastStream[i];
+      ss->width = static_cast<uint16_t>(streams[i].width);
+      ss->height = static_cast<uint16_t>(streams[i].height);
+      ss->numberOfTemporalLayers = static_cast<unsigned char>(
+          streams[i].temporal_layer_thresholds_bps.size() + 1);
+      ss->maxBitrate = streams[i].max_bitrate_bps / 1000;
+      ss->targetBitrate = streams[i].target_bitrate_bps / 1000;
+      ss->minBitrate = streams[i].min_bitrate_bps / 1000;
+      ss->qpMax = streams[i].max_qp;
+      ss->active = true;
+    }
   }
 }
 
@@ -211,6 +213,33 @@ std::string TestConfig::ToString() const {
   ss << "\n" << codec_type << " specific: ";
   ss << CodecSpecificToString(codec_settings);
   return ss.str();
+}
+
+SdpVideoFormat TestConfig::ToSdpVideoFormat() const {
+  switch (codec_settings.codecType) {
+    case kVideoCodecVP8:
+      return SdpVideoFormat(cricket::kVp8CodecName);
+
+    case kVideoCodecVP9:
+      return SdpVideoFormat(cricket::kVp9CodecName);
+
+    case kVideoCodecH264: {
+      const char* packetization_mode =
+          h264_codec_settings.packetization_mode ==
+                  H264PacketizationMode::NonInterleaved
+              ? "1"
+              : "0";
+      return SdpVideoFormat(
+          cricket::kH264CodecName,
+          {{cricket::kH264FmtpProfileLevelId,
+            *H264::ProfileLevelIdToString(H264::ProfileLevelId(
+                h264_codec_settings.profile, H264::kLevel3_1))},
+           {cricket::kH264FmtpPacketizationMode, packetization_mode}});
+    }
+    default:
+      RTC_NOTREACHED();
+      return SdpVideoFormat("");
+  }
 }
 
 std::string TestConfig::CodecName() const {
