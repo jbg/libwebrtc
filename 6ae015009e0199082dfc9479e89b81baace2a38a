@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a4eca93_4e71070f",
+        "filename": "sdk/android/src/jni/videodecoderwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5882
+      },
+      "writtenOn": "2018-02-21T01:35:25Z",
+      "side": 1,
+      "message": "I think it may worth to try to reset the codec only if sw fallback is not available - for H.264 case as the last resource to keep the call. For vp8 we can immediately fallback to sw in this case without reset attempt. Otherwise we may never recover from the case when decoder can always be successfully reopened, but always fails to decode the first frame. For this case we could at least recover by immediate sw fallback for vp8 codec.\n\nOr alternatively add a limitation on the amount of reset attempts - 2 or 3 - similar to encoder",
+      "range": {
+        "startLine": 213,
+        "startChar": 2,
+        "endLine": 213,
+        "endChar": 4
+      },
+      "revId": "6ae015009e0199082dfc9479e89b81baace2a38a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01eb24d7_2cc4722b",
+        "filename": "sdk/android/src/jni/videoencoderwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5882
+      },
+      "writtenOn": "2018-02-21T01:35:25Z",
+      "side": 1,
+      "message": "Same comment as for decoder - I think we may either need to limit the reset attempts or to fallback to sw encoder immediately for vp8 case without reset attempt. Otherwise if HW codec could be reopened but can not encode the 1st frame this method will result in infinite attempts to reset the codec",
+      "range": {
+        "startLine": 283,
+        "startChar": 6,
+        "endLine": 283,
+        "endChar": 13
+      },
+      "revId": "6ae015009e0199082dfc9479e89b81baace2a38a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
