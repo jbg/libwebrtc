@@ -45,6 +45,30 @@
       "revId": "6ae015009e0199082dfc9479e89b81baace2a38a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00c4c395_fd674341",
+        "filename": "sdk/android/src/jni/videoencoderwrapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-21T08:16:11Z",
+      "side": 1,
+      "message": "My idea was to add this logic in the implementation. i.e. After a certain amount of HW errors it starts returning WEBRTC_VIDEO_CODEC_FALLBACK_SOFTWARE instead of ERROR.",
+      "parentUuid": "01eb24d7_2cc4722b",
+      "range": {
+        "startLine": 283,
+        "startChar": 6,
+        "endLine": 283,
+        "endChar": 13
+      },
+      "revId": "6ae015009e0199082dfc9479e89b81baace2a38a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
