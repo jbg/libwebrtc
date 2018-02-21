@@ -117,6 +117,30 @@
       "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25309448_0a02c022",
+        "filename": "call/rtp_bitrate_configurator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-21T11:50:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6d692293_229345a4",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "c68a98925df3f2eb289278eebe4dc8839a201431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

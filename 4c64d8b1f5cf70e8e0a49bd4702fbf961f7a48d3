@@ -165,6 +165,30 @@
       "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbfdf8ab_a672ffa8",
+        "filename": "call/rtp_bitrate_configurator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-21T11:50:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52e3fe87_e064c1b0",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "4c64d8b1f5cf70e8e0a49bd4702fbf961f7a48d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
