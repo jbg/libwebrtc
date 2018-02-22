@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fffb0e02_86f5ce35",
+        "filename": "call/call.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-02-22T17:47:30Z",
+      "side": 1,
+      "message": "Why don\u0027t we do call_-\u003eOnSentPacket here instead and have call suppress any OnSentPacket it receives if there\u0027s a degraded transport?\n\nI wonder if it would have been better to just encapsulate call with a \"DegradedCall\" and have that class suppress any OnSentPacket from the real transport as well as do real_call_-\u003eOnSentPacket? That way I think you wouldn\u0027t have to touch this file at all I think?",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 62
+      },
+      "revId": "63f5f36325b5151e6c9bb35f0f73645e28c763ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

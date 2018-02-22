@@ -63,6 +63,30 @@
       "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9f0761a_a00678b8",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-02-22T17:47:30Z",
+      "side": 1,
+      "message": "I don\u0027t really follow why we have to change this function at all. Can\u0027t we have DegradedSendTransport call Call::OnSentPacket when the packet is passed to the FakeNetworkPipe as any other transport does?",
+      "parentUuid": "38a220b7_3608d56b",
+      "range": {
+        "startLine": 1410,
+        "startChar": 0,
+        "endLine": 1412,
+        "endChar": 72
+      },
+      "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
