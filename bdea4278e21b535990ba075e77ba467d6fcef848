@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1776bd6d_58ecff3b",
+        "filename": "call/call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-22T12:59:03Z",
+      "side": 1,
+      "message": "This moves the estimator to a different thread. Since these things tend to be a bit subtle, it should be mentioned in commit message.",
+      "range": {
+        "startLine": 435,
+        "startChar": 6,
+        "endLine": 435,
+        "endChar": 71
+      },
+      "revId": "bdea4278e21b535990ba075e77ba467d6fcef848",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
