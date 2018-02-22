@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e9d3a3c_bdade5b6",
+        "filename": "test/mock_audio_encoder_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-22T10:12:37Z",
+      "side": 1,
+      "message": "Ah. Of course.",
+      "revId": "ed8c08fac78bd8d8bd8baf33c15a1b18ff302836",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
