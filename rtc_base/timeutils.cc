@@ -55,7 +55,13 @@ int64_t SystemTimeNanos() {
     }
   }
   // Use timebase to convert absolute time tick units into nanoseconds.
-  ticks = mach_absolute_time() * timebase.numer / timebase.denom;
+  const auto mul = [](uint64_t a, uint32_t b) -> int64_t {
+    int64_t product;
+    const bool overflowed = __builtin_mul_overflow(a, b, &product);
+    RTC_DCHECK(!overflowed);
+    return product;
+  };
+  ticks = mul(mach_absolute_time(), timebase.numer) / timebase.denom;
 #elif defined(WEBRTC_POSIX)
   struct timespec ts;
   // TODO(deadbeef): Do we need to handle the case when CLOCK_MONOTONIC is not
