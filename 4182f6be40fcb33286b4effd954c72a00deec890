@@ -16,6 +16,24 @@
       "revId": "4182f6be40fcb33286b4effd954c72a00deec890",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a10ef7da_018df4e3",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-22T13:51:10Z",
+      "side": 1,
+      "message": "You are right. I was trying to avoid adding a mock RtcpBandwidthObserver, but this is as you say a bad way to do it. Using a mock instead as per your suggestion.",
+      "parentUuid": "b7afe9a6_e19c2afc",
+      "revId": "4182f6be40fcb33286b4effd954c72a00deec890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
