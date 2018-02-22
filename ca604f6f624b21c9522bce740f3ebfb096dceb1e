@@ -87,6 +87,30 @@
       "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a84cdc1f_57f37b5b",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-22T19:01:16Z",
+      "side": 1,
+      "message": "We have to ignore calls from the real network (in chrome), but accept those from the fake network. We can\u0027t reasonably tell where the calls originates from though?",
+      "parentUuid": "e9f0761a_a00678b8",
+      "range": {
+        "startLine": 1410,
+        "startChar": 0,
+        "endLine": 1412,
+        "endChar": 72
+      },
+      "revId": "ca604f6f624b21c9522bce740f3ebfb096dceb1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

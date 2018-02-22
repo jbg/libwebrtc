@@ -22,6 +22,30 @@
       "revId": "63f5f36325b5151e6c9bb35f0f73645e28c763ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2631e90a_a6233137",
+        "filename": "call/call.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-22T19:01:16Z",
+      "side": 1,
+      "message": "\u003e Why don\u0027t we do call_-\u003eOnSentPacket here instead and have call suppress any OnSentPacket it receives if there\u0027s a degraded transport?\n\nWe already do suppress Call::OnSentPacket() calls if there\u0027s a degraded transport, otherwise that would null the apparent delay from the fake network.\nSo we can\u0027t call Call::OnSentPacket() from here, as it\u0027s already being ignored.\n\n\u003e I wonder if it would have been better to just encapsulate call with a \"DegradedCall\" and have that class suppress any OnSentPacket from the real transport as well as do real_call_-\u003eOnSentPacket? That way I think you wouldn\u0027t have to touch this file at all I think?\n\nFor the send-side, could have helped a little, but we would still need a proxy on the receive-link, which would mean a proxy in wrapper...",
+      "parentUuid": "fffb0e02_86f5ce35",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 62
+      },
+      "revId": "63f5f36325b5151e6c9bb35f0f73645e28c763ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
