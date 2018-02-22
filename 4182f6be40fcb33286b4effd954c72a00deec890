@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7afe9a6_e19c2afc",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-02-22T13:21:27Z",
+      "side": 1,
+      "message": "Eugh! I\u0027d be more comfortable if you made fake implementation of RtcpBandwidthObserver in this class, instantiate it in ConfigHelper and use that address instead. The current solution seems very brittle to me.",
+      "revId": "4182f6be40fcb33286b4effd954c72a00deec890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
