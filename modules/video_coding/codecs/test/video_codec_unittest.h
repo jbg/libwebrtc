@@ -79,19 +79,19 @@ class VideoCodecUnitTest : public ::testing::Test {
   void SetUp() override;
 
   // Helper method for waiting a single encoded frame.
-  bool WaitForEncodedFrame(EncodedImage* frame,
+  void WaitForEncodedFrame(EncodedImage* frame,
                            CodecSpecificInfo* codec_specific_info);
 
   // Helper methods for waiting for multiple encoded frames. Caller must
   // define how many frames are to be waited for via |num_frames| before calling
-  // Encode(). Then, they can expect to retrive them via WaitForEncodedFrames().
+  // Encode(). Then, the frames can be retrieved via WaitForEncodedFrames().
   void SetWaitForEncodedFramesThreshold(size_t num_frames);
-  bool WaitForEncodedFrames(
+  void WaitForEncodedFrames(
       std::vector<EncodedImage>* frames,
       std::vector<CodecSpecificInfo>* codec_specific_info);
 
   // Helper method for waiting a single decoded frame.
-  bool WaitForDecodedFrame(std::unique_ptr<VideoFrame>* frame,
+  void WaitForDecodedFrame(std::unique_ptr<VideoFrame>* frame,
                            rtc::Optional<uint8_t>* qp);
 
   // Populated by InitCodecs().
