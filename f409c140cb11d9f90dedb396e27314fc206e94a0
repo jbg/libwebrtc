@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c799e19_a3285e1f",
+        "filename": "api/call/transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-02-22T12:53:58Z",
+      "side": 1,
+      "message": "Keeping a raw pointer to memory managed by by someone else seems error prone to me. Doesn\u0027t seem too unlikely that a refactoring of the surrounding code will deallocate the memory pointed to by application_data.\n\nIs it possible to let PacketOptions take ownership of the application data?",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 33
+      },
+      "revId": "f409c140cb11d9f90dedb396e27314fc206e94a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
