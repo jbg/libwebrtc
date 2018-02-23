@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91eda1fe_a5f07c48",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "Please consider not putting the new file directly under rtc_base/, since that\u0027s an API directory; see https://webrtc.googlesource.com/src/+/master/native-api.md. (Subdirectories of rtc_base/ are fine, though.)",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b342396_0a4885cb",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "`size`, for compatibility with the STL etc.?",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 15
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38b86469_b6844277",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "Simplify this to take exactly one argument besides the format string?",
+      "range": {
+        "startLine": 94,
+        "startChar": 53,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8b3e8fc_8ed8c3e1",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "std::vsnprintf returns\n\n  \"Number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to buf_size limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not imposed.\"\n\n  -- http://en.cppreference.com/w/cpp/io/c/vfprintf\n\nYou don\u0027t handle the error case, or the truncation case.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 31
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fa70076_c3125793",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "Also DCHECK that buffer_[length_] \u003d\u003d \u0027\\0\u0027? That\u0027s an essential invariant, but it depends on both std::vsnprintf and rtc::strcpyn doing what this class thinks they should be doing.",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e64448_bc671e73",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "Document these? buffer_ is always null-terminated, and length_ is the number of characters not including the terminating null, right?",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae5dda5c_7b02de04",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T01:18:15Z",
+      "side": 1,
+      "message": "These should be up with the other public constructors:\n\n  \"Every class\u0027s public interface should make explicit which copy and move operations the class supports. This should usually take the form of explicitly declaring and/or deleting the appropriate operations in the public section of the declaration.\"\n\n  -- https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
