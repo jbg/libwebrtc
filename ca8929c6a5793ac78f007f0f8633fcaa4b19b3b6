@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73042e31_34a59341",
+        "filename": "rtc_base/timeutils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-23T14:39:05Z",
+      "side": 1,
+      "message": "This check looks right, assuming you really want to check that result fits in uint64_t. \n\nBut if you change to something like \n\n  static_cast\u003cuint64_t\u003e(std::numeric_limits\u003cint64_t\u003e::max()) / b\n\nthe dcheck on the below cast would be redundant.\n\nThe division is likely one or two orders of magnitude slower than multiplication,\nbut I guess that\u0027s no problem.",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 70
+      },
+      "revId": "ca8929c6a5793ac78f007f0f8633fcaa4b19b3b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
