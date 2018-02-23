@@ -22,6 +22,29 @@
       "revId": "ca8929c6a5793ac78f007f0f8633fcaa4b19b3b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b55392b_4e8c4b1d",
+        "filename": "rtc_base/timeutils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-02-23T14:43:19Z",
+      "side": 1,
+      "message": "b should not be zero here, so this check could be skipped.\n\nI\u0027m not sure if there is a more elegant way to do the check?",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 21
+      },
+      "revId": "ca8929c6a5793ac78f007f0f8633fcaa4b19b3b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
