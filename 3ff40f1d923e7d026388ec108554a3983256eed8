@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "acdc7287_8395ee9b",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T10:13:07Z",
+      "side": 1,
+      "message": "Well, it is a function template, because it\u0027s a member of a class template (and actually makes use of a template parameter). But OK.",
+      "parentUuid": "5aa1dca9_25a30c48",
+      "range": {
+        "startLine": 94,
+        "startChar": 53,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8b3e8fc_8ed8c3e1",
         "filename": "rtc_base/string_builder.h",
         "patchSetId": 9

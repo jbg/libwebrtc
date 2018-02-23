@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "af93b0bd_c0c59b33",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T10:13:07Z",
+      "side": 1,
+      "message": "sgtm",
+      "parentUuid": "3872b9d9_08b163c9",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8f61e08_9c120b46",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 4
@@ -173,6 +197,24 @@
       "side": 1,
       "message": "do you mean that I should instead store the current length of buffer_ and pass the offset of e.g. |length_| to strcatn (and size - length_)?\n\nif so, I can do that but just checking if I understand correctly.",
       "parentUuid": "30435a58_9d31eff6",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db24a313_da5ca3e3",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T10:13:07Z",
+      "side": 1,
+      "message": "Yes---rtc::strcatn() finds the size of its first argument by scanning for the null terminator. But you already have that in `length_`, so you should be able to do something like\n\n  size_t len \u003d rtc::strcpyn(\u0026buffer_[length_], size - length_, str, length);",
+      "parentUuid": "9e15a643_d31b94ce",
       "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true

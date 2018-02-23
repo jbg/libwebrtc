@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "802a98b1_60911cc7",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T10:13:07Z",
+      "side": 1,
+      "message": "The docs at http://en.cppreference.com/w/cpp/io/c/vfprintf say\n\n  \"Return value: Number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to buf_size limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not imposed.\"\n\nSo the negative error value isn\u0027t guaranteed to be -1 in particular. And you still don\u0027t try to handle the truncation case, if I\u0027m not mistaken?",
+      "revId": "9b3bf4850cf61a07a32ebcd8df8f8ac9f287d564",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee9c0a53_4895e976",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T10:13:07Z",
+      "side": 1,
+      "message": "These need to be in the opposite order---otherwise, you try to read buffer_[size_] before ensuring that it isn\u0027t out-of-bounds.",
+      "revId": "9b3bf4850cf61a07a32ebcd8df8f8ac9f287d564",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
