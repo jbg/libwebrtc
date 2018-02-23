@@ -15,8 +15,14 @@
 
 namespace webrtc {
 
-// Initializes global state needed by WebRTC Android NDK.
+// Initializes global state needed by WebRTC Android NDK. When using this
+// version, the client must call ContextUtils.initialize from Java code before
+// using the library.
 void InitAndroid(JavaVM* jvm);
+
+// Initializes global state needed by WebRTC Android NDK. This version calls
+// ContextUtils.initialize through JNI.
+void InitAndroid(JavaVM* jvm, jobject application_context_);
 
 }  // namespace webrtc
 
