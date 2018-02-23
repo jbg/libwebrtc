@@ -27,6 +27,7 @@
 #endif
 
 #include "rtc_base/checks.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/timeutils.h"
 
 namespace rtc {
@@ -55,7 +56,12 @@ int64_t SystemTimeNanos() {
     }
   }
   // Use timebase to convert absolute time tick units into nanoseconds.
-  ticks = mach_absolute_time() * timebase.numer / timebase.denom;
+  const auto mul = [](uint64_t a, uint32_t b) -> int64_t {
+    RTC_DCHECK(b == 0 || a <= std::numeric_limits<uint64_t>::max() / b)
+        << "The multiplication " << a << " * " << b << " overflows";
+    return rtc::dchecked_cast<int64_t>(a * b);
+  };
+  ticks = mul(mach_absolute_time(), timebase.numer) / timebase.denom;
 #elif defined(WEBRTC_POSIX)
   struct timespec ts;
   // TODO(deadbeef): Do we need to handle the case when CLOCK_MONOTONIC is not
