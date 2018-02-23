@@ -467,6 +467,9 @@ struct VideoSenderInfo : public MediaSenderInfo {
   bool has_entered_low_resolution = false;
   rtc::Optional<uint64_t> qp_sum;
   webrtc::VideoContentType content_type = webrtc::VideoContentType::UNSPECIFIED;
+  // TODO(ilnik): Add the link to specific place in
+  // https://w3c.github.io/webrtc-stats/ when it's updated.
+  uint32_t huge_frames_sent = 0;
 };
 
 struct VideoReceiverInfo : public MediaReceiverInfo {

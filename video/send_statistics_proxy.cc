@@ -910,6 +910,18 @@ void SendStatisticsProxy::OnSendEncodedImage(
     }
   }
 
+  // If any of the simulcast streams have a huge frame, it should be counted
+  // as a single difficult input frame.
+  // TODO(ilnik): Add the link to specific place in
+  // https://w3c.github.io/webrtc-stats/ when it's updated.
+  if (encoded_image.timing_.flags & TimingFrameFlags::kTriggeredBySize) {
+    if (!last_outlier_timestamp_ ||
+        *last_outlier_timestamp_ < encoded_image.capture_time_ms_) {
+      last_outlier_timestamp_.emplace(encoded_image.capture_time_ms_);
+      ++stats_.huge_frames_sent;
+    }
+  }
+
   media_byte_rate_tracker_.AddSamples(encoded_image._length);
 
   // Initialize to current since |is_limited_in_resolution| is only updated
