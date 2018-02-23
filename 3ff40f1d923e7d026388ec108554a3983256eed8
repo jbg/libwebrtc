@@ -280,6 +280,24 @@
       "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8251ff8f_44de094b",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-23T10:18:54Z",
+      "side": 1,
+      "message": "I think that might be the way to go. And it\u0027s what the Google style guide (the part I cited above) says we should do.\n\nIt\u0027s slightly more to type, but it has the advantage of being less WebRTC-specific.",
+      "parentUuid": "a2422883_256c31a5",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
