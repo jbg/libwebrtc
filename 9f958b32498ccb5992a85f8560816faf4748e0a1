@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "3872b9d9_08b163c9",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "\"rtc_base\": Ah, sorry. Yes, rtc_base/ makes sense.\n\nAs we discussed offline, this CL wasn\u0027t initially thought of something to land, but as Jonas tells me that there are ~160 examples in our source code, so I\u0027ll continue with something simple that\u0027s based around a stack allocated buffer and supports a few common use cases.\n\nWdyt about moving this to stringutils.h and renaming to e.g. SimpleStringBuilder? (better naming suggestions welcome)",
+      "parentUuid": "6e26a17e_64df0949",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8f61e08_9c120b46",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 4
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "cb27d78a_ee4ec676",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8f61e08_9c120b46",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 8
+      },
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30435a58_9d31eff6",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 4
@@ -107,6 +155,24 @@
       "writtenOn": "2018-02-20T20:23:39Z",
       "side": 1,
       "message": "It looks like you\u0027re recomputing the length of the existing buffer contents each time, instead of saving the length between Append calls.",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e15a643_d31b94ce",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "do you mean that I should instead store the current length of buffer_ and pass the offset of e.g. |length_| to strcatn (and size - length_)?\n\nif so, I can do that but just checking if I understand correctly.",
+      "parentUuid": "30435a58_9d31eff6",
       "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -127,6 +193,24 @@
       "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb0ef7c_a7b15201",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "054c1838_b2163cc1",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +264,24 @@
       "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b41d948b_b0a6a50e",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "991e48e8_e05e298d",
+      "revId": "9f958b32498ccb5992a85f8560816faf4748e0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

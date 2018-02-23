@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ebf1f80_a6fa3c15",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done. Created a strings/ subdir.",
+      "parentUuid": "91eda1fe_a5f07c48",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b342396_0a4885cb",
         "filename": "rtc_base/string_builder.h",
         "patchSetId": 9
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "b6e952d4_5eea4868",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b342396_0a4885cb",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 15
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38b86469_b6844277",
         "filename": "rtc_base/string_builder.h",
         "patchSetId": 9
@@ -53,6 +95,30 @@
       "writtenOn": "2018-02-23T01:18:15Z",
       "side": 1,
       "message": "Simplify this to take exactly one argument besides the format string?",
+      "range": {
+        "startLine": 94,
+        "startChar": 53,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5aa1dca9_25a30c48",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "As is, this is not a template function, which I think is a good thing. There\u0027s no reason to further restrict it for the purposes of the class, and I could actually see it being useful as a public method down the road. I don\u0027t have a need for it right now, which is why I decided to make it private.",
+      "parentUuid": "38b86469_b6844277",
       "range": {
         "startLine": 94,
         "startChar": 53,
@@ -105,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "db744678_d0b8dbc9",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "8fa70076_c3125793",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67e64448_bc671e73",
         "filename": "rtc_base/string_builder.h",
         "patchSetId": 9
@@ -122,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "74a1bf48_4e8c1079",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67e64448_bc671e73",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae5dda5c_7b02de04",
         "filename": "rtc_base/string_builder.h",
         "patchSetId": 9
@@ -136,6 +238,24 @@
       "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2422883_256c31a5",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-23T08:35:38Z",
+      "side": 1,
+      "message": "Done. Btw, what I did here was to first use RTC_DISALLOW_COPY_AND_ASSIGN, but found that I could run into circular dependencies because of constructormagic.h.\n\nAre we deprecating constructormagic.h? (or should we?)",
+      "parentUuid": "ae5dda5c_7b02de04",
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
