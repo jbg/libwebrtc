@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "62b10af6_99fa0a09",
+        "filename": "modules/rtp_rtcp/source/rtp_payload_registry.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-23T08:46:22Z",
+      "side": 1,
+      "message": "That would actually increase the number of string comparisons, since PayloadStringToCodecType is just a sequence of string comparisons. So I\u0027d prefer not to do that.\n\nIt would make more sense to *replace* RtpUtility::Payload::name with an enum and do the conversion elsewhere, but I don\u0027t really know where it comes from.",
+      "parentUuid": "e77fd6a7_7fe2967c",
+      "range": {
+        "startLine": 35,
+        "startChar": 15,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "784a789075129a6ede9fb21227214a9c5a481d37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a00b1699_c58a78eb",
         "filename": "modules/video_coding/generic_encoder.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-21T14:25:06Z",
       "side": 1,
       "message": "may be convert to string to make error message readable.",
+      "range": {
+        "startLine": 72,
+        "startChar": 25,
+        "endLine": 72,
+        "endChar": 44
+      },
+      "revId": "784a789075129a6ede9fb21227214a9c5a481d37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a958c784_d14985cc",
+        "filename": "modules/video_coding/generic_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-02-23T08:46:22Z",
+      "side": 1,
+      "message": "Change to log both name and numbers, since more than one number is mapped to \"Generic\".",
+      "parentUuid": "a00b1699_c58a78eb",
       "range": {
         "startLine": 72,
         "startChar": 25,
