@@ -40,6 +40,7 @@ enum PeerConnectionEnumCounterType {
   kEnumCounterKeyProtocol,
   kEnumCounterSdpSemanticRequested,
   kEnumCounterSdpSemanticNegotiated,
+  kEnumCounterSdpCompatibility,
   kPeerConnectionEnumCounterMax
 };
 
@@ -133,6 +134,26 @@ enum SdpSemanticNegotiated {
   kSdpSemanticNegotiatedUnifiedPlan,
   kSdpSemanticNegotiatedMixed,
   kSdpSemanticNegotiatedMax
+};
+
+enum class SdpFormat {
+  kSimple,
+  kComplexPlanB,
+  kComplexUnifiedPlan,
+};
+
+// Composition of SdpSemantics x SdpFormat.
+enum SdpCompatibility {
+  kSdpCompatibilityDefaultSimple,
+  kSdpCompatibilityDefaultComplexPlanB,
+  kSdpCompatibilityDefaultComplexUnifiedPlan,
+  kSdpCompatibilityPlanBSimple,
+  kSdpCompatibilityPlanBComplexPlanB,
+  kSdpCompatibilityPlanBComplexUnifiedPlan,
+  kSdpCompatibilityUnifiedPlanSimple,
+  kSdpCompatibilityUnifiedPlanComplexPlanB,
+  kSdpCompatibilityUnifiedPlanComplexUnifiedPlan,
+  kSdpCompatibilityMax
 };
 
 class MetricsObserverInterface : public rtc::RefCountInterface {

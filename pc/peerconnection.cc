@@ -2069,6 +2069,11 @@ void PeerConnection::SetRemoteDescription(
   }
   RTC_DCHECK(remote_description());
 
+  if (type == SdpType::kOffer) {
+    // Make UMA notes about SDP compatibility.
+    ReportSdpSemanticsCompatibility(*remote_description());
+  }
+
   if (type == SdpType::kAnswer) {
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
@@ -5721,6 +5726,77 @@ std::string PeerConnection::GetSessionErrorMsg() {
   desc << kSessionError << SessionErrorToString(session_error()) << ". ";
   desc << kSessionErrorDesc << session_error_desc() << ".";
   return desc.str();
+}
+
+static SdpCompatibility GetSdpCompatibilityValue(SdpSemantics semantics,
+                                                 SdpFormat format) {
+  switch (semantics) {
+    case SdpSemantics::kDefault:
+      switch (format) {
+        case SdpFormat::kSimple:
+          return kSdpCompatibilityDefaultSimple;
+        case SdpFormat::kComplexPlanB:
+          return kSdpCompatibilityDefaultComplexPlanB;
+        case SdpFormat::kComplexUnifiedPlan:
+          return kSdpCompatibilityDefaultComplexUnifiedPlan;
+      }
+      break;
+    case SdpSemantics::kPlanB:
+      switch (format) {
+        case SdpFormat::kSimple:
+          return kSdpCompatibilityPlanBSimple;
+        case SdpFormat::kComplexPlanB:
+          return kSdpCompatibilityPlanBComplexPlanB;
+        case SdpFormat::kComplexUnifiedPlan:
+          return kSdpCompatibilityPlanBComplexUnifiedPlan;
+      }
+      break;
+    case SdpSemantics::kUnifiedPlan:
+      switch (format) {
+        case SdpFormat::kSimple:
+          return kSdpCompatibilityUnifiedPlanSimple;
+        case SdpFormat::kComplexPlanB:
+          return kSdpCompatibilityUnifiedPlanComplexPlanB;
+        case SdpFormat::kComplexUnifiedPlan:
+          return kSdpCompatibilityUnifiedPlanComplexUnifiedPlan;
+      }
+      break;
+  }
+  RTC_NOTREACHED();
+  return kSdpCompatibilityMax;
+}
+
+void PeerConnection::ReportSdpSemanticsCompatibility(
+    const SessionDescriptionInterface& remote_offer) {
+  if (!uma_observer_) {
+    return;
+  }
+  int num_audio_mlines = 0;
+  int num_video_mlines = 0;
+  int num_audio_tracks = 0;
+  int num_video_tracks = 0;
+  for (const ContentInfo& content : remote_offer.description()->contents()) {
+    cricket::MediaType media_type = content.media_description()->type();
+    int num_tracks = std::max(
+        1, static_cast<int>(content.media_description()->streams().size()));
+    if (media_type == cricket::MEDIA_TYPE_AUDIO) {
+      num_audio_mlines += 1;
+      num_audio_tracks += num_tracks;
+    } else if (media_type == cricket::MEDIA_TYPE_VIDEO) {
+      num_video_mlines += 1;
+      num_video_tracks += num_tracks;
+    }
+  }
+  SdpFormat format = SdpFormat::kSimple;
+  if (num_audio_mlines > 1 || num_video_mlines > 1) {
+    format = SdpFormat::kComplexUnifiedPlan;
+  } else if (num_audio_tracks > 1 || num_video_tracks > 1) {
+    format = SdpFormat::kComplexPlanB;
+  }
+  SdpCompatibility compatibility =
+      GetSdpCompatibilityValue(configuration_.sdp_semantics, format);
+  uma_observer_->IncrementEnumCounter(kEnumCounterSdpCompatibility,
+                                      compatibility, kSdpCompatibilityMax);
 }
 
 void PeerConnection::ReportNegotiatedSdpSemantics(
