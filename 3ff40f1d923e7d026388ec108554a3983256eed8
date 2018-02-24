@@ -155,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "bf28e0a6_69657b85",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-24T22:36:44Z",
+      "side": 1,
+      "message": "I looked around some more to see where it might make sense to use this class in the future, and decided to make AppendFormat() public since we\u0027re using std::setw, std::setfill, std::hex, etc, which will be easier to support via printf (and possibly even easier to use... to some at least).",
+      "parentUuid": "acdc7287_8395ee9b",
+      "range": {
+        "startLine": 94,
+        "startChar": 53,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8b3e8fc_8ed8c3e1",
         "filename": "rtc_base/string_builder.h",
         "patchSetId": 9
@@ -166,6 +190,30 @@
       "writtenOn": "2018-02-23T01:18:15Z",
       "side": 1,
       "message": "std::vsnprintf returns\n\n  \"Number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to buf_size limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not imposed.\"\n\n  -- http://en.cppreference.com/w/cpp/io/c/vfprintf\n\nYou don\u0027t handle the error case, or the truncation case.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 31
+      },
+      "revId": "3ff40f1d923e7d026388ec108554a3983256eed8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1da4ad3c_440994b8",
+        "filename": "rtc_base/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-24T22:36:44Z",
+      "side": 1,
+      "message": "Now both are DCHECKed. Hmm... now that AppendFormat() is public, the risk of getting -1 is greater. Perhaps it might make sense to handle that case a little better... wdyt?",
+      "parentUuid": "e8b3e8fc_8ed8c3e1",
       "range": {
         "startLine": 97,
         "startChar": 4,
