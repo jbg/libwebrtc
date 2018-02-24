@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "9d782b87_620d6875",
+        "filename": "api/umametrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-02-24T21:17:32Z",
+      "side": 1,
+      "message": "This is actually a cross product of three different variables:\n- Number of tracks (simple/complex)\n- Whether we end up in plan B or unified plan (or mixed or can\u0027t tell?)\n- Whehter the parameter was plan B or Unified\nI think this needs a clearer explanation, and perhaps a better name.\n\n(I might have chosen to record just the cross product of the first two, we\u0027re\nalready recording the parameter separately).",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bed51b0_86294b95",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 1
@@ -36,6 +53,41 @@
     },
     {
       "key": {
+        "uuid": "4eb38a00_bc2ec71e",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2072,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-02-24T21:17:32Z",
+      "side": 1,
+      "message": "If this is accumulated using UMA, I think it\u0027s counted only once per browser session anyway.",
+      "parentUuid": "4bed51b0_86294b95",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e8ab3f9_710fc7ef",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5797,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-02-24T21:17:32Z",
+      "side": 1,
+      "message": "As said in the comment on the api uma.h file, I think mixing in the configuration\u0027s sdp_semantics value is a mistake that makes the stats harder to read.\nI see an opposite argument (the variants with explicit settings tell us that app writers know of the incompatibility and are working around it), but I\u0027d really hope that we can get away with very low usage of the flag.",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3d456d7_201a8ca6",
         "filename": "pc/peerconnection.h",
         "patchSetId": 1
@@ -47,6 +99,23 @@
       "writtenOn": "2018-02-24T00:35:19Z",
       "side": 1,
       "message": "Looks like a half-finished comment",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0cff100_3599770c",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-02-24T21:17:32Z",
+      "side": 1,
+      "message": "You should check that the other variants are 0 in at least one of these tests. I thought about making a helper function of some kind for this (EXPECT_TRUE(checkMetricX(1, 0, 0, 0) or something like that), but didn\u0027t bother with making more tests.",
       "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
