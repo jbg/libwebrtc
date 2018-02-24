@@ -192,8 +192,6 @@ rtc_source_set("rtc_base_approved_generic") {
     "copyonwritebuffer.h",
     "criticalsection.cc",
     "criticalsection.h",
-    "event_tracer.cc",
-    "event_tracer.h",
     "file.cc",
     "file.h",
     "flags.cc",
@@ -215,8 +213,6 @@ rtc_source_set("rtc_base_approved_generic") {
     "pathutils.h",
     "platform_file.cc",
     "platform_file.h",
-    "platform_thread.cc",
-    "platform_thread.h",
     "platform_thread_types.cc",
     "platform_thread_types.h",
     "ptr_util.h",
@@ -240,14 +236,10 @@ rtc_source_set("rtc_base_approved_generic") {
     "swap_queue.h",
     "template_util.h",
     "thread_annotations.h",
-    "thread_checker.h",
-    "thread_checker_impl.cc",
-    "thread_checker_impl.h",
     "timestampaligner.cc",
     "timestampaligner.h",
     "timeutils.cc",
     "timeutils.h",
-    "trace_event.h",
   ]
 
   deps += [
@@ -274,15 +266,11 @@ rtc_source_set("rtc_base_approved_generic") {
     sources += [
       "../../webrtc_overrides/rtc_base/event.cc",
       "../../webrtc_overrides/rtc_base/event.h",
-      "../../webrtc_overrides/rtc_base/logging.cc",
-      "../../webrtc_overrides/rtc_base/logging.h",
     ]
   } else {
     sources += [
       "event.cc",
       "event.h",
-      "logging.cc",
-      "logging.h",
     ]
   }
   if (is_component_build && is_win) {
@@ -402,10 +390,33 @@ rtc_source_set("rtc_task_queue") {
 # depend on rtc_task_queue_api.
 rtc_source_set("rtc_task_queue_api") {
   sources = [
+    "event_tracer.cc",
+    "event_tracer.h",
+    "platform_thread.h",
+    "sequenced_task_checker.h",
+    "sequenced_task_checker_impl.cc",
+    "sequenced_task_checker_impl.h",
     "task_queue.h",
+    "thread_checker.h",
+    "thread_checker_impl.cc",
+    "thread_checker_impl.h",
+    "trace_event.h",
   ]
+  if (build_with_chromium) {
+    sources += [
+      "../../webrtc_overrides/rtc_base/logging.cc",
+      "../../webrtc_overrides/rtc_base/logging.h",
+    ]
+  } else {
+    sources += [
+      "logging.cc",
+      "logging.h",
+    ]
+  }
   deps = [
+    ":checks",
     ":rtc_base_approved",
+    ":stringutils", # event_tracer
   ]
 }
 
@@ -439,14 +450,24 @@ rtc_source_set("rtc_task_queue_impl") {
       ]
     }
   }
+
+  sources += [ "platform_thread.cc" ]
 }
 
+# TODO(tommi): Remove this target as it's a noop now.
 rtc_static_library("sequenced_task_checker") {
-  sources = [
-    "sequenced_task_checker.h",
-    "sequenced_task_checker_impl.cc",
-    "sequenced_task_checker_impl.h",
-  ]
+  sources = []
+  if (is_win) {
+    sources = [
+      "noop.cc",
+    ]
+  }
+  if (is_ios || is_mac) {
+    sources = [
+      "noop.mm",
+    ]
+  }
+
   deps = [
     ":checks",
     ":rtc_base_approved",
@@ -461,7 +482,20 @@ rtc_static_library("weak_ptr") {
   ]
   deps = [
     ":rtc_base_approved",
-    ":sequenced_task_checker",
+    ":rtc_task_queue",
+
+    # ":sequenced_task_checker",
+  ]
+}
+
+rtc_static_library("event_tracer") {
+  sources = [
+  ]
+  deps = [
+    ":checks",
+    ":rtc_base_approved",
+    ":rtc_task_queue",
+    ":stringutils",
   ]
 }
 
@@ -538,6 +572,7 @@ if (is_ios || is_mac) {
     ]
     deps = [
       ":rtc_base_generic",
+      ":rtc_task_queue",
     ]
     visibility = [ ":rtc_base" ]
   }
@@ -551,6 +586,7 @@ rtc_static_library("rtc_base_generic") {
   deps = [
     ":checks",
     ":stringutils",
+    ":rtc_task_queue",
     "..:webrtc_common",
     "../api:array_view",
     "../api:optional",
@@ -933,6 +969,7 @@ if (rtc_include_tests) {
       ":rtc_base",
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
+      ":rtc_task_queue",
       "../system_wrappers:system_wrappers",
       "../test:test_support",
       "//testing/gtest",
@@ -994,6 +1031,7 @@ if (rtc_include_tests) {
       ":rtc_base_approved",
       ":rtc_base_tests_main",
       ":rtc_base_tests_utils",
+      ":event_tracer",
       ":rtc_task_queue",
       ":safe_compare",
       ":stringutils",

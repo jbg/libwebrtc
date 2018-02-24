@@ -601,6 +601,7 @@ if (is_ios || is_mac) {
         "../pc:peerconnection",
         "../rtc_base:checks",
         "../rtc_base:rtc_base",
+        "../rtc_base:rtc_task_queue",
       ]
     }
 

@@ -89,6 +89,7 @@ rtc_static_library("rtc_p2p") {
     "../logging:ice_log",
     "../rtc_base:checks",
     "../rtc_base:rtc_base",
+    "../rtc_base:rtc_task_queue",
     "../rtc_base:stringutils",
     "../system_wrappers:field_trial_api",
   ]
@@ -198,6 +199,7 @@ rtc_static_library("libstunprober") {
     "../:typedefs",
     "../rtc_base:checks",
     "../rtc_base:rtc_base",
+    "../rtc_base:rtc_task_queue",
   ]
 }
 

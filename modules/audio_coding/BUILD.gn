@@ -149,6 +149,7 @@ rtc_static_library("audio_coding") {
            ":neteq",
            ":rent_a_codec",
            "../../rtc_base:rtc_base_approved",
+           "../../rtc_base:rtc_task_queue",
            "../../api:optional",
            "../../logging:rtc_event_log_api",
          ]
@@ -1088,6 +1089,7 @@ rtc_static_library("neteq") {
     "../../rtc_base:checks",
     "../../rtc_base:gtest_prod",
     "../../rtc_base:rtc_base_approved",
+    "../../rtc_base:rtc_task_queue",
     "../../rtc_base:sanitizer",
     "../../rtc_base/system:fallthrough",
     "../../system_wrappers:field_trial_api",
@@ -1375,6 +1377,7 @@ if (rtc_include_tests) {
       "../../api:optional",
       "../../api/audio_codecs:builtin_audio_decoder_factory",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base:rtc_task_queue",
       "../../system_wrappers",
       "../../test:test_support",
     ]
@@ -2213,6 +2216,7 @@ if (rtc_include_tests) {
       "../../rtc_base:rtc_base",
       "../../rtc_base:rtc_base_approved",
       "../../rtc_base:rtc_base_tests_utils",
+      "../../rtc_base:rtc_task_queue",
       "../../rtc_base:sanitizer",
       "../../system_wrappers",
       "../../system_wrappers:cpu_features_api",

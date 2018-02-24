@@ -214,6 +214,7 @@ rtc_static_library("rtc_internal_video_codecs") {
     "../modules/video_coding:webrtc_vp9",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
     "../rtc_base:sequenced_task_checker",
     "../system_wrappers",
     "../system_wrappers:field_trial_api",
@@ -244,6 +245,7 @@ rtc_static_library("rtc_software_fallback_wrappers") {
     "../modules/video_coding:video_codec_interface",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
     "../rtc_base/system:fallthrough",
     "../system_wrappers:field_trial_api",
   ]
@@ -410,6 +412,7 @@ rtc_static_library("rtc_data") {
     "../p2p:rtc_p2p",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
     "../system_wrappers",
   ]
 }

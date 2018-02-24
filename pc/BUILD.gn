@@ -204,6 +204,7 @@ rtc_static_library("peerconnection") {
     "../rtc_base:checks",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
     "../rtc_base:stringutils",
     "../stats",
     "../system_wrappers",
@@ -474,6 +475,7 @@ if (rtc_include_tests) {
       "../api:libjingle_peerconnection_api",
       "../api:mock_rtp",
       "../rtc_base:checks",
+      "../rtc_base:event_tracer",
       "../rtc_base:stringutils",
     ]
     if (is_android) {
