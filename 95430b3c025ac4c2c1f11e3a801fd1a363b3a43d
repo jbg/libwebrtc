@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e075ad2_e67c03be",
+        "filename": "api/umametrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-24T00:35:19Z",
+      "side": 1,
+      "message": "nit: Describe the meaning of this enum in a comment, like in the CL description",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bed51b0_86294b95",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2072,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-24T00:35:19Z",
+      "side": 1,
+      "message": "Should this be reported per-offer, or per-PeerConnection? Doing it for every offer could skew the stats for applications that do lots of re-offers.",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3d456d7_201a8ca6",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-24T00:35:19Z",
+      "side": 1,
+      "message": "Looks like a half-finished comment",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
