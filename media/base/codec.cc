@@ -244,11 +244,25 @@ bool VideoCodec::operator==(const VideoCodec& c) const {
   return Codec::operator==(c);
 }
 
+static bool IsSameH264PacketizationMode(const CodecParameterMap& ours,
+                                        const CodecParameterMap& theirs) {
+  auto ours_it = ours.find(kH264FmtpPacketizationMode);
+  if (ours_it == ours.end()) {
+    return false;
+  }
+  auto theirs_it = theirs.find(kH264FmtpPacketizationMode);
+  if (theirs_it == theirs.end()) {
+    return false;
+  }
+  return *ours_it == *theirs_it;
+}
+
 bool VideoCodec::Matches(const VideoCodec& other) const {
   if (!Codec::Matches(other))
     return false;
   if (CodecNamesEq(name.c_str(), kH264CodecName))
-    return webrtc::H264::IsSameH264Profile(params, other.params);
+    return webrtc::H264::IsSameH264Profile(params, other.params) &&
+           IsSameH264PacketizationMode(params, other.params);
   return true;
 }
 
