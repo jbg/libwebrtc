@@ -18,6 +18,9 @@
 
 namespace webrtc {
 namespace jni {
+RtpEncodingParameters JavaToNativeRtpEncodingParameters(
+    JNIEnv* env,
+    const JavaRef<jobject>& j_encoding_parameters);
 
 RtpParameters JavaToNativeRtpParameters(JNIEnv* jni,
                                         const JavaRef<jobject>& j_parameters);

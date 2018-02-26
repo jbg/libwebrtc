@@ -341,6 +341,9 @@ public class PeerConnection {
     }
   }
 
+  /** Java version of webrtc::SdpSemantics */
+  public enum SdpSemantics { DEFAULT, PLAN_B, UNIFIED_PLAN }
+
   /** Java version of PeerConnectionInterface.RTCConfiguration */
   // TODO(qingsi): Resolve the naming inconsistency of fields with/without units.
   public static class RTCConfiguration {
@@ -386,6 +389,7 @@ public class PeerConnection {
     // Use "Unknown" to represent no preference of adapter types, not the
     // preference of adapters of unknown types.
     public AdapterType networkPreference;
+    public SdpSemantics sdpSemantics;
 
     // This is an optional wrapper for the C++ webrtc::TurnCustomizer.
     public TurnCustomizer turnCustomizer;
@@ -423,6 +427,7 @@ public class PeerConnection {
       combinedAudioVideoBwe = null;
       enableDtlsSrtp = null;
       networkPreference = AdapterType.UNKNOWN;
+      sdpSemantics = SdpSemantics.DEFAULT;
     }
 
     @CalledByNative("RTCConfiguration")
@@ -574,12 +579,18 @@ public class PeerConnection {
     AdapterType getNetworkPreference() {
       return networkPreference;
     }
+
+    @CalledByNative("RTCConfiguration")
+    SdpSemantics getSdpSemantics() {
+      return sdpSemantics;
+    }
   };
 
   private final List<MediaStream> localStreams = new ArrayList<>();
   private final long nativePeerConnection;
   private List<RtpSender> senders = new ArrayList<>();
   private List<RtpReceiver> receivers = new ArrayList<>();
+  private List<RtpTransceiver> transceivers = new ArrayList<>();
 
   /**
    * Wraps a PeerConnection created by the factory. Can be used by clients that want to implement
@@ -727,6 +738,84 @@ public class PeerConnection {
     return Collections.unmodifiableList(receivers);
   }
 
+  public List<RtpTransceiver> getTransceivers() {
+    for (RtpTransceiver transceiver : transceivers) {
+      transceiver.dispose();
+    }
+    transceivers = nativeGetTransceivers();
+    return Collections.unmodifiableList(transceivers);
+  }
+
+  public RtpSender addTrack(MediaStreamTrack track, List<String> streamLabels) {
+    if (track == null || streamLabels == null) {
+      return null;
+    }
+    RtpSender new_sender = nativeAddTrack(track.nativeTrack, streamLabels);
+    if (new_sender != null) {
+      senders.add(new_sender);
+    }
+    return new_sender;
+  }
+
+  public boolean removeTrack(RtpSender sender) {
+    if (sender == null) {
+      return false;
+    }
+    return nativeRemoveTrack(sender.nativeRtpSender);
+  }
+
+  public RtpTransceiver addTransceiver(MediaStreamTrack track) {
+    if (track == null) {
+      return null;
+    }
+    RtpTransceiver new_transceiver = nativeAddTransceiverWithTrack(track.nativeTrack);
+    if (new_transceiver != null) {
+      transceivers.add(new_transceiver);
+    }
+    return new_transceiver;
+  }
+
+  public RtpTransceiver addTransceiver(
+      MediaStreamTrack track, RtpTransceiver.RtpTransceiverInit init) {
+    if (track == null) {
+      return null;
+    }
+    if (init == null) {
+      return addTransceiver(track);
+    }
+    RtpTransceiver new_transceiver = nativeAddTransceiverWithTrackAndInit(track.nativeTrack, init);
+    if (new_transceiver != null) {
+      transceivers.add(new_transceiver);
+    }
+    return new_transceiver;
+  }
+
+  public RtpTransceiver addTransceiver(MediaStreamTrack.MediaType mediaType) {
+    if (mediaType == null) {
+      return null;
+    }
+    RtpTransceiver new_transceiver = nativeAddTransceiverOfType(mediaType);
+    if (new_transceiver != null) {
+      transceivers.add(new_transceiver);
+    }
+    return new_transceiver;
+  }
+
+  public RtpTransceiver addTransceiver(
+      MediaStreamTrack.MediaType mediaType, RtpTransceiver.RtpTransceiverInit init) {
+    if (mediaType == null) {
+      return null;
+    }
+    if (init == null) {
+      return addTransceiver(mediaType);
+    }
+    RtpTransceiver new_transceiver = nativeAddTransceiverOfTypeWithInit(mediaType, init);
+    if (new_transceiver != null) {
+      transceivers.add(new_transceiver);
+    }
+    return new_transceiver;
+  }
+
   // Older, non-standard implementation of getStats.
   @Deprecated
   public boolean getStats(StatsObserver observer, MediaStreamTrack track) {
@@ -808,6 +897,10 @@ public class PeerConnection {
     for (RtpReceiver receiver : receivers) {
       receiver.dispose();
     }
+    for (RtpTransceiver transceiver : transceivers) {
+      transceiver.dispose();
+    }
+    transceivers.clear();
     receivers.clear();
     nativeFreeOwnedPeerConnection(nativePeerConnection);
   }
@@ -854,6 +947,15 @@ public class PeerConnection {
   private native RtpSender nativeCreateSender(String kind, String stream_id);
   private native List<RtpSender> nativeGetSenders();
   private native List<RtpReceiver> nativeGetReceivers();
+  private native List<RtpTransceiver> nativeGetTransceivers();
+  private native RtpSender nativeAddTrack(long track, List<String> streamLabels);
+  private native boolean nativeRemoveTrack(long sender);
+  private native RtpTransceiver nativeAddTransceiverWithTrack(long track);
+  private native RtpTransceiver nativeAddTransceiverWithTrackAndInit(
+      long track, RtpTransceiver.RtpTransceiverInit init);
+  private native RtpTransceiver nativeAddTransceiverOfType(MediaStreamTrack.MediaType mediaType);
+  private native RtpTransceiver nativeAddTransceiverOfTypeWithInit(
+      MediaStreamTrack.MediaType mediaType, RtpTransceiver.RtpTransceiverInit init);
   private native boolean nativeStartRtcEventLog(int file_descriptor, int max_size_bytes);
   private native void nativeStopRtcEventLog();
 }

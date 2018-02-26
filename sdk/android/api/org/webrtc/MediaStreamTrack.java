@@ -51,7 +51,7 @@ public class MediaStreamTrack {
     }
   }
 
-  final long nativeTrack;
+  public final long nativeTrack;
 
   public MediaStreamTrack(long nativeTrack) {
     this.nativeTrack = nativeTrack;
