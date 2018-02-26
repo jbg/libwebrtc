@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "714fdfd1_0e35576b",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T21:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2371127f_6e832a29",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85220aa9_8f61fcf7",
         "filename": "rtc_base/strings/string_builder.h",
         "patchSetId": 24
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c0ec287d_ac35db4a",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T21:09:17Z",
+      "side": 1,
+      "message": "Renamed to AddToLength.\n\nReading the function is good though since the fact it\u0027s a separate function is because of the sanity checks it has.",
+      "parentUuid": "85220aa9_8f61fcf7",
+      "range": {
+        "startLine": 98,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 18
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f22fbe6_3e7a5b9a",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 24
@@ -59,6 +107,30 @@
       "writtenOn": "2018-02-26T20:16:57Z",
       "side": 1,
       "message": "Does it make sense to use the heap at some threshold to avoid causing stack issues in future scenario with less stack space/deeper call depth and several usages of SSB where people have just chosen some safely large enough number? (ulimit -a tells me I have 8 MB of stack, so would last a while at 8kB/call)",
+      "range": {
+        "startLine": 138,
+        "startChar": 27,
+        "endLine": 138,
+        "endChar": 35
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03277c25_25dd58fb",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T21:09:17Z",
+      "side": 1,
+      "message": "The purpose of SimpleStringBuilder is to not do that, be fairly bare bones and limited, but fast, efficient and what you need in most cases.\n\nLater, I\u0027ve thought about implementing StringBuilder, which would be std::string based, support dynamic resizing and std::move-ing it\u0027s contents to the caller after building.",
+      "parentUuid": "8f22fbe6_3e7a5b9a",
       "range": {
         "startLine": 138,
         "startChar": 27,

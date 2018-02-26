@@ -241,6 +241,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ba9bf3b_bbbc39b8",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T21:09:17Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure that there are ways to continue to improve this, but wdyt about doing that in a follow up cl? that is, unless there\u0027s a proposal?\n\noh and also, about the original question, RTC_DCHECK+if() exception? (I guess we\u0027ve seen the code size benefits at least)",
+      "parentUuid": "485c59fa_8ec30dbd",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
