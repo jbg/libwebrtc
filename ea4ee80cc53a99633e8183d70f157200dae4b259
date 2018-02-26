@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6aeec59_536c2ee0",
+        "filename": "sdk/android/api/org/webrtc/MediaStreamTrack.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-26T18:49:19Z",
+      "side": 1,
+      "message": "Why does this need to be public?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 8
+      },
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81062e27_d9a9095e",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-26T18:49:19Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need webrtc:: (already in webrtc namespace).",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e019841c_4d3b54eb",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-26T18:49:19Z",
+      "side": 1,
+      "message": "nit: Keep blank line above.",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
