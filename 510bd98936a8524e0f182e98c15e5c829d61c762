@@ -223,6 +223,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "485c59fa_8ec30dbd",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T20:45:27Z",
+      "side": 1,
+      "message": "I modified your \"stringstream and SimpleStringBuilder comparison\" a bit. Appending a string was a no-op, and if we don\u0027t pretend to do something with the string after we build it, the compiler happily optimizes things away: https://godbolt.org/g/rQBvtu\n\nThe conclusion doesn\u0027t change, though: SimpleStringBuilder generates *much* less code than std::stringstream---40 instructions vs. 110---if you use -O2. With -Os, the situation is the opposite: 43 instructions vs. 26. And I\u0027m pretty sure we usually build with -Os.\n\nIt\u0027s probably still possible to beat std::stringstream in number of instructions, just not quite this easy. A good first step might be to de-inline the operator\u003c\u003c overloads, so that we don\u0027t end up emitting so many copies of the vararg call setup code.",
+      "parentUuid": "a9c962de_970e2c1f",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
