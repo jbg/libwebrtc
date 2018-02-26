@@ -151,6 +151,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbe895f2_488029ec",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T14:02:07Z",
+      "side": 1,
+      "message": "Would it be a good idea to not inline AppendFormat? At a guess, it\u0027s probably not less than a dozen instructions.\n\n...yes, experiment says ~40 instructions: https://godbolt.org/g/oUKTTK",
+      "parentUuid": "e3af2484_0ec90b4c",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
