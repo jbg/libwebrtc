@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e9072fd_04746936",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T13:43:18Z",
+      "side": 1,
+      "message": "Ah, thanks. This was leftover from a previous iteration. Done",
+      "parentUuid": "9ce10ea1_ccb05a3a",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77e2eb09_4ab012ef",
         "filename": "rtc_base/logging_unittest.cc",
         "patchSetId": 22
@@ -33,6 +51,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33d8415d_b314e9a4",
+        "filename": "rtc_base/logging_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T13:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77e2eb09_4ab012ef",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "87ede404_b0689e19",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T13:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a9fc1aa_bb42e3a8",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 17
+      },
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cdddcb7_25907016",
         "filename": "rtc_base/strings/string_builder.h",
         "patchSetId": 22
@@ -70,6 +130,24 @@
       "writtenOn": "2018-02-26T13:15:13Z",
       "side": 1,
       "message": "You shouldn\u0027t DCHECK(x), and then have code that handles the !x case (see https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/checks.h?l\u003d60). Use CHECK if !x should never happen but you\u0027re worried that something worse than a clean crash could occur if you\u0027re wrong; and just handle it without [D]CHECK in case you do expect !x to happen sometimes.",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3af2484_0ec90b4c",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T13:43:18Z",
+      "side": 1,
+      "message": "I understand that, but:\n* RTC_CHECK is expensive. I don\u0027t want to inline that for ever call to operator\u003c\u003c() or AppendFormat().\n* I don\u0027t want a programmer to miss or ignore the error if it occurs.\n\nSo, I\u0027d like to make this an exception to the rule.",
+      "parentUuid": "0cdddcb7_25907016",
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
