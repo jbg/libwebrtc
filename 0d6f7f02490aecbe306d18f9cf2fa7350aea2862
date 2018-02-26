@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4fc42ea4_2fa79b09",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-02-26T09:59:56Z",
+      "side": 1,
+      "message": "Sounds good, let\u0027s keep as-is then.",
+      "parentUuid": "0ae42bae_e6de5843",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "0d6f7f02490aecbe306d18f9cf2fa7350aea2862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89375f92_17967baf",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 19
