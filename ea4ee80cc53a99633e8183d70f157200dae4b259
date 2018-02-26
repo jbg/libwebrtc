@@ -25,6 +25,57 @@
     },
     {
       "key": {
+        "uuid": "2a62fc75_2bad9e7a",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-26T22:25:27Z",
+      "side": 1,
+      "message": "Would probably be a good idea to document what methods can/can\u0027t be called with different semantics, like Steve did in this CL: https://webrtc-review.googlesource.com/c/src/+/54780",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69e30979_006e605b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-26T22:25:27Z",
+      "side": 1,
+      "message": "This comment now applies to getTransceivers as well. This could make it difficult to use the API; for example, an application may want to call \"getTransceivers\" after applying a new remote offer to see if any m\u003d sections are new, but this would invalidate the existing RtpTransceiver wrapper objects, and comparisons between old/new objects wouldn\u0027t work.\n\nThis is why I was thinking we may want to use a map from native pointer to Java object, to avoid creating multiple RtpTransceiver wrappers if one already exists.",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f8b15d0_3f593e63",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-26T22:25:27Z",
+      "side": 1,
+      "message": "RtpReceivers can now be created here, or in onAddTrack, or in getReceivers, each returning a different object... Again, I\u0027m worried applications will find this surprising. And more than that, there\u0027s the fact that only the *last* created RtpReceiver will get the onFirstPacketReceived callback; is anyone planning a fix for that issue?",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81062e27_d9a9095e",
         "filename": "sdk/android/src/jni/pc/peerconnection.cc",
         "patchSetId": 1
@@ -36,6 +87,30 @@
       "writtenOn": "2018-02-26T18:49:19Z",
       "side": 1,
       "message": "nit: Don\u0027t need webrtc:: (already in webrtc namespace).",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "836761fa_7e9c58af",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-02-26T22:25:27Z",
+      "side": 1,
+      "message": "Actually, this is in an unnamed namespace used for helper functions",
+      "parentUuid": "81062e27_d9a9095e",
       "range": {
         "startLine": 111,
         "startChar": 11,
