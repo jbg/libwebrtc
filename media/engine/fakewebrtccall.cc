@@ -235,10 +235,6 @@ void FakeVideoSendStream::ReconfigureVideoEncoder(
       }
     } else if (config_.encoder_settings.payload_name == "VP9") {
       config.encoder_specific_settings->FillVideoCodecVp9(&vpx_settings_.vp9);
-      if (!video_streams_.empty()) {
-        vpx_settings_.vp9.numberOfTemporalLayers = static_cast<unsigned char>(
-            video_streams_.back().temporal_layer_thresholds_bps.size() + 1);
-      }
     } else {
       ADD_FAILURE() << "Unsupported encoder payload: "
                     << config_.encoder_settings.payload_name;

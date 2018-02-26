@@ -20,6 +20,8 @@ extern const char kH264CodecName[];
 
 extern const int kMinVideoBitrateBps;
 
+extern const int kDefaultNumTemporalLayersForSvc;
+
 }  // namespace cricket
 
 #endif  // MEDIA_ENGINE_CONSTANTS_H_
