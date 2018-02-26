@@ -15,8 +15,12 @@
 
 namespace webrtc {
 
-// Initializes global state needed by WebRTC Android NDK.
+// Initializes global state needed by WebRTC Android NDK. You also have to call
+// ContextUtils.initialize from Java code or use SetApplicationContext.
 void InitAndroid(JavaVM* jvm);
+
+// Helper method to call ContextUtils.initialize through JNI.
+void SetApplicationContext(JNIEnv* env, jobject application_context_);
 
 }  // namespace webrtc
 
