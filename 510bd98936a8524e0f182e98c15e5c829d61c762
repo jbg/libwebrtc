@@ -187,6 +187,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccfb5f36_7d503736",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T17:55:59Z",
+      "side": 1,
+      "message": "Here\u0027s a quick comparison of stringstream and SimpleStringBuilder.\n\nhttps://godbolt.org/g/eFGvcx",
+      "parentUuid": "8178d6a1_cb9e6e6d",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
