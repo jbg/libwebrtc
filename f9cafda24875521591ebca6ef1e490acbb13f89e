@@ -46,6 +46,30 @@
       "revId": "f9cafda24875521591ebca6ef1e490acbb13f89e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c691ef8a_f805ea09",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T10:09:14Z",
+      "side": 1,
+      "message": "I figured I\u0027d just use \u0027\\n\u0027 for the reasons Jonas mentions. We have code that will be replaced that uses std::endl and I debated supporting it, but eventually figured it might be misleading and perhaps not a good idea to mix std:: with this class too much.",
+      "parentUuid": "27d173f6_34b9a7d2",
+      "range": {
+        "startLine": 134,
+        "startChar": 46,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "f9cafda24875521591ebca6ef1e490acbb13f89e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
