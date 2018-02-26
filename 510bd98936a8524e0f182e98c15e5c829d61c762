@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ce10ea1_ccb05a3a",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T13:15:13Z",
+      "side": 1,
+      "message": "Is this necessary? (You don\u0027t need it for the friend declaration below.)",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77e2eb09_4ab012ef",
+        "filename": "rtc_base/logging_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T13:15:13Z",
+      "side": 1,
+      "message": "It may be a good idea to use assignment syntax here:\n\n  std::string ret \u003d print_stream_.str();\n\nSee https://abseil.io/tips/88.",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a9fc1aa_bb42e3a8",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T13:15:13Z",
+      "side": 1,
+      "message": "You still don\u0027t check for negative values other than -1.",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 17
+      },
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cdddcb7_25907016",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T13:15:13Z",
+      "side": 1,
+      "message": "You shouldn\u0027t DCHECK(x), and then have code that handles the !x case (see https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/checks.h?l\u003d60). Use CHECK if !x should never happen but you\u0027re worried that something worse than a clean crash could occur if you\u0027re wrong; and just handle it without [D]CHECK in case you do expect !x to happen sometimes.",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
