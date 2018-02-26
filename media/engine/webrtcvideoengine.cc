@@ -23,6 +23,7 @@
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/video_encoder_factory.h"
 #include "call/call.h"
+#include "common_types.h"
 #include "common_video/h264/profile_level_id.h"
 #include "media/engine/constants.h"
 #if defined(USE_BUILTIN_SW_CODECS)
@@ -350,7 +351,7 @@ bool GetVp9LayersFromFieldTrialGroup(int* num_spatial_layers,
              num_temporal_layers) != 2) {
     return false;
   }
-  const int kMaxSpatialLayers = 2;
+  const int kMaxSpatialLayers = 3;
   if (*num_spatial_layers > kMaxSpatialLayers || *num_spatial_layers < 1)
     return false;
 
@@ -361,22 +362,22 @@ bool GetVp9LayersFromFieldTrialGroup(int* num_spatial_layers,
   return true;
 }
 
-int GetDefaultVp9SpatialLayers() {
+size_t GetDefaultVp9SpatialLayers(size_t default_num_spatial_layers) {
   int num_sl;
   int num_tl;
   if (GetVp9LayersFromFieldTrialGroup(&num_sl, &num_tl)) {
     return num_sl;
   }
-  return 1;
+  return default_num_spatial_layers;
 }
 
-int GetDefaultVp9TemporalLayers() {
+size_t GetDefaultVp9TemporalLayers(size_t default_num_temporal_layers) {
   int num_sl;
   int num_tl;
   if (GetVp9LayersFromFieldTrialGroup(&num_sl, &num_tl)) {
     return num_tl;
   }
-  return 1;
+  return default_num_temporal_layers;
 }
 
 const char kForcedFallbackFieldTrial[] =
@@ -462,8 +463,22 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
       // TODO(asapersson): Set to 2 for now since there is a DCHECK in
       // VideoSendStream::ReconfigureVideoEncoder.
       vp9_settings.numberOfSpatialLayers = 2;
+      vp9_settings.numberOfTemporalLayers = 1;
     } else {
-      vp9_settings.numberOfSpatialLayers = GetDefaultVp9SpatialLayers();
+      RTC_CHECK_GE(parameters_.config.rtp.ssrcs.size(), 1);
+
+      size_t default_num_spatial_layers =
+          std::min(std::size_t{webrtc::kMaxSpatialLayers},
+                   parameters_.config.rtp.ssrcs.size());
+      vp9_settings.numberOfSpatialLayers =
+          GetDefaultVp9SpatialLayers(default_num_spatial_layers);
+
+      size_t default_num_temporal_layers =
+          vp9_settings.numberOfSpatialLayers > 1
+              ? kDefaultNumTemporalLayersForSvc
+              : 1;
+      vp9_settings.numberOfTemporalLayers =
+          GetDefaultVp9TemporalLayers(default_num_temporal_layers);
     }
     // VP9 denoising is disabled by default.
     vp9_settings.denoisingOn = codec_default_denoising ? true : denoising;
@@ -2674,11 +2689,6 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   layer.target_bitrate_bps = layer.max_bitrate_bps = max_bitrate_bps;
   layer.max_qp = max_qp_;
   layer.bitrate_priority = encoder_config.bitrate_priority;
-
-  if (CodecNamesEq(codec_name_, kVp9CodecName) && !is_screenshare_) {
-    layer.temporal_layer_thresholds_bps.resize(GetDefaultVp9TemporalLayers() -
-                                               1);
-  }
 
   layers.push_back(layer);
   return layers;
