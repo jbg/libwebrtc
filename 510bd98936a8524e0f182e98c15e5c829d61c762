@@ -259,6 +259,41 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "267a3f2b_77b15403",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T22:12:39Z",
+      "side": 1,
+      "message": "Sure---it\u0027s probably good enough as-is; we can experiment with de-inlining later. (Although personally I would do it from the opposite direction: de-inline all the Append* and operator\u003c\u003c functions in this first version, and experiment with inlining later. A quick modification of the experiment gives a MyFoo with 19 instructions using no inlining, using either -O2 or -Os.)\n\nAnd yes, if a call to CHECK is too big and you really want to inline this function, go ahead.",
+      "parentUuid": "2ba9bf3b_bbbc39b8",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0eb000d_c655086f",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T22:12:39Z",
+      "side": 1,
+      "message": "Hmm, I just noticed: you probably want either size_ \u003c buffer_size or size_ \u003c\u003d buffer_size - 1, not size_ \u003c buffer_size - 1 which is what the code does currently.",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

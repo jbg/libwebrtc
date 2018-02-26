@@ -140,6 +140,30 @@
       "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bb7ed90_4d78c3c8",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T22:12:39Z",
+      "side": 1,
+      "message": "Note that SimpleStringBuilder would be pretty much exactly the same as absl::StrCat/StrAppend, but with different call syntax.",
+      "parentUuid": "03277c25_25dd58fb",
+      "range": {
+        "startLine": 138,
+        "startChar": 27,
+        "endLine": 138,
+        "endChar": 35
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
