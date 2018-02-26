@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fefb4557_ab544c43",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-02-26T09:04:25Z",
+      "side": 1,
+      "message": "Can we do this unconditionally directly after the is_noop_ check instead? Then we can remove some duplication and we can hold the lock a slightly shorter time.",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 30
+      },
+      "revId": "0d6f7f02490aecbe306d18f9cf2fa7350aea2862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcd64517_519a7c1e",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-02-26T09:04:25Z",
+      "side": 1,
+      "message": "Should RTC_DISALLOW_COPY_AND_ASSIGN be used instead?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "0d6f7f02490aecbe306d18f9cf2fa7350aea2862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89375f92_17967baf",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-02-26T09:04:25Z",
+      "side": 1,
+      "message": "Hmm. Looks like I missed this one in the original cl. Let\u0027s use the the SimpleStringBuilder here as well.",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 65
+      },
+      "revId": "0d6f7f02490aecbe306d18f9cf2fa7350aea2862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ebc3786_d866d95b",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-02-26T09:04:25Z",
+      "side": 1,
+      "message": "Same thing here.",
+      "range": {
+        "startLine": 143,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 43
+      },
+      "revId": "0d6f7f02490aecbe306d18f9cf2fa7350aea2862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
