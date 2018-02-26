@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2371127f_6e832a29",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-26T20:16:57Z",
+      "side": 1,
+      "message": "values",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85220aa9_8f61fcf7",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-26T20:16:57Z",
+      "side": 1,
+      "message": "Would it make sense to name this something like IncreaseSize or AddToLength? I had to check the definition to be sure what it did.",
+      "range": {
+        "startLine": 98,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 18
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f22fbe6_3e7a5b9a",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-02-26T20:16:57Z",
+      "side": 1,
+      "message": "Does it make sense to use the heap at some threshold to avoid causing stack issues in future scenario with less stack space/deeper call depth and several usages of SSB where people have just chosen some safely large enough number? (ulimit -a tells me I have 8 MB of stack, so would last a while at 8kB/call)",
+      "range": {
+        "startLine": 138,
+        "startChar": 27,
+        "endLine": 138,
+        "endChar": 35
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
