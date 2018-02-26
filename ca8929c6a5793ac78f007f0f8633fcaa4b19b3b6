@@ -45,6 +45,54 @@
       "revId": "ca8929c6a5793ac78f007f0f8633fcaa4b19b3b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "028800b7_f6ca89f1",
+        "filename": "rtc_base/timeutils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T22:46:26Z",
+      "side": 1,
+      "message": "Yes, I think we can disregard the cost of an integer division in debug-only code.",
+      "parentUuid": "73042e31_34a59341",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 70
+      },
+      "revId": "ca8929c6a5793ac78f007f0f8633fcaa4b19b3b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "200492ad_3498e292",
+        "filename": "rtc_base/timeutils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-26T22:46:26Z",
+      "side": 1,
+      "message": "Right, a numerator of 0 would be very odd indeed. Thanks.\n\nI\u0027m not aware of a better way to do the check (without inline asm or intrinsics), and I feel confident that nisse@ would have known of it if there was one.",
+      "parentUuid": "0b55392b_4e8c4b1d",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 21
+      },
+      "revId": "ca8929c6a5793ac78f007f0f8633fcaa4b19b3b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
