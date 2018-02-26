@@ -2253,6 +2253,39 @@ class Vp9SettingsTestWithFieldTrial : public Vp9SettingsTest {
   }
 };
 
+TEST_F(WebRtcVideoChannelTest, VerifyVp9SvcSettings) {
+  cricket::VideoSendParameters parameters;
+  parameters.codecs.push_back(GetEngineCodec("VP9"));
+  ASSERT_TRUE(channel_->SetSendParameters(parameters));
+
+  FakeVideoSendStream* stream = SetUpSimulcast(false, false);
+  FakeVideoCapturerWithTaskQueue capturer;
+  EXPECT_EQ(cricket::CS_RUNNING,
+            capturer.Start(capturer.GetSupportedFormats()->front()));
+  EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, true, nullptr, &capturer));
+  channel_->SetSend(true);
+
+  EXPECT_TRUE(capturer.CaptureFrame());
+
+  webrtc::VideoCodecVP9 vp9_settings;
+  ASSERT_TRUE(stream->GetVp9Settings(&vp9_settings)) << "No VP9 config set.";
+  EXPECT_EQ(1, vp9_settings.numberOfSpatialLayers);
+  EXPECT_EQ(1, vp9_settings.numberOfTemporalLayers);
+
+  EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, true, nullptr, nullptr));
+  stream = SetUpSimulcast(true, false);
+  EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, true, nullptr, &capturer));
+  channel_->SetSend(true);
+  EXPECT_TRUE(capturer.CaptureFrame());
+
+  ASSERT_TRUE(stream->GetVp9Settings(&vp9_settings)) << "No VP9 config set.";
+  EXPECT_EQ(3, vp9_settings.numberOfSpatialLayers);
+  EXPECT_EQ(kDefaultNumTemporalLayersForSvc,
+            vp9_settings.numberOfTemporalLayers);
+
+  EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, true, nullptr, nullptr));
+}
+
 class Vp9SettingsTestWithNoFlag : public Vp9SettingsTestWithFieldTrial {
  public:
   Vp9SettingsTestWithNoFlag() : Vp9SettingsTestWithFieldTrial("") {}
