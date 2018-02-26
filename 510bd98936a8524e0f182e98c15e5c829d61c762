@@ -169,6 +169,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8178d6a1_cb9e6e6d",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-26T14:53:54Z",
+      "side": 1,
+      "message": "40 instructions isn\u0027t what would be inlined though. I added some more code to this and chained together a few AppendFormat calls:\n\nhttps://godbolt.org/g/LEkt8t",
+      "parentUuid": "bbe895f2_488029ec",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
