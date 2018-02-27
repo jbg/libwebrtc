@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "aaff2280_2f66b768",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5797,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-02-27T00:07:30Z",
+      "side": 1,
+      "message": "We want the metrics to help us answer these questions:\n\nCan we safely change the SdpSemantics default to \"Unified Plan\"?\n\nCan we remove Plan B support?\n\nFor the first question, we can look at SdpCompatibilityDefaultComplexPlanB since those are exactly the cases that would be affected by changing the default. Notably, an application changing to PlanB semantics would no longer log to that particular enum and instead to SdpCompatibilityPlanBComplexPlanB.\n\nFor the second question, we can look at SdpSemanticRequestedPlanB and SdpCompatibility*ComplexPlanB to see how much Plan B is still in the wild.\n\nI think it\u0027s useful to have metrics which can allow us to change the default quicker as I have a hunch Plan B might be around for longer than we hope. At least if the default is Unified Plan then hopefully no new application developer will be tempted to use Plan B.\n\nWdyt?",
+      "parentUuid": "9e8ab3f9_710fc7ef",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3d456d7_201a8ca6",
         "filename": "pc/peerconnection.h",
         "patchSetId": 1
