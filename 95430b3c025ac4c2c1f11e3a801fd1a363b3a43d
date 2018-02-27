@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8158bbac_b1df7fe8",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5797,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-02-27T19:41:32Z",
+      "side": 1,
+      "message": "It won\u0027t tell us for sure, because the adaptations can be done in multiple ways:\n- Set the semantics explicitly at offerer (what this will measure)\n- Use a shim to mangle the SDP into a consistent form before it gets to the answerer\n- Use an answerer that adapts to the incoming form of SDP\n\nThe two last ones have the advantage that they can be tested by interoperating with Firefox.\n\nSo SdpSemanticRequestedPlanB will tell us only the number of people who took alternative 1.\n\nBut the three-way cross product generates all the information from the disaggregated stats, so I guess I can live with it. There will be interpretation needed",
+      "parentUuid": "aaff2280_2f66b768",
+      "revId": "95430b3c025ac4c2c1f11e3a801fd1a363b3a43d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3d456d7_201a8ca6",
         "filename": "pc/peerconnection.h",
         "patchSetId": 1
