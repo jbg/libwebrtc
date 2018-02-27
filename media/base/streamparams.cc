@@ -13,6 +13,8 @@
 #include <list>
 #include <sstream>
 
+#include "rtc_base/checks.h"
+
 namespace cricket {
 namespace {
 // NOTE: There is no check here for duplicate streams, so check before
@@ -195,6 +197,18 @@ bool StreamParams::GetSecondarySsrc(const std::string& semantics,
     }
   }
   return false;
+}
+
+std::vector<std::string> StreamParams::stream_labels() const {
+  return {sync_label};
+}
+
+void StreamParams::set_stream_labels(
+    const std::vector<std::string>& stream_labels) {
+  // TODO(steveanton): Support an arbitrary number of stream labels.
+  RTC_DCHECK_NE(stream_labels.size(), 1)
+      << "set_stream_labels currently only supports exactly 1 stream label.";
+  sync_label = stream_labels[0];
 }
 
 bool IsOneSsrcStream(const StreamParams& sp) {
