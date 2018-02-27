@@ -1,0 +1,441 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce37267f_0021bcec",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Consider moving this documentation to different values in SdpSemantics enum.",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 60
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69e27b4e_de878d6e",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "nit: no comments on the javadoc start line.",
+      "range": {
+        "startLine": 785,
+        "startChar": 2,
+        "endLine": 785,
+        "endChar": 6
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "304d8719_fc8e46a1",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Maybe instead throw IllegalStateException? Same for other methods.",
+      "range": {
+        "startLine": 789,
+        "startChar": 6,
+        "endLine": 789,
+        "endChar": 54
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eccf63cf_94d47abe",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Should this be allowed, maybe we should throw NullPointerException? Same for other similar case",
+      "range": {
+        "startLine": 794,
+        "startChar": 4,
+        "endLine": 794,
+        "endChar": 48
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11804402_e1bb571b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Please follow naming conventions. Variables are named in camelCase.",
+      "range": {
+        "startLine": 797,
+        "startChar": 14,
+        "endLine": 797,
+        "endChar": 24
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f19720d2_ecd4e5c3",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Make JavaDoc?",
+      "range": {
+        "startLine": 804,
+        "startChar": 2,
+        "endLine": 806,
+        "endChar": 75
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5061e83_0410de05",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Merge any relevant information to the javadoc above.",
+      "range": {
+        "startLine": 830,
+        "startChar": 2,
+        "endLine": 832,
+        "endChar": 15
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e18af36_69337483",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Could we design this class to be immutable? Add a constructor if you think we will not add new members, otherwise a builder pattern.",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 42
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5c41c43_93324d34",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Probably package protect this.",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccfd4160_b5403b30",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Could you add a short JavaDoc for public methods that are not obvious. It is not very clear what \"mid\" for example is.",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 23
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da7589da_afe7f5ab",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "We have adopted calling getters getMid etc.",
+      "range": {
+        "startLine": 89,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bff1e87_5171612d",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "I assume this can be null, can you document this if this is the case?",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 29
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9573316f_f94bcf65",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "RTC_NOTREACHED() ?",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 18
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0407028_af9ac555",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Log error if not OK?",
+      "range": {
+        "startLine": 571,
+        "startChar": 9,
+        "endLine": 571,
+        "endChar": 20
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72378381_c2c2be5d",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Methods not defined in the header should be placed in an anonymous namespace.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 56
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25b44381_6ec82560",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "Please place methods not defined in the header in an anonymous namespace.",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 60
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b90b95a2_0984ee98",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "This is deprecated. Please do not use. Use JavaToNativeVector",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a1cafbb_7d277b5d",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "I think we should implement NativeToJavaString that takes an optional.",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 55
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "726c9ee9_ecef75e6",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-27T11:22:03Z",
+      "side": 1,
+      "message": "RtpTranceiverInit?",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
