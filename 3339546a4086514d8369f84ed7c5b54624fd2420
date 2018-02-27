@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36885f72_9ad952ed",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-27T12:28:58Z",
+      "side": 1,
+      "message": "Why commented out?",
+      "range": {
+        "startLine": 21,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "3339546a4086514d8369f84ed7c5b54624fd2420",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97f83367_44a17725",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-27T12:28:58Z",
+      "side": 1,
+      "message": "Lower-case t here, because grammar?",
+      "range": {
+        "startLine": 42,
+        "startChar": 33,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "3339546a4086514d8369f84ed7c5b54624fd2420",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86b80200_99d2f687",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-02-27T12:28:58Z",
+      "side": 1,
+      "message": "You should be able to do\n\n  EXPECT_EQ(str, sb.str());",
+      "revId": "3339546a4086514d8369f84ed7c5b54624fd2420",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
