@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fd70d17a_5a9b6943",
+        "filename": "sdk/android/api/org/webrtc/MediaStreamTrack.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-27T01:23:00Z",
+      "side": 1,
+      "message": "As discussed offline, taking this out. I made changes in the downstream CL to account for this change and addressed it there.",
+      "parentUuid": "e6aeec59_536c2ee0",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 8
+      },
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a62fc75_2bad9e7a",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ec59f10_abbbe383",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-27T01:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a62fc75_2bad9e7a",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "e4830466_fff3f506",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-27T01:23:00Z",
+      "side": 1,
+      "message": "Updated the comment. \n\nIt sounds like creating a mapping could be a larger change and possibly outside the scope of this CL. Perhaps implementing equals would suffice for now. I\u0027ll wait to see what Sami thinks here.",
+      "parentUuid": "69e30979_006e605b",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f8b15d0_3f593e63",
         "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d390312a_9f48851d",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-27T01:23:00Z",
+      "side": 1,
+      "message": "As discussed offline, it looks like the callback issue fine because the observer callback doesn\u0027t get pushed out on object creation, but it\u0027s set explicitly with SetObserver in RtpReceiver.java. As for the issue of separate wrappers being created, I think overriding equals could work (as well as for senders and transceivers). Let\u0027s see what Sami has to say on this.",
+      "parentUuid": "5f8b15d0_3f593e63",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -123,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "335fea36_4b9b3c47",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-27T01:23:00Z",
+      "side": 1,
+      "message": "Since the unnamed namespace is nested within the webrtc namespace I think there\u0027s no problems with removing webrtc::. Everything still compiles and works. I went ahead and took it out.",
+      "parentUuid": "836761fa_7e9c58af",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e019841c_4d3b54eb",
         "filename": "sdk/android/src/jni/pc/rtpparameters.h",
         "patchSetId": 1
@@ -137,6 +239,24 @@
       "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44dd7199_8d2e6ab3",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-27T01:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e019841c_4d3b54eb",
+      "revId": "ea4ee80cc53a99633e8183d70f157200dae4b259",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
