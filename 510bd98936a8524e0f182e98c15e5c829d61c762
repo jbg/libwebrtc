@@ -280,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "cd201f9e_0b902e1a",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-27T12:17:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "267a3f2b_77b15403",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0eb000d_c655086f",
         "filename": "rtc_base/strings/string_builder.h",
         "patchSetId": 22
@@ -294,6 +312,24 @@
       "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad8bb2ac_ebc1d1ed",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-27T12:17:58Z",
+      "side": 1,
+      "message": "Indeed. I\u0027ve changed this now and added a few tests.",
+      "parentUuid": "d0eb000d_c655086f",
+      "revId": "510bd98936a8524e0f182e98c15e5c829d61c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

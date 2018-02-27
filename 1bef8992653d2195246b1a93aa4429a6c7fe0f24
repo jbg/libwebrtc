@@ -164,6 +164,30 @@
       "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7dca823_f6880794",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-02-27T12:17:58Z",
+      "side": 1,
+      "message": "Yes. I guess we\u0027ll switch the implementation over to use the absl routines once we have them.\nstringutils.h should become less and less necessary.\n\nBtw, on syntax I think that\u0027s one of the class\u0027 main features due to how we do logging.",
+      "parentUuid": "0bb7ed90_4d78c3c8",
+      "range": {
+        "startLine": 138,
+        "startChar": 27,
+        "endLine": 138,
+        "endChar": 35
+      },
+      "revId": "1bef8992653d2195246b1a93aa4429a6c7fe0f24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
