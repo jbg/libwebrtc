@@ -47,14 +47,14 @@ TEST_F(TestH264Impl, MAYBE_EncodeDecode) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   // First frame should be a key frame.
   encoded_frame._frameType = kVideoFrameKey;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             decoder_->Decode(encoded_frame, false, nullptr));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
+  WaitForDecodedFrame(&decoded_frame, &decoded_qp);
   ASSERT_TRUE(decoded_frame);
   EXPECT_GT(I420PSNR(input_frame_.get(), decoded_frame.get()), 36);
 }
@@ -64,14 +64,14 @@ TEST_F(TestH264Impl, MAYBE_DecodedQpEqualsEncodedQp) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   // First frame should be a key frame.
   encoded_frame._frameType = kVideoFrameKey;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             decoder_->Decode(encoded_frame, false, nullptr));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
+  WaitForDecodedFrame(&decoded_frame, &decoded_qp);
   ASSERT_TRUE(decoded_frame);
   ASSERT_TRUE(decoded_qp);
   EXPECT_EQ(encoded_frame.qp_, *decoded_qp);

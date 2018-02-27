@@ -63,7 +63,7 @@ void VideoCodecUnitTest::SetUp() {
   // Using a QCIF image. Processing only one frame.
   FILE* source_file_ =
       fopen(test::ResourcePath("paris_qcif", "yuv").c_str(), "rb");
-  ASSERT_TRUE(source_file_ != NULL);
+  ASSERT_TRUE(source_file_ != nullptr);
   rtc::scoped_refptr<VideoFrameBuffer> video_frame_buffer(
       test::ReadI420Buffer(kWidth, kHeight, source_file_));
   input_frame_.reset(new VideoFrame(video_frame_buffer, kVideoRotation_0, 0));
@@ -77,18 +77,16 @@ void VideoCodecUnitTest::SetUp() {
   InitCodecs();
 }
 
-bool VideoCodecUnitTest::WaitForEncodedFrame(
+void VideoCodecUnitTest::WaitForEncodedFrame(
     EncodedImage* frame,
     CodecSpecificInfo* codec_specific_info) {
   std::vector<EncodedImage> frames;
   std::vector<CodecSpecificInfo> codec_specific_infos;
-  if (!WaitForEncodedFrames(&frames, &codec_specific_infos))
-    return false;
-  EXPECT_EQ(frames.size(), static_cast<size_t>(1));
-  EXPECT_EQ(frames.size(), codec_specific_infos.size());
+  WaitForEncodedFrames(&frames, &codec_specific_infos);
+  ASSERT_EQ(frames.size(), static_cast<size_t>(1));
+  ASSERT_EQ(frames.size(), codec_specific_infos.size());
   *frame = frames[0];
   *codec_specific_info = codec_specific_infos[0];
-  return true;
 }
 
 void VideoCodecUnitTest::SetWaitForEncodedFramesThreshold(size_t num_frames) {
@@ -96,43 +94,32 @@ void VideoCodecUnitTest::SetWaitForEncodedFramesThreshold(size_t num_frames) {
   wait_for_encoded_frames_threshold_ = num_frames;
 }
 
-bool VideoCodecUnitTest::WaitForEncodedFrames(
+void VideoCodecUnitTest::WaitForEncodedFrames(
     std::vector<EncodedImage>* frames,
     std::vector<CodecSpecificInfo>* codec_specific_info) {
   EXPECT_TRUE(encoded_frame_event_.Wait(kEncodeTimeoutMs))
       << "Timed out while waiting for encoded frame.";
   // This becomes unsafe if there are multiple threads waiting for frames.
   rtc::CritScope lock(&encoded_frame_section_);
-  EXPECT_FALSE(encoded_frames_.empty());
-  EXPECT_FALSE(codec_specific_infos_.empty());
-  EXPECT_EQ(encoded_frames_.size(), codec_specific_infos_.size());
-  if (!encoded_frames_.empty()) {
-    *frames = encoded_frames_;
-    encoded_frames_.clear();
-    RTC_DCHECK(!codec_specific_infos_.empty());
-    *codec_specific_info = codec_specific_infos_;
-    codec_specific_infos_.clear();
-    return true;
-  } else {
-    return false;
-  }
+  ASSERT_FALSE(encoded_frames_.empty());
+  ASSERT_FALSE(codec_specific_infos_.empty());
+  ASSERT_EQ(encoded_frames_.size(), codec_specific_infos_.size());
+  *frames = encoded_frames_;
+  encoded_frames_.clear();
+  *codec_specific_info = codec_specific_infos_;
+  codec_specific_infos_.clear();
 }
 
-bool VideoCodecUnitTest::WaitForDecodedFrame(std::unique_ptr<VideoFrame>* frame,
+void VideoCodecUnitTest::WaitForDecodedFrame(std::unique_ptr<VideoFrame>* frame,
                                              rtc::Optional<uint8_t>* qp) {
-  bool ret = decoded_frame_event_.Wait(kDecodeTimeoutMs);
-  EXPECT_TRUE(ret) << "Timed out while waiting for a decoded frame.";
+  EXPECT_TRUE(decoded_frame_event_.Wait(kDecodeTimeoutMs))
+      << "Timed out while waiting for a decoded frame.";
   // This becomes unsafe if there are multiple threads waiting for frames.
   rtc::CritScope lock(&decoded_frame_section_);
-  EXPECT_TRUE(decoded_frame_);
-  if (decoded_frame_) {
-    frame->reset(new VideoFrame(std::move(*decoded_frame_)));
-    *qp = decoded_qp_;
-    decoded_frame_.reset();
-    return true;
-  } else {
-    return false;
-  }
+  ASSERT_TRUE(decoded_frame_);
+  frame->reset(new VideoFrame(std::move(*decoded_frame_)));
+  *qp = decoded_qp_;
+  decoded_frame_.reset();
 }
 
 void VideoCodecUnitTest::InitCodecs() {

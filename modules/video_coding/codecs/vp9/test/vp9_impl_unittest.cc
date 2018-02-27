@@ -41,7 +41,7 @@ class TestVp9Impl : public VideoCodecUnitTest {
                        uint8_t temporal_idx) {
     EncodedImage encoded_frame;
     CodecSpecificInfo codec_specific_info;
-    ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+    WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
     EXPECT_EQ(picture_id, codec_specific_info.codecSpecific.VP9.picture_id);
     EXPECT_EQ(tl0_pic_idx, codec_specific_info.codecSpecific.VP9.tl0_pic_idx);
     EXPECT_EQ(temporal_idx, codec_specific_info.codecSpecific.VP9.temporal_idx);
@@ -58,14 +58,14 @@ TEST_F(TestVp9Impl, EncodeDecode) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   // First frame should be a key frame.
   encoded_frame._frameType = kVideoFrameKey;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             decoder_->Decode(encoded_frame, false, nullptr));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
+  WaitForDecodedFrame(&decoded_frame, &decoded_qp);
   ASSERT_TRUE(decoded_frame);
   EXPECT_GT(I420PSNR(input_frame_.get(), decoded_frame.get()), 36);
 }
@@ -80,13 +80,13 @@ TEST_F(TestVp9Impl, EncodedRotationEqualsInputRotation) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   EXPECT_EQ(kVideoRotation_0, encoded_frame.rotation_);
 
   input_frame_->set_rotation(kVideoRotation_90);
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             encoder_->Encode(*input_frame_, nullptr, nullptr));
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   EXPECT_EQ(kVideoRotation_90, encoded_frame.rotation_);
 }
 
@@ -95,14 +95,14 @@ TEST_F(TestVp9Impl, DecodedQpEqualsEncodedQp) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   // First frame should be a key frame.
   encoded_frame._frameType = kVideoFrameKey;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             decoder_->Decode(encoded_frame, false, nullptr));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
+  WaitForDecodedFrame(&decoded_frame, &decoded_qp);
   ASSERT_TRUE(decoded_frame);
   ASSERT_TRUE(decoded_qp);
   EXPECT_EQ(encoded_frame.qp_, *decoded_qp);
@@ -113,7 +113,7 @@ TEST_F(TestVp9Impl, ParserQpEqualsEncodedQp) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
 
   int qp = 0;
   ASSERT_TRUE(vp9::GetQp(encoded_frame._buffer, encoded_frame._length, &qp));
@@ -135,7 +135,7 @@ TEST_F(TestVp9Impl, EncoderRetainsRtpStateAfterRelease) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   int16_t picture_id = codec_specific_info.codecSpecific.VP9.picture_id;
   int tl0_pic_idx = codec_specific_info.codecSpecific.VP9.tl0_pic_idx;
   EXPECT_EQ(0, codec_specific_info.codecSpecific.VP9.temporal_idx);

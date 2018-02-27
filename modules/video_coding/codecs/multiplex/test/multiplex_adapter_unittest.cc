@@ -124,7 +124,7 @@ TEST_F(TestMultiplexAdapter, EncodeDecodeI420Frame) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   EXPECT_EQ(kVideoCodecMultiplex, codec_specific_info.codecType);
 
   EXPECT_EQ(
@@ -132,7 +132,7 @@ TEST_F(TestMultiplexAdapter, EncodeDecodeI420Frame) {
       decoder_->Decode(encoded_frame, false, nullptr, &codec_specific_info));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
+  WaitForDecodedFrame(&decoded_frame, &decoded_qp);
   ASSERT_TRUE(decoded_frame);
   EXPECT_GT(I420PSNR(input_frame_.get(), decoded_frame.get()), 36);
 }
@@ -143,14 +143,14 @@ TEST_F(TestMultiplexAdapter, EncodeDecodeI420AFrame) {
             encoder_->Encode(*yuva_frame, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   EXPECT_EQ(kVideoCodecMultiplex, codec_specific_info.codecType);
 
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             decoder_->Decode(encoded_frame, false, nullptr, nullptr));
   std::unique_ptr<VideoFrame> decoded_frame;
   rtc::Optional<uint8_t> decoded_qp;
-  ASSERT_TRUE(WaitForDecodedFrame(&decoded_frame, &decoded_qp));
+  WaitForDecodedFrame(&decoded_frame, &decoded_qp);
   ASSERT_TRUE(decoded_frame);
   EXPECT_GT(I420PSNR(yuva_frame.get(), decoded_frame.get()), 36);
 
@@ -166,7 +166,7 @@ TEST_F(TestMultiplexAdapter, CheckSingleFrameEncodedBitstream) {
             encoder_->Encode(*input_frame_, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   EXPECT_EQ(kVideoCodecMultiplex, codec_specific_info.codecType);
   EXPECT_EQ(0, codec_specific_info.codecSpecific.generic.simulcast_idx);
 
@@ -186,7 +186,7 @@ TEST_F(TestMultiplexAdapter, CheckDoubleFramesEncodedBitstream) {
             encoder_->Encode(*yuva_frame, nullptr, nullptr));
   EncodedImage encoded_frame;
   CodecSpecificInfo codec_specific_info;
-  ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+  WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
   EXPECT_EQ(kVideoCodecMultiplex, codec_specific_info.codecType);
   EXPECT_EQ(0, codec_specific_info.codecSpecific.generic.simulcast_idx);
 
@@ -213,7 +213,7 @@ TEST_F(TestMultiplexAdapter, ImageIndexIncreases) {
               encoder_->Encode(*yuva_frame, nullptr, nullptr));
     EncodedImage encoded_frame;
     CodecSpecificInfo codec_specific_info;
-    ASSERT_TRUE(WaitForEncodedFrame(&encoded_frame, &codec_specific_info));
+    WaitForEncodedFrame(&encoded_frame, &codec_specific_info);
     const MultiplexImage& unpacked_frame =
         MultiplexEncodedImagePacker::Unpack(encoded_frame);
     EXPECT_EQ(i, unpacked_frame.image_index);
