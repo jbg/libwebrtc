@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "716ecc0b_7c799609",
+        "filename": "modules/video_coding/codecs/test/video_codec_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-27T11:26:55Z",
+      "side": 1,
+      "message": "ASSERT_NE?",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 13
+      },
+      "revId": "d962572356a191b1e6a63799a50a60262560ce56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab117b4d_8d342b9e",
+        "filename": "modules/video_coding/codecs/test/video_codec_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-27T11:26:55Z",
+      "side": 1,
+      "message": "I think it\u0027s frowned upon to use ASSERT_EQ inside helper functions. It has something to do with how the test dies when the assert is triggered. Let\u0027s ask +nisse, who told me not to do this before.",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "d962572356a191b1e6a63799a50a60262560ce56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
