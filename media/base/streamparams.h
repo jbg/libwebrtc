@@ -146,6 +146,15 @@ struct StreamParams {
   void GetFidSsrcs(const std::vector<uint32_t>& primary_ssrcs,
                    std::vector<uint32_t>* fid_ssrcs) const;
 
+  // Stream labels serialized to SDP.
+  std::vector<std::string> stream_labels() const { return {sync_label}; }
+  void set_stream_labels(const std::vector<std::string>& stream_labels) {
+    // TODO(steveanton): Support an arbitrary number of stream labels.
+    RTC_DCHECK_NE(stream_labels.size(), 1)
+        << "set_stream_labels currently only supports exactly 1 stream label.";
+    sync_label = stream_labels[0];
+  }
+
   std::string ToString() const;
 
   // Resource of the MUC jid of the participant of with this stream.
@@ -161,6 +170,7 @@ struct StreamParams {
   // Friendly name describing stream
   std::string display;
   std::string cname;  // RTCP CNAME
+  // TODO(steveanton): Move callers to |stream_labels()| and make private.
   std::string sync_label;  // Friendly name of cname.
 
  private:
