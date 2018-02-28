@@ -47,6 +47,10 @@ group("examples") {
       ":turnserver",
     ]
   }
+
+  if (is_android || is_win) {
+    deps += [ ":webrtc_unity_plugin" ]
+  }
 }
 
 if (is_android) {
