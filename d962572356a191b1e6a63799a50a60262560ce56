@@ -45,6 +45,30 @@
       "revId": "d962572356a191b1e6a63799a50a60262560ce56",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47c4d047_10bdc8a2",
+        "filename": "modules/video_coding/codecs/test/video_codec_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-02-28T10:46:00Z",
+      "side": 1,
+      "message": "I will abandon this change.",
+      "parentUuid": "ab117b4d_8d342b9e",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "d962572356a191b1e6a63799a50a60262560ce56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
