@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bda441e_191ad43d",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "nit: This is indented one space too far.\n\nPlease format your JavaDoc according to:\nhttps://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting",
+      "range": {
+        "startLine": 345,
+        "startChar": 3,
+        "endLine": 345,
+        "endChar": 5
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60307939_02b55272",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "nit: Rename to PLAN_B etc. to match the actual enum names.",
+      "range": {
+        "startLine": 351,
+        "startChar": 6,
+        "endLine": 351,
+        "endChar": 12
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84e4c007_8b8ef10b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "nit: Make this javadoc same for other similar places.",
+      "range": {
+        "startLine": 691,
+        "startChar": 2,
+        "endLine": 691,
+        "endChar": 9
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c448be73_999fc9fd",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "Mistake?",
+      "range": {
+        "startLine": 748,
+        "startChar": 3,
+        "endLine": 748,
+        "endChar": 10
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "970e33ae_47b8acdb",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "Can\u0027t we just delegate to addTransceiver with init param?",
+      "range": {
+        "startLine": 857,
+        "startChar": 24,
+        "endLine": 857,
+        "endChar": 38
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16380a0d_d8e95558",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "Can\u0027t we just delegate to addTransceiver with init param?",
+      "range": {
+        "startLine": 885,
+        "startChar": 24,
+        "endLine": 885,
+        "endChar": 38
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1764a75d_fc7cf50f",
+        "filename": "sdk/android/native_api/jni/java_types.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "You can use a ternary operator here.",
+      "range": {
+        "startLine": 199,
+        "startChar": 2,
+        "endLine": 201,
+        "endChar": 3
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f277121_a2d14f51",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "nit: Please move below NativeToJavaInteger that takes an optional.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 18
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa960c8a_3157c8fc",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-02-28T09:36:15Z",
+      "side": 1,
+      "message": "Print the error stored in result for easier debugging.",
+      "range": {
+        "startLine": 595,
+        "startChar": 4,
+        "endLine": 595,
+        "endChar": 24
+      },
+      "revId": "d7af30b428b1da97f647f5c9c1b3fd842cce93df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
