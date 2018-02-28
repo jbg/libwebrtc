@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "2d54477a_2345aafa",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-28T14:16:45Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "f46f4bcc_e12eb830",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c78adcae_bdefd3a0",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 9
@@ -149,6 +167,24 @@
       "writtenOn": "2018-02-28T13:47:52Z",
       "side": 1,
       "message": "Why do you need to check timestamps?",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bba72a9d_06a98942",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-02-28T14:16:45Z",
+      "side": 1,
+      "message": "// If any of the simulcast streams have a huge frame, it should be counted\n  // as a single difficult input frame.\n\n:)",
+      "parentUuid": "c78adcae_bdefd3a0",
       "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
