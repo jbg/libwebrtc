@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ffd17006_bf494d84",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff947f4c_cf6790c7",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79c5a490_a07301b3",
         "filename": "api/statstypes.cc",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2018-02-28T13:47:52Z",
       "side": 1,
       "message": "Since this was successfully standardized, feel free to drop the \"goog\" :) Though in any case the legacy stats is not compliant, e.g. these are all placed on an \"ssrc\" dictionary - which is non-compliant.\n\ngoogHugeFramesSent or hugeFramesSent, up to you, but I\u0027d prefer dropping the \"goog\".",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a7e9b85_d4646e58",
+        "filename": "api/statstypes.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79c5a490_a07301b3",
       "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c8a452dc_06f6894b",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f4f201c_fc7a28a3",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21f43993_d7c5d483",
         "filename": "pc/rtcstats_integrationtest.cc",
         "patchSetId": 9
@@ -67,6 +121,24 @@
       "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "762c67bc_ac859894",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21f43993_d7c5d483",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "a5f0ecbe_2b174fc3",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c37fe98_02452daf",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b8e02ea_86f1445e",
         "filename": "stats/rtcstats_objects.cc",
         "patchSetId": 9
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "c256d9d0_8ddb3e36",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b8e02ea_86f1445e",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71453d14_00c0709b",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 9
@@ -118,6 +226,24 @@
       "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab3a74c4_0738d533",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71453d14_00c0709b",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "eed01d83_4bec483f",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "f46f4bcc_e12eb830",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c78adcae_bdefd3a0",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 9
@@ -188,6 +332,24 @@
       "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0f0f695_a3b278d4",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-02-28T15:35:14Z",
+      "side": 1,
+      "message": "Because of the simulcast. We might get several or only one output frame with the same timestamp for different streams marked as an outlier. As stated in the comment above, we would want to count that as a single outlier event.",
+      "parentUuid": "c78adcae_bdefd3a0",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
