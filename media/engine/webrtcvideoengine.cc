@@ -2205,7 +2205,14 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::ConfigureCodecs(
                                         recv_codec.codec.params);
     std::unique_ptr<webrtc::VideoDecoder> new_decoder;
 
-    auto it = old_decoders->find(video_format);
+    auto it = allocated_decoders_.find(video_format);
+    if (it != allocated_decoders_.end()) {
+      RTC_LOG(LS_WARNING)
+          << "VideoReceiveStream configured with duplicate codecs.";
+      continue;
+    }
+
+    it = old_decoders->find(video_format);
     if (it != old_decoders->end()) {
       new_decoder = std::move(it->second);
       old_decoders->erase(it);
