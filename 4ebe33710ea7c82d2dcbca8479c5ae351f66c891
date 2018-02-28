@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df44bf4f_afd153d0",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-28T16:20:26Z",
+      "side": 1,
+      "message": "Reordered assignment here to match definition in webrtc::VideoCodec better.",
+      "revId": "4ebe33710ea7c82d2dcbca8479c5ae351f66c891",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
