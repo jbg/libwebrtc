@@ -178,6 +178,9 @@ ScopedJavaLocalRef<jobject> NativeToJavaLong(JNIEnv* env, int64_t u);
 ScopedJavaLocalRef<jstring> NativeToJavaString(JNIEnv* jni, const char* str);
 ScopedJavaLocalRef<jstring> NativeToJavaString(JNIEnv* jni,
                                                const std::string& str);
+ScopedJavaLocalRef<jstring> NativeToJavaString(
+    JNIEnv* jni, const rtc::Optional<std::string>& str);
+
 
 ScopedJavaLocalRef<jobject> NativeToJavaInteger(
     JNIEnv* jni,

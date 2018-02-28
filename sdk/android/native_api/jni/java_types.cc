@@ -194,6 +194,14 @@ ScopedJavaLocalRef<jstring> NativeToJavaString(JNIEnv* jni,
   return NativeToJavaString(jni, str.c_str());
 }
 
+ScopedJavaLocalRef<jstring> NativeToJavaString(
+    JNIEnv* jni, const rtc::Optional<std::string>& str) {
+  if (!str) {
+    return nullptr;
+  }
+  return NativeToJavaString(jni, *str);
+}
+
 ScopedJavaLocalRef<jobject> NativeToJavaInteger(
     JNIEnv* jni,
     const rtc::Optional<int32_t>& optional_int) {
