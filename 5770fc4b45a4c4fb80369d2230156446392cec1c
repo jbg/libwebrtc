@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a7cea6a6_0cfc0853",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce37267f_0021bcec",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 60
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69e27b4e_de878d6e",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8bb33c4_f5c90dbe",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69e27b4e_de878d6e",
+      "range": {
+        "startLine": 785,
+        "startChar": 2,
+        "endLine": 785,
+        "endChar": 6
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d4f8b37d_1e0465cc",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "304d8719_fc8e46a1",
+      "range": {
+        "startLine": 789,
+        "startChar": 6,
+        "endLine": 789,
+        "endChar": 54
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eccf63cf_94d47abe",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faafa304_06ef07de",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eccf63cf_94d47abe",
+      "range": {
+        "startLine": 794,
+        "startChar": 4,
+        "endLine": 794,
+        "endChar": 48
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1ab11ed2_e83b072f",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Too much C++. Thanks for catching this. I must have messed this up because CreateSender uses the same convention. Changed it in CreateSender \u0026 CreateTransceiver as well.",
+      "parentUuid": "11804402_e1bb571b",
+      "range": {
+        "startLine": 797,
+        "startChar": 14,
+        "endLine": 797,
+        "endChar": 24
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f19720d2_ecd4e5c3",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d20661b_82262eb2",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f19720d2_ecd4e5c3",
+      "range": {
+        "startLine": 804,
+        "startChar": 2,
+        "endLine": 806,
+        "endChar": 75
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "ad2b85ee_2af54bfd",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5061e83_0410de05",
+      "range": {
+        "startLine": 830,
+        "startChar": 2,
+        "endLine": 832,
+        "endChar": 15
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e18af36_69337483",
         "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
         "patchSetId": 2
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "5f3c8580_276bfe18",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e18af36_69337483",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 42
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5c41c43_93324d34",
         "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
         "patchSetId": 2
@@ -206,6 +398,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6fd35cc_fbf3a2ed",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5c41c43_93324d34",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +471,54 @@
     },
     {
       "key": {
+        "uuid": "1f045862_2ba2d9d3",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done and for sender(), receiver(), direction() as well.",
+      "parentUuid": "da7589da_afe7f5ab",
+      "range": {
+        "startLine": 89,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7fd83c2_86be26a1",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Yup! I think you\u0027re right, it\u0027s best that we include that here. I added it for the public methods and a class JavaDoc.",
+      "parentUuid": "ccfd4160_b5403b30",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 23
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bff1e87_5171612d",
         "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
         "patchSetId": 2
@@ -275,6 +539,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bdbfd20_a91c9195",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "It actually won\u0027t be null. Every transceiver is created with a sender \u0026 receiver. This is included in the JavaDoc.",
+      "parentUuid": "6bff1e87_5171612d",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 29
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "c3648e4b_536a5d1a",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "SG. I copied the convention used in icecandidate.cc, so we might want to change that there as well for consistency.",
+      "parentUuid": "9573316f_f94bcf65",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 18
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0407028_af9ac555",
         "filename": "sdk/android/src/jni/pc/peerconnection.cc",
         "patchSetId": 2
@@ -321,6 +633,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7362f77_be7988f1",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done. For AddTransceiver as well.",
+      "parentUuid": "f0407028_af9ac555",
+      "range": {
+        "startLine": 571,
+        "startChar": 9,
+        "endLine": 571,
+        "endChar": 20
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -347,6 +683,30 @@
     },
     {
       "key": {
+        "uuid": "b08c7432_e67c9df1",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "It is in the header. I wanted to expose this for JavaToNativeTransceiverInit in rtptransceiver.cc, so that peerconnection.cc can use it for AddTransceiver with a TransceiverInit.",
+      "parentUuid": "72378381_c2c2be5d",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 56
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25b44381_6ec82560",
         "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
         "patchSetId": 2
@@ -367,6 +727,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a03fc75_952c54f5",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25b44381_6ec82560",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 60
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -393,6 +777,30 @@
     },
     {
       "key": {
+        "uuid": "a8a8f622_b11ae5c3",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "I had trouble with this because Java_RtpTransceiverInit_getStreamLabels returns a List\u003cString\u003e, which translates to ScopedJavaLocalRef\u003cjobject\u003e, but unfortunately JavaToNativeVector takes JavaRef\u003cjobjectArray\u003e. Instead of converting ScopedJavaLocalRef\u003cjobject\u003e to JavaRef\u003cjobjectArray\u003e I opted to just do the conversion manually here.",
+      "parentUuid": "b90b95a2_0984ee98",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a1cafbb_7d277b5d",
         "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
         "patchSetId": 2
@@ -416,6 +824,30 @@
     },
     {
       "key": {
+        "uuid": "808c75ba_3b89426c",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a1cafbb_7d277b5d",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 55
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "726c9ee9_ecef75e6",
         "filename": "sdk/android/src/jni/pc/rtptransceiver.h",
         "patchSetId": 2
@@ -436,6 +868,30 @@
       "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a20b67d_29b7a264",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-02-28T01:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "726c9ee9_ecef75e6",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
