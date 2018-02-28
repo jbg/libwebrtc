@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff947f4c_cf6790c7",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "nit: Can you move this to after frames_sent for same order as spec?",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79c5a490_a07301b3",
+        "filename": "api/statstypes.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "Since this was successfully standardized, feel free to drop the \"goog\" :) Though in any case the legacy stats is not compliant, e.g. these are all placed on an \"ssrc\" dictionary - which is non-compliant.\n\ngoogHugeFramesSent or hugeFramesSent, up to you, but I\u0027d prefer dropping the \"goog\".",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f4f201c_fc7a28a3",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "https://w3c.github.io/webrtc-stats/#dom-rtcvideosenderstats-hugeframessent",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21f43993_d7c5d483",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "nit: Same here, after frames_sent for same order as in spec.",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c37fe98_02452daf",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "nit: Same here, after frames_sent for same order as per spec.",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8e02ea_86f1445e",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "nit: Same here, after frames_sent for same order as per spec.",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71453d14_00c0709b",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "https://w3c.github.io/webrtc-stats/#dom-rtcvideosenderstats-hugeframessent",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f46f4bcc_e12eb830",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "This flag implements what is described in the spec, I assume?",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c78adcae_bdefd3a0",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-02-28T13:47:52Z",
+      "side": 1,
+      "message": "Why do you need to check timestamps?",
+      "revId": "e79f04c2646d0c597dbcbc2bc1be9fefd0c74e4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
