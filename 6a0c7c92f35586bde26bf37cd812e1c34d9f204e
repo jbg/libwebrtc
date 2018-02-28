@@ -22,6 +22,30 @@
       "revId": "6a0c7c92f35586bde26bf37cd812e1c34d9f204e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "595c8176_1fbe6cc7",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-28T16:14:35Z",
+      "side": 1,
+      "message": "Yes, at the same time as I uploaded the rebase fix :(\n\nI\u0027ll rebase this patch again and land.",
+      "parentUuid": "2ae5120a_c02f791c",
+      "range": {
+        "startLine": 43,
+        "startChar": 47,
+        "endLine": 43,
+        "endChar": 66
+      },
+      "revId": "6a0c7c92f35586bde26bf37cd812e1c34d9f204e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
