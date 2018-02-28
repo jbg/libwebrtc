@@ -27,6 +27,7 @@ group("examples") {
       ":AppRTCMobile",
       ":AppRTCMobileTest",
       ":AppRTCMobileTestStubbedVideoIO",
+      ":libwebrtc_unity",
     ]
   }
 
@@ -46,6 +47,10 @@ group("examples") {
       ":stunserver",
       ":turnserver",
     ]
+  }
+
+  if (is_android || is_win) {
+    deps += [ ":webrtc_unity_plugin" ]
   }
 }
 
