@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "88041c1d_62a1e803",
+        "filename": "modules/video_coding/codecs/test/test_config.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-28T16:06:15Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a good idea to split the long function. I didn\u0027t like that the internal method was accessible for users of this struct, however. Moved it to an anonymous function instead. We can add another anonymous function for the upcoming SVC setup.",
+      "parentUuid": "de0a52a5_3ed98ced",
+      "range": {
+        "startLine": 143,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 5
+      },
+      "revId": "7799dd78950769566fe60732871dc4a9040996e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef506d4d_f873c50e",
         "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-28T15:40:14Z",
       "side": 1,
       "message": "We should change this to \u003e\u003d. Then the check can catch backward jumps of frame_number (which are not expected). It would be nice to include this change in the CL.",
+      "range": {
+        "startLine": 313,
+        "startChar": 50,
+        "endLine": 313,
+        "endChar": 52
+      },
+      "revId": "7799dd78950769566fe60732871dc4a9040996e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd424c08_3136f181",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-02-28T16:06:15Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "ef506d4d_f873c50e",
       "range": {
         "startLine": 313,
         "startChar": 50,
