@@ -825,6 +825,30 @@
     },
     {
       "key": {
+        "uuid": "2ed276a7_66c2d5ef",
+        "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-03-01T19:28:14Z",
+      "side": 1,
+      "message": "Done. Also updated places that previously used JavaToStdVectorStrings. Happy to remove it from java_types.h/cc if you\u0027d like.",
+      "parentUuid": "63e34d0d_903cf08d",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "5770fc4b45a4c4fb80369d2230156446392cec1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a1cafbb_7d277b5d",
         "filename": "sdk/android/src/jni/pc/rtptransceiver.cc",
         "patchSetId": 2
