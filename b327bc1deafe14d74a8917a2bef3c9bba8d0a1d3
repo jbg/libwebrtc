@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7326d0d6_dae55094",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-01T13:01:44Z",
+      "side": 1,
+      "message": "How about \u0027AudioFrameView\u003cfloat\u003e audio\u0027 instead?",
+      "range": {
+        "startLine": 31,
+        "startChar": 39,
+        "endLine": 31,
+        "endChar": 58
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d8c9755_967b9526",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-01T13:01:44Z",
+      "side": 1,
+      "message": "Suppose the Generator is created from a file. What happens when the rate in the file doesn\u0027t match the rate argument to GenerateFrame()?",
+      "range": {
+        "startLine": 34,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 60
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0486de6d_f12dbe78",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-01T13:01:44Z",
+      "side": 1,
+      "message": "What is \u0027audio_frame_\u0027 going to be used for?",
+      "range": {
+        "startLine": 43,
+        "startChar": 34,
+        "endLine": 43,
+        "endChar": 46
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a83ff951_b5aefe14",
+        "filename": "modules/audio_processing/include/audio_generator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-01T13:01:44Z",
+      "side": 1,
+      "message": "Do you need polymorphism here? There is only one implementation of AudioGenerator.",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f02953f_223b98d3",
+        "filename": "modules/audio_processing/include/audio_generator_factory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-01T13:01:44Z",
+      "side": 1,
+      "message": "Have you considered using WavReader from wav_file.h instead? I don\u0027t know if it\u0027s suited to your needs.",
+      "range": {
+        "startLine": 29,
+        "startChar": 22,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90f2117a_fb1e99c5",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-01T13:01:44Z",
+      "side": 1,
+      "message": "I think this include is not needed because you do forward declare.",
+      "range": {
+        "startLine": 29,
+        "startChar": 35,
+        "endLine": 29,
+        "endChar": 58
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
