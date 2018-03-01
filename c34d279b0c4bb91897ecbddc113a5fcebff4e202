@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82d8cc71_dfcba98d",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "I wonder if we should have the DEFAULT option since the choice here affects what method calls are valid. If the default value changes and apps start crashing, having a default value doesn\u0027t really server its purpose.\n\nSince it is in the C++ interface, I guess it can stay but it seems a bit unnecessary to me.",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 364,
+        "endChar": 58
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dc73e8f_41f371eb",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "There are extra spaces here.",
+      "range": {
+        "startLine": 810,
+        "startChar": 5,
+        "endLine": 810,
+        "endChar": 6
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19c8b505_85ff11d0",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "\u003e When a block tag doesn\u0027t fit on a single line, continuation lines are indented four (or more) spaces from the position of the @.",
+      "range": {
+        "startLine": 815,
+        "startChar": 4,
+        "endLine": 815,
+        "endChar": 5
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da80556_b2df8730",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "Unless this is part of standard etc. I would rather just disallow it.",
+      "range": {
+        "startLine": 824,
+        "startChar": 6,
+        "endLine": 825,
+        "endChar": 45
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f75537a0_75dd9332",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "nit: Extra space",
+      "range": {
+        "startLine": 869,
+        "startChar": 8,
+        "endLine": 869,
+        "endChar": 9
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6028ff68_c33119da",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "nit: Extra space, \u003cp\u003e placement wrong",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 2
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9cd7920_8fb7cdea",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "This class is still mutable. I would prefer to make it immutable, see Effective Java 2nd Edition Item 15.",
+      "range": {
+        "startLine": 69,
+        "startChar": 28,
+        "endLine": 69,
+        "endChar": 46
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44744bba_41817fa4",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "nit: Please fix formatting",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 4
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9629ae3f_d2af392b",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "nit: isStopped",
+      "range": {
+        "startLine": 156,
+        "startChar": 17,
+        "endLine": 156,
+        "endChar": 24
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb5aa8d_3aab1582",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-01T12:30:44Z",
+      "side": 1,
+      "message": "nit: getCurrentDirection",
+      "range": {
+        "startLine": 175,
+        "startChar": 33,
+        "endLine": 175,
+        "endChar": 49
+      },
+      "revId": "c34d279b0c4bb91897ecbddc113a5fcebff4e202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
