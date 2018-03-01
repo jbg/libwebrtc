@@ -120,8 +120,7 @@ int VP9EncoderImpl::Release() {
 bool VP9EncoderImpl::ExplicitlyConfiguredSpatialLayers() const {
   // We check target_bitrate_bps of the 0th layer to see if the spatial layers
   // (i.e. bitrates) were explicitly configured.
-  return num_spatial_layers_ > 1 &&
-         codec_.spatialLayers[0].target_bitrate_bps > 0;
+  return num_spatial_layers_ > 1 && codec_.spatialLayers[0].targetBitrate > 0;
 }
 
 bool VP9EncoderImpl::SetSvcRates() {
@@ -135,13 +134,13 @@ bool VP9EncoderImpl::SetSvcRates() {
     }
     int total_bitrate_bps = 0;
     for (i = 0; i < num_spatial_layers_; ++i)
-      total_bitrate_bps += codec_.spatialLayers[i].target_bitrate_bps;
+      total_bitrate_bps += codec_.spatialLayers[i].targetBitrate * 1000;
     // If total bitrate differs now from what has been specified at the
     // beginning, update the bitrates in the same ratio as before.
     for (i = 0; i < num_spatial_layers_; ++i) {
       config_->ss_target_bitrate[i] = config_->layer_target_bitrate[i] =
           static_cast<int>(static_cast<int64_t>(config_->rc_target_bitrate) *
-                           codec_.spatialLayers[i].target_bitrate_bps /
+                           codec_.spatialLayers[i].targetBitrate * 1000 /
                            total_bitrate_bps);
     }
   } else {
@@ -407,9 +406,32 @@ int VP9EncoderImpl::InitAndSetControlSettings(const VideoCodec* inst) {
   config_->ss_number_layers = num_spatial_layers_;
   if (ExplicitlyConfiguredSpatialLayers()) {
     for (int i = 0; i < num_spatial_layers_; ++i) {
-      const auto& layer = codec_.spatialLayers[i];
-      svc_params_.scaling_factor_num[i] = layer.scaling_factor_num;
-      svc_params_.scaling_factor_den[i] = layer.scaling_factor_den;
+      const auto& layer = codec_.simulcastStream[i];
+      const int scale_factor = codec_.width / layer.width;
+
+      // Ensure scaler factor is integer.
+      const int input_width = scale_factor * layer.width;
+      RTC_CHECK_EQ(input_width, codec_.width);
+      if (input_width != codec_.width) {
+        return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
+      }
+
+      // Ensure scale factor is the same in both dimensions.
+      const int input_height = scale_factor * layer.height;
+      RTC_CHECK_EQ(input_height, codec_.height);
+      if (input_height != codec_.height) {
+        return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
+      }
+
+      // Ensure scale factor is power of two.
+      const bool is_pow_of_two = (scale_factor & (scale_factor - 1)) == 0;
+      RTC_CHECK(is_pow_of_two);
+      if (!is_pow_of_two) {
+        return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
+      }
+
+      svc_params_.scaling_factor_num[i] = 256 / scale_factor;
+      svc_params_.scaling_factor_den[i] = 256;
     }
   } else {
     int scaling_factor_num = 256;
