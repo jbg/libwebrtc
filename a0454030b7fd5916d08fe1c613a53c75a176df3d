@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "98653e24_ff6d304e",
+        "filename": "common_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-01T16:35:39Z",
+      "side": 1,
+      "message": "Theoretically it is enough to have just one. But removing one of these will be quite some change. Lets do refactoring step-by-step and make this change later.",
+      "parentUuid": "9da5f9c8_da09fe9c",
+      "revId": "a0454030b7fd5916d08fe1c613a53c75a176df3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ab26256_49dae022",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-03-01T14:16:58Z",
       "side": 1,
       "message": "What would happen if we returned an error code instead? If/when users can specify this resolutions per stream, would be kinda bad to crash the whole thing?",
+      "revId": "a0454030b7fd5916d08fe1c613a53c75a176df3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d476957_3584c1ba",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-01T16:35:39Z",
+      "side": 1,
+      "message": "Added returning of error code.",
+      "parentUuid": "4ab26256_49dae022",
       "revId": "a0454030b7fd5916d08fe1c613a53c75a176df3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
