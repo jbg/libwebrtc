@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fbd7aca_cddf79a9",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-02T09:36:39Z",
+      "side": 1,
+      "message": "This is always empty?",
+      "range": {
+        "startLine": 73,
+        "startChar": 33,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d119199d_424b342d",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-02T09:36:39Z",
+      "side": 1,
+      "message": "You need to make a defensive copy here as well to prevent someone from passing in an object and then modifying it.",
+      "range": {
+        "startLine": 85,
+        "startChar": 23,
+        "endLine": 85,
+        "endChar": 32
+      },
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10828c21_c7b2091b",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-02T09:36:39Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think it is necessary to have a new line between each method here.",
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14561162_afc3b532",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-02T09:36:39Z",
+      "side": 1,
+      "message": "Can you have Java_T default to jobject?",
+      "range": {
+        "startLine": 153,
+        "startChar": 22,
+        "endLine": 153,
+        "endChar": 37
+      },
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b3abf50_b4e5449b",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-02T09:36:39Z",
+      "side": 1,
+      "message": "Please use static_java_ref_cast",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 59
+      },
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
