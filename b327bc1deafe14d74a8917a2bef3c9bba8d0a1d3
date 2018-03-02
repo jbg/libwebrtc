@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "fc0fd175_dffd6d2b",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-02T12:31:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84296a80_08eaebdf",
+      "range": {
+        "startLine": 34,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 60
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0486de6d_f12dbe78",
         "filename": "modules/audio_processing/audio_generator/audio_generator_impl.h",
         "patchSetId": 7
@@ -190,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "a0167252_dea1d71d",
+        "filename": "modules/audio_processing/include/audio_generator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-02T12:31:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e8a349f5_0d35b75f",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f02953f_223b98d3",
         "filename": "modules/audio_processing/include/audio_generator_factory.h",
         "patchSetId": 7
@@ -225,6 +273,30 @@
       "side": 1,
       "message": "Great idea, done. Will need to look over the WavReader error handling though (currently everything is handled by RTC_CHECKs).",
       "parentUuid": "9f02953f_223b98d3",
+      "range": {
+        "startLine": 29,
+        "startChar": 22,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7517b7c4_48da49c8",
+        "filename": "modules/audio_processing/include/audio_generator_factory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-03-02T12:31:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6b5671f5_201c4cb3",
       "range": {
         "startLine": 29,
         "startChar": 22,
