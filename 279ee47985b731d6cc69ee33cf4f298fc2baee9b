@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38da0d_a271b3b6",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-02T09:52:21Z",
+      "side": 1,
+      "message": "Possibly CHECK_GT(scale_factor, 0)",
+      "range": {
+        "startLine": 434,
+        "startChar": 42,
+        "endLine": 434,
+        "endChar": 54
+      },
+      "revId": "279ee47985b731d6cc69ee33cf4f298fc2baee9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
