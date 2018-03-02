@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6edaeedd_5b6b9efc",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-02T11:27:48Z",
+      "side": 1,
+      "message": "I removed these checks and added unit test. I immediately found that I used simulcastStream instead of spatialLayers in this place. Fixed this.",
+      "parentUuid": "1e53890b_0c663e35",
+      "range": {
+        "startLine": 414,
+        "startChar": 6,
+        "endLine": 417,
+        "endChar": 7
+      },
+      "revId": "35ddf29b79a9aa5ebff250cf4a2903a946140f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27ce14e7_e263ed90",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "35ddf29b79a9aa5ebff250cf4a2903a946140f29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6294f281_9e9f5a86",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-02T11:27:48Z",
+      "side": 1,
+      "message": "This conversion is not really needed since scaling factor is supposed to be integer. Replaced with:\nsvc_params_.scaling_factor_num[i] \u003d 1;\nsvc_params_.scaling_factor_den[i] \u003d scale_factor;",
+      "parentUuid": "27ce14e7_e263ed90",
+      "range": {
+        "startLine": 433,
+        "startChar": 7,
+        "endLine": 433,
+        "endChar": 61
+      },
+      "revId": "35ddf29b79a9aa5ebff250cf4a2903a946140f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
