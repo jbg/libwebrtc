@@ -633,7 +633,7 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
 
   // Add a new MediaStreamTrack to be sent on this PeerConnection, and return
   // the newly created RtpSender. The RtpSender will be associated with the
-  // streams specified in the |stream_ids| list.
+  // streams specified in the |stream_labels| list.
   //
   // Errors:
   // - INVALID_PARAMETER: |track| is null, has a kind other than audio or video,
@@ -643,13 +643,13 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   // implementations have been updated.
   virtual RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> AddTrack(
       rtc::scoped_refptr<MediaStreamTrackInterface> track,
-      const std::vector<std::string>& stream_ids) {
+      const std::vector<std::string>& stream_labels) {
     return RTCError(RTCErrorType::UNSUPPORTED_OPERATION, "Not implemented");
   }
-  // |streams| indicates which stream ids the track should be associated
+  // |streams| indicates which stream labels the track should be associated
   // with.
   // TODO(steveanton): Remove this overload once callers have moved to the
-  // signature with stream ids.
+  // signature with stream labels.
   virtual rtc::scoped_refptr<RtpSenderInterface> AddTrack(
       MediaStreamTrackInterface* track,
       std::vector<MediaStreamInterface*> streams) {
@@ -1189,8 +1189,8 @@ class PeerConnectionFactoryInterface : public rtc::RefCountInterface {
       std::unique_ptr<rtc::RTCCertificateGeneratorInterface> cert_generator,
       PeerConnectionObserver* observer) = 0;
 
-  virtual rtc::scoped_refptr<MediaStreamInterface> CreateLocalMediaStream(
-      const std::string& stream_id) = 0;
+  virtual rtc::scoped_refptr<MediaStreamInterface>
+      CreateLocalMediaStream(const std::string& label) = 0;
 
   // Creates an AudioSourceInterface.
   // |options| decides audio processing settings.

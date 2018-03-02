@@ -58,10 +58,4 @@ AudioTrackInterface::GetAudioProcessor() {
   return nullptr;
 }
 
-// TODO(shampson): Remove this default implementation once downstreams have
-// implemented.
-std::string MediaStreamInterface::id() const {
-  return std::string();
-}
-
 }  // namespace webrtc
