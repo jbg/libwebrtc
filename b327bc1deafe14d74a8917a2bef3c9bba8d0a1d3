@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cdc1a6ad_684baaf8",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-03-02T09:33:14Z",
+      "side": 1,
+      "message": "Great, done",
+      "parentUuid": "7326d0d6_dae55094",
+      "range": {
+        "startLine": 31,
+        "startChar": 39,
+        "endLine": 31,
+        "endChar": 58
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d8c9755_967b9526",
         "filename": "modules/audio_processing/audio_generator/audio_generator_impl.cc",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84296a80_08eaebdf",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-03-02T09:33:14Z",
+      "side": 1,
+      "message": "See comment a bit further down:   // Resample to output rate.\n\nAfter offline discussions, decided to instead let generator use fixed sample rate / channel count. New patch set changes up this interface considerably.",
+      "parentUuid": "3d8c9755_967b9526",
+      "range": {
+        "startLine": 34,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 60
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5298fa8f_842bb029",
+        "filename": "modules/audio_processing/audio_generator/audio_generator_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-03-02T09:33:14Z",
+      "side": 1,
+      "message": "Initially intended as working memory. Should have been a) statically allocated and b) not introduced until implementation CL shows it\u0027s actually needed. Removed.",
+      "parentUuid": "0486de6d_f12dbe78",
+      "range": {
+        "startLine": 43,
+        "startChar": 34,
+        "endLine": 43,
+        "endChar": 46
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a83ff951_b5aefe14",
         "filename": "modules/audio_processing/include/audio_generator.h",
         "patchSetId": 7
@@ -91,6 +163,30 @@
       "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a349f5_0d35b75f",
+        "filename": "modules/audio_processing/include/audio_generator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-03-02T09:33:14Z",
+      "side": 1,
+      "message": "Two reasons:\n1) Modularity, to not have to link with the AudioGenerator implementation.\n2) With new patch set, file playout and generated-on-the-fly playout is different enough to warrant two different classes implementing the AudioGenerator interface. Starting with the file one.\n\nI think that the performance cost of resolving the virtual function call is acceptable since this is intended for diagnostics and testing purposes. Which, by the way, I added in the interface description.",
+      "parentUuid": "a83ff951_b5aefe14",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6b5671f5_201c4cb3",
+        "filename": "modules/audio_processing/include/audio_generator_factory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-03-02T09:33:14Z",
+      "side": 1,
+      "message": "Great idea, done. Will need to look over the WavReader error handling though (currently everything is handled by RTC_CHECKs).",
+      "parentUuid": "9f02953f_223b98d3",
+      "range": {
+        "startLine": 29,
+        "startChar": 22,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90f2117a_fb1e99c5",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 7
@@ -137,6 +257,30 @@
       "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "938e5353_d27d15b5",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-03-02T09:33:14Z",
+      "side": 1,
+      "message": "Done, by removing the forward declaration.",
+      "parentUuid": "90f2117a_fb1e99c5",
+      "range": {
+        "startLine": 29,
+        "startChar": 35,
+        "endLine": 29,
+        "endChar": 58
+      },
+      "revId": "b327bc1deafe14d74a8917a2bef3c9bba8d0a1d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
