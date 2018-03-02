@@ -109,13 +109,20 @@ GoogCcNetworkController::GoogCcNetworkController(
     NetworkControllerConfig config)
     : event_log_(event_log),
       observer_(observer),
-      probe_controller_(new ProbeController(observer_)),
+      probe_controller_(
+          new ProbeController(observer_,
+                              config.constraints.at_time.ms(),
+                              config.starting_rate.bps(),
+                              config.starting_rate.bps(),
+                              config.constraints.max_data_rate.bps_or(-1),
+                              false)),
       bandwidth_estimation_(
           rtc::MakeUnique<SendSideBandwidthEstimation>(event_log_)),
       alr_detector_(rtc::MakeUnique<AlrDetector>()),
       delay_based_bwe_(new DelayBasedBwe(event_log_)),
       acknowledged_bitrate_estimator_(
           rtc::MakeUnique<AcknowledgedBitrateEstimator>()),
+      enable_alr_probing_(false),
       pacing_factor_(kDefaultPaceMultiplier),
       min_pacing_rate_(DataRate::Zero()),
       max_padding_rate_(DataRate::Zero()),
@@ -135,7 +142,6 @@ GoogCcNetworkController::GoogCcNetworkController(
 GoogCcNetworkController::~GoogCcNetworkController() {}
 
 void GoogCcNetworkController::OnNetworkAvailability(NetworkAvailability msg) {
-  probe_controller_->OnNetworkAvailability(msg);
 }
 
 void GoogCcNetworkController::OnNetworkRouteChange(NetworkRouteChange msg) {
@@ -153,10 +159,13 @@ void GoogCcNetworkController::OnNetworkRouteChange(NetworkRouteChange msg) {
   acknowledged_bitrate_estimator_.reset(new AcknowledgedBitrateEstimator());
   delay_based_bwe_->SetStartBitrate(start_bitrate_bps);
   delay_based_bwe_->SetMinBitrate(min_bitrate_bps);
+  probe_controller_.reset(new ProbeController(
+      observer_, msg.at_time.ms(),
+      msg.starting_rate.bps_or(bandwidth_estimation_->GetMinBitrate()),
+      msg.starting_rate.bps_or(0), max_bitrate_bps, enable_alr_probing_));
 
-  probe_controller_->Reset(msg.at_time.ms());
-  probe_controller_->SetBitrates(min_bitrate_bps, start_bitrate_bps,
-                                 max_bitrate_bps, msg.at_time.ms());
+  probe_controller_->SetAlrStartTimeMs(
+      alr_detector_->GetApplicationLimitedRegionStartTime());
 
   MaybeTriggerOnNetworkChanged(msg.at_time);
 }
@@ -193,6 +202,7 @@ void GoogCcNetworkController::OnSentPacket(SentPacket sent_packet) {
 
 void GoogCcNetworkController::OnStreamsConfig(StreamsConfig msg) {
   probe_controller_->EnablePeriodicAlrProbing(msg.requests_alr_probing);
+  enable_alr_probing_ = msg.requests_alr_probing;
 
   bool pacing_changed = false;
   if (msg.pacing_factor && *msg.pacing_factor != pacing_factor_) {
@@ -225,8 +235,8 @@ void GoogCcNetworkController::UpdateBitrateConstraints(
 
   ClampBitrates(&start_bitrate_bps, &min_bitrate_bps, &max_bitrate_bps);
 
-  probe_controller_->SetBitrates(min_bitrate_bps, start_bitrate_bps,
-                                 max_bitrate_bps, constraints.at_time.ms());
+  probe_controller_->UpdateMaxBitrate(max_bitrate_bps,
+                                      constraints.at_time.ms());
 
   bandwidth_estimation_->SetBitrates(start_bitrate_bps, min_bitrate_bps,
                                      max_bitrate_bps);
