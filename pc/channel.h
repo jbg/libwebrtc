@@ -265,9 +265,9 @@ class BaseChannel
   void HandlePacket(bool rtcp, rtc::CopyOnWriteBuffer* packet,
                     const rtc::PacketTime& packet_time);
   // TODO(zstein): packet can be const once the RtpTransport handles protection.
-  virtual void OnPacketReceived(bool rtcp,
-                                rtc::CopyOnWriteBuffer* packet,
-                                const rtc::PacketTime& packet_time);
+  void OnPacketReceived(bool rtcp,
+                        rtc::CopyOnWriteBuffer* packet,
+                        const rtc::PacketTime& packet_time);
   void ProcessPacket(bool rtcp,
                      const rtc::CopyOnWriteBuffer& packet,
                      const rtc::PacketTime& packet_time);
@@ -468,9 +468,6 @@ class VoiceChannel : public BaseChannel {
   // own ringing sound
   sigslot::signal1<VoiceChannel*> SignalEarlyMediaTimeout;
 
-  // Get statistics about the current media session.
-  bool GetStats(VoiceMediaInfo* stats);
-
   webrtc::RtpParameters GetRtpSendParameters_w(uint32_t ssrc) const;
   webrtc::RTCError SetRtpSendParameters_w(uint32_t ssrc,
                                           webrtc::RtpParameters parameters);
@@ -478,9 +475,6 @@ class VoiceChannel : public BaseChannel {
 
  private:
   // overrides from BaseChannel
-  void OnPacketReceived(bool rtcp,
-                        rtc::CopyOnWriteBuffer* packet,
-                        const rtc::PacketTime& packet_time) override;
   void UpdateMediaSendRecvState_w() override;
   bool SetLocalContent_w(const MediaContentDescription* content,
                          webrtc::SdpType type,
@@ -488,12 +482,6 @@ class VoiceChannel : public BaseChannel {
   bool SetRemoteContent_w(const MediaContentDescription* content,
                           webrtc::SdpType type,
                           std::string* error_desc) override;
-  void HandleEarlyMediaTimeout();
-
-  void OnMessage(rtc::Message* pmsg) override;
-
-  static const int kEarlyMediaTimeout = 1000;
-  bool received_media_ = false;
 
   // Last AudioSendParameters sent down to the media_channel() via
   // SetSendParameters.
@@ -521,8 +509,6 @@ class VideoChannel : public BaseChannel {
   }
 
   void FillBitrateInfo(BandwidthEstimationInfo* bwe_info);
-  // Get statistics about the current media session.
-  bool GetStats(VideoMediaInfo* stats);
 
   cricket::MediaType media_type() override { return cricket::MEDIA_TYPE_VIDEO; }
 
@@ -535,7 +521,6 @@ class VideoChannel : public BaseChannel {
   bool SetRemoteContent_w(const MediaContentDescription* content,
                           webrtc::SdpType type,
                           std::string* error_desc) override;
-  bool GetStats_w(VideoMediaInfo* stats);
 
   // Last VideoSendParameters sent down to the media_channel() via
   // SetSendParameters.
