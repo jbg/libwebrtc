@@ -32,6 +32,7 @@
 #include "rtc_base/experiments/alr_experiment.h"
 #include "rtc_base/file.h"
 #include "rtc_base/location.h"
+#include "rtc_base/race_checker.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/trace_event.h"
 #include "rtc_base/weak_ptr.h"
@@ -370,6 +371,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   std::unique_ptr<FecController> fec_controller_;
   ProcessThread* module_process_thread_;
   rtc::ThreadChecker module_process_thread_checker_;
+  rtc::RaceChecker worker_queue_race_cehcker_;
   rtc::TaskQueue* const worker_queue_;
 
   rtc::CriticalSection encoder_activity_crit_sect_;
@@ -459,7 +461,7 @@ class VideoSendStreamImpl::CheckEncoderActivityTask : public rtc::QueuedTask {
       : activity_(0), send_stream_(std::move(send_stream)), timed_out_(false) {}
 
   void Stop() {
-    RTC_CHECK(task_checker_.CalledSequentially());
+    RTC_CHECK_RUNS_SERIALIZED(&task_checker_);
     send_stream_.reset();
   }
 
@@ -473,7 +475,7 @@ class VideoSendStreamImpl::CheckEncoderActivityTask : public rtc::QueuedTask {
 
  private:
   bool Run() override {
-    RTC_CHECK(task_checker_.CalledSequentially());
+    RTC_CHECK_RUNS_SERIALIZED(&task_checker_);
     if (!send_stream_)
       return true;
     if (!rtc::AtomicOps::AcquireLoad(&activity_)) {
@@ -495,7 +497,7 @@ class VideoSendStreamImpl::CheckEncoderActivityTask : public rtc::QueuedTask {
   }
   volatile int activity_;
 
-  rtc::SequencedTaskChecker task_checker_;
+  rtc::RaceChecker task_checker_;
   rtc::WeakPtr<VideoSendStreamImpl> send_stream_;
   bool timed_out_;
 };
@@ -748,7 +750,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       weak_ptr_factory_(this),
       overhead_bytes_per_packet_(0),
       transport_overhead_bytes_per_packet_(0) {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_LOG(LS_INFO) << "VideoSendStreamInternal: " << config_->ToString();
   weak_ptr_ = weak_ptr_factory_.GetWeakPtr();
   module_process_thread_checker_.DetachFromThread();
@@ -870,7 +872,7 @@ void VideoSendStreamImpl::DeRegisterProcessThread() {
 }
 
 VideoSendStreamImpl::~VideoSendStreamImpl() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_DCHECK(!payload_router_.IsActive())
       << "VideoSendStreamImpl::Stop not called";
   RTC_LOG(LS_INFO) << "~VideoSendStreamInternal: " << config_->ToString();
@@ -893,7 +895,7 @@ bool VideoSendStreamImpl::DeliverRtcp(const uint8_t* packet, size_t length) {
 
 void VideoSendStreamImpl::UpdateActiveSimulcastLayers(
     const std::vector<bool> active_layers) {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_DCHECK_EQ(rtp_rtcp_modules_.size(), active_layers.size());
   RTC_LOG(LS_INFO) << "VideoSendStream::UpdateActiveSimulcastLayers";
   bool previously_active = payload_router_.IsActive();
@@ -908,7 +910,7 @@ void VideoSendStreamImpl::UpdateActiveSimulcastLayers(
 }
 
 void VideoSendStreamImpl::Start() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_LOG(LS_INFO) << "VideoSendStream::Start";
   if (payload_router_.IsActive())
     return;
@@ -918,7 +920,7 @@ void VideoSendStreamImpl::Start() {
 }
 
 void VideoSendStreamImpl::StartupVideoSendStream() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   bitrate_allocator_->AddObserver(
       this, encoder_min_bitrate_bps_, encoder_max_bitrate_bps_,
       max_padding_bitrate_, !config_->suspend_below_min_bitrate,
@@ -937,7 +939,7 @@ void VideoSendStreamImpl::StartupVideoSendStream() {
 }
 
 void VideoSendStreamImpl::Stop() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_LOG(LS_INFO) << "VideoSendStream::Stop";
   if (!payload_router_.IsActive())
     return;
@@ -958,7 +960,7 @@ void VideoSendStreamImpl::StopVideoSendStream() {
 }
 
 void VideoSendStreamImpl::SignalEncoderTimedOut() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   // If the encoder has not produced anything the last kEncoderTimeOutMs and it
   // is supposed to, deregister as BitrateAllocatorObserver. This can happen
   // if a camera stops producing frames.
@@ -974,7 +976,7 @@ void VideoSendStreamImpl::OnBitrateAllocationUpdated(
 }
 
 void VideoSendStreamImpl::SignalEncoderActive() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_LOG(LS_INFO) << "SignalEncoderActive, Encoder is active.";
   bitrate_allocator_->AddObserver(
       this, encoder_min_bitrate_bps_, encoder_max_bitrate_bps_,
@@ -994,7 +996,7 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   RTC_DCHECK_GE(config_->rtp.ssrcs.size(), streams.size());
   TRACE_EVENT0("webrtc", "VideoSendStream::OnEncoderConfigurationChanged");
   RTC_DCHECK_GE(config_->rtp.ssrcs.size(), streams.size());
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
 
   encoder_min_bitrate_bps_ =
       std::max(streams[0].min_bitrate_bps, GetEncoderMinBitrateBps());
@@ -1082,7 +1084,7 @@ EncodedImageCallback::Result VideoSendStreamImpl::OnEncodedImage(
 }
 
 void VideoSendStreamImpl::ConfigureProtection() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
 
   // Consistency of FlexFEC parameters is checked in MaybeCreateFlexfecSender.
   const bool flexfec_enabled = (flexfec_sender_ != nullptr);
@@ -1171,7 +1173,7 @@ void VideoSendStreamImpl::ConfigureProtection() {
 }
 
 void VideoSendStreamImpl::ConfigureSsrcs() {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   // Configure regular SSRCs.
   for (size_t i = 0; i < config_->rtp.ssrcs.size(); ++i) {
     uint32_t ssrc = config_->rtp.ssrcs[i];
@@ -1216,7 +1218,7 @@ void VideoSendStreamImpl::ConfigureSsrcs() {
 }
 
 std::map<uint32_t, RtpState> VideoSendStreamImpl::GetRtpStates() const {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   std::map<uint32_t, RtpState> rtp_states;
 
   for (size_t i = 0; i < config_->rtp.ssrcs.size(); ++i) {
@@ -1240,12 +1242,12 @@ std::map<uint32_t, RtpState> VideoSendStreamImpl::GetRtpStates() const {
 
 std::map<uint32_t, RtpPayloadState> VideoSendStreamImpl::GetRtpPayloadStates()
     const {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   return payload_router_.GetRtpPayloadStates();
 }
 
 void VideoSendStreamImpl::SignalNetworkState(NetworkState state) {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   for (RtpRtcp* rtp_rtcp : rtp_rtcp_modules_) {
     rtp_rtcp->SetRTCPStatus(state == kNetworkUp ? config_->rtp.rtcp_mode
                                                 : RtcpMode::kOff);
@@ -1256,7 +1258,7 @@ uint32_t VideoSendStreamImpl::OnBitrateUpdated(uint32_t bitrate_bps,
                                                uint8_t fraction_loss,
                                                int64_t rtt,
                                                int64_t probing_interval_ms) {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   RTC_DCHECK(payload_router_.IsActive())
       << "VideoSendStream::Start has not been called.";
 
@@ -1331,7 +1333,7 @@ int VideoSendStreamImpl::ProtectionRequest(
     uint32_t* sent_video_rate_bps,
     uint32_t* sent_nack_rate_bps,
     uint32_t* sent_fec_rate_bps) {
-  RTC_DCHECK_RUN_ON(worker_queue_);
+  RTC_CHECK_RUNS_SERIALIZED(&worker_queue_race_cehcker_);
   *sent_video_rate_bps = 0;
   *sent_nack_rate_bps = 0;
   *sent_fec_rate_bps = 0;
