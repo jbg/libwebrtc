@@ -34,6 +34,24 @@
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4db2d094_c9a12d14",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-05T12:33:31Z",
+      "side": 1,
+      "message": "Tommi and I discussed this, but I guess it was someplace else than in this CL. Our conclusion then was that the best way was to refactor this so that all the code belonged to a non-template base class that doesn\u0027t own a buffer, and have a templated subclass that owns a buffer that it gives to its parent. Tommi wanted to save this for a later CL.\n\nI just realized that another, possibly cleaner way to do this is to just have one SimpleStringBuilder class that\u0027s not a template, and that takes an ArrayView\u003cchar\u003e constructor argument, so that callers would do this:\n\n  char buffer[1024];\n  rtc::SimpleStringBuilder ss(buffer);\n\nNo template member functions for the linker to possibly fail to de-duplicate, and obvious at each call site where the buffer space is located and how large it is.",
+      "parentUuid": "bef570fd_c022b984",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
