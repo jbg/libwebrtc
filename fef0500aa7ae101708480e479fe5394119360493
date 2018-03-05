@@ -88,6 +88,41 @@
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aa451dc_ef922fc8",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-05T18:48:42Z",
+      "side": 1,
+      "message": "I was thinking something along the same line. :)",
+      "parentUuid": "60c2e405_84e7ee32",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c235fe61_d5e6381f",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-05T18:48:42Z",
+      "side": 1,
+      "message": "I\u0027m missing tests for overshooting the buffer size, and also tests for when vsnprintf fails.",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
