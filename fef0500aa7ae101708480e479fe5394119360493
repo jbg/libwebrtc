@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "ab6333c8_dfa61f11",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-05T19:42:01Z",
+      "side": 1,
+      "message": "is the template thing not\n\n  char buffer[1024];\n  rtc::SimpleStringBuilder ss(buffer);\n\n? (I was interpreting ArrayView being the template in that case)",
+      "parentUuid": "001da9f5_8cd6d973",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c235fe61_d5e6381f",
         "filename": "rtc_base/strings/string_builder_unittest.cc",
         "patchSetId": 28
@@ -192,6 +210,24 @@
       "side": 1,
       "message": "Death tests when dcheck enabled, and other tests when not? If we\u0027re to use it in RTC_LOG the implementation must work regardless.\n\nBtw, Karl added some death tests in array_view_unittest.cc that you can look at.",
       "parentUuid": "07c4cc8b_e2fbebc7",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d3a50b9_15daf576",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-05T19:42:01Z",
+      "side": 1,
+      "message": "Sgtm. For RTC_LOG I was thinking we\u0027d use something that supports dynamic resizing such as std::string based.\n\nHowever, introducing RTC_FAST_LOG() for some specific cases could be interesting? :)\n(assuming it would actually be needed and make a difference)",
+      "parentUuid": "274f9d3e_d22e008e",
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
