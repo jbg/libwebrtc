@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bef570fd_c022b984",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-05T12:01:46Z",
+      "side": 1,
+      "message": "Making the buffer size a template argument is potentially wasteful - the compiler might emit new instances of the template\u0027s methods for each buffer size used. Have you checked that the combination of build tools and flags we use will actually remove such redundancy?\n\nIf they do not, could we just have a preset buffer size and DCHECK any overshoot?",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
