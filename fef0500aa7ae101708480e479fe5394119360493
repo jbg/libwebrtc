@@ -16,6 +16,24 @@
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "043a5e83_14806e13",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-05T12:27:28Z",
+      "side": 1,
+      "message": "I haven\u0027t checked all build tools, but I checked clang and *I think* msvc\u0027s compiler and this wasn\u0027t a problem. Essentially the only thing that changes, is the size of the buffer.\n\nIf you look at the implementation, the function that would (from obsveration) be most susceptible to this, is AppendFormat() and I think we can de-inline it as Karl put it.\n\nSame goes for the other routines that are non trivial.\n\nThis isn\u0027t meant to be the final implementation btw. Absl is on the way and I expect we\u0027ll replace the implementation of this class with something in the absl namespace.\n\nI also threw together a StringBuilder class that\u0027s currently WIP because I haven\u0027t de-inlined its implementation yet or factored out parts that could be shared between it and SimpleStringBuilder.  You can take a look here though if you\u0027re curious and/or have suggestions:\nhttps://webrtc-review.googlesource.com/c/src/+/58980\n(I\u0027ll get back to it in a couple of days)",
+      "parentUuid": "bef570fd_c022b984",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
