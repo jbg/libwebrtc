@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8df41264_e7e0fc96",
+        "filename": "api/umametrics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-03-05T09:12:21Z",
+      "side": 1,
+      "message": "I think a better description is \"... for tracking how much the difference between Plan B and Unified Plan affects users\", since it doesn\u0027t actually track plan B or UP usage for the simple case (the metric above does that).",
+      "revId": "57b466e4065817838f470622e8a20fd1ad2faba6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ff7276a_0911895a",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 5741,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-03-05T09:12:21Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be prettier if done with unsigned int all the way (size_t num_tracks \u003d std::max(1U, content.media_description....)?",
+      "revId": "57b466e4065817838f470622e8a20fd1ad2faba6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba4e1452_53bd1531",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-03-05T09:12:21Z",
+      "side": 1,
+      "message": "Does this class accomplish anything except give a new name in the list of tests?",
+      "revId": "57b466e4065817838f470622e8a20fd1ad2faba6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c05097_1f0bed5e",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-03-05T09:12:21Z",
+      "side": 1,
+      "message": "generalization possible: If you gave this two arguments (metric ID and metric value ID), it would make a sensible addition to the FakeMetricsObserver class, and you could use it also for the ugly block I wrote above in UnifiedPlanTalkingToOurself.\n\n(probably 3 args, since the max value of the loop can\u0027t be inferred from the 2 other arguments)",
+      "revId": "57b466e4065817838f470622e8a20fd1ad2faba6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
