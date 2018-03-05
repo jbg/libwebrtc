@@ -70,6 +70,24 @@
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60c2e405_84e7ee32",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-05T13:22:03Z",
+      "side": 1,
+      "message": "I think no---temporaries go out of scope at the end of the current statement, so the buffer needs to either be a data member of SimpleStringBuilder or be allocated in a separate statement.\n\nWe could do it with a macro, but that would defeat the whole readability point. If you really want a single line, it\u0027s better to do it with a template subclass and a non-template base class as we discussed earlier.",
+      "parentUuid": "201f7edf_6cf922b2",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
