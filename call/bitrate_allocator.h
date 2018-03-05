@@ -20,7 +20,8 @@
 #include <vector>
 
 #include "rtc_base/bitrateallocationstrategy.h"
-#include "rtc_base/sequenced_task_checker.h"
+#include "rtc_base/race_checker.h"
+#include "rtc_base/task_queue.h"
 
 namespace webrtc {
 
@@ -188,23 +189,23 @@ class BitrateAllocator {
       const ObserverAllocation& observers_capacities,
       ObserverAllocation* allocation);
 
-  rtc::SequencedTaskChecker sequenced_checker_;
-  LimitObserver* const limit_observer_ RTC_GUARDED_BY(&sequenced_checker_);
+  rtc::RaceChecker race_checker_;
+  LimitObserver* const limit_observer_ RTC_GUARDED_BY(&race_checker_);
   // Stored in a list to keep track of the insertion order.
-  ObserverConfigs bitrate_observer_configs_ RTC_GUARDED_BY(&sequenced_checker_);
-  uint32_t last_bitrate_bps_ RTC_GUARDED_BY(&sequenced_checker_);
-  uint32_t last_non_zero_bitrate_bps_ RTC_GUARDED_BY(&sequenced_checker_);
-  uint8_t last_fraction_loss_ RTC_GUARDED_BY(&sequenced_checker_);
-  int64_t last_rtt_ RTC_GUARDED_BY(&sequenced_checker_);
-  int64_t last_bwe_period_ms_ RTC_GUARDED_BY(&sequenced_checker_);
+  ObserverConfigs bitrate_observer_configs_ RTC_GUARDED_BY(&race_checker_);
+  uint32_t last_bitrate_bps_ RTC_GUARDED_BY(&race_checker_);
+  uint32_t last_non_zero_bitrate_bps_ RTC_GUARDED_BY(&race_checker_);
+  uint8_t last_fraction_loss_ RTC_GUARDED_BY(&race_checker_);
+  int64_t last_rtt_ RTC_GUARDED_BY(&race_checker_);
+  int64_t last_bwe_period_ms_ RTC_GUARDED_BY(&race_checker_);
   // Number of mute events based on too low BWE, not network up/down.
-  int num_pause_events_ RTC_GUARDED_BY(&sequenced_checker_);
-  Clock* const clock_ RTC_GUARDED_BY(&sequenced_checker_);
-  int64_t last_bwe_log_time_ RTC_GUARDED_BY(&sequenced_checker_);
-  uint32_t total_requested_padding_bitrate_ RTC_GUARDED_BY(&sequenced_checker_);
-  uint32_t total_requested_min_bitrate_ RTC_GUARDED_BY(&sequenced_checker_);
+  int num_pause_events_ RTC_GUARDED_BY(&race_checker_);
+  Clock* const clock_ RTC_GUARDED_BY(&race_checker_);
+  int64_t last_bwe_log_time_ RTC_GUARDED_BY(&race_checker_);
+  uint32_t total_requested_padding_bitrate_ RTC_GUARDED_BY(&race_checker_);
+  uint32_t total_requested_min_bitrate_ RTC_GUARDED_BY(&race_checker_);
   std::unique_ptr<rtc::BitrateAllocationStrategy> bitrate_allocation_strategy_
-      RTC_GUARDED_BY(&sequenced_checker_);
+      RTC_GUARDED_BY(&race_checker_);
 };
 
 }  // namespace webrtc
