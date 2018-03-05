@@ -52,6 +52,24 @@
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "201f7edf_6cf922b2",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-05T12:49:23Z",
+      "side": 1,
+      "message": "That looks pretty clever... is it possible/worth it to somehow be able to condense this into a single line?",
+      "parentUuid": "4db2d094_c9a12d14",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
