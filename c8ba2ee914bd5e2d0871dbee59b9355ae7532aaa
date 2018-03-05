@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "542ec09c_00b85153",
+        "filename": "sdk/android/api/org/webrtc/MediaStream.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-05T08:38:07Z",
+      "side": 1,
+      "message": "Mark with @Deprecated",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 25
+      },
+      "revId": "c8ba2ee914bd5e2d0871dbee59b9355ae7532aaa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

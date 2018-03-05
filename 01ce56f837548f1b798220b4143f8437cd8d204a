@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8ac21cd0_c8c24494",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-05T08:38:07Z",
+      "side": 1,
+      "message": "If it is being dropped, I would like to not include it in the Java API at all. Can you remove all references from Java code and just assume it is empty?",
+      "parentUuid": "dedbff2b_39e7a224",
+      "range": {
+        "startLine": 73,
+        "startChar": 33,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d119199d_424b342d",
         "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
         "patchSetId": 7
