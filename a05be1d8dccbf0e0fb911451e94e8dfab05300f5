@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3d3b75b_f2c972ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-05T19:17:13Z",
+      "side": 1,
+      "message": "Can you list the methods being removed here (SetAudioSend, SetEarlyMedia, GetStats)?",
+      "revId": "a05be1d8dccbf0e0fb911451e94e8dfab05300f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66cf70ae_8fe176fd",
+        "filename": "pc/channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-05T19:17:13Z",
+      "side": 1,
+      "message": "Can this be removed?",
+      "revId": "a05be1d8dccbf0e0fb911451e94e8dfab05300f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3abb372d_1768a33c",
+        "filename": "pc/channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-05T19:17:13Z",
+      "side": 1,
+      "message": "Can this method and the corresponding signal be removed?",
+      "revId": "a05be1d8dccbf0e0fb911451e94e8dfab05300f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
