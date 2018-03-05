@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "84fb85d3_0ff1a06d",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-05T19:17:43Z",
+      "side": 1,
+      "message": "so should we go with that change in a future cl? (move to ArrayView)",
+      "parentUuid": "9aa451dc_ef922fc8",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c235fe61_d5e6381f",
         "filename": "rtc_base/strings/string_builder_unittest.cc",
         "patchSetId": 28
@@ -120,6 +138,24 @@
       "writtenOn": "2018-03-05T18:48:42Z",
       "side": 1,
       "message": "I\u0027m missing tests for overshooting the buffer size, and also tests for when vsnprintf fails.",
+      "revId": "fef0500aa7ae101708480e479fe5394119360493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c4cc8b_e2fbebc7",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-05T19:17:43Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s because they\u0027d all hit checks and it was a toss up between tests or dchecks.\n\nAny suggestions for how to do those tests? death tests in builds with dcheck enabled?",
+      "parentUuid": "c235fe61_d5e6381f",
       "revId": "fef0500aa7ae101708480e479fe5394119360493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
