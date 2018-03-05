@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "924a8b69_cfbc005a",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-03-05T17:00:54Z",
+      "side": 1,
+      "message": "Sounds good, I removed it. When this is implemented to be used natively I\u0027ll add it in.",
+      "parentUuid": "8ac21cd0_c8c24494",
+      "range": {
+        "startLine": 73,
+        "startChar": 33,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "01ce56f837548f1b798220b4143f8437cd8d204a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d119199d_424b342d",
         "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
         "patchSetId": 7
