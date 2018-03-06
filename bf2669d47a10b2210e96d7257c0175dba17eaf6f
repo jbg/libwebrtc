@@ -16,6 +16,24 @@
       "revId": "bf2669d47a10b2210e96d7257c0175dba17eaf6f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30c2210f_accd747e",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-06T10:44:36Z",
+      "side": 1,
+      "message": "Of course. Done.",
+      "parentUuid": "76762e64_d3f15539",
+      "revId": "bf2669d47a10b2210e96d7257c0175dba17eaf6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
