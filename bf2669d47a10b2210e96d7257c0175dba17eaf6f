@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76762e64_d3f15539",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-06T06:19:19Z",
+      "side": 1,
+      "message": "explicit?",
+      "revId": "bf2669d47a10b2210e96d7257c0175dba17eaf6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
