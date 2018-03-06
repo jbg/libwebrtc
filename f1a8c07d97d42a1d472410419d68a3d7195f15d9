@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8764b093_95156972",
+        "filename": "test/fake_audio_device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-03-06T09:09:34Z",
+      "side": 1,
+      "message": "I think we want to avoid default arguments. Also, IMHO it does not feel OK to use it for one parameter only in this case.",
+      "revId": "f1a8c07d97d42a1d472410419d68a3d7195f15d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebac9472_768fa51b",
+        "filename": "test/fake_audio_device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-03-06T09:09:34Z",
+      "side": 1,
+      "message": "Do you really need these APIs? Why not simply use the constructors only to select sample rate and channel config.",
+      "revId": "f1a8c07d97d42a1d472410419d68a3d7195f15d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
