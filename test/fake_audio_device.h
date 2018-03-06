@@ -43,6 +43,8 @@ class FakeAudioDevice : public FakeAudioDeviceModule {
     // Returns the sampling frequency in Hz of the audio data that this
     // capturer produces.
     virtual int SamplingFrequency() const = 0;
+    // Returns the number of channels of captured audio data.
+    virtual int NumChannels() const = 0;
     // Replaces the contents of |buffer| with 10ms of captured audio data
     // (see FakeAudioDevice::SamplesPerFrame). Returns true if the capturer can
     // keep producing data, or false when the capture finishes.
@@ -55,6 +57,8 @@ class FakeAudioDevice : public FakeAudioDeviceModule {
     // Returns the sampling frequency in Hz of the audio data that this
     // renderer receives.
     virtual int SamplingFrequency() const = 0;
+    // Returns the number of channels of audio data to be required.
+    virtual int NumChannels() const = 0;
     // Renders the passed audio data and returns true if the renderer wants
     // to keep receiving data, or false otherwise.
     virtual bool Render(rtc::ArrayView<const int16_t> data) = 0;
@@ -64,9 +68,12 @@ class FakeAudioDevice : public FakeAudioDeviceModule {
   // -max_amplitude and +max_amplitude.
   class PulsedNoiseCapturer final : public Capturer {
    public:
-    PulsedNoiseCapturer(int16_t max_amplitude, int sampling_frequency_in_hz);
+    PulsedNoiseCapturer(int16_t max_amplitude, int sampling_frequency_in_hz,
+                        int num_channels);
 
     int SamplingFrequency() const override { return sampling_frequency_in_hz_; }
+
+    int NumChannels() const override { return num_channels_; }
 
     bool Capture(rtc::BufferT<int16_t>* buffer) override;
 
@@ -78,6 +85,7 @@ class FakeAudioDevice : public FakeAudioDeviceModule {
     Random random_generator_;
     rtc::CriticalSection lock_;
     int16_t max_amplitude_ RTC_GUARDED_BY(lock_);
+    int num_channels_;
   };
 
   // Creates a new FakeAudioDevice. When capturing or playing, 10 ms audio
@@ -97,7 +105,8 @@ class FakeAudioDevice : public FakeAudioDeviceModule {
   // with max amplitude |max_amplitude|.
   static std::unique_ptr<PulsedNoiseCapturer> CreatePulsedNoiseCapturer(
       int16_t max_amplitude,
-      int sampling_frequency_in_hz);
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   // Returns a Capturer instance that gets its data from a file.
   static std::unique_ptr<Capturer> CreateWavFileReader(
@@ -109,17 +118,22 @@ class FakeAudioDevice : public FakeAudioDeviceModule {
 
   // Returns a Renderer instance that writes its data to a file.
   static std::unique_ptr<Renderer> CreateWavFileWriter(
-      std::string filename, int sampling_frequency_in_hz);
+      std::string filename,
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   // Returns a Renderer instance that writes its data to a WAV file, cutting
   // off silence at the beginning (not necessarily perfect silence, see
   // kAmplitudeThreshold) and at the end (only actual 0 samples in this case).
   static std::unique_ptr<Renderer> CreateBoundedWavFileWriter(
-      std::string filename, int sampling_frequency_in_hz);
+      std::string filename,
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   // Returns a Renderer instance that does nothing with the audio data.
   static std::unique_ptr<Renderer> CreateDiscardRenderer(
-      int sampling_frequency_in_hz);
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   int32_t Init() override;
   int32_t RegisterAudioCallback(AudioTransport* callback) override;
