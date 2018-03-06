@@ -21,6 +21,7 @@ namespace webrtc {
 
 namespace {
 
+constexpr int kStereoNumChannels = 2;
 constexpr int kFrameLengthMs = 10;
 constexpr int kFramesPerSecond = 1000 / kFrameLengthMs;
 
@@ -28,37 +29,50 @@ class WavFileReader final : public test::FakeAudioDevice::Capturer {
  public:
   WavFileReader(std::string filename, int sampling_frequency_in_hz)
       : sampling_frequency_in_hz_(sampling_frequency_in_hz),
-        wav_reader_(filename) {
+        wav_reader_(filename),
+        num_channels_(wav_reader_.num_channels()) {
     RTC_CHECK_EQ(wav_reader_.sample_rate(), sampling_frequency_in_hz);
-    RTC_CHECK_EQ(wav_reader_.num_channels(), 1);
   }
 
   int SamplingFrequency() const override {
     return sampling_frequency_in_hz_;
   }
 
+  int NumChannels() const override {
+    return num_channels_;
+  }
+
   bool Capture(rtc::BufferT<int16_t>* buffer) override {
     buffer->SetData(
-        test::FakeAudioDevice::SamplesPerFrame(sampling_frequency_in_hz_),
+        test::FakeAudioDevice::SamplesPerFrame(sampling_frequency_in_hz_) *
+            num_channels_,
         [&](rtc::ArrayView<int16_t> data) {
-      return wav_reader_.ReadSamples(data.size(), data.data());
-    });
+          return wav_reader_.ReadSamples(data.size(), data.data());
+        });
     return buffer->size() > 0;
   }
 
  private:
   int sampling_frequency_in_hz_;
   WavReader wav_reader_;
+  int num_channels_;
 };
 
 class WavFileWriter final : public test::FakeAudioDevice::Renderer {
  public:
-  WavFileWriter(std::string filename, int sampling_frequency_in_hz)
+  WavFileWriter(std::string filename, int sampling_frequency_in_hz,
+                int num_channels)
       : sampling_frequency_in_hz_(sampling_frequency_in_hz),
-        wav_writer_(filename, sampling_frequency_in_hz, 1) {}
+        wav_writer_(filename, sampling_frequency_in_hz,
+                    num_channels),
+        num_channels_(num_channels) {}
 
   int SamplingFrequency() const override {
     return sampling_frequency_in_hz_;
+  }
+
+  int NumChannels() const override {
+    return num_channels_;
   }
 
   bool Render(rtc::ArrayView<const int16_t> data) override {
@@ -69,20 +83,30 @@ class WavFileWriter final : public test::FakeAudioDevice::Renderer {
  private:
   int sampling_frequency_in_hz_;
   WavWriter wav_writer_;
+  int num_channels_;
 };
 
 class BoundedWavFileWriter : public test::FakeAudioDevice::Renderer {
  public:
-  BoundedWavFileWriter(std::string filename, int sampling_frequency_in_hz)
+  BoundedWavFileWriter(std::string filename,
+                       int sampling_frequency_in_hz,
+                       int num_channels)
       : sampling_frequency_in_hz_(sampling_frequency_in_hz),
-        wav_writer_(filename, sampling_frequency_in_hz, 1),
-        silent_audio_(test::FakeAudioDevice::SamplesPerFrame(
-            sampling_frequency_in_hz), 0),
+        wav_writer_(filename, sampling_frequency_in_hz, num_channels),
+        num_channels_(num_channels),
+        silent_audio_(
+            test::FakeAudioDevice::SamplesPerFrame(sampling_frequency_in_hz) *
+                num_channels,
+            0),
         started_writing_(false),
         trailing_zeros_(0) {}
 
   int SamplingFrequency() const override {
     return sampling_frequency_in_hz_;
+  }
+
+  int NumChannels() const override {
+    return num_channels_;
   }
 
   bool Render(rtc::ArrayView<const int16_t> data) override {
@@ -128,6 +152,7 @@ class BoundedWavFileWriter : public test::FakeAudioDevice::Renderer {
  private:
   int sampling_frequency_in_hz_;
   WavWriter wav_writer_;
+  int num_channels_;
   std::vector<int16_t> silent_audio_;
   bool started_writing_;
   size_t trailing_zeros_;
@@ -136,11 +161,16 @@ class BoundedWavFileWriter : public test::FakeAudioDevice::Renderer {
 
 class DiscardRenderer final : public test::FakeAudioDevice::Renderer {
  public:
-  explicit DiscardRenderer(int sampling_frequency_in_hz)
-      : sampling_frequency_in_hz_(sampling_frequency_in_hz) {}
+  explicit DiscardRenderer(int sampling_frequency_in_hz, int num_channels)
+      : sampling_frequency_in_hz_(sampling_frequency_in_hz),
+        num_channels_(num_channels) {}
 
   int SamplingFrequency() const override {
     return sampling_frequency_in_hz_;
+  }
+
+  int NumChannels() const override {
+    return num_channels_;
   }
 
   bool Render(rtc::ArrayView<const int16_t> data) override {
@@ -149,6 +179,7 @@ class DiscardRenderer final : public test::FakeAudioDevice::Renderer {
 
  private:
   int sampling_frequency_in_hz_;
+  int num_channels_;
 };
 
 }  // namespace
@@ -157,11 +188,13 @@ namespace test {
 // Assuming 10ms audio packets.
 FakeAudioDevice::PulsedNoiseCapturer::PulsedNoiseCapturer(
     int16_t max_amplitude,
-    int sampling_frequency_in_hz)
+    int sampling_frequency_in_hz,
+    int num_channels)
     : sampling_frequency_in_hz_(sampling_frequency_in_hz),
       fill_with_zero_(false),
       random_generator_(1),
-      max_amplitude_(max_amplitude) {
+      max_amplitude_(max_amplitude),
+      num_channels_(num_channels) {
   RTC_DCHECK_GT(max_amplitude, 0);
 }
 
@@ -173,7 +206,8 @@ bool FakeAudioDevice::PulsedNoiseCapturer::Capture(
     rtc::CritScope cs(&lock_);
     max_amplitude = max_amplitude_;
   }
-  buffer->SetData(FakeAudioDevice::SamplesPerFrame(sampling_frequency_in_hz_),
+  buffer->SetData(FakeAudioDevice::SamplesPerFrame(sampling_frequency_in_hz_) *
+                      num_channels_,
                   [&](rtc::ArrayView<int16_t> data) {
                     if (fill_with_zero_) {
                       std::fill(data.begin(), data.end(), 0);
@@ -197,11 +231,14 @@ size_t FakeAudioDevice::SamplesPerFrame(int sampling_frequency_in_hz) {
   return rtc::CheckedDivExact(sampling_frequency_in_hz, kFramesPerSecond);
 }
 
+/*static*/
 std::unique_ptr<FakeAudioDevice::PulsedNoiseCapturer>
 FakeAudioDevice::CreatePulsedNoiseCapturer(int16_t max_amplitude,
-                                           int sampling_frequency_in_hz) {
+                                           int sampling_frequency_in_hz,
+                                           int num_channels) {
   return std::unique_ptr<FakeAudioDevice::PulsedNoiseCapturer>(
-      new PulsedNoiseCapturer(max_amplitude, sampling_frequency_in_hz));
+      new PulsedNoiseCapturer(max_amplitude, sampling_frequency_in_hz,
+                              num_channels));
 }
 
 std::unique_ptr<FakeAudioDevice::Capturer> FakeAudioDevice::CreateWavFileReader(
@@ -218,22 +255,26 @@ std::unique_ptr<FakeAudioDevice::Capturer> FakeAudioDevice::CreateWavFileReader(
 }
 
 std::unique_ptr<FakeAudioDevice::Renderer> FakeAudioDevice::CreateWavFileWriter(
-    std::string filename, int sampling_frequency_in_hz) {
+    std::string filename,
+    int sampling_frequency_in_hz,
+    int num_channels) {
   return std::unique_ptr<FakeAudioDevice::Renderer>(
-      new WavFileWriter(filename, sampling_frequency_in_hz));
+      new WavFileWriter(filename, sampling_frequency_in_hz, num_channels));
 }
 
 std::unique_ptr<FakeAudioDevice::Renderer>
-    FakeAudioDevice::CreateBoundedWavFileWriter(
-        std::string filename, int sampling_frequency_in_hz) {
-  return std::unique_ptr<FakeAudioDevice::Renderer>(
-      new BoundedWavFileWriter(filename, sampling_frequency_in_hz));
+FakeAudioDevice::CreateBoundedWavFileWriter(std::string filename,
+                                            int sampling_frequency_in_hz,
+                                            int num_channels) {
+  return std::unique_ptr<FakeAudioDevice::Renderer>(new BoundedWavFileWriter(
+      filename, sampling_frequency_in_hz, num_channels));
 }
 
 std::unique_ptr<FakeAudioDevice::Renderer>
-    FakeAudioDevice::CreateDiscardRenderer(int sampling_frequency_in_hz) {
+FakeAudioDevice::CreateDiscardRenderer(int sampling_frequency_in_hz,
+                                       int num_channels) {
   return std::unique_ptr<FakeAudioDevice::Renderer>(
-      new DiscardRenderer(sampling_frequency_in_hz));
+      new DiscardRenderer(sampling_frequency_in_hz, num_channels));
 }
 
 
@@ -257,7 +298,8 @@ FakeAudioDevice::FakeAudioDevice(std::unique_ptr<Capturer> capturer,
 
   if (renderer_) {
     const int sample_rate = renderer_->SamplingFrequency();
-    playout_buffer_.resize(SamplesPerFrame(sample_rate), 0);
+    playout_buffer_.resize(
+        SamplesPerFrame(sample_rate) * renderer_->NumChannels(), 0);
     RTC_CHECK(good_sample_rate(sample_rate));
   }
   if (capturer_) {
@@ -347,8 +389,9 @@ void FakeAudioDevice::ProcessAudio() {
       uint32_t new_mic_level;
       if (recording_buffer_.size() > 0) {
         audio_callback_->RecordedDataIsAvailable(
-            recording_buffer_.data(), recording_buffer_.size(), 2, 1,
-            capturer_->SamplingFrequency(), 0, 0, 0, false, new_mic_level);
+            recording_buffer_.data(), recording_buffer_.size(), 2,
+            capturer_->NumChannels(), capturer_->SamplingFrequency(), 0, 0, 0,
+            false, new_mic_level);
       }
       if (!keep_capturing) {
         capturing_ = false;
@@ -361,8 +404,9 @@ void FakeAudioDevice::ProcessAudio() {
       int64_t ntp_time_ms;
       const int sampling_frequency = renderer_->SamplingFrequency();
       audio_callback_->NeedMorePlayData(
-          SamplesPerFrame(sampling_frequency), 2, 1, sampling_frequency,
-          playout_buffer_.data(), samples_out, &elapsed_time_ms, &ntp_time_ms);
+          SamplesPerFrame(sampling_frequency), 2, renderer_->NumChannels(),
+          sampling_frequency, playout_buffer_.data(), samples_out,
+          &elapsed_time_ms, &ntp_time_ms);
       const bool keep_rendering = renderer_->Render(
           rtc::ArrayView<const int16_t>(playout_buffer_.data(), samples_out));
       if (!keep_rendering) {
