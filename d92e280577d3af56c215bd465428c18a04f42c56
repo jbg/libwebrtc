@@ -50,6 +50,24 @@
       "revId": "d92e280577d3af56c215bd465428c18a04f42c56",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b00d41f1_0c714335",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-06T17:17:59Z",
+      "side": 1,
+      "message": "I did a little analysis on this code and determined this as a safe upper bound. In reality, it won\u0027t hit this much, but it\u0027s in the right order of magnitude.\n\nYou raise a good point though that perhaps there ought to be some upper bound on size of logs and in the exception cases such as when logging an entire SDP etc, we could require jumping through one more hoop (e.g. use a different logging macro).",
+      "parentUuid": "7f395df8_bdc0c09c",
+      "revId": "d92e280577d3af56c215bd465428c18a04f42c56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
