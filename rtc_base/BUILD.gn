@@ -131,12 +131,14 @@ rtc_source_set("safe_compare") {
 
 rtc_source_set("stringutils") {
   sources = [
+    "strings/string_builder.cc",
     "strings/string_builder.h",
     "stringutils.cc",
     "stringutils.h",
   ]
   deps = [
     ":checks",
+    "../api:array_view",
   ]
 }
 
