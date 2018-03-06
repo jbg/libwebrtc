@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d6f0621d_a423707f",
+        "filename": "test/fake_audio_device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 6177
+      },
+      "writtenOn": "2018-03-06T17:59:14Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "8764b093_95156972",
+      "revId": "f1a8c07d97d42a1d472410419d68a3d7195f15d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebac9472_768fa51b",
         "filename": "test/fake_audio_device.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "f1a8c07d97d42a1d472410419d68a3d7195f15d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97fdd220_36f40ca9",
+        "filename": "test/fake_audio_device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 6177
+      },
+      "writtenOn": "2018-03-06T17:59:14Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "ebac9472_768fa51b",
+      "revId": "f1a8c07d97d42a1d472410419d68a3d7195f15d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
