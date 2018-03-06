@@ -14,20 +14,20 @@
 #include <cstdio>
 #include <string>
 
+#include "api/array_view.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/stringutils.h"
 
 namespace rtc {
 
-// This is a minimalistic string builder class meant to cover the most cases
-// of when you might otherwise be tempted to use a stringstream (discouraged
-// for anything except logging).
-// This class allocates a fixed size buffer on the stack and concatenates
-// strings and numbers into it, allowing the results to be read via |str()|.
-template <size_t buffer_size>
+// This is a minimalistic string builder class meant to cover the most cases of
+// when you might otherwise be tempted to use a stringstream (discouraged for
+// anything except logging). It uses a fixed-size buffer provided by the caller
+// and concatenates strings and numbers into it, allowing the results to be
+// read via |str()|.
 class SimpleStringBuilder {
  public:
-  SimpleStringBuilder() { buffer_[0] = '\0'; }
+  SimpleStringBuilder(rtc::ArrayView<char> buffer);
   SimpleStringBuilder(const SimpleStringBuilder&) = delete;
   SimpleStringBuilder& operator=(const SimpleStringBuilder&) = delete;
 
@@ -80,7 +80,7 @@ class SimpleStringBuilder {
   // Returns a pointer to the built string. The name |str()| is borrowed for
   // compatibility reasons as we replace usage of stringstream throughout the
   // code base.
-  const char* str() const { return &buffer_[0]; }
+  const char* str() const { return buffer_.data(); }
 
   // Returns the length of the string. The name |size()| is picked for STL
   // compatibility reasons.
@@ -90,7 +90,8 @@ class SimpleStringBuilder {
   SimpleStringBuilder& AppendFormat(const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
-    int len = std::vsnprintf(&buffer_[size_], buffer_size - size_, fmt, args);
+    const int len =
+        std::vsnprintf(&buffer_[size_], buffer_.size() - size_, fmt, args);
     RTC_DCHECK_GE(len, 0);
     // Negative values are likely programmer error, but let's not update the
     // length if so.
@@ -104,24 +105,23 @@ class SimpleStringBuilder {
   // slightly more efficient when the length of the string to append, is known.
   SimpleStringBuilder& Append(const char* str, size_t length = SIZE_UNKNOWN) {
     AddToLength(
-        rtc::strcpyn(&buffer_[size_], buffer_size - size_, str, length));
+        rtc::strcpyn(&buffer_[size_], buffer_.size() - size_, str, length));
     return *this;
   }
 
  private:
   void AddToLength(size_t chars_added) {
     size_ += chars_added;
+    RTC_DCHECK_LE(size_, buffer_.size() - 1)
+        << "Buffer size limit reached (" << buffer_.size() << ")";
     RTC_DCHECK_EQ('\0', buffer_[size_]);
-    RTC_DCHECK_LE(size_, buffer_size - 1)
-        << "Buffer size limit reached (" << buffer_size << ")";
   }
 
-  // An always-zero-terminated fixed buffer that we write to.
-  // Assuming the SimpleStringBuilder instance lives on the stack, this
-  // buffer will be stack allocated, which is done for performance reasons.
+  // An always-zero-terminated fixed-size buffer that we write to. The fixed
+  // size allows the buffer to be stack allocated, which helps performance.
   // Having a fixed size is furthermore useful to avoid unnecessary resizing
   // while building it.
-  char buffer_[buffer_size];  // NOLINT
+  const rtc::ArrayView<char> buffer_;
 
   // Represents the number of characters written to the buffer.
   // This does not include the terminating '\0'.

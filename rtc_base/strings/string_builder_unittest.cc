@@ -17,7 +17,8 @@
 namespace rtc {
 
 TEST(SimpleStringBuilder, Limit) {
-  SimpleStringBuilder<10> sb;
+  char sb_buf[10];
+  SimpleStringBuilder sb(sb_buf);
   EXPECT_EQ(0u, strlen(sb.str()));
 
   // Test that for a SSB with a buffer size of 10, that we can write 9 chars
@@ -27,14 +28,16 @@ TEST(SimpleStringBuilder, Limit) {
 }
 
 TEST(SimpleStringBuilder, NumbersAndChars) {
-  SimpleStringBuilder<100> sb;
+  char sb_buf[100];
+  SimpleStringBuilder sb(sb_buf);
   sb << 1 << ':' << 2.1 << ":" << 2.2f << ':' << 78187493520ll << ':'
      << 78187493520ul;
   EXPECT_EQ(0, strcmp(sb.str(), "1:2.100000:2.200000:78187493520:78187493520"));
 }
 
 TEST(SimpleStringBuilder, Format) {
-  SimpleStringBuilder<100> sb;
+  char sb_buf[100];
+  SimpleStringBuilder sb(sb_buf);
   sb << "Here we go - ";
   sb.AppendFormat("This is a hex formatted value: 0x%08x", 3735928559);
   EXPECT_EQ(0,
@@ -43,7 +46,8 @@ TEST(SimpleStringBuilder, Format) {
 }
 
 TEST(SimpleStringBuilder, StdString) {
-  SimpleStringBuilder<100> sb;
+  char sb_buf[100];
+  SimpleStringBuilder sb(sb_buf);
   std::string str = "does this work?";
   sb << str;
   EXPECT_EQ(str, sb.str());
