@@ -16,6 +16,24 @@
       "revId": "df023aa6b434e6845fa06a0dc3be0d6268658063",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10597003_c29ab2c8",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-06T09:40:51Z",
+      "side": 0,
+      "message": "All known callers are updated. But no PSA. I can send out one if you think that is appropriate.\n\nI\u0027ve been working under the assumption that VideoCodec (and lot of other stuff in common_types.h) is considered internal. common_types.h isn\u0027t listed in native-api.md, but it is included indirectly from lots of places.\n\nThe problem here is that RegisterSendPayload needs to know rtp-details, and I want to purge those details from the VideoCodec struct. The replacement is RegisterVideoSendPayload, below. It was added by pbos two years ago, in cl https://codereview.webrtc.org/1725363003.",
+      "parentUuid": "f4d681fd_44e5cb81",
+      "revId": "df023aa6b434e6845fa06a0dc3be0d6268658063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
