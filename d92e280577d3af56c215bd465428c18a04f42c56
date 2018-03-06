@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34404142_a36ca56c",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-06T12:41:38Z",
+      "side": 1,
+      "message": "if (len \u003c 0)\n  buffer_[size_] \u003d \u0027\\0\u0027;\n\n?\n\nIt doesn\u0027t look like vsnprintf makes guarantees about not touching the buffer if the encoding is somehow wrong/terminated. At least I can\u0027t find docs claiming the resulting string will always be null terminated.",
+      "revId": "d92e280577d3af56c215bd465428c18a04f42c56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e262089_ea3bf6c1",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-06T12:41:38Z",
+      "side": 1,
+      "message": "Can we have one or more death tests to make sure logic is water tight when buffer limit is reached?",
+      "revId": "d92e280577d3af56c215bd465428c18a04f42c56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f395df8_bdc0c09c",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-06T12:41:38Z",
+      "side": 1,
+      "message": "Gosh! 8kB logs? Really?",
+      "revId": "d92e280577d3af56c215bd465428c18a04f42c56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
