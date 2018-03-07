@@ -35,6 +35,8 @@ class TestAudioDeviceModule : public AudioDeviceModule {
     // Returns the sampling frequency in Hz of the audio data that this
     // capturer produces.
     virtual int SamplingFrequency() const = 0;
+    // Returns the number of channels of captured audio data.
+    virtual int NumChannels() const = 0;
     // Replaces the contents of |buffer| with 10ms of captured audio data
     // (see TestAudioDeviceModule::SamplesPerFrame). Returns true if the
     // capturer can keep producing data, or false when the capture finishes.
@@ -47,6 +49,8 @@ class TestAudioDeviceModule : public AudioDeviceModule {
     // Returns the sampling frequency in Hz of the audio data that this
     // renderer receives.
     virtual int SamplingFrequency() const = 0;
+    // Returns the number of channels of audio data to be required.
+    virtual int NumChannels() const = 0;
     // Renders the passed audio data and returns true if the renderer wants
     // to keep receiving data, or false otherwise.
     virtual bool Render(rtc::ArrayView<const int16_t> data) = 0;
@@ -80,7 +84,8 @@ class TestAudioDeviceModule : public AudioDeviceModule {
   // with max amplitude |max_amplitude|.
   static std::unique_ptr<PulsedNoiseCapturer> CreatePulsedNoiseCapturer(
       int16_t max_amplitude,
-      int sampling_frequency_in_hz);
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   // Returns a Capturer instance that gets its data from a file.
   static std::unique_ptr<Capturer> CreateWavFileReader(
@@ -94,18 +99,21 @@ class TestAudioDeviceModule : public AudioDeviceModule {
   // Returns a Renderer instance that writes its data to a file.
   static std::unique_ptr<Renderer> CreateWavFileWriter(
       std::string filename,
-      int sampling_frequency_in_hz);
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   // Returns a Renderer instance that writes its data to a WAV file, cutting
   // off silence at the beginning (not necessarily perfect silence, see
   // kAmplitudeThreshold) and at the end (only actual 0 samples in this case).
   static std::unique_ptr<Renderer> CreateBoundedWavFileWriter(
       std::string filename,
-      int sampling_frequency_in_hz);
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   // Returns a Renderer instance that does nothing with the audio data.
   static std::unique_ptr<Renderer> CreateDiscardRenderer(
-      int sampling_frequency_in_hz);
+      int sampling_frequency_in_hz,
+      int num_channels = 1);
 
   virtual int32_t Init() = 0;
   virtual int32_t RegisterAudioCallback(AudioTransport* callback) = 0;
