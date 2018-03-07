@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcd9aaf2_5db5a47c",
+        "filename": "test/fake_audio_device.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-03-07T09:59:28Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "adda15c342423546ca1ef3967629d9c6cf0bef9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
