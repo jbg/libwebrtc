@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f1ae342_923af1b6",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-07T18:04:45Z",
+      "side": 1,
+      "message": "can we move this and Append to the cc file?",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3958c453_e6ead1b7",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-07T18:04:45Z",
+      "side": 1,
+      "message": "Thanks for adding these :)",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 37
+      },
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
