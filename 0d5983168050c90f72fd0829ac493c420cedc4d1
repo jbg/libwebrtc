@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d296a33_5e0087a2",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-03-08T10:12:43Z",
+      "side": 1,
+      "message": "These members will be changed and cleaned up in the followup CL: https://webrtc-review.googlesource.com/c/src/+/60760.",
+      "revId": "0d5983168050c90f72fd0829ac493c420cedc4d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
