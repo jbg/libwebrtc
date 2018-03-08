@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "31c2763c_26b311f5",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T09:44:04Z",
+      "side": 1,
+      "message": "super nit: this could be const",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3958c453_e6ead1b7",
         "filename": "rtc_base/strings/string_builder_unittest.cc",
         "patchSetId": 9
@@ -36,6 +53,40 @@
         "endLine": 59,
         "endChar": 37
       },
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51f625bc_c4644da2",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T09:44:04Z",
+      "side": 1,
+      "message": "Paranoid me also would like tests for appending std::string and formatted str when buffer is completely full. You may be able to twist my arm though. :)",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93f8442f_ef3f0ea1",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T09:44:04Z",
+      "side": 1,
+      "message": "perhaps leave a comment about why we can expect different results here",
       "revId": "a76c95853e620a3f398caff235501953f3355892",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
