@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce093041_6c069dbf",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-08T14:05:54Z",
+      "side": 1,
+      "message": "Yes, and the operator\u003c\u003c functions as well. But I was hoping to do so in a separate CL---this one is already larger than it should be.",
+      "parentUuid": "3f1ae342_923af1b6",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31c2763c_26b311f5",
         "filename": "rtc_base/strings/string_builder.h",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "a76c95853e620a3f398caff235501953f3355892",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "944d6b6f_e329d291",
+        "filename": "rtc_base/strings/string_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-08T14:05:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c2763c_26b311f5",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +112,24 @@
     },
     {
       "key": {
+        "uuid": "c95805f7_6d6152e7",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-08T14:05:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51f625bc_c4644da2",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93f8442f_ef3f0ea1",
         "filename": "rtc_base/strings/string_builder_unittest.cc",
         "patchSetId": 9
@@ -87,6 +141,24 @@
       "writtenOn": "2018-03-08T09:44:04Z",
       "side": 1,
       "message": "perhaps leave a comment about why we can expect different results here",
+      "revId": "a76c95853e620a3f398caff235501953f3355892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ea1043e_fb3196e7",
+        "filename": "rtc_base/strings/string_builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-08T14:05:54Z",
+      "side": 1,
+      "message": "Sure. (It\u0027s not that we *expect* different results, it\u0027s just that we\u0027re *fine* with either of these two alternatives.)",
+      "parentUuid": "93f8442f_ef3f0ea1",
       "revId": "a76c95853e620a3f398caff235501953f3355892",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
