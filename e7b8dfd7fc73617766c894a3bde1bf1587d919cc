@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21c6df3c_ebfded8b",
+        "filename": "modules/audio_device/include/test_audio_device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T10:22:30Z",
+      "side": 1,
+      "message": "Please don\u0027t use default arguments.",
+      "revId": "e7b8dfd7fc73617766c894a3bde1bf1587d919cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e256b27_0f6f2abe",
+        "filename": "modules/audio_device/include/test_audio_device_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T10:22:30Z",
+      "side": 1,
+      "message": "nit: could be const",
+      "revId": "e7b8dfd7fc73617766c894a3bde1bf1587d919cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18e53171_f4f2642c",
+        "filename": "modules/audio_device/include/test_audio_device_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T10:22:30Z",
+      "side": 1,
+      "message": "it doesn\u0027t look right that we read num_channels from the file but specify sample rate programmatically. Since we don\u0027t do rate conversion it seems we *must* get rate from the file. Can you please update (perhaps in a follow up CL)?",
+      "revId": "e7b8dfd7fc73617766c894a3bde1bf1587d919cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cab57d6_d568f70c",
+        "filename": "modules/audio_device/include/test_audio_device_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-08T10:22:30Z",
+      "side": 1,
+      "message": "super nit: sampling rate, num channels, wav reader is a nicer ordering",
+      "revId": "e7b8dfd7fc73617766c894a3bde1bf1587d919cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
