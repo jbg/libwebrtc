@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4b51a059_dd90c112",
+        "filename": "modules/audio_device/include/test_audio_device_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-03-08T11:27:24Z",
+      "side": 1,
+      "message": "Agree. Missed that part. One idea is to add an RTC_CHECK() to handle it for now to ensure that you don\u0027t try to open a stereo file in mono mode.",
+      "parentUuid": "18e53171_f4f2642c",
+      "revId": "e7b8dfd7fc73617766c894a3bde1bf1587d919cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8cab57d6_d568f70c",
         "filename": "modules/audio_device/include/test_audio_device_impl.cc",
         "patchSetId": 10
