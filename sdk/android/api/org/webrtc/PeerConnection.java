@@ -398,6 +398,12 @@ public class PeerConnection {
     public Integer iceCheckIntervalStrongConnectivityMs;
     public Integer iceCheckIntervalWeakConnectivityMs;
     public Integer iceCheckMinInterval;
+    // The time period in milliseconds for which a candidate pair must wait for response to
+    // connectivitiy checks before it becomes unwritable.
+    public Integer iceUnwritableTimeMs;
+    // The minimum number of connectivity checks that a candidate pair must sent without receiving
+    // response before it becomes unwritable.
+    public Integer iceUnwritableMinChecks;
     // The interval in milliseconds at which STUN candidates will resend STUN binding requests
     // to keep NAT bindings open.
     // The default value in the implementation is used if this field is null.
@@ -451,6 +457,8 @@ public class PeerConnection {
       iceCheckIntervalStrongConnectivityMs = null;
       iceCheckIntervalWeakConnectivityMs = null;
       iceCheckMinInterval = null;
+      iceUnwritableTimeMs = null;
+      iceUnwritableMinChecks = null;
       stunCandidateKeepaliveIntervalMs = null;
       disableIPv6OnWifi = false;
       maxIPv6Networks = 5;
@@ -555,6 +563,16 @@ public class PeerConnection {
     @CalledByNative("RTCConfiguration")
     Integer getIceCheckMinInterval() {
       return iceCheckMinInterval;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    Integer getIceUnwritableTimeout() {
+      return iceUnwritableTimeMs;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    Integer getIceUnwritableMinChecks() {
+      return iceUnwritableMinChecks;
     }
 
     @CalledByNative("RTCConfiguration")
