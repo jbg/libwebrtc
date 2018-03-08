@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "6846fe6f_37e08ea6",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-08T14:23:05Z",
+      "side": 1,
+      "message": "nice that this has been moved to separate function.",
+      "range": {
+        "startLine": 66,
+        "startChar": 5,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "0d5983168050c90f72fd0829ac493c420cedc4d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93293e71_0ad2ed3a",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-08T14:23:05Z",
+      "side": 1,
+      "message": "if this is the only purpose to have this map, then maybe it can be replaced with just \u0027size_t last_input_timestamp_;\u0027?",
+      "range": {
+        "startLine": 232,
+        "startChar": 27,
+        "endLine": 232,
+        "endChar": 51
+      },
+      "revId": "0d5983168050c90f72fd0829ac493c420cedc4d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d296a33_5e0087a2",
         "filename": "modules/video_coding/codecs/test/videoprocessor.h",
         "patchSetId": 8
