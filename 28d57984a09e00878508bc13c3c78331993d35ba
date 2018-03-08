@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c8ecde2_031edf28",
+        "filename": "sdk/android/src/jni/pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-03-08T08:35:59Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think these comments add any clarity and are just clutter. Please remove.",
+      "range": {
+        "startLine": 191,
+        "startChar": 2,
+        "endLine": 191,
+        "endChar": 28
+      },
+      "revId": "28d57984a09e00878508bc13c3c78331993d35ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
