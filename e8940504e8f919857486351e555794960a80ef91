@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d99e0da7_8ef5b6ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-09T10:40:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cfd8ba77_1ddcc73f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b4120b1_2d14e6f3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "e8940504e8f919857486351e555794960a80ef91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ceb5e18_3ac88f91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-09T10:40:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6b4120b1_2d14e6f3",
+      "range": {
+        "startLine": 14,
+        "startChar": 45,
+        "endLine": 14,
+        "endChar": 49
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "17152ac6_a5da965c",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-09T10:40:49Z",
+      "side": 1,
+      "message": "Agreed, will try to move the send side parts to RtpTransportControllerSend.",
+      "parentUuid": "6c7cfd73_57f75e2f",
+      "range": {
+        "startLine": 346,
+        "startChar": 2,
+        "endLine": 346,
+        "endChar": 73
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f82cd82_c16905d3",
         "filename": "modules/congestion_controller/network_control/include/network_control.h",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2018-03-09T08:43:48Z",
       "side": 1,
       "message": "This seems to overlap the NetworkChangeObserver quite a bit. I don\u0027t think it\u0027s motivated to add a new interface just because it\u0027s neater to pack arguments in a struct.\n\nWhen doing changes like that, I think it\u0027s good practice to make a cl deleting the old interface and replacing *all* use by the new one (even if that\u0027s a breaking change, not immediately landable). Then you will (i) find out if the new interface is an adequate substitute for the old, in all use cases, (ii) find appropriate reviewers for the design change, (iii) get a better idea of the additional steps needed to transition. \n\nPlease add a comment on at least one of the two interfaces saying how they differ, and what the plan is for deleting NetworkChangeObserver.",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4f2d11c_a69044f5",
+        "filename": "modules/congestion_controller/network_control/include/network_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-09T10:40:49Z",
+      "side": 1,
+      "message": "Yes, they represent the same thing, the plan is to deprecate NetworkChangedObserver, it is only kept to keep compatibility with the old SSCC interface that is exposed externally. The NetworkChangedObserver interface is currently implemented only by Call, the analyzer and unittests for SSCC.\n\nWould it be good enough to add a comment explaining that it is to be deprecated where the NetworkChangedObserver interface is defined?",
+      "parentUuid": "3f82cd82_c16905d3",
       "range": {
         "startLine": 21,
         "startChar": 6,
