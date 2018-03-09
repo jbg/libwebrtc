@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e849e733_9ec1cee6",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-03-09T10:34:48Z",
+      "side": 1,
+      "message": "That\u0027s one good way to fix the issue.\nMore straight-forward fix would be to use StoredPacket constructor explicitly:\npacket_history_.emplace(rtp_seq_no, StoredPacket(std::move(packet)));\n(then make_pair would use implicit move constructor)",
+      "revId": "cf4910d1144ffd4fdc0487f6b380bca1baf52513",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
