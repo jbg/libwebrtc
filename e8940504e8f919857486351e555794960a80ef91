@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfd8ba77_1ddcc73f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-09T08:43:48Z",
+      "side": 1,
+      "message": "First line should say explicitly which method is deleted.\n\nRest of message should briefly explain why the change is needed, and where responsibility is moved instead (new stats state in Call, if I understand it correctly).",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b4120b1_2d14e6f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-09T08:43:48Z",
+      "side": 1,
+      "message": "Avoid abbreviations like this in the commit log. Meaning is going to be less and less obvious with time.",
+      "range": {
+        "startLine": 14,
+        "startChar": 45,
+        "endLine": 14,
+        "endChar": 49
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c7cfd73_57f75e2f",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-09T08:43:48Z",
+      "side": 1,
+      "message": "Moving here is an improvement, but maybe some or all of Call::GetStats should be moved over to RtpTransportControllerSend, where it would make more sense?",
+      "range": {
+        "startLine": 346,
+        "startChar": 2,
+        "endLine": 346,
+        "endChar": 73
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f82cd82_c16905d3",
+        "filename": "modules/congestion_controller/network_control/include/network_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-09T08:43:48Z",
+      "side": 1,
+      "message": "This seems to overlap the NetworkChangeObserver quite a bit. I don\u0027t think it\u0027s motivated to add a new interface just because it\u0027s neater to pack arguments in a struct.\n\nWhen doing changes like that, I think it\u0027s good practice to make a cl deleting the old interface and replacing *all* use by the new one (even if that\u0027s a breaking change, not immediately landable). Then you will (i) find out if the new interface is an adequate substitute for the old, in all use cases, (ii) find appropriate reviewers for the design change, (iii) get a better idea of the additional steps needed to transition. \n\nPlease add a comment on at least one of the two interfaces saying how they differ, and what the plan is for deleting NetworkChangeObserver.",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
