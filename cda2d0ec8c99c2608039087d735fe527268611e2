@@ -16,6 +16,24 @@
       "revId": "cda2d0ec8c99c2608039087d735fe527268611e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1acac7ac_9fe78e59",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-03-09T12:53:37Z",
+      "side": 1,
+      "message": "Nvm, the problem was caused by misconfiguring the encoder in the affected test.",
+      "parentUuid": "92d8ca13_7ce94903",
+      "revId": "cda2d0ec8c99c2608039087d735fe527268611e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
