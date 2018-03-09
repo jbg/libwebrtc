@@ -211,6 +211,30 @@
       "revId": "e8940504e8f919857486351e555794960a80ef91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95c60f18_36d0671c",
+        "filename": "modules/congestion_controller/network_control/include/network_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-09T12:02:55Z",
+      "side": 1,
+      "message": "I think so. Add a deprecation comment of NetworkChangedObserver, refer to this interface there, and say which of the current values (loss rate, rtt, ...), we no longer care about observing).\n\n(Also I\u0027m not so fond of the name \"TransferRate\". For one, it\u0027s about the *sending* rate, and second, it contains more than just a *rate*. But this isn\u0027t the right cl to change that).",
+      "parentUuid": "c4f2d11c_a69044f5",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "e8940504e8f919857486351e555794960a80ef91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
