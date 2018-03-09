@@ -16,6 +16,24 @@
       "revId": "d42712eb77f1ce4e01d66910123ed840561ab874",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6fb7515_6b611af0",
+        "filename": "modules/audio_device/include/test_audio_device.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 6177
+      },
+      "writtenOn": "2018-03-09T08:25:39Z",
+      "side": 1,
+      "message": "There are a bunch of reference to CreatePulsedNoiseCapturer inside or outside of webrtc:\nhttps://cs.corp.google.com/search/?q\u003dCreatePulsedNoiseCapturer\u0026sq\u003dpackage:piper+file://depot/google3+-file:google3/experimental\u0026type\u003dcs\n\nThis default arguments is needed to avoding break them.",
+      "parentUuid": "d279e119_75ac967f",
+      "revId": "d42712eb77f1ce4e01d66910123ed840561ab874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
