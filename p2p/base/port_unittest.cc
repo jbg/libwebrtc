@@ -2559,6 +2559,11 @@ TEST_F(PortTest, TestConnectionPriority) {
 #endif
 }
 
+// TODO(qingsi): Note that the correctness of using constant 500 as an upper
+// bound of RTT in the following tests depends on the link rate and the delay
+// distriubtion configured in VirtualSocketServer::AddPacketToNetwork. The tests
+// below use the default setup where the RTT is deterministically zero. Make the
+// test robust to changes of implementation of VirtualSocketServer.
 TEST_F(PortTest, TestWritableState) {
   rtc::ScopedFakeClock clock;
   UDPPort* port1 = CreateUdpPort(kLocalAddr1);
@@ -2615,7 +2620,6 @@ TEST_F(PortTest, TestWritableState) {
   // responses.
   EXPECT_EQ_SIMULATED_WAIT(Connection::STATE_WRITABLE,
                            ch1.conn()->write_state(), kDefaultTimeout, clock);
-
   // Wait long enough for a full timeout (past however long we've already
   // waited).
   for (uint32_t i = 1; i <= CONNECTION_WRITE_CONNECT_FAILURES; ++i) {
@@ -2628,6 +2632,67 @@ TEST_F(PortTest, TestWritableState) {
   // Even if the connection has timed out, the Connection shouldn't block
   // the sending of data.
   EXPECT_EQ(data_size, ch1.conn()->Send(data, data_size, options));
+
+  ch1.Stop();
+  ch2.Stop();
+}
+
+// Test writability states using the configured threshold value to replace
+// the default value given by |CONNECTION_WRITE_CONNECT_TIMEOUT| and
+// |CONNECTION_WRITE_CONNECT_FAILURES|.
+TEST_F(PortTest, TestWritableStateWithConfiguredThreshold) {
+  rtc::ScopedFakeClock clock;
+  UDPPort* port1 = CreateUdpPort(kLocalAddr1);
+  port1->SetIceRole(cricket::ICEROLE_CONTROLLING);
+  UDPPort* port2 = CreateUdpPort(kLocalAddr2);
+  port2->SetIceRole(cricket::ICEROLE_CONTROLLED);
+
+  // Set up channels.
+  TestChannel ch1(port1);
+  TestChannel ch2(port2);
+
+  // Acquire addresses.
+  ch1.Start();
+  ch2.Start();
+  ASSERT_EQ_SIMULATED_WAIT(1, ch1.complete_count(), kDefaultTimeout, clock);
+  ASSERT_EQ_SIMULATED_WAIT(1, ch2.complete_count(), kDefaultTimeout, clock);
+
+  // Send a ping from src to dst.
+  ch1.CreateConnection(GetCandidate(port2));
+  ASSERT_TRUE(ch1.conn() != NULL);
+  EXPECT_EQ(Connection::STATE_WRITE_INIT, ch1.conn()->write_state());
+  // for TCP connect
+  EXPECT_TRUE_SIMULATED_WAIT(ch1.conn()->connected(), kDefaultTimeout, clock);
+  ch1.Ping();
+  SIMULATED_WAIT(!ch2.remote_address().IsNil(), kShortTimeout, clock);
+
+  // Accept the connection to return the binding response, transition to
+  // writable, and allow data to be sent.
+  ch2.AcceptConnection(GetCandidate(port1));
+  EXPECT_EQ_SIMULATED_WAIT(Connection::STATE_WRITABLE,
+                           ch1.conn()->write_state(), kDefaultTimeout, clock);
+
+  ch1.conn()->set_unwritable_timeout(1000);
+  ch1.conn()->set_unwritable_min_checks(3);
+  // Send two checks.
+  ch1.Ping(1);
+  ch1.Ping(2);
+  // We have not reached the timeout nor have we sent the minimum number of
+  // checks to change the state to Unreliable.
+  ch1.conn()->UpdateState(999);
+  EXPECT_EQ(Connection::STATE_WRITABLE, ch1.conn()->write_state());
+  // We have not send the minimum number of checks without responses.
+  ch1.conn()->UpdateState(1000 + 500);
+  EXPECT_EQ(Connection::STATE_WRITABLE, ch1.conn()->write_state());
+  // Last ping after which the candidate pair should become Unreliable after
+  // timeout.
+  ch1.Ping(3);
+  // We have not reached the timeout.
+  ch1.conn()->UpdateState(999);
+  EXPECT_EQ(Connection::STATE_WRITABLE, ch1.conn()->write_state());
+  // We should be in the state Unreliable now.
+  ch1.conn()->UpdateState(1000 + 500);
+  EXPECT_EQ(Connection::STATE_WRITE_UNRELIABLE, ch1.conn()->write_state());
 
   ch1.Stop();
   ch2.Stop();
