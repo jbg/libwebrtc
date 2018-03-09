@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ef45fb2c_4603be3f",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-09T23:20:09Z",
+      "side": 1,
+      "message": "I missed the setters. Thanks for spotting it!",
+      "parentUuid": "fcab34f2_477649ad",
+      "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31f9024c_33d6b797",
         "filename": "p2p/base/port.h",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2018-03-09T21:40:29Z",
       "side": 1,
       "message": "So this will abort if trying to increase the write timeout greater than the default? I\u0027d rather not do this; we generally only use RTC_CHECK to enforce internal assumptions. Invalid input from a public API call should return an error rather than crashing.",
+      "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "032d2e21_105f2706",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-09T23:20:09Z",
+      "side": 1,
+      "message": "The default of unwritable_timeout_ is CONNECTION_WRITE_CONNECT_TIMEOUT (x-\u003eunreliable transition). CONNECTION_WRITE_TIMEOUT triggers x-\u003etimeout. I was trying to avoid premature state transitions to timeout. Do you have any suggestion/example in our code to properly handle the error by our convention?",
+      "parentUuid": "31f9024c_33d6b797",
       "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "eb977c5d_8541c40b",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2565,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-09T23:20:09Z",
+      "side": 1,
+      "message": "I updated this comment after our discussion. PTAL.",
+      "parentUuid": "b2be0ade_7cb54fd6",
+      "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d7e8e05_6b5f68b3",
         "filename": "p2p/base/port_unittest.cc",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd2f2d16_99750086",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2659,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-09T23:20:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d7e8e05_6b5f68b3",
+      "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
