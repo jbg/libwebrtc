@@ -18,6 +18,7 @@ namespace webrtc {
 // These classes are not part of the API, and are treated as opaque pointers.
 class Call;
 struct CallConfig;
+class RtpTransportControllerSendInterface;
 
 // This interface exists to allow webrtc to be optionally built without media
 // support (i.e., if only being used for data channels). PeerConnectionFactory
@@ -27,6 +28,9 @@ class CallFactoryInterface {
   virtual ~CallFactoryInterface() {}
 
   virtual Call* CreateCall(const CallConfig& config) = 0;
+  virtual Call* CreateCall(
+      const CallConfig& config,
+      std::unique_ptr<RtpTransportControllerSendInterface> transport_send) = 0;
 };
 
 std::unique_ptr<CallFactoryInterface> CreateCallFactory();

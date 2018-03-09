@@ -11,7 +11,10 @@
 #ifndef CALL_CALLFACTORY_H_
 #define CALL_CALLFACTORY_H_
 
+#include <memory>
+
 #include "api/call/callfactoryinterface.h"
+#include "call/rtp_transport_controller_send_interface.h"
 
 namespace webrtc {
 
@@ -19,6 +22,9 @@ class CallFactory : public CallFactoryInterface {
   ~CallFactory() override {}
 
   Call* CreateCall(const CallConfig& config) override;
+  Call* CreateCall(const CallConfig& config,
+                   std::unique_ptr<RtpTransportControllerSendInterface>
+                       transport_send) override;
 };
 
 }  // namespace webrtc

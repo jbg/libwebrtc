@@ -14,6 +14,7 @@
 
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "call/callfactory.h"
 #include "call/rtp_transport_controller_send.h"
 #include "call/video_config.h"
 #include "modules/audio_mixer/audio_mixer_impl.h"
@@ -175,11 +176,12 @@ void CallTest::CreateSenderCall(const Call::Config& config) {
       rtc::MakeUnique<RtpTransportControllerSend>(
           Clock::GetRealTimeClock(), config.event_log, config.bitrate_config);
   sender_call_transport_controller_ = controller_send.get();
-  sender_call_.reset(Call::Create(config, std::move(controller_send)));
+  sender_call_.reset(
+      CreateCallFactory()->CreateCall(config, std::move(controller_send)));
 }
 
 void CallTest::CreateReceiverCall(const Call::Config& config) {
-  receiver_call_.reset(Call::Create(config));
+  receiver_call_.reset(CreateCallFactory()->CreateCall(config));
 }
 
 void CallTest::DestroyCalls() {
