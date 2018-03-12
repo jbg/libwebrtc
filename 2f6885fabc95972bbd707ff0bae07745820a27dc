@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1705149b_2d9ba944",
+        "filename": "modules/congestion_controller/send_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T15:48:49Z",
+      "side": 1,
+      "message": "Should we clarify the thread model for this method somehow? It\u0027s a bit unclear now I think.",
+      "range": {
+        "startLine": 411,
+        "startChar": 2,
+        "endLine": 411,
+        "endChar": 41
+      },
+      "revId": "2f6885fabc95972bbd707ff0bae07745820a27dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
