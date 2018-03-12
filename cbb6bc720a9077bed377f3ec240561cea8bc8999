@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf03b842_826ea72c",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-03-12T13:17:21Z",
+      "side": 1,
+      "message": "what is the type of the rtx_ssrc?\nif it is optional, may be check with .has_value() (to stress it is optional)\nif it is an uint32_t, then check with explicit compare: !\u003d 0 or !\u003d kUndefinedSsrc;",
+      "range": {
+        "startLine": 603,
+        "startChar": 18,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "cbb6bc720a9077bed377f3ec240561cea8bc8999",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
