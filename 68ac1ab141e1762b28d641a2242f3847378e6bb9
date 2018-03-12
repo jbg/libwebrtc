@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28d1bb38_070d6461",
+        "filename": "call/degraded_call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-12T09:45:46Z",
+      "side": 1,
+      "message": "Should we not degrade the call if a FecController is used?",
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
