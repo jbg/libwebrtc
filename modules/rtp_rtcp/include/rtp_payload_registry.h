@@ -52,8 +52,6 @@ class RTPPayloadRegistry {
 
   bool GetRtxSsrc(uint32_t* ssrc) const;
 
-  bool IsRed(const RTPHeader& header) const;
-
   int GetPayloadTypeFrequency(uint8_t payload_type) const;
 
   rtc::Optional<RtpUtility::Payload> PayloadTypeToPayload(

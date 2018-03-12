@@ -150,13 +150,6 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
     RTC_CHECK(AddReceiveCodec(ulpfec_codec));
   }
 
-  if (IsRedEnabled()) {
-    VideoCodec red_codec = {};
-    red_codec.codecType = kVideoCodecRED;
-    red_codec.plType = config_.rtp.red_payload_type;
-    RTC_CHECK(AddReceiveCodec(red_codec));
-  }
-
   if (config_.rtp.rtcp_xr.receiver_reference_time_report)
     rtp_rtcp_->SetRtcpXrRrtrStatus(true);
 
@@ -356,10 +349,6 @@ bool RtpVideoStreamReceiver::IsUlpfecEnabled() const {
   return config_.rtp.ulpfec_payload_type != -1;
 }
 
-bool RtpVideoStreamReceiver::IsRedEnabled() const {
-  return config_.rtp.red_payload_type != -1;
-}
-
 bool RtpVideoStreamReceiver::IsRetransmissionsEnabled() const {
   return config_.rtp.nack.rtp_history_ms > 0;
 }
@@ -435,7 +424,7 @@ void RtpVideoStreamReceiver::RemoveSecondarySink(
 void RtpVideoStreamReceiver::ReceivePacket(const uint8_t* packet,
                                            size_t packet_length,
                                            const RTPHeader& header) {
-  if (rtp_payload_registry_.IsRed(header)) {
+  if (header.payloadType == config_.rtp.red_payload_type) {
     ParseAndHandleEncapsulatingHeader(packet, packet_length, header);
     return;
   }
@@ -453,7 +442,7 @@ void RtpVideoStreamReceiver::ReceivePacket(const uint8_t* packet,
 void RtpVideoStreamReceiver::ParseAndHandleEncapsulatingHeader(
     const uint8_t* packet, size_t packet_length, const RTPHeader& header) {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&worker_task_checker_);
-  if (rtp_payload_registry_.IsRed(header)) {
+  if (header.payloadType == config_.rtp.red_payload_type) {
     int8_t ulpfec_pt = rtp_payload_registry_.ulpfec_payload_type();
     if (packet[header.headerLength] == ulpfec_pt) {
       rtp_receive_statistics_->FecPacketReceived(header, packet_length);
