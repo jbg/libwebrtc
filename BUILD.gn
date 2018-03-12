@@ -171,6 +171,7 @@ config("common_inherited_config") {
 
 config("common_config") {
   cflags = []
+  cflags_c = []
   cflags_cc = []
   defines = []
 
@@ -221,6 +222,7 @@ config("common_config") {
         "-Wno-missing-field-initializers",
         "-Wno-strict-overflow",
       ]
+      cflags_c += [ "-Wstrict-prototypes" ]
       cflags_cc = [
         "-Wnon-virtual-dtor",
 
