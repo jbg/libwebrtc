@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0aaa22d_f121b412",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-12T22:56:36Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need to check STATE_WRITE_INIT for this test",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca7f0396_d0e932f1",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2665,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-12T22:56:36Z",
+      "side": 1,
+      "message": "nit: Not TCP, so not needed",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "361bafbd_c68595f9",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-12T22:56:36Z",
+      "side": 1,
+      "message": "nit: \"not sent\"",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d3fe06f_6e6f1ffe",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-12T22:56:36Z",
+      "side": 1,
+      "message": "Why \"+ 500\"? Oh, because UpdateState takes into account the RTT... The comment above is starting to make more sense now.\n\nI think we must have used \"500\" before the test started using a fake clock. With a fake clock the RTT is deterministically \"1\", due to the manual \"AcceptConnection\" step. Then \"ConservativeRTTEstimate\" multiplies it by 2.\n\nI\u0027d suggest replacing 500 with a constant declared at the top of the file called something like \"kMaxExpectedSimulatedRtt\", and reduce the value to, say, 10 (adding a bit of safety buffer beyond a value of 2). Could also do \"UpdateState(1000 + ch1.conn()-\u003ertt() * 2)\", but that assumes ConservativeRTTEstimate won\u0027t change.",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

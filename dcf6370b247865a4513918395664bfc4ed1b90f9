@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "a9d2e94a_a3e405ca",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2565,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-12T22:56:36Z",
+      "side": 1,
+      "message": "I still don\u0027t quite understand the issue with this test. It does rely on the VirtualSocketServer defaults, but these defaults are guaranteed in comments:\n\n  // Limits the network bandwidth (maximum bytes per second).  Zero means that\n  // all sends occur instantly.  Defaults to 0.\n\n  // Controls the (transit) delay for packets sent in the network.  This does\n  // not inclue the time required to sit in the send queue.  Both of these\n  // values are measured in milliseconds.  Defaults to no delay.\n\nAre you suggesting calling \"set_bandwidth(0)\" and \"set_delay_mean(0)\" explicitly, in case the defaults change? I don\u0027t think that\u0027s a concern, but if that\u0027s what you\u0027re suggesting, it could be done in this CL.",
+      "parentUuid": "eb977c5d_8541c40b",
+      "revId": "dcf6370b247865a4513918395664bfc4ed1b90f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d7e8e05_6b5f68b3",
         "filename": "p2p/base/port_unittest.cc",
         "patchSetId": 4
