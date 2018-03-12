@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ce28af9_f41103bb",
+        "filename": "call/degraded_call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-12T11:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28d1bb38_070d6461",
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9c47588_60566311",
         "filename": "call/degraded_call.cc",
         "patchSetId": 8
@@ -39,6 +57,30 @@
       "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c044352b_b08a8d01",
+        "filename": "call/degraded_call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-12T11:42:19Z",
+      "side": 1,
+      "message": "Extended comment.",
+      "parentUuid": "e9c47588_60566311",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 46
+      },
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "dc5af0cc_211e742a",
+        "filename": "call/degraded_call.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-12T11:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71f4938b_d8f356ba",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 41
+      },
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d58731e_4b282ab2",
         "filename": "call/fake_network_pipe.cc",
         "patchSetId": 8
@@ -85,6 +151,30 @@
       "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4cad52_dcf3611f",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-12T11:42:19Z",
+      "side": 1,
+      "message": "Diff base-\u003epatch set 4.\nNo changes after that, other than a move of the file.",
+      "parentUuid": "4d58731e_4b282ab2",
+      "range": {
+        "startLine": 2,
+        "startChar": 71,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
