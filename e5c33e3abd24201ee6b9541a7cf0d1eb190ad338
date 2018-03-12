@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "508894ea_3a5cbbb2",
+        "filename": "call/call.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T14:54:54Z",
+      "side": 1,
+      "message": "Prefer to have a name of the parameter.",
+      "range": {
+        "startLine": 232,
+        "startChar": 28,
+        "endLine": 232,
+        "endChar": 46
+      },
+      "revId": "e5c33e3abd24201ee6b9541a7cf0d1eb190ad338",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3be2dca6_daf9b4a1",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T14:54:54Z",
+      "side": 1,
+      "message": "Release the crit before calling send side cc.",
+      "range": {
+        "startLine": 124,
+        "startChar": 23,
+        "endLine": 125,
+        "endChar": 2
+      },
+      "revId": "e5c33e3abd24201ee6b9541a7cf0d1eb190ad338",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
