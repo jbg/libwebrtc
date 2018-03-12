@@ -22,6 +22,30 @@
       "revId": "cbb6bc720a9077bed377f3ec240561cea8bc8999",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "808e1cd7_641b1ba5",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-12T13:24:12Z",
+      "side": 1,
+      "message": "It\u0027s an uint32_t, and I check it in the same way as in the deleted block above. I can change to !\u003d 0 if you like.\n\nChanging type to optional would be more correct, since ssrc \u003d\u003d 0 formally is valid, but not in this cl.",
+      "parentUuid": "cf03b842_826ea72c",
+      "range": {
+        "startLine": 603,
+        "startChar": 18,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "cbb6bc720a9077bed377f3ec240561cea8bc8999",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
