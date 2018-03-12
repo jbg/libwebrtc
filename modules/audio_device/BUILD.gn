@@ -48,7 +48,7 @@ config("audio_device_warnings_config") {
 rtc_source_set("audio_device") {
   visibility = [ "*" ]
   public_deps = [
-    ":audio_device_generic",
+    ":audio_device_interface",
   ]
   if (rtc_include_internal_audio_device && is_ios) {
     public_deps += [ ":audio_device_ios_objc" ]
@@ -94,14 +94,60 @@ if (rtc_include_internal_audio_device && is_ios) {
   }
 }
 
-rtc_source_set("audio_device_generic") {
+rtc_source_set("audio_device_interface") {
   visibility = [
     ":audio_device",
     ":audio_device_ios_objc",
   ]
+  sources = [
+    "include/audio_device.h",
+    "include/audio_device_defines.h",
+  ]
+  deps = [
+    "../../:typedefs",
+    "../../rtc_base:checks",
+    "../../rtc_base:deprecation",
+    "../../rtc_base:rtc_base_approved",
+  ]
+  if (!build_with_chromium && is_clang) {
+    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
+    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+  }
+}
+
+rtc_source_set("audio_device_buffer") {
+  visibility = [ "*" ]
+  sources = [
+    "audio_device_buffer.cc",
+    "audio_device_buffer.h",
+    "audio_device_config.h",
+    "fine_audio_buffer.cc",
+    "fine_audio_buffer.h",
+  ]
+  deps = [
+    ":audio_device",
+    "../../:typedefs",
+    "../../api:array_view",
+    "../../common_audio:common_audio_c",
+    "../../rtc_base:checks",
+    "../../rtc_base:rtc_base_approved",
+    "../../rtc_base:rtc_task_queue",
+    "../../system_wrappers",
+    "../../system_wrappers:metrics_api",
+  ]
+  if (!build_with_chromium && is_clang) {
+    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
+    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+  }
+}
+
+rtc_source_set("audio_device_implementation") {
+  visibility = [ "*" ]
   public_configs = [ ":audio_device_config" ]
 
   deps = [
+    ":audio_device",
+    ":audio_device_buffer",
     "..:module_api",
     "../..:webrtc_common",
     "../../:typedefs",
@@ -118,19 +164,12 @@ rtc_source_set("audio_device_generic") {
   ]
 
   sources = [
-    "audio_device_buffer.cc",
-    "audio_device_buffer.h",
-    "audio_device_config.h",
     "audio_device_generic.cc",
     "audio_device_generic.h",
     "dummy/audio_device_dummy.cc",
     "dummy/audio_device_dummy.h",
     "dummy/file_audio_device.cc",
     "dummy/file_audio_device.h",
-    "fine_audio_buffer.cc",
-    "fine_audio_buffer.h",
-    "include/audio_device.h",
-    "include/audio_device_defines.h",
     "include/fake_audio_device.h",
   ]
 
@@ -305,6 +344,8 @@ rtc_source_set("mock_audio_device") {
   ]
   deps = [
     ":audio_device",
+    ":audio_device_buffer",
+    ":audio_device_implementation",
     "../../test:test_support",
   ]
 }
@@ -321,6 +362,8 @@ if (rtc_include_tests) {
       ]
       deps = [
         ":audio_device",
+        ":audio_device_buffer",
+        ":audio_device_implementation",
         ":mock_audio_device",
         "../../rtc_base:rtc_base_approved",
         "../../sdk:audio_objc",
@@ -343,6 +386,8 @@ if (rtc_include_tests) {
     ]
     deps = [
       ":audio_device",
+      ":audio_device_buffer",
+      ":audio_device_implementation",
       ":mock_audio_device",
       "../../api:array_view",
       "../../api:optional",
