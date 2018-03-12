@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a92052f5_e96b03d8",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-12T15:19:43Z",
+      "side": 0,
+      "message": "This looks like the only call site for the pacer\u0027s SetSendBitrateLimits.\n\nI would have expected the call to move to at least one of the implementations of the below SetAllocatedSendBitrateLimits, but I don\u0027t see that. What am I missing? If it\u0027s right that the pacer\u0027s method becomes unused, it should be deleted.",
+      "range": {
+        "startLine": 94,
+        "startChar": 3,
+        "endLine": 94,
+        "endChar": 77
+      },
+      "revId": "51c162ce3bdb1f9f137fb929308b01482bdd2a02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
