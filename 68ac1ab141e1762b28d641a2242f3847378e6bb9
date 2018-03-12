@@ -16,6 +16,75 @@
       "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9c47588_60566311",
+        "filename": "call/degraded_call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T10:30:31Z",
+      "side": 1,
+      "message": "I think you need to clarify why this is a mess. What would have been a better solution?",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 46
+      },
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f4938b_d8f356ba",
+        "filename": "call/degraded_call.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T10:30:31Z",
+      "side": 1,
+      "message": "// Implements Call.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 41
+      },
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d58731e_4b282ab2",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T10:30:31Z",
+      "side": 1,
+      "message": "Looks like this file went from 256 to 383 lines of code. Can you help me see what has changed?",
+      "range": {
+        "startLine": 2,
+        "startChar": 71,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "68ac1ab141e1762b28d641a2242f3847378e6bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
