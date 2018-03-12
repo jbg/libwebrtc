@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4df17527_e61d4533",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T14:39:10Z",
+      "side": 1,
+      "message": "-either?",
+      "range": {
+        "startLine": 71,
+        "startChar": 66,
+        "endLine": 71,
+        "endChar": 72
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae80732_43ac4242",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T14:39:10Z",
+      "side": 1,
+      "message": "What does this guard? I think it would be good to comment on how this class will be used / threading expectations.",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b5a5d94_50897843",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T14:39:10Z",
+      "side": 1,
+      "message": "was",
+      "range": {
+        "startLine": 162,
+        "startChar": 59,
+        "endLine": 162,
+        "endChar": 61
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23d95c65_1212f584",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-12T14:39:10Z",
+      "side": 1,
+      "message": "Could you please add GUARDED_BY\u0027s here?",
+      "range": {
+        "startLine": 200,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 29
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
