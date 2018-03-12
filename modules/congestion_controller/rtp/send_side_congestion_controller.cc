@@ -361,12 +361,19 @@ void SendSideCongestionController::SetBweBitrates(int min_bitrate_bps,
   });
 }
 
-void SendSideCongestionController::SetMaxTotalAllocatedBitrate(
-    int max_total_allocated_bitrate) {
-  task_queue_->PostTask([this, max_total_allocated_bitrate]() {
+void SendSideCongestionController::SetAllocatedSendBitrateLimits(
+    int64_t min_send_bitrate_bps,
+    int64_t max_padding_bitrate_bps,
+    int64_t max_total_bitrate_bps) {
+  task_queue_->PostTask([this, min_send_bitrate_bps, max_padding_bitrate_bps,
+                         max_total_bitrate_bps]() {
+    RTC_DCHECK_RUN_ON(task_queue_.get());
+    streams_config_.min_pacing_rate = DataRate::bps(min_send_bitrate_bps);
+    streams_config_.max_padding_rate = DataRate::bps(max_padding_bitrate_bps);
     streams_config_.max_total_allocated_bitrate =
-        DataRate::bps(max_total_allocated_bitrate);
-    UpdateStreamsConfig();
+        DataRate::bps(max_total_bitrate_bps);
+    if (controller_)
+      UpdateStreamsConfig();
   });
 }
 
@@ -596,19 +603,6 @@ void SendSideCongestionController::PostProcessTasks() {
   task_queue_->PostTask([this]() {
     ProcessTask();
     PacerQueueUpdateTask();
-  });
-}
-
-void SendSideCongestionController::SetSendBitrateLimits(
-    int64_t min_send_bitrate_bps,
-    int64_t max_padding_bitrate_bps) {
-  task_queue_->PostTask([this, min_send_bitrate_bps,
-                         max_padding_bitrate_bps]() {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
-    streams_config_.min_pacing_rate = DataRate::bps(min_send_bitrate_bps);
-    streams_config_.max_padding_rate = DataRate::bps(max_padding_bitrate_bps);
-    if (controller_)
-      UpdateStreamsConfig();
   });
 }
 
