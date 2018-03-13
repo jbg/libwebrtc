@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ff556c58_8f9804f6",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-13T17:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0aaa22d_f121b412",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca7f0396_d0e932f1",
         "filename": "p2p/base/port_unittest.cc",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f5595d0_01b57de9",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2665,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-13T17:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca7f0396_d0e932f1",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "277fd980_99852faf",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-13T17:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "361bafbd_c68595f9",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d3fe06f_6e6f1ffe",
         "filename": "p2p/base/port_unittest.cc",
         "patchSetId": 5
@@ -67,6 +121,24 @@
       "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "375bab82_68231020",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-13T17:55:19Z",
+      "side": 1,
+      "message": "Good idea, and the named constant does provide clarity to the code. I set kMaxExpectedSimulatedRtt to 200 though, since we use the estimated RTT that is clamped to a minimum 100 for RTT \u003d 1. I have also added in the comment to mention UpdateState takes into account the estimated RTT.",
+      "parentUuid": "1d3fe06f_6e6f1ffe",
+      "revId": "bdc5b3ead892ea6c34f6f9630d03f397f201b268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
