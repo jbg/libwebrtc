@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85e508c0_46ddd436",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-13T19:37:27Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 93,
+        "startChar": 13,
+        "endLine": 93,
+        "endChar": 15
+      },
+      "revId": "0670c4a34367d15f49caced61b02b5d8de420435",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
