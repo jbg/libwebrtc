@@ -250,6 +250,7 @@ void AudioSendStream::ConfigureStream(
     if (has_transport_sequence_number) {
       channel_proxy->EnableSendTransportSequenceNumber(
           new_ids.transport_sequence_number);
+      stream->transport_->SetPerPacketFeedbackAvailable(true);
       // Probing in application limited region is only used in combination with
       // send side congestion control, wich depends on feedback packets which
       // requires transport sequence numbers to be enabled.

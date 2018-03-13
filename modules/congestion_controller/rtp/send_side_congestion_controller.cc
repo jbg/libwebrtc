@@ -420,6 +420,9 @@ RtcpBandwidthObserver* SendSideCongestionController::GetBandwidthObserver() {
   return this;
 }
 
+void SendSideCongestionController::SetPerPacketFeedbackAvailable(
+    bool packet_feedback_available) {}
+
 void SendSideCongestionController::EnablePeriodicAlrProbing(bool enable) {
   task_queue_->PostTask([this, enable]() {
     RTC_DCHECK_RUN_ON(task_queue_.get());
