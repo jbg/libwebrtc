@@ -52,8 +52,6 @@ class RTPPayloadRegistry {
 
   bool GetRtxSsrc(uint32_t* ssrc) const;
 
-  bool IsRed(const RTPHeader& header) const;
-
   int GetPayloadTypeFrequency(uint8_t payload_type) const;
 
   rtc::Optional<RtpUtility::Payload> PayloadTypeToPayload(
@@ -68,7 +66,6 @@ class RTPPayloadRegistry {
   // Returns true if the new media payload type has not changed.
   bool ReportMediaPayloadType(uint8_t media_payload_type);
 
-  int8_t red_payload_type() const { return GetPayloadTypeWithName("red"); }
   int8_t ulpfec_payload_type() const {
     return GetPayloadTypeWithName("ulpfec");
   }
