@@ -72,6 +72,7 @@ class RtpTransportControllerSend : public RtpTransportControllerSendInterface,
   RtcpBandwidthObserver* GetBandwidthObserver() override;
   int64_t GetPacerQueuingDelayMs() const override;
   int64_t GetFirstPacketTimeMs() const override;
+  void SetPerPacketFeedbackAvailable(bool available) override;
   void EnablePeriodicAlrProbing(bool enable) override;
   void OnSentPacket(const rtc::SentPacket& sent_packet) override;
 
