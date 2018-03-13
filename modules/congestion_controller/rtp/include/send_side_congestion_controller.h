@@ -156,7 +156,8 @@ class SendSideCongestionController
   // TODO(srte): Move all access to feedback adapter to task queue.
   TransportFeedbackAdapter transport_feedback_adapter_;
 
-  const std::unique_ptr<NetworkControllerFactoryInterface> controller_factory_;
+  const std::unique_ptr<CombinedNetworkControllerFactoryInterface>
+      combined_controller_factory_;
 
   const std::unique_ptr<PacerController> pacer_controller_
       RTC_GUARDED_BY(task_queue_);
@@ -164,7 +165,7 @@ class SendSideCongestionController
   std::unique_ptr<send_side_cc_internal::ControlHandler> control_handler_
       RTC_GUARDED_BY(task_queue_);
 
-  std::unique_ptr<NetworkControllerInterface> controller_
+  std::unique_ptr<CombinedNetworkControllerInterface> controller_
       RTC_GUARDED_BY(task_queue_);
 
   TimeDelta process_interval_ RTC_GUARDED_BY(task_queue_);
