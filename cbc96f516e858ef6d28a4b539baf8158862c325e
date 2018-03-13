@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be30af16_51db1d60",
+        "filename": "modules/audio_device/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-03-13T11:48:40Z",
+      "side": 1,
+      "message": "Can you add a clarifying comment that this target contains default implementations of webrtc::AudioDeviceModule for the following platforms: Linux, iOS, Mac, Win, and Android?",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 47
+      },
+      "revId": "cbc96f516e858ef6d28a4b539baf8158862c325e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
