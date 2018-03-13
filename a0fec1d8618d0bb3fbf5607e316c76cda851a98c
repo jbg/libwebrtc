@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "37daab0a_ff03673b",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-13T14:03:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4df17527_e61d4533",
+      "range": {
+        "startLine": 71,
+        "startChar": 66,
+        "endLine": 71,
+        "endChar": 72
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fae80732_43ac4242",
         "filename": "test/fake_network_pipe.h",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bea7c861_c881893e",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-13T14:03:41Z",
+      "side": 1,
+      "message": "Actually don\u0027t need this lock. Removed it and added comment.",
+      "parentUuid": "fae80732_43ac4242",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2c9878f2_ad552abe",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-13T14:03:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b5a5d94_50897843",
+      "range": {
+        "startLine": 162,
+        "startChar": 59,
+        "endLine": 162,
+        "endChar": 61
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23d95c65_1212f584",
         "filename": "test/fake_network_pipe.h",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "803a61f9_3425ebd1",
+        "filename": "test/fake_network_pipe.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-13T14:03:41Z",
+      "side": 1,
+      "message": "Done. I actually split it into two locks so this should be properly thread safe now.",
+      "parentUuid": "23d95c65_1212f584",
+      "range": {
+        "startLine": 200,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 29
+      },
+      "revId": "a0fec1d8618d0bb3fbf5607e316c76cda851a98c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
