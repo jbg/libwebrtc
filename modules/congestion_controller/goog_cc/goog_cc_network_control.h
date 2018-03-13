@@ -63,7 +63,7 @@ class GoogCcNetworkController : public NetworkControllerInterface {
   RtcEventLog* const event_log_;
   NetworkControllerObserver* const observer_;
 
-  const std::unique_ptr<ProbeController> probe_controller_;
+  std::unique_ptr<ProbeController> probe_controller_;
 
   std::unique_ptr<SendSideBandwidthEstimation> bandwidth_estimation_;
   std::unique_ptr<AlrDetector> alr_detector_;
@@ -80,6 +80,7 @@ class GoogCcNetworkController : public NetworkControllerInterface {
   uint8_t last_estimated_fraction_loss_ = 0;
   int64_t last_estimated_rtt_ms_ = 0;
 
+  bool enable_alr_probing_;
   double pacing_factor_;
   DataRate min_pacing_rate_;
   DataRate max_padding_rate_;
