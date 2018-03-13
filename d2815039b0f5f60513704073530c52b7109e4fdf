@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efad95ec_110cb937",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-13T23:49:24Z",
+      "side": 1,
+      "message": "audio_device_impl would be more in line with other target naming",
+      "revId": "d2815039b0f5f60513704073530c52b7109e4fdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff8a8f46_8fcb066b",
+        "filename": "modules/audio_device/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-13T23:49:24Z",
+      "side": 1,
+      "message": "Use audio_device_api instead (this is the de facto audio device module API and could potentially be moved to api/, but let\u0027s not do that in this CL)",
+      "revId": "d2815039b0f5f60513704073530c52b7109e4fdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dc86351_b32bb032",
+        "filename": "modules/audio_device/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-13T23:49:24Z",
+      "side": 1,
+      "message": "We don\u0027t want whole-world visibility of this target.",
+      "revId": "d2815039b0f5f60513704073530c52b7109e4fdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
