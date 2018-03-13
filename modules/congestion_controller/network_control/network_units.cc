@@ -9,6 +9,7 @@
  */
 
 #include "modules/congestion_controller/network_control/include/network_units.h"
+#include <cmath>
 
 namespace webrtc {
 namespace {
@@ -25,6 +26,7 @@ const TimeDelta TimeDelta::kNotInitialized =
 
 const Timestamp Timestamp::kPlusInfinity = Timestamp(kPlusInfinityVal);
 const Timestamp Timestamp::kNotInitialized = Timestamp(kNotInitializedVal);
+const Timestamp Timestamp::kEpoch = Timestamp(0);
 
 const DataRate DataRate::kZero = DataRate(0);
 const DataRate DataRate::kPlusInfinity = DataRate(kPlusInfinityVal);
@@ -33,6 +35,18 @@ const DataRate DataRate::kNotInitialized = DataRate(kNotInitializedVal);
 const DataSize DataSize::kZero = DataSize(0);
 const DataSize DataSize::kPlusInfinity = DataSize(kPlusInfinityVal);
 const DataSize DataSize::kNotInitialized = DataSize(kNotInitializedVal);
+
+TimeDelta TimeDelta::operator*(double scalar) const {
+  return TimeDelta::us(std::round(us() * scalar));
+}
+
+DataSize DataSize::operator*(double scalar) const {
+  return DataSize::bytes(std::round(bytes() * scalar));
+}
+
+DataRate DataRate::operator*(double scalar) const {
+  return DataRate::bytes_per_second(std::round(bytes_per_second() * scalar));
+}
 
 DataRate operator/(const DataSize& size, const TimeDelta& duration) {
   RTC_DCHECK(size.bytes() < std::numeric_limits<int64_t>::max() / 1000000)
@@ -98,4 +112,5 @@ DataSize operator*(const TimeDelta& duration, const DataRate& rate) {
     return os << value.ms() << " ms";
   }
 }
+
 }  // namespace webrtc
