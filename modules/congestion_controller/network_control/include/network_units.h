@@ -76,9 +76,15 @@ class TimeDelta {
   TimeDelta operator-(const TimeDelta& other) const {
     return TimeDelta::us(us() - other.us());
   }
-  TimeDelta operator*(double scalar) const {
-    return TimeDelta::us(us() * scalar);
+  TimeDelta& operator-=(const TimeDelta& other) {
+    microseconds_ -= other.us();
+    return *this;
   }
+  TimeDelta& operator+=(const TimeDelta& other) {
+    microseconds_ += other.us();
+    return *this;
+  }
+  TimeDelta operator*(double scalar) const;
   TimeDelta operator*(int64_t scalar) const {
     return TimeDelta::us(us() * scalar);
   }
@@ -126,6 +132,7 @@ class Timestamp {
  public:
   static const Timestamp kPlusInfinity;
   static const Timestamp kNotInitialized;
+  static const Timestamp kEpoch;
   Timestamp() : Timestamp(kNotInitialized) {}
   static Timestamp Infinity() { return kPlusInfinity; }
   static Timestamp s(int64_t seconds) { return Timestamp(seconds * 1000000); }
@@ -152,6 +159,14 @@ class Timestamp {
   }
   Timestamp operator+(const TimeDelta& delta) const {
     return Timestamp::us(us() + delta.us());
+  }
+  Timestamp& operator-=(const TimeDelta& other) {
+    microseconds_ -= other.us();
+    return *this;
+  }
+  Timestamp& operator+=(const TimeDelta& other) {
+    microseconds_ += other.us();
+    return *this;
   }
   bool operator==(const Timestamp& other) const {
     return microseconds_ == other.microseconds_;
@@ -204,9 +219,7 @@ class DataSize {
   DataSize operator+(const DataSize& other) const {
     return DataSize::bytes(bytes() + other.bytes());
   }
-  DataSize operator*(double scalar) const {
-    return DataSize::bytes(bytes() * scalar);
-  }
+  DataSize operator*(double scalar) const;
   DataSize operator*(int64_t scalar) const {
     return DataSize::bytes(bytes() * scalar);
   }
@@ -297,9 +310,7 @@ class DataRate {
     return bits_per_sec_ != kNotInitialized.bits_per_sec_;
   }
   bool IsFinite() const { return IsInitialized() && !IsInfinite(); }
-  DataRate operator*(double scalar) const {
-    return DataRate::bytes_per_second(bytes_per_second() * scalar);
-  }
+  DataRate operator*(double scalar) const;
   DataRate operator*(int64_t scalar) const {
     return DataRate::bytes_per_second(bytes_per_second() * scalar);
   }

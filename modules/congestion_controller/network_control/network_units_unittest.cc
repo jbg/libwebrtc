@@ -269,7 +269,7 @@ TEST(DataRateTest, ComparisonOperators) {
   EXPECT_EQ(DataRate::Zero(), DataRate::Zero());
   EXPECT_EQ(DataRate::Infinity(), DataRate::Infinity());
   EXPECT_EQ(small, small);
-  EXPECT_LE(small, small);
+  EXPECT_LT(small, small);
   EXPECT_GE(small, small);
   EXPECT_NE(small, large);
   EXPECT_LE(small, large);
