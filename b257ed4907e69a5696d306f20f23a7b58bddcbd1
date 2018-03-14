@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "044e975a_eee2f85f",
+        "filename": "modules/audio_device/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-03-14T12:38:05Z",
+      "side": 1,
+      "message": "Does this need to be a public dependency? Can we move it to audio_device_impl\u0027s \u0027deps\u0027 section instead?\n\nRight now this target is half impl, half api.",
+      "revId": "b257ed4907e69a5696d306f20f23a7b58bddcbd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
