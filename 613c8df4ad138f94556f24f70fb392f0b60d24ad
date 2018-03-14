@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25406624_3eb8c065",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-14T19:19:15Z",
+      "side": 1,
+      "message": "If you want this to be usable by the outside world, you must set `visibility` to \"*\".",
+      "revId": "613c8df4ad138f94556f24f70fb392f0b60d24ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67218022_dda4d48d",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-14T19:19:15Z",
+      "side": 1,
+      "message": "It would be really nice with better documentation here...\n\nAlso, use CamelCase?",
+      "revId": "613c8df4ad138f94556f24f70fb392f0b60d24ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7a11f8_90c7b96c",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-14T19:19:15Z",
+      "side": 1,
+      "message": "CamelCase?",
+      "revId": "613c8df4ad138f94556f24f70fb392f0b60d24ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
