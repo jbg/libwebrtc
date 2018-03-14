@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0973b4c8_6269e351",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-03-14T22:28:10Z",
+      "side": 1,
+      "message": "I agree. I changed it to an int, and added a static cast to handle the usage of it.",
+      "parentUuid": "ea696ad7_9df02543",
+      "range": {
+        "startLine": 45,
+        "startChar": 39,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "0b5c6beb6dc27534f3b5ef6e01cd8bd06edcdc88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac5fa1ee_98fe9551",
         "filename": "modules/audio_processing/aec3/render_signal_analyzer.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "0b5c6beb6dc27534f3b5ef6e01cd8bd06edcdc88",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4537c64c_fdc5db82",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-03-14T22:28:10Z",
+      "side": 1,
+      "message": "Absolutely! You are correct! Well spotted!",
+      "parentUuid": "ac5fa1ee_98fe9551",
+      "range": {
+        "startLine": 28,
+        "startChar": 32,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "0b5c6beb6dc27534f3b5ef6e01cd8bd06edcdc88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
