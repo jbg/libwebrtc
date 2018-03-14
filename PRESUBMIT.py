@@ -290,7 +290,9 @@ def CheckApprovedFilesLintClean(input_api, output_api,
       res_type = output_api.PresubmitError
     else:
       res_type = output_api.PresubmitPromptWarning
-    result = [res_type('Changelist failed cpplint.py check.')]
+    result = [res_type('Changelist failed cpplint.py check. '
+                       'To list all the errors run:\n'
+                       '$ git cl lint\n')]
 
   return result
 
