@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea696ad7_9df02543",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-14T14:12:51Z",
+      "side": 1,
+      "message": "strong_peak_freeze_duration_ is stored as an int in the class, so I think it should be passed as an int here, or it should be stored as a size_t.",
+      "range": {
+        "startLine": 45,
+        "startChar": 39,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "0b5c6beb6dc27534f3b5ef6e01cd8bd06edcdc88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac5fa1ee_98fe9551",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-14T14:12:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a const ref?",
+      "range": {
+        "startLine": 28,
+        "startChar": 32,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "0b5c6beb6dc27534f3b5ef6e01cd8bd06edcdc88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
