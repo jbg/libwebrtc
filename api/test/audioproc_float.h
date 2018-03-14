@@ -8,11 +8,22 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "api/test/audioproc_float.h"
-#include "modules/audio_processing/include/audio_processing.h"
-#include "rtc_base/ptr_util.h"
+#ifndef API_TEST_AUDIOPROC_FLOAT_H_
+#define API_TEST_AUDIOPROC_FLOAT_H_
 
-int main(int argc, char* argv[]) {
-  return webrtc::test::audioproc_f(
-      rtc::MakeUnique<webrtc::AudioProcessingBuilder>(), argc, argv);
-}
+#include <memory>
+
+#include "modules/audio_processing/include/audio_processing.h"
+
+namespace webrtc {
+namespace test {
+
+// This is an interface for the audio processing simulation utility.
+int audioproc_f(std::unique_ptr<AudioProcessingBuilder> ap_builder,
+                int argc,
+                char* argv[]);
+
+}  // namespace test
+}  // namespace webrtc
+
+#endif  // API_TEST_AUDIOPROC_FLOAT_H_
