@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f0564966_a5e645fc",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-14T18:18:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e30f666a_b544dbbd",
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "978b377a_015ac29b",
         "filename": "p2p/base/port.cc",
         "patchSetId": 7
@@ -30,6 +48,30 @@
       "writtenOn": "2018-03-14T17:42:35Z",
       "side": 1,
       "message": "Why not just set the initial value?  Then we don\u0027t need this to be an optional, do we?",
+      "range": {
+        "startLine": 1130,
+        "startChar": 72,
+        "endLine": 1130,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9460ea5_615d3d45",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-14T18:18:41Z",
+      "side": 1,
+      "message": "For parameters that surface in user configuration, we are trying to provide the utility to RTCConfiguration and IceConfig using optionals that once a parameter is set to null we will be able to restore the default value.",
+      "parentUuid": "978b377a_015ac29b",
       "range": {
         "startLine": 1130,
         "startChar": 72,
@@ -82,6 +124,48 @@
     },
     {
       "key": {
+        "uuid": "ab7e113f_d6c1718e",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-14T18:18:41Z",
+      "side": 1,
+      "message": "This parameter maps to the original constant CONNECTION_WRITE_CONNECT_TIMEOUT (5 seconds), assuming that constant as its default in the .cc file. This gives users the ability to tune the writable-\u003eunreliable transition but keeps -\u003etimeout transition still handled by the implementation.",
+      "parentUuid": "0fdc0ce0_16ff71f0",
+      "range": {
+        "startLine": 582,
+        "startChar": 66,
+        "endLine": 582,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ae91bc0_88fe60bf",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-14T18:18:41Z",
+      "side": 1,
+      "message": "Good idea to cap it at a max. I have a stacked CL adding sanity checks to validate parameters. I will fix this soon.",
+      "parentUuid": "7b1d5ff0_f87fb053",
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7f12a4c_53119b83",
         "filename": "p2p/base/port.h",
         "patchSetId": 7
@@ -93,6 +177,30 @@
       "writtenOn": "2018-03-14T17:42:35Z",
       "side": 1,
       "message": "Actually, we do we have such a low max value (15s)?  Why not allow the app to set it to 60s or higher?",
+      "range": {
+        "startLine": 583,
+        "startChar": 35,
+        "endLine": 583,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28e0c675_2ab6bbe5",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-03-14T18:18:41Z",
+      "side": 1,
+      "message": "I was trying to avoid inconsistent configs and wrong state transitions that we used to reinforce by having constants CONNECTION_WRITE_CONNECT_TIMEOUT \u003c CONNECTION_WRITE_TIMEOUT. There is no config mapped to CONNECTION_WRITE_TIMEOUT (15 seconds) yet in this set of changes. I will add it if we decide this is also good to open to the config.",
+      "parentUuid": "d7f12a4c_53119b83",
       "range": {
         "startLine": 583,
         "startChar": 35,
