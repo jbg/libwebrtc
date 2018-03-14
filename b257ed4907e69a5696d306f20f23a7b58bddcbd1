@@ -16,6 +16,24 @@
       "revId": "b257ed4907e69a5696d306f20f23a7b58bddcbd1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1e9799c_85b59678",
+        "filename": "modules/audio_device/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-03-14T17:23:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "044e975a_eee2f85f",
+      "revId": "b257ed4907e69a5696d306f20f23a7b58bddcbd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
