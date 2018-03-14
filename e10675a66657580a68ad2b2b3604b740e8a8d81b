@@ -22,6 +22,23 @@
       "revId": "e10675a66657580a68ad2b2b3604b740e8a8d81b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5f8756c_5914b551",
+        "filename": "modules/rtp_rtcp/source/rtp_receiver_audio.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-03-14T12:28:26Z",
+      "side": 0,
+      "message": "This is quite interesting. If you look at the block that\u0027s just removed, it does not set Audio.channel but call into the same code path. So it can\u0027t be _that_ important, can it?",
+      "revId": "e10675a66657580a68ad2b2b3604b740e8a8d81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
