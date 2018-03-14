@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e30f666a_b544dbbd",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-14T17:42:35Z",
+      "side": 1,
+      "message": "We should probably document what \"unwritable\" means, or just rename this to ice_connectivity_timeout, which would probably be more clear.  It\u0027s probably easier/better to document it than rename it at this point.",
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "978b377a_015ac29b",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-14T17:42:35Z",
+      "side": 1,
+      "message": "Why not just set the initial value?  Then we don\u0027t need this to be an optional, do we?",
+      "range": {
+        "startLine": 1130,
+        "startChar": 72,
+        "endLine": 1130,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fdc0ce0_16ff71f0",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-14T17:42:35Z",
+      "side": 1,
+      "message": "We should probably add \"MAX\" to the constant name to match the new relationship we have here.",
+      "range": {
+        "startLine": 582,
+        "startChar": 66,
+        "endLine": 582,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b1d5ff0_f87fb053",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-14T17:42:35Z",
+      "side": 1,
+      "message": "We\u0027re just going to crash if the app passes in a value that\u0027s too big?  That seems like a dangerous thing to do, esp if we ever expose this in JS land.  Can we just cap it at the max and log a warning?",
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7f12a4c_53119b83",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-14T17:42:35Z",
+      "side": 1,
+      "message": "Actually, we do we have such a low max value (15s)?  Why not allow the app to set it to 60s or higher?",
+      "range": {
+        "startLine": 583,
+        "startChar": 35,
+        "endLine": 583,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
