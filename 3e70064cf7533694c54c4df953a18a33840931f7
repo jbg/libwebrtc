@@ -16,6 +16,24 @@
       "revId": "3e70064cf7533694c54c4df953a18a33840931f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3be67afd_2a6b997e",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-15T10:29:46Z",
+      "side": 1,
+      "message": "I added some text like you suggested. Unfortunately I don\u0027t think we have any proper documentation of the command line flags/arguments (other than running with --help, which I added to the comments), and I\u0027m also not sure if we should really list them all here, since it can easily get out of date when people add/remove flags.",
+      "parentUuid": "c670dedc_c6a0ea2c",
+      "revId": "3e70064cf7533694c54c4df953a18a33840931f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
