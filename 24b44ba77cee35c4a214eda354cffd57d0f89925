@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "1d81023b_e42f21cf",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:34:54Z",
+      "side": 1,
+      "message": "\u003e All right, if it\u0027s that fast it\u0027s fine to do it (and you don\u0027t have to share the generated project). Will it be this fast in the future, though? I question if this kind of complexity is warranted for the problem we\u0027re solving. That depends on how common it is with stringstream usage in test library code, I guess.\n\nYes, I think it will remain fast also in the future (consider that on Chromium it takes ~2.5 seconds but Chromium is really big compared to WebRTC). I think it is safe to assume this will stay under 500ms for a lot of time. :)\n\nIn this case it is a good investment because we don\u0027t want to add any new stream to production code but we want to allow them in test code and we want to do it reliably.",
+      "parentUuid": "a99b9e50_6f66fb11",
+      "range": {
+        "startLine": 440,
+        "startChar": 7,
+        "endLine": 440,
+        "endChar": 25
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2013893_41137ee8",
         "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
         "patchSetId": 3
