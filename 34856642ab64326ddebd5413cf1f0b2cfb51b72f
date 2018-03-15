@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f58e3cb2_f877f6a5",
+        "filename": "modules/congestion_controller/network_control/include/network_units.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T13:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45cd897b_2abebfbc",
+      "range": {
+        "startLine": 130,
+        "startChar": 17,
+        "endLine": 130,
+        "endChar": 19
+      },
+      "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2890c0d2_ff8c1ce1",
         "filename": "modules/congestion_controller/network_control/network_units.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c50e7d3_0bca0850",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T13:26:47Z",
+      "side": 1,
+      "message": "I think Zero for a timestamp type doesn\u0027t make much sense to me. Calling it Epoch makes it clear what value it represents rather what value it is. But I don\u0027t think it should be commonly used so I can use Timestamp::ms(0) instead. It has the advantage of looking uglier, which will discourage use. It will be used in some ported tests for BBR in an upcoming CL,",
+      "parentUuid": "2890c0d2_ff8c1ce1",
+      "range": {
+        "startLine": 29,
+        "startChar": 27,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "91e01be6_2c039151",
+        "filename": "modules/congestion_controller/network_control/network_units_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T13:26:47Z",
+      "side": 1,
+      "message": "Yep, it does, this was a change that I added to make sure the tests were failing properly. Uploaded by accident.",
+      "parentUuid": "2622a2eb_91aee8f1",
+      "range": {
+        "startLine": 272,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 11
+      },
+      "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c56915b_d22b745f",
         "filename": "modules/congestion_controller/network_control/test/network_ostream_operators.cc",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "f9a33b09_cc23aca7",
+        "filename": "modules/congestion_controller/network_control/test/network_ostream_operators.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T13:26:47Z",
+      "side": 1,
+      "message": "Generally when they are printed by test code, the field you are interested in will be printed as well anyways, this just replaces the anonymous printing of the binary bytes making out the struct with the struct name. Would not be opposed adding more in a later CL if there is a use case for it.",
+      "parentUuid": "9c56915b_d22b745f",
+      "range": {
+        "startLine": 17,
+        "startChar": 33,
+        "endLine": 17,
+        "endChar": 36
+      },
+      "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec93203_fac19439",
         "filename": "modules/congestion_controller/network_control/test/network_ostream_operators.h",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19972059_c1f856cf",
+        "filename": "modules/congestion_controller/network_control/test/network_ostream_operators.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T13:26:47Z",
+      "side": 1,
+      "message": "They are needed for gtest and these files are only used in a test target. There is a pending CL which removes the stream check for test targets.",
+      "parentUuid": "8ec93203_fac19439",
+      "range": {
+        "startLine": 18,
+        "startChar": 7,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "34856642ab64326ddebd5413cf1f0b2cfb51b72f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
