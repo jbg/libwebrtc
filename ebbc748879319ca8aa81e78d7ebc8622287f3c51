@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "338e27cc_39ff6f56",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-03-15T14:20:20Z",
+      "side": 1,
+      "message": "No, this can still be used as a single-parameter constructor.",
+      "parentUuid": "29ca6c87_c8d2c39c",
+      "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bba8c563_a73be17f",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ca968bee_96c00acf",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-03-15T14:20:20Z",
+      "side": 1,
+      "message": "Used rtc::MakeUnique.\nDone.",
+      "parentUuid": "bba8c563_a73be17f",
+      "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a86c627_559a864c",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "861a8b7a_d8efa65d",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-03-15T14:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a86c627_559a864c",
+      "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
