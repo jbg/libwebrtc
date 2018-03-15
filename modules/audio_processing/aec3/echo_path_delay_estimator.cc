@@ -48,6 +48,7 @@ void EchoPathDelayEstimator::Reset(bool soft_reset) {
     matched_filter_lag_aggregator_.Reset();
   }
   matched_filter_.Reset();
+  LEMUR;
 }
 
 rtc::Optional<DelayEstimate> EchoPathDelayEstimator::EstimateDelay(
