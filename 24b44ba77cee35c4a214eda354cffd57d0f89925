@@ -310,6 +310,30 @@
     },
     {
       "key": {
+        "uuid": "ef2414fc_42f5b638",
+        "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:54:59Z",
+      "side": 1,
+      "message": "In Python it is fine to have contextmanagers like this one (actually it is the best way to manage resources). They automate everything without having to write the class code.\n\nI was thinking to make it a real class implementing the contextmanager interface (__enter__, __exit__) in order to unify all the presubmit code that uses GN under a unique class.",
+      "parentUuid": "a804e1c1_d15e1d7b",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89aecd00_f22eaa5b",
         "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
         "patchSetId": 3
