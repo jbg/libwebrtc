@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29ca6c87_c8d2c39c",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-03-15T12:42:55Z",
+      "side": 1,
+      "message": "Remove \"explicit\"?",
+      "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bba8c563_a73be17f",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-03-15T12:42:55Z",
+      "side": 1,
+      "message": "std::make_unique?",
+      "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a86c627_559a864c",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-03-15T12:42:55Z",
+      "side": 1,
+      "message": "I suggest adding DCHECK(task_queue_);",
+      "revId": "ebbc748879319ca8aa81e78d7ebc8622287f3c51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
