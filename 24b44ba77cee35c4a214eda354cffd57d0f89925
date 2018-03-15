@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "e53c21cf_7d42e825",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T13:31:09Z",
+      "side": 1,
+      "message": "Typically you would not want to have these kinds of defines in the unittests themselves but in some shared helper file, or you\u0027d get name collisions. Currently we don\u0027t always have \"test\" in the filename for all files only used in test targets. So we should probably add that as a naming rule in our style guidelines if we want the check to be conditioned on this.",
+      "parentUuid": "0dec8ace_cdc7b33d",
+      "range": {
+        "startLine": 440,
+        "startChar": 7,
+        "endLine": 440,
+        "endChar": 25
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2013893_41137ee8",
         "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
         "patchSetId": 3
