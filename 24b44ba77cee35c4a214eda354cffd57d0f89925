@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d4d5464d_c213e345",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:06:07Z",
+      "side": 1,
+      "message": "Yes, you are right. I was tempted to unify gn_refs together with gn_check (https://webrtc.googlesource.com/src/+/master/tools_webrtc/presubmit_checks_lib/gn_check.py) in  gn_api but I decided to refactor it in a follow up CL because it will pollute this CL too much. :)",
+      "parentUuid": "fdc645ba_02be9dd7",
+      "range": {
+        "startLine": 415,
+        "startChar": 24,
+        "endLine": 415,
+        "endChar": 40
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c32d89f8_52e6416c",
         "filename": "PRESUBMIT.py",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "714bc353_f12c18a9",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c32d89f8_52e6416c",
+      "range": {
+        "startLine": 439,
+        "startChar": 2,
+        "endLine": 439,
+        "endChar": 13
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "a49df27a_f3ba6a2f",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:06:07Z",
+      "side": 1,
+      "message": "Yes, I asked Sebastian about checking the name but as he explained, that is not enough. I prefer to rely on GN and avoid to introduce a new naming rule (which can be sidestepped).\n\nOn my machine \"gn gen out/Default\" takes only 283ms. Please also consider that https://webrtc.googlesource.com/src/+/master/PRESUBMIT.py#496 is already running an identical \u0027gn gen\u0027.\n\nI can refactor PRESUBMIT.py to share the generated GN project among presubmit checks, but I would like to do it in another CL.",
+      "parentUuid": "e53c21cf_7d42e825",
+      "range": {
+        "startLine": 440,
+        "startChar": 7,
+        "endLine": 440,
+        "endChar": 25
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2013893_41137ee8",
         "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
         "patchSetId": 3
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "44fd9b22_3187a5a0",
+        "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:06:07Z",
+      "side": 1,
+      "message": "Yes, in the future gn_api I plan to make this a context manager class which owns the resource (the temp folder) and I will add BelongsToTestTarget and probably IsGnCheckCorrect.\n\nFor now I would like to keep is slim with this version of the context manager, but sure, this will be refactored soon.",
+      "parentUuid": "d2013893_41137ee8",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89aecd00_f22eaa5b",
         "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
         "patchSetId": 3
@@ -138,6 +234,30 @@
       "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9765942b_171140eb",
+        "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-15T14:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89aecd00_f22eaa5b",
+      "range": {
+        "startLine": 69,
+        "startChar": 14,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
