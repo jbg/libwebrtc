@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c670dedc_c6a0ea2c",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-15T10:01:32Z",
+      "side": 1,
+      "message": "I would have expected the docs to also say something to the effect that all you need to do to get a fully working audio processing utility program is to write a main() function that sets up `ap_builder` with the stuff you want in the audio processing pipeline, and then calls AudioprocFloat().\n\nAlso, is the program usage (flags, arguments, etc.) documented anywhere? It would be nice to point at them from here.",
+      "revId": "3e70064cf7533694c54c4df953a18a33840931f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
