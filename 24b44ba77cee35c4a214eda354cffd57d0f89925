@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "a99b9e50_6f66fb11",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2018-03-15T14:16:46Z",
+      "side": 1,
+      "message": "No, but presubmits don\u0027t have to be perfect. A false positive is just annoying, it\u0027s hardly a showstopper. When you say \"these kinds of defines\", what do you mean?\n\nAll right, if it\u0027s that fast it\u0027s fine to do it (and you don\u0027t have to share the generated project). Will it be this fast in the future, though? I question if this kind of complexity is warranted for the problem we\u0027re solving. That depends on how common it is with stringstream usage in test library code, I guess.",
+      "parentUuid": "a49df27a_f3ba6a2f",
+      "range": {
+        "startLine": 440,
+        "startChar": 7,
+        "endLine": 440,
+        "endChar": 25
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2013893_41137ee8",
         "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
         "patchSetId": 3
@@ -202,6 +226,30 @@
       "side": 1,
       "message": "Yes, in the future gn_api I plan to make this a context manager class which owns the resource (the temp folder) and I will add BelongsToTestTarget and probably IsGnCheckCorrect.\n\nFor now I would like to keep is slim with this version of the context manager, but sure, this will be refactored soon.",
       "parentUuid": "d2013893_41137ee8",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43b4536_7b99ff2d",
+        "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2018-03-15T14:16:46Z",
+      "side": 1,
+      "message": "Just having functions is entirely fine in python. A class doesn\u0027t make sense IMO because it has no state to encapsulate anyway.",
+      "parentUuid": "44fd9b22_3187a5a0",
       "range": {
         "startLine": 25,
         "startChar": 4,
