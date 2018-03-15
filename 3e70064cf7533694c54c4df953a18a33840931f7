@@ -34,6 +34,24 @@
       "revId": "3e70064cf7533694c54c4df953a18a33840931f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a3c29b3_44d3ee50",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-15T10:32:49Z",
+      "side": 1,
+      "message": "Yes, it doesn\u0027t make sense to document the flags here, precisely because we don\u0027t promise that they won\u0027t change. I was thinking of e.g. a pointer to whatever source file defines them, but pointing to --help works too.",
+      "parentUuid": "3be67afd_2a6b997e",
+      "revId": "3e70064cf7533694c54c4df953a18a33840931f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
