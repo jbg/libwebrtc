@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdc645ba_02be9dd7",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T10:45:32Z",
+      "side": 1,
+      "message": "Does DefaultGnProject really belong to gn_refs? Maybe gn_refs should be something more generic, like gn_api?",
+      "range": {
+        "startLine": 415,
+        "startChar": 24,
+        "endLine": 415,
+        "endChar": 40
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c32d89f8_52e6416c",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T10:45:32Z",
+      "side": 1,
+      "message": "is_cpp_file?",
+      "range": {
+        "startLine": 439,
+        "startChar": 2,
+        "endLine": 439,
+        "endChar": 13
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2013893_41137ee8",
+        "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T10:45:32Z",
+      "side": 1,
+      "message": "An OO design of this could be:\nclass DefaultGnProject:\n  ...\n  def BelongsToTestTarget(file_path):\n    ...",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89aecd00_f22eaa5b",
+        "filename": "tools_webrtc/presubmit_checks_lib/gn_refs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-15T10:45:32Z",
+      "side": 1,
+      "message": "This could be made more obvious by doing an actual check for what the expected non-true value would be. (An empty string?)",
+      "range": {
+        "startLine": 69,
+        "startChar": 14,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "24b44ba77cee35c4a214eda354cffd57d0f89925",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
