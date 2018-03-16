@@ -16,6 +16,24 @@
       "revId": "566a9a5d892d4e2c7a61c0cac9061a097717c74f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f31beda4_45343b0e",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-03-16T14:47:17Z",
+      "side": 1,
+      "message": "-Wmissing-prototypes, -Wstrict-prototypes, -Wbad-function-cast and -Wnested-externs are C/Obj-C only.\n\nHmm, after running ninja -v I can see \"-Wall -Wextra\" when compiling C++ but only \"-Wall\" when compiling C. I will remove -Wall from this list and add a comment to clarify what we have to do.",
+      "parentUuid": "a7411bd7_f25d9e6d",
+      "revId": "566a9a5d892d4e2c7a61c0cac9061a097717c74f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
