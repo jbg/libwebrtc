@@ -777,8 +777,9 @@ void Port::SendBindingResponse(StunMessage* request,
         << ", id=" << rtc::hex_encode(response.transaction_id());
 
     conn->stats_.sent_ping_responses++;
-    conn->LogCandidatePairEvent(
-        webrtc::IceCandidatePairEventType::kCheckResponseSent);
+    conn->LogIceEvent(webrtc::IceEventLog::CreateConnectivityCheckEvent(
+        rtc::TimeMillis(), conn->hash(), conn->ToLogDescription(),
+        webrtc::ConnectivityCheckEvent::Type::CHECK_RESPONSE_SENT));
   }
 }
 
@@ -1042,7 +1043,7 @@ Connection::Connection(Port* port,
   // TODO(mallinath) - Start connections from STATE_FROZEN.
   // Wire up to send stun packets
   requests_.SignalSendPacket.connect(this, &Connection::OnSendStunPacket);
-  hash_ = static_cast<uint32_t>(std::hash<std::string>{}(ToString()));
+  hash_ = rtc::CreateRandomNonZeroId();
   LOG_J(LS_INFO, this) << "Connection created";
 }
 
@@ -1234,7 +1235,9 @@ void Connection::HandleBindingRequest(IceMessage* msg) {
   }
 
   stats_.recv_ping_requests++;
-  LogCandidatePairEvent(webrtc::IceCandidatePairEventType::kCheckReceived);
+  LogIceEvent(webrtc::IceEventLog::CreateConnectivityCheckEvent(
+      rtc::TimeMillis(), hash(), ToLogDescription(),
+      webrtc::ConnectivityCheckEvent::Type::CHECK_RECEIVED));
 
   // This is a validated stun request from remote peer.
   port_->SendBindingResponse(msg, remote_addr);
@@ -1304,7 +1307,9 @@ void Connection::Destroy() {
   // AutoSocketServerThread::~AutoSocketServerThread.
   LOG_J(LS_VERBOSE, this) << "Connection destroyed";
   port_->thread()->Post(RTC_FROM_HERE, this, MSG_DELETE);
-  LogCandidatePairEvent(webrtc::IceCandidatePairEventType::kDestroyed);
+  LogIceEvent(webrtc::IceEventLog::CreateCandidatePairConfigEvent(
+      rtc::TimeMillis(), hash(), ToLogDescription(),
+      webrtc::CandidatePairConfigEvent::Type::DESTROYED));
 }
 
 void Connection::FailAndDestroy() {
@@ -1564,11 +1569,11 @@ const webrtc::IceCandidatePairDescription& Connection::ToLogDescription() {
   return log_description_.value();
 }
 
-void Connection::LogCandidatePairEvent(webrtc::IceCandidatePairEventType type) {
+void Connection::LogIceEvent(std::unique_ptr<webrtc::IceEvent> event) {
   if (ice_event_log_ == nullptr) {
     return;
   }
-  ice_event_log_->LogCandidatePairEvent(type, hash(), ToLogDescription());
+  ice_event_log_->LogIceEvent(std::move(event));
 }
 
 void Connection::OnConnectionRequestResponse(ConnectionRequest* request,
@@ -1594,8 +1599,9 @@ void Connection::OnConnectionRequestResponse(ConnectionRequest* request,
   packet_loss_estimator_.ReceivedResponse(request->id(), time_received);
 
   stats_.recv_ping_responses++;
-  LogCandidatePairEvent(
-      webrtc::IceCandidatePairEventType::kCheckResponseReceived);
+  LogIceEvent(webrtc::IceEventLog::CreateConnectivityCheckEvent(
+      rtc::TimeMillis(), hash(), ToLogDescription(),
+      webrtc::ConnectivityCheckEvent::Type::CHECK_RESPONSE_RECEIVED, rtt));
 
   MaybeUpdateLocalCandidate(request, response);
 }
@@ -1640,7 +1646,9 @@ void Connection::OnConnectionRequestSent(ConnectionRequest* request) {
                     << ", use_candidate=" << use_candidate_attr()
                     << ", nomination=" << nomination();
   stats_.sent_ping_requests_total++;
-  LogCandidatePairEvent(webrtc::IceCandidatePairEventType::kCheckSent);
+  LogIceEvent(webrtc::IceEventLog::CreateConnectivityCheckEvent(
+      rtc::TimeMillis(), hash(), ToLogDescription(),
+      webrtc::ConnectivityCheckEvent::Type::CHECK_SENT));
   if (stats_.recv_ping_responses == 0) {
     stats_.sent_ping_requests_before_first_response++;
   }

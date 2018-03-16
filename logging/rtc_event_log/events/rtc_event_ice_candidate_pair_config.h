@@ -58,6 +58,9 @@ class IceCandidatePairDescription {
   explicit IceCandidatePairDescription(
       const IceCandidatePairDescription& other);
 
+  IceCandidatePairDescription& operator=(
+      const IceCandidatePairDescription& other);
+
   ~IceCandidatePairDescription();
 
   IceCandidateType local_candidate_type;
