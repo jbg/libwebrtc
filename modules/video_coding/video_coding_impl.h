@@ -75,7 +75,6 @@ class VideoSender {
                             uint32_t maxPayloadSize);
 
   void RegisterExternalEncoder(VideoEncoder* externalEncoder,
-                               uint8_t payloadType,
                                bool internalSource);
 
   int Bitrate(unsigned int* bitrate) const;
