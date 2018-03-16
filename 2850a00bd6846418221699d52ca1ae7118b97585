@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e60c333_268eb016",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-16T12:20:46Z",
+      "side": 1,
+      "message": "It seems the VideoTrackSource class is relevant for both PeerConnection and ORTC. Should it move elsewhere, or should we allow ortc to depend on pc?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "2850a00bd6846418221699d52ca1ae7118b97585",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68af0d55_2f57fff2",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-16T12:20:46Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused about ownership, I guess we ought to keep this reference. Do we really need a std::unique_ptr\u003cFakePeriodicVideoSource\u003e fake_video_sources_, or can we use a scalar? Old code seemed to only ever access fake_video_capturers_[0].\n\nOr should VideoTrackSource be changed to take ownership of the VideoSourceInterface?",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 46
+      },
+      "revId": "2850a00bd6846418221699d52ca1ae7118b97585",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
