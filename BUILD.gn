@@ -171,6 +171,7 @@ config("common_inherited_config") {
 
 config("common_config") {
   cflags = []
+  cflags_c = []
   cflags_cc = []
   defines = []
 
@@ -220,6 +221,17 @@ config("common_config") {
         "-Wno-unused-parameter",
         "-Wno-missing-field-initializers",
         "-Wno-strict-overflow",
+      ]
+      cflags_c += [
+        # TODO(bugs.webrtc.org/9029): enable commented compiler flags.
+        # "-Wall",
+        # "-Wextra",
+        # "-Wmissing-prototypes",
+        # "-Wmissing-declarations",
+        "-Wstrict-prototypes",
+        # "-Wpointer-arith",
+        # "-Wbad-function-cast",
+        # "-Wnested-externs",
       ]
       cflags_cc = [
         "-Wnon-virtual-dtor",
