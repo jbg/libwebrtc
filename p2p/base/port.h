@@ -787,7 +787,7 @@ class Connection : public CandidatePairInterface,
   void MaybeUpdateLocalCandidate(ConnectionRequest* request,
                                  StunMessage* response);
 
-  void LogCandidatePairEvent(webrtc::IceCandidatePairEventType type);
+  void LogIceEvent(std::unique_ptr<webrtc::IceEvent> event);
 
   WriteState write_state_;
   bool receiving_;

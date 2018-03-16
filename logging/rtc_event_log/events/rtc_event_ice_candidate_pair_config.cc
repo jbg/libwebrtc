@@ -23,15 +23,10 @@ IceCandidatePairDescription::IceCandidatePairDescription() {
 }
 
 IceCandidatePairDescription::IceCandidatePairDescription(
-    const IceCandidatePairDescription& other) {
-  local_candidate_type = other.local_candidate_type;
-  local_relay_protocol = other.local_relay_protocol;
-  local_network_type = other.local_network_type;
-  local_address_family = other.local_address_family;
-  remote_candidate_type = other.remote_candidate_type;
-  remote_address_family = other.remote_address_family;
-  candidate_pair_protocol = other.candidate_pair_protocol;
-}
+    const IceCandidatePairDescription& other) = default;
+
+IceCandidatePairDescription& IceCandidatePairDescription::operator=(
+    const IceCandidatePairDescription& other) = default;
 
 IceCandidatePairDescription::~IceCandidatePairDescription() {}
 

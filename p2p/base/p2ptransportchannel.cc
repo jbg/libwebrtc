@@ -230,7 +230,9 @@ void P2PTransportChannel::AddConnection(Connection* connection) {
   had_connection_ = true;
 
   connection->set_ice_event_log(&ice_event_log_);
-  LogCandidatePairEvent(connection, webrtc::IceCandidatePairEventType::kAdded);
+  LogIceEvent(webrtc::IceEventLog::CreateCandidatePairConfigEvent(
+      rtc::TimeMillis(), connection->hash(), connection->ToLogDescription(),
+      webrtc::CandidatePairConfigEvent::Type::ADDED));
 }
 
 // Determines whether we should switch the selected connection to
@@ -398,7 +400,7 @@ IceTransportState P2PTransportChannel::ComputeState() const {
     }
   }
 
-  ice_event_log_.DumpCandidatePairDescriptionToMemoryAsConfigEvents();
+  ice_event_log_.DumpCandidatePairDescriptionToRtcEventLog();
   return IceTransportState::STATE_COMPLETED;
 }
 
@@ -1617,7 +1619,11 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
   // destroyed, so don't use it.
   Connection* old_selected_connection = selected_connection_;
   selected_connection_ = conn;
-  LogCandidatePairEvent(conn, webrtc::IceCandidatePairEventType::kSelected);
+  if (conn != nullptr) {
+    LogIceEvent(webrtc::IceEventLog::CreateCandidatePairConfigEvent(
+        rtc::TimeMillis(), conn->hash(), conn->ToLogDescription(),
+        webrtc::CandidatePairConfigEvent::Type::SELECTED));
+  }
   network_route_.reset();
   if (selected_connection_) {
     ++nomination_;
@@ -2330,15 +2336,8 @@ int P2PTransportChannel::SampleRegatherAllNetworksInterval() {
   return rand_.Rand(interval->min(), interval->max());
 }
 
-void P2PTransportChannel::LogCandidatePairEvent(
-    Connection* conn,
-    webrtc::IceCandidatePairEventType type) {
-  if (conn == nullptr) {
-    return;
-  }
-  auto candidate_pair_id = conn->hash();
-  ice_event_log_.LogCandidatePairEvent(type, candidate_pair_id,
-                                       conn->ToLogDescription());
+void P2PTransportChannel::LogIceEvent(std::unique_ptr<webrtc::IceEvent> event) {
+  ice_event_log_.LogIceEvent(std::move(event));
 }
 
 }  // namespace cricket
