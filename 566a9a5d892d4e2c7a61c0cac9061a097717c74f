@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7411bd7_f25d9e6d",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-16T14:33:15Z",
+      "side": 1,
+      "message": "Are all these flags C specific, or should some of them be in the cflags list instead?",
+      "revId": "566a9a5d892d4e2c7a61c0cac9061a097717c74f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
