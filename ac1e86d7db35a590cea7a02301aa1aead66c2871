@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c052d27f_d441bc27",
+        "filename": "modules/video_coding/encoder_database.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-16T12:40:01Z",
+      "side": 1,
+      "message": "I could do, but it\u0027s slightly different. VideoCodec() will assign non-zero values to a few members (codecType, active), and leaves the coding_specific_ union uninitialized.\n\nSo I\u0027d prefer to not do that in this cl.",
+      "parentUuid": "fce83163_b68d9622",
+      "range": {
+        "startLine": 106,
+        "startChar": 46,
+        "endLine": 106,
+        "endChar": 0
+      },
+      "revId": "ac1e86d7db35a590cea7a02301aa1aead66c2871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d8d8e764_46d34a33",
         "filename": "modules/video_coding/encoder_database.cc",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "ac1e86d7db35a590cea7a02301aa1aead66c2871",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f74a02d3_0438ea07",
+        "filename": "modules/video_coding/encoder_database.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-16T12:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8d8e764_46d34a33",
+      "revId": "ac1e86d7db35a590cea7a02301aa1aead66c2871",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
