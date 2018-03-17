@@ -44,6 +44,9 @@ int TaskQueuePriorityToGCD(Priority priority) {
 using internal::GetQueuePtrTls;
 using internal::AutoSetCurrentQueuePtr;
 
+// No-op for the purposes of flushing the queue during shutdown.
+void Noop(void*) {}
+
 class TaskQueue::Impl : public RefCountInterface {
  public:
   Impl(const char* queue_name, TaskQueue* task_queue, Priority priority);
@@ -64,11 +67,6 @@ class TaskQueue::Impl : public RefCountInterface {
  private:
   struct QueueContext {
     explicit QueueContext(TaskQueue* q) : queue(q), is_active(true) {}
-
-    static void SetNotActive(void* context) {
-      QueueContext* qc = static_cast<QueueContext*>(context);
-      qc->is_active = false;
-    }
 
     static void DeleteContext(void* context) {
       QueueContext* qc = static_cast<QueueContext*>(context);
@@ -162,9 +160,17 @@ TaskQueue::Impl::~Impl() {
   // queue have been released, the queue will be deallocated by the system.
   // This is why we check the context before running tasks.
 
-  // Use dispatch_sync to set the context to null to guarantee that there's not
-  // a race between checking the context and using it from a task.
-  dispatch_sync_f(queue_, context_, &QueueContext::SetNotActive);
+  // Suspend the queue while we set the |is_active| flag to |false|.
+  // If there's a task currently executing, this call will wait until the task
+  // has finished. Subsequent tasks will wait until we call |dispatch_resume|.
+  dispatch_suspend(queue_);
+  context_->is_active = false;
+  dispatch_resume(queue_);
+
+  // Noop call to flush the queue. Delete all tasks but not execute any of the
+  // pending tasks.
+  dispatch_sync_f(queue_, context_, &Noop);
+
   dispatch_release(queue_);
 }
 
