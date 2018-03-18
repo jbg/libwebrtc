@@ -22,7 +22,7 @@
 #include "modules/audio_coding/audio_network_adaptor/include/audio_network_adaptor.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtcp_packet.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 #include "rtc_tools/event_log_visualizer/plot_base.h"
 #include "rtc_tools/event_log_visualizer/triage_notifications.h"
 

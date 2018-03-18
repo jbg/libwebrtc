@@ -13,7 +13,7 @@
 
 #include "rtc_base/basictypes.h"
 #include "rtc_base/buffer.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 
 namespace webrtc {
 namespace rtcp {

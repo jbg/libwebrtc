@@ -11,12 +11,17 @@
 #include <memory>
 #include <utility>
 
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/ptr_util.h"
 
 namespace rtc {
 
 namespace {
+
+int CallWith22(rtc::Function<int(int)> f) {
+  return f ? f(22) : -1;
+}
 
 int CallWith33(rtc::FunctionView<int(int)> fv) {
   return fv ? fv(33) : -1;
@@ -27,6 +32,104 @@ int Add33(int x) {
 }
 
 }  // namespace
+
+// Test the main use case of Function: implicitly converting a callable
+// argument.
+TEST(FunctionTest, ImplicitConversion) {
+  EXPECT_EQ(27, CallWith22([](int x) { return x + 5; }));
+  EXPECT_EQ(55, CallWith22(Add33));
+  EXPECT_EQ(-1, CallWith22(nullptr));
+}
+
+TEST(FunctionTest, IntIntLambdaWithoutState) {
+  auto lam = [](int x) { return x + 1; };
+  EXPECT_EQ(18, lam(17));
+  rtc::Function<int(int)> f(lam);
+  EXPECT_TRUE(f);
+  EXPECT_EQ(18, f(17));
+}
+
+TEST(FunctionTest, IntVoidLambdaWithState) {
+  int x = 13;
+  auto lam = [x]() mutable { return ++x; };
+  rtc::Function<int()> f(lam);
+  EXPECT_TRUE(f);
+  EXPECT_EQ(14, lam());
+  EXPECT_EQ(15, lam());
+  EXPECT_EQ(14, f());
+  EXPECT_EQ(15, f());
+}
+
+TEST(FunctionTest, IntIntFunction) {
+  rtc::FunctionView<int(int)> f(Add33);
+  EXPECT_TRUE(f);
+  EXPECT_EQ(50, f(17));
+}
+
+TEST(FunctionTest, IntIntFunctionPointer) {
+  rtc::FunctionView<int(int)> f(&Add33);
+  EXPECT_TRUE(f);
+  EXPECT_EQ(50, f(17));
+}
+
+TEST(FunctionTest, Null) {
+  // These two call constructors that statically construct null Functions.
+  EXPECT_FALSE(rtc::Function<int()>());
+  EXPECT_FALSE(rtc::Function<int()>(nullptr));
+
+  // This calls the constructor for function pointers.
+  EXPECT_FALSE(rtc::Function<int()>(reinterpret_cast<int (*)()>(0)));
+}
+
+TEST(FunctionTest, MoveSwapDelete) {
+  struct MoveOnlyCallable {
+    std::unique_ptr<int> x;
+    int* y;
+    ~MoveOnlyCallable() { ++*y; }
+    MoveOnlyCallable(std::unique_ptr<int> x, int* y) : x(std::move(x)), y(y) {}
+    MoveOnlyCallable(MoveOnlyCallable&&) = default;
+    int* operator()() { return x.get(); }
+  };
+
+  auto x = rtc::MakeUnique<int>(5);
+  int* const x_ptr = x.get();
+
+  int num_delete_calls = 0;
+  {
+    MoveOnlyCallable c(std::move(x), &num_delete_calls);
+    EXPECT_EQ(0, num_delete_calls);
+    EXPECT_EQ(nullptr, x.get());
+    EXPECT_EQ(x_ptr, c());
+
+    {
+      rtc::Function<int*()> f1 = std::move(c);
+      EXPECT_EQ(0, num_delete_calls);
+      EXPECT_EQ(nullptr, c());
+      EXPECT_EQ(x_ptr, f1());
+
+      {
+        rtc::Function<int*()> f2 = std::move(f1);
+        EXPECT_EQ(0, num_delete_calls);
+        EXPECT_FALSE(f1);
+        EXPECT_EQ(x_ptr, f2());
+
+        f1 = std::move(f2);
+        EXPECT_EQ(0, num_delete_calls);
+        EXPECT_FALSE(f2);
+        EXPECT_EQ(x_ptr, f1());
+
+        using std::swap;
+        swap(f1, f2);
+        EXPECT_EQ(0, num_delete_calls);
+        EXPECT_FALSE(f1);
+        EXPECT_EQ(x_ptr, f2());
+      }
+      EXPECT_EQ(1, num_delete_calls);  // f2 expired (owned heap copy)
+    }
+    EXPECT_EQ(1, num_delete_calls);  // f1 expired (did not own copy)
+  }
+  EXPECT_EQ(2, num_delete_calls);  // c expired (was stack copy)
+}
 
 // Test the main use case of FunctionView: implicitly converting a callable
 // argument.
@@ -73,7 +176,7 @@ TEST(FunctionViewTest, Null) {
   EXPECT_FALSE(rtc::FunctionView<int()>(nullptr));
 
   // This calls the constructor for function pointers.
-  EXPECT_FALSE(rtc::FunctionView<int()>(reinterpret_cast<int(*)()>(0)));
+  EXPECT_FALSE(rtc::FunctionView<int()>(reinterpret_cast<int (*)()>(0)));
 }
 
 // Ensure that FunctionView handles move-only arguments and return values.

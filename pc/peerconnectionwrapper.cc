@@ -18,7 +18,7 @@
 #include "api/jsepsessiondescription.h"
 #include "media/base/fakevideocapturer.h"
 #include "pc/sdputils.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/ptr_util.h"
 
