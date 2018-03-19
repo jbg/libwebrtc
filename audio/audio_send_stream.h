@@ -129,6 +129,7 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   rtc::RaceChecker audio_capture_race_checker_;
   rtc::TaskQueue* worker_queue_;
   webrtc::AudioSendStream::Config config_;
+  bool has_packet_feedback_ = false;
   rtc::scoped_refptr<webrtc::AudioState> audio_state_;
   std::unique_ptr<voe::ChannelProxy> channel_proxy_;
   RtcEventLog* const event_log_;
