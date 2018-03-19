@@ -22,6 +22,30 @@
       "revId": "2743a429e7b80f37bcb852ace072c28b184b4e2b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a41a4c2_1d8a39ec",
+        "filename": "rtc_base/function.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-19T09:30:52Z",
+      "side": 1,
+      "message": "Because this is a non-member function that accesses private members?",
+      "parentUuid": "4a363bc0_91e01e7a",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 27
+      },
+      "revId": "2743a429e7b80f37bcb852ace072c28b184b4e2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
