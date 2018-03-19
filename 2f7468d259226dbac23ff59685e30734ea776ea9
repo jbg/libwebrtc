@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9c0dba0_ea49ca3c",
+        "filename": "logging/rtc_event_log/icelogger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-19T23:22:12Z",
+      "side": 1,
+      "message": "Can you explain the purpose of IsTerminalEvent?",
+      "revId": "2f7468d259226dbac23ff59685e30734ea776ea9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04a5984a_589dfd1a",
+        "filename": "logging/rtc_event_log/icelogger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-19T23:22:12Z",
+      "side": 1,
+      "message": "This isn\u0027t very space-efficient, since \"rtc::Optional\" uses the full space of the contained type. Could use unique_ptr instead of rtc::Optional to address that.",
+      "revId": "2f7468d259226dbac23ff59685e30734ea776ea9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f632c02_8af2647e",
+        "filename": "logging/rtc_event_log/icelogger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-19T23:22:12Z",
+      "side": 1,
+      "message": "The terminal type can already be determined by checking type, then candidate_pair_event-\u003etype if it\u0027s a candidate pair event, and so on. So this seems a bit redundant.\n\nOverall, this structure seems a little cumbersome. I\u0027d suggest maybe doing something similar to what rtcstats_objects.h does, using inheritance between events and a \"safe cast\" method that checks the type before static_casting.",
+      "revId": "2f7468d259226dbac23ff59685e30734ea776ea9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
