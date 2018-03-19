@@ -22,6 +22,30 @@
       "revId": "48107d9bc2f8274210e4d5da3c8d403e65e53eb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f4a03b_ff89fd75",
+        "filename": "common_types.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-19T17:26:16Z",
+      "side": 1,
+      "message": "Only size_t is unsigned so that would result in an infinite loop.\n\nBut I can change to this if you like:\n\nfor (size_t i \u003d kMaxTemporalStreams; i \u003e 0; --i) {\n    if (has_bitrate_[spatial_index][i - 1]) {\n      temporal_rates.resize(i);\n      break;\n    }\n}\n\nalso added comment",
+      "parentUuid": "319b3852_f35bb0f3",
+      "range": {
+        "startLine": 194,
+        "startChar": 7,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "48107d9bc2f8274210e4d5da3c8d403e65e53eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
