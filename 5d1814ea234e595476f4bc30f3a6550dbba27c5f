@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b30ea831_0271bf5b",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-03-19T10:30:06Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment that this is aggregate bitrates, i.e. sum for current and all lower layers? Or change the name?",
+      "range": {
+        "startLine": 58,
+        "startChar": 39,
+        "endLine": 58,
+        "endChar": 56
+      },
+      "revId": "5d1814ea234e595476f4bc30f3a6550dbba27c5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
