@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a5660f3_43298d82",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-19T21:00:26Z",
+      "side": 1,
+      "message": "Our policy is generally to handle invalid input to the API by logging/returning an error, rather than DCHECKing. The exception is \"RTC_DCHECK(!IsUnifiedPlan())\", used for the methods only supported in \"Plan B\" mode.",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42838f32_0b40f3e3",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-19T21:00:26Z",
+      "side": 1,
+      "message": "Should handle the case where the sender isn\u0027t found. Or is this intended to fall through, with a null selector? It seems odd that this method will DCHECK on a null selector, but still allows an invalid selector that turns into a null selector.",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "356328fc_403f92fe",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-19T21:00:26Z",
+      "side": 1,
+      "message": "Instead of a blanket \"allow_missing_types\", could explicitly list the types that are allowed to be missing. That would give the test a bit more weight.",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
