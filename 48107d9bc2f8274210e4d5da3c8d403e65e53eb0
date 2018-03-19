@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "319b3852_f35bb0f3",
+        "filename": "common_types.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-03-19T17:06:11Z",
+      "side": 1,
+      "message": "This is more common I think?\n\n  for (size_t i \u003d kMaxTemporalStreams - 1; i \u003e\u003d 0; --i)",
+      "range": {
+        "startLine": 194,
+        "startChar": 7,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "48107d9bc2f8274210e4d5da3c8d403e65e53eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
