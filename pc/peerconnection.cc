@@ -1583,8 +1583,53 @@ bool PeerConnection::GetStats(StatsObserver* observer,
 }
 
 void PeerConnection::GetStats(RTCStatsCollectorCallback* callback) {
+  TRACE_EVENT0("webrtc", "PeerConnection::GetStats");
   RTC_DCHECK(stats_collector_);
+  RTC_DCHECK(callback);
   stats_collector_->GetStatsReport(callback);
+}
+
+void PeerConnection::GetStats(
+    rtc::scoped_refptr<RtpSenderInterface> selector,
+    rtc::scoped_refptr<RTCStatsCollectorCallback> callback) {
+  TRACE_EVENT0("webrtc", "PeerConnection::GetStats");
+  RTC_DCHECK(stats_collector_);
+  RTC_DCHECK(selector);
+  RTC_DCHECK(callback);
+  rtc::scoped_refptr<RtpSenderInternal> internal_sender;
+  for (const auto& proxy_transceiver : transceivers_) {
+    for (const auto& proxy_sender : proxy_transceiver->internal()->senders()) {
+      if (proxy_sender == selector) {
+        internal_sender = proxy_sender->internal();
+        break;
+      }
+    }
+    if (internal_sender)
+      break;
+  }
+  stats_collector_->GetStatsReport(internal_sender, callback);
+}
+
+void PeerConnection::GetStats(
+    rtc::scoped_refptr<RtpReceiverInterface> selector,
+    rtc::scoped_refptr<RTCStatsCollectorCallback> callback) {
+  TRACE_EVENT0("webrtc", "PeerConnection::GetStats");
+  RTC_DCHECK(stats_collector_);
+  RTC_DCHECK(selector);
+  RTC_DCHECK(callback);
+  rtc::scoped_refptr<RtpReceiverInternal> internal_receiver;
+  for (const auto& proxy_transceiver : transceivers_) {
+    for (const auto& proxy_receiver :
+         proxy_transceiver->internal()->receivers()) {
+      if (proxy_receiver == selector) {
+        internal_receiver = proxy_receiver->internal();
+        break;
+      }
+    }
+    if (internal_receiver)
+      break;
+  }
+  stats_collector_->GetStatsReport(internal_receiver, callback);
 }
 
 PeerConnectionInterface::SignalingState PeerConnection::signaling_state() {
