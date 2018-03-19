@@ -48,7 +48,8 @@ double MediaRatio(uint32_t allocated_bitrate, uint32_t protection_bitrate) {
 }
 }  // namespace
 
-BitrateAllocator::BitrateAllocator(LimitObserver* limit_observer)
+BitrateAllocator::BitrateAllocator(
+    BitrateAllocatorLimitObserver* limit_observer)
     : limit_observer_(limit_observer),
       last_bitrate_bps_(0),
       last_non_zero_bitrate_bps_(kDefaultBitrateBps),

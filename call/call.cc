@@ -169,7 +169,7 @@ class Call : public webrtc::Call,
              public PacketReceiver,
              public RecoveredPacketReceiver,
              public TargetTransferRateObserver,
-             public BitrateAllocator::LimitObserver {
+             public BitrateAllocatorLimitObserver {
  public:
   Call(const Call::Config& config,
        std::unique_ptr<RtpTransportControllerSendInterface> transport_send);
@@ -232,7 +232,7 @@ class Call : public webrtc::Call,
   // Implements TargetTransferRateObserver,
   void OnTargetTransferRate(TargetTransferRate msg) override;
 
-  // Implements BitrateAllocator::LimitObserver.
+  // Implements BitrateAllocatorLimitObserver.
   void OnAllocationLimitsChanged(uint32_t min_send_bitrate_bps,
                                  uint32_t max_padding_bitrate_bps,
                                  uint32_t total_bitrate_bps) override;

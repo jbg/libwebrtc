@@ -73,7 +73,7 @@ const AudioCodecSpec kCodecSpecs[] = {
     {kOpusFormat, {48000, 1, 32000, 6000, 510000}},
     {kG722Format, {16000, 1, 64000}}};
 
-class MockLimitObserver : public BitrateAllocator::LimitObserver {
+class MockLimitObserver : public BitrateAllocatorLimitObserver {
  public:
   MOCK_METHOD3(OnAllocationLimitsChanged,
                void(uint32_t min_send_bitrate_bps,

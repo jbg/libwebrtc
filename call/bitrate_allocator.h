@@ -42,25 +42,24 @@ class BitrateAllocatorObserver {
  protected:
   virtual ~BitrateAllocatorObserver() {}
 };
+// Used to get notified when send stream limits such as the minimum send
+// bitrate and max padding bitrate is changed.
+class BitrateAllocatorLimitObserver {
+ public:
+  virtual void OnAllocationLimitsChanged(uint32_t min_send_bitrate_bps,
+                                         uint32_t max_padding_bitrate_bps,
+                                         uint32_t total_bitrate_bps) = 0;
+
+ protected:
+  virtual ~BitrateAllocatorLimitObserver() {}
+};
 
 // Usage: this class will register multiple RtcpBitrateObserver's one at each
 // RTCP module. It will aggregate the results and run one bandwidth estimation
 // and push the result to the encoders via BitrateAllocatorObserver(s).
 class BitrateAllocator {
  public:
-  // Used to get notified when send stream limits such as the minimum send
-  // bitrate and max padding bitrate is changed.
-  class LimitObserver {
-   public:
-    virtual void OnAllocationLimitsChanged(uint32_t min_send_bitrate_bps,
-                                           uint32_t max_padding_bitrate_bps,
-                                           uint32_t total_bitrate_bps) = 0;
-
-   protected:
-    virtual ~LimitObserver() {}
-  };
-
-  explicit BitrateAllocator(LimitObserver* limit_observer);
+  explicit BitrateAllocator(BitrateAllocatorLimitObserver* limit_observer);
   ~BitrateAllocator();
 
   // Allocate target_bitrate across the registered BitrateAllocatorObservers.
@@ -139,7 +138,7 @@ class BitrateAllocator {
   };
 
   // Calculates the minimum requested send bitrate and max padding bitrate and
-  // calls LimitObserver::OnAllocationLimitsChanged.
+  // calls BitrateAllocatorLimitObserver::OnAllocationLimitsChanged.
   void UpdateAllocationLimits();
 
   typedef std::vector<ObserverConfig> ObserverConfigs;
@@ -196,7 +195,8 @@ class BitrateAllocator {
   uint8_t GetTransmissionMaxBitrateMultiplier();
 
   rtc::SequencedTaskChecker sequenced_checker_;
-  LimitObserver* const limit_observer_ RTC_GUARDED_BY(&sequenced_checker_);
+  BitrateAllocatorLimitObserver* const limit_observer_
+      RTC_GUARDED_BY(&sequenced_checker_);
   // Stored in a list to keep track of the insertion order.
   ObserverConfigs bitrate_observer_configs_ RTC_GUARDED_BY(&sequenced_checker_);
   uint32_t last_bitrate_bps_ RTC_GUARDED_BY(&sequenced_checker_);

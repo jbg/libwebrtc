@@ -22,7 +22,7 @@ using ::testing::_;
 
 namespace webrtc {
 
-class MockLimitObserver : public BitrateAllocator::LimitObserver {
+class MockLimitObserver : public BitrateAllocatorLimitObserver {
  public:
   MOCK_METHOD3(OnAllocationLimitsChanged,
                void(uint32_t min_send_bitrate_bps,
