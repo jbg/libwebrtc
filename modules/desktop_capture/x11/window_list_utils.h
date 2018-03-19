@@ -15,7 +15,7 @@
 
 #include "modules/desktop_capture/desktop_geometry.h"
 #include "modules/desktop_capture/x11/x_atom_cache.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 
 namespace webrtc {
 

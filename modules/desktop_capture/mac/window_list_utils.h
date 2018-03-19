@@ -17,7 +17,7 @@
 #include "modules/desktop_capture/desktop_capturer.h"
 #include "modules/desktop_capture/desktop_geometry.h"
 #include "modules/desktop_capture/mac/desktop_configuration.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 
 namespace webrtc {
 

@@ -21,7 +21,7 @@
 #include "modules/audio_coding/codecs/cng/audio_encoder_cng.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/timeutils.h"

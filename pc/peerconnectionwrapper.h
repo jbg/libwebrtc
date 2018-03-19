@@ -19,7 +19,7 @@
 #include "api/fakemetricsobserver.h"
 #include "api/peerconnectioninterface.h"
 #include "pc/test/mockpeerconnectionobservers.h"
-#include "rtc_base/function_view.h"
+#include "rtc_base/function.h"
 
 namespace webrtc {
 
