@@ -476,7 +476,6 @@ if (rtc_include_tests) {
       ":peerconnection",
       ":rtc_pc_base",
       "../api:libjingle_peerconnection_api",
-      "../api:mock_rtp",
       "../rtc_base:checks",
       "../rtc_base:stringutils",
       "../test:fileutils",
