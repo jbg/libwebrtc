@@ -93,6 +93,30 @@
       "revId": "5fc3376f068ec80b6400cb886e00e3dfdfbb1ee8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ae2cf93_3f0d7137",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T15:22:47Z",
+      "side": 1,
+      "message": "I guess that\u0027s your call. An end-to-end test makes sense, but if that\u0027s the only test, tracking down failures from simple bugs might be unnecessarily cumbersome. \n\nAnd you also have the logic to ignore streams which doesn\u0027t get any allocated bitrate.",
+      "parentUuid": "f05c22cc_c1d9b9f3",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "5fc3376f068ec80b6400cb886e00e3dfdfbb1ee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
