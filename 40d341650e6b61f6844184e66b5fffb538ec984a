@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2fbbad1_8a9b9d6e",
+        "filename": "audio/audio_send_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-03-20T11:44:22Z",
+      "side": 1,
+      "message": "Does this need to be tracked individually? To me it looks like it\u0027s only used in ConfigureBitrateObserver and that will only get called if \n  new_ids.transport_sequence_number !\u003d 0 (or equivalent).\n\nIsn\u0027t has_packet_feedback_ always true in the call to AddObserver?",
+      "revId": "40d341650e6b61f6844184e66b5fffb538ec984a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
