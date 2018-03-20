@@ -93,6 +93,30 @@
       "revId": "0901e8e56563f8e0372cffdced0b2a5e1ec4c639",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6e5ab6c_0a8cbfdd",
+        "filename": "call/bitrate_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-20T12:51:43Z",
+      "side": 1,
+      "message": "Regarding the use of \"observer\" to represent a media stream. I do have a patch for that for the BitrateAllocator. However there\u0027s many variables and comments that need to be changed to fix it so it will be a large CL. It would probably take a while to land. I figured I should use \"observer\" as a synonym for allocatable media stream to be consistent with usage in the rest of this file. WDYT?",
+      "parentUuid": "95aea3bd_1fdcb550",
+      "range": {
+        "startLine": 81,
+        "startChar": 48,
+        "endLine": 81,
+        "endChar": 77
+      },
+      "revId": "0901e8e56563f8e0372cffdced0b2a5e1ec4c639",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
