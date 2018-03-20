@@ -48,11 +48,6 @@ bool IsPacerPushbackExperimentEnabled() {
               webrtc::runtime_enabled_features::kDualStreamModeFeatureName));
 }
 
-NetworkControllerFactoryInterface::uptr ControllerFactory(
-    RtcEventLog* event_log) {
-  return rtc::MakeUnique<GoogCcNetworkControllerFactory>(event_log);
-}
-
 void SortPacketFeedbackVector(std::vector<webrtc::PacketFeedback>* input) {
   std::sort(input->begin(), input->end(), PacketFeedbackComparator());
 }
@@ -306,9 +301,10 @@ SendSideCongestionController::SendSideCongestionController(
     : clock_(clock),
       pacer_(pacer),
       transport_feedback_adapter_(clock_),
-      controller_factory_(ControllerFactory(event_log)),
+      combined_controller_factory_(
+          rtc::MakeUnique<GoogCcNetworkControllerFactory>(event_log)),
       pacer_controller_(MakeUnique<PacerController>(pacer_)),
-      process_interval_(controller_factory_->GetProcessInterval()),
+      process_interval_(combined_controller_factory_->GetProcessInterval()),
       observer_(nullptr),
       send_side_bwe_with_overhead_(
           webrtc::field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
@@ -344,8 +340,9 @@ void SendSideCongestionController::MaybeCreateControllers() {
   control_handler_ = MakeUnique<send_side_cc_internal::ControlHandler>(
       observer_, pacer_controller_.get(), clock_);
 
-  controller_ =
-      controller_factory_->Create(control_handler_.get(), initial_config_);
+  controller_ = combined_controller_factory_->CreateCombined(
+                  control_handler_.get(),
+                  initial_config_);
   UpdateStreamsConfig();
   StartProcessPeriodicTasks();
 }
