@@ -16,6 +16,24 @@
       "revId": "71f07e6dc392a4f7ea81ffdbd5ed6775fe4780d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3605516_8c13f2d0",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T15:46:32Z",
+      "side": 1,
+      "message": "Reformatted cl now.",
+      "parentUuid": "e19396d7_bb45cab1",
+      "revId": "71f07e6dc392a4f7ea81ffdbd5ed6775fe4780d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

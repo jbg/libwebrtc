@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9154ece8_8023f03e",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T15:46:32Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll add a direct dependency from ortc_unittests to pc:peerconnection.",
+      "parentUuid": "ad99c06a_78271b96",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "2850a00bd6846418221699d52ca1ae7118b97585",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68af0d55_2f57fff2",
         "filename": "ortc/ortcfactory_integrationtest.cc",
         "patchSetId": 3
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "f16302ea_4e339504",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T15:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5b73194_b8a3fcf8",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 46
+      },
+      "revId": "2850a00bd6846418221699d52ca1ae7118b97585",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53095fa1_25b39135",
         "filename": "ortc/ortcfactory_integrationtest.cc",
         "patchSetId": 3
@@ -107,6 +155,24 @@
       "writtenOn": "2018-03-19T17:28:16Z",
       "side": 1,
       "message": "Why was this moved?",
+      "revId": "2850a00bd6846418221699d52ca1ae7118b97585",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd3095f3_5009d655",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T15:46:32Z",
+      "side": 1,
+      "message": "Accident, was fixed in ps#4.",
+      "parentUuid": "53095fa1_25b39135",
       "revId": "2850a00bd6846418221699d52ca1ae7118b97585",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
