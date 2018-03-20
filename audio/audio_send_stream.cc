@@ -256,6 +256,7 @@ void AudioSendStream::ConfigureStream(
       stream->transport_->EnablePeriodicAlrProbing(true);
       bandwidth_observer = stream->transport_->GetBandwidthObserver();
     }
+    stream->has_packet_feedback_ = has_transport_sequence_number;
 
     channel_proxy->RegisterSenderCongestionControlObjects(stream->transport_,
                                                           bandwidth_observer);
@@ -283,6 +284,7 @@ void AudioSendStream::Start() {
        !webrtc::field_trial::IsEnabled("WebRTC-Audio-SendSideBwe"))) {
     // Audio BWE is enabled.
     transport_->packet_sender()->SetAccountForAudioPackets(true);
+    has_packet_feedback_ = true;
     ConfigureBitrateObserver(config_.min_bitrate_bps, config_.max_bitrate_bps,
                              config_.bitrate_priority);
   }
@@ -695,7 +697,8 @@ void AudioSendStream::ConfigureBitrateObserver(int min_bitrate_bps,
     config_.bitrate_priority = bitrate_priority;
     // This either updates the current observer or adds a new observer.
     bitrate_allocator_->AddObserver(this, min_bitrate_bps, max_bitrate_bps, 0,
-                                    true, config_.track_id, bitrate_priority);
+                                    true, config_.track_id, bitrate_priority,
+                                    has_packet_feedback_);
     thread_sync_event.Set();
   });
   thread_sync_event.Wait(rtc::Event::kForever);
