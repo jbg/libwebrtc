@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e2db6a4_cae8802f",
+        "filename": "call/bitrate_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T12:32:00Z",
+      "side": 1,
+      "message": "\"data produced by the observer\" sounds a bit confusing...\n\nI guess the idea is that the class implementing the observer interface wants to know its bitrate allocation on order to send some RTP packets, and |has_packet_feedback| means that it promises to attach transport sequence numbers to those packets?\n\nIt seems a bit awkward to signal that with this method. Is there any way it could be routed via RtpTransportControllerSend instead? E.g., VideoSendStreamImpl::OnBitrateUpdated should know both if it gets a non-zero bitrate, and if it intends to send transport sequence numbers.\n\nYou had another cl to move the BitrateAllocator to RtpTransportControllerSend, right? Then VideoSendStreamImpl perhaps won\u0027t need direct access to the BitRateAllocator, and its call to AddObserver could be replaced with some call on RtpTransportControllerSendInterface instead, which might make more sense.",
+      "range": {
+        "startLine": 81,
+        "startChar": 48,
+        "endLine": 81,
+        "endChar": 77
+      },
+      "revId": "0901e8e56563f8e0372cffdced0b2a5e1ec4c639",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad7d67ad_ba2fbfa9",
+        "filename": "call/bitrate_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T12:32:00Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 81,
+        "startChar": 37,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "0901e8e56563f8e0372cffdced0b2a5e1ec4c639",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
