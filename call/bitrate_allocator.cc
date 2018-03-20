@@ -145,7 +145,8 @@ void BitrateAllocator::AddObserver(BitrateAllocatorObserver* observer,
                                    uint32_t pad_up_bitrate_bps,
                                    bool enforce_min_bitrate,
                                    std::string track_id,
-                                   double bitrate_priority) {
+                                   double bitrate_priority,
+                                   bool has_packet_feedback) {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   RTC_DCHECK_GT(bitrate_priority, 0);
   RTC_DCHECK(std::isnormal(bitrate_priority));
@@ -161,7 +162,7 @@ void BitrateAllocator::AddObserver(BitrateAllocatorObserver* observer,
   } else {
     bitrate_observer_configs_.push_back(ObserverConfig(
         observer, min_bitrate_bps, max_bitrate_bps, pad_up_bitrate_bps,
-        enforce_min_bitrate, track_id, bitrate_priority));
+        enforce_min_bitrate, track_id, bitrate_priority, has_packet_feedback));
   }
 
   ObserverAllocation allocation;
@@ -193,7 +194,7 @@ void BitrateAllocator::UpdateAllocationLimits() {
   uint32_t total_requested_padding_bitrate = 0;
   uint32_t total_requested_min_bitrate = 0;
   uint32_t total_requested_bitrate = 0;
-
+  bool has_packet_feedback = false;
   for (const auto& config : bitrate_observer_configs_) {
     uint32_t stream_padding = config.pad_up_bitrate_bps;
     if (config.enforce_min_bitrate) {
@@ -204,6 +205,8 @@ void BitrateAllocator::UpdateAllocationLimits() {
     }
     total_requested_padding_bitrate += stream_padding;
     total_requested_bitrate += config.max_bitrate_bps;
+    if (config.allocated_bitrate_bps > 0 && config.has_packet_feedback)
+      has_packet_feedback = true;
   }
 
   if (total_requested_padding_bitrate == total_requested_padding_bitrate_ &&
@@ -218,9 +221,9 @@ void BitrateAllocator::UpdateAllocationLimits() {
                    << total_requested_min_bitrate
                    << "bps, total_requested_padding_bitrate: "
                    << total_requested_padding_bitrate << "bps";
-  limit_observer_->OnAllocationLimitsChanged(total_requested_min_bitrate,
-                                             total_requested_padding_bitrate,
-                                             total_requested_bitrate, true);
+  limit_observer_->OnAllocationLimitsChanged(
+      total_requested_min_bitrate, total_requested_padding_bitrate,
+      total_requested_bitrate, has_packet_feedback);
 }
 
 void BitrateAllocator::RemoveObserver(BitrateAllocatorObserver* observer) {
