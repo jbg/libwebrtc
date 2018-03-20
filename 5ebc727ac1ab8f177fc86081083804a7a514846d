@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "61295616_d37aa2f8",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-03-20T12:29:41Z",
+      "side": 1,
+      "message": "I think failures of an async operation should be reported to the callback class. It seems a bit silly to introduce a new failure reporting path (e.g. bool return value) only for the case \"you did not provide a callback so we couldn\u0027t return failure any other way\". I think it adds more confusion to have a special-case fail-early path. If you return true the caller might think the operation was successful (and I\u0027ve seen uses like this with SetRemoteDescription in third parties, but an async operation being completed synchronously is an implementation detail - not a contract) - you have no idea if the operation was successful or not until the async callback is invoked. Having a separate \"fail early\" path I think is a mistake, thinking of design patterns such as \"Semi-sync replaceTrack API pre-initial-negotiation is bizarre\" (https://github.com/w3c/webrtc-pc/issues/1769).\n\nBecause waiting for callback is the only sensible way to determine the outcome of the operation, because multiple failure paths is confusing and because of the lack of usefulness in real application to be able to handle \"forgot to add a callback\" gracefully at runtime - can we make an exception and allow DCHECKing callbacks?",
+      "parentUuid": "4a5660f3_43298d82",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "764bc063_e5e21571",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1597,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-03-20T12:29:41Z",
+      "side": 1,
+      "message": "Here on the other hand I agree with the above comment that we should not DCHECK if we have a policy about returning failure on invalid arguments. As long as we have a callback we can conceivably return failure.\n\nBut because getStats() generally cannot fail and I don\u0027t want to have to update the RTCStatsCollectorCallback interface to add OnFailure(RTCError) for this edge case, I updated this code to allow null selector (same behavior as if internal sender is not found).",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42838f32_0b40f3e3",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 2
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6074075c_1daf5b3b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-03-20T12:29:41Z",
+      "side": 1,
+      "message": "The non-null sender argument but null internal sender is the case if you invoke it with a sender that has been removed (Plan B) or with a sender that belongs to another PC.\n\nThis is on purpose. If the sender does not belong to the PC then, \"All RTC[In/Out]boundRTPStreamStats objects representing RTP streams being sent by selector\" and all objects directly or indirectly referenced by those objects, by definition, is an empty set. This is the behavior you get if you invoke GetStatsReport with a null sender, which I made sure to support in the previous CL.\n\nI can see that this is not obvious though so I added a comment.",
+      "parentUuid": "42838f32_0b40f3e3",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "356328fc_403f92fe",
         "filename": "pc/rtcstats_integrationtest.cc",
         "patchSetId": 2
@@ -50,6 +103,24 @@
       "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b379b95_cbbac26d",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-03-20T12:29:41Z",
+      "side": 1,
+      "message": "Good idea, done.",
+      "parentUuid": "356328fc_403f92fe",
+      "revId": "5ebc727ac1ab8f177fc86081083804a7a514846d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
