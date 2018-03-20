@@ -70,7 +70,7 @@ class BitrateAllocator {
                         int64_t rtt,
                         int64_t bwe_period_ms);
 
-  // Set the configuration used by the bandwidth management.
+  // Set the start and max send bitrate used by the bandwidth management.
   //
   // |observer| updates bitrates if already in use.
   // |min_bitrate_bps| = 0 equals no min bitrate.
@@ -78,14 +78,10 @@ class BitrateAllocator {
   // |enforce_min_bitrate| = 'true' will allocate at least |min_bitrate_bps| for
   //    this observer, even if the BWE is too low, 'false' will allocate 0 to
   //    the observer if BWE doesn't allow |min_bitrate_bps|.
-  // |has_packet_feedback| indicates wether the data produced by the observer
-  // will receive per packet feedback. This is tracked here to communicate to
-  // limit observers whether packet feedback can be expected, which is true if
-  // any of the active observers has packet feedback enabled. Note that
-  // |observer|->OnBitrateUpdated() will be called within the scope of this
-  // method with the current rtt, fraction_loss and available bitrate and that
-  // the bitrate in OnBitrateUpdated will be zero if the |observer| is currently
-  // not allowed to send data.
+  // Note that |observer|->OnBitrateUpdated() will be called within the scope of
+  // this method with the current rtt, fraction_loss and available bitrate and
+  // that the bitrate in OnBitrateUpdated will be zero if the |observer| is
+  // currently not allowed to send data.
   void AddObserver(BitrateAllocatorObserver* observer,
                    uint32_t min_bitrate_bps,
                    uint32_t max_bitrate_bps,
