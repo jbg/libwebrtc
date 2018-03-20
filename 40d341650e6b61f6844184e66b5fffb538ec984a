@@ -16,6 +16,24 @@
       "revId": "40d341650e6b61f6844184e66b5fffb538ec984a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27cc7b31_0c4d3a33",
+        "filename": "audio/audio_send_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-20T12:21:08Z",
+      "side": 1,
+      "message": "Good point. I rewrote it without a cached value and ensured that the correct state is reported.",
+      "parentUuid": "e2fbbad1_8a9b9d6e",
+      "revId": "40d341650e6b61f6844184e66b5fffb538ec984a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
