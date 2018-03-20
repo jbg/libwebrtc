@@ -34,6 +34,24 @@
       "revId": "40d341650e6b61f6844184e66b5fffb538ec984a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6e72b93_17b93bac",
+        "filename": "audio/audio_send_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-03-20T13:28:04Z",
+      "side": 1,
+      "message": "I see now that I glossed over the Field Trial check in my previous comment. This solution is better. :)",
+      "parentUuid": "27cc7b31_0c4d3a33",
+      "revId": "40d341650e6b61f6844184e66b5fffb538ec984a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
