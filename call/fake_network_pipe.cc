@@ -80,8 +80,7 @@ void DemuxerImpl::DeliverPacket(const NetworkPacket* packet,
                                 const PacketTime& packet_time) {
   // No packet receiver means that this demuxer will terminate the flow of
   // packets.
-  if (!packet_receiver_)
-    return;
+  if (!packet_receiver_) return;
   const uint8_t* const packet_data = packet->data();
   const size_t packet_length = packet->data_length();
   MediaType media_type = MediaType::ANY;
@@ -148,13 +147,11 @@ FakeNetworkPipe::~FakeNetworkPipe() = default;
 
 void FakeNetworkPipe::SetReceiver(PacketReceiver* receiver) {
   rtc::CritScope crit(&config_lock_);
-  if (demuxer_)
-    demuxer_->SetReceiver(receiver);
+  if (demuxer_) demuxer_->SetReceiver(receiver);
   receiver_ = receiver;
 }
 
-bool FakeNetworkPipe::SendRtp(const uint8_t* packet,
-                              size_t length,
+bool FakeNetworkPipe::SendRtp(const uint8_t* packet, size_t length,
                               const PacketOptions& options) {
   RTC_DCHECK(HasTransport());
   EnqueuePacket(rtc::CopyOnWriteBuffer(packet, length), options, false,
@@ -170,8 +167,7 @@ bool FakeNetworkPipe::SendRtcp(const uint8_t* packet, size_t length) {
 }
 
 PacketReceiver::DeliveryStatus FakeNetworkPipe::DeliverPacket(
-    MediaType media_type,
-    rtc::CopyOnWriteBuffer packet,
+    MediaType media_type, rtc::CopyOnWriteBuffer packet,
     const PacketTime& packet_time) {
   return EnqueuePacket(std::move(packet), rtc::nullopt, false, media_type,
                        packet_time)
@@ -210,8 +206,7 @@ void FakeNetworkPipe::SendPacket(const uint8_t* data, size_t data_length) {
 
 bool FakeNetworkPipe::EnqueuePacket(rtc::CopyOnWriteBuffer packet,
                                     rtc::Optional<PacketOptions> options,
-                                    bool is_rtcp,
-                                    MediaType media_type,
+                                    bool is_rtcp, MediaType media_type,
                                     rtc::Optional<PacketTime> packet_time) {
   Config config;
   {
@@ -256,8 +251,7 @@ bool FakeNetworkPipe::EnqueuePacket(rtc::CopyOnWriteBuffer packet,
 
 float FakeNetworkPipe::PercentageLoss() {
   rtc::CritScope crit(&process_lock_);
-  if (sent_packets_ == 0)
-    return 0;
+  if (sent_packets_ == 0) return 0;
 
   return static_cast<float>(dropped_packets_) /
          (sent_packets_ + dropped_packets_);
@@ -265,8 +259,7 @@ float FakeNetworkPipe::PercentageLoss() {
 
 int FakeNetworkPipe::AverageDelay() {
   rtc::CritScope crit(&process_lock_);
-  if (sent_packets_ == 0)
-    return 0;
+  if (sent_packets_ == 0) return 0;
 
   return static_cast<int>(total_packet_delay_ /
                           static_cast<int64_t>(sent_packets_));
@@ -414,6 +407,54 @@ bool FakeNetworkPipe::HasTransport() const {
 bool FakeNetworkPipe::HasDemuxer() const {
   rtc::CritScope crit(&config_lock_);
   return demuxer_ != nullptr;
+}
+
+void FakeNetworkPipe::DeliverPacketWithLock(NetworkPacket* packet) {
+  rtc::CritScope crit(&config_lock_);
+  DeliverPacket(packet);
+}
+
+void FakeNetworkPipe::ResetStats() {
+  rtc::CritScope crit(&process_lock_);
+  dropped_packets_ = 0;
+  sent_packets_ = 0;
+  total_packet_delay_ = 0;
+}
+
+int FakeNetworkPipe::GetConfigCapacityKbps() const {
+  rtc::CritScope crit(&config_lock_);
+  return config_.link_capacity_kbps;
+}
+
+void FakeNetworkPipe::AddToPacketDropCount() {
+  rtc::CritScope crit(&process_lock_);
+  ++dropped_packets_;
+}
+
+void FakeNetworkPipe::AddToPacketSentCount(int count) {
+  rtc::CritScope crit(&process_lock_);
+  sent_packets_ += count;
+}
+
+void FakeNetworkPipe::AddToTotalDelay(int delay_ms) {
+  rtc::CritScope crit(&process_lock_);
+  total_packet_delay_ += delay_ms;
+}
+
+int64_t FakeNetworkPipe::GetTimeInMilliseconds() const {
+  return clock_->TimeInMilliseconds();
+}
+
+bool FakeNetworkPipe::IsRandomLoss(double prob_loss) {
+  return random_.Rand<double>() < prob_loss;
+}
+
+bool FakeNetworkPipe::ShouldProcess(int64_t time_now) const {
+  return time_now >= next_process_time_;
+}
+
+void FakeNetworkPipe::SetTimeToNextProcess(int64_t skip_ms) {
+  next_process_time_ += skip_ms;
 }
 
 }  // namespace webrtc
