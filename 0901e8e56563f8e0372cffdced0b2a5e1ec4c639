@@ -117,6 +117,30 @@
       "revId": "0901e8e56563f8e0372cffdced0b2a5e1ec4c639",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c631890c_932cf5c3",
+        "filename": "call/bitrate_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T12:55:32Z",
+      "side": 1,
+      "message": "\u003e I agree about the design issue. To me it makes sense doing the refactor first. However it adds to the number of CLs that have to land probably making it hard to achieve before DR32 at the normal rate of CL-reviews. WDYT?\n\nI guess it could make more sense as a temporary hack, if commented properly.\n\nAnd about the TODO below, you probably should *not* update more callers than absolutely necessary, since the argument should be deleted again after moving responsibility to RtpTransportControllerSendInterface. Or make it a separate method, AddObserverAndSignalPacketFeedback (or preferably with a name closer to what the RtpTransportControllerSendInterface method should be).",
+      "parentUuid": "95aea3bd_1fdcb550",
+      "range": {
+        "startLine": 81,
+        "startChar": 48,
+        "endLine": 81,
+        "endChar": 77
+      },
+      "revId": "0901e8e56563f8e0372cffdced0b2a5e1ec4c639",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
