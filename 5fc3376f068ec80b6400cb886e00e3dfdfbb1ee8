@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90dd9ded_a0ff879b",
+        "filename": "call/bitrate_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T13:43:49Z",
+      "side": 1,
+      "message": "Also a somewhat alien place to attach this flag, but I guess we\u0027ll have to live with it for the time being.",
+      "range": {
+        "startLine": 58,
+        "startChar": 48,
+        "endLine": 58,
+        "endChar": 67
+      },
+      "revId": "5fc3376f068ec80b6400cb886e00e3dfdfbb1ee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e77e0be1_1e085d27",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-20T13:43:49Z",
+      "side": 1,
+      "message": "Might also need some new tests to verify that it\u0027s propagated corectly from the AddObserver method to this callback. In which cl would that belong (a pretty basic test would suffice)?",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "5fc3376f068ec80b6400cb886e00e3dfdfbb1ee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
