@@ -88,7 +88,9 @@ class BitrateAllocator {
                    uint32_t pad_up_bitrate_bps,
                    bool enforce_min_bitrate,
                    std::string track_id,
-                   double bitrate_priority);
+                   double bitrate_priority,
+                   // TODO(srte): Remove default when callers have been fixed.
+                   bool has_packet_feedback = false);
 
   // Removes a previously added observer, but will not trigger a new bitrate
   // allocation.
@@ -113,7 +115,8 @@ class BitrateAllocator {
                    uint32_t pad_up_bitrate_bps,
                    bool enforce_min_bitrate,
                    std::string track_id,
-                   double bitrate_priority)
+                   double bitrate_priority,
+                   bool has_packet_feedback)
         : TrackConfig(min_bitrate_bps,
                       max_bitrate_bps,
                       enforce_min_bitrate,
@@ -122,7 +125,8 @@ class BitrateAllocator {
           pad_up_bitrate_bps(pad_up_bitrate_bps),
           allocated_bitrate_bps(-1),
           media_ratio(1.0),
-          bitrate_priority(bitrate_priority) {}
+          bitrate_priority(bitrate_priority),
+          has_packet_feedback(has_packet_feedback) {}
 
     BitrateAllocatorObserver* observer;
     uint32_t pad_up_bitrate_bps;
@@ -132,6 +136,7 @@ class BitrateAllocator {
     // observers. If an observer has twice the bitrate_priority of other
     // observers, it should be allocated twice the bitrate above its min.
     double bitrate_priority;
+    bool has_packet_feedback;
 
     uint32_t LastAllocatedBitrate() const;
     // The minimum bitrate required by this observer, including
