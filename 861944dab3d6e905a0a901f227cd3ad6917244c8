@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b990687_6ac63d05",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-20T12:55:47Z",
+      "side": 1,
+      "message": "nit: not a fan of same-line if statements. I would rather add brackets or at least a newline after itc",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "861944dab3d6e905a0a901f227cd3ad6917244c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
