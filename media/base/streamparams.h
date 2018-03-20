@@ -188,6 +188,8 @@ struct StreamSelector {
       streamid(streamid) {
   }
 
+  StreamSelector(const std::string& streamid) : ssrc(0), streamid(streamid) {}
+
   bool Matches(const StreamParams& stream) const {
     if (ssrc == 0) {
       return stream.groupid == groupid && stream.id == streamid;
