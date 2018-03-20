@@ -140,6 +140,8 @@ class SendSideCongestionController
 
  private:
   void MaybeCreateControllers() RTC_RUN_ON(task_queue_ptr_);
+  void RecreateNetworkControllers() RTC_RUN_ON(task_queue_ptr_);
+
   void StartProcessPeriodicTasks() RTC_RUN_ON(task_queue_ptr_);
   void UpdateControllerWithTimeInterval() RTC_RUN_ON(task_queue_ptr_);
   void UpdatePacerQueue() RTC_RUN_ON(task_queue_ptr_);
@@ -156,8 +158,10 @@ class SendSideCongestionController
   // TODO(srte): Move all access to feedback adapter to task queue.
   TransportFeedbackAdapter transport_feedback_adapter_;
 
+  const std::unique_ptr<FeedbackBasedNetworkControllerFactoryInterface>
+      feedback_controller_factory_ RTC_GUARDED_BY(task_queue_ptr_);
   const std::unique_ptr<CombinedNetworkControllerFactoryInterface>
-      combined_controller_factory_ RTC_GUARDED_BY(task_queue_);
+      combined_controller_factory_ RTC_GUARDED_BY(task_queue_ptr_);
 
   const std::unique_ptr<PacerController> pacer_controller_
       RTC_GUARDED_BY(task_queue_ptr_);
@@ -165,7 +169,19 @@ class SendSideCongestionController
   std::unique_ptr<send_side_cc_internal::ControlHandler> control_handler_
       RTC_GUARDED_BY(task_queue_ptr_);
 
-  std::unique_ptr<CombinedNetworkControllerInterface> controller_
+  std::unique_ptr<FeedbackBasedNetworkControllerInterface>
+      owned_feedback_controller_ RTC_GUARDED_BY(task_queue_ptr_);
+
+  std::unique_ptr<CombinedNetworkControllerInterface> owned_combined_controller_
+      RTC_GUARDED_BY(task_queue_ptr_);
+
+  GenericNetworkControllerInterface* controller_
+      RTC_GUARDED_BY(task_queue_ptr_);
+
+  FeedbackBasedNetworkControllerInterface* feedback_controller_
+      RTC_GUARDED_BY(task_queue_ptr_);
+
+  SimplifiedNetworkControllerInterface* simple_controller_
       RTC_GUARDED_BY(task_queue_ptr_);
 
   TimeDelta process_interval_ RTC_GUARDED_BY(task_queue_ptr_);
@@ -184,6 +200,7 @@ class SendSideCongestionController
   // TODO(srte): Remove atomic when feedback adapter runs on task queue.
   std::atomic<size_t> transport_overhead_bytes_per_packet_;
   bool network_available_ RTC_GUARDED_BY(task_queue_ptr_);
+  bool packet_feedback_available_ RTC_GUARDED_BY(task_queue_ptr_) = false;
 
   // Protects access to last_packet_feedback_vector_ in feedback adapter.
   // TODO(srte): Remove this checker when feedback adapter runs on task queue.
