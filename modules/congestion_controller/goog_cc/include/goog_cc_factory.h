@@ -10,6 +10,9 @@
 
 #ifndef MODULES_CONGESTION_CONTROLLER_GOOG_CC_INCLUDE_GOOG_CC_FACTORY_H_
 #define MODULES_CONGESTION_CONTROLLER_GOOG_CC_INCLUDE_GOOG_CC_FACTORY_H_
+
+#include <memory>
+
 #include "modules/congestion_controller/network_control/include/network_control.h"
 
 namespace webrtc {
@@ -17,12 +20,17 @@ class Clock;
 class RtcEventLog;
 
 class GoogCcNetworkControllerFactory
-    : public NetworkControllerFactoryInterface {
+    : public CombinedNetworkControllerFactoryInterface {
  public:
   explicit GoogCcNetworkControllerFactory(RtcEventLog*);
-  NetworkControllerInterface::uptr Create(
+
+  std::unique_ptr<CombinedNetworkControllerInterface> CreateCombined(
       NetworkControllerObserver* observer,
       NetworkControllerConfig config) override;
+  std::unique_ptr<FeedbackBasedNetworkControllerInterface> CreateFeedbackBased(
+      NetworkControllerObserver* observer,
+      NetworkControllerConfig config) override;
+
   TimeDelta GetProcessInterval() const override;
 
  private:

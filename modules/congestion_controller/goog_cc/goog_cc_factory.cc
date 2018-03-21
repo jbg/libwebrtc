@@ -17,9 +17,18 @@ GoogCcNetworkControllerFactory::GoogCcNetworkControllerFactory(
     RtcEventLog* event_log)
     : event_log_(event_log) {}
 
-NetworkControllerInterface::uptr GoogCcNetworkControllerFactory::Create(
+std::unique_ptr<CombinedNetworkControllerInterface>
+GoogCcNetworkControllerFactory::CreateCombined(
     NetworkControllerObserver* observer,
     NetworkControllerConfig config) {
+  return rtc::MakeUnique<webrtc_cc::GoogCcNetworkController>(event_log_,
+                                                             observer, config);
+}
+
+std::unique_ptr<webrtc::FeedbackBasedNetworkControllerInterface>
+webrtc::GoogCcNetworkControllerFactory::CreateFeedbackBased(
+    webrtc::NetworkControllerObserver* observer,
+    webrtc::NetworkControllerConfig config) {
   return rtc::MakeUnique<webrtc_cc::GoogCcNetworkController>(event_log_,
                                                              observer, config);
 }
