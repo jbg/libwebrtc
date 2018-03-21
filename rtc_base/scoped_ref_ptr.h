@@ -103,11 +103,11 @@ class scoped_refptr {
   operator T*() const { return ptr_; }
   T* operator->() const { return ptr_; }
 
-  // Release a pointer.
-  // The return value is the current pointer held by this object.
-  // If this object holds a null pointer, the return value is null.
-  // After this operation, this object will hold a null pointer,
-  // and will not own the object any more.
+  // Returns the (possibly null) raw pointer, and makes this object
+  // hold a null pointer, all without touching the reference count of
+  // the underlying pointed-to object. This implies that the caller
+  // takes over ownership, and is responsible for calling Release on
+  // the underlying object when no longer using it.
   T* release() {
     T* retVal = ptr_;
     ptr_ = nullptr;
