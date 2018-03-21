@@ -16,6 +16,24 @@
       "revId": "224c5f3fac5f43aaec4acc84874b63347e623932",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "850f5b35_48e5bb4c",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-21T11:58:18Z",
+      "side": 1,
+      "message": "Thanks. I adopted this text, just abbreviating \"the code that called\" to \"caller of\", to make it fit in 5 lines.",
+      "parentUuid": "7f6d18f8_508971cb",
+      "revId": "224c5f3fac5f43aaec4acc84874b63347e623932",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
