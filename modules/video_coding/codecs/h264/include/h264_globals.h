@@ -53,6 +53,16 @@ inline std::ostream& operator<<(std::ostream& stream,
   return stream;
 }
 
+inline std::string ToString(H264PacketizationMode mode) {
+  if(mode == H264PacketizationMode::NonInterleaved) {
+    return "NonInterleaved";
+  } else if (mode == H264PacketizationMode::SingleNalUnit) {
+    return "SingleNalUnit";
+  }
+  RTC_NOTREACHED();
+  return "";
+}
+
 struct NaluInfo {
   uint8_t type;
   int sps_id;

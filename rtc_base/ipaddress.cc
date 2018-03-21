@@ -225,6 +225,15 @@ std::ostream& operator<<(std::ostream& os, const InterfaceAddress& ip) {
   return os;
 }
 
+std::string InterfaceAddress::ToString() const {
+  std::string result = IPAddress::ToString();
+
+  if (family() == AF_INET6)
+    result += "|flags:0x" + rtc::ToHex(ipv6_flags());
+
+  return result;
+}
+
 static bool IPIsPrivateNetworkV4(const IPAddress& ip) {
   uint32_t ip_in_host_order = ip.v4AddressAsHostOrderInteger();
   return ((ip_in_host_order >> 24) == 10) ||

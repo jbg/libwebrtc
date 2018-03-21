@@ -75,7 +75,7 @@ TEST(ascii_string_compareTest, GreaterThan) {
   EXPECT_EQ(1, ascii_string_compare(L"xyz", "xy", 5, identity));
   EXPECT_EQ(1, ascii_string_compare(L"abc", "ABB", 5, tolowercase));
 }
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 TEST(string_trim_Test, Trimming) {
   EXPECT_EQ("temp", string_trim("\n\r\t temp \n\r\t"));
@@ -103,6 +103,12 @@ TEST(string_endsTest, EndsWith) {
   EXPECT_FALSE(ends_with("foobar", "foo"));
   EXPECT_FALSE(ends_with("foobar", "foobarbaz"));
   EXPECT_FALSE(ends_with("", "f"));
+}
+
+TEST(string_toHexTest, ToHex) {
+  EXPECT_EQ(ToHex(0), "0");
+  EXPECT_EQ(ToHex(0X1243E), "1243e");
+  EXPECT_EQ(ToHex(-20), "ffffffec");
 }
 
 } // namespace rtc

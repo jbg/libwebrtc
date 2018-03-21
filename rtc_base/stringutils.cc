@@ -7,6 +7,7 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include <cstdio>
 
 #include "rtc_base/stringutils.h"
 #include "rtc_base/checks.h"
@@ -128,6 +129,13 @@ std::string string_trim(const std::string& s) {
   }
 
   return s.substr(first, last - first + 1);
+}
+
+std::string ToHex(const int i) {
+  char buffer[50];
+  sprintf(buffer, "%x", i);
+
+  return std::string(buffer);
 }
 
 }  // namespace rtc

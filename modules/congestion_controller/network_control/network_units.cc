@@ -112,4 +112,43 @@ DataSize operator*(const TimeDelta& duration, const DataRate& rate) {
   }
 }
 
+::std::string DataRate::ToString() const {
+  if (*this == DataRate::kPlusInfinity) {
+    return "inf bps";
+  } else if (*this == DataRate::kNotInitialized) {
+    return "? bps";
+  } else {
+    return std::to_string(bps()) + " bps";
+  }
+}
+::std::string DataSize::ToString() const {
+  if (*this == DataSize::kPlusInfinity) {
+    return "inf bytes";
+  } else if (*this == DataSize::kNotInitialized) {
+    return "? bytes";
+  } else {
+    return std::to_string(bytes()) + " bytes";
+  }
+}
+::std::string Timestamp::ToString() const {
+  if (*this == Timestamp::kPlusInfinity) {
+    return "inf ms";
+  } else if (*this == Timestamp::kNotInitialized) {
+    return "? ms";
+  } else {
+    return std::to_string(ms()) + " ms";
+  }
+}
+::std::string TimeDelta::ToString() const {
+  if (*this == TimeDelta::kPlusInfinity) {
+    return "+inf ms";
+  } else if (*this == TimeDelta::kMinusInfinity) {
+    return "-inf ms";
+  } else if (*this == TimeDelta::kNotInitialized) {
+    return "? ms";
+  } else {
+    return std::to_string(ms()) + " ms";
+  }
+}
+
 }  // namespace webrtc
