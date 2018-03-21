@@ -98,4 +98,9 @@ std::ostream& operator<<(std::ostream& stream, RTCErrorType error) {
   return stream << kRTCErrorTypeNames[index];
 }
 
+std::string ToString(RTCErrorType error) {
+  int index = static_cast<int>(error);
+  return std::string(kRTCErrorTypeNames[index]);
+}
+
 }  // namespace webrtc
