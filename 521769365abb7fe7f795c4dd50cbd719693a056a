@@ -22,6 +22,30 @@
       "revId": "521769365abb7fe7f795c4dd50cbd719693a056a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2336b660_561b4e2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-21T13:03:16Z",
+      "side": 1,
+      "message": "Yes, after investigating there were no issues. In cases where AudioSendStream uses bandwidth information is always do it trough BitrateAllocator.",
+      "parentUuid": "0dfcafff_484ad586",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "521769365abb7fe7f795c4dd50cbd719693a056a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
