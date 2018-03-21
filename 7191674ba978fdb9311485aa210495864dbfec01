@@ -16,6 +16,24 @@
       "revId": "7191674ba978fdb9311485aa210495864dbfec01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d09abae_777ac73a",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-21T08:27:28Z",
+      "side": 1,
+      "message": "Probably not, I\u0027ll have to reorganize this.\n\nBTW, I\u0027m starting to think that the VideoTrackSource class is a bit dangerous. It\u0027s intended to be reference counted (since it inherits refcounted MediaSourceInterfac in a few steps), but it gets an un-owned reference to a VideoSourceInterface.\n\nNow, it does have an OnSourceDestroyed method, which seems intended to solve that problem. So I\u0027m now calling that before destroying the source, and I think we should be fine.",
+      "parentUuid": "a8642e01_b7629cee",
+      "revId": "7191674ba978fdb9311485aa210495864dbfec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
