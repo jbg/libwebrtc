@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28355d53_4d201050",
+        "filename": "api/audio_codecs/audio_format.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T13:14:26Z",
+      "side": 1,
+      "message": "Replace this with\n\n  os \u003c\u003c saf.ToString();\n  return os;\n\nto save space and reduce code duplication?\n\n(This goes for all types, obviously.)",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71010a4f_31a139d0",
+        "filename": "api/rtcerror.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T13:14:26Z",
+      "side": 1,
+      "message": "Consider adding a TODO for this std::string return value to be replaced with an absl::string_view as soon as we\u0027re able to use that.\n\n(See https://abseil.io/tips/1 and https://github.com/abseil/abseil-cpp/blob/master/absl/strings/string_view.h if you\u0027re not familiar with string_view.)",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97684b79_2b5e9772",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T13:14:26Z",
+      "side": 1,
+      "message": "The leading :: should not be necessary.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 2
+      },
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04a8b924_7e8ba119",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T13:14:26Z",
+      "side": 1,
+      "message": "Have you compared the generated code for this (constructing new std::strings in several places and concatenating them with +) versus the generated code for SimpleStringBuilder?",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fd33daf_e8324e3f",
+        "filename": "modules/video_coding/codecs/h264/include/h264_globals.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T13:14:26Z",
+      "side": 1,
+      "message": "TODO for string_view here too.",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0137b6d1_af51b00d",
+        "filename": "rtc_base/stringutils.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T13:14:26Z",
+      "side": 1,
+      "message": "sizeof(buffer)?",
+      "range": {
+        "startLine": 136,
+        "startChar": 19,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
