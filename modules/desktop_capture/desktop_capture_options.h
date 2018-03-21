@@ -72,6 +72,11 @@ class DesktopCaptureOptions {
       rtc::scoped_refptr<FullScreenChromeWindowDetector> detector) {
     full_screen_window_detector_ = detector;
   }
+
+  bool allow_iosurface_capturer() const { return allow_iosurface_capturer_; }
+  void set_allow_iosurface_capturer(bool allow) {
+    allow_iosurface_capturer_ = allow;
+  }
 #endif
 
   // Flag indicating that the capturer should use screen change notifications.
@@ -122,6 +127,8 @@ class DesktopCaptureOptions {
   rtc::scoped_refptr<DesktopConfigurationMonitor> configuration_monitor_;
   rtc::scoped_refptr<FullScreenChromeWindowDetector>
       full_screen_window_detector_;
+
+  bool allow_iosurface_capturer_ = false;
 #endif
 
 #if defined(WEBRTC_WIN)
