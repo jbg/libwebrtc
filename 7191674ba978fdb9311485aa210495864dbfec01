@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8642e01_b7629cee",
+        "filename": "ortc/ortcfactory_integrationtest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-21T02:03:07Z",
+      "side": 1,
+      "message": "Is it safe to delete the source out from underneath the VideoTrack/VideoTrackSource? Would be safer to add a Stop method to FakePeriodicVideoSource (which would just destroy the task queue, I guess?).",
+      "revId": "7191674ba978fdb9311485aa210495864dbfec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
