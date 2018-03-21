@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f6d18f8_508971cb",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-21T10:18:12Z",
+      "side": 1,
+      "message": "Hmm. Maybe\n\n  Returns the (possibly null) raw pointer, and makes the scoped_refptr\n  hold a null pointer, all without touching the reference count of\n  the underlying pointed-to object. The object is still reference\n  counted, and the code that called release() is now the proud owner\n  of one reference, so it is responsible for calling Release() once\n  on the object when no longer using it.\n\nsince \"takes over ownership\" could be misunderstood as referring to sole ownership of the object.",
+      "revId": "224c5f3fac5f43aaec4acc84874b63347e623932",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
