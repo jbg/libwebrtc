@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffd97565_022bae22",
+        "filename": "rtc_base/scoped_ref_ptr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-22T08:23:08Z",
+      "side": 1,
+      "message": "Looks good. I almost feel like there needs to be an apology here for calling this method release() when its purpose is to remove the responsibility of calling Release() :D",
+      "range": {
+        "startLine": 110,
+        "startChar": 28,
+        "endLine": 110,
+        "endChar": 30
+      },
+      "revId": "82cea033bec5e1a29a8355ca0c93b8fdf8f92f0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
