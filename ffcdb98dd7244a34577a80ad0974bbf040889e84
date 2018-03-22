@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "8dab5fbc_10e711ee",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-22T13:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd41478e_17f4ae7e",
+      "range": {
+        "startLine": 64,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "254f187d_c73e505b",
         "filename": "video/video_stream_decoder_impl.h",
         "patchSetId": 3
@@ -70,6 +94,30 @@
       "writtenOn": "2018-03-22T13:00:30Z",
       "side": 1,
       "message": "Declare as const pointer, VideoStreamDecoder::Callbacks* const callbacks_;\n\nThen RTC_GUARDED_BY is unneeded. You may want to use RTC_PT_GUARDED_BY, depending on what\u0027s intended.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3537d620_a87dce2a",
+        "filename": "video/video_stream_decoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-22T13:56:49Z",
+      "side": 1,
+      "message": "Added const.\n\nI want to use the RTC_GUARDED_BY to make sure I only make callbacks on the |bookkeeping_queue_|.",
+      "parentUuid": "254f187d_c73e505b",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -105,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "529c96a0_30fbe5f5",
+        "filename": "video/video_stream_decoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-22T13:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f95cf1b1_d5718611",
+      "range": {
+        "startLine": 52,
+        "startChar": 17,
+        "endLine": 52,
+        "endChar": 35
+      },
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91d75d64_4acc387f",
         "filename": "video/video_stream_decoder_impl.h",
         "patchSetId": 3
@@ -116,6 +188,30 @@
       "writtenOn": "2018-03-22T13:00:30Z",
       "side": 1,
       "message": "Similarly, this should be a const ptr.\n\nAlso, Clock is deprecated, rtc::TimeMicros (from rtc_base/timeutils.h) is the recommended way to read the monotonic system clock.",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 15
+      },
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "873542d0_972f7d46",
+        "filename": "video/video_stream_decoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-22T13:56:49Z",
+      "side": 1,
+      "message": "Removed it.",
+      "parentUuid": "91d75d64_4acc387f",
       "range": {
         "startLine": 53,
         "startChar": 2,
