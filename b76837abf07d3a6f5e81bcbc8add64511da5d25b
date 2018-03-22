@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c538f547_385a03f7",
+        "filename": "modules/congestion_controller/network_control/test/network_control_tester.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-22T12:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e02de74_08583afc",
+      "range": {
+        "startLine": 106,
+        "startChar": 11,
+        "endLine": 106,
+        "endChar": 15
+      },
+      "revId": "b76837abf07d3a6f5e81bcbc8add64511da5d25b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f7e4f05_933b9f22",
         "filename": "modules/congestion_controller/network_control/test/network_control_tester.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-22T11:48:56Z",
       "side": 1,
       "message": "Looks like there might be packets left in |received_packets_| after leaving this loop. Is that intended/ok?",
+      "range": {
+        "startLine": 127,
+        "startChar": 3,
+        "endLine": 127,
+        "endChar": 0
+      },
+      "revId": "b76837abf07d3a6f5e81bcbc8add64511da5d25b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "176ad017_f82c2596",
+        "filename": "modules/congestion_controller/network_control/test/network_control_tester.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-22T12:40:07Z",
+      "side": 1,
+      "message": "Yes, if they aren\u0027t delivered in time then they are saved for the next run if there is any. Do you think I should comment this fact for clarity?",
+      "parentUuid": "2f7e4f05_933b9f22",
       "range": {
         "startLine": 127,
         "startChar": 3,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e4156022_825cae88",
+        "filename": "modules/congestion_controller/network_control/test/network_control_tester.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-22T12:40:07Z",
+      "side": 1,
+      "message": "My thinking is that it\u0027s nice to be able to inject a one off producer here using a lambda in unit tests. Saves the mess of lots of local scope classes just to wrap a simple function.\n\nExample:\nTEST(SomeControllerTest, HandlesUnderProducingSource){\n setup ...\nfor(double under_production_ratio : { 0.5,0.7,0.9 }){\n  tester.RunSimulation(TimeDelta::seconds(5), TimeDelta::ms(10),\n                       DataRate::kbps(300), TimeDelta::ms(100),\n  [under_production_ratio](const NetworkControlState\u0026 state,\n                           Timestamp now, TimeDelta delta){\n    SentPacket packet;\n    packet.send_time \u003d now;\n    packet.size \u003d cache.target_rate-\u003etarget_rate*delta*under_production_ratio;\n    return packet;\n});\n...\n\n\nWDYT? Would it be easier to read with a local class?",
+      "parentUuid": "1e7b8144_de1166d7",
+      "range": {
+        "startLine": 57,
+        "startChar": 68,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "b76837abf07d3a6f5e81bcbc8add64511da5d25b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da506b15_4b4b0753",
         "filename": "modules/congestion_controller/network_control/test/network_control_tester.h",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "b76837abf07d3a6f5e81bcbc8add64511da5d25b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b666fbb_8980da23",
+        "filename": "modules/congestion_controller/network_control/test/network_control_tester.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-22T12:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da506b15_4b4b0753",
+      "range": {
+        "startLine": 79,
+        "startChar": 50,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "b76837abf07d3a6f5e81bcbc8add64511da5d25b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
