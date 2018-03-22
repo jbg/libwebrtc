@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c32be17_602d4e5b",
+        "filename": "infra/config/cq.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5533
+      },
+      "writtenOn": "2018-03-22T18:15:02Z",
+      "side": 1,
+      "message": "👍",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 20
+      },
+      "revId": "b5b5b2e0d2df8b2692909cd61a480789564792af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
