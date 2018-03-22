@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-#include "call/video_send_stream.h"
+#include "call/video_config.h"
 
 namespace webrtc {
 
@@ -33,7 +33,6 @@ class VideoCodecInitializer {
   // GetBitrateAllocator is called implicitly from here, no need to call again.
   static bool SetupCodec(
       const VideoEncoderConfig& config,
-      const VideoSendStream::Config::EncoderSettings settings,
       const std::vector<VideoStream>& streams,
       bool nack_enabled,
       VideoCodec* codec,
@@ -49,8 +48,6 @@ class VideoCodecInitializer {
   static VideoCodec VideoEncoderConfigToVideoCodec(
       const VideoEncoderConfig& config,
       const std::vector<VideoStream>& streams,
-      // TODO(nisse): Delete when we can rely on config.codec_type.
-      VideoCodecType codec_type,
       bool nack_enabled);
 };
 
