@@ -190,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "d888800b_99fd70e9",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T15:10:17Z",
+      "side": 1,
+      "message": "After some quick godbolt investigation it looks like StringBuilder might potentially be slightly better, or at least not worse. I\u0027ll switch it over.",
+      "parentUuid": "e580b5c9_a09eef89",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5fd33daf_e8324e3f",
         "filename": "modules/video_coding/codecs/h264/include/h264_globals.h",
         "patchSetId": 3
