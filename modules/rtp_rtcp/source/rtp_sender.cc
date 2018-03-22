@@ -741,6 +741,10 @@ void RTPSender::OnReceivedRtcpReportBlocks(
       mid_oracle_rtx_->OnReceivedRtcpReportBlocks(report_blocks);
     }
   }
+
+  if (video_) {
+    video_->OnReceivedRtcpReportBlocks(report_blocks);
+  }
 }
 
 // Called from pacer when we can send the packet.
