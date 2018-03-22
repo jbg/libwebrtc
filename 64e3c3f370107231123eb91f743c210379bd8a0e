@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "27faef32_6d92b0ff",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-03-22T09:20:55Z",
+      "side": 1,
+      "message": "No, Video padding behave differently: it sends full padding packets only.\nThere is a dedicated test SendPadding below that verifies how padding packet look like.\n\nBut for consistency it might make sense to split audio test into two with identical setup, but different expectations (one verifies padding is allowed. another verifies size of padding packets).\nYou think it would be better?",
+      "parentUuid": "24a3af34_9bd52075",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 77
+      },
+      "revId": "64e3c3f370107231123eb91f743c210379bd8a0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "09d75a70_1ab4b243",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "64e3c3f370107231123eb91f743c210379bd8a0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef021df9_44df8738",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-03-22T09:20:55Z",
+      "side": 1,
+      "message": "Thank you!\n(though it made it a bit too long to fit into 80char line.... shrinking it a bit differently)",
+      "parentUuid": "09d75a70_1ab4b243",
+      "range": {
+        "startLine": 376,
+        "startChar": 37,
+        "endLine": 376,
+        "endChar": 46
+      },
+      "revId": "64e3c3f370107231123eb91f743c210379bd8a0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
