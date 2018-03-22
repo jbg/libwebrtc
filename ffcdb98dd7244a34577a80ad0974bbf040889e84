@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f2e7aa6_04372624",
+        "filename": "modules/video_coding/frame_buffer2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-22T12:49:10Z",
+      "side": 1,
+      "message": "Having a |stats_callback_| is optional, but it was not checked here.",
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb745f0b_967802f0",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-22T12:49:10Z",
+      "side": 1,
+      "message": "Not sure what is best, defining the class here or in an anonymous namespace.",
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
