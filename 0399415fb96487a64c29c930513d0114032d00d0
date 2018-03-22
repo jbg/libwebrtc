@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f06b2328_52a40cf2",
+        "filename": "api/audio_codecs/audio_format.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T09:40:25Z",
+      "side": 1,
+      "message": "I considered that, but wasn\u0027t sure it was worth doing since we\u0027re planning to remove the \u003c\u003c overloads anyway.\n\nOn the other hand, it is easily done, so I added it back in.",
+      "parentUuid": "28355d53_4d201050",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71010a4f_31a139d0",
         "filename": "api/rtcerror.cc",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "0399415fb96487a64c29c930513d0114032d00d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f25fd2a_661bf799",
+        "filename": "api/rtcerror.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T09:40:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71010a4f_31a139d0",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "56418fbd_e4ea746f",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T09:40:25Z",
+      "side": 1,
+      "message": "Yep, turns out it wasn\u0027t. I removed them from the \u003c\u003c overloads as well.",
+      "parentUuid": "97684b79_2b5e9772",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 2
+      },
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04a8b924_7e8ba119",
         "filename": "modules/congestion_controller/network_control/network_units.cc",
         "patchSetId": 3
@@ -70,6 +130,24 @@
       "writtenOn": "2018-03-21T13:14:26Z",
       "side": 1,
       "message": "Have you compared the generated code for this (constructing new std::strings in several places and concatenating them with +) versus the generated code for SimpleStringBuilder?",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0d00268_aaba490b",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T09:40:25Z",
+      "side": 1,
+      "message": "I haven\u0027t. Is the std::string concat so bad that I should prefer using SimpleStringBuilder even if only two things are concatenated?",
+      "parentUuid": "04a8b924_7e8ba119",
       "revId": "0399415fb96487a64c29c930513d0114032d00d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "a4b13bb2_d8476f46",
+        "filename": "modules/video_coding/codecs/h264/include/h264_globals.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T09:40:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fd33daf_e8324e3f",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0137b6d1_af51b00d",
         "filename": "rtc_base/stringutils.cc",
         "patchSetId": 3
@@ -104,6 +200,30 @@
       "writtenOn": "2018-03-21T13:14:26Z",
       "side": 1,
       "message": "sizeof(buffer)?",
+      "range": {
+        "startLine": 136,
+        "startChar": 19,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe50025a_5efa137f",
+        "filename": "rtc_base/stringutils.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-22T09:40:25Z",
+      "side": 1,
+      "message": "Ahh, of course. Thanks!",
+      "parentUuid": "0137b6d1_af51b00d",
       "range": {
         "startLine": 136,
         "startChar": 19,
