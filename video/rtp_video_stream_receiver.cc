@@ -438,8 +438,7 @@ void RtpVideoStreamReceiver::ParseAndHandleEncapsulatingHeader(
 
 void RtpVideoStreamReceiver::NotifyReceiverOfFecPacket(
     const RTPHeader& header) {
-  int8_t last_media_payload_type =
-      rtp_payload_registry_.last_received_media_payload_type();
+  int8_t last_media_payload_type = 17;  // XXX
   if (last_media_payload_type < 0) {
     RTC_LOG(LS_WARNING) << "Failed to get last media payload type.";
     return;
