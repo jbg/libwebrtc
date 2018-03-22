@@ -54,6 +54,8 @@ struct SdpAudioFormat {
     return !(a == b);
   }
 
+  std::string ToString() const;
+
   std::string name;
   int clockrate_hz;
   size_t num_channels;
@@ -101,6 +103,8 @@ struct AudioCodecInfo {
 
   bool operator!=(const AudioCodecInfo& b) const { return !(*this == b); }
 
+  std::string ToString() const;
+
   bool HasFixedBitrate() const {
     RTC_DCHECK_GE(min_bitrate_bps, 0);
     RTC_DCHECK_LE(min_bitrate_bps, default_bitrate_bps);
@@ -130,6 +134,8 @@ struct AudioCodecSpec {
   }
 
   bool operator!=(const AudioCodecSpec& b) const { return !(*this == b); }
+
+  std::string ToString() const;
 
   SdpAudioFormat format;
   AudioCodecInfo info;
