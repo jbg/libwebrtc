@@ -169,6 +169,14 @@ void AecState::Update(
   }
   bool recently_converged_filter =
       blocks_since_converged_filter_ < 60 * kNumBlocksPerSecond;
+  if (!recently_converged_filter) {
+    converged_filter_count_ = 0;
+  } else if (converged_filter) {
+    ++converged_filter_count_;
+  }
+  if (converged_filter_count_ > 50) {
+    finite_erl_ = true;
+  }
 
   if (filter_analyzer_.Consistent() && filter_delay_blocks_ < 5) {
     consistent_filter_seen_ = true;
@@ -192,7 +200,7 @@ void AecState::Update(
   // After an amount of active render samples for which an echo should have been
   // detected in the capture signal if the ERL was not infinite, flag that a
   // transparent mode should be entered.
-  transparent_mode_ = !config_.ep_strength.bounded_erl;
+  transparent_mode_ = !config_.ep_strength.bounded_erl && !finite_erl_;
   transparent_mode_ =
       transparent_mode_ &&
       (consistent_filter_estimate_not_seen || !converged_filter_seen_);
