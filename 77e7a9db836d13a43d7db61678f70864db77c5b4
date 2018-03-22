@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e36f290_81a58d91",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a87421da_133c5be4",
+      "range": {
+        "startLine": 47,
+        "startChar": 15,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74559a4f_6347227d",
         "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88f8fbc4_670758ee",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "74559a4f_6347227d",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "45e7e058_3a781ff1",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_cgimage.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e016c513_f4633c90",
+      "range": {
+        "startLine": 140,
+        "startChar": 22,
+        "endLine": 140,
+        "endChar": 30
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79582d53_c3c2ce97",
         "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de1b066_55d622e2",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79582d53_c3c2ce97",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ebbad44b_2d87ba24",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "I tried and it crashed. I suspect the handler passed to CGDisplayStreamCreate in the base class might not run in the same thread. I will try to use rtc::ThreadChecker to verify that.",
+      "parentUuid": "a07d570b_0c479f63",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 62
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b629d1c_bdb894aa",
         "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f20b6aa8_5b489779",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b629d1c_bdb894aa",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 19
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "995f9f02_2d294723",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "In the end I do not fallback. I think it will help debugging when testing iosurface on field.",
+      "parentUuid": "cd4249ef_6d630990",
+      "range": {
+        "startLine": 76,
+        "startChar": 37,
+        "endLine": 76,
+        "endChar": 55
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f818c318_3549a34f",
         "filename": "modules/desktop_capture/screen_capturer_mac.mm",
         "patchSetId": 2
@@ -183,6 +351,30 @@
       "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bd6d905_3a7b1488",
+        "filename": "modules/desktop_capture/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-22T17:33:38Z",
+      "side": 1,
+      "message": "allow_iosurface_capturer() will be false by default. Then for trial we just turn it on and see if it always works or if it need to fallback.",
+      "parentUuid": "f818c318_3549a34f",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 3
+      },
+      "revId": "77e7a9db836d13a43d7db61678f70864db77c5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
