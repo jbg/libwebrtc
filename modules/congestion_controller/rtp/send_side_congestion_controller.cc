@@ -14,6 +14,7 @@
 #include <functional>
 #include <memory>
 #include <vector>
+#include "modules/congestion_controller/bbr/bbr_factory.h"
 #include "modules/congestion_controller/goog_cc/include/goog_cc_factory.h"
 #include "modules/congestion_controller/network_control/include/network_types.h"
 #include "modules/congestion_controller/network_control/include/network_units.h"
@@ -46,6 +47,20 @@ bool IsPacerPushbackExperimentEnabled() {
          (!webrtc::field_trial::IsDisabled(kPacerPushbackExperiment) &&
           webrtc::runtime_enabled_features::IsFeatureEnabled(
               webrtc::runtime_enabled_features::kDualStreamModeFeatureName));
+}
+
+bool IsBBRControllerExperimentEnabled() {
+  const char kBBRControllerExperiment[] = "WebRTC-BBRControllerExperiment";
+  return webrtc::field_trial::IsEnabled(kBBRControllerExperiment);
+}
+
+std::unique_ptr<FeedbackBasedNetworkControllerFactoryInterface>
+MaybeCreateBbrFactory() {
+  if (IsBBRControllerExperimentEnabled()) {
+    return rtc::MakeUnique<BbrNetworkControllerFactory>();
+  } else {
+    return nullptr;
+  }
 }
 
 void SortPacketFeedbackVector(std::vector<webrtc::PacketFeedback>* input) {
@@ -301,9 +316,13 @@ SendSideCongestionController::SendSideCongestionController(
     : clock_(clock),
       pacer_(pacer),
       transport_feedback_adapter_(clock_),
+      feedback_controller_factory_(MaybeCreateBbrFactory()),
       combined_controller_factory_(
           rtc::MakeUnique<GoogCcNetworkControllerFactory>(event_log)),
       pacer_controller_(MakeUnique<PacerController>(pacer_)),
+      controller_(nullptr),
+      feedback_controller_(nullptr),
+      simple_controller_(nullptr),
       process_interval_(combined_controller_factory_->GetProcessInterval()),
       observer_(nullptr),
       send_side_bwe_with_overhead_(
@@ -331,8 +350,19 @@ SendSideCongestionController::SendSideCongestionController(
 // bandwidth is set before this class is initialized so the controllers can be
 // created in the constructor.
 void SendSideCongestionController::MaybeCreateControllers() {
-  if (controller_ || !network_available_ || !observer_)
-    return;
+  if (!controller_ && network_available_ && observer_)
+    RecreateNetworkControllers();
+}
+
+void SendSideCongestionController::RecreateNetworkControllers() {
+  RTC_DCHECK(network_available_);
+  RTC_DCHECK(observer_);
+
+  simple_controller_ = nullptr;
+  feedback_controller_ = nullptr;
+  controller_ = nullptr;
+  owned_combined_controller_.reset();
+  owned_feedback_controller_.reset();
 
   initial_config_.constraints.at_time =
       Timestamp::ms(clock_->TimeInMilliseconds());
@@ -341,9 +371,20 @@ void SendSideCongestionController::MaybeCreateControllers() {
   control_handler_ = MakeUnique<send_side_cc_internal::ControlHandler>(
       observer_, pacer_controller_.get(), clock_);
 
-  controller_ = combined_controller_factory_->CreateCombined(
-                  control_handler_.get(),
-                  initial_config_);
+  if (packet_feedback_available_ && feedback_controller_factory_) {
+    owned_feedback_controller_ =
+        feedback_controller_factory_->CreateFeedbackBased(
+            control_handler_.get(), initial_config_);
+    controller_ = owned_feedback_controller_.get();
+    feedback_controller_ = owned_feedback_controller_.get();
+  } else {
+    owned_combined_controller_ = combined_controller_factory_->CreateCombined(
+        control_handler_.get(), initial_config_);
+
+    controller_ = owned_combined_controller_.get();
+    simple_controller_ = owned_combined_controller_.get();
+    feedback_controller_ = owned_combined_controller_.get();
+  }
   UpdateStreamsConfig();
   StartProcessPeriodicTasks();
 }
@@ -458,7 +499,15 @@ RtcpBandwidthObserver* SendSideCongestionController::GetBandwidthObserver() {
 }
 
 void SendSideCongestionController::SetPerPacketFeedbackAvailable(
-    bool available) {}
+    bool available) {
+  task_queue_->PostTask([this, available]() {
+    RTC_DCHECK_RUN_ON(task_queue_ptr_);
+    packet_feedback_available_ = available;
+    bool feedback_only_controller = simple_controller_ == nullptr;
+    if (feedback_controller_factory_ && (feedback_only_controller != available))
+      MaybeCreateControllers();
+  });
+}
 
 void SendSideCongestionController::EnablePeriodicAlrProbing(bool enable) {
   task_queue_->PostTask([this, enable]() {
@@ -529,8 +578,8 @@ void SendSideCongestionController::OnRttUpdate(int64_t avg_rtt_ms,
   report.smoothed = true;
   task_queue_->PostTask([this, report]() {
     RTC_DCHECK_RUN_ON(task_queue_ptr_);
-    if (controller_)
-      controller_->OnRoundTripTimeUpdate(report);
+    if (simple_controller_)
+      simple_controller_->OnRoundTripTimeUpdate(report);
   });
 }
 
@@ -612,8 +661,8 @@ void SendSideCongestionController::OnTransportFeedback(
         DataSize::bytes(transport_feedback_adapter_.GetOutstandingBytes());
     task_queue_->PostTask([this, msg]() {
       RTC_DCHECK_RUN_ON(task_queue_ptr_);
-      if (controller_)
-        controller_->OnTransportPacketsFeedback(msg);
+      if (feedback_controller_)
+        feedback_controller_->OnTransportPacketsFeedback(msg);
     });
   }
 }
@@ -670,8 +719,8 @@ void SendSideCongestionController::OnReceivedEstimatedBitrate(
   msg.bandwidth = DataRate::bps(bitrate);
   task_queue_->PostTask([this, msg]() {
     RTC_DCHECK_RUN_ON(task_queue_ptr_);
-    if (controller_)
-      controller_->OnRemoteBitrateReport(msg);
+    if (simple_controller_)
+      simple_controller_->OnRemoteBitrateReport(msg);
   });
 }
 
@@ -690,8 +739,8 @@ void SendSideCongestionController::OnReceivedRtcpReceiverReport(
     report.receive_time = Timestamp::ms(now_ms);
     report.round_trip_time = TimeDelta::ms(rtt_ms);
     report.smoothed = false;
-    if (controller_)
-      controller_->OnRoundTripTimeUpdate(report);
+    if (simple_controller_)
+      simple_controller_->OnRoundTripTimeUpdate(report);
   });
 }
 
@@ -734,8 +783,8 @@ void SendSideCongestionController::OnReceivedRtcpReceiverReportBlocks(
   msg.receive_time = now;
   msg.start_time = last_report_block_time_;
   msg.end_time = now;
-  if (controller_)
-    controller_->OnTransportLossReport(msg);
+  if (simple_controller_)
+    simple_controller_->OnTransportLossReport(msg);
   last_report_block_time_ = now;
 }
 }  // namespace webrtc_cc
