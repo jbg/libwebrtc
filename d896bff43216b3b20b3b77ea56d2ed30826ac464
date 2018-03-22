@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7ba2f1c5_9b8bc7a5",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-03-22T08:57:13Z",
+      "side": 1,
+      "message": "One reason is conceptual:\nlast_payload_type_ is needed to send padding.\nIt is responsibility of AssignSequenceNumber function to record everything from last packet that padding needs. (comment at AssignSequenceNumber declaration includes that)\n\nAnother reason is practical: I have a use case where frame splitting functionality is not used (i.e. SendOutgoingData never called), but padding is used.\n\n(In theory it might make sense to remove padding half of AssignSequenceNumber functionality: move this block to function that actually sends the packet to the transport, but that might be a topic for another refactoring)",
+      "parentUuid": "f6d2b8f2_c7568dfc",
+      "range": {
+        "startLine": 1090,
+        "startChar": 2,
+        "endLine": 1090,
+        "endChar": 45
+      },
+      "revId": "d896bff43216b3b20b3b77ea56d2ed30826ac464",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8bfe23b4_fea4a810",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "d896bff43216b3b20b3b77ea56d2ed30826ac464",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c09ed727_fa948be8",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-03-22T08:57:13Z",
+      "side": 1,
+      "message": "rephrased and moved.\nThen also renamed and relocated the test itself.\nbetter?",
+      "parentUuid": "8bfe23b4_fea4a810",
+      "range": {
+        "startLine": 1977,
+        "startChar": 5,
+        "endLine": 1977,
+        "endChar": 78
+      },
+      "revId": "d896bff43216b3b20b3b77ea56d2ed30826ac464",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
