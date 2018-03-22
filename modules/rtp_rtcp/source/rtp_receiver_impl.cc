@@ -102,11 +102,7 @@ RtpReceiverImpl::RtpReceiverImpl(Clock* clock,
   memset(current_remote_csrc_, 0, sizeof(current_remote_csrc_));
 }
 
-RtpReceiverImpl::~RtpReceiverImpl() {
-  for (int i = 0; i < num_csrcs_; ++i) {
-    cb_rtp_feedback_->OnIncomingCSRCChanged(current_remote_csrc_[i], false);
-  }
-}
+RtpReceiverImpl::~RtpReceiverImpl() {}
 
 int32_t RtpReceiverImpl::RegisterReceivePayload(
     int payload_type,
@@ -185,7 +181,6 @@ bool RtpReceiverImpl::IncomingRtpPacket(const RTPHeader& rtp_header,
   WebRtcRTPHeader webrtc_rtp_header;
   memset(&webrtc_rtp_header, 0, sizeof(webrtc_rtp_header));
   webrtc_rtp_header.header = rtp_header;
-  CheckCSRC(webrtc_rtp_header);
 
   auto audio_level =
       rtp_header.extension.hasAudioLevel
@@ -288,23 +283,6 @@ void RtpReceiverImpl::CheckSSRCChanged(const RTPHeader& rtp_header) {
       last_received_timestamp_ = 0;
       last_received_frame_time_ms_ = -1;
 
-      // Do we have a SSRC? Then the stream is restarted.
-      if (ssrc_ != 0) {
-        // Do we have the same codec? Then re-initialize coder.
-        if (rtp_header.payloadType == last_received_payload_type) {
-          const auto payload = rtp_payload_registry_->PayloadTypeToPayload(
-              rtp_header.payloadType);
-          if (!payload) {
-            return;
-          }
-          if (payload->typeSpecific.is_audio()) {
-            reinitialize_audio_payload.emplace(
-                payload->typeSpecific.audio_payload());
-          } else {
-            // OnInitializeDecoder() is only used for audio.
-          }
-        }
-      }
       ssrc_ = rtp_header.ssrc;
     }
   }
@@ -377,88 +355,6 @@ int32_t RtpReceiverImpl::CheckPayloadChanged(const RTPHeader& rtp_header,
   }  // End critsect.
 
   return 0;
-}
-
-// Implementation note: must not hold critsect when called.
-void RtpReceiverImpl::CheckCSRC(const WebRtcRTPHeader& rtp_header) {
-  int32_t num_csrcs_diff = 0;
-  uint32_t old_remote_csrc[kRtpCsrcSize];
-  uint8_t old_num_csrcs = 0;
-
-  {
-    rtc::CritScope lock(&critical_section_rtp_receiver_);
-
-    if (!rtp_media_receiver_->ShouldReportCsrcChanges(
-        rtp_header.header.payloadType)) {
-      return;
-    }
-    old_num_csrcs  = num_csrcs_;
-    if (old_num_csrcs > 0) {
-      // Make a copy of old.
-      memcpy(old_remote_csrc, current_remote_csrc_,
-             num_csrcs_ * sizeof(uint32_t));
-    }
-    const uint8_t num_csrcs = rtp_header.header.numCSRCs;
-    if ((num_csrcs > 0) && (num_csrcs <= kRtpCsrcSize)) {
-      // Copy new.
-      memcpy(current_remote_csrc_,
-             rtp_header.header.arrOfCSRCs,
-             num_csrcs * sizeof(uint32_t));
-    }
-    if (num_csrcs > 0 || old_num_csrcs > 0) {
-      num_csrcs_diff = num_csrcs - old_num_csrcs;
-      num_csrcs_ = num_csrcs;  // Update stored CSRCs.
-    } else {
-      // No change.
-      return;
-    }
-  }  // End critsect.
-
-  bool have_called_callback = false;
-  // Search for new CSRC in old array.
-  for (uint8_t i = 0; i < rtp_header.header.numCSRCs; ++i) {
-    const uint32_t csrc = rtp_header.header.arrOfCSRCs[i];
-
-    bool found_match = false;
-    for (uint8_t j = 0; j < old_num_csrcs; ++j) {
-      if (csrc == old_remote_csrc[j]) {  // old list
-        found_match = true;
-        break;
-      }
-    }
-    if (!found_match && csrc) {
-      // Didn't find it, report it as new.
-      have_called_callback = true;
-      cb_rtp_feedback_->OnIncomingCSRCChanged(csrc, true);
-    }
-  }
-  // Search for old CSRC in new array.
-  for (uint8_t i = 0; i < old_num_csrcs; ++i) {
-    const uint32_t csrc = old_remote_csrc[i];
-
-    bool found_match = false;
-    for (uint8_t j = 0; j < rtp_header.header.numCSRCs; ++j) {
-      if (csrc == rtp_header.header.arrOfCSRCs[j]) {
-        found_match = true;
-        break;
-      }
-    }
-    if (!found_match && csrc) {
-      // Did not find it, report as removed.
-      have_called_callback = true;
-      cb_rtp_feedback_->OnIncomingCSRCChanged(csrc, false);
-    }
-  }
-  if (!have_called_callback) {
-    // If the CSRC list contain non-unique entries we will end up here.
-    // Using CSRC 0 to signal this event, not interop safe, other
-    // implementations might have CSRC 0 as a valid value.
-    if (num_csrcs_diff > 0) {
-      cb_rtp_feedback_->OnIncomingCSRCChanged(0, true);
-    } else if (num_csrcs_diff < 0) {
-      cb_rtp_feedback_->OnIncomingCSRCChanged(0, false);
-    }
-  }
 }
 
 void RtpReceiverImpl::UpdateSources(
