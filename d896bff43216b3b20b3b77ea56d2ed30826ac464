@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6d2b8f2_c7568dfc",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-22T07:45:27Z",
+      "side": 1,
+      "message": "Any good reason to set it here, and not in SendOutgoingData? The old call to SetSendPayloadType was from CheckPayloadType, in turn called from SendOutgoingData, if I read it correctly.",
+      "range": {
+        "startLine": 1090,
+        "startChar": 2,
+        "endLine": 1090,
+        "endChar": 45
+      },
+      "revId": "d896bff43216b3b20b3b77ea56d2ed30826ac464",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bfe23b4_fea4a810",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-22T07:45:27Z",
+      "side": 1,
+      "message": "This sentence is a bit cryptic, perhaps a few missing commas?",
+      "range": {
+        "startLine": 1977,
+        "startChar": 5,
+        "endLine": 1977,
+        "endChar": 78
+      },
+      "revId": "d896bff43216b3b20b3b77ea56d2ed30826ac464",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
