@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ea3a58d_34f96be8",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-22T14:40:12Z",
+      "side": 1,
+      "message": "After second look, it seems this isn\u0027t needed. The estimator state is based on rtcp messages, this call doesn\u0027t update any other state than that for periodic logging.\n\nI\u0027ve also looked at moving both this call and the call to nack_module_ earlier, to RtpVideoStreamReceiver::ReceivePacket. But that\u0027s a bit tricky, since the return values are wanted to construct the VCMPacket inserted into the packet buffer, and there\u0027s no obvious way to pass that info down into RtpReceiver and get it back.",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 456,
+        "endChar": 44
+      },
+      "revId": "77faf9e9fa42f1a737f5714139433ca9828defd0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
