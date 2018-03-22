@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24a3af34_9bd52075",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-22T09:06:01Z",
+      "side": 1,
+      "message": "Would it make sense to use a MockTransport with an expectation on SendRtp in this test too, for consistency with the test below?",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 77
+      },
+      "revId": "64e3c3f370107231123eb91f743c210379bd8a0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09d75a70_1ab4b243",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-22T09:06:01Z",
+      "side": 1,
+      "message": "Missing s.",
+      "range": {
+        "startLine": 376,
+        "startChar": 37,
+        "endLine": 376,
+        "endChar": 46
+      },
+      "revId": "64e3c3f370107231123eb91f743c210379bd8a0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
