@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f61ac0b9_e2a319a3",
+        "filename": "api/audio_codecs/audio_format.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-22T10:13:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f06b2328_52a40cf2",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71010a4f_31a139d0",
         "filename": "api/rtcerror.cc",
         "patchSetId": 3
@@ -148,6 +166,24 @@
       "side": 1,
       "message": "I haven\u0027t. Is the std::string concat so bad that I should prefer using SimpleStringBuilder even if only two things are concatenated?",
       "parentUuid": "04a8b924_7e8ba119",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e580b5c9_a09eef89",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-22T10:13:25Z",
+      "side": 1,
+      "message": "It creates a new std::string, which means inlined code to create and delete the string. I don\u0027t know if that\u0027s bad compared to SSB, but it\u0027s probably worth checking.\n\nOr maybe there\u0027s an rvalue ref overload for operator+ that saves us here. Again, worth checking.\n\nAlso, you create std::strings from literals in two places. If the std::string constructor is inlined in all three places, it could get moderately expensive.",
+      "parentUuid": "f0d00268_aaba490b",
       "revId": "0399415fb96487a64c29c930513d0114032d00d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
