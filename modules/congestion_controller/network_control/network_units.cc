@@ -73,42 +73,55 @@ DataSize operator*(const TimeDelta& duration, const DataRate& rate) {
   return rate * duration;
 }
 
-::std::ostream& operator<<(::std::ostream& os, const DataRate& value) {
-  if (value == DataRate::kPlusInfinity) {
-    return os << "inf bps";
-  } else if (value == DataRate::kNotInitialized) {
-    return os << "? bps";
+std::ostream& operator<<(std::ostream& os, const DataRate& value) { // no-presubmit-check TODO(webrtc:8982)
+  return os << value.ToString();
+}
+std::ostream& operator<<(std::ostream& os, const DataSize& value) { // no-presubmit-check TODO(webrtc:8982)
+  return os << value.ToString();
+}
+std::ostream& operator<<(std::ostream& os, const Timestamp& value) { // no-presubmit-check TODO(webrtc:8982)
+  return os << value.ToString();
+}
+std::ostream& operator<<(std::ostream& os, const TimeDelta& value) { // no-presubmit-check TODO(webrtc:8982)
+  return os << value.ToString();
+}
+
+std::string DataRate::ToString() const {
+  if (*this == DataRate::kPlusInfinity) {
+    return "inf bps";
+  } else if (*this == DataRate::kNotInitialized) {
+    return "? bps";
   } else {
-    return os << value.bps() << " bps";
+    return std::to_string(bps()) + " bps";
   }
 }
-::std::ostream& operator<<(::std::ostream& os, const DataSize& value) {
-  if (value == DataSize::kPlusInfinity) {
-    return os << "inf bytes";
-  } else if (value == DataSize::kNotInitialized) {
-    return os << "? bytes";
+std::string DataSize::ToString() const {
+  if (*this == DataSize::kPlusInfinity) {
+    return "inf bytes";
+  } else if (*this == DataSize::kNotInitialized) {
+    return "? bytes";
   } else {
-    return os << value.bytes() << " bytes";
+    return std::to_string(bytes()) + " bytes";
   }
 }
-::std::ostream& operator<<(::std::ostream& os, const Timestamp& value) {
-  if (value == Timestamp::kPlusInfinity) {
-    return os << "inf ms";
-  } else if (value == Timestamp::kNotInitialized) {
-    return os << "? ms";
+std::string Timestamp::ToString() const {
+  if (*this == Timestamp::kPlusInfinity) {
+    return "inf ms";
+  } else if (*this == Timestamp::kNotInitialized) {
+    return "? ms";
   } else {
-    return os << value.ms() << " ms";
+    return std::to_string(ms()) + " ms";
   }
 }
-::std::ostream& operator<<(::std::ostream& os, const TimeDelta& value) {
-  if (value == TimeDelta::kPlusInfinity) {
-    return os << "+inf ms";
-  } else if (value == TimeDelta::kMinusInfinity) {
-    return os << "-inf ms";
-  } else if (value == TimeDelta::kNotInitialized) {
-    return os << "? ms";
+std::string TimeDelta::ToString() const {
+  if (*this == TimeDelta::kPlusInfinity) {
+    return "+inf ms";
+  } else if (*this == TimeDelta::kMinusInfinity) {
+    return "-inf ms";
+  } else if (*this == TimeDelta::kNotInitialized) {
+    return "? ms";
   } else {
-    return os << value.ms() << " ms";
+    return std::to_string(ms()) + " ms";
   }
 }
 
