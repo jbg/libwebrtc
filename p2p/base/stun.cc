@@ -72,7 +72,9 @@ bool StunMessage::SetTransactionID(const std::string& str) {
 }
 
 static bool ImplementationDefinedRange(int attr_type) {
-  return attr_type >= 0xC000 && attr_type <= 0xFFFF;
+  return
+      (attr_type >= 0x4000 && attr_type <= 0x7FFF) ||
+      (attr_type >= 0xC000 && attr_type <= 0xFFFF);
 }
 
 void StunMessage::AddAttribute(std::unique_ptr<StunAttribute> attr) {
