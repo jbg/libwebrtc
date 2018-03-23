@@ -115,8 +115,11 @@ if (is_android) {
     deps = [
       ":AppRTCMobile_resources",
       "../rtc_base:base_java",
+      "../sdk/android:base_java",
+      "../sdk/android:hwcodecs_java",
       "../sdk/android:libjingle_peerconnection_java",
       "../sdk/android:libjingle_peerconnection_metrics_default_java",
+      "../sdk/android:swcodecs_java",
       "androidapp/third_party/autobanh:autobanh_java",
       "//third_party/jsr-305:jsr_305_javalib",
     ]
