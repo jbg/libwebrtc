@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e372edb3_0ae5329d",
+        "filename": "modules/rtp_rtcp/source/rtp_receiver_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-23T08:04:05Z",
+      "side": 0,
+      "message": "This block used to return early only for packets with the DTMF payload type.\n\nWhy? Any good reason to have CSRC handling depend at all on payload type?",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 5
+      },
+      "revId": "8be087f04e3daf02d7c67619e51720c186af4e2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
