@@ -378,7 +378,7 @@ class StatsGetter : public NetEqGetAudioCallback {
         uint64_t last_event_voice_concealed_samples =
             lifetime_stat.voice_concealed_samples -
             voice_concealed_samples_until_last_event_;
-        RTC_CHECK_GT(last_event_voice_concealed_samples, 0);
+        RTC_CHECK_GE(last_event_voice_concealed_samples, 0);
         concealment_event.duration_ms = last_event_voice_concealed_samples /
                                         (audio_frame.sample_rate_hz_ / 1000);
         concealment_event.concealment_event_number = current_concealment_event_;
