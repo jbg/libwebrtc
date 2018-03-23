@@ -22,6 +22,30 @@
       "revId": "8be087f04e3daf02d7c67619e51720c186af4e2b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9ac1172_f936bf8b",
+        "filename": "modules/rtp_rtcp/source/rtp_receiver_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-23T13:12:03Z",
+      "side": 0,
+      "message": "I\u0027m now fairly sure this doesn\u0027t matter; if the packet carries an empty CSRC list, nothing happens in UpdateSources. Deleting the check should change the behavior only if the DTMF packets carry some bogus non-empty list of CSRCs, which seems a bit far-fetched.\n\nFor some later step, I\u0027d like to refactor UpdateSources to take as input the packet\u0027s list of CSRCs, without an extra copy into the current_remote_csrc_ member variable.",
+      "parentUuid": "e372edb3_0ae5329d",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 5
+      },
+      "revId": "8be087f04e3daf02d7c67619e51720c186af4e2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
