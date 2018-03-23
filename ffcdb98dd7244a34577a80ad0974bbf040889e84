@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "cfbf96e0_85c56ad7",
+        "filename": "video/video_stream_decoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-03-23T09:44:19Z",
+      "side": 1,
+      "message": "Changed to RTC_PT_GUARDED_BY.",
+      "parentUuid": "3537d620_a87dce2a",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "ffcdb98dd7244a34577a80ad0974bbf040889e84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f95cf1b1_d5718611",
         "filename": "video/video_stream_decoder_impl.h",
         "patchSetId": 3
