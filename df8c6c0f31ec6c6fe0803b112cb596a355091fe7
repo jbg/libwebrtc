@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "faf046c2_a1cdad52",
+        "filename": "video/video_stream_decoder_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-23T11:43:21Z",
+      "side": 1,
+      "message": "Good to have the intention document. Still doubt it\u0027s right to specify on which task queue callbacks will be invoked, though.",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 26
+      },
+      "revId": "df8c6c0f31ec6c6fe0803b112cb596a355091fe7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
