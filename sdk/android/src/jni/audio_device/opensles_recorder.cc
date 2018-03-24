@@ -46,20 +46,31 @@ namespace android_adm {
 namespace {
 
 class OpenSLESRecorderFactory : public AudioInputFactory {
+ public:
+  // OpenSLEngineManager is owned outside this factory, in the
+  // OpenSLESPlayerFactory.
+  explicit OpenSLESRecorderFactory(OpenSLEngineManager* engine_manager)
+      : engine_manager_(engine_manager) {}
+
   std::unique_ptr<AudioInput> CreateAudioInput(
       AudioManager* audio_manager) override {
-    return rtc::MakeUnique<OpenSLESRecorder>(audio_manager);
+    return rtc::MakeUnique<OpenSLESRecorder>(audio_manager, engine_manager_);
   }
+
+ private:
+  OpenSLEngineManager* const engine_manager_;
 };
 
 }  // namespace
 
-std::unique_ptr<AudioInputFactory> CreateOpenSLESRecorderFactory() {
-  return rtc::MakeUnique<OpenSLESRecorderFactory>();
+std::unique_ptr<AudioInputFactory> CreateOpenSLESRecorderFactory(
+    OpenSLEngineManager* engine_manager) {
+  return rtc::MakeUnique<OpenSLESRecorderFactory>(engine_manager);
 }
 
-OpenSLESRecorder::OpenSLESRecorder(AudioManager* audio_manager)
-    : audio_manager_(audio_manager),
+OpenSLESRecorder::OpenSLESRecorder(AudioManager* audio_manager,
+                                   OpenSLEngineManager* engine_manager)
+    : engine_manager_(engine_manager),
       audio_parameters_(audio_manager->GetRecordAudioParameters()),
       audio_device_buffer_(nullptr),
       initialized_(false),
@@ -229,7 +240,7 @@ bool OpenSLESRecorder::ObtainEngineInterface() {
     return true;
   // Get access to (or create if not already existing) the global OpenSL Engine
   // object.
-  SLObjectItf engine_object = audio_manager_->GetOpenSLEngine();
+  SLObjectItf engine_object = engine_manager_->GetOpenSLEngine();
   if (engine_object == nullptr) {
     ALOGE("Failed to access the global OpenSL engine");
     return false;

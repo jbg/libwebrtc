@@ -42,23 +42,18 @@ namespace webrtc {
 
 namespace android_adm {
 
-namespace {
-
-class OpenSLESPlayerFactory : public AudioOutputFactory {
-  std::unique_ptr<AudioOutput> CreateAudioOutput(
-      AudioManager* audio_manager) override {
-    return rtc::MakeUnique<OpenSLESPlayer>(audio_manager);
-  }
-};
-
-}  // namespace
-
-std::unique_ptr<AudioOutputFactory> CreateOpenSLESPlayerFactory() {
-  return rtc::MakeUnique<OpenSLESPlayerFactory>();
+std::unique_ptr<AudioOutput> OpenSLESPlayerFactory::CreateAudioOutput(
+    AudioManager* audio_manager) {
+  return rtc::MakeUnique<OpenSLESPlayer>(audio_manager, &engine_manager_);
 }
 
-OpenSLESPlayer::OpenSLESPlayer(AudioManager* audio_manager)
-    : audio_manager_(audio_manager),
+OpenSLEngineManager* OpenSLESPlayerFactory::GetEngineManager() {
+  return &engine_manager_;
+}
+
+OpenSLESPlayer::OpenSLESPlayer(AudioManager* audio_manager,
+                               OpenSLEngineManager* engine_manager)
+    : engine_manager_(engine_manager),
       audio_parameters_(audio_manager->GetPlayoutAudioParameters()),
       audio_device_buffer_(nullptr),
       initialized_(false),
@@ -248,7 +243,7 @@ bool OpenSLESPlayer::ObtainEngineInterface() {
     return true;
   // Get access to (or create if not already existing) the global OpenSL Engine
   // object.
-  SLObjectItf engine_object = audio_manager_->GetOpenSLEngine();
+  SLObjectItf engine_object = engine_manager_->GetOpenSLEngine();
   if (engine_object == nullptr) {
     ALOGE("Failed to access the global OpenSL engine");
     return false;

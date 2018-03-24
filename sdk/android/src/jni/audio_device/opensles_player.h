@@ -32,7 +32,16 @@ class FineAudioBuffer;
 
 namespace android_adm {
 
-std::unique_ptr<AudioOutputFactory> CreateOpenSLESPlayerFactory();
+class OpenSLESPlayerFactory : public AudioOutputFactory {
+ public:
+  std::unique_ptr<AudioOutput> CreateAudioOutput(
+      AudioManager* audio_manager) override;
+
+  OpenSLEngineManager* GetEngineManager();
+
+ private:
+  OpenSLEngineManager engine_manager_;
+};
 
 // Implements 16-bit mono PCM audio output support for Android using the
 // C based OpenSL ES API. No calls from C/C++ to Java using JNI is done.
@@ -62,7 +71,8 @@ class OpenSLESPlayer : public AudioOutput {
   // TODO(henrika): perhaps set this value dynamically based on OS version.
   static const int kNumOfOpenSLESBuffers = 2;
 
-  explicit OpenSLESPlayer(AudioManager* audio_manager);
+  OpenSLESPlayer(AudioManager* audio_manager,
+                 OpenSLEngineManager* engine_manager);
   ~OpenSLESPlayer() override;
 
   int Init() override;
@@ -127,11 +137,11 @@ class OpenSLESPlayer : public AudioOutput {
   // Detached during construction of this object.
   rtc::ThreadChecker thread_checker_opensles_;
 
-  // Raw pointer to the audio manager injected at construction. Used to cache
-  // audio parameters and to access the global SL engine object needed by the
-  // ObtainEngineInterface() method. The audio manager outlives any instance of
-  // this class.
-  AudioManager* audio_manager_;
+  // Handles access to OpenSLES engine, which is shared with OpenSLESRecorder.
+  // Used to access the global SL engine object needed by the
+  // ObtainEngineInterface() method. The engine manager outlives any instance of
+  // this class and is shared with OpenSLESRecorder.
+  OpenSLEngineManager* const engine_manager_;
 
   // Contains audio parameters provided to this class at construction by the
   // AudioManager.
