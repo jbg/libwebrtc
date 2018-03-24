@@ -149,6 +149,9 @@ class StunMessage {
   void SetType(int type) { type_ = static_cast<uint16_t>(type); }
   bool SetTransactionID(const std::string& str);
 
+  size_t AttributeCount() const;
+  const StunAttribute* GetAttribute(size_t index) const;
+
   // Gets the desired attribute value, or NULL if no such attribute type exists.
   const StunAddressAttribute* GetAddress(int type) const;
   const StunUInt32Attribute* GetUInt32(int type) const;
@@ -198,8 +201,8 @@ class StunMessage {
   // This is used for testing.
   void SetStunMagicCookie(uint32_t val);
 
- protected:
-  // Verifies that the given attribute is allowed for this message.
+  // Determines the value type for a given STUN attribute type. If the type is
+  // unrecognized for this message, returns STUN_VALUE_UNKNOWN.
   virtual StunAttributeValueType GetAttributeValueType(int type) const;
 
  private:
@@ -528,8 +531,10 @@ enum RelayAttributeType {
 
 // A "GTURN" STUN message.
 class RelayMessage : public StunMessage {
- protected:
+ public:
   StunAttributeValueType GetAttributeValueType(int type) const override;
+
+ protected:
   StunMessage* CreateNew() const override;
 };
 
@@ -579,8 +584,10 @@ extern const char STUN_ERROR_REASON_ALLOCATION_MISMATCH[];
 extern const char STUN_ERROR_REASON_WRONG_CREDENTIALS[];
 extern const char STUN_ERROR_REASON_UNSUPPORTED_PROTOCOL[];
 class TurnMessage : public StunMessage {
- protected:
+ public:
   StunAttributeValueType GetAttributeValueType(int type) const override;
+
+ protected:
   StunMessage* CreateNew() const override;
 };
 
@@ -604,8 +611,10 @@ extern const char STUN_ERROR_REASON_ROLE_CONFLICT[];
 
 // A RFC 5245 ICE STUN message.
 class IceMessage : public StunMessage {
- protected:
+ public:
   StunAttributeValueType GetAttributeValueType(int type) const override;
+
+ protected:
   StunMessage* CreateNew() const override;
 };
 

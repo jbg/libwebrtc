@@ -31,6 +31,7 @@ namespace cricket {
 const char STUN_ERROR_REASON_TRY_ALTERNATE_SERVER[] = "Try Alternate Server";
 const char STUN_ERROR_REASON_BAD_REQUEST[] = "Bad Request";
 const char STUN_ERROR_REASON_UNAUTHORIZED[] = "Unauthorized";
+const char STUN_ERROR_REASON_UNKNOWN_ATTRIBUTE[] = "Unknown Attribute";
 const char STUN_ERROR_REASON_FORBIDDEN[] = "Forbidden";
 const char STUN_ERROR_REASON_STALE_CREDENTIALS[] = "Stale Credentials";
 const char STUN_ERROR_REASON_ALLOCATION_MISMATCH[] = "Allocation Mismatch";
@@ -71,18 +72,15 @@ bool StunMessage::SetTransactionID(const std::string& str) {
   return true;
 }
 
-static bool ImplementationDefinedRange(int attr_type) {
-  return attr_type >= 0xC000 && attr_type <= 0xFFFF;
+size_t StunMessage::AttributeCount() const {
+  return attrs_.size();
+}
+
+const StunAttribute* StunMessage::GetAttribute(size_t index) const {
+  return attrs_[index].get();
 }
 
 void StunMessage::AddAttribute(std::unique_ptr<StunAttribute> attr) {
-  // Fail any attributes that aren't valid for this type of message,
-  // but allow any type for the range that is "implementation defined"
-  // in the RFC.
-  if (!ImplementationDefinedRange(attr->type())) {
-    RTC_DCHECK_EQ(attr->value_type(), GetAttributeValueType(attr->type()));
-  }
-
   attr->SetOwner(this);
   size_t attr_length = attr->length();
   if (attr_length % 4 != 0) {
@@ -438,15 +436,13 @@ StunAttributeValueType StunMessage::GetAttributeValueType(int type) const {
 
 StunAttribute* StunMessage::CreateAttribute(int type, size_t length) /*const*/ {
   StunAttributeValueType value_type = GetAttributeValueType(type);
-  if (value_type != STUN_VALUE_UNKNOWN) {
-    return StunAttribute::Create(value_type, type,
-                                 static_cast<uint16_t>(length), this);
-  } else if (ImplementationDefinedRange(type)) {
+  if (value_type == STUN_VALUE_UNKNOWN) {
     // Read unknown attributes as STUN_VALUE_BYTE_STRING
     return StunAttribute::Create(STUN_VALUE_BYTE_STRING, type,
                                  static_cast<uint16_t>(length), this);
   } else {
-    return NULL;
+    return StunAttribute::Create(value_type, type,
+                                 static_cast<uint16_t>(length), this);
   }
 }
 

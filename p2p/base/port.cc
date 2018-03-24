@@ -524,6 +524,19 @@ bool Port::GetStunMessage(const char* data,
     return false;
   }
 
+  // Check for attributes in the "comprehension-required" range that were not
+  // comprehended. If one or more is found, the behavior differs based on the
+  // type of the incoming message; see below.
+  std::vector<uint16_t> unknown_attributes;
+  for (size_t i = 0u; i < stun_msg->AttributeCount(); ++i) {
+    const StunAttribute* attr = stun_msg->GetAttribute(i);
+    // "comprehension-required" range is 0x0000-0x7FFF.
+    if (attr->type() >= 0x0000 && attr->type() <= 0x7FFF &&
+        stun_msg->GetAttributeValueType(attr->type()) == STUN_VALUE_UNKNOWN) {
+      unknown_attributes.push_back(attr->type());
+    }
+  }
+
   if (stun_msg->type() == STUN_BINDING_REQUEST) {
     // Check for the presence of USERNAME and MESSAGE-INTEGRITY (if ICE) first.
     // If not present, fail with a 400 Bad Request.
@@ -558,6 +571,15 @@ bool Port::GetStunMessage(const char* data,
                                STUN_ERROR_REASON_UNAUTHORIZED);
       return true;
     }
+
+    // If a request contains unknown comprehension-required attributes, reply
+    // with an error. See RFC5389 section 7.3.1.
+    if (!unknown_attributes.empty()) {
+      SendUnknownAttributesErrorResponse(stun_msg.get(), addr,
+                                         unknown_attributes);
+      return true;
+    }
+
     out_username->assign(remote_ufrag);
   } else if ((stun_msg->type() == STUN_BINDING_RESPONSE) ||
              (stun_msg->type() == STUN_BINDING_ERROR_RESPONSE)) {
@@ -575,11 +597,26 @@ bool Port::GetStunMessage(const char* data,
         return true;
       }
     }
+    // If a response contains unknown comprehension-required attributes, it's
+    // simply discarded and the transaction is considered failed. See RFC5389
+    // sections 7.3.3 and 7.3.4.
+    if (!unknown_attributes.empty()) {
+      LOG_J(LS_ERROR, this) << "Discarding STUN response due to unknown "
+                               "comprehension-required attribute";
+      return true;
+    }
     // NOTE: Username should not be used in verifying response messages.
     out_username->clear();
   } else if (stun_msg->type() == STUN_BINDING_INDICATION) {
     LOG_J(LS_VERBOSE, this) << "Received STUN binding indication:"
                             << " from " << addr.ToSensitiveString();
+    // If an indication contains unknown comprehension-required attributes,
+    // it's simply discarded. See RFC5389 section 7.3.2.
+    if (!unknown_attributes.empty()) {
+      LOG_J(LS_ERROR, this) << "Discarding STUN indication due to unknown "
+                               "comprehension-required attribute";
+      return true;
+    }
     out_username->clear();
     // No stun attributes will be verified, if it's stun indication message.
     // Returning from end of the this method.
@@ -813,6 +850,42 @@ void Port::SendBindingErrorResponse(StunMessage* request,
   SendTo(buf.Data(), buf.Length(), addr, options, false);
   LOG_J(LS_INFO, this) << "Sending STUN binding error: reason=" << reason
                        << " to " << addr.ToSensitiveString();
+}
+
+void Port::SendUnknownAttributesErrorResponse(
+    StunMessage* request,
+    const rtc::SocketAddress& addr,
+    const std::vector<uint16_t> unknown_types) {
+  RTC_DCHECK(request->type() == STUN_BINDING_REQUEST);
+
+  // Fill in the response message.
+  StunMessage response;
+  response.SetType(STUN_BINDING_ERROR_RESPONSE);
+  response.SetTransactionID(request->transaction_id());
+
+  auto error_attr = StunAttribute::CreateErrorCode();
+  error_attr->SetCode(STUN_ERROR_UNKNOWN_ATTRIBUTE);
+  error_attr->SetReason(STUN_ERROR_REASON_UNKNOWN_ATTRIBUTE);
+  response.AddAttribute(std::move(error_attr));
+
+  std::unique_ptr<StunUInt16ListAttribute> unknown_attr =
+      StunAttribute::CreateUnknownAttributes();
+  for (uint16_t type : unknown_types) {
+    unknown_attr->AddType(type);
+  }
+  response.AddAttribute(std::move(unknown_attr));
+
+  response.AddMessageIntegrity(password_);
+  response.AddFingerprint();
+
+  // Send the response message.
+  rtc::ByteBufferWriter buf;
+  response.Write(&buf);
+  rtc::PacketOptions options(DefaultDscpValue());
+  SendTo(buf.Data(), buf.Length(), addr, options, false);
+  LOG_J(LS_INFO, this) << "Sending STUN binding error: reason="
+                       << STUN_ERROR_UNKNOWN_ATTRIBUTE << " to "
+                       << addr.ToSensitiveString();
 }
 
 void Port::KeepAliveUntilPruned() {
