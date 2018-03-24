@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2782cf1c_ec8fc9c5",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Please help to detect the copy of this file. I believe most of the logic in this file pair have not been changed at all.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d21318_496edc6f",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Please add a TODO to this function, if secondary initialization is required, public constructor should be replaced by a static create() function returning a unique_ptr.",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 11
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5826f68_dbf413ed",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Finalize following functions if they should not be overrided by the derived classes.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5ac4a38_8760922e",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "This name is a little bit unclear. You may either rename it or add comments. I do not know when this function would be called until I read through the code. This seems not right to me.",
+      "range": {
+        "startLine": 72,
+        "startChar": 15,
+        "endLine": 72,
+        "endChar": 31
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2fca029_e3a1d3f3",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Copying DesktopRegion is expensive, you may want to use const reference.",
+      "range": {
+        "startLine": 76,
+        "startChar": 32,
+        "endLine": 76,
+        "endChar": 45
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31886bc8_f925cedc",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Maybe just \"source\".",
+      "range": {
+        "startLine": 77,
+        "startChar": 47,
+        "endLine": 77,
+        "endChar": 67
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a077547_273053af",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "I would suggest to rename this function to ReleaseResources() and add sufficient comments to explain that this function would be called when the component is destroyed or the display configuration is changed. Meanwhile remove current ReleaseResources() function.",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 96,
+        "endChar": 21
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22032ade_823b52e1",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Since you are changing this file, please remove this out-of-date comment.",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 55
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f59a5a5_65949352",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_base.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "Sorry, this is a legacy issue, please use RTC_DCHECK() instead.",
+      "range": {
+        "startLine": 241,
+        "startChar": 2,
+        "endLine": 241,
+        "endChar": 8
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a8e8742_a4176f16",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac_iosurface.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-24T01:04:34Z",
+      "side": 1,
+      "message": "When will this happen? I am considering whether returning PERMANENT is the right way.",
+      "range": {
+        "startLine": 81,
+        "startChar": 19,
+        "endLine": 81,
+        "endChar": 34
+      },
+      "revId": "75b021d7579251bfb434e89032997ddb22ceaa2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
