@@ -15,7 +15,7 @@ See http://www.webrtc.org/native-code/development for instructions on how to get
 started developing with the native code.
 
 [Authoritative list](native-api.md) of directories that contain the
-native API header files.
+native API header files. Thanks for reading
 
 ### More info
 
