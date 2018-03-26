@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82f01af3_05f5fa3f",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 26,
+        "startChar": 35,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4bed886_92299312",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "523ef4b7_8c32ce31",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 837,
+        "startChar": 2,
+        "endLine": 838,
+        "endChar": 78
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28aeb0ed_26b5c3d6",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "Are these comment updates intentional?",
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40e04d32_38bc1518",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "even though?",
+      "range": {
+        "startLine": 25,
+        "startChar": 76,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "606f81e6_29ad3693",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "style nit: simulcast_idx",
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eb2c6c2_095510af",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "It\u0027s OK to stack case statements if there is no space between them.\nIf you really want an explicit note on fall-through behavior, I\u0027d recommend the RTC_FALLTHROUGH() macro.",
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b2aaabc_e3f99099",
+        "filename": "modules/video_coding/video_coding_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "TemporalLayersFactory is no longer used, please remove this.\n(And if it was, this would have caused a use after free)\nAlso update comment above.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 7
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ba5bdd8_ed913168",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "VideoStreamEncoder",
+      "range": {
+        "startLine": 148,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 13
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0887afa3_dcc529c4",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-26T08:45:12Z",
+      "side": 1,
+      "message": "This is the only change you need in this file, right?\nThere\u0027s a whole bunch of comments below that need to be fixed, so probably easiest to revert all changes except this line.",
+      "range": {
+        "startLine": 18,
+        "startChar": 57,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "5bca10990fabf85e3c102f2b67ae5bf10b4f746d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
