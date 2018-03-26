@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7305dd9c_efc3d408",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-03-26T11:58:59Z",
+      "side": 0,
+      "message": "Do you know if this can get called from any thread, or only one? Even if rtcp_rtt_stats_ won\u0027t change over time (I agree that it won\u0027t), whatever it does might no longer be locked.\n\nFrom what I can see, only CallStats actually implement OnRttUpdate (except for this proxy), and it already has a lock. So we should be fine. Just thought I\u0027d double-check. :)",
+      "revId": "6b28e20257821c46966f4b91bea5dfb88ff0ab72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
