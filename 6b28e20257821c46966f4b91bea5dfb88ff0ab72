@@ -16,6 +16,24 @@
       "revId": "6b28e20257821c46966f4b91bea5dfb88ff0ab72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e92938e7_938b23b7",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-26T12:15:16Z",
+      "side": 0,
+      "message": "At the moment, it\u0027s undefined (i.e. any thread), but I\u0027m cleaning up the code in a few steps and making the threading context clear. The implementation that this eventually goes to, does currently use a lock, so an extra lock isn\u0027t needed (see call_stats.cc).\n\n\nIn this other CL, I\u0027m reducing locking further in call_stats.cc and adding thread checks that can be used to build assumptions on:\nhttps://webrtc-review.googlesource.com/c/src/+/64521\n\nThat change is still using a ProcessThread though, so a subsequent step will be to remove that reliance and use a TaskQueue.\n\nOne more problem with the RtcpRttStats interface is that it has both an asynchronous contract and a synchronous one. The LastProcessedRtt() method essentially forces an implementation to either use locks, or require that the calling context is known and matches with how notifications are delivered. I\u0027d like to get rid of that method :) If I can do that, I\u0027m sure a few more things become simpler and faster.",
+      "parentUuid": "7305dd9c_efc3d408",
+      "revId": "6b28e20257821c46966f4b91bea5dfb88ff0ab72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
