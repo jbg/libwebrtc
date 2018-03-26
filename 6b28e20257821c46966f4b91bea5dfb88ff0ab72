@@ -34,6 +34,24 @@
       "revId": "6b28e20257821c46966f4b91bea5dfb88ff0ab72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a349f01_54c7db5f",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-03-26T12:39:55Z",
+      "side": 0,
+      "message": "Alright, sounds good to me! :)",
+      "parentUuid": "e92938e7_938b23b7",
+      "revId": "6b28e20257821c46966f4b91bea5dfb88ff0ab72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
