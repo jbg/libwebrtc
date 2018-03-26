@@ -104,6 +104,24 @@
       "revId": "9adb853a2387e8f185e0c5a41dabf553e0f278b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "094f4fa2_0197db61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-03-26T18:49:24Z",
+      "side": 1,
+      "message": "DesignatedExpertRange sounds good.",
+      "parentUuid": "b03d8f37_afbb4d25",
+      "revId": "9adb853a2387e8f185e0c5a41dabf553e0f278b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
