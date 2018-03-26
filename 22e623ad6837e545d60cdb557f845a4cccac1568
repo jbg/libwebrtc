@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "78e77233_64b4626c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-26T18:32:03Z",
+      "side": 1,
+      "message": "Are you going to add documentation?",
+      "parentUuid": "f0564966_a5e645fc",
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "978b377a_015ac29b",
         "filename": "p2p/base/port.cc",
         "patchSetId": 7
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "For parameters that surface in user configuration, we are trying to provide the utility to RTCConfiguration and IceConfig using optionals that once a parameter is set to null we will be able to restore the default value.",
       "parentUuid": "978b377a_015ac29b",
+      "range": {
+        "startLine": 1130,
+        "startChar": 72,
+        "endLine": 1130,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8752f350_15857eb6",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-26T18:32:03Z",
+      "side": 1,
+      "message": "Ah, that makes sense.  Can you leave a comment here reminding us of this fact?  I\u0027m sure I\u0027ll forget :).",
+      "parentUuid": "c9460ea5_615d3d45",
       "range": {
         "startLine": 1130,
         "startChar": 72,
@@ -166,6 +208,30 @@
     },
     {
       "key": {
+        "uuid": "73308c1a_289bbf0a",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-26T18:32:03Z",
+      "side": 1,
+      "message": "Maybe we need a bit of renaming to make things clear.  CONNECTION_WRITE_CONNECT_TIMEOUT and CONNECTION_WRITE_TIMEOUT are pretty confusing.   \n\nCONNECTION_WRITE_CONNECT_TIMEOUT seems like it should be called DEFAULT_UNWRITABLE_TIMEOUT.  \nCONNECTION_WRITE_TIMEOUT seems like it should be called DEFAULT_INACTIVE_TIMEOUT.\n\nThe first is when a candidate pair says \"I\u0027m sending checks but not getting acks\" and the second is the candidate pair saying \"I\u0027m not sending checks any more.\"\n\n(I think)",
+      "parentUuid": "ab7e113f_d6c1718e",
+      "range": {
+        "startLine": 582,
+        "startChar": 66,
+        "endLine": 582,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7f12a4c_53119b83",
         "filename": "p2p/base/port.h",
         "patchSetId": 7
@@ -201,6 +267,30 @@
       "side": 1,
       "message": "I was trying to avoid inconsistent configs and wrong state transitions that we used to reinforce by having constants CONNECTION_WRITE_CONNECT_TIMEOUT \u003c CONNECTION_WRITE_TIMEOUT. There is no config mapped to CONNECTION_WRITE_TIMEOUT (15 seconds) yet in this set of changes. I will add it if we decide this is also good to open to the config.",
       "parentUuid": "d7f12a4c_53119b83",
+      "range": {
+        "startLine": 583,
+        "startChar": 35,
+        "endLine": 583,
+        "endChar": 0
+      },
+      "revId": "22e623ad6837e545d60cdb557f845a4cccac1568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfdbb640_5a760a0b",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5659
+      },
+      "writtenOn": "2018-03-26T18:32:03Z",
+      "side": 1,
+      "message": "Yeah, I see what you\u0027re saying now.  What we could do is make it so the effective inactive timeout (not send checks any more) is always higher than the unwritable timeout.  If you set_unwritable_timeout(30s), you get an inactive timeout of, say... 40s?  Either that or just allow setting both.",
+      "parentUuid": "28e0c675_2ab6bbe5",
       "range": {
         "startLine": 583,
         "startChar": 35,
