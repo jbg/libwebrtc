@@ -27,6 +27,23 @@ constexpr size_t kMaximalNumberOfSamplesPerChannel = 480;
 
 constexpr float kAttackFilterConstant = 0.f;
 
+// Threshold 0.9 gave the most stable results with all history
+// window sizes when using APM-VAD. With RNN-VAD, we should use 0.4
+// instead.
+constexpr float kVadConfidenceThreshold = 0.9f;
+
+// When using APM at confidence 0.9, this gives a target history of
+// ~4 seconds (meaning it takes ~4 seconds of real input audio to
+// fully adjust the level). If we use RNN(confidence = 0.4), this
+// should be ~2500 instead for the same target history window size.
+constexpr float kFullBufferSizeMs = 1000.f;
+
+constexpr float kFullBufferLeakFactor = 1.f - 1.f / kFullBufferSizeMs;
+
+constexpr float kInitialSpeechLevelEstimateDbfs = -30.f;
+
+constexpr float kInitialSaturationMarginDb = 17.f;
+
 // This is computed from kDecayMs by
 // 10 ** (-1/20 * subframe_duration / kDecayMs).
 // |subframe_duration| is |kFrameDurationMs / kSubFramesInFrame|.
