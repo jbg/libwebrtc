@@ -27,7 +27,6 @@
 #include "media/engine/simulcast_encoder_adapter.h"
 #include "media/engine/videodecodersoftwarefallbackwrapper.h"
 #include "media/engine/videoencodersoftwarefallbackwrapper.h"
-#include "modules/video_coding/codecs/vp8/include/vp8_common_types.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_coding.h"
 #include "rtc_base/checks.h"
@@ -330,7 +329,6 @@ void VideoProcessorIntegrationTest::CreateEncoderAndDecoder() {
 
   const SdpVideoFormat format = config_.ToSdpVideoFormat();
   if (config_.simulcast_adapted_encoder) {
-    EXPECT_EQ("VP8", format.name);
     encoder_.reset(new SimulcastEncoderAdapter(encoder_factory_.get()));
   } else {
     encoder_ = encoder_factory_->CreateVideoEncoder(format);
