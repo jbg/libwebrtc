@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ec1430ec_7b598ab9",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-27T14:49:07Z",
+      "side": 1,
+      "message": "This is the only right way to dump SVC layers. Otherwise, if we only dump upper layer, the stream won\u0027t be decodable.",
+      "parentUuid": "7a556230_bd348439",
+      "revId": "6c6eb7c7837192a387915d7b525c6fb9c4efb3e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4117d575_72fe7c03",
         "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "6c6eb7c7837192a387915d7b525c6fb9c4efb3e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edd3300c_cd12676b",
+        "filename": "modules/video_coding/codecs/test/videoprocessor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-03-27T14:49:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4117d575_72fe7c03",
+      "range": {
+        "startLine": 472,
+        "startChar": 24,
+        "endLine": 472,
+        "endChar": 59
+      },
+      "revId": "6c6eb7c7837192a387915d7b525c6fb9c4efb3e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
