@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a10e8b26_d146baaa",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-27T10:48:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a const ref?",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "a6b3d6b44fcf5b2d80571cd327d9efbaeac666a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c5870b3_cee5252f",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-27T10:48:54Z",
+      "side": 1,
+      "message": "Should this be \u003e\u003d ?",
+      "range": {
+        "startLine": 38,
+        "startChar": 46,
+        "endLine": 38,
+        "endChar": 47
+      },
+      "revId": "a6b3d6b44fcf5b2d80571cd327d9efbaeac666a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb341baa_ae0f26d4",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-27T10:48:54Z",
+      "side": 1,
+      "message": "As discussed offline, I think the code would be easier to read if the numerator and denominator are calculated/updated separately.",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 33
+      },
+      "revId": "a6b3d6b44fcf5b2d80571cd327d9efbaeac666a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61bbdf98_12469c04",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-27T10:48:54Z",
+      "side": 1,
+      "message": "Please remove.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "a6b3d6b44fcf5b2d80571cd327d9efbaeac666a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c77a12a_7aa474ca",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-03-27T10:48:54Z",
+      "side": 1,
+      "message": "Const ref",
+      "range": {
+        "startLine": 33,
+        "startChar": 20,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "a6b3d6b44fcf5b2d80571cd327d9efbaeac666a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
