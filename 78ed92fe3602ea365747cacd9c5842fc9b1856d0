@@ -16,6 +16,24 @@
       "revId": "78ed92fe3602ea365747cacd9c5842fc9b1856d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b1c1ed5_c3161dab",
+        "filename": "sdk/android/src/jni/audio_device/opensles_player.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-03-27T13:15:21Z",
+      "side": 1,
+      "message": "Yeah, there are very few cases when we want to have definitions in the headers, and the aaudio case is not one of them. I updated the aaudio code.",
+      "parentUuid": "d0ccfa12_c2dc0caf",
+      "revId": "78ed92fe3602ea365747cacd9c5842fc9b1856d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
