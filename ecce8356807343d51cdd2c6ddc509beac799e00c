@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1c551398_9625d943",
+        "filename": "modules/congestion_controller/rtp/include/send_side_congestion_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-27T15:30:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40567552_9ec1b245",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 38
+      },
+      "revId": "ecce8356807343d51cdd2c6ddc509beac799e00c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51937ffd_4cd17862",
         "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "81511f9f_fdd0d224",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-27T15:30:36Z",
+      "side": 1,
+      "message": "Tried rewriting it, clearer now?",
+      "parentUuid": "51937ffd_4cd17862",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 3
+      },
+      "revId": "ecce8356807343d51cdd2c6ddc509beac799e00c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "093cd5d8_d8a2fd5f",
         "filename": "rtc_base/experiments/congestion_controller_experiment.cc",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2018-03-27T12:33:30Z",
       "side": 1,
       "message": "You intend to do experiments with all of these parameters?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "ecce8356807343d51cdd2c6ddc509beac799e00c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63348714_1d5829f1",
+        "filename": "rtc_base/experiments/congestion_controller_experiment.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-03-27T15:30:36Z",
+      "side": 1,
+      "message": "I don\u0027t know which ones I\u0027ll want to test. There is a 2+ week delay between adding a parameter here and doing the experiment, so I figure it\u0027s best to add them all from the beginning.",
+      "parentUuid": "093cd5d8_d8a2fd5f",
       "range": {
         "startLine": 39,
         "startChar": 0,
