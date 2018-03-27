@@ -129,9 +129,8 @@ void AAudioPlayer::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
       audio_device_buffer_, audio_parameters.sample_rate(), capacity));
 }
 
-int AAudioPlayer::SpeakerVolumeIsAvailable(bool* available) {
-  *available = false;
-  return 0;
+bool AAudioPlayer::SpeakerVolumeIsAvailable() {
+  return false;
 }
 
 void AAudioPlayer::OnErrorCallback(aaudio_result_t error) {

@@ -14,6 +14,7 @@
 #include <aaudio/AAudio.h>
 #include <memory>
 
+#include "api/optional.h"
 #include "modules/audio_device/audio_device_buffer.h"
 #include "modules/audio_device/include/audio_device_defines.h"
 #include "rtc_base/messagehandler.h"
@@ -70,11 +71,11 @@ class AAudioPlayer final : public AAudioObserverInterface,
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer);
 
   // Not implemented in AAudio.
-  int SpeakerVolumeIsAvailable(bool* available);  // NOLINT
+  bool SpeakerVolumeIsAvailable();
   int SetSpeakerVolume(uint32_t volume) { return -1; }
-  int SpeakerVolume(uint32_t* volume) const { return -1; }        // NOLINT
-  int MaxSpeakerVolume(uint32_t* maxVolume) const { return -1; }  // NOLINT
-  int MinSpeakerVolume(uint32_t* minVolume) const { return -1; }  // NOLINT
+  rtc::Optional<uint32_t> SpeakerVolume() const { return rtc::nullopt; }
+  rtc::Optional<uint32_t> MaxSpeakerVolume() const { return rtc::nullopt; }
+  rtc::Optional<uint32_t> MinSpeakerVolume() const { return rtc::nullopt; }
 
  protected:
   // AAudioObserverInterface implementation.
