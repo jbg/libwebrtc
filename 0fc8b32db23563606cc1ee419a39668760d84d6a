@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9439650e_07625a23",
+        "filename": "video/call_stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-27T21:11:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ce7c8f6_c19d56b2",
+      "range": {
+        "startLine": 64,
+        "startChar": 6,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a70e9057_d89a5473",
         "filename": "video/call_stats.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "831afc86_d55efbd2",
+        "filename": "video/call_stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-27T21:11:50Z",
+      "side": 1,
+      "message": "haha Done :)",
+      "parentUuid": "a70e9057_d89a5473",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 6
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8954cdb_4001d63a",
         "filename": "video/call_stats.h",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2018-03-27T09:24:06Z",
       "side": 1,
       "message": "Couldn\u0027t you just have the CallStats instance in a unique_ptr for that test, add some values, destroy it, and then check the histograms?",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 52,
+        "endChar": 30
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75096193_85c642fc",
+        "filename": "video/call_stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-27T21:11:50Z",
+      "side": 1,
+      "message": "Yes, however I\u0027m making changes in an upcoming CL that does make that easier (it would currently affect all tests since the call_stats_ variable is a member variable in the test suite).\n\nDue to the way the threading works in the class though, it\u0027s more natural for UpdateHistograms() to be called on the ProcessThread, soon to be TaskQueue. Since the TaskQueue does not have Stop/Start functionality, UpdateHistogram will move to the TQ and no longer be associated with the dtor. I\u0027ll update the tests to take that into account, but here I\u0027m starting to separate the two.",
+      "parentUuid": "d8954cdb_4001d63a",
       "range": {
         "startLine": 52,
         "startChar": 7,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "bb069366_b32f259a",
+        "filename": "video/call_stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-27T21:11:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3e1ba21_13b19b01",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddbd423e_090145aa",
         "filename": "video/call_stats_unittest.cc",
         "patchSetId": 3
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "ce8f2fde_9ccd0a25",
+        "filename": "video/call_stats_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-27T21:11:50Z",
+      "side": 1,
+      "message": "The update interval is 1000 but the way things are now, is that the average gets updated + callbacks are made as soon as the rtt gets updated. From what I can tell, that should be OK, possibly even an improvement, but ... maybe it\u0027s a bad idea?\n\n(but that\u0027s why the test runs in about a millisecond)",
+      "parentUuid": "ddbd423e_090145aa",
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "819bee57_086997aa",
         "filename": "video/call_stats_unittest.cc",
         "patchSetId": 3
@@ -122,6 +236,30 @@
       "writtenOn": "2018-03-27T09:24:06Z",
       "side": 1,
       "message": "Just saying 94 here seems a bit arbitrary. If we need to verify the value, add comment or explicitly derive it. Otherwise probably OnRttUpdate(_, kRtt2) is enough? Seem CallStatsTest.ChangeRtt already tests that too.",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 46
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e92449e_c8fa9195",
+        "filename": "video/call_stats_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-03-27T21:11:50Z",
+      "side": 1,
+      "message": "oh man, no kidding :) I added comments below when I was digging through exactly that question and added explanation for how those values are arrived at. I added a comment here pointing to the explanations in ChangeRtt.",
+      "parentUuid": "819bee57_086997aa",
       "range": {
         "startLine": 102,
         "startChar": 44,
