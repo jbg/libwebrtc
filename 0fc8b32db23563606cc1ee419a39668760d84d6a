@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ce7c8f6_c19d56b2",
+        "filename": "video/call_stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-27T09:24:06Z",
+      "side": 1,
+      "message": "Maybe a little comment for this one?",
+      "range": {
+        "startLine": 64,
+        "startChar": 6,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a70e9057_d89a5473",
+        "filename": "video/call_stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-27T09:24:06Z",
+      "side": 1,
+      "message": "not sure auto is more readable than int64_t here",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 6
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8954cdb_4001d63a",
+        "filename": "video/call_stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-27T09:24:06Z",
+      "side": 1,
+      "message": "Couldn\u0027t you just have the CallStats instance in a unique_ptr for that test, add some values, destroy it, and then check the histograms?",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 52,
+        "endChar": 30
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3e1ba21_13b19b01",
+        "filename": "video/call_stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-27T09:24:06Z",
+      "side": 1,
+      "message": "nit: initialize in ctor",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddbd423e_090145aa",
+        "filename": "video/call_stats_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-27T09:24:06Z",
+      "side": 1,
+      "message": "This is run asynchronously now? If the process interval is 1000ms, don\u0027t we risk this being racy?",
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "819bee57_086997aa",
+        "filename": "video/call_stats_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-03-27T09:24:06Z",
+      "side": 1,
+      "message": "Just saying 94 here seems a bit arbitrary. If we need to verify the value, add comment or explicitly derive it. Otherwise probably OnRttUpdate(_, kRtt2) is enough? Seem CallStatsTest.ChangeRtt already tests that too.",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 46
+      },
+      "revId": "0fc8b32db23563606cc1ee419a39668760d84d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
