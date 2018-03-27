@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0ccfa12_c2dc0caf",
+        "filename": "sdk/android/src/jni/audio_device/opensles_player.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-03-27T12:21:20Z",
+      "side": 1,
+      "message": "I think we should be consistent with whether we define these functions in the header or not. Now it\u0027s different in opensles and aaudio.",
+      "revId": "78ed92fe3602ea365747cacd9c5842fc9b1856d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
