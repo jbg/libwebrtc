@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6e01aea_0779da68",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-28T08:47:18Z",
+      "side": 1,
+      "message": "I think this is the right place to explain life-time. Task is owned by task queue, and stays alive (sometime after) Stop is called, or the task queue is destroyed. The latter implies that we don\u0027t need to call Stop from our destructor?",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 634,
+        "endChar": 64
+      },
+      "revId": "5cf6c822b5f9e7c7153208e6748bc912785bfb3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

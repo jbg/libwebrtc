@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "214344a0_de157899",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-28T08:47:18Z",
+      "side": 1,
+      "message": "Looks clearer. I think the locals |create_controller| and |recreate_controller| don\u0027t add much value, but the |use_feedback_only_controller| local helps readability.\n\nNits:\n\n  const-declare the flags\n\n  Replace the conditional assignments to feedback_only_controller_ with a single unconditional assignment\n  \nfeedback_only_controller_ \u003d use_feedback_only_controller;",
+      "parentUuid": "81511f9f_fdd0d224",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 3
+      },
+      "revId": "ecce8356807343d51cdd2c6ddc509beac799e00c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "093cd5d8_d8a2fd5f",
         "filename": "rtc_base/experiments/congestion_controller_experiment.cc",
         "patchSetId": 6
@@ -140,6 +164,30 @@
       "revId": "ecce8356807343d51cdd2c6ddc509beac799e00c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbc95f95_b65f0896",
+        "filename": "rtc_base/experiments/congestion_controller_experiment.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-03-28T08:47:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "63348714_1d5829f1",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "ecce8356807343d51cdd2c6ddc509beac799e00c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
