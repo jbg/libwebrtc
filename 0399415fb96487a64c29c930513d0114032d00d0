@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7ed29afa_c4fa310a",
+        "filename": "api/audio_codecs/audio_format.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-28T08:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f61ac0b9_e2a319a3",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71010a4f_31a139d0",
         "filename": "api/rtcerror.cc",
         "patchSetId": 3
@@ -125,6 +143,30 @@
       "side": 1,
       "message": "Yep, turns out it wasn\u0027t. I removed them from the \u003c\u003c overloads as well.",
       "parentUuid": "97684b79_2b5e9772",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 2
+      },
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54accf42_19117f0d",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-28T08:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56418fbd_e4ea746f",
       "range": {
         "startLine": 115,
         "startChar": 0,
@@ -208,6 +250,24 @@
     },
     {
       "key": {
+        "uuid": "6661b7fd_b92c498e",
+        "filename": "modules/congestion_controller/network_control/network_units.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-28T08:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d888800b_99fd70e9",
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fd33daf_e8324e3f",
         "filename": "modules/video_coding/codecs/h264/include/h264_globals.h",
         "patchSetId": 3
@@ -287,6 +347,30 @@
       "revId": "0399415fb96487a64c29c930513d0114032d00d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19bff4ad_ca66555f",
+        "filename": "rtc_base/stringutils.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-03-28T08:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe50025a_5efa137f",
+      "range": {
+        "startLine": 136,
+        "startChar": 19,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "0399415fb96487a64c29c930513d0114032d00d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
