@@ -14,12 +14,14 @@
 #include <functional>
 #include <memory>
 #include <vector>
+#include "modules/congestion_controller/bbr/bbr_factory.h"
 #include "modules/congestion_controller/goog_cc/include/goog_cc_factory.h"
 #include "modules/congestion_controller/network_control/include/network_types.h"
 #include "modules/congestion_controller/network_control/include/network_units.h"
 #include "modules/remote_bitrate_estimator/include/bwe_defines.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/experiments/congestion_controller_experiment.h"
 #include "rtc_base/format_macros.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
@@ -48,9 +50,12 @@ bool IsPacerPushbackExperimentEnabled() {
               webrtc::runtime_enabled_features::kDualStreamModeFeatureName));
 }
 
-NetworkControllerFactoryInterface::uptr ControllerFactory(
-    RtcEventLog* event_log) {
-  return rtc::MakeUnique<GoogCcNetworkControllerFactory>(event_log);
+std::unique_ptr<NetworkControllerFactoryInterface> MaybeCreateBbrFactory() {
+  if (CongestionControllerExperiment::BbrControllerEnabled()) {
+    return rtc::MakeUnique<BbrNetworkControllerFactory>();
+  } else {
+    return nullptr;
+  }
 }
 
 void SortPacketFeedbackVector(std::vector<webrtc::PacketFeedback>* input) {
@@ -98,40 +103,66 @@ TargetRateConstraints ConvertConstraints(int min_bitrate_bps,
                                           : DataRate::Infinity();
   return msg;
 }
+}  // namespace
+
+namespace send_side_cc_internal {
 
 // TODO(srte): Make sure this is reusable and move it to task_queue.h
 // The template closure pattern is based on rtc::ClosureTask.
-template <class Closure>
 class PeriodicTask : public rtc::QueuedTask {
  public:
-  PeriodicTask(Closure&& closure, int64_t period_ms)
-      : closure_(std::forward<Closure>(closure)), period_ms_(period_ms) {}
+  virtual void Stop() = 0;
+};
+
+template <class Closure>
+class PeriodicTaskImpl : public PeriodicTask {
+ public:
+  PeriodicTaskImpl(rtc::TaskQueue* task_queue,
+                   int64_t period_ms,
+                   Closure&& closure)
+      : task_queue_(task_queue),
+        period_ms_(period_ms),
+        closure_(std::forward<Closure>(closure)) {}
   bool Run() override {
+    if (!running_)
+      return true;
     closure_();
     // WrapUnique lets us repost this task on the TaskQueue.
-    rtc::TaskQueue::Current()->PostDelayedTask(rtc::WrapUnique(this),
-                                               period_ms_);
+    task_queue_->PostDelayedTask(rtc::WrapUnique(this), period_ms_);
     // Return false to tell TaskQueue to not destruct this object, since we have
     // taken ownership with WrapUnique.
     return false;
   }
+  void Stop() override {
+    if (task_queue_->IsCurrent()) {
+      RTC_DCHECK(running_);
+      running_ = false;
+    } else {
+      task_queue_->PostTask([this] { Stop(); });
+    }
+  }
 
  private:
+  rtc::TaskQueue* const task_queue_;
+  const int64_t period_ms_;
   typename std::remove_const<
       typename std::remove_reference<Closure>::type>::type closure_;
-  const int64_t period_ms_;
+  bool running_ = true;
 };
 
 template <class Closure>
-static std::unique_ptr<rtc::QueuedTask> NewPeriodicTask(Closure&& closure,
-                                                        int64_t period_ms) {
-  return rtc::MakeUnique<PeriodicTask<Closure>>(std::forward<Closure>(closure),
-                                                period_ms);
+static PeriodicTask* StartPeriodicTask(rtc::TaskQueue* task_queue,
+                                       int64_t period_ms,
+                                       Closure&& closure) {
+  std::unique_ptr<PeriodicTask> periodic_task =
+      rtc::MakeUnique<PeriodicTaskImpl<Closure>>(
+          task_queue, period_ms, std::forward<Closure>(closure));
+  PeriodicTask* periodic_task_ptr = periodic_task.get();
+  task_queue->PostDelayedTask(std::move(periodic_task), period_ms);
+  return periodic_task_ptr;
 }
 
-}  // namespace
 
-namespace send_side_cc_internal {
 class ControlHandler : public NetworkControllerObserver {
  public:
   ControlHandler(NetworkChangedObserver* observer,
@@ -306,15 +337,21 @@ SendSideCongestionController::SendSideCongestionController(
     : clock_(clock),
       pacer_(pacer),
       transport_feedback_adapter_(clock_),
-      controller_factory_(ControllerFactory(event_log)),
+      controller_factory_with_feedback_(MaybeCreateBbrFactory()),
+      controller_factory_fallback_(
+          rtc::MakeUnique<GoogCcNetworkControllerFactory>(event_log)),
       pacer_controller_(MakeUnique<PacerController>(pacer_)),
-      process_interval_(controller_factory_->GetProcessInterval()),
+      process_interval_(controller_factory_fallback_->GetProcessInterval()),
       observer_(nullptr),
       send_side_bwe_with_overhead_(
           webrtc::field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
       transport_overhead_bytes_per_packet_(0),
       network_available_(false),
       periodic_tasks_enabled_(true),
+      packet_feedback_available_(false),
+      feedback_only_controller_(false),
+      pacer_queue_update_task_(nullptr),
+      controller_task_(nullptr),
       task_queue_(MakeUnique<rtc::TaskQueue>("SendSideCCQueue")) {
   task_queue_ptr_ = task_queue_.get();
   initial_config_.constraints =
@@ -335,20 +372,43 @@ SendSideCongestionController::SendSideCongestionController(
 // bandwidth is set before this class is initialized so the controllers can be
 // created in the constructor.
 void SendSideCongestionController::MaybeCreateControllers() {
-  if (controller_ || !network_available_ || !observer_)
+  if (!controller_)
+    MaybeRecreateControllers();
+}
+
+void SendSideCongestionController::MaybeRecreateControllers() {
+  if (!network_available_ || !observer_)
     return;
+  if (!control_handler_) {
+    control_handler_ = MakeUnique<send_side_cc_internal::ControlHandler>(
+        observer_, pacer_controller_.get(), clock_);
+  }
 
   initial_config_.constraints.at_time =
       Timestamp::ms(clock_->TimeInMilliseconds());
   initial_config_.stream_based_config = streams_config_;
 
-  control_handler_ = MakeUnique<send_side_cc_internal::ControlHandler>(
-      observer_, pacer_controller_.get(), clock_);
+  const bool feedback_only_controller =
+      packet_feedback_available_ && controller_factory_with_feedback_;
 
-  controller_ =
-      controller_factory_->Create(control_handler_.get(), initial_config_);
-  UpdateStreamsConfig();
-  StartProcessPeriodicTasks();
+  if (!controller_ || (feedback_only_controller != feedback_only_controller_)) {
+    if (feedback_only_controller) {
+      RTC_LOG(LS_INFO) << "Creating feedback based only controller";
+      controller_ = controller_factory_with_feedback_->Create(
+          control_handler_.get(), initial_config_);
+      process_interval_ =
+          controller_factory_with_feedback_->GetProcessInterval();
+    } else {
+      RTC_LOG(LS_INFO) << "Creating fallback controller";
+      controller_ = controller_factory_fallback_->Create(control_handler_.get(),
+                                                         initial_config_);
+      process_interval_ = controller_factory_fallback_->GetProcessInterval();
+    }
+    feedback_only_controller_ = feedback_only_controller;
+    UpdateStreamsConfig();
+    StartProcessPeriodicTasks();
+  }
+  RTC_DCHECK(controller_);
 }
 
 SendSideCongestionController::~SendSideCongestionController() {
@@ -461,7 +521,13 @@ RtcpBandwidthObserver* SendSideCongestionController::GetBandwidthObserver() {
 }
 
 void SendSideCongestionController::SetPerPacketFeedbackAvailable(
-    bool available) {}
+    bool available) {
+  task_queue_->PostTask([this, available]() {
+    RTC_DCHECK_RUN_ON(task_queue_ptr_);
+    packet_feedback_available_ = available;
+    MaybeRecreateControllers();
+  });
+}
 
 void SendSideCongestionController::EnablePeriodicAlrProbing(bool enable) {
   task_queue_->PostTask([this, enable]() {
@@ -549,19 +615,27 @@ void SendSideCongestionController::Process() {
 void SendSideCongestionController::StartProcessPeriodicTasks() {
   if (!periodic_tasks_enabled_)
     return;
-  task_queue_ptr_->PostDelayedTask(
-      NewPeriodicTask(
-          rtc::Bind(
-              &SendSideCongestionController::UpdateControllerWithTimeInterval,
-              this),
-          process_interval_.ms()),
-      process_interval_.ms());
-
-  task_queue_ptr_->PostDelayedTask(
-      NewPeriodicTask(
-          rtc::Bind(&SendSideCongestionController::UpdatePacerQueue, this),
-          PacerQueueUpdateIntervalMs),
-      PacerQueueUpdateIntervalMs);
+  if (!pacer_queue_update_task_) {
+    pacer_queue_update_task_ = send_side_cc_internal::StartPeriodicTask(
+        task_queue_ptr_, PacerQueueUpdateIntervalMs, [this]() {
+          RTC_DCHECK_RUN_ON(task_queue_ptr_);
+          UpdatePacerQueue();
+        });
+  }
+  if (controller_task_) {
+    controller_task_->Stop();
+    controller_task_ = nullptr;
+  }
+  if (process_interval_.IsFinite()) {
+    // The controller task is owned by the task queue and lives until the task
+    // queue is destroyed or some time after Stop() is called, whichever comes
+    // first.
+    controller_task_ = send_side_cc_internal::StartPeriodicTask(
+        task_queue_ptr_, process_interval_.ms(), [this]() {
+          RTC_DCHECK_RUN_ON(task_queue_ptr_);
+          UpdateControllerWithTimeInterval();
+        });
+  }
 }
 
 void SendSideCongestionController::UpdateControllerWithTimeInterval() {
