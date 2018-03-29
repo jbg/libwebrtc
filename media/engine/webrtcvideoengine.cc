@@ -492,49 +492,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
   return nullptr;
 }
 
-DefaultUnsignalledSsrcHandler::DefaultUnsignalledSsrcHandler()
-    : default_sink_(nullptr) {}
-
-UnsignalledSsrcHandler::Action DefaultUnsignalledSsrcHandler::OnUnsignalledSsrc(
-    WebRtcVideoChannel* channel,
-    uint32_t ssrc) {
-  rtc::Optional<uint32_t> default_recv_ssrc =
-      channel->GetDefaultReceiveStreamSsrc();
-
-  if (default_recv_ssrc) {
-    RTC_LOG(LS_INFO) << "Destroying old default receive stream for SSRC="
-                     << ssrc << ".";
-    channel->RemoveRecvStream(*default_recv_ssrc);
-  }
-
-  StreamParams sp;
-  sp.ssrcs.push_back(ssrc);
-  RTC_LOG(LS_INFO) << "Creating default receive stream for SSRC=" << ssrc
-                   << ".";
-  if (!channel->AddRecvStream(sp, true)) {
-    RTC_LOG(LS_WARNING) << "Could not create default receive stream.";
-  }
-
-  channel->SetSink(ssrc, default_sink_);
-  return kDeliverPacket;
-}
-
-rtc::VideoSinkInterface<webrtc::VideoFrame>*
-DefaultUnsignalledSsrcHandler::GetDefaultSink() const {
-  return default_sink_;
-}
-
-void DefaultUnsignalledSsrcHandler::SetDefaultSink(
-    WebRtcVideoChannel* channel,
-    rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) {
-  default_sink_ = sink;
-  rtc::Optional<uint32_t> default_recv_ssrc =
-      channel->GetDefaultReceiveStreamSsrc();
-  if (default_recv_ssrc) {
-    channel->SetSink(*default_recv_ssrc, default_sink_);
-  }
-}
-
 #if defined(USE_BUILTIN_SW_CODECS)
 WebRtcVideoEngine::WebRtcVideoEngine(
     std::unique_ptr<WebRtcVideoEncoderFactory> external_video_encoder_factory,
@@ -611,7 +568,6 @@ WebRtcVideoChannel::WebRtcVideoChannel(
     DecoderFactoryAdapter* decoder_factory)
     : VideoMediaChannel(config),
       call_(call),
-      unsignalled_ssrc_handler_(&default_unsignalled_ssrc_handler_),
       video_config_(config.video),
       encoder_factory_(encoder_factory),
       decoder_factory_(decoder_factory),
@@ -876,28 +832,17 @@ webrtc::RtpParameters WebRtcVideoChannel::GetRtpReceiveParameters(
     uint32_t ssrc) const {
   webrtc::RtpParameters rtp_params;
   rtc::CritScope stream_lock(&stream_crit_);
-  // SSRC of 0 represents an unsignaled receive stream.
-  if (ssrc == 0) {
-    if (!default_unsignalled_ssrc_handler_.GetDefaultSink()) {
-      RTC_LOG(LS_WARNING)
-          << "Attempting to get RTP parameters for the default, "
-             "unsignaled video receive stream, but not yet "
-             "configured to receive such a stream.";
-      return rtp_params;
-    }
-    rtp_params.encodings.emplace_back();
-  } else {
-    auto it = receive_streams_.find(ssrc);
-    if (it == receive_streams_.end()) {
-      RTC_LOG(LS_WARNING)
-          << "Attempting to get RTP receive parameters for stream "
-          << "with SSRC " << ssrc << " which doesn't exist.";
-      return webrtc::RtpParameters();
-    }
-    // TODO(deadbeef): Return stream-specific parameters, beyond just SSRC.
-    rtp_params.encodings.emplace_back();
-    rtp_params.encodings[0].ssrc = it->second->GetFirstPrimarySsrc();
+
+  auto it = receive_streams_.find(ssrc);
+  if (it == receive_streams_.end()) {
+    RTC_LOG(LS_WARNING)
+        << "Attempting to get RTP receive parameters for stream "
+        << "with SSRC " << ssrc << " which doesn't exist.";
+    return webrtc::RtpParameters();
   }
+  // TODO(deadbeef): Return stream-specific parameters, beyond just SSRC.
+  rtp_params.encodings.emplace_back();
+  rtp_params.encodings[0].ssrc = it->second->GetFirstPrimarySsrc();
 
   // Add codecs, which any stream is prepared to receive.
   for (const VideoCodec& codec : recv_params_.codecs) {
@@ -912,23 +857,12 @@ bool WebRtcVideoChannel::SetRtpReceiveParameters(
   TRACE_EVENT0("webrtc", "WebRtcVideoChannel::SetRtpReceiveParameters");
   rtc::CritScope stream_lock(&stream_crit_);
 
-  // SSRC of 0 represents an unsignaled receive stream.
-  if (ssrc == 0) {
-    if (!default_unsignalled_ssrc_handler_.GetDefaultSink()) {
-      RTC_LOG(LS_WARNING)
-          << "Attempting to set RTP parameters for the default, "
-             "unsignaled video receive stream, but not yet "
-             "configured to receive such a stream.";
-      return false;
-    }
-  } else {
-    auto it = receive_streams_.find(ssrc);
-    if (it == receive_streams_.end()) {
-      RTC_LOG(LS_WARNING)
-          << "Attempting to set RTP receive parameters for stream "
-          << "with SSRC " << ssrc << " which doesn't exist.";
-      return false;
-    }
+  auto it = receive_streams_.find(ssrc);
+  if (it == receive_streams_.end()) {
+    RTC_LOG(LS_WARNING)
+        << "Attempting to set RTP receive parameters for stream "
+        << "with SSRC " << ssrc << " which doesn't exist.";
+    return false;
   }
 
   webrtc::RtpParameters current_parameters = GetRtpReceiveParameters(ssrc);
@@ -1335,12 +1269,6 @@ bool WebRtcVideoChannel::SetSink(
     rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) {
   RTC_LOG(LS_INFO) << "SetSink: ssrc:" << ssrc << " "
                    << (sink ? "(ptr)" : "nullptr");
-  if (ssrc == 0) {
-    // Do not hold |stream_crit_| here, since SetDefaultSink will call
-    // WebRtcVideoChannel::GetDefaultReceiveStreamSsrc().
-    default_unsignalled_ssrc_handler_.SetDefaultSink(this, sink);
-    return true;
-  }
 
   rtc::CritScope stream_lock(&stream_crit_);
   std::map<uint32_t, WebRtcVideoReceiveStream*>::iterator it =
@@ -1434,57 +1362,9 @@ void WebRtcVideoChannel::OnPacketReceived(
     const rtc::PacketTime& packet_time) {
   const webrtc::PacketTime webrtc_packet_time(packet_time.timestamp,
                                               packet_time.not_before);
-  const webrtc::PacketReceiver::DeliveryStatus delivery_result =
-      call_->Receiver()->DeliverPacket(webrtc::MediaType::VIDEO, *packet,
-                                       webrtc_packet_time);
-  switch (delivery_result) {
-    case webrtc::PacketReceiver::DELIVERY_OK:
-      return;
-    case webrtc::PacketReceiver::DELIVERY_PACKET_ERROR:
-      return;
-    case webrtc::PacketReceiver::DELIVERY_UNKNOWN_SSRC:
-      break;
-  }
 
-  uint32_t ssrc = 0;
-  if (!GetRtpSsrc(packet->cdata(), packet->size(), &ssrc)) {
-    return;
-  }
-
-  int payload_type = 0;
-  if (!GetRtpPayloadType(packet->cdata(), packet->size(), &payload_type)) {
-    return;
-  }
-
-  // See if this payload_type is registered as one that usually gets its own
-  // SSRC (RTX) or at least is safe to drop either way (FEC). If it is, and
-  // it wasn't handled above by DeliverPacket, that means we don't know what
-  // stream it associates with, and we shouldn't ever create an implicit channel
-  // for these.
-  for (auto& codec : recv_codecs_) {
-    if (payload_type == codec.rtx_payload_type ||
-        payload_type == codec.ulpfec.red_rtx_payload_type ||
-        payload_type == codec.ulpfec.ulpfec_payload_type) {
-      return;
-    }
-  }
-  if (payload_type == recv_flexfec_payload_type_) {
-    return;
-  }
-
-  switch (unsignalled_ssrc_handler_->OnUnsignalledSsrc(this, ssrc)) {
-    case UnsignalledSsrcHandler::kDropPacket:
-      return;
-    case UnsignalledSsrcHandler::kDeliverPacket:
-      break;
-  }
-
-  if (call_->Receiver()->DeliverPacket(webrtc::MediaType::VIDEO, *packet,
-                                       webrtc_packet_time) !=
-      webrtc::PacketReceiver::DELIVERY_OK) {
-    RTC_LOG(LS_WARNING) << "Failed to deliver RTP packet on re-delivery.";
-    return;
-  }
+  call_->Receiver()->DeliverPacket(webrtc::MediaType::VIDEO, *packet,
+                                   webrtc_packet_time);
 }
 
 void WebRtcVideoChannel::OnRtcpReceived(
