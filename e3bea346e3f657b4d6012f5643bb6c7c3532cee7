@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb355777_5d7418d7",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-03-29T08:47:05Z",
+      "side": 1,
+      "message": "Standard trick that makes this logic a bit simpler:\n\n  const char* separator \u003d \"\";\n  for (const auto\u0026 entry : ToStringMap()) {\n    ost \u003c\u003c separator \u003c\u003c entry.first \u003c\u003c \": \" \u003c\u003c entry.second;\n    separator \u003d \", \";\n  }",
+      "revId": "e3bea346e3f657b4d6012f5643bb6c7c3532cee7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
