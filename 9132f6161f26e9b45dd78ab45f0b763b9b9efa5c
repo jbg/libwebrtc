@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7e510ed_ae6821bd",
+        "filename": "modules/desktop_capture/mac/desktop_frame_iosurface.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "const?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 49
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e772b14_14e49e19",
+        "filename": "modules/desktop_capture/mac/desktop_frame_iosurface.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "if (!io_surface) {\n  return nullptr;\n}",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4a9be9e_5df4e321",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "Add comment: Returns null if |display_id| is invalid or not ready.",
+      "range": {
+        "startLine": 30,
+        "startChar": 38,
+        "endLine": 30,
+        "endChar": 59
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "258beca6_8a8910a0",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "Please add some comments: OS sends the latest IOSurfaceRef through CGDisplayStreamFrameAvailableHandler callback; we store it here.",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc14cb77_3f9db32d",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "Maybe rename to Release(). I think the consumers of this class do not need to know what would be released in this function.\nPlease also add some comments: this function is expected to be executed when display configuration changed.\n\nP.S. Do we really need to call this function when display configuration changed? Will the OS send us the updated IOSurface immediately?",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55587223_93d09455",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 51
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43507233_e35e20bb",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "You do not need to return a SharedDesktopFrame here AFAICT, in ScreenCapturerMac, the data are always copied to |frame|.",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17048b0c_91513bad",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T18:17:16Z",
+      "side": 1,
+      "message": "Check whether desktop_frame_iosurface is nullptr.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 90
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
