@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8bf98aae_51e6572a",
+        "filename": "modules/desktop_capture/mac/desktop_frame_iosurface.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7e510ed_ae6821bd",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 49
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e772b14_14e49e19",
         "filename": "modules/desktop_capture/mac/desktop_frame_iosurface.mm",
         "patchSetId": 14
@@ -45,6 +69,30 @@
       "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f78632f_3c7fc9fc",
+        "filename": "modules/desktop_capture/mac/desktop_frame_iosurface.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e772b14_14e49e19",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "61266072_c1f258b4",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a9be9e_5df4e321",
+      "range": {
+        "startLine": 30,
+        "startChar": 38,
+        "endLine": 30,
+        "endChar": 59
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "258beca6_8a8910a0",
         "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
         "patchSetId": 14
@@ -91,6 +163,30 @@
       "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "305375cf_86c7d539",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "258beca6_8a8910a0",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ef9d88f2_c31cf0ad",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done renamed to Release. You are right about that the OS sends the updated IOSurface immediately so no need to clear the map since it will be updated immediately.\nIt is actually expected to be called before stopping the CGDisplayStreamRef streams so I fixed that and added the comment.",
+      "parentUuid": "fc14cb77_3f9db32d",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55587223_93d09455",
         "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
         "patchSetId": 14
@@ -137,6 +257,30 @@
       "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f831b1_2ba5ab89",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55587223_93d09455",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 51
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "f37931e1_a64f8fde",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43507233_e35e20bb",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17048b0c_91513bad",
         "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
         "patchSetId": 14
@@ -183,6 +351,30 @@
       "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "703afd10_eec9236d",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T22:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17048b0c_91513bad",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 90
+      },
+      "revId": "9132f6161f26e9b45dd78ab45f0b763b9b9efa5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
