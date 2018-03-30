@@ -22,6 +22,30 @@
       "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80d7a8bd_44c9b424",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T23:23:06Z",
+      "side": 1,
+      "message": "It looks like you should return a const DesktopFrame\u0026, rather than a unique_ptr. My bad, I have not considered this at the first place.\n\nYou may want to have a unique_ptr in the DesktopFrameProvider level to store the DesktopFrame returned by DesktopFrameCGImage::CreateForDisplay(). And this io_surfaces_ to store the map between CGDirectDisplayID and DesktopFrameIOSurface. DesktopFrameProvider::Release() clears both the unique_ptr and the map.\n\nThe consumer of this class should not change the DesktopFrame returned by this function and also should not expect its lifetime. The return value is used to copy the pixel to a long-living DesktopFrame, i.e. the SharedDesktopFrame in ScreenCapturerMac.\n\nThis kind of implementation ensures the DesktopFrame returned by DesktopCapturer can outlive the DesktopCapturer itself. Since typically DesktopFrameProvider::Release() or the destructor will release all the instances of DesktopFrameCGImage or DesktopFrameIOSurface.",
+      "parentUuid": "fa484196_35b70ca7",
+      "range": {
+        "startLine": 40,
+        "startChar": 47,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
