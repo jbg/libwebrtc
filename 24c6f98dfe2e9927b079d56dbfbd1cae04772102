@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c56cd1d6_3097b7d2",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T23:02:10Z",
+      "side": 1,
+      "message": "My intention was that LatestFrameForDisplay behaves like a get, not a pop/take. But after all, the CaptureFrame() won\u0027t be called more than the handler I am ok to make it behaves like a take.",
+      "parentUuid": "dbdacc45_592ac542",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 68
+      },
+      "revId": "24c6f98dfe2e9927b079d56dbfbd1cae04772102",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "196fee5f_4e4c3b07",
         "filename": "modules/desktop_capture/mac/screen_capturer_mac.h",
         "patchSetId": 15
@@ -45,6 +69,30 @@
       "revId": "24c6f98dfe2e9927b079d56dbfbd1cae04772102",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0748f804_ac75d92f",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-30T23:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "196fee5f_4e4c3b07",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 64
+      },
+      "revId": "24c6f98dfe2e9927b079d56dbfbd1cae04772102",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
