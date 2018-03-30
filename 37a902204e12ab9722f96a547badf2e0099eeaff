@@ -46,6 +46,30 @@
       "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fd8cbcf_edeb442f",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T23:45:50Z",
+      "side": 1,
+      "message": "A similar example in DirectX capturer on Windows:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/desktop_capture/win/dxgi_output_duplicator.cc?rcl\u003d4157936823f72d53e105305a9da34f94dcb0771e\u0026l\u003d191",
+      "parentUuid": "80d7a8bd_44c9b424",
+      "range": {
+        "startLine": 40,
+        "startChar": 47,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
