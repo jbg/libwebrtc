@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbdacc45_592ac542",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T22:23:53Z",
+      "side": 1,
+      "message": "Sorry, I mean, you do not need to use SharedDesktopFrame at all, you can store the instance in the map.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 68
+      },
+      "revId": "24c6f98dfe2e9927b079d56dbfbd1cae04772102",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "196fee5f_4e4c3b07",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-03-30T22:23:53Z",
+      "side": 1,
+      "message": "If you do not use different implementations according to the allow_iosurface parameter, you can use instance rather than unique_ptr. Unless you prefer to forward declaration instead of include the head file here.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 64
+      },
+      "revId": "24c6f98dfe2e9927b079d56dbfbd1cae04772102",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
