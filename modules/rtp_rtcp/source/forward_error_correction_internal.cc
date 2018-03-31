@@ -10,13 +10,11 @@
 
 #include "modules/rtp_rtcp/source/forward_error_correction_internal.h"
 
-#include <assert.h>
-#include <string.h>
-
 #include <algorithm>
 
 #include "modules/rtp_rtcp/source/fec_private_tables_bursty.h"
 #include "modules/rtp_rtcp/source/fec_private_tables_random.h"
+#include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 
 namespace {
@@ -147,8 +145,17 @@ namespace internal {
 
 PacketMaskTable::PacketMaskTable(FecMaskType fec_mask_type,
                                  int num_media_packets)
-    : fec_mask_type_(InitMaskType(fec_mask_type, num_media_packets)),
-      fec_packet_mask_table_(InitMaskTable(fec_mask_type_)) {}
+    : fec_packet_mask_table_(
+          InitMaskTable(InitMaskType(fec_mask_type, num_media_packets))) {}
+
+PacketMaskTable::~PacketMaskTable() = default;
+
+const uint8_t* PacketMaskTable::LookUp(int media_packet_index,
+                                       int fec_index) const {
+  // TODO(tommi): Need to check index validity, ideally also know how many bytes
+  // need to be read.
+  return fec_packet_mask_table_[media_packet_index][fec_index];
+}
 
 // Sets |fec_mask_type_| to the type of packet mask selected. The type of
 // packet mask selected is based on |fec_mask_type| and |num_media_packets|.
@@ -157,23 +164,23 @@ PacketMaskTable::PacketMaskTable(FecMaskType fec_mask_type,
 FecMaskType PacketMaskTable::InitMaskType(FecMaskType fec_mask_type,
                                           int num_media_packets) {
   // The mask should not be bigger than |packetMaskTbl|.
-  assert(num_media_packets <= static_cast<int>(sizeof(kPacketMaskRandomTbl) /
-                                               sizeof(*kPacketMaskRandomTbl)));
+  RTC_DCHECK_GE(num_media_packets, 0);
+  RTC_DCHECK_LE(static_cast<size_t>(num_media_packets),
+                arraysize(kPacketMaskRandomTbl));
   switch (fec_mask_type) {
     case kFecMaskRandom: {
       return kFecMaskRandom;
     }
     case kFecMaskBursty: {
-      int max_media_packets = static_cast<int>(sizeof(kPacketMaskBurstyTbl) /
-                                               sizeof(*kPacketMaskBurstyTbl));
-      if (num_media_packets > max_media_packets) {
+      constexpr static int kMaxMediaPackets = arraysize(kPacketMaskBurstyTbl);
+      if (num_media_packets > kMaxMediaPackets) {
         return kFecMaskRandom;
       } else {
         return kFecMaskBursty;
       }
     }
   }
-  assert(false);
+  RTC_NOTREACHED();
   return kFecMaskRandom;
 }
 
@@ -189,7 +196,7 @@ const uint8_t* const* const* PacketMaskTable::InitMaskTable(
       return kPacketMaskBurstyTbl;
     }
   }
-  assert(false);
+  RTC_NOTREACHED();
   return kPacketMaskRandomTbl;
 }
 
@@ -207,10 +214,8 @@ void RemainingPacketProtection(int num_media_packets,
     const int res_mask_bytes =
         PacketMaskSize(num_media_packets - num_fec_for_imp_packets);
 
-    const uint8_t* packet_mask_sub_21 =
-        mask_table.fec_packet_mask_table()[num_media_packets -
-                                           num_fec_for_imp_packets -
-                                           1][num_fec_remaining - 1];
+    const uint8_t* packet_mask_sub_21 = mask_table.LookUp(
+        num_media_packets - num_fec_for_imp_packets - 1, num_fec_remaining - 1);
 
     ShiftFitSubMask(num_mask_bytes, res_mask_bytes, num_fec_for_imp_packets,
                     (num_fec_for_imp_packets + num_fec_remaining),
@@ -220,8 +225,7 @@ void RemainingPacketProtection(int num_media_packets,
     // sub_mask22
 
     const uint8_t* packet_mask_sub_22 =
-        mask_table.fec_packet_mask_table()[num_media_packets -
-                                           1][num_fec_remaining - 1];
+        mask_table.LookUp(num_media_packets - 1, num_fec_remaining - 1);
 
     FitSubMask(num_mask_bytes, num_mask_bytes, num_fec_remaining,
                packet_mask_sub_22,
@@ -234,7 +238,7 @@ void RemainingPacketProtection(int num_media_packets,
       }
     }
   } else {
-    assert(false);
+    RTC_NOTREACHED();
   }
 }
 
@@ -248,8 +252,7 @@ void ImportantPacketProtection(int num_fec_for_imp_packets,
 
   // Get sub_mask1 from table
   const uint8_t* packet_mask_sub_1 =
-      mask_table.fec_packet_mask_table()[num_imp_packets -
-                                         1][num_fec_for_imp_packets - 1];
+      mask_table.LookUp(num_imp_packets - 1, num_fec_for_imp_packets - 1);
 
   FitSubMask(num_mask_bytes, num_imp_mask_bytes, num_fec_for_imp_packets,
              packet_mask_sub_1, packet_mask);
@@ -368,9 +371,11 @@ void GeneratePacketMasks(int num_media_packets,
                          bool use_unequal_protection,
                          const PacketMaskTable& mask_table,
                          uint8_t* packet_mask) {
-  assert(num_media_packets > 0);
-  assert(num_fec_packets <= num_media_packets && num_fec_packets > 0);
-  assert(num_imp_packets <= num_media_packets && num_imp_packets >= 0);
+  RTC_DCHECK_GT(num_media_packets, 0);
+  RTC_DCHECK_GT(num_fec_packets, 0);
+  RTC_DCHECK_LE(num_fec_packets, num_media_packets);
+  RTC_DCHECK_LE(num_imp_packets, num_media_packets);
+  RTC_DCHECK_GE(num_imp_packets, 0);
 
   const int num_mask_bytes = PacketMaskSize(num_media_packets);
 
@@ -380,8 +385,7 @@ void GeneratePacketMasks(int num_media_packets,
     // Mask = (k,n-k), with protection factor = (n-k)/k,
     // where k = num_media_packets, n=total#packets, (n-k)=num_fec_packets.
     memcpy(packet_mask,
-           mask_table.fec_packet_mask_table()[num_media_packets -
-                                              1][num_fec_packets - 1],
+           mask_table.LookUp(num_media_packets - 1, num_fec_packets - 1),
            num_fec_packets * num_mask_bytes);
   } else {  // UEP case
     UnequalProtectionMask(num_media_packets, num_fec_packets, num_imp_packets,
