@@ -70,6 +70,30 @@
       "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36c5dc88_acb4d50a",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-03-31T14:21:49Z",
+      "side": 1,
+      "message": "Thx for the suggestion but it seems I will need another map then for the CGImage. Not really a problem but just to mention. But then there is a big problem for the io_surfaces case, the returned \"const DesktopFrame\u0026\" can be read while being destroyed since InvalidateIOSurface is called in another thread. The io_surfaces_lock_ just protects the map. I realize this was the same problem in previous solution with SharedDesktopFrame/-\u003eShare, i.e. rtc::scoped_refptr is not thread safe (isn\u0027t it ?).\n\nSo I think current implementation in Patch Set 16 is fine, since the caller of LatestFrameForDisplay takes ownership of the frame and it is removed from the map. I should maybe renamed these 2 functions. And eventually I need to explicitly call io_surfaces_[display_id] \u003d nullptr but maybe even not because the std:move makes the element in the map invalid so the next time this function is called the condition in \"if (io_surfaces_[display_id])\" will be false. Unless I am mistaken.\n\nWhat do you think ? Thx!",
+      "parentUuid": "3fd8cbcf_edeb442f",
+      "range": {
+        "startLine": 40,
+        "startChar": 47,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
