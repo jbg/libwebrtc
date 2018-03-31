@@ -33,16 +33,13 @@ namespace internal {
 class PacketMaskTable {
  public:
   PacketMaskTable(FecMaskType fec_mask_type, int num_media_packets);
-  ~PacketMaskTable() {}
-  FecMaskType fec_mask_type() const { return fec_mask_type_; }
-  const uint8_t* const* const* fec_packet_mask_table() const {
-    return fec_packet_mask_table_;
-  }
+  ~PacketMaskTable();
+
+  const uint8_t* LookUp(int media_packet_index, int fec_index) const;
 
  private:
   FecMaskType InitMaskType(FecMaskType fec_mask_type, int num_media_packets);
-  const uint8_t* const* const* InitMaskTable(FecMaskType fec_mask_type_);
-  const FecMaskType fec_mask_type_;
+  const uint8_t* const* const* InitMaskTable(FecMaskType fec_mask_type);
   const uint8_t* const* const* fec_packet_mask_table_;
 };
 
