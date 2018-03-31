@@ -33,17 +33,20 @@ namespace internal {
 class PacketMaskTable {
  public:
   PacketMaskTable(FecMaskType fec_mask_type, int num_media_packets);
-  ~PacketMaskTable() {}
-  FecMaskType fec_mask_type() const { return fec_mask_type_; }
-  const uint8_t* const* const* fec_packet_mask_table() const {
-    return fec_packet_mask_table_;
-  }
+  ~PacketMaskTable();
+
+  const uint8_t* LookUp(int media_packet_index, int fec_index) const;
 
  private:
-  FecMaskType InitMaskType(FecMaskType fec_mask_type, int num_media_packets);
-  const uint8_t* const* const* InitMaskTable(FecMaskType fec_mask_type_);
-  const FecMaskType fec_mask_type_;
-  const uint8_t* const* const* fec_packet_mask_table_;
+  struct TableProperties {
+    const uint8_t* const* const* data;
+    const size_t size;
+  };
+
+  static TableProperties PickTable(FecMaskType fec_mask_type,
+                                   int num_media_packets);
+
+  const TableProperties table_;
 };
 
 // Returns an array of packet masks. The mask of a single FEC packet
