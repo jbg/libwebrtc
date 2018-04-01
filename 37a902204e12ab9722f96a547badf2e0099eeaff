@@ -94,6 +94,30 @@
       "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7502c7f3_1ce0ecad",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-01T20:49:32Z",
+      "side": 1,
+      "message": "Interesting. I recall that you have mentioned this problem before: OS callback uses the thread which it has been initialized, i.e. the constructor / Init thread, but CaptureFrame() uses a dedicated thread.\n\nrtc::scoped_refptr itself is thread-safe, but as a pointer, it also requires the implementation of T to be thread-safe. SharedDesktopFrame is thread-safe.\n\nYou do not need to actively call io_surfaces_[display_id], std::move(std::unique_ptr) will erase the reference in the unique_ptr, it becomes nullptr anyway.\n\nSo yes, it looks like the patch #16 should be fine. Please update the name and the comment of the function.\n\nAlso, I am interested by the IOSurfaceIncrementUseCount() and IOSurfaceDecrementUseCount(). So it looks like we can also rely on the OS to help us maintain the lifetime.\nRather than unique_ptr\u003cDesktopFrame\u003e, we can return DesktopFrame\u0026\u0026 from DesktopFrameProvider. By using the default copy constructor, we can keep two references without destructing the IOSurface or CGImageRef and CGDataRef.\nThis is just a random idea; I am OK with current solution.",
+      "parentUuid": "36c5dc88_acb4d50a",
+      "range": {
+        "startLine": 40,
+        "startChar": 47,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
