@@ -35,9 +35,12 @@ class VideoProcessorIntegrationTestVideoToolbox
   }
 };
 
+// TODO(webrtc:9099): Disabled until the issue is fixed.
+#if TARGET_OS_IPHONE
+#define DISABLED_TEST_F TEST_F
 // HW codecs don't work on simulators. Only run these tests on device.
-#if TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
-#define MAYBE_TEST_F TEST_F
+// #if TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+// #define MAYBE_TEST_F TEST_F
 #else
 #define MAYBE_TEST_F(s, name) TEST_F(s, DISABLED_##name)
 #endif
