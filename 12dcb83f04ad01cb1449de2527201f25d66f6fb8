@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20970236_39287c93",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-04-03T17:44:48Z",
+      "side": 1,
+      "message": "Could this just be a local variable?  And below it could check specifically for audio/video?\nAudio example:\nbool remote_peer_supports_msid_audio \u003d \n    remote_description()-\u003edescription()-\u003emsid_supported() ||\n    audio_desc \u0026\u0026 !audio_desc-\u003estreams().empty()?\n\nI tried this and tests passed. I made a comment in the bug and hopefully Taylor can add his insight there (he made the original change that added remote_peer_supports_msid_).",
+      "range": {
+        "startLine": 2478,
+        "startChar": 4,
+        "endLine": 2478,
+        "endChar": 30
+      },
+      "revId": "12dcb83f04ad01cb1449de2527201f25d66f6fb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
