@@ -22,6 +22,30 @@
       "revId": "12dcb83f04ad01cb1449de2527201f25d66f6fb8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef1284c_deb810f9",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-04-03T21:43:04Z",
+      "side": 1,
+      "message": "I didn\u0027t really introduce this logic; I just moved it around: https://codereview.webrtc.org/1404473005/diff/280001/talk/app/webrtc/mediastreamsignaling.h\n\nThe reason it\u0027s stored as a member variable is that we *want* to remember if the remote peer supports SSRC signaling, so that if they later set a description without any \"a\u003dssrc\"s we don\u0027t create a MediaStreamTrack that doesn\u0027t actually receive any media.\n\nOne could argue that this isn\u0027t the right thing to do, because the remote peer may actually be different in a subsequent remote description (in the case of sequential call forking for example). But I\u0027d be worried that changing behavior that\u0027s been around for so long would break somebody. I\u0027d feel better leaving this alone and encouraging anyone affected to just use Unified Plan semantics once available, where the expected behavior is specified by the standard and this problem doesn\u0027t exist.",
+      "parentUuid": "20970236_39287c93",
+      "range": {
+        "startLine": 2478,
+        "startChar": 4,
+        "endLine": 2478,
+        "endChar": 30
+      },
+      "revId": "12dcb83f04ad01cb1449de2527201f25d66f6fb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
