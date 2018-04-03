@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.ipp": "cpp",
+        "__bit_reference": "cpp",
+        "string": "cpp",
+        "rope": "cpp",
+        "bitset": "cpp",
+        "__locale": "cpp"
+    }
+}
