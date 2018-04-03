@@ -11,6 +11,7 @@
 #include "video/video_stream_decoder_impl.h"
 
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/mod_ops.h"
 #include "rtc_base/ptr_util.h"
 
 namespace webrtc {
@@ -23,15 +24,25 @@ VideoStreamDecoderImpl::VideoStreamDecoderImpl(
       decoder_factory_(decoder_factory),
       decoder_settings_(std::move(decoder_settings)),
       bookkeeping_queue_("video_stream_decoder_bookkeeping_queue"),
+      decode_thread_(&DecodeThreadFunction,
+                     this,
+                     "video_stream_decoder_decode_thread",
+                     rtc::kHighestPriority),
       jitter_estimator_(Clock::GetRealTimeClock()),
       timing_(Clock::GetRealTimeClock()),
       frame_buffer_(Clock::GetRealTimeClock(),
                     &jitter_estimator_,
                     &timing_,
-                    nullptr) {}
+                    nullptr),
+      keyframe_required_(true),
+      last_start_time_index_(0) {
+  decode_start_time_.fill({-1, 0});
+  decode_thread_.Start();
+}
 
 VideoStreamDecoderImpl::~VideoStreamDecoderImpl() {
   frame_buffer_.Stop();
+  decode_thread_.Stop();
 }
 
 void VideoStreamDecoderImpl::OnFrame(
@@ -109,6 +120,77 @@ VideoDecoder* VideoStreamDecoderImpl::GetDecoder(int payload_type) {
   current_payload_type_.emplace(payload_type);
   decoder_ = std::move(decoder);
   return decoder_.get();
+}
+
+void VideoStreamDecoderImpl::DecodeThreadFunction(void* ptr) {
+  while (static_cast<VideoStreamDecoderImpl*>(ptr)->Decode()) {
+  }
+}
+
+bool VideoStreamDecoderImpl::Decode() {
+  // TODO(philipel): Use rtc::Event::kForever when it's supported by the
+  //                 FrameBuffer.
+  int wait_time = 100000000;
+
+  // This while loops is pretty much a goto substitute. If we fail to decode we
+  // immediately jump back here to check if there is a keyframe we can try to
+  // decode.
+  while (true) {
+    std::unique_ptr<video_coding::EncodedFrame> frame;
+    video_coding::FrameBuffer::ReturnReason res =
+        frame_buffer_.NextFrame(wait_time, &frame, keyframe_required_);
+
+    if (res == video_coding::FrameBuffer::ReturnReason::kStopped)
+      return false;
+
+    if (frame) {
+      VideoDecoder* decoder = GetDecoder(frame->PayloadType());
+      if (!decoder) {
+        RTC_LOG(LS_WARNING)
+            << "Failed to get decoder, dropping frame (" << frame->id.picture_id
+            << ":" << frame->id.spatial_layer << ").";
+        return true;
+      }
+
+      int64_t decode_start_time_ms = rtc::TimeMillis();
+      uint32_t frame_timestamp = frame->timestamp;
+      bookkeeping_queue_.PostTask(
+          [this, decode_start_time_ms, frame_timestamp]() {
+            RTC_DCHECK_RUN_ON(&bookkeeping_queue_);
+            // Saving decode start time this way wont work if we decode spatial
+            // layers sequentially.
+            decode_start_time_[last_start_time_index_] = {frame_timestamp,
+                                                          decode_start_time_ms};
+            last_start_time_index_ =
+                Add<kDecodeTimeMemory>(last_start_time_index_, 1);
+          });
+
+      int32_t decode_result =
+          decoder->Decode(frame->EncodedImage(),
+                          false,    // missing_frame
+                          nullptr,  // rtp fragmentation header
+                          nullptr,  // codec specific info
+                          frame->RenderTimeMs());
+
+      if (decode_result != WEBRTC_VIDEO_CODEC_OK) {
+        // If we fail to decode, check if we have a keyframe in the
+        // |frame_buffer_| and try again.
+        keyframe_required_ = true;
+        wait_time = 0;
+        continue;
+      }
+
+      keyframe_required_ = false;
+    } else if (keyframe_required_) {
+      // If we end up here it means that we got a decoding error and there is no
+      // keyframe available in the |frame_buffer_|.
+      bookkeeping_queue_.PostTask([this]() {
+        RTC_DCHECK_RUN_ON(&bookkeeping_queue_);
+        callbacks_->OnNonDecodableState();
+      });
+    }
+    return true;
+  }
 }
 
 }  // namespace webrtc
