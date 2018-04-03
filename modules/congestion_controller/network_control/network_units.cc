@@ -9,6 +9,7 @@
  */
 
 #include "modules/congestion_controller/network_control/include/network_units.h"
+#include "rtc_base/strings/string_builder.h"
 #include <cmath>
 
 namespace webrtc {
@@ -50,5 +51,55 @@ DataSize operator*(const TimeDelta& duration, const DataRate& rate) {
   return rate * duration;
 }
 
+std::string DataRate::ToString() const {
+  char buf[256];
+  rtc::SimpleStringBuilder sb(buf);
+  if (*this == DataRate::kPlusInfinity) {
+    sb << "inf bps";
+  } else if (*this == DataRate::kNotInitialized) {
+    sb << "? bps";
+  } else {
+    sb << bps() << " bps";
+  }
+  return sb.str();
+}
+std::string DataSize::ToString() const {
+  char buf[256];
+  rtc::SimpleStringBuilder sb(buf);
+  if (*this == DataSize::kPlusInfinity) {
+    sb << "inf bytes";
+  } else if (*this == DataSize::kNotInitialized) {
+    sb << "? bytes";
+  } else {
+    sb << bytes() << " bytes";
+  }
+  return sb.str();
+}
+std::string Timestamp::ToString() const {
+  char buf[256];
+  rtc::SimpleStringBuilder sb(buf);
+  if (*this == Timestamp::kPlusInfinity) {
+    sb << "inf ms";
+  } else if (*this == Timestamp::kNotInitialized) {
+    sb << "? ms";
+  } else {
+    sb << ms() << " ms";
+  }
+  return sb.str();
+}
+std::string TimeDelta::ToString() const {
+  char buf[256];
+  rtc::SimpleStringBuilder sb(buf);
+  if (*this == TimeDelta::kPlusInfinity) {
+    sb << "+inf ms";
+  } else if (*this == TimeDelta::kMinusInfinity) {
+    sb << "-inf ms";
+  } else if (*this == TimeDelta::kNotInitialized) {
+    sb << "? ms";
+  } else {
+    sb << ms() << " ms";
+  }
+  return sb.str();
+}
 
 }  // namespace webrtc

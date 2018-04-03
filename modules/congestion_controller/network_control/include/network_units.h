@@ -82,6 +82,7 @@ class TimeDelta {
   bool IsMinusInfinity() const {
     return microseconds_ == units_internal::kMinusInfinityVal;
   }
+  std::string ToString() const;
   TimeDelta operator+(const TimeDelta& other) const {
     return TimeDelta::us(us() + other.us());
   }
@@ -174,6 +175,7 @@ class Timestamp {
   TimeDelta operator-(const Timestamp& other) const {
     return TimeDelta::us(us() - other.us());
   }
+  std::string ToString() const;
   Timestamp operator-(const TimeDelta& delta) const {
     return Timestamp::us(us() - delta.us());
   }
@@ -240,6 +242,7 @@ class DataSize {
     return bytes_ != units_internal::kNotInitializedVal;
   }
   bool IsFinite() const { return IsInitialized() && !IsInfinite(); }
+  std::string ToString() const;
   DataSize operator-(const DataSize& other) const {
     return DataSize::bytes(bytes() - other.bytes());
   }
@@ -338,6 +341,7 @@ class DataRate {
     return bits_per_sec_ != units_internal::kNotInitializedVal;
   }
   bool IsFinite() const { return IsInitialized() && !IsInfinite(); }
+  std::string ToString() const;
   DataRate operator*(double scalar) const;
   DataRate operator*(int64_t scalar) const {
     return DataRate::bytes_per_second(bytes_per_second() * scalar);
