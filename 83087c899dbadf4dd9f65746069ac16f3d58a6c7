@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1385069c_e298a386",
+        "filename": "modules/rtp_rtcp/source/fec_private_tables_bursty.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-03T07:28:39Z",
+      "side": 1,
+      "message": "It seems we can also remove these two.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 28
+      },
+      "revId": "83087c899dbadf4dd9f65746069ac16f3d58a6c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27645925_deea57e7",
+        "filename": "modules/rtp_rtcp/source/fec_private_tables_bursty.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-03T07:28:39Z",
+      "side": 1,
+      "message": "I think we can remove these two #include, but array_view will have to be included from fec_private_tables_bursty_unittest.cc.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "83087c899dbadf4dd9f65746069ac16f3d58a6c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
