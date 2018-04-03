@@ -155,6 +155,12 @@ using namespace webrtc::videocapturemodule;
   AVCaptureVideoDataOutput* currentOutput = [self currentOutput];
   if (!currentOutput) return NO;
 
+  NSMutableDictionary* videoSettings = currentOutput.videoSettings.mutableCopy;
+  videoSettings[(NSString*)kCVPixelBufferWidthKey] = @(_capability.width);
+  videoSettings[(NSString*)kCVPixelBufferHeightKey] = @(_capability.height);
+  videoSettings[AVVideoScalingModeKey] = AVVideoScalingModeResizeAspectFill;
+  currentOutput.videoSettings = videoSettings;
+
   [self directOutputToSelf];
 
   _orientationHasChanged = NO;
