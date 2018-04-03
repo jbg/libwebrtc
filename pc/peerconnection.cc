@@ -2474,6 +2474,8 @@ RTCError PeerConnection::ApplyRemoteDescription(
       (audio_desc && !audio_desc->streams().empty()) ||
       (video_desc && !video_desc->streams().empty())) {
     remote_peer_supports_msid_ = true;
+  } else {
+    remote_peer_supports_msid_ = false;
   }
 
   // We wait to signal new streams until we finish processing the description,
