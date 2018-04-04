@@ -45,6 +45,30 @@
       "revId": "0c83bef3c29b208c83b9994f6fd88b6a67eee043",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cad12cb4_172bc674",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-04-04T14:27:00Z",
+      "side": 1,
+      "message": "Cleaned it up a bit.",
+      "parentUuid": "dac83c9a_e42492f5",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "0c83bef3c29b208c83b9994f6fd88b6a67eee043",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
