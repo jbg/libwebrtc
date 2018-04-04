@@ -117,6 +117,30 @@
       "revId": "43f1825bb7097d168b67bfa13aa84a4b6fc2d825",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8fd1b1d_09927b07",
+        "filename": "modules/rtp_rtcp/test/testFec/test_packet_masks_metrics.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-04-04T12:42:31Z",
+      "side": 1,
+      "message": "Thanks. What I mainly was worried about is whether these tests actually can catch a small mistake in the mask. What if we swap two rows?",
+      "parentUuid": "b8cf9560_c03c746c",
+      "range": {
+        "startLine": 799,
+        "startChar": 0,
+        "endLine": 799,
+        "endChar": 57
+      },
+      "revId": "43f1825bb7097d168b67bfa13aa84a4b6fc2d825",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
