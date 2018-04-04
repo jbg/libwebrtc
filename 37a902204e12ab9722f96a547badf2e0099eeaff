@@ -142,6 +142,30 @@
       "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d54cbb1a_30c77284",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-04T05:32:39Z",
+      "side": 1,
+      "message": "Yes, current implementation looks good to me. We can revisit the inc/dec implementation.",
+      "parentUuid": "98a66607_8100463c",
+      "range": {
+        "startLine": 40,
+        "startChar": 47,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "37a902204e12ab9722f96a547badf2e0099eeaff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
