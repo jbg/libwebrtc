@@ -22,6 +22,30 @@
       "revId": "a0330b5c16e24a1925d414bb1a60d75bd024b14b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bac87225_0142e41e",
+        "filename": "media/base/codec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-04T15:42:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfea8fae_31a08232",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "a0330b5c16e24a1925d414bb1a60d75bd024b14b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
