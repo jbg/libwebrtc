@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efef745e_70cfbaaa",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-04T07:49:08Z",
+      "side": 1,
+      "message": "Can you add a comment here that this is a deprecated build target that contains everything?",
+      "range": {
+        "startLine": 973,
+        "startChar": 0,
+        "endLine": 973,
+        "endChar": 54
+      },
+      "revId": "7faf1cab67012e3b88d8bfa8da42d9ae50b2a338",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
