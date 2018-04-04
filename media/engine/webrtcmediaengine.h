@@ -84,6 +84,11 @@ std::vector<webrtc::RtpExtension> FilterRtpExtensions(
     const std::vector<webrtc::RtpExtension>& extensions,
     bool (*supported)(const std::string&),
     bool filter_redundant_extensions);
+std::vector<webrtc::RtpExtension> FilterRtpExtensionsForSend(
+    const std::vector<webrtc::RtpExtension>& extensions,
+    bool (*supported)(const std::string&),
+    bool filter_redundant_extensions,
+    bool is_sending);
 
 webrtc::BitrateConstraints GetBitrateConfigForCodec(const Codec& codec);
 

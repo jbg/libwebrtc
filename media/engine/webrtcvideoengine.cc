@@ -713,8 +713,10 @@ bool WebRtcVideoChannel::GetChangedSendParameters(
     changed_params->codec = selected_send_codec;
 
   // Handle RTP header extensions.
-  std::vector<webrtc::RtpExtension> filtered_extensions = FilterRtpExtensions(
-      params.extensions, webrtc::RtpExtension::IsSupportedForVideo, true);
+  std::vector<webrtc::RtpExtension> filtered_extensions =
+      FilterRtpExtensionsForSend(params.extensions,
+                                 webrtc::RtpExtension::IsSupportedForVideo,
+                                 true, sending_);
   if (!send_rtp_extensions_ || (*send_rtp_extensions_ != filtered_extensions)) {
     changed_params->rtp_header_extensions =
         rtc::Optional<std::vector<webrtc::RtpExtension>>(filtered_extensions);

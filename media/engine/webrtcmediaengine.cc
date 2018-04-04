@@ -202,6 +202,27 @@ std::vector<webrtc::RtpExtension> FilterRtpExtensions(
   return result;
 }
 
+std::vector<webrtc::RtpExtension> FilterRtpExtensionsForSend(
+    const std::vector<webrtc::RtpExtension>& extensions,
+    bool (*supported)(const std::string&),
+    bool filter_redundant_extensions,
+    bool is_sending) {
+  std::vector<webrtc::RtpExtension> result =
+      FilterRtpExtensions(extensions, supported, filter_redundant_extensions);
+  if (is_sending) {
+    // If already sending, don't include the MID header extension when
+    // reconfiguring the send stream.
+    auto mid_it = std::find_if(
+        result.begin(), result.end(), [](const webrtc::RtpExtension& ext) {
+          return ext.uri == webrtc::RtpExtension::kMidUri;
+        });
+    if (mid_it != result.end()) {
+      result.erase(mid_it);
+    }
+  }
+  return result;
+}
+
 webrtc::BitrateConstraints GetBitrateConfigForCodec(const Codec& codec) {
   webrtc::BitrateConstraints config;
   int bitrate_kbps = 0;

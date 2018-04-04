@@ -1310,8 +1310,9 @@ bool WebRtcVoiceMediaChannel::SetSendParameters(
     return false;
   }
   std::vector<webrtc::RtpExtension> filtered_extensions =
-      FilterRtpExtensions(params.extensions,
-                          webrtc::RtpExtension::IsSupportedForAudio, true);
+      FilterRtpExtensionsForSend(params.extensions,
+                                 webrtc::RtpExtension::IsSupportedForAudio,
+                                 true, send_);
   if (send_rtp_extensions_ != filtered_extensions) {
     send_rtp_extensions_.swap(filtered_extensions);
     for (auto& it : send_streams_) {
