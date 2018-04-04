@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1086016_3aa35f92",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-04-04T11:32:23Z",
+      "side": 1,
+      "message": "loop",
+      "range": {
+        "startLine": 135,
+        "startChar": 16,
+        "endLine": 135,
+        "endChar": 21
+      },
+      "revId": "0c83bef3c29b208c83b9994f6fd88b6a67eee043",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dac83c9a_e42492f5",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-04-04T11:32:23Z",
+      "side": 1,
+      "message": "How about breaking this out into a function instead, something like:\n\nframe \u003d GetFrameForDecode(kAnyFrame);\nif (!decoder-\u003eDecode(frame)) {\n  frame \u003d GetFrameForDecode(kKeyFrame);\n  if (!decoder-\u003eDecode(frame)) {\n    // post key frame request.\n  }   \n}\n\nIt\u0027d be easier to read I think.",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "0c83bef3c29b208c83b9994f6fd88b6a67eee043",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
