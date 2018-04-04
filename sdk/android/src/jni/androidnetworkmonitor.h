@@ -47,6 +47,7 @@ struct NetworkInformation {
   std::vector<rtc::IPAddress> ip_addresses;
 
   NetworkInformation();
+  NetworkInformation(const NetworkInformation& n2);
   ~NetworkInformation();
 
   std::string ToString() const;

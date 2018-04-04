@@ -132,6 +132,8 @@ static NetworkInformation GetNetworkInformationFromJava(
 
 NetworkInformation::NetworkInformation() = default;
 
+NetworkInformation::NetworkInformation(const NetworkInformation& n2) = default;
+
 NetworkInformation::~NetworkInformation() = default;
 
 std::string NetworkInformation::ToString() const {
