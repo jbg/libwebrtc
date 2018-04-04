@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "01d64491_38579f4d",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction_internal.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-04-04T12:19:56Z",
+      "side": 1,
+      "message": "I added documentation that explains how the size is computed. I think that the \u0027why\u0027 needs to be answered by someone else, probably marpan@ who, from what I can tell, generated the data about 6 years ago.",
+      "parentUuid": "cffc53d1_44862f26",
+      "range": {
+        "startLine": 371,
+        "startChar": 16,
+        "endLine": 371,
+        "endChar": 55
+      },
+      "revId": "43f1825bb7097d168b67bfa13aa84a4b6fc2d825",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d61ce679_aacead01",
         "filename": "modules/rtp_rtcp/test/testFec/test_packet_masks_metrics.cc",
         "patchSetId": 18
@@ -36,6 +60,30 @@
       "writtenOn": "2018-04-04T11:19:04Z",
       "side": 1,
       "message": "Did you try to run some of these tests to verify that they can catch a trivial error? I think that would be good to do so we have an idea of how well they would catch any mistakes since it\u0027s a CL that is a bit difficult to review.",
+      "range": {
+        "startLine": 799,
+        "startChar": 0,
+        "endLine": 799,
+        "endChar": 57
+      },
+      "revId": "43f1825bb7097d168b67bfa13aa84a4b6fc2d825",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7591019c_c015dca7",
+        "filename": "modules/rtp_rtcp/test/testFec/test_packet_masks_metrics.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-04-04T12:19:56Z",
+      "side": 1,
+      "message": "I ran the tests with and without the CL. Here are the results:\n(I\u0027m not sure the difference in timing is actually something \n\nWith:\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 7 tests from 1 test case.\n[----------] Global test environment set-up.\n[----------] 7 tests from FecPacketMaskMetricsTest\n[ RUN      ] FecPacketMaskMetricsTest.FecXorMaxResidualLoss\n[       OK ] FecPacketMaskMetricsTest.FecXorMaxResidualLoss (79402 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecXorVsRS\n[       OK ] FecPacketMaskMetricsTest.FecXorVsRS (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecTrendXorVsRsLossRate\n[       OK ] FecPacketMaskMetricsTest.FecTrendXorVsRsLossRate (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecBehaviorViaProtectionLevelAndLength\n[       OK ] FecPacketMaskMetricsTest.FecBehaviorViaProtectionLevelAndLength (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecVarianceBehaviorXorVsRs\n[       OK ] FecPacketMaskMetricsTest.FecVarianceBehaviorXorVsRs (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecXorBurstyPerfectRecoveryConsecutiveLoss\n[       OK ] FecPacketMaskMetricsTest.FecXorBurstyPerfectRecoveryConsecutiveLoss (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecRecoveryRateUnderLossConditions\n[       OK ] FecPacketMaskMetricsTest.FecRecoveryRateUnderLossConditions (0 ms)\n[----------] 7 tests from FecPacketMaskMetricsTest (79402 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 7 tests from 1 test case ran. (79402 ms total)\n[  PASSED  ] 7 tests.\n\n\nWithout:\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 7 tests from 1 test case.\n[----------] Global test environment set-up.\n[----------] 7 tests from FecPacketMaskMetricsTest\n[ RUN      ] FecPacketMaskMetricsTest.FecXorMaxResidualLoss\n[       OK ] FecPacketMaskMetricsTest.FecXorMaxResidualLoss (79226 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecXorVsRS\n[       OK ] FecPacketMaskMetricsTest.FecXorVsRS (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecTrendXorVsRsLossRate\n[       OK ] FecPacketMaskMetricsTest.FecTrendXorVsRsLossRate (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecBehaviorViaProtectionLevelAndLength\n[       OK ] FecPacketMaskMetricsTest.FecBehaviorViaProtectionLevelAndLength (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecVarianceBehaviorXorVsRs\n[       OK ] FecPacketMaskMetricsTest.FecVarianceBehaviorXorVsRs (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecXorBurstyPerfectRecoveryConsecutiveLoss\n[       OK ] FecPacketMaskMetricsTest.FecXorBurstyPerfectRecoveryConsecutiveLoss (0 ms)\n[ RUN      ] FecPacketMaskMetricsTest.FecRecoveryRateUnderLossConditions\n[       OK ] FecPacketMaskMetricsTest.FecRecoveryRateUnderLossConditions (0 ms)\n[----------] 7 tests from FecPacketMaskMetricsTest (79226 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 7 tests from 1 test case ran. (79226 ms total)\n[  PASSED  ] 7 tests.",
+      "parentUuid": "d61ce679_aacead01",
       "range": {
         "startLine": 799,
         "startChar": 0,
