@@ -460,6 +460,10 @@ void ApmTest::SetUp() {
   frame_ = new AudioFrame();
   revframe_ = new AudioFrame();
 
+  // Ensure the test frames' internal buffers are zero initialized.
+  frame_->mutable_data();
+  revframe_->mutable_data();
+
   Init(32000, 32000, 32000, 2, 2, 2, false);
 }
 

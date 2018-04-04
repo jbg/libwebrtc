@@ -136,13 +136,12 @@ class AudioFrame {
   int64_t profile_timestamp_ms_ = 0;
 
  private:
-  // A permamently zeroed out buffer to represent muted frames. This is a
-  // header-only class, so the only way to avoid creating a separate empty
-  // buffer per translation unit is to wrap a static in an inline function.
-  static const int16_t* empty_data();
-
   int16_t data_[kMaxDataSizeSamples];
-  bool muted_ = true;
+  enum MuteState : char {
+    kNotMuted = 0,
+    kMuted = 1,
+    kUninitialized = 2,
+  } muted_ = kUninitialized;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(AudioFrame);
 };
