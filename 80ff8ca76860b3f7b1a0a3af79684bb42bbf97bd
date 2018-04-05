@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44934bd8_6d386695",
+        "filename": "api/videosourceinterface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-05T08:18:33Z",
+      "side": 1,
+      "message": "Same here---there\u0027s no technical need for the name, and it doesn\u0027t serve a useful function as documentation either.\n\n(There are more of these in the CL.)",
+      "range": {
+        "startLine": 16,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7432faf8_f484c4fe",
+        "filename": "api/videosourceinterface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-05T08:18:33Z",
+      "side": 1,
+      "message": "In cases such as copy constructors, where the argument name can\u0027t possibly say anything of value, it\u0027s better to just omit it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 39,
+        "endLine": 25,
+        "endChar": 41
+      },
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29534822_d912ec59",
+        "filename": "modules/video_coding/codecs/vp8/include/vp8.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-05T08:18:33Z",
+      "side": 1,
+      "message": "It probably doesn\u0027t matter in this case since I bet VP8Encoder will be destroyed through a VideoEncoder*, but it\u0027s good to get into the habit of writing \u003ddefault instead of {} for destructors, because that makes them \"not user-defined\", which lets the compiler optimize more in some cases.\n\n(More cases of this below.)",
+      "range": {
+        "startLine": 26,
+        "startChar": 25,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "972d525f_af7da5f5",
+        "filename": "sdk/android/src/jni/androidnetworkmonitor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-05T08:18:33Z",
+      "side": 1,
+      "message": "This class has members of type std::vector and std::string, which are much more efficient to move than to copy. Consider adding a move constructor too, or---even better if you can get away with it---defining *only* a move constructor, and deleting the copy constructor.",
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
