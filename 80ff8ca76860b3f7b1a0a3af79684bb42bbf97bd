@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6857ee3a_2e1b360f",
+        "filename": "api/videosourceinterface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-05T09:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44934bd8_6d386695",
+      "range": {
+        "startLine": 16,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7432faf8_f484c4fe",
         "filename": "api/videosourceinterface.h",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "768cd651_d3399e39",
+        "filename": "api/videosourceinterface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-05T09:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7432faf8_f484c4fe",
+      "range": {
+        "startLine": 25,
+        "startChar": 39,
+        "endLine": 25,
+        "endChar": 41
+      },
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "590e5e57_1bc22ab6",
+        "filename": "modules/video_coding/codecs/vp8/include/vp8.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-05T09:42:57Z",
+      "side": 1,
+      "message": "I will keep this in mind for when I add new destructors, but fixing it for existing ones is outside the scope for this change.",
+      "parentUuid": "29534822_d912ec59",
+      "range": {
+        "startLine": 26,
+        "startChar": 25,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "972d525f_af7da5f5",
         "filename": "sdk/android/src/jni/androidnetworkmonitor.h",
         "patchSetId": 3
@@ -85,6 +157,24 @@
       "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "874dbb54_94d8b1dd",
+        "filename": "sdk/android/src/jni/androidnetworkmonitor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-05T09:42:57Z",
+      "side": 1,
+      "message": "Added the move constructor, but deleting the copy constructor was not trivial. Also had to define the copy/move assignment operators.",
+      "parentUuid": "972d525f_af7da5f5",
+      "revId": "80ff8ca76860b3f7b1a0a3af79684bb42bbf97bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
