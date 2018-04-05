@@ -196,8 +196,8 @@ void AudioSendStream::ConfigureStream(
     webrtc::internal::AudioSendStream* stream,
     const webrtc::AudioSendStream::Config& new_config,
     bool first_time) {
-  RTC_LOG(LS_INFO) << "AudioSendStream::ConfigureStream: "
-                   << new_config.ToString();
+  RTC_DLOG(LS_INFO) << "AudioSendStream::ConfigureStream: "
+                    << new_config.ToString();
   const auto& channel_proxy = stream->channel_proxy_;
   const auto& old_config = stream->config_;
 
