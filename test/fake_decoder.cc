@@ -17,11 +17,10 @@
 namespace webrtc {
 namespace test {
 
-FakeDecoder::FakeDecoder() : callback_(NULL) {}
+FakeDecoder::FakeDecoder() : callback_(NULL), width_(320), height_(240) {}
 
 int32_t FakeDecoder::InitDecode(const VideoCodec* config,
                                 int32_t number_of_cores) {
-  config_ = *config;
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
@@ -30,7 +29,12 @@ int32_t FakeDecoder::Decode(const EncodedImage& input,
                             const RTPFragmentationHeader* fragmentation,
                             const CodecSpecificInfo* codec_specific_info,
                             int64_t render_time_ms) {
-  VideoFrame frame(I420Buffer::Create(config_.width, config_.height),
+  if (input._encodedWidth > 0 && input._encodedHeight > 0) {
+    width_ = input._encodedWidth;
+    height_ = input._encodedHeight;
+  }
+
+  VideoFrame frame(I420Buffer::Create(width_, height_),
                    webrtc::kVideoRotation_0,
                    render_time_ms * rtc::kNumMicrosecsPerMillisec);
   frame.set_timestamp(input._timeStamp);
