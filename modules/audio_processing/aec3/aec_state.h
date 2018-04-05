@@ -127,7 +127,8 @@ class AecState {
   void UpdateReverb(const std::vector<float>& impulse_response);
   bool DetectActiveRender(rtc::ArrayView<const float> x) const;
   void UpdateSuppressorGainLimit(bool render_activity);
-  bool DetectEchoSaturation(rtc::ArrayView<const float> x);
+  bool DetectEchoSaturation(rtc::ArrayView<const float> x,
+                            float echo_path_gain);
 
   static int instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
@@ -141,7 +142,6 @@ class AecState {
   bool capture_signal_saturation_ = false;
   bool echo_saturation_ = false;
   bool transparent_mode_ = false;
-  float previous_max_sample_ = 0.f;
   bool render_received_ = false;
   int filter_delay_blocks_ = 0;
   size_t blocks_since_last_saturation_ = 1000;
