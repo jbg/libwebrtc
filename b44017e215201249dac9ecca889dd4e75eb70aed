@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "859480c1_bf983305",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-04-05T11:55:13Z",
+      "side": 1,
+      "message": "Given that we only ever use kForever or 0, should we instead change this to a bool? :)",
+      "range": {
+        "startLine": 135,
+        "startChar": 37,
+        "endLine": 135,
+        "endChar": 52
+      },
+      "revId": "b44017e215201249dac9ecca889dd4e75eb70aed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a8cd698_aaf141be",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-04-05T11:55:13Z",
+      "side": 1,
+      "message": "In that case this should also be changed to a bool, I guess.",
+      "range": {
+        "startLine": 174,
+        "startChar": 30,
+        "endLine": 174,
+        "endChar": 46
+      },
+      "revId": "b44017e215201249dac9ecca889dd4e75eb70aed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2627b7f1_09aae848",
+        "filename": "video/video_stream_decoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-04-05T11:55:13Z",
+      "side": 1,
+      "message": "I just came to realize that we have a component for this:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/codec_timer.h?q\u003dVCMCodecTimer\u0026sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026l\u003d28\n\nAre you going to change that? Hard to see what the plan is right now as this member isn\u0027t used.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 41
+      },
+      "revId": "b44017e215201249dac9ecca889dd4e75eb70aed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
