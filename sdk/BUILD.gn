@@ -537,6 +537,7 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("peerconnectionfactory_base_objc") {
+      allow_poison = [ "audio_codecs" ]
       sources = [
         "objc/Framework/Classes/PeerConnection/RTCAudioSource+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCAudioSource.mm",
