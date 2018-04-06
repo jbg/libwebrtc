@@ -255,6 +255,7 @@ if (is_ios || is_mac) {
     if (rtc_use_metal_rendering) {
       rtc_static_library("metal_objc") {
         visibility = [ "*" ]
+        allow_poison = [ "audio_codecs" ]
         sources = [
           "objc/Framework/Classes/Metal/RTCMTLI420Renderer.h",
           "objc/Framework/Classes/Metal/RTCMTLI420Renderer.mm",
@@ -447,6 +448,7 @@ if (is_ios || is_mac) {
     # The applications which only use WebRTC DataChannel can depend on this.
     rtc_static_library("peerconnectionfactory_no_media_objc") {
       visibility = [ "*" ]
+      allow_poison = [ "audio_codecs" ]
       defines = [ "HAVE_NO_MEDIA" ]
 
       sources = [
@@ -537,6 +539,7 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("peerconnectionfactory_base_objc") {
+      allow_poison = [ "audio_codecs" ]
       sources = [
         "objc/Framework/Classes/PeerConnection/RTCAudioSource+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCAudioSource.mm",
