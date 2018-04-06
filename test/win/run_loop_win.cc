@@ -18,15 +18,20 @@
 namespace webrtc {
 namespace test {
 
-void PressEnterToContinue() {
+void PressEnterToContinue(SingleThreadedTaskQueueForTesting &task_queue) {
   puts(">> Press ENTER to continue...");
 
-  MSG msg;
-  BOOL ret;
-  while ((ret = GetMessage(&msg, NULL, 0, 0)) != 0) {
-    assert(ret != -1);
-    TranslateMessage(&msg);
-    DispatchMessage(&msg);
+  while (!_kbhit() || _getch() != '\r') {
+    if (feof(stdin))
+      return;
+    // Drive the message loop for the thread running the task_queue
+    task_queue.SendTask([&]() {
+      MSG msg;
+      if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+      }
+    });
   }
 }
 }  // namespace test
