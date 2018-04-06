@@ -30,6 +30,7 @@ class LibvpxVp8Decoder : public VP8Decoder {
   LibvpxVp8Decoder();
   ~LibvpxVp8Decoder() override;
 
+  int InitDecode(int number_of_cores) override;
   int InitDecode(const VideoCodec* inst, int number_of_cores) override;
 
   int Decode(const EncodedImage& input_image,

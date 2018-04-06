@@ -138,6 +138,7 @@ class VP9DecoderImpl : public VP9Decoder {
 
   virtual ~VP9DecoderImpl();
 
+  int InitDecode(int number_of_cores) override;
   int InitDecode(const VideoCodec* inst, int number_of_cores) override;
 
   int Decode(const EncodedImage& input_image,

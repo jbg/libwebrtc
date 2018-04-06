@@ -134,6 +134,10 @@ class NullVideoDecoder : public webrtc::VideoDecoder {
  public:
   int32_t InitDecode(const webrtc::VideoCodec* codec_settings,
                      int32_t number_of_cores) override {
+    return InitDecode(number_of_cores);
+  }
+
+  int32_t InitDecode(int32_t number_of_cores) override {
     RTC_LOG(LS_ERROR) << "Can't initialize NullVideoDecoder.";
     return WEBRTC_VIDEO_CODEC_OK;
   }

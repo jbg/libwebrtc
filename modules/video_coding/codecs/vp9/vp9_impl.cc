@@ -898,6 +898,10 @@ VP9DecoderImpl::~VP9DecoderImpl() {
 }
 
 int VP9DecoderImpl::InitDecode(const VideoCodec* inst, int number_of_cores) {
+  return InitDecode(number_of_cores);
+}
+
+int VP9DecoderImpl::InitDecode(int number_of_cores) {
   int ret_val = Release();
   if (ret_val < 0) {
     return ret_val;

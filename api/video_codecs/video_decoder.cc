@@ -33,6 +33,10 @@ int32_t DecodedImageCallback::ReceivedDecodedFrame(const uint64_t pictureId) {
   return -1;
 }
 
+int32_t VideoDecoder::InitDecode(int32_t number_of_cores) {
+  RTC_NOTREACHED();
+}
+
 bool VideoDecoder::PrefersLateDecoding() const {
   return true;
 }

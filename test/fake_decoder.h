@@ -24,6 +24,7 @@ class FakeDecoder : public VideoDecoder {
   FakeDecoder();
   virtual ~FakeDecoder() {}
 
+  int32_t InitDecode(int32_t number_of_cores) override;
   int32_t InitDecode(const VideoCodec* config,
                      int32_t number_of_cores) override;
 

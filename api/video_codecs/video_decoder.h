@@ -53,6 +53,9 @@ class VideoDecoder {
  public:
   virtual ~VideoDecoder() {}
 
+  virtual int32_t InitDecode(int32_t number_of_cores);
+
+  // TODO(philipel): Remove when downstream projects have been updated.
   virtual int32_t InitDecode(const VideoCodec* codec_settings,
                              int32_t number_of_cores) = 0;
 

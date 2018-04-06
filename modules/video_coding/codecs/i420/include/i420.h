@@ -86,6 +86,8 @@ class I420Decoder : public VideoDecoder {
 
   virtual ~I420Decoder();
 
+  int InitDecode(int number_of_cores) override;
+
   // Initialize the decoder.
   // The user must notify the codec of width and height values.
   //

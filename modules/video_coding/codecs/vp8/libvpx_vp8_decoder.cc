@@ -106,6 +106,10 @@ LibvpxVp8Decoder::~LibvpxVp8Decoder() {
 }
 
 int LibvpxVp8Decoder::InitDecode(const VideoCodec* inst, int number_of_cores) {
+  return InitDecode(number_of_cores);
+}
+
+int LibvpxVp8Decoder::InitDecode(int number_of_cores) {
   int ret_val = Release();
   if (ret_val < 0) {
     return ret_val;

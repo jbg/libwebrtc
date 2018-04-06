@@ -25,6 +25,10 @@ FakeDecoder::FakeDecoder()
 
 int32_t FakeDecoder::InitDecode(const VideoCodec* config,
                                 int32_t number_of_cores) {
+  return InitDecode(number_of_cores);
+}
+
+int32_t FakeDecoder::InitDecode(int32_t number_of_cores) {
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
