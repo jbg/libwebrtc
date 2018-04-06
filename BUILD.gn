@@ -584,3 +584,6 @@ if (rtc_include_tests) {
     }
   }
 }
+
+group("poison_audio_codecs") {
+}

@@ -38,6 +38,7 @@ rtc_static_library("audio_encoder_ilbc") {
 
 rtc_static_library("audio_decoder_ilbc") {
   visibility = [ "*" ]
+  poisonous = [ "audio_codecs" ]
   sources = [
     "audio_decoder_ilbc.cc",
     "audio_decoder_ilbc.h",
