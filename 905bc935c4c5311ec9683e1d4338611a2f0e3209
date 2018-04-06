@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a84a839_659a8d84",
+        "filename": "BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-06T15:09:12Z",
+      "side": 1,
+      "message": "We should probably add a comment before the list of poison build targets. Something like:\n\n# ----------------------------------------------------\n# Poisonous build targets\n# .... (what they are, etc...)",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 1
+      },
+      "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae28862b_5f44789f",
+        "filename": "webrtc.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-06T15:09:12Z",
+      "side": 1,
+      "message": "This is nice, I like we don\u0027t have to add the poison_ prefix to the poisonous list. We should probably mention this in the documentation (in the main BUILD.gn file) but the GN error in case you add poisonous \u003d [\"poison_\u003cPOISON_NAME\u003e\"] is probably clear enough.",
+      "range": {
+        "startLine": 345,
+        "startChar": 33,
+        "endLine": 345,
+        "endChar": 41
+      },
+      "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba5ea8e8_bb1539e1",
+        "filename": "webrtc.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-06T15:09:12Z",
+      "side": 1,
+      "message": "I am wondering if we can remove this duplication using another layer of indirection.\n\nWe can probably create a template called rtc_poison_aware_target and create the following template chain:\n\nrtc_source_set -------                               ---\u003e source_set\n                      \\                             /\n                       \\                           /\nrtc_static_library      -\u003e rtc_poison_aware_target -\u003e static_library\n                       /                           \\\n                      /                             \\\nrtc_shared_library ---                               ---\u003e shared_library\n\nIt is tricky but probably we will be able to keep the code to ensure that we are not pulling in a poisonous target in one place.",
+      "range": {
+        "startLine": 415,
+        "startChar": 4,
+        "endLine": 446,
+        "endChar": 5
+      },
+      "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
