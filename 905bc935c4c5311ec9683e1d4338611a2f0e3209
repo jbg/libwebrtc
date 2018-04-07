@@ -68,6 +68,30 @@
       "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92b34bf3_2e81ed24",
+        "filename": "webrtc.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-07T03:42:24Z",
+      "side": 1,
+      "message": "Hmm. How would this work, exactly? The only way I can think of to have rtc_poison_aware_target expand to one of those three is to do\n\n  if (x \u003d\u003d 0) {\n    source_set(name) {...}\n  } else if (x \u003d\u003d 1) {\n    static_library(name) {...}\n  } else {\n    shared_library(name) {...}\n  }\n\nbut that still leaves us with three copies of the poison code.",
+      "parentUuid": "ba5ea8e8_bb1539e1",
+      "range": {
+        "startLine": 415,
+        "startChar": 4,
+        "endLine": 446,
+        "endChar": 5
+      },
+      "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
