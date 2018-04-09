@@ -22,6 +22,30 @@
       "revId": "5bd4a79f75ab7fb51599643f64d37ae2cd0d0b05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb8d54e6_46894e03",
+        "filename": "modules/rtp_rtcp/source/flexfec_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-09T08:44:49Z",
+      "side": 1,
+      "message": "I would probably just add the Mid extension here: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?l\u003d58\u0026rcl\u003d4da18e89bdee78df4478b66cdd0e6f6a38d61b4d. If the extension size varies based on the value, you could use an upper bound on the size for RtpMid::kValueSizeBytes.\n\nLooks like the Mid extension should be added here too?\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?l\u003d66\u0026rcl\u003d4da18e89bdee78df4478b66cdd0e6f6a38d61b4d",
+      "parentUuid": "fa740ffe_1fd2c08b",
+      "range": {
+        "startLine": 71,
+        "startChar": 43,
+        "endLine": 71,
+        "endChar": 58
+      },
+      "revId": "5bd4a79f75ab7fb51599643f64d37ae2cd0d0b05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
