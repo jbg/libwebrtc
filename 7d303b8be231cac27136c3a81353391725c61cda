@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd48424c_73c3a8d0",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-09T09:05:06Z",
+      "side": 1,
+      "message": "There is no frame dropping which is supposed to be tested in this test. \n\nSince frames are now pended this test should keep zero bitrate for time long enough to get frame drop.",
+      "range": {
+        "startLine": 733,
+        "startChar": 2,
+        "endLine": 733,
+        "endChar": 25
+      },
+      "revId": "7d303b8be231cac27136c3a81353391725c61cda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
