@@ -12,6 +12,7 @@ rtc_static_library("vad") {
     "../*",
     "../../../rtc_tools:*",
   ]
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   sources = [
     "common.h",
     "gmm.cc",
