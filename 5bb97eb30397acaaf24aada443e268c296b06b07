@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "392ea5bd_5d541ca9",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-04-09T19:16:19Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "0dc5f17f_a72ef88b",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 27
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2cf841c_1ee144ef",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
         "patchSetId": 1
