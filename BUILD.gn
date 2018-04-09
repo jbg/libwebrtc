@@ -323,6 +323,7 @@ if (!build_with_chromium) {
   rtc_static_library("webrtc") {
     # Only the root target should depend on this.
     visibility = [ "//:default" ]
+    testonly = true
 
     sources = []
     complete_static_lib = true
@@ -583,4 +584,9 @@ if (rtc_include_tests) {
       ]
     }
   }
+}
+
+# The set of poison_* targets needs to be kept in sync with the
+# `all_poison_types` list in webrtc.gni.
+group("poison_audio_codecs") {
 }

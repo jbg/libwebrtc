@@ -1105,6 +1105,7 @@ rtc_static_library("neteq") {
 # does not set the rtc_include_tests flag.
 rtc_source_set("neteq_tools_minimal") {
   visibility += webrtc_default_visibility
+  allow_poison = [ "audio_codecs" ]
   sources = [
     "neteq/tools/audio_sink.cc",
     "neteq/tools/audio_sink.h",
@@ -1201,6 +1202,7 @@ config("neteq_tools_config") {
 
 rtc_source_set("neteq_tools") {
   visibility += webrtc_default_visibility
+  allow_poison = [ "audio_codecs" ]
   sources = [
     "neteq/tools/fake_decode_from_file.cc",
     "neteq/tools/fake_decode_from_file.h",
