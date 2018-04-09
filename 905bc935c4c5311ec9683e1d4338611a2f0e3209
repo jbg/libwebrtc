@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7bd38c97_2d948e65",
+        "filename": "BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-09T06:37:25Z",
+      "side": 1,
+      "message": "Resolving this.",
+      "parentUuid": "7a84a839_659a8d84",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 1
+      },
+      "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae28862b_5f44789f",
         "filename": "webrtc.gni",
         "patchSetId": 7
@@ -92,6 +116,30 @@
       "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dee950d6_f50cf984",
+        "filename": "webrtc.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-04-09T06:37:25Z",
+      "side": 1,
+      "message": "You are right. And on top of this, I realized I prefer to keep it as straightforward as possible (rtc_source_set -\u003e source_set) in order to avoid to break \u0027gn desc\u0027 (with template hierarchies the \u0027type\u0027 of the target is usually \u0027group\u0027, while I prefer to have \u0027source_set\u0027, etc..).",
+      "parentUuid": "92b34bf3_2e81ed24",
+      "range": {
+        "startLine": 415,
+        "startChar": 4,
+        "endLine": 446,
+        "endChar": 5
+      },
+      "revId": "905bc935c4c5311ec9683e1d4338611a2f0e3209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
