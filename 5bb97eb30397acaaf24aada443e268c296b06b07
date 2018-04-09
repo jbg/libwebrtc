@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b27eb69_55bfee6e",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-04-09T18:13:23Z",
+      "side": 1,
+      "message": "This can never checkfail, not even if count is 0 before the decrement.\n\nMove CHECK to precede the subtraction, and change it to GT.",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 27
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2cf841c_1ee144ef",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-04-09T18:13:23Z",
+      "side": 1,
+      "message": "nit: be consistent with #ifdef ENABLE_RTC_EVENT_LOG by writing this as #ifndef. Or rewrite that one into #if defined().",
+      "range": {
+        "startLine": 377,
+        "startChar": 4,
+        "endLine": 377,
+        "endChar": 12
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e68ab58_dfe04fb5",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-04-09T18:13:23Z",
+      "side": 1,
+      "message": "If we wanted to be completely correct, we would need to ifndef out rtc_event_log_count and all usage \n\nI\u0027m fine with not doing it if terelius@ is.\nMaybe add a TODO.",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 377,
+        "endChar": 49
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
