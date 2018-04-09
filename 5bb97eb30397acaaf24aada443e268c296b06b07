@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0dc5f17f_a72ef88b",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-04-09T19:08:50Z",
+      "side": 1,
+      "message": "You\u0027re right about GT vs. GE, but wrong about moving it to before the subtraction:\nhttp://en.cppreference.com/w/c/atomic/atomic_fetch_sub\n\"The value held previously by the atomic object pointed to by obj.\"",
+      "parentUuid": "6b27eb69_55bfee6e",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 27
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f2cf841c_1ee144ef",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
         "patchSetId": 1
@@ -59,6 +83,54 @@
       "writtenOn": "2018-04-09T18:13:23Z",
       "side": 1,
       "message": "If we wanted to be completely correct, we would need to ifndef out rtc_event_log_count and all usage \n\nI\u0027m fine with not doing it if terelius@ is.\nMaybe add a TODO.",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 377,
+        "endChar": 49
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e20aa8d_33b7cf36",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-04-09T19:08:50Z",
+      "side": 1,
+      "message": "I dislike #ifndef; I find them too easy to misread.\nNo problem with changing to #if-defined, though.",
+      "parentUuid": "f2cf841c_1ee144ef",
+      "range": {
+        "startLine": 377,
+        "startChar": 4,
+        "endLine": 377,
+        "endChar": 12
+      },
+      "revId": "5bb97eb30397acaaf24aada443e268c296b06b07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "007d2d49_c4ab86e2",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-04-09T19:08:50Z",
+      "side": 1,
+      "message": "I disagree. I think it\u0027s still useful to count even if the count is only ever used by the DCHECK in the destructor.",
+      "parentUuid": "7e68ab58_dfe04fb5",
       "range": {
         "startLine": 376,
         "startChar": 0,
