@@ -1004,6 +1004,7 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("native_video") {
+      allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
       sources = [
         "objc/Framework/Native/src/objc_frame_buffer.h",
         "objc/Framework/Native/src/objc_frame_buffer.mm",
