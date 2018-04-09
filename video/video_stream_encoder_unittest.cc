@@ -726,10 +726,13 @@ TEST_F(VideoStreamEncoderTest, DropsFramesWhenRateSetToZero) {
   video_stream_encoder_->OnBitrateUpdated(0, 0, 0);
   // Dropped since bitrate is zero.
   video_source_.IncomingCapturedFrame(CreateFrame(2, nullptr));
+  // The pending frame should be received when bitrate is non-zero.
+  video_source_.IncomingCapturedFrame(CreateFrame(3, nullptr));
 
   video_stream_encoder_->OnBitrateUpdated(kTargetBitrateBps, 0, 0);
-  video_source_.IncomingCapturedFrame(CreateFrame(3, nullptr));
   WaitForEncodedFrame(3);
+  video_source_.IncomingCapturedFrame(CreateFrame(4, nullptr));
+  WaitForEncodedFrame(4);
   video_stream_encoder_->Stop();
 }
 
