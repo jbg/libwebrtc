@@ -122,6 +122,7 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("videosource_objc") {
+      allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
       sources = [
         "objc/Framework/Classes/PeerConnection/RTCVideoSource+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCVideoSource.mm",
@@ -379,6 +380,7 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("default_codec_factory_objc") {
+      allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
       sources = [
         "objc/Framework/Classes/PeerConnection/RTCDefaultVideoDecoderFactory.m",
         "objc/Framework/Classes/PeerConnection/RTCDefaultVideoEncoderFactory.m",
@@ -964,6 +966,7 @@ if (is_ios || is_mac) {
     # The native API is currently experimental and may change without notice.
     rtc_static_library("native_api") {
       visibility = [ "*" ]
+      allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
       sources = [
         "objc/Framework/Native/api/video_capturer.h",
         "objc/Framework/Native/api/video_capturer.mm",
@@ -1004,6 +1007,7 @@ if (is_ios || is_mac) {
     }
 
     rtc_static_library("native_video") {
+      allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
       sources = [
         "objc/Framework/Native/src/objc_frame_buffer.h",
         "objc/Framework/Native/src/objc_frame_buffer.mm",

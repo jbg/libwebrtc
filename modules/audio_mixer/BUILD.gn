@@ -16,6 +16,8 @@ group("audio_mixer") {
 }
 
 rtc_static_library("audio_mixer_impl") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
+
   sources = [
     "audio_mixer_impl.cc",
     "audio_mixer_impl.h",

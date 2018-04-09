@@ -511,6 +511,7 @@ rtc_static_library("webrtc_vp9") {
 if (rtc_include_tests) {
   if (is_android) {
     rtc_static_library("android_codec_factory_helper") {
+      allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
       sources = [
         "codecs/test/android_codec_factory_helper.cc",
         "codecs/test/android_codec_factory_helper.h",
