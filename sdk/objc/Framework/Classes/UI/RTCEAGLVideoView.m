@@ -246,6 +246,8 @@
                                       yPlane:_nv12TextureCache.yTexture
                                      uvPlane:_nv12TextureCache.uvTexture];
       [_nv12TextureCache releaseTextures];
+
+      _lastDrawnFrame = self.videoFrame;
     }
   } else {
     if (!_i420TextureCache) {
@@ -258,6 +260,8 @@
                                     yPlane:_i420TextureCache.yTexture
                                     uPlane:_i420TextureCache.uTexture
                                     vPlane:_i420TextureCache.vTexture];
+
+    _lastDrawnFrame = self.videoFrame;
   }
 }
 
