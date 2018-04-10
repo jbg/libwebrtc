@@ -129,6 +129,7 @@
     }
     [self.rendererI420 drawFrame:videoFrame];
   }
+  [self updateVideoOrientation];
 }
 
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
@@ -138,6 +139,7 @@
 
 - (void)setSize:(CGSize)size {
   self.metalView.drawableSize = size;
+  [self updateVideoOrientation];
 }
 
 - (void)renderFrame:(nullable RTCVideoFrame *)frame {
@@ -146,6 +148,54 @@
     return;
   }
   self.videoFrame = frame;
+  [self updateVideoOrientation];
+}
+
+- (void)updateVideoOrientation {
+  RTCVideoFrame *videoFrame = self.videoFrame;
+  if (!videoFrame) {
+    return;
+  }
+  // If the video is in a different orientation that the device, change the
+  // content mode to fit.
+  BOOL isLandscape = NO;
+  switch ([UIApplication sharedApplication].statusBarOrientation) {
+    case UIInterfaceOrientationPortraitUpsideDown:
+    case UIInterfaceOrientationPortrait:
+    case UIInterfaceOrientationUnknown:
+      isLandscape = NO;
+      break;
+    case UIInterfaceOrientationLandscapeLeft:
+    case UIInterfaceOrientationLandscapeRight:
+      isLandscape = YES;
+      break;
+  }
+  UIViewContentMode contentMode = _metalView.contentMode;
+  switch (videoFrame.rotation) {
+    case RTCVideoRotation_0:
+    case RTCVideoRotation_180:
+      // Landscape.
+      if (isLandscape) {
+        contentMode = UIViewContentModeScaleAspectFill;
+      } else {
+        contentMode = UIViewContentModeScaleAspectFit;
+      }
+      break;
+    case RTCVideoRotation_90:
+    case RTCVideoRotation_270:
+      // Portrait.
+      if (isLandscape) {
+        contentMode = UIViewContentModeScaleAspectFit;
+      } else {
+        contentMode = UIViewContentModeScaleAspectFill;
+      }
+      break;
+  }
+  if (_metalView.contentMode != contentMode) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      _metalView.contentMode = contentMode;
+    });
+  }
 }
 
 @end
