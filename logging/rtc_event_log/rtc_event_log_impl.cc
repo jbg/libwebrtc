@@ -33,7 +33,7 @@
 
 namespace webrtc {
 
-#ifdef ENABLE_RTC_EVENT_LOG
+#if defined(ENABLE_RTC_EVENT_LOG)
 
 namespace {
 constexpr size_t kMaxEventsInHistory = 10000;
@@ -44,7 +44,7 @@ constexpr size_t kMaxEventsInConfigHistory = 1000;
 // Observe a limit on the number of concurrent logs, so as not to run into
 // OS-imposed limits on open files and/or threads/task-queues.
 // TODO(eladalon): Known issue - there's a race over |rtc_event_log_count|.
-std::atomic<int> rtc_event_log_count(0);
+std::atomic<size_t> rtc_event_log_count(0);
 
 // TODO(eladalon): This class exists because C++11 doesn't allow transferring a
 // unique_ptr to a lambda (a copy constructor is required). We should get
@@ -161,8 +161,9 @@ RtcEventLogImpl::~RtcEventLogImpl() {
   // If we're logging to the output, this will stop that. Blocking function.
   StopLogging();
 
-  int count = std::atomic_fetch_sub(&rtc_event_log_count, 1) - 1;
-  RTC_DCHECK_GE(count, 0);
+  const size_t count_before =
+      std::atomic_fetch_sub(&rtc_event_log_count, static_cast<size_t>(1));
+  RTC_DCHECK_GT(count_before, 0u);  // Would wrap-around otherwise.
 }
 
 bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
@@ -366,19 +367,26 @@ std::unique_ptr<RtcEventLog> RtcEventLog::Create(EncodingType encoding_type) {
                 rtc::MakeUnique<rtc::TaskQueue>("rtc_event_log"));
 }
 
+// TODO(bugs.webrtc.org/9130): Remove limit on number of RtcEventLogImpl
+// instances.
 std::unique_ptr<RtcEventLog> RtcEventLog::Create(
     EncodingType encoding_type,
     std::unique_ptr<rtc::TaskQueue> task_queue) {
-#ifdef ENABLE_RTC_EVENT_LOG
-  // TODO(eladalon): Known issue - there's a race over |rtc_event_log_count|.
-  constexpr int kMaxLogCount = 5;
-  int count = 1 + std::atomic_fetch_add(&rtc_event_log_count, 1);
+#if defined(ENABLE_RTC_EVENT_LOG)
+  const size_t count =
+      1 + std::atomic_fetch_add(&rtc_event_log_count, static_cast<size_t>(1));
+
+#if !defined(RTC_UNLIMITED_CONCURRENT_EVENT_LOGS)
+  constexpr size_t kMaxLogCount = 5;
   if (count > kMaxLogCount) {
     RTC_LOG(LS_WARNING) << "Denied creation of additional WebRTC event logs. "
                         << count - 1 << " logs open already.";
-    std::atomic_fetch_sub(&rtc_event_log_count, 1);
+    // TODO(eladalon): Known issue - there's a race over |rtc_event_log_count|.
+    std::atomic_fetch_sub(&rtc_event_log_count, static_cast<size_t>(1));
     return CreateNull();
   }
+#endif  // RTC_UNLIMITED_CONCURRENT_EVENT_LOGS
+
   auto encoder = CreateEncoder(encoding_type);
   return rtc::MakeUnique<RtcEventLogImpl>(std::move(encoder),
                                           std::move(task_queue));
