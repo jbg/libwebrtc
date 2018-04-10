@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fc1c96f_e63672a8",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 5742
+      },
+      "writtenOn": "2018-04-10T21:41:19Z",
+      "side": 1,
+      "message": "This test case would pass even if we had the current limit, right?\nIt would just create 995 instances of RtcEventLogNullImpl.",
+      "range": {
+        "startLine": 775,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 1
+      },
+      "revId": "6f496d9330017bd060ec73ff6508150c892bdfe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
