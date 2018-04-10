@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76ecb5f2_f0f76f0e",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-04-10T12:00:24Z",
+      "side": 1,
+      "message": "Why do you need a define for this, and where is this define set?",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 46
+      },
+      "revId": "fb3211d5ea5fe354935cba38e080911c6e71bc67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
