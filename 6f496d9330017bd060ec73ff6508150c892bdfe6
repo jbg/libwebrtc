@@ -22,6 +22,30 @@
       "revId": "6f496d9330017bd060ec73ff6508150c892bdfe6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41945b1e_866da6b6",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-04-10T22:31:12Z",
+      "side": 1,
+      "message": "That we are instantiating RtcEventLogImpl rather than RtcEventLogNullImpl is not the question. What we\u0027re checking is that it does not crash. True, it would still not crash if we instantiated 995 RtcEventLogNullImpl instances. But I think it would be overkill to check that we\u0027re not circumventing the test by doing so. We could, however, land https://webrtc-review.googlesource.com/c/src/+/67860 at some point, in which case it would be possible for this test to instantiate RtcEventLogImpl directly, thereby ensuring that we really are getting only instances of it.",
+      "parentUuid": "7fc1c96f_e63672a8",
+      "range": {
+        "startLine": 775,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 1
+      },
+      "revId": "6f496d9330017bd060ec73ff6508150c892bdfe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
