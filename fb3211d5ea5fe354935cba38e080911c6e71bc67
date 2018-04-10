@@ -22,6 +22,30 @@
       "revId": "fb3211d5ea5fe354935cba38e080911c6e71bc67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45457950_87f40248",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-04-10T12:14:30Z",
+      "side": 1,
+      "message": "Answering privately.",
+      "parentUuid": "76ecb5f2_f0f76f0e",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 46
+      },
+      "revId": "fb3211d5ea5fe354935cba38e080911c6e71bc67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
