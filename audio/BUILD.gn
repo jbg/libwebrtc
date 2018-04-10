@@ -13,6 +13,7 @@ if (is_android) {
 }
 
 rtc_static_library("audio") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   sources = [
     "audio_level.cc",
     "audio_level.h",

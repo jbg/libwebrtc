@@ -101,6 +101,7 @@ rtc_static_library("rtc_pc_base") {
 
 rtc_source_set("rtc_pc") {
   visibility = [ "*" ]
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   deps = [
     ":rtc_pc_base",
     "../media:rtc_audio_video",
@@ -217,6 +218,8 @@ rtc_static_library("peerconnection") {
 # "peerconnection" build target and other targets specific to their
 # requrements. See comment in peerconnectionfactoryinterface.h.
 rtc_static_library("create_pc_factory") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
+
   sources = [
     "createpeerconnectionfactory.cc",
   ]
@@ -249,6 +252,7 @@ rtc_static_library("create_pc_factory") {
 
 rtc_source_set("libjingle_peerconnection") {
   visibility = [ "*" ]
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   deps = [
     ":create_pc_factory",
     ":peerconnection",
