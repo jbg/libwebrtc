@@ -39,8 +39,6 @@ deps = {
   # in base/third_party/libevent is solved.
   'src/base':
     Var('chromium_git') + '/chromium/src/base' + '@' + 'cf3d54e4c0676c4ef344772dac25b84ced0c0a15',
-  'src/build':
-    Var('chromium_git') + '/chromium/src/build' + '@' + 'd1819b57cc3e556e1483fab55135bd9fc1ea4bd5',
   'src/buildtools':
     Var('chromium_git') + '/chromium/buildtools.git' + '@' + '10d701fce52d192005512aa832dc82f9aae72b5d',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -49,12 +47,6 @@ deps = {
       '89af43c4d0506f69980f00dde78c97b2f81437f8',
     'condition': 'checkout_android',
   },
-  'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'd2fc2d7873abcd4509cc977bab71b4c1517f7067',
-    'condition': 'checkout_ios',
-  },
-  'src/testing':
-    Var('chromium_git') + '/chromium/src/testing' + '@' + '357a4f800fc18ac1dbf5671e20d93fd824860a37',
   'src/third_party':
     Var('chromium_git') + '/chromium/src/third_party' + '@' + 'ce49b425a89f51636ffedfddc25423f36dbd5205',
   'src/third_party/android_ndk': {
@@ -158,10 +150,6 @@ deps = {
   },
   'src/third_party/yasm/source/patched-yasm':
     Var('chromium_git') + '/chromium/deps/yasm/patched-yasm.git' + '@' + 'b98114e18d8b9b84586b10d24353ab8616d4c5fc',
-  'src/tools':
-    Var('chromium_git') + '/chromium/src/tools' + '@' + '49e02a869d5b32a88925442048b300ec26584777',
-  'src/tools/gyp':
-    Var('chromium_git') + '/external/gyp.git' + '@' + 'd61a9397e668fa9843c4aa7da9e79460fe590bfb',
   'src/tools/swarming_client':
     Var('chromium_git') + '/infra/luci/client-py.git' + '@' +  Var('swarming_revision'),
 
