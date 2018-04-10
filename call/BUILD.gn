@@ -9,6 +9,7 @@
 import("../webrtc.gni")
 
 rtc_source_set("call_interfaces") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   sources = [
     "audio_receive_stream.h",
     "audio_send_stream.h",
@@ -140,6 +141,8 @@ rtc_source_set("bitrate_allocator") {
 }
 
 rtc_static_library("call") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
+
   sources = [
     "call.cc",
     "callfactory.cc",
@@ -223,6 +226,7 @@ rtc_source_set("video_stream_api") {
 }
 
 rtc_source_set("fake_network") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   sources = [
     "fake_network_pipe.cc",
     "fake_network_pipe.h",

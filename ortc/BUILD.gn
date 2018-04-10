@@ -13,6 +13,7 @@ if (is_android) {
 }
 
 rtc_static_library("ortc") {
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   defines = []
   sources = [
     "ortcfactory.cc",
