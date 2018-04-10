@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76394358_a72de32e",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-04-10T13:54:20Z",
+      "side": 1,
+      "message": "Please, consider _amplitude over _power.",
+      "revId": "c9e66f73ab3e8832535fa6325e83ccc5d496b00b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
