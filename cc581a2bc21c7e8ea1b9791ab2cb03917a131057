@@ -48,6 +48,23 @@
     },
     {
       "key": {
+        "uuid": "84d7867b_090fa62c",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-04-11T13:54:24Z",
+      "side": 1,
+      "message": "There is also this function in UIKit: https://developer.apple.com/documentation/uikit/1623001-uiinterfaceorientationislandscap?language\u003dobjc",
+      "revId": "cc581a2bc21c7e8ea1b9791ab2cb03917a131057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a966126_d63a27e3",
         "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
         "patchSetId": 1
