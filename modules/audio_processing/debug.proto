@@ -74,6 +74,8 @@ message Config {
   optional string experiments_description = 17;
   // Intelligibility Enhancer
   optional bool intelligibility_enhancer_enabled = 18;
+  optional bool capture_pre_apmlifier_enabled = 19;
+  // optional bool gain_controller2_enabled = 20;
 }
 
 message Event {
