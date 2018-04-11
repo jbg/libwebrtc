@@ -2820,6 +2820,54 @@ INSTANTIATE_TEST_CASE_P(
 
 }  // namespace
 
+TEST(ApmMessageTest, TestBoolPayload) {
+  auto m = ApmMessage();
+
+  m.SetBool(ApmMessage::Id::kNullMessage, false);
+  EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+  EXPECT_EQ(false, m.GetBool());
+
+  m.SetBool(ApmMessage::Id::kNullMessage, true);
+  EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+  EXPECT_EQ(true, m.GetBool());
+#ifndef NDEBUG
+  // Reading a type that is different from the last written is forbidden.
+  EXPECT_DEATH(m.GetInt(), "");
+#endif
+}
+
+TEST(ApmMessageTest, TestIntPayload) {
+  auto m = ApmMessage();
+
+  m.SetInt(ApmMessage::Id::kNullMessage, 0);
+  EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+  EXPECT_EQ(0, m.GetInt());
+
+  m.SetInt(ApmMessage::Id::kNullMessage, 100);
+  EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+  EXPECT_EQ(100, m.GetInt());
+#ifndef NDEBUG
+  // Reading a type that is different from the last written is forbidden.
+  EXPECT_DEATH(m.GetBool(), "");
+#endif
+}
+
+TEST(ApmMessageTest, TestFloatPayload) {
+  auto m = ApmMessage();
+
+  m.SetFloat(ApmMessage::Id::kNullMessage, 0.f);
+  EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+  EXPECT_EQ(0.f, m.GetFloat());
+
+  m.SetFloat(ApmMessage::Id::kNullMessage, 100.f);
+  EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+  EXPECT_EQ(100.f, m.GetFloat());
+#ifndef NDEBUG
+  // Reading a type that is different from the last written is forbidden.
+  EXPECT_DEATH(m.GetBool(), "");
+#endif
+}
+
 TEST(ApmConfiguration, EnablePostProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.
   webrtc::Config webrtc_config;
