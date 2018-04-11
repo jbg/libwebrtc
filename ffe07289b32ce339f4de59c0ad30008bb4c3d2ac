@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29894479_1f00c9bb",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-11T22:14:30Z",
+      "side": 1,
+      "message": "nit: Maybe prefer bugs.webrtc.org/6023",
+      "range": {
+        "startLine": 2181,
+        "startChar": 3,
+        "endLine": 2181,
+        "endChar": 24
+      },
+      "revId": "ffe07289b32ce339f4de59c0ad30008bb4c3d2ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
