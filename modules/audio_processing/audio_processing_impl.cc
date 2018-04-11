@@ -380,6 +380,7 @@ AudioProcessingImpl::AudioProcessingImpl(
     NonlinearBeamformer* beamformer)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+      apm_message_queue_(new SwapQueue<ApmMessage>(1)),
       high_pass_filter_impl_(new HighPassFilterImpl(this)),
       echo_control_factory_(std::move(echo_control_factory)),
       submodule_states_(!!capture_post_processor, !!render_pre_processor),
@@ -796,6 +797,9 @@ void AudioProcessingImpl::set_output_will_be_muted(bool muted) {
   }
 }
 
+bool AudioProcessingImpl::InsertMessage(ApmMessage msg) {
+  return apm_message_queue_->Insert(&msg);
+}
 
 int AudioProcessingImpl::ProcessStream(const float* const* src,
                                        size_t samples_per_channel,
@@ -868,6 +872,8 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
     RecordUnprocessedCaptureStream(src);
   }
 
+  MaybeDispatchApmMessage();
+
   capture_.capture_audio->CopyFrom(src, formats_.api_format.input_stream());
   RETURN_ON_ERR(ProcessCaptureStreamLocked());
   capture_.capture_audio->CopyTo(formats_.api_format.output_stream(), dest);
@@ -876,6 +882,23 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
     RecordProcessedCaptureStream(dest);
   }
   return kNoError;
+}
+
+void AudioProcessingImpl::MaybeDispatchApmMessage() {
+  ApmMessage m;
+  if (!apm_message_queue_->Remove(&m))
+    return;
+  switch (m.id()) {
+    // TODO(bugs.chromium.org/p/webrtc/issues/detail?id=9138): Notify observers.
+    case ApmMessage::Id::kUpdateCapturePreGain:
+      // TODO(bugs.chromium.org/p/webrtc/issues/detail?id=9138): m.GetFloat();
+      break;
+    case ApmMessage::Id::kUpdateRenderGain:
+      // TODO(bugs.chromium.org/p/webrtc/issues/detail?id=9138): m.GetFloat();
+      break;
+    default:
+      break;
+  }
 }
 
 void AudioProcessingImpl::QueueBandedRenderAudio(AudioBuffer* audio) {
@@ -1117,6 +1140,8 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
   if (aec_dump_) {
     RecordUnprocessedCaptureStream(*frame);
   }
+
+  MaybeDispatchApmMessage();
 
   capture_.capture_audio->DeinterleaveFrom(frame);
   RETURN_ON_ERR(ProcessCaptureStreamLocked());
