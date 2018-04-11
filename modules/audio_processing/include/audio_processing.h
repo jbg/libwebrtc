@@ -62,6 +62,56 @@ class VoiceDetection;
 // webrtc:8665, addedd temporarily to avoid breaking dependencies.
 typedef CustomProcessing PostProcessing;
 
+// Audio Processing Module message class. A message is made of an ID and a
+// value, which is the message payload. Each ID is associated to a value type
+// and has its own setter method. A message can only be changed by using the
+// message-ID specific setters.
+// read using the getter for the specific value type corresponding to the ID.
+// Using the wrong getter has undefined behavior.
+class ApmMessage {
+ public:
+  // When adding a new type of message, add an entry below.
+  enum class Id {
+    kNullMessage,
+    kUpdateCapturePreGain,
+    kUpdateRenderGain,
+  };
+
+  ApmMessage();
+  ~ApmMessage();
+
+  Id id() const { return id_; }
+
+  // Type-specific getters (one for each entry in ValueType).
+  float GetBool() const;
+  float GetInt() const;
+  float GetFloat() const;
+
+  // Type-specific setters (one for each entry in ValueType).
+  void SetBool(Id id, bool v);
+  void SetInt(Id id, int v);
+  void SetFloat(Id id, float v);
+
+ private:
+  // Payload value types (one for each entry in the union below).
+  enum class ValueType {
+    kBool,
+    kInt,
+    kFloat,
+  };
+
+  // Message ID.
+  Id id_;
+  // Message payload.
+  union {
+    bool bool_val_;
+    int int_val_;
+    float float_val_;
+  };
+  // Message payload type.
+  ValueType type_;
+};
+
 // Use to enable the extended filter mode in the AEC, along with robustness
 // measures around the reported system delays. It comes with a significant
 // increase in AEC complexity, but is much more robust to unreliable reported
@@ -358,6 +408,10 @@ class AudioProcessing : public rtc::RefCountInterface {
   // but some components may change behavior based on this information.
   // Default false.
   virtual void set_output_will_be_muted(bool muted) = 0;
+
+  // Insert an APM message and return true if the message has been inserted in
+  // the queue or false if the queue is full.
+  virtual bool InsertMessage(ApmMessage* msg) = 0;
 
   // Processes a 10 ms |frame| of the primary audio stream. On the client-side,
   // this is the near-end (or captured) audio.
