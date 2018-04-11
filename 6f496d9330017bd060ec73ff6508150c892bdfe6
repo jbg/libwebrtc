@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2d64cde1_253be813",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-04-11T18:46:37Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this test create 1000 threads? Or has WebRTCs task queue implementation changed?",
+      "range": {
+        "startLine": 775,
+        "startChar": 22,
+        "endLine": 775,
+        "endChar": 65
+      },
+      "revId": "6f496d9330017bd060ec73ff6508150c892bdfe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7fc1c96f_e63672a8",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
         "patchSetId": 2
