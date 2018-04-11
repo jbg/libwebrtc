@@ -62,6 +62,64 @@ class VoiceDetection;
 // webrtc:8665, addedd temporarily to avoid breaking dependencies.
 typedef CustomProcessing PostProcessing;
 
+// Audio Processing Module message class. A message is made of an ID and a
+// value, which is the message payload. Each ID is associated to a value type
+// and has its own factory method. Creating via a factory methods and the
+// absence of setters guarantees that the payload type for a specific message ID
+// is correct. The caller must call the correct getter - i.e., that with the
+// type that corresponds to the message ID. Using the wrong getter has undefined
+// behavior.
+class ApmMessage {
+ public:
+  // When adding a new type of message, add an entry below.
+  enum class Id {
+    kNullMessage,
+    kUpdateCapturePreGain,
+    kUpdateRenderGain,
+  };
+
+  ApmMessage();
+  ~ApmMessage();
+
+  Id id() const { return id_; }
+
+  // Type-specific getters (one for each entry in ValueType).
+  bool GetBool() const;
+  int GetInt() const;
+  float GetFloat() const;
+
+  // ID-specific factories (one for each entry in Id).
+  static ApmMessage CreateNullMessage(bool v);   // Only used for testing.
+  static ApmMessage CreateNullMessage(int v);    // Only used for testing.
+  static ApmMessage CreateNullMessage(float v);  // Only used for testing.
+  static ApmMessage CreateUpdateCapturePreGainMessage(float v);
+  static ApmMessage CreateUpdateRenderGainMessage(float v);
+
+ private:
+  // Payload value types (one for each entry in the union below).
+  enum class ValueType {
+    kBool,
+    kInt,
+    kFloat,
+  };
+
+  // Type-specific ctors (one for each entry in ValueType).
+  ApmMessage(Id id, bool v);
+  ApmMessage(Id id, int v);
+  ApmMessage(Id id, float v);
+
+  // Message ID.
+  Id id_;
+  // Message payload.
+  union {
+    bool bool_val_;
+    int int_val_;
+    float float_val_;
+  };
+  // Message payload type.
+  ValueType type_;
+};
+
 // Use to enable the extended filter mode in the AEC, along with robustness
 // measures around the reported system delays. It comes with a significant
 // increase in AEC complexity, but is much more robust to unreliable reported
@@ -358,6 +416,10 @@ class AudioProcessing : public rtc::RefCountInterface {
   // but some components may change behavior based on this information.
   // Default false.
   virtual void set_output_will_be_muted(bool muted) = 0;
+
+  // Insert an APM message and return true if the message has been inserted in
+  // the queue or false if the queue is full.
+  virtual bool InsertMessage(ApmMessage msg) = 0;
 
   // Processes a 10 ms |frame| of the primary audio stream. On the client-side,
   // this is the near-end (or captured) audio.
