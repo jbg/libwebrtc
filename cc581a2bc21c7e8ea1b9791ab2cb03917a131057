@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46d2c081_06e116ff",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-04-11T11:28:29Z",
+      "side": 1,
+      "message": "Is there a reason to call this here, and not just in `renderFrame:`? Seems that it\u0027s only relevant to update the orientation when we actually get a new frame.",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 30
+      },
+      "revId": "cc581a2bc21c7e8ea1b9791ab2cb03917a131057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4214a37_31538dc4",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-04-11T11:28:29Z",
+      "side": 1,
+      "message": "typo: should be `than`.",
+      "range": {
+        "startLine": 159,
+        "startChar": 48,
+        "endLine": 159,
+        "endChar": 52
+      },
+      "revId": "cc581a2bc21c7e8ea1b9791ab2cb03917a131057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a966126_d63a27e3",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-04-11T11:28:29Z",
+      "side": 1,
+      "message": "Can also just omit these cases as the variable is no by default.",
+      "range": {
+        "startLine": 165,
+        "startChar": 9,
+        "endLine": 165,
+        "endChar": 38
+      },
+      "revId": "cc581a2bc21c7e8ea1b9791ab2cb03917a131057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a3de2fa_f6b42b6f",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-04-11T11:28:29Z",
+      "side": 1,
+      "message": "This looks inherently glitchy. When changing rotation frequently does the view show a few frames zoomed in before changing to fit?",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 18
+      },
+      "revId": "cc581a2bc21c7e8ea1b9791ab2cb03917a131057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
