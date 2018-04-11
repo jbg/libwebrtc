@@ -19,8 +19,8 @@
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/include/video_frame.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
-#include "modules/video_coding/codecs/vp8/temporal_layers.h"
 #include "modules/video_coding/include/video_codec_interface.h"
+#include "modules/video_coding/utility/temporal_layers.h"
 
 #include "vpx/vp8cx.h"
 #include "vpx/vpx_encoder.h"
