@@ -66,6 +66,8 @@ class AudioProcessingImpl : public AudioProcessing {
       std::unique_ptr<AudioGenerator> audio_generator) override;
   void DetachPlayoutAudioGenerator() override;
 
+  bool InsertMessage(ApmMessage* msg) override;
+
   // Capture-side exclusive methods possibly running APM in a
   // multi-threaded manner. Acquire the capture lock.
   int ProcessStream(AudioFrame* frame) override;
@@ -148,6 +150,8 @@ class AudioProcessingImpl : public AudioProcessing {
 
   std::unique_ptr<ApmDataDumper> data_dumper_;
   static int instance_count_;
+
+  std::unique_ptr<SwapQueue<ApmMessage>> apm_message_queue_;
 
   // Submodule interface implementations.
   std::unique_ptr<HighPassFilter> high_pass_filter_impl_;
@@ -238,6 +242,10 @@ class AudioProcessingImpl : public AudioProcessing {
   void InitializeGainController2() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializePostProcessor() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializePreProcessor() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
+
+  // Retrieve a message from the APM message queue and dispatch that to the
+  // APM sub-modules for which the message is relevant.
+  void MaybeDispatchApmMessage();
 
   void EmptyQueuedRenderAudio();
   void AllocateRenderQueue()

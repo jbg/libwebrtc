@@ -14,6 +14,55 @@
 
 namespace webrtc {
 
+ApmMessage::ApmMessage()
+    : id_(Id::kNullMessage), bool_val_(false), type_(ValueType::kBool) {}
+
+ApmMessage::~ApmMessage() = default;
+
+bool ApmMessage::GetBool() const {
+  RTC_DCHECK(type_ == ValueType::kBool);
+  return bool_val_;
+}
+
+int ApmMessage::GetInt() const {
+  RTC_DCHECK(type_ == ValueType::kInt);
+  return int_val_;
+}
+
+float ApmMessage::GetFloat() const {
+  RTC_DCHECK(type_ == ValueType::kFloat);
+  return float_val_;
+}
+
+ApmMessage ApmMessage::CreateNullMessage(bool v) {
+  return {Id::kNullMessage, v};
+}
+
+ApmMessage ApmMessage::CreateNullMessage(int v) {
+  return {Id::kNullMessage, v};
+}
+
+ApmMessage ApmMessage::CreateNullMessage(float v) {
+  return {Id::kNullMessage, v};
+}
+
+ApmMessage ApmMessage::CreateUpdateCapturePreGainMessage(float v) {
+  return {Id::kUpdateCapturePreGain, v};
+}
+
+ApmMessage ApmMessage::CreateUpdateRenderGainMessage(float v) {
+  return {Id::kUpdateRenderGain, v};
+}
+
+ApmMessage::ApmMessage(Id id, bool v)
+    : id_(id), bool_val_(v), type_(ValueType::kBool) {}
+
+ApmMessage::ApmMessage(Id id, int v)
+    : id_(id), int_val_(v), type_(ValueType::kInt) {}
+
+ApmMessage::ApmMessage(Id id, float v)
+    : id_(id), float_val_(v), type_(ValueType::kFloat) {}
+
 Beamforming::Beamforming()
     : enabled(false),
       array_geometry(),
