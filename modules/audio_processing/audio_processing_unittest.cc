@@ -36,6 +36,7 @@
 #include "rtc_base/numerics/safe_minmax.h"
 #include "rtc_base/protobuf_utils.h"
 #include "rtc_base/refcountedobject.h"
+#include "rtc_base/swap_queue.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread.h"
 #include "system_wrappers/include/event_wrapper.h"
@@ -2819,6 +2820,65 @@ INSTANTIATE_TEST_CASE_P(
 #endif
 
 }  // namespace
+
+TEST(ApmMessageTest, TestBoolPayload) {
+  {
+    auto m = ApmMessage::CreateNullMessage(false);
+    EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+    EXPECT_EQ(false, m.GetBool());
+  }
+  {
+    auto m = ApmMessage::CreateNullMessage(true);
+    EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+    EXPECT_EQ(true, m.GetBool());
+#ifndef NDEBUG
+    // Reading a type that is different from the last written is forbidden.
+    EXPECT_DEATH(m.GetInt(), "");
+#endif
+  }
+}
+
+TEST(ApmMessageTest, TestIntPayload) {
+  {
+    auto m = ApmMessage::CreateNullMessage(0);
+    EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+    EXPECT_EQ(0, m.GetInt());
+  }
+  {
+    auto m = ApmMessage::CreateNullMessage(100);
+    EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+    EXPECT_EQ(100, m.GetInt());
+#ifndef NDEBUG
+    // Reading a type that is different from the last written is forbidden.
+    EXPECT_DEATH(m.GetBool(), "");
+#endif
+  }
+}
+
+TEST(ApmMessageTest, TestFloatPayload) {
+  {
+    auto m = ApmMessage::CreateNullMessage(0.f);
+    EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+    EXPECT_EQ(0.f, m.GetFloat());
+  }
+  {
+    auto m = ApmMessage::CreateNullMessage(100.f);
+    EXPECT_EQ(ApmMessage::Id::kNullMessage, m.id());
+    EXPECT_EQ(100.f, m.GetFloat());
+#ifndef NDEBUG
+    // Reading a type that is different from the last written is forbidden.
+    EXPECT_DEATH(m.GetBool(), "");
+#endif
+  }
+}
+
+TEST(ApmMessageTest, TestUsageWithSwapQueue) {
+  SwapQueue<ApmMessage> q(1);
+  ApmMessage m = ApmMessage::CreateNullMessage(1.f);
+  ASSERT_TRUE(q.Insert(&m));
+  ASSERT_TRUE(q.Remove(&m));
+  EXPECT_EQ(1.f, m.GetFloat());
+}
 
 TEST(ApmConfiguration, EnablePostProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.

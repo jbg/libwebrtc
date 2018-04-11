@@ -75,4 +75,9 @@ TEST(AudioProcessingImplTest, AudioParameterChangeTriggersInit) {
   EXPECT_NOERR(mock.ProcessReverseStream(&frame));
 }
 
+TEST(AudioProcessingImplTest, MessageIsDelivered) {
+  // TODO(bugs.chromium.org/p/webrtc/issues/detail?id=9138): Mock APM to check
+  // that an APM message is delivered.
+}
+
 }  // namespace webrtc
