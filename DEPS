@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': '5651e5838c817d4c6f8a0f8145c6386d5c9f1242',
+  'chromium_revision': 'c17fba523dc3256bcd2baa23b37404422cf14393',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -50,13 +50,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '699957590e68b8fda876aaff7e907286d38740e2',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'd8fd46a73f4e6d48474f4028ed9dec8f86375c10',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    Var('chromium_git') + '/chromium/src/testing' + '@' + '648685ce423b6446d16446a73caac62cd17ecd48',
+    Var('chromium_git') + '/chromium/src/testing' + '@' + '839c6067eb858cca90156e3b05ab5a12ea613b72',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + '6a43d74c6b09183a2a55f14be03cb3d5f884cb76',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + '548d90e4ddba8737b139dc7f8c00d94f5140612f',
   'src/third_party/android_ndk': {
       'url': Var('chromium_git') + '/android_ndk.git' + '@' + '635bc380968a76f6948fee65f80a0b28db53ae81',
       'condition': 'checkout_android',
@@ -117,7 +117,7 @@ deps = {
   'src/third_party/libsrtp':
     Var('chromium_git') + '/chromium/deps/libsrtp.git' + '@' + 'fc2345089a6b3c5aca9ecd2e1941871a78a13e9c',
   'src/third_party/libvpx/source/libvpx':
-    Var('chromium_git') + '/webm/libvpx.git' + '@' +  'd636fe53af525c30f3bbd7224e7e56d447d0eb3d',
+    Var('chromium_git') + '/webm/libvpx.git' + '@' +  'be5df6080154e58db88fa3640e127efd18c04bde',
   'src/third_party/libyuv':
     Var('chromium_git') + '/libyuv/libyuv.git' + '@' + 'a9626b9daf62a9b260737e9c2de821ad087b19a1',
   'src/third_party/lss': {
