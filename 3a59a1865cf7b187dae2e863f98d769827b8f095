@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc144f1f_b45a998d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T12:43:15Z",
+      "side": 1,
+      "message": "Can you add a DCHECK for setting.id !\u003d Null ID? My reason for this is that it\u0027s better to check for failures early. Someone debugging why client code doesn\u0027t work will find the issue faster.",
+      "range": {
+        "startLine": 800,
+        "startChar": 62,
+        "endLine": 800,
+        "endChar": 63
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f0ad2d_fec07876",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T12:43:15Z",
+      "side": 1,
+      "message": "I want to add a log line already in this CL.",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 73
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0767bf77_de256967",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T12:43:15Z",
+      "side": 1,
+      "message": "Nit: Maybe rename \u0027Rt\u0027 -\u003e \u0027Runtime\u0027? \u0027rt\u0027 in webrtc can be \u0027real time\u0027. Same comment for the rest of this file.",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 23
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "276e3bed_837b0166",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T12:43:15Z",
+      "side": 1,
+      "message": "This needs to be annotated with the capture lock. When we add an implementation that accesses private submodules, the compiler will warn about not holding the lock.",
+      "range": {
+        "startLine": 247,
+        "startChar": 7,
+        "endLine": 247,
+        "endChar": 23
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39c026b7_72635516",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T12:43:15Z",
+      "side": 1,
+      "message": "I plan to make the pre-gain a non-interface. So it can\u0027t be mocked. Can we send through audio and check that gain has been applied instead? I can do that in another CL.",
+      "range": {
+        "startLine": 84,
+        "startChar": 61,
+        "endLine": 84,
+        "endChar": 14
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c42b7af_7de72655",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T12:43:15Z",
+      "side": 1,
+      "message": "Not needed",
+      "range": {
+        "startLine": 37,
+        "startChar": 19,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
