@@ -585,3 +585,8 @@ if (rtc_include_tests) {
     }
   }
 }
+
+# The set of poison_* targets needs to be kept in sync with the
+# `all_poison_types` list in webrtc.gni.
+group("poison_audio_codecs") {
+}
