@@ -36,6 +36,7 @@
 #include "rtc_base/numerics/safe_minmax.h"
 #include "rtc_base/protobuf_utils.h"
 #include "rtc_base/refcountedobject.h"
+#include "rtc_base/swap_queue.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread.h"
 #include "system_wrappers/include/event_wrapper.h"
@@ -2819,6 +2820,29 @@ INSTANTIATE_TEST_CASE_P(
 #endif
 
 }  // namespace
+
+TEST(RuntimeSettingTest, TestCtorAndGetters) {
+  using Id = AudioProcessing::RuntimeSetting::Id;
+  {
+    AudioProcessing::RuntimeSetting s(Id::kNull, 0.f);
+    EXPECT_EQ(Id::kNull, s.id());
+    EXPECT_EQ(0.f, s.value());
+  }
+  {
+    AudioProcessing::RuntimeSetting s(Id::kNull, 100.f);
+    EXPECT_EQ(Id::kNull, s.id());
+    EXPECT_EQ(100.f, s.value());
+  }
+}
+
+TEST(RuntimeSettingTest, TestUsageWithSwapQueue) {
+  using Id = AudioProcessing::RuntimeSetting::Id;
+  SwapQueue<AudioProcessing::RuntimeSetting> q(1);
+  AudioProcessing::RuntimeSetting s(Id::kNull, 1.f);
+  ASSERT_TRUE(q.Insert(&s));
+  ASSERT_TRUE(q.Remove(&s));
+  EXPECT_EQ(1.f, s.value());
+}
 
 TEST(ApmConfiguration, EnablePostProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.

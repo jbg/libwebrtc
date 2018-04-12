@@ -302,6 +302,24 @@ class AudioProcessing : public rtc::RefCountInterface {
     kStereoAndKeyboard
   };
 
+  // A runtime setting is made of an ID and a value, which is the message
+  // payload.
+  class RuntimeSetting {
+   public:
+    enum class Id { kNull, kUpdateCapturePreGain };
+
+    RuntimeSetting() : id_(Id::kNull), value_(0.f) {}
+    RuntimeSetting(Id id, float value) : id_(id), value_(value) {}
+    ~RuntimeSetting() = default;
+
+    Id id() const { return id_; }
+    float value() const { return value_; }
+
+   private:
+    Id id_;
+    float value_;
+  };
+
   ~AudioProcessing() override {}
 
   // Initializes internal states, while retaining all user settings. This
@@ -358,6 +376,9 @@ class AudioProcessing : public rtc::RefCountInterface {
   // but some components may change behavior based on this information.
   // Default false.
   virtual void set_output_will_be_muted(bool muted) = 0;
+
+  // Enqueue a runtime setting.
+  virtual void EnqueueRuntimeSetting(RuntimeSetting msg) = 0;
 
   // Processes a 10 ms |frame| of the primary audio stream. On the client-side,
   // this is the near-end (or captured) audio.
