@@ -380,6 +380,7 @@ AudioProcessingImpl::AudioProcessingImpl(
     NonlinearBeamformer* beamformer)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+      rt_settings_queue_(new SwapQueue<RuntimeSetting>(100)),
       high_pass_filter_impl_(new HighPassFilterImpl(this)),
       echo_control_factory_(std::move(echo_control_factory)),
       submodule_states_(!!capture_post_processor, !!render_pre_processor),
@@ -796,6 +797,13 @@ void AudioProcessingImpl::set_output_will_be_muted(bool muted) {
   }
 }
 
+void AudioProcessingImpl::EnqueueRuntimeSetting(RuntimeSetting setting) {
+  RTC_DCHECK(setting.id() != RuntimeSetting::Id::kNull);
+  if (!rt_settings_queue_->Insert(&setting)) {
+    RTC_LOG(LS_ERROR) << "The runtime setting queue is full.";
+    rt_settings_queue_->Clear();
+  }
+}
 
 int AudioProcessingImpl::ProcessStream(const float* const* src,
                                        size_t samples_per_channel,
@@ -876,6 +884,21 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
     RecordProcessedCaptureStream(dest);
   }
   return kNoError;
+}
+
+void AudioProcessingImpl::HandleRuntimeSettings() {
+  RuntimeSetting setting;
+  while (rt_settings_queue_->Remove(&setting)) {
+    RTC_DCHECK(setting.id() != RuntimeSetting::Id::kNull);
+    switch (setting.id()) {
+      case RuntimeSetting::Id::kUpdateCapturePreGain:
+        // TODO(bugs.chromium.org/p/webrtc/issues/detail?id=9138): Notify
+        // pre-gain when the sub-module is implemented.
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 void AudioProcessingImpl::QueueBandedRenderAudio(AudioBuffer* audio) {
@@ -1132,6 +1155,8 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
 }
 
 int AudioProcessingImpl::ProcessCaptureStreamLocked() {
+  HandleRuntimeSettings();
+
   // Ensure that not both the AEC and AECM are active at the same time.
   // TODO(peah): Simplify once the public API Enable functions for these
   // are moved to APM.
