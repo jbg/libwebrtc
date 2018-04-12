@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14a681bf_413c705c",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "message -\u003e setting",
+      "range": {
+        "startLine": 305,
+        "startChar": 66,
+        "endLine": 305,
+        "endChar": 73
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7629447_aff124ce",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "I\u0027d rather see a comment about what the class does. The comments that it consists of an ID and a value is redundant, since that is clear from the class declaration.\nE.g.,\nSpecified the properties of a setting for passing to an AudioProcessing object during runtime.",
+      "range": {
+        "startLine": 305,
+        "startChar": 2,
+        "endLine": 305,
+        "endChar": 18
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e4db11d_116d6fbc",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "I\u0027m missing a factory method. What is the reason for skipping that? I think it would be much easier if the user don\u0027t need to state the ID.",
+      "range": {
+        "startLine": 307,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 22
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fba4618e_3f92f0fb",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "Please change kNull to kNotSpecified.",
+      "range": {
+        "startLine": 309,
+        "startChar": 20,
+        "endLine": 309,
+        "endChar": 25
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e34d181_c7e3475d",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "What about\nId -\u003e Type\n\nTo me, and ID is more of an index into a database such as an SQL id.\n\nWhat I think we are after here is the type of a setting.",
+      "range": {
+        "startLine": 309,
+        "startChar": 15,
+        "endLine": 309,
+        "endChar": 17
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adf72ca1_7069ca4a",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "I\u0027d rather change this to\nvoid GetValue(*float) const { RTC_DCHECK(value); *value \u003d value_; }\nas that will scale better when other payloads are added.",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e595bcbd_1f5be225",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "mst-\u003esetting",
+      "range": {
+        "startLine": 381,
+        "startChar": 52,
+        "endLine": 381,
+        "endChar": 55
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f06a169d_7cb6b078",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "I\u0027d prefer SetRuntimeSetting.\nThe engueing part is an implementation detail which does not concern the user.",
+      "range": {
+        "startLine": 381,
+        "startChar": 15,
+        "endLine": 381,
+        "endChar": 36
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

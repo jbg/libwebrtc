@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99089083_c971047a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "I\u0027d prefer a more failsafe version such as:\n\nwhile (!rt_settings_queue_-\u003eInsert(\u0026setting)) {\n    RTC_LOG(LS_ERROR) \u003c\u003c \"The runtime setting queue is full. Discarding oldest setting.\";\n    RuntimeSetting setting_to_discard;\n    rt_settings_queue_-\u003eRemove(\u0026setting_to_discard);\n}",
+      "range": {
+        "startLine": 802,
+        "startChar": 2,
+        "endLine": 802,
+        "endChar": 4
+      },
+      "revId": "aa54c5f410bc2385d5bfe1be424f24a86c06b48a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05852082_e6376962",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "setting-\u003esettings",
+      "range": {
+        "startLine": 803,
+        "startChar": 38,
+        "endLine": 803,
+        "endChar": 45
+      },
+      "revId": "aa54c5f410bc2385d5bfe1be424f24a86c06b48a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bd0de9d_9a0e11a0",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-12T14:14:02Z",
+      "side": 1,
+      "message": "Do we need to specify it as a queue in the name? \nwhat about \nruntime_settings_?",
+      "range": {
+        "startLine": 154,
+        "startChar": 45,
+        "endLine": 154,
+        "endChar": 63
+      },
+      "revId": "aa54c5f410bc2385d5bfe1be424f24a86c06b48a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
