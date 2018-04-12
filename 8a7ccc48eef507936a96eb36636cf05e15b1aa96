@@ -70,6 +70,30 @@
       "revId": "8a7ccc48eef507936a96eb36636cf05e15b1aa96",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5b871c5_727971bc",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-04-12T18:13:58Z",
+      "side": 1,
+      "message": "Also it means it is really tight to the timing that is why sometimes it does not happen and this is why I did not see this issue earlier this week when we merged the other CL.",
+      "parentUuid": "46762a83_c5bc8617",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 14
+      },
+      "revId": "8a7ccc48eef507936a96eb36636cf05e15b1aa96",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
