@@ -2820,6 +2820,29 @@ INSTANTIATE_TEST_CASE_P(
 
 }  // namespace
 
+TEST(RtSettingTest, TestCtorAndGetters) {
+  using Id = AudioProcessing::RtSetting::Id;
+  {
+    AudioProcessing::RtSetting s(Id::kNull, 0.f);
+    EXPECT_EQ(Id::kNull, s.id());
+    EXPECT_EQ(0.f, s.value());
+  }
+  {
+    AudioProcessing::RtSetting s(Id::kNull, 100.f);
+    EXPECT_EQ(Id::kNull, s.id());
+    EXPECT_EQ(100.f, s.value());
+  }
+}
+
+TEST(RtSettingTest, TestUsageWithSwapQueue) {
+  using Id = AudioProcessing::RtSetting::Id;
+  SwapQueue<AudioProcessing::RtSetting> q(1);
+  AudioProcessing::RtSetting s(Id::kNull, 1.f);
+  ASSERT_TRUE(q.Insert(&s));
+  ASSERT_TRUE(q.Remove(&s));
+  EXPECT_EQ(1.f, s.value());
+}
+
 TEST(ApmConfiguration, EnablePostProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.
   webrtc::Config webrtc_config;
