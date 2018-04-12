@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "bc47e010_c0721fa3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:32:08Z",
+      "side": 1,
+      "message": "Maybe in another CL? We would need to make a Chromium CL and wait with landing this one.\n\nSuppose we add a new kind of event/setting/message. Then we\u0027d have to change the metric definition. I\u0027m not sure on what the rules for that are.",
+      "parentUuid": "1970e45d_454667e4",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 73
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0767bf77_de256967",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 8
@@ -237,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "52849033_07e8de15",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:32:08Z",
+      "side": 1,
+      "message": "I think it\u0027s better to test observable behaviors. When you send a setting/event/message, you expect the APM to behave in a different way. Like changing the gain. Therefore, I like to test the behavior instead of the implementation. Tests like that help understand how the code should be used, and what effect it has.\n\nOtherwise, we may start testing implementation details. It doesn\u0027t help someone who wants to just use the code (much). We also need to change the tests every time the implementation changes.",
+      "parentUuid": "9090b20d_2ef580ee",
+      "range": {
+        "startLine": 84,
+        "startChar": 61,
+        "endLine": 84,
+        "endChar": 14
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c42b7af_7de72655",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 8
@@ -272,6 +320,30 @@
       "side": 1,
       "message": "Done. Left over from the attempt to friend SwapQueue. I moved the include to audio_processing_unittest.cc",
       "parentUuid": "8c42b7af_7de72655",
+      "range": {
+        "startLine": 37,
+        "startChar": 19,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dcba9ea_f4c6c7b2",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:32:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5723c4f5_76a43d61",
       "range": {
         "startLine": 37,
         "startChar": 19,
