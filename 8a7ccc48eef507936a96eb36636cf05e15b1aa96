@@ -46,6 +46,30 @@
       "revId": "8a7ccc48eef507936a96eb36636cf05e15b1aa96",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46762a83_c5bc8617",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2018-04-12T18:12:02Z",
+      "side": 1,
+      "message": "I know see why you mentioned that (because of the CL description). In short if I add a trace here in the \"if (!frame_source) continue\"  https://chromium.googlesource.com/external/webrtc/+/master/modules/desktop_capture/mac/screen_capturer_mac.mm#415 then the trace continuously shows up without this CL and visually you will some missing parts instead of the 2 displays.\nI do not have a very concise explanation at the moment but it seems that CaptureFrame can be called a lot more than the handler and can be called in between stream handler for display A and stream handler for display B. So this CL ensures that the 2 frame sources (one for each display) are available when calling CaptureFrame.",
+      "parentUuid": "5148345c_c2fb97c0",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 14
+      },
+      "revId": "8a7ccc48eef507936a96eb36636cf05e15b1aa96",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
