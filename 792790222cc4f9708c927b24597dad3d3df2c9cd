@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b285732_ed3e852a",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "There\u0027s no need to define a constexpr for this, right?",
+      "range": {
+        "startLine": 22,
+        "startChar": 15,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e549e1cf_50b09277",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "if not necessary (the code is self-explanatory)",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "345336ec_df9c787a",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6336f7f2_845e8cf3",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "remove line",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 42
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c49ac34_68ddaeda",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "num_samples",
+      "range": {
+        "startLine": 65,
+        "startChar": 15,
+        "endLine": 65,
+        "endChar": 22
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "518f85af_727cef23",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "What about defining 1 / num_samples when GainApplier is constructed? Maybe adding an Init method.",
+      "range": {
+        "startLine": 67,
+        "startChar": 71,
+        "endLine": 67,
+        "endChar": 78
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b28bced_1f8980c4",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "This is duplicated (58-60). I would prefer to have } else { on line 60 and moving 58-60 at the end.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bea1448_545984c7",
+        "filename": "modules/audio_processing/agc2/gain_applier.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "Maybe ask another reviewer if we should provide motivation for the presence of this flag - that is the freedom of using a limiter instead of hard-clipping. It may not be obvious for the reader.",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 36
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e25b998_d16fada4",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "constexpr (same below in this file)",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 7
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41c83b38_f8b8b8e3",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "Lower than 3276.7f otherwise the test fails",
+      "range": {
+        "startLine": 45,
+        "startChar": 37,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "396fc5cf_506b529c",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "If you wish, you can test ramping in both directions and you can use TEST_P to pass the (initial, target) pairs you want to test.",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 55
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1e68064_0632393d",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "const auto",
+      "range": {
+        "startLine": 73,
+        "startChar": 9,
+        "endLine": 73,
+        "endChar": 13
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c7a91cb_c454b4d1",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "Nice with abs, the code still works even regardless of whether you have ramping up or down",
+      "range": {
+        "startLine": 75,
+        "startChar": 38,
+        "endLine": 75,
+        "endChar": 70
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c725e363_765557f2",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T12:25:12Z",
+      "side": 1,
+      "message": "Maybe it\u0027s safe to use EXPECT_FLOAT_EQ (since the division in the tested code and here runs on the same architecture).",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 22
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
