@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "92c21b98_00f77608",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a681bf_413c705c",
+      "range": {
+        "startLine": 305,
+        "startChar": 66,
+        "endLine": 305,
+        "endChar": 73
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7030e0c_19a5bbf6",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7629447_aff124ce",
+      "range": {
+        "startLine": 305,
+        "startChar": 2,
+        "endLine": 305,
+        "endChar": 18
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e4db11d_116d6fbc",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 9
@@ -68,6 +116,30 @@
       "revId": "e838d805227b71788a8e138388853d33f64e72df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "621f2831_3a59919e",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Since we only have one type of payload (i.e., float), factory methods would be redundant code that only hides the RuntimeSetting::Id values. It would lead to names duplication, because each factory method should be named after its corresponding entry in RuntimeSetting::Id (so I don\u0027t see a clear advantage for the user).\n\nI would see a valid reason for adding factory methods if we made them responsible for validating the payload (e.g., kUpdateCapturePreGain only accepts \u003e\u003d 1.f). But I don\u0027t like this solution either because it is better that each APM sub-module validates its parameters.\n\nFinally, if we ever need to add payloads of different type, then we could switch to factory methods to make sure that the right payload type is used. The same cannot be done with overloaded ctors since it would require to check that the given ID is compatible with the type but then we have no means to return an error from the ctor.\n\nConclusion: unless we already know that we are going to add other setting types (e.g., int) I would rely on ctors.",
+      "parentUuid": "8e4db11d_116d6fbc",
+      "range": {
+        "startLine": 307,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 22
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,54 @@
     },
     {
       "key": {
+        "uuid": "da3d2fbb_1f9cde2c",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e34d181_c7e3475d",
+      "range": {
+        "startLine": 309,
+        "startChar": 15,
+        "endLine": 309,
+        "endChar": 17
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6b3ace8_74f09ba9",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fba4618e_3f92f0fb",
+      "range": {
+        "startLine": 309,
+        "startChar": 20,
+        "endLine": 309,
+        "endChar": 25
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "adf72ca1_7069ca4a",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 9
@@ -137,6 +257,30 @@
       "revId": "e838d805227b71788a8e138388853d33f64e72df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d22a1b9_864c9c87",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "I think this CL follows the expectation that no new payload type will be added anytime soon. Therefore, the code is written without anticipating future needs and hence, for consistency, I would not do this. Also, if I were to say which payload types we may add, I wouldn\u0027t expect anything that has an expensive copy.",
+      "parentUuid": "adf72ca1_7069ca4a",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +327,54 @@
       "revId": "e838d805227b71788a8e138388853d33f64e72df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85b54ab0_8004ac9d",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e595bcbd_1f5be225",
+      "range": {
+        "startLine": 381,
+        "startChar": 52,
+        "endLine": 381,
+        "endChar": 55
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "532e68cd_140a6ce1",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f06a169d_7cb6b078",
+      "range": {
+        "startLine": 381,
+        "startChar": 15,
+        "endLine": 381,
+        "endChar": 36
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

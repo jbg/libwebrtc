@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "3ba3364f_6079ad9b",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bc47e010_c0721fa3",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 73
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0767bf77_de256967",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 8
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "I think it\u0027s better to test observable behaviors. When you send a setting/event/message, you expect the APM to behave in a different way. Like changing the gain. Therefore, I like to test the behavior instead of the implementation. Tests like that help understand how the code should be used, and what effect it has.\n\nOtherwise, we may start testing implementation details. It doesn\u0027t help someone who wants to just use the code (much). We also need to change the tests every time the implementation changes.",
       "parentUuid": "9090b20d_2ef580ee",
+      "range": {
+        "startLine": 84,
+        "startChar": 61,
+        "endLine": 84,
+        "endChar": 14
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dbb32d7_c790a1a6",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T16:24:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52849033_07e8de15",
       "range": {
         "startLine": 84,
         "startChar": 61,
