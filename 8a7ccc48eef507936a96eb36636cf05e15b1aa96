@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "425e3419_1e722bc4",
+        "filename": "modules/desktop_capture/mac/desktop_frame_provider.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-12T01:16:13Z",
+      "side": 1,
+      "message": "I remember I have asked a similar question before: won\u0027t OS immediately send us the updated frame after reconfiguration?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 14
+      },
+      "revId": "8a7ccc48eef507936a96eb36636cf05e15b1aa96",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
