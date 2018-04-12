@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "api/test/create_test_controller.h"
 #include "logging/rtc_event_log/output/rtc_event_log_output_file.h"
 #include "media/engine/internalencoderfactory.h"
 #include "media/engine/webrtcvideoengine.h"
@@ -1085,12 +1086,9 @@ VideoQualityTest::VideoQualityTest()
   payload_type_map_[kPayloadTypeH264] = webrtc::MediaType::VIDEO;
   payload_type_map_[kPayloadTypeVP8] = webrtc::MediaType::VIDEO;
   payload_type_map_[kPayloadTypeVP9] = webrtc::MediaType::VIDEO;
-}
 
-VideoQualityTest::VideoQualityTest(
-    std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory)
-    : VideoQualityTest() {
-  fec_controller_factory_ = std::move(fec_controller_factory);
+  test_controller_ = CreateTestController();
+  fec_controller_factory_ = test_controller_->CreateFecController();
 }
 
 VideoQualityTest::Params::Params()
@@ -1815,18 +1813,22 @@ void VideoQualityTest::CreateCapturers() {
 
 std::unique_ptr<test::LayerFilteringTransport>
 VideoQualityTest::CreateSendTransport() {
-  return rtc::MakeUnique<test::LayerFilteringTransport>(
-      &task_queue_, params_.pipe, sender_call_.get(), kPayloadTypeVP8,
-      kPayloadTypeVP9, params_.video[0].selected_tl, params_.ss[0].selected_sl,
-      payload_type_map_, kVideoSendSsrcs[0],
-      static_cast<uint32_t>(kVideoSendSsrcs[0] + params_.ss[0].streams.size() -
-                            1));
+  // return rtc::MakeUnique<test::LayerFilteringTransport>(
+  //  &task_queue_, params_.pipe, sender_call_.get(), kPayloadTypeVP8,
+  //  kPayloadTypeVP9, params_.video[0].selected_tl, params_.ss[0].selected_sl,
+  //  payload_type_map_, kVideoSendSsrcs[0],
+  //  static_cast<uint32_t>(kVideoSendSsrcs[0] + params_.ss[0].streams.size() -
+  //                        1));
+  // TODO(phoglund): how does the test controller get hold of all parameters
+  //                 it needs??
+  return test_controller_->CreateSendTransport();
 }
 
 std::unique_ptr<test::DirectTransport>
 VideoQualityTest::CreateReceiveTransport() {
-  return rtc::MakeUnique<test::DirectTransport>(
-      &task_queue_, params_.pipe, receiver_call_.get(), payload_type_map_);
+  // return rtc::MakeUnique<test::DirectTransport>(
+  //     &task_queue_, params_.pipe, receiver_call_.get(), payload_type_map_);
+  return test_controller_->CreateReceiveTransport();
 }
 
 void VideoQualityTest::CreateVideoStreams() {

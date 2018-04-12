@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 
+#include "api/test/test_controller.h"
 #include "media/engine/simulcast_encoder_adapter.h"
 #include "test/call_test.h"
 #include "test/frame_generator.h"
@@ -114,6 +115,7 @@ class VideoQualityTest : public test::CallTest {
  protected:
   std::map<uint8_t, webrtc::MediaType> payload_type_map_;
   std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory_;
+  std::unique_ptr<TestControllerInterface> test_controller_;
 
   // No-op implementation to be able to instantiate this class from non-TEST_F
   // locations.
