@@ -66,6 +66,8 @@ class AudioProcessingImpl : public AudioProcessing {
       std::unique_ptr<AudioGenerator> audio_generator) override;
   void DetachPlayoutAudioGenerator() override;
 
+  void SetRuntimeSetting(RuntimeSetting setting) override;
+
   // Capture-side exclusive methods possibly running APM in a
   // multi-threaded manner. Acquire the capture lock.
   int ProcessStream(AudioFrame* frame) override;
@@ -148,6 +150,23 @@ class AudioProcessingImpl : public AudioProcessing {
 
   std::unique_ptr<ApmDataDumper> data_dumper_;
   static int instance_count_;
+
+  std::unique_ptr<SwapQueue<RuntimeSetting>> runtime_settings_;
+
+  // The class below is used to hide AudioProcessingImpl members from the code
+  // that populates |runtime_settings_|.
+  class RuntimeSettingEnqueuer {
+   public:
+    RuntimeSettingEnqueuer() = delete;
+    RuntimeSettingEnqueuer(const RuntimeSettingEnqueuer&) = delete;
+    RuntimeSettingEnqueuer& operator=(const RuntimeSettingEnqueuer&) = delete;
+    RuntimeSettingEnqueuer(SwapQueue<RuntimeSetting>* runtime_settings);
+    ~RuntimeSettingEnqueuer();
+    void Enqueue(RuntimeSetting setting);
+
+   private:
+    SwapQueue<RuntimeSetting>* runtime_settings_;
+  } runtime_settings_enqueuer_;
 
   // Submodule interface implementations.
   std::unique_ptr<HighPassFilter> high_pass_filter_impl_;
@@ -238,6 +257,9 @@ class AudioProcessingImpl : public AudioProcessing {
   void InitializeGainController2() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializePostProcessor() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializePreProcessor() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
+
+  // Handle all the runtime settings in the queue.
+  void HandleRuntimeSettings() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
 
   void EmptyQueuedRenderAudio();
   void AllocateRenderQueue()
