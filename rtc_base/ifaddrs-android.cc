@@ -174,7 +174,7 @@ int getifaddrs(struct ifaddrs** result) {
           rtattr* rta = IFA_RTA(address_msg);
           ssize_t payload_len = IFA_PAYLOAD(header);
           while (RTA_OK(rta, payload_len)) {
-            if (rta->rta_type == IFA_ADDRESS) {
+            if (rta->rta_type == IFA_LOCAL) {
               int family = address_msg->ifa_family;
               if (family == AF_INET || family == AF_INET6) {
                 ifaddrs* newest = new ifaddrs;
