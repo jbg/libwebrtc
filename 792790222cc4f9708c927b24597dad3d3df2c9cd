@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4c0115e5_374aa8fc",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "No, compilers are clever",
+      "parentUuid": "5b285732_ed3e852a",
+      "range": {
+        "startLine": 22,
+        "startChar": 15,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e549e1cf_50b09277",
         "filename": "modules/audio_processing/agc2/gain_applier.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58786649_5fb6adc7",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e549e1cf_50b09277",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5dbb280b_276506db",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "345336ec_df9c787a",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6336f7f2_845e8cf3",
         "filename": "modules/audio_processing/agc2/gain_applier.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68b67770_c53cf782",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6336f7f2_845e8cf3",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 42
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9de35a22_edb28fff",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c49ac34_68ddaeda",
+      "range": {
+        "startLine": 65,
+        "startChar": 15,
+        "endLine": 65,
+        "endChar": 22
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "518f85af_727cef23",
         "filename": "modules/audio_processing/agc2/gain_applier.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c385c870_5628f4f4",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Ok, done",
+      "parentUuid": "518f85af_727cef23",
+      "range": {
+        "startLine": 67,
+        "startChar": 71,
+        "endLine": 67,
+        "endChar": 78
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "ea70be51_c2708583",
+        "filename": "modules/audio_processing/agc2/gain_applier.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Rather divide into 2 functions. I\u0027ll do that instead. I don\u0027t like nested scopes, and function names serve as documentation.",
+      "parentUuid": "0b28bced_1f8980c4",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0bea1448_545984c7",
         "filename": "modules/audio_processing/agc2/gain_applier.h",
         "patchSetId": 2
@@ -174,6 +342,30 @@
       "writtenOn": "2018-04-12T12:25:12Z",
       "side": 1,
       "message": "Maybe ask another reviewer if we should provide motivation for the presence of this flag - that is the freedom of using a limiter instead of hard-clipping. It may not be obvious for the reader.",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 36
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c13e136_187a6994",
+        "filename": "modules/audio_processing/agc2/gain_applier.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "I think it\u0027s OK, because this is an internal module. If anyone wonders why we have this flag, they can look at the usage. It\u0027s off in one places, and will be on in another one.",
+      "parentUuid": "0bea1448_545984c7",
       "range": {
         "startLine": 19,
         "startChar": 14,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "b759a054_eed5895b",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e25b998_d16fada4",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 7
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41c83b38_f8b8b8e3",
         "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
         "patchSetId": 2
@@ -229,6 +445,30 @@
       "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e9ecd52_5cfc3d2f",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "No, the point is that the result should overflow max int16 and not be clipped.",
+      "parentUuid": "41c83b38_f8b8b8e3",
+      "range": {
+        "startLine": 45,
+        "startChar": 37,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "4a6fc0ca_5a80b7ca",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "396fc5cf_506b529c",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 55
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1e68064_0632393d",
         "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
         "patchSetId": 2
@@ -275,6 +539,30 @@
       "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33e98d37_e8578ee9",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1e68064_0632393d",
+      "range": {
+        "startLine": 73,
+        "startChar": 9,
+        "endLine": 73,
+        "endChar": 13
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -312,6 +600,30 @@
       "writtenOn": "2018-04-12T12:25:12Z",
       "side": 1,
       "message": "Maybe it\u0027s safe to use EXPECT_FLOAT_EQ (since the division in the tested code and here runs on the same architecture).",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 22
+      },
+      "revId": "792790222cc4f9708c927b24597dad3d3df2c9cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe9c7af5_8281d072",
+        "filename": "modules/audio_processing/agc2/gain_applier_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-12T14:08:05Z",
+      "side": 1,
+      "message": "It\u0027s computed differently in the code we test. I don\u0027t think the results will be equal. If you want, we can lower the tolerance instead.",
+      "parentUuid": "c725e363_765557f2",
       "range": {
         "startLine": 80,
         "startChar": 4,
