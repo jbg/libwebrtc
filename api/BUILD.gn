@@ -130,6 +130,23 @@ rtc_static_library("libjingle_peerconnection_api") {
   }
 }
 
+rtc_source_set("test_controller_api") {
+  visibility = [ "*" ]
+  sources = [
+    "test/test_controller.h",
+  ]
+}
+
+rtc_source_set("create_test_controller") {
+  visibility = [ "*" ]
+  sources = [
+    "test/create_test_controller.h",
+  ]
+  deps = [
+    ":test_controller_api",
+  ]
+}
+
 rtc_source_set("libjingle_logging_api") {
   visibility = [ "*" ]
   sources = [
