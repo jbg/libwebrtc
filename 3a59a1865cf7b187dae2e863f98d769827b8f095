@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3ccf5709_36865516",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T13:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc144f1f_b45a998d",
+      "range": {
+        "startLine": 800,
+        "startChar": 62,
+        "endLine": 800,
+        "endChar": 63
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1f0ad2d_fec07876",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1970e45d_454667e4",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T13:16:28Z",
+      "side": 1,
+      "message": "I used RTC_LOG, what about adding an RTC_HISTOGRAM_ log? If so, any recommendation on how to track events with no associated value?",
+      "parentUuid": "d1f0ad2d_fec07876",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 73
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "030880d2_88195664",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T13:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0767bf77_de256967",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 23
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "276e3bed_837b0166",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ef19da1_6d553d4c",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T13:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "276e3bed_837b0166",
+      "range": {
+        "startLine": 247,
+        "startChar": 7,
+        "endLine": 247,
+        "endChar": 23
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9090b20d_2ef580ee",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T13:16:28Z",
+      "side": 1,
+      "message": "Oh right. We may have another option if the pre-gain submodule writes a log message. I\u0027m not a fan of this type of tests but better than nothing. My view is the following:\n- we should check that the pre-gain sub-module does the right job in isolation (I mean outside of APM)\n- we should independently check that APM forwards the messages to the expected sub-modules; it would be nice if we find a pattern with which we can easily add tests when a new type of message is added (useful in the future)\n- decoupling tests as suggested above should help having light-weight tests\n\nBut as you pointed out, mocking requires an iface (too much). So the way to go is to merge the tests and check that a sub-module behaves as expected by sending a runtime setting via APM. If we do so, we must not have another test checking the behavior of the sub-module in isolation (that would only slow down the trybots).",
+      "parentUuid": "39c026b7_72635516",
+      "range": {
+        "startLine": 84,
+        "startChar": 61,
+        "endLine": 84,
+        "endChar": 14
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c42b7af_7de72655",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 8
@@ -137,6 +257,30 @@
       "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5723c4f5_76a43d61",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-12T13:16:28Z",
+      "side": 1,
+      "message": "Done. Left over from the attempt to friend SwapQueue. I moved the include to audio_processing_unittest.cc",
+      "parentUuid": "8c42b7af_7de72655",
+      "range": {
+        "startLine": 37,
+        "startChar": 19,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "3a59a1865cf7b187dae2e863f98d769827b8f095",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
