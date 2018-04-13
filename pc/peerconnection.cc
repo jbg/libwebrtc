@@ -1748,7 +1748,7 @@ void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
     std::string error = "CreateOffer called when PeerConnection is closed.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_STATE, std::move(error)));
     return;
   }
 
@@ -1756,7 +1756,7 @@ void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
     std::string error = "CreateOffer called with invalid options.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_PARAMETER, std::move(error)));
     return;
   }
 
@@ -1863,7 +1863,7 @@ void PeerConnection::CreateAnswer(
     std::string error = "CreateAnswer called with invalid constraints.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_PARAMETER, std::move(error)));
     return;
   }
 
@@ -1885,7 +1885,7 @@ void PeerConnection::CreateAnswer(CreateSessionDescriptionObserver* observer,
         "have-remote-offer or have-local-pranswer.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_STATE, std::move(error)));
     return;
   }
 
