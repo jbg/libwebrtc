@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9d06d4cd_bb19e4f5",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "Unfortunately it\u0027s forbidden",
+      "parentUuid": "a6f18944_9c122f5a",
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08e06581_b6bb5c49",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 12
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "ba04d080_9585b962",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "Because of bool SwapQueue::Remove(T* output) RTC_WARN_UNUSED_RESULT.\n                                             ^\nWorkaround: log something that, if happens, would be quite weird.",
+      "parentUuid": "08e06581_b6bb5c49",
+      "range": {
+        "startLine": 822,
+        "startChar": 7,
+        "endLine": 822,
+        "endChar": 8
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c5c9447_fb391e9e",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 12
@@ -56,6 +98,24 @@
       "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ef2cedc_4867b30b",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "Ok for now, but what if we want to ignore a message type? Let me know if you want me to leave without NOTREACHED",
+      "parentUuid": "6c5c9447_fb391e9e",
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "f0eb7df4_bfb55d9a",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "054a678c_22295041",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 157,
+        "endChar": 40
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdb38f4f_80af11d0",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 12
@@ -102,6 +186,30 @@
       "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c36f98c_b90ea1e4",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "It makes explicit that we should use another ctor; I usually delete the stuff that is never used to avoid misuses. But in this case the class is just a helper with private visibility, so no need to be picky.",
+      "parentUuid": "cdb38f4f_80af11d0",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 26
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "36a056ef_6038a2f6",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c16949fe_bb2dc7f1",
+      "range": {
+        "startLine": 307,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 22
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fba4618e_3f92f0fb",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 9
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "I don\u0027t think we should write code that we won\u0027t use in the near future but I for sure think that we should write the code in a way that scales for the future. And we should not write code in a way we know we\u0027ll need to change if we have a good alternative to that.\n\nI don\u0027t see how passing the value by reference violates any consistency. The benefit of the construct with returning the values using an output parameter is that we\u0027d not need to annotate the methods by what the return type is.",
       "parentUuid": "5d22a1b9_864c9c87",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0594db6_6d0c2b39",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-13T15:42:59Z",
+      "side": 1,
+      "message": "From https://google.github.io/styleguide/cppguide.html#Output_Parameters:\n\"Prefer using return values instead of output parameters since they improve readability and oftentimes provide the same or better performance.\"\n\nAnd from https://google.github.io/styleguide/cppguide.html#Function_Overloading:\n\"Use overloaded functions (including constructors) only if a reader looking at a call site can get a good idea of what is happening without having to first figure out exactly which overload is being called.\"\n\nThese style guide paragraphs are not hard constraints, so we can opt for void GetValue(float*) or alternatively for void GetFloat(float*). My personal preference is to leave as it is now, but feel free to make the final decision.",
+      "parentUuid": "66789d8f_27881b8f",
       "range": {
         "startLine": 316,
         "startChar": 10,
