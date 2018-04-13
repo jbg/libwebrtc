@@ -58,8 +58,7 @@ void SetFrameData(int16_t data, AudioFrame* frame) {
 
 void VerifyFramesAreEqual(const AudioFrame& frame1, const AudioFrame& frame2) {
   EXPECT_EQ(frame1.num_channels_, frame2.num_channels_);
-  EXPECT_EQ(frame1.samples_per_channel_,
-            frame2.samples_per_channel_);
+  EXPECT_EQ(frame1.samples_per_channel_, frame2.samples_per_channel_);
   const int16_t* frame1_data = frame1.data();
   const int16_t* frame2_data = frame2.data();
   for (size_t i = 0; i < frame1.samples_per_channel_ * frame1.num_channels_;
@@ -350,11 +349,13 @@ TEST_F(AudioFrameOperationsTest, MuteDisabled) {
 TEST_F(AudioFrameOperationsTest, MuteEnabled) {
   SetFrameData(1000, -1000, &frame_);
   AudioFrameOperations::Mute(&frame_, true, true);
+  ASSERT_TRUE(frame_.muted());
 
   AudioFrame muted_frame;
   muted_frame.samples_per_channel_ = frame_.samples_per_channel_;
   muted_frame.num_channels_ = frame_.num_channels_;
   ASSERT_TRUE(muted_frame.muted());
+  muted_frame.mutable_data();
   VerifyFramesAreEqual(muted_frame, frame_);
 }
 

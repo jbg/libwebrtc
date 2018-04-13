@@ -265,6 +265,11 @@ TEST(AudioStateTest,
   EXPECT_CALL(fake_source, GetAudioFrameWithInfo(testing::_, testing::_))
       .WillOnce(
           testing::Invoke([](int sample_rate_hz, AudioFrame* audio_frame) {
+            // Ensure that the frame's data is initialized if it's not muted
+            // otherwise we may try to access uninitialized data due to the way
+            // the test works.
+            if (audio_frame->muted())
+              audio_frame->mutable_data();
             audio_frame->sample_rate_hz_ = sample_rate_hz;
             audio_frame->samples_per_channel_ = sample_rate_hz / 100;
             audio_frame->num_channels_ = kNumberOfChannels;

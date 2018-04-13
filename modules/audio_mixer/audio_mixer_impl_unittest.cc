@@ -38,6 +38,8 @@ constexpr int kDefaultSampleRateHz = 48000;
 // Utility function that resets the frame member variables with
 // sensible defaults.
 void ResetFrame(AudioFrame* frame) {
+  frame->ResetWithoutMuting();
+  frame->mutable_data();
   frame->sample_rate_hz_ = kDefaultSampleRateHz;
   frame->num_channels_ = 1;
 
@@ -521,6 +523,7 @@ TEST(AudioMixer, AnyRateIsPossibleWithNoLimiter) {
 
         std::vector<MockMixerAudioSource> sources(number_of_sources);
         for (auto& source : sources) {
+          ResetFrame(source.fake_frame());
           mixer->AddSource(&source);
         }
 

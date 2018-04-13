@@ -45,6 +45,7 @@ TEST(AudioProcessingImplTest, AudioParameterChangeTriggersInit) {
   mock.Initialize();
 
   AudioFrame frame;
+  frame.mutable_data();  // Initialize the internal buffer.
   // Call with the default parameters; there should be an init.
   frame.num_channels_ = 1;
   SetFrameSampleRate(&frame, 16000);

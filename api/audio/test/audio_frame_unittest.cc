@@ -37,7 +37,10 @@ constexpr size_t kSamplesPerChannel = kSampleRateHz / 100;
 TEST(AudioFrameTest, FrameStartsMuted) {
   AudioFrame frame;
   EXPECT_TRUE(frame.muted());
-  EXPECT_TRUE(AllSamplesAre(0, frame));
+#if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
+  // |data()| Can't be touched without first providing data to the frame.
+  EXPECT_DEATH(frame.data(), "");
+#endif
 }
 
 TEST(AudioFrameTest, UnmutedFrameIsInitiallyZeroed) {

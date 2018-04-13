@@ -46,7 +46,7 @@ class UtilityTest : public ::testing::Test {
 // used so non-integer values result in rounding error, but not an accumulating
 // error.
 void SetMonoFrame(float data, int sample_rate_hz, AudioFrame* frame) {
-  frame->Mute();
+  frame->ResetWithoutMuting();
   frame->num_channels_ = 1;
   frame->sample_rate_hz_ = sample_rate_hz;
   frame->samples_per_channel_ = rtc::CheckedDivExact(sample_rate_hz, 100);
@@ -67,7 +67,7 @@ void SetStereoFrame(float left,
                     float right,
                     int sample_rate_hz,
                     AudioFrame* frame) {
-  frame->Mute();
+  frame->ResetWithoutMuting();
   frame->num_channels_ = 2;
   frame->sample_rate_hz_ = sample_rate_hz;
   frame->samples_per_channel_ = rtc::CheckedDivExact(sample_rate_hz, 100);
@@ -91,7 +91,7 @@ void SetQuadFrame(float ch1,
                   float ch4,
                   int sample_rate_hz,
                   AudioFrame* frame) {
-  frame->Mute();
+  frame->ResetWithoutMuting();
   frame->num_channels_ = 4;
   frame->sample_rate_hz_ = sample_rate_hz;
   frame->samples_per_channel_ = rtc::CheckedDivExact(sample_rate_hz, 100);
