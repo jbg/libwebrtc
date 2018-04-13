@@ -120,6 +120,8 @@ GoogCcNetworkController::GoogCcNetworkController(RtcEventLog* event_log,
       accepted_queue_ms_(kDefaultAcceptedQueueMs) {
   delay_based_bwe_->SetMinBitrate(congestion_controller::GetMinBitrateBps());
   UpdateBitrateConstraints(config.constraints, config.starting_bandwidth);
+  // TODO(srte): OnStreamsConfig should not be called in the constructor as the
+  // returned update will be ignored.
   OnStreamsConfig(config.stream_based_config);
   if (in_cwnd_experiment_ &&
       !ReadCwndExperimentParameter(&accepted_queue_ms_)) {
@@ -226,7 +228,7 @@ NetworkControlUpdate GoogCcNetworkController::OnStreamsConfig(
     pacing_changed = true;
   }
   NetworkControlUpdate update;
-  if (pacing_changed)
+  if (pacing_changed && last_estimate_.has_value())
     update.pacer_config = UpdatePacingRates(msg.at_time);
   return update;
 }
