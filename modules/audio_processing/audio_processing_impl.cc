@@ -379,6 +379,8 @@ AudioProcessingImpl::AudioProcessingImpl(
     NonlinearBeamformer* beamformer)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+      runtime_settings_(new SwapQueue<RuntimeSetting>(100)),
+      runtime_settings_enqueuer_(runtime_settings_.get()),
       high_pass_filter_impl_(new HighPassFilterImpl(this)),
       echo_control_factory_(std::move(echo_control_factory)),
       submodule_states_(!!capture_post_processor, !!render_pre_processor),
@@ -795,6 +797,33 @@ void AudioProcessingImpl::set_output_will_be_muted(bool muted) {
   }
 }
 
+void AudioProcessingImpl::SetRuntimeSetting(RuntimeSetting setting) {
+  RTC_DCHECK(setting.type() != RuntimeSetting::Type::kNotSpecified);
+  runtime_settings_enqueuer_.Enqueue(setting);
+}
+
+AudioProcessingImpl::RuntimeSettingEnqueuer::RuntimeSettingEnqueuer(
+    SwapQueue<RuntimeSetting>* runtime_settings)
+    : runtime_settings_(runtime_settings) {
+  RTC_DCHECK(runtime_settings_);
+}
+
+AudioProcessingImpl::RuntimeSettingEnqueuer::~RuntimeSettingEnqueuer() =
+    default;
+
+void AudioProcessingImpl::RuntimeSettingEnqueuer::Enqueue(
+    RuntimeSetting setting) {
+  size_t remaining_attempts = 10;
+  while (!runtime_settings_->Insert(&setting) && remaining_attempts-- > 0) {
+    RTC_LOG(LS_ERROR)
+        << "The runtime settings queue is full. Discarding oldest setting.";
+    RuntimeSetting setting_to_discard;
+    if (!runtime_settings_->Remove(&setting_to_discard))
+      RTC_LOG(LS_ERROR) << "The runtime settings queue is suddenly empty.";
+  }
+  if (remaining_attempts == 0)
+    RTC_LOG(LS_ERROR) << "Cannot enqueue a new runtime setting.";
+}
 
 int AudioProcessingImpl::ProcessStream(const float* const* src,
                                        size_t samples_per_channel,
@@ -875,6 +904,21 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
     RecordProcessedCaptureStream(dest);
   }
   return kNoError;
+}
+
+void AudioProcessingImpl::HandleRuntimeSettings() {
+  RuntimeSetting setting;
+  while (runtime_settings_->Remove(&setting)) {
+    RTC_DCHECK(setting.type() != RuntimeSetting::Type::kNotSpecified);
+    switch (setting.type()) {
+      case RuntimeSetting::Type::kUpdateCapturePreGain:
+        // TODO(bugs.chromium.org/p/webrtc/issues/detail?id=9138): Notify
+        // pre-gain when the sub-module is implemented.
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 void AudioProcessingImpl::QueueBandedRenderAudio(AudioBuffer* audio) {
@@ -1131,6 +1175,8 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
 }
 
 int AudioProcessingImpl::ProcessCaptureStreamLocked() {
+  HandleRuntimeSettings();
+
   // Ensure that not both the AEC and AECM are active at the same time.
   // TODO(peah): Simplify once the public API Enable functions for these
   // are moved to APM.
