@@ -104,6 +104,24 @@
       "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8db82e09_3aac3e24",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-13T14:44:03Z",
+      "side": 1,
+      "message": "Heh, this is obvious when I see it :) Sorry.",
+      "parentUuid": "22822afd_cb54de05",
+      "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
