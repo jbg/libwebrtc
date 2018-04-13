@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "c16949fe_bb2dc7f1",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "I don\u0027t agree. The main purpose of a factory method is to simplify the usage of this class. Furthermore, even though there is only one use of this class now there are plans for using it for passing other values which means that ng  make sense to design for that.\n\nPayload validation is definitely something that should be added. For instance, for the pre-gain, it makes sense to DCHECK if a gain \u003c 1.f is provided. It may make sense to put some of these checks into APM but the ones we can do here we t as this clearly specifies the allowed parameter range close to the parameter definitions.\n\n\nRegarding simplicity:\nWithout factory methods the user must use the pattern\nRuntimeSetting setting(RuntimeSetting::kUpdateCapturePreGain , 0.7f);\n\nWith factory methods the used can use the pattern\nauto setting \u003d RuntimeSetting::CreatePreGainSetting(0.7f); \n\nI would definite argue that the latter is more readable and easier to use.",
+      "parentUuid": "621f2831_3a59919e",
+      "range": {
+        "startLine": 307,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 22
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fba4618e_3f92f0fb",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 9
@@ -281,6 +305,30 @@
       "revId": "e838d805227b71788a8e138388853d33f64e72df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66789d8f_27881b8f",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "I don\u0027t think we should write code that we won\u0027t use in the near future but I for sure think that we should write the code in a way that scales for the future. And we should not write code in a way we know we\u0027ll need to change if we have a good alternative to that.\n\nI don\u0027t see how passing the value by reference violates any consistency. The benefit of the construct with returning the values using an output parameter is that we\u0027d not need to annotate the methods by what the return type is.",
+      "parentUuid": "5d22a1b9_864c9c87",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {

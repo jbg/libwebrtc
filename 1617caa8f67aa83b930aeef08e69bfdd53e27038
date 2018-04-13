@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6f18944_9c122f5a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "To further increase the clarity that this is not accessing any of the state, I\u0027d prefer placing this implementation in the header file.",
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08e06581_b6bb5c49",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "I don\u0027t see why this check is needed. It is actually even expected to happen as there is another thread emptying the queue.\nI don\u0027t see any reason not to just have\nruntime_settings_-\u003eRemove(\u0026setting_to_discard);",
+      "range": {
+        "startLine": 822,
+        "startChar": 7,
+        "endLine": 822,
+        "endChar": 8
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c5c9447_fb391e9e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "Please add\nRTC_NOTREACHED(); for the default statement.",
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054a678c_22295041",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "I\u0027d rather phrase it as.\nClass providing a thread-safe messagepipe functionality for runtime_settings_.",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 157,
+        "endChar": 40
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdb38f4f_80af11d0",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-13T13:32:21Z",
+      "side": 1,
+      "message": "What is the purpose of deleting the constructors?",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 26
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
