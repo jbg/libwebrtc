@@ -394,6 +394,8 @@ class BbrNetworkController : public NetworkControllerInterface {
   TimeDelta min_rtt_since_last_probe_rtt_ = TimeDelta::PlusInfinity();
   UpdateState last_update_state_;
 
+  bool before_first_process_ = true;
+
   RTC_DISALLOW_COPY_AND_ASSIGN(BbrNetworkController);
 };
 

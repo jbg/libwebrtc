@@ -15,7 +15,9 @@ rtc_static_library("bbr") {
   ]
   deps = [
     ":bbr_controller",
+    "../../../rtc_base:checks",
     "../../../rtc_base:rtc_base_approved",
+    "../../../system_wrappers:field_trial_api",
     "../network_control",
   ]
 }
