@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "a388d5bf_f78fa267",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-13T14:39:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ecae316_a13b9c6d",
+      "range": {
+        "startLine": 226,
+        "startChar": 43,
+        "endLine": 226,
+        "endChar": 69
+      },
+      "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "613aa43a_837ba0cb",
         "filename": "modules/video_coding/video_codec_initializer.cc",
         "patchSetId": 3
@@ -62,6 +86,24 @@
       "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22822afd_cb54de05",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-13T14:39:27Z",
+      "side": 1,
+      "message": "We have such check in L234. We don\u0027t need another check before updating min/max bitrate thresholds since no_spatial_layering is True only if number of spatial layers is 1.",
+      "parentUuid": "613aa43a_837ba0cb",
+      "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
