@@ -20,6 +20,7 @@
 #include "common_audio/signal_processing/include/signal_processing_library.h"
 #include "modules/audio_processing/aec/aec_core.h"
 #include "modules/audio_processing/agc/agc_manager_direct.h"
+#include "modules/audio_processing/agc2/gain_applier.h"
 #include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/beamformer/nonlinear_beamformer.h"
 #include "modules/audio_processing/common.h"
@@ -312,6 +313,7 @@ struct AudioProcessingImpl::ApmPrivateSubmodules {
   std::unique_ptr<EchoControl> echo_controller;
   std::unique_ptr<CustomProcessing> capture_post_processor;
   std::unique_ptr<CustomProcessing> render_pre_processor;
+  std::unique_ptr<GainApplier> pre_amplifier;
 };
 
 AudioProcessingBuilder::AudioProcessingBuilder() = default;
@@ -712,6 +714,7 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
     config_.gain_controller2 = AudioProcessing::Config::GainController2();
   }
   InitializeGainController2();
+  InitializePreAmplifier();
   private_submodules_->gain_controller2->ApplyConfig(config_.gain_controller2);
   RTC_LOG(LS_INFO) << "Gain Controller 2 activated: "
                    << config_.gain_controller2.enabled;
@@ -1142,6 +1145,12 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   MaybeUpdateHistograms();
 
   AudioBuffer* capture_buffer = capture_.capture_audio.get();  // For brevity.
+
+  if (private_submodules_->pre_amplifier) {
+    private_submodules_->pre_amplifier->ApplyGain(AudioFrameView<float>(
+        capture_buffer->channels_f(), capture_buffer->num_channels(),
+        capture_buffer->num_frames()));
+  }
 
   capture_input_rms_.Analyze(rtc::ArrayView<const int16_t>(
       capture_buffer->channels_const()[0],
@@ -1788,6 +1797,15 @@ void AudioProcessingImpl::InitializeEchoController() {
 void AudioProcessingImpl::InitializeGainController2() {
   if (config_.gain_controller2.enabled) {
     private_submodules_->gain_controller2->Initialize(proc_sample_rate_hz());
+  }
+}
+
+void AudioProcessingImpl::InitializePreAmplifier() {
+  if (config_.pre_amplifier.enabled) {
+    private_submodules_->pre_amplifier.reset(
+        new GainApplier(true, config_.pre_amplifier.fixed_gain_factor));
+  } else {
+    private_submodules_->pre_amplifier.reset();
   }
 }
 
