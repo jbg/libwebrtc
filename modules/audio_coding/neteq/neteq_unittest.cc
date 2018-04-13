@@ -1402,6 +1402,7 @@ TEST_F(NetEqDecodingTestWithMutedState, MutedState) {
   // should be correct, though.
   AudioFrame new_frame;
   int16_t* frame_data = new_frame.mutable_data();
+  ASSERT_FALSE(new_frame.muted());
   for (size_t i = 0; i < AudioFrame::kMaxDataSizeSamples; i++) {
     frame_data[i] = 17;
   }
@@ -1410,7 +1411,7 @@ TEST_F(NetEqDecodingTestWithMutedState, MutedState) {
   EXPECT_TRUE(muted);
   EXPECT_TRUE(out_frame_.muted());
   for (size_t i = 0; i < AudioFrame::kMaxDataSizeSamples; i++) {
-    EXPECT_EQ(17, frame_data[i]);
+    ASSERT_EQ(17, frame_data[i]);
   }
   EXPECT_EQ(out_frame_.timestamp_ + out_frame_.samples_per_channel_,
             new_frame.timestamp_);
