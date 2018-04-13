@@ -35,6 +35,10 @@ BitrateAllocation SvcRateAllocator::GetAllocation(uint32_t total_bitrate_bps,
   size_t num_temporal_layers = codec_.VP9().numberOfTemporalLayers;
   RTC_CHECK(num_temporal_layers > 0);
 
+  if (codec_.maxBitrate != 0) {
+    total_bitrate_bps = std::min(total_bitrate_bps, codec_.maxBitrate * 1000);
+  }
+
   if (codec_.mode == kScreensharing) {
     // At screen sharing bitrate allocation is handled by VP9 encoder wrapper.
     bitrate_allocation.SetBitrate(0, 0, total_bitrate_bps);
