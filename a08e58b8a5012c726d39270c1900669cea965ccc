@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da455af6_c224cd82",
+        "filename": "modules/congestion_controller/network_control/units/data_rate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-04-13T22:27:36Z",
+      "side": 1,
+      "message": "Nit:\nMaking this a constant would make me feel more confident that this was correct and will remain correct going into the future.\n\nWould possibly lead to an integer overflow if someone left out a 0 in a future change.",
+      "range": {
+        "startLine": 17,
+        "startChar": 66,
+        "endLine": 17,
+        "endChar": 73
+      },
+      "revId": "a08e58b8a5012c726d39270c1900669cea965ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ca5aebe_adbdd001",
+        "filename": "modules/congestion_controller/network_control/units/data_rate_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-04-13T22:27:36Z",
+      "side": 1,
+      "message": "nit: Test a failure condition for division.",
+      "revId": "a08e58b8a5012c726d39270c1900669cea965ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
