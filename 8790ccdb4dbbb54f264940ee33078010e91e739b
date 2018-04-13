@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69cabd35_ed6db8ba",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-04-13T12:36:33Z",
+      "side": 1,
+      "message": "These should not be needed anymore I guess.",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 7
+      },
+      "revId": "8790ccdb4dbbb54f264940ee33078010e91e739b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6b7d5e6_e0b34b55",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-04-13T12:36:33Z",
+      "side": 1,
+      "message": "Should these encoders be included in the framework, even if not used by the default codec factory, for people who want to inject them? In that case, this target should depend on the vp8 and vp9 targets instead. If not, these files should be dropped from this target.",
+      "range": {
+        "startLine": 867,
+        "startChar": 0,
+        "endLine": 874,
+        "endChar": 9
+      },
+      "revId": "8790ccdb4dbbb54f264940ee33078010e91e739b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
