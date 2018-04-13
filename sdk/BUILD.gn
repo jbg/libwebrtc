@@ -786,6 +786,7 @@ if (is_ios || is_mac) {
           ":videosource_objc",
           ":videotoolbox_objc",
           "../../system_wrappers:system_wrappers_default",
+          "../api/video_codecs:video_codecs_api",
           "../media:rtc_media_base",
           "../modules:module_api",
           "../modules/video_coding:video_codec_interface",

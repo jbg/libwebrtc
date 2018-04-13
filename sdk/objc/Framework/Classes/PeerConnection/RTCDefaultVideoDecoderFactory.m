@@ -11,26 +11,12 @@
 #import "WebRTC/RTCVideoCodecFactory.h"
 
 #import "WebRTC/RTCVideoCodecH264.h"
-#if defined(USE_BUILTIN_SW_CODECS)
-#import "WebRTC/RTCVideoDecoderVP8.h"  // nogncheck
-#if !defined(RTC_DISABLE_VP9)
-#import "WebRTC/RTCVideoDecoderVP9.h"  // nogncheck
-#endif
-#endif
 
 @implementation RTCDefaultVideoDecoderFactory
 
 - (id<RTCVideoDecoder>)createDecoder:(RTCVideoCodecInfo *)info {
   if ([info.name isEqualToString:kRTCVideoCodecH264Name]) {
     return [[RTCVideoDecoderH264 alloc] init];
-#if defined(USE_BUILTIN_SW_CODECS)
-  } else if ([info.name isEqualToString:kRTCVideoCodecVp8Name]) {
-    return [RTCVideoDecoderVP8 vp8Decoder];
-#if !defined(RTC_DISABLE_VP9)
-  } else if ([info.name isEqualToString:kRTCVideoCodecVp9Name]) {
-    return [RTCVideoDecoderVP9 vp9Decoder];
-#endif
-#endif
   }
 
   return nil;
@@ -39,12 +25,6 @@
 - (NSArray<RTCVideoCodecInfo *> *)supportedCodecs {
   return @[
     [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name],
-#if defined(USE_BUILTIN_SW_CODECS)
-    [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp8Name],
-#if !defined(RTC_DISABLE_VP9)
-    [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp9Name],
-#endif
-#endif
   ];
 }
 

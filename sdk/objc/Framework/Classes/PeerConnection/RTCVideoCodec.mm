@@ -50,11 +50,6 @@ NSString *const kRTCLevel31ConstrainedBaseline = @"42e01f";
   return [self initWithName:[NSString stringForStdString:format.name] parameters:params];
 }
 
-- (instancetype)initWithNativeVideoCodec:(cricket::VideoCodec)videoCodec {
-  return [self
-      initWithNativeSdpVideoFormat:webrtc::SdpVideoFormat(videoCodec.name, videoCodec.params)];
-}
-
 - (BOOL)isEqualToCodecInfo:(RTCVideoCodecInfo *)info {
   if (!info ||
       ![self.name isEqualToString:info.name] ||
@@ -85,16 +80,6 @@ NSString *const kRTCLevel31ConstrainedBaseline = @"42e01f";
   }
 
   return webrtc::SdpVideoFormat([NSString stdStringForString:_name], parameters);
-}
-
-- (cricket::VideoCodec)nativeVideoCodec {
-  cricket::VideoCodec codec([NSString stdStringForString:_name]);
-  for (NSString *paramKey in _parameters.allKeys) {
-    codec.SetParam([NSString stdStringForString:paramKey],
-                   [NSString stdStringForString:_parameters[paramKey]]);
-  }
-
-  return codec;
 }
 
 #pragma mark - NSCoding
