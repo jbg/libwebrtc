@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8e121d5_a738715c",
+        "filename": "modules/video_coding/codecs/vp9/svc_rate_allocator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-13T13:42:19Z",
+      "side": 1,
+      "message": "Min/max bitrates can match. E.g. https://cs.chromium.org/chromium/src/third_party/webrtc/video/picture_id_tests.cc?rcl\u003d3ef3bfc2aafa707985c9e9dcd4cfb6ccbc525628\u0026l\u003d275",
+      "range": {
+        "startLine": 69,
+        "startChar": 19,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
