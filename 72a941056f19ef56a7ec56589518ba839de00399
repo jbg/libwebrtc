@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b92a1e28_ec2f1796",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-04-13T11:44:15Z",
+      "side": 1,
+      "message": "Avoid abbreviation. To keep the first line short,maybe just \"Log SendSideCongestionController experiment\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "72a941056f19ef56a7ec56589518ba839de00399",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad3583d6_6ec175b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-04-13T11:44:15Z",
+      "side": 1,
+      "message": "nit: Missing final period.",
+      "range": {
+        "startLine": 11,
+        "startChar": 35,
+        "endLine": 11,
+        "endChar": 41
+      },
+      "revId": "72a941056f19ef56a7ec56589518ba839de00399",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
