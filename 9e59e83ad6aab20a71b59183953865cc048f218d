@@ -22,6 +22,46 @@
       "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ecae316_a13b9c6d",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-13T14:23:29Z",
+      "side": 1,
+      "message": "I\u0027d prefer to put this in brackets.",
+      "range": {
+        "startLine": 226,
+        "startChar": 43,
+        "endLine": 226,
+        "endChar": 69
+      },
+      "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "613aa43a_837ba0cb",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-13T14:23:29Z",
+      "side": 1,
+      "message": "RTC_DCHECK(!spatial_layers.empty());",
+      "revId": "9e59e83ad6aab20a71b59183953865cc048f218d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
