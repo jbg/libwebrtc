@@ -110,6 +110,31 @@ struct NtDeNt {
 };
 static_assert(!sanitizer_impl::IsTriviallyCopyable<NtDeNt>(), "");
 
+// TODO(alessiob): Remove.
+struct ChunkHeader {
+  uint32_t ID;
+  uint32_t Size;
+};
+struct RiffHeader {
+  ChunkHeader header;
+  uint32_t Format;
+};
+struct FmtSubchunk {
+  ChunkHeader header;
+  uint16_t AudioFormat;
+  uint16_t NumChannels;
+  uint32_t SampleRate;
+  uint32_t ByteRate;
+  uint16_t BlockAlign;
+  uint16_t BitsPerSample;
+};
+struct WavHeader {
+  RiffHeader riff;
+  FmtSubchunk fmt;
+  ChunkHeader data_header;
+};
+static_assert(sanitizer_impl::IsTriviallyCopyable<WavHeader>(), "");
+
 // Trivially copyable types.
 
 struct Foo {
