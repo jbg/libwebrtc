@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "651ce209_59c81203",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-04-13T10:19:06Z",
+      "side": 1,
+      "message": "almost the same as it was in neteq_rtpplay.cc except for this ToString(), where it was an override of operator\u003c\u003c",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 24
+      },
+      "revId": "07c4539e40b44143341e8120bc4eff63d6fc92e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
