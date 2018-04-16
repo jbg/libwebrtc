@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_CONGESTION_CONTROLLER_NETWORK_CONTROL_UNITS_DATA_SIZE_H_
-#define MODULES_CONGESTION_CONTROLLER_NETWORK_CONTROL_UNITS_DATA_SIZE_H_
+#ifndef API_UNITS_DATA_SIZE_H_
+#define API_UNITS_DATA_SIZE_H_
 
 #include <stdint.h>
 #include <cmath>
@@ -115,4 +115,4 @@ std::string ToString(const DataSize& value);
 
 }  // namespace webrtc
 
-#endif  // MODULES_CONGESTION_CONTROLLER_NETWORK_CONTROL_UNITS_DATA_SIZE_H_
+#endif  // API_UNITS_DATA_SIZE_H_
