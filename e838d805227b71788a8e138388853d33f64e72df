@@ -380,6 +380,30 @@
     },
     {
       "key": {
+        "uuid": "d6ba8d8c_a2896c7e",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-16T07:11:41Z",
+      "side": 1,
+      "message": "Thanks! I think you are right. Regardless of that the guideline is not strict in this I think the variant you propose is better than the other one in this case.",
+      "parentUuid": "f0594db6_6d0c2b39",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e595bcbd_1f5be225",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 9
