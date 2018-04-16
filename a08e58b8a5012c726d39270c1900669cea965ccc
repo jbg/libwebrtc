@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd717896_06cde4c4",
+        "filename": "modules/congestion_controller/network_control/units/data_rate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-16T09:09:44Z",
+      "side": 1,
+      "message": "I moved the operation to a separate helper function and made a constant for the limit.",
+      "parentUuid": "da455af6_c224cd82",
+      "range": {
+        "startLine": 17,
+        "startChar": 66,
+        "endLine": 17,
+        "endChar": 73
+      },
+      "revId": "a08e58b8a5012c726d39270c1900669cea965ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ca5aebe_adbdd001",
         "filename": "modules/congestion_controller/network_control/units/data_rate_unittest.cc",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "a08e58b8a5012c726d39270c1900669cea965ccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a01c527_71119c4e",
+        "filename": "modules/congestion_controller/network_control/units/data_rate_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-16T09:09:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ca5aebe_adbdd001",
+      "revId": "a08e58b8a5012c726d39270c1900669cea965ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
