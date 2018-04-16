@@ -72,5 +72,42 @@ TEST(DataRateTest, MathOperations) {
   EXPECT_EQ((size_a * kInt32Value).bytes_per_second(), kValueA * kInt32Value);
   EXPECT_EQ((size_a * kFloatValue).bytes_per_second(), kValueA * kFloatValue);
 }
+
+TEST(UnitConversionTest, DataRateAndDataSizeAndTimeDelta) {
+  const int64_t kValueA = 5;
+  const int64_t kValueB = 450;
+  const int64_t kValueC = 45000;
+  const TimeDelta delta_a = TimeDelta::seconds(kValueA);
+  const DataRate rate_b = DataRate::bytes_per_second(kValueB);
+  const DataSize size_c = DataSize::bytes(kValueC);
+  EXPECT_EQ((delta_a * rate_b).bytes(), kValueA * kValueB);
+  EXPECT_EQ((rate_b * delta_a).bytes(), kValueA * kValueB);
+  EXPECT_EQ((size_c / delta_a).bytes_per_second(), kValueC / kValueA);
+  EXPECT_EQ((size_c / rate_b).s(), kValueC / kValueB);
+}
+
+TEST(UnitConversionTest, FailsOnDivisionByZero) {
+  const DataSize non_zero_size = DataSize::bytes(100);
+  const DataSize zero_size = DataSize::Zero();
+  const DataRate zero_rate = DataRate::Zero();
+  const TimeDelta zero_delta = TimeDelta::Zero();
+
+  ASSERT_DEATH(non_zero_size / zero_rate, "");
+  ASSERT_DEATH(non_zero_size / zero_delta, "");
+  ASSERT_DEATH(zero_size / zero_rate, "");
+  ASSERT_DEATH(zero_size / zero_delta, "");
+}
+
+TEST(UnitConversionTest, FailsOnLargeSizeDivision) {
+  // Note that the failure is expected since the current implementation  is
+  // implementated in a way that does not support division of large sizes. If
+  // the implementation is changed, this test can safely be removed.
+  const DataSize large_size =
+      DataSize::bytes(std::numeric_limits<int64_t>::max() / 1000);
+  const DataRate data_rate = DataRate::bps(1);
+  const TimeDelta time_delta = TimeDelta::ms(1);
+  ASSERT_DEATH(large_size / data_rate, "");
+  ASSERT_DEATH(large_size / time_delta, "");
+}
 }  // namespace test
 }  // namespace webrtc
