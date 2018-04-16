@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef1854e_e499f4b3",
+        "filename": "modules/congestion_controller/bbr/bbr_network_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-04-16T13:59:39Z",
+      "side": 1,
+      "message": "It seems this CL makes it log state periodically *in addition* to every update. I thought the intent was to log state less often?",
+      "range": {
+        "startLine": 248,
+        "startChar": 2,
+        "endLine": 248,
+        "endChar": 9
+      },
+      "revId": "4be1fbf4aa19ed986b6a3649fd39999c90c864a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
