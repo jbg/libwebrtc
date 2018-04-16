@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7d9c7eb_70a8f8e8",
+        "filename": "sdk/android/api/org/webrtc/VideoFrame.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-16T11:07:16Z",
+      "side": 1,
+      "message": "Let\u0027s try to move towards keeping this file just an interface.",
+      "range": {
+        "startLine": 104,
+        "startChar": 32,
+        "endLine": 104,
+        "endChar": 38
+      },
+      "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31d0bd7b_8f06ff6b",
+        "filename": "sdk/android/src/java/org/webrtc/TextureBufferImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-16T11:07:16Z",
+      "side": 1,
+      "message": "@Nullable?",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "999dc28d_affaa90c",
+        "filename": "sdk/android/src/java/org/webrtc/TextureBufferImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-16T11:07:16Z",
+      "side": 1,
+      "message": "These are @Nullable?",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
