@@ -1074,7 +1074,8 @@ class VideoAnalyzer : public PacketReceiver,
   const int64_t start_ms_;
 };
 
-VideoQualityTest::VideoQualityTest()
+VideoQualityTest::VideoQualityTest(
+    std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory)
     : clock_(Clock::GetRealTimeClock()), receive_logs_(0), send_logs_(0) {
   payload_type_map_ = test::CallTest::payload_type_map_;
   RTC_DCHECK(payload_type_map_.find(kPayloadTypeH264) ==
@@ -1086,11 +1087,7 @@ VideoQualityTest::VideoQualityTest()
   payload_type_map_[kPayloadTypeH264] = webrtc::MediaType::VIDEO;
   payload_type_map_[kPayloadTypeVP8] = webrtc::MediaType::VIDEO;
   payload_type_map_[kPayloadTypeVP9] = webrtc::MediaType::VIDEO;
-}
 
-VideoQualityTest::VideoQualityTest(
-    std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory)
-    : VideoQualityTest() {
   fec_controller_factory_ = std::move(fec_controller_factory);
 }
 
@@ -1809,11 +1806,11 @@ void VideoQualityTest::CreateCapturers() {
 std::unique_ptr<test::LayerFilteringTransport>
 VideoQualityTest::CreateSendTransport() {
   return rtc::MakeUnique<test::LayerFilteringTransport>(
-      &task_queue_, params_.pipe, sender_call_.get(), kPayloadTypeVP8,
-      kPayloadTypeVP9, params_.video[0].selected_tl, params_.ss[0].selected_sl,
-      payload_type_map_, kVideoSendSsrcs[0],
-      static_cast<uint32_t>(kVideoSendSsrcs[0] + params_.ss[0].streams.size() -
-                            1));
+    &task_queue_, params_.pipe, sender_call_.get(), kPayloadTypeVP8,
+    kPayloadTypeVP9, params_.video[0].selected_tl, params_.ss[0].selected_sl,
+    payload_type_map_, kVideoSendSsrcs[0],
+    static_cast<uint32_t>(kVideoSendSsrcs[0] + params_.ss[0].streams.size() -
+                          1));
 }
 
 std::unique_ptr<test::DirectTransport>
