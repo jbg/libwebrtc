@@ -126,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "8d9793af_facb3937",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-16T08:16:44Z",
+      "side": 1,
+      "message": "Fixed as per offline discussion.",
+      "parentUuid": "5a5881c1_a1e960e5",
+      "range": {
+        "startLine": 822,
+        "startChar": 7,
+        "endLine": 822,
+        "endChar": 8
+      },
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c5c9447_fb391e9e",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 12
@@ -173,6 +197,24 @@
       "side": 1,
       "message": "I don\u0027t see any case where we\u0027d want to ignore a message type. If we have a message type where the functionality is not mapped I think the least error-prone way is to add it to the switch statements but make the content empty (similarly to what is now done with kUpdateCapturePreGain.",
       "parentUuid": "0ef2cedc_4867b30b",
+      "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89919534_1d280304",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-16T08:16:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a660a33_1dddc05f",
       "revId": "1617caa8f67aa83b930aeef08e69bfdd53e27038",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false

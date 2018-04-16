@@ -404,6 +404,30 @@
     },
     {
       "key": {
+        "uuid": "b3f26235_8c2e2b5e",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-16T08:16:44Z",
+      "side": 1,
+      "message": "Fixed as per offline discussion.",
+      "parentUuid": "d6ba8d8c_a2896c7e",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "e838d805227b71788a8e138388853d33f64e72df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e595bcbd_1f5be225",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 9
