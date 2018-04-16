@@ -13,6 +13,7 @@ package org.webrtc;
 import android.graphics.Matrix;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
+import android.os.Handler;
 import java.nio.ByteBuffer;
 import javax.annotation.Nullable;
 
@@ -96,6 +97,17 @@ public class VideoFrame implements RefCounted {
    * Interface for buffers that are stored as a single texture, either in OES or RGB format.
    */
   public interface TextureBuffer extends Buffer {
+    /*
+     * Construct a texture buffer from the provided arguments, including a generic release callback.
+     * ToI420() is implemented by providing a Handler with an active EGL context and a YuvConverter.
+     */
+    public static TextureBuffer create(int width, int height, Type type, int id,
+        Matrix transformMatrix, Handler toI420Handler, YuvConverter yuvConverter,
+        @Nullable Runnable releaseCallback) {
+      return new TextureBufferImpl(
+          width, height, type, id, transformMatrix, toI420Handler, yuvConverter, releaseCallback);
+    }
+
     enum Type {
       OES(GLES11Ext.GL_TEXTURE_EXTERNAL_OES),
       RGB(GLES20.GL_TEXTURE_2D);
