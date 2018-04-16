@@ -120,6 +120,9 @@ rtc_static_library("audio_jni") {
   ]
 }
 
+# TODO(sakal): This native API is not ideal because it forces the client to
+# depend on all implementations even if only one is used. Split out to multiple
+# targets.
 rtc_source_set("native_api_audio_device_module") {
   visibility = [ "*" ]
 
@@ -228,7 +231,6 @@ rtc_source_set("java_audio_device_jni") {
     "src/jni/audio_device/audio_record_jni.h",
     "src/jni/audio_device/audio_track_jni.cc",
     "src/jni/audio_device/audio_track_jni.h",
-    "src/jni/audio_device/java_audio_device_module.cc",
   ]
   deps = [
     ":audio_device_base_jni",
@@ -263,7 +265,6 @@ generate_jni("generated_audio_device_base_jni") {
 
 generate_jni("generated_java_audio_device_jni") {
   sources = [
-    "api/org/webrtc/audio/JavaAudioDeviceModule.java",
     "src/java/org/webrtc/audio/WebRtcAudioRecord.java",
     "src/java/org/webrtc/audio/WebRtcAudioTrack.java",
   ]
@@ -609,7 +610,6 @@ rtc_static_library("peerconnection_jni") {
     ":base_jni",
     ":generated_external_classes_jni",
     ":generated_peerconnection_jni",
-    ":java_audio_device_jni",
     ":native_api_jni",
     "../..:webrtc_common",
     "../../api:libjingle_peerconnection_api",
@@ -635,6 +635,7 @@ rtc_static_library("libjingle_peerconnection_jni") {
   public_deps = [
     ":audio_jni",
     ":base_jni",
+    ":java_audio_jni",
     ":media_jni",
     ":peerconnection_jni",
     ":video_jni",
@@ -722,11 +723,13 @@ dist_jar("libwebrtc") {
   no_build_hooks = true
 
   deps = [
-    ":audio_java",
+    ":audio_api_java",
     ":base_java",
     ":camera_java",
     ":filevideo_java",
     ":hwcodecs_java",
+    ":java_audio_java",
+    ":legacy_audio_java",
     ":libjingle_peerconnection_java",
     ":libjingle_peerconnection_metrics_default_java",
     ":peerconnection_java",
@@ -798,11 +801,19 @@ rtc_android_library("video_api_java") {
   ]
 }
 
-rtc_android_library("audio_java") {
+rtc_android_library("audio_api_java") {
+  java_files = [ "api/org/webrtc/audio/AudioDeviceModule.java" ]
+
+  deps = [
+    ":base_java",
+    "//rtc_base:base_java",
+  ]
+}
+
+# TODO(sakal): Java files should be split to smaller packages, one for each implementation.
+rtc_android_library("java_audio_java") {
   java_files = [
-    "api/org/webrtc/audio/AudioDeviceModule.java",
     "api/org/webrtc/audio/JavaAudioDeviceModule.java",
-    "api/org/webrtc/audio/LegacyAudioDeviceModule.java",
     "src/java/org/webrtc/audio/VolumeLogger.java",
     "src/java/org/webrtc/audio/WebRtcAudioEffects.java",
     "src/java/org/webrtc/audio/WebRtcAudioManager.java",
@@ -812,9 +823,39 @@ rtc_android_library("audio_java") {
   ]
 
   deps = [
+    ":audio_api_java",
     ":base_java",
-    "//modules/audio_device:audio_device_java",
     "//rtc_base:base_java",
+  ]
+}
+
+# JNI target for java_audio_java
+rtc_source_set("java_audio_jni") {
+  sources = [
+    "src/jni/audio_device/java_audio_device_module.cc",
+  ]
+
+  deps = [
+    ":base_jni",
+    ":generated_java_audio_jni",
+    ":java_audio_device_jni",
+  ]
+}
+
+generate_jni("generated_java_audio_jni") {
+  sources = [
+    "api/org/webrtc/audio/JavaAudioDeviceModule.java",
+  ]
+  jni_package = ""
+  jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
+}
+
+rtc_android_library("legacy_audio_java") {
+  java_files = [ "api/org/webrtc/audio/LegacyAudioDeviceModule.java" ]
+
+  deps = [
+    ":audio_api_java",
+    "//modules/audio_device:audio_device_java",
   ]
 }
 
@@ -991,8 +1032,9 @@ rtc_android_library("peerconnection_java") {
   ]
 
   deps = [
-    ":audio_java",
+    ":audio_api_java",
     ":base_java",
+    ":legacy_audio_java",
     ":video_api_java",
     ":video_java",  # TODO(sakal): Remove dependency.
     "//rtc_base:base_java",
@@ -1005,10 +1047,13 @@ rtc_android_library("libjingle_peerconnection_java") {
   java_files = [ "src/java/org/webrtc/Empty.java" ]
 
   deps = [
+    ":audio_api_java",
     ":base_java",
     ":camera_java",
     ":filevideo_java",
     ":hwcodecs_java",
+    ":java_audio_java",
+    ":legacy_audio_java",
     ":peerconnection_java",
     ":screencapturer_java",
     ":surfaceviewrenderer_java",
