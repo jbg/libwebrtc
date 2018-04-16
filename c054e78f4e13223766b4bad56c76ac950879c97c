@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a77691c_e5d86aff",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-16T13:19:28Z",
+      "side": 1,
+      "message": "Since you are switching on an enum, you can depend a bit more on the compiler here. If you _omit_ the default case, the compiler will warn if any of the enum values are not handled. So, I suggest:\n\n // Skip the initial DCHECK.\n switch (settings.type()) {\n   case RuntimeSetting::Type::kCapturePreGain:\n     ... \n     break;\n   case RuntimeSetting::Type::kNotSpecified:\n     RTC_NOTREACHED();\n     break;\n }\n\nThis looks basically the same, but when someone adds a new value to the enum, the compiler will immediately point out that this switch statement needs attention.",
+      "range": {
+        "startLine": 911,
+        "startChar": 4,
+        "endLine": 920,
+        "endChar": 5
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9666961d_94fe80f4",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-16T13:19:28Z",
+      "side": 1,
+      "message": "Can you avoid the pointer here and just make runtime_setings_ a SwapQueue?",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 17
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9560647_6ca2febc",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-16T13:19:28Z",
+      "side": 1,
+      "message": "Will the pointer ever change? Make it const? Or even better, make it a ref instead.\n\n explicit RuntimeSettingEnqueuer(SwapQueue\u003cRuntimeSetting\u003e* runtime_settings)\n     : runtime_settings_(*runtime_settings) {\n   RTC_DCHECK(runtime_settings);\n }",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 13
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5457882d_69b051d9",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-16T13:19:28Z",
+      "side": 1,
+      "message": "Did you consider making this a struct instead of a class? See https://google.github.io/styleguide/cppguide.html#Structs_vs._Classes.",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 307,
+        "endChar": 7
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
