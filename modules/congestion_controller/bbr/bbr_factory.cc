@@ -10,12 +10,25 @@
 
 #include "modules/congestion_controller/bbr/bbr_factory.h"
 #include <memory>
+#include <string>
 
 #include "modules/congestion_controller/bbr/bbr_network_controller.h"
 #include "rtc_base/ptr_util.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
-
+namespace {
+const char kBbrLogInterval[] = "WebRTC-BweBbrLogInterval";
+TimeDelta GetLogInterval() {
+  std::string trial_string = webrtc::field_trial::FindFullName(kBbrLogInterval);
+  int custom_interval_ms_;
+  if (sscanf(trial_string.c_str(), "Enabled,%d", &custom_interval_ms_) == 1) {
+    RTC_LOG(LS_INFO) << "Using custom log interval: " << custom_interval_ms_;
+    return TimeDelta::ms(custom_interval_ms_);
+  }
+  return TimeDelta::seconds(10);
+}
+}  // namespace
 BbrNetworkControllerFactory::BbrNetworkControllerFactory() {}
 
 std::unique_ptr<NetworkControllerInterface> BbrNetworkControllerFactory::Create(
@@ -24,7 +37,7 @@ std::unique_ptr<NetworkControllerInterface> BbrNetworkControllerFactory::Create(
 }
 
 TimeDelta BbrNetworkControllerFactory::GetProcessInterval() const {
-  return TimeDelta::PlusInfinity();
+  return GetLogInterval();
 }
 
 }  // namespace webrtc

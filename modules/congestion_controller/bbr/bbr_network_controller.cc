@@ -245,14 +245,14 @@ NetworkControlUpdate BbrNetworkController::CreateRateUpdate(Timestamp at_time) {
   last_update_state_.target_rate = target_rate;
   last_update_state_.probing_for_bandwidth = probing_for_bandwidth;
 
-  RTC_LOG(LS_INFO) << "RateUpdate, mode: " << ModeToString(mode_)
-                   << ", bw: " << ToString(bandwidth)
-                   << ", min_rtt: " << ToString(rtt)
-                   << ", last_rtt: " << ToString(last_rtt_)
-                   << ", pacing_rate: " << ToString(pacing_rate)
-                   << ", target_rate: " << ToString(target_rate)
-                   << ", Probing:" << probing_for_bandwidth
-                   << ", pacing_gain: " << pacing_gain_;
+  RTC_LOG(LS_VERBOSE) << "RateUpdate, mode: " << ModeToString(mode_)
+                      << ", bw: " << ToString(bandwidth)
+                      << ", min_rtt: " << ToString(rtt)
+                      << ", last_rtt: " << ToString(last_rtt_)
+                      << ", pacing_rate: " << ToString(pacing_rate)
+                      << ", target_rate: " << ToString(target_rate)
+                      << ", Probing:" << probing_for_bandwidth
+                      << ", pacing_gain: " << pacing_gain_;
 
   NetworkControlUpdate update;
 
@@ -307,7 +307,20 @@ NetworkControlUpdate BbrNetworkController::OnNetworkRouteChange(
 
 NetworkControlUpdate BbrNetworkController::OnProcessInterval(
     ProcessInterval msg) {
-  return CreateRateUpdate(msg.at_time);
+  if (before_first_process_) {
+    before_first_process_ = false;
+    return CreateRateUpdate(msg.at_time);
+  }
+  RTC_LOG(LS_INFO) << "mode: " << ModeToString(mode_)
+                   << ", bw: " << ToString(last_update_state_.bandwidth)
+                   << ", min_rtt: " << ToString(last_update_state_.rtt)
+                   << ", last_rtt: " << ToString(last_rtt_) << ", pacing_rate: "
+                   << ToString(last_update_state_.pacing_rate)
+                   << ", target_rate: "
+                   << ToString(last_update_state_.target_rate)
+                   << ", Probing:" << last_update_state_.probing_for_bandwidth
+                   << ", pacing_gain: " << pacing_gain_;
+  return NetworkControlUpdate();
 }
 
 NetworkControlUpdate BbrNetworkController::OnStreamsConfig(StreamsConfig msg) {
@@ -545,9 +558,9 @@ bool BbrNetworkController::UpdateMinRtt(Timestamp ack_time,
        (min_rtt_timestamp_ + TimeDelta::seconds(kMinRttExpirySeconds)));
 
   if (min_rtt_expired || sample_rtt < min_rtt_ || min_rtt_.IsZero()) {
-    RTC_LOG(LS_INFO) << "Min RTT updated, old value: " << ToString(min_rtt_)
-                     << ", new value: " << ToString(sample_rtt)
-                     << ", current time: " << ToString(ack_time);
+    RTC_LOG(LS_VERBOSE) << "Min RTT updated, old value: " << ToString(min_rtt_)
+                        << ", new value: " << ToString(sample_rtt)
+                        << ", current time: " << ToString(ack_time);
 
     if (ShouldExtendMinRttExpiry()) {
       min_rtt_expired = false;
@@ -700,7 +713,7 @@ void BbrNetworkController::MaybeEnterOrExitProbeRtt(
     // Do not decide on the time to exit PROBE_RTT until the |bytes_in_flight|
     // is at the target small value.
     exit_probe_rtt_at_ = Timestamp();
-    RTC_LOG(LS_INFO) << "Entering RTT Probe";
+    RTC_LOG(LS_VERBOSE) << "Entering RTT Probe";
   }
 
   if (mode_ == PROBE_RTT) {
@@ -722,7 +735,7 @@ void BbrNetworkController::MaybeEnterOrExitProbeRtt(
       }
       if (msg.feedback_time >= exit_probe_rtt_at_ && probe_rtt_round_passed_) {
         min_rtt_timestamp_ = msg.feedback_time;
-        RTC_LOG(LS_INFO) << "Exiting RTT Probe";
+        RTC_LOG(LS_VERBOSE) << "Exiting RTT Probe";
         if (!is_at_full_bandwidth_) {
           EnterStartupMode();
         } else {
