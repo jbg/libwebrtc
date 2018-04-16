@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d7b93ff7_6636faba",
+        "filename": "sdk/android/api/org/webrtc/VideoFrame.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-16T11:31:45Z",
+      "side": 1,
+      "message": "Ok, I\u0027m going to make TextureBufferImpl public instead then.",
+      "parentUuid": "a7d9c7eb_70a8f8e8",
+      "range": {
+        "startLine": 104,
+        "startChar": 32,
+        "endLine": 104,
+        "endChar": 38
+      },
+      "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31d0bd7b_8f06ff6b",
         "filename": "sdk/android/src/java/org/webrtc/TextureBufferImpl.java",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d4e858e5_72cbd98f",
+        "filename": "sdk/android/src/java/org/webrtc/TextureBufferImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-16T11:31:45Z",
+      "side": 1,
+      "message": "No, this class is now in the api and requires these to be non-null to properly implement the interface. I know we pass in null in the legacy path that is awaiting removal. I rather not make this nullable in the api and keep status quo until we can clean the legacy path up. The null checker is not triggering on this anyway for some reason.",
+      "parentUuid": "31d0bd7b_8f06ff6b",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "999dc28d_affaa90c",
         "filename": "sdk/android/src/java/org/webrtc/TextureBufferImpl.java",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd6cd257_59b3c27e",
+        "filename": "sdk/android/src/java/org/webrtc/TextureBufferImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-16T11:31:45Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "999dc28d_affaa90c",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "22fe17b3bdee755ebdaa5baf16897c4853c3d8cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
