@@ -509,8 +509,6 @@ rtc_source_set("test_common") {
     "constants.h",
     "drifting_clock.cc",
     "drifting_clock.h",
-    "encoder_settings.cc",
-    "encoder_settings.h",
     "fake_decoder.cc",
     "fake_decoder.h",
     "fake_encoder.cc",
@@ -531,6 +529,12 @@ rtc_source_set("test_common") {
     sources += [
       "run_loop.cc",
       "run_loop.h",
+    ]
+  }
+  if (rtc_use_builtin_sw_codecs) {
+    sources += [
+      "encoder_settings.cc",
+      "encoder_settings.h",
     ]
   }
 
@@ -562,7 +566,6 @@ rtc_source_set("test_common") {
     "../common_video",
     "../logging:rtc_event_log_api",
     "../logging:rtc_event_log_impl_base",
-    "../media:rtc_internal_video_codecs",
     "../media:rtc_media_base",
     "../modules/audio_device",
     "../modules/audio_device:audio_device_impl",
@@ -576,8 +579,7 @@ rtc_source_set("test_common") {
     "../modules/video_coding:video_coding_utility",
     "../modules/video_coding:webrtc_h264",
     "../modules/video_coding:webrtc_multiplex",
-    "../modules/video_coding:webrtc_vp8",
-    "../modules/video_coding:webrtc_vp9",
+    "../modules/video_coding:webrtc_vp8_helpers",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_task_queue",
@@ -590,6 +592,12 @@ rtc_source_set("test_common") {
   ]
   if (!is_android && !build_with_chromium) {
     deps += [ "../modules/video_capture:video_capture_internal_impl" ]
+  }
+  if (rtc_use_builtin_sw_codecs) {
+    deps += [
+      "../media:rtc_internal_video_codecs",
+      "../modules/video_coding:webrtc_vp9",
+    ]
   }
 }
 

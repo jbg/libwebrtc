@@ -306,7 +306,6 @@ if (rtc_include_tests) {
       "encoder_rtcp_feedback_unittest.cc",
       "end_to_end_tests/bandwidth_tests.cc",
       "end_to_end_tests/call_operation_tests.cc",
-      "end_to_end_tests/codec_tests.cc",
       "end_to_end_tests/config_tests.cc",
       "end_to_end_tests/extended_reports_tests.cc",
       "end_to_end_tests/fec_tests.cc",
@@ -324,7 +323,6 @@ if (rtc_include_tests) {
       "end_to_end_tests/transport_feedback_tests.cc",
       "overuse_frame_detector_unittest.cc",
       "payload_router_unittest.cc",
-      "picture_id_tests.cc",
       "quality_threshold_unittest.cc",
       "receive_statistics_proxy_unittest.cc",
       "report_block_stats_unittest.cc",
@@ -334,9 +332,15 @@ if (rtc_include_tests) {
       "stats_counter_unittest.cc",
       "stream_synchronization_unittest.cc",
       "video_receive_stream_unittest.cc",
-      "video_send_stream_tests.cc",
       "video_stream_encoder_unittest.cc",
     ]
+    if (rtc_use_builtin_sw_codecs) {
+      sources += [
+        "end_to_end_tests/codec_tests.cc",
+        "picture_id_tests.cc",
+        "video_send_stream_tests.cc",
+      ]
+    }
     deps = [
       ":video",
       "../api:optional",
@@ -368,7 +372,6 @@ if (rtc_include_tests) {
       "../modules/video_coding:webrtc_h264",
       "../modules/video_coding:webrtc_multiplex",
       "../modules/video_coding:webrtc_vp8_helpers",
-      "../modules/video_coding:webrtc_vp9",
       "../rtc_base:checks",
       "../rtc_base:rate_limiter",
       "../rtc_base:rtc_base_approved",
@@ -399,6 +402,9 @@ if (rtc_include_tests) {
     }
     if (!build_with_mozilla) {
       deps += [ "../media:rtc_media_base" ]
+    }
+    if (rtc_use_builtin_sw_codecs) {
+      deps += [ "../modules/video_coding:webrtc_vp9" ]
     }
   }
 }

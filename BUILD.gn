@@ -40,29 +40,18 @@ if (!build_with_chromium) {
     if (rtc_include_tests) {
       deps += [
         ":rtc_unittests",
-        ":video_engine_tests",
         ":webrtc_nonparallel_tests",
-        ":webrtc_perf_tests",
         "common_audio:common_audio_unittests",
         "common_video:common_video_unittests",
-        "media:rtc_media_unittests",
-        "modules:modules_tests",
-        "modules:modules_unittests",
         "modules/audio_coding:audio_coding_tests",
         "modules/audio_processing:audio_processing_tests",
         "modules/remote_bitrate_estimator:bwe_simulations_tests",
         "modules/rtp_rtcp:test_packet_masks_metrics",
         "modules/video_capture:video_capture_internal_impl",
-        "ortc:ortc_unittests",
-        "pc:peerconnection_unittests",
-        "pc:rtc_pc_unittests",
         "rtc_base:rtc_base_tests_utils",
         "stats:rtc_stats_unittests",
         "system_wrappers:system_wrappers_unittests",
         "test",
-        "video:screenshare_loopback",
-        "video:sv_loopback",
-        "video:video_loopback",
       ]
       if (is_android) {
         deps += [
@@ -73,9 +62,24 @@ if (!build_with_chromium) {
         deps += [ "modules/video_capture:video_capture_tests" ]
       }
       if (rtc_enable_protobuf) {
+        if (rtc_use_builtin_sw_codecs) {
+          deps += [ "audio:low_bandwidth_audio_test" ]
+        }
+        deps += [ "logging:rtc_event_log2rtp_dump" ]
+      }
+      if (rtc_use_builtin_sw_codecs) {
         deps += [
-          "audio:low_bandwidth_audio_test",
-          "logging:rtc_event_log2rtp_dump",
+          ":video_engine_tests",
+          ":webrtc_perf_tests",
+          "media:rtc_media_unittests",
+          "modules:modules_tests",
+          "modules:modules_unittests",
+          "ortc:ortc_unittests",
+          "pc:peerconnection_unittests",
+          "pc:rtc_pc_unittests",
+          "video:screenshare_loopback",
+          "video:sv_loopback",
+          "video:video_loopback",
         ]
       }
     }

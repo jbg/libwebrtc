@@ -484,7 +484,6 @@ if (rtc_include_tests) {
     }
 
     deps += [
-      ":rtc_internal_video_codecs",
       ":rtc_media",
       ":rtc_media_base",
       "..:webrtc_common",
@@ -500,6 +499,9 @@ if (rtc_include_tests) {
       "../test:test_support",
       "//testing/gtest",
     ]
+    if (rtc_use_builtin_sw_codecs) {
+      deps += [ ":rtc_internal_video_codecs" ]
+    }
   }
 
   config("rtc_media_unittests_config") {
@@ -569,20 +571,25 @@ if (rtc_include_tests) {
       "base/videocapturer_unittest.cc",
       "base/videocommon_unittest.cc",
       "engine/apm_helpers_unittest.cc",
-      "engine/internaldecoderfactory_unittest.cc",
-      "engine/multiplexcodecfactory_unittest.cc",
       "engine/nullwebrtcvideoengine_unittest.cc",
       "engine/payload_type_mapper_unittest.cc",
-      "engine/simulcast_encoder_adapter_unittest.cc",
       "engine/simulcast_unittest.cc",
-      "engine/videodecodersoftwarefallbackwrapper_unittest.cc",
       "engine/videoencodersoftwarefallbackwrapper_unittest.cc",
-      "engine/vp8_encoder_simulcast_proxy_unittest.cc",
       "engine/webrtcmediaengine_unittest.cc",
       "engine/webrtcvideocapturer_unittest.cc",
       "engine/webrtcvideoencoderfactory_unittest.cc",
-      "engine/webrtcvideoengine_unittest.cc",
     ]
+
+    if (rtc_use_builtin_sw_codecs) {
+      sources += [
+        "engine/internaldecoderfactory_unittest.cc",
+        "engine/multiplexcodecfactory_unittest.cc",
+        "engine/simulcast_encoder_adapter_unittest.cc",
+        "engine/videodecodersoftwarefallbackwrapper_unittest.cc",
+        "engine/vp8_encoder_simulcast_proxy_unittest.cc",
+        "engine/webrtcvideoengine_unittest.cc",
+      ]
+    }
 
     # TODO(kthelgason): Reenable this test on iOS.
     # See bugs.webrtc.org/5569
@@ -634,7 +641,6 @@ if (rtc_include_tests) {
     }
 
     deps += [
-      ":rtc_internal_video_codecs",
       ":rtc_media",
       ":rtc_media_base",
       ":rtc_media_tests_utils",
@@ -666,5 +672,8 @@ if (rtc_include_tests) {
       "../test:test_support",
       "../test:video_test_common",
     ]
+    if (rtc_use_builtin_sw_codecs) {
+      deps += [ ":rtc_internal_video_codecs" ]
+    }
   }
 }
