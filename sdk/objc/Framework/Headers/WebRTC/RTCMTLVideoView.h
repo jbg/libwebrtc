@@ -35,5 +35,7 @@ RTC_EXPORT
 
 @property(nonatomic, weak) id<RTCVideoRendererDelegate> delegate;
 
+- (void)setContentMode:(UIViewContentMode)mode;
+
 @end
 NS_ASSUME_NONNULL_END
