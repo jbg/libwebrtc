@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "60fe5a61_c1e30b37",
+        "filename": "modules/audio_processing/agc2/rnn_vad/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-17T11:14:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ed674501_c9ddf6b3",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72e51eef_ad633106",
         "filename": "modules/audio_processing/agc2/rnn_vad/BUILD.gn",
         "patchSetId": 6
@@ -277,6 +301,30 @@
         "startChar": 6,
         "endLine": 54,
         "endChar": 12
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fad21ef_18ce36c6",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-17T11:14:13Z",
+      "side": 1,
+      "message": "Yay :-)",
+      "parentUuid": "f18fbe93_2dac4fa7",
+      "range": {
+        "startLine": 54,
+        "startChar": 12,
+        "endLine": 54,
+        "endChar": 13
       },
       "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
