@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "23c5121e_66cbbaeb",
+        "filename": "modules/audio_processing/agc2/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Right",
+      "parentUuid": "a255fadd_db237600",
+      "range": {
+        "startLine": 46,
+        "startChar": 5,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54595863_0b3829ce",
         "filename": "modules/audio_processing/agc2/rnn_vad/BUILD.gn",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed674501_c9ddf6b3",
+        "filename": "modules/audio_processing/agc2/rnn_vad/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Would you mind if for the time being I leave as it is now and then write a final CL to polish BUILD.gn? I will also have to isolate the RNN and the feature extractor and make the rest visible only locally and to do this I will have to add another target. So I would prefer to have a final look at names when all the code is landed. Is it ok for you?",
+      "parentUuid": "54595863_0b3829ce",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2c3b6187_7a4cd960",
+        "filename": "modules/audio_processing/agc2/rnn_vad/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72e51eef_ad633106",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 20,
+        "endChar": 70
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06f1ac8d_8c099c9b",
         "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
         "patchSetId": 6
@@ -91,6 +163,30 @@
       "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f7d0110_664a246d",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Right, it only works in debug mode. rtc::LogMessage::LogToDebug(rtc::LS_INFO) added.",
+      "parentUuid": "06f1ac8d_8c099c9b",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 20
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,54 @@
     },
     {
       "key": {
+        "uuid": "f18fbe93_2dac4fa7",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edfc04f1_6d9a5e7b",
+      "range": {
+        "startLine": 54,
+        "startChar": 12,
+        "endLine": 54,
+        "endChar": 13
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44c3b31b_3a4a1179",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9120fc0_69557312",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 12
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6cee5a5f_ec7842d3",
         "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
         "patchSetId": 6
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "0b7fa231_59c04419",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Good catch, left over from the previous version which only accepted 48k sample rates.",
+      "parentUuid": "6cee5a5f_ec7842d3",
+      "range": {
+        "startLine": 63,
+        "startChar": 20,
+        "endLine": 63,
+        "endChar": 29
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd2020d4_af6accc0",
         "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
         "patchSetId": 6
@@ -174,6 +342,30 @@
       "writtenOn": "2018-04-17T08:56:41Z",
       "side": 1,
       "message": "Braces are fantastically great!",
+      "range": {
+        "startLine": 72,
+        "startChar": 38,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb25b070_975a2542",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd2020d4_af6accc0",
       "range": {
         "startLine": 72,
         "startChar": 38,
@@ -206,6 +398,30 @@
       "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7eece1f_635ac750",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_tool.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T09:41:54Z",
+      "side": 1,
+      "message": "Because we don\u0027t want to update the RNN state when there is silence.",
+      "parentUuid": "d0745380_dcecac60",
+      "range": {
+        "startLine": 92,
+        "startChar": 25,
+        "endLine": 92,
+        "endChar": 34
+      },
+      "revId": "29a495f81e8ed919d58963a79fd9d27ed18622cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
