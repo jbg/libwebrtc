@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f7059e7_9b4ec63c",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-04-17T08:19:31Z",
+      "side": 1,
+      "message": "Where in the spec does it say you should throw this exception? I don\u0027t find it.\nI suppose it should be thrown if the dictionary isn\u0027t a valid dictionary, but ValidateOfferAnswerOptions is something else?",
+      "revId": "01a60bbd1d902b5d1a91d22d0b8b73cadeaccb4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e08163f2_095ab23e",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1866,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-04-17T08:19:31Z",
+      "side": 1,
+      "message": "Same question as above.",
+      "revId": "01a60bbd1d902b5d1a91d22d0b8b73cadeaccb4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
