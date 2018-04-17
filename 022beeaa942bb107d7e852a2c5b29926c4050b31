@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c0040357_f9ff64d4",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-04-17T11:36:27Z",
+      "side": 1,
+      "message": "Sorry, I wasn\u0027t clear. I was thinking of the std::memmove that I guess should be declared in \u003ccstring\u003e.",
+      "parentUuid": "5e85794a_4bfb42f0",
+      "revId": "022beeaa942bb107d7e852a2c5b29926c4050b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e4cce97_4e9143bb",
         "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
         "patchSetId": 4
