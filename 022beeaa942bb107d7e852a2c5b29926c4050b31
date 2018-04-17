@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "8e4cce97_4e9143bb",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-17T09:41:33Z",
+      "side": 1,
+      "message": "Return ArrayView\u003cconst T, S\u003e for more type safety. Same below.",
+      "range": {
+        "startLine": 45,
+        "startChar": 16,
+        "endLine": 45,
+        "endChar": 25
+      },
+      "revId": "022beeaa942bb107d7e852a2c5b29926c4050b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4380e9f8_e29cf8dd",
         "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer_unittest.cc",
         "patchSetId": 4
