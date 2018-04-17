@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d93a9323_eb5d8988",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-04-17T12:18:19Z",
+      "side": 1,
+      "message": "Perhaps add call to super also",
+      "revId": "dad7f042313d86b0fed4452983415803d929b059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3d60b70_282ff7fa",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCMTLVideoView.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-04-17T12:18:19Z",
+      "side": 1,
+      "message": "`UIView` already has a contentMode property so this should be redundant",
+      "revId": "dad7f042313d86b0fed4452983415803d929b059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
