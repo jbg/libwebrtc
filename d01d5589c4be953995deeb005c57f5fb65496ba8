@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "154e611e_5d3e7364",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-17T12:17:05Z",
+      "side": 1,
+      "message": "Yes, even though the unused implementations will hopefully be stripped out. As you may have noticed, it\u0027s actually more than three different ADMs since it\u0027s possible to combine different inputs and outputs, e.g. OpenSLES output and Java input. Can we split this BUILD file up and get more encapsulation since it\u0027s now over 1000 lines and it\u0027s starting to be incomprehensible?",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0b3ac7d_472cb11f",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-17T12:17:05Z",
+      "side": 1,
+      "message": "The interface is a thin wrapper on top of a native ADM and is only added for Android PeerConnectionFactory API users. Native clients can target the native API directly and there will be no use of this file outside the PeerConnectionFactory API, so can we merge it in that target instead?",
+      "range": {
+        "startLine": 805,
+        "startChar": 18,
+        "endLine": 805,
+        "endChar": 61
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91ec4ffc_a64bcf92",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-17T12:17:05Z",
+      "side": 1,
+      "message": "This is only one implementation.",
+      "range": {
+        "startLine": 813,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 91
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "124767ef_c51eafc8",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-17T12:17:05Z",
+      "side": 1,
+      "message": "LegacyAudioDeviceModule is a temporary class while we introduce the new ADM. What\u0027s the benefit of having a separate target for it instead of having it in the peerconnection target during the time we need to have backwards compatibility?",
+      "range": {
+        "startLine": 853,
+        "startChar": 21,
+        "endLine": 853,
+        "endChar": 38
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
