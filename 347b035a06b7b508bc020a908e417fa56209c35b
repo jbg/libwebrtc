@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e65f3b7b_4281ed1d",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-04-17T09:48:49Z",
+      "side": 0,
+      "message": "removed this getter function since, as the purpose of this CL, it is better to output a time for each stats query. then the interval is only a settable guideline rather than fact.",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 33
+      },
+      "revId": "347b035a06b7b508bc020a908e417fa56209c35b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
