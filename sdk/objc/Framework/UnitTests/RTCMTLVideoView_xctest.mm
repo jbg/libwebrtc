@@ -11,6 +11,7 @@
 #import <XCTest/XCTest.h>
 
 #import <Foundation/Foundation.h>
+#import <MetalKit/MetalKit.h>
 #import <OCMock/OCMock.h>
 
 #include <WebRTC/RTCMTLVideoView.h>
@@ -194,6 +195,19 @@
   [realView drawInMTKView:nil];
   [self.rendererNV12Mock verify];
   [self.classMock verify];
+}
+
+- (void)testSetContentMode {
+  OCMStub([self.classMock isMetalAvailable]).andReturn(YES);
+  id metalKitView = OCMClassMock([MTKView class]);
+  [[[[self.classMock stub] ignoringNonObjectArgs] andReturn:metalKitView]
+      createMetalView:CGRectZero];
+  OCMExpect([metalKitView setContentMode:UIViewContentModeScaleAspectFill]);
+
+  RTCMTLVideoView *realView = [[RTCMTLVideoView alloc] init];
+  [realView setContentMode:UIViewContentModeScaleAspectFill];
+
+  OCMVerify(metalKitView);
 }
 
 @end

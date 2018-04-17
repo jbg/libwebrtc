@@ -33,5 +33,7 @@ NS_CLASS_AVAILABLE_IOS(9)
 RTC_EXPORT
 @interface RTCMTLVideoView : UIView <RTCVideoRenderer>
 
+- (void)setContentMode:(UIViewContentMode)mode;
+
 @end
 NS_ASSUME_NONNULL_END

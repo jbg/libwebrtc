@@ -94,6 +94,10 @@
   }
 }
 
+- (void)setContentMode:(UIViewContentMode)mode {
+  _metalView.contentMode = mode;
+}
+
 #pragma mark - Private
 
 - (void)layoutSubviews {
