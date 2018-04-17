@@ -67,6 +67,8 @@ class AecDumpImpl : public AecDump {
 
   void WriteConfig(const InternalAPMConfig& config) override;
 
+  void WriteRuntimeSetting(const RuntimeSetting& runtime_setting) override;
+
  private:
   std::unique_ptr<WriteToFileTask> CreateWriteToFileTask();
 

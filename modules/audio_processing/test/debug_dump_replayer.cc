@@ -73,6 +73,10 @@ bool DebugDumpReplayer::RunNextEvent() {
     case audioproc::Event::CONFIG:
       OnConfigEvent(next_event_.config());
       break;
+    case audioproc::Event::RUNTIME_SETTING:
+      // TODO(aleloi) fix before upload!
+      OnRuntimeSettingEvent(next_event_.runtime_setting());
+      break;
     case audioproc::Event::UNKNOWN_EVENT:
       // We do not expect to receive UNKNOWN event.
       return false;
@@ -167,6 +171,14 @@ void DebugDumpReplayer::OnConfigEvent(const audioproc::Config& msg) {
   ConfigureApm(msg);
 }
 
+void DebugDumpReplayer::OnRuntimeSettingEvent(
+    const audioproc::RuntimeSetting& msg) {
+  RTC_CHECK(apm_.get());
+  RTC_CHECK(msg.has_capture_pre_gain());
+  apm_->SetRuntimeSetting(
+      RuntimeSetting::CreateCapturePreGain(msg.capture_pre_gain()));
+}
+
 void DebugDumpReplayer::MaybeRecreateApm(const audioproc::Config& msg) {
   // These configurations cannot be changed on the fly.
   Config config;
@@ -259,6 +271,11 @@ void DebugDumpReplayer::ConfigureApm(const audioproc::Config& msg) {
   RTC_CHECK_EQ(AudioProcessing::kNoError,
                apm_->noise_suppression()->set_level(
                    static_cast<NoiseSuppression::Level>(msg.ns_level())));
+
+  RTC_CHECK(msg.has_pre_amplifier_enabled());
+  apm_config.pre_amplifier.enabled = msg.pre_amplifier_enabled();
+  apm_config.pre_amplifier.fixed_gain_factor =
+      msg.pre_amplifier_fixed_gain_factor();
 
   apm_->ApplyConfig(apm_config);
 }
