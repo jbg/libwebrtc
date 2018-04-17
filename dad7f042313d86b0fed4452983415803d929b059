@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "17eb9c37_b8d78aff",
+        "filename": "sdk/objc/Framework/Classes/Metal/RTCMTLVideoView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-04-17T13:59:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d93a9323_eb5d8988",
+      "revId": "dad7f042313d86b0fed4452983415803d929b059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3d60b70_282ff7fa",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCMTLVideoView.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "dad7f042313d86b0fed4452983415803d929b059",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4dda78e_a6742260",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCMTLVideoView.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-04-17T13:59:22Z",
+      "side": 1,
+      "message": "Hmm, maybe I should name this something else. It\u0027s really about setting the video view\u0027s content mode, and this naming might be confusing.",
+      "parentUuid": "a3d60b70_282ff7fa",
+      "revId": "dad7f042313d86b0fed4452983415803d929b059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
