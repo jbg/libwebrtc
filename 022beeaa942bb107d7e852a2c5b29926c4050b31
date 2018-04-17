@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5e85794a_4bfb42f0",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T10:56:46Z",
+      "side": 1,
+      "message": "Nope, right? What have you seen that needs cstring? I didn\u0027t see any warning from the presubmit checks.",
+      "parentUuid": "ce675ac8_0ad1e22a",
+      "revId": "022beeaa942bb107d7e852a2c5b29926c4050b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e4cce97_4e9143bb",
         "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "ff54aacf_d0c86b5f",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T10:56:46Z",
+      "side": 1,
+      "message": "Below it cannot be done because the size varies with the offset.",
+      "parentUuid": "8e4cce97_4e9143bb",
+      "range": {
+        "startLine": 45,
+        "startChar": 16,
+        "endLine": 45,
+        "endChar": 25
+      },
+      "revId": "022beeaa942bb107d7e852a2c5b29926c4050b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4380e9f8_e29cf8dd",
         "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer_unittest.cc",
         "patchSetId": 4
@@ -56,6 +98,24 @@
       "revId": "022beeaa942bb107d7e852a2c5b29926c4050b31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e084138_026bd65b",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-17T10:56:46Z",
+      "side": 1,
+      "message": "Oh good catch!",
+      "parentUuid": "4380e9f8_e29cf8dd",
+      "revId": "022beeaa942bb107d7e852a2c5b29926c4050b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
