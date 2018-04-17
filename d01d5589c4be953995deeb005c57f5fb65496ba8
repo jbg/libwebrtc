@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "55165ab6_70a4b284",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-17T14:57:32Z",
+      "side": 1,
+      "message": "Yes, I think we should split this file up. However since target names are practically part of the API, I would like to do that in a separate CL. I feel such CL has a high probability of being reverted and combining the changes would make this CL confusing.",
+      "parentUuid": "154e611e_5d3e7364",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0b3ac7d_472cb11f",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-04-17T12:17:05Z",
       "side": 1,
       "message": "The interface is a thin wrapper on top of a native ADM and is only added for Android PeerConnectionFactory API users. Native clients can target the native API directly and there will be no use of this file outside the PeerConnectionFactory API, so can we merge it in that target instead?",
+      "range": {
+        "startLine": 805,
+        "startChar": 18,
+        "endLine": 805,
+        "endChar": 61
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d545a8ff_01bd7a07",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-17T14:57:32Z",
+      "side": 1,
+      "message": "Native clients will still need Java files from java_audio_java, right? java_audio_java needs this interface and I don\u0027t want to force all native clients to include all the PeerConnection java code.",
+      "parentUuid": "b0b3ac7d_472cb11f",
       "range": {
         "startLine": 805,
         "startChar": 18,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9f3699d3_c6fcdb41",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-17T14:57:32Z",
+      "side": 1,
+      "message": "I meant this implementation is in the same target as the interface. I would like to move towards one target \u003d one package.",
+      "parentUuid": "91ec4ffc_a64bcf92",
+      "range": {
+        "startLine": 813,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 91
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "124767ef_c51eafc8",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0c0e9d3_010b1250",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-17T14:57:32Z",
+      "side": 1,
+      "message": "Yes, this can be merged with peerconnection_java. Done.",
+      "parentUuid": "124767ef_c51eafc8",
+      "range": {
+        "startLine": 853,
+        "startChar": 21,
+        "endLine": 853,
+        "endChar": 38
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
