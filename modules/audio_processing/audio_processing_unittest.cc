@@ -2821,14 +2821,14 @@ INSTANTIATE_TEST_CASE_P(
 }  // namespace
 
 TEST(RuntimeSettingTest, TestDefaultCtor) {
-  auto s = AudioProcessing::RuntimeSetting();
-  EXPECT_EQ(AudioProcessing::RuntimeSetting::Type::kNotSpecified, s.type());
+  auto s = RuntimeSetting();
+  EXPECT_EQ(RuntimeSetting::Type::kNotSpecified, s.type());
 }
 
 TEST(RuntimeSettingTest, TestCapturePreGain) {
-  using Type = AudioProcessing::RuntimeSetting::Type;
+  using Type = RuntimeSetting::Type;
   {
-    auto s = AudioProcessing::RuntimeSetting::CreateCapturePreGain(1.25f);
+    auto s = RuntimeSetting::CreateCapturePreGain(1.25f);
     EXPECT_EQ(Type::kCapturePreGain, s.type());
     float v;
     s.GetFloat(&v);
@@ -2836,16 +2836,16 @@ TEST(RuntimeSettingTest, TestCapturePreGain) {
   }
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
-  EXPECT_DEATH(AudioProcessing::RuntimeSetting::CreateCapturePreGain(0.1f), "");
+  EXPECT_DEATH(RuntimeSetting::CreateCapturePreGain(0.1f), "");
 #endif
 }
 
 TEST(RuntimeSettingTest, TestUsageWithSwapQueue) {
-  SwapQueue<AudioProcessing::RuntimeSetting> q(1);
-  auto s = AudioProcessing::RuntimeSetting();
+  SwapQueue<RuntimeSetting> q(1);
+  auto s = RuntimeSetting();
   ASSERT_TRUE(q.Insert(&s));
   ASSERT_TRUE(q.Remove(&s));
-  EXPECT_EQ(AudioProcessing::RuntimeSetting::Type::kNotSpecified, s.type());
+  EXPECT_EQ(RuntimeSetting::Type::kNotSpecified, s.type());
 }
 
 TEST(ApmConfiguration, EnablePostProcessing) {

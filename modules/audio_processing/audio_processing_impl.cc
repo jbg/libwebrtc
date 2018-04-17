@@ -918,6 +918,9 @@ void AudioProcessingImpl::HandleRuntimeSettings() {
   RuntimeSetting setting;
   while (runtime_settings_->Remove(&setting)) {
     RTC_DCHECK(setting.type() != RuntimeSetting::Type::kNotSpecified);
+    if (aec_dump_) {
+      aec_dump_->WriteRuntimeSetting(setting);
+    }
     switch (setting.type()) {
       case RuntimeSetting::Type::kCapturePreGain:
         if (config_.pre_amplifier.enabled) {

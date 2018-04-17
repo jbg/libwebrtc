@@ -29,6 +29,7 @@
 #include "modules/audio_processing/include/audio_generator.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
 #include "modules/audio_processing/include/config.h"
+#include "modules/audio_processing/include/runtime_setting.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/deprecation.h"
 #include "rtc_base/platform_file.h"
@@ -307,32 +308,6 @@ class AudioProcessing : public rtc::RefCountInterface {
     kMonoAndKeyboard,
     // Left, right, keyboard, and mic.
     kStereoAndKeyboard
-  };
-
-  // Specifies the properties of a setting to be passed to AudioProcessing at
-  // runtime.
-  class RuntimeSetting {
-   public:
-    enum class Type { kNotSpecified, kCapturePreGain };
-
-    RuntimeSetting() : type_(Type::kNotSpecified), value_(0.f) {}
-    ~RuntimeSetting() = default;
-
-    static RuntimeSetting CreateCapturePreGain(float gain) {
-      RTC_DCHECK_GE(gain, 1.f) << "Attenuation is not allowed.";
-      return {Type::kCapturePreGain, gain};
-    }
-
-    Type type() const { return type_; }
-    void GetFloat(float* value) const {
-      RTC_DCHECK(value);
-      *value = value_;
-    }
-
-   private:
-    RuntimeSetting(Type id, float value) : type_(id), value_(value) {}
-    Type type_;
-    float value_;
   };
 
   ~AudioProcessing() override {}

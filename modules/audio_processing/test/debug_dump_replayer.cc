@@ -73,6 +73,10 @@ bool DebugDumpReplayer::RunNextEvent() {
     case audioproc::Event::CONFIG:
       OnConfigEvent(next_event_.config());
       break;
+    case audioproc::Event::RUNTIME_SETTING:
+      // TODO(aleloi) fix before upload!
+      OnRuntimeSettingEvent(next_event_.runtime_setting());
+      break;
     case audioproc::Event::UNKNOWN_EVENT:
       // We do not expect to receive UNKNOWN event.
       return false;
@@ -165,6 +169,14 @@ void DebugDumpReplayer::OnReverseStreamEvent(
 void DebugDumpReplayer::OnConfigEvent(const audioproc::Config& msg) {
   MaybeRecreateApm(msg);
   ConfigureApm(msg);
+}
+
+void DebugDumpReplayer::OnRuntimeSettingEvent(
+    const audioproc::RuntimeSetting& msg) {
+  RTC_CHECK(apm_.get());
+  RTC_CHECK(msg.has_capture_pre_gain());
+  apm_->SetRuntimeSetting(
+      RuntimeSetting::CreateCapturePreGain(msg.capture_pre_gain()));
 }
 
 void DebugDumpReplayer::MaybeRecreateApm(const audioproc::Config& msg) {

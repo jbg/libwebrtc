@@ -110,8 +110,7 @@ TEST(AudioProcessingImplTest, UpdateCapturePreGainRuntimeSetting) {
       << "With factor 1, frame shouldn't be modified.";
 
   constexpr float gain_factor = 2.f;
-  apm->SetRuntimeSetting(
-      AudioProcessing::RuntimeSetting::CreateCapturePreGain(gain_factor));
+  apm->SetRuntimeSetting(RuntimeSetting::CreateCapturePreGain(gain_factor));
 
   // Process for two frames to have time to ramp up gain.
   for (int i = 0; i < 2; ++i) {
