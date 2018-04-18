@@ -187,19 +187,25 @@ bool AudioRtpSender::SetTrack(MediaStreamTrackInterface* track) {
   return true;
 }
 
-RtpParameters AudioRtpSender::GetParameters() const {
+RtpParameters AudioRtpSender::GetParameters() {
   if (!media_channel_ || stopped_) {
     return RtpParameters();
   }
   return worker_thread_->Invoke<RtpParameters>(RTC_FROM_HERE, [&] {
-    return media_channel_->GetRtpSendParameters(ssrc_);
+    RtpParameters result = media_channel_->GetRtpSendParameters(ssrc_);
+    last_transaction_id_ = rtc::CreateRandomUuid();
+    result.transaction_id = last_transaction_id_.value();
+    return result;
   });
 }
 
 RTCError AudioRtpSender::SetParameters(const RtpParameters& parameters) {
   TRACE_EVENT0("webrtc", "AudioRtpSender::SetParameters");
-  if (!media_channel_ || stopped_) {
+  if (!media_channel_ || stopped_ || !last_transaction_id_) {
     return RTCError(RTCErrorType::INVALID_STATE);
+  }
+  if (last_transaction_id_ != parameters.transaction_id) {
+    return RTCError(RTCErrorType::INVALID_MODIFICATION);
   }
   return worker_thread_->Invoke<RTCError>(RTC_FROM_HERE, [&] {
     return media_channel_->SetRtpSendParameters(ssrc_, parameters);
@@ -373,20 +379,27 @@ bool VideoRtpSender::SetTrack(MediaStreamTrackInterface* track) {
   return true;
 }
 
-RtpParameters VideoRtpSender::GetParameters() const {
+RtpParameters VideoRtpSender::GetParameters() {
   if (!media_channel_ || stopped_) {
     return RtpParameters();
   }
   return worker_thread_->Invoke<RtpParameters>(RTC_FROM_HERE, [&] {
-    return media_channel_->GetRtpSendParameters(ssrc_);
+    RtpParameters result = media_channel_->GetRtpSendParameters(ssrc_);
+    last_transaction_id_ = rtc::CreateRandomUuid();
+    result.transaction_id = last_transaction_id_.value();
+    return result;
   });
 }
 
 RTCError VideoRtpSender::SetParameters(const RtpParameters& parameters) {
   TRACE_EVENT0("webrtc", "VideoRtpSender::SetParameters");
-  if (!media_channel_ || stopped_) {
+  if (!media_channel_ || stopped_ || !last_transaction_id_) {
     return RTCError(RTCErrorType::INVALID_STATE);
   }
+  if (last_transaction_id_ != parameters.transaction_id) {
+    return RTCError(RTCErrorType::INVALID_MODIFICATION);
+  }
+
   return worker_thread_->Invoke<RTCError>(RTC_FROM_HERE, [&] {
     return media_channel_->SetRtpSendParameters(ssrc_, parameters);
   });
