@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11112e37_0846a7b1",
+        "filename": "modules/audio_processing/aec_dump/aec_dump_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "Following a comment I got from Henrik, for which I still have to add a CL to fix the consumer of runtime settings in APM, it\u0027s better to remove default so that the compiler complains if one or more enum values don\u0027t have a corresponding case statement in a switch.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 12
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee08d0d5_8d0b5d76",
+        "filename": "modules/audio_processing/debug.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "I\u0027m not a protobuf expert, but as far as I know we shouldn\u0027t do this otherwise we loose backward compatibility. UNKNOWN_EVENT should not change value, just add RUNTIME_SETTINGS \u003d 5.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 22
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7a8ddab_5b4bd71b",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "Why is it a member of APM config? I find this confusing because a runtime setting is something separate from a config passed at initialization time. Should we add instead a separate struct?",
+      "range": {
+        "startLine": 115,
+        "startChar": 15,
+        "endLine": 115,
+        "endChar": 34
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f050908_14b51783",
+        "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "I would add a TODO(bug...) explaining that as soon as we get additional types, this code changes structure. Or, even better, I would structure the code to already support multiple message types.\n\nAlso, I guess this method must support multiple runtime settings at once (because of RuntimeSetting in proto which is a collection of optional fields). This means that we won\u0027t have a switch and that we loose the nice compile-time feature reporting a warning (or even an error) if we don\u0027t look at all the possible cases. If you want, we can discuss offline to find an alternative that warns at compile time if sth is forgotten here.",
+      "range": {
+        "startLine": 570,
+        "startChar": 2,
+        "endLine": 570,
+        "endChar": 40
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68a4f9e3_2004ff80",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "What should be fixed here?",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 40
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b4e0f33_18dbc291",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "This method seems to add duplicated code (see AecDumpBasedSimulator::HandleMessage).\nIs this duplication necessary? Any way to avoid it? Let\u0027s maybe have an offline discussion.",
+      "range": {
+        "startLine": 174,
+        "startChar": 24,
+        "endLine": 174,
+        "endChar": 45
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67c76812_ff5c2eb0",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "I\u0027m ok with RTC_CHECKs, but make sure to check this with Per.",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 11
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "403cbf27_9e43f633",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "I don\u0027t see a similar member for AEC3, which has enable_aec3 in the ctor but not a class member.\nMake sure we\u0027re not breaking any convention used in this class.",
+      "range": {
+        "startLine": 115,
+        "startChar": 7,
+        "endLine": 115,
+        "endChar": 28
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46ddfed1_995cec1c",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-18T09:59:59Z",
+      "side": 1,
+      "message": "this is a way of generating periodic pre-gain values for testing right?",
+      "range": {
+        "startLine": 232,
+        "startChar": 67,
+        "endLine": 232,
+        "endChar": 77
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
