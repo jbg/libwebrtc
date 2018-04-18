@@ -18,6 +18,7 @@
 #include "api/array_view.h"
 #include "api/audio/audio_frame.h"
 #include "modules/audio_processing/include/audio_frame_view.h"
+#include "modules/audio_processing/include/runtime_setting.h"
 
 namespace webrtc {
 
@@ -109,6 +110,9 @@ class AecDump {
 
   // Logs Event::Type CONFIG message.
   virtual void WriteConfig(const InternalAPMConfig& config) = 0;
+
+  // Logs Event::Type RUNTIME_SETTING message.
+  virtual void WriteRuntimeSetting(const RuntimeSetting& runtime_setting) = 0;
 };
 }  // namespace webrtc
 
