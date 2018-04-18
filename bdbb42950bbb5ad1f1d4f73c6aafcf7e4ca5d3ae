@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52199943_0c5029cc",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-18T18:05:47Z",
+      "side": 1,
+      "message": "Can you specialize the error message for when there\u0027s no last transaction id?\n\nE.g., \"Failed to set parameters since GetParameters has never been called on this sender.\"",
+      "revId": "bdbb42950bbb5ad1f1d4f73c6aafcf7e4ca5d3ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4ae5fbf_5c19f2fd",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-18T18:05:47Z",
+      "side": 1,
+      "message": "Can you add an error message that prints the last transaction id and the parameters transaction id?\n\nAlso, I\u0027d recommend the macro LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION, \"error message\") since it will also output an error to the log.",
+      "revId": "bdbb42950bbb5ad1f1d4f73c6aafcf7e4ca5d3ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fca74ff_1e84e7e9",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-18T18:05:47Z",
+      "side": 1,
+      "message": "Same comments here about the error messages.",
+      "revId": "bdbb42950bbb5ad1f1d4f73c6aafcf7e4ca5d3ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4f9f3e7_9dca40a3",
+        "filename": "pc/rtpsenderreceiver_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-18T18:05:47Z",
+      "side": 1,
+      "message": "These .ok() checks are redundant. They just compare the error type to NONE but you already have a comparison of the error type below.",
+      "revId": "bdbb42950bbb5ad1f1d4f73c6aafcf7e4ca5d3ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5458ab56_d2be8fd4",
+        "filename": "pc/rtpsenderreceiver_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-18T18:05:47Z",
+      "side": 1,
+      "message": "What do you think about adding a test where:\n1. GetParameters() is called\n2. GetParameters() is called again\n3. SetParameters is called with the params from the first call.\n\nI imagine that\u0027s the end-to-end purpose of transaction ID.",
+      "revId": "bdbb42950bbb5ad1f1d4f73c6aafcf7e4ca5d3ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20b14b5f_edb0f7d5",
+        "filename": "pc/rtpsenderreceiver_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-18T18:05:47Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to be tested explicitly, but I also don\u0027t have a strong opinion about it.",
+      "revId": "bdbb42950bbb5ad1f1d4f73c6aafcf7e4ca5d3ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
