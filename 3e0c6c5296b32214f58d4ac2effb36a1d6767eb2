@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "760f1657_1d217265",
+        "filename": "modules/audio_processing/aec_dump/aec_dump_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11112e37_0846a7b1",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 12
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee08d0d5_8d0b5d76",
         "filename": "modules/audio_processing/debug.proto",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e2f3686_fd677618",
+        "filename": "modules/audio_processing/debug.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee08d0d5_8d0b5d76",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 22
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7a8ddab_5b4bd71b",
         "filename": "modules/audio_processing/include/aec_dump.h",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7d139bf_41f41b14",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "It\u0027s AecDump::WriteRuntimeConfig.",
+      "parentUuid": "a7a8ddab_5b4bd71b",
+      "range": {
+        "startLine": 115,
+        "startChar": 15,
+        "endLine": 115,
+        "endChar": 34
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "3fa468a2_982df50b",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "eh\n\nI think it\u0027s fixed now. Thanks! I think it was handling the event.",
+      "parentUuid": "68a4f9e3_2004ff80",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 40
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b4e0f33_18dbc291",
         "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
         "patchSetId": 4
@@ -128,6 +224,30 @@
       "writtenOn": "2018-04-18T09:59:59Z",
       "side": 1,
       "message": "This method seems to add duplicated code (see AecDumpBasedSimulator::HandleMessage).\nIs this duplication necessary? Any way to avoid it? Let\u0027s maybe have an offline discussion.",
+      "range": {
+        "startLine": 174,
+        "startChar": 24,
+        "endLine": 174,
+        "endChar": 45
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40ad14de_a0271dc3",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "Currently it\u0027s very difficult to avoid. Both \u0027DebugDumpReplayer\u0027 and \u0027AecDumpBasedSimulator\u0027 replays dumps. I think they could be merged, but it would take a big refactoring.",
+      "parentUuid": "4b4e0f33_18dbc291",
       "range": {
         "startLine": 174,
         "startChar": 24,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "92b14e69_15805b68",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "It\u0027s consistent with the rest of this file. I think it\u0027s always OK in test code.",
+      "parentUuid": "67c76812_ff5c2eb0",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 11
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "403cbf27_9e43f633",
         "filename": "modules/audio_processing/test/debug_dump_test.cc",
         "patchSetId": 4
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "130ae651_10c9f4db",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "The other ctor args are used in the beginning to set up APM. The pre-amplifier flag is used during the call to know if we should send messages.",
+      "parentUuid": "403cbf27_9e43f633",
+      "range": {
+        "startLine": 115,
+        "startChar": 7,
+        "endLine": 115,
+        "endChar": 28
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46ddfed1_995cec1c",
         "filename": "modules/audio_processing/test/debug_dump_test.cc",
         "patchSetId": 4
@@ -197,6 +365,30 @@
       "writtenOn": "2018-04-18T09:59:59Z",
       "side": 1,
       "message": "this is a way of generating periodic pre-gain values for testing right?",
+      "range": {
+        "startLine": 232,
+        "startChar": 67,
+        "endLine": 232,
+        "endChar": 77
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "565635ae_68a38c67",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-04-18T13:25:44Z",
+      "side": 1,
+      "message": "It\u0027s for sending different messages during APM processing. The periodicity is by accident.",
+      "parentUuid": "46ddfed1_995cec1c",
       "range": {
         "startLine": 232,
         "startChar": 67,
