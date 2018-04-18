@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7edd2b70_767cd8ee",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-04-18T16:27:53Z",
+      "side": 1,
+      "message": "Yeah, INTERNAL_ERROR (\u003dOperationError) is \"equally invalid\". It will return error if the option has value \u003e 1 or \u003c -1, which you can\u0027t get to from the IDL interface (which is undefined, true or false, which maps to -1, 1 or 0).\n\nSo I\u0027d say \"this error code is C++ only and not constrained by the spec, so let\u0027s throw something sensible\".",
+      "parentUuid": "6f7059e7_9b4ec63c",
+      "revId": "01a60bbd1d902b5d1a91d22d0b8b73cadeaccb4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e08163f2_095ab23e",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-04-17T08:19:31Z",
       "side": 1,
       "message": "Same question as above.",
+      "revId": "01a60bbd1d902b5d1a91d22d0b8b73cadeaccb4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb0a42ff_2d364b6b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1866,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-04-18T16:27:53Z",
+      "side": 1,
+      "message": "Same answer - this is the constraints version of the above, which Chrome doesn\u0027t use any more.",
+      "parentUuid": "e08163f2_095ab23e",
       "revId": "01a60bbd1d902b5d1a91d22d0b8b73cadeaccb4b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
