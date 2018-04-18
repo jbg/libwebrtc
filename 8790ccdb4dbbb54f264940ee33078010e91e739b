@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "854e181e_7e241320",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-18T06:40:43Z",
+      "side": 1,
+      "message": "I added them always instead so that the default codecs always have VP8/VP9 SW.",
+      "parentUuid": "69cabd35_ed6db8ba",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 7
+      },
+      "revId": "8790ccdb4dbbb54f264940ee33078010e91e739b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6b7d5e6_e0b34b55",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "8790ccdb4dbbb54f264940ee33078010e91e739b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c441630d_0a7e2ddf",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-18T06:40:43Z",
+      "side": 1,
+      "message": "I added them always instead. Clients who depend on the umbrella target will get everything.",
+      "parentUuid": "e6b7d5e6_e0b34b55",
+      "range": {
+        "startLine": 867,
+        "startChar": 0,
+        "endLine": 874,
+        "endChar": 9
+      },
+      "revId": "8790ccdb4dbbb54f264940ee33078010e91e739b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
