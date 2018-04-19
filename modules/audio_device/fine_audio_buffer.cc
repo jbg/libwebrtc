@@ -22,13 +22,16 @@ namespace webrtc {
 
 FineAudioBuffer::FineAudioBuffer(AudioDeviceBuffer* device_buffer,
                                  int sample_rate,
-                                 size_t capacity)
+                                 size_t capacity,
+                                 int channels)
     : device_buffer_(device_buffer),
       sample_rate_(sample_rate),
+      channels_(channels),
       samples_per_10_ms_(static_cast<size_t>(sample_rate_ * 10 / 1000)),
       playout_buffer_(0, capacity),
       record_buffer_(0, capacity) {
-  RTC_LOG(INFO) << "samples_per_10_ms_: " << samples_per_10_ms_;
+  RTC_LOG(INFO) << "samples per channel per 10ms: " << samples_per_10_ms_;
+  RTC_LOG(INFO) << "channels: " << channels_;
 }
 
 FineAudioBuffer::~FineAudioBuffer() {}
@@ -47,18 +50,17 @@ void FineAudioBuffer::GetPlayoutData(rtc::ArrayView<int16_t> audio_buffer,
   // fulfill the request. It is possible that the buffer already contains
   // enough samples from the last round.
   while (playout_buffer_.size() < audio_buffer.size()) {
-    // Get 10ms decoded audio from WebRTC.
+    // Get 10ms decoded audio from WebRTC. The ADB knows about number of
+    // channels; hence we can ask for number of samples per channel here.
     device_buffer_->RequestPlayoutData(samples_per_10_ms_);
     // Append |bytes_per_10_ms_| elements to the end of the buffer.
     const size_t samples_written = playout_buffer_.AppendData(
-        samples_per_10_ms_, [&](rtc::ArrayView<int16_t> buf) {
+        channels_ * samples_per_10_ms_, [&](rtc::ArrayView<int16_t> buf) {
           const size_t samples_per_channel =
               device_buffer_->GetPlayoutData(buf.data());
-          // TODO(henrika): this class is only used on mobile devices and is
-          // currently limited to mono. Modifications are needed for stereo.
-          return samples_per_channel;
+          return channels_ * samples_per_channel;
         });
-    RTC_DCHECK_EQ(samples_per_10_ms_, samples_written);
+    RTC_DCHECK_EQ(channels_ * samples_per_10_ms_, samples_written);
   }
 
   const size_t num_bytes = audio_buffer.size() * sizeof(int16_t);

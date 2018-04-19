@@ -25,6 +25,8 @@
 
 namespace webrtc {
 
+#define AUDIO_DEVICE_PLAYS_SINUS_TONE
+
 static const char kTimerQueueName[] = "AudioDeviceBufferTimer";
 
 // Time between two sucessive calls to LogStats().
@@ -356,9 +358,18 @@ int32_t AudioDeviceBuffer::GetPlayoutData(void* audio_buffer) {
   const double phase_increment =
       k2Pi * 440.0 / static_cast<double>(play_sample_rate_);
   int16_t* destination_r = reinterpret_cast<int16_t*>(audio_buffer);
-  for (size_t i = 0; i < play_buffer_.size(); ++i) {
-    destination_r[i] = static_cast<int16_t>((sin(phase_) * (1 << 14)));
-    phase_ += phase_increment;
+  if (play_channels_ == 1) {
+    for (size_t i = 0; i < play_buffer_.size(); ++i) {
+      destination_r[i] = static_cast<int16_t>((sin(phase_) * (1 << 14)));
+      phase_ += phase_increment;
+    }
+  } else if (play_channels_ == 2) {
+    for (size_t i = 0; i < play_buffer_.size() / 2; ++i) {
+      destination_r[2 * i] = static_cast<int16_t>((sin(phase_) * (1 << 14)));
+      destination_r[2 * i + 1] =
+          static_cast<int16_t>((sin(phase_) * (1 << 14)));
+      phase_ += phase_increment;
+    }
   }
 #else
   memcpy(audio_buffer, play_buffer_.data(),
