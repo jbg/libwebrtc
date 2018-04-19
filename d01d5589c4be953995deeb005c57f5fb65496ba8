@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f0a47645_7664bba5",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-19T07:06:51Z",
+      "side": 1,
+      "message": "Ok, let\u0027s split the build file up in a separate CL.\n\nIf you want to split the native_api_audio_device_module up, I think this CL is a good time to do it. I.e. address the TODO immediately.",
+      "parentUuid": "55165ab6_70a4b284",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0b3ac7d_472cb11f",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 3
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Native clients will still need Java files from java_audio_java, right? java_audio_java needs this interface and I don\u0027t want to force all native clients to include all the PeerConnection java code.",
       "parentUuid": "b0b3ac7d_472cb11f",
+      "range": {
+        "startLine": 805,
+        "startChar": 18,
+        "endLine": 805,
+        "endChar": 61
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "118bb481_0b295b7f",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-19T07:06:51Z",
+      "side": 1,
+      "message": "Native clients need the files starting with WebRtc*, but not JavaAudioDeviceModule.java which is tied to the PeerConnectionFactory API. I think it would be better to have JavaAudioDeviceModule in a separate target similar to how you have splitted up the corresponding jni target java_audio_jni. There is no need for native clients to pull in any of the interfaces tied to PeerConnectionFactory.",
+      "parentUuid": "d545a8ff_01bd7a07",
       "range": {
         "startLine": 805,
         "startChar": 18,
@@ -136,6 +184,53 @@
         "startChar": 0,
         "endLine": 813,
         "endChar": 91
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3646f7_b815c4cf",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-19T07:06:51Z",
+      "side": 1,
+      "message": "There is no interface in this target?",
+      "parentUuid": "9f3699d3_c6fcdb41",
+      "range": {
+        "startLine": 813,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 91
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da40c3bf_639e712d",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-19T07:06:51Z",
+      "side": 1,
+      "message": "The naming \u0027java_audio_java\u0027 is a bit hard to understand, and it\u0027s not a true palindrome either. I think we should replace \u0027audio\u0027 with \u0027audio_device_module\u0027, especially since we already have a audio target in this file.",
+      "range": {
+        "startLine": 814,
+        "startChar": 21,
+        "endLine": 814,
+        "endChar": 36
       },
       "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
