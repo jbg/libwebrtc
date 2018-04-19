@@ -82,8 +82,16 @@ FakeNetworkPipe::FakeNetworkPipe(Clock* clock,
                                  const FakeNetworkPipe::Config& config,
                                  PacketReceiver* receiver,
                                  uint64_t seed)
+    : FakeNetworkPipe(clock,
+                      rtc::MakeUnique<SimulatedNetwork>(config, seed),
+                      receiver) {}
+
+FakeNetworkPipe::FakeNetworkPipe(
+    Clock* clock,
+    std::unique_ptr<FakeNetworkInterface>&& fake_network,
+    PacketReceiver* receiver)
     : clock_(clock),
-      fake_network_(rtc::MakeUnique<SimulatedNetwork>(config, seed)),
+      fake_network_(std::move(fake_network)),
       receiver_(receiver),
       transport_(nullptr),
       clock_offset_ms_(0),
@@ -149,10 +157,6 @@ SimulatedNetwork::SimulatedNetwork(SimulatedNetwork::Config config,
                                    uint64_t random_seed)
     : random_(random_seed), bursting_(false) {
   SetConfig(config);
-}
-
-void FakeNetworkPipe::SetConfig(const FakeNetworkPipe::Config& config) {
-  fake_network_->SetConfig(config);
 }
 
 void SimulatedNetwork::SetConfig(const SimulatedNetwork::Config& config) {

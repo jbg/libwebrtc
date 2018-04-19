@@ -51,15 +51,17 @@ class DirectTransport : public Transport {
                   const std::map<uint8_t, MediaType>& payload_type_map);
 
   DirectTransport(SingleThreadedTaskQueueForTesting* task_queue,
+                  std::unique_ptr<FakeNetworkInterface> fake_network,
+                  Call* send_call,
+                  const std::map<uint8_t, MediaType>& payload_type_map);
+
+  DirectTransport(SingleThreadedTaskQueueForTesting* task_queue,
                   std::unique_ptr<FakeNetworkPipe> pipe,
                   Call* send_call,
                   const std::map<uint8_t, MediaType>& payload_type_map);
 
   ~DirectTransport() override;
-
   void SetClockOffset(int64_t offset_ms);
-
-  void SetConfig(const FakeNetworkPipe::Config& config);
 
   RTC_DEPRECATED void StopSending();
 
