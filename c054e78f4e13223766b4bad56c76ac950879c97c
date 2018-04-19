@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "018f1063_3b787beb",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-19T17:48:45Z",
+      "side": 1,
+      "message": "Great suggestion!",
+      "parentUuid": "6a77691c_e5d86aff",
+      "range": {
+        "startLine": 911,
+        "startChar": 4,
+        "endLine": 920,
+        "endChar": 5
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9666961d_94fe80f4",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 17
@@ -45,6 +69,30 @@
       "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "686f3886_5474a139",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-19T17:48:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9666961d_94fe80f4",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 17
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "94b40b82_dc73ae9e",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-19T17:48:45Z",
+      "side": 1,
+      "message": "I opted for making the ptr const since by ref is only allowed to pass a const\u0026 - the swap queue instance is mutated by RuntimeSettingEnqueuer",
+      "parentUuid": "b9560647_6ca2febc",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 13
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5457882d_69b051d9",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 17
@@ -91,6 +163,30 @@
       "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ba5187d_591a0cf5",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-19T17:48:45Z",
+      "side": 1,
+      "message": "Edge case mainly due to the presence of factory methods. As the style guide says, when not clear class is a safe choice.",
+      "parentUuid": "5457882d_69b051d9",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 307,
+        "endChar": 7
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
