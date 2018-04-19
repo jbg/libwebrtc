@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "134c50ff_3b729fc7",
+        "filename": "modules/video_coding/utility/quality_scaler_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-19T07:43:16Z",
+      "side": 1,
+      "message": "I guess this depends on some constant in quality_scaler.cc. Add a comment about that?",
+      "range": {
+        "startLine": 25,
+        "startChar": 42,
+        "endLine": 25,
+        "endChar": 46
+      },
+      "revId": "8c713fd020ba2e021614ed516526cdcd1f416652",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff1875ef_51025a68",
+        "filename": "modules/video_coding/utility/quality_scaler_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-19T07:43:16Z",
+      "side": 1,
+      "message": "We might want to change this test to use TaskQueueForTest::SendTask, instead of blocking here. No need to do that in this CL though.\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/task_queue_for_test.h?l\u003d34\u0026rcl\u003dd161eda477491b2b97fb3f26d229c625a2a0e9b8",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 30
+      },
+      "revId": "8c713fd020ba2e021614ed516526cdcd1f416652",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
