@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98cfa89c_45ba84ce",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-19T07:45:10Z",
+      "side": 1,
+      "message": "Nit: could be a const auto.",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 12
+      },
+      "revId": "8a9a3793e93f1c7ec12151fa381bca2d08a0416a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
