@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c0c9caa_54f140a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-19T17:17:54Z",
+      "side": 1,
+      "message": "By the way, this bug doesn\u0027t mention the problem that this CL intends to fix.",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "87bd12ab38b4353812134201bb2d9fe9dda11d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
