@@ -17,6 +17,8 @@
 
 #include "common_audio/signal_processing/include/signal_processing_library.h"
 
+#include "stddef.h"
+
 size_t WebRtcSpl_FilterAR(const int16_t* a,
                           size_t a_length,
                           const int16_t* x,
@@ -40,8 +42,11 @@ size_t WebRtcSpl_FilterAR(const int16_t* a,
     {
         // Calculate filtered[i] and filtered_low[i]
         const int16_t* a_ptr = &a[1];
-        int16_t* filtered_ptr = &filtered[i - 1];
-        int16_t* filtered_low_ptr = &filtered_low[i - 1];
+        // Negative overflow is permitted here, because this is
+        // auto-regressive filters, and the state for each batch run is
+        // stored in the "negative" positions of the output vector.
+        int16_t* filtered_ptr = &filtered[(ptrdiff_t) i - 1];
+        int16_t* filtered_low_ptr = &filtered_low[(ptrdiff_t) i - 1];
         int16_t* state_ptr = &state[state_length - 1];
         int16_t* state_low_ptr = &state_low[state_length - 1];
 
