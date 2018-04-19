@@ -40,7 +40,8 @@ class FineAudioBuffer {
   // can be increased to at least capacity without further reallocation.
   FineAudioBuffer(AudioDeviceBuffer* device_buffer,
                   int sample_rate,
-                  size_t capacity);
+                  size_t capacity,
+                  int channels = 1);
   ~FineAudioBuffer();
 
   // Clears buffers and counters dealing with playout and/or recording.
@@ -78,7 +79,9 @@ class FineAudioBuffer {
   AudioDeviceBuffer* const device_buffer_;
   // Sample rate in Hertz.
   const int sample_rate_;
-  // Number of audio samples per 10ms.
+  // Channel count.
+  const int channels_;
+  // Number of audio samples per channel per 10ms.
   const size_t samples_per_10_ms_;
   // Storage for output samples from which a consumer can read audio buffers
   // in any size using GetPlayoutData().

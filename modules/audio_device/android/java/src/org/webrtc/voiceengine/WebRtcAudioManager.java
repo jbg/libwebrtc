@@ -43,7 +43,7 @@ public class WebRtcAudioManager {
   private static final boolean blacklistDeviceForAAudioUsage = true;
 
   // Use mono as default for both audio directions.
-  private static boolean useStereoOutput = false;
+  private static boolean useStereoOutput = true;
   private static boolean useStereoInput = false;
 
   private static boolean blacklistDeviceForOpenSLESUsage = false;
