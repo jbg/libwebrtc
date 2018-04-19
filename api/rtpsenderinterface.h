@@ -53,7 +53,7 @@ class RtpSenderInterface : public rtc::RefCountInterface {
   // tracks.
   virtual std::vector<std::string> stream_ids() const = 0;
 
-  virtual RtpParameters GetParameters() const = 0;
+  virtual RtpParameters GetParameters() = 0;
   // Note that only a subset of the parameters can currently be changed. See
   // rtpparameters.h
   virtual RTCError SetParameters(const RtpParameters& parameters) = 0;
@@ -76,7 +76,7 @@ BEGIN_SIGNALING_PROXY_MAP(RtpSender)
   PROXY_CONSTMETHOD0(cricket::MediaType, media_type)
   PROXY_CONSTMETHOD0(std::string, id)
   PROXY_CONSTMETHOD0(std::vector<std::string>, stream_ids)
-  PROXY_CONSTMETHOD0(RtpParameters, GetParameters);
+  PROXY_METHOD0(RtpParameters, GetParameters);
   PROXY_METHOD1(RTCError, SetParameters, const RtpParameters&)
   PROXY_CONSTMETHOD0(rtc::scoped_refptr<DtmfSenderInterface>, GetDtmfSender);
   END_PROXY_MAP()

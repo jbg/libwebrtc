@@ -15,6 +15,7 @@
 
 @implementation RTCRtpParameters
 
+@synthesize transactionId = _transactionId;
 @synthesize encodings = _encodings;
 @synthesize codecs = _codecs;
 
@@ -25,6 +26,7 @@
 - (instancetype)initWithNativeParameters:
     (const webrtc::RtpParameters &)nativeParameters {
   if (self = [self init]) {
+    _transactionId = [NSString stringForStdString:nativeParameters.transactionId];
     NSMutableArray *encodings = [[NSMutableArray alloc] init];
     for (const auto &encoding : nativeParameters.encodings) {
       [encodings addObject:[[RTCRtpEncodingParameters alloc]
@@ -43,7 +45,8 @@
 }
 
 - (webrtc::RtpParameters)nativeParameters {
-    webrtc::RtpParameters parameters;
+  webrtc::RtpParameters parameters;
+  parameters.transactionId = [NSString stdStringForString:_transactionId];
   for (RTCRtpEncodingParameters *encoding in _encodings) {
     parameters.encodings.push_back(encoding.nativeParameters);
   }
