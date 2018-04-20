@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8f5d34a7_7d093c54",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-04-20T14:37:20Z",
+      "side": 1,
+      "message": "Ack. Perhaps add a comment that these targets are intentionally empty and only serve as markers.",
+      "parentUuid": "4d703165_36961219",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 592,
+        "endChar": 1
+      },
+      "revId": "85f6c672b7c8928bf0983f71013e439a07afb3eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "962f1b26_185840ec",
         "filename": "api/audio_codecs/BUILD.gn",
         "patchSetId": 1
