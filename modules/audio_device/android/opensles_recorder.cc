@@ -78,9 +78,7 @@ int OpenSLESRecorder::Init() {
   ALOGD("Init[tid=%d]", rtc::CurrentThreadId());
   RTC_DCHECK(thread_checker_.CalledOnValidThread());
   if (audio_parameters_.channels() == 2) {
-    // TODO(henrika): FineAudioBuffer needs more work to support stereo.
-    ALOGE("OpenSLESRecorder does not support stereo");
-    return -1;
+    ALOGD("Stereo mode is enabled");
   }
   return 0;
 }
@@ -342,9 +340,7 @@ void OpenSLESRecorder::AllocateDataBuffers() {
         audio_parameters_.GetBytesPerBuffer());
   ALOGD("native sample rate: %d", audio_parameters_.sample_rate());
   RTC_DCHECK(audio_device_buffer_);
-  fine_audio_buffer_.reset(
-      new FineAudioBuffer(audio_device_buffer_, audio_parameters_.sample_rate(),
-                          2 * audio_parameters_.frames_per_buffer()));
+  fine_audio_buffer_.reset(new FineAudioBuffer(audio_device_buffer_));
   // Allocate queue of audio buffers that stores recorded audio samples.
   const int data_size_samples = audio_parameters_.frames_per_buffer();
   audio_buffers_.reset(new std::unique_ptr<SLint16[]>[kNumOfOpenSLESBuffers]);

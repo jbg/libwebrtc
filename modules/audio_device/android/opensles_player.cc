@@ -58,6 +58,8 @@ OpenSLESPlayer::OpenSLESPlayer(AudioManager* audio_manager)
   pcm_format_ = CreatePCMConfiguration(audio_parameters_.channels(),
                                        audio_parameters_.sample_rate(),
                                        audio_parameters_.bits_per_sample());
+  ALOGD("frames_per_buffer: %d", audio_parameters_.frames_per_buffer());
+  ALOGD("channels: %d", audio_parameters_.channels());
   // Detach from this thread since we want to use the checker to verify calls
   // from the internal  audio thread.
   thread_checker_opensles_.DetachFromThread();
@@ -81,9 +83,7 @@ int OpenSLESPlayer::Init() {
   ALOGD("Init[tid=%d]", rtc::CurrentThreadId());
   RTC_DCHECK(thread_checker_.CalledOnValidThread());
   if (audio_parameters_.channels() == 2) {
-    // TODO(henrika): FineAudioBuffer needs more work to support stereo.
-    ALOGE("OpenSLESPlayer does not support stereo");
-    return -1;
+    ALOGW("Stereo mode is enabled");
   }
   return 0;
 }
@@ -212,13 +212,12 @@ void OpenSLESPlayer::AllocateDataBuffers() {
   // recommended to construct audio buffers so that they contain an exact
   // multiple of this number. If so, callbacks will occur at regular intervals,
   // which reduces jitter.
-  const size_t buffer_size_in_samples = audio_parameters_.frames_per_buffer();
+  const size_t buffer_size_in_samples =
+      audio_parameters_.frames_per_buffer() * audio_parameters_.channels();
   ALOGD("native buffer size: %" PRIuS, buffer_size_in_samples);
   ALOGD("native buffer size in ms: %.2f",
         audio_parameters_.GetBufferSizeInMilliseconds());
-  fine_audio_buffer_.reset(
-      new FineAudioBuffer(audio_device_buffer_, audio_parameters_.sample_rate(),
-                          2 * audio_parameters_.frames_per_buffer()));
+  fine_audio_buffer_.reset(new FineAudioBuffer(audio_device_buffer_));
   // Allocated memory for audio buffers.
   for (int i = 0; i < kNumOfOpenSLESBuffers; ++i) {
     audio_buffers_[i].reset(new SLint16[buffer_size_in_samples]);
@@ -397,7 +396,7 @@ void OpenSLESPlayer::EnqueuePlayoutData(bool silence) {
       reinterpret_cast<SLint8*>(audio_buffers_[buffer_index_].get());
   if (silence) {
     RTC_DCHECK(thread_checker_.CalledOnValidThread());
-    // Avoid aquiring real audio data from WebRTC and fill the buffer with
+    // Avoid acquiring real audio data from WebRTC and fill the buffer with
     // zeros instead. Used to prime the buffer with silence and to avoid asking
     // for audio data from two different threads.
     memset(audio_ptr8, 0, audio_parameters_.GetBytesPerBuffer());
@@ -409,7 +408,8 @@ void OpenSLESPlayer::EnqueuePlayoutData(bool silence) {
     // delay estimation.
     fine_audio_buffer_->GetPlayoutData(
         rtc::ArrayView<int16_t>(audio_buffers_[buffer_index_].get(),
-                                audio_parameters_.frames_per_buffer()),
+                                audio_parameters_.frames_per_buffer() *
+                                    audio_parameters_.channels()),
         25);
   }
   // Enqueue the decoded audio buffer for playback.
