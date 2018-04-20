@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4d703165_36961219",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-20T11:38:53Z",
+      "side": 1,
+      "message": "Each type of poison needs to be an actual build target in this design. \"Being poisonous\" is defined as declaring a dep on the corresponding poison_* target, and *not* being immune to one type of poison is defined as declaring an assert_no_dep on the corresponding poison_* target.",
+      "parentUuid": "9726e160_cf86fc6d",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 592,
+        "endChar": 1
+      },
+      "revId": "85f6c672b7c8928bf0983f71013e439a07afb3eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "962f1b26_185840ec",
         "filename": "api/audio_codecs/BUILD.gn",
         "patchSetId": 1
