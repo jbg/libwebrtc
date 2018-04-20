@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "ba2f49d3_bea403e5",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-20T07:14:54Z",
+      "side": 1,
+      "message": "Yes, but you would be passing a (non-const) pointer to the constructor, but storing it as a non-const ref. That is allowed, and makes it clear that the member must always be non-null.",
+      "parentUuid": "94b40b82_dc73ae9e",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 13
+      },
+      "revId": "c054e78f4e13223766b4bad56c76ac950879c97c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5457882d_69b051d9",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 17
