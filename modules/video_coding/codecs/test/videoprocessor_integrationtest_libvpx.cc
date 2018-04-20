@@ -391,8 +391,14 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
       {5, 1, 5, 0.2, 0.3, 0.1, 0, 1}};
   std::vector<QualityThresholds> quality_thresholds = {{36, 34, 0.93, 0.91}};
 
+  const VisualizationParams kVisualizationParams = {
+      true,   // save_encoded_ivf
+      false,  // save_decoded_y4m
+  };
+
   ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                              &quality_thresholds, nullptr, nullptr);
+                              &quality_thresholds, nullptr,
+                              &kVisualizationParams);
 }
 
 TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_MultiresVP8RdPerf) {
