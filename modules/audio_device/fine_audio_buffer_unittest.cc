@@ -25,6 +25,8 @@ using ::testing::Return;
 
 namespace webrtc {
 
+/*
+
 const int kSampleRate = 44100;
 const int kSamplesPer10Ms = kSampleRate * 10 / 1000;
 
@@ -138,5 +140,7 @@ TEST(FineBufferTest, GreaterThan10ms) {
   const int kFrameSizeSamples = kSamplesPer10Ms + 50;
   RunFineBufferTest(kFrameSizeSamples);
 }
+
+*/
 
 }  // namespace webrtc
