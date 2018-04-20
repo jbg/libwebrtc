@@ -26,6 +26,7 @@ using ::testing::Return;
 namespace webrtc {
 
 const int kSampleRate = 44100;
+const int kChannels = 1;
 const int kSamplesPer10Ms = kSampleRate * 10 / 1000;
 
 // The fake audio data is 0,1,..SCHAR_MAX-1,0,1,... This is to make it easy
@@ -90,6 +91,10 @@ void RunFineBufferTest(int frame_size_in_samples) {
       1 + ((kNumberOfFrames * frame_size_in_samples - 1) / kSamplesPer10Ms);
 
   MockAudioDeviceBuffer audio_device_buffer;
+  audio_device_buffer.SetPlayoutSampleRate(kSampleRate);
+  audio_device_buffer.SetPlayoutChannels(kChannels);
+  audio_device_buffer.SetRecordingSampleRate(kSampleRate);
+  audio_device_buffer.SetRecordingChannels(kChannels);
   EXPECT_CALL(audio_device_buffer, RequestPlayoutData(_))
       .WillRepeatedly(Return(kSamplesPer10Ms));
   {
@@ -114,8 +119,7 @@ void RunFineBufferTest(int frame_size_in_samples) {
       .Times(kNumberOfUpdateBufferCalls - 1)
       .WillRepeatedly(Return(kSamplesPer10Ms));
 
-  FineAudioBuffer fine_buffer(&audio_device_buffer, kSampleRate,
-                              kFrameSizeSamples);
+  FineAudioBuffer fine_buffer(&audio_device_buffer);
   std::unique_ptr<int16_t[]> out_buffer(new int16_t[kFrameSizeSamples]);
   std::unique_ptr<int16_t[]> in_buffer(new int16_t[kFrameSizeSamples]);
 
