@@ -78,9 +78,7 @@ int OpenSLESRecorder::Init() {
   ALOGD("Init[tid=%d]", rtc::CurrentThreadId());
   RTC_DCHECK(thread_checker_.CalledOnValidThread());
   if (audio_parameters_.channels() == 2) {
-    // TODO(henrika): FineAudioBuffer needs more work to support stereo.
-    ALOGE("OpenSLESRecorder does not support stereo");
-    return -1;
+    ALOGD("Stereo mode is enabled");
   }
   return 0;
 }
@@ -342,14 +340,13 @@ void OpenSLESRecorder::AllocateDataBuffers() {
         audio_parameters_.GetBytesPerBuffer());
   ALOGD("native sample rate: %d", audio_parameters_.sample_rate());
   RTC_DCHECK(audio_device_buffer_);
-  fine_audio_buffer_.reset(
-      new FineAudioBuffer(audio_device_buffer_, audio_parameters_.sample_rate(),
-                          2 * audio_parameters_.frames_per_buffer()));
+  fine_audio_buffer_.reset(new FineAudioBuffer(audio_device_buffer_));
   // Allocate queue of audio buffers that stores recorded audio samples.
-  const int data_size_samples = audio_parameters_.frames_per_buffer();
+  const int buffer_size_samples =
+      audio_parameters_.frames_per_buffer() * audio_parameters_.channels();
   audio_buffers_.reset(new std::unique_ptr<SLint16[]>[kNumOfOpenSLESBuffers]);
   for (int i = 0; i < kNumOfOpenSLESBuffers; ++i) {
-    audio_buffers_[i].reset(new SLint16[data_size_samples]);
+    audio_buffers_[i].reset(new SLint16[buffer_size_samples]);
   }
 }
 
@@ -374,11 +371,10 @@ void OpenSLESRecorder::ReadBufferQueue() {
   // since there is no support to turn off built-in EC in combination with
   // OpenSL ES anyhow. Hence, as is, the WebRTC based AEC (which would use
   // these estimates) will never be active.
-  const size_t size_in_samples =
-      static_cast<size_t>(audio_parameters_.frames_per_buffer());
   fine_audio_buffer_->DeliverRecordedData(
-      rtc::ArrayView<const int16_t>(audio_buffers_[buffer_index_].get(),
-                                    size_in_samples),
+      rtc::ArrayView<const int16_t>(
+          audio_buffers_[buffer_index_].get(),
+          audio_parameters_.frames_per_buffer() * audio_parameters_.channels()),
       25);
   // Enqueue the utilized audio buffer and use if for recording again.
   EnqueueAudioBuffer();
