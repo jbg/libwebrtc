@@ -40,6 +40,7 @@ VideoCodecVP9 VideoEncoder::GetDefaultVp9Settings() {
   vp9_settings.automaticResizeOn = true;
   vp9_settings.numberOfSpatialLayers = 1;
   vp9_settings.flexibleMode = false;
+  vp9_settings.interLayerPred = kInterLayerPredOn;
 
   return vp9_settings;
 }
