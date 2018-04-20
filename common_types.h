@@ -375,6 +375,15 @@ struct VideoCodecVP8 {
   int keyFrameInterval;
 };
 
+enum InterLayerPredMode {
+  kInterLayerPredOn,       // Allow inter-layer prediction for all frames.
+                           // Frame of low spatial layer can be used for
+                           // prediciton of next spatial layer frame.
+  kInterLayerPredOff,      // Encoder produces independent spatial layers.
+  kInterLayerPredOnKeyPic  // Allow inter-layer prediction only for frames
+                           // within key picture.
+};
+
 // VP9 specific.
 struct VideoCodecVP9 {
   bool operator==(const VideoCodecVP9& other) const;
@@ -391,6 +400,7 @@ struct VideoCodecVP9 {
   bool automaticResizeOn;
   unsigned char numberOfSpatialLayers;
   bool flexibleMode;
+  InterLayerPredMode interLayerPred;
 };
 
 // TODO(magjed): Move this and other H264 related classes out to their own file.

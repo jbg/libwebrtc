@@ -74,9 +74,10 @@ VP9EncoderImpl::VP9EncoderImpl()
       config_(nullptr),
       raw_(nullptr),
       input_image_(nullptr),
-      frames_since_kf_(0),
+      pics_since_key_(0),
       num_temporal_layers_(0),
       num_spatial_layers_(0),
+      inter_layer_pred_(kInterLayerPredOn),
       is_flexible_mode_(false),
       frames_encoded_(0),
       // Use two spatial when screensharing with flexible mode.
@@ -364,6 +365,8 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
 
+  inter_layer_pred_ = inst->VP9().interLayerPred;
+
   return InitAndSetControlSettings(inst);
 }
 
@@ -456,6 +459,9 @@ int VP9EncoderImpl::InitAndSetControlSettings(const VideoCodec* inst) {
   if (num_temporal_layers_ > 1 || num_spatial_layers_ > 1) {
     vpx_codec_control(encoder_, VP9E_SET_SVC_PARAMETERS,
                       &svc_params_);
+
+    vpx_codec_control(encoder_, VP9E_SET_SVC_INTER_LAYER_PRED,
+                      inter_layer_pred_);
   }
   // Register callback for getting each spatial layer.
   vpx_codec_priv_output_cx_pkt_cb_pair_t cbp = {
@@ -626,18 +632,34 @@ void VP9EncoderImpl::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
   // TODO(asapersson): this info has to be obtained from the encoder.
   vp9_info->temporal_up_switch = false;
 
+  if (pkt.data.frame.flags & VPX_FRAME_IS_KEY) {
+    pics_since_key_ = 0;
+  } else if (first_frame_in_picture) {
+    ++pics_since_key_;
+  }
+
+  const bool is_key_pic = (pics_since_key_ == 0);
+
   if (first_frame_in_picture) {
     // TODO(asapersson): this info has to be obtained from the encoder.
     vp9_info->inter_layer_predicted = false;
-    ++frames_since_kf_;
   } else {
-    // TODO(asapersson): this info has to be obtained from the encoder.
-    vp9_info->inter_layer_predicted = true;
+    if (inter_layer_pred_ == kInterLayerPredOn ||
+        (inter_layer_pred_ == kInterLayerPredOnKeyPic && is_key_pic)) {
+      // TODO(asapersson): this info has to be obtained from the encoder.
+      vp9_info->inter_layer_predicted = true;
+    } else {
+      vp9_info->inter_layer_predicted = false;
+    }
   }
 
-  if (pkt.data.frame.flags & VPX_FRAME_IS_KEY) {
-    frames_since_kf_ = 0;
-  }
+  // Set non_ref_for_inter_layer_pred if inter-layer prediction is disabled
+  // for current picture.
+  vp9_info->non_ref_for_inter_layer_pred =
+      (inter_layer_pred_ == kInterLayerPredOff ||
+       (inter_layer_pred_ == kInterLayerPredOnKeyPic && !is_key_pic))
+          ? true
+          : false;
 
   // Always populate this, so that the packetizer can properly set the marker
   // bit.
@@ -652,7 +674,7 @@ void VP9EncoderImpl::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
     }
   } else {
     vp9_info->gof_idx =
-        static_cast<uint8_t>(frames_since_kf_ % gof_.num_frames_in_gof);
+        static_cast<uint8_t>(pics_since_key_ % gof_.num_frames_in_gof);
     vp9_info->temporal_up_switch = gof_.temporal_up_switch[vp9_info->gof_idx];
   }
 
