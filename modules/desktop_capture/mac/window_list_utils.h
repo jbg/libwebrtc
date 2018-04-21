@@ -84,6 +84,16 @@ DesktopRect GetWindowBounds(CGWindowID id);
 DesktopRect GetWindowBounds(const MacDesktopConfiguration& desktop_config,
                             CGWindowID id);
 
+// Convert position in physical Pixel to Density Independent pixel.
+DesktopVector GetPositionInDipDimension(
+    const MacDesktopConfiguration& desktop_config,
+    DesktopVector physical_position);
+
+// Convert position in Density Independent pixel to physical Pixel.
+DesktopVector GetPositionInPhysicalDimension(
+    const MacDesktopConfiguration& desktop_config,
+    DesktopVector dip_position);
+
 }  // namespace webrtc
 
 #endif  // MODULES_DESKTOP_CAPTURE_MAC_WINDOW_LIST_UTILS_H_

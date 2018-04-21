@@ -229,9 +229,9 @@ void MouseCursorMonitorMac::Capture() {
       }
     }
   }
-  // Convert Density Independent Pixel to physical pixel.
-  position = DesktopVector(round(position.x() * scale),
-                           round(position.y() * scale));
+  // Convert position from Density Independent Pixel to physical pixel because
+  // the captured frames have size in physical pixels.
+  position = GetPositionInPhysicalDimension(configuration, position);
   callback_->OnMouseCursorPosition(
       position.subtract(configuration.bounds.top_left()));
 }

@@ -306,4 +306,44 @@ DesktopRect GetWindowBounds(const MacDesktopConfiguration& desktop_config,
   return ApplyScaleFactorOfRect(desktop_config, rect);
 }
 
+DesktopVector GetPositionInDipDimension(
+    const MacDesktopConfiguration& desktop_config,
+    DesktopVector physical_position) {
+  int pixel_position_x = physical_position.x();
+  int position_x = 0;
+  float scale = 1.0;
+  for (auto display : desktop_config.displays) {
+    if (pixel_position_x - display.pixel_bounds.width() > 0) {
+      position_x += display.bounds.width();
+      pixel_position_x -= display.pixel_bounds.width();
+    } else {
+      scale = display.dip_to_pixel_scale;
+      break;
+    }
+  }
+
+  return DesktopVector(position_x + round(pixel_position_x / scale),
+                       round(physical_position.y() / scale));
+}
+
+DesktopVector GetPositionInPhysicalDimension(
+    const MacDesktopConfiguration& desktop_config,
+    DesktopVector dip_position) {
+  int position_x = dip_position.x();
+  int pixel_position_x = 0;
+  float scale = 1.0;
+  for (auto display : desktop_config.displays) {
+    if (position_x - display.bounds.width() > 0) {
+      pixel_position_x += display.pixel_bounds.width();
+      position_x -= display.bounds.width();
+    } else {
+      scale = display.dip_to_pixel_scale;
+      break;
+    }
+  }
+
+  return DesktopVector(pixel_position_x + round(position_x * scale),
+                       round(dip_position.y() * scale));
+}
+
 }  // namespace webrtc

@@ -26,6 +26,7 @@ WindowFinderMac::WindowFinderMac(
     : configuration_monitor_(std::move(configuration_monitor)) {}
 WindowFinderMac::~WindowFinderMac() = default;
 
+// The point should be in Density Indepedent Pixel as same as the window bounds.
 WindowId WindowFinderMac::GetWindowUnderPoint(DesktopVector point) {
   WindowId id = kNullWindowId;
   MacDesktopConfiguration configuration_holder;
@@ -36,20 +37,17 @@ WindowId WindowFinderMac::GetWindowUnderPoint(DesktopVector point) {
     configuration_monitor_->Unlock();
     configuration = &configuration_holder;
   }
-  GetWindowList([&id, point, configuration](CFDictionaryRef window) {
-                  DesktopRect bounds;
-                  if (configuration) {
-                    bounds = GetWindowBounds(*configuration, window);
-                  } else {
-                    bounds = GetWindowBounds(window);
-                  }
-                  if (bounds.Contains(point)) {
-                    id = GetWindowId(window);
-                    return false;
-                  }
-                  return true;
-                },
-                true);
+  GetWindowList(
+      [&id, point](CFDictionaryRef window) {
+        DesktopRect bounds;
+        bounds = GetWindowBounds(window);
+        if (bounds.Contains(point)) {
+          id = GetWindowId(window);
+          return false;
+        }
+        return true;
+      },
+      true);
   return id;
 }
 

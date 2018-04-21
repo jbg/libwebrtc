@@ -41,9 +41,7 @@ DesktopRect NSRectToDesktopRect(const NSRect& ns_rect) {
 void InvertRectYOrigin(const DesktopRect& bounds,
                        DesktopRect* rect) {
   assert(bounds.top() == 0);
-  *rect = DesktopRect::MakeXYWH(
-      rect->left(), bounds.bottom() - rect->bottom(),
-      rect->width(), rect->height());
+  *rect = DesktopRect::MakeXYWH(bounds.right(), bounds.top(), rect->width(), rect->height());
 }
 
 MacDisplayConfiguration GetConfigurationForScreen(NSScreen* screen) {
@@ -105,8 +103,8 @@ MacDesktopConfiguration MacDesktopConfiguration::GetCurrent(Origin origin) {
   NSArray* screens = [NSScreen screens];
   assert(screens);
 
-  // Iterator over the monitors, adding the primary monitor and monitors whose
-  // DPI match that of the primary monitor.
+  // Iterator over the monitors, adding the primary monitor and secondary
+  // monitors in both DIP and physical dimensions.
   for (NSUInteger i = 0; i < [screens count]; ++i) {
     MacDisplayConfiguration display_config =
         GetConfigurationForScreen([screens objectAtIndex: i]);
@@ -114,34 +112,19 @@ MacDesktopConfiguration MacDesktopConfiguration::GetCurrent(Origin origin) {
     if (i == 0)
       desktop_config.dip_to_pixel_scale = display_config.dip_to_pixel_scale;
 
-    // Cocoa uses bottom-up coordinates, so if the caller wants top-down then
-    // we need to invert the positions of secondary monitors relative to the
-    // primary one (the primary monitor's position is (0,0) in both systems).
-    if (i > 0 && origin == TopLeftOrigin) {
-      InvertRectYOrigin(desktop_config.displays[0].bounds,
-                        &display_config.bounds);
-      // |display_bounds| is density dependent, so we need to convert the
-      // primay monitor's position into the secondary monitor's density context.
-      float scaling_factor = display_config.dip_to_pixel_scale /
-          desktop_config.displays[0].dip_to_pixel_scale;
-      DesktopRect primary_bounds = DesktopRect::MakeLTRB(
-          desktop_config.displays[0].pixel_bounds.left() * scaling_factor,
-          desktop_config.displays[0].pixel_bounds.top() * scaling_factor,
-          desktop_config.displays[0].pixel_bounds.right() * scaling_factor,
-          desktop_config.displays[0].pixel_bounds.bottom() * scaling_factor);
-      InvertRectYOrigin(primary_bounds, &display_config.pixel_bounds);
+    // Cocoa uses bottom-up coordinates, so we need to invert the positions of
+    // extra monitors relative to the existing desktop (position is (0,0)).
+    if (i > 0) {
+      InvertRectYOrigin(desktop_config.bounds, &display_config.bounds);
+      InvertRectYOrigin(desktop_config.pixel_bounds, &display_config.pixel_bounds);
     }
 
     // Add the display to the configuration.
     desktop_config.displays.push_back(display_config);
 
-    // Update the desktop bounds to account for this display, unless the current
-    // display uses different DPI settings.
-    if (display_config.dip_to_pixel_scale ==
-        desktop_config.dip_to_pixel_scale) {
-      desktop_config.bounds.UnionWith(display_config.bounds);
-      desktop_config.pixel_bounds.UnionWith(display_config.pixel_bounds);
-    }
+    // Update the desktop bounds to account for this display.
+    desktop_config.bounds.UnionWith(display_config.bounds);
+    desktop_config.pixel_bounds.UnionWith(display_config.pixel_bounds);
   }
 
   return desktop_config;
