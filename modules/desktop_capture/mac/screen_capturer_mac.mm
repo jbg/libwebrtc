@@ -263,7 +263,7 @@ void ScreenCapturerMac::Start(Callback* callback) {
 }
 
 void ScreenCapturerMac::CaptureFrame() {
-  TRACE_EVENT0("webrtc", "creenCapturerMac::CaptureFrame");
+  TRACE_EVENT0("webrtc", "ScreenCapturerMac::CaptureFrame");
   int64_t capture_start_time_nanos = rtc::TimeNanos();
 
   queue_.MoveToNextFrame();
@@ -308,7 +308,7 @@ void ScreenCapturerMac::CaptureFrame() {
         desktop_config_.FindDisplayConfigurationById(current_display_);
     if (config) {
       new_frame->set_top_left(
-          config->bounds.top_left().subtract(desktop_config_.bounds.top_left()));
+          config->pixel_bounds.top_left().subtract(desktop_config_.pixel_bounds.top_left()));
     }
   }
 

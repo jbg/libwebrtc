@@ -143,7 +143,9 @@ bool WindowCapturerMac::IsOccluded(const DesktopVector& pos) {
     configuration_monitor_->Lock();
     auto configuration = configuration_monitor_->desktop_configuration();
     configuration_monitor_->Unlock();
-    sys_pos = pos.add(configuration.bounds.top_left());
+    // Convert physical pixel to Density Independent Pixel.
+    sys_pos = GetPositionInDipDimension(configuration, pos);
+    sys_pos = sys_pos.add(configuration.bounds.top_left());
   }
   return window_finder_.GetWindowUnderPoint(sys_pos) != window_id_;
 }
@@ -215,8 +217,11 @@ void WindowCapturerMac::CaptureFrame() {
     configuration_monitor_->Lock();
     auto configuration = configuration_monitor_->desktop_configuration();
     configuration_monitor_->Unlock();
-    top_left = GetWindowBounds(configuration, on_screen_window).top_left();
-    top_left = top_left.subtract(configuration.bounds.top_left());
+    // Convert Density Independent Pixel to physical pixel because the frame
+    // size is in physical pixels.
+    top_left =
+        GetPositionInPhysicalDimension(configuration, GetWindowBounds(on_screen_window).top_left());
+    top_left = top_left.subtract(configuration.pixel_bounds.top_left());
   } else {
     top_left = GetWindowBounds(on_screen_window).top_left();
   }

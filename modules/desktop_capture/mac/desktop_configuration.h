@@ -58,10 +58,11 @@ struct MacDesktopConfiguration {
   MacDesktopConfiguration& operator=(MacDesktopConfiguration&& other);
 
   // Returns the desktop & display configurations.
-  // If BottomLeftOrigin is used, the output is in Cocoa-style "bottom-up"
-  // (the origin is the bottom-left of the primary monitor, and coordinates
-  // increase as you move up the screen). Otherwise, the configuration will be
-  // converted to follow top-left coordinate system as Windows and X11.
+  // Cocoa uses "bottom-up" style (the origin is the bottom-left of the primary
+  // monitor, and coordinates increase as you move up the screen). Here unify
+  // the configuration by converting to follow top-left coordinate system as
+  // Windows and X11, because the cursor/image position is always in top-left
+  // coordinate system.
   static MacDesktopConfiguration GetCurrent(Origin origin);
 
   // Returns true if the given desktop configuration equals this one.
@@ -71,8 +72,8 @@ struct MacDesktopConfiguration {
   const MacDisplayConfiguration* FindDisplayConfigurationById(
       CGDirectDisplayID id);
 
-  // Bounds of the desktop excluding monitors with DPI settings different from
-  // the main monitor. In Density-Independent Pixels (DIPs).
+  // Bounds of the desktop including all the connected monitors.
+  // In Density-Independent Pixels (DIPs).
   DesktopRect bounds;
 
   // Same as bounds, but expressed in physical pixels.
