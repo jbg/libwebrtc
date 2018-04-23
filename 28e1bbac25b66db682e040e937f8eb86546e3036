@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29d69864_2441ccf0",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-23T13:21:34Z",
+      "side": 1,
+      "message": "Maybe this would be an easier order of the statements:\nif (useHardwareNoiseSuppressor) {\n  if (isBuiltInNoiseSuppressorSupported())) {\n    Logging.d(TAG, \"Built-in NS is available and will be used.\");\n  } else {\n    Logging.e(TAG, \"HW NS not supported\");\n    useHardwareNoiseSuppressor \u003d false;\n  }\n} else {\n  if (isBuiltInNoiseSuppressorSupported()) {\n    Logging.d(TAG, \"Overriding default behavior; now using WebRTC NS!\");\n  }\n}",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 79
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd1806f7_8323cc45",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-23T13:21:34Z",
+      "side": 1,
+      "message": "Do we need this particular log? It seems redundant since we log if we actually override any value.",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59e9054f_ddb0cb7f",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-23T13:21:34Z",
+      "side": 1,
+      "message": "Same comment here as for NS.",
+      "range": {
+        "startLine": 119,
+        "startChar": 19,
+        "endLine": 119,
+        "endChar": 53
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbb24227_01d9cf78",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-23T13:21:34Z",
+      "side": 1,
+      "message": "Change error log to debug or info log.",
+      "range": {
+        "startLine": 156,
+        "startChar": 14,
+        "endLine": 156,
+        "endChar": 15
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34bcfefd_a36cabe3",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-23T13:21:34Z",
+      "side": 1,
+      "message": "Same here: these are not error logs.",
+      "range": {
+        "startLine": 297,
+        "startChar": 13,
+        "endLine": 297,
+        "endChar": 14
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
