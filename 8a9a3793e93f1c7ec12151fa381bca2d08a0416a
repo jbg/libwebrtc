@@ -22,6 +22,30 @@
       "revId": "8a9a3793e93f1c7ec12151fa381bca2d08a0416a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a07ef54_cbc706dd",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-04-23T07:41:39Z",
+      "side": 1,
+      "message": "Yes, of course. It is not only a nit :)",
+      "parentUuid": "98cfa89c_45ba84ce",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 12
+      },
+      "revId": "8a9a3793e93f1c7ec12151fa381bca2d08a0416a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
