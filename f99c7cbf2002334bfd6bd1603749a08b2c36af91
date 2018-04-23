@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "94ac5204_cc77b9f5",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-23T18:33:26Z",
+      "side": 1,
+      "message": "OK I see.\nRemoting is using the GetCurrent(TopLeftOrigin). So I suppose we need two steps to remove it.",
+      "parentUuid": "263c57df_9b483393",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 2
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e23bcd3_9884b943",
         "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
         "patchSetId": 2
@@ -165,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "3d1812cb_8c106daa",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-23T18:33:26Z",
+      "side": 1,
+      "message": "Oh no. Don\u0027t know the monitors can be placed vertically, or even any place around the primary monitor. :(\nI\u0027ll rethink this cl and go back later.",
+      "parentUuid": "831178b2_c91f8ec2",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 55
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "967b5207_658f9804",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 2
@@ -176,6 +224,30 @@
       "writtenOn": "2018-04-23T17:36:46Z",
       "side": 1,
       "message": "Ditto.\n\nYou may want to find the monitor contains the original dip-position first. And a matrix of the monitors may be needed to help you decide the pixels from which monitors need to be subtracted.\n\nOr maybe you add some comments to explain that this logic only handles horizontally placed monitors, which is the most common user cases. (I have no too much experience with Mac OS, does it support aligns monitors horizontally?)",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 55
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80dc32d9_47df0386",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-23T18:33:26Z",
+      "side": 1,
+      "message": "Yes, we have to do this. And we should be able to handle arbitrary monitor arrangement.",
+      "parentUuid": "967b5207_658f9804",
       "range": {
         "startLine": 337,
         "startChar": 0,
