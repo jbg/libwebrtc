@@ -46,6 +46,121 @@
       "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e23bcd3_9884b943",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-23T17:36:46Z",
+      "side": 1,
+      "message": "Maybe update the name of these two parameters, they are confusion.",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 42,
+        "endChar": 40
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "761ae7f2_461fa8ee",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-23T17:36:46Z",
+      "side": 1,
+      "message": "If there are three monitors placed horizontally, will this logic fail?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 71
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9a9ae23_bf3e089a",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-23T17:36:46Z",
+      "side": 1,
+      "message": "pixel_position_x \u003e display.pixel_bounds.width()\nOr do you have any reason to prefer this syntax?",
+      "range": {
+        "startLine": 316,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 59
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "831178b2_c91f8ec2",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-23T17:36:46Z",
+      "side": 1,
+      "message": "I think this logic will fail if two monitors are placed vertically.",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 55
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "967b5207_658f9804",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-04-23T17:36:46Z",
+      "side": 1,
+      "message": "Ditto.\n\nYou may want to find the monitor contains the original dip-position first. And a matrix of the monitors may be needed to help you decide the pixels from which monitors need to be subtracted.\n\nOr maybe you add some comments to explain that this logic only handles horizontally placed monitors, which is the most common user cases. (I have no too much experience with Mac OS, does it support aligns monitors horizontally?)",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 55
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
