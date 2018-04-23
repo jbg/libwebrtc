@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "51c2f6fa_deb6951d",
+        "filename": "modules/audio_processing/aec_dump/aec_dump_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "setting",
+      "range": {
+        "startLine": 174,
+        "startChar": 29,
+        "endLine": 174,
+        "endChar": 32
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11112e37_0846a7b1",
         "filename": "modules/audio_processing/aec_dump/aec_dump_impl.cc",
         "patchSetId": 4
@@ -143,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "f2ced16b_736d9f55",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "My bad, I didn\u0027t expand",
+      "parentUuid": "e7d139bf_41f41b14",
+      "range": {
+        "startLine": 115,
+        "startChar": 15,
+        "endLine": 115,
+        "endChar": 34
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f050908_14b51783",
         "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
         "patchSetId": 4
@@ -154,6 +201,30 @@
       "writtenOn": "2018-04-18T09:59:59Z",
       "side": 1,
       "message": "I would add a TODO(bug...) explaining that as soon as we get additional types, this code changes structure. Or, even better, I would structure the code to already support multiple message types.\n\nAlso, I guess this method must support multiple runtime settings at once (because of RuntimeSetting in proto which is a collection of optional fields). This means that we won\u0027t have a switch and that we loose the nice compile-time feature reporting a warning (or even an error) if we don\u0027t look at all the possible cases. If you want, we can discuss offline to find an alternative that warns at compile time if sth is forgotten here.",
+      "range": {
+        "startLine": 570,
+        "startChar": 2,
+        "endLine": 570,
+        "endChar": 40
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79ec3a19_e997592d",
+        "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this offline",
+      "parentUuid": "4f050908_14b51783",
       "range": {
         "startLine": 570,
         "startChar": 2,
@@ -260,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "56e832f0_5a520ce5",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "What if\n- we add a \u003csth\u003e_utils.cc file in which we define a function that gets a pointer to APM and a const RuntimeSetting\u0026\n- we call such a function from DebugDumpReplayer::OnRuntimeSettingEvent() and AecDumpBasedSimulator::HandleMessage()?\n\nThat seems perfectly doable to me. I am strongly against code duplication, especially for this part that depends on the enum RuntimeSetting::Type (see https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_processing/include/audio_processing.h?q\u003druntimesetting+webrtc\u0026sq\u003dpackage:chromium\u0026l\u003d316) which grows over time. And BTW as pointed out in https://webrtc-review.googlesource.com/c/src/+/70502/4/modules/audio_processing/test/aec_dump_based_simulator.cc#570 we should use switch to get compile time errors when a new RuntimeSetting::Type entry is added and one forgets to treat the new entry.",
+      "parentUuid": "40ad14de_a0271dc3",
+      "range": {
+        "startLine": 174,
+        "startChar": 24,
+        "endLine": 174,
+        "endChar": 45
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67c76812_ff5c2eb0",
         "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
         "patchSetId": 4
@@ -304,6 +399,30 @@
       "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2936f3d9_74562481",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92b14e69_15805b68",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 11
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -354,6 +473,30 @@
     },
     {
       "key": {
+        "uuid": "a78c20b8_ba04c4b5",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "130ae651_10c9f4db",
+      "range": {
+        "startLine": 115,
+        "startChar": 7,
+        "endLine": 115,
+        "endChar": 28
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46ddfed1_995cec1c",
         "filename": "modules/audio_processing/test/debug_dump_test.cc",
         "patchSetId": 4
@@ -398,6 +541,30 @@
       "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "704f48f9_b8456cd2",
+        "filename": "modules/audio_processing/test/debug_dump_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-04-23T14:24:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "565635ae_68a38c67",
+      "range": {
+        "startLine": 232,
+        "startChar": 67,
+        "endLine": 232,
+        "endChar": 77
+      },
+      "revId": "3e0c6c5296b32214f58d4ac2effb36a1d6767eb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
