@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d5048b0_40770f09",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-23T14:59:04Z",
+      "side": 1,
+      "message": "I think this method has been added by mistake, it certainly doesn\u0027t seem useful since all the fields are immutable, can you try removing it? I couldn\u0027t find any usages of it.",
+      "range": {
+        "startLine": 120,
+        "startChar": 9,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "28b2b1ef9ac8c40bcb3aac9b7a0ff2c33ebea736",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faba0d51_f3d2ad15",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-23T14:59:04Z",
+      "side": 1,
+      "message": "nit: Use literal \"\" instead of a new object to avoid allocating an object?",
+      "range": {
+        "startLine": 121,
+        "startChar": 25,
+        "endLine": 121,
+        "endChar": 38
+      },
+      "revId": "28b2b1ef9ac8c40bcb3aac9b7a0ff2c33ebea736",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
