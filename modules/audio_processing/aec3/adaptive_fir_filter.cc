@@ -504,6 +504,8 @@ void AdaptiveFirFilter::ResetFilterBuffersToCurrentSize() {
   H_.resize(current_size_partitions_);
   H2_.resize(current_size_partitions_);
   h_.resize(GetTimeDomainLength(current_size_partitions_));
+  partition_to_constrain_ =
+      std::min(partition_to_constrain_, current_size_partitions_);
 }
 
 void AdaptiveFirFilter::UpdateSize() {
