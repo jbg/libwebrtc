@@ -187,6 +187,7 @@ RenderDelayBufferImpl::RenderDelayBufferImpl(const EchoCanceller3Config& config,
   // Necessary condition to avoid unrecoverable echp due to noncausal alignment.
   RTC_DCHECK_EQ(DelayEstimatorOffset(config_), LowRateBufferOffset() * 2);
   Reset();
+  SetAudioBufferDelay(100000);
 }
 
 RenderDelayBufferImpl::~RenderDelayBufferImpl() = default;
@@ -366,6 +367,7 @@ bool RenderDelayBufferImpl::CausalDelay(size_t delay) const {
 }
 
 void RenderDelayBufferImpl::SetAudioBufferDelay(size_t delay_ms) {
+  delay_ms = 10000;
   if (!external_audio_buffer_delay_ms_) {
     RTC_LOG(LS_WARNING)
         << "Receiving a first reported externally buffer delay of " << delay_ms
