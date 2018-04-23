@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "263c57df_9b483393",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-04-23T17:52:03Z",
+      "side": 1,
+      "message": "No, I think that\u0027s fine, it just wasn\u0027t very clear from the new comment. Can it be removed in this CL? If so that I recommend doing that; if not then please add a TODO comment describing what needs to happen before it can be removed (and follow up on that removal--having an ignored parameter to a function is confusing).",
+      "parentUuid": "69a6441c_0866a3c9",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 2
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e23bcd3_9884b943",
         "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
         "patchSetId": 2
