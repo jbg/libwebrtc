@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "5becce07_aeff96f4",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-23T11:45:49Z",
+      "side": 1,
+      "message": "On a second thought, this seemed hard... I removed the TODO since it is unlikely to happen in the future.",
+      "parentUuid": "f0a47645_7664bba5",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0b3ac7d_472cb11f",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 3
@@ -141,6 +165,30 @@
       "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70e04a32_1d91908f",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-23T11:45:49Z",
+      "side": 1,
+      "message": "As discussed offline, this is not possible because WebRtc* files need interfaces from JavaAudioDeviceModule. It is not possible to move the interfaces because WebRtc* files are not public.",
+      "parentUuid": "118bb481_0b295b7f",
+      "range": {
+        "startLine": 805,
+        "startChar": 18,
+        "endLine": 805,
+        "endChar": 61
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -215,6 +263,30 @@
     },
     {
       "key": {
+        "uuid": "17039757_e69502ef",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-23T11:45:49Z",
+      "side": 1,
+      "message": "I mean putting AudioDeviceModule into a separate target. Removed the TODO since this is unlikely to happen...",
+      "parentUuid": "aa3646f7_b815c4cf",
+      "range": {
+        "startLine": 813,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 91
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da40c3bf_639e712d",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 3
@@ -235,6 +307,30 @@
       "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5140589b_53ea8316",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-23T11:45:49Z",
+      "side": 1,
+      "message": "Done, renamed all audio_device -\u003e audio_device_module.",
+      "parentUuid": "da40c3bf_639e712d",
+      "range": {
+        "startLine": 814,
+        "startChar": 21,
+        "endLine": 814,
+        "endChar": 36
+      },
+      "revId": "d01d5589c4be953995deeb005c57f5fb65496ba8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
