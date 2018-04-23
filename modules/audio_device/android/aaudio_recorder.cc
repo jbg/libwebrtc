@@ -41,7 +41,9 @@ AAudioRecorder::~AAudioRecorder() {
 int AAudioRecorder::Init() {
   RTC_LOG(INFO) << "Init";
   RTC_DCHECK(thread_checker_.CalledOnValidThread());
-  RTC_DCHECK_EQ(aaudio_.audio_parameters().channels(), 1u);
+  if (aaudio_.audio_parameters().channels() == 2) {
+    RTC_DLOG(LS_WARNING) << "Stereo mode is enabled";
+  }
   return 0;
 }
 
@@ -107,9 +109,7 @@ void AAudioRecorder::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
   // Create a modified audio buffer class which allows us to deliver any number
   // of samples (and not only multiples of 10ms which WebRTC uses) to match the
   // native AAudio buffer size.
-  const size_t capacity = 5 * audio_parameters.GetBytesPer10msBuffer();
-  fine_audio_buffer_.reset(new FineAudioBuffer(
-      audio_device_buffer_, audio_parameters.sample_rate(), capacity));
+  fine_audio_buffer_.reset(new FineAudioBuffer(audio_device_buffer_));
 }
 
 int AAudioRecorder::EnableBuiltInAEC(bool enable) {
@@ -181,7 +181,8 @@ aaudio_data_callback_result_t AAudioRecorder::OnDataCallback(
   // Copy recorded audio in |audio_data| to the WebRTC sink using the
   // FineAudioBuffer object.
   fine_audio_buffer_->DeliverRecordedData(
-      rtc::MakeArrayView(static_cast<const int16_t*>(audio_data), num_frames),
+      rtc::MakeArrayView(static_cast<const int16_t*>(audio_data),
+                         aaudio_.samples_per_frame() * num_frames),
       static_cast<int>(latency_millis_ + 0.5));
 
   return AAUDIO_CALLBACK_RESULT_CONTINUE;
