@@ -22,6 +22,30 @@
       "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69a6441c_0866a3c9",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-23T17:11:49Z",
+      "side": 1,
+      "message": "Yes. The bottom-right origin is not used by anyone component(except unittests) and only causes a lot of confusion here. I think it\u0027s OK to remove the |origin| in the future if this proposal works fine. \nDo you see any problem?",
+      "parentUuid": "22b3767f_6ea113d6",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 2
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
