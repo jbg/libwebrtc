@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22b3767f_6ea113d6",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-04-23T17:06:14Z",
+      "side": 1,
+      "message": "Your updated description no longer refers to |origin|. In fact, it makes it sound like it will be ignored; was that intentional?",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 2
+      },
+      "revId": "f99c7cbf2002334bfd6bd1603749a08b2c36af91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
