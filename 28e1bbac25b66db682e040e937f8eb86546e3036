@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0921528a_2bdbe375",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29d69864_2441ccf0",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 79
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd1806f7_8323cc45",
         "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94e1c6e2_4d9fa605",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-24T11:19:18Z",
+      "side": 1,
+      "message": "Removed. This log message used to be AppRTC-only (from PeerConnectionClient) so Duo debuggers should not miss it.",
+      "parentUuid": "fd1806f7_8323cc45",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c47e4364_db935ff3",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59e9054f_ddb0cb7f",
+      "range": {
+        "startLine": 119,
+        "startChar": 19,
+        "endLine": 119,
+        "endChar": 53
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbb24227_01d9cf78",
         "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "aca5ee78_41454a89",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbb24227_01d9cf78",
+      "range": {
+        "startLine": 156,
+        "startChar": 14,
+        "endLine": 156,
+        "endChar": 15
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34bcfefd_a36cabe3",
         "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
         "patchSetId": 2
@@ -114,6 +210,30 @@
       "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c0d942_331957f1",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 6589
+      },
+      "writtenOn": "2018-04-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34bcfefd_a36cabe3",
+      "range": {
+        "startLine": 297,
+        "startChar": 13,
+        "endLine": 297,
+        "endChar": 14
+      },
+      "revId": "28e1bbac25b66db682e040e937f8eb86546e3036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
