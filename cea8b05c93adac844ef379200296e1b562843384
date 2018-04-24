@@ -22,6 +22,30 @@
       "revId": "cea8b05c93adac844ef379200296e1b562843384",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34253b43_5446db57",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2290,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-04-24T17:38:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to test this for audio since all the receive tracks get mixed before the samples are handed to the fake audio capture module that the integration tests use for tracking if audio is received. So there\u0027s no good way with the current infrastructure to distinguish between receiving one audio track or multiple.",
+      "parentUuid": "2ec4c8e3_a3b67ea2",
+      "range": {
+        "startLine": 2290,
+        "startChar": 28,
+        "endLine": 2290,
+        "endChar": 0
+      },
+      "revId": "cea8b05c93adac844ef379200296e1b562843384",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
