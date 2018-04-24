@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f61df738_d01e338d",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-24T12:28:57Z",
+      "side": 1,
+      "message": "Can we move this logging to the createAudioDeviceModule call? I\u0027m thinking mostly to get the logging for clients that just rely on the defaults without calling this method.",
+      "range": {
+        "startLine": 101,
+        "startChar": 10,
+        "endLine": 101,
+        "endChar": 65
+      },
+      "revId": "beba89c0e03b38c57d03b1ef285744a019531ced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c6138ce_8a1230ec",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-24T12:28:57Z",
+      "side": 1,
+      "message": "This logging we should probably keep in this method though.",
+      "range": {
+        "startLine": 103,
+        "startChar": 10,
+        "endLine": 103,
+        "endChar": 48
+      },
+      "revId": "beba89c0e03b38c57d03b1ef285744a019531ced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
