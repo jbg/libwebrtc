@@ -542,8 +542,6 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     // or just discard incoming frames?
     RTC_CHECK(encoder_);
 
-    ConfigureQualityScaler();
-
     const webrtc::VideoEncoderFactory::CodecInfo info =
         settings_.encoder_factory->QueryVideoEncoder(
             encoder_config_.video_format);
@@ -592,6 +590,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   int target_framerate = std::min(
       max_framerate_, source_proxy_->GetActiveSinkWants().max_framerate_fps);
   overuse_detector_->OnTargetFramerateUpdated(target_framerate);
+
+  ConfigureQualityScaler();
 }
 
 void VideoStreamEncoder::ConfigureQualityScaler() {
