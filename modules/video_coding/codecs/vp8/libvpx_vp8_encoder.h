@@ -53,9 +53,6 @@ class LibvpxVp8Encoder : public VP8Encoder {
 
   const char* ImplementationName() const override;
 
-  static vpx_enc_frame_flags_t EncodeFlags(
-      const TemporalLayers::FrameConfig& references);
-
  private:
   void SetupTemporalLayers(int num_streams,
                            int num_temporal_layers,
@@ -63,9 +60,6 @@ class LibvpxVp8Encoder : public VP8Encoder {
 
   // Set the cpu_speed setting for encoder based on resolution and/or platform.
   int SetCpuSpeed(int width, int height);
-
-  // Determine number of encoder threads to use.
-  int NumberOfThreads(int width, int height, int number_of_cores);
 
   // Call encoder initialize function and set control settings.
   int InitAndSetControlSettings();
@@ -81,8 +75,6 @@ class LibvpxVp8Encoder : public VP8Encoder {
 
   // Set the stream state for stream |stream_idx|.
   void SetStreamState(bool send_stream, int stream_idx);
-
-  uint32_t MaxIntraTarget(uint32_t optimal_buffer_size);
 
   const bool use_gf_boost_;
 

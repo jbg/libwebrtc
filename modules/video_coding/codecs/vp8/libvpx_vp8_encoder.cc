@@ -167,13 +167,8 @@ bool UpdateVpxConfiguration(TemporalLayers* temporal_layers,
     FillInEncoderConfig(cfg, config);
   return res;
 }
-}  // namespace
 
-std::unique_ptr<VP8Encoder> VP8Encoder::Create() {
-  return rtc::MakeUnique<LibvpxVp8Encoder>();
-}
-
-vpx_enc_frame_flags_t LibvpxVp8Encoder::EncodeFlags(
+vpx_enc_frame_flags_t EncodeFlags(
     const TemporalLayers::FrameConfig& references) {
   RTC_DCHECK(!references.drop_frame);
 
@@ -195,6 +190,59 @@ vpx_enc_frame_flags_t LibvpxVp8Encoder::EncodeFlags(
     flags |= VP8_EFLAG_NO_UPD_ENTROPY;
 
   return flags;
+}
+
+// Determine number of encoder threads to use.
+int NumberOfThreads(int width, int height, int cpus) {
+#if defined(WEBRTC_ANDROID)
+  if (width * height >= 320 * 180) {
+    if (cpus >= 4) {
+      // 3 threads for CPUs with 4 and more cores since most of times only 4
+      // cores will be active.
+      return 3;
+    } else if (cpus == 3 || cpus == 2) {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+  return 1;
+#else
+  if (width * height >= 1920 * 1080 && cpus > 8) {
+    return 8;  // 8 threads for 1080p on high perf machines.
+  } else if (width * height > 1280 * 960 && cpus >= 6) {
+    // 3 threads for 1080p.
+    return 3;
+  } else if (width * height > 640 * 480 && cpus >= 3) {
+    // 2 threads for qHD/HD.
+    return 2;
+  } else {
+    // 1 thread for VGA or less.
+    return 1;
+  }
+#endif
+}
+
+uint32_t MaxIntraTarget(uint32_t optimalBuffersize, uint32_t maxFramerate) {
+  // Set max to the optimal buffer level (normalized by target BR),
+  // and scaled by a scalePar.
+  // Max target size = scalePar * optimalBufferSize * targetBR[Kbps].
+  // This values is presented in percentage of perFrameBw:
+  // perFrameBw = targetBR[Kbps] * 1000 / frameRate.
+  // The target in % is as follows:
+
+  float scalePar = 0.5;
+  uint32_t targetPct = optimalBuffersize * scalePar * maxFramerate / 10;
+
+  // Don't go below 3 times the per frame bandwidth.
+  const uint32_t minIntraTh = 300;
+  return (targetPct < minIntraTh) ? minIntraTh : targetPct;
+}
+
+}  // namespace
+
+std::unique_ptr<VP8Encoder> VP8Encoder::Create() {
+  return rtc::MakeUnique<LibvpxVp8Encoder>();
 }
 
 LibvpxVp8Encoder::LibvpxVp8Encoder()
@@ -462,7 +510,8 @@ int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
   configurations_[0].rc_buf_sz = 1000;
 
   // Set the maximum target size of any key-frame.
-  rc_max_intra_target_ = MaxIntraTarget(configurations_[0].rc_buf_optimal_sz);
+  rc_max_intra_target_ =
+      MaxIntraTarget(configurations_[0].rc_buf_optimal_sz, codec_.maxFramerate);
 
   if (inst->VP8().keyFrameInterval > 0) {
     configurations_[0].kf_mode = VPX_KF_AUTO;
@@ -585,36 +634,6 @@ int LibvpxVp8Encoder::SetCpuSpeed(int width, int height) {
 #endif
 }
 
-int LibvpxVp8Encoder::NumberOfThreads(int width, int height, int cpus) {
-#if defined(WEBRTC_ANDROID)
-  if (width * height >= 320 * 180) {
-    if (cpus >= 4) {
-      // 3 threads for CPUs with 4 and more cores since most of times only 4
-      // cores will be active.
-      return 3;
-    } else if (cpus == 3 || cpus == 2) {
-      return 2;
-    } else {
-      return 1;
-    }
-  }
-  return 1;
-#else
-  if (width * height >= 1920 * 1080 && cpus > 8) {
-    return 8;  // 8 threads for 1080p on high perf machines.
-  } else if (width * height > 1280 * 960 && cpus >= 6) {
-    // 3 threads for 1080p.
-    return 3;
-  } else if (width * height > 640 * 480 && cpus >= 3) {
-    // 2 threads for qHD/HD.
-    return 2;
-  } else {
-    // 1 thread for VGA or less.
-    return 1;
-  }
-#endif
-}
-
 int LibvpxVp8Encoder::InitAndSetControlSettings() {
   vpx_codec_flags_t flags = 0;
   flags |= VPX_CODEC_USE_OUTPUT_PARTITION;
@@ -677,22 +696,6 @@ int LibvpxVp8Encoder::InitAndSetControlSettings() {
   }
   inited_ = true;
   return WEBRTC_VIDEO_CODEC_OK;
-}
-
-uint32_t LibvpxVp8Encoder::MaxIntraTarget(uint32_t optimalBuffersize) {
-  // Set max to the optimal buffer level (normalized by target BR),
-  // and scaled by a scalePar.
-  // Max target size = scalePar * optimalBufferSize * targetBR[Kbps].
-  // This values is presented in percentage of perFrameBw:
-  // perFrameBw = targetBR[Kbps] * 1000 / frameRate.
-  // The target in % is as follows:
-
-  float scalePar = 0.5;
-  uint32_t targetPct = optimalBuffersize * scalePar * codec_.maxFramerate / 10;
-
-  // Don't go below 3 times the per frame bandwidth.
-  const uint32_t minIntraTh = 300;
-  return (targetPct < minIntraTh) ? minIntraTh : targetPct;
 }
 
 int LibvpxVp8Encoder::Encode(const VideoFrame& frame,
