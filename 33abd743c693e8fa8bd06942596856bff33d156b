@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "514d92e7_395f993f",
+        "filename": "modules/audio_device/android/aaudio_player.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-04-24T11:24:25Z",
+      "side": 1,
+      "message": "Thanks, will do. What are the main benefits?",
+      "parentUuid": "435cb497_8f155b75",
+      "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "896914f5_59df174f",
         "filename": "modules/audio_device/android/aaudio_recorder.cc",
         "patchSetId": 15
@@ -33,6 +51,24 @@
       "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b159d101_f45bb7d0",
+        "filename": "modules/audio_device/android/aaudio_recorder.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-04-24T11:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896914f5_59df174f",
+      "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "26e699bd_61f2db93",
+        "filename": "modules/audio_device/android/opensles_player.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-04-24T11:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd5c71cb_96c463fe",
+      "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ad34935_89135dcf",
         "filename": "modules/audio_device/audio_device_buffer.cc",
         "patchSetId": 15
@@ -64,6 +118,30 @@
       "writtenOn": "2018-04-24T09:49:22Z",
       "side": 1,
       "message": "You repeat this expression twice. Why not a double assignment instead:\n\n  x \u003d y \u003d 4;",
+      "range": {
+        "startLine": 368,
+        "startChar": 10,
+        "endLine": 368,
+        "endChar": 57
+      },
+      "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35f628a4_94b9f8fd",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-04-24T11:24:25Z",
+      "side": 1,
+      "message": "Thanks. Done.",
+      "parentUuid": "4ad34935_89135dcf",
       "range": {
         "startLine": 368,
         "startChar": 10,
@@ -96,6 +174,30 @@
       "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3cc4c82_25134152",
+        "filename": "modules/audio_device/fine_audio_buffer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-04-24T11:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "415227a6_04005445",
+      "range": {
+        "startLine": 21,
+        "startChar": 40,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
