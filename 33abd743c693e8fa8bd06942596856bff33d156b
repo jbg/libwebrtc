@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7362ecbd_4c9ee713",
+        "filename": "modules/audio_device/android/aaudio_player.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-24T13:21:32Z",
+      "side": 1,
+      "message": "Basically, anywhere you use `new` manually is a place where you manually have to make sure there\u0027s no possible way the new object could leak before you hand it over to someone reliable like unique_ptr. Since we don\u0027t use exceptions this isn\u0027t really all that tricky, but it\u0027s even less tricky if you make sure you\u0027re not manually responsible at all.\n\nAs a reviewer, whenever I see the word \"new\" in a CL, I have to check that the object isn\u0027t leaked; when I see \"MakeUnique\", I know that the compiler has already checked.",
+      "parentUuid": "514d92e7_395f993f",
+      "revId": "33abd743c693e8fa8bd06942596856bff33d156b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "896914f5_59df174f",
         "filename": "modules/audio_device/android/aaudio_recorder.cc",
         "patchSetId": 15
