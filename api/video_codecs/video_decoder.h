@@ -22,7 +22,6 @@
 
 namespace webrtc {
 
-class RTPFragmentationHeader;
 // TODO(pbos): Expose these through a public (root) header or change these APIs.
 struct CodecSpecificInfo;
 class VideoCodec;
@@ -58,7 +57,6 @@ class VideoDecoder {
 
   virtual int32_t Decode(const EncodedImage& input_image,
                          bool missing_frames,
-                         const RTPFragmentationHeader* fragmentation,
                          const CodecSpecificInfo* codec_specific_info = NULL,
                          int64_t render_time_ms = -1) = 0;
 

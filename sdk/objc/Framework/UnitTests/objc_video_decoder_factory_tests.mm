@@ -73,22 +73,20 @@ TEST(ObjCVideoDecoderFactoryTest, DecodeReturnsOKOnSuccess) {
   webrtc::VideoDecoder *decoder = GetObjCDecoder(CreateOKDecoderFactory());
 
   webrtc::EncodedImage encoded_image;
-  webrtc::RTPFragmentationHeader header;
   webrtc::CodecSpecificInfo info;
   info.codecType = webrtc::kVideoCodecH264;
 
-  EXPECT_EQ(decoder->Decode(encoded_image, false, &header, &info, 0), WEBRTC_VIDEO_CODEC_OK);
+  EXPECT_EQ(decoder->Decode(encoded_image, false, &info, 0), WEBRTC_VIDEO_CODEC_OK);
 }
 
 TEST(ObjCVideoDecoderFactoryTest, DecodeReturnsErrorOnFail) {
   webrtc::VideoDecoder *decoder = GetObjCDecoder(CreateErrorDecoderFactory());
 
   webrtc::EncodedImage encoded_image;
-  webrtc::RTPFragmentationHeader header;
   webrtc::CodecSpecificInfo info;
   info.codecType = webrtc::kVideoCodecH264;
 
-  EXPECT_EQ(decoder->Decode(encoded_image, false, &header, &info, 0), WEBRTC_VIDEO_CODEC_ERROR);
+  EXPECT_EQ(decoder->Decode(encoded_image, false, &info, 0), WEBRTC_VIDEO_CODEC_ERROR);
 }
 
 TEST(ObjCVideoDecoderFactoryTest, ReleaseDecodeReturnsOKOnSuccess) {
