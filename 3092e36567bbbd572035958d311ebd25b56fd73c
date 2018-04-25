@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6250b9ee_c2ee8e11",
+        "filename": "sdk/android/api/org/webrtc/JavaI420Buffer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-25T15:16:50Z",
+      "side": 1,
+      "message": "Maybe add a check that strideY \u003e\u003d width and strideUV \u003e\u003d (width + 1) / 2",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 91
+      },
+      "revId": "3092e36567bbbd572035958d311ebd25b56fd73c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f155489_7bccfa51",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-25T15:16:50Z",
+      "side": 1,
+      "message": "I think the correct logic here is:\nfinal int chromaHeight \u003d\n          (sliceHeight % 2 \u003d\u003d 0) ? (height + 1) / 2 : height / 2;\n\n(At least if we believe the old implementation in androidmediadecoder.cc.)\n\nI am afraid vEnd may end beyond the buffer with the current logic.",
+      "range": {
+        "startLine": 516,
+        "startChar": 14,
+        "endLine": 516,
+        "endChar": 26
+      },
+      "revId": "3092e36567bbbd572035958d311ebd25b56fd73c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a8528e6_e5f0d773",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-25T15:16:50Z",
+      "side": 1,
+      "message": "I think we could instead of allocating a bigger buffer implement a tight copy using libyuv. Can you add CopyPlane method to YuvHelper and use it?",
+      "range": {
+        "startLine": 525,
+        "startChar": 40,
+        "endLine": 525,
+        "endChar": 97
+      },
+      "revId": "3092e36567bbbd572035958d311ebd25b56fd73c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

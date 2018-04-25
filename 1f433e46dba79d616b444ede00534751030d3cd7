@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d382227d_1247ab18",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-25T15:16:50Z",
+      "side": 0,
+      "message": "I think we still need this logic?",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 5
+      },
+      "revId": "1f433e46dba79d616b444ede00534751030d3cd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
