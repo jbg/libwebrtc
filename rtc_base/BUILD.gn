@@ -154,6 +154,7 @@ rtc_source_set("criticalsection") {
 
 rtc_source_set("platform_thread") {
   visibility = [
+    "//sdk/android:rtc_task_queue_alooper",
     ":rtc_base_approved",
     ":rtc_base_approved_generic",
     ":rtc_task_queue_libevent",
