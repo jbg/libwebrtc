@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf5f8fd1_f57ce986",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-25T12:11:02Z",
+      "side": 1,
+      "message": "Can we make this an enum class?",
+      "range": {
+        "startLine": 386,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 4
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce106163_fae55448",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-25T12:11:02Z",
+      "side": 1,
+      "message": "prediction",
+      "range": {
+        "startLine": 389,
+        "startChar": 30,
+        "endLine": 389,
+        "endChar": 40
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d470605f_de353ffd",
+        "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-25T12:11:02Z",
+      "side": 1,
+      "message": "Maybe check this for the SL1 frame too?",
+      "range": {
+        "startLine": 362,
+        "startChar": 50,
+        "endLine": 362,
+        "endChar": 78
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f687bc8_1ad45002",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-25T12:11:02Z",
+      "side": 1,
+      "message": "Should this only be guarded by num_spatial_layers_ \u003e 1?",
+      "range": {
+        "startLine": 463,
+        "startChar": 4,
+        "endLine": 463,
+        "endChar": 62
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e91e215_44e2c82c",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-25T12:11:02Z",
+      "side": 1,
+      "message": "Do we still want this?",
+      "range": {
+        "startLine": 646,
+        "startChar": 2,
+        "endLine": 646,
+        "endChar": 69
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da5c6dbb_c23c765f",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-04-25T12:11:02Z",
+      "side": 1,
+      "message": "InterLayerPredMode?",
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
