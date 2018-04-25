@@ -22,6 +22,30 @@
       "revId": "61a405661d3b0e42b261af50135f4fda8ece5b78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0977e418_a635614e",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-04-25T10:57:01Z",
+      "side": 1,
+      "message": "I was trying to also remove the deprecated initializeFieldTrials() but noticed clients were still using it. I think we should still update our code to not use deprecated methods when we can. I\u0027ll try to do a follow-up CL where I remove the initializeFieldTrials() method.",
+      "parentUuid": "3d5bc14b_8d871ba6",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 199,
+        "endChar": 31
+      },
+      "revId": "61a405661d3b0e42b261af50135f4fda8ece5b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
