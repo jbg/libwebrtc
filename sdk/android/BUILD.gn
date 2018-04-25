@@ -34,6 +34,36 @@ config("libjingle_peerconnection_jni_warnings_config") {
   }
 }
 
+rtc_source_set("rtc_task_queue_alooper") {
+  visibility = [ "*" ]
+  sources = [
+    "src/jni/task_queue_alooper.cc",
+  ]
+  deps = [
+    ":generated_rtc_task_queue_alooper_jni",
+    ":native_api_jni",
+    "//rtc_base:checks",
+    "//rtc_base:criticalsection",
+    "//rtc_base:logging",
+    "//rtc_base:platform_thread",
+    "//rtc_base:ptr_util",
+    "//rtc_base:refcount",
+    "//rtc_base:rtc_event",
+    "//rtc_base:rtc_task_queue_api",
+    "//rtc_base:safe_conversions",
+    "//rtc_base:timeutils",
+  ]
+  libs = [ "android" ]
+}
+
+generate_jni("generated_rtc_task_queue_alooper_jni") {
+  sources = [
+    "src/java/org/webrtc/LooperTaskQueueHelper.java",
+  ]
+  jni_package = ""
+  jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
+}
+
 generate_jni("generated_base_jni") {
   sources = [
     "api/org/webrtc/NetworkMonitor.java",
@@ -732,6 +762,7 @@ rtc_android_library("base_java") {
     "src/java/org/webrtc/JniCommon.java",
     "src/java/org/webrtc/JniHelper.java",
     "src/java/org/webrtc/JNINamespace.java",
+    "src/java/org/webrtc/LooperTaskQueueHelper.java",
     "src/java/org/webrtc/NativeClassQualifiedName.java",
     "src/java/org/webrtc/RefCountDelegate.java",
     "src/java/org/webrtc/WebRtcClassLoader.java",
