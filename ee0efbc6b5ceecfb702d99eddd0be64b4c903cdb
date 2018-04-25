@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "491cba3c_15dd15bf",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-25T12:29:01Z",
+      "side": 1,
+      "message": "Yes please---that\u0027s generally the way to go with all new enums.",
+      "parentUuid": "bf5f8fd1_f57ce986",
+      "range": {
+        "startLine": 386,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 4
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce106163_fae55448",
         "filename": "common_types.h",
         "patchSetId": 9
