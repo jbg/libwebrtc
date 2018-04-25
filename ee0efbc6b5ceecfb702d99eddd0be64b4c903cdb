@@ -72,6 +72,29 @@
     },
     {
       "key": {
+        "uuid": "776a2015_4cb1ce3e",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-04-25T20:06:28Z",
+      "side": 1,
+      "message": "Only the spatial base layer in a VP9 SVC superframe is a key frame.  Consider the following wording: \"Allow inter-layer prediction only for frames within a superframe containing a key picture\"",
+      "range": {
+        "startLine": 392,
+        "startChar": 37,
+        "endLine": 392,
+        "endChar": 48
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d470605f_de353ffd",
         "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
         "patchSetId": 9
