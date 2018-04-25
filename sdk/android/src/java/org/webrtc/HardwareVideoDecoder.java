@@ -513,37 +513,31 @@ class HardwareVideoDecoder
   private VideoFrame.Buffer copyI420Buffer(
       ByteBuffer buffer, int stride, int sliceHeight, int width, int height) {
     final int uvStride = stride / 2;
+    final int chromaHeight = (height + 1) / 2;
 
     final int yPos = 0;
+    final int yEnd = yPos + stride * height;
     final int uPos = yPos + stride * sliceHeight;
-    final int uEnd = uPos + uvStride * (sliceHeight / 2);
+    final int uEnd = uPos + uvStride * chromaHeight;
     final int vPos = uPos + uvStride * sliceHeight / 2;
-    final int vEnd = vPos + uvStride * (sliceHeight / 2);
+    final int vEnd = vPos + uvStride * chromaHeight;
 
-    VideoFrame.I420Buffer frameBuffer = JavaI420Buffer.allocate(width, height);
+    VideoFrame.I420Buffer frameBuffer = JavaI420Buffer.allocate(width, height, stride, uvStride);
 
     ByteBuffer dataY = frameBuffer.getDataY();
+    buffer.limit(yEnd);
     buffer.position(yPos);
-    buffer.limit(uPos);
     dataY.put(buffer);
 
     ByteBuffer dataU = frameBuffer.getDataU();
-    buffer.position(uPos);
     buffer.limit(uEnd);
+    buffer.position(uPos);
     dataU.put(buffer);
-    if (sliceHeight % 2 != 0) {
-      buffer.position(uEnd - uvStride); // Repeat the last row.
-      dataU.put(buffer);
-    }
 
     ByteBuffer dataV = frameBuffer.getDataV();
-    buffer.position(vPos);
     buffer.limit(vEnd);
+    buffer.position(vPos);
     dataV.put(buffer);
-    if (sliceHeight % 2 != 0) {
-      buffer.position(vEnd - uvStride); // Repeat the last row.
-      dataV.put(buffer);
-    }
 
     return frameBuffer;
   }
