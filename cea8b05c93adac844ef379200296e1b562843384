@@ -46,6 +46,64 @@
       "revId": "cea8b05c93adac844ef379200296e1b562843384",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcc0757e_c69f2259",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2290,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-04-25T21:10:35Z",
+      "side": 1,
+      "message": "I believe getting unmixed, per-track frames is possible using AudioTrackInterface::AddSink. This is what chromium uses, since it handles audio output itself rather than relying on WebRTC.",
+      "parentUuid": "34253b43_5446db57",
+      "range": {
+        "startLine": 2290,
+        "startChar": 28,
+        "endLine": 2290,
+        "endChar": 0
+      },
+      "revId": "cea8b05c93adac844ef379200296e1b562843384",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39a6556b_25aae44c",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-04-25T21:10:35Z",
+      "side": 1,
+      "message": "As a sanity check, probably a good idea to assert that there are two receivers, like the test below does. If for some reason only one was created, then ExpectNewFrames would succeed even if only one track was successfully received.",
+      "revId": "cea8b05c93adac844ef379200296e1b562843384",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83a95c36_7735e464",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2300,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-04-25T21:10:35Z",
+      "side": 1,
+      "message": "nit: EXPECT instead of ASSERT",
+      "revId": "cea8b05c93adac844ef379200296e1b562843384",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
