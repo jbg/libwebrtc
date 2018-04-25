@@ -159,6 +159,7 @@ rtc_source_set("platform_thread") {
     ":rtc_task_queue_libevent",
     ":rtc_task_queue_win",
     ":sequenced_task_checker",
+    "//sdk/android:rtc_task_queue_alooper",
   ]
   sources = [
     "platform_thread.cc",
