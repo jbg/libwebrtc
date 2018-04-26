@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6a2d9e7f_da0a7ad3",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "491cba3c_15dd15bf",
+      "range": {
+        "startLine": 386,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 4
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce106163_fae55448",
         "filename": "common_types.h",
         "patchSetId": 9
@@ -69,6 +93,30 @@
       "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "320274b0_333c1097",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce106163_fae55448",
+      "range": {
+        "startLine": 389,
+        "startChar": 30,
+        "endLine": 389,
+        "endChar": 40
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "a50cea7e_b716e17b",
+        "filename": "common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Superframe and picture terms have the same meaning. Superframe is what VP9 spec uses. Picture is what VP9 RTP spec uses:\n   For terminology, this document uses the term \"frame\" to refer to a\n   single encoded VP9 frame for a particular resolution/quality, and\n   \"picture\" to refer to all the representations (frames) at a single\n   instant in time.  A picture thus consists of one or more frames,\n   encoding different spatial layers.\n\nLets use \"picture\" in WebRTC. \"Key picture\" is the set of frames belonging to the same time instance where base frame is coded as intra.\nDoes that make sense?",
+      "parentUuid": "776a2015_4cb1ce3e",
+      "range": {
+        "startLine": 392,
+        "startChar": 37,
+        "endLine": 392,
+        "endChar": 48
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d470605f_de353ffd",
         "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
         "patchSetId": 9
@@ -115,6 +187,30 @@
       "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52996455_d1e7b6e3",
+        "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "d470605f_de353ffd",
+      "range": {
+        "startLine": 362,
+        "startChar": 50,
+        "endLine": 362,
+        "endChar": 78
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "4ecd2642_507173a5",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f687bc8_1ad45002",
+      "range": {
+        "startLine": 463,
+        "startChar": 4,
+        "endLine": 463,
+        "endChar": 62
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e91e215_44e2c82c",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
         "patchSetId": 9
@@ -164,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "a07a68c1_cd027aca",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Replaced with:\n  // Always set inter_layer_predicted to true on high layer frame if inter-layer\n  // prediction (ILP) is allowed even if encoder didn\u0027t actually use it.\n  // Setting inter_layer_predicted to false would allow receiver to decode high\n  // layer frame without decoding low layer frame. If that would happen (e.g.\n  // if low layer frame is lost) then receiver won\u0027t be able to decode next high\n  // layer frame which uses ILP.",
+      "parentUuid": "6e91e215_44e2c82c",
+      "range": {
+        "startLine": 646,
+        "startChar": 2,
+        "endLine": 646,
+        "endChar": 69
+      },
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da5c6dbb_c23c765f",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
         "patchSetId": 9
@@ -178,6 +322,24 @@
       "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aec2e8f5_3f2b2494",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:27:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da5c6dbb_c23c765f",
+      "revId": "ee0efbc6b5ceecfb702d99eddd0be64b4c903cdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
