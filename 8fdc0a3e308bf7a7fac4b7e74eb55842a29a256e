@@ -22,6 +22,30 @@
       "revId": "8fdc0a3e308bf7a7fac4b7e74eb55842a29a256e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdde9c6b_20474593",
+        "filename": "modules/audio_coding/codecs/ilbc/cb_construct.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-26T13:35:45Z",
+      "side": 1,
+      "message": "No, that\u0027s what I intended: (s32,s32) -\u003e s32. I\u0027m not overly pleased with how it\u0027s currently encoded in the function name, but it\u0027s correct at least.",
+      "parentUuid": "72c12cf5_0adf84f6",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "8fdc0a3e308bf7a7fac4b7e74eb55842a29a256e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
