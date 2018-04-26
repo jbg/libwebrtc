@@ -21,6 +21,8 @@
 #include <numeric>
 
 #include "modules/audio_processing/aec3/vector_math.h"
+#include "modules/audio_processing/logging/apm_data_dumper.h"
+#include "rtc_base/atomicops.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
@@ -253,6 +255,8 @@ void AdjustNonConvergedFrequencies(
 
 }  // namespace
 
+int SuppressionGain::instance_count_ = 0;
+
 // TODO(peah): Add further optimizations, in particular for the divisions.
 void SuppressionGain::LowerBandGain(
     bool low_noise_render,
@@ -320,6 +324,11 @@ void SuppressionGain::LowerBandGain(
   MaskingPower(config_, nearend, comfort_noise, last_masker_, *gain,
                &last_masker_);
   aec3::VectorMath(optimization_).Sqrt(*gain);
+
+  // Debug outputs for the purpose of development and analysis.
+  data_dumper_->DumpRaw("aec3_suppressor_min_gain", min_gain);
+  data_dumper_->DumpRaw("aec3_suppressor_max_gain", max_gain);
+  data_dumper_->DumpRaw("aec3_suppressor_last_masker", last_masker_);
 }
 
 SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
@@ -330,7 +339,9 @@ SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
       state_change_duration_blocks_(
           static_cast<int>(config_.filter.config_change_duration_blocks)),
       coherence_gain_(sample_rate_hz,
-                      config_.suppressor.bands_with_reliable_coherence) {
+                      config_.suppressor.bands_with_reliable_coherence),
+      data_dumper_(
+          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))) {
   RTC_DCHECK_LT(0, state_change_duration_blocks_);
   one_by_state_change_duration_blocks_ = 1.f / state_change_duration_blocks_;
   last_gain_.fill(1.f);
