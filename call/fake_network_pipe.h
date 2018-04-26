@@ -199,27 +199,34 @@ class FakeNetworkPipe : public Transport, public PacketReceiver, public Module {
  public:
   using Config = SimulatedNetwork::Config;
 
-  // Use these constructors if you plan to insert packets using DeliverPacket().
-  FakeNetworkPipe(Clock* clock, const FakeNetworkPipe::Config& config);
+  RTC_DEPRECATED FakeNetworkPipe(Clock* clock,
+                                 const FakeNetworkPipe::Config& config);
+  RTC_DEPRECATED FakeNetworkPipe(Clock* clock,
+                                 const FakeNetworkPipe::Config& config,
+                                 PacketReceiver* receiver);
+  RTC_DEPRECATED FakeNetworkPipe(Clock* clock,
+                                 const FakeNetworkPipe::Config& config,
+                                 PacketReceiver* receiver,
+                                 uint64_t seed);
+  RTC_DEPRECATED FakeNetworkPipe(Clock* clock,
+                                 const FakeNetworkPipe::Config& config,
+                                 Transport* transport);
+
   FakeNetworkPipe(Clock* clock,
-                  const FakeNetworkPipe::Config& config,
+                  std::unique_ptr<FakeNetworkInterface>&& fake_network);
+
+  // Use this constructor if you plan to insert packets using DeliverPacket().
+  FakeNetworkPipe(Clock* clock,
+                  std::unique_ptr<FakeNetworkInterface>&& fake_network,
                   PacketReceiver* receiver);
-  FakeNetworkPipe(Clock* clock,
-                  const FakeNetworkPipe::Config& config,
-                  PacketReceiver* receiver,
-                  uint64_t seed);
 
   // Use this constructor if you plan to insert packets using SendRt[c?]p().
   FakeNetworkPipe(Clock* clock,
-                  const FakeNetworkPipe::Config& config,
+                  std::unique_ptr<FakeNetworkInterface>&& fake_network,
                   Transport* transport);
 
   virtual ~FakeNetworkPipe();
-
   void SetClockOffset(int64_t offset_ms);
-
-  // Sets a new configuration. This won't affect packets already in the pipe.
-  void SetConfig(const FakeNetworkPipe::Config& config);
 
   // Must not be called in parallel with DeliverPacket or Process.
   void SetReceiver(PacketReceiver* receiver);
@@ -265,6 +272,11 @@ class FakeNetworkPipe : public Transport, public PacketReceiver, public Module {
   void SetTimeToNextProcess(int64_t skip_us);
 
  private:
+  FakeNetworkPipe(Clock* clock,
+                  std::unique_ptr<FakeNetworkInterface>&& fake_network,
+                  PacketReceiver* receiver,
+                  Transport* transport);
+
   // Returns true if enqueued, or false if packet was dropped.
   virtual bool EnqueuePacket(rtc::CopyOnWriteBuffer packet,
                      rtc::Optional<PacketOptions> options,
@@ -279,7 +291,7 @@ class FakeNetworkPipe : public Transport, public PacketReceiver, public Module {
   Clock* const clock_;
   // |config_lock| guards the mostly constant things like the callbacks.
   rtc::CriticalSection config_lock_;
-  const std::unique_ptr<SimulatedNetwork> fake_network_;
+  const std::unique_ptr<FakeNetworkInterface> fake_network_;
   PacketReceiver* receiver_ RTC_GUARDED_BY(config_lock_);
   Transport* const transport_ RTC_GUARDED_BY(config_lock_);
 
