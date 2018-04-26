@@ -10,7 +10,8 @@
 
 #include "p2p/base/basicpacketsocketfactory.h"
 
-#include <string>
+#include <memory>
+#include <utility>
 
 #include "p2p/base/asyncstuntcpsocket.h"
 #include "p2p/base/stun.h"
@@ -20,181 +21,158 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/nethelpers.h"
 #include "rtc_base/physicalsocketserver.h"
+#include "rtc_base/ptr_util.h"
 #include "rtc_base/socketadapters.h"
 #include "rtc_base/ssladapter.h"
 #include "rtc_base/thread.h"
+#include "rtc_base/thread_checker.h"
 
 namespace rtc {
 
 BasicPacketSocketFactory::BasicPacketSocketFactory()
-    : thread_(Thread::Current()),
-      socket_factory_(NULL) {
-}
+    : thread_(Thread::Current()) {}
 
 BasicPacketSocketFactory::BasicPacketSocketFactory(Thread* thread)
-    : thread_(thread),
-      socket_factory_(NULL) {
-}
+    : thread_(thread) {}
 
 BasicPacketSocketFactory::BasicPacketSocketFactory(
     SocketFactory* socket_factory)
-    : thread_(NULL),
-      socket_factory_(socket_factory) {
-}
+    : socket_factory_(socket_factory) {}
 
-BasicPacketSocketFactory::~BasicPacketSocketFactory() {
-}
+BasicPacketSocketFactory::~BasicPacketSocketFactory() = default;
 
-AsyncPacketSocket* BasicPacketSocketFactory::CreateUdpSocket(
-    const SocketAddress& address,
-    uint16_t min_port,
-    uint16_t max_port) {
+std::unique_ptr<AsyncPacketSocket> BasicPacketSocketFactory::CreateUdpSocket(
+    const UdpSocketCreateInfo& create_info) {
   // UDP sockets are simple.
-  AsyncSocket* socket =
-      socket_factory()->CreateAsyncSocket(address.family(), SOCK_DGRAM);
+  std::unique_ptr<AsyncSocket> socket(socket_factory()->CreateAsyncSocket(
+      create_info.local_address.family(), SOCK_DGRAM));
   if (!socket) {
-    return NULL;
+    return nullptr;
   }
-  if (BindSocket(socket, address, min_port, max_port) < 0) {
+  if (BindSocket(socket.get(), create_info) < 0) {
     RTC_LOG(LS_ERROR) << "UDP bind failed with error " << socket->GetError();
-    delete socket;
-    return NULL;
+    return nullptr;
   }
-  return new AsyncUDPSocket(socket);
+  return rtc::MakeUnique<AsyncUDPSocket>(socket.release());
 }
 
-AsyncPacketSocket* BasicPacketSocketFactory::CreateServerTcpSocket(
-    const SocketAddress& local_address,
-    uint16_t min_port,
-    uint16_t max_port,
-    int opts) {
+std::unique_ptr<AsyncPacketSocket>
+BasicPacketSocketFactory::CreateServerTcpSocket(
+    const ServerTcpSocketCreateInfo& create_info) {
   // Fail if TLS is required.
-  if (opts & PacketSocketFactory::OPT_TLS) {
+  if (create_info.opts & PacketSocketFactory::OPT_TLS) {
     RTC_LOG(LS_ERROR) << "TLS support currently is not available.";
-    return NULL;
+    return nullptr;
   }
 
-  AsyncSocket* socket =
-      socket_factory()->CreateAsyncSocket(local_address.family(), SOCK_STREAM);
+  std::unique_ptr<AsyncSocket> socket(socket_factory()->CreateAsyncSocket(
+      create_info.local_address.family(), SOCK_STREAM));
   if (!socket) {
-    return NULL;
+    return nullptr;
   }
 
-  if (BindSocket(socket, local_address, min_port, max_port) < 0) {
+  if (BindSocket(socket.get(), create_info) < 0) {
     RTC_LOG(LS_ERROR) << "TCP bind failed with error " << socket->GetError();
-    delete socket;
-    return NULL;
+    return nullptr;
   }
 
   // If using fake TLS, wrap the TCP socket in a pseudo-SSL socket.
-  if (opts & PacketSocketFactory::OPT_TLS_FAKE) {
-    RTC_DCHECK(!(opts & PacketSocketFactory::OPT_TLS));
-    socket = new AsyncSSLSocket(socket);
+  if (create_info.opts & PacketSocketFactory::OPT_TLS_FAKE) {
+    RTC_DCHECK(!(create_info.opts & PacketSocketFactory::OPT_TLS));
+    socket = rtc::MakeUnique<AsyncSSLSocket>(socket.release());
   }
 
   // Set TCP_NODELAY (via OPT_NODELAY) for improved performance.
   // See http://go/gtalktcpnodelayexperiment
   socket->SetOption(Socket::OPT_NODELAY, 1);
 
-  if (opts & PacketSocketFactory::OPT_STUN)
-    return new cricket::AsyncStunTCPSocket(socket, true);
-
-  return new AsyncTCPSocket(socket, true);
-}
-
-AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
-    const SocketAddress& local_address,
-    const SocketAddress& remote_address,
-    const ProxyInfo& proxy_info,
-    const std::string& user_agent,
-    int opts) {
-  PacketSocketTcpOptions tcp_options;
-  tcp_options.opts = opts;
-  return CreateClientTcpSocket(local_address, remote_address, proxy_info,
-                               user_agent, tcp_options);
-}
-
-AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
-    const SocketAddress& local_address,
-    const SocketAddress& remote_address,
-    const ProxyInfo& proxy_info,
-    const std::string& user_agent,
-    const PacketSocketTcpOptions& tcp_options) {
-  AsyncSocket* socket =
-      socket_factory()->CreateAsyncSocket(local_address.family(), SOCK_STREAM);
-  if (!socket) {
-    return NULL;
+  if (create_info.opts & PacketSocketFactory::OPT_STUN) {
+    return rtc::MakeUnique<cricket::AsyncStunTCPSocket>(socket.release(), true);
   }
 
-  if (BindSocket(socket, local_address, 0, 0) < 0) {
+  return rtc::MakeUnique<AsyncTCPSocket>(socket.release(), true);
+}
+
+std::unique_ptr<AsyncPacketSocket>
+BasicPacketSocketFactory::CreateClientTcpSocket(
+    const ClientTcpSocketCreateInfo& create_info) {
+  std::unique_ptr<AsyncSocket> socket(socket_factory()->CreateAsyncSocket(
+      create_info.local_address.family(), SOCK_STREAM));
+  if (!socket) {
+    return nullptr;
+  }
+
+  if (BindSocket(socket.get(), create_info) < 0) {
     // Allow BindSocket to fail if we're binding to the ANY address, since this
     // is mostly redundant in the first place. The socket will be bound when we
     // call Connect() instead.
-    if (local_address.IsAnyIP()) {
+    if (create_info.local_address.IsAnyIP()) {
       RTC_LOG(LS_WARNING) << "TCP bind failed with error " << socket->GetError()
                           << "; ignoring since socket is using 'any' address.";
     } else {
       RTC_LOG(LS_ERROR) << "TCP bind failed with error " << socket->GetError();
-      delete socket;
-      return NULL;
+      return nullptr;
     }
   }
 
   // If using a proxy, wrap the socket in a proxy socket.
-  if (proxy_info.type == PROXY_SOCKS5) {
-    socket = new AsyncSocksProxySocket(
-        socket, proxy_info.address, proxy_info.username, proxy_info.password);
-  } else if (proxy_info.type == PROXY_HTTPS) {
-    socket =
-        new AsyncHttpsProxySocket(socket, user_agent, proxy_info.address,
-                                  proxy_info.username, proxy_info.password);
+  if (create_info.proxy_info.type == PROXY_SOCKS5) {
+    socket = rtc::MakeUnique<AsyncSocksProxySocket>(
+        socket.release(), create_info.proxy_info.address,
+        create_info.proxy_info.username, create_info.proxy_info.password);
+  } else if (create_info.proxy_info.type == PROXY_HTTPS) {
+    socket = rtc::MakeUnique<AsyncHttpsProxySocket>(
+        socket.release(), create_info.user_agent,
+        create_info.proxy_info.address, create_info.proxy_info.username,
+        create_info.proxy_info.password);
   }
 
   // Assert that at most one TLS option is used.
-  int tlsOpts = tcp_options.opts & (PacketSocketFactory::OPT_TLS |
+  int tlsOpts = create_info.opts & (PacketSocketFactory::OPT_TLS |
                                     PacketSocketFactory::OPT_TLS_FAKE |
                                     PacketSocketFactory::OPT_TLS_INSECURE);
-  RTC_DCHECK((tlsOpts & (tlsOpts - 1)) == 0);
+  RTC_DCHECK_EQ((tlsOpts & (tlsOpts - 1)), 0);
 
   if ((tlsOpts & PacketSocketFactory::OPT_TLS) ||
       (tlsOpts & PacketSocketFactory::OPT_TLS_INSECURE)) {
     // Using TLS, wrap the socket in an SSL adapter.
-    SSLAdapter* ssl_adapter = SSLAdapter::Create(socket);
+    std::unique_ptr<SSLAdapter> ssl_adapter(
+        SSLAdapter::Create(socket.release()));
     if (!ssl_adapter) {
-      return NULL;
+      return nullptr;
     }
 
     if (tlsOpts & PacketSocketFactory::OPT_TLS_INSECURE) {
       ssl_adapter->SetIgnoreBadCert(true);
     }
 
-    ssl_adapter->SetAlpnProtocols(tcp_options.tls_alpn_protocols);
-    ssl_adapter->SetEllipticCurves(tcp_options.tls_elliptic_curves);
+    ssl_adapter->SetAlpnProtocols(create_info.tls_alpn_protocols);
+    ssl_adapter->SetEllipticCurves(create_info.tls_elliptic_curves);
 
-    socket = ssl_adapter;
-
-    if (ssl_adapter->StartSSL(remote_address.hostname().c_str(), false) != 0) {
-      delete ssl_adapter;
-      return NULL;
+    if (ssl_adapter->StartSSL(create_info.remote_address.hostname().c_str(),
+                              false) != 0) {
+      RTC_LOG(LS_INFO) << create_info.remote_address.hostname();
+      return nullptr;
     }
 
+    socket = std::move(ssl_adapter);
   } else if (tlsOpts & PacketSocketFactory::OPT_TLS_FAKE) {
     // Using fake TLS, wrap the TCP socket in a pseudo-SSL socket.
-    socket = new AsyncSSLSocket(socket);
+    socket = rtc::MakeUnique<AsyncSSLSocket>(socket.release());
   }
 
-  if (socket->Connect(remote_address) < 0) {
+  if (socket->Connect(create_info.remote_address) < 0) {
     RTC_LOG(LS_ERROR) << "TCP connect failed with error " << socket->GetError();
-    delete socket;
-    return NULL;
+    return nullptr;
   }
 
   // Finally, wrap that socket in a TCP or STUN TCP packet socket.
-  AsyncPacketSocket* tcp_socket;
-  if (tcp_options.opts & PacketSocketFactory::OPT_STUN) {
-    tcp_socket = new cricket::AsyncStunTCPSocket(socket, false);
+  std::unique_ptr<AsyncPacketSocket> tcp_socket;
+  if (create_info.opts & PacketSocketFactory::OPT_STUN) {
+    tcp_socket =
+        rtc::MakeUnique<cricket::AsyncStunTCPSocket>(socket.release(), false);
   } else {
-    tcp_socket = new AsyncTCPSocket(socket, false);
+    tcp_socket = rtc::MakeUnique<AsyncTCPSocket>(socket.release(), false);
   }
 
   // Set TCP_NODELAY (via OPT_NODELAY) for improved performance.
@@ -204,22 +182,23 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
   return tcp_socket;
 }
 
-AsyncResolverInterface* BasicPacketSocketFactory::CreateAsyncResolver() {
-  return new AsyncResolver();
+std::unique_ptr<AsyncResolverInterface>
+BasicPacketSocketFactory::CreateAsyncResolverUnique() {
+  return rtc::MakeUnique<AsyncResolver>();
 }
 
 int BasicPacketSocketFactory::BindSocket(AsyncSocket* socket,
-                                         const SocketAddress& local_address,
-                                         uint16_t min_port,
-                                         uint16_t max_port) {
+                                         const SocketCreateInfo& create_info) {
   int ret = -1;
-  if (min_port == 0 && max_port == 0) {
+  if (create_info.min_port == 0 && create_info.max_port == 0) {
     // If there's no port range, let the OS pick a port for us.
-    ret = socket->Bind(local_address);
+    ret = socket->Bind(create_info.local_address);
   } else {
     // Otherwise, try to find a port in the provided range.
-    for (int port = min_port; ret < 0 && port <= max_port; ++port) {
-      ret = socket->Bind(SocketAddress(local_address.ipaddr(), port));
+    for (int port = create_info.min_port;
+         ret < 0 && port <= create_info.max_port; ++port) {
+      ret =
+          socket->Bind(SocketAddress(create_info.local_address.ipaddr(), port));
     }
   }
   return ret;
@@ -227,7 +206,7 @@ int BasicPacketSocketFactory::BindSocket(AsyncSocket* socket,
 
 SocketFactory* BasicPacketSocketFactory::socket_factory() {
   if (thread_) {
-    RTC_DCHECK(thread_ == Thread::Current());
+    RTC_DCHECK_RUN_ON(thread_);
     return thread_->socketserver();
   } else {
     return socket_factory_;

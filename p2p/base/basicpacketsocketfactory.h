@@ -11,7 +11,7 @@
 #ifndef P2P_BASE_BASICPACKETSOCKETFACTORY_H_
 #define P2P_BASE_BASICPACKETSOCKETFACTORY_H_
 
-#include <string>
+#include <memory>
 
 #include "p2p/base/packetsocketfactory.h"
 
@@ -21,44 +21,32 @@ class AsyncSocket;
 class SocketFactory;
 class Thread;
 
-class BasicPacketSocketFactory : public PacketSocketFactory {
+class BasicPacketSocketFactory final : public PacketSocketFactory {
  public:
   BasicPacketSocketFactory();
   explicit BasicPacketSocketFactory(Thread* thread);
   explicit BasicPacketSocketFactory(SocketFactory* socket_factory);
   ~BasicPacketSocketFactory() override;
 
-  AsyncPacketSocket* CreateUdpSocket(const SocketAddress& local_address,
-                                     uint16_t min_port,
-                                     uint16_t max_port) override;
-  AsyncPacketSocket* CreateServerTcpSocket(const SocketAddress& local_address,
-                                           uint16_t min_port,
-                                           uint16_t max_port,
-                                           int opts) override;
-  AsyncPacketSocket* CreateClientTcpSocket(const SocketAddress& local_address,
-                                           const SocketAddress& remote_address,
-                                           const ProxyInfo& proxy_info,
-                                           const std::string& user_agent,
-                                           int opts) override;
-  AsyncPacketSocket* CreateClientTcpSocket(
-      const SocketAddress& local_address,
-      const SocketAddress& remote_address,
-      const ProxyInfo& proxy_info,
-      const std::string& user_agent,
-      const PacketSocketTcpOptions& tcp_options) override;
-
-  AsyncResolverInterface* CreateAsyncResolver() override;
+  // PacketSocketFactory implementation.
+  using PacketSocketFactory::CreateUdpSocket;
+  std::unique_ptr<AsyncPacketSocket> CreateUdpSocket(
+      const UdpSocketCreateInfo& create_info) override;
+  using PacketSocketFactory::CreateServerTcpSocket;
+  std::unique_ptr<AsyncPacketSocket> CreateServerTcpSocket(
+      const ServerTcpSocketCreateInfo& create_info) override;
+  using PacketSocketFactory::CreateClientTcpSocket;
+  std::unique_ptr<AsyncPacketSocket> CreateClientTcpSocket(
+      const ClientTcpSocketCreateInfo& create_info) override;
+  std::unique_ptr<AsyncResolverInterface> CreateAsyncResolverUnique() override;
 
  private:
-  int BindSocket(AsyncSocket* socket,
-                 const SocketAddress& local_address,
-                 uint16_t min_port,
-                 uint16_t max_port);
+  int BindSocket(AsyncSocket* socket, const SocketCreateInfo& create_info);
 
   SocketFactory* socket_factory();
 
-  Thread* thread_;
-  SocketFactory* socket_factory_;
+  Thread* const thread_ = nullptr;
+  SocketFactory* const socket_factory_ = nullptr;
 };
 
 }  // namespace rtc
