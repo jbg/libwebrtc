@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72c12cf5_0adf84f6",
+        "filename": "modules/audio_coding/codecs/ilbc/cb_construct.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-04-26T12:24:47Z",
+      "side": 1,
+      "message": "Did this name turn out the way you intended it to? To me it seems you have an \"S32\" too much.",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "8fdc0a3e308bf7a7fac4b7e74eb55842a29a256e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
