@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9968b005_95389067",
+        "filename": "sdk/android/src/jni/task_queue_alooper.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-04-26T11:53:24Z",
+      "side": 1,
+      "message": "this is copied from task_queue_posix.cc, right? could we just use that same file?",
+      "revId": "fa2f8b45f4c8fbfbf907395ec1ff4ad8032b7a64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06fc56b9_527a6bcd",
+        "filename": "sdk/android/src/jni/task_queue_alooper.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-04-26T11:53:24Z",
+      "side": 1,
+      "message": "perhaps we could move these utility methods away from the libevent implementation and into a shared location rather than copy. same for other parts below that might be copied.",
+      "revId": "fa2f8b45f4c8fbfbf907395ec1ff4ad8032b7a64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
