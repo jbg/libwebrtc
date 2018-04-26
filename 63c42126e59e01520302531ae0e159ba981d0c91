@@ -22,6 +22,30 @@
       "revId": "63c42126e59e01520302531ae0e159ba981d0c91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d1e69dc_e5d5c3c9",
+        "filename": "common_types.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T09:05:55Z",
+      "side": 1,
+      "message": "Right. Removed \"InterLayerPred\". Thanks!",
+      "parentUuid": "16220c57_f16371f0",
+      "range": {
+        "startLine": 365,
+        "startChar": 2,
+        "endLine": 365,
+        "endChar": 19
+      },
+      "revId": "63c42126e59e01520302531ae0e159ba981d0c91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
