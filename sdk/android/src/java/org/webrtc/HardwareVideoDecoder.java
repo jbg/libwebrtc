@@ -100,6 +100,8 @@ class HardwareVideoDecoder
   // on the decoder thread.
   private boolean keyFrameRequired;
 
+  boolean printed;
+
   private final EglBase.Context sharedContext;
   // Valid and immutable while the decoder is running.
   @Nullable private SurfaceTextureHelper surfaceTextureHelper;
@@ -143,6 +145,7 @@ class HardwareVideoDecoder
     this.colorFormat = colorFormat;
     this.sharedContext = sharedContext;
     this.frameInfos = new LinkedBlockingDeque<>();
+    this.printed = false;
   }
 
   @Override
@@ -512,38 +515,49 @@ class HardwareVideoDecoder
 
   private VideoFrame.Buffer copyI420Buffer(
       ByteBuffer buffer, int stride, int sliceHeight, int width, int height) {
+    VideoFrame.I420Buffer frameBuffer = JavaI420Buffer.allocate(width, height);
+
+    // TODO(brandtr): RTC_CHECK_EQ(0, stride % 2);
     final int uvStride = stride / 2;
 
     final int yPos = 0;
     final int uPos = yPos + stride * sliceHeight;
-    final int uEnd = uPos + uvStride * (sliceHeight / 2);
     final int vPos = uPos + uvStride * sliceHeight / 2;
-    final int vEnd = vPos + uvStride * (sliceHeight / 2);
+    final int vEnd = vPos + uvStride * sliceHeight / 2;
 
-    VideoFrame.I420Buffer frameBuffer = JavaI420Buffer.allocate(width, height);
+    // Note that the case with odd |sliceHeight| is handled in a special way.
+    // The chroma height contained in the payload is rounded down instead of
+    // up, making it one row less than what we expect in WebRTC. Therefore, we
+    // have to duplicate the last chroma rows for this case. Also, the offset
+    // between the Y plane and the U plane is unintuitive for this case. See
+    // http://bugs.webrtc.org/6651 for more info.
+    final int chromaWidth = (width + 1) / 2;
+    final int chromaHeight = (sliceHeight % 2 == 0) ? (height + 1) / 2 : height / 2;
 
-    ByteBuffer dataY = frameBuffer.getDataY();
+    if (!printed) {
+      Logging.e(TAG,
+          "copyI420Buffer"
+              + ", stride: " + stride + ", sliceHeight: " + sliceHeight + ", width: " + width
+              + ", height: " + height + ", uvStride: " + uvStride + ", uPos: " + uPos
+              + ", vPos: " + vPos + ", vEnd: " + vEnd + ", chromaWidth: " + chromaWidth
+              + ", chromaHeight: " + chromaHeight);
+    }
+    printed = true;
+
     buffer.position(yPos);
     buffer.limit(uPos);
-    dataY.put(buffer);
+    YuvHelper.CopyPlane(
+        buffer, stride, frameBuffer.getDataY(), frameBuffer.getStrideY(), width, height);
 
-    ByteBuffer dataU = frameBuffer.getDataU();
     buffer.position(uPos);
-    buffer.limit(uEnd);
-    dataU.put(buffer);
-    if (sliceHeight % 2 != 0) {
-      buffer.position(uEnd - uvStride); // Repeat the last row.
-      dataU.put(buffer);
-    }
+    buffer.limit(vPos);
+    YuvHelper.CopyPlane(buffer, uvStride, frameBuffer.getDataU(), frameBuffer.getStrideU(),
+        chromaWidth, chromaHeight);
 
-    ByteBuffer dataV = frameBuffer.getDataV();
     buffer.position(vPos);
     buffer.limit(vEnd);
-    dataV.put(buffer);
-    if (sliceHeight % 2 != 0) {
-      buffer.position(vEnd - uvStride); // Repeat the last row.
-      dataV.put(buffer);
-    }
+    YuvHelper.CopyPlane(buffer, uvStride, frameBuffer.getDataV(), frameBuffer.getStrideV(),
+        chromaWidth, chromaHeight);
 
     return frameBuffer;
   }

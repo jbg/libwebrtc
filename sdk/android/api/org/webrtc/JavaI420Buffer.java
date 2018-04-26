@@ -75,14 +75,15 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
 
   /** Allocates an empty I420Buffer suitable for an image of the given dimensions. */
   public static JavaI420Buffer allocate(int width, int height) {
-    int chromaHeight = (height + 1) / 2;
-    int strideUV = (width + 1) / 2;
-    int yPos = 0;
-    int uPos = yPos + width * height;
-    int vPos = uPos + strideUV * chromaHeight;
+    final int chromaHeight = (height + 1) / 2;
+    final int chromaWidth = (width + 1) / 2;
+    final int yPos = 0;
+    final int uPos = yPos + width * height;
+    final int vPos = uPos + chromaWidth * chromaHeight;
+    final int vEnd = vPos + chromaWidth * chromaHeight;
 
     ByteBuffer buffer =
-        JniCommon.nativeAllocateByteBuffer(width * height + 2 * strideUV * chromaHeight);
+        JniCommon.nativeAllocateByteBuffer(width * height + 2 * chromaWidth * chromaHeight);
 
     buffer.position(yPos);
     buffer.limit(uPos);
@@ -93,10 +94,10 @@ public class JavaI420Buffer implements VideoFrame.I420Buffer {
     ByteBuffer dataU = buffer.slice();
 
     buffer.position(vPos);
-    buffer.limit(vPos + strideUV * chromaHeight);
+    buffer.limit(vEnd);
     ByteBuffer dataV = buffer.slice();
 
-    return new JavaI420Buffer(width, height, dataY, width, dataU, strideUV, dataV, strideUV,
+    return new JavaI420Buffer(width, height, dataY, width, dataU, chromaWidth, dataV, chromaWidth,
         () -> { JniCommon.nativeFreeByteBuffer(buffer); });
   }
 
