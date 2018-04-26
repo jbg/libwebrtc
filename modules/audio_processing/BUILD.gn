@@ -577,6 +577,7 @@ if (rtc_include_tests) {
         ":audioproc_protobuf_utils",
         ":audioproc_test_utils",
         ":audioproc_unittest_proto",
+        ":runtime_settings_protobuf_utils",
         "../../api/audio:audio_frame_api",
         "../../rtc_base:rtc_task_queue",
         "aec_dump",
@@ -692,6 +693,7 @@ if (rtc_include_tests) {
         ":audioproc_debug_proto",
         ":audioproc_protobuf_utils",
         ":audioproc_test_utils",
+        ":runtime_settings_protobuf_utils",
         "../../api:optional",
         "../../api/audio:aec3_factory",
         "../../common_audio:common_audio",
@@ -844,8 +846,26 @@ if (rtc_include_tests) {
         ":audioproc_debug_proto",
         "../..:typedefs",
         "../..:webrtc_common",
+        "../../rtc_base:checks",
         "../../rtc_base:protobuf_utils",
         "../../rtc_base:rtc_base_approved",
+
+        # ":audio_processing",
+      ]
+    }
+
+    rtc_static_library("runtime_settings_protobuf_utils") {
+      testonly = true
+      sources = [
+        "test/runtime_setting_util.cc",
+        "test/runtime_setting_util.h",
+      ]
+
+      deps = [
+        ":audio_processing",
+        ":audioproc_debug_proto",
+        ":audioproc_protobuf_utils",
+        "../../rtc_base:checks",
       ]
     }
   }
