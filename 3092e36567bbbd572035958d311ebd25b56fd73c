@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "d61e3a1f_0d7e780a",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-04-26T08:46:55Z",
+      "side": 1,
+      "message": "I never seen odd values of stride/width/height of luma in yuv420. But, since our code is prepared for odd width/height, should it also handle odd stride?",
+      "range": {
+        "startLine": 515,
+        "startChar": 25,
+        "endLine": 515,
+        "endChar": 35
+      },
+      "revId": "3092e36567bbbd572035958d311ebd25b56fd73c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f155489_7bccfa51",
         "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
         "patchSetId": 7
