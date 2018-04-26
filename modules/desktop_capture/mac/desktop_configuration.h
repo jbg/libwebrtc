@@ -40,6 +40,9 @@ struct MacDisplayConfiguration {
 
   // Scale factor from DIPs to physical pixels.
   float dip_to_pixel_scale = 1.0f;
+
+  // Display type, built-in or external.
+  bool is_builtin;
 };
 
 typedef std::vector<MacDisplayConfiguration> MacDisplayConfigurations;

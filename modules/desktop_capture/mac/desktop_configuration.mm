@@ -69,6 +69,9 @@ MacDisplayConfiguration GetConfigurationForScreen(NSScreen* screen) {
     display_config.pixel_bounds = display_config.bounds;
   }
 
+  // Determine if the display is built-in or external.
+  display_config.is_builtin = CGDisplayIsBuiltin(display_config.id);
+
   return display_config;
 }
 
@@ -170,8 +173,13 @@ MacDesktopConfiguration::FindDisplayConfigurationById(
     CGDirectDisplayID id) {
   for (MacDisplayConfigurations::const_iterator it = displays.begin();
       it != displays.end(); ++it) {
-    if (it->id == id)
-      return &(*it);
+    // The MBP having both discrete and integrated graphic cards will do
+    // automate graphics switching by default. When it switches from discrete to
+    // integrated one, the current display ID of the built-in display will
+    // change and this will cause screen capture stops.
+    // So make screen capture of built-in display continuing even if its display
+    // ID is changed.
+    if (it->id == id || (it->is_builtin && CGDisplayIsBuiltin(id))) return &(*it);
   }
   return NULL;
 }
