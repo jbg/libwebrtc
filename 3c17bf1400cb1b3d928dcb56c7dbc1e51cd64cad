@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "716500bd_5b55d28a",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "Is this a typo?",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad56f986_895a9729",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "Bad merge?",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc34eee9_5e9e807f",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "Another bad merge?",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a11082b5_9b685130",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "Another one.",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ed36b1a_6cc73afe",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "Should we make this consistent by providing a default \u003d true?",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cacd93c9_f381463b",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5f2583c_8ae09c38",
+        "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "Should we also have test cases for H264?",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e048ad0_7ad6fb97",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "I would keep the variable name `codec_settings`",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff606708_57971b2d",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "These could just be fixed arrays with size of kMaxSimulcastStreams.",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fed3dad9_5250bc0c",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "nits: I would suggest moving these utility functions out of the allocator.",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49a2ff72_402b1bb8",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-26T22:42:19Z",
+      "side": 1,
+      "message": "nits: align the comment.",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
