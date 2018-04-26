@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b9663cc8_8499b871",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-26T22:37:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3af888a5_d60031fd",
+      "range": {
+        "startLine": 73,
+        "startChar": 76,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b949eb8f_4a29ed09",
         "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b9d0083_2b32df62",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-26T22:37:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b949eb8f_4a29ed09",
+      "range": {
+        "startLine": 170,
+        "startChar": 57,
+        "endLine": 171,
+        "endChar": 0
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "02d79a05_a96c9769",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-26T22:37:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "170e2336_f0b3c5ee",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 61
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc5dd68a_c4e88a23",
         "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b8bb032_b203e373",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-04-26T22:37:42Z",
+      "side": 1,
+      "message": "Done.\n\nYes it replies on the assumption that there is only one physical built-in display, which is quite promising nowadays. If this is not the case, we really can\u0027t do anything to this issue.\nAlso there is only one built-in display in the current DesktopConfiguration.",
+      "parentUuid": "bc5dd68a_c4e88a23",
+      "range": {
+        "startLine": 182,
+        "startChar": 82,
+        "endLine": 183,
+        "endChar": 0
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
