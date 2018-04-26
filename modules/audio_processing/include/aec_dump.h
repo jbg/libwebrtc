@@ -67,6 +67,11 @@ struct InternalAPMStreamsConfig {
   size_t render_output_num_channels = 0;
 };
 
+struct InternalAecDumpRuntimeSetting {
+  enum class Type { kNotSpecified, kCapturePreGain } type;
+  float value;
+};
+
 // An interface for recording configuration and input/output streams
 // of the Audio Processing Module. The recordings are called
 // 'aec-dumps' and are stored in a protobuf format defined in
@@ -109,6 +114,10 @@ class AecDump {
 
   // Logs Event::Type CONFIG message.
   virtual void WriteConfig(const InternalAPMConfig& config) = 0;
+
+  // Logs Event::Type RUNTIME_SETTING message.
+  virtual void WriteRuntimeSetting(
+      const InternalAecDumpRuntimeSetting& runtime_setting) = 0;
 };
 }  // namespace webrtc
 
