@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f962e8be_8f29789f",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-26T08:58:11Z",
+      "side": 1,
+      "message": "Nit: I usually place data_dumper_ second first in the variable list after instance_count_ (which means that it comes first in the initialization list.\n\nThe benefits of that is that apm_dumper_ is purely something for debugging/testing and it is nice to put it outside of the code that does the real stuff to avoid it taking the focus of the important parts of the code.",
+      "revId": "eaf7d7624688ae5b956cec74b6df5795f470ae94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
