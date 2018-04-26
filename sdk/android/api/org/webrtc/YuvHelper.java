@@ -15,6 +15,12 @@ import java.nio.ByteBuffer;
 /** Wraps libyuv methods to Java. All passed byte buffers must be direct byte buffers. */
 @JNINamespace("webrtc::jni")
 public class YuvHelper {
+  /** Helper method for copying a single colour plane. */
+  public static void CopyPlane(
+      ByteBuffer src, int srcStride, ByteBuffer dst, int dstStride, int width, int height) {
+    nativeCopyPlane(src, srcStride, dst, dstStride, width, height);
+  }
+
   /** Helper method for copying I420 to tightly packed destination buffer. */
   public static void I420Copy(ByteBuffer srcY, int srcStrideY, ByteBuffer srcU, int srcStrideU,
       ByteBuffer srcV, int srcStrideV, ByteBuffer dst, int width, int height) {
@@ -119,6 +125,8 @@ public class YuvHelper {
         dstStrideU, dstV, dstStrideV, srcWidth, srcHeight, rotationMode);
   }
 
+  private static native void nativeCopyPlane(
+      ByteBuffer src, int srcStride, ByteBuffer dst, int dstStride, int width, int height);
   private static native void nativeI420Copy(ByteBuffer srcY, int srcStrideY, ByteBuffer srcU,
       int srcStrideU, ByteBuffer srcV, int srcStrideV, ByteBuffer dstY, int dstStrideY,
       ByteBuffer dstU, int dstStrideU, ByteBuffer dstV, int dstStrideV, int width, int height);

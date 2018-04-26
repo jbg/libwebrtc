@@ -25,6 +25,11 @@ namespace test {
 namespace {
 const int kForemanNumFrames = 300;
 const int kForemanFramerateFps = 30;
+
+const VisualizationParams kVisualizationParams = {
+    true,  // save_encoded_ivf
+    true,  // save_decoded_y4m
+};
 }  // namespace
 
 class VideoProcessorIntegrationTestMediaCodec
@@ -106,8 +111,7 @@ TEST_F(VideoProcessorIntegrationTestMediaCodec,
 
 TEST_F(VideoProcessorIntegrationTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
   const int kNumFrames = 30;
-  // TODO(brandtr): Add H.264 when we have fixed the encoder.
-  const std::vector<std::string> codecs = {cricket::kVp8CodecName};
+  const std::vector<std::string> codecs = {cricket::kH264CodecName};
   const std::vector<std::tuple<int, int>> resolutions = {
       {128, 96}, {160, 120}, {176, 144}, {240, 136}, {320, 240}, {480, 272}};
   const std::vector<RateProfile> rate_profiles = {
@@ -128,7 +132,7 @@ TEST_F(VideoProcessorIntegrationTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
 
       ProcessFramesAndMaybeVerify(
           rate_profiles, nullptr /* rc_thresholds */, &quality_thresholds,
-          nullptr /* bs_thresholds */, nullptr /* visualization_params */);
+          nullptr /* bs_thresholds */, &kVisualizationParams);
     }
   }
 }
