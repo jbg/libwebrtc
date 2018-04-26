@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3af888a5_d60031fd",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-04-26T20:04:52Z",
+      "side": 1,
+      "message": "This comment is no longer strictly correct. I\u0027d like to say something like:\n\n\"If |id| corresponds to the built-in display, return its configuration, otherwise return the configuration for the display with the specified id, or nullptr if no such display exists.\"\n\nHowever, see my comment in the .mm file for some nuances.",
+      "range": {
+        "startLine": 73,
+        "startChar": 76,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b949eb8f_4a29ed09",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-04-26T20:04:52Z",
+      "side": 1,
+      "message": "Update this comment too (or remove it--I\u0027m not there\u0027s much value in duplicating the header comments here, although it seems standard in this file).",
+      "range": {
+        "startLine": 170,
+        "startChar": 57,
+        "endLine": 171,
+        "endChar": 0
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "170e2336_f0b3c5ee",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-04-26T20:04:52Z",
+      "side": 1,
+      "message": "I doubt it\u0027s expensive, but no need to recompute this for every display.",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 61
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc5dd68a_c4e88a23",
+        "filename": "modules/desktop_capture/mac/desktop_configuration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-04-26T20:04:52Z",
+      "side": 1,
+      "message": "If passed a built-in display, this will return either the first built-in display or the first display with the correct id, whichever it encounters first. This is somewhat non-deterministic and hard to document, which makes me suspicious about whether or not it\u0027s the correct behaviour. Is there an implicit assumption that only one of these situations is possible? Even if that\u0027s the case, you could make it more explicit with something like:\n\n  if ((is_builtin \u0026\u0026 it-\u003eis_builtin) || (!is_builtin \u0026\u0026 it-\u003eid \u003d\u003d id))\n\nThis also assumes that there can only ever be one built-in display; is that true even in the multi-monitor case?",
+      "range": {
+        "startLine": 182,
+        "startChar": 82,
+        "endLine": 183,
+        "endChar": 0
+      },
+      "revId": "34651a7746176ddabc27f293d8c740d1c025abe0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
