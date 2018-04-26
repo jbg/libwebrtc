@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5b83a1c7_3c13d1c8",
+        "filename": "sdk/android/src/jni/task_queue_alooper.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-26T12:36:25Z",
+      "side": 1,
+      "message": "Yes, these were copied for now. I did this because I would have had to include a file from a different directory, I believe this is not possible in GN but I can try again later. I can also try moving the files to a separate target so I can simply depend on them.",
+      "parentUuid": "9968b005_95389067",
+      "revId": "fa2f8b45f4c8fbfbf907395ec1ff4ad8032b7a64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06fc56b9_527a6bcd",
         "filename": "sdk/android/src/jni/task_queue_alooper.cc",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2018-04-26T11:53:24Z",
       "side": 1,
       "message": "perhaps we could move these utility methods away from the libevent implementation and into a shared location rather than copy. same for other parts below that might be copied.",
+      "revId": "fa2f8b45f4c8fbfbf907395ec1ff4ad8032b7a64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ec6882a_6b111ac1",
+        "filename": "sdk/android/src/jni/task_queue_alooper.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-04-26T12:36:25Z",
+      "side": 1,
+      "message": "Okay, I will work on consolidating the files. I didn\u0027t want to touch the original implementation at first because I don\u0027t want to cause any regressions on other platforms.",
+      "parentUuid": "06fc56b9_527a6bcd",
       "revId": "fa2f8b45f4c8fbfbf907395ec1ff4ad8032b7a64",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
