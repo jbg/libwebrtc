@@ -16,6 +16,24 @@
       "revId": "eaf7d7624688ae5b956cec74b6df5795f470ae94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cace0c4c_d7d4a5f7",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-04-26T10:43:48Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll do it like that.",
+      "parentUuid": "f962e8be_8f29789f",
+      "revId": "eaf7d7624688ae5b956cec74b6df5795f470ae94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
