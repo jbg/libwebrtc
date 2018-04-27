@@ -24,6 +24,9 @@ namespace webrtc {
 namespace test {
 
 namespace {
+
+typedef VideoProcessorIntegrationTestFixtureInterface BaseTest;
+
 // Codec settings.
 const int kCifWidth = 352;
 const int kCifHeight = 288;
@@ -35,75 +38,72 @@ const size_t kBitrateRdPerfKbps[] = {100,  200,  300,  400,  500,  600,
                                      700,  800,  1000, 1250, 1400, 1600,
                                      1800, 2000, 2200, 2500};
 const size_t kNumFirstFramesToSkipAtRdPerfAnalysis = 60;
-}  // namespace
 
-class VideoProcessorIntegrationTestLibvpx : public testing::Test {
- protected:
-  VideoProcessorIntegrationTestLibvpx() {
-    fixture_ = CreateVideoProcessorIntegrationTestFixture();
-    fixture_->config.filename = "foreman_cif";
-    fixture_->config.filepath = ResourcePath(fixture_->config.filename, "yuv");
-    fixture_->config.num_frames = kNumFramesLong;
-    // Onl allow encoder/decoder to use single core, for predictability.
-    fixture_->config.use_single_core = true;
-    fixture_->config.hw_encoder = false;
-    fixture_->config.hw_decoder = false;
-    fixture_->config.encoded_frame_checker = &qp_frame_checker_;
-  }
-
-  void PrintRdPerf(std::map<size_t, std::vector<VideoStatistics>> rd_stats) {
-    printf("--> Summary\n");
-    printf("%11s %5s %6s %11s %12s %11s %13s %13s %5s %7s %7s %7s %13s %13s\n",
-           "uplink_kbps", "width", "height", "spatial_idx", "temporal_idx",
-           "target_kbps", "downlink_kbps", "framerate_fps", "psnr", "psnr_y",
-           "psnr_u", "psnr_v", "enc_speed_fps", "dec_speed_fps");
-    for (const auto& rd_stat : rd_stats) {
-      const size_t bitrate_kbps = rd_stat.first;
-      for (const auto& layer_stat : rd_stat.second) {
-        printf(
-            "%11zu %5zu %6zu %11zu %12zu %11zu %13zu %13.2f %5.2f %7.2f %7.2f "
-            "%7.2f"
-            "%13.2f %13.2f\n",
-            bitrate_kbps, layer_stat.width, layer_stat.height,
-            layer_stat.spatial_idx, layer_stat.temporal_idx,
-            layer_stat.target_bitrate_kbps, layer_stat.bitrate_kbps,
-            layer_stat.framerate_fps, layer_stat.avg_psnr,
-            layer_stat.avg_psnr_y, layer_stat.avg_psnr_u, layer_stat.avg_psnr_v,
-            layer_stat.enc_speed_fps, layer_stat.dec_speed_fps);
-      }
+class QpFrameChecker : public TestConfig::EncodedFrameChecker {
+ public:
+  void CheckEncodedFrame(webrtc::VideoCodecType codec,
+                         const EncodedImage& encoded_frame) const override {
+    int qp;
+    if (codec == kVideoCodecVP8) {
+      EXPECT_TRUE(
+          vp8::GetQp(encoded_frame._buffer, encoded_frame._length, &qp));
+    } else if (codec == kVideoCodecVP9) {
+      EXPECT_TRUE(
+          vp9::GetQp(encoded_frame._buffer, encoded_frame._length, &qp));
+    } else {
+      RTC_NOTREACHED();
     }
+    EXPECT_EQ(encoded_frame.qp_, qp) << "Encoder QP != parsed bitstream QP.";
   }
-  std::unique_ptr<VideoProcessorIntegrationTestFixtureInterface> fixture_;
-
- private:
-  // Verify that the QP parser returns the same QP as the encoder does.
-  const class QpFrameChecker : public TestConfig::EncodedFrameChecker {
-   public:
-    void CheckEncodedFrame(webrtc::VideoCodecType codec,
-                           const EncodedImage& encoded_frame) const override {
-      int qp;
-      if (codec == kVideoCodecVP8) {
-        EXPECT_TRUE(
-            vp8::GetQp(encoded_frame._buffer, encoded_frame._length, &qp));
-      } else if (codec == kVideoCodecVP9) {
-        EXPECT_TRUE(
-            vp9::GetQp(encoded_frame._buffer, encoded_frame._length, &qp));
-      } else {
-        RTC_NOTREACHED();
-      }
-      EXPECT_EQ(encoded_frame.qp_, qp) << "Encoder QP != parsed bitstream QP.";
-    }
-  } qp_frame_checker_;
 };
+
+static std::unique_ptr<BaseTest> CreateTestFixture() {
+  auto fixture = CreateVideoProcessorIntegrationTestFixture();
+  fixture->config.filename = "foreman_cif";
+  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
+  fixture->config.num_frames = kNumFramesLong;
+  // Onl llow encoder/decoder to use single core, for predictability.
+  fixture->config.use_single_core = true;
+  fixture->config.hw_encoder = false;
+  fixture->config.hw_decoder = false;
+  fixture->config.encoded_frame_checker = new QpFrameChecker;
+  return fixture;
+}
+
+static void PrintRdPerf(
+    std::map<size_t, std::vector<VideoStatistics>> rd_stats) {
+  printf("--> Summary\n");
+  printf("%11s %5s %6s %11s %12s %11s %13s %13s %5s %7s %7s %7s %13s %13s\n",
+         "uplink_kbps", "width", "height", "spatial_idx", "temporal_idx",
+         "target_kbps", "downlink_kbps", "framerate_fps", "psnr", "psnr_y",
+         "psnr_u", "psnr_v", "enc_speed_fps", "dec_speed_fps");
+  for (const auto& rd_stat : rd_stats) {
+    const size_t bitrate_kbps = rd_stat.first;
+    for (const auto& layer_stat : rd_stat.second) {
+      printf(
+          "%11zu %5zu %6zu %11zu %12zu %11zu %13zu %13.2f %5.2f %7.2f %7.2f "
+          "%7.2f"
+          "%13.2f %13.2f\n",
+          bitrate_kbps, layer_stat.width, layer_stat.height,
+          layer_stat.spatial_idx, layer_stat.temporal_idx,
+          layer_stat.target_bitrate_kbps, layer_stat.bitrate_kbps,
+          layer_stat.framerate_fps, layer_stat.avg_psnr, layer_stat.avg_psnr_y,
+          layer_stat.avg_psnr_u, layer_stat.avg_psnr_v,
+          layer_stat.enc_speed_fps, layer_stat.dec_speed_fps);
+    }
+  }
+}
+}  // namespace
 
 // Fails on iOS. See webrtc:4755.
 #if !defined(WEBRTC_IOS)
 
 #if !defined(RTC_DISABLE_VP9)
-TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP9) {
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false,
-                                    true, false, kCifWidth, kCifHeight);
-  fixture_->config.num_frames = kNumFramesShort;
+TEST(VideoProcessorIntegrationTestLibvpx, HighBitrateVP9) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
+                                   false, kCifWidth, kCifHeight);
+  fixture->config.num_frames = kNumFramesShort;
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
@@ -112,13 +112,14 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP9) {
 
   std::vector<QualityThresholds> quality_thresholds = {{37, 36, 0.94, 0.92}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false,
-                                    true, false, kCifWidth, kCifHeight);
+TEST(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
+                                   false, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {
       {200, 30, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -133,13 +134,14 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
   std::vector<QualityThresholds> quality_thresholds = {
       {34, 33, 0.90, 0.88}, {38, 35, 0.95, 0.91}, {35, 34, 0.93, 0.90}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false,
-                                    true, false, kCifWidth, kCifHeight);
+TEST(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
+                                   false, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {
       {100, 24, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -156,14 +158,15 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
   std::vector<QualityThresholds> quality_thresholds = {
       {33, 32, 0.89, 0.87}, {33.5, 32, 0.90, 0.86}, {33.5, 31.5, 0.90, 0.85}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, true, true,
-                                    false, kCifWidth, kCifHeight);
-  fixture_->config.num_frames = kNumFramesShort;
+TEST(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, true, true,
+                                   false, kCifWidth, kCifHeight);
+  fixture->config.num_frames = kNumFramesShort;
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
@@ -172,13 +175,14 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
 
   std::vector<QualityThresholds> quality_thresholds = {{37.5, 36, 0.94, 0.93}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false,
-                                    true, true, kCifWidth, kCifHeight);
+TEST(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
+                                   true, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {{50, 30, kNumFramesLong}};
 
@@ -187,8 +191,8 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
 
   std::vector<QualityThresholds> quality_thresholds = {{28, 25, 0.80, 0.65}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 // TODO(marpan): Add temporal layer test for VP9, once changes are in
@@ -196,10 +200,11 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
 
 #endif  // !defined(RTC_DISABLE_VP9)
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
-                                    false, kCifWidth, kCifHeight);
-  fixture_->config.num_frames = kNumFramesShort;
+TEST(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
+                                   false, kCifWidth, kCifHeight);
+  fixture->config.num_frames = kNumFramesShort;
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
@@ -211,8 +216,8 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
   // than quality of x86 version. Use lower thresholds for now.
   std::vector<QualityThresholds> quality_thresholds = {{35, 33, 0.91, 0.89}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 #endif  // !defined(WEBRTC_IOS)
@@ -232,9 +237,10 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
 #else
 #define MAYBE_ChangeBitrateVP8 ChangeBitrateVP8
 #endif
-TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
-                                    false, kCifWidth, kCifHeight);
+TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
+                                   false, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {
       {200, 30, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -253,8 +259,8 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
   std::vector<QualityThresholds> quality_thresholds = {
       {31.8, 31, 0.86, 0.85}, {36, 34.8, 0.92, 0.90}, {33.5, 32, 0.90, 0.88}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 // Too slow to finish before timeout on iOS. See webrtc:4755.
@@ -263,9 +269,10 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
 #else
 #define MAYBE_ChangeFramerateVP8 ChangeFramerateVP8
 #endif
-TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
-                                    false, kCifWidth, kCifHeight);
+TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
+                                   false, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {
       {80, 24, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -290,8 +297,8 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
   std::vector<QualityThresholds> quality_thresholds = {
       {31, 30, 0.85, 0.84}, {31.5, 30.5, 0.86, 0.84}, {30.5, 29, 0.83, 0.78}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 // Too slow to finish before timeout on iOS. See webrtc:4755.
@@ -300,9 +307,10 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
 #else
 #define MAYBE_TemporalLayersVP8 TemporalLayersVP8
 #endif
-TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 3, true, true,
-                                    false, kCifWidth, kCifHeight);
+TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
+  auto fixture = CreateTestFixture();
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 3, true, true,
+                                   false, kCifWidth, kCifHeight);
 
   std::vector<RateProfile> rate_profiles = {{200, 30, 150},
                                             {400, 30, kNumFramesLong}};
@@ -322,8 +330,8 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
   std::vector<QualityThresholds> quality_thresholds = {{31, 30, 0.85, 0.84},
                                                        {31, 28, 0.85, 0.75}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 // Might be too slow on mobile platforms.
@@ -332,22 +340,23 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
 #else
 #define MAYBE_MultiresVP8 MultiresVP8
 #endif
-TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_MultiresVP8) {
-  fixture_->config.filename = "ConferenceMotion_1280_720_50";
-  fixture_->config.filepath = ResourcePath(fixture_->config.filename, "yuv");
-  fixture_->config.num_frames = 100;
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
-                                    false, 1280, 720);
+TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_MultiresVP8) {
+  auto fixture = CreateTestFixture();
+  fixture->config.filename = "ConferenceMotion_1280_720_50";
+  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
+  fixture->config.num_frames = 100;
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
+                                   false, 1280, 720);
 
   std::vector<RateProfile> rate_profiles = {
-      {1500, 30, fixture_->config.num_frames}};
+      {1500, 30, fixture->config.num_frames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
       {5, 1, 5, 0.2, 0.3, 0.1, 0, 1}};
   std::vector<QualityThresholds> quality_thresholds = {{34, 32, 0.90, 0.88}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 // Might be too slow on mobile platforms.
@@ -356,23 +365,24 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_MultiresVP8) {
 #else
 #define MAYBE_SimulcastVP8 SimulcastVP8
 #endif
-TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
-  fixture_->config.filename = "ConferenceMotion_1280_720_50";
-  fixture_->config.filepath = ResourcePath(fixture_->config.filename, "yuv");
-  fixture_->config.num_frames = 100;
-  fixture_->config.simulcast_adapted_encoder = true;
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
-                                    false, 1280, 720);
+TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
+  auto fixture = CreateTestFixture();
+  fixture->config.filename = "ConferenceMotion_1280_720_50";
+  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
+  fixture->config.num_frames = 100;
+  fixture->config.simulcast_adapted_encoder = true;
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
+                                   false, 1280, 720);
 
   std::vector<RateProfile> rate_profiles = {
-      {1500, 30, fixture_->config.num_frames}};
+      {1500, 30, fixture->config.num_frames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
       {20, 5, 90, 0.8, 0.5, 0.3, 0, 1}};
   std::vector<QualityThresholds> quality_thresholds = {{34, 32, 0.90, 0.88}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
 // Might be too slow on mobile platforms.
@@ -381,65 +391,68 @@ TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
 #else
 #define MAYBE_SvcVP9 SvcVP9
 #endif
-TEST_F(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
-  fixture_->config.filename = "ConferenceMotion_1280_720_50";
-  fixture_->config.filepath = ResourcePath(fixture_->config.filename, "yuv");
-  fixture_->config.num_frames = 100;
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true,
-                                    false, 1280, 720);
+TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
+  auto fixture = CreateTestFixture();
+  fixture->config.filename = "ConferenceMotion_1280_720_50";
+  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
+  fixture->config.num_frames = 100;
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true,
+                                   false, 1280, 720);
 
   std::vector<RateProfile> rate_profiles = {
-      {1500, 30, fixture_->config.num_frames}};
+      {1500, 30, fixture->config.num_frames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
       {5, 1, 5, 0.2, 0.3, 0.1, 0, 1}};
   std::vector<QualityThresholds> quality_thresholds = {{36, 34, 0.93, 0.91}};
 
-  fixture_->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
-                                        &quality_thresholds, nullptr, nullptr);
+  fixture->ProcessFramesAndMaybeVerify(rate_profiles, &rc_thresholds,
+                                       &quality_thresholds, nullptr, nullptr);
 }
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_MultiresVP8RdPerf) {
-  fixture_->config.filename = "FourPeople_1280x720_30";
-  fixture_->config.filepath = ResourcePath(fixture_->config.filename, "yuv");
-  fixture_->config.num_frames = 300;
-  fixture_->config.print_frame_level_stats = true;
-  fixture_->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
-                                    false, 1280, 720);
+TEST(VideoProcessorIntegrationTestLibvpx, DISABLED_MultiresVP8RdPerf) {
+  auto fixture = CreateTestFixture();
+  fixture->config.filename = "FourPeople_1280x720_30";
+  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
+  fixture->config.num_frames = 300;
+  fixture->config.print_frame_level_stats = true;
+  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
+                                   false, 1280, 720);
 
   std::map<size_t, std::vector<VideoStatistics>> rd_stats;
   for (size_t bitrate_kbps : kBitrateRdPerfKbps) {
     std::vector<RateProfile> rate_profiles = {
-        {bitrate_kbps, 30, fixture_->config.num_frames}};
+        {bitrate_kbps, 30, fixture->config.num_frames}};
 
-    fixture_->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
-                                          nullptr, nullptr);
+    fixture->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
+                                         nullptr, nullptr);
 
-    rd_stats[bitrate_kbps] = fixture_->stats.SliceAndCalcLayerVideoStatistic(
-        kNumFirstFramesToSkipAtRdPerfAnalysis, fixture_->config.num_frames - 1);
+    rd_stats[bitrate_kbps] = fixture->stats.SliceAndCalcLayerVideoStatistic(
+        kNumFirstFramesToSkipAtRdPerfAnalysis, fixture->config.num_frames - 1);
   }
 
   PrintRdPerf(rd_stats);
 }
 
-TEST_F(VideoProcessorIntegrationTestLibvpx, DISABLED_SvcVP9RdPerf) {
-  fixture_->config.filename = "FourPeople_1280x720_30";
-  fixture_->config.filepath = ResourcePath(fixture_->config.filename, "yuv");
-  fixture_->config.num_frames = 300;
-  fixture_->config.print_frame_level_stats = true;
-  fixture_->config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true,
-                                    false, 1280, 720);
+TEST(VideoProcessorIntegrationTestLibvpx, DISABLED_SvcVP9RdPerf) {
+  auto fixture = CreateTestFixture();
+  fixture->config.filename = "FourPeople_1280x720_30";
+  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
+  fixture->config.num_frames = 300;
+  fixture->config.print_frame_level_stats = true;
+  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true,
+                                   false, 1280, 720);
 
   std::map<size_t, std::vector<VideoStatistics>> rd_stats;
   for (size_t bitrate_kbps : kBitrateRdPerfKbps) {
     std::vector<RateProfile> rate_profiles = {
-        {bitrate_kbps, 30, fixture_->config.num_frames}};
+        {bitrate_kbps, 30, fixture->config.num_frames}};
 
-    fixture_->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
-                                          nullptr, nullptr);
+    fixture->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
+                                         nullptr, nullptr);
 
-    rd_stats[bitrate_kbps] = fixture_->stats.SliceAndCalcLayerVideoStatistic(
-        kNumFirstFramesToSkipAtRdPerfAnalysis, fixture_->config.num_frames - 1);
+    rd_stats[bitrate_kbps] = fixture->stats.SliceAndCalcLayerVideoStatistic(
+        kNumFirstFramesToSkipAtRdPerfAnalysis, fixture->config.num_frames - 1);
   }
 
   PrintRdPerf(rd_stats);
