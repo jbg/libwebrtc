@@ -38,6 +38,13 @@ class RenderBuffer {
     return block_buffer_->buffer[position];
   }
 
+  // Get a block from an index.
+  const std::vector<std::vector<float>>& BlockAtIndex(int index) const {
+    int index_bound = std::min(index, block_buffer_->size - 1);
+    index_bound = std::max(0, index_bound);
+    return block_buffer_->buffer[index];
+  }
+
   // Get the spectrum from one of the FFTs in the buffer.
   rtc::ArrayView<const float> Spectrum(int buffer_offset_ffts) const {
     int position = spectrum_buffer_->OffsetIndex(spectrum_buffer_->read,
@@ -70,8 +77,11 @@ class RenderBuffer {
     return spectrum_buffer_->OffsetIndex(index, offset);
   }
 
-  // Returns the write postion in the circular buffer.
+  // Returns the write postion in the circular buffer for the spectrum.
   int GetWritePositionSpectrum() const { return spectrum_buffer_->write; }
+
+  // Returns the write position in the circular buffer for the blocks.
+  int GetWritePositionBlocks() const { return block_buffer_->write; }
 
   // Returns the sum of the spectrums for a certain number of FFTs.
   void SpectralSum(size_t num_spectra,
@@ -98,8 +108,13 @@ class RenderBuffer {
     return headroom;
   }
 
-  // Decrease an index that is used for accessing the buffer.
+  // Decreases and returns an index that is used for accessing the
+  // spectrum buffer.
   int DecIdx(int idx) const { return spectrum_buffer_->DecIndex(idx); }
+
+  // Increases and returns an index that is used for accessing the
+  // block buffer.
+  int IncIdx(int idx) const { return block_buffer_->IncIndex(idx); }
 
   // Return a pointer to the spectrum buffer.
   const VectorBuffer* GetSpectrumBuffer() const { return spectrum_buffer_; }
