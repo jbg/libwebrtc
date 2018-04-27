@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "646d03a2_33d2d93b",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "716500bd_5b55d28a",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad56f986_895a9729",
         "filename": "media/engine/fakewebrtccall.cc",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e03a615c_6922ac2e",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad56f986_895a9729",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "17f0bd5b_1b344493",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dc34eee9_5e9e807f",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a11082b5_9b685130",
         "filename": "media/engine/fakewebrtccall.cc",
         "patchSetId": 12
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "1ee5c0f3_8b25656d",
+        "filename": "media/engine/fakewebrtccall.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a11082b5_9b685130",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ed36b1a_6cc73afe",
         "filename": "media/engine/simulcast.h",
         "patchSetId": 12
@@ -81,6 +153,24 @@
       "writtenOn": "2018-04-26T22:42:19Z",
       "side": 1,
       "message": "Should we make this consistent by providing a default \u003d true?",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54c232e_8d36e8b1",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "the default \"true\" value was needed because is_screenshare had already a default value, so couldn\u0027t do it other way.\n\nI can set the default to true or leave it as it is, just depends of the preferred coding style regarding default values. I wouldn\u0027t change it, but if you think it is needed, I\u0027ll do.",
+      "parentUuid": "4ed36b1a_6cc73afe",
       "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "2d2ec183_6635e8ee",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "same.",
+      "parentUuid": "cacd93c9_f381463b",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5f2583c_8ae09c38",
         "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
         "patchSetId": 12
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5e23dcdc_23a40d59",
+        "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "Yes, it is already added in the h264_simulcast_unittest.cc inside h264 dir",
+      "parentUuid": "c5f2583c_8ae09c38",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e048ad0_7ad6fb97",
         "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
         "patchSetId": 12
@@ -132,6 +258,24 @@
       "writtenOn": "2018-04-26T22:42:19Z",
       "side": 1,
       "message": "I would keep the variable name `codec_settings`",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f9d4eee_efc249b5",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "Me too, but as I cloned the vp8 simulcast implementation. It is easier to do a side-by-side comparation to ensure that the vp8 and the h264 implementations of simulcast do the same if I renamed the variable as it was on the vp8 code.",
+      "parentUuid": "8e048ad0_7ad6fb97",
       "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "e0c05a46_9753b930",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "I have cloned exactly what is inside VP8Encoder. IMHO vector is better as you don\u0027t have to worry about setting the null values to the unusued encoders.",
+      "parentUuid": "ff606708_57971b2d",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fed3dad9_5250bc0c",
         "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
         "patchSetId": 12
@@ -166,6 +328,24 @@
       "writtenOn": "2018-04-26T22:42:19Z",
       "side": 1,
       "message": "nits: I would suggest moving these utility functions out of the allocator.",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "159894b8_394ec43e",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "where should be the best place to put them instead?",
+      "parentUuid": "fed3dad9_5250bc0c",
       "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -186,6 +366,24 @@
       "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ef73e8a_82efc755",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-04-27T09:09:56Z",
+      "side": 1,
+      "message": "I don\u0027t know why this comment has changed, bad rebase I think. Will revert the change.",
+      "parentUuid": "49a2ff72_402b1bb8",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
