@@ -31,11 +31,17 @@ ScopedJavaLocalRef<jobject> NativeToJavaRtpEncodingParameter(
 ScopedJavaLocalRef<jobject> NativeToJavaRtpCodecParameter(
     JNIEnv* env,
     const RtpCodecParameters& codec) {
-  return Java_Codec_Constructor(env, codec.payload_type,
-                                NativeToJavaString(env, codec.name),
-                                NativeToJavaMediaType(env, codec.kind),
-                                NativeToJavaInteger(env, codec.clock_rate),
-                                NativeToJavaInteger(env, codec.num_channels));
+  return Java_Codec_Constructor(
+      env, codec.payload_type, NativeToJavaString(env, codec.name),
+      NativeToJavaMediaType(env, codec.kind),
+      NativeToJavaInteger(env, codec.clock_rate),
+      NativeToJavaInteger(env, codec.num_channels),
+      NativeToJavaMap(
+          env, codec.parameters,
+          [](JNIEnv* env, const std::pair<std::string, std::string>& entry) {
+            return std::make_pair(NativeToJavaString(env, entry.first),
+                                  NativeToJavaString(env, entry.second));
+          }));
 }
 
 }  // namespace
@@ -82,6 +88,9 @@ RtpParameters JavaToNativeRtpParameters(JNIEnv* jni,
     codec.num_channels =
         JavaToNativeOptionalInt(jni, Java_Codec_getNumChannels(jni, j_codec));
     parameters.codecs.push_back(codec);
+    auto parameters_map =
+        JavaToNativeStringMap(jni, Java_Codec_getParameters(jni, j_codec));
+    codec.parameters.insert(parameters_map.begin(), parameters_map.end());
   }
   return parameters;
 }
