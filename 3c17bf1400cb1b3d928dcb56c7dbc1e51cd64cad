@@ -195,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "4df84f3f_3d0232fa",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-27T15:27:42Z",
+      "side": 1,
+      "message": "Make sense, I would suggest moving this parameter before the screenshare ones.",
+      "parentUuid": "17087dd8_df5d7d6d",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cacd93c9_f381463b",
         "filename": "media/engine/simulcast.h",
         "patchSetId": 12
@@ -335,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "49543fc4_4ed1ed7c",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-27T15:27:42Z",
+      "side": 1,
+      "message": "I should have mark as a nitpicking. I don\u0027t have a strong opinion toward this. vector is fine with me.",
+      "parentUuid": "e0c05a46_9753b930",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fed3dad9_5250bc0c",
         "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
         "patchSetId": 12
@@ -364,6 +400,24 @@
       "side": 1,
       "message": "where should be the best place to put them instead?",
       "parentUuid": "fed3dad9_5250bc0c",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc7e9329_e1733553",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-04-27T15:27:42Z",
+      "side": 1,
+      "message": "On second thought. This is fine. \n\nI am getting ahead of myself. We are planning on a project externalizing the video bitrate allocator. We might move these then if that project materialize ;-)",
+      "parentUuid": "159894b8_394ec43e",
       "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
