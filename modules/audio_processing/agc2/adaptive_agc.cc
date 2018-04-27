@@ -38,7 +38,7 @@ void AdaptiveAgc::Process(AudioFrameView<float> float_frame) {
   // frames, and no estimates for other frames. We want to feed all to
   // the level estimator, but only care about the last level it
   // produces.
-  rtc::ArrayView<const VadWithLevel::LevelAndProbability> vad_results =
+  rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability> vad_results =
       vad_.AnalyzeFrame(float_frame);
   for (const auto& vad_result : vad_results) {
     apm_data_dumper_->DumpRaw("agc2_vad_probability",

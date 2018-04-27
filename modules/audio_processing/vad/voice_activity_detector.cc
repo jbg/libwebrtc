@@ -12,6 +12,10 @@
 
 #include <algorithm>
 
+#include <math.h>
+
+#include "api/array_view.h"
+#include "common_audio/include/audio_util.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
@@ -23,6 +27,14 @@ const double kDefaultVoiceValue = 1.0;
 const double kNeutralProbability = 0.5;
 const double kLowProbability = 0.01;
 
+void ProcessForPeak(rtc::ArrayView<const int16_t, kLength10Ms> audio,
+                    std::vector<double>* put_here) {
+  float current_max = 0;
+  for (const auto& x : audio) {
+    current_max = std::max(static_cast<float>(std::abs(x)), current_max);
+  }
+  put_here->push_back(current_max);
+}
 }  // namespace
 
 VoiceActivityDetector::VoiceActivityDetector()
@@ -50,6 +62,10 @@ void VoiceActivityDetector::ProcessChunk(const int16_t* audio,
   }
   RTC_DCHECK_EQ(length, kLength10Ms);
 
+  ProcessForPeak(
+      rtc::ArrayView<const int16_t, kLength10Ms>(resampled_ptr, kLength10Ms),
+      &chunkwise_peak_);
+
   // Each chunk needs to be passed into |standalone_vad_|, because internally it
   // buffers the audio and processes it all at once when GetActivity() is
   // called.
@@ -59,6 +75,8 @@ void VoiceActivityDetector::ProcessChunk(const int16_t* audio,
 
   chunkwise_voice_probabilities_.resize(features_.num_frames);
   chunkwise_rms_.resize(features_.num_frames);
+  chunkwise_peak_.resize(features_.num_frames);
+  chunkwise_level_and_probabilities_.resize(features_.num_frames);
   std::copy(features_.rms, features_.rms + chunkwise_rms_.size(),
             chunkwise_rms_.begin());
   if (features_.num_frames > 0) {
@@ -79,6 +97,11 @@ void VoiceActivityDetector::ProcessChunk(const int16_t* audio,
                    0);
     }
     last_voice_probability_ = chunkwise_voice_probabilities_.back();
+  }
+  for (size_t i = 0; i < features_.num_frames; ++i) {
+    chunkwise_level_and_probabilities_[i] = LevelAndProbability(
+        chunkwise_voice_probabilities_[i], FloatS16ToDbfs(chunkwise_rms_[i]),
+        FloatS16ToDbfs(chunkwise_peak_[i]));
   }
 }
 

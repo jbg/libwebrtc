@@ -22,7 +22,7 @@ AdaptiveModeLevelEstimator::AdaptiveModeLevelEstimator(
       apm_data_dumper_(apm_data_dumper) {}
 
 void AdaptiveModeLevelEstimator::UpdateEstimation(
-    const VadWithLevel::LevelAndProbability& vad_data) {
+    const VoiceActivityDetector::LevelAndProbability& vad_data) {
   RTC_DCHECK_GT(vad_data.speech_rms_dbfs, -150.f);
   RTC_DCHECK_LT(vad_data.speech_rms_dbfs, 50.f);
   RTC_DCHECK_GT(vad_data.speech_peak_dbfs, -150.f);

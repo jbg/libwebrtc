@@ -20,7 +20,8 @@ class ApmDataDumper;
 class AdaptiveModeLevelEstimator {
  public:
   explicit AdaptiveModeLevelEstimator(ApmDataDumper* apm_data_dumper);
-  void UpdateEstimation(const VadWithLevel::LevelAndProbability& vad_data);
+  void UpdateEstimation(
+      const VoiceActivityDetector::LevelAndProbability& vad_data);
   float LatestLevelEstimate() const;
 
  private:

@@ -68,14 +68,14 @@ float ComputeGainChangeThisFrameDb(float target_gain_db,
 
 AdaptiveDigitalGainApplier::AdaptiveDigitalGainApplier(
     ApmDataDumper* apm_data_dumper)
-    : gain_applier_(false, 1.f),  // Initial gain is 1, and we do not
-                                  // clip after gain.
+    : gain_applier_(false, DbToRatio(last_gain_db_)),
       apm_data_dumper_(apm_data_dumper) {}
 
 void AdaptiveDigitalGainApplier::Process(
     float input_level_dbfs,
     float input_noise_level_dbfs,
-    rtc::ArrayView<const VadWithLevel::LevelAndProbability> vad_results,
+    rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>
+        vad_results,
     AudioFrameView<float> float_frame) {
   RTC_DCHECK_GE(input_level_dbfs, -150.f);
   RTC_DCHECK_LE(input_level_dbfs, 0.f);
@@ -97,7 +97,7 @@ void AdaptiveDigitalGainApplier::Process(
   if (!vad_results.empty()) {
     gain_increase_allowed_ = std::all_of(
         vad_results.begin(), vad_results.end(),
-        [](const VadWithLevel::LevelAndProbability& vad_result) {
+        [](const VoiceActivityDetector::LevelAndProbability& vad_result) {
           return vad_result.speech_probability > kVadConfidenceThreshold;
         });
   }

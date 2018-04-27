@@ -26,7 +26,7 @@ constexpr float kWithNoiseDbfs = -20.f;
 
 // Runs gain applier and returns the applied gain in linear scale.
 float RunOnConstantLevel(int num_iterations,
-                         VadWithLevel::LevelAndProbability vad_data,
+                         VoiceActivityDetector::LevelAndProbability vad_data,
                          float input_level_dbfs,
                          AdaptiveDigitalGainApplier* gain_applier) {
   float gain_linear = 0.f;
@@ -35,20 +35,23 @@ float RunOnConstantLevel(int num_iterations,
     VectorFloatFrame fake_audio(1, 1, 1.f);
     gain_applier->Process(
         input_level_dbfs, kNoNoiseDbfs,
-        rtc::ArrayView<const VadWithLevel::LevelAndProbability>(&vad_data, 1),
+        rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>(
+            &vad_data, 1),
         fake_audio.float_frame_view());
     gain_linear = fake_audio.float_frame_view().channel(0)[0];
   }
   return gain_linear;
 }
 
-constexpr VadWithLevel::LevelAndProbability kVadSpeech(1.f, -20.f, 0.f);
+constexpr VoiceActivityDetector::LevelAndProbability kVadSpeech(1.f,
+                                                                -20.f,
+                                                                0.f);
 }  // namespace
 
 TEST(AutomaticGainController2AdaptiveGainApplier, GainApplierShouldNotCrash) {
-  static_assert(
-      std::is_trivially_destructible<VadWithLevel::LevelAndProbability>::value,
-      "");
+  static_assert(std::is_trivially_destructible<
+                    VoiceActivityDetector::LevelAndProbability>::value,
+                "");
   ApmDataDumper apm_data_dumper(0);
   AdaptiveDigitalGainApplier gain_applier(&apm_data_dumper);
 
@@ -56,7 +59,8 @@ TEST(AutomaticGainController2AdaptiveGainApplier, GainApplierShouldNotCrash) {
   VectorFloatFrame fake_audio(2, 480, 10000.f);
   gain_applier.Process(
       -5.0, kNoNoiseDbfs,
-      rtc::ArrayView<const VadWithLevel::LevelAndProbability>(&kVadSpeech, 1),
+      rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>(
+          &kVadSpeech, 1),
       fake_audio.float_frame_view());
 }
 
@@ -109,7 +113,8 @@ TEST(AutomaticGainController2AdaptiveGainApplier, GainDoesNotChangeFast) {
     VectorFloatFrame fake_audio(1, 1, 1.f);
     gain_applier.Process(
         initial_level_dbfs, kNoNoiseDbfs,
-        rtc::ArrayView<const VadWithLevel::LevelAndProbability>(&kVadSpeech, 1),
+        rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>(
+            &kVadSpeech, 1),
         fake_audio.float_frame_view());
     float current_gain_linear = fake_audio.float_frame_view().channel(0)[0];
     EXPECT_LE(std::abs(current_gain_linear - last_gain_linear),
@@ -123,7 +128,8 @@ TEST(AutomaticGainController2AdaptiveGainApplier, GainDoesNotChangeFast) {
     VectorFloatFrame fake_audio(1, 1, 1.f);
     gain_applier.Process(
         0.f, kNoNoiseDbfs,
-        rtc::ArrayView<const VadWithLevel::LevelAndProbability>(&kVadSpeech, 1),
+        rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>(
+            &kVadSpeech, 1),
         fake_audio.float_frame_view());
     float current_gain_linear = fake_audio.float_frame_view().channel(0)[0];
     EXPECT_LE(std::abs(current_gain_linear - last_gain_linear),
@@ -142,7 +148,8 @@ TEST(AutomaticGainController2AdaptiveGainApplier, GainIsRampedInAFrame) {
   VectorFloatFrame fake_audio(1, num_samples, 1.f);
   gain_applier.Process(
       initial_level_dbfs, kNoNoiseDbfs,
-      rtc::ArrayView<const VadWithLevel::LevelAndProbability>(&kVadSpeech, 1),
+      rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>(
+          &kVadSpeech, 1),
       fake_audio.float_frame_view());
   float maximal_difference = 0.f;
   float current_value = 1.f;
@@ -172,7 +179,8 @@ TEST(AutomaticGainController2AdaptiveGainApplier, NoiseLimitsGain) {
     VectorFloatFrame fake_audio(1, num_samples, 1.f);
     gain_applier.Process(
         initial_level_dbfs, kWithNoiseDbfs,
-        rtc::ArrayView<const VadWithLevel::LevelAndProbability>(&kVadSpeech, 1),
+        rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>(
+            &kVadSpeech, 1),
         fake_audio.float_frame_view());
 
     const float maximal_ratio =

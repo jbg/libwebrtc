@@ -28,7 +28,7 @@ class SaturationProtector {
   // whenever a frame is reliably classified as 'speech'.
   //
   // Returned value is in DB scale.
-  void UpdateMargin(const VadWithLevel::LevelAndProbability& vad_data,
+  void UpdateMargin(const VoiceActivityDetector::LevelAndProbability& vad_data,
                     float last_speech_level_estimate_dbfs);
 
   // Returns latest computed margin. Used in cases when speech is not

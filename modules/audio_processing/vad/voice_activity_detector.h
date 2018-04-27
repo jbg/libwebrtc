@@ -14,11 +14,12 @@
 #include <memory>
 #include <vector>
 
+#include "api/array_view.h"
 #include "common_audio/resampler/include/resampler.h"
-#include "modules/audio_processing/vad/vad_audio_proc.h"
 #include "modules/audio_processing/vad/common.h"
 #include "modules/audio_processing/vad/pitch_based_vad.h"
 #include "modules/audio_processing/vad/standalone_vad.h"
+#include "modules/audio_processing/vad/vad_audio_proc.h"
 
 namespace webrtc {
 
@@ -26,6 +27,17 @@ namespace webrtc {
 // StandaloneVad and PitchBasedVad to get a more robust estimation.
 class VoiceActivityDetector {
  public:
+  struct LevelAndProbability {
+    constexpr LevelAndProbability(float prob, float rms, float peak)
+        : speech_probability(prob),
+          speech_rms_dbfs(rms),
+          speech_peak_dbfs(peak) {}
+    LevelAndProbability() = default;
+    float speech_probability = 0;
+    float speech_rms_dbfs = 0;  // Root mean square in decibels to full-scale.
+    float speech_peak_dbfs = 0;
+  };
+
   VoiceActivityDetector();
   ~VoiceActivityDetector();
 
@@ -47,10 +59,17 @@ class VoiceActivityDetector {
   // implementation, although it has a few chunks of delay.
   float last_voice_probability() const { return last_voice_probability_; }
 
+  rtc::ArrayView<const LevelAndProbability> levels_and_probability() {
+    return chunkwise_level_and_probabilities_;
+  }
+
  private:
   // TODO(aluebs): Change these to float.
   std::vector<double> chunkwise_voice_probabilities_;
   std::vector<double> chunkwise_rms_;
+  std::vector<double> chunkwise_peak_;
+
+  std::vector<LevelAndProbability> chunkwise_level_and_probabilities_;
 
   float last_voice_probability_;
 

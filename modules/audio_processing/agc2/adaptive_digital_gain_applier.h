@@ -23,14 +23,14 @@ class AdaptiveDigitalGainApplier {
  public:
   explicit AdaptiveDigitalGainApplier(ApmDataDumper* apm_data_dumper);
   // Decide what gain to apply.
-  void Process(
-      float input_level_dbfs,
-      float input_noise_level_dbfs,
-      rtc::ArrayView<const VadWithLevel::LevelAndProbability> vad_results,
-      AudioFrameView<float> float_frame);
+  void Process(float input_level_dbfs,
+               float input_noise_level_dbfs,
+               rtc::ArrayView<const VoiceActivityDetector::LevelAndProbability>
+                   vad_results,
+               AudioFrameView<float> float_frame);
 
  private:
-  float last_gain_db_ = 0.f;
+  float last_gain_db_ = 8.f;
   GainApplier gain_applier_;
 
   // For some combinations of noise and speech probability, increasing

@@ -19,7 +19,7 @@
 namespace webrtc {
 namespace {
 float RunOnConstantLevel(int num_iterations,
-                         VadWithLevel::LevelAndProbability vad_data,
+                         VoiceActivityDetector::LevelAndProbability vad_data,
                          float estimated_level_dbfs,
                          SaturationProtector* saturation_protector) {
   float last_margin = saturation_protector->LastMargin();
@@ -38,7 +38,7 @@ float RunOnConstantLevel(int num_iterations,
 TEST(AutomaticGainController2SaturationProtector, ProtectorShouldNotCrash) {
   ApmDataDumper apm_data_dumper(0);
   SaturationProtector saturation_protector(&apm_data_dumper);
-  VadWithLevel::LevelAndProbability vad_data(1.f, -20.f, -10.f);
+  VoiceActivityDetector::LevelAndProbability vad_data(1.f, -20.f, -10.f);
 
   saturation_protector.UpdateMargin(vad_data, -20.f);
   static_cast<void>(saturation_protector.LastMargin());
@@ -59,7 +59,7 @@ TEST(AutomaticGainController2SaturationProtector,
       0.5 * std::abs(kInitialSaturationMarginDb - kCrestFactor);
 
   static_cast<void>(RunOnConstantLevel(
-      2000, VadWithLevel::LevelAndProbability(1.f, -90.f, kPeakLevel),
+      2000, VoiceActivityDetector::LevelAndProbability(1.f, -90.f, kPeakLevel),
       kSpeechLevel, &saturation_protector));
 
   EXPECT_NEAR(saturation_protector.LastMargin(), kCrestFactor, kMaxDifference);
@@ -77,15 +77,16 @@ TEST(AutomaticGainController2SaturationProtector, ProtectorChangesSlowly) {
 
   constexpr int kNumIterations = 1000;
   float max_difference = RunOnConstantLevel(
-      kNumIterations, VadWithLevel::LevelAndProbability(1.f, -90.f, kPeakLevel),
+      kNumIterations,
+      VoiceActivityDetector::LevelAndProbability(1.f, -90.f, kPeakLevel),
       kSpeechLevel, &saturation_protector);
 
-  max_difference =
-      std::max(RunOnConstantLevel(
-                   kNumIterations,
-                   VadWithLevel::LevelAndProbability(1.f, -90.f, kPeakLevel),
-                   kOtherSpeechLevel, &saturation_protector),
-               max_difference);
+  max_difference = std::max(
+      RunOnConstantLevel(
+          kNumIterations,
+          VoiceActivityDetector::LevelAndProbability(1.f, -90.f, kPeakLevel),
+          kOtherSpeechLevel, &saturation_protector),
+      max_difference);
 
   constexpr float kMaxChangeSpeedDbPerSecond = 0.5;  // 1 db / 2 seconds.
 
@@ -105,7 +106,7 @@ TEST(AutomaticGainController2SaturationProtector,
   // First run on initial level.
   float max_difference = RunOnConstantLevel(
       kDelayIterations,
-      VadWithLevel::LevelAndProbability(
+      VoiceActivityDetector::LevelAndProbability(
           1.f, -90.f, kInitialSpeechLevelDbfs + kInitialSaturationMarginDb),
       kInitialSpeechLevelDbfs, &saturation_protector);
 
@@ -113,7 +114,7 @@ TEST(AutomaticGainController2SaturationProtector,
   max_difference = std::max(
       RunOnConstantLevel(
           kDelayIterations,
-          VadWithLevel::LevelAndProbability(
+          VoiceActivityDetector::LevelAndProbability(
               1.f, -90.f, kLaterSpeechLevelDbfs + kInitialSaturationMarginDb),
           kInitialSpeechLevelDbfs, &saturation_protector),
       max_difference);
@@ -122,7 +123,7 @@ TEST(AutomaticGainController2SaturationProtector,
   max_difference = std::max(
       RunOnConstantLevel(
           kDelayIterations,
-          VadWithLevel::LevelAndProbability(
+          VoiceActivityDetector::LevelAndProbability(
               1.f, -90.f, kLaterSpeechLevelDbfs + kInitialSaturationMarginDb),
           kLaterSpeechLevelDbfs, &saturation_protector),
       max_difference);

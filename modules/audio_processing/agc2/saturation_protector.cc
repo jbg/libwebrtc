@@ -59,7 +59,7 @@ SaturationProtector::SaturationProtector(ApmDataDumper* apm_data_dumper)
     : apm_data_dumper_(apm_data_dumper) {}
 
 void SaturationProtector::UpdateMargin(
-    const VadWithLevel::LevelAndProbability& vad_data,
+    const VoiceActivityDetector::LevelAndProbability& vad_data,
     float last_speech_level_estimate) {
   peak_enveloper_.Process(vad_data.speech_peak_dbfs);
   const float delayed_peak_dbfs = peak_enveloper_.Query();
