@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "17087dd8_df5d7d6d",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-04-27T09:36:24Z",
+      "side": 1,
+      "message": "The Google C++ style guide has default arguments forbidden on virtual functions and permitted-but-frowned-upon (\"why aren\u0027t you using an overload\") for non-virtual functions. This function is not virtual, so take your pick.",
+      "parentUuid": "d54c232e_8d36e8b1",
+      "revId": "3c17bf1400cb1b3d928dcb56c7dbc1e51cd64cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cacd93c9_f381463b",
         "filename": "media/engine/simulcast.h",
         "patchSetId": 12
