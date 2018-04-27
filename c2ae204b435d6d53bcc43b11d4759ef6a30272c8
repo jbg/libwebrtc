@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15eb0086_fca8f91d",
+        "filename": "modules/audio_processing/aec3/echo_audibility.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-27T13:18:06Z",
+      "side": 1,
+      "message": "I think that you can put this in the else statement for the if statement on row 79",
+      "range": {
+        "startLine": 82,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 3
+      },
+      "revId": "c2ae204b435d6d53bcc43b11d4759ef6a30272c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9c8f521_fce99657",
+        "filename": "modules/audio_processing/aec3/render_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-27T13:18:06Z",
+      "side": 1,
+      "message": "Since this is now specific to the spectrum buffer, and IncIdx is specific for the block_buffer I think we have a big risk of confusion  between the too.\n\nWould it be possible to instead of adding these two methods instead add getters for the block_buffer_ and spectrum_buffer_ that return const-ref objects?\n\nThat approach could then also be used to eliminate the methods on lines 81 and 84 and instead replace those operations with operations directly on the block_buffer_ and spectrum_buffer_.\n\nProbably also the method at line 42 should be included there?\n\n\nWDYT?",
+      "revId": "c2ae204b435d6d53bcc43b11d4759ef6a30272c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
