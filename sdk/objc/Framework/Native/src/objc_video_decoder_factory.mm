@@ -50,7 +50,6 @@ class ObjCVideoDecoder : public VideoDecoder {
 
   int32_t Decode(const EncodedImage &input_image,
                  bool missing_frames,
-                 const RTPFragmentationHeader *fragmentation,
                  const CodecSpecificInfo *codec_specific_info = NULL,
                  int64_t render_time_ms = -1) {
     RTCEncodedImage *encodedImage =
@@ -74,8 +73,9 @@ class ObjCVideoDecoder : public VideoDecoder {
             codecSpecificInfo:rtcCodecSpecificInfo
                  renderTimeMs:render_time_ms];
     } else {
+      RTPFragmentationHeader fragmentation;
       RTCRtpFragmentationHeader *header =
-          [[RTCRtpFragmentationHeader alloc] initWithNativeFragmentationHeader:fragmentation];
+          [[RTCRtpFragmentationHeader alloc] initWithNativeFragmentationHeader:&fragmentation];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
       return [decoder_ decode:encodedImage
