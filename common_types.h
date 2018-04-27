@@ -151,7 +151,7 @@ class RtcpPacketTypeCounterObserver {
       const RtcpPacketTypeCounter& packet_counter) = 0;
 };
 
-// Callback, used to notify an observer whenever new rates have been estimated.
+// Rate statistics for a stream.
 class BitrateStatisticsObserver {
  public:
   virtual ~BitrateStatisticsObserver() {}
@@ -240,7 +240,7 @@ struct CodecInst {
 // RTP
 enum { kRtpCsrcSize = 15 };  // RFC 3550 page 13
 
-// NETEQ statistics.
+
 struct NetworkStatistics {
   // current jitter buffer size in ms
   uint16_t currentBufferSize;
@@ -310,7 +310,7 @@ struct AudioDecodingCallStats {
   int decoded_normal;  // Number of calls where audio RTP packet decoded.
   int decoded_plc;     // Number of calls resulted in PLC.
   int decoded_cng;  // Number of calls where comfort noise generated due to DTX.
-  int decoded_plc_cng;  // Number of calls resulted where PLC faded to CNG.
+  int decoded_plc_cng;       // Number of calls resulted where PLC faded to CNG.
   int decoded_muted_output;  // Number of calls returning a muted state output.
 };
 
@@ -337,6 +337,17 @@ enum class VideoType {
   kNV21,
   kNV12,
   kBGRA,
+};
+
+
+// Ratio allocation between temporal streams:
+// Values as required for the VP8 codec (accumulating).
+static const float
+    kLayerRateAlloction[kMaxSimulcastStreams][kMaxTemporalStreams] = {
+        {1.0f, 1.0f, 1.0f, 1.0f},  // 1 layer
+        {0.6f, 1.0f, 1.0f, 1.0f},  // 2 layers {60%, 40%}
+        {0.4f, 0.6f, 1.0f, 1.0f},  // 3 layers {40%, 20%, 40%}
+        {0.25f, 0.4f, 0.6f, 1.0f}  // 4 layers {25%, 15%, 20%, 40%}
 };
 
 // Video codec
