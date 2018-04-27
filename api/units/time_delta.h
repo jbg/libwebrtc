@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_CONGESTION_CONTROLLER_NETWORK_CONTROL_UNITS_TIME_DELTA_H_
-#define MODULES_CONGESTION_CONTROLLER_NETWORK_CONTROL_UNITS_TIME_DELTA_H_
+#ifndef API_UNITS_TIME_DELTA_H_
+#define API_UNITS_TIME_DELTA_H_
 
 #include <stdint.h>
 #include <cmath>
@@ -145,4 +145,4 @@ inline TimeDelta operator*(const int32_t& scalar, const TimeDelta& delta) {
 std::string ToString(const TimeDelta& value);
 }  // namespace webrtc
 
-#endif  // MODULES_CONGESTION_CONTROLLER_NETWORK_CONTROL_UNITS_TIME_DELTA_H_
+#endif  // API_UNITS_TIME_DELTA_H_
