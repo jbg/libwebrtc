@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94050f0d_c11ddf1f",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-28T22:59:10Z",
+      "side": 1,
+      "message": "Why is the destructor not public?",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9066684b_4f6db19b",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-28T22:59:10Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0472007f_9cc97add",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-28T22:59:10Z",
+      "side": 1,
+      "message": "Again, why?",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4885480a_46a2df83",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-28T22:59:10Z",
+      "side": 1,
+      "message": "rtc::Optional?",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
