@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c01e4b25_89d5f3e5",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-04-29T11:05:30Z",
+      "side": 1,
+      "message": "+1 this is discouraged, especially in header files.\nFrom the style guide:\n\n\"Don\u0027t put an alias in your public API just to save typing in the implementation; do so only if you intend it to be used by your clients.\"\n\n\"Do not use Namespace aliases at namespace scope in header files except in explicitly marked internal-only namespaces, because anything imported into a namespace in a header file becomes part of the public API exported by that file.\"\n\nSearch for \"These aliases don\u0027t document intended use, and half of them aren\u0027t meant for client use\" for guidance on what you could do instead.",
+      "parentUuid": "9066684b_4f6db19b",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0472007f_9cc97add",
         "filename": "api/transport/network_control.h",
         "patchSetId": 2
