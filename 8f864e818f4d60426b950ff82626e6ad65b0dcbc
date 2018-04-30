@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "786d3308_8fec4ee0",
+        "filename": "api/units/data_rate.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "Fixed, though it shouldn\u0027t make much difference considering how large the value would have to be.",
+      "parentUuid": "ac25ef73_cc827bda",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01419686_fa84eae5",
         "filename": "api/units/data_rate.h",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feeeb9e6_96b994ac",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01419686_fa84eae5",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "4ab0d300_c721365b",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75d7ac01_a79c27d5",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15c86321_724ce04a",
         "filename": "api/units/data_rate.h",
         "patchSetId": 5
@@ -73,6 +133,24 @@
       "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11ccc479_67ae1e30",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c86321_724ce04a",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "57e4a208_8c248923",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "It\u0027s required to avoid ambiguity between casting to double or int64_t.",
+      "parentUuid": "59b1cd40_f0ebb816",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15f52ec5_5c615e37",
         "filename": "api/units/data_rate.h",
         "patchSetId": 5
@@ -110,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "2b95dee0_9edc129b",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15f52ec5_5c615e37",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62940325_4da5747b",
         "filename": "api/units/data_size.h",
         "patchSetId": 5
@@ -124,6 +238,24 @@
       "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07d01a9a_765a9623",
+        "filename": "api/units/data_size.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:24:22Z",
+      "side": 1,
+      "message": "Removed bits constructor/getter as they are not used and I\u0027m not aware of a use case that wouldn\u0027t be better served by using the DataRate class.",
+      "parentUuid": "62940325_4da5747b",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
