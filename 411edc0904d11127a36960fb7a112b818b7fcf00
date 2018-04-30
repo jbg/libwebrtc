@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5f5f2698_19181db8",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:41:18Z",
+      "side": 1,
+      "message": "Because the interface is not meant to be used for an owning reference, that would most likely be a programmer error. But I\u0027ll change it to a public destructor if that\u0027s easier to follow and fits better with the overall style.",
+      "parentUuid": "94050f0d_c11ddf1f",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9066684b_4f6db19b",
         "filename": "api/transport/network_control.h",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "40e1f2fd_b32bb115",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:41:18Z",
+      "side": 1,
+      "message": "Yes, I actually removed these in a refactoring CL which was apparently not landed. Removed now.",
+      "parentUuid": "c01e4b25_89d5f3e5",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0472007f_9cc97add",
         "filename": "api/transport/network_control.h",
         "patchSetId": 2
@@ -68,6 +104,24 @@
       "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fde1a638_cee3b3a2",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T12:41:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0472007f_9cc97add",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
