@@ -22,6 +22,30 @@
       "revId": "cc336e97600600d24559035947ff2390b984bf9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec57a032_33729f8c",
+        "filename": "modules/audio_processing/aec3/echo_audibility.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-04-30T09:52:08Z",
+      "side": 1,
+      "message": "r.first returns an iterator and the star take that value. I need to keep the original version.",
+      "parentUuid": "aca1214c_f72b14d6",
+      "range": {
+        "startLine": 92,
+        "startChar": 41,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "cc336e97600600d24559035947ff2390b984bf9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
