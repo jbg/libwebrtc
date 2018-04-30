@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d319199f_24ff1e8d",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "This function needs a comment; not easy to read intention out of code. Comment in header says something about discard of reordered packets but I cannot see where this function implements that. Moreover, if it does, that functionality should be possible to turn off as we should not always discard every reordered packet.",
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "308d716c_80d39da6",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "Does this set just grow indefinitely? I do not see it being read or cleaned up anywhere.",
+      "range": {
+        "startLine": 252,
+        "startChar": 4,
+        "endLine": 252,
+        "endChar": 37
+      },
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fc325f2_1b8890db",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "blank line needed between classes I think.",
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7128c882_dd2603fb",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "Are these two truly required? The prior is used only for logging purposes, and the latter will not be used by FakeNetworkTrace, as with that model packet exit times cannot be pre-calculated.",
+      "range": {
+        "startLine": 114,
+        "startChar": 1,
+        "endLine": 115,
+        "endChar": 71
+      },
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2365fca_b4baa2e8",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "Is this to be taken literal? Old class allowed delivering packets out of order (by a config switch iirc).",
+      "range": {
+        "startLine": 182,
+        "startChar": 29,
+        "endLine": 182,
+        "endChar": 36
+      },
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba3ded35_04a4010d",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "Doesn\u0027t this comment fit better with the SimulatedNetwork class? That is where the delays are implemented.",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 20
+      },
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f8d04b_1846e2ba",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "When this is the derived class, how does injection of another class work?",
+      "range": {
+        "startLine": 282,
+        "startChar": 24,
+        "endLine": 282,
+        "endChar": 40
+      },
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fee7bcb_160b38b6",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-04-30T11:57:50Z",
+      "side": 1,
+      "message": "There is a capacity_link_ in both classes. Think this name is misleading as it is sum of both delays, no? Maybe packets_in_flight_?",
+      "range": {
+        "startLine": 289,
+        "startChar": 3,
+        "endLine": 289,
+        "endChar": 68
+      },
+      "revId": "de3346f3ee8c4bebf5f7f4655c07e8d92bb14368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
