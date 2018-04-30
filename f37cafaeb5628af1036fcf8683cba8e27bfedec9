@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b53ca4f_d146d0be",
+        "filename": "modules/audio_processing/aec3/echo_audibility.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-04-30T10:12:40Z",
+      "side": 1,
+      "message": "Since this could wrap, please add a DCHECK that \nrender_buffer.Headroom()+1 \u003e\u003d - delay_blocks.",
+      "range": {
+        "startLine": 54,
+        "startChar": 25,
+        "endLine": 54,
+        "endChar": 38
+      },
+      "revId": "f37cafaeb5628af1036fcf8683cba8e27bfedec9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
