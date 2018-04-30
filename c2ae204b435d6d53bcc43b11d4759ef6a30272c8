@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c69399d5_740ef677",
+        "filename": "modules/audio_processing/aec3/echo_audibility.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-04-30T08:14:27Z",
+      "side": 1,
+      "message": "Yes, I will do that as it might be more clear for the reader. In any case the for loop would not be evaluated.",
+      "parentUuid": "15eb0086_fca8f91d",
+      "range": {
+        "startLine": 82,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 3
+      },
+      "revId": "c2ae204b435d6d53bcc43b11d4759ef6a30272c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9c8f521_fce99657",
         "filename": "modules/audio_processing/aec3/render_buffer.h",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "c2ae204b435d6d53bcc43b11d4759ef6a30272c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b45b335_d2d1e717",
+        "filename": "modules/audio_processing/aec3/render_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-04-30T08:14:27Z",
+      "side": 1,
+      "message": "Agree, I have changed it for accessing directly to the block_buffer and the spectrum_buffer and I have removed the methods that were doing nothing but passing the information to those internal buffer structs.",
+      "parentUuid": "b9c8f521_fce99657",
+      "revId": "c2ae204b435d6d53bcc43b11d4759ef6a30272c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
