@@ -189,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "56470654_8f120ad2",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-30T13:09:41Z",
+      "side": 1,
+      "message": "Ah. But don\u0027t you get the same problem with other integer types as well? IOW, don\u0027t you need something like\n\n  template \u003ctypename T, typename std::enable_if\u003cstd::is_integral\u003cT\u003e::value\u003e::type* \u003d nullptr\u003e\n  friend DataRate operator*(DataRate dr, T scalar) {\n    return DataRate::bytes_per_second(dr.bytes_per_second() * scalar);\n  }\n\n  template \u003ctypename T, typename std::enable_if\u003cstd::is_floating_point\u003cT\u003e::value\u003e::type* \u003d nullptr\u003e\n  friend DataRate operator*(DataRate dr, T scalar) {\n    return DataRate::bytes_per_second(std::llround(dr.bytes_per_second() * scalar));\n  }\n\n  template \u003ctypename T, typename std::enable_if\u003cstd::is_arithmetic\u003cT\u003e::value\u003e::type* \u003d nullptr\u003e\n  friend DataRate operator*(T scalar, DataRate dr) {\n    return dr * scalar;\n  }",
+      "parentUuid": "57e4a208_8c248923",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15f52ec5_5c615e37",
         "filename": "api/units/data_rate.h",
         "patchSetId": 5
