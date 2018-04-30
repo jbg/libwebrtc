@@ -157,6 +157,24 @@
       "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95b28a32_c6146bcf",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T13:21:31Z",
+      "side": 1,
+      "message": "Yes, should probably be. Since that would a bit larger refactoring (it\u0027s used in many places), I moved the struct into webrtc_impl namespace and added a TODO about it.",
+      "parentUuid": "4885480a_46a2df83",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
