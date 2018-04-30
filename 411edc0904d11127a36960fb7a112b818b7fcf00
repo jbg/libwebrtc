@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d181ba56_703d21f7",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-04-30T13:14:35Z",
+      "side": 1,
+      "message": "A public destructor is the common thing. It should be fine to have a protected destructor (since it\u0027s strictly less powerful), as long as you document why.",
+      "parentUuid": "5f5f2698_19181db8",
+      "revId": "411edc0904d11127a36960fb7a112b818b7fcf00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9066684b_4f6db19b",
         "filename": "api/transport/network_control.h",
         "patchSetId": 2
