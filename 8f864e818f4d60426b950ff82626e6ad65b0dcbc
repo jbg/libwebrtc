@@ -207,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "2f956e0f_628120ed",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-04-30T13:17:30Z",
+      "side": 1,
+      "message": "Yes, for handling all cases that would be better. Maybe adding as a followup CL makes sense?",
+      "parentUuid": "56470654_8f120ad2",
+      "revId": "8f864e818f4d60426b950ff82626e6ad65b0dcbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15f52ec5_5c615e37",
         "filename": "api/units/data_rate.h",
         "patchSetId": 5
