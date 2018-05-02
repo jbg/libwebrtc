@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "72198255_d13281e4",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5666
+      },
+      "writtenOn": "2018-05-02T13:56:34Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s obvious from the code. I think a more useful comment would be\n\n# Used by the WebRTC DEPS autoroller to update third_party/, build/ etc.",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 89
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67c521e1_39bfdf8e",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5666
+      },
+      "writtenOn": "2018-05-02T13:56:34Z",
+      "side": 1,
+      "message": "Can you elaborate on why you chose this solution rather than just checking out third_party on the side in the recipe runner and passing its path to the roll script? What do we gain by doing it this way?",
+      "range": {
+        "startLine": 79,
+        "startChar": 6,
+        "endLine": 79,
+        "endChar": 47
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7be6cd61_09db4515",
         "filename": "THIRD_PARTY_DEPS",
         "patchSetId": 1
@@ -18,6 +64,98 @@
         "startChar": 48,
         "endLine": 1,
         "endChar": 67
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ff73ed1_821b78e9",
+        "filename": "THIRD_PARTY_DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5666
+      },
+      "writtenOn": "2018-05-02T13:56:34Z",
+      "side": 1,
+      "message": "Hmm. This whole list and PLATFORM_DEPS seems like really unfortunate duplication of DEPS. Is there any way we can parse this information out of DEPS instead?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 15
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d8d7308_020032cd",
+        "filename": "third_party/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5666
+      },
+      "writtenOn": "2018-05-02T13:56:34Z",
+      "side": 1,
+      "message": "Looks like you\u0027re missing the first line from https://cs.chromium.org/chromium/src/third_party/.gitignore?q\u003dthird_party/.gi\u0026sq\u003dpackage:chromium\u0026l\u003d1 :)\n\nThis file will be automatically copied by the autoroller, right?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 77
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d5fe70d_2b01cc87",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5666
+      },
+      "writtenOn": "2018-05-02T13:56:34Z",
+      "side": 1,
+      "message": "Nit: remove space",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 88,
+        "endChar": 7
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eca994a_95a6e4c1",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5666
+      },
+      "writtenOn": "2018-05-02T13:56:34Z",
+      "side": 1,
+      "message": "ThirdParty",
+      "range": {
+        "startLine": 397,
+        "startChar": 4,
+        "endLine": 397,
+        "endChar": 24
       },
       "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
