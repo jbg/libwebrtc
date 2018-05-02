@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f293a712_ce3e732e",
+        "filename": "api/video_codecs/video_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-02T18:28:40Z",
+      "side": 1,
+      "message": "Remove these two comments---you (wisely) didn\u0027t add default values to the new Decode() method.",
+      "range": {
+        "startLine": 48,
+        "startChar": 27,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "fd8221b441057483441cda8f2168e93371276a04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "04577c5f_3fc5d1c5",
         "filename": "sdk/objc/Framework/Native/src/objc_video_decoder_factory.mm",
         "patchSetId": 9
