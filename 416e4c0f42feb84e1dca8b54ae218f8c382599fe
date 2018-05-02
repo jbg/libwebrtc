@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ad06367b_08c52df4",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72198255_d13281e4",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 89
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67c521e1_39bfdf8e",
         "filename": "DEPS",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edcb13f4_455057c1",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "Checkouting third_party on the side will be more complicated comparing to this solution because of these points:\n1. We need to modify recipe to checkout third_party and put it somewhere on the build bot and configure not to do fresh checkout every time\n2. We need to pass this location to autoroller script\n3. During manual autoroller run user have to manually checkout third_party somewhere and pass its directory to the autoroller script. Also we have to provide some instructions (it can be done by error messages also)\n\nIn this solution all configuration will be done from the box, user just need to specify custom var in .gclient file. For autoroller bot it will require just simple modification: add custom var into recipe. It can take a bit more time during gclient sync, because of third_party checkout, but looks like this time for bot and manual rolls is not critical. But in such case this solution will use previously validated and work-proved methods to get required files properly.",
+      "parentUuid": "67c521e1_39bfdf8e",
+      "range": {
+        "startLine": 79,
+        "startChar": 6,
+        "endLine": 79,
+        "endChar": 47
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8075bf30_961893f8",
+        "filename": "THIRD_PARTY_DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7be6cd61_09db4515",
+      "range": {
+        "startLine": 1,
+        "startChar": 48,
+        "endLine": 1,
+        "endChar": 67
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ff73ed1_821b78e9",
         "filename": "THIRD_PARTY_DEPS",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92421edd_9576bbcb",
+        "filename": "THIRD_PARTY_DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but I will think, how to fix it. I think it is better to roll first in this way to control all deps during such big change manually, and then try to figure out the way of automatic gathering of this list.",
+      "parentUuid": "3ff73ed1_821b78e9",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 15
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "b66a5769_ce355780",
+        "filename": "third_party/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "We need to have separate ignore file because:\n1. We want to add own entries and not get conflicts during sync\n2. Don\u0027t accidentally ignore some deps, that will be ignored in chromium\n\nAlso looks like any missync in this file will be found because of more serious outages, like if some dep will be removed from chromium, we will fail to compile webrtc",
+      "parentUuid": "1d8d7308_020032cd",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 77
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d5fe70d_2b01cc87",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "bedb7174_4a45c7f5",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d5fe70d_2b01cc87",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 88,
+        "endChar": 7
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1eca994a_95a6e4c1",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -160,6 +304,30 @@
       "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0417ee93_ffa5bbc6",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-02T14:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eca994a_95a6e4c1",
+      "range": {
+        "startLine": 397,
+        "startChar": 4,
+        "endLine": 397,
+        "endChar": 24
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
