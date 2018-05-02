@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04577c5f_3fc5d1c5",
+        "filename": "sdk/objc/Framework/Native/src/objc_video_decoder_factory.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-05-02T10:54:02Z",
+      "side": 1,
+      "message": "Can you remove fragmentation header from the ObjC code as well?",
+      "range": {
+        "startLine": 78,
+        "startChar": 45,
+        "endLine": 78,
+        "endChar": 78
+      },
+      "revId": "fd8221b441057483441cda8f2168e93371276a04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
