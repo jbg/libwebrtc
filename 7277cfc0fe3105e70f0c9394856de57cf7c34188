@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ccf5ecc_7c05d7bd",
+        "filename": "modules/audio_processing/aec3/echo_audibility.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-05-02T07:42:05Z",
+      "side": 1,
+      "message": "Afaics, render_block_write_current is only used in a const-manner below.\n\nI think it would be better to instead use block_buffer.write instead of block_buffer.write as that is more explicit.\n\nAlternatively, const declare render_block_write_current to show that it is a proper alias for block_buffer.write",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 32
+      },
+      "revId": "7277cfc0fe3105e70f0c9394856de57cf7c34188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
