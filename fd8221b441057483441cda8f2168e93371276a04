@@ -22,6 +22,30 @@
       "revId": "fd8221b441057483441cda8f2168e93371276a04",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27046e2a_84a794c8",
+        "filename": "sdk/objc/Framework/Native/src/objc_video_decoder_factory.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-02T11:26:28Z",
+      "side": 1,
+      "message": "Was deprecated in cl https://webrtc-review.googlesource.com/c/src/+/72442, plan to delete as soon as downstream objc apps are updated.",
+      "parentUuid": "04577c5f_3fc5d1c5",
+      "range": {
+        "startLine": 78,
+        "startChar": 45,
+        "endLine": 78,
+        "endChar": 78
+      },
+      "revId": "fd8221b441057483441cda8f2168e93371276a04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
