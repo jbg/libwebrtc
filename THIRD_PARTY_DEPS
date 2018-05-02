@@ -1,0 +1,106 @@
+# TODO(titovartem) think, maybe we needn't such difficult structure and it will be enough just
+# to have a list
+
+COMMON_DEPS = [
+  'binutils',
+  'boringssl',
+  'ced',
+  #'depot_tools',
+  #'ffmpeg',
+  'freetype',
+  'googletest',
+  'harfbuzz-ng',
+  #'icu',
+  'instrumented_libraries',
+  'jsoncpp',
+  'libFuzzer',
+  #'libjpeg_turbo',
+  'libpng',
+  #'libsrtp',
+  'libvpx',
+  #'libyuv',
+  #'llvm-build',
+  #'lss',
+  'mockito',
+  'openh264',
+  #'openmax_dl',
+  'opus',
+  'protobuf',
+  'requests',
+  'usrsctp',
+  'yasm',
+  'zlib',
+
+  #'catapult',
+  'colorama',
+  #'gtest-parallel',
+]
+
+PLATFORM_DEPS = {
+  'linux': [],
+  'win': [
+    # externally sync deps
+    #'syzygy',
+    #'winsdk_samples',
+  ],
+  'android': [
+    # compile time deps
+    'accessibility_test_framework',
+    'android_platform',
+    'android_support_test_runner',
+    'apk-patch-size-estimator',
+    'ashmem',
+    'auto',
+    'bazel',
+    'bouncycastle',
+    'breakpad',
+    'byte_buddy',
+    'closure_compiler',
+    'errorprone',
+    'espresso',
+    'eu-strip',
+    'gson',
+    'guava',
+    'hamcrest',
+    'icu4j',
+    'ijar',
+    'intellij',
+    'javax_inject',
+    'jinja2',
+    'jsr-305',
+    'junit',
+    'libxml',
+    'markupsafe',
+    'modp_b64',
+    'objenesis',
+    'ow2_asm',
+    'robolectric',
+    'sqlite4java',
+    'tcmalloc',
+    'ub-uiautomator',
+    'xstream',
+    # test time deps
+    'proguard',
+
+    # externally sync deps
+    #'android_ndk',
+    'android_system_sdk',
+    #'android_tools',
+    #'findbugs',
+  ],
+  'mac': [
+    'ocmock'
+  ],
+  'ios': [
+    'ocmock'
+  ],
+}
+
+FILES = [
+  'BUILD.gn',
+  'DEPS',
+  'libjpeg.gni',
+  'PRESUBMIT.py',
+  'README.chromium',
+  'README.chromium.template',
+]
