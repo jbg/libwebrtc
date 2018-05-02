@@ -52,7 +52,6 @@ class VideoProcessorIntegrationTestParameterized
       : bitrate_(::testing::get<0>(GetParam())),
         codec_type_(::testing::get<1>(GetParam())),
         hw_codec_(::testing::get<2>(GetParam())) {
-    fixture_ = CreateVideoProcessorIntegrationTestFixture();
   }
   ~VideoProcessorIntegrationTestParameterized() override = default;
 
@@ -60,13 +59,14 @@ class VideoProcessorIntegrationTestParameterized
                size_t height,
                size_t framerate,
                const std::string& filename) {
-    fixture_->config.filename = filename;
-    fixture_->config.filepath = ResourcePath(filename, "yuv");
-    fixture_->config.use_single_core = kUseSingleCore;
-    fixture_->config.measure_cpu = kMeasureCpu;
-    fixture_->config.hw_encoder = hw_codec_;
-    fixture_->config.hw_decoder = hw_codec_;
-    fixture_->config.num_frames = kNumFrames;
+    TestConfig config;
+    config.filename = filename;
+    config.filepath = ResourcePath(filename, "yuv");
+    config.use_single_core = kUseSingleCore;
+    config.measure_cpu = kMeasureCpu;
+    config.hw_encoder = hw_codec_;
+    config.hw_decoder = hw_codec_;
+    config.num_frames = kNumFrames;
 
     const size_t num_simulcast_streams =
         codec_type_ == kVideoCodecVP8 ? kNumSpatialLayers : 1;
@@ -74,14 +74,15 @@ class VideoProcessorIntegrationTestParameterized
         codec_type_ == kVideoCodecVP9 ? kNumSpatialLayers : 1;
 
     const std::string codec_name = CodecTypeToPayloadString(codec_type_);
-    fixture_->config.SetCodecSettings(codec_name, num_simulcast_streams,
-                                      num_spatial_layers, kNumTemporalLayers,
-                                      kDenoisingOn, kFrameDropperOn,
-                                      kSpatialResizeOn, width, height);
+    config.SetCodecSettings(codec_name, num_simulcast_streams,
+                            num_spatial_layers, kNumTemporalLayers,
+                            kDenoisingOn, kFrameDropperOn, kSpatialResizeOn,
+                            width, height);
 
     std::vector<RateProfile> rate_profiles = {
         {bitrate_, framerate, kNumFrames}};
 
+    fixture_ = CreateVideoProcessorIntegrationTestFixture(config);
     fixture_->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
                                           nullptr, &kVisualizationParams);
   }
