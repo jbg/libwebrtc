@@ -26,19 +26,24 @@ typedef VideoProcessorIntegrationTestFixtureInterface BaseTest;
 
 const int kForemanNumFrames = 300;
 
-static std::unique_ptr<BaseTest> CreateTestFixture() {
+static TestConfig CreateTestConfig() {
+  TestConfig config;
+  config.filename = "foreman_cif";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = kForemanNumFrames;
+  config.hw_encoder = true;
+  config.hw_decoder = true;
+  config.encoded_frame_checker =
+      new VideoProcessorIntegrationTest::H264KeyframeChecker();
+  return config;
+}
+
+static std::unique_ptr<BaseTest> CreateTestFixtureWithConfig(
+    TestConfig config) {
   auto decoder_factory = CreateObjCDecoderFactory();
   auto encoder_factory = CreateObjCEncoderFactory();
-  auto fixture = CreateVideoProcessorIntegrationTestFixture(
-      std::move(decoder_factory), std::move(encoder_factory));
-  fixture->config.filename = "foreman_cif";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = kForemanNumFrames;
-  fixture->config.hw_encoder = true;
-  fixture->config.hw_decoder = true;
-  fixture->config.encoded_frame_checker =
-      new VideoProcessorIntegrationTest::H264KeyframeChecker();
-  return fixture;
+  return CreateVideoProcessorIntegrationTestFixture(
+      config, std::move(decoder_factory), std::move(encoder_factory));
 }
 }  // namespace
 
@@ -54,9 +59,10 @@ static std::unique_ptr<BaseTest> CreateTestFixture() {
 // longer in use.
 MAYBE_TEST(VideoProcessorIntegrationTestVideoToolbox,
            ForemanCif500kbpsH264CBP) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false,
-                                   false, false, 352, 288);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
+                          352, 288);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kForemanNumFrames}};
 
@@ -68,10 +74,11 @@ MAYBE_TEST(VideoProcessorIntegrationTestVideoToolbox,
 
 MAYBE_TEST(VideoProcessorIntegrationTestVideoToolbox,
            ForemanCif500kbpsH264CHP) {
-  auto fixture = CreateTestFixture();
-  fixture->config.h264_codec_settings.profile = H264::kProfileConstrainedHigh;
-  fixture->config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false,
-                                   false, false, 352, 288);
+  auto config = CreateTestConfig();
+  config.h264_codec_settings.profile = H264::kProfileConstrainedHigh;
+  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
+                          352, 288);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kForemanNumFrames}};
 

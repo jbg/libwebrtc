@@ -57,17 +57,21 @@ class QpFrameChecker : public TestConfig::EncodedFrameChecker {
   }
 };
 
-static std::unique_ptr<BaseTest> CreateTestFixture() {
-  auto fixture = CreateVideoProcessorIntegrationTestFixture();
-  fixture->config.filename = "foreman_cif";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = kNumFramesLong;
-  // Onl llow encoder/decoder to use single core, for predictability.
-  fixture->config.use_single_core = true;
-  fixture->config.hw_encoder = false;
-  fixture->config.hw_decoder = false;
-  fixture->config.encoded_frame_checker = new QpFrameChecker;
-  return fixture;
+static TestConfig CreateTestConfig() {
+  TestConfig config;
+  config.filename = "foreman_cif";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = kNumFramesLong;
+  config.use_single_core = true;
+  config.hw_encoder = false;
+  config.hw_decoder = false;
+  config.encoded_frame_checker = new QpFrameChecker;
+  return config;
+}
+
+static std::unique_ptr<BaseTest> CreateTestFixtureWithConfig(
+    TestConfig config) {
+  return CreateVideoProcessorIntegrationTestFixture(config);
 }
 
 static void PrintRdPerf(
@@ -100,10 +104,11 @@ static void PrintRdPerf(
 
 #if !defined(RTC_DISABLE_VP9)
 TEST(VideoProcessorIntegrationTestLibvpx, HighBitrateVP9) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
-                                   false, kCifWidth, kCifHeight);
-  fixture->config.num_frames = kNumFramesShort;
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true, false,
+                          kCifWidth, kCifHeight);
+  config.num_frames = kNumFramesShort;
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
@@ -117,9 +122,10 @@ TEST(VideoProcessorIntegrationTestLibvpx, HighBitrateVP9) {
 }
 
 TEST(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
-                                   false, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {200, 30, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -139,9 +145,10 @@ TEST(VideoProcessorIntegrationTestLibvpx, ChangeBitrateVP9) {
 }
 
 TEST(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
-                                   false, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {100, 24, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -163,10 +170,11 @@ TEST(VideoProcessorIntegrationTestLibvpx, ChangeFramerateVP9) {
 }
 
 TEST(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, true, true,
-                                   false, kCifWidth, kCifHeight);
-  fixture->config.num_frames = kNumFramesShort;
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, true, true, false,
+                          kCifWidth, kCifHeight);
+  config.num_frames = kNumFramesShort;
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
@@ -180,9 +188,10 @@ TEST(VideoProcessorIntegrationTestLibvpx, DenoiserOnVP9) {
 }
 
 TEST(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true,
-                                   true, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 1, 1, false, true, true,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{50, 30, kNumFramesLong}};
 
@@ -201,10 +210,11 @@ TEST(VideoProcessorIntegrationTestLibvpx, VeryLowBitrateVP9) {
 #endif  // !defined(RTC_DISABLE_VP9)
 
 TEST(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
-                                   false, kCifWidth, kCifHeight);
-  fixture->config.num_frames = kNumFramesShort;
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true, false,
+                          kCifWidth, kCifHeight);
+  config.num_frames = kNumFramesShort;
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFramesShort}};
 
@@ -238,9 +248,10 @@ TEST(VideoProcessorIntegrationTestLibvpx, HighBitrateVP8) {
 #define MAYBE_ChangeBitrateVP8 ChangeBitrateVP8
 #endif
 TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
-                                   false, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {200, 30, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -270,9 +281,10 @@ TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeBitrateVP8) {
 #define MAYBE_ChangeFramerateVP8 ChangeFramerateVP8
 #endif
 TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true,
-                                   false, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {80, 24, 100},  // target_kbps, input_fps, frame_index_rate_update
@@ -308,9 +320,10 @@ TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_ChangeFramerateVP8) {
 #define MAYBE_TemporalLayersVP8 TemporalLayersVP8
 #endif
 TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 3, true, true,
-                                   false, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 3, true, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{200, 30, 150},
                                             {400, 30, kNumFramesLong}};
@@ -341,15 +354,15 @@ TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_TemporalLayersVP8) {
 #define MAYBE_MultiresVP8 MultiresVP8
 #endif
 TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_MultiresVP8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.filename = "ConferenceMotion_1280_720_50";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = 100;
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
-                                   false, 1280, 720);
+  auto config = CreateTestConfig();
+  config.filename = "ConferenceMotion_1280_720_50";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = 100;
+  config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true, false,
+                          1280, 720);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
-  std::vector<RateProfile> rate_profiles = {
-      {1500, 30, fixture->config.num_frames}};
+  std::vector<RateProfile> rate_profiles = {{1500, 30, config.num_frames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
       {5, 1, 5, 0.2, 0.3, 0.1, 0, 1}};
@@ -366,16 +379,16 @@ TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_MultiresVP8) {
 #define MAYBE_SimulcastVP8 SimulcastVP8
 #endif
 TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.filename = "ConferenceMotion_1280_720_50";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = 100;
-  fixture->config.simulcast_adapted_encoder = true;
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
-                                   false, 1280, 720);
+  auto config = CreateTestConfig();
+  config.filename = "ConferenceMotion_1280_720_50";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = 100;
+  config.simulcast_adapted_encoder = true;
+  config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true, false,
+                          1280, 720);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
-  std::vector<RateProfile> rate_profiles = {
-      {1500, 30, fixture->config.num_frames}};
+  std::vector<RateProfile> rate_profiles = {{1500, 30, config.num_frames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
       {20, 5, 90, 0.8, 0.5, 0.3, 0, 1}};
@@ -392,15 +405,15 @@ TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_SimulcastVP8) {
 #define MAYBE_SvcVP9 SvcVP9
 #endif
 TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
-  auto fixture = CreateTestFixture();
-  fixture->config.filename = "ConferenceMotion_1280_720_50";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = 100;
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true,
-                                   false, 1280, 720);
+  auto config = CreateTestConfig();
+  config.filename = "ConferenceMotion_1280_720_50";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = 100;
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true, false,
+                          1280, 720);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
-  std::vector<RateProfile> rate_profiles = {
-      {1500, 30, fixture->config.num_frames}};
+  std::vector<RateProfile> rate_profiles = {{1500, 30, config.num_frames}};
 
   std::vector<RateControlThresholds> rc_thresholds = {
       {5, 1, 5, 0.2, 0.3, 0.1, 0, 1}};
@@ -411,48 +424,52 @@ TEST(VideoProcessorIntegrationTestLibvpx, MAYBE_SvcVP9) {
 }
 
 TEST(VideoProcessorIntegrationTestLibvpx, DISABLED_MultiresVP8RdPerf) {
-  auto fixture = CreateTestFixture();
-  fixture->config.filename = "FourPeople_1280x720_30";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = 300;
-  fixture->config.print_frame_level_stats = true;
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true,
-                                   false, 1280, 720);
+  auto config = CreateTestConfig();
+  config.filename = "FourPeople_1280x720_30";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = 300;
+  config.print_frame_level_stats = true;
+  config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true, false,
+                          1280, 720);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::map<size_t, std::vector<VideoStatistics>> rd_stats;
   for (size_t bitrate_kbps : kBitrateRdPerfKbps) {
     std::vector<RateProfile> rate_profiles = {
-        {bitrate_kbps, 30, fixture->config.num_frames}};
+        {bitrate_kbps, 30, config.num_frames}};
 
     fixture->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
                                          nullptr, nullptr);
 
-    rd_stats[bitrate_kbps] = fixture->stats.SliceAndCalcLayerVideoStatistic(
-        kNumFirstFramesToSkipAtRdPerfAnalysis, fixture->config.num_frames - 1);
+    rd_stats[bitrate_kbps] =
+        fixture->GetStats().SliceAndCalcLayerVideoStatistic(
+            kNumFirstFramesToSkipAtRdPerfAnalysis, config.num_frames - 1);
   }
 
   PrintRdPerf(rd_stats);
 }
 
 TEST(VideoProcessorIntegrationTestLibvpx, DISABLED_SvcVP9RdPerf) {
-  auto fixture = CreateTestFixture();
-  fixture->config.filename = "FourPeople_1280x720_30";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = 300;
-  fixture->config.print_frame_level_stats = true;
-  fixture->config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true,
-                                   false, 1280, 720);
+  auto config = CreateTestConfig();
+  config.filename = "FourPeople_1280x720_30";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = 300;
+  config.print_frame_level_stats = true;
+  config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true, false,
+                          1280, 720);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::map<size_t, std::vector<VideoStatistics>> rd_stats;
   for (size_t bitrate_kbps : kBitrateRdPerfKbps) {
     std::vector<RateProfile> rate_profiles = {
-        {bitrate_kbps, 30, fixture->config.num_frames}};
+        {bitrate_kbps, 30, config.num_frames}};
 
     fixture->ProcessFramesAndMaybeVerify(rate_profiles, nullptr, nullptr,
                                          nullptr, nullptr);
 
-    rd_stats[bitrate_kbps] = fixture->stats.SliceAndCalcLayerVideoStatistic(
-        kNumFirstFramesToSkipAtRdPerfAnalysis, fixture->config.num_frames - 1);
+    rd_stats[bitrate_kbps] =
+        fixture->GetStats().SliceAndCalcLayerVideoStatistic(
+            kNumFirstFramesToSkipAtRdPerfAnalysis, config.num_frames - 1);
   }
 
   PrintRdPerf(rd_stats);

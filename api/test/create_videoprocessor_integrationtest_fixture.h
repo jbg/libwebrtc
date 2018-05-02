@@ -16,15 +16,17 @@
 #include "api/test/videoprocessor_integrationtest_fixture.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
+#include "modules/video_coding/codecs/test/test_config.h"
 
 namespace webrtc {
 namespace test {
 
 std::unique_ptr<VideoProcessorIntegrationTestFixtureInterface>
-CreateVideoProcessorIntegrationTestFixture();
+CreateVideoProcessorIntegrationTestFixture(TestConfig config);
 
 std::unique_ptr<VideoProcessorIntegrationTestFixtureInterface>
 CreateVideoProcessorIntegrationTestFixture(
+    TestConfig config,
     std::unique_ptr<VideoDecoderFactory> decoder_factory,
     std::unique_ptr<VideoEncoderFactory> encoder_factory);
 

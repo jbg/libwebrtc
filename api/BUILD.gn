@@ -399,6 +399,7 @@ if (rtc_include_tests) {
     ]
     deps = [
       ":videoprocessor_integrationtest_fixture_api",
+      "../modules/video_coding:video_codecs_test_framework",
       "../modules/video_coding:videoprocessor_integrationtest_impl",
       "../rtc_base:rtc_base_approved",
       "video_codecs:video_codecs_api",

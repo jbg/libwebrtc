@@ -28,21 +28,27 @@ const int kForemanFramerateFps = 30;
 
 typedef VideoProcessorIntegrationTestFixtureInterface BaseTest;
 
-static std::unique_ptr<BaseTest> CreateTestFixture() {
-  auto fixture = CreateVideoProcessorIntegrationTestFixture();
-  fixture->config.filename = "foreman_cif";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = kForemanNumFrames;
-  fixture->config.hw_encoder = true;
-  fixture->config.hw_decoder = true;
-  return fixture;
+static TestConfig CreateTestConfig() {
+  TestConfig config;
+  config.filename = "foreman_cif";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = kForemanNumFrames;
+  config.hw_encoder = true;
+  config.hw_decoder = true;
+  return config;
+}
+
+static std::unique_ptr<BaseTest> CreateTestFixtureWithConfig(
+    TestConfig config) {
+  return CreateVideoProcessorIntegrationTestFixture(config);
 }
 }  // namespace
 
 TEST(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsVp8) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, false,
-                                   false, false, 352, 288);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, false, false, false,
+                          352, 288);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {500, kForemanFramerateFps, kForemanNumFrames}};
@@ -60,12 +66,13 @@ TEST(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsVp8) {
 }
 
 TEST(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsH264CBP) {
-  auto fixture = CreateTestFixture();
+  auto config = CreateTestConfig();
   const auto frame_checker =
       rtc::MakeUnique<VideoProcessorIntegrationTest::H264KeyframeChecker>();
-  fixture->config.encoded_frame_checker = frame_checker.get();
-  fixture->config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false,
-                                   false, false, 352, 288);
+  config.encoded_frame_checker = frame_checker.get();
+  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
+                          352, 288);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {500, kForemanFramerateFps, kForemanNumFrames}};
@@ -86,14 +93,15 @@ TEST(VideoProcessorIntegrationTestMediaCodec, ForemanCif500kbpsH264CBP) {
 // HW encoders that support CHP.
 TEST(VideoProcessorIntegrationTestMediaCodec,
      DISABLED_ForemanCif500kbpsH264CHP) {
-  auto fixture = CreateTestFixture();
+  auto config = CreateTestConfig();
   const auto frame_checker =
       rtc::MakeUnique<VideoProcessorIntegrationTest::H264KeyframeChecker>();
 
-  fixture->config.h264_codec_settings.profile = H264::kProfileConstrainedHigh;
-  fixture->config.encoded_frame_checker = frame_checker.get();
-  fixture->config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false,
-                                   false, false, 352, 288);
+  config.h264_codec_settings.profile = H264::kProfileConstrainedHigh;
+  config.encoded_frame_checker = frame_checker.get();
+  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
+                          352, 288);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {
       {500, kForemanFramerateFps, kForemanNumFrames}};
@@ -111,7 +119,7 @@ TEST(VideoProcessorIntegrationTestMediaCodec,
 }
 
 TEST(VideoProcessorIntegrationTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
-  auto fixture = CreateTestFixture();
+  auto config = CreateTestConfig();
   const int kNumFrames = 30;
   // TODO(brandtr): Add H.264 when we have fixed the encoder.
   const std::vector<std::string> codecs = {cricket::kVp8CodecName};
@@ -126,14 +134,14 @@ TEST(VideoProcessorIntegrationTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
     for (const auto& resolution : resolutions) {
       const int width = std::get<0>(resolution);
       const int height = std::get<1>(resolution);
-      fixture->config.filename = std::string("foreman_") +
-                                 std::to_string(width) + "x" +
-                                 std::to_string(height);
-      fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-      fixture->config.num_frames = kNumFrames;
-      fixture->config.SetCodecSettings(codec, 1, 1, 1, false, false, false,
-                                       width, height);
+      config.filename = std::string("foreman_") + std::to_string(width) + "x" +
+                        std::to_string(height);
+      config.filepath = ResourcePath(fixture->config.filename, "yuv");
+      config.num_frames = kNumFrames;
+      config.SetCodecSettings(codec, 1, 1, 1, false, false, false, width,
+                              height);
 
+      auto fixture = CreateTestFixtureWithConfig(config);
       fixture->ProcessFramesAndMaybeVerify(
           rate_profiles, nullptr /* rc_thresholds */, &quality_thresholds,
           nullptr /* bs_thresholds */, nullptr /* visualization_params */);

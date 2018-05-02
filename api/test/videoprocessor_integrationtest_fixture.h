@@ -68,9 +68,7 @@ class VideoProcessorIntegrationTestFixtureInterface {
       const std::vector<QualityThresholds>* quality_thresholds,
       const BitstreamThresholds* bs_thresholds,
       const VisualizationParams* visualization_params) = 0;
-
-  TestConfig config;
-  Stats stats;
+  virtual Stats GetStats() = 0;
 };
 
 }  // namespace test

@@ -22,6 +22,7 @@
 #include "api/video_codecs/video_encoder_factory.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/h264/h264_common.h"
+#include "modules/video_coding/codecs/test/stats.h"
 #include "modules/video_coding/codecs/test/test_config.h"
 #include "modules/video_coding/codecs/test/videoprocessor.h"
 #include "modules/video_coding/utility/ivf_file_writer.h"
@@ -46,11 +47,11 @@ class VideoProcessorIntegrationTest
                            const EncodedImage& encoded_frame) const override;
   };
 
- public:
-  VideoProcessorIntegrationTest();
+  explicit VideoProcessorIntegrationTest(TestConfig config);
   VideoProcessorIntegrationTest(
-      std::unique_ptr<VideoDecoderFactory> decoderFactory,
-      std::unique_ptr<VideoEncoderFactory> encoderFactory);
+      TestConfig config,
+      std::unique_ptr<VideoDecoderFactory> decoder_factory,
+      std::unique_ptr<VideoEncoderFactory> encoder_factory);
   ~VideoProcessorIntegrationTest() override;
 
   void ProcessFramesAndMaybeVerify(
@@ -59,6 +60,8 @@ class VideoProcessorIntegrationTest
       const std::vector<QualityThresholds>* quality_thresholds,
       const BitstreamThresholds* bs_thresholds,
       const VisualizationParams* visualization_params) override;
+
+  Stats GetStats() override;
 
  private:
   class CpuProcessTime;
@@ -97,6 +100,8 @@ class VideoProcessorIntegrationTest
   VideoProcessor::VideoDecoderList decoders_;
 
   // Helper objects.
+  TestConfig config_;
+  Stats stats_;
   std::unique_ptr<FrameReader> source_frame_reader_;
   VideoProcessor::IvfFileWriterList encoded_frame_writers_;
   VideoProcessor::FrameWriterList decoded_frame_writers_;

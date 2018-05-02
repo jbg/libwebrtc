@@ -30,25 +30,31 @@ const int kCifWidth = 352;
 const int kCifHeight = 288;
 const int kNumFrames = 100;
 
-static std::unique_ptr<BaseTest> CreateTestFixture() {
-  auto fixture = CreateVideoProcessorIntegrationTestFixture();
-  fixture->config.filename = "foreman_cif";
-  fixture->config.filepath = ResourcePath(fixture->config.filename, "yuv");
-  fixture->config.num_frames = kNumFrames;
-  // Only allow encoder/decoder to use single core, for predictability.
-  fixture->config.use_single_core = true;
-  fixture->config.hw_encoder = false;
-  fixture->config.hw_decoder = false;
-  fixture->config.encoded_frame_checker =
+static TestConfig CreateTestConfig() {
+  TestConfig config;
+  config.filename = "foreman_cif";
+  config.filepath = ResourcePath(config.filename, "yuv");
+  config.num_frames = kNumFrames;
+  llow encoder/decoder to use single core, for predictability.
+  config.use_single_core = true;
+  config.hw_encoder = false;
+  config.hw_decoder = false;
+  config.encoded_frame_checker =
       new VideoProcessorIntegrationTest::H264KeyframeChecker();
-  return fixture;
+  return config;
+}
+
+static std::unique_ptr<BaseTest> CreateTestFixtureWithConfig(
+    TestConfig config) {
+  return CreateVideoProcessorIntegrationTestFixture(config);
 }
 }  // namespace
 
 TEST(VideoProcessorIntegrationTestOpenH264, ConstantHighBitrate) {
-  auto fixture = CreateTestFixture();
-  fixture->config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false,
-                                   true, false, kCifWidth, kCifHeight);
+  auto config = CreateTestConfig();
+  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFrames}};
 
@@ -64,12 +70,13 @@ TEST(VideoProcessorIntegrationTestOpenH264, ConstantHighBitrate) {
 // H264: Enable SingleNalUnit packetization mode. Encoder should split
 // large frames into multiple slices and limit length of NAL units.
 TEST(VideoProcessorIntegrationTestOpenH264, SingleNalUnit) {
-  auto fixture = CreateTestFixture();
-  fixture->config.h264_codec_settings.packetization_mode =
+  auto config = CreateTestConfig();
+  config.h264_codec_settings.packetization_mode =
       H264PacketizationMode::SingleNalUnit;
-  fixture->config.max_payload_size_bytes = 500;
-  fixture->config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false,
-                                   true, false, kCifWidth, kCifHeight);
+  config.max_payload_size_bytes = 500;
+  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, true, false,
+                          kCifWidth, kCifHeight);
+  auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, 30, kNumFrames}};
 
