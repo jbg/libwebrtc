@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a12749cf_0c6fd818",
+        "filename": "examples/objc/AppRTCMobile/ios/ARDVideoCallViewController.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-03T07:07:01Z",
+      "side": 1,
+      "message": "nit: I prefer to avoid this dance in unretained blocks.",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 30
+      },
+      "revId": "40c6cfacf79b2c9cf4e7bf739ce93103cb5d5ce1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
