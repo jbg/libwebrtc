@@ -50,11 +50,22 @@ DirectTransport::DirectTransport(
     const FakeNetworkPipe::Config& config,
     Call* send_call,
     const std::map<uint8_t, MediaType>& payload_type_map)
+    : DirectTransport(task_queue,
+                      rtc::MakeUnique<SimulatedNetwork>(config),
+                      send_call,
+                      payload_type_map) {}
+
+DirectTransport::DirectTransport(
+    SingleThreadedTaskQueueForTesting* task_queue,
+    std::unique_ptr<FakeNetworkInterface> fake_network,
+    Call* send_call,
+    const std::map<uint8_t, MediaType>& payload_type_map)
     : send_call_(send_call),
       clock_(Clock::GetRealTimeClock()),
       task_queue_(task_queue),
       demuxer_(payload_type_map),
-      fake_network_(rtc::MakeUnique<FakeNetworkPipe>(clock_, config)) {
+      fake_network_(
+          rtc::MakeUnique<FakeNetworkPipe>(clock_, std::move(fake_network))) {
   Start();
 }
 
@@ -80,10 +91,6 @@ DirectTransport::~DirectTransport() {
 
 void DirectTransport::SetClockOffset(int64_t offset_ms) {
   fake_network_->SetClockOffset(offset_ms);
-}
-
-void DirectTransport::SetConfig(const FakeNetworkPipe::Config& config) {
-  fake_network_->SetConfig(config);
 }
 
 void DirectTransport::StopSending() {

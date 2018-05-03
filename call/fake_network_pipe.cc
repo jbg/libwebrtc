@@ -67,41 +67,70 @@ NetworkPacket& NetworkPacket::operator=(NetworkPacket&& o) {
 
 FakeNetworkPipe::FakeNetworkPipe(Clock* clock,
                                  const FakeNetworkPipe::Config& config)
-    : FakeNetworkPipe(clock, config, nullptr, 1) {}
+    : FakeNetworkPipe(clock,
+                      rtc::MakeUnique<SimulatedNetwork>(config, 1),
+                      nullptr,
+                      nullptr) {}
 
 FakeNetworkPipe::FakeNetworkPipe(Clock* clock,
                                  const FakeNetworkPipe::Config& config,
                                  PacketReceiver* receiver)
-    : FakeNetworkPipe(clock, config, receiver, 1) {}
+    : FakeNetworkPipe(clock,
+                      rtc::MakeUnique<SimulatedNetwork>(config, 1),
+                      receiver,
+                      nullptr) {}
 
 FakeNetworkPipe::FakeNetworkPipe(Clock* clock,
                                  const FakeNetworkPipe::Config& config,
                                  PacketReceiver* receiver,
                                  uint64_t seed)
-    : clock_(clock),
-      fake_network_(rtc::MakeUnique<SimulatedNetwork>(config, seed)),
-      receiver_(receiver),
-      transport_(nullptr),
-      clock_offset_ms_(0),
-      dropped_packets_(0),
-      sent_packets_(0),
-      total_packet_delay_us_(0),
-      next_process_time_us_(clock_->TimeInMicroseconds()),
-      last_log_time_us_(clock_->TimeInMicroseconds()) {}
+    : FakeNetworkPipe(clock,
+                      rtc::MakeUnique<SimulatedNetwork>(config, seed),
+                      receiver,
+                      nullptr) {}
 
 FakeNetworkPipe::FakeNetworkPipe(Clock* clock,
                                  const FakeNetworkPipe::Config& config,
                                  Transport* transport)
+    : FakeNetworkPipe(clock,
+                      rtc::MakeUnique<SimulatedNetwork>(config, 1),
+                      nullptr,
+                      transport) {}
+
+FakeNetworkPipe::FakeNetworkPipe(
+    Clock* clock,
+    std::unique_ptr<FakeNetworkInterface>&& fake_network)
+    : FakeNetworkPipe(clock, std::move(fake_network), nullptr, nullptr) {}
+
+FakeNetworkPipe::FakeNetworkPipe(
+    Clock* clock,
+    std::unique_ptr<FakeNetworkInterface>&& fake_network,
+    PacketReceiver* receiver)
+    : FakeNetworkPipe(clock, std::move(fake_network), receiver, nullptr) {}
+
+FakeNetworkPipe::FakeNetworkPipe(
+    Clock* clock,
+    std::unique_ptr<FakeNetworkInterface>&& fake_network,
+    Transport* transport)
+    : FakeNetworkPipe(clock, std::move(fake_network), nullptr, transport) {}
+
+FakeNetworkPipe::FakeNetworkPipe(
+    Clock* clock,
+    std::unique_ptr<FakeNetworkInterface>&& fake_network,
+    PacketReceiver* receiver,
+    Transport* transport)
     : clock_(clock),
-      fake_network_(rtc::MakeUnique<SimulatedNetwork>(config, 1)),
-      receiver_(nullptr),
+      fake_network_(std::move(fake_network)),
+      receiver_(receiver),
       transport_(transport),
       clock_offset_ms_(0),
       dropped_packets_(0),
       sent_packets_(0),
       total_packet_delay_us_(0),
       next_process_time_us_(clock_->TimeInMicroseconds()),
-      last_log_time_us_(clock_->TimeInMicroseconds()) {}
+      last_log_time_us_(clock_->TimeInMicroseconds()) {
+  RTC_DCHECK(!receiver || !transport);
+}
 
 FakeNetworkPipe::~FakeNetworkPipe() = default;
 
@@ -145,10 +174,6 @@ SimulatedNetwork::SimulatedNetwork(SimulatedNetwork::Config config,
                                    uint64_t random_seed)
     : random_(random_seed), bursting_(false) {
   SetConfig(config);
-}
-
-void FakeNetworkPipe::SetConfig(const FakeNetworkPipe::Config& config) {
-  fake_network_->SetConfig(config);
 }
 
 void SimulatedNetwork::SetConfig(const SimulatedNetwork::Config& config) {
