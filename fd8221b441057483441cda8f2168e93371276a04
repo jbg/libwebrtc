@@ -141,6 +141,30 @@
       "revId": "fd8221b441057483441cda8f2168e93371276a04",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c387b3_9ad0bb32",
+        "filename": "sdk/objc/Framework/Native/src/objc_video_decoder_factory.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-05-03T07:30:48Z",
+      "side": 1,
+      "message": "Understood. The most efficient and safe order is if you do it bottom up so you can completely remove the fragmentation code here, otherwise you will have to revisit this code again in another CL.",
+      "parentUuid": "f3cb85ce_6b9c5511",
+      "range": {
+        "startLine": 78,
+        "startChar": 45,
+        "endLine": 78,
+        "endChar": 78
+      },
+      "revId": "fd8221b441057483441cda8f2168e93371276a04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
