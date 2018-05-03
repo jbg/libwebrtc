@@ -22,6 +22,121 @@
       "revId": "3bcae300c85c1da2c0f4df7151a609213a6b3d98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e40dc06f_fb2ea598",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T13:37:48Z",
+      "side": 1,
+      "message": "Maybe call this ChromeRevisionUpdate?",
+      "range": {
+        "startLine": 64,
+        "startChar": 6,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "3bcae300c85c1da2c0f4df7151a609213a6b3d98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e039177b_78d38804",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T13:37:48Z",
+      "side": 1,
+      "message": "-\u003e current_chrome_rev, new_chrome_rev, current_third_party_rev, ...",
+      "range": {
+        "startLine": 66,
+        "startChar": 21,
+        "endLine": 66,
+        "endChar": 35
+      },
+      "revId": "3bcae300c85c1da2c0f4df7151a609213a6b3d98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22a46e84_4db515bd",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T13:37:48Z",
+      "side": 1,
+      "message": "Nit: punctuation",
+      "range": {
+        "startLine": 405,
+        "startChar": 2,
+        "endLine": 405,
+        "endChar": 60
+      },
+      "revId": "3bcae300c85c1da2c0f4df7151a609213a6b3d98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c096c5a0_dde151c4",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T13:37:48Z",
+      "side": 1,
+      "message": "Nit: punctuation",
+      "range": {
+        "startLine": 407,
+        "startChar": 2,
+        "endLine": 407,
+        "endChar": 64
+      },
+      "revId": "3bcae300c85c1da2c0f4df7151a609213a6b3d98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa42097b_fa3225f7",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T13:37:48Z",
+      "side": 1,
+      "message": "Yeah, this function builds a rev update, what is its actual purpose? It\u0027s rather getting the revision ranges to roll? Maybe it should be called GetRollRevisionRanges?",
+      "range": {
+        "startLine": 485,
+        "startChar": 4,
+        "endLine": 485,
+        "endChar": 18
+      },
+      "revId": "3bcae300c85c1da2c0f4df7151a609213a6b3d98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
