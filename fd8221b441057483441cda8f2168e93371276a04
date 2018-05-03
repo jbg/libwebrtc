@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "afd4f914_5bd53611",
+        "filename": "api/video_codecs/video_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T06:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f293a712_ce3e732e",
+      "range": {
+        "startLine": 48,
+        "startChar": 27,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "fd8221b441057483441cda8f2168e93371276a04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04577c5f_3fc5d1c5",
         "filename": "sdk/objc/Framework/Native/src/objc_video_decoder_factory.mm",
         "patchSetId": 9
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "If any downstream app is using fragmentation header, won\u0027t this CL break them? What happens if you call the decode:missingFrames:codecSpecificInfo:renderTimeMs: method instead and remove the suppression below?",
       "parentUuid": "27046e2a_84a794c8",
+      "range": {
+        "startLine": 78,
+        "startChar": 45,
+        "endLine": 78,
+        "endChar": 78
+      },
+      "revId": "fd8221b441057483441cda8f2168e93371276a04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3cb85ce_6b9c5511",
+        "filename": "sdk/objc/Framework/Native/src/objc_video_decoder_factory.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T06:33:49Z",
+      "side": 1,
+      "message": "I\u0027m not expecting any downstream code to actually *use* the RTPFragmentationHeader for anything, it\u0027s just that downstream code is implementing an interface where it is passed as an argument. I\u0027ll prepare another cl deleting the deprecated objc method, and then we\u0027ll see what can be landed first.",
+      "parentUuid": "2fcd7d97_3ee94f3a",
       "range": {
         "startLine": 78,
         "startChar": 45,
