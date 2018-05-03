@@ -187,6 +187,98 @@
       "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18c15380_cd9e8c75",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T09:42:19Z",
+      "side": 1,
+      "message": "Do you have any really good reason to use friend here and in the below struct?\n\nIt would be clearer to either have public constructor and accessor methods, or use a plain struct where everything is public. \n\nMaybe you would also get adequate protection by making the packet_id a construction time const?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa27eaad_1bebe8b8",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T09:42:19Z",
+      "side": 1,
+      "message": "Should this be read as (FakeNetwork)Interface of Fake(NetworkInterface)?",
+      "range": {
+        "startLine": 110,
+        "startChar": 6,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "707748b7_117f84da",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T09:42:19Z",
+      "side": 1,
+      "message": "Please comment on the methods purpose. Does it also remove the packets from the network, or which method is responsible for that?",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 59
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fe8c091_cc154471",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T09:42:19Z",
+      "side": 1,
+      "message": "\"Known\" in the name isn\u0027t very clear and helpful. Maybe just NextDeliveryTimeUs() ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 33,
+        "endLine": 115,
+        "endChar": 58
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
