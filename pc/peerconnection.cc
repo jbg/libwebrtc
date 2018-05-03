@@ -3021,33 +3021,42 @@ void PeerConnection::SetMetricObserver_n(UMAObserver* observer) {
   }
 }
 
-RTCError PeerConnection::SetBitrate(const BitrateParameters& bitrate) {
+RTCError PeerConnection::SetBitrate(
+    const BitrateParameters& bitrate_parameters) {
+  BitrateSettings bitrate;
+  bitrate.min_bitrate_bps = bitrate_parameters.min_bitrate_bps;
+  bitrate.start_bitrate_bps = bitrate_parameters.current_bitrate_bps;
+  bitrate.max_bitrate_bps = bitrate_parameters.max_bitrate_bps;
+  return SetBitrate(bitrate);
+}
+
+RTCError PeerConnection::SetBitrate(const BitrateSettings& bitrate) {
   if (!worker_thread()->IsCurrent()) {
     return worker_thread()->Invoke<RTCError>(
-        RTC_FROM_HERE, rtc::Bind(&PeerConnection::SetBitrate, this, bitrate));
+        RTC_FROM_HERE, [this, bitrate](){ return SetBitrate(bitrate); });
   }
 
   const bool has_min = static_cast<bool>(bitrate.min_bitrate_bps);
-  const bool has_current = static_cast<bool>(bitrate.current_bitrate_bps);
+  const bool has_start = static_cast<bool>(bitrate.start_bitrate_bps);
   const bool has_max = static_cast<bool>(bitrate.max_bitrate_bps);
   if (has_min && *bitrate.min_bitrate_bps < 0) {
     LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
                          "min_bitrate_bps <= 0");
   }
-  if (has_current) {
-    if (has_min && *bitrate.current_bitrate_bps < *bitrate.min_bitrate_bps) {
+  if (has_start) {
+    if (has_min && *bitrate.start_bitrate_bps < *bitrate.min_bitrate_bps) {
       LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
-                           "current_bitrate_bps < min_bitrate_bps");
-    } else if (*bitrate.current_bitrate_bps < 0) {
+                           "start_bitrate_bps < min_bitrate_bps");
+    } else if (*bitrate.start_bitrate_bps < 0) {
       LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
                            "curent_bitrate_bps < 0");
     }
   }
   if (has_max) {
-    if (has_current &&
-        *bitrate.max_bitrate_bps < *bitrate.current_bitrate_bps) {
+    if (has_start &&
+        *bitrate.max_bitrate_bps < *bitrate.start_bitrate_bps) {
       LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
-                           "max_bitrate_bps < current_bitrate_bps");
+                           "max_bitrate_bps < start_bitrate_bps");
     } else if (has_min && *bitrate.max_bitrate_bps < *bitrate.min_bitrate_bps) {
       LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
                            "max_bitrate_bps < min_bitrate_bps");
@@ -3057,13 +3066,8 @@ RTCError PeerConnection::SetBitrate(const BitrateParameters& bitrate) {
     }
   }
 
-  BitrateConstraintsMask mask;
-  mask.min_bitrate_bps = bitrate.min_bitrate_bps;
-  mask.start_bitrate_bps = bitrate.current_bitrate_bps;
-  mask.max_bitrate_bps = bitrate.max_bitrate_bps;
-
   RTC_DCHECK(call_.get());
-  call_->GetTransportControllerSend()->SetClientBitratePreferences(mask);
+  call_->GetTransportControllerSend()->SetClientBitratePreferences(bitrate);
 
   return RTCError::OK();
 }

@@ -179,6 +179,7 @@ class PeerConnection : public PeerConnectionInternal,
 
   void RegisterUMAObserver(UMAObserver* observer) override;
 
+  RTCError SetBitrate(const BitrateSettings& bitrate) override;
   RTCError SetBitrate(const BitrateParameters& bitrate) override;
 
   void SetBitrateAllocationStrategy(

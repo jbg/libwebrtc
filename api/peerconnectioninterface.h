@@ -90,6 +90,7 @@
 #include "api/setremotedescriptionobserverinterface.h"
 #include "api/stats/rtcstatscollectorcallback.h"
 #include "api/statstypes.h"
+#include "api/transport/bitrate_settings.h"
 #include "api/turncustomizer.h"
 #include "api/umametrics.h"
 #include "logging/rtc_event_log/rtc_event_log_factory_interface.h"
@@ -994,6 +995,9 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   //
   // Setting |current_bitrate_bps| will reset the current bitrate estimate
   // to the provided value.
+  virtual RTCError SetBitrate(const BitrateSettings& bitrate) = 0;
+
+  // TODO(nisse): Deprecated - use version above.
   virtual RTCError SetBitrate(const BitrateParameters& bitrate) = 0;
 
   // Sets current strategy. If not set default WebRTC allocator will be used.
