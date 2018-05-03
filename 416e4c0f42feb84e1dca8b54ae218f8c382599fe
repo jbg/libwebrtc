@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "d8eb98ab_0dc67b00",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-03T08:21:11Z",
+      "side": 1,
+      "message": "Yes, they have very similar points, but using DEPS file has a batch of small improvements comparing to the side checkout. From my point of view it is much easier to manage all stuff, when it is staying together, then separate dependent parts. So I think the main advantage is that it will work out of the box after adding one-line config changes. It will simplify rolling bot maintenance and, I think, local runs (maybe only a bit).",
+      "parentUuid": "59aacfbf_dd89ccf7",
+      "range": {
+        "startLine": 79,
+        "startChar": 6,
+        "endLine": 79,
+        "endChar": 47
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7be6cd61_09db4515",
         "filename": "THIRD_PARTY_DEPS",
         "patchSetId": 1
