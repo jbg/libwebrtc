@@ -49,6 +49,53 @@
     },
     {
       "key": {
+        "uuid": "5a292edd_a3d36de5",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T11:11:51Z",
+      "side": 1,
+      "message": "Things named *Interface aren\u0027t allowed to be abstract base classes according to the style guidelines. Why should it have a default implementation rather just implementing in the implementation class?",
+      "parentUuid": "00d8b9fc_a0378853",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 68
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5d119a_c4c78ca9",
+        "filename": "api/transport/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T11:11:51Z",
+      "side": 1,
+      "message": "is _api needed here? Seems reduntant considering the api/ path.",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d6e5458_cbed8a48",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 1
