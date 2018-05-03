@@ -213,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "cae582aa_0eb470f6",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T09:50:49Z",
+      "side": 1,
+      "message": "Valid point, I just wanted to ensure that NetworkSimulations do not rely on this value. On the other hand. If a simulation is reused by other code, the calling code would need to access the value, so I\u0027m removing the friend and making packet_id public.",
+      "parentUuid": "18c15380_cd9e8c75",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa27eaad_1bebe8b8",
         "filename": "call/fake_network_pipe.h",
         "patchSetId": 6
@@ -224,6 +248,30 @@
       "writtenOn": "2018-05-03T09:42:19Z",
       "side": 1,
       "message": "Should this be read as (FakeNetwork)Interface of Fake(NetworkInterface)?",
+      "range": {
+        "startLine": 110,
+        "startChar": 6,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6de1baa_db49527f",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T09:50:49Z",
+      "side": 1,
+      "message": "Former, maybe it should be called NetworkSimulationInterface to not cause confusing over the overloaded meaning of Fake that is used in automated testing contexts? WDYT?",
+      "parentUuid": "aa27eaad_1bebe8b8",
       "range": {
         "startLine": 110,
         "startChar": 6,
@@ -259,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "3b278555_d39e4cfd",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T09:50:49Z",
+      "side": 1,
+      "message": "Good point, adding comment.",
+      "parentUuid": "707748b7_117f84da",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 59
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fe8c091_cc154471",
         "filename": "call/fake_network_pipe.h",
         "patchSetId": 6
@@ -279,6 +351,30 @@
       "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "005feb9a_0f139e28",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T09:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fe8c091_cc154471",
+      "range": {
+        "startLine": 115,
+        "startChar": 33,
+        "endLine": 115,
+        "endChar": 58
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
