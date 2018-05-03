@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "938a0792_c1e3aaf2",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T11:49:20Z",
+      "side": 1,
+      "message": "Adding an inline default implementaiton for now, since the compiler seems happy. Could consider a separate cl to move all method implementations to a new .cc file.",
+      "parentUuid": "b23b84ad_5c589421",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 68
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e5d119a_c4c78ca9",
         "filename": "api/transport/BUILD.gn",
         "patchSetId": 1
@@ -191,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "10b83967_bf7e09e7",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3036,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T11:49:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d6e5458_cbed8a48",
+      "range": {
+        "startLine": 3036,
+        "startChar": 23,
+        "endLine": 3036,
+        "endChar": 38
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f0e9ee6_ee16962a",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 1
@@ -202,6 +250,24 @@
       "writtenOn": "2018-05-03T10:43:09Z",
       "side": 1,
       "message": "Not introduced in this CL, but... you can just use the optionals directly in a bool context. Or, if that feels too magical, they have a .has_value() method.",
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c4bb43_0b1ae3ee",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3041,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T11:49:20Z",
+      "side": 1,
+      "message": "Changing to .has_value().",
+      "parentUuid": "3f0e9ee6_ee16962a",
       "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
