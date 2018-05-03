@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bedfa063_8fa11779",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3027,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T09:24:17Z",
+      "side": 0,
+      "message": "Using rtc::Bind broke with the overloaded method. Lambda should be ok, since Invoke is synchronous. Is it possible (and if so, preferable?) to write a reference to a particular overload of a member function, like rtc::Bind(\u0026PeerConnection::SetBitrate(const BitrateSettings\u0026 bitrate), ...)?",
+      "range": {
+        "startLine": 3027,
+        "startChar": 23,
+        "endLine": 3027,
+        "endChar": 60
+      },
+      "revId": "6f7e6d6ff3533557ef99a0ceb01850f1fef071b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

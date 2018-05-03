@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00d8b9fc_a0378853",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T09:24:17Z",
+      "side": 1,
+      "message": "Would it work to to add a default implementation here? inline, unless we want to create a peerconnectioninterface.cc file. It might be considered \"non-trivial\"; copying the three optionals in the structs, and then calling the new method.",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 68
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
