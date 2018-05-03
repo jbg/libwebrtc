@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "581e7572_45dd72ff",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-03T15:13:17Z",
+      "side": 1,
+      "message": "It would introduce a cyclic dependency. We have \u0027InternalApmConfig\u0027 and \u0027InternalAPMStreamsConfig\u0027 for the same reason. \u0027aec_dump.h\u0027 can\u0027t include \u0027audio_processing.h\u0027, because \u0027audio_processing.h\u0027 includes \u0027aec_dump.h\u0027.",
+      "parentUuid": "e6543e5d_15037d20",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 2
+      },
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "965c7869_8db36700",
         "filename": "modules/audio_processing/test/runtime_setting_util.cc",
         "patchSetId": 8
@@ -39,6 +63,24 @@
       "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60b6a2ab_9b52c7e6",
+        "filename": "modules/audio_processing/test/runtime_setting_util.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-03T15:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "965c7869_8db36700",
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "251fbcc0_8fe10503",
+        "filename": "modules/audio_processing/test/runtime_setting_util.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-03T15:13:17Z",
+      "side": 1,
+      "message": "I read somewhere that it\u0027s not possible to extensively check protobuf enums. Currently the RuntimeSetting in \u0027debug.proto\u0027 doesn\u0027t even have an enum, so we can\u0027t enumerate.",
+      "parentUuid": "74d29da7_c410f0de",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 61
+      },
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f15f0096_87f5fa33",
         "filename": "modules/audio_processing/test/runtime_setting_util.h",
         "patchSetId": 8
@@ -79,6 +145,24 @@
       "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "902973a2_12fe3a65",
+        "filename": "modules/audio_processing/test/runtime_setting_util.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-03T15:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f15f0096_87f5fa33",
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
