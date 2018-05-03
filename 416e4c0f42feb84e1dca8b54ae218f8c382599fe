@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "c9d2351f_c3c88f61",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T13:38:27Z",
+      "side": 1,
+      "message": "I am unconvinced, but if you insist, sure let\u0027s give it a shot. Add a comment why this entry is here though.",
+      "parentUuid": "d8eb98ab_0dc67b00",
+      "range": {
+        "startLine": 79,
+        "startChar": 6,
+        "endLine": 79,
+        "endChar": 47
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7be6cd61_09db4515",
         "filename": "THIRD_PARTY_DEPS",
         "patchSetId": 1
