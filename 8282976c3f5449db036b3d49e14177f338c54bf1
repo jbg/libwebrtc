@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "7309ee33_7f15fd7b",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T11:20:29Z",
+      "side": 1,
+      "message": "NetworkSimulationInterface sgtm.",
+      "parentUuid": "f6de1baa_db49527f",
+      "range": {
+        "startLine": 110,
+        "startChar": 6,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "707748b7_117f84da",
         "filename": "call/fake_network_pipe.h",
         "patchSetId": 6
