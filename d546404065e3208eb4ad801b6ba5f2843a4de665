@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6543e5d_15037d20",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-03T12:27:46Z",
+      "side": 1,
+      "message": "Why can\u0027t we use RuntimeSetting directly anymore?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 2
+      },
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "965c7869_8db36700",
+        "filename": "modules/audio_processing/test/runtime_setting_util.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-03T12:27:46Z",
+      "side": 1,
+      "message": "add an empty line before and after this definition",
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74d29da7_c410f0de",
+        "filename": "modules/audio_processing/test/runtime_setting_util.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-03T12:27:46Z",
+      "side": 1,
+      "message": "Have you planned to write a follow-up CL in which you change this function to use a switch that would trigger compile-time errors if an enum is not treated? I would strongly recommend this because without a switch scheme we can add new runtime setting types and easily forget to replay them in AEC dumps.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 61
+      },
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f15f0096_87f5fa33",
+        "filename": "modules/audio_processing/test/runtime_setting_util.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-03T12:27:46Z",
+      "side": 1,
+      "message": "add an empty line before and after this declaration",
+      "revId": "d546404065e3208eb4ad801b6ba5f2843a4de665",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
