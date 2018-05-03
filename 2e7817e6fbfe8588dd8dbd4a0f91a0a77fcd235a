@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "b6f81aef_8e9425e0",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T11:35:51Z",
+      "side": 1,
+      "message": "\u003e Things named *Interface aren\u0027t allowed to be abstract base classes according to the style guidelines. Why should it have a default implementation rather just implementing in the implementation class?\n\nBecause there multiple implementations, and it\u0027s nice to not have them all be aware of the existence of the deprecated method.\n\nFor transitions over interface changes, we often add default implementations to classes which are otherwise pure interfaces. This class already has two dozen methods with inline default implementations.",
+      "parentUuid": "5a292edd_a3d36de5",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 68
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e5d119a_c4c78ca9",
         "filename": "api/transport/BUILD.gn",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "writtenOn": "2018-05-03T11:11:51Z",
       "side": 1,
       "message": "is _api needed here? Seems reduntant considering the api/ path.",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7573ec5_5cd8b85b",
+        "filename": "api/transport/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-03T11:35:51Z",
+      "side": 1,
+      "message": "Some guidance is needed. Roughly half (and a majority) of the targets under api/ include _api in their name, half of them doesn\u0027t. \n\n$ git grep source_set master -- api |grep -c _api\n21\n$ git grep source_set master -- api |grep -c -v _api\n18",
+      "parentUuid": "8e5d119a_c4c78ca9",
       "range": {
         "startLine": 11,
         "startChar": 16,
