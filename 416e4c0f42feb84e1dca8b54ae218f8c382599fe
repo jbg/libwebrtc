@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "59aacfbf_dd89ccf7",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T07:00:05Z",
+      "side": 1,
+      "message": "1. Yes. Not sure what you mean by \"not do fresh checkout every time\" - you do need to git clone the repo on each run since we\u0027re always rolling to HEAD. Do you mean that the checkout should be cached so the git pull becomes incremental? That we should aim to do, and AFAIK there are caches for git repos on the bots that we can use. I can dig more there if you want.\n2. I don\u0027t think this is a problem. I think it makes the \"API\" between the script and DEPS clearer. Sure, the script already interacts with the DEPS file, but I think this solution is just a really convoluted way to run git clone.\n3. Also not a problem IMO: the user currently gets an error message about setting a variable, and instead they will get an error message \"run `git clone xyz /tmp/chromium_third_party` and pass --chromium-third-party-dir\u003d/tmp/chromium_third_party/third_party to this script\". That\u0027s a wash in my book. Note also that with the var solution, the user will need to remember to remove the variable from their .gclient when they\u0027re done, or their checkout will be slowed down slightly for all coming syncs.\n\nAs for the time it takes, it should take about the same time to run git clone by ourselves and syncing in DEPS. As for DEPS being a validated way of getting things: this is true, but I\u0027m pretty sure it just runs git clone :) Otherwise the complexity comes from conditions and recursing into other DEPS files, but we need neither here.",
+      "parentUuid": "edcb13f4_455057c1",
+      "range": {
+        "startLine": 79,
+        "startChar": 6,
+        "endLine": 79,
+        "endChar": 47
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7be6cd61_09db4515",
         "filename": "THIRD_PARTY_DEPS",
         "patchSetId": 1
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "I\u0027m not sure, but I will think, how to fix it. I think it is better to roll first in this way to control all deps during such big change manually, and then try to figure out the way of automatic gathering of this list.",
       "parentUuid": "3ff73ed1_821b78e9",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 15
+      },
+      "revId": "416e4c0f42feb84e1dca8b54ae218f8c382599fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "669bed3f_7312ecee",
+        "filename": "THIRD_PARTY_DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-03T07:00:05Z",
+      "side": 1,
+      "message": "SGTM. Let\u0027s not put too much time on making this one look nice then; if we fail to generate this list later, we should investigate how we at least make it as concise and clear as possible.",
+      "parentUuid": "92421edd_9576bbcb",
       "range": {
         "startLine": 4,
         "startChar": 0,
