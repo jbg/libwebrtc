@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4d9c561_d124c837",
+        "filename": "rtc_tools/event_log_export.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-03T11:49:55Z",
+      "side": 1,
+      "message": "Given that people are supposed to use the output of this program rather than reusing the code, I\u0027m not sure that the extra complexity of constructing a heterogeneous array is worth it compared to just which array to choose the element from. See code suggestion below.",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 18
+      },
+      "revId": "a3bafbef632a4e17db50cbef53b46ae3755aa646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aaebde6_ad720a48",
+        "filename": "rtc_tools/event_log_export.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-03T11:49:55Z",
+      "side": 1,
+      "message": "nit: incoming\nSame below.",
+      "range": {
+        "startLine": 148,
+        "startChar": 20,
+        "endLine": 148,
+        "endChar": 29
+      },
+      "revId": "a3bafbef632a4e17db50cbef53b46ae3755aa646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da914aa9_ca016523",
+        "filename": "rtc_tools/event_log_export.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-03T11:49:55Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 188,
+        "startChar": 6,
+        "endLine": 188,
+        "endChar": 53
+      },
+      "revId": "a3bafbef632a4e17db50cbef53b46ae3755aa646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "137003e1_330083c0",
+        "filename": "rtc_tools/event_log_export.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-03T11:49:55Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem correct to me? The RTP header timestamp is capture time measured in a 90 kHz clock.",
+      "range": {
+        "startLine": 192,
+        "startChar": 46,
+        "endLine": 192,
+        "endChar": 73
+      },
+      "revId": "a3bafbef632a4e17db50cbef53b46ae3755aa646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa2ea55a_4b7f02ca",
+        "filename": "rtc_tools/event_log_export.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-03T11:49:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure whether it is useful to mix incoming and outgoing RTP packets in the same output. Wouldn\u0027t it be better to get one table of incoming packets and one table of outgoing? Possibly with a command line switch to determine direction until the tool can output into numpy or Pandas?\n\nint64_t next_rtp_time \u003d outgoing_rtp_it-\u003elog_time\nint64_t next_feedback_time \u003d incoming_feedback_it-\u003elog_time\nwhile (1) {\n  if (outgoing_rtp_it !\u003d outgoing_rtp.end() \u0026\u0026 next_rtp_time \u003c\u003d next_feedback_time) {\n    // insert in feedback adapter\n    ++outgoing_rtp_it;\n    next_rtp_time \u003d outgoing_rtp_it !\u003d outgoing_rtp.end() ? outgoing_rtp_it-\u003elog_time\n                                                          : numeric_limits\u003cint64_t\u003e::max();\n  } else if (incoming_feedback_it !\u003d incoming_feedback.end() \u0026\u0026 next_feedback_time \u003c next_rtp_time) {\n    // insert in feedback adapter\n    ++incoming_feedback_it;\n    next_feedback_time \u003d incoming_feedback_it !\u003d incoming_feedback.end() ? incoming_feedback_it-\u003elog_time : numeric_limits\u003cint64_t\u003e::max();\n  } else {\n    break;\n  }\n}\n\nThe other direction would be similar.",
+      "revId": "a3bafbef632a4e17db50cbef53b46ae3755aa646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
