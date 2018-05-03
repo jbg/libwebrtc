@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8e4d5b5_4348bd23",
+        "filename": "modules/video_coding/codecs/test/videoprocessor_integrationtest_mediacodec.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-03T12:30:39Z",
+      "side": 1,
+      "message": "Keep VP8, so the test is run for both codecs.",
+      "range": {
+        "startLine": 106,
+        "startChar": 43,
+        "endLine": 106,
+        "endChar": 66
+      },
+      "revId": "c842000249d449a88f6cf77bd3850b4b35f0c965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4b31096_2a9bfb89",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-03T12:30:39Z",
+      "side": 1,
+      "message": "This seems to have been the missing part! When adding this to my local patch, the MixedRes test passes.",
+      "range": {
+        "startLine": 546,
+        "startChar": 31,
+        "endLine": 546,
+        "endChar": 36
+      },
+      "revId": "c842000249d449a88f6cf77bd3850b4b35f0c965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
