@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "b23b84ad_5c589421",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-03T11:41:43Z",
+      "side": 1,
+      "message": "Ok, didn\u0027t know we had an exception for transitions, makes sense though, is this documented anywhere? I agree that it shouldn\u0027t be any issues adding a .cc file.",
+      "parentUuid": "b6f81aef_8e9425e0",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 68
+      },
+      "revId": "2e7817e6fbfe8588dd8dbd4a0f91a0a77fcd235a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e5d119a_c4c78ca9",
         "filename": "api/transport/BUILD.gn",
         "patchSetId": 1
