@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4c0b07_27201778",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-05-03T09:26:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 238,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 13
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6034f7b3_614a134c",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-05-03T09:26:27Z",
+      "side": 1,
+      "message": "No \"not\" here if I understand things correctly.",
+      "range": {
+        "startLine": 238,
+        "startChar": 52,
+        "endLine": 238,
+        "endChar": 56
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb7fe661_e994d2d9",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-05-03T09:26:27Z",
+      "side": 1,
+      "message": "Suggest break this comment in two, one for each check.\n// Check that packet is in the deque of packets in flight.\n// Check that packet is *not* in set of already received packets pending deletion from the deque.",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 29
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f16d320b_e6084531",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-05-03T09:26:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 245,
+        "startChar": 65,
+        "endLine": 245,
+        "endChar": 70
+      },
+      "revId": "8282976c3f5449db036b3d49e14177f338c54bf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
