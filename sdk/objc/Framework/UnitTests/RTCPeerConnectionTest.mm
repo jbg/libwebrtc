@@ -98,4 +98,21 @@ TEST(RTCPeerConnectionTest, ConfigurationGetterTest) {
   }
 }
 
+TEST(RTCPeerConnectionTest, RTCPeerConnectionRTCPeerConnectionFactoryLifetimeTest) {
+  @autoreleasepool {
+    RTCConfiguration *config = [[RTCConfiguration alloc] init];
 
+    RTCMediaConstraints *contraints =
+        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+    RTCPeerConnection *peerConnection =
+        [factory peerConnectionWithConfiguration:config constraints:contraints delegate:nil];
+
+    peerConnection = nil;
+    factory = nil;
+  }
+
+  EXPECT_TRUE(true) << "Expect test does not crash";
+}
