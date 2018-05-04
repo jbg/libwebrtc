@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e65715ef_a1c740f1",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-04T14:00:35Z",
+      "side": 1,
+      "message": "I think it\u0027s best to replace \u0027chrome\u0027 with \u0027Chromium\u0027 everywhere",
+      "range": {
+        "startLine": 67,
+        "startChar": 6,
+        "endLine": 67,
+        "endChar": 12
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc39cdd_fdfb2f7a",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-04T14:00:35Z",
+      "side": 1,
+      "message": "Maybe this can be a NamedTuple just like the classes above it?",
+      "range": {
+        "startLine": 67,
+        "startChar": 6,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4cbf9b5_5a01f21d",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-04T14:00:35Z",
+      "side": 1,
+      "message": "Keep the indent",
+      "range": {
+        "startLine": 118,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 4
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59f3e8c0_cf474e53",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-04T14:00:35Z",
+      "side": 1,
+      "message": "Chromium",
+      "range": {
+        "startLine": 346,
+        "startChar": 22,
+        "endLine": 346,
+        "endChar": 28
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1d2a9d_0c17e3e8",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-04T14:00:35Z",
+      "side": 1,
+      "message": "\"omitted\"",
+      "range": {
+        "startLine": 555,
+        "startChar": 69,
+        "endLine": 555,
+        "endChar": 76
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb724a6e_42aa4c48",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-04T14:00:35Z",
+      "side": 1,
+      "message": "Needs a space: varssection",
+      "range": {
+        "startLine": 597,
+        "startChar": 77,
+        "endLine": 598,
+        "endChar": 22
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
