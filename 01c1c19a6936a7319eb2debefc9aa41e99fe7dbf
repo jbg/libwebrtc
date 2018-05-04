@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "73b89238_0ead8659",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2018-05-04T13:27:46Z",
+      "side": 1,
+      "message": "I guess it could be useful if there were more Maps to transform.",
+      "parentUuid": "ac810ef2_71aa796c",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 21
+      },
+      "revId": "01c1c19a6936a7319eb2debefc9aa41e99fe7dbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6860b02_b1e8bf21",
         "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-05-04T13:20:25Z",
       "side": 1,
       "message": "Is this different from codec.parameters \u003d JavaToNativeStringMap?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 20
+      },
+      "revId": "01c1c19a6936a7319eb2debefc9aa41e99fe7dbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb3bf693_b62343ae",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2018-05-04T13:27:46Z",
+      "side": 1,
+      "message": "Yes, JavaToNativeStringMap returns a std::map, but codec.parameters is of type std::unordered_map.\nThis is as far as I know one of the best way to copy data from one to the other.",
+      "parentUuid": "c6860b02_b1e8bf21",
       "range": {
         "startLine": 92,
         "startChar": 4,
