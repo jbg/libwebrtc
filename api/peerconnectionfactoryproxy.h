@@ -31,13 +31,6 @@ BEGIN_SIGNALING_PROXY_MAP(PeerConnectionFactory)
   // removed.
   using PeerConnectionFactoryInterface::CreateVideoSource;
   PROXY_METHOD1(void, SetOptions, const Options&)
-  PROXY_METHOD5(rtc::scoped_refptr<PeerConnectionInterface>,
-                CreatePeerConnection,
-                const PeerConnectionInterface::RTCConfiguration&,
-                const MediaConstraintsInterface*,
-                std::unique_ptr<cricket::PortAllocator>,
-                std::unique_ptr<rtc::RTCCertificateGeneratorInterface>,
-                PeerConnectionObserver*);
   PROXY_METHOD4(rtc::scoped_refptr<PeerConnectionInterface>,
                 CreatePeerConnection,
                 const PeerConnectionInterface::RTCConfiguration&,
@@ -50,8 +43,6 @@ BEGIN_SIGNALING_PROXY_MAP(PeerConnectionFactory)
                 PeerConnectionDependencies);
   PROXY_METHOD1(rtc::scoped_refptr<MediaStreamInterface>,
                 CreateLocalMediaStream, const std::string&)
-  PROXY_METHOD1(rtc::scoped_refptr<AudioSourceInterface>,
-                CreateAudioSource, const MediaConstraintsInterface*)
   PROXY_METHOD1(rtc::scoped_refptr<AudioSourceInterface>,
                 CreateAudioSource,
                 const cricket::AudioOptions&)

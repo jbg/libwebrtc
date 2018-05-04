@@ -95,14 +95,6 @@ BEGIN_SIGNALING_PROXY_MAP(PeerConnection)
   PROXY_METHOD2(void,
                 CreateOffer,
                 CreateSessionDescriptionObserver*,
-                const MediaConstraintsInterface*)
-  PROXY_METHOD2(void,
-                CreateAnswer,
-                CreateSessionDescriptionObserver*,
-                const MediaConstraintsInterface*)
-  PROXY_METHOD2(void,
-                CreateOffer,
-                CreateSessionDescriptionObserver*,
                 const RTCOfferAnswerOptions&)
   PROXY_METHOD2(void,
                 CreateAnswer,
