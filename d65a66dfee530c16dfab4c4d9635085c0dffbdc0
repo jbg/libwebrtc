@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b7797f5b_6a016363",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-04T13:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e4e392_f3c32219",
+      "range": {
+        "startLine": 234,
+        "startChar": 41,
+        "endLine": 234,
+        "endChar": 51
+      },
+      "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "777674e1_3e939d79",
         "filename": "call/fake_network_pipe.h",
         "patchSetId": 11
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0c443183_84852424",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-04T13:37:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "777674e1_3e939d79",
+      "range": {
+        "startLine": 181,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 20
+      },
+      "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbd5d3cd_213a7818",
         "filename": "call/fake_network_pipe.h",
         "patchSetId": 11
@@ -68,6 +116,30 @@
       "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d96c70e_f6b6d18a",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-04T13:37:40Z",
+      "side": 1,
+      "message": "Removed NetworkPacketStorage and put the functionality into FakeNetworkPipe as it seems having a separate class mostly made it confusing.",
+      "parentUuid": "bbd5d3cd_213a7818",
+      "range": {
+        "startLine": 192,
+        "startChar": 7,
+        "endLine": 192,
+        "endChar": 14
+      },
+      "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
