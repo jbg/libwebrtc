@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64e4e392_f3c32219",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-04T12:36:56Z",
+      "side": 1,
+      "message": "C-style cast is discouraged.\n\nBut it\u0027s nice that you now only have ptr-to-int cast, and not the opposite direction.",
+      "range": {
+        "startLine": 234,
+        "startChar": 41,
+        "endLine": 234,
+        "endChar": 51
+      },
+      "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "777674e1_3e939d79",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-04T12:36:56Z",
+      "side": 1,
+      "message": "No longer accurate.",
+      "range": {
+        "startLine": 181,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 20
+      },
+      "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbd5d3cd_213a7818",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-04T12:36:56Z",
+      "side": 1,
+      "message": "Now you have Enqueue/PopBack. I\u0027d expect either Enqueue/Dequeue, or PushBack/PopHead? But maybe neither match the way the class is used?\n\nAnd to switch track: I\u0027m a little confused by the ordering provided by this class, I was expecting a FIFO queue with occasionally dropped packets. But you always extract packets in order determined by DequeueDeliverablePackets (which might do packet reorder?).\n\nSo do you really need a deque? If you want just an unordered storage, couldn\u0027t you use a map and something like\n\nuint64_t Insert(packet) {\n  map_[seqno_] \u003d packet;\n  return seqno_++;\n}\n\nPacket Remove(uint64_t id) {\n  auto it \u003d map_.find(id);\n  RTC_DCHECK(it !\u003d map_.end());\n  Packet packet \u003d *it;\n  map_.erase(it);\n  return packet;\n}\n\nand no need for lazy removal. You\u0027d might get O(log n) rather than O(1) for removal, but shouldn\u0027t that be good enough?\n\nNow, that doesn\u0027t work with the latest version of PopBack method (which does rely on the deque\u0027s order), but it looks like the id is available where PopBack is called.",
+      "range": {
+        "startLine": 192,
+        "startChar": 7,
+        "endLine": 192,
+        "endChar": 14
+      },
+      "revId": "d65a66dfee530c16dfab4c4d9635085c0dffbdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
