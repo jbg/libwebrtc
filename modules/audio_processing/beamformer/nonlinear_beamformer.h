@@ -21,10 +21,10 @@
 #include <memory>
 #include <vector>
 
-#include "common_audio/lapped_transform.h"
 #include "common_audio/channel_buffer.h"
 #include "modules/audio_processing/beamformer/array_util.h"
 #include "modules/audio_processing/beamformer/complex_matrix.h"
+#include "modules/audio_processing/lapped_transform.h"
 
 namespace webrtc {
 

@@ -2277,6 +2277,7 @@ if (rtc_include_tests) {
       "../../test:rtp_test_utils",
       "../../test:test_common",
       "../../test:test_support",
+      "../audio_processing:lapped_transform",
       "//testing/gtest",
     ]
 

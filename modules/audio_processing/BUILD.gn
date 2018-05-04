@@ -123,6 +123,7 @@ rtc_static_library("audio_processing") {
     ":audio_generator_interface",
     ":audio_processing_c",
     ":audio_processing_statistics",
+    ":lapped_transform",
     "../..:typedefs",
     "../..:webrtc_common",
     "../../api:array_view",
@@ -158,6 +159,7 @@ rtc_static_library("audio_processing") {
       "intelligibility/intelligibility_utils.cc",
       "intelligibility/intelligibility_utils.h",
     ]
+    deps += [ ":lapped_transform" ]
   } else {
     defines += [ "WEBRTC_INTELLIGIBILITY_ENHANCER=0" ]
   }
@@ -439,6 +441,18 @@ rtc_source_set("aec_core") {
   configs += [ "//build/config/compiler:no_size_t_to_int_warning" ]
 }
 
+rtc_source_set("lapped_transform") {
+  sources = [
+    "lapped_transform.cc",
+    "lapped_transform.h",
+  ]
+  deps = [
+    "../../common_audio",
+    "../../rtc_base:checks",
+    "../../rtc_base/memory:aligned_array",
+  ]
+}
+
 if (rtc_include_tests) {
   rtc_source_set("mocks") {
     testonly = true
@@ -498,6 +512,7 @@ if (rtc_include_tests) {
       "config_unittest.cc",
       "echo_cancellation_impl_unittest.cc",
       "gain_controller2_unittest.cc",
+      "lapped_transform_unittest.cc",
       "splitting_filter_unittest.cc",
       "test/fake_recording_device_unittest.cc",
       "transient/dyadic_decimator_unittest.cc",
@@ -521,6 +536,7 @@ if (rtc_include_tests) {
       ":audio_processing",
       ":audioproc_test_utils",
       ":file_audio_generator_unittests",
+      ":lapped_transform",
       ":mocks",
       "../..:typedefs",
       "../..:webrtc_common",

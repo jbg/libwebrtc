@@ -16,9 +16,9 @@
 #include <vector>
 
 #include "common_audio/channel_buffer.h"
-#include "common_audio/lapped_transform.h"
 #include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/intelligibility/intelligibility_utils.h"
+#include "modules/audio_processing/lapped_transform.h"
 #include "modules/audio_processing/render_queue_item_verifier.h"
 #include "modules/audio_processing/vad/voice_activity_detector.h"
 #include "rtc_base/swap_queue.h"
