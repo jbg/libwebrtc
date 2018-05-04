@@ -22,6 +22,30 @@
       "revId": "f93e9debc8607ac027d1f39859b29601279bcf14",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae18b347_e40fc58a",
+        "filename": "test/direct_transport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-04T12:26:37Z",
+      "side": 1,
+      "message": "It\u0027s currently used for legacy reasons, but it should not be used for new code, added a deprecation comment.",
+      "parentUuid": "d2bdc379_08f95213",
+      "range": {
+        "startLine": 58,
+        "startChar": 1,
+        "endLine": 61,
+        "endChar": 72
+      },
+      "revId": "f93e9debc8607ac027d1f39859b29601279bcf14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
