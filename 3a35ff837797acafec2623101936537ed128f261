@@ -16,6 +16,24 @@
       "revId": "3a35ff837797acafec2623101936537ed128f261",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f83d3d5_3316ef02",
+        "filename": "rtc_base/opensslcommon_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2018-05-04T16:39:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79f6b3e3_bc4eb7f6",
+      "revId": "3a35ff837797acafec2623101936537ed128f261",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
