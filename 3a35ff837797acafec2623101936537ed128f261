@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79f6b3e3_bc4eb7f6",
+        "filename": "rtc_base/opensslcommon_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-04T16:26:52Z",
+      "side": 1,
+      "message": "nit: Could use a comment summarizing what this does, like \"Creates a server using certificate |cert|, performs an SSL handshake between a client and server, then returns the client, such that the certificate can be retrieved with \"SSL_get_peer_certificate\" and VerifyPeerCertMatchesHost can be tested.\"",
+      "revId": "3a35ff837797acafec2623101936537ed128f261",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
