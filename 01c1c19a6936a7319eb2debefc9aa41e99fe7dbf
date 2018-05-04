@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac810ef2_71aa796c",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-05-04T13:20:25Z",
+      "side": 1,
+      "message": "nit: Maybe we should add a helper JavaToNativeStringMap?",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 21
+      },
+      "revId": "01c1c19a6936a7319eb2debefc9aa41e99fe7dbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6860b02_b1e8bf21",
+        "filename": "sdk/android/src/jni/pc/rtpparameters.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-05-04T13:20:25Z",
+      "side": 1,
+      "message": "Is this different from codec.parameters \u003d JavaToNativeStringMap?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 20
+      },
+      "revId": "01c1c19a6936a7319eb2debefc9aa41e99fe7dbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
