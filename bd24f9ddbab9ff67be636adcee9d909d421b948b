@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "8e40fdb6_c29aa9db",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-04T14:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e65715ef_a1c740f1",
+      "range": {
+        "startLine": 67,
+        "startChar": 6,
+        "endLine": 67,
+        "endChar": 12
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83c0a94d_1e236d08",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-04T14:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dc39cdd_fdfb2f7a",
+      "range": {
+        "startLine": 67,
+        "startChar": 6,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4cbf9b5_5a01f21d",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2018-05-04T14:00:35Z",
       "side": 1,
       "message": "Keep the indent",
+      "range": {
+        "startLine": 118,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 4
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8562073_57efb3ec",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-04T14:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4cbf9b5_5a01f21d",
       "range": {
         "startLine": 118,
         "startChar": 3,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "72ba22fb_6bc7548b",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-04T14:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59f3e8c0_cf474e53",
+      "range": {
+        "startLine": 346,
+        "startChar": 22,
+        "endLine": 346,
+        "endChar": 28
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a1d2a9d_0c17e3e8",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 8
@@ -105,6 +201,30 @@
       "writtenOn": "2018-05-04T14:00:35Z",
       "side": 1,
       "message": "\"omitted\"",
+      "range": {
+        "startLine": 555,
+        "startChar": 69,
+        "endLine": 555,
+        "endChar": 76
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33cde82d_08bf2ba9",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-04T14:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a1d2a9d_0c17e3e8",
       "range": {
         "startLine": 555,
         "startChar": 69,
@@ -137,6 +257,30 @@
       "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ea5454c_84e5d199",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-04T14:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb724a6e_42aa4c48",
+      "range": {
+        "startLine": 597,
+        "startChar": 77,
+        "endLine": 598,
+        "endChar": 22
+      },
+      "revId": "bd24f9ddbab9ff67be636adcee9d909d421b948b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
