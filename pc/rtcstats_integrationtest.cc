@@ -109,18 +109,18 @@ class RTCStatsIntegrationTest : public testing::Test {
     PeerConnectionInterface::IceServer ice_server;
     ice_server.uri = "stun:1.1.1.1:3478";
     config.servers.push_back(ice_server);
-    EXPECT_TRUE(caller_->CreatePc(nullptr, config,
+    EXPECT_TRUE(caller_->CreatePc(config,
                                   CreateBuiltinAudioEncoderFactory(),
                                   CreateBuiltinAudioDecoderFactory()));
-    EXPECT_TRUE(callee_->CreatePc(nullptr, config,
+    EXPECT_TRUE(callee_->CreatePc(config,
                                   CreateBuiltinAudioEncoderFactory(),
                                   CreateBuiltinAudioDecoderFactory()));
     PeerConnectionTestWrapper::Connect(caller_.get(), callee_.get());
 
     // Get user media for audio and video
-    caller_->GetAndAddUserMedia(true, FakeConstraints(),
+    caller_->GetAndAddUserMedia(true,
                                 true, FakeConstraints());
-    callee_->GetAndAddUserMedia(true, FakeConstraints(),
+    callee_->GetAndAddUserMedia(true,
                                 true, FakeConstraints());
 
     // Create data channels
@@ -129,7 +129,7 @@ class RTCStatsIntegrationTest : public testing::Test {
     callee_->CreateDataChannel("data", init);
 
     // Negotiate and wait for call to establish
-    caller_->CreateOffer(nullptr);
+    caller_->CreateOffer(PeerConnectionInterface::RTCOfferAnswerOptions());
     caller_->WaitForCallEstablished();
     callee_->WaitForCallEstablished();
   }
