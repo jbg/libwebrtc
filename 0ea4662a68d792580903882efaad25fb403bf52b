@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77de7386_3784e893",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-04T13:56:23Z",
+      "side": 1,
+      "message": "I\u0027m still a little confused. Is this why you want a deque rather than a map? Comment at the declaration of the packets_in_flight_ member that packets are sorted by increasing send time, if that is the case.",
+      "range": {
+        "startLine": 361,
+        "startChar": 26,
+        "endLine": 361,
+        "endChar": 72
+      },
+      "revId": "0ea4662a68d792580903882efaad25fb403bf52b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5126e2a_a44213dc",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-04T13:56:23Z",
+      "side": 1,
+      "message": "Maybe efficiency doesn\u0027t matter, but you could to this more efficiently if ids were assigned in such a way that they are in increasing order in the queue. Even better if delivery_infos where also sorted by id, so you could do an ordered merge.",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 26
+      },
+      "revId": "0ea4662a68d792580903882efaad25fb403bf52b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
