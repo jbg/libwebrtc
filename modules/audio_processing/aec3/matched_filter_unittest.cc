@@ -68,9 +68,9 @@ TEST(MatchedFilter, TestNeonOptimizations) {
       float error_sum_NEON = 0.f;
 
       MatchedFilterCore_NEON(x_index, h.size() * 150.f * 150.f, x, y, h_NEON,
-                             &filters_updated_NEON, &error_sum_NEON);
+                             0.7f, &filters_updated_NEON, &error_sum_NEON);
 
-      MatchedFilterCore(x_index, h.size() * 150.f * 150.f, x, y, h,
+      MatchedFilterCore(x_index, h.size() * 150.f * 150.f, x, y, h, 0.7f,
                         &filters_updated, &error_sum);
 
       EXPECT_EQ(filters_updated, filters_updated_NEON);
@@ -110,9 +110,9 @@ TEST(MatchedFilter, TestSse2Optimizations) {
         float error_sum_SSE2 = 0.f;
 
         MatchedFilterCore_SSE2(x_index, h.size() * 150.f * 150.f, x, y, h_SSE2,
-                               &filters_updated_SSE2, &error_sum_SSE2);
+                               0.7f, &filters_updated_SSE2, &error_sum_SSE2);
 
-        MatchedFilterCore(x_index, h.size() * 150.f * 150.f, x, y, h,
+        MatchedFilterCore(x_index, h.size() * 150.f * 150.f, x, y, h, 0.7f,
                           &filters_updated, &error_sum);
 
         EXPECT_EQ(filters_updated, filters_updated_SSE2);

@@ -32,6 +32,7 @@ void MatchedFilterCore_NEON(size_t x_start_index,
                             rtc::ArrayView<const float> x,
                             rtc::ArrayView<const float> y,
                             rtc::ArrayView<float> h,
+                            float mu,
                             bool* filters_updated,
                             float* error_sum);
 
@@ -45,6 +46,7 @@ void MatchedFilterCore_SSE2(size_t x_start_index,
                             rtc::ArrayView<const float> x,
                             rtc::ArrayView<const float> y,
                             rtc::ArrayView<float> h,
+                            float mu,
                             bool* filters_updated,
                             float* error_sum);
 
@@ -56,6 +58,7 @@ void MatchedFilterCore(size_t x_start_index,
                        rtc::ArrayView<const float> x,
                        rtc::ArrayView<const float> y,
                        rtc::ArrayView<float> h,
+                       float mu,
                        bool* filters_updated,
                        float* error_sum);
 
@@ -121,6 +124,8 @@ class MatchedFilter {
   std::vector<LagEstimate> lag_estimates_;
   std::vector<size_t> filters_offsets_;
   const float excitation_limit_;
+  const bool adaptive_step_size_;
+  float mu_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(MatchedFilter);
 };
