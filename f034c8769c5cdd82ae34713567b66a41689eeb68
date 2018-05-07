@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "23305578_04c95f6f",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-07T08:15:34Z",
+      "side": 1,
+      "message": "Is there a reason that these are source_set instead of static_library?",
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "09d4ae27_75cb58f6",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 13
@@ -131,6 +148,92 @@
       "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77908cf2_f78de97c",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-07T08:15:34Z",
+      "side": 1,
+      "message": "Nit: no indent here",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 2
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b171ea58_bf24dcda",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-07T08:15:34Z",
+      "side": 1,
+      "message": "Nor here",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 2
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af377723_96f78963",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-07T08:15:34Z",
+      "side": 1,
+      "message": "Is this for backwards compatibility or can it be removed?",
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d88d38_c1680937",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-07T08:15:34Z",
+      "side": 1,
+      "message": "💣",
+      "range": {
+        "startLine": 26,
+        "startChar": 66,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
