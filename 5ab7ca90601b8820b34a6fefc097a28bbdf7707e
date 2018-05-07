@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99310a5b_606d2ccb",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-05-07T07:55:31Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 372,
+        "startChar": 16,
+        "endLine": 372,
+        "endChar": 21
+      },
+      "revId": "5ab7ca90601b8820b34a6fefc097a28bbdf7707e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48e2777c_e9910f34",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-05-07T07:55:31Z",
+      "side": 1,
+      "message": "Think these fit on one line.",
+      "range": {
+        "startLine": 413,
+        "startChar": 1,
+        "endLine": 414,
+        "endChar": 48
+      },
+      "revId": "5ab7ca90601b8820b34a6fefc097a28bbdf7707e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
