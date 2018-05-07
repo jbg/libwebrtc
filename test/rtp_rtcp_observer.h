@@ -110,9 +110,9 @@ class PacketTransport : public test::DirectTransport {
                   RtpRtcpObserver* observer,
                   TransportType transport_type,
                   const std::map<uint8_t, MediaType>& payload_type_map,
-                  std::unique_ptr<FakeNetworkPipe> nw_pipe)
+                  std::unique_ptr<NetworkSimulationInterface> fake_network)
       : test::DirectTransport(task_queue,
-                              std::move(nw_pipe),
+                              std::move(fake_network),
                               send_call,
                               payload_type_map),
         observer_(observer),
