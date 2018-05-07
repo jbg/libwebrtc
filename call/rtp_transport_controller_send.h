@@ -79,7 +79,7 @@ class RtpTransportControllerSend final
 
   void SetSdpBitrateParameters(const BitrateConstraints& constraints) override;
   void SetClientBitratePreferences(
-      const BitrateConstraintsMask& preferences) override;
+      const BitrateSettings& preferences) override;
 
  private:
   const Clock* const clock_;
