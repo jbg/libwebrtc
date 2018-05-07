@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0752418_9689559e",
+        "filename": "modules/audio_processing/agc2/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-07T10:34:47Z",
+      "side": 1,
+      "message": "Can you put it above \u0027common\u0027? There is a (not very strict) guideline somewhere to put targets in order. For this BUILD file, it would be \n* the folder-named target \u0027:agc2\u0027\n* all non-test targets in alphabetical order\n* all test targets in alphabetical order",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 14
+      },
+      "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4fb0867_c8251854",
+        "filename": "modules/audio_processing/agc2/biquad_filter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-07T10:34:47Z",
+      "side": 1,
+      "message": "What does the \u0027I \u0027 mean?",
+      "range": {
+        "startLine": 15,
+        "startChar": 26,
+        "endLine": 15,
+        "endChar": 28
+      },
+      "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "601102df_f07132fe",
+        "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-07T10:34:47Z",
+      "side": 1,
+      "message": "2018? Or is it an old test?",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
