@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09d4ae27_75cb58f6",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-07T08:11:03Z",
+      "side": 1,
+      "message": "Maybe unrelated but do we need this?",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 131,
+        "endChar": 78
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e20dc2bd_cf3c3650",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-07T08:11:03Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fb1ba9b_d916ccdc",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-07T08:11:03Z",
+      "side": 1,
+      "message": "NS_ASSUME_NONNULL",
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5f6003a_1ec9bd57",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-07T08:11:03Z",
+      "side": 1,
+      "message": "Is this file new? Then this should be 2018.",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e549f0d_8e25bf35",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-07T08:11:03Z",
+      "side": 1,
+      "message": "I\u0027m a little scared of this raw pointer. Can we take ownership of the observer with a unique_ptr? or use rtc::shared_ptr?",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 30
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c572fdaa_8ea4bd13",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-07T08:11:03Z",
+      "side": 1,
+      "message": "RTC_DCHECK",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 19
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
