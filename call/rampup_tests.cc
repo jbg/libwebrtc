@@ -10,6 +10,8 @@
 
 #include "call/rampup_tests.h"
 
+#include <utility>
+
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
@@ -96,9 +98,12 @@ void RampUpTester::OnVideoStreamsCreated(
 test::PacketTransport* RampUpTester::CreateSendTransport(
     test::SingleThreadedTaskQueueForTesting* task_queue,
     Call* sender_call) {
+  auto send_network =
+      rtc::MakeUnique<SimulatedNetwork>(forward_transport_config_);
+  send_network_ = send_network.get();
   send_transport_ = new test::PacketTransport(
       task_queue, sender_call, this, test::PacketTransport::kSender,
-      test::CallTest::payload_type_map_, forward_transport_config_);
+      test::CallTest::payload_type_map_, std::move(send_network));
   return send_transport_;
 }
 
@@ -551,7 +556,7 @@ void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
         state_start_ms_ = now;
         interval_start_ms_ = now;
         sent_bytes_ = 0;
-        send_transport_->SetConfig(forward_transport_config_);
+        send_network_->SetConfig(forward_transport_config_);
       }
       break;
   }
