@@ -206,8 +206,11 @@ TEST_F(FakeNetworkPipeTest, ChangingCapacityWithEmptyPipeTest) {
   config.queue_length_packets = 20;
   config.link_capacity_kbps = 80;
   MockReceiver receiver;
-  std::unique_ptr<FakeNetworkPipe> pipe(
-      new FakeNetworkPipe(&fake_clock_, config, &receiver));
+  std::unique_ptr<SimulatedNetwork> simulated_network(
+      new SimulatedNetwork(config));
+  SimulatedNetwork* simulated_network_ptr = simulated_network.get();
+  std::unique_ptr<FakeNetworkPipe> pipe(new FakeNetworkPipe(
+      &fake_clock_, std::move(simulated_network), &receiver));
 
   // Add 10 packets of 1000 bytes, = 80 kb, and verify it takes one second to
   // get through the pipe.
@@ -231,7 +234,7 @@ TEST_F(FakeNetworkPipeTest, ChangingCapacityWithEmptyPipeTest) {
 
   // Change the capacity.
   config.link_capacity_kbps /= 2;  // Reduce to 50%.
-  pipe->SetConfig(config);
+  simulated_network_ptr->SetConfig(config);
 
   // Add another 10 packets of 1000 bytes, = 80 kb, and verify it takes two
   // seconds to get them through the pipe.
@@ -265,8 +268,11 @@ TEST_F(FakeNetworkPipeTest, ChangingCapacityWithPacketsInPipeTest) {
   config.queue_length_packets = 20;
   config.link_capacity_kbps = 80;
   MockReceiver receiver;
-  std::unique_ptr<FakeNetworkPipe> pipe(
-      new FakeNetworkPipe(&fake_clock_, config, &receiver));
+  std::unique_ptr<SimulatedNetwork> simulated_network(
+      new SimulatedNetwork(config));
+  SimulatedNetwork* simulated_network_ptr = simulated_network.get();
+  std::unique_ptr<FakeNetworkPipe> pipe(new FakeNetworkPipe(
+      &fake_clock_, std::move(simulated_network), &receiver));
 
   // Add 10 packets of 1000 bytes, = 80 kb.
   const int kNumPackets = 10;
@@ -278,7 +284,7 @@ TEST_F(FakeNetworkPipeTest, ChangingCapacityWithPacketsInPipeTest) {
 
   // Change the capacity.
   config.link_capacity_kbps *= 2;  // Double the capacity.
-  pipe->SetConfig(config);
+  simulated_network_ptr->SetConfig(config);
 
   // Add another 10 packets of 1000 bytes, = 80 kb, and verify it takes two
   // seconds to get them through the pipe.
@@ -320,8 +326,11 @@ TEST_F(FakeNetworkPipeTest, DisallowReorderingThenAllowReordering) {
   config.queue_delay_ms = 100;
   config.delay_standard_deviation_ms = 10;
   ReorderTestReceiver receiver;
-  std::unique_ptr<FakeNetworkPipe> pipe(
-      new FakeNetworkPipe(&fake_clock_, config, &receiver));
+  std::unique_ptr<SimulatedNetwork> simulated_network(
+      new SimulatedNetwork(config));
+  SimulatedNetwork* simulated_network_ptr = simulated_network.get();
+  std::unique_ptr<FakeNetworkPipe> pipe(new FakeNetworkPipe(
+      &fake_clock_, std::move(simulated_network), &receiver));
 
   const uint32_t kNumPackets = 100;
   const int kPacketSize = 10;
@@ -338,7 +347,7 @@ TEST_F(FakeNetworkPipeTest, DisallowReorderingThenAllowReordering) {
   }
 
   config.allow_reordering = true;
-  pipe->SetConfig(config);
+  simulated_network_ptr->SetConfig(config);
   SendPackets(pipe.get(), kNumPackets, kPacketSize);
   fake_clock_.AdvanceTimeMilliseconds(1000);
   receiver.delivered_sequence_numbers_.clear();
