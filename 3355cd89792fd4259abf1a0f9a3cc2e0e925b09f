@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "45aa60f6_8ba77d52",
+        "filename": "modules/audio_processing/agc2/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-07T11:27:12Z",
+      "side": 1,
+      "message": "Ok, I fixed the whole file.",
+      "parentUuid": "e0752418_9689559e",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 14
+      },
+      "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4fb0867_c8251854",
         "filename": "modules/audio_processing/agc2/biquad_filter.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "073a306b_4d494f6b",
+        "filename": "modules/audio_processing/agc2/biquad_filter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-07T11:27:12Z",
+      "side": 1,
+      "message": "I -\u003e one; I added this comment to make explicit that it\u0027s not a transposed direct form II impl",
+      "parentUuid": "a4fb0867_c8251854",
+      "range": {
+        "startLine": 15,
+        "startChar": 26,
+        "endLine": 15,
+        "endChar": 28
+      },
+      "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "601102df_f07132fe",
         "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc867271_97290c23",
+        "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-07T11:27:12Z",
+      "side": 1,
+      "message": "good catch :)",
+      "parentUuid": "601102df_f07132fe",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "3355cd89792fd4259abf1a0f9a3cc2e0e925b09f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
