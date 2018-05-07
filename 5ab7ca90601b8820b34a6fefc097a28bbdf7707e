@@ -45,6 +45,29 @@
       "revId": "5ab7ca90601b8820b34a6fefc097a28bbdf7707e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b0e05d0_743dc963",
+        "filename": "call/fake_network_pipe.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-07T08:47:27Z",
+      "side": 1,
+      "message": "This is a bit vague. Please be a little more explicit. What I think you mean is that that packets are added at the back of the deque, so that the deque is ordered by increasing send time, and that the common case when removing packets from the deque is removing packets close to the front of the deque.",
+      "range": {
+        "startLine": 278,
+        "startChar": 17,
+        "endLine": 278,
+        "endChar": 52
+      },
+      "revId": "5ab7ca90601b8820b34a6fefc097a28bbdf7707e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
