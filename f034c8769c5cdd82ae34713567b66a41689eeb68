@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "088f0889_9e7334ad",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23305578_04c95f6f",
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09d4ae27_75cb58f6",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 13
@@ -39,6 +57,30 @@
       "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8868b6c9_b29aa1ee",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Good point. I\u0027m moving these methods into audio_device_ios.mm and removing the file.",
+      "parentUuid": "09d4ae27_75cb58f6",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 131,
+        "endChar": 78
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "8c38e6be_50176762",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e20dc2bd_cf3c3650",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fb1ba9b_d916ccdc",
         "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.h",
         "patchSetId": 13
@@ -79,6 +145,24 @@
       "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0769cded_b035bfc1",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fb1ba9b_d916ccdc",
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "ffb5254a_b434eac6",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5f6003a_1ec9bd57",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e549f0d_8e25bf35",
         "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
         "patchSetId": 13
@@ -125,6 +233,30 @@
       "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75369bf1_15067bf0",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "\"Observer\" is really a delegate and in this case the caller (audio_device_ios) is owning the receiver (RTCNativeAudioSessionDelegateAdapter). Furthermore, from what I understand it\u0027s not possible to create a shared_ptr from this in the constructor of audio_device_ios.",
+      "parentUuid": "1e549f0d_8e25bf35",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 30
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "9198dbf2_e214e96b",
+        "filename": "sdk/objc/Framework/Classes/Audio/RTCNativeAudioSessionDelegateAdapter.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c572fdaa_8ea4bd13",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 19
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77908cf2_f78de97c",
         "filename": "sdk/objc/Framework/Native/api/audio_device_module.h",
         "patchSetId": 13
@@ -171,6 +327,30 @@
       "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c52292b3_dc89ea79",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77908cf2_f78de97c",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 2
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -197,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "440b38b1_63084f4e",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b171ea58_bf24dcda",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 2
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af377723_96f78963",
         "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
         "patchSetId": 13
@@ -214,6 +418,24 @@
     },
     {
       "key": {
+        "uuid": "b7e464a6_8ff411fc",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Yes, this ensures that the forked module logs the same lines as before.",
+      "parentUuid": "af377723_96f78963",
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d88d38_c1680937",
         "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
         "patchSetId": 13
@@ -225,6 +447,30 @@
       "writtenOn": "2018-05-07T08:15:34Z",
       "side": 1,
       "message": "💣",
+      "range": {
+        "startLine": 26,
+        "startChar": 66,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "f034c8769c5cdd82ae34713567b66a41689eeb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fab97b0_bcef0871",
+        "filename": "sdk/objc/Framework/Native/api/audio_device_module.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-05-07T12:10:07Z",
+      "side": 1,
+      "message": "Same explosion as the old code :)",
+      "parentUuid": "30d88d38_c1680937",
       "range": {
         "startLine": 26,
         "startChar": 66,
