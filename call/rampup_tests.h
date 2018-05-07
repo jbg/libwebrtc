@@ -74,6 +74,7 @@ class RampUpTester : public test::EndToEndTest {
   const bool report_perf_stats_;
   Call* sender_call_;
   VideoSendStream* send_stream_;
+  SimulatedNetwork* send_network_;
   test::PacketTransport* send_transport_;
 
  private:
