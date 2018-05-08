@@ -22,6 +22,30 @@
       "revId": "5f0d0e737e3e20d261eadb50f92be0faf55fbcfd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "908b4cee_aafd604c",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-08T12:46:30Z",
+      "side": 0,
+      "message": "Seems like the right thing to do, since that function explicitly wants an uninitialized struct.\n\nAlternatively, to keep the current behavior but avoiding the warning, do\n\n  DMO_MEDIA_TYPE mt \u003d {};\n\nBut your reasoning seems right.",
+      "parentUuid": "a0c1084c_6d758913",
+      "range": {
+        "startLine": 2074,
+        "startChar": 31,
+        "endLine": 2074,
+        "endChar": 34
+      },
+      "revId": "5f0d0e737e3e20d261eadb50f92be0faf55fbcfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
