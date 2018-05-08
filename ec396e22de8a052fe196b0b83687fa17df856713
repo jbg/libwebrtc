@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7d83136_51c4ac08",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-08T11:52:52Z",
+      "side": 1,
+      "message": "This dep looks suspicious. But maybe it\u0027s needed for something?",
+      "revId": "ec396e22de8a052fe196b0b83687fa17df856713",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "746b4afc_54552d65",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-05-08T11:52:52Z",
+      "side": 1,
+      "message": "Seems strange to include this as a source here too. Maybe this header could be in a rtc_source_set that is available on all platforms and added as a dep both here and for audio_device instead?",
+      "revId": "ec396e22de8a052fe196b0b83687fa17df856713",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
