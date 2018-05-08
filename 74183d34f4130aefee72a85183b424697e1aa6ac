@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce275a49_74be7584",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-08T19:21:30Z",
+      "side": 1,
+      "message": "Move destructor before the regular member functions.",
+      "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b02ffb9_e918a80d",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-08T19:21:30Z",
+      "side": 1,
+      "message": "Are you sure that no API header includes this header? Because if they do, this using declaration makes the implementation namespace useless.\n\nPrefer to just call the struct webrtc_impl::PacedPacketInfo everywhere instead.",
+      "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
