@@ -15,8 +15,12 @@
 // it's transitively required by linux/route.h, so include that version on
 // linux instead of the standard posix one.
 #if defined(WEBRTC_LINUX)
+#include <linux/ethtool.h>
 #include <linux/if.h>
 #include <linux/route.h>
+#include <linux/sockios.h>
+#include <linux/wireless.h>
+#include <sys/ioctl.h>
 #elif !defined(__native_client__)
 #include <net/if.h>
 #endif
@@ -180,6 +184,33 @@ bool MatchTypeNameWithIndexPattern(const std::string& network_name,
   return std::find_if(network_name.begin() + type_name.size(),
                       network_name.end(),
                       [](char c) { return !isdigit(c); }) == network_name.end();
+}
+
+// This method borrows the Chromium approach using ioctl to detect network
+// interface types as in net/base/network_interfaces_linux.cc.
+rtc::AdapterType GetAdapterTypeLinux(const char* network_name) {
+  int ioctl_socket = socket(AF_INET6, SOCK_DGRAM, 0);
+  if (ioctl_socket < 0)
+    return rtc::ADAPTER_TYPE_UNKNOWN;
+
+  // Test wireless extensions for ADAPTER_TYPE_WIFI
+  struct iwreq pwrq = {};
+  strncpy(pwrq.ifr_name, network_name, IFNAMSIZ - 1);
+  if (ioctl(ioctl_socket, SIOCGIWNAME, &pwrq) != -1)
+    return rtc::ADAPTER_TYPE_WIFI;
+
+#if !defined(WEBRTC_ANDROID)
+  // Test ethtool for ADAPTER_TYPE_ETHERNET
+  struct ethtool_cmd ecmd = {};
+  ecmd.cmd = ETHTOOL_GSET;
+  struct ifreq ifr = {};
+  ifr.ifr_data = &ecmd;
+  strncpy(ifr.ifr_name, network_name, IFNAMSIZ - 1);
+  if (ioctl(ioctl_socket, SIOCETHTOOL, &ifr) != -1)
+    return rtc::ADAPTER_TYPE_ETHERNET;
+#endif  // !defined(WEBRTC_ANDROID)
+
+  return rtc::ADAPTER_TYPE_UNKNOWN;
 }
 
 // A cautious note that this method may not provide an accurate adapter type
@@ -531,6 +562,11 @@ void BasicNetworkManager::ConvertIfAddrs(struct ifaddrs* interfaces,
       if (network_monitor_) {
         adapter_type = network_monitor_->GetAdapterType(cursor->ifa_name);
       }
+#if defined(WEBRTC_LINUX)
+      if (adapter_type == ADAPTER_TYPE_UNKNOWN) {
+        adapter_type = GetAdapterTypeLinux(cursor->ifa_name);
+      }
+#endif  // defined(WEBRTC_LINUX)
       if (adapter_type == ADAPTER_TYPE_UNKNOWN) {
         adapter_type = GetAdapterTypeFromName(cursor->ifa_name);
       }
