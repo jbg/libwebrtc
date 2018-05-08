@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baf794a9_5f2eeefd",
+        "filename": "sdk/android/api/org/webrtc/YuvHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-05-08T09:20:25Z",
+      "side": 1,
+      "message": "If you add it here, can you remove nativeCopyPlane in VideoFrameDrawer.java?",
+      "range": {
+        "startLine": 101,
+        "startChar": 21,
+        "endLine": 101,
+        "endChar": 30
+      },
+      "revId": "6392a73fc1accbaddb5bd97e59bd30076ed78823",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e796bee7_564bc7d2",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-05-08T09:20:25Z",
+      "side": 1,
+      "message": "Do we have any unittests covering this?",
+      "range": {
+        "startLine": 513,
+        "startChar": 28,
+        "endLine": 513,
+        "endChar": 42
+      },
+      "revId": "6392a73fc1accbaddb5bd97e59bd30076ed78823",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
