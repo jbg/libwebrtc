@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c63fccd_53bce4c9",
+        "filename": "modules/audio_coding/acm2/acm_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-08T10:35:12Z",
+      "side": 1,
+      "message": "Alternative:\n\n  std::fill_n(last_audio_buffer_.get(), AudioFrame::kMaxDataSizeSamples, 0);",
+      "revId": "19740585faf3f2fff1f8165deff2a9578f2ca587",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
