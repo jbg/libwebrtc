@@ -46,6 +46,30 @@
       "revId": "5f0d0e737e3e20d261eadb50f92be0faf55fbcfd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09fe516f_f004058c",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-05-08T13:01:16Z",
+      "side": 0,
+      "message": "Yeah, let\u0027s use {}. I prefer to keep the current behavior.",
+      "parentUuid": "908b4cee_aafd604c",
+      "range": {
+        "startLine": 2074,
+        "startChar": 31,
+        "endLine": 2074,
+        "endChar": 34
+      },
+      "revId": "5f0d0e737e3e20d261eadb50f92be0faf55fbcfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
