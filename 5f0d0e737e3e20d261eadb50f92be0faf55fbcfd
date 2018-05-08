@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0c1084c_6d758913",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-05-08T12:24:40Z",
+      "side": 0,
+      "message": "From the documentation: \"Pointer to an uninitialized DMO_MEDIA_TYPE structure allocated by the caller\". I think we can avoid the universal zero-initializer (it is triggering -Wmissing-braces and I would like to remove the warning suppression from WebRTC code).",
+      "range": {
+        "startLine": 2074,
+        "startChar": 31,
+        "endLine": 2074,
+        "endChar": 34
+      },
+      "revId": "5f0d0e737e3e20d261eadb50f92be0faf55fbcfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
