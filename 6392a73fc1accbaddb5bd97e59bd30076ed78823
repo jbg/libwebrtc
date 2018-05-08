@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d19c2db9_8dcda2b3",
+        "filename": "sdk/android/api/org/webrtc/YuvHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-05-08T13:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baf794a9_5f2eeefd",
+      "range": {
+        "startLine": 101,
+        "startChar": 21,
+        "endLine": 101,
+        "endChar": 30
+      },
+      "revId": "6392a73fc1accbaddb5bd97e59bd30076ed78823",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e796bee7_564bc7d2",
         "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "6392a73fc1accbaddb5bd97e59bd30076ed78823",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcc783cd_c076cd00",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoDecoder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-05-08T13:21:47Z",
+      "side": 1,
+      "message": "The integration test that was enabled catches this. This should be good enough until a better unit test can be added.",
+      "parentUuid": "e796bee7_564bc7d2",
+      "range": {
+        "startLine": 513,
+        "startChar": 28,
+        "endLine": 513,
+        "endChar": 42
+      },
+      "revId": "6392a73fc1accbaddb5bd97e59bd30076ed78823",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
