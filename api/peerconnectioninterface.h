@@ -983,37 +983,13 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   // TODO(deadbeef): Take argument as scoped_refptr?
   virtual void RegisterUMAObserver(UMAObserver* observer) = 0;
 
-  // 0 <= min <= current <= max should hold for set parameters.
-  struct BitrateParameters {
-    rtc::Optional<int> min_bitrate_bps;
-    rtc::Optional<int> current_bitrate_bps;
-    rtc::Optional<int> max_bitrate_bps;
-  };
-
   // SetBitrate limits the bandwidth allocated for all RTP streams sent by
   // this PeerConnection. Other limitations might affect these limits and
   // are respected (for example "b=AS" in SDP).
   //
   // Setting |current_bitrate_bps| will reset the current bitrate estimate
   // to the provided value.
-  virtual RTCError SetBitrate(const BitrateSettings& bitrate) {
-    BitrateParameters bitrate_parameters;
-    bitrate_parameters.min_bitrate_bps = bitrate.min_bitrate_bps;
-    bitrate_parameters.current_bitrate_bps = bitrate.start_bitrate_bps;
-    bitrate_parameters.max_bitrate_bps = bitrate.max_bitrate_bps;
-    return SetBitrate(bitrate_parameters);
-  }
-
-  // TODO(nisse): Deprecated - use version above. These two default
-  // implementations require subclasses to implement one or the other
-  // of the methods.
-  virtual RTCError SetBitrate(const BitrateParameters& bitrate_parameters) {
-    BitrateSettings bitrate;
-    bitrate.min_bitrate_bps = bitrate_parameters.min_bitrate_bps;
-    bitrate.start_bitrate_bps = bitrate_parameters.current_bitrate_bps;
-    bitrate.max_bitrate_bps = bitrate_parameters.max_bitrate_bps;
-    return SetBitrate(bitrate);
-  }
+  virtual RTCError SetBitrate(const BitrateSettings& bitrate) = 0;
 
   // Sets current strategy. If not set default WebRTC allocator will be used.
   // May be changed during an active session. The strategy
