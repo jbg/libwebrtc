@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f5ef48f9_81bf4a5b",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-09T08:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce275a49_74be7584",
+      "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b02ffb9_e918a80d",
         "filename": "modules/include/module_common_types.h",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1466bae3_61be7d45",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-09T08:34:34Z",
+      "side": 1,
+      "message": "Removed webrtc_impl prefix per offline discussion.",
+      "parentUuid": "8b02ffb9_e918a80d",
+      "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
