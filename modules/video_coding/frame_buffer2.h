@@ -119,7 +119,7 @@ class FrameBuffer {
 
   // Updates the minimal and maximal playout delays
   // depending on the frame.
-  void UpdatePlayoutDelays(const EncodedFrame& frame)
+  void UpdatePlayoutDelays(EncodedFrame* frame)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
 
   // Update all directly dependent and indirectly dependent frames and mark
