@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f88974da_09a08f0e",
+        "filename": "modules/video_capture/windows/device_info_ds.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-09T08:30:19Z",
+      "side": 1,
+      "message": "Why do you have to fix this comment? I thought the idea was that our -Wno-comment didn\u0027t do anything, because Chromium was already taking care of it for us?",
+      "revId": "644418b6bce407b2e3f6590cb9dd70a16c128848",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
