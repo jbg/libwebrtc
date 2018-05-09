@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6db9fb2d_def30816",
+        "filename": "media/engine/simulcast.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-09T07:17:07Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 13
+      },
+      "revId": "6bb522106a9a79e1ab7a5a6517582734a98a2136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c313a20_4bcffe16",
+        "filename": "media/engine/simulcast.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-09T07:17:07Z",
+      "side": 1,
+      "message": "Seems a bit harsh to CHECK on user-provided input. Maybe better with a soft if check? Or do you have examples of other places where we do this?",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "6bb522106a9a79e1ab7a5a6517582734a98a2136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
