@@ -409,11 +409,11 @@ struct RtpEncodingParameters {
 
   // For video, scale the resolution down by this factor.
   // TODO(deadbeef): Not implemented.
-  double scale_resolution_down_by = 1.0;
+  rtc::Optional<double> scale_resolution_down_by;
 
   // Scale the framerate down by this factor.
   // TODO(deadbeef): Not implemented.
-  double scale_framerate_down_by = 1.0;
+  rtc::Optional<double> scale_framerate_down_by;
 
   // For an RtpSender, set to true to cause this encoding to be encoded and
   // sent, and false for it not to be encoded and sent. This allows control
@@ -447,6 +447,13 @@ struct RtpEncodingParameters {
   bool operator!=(const RtpEncodingParameters& o) const {
     return !(*this == o);
   }
+  // Returns an true if any field that isn't implemented contains a value.
+  bool UnimplementedParameterHasValue() const;
+
+  // The max_bitrate_bps and bitrate_priority both are implemented per-sender,
+  // meaning that these parameters are used for the sender as a whole. Returns
+  // true if either of these contain a value that isn't default.
+  bool PerSenderParameterHasValue() const;
 };
 
 struct RtpCodecParameters {
@@ -564,6 +571,9 @@ struct RtpParameters {
   // TODO(deadbeef): Not implemented.
   DegradationPreference degradation_preference =
       DegradationPreference::BALANCED;
+
+  // Returns true if any field that isn't implemented contains a value.
+  bool UnimplementedParameterHasValue() const;
 
   bool operator==(const RtpParameters& o) const {
     return mid == o.mid && codecs == o.codecs &&

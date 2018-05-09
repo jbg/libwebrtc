@@ -195,4 +195,41 @@ std::vector<RtpExtension> RtpExtension::FilterDuplicateNonEncrypted(
   }
   return filtered;
 }
+
+bool RtpEncodingParameters::UnimplementedParameterHasValue() const {
+  if (codec_payload_type.has_value() || fec.has_value() || rtx.has_value() ||
+      dtx.has_value() || ptime.has_value() || max_framerate.has_value() ||
+      !rid.empty() || scale_resolution_down_by.has_value() ||
+      scale_framerate_down_by.has_value() || !dependency_rids.empty()) {
+    return true;
+  }
+  return false;
+}
+
+bool RtpEncodingParameters::PerSenderParameterHasValue() const {
+  if (max_bitrate_bps.has_value() ||
+      bitrate_priority != kDefaultBitratePriority) {
+    return true;
+  }
+  return false;
+}
+
+bool RtpParameters::UnimplementedParameterHasValue() const {
+  if (!transaction_id.empty() || !mid.empty() ||
+      degradation_preference != DegradationPreference::BALANCED) {
+    return true;
+  }
+  for (size_t i = 0; i < encodings.size(); ++i) {
+    if (encodings[i].UnimplementedParameterHasValue()) {
+      return true;
+    }
+    // Encoding parameters that are per-sender should only contain value at
+    // index 0.
+    if (i != 0 && encodings[i].PerSenderParameterHasValue()) {
+      return true;
+    }
+  }
+  return false;
+}
+
 }  // namespace webrtc
