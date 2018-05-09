@@ -16,6 +16,24 @@
       "revId": "644418b6bce407b2e3f6590cb9dd70a16c128848",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62aff630_221f718c",
+        "filename": "modules/video_capture/windows/device_info_ds.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-05-09T09:06:49Z",
+      "side": 1,
+      "message": "Right, I should update the CL description.\n\nThe Chromium warning suppression is only for GCC because of https://gcc.gnu.org/bugzilla/show_bug.cgi?id\u003d61638.\n\nOn clang, Chromium is not suppressing this warning so I had to fix the only problem we have in WebRTC.",
+      "parentUuid": "f88974da_09a08f0e",
+      "revId": "644418b6bce407b2e3f6590cb9dd70a16c128848",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
