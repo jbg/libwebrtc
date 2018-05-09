@@ -201,6 +201,12 @@ RTCError AudioRtpSender::SetParameters(const RtpParameters& parameters) {
   if (!media_channel_ || stopped_) {
     return RTCError(RTCErrorType::INVALID_STATE);
   }
+  if (parameters.UnimplementedParameterHasValue() ||
+      !parameters.header_extensions.empty()) {
+    LOG_AND_RETURN_ERROR(
+        RTCErrorType::UNSUPPORTED_PARAMETER,
+        "Attempted to set an unimplemented parameter of RtpParameters.");
+  }
   return worker_thread_->Invoke<RTCError>(RTC_FROM_HERE, [&] {
     return media_channel_->SetRtpSendParameters(ssrc_, parameters);
   });
@@ -386,6 +392,12 @@ RTCError VideoRtpSender::SetParameters(const RtpParameters& parameters) {
   TRACE_EVENT0("webrtc", "VideoRtpSender::SetParameters");
   if (!media_channel_ || stopped_) {
     return RTCError(RTCErrorType::INVALID_STATE);
+  }
+  if (parameters.UnimplementedParameterHasValue() ||
+      !parameters.header_extensions.empty()) {
+    LOG_AND_RETURN_ERROR(
+        RTCErrorType::UNSUPPORTED_PARAMETER,
+        "Attempted to set an unimplemented parameter of RtpParameters.");
   }
   return worker_thread_->Invoke<RTCError>(RTC_FROM_HERE, [&] {
     return media_channel_->SetRtpSendParameters(ssrc_, parameters);
