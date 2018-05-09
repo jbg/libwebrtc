@@ -48,6 +48,8 @@ rtc_static_library("rtc_p2p") {
     "base/portinterface.h",
     "base/pseudotcp.cc",
     "base/pseudotcp.h",
+    "base/regatheringcontroller.cc",
+    "base/regatheringcontroller.h",
     "base/relayport.cc",
     "base/relayport.h",
     "base/stun.cc",
