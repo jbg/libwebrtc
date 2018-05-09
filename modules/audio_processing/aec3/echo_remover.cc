@@ -73,9 +73,7 @@ class EchoRemoverImpl final : public EchoRemover {
                       std::vector<std::vector<float>>* capture) override;
 
   // Returns the internal delay estimate in blocks.
-  rtc::Optional<int> Delay() const override {
-    return aec_state_.InternalDelay();
-  }
+  rtc::Optional<int> Delay() const override { return rtc::nullopt; }
 
   // Updates the status on whether echo leakage is detected in the output of the
   // echo remover.
