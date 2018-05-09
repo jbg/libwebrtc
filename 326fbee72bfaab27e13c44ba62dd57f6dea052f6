@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "1e3aa0a3_5dec96b9",
+        "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 6000
+      },
+      "writtenOn": "2018-05-09T09:24:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d53295cc_70ccb179",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "326fbee72bfaab27e13c44ba62dd57f6dea052f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3686894f_99de1933",
         "filename": "sdk/android/src/java/org/webrtc/Camera1Session.java",
         "patchSetId": 1
