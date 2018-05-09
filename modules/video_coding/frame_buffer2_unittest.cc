@@ -276,6 +276,17 @@ TEST_F(TestFrameBuffer2, SetPlayoutDelay) {
   EXPECT_EQ(kPlayoutDelayMs.max_ms, timing_.max_playout_delay());
 }
 
+TEST_F(TestFrameBuffer2, ZeroPlayoutDelay) {
+  const PlayoutDelay kPlayoutDelayMs = {0, 0};
+  std::unique_ptr<FrameObjectFake> test_frame(new FrameObjectFake());
+  test_frame->id.picture_id = 0;
+  test_frame->SetPlayoutDelay(kPlayoutDelayMs);
+  buffer_.InsertFrame(std::move(test_frame));
+  ExtractFrame(0, false);
+  CheckFrame(0, 0, 0);
+  EXPECT_EQ(0, frames_[0]->RenderTimeMs());
+}
+
 // Flaky test, see bugs.webrtc.org/7068.
 TEST_F(TestFrameBuffer2, DISABLED_OneUnorderedSuperFrame) {
   uint16_t pid = Rand();
