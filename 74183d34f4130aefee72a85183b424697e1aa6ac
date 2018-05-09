@@ -69,6 +69,24 @@
       "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96649394_772bcb37",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-09T08:38:21Z",
+      "side": 1,
+      "message": "Good. Until you can live without this alias, or at least put it in a much less transitively popular header file, trying to put PacedPacketInfo in webrtc_impl just seems like extra complexity for no gain.",
+      "parentUuid": "1466bae3_61be7d45",
+      "revId": "74183d34f4130aefee72a85183b424697e1aa6ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
