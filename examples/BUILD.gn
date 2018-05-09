@@ -602,8 +602,6 @@ if (is_linux || is_win) {
         "-Wno-format",
 
         # See https://bugs.chromium.org/p/webrtc/issues/detail?id=6271
-        # for -Wno-reorder and -Wno-sign-compare
-        "-Wno-reorder",
         "-Wno-sign-compare",
       ]
     }

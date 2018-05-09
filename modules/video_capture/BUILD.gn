@@ -89,7 +89,6 @@ if (!build_with_chromium) {
         "-Wno-ignored-qualifiers",
         "-Wno-microsoft-extra-qualification",
         "-Wno-overloaded-virtual",
-        "-Wno-reorder",
         "-Wno-writable-strings",
       ]
     }

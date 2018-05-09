@@ -990,7 +990,6 @@ config("rtc_base_tests_utils_warnings_config") {
   if (is_win && is_clang) {
     cflags = [
       # See https://bugs.chromium.org/p/webrtc/issues/detail?id=6270
-      "-Wno-reorder",
       "-Wno-sign-compare",
     ]
   }
