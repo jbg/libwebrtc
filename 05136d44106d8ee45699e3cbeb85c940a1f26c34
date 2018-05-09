@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b01d3097_4918a362",
+        "filename": "modules/audio_processing/agc2/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-09T09:45:11Z",
+      "side": 1,
+      "message": "Making this target visible also to the sub-directories.",
+      "range": {
+        "startLine": 51,
+        "startChar": 18,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "05136d44106d8ee45699e3cbeb85c940a1f26c34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aa2b699_0c055c04",
+        "filename": "modules/audio_processing/agc2/biquad_filter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-09T09:45:11Z",
+      "side": 1,
+      "message": "Needed by FeatureExtractor::Reset().",
+      "range": {
+        "startLine": 37,
+        "startChar": 7,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "05136d44106d8ee45699e3cbeb85c940a1f26c34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
