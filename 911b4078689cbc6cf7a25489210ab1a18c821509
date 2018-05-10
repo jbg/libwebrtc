@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57951fba_9e9544b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-10T18:31:00Z",
+      "side": 1,
+      "message": "nit: This could be misinterpreted as \"make WebRTC build without SW codecs by default\" (what I assumed at first), when really it means \"Fix link errors when rtc_use_builtin_sw_codecs \u003d false\".",
+      "revId": "911b4078689cbc6cf7a25489210ab1a18c821509",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15dab55e_17aa3cc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-10T18:31:00Z",
+      "side": 1,
+      "message": "nit: To someone without context, it may not be clear what\u0027s meant by \"the library\" (libjingle_peerconnection?) and \"the default targets\" (group(\"default\"), which transitively includes all build targets?)",
+      "revId": "911b4078689cbc6cf7a25489210ab1a18c821509",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86db5ae3_d8984642",
+        "filename": "pc/createpeerconnectionfactory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-10T18:31:00Z",
+      "side": 1,
+      "message": "nit: Would be helpful to document somewhere that when rtc_use_builtin_sw_codecs is false, you must use this CreatePeerConnectionFactory overload.",
+      "revId": "911b4078689cbc6cf7a25489210ab1a18c821509",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
