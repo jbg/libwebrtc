@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b22b3fb_edb36048",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-05-10T20:56:22Z",
+      "side": 1,
+      "message": "Should be\n\nBug: webrtc:8772",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 8
+      },
+      "revId": "89688e4ed6e1c01adcab56ef941f1174ff0cc8d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
