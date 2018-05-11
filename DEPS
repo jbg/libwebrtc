@@ -2,8 +2,10 @@
 
 vars = {
   'chromium_git': 'https://chromium.googlesource.com',
+
   # Used by the WebRTC DEPS autoroller to update third_party/. If you need to run autoroller localy,
-  # you can set it via custom_vars section in the .gclient file.
+
+# you can set it via custom_vars section in the .gclient file.
   'roll_chromium_into_webrtc': False,
   # By default, we should check out everything needed to run on the main
   # chromium waterfalls. More info at: crbug.com/570091.
