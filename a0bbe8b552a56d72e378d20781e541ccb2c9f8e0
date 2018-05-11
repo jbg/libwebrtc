@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dee24f38_2a476bdf",
+        "filename": "rtc_tools/unpack_aecdump/unpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T09:16:49Z",
+      "side": 1,
+      "message": "I wonder if there is a difference. An \u0027r\u0027 in binary is an \u0027r\u0027 in ascii.",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "a0bbe8b552a56d72e378d20781e541ccb2c9f8e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
