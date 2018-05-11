@@ -218,7 +218,7 @@ int64_t VCMTiming::RenderTimeMsInternal(uint32_t frame_timestamp,
 
   if (min_playout_delay_ms_ == 0 && max_playout_delay_ms_ == 0) {
     // Render as soon as possible.
-    return now_ms;
+    return 0;
   }
 
   // Make sure the actual delay stays in the range of |min_playout_delay_ms_|
