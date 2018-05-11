@@ -16,6 +16,121 @@
       "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cdd1303_d8af58bc",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-11T09:18:53Z",
+      "side": 1,
+      "message": "You can\u0027t call None, so the call on line 191 will raise an exception if the caller didn\u0027t pass this argument and input_api.FilterSourceFile(x) is true. Is that intended?",
+      "range": {
+        "startLine": 185,
+        "startChar": 48,
+        "endLine": 185,
+        "endChar": 52
+      },
+      "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "969e363d_bfbc2658",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-11T09:18:53Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 209,
+        "startChar": 41,
+        "endLine": 209,
+        "endChar": 45
+      },
+      "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac220e86_f16a136f",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-11T09:18:53Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 232,
+        "startChar": 42,
+        "endLine": 232,
+        "endChar": 46
+      },
+      "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b7cef2b_3100880f",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-11T09:18:53Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 421,
+        "startChar": 49,
+        "endLine": 421,
+        "endChar": 53
+      },
+      "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d23c044e_746dfc4d",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-11T09:18:53Z",
+      "side": 1,
+      "message": "Same.\n\nMore instances below---I won\u0027t tag them all.",
+      "range": {
+        "startLine": 497,
+        "startChar": 61,
+        "endLine": 497,
+        "endChar": 65
+      },
+      "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
