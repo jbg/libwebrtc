@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8944d697_9c6cf981",
+        "filename": "call/fake_network_pipe.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-11T09:12:07Z",
+      "side": 1,
+      "message": "I\u0027d consider folding it with the assignment above (and make it const int64_t). But LGTM either way.",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 70
+      },
+      "revId": "3e45c276d4fe21eb8d43e54923204548cdf90992",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
