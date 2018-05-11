@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1c4f642_7983b026",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-11T08:32:50Z",
+      "side": 1,
+      "message": "Needs \"Bug:\" tag",
+      "revId": "519dda6b45d41a12e81c274f71629b0db62cf6b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
