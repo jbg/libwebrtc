@@ -65,6 +65,12 @@ class MouseCursorMonitor {
     // mouse cursor against fullscreen.
     virtual void OnMouseCursorPosition(const DesktopVector& position) {}
 
+    // MacOSX provides cursor position and other locations in DIP pixel only and
+    // there is no easy way to convert them to physical pixel. So keep position
+    // in DIP pixel together with scale factor for following processing.
+    virtual void OnMouseCursorPositionAndScale(const DesktopVector& position,
+                                               const float scale) {}
+
    protected:
     virtual ~Callback() {}
   };

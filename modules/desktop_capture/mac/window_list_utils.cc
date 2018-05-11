@@ -14,6 +14,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <unordered_map>
 
 #include "rtc_base/checks.h"
 #include "rtc_base/macutils.h"
@@ -61,33 +62,12 @@ bool GetWindowRef(CGWindowID id,
 }
 
 // Scales the |rect| according to the DIP to physical pixel scale of |rect|.
-// |rect| is in unscaled system coordinate, i.e. it's device-independent and the
-// primary monitor starts from (0, 0). If |rect| overlaps multiple monitors, the
-// returned size may not be accurate when monitors have different DIP settings.
-// If |rect| is entirely out of the display, this function returns |rect|.
+// Only scale the size and leave the top_left in DIP pixel.
 DesktopRect ApplyScaleFactorOfRect(
     const MacDesktopConfiguration& desktop_config,
     DesktopRect rect) {
-  // TODO(http://crbug.com/778049): How does Mac OSX decide the scale factor
-  // if one window is across two monitors with different DPIs.
-  float scales[] = {
-      GetScaleFactorAtPosition(desktop_config, rect.top_left()),
-      GetScaleFactorAtPosition(desktop_config,
-          DesktopVector(rect.left() + rect.width() / 2,
-                        rect.top() + rect.height() / 2)),
-      GetScaleFactorAtPosition(
-            desktop_config, DesktopVector(rect.right(), rect.bottom())),
-  };
-  // Since GetScaleFactorAtPosition() returns 1 if the position is out of the
-  // display, we always prefer a value which not equals to 1.
-  float scale = *std::max_element(std::begin(scales), std::end(scales));
-  if (scale == 1) {
-    scale = *std::min_element(std::begin(scales), std::end(scales));
-  }
-
-  return DesktopRect::MakeXYWH(rect.left() * scale,
-                               rect.top() * scale,
-                               rect.width() * scale,
+  const float scale = GetCurrentScaleFactorOfRect(desktop_config, rect);
+  return DesktopRect::MakeXYWH(rect.left(), rect.top(), rect.width() * scale,
                                rect.height() * scale);
 }
 
@@ -263,6 +243,39 @@ float GetScaleFactorAtPosition(const MacDesktopConfiguration& desktop_config,
     }
   }
   return 1;
+}
+
+float GetCurrentScaleFactorOfRect(const MacDesktopConfiguration& desktop_config,
+                                  DesktopRect dip_rect) {
+  // TODO(http://crbug.com/778049): How does Mac OSX decide the scale factor
+  // if one window is across two monitors with different DPIs.
+  const int kPostionsToCheck = 3;
+  float scales[kPostionsToCheck] = {
+      GetScaleFactorAtPosition(desktop_config, dip_rect.top_left()),
+      GetScaleFactorAtPosition(
+          desktop_config,
+          DesktopVector(dip_rect.left() + dip_rect.width() / 2,
+                        dip_rect.top() + dip_rect.height() / 2)),
+      GetScaleFactorAtPosition(
+          desktop_config, DesktopVector(dip_rect.right(), dip_rect.bottom())),
+  };
+
+  // Take scale factor of the display that most of the rect is on.
+  std::unordered_map<float, int> hash;
+  for (int i = 0; i < kPostionsToCheck; i++)
+    hash[scales[i]]++;
+
+  // Find the max repeating scale in the |scales| array.
+  float scale = 1.0;
+  int max_count = 0;
+  for (auto i : hash) {
+    if (max_count < i.second) {
+      scale = i.first;
+      max_count = i.second;
+    }
+  }
+
+  return scale;
 }
 
 DesktopRect GetWindowBounds(CFDictionaryRef window) {

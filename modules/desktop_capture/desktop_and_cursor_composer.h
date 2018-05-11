@@ -59,6 +59,8 @@ class DesktopAndCursorComposer : public DesktopCapturer,
   void OnMouseCursorPosition(MouseCursorMonitor::CursorState state,
                              const DesktopVector& position) override;
   void OnMouseCursorPosition(const DesktopVector& position) override;
+  void OnMouseCursorPositionAndScale(const DesktopVector& position,
+                                     const float scale) override;
 
   const std::unique_ptr<DesktopCapturer> desktop_capturer_;
   const std::unique_ptr<MouseCursorMonitor> mouse_monitor_;
@@ -67,6 +69,7 @@ class DesktopAndCursorComposer : public DesktopCapturer,
 
   std::unique_ptr<MouseCursor> cursor_;
   DesktopVector cursor_position_;
+  float scale_factor_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DesktopAndCursorComposer);
 };
