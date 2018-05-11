@@ -22,6 +22,30 @@
       "revId": "a0bbe8b552a56d72e378d20781e541ccb2c9f8e0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a9b25c5_5d8cdda7",
+        "filename": "rtc_tools/unpack_aecdump/unpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-05-11T09:45:21Z",
+      "side": 1,
+      "message": "The difference is the newlines, but on second thought I don\u0027t think it\u0027s meaningful. I\u0027ll remove it. audioproc_f is agnostic, it discards newlines when reading call orders.",
+      "parentUuid": "dee24f38_2a476bdf",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "a0bbe8b552a56d72e378d20781e541ccb2c9f8e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
