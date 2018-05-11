@@ -229,11 +229,10 @@ void MouseCursorMonitorMac::Capture() {
       }
     }
   }
-  // Convert Density Independent Pixel to physical pixel.
-  position = DesktopVector(round(position.x() * scale),
-                           round(position.y() * scale));
-  callback_->OnMouseCursorPosition(
-      position.subtract(configuration.bounds.top_left()));
+
+  // Always report cursor position in DIP pixel together with scale on MacOSX.
+  callback_->OnMouseCursorPositionAndScale(position.subtract(configuration.bounds.top_left()),
+                                           scale);
 }
 
 void MouseCursorMonitorMac::CaptureImage(float scale) {

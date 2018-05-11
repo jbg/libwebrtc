@@ -22,6 +22,10 @@
 
 namespace webrtc {
 
+// Standard Mac displays have 72dpi, but we report 96dpi for
+// consistency with Windows and Linux.
+const int kStandardDPI = 96;
+
 // DesktopFrame represents a video frame captured from the screen.
 class DesktopFrame {
  public:
@@ -33,6 +37,13 @@ class DesktopFrame {
   // Returns the rectangle in full desktop coordinates to indicate the area
   // covered by the DesktopFrame.
   DesktopRect rect() const;
+
+  // Returns the rectangle in DIP coordinates on MaxOSX. On other platforms,
+  // |dip_rect| is same as |rect|.
+  // This is for checking the relative position of a frame and others on Mac.
+  // MacOSX provides location info in DIP coordinates and frame size in physical
+  // coordinates. So unify them all into DIP coordicates.
+  DesktopRect dip_rect() const;
 
   // Size of the frame.
   const DesktopSize& size() const { return size_; }

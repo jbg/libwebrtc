@@ -28,6 +28,7 @@ DesktopFrame::DesktopFrame(DesktopSize size,
       shared_memory_(shared_memory),
       size_(size),
       stride_(stride),
+      dpi_(DesktopVector(kStandardDPI, kStandardDPI)),
       capture_time_ms_(0),
       capturer_id_(DesktopCapturerId::kUnknown) {
   RTC_DCHECK(size_.width() >= 0);
@@ -60,6 +61,16 @@ void DesktopFrame::CopyPixelsFrom(const DesktopFrame& src_frame,
 
 DesktopRect DesktopFrame::rect() const {
   return DesktopRect::MakeOriginSize(top_left(), size());
+}
+
+DesktopRect DesktopFrame::dip_rect() const {
+  if (dpi().is_zero() || dpi().x() != dpi().y())
+    return DesktopRect::MakeOriginSize(top_left(), size());
+
+  float scale = dpi().x() / kStandardDPI;
+  // Only scale the size.
+  return DesktopRect::MakeXYWH(top_left().x(), top_left().y(),
+                               size().width() / scale, size().height() / scale);
 }
 
 uint8_t* DesktopFrame::GetFrameDataAtPos(const DesktopVector& pos) const {

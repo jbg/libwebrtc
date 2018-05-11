@@ -136,7 +136,9 @@ DesktopAndCursorComposer::DesktopAndCursorComposer(
 DesktopAndCursorComposer::DesktopAndCursorComposer(
     DesktopCapturer* desktop_capturer,
     MouseCursorMonitor* mouse_monitor)
-    : desktop_capturer_(desktop_capturer), mouse_monitor_(mouse_monitor) {
+    : desktop_capturer_(desktop_capturer),
+      mouse_monitor_(mouse_monitor),
+      scale_factor_(1.0) {
   RTC_DCHECK(desktop_capturer_);
 }
 
@@ -168,10 +170,15 @@ void DesktopAndCursorComposer::OnCaptureResult(
     DesktopCapturer::Result result,
     std::unique_ptr<DesktopFrame> frame) {
   if (frame && cursor_) {
-    if (frame->rect().Contains(cursor_position_) &&
+    // Use |dip_rect| of the frame for OSX, since OSX provides all location
+    // info in DIP pixel coordinates.
+    // On other platforms, |dip_rect| is sames as |rect|.
+    if (frame->dip_rect().Contains(cursor_position_) &&
         !desktop_capturer_->IsOccluded(cursor_position_)) {
-      const DesktopVector relative_position =
+      DesktopVector relative_position =
           cursor_position_.subtract(frame->top_left());
+      relative_position.set(relative_position.x() * scale_factor_,
+                            relative_position.y() * scale_factor_);
       frame = rtc::MakeUnique<DesktopFrameWithCursor>(
           std::move(frame), *cursor_, relative_position);
     }
@@ -193,6 +200,13 @@ void DesktopAndCursorComposer::OnMouseCursorPosition(
 void DesktopAndCursorComposer::OnMouseCursorPosition(
     const DesktopVector& position) {
   cursor_position_ = position;
+}
+
+void DesktopAndCursorComposer::OnMouseCursorPositionAndScale(
+    const DesktopVector& position,
+    const float scale) {
+  cursor_position_ = position;
+  scale_factor_ = scale;
 }
 
 }  // namespace webrtc

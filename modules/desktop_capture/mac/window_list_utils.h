@@ -59,6 +59,15 @@ WindowId GetWindowId(CFDictionaryRef window);
 float GetScaleFactorAtPosition(const MacDesktopConfiguration& desktop_config,
                                DesktopVector position);
 
+// Returns the DIP to physical pixel scale at the location of |rect|.
+// |dip_rect| is in device-independent coordinate and the primary monitor
+// starts from (0, 0). If |dip_rect| overlaps multiple monitors, the returned
+// scale may not be accurate when monitors have different DIP settings. The
+// scale of the monitor which most of the |dip_rect| is on will be returned.
+// If |rect| is entirely out of the display, this function returns 1.
+float GetCurrentScaleFactorOfRect(const MacDesktopConfiguration& desktop_config,
+                                  DesktopRect dip_rect);
+
 // Returns the bounds of |window|. If |window| is not a window or the bounds
 // cannot be retrieved, this function returns an empty DesktopRect. The returned
 // DesktopRect is in system coordinate, i.e. the primary monitor always starts
