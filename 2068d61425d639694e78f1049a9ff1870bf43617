@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb6ba7c7_79668292",
+        "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "I like braces...",
+      "range": {
+        "startLine": 122,
+        "startChar": 40,
+        "endLine": 122,
+        "endChar": 41
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3269131c_2bd55a87",
+        "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "Braces are great!",
+      "range": {
+        "startLine": 127,
+        "startChar": 40,
+        "endLine": 127,
+        "endChar": 41
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "333d0172_5f0f2100",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "Will it always be \u0027false\u0027?",
+      "range": {
+        "startLine": 28,
+        "startChar": 28,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e4a8cfa_1b29f2f8",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "Custom dtor? Is it the Clang plugin that says something about \"nontrivial class needs custom d-tor\"? If not, a custom d-tor raises suspicions about non-trivial resource management.",
+      "range": {
+        "startLine": 33,
+        "startChar": 3,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1c33023_31375a1e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "I think it\u0027s better with asserts in the test itself. Can you make this return a bool? And then check for it in the test?\n\nTEST(...) {\n...\nASSERT_TRUE(PitchIsValid(low_pitch_hz));\n...\n}",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f06be5ad_f036529c",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "Can this be broken out? If it\u0027s named something appropriate, the reader doesn\u0027t need to know that the pitch is second-last in the feature vector.",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 87,
+        "endChar": 4
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a55bd395_62e05d6e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "I\u0027m thinking of ways to make the test easier to read. How about instead checking for EXPECT_NEAR(pitch_hz, pitch_feature, TOLERANCE)?\n\nThen we don\u0027t need to compute both frequencies in the same test. I suggest having only one pitch in the test, but possibly splitting the test in two.",
+      "range": {
+        "startLine": 98,
+        "startChar": 12,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e64773c9_785da6c4",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "Hmm, don\u0027t know what I think about vectors and array views pointing in to them. I don\u0027t like it, but can\u0027t think of anything better.",
+      "range": {
+        "startLine": 21,
+        "startChar": 62,
+        "endLine": 21,
+        "endChar": 65
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3239c7e3_d6da50cd",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "I suggest changing \u0027auto\u0027 to \u0027const PitchInfo\u0027. The type isn\u0027t immediately clear from the RHS.",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 10
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1398507_e663ff6a",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-11T11:37:33Z",
+      "side": 1,
+      "message": "Do we really need the \u0027T\u0027? Will it ever going to be anything but \u0027float\u0027?\n\nAlso: in \u0027Reset\u0027, we fill the buffer with \u00270\u0027, which is a restriction on the values of \u0027T\u0027.",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
