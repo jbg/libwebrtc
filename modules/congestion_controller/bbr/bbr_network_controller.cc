@@ -561,6 +561,8 @@ void BbrNetworkController::UpdateBandwidth(
       continue;
     send_ack_tracker_.ClearOldSamples(send_time);
 
+    if (result.send_timespan.ms() < 0)
+      continue;
     DataRate ack_rate = result.acked_data / result.ack_timespan;
     DataRate send_rate = result.send_timespan.IsZero()
                              ? DataRate::Infinity()
