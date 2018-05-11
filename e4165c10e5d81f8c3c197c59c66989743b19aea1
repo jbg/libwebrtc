@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5979438_4997af7e",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-05-11T23:56:59Z",
+      "side": 1,
+      "message": "s/sames/same/",
+      "range": {
+        "startLine": 175,
+        "startChar": 41,
+        "endLine": 175,
+        "endChar": 46
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31216801_251ec97f",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-05-11T23:56:59Z",
+      "side": 1,
+      "message": "TODO to remove this method?\n\nIn fact, please add TODOs to all the code you mention in your CL description that is now obsolete.",
+      "range": {
+        "startLine": 61,
+        "startChar": 69,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4aab686f_9a9384c6",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-05-11T23:56:59Z",
+      "side": 1,
+      "message": "This comment seems out-of-place now that it\u0027s in a cross-platform header rather than a Mac-specific implementation. I don\u0027t really understand the ramifications of using the wrong DPI on Mac; will things appear slightly smaller/larger than they should on the client side?",
+      "range": {
+        "startLine": 26,
+        "startChar": 38,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "496b54f3_69531aaa",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-05-11T23:56:59Z",
+      "side": 1,
+      "message": "s/Max/Mac/",
+      "range": {
+        "startLine": 41,
+        "startChar": 49,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "863024ec_622dbb5b",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-05-11T23:56:59Z",
+      "side": 1,
+      "message": "|hash| is not a very descriptive name for this. I think |count| would be better.",
+      "range": {
+        "startLine": 264,
+        "startChar": 38,
+        "endLine": 264,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
