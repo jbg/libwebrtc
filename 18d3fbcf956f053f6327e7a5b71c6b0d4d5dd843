@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87a1671a_737cdb7a",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-11T20:42:06Z",
+      "side": 1,
+      "message": "It\u0027s best if you can avoid ever having a raw pointer own an object. E.g.:\n\n  auto mock_verifier \u003d rtc::MakeUnique\u003cMockCertVerifier\u003e();\n  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));\n  std::unique_ptr\u003crtc::SSLCertificateVerifier\u003e cert_verifier(std::move(mock_verifier));",
+      "revId": "18d3fbcf956f053f6327e7a5b71c6b0d4d5dd843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
