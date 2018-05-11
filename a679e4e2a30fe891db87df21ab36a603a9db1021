@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f034e973_ce8e618e",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-11T09:20:24Z",
+      "side": 1,
+      "message": "Done, also updated commit message bug reference.",
+      "parentUuid": "36f04a0d_096537dd",
+      "range": {
+        "startLine": 223,
+        "startChar": 7,
+        "endLine": 223,
+        "endChar": 12
+      },
+      "revId": "a679e4e2a30fe891db87df21ab36a603a9db1021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db5494f4_a8d44f6f",
         "filename": "api/video/video_sink_interface.h",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "a679e4e2a30fe891db87df21ab36a603a9db1021",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e46d787_11da30fd",
+        "filename": "api/video/video_sink_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-11T09:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db5494f4_a8d44f6f",
+      "range": {
+        "startLine": 21,
+        "startChar": 32,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "a679e4e2a30fe891db87df21ab36a603a9db1021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
