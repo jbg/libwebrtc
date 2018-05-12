@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "8eac0973_a28f1698",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I think you do not need to have scale_factor_ in this class. You can always calculate it from DesktopFrame.",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31216801_251ec97f",
         "filename": "modules/desktop_capture/desktop_and_cursor_composer.h",
         "patchSetId": 4
@@ -41,6 +64,76 @@
         "startChar": 69,
         "endLine": 61,
         "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38188918_6c24cdf9",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "Please see my comment in the implementation. I doubt whether we should add the new API.",
+      "parentUuid": "31216801_251ec97f",
+      "range": {
+        "startLine": 61,
+        "startChar": 69,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db28a81d_1e1aeb12",
+        "filename": "modules/desktop_capture/desktop_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I would suggest to ensure that dpi() is not zero. I did not see a case this condition should be hit.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d43434a_d92d2cee",
+        "filename": "modules/desktop_capture/desktop_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "You may want to export\nfloat DesktopFrame::scale_factor() const;",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 41
       },
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
@@ -71,6 +164,53 @@
     },
     {
       "key": {
+        "uuid": "f1380823_555a2f6e",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I would suggest to avoid mentioning Mac OSX in platform independent classes.",
+      "parentUuid": "4aab686f_9a9384c6",
+      "range": {
+        "startLine": 26,
+        "startChar": 38,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aadc1ef3_d9d42d16",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "Just update the logic of this function. This function is used in DesktopAndCursorComposer only. Adding a new function will create extra confusion.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "496b54f3_69531aaa",
         "filename": "modules/desktop_capture/desktop_frame.h",
         "patchSetId": 4
@@ -94,6 +234,121 @@
     },
     {
       "key": {
+        "uuid": "b77a738d_dc830c25",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I would suggest to avoid mentioning MacOSX at all. This is a common behavior if the DPI is not standard. This can happen on any platforms as long as we create the DesktopFrame with a different dpi.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95532b73_ed1caa03",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "Update the comment, this size is in physical size, i.e. mapping directly to the size of the underlay buffer.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb0ea1e_95533f4b",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "More comment here for the unit of the DesktopVector. I.e. full desktop coordinates, and maybe scaled by the OS. But it\u0027s always consistent with the MouseCursorMonitor.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8deb4600_9743c3df",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I would suggest to add a GetScaleFactorOfWindow() rather than GetScaleFactorOfRect. The later one will just introduces a new confusion: what the unit and coordinate of the DesktopRect.",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 33
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74e26315_c7450f56",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "float scales[] \u003d {\n  ...\n};\n\nfor (const auto\u0026 scale : scales) {\n  hash[scale]++;\n}",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 36
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "863024ec_622dbb5b",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 4
@@ -110,6 +365,121 @@
         "startChar": 38,
         "endLine": 264,
         "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e44deb2e_e66d8e3e",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "std::max() should be helpful to avoid this manual loop.",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 3
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2db0838e_522b0831",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I would suggest to mention that the unit of this position is controlled by the OS; but it is always consistent with DesktopFrame.dip_rect().",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 72
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b800d33a_ccb189fa",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "I doubt whether this overload is useful. The client can still get the scale factor by using the DisplayConfiguration on Mac OSX.\nThis API goes to each platform, but the scale may only be helpful on Mac OSX.",
+      "range": {
+        "startLine": 71,
+        "startChar": 17,
+        "endLine": 71,
+        "endChar": 46
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb24b352_919d2381",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_mac.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "Considering this impacts only Mac OSX, returning DIP pixel in OnMouseCursorPosition() should be fine.",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 50
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3b43a60_eb40ea37",
+        "filename": "modules/desktop_capture/window_capturer_mac.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-12T00:33:30Z",
+      "side": 1,
+      "message": "Why do you want to move this line into the condition?",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 34
       },
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
