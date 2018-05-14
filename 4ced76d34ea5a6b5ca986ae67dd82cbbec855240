@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ff8db76_4327b4c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T16:40:33Z",
+      "side": 1,
+      "message": "I confess I don\u0027t understand if, by reading the description, I should expect to get faster compilation once this CL lands or if we will loose that to reduce complexity and redundant code.\n\nIf I understand well, then I would rephrase as follows:\n\"Having the AecDump implementation not depending on \u0027audio_processing\u0027 allows to have faster compilation time and reduces the dependencies. However, maintaining such a decoupling can make APM and AecDump client code more complex.\"",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 58
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
