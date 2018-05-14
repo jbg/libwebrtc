@@ -14,7 +14,6 @@
 #include <map>
 
 #include "modules/include/module_common_types.h"
-#include "rtc_base/basictypes.h"
 #include "rtc_base/constructormagic.h"
 
 namespace webrtc {
@@ -24,11 +23,13 @@ namespace webrtc_cc {
 
 class SendTimeHistory {
  public:
-  SendTimeHistory(const Clock* clock, int64_t packet_age_limit_ms);
+  SendTimeHistory();
   ~SendTimeHistory();
 
-  // Cleanup old entries, then add new packet info with provided parameters.
-  void AddAndRemoveOld(const PacketFeedback& packet);
+  // Add new packet info with provided parameters.
+  void AddPacket(const PacketFeedback& packet);
+  // Cleanup old entries.
+  void RemoveOld(int64_t older_than_ms);
 
   // Updates packet info identified by |sequence_number| with |send_time_ms|.
   // Return false if not found.
@@ -46,13 +47,11 @@ class SendTimeHistory {
                              uint16_t remote_net_id) const;
 
  private:
-  const Clock* const clock_;
-  const int64_t packet_age_limit_ms_;
   SequenceNumberUnwrapper seq_num_unwrapper_;
   std::map<int64_t, PacketFeedback> history_;
   rtc::Optional<int64_t> latest_acked_seq_num_;
 
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(SendTimeHistory);
+  RTC_DISALLOW_COPY_AND_ASSIGN(SendTimeHistory);
 };
 
 }  // namespace webrtc_cc

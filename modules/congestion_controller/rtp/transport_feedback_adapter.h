@@ -41,6 +41,7 @@ class TransportFeedbackAdapter {
                  uint16_t sequence_number,
                  size_t length,
                  const PacedPacketInfo& pacing_info);
+  void RemoveOld();
   void OnSentPacket(uint16_t sequence_number, int64_t send_time_ms);
 
   // TODO(holmer): This method should return DelayBasedBwe::Result so that we

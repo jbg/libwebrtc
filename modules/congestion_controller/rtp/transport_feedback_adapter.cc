@@ -28,7 +28,7 @@ const int64_t kBaseTimestampScaleFactor =
 const int64_t kBaseTimestampRangeSizeUs = kBaseTimestampScaleFactor * (1 << 24);
 
 TransportFeedbackAdapter::TransportFeedbackAdapter(const Clock* clock)
-    : send_time_history_(clock, kSendTimeHistoryWindowMs),
+    : send_time_history_(),
       clock_(clock),
       current_offset_ms_(kNoTimestamp),
       last_timestamp_us_(kNoTimestamp),
@@ -64,7 +64,8 @@ void TransportFeedbackAdapter::AddPacket(uint32_t ssrc,
   {
     rtc::CritScope cs(&lock_);
     const int64_t creation_time_ms = clock_->TimeInMilliseconds();
-    send_time_history_.AddAndRemoveOld(
+    send_time_history_.RemoveOld(creation_time_ms - kSendTimeHistoryWindowMs);
+    send_time_history_.AddPacket(
         PacketFeedback(creation_time_ms, sequence_number, length, local_net_id_,
                        remote_net_id_, pacing_info));
   }
@@ -75,6 +76,12 @@ void TransportFeedbackAdapter::AddPacket(uint32_t ssrc,
       observer->OnPacketAdded(ssrc, sequence_number);
     }
   }
+}
+
+void TransportFeedbackAdapter::RemoveOld() {
+  rtc::CritScope cs(&lock_);
+  send_time_history_.RemoveOld(clock_->TimeInMilliseconds() -
+                               kSendTimeHistoryWindowMs);
 }
 
 void TransportFeedbackAdapter::OnSentPacket(uint16_t sequence_number,
