@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "17bbeab9_c7a95cdd",
+        "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb6ba7c7_79668292",
+      "range": {
+        "startLine": 122,
+        "startChar": 40,
+        "endLine": 122,
+        "endChar": 41
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3269131c_2bd55a87",
         "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cbb066a_a6f0d301",
+        "filename": "modules/audio_processing/agc2/biquad_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "{Done.}",
+      "parentUuid": "3269131c_2bd55a87",
+      "range": {
+        "startLine": 127,
+        "startChar": 40,
+        "endLine": 127,
+        "endChar": 41
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4d2f9077_7572208f",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "Good question. For now, let\u0027s leave as it is. It depends on the context in which the VAD is used. If an HPF is already in place in APM, then another HPF is not needed. I would prefer to leave this implemented and once the AGC2 work is finalized we check if still needed. I add a TODO to not forget.",
+      "parentUuid": "333d0172_5f0f2100",
+      "range": {
+        "startLine": 28,
+        "startChar": 28,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e4a8cfa_1b29f2f8",
         "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction.h",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b80624d7_0e409a34",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "It is defined in the .cc file as default; note that we can\u0027t define it in the .h file - complex dtors inline are not allowed.",
+      "parentUuid": "1e4a8cfa_1b29f2f8",
+      "range": {
+        "startLine": 33,
+        "startChar": 3,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "26c27bf7_1833e1ae",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1c33023_31375a1e",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06be5ad_f036529c",
         "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35da8f15_9fd5782b",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "I switched to a constant, much easier.",
+      "parentUuid": "f06be5ad_f036529c",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 87,
+        "endChar": 4
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "1050ffb3_e0dd0598",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "Thanks so much for this comment Alex, I\u0027ve found two bugs one of which was awful!\n\nActually, I was struggling a bit while thinking of ways to test FeaturesExtractor. The most important thing was adding a test that covers FeaturesExtractor::CheckSilenceComputeFeatures() 100% - except for the HPF part (the only branch).\n\nThen I asked my self if there was something specific worth testing and that doesn\u0027t belong to the LP residual, the pitch estimation or the spectral features computation parts.\nThe idea I got was to feed the feature extractor with simple signals with which I could write quite obvious expectations.\n\nThe first, and probably, easiest thing to test that came to my mind was to focus on the pitch period value from the pitch vector. That value is normalized and proportional to the estimated pitch period. So I thought that using pure tones with known frequency would be good and to test a relative comparison since the caller doesn\u0027t know which normalization is applied.\n\nThanks to your comment I also spot a bug in the unit test, because the comparison was done like if the pitch feature were proportional to frequency (whereas it\u0027s proportional to period). I think the changes I made help the reader. Still, feel free to suggest alternatives.",
+      "parentUuid": "a55bd395_62e05d6e",
+      "range": {
+        "startLine": 98,
+        "startChar": 12,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e64773c9_785da6c4",
         "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.cc",
         "patchSetId": 2
@@ -174,6 +342,30 @@
       "writtenOn": "2018-05-11T11:37:33Z",
       "side": 1,
       "message": "Hmm, don\u0027t know what I think about vectors and array views pointing in to them. I don\u0027t like it, but can\u0027t think of anything better.",
+      "range": {
+        "startLine": 21,
+        "startChar": 62,
+        "endLine": 21,
+        "endChar": 65
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d09f1f15_6e021f14",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "Note that I\u0027ve added the DCHECKS immediately below, so it\u0027s easy to verify that the view is safe.\n\nLet me give a bit of context. My first goal is to write interfaces using ArrayView args with compile-time known size. My hope is that the compiler does more magic and the code is more optimized.\n\nTo further possibly optimize, I create a view just once to avoid creating views on the fly which may lead to calling the ArrayView ctor for every frame (and for each view).\n\nNot sure whether these optimization really matter, I guess that the code around ArrayView would anyway be inlined since those objects are extremely cheap. WDYT?",
+      "parentUuid": "e64773c9_785da6c4",
       "range": {
         "startLine": 21,
         "startChar": 62,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "fc6ba5af_64cd2fd2",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3239c7e3_d6da50cd",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 10
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1398507_e663ff6a",
         "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
         "patchSetId": 2
@@ -229,6 +445,30 @@
       "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42df1307_c1949acb",
+        "filename": "modules/audio_processing/agc2/rnn_vad/sequence_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T17:46:18Z",
+      "side": 1,
+      "message": "As for resetting to 0, it\u0027s safe since the sequence buffer only accept types for which the cast exists (see the std::is_arithmetic\u003cT\u003e static assert).\n\nThen, allowing different types helped me spotting bugs.\nSo I feel like I owe that template parameter to exist :)\n... but if you still don\u0027t sympathize with it, ask and I will switch to floats.",
+      "parentUuid": "d1398507_e663ff6a",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "2068d61425d639694e78f1049a9ff1870bf43617",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
