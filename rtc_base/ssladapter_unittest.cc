@@ -10,9 +10,11 @@
 
 #include <memory>
 #include <string>
+#include <utility>
 
 #include "rtc_base/gunit.h"
 #include "rtc_base/ipaddress.h"
+#include "rtc_base/ptr_util.h"
 #include "rtc_base/socketstream.h"
 #include "rtc_base/ssladapter.h"
 #include "rtc_base/sslidentity.h"
@@ -20,6 +22,10 @@
 #include "rtc_base/stream.h"
 #include "rtc_base/stringencode.h"
 #include "rtc_base/virtualsocketserver.h"
+#include "test/gmock.h"
+
+using ::testing::_;
+using ::testing::Return;
 
 static const int kTimeout = 5000;
 
@@ -38,6 +44,13 @@ static rtc::AsyncSocket* CreateSocket(const rtc::SSLMode& ssl_mode) {
 static std::string GetSSLProtocolName(const rtc::SSLMode& ssl_mode) {
   return (ssl_mode == rtc::SSL_MODE_DTLS) ? "DTLS" : "TLS";
 }
+
+// Simple mock for the certificate verifier.
+class MockCertVerifier : public rtc::SSLCertificateVerifier {
+ public:
+  virtual ~MockCertVerifier() = default;
+  MOCK_METHOD1(Verify, bool(const rtc::SSLCertificate&));
+};
 
 class SSLAdapterTestDummyClient : public sigslot::has_slots<> {
  public:
@@ -58,6 +71,14 @@ class SSLAdapterTestDummyClient : public sigslot::has_slots<> {
         &SSLAdapterTestDummyClient::OnSSLAdapterReadEvent);
     ssl_adapter_->SignalCloseEvent.connect(this,
         &SSLAdapterTestDummyClient::OnSSLAdapterCloseEvent);
+  }
+
+  void SetIgnoreBadCert(bool ignore_bad_cert) {
+    ssl_adapter_->SetIgnoreBadCert(ignore_bad_cert);
+  }
+
+  void SetCertVerifier(rtc::SSLCertificateVerifier* ssl_cert_verifier) {
+    ssl_adapter_->SetCertVerifier(ssl_cert_verifier);
   }
 
   void SetAlpnProtocols(const std::vector<std::string>& protos) {
@@ -291,6 +312,14 @@ class SSLAdapterTestBase : public testing::Test,
     handshake_wait_ = wait;
   }
 
+  void SetIgnoreBadCert(bool ignore_bad_cert) {
+    client_->SetIgnoreBadCert(ignore_bad_cert);
+  }
+
+  void SetCertVerifier(rtc::SSLCertificateVerifier* ssl_cert_verifier) {
+    client_->SetCertVerifier(ssl_cert_verifier);
+  }
+
   void SetAlpnProtocols(const std::vector<std::string>& protos) {
     client_->SetAlpnProtocols(protos);
   }
@@ -394,13 +423,74 @@ TEST_F(SSLAdapterTestTLS_RSA, TestTLSConnect) {
   TestHandshake(true);
 }
 
+// Test that handshake works with a custom verifier that returns true. RSA.
+TEST_F(SSLAdapterTestTLS_RSA, TestTLSConnectCustomCertVerifierSucceeds) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(true);
+}
+
+// Test that handshake fails with a custom verifier that returns false. RSA.
+TEST_F(SSLAdapterTestTLS_RSA, TestTLSConnectCustomCertVerifierFails) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(false));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(false);
+}
+
 // Test that handshake works, using ECDSA
 TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSConnect) {
   TestHandshake(true);
 }
 
+// Test that handshake works with a custom verifier that returns true. ECDSA.
+TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSConnectCustomCertVerifierSucceeds) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(true);
+}
+
+// Test that handshake fails with a custom verifier that returns false. ECDSA.
+TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSConnectCustomCertVerifierFails) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(false));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(false);
+}
+
 // Test transfer between client and server, using RSA
 TEST_F(SSLAdapterTestTLS_RSA, TestTLSTransfer) {
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer between client and server, using RSA with custom cert verifier.
+TEST_F(SSLAdapterTestTLS_RSA, TestTLSTransferCustomCertVerifier) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
   TestHandshake(true);
   TestTransfer("Hello, world!");
 }
@@ -452,6 +542,20 @@ TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSTransfer) {
   TestTransfer("Hello, world!");
 }
 
+// Test transfer between client and server, using ECDSA with custom cert
+// verifier.
+TEST_F(SSLAdapterTestTLS_ECDSA, TestDTLSTransferCustomCertVerifier) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
 // Test transfer using ALPN with protos as h2 and http/1.1
 TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSALPN) {
   std::vector<std::string> alpn_protos{"h2", "http/1.1"};
@@ -475,9 +579,60 @@ TEST_F(SSLAdapterTestDTLS_RSA, TestDTLSConnect) {
   TestHandshake(true);
 }
 
+// Test that handshake works with a custom verifier that returns true. DTLS_RSA.
+TEST_F(SSLAdapterTestDTLS_RSA, TestDTLSConnectCustomCertVerifierSucceeds) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(true);
+}
+
+// Test that handshake fails with a custom verifier that returns false.
+// DTLS_RSA.
+TEST_F(SSLAdapterTestDTLS_RSA, TestTLSConnectCustomCertVerifierFails) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(false));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(false);
+}
+
 // Test that handshake works, using ECDSA
 TEST_F(SSLAdapterTestDTLS_ECDSA, TestDTLSConnect) {
   TestHandshake(true);
+}
+
+// Test that handshake works with a custom verifier that returns true.
+// DTLS_ECDSA.
+TEST_F(SSLAdapterTestDTLS_ECDSA, TestDTLSConnectCustomCertVerifierSucceeds) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(true);
+}
+
+// Test that handshake fails with a custom verifier that returns false.
+// DTLS_ECDSA.
+TEST_F(SSLAdapterTestDTLS_ECDSA, TestTLSConnectCustomCertVerifierFails) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(false));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(false);
 }
 
 // Test transfer between client and server, using RSA
@@ -486,8 +641,35 @@ TEST_F(SSLAdapterTestDTLS_RSA, TestDTLSTransfer) {
   TestTransfer("Hello, world!");
 }
 
+// Test transfer between client and server, using RSA with custom cert verifier.
+TEST_F(SSLAdapterTestDTLS_RSA, TestDTLSTransferCustomCertVerifier) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
 // Test transfer between client and server, using ECDSA
 TEST_F(SSLAdapterTestDTLS_ECDSA, TestDTLSTransfer) {
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer between client and server, using ECDSA with custom cert
+// verifier.
+TEST_F(SSLAdapterTestDTLS_ECDSA, TestDTLSTransferCustomCertVerifier) {
+  auto mock_verifier = rtc::MakeUnique<MockCertVerifier>();
+  EXPECT_CALL(*mock_verifier, Verify(_)).WillRepeatedly(Return(true));
+  auto cert_verifier =
+      std::unique_ptr<rtc::SSLCertificateVerifier>(std::move(mock_verifier));
+
+  SetIgnoreBadCert(false);
+  SetCertVerifier(cert_verifier.get());
   TestHandshake(true);
   TestTransfer("Hello, world!");
 }
