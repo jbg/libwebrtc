@@ -19,6 +19,7 @@
 #import "RTCVideoTrack+Private.h"
 
 @implementation RTCMediaStream {
+  RTCPeerConnectionFactory *_factory;
   NSMutableArray *_audioTracks;
   NSMutableArray *_videoTracks;
   rtc::scoped_refptr<webrtc::MediaStreamInterface> _nativeMediaStream;
@@ -31,7 +32,10 @@
   std::string nativeId = [NSString stdStringForString:streamId];
   rtc::scoped_refptr<webrtc::MediaStreamInterface> stream =
       factory.nativeFactory->CreateLocalMediaStream(nativeId);
-  return [self initWithNativeMediaStream:stream];
+  if ([self initWithNativeMediaStream:stream] != nil) {
+    _factory = factory;
+  }
+  return self;
 }
 
 - (NSArray<RTCAudioTrack *> *)audioTracks {

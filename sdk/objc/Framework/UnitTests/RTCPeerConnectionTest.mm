@@ -98,4 +98,74 @@ TEST(RTCPeerConnectionTest, ConfigurationGetterTest) {
   }
 }
 
+TEST(RTCPeerConnectionTest, RTCPeerConnectionRTCPeerConnectionFactoryLifetimeTest) {
+  @autoreleasepool {
+    RTCConfiguration *config = [[RTCConfiguration alloc] init];
 
+    RTCMediaConstraints *contraints =
+        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+    RTCPeerConnection *peerConnection =
+        [factory peerConnectionWithConfiguration:config constraints:contraints delegate:nil];
+
+    peerConnection = nil;
+    factory = nil;
+  }
+
+  EXPECT_TRUE(true) << "Expect test does not crash";
+}
+
+TEST(RTCPeerConnectionTest, RTCAudioTrackRTCPeerConnectionFactoryLifetimeTest) {
+  @autoreleasepool {
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+    RTCAudioTrack *audioTrack = [factory audioTrackWithTrackId:@"audioTrack"];
+
+    audioTrack = nil;
+    factory = nil;
+  }
+
+  EXPECT_TRUE(true) << "Expect test does not crash";
+}
+
+TEST(RTCPeerConnectionTest, RTCVideoSourceRTCPeerConnectionFactoryLifetimeTest) {
+  @autoreleasepool {
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+    RTCVideoSource *videoSource = [factory videoSource];
+
+    videoSource = nil;
+    factory = nil;
+  }
+
+  EXPECT_TRUE(true) << "Expect test does not crash";
+}
+
+TEST(RTCPeerConnectionTest, RTCVideoTrackRTCPeerConnectionFactoryLifetimeTest) {
+  @autoreleasepool {
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+    RTCVideoTrack *videoTrack =
+        [factory videoTrackWithSource:[factory videoSource] trackId:@"videoTrack"];
+
+    videoTrack = nil;
+    factory = nil;
+  }
+
+  EXPECT_TRUE(true) << "Expect test does not crash";
+}
+
+TEST(RTCPeerConnectionTest, RTCMediaStreamRTCPeerConnectionFactoryLifetimeTest) {
+  @autoreleasepool {
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+    RTCMediaStream *mediaStream = [factory mediaStreamWithStreamId:@"mediaStream"];
+
+    mediaStream = nil;
+    factory = nil;
+  }
+
+  EXPECT_TRUE(true) << "Expect test does not crash";
+}
