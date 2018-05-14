@@ -61,7 +61,7 @@ class NetworkControllerInterface {
   // Called round trip time has been calculated by protocol specific mechanisms.
   virtual NetworkControlUpdate OnRoundTripTimeUpdate(RoundTripTimeUpdate) = 0;
   // Called when a packet is sent on the network.
-  virtual NetworkControlUpdate OnSentPacket(SentPacket) = 0;
+  virtual NetworkControlUpdate OnSentPacket(SendPacketInfo) = 0;
   // Called when the stream specific configuration has been updated.
   virtual NetworkControlUpdate OnStreamsConfig(StreamsConfig) = 0;
   // Called when target transfer rate constraints has been changed.

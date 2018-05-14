@@ -41,7 +41,7 @@ class GoogCcNetworkController : public NetworkControllerInterface {
   NetworkControlUpdate OnProcessInterval(ProcessInterval msg) override;
   NetworkControlUpdate OnRemoteBitrateReport(RemoteBitrateReport msg) override;
   NetworkControlUpdate OnRoundTripTimeUpdate(RoundTripTimeUpdate msg) override;
-  NetworkControlUpdate OnSentPacket(SentPacket msg) override;
+  NetworkControlUpdate OnSentPacket(SendPacketInfo msg) override;
   NetworkControlUpdate OnStreamsConfig(StreamsConfig msg) override;
   NetworkControlUpdate OnTargetRateConstraints(
       TargetRateConstraints msg) override;

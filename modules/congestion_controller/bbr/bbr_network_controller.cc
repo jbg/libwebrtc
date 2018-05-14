@@ -307,10 +307,10 @@ bool BbrNetworkController::InSlowStart() const {
   return mode_ == STARTUP;
 }
 
-NetworkControlUpdate BbrNetworkController::OnSentPacket(SentPacket msg) {
-  last_send_time_ = msg.send_time;
+NetworkControlUpdate BbrNetworkController::OnSentPacket(SendPacketInfo msg) {
+  last_send_time_ = msg.sent_packet.send_time;
   if (!aggregation_epoch_start_time_) {
-    aggregation_epoch_start_time_ = msg.send_time;
+    aggregation_epoch_start_time_ = msg.sent_packet.send_time;
     aggregation_epoch_bytes_ = DataSize::Zero();
   }
   return NetworkControlUpdate();

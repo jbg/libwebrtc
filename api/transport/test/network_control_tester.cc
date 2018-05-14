@@ -108,12 +108,16 @@ void NetworkControllerTester::RunSimulation(TimeDelta duration,
     }
 
     if (send_packet) {
-      SentPacket sent_packet;
-      sent_packet = next_packet(state_, current_time_, packet_interval);
-      sent_packet.sequence_number = packet_sequence_number_++;
-      Update(&state_, controller_->OnSentPacket(sent_packet));
-      outstanding_packets_.push_back(SimulateSend(
-          sent_packet, packet_interval, propagation_delay, actual_bandwidth));
+      SendPacketInfo msg;
+      msg.sent_packet = next_packet(state_, current_time_, packet_interval);
+      msg.sent_packet.sequence_number = packet_sequence_number_++;
+      msg.data_in_flight = msg.sent_packet.size;
+      for (PacketResult& packet : outstanding_packets_)
+        msg.data_in_flight += packet.sent_packet->size;
+      Update(&state_, controller_->OnSentPacket(msg));
+      outstanding_packets_.push_back(
+          SimulateSend(msg.sent_packet, packet_interval, propagation_delay,
+                       actual_bandwidth));
     }
 
     if (outstanding_packets_.size() >= 2 &&

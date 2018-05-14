@@ -207,10 +207,9 @@ NetworkControlUpdate GoogCcNetworkController::OnRoundTripTimeUpdate(
   return NetworkControlUpdate();
 }
 
-NetworkControlUpdate GoogCcNetworkController::OnSentPacket(
-    SentPacket sent_packet) {
-  alr_detector_->OnBytesSent(sent_packet.size.bytes(),
-                             sent_packet.send_time.ms());
+NetworkControlUpdate GoogCcNetworkController::OnSentPacket(SendPacketInfo msg) {
+  alr_detector_->OnBytesSent(msg.sent_packet.size.bytes(),
+                             msg.sent_packet.send_time.ms());
   return NetworkControlUpdate();
 }
 

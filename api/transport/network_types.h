@@ -91,6 +91,11 @@ struct SentPacket {
   int64_t sequence_number;
 };
 
+struct SendPacketInfo {
+  SentPacket sent_packet;
+  DataSize data_in_flight = DataSize::Zero();
+};
+
 // Transport level feedback
 
 struct RemoteBitrateReport {
