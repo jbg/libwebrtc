@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36f2a21b_f9abcef8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T16:49:10Z",
+      "side": 0,
+      "message": "Nice that we get rid of such a 1:1 mapping function!",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 39
+      },
+      "revId": "b330688ef774e1bf1a8aeb4bc777a9ed84965769",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

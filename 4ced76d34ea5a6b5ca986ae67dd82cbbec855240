@@ -22,6 +22,75 @@
       "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eedb1301_86206fb4",
+        "filename": "modules/audio_processing/aec_dump/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T16:49:10Z",
+      "side": 1,
+      "message": "is it ok like this? shall we be explicit and indicate :aec_dump explicitly? (not sure about what the guide says for build files)",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d4e090e_ff7048a2",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T16:49:10Z",
+      "side": 1,
+      "message": "What about this? Can it be removed as done for InternalAPMStreamsConfig?\nIt would be great because it looks like a duplication of sth that should already be defined for APM.\n\nAnd if we only need to provide a view on flags specifying which APM sub-modules are active, I would define that view inside APM so that when a new sub-module is added, it\u0027s harder to forget to update the view. For instance, here I don\u0027t see any flag for AGC2.\n\nI\u0027m not complaining about your CL at all, just proposing another optimization!",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 24
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6ee4d34_9a6d2318",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-05-14T16:49:10Z",
+      "side": 1,
+      "message": "Why commented? Do we still need this?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
