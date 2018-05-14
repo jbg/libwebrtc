@@ -551,10 +551,12 @@ void SendSideCongestionController::OnSentPacket(
   MaybeUpdateOutstandingData();
   auto packet = transport_feedback_adapter_.GetPacket(sent_packet.packet_id);
   if (packet.has_value()) {
-    SentPacket msg;
-    msg.size = DataSize::bytes(packet->payload_size);
-    msg.send_time = Timestamp::ms(packet->send_time_ms);
-    msg.sequence_number = packet->long_sequence_number;
+    SendPacketInfo msg;
+    msg.sent_packet.size = DataSize::bytes(packet->payload_size);
+    msg.sent_packet.send_time = Timestamp::ms(packet->send_time_ms);
+    msg.sent_packet.sequence_number = packet->long_sequence_number;
+    msg.data_in_flight =
+        DataSize::bytes(transport_feedback_adapter_.GetOutstandingBytes());
     task_queue_->PostTask([this, msg]() {
       RTC_DCHECK_RUN_ON(task_queue_);
       if (controller_)

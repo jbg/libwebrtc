@@ -101,7 +101,7 @@ class BbrNetworkController : public NetworkControllerInterface {
   NetworkControlUpdate OnNetworkAvailability(NetworkAvailability msg) override;
   NetworkControlUpdate OnNetworkRouteChange(NetworkRouteChange msg) override;
   NetworkControlUpdate OnProcessInterval(ProcessInterval msg) override;
-  NetworkControlUpdate OnSentPacket(SentPacket msg) override;
+  NetworkControlUpdate OnSentPacket(SendPacketInfo msg) override;
   NetworkControlUpdate OnStreamsConfig(StreamsConfig msg) override;
   NetworkControlUpdate OnTargetRateConstraints(
       TargetRateConstraints msg) override;
