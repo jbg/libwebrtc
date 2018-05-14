@@ -25,6 +25,8 @@ SendTimeHistory::~SendTimeHistory() = default;
 
 void SendTimeHistory::AddPacket(const PacketFeedback& packet) {
   int64_t unwrapped_seq_num = seq_num_unwrapper_.Unwrap(packet.sequence_number);
+  PacketFeedback packet_copy = packet;
+  packet_copy.long_sequence_number = unwrapped_seq_num;
   history_.insert(std::make_pair(unwrapped_seq_num, packet));
 }
 
