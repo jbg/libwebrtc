@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dba87afe_fec4a030",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-15T09:32:33Z",
+      "side": 1,
+      "message": "It will only be a little faster and only in some scenarios. E.g. when you change something in \u0027audio_processing.h\u0027, ninja does ~100 operations. Now it will do a few more.\n\nI think that the redundant code is too small to be noticeable. E.g. if one runs \u0027clang++ -E\u0027 (to only run the pre-processor) on \u0027audio_processing_impl.cc\u0027, one gets ~80k lines of output. A few non-template structs will hardly affect that.\n\nI\u0027ve changed the formulation.",
+      "parentUuid": "5ff8db76_4327b4c4",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 58
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eedb1301_86206fb4",
         "filename": "modules/audio_processing/aec_dump/BUILD.gn",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c85350df_ed347743",
+        "filename": "modules/audio_processing/aec_dump/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-15T09:32:33Z",
+      "side": 1,
+      "message": "Changed to \u0027../\u0027 for consistency. It\u0027s \u0027modules/audio_processing:audio_processing\u0027. I\u0027m reasonable certain the style guide encourages it.",
+      "parentUuid": "eedb1301_86206fb4",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d4e090e_ff7048a2",
         "filename": "modules/audio_processing/include/aec_dump.h",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2018-05-14T16:49:10Z",
       "side": 1,
       "message": "What about this? Can it be removed as done for InternalAPMStreamsConfig?\nIt would be great because it looks like a duplication of sth that should already be defined for APM.\n\nAnd if we only need to provide a view on flags specifying which APM sub-modules are active, I would define that view inside APM so that when a new sub-module is added, it\u0027s harder to forget to update the view. For instance, here I don\u0027t see any flag for AGC2.\n\nI\u0027m not complaining about your CL at all, just proposing another optimization!",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 24
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a495af3_91fdadba",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-15T09:32:33Z",
+      "side": 1,
+      "message": "I think this one should be left as is. It has an \u0027\u003d\u003d\u0027 operator. The operator is used to not write the same config to aec dump twice. Also, the fields or this struct are collected from several submodules. I think it serves as a good abstraction of the \u0027config\u0027. I think that there is nothing that could replace the struct at the moment.",
+      "parentUuid": "8d4e090e_ff7048a2",
       "range": {
         "startLine": 27,
         "startChar": 7,
@@ -91,6 +163,30 @@
       "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0f1c50b_4b9e7d06",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-05-15T09:32:33Z",
+      "side": 1,
+      "message": "Forgot this. Removed.",
+      "parentUuid": "c6ee4d34_9a6d2318",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "4ced76d34ea5a6b5ca986ae67dd82cbbec855240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
