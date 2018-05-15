@@ -178,9 +178,9 @@ class ArrayView final : public impl::ArrayViewBase<T, Size> {
                   "Array size must match ArrayView size");
   }
 
-  // (Only if size is fixed.) Construct a fixed size ArrayView<T, N> from a
-  // non-const std::array instance. For an ArrayView with variable size, the
-  // used ctor is ArrayView(U& u) instead.
+  // (Only if size is fixed.) Construct a fixed size ArrayView<T, N> where T is
+  // non-const from a non-const std::array instance. For an ArrayView with
+  // variable size, the used ctor is ArrayView(U& u) instead.
   template <typename U,
             size_t N,
             typename std::enable_if<
