@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7e5a0fa_78a9e10a",
+        "filename": "third_party/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-15T06:05:55Z",
+      "side": 1,
+      "message": "I see here you missed a comment I made in the earlier review. You missed one sentence when you copied the above comment.",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 8
+      },
+      "revId": "9d781cb5f916a09f8371f86614a1d292f70e185f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
