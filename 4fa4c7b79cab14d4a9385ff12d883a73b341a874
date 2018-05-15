@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbba59f4_9a743dfa",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-15T21:43:22Z",
+      "side": 1,
+      "message": "May be more comments, e.g.,\nReturns the rectangle in full desktop coordinates to indicate the area\ncovered by the DesktopFrame. I.e. top_left() -\u003e size() / scale_factor().",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "148babfd_be1d697d",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-15T21:43:22Z",
+      "side": 1,
+      "message": "Why is \"Current\" included in the function name?\n\nNit: GetWindowScaleFactor().",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 35
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e5bb1d4_6dd3645d",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-15T21:43:22Z",
+      "side": 1,
+      "message": "I would suggest to use DesktopSize to avoid confusion. The rect.top_left() is not used in this function.",
+      "range": {
+        "startLine": 70,
+        "startChar": 36,
+        "endLine": 70,
+        "endChar": 52
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
