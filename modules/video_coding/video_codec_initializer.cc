@@ -197,7 +197,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
 
       if (video_codec.mode == kScreensharing &&
           config.encoder_specific_settings) {
-        video_codec.VP9()->flexibleMode = true;
         // For now VP9 screensharing use 1 temporal and 2 spatial layers.
         RTC_DCHECK_EQ(1, video_codec.VP9()->numberOfTemporalLayers);
         RTC_DCHECK_EQ(2, video_codec.VP9()->numberOfSpatialLayers);

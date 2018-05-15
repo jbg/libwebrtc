@@ -3576,7 +3576,10 @@ TEST_F(VideoSendStreamTest, Vp9NonFlexModeSmallResolution) {
 // Crashes on Android; bugs.webrtc.org/7401
 #define MAYBE_Vp9FlexModeRefCount DISABLED_Vp9FlexModeRefCount
 #else
-#define MAYBE_Vp9FlexModeRefCount Vp9FlexModeRefCount
+// TODO(ssilkin): Disabled since support of flexible mode is temporally removed
+// from VP9 encoder wrapper.
+#define MAYBE_Vp9FlexModeRefCount DISABLED_Vp9FlexModeRefCount
+// #define MAYBE_Vp9FlexModeRefCount Vp9FlexModeRefCount
 #endif
 TEST_F(VideoSendStreamTest, MAYBE_Vp9FlexModeRefCount) {
   class FlexibleMode : public Vp9HeaderObserver {
