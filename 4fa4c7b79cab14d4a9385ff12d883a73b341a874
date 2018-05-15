@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "09662d10_034c2f20",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-15T22:07:32Z",
+      "side": 1,
+      "message": "I think you may want to use\nstd::fabs(scale_x - scale_y) \u003c\u003d std::number_limits\u003cfloat\u003e::epsilon() * std::max(scale_x, scale_y)\nto avoid the inaccuracy of the floats.\n\nSee https://stackoverflow.com/questions/4548004/how-to-correctly-and-standardly-compare-floats.",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 44
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "148babfd_be1d697d",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 6
@@ -36,6 +59,30 @@
       "writtenOn": "2018-05-15T21:43:22Z",
       "side": 1,
       "message": "Why is \"Current\" included in the function name?\n\nNit: GetWindowScaleFactor().",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 35
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9382822c_3a5b2616",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-05-15T22:07:32Z",
+      "side": 1,
+      "message": "Indeed I would suggest to use GetWindowBounds directly.",
+      "parentUuid": "148babfd_be1d697d",
       "range": {
         "startLine": 69,
         "startChar": 6,
