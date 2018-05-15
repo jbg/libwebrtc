@@ -22,6 +22,30 @@
       "revId": "b330688ef774e1bf1a8aeb4bc777a9ed84965769",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22deb3f3_482f46b7",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-05-15T07:28:39Z",
+      "side": 0,
+      "message": "I agree. But I think it is also worth mentioning that this is only a convenience function for being able to use WriteInitMessage with one parameter.\n\nAn alternative is to actually put these parameters as inputs to WriteInitMessage which as well would accomplish the same thing.",
+      "parentUuid": "36f2a21b_f9abcef8",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 39
+      },
+      "revId": "b330688ef774e1bf1a8aeb4bc777a9ed84965769",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
