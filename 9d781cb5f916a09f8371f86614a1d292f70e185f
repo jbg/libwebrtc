@@ -22,6 +22,30 @@
       "revId": "9d781cb5f916a09f8371f86614a1d292f70e185f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9fa65d3_27409071",
+        "filename": "third_party/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-15T08:06:12Z",
+      "side": 1,
+      "message": "That review wasn\u0027t merged when I created this one. So comment will appear after merge.",
+      "parentUuid": "d7e5a0fa_78a9e10a",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 8
+      },
+      "revId": "9d781cb5f916a09f8371f86614a1d292f70e185f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
