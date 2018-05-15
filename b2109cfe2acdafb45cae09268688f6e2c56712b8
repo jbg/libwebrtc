@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5937834_d3a31ebb",
+        "filename": "api/array_view.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-15T10:48:50Z",
+      "side": 1,
+      "message": "I don\u0027t think you need the is_const conditions; trying to convert const to non-const won\u0027t work anyway (the compiler will just disregard that constructor), and converting non-const to const should be allowed, but this implementation forbids it.\n\nCompare with constructors (5) and (6) here: http://en.cppreference.com/w/cpp/container/span/span",
+      "revId": "b2109cfe2acdafb45cae09268688f6e2c56712b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82c1f70f_078aa006",
+        "filename": "api/array_view_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-15T10:48:50Z",
+      "side": 1,
+      "message": "Also test that a non-const std::array can be used with a rtc::ArrayView\u003cconst float, size\u003e.",
+      "revId": "b2109cfe2acdafb45cae09268688f6e2c56712b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
