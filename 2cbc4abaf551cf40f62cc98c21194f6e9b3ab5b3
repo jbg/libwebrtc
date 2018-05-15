@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96a58e51_cd53b85f",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-15T06:24:34Z",
+      "side": 1,
+      "message": "Can we come up with a better name, or is this the name used in BBR in QUIC? Seems a bit strange to mix SendPacket and SentPacket, and Info is a bit generic...",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291338d8_f899538c",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-15T06:24:34Z",
+      "side": 1,
+      "message": "Looks unused, maybe explain in the description what it\u0027s for?",
+      "range": {
+        "startLine": 96,
+        "startChar": 11,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4f039b6_ecda6455",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-15T06:24:34Z",
+      "side": 1,
+      "message": "Is it important that this is the number of outstanding bytes at the time when the packet was sent?",
+      "range": {
+        "startLine": 558,
+        "startChar": 4,
+        "endLine": 559,
+        "endChar": 75
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
