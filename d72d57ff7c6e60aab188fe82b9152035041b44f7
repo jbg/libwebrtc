@@ -22,6 +22,30 @@
       "revId": "d72d57ff7c6e60aab188fe82b9152035041b44f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93070b0c_22f604f6",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2018-05-15T16:14:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21d0eba6_d30563e6",
+      "range": {
+        "startLine": 289,
+        "startChar": 28,
+        "endLine": 289,
+        "endChar": 49
+      },
+      "revId": "d72d57ff7c6e60aab188fe82b9152035041b44f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
