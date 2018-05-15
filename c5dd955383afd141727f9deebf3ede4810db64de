@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f731723e_f179b228",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-15T13:10:34Z",
+      "side": 1,
+      "message": "Need this to use kVideoPayloadTypeFrequency in VP9 wrapper.",
+      "revId": "c5dd955383afd141727f9deebf3ede4810db64de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa2f9b8e_d73045b7",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-15T13:10:34Z",
+      "side": 1,
+      "message": "Copy-pasted from ScreenshareLayers::UpdateLayerConfig (vp8/screenshare_layers.cc).",
+      "range": {
+        "startLine": 811,
+        "startChar": 1,
+        "endLine": 838,
+        "endChar": 1
+      },
+      "revId": "c5dd955383afd141727f9deebf3ede4810db64de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
