@@ -438,6 +438,9 @@ public class PeerConnection {
     //
     // Can be set to Integer.MAX_VALUE to effectively disable the limit.
     public int maxIPv6Networks;
+    // Exclude link-local network interfaces
+    // from considertaion for gathering ICE candidates.
+    public boolean disableLinkLocalNetworks;
     @Nullable public IntervalRange iceRegatherIntervalRange;
 
     // These values will be overridden by MediaStream constraints if deprecated constraints-based
@@ -485,6 +488,7 @@ public class PeerConnection {
       stunCandidateKeepaliveIntervalMs = null;
       disableIPv6OnWifi = false;
       maxIPv6Networks = 5;
+      disableLinkLocalNetworks = false;
       iceRegatherIntervalRange = null;
       disableIpv6 = false;
       enableDscp = false;
@@ -617,6 +621,11 @@ public class PeerConnection {
     @CalledByNative("RTCConfiguration")
     int getMaxIPv6Networks() {
       return maxIPv6Networks;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    int getDisableLinkLocalNetworks() {
+      return disableLinkLocalNetworks;
     }
 
     @Nullable

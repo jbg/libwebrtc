@@ -203,6 +203,8 @@ void JavaToNativeRTCConfiguration(
       Java_RTCConfiguration_getDisableIPv6OnWifi(jni, j_rtc_config);
   rtc_config->max_ipv6_networks =
       Java_RTCConfiguration_getMaxIPv6Networks(jni, j_rtc_config);
+  rtc_config->disable_link_local_networks =
+      Java_RTCConfiguration_getDisableLinkLocalNetworks(jni, j_rtc_config);
   ScopedJavaLocalRef<jobject> j_ice_regather_interval_range =
       Java_RTCConfiguration_getIceRegatherIntervalRange(jni, j_rtc_config);
   if (!IsNull(jni, j_ice_regather_interval_range)) {
