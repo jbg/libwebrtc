@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7378096b_a142b13e",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T23:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbba59f4_9a743dfa",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09662d10_034c2f20",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b24768a2_bc61b080",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T23:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09662d10_034c2f20",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 44
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "30b6fb0c_3ef54857",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T23:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "148babfd_be1d697d",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 35
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e5bb1d4_6dd3645d",
         "filename": "modules/desktop_capture/mac/window_list_utils.h",
         "patchSetId": 6
@@ -115,6 +187,30 @@
       "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f7dce2f_466bb3ac",
+        "filename": "modules/desktop_capture/mac/window_list_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T23:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e5bb1d4_6dd3645d",
+      "range": {
+        "startLine": 70,
+        "startChar": 36,
+        "endLine": 70,
+        "endChar": 52
+      },
+      "revId": "4fa4c7b79cab14d4a9385ff12d883a73b341a874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
