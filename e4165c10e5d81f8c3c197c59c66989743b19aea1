@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "636c87fa_a987faba",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5979438_4997af7e",
+      "range": {
+        "startLine": 175,
+        "startChar": 41,
+        "endLine": 175,
+        "endChar": 46
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8eac0973_a28f1698",
         "filename": "modules/desktop_capture/desktop_and_cursor_composer.cc",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7b3df19_1d1bba91",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eac0973_a28f1698",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "8ff03151_6b90f532",
+        "filename": "modules/desktop_capture/desktop_and_cursor_composer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38188918_6c24cdf9",
+      "range": {
+        "startLine": 61,
+        "startChar": 69,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db28a81d_1e1aeb12",
         "filename": "modules/desktop_capture/desktop_frame.cc",
         "patchSetId": 4
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "9530cca3_c9a04c88",
+        "filename": "modules/desktop_capture/desktop_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "According to comments to dpi(), the dpi may be set to zero if dpi is unknown. So I think it\u0027s better to check it\u0027s not zero here.",
+      "parentUuid": "db28a81d_1e1aeb12",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d43434a_d92d2cee",
         "filename": "modules/desktop_capture/desktop_frame.cc",
         "patchSetId": 4
@@ -138,6 +234,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3e51b2b_84509d29",
+        "filename": "modules/desktop_capture/desktop_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d43434a_d92d2cee",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 41
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -188,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "d4ebbc07_2cef2c09",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1380823_555a2f6e",
+      "range": {
+        "startLine": 26,
+        "startChar": 38,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aadc1ef3_d9d42d16",
         "filename": "modules/desktop_capture/desktop_frame.h",
         "patchSetId": 4
@@ -208,6 +352,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f0dbf0a_d11f1a68",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadc1ef3_d9d42d16",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -257,6 +425,54 @@
     },
     {
       "key": {
+        "uuid": "f89aee4b_f72375f6",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "496b54f3_69531aaa",
+      "range": {
+        "startLine": 41,
+        "startChar": 49,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5422b7e_a81e178f",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b77a738d_dc830c25",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95532b73_ed1caa03",
         "filename": "modules/desktop_capture/desktop_frame.h",
         "patchSetId": 4
@@ -277,6 +493,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43dda24f_6d236965",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95532b73_ed1caa03",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -303,6 +543,30 @@
     },
     {
       "key": {
+        "uuid": "7bb18fab_1d735df7",
+        "filename": "modules/desktop_capture/desktop_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecb0ea1e_95533f4b",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8deb4600_9743c3df",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 4
@@ -323,6 +587,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ff8e892_8896600d",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8deb4600_9743c3df",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 33
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -349,6 +637,30 @@
     },
     {
       "key": {
+        "uuid": "63e5529c_e1a13070",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74e26315_c7450f56",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 36
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "863024ec_622dbb5b",
         "filename": "modules/desktop_capture/mac/window_list_utils.cc",
         "patchSetId": 4
@@ -369,6 +681,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40c466ff_ae8d947c",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "863024ec_622dbb5b",
+      "range": {
+        "startLine": 264,
+        "startChar": 38,
+        "endLine": 264,
+        "endChar": 0
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -395,6 +731,30 @@
     },
     {
       "key": {
+        "uuid": "0155b77a_885602d7",
+        "filename": "modules/desktop_capture/mac/window_list_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e44deb2e_e66d8e3e",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 3
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2db0838e_522b0831",
         "filename": "modules/desktop_capture/mouse_cursor_monitor.h",
         "patchSetId": 4
@@ -415,6 +775,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78907e72_838e5746",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2db0838e_522b0831",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 72
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -441,6 +825,30 @@
     },
     {
       "key": {
+        "uuid": "a5f72532_68bdd226",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b800d33a_ccb189fa",
+      "range": {
+        "startLine": 71,
+        "startChar": 17,
+        "endLine": 71,
+        "endChar": 46
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb24b352_919d2381",
         "filename": "modules/desktop_capture/mouse_cursor_monitor_mac.mm",
         "patchSetId": 4
@@ -464,6 +872,30 @@
     },
     {
       "key": {
+        "uuid": "0f12e704_9e90ff63",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_mac.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb24b352_919d2381",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 50
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3b43a60_eb40ea37",
         "filename": "modules/desktop_capture/window_capturer_mac.mm",
         "patchSetId": 4
@@ -484,6 +916,30 @@
       "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cfd4ec5_d2f18220",
+        "filename": "modules/desktop_capture/window_capturer_mac.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-05-15T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3b43a60_eb40ea37",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 34
+      },
+      "revId": "e4165c10e5d81f8c3c197c59c66989743b19aea1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
