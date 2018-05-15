@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "18979e16_74aeb037",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-15T06:43:57Z",
+      "side": 1,
+      "message": "Valid point, the purpose really is to contain information relevant at send time but not at feedback time. The SentPacket struct is used both at send and feedback time. Do you you have any suggestion for naming it?",
+      "parentUuid": "96a58e51_cd53b85f",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "291338d8_f899538c",
         "filename": "api/transport/network_types.h",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3c9e945d_ea211672",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-15T06:43:57Z",
+      "side": 1,
+      "message": "I\u0027m adding usage in a later CL for bbr sender. If it seems too implementation specific I could keep track of this value (or at least a close approximation) in the BBR controller. WDYT?",
+      "parentUuid": "291338d8_f899538c",
+      "range": {
+        "startLine": 96,
+        "startChar": 11,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4f039b6_ecda6455",
         "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2018-05-15T06:24:34Z",
       "side": 1,
       "message": "Is it important that this is the number of outstanding bytes at the time when the packet was sent?",
+      "range": {
+        "startLine": 558,
+        "startChar": 4,
+        "endLine": 559,
+        "endChar": 75
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd4ab8a2_196f2a69",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-05-15T06:43:57Z",
+      "side": 1,
+      "message": "That\u0027s how the BBR controller uses the value. In the Quic BBR implementation, it calls an injected data structure to retrieve the amount of data in flight, so I assume it\u0027s inclusive all sent packets.\n\nDo you think there might be performance issues? We could cache the value here or in the adapter, the latter still requires grabbing a lock in the adapter.",
+      "parentUuid": "a4f039b6_ecda6455",
       "range": {
         "startLine": 558,
         "startChar": 4,
