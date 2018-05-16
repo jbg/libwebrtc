@@ -70,6 +70,24 @@
       "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eedf7af_6abede27",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-05-16T13:51:08Z",
+      "side": 1,
+      "message": "If you think of VCMTiming as a class that should only be used by the FrameBuffer and you didn\u0027t break out that functionality to simplify testing, then I agree they can (even should) be tested together (as you said, it is only an implementation detail in that case).\n\nIf you think VCMTiming is meant to only be used by the FrameBuffer class, then this is fine. Otherwise I think you should change it.",
+      "parentUuid": "78ed3a6e_cf4dd099",
+      "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
