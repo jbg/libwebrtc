@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dbdd2c1_e5bc8e9f",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Why does regather_on_failed_networks_interval() need to be passed in, if regather_controller_ already knows it?",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "659a2767_2df5ce42",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Not needed since the caller can just check \"allocator_session() \u0026\u0026 allocator_session()-\u003eIsCleared()\". Fewer public methods means fewer things to maintain and test.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61d562b0_0409d9cc",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Looks like this is no longer public just for unit tests.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f4c24fe_977aa470",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be public; the thread can be passed into the RegatheringController\u0027s constructor.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8adb69ba_413d57e4",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "nit: This is more like \"MaybeRegatherOnAllNetworks\", or \"RegatherOnAllNetworksIfDoneGathering\"",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efd9c5ce_c3b93a46",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "What happens if this is called multiple times? Should it cancel the previously scheduled regathering?",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "331e0fef_dd670aa1",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "nit: This is more like \"MaybeRegatherOnFailedNetworks\", or \"RegatherOnFailedNetworksIfDoneGathering\"",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c409519_1fc09e42",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Shouldn\u0027t use lower_case naming since it\u0027s not a trivial getter",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "504585f2_7fdcba9d",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be forward declared. See https://cs.chromium.org/chromium/src/third_party/webrtc/style-guide.md",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82a11219_d6b7d66e",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Why is a pure virtual interface needed? Is the idea that eventually, an application could create its own RegatheringController subclass and inject it? I\u0027d suggest holding off on adding this interface until that\u0027s actually supported though. Right now there\u0027s not even an IceTransportInterface.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5b528d7_9ea7bbb2",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "This creates a circular dependency between P2PTransportChannel and BasicRegatheringController. Couldn\u0027t it just be given a PortAllocatorSession? Or if needed later, IceTransportInterface (assuming that gets added soon by Steve)?",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56ff0102_6281eb8e",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Should document these methods with comments.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d624bc0a_07be48d3",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Is the \"repeated\" argument needed? Currently it\u0027s always set to true.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c3b2220_336e8cf2",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Doesn\u0027t appear to be used",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0dd9c92_b70aed06",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Do these need to be public?",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7e418aa_fe53a578",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "Does this need to be public?",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0e5b608_0e960997",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T02:15:06Z",
+      "side": 1,
+      "message": "nit: The \"Schedule\" methods put the arguments in the reverse order.",
+      "revId": "adbd17c8ce4e65191649bd9f69569c476078ef61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
