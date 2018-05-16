@@ -34,6 +34,24 @@
       "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eee1e248_553091cf",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-05-16T12:31:57Z",
+      "side": 1,
+      "message": "In general unittests should only test one class. The benefit is that it is easier to find the problem when a test fails if only one class is being tested, and not several at once.",
+      "parentUuid": "ec405ec1_fd289f2e",
+      "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
