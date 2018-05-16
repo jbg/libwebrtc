@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b600689_83e2495c",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:22:57Z",
+      "side": 1,
+      "message": "nit: This code is repeated in all the tests; maybe add a \"SetMockCertVerifier\" helper method, so the tests could look like:\n\n  SetMockCertVerifier(/*return_value\u003d*/true);\n  TestHandshake(/*expect_success\u003d*/true);\n\nI think that will ease maintenance without making the tests much harder to understand.",
+      "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8280db3_5b52e167",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:22:57Z",
+      "side": 1,
+      "message": "nit: When there\u0027s a test you want to repeat for multiple combinations of parameters, TEST_P helps: https://github.com/google/googletest/blob/master/googletest/docs/AdvancedGuide.md#value-parameterized-tests\n\nThe disadvantage is that by default, it generates test names that only reveal the index of the parameter, and not its value, like:\n\nSSLAdapterTest/Parameterized.TestTransfer/0\nSSLAdapterTest/Parameterized.TestTransfer/1\n\nBut it seems you can add a name-generating functor as an optional argument to fix that. For example, here\u0027s one of our existing parameterized tests with a name generator:\n\n   INSTANTIATE_TEST_CASE_P(\n       PeerConnectionIntegrationTest,\n       PeerConnectionIntegrationInteropTest,\n       Values(std::make_tuple(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),\n              std::make_tuple(SdpSemantics::kUnifiedPlan, SdpSemantics::kPlanB)),\n       [](const testing::TestParamInfo\u003cstd::tuple\u003cSdpSemantics, SdpSemantics\u003e\u003e\n              info) -\u003e std::string {\n         if (std::get\u003c0\u003e(info.param) \u003d\u003d SdpSemantics::kPlanB) {\n           return \"PlanBToUnifiedPlan\";\n         } else {\n           return \"UnifiedPlanToPlanB\";\n         }\n       });\n\nSo you can do that to get \"TLS\"/\"DTLS\" and \"RSA\"/\"ECDSA\" to show up in the name (e.g., \"SSLAdapterTest/Parameterized.TestTransfer/TLS_ECDSA\"), while still getting the benefits of using TEST_P (only having to write each test once, and not four times).",
+      "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d881ee75_dce31c74",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:22:57Z",
+      "side": 1,
+      "message": "TLS, not DTLS",
+      "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
