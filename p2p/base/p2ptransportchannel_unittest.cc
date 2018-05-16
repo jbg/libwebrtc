@@ -1412,6 +1412,149 @@ TEST_F(P2PTransportChannelTest, TestIceRegatherOnAllNetworksContinual) {
   DestroyChannels();
 }
 
+// Tests that ICE regathering can be canceled and resumed once via the
+// regathering controller.
+TEST_F(P2PTransportChannelTest,
+       IceRegatheringOnAllNetworksCanBeCanceledAndResumedOnce) {
+  rtc::ScopedFakeClock clock;
+  ConfigureEndpoints(OPEN, OPEN, kOnlyLocalPorts, kOnlyLocalPorts);
+
+  // ep1 gathers continually but ep2 does not.
+  const int kRegatherInterval = 2000;
+  IceConfig config1 = CreateIceConfig(1000, GATHER_CONTINUALLY);
+  config1.regather_all_networks_interval_range.emplace(kRegatherInterval,
+                                                       kRegatherInterval);
+  IceConfig config2;
+  CreateChannels(config1, config2);
+
+  EXPECT_TRUE_SIMULATED_WAIT(ep1_ch1()->receiving() && ep1_ch1()->writable() &&
+                                 ep2_ch1()->receiving() &&
+                                 ep2_ch1()->writable(),
+                             kDefaultTimeout, clock);
+
+  fw()->AddRule(false, rtc::FP_ANY, rtc::FD_ANY, kPublicAddrs[0]);
+  // Timeout value such that all connections are deleted.
+  const int kNetworkGatherDurationShort = 3000;
+  SIMULATED_WAIT(false, kNetworkGatherDurationShort, clock);
+  // Expect regathering to happen once in 3s with 2s interval.
+  EXPECT_EQ(1, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  ep1_ch1()->regather_controller()->CancelScheduledRegathering();
+  SIMULATED_WAIT(false, kNetworkGatherDurationShort, clock);
+  // Expect no regathering happened in the last 3s.
+  EXPECT_EQ(1, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  ep1_ch1()->regather_controller()->ScheduleRegatheringOnAllNetworks(
+      config1.regather_all_networks_interval_range.value(),
+      false /* repeated */);
+  const int kNetworkGatherDurationLong = 11000;
+  // Expect regathering to happen only once in 11s.
+  SIMULATED_WAIT(false, kNetworkGatherDurationLong, clock);
+  EXPECT_EQ(2, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  DestroyChannels();
+}
+
+// Tests that ICE regathering can be canceled and resumed to repeat via the
+// regathering controller.
+TEST_F(P2PTransportChannelTest,
+       IceRegatheringOnAllNetworksCanBeCanceledAndResumedToRepeat) {
+  rtc::ScopedFakeClock clock;
+  ConfigureEndpoints(OPEN, OPEN, kOnlyLocalPorts, kOnlyLocalPorts);
+
+  // ep1 gathers continually but ep2 does not.
+  const int kRegatherInterval = 2000;
+  IceConfig config1 = CreateIceConfig(1000, GATHER_CONTINUALLY);
+  config1.regather_all_networks_interval_range.emplace(kRegatherInterval,
+                                                       kRegatherInterval);
+  IceConfig config2;
+  CreateChannels(config1, config2);
+
+  EXPECT_TRUE_SIMULATED_WAIT(ep1_ch1()->receiving() && ep1_ch1()->writable() &&
+                                 ep2_ch1()->receiving() &&
+                                 ep2_ch1()->writable(),
+                             kDefaultTimeout, clock);
+
+  fw()->AddRule(false, rtc::FP_ANY, rtc::FD_ANY, kPublicAddrs[0]);
+  // Timeout value such that all connections are deleted.
+  const int kNetworkGatherDurationShort = 3000;
+  SIMULATED_WAIT(false, kNetworkGatherDurationShort, clock);
+  // Expect regathering to happen once in 3s with 2s interval.
+  EXPECT_EQ(1, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  ep1_ch1()->regather_controller()->CancelScheduledRegathering();
+  SIMULATED_WAIT(false, kNetworkGatherDurationShort, clock);
+  // Expect no regathering happened in the last 3s.
+  EXPECT_EQ(1, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  ep1_ch1()->regather_controller()->ScheduleRegatheringOnAllNetworks(
+      config1.regather_all_networks_interval_range.value(),
+      true /* repeated */);
+  const int kNetworkGatherDurationLong = 11000;
+  // Expect regathering to happen for another 5 times in 11s with 2s interval.
+  SIMULATED_WAIT(false, kNetworkGatherDurationLong, clock);
+  EXPECT_EQ(6, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  DestroyChannels();
+}
+
+// Tests that the schedule of ICE regathering can be canceled and replaced by a
+// new repeating schedule.
+TEST_F(P2PTransportChannelTest,
+       PreviousScheduleOfIceRegatheringCanBeReplacedByNewRepeatingSchedule) {
+  rtc::ScopedFakeClock clock;
+  ConfigureEndpoints(OPEN, OPEN, kOnlyLocalPorts, kOnlyLocalPorts);
+
+  // ep1 gathers continually but ep2 does not.
+  const int kRegatherIntervalShort = 2000;
+  IceConfig config1 = CreateIceConfig(1000, GATHER_CONTINUALLY);
+  config1.regather_all_networks_interval_range.emplace(kRegatherIntervalShort,
+                                                       kRegatherIntervalShort);
+  IceConfig config2;
+  CreateChannels(config1, config2);
+
+  EXPECT_TRUE_SIMULATED_WAIT(ep1_ch1()->receiving() && ep1_ch1()->writable() &&
+                                 ep2_ch1()->receiving() &&
+                                 ep2_ch1()->writable(),
+                             kDefaultTimeout, clock);
+
+  fw()->AddRule(false, rtc::FP_ANY, rtc::FD_ANY, kPublicAddrs[0]);
+  // Timeout value such that all connections are deleted.
+  const int kNetworkGatherDurationShort = 3000;
+  ep1_ch1()->regather_controller()->CancelScheduledRegathering();
+  SIMULATED_WAIT(false, kNetworkGatherDurationShort, clock);
+  // Expect no regathering happened in the last 3s after regathering is
+  // canceled.
+  EXPECT_EQ(0, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  // Resume the regathering.
+  ep1_ch1()->regather_controller()->ScheduleRegatheringOnAllNetworks(
+      config1.regather_all_networks_interval_range.value(),
+      true /* repeated */);
+  SIMULATED_WAIT(false, kRegatherIntervalShort - 500, clock);
+  // Reschedule repeating regathering. We should not have regathered yet.
+  const int kRegatherIntervalLong = 5000;
+  config1.regather_all_networks_interval_range.emplace(kRegatherIntervalLong,
+                                                       kRegatherIntervalLong);
+  ep1_ch1()->regather_controller()->ScheduleRegatheringOnAllNetworks(
+      config1.regather_all_networks_interval_range.value(),
+      true /* repeated */);
+  const int kNetworkGatherDurationLong = 11000;
+  SIMULATED_WAIT(false, kNetworkGatherDurationLong, clock);
+  // Expect regathering to happen twice in the last 13.5s with 5s interval.
+  EXPECT_EQ(2, GetMetricsObserver(0)->GetEnumCounter(
+                   webrtc::kEnumCounterIceRegathering,
+                   static_cast<int>(IceRegatheringReason::OCCASIONAL_REFRESH)));
+  DestroyChannels();
+}
+
 // Test that ICE periodic regathering can change the selected connection on the
 // specified interval and that the peers can communicate over the new
 // connection. The test is parameterized to test that it works when regathering

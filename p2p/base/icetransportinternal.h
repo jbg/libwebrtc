@@ -23,6 +23,7 @@
 
 namespace webrtc {
 class MetricsObserverInterface;
+class IceRestartControllerInterface;
 }
 
 namespace cricket {
