@@ -786,6 +786,7 @@ if (is_ios || is_mac) {
           "objc/Framework/UnitTests/RTCIceServerTest.mm",
           "objc/Framework/UnitTests/RTCIntervalRangeTests.mm",
           "objc/Framework/UnitTests/RTCMediaConstraintsTest.mm",
+          "objc/Framework/UnitTests/RTCPeerConnectionFactoryTest.mm",
           "objc/Framework/UnitTests/RTCPeerConnectionTest.mm",
           "objc/Framework/UnitTests/RTCSessionDescriptionTest.mm",
           "objc/Framework/UnitTests/RTCTracingTest.mm",

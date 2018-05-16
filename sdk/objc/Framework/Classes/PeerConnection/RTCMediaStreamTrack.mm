@@ -20,6 +20,7 @@ NSString * const kRTCMediaStreamTrackKindVideo =
     @(webrtc::MediaStreamTrackInterface::kVideoKind);
 
 @implementation RTCMediaStreamTrack {
+  RTCPeerConnectionFactory *_factory;
   rtc::scoped_refptr<webrtc::MediaStreamTrackInterface> _nativeTrack;
   RTCMediaStreamTrackType _type;
 }
@@ -71,6 +72,10 @@ NSString * const kRTCMediaStreamTrackKindVideo =
 
 - (rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack {
   return _nativeTrack;
+}
+
+- (RTCPeerConnectionFactory *)factory {
+  return _factory;
 }
 
 - (instancetype)initWithNativeTrack:

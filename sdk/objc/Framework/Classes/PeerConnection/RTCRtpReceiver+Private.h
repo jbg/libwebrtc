@@ -34,8 +34,8 @@ class RtpReceiverDelegateAdapter : public RtpReceiverObserverInterface {
     rtc::scoped_refptr<webrtc::RtpReceiverInterface> nativeRtpReceiver;
 
 /** Initialize an RTCRtpReceiver with a native RtpReceiverInterface. */
-- (instancetype)initWithNativeRtpReceiver:
-    (rtc::scoped_refptr<webrtc::RtpReceiverInterface>)nativeRtpReceiver
+- (instancetype)initWithFactory:(RTCPeerConnectionFactory*)factory
+              nativeRtpReceiver:(rtc::scoped_refptr<webrtc::RtpReceiverInterface>)nativeRtpReceiver
     NS_DESIGNATED_INITIALIZER;
 
 + (RTCRtpMediaType)mediaTypeForNativeMediaType:(cricket::MediaType)nativeMediaType;

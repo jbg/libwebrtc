@@ -97,5 +97,3 @@ TEST(RTCPeerConnectionTest, ConfigurationGetterTest) {
     [test testConfigurationGetter];
   }
 }
-
-

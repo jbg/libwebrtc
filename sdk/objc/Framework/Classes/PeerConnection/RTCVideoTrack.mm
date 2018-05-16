@@ -17,6 +17,7 @@
 #import "RTCVideoSource+Private.h"
 
 @implementation RTCVideoTrack {
+  RTCPeerConnectionFactory *_factory;
   NSMutableArray *_adapters;
 }
 
@@ -34,16 +35,18 @@
                                               source.nativeVideoSource);
   if (self = [self initWithNativeTrack:track type:RTCMediaStreamTrackTypeVideo]) {
     _source = source;
+    _factory = factory;
   }
   return self;
 }
 
-- (instancetype)initWithNativeTrack:
-    (rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeMediaTrack
-                               type:(RTCMediaStreamTrackType)type {
+- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+                    nativeTrack:
+                        (rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeMediaTrack
+                           type:(RTCMediaStreamTrackType)type {
   NSParameterAssert(nativeMediaTrack);
   NSParameterAssert(type == RTCMediaStreamTrackTypeVideo);
-  if (self = [super initWithNativeTrack:nativeMediaTrack type:type]) {
+  if (self = [super initWithFactory:factory nativeTrack:nativeMediaTrack type:type]) {
     _adapters = [NSMutableArray array];
   }
   return self;
@@ -60,7 +63,7 @@
     rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> source =
         self.nativeVideoTrack->GetSource();
     if (source) {
-      _source = [[RTCVideoSource alloc] initWithNativeVideoSource:source.get()];
+      _source = [[RTCVideoSource alloc] initWithFactory:_factory nativeVideoSource:source.get()];
     }
   }
   return _source;

@@ -226,7 +226,8 @@ void PeerConnectionDelegateAdapter::OnAddTrack(
       RTCMediaStream *mediaStream = [[RTCMediaStream alloc] initWithNativeMediaStream:nativeStream];
       [mediaStreams addObject:mediaStream];
     }
-    RTCRtpReceiver *rtpReceiver = [[RTCRtpReceiver alloc] initWithNativeRtpReceiver:receiver];
+    RTCRtpReceiver *rtpReceiver =
+        [[RTCRtpReceiver alloc] initWithFactory:peer_connection.factory nativeRtpReceiver:receiver];
 
     [peer_connection.delegate peerConnection:peer_connection
                               didAddReceiver:rtpReceiver
@@ -238,6 +239,7 @@ void PeerConnectionDelegateAdapter::OnAddTrack(
 
 
 @implementation RTCPeerConnection {
+  RTCPeerConnectionFactory *_factory;
   NSMutableArray<RTCMediaStream *> *_localStreams;
   std::unique_ptr<webrtc::PeerConnectionDelegateAdapter> _observer;
   rtc::scoped_refptr<webrtc::PeerConnectionInterface> _peerConnection;
@@ -270,6 +272,7 @@ void PeerConnectionDelegateAdapter::OnAddTrack(
     if (!_peerConnection) {
       return nil;
     }
+    _factory = factory;
     _localStreams = [[NSMutableArray alloc] init];
     _delegate = delegate;
   }
@@ -721,6 +724,10 @@ void PeerConnectionDelegateAdapter::OnAddTrack(
 
 - (rtc::scoped_refptr<webrtc::PeerConnectionInterface>)nativePeerConnection {
   return _peerConnection;
+}
+
+- (RTCPeerConnectionFactory *)factory {
+  return _factory;
 }
 
 @end

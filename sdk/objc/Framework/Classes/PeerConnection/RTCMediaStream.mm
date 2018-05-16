@@ -19,6 +19,7 @@
 #import "RTCVideoTrack+Private.h"
 
 @implementation RTCMediaStream {
+  RTCPeerConnectionFactory *_factory;
   NSMutableArray *_audioTracks;
   NSMutableArray *_videoTracks;
   rtc::scoped_refptr<webrtc::MediaStreamInterface> _nativeMediaStream;
@@ -31,7 +32,7 @@
   std::string nativeId = [NSString stdStringForString:streamId];
   rtc::scoped_refptr<webrtc::MediaStreamInterface> stream =
       factory.nativeFactory->CreateLocalMediaStream(nativeId);
-  return [self initWithNativeMediaStream:stream];
+  return [self initWithFactory:factory nativeMediaStream:stream];
 }
 
 - (NSArray<RTCAudioTrack *> *)audioTracks {
@@ -91,8 +92,9 @@
   return _nativeMediaStream;
 }
 
-- (instancetype)initWithNativeMediaStream:
-    (rtc::scoped_refptr<webrtc::MediaStreamInterface>)nativeMediaStream {
+- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+              nativeMediaStream:
+                  (rtc::scoped_refptr<webrtc::MediaStreamInterface>)nativeMediaStream {
   NSParameterAssert(nativeMediaStream);
   if (self = [super init]) {
     webrtc::AudioTrackVector audioTracks = nativeMediaStream->GetAudioTracks();
@@ -101,18 +103,19 @@
     _audioTracks = [NSMutableArray arrayWithCapacity:audioTracks.size()];
     _videoTracks = [NSMutableArray arrayWithCapacity:videoTracks.size()];
     _nativeMediaStream = nativeMediaStream;
+    _factory = factory;
 
     for (auto &track : audioTracks) {
       RTCMediaStreamTrackType type = RTCMediaStreamTrackTypeAudio;
       RTCAudioTrack *audioTrack =
-          [[RTCAudioTrack alloc] initWithNativeTrack:track type:type];
+          [[RTCAudioTrack alloc] initWithFactory:_factory nativeTrack:track type:type];
       [_audioTracks addObject:audioTrack];
     }
 
     for (auto &track : videoTracks) {
       RTCMediaStreamTrackType type = RTCMediaStreamTrackTypeVideo;
       RTCVideoTrack *videoTrack =
-          [[RTCVideoTrack alloc] initWithNativeTrack:track type:type];
+          [[RTCVideoTrack alloc] initWithFactory:_factory nativeTrack:track type:type];
       [_videoTracks addObject:videoTrack];
     }
   }
