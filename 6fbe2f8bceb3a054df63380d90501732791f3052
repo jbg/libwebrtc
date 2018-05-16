@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "266ac668_68eb5277",
+        "filename": "modules/video_coding/packet_buffer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-05-16T14:03:24Z",
+      "side": 1,
+      "message": "Yes, when we didn\u0027t clear on codec change we could get some type confusion by interpreting the |codecHeader| union as a H264 header. This caused us to interpret some unrelated data as the |nalu_length|.\n\nI used a CHECK since |nalu_length| should already be validated by us at this point.",
+      "parentUuid": "9d338375_4c4f6cc0",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 46
+      },
+      "revId": "6fbe2f8bceb3a054df63380d90501732791f3052",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "362e8bc6_233c7d94",
         "filename": "modules/video_coding/video_packet_buffer_unittest.cc",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "6fbe2f8bceb3a054df63380d90501732791f3052",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de2a3909_fa23df4e",
+        "filename": "modules/video_coding/video_packet_buffer_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-05-16T14:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "362e8bc6_233c7d94",
+      "revId": "6fbe2f8bceb3a054df63380d90501732791f3052",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
