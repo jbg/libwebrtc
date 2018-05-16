@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "605f65d1_bb1f6609",
+        "filename": "modules/video_coding/video_packet_buffer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-16T15:17:04Z",
+      "side": 1,
+      "message": "Maybe \"ClearOnMidFrameCodecChange\"?",
+      "range": {
+        "startLine": 774,
+        "startChar": 25,
+        "endLine": 774,
+        "endChar": 43
+      },
+      "revId": "e85f30b62a0f64b581d46832169a19ab14d0aeb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
