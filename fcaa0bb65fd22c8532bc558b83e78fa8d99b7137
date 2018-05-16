@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "099b68a3_91e61341",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T20:10:16Z",
+      "side": 1,
+      "message": "nit: add paragraph breaks before \"It also changes...\" and \"This change is part of...\"",
+      "revId": "fcaa0bb65fd22c8532bc558b83e78fa8d99b7137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "254598e1_2b0401bd",
+        "filename": "api/rtpparameters.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T20:10:16Z",
+      "side": 1,
+      "message": "nit: Do these methods need to be part of the API, or could they go in rtpsender.cc?",
+      "revId": "fcaa0bb65fd22c8532bc558b83e78fa8d99b7137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "229cfc23_f47287e2",
+        "filename": "api/rtpparameters.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T20:10:16Z",
+      "side": 1,
+      "message": "nit: The whole \"per sender\" concept could be explained in a bit more detail.",
+      "revId": "fcaa0bb65fd22c8532bc558b83e78fa8d99b7137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb857c0d_7506a247",
+        "filename": "pc/rtpsenderreceiver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T20:10:16Z",
+      "side": 1,
+      "message": "ASSERT_EQ may be more appropriate",
+      "revId": "fcaa0bb65fd22c8532bc558b83e78fa8d99b7137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
