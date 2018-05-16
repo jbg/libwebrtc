@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9aba564f_fa7544df",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-05-16T11:12:17Z",
+      "side": 1,
+      "message": "To avoid having to depend on the behavior of the VCMTiming class I suggest you update the VCMTimingFake class with set_min_playout_delay/set_max_playout_delay functions instead.",
+      "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
