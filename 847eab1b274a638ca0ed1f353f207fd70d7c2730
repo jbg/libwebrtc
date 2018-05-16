@@ -52,6 +52,24 @@
       "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78ed3a6e_cf4dd099",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-16T13:13:00Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a benefit, but I also don\u0027t like mocking things that doesn\u0027t have to be mocked. In this case it becomes a bit extreme since FrameBuffer can\u0027t function correctly without VCMTiming, so it really is a part of the class IMO. Testing each class separately becomes closer to testing implementation details, rather than testing the behavior.\n\nIf you feel strongly about it I could change, but I don\u0027t think I agree. :)",
+      "parentUuid": "eee1e248_553091cf",
+      "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
