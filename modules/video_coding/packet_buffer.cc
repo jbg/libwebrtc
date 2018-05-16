@@ -66,6 +66,11 @@ bool PacketBuffer::InsertPacket(VCMPacket* packet) {
   {
     rtc::CritScope lock(&crit_);
 
+    if (last_video_codec_type_ != packet->codec) {
+      Clear();
+      last_video_codec_type_.emplace(packet->codec);
+    }
+
     OnTimestampReceived(packet->timestamp);
 
     uint16_t seq_num = packet->seqNum;
@@ -307,6 +312,9 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
           const RTPVideoHeaderH264& header =
               data_buffer_[start_index].video_header.codecHeader.H264;
           for (size_t j = 0; j < header.nalus_length; ++j) {
+            if (j >= kMaxNalusPerPacket)
+              return found_frames;
+
             if (header.nalus[j].type == H264::NaluType::kSps) {
               has_h264_sps = true;
             } else if (header.nalus[j].type == H264::NaluType::kPps) {
