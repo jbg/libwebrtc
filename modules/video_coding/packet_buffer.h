@@ -178,6 +178,8 @@ class PacketBuffer {
   // Stores the same unique timestamps in the order of insertion.
   std::queue<uint32_t> rtp_timestamps_history_queue_ RTC_GUARDED_BY(crit_);
 
+  rtc::Optional<VideoCodecType> last_video_codec_type_ RTC_GUARDED_BY(crit_);
+
   mutable volatile int ref_count_ = 0;
 };
 
