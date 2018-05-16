@@ -13,6 +13,7 @@
 
 #include <memory>
 #include <string>
+
 #include <vector>
 
 #include "api/video_codecs/video_decoder.h"
@@ -37,8 +38,8 @@ class FakeWebRtcVideoDecoder : public webrtc::VideoDecoder {
 
   int32_t InitDecode(const webrtc::VideoCodec*, int32_t) override;
   int32_t Decode(const webrtc::EncodedImage&,
-                 bool,
-                 const webrtc::CodecSpecificInfo*,
+                         bool,
+                         const webrtc::CodecSpecificInfo*,
                  int64_t) override;
   int32_t RegisterDecodeCompleteCallback(
       webrtc::DecodedImageCallback*) override;
