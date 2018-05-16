@@ -745,6 +745,54 @@ TEST_F(TestPacketBuffer, PacketTimestamps) {
   EXPECT_FALSE(packet_keyframe_ms);
 }
 
+TEST_F(TestPacketBuffer, CodecChanged) {
+  VCMPacket packet;
+  packet.is_first_packet_in_frame = true;
+  packet.markerBit = true;
+  packet.sizeBytes = 0;
+  packet.dataPtr = nullptr;
+
+  packet.codec = kVideoCodecVP8;
+  packet.timestamp = 1;
+  packet.seqNum = 1;
+  packet.frameType = kVideoFrameKey;
+  EXPECT_TRUE(packet_buffer_->InsertPacket(&packet));
+
+  packet.timestamp = 2;
+  packet.seqNum = 2;
+  packet.frameType = kVideoFrameDelta;
+  EXPECT_TRUE(packet_buffer_->InsertPacket(&packet));
+
+  packet.codec = kVideoCodecH264;
+  packet.seqNum = 3;
+  packet.frameType = kVideoFrameKey;
+  EXPECT_TRUE(packet_buffer_->InsertPacket(&packet));
+
+  EXPECT_EQ(3UL, frames_from_callback_.size());
+}
+
+TEST_F(TestPacketBuffer, ClearOnCodecChange) {
+  VCMPacket packet;
+  packet.codec = kVideoCodecVP8;
+  packet.timestamp = 1;
+  packet.seqNum = 1;
+  packet.frameType = kVideoFrameKey;
+  packet.is_first_packet_in_frame = true;
+  packet.markerBit = false;
+  packet.sizeBytes = 0;
+  packet.dataPtr = nullptr;
+  EXPECT_TRUE(packet_buffer_->InsertPacket(&packet));
+
+  packet.codec = kVideoCodecH264;
+  packet.seqNum = 2;
+  packet.frameType = kVideoFrameKey;
+  packet.is_first_packet_in_frame = false;
+  packet.markerBit = true;
+  EXPECT_TRUE(packet_buffer_->InsertPacket(&packet));
+
+  EXPECT_EQ(0UL, frames_from_callback_.size());
+}
+
 TEST_P(TestPacketBufferH264Parameterized, OneFrameFillBuffer) {
   InsertH264(0, kKeyFrame, kFirst, kNotLast, 1000);
   for (int i = 1; i < kStartSize - 1; ++i)
