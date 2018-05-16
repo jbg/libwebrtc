@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b3c12ba_84091279",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:42:28Z",
+      "side": 1,
+      "message": "nit: Missing newline between 1-line summary and description below",
+      "revId": "97f844b04beb55f30157118f4357425bbe40de20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ac98818_43d2f966",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3908,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:42:28Z",
+      "side": 1,
+      "message": "nit: Don\u0027t necessarily need to wait for ICE to complete, if this test is just intended to verify \"can send media over TCP/TURN\".",
+      "revId": "97f844b04beb55f30157118f4357425bbe40de20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "473060fb_2798b936",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3913,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:42:28Z",
+      "side": 1,
+      "message": "There\u0027s no ICE restart in this test.",
+      "revId": "97f844b04beb55f30157118f4357425bbe40de20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c11aa0b3_9468737b",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3916,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:42:28Z",
+      "side": 1,
+      "message": "nit: Just as a matter of style, ASSERT is typically used to verify assumptions (similar to RTC_DCHECK) or abort a test early when it would crash otherwise. Basically, situations where \"it wouldn\u0027t make sense proceeding with the test unless this condition holds\". Whereas EXPECT is used for the main thing the test is trying to verify. So I\u0027d suggest EXPECT here.\n\nSee also https://stackoverflow.com/questions/2565299/using-assert-and-expect-in-googletest",
+      "revId": "97f844b04beb55f30157118f4357425bbe40de20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ed083db_1babad47",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3919,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-16T18:42:28Z",
+      "side": 1,
+      "message": "Actually... Don\u0027t think this is necessary. Neither for the above test.\n\nIt was true for the tests further above, due to the ScopedFakeClock and TurnCustomizer. The PeerConnection could blow up if it suddenly sees the fake clock replaced with a real one, or if it tries to access a TurnCustomizer that\u0027s been deleted. But since this test passes ownership of the certificate verifier to the PeerConnection, that issue doesn\u0027t exist here.",
+      "revId": "97f844b04beb55f30157118f4357425bbe40de20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
