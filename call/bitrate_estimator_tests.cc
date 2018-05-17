@@ -136,9 +136,8 @@ class BitrateEstimatorTest : public test::CallTest {
 
   virtual void TearDown() {
     task_queue_.SendTask([this]() {
-      for (auto* stream : streams_) {
+      for (auto& stream : streams_) {
         stream->StopSending();
-        delete stream;
       }
       streams_.clear();
 
@@ -227,7 +226,7 @@ class BitrateEstimatorTest : public test::CallTest {
   std::unique_ptr<Call> sender_call_;
   std::unique_ptr<Call> receiver_call_;
   VideoReceiveStream::Config receive_config_;
-  std::vector<Stream*> streams_;
+  std::vector<std::unique_ptr<Stream>> streams_;
 };
 
 static const char* kAbsSendTimeLog =
@@ -241,7 +240,7 @@ TEST_F(BitrateEstimatorTest, InstantiatesTOFPerDefaultForVideo) {
         RtpExtension(RtpExtension::kTimestampOffsetUri, kTOFExtensionId));
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
   });
   EXPECT_TRUE(receiver_log_.Wait());
 }
@@ -254,7 +253,7 @@ TEST_F(BitrateEstimatorTest, ImmediatelySwitchToASTForVideo) {
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
     receiver_log_.PushExpectedLogLine("Switching to absolute send time RBE.");
     receiver_log_.PushExpectedLogLine(kAbsSendTimeLog);
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
   });
   EXPECT_TRUE(receiver_log_.Wait());
 }
@@ -265,7 +264,7 @@ TEST_F(BitrateEstimatorTest, SwitchesToASTForVideo) {
         RtpExtension(RtpExtension::kTimestampOffsetUri, kTOFExtensionId));
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
   });
   EXPECT_TRUE(receiver_log_.Wait());
 
@@ -274,7 +273,7 @@ TEST_F(BitrateEstimatorTest, SwitchesToASTForVideo) {
         RtpExtension(RtpExtension::kAbsSendTimeUri, kASTExtensionId);
     receiver_log_.PushExpectedLogLine("Switching to absolute send time RBE.");
     receiver_log_.PushExpectedLogLine(kAbsSendTimeLog);
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
   });
   EXPECT_TRUE(receiver_log_.Wait());
 }
@@ -287,7 +286,7 @@ TEST_F(BitrateEstimatorTest, DISABLED_SwitchesToASTThenBackToTOFForVideo) {
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
     receiver_log_.PushExpectedLogLine(kAbsSendTimeLog);
     receiver_log_.PushExpectedLogLine(kSingleStreamLog);
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
   });
   EXPECT_TRUE(receiver_log_.Wait());
 
@@ -296,7 +295,7 @@ TEST_F(BitrateEstimatorTest, DISABLED_SwitchesToASTThenBackToTOFForVideo) {
         RtpExtension(RtpExtension::kAbsSendTimeUri, kASTExtensionId);
     receiver_log_.PushExpectedLogLine(kAbsSendTimeLog);
     receiver_log_.PushExpectedLogLine("Switching to absolute send time RBE.");
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
   });
   EXPECT_TRUE(receiver_log_.Wait());
 
@@ -306,7 +305,7 @@ TEST_F(BitrateEstimatorTest, DISABLED_SwitchesToASTThenBackToTOFForVideo) {
     receiver_log_.PushExpectedLogLine(kAbsSendTimeLog);
     receiver_log_.PushExpectedLogLine(
         "WrappingBitrateEstimator: Switching to transmission time offset RBE.");
-    streams_.push_back(new Stream(this));
+    streams_.push_back(rtc::MakeUnique<Stream>(this));
     streams_[0]->StopSending();
     streams_[1]->StopSending();
   });
