@@ -10,6 +10,7 @@
 
 #include "api/video/i420_buffer.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/video_coding/codecs/test/video_codec_unittest.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
@@ -423,6 +424,42 @@ TEST_F(TestVp9Impl,
       }
     }
   }
+}
+
+class TestVp9ImplFrameDropping : public TestVp9Impl {
+ protected:
+  void ModifyCodecSettings(VideoCodec* codec_settings) override {
+    webrtc::test::CodecSettings(kVideoCodecVP9, codec_settings);
+    // We need to encode quite a lot of frames in this test. Use low resolution
+    // to reduce execution time.
+    codec_settings->width = 64;
+    codec_settings->height = 64;
+    codec_settings->mode = kScreensharing;
+  }
+};
+
+TEST_F(TestVp9ImplFrameDropping, PreEncodeFrameDropping) {
+  const size_t num_frames_to_encode = 100;
+  const float input_framerate_fps = 30.0;
+  const float video_duration_secs = num_frames_to_encode / input_framerate_fps;
+  const float expected_framerate_fps = 5.0f;
+  const float max_framerate_mismatch_pct = 10.0;
+
+  VideoFrame* input_frame = NextInputFrame();
+  for (size_t frame_num = 0; frame_num < num_frames_to_encode; ++frame_num) {
+    EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
+              encoder_->Encode(*input_frame, nullptr, nullptr));
+    const size_t timestamp = input_frame->timestamp() +
+                             kVideoPayloadTypeFrequency / input_framerate_fps;
+    input_frame->set_timestamp(static_cast<uint32_t>(timestamp));
+  }
+
+  const size_t num_encoded_frames = GetNumEncodedFrames();
+  const float encoded_framerate_fps = num_encoded_frames / video_duration_secs;
+  const float framerate_mismatch_pct =
+      100 * std::fabs(expected_framerate_fps - encoded_framerate_fps) /
+      expected_framerate_fps;
+  EXPECT_LE(framerate_mismatch_pct, max_framerate_mismatch_pct);
 }
 
 }  // namespace webrtc
