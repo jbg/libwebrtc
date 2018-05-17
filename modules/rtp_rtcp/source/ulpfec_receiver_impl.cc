@@ -170,6 +170,8 @@ int32_t UlpfecReceiverImpl::AddReceivedRedPacket(
     ++packet_counter_.num_fec_packets;
 
     // Copy FEC payload data.
+    RTC_DCHECK_LE(payload_data_length - red_header_length - block_length,
+                  IP_PACKET_SIZE);
     memcpy(second_received_packet->pkt->data,
            incoming_rtp_packet + header.headerLength + red_header_length +
                block_length,
@@ -180,7 +182,9 @@ int32_t UlpfecReceiverImpl::AddReceivedRedPacket(
 
   } else if (received_packet->is_fec) {
     ++packet_counter_.num_fec_packets;
+
     // everything behind the RED header
+    RTC_DCHECK_LE(payload_data_length - red_header_length, IP_PACKET_SIZE);
     memcpy(received_packet->pkt->data,
            incoming_rtp_packet + header.headerLength + red_header_length,
            payload_data_length - red_header_length);
@@ -190,6 +194,7 @@ int32_t UlpfecReceiverImpl::AddReceivedRedPacket(
 
   } else {
     // Copy RTP header.
+    RTC_DCHECK_LE(header.headerLength, IP_PACKET_SIZE);
     memcpy(received_packet->pkt->data, incoming_rtp_packet,
            header.headerLength);
 
