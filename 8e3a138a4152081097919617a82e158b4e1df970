@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eba4f98d_6d99810d",
+        "filename": "tools_webrtc/ensure_webcam_is_running.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T10:03:44Z",
+      "side": 1,
+      "message": "This surprises me a bit. I\u0027d say the unix convention would be something like sh -c \"my_command arg1 arg2\", but it appears you\u0027re following the convention for gtest_parallel_wrapper.py and the like, so I think this is fine.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "8e3a138a4152081097919617a82e158b4e1df970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "210d99f2_112580a6",
+        "filename": "tools_webrtc/ensure_webcam_is_running.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T10:03:44Z",
+      "side": 1,
+      "message": "This reads to me as if you\u0027re fixing PYTHONPATH, so what about _UseSystemPython? Well, I guess that\u0027s an ambiguous term as well, so perhaps _ForcePythonInterpreter is a better name? Your call.",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 18
+      },
+      "revId": "8e3a138a4152081097919617a82e158b4e1df970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f3b502_886e581c",
+        "filename": "tools_webrtc/ensure_webcam_is_running.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T10:03:44Z",
+      "side": 1,
+      "message": "Why this?",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 104,
+        "endChar": 14
+      },
+      "revId": "8e3a138a4152081097919617a82e158b4e1df970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1544091c_da7bc3b8",
+        "filename": "tools_webrtc/mb/gn_isolate_map.pyl",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T10:03:44Z",
+      "side": 1,
+      "message": "use_sw_webcam? Or actually maybe this is fine, the test doesn\u0027t care as long as it gets a functioning webcam.",
+      "range": {
+        "startLine": 124,
+        "startChar": 5,
+        "endLine": 124,
+        "endChar": 15
+      },
+      "revId": "8e3a138a4152081097919617a82e158b4e1df970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
