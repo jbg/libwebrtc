@@ -22,6 +22,30 @@
       "revId": "d9b60a5bb46c23445fa7006dc95b6884ae1956fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7890ccc_336f03b0",
+        "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-17T15:40:13Z",
+      "side": 1,
+      "message": "Replaced.",
+      "parentUuid": "1a2b03e1_7123897d",
+      "range": {
+        "startLine": 462,
+        "startChar": 64,
+        "endLine": 462,
+        "endChar": 0
+      },
+      "revId": "d9b60a5bb46c23445fa7006dc95b6884ae1956fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
