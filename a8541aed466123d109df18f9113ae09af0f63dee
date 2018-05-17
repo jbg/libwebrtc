@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "74d83839_8e033c6a",
+        "filename": "modules/audio_device/audio_device_name.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Done. Added all four (copy and move) just in case.",
+      "parentUuid": "5f908d81_d2087f1b",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dfc58085_01196b8f",
         "filename": "modules/audio_device/audio_device_name.h",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2018-05-17T10:09:22Z",
       "side": 1,
       "message": "In general, when the callee copies and stores the argument, pass-by-value is a good default. Because then there is no copy if the caller passes a temporary or a std::move\u0027d value.\n\n(More cases of this below.)",
+      "range": {
+        "startLine": 28,
+        "startChar": 18,
+        "endLine": 28,
+        "endChar": 36
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9260c581_f4fab28f",
+        "filename": "modules/audio_device/audio_device_name.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Now using pass-by-value instead. Kept std::move() in ctor. Please ping if that is not the best option here.",
+      "parentUuid": "dfc58085_01196b8f",
       "range": {
         "startLine": 28,
         "startChar": 18,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "6af99442_f328777b",
+        "filename": "modules/audio_device/audio_device_name.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Copied from Chrome; did not think. Now removed.",
+      "parentUuid": "75ab370b_18538537",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 36
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92dddd62_69840c8c",
         "filename": "modules/audio_device/win/core_audio_utility_win.cc",
         "patchSetId": 6
@@ -76,6 +142,24 @@
       "writtenOn": "2018-05-17T10:09:22Z",
       "side": 1,
       "message": "Perfer to not make nested namespaces whose names risk collision with top-level namespaces. \"win\" is not unlikely to be used at the top level by someone.\n\nhttps://google.github.io/styleguide/cppguide.html#Namespace_Names",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "487ece37_dd0d43e9",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Triggered lots of changes but now using webrtc_win instead",
+      "parentUuid": "92dddd62_69840c8c",
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -122,6 +206,30 @@
     },
     {
       "key": {
+        "uuid": "196d8345_df652c2d",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "317618e0_07d63fb5",
+      "range": {
+        "startLine": 39,
+        "startChar": 31,
+        "endLine": 39,
+        "endChar": 35
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80902309_c4e36c3e",
         "filename": "modules/audio_device/win/core_audio_utility_win.cc",
         "patchSetId": 6
@@ -162,6 +270,30 @@
     },
     {
       "key": {
+        "uuid": "1ead1685_af351287",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90e61bee_c87fce2e",
+      "range": {
+        "startLine": 44,
+        "startChar": 44,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab7f9fa_78a87310",
         "filename": "modules/audio_device/win/core_audio_utility_win.h",
         "patchSetId": 6
@@ -176,6 +308,24 @@
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2dc881f_aa71baf8",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ab7f9fa_78a87310",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -196,6 +346,24 @@
     },
     {
       "key": {
+        "uuid": "4ce0c557_1946c69c",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eacda515_5ec57070",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32c84a57_54bb3a10",
         "filename": "modules/audio_device/win/core_audio_utility_win.h",
         "patchSetId": 6
@@ -207,6 +375,24 @@
       "writtenOn": "2018-05-17T10:09:22Z",
       "side": 1,
       "message": "I haven\u0027t actually tried to compile it, but the following should be equivalent to your ScopedCoMem class:\n\n  struct ScopedCoMemDeleter {\n    void operator()(void* ptr) const {\n      CoTaskMemFree(ptr);\n    }\n  };\n\n  template \u003ctypename T\u003e\n  using ScopedCoMem \u003d std::unique_ptr\u003cT, ScopedCoMemDeleter\u003e;\n\n(Personally, I wouldn\u0027t actually bother with the ScopedCoMem alias; I would just use std::unique_ptr\u003cT, ScopedCoMemDeleter\u003e directly, since that\u0027s going to be more recognizable.)",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ad6690c_740430ee",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Tried but failed. Let\u0027s discuss.",
+      "parentUuid": "32c84a57_54bb3a10",
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -230,6 +416,24 @@
     },
     {
       "key": {
+        "uuid": "ae71121b_415ed0a1",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b91204_e8ff1900",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "776f368d_04e4292e",
         "filename": "modules/audio_device/win/core_audio_utility_win.h",
         "patchSetId": 6
@@ -247,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "59718b91_0034ba95",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "776f368d_04e4292e",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1c06be6_504732e5",
         "filename": "modules/audio_device/win/core_audio_utility_win.h",
         "patchSetId": 6
@@ -258,6 +480,24 @@
       "writtenOn": "2018-05-17T10:09:22Z",
       "side": 1,
       "message": "Note that the style guide currently forbids (or at least strongly discourages) grouping global functions in a class:\n\n\"Do not create classes only to group static member functions; this is no different than just giving the function names a common prefix, and such grouping is usually unnecessary anyway.\" \n -- https://google.github.io/styleguide/cppguide.html#Nonmember,_Static_Member,_and_Global_Functions\n\nThere\u0027s no significant technical problem caused by this, however, so since you\u0027re just copying this code, I guess you can keep the class if you want.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5760315b_66540a58",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-17T15:10:23Z",
+      "side": 1,
+      "message": "Discussed off-line. Will use namespace.",
+      "parentUuid": "c1c06be6_504732e5",
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
