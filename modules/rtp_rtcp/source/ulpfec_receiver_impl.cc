@@ -21,6 +21,8 @@
 
 namespace webrtc {
 
+static constexpr int64_t kMaxPacketSize = 1500;
+
 UlpfecReceiver* UlpfecReceiver::Create(uint32_t ssrc,
                                        RecoveredPacketReceiver* callback) {
   return new UlpfecReceiverImpl(ssrc, callback);
@@ -170,6 +172,8 @@ int32_t UlpfecReceiverImpl::AddReceivedRedPacket(
     ++packet_counter_.num_fec_packets;
 
     // Copy FEC payload data.
+    RTC_DCHECK_LE(payload_data_length - red_header_length - block_length,
+                  kMaxPacketSize);
     memcpy(second_received_packet->pkt->data,
            incoming_rtp_packet + header.headerLength + red_header_length +
                block_length,
@@ -180,7 +184,9 @@ int32_t UlpfecReceiverImpl::AddReceivedRedPacket(
 
   } else if (received_packet->is_fec) {
     ++packet_counter_.num_fec_packets;
+
     // everything behind the RED header
+    RTC_DCHECK_LE(payload_data_length - red_header_length, kMaxPacketSize);
     memcpy(received_packet->pkt->data,
            incoming_rtp_packet + header.headerLength + red_header_length,
            payload_data_length - red_header_length);
@@ -190,6 +196,7 @@ int32_t UlpfecReceiverImpl::AddReceivedRedPacket(
 
   } else {
     // Copy RTP header.
+    RTC_DCHECK_LE(header.headerLength, kMaxPacketSize);
     memcpy(received_packet->pkt->data, incoming_rtp_packet,
            header.headerLength);
 
