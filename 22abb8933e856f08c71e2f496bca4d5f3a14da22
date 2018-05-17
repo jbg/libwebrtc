@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec0fcedf_e6e7e4d4",
+        "filename": "video/full_stack_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-17T10:56:46Z",
+      "side": 1,
+      "message": "I think this is the default. Can you double check and remove in that case?",
+      "range": {
+        "startLine": 754,
+        "startChar": 16,
+        "endLine": 754,
+        "endChar": 17
+      },
+      "revId": "22abb8933e856f08c71e2f496bca4d5f3a14da22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b389c603_ab2e5cdc",
+        "filename": "video/full_stack_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-17T10:56:46Z",
+      "side": 1,
+      "message": "This indentation looks weird. One space seems enough.",
+      "range": {
+        "startLine": 759,
+        "startChar": 37,
+        "endLine": 759,
+        "endChar": 41
+      },
+      "revId": "22abb8933e856f08c71e2f496bca4d5f3a14da22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
