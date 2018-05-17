@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4386bfba_3288eae1",
+        "filename": "media/engine/fakewebrtcvideoengine.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "nit: remove newline",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6760fc21_99a72fd9",
+        "filename": "media/engine/fakewebrtcvideoengine.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "range": {
+        "startLine": 42,
+        "startChar": 58,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6b3bf1d_d1820140",
+        "filename": "media/engine/simulcast.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "Looks like a merge conflict here, please remove comments.",
+      "range": {
+        "startLine": 63,
+        "startChar": 71,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37a0906d_6937c3da",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "nit: prefer explicit i \u003e 0",
+      "range": {
+        "startLine": 275,
+        "startChar": 9,
+        "endLine": 275,
+        "endChar": 10
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3feb2d00_7c1daf08",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "nit: {} with if/else",
+      "range": {
+        "startLine": 287,
+        "startChar": 67,
+        "endLine": 287,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bf15b36_65e33028",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "static?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ad190ef_3da2066c",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this class is the best place for these. It\u0027s already grown more than expected, so adding utility methods that aren\u0027t really related rate allocation doesn\u0027t help.\n\nSince you\u0027re moving stuff out to utility, might be better to have separate helper class for these? Maybe the vp8 temporal layer bitrate distribution can live there as well, would like to avoid including common_types if possible.\n\nAlso, if you extract NumberOfStream(), rename it so it\u0027s clear what kind of streams i refers to.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a77b7b0a_6c3b8f03",
+        "filename": "modules/video_coding/utility/temporal_layers.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "I don\u0027t think these make sense outside of vp8. Temporal layering will be different for other codecs.\nWas there any specific reason for moving them?",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 55
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afac7096_be23b511",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-17T14:28:24Z",
+      "side": 1,
+      "message": "\\n",
+      "range": {
+        "startLine": 29,
+        "startChar": 57,
+        "endLine": 29,
+        "endChar": 64
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
