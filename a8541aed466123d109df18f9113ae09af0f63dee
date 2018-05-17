@@ -82,6 +82,23 @@
     },
     {
       "key": {
+        "uuid": "13f901ea_ea4c86c9",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-05-17T13:40:54Z",
+      "side": 1,
+      "message": "Why is this commented out?",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "317618e0_07d63fb5",
         "filename": "modules/audio_device/win/core_audio_utility_win.cc",
         "patchSetId": 6
@@ -99,6 +116,23 @@
         "endLine": 39,
         "endChar": 35
       },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80902309_c4e36c3e",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-05-17T13:40:54Z",
+      "side": 1,
+      "message": "nit: CreateClient2Internal, since it creates an IAudioClient2.",
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -224,6 +258,23 @@
       "writtenOn": "2018-05-17T10:09:22Z",
       "side": 1,
       "message": "Note that the style guide currently forbids (or at least strongly discourages) grouping global functions in a class:\n\n\"Do not create classes only to group static member functions; this is no different than just giving the function names a common prefix, and such grouping is usually unnecessary anyway.\" \n -- https://google.github.io/styleguide/cppguide.html#Nonmember,_Static_Member,_and_Global_Functions\n\nThere\u0027s no significant technical problem caused by this, however, so since you\u0027re just copying this code, I guess you can keep the class if you want.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee1a15c2_81012dfc",
+        "filename": "modules/audio_device/win/core_audio_utility_win_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-05-17T13:40:54Z",
+      "side": 1,
+      "message": "Perhaps not limited to this test: what about platforms where IAudioClient2 doesn\u0027t exist? Say Windows 7. Will the rest of the code be fine (but return an empty client)? What about this test? Should it be skipped on older Windowses?",
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
