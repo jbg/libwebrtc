@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b1123fc_0c627f8f",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-17T22:59:38Z",
+      "side": 1,
+      "message": "Not needed anymore",
+      "revId": "88351a713a249e39093ee2e1e1a51ce03891bc3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9274538_018cda29",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-17T22:59:38Z",
+      "side": 1,
+      "message": "Looks like this has gone back to being \"public for unit tests\".",
+      "revId": "88351a713a249e39093ee2e1e1a51ce03891bc3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ebf745_321d597d",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-17T22:59:38Z",
+      "side": 1,
+      "message": "Should avoid this wherever possible. See https://engdoc.corp.google.com/eng/doc/devguide/coding/testing/unit-testing-best-practices.md?cl\u003dhead#public-apis",
+      "revId": "88351a713a249e39093ee2e1e1a51ce03891bc3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "514919ce_5700cfbe",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-17T22:59:38Z",
+      "side": 1,
+      "message": "These seem like tests meant for BasicRegatheringController, but tested through P2PTransportChannel.\n\nTests for BasicRegatheringController should go in their own file, independent of P2PTransportChannel, maybe using a fake/mock PortAllocatorSession.",
+      "revId": "88351a713a249e39093ee2e1e1a51ce03891bc3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
