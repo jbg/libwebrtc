@@ -1,0 +1,232 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f908d81_d2087f1b",
+        "filename": "modules/audio_device/audio_device_name.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "This class has std::string data members, which are cheaper to move than to copy, so consider also supplying a defaulted move constructor.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfc58085_01196b8f",
+        "filename": "modules/audio_device/audio_device_name.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "In general, when the callee copies and stores the argument, pass-by-value is a good default. Because then there is no copy if the caller passes a temporary or a std::move\u0027d value.\n\n(More cases of this below.)",
+      "range": {
+        "startLine": 28,
+        "startChar": 18,
+        "endLine": 28,
+        "endChar": 36
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75ab370b_18538537",
+        "filename": "modules/audio_device/audio_device_name.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "Why do you need accessors when the data members are public?",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 36
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92dddd62_69840c8c",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "Perfer to not make nested namespaces whose names risk collision with top-level namespaces. \"win\" is not unlikely to be used at the top level by someone.\n\nhttps://google.github.io/styleguide/cppguide.html#Namespace_Names",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "317618e0_07d63fb5",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "Can you replace as many as possible of these with nullptr?",
+      "range": {
+        "startLine": 39,
+        "startChar": 31,
+        "endLine": 39,
+        "endChar": 35
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e61bee_c87fce2e",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "No need to manually convert the std::string to a const char*; RTC_DLOG can handle it.",
+      "range": {
+        "startLine": 44,
+        "startChar": 44,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ab7f9fa_78a87310",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "This method can be const.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eacda515_5ec57070",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "In C++11, declare these with \u003ddelete up in the public section.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32c84a57_54bb3a10",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "I haven\u0027t actually tried to compile it, but the following should be equivalent to your ScopedCoMem class:\n\n  struct ScopedCoMemDeleter {\n    void operator()(void* ptr) const {\n      CoTaskMemFree(ptr);\n    }\n  };\n\n  template \u003ctypename T\u003e\n  using ScopedCoMem \u003d std::unique_ptr\u003cT, ScopedCoMemDeleter\u003e;\n\n(Personally, I wouldn\u0027t actually bother with the ScopedCoMem alias; I would just use std::unique_ptr\u003cT, ScopedCoMemDeleter\u003e directly, since that\u0027s going to be more recognizable.)",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b91204_e8ff1900",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "These two methods can be const.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "776f368d_04e4292e",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "Declare these as deleted up in the public section?",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1c06be6_504732e5",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-17T10:09:22Z",
+      "side": 1,
+      "message": "Note that the style guide currently forbids (or at least strongly discourages) grouping global functions in a class:\n\n\"Do not create classes only to group static member functions; this is no different than just giving the function names a common prefix, and such grouping is usually unnecessary anyway.\" \n -- https://google.github.io/styleguide/cppguide.html#Nonmember,_Static_Member,_and_Global_Functions\n\nThere\u0027s no significant technical problem caused by this, however, so since you\u0027re just copying this code, I guess you can keep the class if you want.",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
