@@ -3576,7 +3576,7 @@ TEST_F(VideoSendStreamTest, Vp9NonFlexModeSmallResolution) {
 // Crashes on Android; bugs.webrtc.org/7401
 #define MAYBE_Vp9FlexModeRefCount DISABLED_Vp9FlexModeRefCount
 #else
-// TODO(webrtc:9270): Support of flexible mode is temporarily disabled. Enable
+// TODO(webrtc:9270): Support of flexible mode is temporally disabled. Enable
 // the test after webrtc:9270 is implemented.
 #define MAYBE_Vp9FlexModeRefCount DISABLED_Vp9FlexModeRefCount
 // #define MAYBE_Vp9FlexModeRefCount Vp9FlexModeRefCount
