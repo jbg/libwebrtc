@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "154e5287_6029365c",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "Nit: indent",
+      "range": {
+        "startLine": 509,
+        "startChar": 27,
+        "endLine": 509,
+        "endChar": 53
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d47e9899_c169103c",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "CheckThirdPartyDirectory?",
+      "range": {
+        "startLine": 837,
+        "startChar": 4,
+        "endLine": 837,
+        "endChar": 19
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8569dabd_441a606a",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "This code and most of ThirdPartyCheck should probably move to a new module in tools_webrtc/presubmit_checks_lib. Also add unit tests please.",
+      "range": {
+        "startLine": 868,
+        "startChar": 0,
+        "endLine": 894,
+        "endChar": 16
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cdea28b_278a55ca",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "Write something here about using the add tool if the new dependency is intended to be copied from chromium. Bonus points for generating a correct command line the user can just run :) If it\u0027s a new WebRTC dep the user has to just edit the webrtc json file.",
+      "range": {
+        "startLine": 970,
+        "startChar": 16,
+        "endLine": 972,
+        "endChar": 48
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d47f832_c4cf1c8c",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "\"owned by\" doesn\u0027t make a lot of sense in this context. What about \"Third party dependencies xyz, yuv can\u0027t be a WebRTC- and Chromium-specific dependency at the same time. Remove it from one of these files: ...\"?",
+      "range": {
+        "startLine": 991,
+        "startChar": 54,
+        "endLine": 992,
+        "endChar": 75
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3883d02b_595ba3a6",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "... If you really want to change this code you have to do it upstream in Chromium\u0027s third_party.",
+      "range": {
+        "startLine": 1009,
+        "startChar": 15,
+        "endLine": 1010,
+        "endChar": 25
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78b1f12a_29be78d5",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-05-17T12:47:44Z",
+      "side": 1,
+      "message": "Put these guys in a tools_webrtc/presubmit_checks_lib module and add some unit tests, please. This file is already pretty long.",
+      "range": {
+        "startLine": 967,
+        "startChar": 0,
+        "endLine": 1026,
+        "endChar": 42
+      },
+      "revId": "1b09088bda024dce88b7dd359ec139de61b16e0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
