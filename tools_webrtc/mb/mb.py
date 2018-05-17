@@ -827,7 +827,6 @@ class MetaBuildWrapper(object):
       self.WriteFailureAndRaise('No command line for %s found (test type %s).'
                                 % (target, test_type), output_path=None)
 
-    cmdline = []
     extra_files = [
       '../../.vpython',
       '../../testing/test_env.py',
@@ -842,7 +841,10 @@ class MetaBuildWrapper(object):
                  '--logcat-output-file', '${ISOLATED_OUTDIR}/logcats',
                  '--store-tombstones']
     else:
-      extra_files = ['../../testing/test_env.py']
+      wrappers = []
+
+      if isolate_map[target].get('use_webcam', False):
+        wrappers.append('../../tools_webrtc/ensure_webcam_is_running.py')
 
       # This needs to mirror the settings in //build/config/ui.gni:
       # use_x11 = is_linux && !use_ozone.
@@ -850,12 +852,12 @@ class MetaBuildWrapper(object):
 
       xvfb = use_x11 and test_type == 'windowed_test_launcher'
       if xvfb:
-        extra_files += [
-            '../../testing/xvfb.py',
-        ]
+        wrappers.append('../../testing/xvfb.py')
+      else:
+        wrappers.append('../../testing/test_env.py')
 
-      cmdline = (['../../testing/xvfb.py'] if xvfb else
-                 ['../../testing/test_env.py'])
+      cmdline = list(wrappers)
+      extra_files = list(wrappers)
 
       # Memcheck is only supported for linux. Ignore in other platforms.
       if is_linux and 'rtc_use_memcheck=true' in vals['gn_args']:
