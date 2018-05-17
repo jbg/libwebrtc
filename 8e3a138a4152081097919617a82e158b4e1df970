@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "06aa396c_37d56ff2",
+        "filename": "tools_webrtc/ensure_webcam_is_running.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-17T10:07:00Z",
+      "side": 1,
+      "message": "_ForcePythonInterpreter - done.",
+      "parentUuid": "210d99f2_112580a6",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 18
+      },
+      "revId": "8e3a138a4152081097919617a82e158b4e1df970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67f3b502_886e581c",
         "filename": "tools_webrtc/ensure_webcam_is_running.py",
         "patchSetId": 7
@@ -68,6 +92,30 @@
       "revId": "8e3a138a4152081097919617a82e158b4e1df970",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83b5e24e_95dc87df",
+        "filename": "tools_webrtc/ensure_webcam_is_running.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-05-17T10:07:00Z",
+      "side": 1,
+      "message": "(this was copied exactly)\nThis is needed to not mutate the original `cmd` and only return a modified copy. Doesn\u0027t actually matter but it\u0027s nice to do.",
+      "parentUuid": "67f3b502_886e581c",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 104,
+        "endChar": 14
+      },
+      "revId": "8e3a138a4152081097919617a82e158b4e1df970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
