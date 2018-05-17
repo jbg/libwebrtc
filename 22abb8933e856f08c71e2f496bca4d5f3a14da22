@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "014af02b_6ab09946",
+        "filename": "video/full_stack_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-17T11:19:08Z",
+      "side": 1,
+      "message": "It is set to false in ctor - https://cs.chromium.org/chromium/src/third_party/webrtc/video/video_quality_test.cc?rcl\u003def75ebef55207d770bc3712004e0680e0fe261f2\u0026l\u003d1129",
+      "parentUuid": "ec0fcedf_e6e7e4d4",
+      "range": {
+        "startLine": 754,
+        "startChar": 16,
+        "endLine": 754,
+        "endChar": 17
+      },
+      "revId": "22abb8933e856f08c71e2f496bca4d5f3a14da22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b389c603_ab2e5cdc",
         "filename": "video/full_stack_tests.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "22abb8933e856f08c71e2f496bca4d5f3a14da22",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fa106e4_747082fd",
+        "filename": "video/full_stack_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-17T11:19:08Z",
+      "side": 1,
+      "message": "These are added by formatting tool. It seems the tool aligns array items.",
+      "parentUuid": "b389c603_ab2e5cdc",
+      "range": {
+        "startLine": 759,
+        "startChar": 37,
+        "endLine": 759,
+        "endChar": 41
+      },
+      "revId": "22abb8933e856f08c71e2f496bca4d5f3a14da22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
