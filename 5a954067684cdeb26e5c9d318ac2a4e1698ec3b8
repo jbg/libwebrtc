@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c0fbe936_681fc7c3",
+        "filename": "media/engine/fakewebrtcvideoengine.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4386bfba_3288eae1",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6760fc21_99a72fd9",
         "filename": "media/engine/fakewebrtcvideoengine.h",
         "patchSetId": 18
@@ -45,6 +69,30 @@
       "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53fd7e5a_9e93fe5f",
+        "filename": "media/engine/fakewebrtcvideoengine.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6760fc21_99a72fd9",
+      "range": {
+        "startLine": 42,
+        "startChar": 58,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b1231283_063410b0",
+        "filename": "media/engine/simulcast.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6b3bf1d_d1820140",
+      "range": {
+        "startLine": 63,
+        "startChar": 71,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37a0906d_6937c3da",
         "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
         "patchSetId": 18
@@ -91,6 +163,30 @@
       "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "555ab88c_e46b3a64",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "37a0906d_6937c3da",
+      "range": {
+        "startLine": 275,
+        "startChar": 9,
+        "endLine": 275,
+        "endChar": 10
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9f79cf74_8ed858cc",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3feb2d00_7c1daf08",
+      "range": {
+        "startLine": 287,
+        "startChar": 67,
+        "endLine": 287,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7bf15b36_65e33028",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
         "patchSetId": 18
@@ -128,6 +248,30 @@
       "writtenOn": "2018-05-17T14:28:24Z",
       "side": 1,
       "message": "static?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee2f74bf_47b12f98",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "As I reused vp8 encoder code in h264 encoder, GCD function is in both files. Didn\u0027t knew what was the best place to put this on an external unique file, so just changed the definition to static to avoid duplicated symbols on linking.",
+      "parentUuid": "7bf15b36_65e33028",
       "range": {
         "startLine": 50,
         "startChar": 0,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "02da2828_bcdf2196",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "Sure. Just wanted to make minimal changes before getting a review and checking what was the proper way to make the change.\n\nWhat would be the best name for it, simulcast_layers.h?\n\nNot really sure if temporal_layers.h is required to be included here at all, will check if I can remove it",
+      "parentUuid": "2ad190ef_3da2066c",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a77b7b0a_6c3b8f03",
         "filename": "modules/video_coding/utility/temporal_layers.h",
         "patchSetId": 18
@@ -174,6 +342,30 @@
       "writtenOn": "2018-05-17T14:28:24Z",
       "side": 1,
       "message": "I don\u0027t think these make sense outside of vp8. Temporal layering will be different for other codecs.\nWas there any specific reason for moving them?",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 55
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17a99410_a7574b5d",
+        "filename": "modules/video_coding/utility/temporal_layers.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-17T15:57:23Z",
+      "side": 1,
+      "message": "It was like that on the original CL from highfive.\n\nI think that the main reason was that it was included from the simulcast_rate_allocator.h so it was easier to move everything out than reference vp8 stuff from the utility.",
+      "parentUuid": "a77b7b0a_6c3b8f03",
       "range": {
         "startLine": 13,
         "startChar": 8,
