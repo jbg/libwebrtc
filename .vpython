@@ -43,3 +43,11 @@ wheel: <
     platform: "win_amd64"
   >
 >
+
+# Used by:
+#   tools_webrtc/libs/generate_licenses_test.py
+wheel: <
+  name: "infra/python/wheels/mock-py2_py3"
+  version: "version:2.0.0"
+>
+
