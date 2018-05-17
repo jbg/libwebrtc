@@ -14,9 +14,9 @@
 
 #include "api/video/i420_buffer.h"
 #include "media/base/videoadapter.h"
-#include "modules/video_coding/codecs/vp8/temporal_layers.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
 #include "modules/video_coding/utility/default_video_bitrate_allocator.h"
+#include "modules/video_coding/utility/temporal_layers.h"
 #include "rtc_base/fakeclock.h"
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/metrics_default.h"

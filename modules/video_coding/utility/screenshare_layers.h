@@ -6,13 +6,13 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#ifndef MODULES_VIDEO_CODING_CODECS_VP8_SCREENSHARE_LAYERS_H_
-#define MODULES_VIDEO_CODING_CODECS_VP8_SCREENSHARE_LAYERS_H_
+#ifndef MODULES_VIDEO_CODING_UTILITY_SCREENSHARE_LAYERS_H_
+#define MODULES_VIDEO_CODING_UTILITY_SCREENSHARE_LAYERS_H_
 
 #include <vector>
 
-#include "modules/video_coding/codecs/vp8/temporal_layers.h"
 #include "modules/video_coding/utility/frame_dropper.h"
+#include "modules/video_coding/utility/temporal_layers.h"
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/timeutils.h"
 #include "typedefs.h"  // NOLINT(build/include)
@@ -28,8 +28,7 @@ class ScreenshareLayers : public TemporalLayers {
   static const double kAcceptableTargetOvershoot;
   static const int kMaxFrameIntervalMs;
 
-  ScreenshareLayers(int num_temporal_layers,
-                    Clock* clock);
+  ScreenshareLayers(int num_temporal_layers, Clock* clock);
   virtual ~ScreenshareLayers();
 
   // Returns the recommended VP8 encode flags needed. May refresh the decoder
@@ -119,4 +118,4 @@ class ScreenshareLayers : public TemporalLayers {
 };
 }  // namespace webrtc
 
-#endif  // MODULES_VIDEO_CODING_CODECS_VP8_SCREENSHARE_LAYERS_H_
+#endif  // MODULES_VIDEO_CODING_UTILITY_SCREENSHARE_LAYERS_H_
