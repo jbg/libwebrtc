@@ -13,7 +13,6 @@ import sys
 from collections import defaultdict
 from contextlib import contextmanager
 
-
 # Files and directories that are *skipped* by cpplint in the presubmit script.
 CPPLINT_BLACKLIST = [
   'api/video_codecs/video_decoder.h',
@@ -140,6 +139,7 @@ def VerifyNativeApiHeadersListIsValid(input_api, output_api):
         non_existing_paths)]
   return []
 
+
 API_CHANGE_MSG = """
 You seem to be changing native API header files. Please make sure that you:
   1. Make compatible changes that don't break existing clients. Usually
@@ -158,6 +158,7 @@ You seem to be changing native API header files. Please make sure that you:
      has passed.
 Related files:
 """
+
 
 def CheckNativeApiHeaderChanges(input_api, output_api):
   """Checks to remind proper changing of native APIs."""
@@ -288,7 +289,7 @@ def CheckApprovedFilesLintClean(input_api, output_api,
   for f in input_api.AffectedSourceFiles(source_file_filter):
     # Note that moved/renamed files also count as added.
     if f.Action() == 'A' or not IsLintBlacklisted(blacklist_paths,
-                                                   f.LocalPath()):
+                                                  f.LocalPath()):
       files.append(f.AbsoluteLocalPath())
 
   for file_name in files:
@@ -302,6 +303,7 @@ def CheckApprovedFilesLintClean(input_api, output_api,
     result = [res_type('Changelist failed cpplint.py check.')]
 
   return result
+
 
 def CheckNoSourcesAbove(input_api, gn_files, output_api):
   # Disallow referencing source files with paths above the GN file location.
@@ -331,11 +333,13 @@ def CheckNoSourcesAbove(input_api, gn_files, output_api):
         items=violating_gn_files)]
   return []
 
+
 def CheckNoMixingSources(input_api, gn_files, output_api):
   """Disallow mixing C, C++ and Obj-C/Obj-C++ in the same target.
 
   See bugs.webrtc.org/7743 for more context.
   """
+
   def _MoreThanOneSourceUsed(*sources_lists):
     sources_used = 0
     for source_list in sources_lists:
@@ -397,6 +401,7 @@ def CheckNoMixingSources(input_api, gn_files, output_api):
                                        '\n'.join(errors.keys())))]
   return []
 
+
 def CheckNoPackageBoundaryViolations(input_api, gn_files, output_api):
   cwd = input_api.PresubmitLocalPath()
   with _AddToPath(input_api.os_path.join(
@@ -456,6 +461,7 @@ def CheckNoStreamUsageIsAdded(input_api, output_api,
     return [output_api.PresubmitError(error_msg, errors)]
   return []
 
+
 def CheckPublicDepsIsNotUsed(gn_files, input_api, output_api):
   """Checks that public_deps is not used without a good reason."""
   result = []
@@ -477,6 +483,7 @@ def CheckPublicDepsIsNotUsed(gn_files, input_api, output_api):
                                                    line_number)))
   return result
 
+
 def CheckCheckIncludesIsNotUsed(gn_files, output_api):
   result = []
   error_msg = ('check_includes overrides are not allowed since it can cause '
@@ -494,11 +501,12 @@ def CheckCheckIncludesIsNotUsed(gn_files, output_api):
                                                    line_number)))
   return result
 
+
 def CheckGnChanges(input_api, output_api, source_file_filter):
   file_filter = lambda x: (input_api.FilterSourceFile(
       x, white_list=(r'.+\.(gn|gni)$',),
       black_list=(r'.*/presubmit_checks_lib/testdata/.*',))
-      and source_file_filter(x))
+                           and source_file_filter(x))
 
   gn_files = []
   for f in input_api.AffectedSourceFiles(file_filter):
@@ -513,6 +521,7 @@ def CheckGnChanges(input_api, output_api, source_file_filter):
     result.extend(CheckPublicDepsIsNotUsed(gn_files, input_api, output_api))
     result.extend(CheckCheckIncludesIsNotUsed(gn_files, output_api))
   return result
+
 
 def CheckGnGen(input_api, output_api):
   """Runs `gn gen --check` with default args to detect mismatches between
@@ -529,6 +538,7 @@ def CheckGnGen(input_api, output_api):
         '  gn gen --check <out_dir>',
         long_text='\n\n'.join(errors))]
   return []
+
 
 def CheckUnwantedDependencies(input_api, output_api, source_file_filter):
   """Runs checkdeps on #include statements added in this
@@ -589,6 +599,7 @@ def CheckUnwantedDependencies(input_api, output_api, source_file_filter):
         warning_descriptions))
   return results
 
+
 def CheckCommitMessageBugEntry(input_api, output_api):
   """Check that bug entries are well-formed in commit message."""
   bogus_bug_msg = (
@@ -614,6 +625,7 @@ def CheckCommitMessageBugEntry(input_api, output_api):
       results.append(bogus_bug_msg % bug)
   return [output_api.PresubmitError(r) for r in results]
 
+
 def CheckChangeHasBugField(input_api, output_api):
   """Requires that the changelist is associated with a bug.
 
@@ -632,6 +644,7 @@ def CheckChangeHasBugField(input_api, output_api):
         'reference it using either of:\n'
         ' * https://bugs.webrtc.org - reference it using Bug: webrtc:XXXX\n'
         ' * https://crbug.com - reference it using Bug: chromium:XXXXXX')]
+
 
 def CheckJSONParseErrors(input_api, output_api, source_file_filter):
   """Check that JSON files do not contain syntax errors."""
@@ -655,7 +668,8 @@ def CheckJSONParseErrors(input_api, output_api, source_file_filter):
                                     affected_file.AbsoluteLocalPath())
     if parse_error:
       results.append(output_api.PresubmitError('%s could not be parsed: %s' %
-          (affected_file.LocalPath(), parse_error)))
+                                               (affected_file.LocalPath(),
+                                                parse_error)))
   return results
 
 
@@ -778,14 +792,14 @@ def CommonChecks(input_api, output_api):
                  third_party_filter_list)
   hundred_char_sources = lambda x: input_api.FilterSourceFile(x,
       white_list=objc_filter_list)
+  non_third_party_sources = lambda x: input_api.FilterSourceFile(x,
+      black_list=third_party_filter_list)
+
   results.extend(input_api.canned_checks.CheckLongLines(
       input_api, output_api, maxlen=80, source_file_filter=eighty_char_sources))
   results.extend(input_api.canned_checks.CheckLongLines(
       input_api, output_api, maxlen=100,
       source_file_filter=hundred_char_sources))
-
-  non_third_party_sources = lambda x: input_api.FilterSourceFile(x,
-      black_list=third_party_filter_list)
   results.extend(input_api.canned_checks.CheckChangeHasNoTabs(
       input_api, output_api, source_file_filter=non_third_party_sources))
   results.extend(input_api.canned_checks.CheckChangeHasNoStrayWhitespace(
@@ -816,7 +830,68 @@ def CommonChecks(input_api, output_api):
       input_api, output_api, source_file_filter=non_third_party_sources))
   results.extend(CheckNoStreamUsageIsAdded(
       input_api, output_api, non_third_party_sources))
+  results.extend(ThirdPartyCheck(input_api, output_api))
   return results
+
+
+def ThirdPartyCheck(input_api, output_api):
+  # We have to put something in black_list here that won't blacklist
+  # third_party/* because otherwise default black list will be used. Default
+  # list contains third_party, so source set will become empty.
+  third_party_sources = lambda x: input_api.FilterSourceFile(x,
+      white_list=(r'^third_party[\\\/].+',), black_list=(r'^_',))
+
+  webrtc_owned_deps_list_path = input_api.os_path.join(
+      input_api.PresubmitLocalPath(),
+      'THIRD_PARTY_WEBRTC_DEPS.json')
+  chromium_owned_deps_list_path = input_api.os_path.join(
+      input_api.PresubmitLocalPath(),
+      'THIRD_PARTY_CHROMIUM_DEPS.json')
+  webrtc_owned_deps = _LoadDepsList(webrtc_owned_deps_list_path)
+  chromium_owned_deps = _LoadDepsList(chromium_owned_deps_list_path)
+  chromium_added_deps = _GetChromiumOwnedAddedDeps(input_api)
+
+  results = []
+  results.extend(CheckNoNotOwned3ppDeps(input_api, output_api,
+                                        webrtc_owned_deps, chromium_owned_deps,
+                                        third_party_sources))
+  results.extend(CheckNoBothOwned3ppDeps(output_api, webrtc_owned_deps,
+                                         chromium_owned_deps))
+  results.extend(CheckNoChangesInAutoImportedDeps(input_api, output_api,
+                                                  webrtc_owned_deps,
+                                                  chromium_owned_deps,
+                                                  chromium_added_deps,
+                                                  third_party_sources))
+  return results
+
+
+def _GetChromiumOwnedAddedDeps(input_api):
+  """Return list of deps that were added into chormium owned deps list."""
+
+  chromium_owned_deps_list_source = lambda x: input_api.FilterSourceFile(x,
+      white_list=('THIRD_PARTY_CHROMIUM_DEPS.json',), black_list=(r'^_',))
+
+  added_deps = []
+  for f in input_api.AffectedFiles(file_filter=chromium_owned_deps_list_source):
+    print 'Loading chromium owned deps changes from %s' % f.LocalPath()
+    if f.Action() != 'M':
+      break
+
+    prev_json = json.loads(_ReadAffectedFileContent(f.OldContents()))
+    new_json = json.loads(_ReadAffectedFileContent(f.NewContents()))
+    prev_deps_set = set(prev_json.get('dependencies', []))
+    new_deps_set = set(new_json.get('dependencies', []))
+    added_deps = list(new_deps_set.difference(prev_deps_set))
+    break
+
+  return added_deps
+
+
+def _ReadAffectedFileContent(line_iter):
+  content = ''
+  for line in line_iter:
+    content = '%s%s\n' % (content, line)
+  return content
 
 
 def CheckChangeOnUpload(input_api, output_api):
@@ -874,8 +949,7 @@ def CheckOrphanHeaders(input_api, output_api, source_file_filter):
   return results
 
 
-def CheckNewlineAtTheEndOfProtoFiles(input_api, output_api,
-                                     source_file_filter):
+def CheckNewlineAtTheEndOfProtoFiles(input_api, output_api, source_file_filter):
   """Checks that all .proto files are terminated with a newline."""
   error_msg = 'File {} must end with exactly one newline.'
   results = []
@@ -888,3 +962,65 @@ def CheckNewlineAtTheEndOfProtoFiles(input_api, output_api,
       if len(lines) > 0 and not lines[-1].endswith('\n'):
         results.append(output_api.PresubmitError(error_msg.format(file_path)))
   return results
+
+
+def CheckNoNotOwned3ppDeps(input_api, output_api,
+    webrtc_owned_deps, chromium_owned_deps, third_party_sources):
+  """Checks that there are no any not owned third_party deps."""
+  error_msg = ('Third party dependency [{}] have to be specified either in '
+               'THIRD_PARTY_WEBRTC_DEPS.json or in '
+               'THIRD_PARTY_CHROMIUM_DEPS.json')
+
+  not_owned_deps = set()
+  results = []
+  for f in input_api.AffectedFiles(file_filter=third_party_sources):
+    file_path = f.LocalPath()
+    split = re.split(r'[\\\/]', file_path)
+    dep_name = split[1]
+    if (dep_name not in not_owned_deps
+        and dep_name not in webrtc_owned_deps
+        and dep_name not in chromium_owned_deps):
+      results.append(
+          output_api.PresubmitError(error_msg.format(dep_name)))
+      not_owned_deps.add(dep_name)
+  return results
+
+
+def CheckNoBothOwned3ppDeps(output_api, webrtc_owned_deps, chromium_owned_deps):
+  """Checks that there are no any not owned third_party deps."""
+  error_msg = ('Third party dependencies {} can\'t be owned by webrtc and '
+               'chromium in same time. Remove it from one of these files: '
+               'THIRD_PARTY_WEBRTC_DEPS.json or THIRD_PARTY_CHROMIUM_DEPS.json')
+
+  both_owned_deps = set(chromium_owned_deps).intersection(
+      set(webrtc_owned_deps))
+  results = []
+  if both_owned_deps:
+    results.append(output_api.PresubmitError(error_msg.format(
+        json.dumps(list(both_owned_deps)))))
+  return results
+
+
+def CheckNoChangesInAutoImportedDeps(input_api, output_api,
+    webrtc_owned_deps, chromium_owned_deps, chromium_added_deps,
+    third_party_sources):
+  """Checks that there are no changes in deps imported by autoroller."""
+
+  error_msg = ('Changes in [{}] will be overridden during chromium third_party '
+               'autoroll')
+  results = []
+  for f in input_api.AffectedFiles(file_filter=third_party_sources):
+    file_path = f.LocalPath()
+    split = re.split(r'[\\\/]', file_path)
+    dep_name = split[1]
+    if (dep_name not in webrtc_owned_deps
+        and dep_name in chromium_owned_deps
+        and dep_name not in chromium_added_deps):
+      results.append(output_api.PresubmitError(error_msg.format(file_path)))
+  return results
+
+
+def _LoadDepsList(file_name):
+  with open(file_name, 'rb') as f:
+    content = json.load(f)
+    return content.get('dependencies', [])
