@@ -590,6 +590,24 @@
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bfa4dec_d3d1cefe",
+        "filename": "modules/audio_device/win/core_audio_utility_win_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-18T09:35:31Z",
+      "side": 1,
+      "message": "I figured you should ask. Tried building from a command line where I emulate Win7 but failed. So, I am not sure actually. Can we try on bots and take it from there?",
+      "parentUuid": "f8d68fc0_ca25594e",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
