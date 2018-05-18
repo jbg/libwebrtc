@@ -331,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "77af5869_58985f6e",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-18T14:25:30Z",
+      "side": 1,
+      "message": "sure, or simulcast_utils or simulcast_helpers or whatever\n\ntemporal_layers.h from vp8/ really is vp8-specific and I\u0027d like to keep it there.\nSimulcastRateAllocator used to have a dependency on temporal_layers.h but it doesn\u0027t anymore. I think the include left here is a mistake. So I don\u0027t see the reason for moving them now.",
+      "parentUuid": "02da2828_bcdf2196",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a77b7b0a_6c3b8f03",
         "filename": "modules/video_coding/utility/temporal_layers.h",
         "patchSetId": 18
