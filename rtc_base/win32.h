@@ -40,7 +40,6 @@ typedef struct _TOKEN_MANDATORY_LABEL {
 
 #include <string>
 
-#include "rtc_base/basictypes.h"
 #include "rtc_base/stringutils.h"
 
 namespace rtc {

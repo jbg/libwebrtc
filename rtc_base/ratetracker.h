@@ -12,7 +12,7 @@
 #define RTC_BASE_RATETRACKER_H_
 
 #include <stdlib.h>
-#include "rtc_base/basictypes.h"
+#include <stdint.h>
 
 namespace rtc {
 
