@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6335093b_32a840a2",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-18T06:53:13Z",
+      "side": 1,
+      "message": "See below.",
+      "parentUuid": "18979e16_74aeb037",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "291338d8_f899538c",
         "filename": "api/transport/network_types.h",
         "patchSetId": 2
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "c0d15547_43d836ec",
+        "filename": "api/transport/network_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-18T06:53:13Z",
+      "side": 1,
+      "message": "Feel free to add it, but I think you can just add it to the SentPacket struct directly? Just make sure there\u0027s a comment saying that it\u0027s the number of bytes in flight when the packet was sent.",
+      "parentUuid": "3c9e945d_ea211672",
+      "range": {
+        "startLine": 96,
+        "startChar": 11,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4f039b6_ecda6455",
         "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
         "patchSetId": 2
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "That\u0027s how the BBR controller uses the value. In the Quic BBR implementation, it calls an injected data structure to retrieve the amount of data in flight, so I assume it\u0027s inclusive all sent packets.\n\nDo you think there might be performance issues? We could cache the value here or in the adapter, the latter still requires grabbing a lock in the adapter.",
       "parentUuid": "a4f039b6_ecda6455",
+      "range": {
+        "startLine": 558,
+        "startChar": 4,
+        "endLine": 559,
+        "endChar": 75
+      },
+      "revId": "2cbc4abaf551cf40f62cc98c21194f6e9b3ab5b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb3f377c_b0083143",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-18T06:53:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be that expensive?",
+      "parentUuid": "dd4ab8a2_196f2a69",
       "range": {
         "startLine": 558,
         "startChar": 4,
