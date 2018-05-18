@@ -13,7 +13,6 @@
 
 #include <cmath>
 
-#include "rtc_base/basictypes.h"
 
 namespace webrtc {
 
