@@ -22,6 +22,30 @@
       "revId": "fdf1302467cded6705ee00d854794e27a17f422f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed00df47_65bf511b",
+        "filename": "tools_webrtc/presubmit_checks_lib/check_3pp.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-18T11:39:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "575f9617_63bdb7c7",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 78
+      },
+      "revId": "fdf1302467cded6705ee00d854794e27a17f422f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
