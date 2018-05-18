@@ -572,6 +572,24 @@
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8d68fc0_ca25594e",
+        "filename": "modules/audio_device/win/core_audio_utility_win_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-05-18T09:18:54Z",
+      "side": 1,
+      "message": "So the code will still run fine on an old Windows (except we can\u0027t get IAudioClient2s)? I.e. there won\u0027t be any linking problems? (I expect there won\u0027t, just double-checking)",
+      "parentUuid": "d1f33995_a030360d",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
