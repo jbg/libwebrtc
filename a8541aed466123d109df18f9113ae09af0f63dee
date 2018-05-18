@@ -183,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "5739dc79_7a07bbe3",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-18T08:21:37Z",
+      "side": 1,
+      "message": "My bad. Added it again since it can be useful for debugging.",
+      "parentUuid": "13f901ea_ea4c86c9",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "317618e0_07d63fb5",
         "filename": "modules/audio_device/win/core_audio_utility_win.cc",
         "patchSetId": 6
@@ -244,6 +262,24 @@
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c89d1bf_27fcebbf",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-18T08:21:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80902309_c4e36c3e",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -515,6 +551,24 @@
       "writtenOn": "2018-05-17T13:40:54Z",
       "side": 1,
       "message": "Perhaps not limited to this test: what about platforms where IAudioClient2 doesn\u0027t exist? Say Windows 7. Will the rest of the code be fine (but return an empty client)? What about this test? Should it be skipped on older Windowses?",
+      "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f33995_a030360d",
+        "filename": "modules/audio_device/win/core_audio_utility_win_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-05-18T08:21:37Z",
+      "side": 1,
+      "message": "Great comment. I am working on porting \"Windows version\" info classes to WebRTC in parallel but have not finished that work yet. I am commenting out this part for now adding a TODO. And then I can add better support to exclude the test on e.g. Win7. Ideally, I should have ~:\n\nABORT_TEST_IF_NOT(DevicesAvailable() || Version() \u003c 10);",
+      "parentUuid": "ee1a15c2_81012dfc",
       "revId": "a8541aed466123d109df18f9113ae09af0f63dee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
