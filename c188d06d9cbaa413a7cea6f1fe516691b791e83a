@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e9b25a6_e09647ef",
+        "filename": "call/bitrate_estimator_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-18T06:42:49Z",
+      "side": 1,
+      "message": "I think const auto\u0026 should work (the pointer is const, even though pointed-to object isn\u0027t).",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 15
+      },
+      "revId": "c188d06d9cbaa413a7cea6f1fe516691b791e83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
