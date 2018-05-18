@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e27d570e_f66ecf9e",
+        "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-18T11:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1025e18_82a73c77",
+      "range": {
+        "startLine": 52,
+        "startChar": 46,
+        "endLine": 52,
+        "endChar": 54
+      },
+      "revId": "3ac7e8a05203c4c34a4232f15baccaf339381c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "769b320d_540c4e0a",
         "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes.py",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "3ac7e8a05203c4c34a4232f15baccaf339381c6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3abe2309_d4429b3f",
+        "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-18T11:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "769b320d_540c4e0a",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "3ac7e8a05203c4c34a4232f15baccaf339381c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "14a86bbc_f918db73",
+        "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-18T11:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1601d228_b6233d3b",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 16
+      },
+      "revId": "3ac7e8a05203c4c34a4232f15baccaf339381c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77269823_170b41c4",
         "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes_test.py",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "5eb5f051_53f45849",
+        "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-18T11:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77269823_170b41c4",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "3ac7e8a05203c4c34a4232f15baccaf339381c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b798ea2d_f7a244d3",
         "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes_test.py",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2018-05-18T06:54:08Z",
       "side": 1,
       "message": "Nice, it tests what it needs but isn\u0027t too specific.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "3ac7e8a05203c4c34a4232f15baccaf339381c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d65c9d_87000625",
+        "filename": "tools_webrtc/presubmit_checks_lib/check_third_party_changes_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-05-18T11:12:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b798ea2d_f7a244d3",
       "range": {
         "startLine": 71,
         "startChar": 4,
