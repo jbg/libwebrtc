@@ -15,7 +15,6 @@
 #include <vector>
 
 #include "call/video_config.h"
-#include "rtc_base/basictypes.h"
 
 namespace cricket {
 struct StreamParams;

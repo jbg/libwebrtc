@@ -17,7 +17,6 @@
 #include "api/optional.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "common_types.h"  // NOLINT(build/include)
-#include "rtc_base/basictypes.h"
 #include "rtc_base/refcount.h"
 #include "rtc_base/scoped_ref_ptr.h"
 #include "typedefs.h"  // NOLINT(build/include)
