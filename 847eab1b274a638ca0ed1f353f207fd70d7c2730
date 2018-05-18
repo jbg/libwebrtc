@@ -88,6 +88,24 @@
       "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8feb95d7_1096d3bb",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-18T08:27:11Z",
+      "side": 1,
+      "message": "I wouldn\u0027t mind seeing it as an implementation detail of FrameBuffer. I leave it to you to decide that though, since you work more on this code. :)",
+      "parentUuid": "8eedf7af_6abede27",
+      "revId": "847eab1b274a638ca0ed1f353f207fd70d7c2730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
