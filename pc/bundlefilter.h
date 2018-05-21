@@ -17,7 +17,6 @@
 #include <vector>
 
 #include "media/base/streamparams.h"
-#include "rtc_base/basictypes.h"
 
 namespace cricket {
 
