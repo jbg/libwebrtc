@@ -143,10 +143,13 @@ if (rtc_include_tests) {
     testonly = true
     visibility = [ ":*" ]  # Only targets in this file can depend on this.
     sources = [
+      "default_video_quality_test_fixture.cc",
       "video_quality_test.cc",
       "video_quality_test.h",
     ]
     deps = [
+      "../api:create_video_quality_test_fixture_api",
+      "../api:video_quality_test_fixture_api",
       "../logging:rtc_event_log_api",
       "../logging:rtc_event_log_impl_output",
       "../media:rtc_audio_video",
@@ -184,6 +187,7 @@ if (rtc_include_tests) {
     ]
     deps = [
       ":video_quality_test",
+      "../api:create_video_quality_test_fixture_api",
       "../modules/pacing:pacing",
       "../rtc_base/experiments:alr_experiment",
       "../test:field_trial",
@@ -207,6 +211,7 @@ if (rtc_include_tests) {
     ]
     deps = [
       ":video_quality_test",
+      "../api:create_video_quality_test_fixture_api",
       "../rtc_base:rtc_base_approved",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
@@ -233,6 +238,7 @@ if (rtc_include_tests) {
 
     deps = [
       ":video_quality_test",
+      "../api:create_video_quality_test_fixture_api",
       "../rtc_base:rtc_base_approved",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
@@ -258,6 +264,7 @@ if (rtc_include_tests) {
     ]
     deps = [
       ":video_quality_test",
+      "../api:create_video_quality_test_fixture_api",
       "../rtc_base:rtc_base_approved",
       "../system_wrappers:field_trial_default",
       "../system_wrappers:metrics_default",
