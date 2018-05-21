@@ -723,11 +723,6 @@ include_rules = [
   "-chromium",
   "+external/webrtc/webrtc",  # Android platform build.
   "+libyuv",
-  # Individual headers that will be moved out of here, see webrtc:4243.
-  "+call/rtp_config.h",
-  "+common_types.h",
-  "+transport.h",
-  "+typedefs.h",
 
   "+WebRTC",
   "+api",
@@ -736,13 +731,3 @@ include_rules = [
   "+test",
   "+rtc_tools",
 ]
-
-# The below rules will be removed when webrtc:4243 is fixed.
-specific_include_rules = {
-  "video_receive_stream\.h": [
-    "+call/video_receive_stream.h",
-  ],
-  "video_send_stream\.h": [
-    "+call/video_send_stream.h",
-  ],
-}
