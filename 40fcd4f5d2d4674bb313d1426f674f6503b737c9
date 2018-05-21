@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1511724e_8c79042b",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-21T19:33:06Z",
+      "side": 1,
+      "message": "Could this class be eliminated, and users switched over to rtc::Buffer instead?",
+      "revId": "40fcd4f5d2d4674bb313d1426f674f6503b737c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
