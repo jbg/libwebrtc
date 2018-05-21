@@ -111,6 +111,8 @@ ReceiveStatisticsProxy::ReceiveStatisticsProxy(
       first_report_block_time_ms_(-1),
       avg_rtt_ms_(0),
       last_content_type_(VideoContentType::UNSPECIFIED),
+      num_delayed_frames_rendered_(0),
+      sum_missed_render_deadline_ms_(0),
       timing_frame_info_counter_(kMovingMaxWindowMs) {
   decode_thread_.DetachFromThread();
   network_thread_.DetachFromThread();
@@ -177,6 +179,18 @@ void ReceiveStatisticsProxy::UpdateHistograms() {
           "WebRTC.Video.DecodedFramesPerSecond",
           static_cast<int>((stats_.frames_decoded * 1000.0f / elapsed_ms) +
                            0.5f));
+
+      const uint32_t frames_rendered = stats_.frames_rendered;
+      if (frames_rendered > 0) {
+        RTC_HISTOGRAM_PERCENTAGE(
+            "WebRTC.Video.DelayedFramesToRenderer",
+            num_delayed_frames_rendered_ * 100 / frames_rendered);
+        if (num_delayed_frames_rendered_ > 0) {
+          RTC_HISTOGRAM_COUNTS_1000(
+              "WebRTC.Video.DelayedFramesToRenderer_AvgDelayInMs",
+              sum_missed_render_deadline_ms_ / num_delayed_frames_rendered_);
+        }
+      }
     }
   }
 
@@ -718,11 +732,11 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
   int height = frame.height();
   RTC_DCHECK_GT(width, 0);
   RTC_DCHECK_GT(height, 0);
-  uint64_t now = clock_->TimeInMilliseconds();
+  int64_t now_ms = clock_->TimeInMilliseconds();
   rtc::CritScope lock(&crit_);
   ContentSpecificStats* content_specific_stats =
       &content_specific_stats_[last_content_type_];
-  renders_fps_estimator_.Update(1, now);
+  renders_fps_estimator_.Update(1, now_ms);
   ++stats_.frames_rendered;
   stats_.width = width;
   stats_.height = height;
@@ -730,6 +744,12 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
   render_pixel_tracker_.AddSamples(sqrt(width * height));
   content_specific_stats->received_width.Add(width);
   content_specific_stats->received_height.Add(height);
+
+  const int64_t time_until_rendering_ms = frame.render_time_ms() - now_ms;
+  if (time_until_rendering_ms < 0) {
+    sum_missed_render_deadline_ms_ += -time_until_rendering_ms;
+    ++num_delayed_frames_rendered_;
+  }
 
   if (frame.ntp_time_ms() > 0) {
     int64_t delay_ms = clock_->CurrentNtpInMilliseconds() - frame.ntp_time_ms();
