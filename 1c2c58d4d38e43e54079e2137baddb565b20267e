@@ -22,6 +22,30 @@
       "revId": "1c2c58d4d38e43e54079e2137baddb565b20267e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26aab09b_d24d3024",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-22T10:59:42Z",
+      "side": 1,
+      "message": "Yes, you are probably right since they will be scaled according to the first sample in each plot. I think that\u0027s fine for the case where you want time of day timestamps on the x axis though.\n\nI plan on making this available through a flag if you agree that this is a the right approach.",
+      "parentUuid": "8fbec17d_dcc0e058",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "1c2c58d4d38e43e54079e2137baddb565b20267e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
