@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fd3bf554_1ae37bbe",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-05-22T22:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b600689_83e2495c",
+      "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8280db3_5b52e167",
         "filename": "rtc_base/ssladapter_unittest.cc",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2018-05-16T18:22:57Z",
       "side": 1,
       "message": "nit: When there\u0027s a test you want to repeat for multiple combinations of parameters, TEST_P helps: https://github.com/google/googletest/blob/master/googletest/docs/AdvancedGuide.md#value-parameterized-tests\n\nThe disadvantage is that by default, it generates test names that only reveal the index of the parameter, and not its value, like:\n\nSSLAdapterTest/Parameterized.TestTransfer/0\nSSLAdapterTest/Parameterized.TestTransfer/1\n\nBut it seems you can add a name-generating functor as an optional argument to fix that. For example, here\u0027s one of our existing parameterized tests with a name generator:\n\n   INSTANTIATE_TEST_CASE_P(\n       PeerConnectionIntegrationTest,\n       PeerConnectionIntegrationInteropTest,\n       Values(std::make_tuple(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),\n              std::make_tuple(SdpSemantics::kUnifiedPlan, SdpSemantics::kPlanB)),\n       [](const testing::TestParamInfo\u003cstd::tuple\u003cSdpSemantics, SdpSemantics\u003e\u003e\n              info) -\u003e std::string {\n         if (std::get\u003c0\u003e(info.param) \u003d\u003d SdpSemantics::kPlanB) {\n           return \"PlanBToUnifiedPlan\";\n         } else {\n           return \"UnifiedPlanToPlanB\";\n         }\n       });\n\nSo you can do that to get \"TLS\"/\"DTLS\" and \"RSA\"/\"ECDSA\" to show up in the name (e.g., \"SSLAdapterTest/Parameterized.TestTransfer/TLS_ECDSA\"), while still getting the benefits of using TEST_P (only having to write each test once, and not four times).",
+      "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5e790a8_6ba8d2dd",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-05-22T22:20:55Z",
+      "side": 1,
+      "message": "I added a TODO to do this in the future just based on time restrictions right now. I just recently learned about TEST_P and being able to set a name is very useful. Thanks!",
+      "parentUuid": "e8280db3_5b52e167",
       "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e0250e_ce3ad3fc",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-05-22T22:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d881ee75_dce31c74",
+      "revId": "8c5d326ef4bbbc95a13db15847b5440295f704df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
