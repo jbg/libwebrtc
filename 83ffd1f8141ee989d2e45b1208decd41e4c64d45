@@ -1,0 +1,239 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "226ede09_bc193c70",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "Isn\u0027t there even an RTC_DEPRECATED macro?",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04723f74_37acf59a",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "nit: .",
+      "range": {
+        "startLine": 989,
+        "startChar": 21,
+        "endLine": 989,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad307aa3_af880399",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "nit: HD, and SD below",
+      "range": {
+        "startLine": 1015,
+        "startChar": 5,
+        "endLine": 1015,
+        "endChar": 7
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e793f3db_c4edffb7",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "This is going to depend on call length. Maybe number of resolution downswitches per minute (or whatever time-unit makes sense)?\nAlternatively time between downswitches.",
+      "range": {
+        "startLine": 91,
+        "startChar": 80,
+        "endLine": 91,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deef1c55_74912964",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "This get\u0027s quite confusing. Couldn\u0027t you make this a member of ReceiveStatisticsProxy::ContentSpecificStats instead? Then we can set the content type at creation instead.",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa4beb69_7d8bb08c",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "Perhaps explicitly pass an Opitional\u003cint64_t\u003e interframe_delay as well, since we already have that in ReceiveStatisticsProxy. That way we can piggy-back on the logic that filters out \"freezes\" that are due to pause/resume events.",
+      "range": {
+        "startLine": 124,
+        "startChar": 12,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb546f27_301cf7fa",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "can we make kMinIncreaseForFreezeMs more dynamic? eg something like max(kMinIncreaseForFreezeMs, 2 * avg(interframe_delay)). Dropping even a single frame in screenshare is otherwise going to trigger a freeze.",
+      "range": {
+        "startLine": 129,
+        "startChar": 16,
+        "endLine": 129,
+        "endChar": 39
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "046e3021_ec5c0d72",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "Would prefer a codec type enum here. We probably want to do this for h264 etc as well.",
+      "range": {
+        "startLine": 37,
+        "startChar": 27,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e0f308e_e3c6d133",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "I wonder if we should use 540p and 270p instead? Eg, count HD downscaled once to still be HD?",
+      "range": {
+        "startLine": 52,
+        "startChar": 57,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "addd62bc_5770111c",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "Please move these constants to an anonymous namespace withing the implementation instead.",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0764683f_aa96baa5",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-22T14:21:25Z",
+      "side": 1,
+      "message": "In general would be useful with few comments here.",
+      "range": {
+        "startLine": 68,
+        "startChar": 38,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
