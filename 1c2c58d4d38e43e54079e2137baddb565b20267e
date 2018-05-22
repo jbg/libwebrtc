@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fbec17d_dcc0e058",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-22T10:53:05Z",
+      "side": 1,
+      "message": "This would scale all the plots differently I think.",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "1c2c58d4d38e43e54079e2137baddb565b20267e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
