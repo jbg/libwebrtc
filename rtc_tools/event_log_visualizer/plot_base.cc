@@ -11,6 +11,7 @@
 #include "rtc_tools/event_log_visualizer/plot_base.h"
 
 #include <algorithm>
+#include <limits>
 
 #include "rtc_base/checks.h"
 
@@ -25,6 +26,14 @@ void Plot::SetXAxis(float min_value,
   xaxis_min_ = min_value - left_margin * (max_value - min_value);
   xaxis_max_ = max_value + right_margin * (max_value - min_value);
   xaxis_label_ = label;
+}
+
+void Plot::SetSuggestedXAxis(float max_value,
+                             std::string label,
+                             float left_margin,
+                             float right_margin) {
+  SetSuggestedXAxis(std::numeric_limits<float>::max(), max_value, label,
+                    left_margin, right_margin);
 }
 
 void Plot::SetSuggestedXAxis(float min_value,

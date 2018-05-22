@@ -111,6 +111,10 @@ class Plot {
   // but modified such that all points in the data series can be represented
   // on the x-axis. The margins are measured as fractions of the range of
   // x-values and are added to either side of the plot.
+  void SetSuggestedXAxis(float max_value,
+                         std::string label,
+                         float left_margin = 0,
+                         float right_margin = 0);
   void SetSuggestedXAxis(float min_value,
                          float max_value,
                          std::string label,
