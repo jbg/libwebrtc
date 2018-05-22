@@ -52,6 +52,24 @@
       "revId": "40fcd4f5d2d4674bb313d1426f674f6503b737c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71107d8a_2affaa87",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-22T13:41:00Z",
+      "side": 1,
+      "message": "I\u0027m expecting that tests use MemoryStream to exercise code that expects a StreamInterface. But I haven\u0027t really investigated.",
+      "parentUuid": "7cbdb741_2f75ceac",
+      "revId": "40fcd4f5d2d4674bb313d1426f674f6503b737c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
