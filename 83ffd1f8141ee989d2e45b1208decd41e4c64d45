@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d1a445ee_59dd2cd7",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "226ede09_bc193c70",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04723f74_37acf59a",
         "filename": "video/receive_statistics_proxy_unittest.cc",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c07b591_79c5bc0a",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04723f74_37acf59a",
+      "range": {
+        "startLine": 989,
+        "startChar": 21,
+        "endLine": 989,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "f1a87030_21472c04",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad307aa3_af880399",
+      "range": {
+        "startLine": 1015,
+        "startChar": 5,
+        "endLine": 1015,
+        "endChar": 7
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e793f3db_c4edffb7",
         "filename": "video/video_quality_observer.cc",
         "patchSetId": 5
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "80cd7430_f028ea7c",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e793f3db_c4edffb7",
+      "range": {
+        "startLine": 91,
+        "startChar": 80,
+        "endLine": 91,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "deef1c55_74912964",
         "filename": "video/video_quality_observer.cc",
         "patchSetId": 5
@@ -99,6 +189,24 @@
       "writtenOn": "2018-05-22T14:21:25Z",
       "side": 1,
       "message": "This get\u0027s quite confusing. Couldn\u0027t you make this a member of ReceiveStatisticsProxy::ContentSpecificStats instead? Then we can set the content type at creation instead.",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a670a08a_2fcafa00",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "No, the long delay caused by different content type will be counted as freeze. It would be possible to pass an interframe_delay directly instead of current_time, but it will confuse aggregated metric which I want to be for whole user experience.\n\nAlso, it will be split on spatial layers and experiments, and we don\u0027t want that and we will have to write some aggregating logic.\n\nAnother solution would be to create two video_quality_observers for realtime/screenshare, but it will be confusing to have contentSpecificStats sliced on simulcast/content/experiment and aggregated and separately videoQualityObserver sliced only on content.",
+      "parentUuid": "deef1c55_74912964",
       "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "003a57f1_7c6b1420",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "No, I think we want that pause to be counted as a freeze.",
+      "parentUuid": "fa4beb69_7d8bb08c",
+      "range": {
+        "startLine": 124,
+        "startChar": 12,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb546f27_301cf7fa",
         "filename": "video/video_quality_observer.cc",
         "patchSetId": 5
@@ -148,6 +280,30 @@
       "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9c74acb_dda4c193",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb546f27_301cf7fa",
+      "range": {
+        "startLine": 129,
+        "startChar": 16,
+        "endLine": 129,
+        "endChar": 39
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -174,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "8f9ca189_66b34d4d",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "046e3021_ec5c0d72",
+      "range": {
+        "startLine": 37,
+        "startChar": 27,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0f308e_e3c6d133",
         "filename": "video/video_quality_observer.h",
         "patchSetId": 5
@@ -197,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "475bf41b_53058c2f",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done. I agree on HD, but for SD i don\u0027t want to count 270p.",
+      "parentUuid": "0e0f308e_e3c6d133",
+      "range": {
+        "startLine": 52,
+        "startChar": 57,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "addd62bc_5770111c",
         "filename": "video/video_quality_observer.h",
         "patchSetId": 5
@@ -211,6 +415,24 @@
       "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9093ff4f_480e84ae",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "addd62bc_5770111c",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -234,6 +456,30 @@
       "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c39c22b9_1089cebc",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-05-22T15:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0764683f_aa96baa5",
+      "range": {
+        "startLine": 68,
+        "startChar": 38,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
