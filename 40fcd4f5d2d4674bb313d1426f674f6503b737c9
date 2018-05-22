@@ -16,6 +16,24 @@
       "revId": "40fcd4f5d2d4674bb313d1426f674f6503b737c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec9e198c_76d720f8",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-22T06:44:46Z",
+      "side": 1,
+      "message": "It\u0027s used in tests, including httpserver.cc, which is only used in tests.\nI\u0027d prefer to delete rather than refactor that code, but it\u0027s unlikely to happen soon.\n\nI\u0027m considering splitting the MemoryStream out to its own source file, and move it to some test-only build target. (But it would be cute to have the gerrit binary size plugin up and running before that).",
+      "parentUuid": "1511724e_8c79042b",
+      "revId": "40fcd4f5d2d4674bb313d1426f674f6503b737c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
