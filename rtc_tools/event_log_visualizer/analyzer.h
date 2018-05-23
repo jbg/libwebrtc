@@ -151,7 +151,8 @@ class EventLogAnalyzer {
     return name.str();
   }
 
-  float ToCallTime(int64_t timestamp) const;
+  int64_t ToCallTimeUs(int64_t timestamp) const;
+  float ToCallTimeSec(int64_t timestamp) const;
 
   void Alert_RtpLogTimeGap(PacketDirection direction,
                            float time_seconds,
@@ -231,6 +232,7 @@ class EventLogAnalyzer {
   // First and last events of the log.
   int64_t begin_time_;
   int64_t end_time_;
+  const bool normalize_time_;
 
   // Duration (in seconds) of log file.
   float call_duration_s_;
