@@ -15,7 +15,9 @@
 #include "api/test/create_videocodec_test_fixture.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "media/base/mediaconstants.h"
+#include "modules/video_coding/codecs/test/android_codec_factory_helper.h"
 #include "modules/video_coding/codecs/test/videocodec_test_fixture_impl.h"
+#include "rtc_base/ptr_util.h"
 #include "test/gtest.h"
 #include "test/testsupport/fileutils.h"
 
@@ -35,13 +37,16 @@ VideoCodecTestFixture::Config CreateConfig() {
   config.hw_decoder = true;
   return config;
 }
+
 }  // namespace
 
 TEST(VideoCodecTestMediaCodec, ForemanCif500kbpsVp8) {
+  InitializeAndroidObjects();
   auto config = CreateConfig();
   config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, false, false, false,
                           352, 288);
-  auto fixture = CreateVideoCodecTestFixture(config);
+  auto fixture = CreateVideoCodecTestFixture(
+      config, CreateAndroidDecoderFactory(), CreateAndroidEncoderFactory());
 
   std::vector<RateProfile> rate_profiles = {
       {500, kForemanFramerateFps, kForemanNumFrames}};
@@ -59,13 +64,15 @@ TEST(VideoCodecTestMediaCodec, ForemanCif500kbpsVp8) {
 }
 
 TEST(VideoCodecTestMediaCodec, ForemanCif500kbpsH264CBP) {
+  InitializeAndroidObjects();
   auto config = CreateConfig();
   const auto frame_checker = rtc::MakeUnique<
       VideoCodecTestFixtureImpl::H264KeyframeChecker>();
   config.encoded_frame_checker = frame_checker.get();
   config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
                           352, 288);
-  auto fixture = CreateVideoCodecTestFixture(config);
+  auto fixture = CreateVideoCodecTestFixture(
+      config, CreateAndroidDecoderFactory(), CreateAndroidEncoderFactory());
 
   std::vector<RateProfile> rate_profiles = {
       {500, kForemanFramerateFps, kForemanNumFrames}};
@@ -85,6 +92,7 @@ TEST(VideoCodecTestMediaCodec, ForemanCif500kbpsH264CBP) {
 // TODO(brandtr): Enable this test when we have trybots/buildbots with
 // HW encoders that support CHP.
 TEST(VideoCodecTestMediaCodec, DISABLED_ForemanCif500kbpsH264CHP) {
+  InitializeAndroidObjects();
   auto config = CreateConfig();
   const auto frame_checker = rtc::MakeUnique<
       VideoCodecTestFixtureImpl::H264KeyframeChecker>();
@@ -93,7 +101,8 @@ TEST(VideoCodecTestMediaCodec, DISABLED_ForemanCif500kbpsH264CHP) {
   config.encoded_frame_checker = frame_checker.get();
   config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
                           352, 288);
-  auto fixture = CreateVideoCodecTestFixture(config);
+  auto fixture = CreateVideoCodecTestFixture(
+      config, CreateAndroidDecoderFactory(), CreateAndroidEncoderFactory());
 
   std::vector<RateProfile> rate_profiles = {
       {500, kForemanFramerateFps, kForemanNumFrames}};
@@ -111,6 +120,7 @@ TEST(VideoCodecTestMediaCodec, DISABLED_ForemanCif500kbpsH264CHP) {
 }
 
 TEST(VideoCodecTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
+  InitializeAndroidObjects();
   auto config = CreateConfig();
   const int kNumFrames = 30;
   const std::vector<std::string> codecs = {cricket::kVp8CodecName,
@@ -133,7 +143,8 @@ TEST(VideoCodecTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
       config.SetCodecSettings(codec, 1, 1, 1, false, false, false, width,
                               height);
 
-      auto fixture = CreateVideoCodecTestFixture(config);
+      auto fixture = CreateVideoCodecTestFixture(
+          config, CreateAndroidDecoderFactory(), CreateAndroidEncoderFactory());
       fixture->RunTest(rate_profiles, nullptr /* rc_thresholds */,
                        &quality_thresholds, nullptr /* bs_thresholds */,
                        nullptr /* visualization_params */);
