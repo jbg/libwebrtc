@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e87ca7a3_ab04b4fc",
+        "filename": "video/end_to_end_tests/multi_codec_receive_tests.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-23T08:02:05Z",
+      "side": 1,
+      "message": "Maybe 0 instead?",
+      "range": {
+        "startLine": 36,
+        "startChar": 11,
+        "endLine": 36,
+        "endChar": 48
+      },
+      "revId": "c7650d122748b97064250cdc7d46375af33b74e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b0ee9a0_b9b81785",
+        "filename": "video/end_to_end_tests/multi_codec_receive_tests.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-05-23T08:02:05Z",
+      "side": 1,
+      "message": "How about directly coupling the codec with the configuration, instead of doing the modulo for the temporal layers?\n\n\nstruct CodecConfig {\n  std::string payload_name;\n  VideoEncoderFactory* encoder_factory;\n  int num_temporal_layers;\n}\n\nvoid MultiCodecReceiveTest::RunTestWithCodecs(const std::vector\u003cCodecConfig\u003e\u0026 codec_configs) {\n  for (const auto\u0026 codec_config : codec_configs) {\n    // Recreate with new codec and config (temporal layers).\n    ...\n  }\n}\n\nTEST_F(MultiCodecReceiveTest, SingleStreamReceivesVp8H264) {\n  std::vector\u003cCodecConfig\u003e codec_configs \u003d {{\"VP8\", \u0026vp8_encoder_factory, 3}, {\"H264\", \u0026h264_encoder_factory, 1}, {\"VP8\", \u0026vp8_encoder_factory, 3}};\n  RunTestWithCodecs(codec_configs);\n}",
+      "range": {
+        "startLine": 220,
+        "startChar": 28,
+        "endLine": 220,
+        "endChar": 45
+      },
+      "revId": "c7650d122748b97064250cdc7d46375af33b74e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
