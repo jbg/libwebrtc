@@ -64,8 +64,6 @@ rtc_static_library("congestion_controller") {
 rtc_static_library("transport_feedback") {
   visibility = [ "*" ]
   sources = [
-    "send_time_history.cc",
-    "send_time_history.h",
     "transport_feedback_adapter.cc",
     "transport_feedback_adapter.h",
   ]
@@ -76,6 +74,7 @@ rtc_static_library("transport_feedback") {
     "../../rtc_base:rtc_base_approved",
     "../../system_wrappers:system_wrappers",
     "../rtp_rtcp:rtp_rtcp_format",
+    "rtp:transport_feedback",
   ]
 }
 
@@ -159,7 +158,6 @@ if (rtc_include_tests) {
       "probe_controller_unittest.cc",
       "receive_side_congestion_controller_unittest.cc",
       "send_side_congestion_controller_unittest.cc",
-      "send_time_history_unittest.cc",
       "transport_feedback_adapter_unittest.cc",
       "trendline_estimator_unittest.cc",
     ]
