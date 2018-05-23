@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87348d6c_c1c641f7",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "This should be true, right?",
+      "range": {
+        "startLine": 455,
+        "startChar": 22,
+        "endLine": 455,
+        "endChar": 27
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d74238b_3a9c6854",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "This seems to be switched. If the normalize_ is true then this will return 0, causing the function to not subtract the start time of the call.\n\nThe Process functions currently accept function objects that extract the y-coordinates. I wonder if we do the same with the x-coordinate and pass in a lambda that calls ToCallTimeSec? Sounds like it would be simpler.",
+      "range": {
+        "startLine": 546,
+        "startChar": 35,
+        "endLine": 546,
+        "endChar": 47
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b906306e_96f3101c",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 668,
+        "startChar": 8,
+        "endLine": 668,
+        "endChar": 20
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f7dea05_d89f3f7b",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 753,
+        "startChar": 8,
+        "endLine": 753,
+        "endChar": 20
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4de5afa7_1c49f07f",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 761,
+        "startChar": 8,
+        "endLine": 761,
+        "endChar": 20
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b639bde9_90d717cc",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 787,
+        "startChar": 8,
+        "endLine": 787,
+        "endChar": 20
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16182a7_fc61cab6",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 795,
+        "startChar": 8,
+        "endLine": 795,
+        "endChar": 20
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaf6b6d2_3b8ffc1b",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "This could also be done by passing a lambda that calls ToCallTimeSec.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 33,
+        "endLine": 1045,
+        "endChar": 48
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3852cd9f_5b06cdb0",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 1464,
+        "startChar": 6,
+        "endLine": 1464,
+        "endChar": 18
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7589fd52_c12168a9",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 1484,
+        "startChar": 6,
+        "endLine": 1484,
+        "endChar": 18
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e30328dd_b287912b",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 1504,
+        "startChar": 6,
+        "endLine": 1504,
+        "endChar": 18
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef7a276e_726b4338",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 1525,
+        "startChar": 6,
+        "endLine": 1525,
+        "endChar": 18
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef3a0f3_6941d697",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 1545,
+        "startChar": 6,
+        "endLine": 1545,
+        "endChar": 18
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5da8f0bb_bdd007e6",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T10:55:04Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "2040e6ddabe356ec204c2cfd700f7903ed1c6dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
