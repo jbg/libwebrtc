@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "937f7113_478c4e53",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-23T13:24:29Z",
+      "side": 1,
+      "message": "Does this work? It looks like a call to a static method.\n\nMaybe this-\u003eToCallTime(...) to be clear? Same below.",
+      "range": {
+        "startLine": 545,
+        "startChar": 13,
+        "endLine": 545,
+        "endChar": 29
+      },
+      "revId": "3d524f20775cbfe35711b054090c7045db3f5077",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
