@@ -15,6 +15,7 @@
 #include <algorithm>
 
 #include "modules/remote_bitrate_estimator/test/packet_sender.h"
+#include "rtc_base/system/unused.h"
 #include "typedefs.h"  // NOLINT(build/include)
 
 namespace webrtc {

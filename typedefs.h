@@ -16,6 +16,5 @@
 #include <stdint.h>
 
 #include "rtc_base/system/arch.h"
-#include "rtc_base/system/unused.h"
 
 #endif  // TYPEDEFS_H_

@@ -21,6 +21,7 @@
 
 #include <stdbool.h>
 #include "modules/audio_coding/codecs/ilbc/defines.h"
+#include "rtc_base/system/unused.h"
 
 /*----------------------------------------------------------------*
  *  Construct decoded vector from codebook and gains.

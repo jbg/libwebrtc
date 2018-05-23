@@ -22,6 +22,7 @@
 #include <stdbool.h>
 
 #include "modules/audio_coding/codecs/ilbc/defines.h"
+#include "rtc_base/system/unused.h"
 
 // Returns true on success, false on failure. In case of failure, the decoder
 // state may be corrupted and needs resetting.

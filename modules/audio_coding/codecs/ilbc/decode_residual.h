@@ -21,6 +21,7 @@
 
 #include <stdbool.h>
 #include "modules/audio_coding/codecs/ilbc/defines.h"
+#include "rtc_base/system/unused.h"
 
 /*----------------------------------------------------------------*
  *  frame residual decoder function (subrutine to iLBC_decode)
