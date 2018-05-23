@@ -213,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "80b44744_01baa243",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-23T08:27:21Z",
+      "side": 1,
+      "message": "I see.\nWhat if we have a unique_ptr\u003cVideoQualityObserver\u003e in ReceiveStatisticsProxy, then on decoded frame it can detect a content type switch (I think it already does?) and reset the instance?\nWe could also add the OnStreamInactive() to this class and forward from the stats proxy as well.  I would rather not the have the muting/unmuting camera condition pollute these stats, if possible.",
+      "parentUuid": "a670a08a_2fcafa00",
+      "revId": "83ffd1f8141ee989d2e45b1208decd41e4c64d45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fa4beb69_7d8bb08c",
         "filename": "video/video_quality_observer.cc",
         "patchSetId": 5

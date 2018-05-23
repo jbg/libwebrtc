@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22a68282_0c7f5548",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-23T08:27:21Z",
+      "side": 1,
+      "message": "// TODO: Add thresholds for H264/HEVC?",
+      "revId": "ecb906d614ff717f6620c708906e15227ca7a708",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeefca66_5e150454",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-23T08:27:21Z",
+      "side": 1,
+      "message": "switch/case?",
+      "range": {
+        "startLine": 158,
+        "startChar": 52,
+        "endLine": 158,
+        "endChar": 0
+      },
+      "revId": "ecb906d614ff717f6620c708906e15227ca7a708",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff95c294_6dcdb3c8",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-23T08:27:21Z",
+      "side": 1,
+      "message": "nit: s/Times/Time",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 60,
+        "endChar": 10
+      },
+      "revId": "ecb906d614ff717f6620c708906e15227ca7a708",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef4ea79_ba541d37",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-23T08:27:21Z",
+      "side": 1,
+      "message": "Note that the Resolution enum is used as index?\nOr make it a map\u003cResolution, int64_t\u003e so the usage is explicit.",
+      "range": {
+        "startLine": 65,
+        "startChar": 46,
+        "endLine": 65,
+        "endChar": 0
+      },
+      "revId": "ecb906d614ff717f6620c708906e15227ca7a708",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
