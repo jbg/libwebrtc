@@ -521,6 +521,11 @@ void VideoStreamEncoder::ReconfigureEncoder() {
       video_sender_.RegisterExternalEncoder(nullptr, false);
     }
 
+    SdpVideoFormat video_format = encoder_config_.video_format;
+    if (settings_.experiment_vaapi_vp8_hw_encoding) {
+      video_format.parameters[kExprimentVaapiVp8HwEncodingParameter] =
+          "Enabled";
+    }
     encoder_ = settings_.encoder_factory->CreateVideoEncoder(
         encoder_config_.video_format);
     // TODO(nisse): What to do if creating the encoder fails? Crash,

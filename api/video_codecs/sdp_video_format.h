@@ -16,6 +16,13 @@
 
 namespace webrtc {
 
+// This artificial SDP parameter is used to pass the experiment status to
+// video encoder factory. It's added explicitly before call to
+// |CreateVideoEncoder()| with value "Enabled" if experiment is enabled.
+// TODO(ilnik): remove this when VAAPI VP8 experiment is over.
+const char kExprimentVaapiVp8HwEncodingParameter[] =
+    "ExprimentVaapiVp8HwEncoding";
+
 // SDP specification for a single video codec.
 // NOTE: This class is still under development and may change without notice.
 struct SdpVideoFormat {
