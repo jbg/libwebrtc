@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea8c9e7_f1efc7b9",
+        "filename": "pc/videotrack_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-23T08:46:28Z",
+      "side": 1,
+      "message": "I\u0027d like to replace cricket::VideoCapturer with some other source of frames, but that\u0027s for a different cl.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 52
+      },
+      "revId": "d722c390fd1135913a723af0abee165843e6f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
