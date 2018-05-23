@@ -17,6 +17,7 @@
 
 namespace webrtc {
 
+// TODO(nisse): Inherit VideoTrackSourceInterface, not VideoTrackSource?
 // A minimal implementation of VideoTrackSource, which doesn't produce
 // any frames.
 class FakeVideoTrackSource : public VideoTrackSource {
@@ -33,9 +34,10 @@ class FakeVideoTrackSource : public VideoTrackSource {
 
  protected:
   explicit FakeVideoTrackSource(bool is_screencast)
-      : VideoTrackSource(&source_, false /* remote */),
-        is_screencast_(is_screencast) {}
-  virtual ~FakeVideoTrackSource() {}
+      : VideoTrackSource(false /* remote */), is_screencast_(is_screencast) {}
+  ~FakeVideoTrackSource() override = default;
+
+  rtc::VideoSourceInterface<VideoFrame>* source() override { return &source_; }
 
  private:
   class Source : public rtc::VideoSourceInterface<VideoFrame> {
