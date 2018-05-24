@@ -125,7 +125,6 @@ P2PTransportChannel::P2PTransportChannel(const std::string& transport_name,
       ice_role_(ICEROLE_UNKNOWN),
       tiebreaker_(0),
       gathering_state_(kIceGatheringNew),
-      rand_(rtc::SystemTimeNanos()),
       config_(RECEIVING_TIMEOUT,
               BACKUP_CONNECTION_PING_INTERVAL,
               GATHER_ONCE /* continual_gathering_policy */,
@@ -138,6 +137,11 @@ P2PTransportChannel::P2PTransportChannel(const std::string& transport_name,
   // Validate IceConfig even for mostly built-in constant default values in case
   // we change them.
   RTC_DCHECK(ValidateIceConfig(config_).ok());
+  webrtc::BasicRegatheringController::Config regathering_config(
+      config_.regather_on_failed_networks_interval_or_default(),
+      config_.regather_all_networks_interval_range);
+  regathering_controller_.reset(new webrtc::BasicRegatheringController(
+      this, regathering_config, network_thread_));
   ice_event_log_.set_event_log(event_log);
 }
 
@@ -164,6 +168,7 @@ void P2PTransportChannel::AddAllocatorSession(
     allocator_session()->PruneAllPorts();
   }
   allocator_sessions_.push_back(std::move(session));
+  regathering_controller_->set_allocator_session(allocator_session());
 
   // We now only want to apply new candidates that we receive to the ports
   // created by this new session because these are replacing those of the
@@ -570,6 +575,11 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
                      << config.stun_keepalive_interval_or_default();
   }
 
+  webrtc::BasicRegatheringController::Config regathering_config(
+      config_.regather_on_failed_networks_interval_or_default(),
+      config_.regather_all_networks_interval_range);
+  regathering_controller_->set_config(regathering_config);
+
   RTC_DCHECK(ValidateIceConfig(config_).ok());
 }
 
@@ -622,6 +632,13 @@ RTCError P2PTransportChannel::ValidateIceConfig(const IceConfig& config) {
     return RTCError(RTCErrorType::INVALID_PARAMETER,
                     "The timeout period for the writability state to become "
                     "UNRELIABLE is longer than that to become TIMEOUT.");
+  }
+
+  if (config.regather_all_networks_interval_range &&
+      config.regather_all_networks_interval_range.value().min() < 0) {
+    return RTCError(
+        RTCErrorType::INVALID_RANGE,
+        "The minimum regathering interval is negative for all networks.");
   }
 
   return RTCError::OK();
@@ -1291,15 +1308,12 @@ void P2PTransportChannel::MaybeStartPinging() {
     invoker_.AsyncInvoke<void>(
         RTC_FROM_HERE, thread(),
         rtc::Bind(&P2PTransportChannel::CheckAndPing, this));
-    invoker_.AsyncInvokeDelayed<void>(
-        RTC_FROM_HERE, thread(),
-        rtc::Bind(&P2PTransportChannel::RegatherOnFailedNetworks, this),
-        config_.regather_on_failed_networks_interval_or_default());
+    regathering_controller_->ScheduleRegatheringOnFailedNetworks(
+        true /* repeated */);
+
     if (config_.regather_all_networks_interval_range) {
-      invoker_.AsyncInvokeDelayed<void>(
-          RTC_FROM_HERE, thread(),
-          rtc::Bind(&P2PTransportChannel::RegatherOnAllNetworks, this),
-          SampleRegatherAllNetworksInterval());
+      regathering_controller_->ScheduleRegatheringOnAllNetworks(
+          true /* repeated */);
     }
     started_pinging_ = true;
   }
@@ -2184,31 +2198,6 @@ void P2PTransportChannel::OnCandidatesRemoved(
   SignalCandidatesRemoved(this, candidates_to_remove);
 }
 
-void P2PTransportChannel::RegatherOnFailedNetworks() {
-  // Only re-gather when the current session is in the CLEARED state (i.e., not
-  // running or stopped). It is only possible to enter this state when we gather
-  // continually, so there is an implicit check on continual gathering here.
-  if (!allocator_sessions_.empty() && allocator_session()->IsCleared()) {
-    allocator_session()->RegatherOnFailedNetworks();
-  }
-
-  invoker_.AsyncInvokeDelayed<void>(
-      RTC_FROM_HERE, thread(),
-      rtc::Bind(&P2PTransportChannel::RegatherOnFailedNetworks, this),
-      config_.regather_on_failed_networks_interval_or_default());
-}
-
-void P2PTransportChannel::RegatherOnAllNetworks() {
-  if (!allocator_sessions_.empty() && allocator_session()->IsCleared()) {
-    allocator_session()->RegatherOnAllNetworks();
-  }
-
-  invoker_.AsyncInvokeDelayed<void>(
-      RTC_FROM_HERE, thread(),
-      rtc::Bind(&P2PTransportChannel::RegatherOnAllNetworks, this),
-      SampleRegatherAllNetworksInterval());
-}
-
 void P2PTransportChannel::PruneAllPorts() {
   pruned_ports_.insert(pruned_ports_.end(), ports_.begin(), ports_.end());
   ports_.clear();
@@ -2360,12 +2349,6 @@ void P2PTransportChannel::set_receiving(bool receiving) {
   }
   receiving_ = receiving;
   SignalReceivingState(this);
-}
-
-int P2PTransportChannel::SampleRegatherAllNetworksInterval() {
-  auto interval = config_.regather_all_networks_interval_range;
-  RTC_DCHECK(interval);
-  return rand_.Rand(interval->min(), interval->max());
 }
 
 void P2PTransportChannel::LogCandidatePairEvent(
