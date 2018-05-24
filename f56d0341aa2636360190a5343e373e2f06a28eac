@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "938ecae7_348d4b84",
+        "filename": "modules/audio_processing/aec3/decimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-05-24T21:51:49Z",
+      "side": 1,
+      "message": "The name of this filter is now incorrect (as it can also be a bandpass filter)\n\nCould we change it to something else? What about anti_aliasing_filter?",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "f56d0341aa2636360190a5343e373e2f06a28eac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
