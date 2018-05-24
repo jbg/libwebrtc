@@ -559,13 +559,6 @@ if (rtc_include_tests) {
     }
   }
 
-  rtc_source_set("simulcast_test_fixture_api") {
-    testonly = true
-    sources = [
-      "codecs/vp8/simulcast_test_fixture.h",
-    ]
-  }
-
   rtc_source_set("simulcast_test_fixture_impl") {
     testonly = true
     sources = [
@@ -580,11 +573,11 @@ if (rtc_include_tests) {
 
     deps = [
       ":mock_headers",
-      ":simulcast_test_fixture_api",
       ":video_codec_interface",
       ":video_coding",
       ":webrtc_vp8_helpers",
       "../../:webrtc_common",
+      "../../api:simulcast_test_fixture_api",
       "../../api/video:video_frame",
       "../../api/video:video_frame_i420",
       "../../api/video_codecs:video_codecs_api",
@@ -847,6 +840,8 @@ if (rtc_include_tests) {
       "..:module_api",
       "../..:webrtc_common",
       "../../:typedefs",
+      "../../api:create_simulcast_test_fixture_api",
+      "../../api:simulcast_test_fixture_api",
       "../../api:videocodec_test_fixture_api",
       "../../api/video:video_frame",
       "../../api/video:video_frame_i420",

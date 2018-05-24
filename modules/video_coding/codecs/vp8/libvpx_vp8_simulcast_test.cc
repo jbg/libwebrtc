@@ -10,95 +10,97 @@
 
 #include <memory>
 
+#include "api/test/create_simulcast_test_fixture.h"
+#include "api/test/simulcast_test_fixture.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
-#include "modules/video_coding/codecs/vp8/simulcast_test_fixture_impl.h"
 #include "rtc_base/ptr_util.h"
 #include "test/function_video_decoder_factory.h"
 #include "test/function_video_encoder_factory.h"
+#include "test/gtest.h"
 
 namespace webrtc {
 namespace test {
 
 namespace {
-std::unique_ptr<SimulcastTestFixture> CreateSimulcastTestFixture() {
+std::unique_ptr<SimulcastTestFixture> CreateSpecificSimulcastTestFixture() {
   std::unique_ptr<VideoEncoderFactory> encoder_factory =
       rtc::MakeUnique<FunctionVideoEncoderFactory>(
           []() { return VP8Encoder::Create(); });
   std::unique_ptr<VideoDecoderFactory> decoder_factory =
       rtc::MakeUnique<FunctionVideoDecoderFactory>(
           []() { return VP8Decoder::Create(); });
-  return rtc::MakeUnique<SimulcastTestFixtureImpl>(std::move(encoder_factory),
-                                                   std::move(decoder_factory));
+  return CreateSimulcastTestFixture(std::move(encoder_factory),
+                                    std::move(decoder_factory));
 }
 }  // namespace
 
 TEST(LibvpxVp8SimulcastTest, TestKeyFrameRequestsOnAllStreams) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestKeyFrameRequestsOnAllStreams();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestPaddingAllStreams) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestPaddingAllStreams();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestPaddingTwoStreams) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestPaddingTwoStreams();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestPaddingTwoStreamsOneMaxedOut) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestPaddingTwoStreamsOneMaxedOut();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestPaddingOneStream) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestPaddingOneStream();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestPaddingOneStreamTwoMaxedOut) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestPaddingOneStreamTwoMaxedOut();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestSendAllStreams) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestSendAllStreams();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestDisablingStreams) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestDisablingStreams();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestActiveStreams) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestActiveStreams();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestSwitchingToOneStream) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestSwitchingToOneStream();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestSwitchingToOneOddStream) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestSwitchingToOneOddStream();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestSwitchingToOneSmallStream) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestSwitchingToOneSmallStream();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestSpatioTemporalLayers333PatternEncoder) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestSpatioTemporalLayers333PatternEncoder();
 }
 
 TEST(LibvpxVp8SimulcastTest, TestStrideEncodeDecode) {
-  auto fixture = CreateSimulcastTestFixture();
+  auto fixture = CreateSpecificSimulcastTestFixture();
   fixture->TestStrideEncodeDecode();
 }
 
