@@ -12,6 +12,8 @@
 #include <memory>
 #include <vector>
 
+#include "api/test/create_simulcast_test_fixture.h"
+#include "api/test/simulcast_test_fixture.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "api/video_codecs/video_encoder_factory.h"
 #include "common_video/include/video_frame_buffer.h"
@@ -36,7 +38,7 @@ namespace {
 constexpr int kDefaultWidth = 1280;
 constexpr int kDefaultHeight = 720;
 
-std::unique_ptr<SimulcastTestFixture> CreateSimulcastTestFixture(
+std::unique_ptr<SimulcastTestFixture> CreateSpecificSimulcastTestFixture(
     VideoEncoderFactory* internal_encoder_factory) {
   std::unique_ptr<VideoEncoderFactory> encoder_factory =
       rtc::MakeUnique<FunctionVideoEncoderFactory>(
@@ -47,95 +49,95 @@ std::unique_ptr<SimulcastTestFixture> CreateSimulcastTestFixture(
   std::unique_ptr<VideoDecoderFactory> decoder_factory =
       rtc::MakeUnique<FunctionVideoDecoderFactory>(
           []() { return VP8Decoder::Create(); });
-  return rtc::MakeUnique<SimulcastTestFixtureImpl>(std::move(encoder_factory),
-                                                   std::move(decoder_factory));
+  return CreateSimulcastTestFixture(std::move(encoder_factory),
+                                    std::move(decoder_factory));
 }
 
 }  // namespace
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestKeyFrameRequestsOnAllStreams) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestKeyFrameRequestsOnAllStreams();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestPaddingAllStreams) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestPaddingAllStreams();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestPaddingTwoStreams) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestPaddingTwoStreams();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestPaddingTwoStreamsOneMaxedOut) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestPaddingTwoStreamsOneMaxedOut();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestPaddingOneStream) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestPaddingOneStream();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestPaddingOneStreamTwoMaxedOut) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestPaddingOneStreamTwoMaxedOut();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestSendAllStreams) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestSendAllStreams();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestDisablingStreams) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestDisablingStreams();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestActiveStreams) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestActiveStreams();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestSwitchingToOneStream) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestSwitchingToOneStream();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestSwitchingToOneOddStream) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestSwitchingToOneOddStream();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest, TestStrideEncodeDecode) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestStrideEncodeDecode();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest,
      TestSpatioTemporalLayers333PatternEncoder) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestSpatioTemporalLayers333PatternEncoder();
 }
 
 TEST(SimulcastEncoderAdapterSimulcastTest,
      TestSpatioTemporalLayers321PatternEncoder) {
   InternalEncoderFactory internal_encoder_factory;
-  auto fixture = CreateSimulcastTestFixture(&internal_encoder_factory);
+  auto fixture = CreateSpecificSimulcastTestFixture(&internal_encoder_factory);
   fixture->TestSpatioTemporalLayers321PatternEncoder();
 }
 

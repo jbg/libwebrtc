@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CODING_CODECS_VP8_SIMULCAST_TEST_FIXTURE_H_
-#define MODULES_VIDEO_CODING_CODECS_VP8_SIMULCAST_TEST_FIXTURE_H_
+#ifndef API_TEST_SIMULCAST_TEST_FIXTURE_H_
+#define API_TEST_SIMULCAST_TEST_FIXTURE_H_
 
 namespace webrtc {
 namespace test {
@@ -38,4 +38,4 @@ class SimulcastTestFixture {
 }  // namespace test
 }  // namespace webrtc
 
-#endif  // MODULES_VIDEO_CODING_CODECS_VP8_SIMULCAST_TEST_FIXTURE_H_
+#endif  // API_TEST_SIMULCAST_TEST_FIXTURE_H_
