@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "509abaf5_721f9932",
+        "filename": "modules/rtp_rtcp/source/rtp_receiver_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-24T07:52:08Z",
+      "side": 1,
+      "message": "This seems to be the only use of the |ssrc_| member, returned by GetSources. What\u0027s the proper logic for the remote ssrc and GetSources? There will only be one, but maybe we should exclude it from the GetSources list if we haven\u0027t seen any packets the last 10 seconds (kGetSourcesTimeoutMs)?\n\nIn case it is ok to always include the remote ssrc, it would be easy to add that to the list higher up, in AudioReceiveStream::GetSources().",
+      "range": {
+        "startLine": 348,
+        "startChar": 39,
+        "endLine": 348,
+        "endChar": 44
+      },
+      "revId": "ad0a8e22d124eff3addf9ee7d3c32c0c978932b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
