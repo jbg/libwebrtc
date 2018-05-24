@@ -28,7 +28,6 @@
 #include "media/engine/simulcast_encoder_adapter.h"
 #include "media/engine/videodecodersoftwarefallbackwrapper.h"
 #include "media/engine/videoencodersoftwarefallbackwrapper.h"
-#include "modules/video_coding/codecs/vp8/include/vp8_common_types.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_coding.h"
@@ -148,7 +147,7 @@ std::string FilenameWithParams(
 }  // namespace
 
 VideoCodecTestFixtureImpl::Config::Config() = default;
-
+// TODO(kthelgason): Move this out of the test fixture impl and
 void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
     std::string codec_name,
     size_t num_simulcast_streams,
@@ -162,7 +161,7 @@ void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
   this->codec_name = codec_name;
   VideoCodecType codec_type = PayloadStringToCodecType(codec_name);
   webrtc::test::CodecSettings(codec_type, &codec_settings);
-
+// make available as a shared utility class.
   // TODO(brandtr): Move the setting of |width| and |height| to the tests, and
   // DCHECK that they are set before initializing the codec instead.
   codec_settings.width = static_cast<uint16_t>(width);
@@ -605,7 +604,6 @@ void VideoCodecTestFixtureImpl::CreateEncoderAndDecoder() {
   if (!encoder_factory_)
     encoder_factory_ = CreateEncoderFactory();
   if (config_.simulcast_adapted_encoder) {
-    EXPECT_EQ("VP8", format.name);
     encoder_.reset(new SimulcastEncoderAdapter(encoder_factory_.get()));
   } else {
     encoder_ = encoder_factory_->CreateVideoEncoder(format);

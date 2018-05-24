@@ -18,8 +18,8 @@
 
 namespace cricket {
 
-// TODO(pthatcher): Write unit tests just for these functions,
-// independent of WebrtcVideoEngine.
+// TODO(sprang): Remove this, as we're moving away from temporal layer mode.
+// Config for use with screen cast when temporal layers are enabled.
 
 int GetTotalMaxBitrateBps(const std::vector<webrtc::VideoStream>& streams);
 
@@ -33,7 +33,8 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(
     double bitrate_priority,
     int max_qp,
     int max_framerate,
-    bool is_screenshare = false);
+    bool is_screenshare = false,
+    bool temporal_layers_supported = true);
 
 // Gets the simulcast config layers for a non-screensharing case.
 std::vector<webrtc::VideoStream> GetNormalSimulcastLayers(
@@ -43,7 +44,8 @@ std::vector<webrtc::VideoStream> GetNormalSimulcastLayers(
     int max_bitrate_bps,
     double bitrate_priority,
     int max_qp,
-    int max_framerate);
+    int max_framerate,
+    bool temporal_layers_supported);
 
 // Get simulcast config layers for screenshare settings.
 std::vector<webrtc::VideoStream> GetScreenshareLayers(
@@ -54,7 +56,8 @@ std::vector<webrtc::VideoStream> GetScreenshareLayers(
     double bitrate_priority,
     int max_qp,
     int max_framerate,
-    bool screenshare_simulcast_enabled);
+    bool screenshare_simulcast_enabled,
+    bool temporal_layers_supported);
 
 bool ScreenshareSimulcastFieldTrialEnabled();
 
