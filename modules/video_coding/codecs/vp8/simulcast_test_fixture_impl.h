@@ -11,11 +11,10 @@
 #ifndef MODULES_VIDEO_CODING_CODECS_VP8_SIMULCAST_TEST_FIXTURE_IMPL_H_
 #define MODULES_VIDEO_CODING_CODECS_VP8_SIMULCAST_TEST_FIXTURE_IMPL_H_
 
-#include "modules/video_coding/codecs/vp8/simulcast_test_fixture.h"
-
 #include <memory>
 #include <vector>
 
+#include "api/test/simulcast_test_fixture.h"
 #include "api/video/i420_buffer.h"
 #include "api/video/video_frame.h"
 #include "api/video_codecs/video_decoder_factory.h"
