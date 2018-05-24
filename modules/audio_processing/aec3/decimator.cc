@@ -28,12 +28,12 @@ const CascadedBiQuadFilter::BiQuadCoefficients kLowPassFilterCoefficients4 = {
     {-1.5879f, 0.6594f}};
 constexpr int kNumFilters4 = 3;
 
-// b, a = signal.butter(2, 800/8000.0, 'lowpass', analog=False) which are the
-// same as b, a = signal.butter(2, 400/4000.0, 'lowpass', analog=False).
-const CascadedBiQuadFilter::BiQuadCoefficients kLowPassFilterCoefficients8 = {
-    {0.02008337f, 0.04016673f, 0.02008337f},
-    {-1.56101808f, 0.64135154f}};
-constexpr int kNumFilters8 = 4;
+// b, a = signal.cheby1(1, 6, [1000/8000, 2000/8000], btype='bandpass',
+// analog=False)
+const CascadedBiQuadFilter::BiQuadCoefficients kBandPassFilterCoefficients8 = {
+    {0.10330478f, 0.f, -0.10330478f},
+    {-1.520363, 0.79339043}};
+constexpr int kNumFilters8 = 5;
 
 // b, a = signal.butter(2, 1000/8000.0, 'highpass', analog=False)
 const CascadedBiQuadFilter::BiQuadCoefficients kHighPassFilterCoefficients4 = {
@@ -48,7 +48,7 @@ Decimator::Decimator(size_t down_sampling_factor)
       low_pass_filter_(
           down_sampling_factor_ == 4
               ? kLowPassFilterCoefficients4
-              : (down_sampling_factor_ == 8 ? kLowPassFilterCoefficients8
+              : (down_sampling_factor_ == 8 ? kBandPassFilterCoefficients8
                                             : kLowPassFilterCoefficients2),
           down_sampling_factor_ == 4
               ? kNumFilters4
@@ -68,7 +68,7 @@ void Decimator::Decimate(rtc::ArrayView<const float> in,
   low_pass_filter_.Process(in, x);
 
   // High-pass filter to reduce the impact of near-end noise.
-  if (down_sampling_factor_ == 4)
+  if (down_sampling_factor_ <= 4)
     high_pass_filter_.Process(x, x);
 
   // Downsample the signal.
