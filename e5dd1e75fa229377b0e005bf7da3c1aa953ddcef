@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bdcfdc5_b424c49a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-05-24T10:46:40Z",
+      "side": 1,
+      "message": "that is not always true.\nsometimes receiver doesn\u0027t know ssrc in advance and need to identify the stream using mid or rsid rtp header extensions (and then discover the ssrc).\nSee https://tools.ietf.org/html/draft-roach-mmusic-unified-plan-00#section-3.2.1\n\nHow remote ssrc will be communicated to rtp_rtcp module in that case?",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 8,
+        "endChar": 19
+      },
+      "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6d7dc51_d38e4775",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-05-24T10:46:40Z",
+      "side": 1,
+      "message": "RTC_DCHECK_EQ",
+      "range": {
+        "startLine": 371,
+        "startChar": 4,
+        "endLine": 371,
+        "endChar": 14
+      },
+      "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f67fd1c_c21f2000",
+        "filename": "modules/rtp_rtcp/include/rtp_receiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-05-24T10:46:40Z",
+      "side": 1,
+      "message": "please leave old signature (as deprecated) to avoid breaking downstream project.",
+      "range": {
+        "startLine": 43,
+        "startChar": 22,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
