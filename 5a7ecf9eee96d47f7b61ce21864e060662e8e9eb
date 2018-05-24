@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "29e094c6_d1a6fe1f",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-24T11:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad9816d_7400a684",
+      "range": {
+        "startLine": 448,
+        "startChar": 35,
+        "endLine": 448,
+        "endChar": 42
+      },
+      "revId": "5a7ecf9eee96d47f7b61ce21864e060662e8e9eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9e40bdc_2e2e29b9",
         "filename": "rtc_tools/event_log_visualizer/analyzer.h",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3b324c69_48decf9f",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-24T11:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9e40bdc_2e2e29b9",
+      "range": {
+        "startLine": 34,
+        "startChar": 52,
+        "endLine": 34,
+        "endChar": 59
+      },
+      "revId": "5a7ecf9eee96d47f7b61ce21864e060662e8e9eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f6dd34a_cffa924b",
         "filename": "rtc_tools/event_log_visualizer/main.cc",
         "patchSetId": 9
@@ -68,6 +116,30 @@
       "revId": "5a7ecf9eee96d47f7b61ce21864e060662e8e9eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f30403d0_118bb02a",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-24T11:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f6dd34a_cffa924b",
+      "range": {
+        "startLine": 154,
+        "startChar": 35,
+        "endLine": 154,
+        "endChar": 55
+      },
+      "revId": "5a7ecf9eee96d47f7b61ce21864e060662e8e9eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
