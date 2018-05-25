@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99ab232c_36f18f0d",
+        "filename": "sdk/objc/Framework/UnitTests/RTCPeerConnectionFactoryTest.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-05-25T11:43:14Z",
+      "side": 1,
+      "message": "This should not be necessary.",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "e9a166f7aaac8aabf94f1365a31a3f44af069d41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
