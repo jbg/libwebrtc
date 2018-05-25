@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2a7ef9eb_5a792993",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-25T08:24:08Z",
+      "side": 1,
+      "message": "As far as I understand, unsignalled ssrcs are handled at demux time (current handling of webrtc::PacketReceiver::DELIVERY_UNKNOWN_SSRC in webrtcvoiceengine.cc and webrtcvideoengine.cc, with mid handling somewhere else, and earlier). And when the RtpReceiver for the stream is created, the ssrc is known.\n\nFor video, OnIncomingSSRCChanged was unused before this cl, with RtpVideoStreamReceiver implementing RtpFeedback, but with a do-nothing implementation.",
+      "parentUuid": "8bdcfdc5_b424c49a",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 8,
+        "endChar": 19
+      },
+      "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6d7dc51_d38e4775",
         "filename": "audio/audio_receive_stream.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9790b035_afbec512",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-25T08:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6d7dc51_d38e4775",
+      "range": {
+        "startLine": 371,
+        "startChar": 4,
+        "endLine": 371,
+        "endChar": 14
+      },
+      "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f67fd1c_c21f2000",
         "filename": "modules/rtp_rtcp/include/rtp_receiver.h",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e617ca6c_949f8368",
+        "filename": "modules/rtp_rtcp/include/rtp_receiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-25T08:24:08Z",
+      "side": 1,
+      "message": "Done. Is it sufficient with a forward declaration of the RtpFeedback class, or do we need to keep the declaration as well?",
+      "parentUuid": "4f67fd1c_c21f2000",
+      "range": {
+        "startLine": 43,
+        "startChar": 22,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "e5dd1e75fa229377b0e005bf7da3c1aa953ddcef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
