@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43a262df_28dcac0a",
+        "filename": "modules/rtp_rtcp/source/rtp_receiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-05-25T09:13:25Z",
+      "side": 0,
+      "message": "not resetting these two fields is intended?",
+      "range": {
+        "startLine": 280,
+        "startChar": 35,
+        "endLine": 280,
+        "endChar": 0
+      },
+      "revId": "9d4e840617cc24616da776fe48076b37f787a373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
