@@ -22,6 +22,30 @@
       "revId": "9d4e840617cc24616da776fe48076b37f787a373",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "373a0aac_714dbf54",
+        "filename": "modules/rtp_rtcp/source/rtp_receiver_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-05-25T09:24:47Z",
+      "side": 0,
+      "message": "Yes. They are assigned these values on construction, and I think the deleted condition ssrc_ !\u003d rtp_header.src was true only for the very first rtp packet, so that the assignments are no change.\n\nAnd if ssrc_ really is needed in this class, for populating GetSources, I\u0027d like to make it a construction time constant (and then DCHECK that rtp_header.ssrc \u003d\u003d ssrc_). \n\nI think it\u0027s the demuxer\u0027s responsibility to only pass packets for the right ssrc.",
+      "parentUuid": "43a262df_28dcac0a",
+      "range": {
+        "startLine": 280,
+        "startChar": 35,
+        "endLine": 280,
+        "endChar": 0
+      },
+      "revId": "9d4e840617cc24616da776fe48076b37f787a373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
