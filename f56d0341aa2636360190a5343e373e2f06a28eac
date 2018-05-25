@@ -22,6 +22,30 @@
       "revId": "f56d0341aa2636360190a5343e373e2f06a28eac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7027650_cc50fd98",
+        "filename": "modules/audio_processing/aec3/decimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-05-25T07:52:03Z",
+      "side": 1,
+      "message": "Very good point! I will also change high_pass_filter_ to noise_reduction_filter_.",
+      "parentUuid": "938ecae7_348d4b84",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "f56d0341aa2636360190a5343e373e2f06a28eac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
