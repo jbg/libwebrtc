@@ -57,14 +57,14 @@ struct EchoCanceller3Config {
 
   struct Erle {
     float min = 1.f;
-    float max_l = 4.f;
-    float max_h = 1.5f;
+    float max_l = 100.f;
+    float max_h = 100.f;
   } erle;
 
   struct EpStrength {
-    float lf = 1.f;
-    float mf = 1.f;
-    float hf = 1.f;
+    float lf = 0.1f;
+    float mf = 0.1f;
+    float hf = 0.1f;
     float default_len = 0.f;
     bool echo_can_saturate = true;
     bool bounded_erl = false;
