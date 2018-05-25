@@ -201,6 +201,8 @@ int CalculateMaxPadBitrateBps(std::vector<VideoStream> streams,
       pad_up_to_bitrate_bps += streams[i].target_bitrate_bps;
   } else if (pad_to_min_bitrate) {
     pad_up_to_bitrate_bps = streams[0].min_bitrate_bps;
+  } else {
+    pad_up_to_bitrate_bps = streams[0].min_bitrate_bps;
   }
 
   pad_up_to_bitrate_bps =
@@ -635,6 +637,8 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
                encoder_max_bitrate_bps_);
   max_padding_bitrate_ = CalculateMaxPadBitrateBps(
       streams, min_transmit_bitrate_bps, config_->suspend_below_min_bitrate);
+
+  printf("max_padding_bitrate_=%d\n", max_padding_bitrate_);
 
   // Clear stats for disabled layers.
   for (size_t i = streams.size(); i < config_->rtp.ssrcs.size(); ++i) {

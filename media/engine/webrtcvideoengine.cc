@@ -38,6 +38,7 @@
 #include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/field_trial.h"
+#include "modules/video_coding/codecs/vp9/svc_config.h"
 
 namespace cricket {
 
@@ -2699,6 +2700,17 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
     RTC_DCHECK(encoder_config.encoder_specific_settings);
     // Use VP9 SVC layering from codec settings which might be initialized
     // though field trial in ConfigureVideoEncoderSettings.
+#if 1
+    unsigned int sumMinBitrateKbps = 0;
+    std::vector<webrtc::SpatialLayer> spatial_layers =
+      webrtc::GetSvcConfig(width, height, 3, 1, false);
+    for (const webrtc::SpatialLayer& layer : spatial_layers) {
+      sumMinBitrateKbps += layer.minBitrate;
+      // printf("MinBitrate=%d, ", layer.minBitrate);
+    }
+    layer.min_bitrate_bps = sumMinBitrateKbps * 1000;
+#endif
+
     webrtc::VideoCodecVP9 vp9_settings;
     encoder_config.encoder_specific_settings->FillVideoCodecVp9(&vp9_settings);
     layer.num_temporal_layers = vp9_settings.numberOfTemporalLayers;
