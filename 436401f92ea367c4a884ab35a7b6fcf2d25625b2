@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0604685_f8309532",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2702,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-28T15:33:03Z",
+      "side": 1,
+      "message": "through?",
+      "range": {
+        "startLine": 2702,
+        "startChar": 7,
+        "endLine": 2702,
+        "endChar": 13
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcd0cd72_33da2cce",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2706,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-28T15:33:03Z",
+      "side": 1,
+      "message": "These should probably not be hard coded right?",
+      "range": {
+        "startLine": 2706,
+        "startChar": 42,
+        "endLine": 2706,
+        "endChar": 47
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c83efc8b_0f81fd3b",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2707,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-28T15:33:03Z",
+      "side": 1,
+      "message": "Use a different variable name as \"layer\" is already used.",
+      "range": {
+        "startLine": 2707,
+        "startChar": 37,
+        "endLine": 2707,
+        "endChar": 42
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9e1e894_c21567d9",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2711,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-28T15:33:03Z",
+      "side": 1,
+      "message": "It seems a bit strange to set the min bitrate of the SVC stream to be equal to the sum of min bitrates. I wonder if we instead should change the code that computes the padding rate to be aware of layering similarly to how it today is aware of simulcast? This would be the place:\nhttps://cs.corp.google.com/piper///depot/google3/third_party/webrtc/files/stable/webrtc/video/video_send_stream_impl.cc?dr\u0026rcl\u003d198237926\u0026g\u003d0\u0026l\u003d191",
+      "range": {
+        "startLine": 2711,
+        "startChar": 0,
+        "endLine": 2711,
+        "endChar": 53
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18ecd65a_0b7b627b",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-05-28T15:33:03Z",
+      "side": 1,
+      "message": "Should be able to merge these two into a single else.",
+      "range": {
+        "startLine": 202,
+        "startChar": 4,
+        "endLine": 204,
+        "endChar": 10
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
