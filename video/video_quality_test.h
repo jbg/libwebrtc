@@ -126,6 +126,9 @@ class VideoQualityTest : public test::CallTest {
     InternalEncoderFactory internal_encoder_factory_;
   };
 
+  static void PollStatsThread(void* obj);
+  void PollStats();
+
   std::map<uint8_t, webrtc::MediaType> payload_type_map_;
   std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory_;
 
@@ -187,6 +190,8 @@ class VideoQualityTest : public test::CallTest {
   std::unique_ptr<webrtc::RtcEventLog> send_event_log_;
 
   size_t num_video_streams_;
+  rtc::PlatformThread stats_polling_thread_;
+  rtc::Event done_;
 };
 
 }  // namespace webrtc
