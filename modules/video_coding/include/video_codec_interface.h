@@ -44,8 +44,8 @@ struct CodecSpecificInfoVP9 {
   int16_t picture_id;  // Negative value to skip pictureId.
 
   bool first_frame_in_picture;  // First frame, increment picture_id.
-  bool inter_pic_predicted;  // This layer frame is dependent on previously
-                             // coded frame(s).
+  bool inter_pic_predicted;     // This layer frame is dependent on previously
+                                // coded frame(s).
   bool flexible_mode;
   bool ss_data_available;
   bool non_ref_for_inter_layer_pred;
@@ -79,6 +79,7 @@ struct CodecSpecificInfoGeneric {
 
 struct CodecSpecificInfoH264 {
   H264PacketizationMode packetization_mode;
+  uint8_t simulcast_idx;
 };
 
 union CodecSpecificInfoUnion {
@@ -92,7 +93,9 @@ union CodecSpecificInfoUnion {
 // must be fitted with a copy-constructor. This is because it is copied
 // in the copy-constructor of VCMEncodedFrame.
 struct CodecSpecificInfo {
-  CodecSpecificInfo() : codecType(kVideoCodecUnknown), codec_name(nullptr) {}
+  CodecSpecificInfo() : codecType(kVideoCodecUnknown), codec_name(nullptr) {
+    memset(&codecSpecific, 0, sizeof(codecSpecific));
+  }
   VideoCodecType codecType;
   const char* codec_name;
   CodecSpecificInfoUnion codecSpecific;
