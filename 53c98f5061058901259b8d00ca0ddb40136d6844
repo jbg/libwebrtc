@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71331475_51473bbc",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-29T09:18:10Z",
+      "side": 1,
+      "message": "I added this clear().",
+      "range": {
+        "startLine": 369,
+        "startChar": 2,
+        "endLine": 369,
+        "endChar": 27
+      },
+      "revId": "53c98f5061058901259b8d00ca0ddb40136d6844",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a63c239d_10da8296",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-05-29T09:18:10Z",
+      "side": 1,
+      "message": "I added this clear().",
+      "range": {
+        "startLine": 377,
+        "startChar": 2,
+        "endLine": 377,
+        "endChar": 27
+      },
+      "revId": "53c98f5061058901259b8d00ca0ddb40136d6844",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
