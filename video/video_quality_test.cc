@@ -1106,7 +1106,11 @@ VideoQualityTest::TestVideoEncoderFactory::CreateVideoEncoder(
 }
 
 VideoQualityTest::VideoQualityTest()
-    : clock_(Clock::GetRealTimeClock()), receive_logs_(0), send_logs_(0) {
+    : clock_(Clock::GetRealTimeClock()),
+      receive_logs_(0),
+      send_logs_(0),
+      stats_polling_thread_(&PollStatsThread, this, "StatsPoller"),
+      done_(true, false) {
   payload_type_map_ = test::CallTest::payload_type_map_;
   RTC_DCHECK(payload_type_map_.find(kPayloadTypeH264) ==
              payload_type_map_.end());
@@ -1139,7 +1143,7 @@ VideoQualityTest::Params::Params()
           std::vector<SpatialLayer>()},
          {std::vector<VideoStream>(), 0, 0, -1, InterLayerPredMode::kOn,
           std::vector<SpatialLayer>()}},
-      logging({false, "", "", ""}) {}
+      logging({false, false, "", "", ""}) {}
 
 VideoQualityTest::Params::~Params() = default;
 
@@ -2239,7 +2243,15 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
     }
   });
 
+  if (params.logging.print_stats)
+    stats_polling_thread_.Start();
+
   test::PressEnterToContinue();
+
+  done_.Set();
+
+  if (params.logging.print_stats)
+    stats_polling_thread_.Stop();
 
   task_queue_.SendTask([&]() {
     if (params_.audio.enabled) {
@@ -2268,6 +2280,20 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
 
     DestroyCalls();
   });
+}
+
+void VideoQualityTest::PollStatsThread(void* obj) {
+  static_cast<VideoQualityTest*>(obj)->PollStats();
+}
+
+void VideoQualityTest::PollStats() {
+  while (!done_.Wait(kSendStatsPollingIntervalMs)) {
+    Call::Stats call_stats = sender_call_->GetStats();
+    VideoSendStream::Stats send_stats = video_send_streams_[0]->GetStats();
+    printf("BWE: %u kbps, media bitrate: %u kbps, target bitrate: %u kbps\n",
+           call_stats.send_bandwidth_bps, send_stats.media_bitrate_bps,
+           send_stats.target_media_bitrate_bps);
+  }
 }
 
 void VideoQualityTest::StartEncodedFrameLogs(VideoSendStream* stream) {

@@ -230,24 +230,30 @@ std::string EncodedFramePath() {
   return static_cast<std::string>(FLAG_encoded_frame_path);
 }
 
-DEFINE_bool(logs, false, "print logs to stderr");
+DEFINE_bool(logs, false, "Print logs to stderr.");
 
-DEFINE_bool(send_side_bwe, true, "Use send-side bandwidth estimation");
+DEFINE_bool(print_stats, false, "Periodically print stats to stdout.");
 
-DEFINE_bool(allow_reordering, false, "Allow packet reordering to occur");
+DEFINE_bool(send_side_bwe, true, "Use send-side bandwidth estimation.");
+
+DEFINE_bool(allow_reordering, false, "Allow packet reordering to occur.");
 
 DEFINE_bool(use_ulpfec, false, "Use RED+ULPFEC forward error correction.");
 
 DEFINE_bool(use_flexfec, false, "Use FlexFEC forward error correction.");
 
-DEFINE_bool(audio, false, "Add audio stream");
+DEFINE_bool(audio, false, "Add audio stream.");
 
-DEFINE_bool(audio_video_sync, false, "Sync audio and video stream (no effect if"
-    " audio is false)");
+DEFINE_bool(audio_video_sync,
+            false,
+            "Sync audio and video stream (no effect if"
+            " audio is false).");
 
-DEFINE_bool(audio_dtx, false, "Enable audio DTX (no effect if audio is false)");
+DEFINE_bool(audio_dtx,
+            false,
+            "Enable audio DTX (no effect if audio is false).");
 
-DEFINE_bool(video, true, "Add video stream");
+DEFINE_bool(video, true, "Add video stream.");
 
 DEFINE_string(
     force_fieldtrials,
@@ -255,7 +261,7 @@ DEFINE_string(
     "Field trials control experimental feature code which can be forced. "
     "E.g. running with --force_fieldtrials=WebRTC-FooFeature/Enable/"
     " will assign the group Enable to field trial WebRTC-FooFeature. Multiple "
-    "trials are separated by \"/\"");
+    "trials are separated by \"/\".");
 
 // Video-specific flags.
 DEFINE_string(clip,
@@ -265,7 +271,7 @@ std::string Clip() {
   return static_cast<std::string>(FLAG_clip);
 }
 
-DEFINE_bool(help, false, "prints this message");
+DEFINE_bool(help, false, "Prints this message.");
 
 }  // namespace flags
 
@@ -304,8 +310,9 @@ void Loopback() {
                      flags::GetCaptureDevice()};
   params.audio = {flags::FLAG_audio, flags::FLAG_audio_video_sync,
                   flags::FLAG_audio_dtx};
-  params.logging = {flags::FLAG_logs, flags::FLAG_rtc_event_log_name,
-                    flags::FLAG_rtp_dump_name, flags::FLAG_encoded_frame_path};
+  params.logging = {flags::FLAG_logs, flags::FLAG_print_stats,
+                    flags::FLAG_rtc_event_log_name, flags::FLAG_rtp_dump_name,
+                    flags::FLAG_encoded_frame_path};
   params.screenshare[0].enabled = false;
   params.analyzer = {"video", 0.0, 0.0, flags::DurationSecs(),
       flags::OutputFilename(), flags::GraphTitle()};
