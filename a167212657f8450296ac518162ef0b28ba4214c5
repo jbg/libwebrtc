@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c79ec34d_d33dc82c",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCPeerConnectionFactory.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-05-29T18:56:19Z",
+      "side": 1,
+      "message": "Came across this CL.\n\nIt is passing a `rtc::scoped_refptr\u003cwebrtc::AudioDeviceModule\u003e` into a `webrtc::AudioDeviceModule*`. How does this work?",
+      "revId": "a167212657f8450296ac518162ef0b28ba4214c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
