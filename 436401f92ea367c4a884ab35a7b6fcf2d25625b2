@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9f2ce50c_9d5877b1",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2702,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-29T21:20:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0604685_f8309532",
+      "range": {
+        "startLine": 2702,
+        "startChar": 7,
+        "endLine": 2702,
+        "endChar": 13
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcd0cd72_33da2cce",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "479c158d_98dc9204",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2706,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-29T21:20:34Z",
+      "side": 1,
+      "message": "Correct. In the latest patch, the number of spatial layers , 3, depends on the configured number of spatial layers. The number of temporal layers does not affect the value of the spatial bit rates and is therefore irrelevant.",
+      "parentUuid": "bcd0cd72_33da2cce",
+      "range": {
+        "startLine": 2706,
+        "startChar": 42,
+        "endLine": 2706,
+        "endChar": 47
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "83029c22_bfeb7913",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2707,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-29T21:20:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c83efc8b_0f81fd3b",
+      "range": {
+        "startLine": 2707,
+        "startChar": 37,
+        "endLine": 2707,
+        "endChar": 42
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9e1e894_c21567d9",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e963fb6_b1b8f6c7",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2711,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-29T21:20:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9e1e894_c21567d9",
+      "range": {
+        "startLine": 2711,
+        "startChar": 0,
+        "endLine": 2711,
+        "endChar": 53
+      },
+      "revId": "436401f92ea367c4a884ab35a7b6fcf2d25625b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
