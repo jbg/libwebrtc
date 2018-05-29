@@ -38,6 +38,8 @@
 #include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/field_trial.h"
+#include "modules/video_coding/codecs/vp9/svc_config.h"
+#include "modules/video_coding/codecs/vp9/svc_rate_allocator.h"
 
 namespace cricket {
 
@@ -2701,6 +2703,21 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
     // though field trial in ConfigureVideoEncoderSettings.
     webrtc::VideoCodecVP9 vp9_settings;
     encoder_config.encoder_specific_settings->FillVideoCodecVp9(&vp9_settings);
+    unsigned char vp9_num_spatial_layers = vp9_settings.numberOfSpatialLayers;
+    float top_fraction = 1.;
+
+    // Compute fraction of total bit rate allocated to top-most spatial layer.
+    for (int i = 1; i < vp9_num_spatial_layers; ++i) {
+      top_fraction += std::pow(webrtc::kSpatialLayeringRateScalingFactor, i);
+    }
+    std::vector<webrtc::SpatialLayer> spatial_layers =
+      webrtc::GetSvcConfig(width, height, vp9_num_spatial_layers, 1, false);
+    // The minimum total bit rate required to support all spatial layers
+    // equals the minimum bit rate required by the top-most spatial layer
+    // times top_fraction.
+    layer.min_bitrate_bps = (unsigned int)
+      (static_cast<float>(spatial_layers[vp9_num_spatial_layers - 1].minBitrate
+      * top_fraction)) * 1000;  // minBitrate has units of kbps.
     layer.num_temporal_layers = vp9_settings.numberOfTemporalLayers;
   }
 

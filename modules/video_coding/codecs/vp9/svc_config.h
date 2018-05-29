@@ -16,6 +16,9 @@
 
 namespace webrtc {
 
+const size_t kMinVp9SvcBitrateKbps = 30;
+const size_t kMaxVp9SvcBitrateKbps = 2400;  // 30% lower than VP8 SIM max.
+
 std::vector<SpatialLayer> GetSvcConfig(size_t input_width,
                                        size_t input_height,
                                        size_t num_spatial_layers,

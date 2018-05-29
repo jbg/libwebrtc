@@ -25,6 +25,7 @@
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/field_trial.h"
+#include "modules/video_coding/codecs/vp9/svc_config.h"
 
 namespace webrtc {
 namespace internal {
@@ -616,25 +617,36 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   RTC_DCHECK_GE(config_->rtp.ssrcs.size(), streams.size());
   RTC_DCHECK_RUN_ON(worker_queue_);
 
-  encoder_min_bitrate_bps_ =
+  const VideoCodecType codecType =
+    PayloadStringToCodecType(config_->rtp.payload_name);
+
+  if (codecType == kVideoCodecVP9) {
+    encoder_min_bitrate_bps_ = kMinVp9SvcBitrateKbps * 1000;
+    encoder_max_bitrate_bps_ = kMaxVp9SvcBitrateKbps * 1000;
+    encoder_bitrate_priority_ = kDefaultBitratePriority;
+    max_padding_bitrate_ = CalculateMaxPadBitrateBps(
+      streams, min_transmit_bitrate_bps, 1);
+  } else {
+    encoder_min_bitrate_bps_ =
       std::max(streams[0].min_bitrate_bps, GetEncoderMinBitrateBps());
-  encoder_max_bitrate_bps_ = 0;
-  double stream_bitrate_priority_sum = 0;
-  for (const auto& stream : streams) {
-    // We don't want to allocate more bitrate than needed to inactive streams.
-    encoder_max_bitrate_bps_ += stream.active ? stream.max_bitrate_bps : 0;
-    if (stream.bitrate_priority) {
-      RTC_DCHECK_GT(*stream.bitrate_priority, 0);
-      stream_bitrate_priority_sum += *stream.bitrate_priority;
+    encoder_max_bitrate_bps_ = 0;
+    double stream_bitrate_priority_sum = 0;
+    for (const auto& stream : streams) {
+      // We don't want to allocate more bitrate than needed to inactive streams.
+      encoder_max_bitrate_bps_ += stream.active ? stream.max_bitrate_bps : 0;
+      if (stream.bitrate_priority) {
+        RTC_DCHECK_GT(*stream.bitrate_priority, 0);
+        stream_bitrate_priority_sum += *stream.bitrate_priority;
+      }
     }
-  }
-  RTC_DCHECK_GT(stream_bitrate_priority_sum, 0);
-  encoder_bitrate_priority_ = stream_bitrate_priority_sum;
-  encoder_max_bitrate_bps_ =
+    RTC_DCHECK_GT(stream_bitrate_priority_sum, 0);
+    encoder_bitrate_priority_ = stream_bitrate_priority_sum;
+    encoder_max_bitrate_bps_ =
       std::max(static_cast<uint32_t>(encoder_min_bitrate_bps_),
                encoder_max_bitrate_bps_);
-  max_padding_bitrate_ = CalculateMaxPadBitrateBps(
+    max_padding_bitrate_ = CalculateMaxPadBitrateBps(
       streams, min_transmit_bitrate_bps, config_->suspend_below_min_bitrate);
+  }
 
   // Clear stats for disabled layers.
   for (size_t i = streams.size(); i < config_->rtp.ssrcs.size(); ++i) {
