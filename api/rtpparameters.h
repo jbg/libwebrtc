@@ -404,6 +404,9 @@ struct RtpEncodingParameters {
   // fixed.
   rtc::Optional<int> max_bitrate_bps;
 
+  //
+  rtc::Optional<int> min_bitrate_bps;
+
   // TODO(deadbeef): Not implemented.
   rtc::Optional<int> max_framerate;
 
