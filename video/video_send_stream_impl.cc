@@ -25,6 +25,8 @@
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/field_trial.h"
+#include "modules/video_coding/codecs/vp9/svc_config.h"
+#include "modules/video_coding/codecs/vp9/svc_rate_allocator.h"
 
 namespace webrtc {
 namespace internal {
@@ -616,25 +618,55 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   RTC_DCHECK_GE(config_->rtp.ssrcs.size(), streams.size());
   RTC_DCHECK_RUN_ON(worker_queue_);
 
-  encoder_min_bitrate_bps_ =
-      std::max(streams[0].min_bitrate_bps, GetEncoderMinBitrateBps());
-  encoder_max_bitrate_bps_ = 0;
-  double stream_bitrate_priority_sum = 0;
-  for (const auto& stream : streams) {
-    // We don't want to allocate more bitrate than needed to inactive streams.
-    encoder_max_bitrate_bps_ += stream.active ? stream.max_bitrate_bps : 0;
-    if (stream.bitrate_priority) {
-      RTC_DCHECK_GT(*stream.bitrate_priority, 0);
-      stream_bitrate_priority_sum += *stream.bitrate_priority;
+  const VideoCodecType codecType =
+    PayloadStringToCodecType(config_->rtp.payload_name);
+
+  if (codecType == kVideoCodecVP9) {
+    encoder_bitrate_priority_ = kDefaultBitratePriority;
+    encoder_min_bitrate_bps_ = kMinVp9SvcBitrateKbps * 1000;
+    std::vector<SpatialLayer> spatial_layers =
+      GetSvcConfig(streams[0].width, streams[0].height,
+        kMaxVp9NumberOfSpatialLayers, 1, false);
+    // Compute fraction of total bit rate allocated to top-most spatial layer
+    // and set encoder_max_bitrate_bps_.
+    unsigned char vp9_num_spatial_layers = spatial_layers.size();
+    float top_fraction = 1.;
+    encoder_max_bitrate_bps_ =
+      spatial_layers[0].maxBitrate * 1000;  // maxBitrate has units of kbps.
+    for (int i = 1; i < vp9_num_spatial_layers; ++i) {
+      top_fraction += std::pow(kSpatialLayeringRateScalingFactor, i);
+      encoder_max_bitrate_bps_ += spatial_layers[i].maxBitrate * 1000;
     }
-  }
-  RTC_DCHECK_GT(stream_bitrate_priority_sum, 0);
-  encoder_bitrate_priority_ = stream_bitrate_priority_sum;
-  encoder_max_bitrate_bps_ =
+    encoder_max_bitrate_bps_ =
+      std::max(static_cast<uint32_t>(encoder_min_bitrate_bps_),
+        encoder_max_bitrate_bps_);
+    // The minimum total bit rate required to support all spatial layers
+    // equals the minimum bit rate required by the top-most spatial layer
+    // times top_fraction.
+    max_padding_bitrate_  = (unsigned int)
+      (static_cast<float>(spatial_layers[vp9_num_spatial_layers - 1].minBitrate
+      * top_fraction)) * 1000;  // minBitrate has units of kbps.
+  } else {
+    encoder_min_bitrate_bps_ =
+      std::max(streams[0].min_bitrate_bps, GetEncoderMinBitrateBps());
+    encoder_max_bitrate_bps_ = 0;
+    double stream_bitrate_priority_sum = 0;
+    for (const auto& stream : streams) {
+      // We don't want to allocate more bitrate than needed to inactive streams.
+      encoder_max_bitrate_bps_ += stream.active ? stream.max_bitrate_bps : 0;
+      if (stream.bitrate_priority) {
+        RTC_DCHECK_GT(*stream.bitrate_priority, 0);
+        stream_bitrate_priority_sum += *stream.bitrate_priority;
+      }
+    }
+    RTC_DCHECK_GT(stream_bitrate_priority_sum, 0);
+    encoder_bitrate_priority_ = stream_bitrate_priority_sum;
+    encoder_max_bitrate_bps_ =
       std::max(static_cast<uint32_t>(encoder_min_bitrate_bps_),
                encoder_max_bitrate_bps_);
-  max_padding_bitrate_ = CalculateMaxPadBitrateBps(
+    max_padding_bitrate_ = CalculateMaxPadBitrateBps(
       streams, min_transmit_bitrate_bps, config_->suspend_below_min_bitrate);
+  }
 
   // Clear stats for disabled layers.
   for (size_t i = streams.size(); i < config_->rtp.ssrcs.size(); ++i) {

@@ -75,6 +75,7 @@ rtc_static_library("video") {
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../modules/video_coding:codec_globals_headers",
     "../modules/video_coding:video_codec_interface",
+    "../modules/video_coding:webrtc_vp9_helpers",
     "../rtc_base:checks",
     "../rtc_base:stringutils",
     "../rtc_base/experiments:alr_experiment",

@@ -16,6 +16,8 @@
 
 namespace webrtc {
 
+const size_t kMinVp9SvcBitrateKbps = 30;
+
 std::vector<SpatialLayer> GetSvcConfig(size_t input_width,
                                        size_t input_height,
                                        size_t num_spatial_layers,

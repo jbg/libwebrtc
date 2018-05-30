@@ -19,8 +19,6 @@
 namespace webrtc {
 
 namespace {
-const size_t kMinVp9SvcBitrateKbps = 30;
-
 const size_t kMaxNumLayersForScreenSharing = 2;
 const size_t kMaxScreenSharingLayerBitrateKbps[] = {200, 500};
 }  // namespace
