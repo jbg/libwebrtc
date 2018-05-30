@@ -355,6 +355,30 @@
     },
     {
       "key": {
+        "uuid": "d387f140_8a2b7d90",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-05-30T07:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77af5869_58985f6e",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "5a954067684cdeb26e5c9d318ac2a4e1698ec3b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a77b7b0a_6c3b8f03",
         "filename": "modules/video_coding/utility/temporal_layers.h",
         "patchSetId": 18
