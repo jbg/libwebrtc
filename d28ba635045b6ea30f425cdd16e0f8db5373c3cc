@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7c6a238f_4514773b",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2706,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-30T19:40:25Z",
+      "side": 1,
+      "message": "Resolved in the latest patch.",
+      "parentUuid": "d9657db5_7fc380e5",
+      "range": {
+        "startLine": 2706,
+        "startChar": 56,
+        "endLine": 2706,
+        "endChar": 77
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "289034f6_fbd73934",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbd81996_cc88a99b",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2720,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-30T19:40:25Z",
+      "side": 1,
+      "message": "In the latest patch, I moved the bit rate updates and max_padding_bitrate_ computation out of webrtcvideoengine.cc and into video_send_stream_impl.cc.  Now VP8 and VP9 values are computed in the same place and we don\u0027t need to import SVC stuff into webrtcvideoengine.cc.  Thanks for the excellent suggestion.",
+      "parentUuid": "289034f6_fbd73934",
+      "range": {
+        "startLine": 2706,
+        "startChar": 0,
+        "endLine": 2720,
+        "endChar": 64
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0c131f32_6519e731",
+        "filename": "modules/video_coding/codecs/vp9/svc_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-30T19:40:25Z",
+      "side": 1,
+      "message": "Removed.  The max bit rate is now computed dynamically using values returned from GetSvcConfig().",
+      "parentUuid": "de63d288_0c7e41d3",
+      "range": {
+        "startLine": 20,
+        "startChar": 13,
+        "endLine": 20,
+        "endChar": 41
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfe2477e_341352e0",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2924e0dd_dcdda4d6",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-30T19:40:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfe2477e_341352e0",
+      "range": {
+        "startLine": 625,
+        "startChar": 4,
+        "endLine": 625,
+        "endChar": 28
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
