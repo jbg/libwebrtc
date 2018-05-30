@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f629c70c_be24fd23",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2293,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-05-30T12:31:03Z",
+      "side": 1,
+      "message": "bitrates in bps",
+      "range": {
+        "startLine": 2293,
+        "startChar": 20,
+        "endLine": 2293,
+        "endChar": 24
+      },
+      "revId": "351fe635da4c65e95eb2f618023a0f89cb067d21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4a05b21_d5c588de",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-05-30T12:31:03Z",
+      "side": 1,
+      "message": "Or perhaps print all stats using Stats::ToString?",
+      "revId": "351fe635da4c65e95eb2f618023a0f89cb067d21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
