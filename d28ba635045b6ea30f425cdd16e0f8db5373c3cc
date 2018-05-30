@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d9657db5_7fc380e5",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2706,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-30T14:47:42Z",
+      "side": 1,
+      "message": "[in case if we will decide to calculate min bitrate here]\nThis holds maximum possible number of layers (equal to number of SSRCs). Actual number of layers can be lower (depends on input resolution).",
+      "range": {
+        "startLine": 2706,
+        "startChar": 56,
+        "endLine": 2706,
+        "endChar": 77
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "289034f6_fbd73934",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 2
@@ -18,6 +41,52 @@
         "startChar": 0,
         "endLine": 2720,
         "endChar": 64
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de63d288_0c7e41d3",
+        "filename": "modules/video_coding/codecs/vp9/svc_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-30T14:47:42Z",
+      "side": 1,
+      "message": "I can\u0027t recognize this limit. Where does it come from?",
+      "range": {
+        "startLine": 20,
+        "startChar": 13,
+        "endLine": 20,
+        "endChar": 41
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfe2477e_341352e0",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-30T14:47:42Z",
+      "side": 1,
+      "message": "This should depend on resolution.",
+      "range": {
+        "startLine": 625,
+        "startChar": 4,
+        "endLine": 625,
+        "endChar": 28
       },
       "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
