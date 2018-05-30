@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "289034f6_fbd73934",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2720,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-05-30T11:20:38Z",
+      "side": 1,
+      "message": "I think it would be better to update stream bitrate thresholds in VideoStreamEncoder::ReconfigureEncoder after VideoCodecInitializer::SetupCodec call when actual layering and bitrate thresholds are known (VideoCodec codec). We can use target_bitrate_bps as the bitrate we want to pad to and set it equal to sum of min bitrate of layers.\n\nThen we don\u0027t need to bring SVC stuff to webrtcvideoengine.cc and don\u0027t need to change svc_config.cc/h and svc_rate_allocator.cc/h.",
+      "range": {
+        "startLine": 2706,
+        "startChar": 0,
+        "endLine": 2720,
+        "endChar": 64
+      },
+      "revId": "d28ba635045b6ea30f425cdd16e0f8db5373c3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
