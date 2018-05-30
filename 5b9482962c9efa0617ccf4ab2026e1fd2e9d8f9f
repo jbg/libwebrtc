@@ -2,6 +2,159 @@
   "comments": [
     {
       "key": {
+        "uuid": "7b72cc57_a09a3e8d",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need to initialize to nullptr explicitly, unique_ptr does this by default: http://en.cppreference.com/w/cpp/memory/unique_ptr/unique_ptr",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03d7a451_7f1a4a83",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "nit: RTC_DCHECK(ice_transport), RTC_DCHECK(thread)",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7062401_78d0aa6a",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "These slots should all be private.",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3b68fe1_3ff9a154",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "I was suggesting to go from 2 public \"Schedule\" methods to 0, but instead we\u0027re going to 4, where 2 are unused? Can you explain the reasoning?\n\nThe purpose of the \"schedule\" methods seems to be to only start the timers after ICE connectivity checks begin. But I\u0027d suggest that a better approach would be to implement an ICE \"checking\" state (IceTransportState::STATE_CONNECTING is close), and then have RegatheringController listen to the state change signal and start the timers itself. That way P2PTransportChannel wouldn\u0027t have to call any \"schedule\" method; it just constructs the regathering controller and forgets about it.\n\nSince implementing \"STATE_CHECKING\" would be better done in a separate CL, for now I\u0027d suggest a \"void Start();\" method, with a TODO to delete it. This still mostly decouples the interface from the implementation.",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054b8c1f_1936b6f3",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "Should be private?",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d311d117_0d3392b7",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this possibly need to cancel current timers?",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc3b0fda_48809119",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "Could use some comments",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "976ee570_31275b6f",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "Any reason why a \"pooled\" session is used here?",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b1529c6_0cac8d65",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "This test doesn\u0027t really need to go through FakeMetricsObserver, that just adds an extra layer of indirection. Could just store a \"map\u003cIceRegatheringReason, int\u003e\"",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d517764c_de00737f",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 7
@@ -19,6 +172,47 @@
         "endLine": 114,
         "endChar": 60
       },
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e471a87_7c41469f",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "The P2PTransportChannel test is more of an integration test; it\u0027s testing that, independent of how it\u0027s actually implemented underneath, regathering on failed networks occurs if regather_on_failed_networks_interval is set.\n\nWhereas this is more of a unit test that tests BasicRegatheringController in isolation. Using fake/mock objects it can simulate behavior that wouldn\u0027t even occur with P2PTransportChannel; it can test things in more detail.",
+      "parentUuid": "d517764c_de00737f",
+      "range": {
+        "startLine": 114,
+        "startChar": 28,
+        "endLine": 114,
+        "endChar": 60
+      },
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbd4e434_68649853",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-05-30T21:51:07Z",
+      "side": 1,
+      "message": "nit: Since this is using a simulated clock, could wait for exactly 1999ms and verify regathering wasn\u0027t initiated, then wait the final millisecond and verify it was.",
       "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
