@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e378d8c_36febd00",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-31T12:10:01Z",
+      "side": 1,
+      "message": "nit: codec_type",
+      "range": {
+        "startLine": 621,
+        "startChar": 23,
+        "endLine": 621,
+        "endChar": 32
+      },
+      "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebf9f88b_1686008a",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-31T12:10:01Z",
+      "side": 1,
+      "message": "Prefer using type aliases, such a uint8_t. In this case I think it\u0027s better to keep the size_t type that size() returns.",
+      "range": {
+        "startLine": 632,
+        "startChar": 4,
+        "endLine": 632,
+        "endChar": 17
+      },
+      "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4845e04_9a346294",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-05-31T12:10:01Z",
+      "side": 1,
+      "message": "avoid c-style cast, use type alises",
+      "range": {
+        "startLine": 646,
+        "startChar": 28,
+        "endLine": 646,
+        "endChar": 42
+      },
+      "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
