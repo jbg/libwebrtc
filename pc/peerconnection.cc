@@ -1427,7 +1427,6 @@ PeerConnection::CreateSender(
                            static_cast<VideoTrackInterface*>(track.get()),
                            stream_ids));
   }
-  sender->internal()->set_stream_ids(stream_ids);
   return sender;
 }
 
