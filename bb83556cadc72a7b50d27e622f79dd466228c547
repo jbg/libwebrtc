@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9140a7fc_8048acdf",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-31T20:04:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e378d8c_36febd00",
+      "range": {
+        "startLine": 621,
+        "startChar": 23,
+        "endLine": 621,
+        "endChar": 32
+      },
+      "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebf9f88b_1686008a",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2bb9a5fb_7daa992a",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-31T20:04:40Z",
+      "side": 1,
+      "message": "Variable has been removed in the latest patch.",
+      "parentUuid": "ebf9f88b_1686008a",
+      "range": {
+        "startLine": 632,
+        "startChar": 4,
+        "endLine": 632,
+        "endChar": 17
+      },
+      "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4845e04_9a346294",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b80431a_9f7d4cfc",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-31T20:04:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4845e04_9a346294",
+      "range": {
+        "startLine": 646,
+        "startChar": 28,
+        "endLine": 646,
+        "endChar": 42
+      },
+      "revId": "bb83556cadc72a7b50d27e622f79dd466228c547",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
