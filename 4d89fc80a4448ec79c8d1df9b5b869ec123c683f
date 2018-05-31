@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdd4c304_30c96a44",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-05-31T11:11:38Z",
+      "side": 1,
+      "message": "For a struct like this (whose members are public and easily viewable) I would omit all this, because it just spells out the obvious. I won\u0027t object to leaving them in, though, because the do serve as good documentation.",
+      "revId": "4d89fc80a4448ec79c8d1df9b5b869ec123c683f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
