@@ -617,11 +617,11 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   RTC_DCHECK_RUN_ON(worker_queue_);
 
   encoder_min_bitrate_bps_ =
-      std::max(streams[0].min_bitrate_bps, GetEncoderMinBitrateBps());
+    std::max(streams[0].min_bitrate_bps, GetEncoderMinBitrateBps());
   encoder_max_bitrate_bps_ = 0;
   double stream_bitrate_priority_sum = 0;
   for (const auto& stream : streams) {
-    // We don't want to allocate more bitrate than needed to inactive streams.
+     // We don't want to allocate more bitrate than needed to inactive streams.
     encoder_max_bitrate_bps_ += stream.active ? stream.max_bitrate_bps : 0;
     if (stream.bitrate_priority) {
       RTC_DCHECK_GT(*stream.bitrate_priority, 0);
@@ -631,10 +631,17 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   RTC_DCHECK_GT(stream_bitrate_priority_sum, 0);
   encoder_bitrate_priority_ = stream_bitrate_priority_sum;
   encoder_max_bitrate_bps_ =
-      std::max(static_cast<uint32_t>(encoder_min_bitrate_bps_),
-               encoder_max_bitrate_bps_);
-  max_padding_bitrate_ = CalculateMaxPadBitrateBps(
+    std::max(static_cast<uint32_t>(encoder_min_bitrate_bps_),
+            encoder_max_bitrate_bps_);
+
+  const VideoCodecType codecType =
+    PayloadStringToCodecType(config_->rtp.payload_name);
+  if (codecType == kVideoCodecVP9) {
+    max_padding_bitrate_ = streams[0].target_bitrate_bps;
+  } else {
+    max_padding_bitrate_ = CalculateMaxPadBitrateBps(
       streams, min_transmit_bitrate_bps, config_->suspend_below_min_bitrate);
+  }
 
   // Clear stats for disabled layers.
   for (size_t i = streams.size(); i < config_->rtp.ssrcs.size(); ++i) {
