@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0ec0d6_cbd764bf",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-05-31T13:55:22Z",
+      "side": 1,
+      "message": "Ignoring for the moment the idea of hysteresis that you are suggesting (which is good), it is my understanding that the max_padding_bitrate_kbps should equal the minimum bit rate for the highest supported spatial layer. For K-SVC, such value is not the sum of the minimum bit rate of the underlying spatial layers.\n\nAlso, what happens if the encoder decides to drop a spatial layer, will this code adapt the max_padding_bitrate_kbps?",
+      "range": {
+        "startLine": 530,
+        "startChar": 8,
+        "endLine": 530,
+        "endChar": 32
+      },
+      "revId": "3e090ab12f1efc192ce16053ea93a017c36ddc1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
