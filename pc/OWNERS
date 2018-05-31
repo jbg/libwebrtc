@@ -7,6 +7,7 @@ pthatcher@webrtc.org
 steveanton@webrtc.org
 tommi@webrtc.org
 zhihuang@webrtc.org
+benwright@webrtc.org
 
 per-file peerconnection*=hbos@webrtc.org
 per-file rtcstats*=hbos@webrtc.org
