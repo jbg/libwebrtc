@@ -514,6 +514,30 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     RTC_LOG(LS_ERROR) << "Failed to create encoder configuration.";
   }
 
+  if (encoder_config_.codec_type == kVideoCodecVP9) {
+    // Calculate maximum padding bitrate as sum of minimum bitrates of spatial
+    // layers which encoder can produce at given |max_bitrate_bps| and store
+    // this value in |target_bitrate_bps|.
+    // TODO(webrtc:9342): Refactor the way spatial layers are described and
+    // remove this workaround.
+    int max_padding_bitrate_kbps = 0;
+    int max_encoder_bitrate_kbps = 0;
+    for (int i = 0; i < codec.VP9()->numberOfSpatialLayers; ++i) {
+      // TODO(ssilkin): There should be some margin between max padding bitrate
+      // and max encoder bitrate. With the current logic they can be equal.
+      if (max_padding_bitrate_kbps + codec.spatialLayers[i].minBitrate <=
+          static_cast<unsigned int>(streams[0].max_bitrate_bps)) {
+        max_padding_bitrate_kbps += codec.spatialLayers[i].minBitrate;
+      }
+      max_encoder_bitrate_kbps += codec.spatialLayers[i].maxBitrate;
+    }
+
+    streams[0].target_bitrate_bps = max_padding_bitrate_kbps * 1000;
+    // Lower max bitrate to the level codec actually can produce.
+    streams[0].max_bitrate_bps =
+        std::min(streams[0].max_bitrate_bps, max_encoder_bitrate_kbps * 1000);
+  }
+
   codec.startBitrate =
       std::max(encoder_start_bitrate_bps_ / 1000, codec.minBitrate);
   codec.startBitrate = std::min(codec.startBitrate, codec.maxBitrate);

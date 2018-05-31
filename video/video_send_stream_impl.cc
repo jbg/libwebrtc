@@ -633,8 +633,19 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   encoder_max_bitrate_bps_ =
       std::max(static_cast<uint32_t>(encoder_min_bitrate_bps_),
                encoder_max_bitrate_bps_);
-  max_padding_bitrate_ = CalculateMaxPadBitrateBps(
-      streams, min_transmit_bitrate_bps, config_->suspend_below_min_bitrate);
+
+  const VideoCodecType codec_type =
+      PayloadStringToCodecType(config_->rtp.payload_name);
+  if (codec_type == kVideoCodecVP9) {
+    // In case of VP9, |target_bitrate_bps| holds the minimum bitrate needed to
+    // produce all spatial layers. Use this as the maximum padding bitrate.
+    // TODO(webrtc:9342): Refactor the way spatial layers are described and
+    // remove this workaround.
+    max_padding_bitrate_ = streams[0].target_bitrate_bps;
+  } else {
+    max_padding_bitrate_ = CalculateMaxPadBitrateBps(
+        streams, min_transmit_bitrate_bps, config_->suspend_below_min_bitrate);
+  }
 
   // Clear stats for disabled layers.
   for (size_t i = streams.size(); i < config_->rtp.ssrcs.size(); ++i) {
