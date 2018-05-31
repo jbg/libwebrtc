@@ -84,8 +84,8 @@ static const char kUuidDigit17[4] = {'8', '9', 'a', 'b'};
 // This round about way of creating a global RNG is to safe-guard against
 // indeterminant static initialization order.
 std::unique_ptr<RandomGenerator>& GetGlobalRng() {
-  static std::unique_ptr<RandomGenerator>& global_rng
-      = *new std::unique_ptr<RandomGenerator>(new SecureRandomGenerator());
+  static std::unique_ptr<RandomGenerator>& global_rng =
+      *new std::unique_ptr<RandomGenerator>(new SecureRandomGenerator());
 
   return global_rng;
 }
