@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c06012b_e5dfd533",
+        "filename": "api/OWNERS",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T17:45:53Z",
+      "side": 1,
+      "message": "May be useful to add a comment like:\n\n# Owner of security-related APIs (frame encryption, DTLS, etc.)\n\nSo that you don\u0027t end up suddenly getting code review requests for every single API change.\n\nThough maybe being a \"partial\" owner like this is bad practice? Hoping someone CCed will chime in.",
+      "revId": "e3384d00b4603d8a4d8677979aa42b25b5a38a1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
