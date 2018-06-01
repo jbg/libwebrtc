@@ -46,6 +46,30 @@
       "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d83ec4d_f29290eb",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-06-01T12:58:42Z",
+      "side": 1,
+      "message": "Ok I guess that code is generic. Maybe we should rename it to something that does not reference broadcast specifically?\n\nActually, I think \"ARDSampleHandler\" should be this class and \"BroadcastCapturer\" would be a more appropriate name for the RPBroadcastSampleHandler subclass.",
+      "parentUuid": "6050b8ad_943a7de2",
+      "range": {
+        "startLine": 247,
+        "startChar": 25,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
