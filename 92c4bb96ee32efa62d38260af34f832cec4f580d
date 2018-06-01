@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea920845_583099ee",
+        "filename": "modules/video_coding/codecs/vp9/svc_config.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-01T14:23:24Z",
+      "side": 1,
+      "message": "Casting to float is not needed. This should work just fine:\n\nspatial_layers[0].targetBitrate \u003d static_cast\u003cunsigned int\u003e(\n      spatial_layers[num_spatial_layers - 1].minBitrate * top_fraction);",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "revId": "92c4bb96ee32efa62d38260af34f832cec4f580d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
