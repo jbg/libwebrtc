@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2f8c695c_3f683ca2",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b72cc57_a09a3e8d",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03d7a451_7f1a4a83",
         "filename": "p2p/base/regatheringcontroller.cc",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4b233f4_c5a87d57",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d7a451_7f1a4a83",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "764c7680_d1252028",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7062401_78d0aa6a",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3b68fe1_3ff9a154",
         "filename": "p2p/base/regatheringcontroller.h",
         "patchSetId": 7
@@ -67,6 +121,24 @@
       "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fec0c3b2_ef7f1315",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Done. These \"schedule\" methods were public mostly because of the initialization phase in P2PTransportChannel, and I was also wondering if there is any chance we may need explicit schedules. Now I realize these are not necessary after reflection on your comments, and the pattern after refactoring we are move toward would only couple the two objects via the signal and slots (ideally). Exposing these methods are against this pattern and decoupling. It sounds a good plan to me to have a public and temporary \"start\" method to cover the current call sites of schedules in P2PTransportChannel.",
+      "parentUuid": "c3b68fe1_3ff9a154",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "803e207c_1b82a267",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "054b8c1f_1936b6f3",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d311d117_0d3392b7",
         "filename": "p2p/base/regatheringcontroller.h",
         "patchSetId": 7
@@ -101,6 +191,24 @@
       "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92428494_3df21137",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Ack. May need a field to mark if there is any recurring schedule. Also added tests for this.",
+      "parentUuid": "d311d117_0d3392b7",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "dc9e8a61_1ec24eb6",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc3b0fda_48809119",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "976ee570_31275b6f",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 7
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "b8a22251_e15b413e",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "SetConfiguration kicked off gathering because of the non-zero pool size I used. Fixed it with an explicit call of StartGettingPorts. This may improve the readability of the code.",
+      "parentUuid": "976ee570_31275b6f",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b1529c6_0cac8d65",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 7
@@ -152,6 +296,24 @@
       "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ec501f0_635aabec",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Ack. We may need to fix this pattern using the metric observer to check code path in the other tests for ICE restart.",
+      "parentUuid": "0b1529c6_0cac8d65",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -216,6 +378,24 @@
       "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9d94ac3_4f952b62",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-01T16:57:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbd4e434_68649853",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
