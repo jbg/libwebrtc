@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "951bd3fa_73d65a67",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-06-01T12:30:50Z",
+      "side": 1,
+      "message": "These files should probably go in the /ios folder and in the :AppRTCMobile_lib target",
+      "range": {
+        "startLine": 247,
+        "startChar": 25,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
