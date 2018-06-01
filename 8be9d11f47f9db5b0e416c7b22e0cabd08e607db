@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c60bfc1_5d2af667",
+        "filename": "modules/video_coding/codecs/vp9/svc_config.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-01T08:27:06Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23ab5c2f_1b729104",
+        "filename": "modules/video_coding/codecs/vp9/svc_rate_allocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-01T08:27:06Z",
+      "side": 1,
+      "message": "These should be declared as external constants here and initialized in svc_rate_allocator.cc. See media/engine/constants.h /.cc for example.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 54
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70dd4ea6_dc5665c1",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-01T08:27:06Z",
+      "side": 1,
+      "message": "incorrect indent. run \u0027git cl format\u0027 to fix this.",
+      "range": {
+        "startLine": 638,
+        "startChar": 2,
+        "endLine": 638,
+        "endChar": 4
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fd2e1c1_3efa0fca",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-01T08:27:06Z",
+      "side": 1,
+      "message": "Put this comment before L524?",
+      "range": {
+        "startLine": 514,
+        "startChar": 6,
+        "endLine": 515,
+        "endChar": 75
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
