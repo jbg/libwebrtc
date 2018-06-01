@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e54f9f10_9ac1bb3c",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T19:31:49Z",
+      "side": 1,
+      "message": "Could check this in ValidateRtpParameters.",
+      "revId": "9634064501d45ccee63597760de51b779e91145b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16d803a0_ae07f218",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T19:31:49Z",
+      "side": 1,
+      "message": "This is still setting the track-wide max_bitrate_bps to encodings[0].max_bitrate_bps, which prevents actually reaching the max for the highest quality layer (since some bits are used by the lower layers). Instead we should be summing up all the max_bitrate_bps\u0027s.",
+      "revId": "9634064501d45ccee63597760de51b779e91145b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2d4fc58_42d24d63",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5462,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T19:31:49Z",
+      "side": 1,
+      "message": "nit: It\u0027s odd that there\u0027s both \"GetAndSetMinAndMaxBitrateRtpSendParameters\" and \"SetMinAndMaxBitrateRtpSendParameters\", and they\u0027re testing different things. Would prefer more descriptive test names, and/or comments above the tests summarizing what they\u0027re intending to test. For example:\n\n// Test that min and max bitrate values set via RtpParameters are correctly propagated\n// to the underlying encoder, and that the target is set to 3/4 of the maximum (3/4 was\n// chosen because it\u0027s similar to the simulcast defaults that are used if no min/max are\n// specified).\nTEST_F(WebRtcVideoChannelTest, MinAndMaxSimulcastBitratePropagatedToEncoder) {",
+      "revId": "9634064501d45ccee63597760de51b779e91145b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e72e5859_e971753e",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5479,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T19:31:49Z",
+      "side": 1,
+      "message": "nit: May improve readability to factor out the common simulcast setup into a helper method",
+      "revId": "9634064501d45ccee63597760de51b779e91145b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6e2fc9_4e340790",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5589,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T19:31:49Z",
+      "side": 1,
+      "message": "I\u0027d suggest adding constants for the default values so that if they change, they only need to be updated in one place. And mention in a comment that they\u0027re taken from kSimulcastConfigs.\n\nOr even better, write the tests in a way that isn\u0027t dependent on the defaults. For example, in the below test, could just do:\n\n  // For layer 1, set the min bitrate above the default max.\n  parameters.encodings[0].min_bitrate_bps \u003d\n      send_stream-\u003eGetVideoStreams()[0].max_bitrate_bps + 1;\n  // For layer 2, set the max bitrate below the default min.\n  parameters.encodings[0].max_bitrate_bps \u003d\n      send_stream-\u003eGetVideoStreams()[0].min_bitrate_bps - 1;",
+      "revId": "9634064501d45ccee63597760de51b779e91145b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
