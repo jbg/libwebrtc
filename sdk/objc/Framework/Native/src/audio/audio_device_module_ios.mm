@@ -40,9 +40,15 @@
 namespace webrtc {
 namespace ios_adm {
 
-  AudioDeviceModuleIOS::AudioDeviceModuleIOS() {
+  AudioDeviceModuleIOS::AudioDeviceModuleIOS() : audio_device_(new ios_adm::AudioDeviceIOS()) {
     RTC_LOG(INFO) << "current platform is IOS";
     RTC_LOG(INFO) << "iPhone Audio APIs will be utilized.";
+  }
+
+  AudioDeviceModuleIOS::AudioDeviceModuleIOS(std::unique_ptr<AudioDeviceGeneric> audio_device)
+      : audio_device_(std::move(audio_device)) {
+    RTC_LOG(INFO) << "current platform is IOS";
+    RTC_LOG(INFO) << "Custom iPhone Audio APIs will be utilized.";
   }
 
   int32_t AudioDeviceModuleIOS::AttachAudioBuffer() {
