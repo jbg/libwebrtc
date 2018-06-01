@@ -70,6 +70,30 @@
       "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54f00eaa_bb01b16c",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-06-01T13:47:33Z",
+      "side": 1,
+      "message": "I think that naming would be confusing since the BroadcastCapturer inherits from RTCVideoCapturer and ARDSampleHandler inherits from RPBroadcastSampleHandler.\n\nBut yes, the capturer could be named something like ARDExternalSampleCapturer and ARDSampleHandlerDelegate could be ARDExternalSampleDelegate. Maybe ARDSampleHandler could be renamed ARDBroadcastSampleHandler if that is more clear. Wdyt?",
+      "parentUuid": "2d83ec4d_f29290eb",
+      "range": {
+        "startLine": 247,
+        "startChar": 25,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
