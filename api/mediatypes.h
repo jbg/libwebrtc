@@ -28,4 +28,15 @@ MediaType MediaTypeFromString(const std::string& type_str);
 
 }  // namespace cricket
 
+namespace webrtc {
+
+enum class MediaType {
+  ANY,
+  AUDIO,
+  VIDEO,
+  DATA
+};
+
+}  // namespace webrtc
+
 #endif  // API_MEDIATYPES_H_
