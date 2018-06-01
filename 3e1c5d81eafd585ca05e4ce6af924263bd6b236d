@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48208feb_58534caa",
+        "filename": "modules/audio_device/include/audio_device_module_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-06-01T10:15:09Z",
+      "side": 1,
+      "message": "typo (unless it\u0027s actually a duel :)\n\nBtw, can you update the description to reflect that the \"peer connection interface\" change is specific to ios? The current wording makes it look like it\u0027s a much bigger change.\n\nI agree with Fredrik that it would be nice to land a separate CL that does the formatting changes and then rebase this one.",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 68
+      },
+      "revId": "3e1c5d81eafd585ca05e4ce6af924263bd6b236d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
