@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 
+#include "api/test/create_video_quality_test_fixture.h"
 #include "rtc_base/flags.h"
 #include "rtc_base/stringencode.h"
 #include "system_wrappers/include/field_trial_default.h"
@@ -576,11 +577,11 @@ void Loopback() {
       flags::VideoSelectedStream(), flags::VideoNumSpatialLayers(),
       flags::VideoSelectedSL(), flags::VideoInterLayerPred(), SL_descriptors);
 
-  VideoQualityTest test;
+  auto fixture = CreateVideoQualityTestFixture();
   if (flags::DurationSecs()) {
-    test.RunWithAnalyzer(params);
+    fixture->RunWithAnalyzer(params);
   } else {
-    test.RunWithRenderers(params);
+    fixture->RunWithRenderers(params);
   }
 }
 }  // namespace webrtc
