@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c2be18a8_bf0b740d",
+        "filename": "modules/video_coding/codecs/vp9/svc_config.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-06-01T13:49:11Z",
+      "side": 1,
+      "message": "The parenthesis should have been around the .minBitrate term because it is not a float and top_fraction is.",
+      "parentUuid": "2c60bfc1_5d2af667",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23ab5c2f_1b729104",
         "filename": "modules/video_coding/codecs/vp9/svc_rate_allocator.h",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "416a7651_59efbaa3",
+        "filename": "modules/video_coding/codecs/vp9/svc_rate_allocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-06-01T13:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23ab5c2f_1b729104",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 54
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1dd9d3c2_2f25c673",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-06-01T13:49:11Z",
+      "side": 1,
+      "message": "I ran \"git cl format\" and \"git cl format video/video_send_stream_impl.cc\"",
+      "parentUuid": "70dd4ea6_dc5665c1",
+      "range": {
+        "startLine": 638,
+        "startChar": 2,
+        "endLine": 638,
+        "endChar": 4
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e2e19b4_407a05c0",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 6
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "94ef4d65_f82d8802",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-06-01T13:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e2e19b4_407a05c0",
+      "range": {
+        "startLine": 511,
+        "startChar": 53,
+        "endLine": 511,
+        "endChar": 0
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fd2e1c1_3efa0fca",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 6
@@ -114,6 +210,30 @@
       "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06fa6ebb_27a40ffa",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2018-06-01T13:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fd2e1c1_3efa0fca",
+      "range": {
+        "startLine": 514,
+        "startChar": 6,
+        "endLine": 515,
+        "endChar": 75
+      },
+      "revId": "8be9d11f47f9db5b0e416c7b22e0cabd08e607db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
