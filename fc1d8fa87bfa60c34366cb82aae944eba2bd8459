@@ -94,6 +94,30 @@
       "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3b0885e_d73aed3e",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-06-01T13:49:58Z",
+      "side": 1,
+      "message": "I think yes. Those names sound more descriptive to me. Thanks!",
+      "parentUuid": "54f00eaa_bb01b16c",
+      "range": {
+        "startLine": 247,
+        "startChar": 25,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "fc1d8fa87bfa60c34366cb82aae944eba2bd8459",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
