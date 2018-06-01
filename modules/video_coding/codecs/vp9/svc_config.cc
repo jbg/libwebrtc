@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "modules/video_coding/include/video_codec_interface.h"
+#include "modules/video_coding/codecs/vp9/svc_rate_allocator.h"
 
 namespace webrtc {
 
@@ -63,6 +64,7 @@ std::vector<SpatialLayer> ConfigureSvcNormalVideo(size_t input_width,
   num_spatial_layers =
       std::min({num_spatial_layers, num_layers_fit_horz, num_layers_fit_vert});
 
+  float top_fraction = 0.;
   for (size_t sl_idx = 0; sl_idx < num_spatial_layers; ++sl_idx) {
     SpatialLayer spatial_layer = {0};
     spatial_layer.width = input_width >> (num_spatial_layers - sl_idx - 1);
@@ -83,11 +85,16 @@ std::vector<SpatialLayer> ConfigureSvcNormalVideo(size_t input_width,
     spatial_layer.maxBitrate =
          static_cast<int>((1.6 * num_pixels + 50 * 1000) / 1000);
     spatial_layer.targetBitrate =
-        (spatial_layer.maxBitrate + spatial_layer.minBitrate) / 2;
-
+      (spatial_layer.minBitrate + spatial_layer.maxBitrate) / 2;
     spatial_layers.push_back(spatial_layer);
+    top_fraction += std::pow(kSpatialLayeringRateScalingFactor, sl_idx);
   }
-
+  // Compute spatial_layers[0].targetBitrate, which is used to set
+  // max_padding_bitrate_.  Set max_padding_bitrate_ equal to the minimum
+  // total bit rate required to support all spatial layers.
+  spatial_layers[0].targetBitrate = static_cast<unsigned int>
+    (static_cast<float>(spatial_layers[num_spatial_layers - 1].minBitrate)
+    * top_fraction);
   return spatial_layers;
 }
 
