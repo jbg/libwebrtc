@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef4c575f_7ae4abde",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "nit: \"The minimum regathering interval for all networks is negative.\"\n\nAlso: Is there a test for the config validation? If not, would be a good idea to add one; maybe just one in peerconnection_ice_unittest.cc, going through PeerConnection::SetConfiguration.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3008237d_a314f9b9",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "nit: Corner case, but what if regather_on_all_networks_interval_range is set to a nullopt? Then it should be canceled but not restarted (otherwise the DCHECK would be hit)",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc1dbdd8_e364feaa",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "nit: Don\u0027t really need the delay argument, since it should be possible to just read config_.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b1ec42f_0b540cee",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "A DCHECK is sufficient for \"should be impossible to occur if this class was coded correctly\" type things; don\u0027t need both a DCHECK and an error message.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c77387d3_95016d98",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "nit: If all this method does is DCHECK(config_.regather_on_all_networks_interval_range) and then call the other overload of ScheduleRegatheringOnAllNetworks, the two methods can just be combined. Same with ScheduleRegatheringOnFailedNetworks.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f51018d9_7c14ee32",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "Just realized, should have a test that the regathering only occurs in the \"cleared\" state. Meaning it doesn\u0027t happen while gathering is still in progress, or when continual gathering is not enabled.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47c47fcc_eeef76b2",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "nit: Odd order of arguments; const should go first.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "728a4345_422747b8",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "Should only test via the public API. If you haven\u0027t read through https://engdoc.corp.google.com/eng/doc/devguide/coding/testing/unit-testing-best-practices.md?cl\u003dhead yet I\u0027d recommend it.\n\nSo, for example, to test the cancellation logic, instead of calling the \"Cancel\"/\"Schedule\" methods directly, you could call \"Start\" with interval A, then wait a bit, then call SetConfig with interval B, and verify the regathering occurs at the expected time.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18fbbf92_6be294ca",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need the \"repeated\" argument if it\u0027s always true.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

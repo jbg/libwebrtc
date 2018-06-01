@@ -317,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "7686bf0c_f78dba86",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-01T22:00:49Z",
+      "side": 1,
+      "message": "It makes sense for the other tests, because they\u0027re specifically testing that the metric is incremented when expected:\n\n  // Tests that a UMA on ICE regathering is recorded when there is a network\n  // change if and only if continual gathering is enabled.\n\nI guess really, it\u0027s BasicPortAllocator\u0027s responsibility to increment the metric, not P2PTransportChannel\u0027s. So maybe it would make more sense to verify the metric is incremented in basicportallocator_unittest, and in p2ptransportchannel_unittest.cc do something else to determine if regathering occurred (like noticing new candidates appearing). But that may be overkill.",
+      "parentUuid": "1ec501f0_635aabec",
+      "revId": "5b9482962c9efa0617ccf4ab2026e1fd2e9d8f9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d517764c_de00737f",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 7
