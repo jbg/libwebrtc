@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc680e79_f8fa4121",
+        "filename": "modules/video_coding/codecs/vp9/svc_config.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-06-01T15:44:19Z",
+      "side": 1,
+      "message": "This cast isn\u0027t needed, results will be implicitly float because top_fraction is float.",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "revId": "22aff942c60a74ad49083c03ca9e21c02b2c7bad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
