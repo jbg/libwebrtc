@@ -22,6 +22,30 @@
       "revId": "3e1c5d81eafd585ca05e4ce6af924263bd6b236d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4a32876_3bfe0f8f",
+        "filename": "modules/audio_device/include/audio_device_module_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-06-01T17:32:52Z",
+      "side": 1,
+      "message": "This file is accidentally added. It should not be part of this diff, I am removing it.",
+      "parentUuid": "48208feb_58534caa",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 68
+      },
+      "revId": "3e1c5d81eafd585ca05e4ce6af924263bd6b236d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
