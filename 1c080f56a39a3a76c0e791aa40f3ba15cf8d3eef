@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61e659af_4a8ae039",
+        "filename": "sdk/objc/Framework/Native/src/audio/audio_device_module_ios.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-04T08:32:52Z",
+      "side": 1,
+      "message": "explicit",
+      "revId": "1c080f56a39a3a76c0e791aa40f3ba15cf8d3eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa454313_eb4632a0",
+        "filename": "sdk/objc/Framework/Native/src/audio/audio_device_module_ios.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-04T08:32:52Z",
+      "side": 1,
+      "message": "Could we perhaps remove these log statements instead of duplicating them? I don\u0027t see what information they add - the platform should be known outside this context.",
+      "revId": "1c080f56a39a3a76c0e791aa40f3ba15cf8d3eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
