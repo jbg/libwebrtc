@@ -13,8 +13,6 @@
 
 #include <memory>
 
-#include "audio_device_ios.h"
-
 #include "modules/audio_device/audio_device_buffer.h"
 #include "modules/audio_device/include/audio_device.h"
 #include "rtc_base/checks.h"
@@ -34,6 +32,8 @@ namespace ios_adm {
     int32_t AttachAudioBuffer();
 
     AudioDeviceModuleIOS();
+    explicit AudioDeviceModuleIOS(
+        std::unique_ptr<AudioDeviceGeneric> audio_device);
     ~AudioDeviceModuleIOS() override;
 
     // Retrieve the currently utilized audio layer
@@ -133,7 +133,7 @@ namespace ios_adm {
 #endif  // WEBRTC_IOS
     private:
     bool initialized_ = false;
-    std::unique_ptr<AudioDeviceIOS> audio_device_;
+    std::unique_ptr<AudioDeviceGeneric> audio_device_;
     std::unique_ptr<AudioDeviceBuffer> audio_device_buffer_;
 
   };
