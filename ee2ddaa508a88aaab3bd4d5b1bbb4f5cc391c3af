@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d915e955_da33f884",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Good point and there are no such tests yet. I added a TODO here and will follow up with a small CL to resolve it soon.",
+      "parentUuid": "ef4c575f_7ae4abde",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3008237d_a314f9b9",
         "filename": "p2p/base/regatheringcontroller.cc",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fb53c60_bbd4ba3e",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Good catch. Fixed.",
+      "parentUuid": "3008237d_a314f9b9",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "cb0a1e45_3e566641",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Done. Also merged the two overloads.",
+      "parentUuid": "cc1dbdd8_e364feaa",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b1ec42f_0b540cee",
         "filename": "p2p/base/regatheringcontroller.cc",
         "patchSetId": 9
@@ -67,6 +121,24 @@
       "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28d87034_e3dec508",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0b1ec42f_0b540cee",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "1eb0d4cc_1faf9194",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c77387d3_95016d98",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f51018d9_7c14ee32",
         "filename": "p2p/base/regatheringcontroller.cc",
         "patchSetId": 9
@@ -101,6 +191,24 @@
       "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a25bd43_a4b9b6d2",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f51018d9_7c14ee32",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "3c3bc76a_61d47abf",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47c47fcc_eeef76b2",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "728a4345_422747b8",
         "filename": "p2p/base/regatheringcontroller.h",
         "patchSetId": 9
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "98dda75b_2ad28b4b",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "Sure, I should have only tested the object in the same way a client may use it via the public API. The tests are rewritten.",
+      "parentUuid": "728a4345_422747b8",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18fbbf92_6be294ca",
         "filename": "p2p/base/regatheringcontroller.h",
         "patchSetId": 9
@@ -149,6 +293,24 @@
       "writtenOn": "2018-06-01T22:00:49Z",
       "side": 1,
       "message": "nit: Don\u0027t need the \"repeated\" argument if it\u0027s always true.",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cfe6bba_4c06aead",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-04T17:37:59Z",
+      "side": 1,
+      "message": "I am expecting we may need it when we implement the autonomous regathering, where we may only need an one-time regathering. Let me know if I should add this back in the other CL working on this or keep the signature as is.",
+      "parentUuid": "18fbbf92_6be294ca",
       "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
