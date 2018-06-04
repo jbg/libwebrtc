@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8df0cae6_b5bafbe0",
+        "filename": "sdk/objc/Framework/Native/src/audio/audio_device_module_ios.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-06-04T20:50:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "61e659af_4a8ae039",
+      "revId": "1c080f56a39a3a76c0e791aa40f3ba15cf8d3eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa454313_eb4632a0",
         "filename": "sdk/objc/Framework/Native/src/audio/audio_device_module_ios.mm",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "1c080f56a39a3a76c0e791aa40f3ba15cf8d3eef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f79399c_008e4c21",
+        "filename": "sdk/objc/Framework/Native/src/audio/audio_device_module_ios.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-06-04T20:50:53Z",
+      "side": 1,
+      "message": "Agree. I think\n\nRTC_LOG(INFO) \u003c\u003c __FUNCTION__;\n\nshould be suffice.",
+      "parentUuid": "aa454313_eb4632a0",
+      "revId": "1c080f56a39a3a76c0e791aa40f3ba15cf8d3eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
