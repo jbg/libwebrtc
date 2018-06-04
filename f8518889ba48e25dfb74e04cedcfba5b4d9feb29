@@ -34,6 +34,24 @@
       "revId": "f8518889ba48e25dfb74e04cedcfba5b4d9feb29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "394b065f_2166a145",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-06-04T11:22:10Z",
+      "side": 0,
+      "message": "I don\u0027t have the cycles to do that in the foreseeable future.",
+      "parentUuid": "6539f5ff_ebecc64a",
+      "revId": "f8518889ba48e25dfb74e04cedcfba5b4d9feb29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
