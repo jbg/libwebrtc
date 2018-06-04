@@ -16,6 +16,24 @@
       "revId": "19d8d42ba06e5e0978505db494523491342056ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0882cbb0_b7b9fa39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-06-04T10:19:09Z",
+      "side": 1,
+      "message": "Yes, it rolled a few months ago.",
+      "parentUuid": "8d85bbeb_d0793fa2",
+      "revId": "19d8d42ba06e5e0978505db494523491342056ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

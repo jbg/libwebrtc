@@ -16,6 +16,24 @@
       "revId": "f8518889ba48e25dfb74e04cedcfba5b4d9feb29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6539f5ff_ebecc64a",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-06-04T10:19:09Z",
+      "side": 0,
+      "message": "Unfortunately yes, there are other deprecated functions to remove (e.g. av_register_all: https://ci.chromium.org/p/webrtc/builders/luci.webrtc.try/linux_arm64_dbg/11693).\n\nI think we should re-open bugs.webrtc.org/8745 and remove them, can you take a look at that?",
+      "parentUuid": "b6dd4dff_e2efcba8",
+      "revId": "f8518889ba48e25dfb74e04cedcfba5b4d9feb29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
