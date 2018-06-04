@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6dd4dff_e2efcba8",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-06-04T10:13:38Z",
+      "side": 0,
+      "message": "Is this flag still needed?",
+      "revId": "f8518889ba48e25dfb74e04cedcfba5b4d9feb29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
