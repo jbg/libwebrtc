@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "764ac2b0_0db37359",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-06-05T14:42:15Z",
+      "side": 1,
+      "message": "Did you mean 5, 3 or am I just misunderstanding?",
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af3ed5a4_bb0996b8",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
         "patchSetId": 5
