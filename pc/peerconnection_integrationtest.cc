@@ -1094,6 +1094,12 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
     if (callee_) {
       callee_->set_signaling_message_receiver(nullptr);
     }
+    // If turn servers were created for the test they need to be destroyed on
+    // the network thread.
+    for (auto turn_server : turn_servers_) {
+      network_thread()->Invoke<void>(RTC_FROM_HERE,
+                                     [turn_server] { delete turn_server; });
+    }
   }
 
   bool SignalingStateStable() {
@@ -1228,6 +1234,28 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
     dependencies.cert_generator = std::move(cert_generator);
     return CreatePeerConnectionWrapper("New Peer", nullptr, nullptr, nullptr,
                                        std::move(dependencies));
+  }
+
+  // The turn server needs to be created on the network thread. Otherwise we run
+  // into race conditions when it is deleted on the signaling thread and a
+  // socket is trying to send to it on the network thread.
+  cricket::TestTurnServer* CreateTurnServer(
+      rtc::SocketAddress internal_address,
+      rtc::SocketAddress external_address,
+      cricket::ProtocolType type = cricket::ProtocolType::PROTO_UDP,
+      const std::string& common_name = "test turn server") {
+    rtc::Thread* thread = network_thread();
+    cricket::TestTurnServer* turn_server =
+        network_thread_->Invoke<cricket::TestTurnServer*>(
+            RTC_FROM_HERE, [thread, internal_address, external_address, type,
+                            common_name] {
+              return new cricket::TestTurnServer(thread, internal_address,
+                                                 external_address, type,
+                                                 /*ignore_bad_certs=*/true,
+                                                 common_name);
+            });
+    turn_servers_.push_back(turn_server);
+    return turn_servers_.back();
   }
 
   // Once called, SDP blobs and ICE candidates will be automatically signaled
@@ -1435,6 +1463,7 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
   SdpSemantics sdp_semantics_;
 
  private:
+  std::vector<cricket::TestTurnServer*> turn_servers_;
   // |ss_| is used by |network_thread_| so it must be destroyed later.
   std::unique_ptr<rtc::VirtualSocketServer> ss_;
   std::unique_ptr<rtc::FirewallSocketServer> fss_;
@@ -3743,17 +3772,15 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndConnectionTimeWithTurnTurnPair) {
                                                                  3478};
   static const rtc::SocketAddress turn_server_2_external_address{"99.99.99.1",
                                                                  0};
-  cricket::TestTurnServer turn_server_1(network_thread(),
-                                        turn_server_1_internal_address,
-                                        turn_server_1_external_address);
-  cricket::TestTurnServer turn_server_2(network_thread(),
-                                        turn_server_2_internal_address,
-                                        turn_server_2_external_address);
+  cricket::TestTurnServer* turn_server_1 = CreateTurnServer(
+      turn_server_1_internal_address, turn_server_1_external_address);
 
+  cricket::TestTurnServer* turn_server_2 = CreateTurnServer(
+      turn_server_2_internal_address, turn_server_2_external_address);
   // Bypass permission check on received packets so media can be sent before
   // the candidate is signaled.
-  turn_server_1.set_enable_permission_checks(false);
-  turn_server_2.set_enable_permission_checks(false);
+  turn_server_1->set_enable_permission_checks(false);
+  turn_server_2->set_enable_permission_checks(false);
 
   PeerConnectionInterface::RTCConfiguration client_1_config;
   webrtc::PeerConnectionInterface::IceServer ice_server_1;
@@ -3790,10 +3817,6 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndConnectionTimeWithTurnTurnPair) {
   caller()->CreateAndSetAndSignalOffer();
   EXPECT_TRUE_SIMULATED_WAIT(DtlsConnected(), total_connection_time_ms,
                              fake_clock);
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
 
 // Verify that a TurnCustomizer passed in through RTCConfiguration
@@ -3808,12 +3831,10 @@ TEST_P(PeerConnectionIntegrationTest, TurnCustomizerUsedForTurnConnections) {
                                                                  3478};
   static const rtc::SocketAddress turn_server_2_external_address{"99.99.99.1",
                                                                  0};
-  cricket::TestTurnServer turn_server_1(network_thread(),
-                                        turn_server_1_internal_address,
-                                        turn_server_1_external_address);
-  cricket::TestTurnServer turn_server_2(network_thread(),
-                                        turn_server_2_internal_address,
-                                        turn_server_2_external_address);
+  CreateTurnServer(turn_server_1_internal_address,
+                   turn_server_1_external_address);
+  CreateTurnServer(turn_server_2_internal_address,
+                   turn_server_2_external_address);
 
   PeerConnectionInterface::RTCConfiguration client_1_config;
   webrtc::PeerConnectionInterface::IceServer ice_server_1;
@@ -3853,9 +3874,7 @@ TEST_P(PeerConnectionIntegrationTest, TurnCustomizerUsedForTurnConnections) {
 
   EXPECT_GT(customizer2->allow_channel_data_cnt_, 0u);
   EXPECT_GT(customizer2->modify_cnt_, 0u);
-
-  // Need to free the clients here since they're using things we created on
-  // the stack.
+  // Need to free the clients before customizers are destroyed.
   delete SetCallerPcWrapperAndReturnCurrent(nullptr);
   delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
@@ -3868,9 +3887,8 @@ TEST_P(PeerConnectionIntegrationTest, TCPUsedForTurnConnections) {
   static const rtc::SocketAddress turn_server_external_address{"88.88.88.1", 0};
 
   // Enable TCP for the fake turn server.
-  cricket::TestTurnServer turn_server(
-      network_thread(), turn_server_internal_address,
-      turn_server_external_address, cricket::PROTO_TCP);
+  CreateTurnServer(turn_server_internal_address, turn_server_external_address,
+                   cricket::PROTO_TCP);
 
   webrtc::PeerConnectionInterface::IceServer ice_server;
   ice_server.urls.push_back("turn:88.88.88.0:3478?transport=tcp");
@@ -3915,10 +3933,8 @@ TEST_P(PeerConnectionIntegrationTest,
 
   // Enable TCP-TLS for the fake turn server. We need to pass in 88.88.88.0 so
   // that host name verification passes on the fake certificate.
-  cricket::TestTurnServer turn_server(
-      network_thread(), turn_server_internal_address,
-      turn_server_external_address, cricket::PROTO_TLS,
-      /*ignore_bad_certs=*/true, "88.88.88.0");
+  CreateTurnServer(turn_server_internal_address, turn_server_external_address,
+                   cricket::PROTO_TLS, "88.88.88.0");
 
   webrtc::PeerConnectionInterface::IceServer ice_server;
   ice_server.urls.push_back("turns:88.88.88.0:3478?transport=tcp");
@@ -3967,11 +3983,6 @@ TEST_P(PeerConnectionIntegrationTest,
 
   EXPECT_GT(client_1_cert_verifier->call_count_, 0u);
   EXPECT_GT(client_2_cert_verifier->call_count_, 0u);
-
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
 
 TEST_P(PeerConnectionIntegrationTest,
@@ -3982,10 +3993,8 @@ TEST_P(PeerConnectionIntegrationTest,
 
   // Enable TCP-TLS for the fake turn server. We need to pass in 88.88.88.0 so
   // that host name verification passes on the fake certificate.
-  cricket::TestTurnServer turn_server(
-      network_thread(), turn_server_internal_address,
-      turn_server_external_address, cricket::PROTO_TLS,
-      /*ignore_bad_certs=*/true, "88.88.88.0");
+  CreateTurnServer(turn_server_internal_address, turn_server_external_address,
+                   cricket::PROTO_TLS, "88.88.88.0");
 
   webrtc::PeerConnectionInterface::IceServer ice_server;
   ice_server.urls.push_back("turns:88.88.88.0:3478?transport=tcp");
@@ -4039,11 +4048,6 @@ TEST_P(PeerConnectionIntegrationTest,
 
   EXPECT_GT(client_1_cert_verifier->call_count_, 0u);
   EXPECT_GT(client_2_cert_verifier->call_count_, 0u);
-
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
 
 // Test that audio and video flow end-to-end when codec names don't use the
