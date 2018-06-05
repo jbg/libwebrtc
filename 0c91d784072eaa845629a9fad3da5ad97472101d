@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af3ed5a4_bb0996b8",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "while this is correct, an easy natural change (chaning value type to more logical size_t or int)  will make it wrong:\nextended_seq_max is 32bit unwinded sequence number,\nlast_report_extended_seq_max_ is 16bit sequence number, so the plain difference produced wrong expected value. Cutting it to 16 bit though turn it into (vast majority cases) correct value.\n\nturning last_report_extended_seq_max_ into unwinded 32bit will likely make this logic more natural (and even handle unexpected case when expected packets \u003e 2^16)",
+      "range": {
+        "startLine": 215,
+        "startChar": 59,
+        "endLine": 216,
+        "endChar": 0
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb6d33c1_7ee3b586",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "it shouldn\u0027t, A.3 of the rfc3550 explicitly mention negative values as valid\n(only fraction_lost is snapped to zero if negative)",
+      "range": {
+        "startLine": 240,
+        "startChar": 51,
+        "endLine": 240,
+        "endChar": 76
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4bebc25_461c9ce0",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "why change to output parameter instead of returning RtcpStatistics?\nhttps://google.github.io/styleguide/cppguide.html#Output_Parameters",
+      "range": {
+        "startLine": 53,
+        "startChar": 58,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ea2b629_df2cc603",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "added word \u0027extended\u0027 makes it a bit confusing:\nThe name looks very similar to 32 bit value in report block \u0027extended highest sequence number received\u0027 (and together with \u0027received_seq_wraps_\u0027 is that value)\n\nmay be use uint32_t",
+      "range": {
+        "startLine": 84,
+        "startChar": 11,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eac31e2c_b3b8162e",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "the functionality of this TestCallback look like mock, so may be use mock instead:\n\nclass MockRtcpCallback : public RtcpStatisticsCallback {\n public:\n  MOCK_METHOD2(StatisticsUpdated, void((const RtcpStatistics\u0026 statistics,\n                         uint32_t ssrc));\n};\n\n...\n\n{\nMockRtcpCallback mock;\nEXPECT_CALL(mock, StatisticsUpdated(_, _)).Times(3);\nstatistic-\u003eIncomingPacket(...);\nstatistic-\u003eIncomingPacket(...);\n\n....\nRtcpStatistics stat1, stat2;\nEXPECT_CALL(mock, StatisticsUpdated(_, _)).WillOnce(SaveArg\u003c0\u003e(\u0026stat1));\nreceive_statistics_-\u003eGetStatistician(kSsrc1)-\u003eGetStat...(\u0026stat2);\n\nEXPECT_EQ(stat1.field, stat2.field);\n....",
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcd82e3e_fa0ca8bf",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "I do not see the check we got a new callback.\nThough that is checked in another test.\nMay be updated the comment: \u0027... and check that we got the matching values from a new callback\u0027",
+      "range": {
+        "startLine": 314,
+        "startChar": 35,
+        "endLine": 314,
+        "endChar": 67
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c26775e_d128c9f5",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-05T09:56:50Z",
+      "side": 1,
+      "message": "may be using hexadecimal will make it more visible is it \u0027-3\u0027 or \u0027-1\u0027:\n0xfffd",
+      "range": {
+        "startLine": 437,
+        "startChar": 28,
+        "endLine": 437,
+        "endChar": 33
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
