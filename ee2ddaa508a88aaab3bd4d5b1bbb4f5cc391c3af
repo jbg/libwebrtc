@@ -314,6 +314,24 @@
       "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8e62841_f47bcf05",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-05T23:43:48Z",
+      "side": 1,
+      "message": "It turns out I may not need this parameter. Removed it and renamed methods in the new patch.",
+      "parentUuid": "9cfe6bba_4c06aead",
+      "revId": "ee2ddaa508a88aaab3bd4d5b1bbb4f5cc391c3af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
