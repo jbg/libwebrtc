@@ -13,14 +13,13 @@
 #include "api/video_codecs/video_encoder.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "common_video/include/video_bitrate_allocator.h"
-#include "modules/video_coding/codecs/vp8/screenshare_layers.h"
-#include "modules/video_coding/codecs/vp8/simulcast_rate_allocator.h"
-#include "modules/video_coding/codecs/vp8/temporal_layers.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
 #include "modules/video_coding/codecs/vp9/svc_rate_allocator.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/utility/default_video_bitrate_allocator.h"
+#include "modules/video_coding/utility/simulcast_rate_allocator.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/system/fallthrough.h"
 #include "system_wrappers/include/clock.h"
 
 namespace webrtc {
@@ -55,7 +54,8 @@ VideoCodecInitializer::CreateBitrateAllocator(const VideoCodec& codec) {
 
   switch (codec.codecType) {
     case kVideoCodecVP8:
-      // Set up default VP8 temporal layer factory, if not provided.
+      RTC_FALLTHROUGH();
+    case kVideoCodecH264:
       rate_allocator.reset(new SimulcastRateAllocator(codec));
       break;
     case kVideoCodecVP9:
@@ -194,45 +194,45 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       RTC_DCHECK_LE(video_codec.VP9()->numberOfTemporalLayers,
                     kMaxTemporalStreams);
 
-      RTC_DCHECK(config.spatial_layers.empty() ||
-                 config.spatial_layers.size() ==
-                     video_codec.VP9()->numberOfSpatialLayers);
+        RTC_DCHECK(config.spatial_layers.empty() ||
+                   config.spatial_layers.size() ==
+                       video_codec.VP9()->numberOfSpatialLayers);
 
-      std::vector<SpatialLayer> spatial_layers;
-      if (!config.spatial_layers.empty()) {
-        // Layering is set explicitly.
-        spatial_layers = config.spatial_layers;
-      } else {
+        std::vector<SpatialLayer> spatial_layers;
+        if (!config.spatial_layers.empty()) {
+          // Layering is set explicitly.
+          spatial_layers = config.spatial_layers;
+        } else {
         spatial_layers = GetSvcConfig(video_codec.width, video_codec.height,
-                                      video_codec.VP9()->numberOfSpatialLayers,
+                           video_codec.VP9()->numberOfSpatialLayers,
                                       video_codec.VP9()->numberOfTemporalLayers,
                                       video_codec.mode == kScreensharing);
 
-        const bool no_spatial_layering = (spatial_layers.size() == 1);
-        if (no_spatial_layering) {
-          // Use codec's bitrate limits.
-          spatial_layers.back().minBitrate = video_codec.minBitrate;
-          spatial_layers.back().maxBitrate = video_codec.maxBitrate;
+          const bool no_spatial_layering = (spatial_layers.size() == 1);
+          if (no_spatial_layering) {
+            // Use codec's bitrate limits.
+            spatial_layers.back().minBitrate = video_codec.minBitrate;
+            spatial_layers.back().maxBitrate = video_codec.maxBitrate;
+          }
         }
-      }
 
-      RTC_DCHECK(!spatial_layers.empty());
-      for (size_t i = 0; i < spatial_layers.size(); ++i) {
-        video_codec.spatialLayers[i] = spatial_layers[i];
-      }
+        RTC_DCHECK(!spatial_layers.empty());
+        for (size_t i = 0; i < spatial_layers.size(); ++i) {
+          video_codec.spatialLayers[i] = spatial_layers[i];
+        }
 
-      // Update layering settings.
-      video_codec.VP9()->numberOfSpatialLayers =
-          static_cast<unsigned char>(spatial_layers.size());
-      RTC_DCHECK_GE(video_codec.VP9()->numberOfSpatialLayers, 1);
-      RTC_DCHECK_LE(video_codec.VP9()->numberOfSpatialLayers,
-                    kMaxSpatialLayers);
+        // Update layering settings.
+        video_codec.VP9()->numberOfSpatialLayers =
+            static_cast<unsigned char>(spatial_layers.size());
+        RTC_DCHECK_GE(video_codec.VP9()->numberOfSpatialLayers, 1);
+        RTC_DCHECK_LE(video_codec.VP9()->numberOfSpatialLayers,
+                      kMaxSpatialLayers);
 
-      video_codec.VP9()->numberOfTemporalLayers = static_cast<unsigned char>(
-          spatial_layers.back().numberOfTemporalLayers);
-      RTC_DCHECK_GE(video_codec.VP9()->numberOfTemporalLayers, 1);
-      RTC_DCHECK_LE(video_codec.VP9()->numberOfTemporalLayers,
-                    kMaxTemporalStreams);
+        video_codec.VP9()->numberOfTemporalLayers = static_cast<unsigned char>(
+            spatial_layers.back().numberOfTemporalLayers);
+        RTC_DCHECK_GE(video_codec.VP9()->numberOfTemporalLayers, 1);
+        RTC_DCHECK_LE(video_codec.VP9()->numberOfTemporalLayers,
+                      kMaxTemporalStreams);
 
       break;
     }

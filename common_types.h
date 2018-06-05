@@ -325,6 +325,16 @@ enum class VideoType {
   kBGRA,
 };
 
+// Ratio allocation between temporal streams:
+// Values as required for the VP8 codec (accumulating).
+static const float
+    kLayerRateAlloction[kMaxSimulcastStreams][kMaxTemporalStreams] = {
+        {1.0f, 1.0f, 1.0f, 1.0f},  // 1 layer
+        {0.6f, 1.0f, 1.0f, 1.0f},  // 2 layers {60%, 40%}
+        {0.4f, 0.6f, 1.0f, 1.0f},  // 3 layers {40%, 20%, 40%}
+        {0.25f, 0.4f, 0.6f, 1.0f}  // 4 layers {25%, 15%, 20%, 40%}
+};
+
 // Video codec
 enum VideoCodecComplexity {
   kComplexityNormal = 0,
