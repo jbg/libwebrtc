@@ -174,18 +174,17 @@ int GetTotalMaxBitrateBps(const std::vector<webrtc::VideoStream>& layers) {
 std::vector<webrtc::VideoStream> GetSimulcastConfig(size_t max_layers,
                                                     int width,
                                                     int height,
-                                                    int max_bitrate_bps,
                                                     double bitrate_priority,
                                                     int max_qp,
                                                     int max_framerate,
                                                     bool is_screenshare) {
   if (is_screenshare) {
-    return GetScreenshareLayers(max_layers, width, height, max_bitrate_bps,
-                                bitrate_priority, max_qp, max_framerate,
+    return GetScreenshareLayers(max_layers, width, height, bitrate_priority,
+                                max_qp, max_framerate,
                                 ScreenshareSimulcastFieldTrialEnabled());
   } else {
-    return GetNormalSimulcastLayers(max_layers, width, height, max_bitrate_bps,
-                                    bitrate_priority, max_qp, max_framerate);
+    return GetNormalSimulcastLayers(max_layers, width, height, bitrate_priority,
+                                    max_qp, max_framerate);
   }
 }
 
@@ -193,7 +192,6 @@ std::vector<webrtc::VideoStream> GetNormalSimulcastLayers(
     size_t max_layers,
     int width,
     int height,
-    int max_bitrate_bps,
     double bitrate_priority,
     int max_qp,
     int max_framerate) {
@@ -253,8 +251,6 @@ std::vector<webrtc::VideoStream> GetNormalSimulcastLayers(
       break;
     }
   }
-  // If there is bitrate leftover, give it to the largest layer.
-  BoostMaxSimulcastLayer(max_bitrate_bps, &layers);
   // Currently the relative bitrate priority of the sender is controlled by
   // the value of the lowest VideoStream.
   // TODO(bugs.webrtc.org/8630): The web specification describes being able to
@@ -268,7 +264,6 @@ std::vector<webrtc::VideoStream> GetScreenshareLayers(
     size_t max_layers,
     int width,
     int height,
-    int max_bitrate_bps,
     double bitrate_priority,
     int max_qp,
     int max_framerate,
