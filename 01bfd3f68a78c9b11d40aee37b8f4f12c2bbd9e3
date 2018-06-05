@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2772d0a9_0bdaba3f",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-05T18:08:43Z",
+      "side": 1,
+      "message": "If you change to a vector of unique_ptr then this can be simplified to:\n\nnetwork_thread()-\u003eInvoke\u003cvoid\u003e(RTC_FROM_HERE, [this] { turn_servers_.clear(); });",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b994e394_096feef2",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-05T18:08:43Z",
+      "side": 1,
+      "message": "Maybe make this std::vector\u003cstd::unique_ptr\u003c\u003e\u003e to make ownership clear. Also add a comment that these can only be accessed on the network thread.",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b150a74b_8042b6e6",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3782,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-05T18:08:43Z",
+      "side": 1,
+      "message": "Technically isn\u0027t safe because the turn servers live on the network thread. Not sure what would be the best approach here.\n\nIdeas:\n- Have CreateTurnServer take a lambda which does the creation and initialization.\n- Expose the network thread and do an Invoke for these.",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f91b48f6_ab093cab",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3877,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-05T18:08:43Z",
+      "side": 1,
+      "message": "Why is this one needed?",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
