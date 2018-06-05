@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e1e08c9_dc69449e",
+        "filename": "modules/video_coding/timing.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-05T08:37:57Z",
+      "side": 0,
+      "message": "I think this can be removed.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 44
+      },
+      "revId": "613591a5b8e67fd4fc5995aec405e0dff97c9e96",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
