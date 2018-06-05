@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e683b23_cd43c66c",
+        "filename": "api/rtpparameters.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-05T22:39:00Z",
+      "side": 1,
+      "message": "This comment is obsolete now, right? The comment is talking about how we only use \"encodings[0].max_bitrate_bps\", and it applies to the entire track, not just the first simulcast layer. But now it\u0027s implemented correctly.",
+      "revId": "d4eb8d8784838e637edf24fe82514a0fbb31f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4324df9e_19ecb488",
+        "filename": "api/rtpparameters.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-05T22:39:00Z",
+      "side": 1,
+      "message": "Should mention that it\u0027s also not implemented for the ORTC API.",
+      "revId": "d4eb8d8784838e637edf24fe82514a0fbb31f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c729dfd_d08c62a6",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-05T22:39:00Z",
+      "side": 1,
+      "message": "A comment here would be nice.",
+      "revId": "d4eb8d8784838e637edf24fe82514a0fbb31f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a12d878a_911751e9",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-05T22:39:00Z",
+      "side": 1,
+      "message": "nit: This comment isn\u0027t completely clear to me; would suggest something like:\n\n\"When simulcast is enabled (when there are multiple encodings), encodings[i].max_bitrate_bps will be enforced by encoder_config.simulcast_layers[i].max_bitrate_bps. Otherwise, it\u0027s enforced by stream_max_bitrate, taking the minimum of the two maximums (one coming from SDP, the other coming from RtpParameters).\"",
+      "revId": "d4eb8d8784838e637edf24fe82514a0fbb31f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de37da70_37cce5be",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2748,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-05T22:39:00Z",
+      "side": 1,
+      "message": "Should only do this if there\u0027s no application-configured maximum for the largest layer, right? Otherwise we\u0027ll be violating the maximum. If you agree, should update the related test.",
+      "revId": "d4eb8d8784838e637edf24fe82514a0fbb31f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b5d8747_fcdee881",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 5490,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-05T22:39:00Z",
+      "side": 1,
+      "message": "nit: Check the specific type of error (INVALID_RANGE)",
+      "revId": "d4eb8d8784838e637edf24fe82514a0fbb31f138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
