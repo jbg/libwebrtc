@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bf432b23_e31ec988",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-06-06T23:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2772d0a9_0bdaba3f",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b994e394_096feef2",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59d887d9_93ae1bf0",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-06-06T23:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b994e394_096feef2",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "30b716cd_e31282e7",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3782,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-06-06T23:52:22Z",
+      "side": 1,
+      "message": "Since the network thread is already exposed \u0026 it\u0027s only done here, I went with option 2 here.",
+      "parentUuid": "b150a74b_8042b6e6",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f91b48f6_ab093cab",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc7bd6c_6b4618b2",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3877,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-06-06T23:52:22Z",
+      "side": 1,
+      "message": "A TurnPort is created with a raw pointer to a TurnCustomizer. The TurnPort has the same lifetime as the PeerConnection, so it\u0027s expected that the TurnCustomizer outlives the life of the PeerConnection or else when Send() is called it will hit a seg fault. \n\nI fixed this by doing the same thing as what I did with the TurnServers for TurnCustomizers. I also udpated the test\u0027s destructor to delete the caller/callee as well. This allows destroying the turn servers \u0026 customizers on the network thread (\u0026 after the PeerConnections).",
+      "parentUuid": "f91b48f6_ab093cab",
+      "revId": "01bfd3f68a78c9b11d40aee37b8f4f12c2bbd9e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
