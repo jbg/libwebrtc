@@ -1090,10 +1090,19 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
   ~PeerConnectionIntegrationBaseTest() {
     if (caller_) {
       caller_->set_signaling_message_receiver(nullptr);
+      delete SetCallerPcWrapperAndReturnCurrent(nullptr);
     }
     if (callee_) {
       callee_->set_signaling_message_receiver(nullptr);
+      delete SetCalleePcWrapperAndReturnCurrent(nullptr);
     }
+
+    // If turn servers were created for the test they need to be destroyed on
+    // the network thread.
+    network_thread()->Invoke<void>(RTC_FROM_HERE, [this] {
+      turn_servers_.clear();
+      turn_customizers_.clear();
+    });
   }
 
   bool SignalingStateStable() {
@@ -1228,6 +1237,52 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
     dependencies.cert_generator = std::move(cert_generator);
     return CreatePeerConnectionWrapper("New Peer", nullptr, nullptr, nullptr,
                                        std::move(dependencies));
+  }
+
+  // The turn server needs to be created on the network thread. Otherwise we run
+  // into race conditions when it is deleted on the signaling thread and a
+  // socket is trying to send to it on the network thread.
+  cricket::TestTurnServer* CreateTurnServer(
+      rtc::SocketAddress internal_address,
+      rtc::SocketAddress external_address,
+      cricket::ProtocolType type = cricket::ProtocolType::PROTO_UDP,
+      const std::string& common_name = "test turn server") {
+    rtc::Thread* thread = network_thread();
+    std::unique_ptr<cricket::TestTurnServer> turn_server =
+        network_thread_->Invoke<std::unique_ptr<cricket::TestTurnServer>>(
+            RTC_FROM_HERE,
+            [thread, internal_address, external_address, type, common_name] {
+              return rtc::MakeUnique<cricket::TestTurnServer>(
+                  thread, internal_address, external_address, type,
+                  /*ignore_bad_certs=*/true, common_name);
+            });
+    turn_servers_.push_back(std::move(turn_server));
+    return turn_servers_.back().get();
+  }
+
+  cricket::TestTurnCustomizer* CreateTurnCustomizer() {
+    std::unique_ptr<cricket::TestTurnCustomizer> turn_customizer =
+        network_thread()->Invoke<std::unique_ptr<cricket::TestTurnCustomizer>>(
+            RTC_FROM_HERE,
+            [] { return rtc::MakeUnique<cricket::TestTurnCustomizer>(); });
+    turn_customizers_.push_back(std::move(turn_customizer));
+    return turn_customizers_.back().get();
+  }
+
+  // Checks that the function counters for a TestTurnCustomizer are greater than
+  // 0.
+  void ExpectTurnCustomizerCountersIncremented(
+      cricket::TestTurnCustomizer* turn_customizer) {
+    unsigned int allow_channel_data_counter =
+        network_thread()->Invoke<unsigned int>(
+            RTC_FROM_HERE, [turn_customizer] {
+              return turn_customizer->allow_channel_data_cnt_;
+            });
+    EXPECT_GT(allow_channel_data_counter, 0u);
+    unsigned int modify_counter = network_thread()->Invoke<unsigned int>(
+        RTC_FROM_HERE,
+        [turn_customizer] { return turn_customizer->modify_cnt_; });
+    EXPECT_GT(modify_counter, 0u);
   }
 
   // Once called, SDP blobs and ICE candidates will be automatically signaled
@@ -1443,6 +1498,10 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
   // later.
   std::unique_ptr<rtc::Thread> network_thread_;
   std::unique_ptr<rtc::Thread> worker_thread_;
+  // The turn servers and turn customizers should only be accessed on the
+  // network thread to avoid a race with the a socket read/write.
+  std::vector<std::unique_ptr<cricket::TestTurnServer>> turn_servers_;
+  std::vector<std::unique_ptr<cricket::TestTurnCustomizer>> turn_customizers_;
   std::unique_ptr<PeerConnectionWrapper> caller_;
   std::unique_ptr<PeerConnectionWrapper> callee_;
 };
@@ -3743,17 +3802,19 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndConnectionTimeWithTurnTurnPair) {
                                                                  3478};
   static const rtc::SocketAddress turn_server_2_external_address{"99.99.99.1",
                                                                  0};
-  cricket::TestTurnServer turn_server_1(network_thread(),
-                                        turn_server_1_internal_address,
-                                        turn_server_1_external_address);
-  cricket::TestTurnServer turn_server_2(network_thread(),
-                                        turn_server_2_internal_address,
-                                        turn_server_2_external_address);
+  cricket::TestTurnServer* turn_server_1 = CreateTurnServer(
+      turn_server_1_internal_address, turn_server_1_external_address);
 
+  cricket::TestTurnServer* turn_server_2 = CreateTurnServer(
+      turn_server_2_internal_address, turn_server_2_external_address);
   // Bypass permission check on received packets so media can be sent before
   // the candidate is signaled.
-  turn_server_1.set_enable_permission_checks(false);
-  turn_server_2.set_enable_permission_checks(false);
+  network_thread()->Invoke<void>(RTC_FROM_HERE, [turn_server_1] {
+    turn_server_1->set_enable_permission_checks(false);
+  });
+  network_thread()->Invoke<void>(RTC_FROM_HERE, [turn_server_2] {
+    turn_server_2->set_enable_permission_checks(false);
+  });
 
   PeerConnectionInterface::RTCConfiguration client_1_config;
   webrtc::PeerConnectionInterface::IceServer ice_server_1;
@@ -3790,10 +3851,6 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndConnectionTimeWithTurnTurnPair) {
   caller()->CreateAndSetAndSignalOffer();
   EXPECT_TRUE_SIMULATED_WAIT(DtlsConnected(), total_connection_time_ms,
                              fake_clock);
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
 
 // Verify that a TurnCustomizer passed in through RTCConfiguration
@@ -3808,12 +3865,10 @@ TEST_P(PeerConnectionIntegrationTest, TurnCustomizerUsedForTurnConnections) {
                                                                  3478};
   static const rtc::SocketAddress turn_server_2_external_address{"99.99.99.1",
                                                                  0};
-  cricket::TestTurnServer turn_server_1(network_thread(),
-                                        turn_server_1_internal_address,
-                                        turn_server_1_external_address);
-  cricket::TestTurnServer turn_server_2(network_thread(),
-                                        turn_server_2_internal_address,
-                                        turn_server_2_external_address);
+  CreateTurnServer(turn_server_1_internal_address,
+                   turn_server_1_external_address);
+  CreateTurnServer(turn_server_2_internal_address,
+                   turn_server_2_external_address);
 
   PeerConnectionInterface::RTCConfiguration client_1_config;
   webrtc::PeerConnectionInterface::IceServer ice_server_1;
@@ -3822,8 +3877,8 @@ TEST_P(PeerConnectionIntegrationTest, TurnCustomizerUsedForTurnConnections) {
   ice_server_1.password = "test";
   client_1_config.servers.push_back(ice_server_1);
   client_1_config.type = webrtc::PeerConnectionInterface::kRelay;
-  auto customizer1 = rtc::MakeUnique<cricket::TestTurnCustomizer>();
-  client_1_config.turn_customizer = customizer1.get();
+  auto customizer1 = CreateTurnCustomizer();
+  client_1_config.turn_customizer = customizer1;
 
   PeerConnectionInterface::RTCConfiguration client_2_config;
   webrtc::PeerConnectionInterface::IceServer ice_server_2;
@@ -3832,8 +3887,8 @@ TEST_P(PeerConnectionIntegrationTest, TurnCustomizerUsedForTurnConnections) {
   ice_server_2.password = "test";
   client_2_config.servers.push_back(ice_server_2);
   client_2_config.type = webrtc::PeerConnectionInterface::kRelay;
-  auto customizer2 = rtc::MakeUnique<cricket::TestTurnCustomizer>();
-  client_2_config.turn_customizer = customizer2.get();
+  auto customizer2 = CreateTurnCustomizer();
+  client_2_config.turn_customizer = customizer2;
 
   ASSERT_TRUE(
       CreatePeerConnectionWrappersWithConfig(client_1_config, client_2_config));
@@ -3848,16 +3903,8 @@ TEST_P(PeerConnectionIntegrationTest, TurnCustomizerUsedForTurnConnections) {
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(DtlsConnected(), kDefaultTimeout);
 
-  EXPECT_GT(customizer1->allow_channel_data_cnt_, 0u);
-  EXPECT_GT(customizer1->modify_cnt_, 0u);
-
-  EXPECT_GT(customizer2->allow_channel_data_cnt_, 0u);
-  EXPECT_GT(customizer2->modify_cnt_, 0u);
-
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
+  ExpectTurnCustomizerCountersIncremented(customizer1);
+  ExpectTurnCustomizerCountersIncremented(customizer2);
 }
 
 // Verifies that you can use TCP instead of UDP to connect to a TURN server and
@@ -3868,9 +3915,8 @@ TEST_P(PeerConnectionIntegrationTest, TCPUsedForTurnConnections) {
   static const rtc::SocketAddress turn_server_external_address{"88.88.88.1", 0};
 
   // Enable TCP for the fake turn server.
-  cricket::TestTurnServer turn_server(
-      network_thread(), turn_server_internal_address,
-      turn_server_external_address, cricket::PROTO_TCP);
+  CreateTurnServer(turn_server_internal_address, turn_server_external_address,
+                   cricket::PROTO_TCP);
 
   webrtc::PeerConnectionInterface::IceServer ice_server;
   ice_server.urls.push_back("turn:88.88.88.0:3478?transport=tcp");
@@ -3915,10 +3961,8 @@ TEST_P(PeerConnectionIntegrationTest,
 
   // Enable TCP-TLS for the fake turn server. We need to pass in 88.88.88.0 so
   // that host name verification passes on the fake certificate.
-  cricket::TestTurnServer turn_server(
-      network_thread(), turn_server_internal_address,
-      turn_server_external_address, cricket::PROTO_TLS,
-      /*ignore_bad_certs=*/true, "88.88.88.0");
+  CreateTurnServer(turn_server_internal_address, turn_server_external_address,
+                   cricket::PROTO_TLS, "88.88.88.0");
 
   webrtc::PeerConnectionInterface::IceServer ice_server;
   ice_server.urls.push_back("turns:88.88.88.0:3478?transport=tcp");
@@ -3967,11 +4011,6 @@ TEST_P(PeerConnectionIntegrationTest,
 
   EXPECT_GT(client_1_cert_verifier->call_count_, 0u);
   EXPECT_GT(client_2_cert_verifier->call_count_, 0u);
-
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
 
 TEST_P(PeerConnectionIntegrationTest,
@@ -3982,10 +4021,8 @@ TEST_P(PeerConnectionIntegrationTest,
 
   // Enable TCP-TLS for the fake turn server. We need to pass in 88.88.88.0 so
   // that host name verification passes on the fake certificate.
-  cricket::TestTurnServer turn_server(
-      network_thread(), turn_server_internal_address,
-      turn_server_external_address, cricket::PROTO_TLS,
-      /*ignore_bad_certs=*/true, "88.88.88.0");
+  CreateTurnServer(turn_server_internal_address, turn_server_external_address,
+                   cricket::PROTO_TLS, "88.88.88.0");
 
   webrtc::PeerConnectionInterface::IceServer ice_server;
   ice_server.urls.push_back("turns:88.88.88.0:3478?transport=tcp");
@@ -4039,11 +4076,6 @@ TEST_P(PeerConnectionIntegrationTest,
 
   EXPECT_GT(client_1_cert_verifier->call_count_, 0u);
   EXPECT_GT(client_2_cert_verifier->call_count_, 0u);
-
-  // Need to free the clients here since they're using things we created on
-  // the stack.
-  delete SetCallerPcWrapperAndReturnCurrent(nullptr);
-  delete SetCalleePcWrapperAndReturnCurrent(nullptr);
 }
 
 // Test that audio and video flow end-to-end when codec names don't use the
