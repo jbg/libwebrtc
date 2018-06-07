@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7b955e6_447a86e8",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "nit: \"ini\"",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae875a86_3ac55bd2",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure if the constants/local variables in these tests improve readability; compare this to:\n\n  BasicRegatheringController::Config config(rtc::IntervalRange(2000, 2000), 2000);\n  regathering_controller()-\u003eSetConfig(config);\n  regathering_controller()-\u003eStart();\n  SIMULATED_WAIT(false, 10000, clock);\n\nAlso, in the later tests, where \"1000 \u003c kRegatherInterval \u003c kNetworkGatherDurationLong \u003c kRegatherIntervalLong\" must be true, using the literal values may make this more obvious.\n\nProbably just a matter of opinion though, don\u0027t feel like you need to change it at this point.",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62b34873_f8ba6c40",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "If this is just meant to be testing the cancellation, then waiting until the first interval passes isn\u0027t really necessary. Testing how things work normally with no cancellation can be a separate test.",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b07b5abd_be6d90ef",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "Since ScheduleOfIceRegatheringOnAllNetworkCanBeReplaced already tests replacing one interval with a new interval, this could test setting a nullopt.",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e97ecf24_b5f13e41",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of the initial 1-second wait?",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a83e55e_216f1fc3",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "Again, I don\u0027t think the initial 1-second wait or subsequent 2-second wait are relevant to this test, if it\u0027s just testing the cancellation. Same goes for the tests below.",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "475a4b0c_9fc9722e",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-07T00:51:21Z",
+      "side": 1,
+      "message": "nit: This is basically a superset of IceRegatheringOnFailedNetworksCanBeCanceled (the only difference being that this test waits long enough at the end for the longer interval to pass), so I think the two tests could be combined.",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
