@@ -365,9 +365,9 @@ VideoCodecTestFixtureImpl::VideoCodecTestFixtureImpl(Config config)
       config_(config) {}
 
 VideoCodecTestFixtureImpl::VideoCodecTestFixtureImpl(
-    Config config,
-    std::unique_ptr<VideoDecoderFactory> decoder_factory,
-    std::unique_ptr<VideoEncoderFactory> encoder_factory)
+        Config config,
+        std::unique_ptr<VideoDecoderFactory> decoder_factory,
+        std::unique_ptr<VideoEncoderFactory> encoder_factory)
     : encoder_factory_(std::move(encoder_factory)),
       decoder_factory_(std::move(decoder_factory)),
       config_(config) {}
@@ -556,7 +556,7 @@ void VideoCodecTestFixtureImpl::CreateEncoderAndDecoder() {
   }
   SdpVideoFormat format(config_.codec_name);
 
-  encoder_ = encoder_factory_->CreateVideoEncoder(format);
+    encoder_ = encoder_factory_->CreateVideoEncoder(format);
   EXPECT_TRUE(encoder_) << "Encoder not successfully created.";
 
   const size_t num_simulcast_or_spatial_layers = std::max(
@@ -598,29 +598,29 @@ void VideoCodecTestFixtureImpl::SetUpAndInitObjects(
   RTC_DCHECK(decoded_frame_writers_.empty());
   const size_t num_simulcast_or_spatial_layers = std::max(
       config_.NumberOfSimulcastStreams(), config_.NumberOfSpatialLayers());
-  for (size_t simulcast_svc_idx = 0;
-       simulcast_svc_idx < num_simulcast_or_spatial_layers;
-       ++simulcast_svc_idx) {
+    for (size_t simulcast_svc_idx = 0;
+         simulcast_svc_idx < num_simulcast_or_spatial_layers;
+         ++simulcast_svc_idx) {
     const std::string output_filename_base = OutputPath() +
                                              FilenameWithParams(config_) + "_" +
-                                             std::to_string(simulcast_svc_idx);
+          std::to_string(simulcast_svc_idx);
 
     if (config_.visualization_params.save_encoded_ivf) {
-      rtc::File post_encode_file =
-          rtc::File::Create(output_filename_base + ".ivf");
-      encoded_frame_writers_.push_back(
-          IvfFileWriter::Wrap(std::move(post_encode_file), 0));
-    }
+        rtc::File post_encode_file =
+            rtc::File::Create(output_filename_base + ".ivf");
+        encoded_frame_writers_.push_back(
+            IvfFileWriter::Wrap(std::move(post_encode_file), 0));
+      }
 
     if (config_.visualization_params.save_decoded_y4m) {
-      FrameWriter* decoded_frame_writer = new Y4mFrameWriterImpl(
-          output_filename_base + ".y4m", config_.codec_settings.width,
-          config_.codec_settings.height, initial_framerate_fps);
-      EXPECT_TRUE(decoded_frame_writer->Init());
-      decoded_frame_writers_.push_back(
-          std::unique_ptr<FrameWriter>(decoded_frame_writer));
+        FrameWriter* decoded_frame_writer = new Y4mFrameWriterImpl(
+            output_filename_base + ".y4m", config_.codec_settings.width,
+            config_.codec_settings.height, initial_framerate_fps);
+        EXPECT_TRUE(decoded_frame_writer->Init());
+        decoded_frame_writers_.push_back(
+            std::unique_ptr<FrameWriter>(decoded_frame_writer));
+      }
     }
-  }
 
   stats_.Clear();
 
