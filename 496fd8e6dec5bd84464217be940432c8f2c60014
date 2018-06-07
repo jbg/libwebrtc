@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50017846_2eb0edbb",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-06-07T09:22:25Z",
+      "side": 1,
+      "message": "Please, add in alphabetic order, at line 41. (Yes, true, all of them aren\u0027t, but let\u0027s try.)",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "496fd8e6dec5bd84464217be940432c8f2c60014",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
