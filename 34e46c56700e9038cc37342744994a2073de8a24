@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9b9808c1_f82e294a",
+        "filename": "p2p/base/regatheringcontroller.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b955e6_447a86e8",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae875a86_3ac55bd2",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "34e46c56700e9038cc37342744994a2073de8a24",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8fa6f95_d2d56685",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "Ack. This reminds me of one episode in TotT on the same issue, and I remember the literal is encouraged for readability if it does not spam the code. Fixed.",
+      "parentUuid": "ae875a86_3ac55bd2",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1c26e52e_4a2bfa0d",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "Ack. Added a separate test for the normal schedule.",
+      "parentUuid": "62b34873_f8ba6c40",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b07b5abd_be6d90ef",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 12
@@ -67,6 +121,24 @@
       "revId": "34e46c56700e9038cc37342744994a2073de8a24",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a813792e_e3b0f24a",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "b07b5abd_be6d90ef",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "771b95da_3b730dcd",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "It was a typo and meant for kRegatherIntervalShort - 1 to test the expected schedule as in an earlier test. Removed after revising the tests and adding a new one for the normal schedule.",
+      "parentUuid": "e97ecf24_b5f13e41",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a83e55e_216f1fc3",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 12
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "9c2a57f8_fc175016",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "Ack. Removed as in the changes to other tests.",
+      "parentUuid": "7a83e55e_216f1fc3",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "475a4b0c_9fc9722e",
         "filename": "p2p/base/regatheringcontroller_unittest.cc",
         "patchSetId": 12
@@ -118,6 +226,24 @@
       "revId": "34e46c56700e9038cc37342744994a2073de8a24",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc2f7d15_39cdc2fa",
+        "filename": "p2p/base/regatheringcontroller_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-07T16:49:20Z",
+      "side": 1,
+      "message": "Ack. They are essentially the same logic with different checkpoints.",
+      "parentUuid": "475a4b0c_9fc9722e",
+      "revId": "34e46c56700e9038cc37342744994a2073de8a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
