@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0ee3f733_0df06b07",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-06-07T09:04:42Z",
+      "side": 1,
+      "message": "The last_send_time is not appropriately named, it\u0027s really the last time we sent something or did not send anything because buffers were empty.\n\nThis change means that we don\u0027t add time when we are congested to the budget.\n\nSince we don\u0027t build up underuse, updating it on 282 shouldn\u0027t make any difference.",
+      "parentUuid": "c7852843_60b0031f",
+      "range": {
+        "startLine": 258,
+        "startChar": 38,
+        "endLine": 258,
+        "endChar": 59
+      },
+      "revId": "cd1795021c6b76c74e783ffb19ad727ad1ed8a22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c70a13ee_9c3cdbd5",
         "filename": "modules/pacing/paced_sender.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "cd1795021c6b76c74e783ffb19ad727ad1ed8a22",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7717f9b_a442470e",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-06-07T09:04:42Z",
+      "side": 1,
+      "message": "The other constants are in ms, and arguably it\u0027s easier to read. (2000 ms vs 2000000 us)\n\nIf we still want to change to us, I think it should be done for all the constants and in a separate CL.",
+      "parentUuid": "c70a13ee_9c3cdbd5",
+      "range": {
+        "startLine": 272,
+        "startChar": 38,
+        "endLine": 272,
+        "endChar": 71
+      },
+      "revId": "cd1795021c6b76c74e783ffb19ad727ad1ed8a22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
