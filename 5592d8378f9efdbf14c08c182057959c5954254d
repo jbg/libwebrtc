@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de7a26cb_09ed5d5e",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-07T01:08:01Z",
+      "side": 1,
+      "message": "Add a comment saying why these need to be deleted earlier.",
+      "revId": "5592d8378f9efdbf14c08c182057959c5954254d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cd42877_d79f123f",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-07T01:08:01Z",
+      "side": 1,
+      "message": "Move this comment into the body of the function.",
+      "revId": "5592d8378f9efdbf14c08c182057959c5954254d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18272473_145ded84",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-07T01:08:01Z",
+      "side": 1,
+      "message": "Add a comment here and CreateTurnCustomizer saying that any interaction with the returned object must be done on the network thread.",
+      "revId": "5592d8378f9efdbf14c08c182057959c5954254d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
