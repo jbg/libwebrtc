@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7852843_60b0031f",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-07T08:45:46Z",
+      "side": 1,
+      "message": "Is this changed because we sometimes update the budget without sending?\n\nShould we not update the budget also on line 282?",
+      "range": {
+        "startLine": 258,
+        "startChar": 38,
+        "endLine": 258,
+        "endChar": 59
+      },
+      "revId": "cd1795021c6b76c74e783ffb19ad727ad1ed8a22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c70a13ee_9c3cdbd5",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-07T08:45:46Z",
+      "side": 1,
+      "message": "Change this constant to microseconds?",
+      "range": {
+        "startLine": 272,
+        "startChar": 38,
+        "endLine": 272,
+        "endChar": 71
+      },
+      "revId": "cd1795021c6b76c74e783ffb19ad727ad1ed8a22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
