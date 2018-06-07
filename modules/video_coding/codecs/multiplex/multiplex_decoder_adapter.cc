@@ -201,7 +201,8 @@ void MultiplexDecoderAdapter::MergeAlphaImages(
   RTC_DCHECK_EQ(yuv_buffer->width(), alpha_buffer->width());
   RTC_DCHECK_EQ(yuv_buffer->height(), alpha_buffer->height());
   rtc::scoped_refptr<I420ABufferInterface> merged_buffer = WrapI420ABuffer(
-      yuv_buffer->width(), yuv_buffer->height(), yuv_buffer->DataY(),
+      yuv_buffer->width(), yuv_buffer->height(),
+      PlanarYuvBuffer::BitDepth::kBitDepth8, yuv_buffer->DataY(),
       yuv_buffer->StrideY(), yuv_buffer->DataU(), yuv_buffer->StrideU(),
       yuv_buffer->DataV(), yuv_buffer->StrideV(), alpha_buffer->DataY(),
       alpha_buffer->StrideY(),

@@ -81,8 +81,20 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
 // This interface represents Type::kI420 and Type::kI444.
 class PlanarYuvBuffer : public VideoFrameBuffer {
  public:
+  // The number of bits used to indicate the color of a single pixel.
+  // - kBitDepth8 allocates and fills 8 bits per pixel.
+  // - kBitDepth10 allocates 16 bits per pixel and fills 10 least significant
+  // bits with color information.
+  enum class BitDepth {
+    kBitDepth8 = 8,
+    kBitDepth10 = 10,
+  };
+
   virtual int ChromaWidth() const = 0;
   virtual int ChromaHeight() const = 0;
+
+  // Returns the BitDepth information. kBitDepth8 by default.
+  virtual BitDepth bit_depth() const;
 
   // Returns pointer to the pixel data for a given plane. The memory is owned by
   // the VideoFrameBuffer object and must not be freed by the caller.
