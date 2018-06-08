@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7333adde_327d09c7",
+        "filename": "media/engine/simulcast.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-08T09:35:31Z",
+      "side": 1,
+      "message": "Not sure, if is_screenshare has a default value is to keep compatibility with older code, so in this case moving the temporal_layers_supported before it will break it.\n\nIf compatibility is not needed, then it would be better to remove the default values completely.",
+      "parentUuid": "d43520c9_ab95f008",
+      "revId": "c2f6ead1132107a993b55625c9f5dccff07b8d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1b19655a_c892c526",
         "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
         "patchSetId": 28
@@ -33,6 +51,24 @@
       "revId": "c2f6ead1132107a993b55625c9f5dccff07b8d23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7d95513_444279f2",
+        "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-08T09:35:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b19655a_c892c526",
+      "revId": "c2f6ead1132107a993b55625c9f5dccff07b8d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "16fbce9b_8cbec70a",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_fixture_impl.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-08T09:35:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2a2754be_7d034a9c",
+      "revId": "c2f6ead1132107a993b55625c9f5dccff07b8d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "033130c9_44144a99",
         "filename": "modules/video_coding/utility/simulcast_utility.cc",
         "patchSetId": 28
@@ -67,6 +121,24 @@
       "revId": "c2f6ead1132107a993b55625c9f5dccff07b8d23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b4afb0f_0f6b1460",
+        "filename": "modules/video_coding/utility/simulcast_utility.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-08T09:35:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "033130c9_44144a99",
+      "revId": "c2f6ead1132107a993b55625c9f5dccff07b8d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
