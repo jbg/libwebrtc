@@ -138,6 +138,18 @@
   return self;
 }
 
+- (instancetype)initWithAudioDeviceModule:
+        (rtc::scoped_refptr<webrtc::AudioDeviceModule>)audioDeviceModule {
+  return [self initWithNativeAudioEncoderFactory:webrtc::CreateBuiltinAudioEncoderFactory()
+                       nativeAudioDecoderFactory:webrtc::CreateBuiltinAudioDecoderFactory()
+                       nativeVideoEncoderFactory:webrtc::ObjCToNativeVideoEncoderFactory(
+                                                     [[RTCVideoEncoderFactoryH264 alloc] init])
+                       nativeVideoDecoderFactory:webrtc::ObjCToNativeVideoDecoderFactory(
+                                                     [[RTCVideoDecoderFactoryH264 alloc] init])
+                               audioDeviceModule:audioDeviceModule
+                           audioProcessingModule:nullptr];
+}
+
 - (instancetype)initWithNativeAudioEncoderFactory:
                     (rtc::scoped_refptr<webrtc::AudioEncoderFactory>)audioEncoderFactory
                         nativeAudioDecoderFactory:
@@ -147,7 +159,7 @@
                         nativeVideoDecoderFactory:
                             (std::unique_ptr<webrtc::VideoDecoderFactory>)videoDecoderFactory
                                 audioDeviceModule:
-                                    (nullable webrtc::AudioDeviceModule *)audioDeviceModule
+                                    (rtc::scoped_refptr<webrtc::AudioDeviceModule>)audioDeviceModule
                             audioProcessingModule:
                                 (rtc::scoped_refptr<webrtc::AudioProcessing>)audioProcessingModule {
 #ifdef HAVE_NO_MEDIA

@@ -817,8 +817,10 @@ if (is_ios || is_mac) {
             "objc/Framework/UnitTests/RTCDoNotPutCPlusPlusInFrameworkHeaders_xctest.m",
             "objc/Framework/UnitTests/RTCFileVideoCapturer_xctest.mm",
             "objc/Framework/UnitTests/RTCH264ProfileLevelId_xctest.m",
+            "objc/Framework/UnitTests/audio_device_module_ios_xctest.mm",
             "objc/Framework/UnitTests/frame_buffer_helpers.h",
             "objc/Framework/UnitTests/frame_buffer_helpers.mm",
+            "objc/Framework/UnitTests/mock_audio_device_ios.h",
           ]
 
           # TODO(peterhanspers): Reenable these tests on simulator.
