@@ -16,13 +16,15 @@
 #include "api/test/simulcast_test_fixture.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
+#include "common_types.h"  // NOLINT(build/include)
 
 namespace webrtc {
 namespace test {
 
 std::unique_ptr<SimulcastTestFixture> CreateSimulcastTestFixture(
     std::unique_ptr<VideoEncoderFactory> encoder_factory,
-    std::unique_ptr<VideoDecoderFactory> decoder_factory);
+    std::unique_ptr<VideoDecoderFactory> decoder_factory,
+    VideoCodecType codec_type);
 
 }  // namespace test
 }  // namespace webrtc
