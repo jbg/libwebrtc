@@ -12,6 +12,7 @@
 #include "modules/audio_processing/logging/apm_data_dumper.h"
 #include "rtc_base/atomicops.h"
 #include "rtc_base/logging.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -26,6 +27,10 @@ bool DetectSaturation(rtc::ArrayView<const float> y) {
     }
   }
   return false;
+}
+
+bool HandleExtremeDelays() {
+  return field_trial::IsEnabled("WebRTC-Aec3HandleExtremeDelays");
 }
 
 // Method for adjusting config parameter dependencies..
@@ -62,6 +67,12 @@ EchoCanceller3Config AdjustConfig(const EchoCanceller3Config& config) {
       adjusted_cfg.echo_model.nonlinear_release = 0.6f;
     }
   }
+
+  if (HandleExtremeDelays()) {
+    adjusted_cfg.delay.api_call_jitter_blocks = std::max(
+        adjusted_cfg.delay.api_call_jitter_blocks, static_cast<size_t>(52));
+  }
+
   return adjusted_cfg;
 }
 

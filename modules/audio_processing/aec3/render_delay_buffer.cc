@@ -201,7 +201,7 @@ RenderDelayBufferImpl::RenderDelayBufferImpl(const EchoCanceller3Config& config,
   RTC_DCHECK_EQ(blocks_.buffer.size(), ffts_.buffer.size());
   RTC_DCHECK_EQ(spectra_.buffer.size(), ffts_.buffer.size());
 
-  // Necessary condition to avoid unrecoverable echp due to noncausal alignment.
+  // Necessary condition to avoid unrecoverable echo due to noncausal alignment.
   RTC_DCHECK_EQ(DelayEstimatorOffset(config_), LowRateBufferOffset() * 2);
   Reset();
 }
@@ -460,7 +460,7 @@ bool RenderDelayBufferImpl::DetectActiveRender(
 
 int RenderDelayBuffer::RenderDelayBuffer::DelayEstimatorOffset(
     const EchoCanceller3Config& config) {
-  return config.delay.api_call_jitter_blocks * 2;
+  return config.delay.api_call_jitter_blocks;
 }
 
 RenderDelayBuffer* RenderDelayBuffer::Create(const EchoCanceller3Config& config,
