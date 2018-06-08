@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a505f3f6_d425eed2",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-08T11:58:01Z",
+      "side": 1,
+      "message": "Need to update downstream code to use accessors, before changing this to private.",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 26
+      },
+      "revId": "c3cd6c01d0f6dfaf32b19598235161be5516261d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
