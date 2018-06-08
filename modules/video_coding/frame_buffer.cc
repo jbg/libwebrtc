@@ -278,10 +278,11 @@ VCMFrameBufferStateEnum VCMFrameBuffer::GetState() const {
   return _state;
 }
 
+// TODO(nisse): Unused, delete.
 // Get current state of frame
 VCMFrameBufferStateEnum VCMFrameBuffer::GetState(uint32_t& timeStamp) const {
   TRACE_EVENT0("webrtc", "VCMFrameBuffer::GetState");
-  timeStamp = TimeStamp();
+  timeStamp = Timestamp();
   return GetState();
 }
 
