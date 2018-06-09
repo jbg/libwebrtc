@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46960a96_0223e078",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-06-09T00:38:28Z",
+      "side": 1,
+      "message": "Can be consistent with network_thread() in other places.",
+      "range": {
+        "startLine": 1254,
+        "startChar": 8,
+        "endLine": 1254,
+        "endChar": 23
+      },
+      "revId": "9588f4165a94fc6900541b60ed50394504c53a55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89c39d5e_1dd6ad7b",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3886,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-06-09T00:38:28Z",
+      "side": 1,
+      "message": "nit: auto*",
+      "range": {
+        "startLine": 3886,
+        "startChar": 2,
+        "endLine": 3886,
+        "endChar": 6
+      },
+      "revId": "9588f4165a94fc6900541b60ed50394504c53a55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
