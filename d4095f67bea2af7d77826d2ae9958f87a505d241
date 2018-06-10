@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69f15f73_78f1037b",
+        "filename": "api/test/create_simulcast_test_fixture.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-10T13:23:45Z",
+      "side": 1,
+      "message": "Ideally we would avoid adding this parameter, but I see no simple way of doing that. I think this signature would be better, however:\n\nstd::unique_ptr\u003cSimulcastTestFixture\u003e CreateSimulcastTestFixture(\n    SdpVideoFormat video_format,\n    std::unique_ptr\u003cVideoEncoderFactory\u003e encoder_factory,\n    std::unique_ptr\u003cVideoDecoderFactory\u003e decoder_factory);\n\nIt is more flexible to supply a SdpVideoFormat than a VideoCodecType, and the codec factory expects a SdpVideoFormat anyway. Also, this is more in line with how we instantiate codecs in other tests:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/codecs/test/videocodec_test_fixture_impl.cc?l\u003d577\u0026rcl\u003db90e63c620877712e45ee320cfa25cb825bf5373\n\nIn places where a VideoCodecType is needed, the PayloadStringToCodecType helper function can be used together with format.name.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/common_types.h?l\u003d428\u0026rcl\u003db90e63c620877712e45ee320cfa25cb825bf5373",
+      "range": {
+        "startLine": 27,
+        "startChar": 19,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16d3049_9c7dee83",
+        "filename": "api/video/video_bitrate_allocation.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-10T13:23:45Z",
+      "side": 1,
+      "message": "Why does this belong in API? This table seems to be an implementation detail of a particular VideoBitrateAllocator, as we have no way to set temporal layer bitrate allocation through the RtpSender APIs?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54fa9703_eee18213",
+        "filename": "modules/video_coding/utility/simulcast_test_fixture_impl.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-10T13:23:45Z",
+      "side": 1,
+      "message": "Can this, and |picture_id_| be removed?\n\nThe setting of a picture_id by the encoder is deprecated, and will be removed.\nhttps://webrtc-review.googlesource.com/c/src/+/61640",
+      "range": {
+        "startLine": 116,
+        "startChar": 36,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36defaa5_c9f0d6c1",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-10T13:23:45Z",
+      "side": 1,
+      "message": "Revert, here and below.",
+      "range": {
+        "startLine": 197,
+        "startChar": 6,
+        "endLine": 197,
+        "endChar": 8
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
