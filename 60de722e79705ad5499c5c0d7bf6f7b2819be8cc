@@ -22,6 +22,30 @@
       "revId": "60de722e79705ad5499c5c0d7bf6f7b2819be8cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5bf460b_de0d3228",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-06-11T13:51:34Z",
+      "side": 1,
+      "message": "Yeah, originally libvpx was not at all used if rtc_use_builtin_sw_codecs was set to false, and it is still the case on Android that SW codecs are not available at all.\n\nOther platforms are in the state of being migrated to remove the flag and expose the sw codecs as separate targets, and using the build file \"poison\" system to make sure that no targets that should not include sw codecs depend on them. Eventually this should be achieved for Android as well.",
+      "parentUuid": "b7dc42ff_910e1a10",
+      "range": {
+        "startLine": 903,
+        "startChar": 4,
+        "endLine": 903,
+        "endChar": 29
+      },
+      "revId": "60de722e79705ad5499c5c0d7bf6f7b2819be8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
