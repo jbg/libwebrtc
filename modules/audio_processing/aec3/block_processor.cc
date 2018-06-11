@@ -248,7 +248,7 @@ BlockProcessor* BlockProcessor::Create(const EchoCanceller3Config& config,
       RenderDelayBuffer::Create(config, NumBandsForRate(sample_rate_hz)));
   std::unique_ptr<RenderDelayController> delay_controller(
       RenderDelayController::Create(
-          config, RenderDelayBuffer::DelayEstimatorOffset(config),
+          config,
           sample_rate_hz));
   std::unique_ptr<EchoRemover> echo_remover(
       EchoRemover::Create(config, sample_rate_hz));
@@ -262,7 +262,7 @@ BlockProcessor* BlockProcessor::Create(
     std::unique_ptr<RenderDelayBuffer> render_buffer) {
   std::unique_ptr<RenderDelayController> delay_controller(
       RenderDelayController::Create(
-          config, RenderDelayBuffer::DelayEstimatorOffset(config),
+          config,
           sample_rate_hz));
   std::unique_ptr<EchoRemover> echo_remover(
       EchoRemover::Create(config, sample_rate_hz));

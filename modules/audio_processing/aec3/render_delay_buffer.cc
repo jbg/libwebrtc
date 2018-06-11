@@ -96,7 +96,6 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
   rtc::Optional<size_t> external_audio_buffer_delay_;
   bool external_delay_verified_after_reset_ = false;
 
-  int LowRateBufferOffset() const { return DelayEstimatorOffset(config_) >> 1; }
   int MapExternalDelayToInternalDelay(size_t external_delay_blocks) const;
   int MapInternalDelayToExternalDelay() const;
   void ApplyDelay(int delay);
@@ -158,17 +157,6 @@ int BufferLatency(const DownsampledRenderBuffer& l) {
   return (l.buffer.size() + l.read - l.write) % l.buffer.size();
 }
 
-// Computes the mismatch between the number of render and capture calls based on
-// the known offset (achieved during reset) of the low rate buffer.
-bool ApiCallSkew(const DownsampledRenderBuffer& low_rate_buffer,
-                 int sub_block_size,
-                 int low_rate_buffer_offset_sub_blocks) {
-  int latency = BufferLatency(low_rate_buffer);
-  int skew = abs(low_rate_buffer_offset_sub_blocks * sub_block_size - latency);
-  int skew_limit = low_rate_buffer_offset_sub_blocks * sub_block_size;
-  return skew >= skew_limit;
-}
-
 int RenderDelayBufferImpl::instance_count_ = 0;
 
 RenderDelayBufferImpl::RenderDelayBufferImpl(const EchoCanceller3Config& config,
@@ -201,8 +189,6 @@ RenderDelayBufferImpl::RenderDelayBufferImpl(const EchoCanceller3Config& config,
   RTC_DCHECK_EQ(blocks_.buffer.size(), ffts_.buffer.size());
   RTC_DCHECK_EQ(spectra_.buffer.size(), ffts_.buffer.size());
 
-  // Necessary condition to avoid unrecoverable echp due to noncausal alignment.
-  RTC_DCHECK_EQ(DelayEstimatorOffset(config_), LowRateBufferOffset() * 2);
   Reset();
 }
 
@@ -216,7 +202,7 @@ void RenderDelayBufferImpl::Reset() {
   // Pre-fill the low rate buffer (which is used for delay estimation) to add
   // headroom for the allowed api call jitter.
   low_rate_.read = low_rate_.OffsetIndex(
-      low_rate_.write, LowRateBufferOffset() * sub_block_size_);
+      low_rate_.write, 0);
 
   // Check for any external audio buffer delay and whether it is feasible.
   if (external_audio_buffer_delay_) {
@@ -324,13 +310,7 @@ RenderDelayBufferImpl::PrepareCaptureProcessing() {
     IncreaseReadIndices(internal_delay_, sub_block_size_, &blocks_, &spectra_,
                         &ffts_, &low_rate_);
 
-    // Check for skew in the API calls which, if too large, causes the delay
-    // estimation to be noncausal. Doing this check after the render indice
-    // increase saves one unit of allowed skew. Note that the skew check only
-    // should need to be one-sided as one of the skew directions results in an
-    // underrun.
-    bool skew = ApiCallSkew(low_rate_, sub_block_size_, LowRateBufferOffset());
-    event = skew ? BufferingEvent::kApiCallSkew : BufferingEvent::kNone;
+    event = BufferingEvent::kNone;
   }
 
   if (event != BufferingEvent::kNone) {
@@ -400,8 +380,7 @@ int RenderDelayBufferImpl::MapExternalDelayToInternalDelay(
   RTC_DCHECK_LT(0, sub_block_size_);
   RTC_DCHECK_EQ(0, latency % sub_block_size_);
   int latency_blocks = latency / sub_block_size_;
-  return latency_blocks + static_cast<int>(external_delay_blocks) -
-         DelayEstimatorOffset(config_);
+  return latency_blocks + static_cast<int>(external_delay_blocks);
 }
 
 // Maps the internally used delay to the delay used externally.
@@ -412,7 +391,7 @@ int RenderDelayBufferImpl::MapInternalDelayToExternalDelay() const {
                            ? spectra_.read - spectra_.write
                            : spectra_.size + spectra_.read - spectra_.write;
 
-  return internal_delay - latency_blocks + DelayEstimatorOffset(config_);
+  return internal_delay - latency_blocks;
 }
 
 // Set the read indices according to the delay.
@@ -457,11 +436,6 @@ bool RenderDelayBufferImpl::DetectActiveRender(
 }
 
 }  // namespace
-
-int RenderDelayBuffer::RenderDelayBuffer::DelayEstimatorOffset(
-    const EchoCanceller3Config& config) {
-  return config.delay.api_call_jitter_blocks * 2;
-}
 
 RenderDelayBuffer* RenderDelayBuffer::Create(const EchoCanceller3Config& config,
                                              size_t num_bands) {
