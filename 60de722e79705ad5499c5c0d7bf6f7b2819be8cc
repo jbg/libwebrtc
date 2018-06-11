@@ -46,6 +46,30 @@
       "revId": "60de722e79705ad5499c5c0d7bf6f7b2819be8cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97eded1b_70b09b18",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-06-11T14:12:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5bf460b_de0d3228",
+      "range": {
+        "startLine": 903,
+        "startChar": 4,
+        "endLine": 903,
+        "endChar": 29
+      },
+      "revId": "60de722e79705ad5499c5c0d7bf6f7b2819be8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
