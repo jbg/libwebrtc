@@ -22,12 +22,19 @@ namespace webrtc {
 // Plain I420 buffer in standard memory.
 class I420Buffer : public I420BufferInterface {
  public:
-  static rtc::scoped_refptr<I420Buffer> Create(int width, int height);
-  static rtc::scoped_refptr<I420Buffer> Create(int width,
-                                               int height,
-                                               int stride_y,
-                                               int stride_u,
-                                               int stride_v);
+  static rtc::scoped_refptr<I420Buffer> Create(
+      int width,
+      int height,
+      PlanarYuvBuffer::BitDepth bit_depth =
+          PlanarYuvBuffer::BitDepth::kBitDepth8);
+  static rtc::scoped_refptr<I420Buffer> Create(
+      int width,
+      int height,
+      int stride_y,
+      int stride_u,
+      int stride_v,
+      PlanarYuvBuffer::BitDepth bit_depth =
+          PlanarYuvBuffer::BitDepth::kBitDepth8);
 
   // Create a new buffer and copy the pixel data.
   static rtc::scoped_refptr<I420Buffer> Copy(const I420BufferInterface& buffer);
@@ -64,6 +71,7 @@ class I420Buffer : public I420BufferInterface {
 
   int width() const override;
   int height() const override;
+  PlanarYuvBuffer::BitDepth bit_depth() const override;
   const uint8_t* DataY() const override;
   const uint8_t* DataU() const override;
   const uint8_t* DataV() const override;
@@ -92,8 +100,17 @@ class I420Buffer : public I420BufferInterface {
   void ScaleFrom(const I420BufferInterface& src);
 
  protected:
-  I420Buffer(int width, int height);
-  I420Buffer(int width, int height, int stride_y, int stride_u, int stride_v);
+  I420Buffer(int width,
+             int height,
+             PlanarYuvBuffer::BitDepth bit_depth =
+                 PlanarYuvBuffer::BitDepth::kBitDepth8);
+  I420Buffer(int width,
+             int height,
+             int stride_y,
+             int stride_u,
+             int stride_v,
+             PlanarYuvBuffer::BitDepth bit_depth =
+                 PlanarYuvBuffer::BitDepth::kBitDepth8);
 
   ~I420Buffer() override;
 
@@ -103,6 +120,7 @@ class I420Buffer : public I420BufferInterface {
   const int stride_y_;
   const int stride_u_;
   const int stride_v_;
+  const PlanarYuvBuffer::BitDepth bit_depth_;
   const std::unique_ptr<uint8_t, AlignedFreeDeleter> data_;
 };
 

@@ -61,7 +61,8 @@ class TestMultiplexAdapter : public VideoCodecUnitTest {
     rtc::scoped_refptr<webrtc::I420BufferInterface> yuv_buffer =
         input_frame->video_frame_buffer()->ToI420();
     rtc::scoped_refptr<I420ABufferInterface> yuva_buffer = WrapI420ABuffer(
-        yuv_buffer->width(), yuv_buffer->height(), yuv_buffer->DataY(),
+        yuv_buffer->width(), yuv_buffer->height(),
+        PlanarYuvBuffer::BitDepth::kBitDepth8, yuv_buffer->DataY(),
         yuv_buffer->StrideY(), yuv_buffer->DataU(), yuv_buffer->StrideU(),
         yuv_buffer->DataV(), yuv_buffer->StrideV(), yuv_buffer->DataY(),
         yuv_buffer->StrideY(), rtc::KeepRefUntilDone(yuv_buffer));
@@ -74,7 +75,8 @@ class TestMultiplexAdapter : public VideoCodecUnitTest {
     const I420ABufferInterface* yuva_buffer =
         yuva_frame.video_frame_buffer()->GetI420A();
     rtc::scoped_refptr<I420BufferInterface> axx_buffer = WrapI420Buffer(
-        yuva_buffer->width(), yuva_buffer->height(), yuva_buffer->DataA(),
+        yuva_buffer->width(), yuva_buffer->height(),
+        PlanarYuvBuffer::BitDepth::kBitDepth8, yuva_buffer->DataA(),
         yuva_buffer->StrideA(), yuva_buffer->DataU(), yuva_buffer->StrideU(),
         yuva_buffer->DataV(), yuva_buffer->StrideV(),
         rtc::KeepRefUntilDone(yuva_frame.video_frame_buffer()));

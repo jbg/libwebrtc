@@ -27,28 +27,50 @@ namespace webrtc {
 
 namespace {
 
-int I420DataSize(int height, int stride_y, int stride_u, int stride_v) {
-  return stride_y * height + (stride_u + stride_v) * ((height + 1) / 2);
+int I420DataSize(int height,
+                 int stride_y,
+                 int stride_u,
+                 int stride_v,
+                 PlanarYuvBuffer::BitDepth bit_depth) {
+  int bytes_per_pixel = 1;
+  switch (bit_depth) {
+    case PlanarYuvBuffer::BitDepth::kBitDepth8:
+      bytes_per_pixel = 1;
+      break;
+    case PlanarYuvBuffer::BitDepth::kBitDepth10:
+      bytes_per_pixel = 2;
+      break;
+  }
+  return bytes_per_pixel *
+         (stride_y * height + (stride_u + stride_v) * ((height + 1) / 2));
 }
 
 }  // namespace
 
-I420Buffer::I420Buffer(int width, int height)
-    : I420Buffer(width, height, width, (width + 1) / 2, (width + 1) / 2) {
-}
+I420Buffer::I420Buffer(int width,
+                       int height,
+                       PlanarYuvBuffer::BitDepth bit_depth)
+    : I420Buffer(width,
+                 height,
+                 width,
+                 (width + 1) / 2,
+                 (width + 1) / 2,
+                 bit_depth) {}
 
 I420Buffer::I420Buffer(int width,
                        int height,
                        int stride_y,
                        int stride_u,
-                       int stride_v)
+                       int stride_v,
+                       PlanarYuvBuffer::BitDepth bit_depth)
     : width_(width),
       height_(height),
       stride_y_(stride_y),
       stride_u_(stride_u),
       stride_v_(stride_v),
+      bit_depth_(bit_depth),
       data_(static_cast<uint8_t*>(AlignedMalloc(
-          I420DataSize(height, stride_y, stride_u, stride_v),
+          I420DataSize(height, stride_y, stride_u, stride_v, bit_depth),
           kBufferAlignment))) {
   RTC_DCHECK_GT(width, 0);
   RTC_DCHECK_GT(height, 0);
@@ -61,20 +83,22 @@ I420Buffer::~I420Buffer() {
 }
 
 // static
-rtc::scoped_refptr<I420Buffer> I420Buffer::Create(int width, int height) {
-  return new rtc::RefCountedObject<I420Buffer>(width, height);
+rtc::scoped_refptr<I420Buffer>
+I420Buffer::Create(int width, int height, PlanarYuvBuffer::BitDepth bit_depth) {
+  return new rtc::RefCountedObject<I420Buffer>(width, height, bit_depth);
 }
 
 // static
-rtc::scoped_refptr<I420Buffer> I420Buffer::Create(int width,
-                                                  int height,
-                                                  int stride_y,
-                                                  int stride_u,
-                                                  int stride_v) {
-  return new rtc::RefCountedObject<I420Buffer>(
-      width, height, stride_y, stride_u, stride_v);
+rtc::scoped_refptr<I420Buffer> I420Buffer::Create(
+    int width,
+    int height,
+    int stride_y,
+    int stride_u,
+    int stride_v,
+    PlanarYuvBuffer::BitDepth bit_depth) {
+  return new rtc::RefCountedObject<I420Buffer>(width, height, stride_y,
+                                               stride_u, stride_v, bit_depth);
 }
-
 // static
 rtc::scoped_refptr<I420Buffer> I420Buffer::Copy(
     const I420BufferInterface& source) {
@@ -134,7 +158,7 @@ rtc::scoped_refptr<I420Buffer> I420Buffer::Rotate(
 
 void I420Buffer::InitializeData() {
   memset(data_.get(), 0,
-         I420DataSize(height_, stride_y_, stride_u_, stride_v_));
+         I420DataSize(height_, stride_y_, stride_u_, stride_v_, bit_depth_));
 }
 
 int I420Buffer::width() const {
@@ -143,6 +167,10 @@ int I420Buffer::width() const {
 
 int I420Buffer::height() const {
   return height_;
+}
+
+PlanarYuvBuffer::BitDepth I420Buffer::bit_depth() const {
+  return bit_depth_;
 }
 
 const uint8_t* I420Buffer::DataY() const {

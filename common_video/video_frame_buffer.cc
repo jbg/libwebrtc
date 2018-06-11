@@ -30,6 +30,7 @@ class WrappedYuvBuffer : public Base {
  public:
   WrappedYuvBuffer(int width,
                    int height,
+                   PlanarYuvBuffer::BitDepth bit_depth,
                    const uint8_t* y_plane,
                    int y_stride,
                    const uint8_t* u_plane,
@@ -39,6 +40,7 @@ class WrappedYuvBuffer : public Base {
                    const rtc::Callback0<void>& no_longer_used)
       : width_(width),
         height_(height),
+        bit_depth_(bit_depth),
         y_plane_(y_plane),
         u_plane_(u_plane),
         v_plane_(v_plane),
@@ -52,6 +54,8 @@ class WrappedYuvBuffer : public Base {
   int width() const override { return width_; }
 
   int height() const override { return height_; }
+
+  PlanarYuvBuffer::BitDepth bit_depth() const override { return bit_depth_; }
 
   const uint8_t* DataY() const override { return y_plane_; }
 
@@ -70,6 +74,7 @@ class WrappedYuvBuffer : public Base {
 
   const int width_;
   const int height_;
+  const PlanarYuvBuffer::BitDepth bit_depth_;
   const uint8_t* const y_plane_;
   const uint8_t* const u_plane_;
   const uint8_t* const v_plane_;
@@ -85,6 +90,7 @@ class WrappedYuvaBuffer : public WrappedYuvBuffer<BaseWithA> {
  public:
   WrappedYuvaBuffer(int width,
                     int height,
+                    PlanarYuvBuffer::BitDepth bit_depth,
                     const uint8_t* y_plane,
                     int y_stride,
                     const uint8_t* u_plane,
@@ -96,6 +102,7 @@ class WrappedYuvaBuffer : public WrappedYuvBuffer<BaseWithA> {
                     const rtc::Callback0<void>& no_longer_used)
       : WrappedYuvBuffer<BaseWithA>(width,
                                     height,
+                                    bit_depth,
                                     y_plane,
                                     y_stride,
                                     u_plane,
@@ -149,8 +156,7 @@ WrappedI420Buffer::WrappedI420Buffer(int width,
       y_stride_(y_stride),
       u_stride_(u_stride),
       v_stride_(v_stride),
-      no_longer_used_cb_(no_longer_used) {
-}
+      no_longer_used_cb_(no_longer_used) {}
 
 WrappedI420Buffer::~WrappedI420Buffer() {
   no_longer_used_cb_();
@@ -187,6 +193,7 @@ int WrappedI420Buffer::StrideV() const {
 rtc::scoped_refptr<I420BufferInterface> WrapI420Buffer(
     int width,
     int height,
+    PlanarYuvBuffer::BitDepth bit_depth,
     const uint8_t* y_plane,
     int y_stride,
     const uint8_t* u_plane,
@@ -196,13 +203,14 @@ rtc::scoped_refptr<I420BufferInterface> WrapI420Buffer(
     const rtc::Callback0<void>& no_longer_used) {
   return rtc::scoped_refptr<I420BufferInterface>(
       new rtc::RefCountedObject<WrappedYuvBuffer<I420BufferInterface>>(
-          width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, no_longer_used));
+          width, height, bit_depth, y_plane, y_stride, u_plane, u_stride,
+          v_plane, v_stride, no_longer_used));
 }
 
 rtc::scoped_refptr<I420ABufferInterface> WrapI420ABuffer(
     int width,
     int height,
+    PlanarYuvBuffer::BitDepth bit_depth,
     const uint8_t* y_plane,
     int y_stride,
     const uint8_t* u_plane,
@@ -214,13 +222,14 @@ rtc::scoped_refptr<I420ABufferInterface> WrapI420ABuffer(
     const rtc::Callback0<void>& no_longer_used) {
   return rtc::scoped_refptr<I420ABufferInterface>(
       new rtc::RefCountedObject<WrappedYuvaBuffer<I420ABufferInterface>>(
-          width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, a_plane, a_stride, no_longer_used));
+          width, height, bit_depth, y_plane, y_stride, u_plane, u_stride,
+          v_plane, v_stride, a_plane, a_stride, no_longer_used));
 }
 
 rtc::scoped_refptr<I444BufferInterface> WrapI444Buffer(
     int width,
     int height,
+    PlanarYuvBuffer::BitDepth bit_depth,
     const uint8_t* y_plane,
     int y_stride,
     const uint8_t* u_plane,
@@ -230,14 +239,15 @@ rtc::scoped_refptr<I444BufferInterface> WrapI444Buffer(
     const rtc::Callback0<void>& no_longer_used) {
   return rtc::scoped_refptr<I444BufferInterface>(
       new rtc::RefCountedObject<WrappedYuvBuffer<I444BufferBase>>(
-          width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, no_longer_used));
+          width, height, bit_depth, y_plane, y_stride, u_plane, u_stride,
+          v_plane, v_stride, no_longer_used));
 }
 
 rtc::scoped_refptr<PlanarYuvBuffer> WrapYuvBuffer(
     VideoFrameBuffer::Type type,
     int width,
     int height,
+    PlanarYuvBuffer::BitDepth bit_depth,
     const uint8_t* y_plane,
     int y_stride,
     const uint8_t* u_plane,
@@ -247,11 +257,13 @@ rtc::scoped_refptr<PlanarYuvBuffer> WrapYuvBuffer(
     const rtc::Callback0<void>& no_longer_used) {
   switch (type) {
     case VideoFrameBuffer::Type::kI420:
-      return WrapI420Buffer(width, height, y_plane, y_stride, u_plane, u_stride,
-                            v_plane, v_stride, no_longer_used);
+      return WrapI420Buffer(width, height, bit_depth, y_plane, y_stride,
+                            u_plane, u_stride, v_plane, v_stride,
+                            no_longer_used);
     case VideoFrameBuffer::Type::kI444:
-      return WrapI444Buffer(width, height, y_plane, y_stride, u_plane, u_stride,
-                            v_plane, v_stride, no_longer_used);
+      return WrapI444Buffer(width, height, bit_depth, y_plane, y_stride,
+                            u_plane, u_stride, v_plane, v_stride,
+                            no_longer_used);
     default:
       FATAL() << "Unexpected frame buffer type.";
       return nullptr;
