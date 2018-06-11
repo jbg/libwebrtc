@@ -22,6 +22,30 @@
       "revId": "bbb3355746a60ea3f406eac3ded06e054bb75bb8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3610977b_52959e68",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-06-11T14:49:01Z",
+      "side": 1,
+      "message": "The thing that originally prompted this CL is the effort to remove all stringstreams from webrtc. I\u0027m a bit worried about using a fixed buffer/SimpleStringBuilder etc. when it\u0027s hard to guess how big the final output will be.\nWhere can I check what\u0027s being sent to the event log?",
+      "parentUuid": "a99a870a_c7d7990f",
+      "range": {
+        "startLine": 629,
+        "startChar": 14,
+        "endLine": 630,
+        "endChar": 0
+      },
+      "revId": "bbb3355746a60ea3f406eac3ded06e054bb75bb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
