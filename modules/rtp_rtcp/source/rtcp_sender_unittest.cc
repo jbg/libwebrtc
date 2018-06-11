@@ -28,6 +28,7 @@ using ::testing::SizeIs;
 
 namespace webrtc {
 
+#ifndef NDEBUG
 TEST(NACKStringBuilderTest, TestCase1) {
   NACKStringBuilder builder;
   builder.PushNACK(5);
@@ -182,6 +183,7 @@ TEST(NACKStringBuilderTest, TestCase13) {
   builder.PushNACK(9);
   EXPECT_EQ(std::string("5-6,9"), builder.GetResult());
 }
+#endif  // #ifndef NDEBUG
 
 class RtcpPacketTypeCounterObserverImpl : public RtcpPacketTypeCounterObserver {
  public:
