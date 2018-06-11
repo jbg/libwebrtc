@@ -8,11 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <sstream>
-
 #include "p2p/base/packetlossestimator.h"
 
 #include "rtc_base/checks.h"
+#include "rtc_base/strings/string_builder.h"
 
 namespace cricket {
 
@@ -108,21 +107,22 @@ std::size_t PacketLossEstimator::tracked_packet_count_for_testing() const {
 
 std::string PacketLossEstimator::TrackedPacketsStringForTesting(
     std::size_t max) const {
-  std::ostringstream oss;
+  char buf[4096];
+  rtc::SimpleStringBuilder sb(buf);
 
   size_t count = 0;
   for (const auto& p : tracked_packets_) {
     const auto& id = p.first;
     const auto& packet_info = p.second;
-    oss << "{ " << id << ", " << packet_info.sent_time << "}, ";
+    sb << "{ " << id << ", " << packet_info.sent_time << "}, ";
     count += 1;
     if (count == max) {
-      oss << "...";
+      sb << "...";
       break;
     }
   }
 
-  return oss.str();
+  return sb.str();
 }
 
 }  // namespace cricket
