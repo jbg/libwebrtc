@@ -46,6 +46,30 @@
       "revId": "bbb3355746a60ea3f406eac3ded06e054bb75bb8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56c228a0_ef706608",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-11T15:21:22Z",
+      "side": 1,
+      "message": "rtc event log stores nack packets raw (see logging/rtc_event_log/events/rtc_event_rtcp_packet_outgoing.h\nAnd PacketContainer::SendPackets in this file.\nThen there are tools to parse and pretty print them, but I\u0027m not familiar with them.\n\nmay be use combination of std::string and SimpleStringBuilder to cover both common short-string case and rare long string case:\n\nchar short_string[1024];\nSimpleStringBuilder builder_(short_string);\nstd::string long_string;\nNackBuilder::PushNack() {\n  // do push with builder_;\n  if (builder_.size() \u003e 1000) { // 24 chars is more than enough to push one more number.\n    long_string +\u003d builder_.str();\n    builder_ \u003d SimpleStringBuilder(short_string);\n  }\n}\n\nchar* NackBuilder::Str() {\n  if (long_string.empty()) {\n    return builder_.str();\n  } else {\n    long_string +\u003d builder_.str();\n    builder_ \u003d SimpleStringBuilder(short_string);\n    return long_string.c_str();\n  }\n}\n\nOr, call NackBuilder only when trace is enabled and do not worry it might be a bit slow.\n(side note: there is some chance absl::StrAppend and neighbour functions become available this week.)",
+      "parentUuid": "3610977b_52959e68",
+      "range": {
+        "startLine": 629,
+        "startChar": 14,
+        "endLine": 630,
+        "endChar": 0
+      },
+      "revId": "bbb3355746a60ea3f406eac3ded06e054bb75bb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
