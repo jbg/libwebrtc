@@ -169,8 +169,6 @@ EchoCanceller3Config ParseAec3Parameters(const std::string& filename) {
     ReadParam(section, "default_delay", &cfg.delay.default_delay);
     ReadParam(section, "down_sampling_factor", &cfg.delay.down_sampling_factor);
     ReadParam(section, "num_filters", &cfg.delay.num_filters);
-    ReadParam(section, "api_call_jitter_blocks",
-              &cfg.delay.api_call_jitter_blocks);
     ReadParam(section, "min_echo_path_delay_blocks",
               &cfg.delay.min_echo_path_delay_blocks);
     ReadParam(section, "delay_headroom_blocks",

@@ -33,7 +33,6 @@ class RenderDelayBuffer {
     kNone,
     kRenderUnderrun,
     kRenderOverrun,
-    kApiCallSkew,
     kRenderDataLost
   };
 
@@ -70,9 +69,6 @@ class RenderDelayBuffer {
 
   // Returns whether the current delay is noncausal.
   virtual bool CausalDelay(size_t delay) const = 0;
-
-  // Returns the maximum non calusal offset that can occur in the delay buffer.
-  static int DelayEstimatorOffset(const EchoCanceller3Config& config);
 
   // Provides an optional external estimate of the audio buffer delay.
   virtual void SetAudioBufferDelay(size_t delay_ms) = 0;

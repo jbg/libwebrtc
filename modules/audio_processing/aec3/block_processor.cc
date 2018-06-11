@@ -142,16 +142,6 @@ void BlockProcessorImpl::ProcessCapture(
       RTC_LOG(LS_WARNING) << "Reset due to render buffer underrrun at block "
                           << capture_call_counter_;
     }
-  } else if (render_event_ == RenderDelayBuffer::BufferingEvent::kApiCallSkew) {
-    // There have been too many render calls in a row. Reset to avoid noncausal
-    // echo.
-    echo_path_variability.delay_change =
-        EchoPathVariability::DelayAdjustment::kDelayReset;
-    delay_controller_->Reset();
-    capture_properly_started_ = false;
-    render_properly_started_ = false;
-    RTC_LOG(LS_WARNING) << "Reset due to render buffer api skew at block "
-                        << capture_call_counter_;
   }
 
   data_dumper_->DumpWav("aec3_processblock_capture_input2", kBlockSize,
@@ -248,7 +238,7 @@ BlockProcessor* BlockProcessor::Create(const EchoCanceller3Config& config,
       RenderDelayBuffer::Create(config, NumBandsForRate(sample_rate_hz)));
   std::unique_ptr<RenderDelayController> delay_controller(
       RenderDelayController::Create(
-          config, RenderDelayBuffer::DelayEstimatorOffset(config),
+          config,
           sample_rate_hz));
   std::unique_ptr<EchoRemover> echo_remover(
       EchoRemover::Create(config, sample_rate_hz));
@@ -262,7 +252,7 @@ BlockProcessor* BlockProcessor::Create(
     std::unique_ptr<RenderDelayBuffer> render_buffer) {
   std::unique_ptr<RenderDelayController> delay_controller(
       RenderDelayController::Create(
-          config, RenderDelayBuffer::DelayEstimatorOffset(config),
+          config,
           sample_rate_hz));
   std::unique_ptr<EchoRemover> echo_remover(
       EchoRemover::Create(config, sample_rate_hz));

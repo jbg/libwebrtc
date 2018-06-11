@@ -25,7 +25,6 @@ namespace webrtc {
 class RenderDelayController {
  public:
   static RenderDelayController* Create(const EchoCanceller3Config& config,
-                                       int non_causal_offset,
                                        int sample_rate_hz);
   virtual ~RenderDelayController() = default;
 

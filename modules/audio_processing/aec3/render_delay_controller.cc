@@ -45,7 +45,6 @@ constexpr int kSkewHistorySizeLog2 = 8;
 class RenderDelayControllerImpl final : public RenderDelayController {
  public:
   RenderDelayControllerImpl(const EchoCanceller3Config& config,
-                            int non_causal_offset,
                             int sample_rate_hz);
   ~RenderDelayControllerImpl() override;
   void Reset() override;
@@ -65,8 +64,6 @@ class RenderDelayControllerImpl final : public RenderDelayController {
   const int skew_hysteresis_blocks_;
   rtc::Optional<DelayEstimate> delay_;
   EchoPathDelayEstimator delay_estimator_;
-  std::vector<float> delay_buf_;
-  int delay_buf_index_ = 0;
   RenderDelayControllerMetrics metrics_;
   SkewEstimator skew_estimator_;
   rtc::Optional<DelayEstimate> delay_samples_;
@@ -120,7 +117,6 @@ int RenderDelayControllerImpl::instance_count_ = 0;
 
 RenderDelayControllerImpl::RenderDelayControllerImpl(
     const EchoCanceller3Config& config,
-    int non_causal_offset,
     int sample_rate_hz)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
@@ -132,11 +128,10 @@ RenderDelayControllerImpl::RenderDelayControllerImpl(
           static_cast<int>(config.delay.hysteresis_limit_2_blocks)),
       skew_hysteresis_blocks_(GetSkewHysteresis(config)),
       delay_estimator_(data_dumper_.get(), config),
-      delay_buf_(kBlockSize * non_causal_offset, 0.f),
       skew_estimator_(kSkewHistorySizeLog2) {
   RTC_DCHECK(ValidFullBandRate(sample_rate_hz));
   delay_estimator_.LogDelayEstimationProperties(sample_rate_hz,
-                                                delay_buf_.size());
+                                                0);
 }
 
 RenderDelayControllerImpl::~RenderDelayControllerImpl() = default;
@@ -146,7 +141,6 @@ void RenderDelayControllerImpl::Reset() {
   delay_samples_ = rtc::nullopt;
   skew_ = rtc::nullopt;
   previous_offset_blocks_ = 0;
-  std::fill(delay_buf_.begin(), delay_buf_.end(), 0.f);
   delay_estimator_.Reset(false);
   skew_estimator_.Reset();
   delay_change_counter_ = 0;
@@ -165,12 +159,9 @@ rtc::Optional<DelayEstimate> RenderDelayControllerImpl::GetDelay(
   RTC_DCHECK_EQ(kBlockSize, capture.size());
   ++capture_call_counter_;
 
-  // Estimate the delay with a delayed capture.
-  RTC_DCHECK_LT(delay_buf_index_ + kBlockSize - 1, delay_buf_.size());
-  rtc::ArrayView<const float> capture_delayed(&delay_buf_[delay_buf_index_],
-                                              kBlockSize);
+  // Estimate the delay.
   auto delay_samples =
-      delay_estimator_.EstimateDelay(render_buffer, capture_delayed);
+      delay_estimator_.EstimateDelay(render_buffer, capture);
 
   // Overrule the delay estimator delay if the echo remover reports a delay.
   if (echo_remover_delay) {
@@ -179,10 +170,6 @@ rtc::Optional<DelayEstimate> RenderDelayControllerImpl::GetDelay(
     delay_samples = DelayEstimate(DelayEstimate::Quality::kRefined,
                                   total_echo_remover_delay_samples);
   }
-
-  std::copy(capture.begin(), capture.end(),
-            delay_buf_.begin() + delay_buf_index_);
-  delay_buf_index_ = (delay_buf_index_ + kBlockSize) % delay_buf_.size();
 
   // Compute the latest skew update.
   rtc::Optional<int> skew = skew_estimator_.GetSkewFromCapture();
@@ -283,9 +270,8 @@ rtc::Optional<DelayEstimate> RenderDelayControllerImpl::GetDelay(
 
 RenderDelayController* RenderDelayController::Create(
     const EchoCanceller3Config& config,
-    int non_causal_offset,
     int sample_rate_hz) {
-  return new RenderDelayControllerImpl(config, non_causal_offset,
+  return new RenderDelayControllerImpl(config,
                                        sample_rate_hz);
 }
 
