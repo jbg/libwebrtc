@@ -14,7 +14,9 @@
 #include <map>
 #include <memory>
 #include <set>
+#ifndef NDEBUG
 #include <sstream>
+#endif
 #include <string>
 #include <vector>
 
@@ -41,6 +43,7 @@ namespace webrtc {
 class ModuleRtpRtcpImpl;
 class RtcEventLog;
 
+#ifndef NDEBUG
 class NACKStringBuilder {
  public:
   NACKStringBuilder();
@@ -55,6 +58,7 @@ class NACKStringBuilder {
   uint16_t prevNack_;
   bool consecutive_;
 };
+#endif  // #ifndef NDEBUG
 
 class RTCPSender {
  public:
