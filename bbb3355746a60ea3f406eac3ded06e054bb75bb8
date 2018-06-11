@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a99a870a_c7d7990f",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-11T14:22:59Z",
+      "side": 1,
+      "message": "As far as I understand, trace available in debug only is not very useful.\nOne option would be to remove it completely. There are still rtc event log that track all outgoing rtcp, including nack. May be it is enough.\n\nIf you prefer to keep the functionality, then it might be better to fix NackBuilder instead:\nIf you are trying to improve run-time, may be turn NackStringBuilder into static function that converts ArrayView\u003cnack\u003e into a string. That function will then be executed only when trace is enabled.\nIf you are trying to improve binary size (eliminate sstream), then it might be better to rewrite nack builder (e.g. use some staticly allocated char array large enough for reasonable nacks)",
+      "range": {
+        "startLine": 629,
+        "startChar": 14,
+        "endLine": 630,
+        "endChar": 0
+      },
+      "revId": "bbb3355746a60ea3f406eac3ded06e054bb75bb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
