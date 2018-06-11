@@ -22,6 +22,30 @@
       "revId": "c3cd6c01d0f6dfaf32b19598235161be5516261d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6976f8c7_4bf0a5ee",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-06-11T12:48:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a505f3f6_d425eed2",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 26
+      },
+      "revId": "c3cd6c01d0f6dfaf32b19598235161be5516261d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
