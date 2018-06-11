@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7dc42ff_910e1a10",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-06-11T13:45:02Z",
+      "side": 1,
+      "message": "This CL lgtm but it is unclear to me how the clients are supposed to use SW codecs on Android if rtc_use_builtin_sw_codecs is set to false? This target seems to be completely removed then.",
+      "range": {
+        "startLine": 903,
+        "startChar": 4,
+        "endLine": 903,
+        "endChar": 29
+      },
+      "revId": "60de722e79705ad5499c5c0d7bf6f7b2819be8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
