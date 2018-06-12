@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdac916c_04aa7bfe",
+        "filename": "p2p/base/regatheringcontroller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-12T19:50:39Z",
+      "side": 1,
+      "message": "This now handles going from non-nullopt to nullopt, but not the other way around, since need_cancel_and_maybe_reschedule_on_all_networks will end up being false.",
+      "revId": "fdf9698dd10d8e2866e24240e9e81e9333841f0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
