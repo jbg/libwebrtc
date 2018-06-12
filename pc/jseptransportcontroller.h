@@ -78,6 +78,7 @@ class JsepTransportController : public sigslot::has_slots<>,
     // Used to inject the ICE/DTLS transports created externally.
     cricket::TransportFactoryInterface* external_transport_factory = nullptr;
     Observer* transport_observer = nullptr;
+    bool active_reset_srtp_params = false;
     RtcEventLog* event_log = nullptr;
   };
 
