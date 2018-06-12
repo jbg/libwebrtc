@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "837cb33b_9eb10239",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-06-12T15:43:51Z",
+      "side": 1,
+      "message": "Should be split into short header and a separate longer description.\n\nThe description is a bit short, I\u0027m not sure I understand how the change leads to the desired behavior. Also not clear to me why the behavior is desirable compared to allowing one participant to use audio bwe while the other does not use it.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 202
+      },
+      "revId": "1471a7f9dcc21cae6a78775f23f99283d30ce360",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
