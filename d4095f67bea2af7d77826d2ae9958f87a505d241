@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a43e3e4_2b3a6c80",
+        "filename": "api/test/create_simulcast_test_fixture.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-12T09:20:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69f15f73_78f1037b",
+      "range": {
+        "startLine": 27,
+        "startChar": 19,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b16d3049_9c7dee83",
         "filename": "api/video/video_bitrate_allocation.h",
         "patchSetId": 31
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-10T13:23:45Z",
       "side": 1,
       "message": "Why does this belong in API? This table seems to be an implementation detail of a particular VideoBitrateAllocator, as we have no way to set temporal layer bitrate allocation through the RtpSender APIs?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60aeba44_ca7d1344",
+        "filename": "api/video/video_bitrate_allocation.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-12T09:20:36Z",
+      "side": 1,
+      "message": "It is used in files both in media/engine, modules/video_coding and modules/video_coding/utility so not sure what is the best place to put it. \n\nWhere should I move it instead?",
+      "parentUuid": "b16d3049_9c7dee83",
       "range": {
         "startLine": 31,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "01cbf15f_aa0af18b",
+        "filename": "modules/video_coding/utility/simulcast_test_fixture_impl.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-12T09:20:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "54fa9703_eee18213",
+      "range": {
+        "startLine": 116,
+        "startChar": 36,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36defaa5_c9f0d6c1",
         "filename": "modules/video_coding/video_codec_initializer.cc",
         "patchSetId": 31
@@ -91,6 +163,30 @@
       "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43f31a61_6824cfda",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-12T09:20:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36defaa5_c9f0d6c1",
+      "range": {
+        "startLine": 197,
+        "startChar": 6,
+        "endLine": 197,
+        "endChar": 8
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
