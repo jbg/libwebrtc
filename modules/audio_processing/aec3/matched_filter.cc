@@ -22,8 +22,15 @@
 #include "api/audio/echo_canceller3_config.h"
 #include "modules/audio_processing/logging/apm_data_dumper.h"
 #include "rtc_base/logging.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
+namespace {
+
+bool ForceAllFilters() {
+  return field_trial::IsEnabled("WebRTC-Aec3LazyFilteringKillSwitch");
+}
+}  // namespace
 namespace aec3 {
 
 #if defined(WEBRTC_HAS_NEON)
@@ -319,7 +326,8 @@ MatchedFilter::MatchedFilter(ApmDataDumper* data_dumper,
           std::vector<float>(window_size_sub_blocks * sub_block_size_, 0.f)),
       lag_estimates_(num_matched_filters),
       filters_offsets_(num_matched_filters, 0),
-      excitation_limit_(excitation_limit) {
+      excitation_limit_(excitation_limit),
+      force_all_filters_(ForceAllFilters()) {
   RTC_DCHECK(data_dumper);
   RTC_DCHECK_LT(0, window_size_sub_blocks);
   RTC_DCHECK((kBlockSize % sub_block_size) == 0);
@@ -336,6 +344,8 @@ void MatchedFilter::Reset() {
   for (auto& l : lag_estimates_) {
     l = MatchedFilter::LagEstimate();
   }
+
+  delay_.reset();
 }
 
 void MatchedFilter::Update(const DownsampledRenderBuffer& render_buffer,
@@ -345,6 +355,8 @@ void MatchedFilter::Update(const DownsampledRenderBuffer& render_buffer,
 
   const float x2_sum_threshold =
       filters_[0].size() * excitation_limit_ * excitation_limit_;
+
+  const size_t window_size = filters_[0].size() >> 2;
 
   // Apply all matched filters.
   size_t alignment_shift = 0;
@@ -356,7 +368,17 @@ void MatchedFilter::Update(const DownsampledRenderBuffer& render_buffer,
         (render_buffer.read + alignment_shift + sub_block_size_ - 1) %
         render_buffer.buffer.size();
 
-    switch (optimization_) {
+    // If a delay has already been found only use the filters near that delay.
+    bool run_filter = force_all_filters_ || !delay_;
+    if (delay_) {
+      const size_t win_min = *delay_ >= window_size ? *delay_ - window_size : 0;
+      const size_t win_max = *delay_ + window_size;
+      run_filter =
+          run_filter || (win_max >= alignment_shift &&
+                         win_min < alignment_shift + filters_[n].size());
+    }
+    if (run_filter) {
+      switch (optimization_) {
 #if defined(WEBRTC_ARCH_X86_FAMILY)
       case Aec3Optimization::kSse2:
         aec3::MatchedFilterCore_SSE2(x_start_index, x2_sum_threshold,
@@ -375,28 +397,32 @@ void MatchedFilter::Update(const DownsampledRenderBuffer& render_buffer,
         aec3::MatchedFilterCore(x_start_index, x2_sum_threshold,
                                 render_buffer.buffer, y, filters_[n],
                                 &filters_updated, &error_sum);
+      }
+
+      // Compute anchor for the matched filter error.
+      const float error_sum_anchor =
+          std::inner_product(y.begin(), y.end(), y.begin(), 0.f);
+
+      // Estimate the lag in the matched filter as the distance to the portion
+      // in the filter that contributes the most to the matched filter output.
+      // This is detected as the peak of the matched filter.
+      const size_t lag_estimate = std::distance(
+          filters_[n].begin(),
+          std::max_element(
+              filters_[n].begin(), filters_[n].end(),
+              [](float a, float b) -> bool { return a * a < b * b; }));
+
+      // Update the lag estimates for the matched filter.
+      const float kMatchingFilterThreshold = 0.2f;
+      lag_estimates_[n] = LagEstimate(
+          error_sum_anchor - error_sum,
+          (lag_estimate > 2 && lag_estimate < (filters_[n].size() - 10) &&
+           error_sum < kMatchingFilterThreshold * error_sum_anchor),
+          lag_estimate + alignment_shift, filters_updated);
+    } else {
+      // Filter not used. Clear lag estimate.
+      lag_estimates_[n] = LagEstimate(0, false, alignment_shift, false);
     }
-
-    // Compute anchor for the matched filter error.
-    const float error_sum_anchor =
-        std::inner_product(y.begin(), y.end(), y.begin(), 0.f);
-
-    // Estimate the lag in the matched filter as the distance to the portion in
-    // the filter that contributes the most to the matched filter output. This
-    // is detected as the peak of the matched filter.
-    const size_t lag_estimate = std::distance(
-        filters_[n].begin(),
-        std::max_element(
-            filters_[n].begin(), filters_[n].end(),
-            [](float a, float b) -> bool { return a * a < b * b; }));
-
-    // Update the lag estimates for the matched filter.
-    const float kMatchingFilterThreshold = 0.2f;
-    lag_estimates_[n] = LagEstimate(
-        error_sum_anchor - error_sum,
-        (lag_estimate > 2 && lag_estimate < (filters_[n].size() - 10) &&
-         error_sum < kMatchingFilterThreshold * error_sum_anchor),
-        lag_estimate + alignment_shift, filters_updated);
 
     RTC_DCHECK_GE(10, filters_.size());
     switch (n) {
