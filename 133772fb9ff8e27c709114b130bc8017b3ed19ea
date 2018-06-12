@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc5093c7_f45fc76b",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-06-12T12:47:26Z",
+      "side": 1,
+      "message": "Would is be possible to make the field trial control whether we even connect the transport sequence numbers to the audio stream? Seems inconsistent that we would negotiate transport sequence numbers and then not use them, which will happen in this case, right?",
+      "range": {
+        "startLine": 246,
+        "startChar": 7,
+        "endLine": 247,
+        "endChar": 70
+      },
+      "revId": "133772fb9ff8e27c709114b130bc8017b3ed19ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
