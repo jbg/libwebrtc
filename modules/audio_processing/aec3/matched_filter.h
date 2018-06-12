@@ -102,6 +102,8 @@ class MatchedFilter {
     return lag_estimates_;
   }
 
+  void FoundLag(size_t lag) { delay = lag; }
+
   // Returns the maximum filter lag.
   size_t GetMaxFilterLag() const {
     return filters_.size() * filter_intra_lag_shift_ + filters_[0].size();
@@ -121,6 +123,7 @@ class MatchedFilter {
   std::vector<LagEstimate> lag_estimates_;
   std::vector<size_t> filters_offsets_;
   const float excitation_limit_;
+  rtc::Optional<size_t> delay;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(MatchedFilter);
 };

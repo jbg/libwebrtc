@@ -85,6 +85,10 @@ rtc::Optional<DelayEstimate> EchoPathDelayEstimator::EstimateDelay(
       matched_filter_lag_aggregator_.Aggregate(
           matched_filter_.GetLagEstimates());
 
+  if (aggregated_matched_filter_lag) {
+    matched_filter_.FoundLag(aggregated_matched_filter_lag->delay);
+  }
+
   // TODO(peah): Move this logging outside of this class once EchoCanceller3
   // development is done.
   data_dumper_->DumpRaw(
