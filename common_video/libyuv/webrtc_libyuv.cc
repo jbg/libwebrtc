@@ -223,7 +223,8 @@ rtc::scoped_refptr<I420ABufferInterface> ScaleI420ABuffer(
                      axx_buffer->StrideY(), target_width, target_height,
                      libyuv::kFilterBox);
   rtc::scoped_refptr<I420ABufferInterface> merged_buffer = WrapI420ABuffer(
-      yuv_buffer->width(), yuv_buffer->height(), yuv_buffer->DataY(),
+      yuv_buffer->width(), yuv_buffer->height(),
+      PlanarYuvBuffer::BitDepth::kBitDepth8, yuv_buffer->DataY(),
       yuv_buffer->StrideY(), yuv_buffer->DataU(), yuv_buffer->StrideU(),
       yuv_buffer->DataV(), yuv_buffer->StrideV(), axx_buffer->DataY(),
       axx_buffer->StrideY(),

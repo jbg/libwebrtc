@@ -147,6 +147,7 @@ int MultiplexEncoderAdapter::Encode(
       input_image.video_frame_buffer()->GetI420A();
   rtc::scoped_refptr<I420BufferInterface> alpha_buffer =
       WrapI420Buffer(input_image.width(), input_image.height(),
+                     PlanarYuvBuffer::BitDepth::kBitDepth8,
                      yuva_buffer->DataA(), yuva_buffer->StrideA(),
                      multiplex_dummy_planes_.data(), yuva_buffer->StrideU(),
                      multiplex_dummy_planes_.data(), yuva_buffer->StrideV(),

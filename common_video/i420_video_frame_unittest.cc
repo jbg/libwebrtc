@@ -18,12 +18,17 @@
 #include "test/fake_texture_frame.h"
 #include "test/frame_utils.h"
 #include "test/gtest.h"
+#include "third_party/libyuv/include/libyuv/convert.h"
 
 namespace webrtc {
 
 namespace {
 
-rtc::scoped_refptr<I420Buffer> CreateGradient(int width, int height) {
+rtc::scoped_refptr<I420Buffer> CreateGradient(
+    int width,
+    int height,
+    PlanarYuvBuffer::BitDepth bit_depth =
+        PlanarYuvBuffer::BitDepth::kBitDepth8) {
   rtc::scoped_refptr<I420Buffer> buffer(
       I420Buffer::Create(width, height));
   // Initialize with gradient, Y = 128(x/w + y/h), U = 256 x/w, V = 256 y/h
@@ -43,7 +48,22 @@ rtc::scoped_refptr<I420Buffer> CreateGradient(int width, int height) {
           255 * y / (chroma_height - 1);
     }
   }
-  return buffer;
+  if (bit_depth == PlanarYuvBuffer::BitDepth::kBitDepth8)
+    return buffer;
+
+  RTC_DCHECK(bit_depth == PlanarYuvBuffer::BitDepth::kBitDepth10);
+  rtc::scoped_refptr<I420Buffer> bit_depth_buffer(
+      I420Buffer::Create(width, height, bit_depth));
+  libyuv::I420ToI010(
+      buffer->DataY(), buffer->StrideY(), buffer->DataU(), buffer->StrideU(),
+      buffer->DataV(), buffer->StrideV(),
+      reinterpret_cast<uint16_t*>(bit_depth_buffer->MutableDataY()),
+      bit_depth_buffer->StrideY() / 2,
+      reinterpret_cast<uint16_t*>(bit_depth_buffer->MutableDataU()),
+      bit_depth_buffer->StrideU() / 2,
+      reinterpret_cast<uint16_t*>(bit_depth_buffer->MutableDataV()),
+      bit_depth_buffer->StrideV() / 2, width, height);
+  return bit_depth_buffer;
 }
 
 // The offsets and sizes describe the rectangle extracted from the
@@ -56,6 +76,21 @@ void CheckCrop(const webrtc::I420BufferInterface& frame,
                double rel_height) {
   int width = frame.width();
   int height = frame.height();
+
+  if (frame.bit_depth() == PlanarYuvBuffer::BitDepth::kBitDepth10) {
+    rtc::scoped_refptr<I420Buffer> buffer(I420Buffer::Create(width, height));
+    libyuv::I010ToI420(
+        reinterpret_cast<const uint16_t*>(frame.DataY()), frame.StrideY() / 2,
+        reinterpret_cast<const uint16_t*>(frame.DataU()), frame.StrideU() / 2,
+        reinterpret_cast<const uint16_t*>(frame.DataV()), frame.StrideV() / 2,
+        buffer->MutableDataY(), buffer->StrideY(), buffer->MutableDataU(),
+        buffer->StrideU(), buffer->MutableDataV(), buffer->StrideV(), width,
+        height);
+    CheckCrop(*buffer, offset_x, offset_y, rel_width, rel_height);
+    return;
+  }
+  RTC_DCHECK(frame.bit_depth() == PlanarYuvBuffer::BitDepth::kBitDepth8);
+
   // Check that pixel values in the corners match the gradient used
   // for initialization.
   for (int i = 0; i < 2; i++) {
@@ -82,6 +117,23 @@ void CheckRotate(int width,
                  int height,
                  webrtc::VideoRotation rotation,
                  const webrtc::I420BufferInterface& rotated) {
+  if (rotated.bit_depth() == PlanarYuvBuffer::BitDepth::kBitDepth10) {
+    rtc::scoped_refptr<I420Buffer> buffer(
+        I420Buffer::Create(rotated.width(), rotated.height()));
+    libyuv::I010ToI420(reinterpret_cast<const uint16_t*>(rotated.DataY()),
+                       rotated.StrideY() / 2,
+                       reinterpret_cast<const uint16_t*>(rotated.DataU()),
+                       rotated.StrideU() / 2,
+                       reinterpret_cast<const uint16_t*>(rotated.DataV()),
+                       rotated.StrideV() / 2, buffer->MutableDataY(),
+                       buffer->StrideY(), buffer->MutableDataU(),
+                       buffer->StrideU(), buffer->MutableDataV(),
+                       buffer->StrideV(), rotated.width(), rotated.height());
+    CheckRotate(width, height, rotation, *buffer);
+    return;
+  }
+  RTC_DCHECK(rotated.bit_depth() == PlanarYuvBuffer::BitDepth::kBitDepth8);
+
   int rotated_width = width;
   int rotated_height = height;
 
@@ -150,12 +202,10 @@ TEST(TestVideoFrame, ShallowCopy) {
   memset(buffer_u, 8, kSizeU);
   memset(buffer_v, 4, kSizeV);
 
-  VideoFrame frame1(
-      I420Buffer::Copy(width, height,
-                       buffer_y, stride_y,
-                       buffer_u, stride_u,
-                       buffer_v, stride_v),
-      kRotation, 0);
+  VideoFrame frame1(I420Buffer::Copy(width, height, buffer_y, stride_y,
+                                     buffer_u, stride_u, buffer_v, stride_v,
+                                     PlanarYuvBuffer::BitDepth::kBitDepth8),
+                    kRotation, 0);
   frame1.set_timestamp(timestamp);
   frame1.set_ntp_time_ms(ntp_time_ms);
   frame1.set_timestamp_us(timestamp_us);
@@ -203,9 +253,11 @@ TEST(TestVideoFrame, TextureInitialValues) {
   EXPECT_EQ(20, frame.timestamp_us());
 }
 
-TEST(TestI420FrameBuffer, Copy) {
-  rtc::scoped_refptr<I420Buffer> buf1(
-      I420Buffer::Create(20, 10));
+class TestI420FrameBuffer
+    : public ::testing::TestWithParam<PlanarYuvBuffer::BitDepth> {};
+
+TEST_P(TestI420FrameBuffer, Copy) {
+  rtc::scoped_refptr<I420Buffer> buf1(I420Buffer::Create(20, 10, GetParam()));
   memset(buf1->MutableDataY(), 1, 200);
   memset(buf1->MutableDataU(), 2, 50);
   memset(buf1->MutableDataV(), 3, 50);
@@ -213,86 +265,107 @@ TEST(TestI420FrameBuffer, Copy) {
   EXPECT_TRUE(test::FrameBufsEqual(buf1, buf2));
 }
 
-TEST(TestI420FrameBuffer, Scale) {
-  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(200, 100);
+TEST_P(TestI420FrameBuffer, Scale) {
+  const PlanarYuvBuffer::BitDepth bit_depth = GetParam();
+  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(200, 100, bit_depth);
 
   // Pure scaling, no cropping.
   rtc::scoped_refptr<I420Buffer> scaled_buffer(
-      I420Buffer::Create(150, 75));
+      I420Buffer::Create(150, 74, bit_depth));
 
   scaled_buffer->ScaleFrom(*buf);
   CheckCrop(*scaled_buffer, 0.0, 0.0, 1.0, 1.0);
 }
 
-TEST(TestI420FrameBuffer, CropXCenter) {
-  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(200, 100);
+TEST_P(TestI420FrameBuffer, CropXCenter) {
+  const PlanarYuvBuffer::BitDepth bit_depth = GetParam();
+  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(200, 100, bit_depth);
 
   // Pure center cropping, no scaling.
   rtc::scoped_refptr<I420Buffer> scaled_buffer(
-      I420Buffer::Create(100, 100));
+      I420Buffer::Create(100, 100, bit_depth));
 
   scaled_buffer->CropAndScaleFrom(*buf, 50, 0, 100, 100);
   CheckCrop(*scaled_buffer, 0.25, 0.0, 0.5, 1.0);
 }
 
-TEST(TestI420FrameBuffer, CropXNotCenter) {
-  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(200, 100);
+TEST_P(TestI420FrameBuffer, CropXNotCenter) {
+  const PlanarYuvBuffer::BitDepth bit_depth = GetParam();
+  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(200, 100, bit_depth);
 
   // Non-center cropping, no scaling.
   rtc::scoped_refptr<I420Buffer> scaled_buffer(
-      I420Buffer::Create(100, 100));
+      I420Buffer::Create(100, 100, bit_depth));
 
   scaled_buffer->CropAndScaleFrom(*buf, 25, 0, 100, 100);
   CheckCrop(*scaled_buffer, 0.125, 0.0, 0.5, 1.0);
 }
 
-TEST(TestI420FrameBuffer, CropYCenter) {
-  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(100, 200);
+TEST_P(TestI420FrameBuffer, CropYCenter) {
+  const PlanarYuvBuffer::BitDepth bit_depth = GetParam();
+  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(100, 200, bit_depth);
 
   // Pure center cropping, no scaling.
   rtc::scoped_refptr<I420Buffer> scaled_buffer(
-      I420Buffer::Create(100, 100));
+      I420Buffer::Create(100, 100, bit_depth));
 
   scaled_buffer->CropAndScaleFrom(*buf, 0, 50, 100, 100);
   CheckCrop(*scaled_buffer, 0.0, 0.25, 1.0, 0.5);
 }
 
-TEST(TestI420FrameBuffer, CropYNotCenter) {
-  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(100, 200);
+TEST_P(TestI420FrameBuffer, CropYNotCenter) {
+  const PlanarYuvBuffer::BitDepth bit_depth = GetParam();
+  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(100, 200, bit_depth);
 
   // Non-center cropping, no scaling.
   rtc::scoped_refptr<I420Buffer> scaled_buffer(
-      I420Buffer::Create(100, 100));
+      I420Buffer::Create(100, 100, bit_depth));
 
   scaled_buffer->CropAndScaleFrom(*buf, 0, 25, 100, 100);
   CheckCrop(*scaled_buffer, 0.0, 0.125, 1.0, 0.5);
 }
 
-TEST(TestI420FrameBuffer, CropAndScale16x9) {
-  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(640, 480);
+TEST_P(TestI420FrameBuffer, CropAndScale16x9) {
+  const PlanarYuvBuffer::BitDepth bit_depth = GetParam();
+  rtc::scoped_refptr<I420Buffer> buf = CreateGradient(640, 480, bit_depth);
 
   // Center crop to 640 x 360 (16/9 aspect), then scale down by 2.
   rtc::scoped_refptr<I420Buffer> scaled_buffer(
-      I420Buffer::Create(320, 180));
+      I420Buffer::Create(320, 180, bit_depth));
 
   scaled_buffer->CropAndScaleFrom(*buf);
   CheckCrop(*scaled_buffer, 0.0, 0.125, 1.0, 0.75);
 }
 
+INSTANTIATE_TEST_CASE_P(
+    ,
+    TestI420FrameBuffer,
+    ::testing::Values(PlanarYuvBuffer::BitDepth::kBitDepth8,
+                      PlanarYuvBuffer::BitDepth::kBitDepth10));
+
 class TestI420BufferRotate
-    : public ::testing::TestWithParam<webrtc::VideoRotation> {};
+    : public ::testing::TestWithParam<
+          std::tuple<webrtc::VideoRotation, PlanarYuvBuffer::BitDepth>> {};
 
 TEST_P(TestI420BufferRotate, Rotates) {
-  rtc::scoped_refptr<I420BufferInterface> buffer = CreateGradient(640, 480);
+  const webrtc::VideoRotation rotation = std::get<0>(GetParam());
+  const PlanarYuvBuffer::BitDepth bit_depth = std::get<1>(GetParam());
+  rtc::scoped_refptr<I420BufferInterface> buffer =
+      CreateGradient(640, 480, bit_depth);
   rtc::scoped_refptr<I420BufferInterface> rotated_buffer =
-      I420Buffer::Rotate(*buffer, GetParam());
-  CheckRotate(640, 480, GetParam(), *rotated_buffer);
+      I420Buffer::Rotate(*buffer, rotation);
+  CheckRotate(640, 480, rotation, *rotated_buffer);
 }
 
-INSTANTIATE_TEST_CASE_P(Rotate, TestI420BufferRotate,
-                        ::testing::Values(kVideoRotation_0,
-                                          kVideoRotation_90,
-                                          kVideoRotation_180,
-                                          kVideoRotation_270));
+INSTANTIATE_TEST_CASE_P(
+    Rotate,
+    TestI420BufferRotate,
+    ::testing::Combine(
+        ::testing::Values(kVideoRotation_0,
+                          kVideoRotation_90,
+                          kVideoRotation_180,
+                          kVideoRotation_270),
+        ::testing::Values(PlanarYuvBuffer::BitDepth::kBitDepth8,
+                          PlanarYuvBuffer::BitDepth::kBitDepth10)));
 
 }  // namespace webrtc
