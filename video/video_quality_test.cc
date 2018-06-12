@@ -529,6 +529,7 @@ class VideoAnalyzer : public PacketReceiver,
     double ssim;
   };
 
+  // TODO(nisse): pre_decode_callback has been deleted. Do we still need this?
   // This class receives the send-side OnEncodeTiming and is provided to not
   // conflict with the receiver-side pre_decode_callback.
   class OnEncodeTimingProxy : public EncodedFrameObserver {
