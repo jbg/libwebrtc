@@ -22,6 +22,30 @@
       "revId": "1471a7f9dcc21cae6a78775f23f99283d30ce360",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01060b8f_f2a349dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5619
+      },
+      "writtenOn": "2018-06-12T15:59:10Z",
+      "side": 1,
+      "message": "Updated description as advised.",
+      "parentUuid": "837cb33b_9eb10239",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 202
+      },
+      "revId": "1471a7f9dcc21cae6a78775f23f99283d30ce360",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
