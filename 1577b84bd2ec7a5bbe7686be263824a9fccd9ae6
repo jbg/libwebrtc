@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b814b364_5b794868",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2843,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-12T16:02:28Z",
+      "side": 1,
+      "message": "Just realized, don\u0027t we need to support this in SetConfiguration as well, since we won\u0027t necessarily know if the other peer is affected by the bug at the time of creating the PeerConnection?",
+      "revId": "1577b84bd2ec7a5bbe7686be263824a9fccd9ae6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
