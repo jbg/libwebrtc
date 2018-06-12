@@ -308,6 +308,7 @@ int ForwardErrorCorrection::InsertZerosInPacketMasks(
                                   new_bit_index);
     }
     new_bit_index += num_zeros_to_insert;
+    RTC_CHECK_LT(new_bit_index, max_media_packets);
     internal::CopyColumn(tmp_packet_masks_, tmp_packet_mask_size, packet_masks_,
                          packet_mask_size_, num_fec_packets, new_bit_index,
                          old_bit_index);
