@@ -457,6 +457,8 @@ public class PeerConnection {
     // This is an optional wrapper for the C++ webrtc::TurnCustomizer.
     @Nullable public TurnCustomizer turnCustomizer;
 
+    public boolean activeResetSrtpParams;
+
     // TODO(deadbeef): Instead of duplicating the defaults here, we should do
     // something to pick up the defaults from C++. The Objective-C equivalent
     // of RTCConfiguration does that.
@@ -495,6 +497,7 @@ public class PeerConnection {
       enableDtlsSrtp = null;
       networkPreference = AdapterType.UNKNOWN;
       sdpSemantics = SdpSemantics.PLAN_B;
+      activeResetSrtpParams = false;
     }
 
     @CalledByNative("RTCConfiguration")
@@ -681,6 +684,11 @@ public class PeerConnection {
     @CalledByNative("RTCConfiguration")
     SdpSemantics getSdpSemantics() {
       return sdpSemantics;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    boolean getActiveResetSrtpParams() {
+      return activeResetSrtpParams;
     }
   };
 
