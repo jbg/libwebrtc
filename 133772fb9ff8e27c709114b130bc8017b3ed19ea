@@ -46,6 +46,30 @@
       "revId": "133772fb9ff8e27c709114b130bc8017b3ed19ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f53c995b_9f674327",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-06-12T13:42:18Z",
+      "side": 1,
+      "message": "Ok.\n\nCould we make sure that the sender does not assign any rtp header extension ID if the trial is enabled? that way we don\u0027t have to check the trial each time behavior is condiitoned on having the number.",
+      "parentUuid": "30cbdfe8_89b8df43",
+      "range": {
+        "startLine": 246,
+        "startChar": 7,
+        "endLine": 247,
+        "endChar": 70
+      },
+      "revId": "133772fb9ff8e27c709114b130bc8017b3ed19ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
