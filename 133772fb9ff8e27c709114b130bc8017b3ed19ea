@@ -70,6 +70,30 @@
       "revId": "133772fb9ff8e27c709114b130bc8017b3ed19ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b645768_092c57c8",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5619
+      },
+      "writtenOn": "2018-06-12T14:03:24Z",
+      "side": 1,
+      "message": "RTP extension support is handled by code that is not aware of audio specific logic.",
+      "parentUuid": "f53c995b_9f674327",
+      "range": {
+        "startLine": 246,
+        "startChar": 7,
+        "endLine": 247,
+        "endChar": 70
+      },
+      "revId": "133772fb9ff8e27c709114b130bc8017b3ed19ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
