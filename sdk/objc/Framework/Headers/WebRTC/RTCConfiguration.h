@@ -162,6 +162,11 @@ RTC_EXPORT
  */
 @property(nonatomic, assign) RTCSdpSemantics sdpSemantics;
 
+/** Actively reset the SRTP parameters when the DTLS transports underneath are
+ *  changed after offer/answer negotiation.
+ */
+@property(nonatomic, assign) BOOL activeResetSrtpParams;
+
 - (instancetype)init;
 
 @end
