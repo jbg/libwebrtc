@@ -11,17 +11,18 @@
 #ifndef MEDIA_ENGINE_SIMULCAST_H_
 #define MEDIA_ENGINE_SIMULCAST_H_
 
-#include <string>
 #include <vector>
 
 #include "api/video_codecs/video_encoder_config.h"
 
 namespace cricket {
 
-// TODO(pthatcher): Write unit tests just for these functions,
-// independent of WebrtcVideoEngine.
-
 int GetTotalMaxBitrateBps(const std::vector<webrtc::VideoStream>& streams);
+
+// Adds any bitrate of |max_bitrate_bps| that is above the total maximum bitrate
+// for the |layers| to the highest quality layer.
+void BoostMaxSimulcastLayer(int max_bitrate_bps,
+                            std::vector<webrtc::VideoStream>* layers);
 
 // Get simulcast settings.
 // TODO(sprang): Remove default parameter when it's not longer referenced.

@@ -155,6 +155,9 @@ void SlotSimulcastMaxResolution(size_t max_layers, int* width, int* height) {
 
 void BoostMaxSimulcastLayer(int max_bitrate_bps,
                             std::vector<webrtc::VideoStream>* layers) {
+  if (layers->empty())
+    return;
+
   // Spend additional bits to boost the max layer.
   int bitrate_left_bps = max_bitrate_bps - GetTotalMaxBitrateBps(*layers);
   if (bitrate_left_bps > 0) {
@@ -163,6 +166,9 @@ void BoostMaxSimulcastLayer(int max_bitrate_bps,
 }
 
 int GetTotalMaxBitrateBps(const std::vector<webrtc::VideoStream>& layers) {
+  if (layers.empty())
+    return 0;
+
   int total_max_bitrate_bps = 0;
   for (size_t s = 0; s < layers.size() - 1; ++s) {
     total_max_bitrate_bps += layers[s].target_bitrate_bps;
