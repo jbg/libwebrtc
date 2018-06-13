@@ -21,7 +21,6 @@
 #include "common_audio/signal_processing/include/signal_processing_library.h"
 #include "modules/audio_processing/aec_dump/aec_dump_factory.h"
 #include "modules/audio_processing/audio_processing_impl.h"
-#include "modules/audio_processing/beamformer/mock_nonlinear_beamformer.h"
 #include "modules/audio_processing/common.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/include/mock_audio_processing.h"
@@ -1310,16 +1309,8 @@ TEST_F(ApmTest, AgcOnlyAdaptsWhenTargetSignalIsPresent) {
   const size_t kNumChunks = 700;
   const float kScaleFactor = 0.25f;
   Config config;
-  std::vector<webrtc::Point> geometry;
-  geometry.push_back(webrtc::Point(0.f, 0.f, 0.f));
-  geometry.push_back(webrtc::Point(0.05f, 0.f, 0.f));
-  config.Set<Beamforming>(new Beamforming(true, geometry));
-  testing::NiceMock<MockNonlinearBeamformer>* beamformer =
-      new testing::NiceMock<MockNonlinearBeamformer>(geometry, 1u);
   std::unique_ptr<AudioProcessing> apm(
       AudioProcessingBuilder()
-          .SetNonlinearBeamformer(
-              std::unique_ptr<webrtc::NonlinearBeamformer>(beamformer))
           .Create(config));
   EXPECT_EQ(kNoErr, apm->gain_control()->Enable(true));
   ChannelBuffer<float> src_buf(kSamplesPerChannel, kNumInputChannels);
@@ -1335,8 +1326,6 @@ TEST_F(ApmTest, AgcOnlyAdaptsWhenTargetSignalIsPresent) {
   const int kDefaultCompressionGain =
       apm->gain_control()->compression_gain_db();
   bool is_target = false;
-  EXPECT_CALL(*beamformer, is_target_present())
-      .WillRepeatedly(testing::ReturnPointee(&is_target));
   for (size_t i = 0; i < kNumChunks; ++i) {
     ASSERT_TRUE(ReadChunk(far_file,
                           int_data.get(),
