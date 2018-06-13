@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "06f69d76_826e5392",
+        "filename": "api/video/video_bitrate_allocation.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-13T08:05:36Z",
+      "side": 1,
+      "message": "I\u0027d say that video_coding/utility is the right place right now. It should be fine for the code in media/engine to depend on video_coding/utility:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/media/DEPS\n\nMoving it to api/ means that downstream users can depend directly on it, which is something we should avoid.",
+      "parentUuid": "60aeba44_ca7d1344",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "54fa9703_eee18213",
         "filename": "modules/video_coding/utility/simulcast_test_fixture_impl.cc",
         "patchSetId": 31
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "54fa9703_eee18213",
+      "range": {
+        "startLine": 116,
+        "startChar": 36,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "d4095f67bea2af7d77826d2ae9958f87a505d241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e2a734_11edb6ac",
+        "filename": "modules/video_coding/utility/simulcast_test_fixture_impl.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-13T08:05:36Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "01cbf15f_aa0af18b",
       "range": {
         "startLine": 116,
         "startChar": 36,
