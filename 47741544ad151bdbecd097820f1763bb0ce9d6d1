@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8795a696_f3318332",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-13T21:08:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5646bc6_2ff78ca2",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "47741544ad151bdbecd097820f1763bb0ce9d6d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "caa5c2e4_6800b5f0",
         "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
         "patchSetId": 37
@@ -45,6 +69,30 @@
       "revId": "47741544ad151bdbecd097820f1763bb0ce9d6d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b01295a6_bd58478e",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-13T21:08:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "caa5c2e4_6800b5f0",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "47741544ad151bdbecd097820f1763bb0ce9d6d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
