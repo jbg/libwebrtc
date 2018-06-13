@@ -112,9 +112,6 @@ void RTPSenderVideo::SendVideoPacket(std::unique_ptr<RtpPacketToSend> packet,
   }
   rtc::CritScope cs(&stats_crit_);
   video_bitrate_.Update(packet_size, clock_->TimeInMilliseconds());
-  TRACE_EVENT_INSTANT2(TRACE_DISABLED_BY_DEFAULT("webrtc_rtp"),
-                       "Video::PacketNormal", "timestamp", rtp_timestamp,
-                       "seqnum", seq_num);
 }
 
 void RTPSenderVideo::SendVideoPacketAsRedMaybeWithUlpfec(
@@ -158,9 +155,6 @@ void RTPSenderVideo::SendVideoPacketAsRedMaybeWithUlpfec(
                                  RtpPacketSender::kLowPriority)) {
     rtc::CritScope cs(&stats_crit_);
     video_bitrate_.Update(red_packet_size, clock_->TimeInMilliseconds());
-    TRACE_EVENT_INSTANT2(TRACE_DISABLED_BY_DEFAULT("webrtc_rtp"),
-                         "Video::PacketRed", "timestamp", rtp_timestamp,
-                         "seqnum", media_seq_num);
   } else {
     RTC_LOG(LS_WARNING) << "Failed to send RED packet " << media_seq_num;
   }
@@ -176,9 +170,6 @@ void RTPSenderVideo::SendVideoPacketAsRedMaybeWithUlpfec(
                                    RtpPacketSender::kLowPriority)) {
       rtc::CritScope cs(&stats_crit_);
       fec_bitrate_.Update(fec_packet->length(), clock_->TimeInMilliseconds());
-      TRACE_EVENT_INSTANT2(TRACE_DISABLED_BY_DEFAULT("webrtc_rtp"),
-                           "Video::PacketUlpfec", "timestamp", rtp_timestamp,
-                           "seqnum", fec_sequence_number);
     } else {
       RTC_LOG(LS_WARNING) << "Failed to send ULPFEC packet "
                           << fec_sequence_number;
@@ -208,9 +199,6 @@ void RTPSenderVideo::SendVideoPacketWithFlexfec(
                                      RtpPacketSender::kLowPriority)) {
         rtc::CritScope cs(&stats_crit_);
         fec_bitrate_.Update(packet_length, clock_->TimeInMilliseconds());
-        TRACE_EVENT_INSTANT2(TRACE_DISABLED_BY_DEFAULT("webrtc_rtp"),
-                             "Video::PacketFlexfec", "timestamp", timestamp,
-                             "seqnum", seq_num);
       } else {
         RTC_LOG(LS_WARNING) << "Failed to send FlexFEC packet " << seq_num;
       }
