@@ -21,6 +21,7 @@ namespace webrtc {
 class I420BufferInterface;
 class I420ABufferInterface;
 class I444BufferInterface;
+class I010BufferInterface;
 
 // Base class for frame buffers of different types of pixel format and storage.
 // The tag in type() indicates how the data is represented, and each type is
@@ -47,6 +48,7 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
     kI420,
     kI420A,
     kI444,
+    kI010,
   };
 
   // This function specifies in what pixel format the data is stored in.
@@ -73,17 +75,27 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
   const I420ABufferInterface* GetI420A() const;
   I444BufferInterface* GetI444();
   const I444BufferInterface* GetI444() const;
+  I010BufferInterface* GetI010();
+  const I010BufferInterface* GetI010() const;
 
  protected:
   ~VideoFrameBuffer() override {}
 };
 
-// This interface represents Type::kI420 and Type::kI444.
-class PlanarYuvBuffer : public VideoFrameBuffer {
+// This interface represents planar formats.
+class PlanarBuffer : public VideoFrameBuffer {
  public:
   virtual int ChromaWidth() const = 0;
   virtual int ChromaHeight() const = 0;
 
+ protected:
+  ~PlanarBuffer() override {}
+};
+
+// This interface represents 8-bit color depth formats: Type::kI420,
+// Type::kI420A and Type::kI444.
+class PlanarYuvBuffer : public PlanarBuffer {
+ public:
   // Returns pointer to the pixel data for a given plane. The memory is owned by
   // the VideoFrameBuffer object and must not be freed by the caller.
   virtual const uint8_t* DataY() const = 0;
@@ -131,6 +143,36 @@ class I444BufferInterface : public PlanarYuvBuffer {
 
  protected:
   ~I444BufferInterface() override {}
+};
+
+// This interface represents 8-bit to 16-bit color depth formats: Type::kI010.
+class PlanarYuv16BBuffer : public PlanarBuffer {
+ public:
+  // Returns pointer to the pixel data for a given plane. The memory is owned by
+  // the VideoFrameBuffer object and must not be freed by the caller.
+  virtual const uint16_t* DataY() const = 0;
+  virtual const uint16_t* DataU() const = 0;
+  virtual const uint16_t* DataV() const = 0;
+
+  // Returns the number of steps(in 16 bits) between successive rows for a given
+  // plane.
+  virtual int StrideY() const = 0;
+  virtual int StrideU() const = 0;
+  virtual int StrideV() const = 0;
+
+ protected:
+  ~PlanarYuv16BBuffer() override {}
+};
+
+class I010BufferInterface : public PlanarYuv16BBuffer {
+ public:
+  Type type() const override;
+
+  int ChromaWidth() const final;
+  int ChromaHeight() const final;
+
+ protected:
+  ~I010BufferInterface() override {}
 };
 
 }  // namespace webrtc
