@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1815710d_1b88a997",
+        "filename": "sdk/objc/Framework/Native/src/audio/audio_device_module_ios.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-13T07:04:53Z",
+      "side": 1,
+      "message": "Do you know why the diff is so broken? Has any function changed place? We typically don\u0027t make CLs just to re-format files, specially when it breaks the history like this.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "1d2233835d4116d6ef2e38b126a4befe1385a9b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
