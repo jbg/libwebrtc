@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ec91f90_7d925ff9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "I meant \"3, 5\"; the order doesn\u0027t make a difference in this case. See updated message, hopefully should be more clear now.",
+      "parentUuid": "764ac2b0_0db37359",
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af3ed5a4_bb0996b8",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e344b67_fd527381",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "Totally agree; see other comment.",
+      "parentUuid": "af3ed5a4_bb0996b8",
+      "range": {
+        "startLine": 215,
+        "startChar": 59,
+        "endLine": 216,
+        "endChar": 0
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "9bcebc50_a783070b",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "Oops, I assumed it was unsigned like fraction_lost, since the comment below mentions a maximum of 2^24 rather than 2^23. Fixed. Also, I might as well address that TODO while I\u0027m at it.",
+      "parentUuid": "fb6d33c1_7ee3b586",
+      "range": {
+        "startLine": 240,
+        "startChar": 51,
+        "endLine": 240,
+        "endChar": 76
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4bebc25_461c9ce0",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
         "patchSetId": 5
@@ -85,6 +151,30 @@
       "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39ca8cc5_e5183f76",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "To avoid a copy, but I\u0027ll change it back.",
+      "parentUuid": "e4bebc25_461c9ce0",
+      "range": {
+        "startLine": 53,
+        "startChar": 58,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "68fb62dd_0f02acf3",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "Good catch... I definitely intended this to be a 32-bit extended sequence number as the name implies. Looks like despite all the tests I added, nothing caught this, because I needed to test fraction loss *after* a rollover, not just during. And even after I added such a test, it didn\u0027t catch this problem because \"exp_since_last\" was also a uint16_t, meaning the two integer overflows ended up canceling each other out. :)",
+      "parentUuid": "4ea2b629_df2cc603",
+      "range": {
+        "startLine": 84,
+        "startChar": 11,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eac31e2c_b3b8162e",
         "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
         "patchSetId": 5
@@ -122,6 +236,24 @@
       "writtenOn": "2018-06-05T09:56:50Z",
       "side": 1,
       "message": "the functionality of this TestCallback look like mock, so may be use mock instead:\n\nclass MockRtcpCallback : public RtcpStatisticsCallback {\n public:\n  MOCK_METHOD2(StatisticsUpdated, void((const RtcpStatistics\u0026 statistics,\n                         uint32_t ssrc));\n};\n\n...\n\n{\nMockRtcpCallback mock;\nEXPECT_CALL(mock, StatisticsUpdated(_, _)).Times(3);\nstatistic-\u003eIncomingPacket(...);\nstatistic-\u003eIncomingPacket(...);\n\n....\nRtcpStatistics stat1, stat2;\nEXPECT_CALL(mock, StatisticsUpdated(_, _)).WillOnce(SaveArg\u003c0\u003e(\u0026stat1));\nreceive_statistics_-\u003eGetStatistician(kSsrc1)-\u003eGetStat...(\u0026stat2);\n\nEXPECT_EQ(stat1.field, stat2.field);\n....",
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "528f4fc7_f8b31887",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "Did this in patchset 8. I don\u0027t know if it makes things better, though; it\u0027s doing the same thing as before with about the same amount of code but now needs the reader to understand gmock and SaveArg and stuff.",
+      "parentUuid": "eac31e2c_b3b8162e",
       "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -148,6 +280,30 @@
       "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b192881_5553da79",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-13T22:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcd82e3e_fa0ca8bf",
+      "range": {
+        "startLine": 314,
+        "startChar": 35,
+        "endLine": 314,
+        "endChar": 67
+      },
+      "revId": "0c91d784072eaa845629a9fad3da5ad97472101d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
