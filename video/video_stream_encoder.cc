@@ -15,7 +15,7 @@
 #include <numeric>
 #include <utility>
 
-#include "api/video/i420_buffer.h"
+#include "api/video/planar_buffer_factory.h"
 #include "common_video/include/video_bitrate_allocator.h"
 #include "common_video/include/video_frame.h"
 #include "modules/video_coding/include/video_codec_initializer.h"
@@ -838,17 +838,17 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   if (crop_width_ > 0 || crop_height_ > 0) {
     int cropped_width = video_frame.width() - crop_width_;
     int cropped_height = video_frame.height() - crop_height_;
-    rtc::scoped_refptr<I420Buffer> cropped_buffer =
-        I420Buffer::Create(cropped_width, cropped_height);
-    // TODO(ilnik): Remove scaling if cropping is too big, as it should never
-    // happen after SinkWants signaled correctly from ReconfigureEncoder.
+    rtc::scoped_refptr<PlanarBuffer> cropped_buffer;
+    // TODO(ilnik): Remove scaling if cropping is too big, as it should
+    // never happen after SinkWants signaled correctly from
+    // ReconfigureEncoder.
     if (crop_width_ < 4 && crop_height_ < 4) {
-      cropped_buffer->CropAndScaleFrom(
-          *video_frame.video_frame_buffer()->ToI420(), crop_width_ / 2,
-          crop_height_ / 2, cropped_width, cropped_height);
+      cropped_buffer = PlanarBufferFactory::CropAndScaleFrom(
+          *video_frame.video_frame_buffer(), crop_width_ / 2, crop_height_ / 2,
+          cropped_width, cropped_height);
     } else {
-      cropped_buffer->ScaleFrom(
-          *video_frame.video_frame_buffer()->ToI420().get());
+      cropped_buffer = PlanarBufferFactory::ScaleFrom(
+          *video_frame.video_frame_buffer(), cropped_width, cropped_height);
     }
     out_frame =
         VideoFrame(cropped_buffer, video_frame.timestamp(),
