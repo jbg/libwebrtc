@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5646bc6_2ff78ca2",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-13T19:57:39Z",
+      "side": 1,
+      "message": "Please remove the trailing _ for these members as they aren\u0027t private.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "47741544ad151bdbecd097820f1763bb0ce9d6d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caa5c2e4_6800b5f0",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-13T19:57:39Z",
+      "side": 1,
+      "message": "Clean this up",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "47741544ad151bdbecd097820f1763bb0ce9d6d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
