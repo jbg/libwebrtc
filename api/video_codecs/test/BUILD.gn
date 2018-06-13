@@ -23,7 +23,6 @@ if (rtc_include_tests) {
       "..:video_codecs_api",
       "../../../modules/video_coding:video_codec_interface",
       "../../../modules/video_coding:webrtc_vp8",
-      "../../../modules/video_coding:webrtc_vp8_helpers",
       "../../../rtc_base:checks",
       "../../../rtc_base:rtc_base_tests_utils",
       "../../../system_wrappers:metrics_default",
