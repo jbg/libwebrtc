@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d996b573_0669f725",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-06-13T07:45:38Z",
+      "side": 1,
+      "message": "Would it be possible to move this into internal::CopyColumn? I think it would be clearer to have the CHECK right before the potential oob read.",
+      "range": {
+        "startLine": 311,
+        "startChar": 4,
+        "endLine": 311,
+        "endChar": 51
+      },
+      "revId": "3e1c3b373eaa8cd793ae4a8d8ee4d8b929d2ef56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
