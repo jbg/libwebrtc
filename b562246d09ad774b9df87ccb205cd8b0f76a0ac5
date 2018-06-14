@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3fc9767_be98e1b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right for the current version of the cl.",
+      "range": {
+        "startLine": 10,
+        "startChar": 55,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab4bfea1_7730c09c",
+        "filename": "api/video/planar_buffer_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "I don\u0027t think we need a class for this, I\u0027d prefer functions like\n\n  CreatePlanarFrameBuffer(type, width, height);\n\nAlso, I wonder if we really need these convenience functions, and if they have to be exposed in api/. What are the use cases? We intentionally didn\u0027t add methods like Rotate on the FrameBufferInterface, but if you really need to be able to rotate frame buffers of arbitrary type, then maybe we should reconsider that. Virtual methods are generally preferrable to code with an explicit switch (type), and doesn\u0027t require linking in any code for unused classes.\n\nThere\u0027s one other convenience functions with a switch (type), WrapYuvBuffer, declared in common_video/include/frame_buffer.h, not really sure where that is used.\n\nAnd if convenience functions like these are added to the api, it would be nice if they supported all frame buffer types.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b043edb3_d0ecbdeb",
+        "filename": "api/video/video_frame_buffer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "This is the same for I420 and I420A. If there already exists some suitable common base class, move there, but overkill to create a new base class just for these methods.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 1
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "404670cb_9743ee38",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "Is I010 a standard name? Do you have any authoritative reference for the format? (First google hit is https://msdn.microsoft.com/en-us/library/windows/desktop/bb970578(v\u003dvs.85).aspx, which doesn\u0027t even mention \"I010\", which is a bit confusing).",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b29bc1d_55af284c",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer keeping \"Yuv\" in the name, since it has the Chroma* methods.\n\nIt would make sense to me to move the Stride* methods up to this interface, with the understanding that they will return stride in units matching the type of the corresponding Data* method.",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 18
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d0cc7c6_f9ad8362",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "Rename PlanarYuv8Buffer, if that can be done without breaking too much things.",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 21
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fead237b_18f94696",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T07:43:04Z",
+      "side": 1,
+      "message": "Document how pixel values are normalized. I mean, Y is conceptually a value in the range 0.0-1.0, does that correspond to DataY()[i] / 1024.0 or DataY()[i] / 65536.0 ?\n\nIn the former case, adding a method giving the bit size would be reasonable.",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 24
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
