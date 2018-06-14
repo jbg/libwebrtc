@@ -12,6 +12,7 @@
 
 #include <stdint.h>
 #include <initializer_list>
+#include <map>
 #include <string>
 #include "api/optional.h"
 
@@ -57,7 +58,7 @@ void ParseFieldTrial(
 template <typename T>
 rtc::Optional<T> ParseTypedParameter(std::string);
 
-// This class uses the ParseTypedParameter funciton to implement a parameter
+// This class uses the ParseTypedParameter function to implement a parameter
 // implementation with an enforced default value.
 template <typename T>
 class FieldTrialParameter : public FieldTrialParameterInterface {
@@ -65,6 +66,7 @@ class FieldTrialParameter : public FieldTrialParameterInterface {
   FieldTrialParameter(std::string key, T default_value)
       : FieldTrialParameterInterface(key), value_(default_value) {}
   T Get() const { return value_; }
+  operator T() const { return Get(); }
 
  protected:
   bool Parse(rtc::Optional<std::string> str_value) override {
@@ -82,7 +84,38 @@ class FieldTrialParameter : public FieldTrialParameterInterface {
   T value_;
 };
 
-// This class uses the ParseTypedParameter funciton to implement a optional
+class AbstractFieldTrialEnum : public FieldTrialParameterInterface {
+ public:
+  AbstractFieldTrialEnum(std::string key, int default_value);
+  AbstractFieldTrialEnum(std::string key,
+                         int default_value,
+                         std::map<std::string, int> mapping);
+  ~AbstractFieldTrialEnum() override;
+  AbstractFieldTrialEnum(const AbstractFieldTrialEnum&);
+
+ protected:
+  bool Parse(rtc::Optional<std::string> str_value) override;
+
+ protected:
+  int value_;
+  std::map<std::string, int> enum_mapping_;
+};
+
+// This  is a simple helper for enums.
+template <typename T>
+class FieldTrialEnum : public AbstractFieldTrialEnum {
+ public:
+  FieldTrialEnum(std::string key, T default_value)
+      : AbstractFieldTrialEnum(key, default_value) {}
+  FieldTrialEnum(std::string key,
+                 T default_value,
+                 std::map<std::string, int> mapping)
+      : AbstractFieldTrialEnum(key, default_value, mapping) {}
+  T Get() const { return static_cast<T>(value_); }
+  operator T() const { return Get(); }
+};
+
+// This class uses the ParseTypedParameter function to implement an optional
 // parameter implementation that can default to rtc::nullopt.
 template <typename T>
 class FieldTrialOptional : public FieldTrialParameterInterface {
@@ -92,6 +125,7 @@ class FieldTrialOptional : public FieldTrialParameterInterface {
   FieldTrialOptional(std::string key, rtc::Optional<T> default_value)
       : FieldTrialParameterInterface(key), value_(default_value) {}
   rtc::Optional<T> Get() const { return value_; }
+  operator rtc::Optional<T>() const { return Get(); }
 
  protected:
   bool Parse(rtc::Optional<std::string> str_value) override {

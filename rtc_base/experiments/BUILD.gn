@@ -44,7 +44,6 @@ rtc_static_library("congestion_controller_experiment") {
   ]
   deps = [
     "../:rtc_base_approved",
-    "../../api:optional",
     "../../system_wrappers:field_trial_api",
   ]
 }
