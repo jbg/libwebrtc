@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2165cb5_b7241d41",
+        "filename": "api/video/i010_buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-14T10:21:15Z",
+      "side": 1,
+      "message": "puts?",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c042519_6aff1858",
+        "filename": "common_video/planar_video_frame_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-14T10:21:15Z",
+      "side": 1,
+      "message": "Can you add a hint that this file has moved from i420_video_frame_unittest.cc so that the diff works?",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60173211_872402d3",
+        "filename": "media/base/adaptedvideotracksource.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-14T10:21:15Z",
+      "side": 1,
+      "message": "I don\u0027t think we should add this here. I420 should be the only format we do special handling of. Can you add any missing support for CVO instead so that we don\u0027t apply rotation?",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 63
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

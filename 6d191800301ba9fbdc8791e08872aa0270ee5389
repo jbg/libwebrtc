@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30c6bdc8_f05d6852",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-14T10:21:15Z",
+      "side": 0,
+      "message": "I wasn\u0027t aware of this code. It\u0027s never good to have to convert to I420 because of performance and quality loss, and this code does not even try to reuse the memory.\n\nEmircan - do you know when this code path triggers? Is it a use case you need to support?",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
