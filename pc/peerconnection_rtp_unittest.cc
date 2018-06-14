@@ -758,6 +758,20 @@ TEST_P(PeerConnectionRtpTest, LegacyObserverOnSuccess) {
       callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal(), &error));
 }
 
+// Passes in Plan B, fails in Unified Plan.
+TEST_P(PeerConnectionRtpTest, SetConfigurationAfterSetLocalDescription) {
+  RTCConfiguration config;
+  config.type = webrtc::PeerConnectionInterface::IceTransportsType::kAll;
+  auto pc = CreatePeerConnection(config);
+  ASSERT_TRUE(pc->CreateOfferAndSetAsLocal());
+  config.type = webrtc::PeerConnectionInterface::IceTransportsType::kRelay;
+  RTCError error;
+  bool result = pc->pc()->SetConfiguration(config, &error);
+  if (!result)
+    printf("setConfiguration() failed: %s\n", ToString(error.type()).c_str());
+  ASSERT_TRUE(result);
+}
+
 // Verifies legacy behavior: The observer is not called if if the peer
 // connection is destroyed because the asynchronous callback is executed in the
 // peer connection's message handler.
