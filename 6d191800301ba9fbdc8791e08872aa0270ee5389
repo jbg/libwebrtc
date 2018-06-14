@@ -22,6 +22,30 @@
       "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7e3bf26_2c00607d",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T10:39:03Z",
+      "side": 0,
+      "message": "It seems this happens if incoming frames are larger that what\u0027s configured for the highest simulcast layer (see ReconfigureEncoder).\n\nFor one, why are simulcast streams configured with a width and height, regardless of aspect ratio of the incoming video? The restriction should be passed on to the video source with VisdeoSinkWants, but there we only have a pixel count, no width and height.",
+      "parentUuid": "30c6bdc8_f05d6852",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
