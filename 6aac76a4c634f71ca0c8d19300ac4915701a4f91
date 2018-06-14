@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46e38c79_1cfe990b",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-14T13:31:07Z",
+      "side": 1,
+      "message": "do you mean \u0027counters\u0027?\n(receive_counters_ likely should be GUARDED_BY(stream_lock_)",
+      "range": {
+        "startLine": 66,
+        "startChar": 37,
+        "endLine": 66,
+        "endChar": 54
+      },
+      "revId": "6aac76a4c634f71ca0c8d19300ac4915701a4f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c565f627_aac5018f",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-14T13:31:07Z",
+      "side": 1,
+      "message": "reorder using alphabetically (i.e. add two new lines first)",
+      "range": {
+        "startLine": 24,
+        "startChar": 19,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "6aac76a4c634f71ca0c8d19300ac4915701a4f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6135846b_67b7c972",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-06-14T13:31:07Z",
+      "side": 1,
+      "message": "It is good to see notes about all these cases,\nbut I do not know answer to these questions.\n\nMay be open a bug (follow RFC3550 when calculating report blocks for rtcp receiver report),\nassign TODOs to that bug (TODO(bugs.webrtc.org/\u003cnumber\u003e): ) and write here \nsomething like \"Follow RFC3550 or document why it is not followed\", e.g.\nhere you might write something like \"Reset counters for report block calculation on large sequence number gaps.\"",
+      "range": {
+        "startLine": 574,
+        "startChar": 51,
+        "endLine": 574,
+        "endChar": 69
+      },
+      "revId": "6aac76a4c634f71ca0c8d19300ac4915701a4f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
