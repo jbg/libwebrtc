@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bc1cac0_0746db7e",
+        "filename": "test/fuzzers/ulpfec_generator_fuzzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-06-14T12:19:48Z",
+      "side": 1,
+      "message": "While this will indeed avoid testing the case when the sequence number wraps, isn\u0027t this something that the production code must handle?",
+      "range": {
+        "startLine": 52,
+        "startChar": 19,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "9073e68bc0fdec568177f6146a05940af4f119d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
