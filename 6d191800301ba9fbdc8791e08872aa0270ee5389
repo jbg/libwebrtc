@@ -70,6 +70,30 @@
       "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70c79c4f_33628821",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-14T11:15:35Z",
+      "side": 0,
+      "message": "Please be a bit more specific. Where were the frames dropped? Do you mean literally \"odd\", as in not divisible by 2? In that case we should do cheap cropping by a few pixels without any scaling, and preferably closer to the simulcast encoder that requires even size.\n\nAre there any related tests?",
+      "parentUuid": "14e44894_4a8a38c4",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
