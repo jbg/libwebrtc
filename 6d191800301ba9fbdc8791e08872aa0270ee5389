@@ -94,6 +94,30 @@
       "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb7619dd_dbc20dd1",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-06-14T16:23:55Z",
+      "side": 0,
+      "message": "The resolution was not divisible by 4. As I remember now, one example of the problem is when FullHD stream cpu adapts down - This leads to a frame size not divisible by 4. Here\u0027s the test.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/video/video_stream_encoder_unittest.cc?q\u003dAcceptsFullHdAdaptedDownSimulcastFrames\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d2954\n\nThe cropping of up to 3 pixels in each dimension should be enough in these cases. The pure scaling code path is there as a failsafe if something goes terribly wrong with frame size configuration we will be slow but at least we will pass some frames through.",
+      "parentUuid": "70c79c4f_33628821",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
