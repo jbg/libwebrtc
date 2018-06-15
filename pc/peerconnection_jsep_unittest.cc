@@ -14,6 +14,7 @@
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "media/engine/webrtcmediaengine.h"
 #include "modules/audio_processing/include/audio_processing.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "pc/mediasession.h"
 #include "pc/peerconnectionfactory.h"
 #include "pc/peerconnectionwrapper.h"
@@ -59,7 +60,9 @@ class PeerConnectionFactoryForJsepTest : public PeerConnectionFactory {
                                   nullptr,
                                   AudioProcessingBuilder().Create()),
                               CreateCallFactory(),
-                              nullptr) {}
+                              /*event_log_factory=*/nullptr,
+                              rtc::MakeUnique<DefaultFecControllerFactory>(),
+                              /*network_controller_factory=*/nullptr) {}
 
   std::unique_ptr<cricket::SctpTransportInternalFactory>
   CreateSctpTransportInternalFactory() {

@@ -7,6 +7,7 @@ include_rules = [
   "+logging/rtc_event_log",
   "+media",
   "+modules/audio_device",
+  "+modules/audio_mixer",
   "+modules/audio_processing",
   "+modules/congestion_controller",
   "+modules/rtp_rtcp",

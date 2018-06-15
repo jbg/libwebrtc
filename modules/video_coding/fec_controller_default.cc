@@ -10,6 +10,8 @@
 
 #include "modules/video_coding/fec_controller_default.h"
 
+#include "rtc_base/ptr_util.h"
+
 namespace webrtc {
 using rtc::CritScope;
 FecControllerDefault::FecControllerDefault(
@@ -167,4 +169,10 @@ void FecControllerDefault::UpdateWithEncodedData(
     }
   }
 }
+
+std::unique_ptr<FecController>
+DefaultFecControllerFactory::CreateFecController() {
+  return rtc::MakeUnique<FecControllerDefault>(Clock::GetRealTimeClock());
+}
+
 }  // namespace webrtc

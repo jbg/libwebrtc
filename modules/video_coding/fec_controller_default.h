@@ -54,5 +54,12 @@ class FecControllerDefault : public FecController {
   RTC_DISALLOW_COPY_AND_ASSIGN(FecControllerDefault);
 };
 
+// Will always use realtime clock.
+class DefaultFecControllerFactory : public FecControllerFactoryInterface {
+ public:
+  DefaultFecControllerFactory() = default;
+  std::unique_ptr<FecController> CreateFecController() override;
+};
+
 }  // namespace webrtc
 #endif  // MODULES_VIDEO_CODING_FEC_CONTROLLER_DEFAULT_H_

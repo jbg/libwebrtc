@@ -216,10 +216,7 @@ rtc_static_library("rtc_internal_video_codecs") {
 
 rtc_static_library("rtc_audio_video") {
   visibility = [ "*" ]
-  allow_poison = [
-    "audio_codecs",  # TODO(bugs.webrtc.org/8396): Remove.
-    "software_video_codecs",  # TODO(bugs.webrtc.org/7925): Remove.
-  ]
+  allow_poison = [ "audio_codecs" ]  # TODO(bugs.webrtc.org/8396): Remove.
   defines = []
   libs = []
   deps = [
@@ -295,9 +292,6 @@ rtc_static_library("rtc_audio_video") {
   } else {
     deps += [ "../modules/audio_processing/aec_dump:null_aec_dump_factory" ]
   }
-  if (rtc_use_builtin_sw_codecs) {
-    deps += [ ":rtc_internal_video_codecs" ]
-  }
   deps += [
     ":rtc_constants",
     ":rtc_media_base",
@@ -316,8 +310,6 @@ rtc_static_library("rtc_audio_video") {
     "../call:video_stream_api",
     "../common_video:common_video",
     "../modules/audio_device:audio_device",
-    "../modules/audio_device:audio_device_impl",
-    "../modules/audio_mixer:audio_mixer_impl",
     "../modules/audio_processing:audio_processing",
     "../modules/video_capture:video_capture_module",
     "../modules/video_coding:webrtc_vp8_helpers",
