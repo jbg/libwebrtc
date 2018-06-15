@@ -35,7 +35,8 @@ class FakeWebRtcVcmFactory : public cricket::WebRtcVcmFactoryInterface {
   virtual void DestroyDeviceInfo(webrtc::VideoCaptureModule::DeviceInfo* info) {
   }
   void OnDestroyed(webrtc::VideoCaptureModule* module) {
-    std::remove(modules.begin(), modules.end(), module);
+    modules.erase(std::remove(modules.begin(), modules.end(), module),
+                  modules.end());
   }
   FakeWebRtcDeviceInfo device_info;
   std::vector<rtc::scoped_refptr<FakeWebRtcVideoCaptureModule>> modules;
