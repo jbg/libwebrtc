@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37216ca5_e96411cd",
+        "filename": "media/engine/fakewebrtcvcmfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-15T08:32:09Z",
+      "side": 1,
+      "message": "This makes no sense. When the capture module is destroyed, we try to remove it from the factory\u0027s list of modules. But the module is reference counted, so if the factory still has a reference, how could it be destroyed?\n\nWe get errors \"pure virtual function called\", where Release on the module is called when it is already half destructed. Which likely happens at the time the factory is destructed, even if I haven\u0027t quite been able to wrap my head around the sequence of calls.\n\nAnyway, if all that should happen is that the factory keeps references to the modules until\nit is destructed, OnDestroyed is pointless. I\u0027ll try deleting it.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 1
+      },
+      "revId": "1c9105a0212e2d681b36182e8f01fa929d7dceea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
