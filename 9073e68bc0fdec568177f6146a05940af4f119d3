@@ -22,6 +22,30 @@
       "revId": "9073e68bc0fdec568177f6146a05940af4f119d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d2f362c_f3e2c761",
+        "filename": "test/fuzzers/ulpfec_generator_fuzzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2018-06-15T12:56:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bc1cac0_0746db7e",
+      "range": {
+        "startLine": 52,
+        "startChar": 19,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "9073e68bc0fdec568177f6146a05940af4f119d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
