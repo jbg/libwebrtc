@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "657e4ef5_bbc22225",
+        "filename": "modules/congestion_controller/bbr/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7343
+      },
+      "writtenOn": "2018-06-15T12:48:15Z",
+      "side": 1,
+      "message": "Same listed twice.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 42
+      },
+      "revId": "c8d782fdc4401eee129ec89fbd4f46bb402845d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
