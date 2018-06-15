@@ -118,6 +118,30 @@
       "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a639812e_c9eeeda5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-15T10:27:46Z",
+      "side": 0,
+      "message": "To crop, we should be able to do that cheaply, with no scaling or copying. Either here, using WrapI420Buffer, or preferably closer to the encoder that requires the size to be a multiple of 4.",
+      "parentUuid": "bb7619dd_dbc20dd1",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
