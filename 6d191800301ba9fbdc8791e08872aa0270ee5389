@@ -142,6 +142,30 @@
       "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3f8d62d_f3d33f0a",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-06-15T11:37:43Z",
+      "side": 0,
+      "message": "It\u0027s hard to do it further down, as the decision to crop is made here in VideoStreamEncoder::ReconfigureEncoder(). If we can do it cheaply, we should totally do that. I think, at the time this code was added WrapI420Buffer was not available. If it\u0027s possible to do it in this CL, let\u0027s do that. Otherwise, please create a new bug and we will fix that in a later CL.",
+      "parentUuid": "a639812e_c9eeeda5",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
