@@ -17,6 +17,7 @@
 #include "api/call/callfactoryinterface.h"
 #include "logging/rtc_event_log/rtc_event_log_factory.h"
 #include "media/base/fakemediaengine.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "p2p/base/fakeportallocator.h"
 #include "pc/mediasession.h"
 #include "pc/peerconnectionwrapper.h"
@@ -77,7 +78,8 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
     auto pc_factory = CreateModularPeerConnectionFactory(
         rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
         std::move(media_engine), CreateCallFactory(),
-        CreateRtcEventLogFactory());
+        CreateRtcEventLogFactory(),
+        rtc::MakeUnique<DefaultFecControllerFactory>(), nullptr);
 
     auto fake_port_allocator = rtc::MakeUnique<cricket::FakePortAllocator>(
         rtc::Thread::Current(), nullptr);

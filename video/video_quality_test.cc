@@ -1122,6 +1122,7 @@ VideoQualityTest::VideoQualityTest()
 VideoQualityTest::VideoQualityTest(
     std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory)
     : VideoQualityTest() {
+  // Note, this is stored in our base class, CallTest.
   fec_controller_factory_ = std::move(fec_controller_factory);
 }
 
@@ -1967,8 +1968,10 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
     recv_event_log_ = RtcEventLog::CreateNull();
   }
 
-  Call::Config send_call_config(send_event_log_.get());
-  Call::Config recv_call_config(recv_event_log_.get());
+  Call::Config send_call_config(send_event_log_.get(),
+                                fec_controller_factory_.get());
+  Call::Config recv_call_config(recv_event_log_.get(),
+                                fec_controller_factory_.get());
   send_call_config.bitrate_config = params.call.call_bitrate_config;
   recv_call_config.bitrate_config = params.call.call_bitrate_config;
 
@@ -2146,7 +2149,7 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
 
     // TODO(ivica): Remove bitrate_config and use the default Call::Config(), to
     // match the full stack tests.
-    Call::Config call_config(event_log_.get());
+    Call::Config call_config(event_log_.get(), fec_controller_factory_.get());
     call_config.bitrate_config = params_.call.call_bitrate_config;
 
     rtc::scoped_refptr<TestAudioDeviceModule> fake_audio_device =

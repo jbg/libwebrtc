@@ -103,7 +103,7 @@ class BitrateEstimatorTest : public test::CallTest {
 
   virtual void SetUp() {
     task_queue_.SendTask([this]() {
-      Call::Config config(event_log_.get());
+      Call::Config config(event_log_.get(), fec_controller_factory_.get());
       receiver_call_.reset(Call::Create(config));
       sender_call_.reset(Call::Create(config));
 

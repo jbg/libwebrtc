@@ -79,7 +79,7 @@ RampUpTester::~RampUpTester() {
 }
 
 Call::Config RampUpTester::GetSenderCallConfig() {
-  Call::Config call_config(&event_log_);
+  Call::Config call_config(&event_log_, &fec_controller_factory_);
   if (start_bitrate_bps_ != 0) {
     call_config.bitrate_config.start_bitrate_bps = start_bitrate_bps_;
   }
@@ -440,7 +440,7 @@ void RampUpDownUpTester::PollStats() {
 }
 
 Call::Config RampUpDownUpTester::GetReceiverCallConfig() {
-  Call::Config config(&event_log_);
+  Call::Config config(&event_log_, &fec_controller_factory_);
   config.bitrate_config.min_bitrate_bps = 10000;
   return config;
 }

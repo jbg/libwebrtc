@@ -12,6 +12,7 @@
 
 #include "api/peerconnectionproxy.h"
 #include "media/base/fakemediaengine.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "pc/mediasession.h"
 #include "pc/peerconnection.h"
 #include "pc/peerconnectionfactory.h"
@@ -41,10 +42,12 @@ class PeerConnectionFactoryForDataChannelTest
             rtc::Thread::Current(),
             rtc::MakeUnique<cricket::FakeMediaEngine>(),
             CreateCallFactory(),
-            nullptr) {}
+            /*event_log_factory=*/nullptr,
+            rtc::MakeUnique<DefaultFecControllerFactory>(),
+            /*network_controller_factory=*/nullptr) {}
 
   std::unique_ptr<cricket::SctpTransportInternalFactory>
-  CreateSctpTransportInternalFactory() {
+  CreateSctpTransportInternalFactory() override {
     auto factory = rtc::MakeUnique<FakeSctpTransportFactory>();
     last_fake_sctp_transport_factory_ = factory.get();
     return factory;

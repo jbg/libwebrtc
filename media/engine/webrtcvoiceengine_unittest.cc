@@ -23,7 +23,9 @@
 #include "media/engine/fakewebrtccall.h"
 #include "media/engine/webrtcvoiceengine.h"
 #include "modules/audio_device/include/mock_audio_device.h"
+#include "modules/audio_mixer/audio_mixer_impl.h"
 #include "modules/audio_processing/include/mock_audio_processing.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "pc/channel.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/byteorder.h"
@@ -137,7 +139,8 @@ TEST(WebRtcVoiceEngineTestStubLibrary, StartupShutdown) {
   {
     cricket::WebRtcVoiceEngine engine(
         &adm, webrtc::MockAudioEncoderFactory::CreateUnusedFactory(),
-        webrtc::MockAudioDecoderFactory::CreateUnusedFactory(), nullptr, apm);
+        webrtc::MockAudioDecoderFactory::CreateUnusedFactory(),
+        webrtc::AudioMixerImpl::Create(), apm);
     engine.Init();
   }
 }
@@ -192,8 +195,9 @@ class WebRtcVoiceEngineTestFake : public testing::Test {
     // factories. Those tests should probably be moved elsewhere.
     auto encoder_factory = webrtc::CreateBuiltinAudioEncoderFactory();
     auto decoder_factory = webrtc::CreateBuiltinAudioDecoderFactory();
-    engine_.reset(new cricket::WebRtcVoiceEngine(
-        &adm_, encoder_factory, decoder_factory, nullptr, apm_));
+    engine_.reset(
+        new cricket::WebRtcVoiceEngine(&adm_, encoder_factory, decoder_factory,
+                                       webrtc::AudioMixerImpl::Create(), apm_));
     engine_->Init();
     send_parameters_.codecs.push_back(kPcmuCodec);
     recv_parameters_.codecs.push_back(kPcmuCodec);
@@ -3373,11 +3377,13 @@ TEST(WebRtcVoiceEngineTest, StartupShutdown) {
       webrtc::AudioProcessingBuilder().Create();
   cricket::WebRtcVoiceEngine engine(
       &adm, webrtc::MockAudioEncoderFactory::CreateUnusedFactory(),
-      webrtc::MockAudioDecoderFactory::CreateUnusedFactory(), nullptr, apm);
+      webrtc::MockAudioDecoderFactory::CreateUnusedFactory(),
+      webrtc::AudioMixerImpl::Create(), apm);
   engine.Init();
   webrtc::RtcEventLogNullImpl event_log;
+  webrtc::DefaultFecControllerFactory fec_factory;
   std::unique_ptr<webrtc::Call> call(
-      webrtc::Call::Create(webrtc::Call::Config(&event_log)));
+      webrtc::Call::Create(webrtc::Call::Config(&event_log, &fec_factory)));
   cricket::VoiceMediaChannel* channel = engine.CreateChannel(
       call.get(), cricket::MediaConfig(), cricket::AudioOptions());
   EXPECT_TRUE(channel != nullptr);
@@ -3396,11 +3402,13 @@ TEST(WebRtcVoiceEngineTest, StartupShutdownWithExternalADM) {
         webrtc::AudioProcessingBuilder().Create();
     cricket::WebRtcVoiceEngine engine(
         &adm, webrtc::MockAudioEncoderFactory::CreateUnusedFactory(),
-        webrtc::MockAudioDecoderFactory::CreateUnusedFactory(), nullptr, apm);
+        webrtc::MockAudioDecoderFactory::CreateUnusedFactory(),
+        webrtc::AudioMixerImpl::Create(), apm);
     engine.Init();
     webrtc::RtcEventLogNullImpl event_log;
+    webrtc::DefaultFecControllerFactory fec_factory;
     std::unique_ptr<webrtc::Call> call(
-        webrtc::Call::Create(webrtc::Call::Config(&event_log)));
+        webrtc::Call::Create(webrtc::Call::Config(&event_log, &fec_factory)));
     cricket::VoiceMediaChannel* channel = engine.CreateChannel(
         call.get(), cricket::MediaConfig(), cricket::AudioOptions());
     EXPECT_TRUE(channel != nullptr);
@@ -3417,7 +3425,8 @@ TEST(WebRtcVoiceEngineTest, HasCorrectPayloadTypeMapping) {
       webrtc::AudioProcessingBuilder().Create();
   cricket::WebRtcVoiceEngine engine(
       &adm, webrtc::MockAudioEncoderFactory::CreateUnusedFactory(),
-      webrtc::MockAudioDecoderFactory::CreateUnusedFactory(), nullptr, apm);
+      webrtc::MockAudioDecoderFactory::CreateUnusedFactory(),
+      webrtc::AudioMixerImpl::Create(), apm);
   engine.Init();
   for (const cricket::AudioCodec& codec : engine.send_codecs()) {
     auto is_codec = [&codec](const char* name, int clockrate = 0) {
@@ -3462,11 +3471,13 @@ TEST(WebRtcVoiceEngineTest, Has32Channels) {
       webrtc::AudioProcessingBuilder().Create();
   cricket::WebRtcVoiceEngine engine(
       &adm, webrtc::MockAudioEncoderFactory::CreateUnusedFactory(),
-      webrtc::MockAudioDecoderFactory::CreateUnusedFactory(), nullptr, apm);
+      webrtc::MockAudioDecoderFactory::CreateUnusedFactory(),
+      webrtc::AudioMixerImpl::Create(), apm);
   engine.Init();
   webrtc::RtcEventLogNullImpl event_log;
+  webrtc::DefaultFecControllerFactory fec_factory;
   std::unique_ptr<webrtc::Call> call(
-      webrtc::Call::Create(webrtc::Call::Config(&event_log)));
+      webrtc::Call::Create(webrtc::Call::Config(&event_log, &fec_factory)));
 
   cricket::VoiceMediaChannel* channels[32];
   size_t num_channels = 0;
@@ -3500,11 +3511,13 @@ TEST(WebRtcVoiceEngineTest, SetRecvCodecs) {
       webrtc::AudioProcessingBuilder().Create();
   cricket::WebRtcVoiceEngine engine(
       &adm, webrtc::MockAudioEncoderFactory::CreateUnusedFactory(),
-      webrtc::CreateBuiltinAudioDecoderFactory(), nullptr, apm);
+      webrtc::CreateBuiltinAudioDecoderFactory(),
+      webrtc::AudioMixerImpl::Create(), apm);
   engine.Init();
   webrtc::RtcEventLogNullImpl event_log;
+  webrtc::DefaultFecControllerFactory fec_factory;
   std::unique_ptr<webrtc::Call> call(
-      webrtc::Call::Create(webrtc::Call::Config(&event_log)));
+      webrtc::Call::Create(webrtc::Call::Config(&event_log, &fec_factory)));
   cricket::WebRtcVoiceMediaChannel channel(&engine, cricket::MediaConfig(),
                                            cricket::AudioOptions(), call.get());
   cricket::AudioRecvParameters parameters;
@@ -3541,7 +3554,8 @@ TEST(WebRtcVoiceEngineTest, CollectRecvCodecs) {
   rtc::scoped_refptr<webrtc::AudioProcessing> apm =
       webrtc::AudioProcessingBuilder().Create();
   cricket::WebRtcVoiceEngine engine(&adm, unused_encoder_factory,
-                                    mock_decoder_factory, nullptr, apm);
+                                    mock_decoder_factory,
+                                    webrtc::AudioMixerImpl::Create(), apm);
   engine.Init();
   auto codecs = engine.recv_codecs();
   EXPECT_EQ(11u, codecs.size());

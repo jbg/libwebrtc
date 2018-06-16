@@ -10,6 +10,7 @@
 
 #include "media/engine/convert_legacy_video_factory.h"
 
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -189,7 +190,7 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
     }
 
     const VideoCodec codec(format);
-    const VideoDecoderParams params = {};
+    const VideoDecoderParams params = {receive_stream_id_};
     if (external_decoder_factory_ != nullptr) {
       std::unique_ptr<webrtc::VideoDecoder> external_decoder =
           CreateScopedVideoDecoder(external_decoder_factory_.get(), codec,
@@ -213,8 +214,13 @@ class DecoderAdapter : public webrtc::VideoDecoderFactory {
     return std::vector<webrtc::SdpVideoFormat>();
   }
 
+  void SetReceiveStreamId(const std::string& receive_stream_id) override {
+    receive_stream_id_ = receive_stream_id;
+  }
+
  private:
   const std::unique_ptr<WebRtcVideoDecoderFactory> external_decoder_factory_;
+  std::string receive_stream_id_;
 };
 
 }  // namespace

@@ -44,7 +44,6 @@
 #include "modules/rtp_rtcp/source/byte_io.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/utility/include/process_thread.h"
-#include "modules/video_coding/fec_controller_default.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/location.h"
@@ -447,6 +446,7 @@ Call::Call(const Call::Config& config,
       video_send_delay_stats_(new SendDelayStats(clock_)),
       start_ms_(clock_->TimeInMilliseconds()) {
   RTC_DCHECK(config.event_log != nullptr);
+  RTC_DCHECK(config.fec_controller_factory != nullptr);
   transport_send->RegisterTargetTransferRateObserver(this);
   transport_send_ = std::move(transport_send);
   transport_send_ptr_ = transport_send_.get();
@@ -751,15 +751,9 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
 webrtc::VideoSendStream* Call::CreateVideoSendStream(
     webrtc::VideoSendStream::Config config,
     VideoEncoderConfig encoder_config) {
-  if (config_.fec_controller_factory) {
-    RTC_LOG(LS_INFO) << "External FEC Controller will be used.";
-  }
-  std::unique_ptr<FecController> fec_controller =
-      config_.fec_controller_factory
-          ? config_.fec_controller_factory->CreateFecController()
-          : rtc::MakeUnique<FecControllerDefault>(Clock::GetRealTimeClock());
-  return CreateVideoSendStream(std::move(config), std::move(encoder_config),
-                               std::move(fec_controller));
+  return CreateVideoSendStream(
+      std::move(config), std::move(encoder_config),
+      config_.fec_controller_factory->CreateFecController());
 }
 
 void Call::DestroyVideoSendStream(webrtc::VideoSendStream* send_stream) {

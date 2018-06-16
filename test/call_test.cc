@@ -17,6 +17,7 @@
 #include "api/video_codecs/video_encoder_config.h"
 #include "call/rtp_transport_controller_send.h"
 #include "modules/audio_mixer/audio_mixer_impl.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
 #include "rtc_base/ptr_util.h"
@@ -33,6 +34,7 @@ const int kVideoRotationRtpExtensionId = 4;
 CallTest::CallTest()
     : clock_(Clock::GetRealTimeClock()),
       event_log_(RtcEventLog::CreateNull()),
+      fec_controller_factory_(new DefaultFecControllerFactory()),
       sender_call_transport_controller_(nullptr),
       video_send_config_(nullptr),
       video_send_stream_(nullptr),
@@ -482,10 +484,14 @@ const std::map<uint8_t, MediaType> CallTest::payload_type_map_ = {
     {CallTest::kAudioSendPayloadType, MediaType::AUDIO},
     {CallTest::kDefaultKeepalivePayloadType, MediaType::ANY}};
 
-BaseTest::BaseTest() : event_log_(RtcEventLog::CreateNull()) {}
+BaseTest::BaseTest()
+    : event_log_(RtcEventLog::CreateNull()),
+      fec_controller_factory_(new DefaultFecControllerFactory()) {}
 
 BaseTest::BaseTest(unsigned int timeout_ms)
-    : RtpRtcpObserver(timeout_ms), event_log_(RtcEventLog::CreateNull()) {}
+    : RtpRtcpObserver(timeout_ms),
+      event_log_(RtcEventLog::CreateNull()),
+      fec_controller_factory_(new DefaultFecControllerFactory()) {}
 
 BaseTest::~BaseTest() {
 }
@@ -503,11 +509,11 @@ void BaseTest::OnFakeAudioDevicesCreated(
     TestAudioDeviceModule* recv_audio_device) {}
 
 Call::Config BaseTest::GetSenderCallConfig() {
-  return Call::Config(event_log_.get());
+  return Call::Config(event_log_.get(), fec_controller_factory_.get());
 }
 
 Call::Config BaseTest::GetReceiverCallConfig() {
-  return Call::Config(event_log_.get());
+  return Call::Config(event_log_.get(), fec_controller_factory_.get());
 }
 
 void BaseTest::OnRtpTransportControllerSendCreated(

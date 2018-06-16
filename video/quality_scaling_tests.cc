@@ -105,7 +105,7 @@ void QualityScalingTest::RunTest(VideoEncoderFactory* encoder_factory,
     }
 
     Call::Config GetSenderCallConfig() override {
-      Call::Config config(event_log_.get());
+      Call::Config config(event_log_.get(), fec_controller_factory_.get());
       config.bitrate_config.start_bitrate_bps = start_bps_;
       return config;
     }

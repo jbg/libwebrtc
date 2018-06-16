@@ -44,7 +44,7 @@ class ProbingTest : public test::EndToEndTest {
   ~ProbingTest() {}
 
   Call::Config GetSenderCallConfig() override {
-    Call::Config config(event_log_.get());
+    Call::Config config(event_log_.get(), fec_controller_factory_.get());
     config.bitrate_config.start_bitrate_bps = start_bitrate_bps_;
     return config;
   }
