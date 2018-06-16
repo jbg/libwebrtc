@@ -24,6 +24,7 @@
 #include "call/rtp_transport_controller_send.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
 #include "media/base/mediachannel.h"  // For MediaConfig.
+#include "modules/video_coding/fec_controller_default.h"
 #include "pc/channelmanager.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/sigslot.h"
@@ -196,6 +197,7 @@ class RtpTransportControllerAdapter : public RtpTransportControllerInterface,
   RtpKeepAliveConfig keepalive_;
   cricket::ChannelManager* channel_manager_;
   webrtc::RtcEventLog* event_log_;
+  DefaultFecControllerFactory fec_controller_factory_;
   std::unique_ptr<Call> call_;
   webrtc::RtpTransportControllerSend* call_send_rtp_transport_controller_;
 

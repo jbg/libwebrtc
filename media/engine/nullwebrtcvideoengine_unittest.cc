@@ -11,6 +11,7 @@
 #include "media/engine/nullwebrtcvideoengine.h"
 #include "media/engine/webrtcvoiceengine.h"
 #include "modules/audio_device/include/mock_audio_device.h"
+#include "modules/audio_mixer/audio_mixer_impl.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "test/gtest.h"
 #include "test/mock_audio_decoder_factory.h"
@@ -31,7 +32,7 @@ class WebRtcMediaEngineNullVideo
             std::forward_as_tuple(adm,
                                   audio_encoder_factory,
                                   audio_decoder_factory,
-                                  nullptr,
+                                  webrtc::AudioMixerImpl::Create(),
                                   webrtc::AudioProcessingBuilder().Create()),
             std::forward_as_tuple()) {}
 };

@@ -75,7 +75,8 @@ TEST_F(SsrcEndToEndTest, UnknownRtpPacketGivesUnknownSsrcReturnCode) {
 
   task_queue_.SendTask([this, &send_transport, &receive_transport,
                         &input_observer]() {
-    CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+    CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+                Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
     send_transport = rtc::MakeUnique<test::DirectTransport>(
         &task_queue_, sender_call_.get(), payload_type_map_);

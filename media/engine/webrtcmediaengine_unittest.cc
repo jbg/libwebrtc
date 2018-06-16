@@ -15,6 +15,8 @@
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "media/engine/webrtcmediaengine.h"
+#include "modules/audio_device/include/audio_device.h"
+#include "modules/audio_mixer/audio_mixer_impl.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "test/gtest.h"
 
@@ -241,10 +243,13 @@ TEST(WebRtcMediaEngineTest, FilterRtpExtensions_RemoveRedundantBwe_3) {
 
 TEST(WebRtcMediaEngineFactoryTest, CreateWithBuiltinDecoders) {
   std::unique_ptr<MediaEngineInterface> engine(WebRtcMediaEngineFactory::Create(
-      nullptr /* adm */, webrtc::CreateBuiltinAudioEncoderFactory(),
+      webrtc::AudioDeviceModule::Create(
+          webrtc::AudioDeviceModule::kPlatformDefaultAudio),
+      webrtc::CreateBuiltinAudioEncoderFactory(),
       webrtc::CreateBuiltinAudioDecoderFactory(),
       webrtc::CreateBuiltinVideoEncoderFactory(),
-      webrtc::CreateBuiltinVideoDecoderFactory(), nullptr /* audio_mixer */,
+      webrtc::CreateBuiltinVideoDecoderFactory(),
+      webrtc::AudioMixerImpl::Create(),
       webrtc::AudioProcessingBuilder().Create()));
   EXPECT_TRUE(engine);
 }

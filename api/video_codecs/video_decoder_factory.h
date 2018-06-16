@@ -12,6 +12,7 @@
 #define API_VIDEO_CODECS_VIDEO_DECODER_FACTORY_H_
 
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace webrtc {
@@ -30,6 +31,12 @@ class VideoDecoderFactory {
   // Creates a VideoDecoder for the specified format.
   virtual std::unique_ptr<VideoDecoder> CreateVideoDecoder(
       const SdpVideoFormat& format) = 0;
+
+  // Hack in order to pass in |receive_stream_id| (a MediaStreamTrack ID) to
+  // legacy clients. New code should not use this.
+  // TODO(bugs.webrtc.org/7925): Remove once WebRtcVideoDecoderFactory is
+  // deprecated.
+  virtual void SetReceiveStreamId(const std::string& receive_stream_id) {}
 
   virtual ~VideoDecoderFactory() {}
 };

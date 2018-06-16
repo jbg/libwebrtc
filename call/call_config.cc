@@ -12,8 +12,11 @@
 
 namespace webrtc {
 
-CallConfig::CallConfig(RtcEventLog* event_log) : event_log(event_log) {
+CallConfig::CallConfig(RtcEventLog* event_log,
+                       FecControllerFactoryInterface* fec_controller_factory)
+    : event_log(event_log), fec_controller_factory(fec_controller_factory) {
   RTC_DCHECK(event_log);
+  RTC_DCHECK(fec_controller_factory);
 }
 CallConfig::~CallConfig() = default;
 

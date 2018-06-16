@@ -83,7 +83,8 @@ void NetworkStateEndToEndTest::VerifyNewVideoSendStreamsRespectNetworkState(
 
   task_queue_.SendTask([this, network_to_bring_up, &encoder_factory,
                         transport]() {
-    CreateSenderCall(Call::Config(event_log_.get()));
+    CreateSenderCall(
+        Call::Config(event_log_.get(), fec_controller_factory_.get()));
     sender_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
 
     CreateSendConfig(1, 0, 0, transport);
@@ -111,7 +112,7 @@ void NetworkStateEndToEndTest::VerifyNewVideoReceiveStreamsRespectNetworkState(
 
   task_queue_.SendTask([this, &sender_transport, network_to_bring_up,
                         transport]() {
-    Call::Config config(event_log_.get());
+    Call::Config config(event_log_.get(), fec_controller_factory_.get());
     CreateCalls(config, config);
     receiver_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
     sender_transport = rtc::MakeUnique<test::DirectTransport>(

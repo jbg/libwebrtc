@@ -289,7 +289,7 @@ void PictureIdTest::SetupEncoder(VideoEncoderFactory* encoder_factory,
       new PictureIdObserver(PayloadStringToCodecType(payload_name)));
 
   task_queue_.SendTask([this, encoder_factory, payload_name]() {
-    Call::Config config(event_log_.get());
+    Call::Config config(event_log_.get(), fec_controller_factory_.get());
     CreateCalls(config, config);
 
     send_transport_.reset(new test::PacketTransport(

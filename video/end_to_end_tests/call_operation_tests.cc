@@ -40,7 +40,8 @@ INSTANTIATE_TEST_CASE_P(
                       "WebRTC-TaskQueueCongestionControl/Enabled/"));
 
 TEST_P(CallOperationEndToEndTest, ReceiverCanBeStartedTwice) {
-  CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+  CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+              Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
   test::NullTransport transport;
   CreateSendConfig(1, 0, 0, &transport);
@@ -55,7 +56,8 @@ TEST_P(CallOperationEndToEndTest, ReceiverCanBeStartedTwice) {
 }
 
 TEST_P(CallOperationEndToEndTest, ReceiverCanBeStoppedTwice) {
-  CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+  CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+              Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
   test::NullTransport transport;
   CreateSendConfig(1, 0, 0, &transport);
@@ -70,7 +72,8 @@ TEST_P(CallOperationEndToEndTest, ReceiverCanBeStoppedTwice) {
 }
 
 TEST_P(CallOperationEndToEndTest, ReceiverCanBeStoppedAndRestarted) {
-  CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+  CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+              Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
   test::NullTransport transport;
   CreateSendConfig(1, 0, 0, &transport);
@@ -113,7 +116,8 @@ TEST_P(CallOperationEndToEndTest, RendersSingleDelayedFrame) {
 
   task_queue_.SendTask([this, &renderer, &frame_forwarder, &sender_transport,
                         &receiver_transport]() {
-    CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+    CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+                Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
     sender_transport = rtc::MakeUnique<test::DirectTransport>(
         &task_queue_, sender_call_.get(), payload_type_map_);
@@ -173,7 +177,8 @@ TEST_P(CallOperationEndToEndTest, TransmitsFirstFrame) {
 
   task_queue_.SendTask([this, &renderer, &frame_generator, &frame_forwarder,
                         &sender_transport, &receiver_transport]() {
-    CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+    CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+                Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
     sender_transport = rtc::MakeUnique<test::DirectTransport>(
         &task_queue_, sender_call_.get(), payload_type_map_);
@@ -250,7 +255,8 @@ TEST_P(CallOperationEndToEndTest, ObserversEncodedFrames) {
   std::unique_ptr<test::DirectTransport> receiver_transport;
 
   task_queue_.SendTask([&]() {
-    CreateCalls(Call::Config(event_log_.get()), Call::Config(event_log_.get()));
+    CreateCalls(Call::Config(event_log_.get(), fec_controller_factory_.get()),
+                Call::Config(event_log_.get(), fec_controller_factory_.get()));
 
     sender_transport = rtc::MakeUnique<test::DirectTransport>(
         &task_queue_, sender_call_.get(), payload_type_map_);

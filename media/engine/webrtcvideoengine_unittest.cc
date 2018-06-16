@@ -38,9 +38,10 @@
 #include "media/engine/simulcast.h"
 #include "media/engine/webrtcvideoengine.h"
 #include "media/engine/webrtcvoiceengine.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "rtc_base/arraysize.h"
-#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/stringutils.h"
 #include "test/field_trial.h"
 #include "test/gmock.h"
@@ -182,7 +183,8 @@ class WebRtcVideoEngineTest : public ::testing::Test {
   WebRtcVideoEngineTest() : WebRtcVideoEngineTest("") {}
   explicit WebRtcVideoEngineTest(const char* field_trials)
       : override_field_trials_(field_trials),
-        call_(webrtc::Call::Create(webrtc::Call::Config(&event_log_))),
+        call_(webrtc::Call::Create(
+            webrtc::Call::Config(&event_log_, &fec_controller_factory_))),
         encoder_factory_(new cricket::FakeWebRtcVideoEncoderFactory),
         decoder_factory_(new cricket::FakeWebRtcVideoDecoderFactory),
         engine_(std::unique_ptr<cricket::FakeWebRtcVideoEncoderFactory>(
@@ -211,6 +213,7 @@ class WebRtcVideoEngineTest : public ::testing::Test {
 
   webrtc::test::ScopedFieldTrials override_field_trials_;
   webrtc::RtcEventLogNullImpl event_log_;
+  webrtc::DefaultFecControllerFactory fec_controller_factory_;
   // Used in WebRtcVideoEngineVoiceTest, but defined here so it's properly
   // initialized when the constructor is called.
   std::unique_ptr<webrtc::Call> call_;
@@ -1000,8 +1003,9 @@ TEST(WebRtcVideoEngineNewVideoCodecFactoryTest, Vp8) {
 
   // Create a call.
   webrtc::RtcEventLogNullImpl event_log;
+  webrtc::DefaultFecControllerFactory fec_factory;
   std::unique_ptr<webrtc::Call> call(
-      webrtc::Call::Create(webrtc::Call::Config(&event_log)));
+      webrtc::Call::Create(webrtc::Call::Config(&event_log, &fec_factory)));
 
   // Create send channel.
   const int send_ssrc = 123;
@@ -1062,8 +1066,9 @@ TEST(WebRtcVideoEngineNewVideoCodecFactoryTest, NullDecoder) {
 
   // Create a call.
   webrtc::RtcEventLogNullImpl event_log;
+  webrtc::DefaultFecControllerFactory fec_factory;
   std::unique_ptr<webrtc::Call> call(
-      webrtc::Call::Create(webrtc::Call::Config(&event_log)));
+      webrtc::Call::Create(webrtc::Call::Config(&event_log, &fec_factory)));
 
   // Create recv channel.
   const int recv_ssrc = 321;
@@ -1142,7 +1147,8 @@ TEST_F(WebRtcVideoEngineTest, DISABLED_RecreatesEncoderOnContentTypeChange) {
 class WebRtcVideoChannelBaseTest : public testing::Test {
  protected:
   WebRtcVideoChannelBaseTest()
-      : call_(webrtc::Call::Create(webrtc::Call::Config(&event_log_))),
+      : call_(webrtc::Call::Create(
+            webrtc::Call::Config(&event_log_, &fec_controller_factory_))),
         engine_(webrtc::CreateBuiltinVideoEncoderFactory(),
                 webrtc::CreateBuiltinVideoDecoderFactory()) {}
 
@@ -1408,6 +1414,7 @@ class WebRtcVideoChannelBaseTest : public testing::Test {
   }
 
   webrtc::RtcEventLogNullImpl event_log_;
+  webrtc::DefaultFecControllerFactory fec_controller_factory_;
   const std::unique_ptr<webrtc::Call> call_;
   WebRtcVideoEngine engine_;
   std::unique_ptr<cricket::FakeVideoCapturerWithTaskQueue> video_capturer_;

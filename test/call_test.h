@@ -13,6 +13,7 @@
 #include <memory>
 #include <vector>
 
+#include "api/fec_controller.h"
 #include "call/call.h"
 #include "call/rtp_transport_controller_send.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
@@ -119,6 +120,7 @@ class CallTest : public ::testing::Test {
   Clock* const clock_;
 
   std::unique_ptr<webrtc::RtcEventLog> event_log_;
+  std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory_;
   std::unique_ptr<Call> sender_call_;
   RtpTransportControllerSend* sender_call_transport_controller_;
   std::unique_ptr<PacketTransport> send_transport_;
@@ -217,6 +219,7 @@ class BaseTest : public RtpRtcpObserver {
   virtual void OnStreamsStopped();
 
   std::unique_ptr<webrtc::RtcEventLog> event_log_;
+  std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory_;
 };
 
 class SendTest : public BaseTest {

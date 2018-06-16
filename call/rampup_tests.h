@@ -17,6 +17,7 @@
 
 #include "call/call.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "rtc_base/event.h"
 #include "test/call_test.h"
 
@@ -63,6 +64,7 @@ class RampUpTester : public test::EndToEndTest {
   void TriggerTestDone();
 
   webrtc::RtcEventLogNullImpl event_log_;
+  webrtc::DefaultFecControllerFactory fec_controller_factory_;
   rtc::Event stop_event_;
   Clock* const clock_;
   FakeNetworkPipe::Config forward_transport_config_;
