@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d53cf5bb_d99b5a76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3fc9767_be98e1b4",
+      "range": {
+        "startLine": 10,
+        "startChar": 55,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab4bfea1_7730c09c",
         "filename": "api/video/planar_buffer_factory.h",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-14T07:43:04Z",
       "side": 1,
       "message": "I don\u0027t think we need a class for this, I\u0027d prefer functions like\n\n  CreatePlanarFrameBuffer(type, width, height);\n\nAlso, I wonder if we really need these convenience functions, and if they have to be exposed in api/. What are the use cases? We intentionally didn\u0027t add methods like Rotate on the FrameBufferInterface, but if you really need to be able to rotate frame buffers of arbitrary type, then maybe we should reconsider that. Virtual methods are generally preferrable to code with an explicit switch (type), and doesn\u0027t require linking in any code for unused classes.\n\nThere\u0027s one other convenience functions with a switch (type), WrapYuvBuffer, declared in common_video/include/frame_buffer.h, not really sure where that is used.\n\nAnd if convenience functions like these are added to the api, it would be nice if they supported all frame buffer types.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e006db8c_d782816e",
+        "filename": "api/video/planar_buffer_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "I actually was looking forward to your feedback regarding this. There are I420Buffer::Rotate(),C rop() etc. versions of these functions that are being used in capture-to-encode path. If they were to be called on I010 input, we would convert 10-bit into 8-bit and lose the information. That\u0027s why I tried to add new ones. If those calls are all unnecessary, I can completely get rid of this convenience class. If those call are actually necessary, we can keep discussing. But it looks like all can be eliminated. Therefore, I will just get rid of this.",
+      "parentUuid": "ab4bfea1_7730c09c",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e8a5bb4f_a2093416",
+        "filename": "api/video/video_frame_buffer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "KI444 breaks that chain unfortunately. It would be an overkill to make a base class for 4:2:0 subsampling.",
+      "parentUuid": "b043edb3_d0ecbdeb",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 1
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "404670cb_9743ee38",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 10
@@ -82,6 +154,30 @@
       "writtenOn": "2018-06-14T07:43:04Z",
       "side": 1,
       "message": "Is I010 a standard name? Do you have any authoritative reference for the format? (First google hit is https://msdn.microsoft.com/en-us/library/windows/desktop/bb970578(v\u003dvs.85).aspx, which doesn\u0027t even mention \"I010\", which is a bit confusing).",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45ab220f_3e14367b",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "It is the standard naming in libyuv and some codecs, i.e. I420ToI010, VA_FOURCC_I010. That MSDN doc describes P010, which is equivalent of 4:2:0 with 10 bits but those are most significant bits, whereas I420 fills least significant bits. I decided to go with I010 because I make use of those libyuv conversion functions and that is the format libvpx likes.\n\nChrome actually calls it PIXEL_FORMAT_YUV420P10, which is the generic name covering I010, H010 and P010. I can also name it kYUV420P10 as well but it doesn\u0027t really take endianness into account. \nhttps://bugs.chromium.org/p/libyuv/issues/detail?id\u003d751#c5",
+      "parentUuid": "404670cb_9743ee38",
       "range": {
         "startLine": 24,
         "startChar": 6,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "c0ee3f76_ad338fe3",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b29bc1d_55af284c",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 18
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d0cc7c6_f9ad8362",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 10
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "ace3da61_f0473268",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d0cc7c6_f9ad8362",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 21
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fead237b_18f94696",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 10
@@ -151,6 +295,30 @@
       "writtenOn": "2018-06-14T07:43:04Z",
       "side": 1,
       "message": "Document how pixel values are normalized. I mean, Y is conceptually a value in the range 0.0-1.0, does that correspond to DataY()[i] / 1024.0 or DataY()[i] / 65536.0 ?\n\nIn the former case, adding a method giving the bit size would be reasonable.",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 24
+      },
+      "revId": "b562246d09ad774b9df87ccb205cd8b0f76a0ac5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27add8f9_7781136a",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "Well, I am attempting to cover all color depth \u003e8 and \u003c16 in this interface as all of them is aligned by 16 bits. I can also add a 12-bit color depth input later. However, that would be a new Type(corresponding to fourcc code) which would indicate bit size. \nI will comment that lowest significant ten 10 bits are filled in I010BufferInterface.",
+      "parentUuid": "fead237b_18f94696",
       "range": {
         "startLine": 153,
         "startChar": 16,

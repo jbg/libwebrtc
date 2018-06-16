@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9aca070f_631329ca",
+        "filename": "api/video/i010_buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2165cb5_b7241d41",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c042519_6aff1858",
         "filename": "common_video/planar_video_frame_unittest.cc",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-14T10:21:15Z",
       "side": 1,
       "message": "Can you add a hint that this file has moved from i420_video_frame_unittest.cc so that the diff works?",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffae8b26_96c6711f",
+        "filename": "common_video/planar_video_frame_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "I couldn\u0027t actually figure out how to do that in gerrit :) Do you know how to?\n\nSee below for the gerrit bug, I am switching the year back to see if it helps.\nhttps://bugs.chromium.org/p/gerrit/issues/detail?id\u003d6441",
+      "parentUuid": "2c042519_6aff1858",
       "range": {
         "startLine": 1,
         "startChar": 1,
@@ -64,6 +112,53 @@
         "startChar": 7,
         "endLine": 51,
         "endChar": 63
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b6b64a9_938b661f",
+        "filename": "media/base/adaptedvideotracksource.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "Removed, will handle it in the follow-ups. Btw, why do we do it for I420 and not defer that to CVO as well?",
+      "parentUuid": "60173211_872402d3",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 63
+      },
+      "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73aec250_2b07e20f",
+        "filename": "media/base/videocapturer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 1,
+      "message": "I am assuming this is also unnecessary based on the comment on media/base/adaptedvideotracksource.cc. Removing here as well.",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 0
       },
       "revId": "9bb37475849095b4e3c0b8124cae8b26e093728f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",

@@ -166,6 +166,30 @@
       "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba6e2c6e_ea7a7f76",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-16T00:38:53Z",
+      "side": 0,
+      "message": "Note that we cannot use WrapI420Buffer here without calling ToI420() first, which is the expensive operation. i.e., kNative input wouldn\u0027t make it past as well as kI010. I assume we want to handle it in each encoder implementation, after calling ToI420().\n\nEither way, it looks like the conclusion is that this should be removed eventually. I am reverting my changes here. TODO is already there.",
+      "parentUuid": "f3f8d62d_f3d33f0a",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 851,
+        "endChar": 61
+      },
+      "revId": "6d191800301ba9fbdc8791e08872aa0270ee5389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
