@@ -31,11 +31,11 @@ class FakeRtcEventLogFactory : public RtcEventLogFactoryInterface {
       RtcEventLog::EncodingType encoding_type,
       std::unique_ptr<rtc::TaskQueue> task_queue) override;
 
-  webrtc::RtcEventLog* last_log_created() { return last_log_created_; }
+  webrtc::FakeRtcEventLog* last_log_created() { return last_log_created_; }
   rtc::Thread* thread() { return thread_; }
 
  private:
-  webrtc::RtcEventLog* last_log_created_;
+  webrtc::FakeRtcEventLog* last_log_created_ = nullptr;
   rtc::Thread* thread_;
 };
 

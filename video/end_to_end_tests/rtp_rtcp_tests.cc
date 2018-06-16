@@ -268,7 +268,7 @@ void RtpRtcpEndToEndTest::TestRtpStatePreservation(
   std::unique_ptr<test::PacketTransport> send_transport;
   std::unique_ptr<test::PacketTransport> receive_transport;
 
-  Call::Config config(event_log_.get());
+  Call::Config config(event_log_.get(), fec_controller_factory_.get());
   VideoEncoderConfig one_stream;
 
   task_queue_.SendTask([this, &observer, &send_transport, &receive_transport,
@@ -464,7 +464,7 @@ TEST_F(RtpRtcpEndToEndTest, TestFlexfecRtpStatePreservation) {
   static constexpr int kFrameMaxHeight = 180;
   static constexpr int kFrameRate = 15;
 
-  Call::Config config(event_log_.get());
+  Call::Config config(event_log_.get(), fec_controller_factory_.get());
 
   std::unique_ptr<test::PacketTransport> send_transport;
   std::unique_ptr<test::PacketTransport> receive_transport;

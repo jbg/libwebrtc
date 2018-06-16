@@ -46,6 +46,7 @@ rtc_static_library("ortc") {
     "../media:rtc_media",
     "../media:rtc_media_base",
     "../modules/audio_processing:audio_processing",
+    "../modules/video_coding:video_coding",  # For FecControllerDefault
     "../p2p:rtc_p2p",
     "../pc:libjingle_peerconnection",
     "../pc:peerconnection",

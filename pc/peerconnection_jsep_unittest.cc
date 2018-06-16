@@ -13,7 +13,9 @@
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "media/engine/webrtcmediaengine.h"
+#include "modules/audio_mixer/audio_mixer_impl.h"
 #include "modules/audio_processing/include/audio_processing.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "pc/mediasession.h"
 #include "pc/peerconnectionfactory.h"
 #include "pc/peerconnectionwrapper.h"
@@ -56,13 +58,15 @@ class PeerConnectionFactoryForJsepTest : public PeerConnectionFactory {
                                   CreateBuiltinAudioDecoderFactory(),
                                   CreateBuiltinVideoEncoderFactory(),
                                   CreateBuiltinVideoDecoderFactory(),
-                                  nullptr,
+                                  AudioMixerImpl::Create(),
                                   AudioProcessingBuilder().Create()),
                               CreateCallFactory(),
-                              nullptr) {}
+                              /*event_log_factory=*/nullptr,
+                              rtc::MakeUnique<DefaultFecControllerFactory>(),
+                              /*network_controller_factory=*/nullptr) {}
 
   std::unique_ptr<cricket::SctpTransportInternalFactory>
-  CreateSctpTransportInternalFactory() {
+  CreateSctpTransportInternalFactory() override {
     return rtc::MakeUnique<FakeSctpTransportFactory>();
   }
 };

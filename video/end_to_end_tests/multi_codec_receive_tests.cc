@@ -144,7 +144,7 @@ class MultiCodecReceiveTest : public test::CallTest {
  public:
   MultiCodecReceiveTest() {
     task_queue_.SendTask([this]() {
-      Call::Config config(event_log_.get());
+      Call::Config config(event_log_.get(), fec_controller_factory_.get());
       CreateCalls(config, config);
 
       send_transport_.reset(new test::PacketTransport(

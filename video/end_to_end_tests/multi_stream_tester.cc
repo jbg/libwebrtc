@@ -16,6 +16,7 @@
 
 #include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
+#include "modules/video_coding/fec_controller_default.h"
 #include "test/call_test.h"
 #include "test/encoder_settings.h"
 #include "test/function_video_encoder_factory.h"
@@ -39,7 +40,8 @@ MultiStreamTester::~MultiStreamTester() {}
 
 void MultiStreamTester::RunTest() {
   webrtc::RtcEventLogNullImpl event_log;
-  Call::Config config(&event_log);
+  DefaultFecControllerFactory fec_factory;
+  Call::Config config(&event_log, &fec_factory);
   std::unique_ptr<Call> sender_call;
   std::unique_ptr<Call> receiver_call;
   std::unique_ptr<test::DirectTransport> sender_transport;

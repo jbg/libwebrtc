@@ -128,7 +128,6 @@ class VideoQualityTest : public test::CallTest {
   };
 
   std::map<uint8_t, webrtc::MediaType> payload_type_map_;
-  std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory_;
 
   // No-op implementation to be able to instantiate this class from non-TEST_F
   // locations.

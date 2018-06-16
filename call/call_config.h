@@ -23,7 +23,8 @@ class AudioProcessing;
 class RtcEventLog;
 
 struct CallConfig {
-  explicit CallConfig(RtcEventLog* event_log);
+  CallConfig(RtcEventLog* event_log,
+             FecControllerFactoryInterface* fec_controller_factory);
   ~CallConfig();
 
   RTC_DEPRECATED static constexpr int kDefaultStartBitrateBps = 300000;
@@ -44,7 +45,7 @@ struct CallConfig {
   // Use webrtc::RtcEventLog::CreateNull() for a null implementation.
   RtcEventLog* event_log = nullptr;
 
-  // FecController to use for this call.
+  // FecController to use for this call. Required.
   FecControllerFactoryInterface* fec_controller_factory = nullptr;
 
   // Network controller factory to use for this call.
