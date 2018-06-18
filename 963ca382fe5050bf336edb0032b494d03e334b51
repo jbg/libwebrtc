@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c4a4571f_0f099457",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-18T20:02:51Z",
+      "side": 1,
+      "message": "One is I010 to I010 and other is from I420.",
+      "parentUuid": "04d9ed16_85818a92",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 0
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86284eb4_44133774",
         "filename": "api/video/i010_buffer.cc",
         "patchSetId": 12
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "27a622c1_21d4ee22",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-18T20:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86284eb4_44133774",
+      "range": {
+        "startLine": 120,
+        "startChar": 1,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "747adc56_2d7c3c1b",
         "filename": "api/video/i010_buffer.cc",
         "patchSetId": 12
@@ -59,6 +107,30 @@
       "writtenOn": "2018-06-18T08:34:21Z",
       "side": 1,
       "message": "We\u0027ll write each chroma pixel four times.\n\nAlso, it\u0027s not entirely clear to my how rotation should be defined in the case of width or height being odd, it seems rotation will change alignment between Y and UV pixels. An comment on this would be nice.\n\nNot sure how to best write this loop (maybe mirror what libyuv does?). One possibility might be to write the loop to handle four Y pixels per iteration. And the mid-loop switch statement could be replaced by some dest_stride variables, used for direct writes into the data_ array, rather than going via MutableDataX().",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 53
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79e35ae6_de04fffb",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-18T20:02:51Z",
+      "side": 1,
+      "message": "I will move to libyuv implementation as soon as it becomes available. I just wanted to make a placeholder for now, keeping it as simple as possible. Considering I got rid of I010 specific rotate call after magjed@ comment, only use should be the integration test that will be added in the follow-ups.",
+      "parentUuid": "747adc56_2d7c3c1b",
       "range": {
         "startLine": 143,
         "startChar": 0,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "c8e114fc_7760cabe",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-18T20:02:51Z",
+      "side": 1,
+      "message": "If I define it in I0101BufferInterface, it would cause circular dependency as I am using I420Buffer instance. This class is I010 where we own and allocate memory and I010BufferBase is just wrapper. I think it is OK to duplicate between those two implementations.",
+      "parentUuid": "7040632a_855f1c59",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0b16c7c_b91cf2f9",
         "filename": "media/base/adaptedvideotracksource.cc",
         "patchSetId": 12
@@ -114,6 +210,30 @@
       "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "065cd7ad_d5ae1a55",
+        "filename": "media/base/adaptedvideotracksource.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-18T20:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0b16c7c_b91cf2f9",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

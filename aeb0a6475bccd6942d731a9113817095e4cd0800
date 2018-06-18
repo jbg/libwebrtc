@@ -22,6 +22,30 @@
       "revId": "aeb0a6475bccd6942d731a9113817095e4cd0800",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ca04353_cae86c9b",
+        "filename": "common_video/i420_video_frame_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-18T20:02:51Z",
+      "side": 0,
+      "message": "I was trying to get gerrit to recognize rename, but didn\u0027t work. See PS#13 for the revived state. I will rename it after reviewers take a look and stamp.",
+      "parentUuid": "b3b7ace9_df73414b",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "aeb0a6475bccd6942d731a9113817095e4cd0800",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
