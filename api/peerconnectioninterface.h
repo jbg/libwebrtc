@@ -896,22 +896,12 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   // Create a new offer.
   // The CreateSessionDescriptionObserver callback will be called when done.
   virtual void CreateOffer(CreateSessionDescriptionObserver* observer,
-                           const MediaConstraintsInterface* constraints) {}
-
-  // TODO(jiayl): remove the default impl and the old interface when chromium
-  // code is updated.
-  virtual void CreateOffer(CreateSessionDescriptionObserver* observer,
-                           const RTCOfferAnswerOptions& options) {}
+                           const RTCOfferAnswerOptions& options) = 0;
 
   // Create an answer to an offer.
   // The CreateSessionDescriptionObserver callback will be called when done.
   virtual void CreateAnswer(CreateSessionDescriptionObserver* observer,
-                            const RTCOfferAnswerOptions& options) {}
-  // Deprecated - use version above.
-  // TODO(hta): Remove and remove default implementations when all callers
-  // are updated.
-  virtual void CreateAnswer(CreateSessionDescriptionObserver* observer,
-                            const MediaConstraintsInterface* constraints) {}
+                            const RTCOfferAnswerOptions& options) = 0;
 
   // Sets the local session description.
   // The PeerConnection takes the ownership of |desc| even if it fails.
@@ -1308,19 +1298,7 @@ class PeerConnectionFactoryInterface : public rtc::RefCountInterface {
       const PeerConnectionInterface::RTCConfiguration& configuration,
       std::unique_ptr<cricket::PortAllocator> allocator,
       std::unique_ptr<rtc::RTCCertificateGeneratorInterface> cert_generator,
-      PeerConnectionObserver* observer) {
-    return nullptr;
-  }
-  // Deprecated; should use RTCConfiguration for everything that previously
-  // used constraints.
-  virtual rtc::scoped_refptr<PeerConnectionInterface> CreatePeerConnection(
-      const PeerConnectionInterface::RTCConfiguration& configuration,
-      const MediaConstraintsInterface* constraints,
-      std::unique_ptr<cricket::PortAllocator> allocator,
-      std::unique_ptr<rtc::RTCCertificateGeneratorInterface> cert_generator,
-      PeerConnectionObserver* observer) {
-    return nullptr;
-  }
+      PeerConnectionObserver* observer) = 0;
 
   virtual rtc::scoped_refptr<MediaStreamInterface> CreateLocalMediaStream(
       const std::string& stream_id) = 0;
@@ -1359,12 +1337,6 @@ class PeerConnectionFactoryInterface : public rtc::RefCountInterface {
   virtual rtc::scoped_refptr<VideoTrackSourceInterface> CreateVideoSource(
       cricket::VideoCapturer* capturer) {
     return CreateVideoSource(std::unique_ptr<cricket::VideoCapturer>(capturer));
-  }
-  virtual rtc::scoped_refptr<VideoTrackSourceInterface> CreateVideoSource(
-      cricket::VideoCapturer* capturer,
-      const MediaConstraintsInterface* constraints) {
-    return CreateVideoSource(std::unique_ptr<cricket::VideoCapturer>(capturer),
-                             constraints);
   }
 
   // Creates a new local VideoTrack. The same |source| can be used in several

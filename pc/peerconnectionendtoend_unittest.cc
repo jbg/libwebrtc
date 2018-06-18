@@ -77,15 +77,14 @@ class PeerConnectionEndToEndBaseTest : public sigslot::has_slots<>,
   }
 
   void CreatePcs(
-      const MediaConstraintsInterface* pc_constraints,
       rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory1,
       rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory1,
       rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory2,
       rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory2) {
-    EXPECT_TRUE(caller_->CreatePc(pc_constraints, config_,
+    EXPECT_TRUE(caller_->CreatePc(config_,
                                   audio_encoder_factory1,
                                   audio_decoder_factory1));
-    EXPECT_TRUE(callee_->CreatePc(pc_constraints, config_,
+    EXPECT_TRUE(callee_->CreatePc(config_,
                                   audio_encoder_factory2,
                                   audio_decoder_factory2));
     PeerConnectionTestWrapper::Connect(caller_.get(), callee_.get());
@@ -97,10 +96,9 @@ class PeerConnectionEndToEndBaseTest : public sigslot::has_slots<>,
   }
 
   void CreatePcs(
-      const MediaConstraintsInterface* pc_constraints,
       rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory,
       rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory) {
-    CreatePcs(pc_constraints, audio_encoder_factory, audio_decoder_factory,
+    CreatePcs(audio_encoder_factory, audio_decoder_factory,
               audio_encoder_factory, audio_decoder_factory);
   }
 
@@ -121,7 +119,8 @@ class PeerConnectionEndToEndBaseTest : public sigslot::has_slots<>,
   }
 
   void Negotiate() {
-    caller_->CreateOffer(NULL);
+    caller_->CreateOffer(
+        webrtc::PeerConnectionInterface::RTCOfferAnswerOptions());
   }
 
   void WaitForCallEstablished() {
@@ -369,7 +368,7 @@ TEST_P(PeerConnectionEndToEndTest, Call) {
 #endif  //  defined(THREAD_SANITIZER)
   rtc::scoped_refptr<webrtc::AudioDecoderFactory> real_decoder_factory =
       webrtc::CreateBuiltinAudioDecoderFactory();
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             CreateForwardingMockDecoderFactory(real_decoder_factory.get()));
   GetAndAddUserMedia();
   Negotiate();
@@ -378,10 +377,8 @@ TEST_P(PeerConnectionEndToEndTest, Call) {
 
 #if !defined(ADDRESS_SANITIZER)
 TEST_P(PeerConnectionEndToEndTest, CallWithLegacySdp) {
-  FakeConstraints pc_constraints;
-  pc_constraints.AddMandatory(MediaConstraintsInterface::kEnableDtlsSrtp,
-                              false);
-  CreatePcs(&pc_constraints, webrtc::CreateBuiltinAudioEncoderFactory(),
+  // TODO(nisse): XXX Explicitly disable DtlsSrtp
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::CreateBuiltinAudioDecoderFactory());
   GetAndAddUserMedia();
   Negotiate();
@@ -444,8 +441,7 @@ TEST_P(PeerConnectionEndToEndTest, CallWithCustomCodec) {
 
   std::vector<webrtc::AudioCodecPairId> encoder_id1, encoder_id2, decoder_id1,
       decoder_id2;
-  CreatePcs(nullptr,
-            rtc::scoped_refptr<webrtc::AudioEncoderFactory>(
+  CreatePcs(rtc::scoped_refptr<webrtc::AudioEncoderFactory>(
                 new rtc::RefCountedObject<IdLoggingAudioEncoderFactory>(
                     webrtc::CreateAudioEncoderFactory<
                         AudioEncoderUnicornSparklesRainbow>(),
@@ -484,7 +480,7 @@ TEST_P(PeerConnectionEndToEndTest, CallWithCustomCodec) {
 // Verifies that a DataChannel created before the negotiation can transition to
 // "OPEN" and transfer data.
 TEST_P(PeerConnectionEndToEndTest, CreateDataChannelBeforeNegotiate) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
@@ -509,7 +505,7 @@ TEST_P(PeerConnectionEndToEndTest, CreateDataChannelBeforeNegotiate) {
 // Verifies that a DataChannel created after the negotiation can transition to
 // "OPEN" and transfer data.
 TEST_P(PeerConnectionEndToEndTest, CreateDataChannelAfterNegotiate) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
@@ -541,7 +537,7 @@ TEST_P(PeerConnectionEndToEndTest, CreateDataChannelAfterNegotiate) {
 
 // Verifies that DataChannel IDs are even/odd based on the DTLS roles.
 TEST_P(PeerConnectionEndToEndTest, DataChannelIdAssignment) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
@@ -569,7 +565,7 @@ TEST_P(PeerConnectionEndToEndTest, DataChannelIdAssignment) {
 // there are multiple DataChannels.
 TEST_P(PeerConnectionEndToEndTest,
        MessageTransferBetweenTwoPairsOfDataChannels) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
@@ -609,7 +605,7 @@ TEST_P(PeerConnectionEndToEndTest,
 // channel, and the closed channel was incorrectly still assigned to the ID.
 TEST_P(PeerConnectionEndToEndTest,
        DataChannelFromOpenWorksAfterPreviousChannelClosed) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
@@ -642,7 +638,7 @@ TEST_P(PeerConnectionEndToEndTest,
 // closing before creating the second one.
 TEST_P(PeerConnectionEndToEndTest,
        DataChannelFromOpenWorksWhilePreviousChannelClosing) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
@@ -673,7 +669,7 @@ TEST_P(PeerConnectionEndToEndTest,
 // reference count), no memory access violation will occur.
 // See: https://code.google.com/p/chromium/issues/detail?id=565048
 TEST_P(PeerConnectionEndToEndTest, CloseDataChannelRemotelyWhileNotReferenced) {
-  CreatePcs(nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+  CreatePcs(webrtc::CreateBuiltinAudioEncoderFactory(),
             webrtc::MockAudioDecoderFactory::CreateEmptyFactory());
 
   webrtc::DataChannelInit init;
