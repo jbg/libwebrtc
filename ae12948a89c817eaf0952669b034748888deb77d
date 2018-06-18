@@ -70,6 +70,30 @@
       "revId": "ae12948a89c817eaf0952669b034748888deb77d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd50e508_f36ef385",
+        "filename": "media/engine/fakewebrtcvcmfactory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-18T12:27:38Z",
+      "side": 1,
+      "message": "It is used by tests, but in a different way. See WebRtcVideoCapturerTest, it uses this (public) |modules| member like this:\n\n  factory_-\u003emodules[0]-\u003eSendFrame(640, 480);\n\nin two of the tests (not indexed by cs.chromium.org, so no direct link).\n\nSo I think we should keep it for now.",
+      "parentUuid": "1883dc43_47e17470",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 72
+      },
+      "revId": "ae12948a89c817eaf0952669b034748888deb77d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
