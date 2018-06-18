@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa2834e7_94523e3a",
+        "filename": "api/video_codecs/video_decoder_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-18T08:08:12Z",
+      "side": 1,
+      "message": "Please don\u0027t add any method to the new interface. There is a high risk people will start using it. The current code is very bloated, but it\u0027s written that way so we could avoid adding this method to the new interface and so that we could easily nuke everything once WebRtcVideoDecoderFactory is gone. Anders is actively working on removing WebRtcVideoDecoderFactory and the USE_BUILTIN_SW_CODECS ifdefs. Are the other changes in this CL dependent on you adding this method or can you work around it?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 74
+      },
+      "revId": "f648d242e61898a7312dcb0c3c5967c1da7ed051",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
