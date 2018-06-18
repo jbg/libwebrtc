@@ -22,6 +22,30 @@
       "revId": "f648d242e61898a7312dcb0c3c5967c1da7ed051",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "946675de_bc61ff1c",
+        "filename": "api/video_codecs/video_decoder_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-18T22:08:34Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand the issue; if someone starts using a method that\u0027s slated for removal, and then we remove it, they only have themselves to blame, right?\n\nI can definitely undo this, it just makes this CL cleaner, allowing all the other CreatePeerConnectionFactory overloads to be implemented in terms of the the new one, and moving creation of the \"built-in\" factories to createpeerconnectionfactory.cc. See CL description for more explanation.\n\nHow close is Anders to being done; should I just wait? (I\u0027ll be leaving Google in 2 weeks FYI)",
+      "parentUuid": "fa2834e7_94523e3a",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 74
+      },
+      "revId": "f648d242e61898a7312dcb0c3c5967c1da7ed051",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
