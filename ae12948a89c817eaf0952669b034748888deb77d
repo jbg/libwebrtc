@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b401cb9_c2794858",
+        "filename": "media/engine/fakewebrtcvcmfactory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-06-18T10:51:57Z",
+      "side": 1,
+      "message": "Why do we even need this?",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 72
+      },
+      "revId": "ae12948a89c817eaf0952669b034748888deb77d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
