@@ -143,9 +143,9 @@ class FakeRTCCertificateGenerator
 
   void GenerateCertificateAsync(
       const rtc::KeyParams& key_params,
-      const rtc::Optional<uint64_t>& expires_ms,
-      const rtc::scoped_refptr<rtc::RTCCertificateGeneratorCallback>&
-          callback) override {
+      const absl::optional<uint64_t>& expires_ms,
+      const rtc::scoped_refptr<rtc::RTCCertificateGeneratorCallback>& callback)
+      override {
     // The certificates are created from constant PEM strings and use its coded
     // expiration time, we do not support modifying it.
     RTC_DCHECK(!expires_ms);

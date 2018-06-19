@@ -362,7 +362,7 @@ void BaseChannel::OnWritableState(bool writable) {
 }
 
 void BaseChannel::OnNetworkRouteChanged(
-    rtc::Optional<rtc::NetworkRoute> network_route) {
+    absl::optional<rtc::NetworkRoute> network_route) {
   RTC_DCHECK(network_thread_->IsCurrent());
   rtc::NetworkRoute new_route;
   if (network_route) {
