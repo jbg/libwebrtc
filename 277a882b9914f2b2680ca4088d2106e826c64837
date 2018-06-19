@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a75315f_e43efa7e",
+        "filename": "common_video/i420_video_frame_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-19T23:40:25Z",
+      "side": 1,
+      "message": "Yes, only use on this CL.",
+      "parentUuid": "e37d9f2c_af2c8ed4",
+      "range": {
+        "startLine": 156,
+        "startChar": 8,
+        "endLine": 156,
+        "endChar": 25
+      },
+      "revId": "277a882b9914f2b2680ca4088d2106e826c64837",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5f86a6c_6567d966",
         "filename": "common_video/i420_video_frame_unittest.cc",
         "patchSetId": 14
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-19T09:38:38Z",
       "side": 1,
       "message": "Correct size for memset is twice as large for I010 than for I420 and I010, right? And for I010, you get pixel values 0x101, 0x202 and 0x303, is that ok for this test?",
+      "range": {
+        "startLine": 322,
+        "startChar": 33,
+        "endLine": 322,
+        "endChar": 36
+      },
+      "revId": "277a882b9914f2b2680ca4088d2106e826c64837",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff14ff89_d15bbb0b",
+        "filename": "common_video/i420_video_frame_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-06-19T23:40:25Z",
+      "side": 1,
+      "message": "Good catch. Tests pass because FrameBufsEqual actually compares I420 bufs. I will change it.",
+      "parentUuid": "c5f86a6c_6567d966",
       "range": {
         "startLine": 322,
         "startChar": 33,
