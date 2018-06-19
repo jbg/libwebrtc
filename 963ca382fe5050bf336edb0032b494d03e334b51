@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "598043d6_013daea2",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-19T09:38:38Z",
+      "side": 1,
+      "message": "Ah, I see. Are both used? Conversion from I420 to I010 doesn\u0027t seem so useful.",
+      "parentUuid": "c4a4571f_0f099457",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 0
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86284eb4_44133774",
         "filename": "api/video/i010_buffer.cc",
         "patchSetId": 12
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "9e286646_220e5857",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-19T09:38:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79e35ae6_de04fffb",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 53
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7040632a_855f1c59",
         "filename": "api/video/i010_buffer.cc",
         "patchSetId": 12
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "If I define it in I0101BufferInterface, it would cause circular dependency as I am using I420Buffer instance. This class is I010 where we own and allocate memory and I010BufferBase is just wrapper. I think it is OK to duplicate between those two implementations.",
       "parentUuid": "7040632a_855f1c59",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "963ca382fe5050bf336edb0032b494d03e334b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "782aef84_62188d4f",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-19T09:38:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c8e114fc_7760cabe",
       "range": {
         "startLine": 152,
         "startChar": 40,
