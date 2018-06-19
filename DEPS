@@ -10,7 +10,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': '9d565db4c0551c5953aab7d22061065da8c477da',
+  'chromium_revision': 'ce24c5ff65e56f968d03d66ec61095dcc74f93da',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -43,13 +43,13 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling Chromium third_party
   # and whatever else without interference from each other.
-  'chromium_third_party_revision': '5e63803713fbc10c991b6d2779e2c5d481d53bfd',
+  'chromium_third_party_revision': 'b466e05d534d1686ba41f3b860713c0e292a4647',
 }
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + '4fcbb21d4936cca5357e251663f46752236fe566',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '4676210b028b835b1684bc4d247ca6769e068cec',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + 'f29a733cc2bdb5ad13dfa302e3bc269df14a70b3',
   'src/buildtools':
@@ -61,11 +61,11 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '84fac4e7279e952b3b65dd636a0da25f6c3ed1ea',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'b17cc77037cab4e41067390be8f40776117b45c2',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    Var('chromium_git') + '/chromium/src/testing' + '@' + '04314205f8b75246f9282a0dbaeab20be58c61d6',
+    Var('chromium_git') + '/chromium/src/testing' + '@' + '10ad87fa0c53ab43c5cce387f220be1c1064d000',
   # This entry is used for chromium third_party rolling into webrtc third_party only.
   'src/third_party_chromium': {
       'url': Var('chromium_git') + '/chromium/src/third_party' + '@' + Var('chromium_third_party_revision'),
