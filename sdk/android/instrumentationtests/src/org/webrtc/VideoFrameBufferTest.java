@@ -212,58 +212,7 @@ public class VideoFrameBufferTest {
         });
 
     // Wrap |oesBuffer| to quit |renderThread| once |oesBuffer| is released.
-    return new VideoFrame.TextureBuffer() {
-      private final RefCountDelegate refCountDelegate = new RefCountDelegate(() -> {
-        oesBuffer.release();
-        renderThread.quit();
-      });
-
-      @Override
-      public void retain() {
-        refCountDelegate.retain();
-      }
-
-      @Override
-      public void release() {
-        refCountDelegate.release();
-      }
-
-      @Override
-      public VideoFrame.TextureBuffer.Type getType() {
-        return oesBuffer.getType();
-      }
-
-      @Override
-      public int getTextureId() {
-        return oesBuffer.getTextureId();
-      }
-
-      @Override
-      public Matrix getTransformMatrix() {
-        return oesBuffer.getTransformMatrix();
-      }
-
-      @Override
-      public int getWidth() {
-        return oesBuffer.getWidth();
-      }
-
-      @Override
-      public int getHeight() {
-        return oesBuffer.getHeight();
-      }
-
-      @Override
-      public VideoFrame.I420Buffer toI420() {
-        return oesBuffer.toI420();
-      }
-
-      @Override
-      public VideoFrame.Buffer cropAndScale(
-          int cropX, int cropY, int cropWidth, int cropHeight, int scaleWidth, int scaleHeight) {
-        return oesBuffer.cropAndScale(cropX, cropY, cropWidth, cropHeight, scaleWidth, scaleHeight);
-      }
-    };
+    return new BundledTextureBuffer(oesBuffer, new RefCountDelegate(renderThread::quit));
   }
 
   /** Create an NV21Buffer with the same pixel content as the given I420 buffer. */
@@ -324,6 +273,72 @@ public class VideoFrameBufferTest {
     return new NV12Buffer(width, height, /* stride= */ width, /* sliceHeight= */ height, nv12Buffer,
         /* releaseCallback */ null);
   }
+
+  /**
+   * Bundle a RefCountDelegate to the same lifetime as a VideoFrame.TextureBuffer for releasing
+   * extra resources.
+   */
+  private static class BundledTextureBuffer implements VideoFrame.TextureBuffer {
+    private final VideoFrame.TextureBuffer buffer;
+    private final RefCountDelegate refCountDelegate;
+
+    public BundledTextureBuffer(
+        VideoFrame.TextureBuffer buffer, RefCountDelegate refCountDelegate) {
+      this.buffer = buffer;
+      this.refCountDelegate = refCountDelegate;
+    }
+
+    @Override
+    public void retain() {
+      buffer.retain();
+      refCountDelegate.retain();
+    }
+
+    @Override
+    public void release() {
+      buffer.release();
+      refCountDelegate.release();
+    }
+
+    @Override
+    public VideoFrame.TextureBuffer.Type getType() {
+      return buffer.getType();
+    }
+
+    @Override
+    public int getTextureId() {
+      return buffer.getTextureId();
+    }
+
+    @Override
+    public Matrix getTransformMatrix() {
+      return buffer.getTransformMatrix();
+    }
+
+    @Override
+    public int getWidth() {
+      return buffer.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+      return buffer.getHeight();
+    }
+
+    @Override
+    public VideoFrame.I420Buffer toI420() {
+      return buffer.toI420();
+    }
+
+    @Override
+    public VideoFrame.Buffer cropAndScale(
+        int cropX, int cropY, int cropWidth, int cropHeight, int scaleWidth, int scaleHeight) {
+      final VideoFrame.TextureBuffer newBuffer = (VideoFrame.TextureBuffer) buffer.cropAndScale(
+          cropX, cropY, cropWidth, cropHeight, scaleWidth, scaleHeight);
+      refCountDelegate.retain();
+      return new BundledTextureBuffer(newBuffer, refCountDelegate);
+    }
+  };
 
   /** Print the ByteBuffer plane to the StringBuilder. */
   private static void printPlane(
