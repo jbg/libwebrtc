@@ -10,7 +10,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': '9d565db4c0551c5953aab7d22061065da8c477da',
+  'chromium_revision': '7a4ba5beeb52be1d62a2cb16b3f4213611aae895',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -43,13 +43,13 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling Chromium third_party
   # and whatever else without interference from each other.
-  'chromium_third_party_revision': '5e63803713fbc10c991b6d2779e2c5d481d53bfd',
+  'chromium_third_party_revision': 'b4dd02bbaae28d8844aa4b1a351f994f35c4a778',
 }
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + '4fcbb21d4936cca5357e251663f46752236fe566',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '4676210b028b835b1684bc4d247ca6769e068cec',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + 'f29a733cc2bdb5ad13dfa302e3bc269df14a70b3',
   'src/buildtools':
@@ -61,7 +61,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '84fac4e7279e952b3b65dd636a0da25f6c3ed1ea',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '6d93ee19c87c93263962f0958f4ea7bd7477945c',
     'condition': 'checkout_ios',
   },
   'src/testing':
