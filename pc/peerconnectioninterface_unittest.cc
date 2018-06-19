@@ -707,30 +707,23 @@ class PeerConnectionInterfaceBaseTest : public testing::Test {
   }
 
   void CreatePeerConnection() {
-    CreatePeerConnection(PeerConnectionInterface::RTCConfiguration(), nullptr);
+    CreatePeerConnection(PeerConnectionInterface::RTCConfiguration());
   }
 
   // DTLS does not work in a loopback call, so is disabled for most of the
   // tests in this file.
   void CreatePeerConnectionWithoutDtls() {
-    FakeConstraints no_dtls_constraints;
-    no_dtls_constraints.AddMandatory(
-        webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, false);
+    RTCConfiguration config;
+    config.enable_dtls_srtp = false;
 
-    CreatePeerConnection(PeerConnectionInterface::RTCConfiguration(),
-                         &no_dtls_constraints);
-  }
-
-  void CreatePeerConnection(webrtc::MediaConstraintsInterface* constraints) {
-    CreatePeerConnection(PeerConnectionInterface::RTCConfiguration(),
-                         constraints);
+    CreatePeerConnection(config);
   }
 
   void CreatePeerConnectionWithIceTransportsType(
       PeerConnectionInterface::IceTransportsType type) {
     PeerConnectionInterface::RTCConfiguration config;
     config.type = type;
-    return CreatePeerConnection(config, nullptr);
+    return CreatePeerConnection(config);
   }
 
   void CreatePeerConnectionWithIceServer(const std::string& uri,
@@ -740,12 +733,11 @@ class PeerConnectionInterfaceBaseTest : public testing::Test {
     server.uri = uri;
     server.password = password;
     config.servers.push_back(server);
-    CreatePeerConnection(config, nullptr);
+    CreatePeerConnection(config);
   }
 
   void CreatePeerConnection(
-      const PeerConnectionInterface::RTCConfiguration& config,
-      webrtc::MediaConstraintsInterface* constraints) {
+      const RTCConfiguration& config) {
     std::unique_ptr<cricket::FakePortAllocator> port_allocator(
         new cricket::FakePortAllocator(rtc::Thread::Current(), nullptr));
     port_allocator_ = port_allocator.get();
@@ -753,18 +745,15 @@ class PeerConnectionInterfaceBaseTest : public testing::Test {
     // Create certificate generator unless DTLS constraint is explicitly set to
     // false.
     std::unique_ptr<rtc::RTCCertificateGeneratorInterface> cert_generator;
-    bool dtls;
-    if (FindConstraint(constraints,
-                       webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                       &dtls,
-                       nullptr) && dtls) {
+
+    if (config.enable_dtls_srtp.value_or(true)) {
       fake_certificate_generator_ = new FakeRTCCertificateGenerator();
       cert_generator.reset(fake_certificate_generator_);
     }
     RTCConfiguration modified_config = config;
     modified_config.sdp_semantics = sdp_semantics_;
     pc_ = pc_factory_->CreatePeerConnection(
-        modified_config, constraints, std::move(port_allocator),
+        modified_config, std::move(port_allocator),
         std::move(cert_generator), &observer_);
     ASSERT_TRUE(pc_.get() != NULL);
     observer_.SetPeerConnectionInterface(pc_.get());
@@ -778,7 +767,7 @@ class PeerConnectionInterfaceBaseTest : public testing::Test {
     config.servers.push_back(server);
     config.sdp_semantics = sdp_semantics_;
     rtc::scoped_refptr<PeerConnectionInterface> pc =
-        pc_factory_->CreatePeerConnection(config, nullptr, nullptr, nullptr,
+        pc_factory_->CreatePeerConnection(config, nullptr, nullptr,
                                           &observer_);
     EXPECT_EQ(nullptr, pc);
   }
@@ -895,15 +884,15 @@ class PeerConnectionInterfaceBaseTest : public testing::Test {
   }
 
   bool DoCreateOfferAnswer(std::unique_ptr<SessionDescriptionInterface>* desc,
-                           bool offer,
-                           MediaConstraintsInterface* constraints) {
+                           const RTCOfferAnswerOptions* options,
+                           bool offer) {
     rtc::scoped_refptr<MockCreateSessionDescriptionObserver>
         observer(new rtc::RefCountedObject<
             MockCreateSessionDescriptionObserver>());
     if (offer) {
-      pc_->CreateOffer(observer, constraints);
+      pc_->CreateOffer(observer, options ? *options : RTCOfferAnswerOptions());
     } else {
-      pc_->CreateAnswer(observer, constraints);
+      pc_->CreateAnswer(observer, options ? *options : RTCOfferAnswerOptions());
     }
     EXPECT_EQ_WAIT(true, observer->called(), kTimeout);
     *desc = observer->MoveDescription();
@@ -911,13 +900,13 @@ class PeerConnectionInterfaceBaseTest : public testing::Test {
   }
 
   bool DoCreateOffer(std::unique_ptr<SessionDescriptionInterface>* desc,
-                     MediaConstraintsInterface* constraints) {
-    return DoCreateOfferAnswer(desc, true, constraints);
+                     const RTCOfferAnswerOptions* options) {
+    return DoCreateOfferAnswer(desc, options, true);
   }
 
   bool DoCreateAnswer(std::unique_ptr<SessionDescriptionInterface>* desc,
-                      MediaConstraintsInterface* constraints) {
-    return DoCreateOfferAnswer(desc, false, constraints);
+                      const RTCOfferAnswerOptions* options) {
+    return DoCreateOfferAnswer(desc, options, false);
   }
 
   bool DoSetSessionDescription(
@@ -1361,7 +1350,7 @@ TEST_P(PeerConnectionInterfaceTest, CreatePeerConnectionWithPooledCandidates) {
   config.candidate_network_policy =
       PeerConnectionInterface::kCandidateNetworkPolicyLowCost;
   config.ice_candidate_pool_size = 1;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
 
   const cricket::FakePortAllocatorSession* session =
       static_cast<const cricket::FakePortAllocatorSession*>(
@@ -1414,7 +1403,7 @@ TEST_P(PeerConnectionInterfaceTest,
           nullptr /* audio_processing */));
   rtc::scoped_refptr<PeerConnectionInterface> pc(
       pc_factory->CreatePeerConnection(
-          config, nullptr, std::move(port_allocator), nullptr, &observer_));
+          config, std::move(port_allocator), nullptr, &observer_));
 
   // Now validate that the config fields set above were applied to the
   // PortAllocator, as flags or otherwise.
@@ -1432,7 +1421,7 @@ TEST_P(PeerConnectionInterfaceTest,
 TEST_P(PeerConnectionInterfaceTest, GetConfigurationAfterCreatePeerConnection) {
   PeerConnectionInterface::RTCConfiguration config;
   config.type = PeerConnectionInterface::kRelay;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
 
   PeerConnectionInterface::RTCConfiguration returned_config =
       pc_->GetConfiguration();
@@ -1944,9 +1933,10 @@ TEST_P(PeerConnectionInterfaceTest, GetRTCStatsBeforeAndAfterCalling) {
 
 // This test setup two RTP data channels in loop back.
 TEST_P(PeerConnectionInterfaceTest, TestDataChannel) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_rtp_data_channel = true;
+  config.enable_dtls_srtp = false;
+  CreatePeerConnection(config);
   rtc::scoped_refptr<DataChannelInterface> data1 =
       pc_->CreateDataChannel("test1", NULL);
   rtc::scoped_refptr<DataChannelInterface> data2 =
@@ -1991,9 +1981,10 @@ TEST_P(PeerConnectionInterfaceTest, TestDataChannel) {
 // This test verifies that sendnig binary data over RTP data channels should
 // fail.
 TEST_P(PeerConnectionInterfaceTest, TestSendBinaryOnRtpDataChannel) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_rtp_data_channel = true;
+  config.enable_dtls_srtp = false;
+  CreatePeerConnection(config);
   rtc::scoped_refptr<DataChannelInterface> data1 =
       pc_->CreateDataChannel("test1", NULL);
   rtc::scoped_refptr<DataChannelInterface> data2 =
@@ -2021,9 +2012,10 @@ TEST_P(PeerConnectionInterfaceTest, TestSendBinaryOnRtpDataChannel) {
 // This test setup a RTP data channels in loop back and test that a channel is
 // opened even if the remote end answer with a zero SSRC.
 TEST_P(PeerConnectionInterfaceTest, TestSendOnlyDataChannel) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_rtp_data_channel = true;
+  config.enable_dtls_srtp = false;
+  CreatePeerConnection(config);
   rtc::scoped_refptr<DataChannelInterface> data1 =
       pc_->CreateDataChannel("test1", NULL);
   std::unique_ptr<MockDataChannelObserver> observer1(
@@ -2043,9 +2035,11 @@ TEST_P(PeerConnectionInterfaceTest, TestSendOnlyDataChannel) {
 // This test that if a data channel is added in an answer a receive only channel
 // channel is created.
 TEST_P(PeerConnectionInterfaceTest, TestReceiveOnlyDataChannel) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_rtp_data_channel = true;
+  config.enable_dtls_srtp = false;
+
+  CreatePeerConnection(config);
 
   std::string offer_label = "offer_channel";
   rtc::scoped_refptr<DataChannelInterface> offer_channel =
@@ -2084,9 +2078,9 @@ TEST_P(PeerConnectionInterfaceTest, TestReceiveOnlyDataChannel) {
 // requested.
 // TODO(perkj): Remove this test once reliable channels are implemented.
 TEST_P(PeerConnectionInterfaceTest, CreateReliableRtpDataChannelShouldFail) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  CreatePeerConnection(rtc_config);
 
   std::string label = "test";
   webrtc::DataChannelInit config;
@@ -2098,9 +2092,9 @@ TEST_P(PeerConnectionInterfaceTest, CreateReliableRtpDataChannelShouldFail) {
 
 // Verifies that duplicated label is not allowed for RTP data channel.
 TEST_P(PeerConnectionInterfaceTest, RtpDuplicatedLabelNotAllowed) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_rtp_data_channel = true;
+  CreatePeerConnection(config);
 
   std::string label = "test";
   rtc::scoped_refptr<DataChannelInterface> channel =
@@ -2115,9 +2109,9 @@ TEST_P(PeerConnectionInterfaceTest, RtpDuplicatedLabelNotAllowed) {
 // This tests that a SCTP data channel is returned using different
 // DataChannelInit configurations.
 TEST_P(PeerConnectionInterfaceTest, CreateSctpDataChannel) {
-  FakeConstraints constraints;
-  constraints.SetAllowDtlsSctpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
 
   webrtc::DataChannelInit config;
 
@@ -2153,9 +2147,9 @@ TEST_P(PeerConnectionInterfaceTest, CreateSctpDataChannel) {
 // maxRetransmitTime are set for SCTP data channels.
 TEST_P(PeerConnectionInterfaceTest,
        CreateSctpDataChannelShouldFailForInvalidConfig) {
-  FakeConstraints constraints;
-  constraints.SetAllowDtlsSctpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
 
   std::string label = "test";
   webrtc::DataChannelInit config;
@@ -2171,9 +2165,9 @@ TEST_P(PeerConnectionInterfaceTest,
 // or out of range should fail.
 TEST_P(PeerConnectionInterfaceTest,
        CreateSctpDataChannelWithInvalidIdShouldFail) {
-  FakeConstraints constraints;
-  constraints.SetAllowDtlsSctpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
 
   webrtc::DataChannelInit config;
   rtc::scoped_refptr<DataChannelInterface> channel;
@@ -2198,10 +2192,9 @@ TEST_P(PeerConnectionInterfaceTest,
 
 // Verifies that duplicated label is allowed for SCTP data channel.
 TEST_P(PeerConnectionInterfaceTest, SctpDuplicatedLabelAllowed) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
 
   std::string label = "test";
   rtc::scoped_refptr<DataChannelInterface> channel =
@@ -2216,9 +2209,10 @@ TEST_P(PeerConnectionInterfaceTest, SctpDuplicatedLabelAllowed) {
 // This test verifies that OnRenegotiationNeeded is fired for every new RTP
 // DataChannel.
 TEST_P(PeerConnectionInterfaceTest, RenegotiationNeededForNewRtpDataChannel) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  CreatePeerConnection(rtc_config);
 
   rtc::scoped_refptr<DataChannelInterface> dc1 =
       pc_->CreateDataChannel("test1", NULL);
@@ -2232,9 +2226,10 @@ TEST_P(PeerConnectionInterfaceTest, RenegotiationNeededForNewRtpDataChannel) {
 
 // This test that a data channel closes when a PeerConnection is deleted/closed.
 TEST_P(PeerConnectionInterfaceTest, DataChannelCloseWhenPeerConnectionClose) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  CreatePeerConnection(rtc_config);
 
   rtc::scoped_refptr<DataChannelInterface> data1 =
       pc_->CreateDataChannel("test1", NULL);
@@ -2257,9 +2252,10 @@ TEST_P(PeerConnectionInterfaceTest, DataChannelCloseWhenPeerConnectionClose) {
 
 // This tests that RTP data channels can be rejected in an answer.
 TEST_P(PeerConnectionInterfaceTest, TestRejectRtpDataChannelInAnswer) {
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  CreatePeerConnection(rtc_config);
 
   rtc::scoped_refptr<DataChannelInterface> offer_channel(
       pc_->CreateDataChannel("offer_channel", NULL));
@@ -2287,8 +2283,8 @@ TEST_P(PeerConnectionInterfaceTest, TestRejectSctpDataChannelInAnswer)
 TEST_P(PeerConnectionInterfaceTest, DISABLED_TestRejectSctpDataChannelInAnswer)
 #endif
 {
-  FakeConstraints constraints;
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  CreatePeerConnection(rtc_config);
 
   rtc::scoped_refptr<DataChannelInterface> offer_channel(
       pc_->CreateDataChannel("offer_channel", NULL));
@@ -2313,10 +2309,9 @@ TEST_P(PeerConnectionInterfaceTest, DISABLED_TestRejectSctpDataChannelInAnswer)
 // FireFox, use it as a remote session description, generate an answer and use
 // the answer as a local description.
 TEST_P(PeerConnectionInterfaceTest, ReceiveFireFoxOffer) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
   AddAudioTrack("audio_label");
   AddVideoTrack("video_label");
   std::unique_ptr<SessionDescriptionInterface> desc(
@@ -2348,10 +2343,9 @@ TEST_P(PeerConnectionInterfaceTest, ReceiveFireFoxOffer) {
 // The fallback was previously supported but was removed to simplify the code
 // and because it's non-standard.
 TEST_P(PeerConnectionInterfaceTest, DtlsSdesFallbackNotSupported) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
   // Wait for fake certificate to be generated. Previously, this is what caused
   // the "a=crypto" lines to be rejected.
   AddAudioTrack("audio_label");
@@ -2393,10 +2387,9 @@ TEST_P(PeerConnectionInterfaceTest, ReceiveUpdatedAudioOfferWithBadCodecs) {
 // Test that if we're receiving (but not sending) a track, subsequent offers
 // will have m-lines with a=recvonly.
 TEST_P(PeerConnectionInterfaceTest, CreateSubsequentRecvOnlyOffer) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
   CreateAndSetRemoteOffer(GetSdpStringWithStream1());
   CreateAnswerAsLocalDescription();
 
@@ -2420,10 +2413,9 @@ TEST_P(PeerConnectionInterfaceTest, CreateSubsequentRecvOnlyOffer) {
 // offerToReceiveVideo/offerToReceiveAudio constraints are explicitly set to
 // false, the generated m-lines will be a=inactive.
 TEST_P(PeerConnectionInterfaceTest, CreateSubsequentInactiveOffer) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration rtc_config;
+  rtc_config.enable_dtls_srtp = true;
+  CreatePeerConnection(rtc_config);
   CreateAndSetRemoteOffer(GetSdpStringWithStream1());
   CreateAnswerAsLocalDescription();
 
@@ -2431,12 +2423,10 @@ TEST_P(PeerConnectionInterfaceTest, CreateSubsequentInactiveOffer) {
   // A new offer would be recvonly, but we'll set the "no receive" constraints
   // to make it inactive.
   std::unique_ptr<SessionDescriptionInterface> offer;
-  FakeConstraints offer_constraints;
-  offer_constraints.AddMandatory(
-      webrtc::MediaConstraintsInterface::kOfferToReceiveVideo, false);
-  offer_constraints.AddMandatory(
-      webrtc::MediaConstraintsInterface::kOfferToReceiveAudio, false);
-  DoCreateOffer(&offer, &offer_constraints);
+  RTCOfferAnswerOptions options;
+  options.offer_to_receive_audio = 0;
+  options.offer_to_receive_video = 0;
+  DoCreateOffer(&offer, &options);
 
   const cricket::ContentInfo* video_content =
       cricket::GetFirstVideoContent(offer->description());
@@ -2476,7 +2466,7 @@ TEST_P(PeerConnectionInterfaceTest, SetConfigurationChangesCandidateFilter) {
 TEST_P(PeerConnectionInterfaceTest, SetConfigurationChangesPruneTurnPortsFlag) {
   PeerConnectionInterface::RTCConfiguration config;
   config.prune_turn_ports = false;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
   EXPECT_FALSE(port_allocator_->prune_turn_ports());
 
@@ -2491,7 +2481,7 @@ TEST_P(PeerConnectionInterfaceTest, SetConfigurationChangesPruneTurnPortsFlag) {
 TEST_P(PeerConnectionInterfaceTest, SetConfigurationChangesIceCheckInterval) {
   PeerConnectionInterface::RTCConfiguration config;
   config.ice_check_min_interval = rtc::nullopt;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
   config.ice_check_min_interval = 100;
   EXPECT_TRUE(pc_->SetConfiguration(config));
@@ -2588,7 +2578,7 @@ TEST_P(PeerConnectionInterfaceTest,
   config.bundle_policy = PeerConnectionInterface::kBundlePolicyBalanced;
   config.rtcp_mux_policy = PeerConnectionInterface::kRtcpMuxPolicyNegotiate;
   config.continual_gathering_policy = PeerConnectionInterface::GATHER_ONCE;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
 
   PeerConnectionInterface::RTCConfiguration modified_config =
       pc_->GetConfiguration();
@@ -2618,7 +2608,7 @@ TEST_P(PeerConnectionInterfaceTest,
 TEST_P(PeerConnectionInterfaceTest,
        SetConfigurationReturnsRangeErrorForBadCandidatePoolSize) {
   PeerConnectionInterface::RTCConfiguration config;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
 
   config.ice_candidate_pool_size = -1;
@@ -2637,7 +2627,7 @@ TEST_P(PeerConnectionInterfaceTest,
 TEST_P(PeerConnectionInterfaceTest,
        SetConfigurationReturnsSyntaxErrorFromBadIceUrls) {
   PeerConnectionInterface::RTCConfiguration config;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
 
   PeerConnectionInterface::IceServer bad_server;
@@ -2653,7 +2643,7 @@ TEST_P(PeerConnectionInterfaceTest,
 TEST_P(PeerConnectionInterfaceTest,
        SetConfigurationReturnsInvalidParameterIfCredentialsMissing) {
   PeerConnectionInterface::RTCConfiguration config;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
 
   PeerConnectionInterface::IceServer bad_server;
@@ -2773,10 +2763,9 @@ TEST_P(PeerConnectionInterfaceTest, CloseAndGetStats) {
 // SDP string is created. In this test the two separate MediaStreams are
 // signaled.
 TEST_P(PeerConnectionInterfaceTest, UpdateRemoteStreams) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(GetSdpStringWithStream1());
 
   rtc::scoped_refptr<StreamCollection> reference(CreateStreamCollection(1, 1));
@@ -2800,10 +2789,9 @@ TEST_P(PeerConnectionInterfaceTest, UpdateRemoteStreams) {
 // specific behavior.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        AddRemoveTrackFromExistingRemoteMediaStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   std::unique_ptr<SessionDescriptionInterface> desc_ms1 =
       CreateSessionDescriptionAndReference(1, 1);
   EXPECT_TRUE(DoSetRemoteDescription(std::move(desc_ms1)));
@@ -2844,10 +2832,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // This tests that remote tracks are ended if a local session description is set
 // that rejects the media content type.
 TEST_P(PeerConnectionInterfaceTest, RejectMediaContent) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   // First create and set a remote offer, then reject its video content in our
   // answer.
   CreateAndSetRemoteOffer(kSdpStringWithStream1PlanB);
@@ -2894,10 +2881,9 @@ TEST_P(PeerConnectionInterfaceTest, RejectMediaContent) {
 // of PeerConnection and then PeerConnection tries to reject the track.
 // Don't run under Unified Plan since the stream API is not available.
 TEST_F(PeerConnectionInterfaceTestPlanB, RemoveTrackThenRejectMediaContent) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(GetSdpStringWithStream1());
   MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
   remote_stream->RemoveTrack(remote_stream->GetVideoTracks()[0]);
@@ -2921,10 +2907,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB, RemoveTrackThenRejectMediaContent) {
 // will be created, even if the description contains SSRCs/MSIDs.
 // See: https://code.google.com/p/webrtc/issues/detail?id=5054
 TEST_P(PeerConnectionInterfaceTest, RecvonlyDescriptionDoesntCreateStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
 
   std::string recvonly_offer = GetSdpStringWithStream1();
   rtc::replace_substrs(kSendrecv, strlen(kSendrecv), kRecvonly,
@@ -2940,10 +2925,9 @@ TEST_P(PeerConnectionInterfaceTest, RecvonlyDescriptionDoesntCreateStream) {
 // in a subsequent session description.
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB, SdpWithoutMsidCreatesDefaultStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(kSdpStringWithoutStreamsAudioOnly);
 
   ASSERT_EQ(1u, observer_.remote_streams()->count());
@@ -2970,10 +2954,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB, SdpWithoutMsidCreatesDefaultStream) {
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        SendOnlySdpWithoutMsidCreatesDefaultStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(kSdpStringSendOnlyWithoutStreams);
 
   ASSERT_EQ(1u, observer_.remote_streams()->count());
@@ -2988,10 +2971,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // a remote track that as already been removed from the MediaStream.
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB, RemoveAlreadyGoneRemoteStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(GetSdpStringWithStream1());
   MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
   remote_stream->RemoveTrack(remote_stream->GetAudioTracks()[0]);
@@ -3008,10 +2990,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB, RemoveAlreadyGoneRemoteStream) {
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        SdpWithoutMsidAndStreamsCreatesDefaultStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(kSdpStringWithoutStreams);
 
   ASSERT_EQ(1u, observer_.remote_streams()->count());
@@ -3024,10 +3005,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // description doesn't contain any streams but does support MSID.
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB, SdpWithMsidDontCreatesDefaultStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(kSdpStringWithMsidWithoutStreams);
   EXPECT_EQ(0u, observer_.remote_streams()->count());
 }
@@ -3038,10 +3018,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB, SdpWithMsidDontCreatesDefaultStream) {
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        DefaultTracksNotDestroyedAndRecreated) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(kSdpStringWithoutStreamsAudioOnly);
 
   ASSERT_EQ(1u, observer_.remote_streams()->count());
@@ -3060,10 +3039,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // description is updated to not have any MediaStreams.
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB, VerifyDefaultStreamIsNotCreated) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(GetSdpStringWithStream1());
   rtc::scoped_refptr<StreamCollection> reference(CreateStreamCollection(1, 1));
   EXPECT_TRUE(
@@ -3077,10 +3055,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB, VerifyDefaultStreamIsNotCreated) {
 // an endpoint that doesn't signal SSRCs, but signals media stream IDs.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        SdpWithMsidWithoutSsrcCreatesDefaultStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   std::string sdp_string = kSdpStringWithoutStreamsAudioOnly;
   // Add a=msid lines to simulate a Unified Plan endpoint that only
   // signals stream IDs with a=msid lines.
@@ -3101,10 +3078,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // a=ssrc msid and a=msid lines for interop signaling with Plan B.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        SdpWithEmptyMsidAndSsrcCreatesDefaultStreamId) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   // Add a a=msid line to the SDP. This is prioritized when parsing the SDP, so
   // the sender's stream ID will be interpreted as no stream IDs.
   std::string sdp_string = kSdpStringWithStream1AudioTrackOnly;
@@ -3140,10 +3116,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // an RtpSender's lifetime isn't determined by when a local description is set.
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB, LocalDescriptionChanged) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
 
   // Create an offer with 1 stream with 2 tracks of each type.
   rtc::scoped_refptr<StreamCollection> stream_collection =
@@ -3180,10 +3155,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB, LocalDescriptionChanged) {
 // Don't run under Unified Plan since this behavior is Plan B specific.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        AddLocalStreamAfterLocalDescriptionChanged) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
 
   rtc::scoped_refptr<StreamCollection> stream_collection =
       CreateStreamCollection(1, 2);
@@ -3210,10 +3184,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 // changed when SetLocalDescription is called.
 TEST_P(PeerConnectionInterfaceTest,
        ChangeSsrcOnTrackInLocalSessionDescription) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
 
   AddAudioTrack(kAudioTracks[0]);
   AddVideoTrack(kVideoTracks[0]);
@@ -3264,10 +3237,9 @@ TEST_P(PeerConnectionInterfaceTest,
 // Don't run under Unified Plan since the stream API is not available.
 TEST_F(PeerConnectionInterfaceTestPlanB,
        SignalSameTracksInSeparateMediaStream) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
 
   rtc::scoped_refptr<StreamCollection> stream_collection =
       CreateStreamCollection(2, 1);
@@ -3302,10 +3274,9 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 
 // This tests that PeerConnectionObserver::OnAddTrack is correctly called.
 TEST_P(PeerConnectionInterfaceTest, OnAddTrackCallback) {
-  FakeConstraints constraints;
-  constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp,
-                           true);
-  CreatePeerConnection(&constraints);
+  RTCConfiguration config;
+  config.enable_dtls_srtp = true;
+  CreatePeerConnection(config);
   CreateAndSetRemoteOffer(kSdpStringWithStream1AudioTrackOnly);
   EXPECT_EQ(observer_.num_added_tracks_, 1);
   EXPECT_EQ(observer_.last_added_track_label_, kAudioTracks[0]);
@@ -3329,9 +3300,7 @@ TEST_P(PeerConnectionInterfaceTest, OnAddTrackCallback) {
 TEST_P(PeerConnectionInterfaceTest, SetConfigurationCausingIceRestart) {
   PeerConnectionInterface::RTCConfiguration config;
   config.type = PeerConnectionInterface::kRelay;
-  // Need to pass default constraints to prevent disabling of DTLS...
-  FakeConstraints default_constraints;
-  CreatePeerConnection(config, &default_constraints);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
   AddAudioTrack(kAudioTracks[0], {kStreamId1});
   AddVideoTrack(kVideoTracks[0], {kStreamId1});
@@ -3365,9 +3334,7 @@ TEST_P(PeerConnectionInterfaceTest, SetConfigurationCausingIceRestart) {
 TEST_P(PeerConnectionInterfaceTest, SetConfigurationNotCausingIceRestart) {
   PeerConnectionInterface::RTCConfiguration config;
   config.type = PeerConnectionInterface::kRelay;
-  // Need to pass default constraints to prevent disabling of DTLS...
-  FakeConstraints default_constraints;
-  CreatePeerConnection(config, &default_constraints);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
   AddAudioTrack(kAudioTracks[0]);
   AddVideoTrack(kVideoTracks[0]);
@@ -3401,9 +3368,7 @@ TEST_P(PeerConnectionInterfaceTest, SetConfigurationNotCausingIceRestart) {
 TEST_P(PeerConnectionInterfaceTest, SetConfigurationCausingPartialIceRestart) {
   PeerConnectionInterface::RTCConfiguration config;
   config.type = PeerConnectionInterface::kRelay;
-  // Need to pass default constraints to prevent disabling of DTLS...
-  FakeConstraints default_constraints;
-  CreatePeerConnection(config, &default_constraints);
+  CreatePeerConnection(config);
   config = pc_->GetConfiguration();
   AddAudioTrack(kAudioTracks[0], {kStreamId1});
   AddVideoTrack(kVideoTracks[0], {kStreamId1});
@@ -3561,11 +3526,11 @@ TEST_P(PeerConnectionInterfaceTest, OffersAndAnswersHaveTrickleIceOption) {
   CreatePeerConnection();
 
   // First, create an offer with audio/video.
-  FakeConstraints constraints;
-  constraints.SetMandatoryReceiveAudio(true);
-  constraints.SetMandatoryReceiveVideo(true);
+  RTCOfferAnswerOptions options;
+  options.offer_to_receive_audio = 1;
+  options.offer_to_receive_video = 1;
   std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, &constraints));
+  ASSERT_TRUE(DoCreateOffer(&offer, &options));
   cricket::SessionDescription* desc = offer->description();
   ASSERT_EQ(2u, desc->transport_infos().size());
   EXPECT_TRUE(desc->transport_infos()[0].description.HasOption("trickle"));
@@ -3574,7 +3539,7 @@ TEST_P(PeerConnectionInterfaceTest, OffersAndAnswersHaveTrickleIceOption) {
   // Apply the offer as a remote description, then create an answer.
   EXPECT_TRUE(DoSetRemoteDescription(std::move(offer)));
   std::unique_ptr<SessionDescriptionInterface> answer;
-  ASSERT_TRUE(DoCreateAnswer(&answer, &constraints));
+  ASSERT_TRUE(DoCreateAnswer(&answer, &options));
   desc = answer->description();
   ASSERT_EQ(2u, desc->transport_infos().size());
   EXPECT_TRUE(desc->transport_infos()[0].description.HasOption("trickle"));
@@ -3586,7 +3551,7 @@ TEST_P(PeerConnectionInterfaceTest, OffersAndAnswersHaveTrickleIceOption) {
 TEST_P(PeerConnectionInterfaceTest, IceRenominationNotOffered) {
   PeerConnectionInterface::RTCConfiguration config;
   config.enable_ice_renomination = false;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   AddAudioTrack("foo");
 
   std::unique_ptr<SessionDescriptionInterface> offer;
@@ -3602,7 +3567,7 @@ TEST_P(PeerConnectionInterfaceTest, IceRenominationNotOffered) {
 TEST_P(PeerConnectionInterfaceTest, IceRenominationOptionInOfferAndAnswer) {
   PeerConnectionInterface::RTCConfiguration config;
   config.enable_ice_renomination = true;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
   AddAudioTrack("foo");
 
   std::unique_ptr<SessionDescriptionInterface> offer;
@@ -3629,11 +3594,11 @@ TEST_P(PeerConnectionInterfaceTest, IceRenominationOptionInOfferAndAnswer) {
 TEST_P(PeerConnectionInterfaceTest, CreateOfferWithOfferToReceiveConstraints) {
   CreatePeerConnection();
 
-  FakeConstraints constraints;
-  constraints.SetMandatoryReceiveAudio(true);
-  constraints.SetMandatoryReceiveVideo(true);
+  RTCOfferAnswerOptions options;
+  options.offer_to_receive_audio = 1;
+  options.offer_to_receive_video = 1;
   std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, &constraints));
+  ASSERT_TRUE(DoCreateOffer(&offer, &options));
 
   cricket::SessionDescription* desc = offer->description();
   const cricket::ContentInfo* audio = cricket::GetFirstAudioContent(desc);
@@ -3654,18 +3619,18 @@ TEST_F(PeerConnectionInterfaceTestPlanB,
 
   // First, create an offer with audio/video and apply it as a remote
   // description.
-  FakeConstraints constraints;
-  constraints.SetMandatoryReceiveAudio(true);
-  constraints.SetMandatoryReceiveVideo(true);
+  RTCOfferAnswerOptions options;
+  options.offer_to_receive_audio = 1;
+  options.offer_to_receive_video = 1;
   std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, &constraints));
+  ASSERT_TRUE(DoCreateOffer(&offer, &options));
   EXPECT_TRUE(DoSetRemoteDescription(std::move(offer)));
 
   // Now create answer that rejects audio/video.
-  constraints.SetMandatoryReceiveAudio(false);
-  constraints.SetMandatoryReceiveVideo(false);
+  options.offer_to_receive_audio = 0;
+  options.offer_to_receive_video = 0;
   std::unique_ptr<SessionDescriptionInterface> answer;
-  ASSERT_TRUE(DoCreateAnswer(&answer, &constraints));
+  ASSERT_TRUE(DoCreateAnswer(&answer, &options));
 
   cricket::SessionDescription* desc = answer->description();
   const cricket::ContentInfo* audio = cricket::GetFirstAudioContent(desc);
@@ -3686,7 +3651,7 @@ TEST_P(PeerConnectionInterfaceTest,
 #endif  // HAVE_SCTP
   PeerConnectionInterface::RTCConfiguration config;
   config.bundle_policy = PeerConnectionInterface::kBundlePolicyMaxBundle;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
 
   // First, create an offer with only a data channel and apply it as a remote
   // description.
@@ -3772,7 +3737,7 @@ TEST_P(PeerConnectionInterfaceTest,
   config.ice_regather_interval_range.emplace(1000, 2000);
   config.continual_gathering_policy =
       PeerConnectionInterface::ContinualGatheringPolicy::GATHER_CONTINUALLY;
-  CreatePeerConnection(config, nullptr);
+  CreatePeerConnection(config);
 }
 
 // The current bitrate from BitrateSettings is currently clamped
@@ -4017,10 +3982,9 @@ class PeerConnectionMediaConfigTest : public testing::Test {
     pcf_->Initialize();
   }
   const cricket::MediaConfig TestCreatePeerConnection(
-      const PeerConnectionInterface::RTCConfiguration& config,
-      const MediaConstraintsInterface* constraints) {
+      const RTCConfiguration& config) {
     rtc::scoped_refptr<PeerConnectionInterface> pc(pcf_->CreatePeerConnection(
-        config, constraints, nullptr, nullptr, &observer_));
+        config, nullptr, nullptr, &observer_));
     EXPECT_TRUE(pc.get());
     return pc->GetConfiguration().media_config;
   }
@@ -4033,10 +3997,9 @@ class PeerConnectionMediaConfigTest : public testing::Test {
 // default RTCConfiguration.
 TEST_F(PeerConnectionMediaConfigTest, TestDefaults) {
   PeerConnectionInterface::RTCConfiguration config;
-  FakeConstraints constraints;
 
   const cricket::MediaConfig& media_config =
-      TestCreatePeerConnection(config, &constraints);
+      TestCreatePeerConnection(config);
 
   EXPECT_FALSE(media_config.enable_dscp);
   EXPECT_TRUE(media_config.video.enable_cpu_adaptation);
@@ -4045,42 +4008,14 @@ TEST_F(PeerConnectionMediaConfigTest, TestDefaults) {
   EXPECT_FALSE(media_config.video.experiment_cpu_load_estimator);
 }
 
-// This test verifies the DSCP constraint is recognized and passed to
-// the PeerConnection.
-TEST_F(PeerConnectionMediaConfigTest, TestDscpConstraintTrue) {
-  PeerConnectionInterface::RTCConfiguration config;
-  FakeConstraints constraints;
-
-  constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDscp, true);
-  const cricket::MediaConfig& media_config =
-      TestCreatePeerConnection(config, &constraints);
-
-  EXPECT_TRUE(media_config.enable_dscp);
-}
-
-// This test verifies the cpu overuse detection constraint is
-// recognized and passed to the PeerConnection.
-TEST_F(PeerConnectionMediaConfigTest, TestCpuOveruseConstraintFalse) {
-  PeerConnectionInterface::RTCConfiguration config;
-  FakeConstraints constraints;
-
-  constraints.AddOptional(
-      webrtc::MediaConstraintsInterface::kCpuOveruseDetection, false);
-  const cricket::MediaConfig media_config =
-      TestCreatePeerConnection(config, &constraints);
-
-  EXPECT_FALSE(media_config.video.enable_cpu_adaptation);
-}
-
 // This test verifies that the enable_prerenderer_smoothing flag is
 // propagated from RTCConfiguration to the PeerConnection.
 TEST_F(PeerConnectionMediaConfigTest, TestDisablePrerendererSmoothingTrue) {
   PeerConnectionInterface::RTCConfiguration config;
-  FakeConstraints constraints;
 
   config.set_prerenderer_smoothing(false);
   const cricket::MediaConfig& media_config =
-      TestCreatePeerConnection(config, &constraints);
+      TestCreatePeerConnection(config);
 
   EXPECT_FALSE(media_config.video.enable_prerenderer_smoothing);
 }
@@ -4089,29 +4024,12 @@ TEST_F(PeerConnectionMediaConfigTest, TestDisablePrerendererSmoothingTrue) {
 // propagated from RTCConfiguration to the PeerConnection.
 TEST_F(PeerConnectionMediaConfigTest, TestEnableExperimentCpuLoadEstimator) {
   PeerConnectionInterface::RTCConfiguration config;
-  FakeConstraints constraints;
 
   config.set_experiment_cpu_load_estimator(true);
   const cricket::MediaConfig& media_config =
-      TestCreatePeerConnection(config, &constraints);
+      TestCreatePeerConnection(config);
 
   EXPECT_TRUE(media_config.video.experiment_cpu_load_estimator);
-}
-
-// This test verifies the suspend below min bitrate constraint is
-// recognized and passed to the PeerConnection.
-TEST_F(PeerConnectionMediaConfigTest,
-       TestSuspendBelowMinBitrateConstraintTrue) {
-  PeerConnectionInterface::RTCConfiguration config;
-  FakeConstraints constraints;
-
-  constraints.AddOptional(
-      webrtc::MediaConstraintsInterface::kEnableVideoSuspendBelowMinBitrate,
-      true);
-  const cricket::MediaConfig media_config =
-      TestCreatePeerConnection(config, &constraints);
-
-  EXPECT_TRUE(media_config.video.suspend_below_min_bitrate);
 }
 
 // Tests a few random fields being different.

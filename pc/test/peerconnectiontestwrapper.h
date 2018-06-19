@@ -35,7 +35,6 @@ class PeerConnectionTestWrapper
   virtual ~PeerConnectionTestWrapper();
 
   bool CreatePc(
-      const webrtc::MediaConstraintsInterface* constraints,
       const webrtc::PeerConnectionInterface::RTCConfiguration& config,
       rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory,
       rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory);
@@ -66,8 +65,10 @@ class PeerConnectionTestWrapper
   void OnSuccess(webrtc::SessionDescriptionInterface* desc) override;
   void OnFailure(webrtc::RTCError) override {}
 
-  void CreateOffer(const webrtc::MediaConstraintsInterface* constraints);
-  void CreateAnswer(const webrtc::MediaConstraintsInterface* constraints);
+  void CreateOffer(
+      const webrtc::PeerConnectionInterface::RTCOfferAnswerOptions& options);
+  void CreateAnswer(
+      const webrtc::PeerConnectionInterface::RTCOfferAnswerOptions& options);
   void ReceiveOfferSdp(const std::string& sdp);
   void ReceiveAnswerSdp(const std::string& sdp);
   void AddIceCandidate(const std::string& sdp_mid, int sdp_mline_index,
@@ -78,7 +79,7 @@ class PeerConnectionTestWrapper
   void WaitForVideo();
   void GetAndAddUserMedia(
       bool audio, const cricket::AudioOptions& audio_options,
-    bool video, const webrtc::FakeConstraints& video_constraints);
+      bool video, const webrtc::FakeConstraints& video_constraints);
 
   // sigslots
   sigslot::signal1<std::string*> SignalOnIceCandidateCreated;
