@@ -12,7 +12,7 @@
 
 #include <memory>
 
-#include "api/optional.h"
+#include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/logging.h"
@@ -80,18 +80,18 @@ class RTCCertificateGeneratorTest : public testing::Test {
 
 TEST_F(RTCCertificateGeneratorTest, GenerateECDSA) {
   EXPECT_TRUE(RTCCertificateGenerator::GenerateCertificate(
-      KeyParams::ECDSA(), Optional<uint64_t>()));
+      KeyParams::ECDSA(), absl::optional<uint64_t>()));
 }
 
 TEST_F(RTCCertificateGeneratorTest, GenerateRSA) {
   EXPECT_TRUE(RTCCertificateGenerator::GenerateCertificate(
-      KeyParams::RSA(), Optional<uint64_t>()));
+      KeyParams::RSA(), absl::optional<uint64_t>()));
 }
 
 TEST_F(RTCCertificateGeneratorTest, GenerateAsyncECDSA) {
   EXPECT_FALSE(fixture_->certificate());
   fixture_->generator()->GenerateCertificateAsync(
-      KeyParams::ECDSA(), Optional<uint64_t>(), fixture_);
+      KeyParams::ECDSA(), absl::optional<uint64_t>(), fixture_);
   // Until generation has completed, the certificate is null. Since this is an
   // async call, generation must not have completed until we process messages
   // posted to this thread (which is done by |EXPECT_TRUE_WAIT|).
@@ -111,14 +111,14 @@ TEST_F(RTCCertificateGeneratorTest, GenerateWithExpires) {
   // Generate a certificate that expires immediately.
   scoped_refptr<RTCCertificate> cert_a =
       RTCCertificateGenerator::GenerateCertificate(KeyParams::ECDSA(),
-                                                   Optional<uint64_t>(0));
+                                                   absl::optional<uint64_t>(0));
   EXPECT_TRUE(cert_a);
 
   // Generate a certificate that expires in one minute.
   const uint64_t kExpiresMs = 60000;
   scoped_refptr<RTCCertificate> cert_b =
       RTCCertificateGenerator::GenerateCertificate(
-          KeyParams::ECDSA(), Optional<uint64_t>(kExpiresMs));
+          KeyParams::ECDSA(), absl::optional<uint64_t>(kExpiresMs));
   EXPECT_TRUE(cert_b);
 
   // Verify that |cert_b| expires approximately |kExpiresMs| after |cert_a|
@@ -134,10 +134,10 @@ TEST_F(RTCCertificateGeneratorTest, GenerateWithInvalidParamsShouldFail) {
   EXPECT_FALSE(invalid_params.IsValid());
 
   EXPECT_FALSE(RTCCertificateGenerator::GenerateCertificate(
-      invalid_params, Optional<uint64_t>()));
+      invalid_params, absl::optional<uint64_t>()));
 
   fixture_->generator()->GenerateCertificateAsync(
-      invalid_params, Optional<uint64_t>(), fixture_);
+      invalid_params, absl::optional<uint64_t>(), fixture_);
   EXPECT_TRUE_WAIT(fixture_->GenerateAsyncCompleted(), kGenerationTimeoutMs);
   EXPECT_FALSE(fixture_->certificate());
 }
