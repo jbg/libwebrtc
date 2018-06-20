@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdc97959_07cc345b",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-20T13:58:40Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep codec_settings as I never understood what inst actually means...",
+      "range": {
+        "startLine": 188,
+        "startChar": 54,
+        "endLine": 188,
+        "endChar": 58
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c96ac3e_d6eb4866",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-20T13:58:40Z",
+      "side": 1,
+      "message": "We go in here also if we don\u0027t do simulcast, right? The comment seems a bit misleading as it probably means temporal layers are not supported at all.",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a83acccc_ce2ebc89",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-20T13:58:40Z",
+      "side": 1,
+      "message": "Perhaps use #ifdef here instead?",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ba27604_9e09d65a",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-20T13:58:40Z",
+      "side": 1,
+      "message": "Why rename this? :)",
+      "range": {
+        "startLine": 348,
+        "startChar": 29,
+        "endLine": 348,
+        "endChar": 36
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
