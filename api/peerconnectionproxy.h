@@ -95,14 +95,6 @@ PROXY_CONSTMETHOD0(const SessionDescriptionInterface*,
 PROXY_METHOD2(void,
               CreateOffer,
               CreateSessionDescriptionObserver*,
-              const MediaConstraintsInterface*)
-PROXY_METHOD2(void,
-              CreateAnswer,
-              CreateSessionDescriptionObserver*,
-              const MediaConstraintsInterface*)
-PROXY_METHOD2(void,
-              CreateOffer,
-              CreateSessionDescriptionObserver*,
               const RTCOfferAnswerOptions&)
 PROXY_METHOD2(void,
               CreateAnswer,

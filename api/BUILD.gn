@@ -425,7 +425,6 @@ if (rtc_include_tests) {
     deps = [
       ":array_view",
       ":libjingle_peerconnection_api",
-      ":libjingle_peerconnection_test_api",
       ":optional",
       ":ortc_api",
       "../rtc_base:checks",
