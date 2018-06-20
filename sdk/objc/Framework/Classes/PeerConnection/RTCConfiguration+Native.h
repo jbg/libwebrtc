@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RTCConfiguration ()
 
-/** Optional TurnCustomizer.
+/** absl::optional TurnCustomizer.
  *  With this class one can modify outgoing TURN messages.
  *  The object passed in must remain valid until PeerConnection::Close() is
  * called.

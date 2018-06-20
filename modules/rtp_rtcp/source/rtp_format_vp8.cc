@@ -85,7 +85,7 @@ int ParseVP8Extension(RTPVideoHeaderVP8* vp8,
                       size_t data_length) {
   RTC_DCHECK_GT(data_length, 0);
   size_t parsed_bytes = 0;
-  // Optional X field is present.
+  // absl::optional X field is present.
   bool has_picture_id = (*data & 0x80) ? true : false;   // I bit
   bool has_tl0_pic_idx = (*data & 0x40) ? true : false;  // L bit
   bool has_tid = (*data & 0x20) ? true : false;          // T bit

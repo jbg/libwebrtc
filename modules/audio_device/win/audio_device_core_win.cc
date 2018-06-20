@@ -2120,7 +2120,7 @@ int32_t AudioDeviceWindowsCore::InitRecordingDMO() {
 
   _mediaBuffer = new MediaBufferImpl(_recBlockSize * _recAudioFrameSize);
 
-  // Optional, but if called, must be after media types are set.
+  // absl::optional, but if called, must be after media types are set.
   hr = _dmo->AllocateStreamingResources();
   if (FAILED(hr)) {
     _TraceCOMError(hr);

@@ -113,9 +113,9 @@ class OpenSSLAdapter : public SSLAdapter, public MessageHandler {
   // to allow its SSL_SESSION* to be cached for later resumption.
   static int NewSSLSessionCallback(SSL* ssl, SSL_SESSION* session);
 
-  // Optional SSL Shared session cache to improve performance.
+  // absl::optional SSL Shared session cache to improve performance.
   OpenSSLSessionCache* ssl_session_cache_ = nullptr;
-  // Optional SSL Certificate verifier which can be set by a third party.
+  // absl::optional SSL Certificate verifier which can be set by a third party.
   SSLCertificateVerifier* ssl_cert_verifier_ = nullptr;
   // The current connection state of the (d)TLS connection.
   SSLState state_;

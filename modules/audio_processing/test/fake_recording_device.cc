@@ -43,7 +43,7 @@ class FakeRecordingDeviceWorker {
  protected:
   // Mic level to simulate.
   int mic_level_;
-  // Optional mic level to undo.
+  // absl::optional mic level to undo.
   absl::optional<int> undo_mic_level_;
 };
 

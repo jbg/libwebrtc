@@ -263,7 +263,7 @@ class StreamAdapterInterface : public StreamInterface,
                      int* error) override;
   void Close() override;
 
-  // Optional Stream Interface
+  // absl::optional Stream Interface
   /*  Note: Many stream adapters were implemented prior to this Read/Write
       interface.  Therefore, a simple pass through of data in those cases may
       be broken.  At a later time, we should do a once-over pass of all
