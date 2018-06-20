@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "955898b3_f7af15fa",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-06-20T12:59:03Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t help that much, so remove it.",
+      "range": {
+        "startLine": 812,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 42
+      },
+      "revId": "c0249ec283deff251e3b74510a2f2e49078be285",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
