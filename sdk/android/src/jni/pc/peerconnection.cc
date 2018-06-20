@@ -117,6 +117,51 @@ SdpSemantics JavaToNativeSdpSemantics(JNIEnv* jni,
   return SdpSemantics::kPlanB;
 }
 
+// TODO(nisse): Move elsewhere?
+bool ConvertConstraintsToOfferAnswerOptions(
+    const MediaConstraintsInterface* constraints,
+    PeerConnectionInterface::RTCOfferAnswerOptions* offer_answer_options) {
+  if (!constraints) {
+    return true;
+  }
+
+  bool value = false;
+  size_t mandatory_constraints_satisfied = 0;
+
+  if (FindConstraint(constraints,
+                     MediaConstraintsInterface::kOfferToReceiveAudio, &value,
+                     &mandatory_constraints_satisfied)) {
+    offer_answer_options->offer_to_receive_audio =
+        value ? PeerConnectionInterface::RTCOfferAnswerOptions::
+                    kOfferToReceiveMediaTrue
+              : 0;
+  }
+
+  if (FindConstraint(constraints,
+                     MediaConstraintsInterface::kOfferToReceiveVideo, &value,
+                     &mandatory_constraints_satisfied)) {
+    offer_answer_options->offer_to_receive_video =
+        value ? PeerConnectionInterface::RTCOfferAnswerOptions::
+                    kOfferToReceiveMediaTrue
+              : 0;
+  }
+  if (FindConstraint(constraints,
+                     MediaConstraintsInterface::kVoiceActivityDetection, &value,
+                     &mandatory_constraints_satisfied)) {
+    offer_answer_options->voice_activity_detection = value;
+  }
+  if (FindConstraint(constraints, MediaConstraintsInterface::kUseRtpMux, &value,
+                     &mandatory_constraints_satisfied)) {
+    offer_answer_options->use_rtp_mux = value;
+  }
+  if (FindConstraint(constraints, MediaConstraintsInterface::kIceRestart,
+                     &value, &mandatory_constraints_satisfied)) {
+    offer_answer_options->ice_restart = value;
+  }
+
+  return mandatory_constraints_satisfied == constraints->GetMandatory().size();
+}
+
 }  // namespace
 
 void JavaToNativeRTCConfiguration(
@@ -444,7 +489,9 @@ static void JNI_PeerConnection_CreateOffer(
   rtc::scoped_refptr<CreateSdpObserverJni> observer(
       new rtc::RefCountedObject<CreateSdpObserverJni>(jni, j_observer,
                                                       std::move(constraints)));
-  ExtractNativePC(jni, j_pc)->CreateOffer(observer, observer->constraints());
+  PeerConnectionInterface::RTCOfferAnswerOptions options;
+  ConvertConstraintsToOfferAnswerOptions(observer->constraints(), &options);
+  ExtractNativePC(jni, j_pc)->CreateOffer(observer, options);
 }
 
 static void JNI_PeerConnection_CreateAnswer(
@@ -457,7 +504,9 @@ static void JNI_PeerConnection_CreateAnswer(
   rtc::scoped_refptr<CreateSdpObserverJni> observer(
       new rtc::RefCountedObject<CreateSdpObserverJni>(jni, j_observer,
                                                       std::move(constraints)));
-  ExtractNativePC(jni, j_pc)->CreateAnswer(observer, observer->constraints());
+  PeerConnectionInterface::RTCOfferAnswerOptions options;
+  ConvertConstraintsToOfferAnswerOptions(observer->constraints(), &options);
+  ExtractNativePC(jni, j_pc)->CreateAnswer(observer, options);
 }
 
 static void JNI_PeerConnection_SetLocalDescription(
