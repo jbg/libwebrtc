@@ -29,7 +29,6 @@
 #include "api/peerconnectioninterface.h"
 #include "api/peerconnectionproxy.h"
 #include "api/rtpreceiverinterface.h"
-#include "api/test/fakeconstraints.h"
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "api/video_codecs/sdp_video_format.h"
@@ -80,7 +79,6 @@ using webrtc::DataChannelInterface;
 using webrtc::DtmfSender;
 using webrtc::DtmfSenderInterface;
 using webrtc::DtmfSenderObserverInterface;
-using webrtc::FakeConstraints;
 using webrtc::FakeVideoTrackRenderer;
 using webrtc::MediaConstraintsInterface;
 using webrtc::MediaStreamInterface;
@@ -243,8 +241,8 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     PeerConnectionWrapper* client(new PeerConnectionWrapper(debug_name));
     webrtc::PeerConnectionDependencies dependencies(nullptr);
     dependencies.cert_generator = std::move(cert_generator);
-    if (!client->Init(nullptr, nullptr, nullptr, std::move(dependencies),
-                      network_thread, worker_thread, nullptr)) {
+    if (!client->Init(nullptr, nullptr, std::move(dependencies), network_thread,
+                      worker_thread, nullptr)) {
       delete client;
       return nullptr;
     }
@@ -568,8 +566,7 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
   explicit PeerConnectionWrapper(const std::string& debug_name)
       : debug_name_(debug_name) {}
 
-  bool Init(const MediaConstraintsInterface* constraints,
-            const PeerConnectionFactory::Options* options,
+  bool Init(const PeerConnectionFactory::Options* options,
             const PeerConnectionInterface::RTCConfiguration* config,
             webrtc::PeerConnectionDependencies dependencies,
             rtc::Thread* network_thread,
@@ -626,13 +623,11 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     }
 
     dependencies.allocator = std::move(port_allocator);
-    peer_connection_ =
-        CreatePeerConnection(constraints, config, std::move(dependencies));
+    peer_connection_ = CreatePeerConnection(config, std::move(dependencies));
     return peer_connection_.get() != nullptr;
   }
 
   rtc::scoped_refptr<webrtc::PeerConnectionInterface> CreatePeerConnection(
-      const MediaConstraintsInterface* constraints,
       const PeerConnectionInterface::RTCConfiguration* config,
       webrtc::PeerConnectionDependencies dependencies) {
     PeerConnectionInterface::RTCConfiguration modified_config;
@@ -647,12 +642,6 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     // ratios and not specific resolutions, is this even necessary?
     modified_config.set_cpu_adaptation(false);
 
-    // Use the legacy interface.
-    if (constraints != nullptr) {
-      return peer_connection_factory_->CreatePeerConnection(
-          modified_config, constraints, std::move(dependencies.allocator),
-          std::move(dependencies.cert_generator), this);
-    }
     dependencies.observer = this;
     return peer_connection_factory_->CreatePeerConnection(
         modified_config, std::move(dependencies));
@@ -1160,7 +1149,6 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
   // log factory will be used.
   std::unique_ptr<PeerConnectionWrapper> CreatePeerConnectionWrapper(
       const std::string& debug_name,
-      const MediaConstraintsInterface* constraints,
       const PeerConnectionFactory::Options* options,
       const RTCConfiguration* config,
       webrtc::PeerConnectionDependencies dependencies,
@@ -1177,9 +1165,9 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
     std::unique_ptr<PeerConnectionWrapper> client(
         new PeerConnectionWrapper(debug_name));
 
-    if (!client->Init(constraints, options, &modified_config,
-                      std::move(dependencies), network_thread_.get(),
-                      worker_thread_.get(), std::move(event_log_factory))) {
+    if (!client->Init(options, &modified_config, std::move(dependencies),
+                      network_thread_.get(), worker_thread_.get(),
+                      std::move(event_log_factory))) {
       return nullptr;
     }
     return client;
@@ -1188,13 +1176,12 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
   std::unique_ptr<PeerConnectionWrapper>
   CreatePeerConnectionWrapperWithFakeRtcEventLog(
       const std::string& debug_name,
-      const MediaConstraintsInterface* constraints,
       const PeerConnectionFactory::Options* options,
       const RTCConfiguration* config,
       webrtc::PeerConnectionDependencies dependencies) {
     std::unique_ptr<webrtc::FakeRtcEventLogFactory> event_log_factory(
         new webrtc::FakeRtcEventLogFactory(rtc::Thread::Current()));
-    return CreatePeerConnectionWrapper(debug_name, constraints, options, config,
+    return CreatePeerConnectionWrapper(debug_name, options, config,
                                        std::move(dependencies),
                                        std::move(event_log_factory));
   }
@@ -1216,26 +1203,13 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
     SdpSemantics original_semantics = sdp_semantics_;
     sdp_semantics_ = caller_semantics;
     caller_ = CreatePeerConnectionWrapper(
-        "Caller", nullptr, nullptr, nullptr,
-        webrtc::PeerConnectionDependencies(nullptr), nullptr);
+        "Caller", nullptr, nullptr, webrtc::PeerConnectionDependencies(nullptr),
+        nullptr);
     sdp_semantics_ = callee_semantics;
     callee_ = CreatePeerConnectionWrapper(
-        "Callee", nullptr, nullptr, nullptr,
-        webrtc::PeerConnectionDependencies(nullptr), nullptr);
+        "Callee", nullptr, nullptr, webrtc::PeerConnectionDependencies(nullptr),
+        nullptr);
     sdp_semantics_ = original_semantics;
-    return caller_ && callee_;
-  }
-
-  bool CreatePeerConnectionWrappersWithConstraints(
-      MediaConstraintsInterface* caller_constraints,
-      MediaConstraintsInterface* callee_constraints) {
-    caller_ = CreatePeerConnectionWrapper(
-        "Caller", caller_constraints, nullptr, nullptr,
-        webrtc::PeerConnectionDependencies(nullptr), nullptr);
-    callee_ = CreatePeerConnectionWrapper(
-        "Callee", callee_constraints, nullptr, nullptr,
-        webrtc::PeerConnectionDependencies(nullptr), nullptr);
-
     return caller_ && callee_;
   }
 
@@ -1243,10 +1217,10 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
       const PeerConnectionInterface::RTCConfiguration& caller_config,
       const PeerConnectionInterface::RTCConfiguration& callee_config) {
     caller_ = CreatePeerConnectionWrapper(
-        "Caller", nullptr, nullptr, &caller_config,
+        "Caller", nullptr, &caller_config,
         webrtc::PeerConnectionDependencies(nullptr), nullptr);
     callee_ = CreatePeerConnectionWrapper(
-        "Callee", nullptr, nullptr, &callee_config,
+        "Callee", nullptr, &callee_config,
         webrtc::PeerConnectionDependencies(nullptr), nullptr);
     return caller_ && callee_;
   }
@@ -1257,10 +1231,10 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
       const PeerConnectionInterface::RTCConfiguration& callee_config,
       webrtc::PeerConnectionDependencies callee_dependencies) {
     caller_ =
-        CreatePeerConnectionWrapper("Caller", nullptr, nullptr, &caller_config,
+        CreatePeerConnectionWrapper("Caller", nullptr, &caller_config,
                                     std::move(caller_dependencies), nullptr);
     callee_ =
-        CreatePeerConnectionWrapper("Callee", nullptr, nullptr, &callee_config,
+        CreatePeerConnectionWrapper("Callee", nullptr, &callee_config,
                                     std::move(callee_dependencies), nullptr);
     return caller_ && callee_;
   }
@@ -1269,10 +1243,10 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
       const PeerConnectionFactory::Options& caller_options,
       const PeerConnectionFactory::Options& callee_options) {
     caller_ = CreatePeerConnectionWrapper(
-        "Caller", nullptr, &caller_options, nullptr,
+        "Caller", &caller_options, nullptr,
         webrtc::PeerConnectionDependencies(nullptr), nullptr);
     callee_ = CreatePeerConnectionWrapper(
-        "Callee", nullptr, &callee_options, nullptr,
+        "Callee", &callee_options, nullptr,
         webrtc::PeerConnectionDependencies(nullptr), nullptr);
     return caller_ && callee_;
   }
@@ -1280,10 +1254,10 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
   bool CreatePeerConnectionWrappersWithFakeRtcEventLog() {
     PeerConnectionInterface::RTCConfiguration default_config;
     caller_ = CreatePeerConnectionWrapperWithFakeRtcEventLog(
-        "Caller", nullptr, nullptr, &default_config,
+        "Caller", nullptr, &default_config,
         webrtc::PeerConnectionDependencies(nullptr));
     callee_ = CreatePeerConnectionWrapperWithFakeRtcEventLog(
-        "Callee", nullptr, nullptr, &default_config,
+        "Callee", nullptr, &default_config,
         webrtc::PeerConnectionDependencies(nullptr));
     return caller_ && callee_;
   }
@@ -1296,7 +1270,7 @@ class PeerConnectionIntegrationBaseTest : public testing::Test {
 
     webrtc::PeerConnectionDependencies dependencies(nullptr);
     dependencies.cert_generator = std::move(cert_generator);
-    return CreatePeerConnectionWrapper("New Peer", nullptr, nullptr, nullptr,
+    return CreatePeerConnectionWrapper("New Peer", nullptr, nullptr,
                                        std::move(dependencies), nullptr);
   }
 
@@ -2931,10 +2905,10 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndCallWithGcmCipher) {
 // This test sets up a call between two parties with audio, video and an RTP
 // data channel.
 TEST_P(PeerConnectionIntegrationTest, EndToEndCallWithRtpDataChannel) {
-  FakeConstraints setup_constraints;
-  setup_constraints.SetAllowRtpDataChannels();
-  ASSERT_TRUE(CreatePeerConnectionWrappersWithConstraints(&setup_constraints,
-                                                          &setup_constraints));
+  PeerConnectionInterface::RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(rtc_config, rtc_config));
   ConnectFakeSignaling();
   // Expect that data channel created on caller side will show up for callee as
   // well.
@@ -2967,10 +2941,10 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndCallWithRtpDataChannel) {
 TEST_P(PeerConnectionIntegrationTest,
        RtpDataChannelSignaledClosedInCalleeOffer) {
   // Same procedure as above test.
-  FakeConstraints setup_constraints;
-  setup_constraints.SetAllowRtpDataChannels();
-  ASSERT_TRUE(CreatePeerConnectionWrappersWithConstraints(&setup_constraints,
-                                                          &setup_constraints));
+  PeerConnectionInterface::RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(rtc_config, rtc_config));
   ConnectFakeSignaling();
   caller()->CreateDataChannel();
   caller()->AddAudioVideoTracks();
@@ -3009,10 +2983,10 @@ TEST_P(PeerConnectionIntegrationTest,
   virtual_socket_server()->set_delay_mean(5);  // 5 ms per hop.
   virtual_socket_server()->UpdateDelayDistribution();
 
-  FakeConstraints constraints;
-  constraints.SetAllowRtpDataChannels();
-  ASSERT_TRUE(
-      CreatePeerConnectionWrappersWithConstraints(&constraints, &constraints));
+  PeerConnectionInterface::RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(rtc_config, rtc_config));
   ConnectFakeSignaling();
   caller()->CreateDataChannel();
   caller()->CreateAndSetAndSignalOffer();
@@ -3048,16 +3022,15 @@ TEST_P(PeerConnectionIntegrationTest,
 // This test sets up a call between two parties with audio, video and but only
 // the caller client supports RTP data channels.
 TEST_P(PeerConnectionIntegrationTest, RtpDataChannelsRejectedByCallee) {
-  FakeConstraints setup_constraints_1;
-  setup_constraints_1.SetAllowRtpDataChannels();
+  PeerConnectionInterface::RTCConfiguration rtc_config_1;
+  rtc_config_1.enable_rtp_data_channel = true;
   // Must disable DTLS to make negotiation succeed.
-  setup_constraints_1.SetMandatory(MediaConstraintsInterface::kEnableDtlsSrtp,
-                                   false);
-  FakeConstraints setup_constraints_2;
-  setup_constraints_2.SetMandatory(MediaConstraintsInterface::kEnableDtlsSrtp,
-                                   false);
-  ASSERT_TRUE(CreatePeerConnectionWrappersWithConstraints(
-      &setup_constraints_1, &setup_constraints_2));
+  rtc_config_1.enable_dtls_srtp = false;
+  PeerConnectionInterface::RTCConfiguration rtc_config_2;
+  rtc_config_2.enable_dtls_srtp = false;
+  rtc_config_2.enable_dtls_srtp = false;
+  ASSERT_TRUE(
+      CreatePeerConnectionWrappersWithConfig(rtc_config_1, rtc_config_2));
   ConnectFakeSignaling();
   caller()->CreateDataChannel();
   caller()->AddAudioVideoTracks();
@@ -3074,10 +3047,10 @@ TEST_P(PeerConnectionIntegrationTest, RtpDataChannelsRejectedByCallee) {
 // This test sets up a call between two parties with audio, and video. When
 // audio and video is setup and flowing, an RTP data channel is negotiated.
 TEST_P(PeerConnectionIntegrationTest, AddRtpDataChannelInSubsequentOffer) {
-  FakeConstraints setup_constraints;
-  setup_constraints.SetAllowRtpDataChannels();
-  ASSERT_TRUE(CreatePeerConnectionWrappersWithConstraints(&setup_constraints,
-                                                          &setup_constraints));
+  PeerConnectionInterface::RTCConfiguration rtc_config;
+  rtc_config.enable_rtp_data_channel = true;
+  rtc_config.enable_dtls_srtp = false;
+  ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(rtc_config, rtc_config));
   ConnectFakeSignaling();
   // Do initial offer/answer with audio/video.
   caller()->AddAudioVideoTracks();
