@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ecb53d0_a870163d",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-21T14:52:50Z",
+      "side": 1,
+      "message": "still, why not _api ? nit",
+      "revId": "becc99a49b0f23296b0ffb58a8c8a531d21e22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
