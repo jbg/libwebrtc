@@ -10,7 +10,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': 'cb8b61b491aad9c3b36dbfd705d52a7bfc3c2dda',
+  'chromium_revision': 'c4594f8e6b003937a7f7cb2485654496f227a173',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -43,7 +43,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling Chromium third_party
   # and whatever else without interference from each other.
-  'chromium_third_party_revision': 'b0f19bfaad365c8ae66dec47bd32419ab6e722fb',
+  'chromium_third_party_revision': '1d3a9e9d890565ca774571f53d0df18a3bd60f54',
 }
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
