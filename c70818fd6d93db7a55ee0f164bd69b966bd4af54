@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e498526_660e2e4a",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-21T08:24:45Z",
+      "side": 1,
+      "message": "_api since this is exposed",
+      "revId": "c70818fd6d93db7a55ee0f164bd69b966bd4af54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efdcb64f_f14282b7",
+        "filename": "api/mediatypes.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-21T08:24:45Z",
+      "side": 1,
+      "message": "This is confusing - leave a comment explaining why there are multiple MediaType:s",
+      "revId": "c70818fd6d93db7a55ee0f164bd69b966bd4af54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "464f257a_213eb3c6",
+        "filename": "api/test/video_quality_test_fixture.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-21T08:24:45Z",
+      "side": 1,
+      "message": "Can we provide an instance via a NetworkSimulationInterface* instead of having the VideoQualityTest implementation set it up from the config? I\u0027d prefer that, alternatively adding the network config inline here and avoid exposing SimulatedNetwork in api/test",
+      "revId": "c70818fd6d93db7a55ee0f164bd69b966bd4af54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82375505_be562259",
+        "filename": "video/default_video_quality_test_fixture.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-06-21T08:24:45Z",
+      "side": 1,
+      "message": "This file should live in api/test/ - compare with create_videocodec_test_fixture.cc",
+      "revId": "c70818fd6d93db7a55ee0f164bd69b966bd4af54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
