@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f70c423_14021152",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 43
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-06-21T11:01:40Z",
+      "side": 1,
+      "message": "Can you please fix the indentation?\n\nI think you can run:\n\n$ gn format modules/video_coding/BUILD.gn",
+      "range": {
+        "startLine": 149,
+        "startChar": 2,
+        "endLine": 149,
+        "endChar": 4
+      },
+      "revId": "d522ba4bd4651572ced6b79256689b73d2f3ec70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25a82e2f_10dc5bc2",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 43
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-06-21T11:01:40Z",
+      "side": 1,
+      "message": "Is this really needed? I landed a CL to remove all of them yesterday (https://webrtc-review.googlesource.com/84144).\n\nIt is better to fix the cast warning instead of suppressing it.",
+      "range": {
+        "startLine": 249,
+        "startChar": 2,
+        "endLine": 250,
+        "endChar": 67
+      },
+      "revId": "d522ba4bd4651572ced6b79256689b73d2f3ec70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "553442fc_94eab9d1",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 43
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-06-21T11:01:40Z",
+      "side": 1,
+      "message": "Wrong indentation (see above).",
+      "range": {
+        "startLine": 689,
+        "startChar": 2,
+        "endLine": 689,
+        "endChar": 4
+      },
+      "revId": "d522ba4bd4651572ced6b79256689b73d2f3ec70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
