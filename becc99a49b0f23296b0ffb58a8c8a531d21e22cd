@@ -16,6 +16,24 @@
       "revId": "becc99a49b0f23296b0ffb58a8c8a531d21e22cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaef8d54_27310ab6",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-06-21T14:57:31Z",
+      "side": 1,
+      "message": "Oops sorry, I accidentally undid my change.",
+      "parentUuid": "5ecb53d0_a870163d",
+      "revId": "becc99a49b0f23296b0ffb58a8c8a531d21e22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
