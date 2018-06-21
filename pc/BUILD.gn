@@ -483,6 +483,7 @@ if (rtc_include_tests) {
       "../rtc_base:base64",
       "../rtc_base:checks",
       "../rtc_base:stringutils",
+      "../system_wrappers:metrics_api",
       "../test:fileutils",
     ]
     if (is_android) {

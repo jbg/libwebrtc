@@ -62,6 +62,8 @@
 #include "rtc_base/gunit.h"
 #include "rtc_base/testcertificateverifier.h"
 #include "rtc_base/virtualsocketserver.h"
+#include "system_wrappers/include/metrics.h"
+#include "system_wrappers/include/metrics_default.h"
 #include "test/gmock.h"
 
 using cricket::ContentInfo;
@@ -4510,6 +4512,75 @@ TEST_P(PeerConnectionIntegrationTest,
   EXPECT_LT(0, caller_ice_event_count);
   EXPECT_LT(0, callee_ice_config_count);
   EXPECT_LT(0, callee_ice_event_count);
+}
+
+TEST_P(PeerConnectionIntegrationTest, RtcHistogramMacroBehavior) {
+  // Test 1, using RTC_HISTOGRAM_ENUMERATION where the histogram name varies.
+  webrtc::metrics::Reset();
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("video", 0));
+
+  std::string counter1;
+  for (int i = 0; i < 2; ++i) {
+    if (i == 0) {
+      counter1 = "audio";
+    } else {
+      counter1 = "video";
+    }
+    RTC_HISTOGRAM_ENUMERATION(counter1, 0, 2);
+  }
+  // Both events are logged to "audio".
+  EXPECT_EQ(2, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("video", 0));
+
+  // Test 2, using RTC_HISTOGRAM_ENUMERATION_SPARSE where the histogram name
+  // varies.
+  webrtc::metrics::Reset();
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("video", 0));
+
+  std::string counter2;
+  for (int i = 0; i < 2; ++i) {
+    if (i == 0) {
+      counter2 = "audio";
+    } else {
+      counter2 = "video";
+    }
+    RTC_HISTOGRAM_ENUMERATION_SPARSE(counter2, 0, 2);
+  }
+  // Events are logged to "audio" and "video" respectively.
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("video", 0));
+
+  // Test 3, using RTC_HISTOGRAM_ENUMERATION where the histogram name is
+  // static.
+  webrtc::metrics::Reset();
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("video", 0));
+
+  std::string audio_counter = "audio";
+  std::string video_counter = "video";
+  for (int i = 0; i < 1; ++i) {
+    RTC_HISTOGRAM_ENUMERATION(audio_counter, 0, 2);
+    RTC_HISTOGRAM_ENUMERATION(video_counter, 0, 2);
+  }
+  // Events are logged to "audio" and "video" respectively.
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("video", 0));
+
+  // Test 4, using RTC_HISTOGRAM_ENUMERATION_SPARSE where the histogram name is
+  // static.
+  webrtc::metrics::Reset();
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("video", 0));
+
+  for (int i = 0; i < 1; ++i) {
+    RTC_HISTOGRAM_ENUMERATION_SPARSE(audio_counter, 0, 2);
+    RTC_HISTOGRAM_ENUMERATION_SPARSE(video_counter, 0, 2);
+  }
+  // Events are logged to "audio" and "video" respectively.
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("audio", 0));
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("video", 0));
 }
 
 INSTANTIATE_TEST_CASE_P(PeerConnectionIntegrationTest,
