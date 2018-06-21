@@ -110,4 +110,35 @@ TEST_F(MetricsTest, RtcHistogramSparse_NonConstantNameWorks) {
   EXPECT_EQ(1, metrics::NumSamples("Sparse2"));
 }
 
+TEST_F(MetricsTest, RtcHistogramEnumerationIsSafeInLoops) {
+  webrtc::metrics::Reset();
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("Name1", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("Name2", 0));
+
+  const char* counter_name;
+  for (int i = 0; i < 2; ++i) {
+    if (i == 0) {
+      counter_name = "Name1";
+    } else {
+      counter_name = "Name2";
+    }
+    RTC_HISTOGRAM_ENUMERATION(counter_name, 0, 2);
+  }
+  // Both events logged to Name1.
+  EXPECT_EQ(2, webrtc::metrics::NumEvents("Name1", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("Name2", 0));
+
+  webrtc::metrics::Reset();
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("Name1", 0));
+  EXPECT_EQ(0, webrtc::metrics::NumEvents("Name2", 0));
+
+  for (int i = 0; i < 1; ++i) {
+    RTC_HISTOGRAM_ENUMERATION("Name1", 0, 2);
+    RTC_HISTOGRAM_ENUMERATION("Name2", 0, 2);
+  }
+  // Events logged to Name1 and Name2 respectively.
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("Name1", 0));
+  EXPECT_EQ(1, webrtc::metrics::NumEvents("Name2", 0));
+}
+
 }  // namespace webrtc
