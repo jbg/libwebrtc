@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b0dbd2aa_bed0261c",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-21T08:45:10Z",
+      "side": 1,
+      "message": "I cloned the code in vp8 encoder impl, in there the codec settings where called \"inst\".\n\nThe code in vp8 and h264 is almost line by line equal, so keeping the \"inst\" naming allows to compare them side by side and easily spot any difference/error.\n\nI can rename it if you feel so.",
+      "parentUuid": "bdc97959_07cc345b",
+      "range": {
+        "startLine": 188,
+        "startChar": 54,
+        "endLine": 188,
+        "endChar": 58
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0c96ac3e_d6eb4866",
         "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
         "patchSetId": 42
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-20T13:58:40Z",
       "side": 1,
       "message": "We go in here also if we don\u0027t do simulcast, right? The comment seems a bit misleading as it probably means temporal layers are not supported at all.",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b58c4919_d1b955f3",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-21T08:45:10Z",
+      "side": 1,
+      "message": "afaik temporal layers for h264 are not supported at all. can you clarify please?",
+      "parentUuid": "0c96ac3e_d6eb4866",
       "range": {
         "startLine": 240,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "77f6302e_fd109282",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-21T08:45:10Z",
+      "side": 1,
+      "message": "It was like that before the patch, I prefer not to touch it.",
+      "parentUuid": "a83acccc_ce2ebc89",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ba27604_9e09d65a",
         "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
         "patchSetId": 42
@@ -82,6 +154,30 @@
       "writtenOn": "2018-06-20T13:58:40Z",
       "side": 1,
       "message": "Why rename this? :)",
+      "range": {
+        "startLine": 348,
+        "startChar": 29,
+        "endLine": 348,
+        "endChar": 36
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82eb50ea_3ac1dac4",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-06-21T08:45:10Z",
+      "side": 1,
+      "message": "Because it was like that in the vp8 encoder and allowed me to easily  port the code and review. I can change it if you feel so.",
+      "parentUuid": "4ba27604_9e09d65a",
       "range": {
         "startLine": 348,
         "startChar": 29,
