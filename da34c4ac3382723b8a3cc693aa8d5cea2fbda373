@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "49fb2cc5_8835d67a",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-21T08:49:33Z",
+      "side": 1,
+      "message": "Right, but the comment says \"Temporal layers with simulcast still not supported\". You can drop the whole simulcast part.",
+      "parentUuid": "b58c4919_d1b955f3",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a83acccc_ce2ebc89",
         "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
         "patchSetId": 42
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "256c461e_17312524",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-21T08:49:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "77f6302e_fd109282",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ba27604_9e09d65a",
         "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
         "patchSetId": 42
@@ -187,6 +235,30 @@
       "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dfc85d0_31fd115b",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 42
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-06-21T08:49:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "82eb50ea_3ac1dac4",
+      "range": {
+        "startLine": 348,
+        "startChar": 29,
+        "endLine": 348,
+        "endChar": 36
+      },
+      "revId": "da34c4ac3382723b8a3cc693aa8d5cea2fbda373",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
