@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e9c77e5_d341b850",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-22T19:49:28Z",
+      "side": 1,
+      "message": "I had an issue because of the macro interprets the comma in the template, similar to this one (https://stackoverflow.com/questions/13842468/comma-in-c-c-macro) and used the alias to avoid that, but sure I should try to avoid this and given the comment below this may not be the right approach.",
+      "parentUuid": "655ea351_6e9503f1",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a93037f_aa49b362",
         "filename": "system_wrappers/include/metrics.h",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-22T18:32:24Z",
       "side": 1,
       "message": "This isn\u0027t thread-safe, since the map modification isn\u0027t atomic, only copying the pointer afterwards",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a536d802_0bf85e2d",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-22T19:49:28Z",
+      "side": 1,
+      "message": "Ah, good point, and I overlooked this aspect. It seems I may need a different approach. My first thought was to use something like atomic_histogram_pointer##constant_name, and this would be thread safe and also avoid using a heavy object like map (with possibly locks for thread safety) that keeps the binary size unchanged. The issue is |constant_name| would a string literal in most cases, and the concatenation does not work. Event if I remove the quotes (with some really hacky macro tricks), we need to take care of the case when |constant_name| is a variable, in which case it would be the variable name gets concatenated...",
+      "parentUuid": "2a93037f_aa49b362",
       "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
