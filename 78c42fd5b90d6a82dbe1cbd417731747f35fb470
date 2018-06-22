@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "655ea351_6e9503f1",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-22T18:32:24Z",
+      "side": 1,
+      "message": "Should try not to use aliases; see https://google.github.io/styleguide/cppguide.html#Aliases",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a93037f_aa49b362",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-22T18:32:24Z",
+      "side": 1,
+      "message": "This isn\u0027t thread-safe, since the map modification isn\u0027t atomic, only copying the pointer afterwards",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
