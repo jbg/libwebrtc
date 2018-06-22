@@ -69,6 +69,24 @@
       "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6ec4115_13aab526",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-22T20:19:36Z",
+      "side": 1,
+      "message": "Hmm... Maybe concatenate the line number? https://stackoverflow.com/questions/1597007/creating-c-macro-with-and-line-token-concatenation-with-positioning-macr\n\nIf there\u0027s really no way to do this that\u0027s not obscenely complex/hacky, we could just add an extra argument to the macros.\n\nOr just avoid calling it in a loop, and do something to cause a compile error if it does end up called in a loop?",
+      "parentUuid": "a536d802_0bf85e2d",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
