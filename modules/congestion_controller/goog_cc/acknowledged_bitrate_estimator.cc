@@ -48,12 +48,20 @@ void AcknowledgedBitrateEstimator::IncomingPacketFeedbackVector(
 }
 
 absl::optional<uint32_t> AcknowledgedBitrateEstimator::bitrate_bps() const {
-  return bitrate_estimator_->bitrate_bps();
+  auto estimated_bitrate = bitrate_estimator_->bitrate_bps();
+  return estimated_bitrate
+             ? *estimated_bitrate +
+                   (no_feedback_bitrate_bps_ ? *no_feedback_bitrate_bps_ : 0)
+             : estimated_bitrate;
 }
 
 void AcknowledgedBitrateEstimator::SetAlrEndedTimeMs(
     int64_t alr_ended_time_ms) {
   alr_ended_time_ms_.emplace(alr_ended_time_ms);
+}
+
+void AcknowledgedBitrateEstimator::SetNoFeedbackBitrate(uint32_t bitrate_bps) {
+  no_feedback_bitrate_bps_.emplace(bitrate_bps);
 }
 
 void AcknowledgedBitrateEstimator::MaybeExpectFastRateChange(
