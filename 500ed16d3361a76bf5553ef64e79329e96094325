@@ -94,6 +94,52 @@
     },
     {
       "key": {
+        "uuid": "871c4dbc_301aa5a5",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-06-25T11:46:15Z",
+      "side": 1,
+      "message": "SetAllocatedBitrateWithoutFeedback?\n\nI feel that SetNoFeedbackBitrate is ambiguous. For example, it could be interpreted as a safe default if all feedback is lost.",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41005bb8_f554fe03",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-06-25T11:46:15Z",
+      "side": 1,
+      "message": "Please add a comment explaining what it is for.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e975b40c_60319f75",
         "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.h",
         "patchSetId": 5
