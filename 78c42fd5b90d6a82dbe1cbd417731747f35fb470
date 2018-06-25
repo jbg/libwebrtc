@@ -139,6 +139,24 @@
       "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e9034bd_63790ef1",
+        "filename": "system_wrappers/source/metrics_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-25T17:49:58Z",
+      "side": 1,
+      "message": "Yes, this works as is. The same test in the other CL (https://webrtc-review.googlesource.com/c/src/+/84820) is used to clarify what this CL is trying to asking for feedback. The first test where the counter name is not a literal was not working there, but it looks like this is the intended behavior based on the feedback.",
+      "parentUuid": "7f958eb1_59152f74",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
