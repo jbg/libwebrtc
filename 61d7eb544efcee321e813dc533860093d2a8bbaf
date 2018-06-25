@@ -80,6 +80,24 @@
       "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f712410_dc61800c",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-06-25T22:28:06Z",
+      "side": 1,
+      "message": "Hmm, good catch, and I realize this is problematic. The std::set::insert seems to reorder elements after insertion: \"Internally, set containers keep all their elements sorted following the criterion specified by its comparison object.\" (http://www.cplusplus.com/reference/set/set/insert/)",
+      "parentUuid": "0cbf005a_83519911",
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
