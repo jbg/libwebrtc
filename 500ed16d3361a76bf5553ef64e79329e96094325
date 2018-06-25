@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b37a3def_6c3a5102",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 7343
+      },
+      "writtenOn": "2018-06-25T11:08:49Z",
+      "side": 1,
+      "message": "I do not know what TWCC stands for and therefore intention of this field is hard to guess. \"NoTransportTimestamping\" or something like that.",
+      "range": {
+        "startLine": 298,
+        "startChar": 39,
+        "endLine": 298,
+        "endChar": 63
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8563330a_c783282b",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 7343
+      },
+      "writtenOn": "2018-06-25T11:08:49Z",
+      "side": 1,
+      "message": "Comment seems misplaced with the new added lines.",
+      "range": {
+        "startLine": 413,
+        "startChar": 2,
+        "endLine": 415,
+        "endChar": 13
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85f71aba_93a72931",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 7343
+      },
+      "writtenOn": "2018-06-25T11:08:49Z",
+      "side": 1,
+      "message": "Propose adding a comment here, something like:\nWhen skipping transport timestamp extension audio packets are not included in the bandwidth estimate. Instead, add the audio bandwidth allocation as an offset to the estimate.",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 66
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67aaf572_7a8915f0",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7343
+      },
+      "writtenOn": "2018-06-25T11:08:49Z",
+      "side": 1,
+      "message": "Could use value_or here",
+      "range": {
+        "startLine": 54,
+        "startChar": 19,
+        "endLine": 54,
+        "endChar": 77
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e975b40c_60319f75",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7343
+      },
+      "writtenOn": "2018-06-25T11:08:49Z",
+      "side": 1,
+      "message": "Not sure about name. Consider if \"bandwidth_estimate_offset_bps_\" is better.",
+      "range": {
+        "startLine": 42,
+        "startChar": 26,
+        "endLine": 42,
+        "endChar": 52
+      },
+      "revId": "500ed16d3361a76bf5553ef64e79329e96094325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
