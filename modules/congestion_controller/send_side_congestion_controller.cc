@@ -415,6 +415,10 @@ void SendSideCongestionController::SetPacingFactor(float pacing_factor) {
   pacer_->SetPacingFactor(pacing_factor);
 }
 
+void SendSideCongestionController::SetNoFeedbackBitrate(uint32_t bitrate_bps) {
+  acknowledged_bitrate_estimator_->SetNoFeedbackBitrate(bitrate_bps);
+}
+
 void SendSideCongestionController::MaybeTriggerOnNetworkChanged() {
   uint32_t bitrate_bps;
   uint8_t fraction_loss;
