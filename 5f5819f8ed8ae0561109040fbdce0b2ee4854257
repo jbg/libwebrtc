@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e26ba259_53f0819d",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-25T09:02:24Z",
+      "side": 0,
+      "message": "Can\u0027t all this be replaced by a C++11 static,\n\nstatic webrtc::metrics::Histogram* const histogram \u003d factory_get_invocation;\n\nAnd preferably, moved outside of the macro.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 76
+      },
+      "revId": "5f5819f8ed8ae0561109040fbdce0b2ee4854257",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

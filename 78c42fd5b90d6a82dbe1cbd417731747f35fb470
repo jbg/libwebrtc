@@ -87,6 +87,24 @@
       "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a36de6da_3b79b0a8",
+        "filename": "system_wrappers/include/metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-06-25T09:02:24Z",
+      "side": 1,
+      "message": "I\u0027m afraid I don\u0027t understand the purpose of the caching of the histogram pointer.\n\nIt would be cleanest to leave that to the caller and pass in an appropriate Histogram pointer.",
+      "parentUuid": "e6ec4115_13aab526",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
