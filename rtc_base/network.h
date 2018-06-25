@@ -16,6 +16,7 @@
 #include <deque>
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -196,6 +197,8 @@ class NetworkManagerBase : public NetworkManager {
 
   IPAddress default_local_ipv4_address_;
   IPAddress default_local_ipv6_address_;
+
+  std::set<std::string> interface_names_;
   // We use 16 bits to save the bandwidth consumption when sending the network
   // id over the Internet. It is OK that the 16-bit integer overflows to get a
   // network id 0 because we only compare the network ids in the old and the new
@@ -404,6 +407,9 @@ class Network {
   uint16_t id() const { return id_; }
   void set_id(uint16_t id) { id_ = id; }
 
+  uint16_t interface_id() const { return interface_id_; }
+  void set_interface_id(uint16_t interface_id) { interface_id_ = interface_id; }
+
   int preference() const { return preference_; }
   void set_preference(int preference) { preference_ = preference; }
 
@@ -435,6 +441,7 @@ class Network {
   int preference_;
   bool active_ = true;
   uint16_t id_ = 0;
+  uint16_t interface_id_ = 0;
 
   friend class NetworkManager;
 };
