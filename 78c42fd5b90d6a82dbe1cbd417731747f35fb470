@@ -105,6 +105,40 @@
       "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edf0f29e_565505f0",
+        "filename": "system_wrappers/source/metrics_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-25T10:44:11Z",
+      "side": 1,
+      "message": "This isn\u0027t supposed to work.",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f958eb1_59152f74",
+        "filename": "system_wrappers/source/metrics_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-25T10:44:11Z",
+      "side": 1,
+      "message": "But this should work even before this CL?",
+      "revId": "78c42fd5b90d6a82dbe1cbd417731747f35fb470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
