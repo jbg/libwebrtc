@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22aa17a3_51d03ad3",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-25T21:59:34Z",
+      "side": 1,
+      "message": "I have a couple of questions regarding the attribute type values:\n1. How is this number determined? In addition to the ICE and STUN RFCs, are there other (maybe internal) references I should be aware of to make sure the numeric value below does not conflict with some other extended attributes?\n2. Do I need any public announcement of the new field so that there is no conflict in the future from endpoints with different implementation?",
+      "range": {
+        "startLine": 597,
+        "startChar": 27,
+        "endLine": 597,
+        "endChar": 33
+      },
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
