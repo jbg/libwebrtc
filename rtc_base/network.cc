@@ -32,6 +32,7 @@
 #include <stdio.h>
 
 #include <algorithm>
+#include <iterator>
 #include <memory>
 
 #include "rtc_base/checks.h"
@@ -340,8 +341,15 @@ void NetworkManagerBase::MergeNetworkList(const NetworkList& new_networks,
     Network* net = kv.second.net;
     auto existing = networks_map_.find(key);
     if (existing == networks_map_.end()) {
-      // This network is new. Place it in the network map.
+      interface_names_.insert(net->name());
+      const auto& interface_iterator = interface_names_.find(net->name());
+      RTC_DCHECK(interface_iterator != interface_names_.end());
+      // Meaningful interface id starts from 1, similar to the network id (see
+      // the initial value of next_available_network_id_ below).
+      net->set_interface_id(
+          std::distance(interface_names_.begin(), interface_iterator) + 1);
       merged_list.push_back(net);
+      // This network is new. Place it in the network map.
       networks_map_[key] = net;
       net->set_id(next_available_network_id_++);
       // Also, we might have accumulated IPAddresses from the first
