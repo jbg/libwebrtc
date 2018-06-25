@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1769ee13_b440dc91",
+        "filename": "api/candidate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-25T22:16:21Z",
+      "side": 1,
+      "message": "Add a brief comment.",
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22aa17a3_51d03ad3",
         "filename": "p2p/base/stun.h",
         "patchSetId": 1
@@ -19,6 +36,47 @@
         "endLine": 597,
         "endChar": 33
       },
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "253ee5d8_12500cd0",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-25T22:16:21Z",
+      "side": 1,
+      "message": "1. If I understand correctly, the IETF is ultimately responsible for standardizing the number. Here\u0027s a page with all the currently assigned numbers: https://www.iana.org/assignments/stun-parameters/stun-parameters.xhtml\n\nOf course there\u0027s already some non-standard numbers here, so maybe that list is not super useful.\n\n2. I\u0027ll defer to Taylor/Peter who may know more here.",
+      "parentUuid": "22aa17a3_51d03ad3",
+      "range": {
+        "startLine": 597,
+        "startChar": 27,
+        "endLine": 597,
+        "endChar": 33
+      },
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cbf005a_83519911",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-25T22:16:21Z",
+      "side": 1,
+      "message": "This could change the interface_ids for existing networks (if net-\u003ename() is \u003c an existing network). Is that ok?",
       "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
