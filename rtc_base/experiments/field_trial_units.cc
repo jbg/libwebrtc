@@ -23,10 +23,10 @@ namespace {
 
 struct ValueWithUnit {
   double value;
-  std::string unit;
+  const std::string unit;
 };
 
-absl::optional<ValueWithUnit> ParseValueWithUnit(std::string str) {
+absl::optional<ValueWithUnit> ParseValueWithUnit(const string_view str) {
   if (str == "inf") {
     return ValueWithUnit{std::numeric_limits<double>::infinity(), ""};
   } else if (str == "-inf") {
@@ -35,8 +35,9 @@ absl::optional<ValueWithUnit> ParseValueWithUnit(std::string str) {
     double double_val;
     char unit_char[RTC_TRIAL_UNIT_SIZE];
     unit_char[0] = 0;
-    if (sscanf(str.c_str(), "%lf%" RTC_TRIAL_UNIT_LENGTH_STR "s", &double_val,
-               unit_char) >= 1) {
+    std::string string = str;
+    if (sscanf(string.c_str(), "%lf%" RTC_TRIAL_UNIT_LENGTH_STR "s",
+               &double_val, unit_char) >= 1) {
       return ValueWithUnit{double_val, unit_char};
     }
   }
@@ -45,7 +46,7 @@ absl::optional<ValueWithUnit> ParseValueWithUnit(std::string str) {
 }  // namespace
 
 template <>
-absl::optional<DataRate> ParseTypedParameter<DataRate>(std::string str) {
+absl::optional<DataRate> ParseTypedParameter<DataRate>(const string_view str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit.empty() || result->unit == "kbps") {
@@ -58,7 +59,7 @@ absl::optional<DataRate> ParseTypedParameter<DataRate>(std::string str) {
 }
 
 template <>
-absl::optional<DataSize> ParseTypedParameter<DataSize>(std::string str) {
+absl::optional<DataSize> ParseTypedParameter<DataSize>(const string_view str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit.empty() || result->unit == "bytes")
@@ -68,7 +69,8 @@ absl::optional<DataSize> ParseTypedParameter<DataSize>(std::string str) {
 }
 
 template <>
-absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(std::string str) {
+absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(
+    const string_view str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit == "s" || result->unit == "seconds") {
