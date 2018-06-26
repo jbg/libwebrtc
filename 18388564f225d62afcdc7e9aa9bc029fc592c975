@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c78d214_69f74e26",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-26T04:17:01Z",
+      "side": 1,
+      "message": "Capitalize as PeerConnectionFactory?",
+      "range": {
+        "startLine": 1504,
+        "startChar": 70,
+        "endLine": 1505,
+        "endChar": 21
+      },
+      "revId": "18388564f225d62afcdc7e9aa9bc029fc592c975",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
