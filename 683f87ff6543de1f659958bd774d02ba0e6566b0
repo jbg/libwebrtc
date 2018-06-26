@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca2e548b_9bc0dea9",
+        "filename": "api/mediaconstraintsinterface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-06-26T12:10:42Z",
+      "side": 1,
+      "message": "This may look a bit misleading.\nThe interface in the spec is still in the spec and still in active use, but the translation between that interface and WebRTC\u0027s interface is being moved as far up the stack as possible (currently in content/, may be moving to blink/ eventually).\n\nMight instead say \"not used by Chrome\".",
+      "revId": "683f87ff6543de1f659958bd774d02ba0e6566b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
