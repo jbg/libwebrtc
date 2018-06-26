@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a9aec7cd_1796acae",
+        "filename": "api/candidate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-06-26T00:46:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1769ee13_b440dc91",
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22aa17a3_51d03ad3",
         "filename": "p2p/base/stun.h",
         "patchSetId": 1
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "855b9f56_76449fa7",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-06-26T00:46:36Z",
+      "side": 1,
+      "message": "Thanks for the pointer to the list! At least, it seems numbers above 0xC003 is unassigned in the standard space",
+      "parentUuid": "253ee5d8_12500cd0",
+      "range": {
+        "startLine": 597,
+        "startChar": 27,
+        "endLine": 597,
+        "endChar": 33
+      },
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0cbf005a_83519911",
         "filename": "rtc_base/network.cc",
         "patchSetId": 1
@@ -95,6 +137,24 @@
       "side": 1,
       "message": "Hmm, good catch, and I realize this is problematic. The std::set::insert seems to reorder elements after insertion: \"Internally, set containers keep all their elements sorted following the criterion specified by its comparison object.\" (http://www.cplusplus.com/reference/set/set/insert/)",
       "parentUuid": "0cbf005a_83519911",
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "198d199b_1c281b58",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-06-26T00:46:36Z",
+      "side": 1,
+      "message": "Thought std::unordered_set has the desired behavior in a previous patch but it turns out using it is still wrong. The interface ids are explicitly stored instead in the new patch.",
+      "parentUuid": "2f712410_dc61800c",
       "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
