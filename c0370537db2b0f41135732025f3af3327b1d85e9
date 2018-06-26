@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "e65e154f_b73ca250",
+        "filename": "api/candidate.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-26T04:09:27Z",
+      "side": 1,
+      "message": "Maybe also clarify this comment to distinguish it from interface_id.",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18733efb_608d8df9",
+        "filename": "api/candidate.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-26T04:09:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 19
+      },
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "012c8892_e423de1d",
         "filename": "rtc_base/network.h",
         "patchSetId": 4

@@ -158,6 +158,24 @@
       "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c84db206_8758f583",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-06-26T04:09:27Z",
+      "side": 1,
+      "message": "An alternative is to use a std::vector and manually check if the network already exists before adding it. But the solution you have now works, so up to you which one you prefer.",
+      "parentUuid": "198d199b_1c281b58",
+      "revId": "61d7eb544efcee321e813dc533860093d2a8bbaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
