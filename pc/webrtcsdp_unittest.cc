@@ -2137,6 +2137,13 @@ TEST_F(WebRtcSdpTest, SerializeCandidates) {
   message = webrtc::SdpSerializeCandidate(*jcandidate_);
   EXPECT_EQ(std::string(kRawCandidate) + " network-id 1 network-cost 999",
             message);
+  candidate_with_network_info.set_interface_id(2);
+  jcandidate_.reset(new JsepIceCandidate(std::string("audio"), 0,
+                                         candidate_with_network_info));
+  message = webrtc::SdpSerializeCandidate(*jcandidate_);
+  EXPECT_EQ(
+      std::string(kRawCandidate) + " network-id 1 network-cost 999 iface-id 2",
+      message);
 }
 
 // TODO(mallinath) : Enable this test once WebRTCSdp capable of parsing
@@ -2438,7 +2445,7 @@ TEST_F(WebRtcSdpTest, DeserializeCandidate) {
   expected.set_generation(0);
   EXPECT_TRUE(jcandidate.candidate().IsEquivalent(expected));
 
-  // Candidate with network id and/or cost.
+  // Candidate with network id and/or cost, or interface id.
   sdp = kSdpOneCandidate;
   Replace(" generation 2", " generation 2 network-id 2", &sdp);
   EXPECT_TRUE(SdpDeserializeCandidate(sdp, &jcandidate));
@@ -2448,11 +2455,16 @@ TEST_F(WebRtcSdpTest, DeserializeCandidate) {
   expected.set_network_id(2);
   EXPECT_TRUE(jcandidate.candidate().IsEquivalent(expected));
   EXPECT_EQ(0, jcandidate.candidate().network_cost());
-  // Add network cost
+  // Add network cost.
   Replace(" network-id 2", " network-id 2 network-cost 9", &sdp);
   EXPECT_TRUE(SdpDeserializeCandidate(sdp, &jcandidate));
   EXPECT_TRUE(jcandidate.candidate().IsEquivalent(expected));
   EXPECT_EQ(9, jcandidate.candidate().network_cost());
+  // Add interface id.
+  Replace(" network-cost 9", " network-cost 9 iface-id 2", &sdp);
+  EXPECT_TRUE(SdpDeserializeCandidate(sdp, &jcandidate));
+  EXPECT_TRUE(jcandidate.candidate().IsEquivalent(expected));
+  EXPECT_EQ(2, jcandidate.candidate().interface_id());
 
   sdp = kSdpTcpActiveCandidate;
   EXPECT_TRUE(SdpDeserializeCandidate(sdp, &jcandidate));
