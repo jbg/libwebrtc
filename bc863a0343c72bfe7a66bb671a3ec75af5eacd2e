@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e3ce7ad_45cf8386",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-26T09:06:57Z",
+      "side": 1,
+      "message": "No need in parentheses.",
+      "range": {
+        "startLine": 378,
+        "startChar": 9,
+        "endLine": 378,
+        "endChar": 10
+      },
+      "revId": "bc863a0343c72bfe7a66bb671a3ec75af5eacd2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48307e95_5e048fac",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-26T09:06:57Z",
+      "side": 1,
+      "message": "No need in extra parentheses.",
+      "range": {
+        "startLine": 385,
+        "startChar": 6,
+        "endLine": 385,
+        "endChar": 7
+      },
+      "revId": "bc863a0343c72bfe7a66bb671a3ec75af5eacd2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26d6cfa3_43fcacd4",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-06-26T09:06:57Z",
+      "side": 1,
+      "message": "No need in parentheses. Please clean up other relevant lines.",
+      "range": {
+        "startLine": 419,
+        "startChar": 12,
+        "endLine": 419,
+        "endChar": 13
+      },
+      "revId": "bc863a0343c72bfe7a66bb671a3ec75af5eacd2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
