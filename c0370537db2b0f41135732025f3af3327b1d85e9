@@ -42,6 +42,40 @@
     },
     {
       "key": {
+        "uuid": "9dafb766_731dea24",
+        "filename": "api/candidate.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-27T23:13:36Z",
+      "side": 1,
+      "message": "\"e.g.\" implies that there are other reasons for the same interface having multiple networks, but isn\u0027t this the only possible reason? I think the comments describing what these IDs represent could be more clear.",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f26778f6_434805f3",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-27T23:13:36Z",
+      "side": 1,
+      "message": "What about network cost/network ID? I thought the idea was to have a new attribute that contains all necessary information and eventually stop using the old attribute.",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "012c8892_e423de1d",
         "filename": "rtc_base/network.h",
         "patchSetId": 4
@@ -59,6 +93,47 @@
         "endLine": 207,
         "endChar": 47
       },
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cb07efe_df3ddf2d",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-27T23:13:36Z",
+      "side": 1,
+      "message": "I think it may be implying \"it\u0027s ok if this rolls over back to 0, because by the time that happens the original ID 0 Network won\u0027t be in use by a \"best connection\"\"?",
+      "parentUuid": "012c8892_e423de1d",
+      "range": {
+        "startLine": 205,
+        "startChar": 27,
+        "endLine": 207,
+        "endChar": 47
+      },
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36dfed48_89921320",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-06-27T23:13:36Z",
+      "side": 1,
+      "message": "Comment describing what interface_id represents?",
       "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
