@@ -86,6 +86,7 @@ class SuppressionGain {
   int initial_state_change_counter_ = 0;
   CoherenceGain coherence_gain_;
   const bool enable_transparency_improvements_;
+  const bool enable_new_suppression_;
   aec3::MovingAverage moving_average_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(SuppressionGain);

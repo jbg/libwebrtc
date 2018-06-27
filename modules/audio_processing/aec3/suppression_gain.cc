@@ -35,6 +35,10 @@ bool EnableTransparencyImprovements() {
       "WebRTC-Aec3TransparencyImprovementsKillSwitch");
 }
 
+bool EnableNewSuppression() {
+  return !field_trial::IsEnabled("WebRTC-Aec3NewSuppressionKillSwitch");
+}
+
 // Adjust the gains according to the presence of known external filters.
 void AdjustForExternalFilters(std::array<float, kFftLengthBy2Plus1>* gain) {
   // Limit the low frequency gains to avoid the impact of the high-pass filter
@@ -150,7 +154,31 @@ void WeightEchoForAudibility(const EchoCanceller3Config& config,
 }
 
 // Computes the gain to reduce the echo to a non audible level.
-void GainToNoAudibleEcho(
+void GainToNoAudibleEcho(const EchoCanceller3Config& config,
+                         const std::array<float, kFftLengthBy2Plus1>& nearend,
+                         const std::array<float, kFftLengthBy2Plus1>& echo,
+                         const std::array<float, kFftLengthBy2Plus1>& masker,
+                         const std::array<float, kFftLengthBy2Plus1>& min_gain,
+                         const std::array<float, kFftLengthBy2Plus1>& max_gain,
+                         std::array<float, kFftLengthBy2Plus1>* gain) {
+  const float enr_transparent = config.gain_mask.enr_transparent;
+  const float enr_suppress = config.gain_mask.enr_suppress;
+  const float emr_transparent = config.gain_mask.emr_transparent;
+
+  for (size_t k = 0; k < gain->size(); ++k) {
+    float enr = echo[k] / nearend[k]; // Echo-to-nearend ratio.
+    float emr = echo[k] / masker[k]; // Echo-to-masker (noise) ratio.
+    float g = 1.0f;
+    if (enr > enr_transparent && emr > emr_transparent) {
+      g = 1.f - (enr - enr_transparent) / (enr_suppress - enr_transparent);
+      g = std::max(g, emr_transparent / emr);
+    }
+    (*gain)[k] = std::max(std::min(g, max_gain[k]), min_gain[k]);
+  }
+}
+
+// Computes the gain to reduce the echo to a non audible level.
+void GainToNoAudibleEchoFallback(
     const EchoCanceller3Config& config,
     bool low_noise_render,
     bool saturated_echo,
@@ -342,16 +370,22 @@ void SuppressionGain::LowerBandGain(
 
   // Iteratively compute the gain required to attenuate the echo to a non
   // noticeable level.
-  gain->fill(0.f);
   std::array<float, kFftLengthBy2Plus1> masker;
-  for (int k = 0; k < 2; ++k) {
-    MaskingPower(config_, enable_transparency_improvements_, nearend,
-                 comfort_noise, last_masker_, *gain, &masker);
-    GainToNoAudibleEcho(config_, low_noise_render, saturated_echo,
-                        linear_echo_estimate, enable_transparency_improvements_,
-                        nearend, weighted_echo, masker, min_gain, max_gain,
-                        one_by_weighted_echo, gain);
+  if (enable_new_suppression_) {
+    GainToNoAudibleEcho(config_, nearend, weighted_echo, comfort_noise,
+                        min_gain, max_gain, gain);
     AdjustForExternalFilters(gain);
+  } else {
+    gain->fill(0.f);
+    for (int k = 0; k < 2; ++k) {
+      MaskingPower(config_, enable_transparency_improvements_, nearend,
+                   comfort_noise, last_masker_, *gain, &masker);
+      GainToNoAudibleEchoFallback(
+          config_, low_noise_render, saturated_echo, linear_echo_estimate,
+          enable_transparency_improvements_, nearend, weighted_echo, masker,
+          min_gain, max_gain, one_by_weighted_echo, gain);
+      AdjustForExternalFilters(gain);
+    }
   }
 
   // Adjust the gain for frequencies which have not yet converged.
@@ -388,6 +422,7 @@ SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
       coherence_gain_(sample_rate_hz,
                       config_.suppressor.bands_with_reliable_coherence),
       enable_transparency_improvements_(EnableTransparencyImprovements()),
+      enable_new_suppression_(EnableNewSuppression()),
       moving_average_(kFftLengthBy2Plus1,
                       config.suppressor.nearend_average_blocks) {
   RTC_DCHECK_LT(0, state_change_duration_blocks_);

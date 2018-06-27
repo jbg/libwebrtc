@@ -84,6 +84,10 @@ struct EchoCanceller3Config {
     float m8 = 0.0001f;
     float m9 = 0.1f;
 
+    float enr_transparent = 0.1f;
+    float enr_suppress = 0.3f;
+    float emr_transparent = 0.1f;
+
     float gain_curve_offset = 1.45f;
     float gain_curve_slope = 5.f;
     float temporal_masking_lf = 0.9f;
