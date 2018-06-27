@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "298fe7c1_44a8cb18",
+        "filename": "rtc_base/experiments/field_trial_parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "You should be able to use dchecked_cast here, right?",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 20
+      },
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf6afc80_f6329a6a",
+        "filename": "rtc_base/experiments/field_trial_parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "There\u0027s a TODO in the RTC_LOG implementation about supporting absl::string_view arguments. Consider fixing it instead of adding multiple instances of this rather costly conversion. (If you don\u0027t have the time, I hope to get to it in the next few days.)",
+      "range": {
+        "startLine": 75,
+        "startChar": 53,
+        "endLine": 75,
+        "endChar": 69
+      },
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75a5c7ac_46878905",
+        "filename": "rtc_base/experiments/field_trial_parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "sscanf requires its input string to be null terminated. This isn\u0027t the case for string_view.\n\nCould these be useful? https://github.com/abseil/abseil-cpp/blob/master/absl/strings/numbers.h",
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6584f3c6_b52996f5",
+        "filename": "rtc_base/experiments/field_trial_parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "Why manual memory management instead of, say, std::unique_ptr\u003cPair[]\u003e or std::vector\u003cPair\u003e?",
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e73a7db_0631a845",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "You should be able to use absl::string_view instead of rolling your own.",
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6347c83b_5bfd947c",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "Why `const` here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 41
+      },
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de800ef_74f88d4d",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T13:00:38Z",
+      "side": 1,
+      "message": "Top-level `const` doesn\u0027t do anything for arguments in functions declarations.",
+      "range": {
+        "startLine": 116,
+        "startChar": 25,
+        "endLine": 116,
+        "endChar": 30
+      },
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
