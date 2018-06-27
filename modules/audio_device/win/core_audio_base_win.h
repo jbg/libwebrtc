@@ -29,7 +29,12 @@ namespace webrtc_win {
 // Serves as base class for CoreAudioInput and CoreAudioOutput and supports
 // device handling and audio streaming where the direction (input or output)
 // is set at constructions by the parent.
-class CoreAudioBase {
+// The IAudioSessionEvents interface provides notifications of session-related
+// events such as changes in the volume level, display name, and session state.
+// This class does not use the default ref-counting memory management method
+// provided by IUnknown: calling CoreAudioBase::Release() will not delete the
+// object.
+class CoreAudioBase : public IAudioSessionEvents {
  public:
   enum class Direction {
     kInput,
@@ -88,12 +93,39 @@ class CoreAudioBase {
   uint32_t endpoint_buffer_size_frames_ = 0;
   Microsoft::WRL::ComPtr<IAudioClient> audio_client_;
   Microsoft::WRL::ComPtr<IAudioClock> audio_clock_;
+  Microsoft::WRL::ComPtr<IAudioSessionControl> audio_session_control_;
   ScopedHandle audio_samples_event_;
   ScopedHandle stop_event_;
   std::unique_ptr<rtc::PlatformThread> audio_thread_;
 
  private:
+  LONG ref_count_ = 1;
+
   void StopThread();
+  AudioSessionState GetAudioSessionState() const;
+
+  // IUnknown (required by IAudioSessionEvents and IMMNotificationClient).
+  ULONG __stdcall AddRef() override;
+  ULONG __stdcall Release() override;
+  HRESULT __stdcall QueryInterface(REFIID iid, void** object) override;
+
+  // IAudioSessionEvents implementation
+  HRESULT __stdcall OnStateChanged(AudioSessionState new_state) override;
+  HRESULT __stdcall OnSessionDisconnected(
+      AudioSessionDisconnectReason disconnect_reason) override;
+  HRESULT __stdcall OnDisplayNameChanged(LPCWSTR new_display_name,
+                                         LPCGUID event_context) override;
+  HRESULT __stdcall OnIconPathChanged(LPCWSTR new_icon_path,
+                                      LPCGUID event_context) override;
+  HRESULT __stdcall OnSimpleVolumeChanged(float new_simple_volume,
+                                          BOOL new_mute,
+                                          LPCGUID event_context) override;
+  HRESULT __stdcall OnChannelVolumeChanged(DWORD channel_count,
+                                           float new_channel_volumes[],
+                                           DWORD changed_channel,
+                                           LPCGUID event_context) override;
+  HRESULT __stdcall OnGroupingParamChanged(LPCGUID new_grouping_param,
+                                           LPCGUID event_context) override;
 };
 
 }  // namespace webrtc_win

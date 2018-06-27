@@ -226,6 +226,11 @@ bool CoreAudioInput::OnDataCallback(uint64_t device_frequency) {
   UINT32 num_frames_in_next_packet = 0;
   _com_error error =
       audio_capture_client_->GetNextPacketSize(&num_frames_in_next_packet);
+  // TODO(henrika): sort out usage of AUDCLNT_E_DEVICE_INVALIDATED.
+  if (error.Error() == AUDCLNT_E_DEVICE_INVALIDATED) {
+    RTC_DLOG(LS_ERROR) << "AUDCLNT_E_DEVICE_INVALIDATED";
+    return false;
+  }
   if (error.Error() != S_OK) {
     RTC_LOG(LS_ERROR) << "IAudioCaptureClient::GetNextPacketSize failed: "
                       << core_audio_utility::ErrorToString(error);

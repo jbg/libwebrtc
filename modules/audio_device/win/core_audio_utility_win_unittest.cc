@@ -605,6 +605,51 @@ TEST_F(CoreAudioUtilityWinTest, CreateAudioClock) {
   }
 }
 
+TEST_F(CoreAudioUtilityWinTest, CreateAudioSessionControl) {
+  ABORT_TEST_IF_NOT(DevicesAvailable());
+
+  EDataFlow data_flow[] = {eRender, eCapture};
+
+  WAVEFORMATPCMEX format;
+  uint32_t endpoint_buffer_size = 0;
+
+  for (size_t i = 0; i < arraysize(data_flow); ++i) {
+    ComPtr<IAudioClient> client;
+    ComPtr<IAudioSessionControl> audio_session_control;
+
+    // Create a default client for the given data-flow direction.
+    client = core_audio_utility::CreateClient(AudioDeviceName::kDefaultDeviceId,
+                                              data_flow[i], eConsole);
+    EXPECT_TRUE(client.Get());
+    EXPECT_TRUE(SUCCEEDED(
+        core_audio_utility::GetSharedModeMixFormat(client.Get(), &format)));
+
+    // It is not possible to create an audio session control using an
+    // unitialized client interface.
+    audio_session_control =
+        core_audio_utility::CreateAudioSessionControl(client.Get());
+    EXPECT_FALSE(audio_session_control.Get());
+
+    // Do a proper initialization and verify that it works this time.
+    core_audio_utility::SharedModeInitialize(client.Get(), &format, nullptr,
+                                             &endpoint_buffer_size);
+    audio_session_control =
+        core_audio_utility::CreateAudioSessionControl(client.Get());
+    EXPECT_TRUE(audio_session_control.Get());
+    EXPECT_GT(endpoint_buffer_size, 0u);
+
+    // Use the audio session control and verify that the session state can be
+    // queried. When a client opens a session by assigning the first stream to
+    // the session (by calling the IAudioClient::Initialize method), the initial
+    // session state is inactive. The session state changes from inactive to
+    // active when a stream in the session begins running (because the client
+    // has called the IAudioClient::Start method).
+    AudioSessionState state;
+    EXPECT_TRUE(SUCCEEDED(audio_session_control->GetState(&state)));
+    EXPECT_EQ(state, AudioSessionStateInactive);
+  }
+}
+
 TEST_F(CoreAudioUtilityWinTest, CreateSimpleAudioVolume) {
   ABORT_TEST_IF_NOT(DevicesAvailable());
 
