@@ -201,6 +201,24 @@
     },
     {
       "key": {
+        "uuid": "349d510f_30f145fc",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-06-27T16:45:42Z",
+      "side": 1,
+      "message": "Patch set 5 was smaller than patch set 6 though (binary size). Are you saying that absl::string_view was worse for binary size than your string_view in this CL?",
+      "parentUuid": "97f753e6_6623db77",
+      "revId": "d7b253a6f6a207348047898f7e7e869a3c10e731",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6347c83b_5bfd947c",
         "filename": "rtc_base/experiments/field_trial_parser.h",
         "patchSetId": 5
