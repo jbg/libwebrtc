@@ -224,6 +224,11 @@ bool CoreAudioOutput::OnDataCallback(uint64_t device_frequency) {
   // the endpoint buffer currently contains.
   UINT32 num_unread_frames = 0;
   _com_error error = audio_client_->GetCurrentPadding(&num_unread_frames);
+  // TODO(henrika): sort out usage of AUDCLNT_E_DEVICE_INVALIDATED.
+  if (error.Error() == AUDCLNT_E_DEVICE_INVALIDATED) {
+    RTC_DLOG(LS_ERROR) << "AUDCLNT_E_DEVICE_INVALIDATED";
+    return false;
+  }
   if (error.Error() != S_OK) {
     RTC_LOG(LS_ERROR) << "IAudioClient::GetCurrentPadding failed: "
                       << core_audio_utility::ErrorToString(error);
