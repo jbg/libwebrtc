@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e45bedd8_c6487718",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-06-28T11:11:03Z",
+      "side": 1,
+      "message": "As is, we have a not-very-nice dependency on implementation details of InitializePortAllocator_n that is not surfaced as a result. This code is sensitive to changes or refactoring and it is not clear why parsing always succeeds without looking closer. Plus, we end up parsing it twice which may be redundant.\n\nI assume you parse it twice because NoteUsageEvent DCHECKs that it is called on the signaling thread. It would be safe to call it from InitializePortAllocator_n because the signaling thread is blocked but that is not what we DCHECK, we could get around this with mutex but that is not popular around here, and we can\u0027t have InitializePortAllocator_n jump back without deadlock.\n\nWhat do you think about returning stun_servers and turn_servers (or bools for whether present) from InitializePortAllocator_n, making this assumption a contract of the function? Less error prone.",
+      "revId": "0ab41ac6f789489792f4fff068158045dd08eab1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c073c52_f583c9b5",
+        "filename": "pc/peerconnection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-06-28T11:11:03Z",
+      "side": 1,
+      "message": "Do we have test coverage for both ways of adding STUN/TURN?\n1. Constructor\n2. setConfiguration()\n\nLet\u0027s make this two unittests.",
+      "revId": "0ab41ac6f789489792f4fff068158045dd08eab1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
