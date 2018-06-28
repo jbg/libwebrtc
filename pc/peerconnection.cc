@@ -920,6 +920,21 @@ bool PeerConnection::Initialize(
                                    this, configuration))) {
     return false;
   }
+  // Re-parse the configuration to identify stun and turn servers.
+  cricket::ServerAddresses stun_servers;
+  std::vector<cricket::RelayServerConfig> turn_servers;
+
+  RTCErrorType parse_error =
+      ParseIceServers(configuration.servers, &stun_servers, &turn_servers);
+  // If there were errors, the initialization above should have failed.
+  RTC_DCHECK(parse_error == RTCErrorType::NONE);
+  // Note if STUN or TURN servers were supplied.
+  if (!stun_servers.empty()) {
+    NoteUsageEvent(UsageEvent::STUN_SERVER_ADDED);
+  }
+  if (!turn_servers.empty()) {
+    NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
+  }
 
   const PeerConnectionFactoryInterface::Options& options = factory_->options();
 
