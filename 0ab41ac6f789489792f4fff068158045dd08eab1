@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9870981d_c3b5b50d",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-06-28T11:20:36Z",
+      "side": 1,
+      "message": "I made the collection of the histogram signaling-thread-only, to avoid having to deal with locking. This means I can\u0027t collect the data from InitializePortAllocator_n.\n\nI tried using the accessors to get the data from the port allocator, but that failed because those are network thread only (CalledOnValidThread means \"called on the same thread\"). There\u0027s no existing way to query the port allocator for its config.\n\nOne cleaner alternative is to move the parsing before InitalizePortAllocator_n, and pass stun_servers and turn_servers as arguments to InitializePortAllocator_n. It\u0027s a private method, so changing its API shouldn\u0027t be a big deal.",
+      "parentUuid": "e45bedd8_c6487718",
+      "revId": "0ab41ac6f789489792f4fff068158045dd08eab1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c073c52_f583c9b5",
         "filename": "pc/peerconnection_histogram_unittest.cc",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-28T11:11:03Z",
       "side": 1,
       "message": "Do we have test coverage for both ways of adding STUN/TURN?\n1. Constructor\n2. setConfiguration()\n\nLet\u0027s make this two unittests.",
+      "revId": "0ab41ac6f789489792f4fff068158045dd08eab1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1231676b_bcfd82bc",
+        "filename": "pc/peerconnection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-06-28T11:20:36Z",
+      "side": 1,
+      "message": "This handles the constructor. The data collected so far indicates we have zero usage of setConfiguration(), but yes, there should be an unit test for that.\n\nWill add.",
+      "parentUuid": "1c073c52_f583c9b5",
       "revId": "0ab41ac6f789489792f4fff068158045dd08eab1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
