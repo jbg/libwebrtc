@@ -3598,3 +3598,34 @@ TEST(WebRtcVoiceEngineTest, CollectRecvCodecs) {
   EXPECT_GE(find_codec({"telephone-event", 32000, 1}), num_specs);
   EXPECT_GE(find_codec({"telephone-event", 48000, 1}), num_specs);
 }
+
+// A WebRtcVoiceEngine constructed with no encoder/decoder factories shouldn't
+// blow up, it should just return empty lists for supported codecs, and
+// shouldn't allow creating send/receive streams or applying send/recv
+// parameters.
+//
+// This should be supported so that an application can construct a
+// PeerConnectionFactory without audio support (if it's only dealing with
+// video, or only dealing with data channels).
+TEST(WebRtcVoiceEngineTest, NoEncoderOrDecoderFactory) {
+  cricket::WebRtcVoiceEngine engine(
+      /*adm=*/nullptr, /*encoder_factory=*/nullptr, /*decoder_factory=*/nullptr,
+      /*audio_mixer=*/nullptr, webrtc::AudioProcessingBuilder().Create());
+  engine.Init();
+
+  // Should get an empty list of codecs.
+  EXPECT_TRUE(engine.send_codecs().empty());
+  EXPECT_TRUE(engine.recv_codecs().empty());
+
+  // If a channel is created, it should just fail to apply send/recv parameters.
+  cricket::FakeCall call;
+  std::unique_ptr<cricket::VoiceMediaChannel> channel(engine.CreateChannel(
+      &call, cricket::MediaConfig(), cricket::AudioOptions()));
+  EXPECT_FALSE(channel->SetSendParameters(cricket::AudioSendParameters()));
+  EXPECT_FALSE(channel->SetRecvParameters(cricket::AudioRecvParameters()));
+
+  // Should also fail to create streams.
+  cricket::StreamParams sp = cricket::StreamParams::CreateLegacy(0xdeadbeef);
+  EXPECT_FALSE(channel->AddSendStream(sp));
+  EXPECT_FALSE(channel->AddRecvStream(sp));
+}

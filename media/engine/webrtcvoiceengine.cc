@@ -209,8 +209,6 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
   worker_thread_checker_.DetachFromThread();
   signal_thread_checker_.DetachFromThread();
   RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::WebRtcVoiceEngine";
-  RTC_DCHECK(decoder_factory);
-  RTC_DCHECK(encoder_factory);
   RTC_DCHECK(audio_processing);
   // The rest of our initialization will happen in Init.
 }
@@ -238,16 +236,26 @@ void WebRtcVoiceEngine::Init() {
       new rtc::TaskQueue("rtc-low-prio", rtc::TaskQueue::Priority::LOW));
 
   // Load our audio codec lists.
-  RTC_LOG(LS_INFO) << "Supported send codecs in order of preference:";
-  send_codecs_ = CollectCodecs(encoder_factory_->GetSupportedEncoders());
-  for (const AudioCodec& codec : send_codecs_) {
-    RTC_LOG(LS_INFO) << ToString(codec);
+  if (encoder_factory_) {
+    RTC_LOG(LS_INFO) << "Supported send codecs in order of preference:";
+    send_codecs_ = CollectCodecs(encoder_factory_->GetSupportedEncoders());
+    for (const AudioCodec& codec : send_codecs_) {
+      RTC_LOG(LS_INFO) << ToString(codec);
+    }
+  } else {
+    RTC_LOG(LS_INFO)
+        << "No supported send codecs since no encoder factory was provided.";
   }
 
-  RTC_LOG(LS_INFO) << "Supported recv codecs in order of preference:";
-  recv_codecs_ = CollectCodecs(decoder_factory_->GetSupportedDecoders());
-  for (const AudioCodec& codec : recv_codecs_) {
-    RTC_LOG(LS_INFO) << ToString(codec);
+  if (decoder_factory_) {
+    RTC_LOG(LS_INFO) << "Supported recv codecs in order of preference:";
+    recv_codecs_ = CollectCodecs(decoder_factory_->GetSupportedDecoders());
+    for (const AudioCodec& codec : recv_codecs_) {
+      RTC_LOG(LS_INFO) << ToString(codec);
+    }
+  } else {
+    RTC_LOG(LS_INFO)
+        << "No supported recv codecs since no decoder factory was provided.";
   }
 
 #if defined(WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE)
@@ -1533,6 +1541,12 @@ bool WebRtcVoiceMediaChannel::SetRecvCodecs(
     return false;
   }
 
+  if (!engine()->decoder_factory_) {
+    RTC_LOG(LS_WARNING)
+        << "Can't set recv codecs since no decoder factory was provided.";
+    return false;
+  }
+
   // Create a payload type -> SdpAudioFormat map with all the decoders. Fail
   // unless the factory claims to support all decoders.
   std::map<int, webrtc::SdpAudioFormat> decoder_map;
@@ -1630,6 +1644,12 @@ bool WebRtcVoiceMediaChannel::SetSendCodecs(
         dtmf_payload_freq_ = codec.clockrate;
       }
     }
+  }
+
+  if (!engine()->encoder_factory_) {
+    RTC_LOG(LS_WARNING)
+        << "Can't set send codecs since no encoder factory was provided.";
+    return false;
   }
 
   // Scan through the list to figure out the codec to use for sending.
@@ -1799,6 +1819,12 @@ bool WebRtcVoiceMediaChannel::AddSendStream(const StreamParams& sp) {
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   RTC_LOG(LS_INFO) << "AddSendStream: " << sp.ToString();
 
+  if (!engine()->encoder_factory_) {
+    RTC_LOG(LS_WARNING)
+        << "Can't create send stream since no encoder factory was provided.";
+    return false;
+  }
+
   uint32_t ssrc = sp.first_ssrc();
   RTC_DCHECK(0 != ssrc);
 
@@ -1861,6 +1887,12 @@ bool WebRtcVoiceMediaChannel::AddRecvStream(const StreamParams& sp) {
   TRACE_EVENT0("webrtc", "WebRtcVoiceMediaChannel::AddRecvStream");
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   RTC_LOG(LS_INFO) << "AddRecvStream: " << sp.ToString();
+
+  if (!engine()->decoder_factory_) {
+    RTC_LOG(LS_WARNING)
+        << "Can't create recv stream since no decoder factory was provided.";
+    return false;
+  }
 
   if (!sp.has_ssrcs()) {
     // This is a StreamParam with unsignaled SSRCs. Store it, so it can be used
