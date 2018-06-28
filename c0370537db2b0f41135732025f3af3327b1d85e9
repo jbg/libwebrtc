@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "059b0421_5a776652",
+        "filename": "api/candidate.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e65e154f_b73ca250",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18733efb_608d8df9",
         "filename": "api/candidate.h",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "2e1f6b33_e41bea4a",
+        "filename": "api/candidate.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18733efb_608d8df9",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 19
+      },
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9dafb766_731dea24",
         "filename": "api/candidate.h",
         "patchSetId": 4
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "d7f1a426_061c7d49",
+        "filename": "api/candidate.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "Edited comments for both IDs. PTAL.",
+      "parentUuid": "9dafb766_731dea24",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f26778f6_434805f3",
         "filename": "p2p/base/stun.h",
         "patchSetId": 4
@@ -70,6 +130,24 @@
       "writtenOn": "2018-06-27T23:13:36Z",
       "side": 1,
       "message": "What about network cost/network ID? I thought the idea was to have a new attribute that contains all necessary information and eventually stop using the old attribute.",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff4a2e73_179ed0c5",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "I should really call it the part 2 of STUN_ATTR_NETWORK_INFO, or STUN_ATTR_NETWORK_INFO_EXTRA. Both attributes are signaled and detected by the new endpoint. Do I misunderstand what you mean?",
+      "parentUuid": "f26778f6_434805f3",
       "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -123,6 +201,53 @@
     },
     {
       "key": {
+        "uuid": "c32f4308_802a33c0",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "Hmm, this makes much more sense. It probably assumes \"old and the new best connections\" are not too distance in their \"generation\" that is related to the indices of their networks.",
+      "parentUuid": "0cb07efe_df3ddf2d",
+      "range": {
+        "startLine": 205,
+        "startChar": 27,
+        "endLine": 207,
+        "endChar": 47
+      },
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "471a27ca_ccbca122",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "is?",
+      "range": {
+        "startLine": 407,
+        "startChar": 56,
+        "endLine": 407,
+        "endChar": 62
+      },
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "36dfed48_89921320",
         "filename": "rtc_base/network.h",
         "patchSetId": 4
@@ -137,6 +262,24 @@
       "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11c62a53_7d2747e6",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-06-28T17:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36dfed48_89921320",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
