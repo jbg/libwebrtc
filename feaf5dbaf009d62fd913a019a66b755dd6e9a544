@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f66e9767_1b82675f",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4737,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-06-28T12:03:44Z",
+      "side": 1,
+      "message": "You might want to take the argument as value rather than reference. But then again you might not, up to you.",
+      "revId": "feaf5dbaf009d62fd913a019a66b755dd6e9a544",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
