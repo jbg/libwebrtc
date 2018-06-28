@@ -920,6 +920,21 @@ bool PeerConnection::Initialize(
                                    this, configuration))) {
     return false;
   }
+  // Re-parse the configuration to identify stun and turn servers.
+  cricket::ServerAddresses stun_servers;
+  std::vector<cricket::RelayServerConfig> turn_servers;
+
+  RTCErrorType parse_error =
+      ParseIceServers(configuration.servers, &stun_servers, &turn_servers);
+  // If there were errors, the initialization above should have failed.
+  RTC_DCHECK(parse_error == RTCErrorType::NONE);
+  // Note if STUN or TURN servers were supplied.
+  if (!stun_servers.empty()) {
+    NoteUsageEvent(UsageEvent::STUN_SERVER_ADDED);
+  }
+  if (!turn_servers.empty()) {
+    NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
+  }
 
   const PeerConnectionFactoryInterface::Options& options = factory_->options();
 
@@ -1040,10 +1055,10 @@ bool PeerConnection::Initialize(
         RtpTransceiverProxyWithInternal<RtpTransceiver>::Create(
             signaling_thread(), new RtpTransceiver(cricket::MEDIA_TYPE_VIDEO)));
   }
-  signaling_thread()->PostDelayed(
-      RTC_FROM_HERE,
-      return_histogram_very_quickly_ ? 0 : REPORT_USAGE_PATTERN_DELAY_MS, this,
-      MSG_REPORT_USAGE_PATTERN, nullptr);
+  int delay_ms =
+      return_histogram_very_quickly_ ? 0 : REPORT_USAGE_PATTERN_DELAY_MS;
+  signaling_thread()->PostDelayed(RTC_FROM_HERE, delay_ms, this,
+                                  MSG_REPORT_USAGE_PATTERN, nullptr);
   return true;
 }
 
@@ -4547,6 +4562,7 @@ void PeerConnection::OnDataChannelOpenMessage(
   rtc::scoped_refptr<DataChannelInterface> proxy_channel =
       DataChannelProxy::Create(signaling_thread(), channel);
   observer_->OnDataChannel(std::move(proxy_channel));
+  NoteUsageEvent(UsageEvent::DATA_ADDED);
 }
 
 rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
