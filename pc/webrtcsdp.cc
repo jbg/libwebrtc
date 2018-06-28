@@ -140,6 +140,7 @@ static const char kAttributeCandidatePwd[] = "pwd";
 static const char kAttributeCandidateGeneration[] = "generation";
 static const char kAttributeCandidateNetworkId[] = "network-id";
 static const char kAttributeCandidateNetworkCost[] = "network-cost";
+static const char kAttributeCandidateInterfaceId[] = "iface-id";
 static const char kAttributeFingerprint[] = "fingerprint";
 static const char kAttributeSetup[] = "setup";
 static const char kAttributeFmtp[] = "fmtp";
@@ -1126,6 +1127,7 @@ bool ParseCandidate(const std::string& message,
   uint32_t generation = 0;
   uint16_t network_id = 0;
   uint16_t network_cost = 0;
+  uint16_t interface_id = 0;
   for (size_t i = current_position; i + 1 < fields.size(); ++i) {
     // RFC 5245
     // *(SP extension-att-name SP extension-att-value)
@@ -1146,6 +1148,10 @@ bool ParseCandidate(const std::string& message,
         return false;
       }
       network_cost = std::min(network_cost, rtc::kNetworkCostMax);
+    } else if (fields[i] == kAttributeCandidateInterfaceId) {
+      if (!GetValueFromString(first_line, fields[++i], &interface_id, error)) {
+        return false;
+      }
     } else {
       // Skip the unknown extension.
       ++i;
@@ -1157,6 +1163,7 @@ bool ParseCandidate(const std::string& message,
                          generation, foundation, network_id, network_cost);
   candidate->set_related_address(related_address);
   candidate->set_tcptype(tcptype);
+  candidate->set_interface_id(interface_id);
   return true;
 }
 
@@ -1913,6 +1920,9 @@ void BuildCandidate(const std::vector<Candidate>& candidates,
     }
     if (it->network_cost() > 0) {
       os << " " << kAttributeCandidateNetworkCost << " " << it->network_cost();
+    }
+    if (it->interface_id() > 0) {
+      os << " " << kAttributeCandidateInterfaceId << " " << it->interface_id();
     }
 
     AddLine(os.str(), message);
