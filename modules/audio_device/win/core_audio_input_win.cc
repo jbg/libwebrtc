@@ -24,7 +24,8 @@ namespace webrtc_win {
 
 CoreAudioInput::CoreAudioInput()
     : CoreAudioBase(CoreAudioBase::Direction::kInput,
-                    [this](uint64_t freq) { return OnDataCallback(freq); }) {
+                    [this](uint64_t freq) { return OnDataCallback(freq); },
+                    [this](ErrorType err) { return OnErrorCallback(err); }) {
   RTC_DLOG(INFO) << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   thread_checker_audio_.DetachFromThread();
@@ -221,11 +222,25 @@ int CoreAudioInput::VolumeIsAvailable(bool* available) {
   return IsVolumeControlAvailable(available) ? 0 : -1;
 }
 
+bool CoreAudioInput::OnErrorCallback(ErrorType error) {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  return true;
+}
+
 bool CoreAudioInput::OnDataCallback(uint64_t device_frequency) {
   RTC_DCHECK_RUN_ON(&thread_checker_audio_);
   UINT32 num_frames_in_next_packet = 0;
   _com_error error =
       audio_capture_client_->GetNextPacketSize(&num_frames_in_next_packet);
+  if (error.Error() == AUDCLNT_E_DEVICE_INVALIDATED) {
+    // Avoid breaking the thread loop implicitly by returning false and return
+    // true instead for AUDCLNT_E_DEVICE_INVALIDATED even it is a valid error
+    // message. We will use notifications about device changes instead to stop
+    // data callbacks and attempt to restart streaming .
+    RTC_DLOG(LS_ERROR) << "AUDCLNT_E_DEVICE_INVALIDATED";
+    return true;
+  }
   if (error.Error() != S_OK) {
     RTC_LOG(LS_ERROR) << "IAudioCaptureClient::GetNextPacketSize failed: "
                       << core_audio_utility::ErrorToString(error);

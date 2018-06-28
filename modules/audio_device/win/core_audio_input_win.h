@@ -53,6 +53,7 @@ class CoreAudioInput final : public CoreAudioBase, public AudioInput {
 
  private:
   bool OnDataCallback(uint64_t device_frequency);
+  bool OnErrorCallback(ErrorType error);
   absl::optional<int> EstimateLatencyMillis(uint64_t capture_time_100ns);
 
   std::unique_ptr<FineAudioBuffer> fine_audio_buffer_;
