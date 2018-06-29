@@ -81,11 +81,15 @@ class SuppressionGain {
   std::array<float, kFftLengthBy2Plus1> gain_increase_;
   std::array<float, kFftLengthBy2Plus1> last_nearend_;
   std::array<float, kFftLengthBy2Plus1> last_echo_;
+  std::array<float, kFftLengthBy2Plus1> enr_transparent_;
+  std::array<float, kFftLengthBy2Plus1> enr_suppress_;
+  std::array<float, kFftLengthBy2Plus1> emr_transparent_;
   LowNoiseRenderDetector low_render_detector_;
   bool initial_state_ = true;
   int initial_state_change_counter_ = 0;
   CoherenceGain coherence_gain_;
   const bool enable_transparency_improvements_;
+  const bool enable_new_suppression_;
   aec3::MovingAverage moving_average_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(SuppressionGain);
