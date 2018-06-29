@@ -163,7 +163,8 @@ void AndroidCallClient::CreatePeerConnectionFactory() {
   pcf_ = CreateModularPeerConnectionFactory(
       network_thread_.get(), worker_thread_.get(), signaling_thread_.get(),
       std::move(media_engine), webrtc::CreateCallFactory(),
-      webrtc::CreateRtcEventLogFactory());
+      webrtc::CreateRtcEventLogFactory(), /*fec_controller_factory=*/nullptr,
+      /*network_controller_factory=*/nullptr);
   RTC_LOG(LS_INFO) << "PeerConnectionFactory created: " << pcf_;
 }
 

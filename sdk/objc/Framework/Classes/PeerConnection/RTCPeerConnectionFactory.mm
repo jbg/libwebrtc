@@ -132,7 +132,9 @@
         _signalingThread.get(),
         std::unique_ptr<cricket::MediaEngineInterface>(),
         std::unique_ptr<webrtc::CallFactoryInterface>(),
-        std::unique_ptr<webrtc::RtcEventLogFactoryInterface>());
+        std::unique_ptr<webrtc::RtcEventLogFactoryInterface>(),
+        std::unique_ptr<webrtc::FecControllerFactoryInterface>(),
+        std::unique_ptr<webrtc::NetworkControllerFactoryInterface>());
     NSAssert(_nativeFactory, @"Failed to initialize PeerConnectionFactory!");
   }
   return self;

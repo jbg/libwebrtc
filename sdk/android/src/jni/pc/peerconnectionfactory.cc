@@ -293,7 +293,8 @@ jlong CreatePeerConnectionFactoryForJava(
       CreateModularPeerConnectionFactory(
           network_thread.get(), worker_thread.get(), signaling_thread.get(),
           std::move(media_engine), std::move(call_factory),
-          std::move(rtc_event_log_factory), std::move(fec_controller_factory)));
+          std::move(rtc_event_log_factory), std::move(fec_controller_factory),
+          /*network_controller_factory=*/nullptr));
   RTC_CHECK(factory) << "Failed to create the peer connection factory; "
                      << "WebRTC/libjingle init likely failed on this device";
   // TODO(honghaiz): Maybe put the options as the argument of
