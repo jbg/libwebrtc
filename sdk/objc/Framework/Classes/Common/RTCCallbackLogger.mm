@@ -78,6 +78,8 @@ class CallbackLogSink : public rtc::LogSink {
       return rtc::LS_WARNING;
     case RTCLoggingSeverityError:
       return rtc::LS_ERROR;
+    case RTCLoggingSeverityNone:
+      return rtc::LS_NONE;
   }
 }
 
