@@ -36,7 +36,9 @@ class FakePeerConnectionFactory
             rtc::Thread::Current(),
             std::move(media_engine),
             std::unique_ptr<webrtc::CallFactoryInterface>(),
-            std::unique_ptr<RtcEventLogFactoryInterface>()) {}
+            std::unique_ptr<RtcEventLogFactoryInterface>(),
+            std::unique_ptr<FecControllerFactoryInterface>(),
+            std::unique_ptr<NetworkControllerFactoryInterface>()) {}
 };
 
 class MockPeerConnection
