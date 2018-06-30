@@ -976,6 +976,7 @@ void VirtualSocketServer::AddPacketToNetwork(VirtualSocket* sender,
     // delivery time only needs to be updated when it has ordered delivery.
     sender->last_delivery_time_ = ts;
   }
+
   msg_queue_->PostAt(RTC_FROM_HERE, ts, recipient, MSG_ID_PACKET, p);
 }
 
