@@ -17,6 +17,7 @@
 #endif
 
 #include "modules/audio_processing/agc/gain_map_internal.h"
+#include "modules/audio_processing/agc2/adaptive_mode_level_estimator_agc_interface.h"
 #include "modules/audio_processing/gain_control_impl.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -163,8 +164,11 @@ AgcManagerDirect::AgcManagerDirect(Agc* agc,
       file_preproc_(new DebugFile("agc_preproc.pcm")),
       file_postproc_(new DebugFile("agc_postproc.pcm")) {
   instance_counter_++;
+
   if (use_agc2_level_estimation_) {
-    RTC_NOTREACHED() << "Agc2 level estimation not implemented.";
+    agc_.reset(new AdaptiveModeLevelEstimatorAgcInterface(data_dumper_.get()));
+  } else {
+    agc_.reset(new Agc());
   }
   if (use_agc2_digital_adaptive_) {
     RTC_NOTREACHED() << "Agc2 digital adaptive not implemented.";
@@ -312,6 +316,7 @@ void AgcManagerDirect::SetLevel(int new_level) {
   }
 
   volume_callbacks_->SetMicVolume(new_level);
+  agc_->Reset();
   RTC_DLOG(LS_INFO) << "[agc] voe_level=" << voe_level << ", "
                     << "level_=" << level_ << ", "
                     << "new_level=" << new_level;
