@@ -201,6 +201,33 @@ class TestRtpFrameReferenceFinder : public ::testing::Test,
     reference_finder_->ManageFrame(std::move(frame));
   }
 
+  void InsertH264(uint16_t seq_num_start,
+                  uint16_t seq_num_end,
+                  bool keyframe,
+                  uint8_t tid = kNoTemporalIdx,
+                  int32_t tl0 = kNoTl0PicIdx,
+                  bool sync = false) {
+    VCMPacket packet;
+    packet.codec = kVideoCodecH264;
+    packet.seqNum = seq_num_start;
+    packet.markerBit = (seq_num_start == seq_num_end);
+    packet.frameType = keyframe ? kVideoFrameKey : kVideoFrameDelta;
+    packet.video_header.frame_marking.temporal_id = tid;
+    packet.video_header.frame_marking.tl0_pic_idx = tl0;
+    packet.video_header.frame_marking.base_layer_sync = sync;
+    ref_packet_buffer_->InsertPacket(&packet);
+
+    if (seq_num_start != seq_num_end) {
+      packet.seqNum = seq_num_end;
+      packet.markerBit = true;
+      ref_packet_buffer_->InsertPacket(&packet);
+    }
+
+    std::unique_ptr<RtpFrameObject> frame(new RtpFrameObject(
+        ref_packet_buffer_, seq_num_start, seq_num_end, 0, 0, 0));
+    reference_finder_->ManageFrame(std::move(frame));
+  }
+
   // Check if a frame with picture id |pid| and spatial index |sidx| has been
   // delivered from the packet buffer, and if so, if it has the references
   // specified by |refs|.
@@ -239,6 +266,11 @@ class TestRtpFrameReferenceFinder : public ::testing::Test,
   template <typename... T>
   void CheckReferencesVp9(int64_t pid, uint8_t sidx, T... refs) const {
     CheckReferences(pid, sidx, refs...);
+  }
+
+  template <typename... T>
+  void CheckReferencesH264(int64_t pid, T... refs) const {
+    CheckReferences(pid, 0, refs...);
   }
 
   template <typename... T>
@@ -1345,6 +1377,38 @@ TEST_F(TestRtpFrameReferenceFinder, Vp9GofTidTooHigh) {
 
   ASSERT_EQ(1UL, frames_from_callback_.size());
   CheckReferencesVp9(0, 0);
+}
+
+// Test with 3 temporal layers in a 0212 pattern.
+TEST_F(TestRtpFrameReferenceFinder, H264TemporalLayers_0212) {
+  uint16_t sn = Rand();
+
+  InsertH264(sn, sn, true, 0, 55);
+  InsertH264(sn + 1, sn + 1, false, 2, 55, true);
+  InsertH264(sn + 2, sn + 2, false, 1, 55, true);
+  InsertH264(sn + 3, sn + 3, false, 2, 55);
+  InsertH264(sn + 4, sn + 4, false, 0, 56);
+  InsertH264(sn + 5, sn + 5, false, 2, 56, true);
+  InsertH264(sn + 6, sn + 6, false, 1, 56, true);
+  InsertH264(sn + 7, sn + 7, false, 2, 56);
+  InsertH264(sn + 8, sn + 8, false, 0, 57);
+  InsertH264(sn + 9, sn + 9, false, 2, 57, true);
+  InsertH264(sn + 10, sn + 10, false, 1, 57, true);
+  InsertH264(sn + 11, sn + 11, false, 2, 57);
+
+  ASSERT_EQ(12UL, frames_from_callback_.size());
+  CheckReferencesH264(0);
+  CheckReferencesH264(1, 0);
+  CheckReferencesH264(2, 0);
+  CheckReferencesH264(3, 0, 1, 2);
+  CheckReferencesH264(4, 0);
+  CheckReferencesH264(5, 4);
+  CheckReferencesH264(6, 4);
+  CheckReferencesH264(7, 4, 5, 6);
+  CheckReferencesH264(8, 4);
+  CheckReferencesH264(9, 8);
+  CheckReferencesH264(10, 8);
+  CheckReferencesH264(11, 8, 9, 10);
 }
 
 }  // namespace video_coding
