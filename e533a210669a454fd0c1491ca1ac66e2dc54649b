@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee27c33_524d2642",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2018-07-02T15:51:56Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this call ManageFrameGeneric intead? H264 must be able to be used without frame markings",
+      "revId": "e533a210669a454fd0c1491ca1ac66e2dc54649b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
