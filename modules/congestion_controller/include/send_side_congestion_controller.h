@@ -165,6 +165,12 @@ class SendSideCongestionController
   bool pacer_pushback_experiment_ = false;
   float encoding_rate_ = 1.0;
 
+  bool congestion_window_pushback_experiment_;
+  absl::optional<DataSize> current_data_window_;
+  DataSize outstanding_data_ = DataSize::Zero();
+  uint32_t min_pushback_target_bitrate_bps_;
+  double encoding_rate_ratio_ = 1.0;
+
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(SendSideCongestionController);
 };
 
