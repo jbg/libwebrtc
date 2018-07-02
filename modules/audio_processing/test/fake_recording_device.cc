@@ -12,9 +12,9 @@
 
 #include <algorithm>
 
+#include "absl/memory/memory.h"
 #include "absl/types/optional.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/ptr_util.h"
 
 namespace webrtc {
 namespace test {
@@ -105,10 +105,11 @@ FakeRecordingDevice::FakeRecordingDevice(int initial_mic_level,
                                          int device_kind) {
   switch (device_kind) {
     case 0:
-      worker_ = rtc::MakeUnique<FakeRecordingDeviceIdentity>(initial_mic_level);
+      worker_ =
+          absl::make_unique<FakeRecordingDeviceIdentity>(initial_mic_level);
       break;
     case 1:
-      worker_ = rtc::MakeUnique<FakeRecordingDeviceLinear>(initial_mic_level);
+      worker_ = absl::make_unique<FakeRecordingDeviceLinear>(initial_mic_level);
       break;
     default:
       RTC_NOTREACHED();

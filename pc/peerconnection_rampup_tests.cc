@@ -156,17 +156,17 @@ class PeerConnectionRampUpTest : public ::testing::Test {
     fake_network_manager->AddInterface(kDefaultLocalAddress);
     fake_network_managers_.emplace_back(fake_network_manager);
     auto port_allocator =
-        rtc::MakeUnique<cricket::BasicPortAllocator>(fake_network_manager);
+        absl::make_unique<cricket::BasicPortAllocator>(fake_network_manager);
 
     port_allocator->set_step_delay(cricket::kDefaultStepDelay);
-    auto observer = rtc::MakeUnique<MockPeerConnectionObserver>();
+    auto observer = absl::make_unique<MockPeerConnectionObserver>();
     auto pc = pc_factory_->CreatePeerConnection(
         config, std::move(port_allocator), nullptr, observer.get());
     if (!pc) {
       return nullptr;
     }
 
-    return rtc::MakeUnique<PeerConnectionWrapperForRampUpTest>(
+    return absl::make_unique<PeerConnectionWrapperForRampUpTest>(
         pc_factory_, pc, std::move(observer), fake_network_manager);
   }
 
@@ -207,7 +207,7 @@ class PeerConnectionRampUpTest : public ::testing::Test {
                   "88.88.88.0", 3478};
               static const rtc::SocketAddress turn_server_external_address{
                   "88.88.88.1", 0};
-              return rtc::MakeUnique<cricket::TestTurnServer>(
+              return absl::make_unique<cricket::TestTurnServer>(
                   thread, turn_server_internal_address,
                   turn_server_external_address, type);
             });
