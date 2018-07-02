@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95c137f_f832a89d",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-07-02T12:56:06Z",
+      "side": 1,
+      "message": "Note: These two functions are not changed. What was done was that I folded GetDecisionSpecialized into the end of GetDecision, effectively moving a chunk of code from below this block to above it.",
+      "revId": "261beed20587be9c25b55fb175df3eafaafa2874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
