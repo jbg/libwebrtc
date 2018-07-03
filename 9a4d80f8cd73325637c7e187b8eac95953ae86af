@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa1ceb66_6d0efa41",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-07-03T08:17:26Z",
+      "side": 1,
+      "message": "Move to constructor - See below",
+      "range": {
+        "startLine": 166,
+        "startChar": 1,
+        "endLine": 167,
+        "endChar": 0
+      },
+      "revId": "9a4d80f8cd73325637c7e187b8eac95953ae86af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1880782_51f26066",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-07-03T08:17:26Z",
+      "side": 1,
+      "message": "Do we need a guard on this? Sebastian?",
+      "range": {
+        "startLine": 170,
+        "startChar": 2,
+        "endLine": 170,
+        "endChar": 48
+      },
+      "revId": "9a4d80f8cd73325637c7e187b8eac95953ae86af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25e9f01a_bd1ce0e4",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-07-03T08:17:26Z",
+      "side": 1,
+      "message": "Could we not just just encoding_rate_ here?",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 36
+      },
+      "revId": "9a4d80f8cd73325637c7e187b8eac95953ae86af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d53c0fcb_d2bc89e2",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-07-03T08:17:26Z",
+      "side": 1,
+      "message": "We are using initializer list for two members (plus the encoding_rate_ above). Initialize along with the rest in constructor.",
+      "range": {
+        "startLine": 170,
+        "startChar": 2,
+        "endLine": 173,
+        "endChar": 0
+      },
+      "revId": "9a4d80f8cd73325637c7e187b8eac95953ae86af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "348509e9_dd404b9d",
+        "filename": "modules/congestion_controller/send_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-07-03T08:17:26Z",
+      "side": 1,
+      "message": "Think maybe this is clearer (if so, copy paste to the parallel impl.)\n\"Do not adjust below the minimum pushback bitrate but do obey if the original estimate is below it.\"",
+      "range": {
+        "startLine": 499,
+        "startChar": 5,
+        "endLine": 500,
+        "endChar": 72
+      },
+      "revId": "9a4d80f8cd73325637c7e187b8eac95953ae86af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
