@@ -1595,8 +1595,8 @@ TEST_P(PeerConnectionIntegrationTest,
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
   // Should be one receiver each for audio/video.
-  EXPECT_EQ(2, caller()->rtp_receiver_observers().size());
-  EXPECT_EQ(2, callee()->rtp_receiver_observers().size());
+  EXPECT_EQ(2U, caller()->rtp_receiver_observers().size());
+  EXPECT_EQ(2U, callee()->rtp_receiver_observers().size());
   // Wait for all "first packet received" callbacks to be fired.
   EXPECT_TRUE_WAIT(
       std::all_of(caller()->rtp_receiver_observers().begin(),
@@ -1616,8 +1616,8 @@ TEST_P(PeerConnectionIntegrationTest,
   // callback should still be invoked.
   caller()->ResetRtpReceiverObservers();
   callee()->ResetRtpReceiverObservers();
-  EXPECT_EQ(2, caller()->rtp_receiver_observers().size());
-  EXPECT_EQ(2, callee()->rtp_receiver_observers().size());
+  EXPECT_EQ(2U, caller()->rtp_receiver_observers().size());
+  EXPECT_EQ(2U, callee()->rtp_receiver_observers().size());
   EXPECT_TRUE(
       std::all_of(caller()->rtp_receiver_observers().begin(),
                   caller()->rtp_receiver_observers().end(),
@@ -1903,7 +1903,7 @@ TEST_P(PeerConnectionIntegrationTest, AudioToVideoUpgrade) {
       // The caller creates a new transceiver to receive video on when receiving
       // the offer, but by default it is send only.
       auto transceivers = caller()->pc()->GetTransceivers();
-      ASSERT_EQ(3, transceivers.size());
+      ASSERT_EQ(3U, transceivers.size());
       ASSERT_EQ(cricket::MEDIA_TYPE_VIDEO,
                 transceivers[2]->receiver()->media_type());
       transceivers[2]->sender()->SetTrack(caller()->CreateLocalVideoTrack());
@@ -2590,7 +2590,7 @@ TEST_P(PeerConnectionIntegrationTest,
   //
   // Also, we use "EXPECT_TRUE_WAIT" because the stats collector may decide to
   // return cached stats if not enough time has passed since the last update.
-  EXPECT_TRUE_WAIT(callee()->OldGetStats()->BytesReceived() > 0U,
+  EXPECT_TRUE_WAIT(callee()->OldGetStats()->BytesReceived() > 0,
                    kDefaultTimeout);
 }
 
@@ -3209,10 +3209,10 @@ TEST_P(PeerConnectionIntegrationTest, StressTestUnorderedSctpDataChannel) {
   }
 
   // Wait for all messages to be received.
-  EXPECT_EQ_WAIT(kNumMessages,
+  EXPECT_EQ_WAIT(static_cast<size_t>(kNumMessages),
                  caller()->data_observer()->received_message_count(),
                  kDefaultTimeout);
-  EXPECT_EQ_WAIT(kNumMessages,
+  EXPECT_EQ_WAIT(static_cast<size_t>(kNumMessages),
                  callee()->data_observer()->received_message_count(),
                  kDefaultTimeout);
 
@@ -3517,17 +3517,17 @@ TEST_P(PeerConnectionIntegrationIceStatesTest, VerifyBestConnection) {
   if (TestIPv6()) {
     // When IPv6 is enabled, we should prefer an IPv6 connection over an IPv4
     // connection.
-    EXPECT_EQ(0u, num_best_ipv4);
-    EXPECT_EQ(1u, num_best_ipv6);
+    EXPECT_EQ(0, num_best_ipv4);
+    EXPECT_EQ(1, num_best_ipv6);
   } else {
-    EXPECT_EQ(1u, num_best_ipv4);
-    EXPECT_EQ(0u, num_best_ipv6);
+    EXPECT_EQ(1, num_best_ipv4);
+    EXPECT_EQ(0, num_best_ipv6);
   }
 
-  EXPECT_EQ(0u, metrics_observer->GetEnumCounter(
+  EXPECT_EQ(0, metrics_observer->GetEnumCounter(
                     webrtc::kEnumCounterIceCandidatePairTypeUdp,
                     webrtc::kIceCandidatePairHostHost));
-  EXPECT_EQ(1u, metrics_observer->GetEnumCounter(
+  EXPECT_EQ(1, metrics_observer->GetEnumCounter(
                     webrtc::kEnumCounterIceCandidatePairTypeUdp,
                     webrtc::kIceCandidatePairHostPublicHostPublic));
 }
@@ -3829,7 +3829,7 @@ TEST_F(PeerConnectionIntegrationTestPlanB, CanSendRemoteVideoTrack) {
   caller()->AddVideoTrack();
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kMaxWaitForActivationMs);
-  ASSERT_EQ(1, callee()->remote_streams()->count());
+  ASSERT_EQ(1U, callee()->remote_streams()->count());
 
   // Echo the stream back, and do a new offer/anwer (initiated by callee this
   // time).
