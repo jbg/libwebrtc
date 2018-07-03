@@ -28,6 +28,7 @@
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/thread_checker.h"
 #include "rtc_base/timeutils.h"
+#include "system_wrappers/include/sleep.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #ifdef WEBRTC_WIN
@@ -341,7 +342,7 @@ class MockAudioTransport : public test::MockAudioTransport {
                                       const bool typing_status,
                                       uint32_t& new_mic_level) {
     EXPECT_TRUE(rec_mode()) << "No test is expecting these callbacks.";
-    RTC_LOG(INFO) << "+";
+    // RTC_LOG(INFO) << "+";
     // Store audio parameters once in the first callback. For all other
     // callbacks, verify that the provided audio parameters are maintained and
     // that each callback corresponds to 10ms for any given sample rate.
@@ -379,7 +380,7 @@ class MockAudioTransport : public test::MockAudioTransport {
                                int64_t* elapsed_time_ms,
                                int64_t* ntp_time_ms) {
     EXPECT_TRUE(play_mode()) << "No test is expecting these callbacks.";
-    RTC_LOG(INFO) << "-";
+    // RTC_LOG(INFO) << "-";
     // Store audio parameters once in the first callback. For all other
     // callbacks, verify that the provided audio parameters are maintained and
     // that each callback corresponds to 10ms for any given sample rate.
@@ -777,6 +778,30 @@ TEST_P(AudioDeviceTest, InitStopInitPlayoutWhileRecording) {
   StopRecording();
 }
 
+// TODO(henrika): restart without intermediate destruction is currently only
+// supported on Windows.
+#ifdef WEBRTC_WIN
+// Tests Start/Stop playout followed by a second session (emulates a restart).
+TEST_P(AudioDeviceTest, StartStopPlayoutWithRestart) {
+  SKIP_TEST_IF_NOT(requirements_satisfied());
+  StartPlayout();
+  StopPlayout();
+  // Restart playout without destroying the ADM in between.
+  StartPlayout();
+  StopPlayout();
+}
+
+// Tests Start/Stop recording followed by a second session (emulates a restart).
+TEST_P(AudioDeviceTest, StartStopRecordingWithRestart) {
+  SKIP_TEST_IF_NOT(requirements_satisfied());
+  StartRecording();
+  StopRecording();
+  // Restart recording without destroying the ADM in between.
+  StartRecording();
+  StopRecording();
+}
+#endif  // #ifdef WEBRTC_WIN
+
 // Start playout and verify that the native audio layer starts asking for real
 // audio samples to play out using the NeedMorePlayData() callback.
 // Note that we can't add expectations on audio parameters in EXPECT_CALL
@@ -866,6 +891,26 @@ TEST_P(AudioDeviceTest, RunPlayoutAndRecordingInFullDuplex) {
   PRINT("\n");
 }
 
+TEST_P(AudioDeviceTest, RunPlayoutAndRecordingInFullDuplexAndWaitForEnterKey) {
+  SKIP_TEST_IF_NOT(requirements_satisfied());
+  NiceMock<MockAudioTransport> mock(TransportType::kPlayAndRecord);
+  FifoAudioStream audio_stream;
+  mock.HandleCallbacks(event(), &audio_stream,
+                       kFullDuplexTimeInSec * kNumCallbacksPerSecond);
+  EXPECT_EQ(0, audio_device()->RegisterAudioCallback(&mock));
+  EXPECT_EQ(0, audio_device()->SetStereoPlayout(true));
+  EXPECT_EQ(0, audio_device()->SetStereoRecording(true));
+  StartPlayout();
+  StartRecording();
+
+  do {
+    PRINT("Loopback audio is active. Press Enter to stop.\n");
+  } while (getchar() != '\n');
+
+  StopRecording();
+  StopPlayout();
+}
+
 // Measures loopback latency and reports the min, max and average values for
 // a full duplex audio session.
 // The latency is measured like so:
@@ -906,8 +951,9 @@ TEST_P(AudioDeviceTest, DISABLED_MeasureLoopbackLatency) {
 INSTANTIATE_TEST_CASE_P(
     AudioLayerWin,
     AudioDeviceTest,
-    ::testing::Values(AudioDeviceModule::kPlatformDefaultAudio,
-                      AudioDeviceModule::kWindowsCoreAudio2));
+    // ::testing::Values(AudioDeviceModule::kPlatformDefaultAudio,
+    //                   AudioDeviceModule::kWindowsCoreAudio2));
+    ::testing::Values(AudioDeviceModule::kWindowsCoreAudio2));
 #else
 // For all platforms but Windows, only test the default audio layer.
 INSTANTIATE_TEST_CASE_P(

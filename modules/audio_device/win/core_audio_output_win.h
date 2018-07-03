@@ -52,7 +52,9 @@ class CoreAudioOutput final : public CoreAudioBase, public AudioOutput {
   CoreAudioOutput& operator=(const CoreAudioOutput&) = delete;
 
  private:
+  void SafeRelease();
   bool OnDataCallback(uint64_t device_frequency);
+  bool OnErrorCallback(ErrorType error);
   int EstimateOutputLatencyMillis(uint64_t device_frequency);
 
   std::unique_ptr<FineAudioBuffer> fine_audio_buffer_;

@@ -24,7 +24,8 @@ namespace webrtc_win {
 
 CoreAudioOutput::CoreAudioOutput()
     : CoreAudioBase(CoreAudioBase::Direction::kOutput,
-                    [this](uint64_t freq) { return OnDataCallback(freq); }) {
+                    [this](uint64_t freq) { return OnDataCallback(freq); },
+                    [this](ErrorType err) { return OnErrorCallback(err); }) {
   RTC_DLOG(INFO) << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   thread_checker_audio_.DetachFromThread();
@@ -100,7 +101,6 @@ int CoreAudioOutput::InitPlayout() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   RTC_DCHECK(!initialized_);
   RTC_DCHECK(!Playing());
-  RTC_DCHECK(!audio_client_.Get());
   RTC_DCHECK(!audio_render_client_.Get());
 
   // Create an IAudioClient client and store the valid interface pointer in
@@ -187,8 +187,7 @@ int CoreAudioOutput::StopPlayout() {
   // method is called without any active output audio.
   if (!Playing()) {
     RTC_DLOG(WARNING) << "No output stream is active";
-    audio_client_.Reset();
-    audio_render_client_.Reset();
+    SafeRelease();
     initialized_ = false;
     return 0;
   }
@@ -198,7 +197,11 @@ int CoreAudioOutput::StopPlayout() {
     return -1;
   }
 
+  // Release all allocated resources to allow for a restart without
+  // intermediate destruction.
+  SafeRelease();
   thread_checker_audio_.DetachFromThread();
+
   initialized_ = false;
   return 0;
 }
@@ -218,12 +221,34 @@ int CoreAudioOutput::VolumeIsAvailable(bool* available) {
   return IsVolumeControlAvailable(available) ? 0 : -1;
 }
 
+void CoreAudioOutput::SafeRelease() {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  CoreAudioBase::SafeRelease();
+  if (audio_render_client_.Get()) {
+    audio_render_client_.Reset();
+  }
+}
+
+bool CoreAudioOutput::OnErrorCallback(ErrorType error) {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  return true;
+}
+
 bool CoreAudioOutput::OnDataCallback(uint64_t device_frequency) {
   RTC_DCHECK_RUN_ON(&thread_checker_audio_);
   // Get the padding value which indicates the amount of valid unread data that
   // the endpoint buffer currently contains.
   UINT32 num_unread_frames = 0;
   _com_error error = audio_client_->GetCurrentPadding(&num_unread_frames);
+  if (error.Error() == AUDCLNT_E_DEVICE_INVALIDATED) {
+    // Avoid breaking the thread loop implicitly by returning false and return
+    // true instead for AUDCLNT_E_DEVICE_INVALIDATED even it is a valid error
+    // message. We will use notifications about device changes instead to stop
+    // data callbacks and attempt to restart streaming .
+    RTC_DLOG(LS_ERROR) << "AUDCLNT_E_DEVICE_INVALIDATED";
+    return true;
+  }
   if (error.Error() != S_OK) {
     RTC_LOG(LS_ERROR) << "IAudioClient::GetCurrentPadding failed: "
                       << core_audio_utility::ErrorToString(error);

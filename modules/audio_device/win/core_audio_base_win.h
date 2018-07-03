@@ -16,6 +16,7 @@
 #include <string>
 
 #include "modules/audio_device/win/core_audio_utility_win.h"
+#include "rtc_base/criticalsection.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/thread_checker.h"
 
@@ -29,20 +30,41 @@ namespace webrtc_win {
 // Serves as base class for CoreAudioInput and CoreAudioOutput and supports
 // device handling and audio streaming where the direction (input or output)
 // is set at constructions by the parent.
-class CoreAudioBase {
+// The IAudioSessionEvents interface provides notifications of session-related
+// events such as changes in the volume level, display name, and session state.
+// This class does not use the default ref-counting memory management method
+// provided by IUnknown: calling CoreAudioBase::Release() will not delete the
+// object.
+class CoreAudioBase : public IAudioSessionEvents {
  public:
   enum class Direction {
     kInput,
     kOutput,
   };
 
+  enum class ErrorType {
+    kStreamDisconnected,
+  };
+
+  template <typename T>
+  auto as_integer(T const value) -> typename std::underlying_type<T>::type {
+    return static_cast<typename std::underlying_type<T>::type>(value);
+  }
+
   // Callback definition for notifications of new audio data. For input clients,
   // it means that "new audio data has now been captured", and for output
   // clients, "the output layer now needs new audio data".
   typedef std::function<bool(uint64_t device_frequency)> OnDataCallback;
 
-  explicit CoreAudioBase(Direction direction, OnDataCallback callback);
+  // Callback definition for....
+  typedef std::function<bool(ErrorType error)> OnErrorCallback;
+
+  explicit CoreAudioBase(Direction direction,
+                         OnDataCallback data_callback,
+                         OnErrorCallback error_callback);
   ~CoreAudioBase();
+
+  // TODO(henrika): rtc::CritScope cs(&lock_);
 
   std::string GetDeviceID(int index) const;
   int DeviceName(int index, std::string* name, std::string* guid) const;
@@ -60,6 +82,9 @@ class CoreAudioBase {
   CoreAudioBase& operator=(const CoreAudioBase&) = delete;
 
  protected:
+  // TODO(henrika): add comments...
+  void SafeRelease();
+
   // Returns number of active devices given the specified |direction_|.
   int NumberOfActiveDevices() const;
 
@@ -79,8 +104,10 @@ class CoreAudioBase {
 
   rtc::ThreadChecker thread_checker_;
   rtc::ThreadChecker thread_checker_audio_;
+  rtc::CriticalSection lock_;
   const Direction direction_;
   const OnDataCallback on_data_callback_;
+  const OnErrorCallback on_error_callback_;
   AudioDeviceBuffer* audio_device_buffer_ = nullptr;
   bool initialized_ = false;
   std::string device_id_;
@@ -88,12 +115,42 @@ class CoreAudioBase {
   uint32_t endpoint_buffer_size_frames_ = 0;
   Microsoft::WRL::ComPtr<IAudioClient> audio_client_;
   Microsoft::WRL::ComPtr<IAudioClock> audio_clock_;
+  Microsoft::WRL::ComPtr<IAudioSessionControl> audio_session_control_;
   ScopedHandle audio_samples_event_;
   ScopedHandle stop_event_;
+  ScopedHandle restart_event_;
   std::unique_ptr<rtc::PlatformThread> audio_thread_;
+  bool is_restarting_ = false;
 
  private:
+  LONG ref_count_ = 1;
+
   void StopThread();
+  bool HandleRestartEvent();
+  AudioSessionState GetAudioSessionState() const;
+
+  // IUnknown (required by IAudioSessionEvents and IMMNotificationClient).
+  ULONG __stdcall AddRef() override;
+  ULONG __stdcall Release() override;
+  HRESULT __stdcall QueryInterface(REFIID iid, void** object) override;
+
+  // IAudioSessionEvents implementation
+  HRESULT __stdcall OnStateChanged(AudioSessionState new_state) override;
+  HRESULT __stdcall OnSessionDisconnected(
+      AudioSessionDisconnectReason disconnect_reason) override;
+  HRESULT __stdcall OnDisplayNameChanged(LPCWSTR new_display_name,
+                                         LPCGUID event_context) override;
+  HRESULT __stdcall OnIconPathChanged(LPCWSTR new_icon_path,
+                                      LPCGUID event_context) override;
+  HRESULT __stdcall OnSimpleVolumeChanged(float new_simple_volume,
+                                          BOOL new_mute,
+                                          LPCGUID event_context) override;
+  HRESULT __stdcall OnChannelVolumeChanged(DWORD channel_count,
+                                           float new_channel_volumes[],
+                                           DWORD changed_channel,
+                                           LPCGUID event_context) override;
+  HRESULT __stdcall OnGroupingParamChanged(LPCGUID new_grouping_param,
+                                           LPCGUID event_context) override;
 };
 
 }  // namespace webrtc_win
