@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "0702372a_b3b5cb66",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator_agc.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-03T12:01:08Z",
+      "side": 1,
+      "message": "Ah, I see. Thanks!",
+      "parentUuid": "3a4fc89e_21c54757",
+      "range": {
+        "startLine": 32,
+        "startChar": 31,
+        "endLine": 32,
+        "endChar": 52
+      },
+      "revId": "614a5e8e87a529112cb4c928045828abc8887bff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e49f04f_86e47116",
         "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator_agc.cc",
         "patchSetId": 12
