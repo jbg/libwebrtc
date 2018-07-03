@@ -223,14 +223,6 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
 
   config("apprtc_signaling_config") {
     include_dirs = [ "objc/AppRTCMobile" ]
-
-    # GN orders flags on a target before flags from configs. The default config
-    # adds these flags so to cancel them out they need to come from a config and
-    # cannot be on the target directly.
-    cflags = [
-      "-Wno-sign-compare",
-      "-Wno-unused-variable",
-    ]
   }
 
   rtc_static_library("apprtc_signaling") {
@@ -597,30 +589,12 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
     include_dirs = [ "objc/AppRTCMobile/third_party/SocketRocket" ]
   }
 
-  config("socketrocket_warning_config") {
-    # GN orders flags on a target before flags from configs. The default config
-    # adds these flags so to cancel them out they need to come from a config and
-    # cannot be on the target directly.
-    cflags = [
-      "-Wno-deprecated-declarations",
-      "-Wno-nonnull",
-      "-Wno-semicolon-before-method-body",
-      "-Wno-unused-variable",
-    ]
-
-    cflags_objc = [
-      # Enabled for cflags_objc in build/config/compiler/BUILD.gn.
-      "-Wno-objc-missing-property-synthesis",
-    ]
-  }
-
   rtc_static_library("socketrocket") {
     testonly = true
     sources = [
       "objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.h",
       "objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
     ]
-    configs += [ ":socketrocket_warning_config" ]
     public_configs = [ ":socketrocket_include_config" ]
 
     libs = [
@@ -676,28 +650,6 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
 }
 
 if (is_linux || is_win) {
-  config("peerconnection_client_warnings_config") {
-    cflags = []
-    if (is_win && is_clang) {
-      cflags += [
-        # Disable warnings failing when compiling with Clang on Windows.
-        # https://bugs.chromium.org/p/webrtc/issues/detail?id=5366
-        "-Wno-format",
-
-        # See https://bugs.chromium.org/p/webrtc/issues/detail?id=6271
-        # for -Wno-reorder and -Wno-sign-compare
-        "-Wno-reorder",
-        "-Wno-sign-compare",
-      ]
-    }
-    if (is_linux && target_cpu == "x86") {
-      cflags += [
-        # Needed to compile on Linux 32-bit.
-        "-Wno-sentinel",
-      ]
-    }
-  }
-
   rtc_executable("peerconnection_client") {
     testonly = true
     sources = [
@@ -745,7 +697,6 @@ if (is_linux || is_win) {
       ]
       deps += [ "//build/config/linux/gtk" ]
     }
-    configs += [ ":peerconnection_client_warnings_config" ]
 
     deps += [
       "../api:libjingle_peerconnection_api",
@@ -878,10 +829,7 @@ if (is_win || is_android) {
     }
     if (is_win) {
       cflags = [ "/wd4245" ]
-      configs += [
-        "//build/config/win:windowed",
-        ":peerconnection_client_warnings_config",
-      ]
+      configs += [ "//build/config/win:windowed" ]
     }
     deps = [
       "../api:libjingle_peerconnection_api",
