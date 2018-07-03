@@ -594,7 +594,10 @@ enum IceAttributeType {
   STUN_ATTR_NOMINATION = 0xC001,       // UInt32
   // UInt32. The higher 16 bits are the network ID. The lower 16 bits are the
   // network cost.
-  STUN_ATTR_NETWORK_INFO = 0xC057
+  STUN_ATTR_NETWORK_INFO = 0xC057,
+  // UInt32. The higher 16 bits are the interface id. The lower 16 bits are
+  // reserved.
+  STUN_ATTR_NETWORK_INFO_EXTRA = 0xC058,
 };
 
 // RFC 5245-defined errors.
