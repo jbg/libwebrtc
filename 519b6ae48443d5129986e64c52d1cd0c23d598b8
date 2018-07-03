@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de278933_be597fdc",
+        "filename": "pc/datachannel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-07-03T10:35:43Z",
+      "side": 1,
+      "message": "checked_cast?",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 23
+      },
+      "revId": "519b6ae48443d5129986e64c52d1cd0c23d598b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
