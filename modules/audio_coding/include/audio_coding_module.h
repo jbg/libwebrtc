@@ -30,7 +30,7 @@ namespace webrtc {
 
 // forward declarations
 struct CodecInst;
-struct WebRtcRTPHeader;
+class WebRtcRTPHeader;
 class AudioDecoder;
 class AudioEncoder;
 class AudioFrame;

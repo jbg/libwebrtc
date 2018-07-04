@@ -51,13 +51,17 @@ class RtpPacketizer {
 // the jitter buffer can just store that pointer rather than doing a copy there.
 class RtpDepacketizer {
  public:
-  struct ParsedPayload {
+  class ParsedPayload {
+   public:
+    RTPVideoHeader& video_header() { return video; }
+    const RTPVideoHeader& video_header() const { return video; }
+
     const uint8_t* payload;
     size_t payload_length;
     FrameType frame_type;
-    RTPVideoHeader& video_header() { return type.Video; }
-    const RTPVideoHeader& video_header() const { return type.Video; }
-    RTPTypeHeader type;
+
+   private:
+    RTPVideoHeader video;
   };
 
   static RtpDepacketizer* Create(VideoCodecType type);
