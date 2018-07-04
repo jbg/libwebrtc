@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f071f519_fd331118",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-07-04T11:42:13Z",
+      "side": 1,
+      "message": "Thanks for catching!",
+      "parentUuid": "96cfebad_5b04ebed",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "f805d3725d84e3b802eb3c2bec7c51c4eb5d71d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db1a9f40_502c0365",
         "filename": "logging/rtc_event_log/rtc_event_log2text.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "22da9a63_83b3ac71",
+        "filename": "logging/rtc_event_log/rtc_event_log2text.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-07-04T11:42:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db1a9f40_502c0365",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 393,
+        "endChar": 18
+      },
+      "revId": "f805d3725d84e3b802eb3c2bec7c51c4eb5d71d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da247023_66562179",
         "filename": "logging/rtc_event_log/rtc_event_log2text.cc",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2018-07-04T11:33:15Z",
       "side": 1,
       "message": "How about opening the file and returning an istream or FILE*? Seem like we could get rid of the enum and switch statement in main().",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 402,
+        "endChar": 31
+      },
+      "revId": "f805d3725d84e3b802eb3c2bec7c51c4eb5d71d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a41f23fc_f5f21666",
+        "filename": "logging/rtc_event_log/rtc_event_log2text.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-07-04T11:42:13Z",
+      "side": 1,
+      "message": "Don\u0027t we eventually want to get rid of streams in WebRTC? That would make it harder.",
+      "parentUuid": "da247023_66562179",
       "range": {
         "startLine": 402,
         "startChar": 0,
