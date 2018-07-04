@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87892d06_7602bdb5",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-04T12:40:05Z",
+      "side": 1,
+      "message": "class imply different naming style for members, so may be name this one video_\n(or keep WebRtcRTPHeader struct until other members are hided)\n\nhttps://google.github.io/styleguide/cppguide.html#Structs_vs._Classes",
+      "range": {
+        "startLine": 78,
+        "startChar": 17,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "47ff8ac4f818c56e3b12c6b2a508b8a5c7167524",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13dc8d27_f165d1f7",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-04T12:40:05Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 64,
+        "startChar": 19,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "47ff8ac4f818c56e3b12c6b2a508b8a5c7167524",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
