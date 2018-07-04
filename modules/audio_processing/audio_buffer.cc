@@ -441,7 +441,7 @@ void AudioBuffer::CopyLowPassToReference() {
     low_pass_reference_channels_.reset(
         new ChannelBuffer<int16_t>(num_split_frames_, num_proc_channels_));
   }
-  for (size_t i = 0; i < num_proc_channels_; i++) {
+  for (size_t i = 0; i < std::min(num_proc_channels_, num_channels_); i++) {
     memcpy(low_pass_reference_channels_->channels()[i],
            split_bands_const(i)[kBand0To8kHz],
            low_pass_reference_channels_->num_frames_per_band() *
