@@ -352,6 +352,30 @@
       "revId": "614a5e8e87a529112cb4c928045828abc8887bff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a96b48a_278a84a4",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator_agc.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-07-04T08:13:51Z",
+      "side": 1,
+      "message": "We don\u0027t know and it\u0027s non-trivial. I\u0027ve filed webrtc:9485.",
+      "parentUuid": "7f8db8f8_82f94c5f",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 27
+      },
+      "revId": "614a5e8e87a529112cb4c928045828abc8887bff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
