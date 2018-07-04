@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63f3a8dd_8d054ca6",
+        "filename": "sdk/android/src/jni/audio_device/audio_record_jni.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-04T12:41:03Z",
+      "side": 1,
+      "message": "Seems unrelated to me but ok.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 3
+      },
+      "revId": "af7312d3a1168be05249d4b0e11412efe2c3a358",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
