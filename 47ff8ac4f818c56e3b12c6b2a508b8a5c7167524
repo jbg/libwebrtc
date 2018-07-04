@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d9e8c3fd_e41ec292",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-04T14:56:23Z",
+      "side": 1,
+      "message": "Reverted to struct.",
+      "parentUuid": "87892d06_7602bdb5",
+      "range": {
+        "startLine": 78,
+        "startChar": 17,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "47ff8ac4f818c56e3b12c6b2a508b8a5c7167524",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13dc8d27_f165d1f7",
         "filename": "modules/rtp_rtcp/source/rtp_format.h",
         "patchSetId": 1
