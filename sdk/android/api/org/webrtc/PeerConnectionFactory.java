@@ -357,19 +357,6 @@ public class PeerConnectionFactory {
     return new VideoSource(nativeCreateVideoSource(nativeFactory, isScreencast));
   }
 
-  @Deprecated
-  public VideoSource createVideoSource(VideoCapturer capturer) {
-    final EglBase.Context eglContext =
-        localEglbase == null ? null : localEglbase.getEglBaseContext();
-    final SurfaceTextureHelper surfaceTextureHelper =
-        SurfaceTextureHelper.create(VIDEO_CAPTURER_THREAD_NAME, eglContext);
-    final VideoSource videoSource = new VideoSource(
-        nativeCreateVideoSource(nativeFactory, capturer.isScreencast()), surfaceTextureHelper);
-    capturer.initialize(surfaceTextureHelper, ContextUtils.getApplicationContext(),
-        videoSource.getCapturerObserver());
-    return videoSource;
-  }
-
   public VideoTrack createVideoTrack(String id, VideoSource source) {
     return new VideoTrack(nativeCreateVideoTrack(nativeFactory, id, source.nativeSource));
   }
