@@ -531,8 +531,12 @@ static int const kKbpsMultiplier = 1000;
   // Create peer connection.
   RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
   RTCConfiguration *config = [[RTCConfiguration alloc] init];
+  NSDictionary *d = @{ @"expires" : @100000, @"name" : @"RSASSA-PKCS1-v1_5" };
+  RTCCertificate *pcert = [config generateCertificate:d];
   config.iceServers = _iceServers;
   config.sdpSemantics = RTCSdpSemanticsUnifiedPlan;
+  config.certificate = pcert;
+
   _peerConnection = [_factory peerConnectionWithConfiguration:config
                                                   constraints:constraints
                                                      delegate:self];

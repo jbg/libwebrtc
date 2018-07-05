@@ -23,6 +23,7 @@
 @implementation RTCConfiguration
 
 @synthesize iceServers = _iceServers;
+@synthesize certificate = _certificate;
 @synthesize iceTransportPolicy = _iceTransportPolicy;
 @synthesize bundlePolicy = _bundlePolicy;
 @synthesize rtcpMuxPolicy = _rtcpMuxPolicy;
@@ -168,16 +169,32 @@
       _iceBackupCandidatePairPingInterval;
   rtc::KeyType keyType =
       [[self class] nativeEncryptionKeyTypeForKeyType:_keyType];
-  // Generate non-default certificate.
-  if (keyType != rtc::KT_DEFAULT) {
-    rtc::scoped_refptr<rtc::RTCCertificate> certificate =
-        rtc::RTCCertificateGenerator::GenerateCertificate(rtc::KeyParams(keyType),
-                                                          absl::optional<uint64_t>());
+  if (_certificate != nullptr) {
+    // if offered a pemcert use it...
+    RTC_LOG(LS_INFO) << "Have Configured Cert - using it";
+    std::string pem_private_key = [[_certificate private_key] UTF8String];
+    std::string pem_certificate = [[_certificate certificate] UTF8String];
+    rtc::RTCCertificatePEM pem = rtc::RTCCertificatePEM(pem_private_key, pem_certificate);
+    rtc::scoped_refptr<rtc::RTCCertificate> certificate = rtc::RTCCertificate::FromPEM(pem);
+    RTC_LOG(LS_INFO) << "created cert from PEM strings";
     if (!certificate) {
-      RTCLogError(@"Failed to generate certificate.");
+      RTC_LOG(LS_ERROR) << "Failed to generate certificate from pem";
       return nullptr;
     }
     nativeConfig->certificates.push_back(certificate);
+  } else {
+    RTC_LOG(LS_INFO) << "Don't have configured Cert ";
+    // Generate non-default certificate.
+    if (keyType != rtc::KT_DEFAULT) {
+      rtc::scoped_refptr<rtc::RTCCertificate> certificate =
+          rtc::RTCCertificateGenerator::GenerateCertificate(rtc::KeyParams(keyType),
+                                                            absl::optional<uint64_t>());
+      if (!certificate) {
+        RTCLogError(@"Failed to generate certificate.");
+        return nullptr;
+      }
+      nativeConfig->certificates.push_back(certificate);
+    }
   }
   nativeConfig->ice_candidate_pool_size = _iceCandidatePoolSize;
   nativeConfig->prune_turn_ports = _shouldPruneTurnPorts ? true : false;
@@ -432,4 +449,63 @@
   }
 }
 
+- (RTCCertificate *)generateCertificate:(NSDictionary *)params {
+  RTC_LOG(LS_INFO) << "Generate a new Cert ";
+  rtc::KeyType keyType;
+  NSString *kts = [params valueForKey:@"name"];
+  if (kts == nil) {
+    keyType = rtc::KT_ECDSA;
+  } else {
+    if ([kts isEqualToString:@"ECDSA"]) {
+      keyType = rtc::KT_ECDSA;
+      ;
+    } else if ([kts isEqualToString:@"RSASSA-PKCS1-v1_5"]) {
+      keyType = rtc::KT_RSA;
+    }
+  }
+
+  NSNumber *expires = [params valueForKey:@"expires"];
+  rtc::scoped_refptr<rtc::RTCCertificate> cc_certificate = nullptr;
+  if (expires != nil) {
+    uint64_t expt = [expires unsignedLongLongValue];
+    cc_certificate = rtc::RTCCertificateGenerator::GenerateCertificate(
+        rtc::KeyParams(keyType), absl::optional<uint64_t>(expt));
+  } else {
+    cc_certificate = rtc::RTCCertificateGenerator::GenerateCertificate(rtc::KeyParams(keyType),
+                                                                       absl::optional<uint64_t>());
+  }
+  if (!cc_certificate) {
+    RTCLogError(@"Failed to generate certificate.");
+    return nullptr;
+  }
+  // grab PEMs and create an NS RTCCerticicate
+  rtc::RTCCertificatePEM pem = cc_certificate->ToPEM();
+  std::string pem_private_key = pem.private_key();
+  std::string pem_certificate = pem.certificate();
+  RTC_LOG(LS_INFO) << "CERT PEM ";
+  RTC_LOG(LS_INFO) << pem_certificate;
+
+  RTCCertificate *cert = [[RTCCertificate alloc] initWithStrings:@(pem_private_key.c_str())
+                                                     certificate:@(pem_certificate.c_str())];
+  return cert;
+}
+
+@end
+@implementation RTCCertificate
+
+@synthesize private_key = _private_key;
+@synthesize certificate = _certificate;
+
+- (id)copyWithZone:(NSZone *)zone {
+  id copy = [[[self class] alloc] initWithStrings:[self.private_key copyWithZone:zone]
+                                      certificate:[self.certificate copyWithZone:zone]];
+  return copy;
+}
+- (instancetype)initWithStrings:(NSString *)private_key certificate:(NSString *)certificate {
+  if (self = [super init]) {
+    _private_key = [private_key copy];
+    _certificate = [certificate copy];
+  }
+  return self;
+}
 @end
