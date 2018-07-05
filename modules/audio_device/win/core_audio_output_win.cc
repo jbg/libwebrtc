@@ -24,7 +24,8 @@ namespace webrtc_win {
 
 CoreAudioOutput::CoreAudioOutput()
     : CoreAudioBase(CoreAudioBase::Direction::kOutput,
-                    [this](uint64_t freq) { return OnDataCallback(freq); }) {
+                    [this](uint64_t freq) { return OnDataCallback(freq); },
+                    [this](ErrorType err) { return OnErrorCallback(err); }) {
   RTC_DLOG(INFO) << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   thread_checker_audio_.DetachFromThread();
@@ -96,11 +97,9 @@ bool CoreAudioOutput::PlayoutIsInitialized() const {
 }
 
 int CoreAudioOutput::InitPlayout() {
-  RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << IsRestarting();
   RTC_DCHECK(!initialized_);
   RTC_DCHECK(!Playing());
-  RTC_DCHECK(!audio_client_.Get());
   RTC_DCHECK(!audio_render_client_.Get());
 
   // Create an IAudioClient client and store the valid interface pointer in
@@ -132,13 +131,15 @@ int CoreAudioOutput::InitPlayout() {
   // a rendering endpoint buffer.
   ComPtr<IAudioRenderClient> audio_render_client =
       core_audio_utility::CreateRenderClient(audio_client_.Get());
-  if (!audio_render_client.Get())
+  if (!audio_render_client.Get()) {
     return -1;
+  }
 
   ComPtr<IAudioClock> audio_clock =
       core_audio_utility::CreateAudioClock(audio_client_.Get());
-  if (!audio_clock.Get())
+  if (!audio_clock.Get()) {
     return -1;
+  }
 
   // Store valid COM interfaces. Note that, |audio_client_| has already been
   // set in CoreAudioBase::Init().
@@ -150,13 +151,11 @@ int CoreAudioOutput::InitPlayout() {
 }
 
 int CoreAudioOutput::StartPlayout() {
-  RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << IsRestarting();
   RTC_DCHECK(!Playing());
   if (!initialized_) {
     RTC_DLOG(LS_WARNING)
         << "Playout can not start since InitPlayout must succeed first";
-    return 0;
   }
   if (fine_audio_buffer_) {
     fine_audio_buffer_->ResetPlayout();
@@ -173,12 +172,12 @@ int CoreAudioOutput::StartPlayout() {
     return -1;
   }
 
+  is_active_ = true;
   return 0;
 }
 
 int CoreAudioOutput::StopPlayout() {
-  RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << IsRestarting();
   if (!initialized_) {
     return 0;
   }
@@ -187,8 +186,7 @@ int CoreAudioOutput::StopPlayout() {
   // method is called without any active output audio.
   if (!Playing()) {
     RTC_DLOG(WARNING) << "No output stream is active";
-    audio_client_.Reset();
-    audio_render_client_.Reset();
+    SafeRelease();
     initialized_ = false;
     return 0;
   }
@@ -198,15 +196,18 @@ int CoreAudioOutput::StopPlayout() {
     return -1;
   }
 
-  thread_checker_audio_.DetachFromThread();
+  // Release all allocated resources to allow for a restart without
+  // intermediate destruction.
+  SafeRelease();
+
   initialized_ = false;
+  is_active_ = false;
   return 0;
 }
 
 bool CoreAudioOutput::Playing() {
-  RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  return audio_thread_ != nullptr;
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << is_active_;
+  return is_active_;
 }
 
 // TODO(henrika): finalize support of audio session volume control. As is, we
@@ -218,13 +219,58 @@ int CoreAudioOutput::VolumeIsAvailable(bool* available) {
   return IsVolumeControlAvailable(available) ? 0 : -1;
 }
 
+int CoreAudioOutput::RestartPlayout() {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  if (!Playing()) {
+    return 0;
+  }
+
+  if (!Restart()) {
+    RTC_LOG(LS_ERROR) << "RestartPlayout failed";
+    return -1;
+  }
+  return 0;
+}
+
+void CoreAudioOutput::SafeRelease() {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  CoreAudioBase::SafeRelease();
+  if (audio_render_client_.Get()) {
+    audio_render_client_.Reset();
+  }
+}
+
+bool CoreAudioOutput::OnErrorCallback(ErrorType error) {
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << as_integer(error);
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  if (!initialized_ || !Playing()) {
+    return true;
+  }
+
+  if (error == CoreAudioBase::ErrorType::kStreamDisconnected) {
+    HandleStreamDisconnected();
+  } else {
+    RTC_DLOG(WARNING) << "Unsupported error type";
+  }
+  return true;
+}
+
 bool CoreAudioOutput::OnDataCallback(uint64_t device_frequency) {
   RTC_DCHECK_RUN_ON(&thread_checker_audio_);
   // Get the padding value which indicates the amount of valid unread data that
   // the endpoint buffer currently contains.
   UINT32 num_unread_frames = 0;
   _com_error error = audio_client_->GetCurrentPadding(&num_unread_frames);
-  if (error.Error() != S_OK) {
+  if (error.Error() == AUDCLNT_E_DEVICE_INVALIDATED) {
+    // Avoid breaking the thread loop implicitly by returning false and return
+    // true instead for AUDCLNT_E_DEVICE_INVALIDATED even it is a valid error
+    // message. We will use notifications about device changes instead to stop
+    // data callbacks and attempt to restart streaming .
+    RTC_DLOG(LS_ERROR) << "AUDCLNT_E_DEVICE_INVALIDATED";
+    return true;
+  }
+  if (FAILED(error.Error())) {
     RTC_LOG(LS_ERROR) << "IAudioClient::GetCurrentPadding failed: "
                       << core_audio_utility::ErrorToString(error);
     return false;
@@ -236,12 +282,17 @@ bool CoreAudioOutput::OnDataCallback(uint64_t device_frequency) {
   // calling IAudioRenderClient::GetBuffer().
   UINT32 num_requested_frames =
       endpoint_buffer_size_frames_ - num_unread_frames;
+  if (num_requested_frames == 0) {
+    RTC_DLOG(LS_WARNING)
+        << "Audio thread is signaled but no new audio samples are needed";
+    return true;
+  }
 
   // Request all available space in the rendering endpoint buffer into which the
   // client can later write an audio packet.
   uint8_t* audio_data;
   error = audio_render_client_->GetBuffer(num_requested_frames, &audio_data);
-  if (error.Error() != S_OK) {
+  if (FAILED(error.Error())) {
     RTC_LOG(LS_ERROR) << "IAudioRenderClient::GetBuffer failed: "
                       << core_audio_utility::ErrorToString(error);
     return false;
@@ -262,7 +313,7 @@ bool CoreAudioOutput::OnDataCallback(uint64_t device_frequency) {
 
   // Release the buffer space acquired in IAudioRenderClient::GetBuffer.
   error = audio_render_client_->ReleaseBuffer(num_requested_frames, 0);
-  if (error.Error() != S_OK) {
+  if (FAILED(error.Error())) {
     RTC_LOG(LS_ERROR) << "IAudioRenderClient::ReleaseBuffer failed: "
                       << core_audio_utility::ErrorToString(error);
     return false;
@@ -299,6 +350,19 @@ int CoreAudioOutput::EstimateOutputLatencyMillis(uint64_t device_frequency) {
     delay_ms = delay.ms();
   }
   return delay_ms;
+}
+
+// TODO(henrika): note that this method happens on the audio thread.
+bool CoreAudioOutput::HandleStreamDisconnected() {
+  RTC_DLOG(INFO) << "<<<--- " << __FUNCTION__;
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+
+  StopPlayout();
+  InitPlayout();
+  StartPlayout();
+
+  RTC_DLOG(INFO) << __FUNCTION__ << " --->>>";
+  return true;
 }
 
 }  // namespace webrtc_win

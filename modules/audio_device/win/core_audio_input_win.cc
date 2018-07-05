@@ -22,9 +22,14 @@ using Microsoft::WRL::ComPtr;
 namespace webrtc {
 namespace webrtc_win {
 
+enum AudioDeviceMessageType : uint32_t {
+  kMessageInputStreamDisconnected,
+};
+
 CoreAudioInput::CoreAudioInput()
     : CoreAudioBase(CoreAudioBase::Direction::kInput,
-                    [this](uint64_t freq) { return OnDataCallback(freq); }) {
+                    [this](uint64_t freq) { return OnDataCallback(freq); },
+                    [this](ErrorType err) { return OnErrorCallback(err); }) {
   RTC_DLOG(INFO) << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   thread_checker_audio_.DetachFromThread();
@@ -96,10 +101,8 @@ bool CoreAudioInput::RecordingIsInitialized() const {
 
 int CoreAudioInput::InitRecording() {
   RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
   RTC_DCHECK(!initialized_);
   RTC_DCHECK(!Recording());
-  RTC_DCHECK(!audio_client_.Get());
   RTC_DCHECK(!audio_capture_client_.Get());
 
   // Create an IAudioClient and store the valid interface pointer in
@@ -154,7 +157,6 @@ int CoreAudioInput::InitRecording() {
 
 int CoreAudioInput::StartRecording() {
   RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
   RTC_DCHECK(!Recording());
   if (!initialized_) {
     RTC_DLOG(LS_WARNING)
@@ -169,12 +171,12 @@ int CoreAudioInput::StartRecording() {
     return -1;
   }
 
+  is_active_ = true;
   return 0;
 }
 
 int CoreAudioInput::StopRecording() {
   RTC_DLOG(INFO) << __FUNCTION__;
-  RTC_DCHECK_RUN_ON(&thread_checker_);
   if (!initialized_) {
     return 0;
   }
@@ -183,8 +185,7 @@ int CoreAudioInput::StopRecording() {
   // method is called without any active input audio.
   if (!Recording()) {
     RTC_DLOG(WARNING) << "No input stream is active";
-    audio_client_.Reset();
-    audio_capture_client_.Reset();
+    SafeRelease();
     initialized_ = false;
     return 0;
   }
@@ -194,22 +195,19 @@ int CoreAudioInput::StopRecording() {
     return -1;
   }
 
-  // TODO(henrika): if we want to support Init(), Start(), Stop(), Init(),
-  // Start(), Stop() without close in between, these lines are needed.
-  // Not supported on mobile ADMs, hence we can probably live without it.
-  // audio_client_.Reset();
-  // audio_capture_client_.Reset();
-  // audio_device_buffer_->NativeAudioRecordingInterrupted();
-  thread_checker_audio_.DetachFromThread();
+  // Release all allocated resources to allow for a restart without
+  // intermediate destruction.
+  SafeRelease();
   qpc_to_100ns_.reset();
+
   initialized_ = false;
+  is_active_ = false;
   return 0;
 }
 
 bool CoreAudioInput::Recording() {
-  RTC_DLOG(INFO) << __FUNCTION__ << ": " << (audio_thread_ != nullptr);
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  return audio_thread_ != nullptr;
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << is_active_;
+  return is_active_;
 }
 
 // TODO(henrika): finalize support of audio session volume control. As is, we
@@ -221,12 +219,28 @@ int CoreAudioInput::VolumeIsAvailable(bool* available) {
   return IsVolumeControlAvailable(available) ? 0 : -1;
 }
 
+void CoreAudioInput::SafeRelease() {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  CoreAudioBase::SafeRelease();
+  if (audio_capture_client_.Get()) {
+    audio_capture_client_.Reset();
+  }
+}
+
 bool CoreAudioInput::OnDataCallback(uint64_t device_frequency) {
   RTC_DCHECK_RUN_ON(&thread_checker_audio_);
   UINT32 num_frames_in_next_packet = 0;
   _com_error error =
       audio_capture_client_->GetNextPacketSize(&num_frames_in_next_packet);
-  if (error.Error() != S_OK) {
+  if (error.Error() == AUDCLNT_E_DEVICE_INVALIDATED) {
+    // Avoid breaking the thread loop implicitly by returning false and return
+    // true instead for AUDCLNT_E_DEVICE_INVALIDATED even it is a valid error
+    // message. We will use notifications about device changes instead to stop
+    // data callbacks and attempt to restart streaming .
+    RTC_DLOG(LS_ERROR) << "AUDCLNT_E_DEVICE_INVALIDATED";
+    return true;
+  }
+  if (FAILED(error.Error())) {
     RTC_LOG(LS_ERROR) << "IAudioCaptureClient::GetNextPacketSize failed: "
                       << core_audio_utility::ErrorToString(error);
     return false;
@@ -248,7 +262,7 @@ bool CoreAudioInput::OnDataCallback(uint64_t device_frequency) {
       RTC_DCHECK_EQ(num_frames_to_read, 0u);
       return true;
     }
-    if (error.Error() != S_OK) {
+    if (FAILED(error.Error())) {
       RTC_LOG(LS_ERROR) << "IAudioCaptureClient::GetBuffer failed: "
                         << core_audio_utility::ErrorToString(error);
       return false;
@@ -297,7 +311,7 @@ bool CoreAudioInput::OnDataCallback(uint64_t device_frequency) {
     }
 
     error = audio_capture_client_->ReleaseBuffer(num_frames_to_read);
-    if (error.Error() != S_OK) {
+    if (FAILED(error.Error())) {
       RTC_LOG(LS_ERROR) << "IAudioCaptureClient::ReleaseBuffer failed: "
                         << core_audio_utility::ErrorToString(error);
       return false;
@@ -305,13 +319,25 @@ bool CoreAudioInput::OnDataCallback(uint64_t device_frequency) {
 
     error =
         audio_capture_client_->GetNextPacketSize(&num_frames_in_next_packet);
-    if (error.Error() != S_OK) {
+    if (FAILED(error.Error())) {
       RTC_LOG(LS_ERROR) << "IAudioCaptureClient::GetNextPacketSize failed: "
                         << core_audio_utility::ErrorToString(error);
       return false;
     }
   }
 
+  return true;
+}
+
+// TODO(henrika): how to return vale from main thread?
+bool CoreAudioInput::OnErrorCallback(ErrorType error) {
+  RTC_DLOG(INFO) << __FUNCTION__ << ": " << as_integer(error);
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  if (error == CoreAudioBase::ErrorType::kStreamDisconnected) {
+    HandleStreamDisconnected();
+  } else {
+    RTC_DLOG(WARNING) << "Unsupported error type";
+  }
   return true;
 }
 
@@ -336,6 +362,15 @@ absl::optional<int> CoreAudioInput::EstimateLatencyMillis(
   webrtc::TimeDelta delay_us =
       webrtc::TimeDelta::us(0.1 * (now_time_100ns - capture_time_100ns) + 0.5);
   return delay_us.ms();
+}
+
+// TODO(henrika): note that this method happens on the audio thread.
+bool CoreAudioInput::HandleStreamDisconnected() {
+  RTC_DLOG(INFO) << "<<<--- " << __FUNCTION__;
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+
+  RTC_DLOG(INFO) << __FUNCTION__ << " --->>>";
+  return true;
 }
 
 }  // namespace webrtc_win

@@ -52,8 +52,11 @@ class CoreAudioInput final : public CoreAudioBase, public AudioInput {
   CoreAudioInput& operator=(const CoreAudioInput&) = delete;
 
  private:
+  void SafeRelease();
   bool OnDataCallback(uint64_t device_frequency);
+  bool OnErrorCallback(ErrorType error);
   absl::optional<int> EstimateLatencyMillis(uint64_t capture_time_100ns);
+  bool HandleStreamDisconnected();
 
   std::unique_ptr<FineAudioBuffer> fine_audio_buffer_;
   Microsoft::WRL::ComPtr<IAudioCaptureClient> audio_capture_client_;

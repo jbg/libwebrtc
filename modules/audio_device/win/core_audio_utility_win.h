@@ -451,6 +451,12 @@ Microsoft::WRL::ComPtr<IAudioCaptureClient> CreateCaptureClient(
 // data rate and the current position in the stream.
 Microsoft::WRL::ComPtr<IAudioClock> CreateAudioClock(IAudioClient* client);
 
+// Creates an AudioSessionControl interface for an existing IAudioClient given
+// by |client|. The IAudioControl interface enables a client to configure the
+// control parameters for an audio session and to monitor events in the session.
+Microsoft::WRL::ComPtr<IAudioSessionControl> CreateAudioSessionControl(
+    IAudioClient* client);
+
 // Creates an ISimpleAudioVolume interface for an existing IAudioClient given by
 // |client|. This interface enables a client to control the master volume level
 // of an active audio session.

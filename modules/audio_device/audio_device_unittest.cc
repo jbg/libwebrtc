@@ -28,6 +28,7 @@
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/thread_checker.h"
 #include "rtc_base/timeutils.h"
+#include "system_wrappers/include/sleep.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #ifdef WEBRTC_WIN
@@ -41,6 +42,7 @@ using ::testing::Ge;
 using ::testing::Invoke;
 using ::testing::NiceMock;
 using ::testing::NotNull;
+using ::testing::Mock;
 
 namespace webrtc {
 namespace {
@@ -341,7 +343,7 @@ class MockAudioTransport : public test::MockAudioTransport {
                                       const bool typing_status,
                                       uint32_t& new_mic_level) {
     EXPECT_TRUE(rec_mode()) << "No test is expecting these callbacks.";
-    RTC_LOG(INFO) << "+";
+    // RTC_LOG(INFO) << "+";
     // Store audio parameters once in the first callback. For all other
     // callbacks, verify that the provided audio parameters are maintained and
     // that each callback corresponds to 10ms for any given sample rate.
@@ -379,7 +381,7 @@ class MockAudioTransport : public test::MockAudioTransport {
                                int64_t* elapsed_time_ms,
                                int64_t* ntp_time_ms) {
     EXPECT_TRUE(play_mode()) << "No test is expecting these callbacks.";
-    RTC_LOG(INFO) << "-";
+    // RTC_LOG(INFO) << "-";
     // Store audio parameters once in the first callback. For all other
     // callbacks, verify that the provided audio parameters are maintained and
     // that each callback corresponds to 10ms for any given sample rate.
@@ -436,6 +438,15 @@ class MockAudioTransport : public test::MockAudioTransport {
   bool rec_mode() const {
     return type_ == TransportType::kRecord ||
            type_ == TransportType::kPlayAndRecord;
+  }
+
+  void ResetCallbackCounters() {
+    if (play_mode()) {
+      play_count_ = 0;
+    }
+    if (rec_mode()) {
+      rec_count_ = 0;
+    }
   }
 
  private:
@@ -507,17 +518,17 @@ class AudioDeviceTest
   bool requirements_satisfied() const { return requirements_satisfied_; }
   rtc::Event* event() { return &event_; }
 
-  const rtc::scoped_refptr<AudioDeviceModule>& audio_device() const {
+  const rtc::scoped_refptr<AudioDeviceModuleForTest>& audio_device() const {
     return audio_device_;
   }
 
-  rtc::scoped_refptr<AudioDeviceModule> CreateAudioDevice() {
+  rtc::scoped_refptr<AudioDeviceModuleForTest> CreateAudioDevice() {
     // Use the default factory for kPlatformDefaultAudio and a special factory
     // CreateWindowsCoreAudioAudioDeviceModule() for kWindowsCoreAudio2.
     // The value of |audio_layer_| is set at construction by GetParam() and two
     // different layers are tested on Windows only.
     if (audio_layer_ == AudioDeviceModule::kPlatformDefaultAudio) {
-      return AudioDeviceModule::Create(audio_layer_);
+      return AudioDeviceModule::CreateForTest(audio_layer_);
     } else if (audio_layer_ == AudioDeviceModule::kWindowsCoreAudio2) {
 #ifdef WEBRTC_WIN
       // We must initialize the COM library on a thread before we calling any of
@@ -528,7 +539,7 @@ class AudioDeviceTest
       EXPECT_TRUE(com_initializer_->Succeeded());
       EXPECT_TRUE(webrtc_win::core_audio_utility::IsSupported());
       EXPECT_TRUE(webrtc_win::core_audio_utility::IsMMCSSSupported());
-      return CreateWindowsCoreAudioAudioDeviceModule();
+      return CreateWindowsCoreAudioAudioDeviceModuleForTest();
 #else
       return nullptr;
 #endif
@@ -587,7 +598,7 @@ class AudioDeviceTest
   AudioDeviceModule::AudioLayer audio_layer_;
   bool requirements_satisfied_ = true;
   rtc::Event event_;
-  rtc::scoped_refptr<AudioDeviceModule> audio_device_;
+  rtc::scoped_refptr<AudioDeviceModuleForTest> audio_device_;
   bool stereo_playout_ = false;
 };
 
@@ -777,6 +788,63 @@ TEST_P(AudioDeviceTest, InitStopInitPlayoutWhileRecording) {
   StopRecording();
 }
 
+// TODO(henrika): restart without intermediate destruction is currently only
+// supported on Windows.
+#ifdef WEBRTC_WIN
+// Tests Start/Stop playout followed by a second session (emulates a restart
+// triggered by a user using public APIs).
+TEST_P(AudioDeviceTest, StartStopPlayoutWithExternalRestart) {
+  SKIP_TEST_IF_NOT(requirements_satisfied());
+  StartPlayout();
+  StopPlayout();
+  // Restart playout without destroying the ADM in between. Ensures that we
+  // support: Init(), Start(), Stop(), Init(), Start(), Stop().
+  StartPlayout();
+  StopPlayout();
+}
+
+// Tests Start/Stop recording followed by a second session (emulates a restart
+// triggered by a user using public APIs).
+TEST_P(AudioDeviceTest, StartStopRecordingWithExternalRestart) {
+  SKIP_TEST_IF_NOT(requirements_satisfied());
+  StartRecording();
+  StopRecording();
+  // Restart recording without destroying the ADM in between.  Ensures that we
+  // support: Init(), Start(), Stop(), Init(), Start(), Stop().
+  StartRecording();
+  StopRecording();
+}
+
+// Tests Start/Stop playout followed by a second session (emulates a restart
+// triggered by an internal callback e.g. corresponding to a device switch).
+TEST_P(AudioDeviceTest, StartStopPlayoutWithInternalRestart) {
+  MockAudioTransport mock(TransportType::kPlay);
+  mock.HandleCallbacks(event(), nullptr, kNumCallbacks);
+  EXPECT_CALL(mock, NeedMorePlayData(_, _, _, _, NotNull(), _, _, _))
+      .Times(AtLeast(kNumCallbacks));
+  EXPECT_EQ(0, audio_device()->RegisterAudioCallback(&mock));
+  StartPlayout();
+  event()->Wait(kTestTimeOutInMilliseconds);
+  EXPECT_TRUE(audio_device()->Playing());
+  // Restart playout but without stopping the internal audio thread.
+  // This procedure uses a non-public test API and it emulates what happens
+  // inside the ADM when e.g. a device is removed.
+  audio_device()->RestartPlayoutInternally();
+  // Wait until audio has restarted and a new sequence of audio callbacks
+  // becomes active.
+  // TODO(henrika): is it possible to verify that the internal state transition
+  // is Stop->Init->Start?
+  ASSERT_TRUE(Mock::VerifyAndClearExpectations(&mock));
+  mock.ResetCallbackCounters();
+  EXPECT_CALL(mock, NeedMorePlayData(_, _, _, _, NotNull(), _, _, _))
+      .Times(AtLeast(kNumCallbacks));
+  event()->Wait(kTestTimeOutInMilliseconds);
+  EXPECT_TRUE(audio_device()->Playing());
+  // Stop playout and the audio thread after successful internal restart.
+  StopPlayout();
+}
+#endif  // #ifdef WEBRTC_WIN
+
 // Start playout and verify that the native audio layer starts asking for real
 // audio samples to play out using the NeedMorePlayData() callback.
 // Note that we can't add expectations on audio parameters in EXPECT_CALL
@@ -866,6 +934,44 @@ TEST_P(AudioDeviceTest, RunPlayoutAndRecordingInFullDuplex) {
   PRINT("\n");
 }
 
+TEST_P(AudioDeviceTest,
+       DISABLED_RunPlayoutAndRecordingInFullDuplexAndWaitForEnterKey) {
+  SKIP_TEST_IF_NOT(requirements_satisfied());
+  NiceMock<MockAudioTransport> mock(TransportType::kPlayAndRecord);
+  FifoAudioStream audio_stream;
+  mock.HandleCallbacks(event(), &audio_stream,
+                       kFullDuplexTimeInSec * kNumCallbacksPerSecond);
+  EXPECT_EQ(0, audio_device()->RegisterAudioCallback(&mock));
+  EXPECT_EQ(0, audio_device()->SetStereoPlayout(true));
+  EXPECT_EQ(0, audio_device()->SetStereoRecording(true));
+  StartPlayout();
+  StartRecording();
+
+  do {
+    PRINT("Loopback audio is active. Press Enter to stop and start again.\n");
+  } while (getchar() != '\n');
+
+  StopRecording();
+  StopPlayout();
+
+  StartPlayout();
+  StartRecording();
+
+  do {
+    PRINT("Loopback audio is active. Press Enter to restart.\n");
+  } while (getchar() != '\n');
+
+  // Should do stop and then new start internally (emulates device switch)...
+  audio_device()->RestartPlayoutInternally();
+
+  do {
+    PRINT("Loopback audio should be active again. Press Enter to stop.\n");
+  } while (getchar() != '\n');
+
+  StopRecording();
+  StopPlayout();
+}
+
 // Measures loopback latency and reports the min, max and average values for
 // a full duplex audio session.
 // The latency is measured like so:
@@ -906,8 +1012,9 @@ TEST_P(AudioDeviceTest, DISABLED_MeasureLoopbackLatency) {
 INSTANTIATE_TEST_CASE_P(
     AudioLayerWin,
     AudioDeviceTest,
-    ::testing::Values(AudioDeviceModule::kPlatformDefaultAudio,
-                      AudioDeviceModule::kWindowsCoreAudio2));
+    // ::testing::Values(AudioDeviceModule::kPlatformDefaultAudio,
+    //                   AudioDeviceModule::kWindowsCoreAudio2));
+    ::testing::Values(AudioDeviceModule::kWindowsCoreAudio2));
 #else
 // For all platforms but Windows, only test the default audio layer.
 INSTANTIATE_TEST_CASE_P(
