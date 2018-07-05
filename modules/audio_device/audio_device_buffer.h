@@ -12,6 +12,7 @@
 #define MODULES_AUDIO_DEVICE_AUDIO_DEVICE_BUFFER_H_
 
 #include "modules/audio_device/include/audio_device.h"
+#include "rtc_base/atomicops.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/criticalsection.h"
 #include "rtc_base/task_queue.h"
@@ -165,19 +166,13 @@ class AudioDeviceBuffer {
   // be transported.
   AudioTransport* audio_transport_cb_;
 
-  // The members below that are not annotated are protected by design. They are
-  // all set on the main thread (verified by |main_thread_checker_|) and then
-  // read on either the playout or recording audio thread. But, media will never
-  // be active when the member is set; hence no conflict exists. It is too
-  // complex to ensure and verify that this is actually the case.
+  // Sample rate in Hertz. Accessed atomically.
+  volatile int rec_sample_rate_;
+  volatile int play_sample_rate_;
 
-  // Sample rate in Hertz.
-  uint32_t rec_sample_rate_;
-  uint32_t play_sample_rate_;
-
-  // Number of audio channels.
-  size_t rec_channels_;
-  size_t play_channels_;
+  // Number of audio channels. Accessed atomically.
+  volatile int rec_channels_;
+  volatile int play_channels_;
 
   // Keeps track of if playout/recording are active or not. A combination
   // of these states are used to determine when to start and stop the timer.

@@ -25,7 +25,7 @@ namespace webrtc {
 class AudioDeviceGeneric;
 class AudioManager;
 
-class AudioDeviceModuleImpl : public AudioDeviceModule {
+class AudioDeviceModuleImpl : public AudioDeviceModuleForTest {
  public:
   enum PlatformType {
     kPlatformNotSupported = 0,
@@ -147,6 +147,8 @@ class AudioDeviceModuleImpl : public AudioDeviceModule {
   }
 #endif
   AudioDeviceBuffer* GetAudioDeviceBuffer() { return &audio_device_buffer_; }
+
+  int RestartPlayout() override { return -1; }
 
  private:
   PlatformType Platform() const;
