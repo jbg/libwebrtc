@@ -1173,6 +1173,8 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   // are moved to APM.
   RTC_DCHECK(!(public_submodules_->echo_cancellation->is_enabled() &&
                public_submodules_->echo_control_mobile->is_enabled()));
+  RTC_DCHECK(!(private_submodules_->echo_controller &&
+               public_submodules_->echo_control_mobile->is_enabled()));
 
   MaybeUpdateHistograms();
 
