@@ -14,6 +14,7 @@
 
 @class RTCIceServer;
 @class RTCIntervalRange;
+@class RTCCertificate;
 
 /**
  * Represents the ice transport policy. This exposes the same states in C++,
@@ -67,12 +68,29 @@ typedef NS_ENUM(NSInteger, RTCSdpSemantics) {
 };
 
 NS_ASSUME_NONNULL_BEGIN
+RTC_EXPORT
+@interface RTCCertificate : NSObject <NSCopying>
 
+/** Private key in PEM */
+@property(nonatomic, readonly, nullable) NSString *private_key;
+
+/** Public key in an x509 cert encoded in PEM*/
+@property(nonatomic, readonly, nullable) NSString *certificate;
+
+/**
+ * Initialize an RTCCertificate with PEM strings for private_key and certificate
+ */
+- (instancetype)initWithStrings:(NSString *)private_key certificate:(NSString *)certificate;
+
+@end
 RTC_EXPORT
 @interface RTCConfiguration : NSObject
 
 /** An array of Ice Servers available to be used by ICE. */
 @property(nonatomic, copy) NSArray<RTCIceServer *> *iceServers;
+
+/** An RTCCertificate for 're' use */
+@property(nonatomic, copy, nullable) RTCCertificate *certificate;
 
 /** Which candidates the ICE agent is allowed to use. The W3C calls it
  * |iceTransportPolicy|, while in C++ it is called |type|. */
@@ -165,6 +183,7 @@ RTC_EXPORT
 @property(nonatomic, assign) BOOL activeResetSrtpParams;
 
 - (instancetype)init;
+- (RTCCertificate *)generateCertificate:(NSDictionary *)params;
 
 @end
 
