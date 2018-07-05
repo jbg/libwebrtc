@@ -22,6 +22,30 @@
       "revId": "ca4c1fdc49a475dac9f82ce23abe0cda7e89dc21",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eaa60da_d54acee6",
+        "filename": "test/fuzzers/audio_processing_configs_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-07-05T12:44:47Z",
+      "side": 1,
+      "message": "IIUC, AECs running in tandem is not that uncommon. I say we land this. If it turns out that aecm+aec3 leads to  un-interesting crashes, we disable that combination.",
+      "parentUuid": "d1a34a8e_c94ba833",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "ca4c1fdc49a475dac9f82ce23abe0cda7e89dc21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
