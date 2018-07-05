@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1a34a8e_c94ba833",
+        "filename": "test/fuzzers/audio_processing_configs_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-05T10:46:38Z",
+      "side": 1,
+      "message": "Is (use_aecm \u0026\u0026 aec3) not a sufficient condition? I figure any combination of multiple AECs should trigger CHECKs, erroneous behavior. Or do they just overwrite?",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "ca4c1fdc49a475dac9f82ce23abe0cda7e89dc21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
