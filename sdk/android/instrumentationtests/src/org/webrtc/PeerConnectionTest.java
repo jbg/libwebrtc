@@ -698,7 +698,9 @@ public class PeerConnectionTest {
     final CameraEnumerator enumerator = new Camera1Enumerator(false /* captureToTexture */);
     final VideoCapturer videoCapturer =
         enumerator.createCapturer(enumerator.getDeviceNames()[0], null /* eventsHandler */);
-    final VideoSource videoSource = factory.createVideoSource(videoCapturer);
+    final VideoSource videoSource = factory.createVideoSource(/* isScreencast= */ false);
+    videoCapturer.initialize(/* surfaceTextureHelper= */ null,
+        InstrumentationRegistry.getTargetContext(), videoSource.getCapturerObserver());
     videoCapturer.startCapture(640, 480, 30);
 
     offeringExpectations.expectRenegotiationNeeded();
@@ -1094,7 +1096,9 @@ public class PeerConnectionTest {
     final CameraEnumerator enumerator = new Camera1Enumerator(false /* captureToTexture */);
     final VideoCapturer videoCapturer =
         enumerator.createCapturer(enumerator.getDeviceNames()[0], null /* eventsHandler */);
-    final VideoSource videoSource = factory.createVideoSource(videoCapturer);
+    final VideoSource videoSource = factory.createVideoSource(/* isScreencast= */ false);
+    videoCapturer.initialize(/* surfaceTextureHelper= */ null,
+        InstrumentationRegistry.getTargetContext(), videoSource.getCapturerObserver());
     videoCapturer.startCapture(640, 480, 30);
 
     // Add offerer media stream.
@@ -1318,7 +1322,9 @@ public class PeerConnectionTest {
     final CameraEnumerator enumerator = new Camera1Enumerator(false /* captureToTexture */);
     final VideoCapturer videoCapturer =
         enumerator.createCapturer(enumerator.getDeviceNames()[0], null /* eventsHandler */);
-    final VideoSource videoSource = factory.createVideoSource(videoCapturer);
+    final VideoSource videoSource = factory.createVideoSource(/* isScreencast= */ false);
+    videoCapturer.initialize(/* surfaceTextureHelper= */ null,
+        InstrumentationRegistry.getTargetContext(), videoSource.getCapturerObserver());
     VideoTrack videoTrack = factory.createVideoTrack("video", videoSource);
     offeringExpectations.expectRenegotiationNeeded();
     localStream.addTrack(videoTrack);
