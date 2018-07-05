@@ -18,12 +18,12 @@ package org.webrtc;
  *
  * @note This will replace the deprecated VideoCapturer.CapturerObserver interface.
  */
-public interface CapturerObserver extends VideoCapturer.CapturerObserver {
+public interface CapturerObserver {
   /** Notify if the capturer have been started successfully or not. */
-  @Override void onCapturerStarted(boolean success);
+  void onCapturerStarted(boolean success);
   /** Notify that the capturer has been stopped. */
-  @Override void onCapturerStopped();
+  void onCapturerStopped();
 
   /** Delivers a captured frame. */
-  @Override void onFrameCaptured(VideoFrame frame);
+  void onFrameCaptured(VideoFrame frame);
 }
