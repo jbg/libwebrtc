@@ -54,6 +54,15 @@ class FilterAnalyzer {
   // Returns the number of blocks for the current used filter.
   float FilterLengthBlocks() const { return filter_length_blocks_; }
 
+  // Returns the preprocessed filter.
+  const std::vector<float>& GetPreprocFilter() const {
+    RTC_DCHECK_EQ(use_preprocessed_filter_, true);
+    return h_highpass_;
+  }
+
+  // Returns whether the preprocessed filter is used.
+  bool IsPreprocessedFilterUsed() const { return use_preprocessed_filter_; }
+
  private:
   void UpdateFilterGain(rtc::ArrayView<const float> filter_time_domain,
                         size_t max_index);

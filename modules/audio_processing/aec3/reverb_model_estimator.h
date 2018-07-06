@@ -48,6 +48,8 @@ class ReverbModelEstimator {
   }
 
  private:
+  static constexpr int kBlocksFirstReflections = 3;
+
   bool IsAGoodFilterForDecayEstimation(int filter_delay_blocks,
                                        bool usable_linear_estimate,
                                        size_t length_filter);
@@ -61,11 +63,42 @@ class ReverbModelEstimator {
 
   void ResetDecayEstimation();
 
-  const size_t filter_main_length_blocks_;
+  class LinearRegressor {
+   public:
+    void Reset();
+    void InitAccumulators(const float N);
+    void Update(float z);
+    float EstimateDecay(float decay_fallback);
+    float GetAccumulatedNumerator() { return accumulated_nz_; }
 
-  float accumulated_nz_ = 0.f;
-  float accumulated_nn_ = 0.f;
-  float accumulated_count_ = 0.f;
+   public:
+    float accumulated_nz_ = 0.f;
+    float accumulated_nn_ = 0.f;
+    float accumulated_count_ = 0.f;
+  };
+
+  class LinearRegressorSections {
+   public:
+    explicit LinearRegressorSections(size_t blocks);
+    ~LinearRegressorSections();
+    void StartBlock(size_t current_block);
+    void EndBlock(size_t current_block, float alpha);
+    void Update(float z);
+    size_t EarlyReflections();
+    void Dump(const std::unique_ptr<ApmDataDumper>& data_dumper);
+
+   private:
+    static constexpr int kBlocksPerSection = 3;
+    std::vector<LinearRegressor> linear_regressors_;
+    std::vector<float> numerators_;
+    size_t idx_ = 0;
+    bool section_started_ = false;
+  };
+
+  const size_t filter_main_length_blocks_;
+  LinearRegressor linear_regressor_;
+  LinearRegressorSections linear_regressor_sections_;
+  size_t block_after_early_reflections_ = kBlocksFirstReflections;
   size_t current_reverb_decay_section_ = 0;
   size_t num_reverb_decay_sections_ = 0;
   size_t num_reverb_decay_sections_next_ = 0;
@@ -74,6 +107,7 @@ class ReverbModelEstimator {
   float reverb_decay_;
   float tail_energy_ = 0.f;
   float alpha_ = 0.f;
+  size_t peak_index_ = 2;
   std::array<float, kFftLengthBy2Plus1> freq_resp_tail_;
   float ratio_tail_to_direct_path_ = 0.f;
   bool enable_smooth_freq_resp_tail_updates_;
