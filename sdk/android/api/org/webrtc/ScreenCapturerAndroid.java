@@ -78,7 +78,7 @@ public class ScreenCapturerAndroid
   // TODO(bugs.webrtc.org/8491): Remove NoSynchronizedMethodCheck suppression.
   @SuppressWarnings("NoSynchronizedMethodCheck")
   public synchronized void initialize(final SurfaceTextureHelper surfaceTextureHelper,
-      final Context applicationContext, final VideoCapturer.CapturerObserver capturerObserver) {
+      final Context applicationContext, final CapturerObserver capturerObserver) {
     checkNotDisposed();
 
     if (capturerObserver == null) {
