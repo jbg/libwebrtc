@@ -287,8 +287,12 @@ void AecState::Update(
   use_linear_filter_output_ = usable_linear_estimate_ && !TransparentMode();
   diverged_linear_filter_ = diverged_filter;
 
+  const std::vector<float>& impulse_response_reverb =
+      filter_analyzer_.IsPreprocessedFilterUsed()
+          ? filter_analyzer_.GetPreprocFilter()
+          : adaptive_filter_impulse_response;
   reverb_model_estimator_.Update(
-      adaptive_filter_impulse_response, adaptive_filter_frequency_response,
+      impulse_response_reverb, adaptive_filter_frequency_response,
       erle_estimator_.GetInstLinearQualityEstimate(), filter_delay_blocks_,
       usable_linear_estimate_, config_.ep_strength.default_len,
       IsBlockStationary());
