@@ -58,6 +58,8 @@ float ComputeRatioEnergies(
 
 ReverbModelEstimator::ReverbModelEstimator(const EchoCanceller3Config& config)
     : filter_main_length_blocks_(config.filter.main.length_blocks),
+      linear_regressor_sections_(config.filter.main.length_blocks -
+                                 kBlocksFirstReflections),
       reverb_decay_(fabsf(config.ep_strength.default_len)),
       enable_smooth_freq_resp_tail_updates_(EnableSmoothUpdatesTailFreqResp()) {
   block_energies_.fill(0.f);
@@ -115,9 +117,7 @@ void ReverbModelEstimator::Update(
 }
 
 void ReverbModelEstimator::ResetDecayEstimation() {
-  accumulated_nz_ = 0.f;
-  accumulated_nn_ = 0.f;
-  accumulated_count_ = 0.f;
+  linear_regressor_.Reset();
   current_reverb_decay_section_ = 0;
   num_reverb_decay_sections_ = 0;
   num_reverb_decay_sections_next_ = 0;
@@ -129,31 +129,20 @@ void ReverbModelEstimator::UpdateReverbDecay(
     const std::vector<float>& impulse_response) {
   constexpr float kOneByFftLengthBy2 = 1.f / kFftLengthBy2;
 
-  // Form the data to match against by squaring the impulse response
-  // coefficients.
-  std::array<float, GetTimeDomainLength(kMaxAdaptiveFilterLength)>
-      matching_data_data;
-  RTC_DCHECK_LE(GetTimeDomainLength(filter_main_length_blocks_),
-                matching_data_data.size());
-  rtc::ArrayView<float> matching_data(
-      matching_data_data.data(),
-      GetTimeDomainLength(filter_main_length_blocks_));
-  std::transform(
-      impulse_response.begin(), impulse_response.end(), matching_data.begin(),
-      [](float a) { return a * a; });  // TODO(devicentepena) check if focusing
-                                       // on one block would be enough.
-
   if (current_reverb_decay_section_ < filter_main_length_blocks_) {
-    // Update accumulated variables for the current filter section.
-
+    std::array<float, kFftLengthBy2> matching_data;
     const size_t start_index = current_reverb_decay_section_ * kFftLengthBy2;
+    std::transform(impulse_response.begin() + start_index,
+                   impulse_response.begin() + start_index + kFftLengthBy2,
+                   matching_data.begin(),
+                   [](float a) {
+                     return a * a;
+                   });  // TODO(devicentepena) check if focusing
+                        // on one block would be enough.
 
-    RTC_DCHECK_GT(matching_data.size(), start_index);
-    RTC_DCHECK_GE(matching_data.size(), start_index + kFftLengthBy2);
+    // Update accumulated variables for the current filter section.
     float section_energy =
-        std::accumulate(matching_data.begin() + start_index,
-                        matching_data.begin() + start_index + kFftLengthBy2,
-                        0.f) *
+        std::accumulate(matching_data.begin(), matching_data.end(), 0.f) *
         kOneByFftLengthBy2;
 
     section_energy = std::max(
@@ -178,13 +167,20 @@ void ReverbModelEstimator::UpdateReverbDecay(
     block_energies_[current_reverb_decay_section_] = section_energy;
 
     if (num_reverb_decay_sections_ > 0) {
+      linear_regressor_sections_.StartBlock(current_reverb_decay_section_ -
+                                            peak_index_ -
+                                            kBlocksFirstReflections);
       // Linear regression of log squared magnitude of impulse response.
       for (size_t i = 0; i < kFftLengthBy2; i++) {
-        RTC_DCHECK_GT(matching_data.size(), start_index + i);
-        float z = FastApproxLog2f(matching_data[start_index + i] + 1e-10);
-        accumulated_nz_ += accumulated_count_ * z;
-        ++accumulated_count_;
+        float z = FastApproxLog2f(matching_data[i] + 1e-10);
+        if (current_reverb_decay_section_ >= block_after_early_reflections_) {
+          linear_regressor_.Update(z);
+        }
+        linear_regressor_sections_.Update(z);
       }
+      linear_regressor_sections_.EndBlock(
+          current_reverb_decay_section_ - peak_index_ - kBlocksFirstReflections,
+          alpha_);
     }
 
     num_reverb_decay_sections_ =
@@ -192,21 +188,24 @@ void ReverbModelEstimator::UpdateReverbDecay(
     ++current_reverb_decay_section_;
 
   } else {
-    constexpr float kMaxDecay = 0.95f;  // ~1 sec min RT60.
-    constexpr float kMinDecay = 0.02f;  // ~15 ms max RT60.
+    // Form the data to match against by squaring the impulse response
+    // coefficients.
+    std::array<float, GetTimeDomainLength(kMaxAdaptiveFilterLength)>
+        matching_data_data;
+    RTC_DCHECK_LE(GetTimeDomainLength(filter_main_length_blocks_),
+                  matching_data_data.size());
+    rtc::ArrayView<float> matching_data(
+        matching_data_data.data(),
+        GetTimeDomainLength(filter_main_length_blocks_));
+    std::transform(
+        impulse_response.begin(), impulse_response.end(), matching_data.begin(),
+        [](float a) { return a * a; });  // TODO(devicentepena) This could be
+                                         // optimized further and not square the
+                                         // whole impulse reponse.
 
     // Accumulated variables throughout whole filter.
-
     // Solve for decay rate.
-
-    float decay = reverb_decay_;
-
-    if (accumulated_nn_ != 0.f) {
-      const float exp_candidate = -accumulated_nz_ / accumulated_nn_;
-      decay = powf(2.0f, -exp_candidate * kFftLengthBy2);
-      decay = std::min(decay, kMaxDecay);
-      decay = std::max(decay, kMinDecay);
-    }
+    float decay = linear_regressor_.EstimateDecay(reverb_decay_);
 
     // Filter tail energy (assumed to be noise).
     constexpr size_t kTailLength = kFftLengthBy2;
@@ -230,21 +229,28 @@ void ReverbModelEstimator::UpdateReverbDecay(
       num_reverb_decay_sections_ = 0;
     }
 
-    const float N = num_reverb_decay_sections_ * kFftLengthBy2;
-    accumulated_nz_ = 0.f;
-    const float k1By12 = 1.f / 12.f;
-    // Arithmetic sum $2 \sum_{i=0.5}^{(N-1)/2}i^2$ calculated directly.
-    accumulated_nn_ = N * (N * N - 1.0f) * k1By12;
-    accumulated_count_ = -N * 0.5f;
-    // Linear regression approach assumes symmetric index around 0.
-    accumulated_count_ += 0.5f;
-
     // Identify the peak index of the impulse response.
     const size_t peak_index = std::distance(
         matching_data.begin(),
         std::max_element(matching_data.begin(), matching_data.end()));
+    peak_index_ = peak_index * kOneByFftLengthBy2;
+    current_reverb_decay_section_ = peak_index_ + kBlocksFirstReflections;
+    size_t num_reverb_decay_sections = num_reverb_decay_sections_;
+    size_t early_reflections = linear_regressor_sections_.EarlyReflections();
+    if (num_reverb_decay_sections - early_reflections > 5) {
+      block_after_early_reflections_ =
+          current_reverb_decay_section_ + early_reflections;
+      num_reverb_decay_sections -= early_reflections;
+    } else {
+      // Not enough blocks for the decay estimate, do not use that
+      // current realization of the filter.
+      num_reverb_decay_sections = 0;
+      num_reverb_decay_sections_ = 0;
+    }
 
-    current_reverb_decay_section_ = peak_index * kOneByFftLengthBy2 + 3;
+    const float N = num_reverb_decay_sections * kFftLengthBy2;
+    linear_regressor_.InitAccumulators(N);
+
     // Make sure we're not out of bounds.
     if (current_reverb_decay_section_ + 1 >= filter_main_length_blocks_) {
       current_reverb_decay_section_ = filter_main_length_blocks_;
@@ -264,14 +270,12 @@ void ReverbModelEstimator::UpdateReverbDecay(
     bool main_filter_is_sane = first_section_energy > 2.f * tail_energy_ &&
                                matching_data[peak_index] < 100.f;
 
-    // Not detecting any decay, but tail is over noise - assume max decay.
-    if (num_reverb_decay_sections_ == 0 && main_filter_is_sane &&
-        main_filter_has_reverb) {
-      decay = kMaxDecay;
-    }
-
     if (main_filter_is_sane && num_reverb_decay_sections_ > 0) {
+      constexpr float kMaxDecay = 0.95f;  // ~1 sec min RT60.
+      constexpr float kMinDecay = 0.02f;  // ~15 ms max RT60.
       decay = std::max(.97f * reverb_decay_, decay);
+      decay = std::min(decay, kMaxDecay);
+      decay = std::max(decay, kMinDecay);
       reverb_decay_ -= alpha_ * (reverb_decay_ - decay);
     }
 
@@ -316,6 +320,123 @@ void ReverbModelEstimator::Dump(
   data_dumper->DumpRaw("aec3_reverb_alpha", alpha_);
   data_dumper->DumpRaw("aec3_num_reverb_decay_sections",
                        static_cast<int>(num_reverb_decay_sections_));
+  data_dumper->DumpRaw("aec3_blocks_after_early_reflections",
+                       (int)block_after_early_reflections_);
+  linear_regressor_sections_.Dump(data_dumper);
 }
 
+void ReverbModelEstimator::LinearRegressor::Reset() {
+  accumulated_nz_ = 0.f;
+  accumulated_nn_ = 0.f;
+  accumulated_count_ = 0.f;
+}
+
+void ReverbModelEstimator::LinearRegressor::InitAccumulators(const float N) {
+  accumulated_nz_ = 0.f;
+  // Arithmetic sum $2 \sum_{i=0.5}^{(N-1)/2}i^2$ calculated directly.
+  accumulated_nn_ = N * (N * N - 1.0f) * (1.f / 12.f);
+  accumulated_count_ = -N * 0.5f;
+  // Linear regression approach assumes symmetric index around 0.
+  accumulated_count_ += 0.5f;
+}
+
+void ReverbModelEstimator::LinearRegressor::Update(float z) {
+  accumulated_nz_ += accumulated_count_ * z;
+  ++accumulated_count_;
+}
+
+float ReverbModelEstimator::LinearRegressor::EstimateDecay(
+    float decay_fallback) {
+  float decay = decay_fallback;
+  if (accumulated_nn_ != 0) {
+    const float exp_candidate = -accumulated_nz_ / accumulated_nn_;
+    decay = (powf(2.0f, -exp_candidate * kFftLengthBy2));
+  }
+  return decay;
+}
+
+ReverbModelEstimator::LinearRegressorSections::LinearRegressorSections(
+    size_t blocks)
+    : linear_regressors_(1 + (blocks / kBlocksPerSection)),
+      numerators_(1 + (blocks / kBlocksPerSection), 0.f) {
+  for (auto lr : linear_regressors_) {
+    lr.Reset();
+  }
+}
+ReverbModelEstimator::LinearRegressorSections::~LinearRegressorSections() =
+    default;
+
+void ReverbModelEstimator::LinearRegressorSections::StartBlock(
+    size_t current_block) {
+  idx_ = current_block / kBlocksPerSection;
+  bool start_section = (idx_ * kBlocksPerSection == current_block);
+  RTC_DCHECK_GE(idx_, 0);
+  RTC_DCHECK_LT(idx_, linear_regressors_.size());
+  if (start_section) {
+    linear_regressors_[idx_].InitAccumulators(kBlocksPerSection *
+                                              kFftLengthBy2);
+    section_started_ = true;
+  }
+}
+
+void ReverbModelEstimator::LinearRegressorSections::EndBlock(
+    size_t current_block,
+    float alpha) {
+  idx_ = current_block / kBlocksPerSection;
+  bool end_section = ((idx_ + 1) * kBlocksPerSection - 1 == current_block);
+  if (end_section) {
+    if (section_started_ == false) {
+      linear_regressors_[idx_]
+          .Reset();  // Do not use the estimation for this section as
+                     // the starting block was not included.
+    } else {
+      numerators_[idx_] +=
+          alpha * (linear_regressors_[idx_].GetAccumulatedNumerator() -
+                   numerators_[idx_]);
+    }
+    section_started_ = false;
+  }
+}
+
+void ReverbModelEstimator::LinearRegressorSections::Update(float z) {
+  linear_regressors_[idx_].Update(z);
+}
+
+void ReverbModelEstimator::LinearRegressorSections::Dump(
+    const std::unique_ptr<ApmDataDumper>& data_dumper) {
+  data_dumper->DumpRaw(
+      "aec3_lr_acum_numerator",
+      rtc::ArrayView<const float>(numerators_.data(), numerators_.size()));
+}
+
+size_t ReverbModelEstimator::LinearRegressorSections::EarlyReflections() {
+  size_t early_reflections = 0;
+
+  constexpr float N = kBlocksPerSection * kFftLengthBy2;
+  constexpr float accumulated_nn = N * (N * N - 1.0f) * (1.f / 12.f);
+  // numerator_11 refers to the quantity that the linear regressor needs in the
+  // numerator for getting a decay equal to 1.1 (which is not a decay).
+  // log2(1.1) * accumulated_nn / kFftLengthBy2.
+  constexpr float numerator_11 =
+      0.13750352374993502f * accumulated_nn / kFftLengthBy2;
+  // log2(0.8) *  accumulated_nn / kFftLengthBy2.
+  constexpr float numerator_08 =
+      -0.32192809488736229f * accumulated_nn / kFftLengthBy2;
+  constexpr size_t sections_to_analyze = 3;
+
+  // Analyzing the first sections_to_analyze regions.
+  auto min_num_stable_region = std::min_element(
+      numerators_.begin() + sections_to_analyze, numerators_.end());
+  for (size_t k = 0; k < sections_to_analyze; ++k) {
+    if ((numerators_[k] > numerator_11) ||   // Blocks with positive tilts.
+        ((numerators_[k] < numerator_08) &&  // Tilts that are significantly
+                                             // steeper than the remaining
+                                             // impulse response.
+         (numerators_[k] < 0.9f * (*min_num_stable_region)))) {
+      early_reflections = (k + 1) * kBlocksPerSection;
+    }
+  }
+
+  return early_reflections;
+}
 }  // namespace webrtc
