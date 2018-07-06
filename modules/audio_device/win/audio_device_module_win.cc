@@ -34,7 +34,7 @@ namespace {
 // i.e., all public methods must also be called on the same thread. A thread
 // checker will RTC_DCHECK if any method is called on an invalid thread.
 // TODO(henrika): is thread checking needed in AudioInput and AudioOutput?
-class WindowsAudioDeviceModule : public AudioDeviceModule {
+class WindowsAudioDeviceModuleForTest : public AudioDeviceModuleForTest {
  public:
   enum class InitStatus {
     OK = 0,
@@ -44,8 +44,8 @@ class WindowsAudioDeviceModule : public AudioDeviceModule {
     NUM_STATUSES = 4
   };
 
-  WindowsAudioDeviceModule(std::unique_ptr<AudioInput> audio_input,
-                           std::unique_ptr<AudioOutput> audio_output)
+  WindowsAudioDeviceModuleForTest(std::unique_ptr<AudioInput> audio_input,
+                                  std::unique_ptr<AudioOutput> audio_output)
       : input_(std::move(audio_input)), output_(std::move(audio_output)) {
     RTC_CHECK(input_);
     RTC_CHECK(output_);
@@ -53,14 +53,16 @@ class WindowsAudioDeviceModule : public AudioDeviceModule {
     RTC_DCHECK_RUN_ON(&thread_checker_);
   }
 
-  ~WindowsAudioDeviceModule() override {
+  ~WindowsAudioDeviceModuleForTest() override {
     RTC_LOG(INFO) << __FUNCTION__;
     RTC_DCHECK_RUN_ON(&thread_checker_);
     Terminate();
   }
 
-  WindowsAudioDeviceModule(const WindowsAudioDeviceModule&) = delete;
-  WindowsAudioDeviceModule& operator=(const WindowsAudioDeviceModule&) = delete;
+  WindowsAudioDeviceModuleForTest(const WindowsAudioDeviceModuleForTest&) =
+      delete;
+  WindowsAudioDeviceModuleForTest& operator=(
+      const WindowsAudioDeviceModuleForTest&) = delete;
 
   int32_t ActiveAudioLayer(
       AudioDeviceModule::AudioLayer* audioLayer) const override {
@@ -388,6 +390,18 @@ class WindowsAudioDeviceModule : public AudioDeviceModule {
     return 0;
   }
 
+  int RestartPlayoutInternally() override {
+    RTC_DLOG(INFO) << __FUNCTION__;
+    RTC_DCHECK_RUN_ON(&thread_checker_);
+    return output_->RestartPlayout();
+  }
+
+  int RestartRecordingInternally() override {
+    RTC_DLOG(INFO) << __FUNCTION__;
+    RTC_DCHECK_RUN_ON(&thread_checker_);
+    return input_->RestartRecording();
+  }
+
  private:
   // Ensures that the class is used on the same thread as it is constructed
   // and destroyed on.
@@ -410,12 +424,12 @@ class WindowsAudioDeviceModule : public AudioDeviceModule {
 
 }  // namespace
 
-rtc::scoped_refptr<AudioDeviceModule>
+rtc::scoped_refptr<AudioDeviceModuleForTest>
 CreateWindowsCoreAudioAudioDeviceModuleFromInputAndOutput(
     std::unique_ptr<AudioInput> audio_input,
     std::unique_ptr<AudioOutput> audio_output) {
   RTC_LOG(INFO) << __FUNCTION__;
-  return new rtc::RefCountedObject<WindowsAudioDeviceModule>(
+  return new rtc::RefCountedObject<WindowsAudioDeviceModuleForTest>(
       std::move(audio_input), std::move(audio_output));
 }
 
