@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae623e15_5bfcd4ac",
+        "filename": "modules/congestion_controller/congestion_window_pushback_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T13:54:55Z",
+      "side": 1,
+      "message": "nit: this could be moved outside of the lock",
+      "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7beefb8_0c8f8ef1",
+        "filename": "modules/congestion_controller/congestion_window_pushback_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T13:54:55Z",
+      "side": 1,
+      "message": "ah, I was hoping that the design was lock free and we wouldn\u0027t need this :) Is there any way to avoid it?\n\nbtw, I think you can just call this |lock_| if you still need it, and nice that you added the RTC_GUARDED_BY checks.",
+      "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ee27bd9_50042666",
+        "filename": "modules/congestion_controller/congestion_window_pushback_controller_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T13:54:55Z",
+      "side": 1,
+      "message": "nit: what about\nCongestionWindowPushbackController cwnd_controller_;\n?",
+      "range": {
+        "startLine": 26,
+        "startChar": 17,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
