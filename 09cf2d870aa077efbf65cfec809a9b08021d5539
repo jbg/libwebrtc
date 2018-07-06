@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9720620_0b133368",
+        "filename": "modules/congestion_controller/congestion_window_pushback_controller.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T10:45:35Z",
+      "side": 1,
+      "message": "nit: initialize these variables inline in the header",
+      "revId": "09cf2d870aa077efbf65cfec809a9b08021d5539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0668c2e0_c00d8f99",
+        "filename": "modules/congestion_controller/congestion_window_pushback_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T10:45:35Z",
+      "side": 1,
+      "message": "can we add some documentation for the class? If all methods need to be called on the same thread or calling sequence, it would be nice to also include a thread/sequence checker for all methods since there\u0027s no locking done.",
+      "revId": "09cf2d870aa077efbf65cfec809a9b08021d5539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fb1700a_d9a65c7a",
+        "filename": "modules/congestion_controller/include/send_side_congestion_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T10:45:35Z",
+      "side": 1,
+      "message": "do you need both of these variables? seems like congestion_window_pushback_controller_ will always be nullptr if congestion_window_pushback_experiment_ is false and always valid if the other var is true.",
+      "revId": "09cf2d870aa077efbf65cfec809a9b08021d5539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05693b1f_be19c989",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T10:45:35Z",
+      "side": 1,
+      "message": "I think you should be able to remove this variable and also make congestion_window_pushback_controller_ const.\n\nEssentially do something like:\n\nnamespace webrtc {\nnamespace webrtc_cc {\nnamespace {\n...\nstd::unique_ptr\u003cCongestionWindowPushbackController\u003e\nMaybeInitalizeCongestionWindowPushbackController() {\n  std::unique_ptr\u003cCongestionWindowPushbackController\u003e ret;\n  if (IsCongestionWindowExperimentEnabled())\n    ret \u003d rtc::MakeUnique\u003cCongestionWindowPushbackController\u003e();\n  return ret;\n}  \n\n...\nControlHandler::ControlHandler(NetworkChangedObserver* observer,\n    ...\n    congestion_window_pushback_controller_(\n        MaybeInitalizeCongestionWindowPushbackController()) {\n  sequenced_checker_.Detach();\n  ...",
+      "revId": "09cf2d870aa077efbf65cfec809a9b08021d5539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b99bb345_137c6fc4",
+        "filename": "modules/congestion_controller/send_side_congestion_controller.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-07-06T10:45:35Z",
+      "side": 1,
+      "message": "same here - perhaps you don\u0027t need both of these variables.",
+      "revId": "09cf2d870aa077efbf65cfec809a9b08021d5539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
