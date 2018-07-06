@@ -39,6 +39,7 @@ class AcknowledgedBitrateEstimator;
 class ProbeController;
 class RateLimiter;
 class RtcEventLog;
+class CongestionWindowPushbackController;
 
 class SendSideCongestionController
     : public SendSideCongestionControllerInterface {
@@ -164,6 +165,10 @@ class SendSideCongestionController
 
   bool pacer_pushback_experiment_ = false;
   float encoding_rate_ = 1.0;
+
+  bool congestion_window_pushback_experiment_;
+  std::unique_ptr<CongestionWindowPushbackController>
+      congestion_window_pushback_controller_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(SendSideCongestionController);
 };
