@@ -2267,6 +2267,40 @@ TEST_F(ApmTest, NoErrorsWithKeyboardChannel) {
   }
 }
 
+#include <iostream>
+TEST_F(ApmTest, ExperimentalGainControl) {
+  Config config;
+  config.Set<ExperimentalAgc>(new ExperimentalAgc(
+      true /* enabled */, true /* enabled_agc2_level_estimator */,
+      false /* enabled_agc2_digital_adaptive */));
+  std::unique_ptr<AudioProcessing> ap(AudioProcessingBuilder().Create(config));
+  EXPECT_EQ(ap->kNoError, ap->gain_control()->Enable(true));
+
+  constexpr int kSampleRateHz = 16000;
+
+  std::string filename = ResourceFilePath("near", kSampleRateHz);
+  auto speech_file = fopen(filename.c_str(), "rb");
+  ASSERT_TRUE(far_file_ != NULL) << "Could not open file " << filename << "\n";
+
+  AudioFrame speech_frame;
+  speech_frame.num_channels_ = 2;
+  speech_frame.samples_per_channel_ = rtc::CheckedDivExact(kSampleRateHz, 100);
+  speech_frame.sample_rate_hz_ = speech_frame.samples_per_channel_ * 100;
+
+  int level = 100;
+
+  while (ReadFrame(speech_file, &speech_frame)) {
+    ap->gain_control()->set_stream_analog_level(level);
+    EXPECT_NOERR(ap->ProcessStream(&speech_frame));
+    auto new_level = ap->gain_control()->stream_analog_level();
+    if (new_level != level) {
+      std::cout << "[agc level] " << level << "\n";
+    }
+    level = new_level;
+  }
+  std::cout << "[agc level] " << level << "\n";
+}
+
 // Compares the reference and test arrays over a region around the expected
 // delay. Finds the highest SNR in that region and adds the variance and squared
 // error results to the supplied accumulators.
