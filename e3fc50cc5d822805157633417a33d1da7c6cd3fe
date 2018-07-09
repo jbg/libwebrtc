@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "bcdc69be_ff6e98ed",
+        "filename": "modules/congestion_controller/congestion_window_pushback_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-07-09T12:07:57Z",
+      "side": 1,
+      "message": "If it\u0027s needed by the old SSCC, the lock should be moved there. The new SSCC guarantees that all calls to ControlHandler are sequential so this lock should not be needed.",
+      "parentUuid": "f7beefb8_0c8f8ef1",
+      "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2ee27bd9_50042666",
         "filename": "modules/congestion_controller/congestion_window_pushback_controller_unittest.cc",
         "patchSetId": 6
@@ -52,6 +70,52 @@
         "startChar": 17,
         "endLine": 26,
         "endChar": 18
+      },
+      "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21547b4e_6c8488a3",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-07-09T12:07:57Z",
+      "side": 1,
+      "message": "MaybeCreate...",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 48
+      },
+      "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "847ce8f6_9358c56e",
+        "filename": "modules/congestion_controller/send_side_congestion_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-07-09T12:07:57Z",
+      "side": 1,
+      "message": "MaybeCreate...",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 48
       },
       "revId": "e3fc50cc5d822805157633417a33d1da7c6cd3fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
