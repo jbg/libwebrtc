@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81ab5249_f8b0cab9",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-09T10:39:23Z",
+      "side": 1,
+      "message": "This is not an RFC 5245 ICE STUN attribute.\n\nThis value is registered with IANA as ENF-FLOW-DESCRIPTION: https://www.iana.org/assignments/stun-parameters/stun-parameters.xml#stun-parameters-4\n\nPlease provide a proper reference.\n\n(According to https://tools.ietf.org/html/rfc5389#section-18.2 the C000 range is basically intended as a free-for-all, but collisions are a Bad Thing - registration is required.)",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73fdda8c_6458a2ec",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-09T10:39:23Z",
+      "side": 1,
+      "message": "These new candidates are not registered with IANA. Please add a proper reference, or note that IANA registration is in progress.\nAre all 16-bit values including 0 and FFFF permitted here?",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d18c18_3fcbccf4",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-09T10:39:23Z",
+      "side": 1,
+      "message": "Where\u0027s the reference for this new field?",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
