@@ -855,6 +855,19 @@ ComPtr<IAudioClock> CreateAudioClock(IAudioClient* client) {
   return audio_clock;
 }
 
+ComPtr<IAudioSessionControl> CreateAudioSessionControl(IAudioClient* client) {
+  RTC_DLOG(INFO) << "CreateAudioSessionControl";
+  RTC_DCHECK(client);
+  ComPtr<IAudioSessionControl> audio_session_control;
+  _com_error error = client->GetService(IID_PPV_ARGS(&audio_session_control));
+  if (error.Error() != S_OK) {
+    RTC_LOG(LS_ERROR) << "IAudioClient::GetService(IID_IAudioControl) failed: "
+                      << ErrorToString(error);
+    return ComPtr<IAudioSessionControl>();
+  }
+  return audio_session_control;
+}
+
 ComPtr<ISimpleAudioVolume> CreateSimpleAudioVolume(IAudioClient* client) {
   RTC_DLOG(INFO) << "CreateSimpleAudioVolume";
   RTC_DCHECK(client);
