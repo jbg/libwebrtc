@@ -179,6 +179,8 @@ class PeerConnectionRampUpTest : public ::testing::Test {
   void SetupOneWayCall() {
     ASSERT_TRUE(caller_);
     ASSERT_TRUE(callee_);
+    rtc::PlatformFile file = rtc::CreatePlatformFile("max_bitrate_log");
+    caller_->pc()->StartRtcEventLog(file, 10000000);
     FrameGeneratorCapturerVideoTrackSource::Config config;
     caller_->AddTrack(caller_->CreateLocalVideoTrack(config, clock_));
     // Disable highpass filter so that we can get all the test audio frames.
@@ -202,6 +204,16 @@ class PeerConnectionRampUpTest : public ::testing::Test {
     // This means that ICE and DTLS are connected.
     ASSERT_TRUE_WAIT(callee_->IsIceConnected(), kDefaultTimeoutMs);
     ASSERT_TRUE_WAIT(caller_->IsIceConnected(), kDefaultTimeoutMs);
+
+    // Set a max bitrate to the sender, to make sure this works properly.
+    auto senders = caller_->pc()->GetSenders();
+    for (auto& sender : senders) {
+      if (cricket::MediaType::MEDIA_TYPE_VIDEO == sender->media_type()) {
+        auto rtp_parameters = sender->GetParameters();
+        rtp_parameters.encodings[0].max_bitrate_bps = 400000;
+        sender->SetParameters(rtp_parameters);
+      }
+    }
   }
 
   void CreateTurnServer(cricket::ProtocolType type,
@@ -241,6 +253,7 @@ class PeerConnectionRampUpTest : public ::testing::Test {
         "bwe_after_" + std::to_string(kDefaultTestTimeMs / 1000) + "_seconds";
     test::PrintResult("peerconnection_ramp_up_", test_string, value_description,
                       average_bandwidth_estimate, "bwe", false);
+    caller_->pc()->StopRtcEventLog();
   }
 
   rtc::Thread* network_thread() { return network_thread_.get(); }
