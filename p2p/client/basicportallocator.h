@@ -78,6 +78,8 @@ class BasicPortAllocator : public PortAllocator {
     return relay_port_factory_;
   }
 
+  rtc::AsyncResolverInterface* CreateAsyncResolver() override;
+
  private:
   void Construct();
 

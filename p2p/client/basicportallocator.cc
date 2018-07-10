@@ -240,6 +240,10 @@ PortAllocatorSession* BasicPortAllocator::CreateSessionInternal(
   return session;
 }
 
+rtc::AsyncResolverInterface* BasicPortAllocator::CreateAsyncResolver() {
+  return socket_factory_ ? socket_factory_->CreateAsyncResolver() : nullptr;
+}
+
 void BasicPortAllocator::AddTurnServer(const RelayServerConfig& turn_server) {
   CheckRunOnValidThreadAndInitialized();
   std::vector<RelayServerConfig> new_turn_servers = turn_servers();

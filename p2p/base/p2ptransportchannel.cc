@@ -25,6 +25,7 @@
 #include "rtc_base/crc32.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/nethelper.h"
+#include "rtc_base/nethelpers.h"
 #include "rtc_base/stringencode.h"
 #include "rtc_base/timeutils.h"
 #include "system_wrappers/include/field_trial.h"
@@ -146,6 +147,10 @@ P2PTransportChannel::P2PTransportChannel(const std::string& transport_name,
 }
 
 P2PTransportChannel::~P2PTransportChannel() {
+  for (auto& p : resolvers_) {
+    p.resolver_->Destroy(/*wait=*/false);
+    p.resolver_ = nullptr;
+  }
   RTC_DCHECK(network_thread_ == rtc::Thread::Current());
 }
 
@@ -991,6 +996,71 @@ void P2PTransportChannel::AddRemoteCandidate(const Candidate& candidate) {
     }
   }
 
+  if (candidate.address().IsUnresolvedIP()) {
+    rtc::AsyncResolverInterface* resolver = allocator_->CreateAsyncResolver();
+    resolver->SignalDone.connect(this,
+                                 &P2PTransportChannel::OnCandidateResolved);
+    resolver->Start(candidate.address());
+    resolvers_.push_back({new_remote_candidate, resolver});
+    RTC_LOG(LS_INFO) << "Asynchronously resolving ICE candidate hostname "
+                     << candidate.address().ToSensitiveString();
+    return;
+  }
+
+  FinishAddingRemoteCandidate(new_remote_candidate);
+}
+
+void P2PTransportChannel::OnCandidateResolved(
+    rtc::AsyncResolverInterface* resolver) {
+  auto p = std::find_if(resolvers_.begin(), resolvers_.end(),
+                        [resolver](const CandidateAndResolver& cr) {
+                          return cr.resolver_ == resolver;
+                        });
+  if (p == resolvers_.end()) {
+    RTC_NOTREACHED();
+    return;
+  }
+  if (resolver->GetError()) {
+    RTC_LOG(LS_WARNING) << "Failed to resolve ICE candidate hostname "
+                        << p->candidate_.address().ToSensitiveString()
+                        << " with error " << resolver->GetError();
+    // TODO(zstein): Pretty sure this gets called from
+    // SignalThread::EnterExit::~EnterExit after the thread finishes running,
+    // which will be called by a method a bit higher on the call stack (this was
+    // called by AsyncResolver::OnWorkDone, which was called by
+    // SignalThread::OnMessage, which contains an EnterExit). This code is...
+    // not great.
+    resolver->Destroy(/*wait=*/false);
+    resolvers_.erase(p);
+    return;
+  }
+
+  rtc::SocketAddress resolved_address;
+  // Prefer IPv6 if it is available (see draft-ietf-mmusic-ice-sip-sdp-21,
+  // Section 4.1).
+  bool have_address =
+      resolver->GetResolvedAddress(AF_INET6, &resolved_address) ||
+      resolver->GetResolvedAddress(AF_INET, &resolved_address);
+  if (!have_address) {
+    RTC_LOG(LS_INFO) << "ICE candidate hostname "
+                     << p->candidate_.address().ToSensitiveString()
+                     << " could not be resolved";
+    resolver->Destroy(/*wait=*/false);
+    resolvers_.erase(p);
+    return;
+  }
+
+  RTC_LOG(LS_INFO) << "Resolved ICE candidate hostname "
+                   << p->candidate_.address().ToSensitiveString() << " to "
+                   << resolved_address.ipaddr().ToSensitiveString();
+  p->candidate_.set_address(resolved_address);
+  FinishAddingRemoteCandidate(p->candidate_);
+  resolver->Destroy(/*wait=*/false);
+  resolvers_.erase(p);
+}
+
+void P2PTransportChannel::FinishAddingRemoteCandidate(
+    const Candidate& new_remote_candidate) {
   // If this candidate matches what was thought to be a peer reflexive
   // candidate, we need to update the candidate priority/etc.
   for (Connection* conn : connections_) {

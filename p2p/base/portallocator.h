@@ -18,6 +18,7 @@
 
 #include "p2p/base/port.h"
 #include "p2p/base/portinterface.h"
+#include "rtc_base/asyncresolverinterface.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/proxyinfo.h"
 #include "rtc_base/sigslot.h"
@@ -544,6 +545,10 @@ class PortAllocator : public sigslot::has_slots<> {
   // candidate stats can be collected from P2PTransportChannel::GetStats.
   virtual void GetCandidateStatsFromPooledSessions(
       CandidateStatsList* candidate_stats_list);
+
+  // TODO(zstein): Remove default implementation.
+  // TODO(zstein): describe memory management.
+  virtual rtc::AsyncResolverInterface* CreateAsyncResolver() = 0;
 
  protected:
   virtual PortAllocatorSession* CreateSessionInternal(
