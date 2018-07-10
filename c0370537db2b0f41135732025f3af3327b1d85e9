@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "9ccf4de2_f19bc8a9",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2018-07-10T09:31:49Z",
+      "side": 1,
+      "message": "Using two attributes instead of one wastes 4 bytes per STUN message, though. So I\u0027d think one attribute would be preferable in the long run. If 32 bits isn\u0027t enough, could make it longer, or make it variable length so we won\u0027t have to do this again. Making a new StunAttribute subclass seems reasonable too (encapsulating the logic of reading/writing the bitfields).",
+      "parentUuid": "ff4a2e73_179ed0c5",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "012c8892_e423de1d",
         "filename": "rtc_base/network.h",
         "patchSetId": 4
