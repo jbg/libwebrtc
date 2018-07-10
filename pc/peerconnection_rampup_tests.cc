@@ -179,6 +179,8 @@ class PeerConnectionRampUpTest : public ::testing::Test {
   void SetupOneWayCall() {
     ASSERT_TRUE(caller_);
     ASSERT_TRUE(callee_);
+    rtc::PlatformFile file = rtc::CreatePlatformFile("max_bitrate_log");
+    caller_->pc()->StartRtcEventLog(file, 10000000);
     FrameGeneratorCapturerVideoTrackSource::Config config;
     caller_->AddTrack(caller_->CreateLocalVideoTrack(config, clock_));
     // Disable highpass filter so that we can get all the test audio frames.
@@ -202,6 +204,17 @@ class PeerConnectionRampUpTest : public ::testing::Test {
     // This means that ICE and DTLS are connected.
     ASSERT_TRUE_WAIT(callee_->IsIceConnected(), kDefaultTimeoutMs);
     ASSERT_TRUE_WAIT(caller_->IsIceConnected(), kDefaultTimeoutMs);
+
+
+    // Set a max bitrate to the sender, to make sure this works properly.
+    auto transceivers = caller_->pc()->GetTransceivers();
+    for (auto& transciever : transceivers) {
+      if (cricket::MediaType::MEDIA_TYPE_VIDEO == transciever->sender()->media_type()) {
+        auto rtp_parameters = transciever->sender()->GetParameters();
+        rtp_parameters.encodings[0].max_bitrate_bps = 400000;
+        transciever->sender()->SetParameters(rtp_parameters);
+      }
+    }
   }
 
   void CreateTurnServer(cricket::ProtocolType type,
@@ -241,6 +254,7 @@ class PeerConnectionRampUpTest : public ::testing::Test {
         "bwe_after_" + std::to_string(kDefaultTestTimeMs / 1000) + "_seconds";
     test::PrintResult("peerconnection_ramp_up_", test_string, value_description,
                       average_bandwidth_estimate, "bwe", false);
+    caller_->pc()->StopRtcEventLog();
   }
 
   rtc::Thread* network_thread() { return network_thread_.get(); }
@@ -375,9 +389,11 @@ TEST_F(PeerConnectionRampUpTest, UDPPeerToPeer) {
   PeerConnectionInterface::RTCConfiguration client_1_config;
   client_1_config.tcp_candidate_policy =
       PeerConnection::kTcpCandidatePolicyDisabled;
+  client_1_config.sdp_semantics = SdpSemantics::kUnifiedPlan;
   PeerConnectionInterface::RTCConfiguration client_2_config;
   client_2_config.tcp_candidate_policy =
       PeerConnection::kTcpCandidatePolicyDisabled;
+  client_2_config.sdp_semantics = SdpSemantics::kUnifiedPlan;
   ASSERT_TRUE(CreatePeerConnectionWrappers(client_1_config, client_2_config));
 
   SetupOneWayCall();

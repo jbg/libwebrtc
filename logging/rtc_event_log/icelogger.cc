@@ -18,33 +18,22 @@ namespace webrtc {
 IceEventLog::IceEventLog() {}
 IceEventLog::~IceEventLog() {}
 
+// RTC event logs aren't working properly with ICEEventLogs. Not logging these
+// to get proper RTC event logs for a local run.
 void IceEventLog::LogCandidatePairConfig(
     IceCandidatePairConfigType type,
     uint32_t candidate_pair_id,
     const IceCandidatePairDescription& candidate_pair_desc) {
-  if (event_log_ == nullptr) {
-    return;
-  }
-  candidate_pair_desc_by_id_[candidate_pair_id] = candidate_pair_desc;
-  event_log_->Log(absl::make_unique<RtcEventIceCandidatePairConfig>(
-      type, candidate_pair_id, candidate_pair_desc));
+  return;
 }
 
 void IceEventLog::LogCandidatePairEvent(IceCandidatePairEventType type,
                                         uint32_t candidate_pair_id) {
-  if (event_log_ == nullptr) {
-    return;
-  }
-  event_log_->Log(
-      absl::make_unique<RtcEventIceCandidatePair>(type, candidate_pair_id));
+  return;
 }
 
 void IceEventLog::DumpCandidatePairDescriptionToMemoryAsConfigEvents() const {
-  for (const auto& desc_id_pair : candidate_pair_desc_by_id_) {
-    event_log_->Log(absl::make_unique<RtcEventIceCandidatePairConfig>(
-        IceCandidatePairConfigType::kUpdated, desc_id_pair.first,
-        desc_id_pair.second));
-  }
+  return;
 }
 
 }  // namespace webrtc
