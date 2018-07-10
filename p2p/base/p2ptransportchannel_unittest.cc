@@ -14,6 +14,7 @@
 
 #include "api/fakemetricsobserver.h"
 #include "p2p/base/fakeportallocator.h"
+#include "p2p/base/fakeresolver.h"
 #include "p2p/base/icetransportinternal.h"
 #include "p2p/base/p2ptransportchannel.h"
 #include "p2p/base/packettransportinternal.h"
@@ -4578,6 +4579,22 @@ TEST_F(P2PTransportChannelMostLikelyToWorkFirstTest, TestTcpTurn) {
 
   // Finally, Local/Relay will be pinged.
   VerifyNextPingableConnection(LOCAL_PORT_TYPE, RELAY_PORT_TYPE);
+}
+
+static const int kWait = 100;
+
+TEST(P2PTransportChannelResolverTest, HostnameCandidateIsResolved) {
+  std::unique_ptr<PortAllocator> port_allocator =
+      rtc::MakeUnique<FakePortAllocator>(rtc::Thread::Current(), nullptr);
+  P2PTransportChannel channel("tn", 0, port_allocator.get(), nullptr);
+  Candidate hostname_candidate;
+  SocketAddress hostname_address("a.com", 1000);
+  hostname_candidate.set_address(hostname_address);
+  channel.AddRemoteCandidate(hostname_candidate);
+
+  EXPECT_EQ_WAIT(1u, channel.remote_candidates().size(), kWait);
+  const RemoteCandidate& candidate = channel.remote_candidates()[0];
+  EXPECT_FALSE(candidate.address().IsUnresolvedIP());
 }
 
 }  // namespace cricket
