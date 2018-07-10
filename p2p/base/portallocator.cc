@@ -246,4 +246,8 @@ void PortAllocator::GetCandidateStatsFromPooledSessions(
   }
 }
 
+rtc::AsyncResolverInterface* PortAllocator::CreateAsyncResolver() {
+  return nullptr;
+}
+
 }  // namespace cricket

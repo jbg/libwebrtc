@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "p2p/base/basicpacketsocketfactory.h"
+#include "p2p/base/fakeresolver.h"
 #include "p2p/base/portallocator.h"
 #include "p2p/base/udpport.h"
 #include "rtc_base/bind.h"
@@ -255,6 +256,10 @@ class FakePortAllocator : public cricket::PortAllocator {
   }
 
   bool initialized() const { return initialized_; }
+
+  rtc::AsyncResolverInterface* CreateAsyncResolver() override {
+    return new rtc::FakeResolver;
+  }
 
  private:
   rtc::Thread* network_thread_;

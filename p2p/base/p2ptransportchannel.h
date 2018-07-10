@@ -21,6 +21,7 @@
 #define P2P_BASE_P2PTRANSPORTCHANNEL_H_
 
 #include <algorithm>
+#include <list>
 #include <map>
 #include <memory>
 #include <set>
@@ -99,6 +100,8 @@ class P2PTransportChannel : public IceTransportInternal {
   void MaybeStartGathering() override;
   IceGatheringState gathering_state() const override;
   void AddRemoteCandidate(const Candidate& candidate) override;
+  void OnCandidateResolved(rtc::AsyncResolverInterface* resolver);
+  void FinishAddingRemoteCandidate(const Candidate& new_remote_candidate);
   void RemoveRemoteCandidate(const Candidate& candidate) override;
   // Sets the parameters in IceConfig. We do not set them blindly. Instead, we
   // only update the parameter if it is considered set in |config|. For example,
@@ -412,6 +415,14 @@ class P2PTransportChannel : public IceTransportInternal {
   webrtc::MetricsObserverInterface* metrics_observer_ = nullptr;
   absl::optional<rtc::NetworkRoute> network_route_;
   webrtc::IceEventLog ice_event_log_;
+
+  // Pairs candidates with resolved addresses with a resolver object.
+  struct CandidateAndResolver final {
+    Candidate candidate_;
+    rtc::AsyncResolverInterface* resolver_;
+  };
+  // Stores candidates waiting on asynchronous address resolution.
+  std::list<CandidateAndResolver> resolvers_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(P2PTransportChannel);
 };
