@@ -16,6 +16,24 @@
       "revId": "4886767f26be587460cc5ec323b6b963fc114d78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e2cc781_0cd28426",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-07-11T17:39:36Z",
+      "side": 1,
+      "message": "Yeah, we\u0027re aware :/ unfortunately, it\u0027s not a small thing in a multiway call because we use audio levels to determine the active speaker. 5-10 seconds is far too infrequent.\n\nWe\u0027re using the native API and are looking into less expensive ways of surfacing the audio level.",
+      "parentUuid": "b78ad8ce_8756a351",
+      "revId": "4886767f26be587460cc5ec323b6b963fc114d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
