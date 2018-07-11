@@ -34,6 +34,24 @@
       "revId": "4886767f26be587460cc5ec323b6b963fc114d78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba69931f_a995f90b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-07-11T17:45:40Z",
+      "side": 1,
+      "message": "Specifically, RtpSource for remote audio and AudioStreamTrack for local audio.\n\nBut audio level isn\u0027t hooked up yet for AudioStreamTrack, and RtpSource audio levels 1) aren\u0027t provided if the audio level wasn\u0027t included in a header extension; 2) aren\u0027t smoothed like GetStats audio levels and aren\u0027t usable for determining the active speaker.",
+      "parentUuid": "4e2cc781_0cd28426",
+      "revId": "4886767f26be587460cc5ec323b6b963fc114d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
