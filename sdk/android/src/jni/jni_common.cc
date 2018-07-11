@@ -45,5 +45,11 @@ static void JNI_JniCommon_FreeByteBuffer(
   ::operator delete(data);
 }
 
+static void JNI_JniCommon_FreeVideoEncoder(JNIEnv* jni,
+                                           const JavaParamRef<jclass>&,
+                                           const jlong j_video_encoder) {
+  ::operator delete(reinterpret_cast<VideoEncoder*>(j_video_encoder));
+}
+
 }  // namespace jni
 }  // namespace webrtc
