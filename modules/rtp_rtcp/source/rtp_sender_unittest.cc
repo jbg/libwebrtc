@@ -1810,8 +1810,9 @@ TEST_P(RtpSenderVideoTest, RetransmissionTypesGeneric) {
 
 TEST_P(RtpSenderVideoTest, RetransmissionTypesH264) {
   RTPVideoHeader header;
+  header.video_type_header.emplace<RTPVideoHeaderH264>().packetization_mode =
+      H264PacketizationMode::NonInterleaved;
   header.codec = kVideoCodecH264;
-  header.h264().packetization_mode = H264PacketizationMode::NonInterleaved;
 
   EXPECT_EQ(kDontRetransmit,
             rtp_sender_video_->GetStorageType(
