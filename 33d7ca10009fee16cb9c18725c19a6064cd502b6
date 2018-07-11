@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfc39bb2_adb094a7",
+        "filename": "p2p/client/basicportallocator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-11T19:43:44Z",
+      "side": 1,
+      "message": "TODO: This probably needs to return a resolver even if we don\u0027t have a socket factory.",
+      "revId": "33d7ca10009fee16cb9c18725c19a6064cd502b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
