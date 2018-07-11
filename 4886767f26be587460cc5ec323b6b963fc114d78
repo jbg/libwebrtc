@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b78ad8ce_8756a351",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-11T09:13:38Z",
+      "side": 1,
+      "message": "A very expensive thing to do for such a small thing. There are reports of calling getStats() or not being the difference between the fan making a sound or not (not sure which application).\nPreferably getStats() should only be called every 5-10 seconds.\n\nRehashing an old conversation, but: Is WebAudio too expensive? There was an issue about exposing different levels directly on MediaStreamTracks (https://github.com/w3c/mediacapture-main/issues/523) but nobody\u0027s owning/driving it.",
+      "revId": "4886767f26be587460cc5ec323b6b963fc114d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
