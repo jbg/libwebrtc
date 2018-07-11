@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01fd9aea_59d3d264",
+        "filename": "modules/rtp_rtcp/source/rtp_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "why pointer instead or reference?\nconst auto\u0026 h264 \u003d ...\n..., h264.packetization_mode);",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 11
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ac81856_5cf66d84",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "class in a unittest with suffix \u0027Test\u0027 usually a fixture (i.e. derived from ::testing::Test)\nwould suggest to drop that suffix (it is in unnamed namespace of a test file, so shouldn\u0027t leak anyway)\nParsedPayloadH264 (or may be H264ParsedPayload)\n\nChecking how it used though, I suspect it can be removed, at least the constructor.",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4342ab2f_3df3386a",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "or, if you prefer one-liners,\nheader.video_type_header.emplace\u003cRTPVideoHeaderH264\u003e().packetization_mode \u003d mode;",
+      "range": {
+        "startLine": 78,
+        "startChar": 41,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0915a12_8c97c816",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "shouldn\u0027t depacketizer correctly initialize the variant itself?",
+      "range": {
+        "startLine": 606,
+        "startChar": 2,
+        "endLine": 606,
+        "endChar": 23
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45dcd60a_ad3617b6",
+        "filename": "modules/video_coding/h264_sps_pps_tracker.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "since you renamed the variable and thus touch all lines where it is used anyway, may be change it to reference. (or even better - to const\u0026 to note you only read from it)",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 19
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fd5040c_1ab9db38",
+        "filename": "modules/video_coding/h264_sps_pps_tracker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "ditto, suffix Test make bad impression.\nmay be use prefix instead: TestVCMPacket\nor stress it is about h264: H264VcmPacket",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 19
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b0e49f0_dff5c3d9",
+        "filename": "modules/video_coding/h264_sps_pps_tracker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "here you may use emplace too:\nauto\u0026 type_header \u003d video_header.video_type_header.emplace\u003cRTPVideoHeaderH264\u003e();\ntype_header.nalus_length \u003d 0;\nttype_header.packetization_type \u003d kH264SingleNalu;",
+      "range": {
+        "startLine": 54,
+        "startChar": 40,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f4fcf6f_d5225b8f",
+        "filename": "modules/video_coding/jitter_buffer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-11T13:28:13Z",
+      "side": 1,
+      "message": "imho (non-const) reference is a bit cleaner.\nhttp://go/totw/87",
+      "range": {
+        "startLine": 1158,
+        "startChar": 14,
+        "endLine": 1158,
+        "endChar": 0
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
