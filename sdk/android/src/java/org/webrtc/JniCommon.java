@@ -20,4 +20,7 @@ public class JniCommon {
 
   public static native ByteBuffer nativeAllocateByteBuffer(int size);
   public static native void nativeFreeByteBuffer(ByteBuffer buffer);
+
+  /** delete's a webrtc::VideoEncoder*. */
+  public static native void nativeFreeVideoEncoder(long videoEncoder);
 }

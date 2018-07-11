@@ -8,6 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "api/video_codecs/video_encoder.h"
 #include "rtc_base/refcount.h"
 #include "sdk/android/generated_base_jni/jni/JniCommon_jni.h"
 #include "sdk/android/src/jni/jni_helpers.h"
@@ -43,6 +44,12 @@ static void JNI_JniCommon_FreeByteBuffer(
     const JavaParamRef<jobject>& byte_buffer) {
   void* data = jni->GetDirectBufferAddress(byte_buffer.obj());
   ::operator delete(data);
+}
+
+static void JNI_JniCommon_FreeVideoEncoder(JNIEnv* jni,
+                                           const JavaParamRef<jclass>&,
+                                           const jlong j_video_encoder) {
+  ::operator delete(reinterpret_cast<VideoEncoder*>(j_video_encoder));
 }
 
 }  // namespace jni
