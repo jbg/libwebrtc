@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bdab9f3_2f2da1f9",
+        "filename": "sdk/android/src/jni/jni_common.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-07-11T07:22:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure why/if this is necessary (we don\u0027t seem to overload operator delete in webrtc::jni), but since the rest of the functions in this .cc do this I just added it too.",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 19
+      },
+      "revId": "8cf7b931583de1305d1dcc523c09cb5e923d31a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
