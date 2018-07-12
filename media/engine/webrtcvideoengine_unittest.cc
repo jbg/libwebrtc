@@ -3946,6 +3946,56 @@ TEST_F(WebRtcVideoChannelTest, SetMaxSendBandwidthAndAddSendStream) {
             stream->GetVideoStreams()[0].max_bitrate_bps);
 }
 
+// Tests that when the codec specific max bitrate and VideoSendParameters
+// max_bandwidth_bps are used, that it sets the VideoStream's max bitrate
+// appropriately.
+TEST_F(WebRtcVideoChannelTest,
+       MaxBitratePrioritizesVideoSendParametersOverCodecMaxBitrate) {
+  send_parameters_.codecs[0].params[kCodecParamMinBitrate] = "100";
+  send_parameters_.codecs[0].params[kCodecParamStartBitrate] = "200";
+  send_parameters_.codecs[0].params[kCodecParamMaxBitrate] = "300";
+  send_parameters_.max_bandwidth_bps = -1;
+  FakeVideoSendStream* stream = AddSendStream();
+  ExpectSetMaxBitrate(300000);
+  ASSERT_TRUE(channel_->SetSendParameters(send_parameters_));
+
+  ASSERT_EQ(1u, stream->GetVideoStreams().size());
+  // First the max bitrate is set based upon the codec param.
+  EXPECT_EQ(300000, stream->GetVideoStreams()[0].max_bitrate_bps);
+
+  // The VideoSendParameters max bitrate overrides the codec's.
+  send_parameters_.max_bandwidth_bps = 500000;
+  ExpectSetMaxBitrate(send_parameters_.max_bandwidth_bps);
+  ASSERT_TRUE(channel_->SetSendParameters(send_parameters_));
+  EXPECT_EQ(500000, stream->GetVideoStreams()[0].max_bitrate_bps);
+}
+
+// Tests that when the codec specific max bitrate and RtpParameters
+// max_bitrate_bps are used, that it sets the VideoStream's max bitrate
+// appropriately.
+TEST_F(WebRtcVideoChannelTest,
+       MaxBitratePrioritizesRtpParametersOverCodecMaxBitrate) {
+  send_parameters_.codecs[0].params[kCodecParamMinBitrate] = "100";
+  send_parameters_.codecs[0].params[kCodecParamStartBitrate] = "200";
+  send_parameters_.codecs[0].params[kCodecParamMaxBitrate] = "300";
+  send_parameters_.max_bandwidth_bps = -1;
+  FakeVideoSendStream* stream = AddSendStream();
+  ExpectSetMaxBitrate(300000);
+  ASSERT_TRUE(channel_->SetSendParameters(send_parameters_));
+
+  ASSERT_EQ(1u, stream->GetVideoStreams().size());
+  // First the max bitrate is set based upon the codec param.
+  EXPECT_EQ(300000, stream->GetVideoStreams()[0].max_bitrate_bps);
+
+  // The RtpParameter max bitrate overrides the codec's.
+  webrtc::RtpParameters parameters = channel_->GetRtpSendParameters(last_ssrc_);
+  ASSERT_EQ(1u, parameters.encodings.size());
+  parameters.encodings[0].max_bitrate_bps = 500000;
+  EXPECT_TRUE(channel_->SetRtpSendParameters(last_ssrc_, parameters).ok());
+  EXPECT_EQ(parameters.encodings[0].max_bitrate_bps,
+            stream->GetVideoStreams()[0].max_bitrate_bps);
+}
+
 TEST_F(WebRtcVideoChannelTest,
        MaxBitrateIsMinimumOfMaxSendBandwidthAndMaxEncodingBitrate) {
   send_parameters_.max_bandwidth_bps = 99999;
