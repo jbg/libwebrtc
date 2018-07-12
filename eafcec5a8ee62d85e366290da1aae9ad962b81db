@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "18249416_49a5614f",
+        "filename": "modules/rtp_rtcp/source/rtp_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01fd9aea_59d3d264",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 11
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ac81856_5cf66d84",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70cf873c_03258227",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "You are right, the ctor set the correct variant so the ctor can be removed.",
+      "parentUuid": "2ac81856_5cf66d84",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "6de5ad11_b741acf2",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "It does.",
+      "parentUuid": "d0915a12_8c97c816",
+      "range": {
+        "startLine": 606,
+        "startChar": 2,
+        "endLine": 606,
+        "endChar": 23
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45dcd60a_ad3617b6",
         "filename": "modules/video_coding/h264_sps_pps_tracker.cc",
         "patchSetId": 2
@@ -105,6 +177,30 @@
       "writtenOn": "2018-07-11T13:28:13Z",
       "side": 1,
       "message": "since you renamed the variable and thus touch all lines where it is used anyway, may be change it to reference. (or even better - to const\u0026 to note you only read from it)",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 19
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e26b7d78_3c6b8440",
+        "filename": "modules/video_coding/h264_sps_pps_tracker.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45dcd60a_ad3617b6",
       "range": {
         "startLine": 39,
         "startChar": 8,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "0168fa7b_caf24ae3",
+        "filename": "modules/video_coding/h264_sps_pps_tracker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fd5040c_1ab9db38",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 19
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b0e49f0_dff5c3d9",
         "filename": "modules/video_coding/h264_sps_pps_tracker_unittest.cc",
         "patchSetId": 2
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "b8210d00_da733e6f",
+        "filename": "modules/video_coding/h264_sps_pps_tracker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "8b0e49f0_dff5c3d9",
+      "range": {
+        "startLine": 54,
+        "startChar": 40,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f4fcf6f_d5225b8f",
         "filename": "modules/video_coding/jitter_buffer_unittest.cc",
         "patchSetId": 2
@@ -174,6 +318,30 @@
       "writtenOn": "2018-07-11T13:28:13Z",
       "side": 1,
       "message": "imho (non-const) reference is a bit cleaner.\nhttp://go/totw/87",
+      "range": {
+        "startLine": 1158,
+        "startChar": 14,
+        "endLine": 1158,
+        "endChar": 0
+      },
+      "revId": "eafcec5a8ee62d85e366290da1aae9ad962b81db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21ce3a5e_6f9d6d76",
+        "filename": "modules/video_coding/jitter_buffer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-07-12T12:16:12Z",
+      "side": 1,
+      "message": "Didn\u0027t know we were allowed to do that, changed.",
+      "parentUuid": "1f4fcf6f_d5225b8f",
       "range": {
         "startLine": 1158,
         "startChar": 14,
