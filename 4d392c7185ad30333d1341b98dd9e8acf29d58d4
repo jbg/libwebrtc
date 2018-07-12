@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bbf3340_edf05ad7",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-12T12:30:49Z",
+      "side": 1,
+      "message": "nit: this change is not needed.",
+      "range": {
+        "startLine": 589,
+        "startChar": 20,
+        "endLine": 589,
+        "endChar": 24
+      },
+      "revId": "4d392c7185ad30333d1341b98dd9e8acf29d58d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60875011_0d0cac98",
+        "filename": "modules/video_coding/jitter_buffer_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-12T12:30:49Z",
+      "side": 1,
+      "message": "you can emplace to eliminte duplictation in this and next lines.",
+      "range": {
+        "startLine": 1158,
+        "startChar": 65,
+        "endLine": 1158,
+        "endChar": 0
+      },
+      "revId": "4d392c7185ad30333d1341b98dd9e8acf29d58d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8730e468_4c40e326",
+        "filename": "modules/video_coding/packet_buffer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-12T12:30:49Z",
+      "side": 1,
+      "message": "may be const auto*\nto stress you only reading",
+      "range": {
+        "startLine": 306,
+        "startChar": 10,
+        "endLine": 306,
+        "endChar": 15
+      },
+      "revId": "4d392c7185ad30333d1341b98dd9e8acf29d58d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c5c1fd_d5dda89f",
+        "filename": "modules/video_coding/session_info.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-07-12T12:30:49Z",
+      "side": 1,
+      "message": "may be const auto*",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 180,
+        "endChar": 6
+      },
+      "revId": "4d392c7185ad30333d1341b98dd9e8acf29d58d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
