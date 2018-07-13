@@ -103,24 +103,24 @@ void AecState::HandleEchoPathChange(
 
   // TODO(peah): Refine the reset scheme according to the type of gain and
   // delay adjustment.
-  if (echo_path_variability.gain_change) {
-    full_reset();
-  }
 
   if (echo_path_variability.delay_change !=
-      EchoPathVariability::DelayAdjustment::kBufferReadjustment) {
-    full_reset();
-  } else if (echo_path_variability.delay_change !=
-             EchoPathVariability::DelayAdjustment::kBufferFlush) {
-    full_reset();
-  } else if (echo_path_variability.delay_change !=
-             EchoPathVariability::DelayAdjustment::kDelayReset) {
-    full_reset();
-  } else if (echo_path_variability.delay_change !=
-             EchoPathVariability::DelayAdjustment::kNewDetectedDelay) {
-    full_reset();
-  } else if (echo_path_variability.gain_change) {
-    blocks_since_reset_ = kNumBlocksPerSecond;
+      EchoPathVariability::DelayAdjustment::kNone) {
+    if (echo_path_variability.delay_change !=
+        EchoPathVariability::DelayAdjustment::kBufferReadjustment) {
+      full_reset();
+    } else if (echo_path_variability.delay_change !=
+               EchoPathVariability::DelayAdjustment::kBufferFlush) {
+      full_reset();
+    } else if (echo_path_variability.delay_change !=
+               EchoPathVariability::DelayAdjustment::kDelayReset) {
+      full_reset();
+    } else if (echo_path_variability.delay_change !=
+               EchoPathVariability::DelayAdjustment::kNewDetectedDelay) {
+      full_reset();
+    } else if (echo_path_variability.gain_change) {
+      blocks_since_reset_ = kNumBlocksPerSecond;
+    }
   }
 }
 

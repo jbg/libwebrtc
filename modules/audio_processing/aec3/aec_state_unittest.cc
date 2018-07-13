@@ -67,7 +67,7 @@ TEST(AecState, NormalUsage) {
   // Verify that linear AEC usability becomes false after an echo path change is
   // reported
   state.HandleEchoPathChange(EchoPathVariability(
-      true, EchoPathVariability::DelayAdjustment::kNone, false));
+      false, EchoPathVariability::DelayAdjustment::kBufferReadjustment, false));
   state.Update(delay_estimate, converged_filter_frequency_response,
                impulse_response, true, false,
                *render_delay_buffer->GetRenderBuffer(), E2_main, Y2, s);
