@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ddc83cfe_7af76b1c",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-14T09:49:16Z",
+      "side": 1,
+      "message": "I\u0027m working on a JNI patch to add the same functionality. This same logic is present there as well. Maybe after they land, I can do a separate CL to deprecate keyType in a uniform way?",
+      "parentUuid": "9656b53a_b74c32a1",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 15
+      },
+      "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e2d9b62_6630aef4",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-07-12T21:01:37Z",
       "side": 1,
       "message": "I think it would be better to have this be a wrapper of the native rtc::RTCCertificate. That way we could add more of the underlying methods later if they were deemed useful.\n\nSo have a new @interface RTCCertificatePEM which has the private_key and certificate as PEM strings (like the class you have now) then introduce RTCCertificate as an interface which wraps an rtc::RTCCertificate. Check out RTCRtpParameters for an example of how that would look.\n\nFor now, the RTCCertificate can just have a static method for creating from an RTCCertificatePEM and a method for exporting to an RTCCertificatePEM (no need to export the other native methods until someone actually needs them).\n\nAlso, please move this to its own header file.",
+      "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ccacf1d_d5af6077",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-14T09:49:16Z",
+      "side": 1,
+      "message": "Moved interface to new header. Is RTCConfiguration.h the proper place to import it?\n\nI understand your point about making it easier to expose more functionality in the certificate object in the future. However, I don\u0027t know if it will be useful. As far as I understand it, the WebRTC standard does not allow users to provide arbitrary certificates. The user will not need a robust RTCCertificate object for creating their own certs. So the primary use of generateCertificate and this RTCCertificate object will be to store it in the client application between sessions. PEM strings are a standard way to do that and make serialization/deserialization simple if needed. Adding to this object could make complicate the client usage.\n\nWhen I read through the history of when this was added to JS (https://codereview.chromium.org/1373023002/) it seemed to also be advocating for a simple WebRTCCertificate for JS land.\n\nI might be missing something though or have misunderstood your request.",
+      "parentUuid": "1e2d9b62_6630aef4",
       "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -56,6 +98,24 @@
       "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8a786c7_32cfc8d7",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-14T09:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66c876b4_38e5d794",
+      "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
