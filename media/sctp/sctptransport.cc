@@ -292,21 +292,29 @@ class SctpTransport::UsrSctpWrapper {
       RTC_LOG(LS_ERROR) << "Received an unknown PPID " << ppid
                         << " on an SCTP packet.  Dropping.";
     } else {
-      rtc::CopyOnWriteBuffer buffer;
       ReceiveDataParams params;
-      buffer.SetData(reinterpret_cast<uint8_t*>(data), length);
+      transport->partial_message_.AppendData(reinterpret_cast<uint8_t*>(data),
+                                             length);
+      free(data);
+
+      if (!(flags & MSG_EOR)) {
+        return 1;
+      }
+
       params.sid = rcv.rcv_sid;
       params.seq_num = rcv.rcv_ssn;
       params.timestamp = rcv.rcv_tsn;
       params.type = type;
+
       // The ownership of the packet transfers to |invoker_|. Using
       // CopyOnWriteBuffer is the most convenient way to do this.
       transport->invoker_.AsyncInvoke<void>(
           RTC_FROM_HERE, transport->network_thread_,
           rtc::Bind(&SctpTransport::OnInboundPacketFromSctpToTransport,
-                    transport, buffer, params, flags));
+                    transport, transport->partial_message_, params, flags));
+
+      transport->partial_message_.Clear();
     }
-    free(data);
     return 1;
   }
 
@@ -350,6 +358,7 @@ SctpTransport::SctpTransport(rtc::Thread* network_thread,
                              rtc::PacketTransportInternal* transport)
     : network_thread_(network_thread),
       transport_(transport),
+      partial_message_(),
       was_ever_writable_(transport->writable()) {
   RTC_DCHECK(network_thread_);
   RTC_DCHECK(transport_);
@@ -489,6 +498,7 @@ bool SctpTransport::SendData(const SendDataParams& params,
   spa.sendv_flags |= SCTP_SEND_SNDINFO_VALID;
   spa.sendv_sndinfo.snd_sid = params.sid;
   spa.sendv_sndinfo.snd_ppid = rtc::HostToNetwork32(GetPpid(params.type));
+  spa.sendv_sndinfo.snd_flags |= SCTP_EOR;
 
   // Ordered implies reliable.
   if (!params.ordered) {
@@ -691,6 +701,15 @@ bool SctpTransport::ConfigureSctpSocket() {
                          sizeof(nodelay))) {
     RTC_LOG_ERRNO(LS_ERROR) << debug_name_ << "->ConfigureSctpSocket(): "
                             << "Failed to set SCTP_NODELAY.";
+    return false;
+  }
+
+  // Explicit EOR.
+  uint32_t eor = 1;
+  if (usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_EXPLICIT_EOR, &eor,
+                         sizeof(eor))) {
+    RTC_LOG_ERRNO(LS_ERROR) << debug_name_ << "->ConfigureSctpSocket(): "
+                            << "Failed to set SCTP_EXPLICIT_EOR.";
     return false;
   }
 

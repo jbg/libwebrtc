@@ -142,6 +142,10 @@ class SctpTransport : public SctpTransportInternal,
   rtc::AsyncInvoker invoker_;
   // Underlying DTLS channel.
   rtc::PacketTransportInternal* transport_ = nullptr;
+
+  // Keep partial (!EOR) messages
+  rtc::CopyOnWriteBuffer partial_message_;
+
   bool was_ever_writable_ = false;
   int local_port_ = kSctpDefaultPort;
   int remote_port_ = kSctpDefaultPort;
