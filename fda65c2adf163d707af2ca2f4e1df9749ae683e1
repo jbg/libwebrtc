@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "181dc11f_5c758136",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:09:43Z",
+      "side": 1,
+      "message": "This test was passing before unintentionally because the SRDs with no answer would cause the track to be added twice which updates the remote streams (in the \"add remote track\" step). Now, the track is only added the first time and there is no language in the specification to update the streams each time SRD is called. So for now I\u0027ve commented it out and will revisit once the spec bug is resolved.",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
