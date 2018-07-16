@@ -47,13 +47,17 @@ class CoreAudioOutput final : public CoreAudioBase, public AudioOutput {
   int StopPlayout() override;
   bool Playing() override;
   int VolumeIsAvailable(bool* available) override;
+  int RestartPlayout() override;
 
   CoreAudioOutput(const CoreAudioOutput&) = delete;
   CoreAudioOutput& operator=(const CoreAudioOutput&) = delete;
 
  private:
+  void SafeRelease();
   bool OnDataCallback(uint64_t device_frequency);
+  bool OnErrorCallback(ErrorType error);
   int EstimateOutputLatencyMillis(uint64_t device_frequency);
+  bool HandleStreamDisconnected();
 
   std::unique_ptr<FineAudioBuffer> fine_audio_buffer_;
   Microsoft::WRL::ComPtr<IAudioRenderClient> audio_render_client_;
