@@ -1,0 +1,27 @@
+--- modules/congestion_controller/BUILD.gn
++++ modules/congestion_controller/BUILD.gn
+@@ -20,6 +20,8 @@ rtc_static_library("congestion_controller") {
+   visibility = [ "*" ]
+   configs += [ ":bwe_test_logging" ]
+   sources = [
++    "congestion_window_pushback_controller.cc",
++    "congestion_window_pushback_controller.h",
+     "include/network_changed_observer.h",
+     "include/receive_side_congestion_controller.h",
+     "include/send_side_congestion_controller.h",
+@@ -39,6 +41,7 @@ rtc_static_library("congestion_controller") {
+     ":transport_feedback",
+     "..:module_api",
+     "../..:webrtc_common",
++    "../../api/transport:network_control",
+     "../../rtc_base:checks",
+     "../../rtc_base:rate_limiter",
+     "../../system_wrappers",
+@@ -80,6 +83,7 @@ if (rtc_include_tests) {
+     testonly = true
+ 
+     sources = [
++      "congestion_window_pushback_controller_unittest.cc",
+       "probe_controller_unittest.cc",
+       "receive_side_congestion_controller_unittest.cc",
+       "send_side_congestion_controller_unittest.cc",
