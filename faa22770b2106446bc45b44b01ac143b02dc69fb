@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fa9a972_56f3f061",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "Still need to free(data) in this branch.",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcbda446_45411e3f",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "Are we guaranteed that there\u0027s no interleaving callbacks for e.g. other stream data?",
+      "range": {
+        "startLine": 296,
+        "startChar": 17,
+        "endLine": 296,
+        "endChar": 33
+      },
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62a06f93_a339062e",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "May want to put a hard cap on the amount of data buffered here to prevent DoS. Is there any spec that might provide a guideline / requirement?",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c4031d_15fceaf8",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "Clear() won\u0027t reset the capacity -- so the partial_message_ buffer will always be the size of the largest message ever received. Not sure if that might be an issue.",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6315495_5ff052d8",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "nit: no need to explicitly call out default constructor for non-primitive C++ types.",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a9caf40_32fd8fed",
+        "filename": "media/sctp/sctptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "Maybe expand a little on this comment. Suggestion:\n\n// Track the data received from usrsctp between callbacks until the EOR bit arrives.",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4056cca7_946d6b68",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:42:01Z",
+      "side": 1,
+      "message": "Maybe leave the test as-is (testing whether data can be sent at all) and add a new test for testing large messages. That way it\u0027s clear if all data transmission is broken or just the reassembly of large messages.",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
