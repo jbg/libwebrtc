@@ -469,6 +469,18 @@ class PeerConnection : public PeerConnectionInternal,
           transceiver,
       const SessionDescriptionInterface* sdesc) const;
 
+  // Runs the algorithm **process the removal of a remote track** specific in
+  // the WebRTC specification.
+  // |remove_list| is the list of transceivers for which the receiving track is
+  //     being removed.
+  // |removed_streams| is the list of streams which no longer have a receiving
+  //     track so should be removed.
+  void ProcessRemovalOfRemoteTrack(
+      rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
+          transceiver,
+      std::vector<rtc::scoped_refptr<RtpTransceiverInterface>>* remove_list,
+      std::vector<rtc::scoped_refptr<MediaStreamInterface>>* removed_streams);
+
   void OnNegotiationNeeded();
 
   bool IsClosed() const {
