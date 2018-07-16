@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "08f25524_2bceb16e",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-16T13:13:07Z",
+      "side": 1,
+      "message": "True. Let\u0027s change to that.",
+      "parentUuid": "b26514f6_3e2d8864",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 3
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52621566_340de4fa",
         "filename": "modules/audio_processing/aec3/main_filter_update_gain.cc",
         "patchSetId": 3
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "229762b7_6ff099ff",
+        "filename": "modules/audio_processing/aec3/main_filter_update_gain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-16T13:13:07Z",
+      "side": 1,
+      "message": "True. I instead removed the TODO as it does not at the moment warrant a separate bug.",
+      "parentUuid": "52621566_340de4fa",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d55a0dd2_c6940a7b",
+        "filename": "modules/audio_processing/aec3/main_filter_update_gain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-16T13:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aba0c303_cbbb520b",
+      "range": {
+        "startLine": 24,
+        "startChar": 34,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c53f01f6_c1f9a697",
         "filename": "modules/audio_processing/aec3/subtractor.cc",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a3b6ab5_b64cf920",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-16T13:13:07Z",
+      "side": 1,
+      "message": "Good point! I\u0027ll add that.",
+      "parentUuid": "c53f01f6_c1f9a697",
+      "range": {
+        "startLine": 28,
+        "startChar": 34,
+        "endLine": 28,
+        "endChar": 76
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "058eaa69_1f6e0f5c",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-16T13:13:07Z",
+      "side": 1,
+      "message": "Good point! Let\u0027s simplify it to that since the behavior is still the same for all changes.",
+      "parentUuid": "56d17131_55eebe9c",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 0
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecfa064b_cfb27d47",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 3
@@ -137,6 +257,30 @@
       "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d707693b_09a92b8c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-16T13:13:07Z",
+      "side": 1,
+      "message": "As it is now, there is no other functionality that uses this. Since no such functionality is planned I think it makes sense to keep it tied to the echo_controller code.",
+      "parentUuid": "ecfa064b_cfb27d47",
+      "range": {
+        "startLine": 1201,
+        "startChar": 0,
+        "endLine": 1206,
+        "endChar": 54
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
