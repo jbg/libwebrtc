@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "66bcea51_ce7b830b",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:58:08Z",
+      "side": 1,
+      "message": "Yeah, that would be great. Or just file a bug to deprecate it in the future (just wanted to point this out before I forgot).",
+      "parentUuid": "ddc83cfe_7af76b1c",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 15
+      },
+      "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2d9b62_6630aef4",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
         "patchSetId": 1
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "Moved interface to new header. Is RTCConfiguration.h the proper place to import it?\n\nI understand your point about making it easier to expose more functionality in the certificate object in the future. However, I don\u0027t know if it will be useful. As far as I understand it, the WebRTC standard does not allow users to provide arbitrary certificates. The user will not need a robust RTCCertificate object for creating their own certs. So the primary use of generateCertificate and this RTCCertificate object will be to store it in the client application between sessions. PEM strings are a standard way to do that and make serialization/deserialization simple if needed. Adding to this object could make complicate the client usage.\n\nWhen I read through the history of when this was added to JS (https://codereview.chromium.org/1373023002/) it seemed to also be advocating for a simple WebRTCCertificate for JS land.\n\nI might be missing something though or have misunderstood your request.",
       "parentUuid": "1e2d9b62_6630aef4",
+      "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1abddb4_f21d131b",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-16T23:58:08Z",
+      "side": 1,
+      "message": "Yes, RTCConfiguration.h is the right place -- thanks for moving it.\n\nI see your point about keeping the interface simple. I\u0027ll leave it up to the iOS SDK owners to indicate which they prefer.",
+      "parentUuid": "6ccacf1d_d5af6077",
       "revId": "6e65f57c2cf833803f2e404793c6b6b1d0c1f402",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
