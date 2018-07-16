@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b26514f6_3e2d8864",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-16T12:00:33Z",
+      "side": 1,
+      "message": "I think this can be simplified. The last two conditionals will never execute:\nIf delay_change is kBufferFlush, then it will trigger !\u003d kBufferReadjustment.\nIf delay_change is _not_ kBufferFlush, then it will trigger !\u003d kBufferFlush (or exit, !\u003d kNone).\nWe cannot reach the code for kDelayReset, kNewDetectedDelay.\n\nThe code seems equivalent to:\n\nif (echo_path_variability.delay_change !\u003d\n      EchoPathVariability::DelayAdjustment::kNone) {\n  full_reset();\n}",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 3
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52621566_340de4fa",
+        "filename": "modules/audio_processing/aec3/main_filter_update_gain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-16T12:00:33Z",
+      "side": 1,
+      "message": "nit: TODOs should ideally be attached to a bug à la \"TODO(bugs.webrtc.org/####): yada yada.\"",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aba0c303_cbbb520b",
+        "filename": "modules/audio_processing/aec3/main_filter_update_gain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-16T12:00:33Z",
+      "side": 1,
+      "message": "nit: kHError not hKError?",
+      "range": {
+        "startLine": 24,
+        "startChar": 34,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c53f01f6_c1f9a697",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-16T12:00:33Z",
+      "side": 1,
+      "message": "nit: Would be nice if this was added to fuzzers, just to keep coverage up. Only need to append tp list:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/test/fuzzers/audio_processing_configs_fuzzer.cc?dr\u0026g\u003d0\u0026l\u003d48",
+      "range": {
+        "startLine": 28,
+        "startChar": 34,
+        "endLine": 28,
+        "endChar": 76
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56d17131_55eebe9c",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-16T12:00:33Z",
+      "side": 1,
+      "message": "Is the enum expected to get more values? This is currently equivalent to:\n\nif (echo_path_variability.delay_change !\u003d\n    EchoPathVariability::DelayAdjustment::kNone) {\n  // TODO(peah): Add delay-change specific reset behavior.\n  full_reset();\n}",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 0
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecfa064b_cfb27d47",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-16T12:00:33Z",
+      "side": 1,
+      "message": "Do we want the presence of this flag to depend on whether an AEC is injected or not?\nIs this better (future-proofer) to keep outside of the if(private_submodules_-\u003eecho_controller)?",
+      "range": {
+        "startLine": 1201,
+        "startChar": 0,
+        "endLine": 1206,
+        "endChar": 54
+      },
+      "revId": "17f116429dd60bd19ec11fbd55c39dfdacaa4c44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
