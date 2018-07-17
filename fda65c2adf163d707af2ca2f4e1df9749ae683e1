@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0f059b09_0767f604",
+        "filename": "api/rtptransceiverinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-17T21:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "204bdb1a_1357c235",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1091ea2b_4cab8ad5",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Removing them one at a time is consistent with the logic that says that an event handler only sees the changes that it has seen the events for. (cf multi-hop state changes).\nIt\u0027s a PITA to keep straight, but the alternative is somewhat confusing.",
       "parentUuid": "330f92c8_8af88cc9",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2f92849_812c526b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2607,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-17T21:25:56Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. I agree with Harald that the iterative behavior is the only kind of behavior that really makes sense.\n\nThe native API is not very good about following that guideline. In the long term it\u0027s something I\u0027d like to improve.",
+      "parentUuid": "ceed5a25_ddc25404",
       "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -139,6 +175,24 @@
       "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "091dd8c2_c4aec07c",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-17T21:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fae05d5_2d81ca62",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

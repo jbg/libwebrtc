@@ -16,6 +16,24 @@
       "revId": "d48b5f5a41faeca1c0ac2c88d644bb2bd6ed5004",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b6ec0ac_049970f1",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2064,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-17T21:25:56Z",
+      "side": 0,
+      "message": "It\u0027s not mentioned in the spec so I removed it.\n\nI don\u0027t think there\u0027s a case where it could happen aside from SDP munging. In order to generate a rejected media section in the offer/answer the local transceiver would have already been stopped.",
+      "parentUuid": "175aa243_d8d79908",
+      "revId": "d48b5f5a41faeca1c0ac2c88d644bb2bd6ed5004",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
