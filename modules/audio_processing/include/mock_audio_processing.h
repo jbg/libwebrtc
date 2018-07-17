@@ -24,7 +24,8 @@ namespace test {
 
 class MockEchoCancellation : public EchoCancellation {
  public:
-  virtual ~MockEchoCancellation() {}
+  MockEchoCancellation();
+  virtual ~MockEchoCancellation();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_METHOD1(enable_drift_compensation, int(bool enable));
@@ -47,7 +48,8 @@ class MockEchoCancellation : public EchoCancellation {
 
 class MockEchoControlMobile : public EchoControlMobile {
  public:
-  virtual ~MockEchoControlMobile() {}
+  MockEchoControlMobile();
+  virtual ~MockEchoControlMobile();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_METHOD1(set_routing_mode, int(RoutingMode mode));
@@ -60,7 +62,8 @@ class MockEchoControlMobile : public EchoControlMobile {
 
 class MockGainControl : public GainControl {
  public:
-  virtual ~MockGainControl() {}
+  MockGainControl();
+  virtual ~MockGainControl();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_METHOD1(set_stream_analog_level, int(int level));
@@ -81,14 +84,16 @@ class MockGainControl : public GainControl {
 
 class MockHighPassFilter : public HighPassFilter {
  public:
-  virtual ~MockHighPassFilter() {}
+  MockHighPassFilter();
+  virtual ~MockHighPassFilter();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
 };
 
 class MockLevelEstimator : public LevelEstimator {
  public:
-  virtual ~MockLevelEstimator() {}
+  MockLevelEstimator();
+  virtual ~MockLevelEstimator();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_METHOD0(RMS, int());
@@ -96,7 +101,8 @@ class MockLevelEstimator : public LevelEstimator {
 
 class MockNoiseSuppression : public NoiseSuppression {
  public:
-  virtual ~MockNoiseSuppression() {}
+  MockNoiseSuppression();
+  virtual ~MockNoiseSuppression();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_METHOD1(set_level, int(Level level));
@@ -107,7 +113,8 @@ class MockNoiseSuppression : public NoiseSuppression {
 
 class MockCustomProcessing : public CustomProcessing {
  public:
-  virtual ~MockCustomProcessing() {}
+  MockCustomProcessing();
+  virtual ~MockCustomProcessing();
   MOCK_METHOD2(Initialize, void(int sample_rate_hz, int num_channels));
   MOCK_METHOD1(Process, void(AudioBuffer* audio));
   MOCK_METHOD1(SetRuntimeSetting,
@@ -117,7 +124,8 @@ class MockCustomProcessing : public CustomProcessing {
 
 class MockEchoControl : public EchoControl {
  public:
-  virtual ~MockEchoControl() {}
+  MockEchoControl();
+  virtual ~MockEchoControl();
   MOCK_METHOD1(AnalyzeRender, void(AudioBuffer* render));
   MOCK_METHOD1(AnalyzeCapture, void(AudioBuffer* capture));
   MOCK_METHOD2(ProcessCapture,
@@ -128,7 +136,8 @@ class MockEchoControl : public EchoControl {
 
 class MockVoiceDetection : public VoiceDetection {
  public:
-  virtual ~MockVoiceDetection() {}
+  MockVoiceDetection();
+  virtual ~MockVoiceDetection();
   MOCK_METHOD1(Enable, int(bool enable));
   MOCK_CONST_METHOD0(is_enabled, bool());
   MOCK_CONST_METHOD0(stream_has_voice, bool());
@@ -141,16 +150,8 @@ class MockVoiceDetection : public VoiceDetection {
 
 class MockAudioProcessing : public testing::NiceMock<AudioProcessing> {
  public:
-  MockAudioProcessing()
-      : echo_cancellation_(new testing::NiceMock<MockEchoCancellation>()),
-        echo_control_mobile_(new testing::NiceMock<MockEchoControlMobile>()),
-        gain_control_(new testing::NiceMock<MockGainControl>()),
-        high_pass_filter_(new testing::NiceMock<MockHighPassFilter>()),
-        level_estimator_(new testing::NiceMock<MockLevelEstimator>()),
-        noise_suppression_(new testing::NiceMock<MockNoiseSuppression>()),
-        voice_detection_(new testing::NiceMock<MockVoiceDetection>()) {}
-
-  virtual ~MockAudioProcessing() {}
+  MockAudioProcessing();
+  virtual ~MockAudioProcessing();
 
   MOCK_METHOD0(Initialize, int());
   MOCK_METHOD6(Initialize,

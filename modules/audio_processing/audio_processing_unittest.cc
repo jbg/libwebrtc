@@ -359,8 +359,8 @@ bool ReadChunk(FILE* file, int16_t* int_data, float* float_data,
 class ApmTest : public ::testing::Test {
  protected:
   ApmTest();
-  virtual void SetUp();
-  virtual void TearDown();
+  void SetUp() override;
+  void TearDown() override;
 
   static void SetUpTestCase() {
   }
@@ -1491,8 +1491,8 @@ TEST_F(ApmTest, NoProcessingWhenAllComponentsDisabledFloat) {
   };
   float dest[kSamples] = {};
 
-  auto src_channels = &src[0];
-  auto dest_channels = &dest[0];
+  auto* src_channels = &src[0];
+  auto* dest_channels = &dest[0];
 
   apm_.reset(AudioProcessingBuilder().Create());
   EXPECT_NOERR(apm_->ProcessStream(
@@ -1505,7 +1505,7 @@ TEST_F(ApmTest, NoProcessingWhenAllComponentsDisabledFloat) {
 
   // Same for ProcessReverseStream.
   float rev_dest[kSamples] = {};
-  auto rev_dest_channels = &rev_dest[0];
+  auto* rev_dest_channels = &rev_dest[0];
 
   StreamConfig input_stream = {sample_rate, 1};
   StreamConfig output_stream = {sample_rate, 1};
@@ -2348,7 +2348,7 @@ class AudioProcessingTest
     }
   }
 
-  void TearDown() {
+  void TearDown() override {
     // Remove "out" files after each test.
     ClearTempOutFiles();
   }
@@ -2760,7 +2760,7 @@ TEST(RuntimeSettingTest, TestUsageWithSwapQueue) {
 
 TEST(ApmConfiguration, EnablePostProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.
-  auto mock_post_processor_ptr =
+  auto* mock_post_processor_ptr =
       new testing::NiceMock<test::MockCustomProcessing>();
   auto mock_post_processor =
       std::unique_ptr<CustomProcessing>(mock_post_processor_ptr);
@@ -2779,7 +2779,7 @@ TEST(ApmConfiguration, EnablePostProcessing) {
 
 TEST(ApmConfiguration, EnablePreProcessing) {
   // Verify that apm uses a capture post processing module if one is provided.
-  auto mock_pre_processor_ptr =
+  auto* mock_pre_processor_ptr =
       new testing::NiceMock<test::MockCustomProcessing>();
   auto mock_pre_processor =
       std::unique_ptr<CustomProcessing>(mock_pre_processor_ptr);
@@ -2797,7 +2797,7 @@ TEST(ApmConfiguration, EnablePreProcessing) {
 }
 
 TEST(ApmConfiguration, PreProcessingReceivesRuntimeSettings) {
-  auto mock_pre_processor_ptr =
+  auto* mock_pre_processor_ptr =
       new testing::NiceMock<test::MockCustomProcessing>();
   auto mock_pre_processor =
       std::unique_ptr<CustomProcessing>(mock_pre_processor_ptr);
@@ -2820,8 +2820,8 @@ TEST(ApmConfiguration, PreProcessingReceivesRuntimeSettings) {
 
 class MyEchoControlFactory : public EchoControlFactory {
  public:
-  std::unique_ptr<EchoControl> Create(int sample_rate_hz) {
-    auto ec = new test::MockEchoControl();
+  std::unique_ptr<EchoControl> Create(int sample_rate_hz) override {
+    auto* ec = new test::MockEchoControl();
     EXPECT_CALL(*ec, AnalyzeRender(testing::_)).Times(1);
     EXPECT_CALL(*ec, AnalyzeCapture(testing::_)).Times(2);
     EXPECT_CALL(*ec, ProcessCapture(testing::_, testing::_)).Times(2);

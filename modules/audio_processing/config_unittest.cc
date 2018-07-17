@@ -65,7 +65,7 @@ struct Algo1_CostFunction {
 };
 
 struct SqrCost : Algo1_CostFunction {
-  virtual int cost(int x) const { return x * x; }
+  int cost(int x) const override { return x * x; }
 };
 
 TEST(Config, SupportsPolymorphism) {

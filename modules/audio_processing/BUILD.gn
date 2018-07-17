@@ -320,6 +320,7 @@ if (rtc_include_tests) {
     testonly = true
     sources = [
       "include/mock_audio_processing.h",
+      "mock_audio_processing.cc",
     ]
     deps = [
       ":audio_processing",
@@ -474,11 +475,6 @@ if (rtc_include_tests) {
         "test/test_utils.h",
         "voice_detection_unittest.cc",
       ]
-    }
-
-    if ((!build_with_chromium || is_win) && is_clang) {
-      # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-      suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
     }
   }
 

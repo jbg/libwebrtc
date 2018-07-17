@@ -23,7 +23,7 @@ class MovingMomentsTest : public ::testing::Test {
   static const size_t kMovingMomentsBufferLength = 5;
   static const size_t kMaxOutputLength = 20;  // Valid for this tests only.
 
-  virtual void SetUp();
+  void SetUp() override;
   // Calls CalculateMoments and verifies that it produces the expected
   // outputs.
   void CalculateMomentsAndVerify(const float* input,
