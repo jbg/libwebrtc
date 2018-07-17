@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d246fee4_62fbb23e",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-17T08:36:13Z",
+      "side": 1,
+      "message": "nit: Are these changes pointed out by find_bad_constructs?\nI can\u0027t discern which case would cause it, but maybe I\u0027m looking in the wrong place.\nhttps://github.com/adobe/chromium/blob/master/tools/clang/plugins/FindBadConstructs.cpp#L7",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "a8ba493da3dfd57ecf518fdf83e7fff0b6b3be5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
