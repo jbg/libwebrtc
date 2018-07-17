@@ -22,6 +22,30 @@
       "revId": "a8ba493da3dfd57ecf518fdf83e7fff0b6b3be5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24b6c58e_4efcdb12",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-17T08:47:01Z",
+      "side": 1,
+      "message": "\u003e nit: Are these changes pointed out by find_bad_constructs?\n\u003e I can\u0027t discern which case would cause it, but maybe I\u0027m looking in the wrong place.\n\u003e https://github.com/adobe/chromium/blob/master/tools/clang/plugins/FindBadConstructs.cpp#L7\n\nYes, all these changes are pointed out by find_bad_constructs.\nThe location of the plugin we use is: https://cs.chromium.org/chromium/src/tools/clang/plugins.\n\nThe error for this specific case is here: https://cs.chromium.org/chromium/src/tools/clang/plugins/FindBadConstructsConsumer.cpp?l\u003d197\u0026rcl\u003d657bf20a476b721ac0d069f8323ab7b134b626ee.",
+      "parentUuid": "d246fee4_62fbb23e",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "a8ba493da3dfd57ecf518fdf83e7fff0b6b3be5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
