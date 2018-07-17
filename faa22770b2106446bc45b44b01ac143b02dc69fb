@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "b57622ac_bd6358db",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-17T22:19:00Z",
+      "side": 1,
+      "message": "Maybe it would be worth tracking the last stream ID received and DCHECKing that it is the same when appending to a non-empty buffer? That way it would crash if the assumption was ever false instead of silently corrupting the data.",
+      "parentUuid": "8c97c538_a32b4788",
+      "range": {
+        "startLine": 296,
+        "startChar": 17,
+        "endLine": 296,
+        "endChar": 33
+      },
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62a06f93_a339062e",
         "filename": "media/sctp/sctptransport.cc",
         "patchSetId": 2
