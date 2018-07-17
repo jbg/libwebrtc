@@ -142,6 +142,11 @@ class SctpTransport : public SctpTransportInternal,
   rtc::AsyncInvoker invoker_;
   // Underlying DTLS channel.
   rtc::PacketTransportInternal* transport_ = nullptr;
+
+  // Track the data received from usrsctp between callbacks until the EOR bit
+  // arrives.
+  rtc::CopyOnWriteBuffer partial_message_;
+
   bool was_ever_writable_ = false;
   int local_port_ = kSctpDefaultPort;
   int remote_port_ = kSctpDefaultPort;
