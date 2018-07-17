@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "175aa243_d8d79908",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2064,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-17T11:58:49Z",
+      "side": 0,
+      "message": "Where did the logic that calls transceiver-\u003eStop() go?\nIt seems scary that removing a call to Stop() didn\u0027t change any tests.\n(Did it collapse into the Stop() on line 2469? Was it called twice before?)",
+      "revId": "d48b5f5a41faeca1c0ac2c88d644bb2bd6ed5004",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
