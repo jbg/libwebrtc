@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "63e2a333_eb63aaed",
+        "filename": "examples/objc/AppRTCMobile/ARDAppClient.m",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "avoid poorly-named intermediate var by using dict literal directly.",
+      "range": {
+        "startLine": 535,
+        "startChar": 54,
+        "endLine": 535,
+        "endChar": 55
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19e8c58b_fa59afca",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
         "patchSetId": 3
@@ -18,6 +41,69 @@
         "startChar": 60,
         "endLine": 191,
         "endChar": 86
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d34817e_1c39c2a3",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "This log statement does not seem super useful to me.",
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1791e875_ca017f00",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "please use better variable names",
+      "range": {
+        "startLine": 455,
+        "startChar": 12,
+        "endLine": 455,
+        "endChar": 15
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f072874_e8b44e88",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "this needs a better name",
+      "range": {
+        "startLine": 470,
+        "startChar": 13,
+        "endLine": 470,
+        "endChar": 17
       },
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
@@ -71,6 +157,29 @@
     },
     {
       "key": {
+        "uuid": "4e973757_a82eff6d",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "This should go in RTCCertificate.m",
+      "range": {
+        "startLine": 494,
+        "startChar": 1,
+        "endLine": 494,
+        "endChar": 15
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ae7a8ea3_76354f44",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
         "patchSetId": 3
@@ -82,6 +191,52 @@
       "writtenOn": "2018-07-16T23:58:08Z",
       "side": 1,
       "message": "nit: style guide requires periods at the end of comments.",
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ec77ec3_f86897f4",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "Why are these nullable?",
+      "range": {
+        "startLine": 24,
+        "startChar": 31,
+        "endLine": 24,
+        "endChar": 39
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f604e3d_9fda318d",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "Is this the designated initializer? Mark it as such and declare init as unavailable.",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 31
+      },
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -104,6 +259,75 @@
         "startChar": 33,
         "endLine": 78,
         "endChar": 34
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "600678db_79f85e5e",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "generateCertificateWithParams:params",
+      "range": {
+        "startLine": 179,
+        "startChar": 20,
+        "endLine": 179,
+        "endChar": 39
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "407ace4c_39b591bf",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "nullable",
+      "range": {
+        "startLine": 179,
+        "startChar": 41,
+        "endLine": 179,
+        "endChar": 53
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "087517bf_0dfa5005",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-17T08:25:27Z",
+      "side": 1,
+      "message": "Aslo, this feels like it should be a class method on RTCCertificate rather than an instance method on RTCConfiguration.",
+      "range": {
+        "startLine": 179,
+        "startChar": 20,
+        "endLine": 179,
+        "endChar": 39
       },
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
