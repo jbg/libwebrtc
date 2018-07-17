@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "330f92c8_8af88cc9",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2607,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-17T08:45:27Z",
+      "side": 1,
+      "message": "(Not an edge-case whether it would happen: usually you would have a stream with two tracks, but edge-case in the sense that you would care about the difference. It might arguably be more useful that the stream is in a complete state when the event fires - something I suggested on the spec, but consensus was that it should only be added and fired iteratively.)",
+      "parentUuid": "1091ea2b_4cab8ad5",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "181dc11f_5c758136",
         "filename": "pc/peerconnection_rtp_unittest.cc",
         "patchSetId": 2
