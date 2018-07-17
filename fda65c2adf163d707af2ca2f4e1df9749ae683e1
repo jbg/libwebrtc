@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "543230c7_354cb758",
+        "filename": "api/rtptransceiverinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-17T08:41:49Z",
+      "side": 1,
+      "message": "Can you add a default implementation returning nullopt as to not break chrome on import having fake/mock implementations of this interface?",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1091ea2b_4cab8ad5",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2607,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-17T08:41:49Z",
+      "side": 1,
+      "message": "This might not matter because it\u0027s an edge-case spec detail about streams, which are implemented in Chrome and not affected by how this is handled natively, and natively streams are going away, so whatever -- but:\n\nIn the spec, tracks are added/removed from the stream after all transceivers have been updated when looping through the addList/removeList (when firing the events). The observable difference is if you have a stream with multiple tracks and you observe stream.getTracks() inside of the events firing. With the current code, when the first event fires the stream will already be empty. In spec, when the first even fires only the first track has been removed, not until the second one fires has both been removed.\n\nJust wanted to call that out. I would not bother fixing it since it\u0027s native-only and change of behavior, but if I did I would fix it in a separate CL.",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "181dc11f_5c758136",
         "filename": "pc/peerconnection_rtp_unittest.cc",
         "patchSetId": 2
@@ -13,6 +47,24 @@
       "writtenOn": "2018-07-16T23:09:43Z",
       "side": 1,
       "message": "This test was passing before unintentionally because the SRDs with no answer would cause the track to be added twice which updates the remote streams (in the \"add remote track\" step). Now, the track is only added the first time and there is no language in the specification to update the streams each time SRD is called. So for now I\u0027ve commented it out and will revisit once the spec bug is resolved.",
+      "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f9d2956_097fd773",
+        "filename": "pc/peerconnection_rtp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-17T08:41:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "181dc11f_5c758136",
       "revId": "fda65c2adf163d707af2ca2f4e1df9749ae683e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
