@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d258f72d_b90aaaff",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2018-07-18T17:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d63a77_a02c760e",
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcbda446_45411e3f",
         "filename": "media/sctp/sctptransport.cc",
         "patchSetId": 2
@@ -105,6 +123,30 @@
       "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "701988c2_e919d951",
+        "filename": "media/sctp/sctptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2018-07-18T17:53:55Z",
+      "side": 1,
+      "message": "The scenario described would only happen in the case of an usrsctp bug in the handling of an sctp protocol violation. Decided on a CHECK rather that a DCHECK, to be sure we\u0027ll be informed even in stable Chrome versions.",
+      "parentUuid": "b57622ac_bd6358db",
+      "range": {
+        "startLine": 296,
+        "startChar": 17,
+        "endLine": 296,
+        "endChar": 33
+      },
+      "revId": "faa22770b2106446bc45b44b01ac143b02dc69fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
