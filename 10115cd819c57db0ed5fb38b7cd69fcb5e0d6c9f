@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7cfd731b_9bc08276",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Done, using default memory order. Low usage in WebRTC, hence can\u0027t follow existing style.",
+      "parentUuid": "cacaf596_6f34457c",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f8ef268_76344084",
         "filename": "modules/audio_device/audio_device_unittest.cc",
         "patchSetId": 18
@@ -33,6 +51,24 @@
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1620980d_168b59d2",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Bad comment, sorry. Improved now.",
+      "parentUuid": "7f8ef268_76344084",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c0c0994a_5071263c",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Used for testing only to ensure that callbacks are active. But adds text 100 times per second.\nNow removed.",
+      "parentUuid": "a8ca8b5f_dc567989",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c31deed_21ade59b",
         "filename": "modules/audio_device/audio_device_unittest.cc",
         "patchSetId": 18
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "60dbf144_af1bfdbc",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c31deed_21ade59b",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7018b9e_63bf82b3",
         "filename": "modules/audio_device/win/audio_device_module_win.cc",
         "patchSetId": 18
@@ -81,6 +153,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "I understand why you created a separate interface for the \"testing\" version of an AudioDeviceModule, but there\u0027s no reason to rename the implementation just because it inherits from it. It\u0027s quite confusing if the ForTest version is used in production.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b599fd9_7d004ffb",
+        "filename": "modules/audio_device/win/audio_device_module_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Worked with kwiberg@ on this part. Tried different ways but felt that this approach was ok.\n\nNote that, a user is supposed to look at the factory and use:\n\nrtc::scoped_refptr\u003cAudioDeviceModule\u003e CreateWindowsCoreAudioAudioDeviceModule();\n\nor for testing\n\nrtc::scoped_refptr\u003cAudioDeviceModuleForTest\u003e\nCreateWindowsCoreAudioAudioDeviceModuleForTest();\n\nwhere the first method creates a ForTest version but downcasts it to a default ADM.\nWill lead to minor overhead.\n\nI honestly can\u0027t come up with a more clear approach.\n\nOh, I did rename the main class and removed the FoTest-postfix. See your point there.",
+      "parentUuid": "e7018b9e_63bf82b3",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "cc954672_012f29cf",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Well, I did that at first but it felt more safe to actually try to create the object since I\u0027ve seen examples where things can fail even on platforms where things should be supported. Also, see thus style in Chrome. But again, let\u0027s discuss.\n\nI will leave all correlated comments below with the same comment.",
+      "parentUuid": "45755cda_45f66df3",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fca2ee61_dc55b9a5",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -118,6 +226,24 @@
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f6eea65_9d0c2768",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fca2ee61_dc55b9a5",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "37e63b26_f95d90d4",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3336df1a_f60dae32",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "224ceae8_92bd4bff",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -149,6 +293,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "Could this reasonably fail while we still would have audio playback working? Do we want to fail in those cases, or could we keep running without an IAudioSessionControl?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "566df836_683c0bcf",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Not sure actually. As is, both input and output needs this one or they will fail to be created. Don\u0027t know if it is worth the effort to try to run audio with an audio session control in one direction only. Best I can do for now.",
+      "parentUuid": "224ceae8_92bd4bff",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "3096076a_30d392da",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bca17b76_bf130208",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1af2e549_0f67f74e",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "45496e13_da194cbc",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Not needed. Removed.",
+      "parentUuid": "1af2e549_0f67f74e",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68f56bbc_f6a15fb3",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -200,6 +398,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "Why not have each part of the if-else set *object and return?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd0520cd_fce43914",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Modified to same style as in Chrome (see link above).\nNote that, this method is never called. Again. Usage of IUnknown is rather odd for these callback interfaces when you \"are\" the callback interface.",
+      "parentUuid": "68f56bbc_f6a15fb3",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "3bc177db_088ff42f",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "In the current solution (which does not use IMMDeviceNotification), we only look at \"stream was disconnected\", and the selected device does not matter. As soon as any active device is removed and that device affects the stream, we switch to the next default device. You can remove a device without any effect if it is not tied to an active stream.",
+      "parentUuid": "6ff7b841_c13bd3b6",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac4b59fd_52b6beb8",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -234,6 +468,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "Join these into one if-statement.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20d3f921_cb233749",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "I might be tired but I don\u0027t understand; can you elaborate?\n\nAnd you want me to use std::atomic as well?",
+      "parentUuid": "ac4b59fd_52b6beb8",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "db9fb546_48aa3166",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "My bad. Fixed.",
+      "parentUuid": "7cad2260_e3e53e74",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57a76d67_73094c00",
         "filename": "modules/audio_device/win/core_audio_base_win.h",
         "patchSetId": 18
@@ -268,6 +538,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "Why this name?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88cb0d77_de63a48f",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Comes from a well-known design pattern in COM where you:\n- check if not-null, and then\n- release\n\nI can change to plain Release() if you like.",
+      "parentUuid": "57a76d67_73094c00",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -297,6 +585,30 @@
     },
     {
       "key": {
+        "uuid": "bd3fb3de_692cc051",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "I have seen this pattern in Chrome and was not able to come up with a better idea. Felt OK since you got that dynamic part where you try to create them from 3 down to 1 and stop as soon as it works. But I am open for ideas, of course.",
+      "parentUuid": "c91aa600_2a20060c",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 55
+      },
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba879b22_00eb5ca2",
         "filename": "modules/audio_device/win/core_audio_base_win.h",
         "patchSetId": 18
@@ -308,6 +620,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "Hmmm... these seem like they could (or should) keep the object alive longer than necessary. Would it make sense to separate the IAudioSessionEvents/IMMNotificationClient functionality into a separate class?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98301306_99d9c9c2",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "I know that it looks odd but I must blame how the interface is designed. We have the exact same issue in Chrome and there we simply add a comment about \"proper COM reference counting is not implemented\" and simply return a hard-coded 1 in both Add and Release. I added some basic support just to be able to track that we were OK.\n\nGiven that the use of AddRef, Release and QueryInterface is very awkward for these interfaces, I only think it would be confusing to break out a specific implementation and control its lifetime using reference counting.\n\nSee https://cs.chromium.org/chromium/src/remoting/host/win/default_audio_device_change_detector.h?q\u003dimmnotificationclient\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d18 for Chrome example.\n\nIn short, I think it is OK to rely on a scheme where we know that, as soon as our main client is not leaked, these interfaces will not leak either. But let\u0027s discuss off-line.",
+      "parentUuid": "ba879b22_00eb5ca2",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -331,6 +661,24 @@
     },
     {
       "key": {
+        "uuid": "3347bd1e_935e367e",
+        "filename": "modules/audio_device/win/core_audio_input_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Good point but I don\u0027t have a clear answer. Have not designed for such a case and can\u0027t say for sure. Would have to do more work to (1) figure out what happens, and (2), redesign if current approach is not sufficient. Will not have time with any major changes the last day(s) before I go on vacation.",
+      "parentUuid": "20a5e1e4_2868d616",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "747cbef9_3c991f1d",
         "filename": "modules/audio_device/win/core_audio_utility_win.cc",
         "patchSetId": 18
@@ -348,6 +696,24 @@
     },
     {
       "key": {
+        "uuid": "79a379e6_99bce795",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "Great comment. Fixed. The version is now logged on the client side instead when an IAudioClient is created.",
+      "parentUuid": "747cbef9_3c991f1d",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f3f6c61_f1ab29d5",
         "filename": "modules/audio_device/win/core_audio_utility_win.h",
         "patchSetId": 18
@@ -359,6 +725,24 @@
       "writtenOn": "2018-07-18T10:04:25Z",
       "side": 1,
       "message": "Shouldn\u0027t this then take an IAudioClient2*?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d04bb4_70777097",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-18T13:07:06Z",
+      "side": 1,
+      "message": "I could implement it that way, and perhaps it would be more clear. But instead I tried to hide those parts internally. Compare with IAudioClient::Initialize() which can be called also for IAudioClient2. Hence, what I do today is like so:\n\nIAudioClient* audio_client \u003d nullptr;\n  if (audio_client3) {\n    audio_client \u003d audio_client3.Get();\n  } else if (audio_client2) {\n    audio_client \u003d audio_client2.Get();\n  } else {\n    audio_client \u003d audio_client1.Get();\n  }\n\nand then\n\nif (core_audio_utility::GetAudioClientVersion() \u003e 1) {\n    if (FAILED(core_audio_utility::SetClientProperties(audio_client))) {\n      return false;\n    }\n  }\n\nI guess you want me to instead force the client to call:\n\ncore_audio_utility::SetClientProperties(audio_client2.Get())\n\nbut it felt more clean to use as I did and cast IAudioClient to IAudioClient2 internally.\n\nPerhaps we can discuss pros and cons in the office.",
+      "parentUuid": "5f3f6c61_f1ab29d5",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
