@@ -22,6 +22,30 @@
       "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17fa6b1c_33d82b14",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2018-07-18T19:59:05Z",
+      "side": 1,
+      "message": "Ok, here is my interpretation, but since I\u0027m no C++ expert I might be wrong:\n- \u0027const\u0027 assures that no code can change the value of the variable\n- \u0027static\u0027 assures that there is one instance per compile unit (the file in this case). Static variable are initialized once before the application is started (e.g. before main() is invoked).\n\nUsing \u0027static const\u0027 combines immutable with single initialization. Without \u0027static\u0027 the variable would be put on the stack and initialized on every invocation of the function.",
+      "parentUuid": "ebd8dde8_eb1c23df",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 10
+      },
+      "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
