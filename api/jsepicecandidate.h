@@ -18,6 +18,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "api/candidate.h"
 #include "api/jsep.h"
 #include "rtc_base/constructormagic.h"
@@ -27,9 +28,10 @@ namespace webrtc {
 // Implementation of IceCandidateInterface.
 class JsepIceCandidate : public IceCandidateInterface {
  public:
-  JsepIceCandidate(const std::string& sdp_mid, int sdp_mline_index);
   JsepIceCandidate(const std::string& sdp_mid,
-                   int sdp_mline_index,
+                   absl::optional<unsigned short> sdp_mline_index);
+  JsepIceCandidate(const std::string& sdp_mid,
+                   absl::optional<unsigned short> sdp_mline_index,
                    const cricket::Candidate& candidate);
   ~JsepIceCandidate();
   // |err| may be null.
@@ -39,7 +41,9 @@ class JsepIceCandidate : public IceCandidateInterface {
   }
 
   virtual std::string sdp_mid() const { return sdp_mid_; }
-  virtual int sdp_mline_index() const { return sdp_mline_index_; }
+  virtual absl::optional<unsigned short> sdp_mline_index() const {
+    return sdp_mline_index_;
+  }
   virtual const cricket::Candidate& candidate() const { return candidate_; }
 
   virtual std::string server_url() const { return candidate_.url(); }
@@ -48,7 +52,7 @@ class JsepIceCandidate : public IceCandidateInterface {
 
  private:
   std::string sdp_mid_;
-  int sdp_mline_index_;
+  absl::optional<unsigned short> sdp_mline_index_;
   cricket::Candidate candidate_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(JsepIceCandidate);

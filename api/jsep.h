@@ -59,7 +59,7 @@ class IceCandidateInterface {
   virtual std::string sdp_mid() const = 0;
   // This indicates the index (starting at zero) of m= section this candidate
   // is associated with. Needed when an endpoint doesn't support MIDs.
-  virtual int sdp_mline_index() const = 0;
+  virtual absl::optional<unsigned short> sdp_mline_index() const = 0;
   // Only for use internally.
   virtual const cricket::Candidate& candidate() const = 0;
   // The URL of the ICE server which this candidate was gathered from.
@@ -73,10 +73,11 @@ class IceCandidateInterface {
 // Creates a IceCandidateInterface based on SDP string.
 // Returns null if the sdp string can't be parsed.
 // |error| may be null.
-IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
-                                          int sdp_mline_index,
-                                          const std::string& sdp,
-                                          SdpParseError* error);
+IceCandidateInterface* CreateIceCandidate(
+    const std::string& sdp_mid,
+    absl::optional<unsigned short> sdp_mline_index,
+    const std::string& sdp,
+    SdpParseError* error);
 
 // This class represents a collection of candidates for a specific m= section.
 // Used in SessionDescriptionInterface.

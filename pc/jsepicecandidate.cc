@@ -12,15 +12,17 @@
 
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "pc/webrtcsdp.h"
 #include "rtc_base/stringencode.h"
 
 namespace webrtc {
 
-IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
-                                          int sdp_mline_index,
-                                          const std::string& sdp,
-                                          SdpParseError* error) {
+IceCandidateInterface* CreateIceCandidate(
+    const std::string& sdp_mid,
+    absl::optional<unsigned short> sdp_mline_index,
+    const std::string& sdp,
+    SdpParseError* error) {
   JsepIceCandidate* jsep_ice = new JsepIceCandidate(sdp_mid, sdp_mline_index);
   if (!jsep_ice->Initialize(sdp, error)) {
     delete jsep_ice;
@@ -29,13 +31,15 @@ IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
   return jsep_ice;
 }
 
-JsepIceCandidate::JsepIceCandidate(const std::string& sdp_mid,
-                                   int sdp_mline_index)
+JsepIceCandidate::JsepIceCandidate(
+    const std::string& sdp_mid,
+    absl::optional<unsigned short> sdp_mline_index)
     : sdp_mid_(sdp_mid), sdp_mline_index_(sdp_mline_index) {}
 
-JsepIceCandidate::JsepIceCandidate(const std::string& sdp_mid,
-                                   int sdp_mline_index,
-                                   const cricket::Candidate& candidate)
+JsepIceCandidate::JsepIceCandidate(
+    const std::string& sdp_mid,
+    absl::optional<unsigned short> sdp_mline_index,
+    const cricket::Candidate& candidate)
     : sdp_mid_(sdp_mid),
       sdp_mline_index_(sdp_mline_index),
       candidate_(candidate) {}
