@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4b9603a_61e945ac",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "I think you should be able to just return rec_sample_rate_ here. It\u0027ll implicitly convert to the underlying type. Although, why are you setting using uint32_t but getting using int32_t. That seems strange!",
+      "revId": "901eca5a49ca9c4aa05e1a1709ce677fbc509d97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

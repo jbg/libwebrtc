@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "74891739_2d1115f5",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "I\u0027d just use the \u003d operator for assignment, i.e.:\n  rec_sample_rate_ \u003d rtc::dchecked_cast\u003cint\u003e(fsHz);\nin this case.",
+      "parentUuid": "7cfd731b_9bc08276",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f8ef268_76344084",
         "filename": "modules/audio_device/audio_device_unittest.cc",
         "patchSetId": 18
@@ -177,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "189d4556_2713aa38",
+        "filename": "modules/audio_device/win/audio_device_module_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "Good, that was my only major gripe with it. The other parts seem sensible!",
+      "parentUuid": "1b599fd9_7d004ffb",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45755cda_45f66df3",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -206,6 +242,24 @@
       "side": 1,
       "message": "Well, I did that at first but it felt more safe to actually try to create the object since I\u0027ve seen examples where things can fail even on platforms where things should be supported. Also, see thus style in Chrome. But again, let\u0027s discuss.\n\nI will leave all correlated comments below with the same comment.",
       "parentUuid": "45755cda_45f66df3",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bd3658b_075095af",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "Well, if you can\u0027t trust GetAudioClientVersion here, then you can\u0027t use it to determine which version you actually have in the two util functions that require version 2. Let\u0027s hash this out on Friday!",
+      "parentUuid": "cc954672_012f29cf",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -422,6 +476,24 @@
     },
     {
       "key": {
+        "uuid": "78cb0cb6_a04f8786",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "Alright, this is fine if you move *object \u003d nullptr down before the last return. Why set it twice on success?",
+      "parentUuid": "bd0520cd_fce43914",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6ff7b841_c13bd3b6",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -492,6 +564,24 @@
     },
     {
       "key": {
+        "uuid": "40131405_3deea38b",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "Both the if and else if blocks do the same things, so why not just have one if that covers both DisconnectReasons?\n\nAnd, yes, I believe we want to move towards std::atomic, now that it\u0027s available, so at least use it in new code.",
+      "parentUuid": "20d3f921_cb233749",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7cad2260_e3e53e74",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -556,6 +646,24 @@
       "side": 1,
       "message": "Comes from a well-known design pattern in COM where you:\n- check if not-null, and then\n- release\n\nI can change to plain Release() if you like.",
       "parentUuid": "57a76d67_73094c00",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a5b2e27_dca19cf5",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T14:09:08Z",
+      "side": 1,
+      "message": "It\u0027s just so generic, and close to our ref counted objects\u0027 Release() method. Why not call it ReleaseComObjects() or something like that? You might not even have to have that comment above it then. :)",
+      "parentUuid": "88cb0d77_de63a48f",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
