@@ -70,6 +70,30 @@
       "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4af7130_d01cde95",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-18T20:31:50Z",
+      "side": 1,
+      "message": "The style guide says you can either use an anonymous namespace or static.\n\nIn general I think the anonymous namespace is good for utilities used throughout the file.\n\nIf something is just going to be used once, it is more readable to define it static so that it can be put next to the code that uses it.",
+      "parentUuid": "6f7b954f_fa307a1b",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 10
+      },
+      "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
