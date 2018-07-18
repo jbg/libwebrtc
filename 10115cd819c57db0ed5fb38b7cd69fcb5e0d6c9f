@@ -1,0 +1,384 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cacaf596_6f34457c",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Chromium now allows the use of std::atomic. I\u0027d prefer it if you used that instead of WebRTC\u0027s own atomics. (see: https://chromium-cpp.appspot.com/#library-whitelist)",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f8ef268_76344084",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "What?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8ca8b5f_dc567989",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c31deed_21ade59b",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "wat?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7018b9e_63bf82b3",
+        "filename": "modules/audio_device/win/audio_device_module_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "I understand why you created a separate interface for the \"testing\" version of an AudioDeviceModule, but there\u0027s no reason to rename the implementation just because it inherits from it. It\u0027s quite confusing if the ForTest version is used in production.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45755cda_45f66df3",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Can\u0027t you just decide which one to create based on the value returned by GetAudioClientVersion()?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fca2ee61_dc55b9a5",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "I\u0027d prefer it if you used \u003e\u003d \u003cexpected version\u003e instead. It\u0027s slightly easier to reason about in this case.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3336df1a_f60dae32",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "0 * X \u003d 0. :)\nNo reason for the multiplication.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "224ceae8_92bd4bff",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Could this reasonably fail while we still would have audio playback working? Do we want to fail in those cases, or could we keep running without an IAudioSessionControl?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bca17b76_bf130208",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "That\u0027s not how that\u0027s spelled.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1af2e549_0f67f74e",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Why are you qualifying the SetDevice call with CoreAudioBase::?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68f56bbc_f6a15fb3",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Why not have each part of the if-else set *object and return?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ff7b841_c13bd3b6",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "What if we had opened a non-default device? Can we do that (I guess so)? Do we still want to revert to the default device?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac4b59fd_52b6beb8",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Join these into one if-statement.",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cad2260_e3e53e74",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Why commented out?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a76d67_73094c00",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Why this name?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c91aa600_2a20060c",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "This is not very nice. You should be able to only keep an IAudioClient and a version number. Let me think about this a bit...",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 55
+      },
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba879b22_00eb5ca2",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Hmmm... these seem like they could (or should) keep the object alive longer than necessary. Would it make sense to separate the IAudioSessionEvents/IMMNotificationClient functionality into a separate class?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20a5e1e4_2868d616",
+        "filename": "modules/audio_device/win/core_audio_input_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Can this race with the main thread? What happens if the user calls StopRecording() just as a device is disconnected? Could it get erroneously restarted on a new device, with the user\u0027s Stop being ignored?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "747cbef9_3c991f1d",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Seems like this could cause a lot of (debug) logging, if this is called in several places. Maybe just log this when trying to create an IAudioClientX?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f3f6c61_f1ab29d5",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this then take an IAudioClient2*?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51a55859_43dd39ca",
+        "filename": "modules/audio_device/win/core_audio_utility_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-18T10:04:25Z",
+      "side": 1,
+      "message": "Same here?",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
