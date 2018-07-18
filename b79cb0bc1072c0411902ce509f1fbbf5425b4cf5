@@ -46,6 +46,30 @@
       "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f7b954f_fa307a1b",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-07-18T20:26:40Z",
+      "side": 1,
+      "message": "Ack. Just throwing one more thought here on the nit: in our codebase, we have mostly used global but only file-visible constants with the anonymous namespace as kMaxWait above. I am just wondering if there is a style guide item on that.",
+      "parentUuid": "17fa6b1c_33d82b14",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 10
+      },
+      "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
