@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebd8dde8_eb1c23df",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-07-18T18:28:03Z",
+      "side": 1,
+      "message": "question: why do we need static here?",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 10
+      },
+      "revId": "b79cb0bc1072c0411902ce509f1fbbf5425b4cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
