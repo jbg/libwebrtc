@@ -9,6 +9,7 @@
  */
 
 #include "modules/audio_device/win/core_audio_base_win.h"
+#include "modules/audio_device/audio_device_buffer.h"
 
 #include <string>
 
@@ -17,6 +18,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
+#include "rtc_base/timeutils.h"
 #include "rtc_base/win/windows_version.h"
 
 using Microsoft::WRL::ComPtr;
@@ -25,10 +27,16 @@ namespace webrtc {
 namespace webrtc_win {
 namespace {
 
+// Each unit of reference time is 100 nanoseconds, hence |kReftimesPerSec|
+// corresponds to one second.
+// TODO(henrika): possibly add usage in Init().
+// const REFERENCE_TIME kReferenceTimesPerSecond = 10000000;
+
 enum DefaultDeviceType {
-  kDefault,
-  kDefaultCommunications,
-  kDefaultDeviceTypeMaxCount,
+  kUndefined = -1,
+  kDefault = 0,
+  kDefaultCommunications = 1,
+  kDefaultDeviceTypeMaxCount = kDefaultCommunications + 1,
 };
 
 const char* DirectionToString(CoreAudioBase::Direction direction) {
@@ -42,6 +50,39 @@ const char* DirectionToString(CoreAudioBase::Direction direction) {
   }
 }
 
+const char* SessionStateToString(AudioSessionState state) {
+  switch (state) {
+    case AudioSessionStateActive:
+      return "Active";
+    case AudioSessionStateInactive:
+      return "Inactive";
+    case AudioSessionStateExpired:
+      return "Expired";
+    default:
+      return "Invalid";
+  }
+}
+
+const char* SessionDisconnectReasonToString(
+    AudioSessionDisconnectReason reason) {
+  switch (reason) {
+    case DisconnectReasonDeviceRemoval:
+      return "DeviceRemoval";
+    case DisconnectReasonServerShutdown:
+      return "ServerShutdown";
+    case DisconnectReasonFormatChanged:
+      return "FormatChanged";
+    case DisconnectReasonSessionLogoff:
+      return "SessionLogoff";
+    case DisconnectReasonSessionDisconnected:
+      return "Disconnected";
+    case DisconnectReasonExclusiveModeOverride:
+      return "ExclusiveModeOverride";
+    default:
+      return "Invalid";
+  }
+}
+
 void Run(void* obj) {
   RTC_DCHECK(obj);
   reinterpret_cast<CoreAudioBase*>(obj)->ThreadRun();
@@ -49,8 +90,14 @@ void Run(void* obj) {
 
 }  // namespace
 
-CoreAudioBase::CoreAudioBase(Direction direction, OnDataCallback callback)
-    : direction_(direction), on_data_callback_(callback), format_() {
+CoreAudioBase::CoreAudioBase(Direction direction,
+                             OnDataCallback data_callback,
+                             OnErrorCallback error_callback)
+    : format_(),
+      direction_(direction),
+      on_data_callback_(data_callback),
+      on_error_callback_(error_callback),
+      device_index_(kUndefined) {
   RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction) << "]";
 
   // Create the event which the audio engine will signal each time a buffer
@@ -58,17 +105,31 @@ CoreAudioBase::CoreAudioBase(Direction direction, OnDataCallback callback)
   audio_samples_event_.Set(CreateEvent(nullptr, false, false, nullptr));
   RTC_DCHECK(audio_samples_event_.IsValid());
 
-  // Event to be be set in Stop() when rendering/capturing shall stop.
+  // Event to be set in Stop() when rendering/capturing shall stop.
   stop_event_.Set(CreateEvent(nullptr, false, false, nullptr));
   RTC_DCHECK(stop_event_.IsValid());
+
+  // Event to be set when it has been detected that an active device has been
+  // invalidated or the stream format has changed.
+  restart_event_.Set(CreateEvent(nullptr, false, false, nullptr));
+  RTC_DCHECK(restart_event_.IsValid());
 }
 
 CoreAudioBase::~CoreAudioBase() {
   RTC_DLOG(INFO) << __FUNCTION__;
+  RTC_DCHECK_EQ(ref_count_, 1);
 }
 
 EDataFlow CoreAudioBase::GetDataFlow() const {
   return direction_ == CoreAudioBase::Direction::kOutput ? eRender : eCapture;
+}
+
+bool CoreAudioBase::IsRestarting() const {
+  return rtc::AtomicOps::AcquireLoad(&is_restarting_) == 1;
+}
+
+int64_t CoreAudioBase::TimeSinceStart() const {
+  return rtc::TimeSince(start_time_);
 }
 
 int CoreAudioBase::NumberOfActiveDevices() const {
@@ -78,6 +139,27 @@ int CoreAudioBase::NumberOfActiveDevices() const {
 int CoreAudioBase::NumberOfEnumeratedDevices() const {
   const int num_active = NumberOfActiveDevices();
   return num_active > 0 ? num_active + kDefaultDeviceTypeMaxCount : 0;
+}
+
+void CoreAudioBase::SafeRelease() {
+  RTC_DLOG(INFO) << __FUNCTION__;
+  // ComPtr::Reset() sets the ComPtr to nullptr releasing any previous
+  // reference.
+  if (audio_client_) {
+    audio_client_.Reset();
+  }
+  if (audio_client2_) {
+    audio_client2_.Reset();
+  }
+  if (audio_client3_) {
+    audio_client3_.Reset();
+  }
+  if (audio_clock_.Get()) {
+    audio_clock_.Reset();
+  }
+  if (audio_session_control_.Get()) {
+    audio_session_control_.Reset();
+  }
 }
 
 bool CoreAudioBase::IsDefaultDevice(int index) const {
@@ -138,6 +220,21 @@ std::string CoreAudioBase::GetDeviceID(int index) const {
   return device_id;
 }
 
+int CoreAudioBase::SetDevice(int index) {
+  RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
+                 << "]";
+  if (initialized_) {
+    return -1;
+  }
+
+  std::string device_id = GetDeviceID(index);
+  RTC_DLOG(INFO) << "index=" << index << " => device_id: " << device_id;
+  device_index_ = index;
+  device_id_ = device_id;
+
+  return device_id_.empty() ? -1 : 0;
+}
+
 int CoreAudioBase::DeviceName(int index,
                               std::string* name,
                               std::string* guid) const {
@@ -165,16 +262,28 @@ int CoreAudioBase::DeviceName(int index,
   return 0;
 }
 
+IAudioClient* CoreAudioBase::GetAudioClient() const {
+  if (audio_client3_) {
+    return audio_client3_.Get();
+  } else if (audio_client2_) {
+    return audio_client2_.Get();
+  } else if (audio_client_) {
+    return audio_client_.Get();
+  } else {
+    return nullptr;
+  }
+}
+
 bool CoreAudioBase::Init() {
   RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
                  << "]";
   RTC_DCHECK(!device_id_.empty());
   RTC_DCHECK(audio_device_buffer_);
-  RTC_DCHECK(!audio_client_.Get());
+  RTC_DCHECK(!GetAudioClient());
+  RTC_DCHECK(!audio_session_control_.Get());
 
   // Use an existing |device_id_| and set parameters which are required to
   // create an audio client. It is up to the parent class to set |device_id_|.
-  // TODO(henrika): improve device notification.
   std::string device_id = device_id_;
   ERole role = eConsole;
   if (IsDefaultDevice(device_id)) {
@@ -183,19 +292,63 @@ bool CoreAudioBase::Init() {
   } else if (IsDefaultCommunicationsDevice(device_id)) {
     device_id = AudioDeviceName::kDefaultCommunicationsDeviceId;
     role = eCommunications;
+  } else {
+    RTC_DLOG(LS_WARNING) << "Not using a default device";
   }
 
   // Create an IAudioClient interface which enables us to create and initialize
   // an audio stream between an audio application and the audio engine.
-  ComPtr<IAudioClient> audio_client =
-      core_audio_utility::CreateClient(device_id, GetDataFlow(), role);
-  if (!audio_client.Get()) {
-    return false;
+  // Try to create the latest version (3) first and then fall back to version 2
+  // and finally 1 if needed. Only one of the pointers below will be defined.
+  ComPtr<IAudioClient> audio_client1;
+  ComPtr<IAudioClient2> audio_client2;
+  ComPtr<IAudioClient3> audio_client3 =
+      core_audio_utility::CreateClient3(device_id, GetDataFlow(), role);
+  if (!audio_client3) {
+    // IAudioClient version 3 failed. Try falling back to version 2.
+    RTC_CHECK_LT(core_audio_utility::GetAudioClientVersion(), 3);
+    audio_client2 =
+        core_audio_utility::CreateClient2(device_id, GetDataFlow(), role);
+    if (!audio_client2) {
+      // IAudioClient version 2 failed. Try falling back to version 1.
+      RTC_CHECK_LT(core_audio_utility::GetAudioClientVersion(), 2);
+      audio_client1 =
+          core_audio_utility::CreateClient(device_id, GetDataFlow(), role);
+      if (!audio_client1) {
+        // No more version available to fall back to.
+        return false;
+      }
+    }
   }
 
-  // Retrieve preferred audio input or output parameters for the given client.
+  // Use latest possible IAudioClient version as input to all APIs below that
+  // requires raw pointers to IAudioClient instances.
+  IAudioClient* audio_client = nullptr;
+  if (audio_client3) {
+    RTC_DLOG(INFO) << "Using IAudioClient3";
+    audio_client = audio_client3.Get();
+  } else if (audio_client2) {
+    RTC_DLOG(INFO) << "Using IAudioClient2";
+    audio_client = audio_client2.Get();
+  } else {
+    RTC_DLOG(INFO) << "Using IAudioClient";
+    audio_client = audio_client1.Get();
+  }
+
+  // Set extra client properties before initialization if the audio client
+  // supports it.
+  // TODO(henrika): evaluate effect(s) of making these changes. Also, perhaps
+  // these types of settings belongs to the client and not the utility parts.
+  if (core_audio_utility::GetAudioClientVersion() >= 2) {
+    if (FAILED(core_audio_utility::SetClientProperties(audio_client))) {
+      return false;
+    }
+  }
+
+  // Retrieve preferred audio input or output parameters for the given client
+  // and the specified client properties.
   AudioParameters params;
-  if (FAILED(core_audio_utility::GetPreferredAudioParameters(audio_client.Get(),
+  if (FAILED(core_audio_utility::GetPreferredAudioParameters(audio_client,
                                                              &params))) {
     return false;
   }
@@ -221,14 +374,17 @@ bool CoreAudioBase::Init() {
 
   // Verify that the format is supported.
   if (!core_audio_utility::IsFormatSupported(
-          audio_client.Get(), AUDCLNT_SHAREMODE_SHARED, &format_)) {
+          audio_client, AUDCLNT_SHAREMODE_SHARED, &format_)) {
     return false;
   }
 
   // Initialize the audio stream between the client and the device in shared
-  // mode using event-driven buffer handling.
+  // mode using event-driven buffer handling. Also, using 0 as requested buffer
+  // size results in a default (minimum) endpoint buffer size.
+  // TODO(henrika): possibly increase |requested_buffer_size| to add robustness.
+  const REFERENCE_TIME requested_buffer_size = 0;
   if (FAILED(core_audio_utility::SharedModeInitialize(
-          audio_client.Get(), &format_, audio_samples_event_,
+          audio_client, &format_, audio_samples_event_, requested_buffer_size,
           &endpoint_buffer_size_frames_))) {
     return false;
   }
@@ -239,7 +395,7 @@ bool CoreAudioBase::Init() {
   // TODO(henrik): sort out if a non-perfect match really is an issue.
   REFERENCE_TIME device_period;
   if (FAILED(core_audio_utility::GetDevicePeriod(
-          audio_client.Get(), AUDCLNT_SHAREMODE_SHARED, &device_period))) {
+          audio_client, AUDCLNT_SHAREMODE_SHARED, &device_period))) {
     return false;
   }
   const double device_period_in_seconds =
@@ -256,8 +412,40 @@ bool CoreAudioBase::Init() {
                      << preferred_frames_per_buffer;
   }
 
+  // Create an AudioSessionControl interface given the initialized client.
+  // The IAudioControl interface enables a client to configure the control
+  // parameters for an audio session and to monitor events in the session.
+  ComPtr<IAudioSessionControl> audio_session_control =
+      core_audio_utility::CreateAudioSessionControl(audio_client);
+  if (!audio_session_control.Get()) {
+    return false;
+  }
+
+  // The Sndvol program displays volume and mute controls for sessions that
+  // are in the active and inactive states.
+  AudioSessionState state;
+  if (FAILED(audio_session_control->GetState(&state))) {
+    return false;
+  }
+  RTC_DLOG(INFO) << "audio session state: " << SessionStateToString(state);
+  RTC_DCHECK_EQ(state, AudioSessionStateInactive);
+
+  // Register the client to receive notifications of session events, including
+  // changes in the stream state.
+  if (FAILED(audio_session_control->RegisterAudioSessionNotification(this))) {
+    return false;
+  }
+
   // Store valid COM interfaces.
-  audio_client_ = audio_client;
+  if (audio_client3) {
+    // TODO(henrika): equivalent to audio_client3.CopyTo(&audio_client3_)?
+    audio_client3_ = audio_client3;
+  } else if (audio_client2) {
+    audio_client2_ = audio_client2;
+  } else {
+    audio_client_ = audio_client1;
+  }
+  audio_session_control_ = audio_session_control;
 
   return true;
 }
@@ -265,26 +453,41 @@ bool CoreAudioBase::Init() {
 bool CoreAudioBase::Start() {
   RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
                  << "]";
-
-  audio_thread_ = absl::make_unique<rtc::PlatformThread>(
-      Run, this, IsInput() ? "wasapi_capture_thread" : "wasapi_render_thread",
-      rtc::kRealtimePriority);
-  audio_thread_->Start();
-  if (!audio_thread_->IsRunning()) {
-    StopThread();
-    RTC_LOG(LS_ERROR) << "Failed to start audio thread";
-    return false;
+  if (IsRestarting()) {
+    // Audio thread should be alive during internal restart since the restart
+    // callback is triggered on that thread and it also makes the restart
+    // sequence less complex.
+    RTC_DCHECK(audio_thread_);
   }
-  RTC_DLOG(INFO) << "Started thread with name: " << audio_thread_->name();
+
+  // Start an audio thread but only if one does not already exist (which is the
+  // case during restart).
+  if (!audio_thread_) {
+    audio_thread_ = absl::make_unique<rtc::PlatformThread>(
+        Run, this, IsInput() ? "wasapi_capture_thread" : "wasapi_render_thread",
+        rtc::kRealtimePriority);
+    RTC_DCHECK(audio_thread_);
+    audio_thread_->Start();
+    if (!audio_thread_->IsRunning()) {
+      StopThread();
+      RTC_LOG(LS_ERROR) << "Failed to start audio thread";
+      return false;
+    }
+    RTC_DLOG(INFO) << "Started thread with name: " << audio_thread_->name()
+                   << " and id: " << audio_thread_->GetThreadRef();
+  }
 
   // Start streaming data between the endpoint buffer and the audio engine.
-  _com_error error = audio_client_->Start();
-  if (error.Error() != S_OK) {
+  _com_error error = GetAudioClient()->Start();
+  if (FAILED(error.Error())) {
     StopThread();
     RTC_LOG(LS_ERROR) << "IAudioClient::Start failed: "
                       << core_audio_utility::ErrorToString(error);
     return false;
   }
+
+  start_time_ = rtc::TimeMillis();
+  num_data_callbacks_ = 0;
 
   return true;
 }
@@ -292,18 +495,23 @@ bool CoreAudioBase::Start() {
 bool CoreAudioBase::Stop() {
   RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
                  << "]";
+  RTC_DLOG(INFO) << "total activity time: " << TimeSinceStart();
 
-  // Stop streaming and the internal audio thread.
-  _com_error error = audio_client_->Stop();
-  if (error.Error() != S_OK) {
+  // Stop audio streaming.
+  _com_error error = GetAudioClient()->Stop();
+  if (FAILED(error.Error())) {
     RTC_LOG(LS_ERROR) << "IAudioClient::Stop failed: "
                       << core_audio_utility::ErrorToString(error);
   }
-  StopThread();
+  // Stop and destroy the audio thread but only when a restart attempt is not
+  // ongoing.
+  if (!IsRestarting()) {
+    StopThread();
+  }
 
   // Flush all pending data and reset the audio clock stream position to 0.
-  error = audio_client_->Reset();
-  if (error.Error() != S_OK) {
+  error = GetAudioClient()->Reset();
+  if (FAILED(error.Error())) {
     RTC_LOG(LS_ERROR) << "IAudioClient::Reset failed: "
                       << core_audio_utility::ErrorToString(error);
   }
@@ -314,9 +522,33 @@ bool CoreAudioBase::Stop() {
     // would fail with AUDCLNT_E_BUFFER_ERROR at
     // IAudioRenderClient::GetBuffer().
     UINT32 num_queued_frames = 0;
-    audio_client_->GetCurrentPadding(&num_queued_frames);
+    GetAudioClient()->GetCurrentPadding(&num_queued_frames);
     RTC_DCHECK_EQ(0u, num_queued_frames);
   }
+
+  // Delete the previous registration by the client to receive notifications
+  // about audio session events.
+  RTC_DLOG(INFO) << "audio session state: "
+                 << SessionStateToString(GetAudioSessionState());
+  error = audio_session_control_->UnregisterAudioSessionNotification(this);
+  if (FAILED(error.Error())) {
+    RTC_LOG(LS_ERROR)
+        << "IAudioSessionControl::UnregisterAudioSessionNotification failed: "
+        << core_audio_utility::ErrorToString(error);
+  }
+
+  // To ensure that the restart process is as simple as possible, the audio
+  // thread is not destroyed during restart attempts triggered by internal
+  // error callbacks.
+  if (!IsRestarting()) {
+    thread_checker_audio_.DetachFromThread();
+    IsOutput() ? audio_device_buffer_->NativeAudioPlayoutInterrupted()
+               : audio_device_buffer_->NativeAudioRecordingInterrupted();
+  }
+
+  // Release all allocated COM interfaces to allow for a restart without
+  // intermediate destruction.
+  SafeRelease();
 
   return true;
 }
@@ -327,13 +559,13 @@ bool CoreAudioBase::IsVolumeControlAvailable(bool* available) const {
   // as well but we use the audio client here to ensure that the initialized
   // audio session is visible under group box labeled "Applications" in
   // Sndvol.exe.
-  if (!audio_client_.Get()) {
+  if (!GetAudioClient()) {
     return false;
   }
 
   // Try to create an ISimpleAudioVolume instance.
   ComPtr<ISimpleAudioVolume> audio_volume =
-      core_audio_utility::CreateSimpleAudioVolume(audio_client_.Get());
+      core_audio_utility::CreateSimpleAudioVolume(GetAudioClient());
   if (!audio_volume.Get()) {
     RTC_DLOG(LS_ERROR) << "Volume control is not supported";
     return false;
@@ -353,8 +585,21 @@ bool CoreAudioBase::IsVolumeControlAvailable(bool* available) const {
   return false;
 }
 
+// Internal test method which can be used in tests to emulate a restart signal.
+// It simply sets the same event which is normally triggered by session and
+// device notifications. Hence, the emulated restart sequence covers most parts
+// of a real sequence expect the actual device switch.
+bool CoreAudioBase::Restart() {
+  RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
+                 << "]";
+  rtc::AtomicOps::ReleaseStore(&is_restarting_, 1);
+  SetEvent(restart_event_.Get());
+  return true;
+}
+
 void CoreAudioBase::StopThread() {
   RTC_DLOG(INFO) << __FUNCTION__;
+  RTC_DCHECK(!IsRestarting());
   if (audio_thread_) {
     if (audio_thread_->IsRunning()) {
       RTC_DLOG(INFO) << "Sets stop_event...";
@@ -367,7 +612,159 @@ void CoreAudioBase::StopThread() {
     // Ensure that we don't quit the main thread loop immediately next
     // time Start() is called.
     ResetEvent(stop_event_.Get());
+    ResetEvent(restart_event_.Get());
   }
+}
+
+bool CoreAudioBase::HandleRestartEvent() {
+  RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
+                 << "]";
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  RTC_DCHECK(audio_thread_);
+  RTC_DCHECK(IsRestarting());
+  // Let each client (input and/or output) take care of its own restart
+  // sequence since each side might need unique actions.
+  // TODO(henrika): revisit and investigate if one common base implementation
+  // is possible
+  bool restart_ok = on_error_callback_(ErrorType::kStreamDisconnected);
+  if (restart_ok) {
+    rtc::AtomicOps::ReleaseStore(&is_restarting_, 0);
+  }
+  return restart_ok;
+}
+
+bool CoreAudioBase::SwitchDeviceIfNeeded() {
+  RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
+                 << "]";
+  RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  RTC_DCHECK(IsRestarting());
+
+  RTC_DLOG(INFO) << "device_index=" << device_index_
+                 << " => device_id: " << device_id_;
+
+  // Ensure that at least one device exists and can be utilized. The most
+  // probable cause for ending up here is that a device has been removed.
+  if (core_audio_utility::NumberOfActiveDevices(IsInput() ? eCapture
+                                                          : eRender) < 1) {
+    RTC_DLOG(LS_ERROR) << "All devices are disabled or removed";
+    return false;
+  }
+
+  // Get the unique device ID for the index which is currently used. It seems
+  // safe to assume that if the ID is the same as the existing device ID, then
+  // the device configuration is the same as before.
+  std::string device_id = GetDeviceID(device_index_);
+  if (device_id != device_id_) {
+    RTC_LOG(LS_WARNING)
+        << "Device configuration has changed => changing device selection...";
+    // TODO(henrika): depending on the current state and how we got here, we
+    // must select a new device here.
+    if (SetDevice(kDefault) == -1) {
+      RTC_LOG(LS_WARNING) << "Failed to set new audio device";
+      return false;
+    }
+  } else {
+    RTC_LOG(INFO)
+        << "Device configuration has not changed => keeping selected device";
+  }
+  return true;
+}
+
+AudioSessionState CoreAudioBase::GetAudioSessionState() const {
+  AudioSessionState state = AudioSessionStateInactive;
+  RTC_DCHECK(audio_session_control_.Get());
+  _com_error error = audio_session_control_->GetState(&state);
+  if (FAILED(error.Error())) {
+    RTC_DLOG(LS_ERROR) << "IAudioSessionControl::GetState failed: "
+                       << core_audio_utility::ErrorToString(error);
+  }
+  return state;
+}
+
+// TODO(henrika): only used for debugging purposes currently.
+ULONG CoreAudioBase::AddRef() {
+  ULONG new_ref = InterlockedIncrement(&ref_count_);
+  // RTC_DLOG(INFO) << "__AddRef => " << new_ref;
+  return new_ref;
+}
+
+// TODO(henrika): does not call delete this.
+ULONG CoreAudioBase::Release() {
+  ULONG new_ref = InterlockedDecrement(&ref_count_);
+  // RTC_DLOG(INFO) << "__Release => " << new_ref;
+  return new_ref;
+}
+
+// TODO(henrika): can probably be replaced by "return S_OK" only.
+HRESULT CoreAudioBase::QueryInterface(REFIID iid, void** object) {
+  if (object == nullptr) {
+    return E_POINTER;
+  }
+  *object = nullptr;
+  if (iid == IID_IUnknown || iid == __uuidof(IAudioSessionEvents)) {
+    *object = static_cast<IAudioSessionEvents*>(this);
+    return S_OK;
+  };
+  return E_NOINTERFACE;
+}
+
+// IAudioSessionEvents::OnStateChanged.
+HRESULT CoreAudioBase::OnStateChanged(AudioSessionState new_state) {
+  RTC_DLOG(INFO) << "___" << __FUNCTION__ << "["
+                 << DirectionToString(direction())
+                 << "] new_state: " << SessionStateToString(new_state);
+  return S_OK;
+}
+
+// When a session is disconnected because of a device removal or format change
+// event, we want to inform the audio thread about the lost audio session and
+// trigger an attempt to restart audio using a new (default) device.
+HRESULT CoreAudioBase::OnSessionDisconnected(
+    AudioSessionDisconnectReason disconnect_reason) {
+  RTC_DLOG(INFO) << "___" << __FUNCTION__ << "["
+                 << DirectionToString(direction()) << "] reason: "
+                 << SessionDisconnectReasonToString(disconnect_reason);
+  if (disconnect_reason == DisconnectReasonDeviceRemoval) {
+    rtc::AtomicOps::ReleaseStore(&is_restarting_, 1);
+    SetEvent(restart_event_.Get());
+  } else if (disconnect_reason == DisconnectReasonFormatChanged) {
+    rtc::AtomicOps::ReleaseStore(&is_restarting_, 1);
+    SetEvent(restart_event_.Get());
+  }
+  return S_OK;
+}
+
+// IAudioSessionEvents::OnDisplayNameChanged
+HRESULT CoreAudioBase::OnDisplayNameChanged(LPCWSTR new_display_name,
+                                            LPCGUID event_context) {
+  return S_OK;
+}
+
+// IAudioSessionEvents::OnIconPathChanged
+HRESULT CoreAudioBase::OnIconPathChanged(LPCWSTR new_icon_path,
+                                         LPCGUID event_context) {
+  return S_OK;
+}
+
+// IAudioSessionEvents::OnSimpleVolumeChanged
+HRESULT CoreAudioBase::OnSimpleVolumeChanged(float new_simple_volume,
+                                             BOOL new_mute,
+                                             LPCGUID event_context) {
+  return S_OK;
+}
+
+// IAudioSessionEvents::OnChannelVolumeChanged
+HRESULT CoreAudioBase::OnChannelVolumeChanged(DWORD channel_count,
+                                              float new_channel_volumes[],
+                                              DWORD changed_channel,
+                                              LPCGUID event_context) {
+  return S_OK;
+}
+
+// IAudioSessionEvents::OnGroupingParamChanged
+HRESULT CoreAudioBase::OnGroupingParamChanged(LPCGUID new_grouping_param,
+                                              LPCGUID event_context) {
+  return S_OK;
 }
 
 void CoreAudioBase::ThreadRun() {
@@ -375,7 +772,8 @@ void CoreAudioBase::ThreadRun() {
     RTC_LOG(LS_ERROR) << "MMCSS is not supported";
     return;
   }
-  RTC_DLOG(INFO) << "ThreadRun starts...";
+  RTC_DLOG(INFO) << "[" << DirectionToString(direction())
+                 << "] ThreadRun starts...";
   // TODO(henrika): difference between "Pro Audio" and "Audio"?
   ScopedMMCSSRegistration mmcss_registration(L"Pro Audio");
   ScopedCOMInitializer com_initializer(ScopedCOMInitializer::kMTA);
@@ -386,17 +784,19 @@ void CoreAudioBase::ThreadRun() {
 
   bool streaming = true;
   bool error = false;
-  HANDLE wait_array[] = {stop_event_.Get(), audio_samples_event_.Get()};
+  HANDLE wait_array[] = {stop_event_.Get(), restart_event_.Get(),
+                         audio_samples_event_.Get()};
 
   // The device frequency is the frequency generated by the hardware clock in
   // the audio device. The GetFrequency() method reports a constant frequency.
   UINT64 device_frequency = 0;
-  if (audio_clock_.Get()) {
+  _com_error result(S_FALSE);
+  if (audio_clock_) {
     RTC_DCHECK(IsOutput());
-    _com_error result = audio_clock_->GetFrequency(&device_frequency);
-    if ((error = result.Error()) != S_OK) {
+    result = audio_clock_->GetFrequency(&device_frequency);
+    if (FAILED(result.Error())) {
       RTC_LOG(LS_ERROR) << "IAudioClock::GetFrequency failed: "
-                        << core_audio_utility::ErrorToString(error);
+                        << core_audio_utility::ErrorToString(result);
     }
   }
 
@@ -412,6 +812,10 @@ void CoreAudioBase::ThreadRun() {
         streaming = false;
         break;
       case WAIT_OBJECT_0 + 1:
+        // |restart_event_| has been set.
+        error = !HandleRestartEvent();
+        break;
+      case WAIT_OBJECT_0 + 2:
         // |audio_samples_event_| has been set.
         error = !on_data_callback_(device_frequency);
         break;
@@ -422,17 +826,23 @@ void CoreAudioBase::ThreadRun() {
   }
 
   if (streaming && error) {
-    RTC_LOG(LS_ERROR) << "WASAPI streaming failed.";
+    RTC_LOG(LS_ERROR) << "[" << DirectionToString(direction())
+                      << "] WASAPI streaming failed.";
     // Stop audio streaming since something has gone wrong in our main thread
     // loop. Note that, we are still in a "started" state, hence a Stop() call
     // is required to join the thread properly.
-    audio_client_->Stop();
+    result = GetAudioClient()->Stop();
+    if (FAILED(result.Error())) {
+      RTC_LOG(LS_ERROR) << "IAudioClient::Stop failed: "
+                        << core_audio_utility::ErrorToString(result);
+    }
 
     // TODO(henrika): notify clients that something has gone wrong and that
     // this stream should be destroyed instead of reused in the future.
   }
 
-  RTC_DLOG(INFO) << "...ThreadRun stops";
+  RTC_DLOG(INFO) << "[" << DirectionToString(direction())
+                 << "] ...ThreadRun stops";
 }
 
 }  // namespace webrtc_win

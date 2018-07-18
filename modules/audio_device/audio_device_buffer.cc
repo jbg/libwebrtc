@@ -20,6 +20,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/format_macros.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/timeutils.h"
 #include "system_wrappers/include/metrics.h"
 
@@ -181,51 +182,43 @@ void AudioDeviceBuffer::StopRecording() {
 }
 
 int32_t AudioDeviceBuffer::SetRecordingSampleRate(uint32_t fsHz) {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
   RTC_LOG(INFO) << "SetRecordingSampleRate(" << fsHz << ")";
-  rec_sample_rate_ = fsHz;
+  rec_sample_rate_.store(rtc::dchecked_cast<int>(fsHz));
   return 0;
 }
 
 int32_t AudioDeviceBuffer::SetPlayoutSampleRate(uint32_t fsHz) {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
   RTC_LOG(INFO) << "SetPlayoutSampleRate(" << fsHz << ")";
-  play_sample_rate_ = fsHz;
+  play_sample_rate_.store(rtc::dchecked_cast<int>(fsHz));
   return 0;
 }
 
 int32_t AudioDeviceBuffer::RecordingSampleRate() const {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
-  return rec_sample_rate_;
+  return rtc::dchecked_cast<int32_t>(rec_sample_rate_.load());
 }
 
 int32_t AudioDeviceBuffer::PlayoutSampleRate() const {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
-  return play_sample_rate_;
+  return rtc::dchecked_cast<int32_t>(play_sample_rate_.load());
 }
 
 int32_t AudioDeviceBuffer::SetRecordingChannels(size_t channels) {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
   RTC_LOG(INFO) << "SetRecordingChannels(" << channels << ")";
-  rec_channels_ = channels;
+  rec_channels_.store(rtc::dchecked_cast<int>(channels));
   return 0;
 }
 
 int32_t AudioDeviceBuffer::SetPlayoutChannels(size_t channels) {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
   RTC_LOG(INFO) << "SetPlayoutChannels(" << channels << ")";
-  play_channels_ = channels;
+  play_channels_.store(rtc::dchecked_cast<int>(channels));
   return 0;
 }
 
 size_t AudioDeviceBuffer::RecordingChannels() const {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
-  return rec_channels_;
+  return rtc::dchecked_cast<int32_t>(rec_channels_.load());
 }
 
 size_t AudioDeviceBuffer::PlayoutChannels() const {
-  RTC_DCHECK(main_thread_checker_.CalledOnValidThread());
-  return play_channels_;
+  return rtc::dchecked_cast<int32_t>(play_channels_.load());
 }
 
 int32_t AudioDeviceBuffer::SetTypingStatus(bool typing_status) {
