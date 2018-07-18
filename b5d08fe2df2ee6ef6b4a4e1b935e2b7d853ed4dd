@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7036a35c_bba7d8fd",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-18T18:06:13Z",
+      "side": 1,
+      "message": "Remove this?",
+      "revId": "b5d08fe2df2ee6ef6b4a4e1b935e2b7d853ed4dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6e97eee_fe9504f4",
+        "filename": "rtc_base/copyonwritebuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-18T18:06:13Z",
+      "side": 1,
+      "message": "should be const",
+      "range": {
+        "startLine": 35,
+        "startChar": 20,
+        "endLine": 35,
+        "endChar": 23
+      },
+      "revId": "b5d08fe2df2ee6ef6b4a4e1b935e2b7d853ed4dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
