@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "403fa016_0cb3a791",
+        "filename": "examples/objc/AppRTCMobile/ARDAppClient.m",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63e2a333_eb63aaed",
+      "range": {
+        "startLine": 535,
+        "startChar": 54,
+        "endLine": 535,
+        "endChar": 55
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19e8c58b_fa59afca",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f8eee9cd_a567cbad",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19e8c58b_fa59afca",
+      "range": {
+        "startLine": 191,
+        "startChar": 60,
+        "endLine": 191,
+        "endChar": 86
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d34817e_1c39c2a3",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
         "patchSetId": 3
@@ -62,6 +110,24 @@
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc03d924_293523c1",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d34817e_1c39c2a3",
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "f2dcf868_3cce1de0",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1791e875_ca017f00",
+      "range": {
+        "startLine": 455,
+        "startChar": 12,
+        "endLine": 455,
+        "endChar": 15
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f072874_e8b44e88",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
         "patchSetId": 3
@@ -108,6 +198,30 @@
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e727fb5_eeccf2f0",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f072874_e8b44e88",
+      "range": {
+        "startLine": 470,
+        "startChar": 13,
+        "endLine": 470,
+        "endChar": 17
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "e618b322_40c3cb0c",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b7f889f_4bb0425c",
+      "range": {
+        "startLine": 472,
+        "startChar": 33,
+        "endLine": 472,
+        "endChar": 57
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16290f93_95d97bb8",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
         "patchSetId": 3
@@ -154,6 +292,30 @@
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3dede78_23f05093",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16290f93_95d97bb8",
+      "range": {
+        "startLine": 475,
+        "startChar": 71,
+        "endLine": 475,
+        "endChar": 96
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "fa1d0b42_6ef06b1e",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e973757_a82eff6d",
+      "range": {
+        "startLine": 494,
+        "startChar": 1,
+        "endLine": 494,
+        "endChar": 15
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae7a8ea3_76354f44",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
         "patchSetId": 3
@@ -194,6 +380,24 @@
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ec2387_4ebcc91a",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae7a8ea3_76354f44",
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -220,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "9cb2c381_e1095e15",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ec77ec3_f86897f4",
+      "range": {
+        "startLine": 24,
+        "startChar": 31,
+        "endLine": 24,
+        "endChar": 39
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f604e3d_9fda318d",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
         "patchSetId": 3
@@ -243,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "02d508f6_756dd5e8",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f604e3d_9fda318d",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 31
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d05c219_3c26aa7b",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
         "patchSetId": 3
@@ -263,6 +515,30 @@
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbe8e23a_80f663e4",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d05c219_3c26aa7b",
+      "range": {
+        "startLine": 78,
+        "startChar": 33,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -332,6 +608,78 @@
       "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "968991de_9d7ce101",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "My only thought is that if there is anything within the RTCConfiguration itself which is required to generate an appropriate certificate, then generateCertificate has access to it.",
+      "parentUuid": "087517bf_0dfa5005",
+      "range": {
+        "startLine": 179,
+        "startChar": 20,
+        "endLine": 179,
+        "endChar": 39
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8632335_c48f2e97",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "407ace4c_39b591bf",
+      "range": {
+        "startLine": 179,
+        "startChar": 41,
+        "endLine": 179,
+        "endChar": 53
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80fa28d7_5b6d5d1f",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-07-18T11:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "600678db_79f85e5e",
+      "range": {
+        "startLine": 179,
+        "startChar": 20,
+        "endLine": 179,
+        "endChar": 39
+      },
+      "revId": "34a19831e9727f7b70ef754994b94e272e6d5fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
