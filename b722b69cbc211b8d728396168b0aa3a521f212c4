@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a455fed3_5110bc77",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-19T11:20:33Z",
+      "side": 1,
+      "message": "I\u0027d prefer the name adjusted filter instead of Preprocessed filter as it is more vague. Furthermore, the prefix pre- does not make sense when used externally of the FilterAnalyzer class.",
+      "range": {
+        "startLine": 58,
+        "startChar": 28,
+        "endLine": 58,
+        "endChar": 44
+      },
+      "revId": "b722b69cbc211b8d728396168b0aa3a521f212c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01bcac3c_07b66649",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-19T11:20:33Z",
+      "side": 1,
+      "message": "Let\u0027s return and arrayview instead.",
+      "range": {
+        "startLine": 58,
+        "startChar": 13,
+        "endLine": 58,
+        "endChar": 19
+      },
+      "revId": "b722b69cbc211b8d728396168b0aa3a521f212c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "957076fe_fa78d543",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-19T11:20:33Z",
+      "side": 1,
+      "message": "I\u0027d prefer to make this part always available as it is clear that the functionality within this CL needs it. Let\u0027s rewrite the code accordingly.",
+      "revId": "b722b69cbc211b8d728396168b0aa3a521f212c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ea790dc_f90062fd",
+        "filename": "modules/audio_processing/aec3/reverb_model_estimator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-19T11:20:33Z",
+      "side": 1,
+      "message": "I\u0027d prefer a more specific naming of this class. The current name indicates that it is a generic linear regressor class, which it is not.",
+      "revId": "b722b69cbc211b8d728396168b0aa3a521f212c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecea6727_2e709f90",
+        "filename": "modules/audio_processing/aec3/reverb_model_estimator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-19T11:20:33Z",
+      "side": 1,
+      "message": "This constant should go into the .cc file",
+      "range": {
+        "startLine": 95,
+        "startChar": 25,
+        "endLine": 95,
+        "endChar": 42
+      },
+      "revId": "b722b69cbc211b8d728396168b0aa3a521f212c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a5ba78a_7568a9fe",
+        "filename": "modules/audio_processing/aec3/reverb_model_estimator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-19T11:20:33Z",
+      "side": 1,
+      "message": "Lets move this initialization to the initializer list. In that way the constant can be put in the anonymous section in the .cc file",
+      "revId": "b722b69cbc211b8d728396168b0aa3a521f212c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
