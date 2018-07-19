@@ -81,6 +81,8 @@ rtc_source_set("base_jni") {
     "src/jni/pc/logging.cc",
     "src/jni/pc/media.h",
     "src/jni/pc/video.h",
+    "src/jni/sslcertificateverifierwrapper.cc",
+    "src/jni/sslcertificateverifierwrapper.h",
   ]
 
   deps = [
@@ -492,6 +494,7 @@ generate_jni("generated_peerconnection_jni") {
     "api/org/webrtc/RtpReceiver.java",
     "api/org/webrtc/RtpSender.java",
     "api/org/webrtc/RtpTransceiver.java",
+    "api/org/webrtc/SSLCertificateVerifier.java",
     "api/org/webrtc/SdpObserver.java",
     "api/org/webrtc/SessionDescription.java",
     "api/org/webrtc/StatsObserver.java",
@@ -995,6 +998,7 @@ rtc_android_library("peerconnection_java") {
     "api/org/webrtc/RtpReceiver.java",
     "api/org/webrtc/RtpSender.java",
     "api/org/webrtc/RtpTransceiver.java",
+    "api/org/webrtc/SSLCertificateVerifier.java",
     "api/org/webrtc/SdpObserver.java",
     "api/org/webrtc/SessionDescription.java",
     "api/org/webrtc/StatsObserver.java",
