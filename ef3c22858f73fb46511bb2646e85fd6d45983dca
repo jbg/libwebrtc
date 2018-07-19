@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d72a350f_bb62df0c",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-07-19T17:49:39Z",
+      "side": 1,
+      "message": "Thanks for catching this. I have added a TODO to register the type value of the network information and will work on it soon. To resolve the conflict with the registered ENF-FLOW-DESCRIPTION that takes the value 0xC001, it may take a while for us to deprecate the old value in order to interoperate with old endpoints.\n\nMy understanding is that the STUN-related objects we define in p2p/ are only intended for ICE within WebRTC, and so far it is okay to have conflicts (though not ideal) with IANA values as long as we maintain internal interoperability. Let me know if there are caveats I overlooked.",
+      "parentUuid": "81ab5249_f8b0cab9",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73fdda8c_6458a2ec",
         "filename": "p2p/base/stun.h",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "747db38a_73180efd",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-07-19T17:49:39Z",
+      "side": 1,
+      "message": "The existing STUN_ATTR_NETWORK_INFO can in principle assume all values between 0 and FFFF. We don\u0027t have restriction on the value of network IDs and network costs, though network costs are enumerated in rtc_base/network_constants.h.",
+      "parentUuid": "73fdda8c_6458a2ec",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60d18c18_3fcbccf4",
         "filename": "pc/webrtcsdp.cc",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2018-07-09T10:39:23Z",
       "side": 1,
       "message": "Where\u0027s the reference for this new field?",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d87f4d3_d64283dc",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-07-19T17:49:39Z",
+      "side": 1,
+      "message": "This is no public reference to this attribute, and it is introduced similarly to the network-id and network-cost for our implementation. This attribute is used in the other CL (https://webrtc-review.googlesource.com/c/src/+/83824) to allow us to have candidate pairs for each pair of interfaces, instead of each local interface. This can improve the diversity of our pool of candidate pairs, compared to the existing situation where we may end up with wifi\u003c-\u003ewifi and cell\u003c-\u003ewifi and the remote wifi becomes the single point of failure.",
+      "parentUuid": "60d18c18_3fcbccf4",
       "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true

@@ -172,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "79692df4_44b11c8c",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-07-19T17:49:39Z",
+      "side": 1,
+      "message": "My worry about extending the existing attribute to 64 bits or beyond was this might cause run-time problem for old endpoints. When an old endpoint parses the STUN message sent by a new endpoint, it would generate a StunUInt32Attribute for STUN_ATTR_NETWORK_INFO and consumes 4 bytes of the buffer. The parser continues to interpret the next 4 bytes, and it could make sense of it, e.g. interface_id \u003d 1 interpreted as attr_type \u003d 1, and then the bits beyond these 4 bytes (if we extend the attribute beyond 64bits or adding more attributes later) would be incorrectly parsed and produce attributes with the same types as ones parsed previously but garbage values.\n\nI realize now this is not a problem if we do not plan to add more attributes (likely so) since StunMessage::GetAttribute iterates the list attrs_ sequentially and these garbage attributes, if ever produced, would not interfere. Extending the existing attribute also removes one more potential conflict and the need to register another type value, a concern as pointed out by Harald.\n\nThere is still one caveat if we extend the existing attribute, and we need to tweak the byte order. My understanding is that, if we use StunUInt64Attribute, and if network_id \u003d 1, network_cost \u003d 2, interface_id \u003d 3, we need the 4-byte layout like 0x3F12 when constructing a StunUInt64Attribute, so it becomes 0x21F3 in the big endian, and when an old endpoint consumes the first 2 bytes, it obtain 0x21 and converts it to 0x12 to have the correct network_id and network_cost.\n\nI am debating with myself tweaking the byte order is too hacky.",
+      "parentUuid": "9ccf4de2_f19bc8a9",
+      "revId": "c0370537db2b0f41135732025f3af3327b1d85e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "012c8892_e423de1d",
         "filename": "rtc_base/network.h",
         "patchSetId": 4
