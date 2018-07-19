@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8591a883_f34192b7",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionDependencies.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-19T07:29:04Z",
+      "side": 1,
+      "message": "nit: I think these could be final",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 56
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "940b2ed3_c4d99c04",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionDependencies.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-19T07:29:04Z",
+      "side": 1,
+      "message": "Why have the have been made public?",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "606bb6f4_3837abc8",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-19T07:29:04Z",
+      "side": 1,
+      "message": "nit: I think it would reduce the work of adding new members in the future, if we created a PeerConnectionDependencies object here instead of having createPeerConnectionInternal method.",
+      "range": {
+        "startLine": 352,
+        "startChar": 4,
+        "endLine": 352,
+        "endChar": 80
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a47ddd8_ea17c1ae",
+        "filename": "sdk/android/api/org/webrtc/SSLCertificateVerifier.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-19T07:29:04Z",
+      "side": 1,
+      "message": "nit: public is redundant here. All methods in interfaces are automatically public.",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 25
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b83c5500_6235eddf",
+        "filename": "sdk/android/api/org/webrtc/SSLCertificateVerifier.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-19T07:29:04Z",
+      "side": 1,
+      "message": "Have you considered using ByteBuffer instead?",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 46
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
