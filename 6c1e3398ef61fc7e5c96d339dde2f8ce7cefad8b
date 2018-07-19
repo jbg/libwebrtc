@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8007b393_953c57b4",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionDependencies.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-07-19T22:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8591a883_f34192b7",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 56
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "940b2ed3_c4d99c04",
         "filename": "sdk/android/api/org/webrtc/PeerConnectionDependencies.java",
         "patchSetId": 12
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "93f621a4_e127b342",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionDependencies.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-07-19T22:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "940b2ed3_c4d99c04",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "606bb6f4_3837abc8",
         "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
         "patchSetId": 12
@@ -59,6 +107,30 @@
       "writtenOn": "2018-07-19T07:29:04Z",
       "side": 1,
       "message": "nit: I think it would reduce the work of adding new members in the future, if we created a PeerConnectionDependencies object here instead of having createPeerConnectionInternal method.",
+      "range": {
+        "startLine": 352,
+        "startChar": 4,
+        "endLine": 352,
+        "endChar": 80
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "846c201d_e685666b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-07-19T22:36:48Z",
+      "side": 1,
+      "message": "While I agree I wanted to keep this change scoped. I will file a bug to do this in a separate CL.",
+      "parentUuid": "606bb6f4_3837abc8",
       "range": {
         "startLine": 352,
         "startChar": 4,
@@ -105,6 +177,54 @@
       "writtenOn": "2018-07-19T07:29:04Z",
       "side": 1,
       "message": "Have you considered using ByteBuffer instead?",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 46
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf0a4009_87d697ab",
+        "filename": "sdk/android/api/org/webrtc/SSLCertificateVerifier.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-07-19T22:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a47ddd8_ea17c1ae",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 25
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fdcba09_c15d366e",
+        "filename": "sdk/android/api/org/webrtc/SSLCertificateVerifier.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-07-19T22:36:48Z",
+      "side": 1,
+      "message": "I considered it but decided against it since the certificate is only going to be read from. Appending etc and the other things that ByteBuffer helps with generally won\u0027t be needed by the implementer.",
+      "parentUuid": "b83c5500_6235eddf",
       "range": {
         "startLine": 26,
         "startChar": 40,
