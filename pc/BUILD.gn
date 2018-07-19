@@ -125,7 +125,6 @@ rtc_static_library("peerconnection") {
     "dtmfsender.h",
     "iceserverparsing.cc",
     "iceserverparsing.h",
-    "jsepicecandidate.cc",
     "jsepsessiondescription.cc",
     "localaudiosource.cc",
     "localaudiosource.h",

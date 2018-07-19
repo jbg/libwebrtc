@@ -1,5 +1,5 @@
 /*
- *  Copyright 2012 The WebRTC project authors. All Rights Reserved.
+ *  Copyright 2018 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -9,25 +9,9 @@
  */
 
 #include "api/jsepicecandidate.h"
-
-#include <vector>
-
 #include "pc/webrtcsdp.h"
-#include "rtc_base/stringencode.h"
 
 namespace webrtc {
-
-IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
-                                          int sdp_mline_index,
-                                          const std::string& sdp,
-                                          SdpParseError* error) {
-  JsepIceCandidate* jsep_ice = new JsepIceCandidate(sdp_mid, sdp_mline_index);
-  if (!jsep_ice->Initialize(sdp, error)) {
-    delete jsep_ice;
-    return NULL;
-  }
-  return jsep_ice;
-}
 
 JsepIceCandidate::JsepIceCandidate(const std::string& sdp_mid,
                                    int sdp_mline_index)
@@ -53,11 +37,36 @@ bool JsepIceCandidate::ToString(std::string* out) const {
   return !out->empty();
 }
 
+std::string JsepIceCandidate::sdp_mid() const {
+  return sdp_mid_;
+}
+
+int JsepIceCandidate::sdp_mline_index() const {
+  return sdp_mline_index_;
+}
+
+const cricket::Candidate& JsepIceCandidate::candidate() const {
+  return candidate_;
+}
+
+std::string JsepIceCandidate::server_url() const {
+  return candidate_.url();
+}
+
+JsepCandidateCollection::JsepCandidateCollection() = default;
+
+JsepCandidateCollection::JsepCandidateCollection(JsepCandidateCollection&& o)
+    : candidates_(std::move(o.candidates_)) {}
+
 JsepCandidateCollection::~JsepCandidateCollection() {
   for (std::vector<JsepIceCandidate*>::iterator it = candidates_.begin();
        it != candidates_.end(); ++it) {
     delete *it;
   }
+}
+
+size_t JsepCandidateCollection::count() const {
+  return candidates_.size();
 }
 
 bool JsepCandidateCollection::HasCandidate(
@@ -86,6 +95,14 @@ size_t JsepCandidateCollection::remove(const cricket::Candidate& candidate) {
     return 1;
   }
   return 0;
+}
+
+void JsepCandidateCollection::add(JsepIceCandidate* candidate) {
+  candidates_.push_back(candidate);
+}
+
+const IceCandidateInterface* JsepCandidateCollection::at(size_t index) const {
+  return candidates_[index];
 }
 
 }  // namespace webrtc

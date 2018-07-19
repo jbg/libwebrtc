@@ -9,8 +9,21 @@
  */
 
 #include "api/jsep.h"
+#include "api/jsepicecandidate.h"
 
 namespace webrtc {
+
+IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
+                                          int sdp_mline_index,
+                                          const std::string& sdp,
+                                          SdpParseError* error) {
+  JsepIceCandidate* jsep_ice = new JsepIceCandidate(sdp_mid, sdp_mline_index);
+  if (!jsep_ice->Initialize(sdp, error)) {
+    delete jsep_ice;
+    return NULL;
+  }
+  return jsep_ice;
+}
 
 std::string IceCandidateInterface::server_url() const {
   return "";
