@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d7ae083_577b052f",
+        "filename": "api/jsepicecandidate.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-20T09:20:31Z",
+      "side": 1,
+      "message": "I moved these from pc/jsepicecandidate.cc to here.\n\nThe file pc/jsepicecandidate.cc still violates https://webrtc.googlesource.com/src/+/HEAD/style-guide.md#h-cc-pairs but I don\u0027t want to mix that refactoring with this CL.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 1
+      },
+      "revId": "0b20a02f2261f2f07a15053c13a5f763c8e54392",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

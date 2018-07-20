@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1211cac8_de33f22f",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-20T09:20:31Z",
+      "side": 0,
+      "message": "I will tackle this one in another CL because it requires even more fixes in the codebase and this CL is bigger enough.",
+      "range": {
+        "startLine": 1349,
+        "startChar": 0,
+        "endLine": 1352,
+        "endChar": 3
+      },
+      "revId": "79eb4dd92813c035dcbe4024be9b932689863425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
