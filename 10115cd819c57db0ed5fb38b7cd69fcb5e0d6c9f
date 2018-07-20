@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "20614d59_a4e54d9e",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-20T13:17:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74891739_2d1115f5",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f8ef268_76344084",
         "filename": "modules/audio_device/audio_device_unittest.cc",
         "patchSetId": 18
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Good, that was my only major gripe with it. The other parts seem sensible!",
       "parentUuid": "1b599fd9_7d004ffb",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c812c4c9_c143c755",
+        "filename": "modules/audio_device/win/audio_device_module_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-20T13:17:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "189d4556_2713aa38",
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -494,6 +530,24 @@
     },
     {
       "key": {
+        "uuid": "76de0f20_1006a2ff",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-20T13:17:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78cb0cb6_a04f8786",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ff7b841_c13bd3b6",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 18
@@ -579,6 +633,24 @@
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4bccb8e_2fc2a052",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-20T13:17:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40131405_3deea38b",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -670,6 +742,24 @@
     },
     {
       "key": {
+        "uuid": "20d18709_7b3c6acb",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-20T13:17:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5b2e27_dca19cf5",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c91aa600_2a20060c",
         "filename": "modules/audio_device/win/core_audio_base_win.h",
         "patchSetId": 18
@@ -749,6 +839,24 @@
       "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c75f901_167fa478",
+        "filename": "modules/audio_device/win/core_audio_base_win.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-07-20T13:17:44Z",
+      "side": 1,
+      "message": "Discussed off-line. NO further action.",
+      "parentUuid": "98301306_99d9c9c2",
+      "revId": "10115cd819c57db0ed5fb38b7cd69fcb5e0d6c9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
