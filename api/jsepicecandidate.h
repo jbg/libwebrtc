@@ -31,20 +31,20 @@ class JsepIceCandidate : public IceCandidateInterface {
   JsepIceCandidate(const std::string& sdp_mid,
                    int sdp_mline_index,
                    const cricket::Candidate& candidate);
-  ~JsepIceCandidate();
+  ~JsepIceCandidate() override;
   // |err| may be null.
   bool Initialize(const std::string& sdp, SdpParseError* err);
   void SetCandidate(const cricket::Candidate& candidate) {
     candidate_ = candidate;
   }
 
-  virtual std::string sdp_mid() const { return sdp_mid_; }
-  virtual int sdp_mline_index() const { return sdp_mline_index_; }
-  virtual const cricket::Candidate& candidate() const { return candidate_; }
+  std::string sdp_mid() const override;
+  int sdp_mline_index() const override;
+  const cricket::Candidate& candidate() const override;
 
-  virtual std::string server_url() const { return candidate_.url(); }
+  std::string server_url() const override;
 
-  virtual bool ToString(std::string* out) const;
+  bool ToString(std::string* out) const override;
 
  private:
   std::string sdp_mid_;

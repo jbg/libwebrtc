@@ -8,19 +8,24 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "api/rtptransceiverinterface.h"
+#include "api/jsepicecandidate.h"
 
 namespace webrtc {
 
-RtpTransceiverInit::RtpTransceiverInit() = default;
+std::string JsepIceCandidate::sdp_mid() const {
+  return sdp_mid_;
+}
 
-RtpTransceiverInit::RtpTransceiverInit(const RtpTransceiverInit& rhs) = default;
+int JsepIceCandidate::sdp_mline_index() const {
+  return sdp_mline_index_;
+}
 
-RtpTransceiverInit::~RtpTransceiverInit() = default;
+const cricket::Candidate& JsepIceCandidate::candidate() const {
+  return candidate_;
+}
 
-absl::optional<RtpTransceiverDirection>
-RtpTransceiverInterface::fired_direction() const {
-  return absl::nullopt;
+std::string JsepIceCandidate::server_url() const {
+  return candidate_.url();
 }
 
 }  // namespace webrtc

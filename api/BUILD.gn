@@ -57,6 +57,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     "dtmfsenderinterface.h",
     "jsep.cc",
     "jsep.h",
+    "jsepicecandidate.cc",
     "jsepicecandidate.h",
     "jsepsessiondescription.h",
     "mediaconstraintsinterface.cc",
@@ -92,6 +93,11 @@ rtc_static_library("libjingle_peerconnection_api") {
     "umametrics.h",
     "videosourceproxy.h",
   ]
+
+  if (is_clang) {
+    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
+    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+  }
 
   deps = [
     ":array_view",
