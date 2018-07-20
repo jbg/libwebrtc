@@ -234,6 +234,30 @@
       "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9c5a412_3716a97b",
+        "filename": "sdk/android/api/org/webrtc/SSLCertificateVerifier.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-07-20T07:39:00Z",
+      "side": 1,
+      "message": "Okay, an advantage with ByteBuffer would be that we could avoid a memcpy. But as long as the certificates aren\u0027t too big I guess that won\u0027t matter.",
+      "parentUuid": "1fdcba09_c15d366e",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 46
+      },
+      "revId": "6c1e3398ef61fc7e5c96d339dde2f8ce7cefad8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
