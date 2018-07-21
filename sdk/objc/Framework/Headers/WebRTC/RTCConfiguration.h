@@ -10,10 +10,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import <WebRTC/RTCCertificate.h>
 #import <WebRTC/RTCMacros.h>
 
 @class RTCIceServer;
 @class RTCIntervalRange;
+@class RTCCertificate;
 
 /**
  * Represents the ice transport policy. This exposes the same states in C++,
@@ -67,12 +69,14 @@ typedef NS_ENUM(NSInteger, RTCSdpSemantics) {
 };
 
 NS_ASSUME_NONNULL_BEGIN
-
 RTC_EXPORT
 @interface RTCConfiguration : NSObject
 
 /** An array of Ice Servers available to be used by ICE. */
 @property(nonatomic, copy) NSArray<RTCIceServer *> *iceServers;
+
+/** An RTCCertificate for 're' use. */
+@property(nonatomic, copy, nullable) RTCCertificate *certificate;
 
 /** Which candidates the ICE agent is allowed to use. The W3C calls it
  * |iceTransportPolicy|, while in C++ it is called |type|. */
@@ -165,6 +169,14 @@ RTC_EXPORT
 @property(nonatomic, assign) BOOL activeResetSrtpParams;
 
 - (instancetype)init;
+
+/** Generate a new certificate for 're' use.
+ *
+ *  Optional dictionary of parameters. Defaults to KeyType ECDSA if none are
+ *  provided.
+ *  - name: "ECDSA" or "RSASSA-PKCS1-v1_5"
+ */
+- (nullable RTCCertificate *)generateCertificateWithParams:(NSDictionary *)params;
 
 @end
 
