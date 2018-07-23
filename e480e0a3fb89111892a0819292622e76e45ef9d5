@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b0cf81e_3a9df77d",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "nit: period after log lines here and elsewhere.",
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c0ccf19_36c9cb28",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "I don\u0027t see that this accesses any members on RTCConfiguration. Can you please add this as a class method on RTCCertificate.",
+      "range": {
+        "startLine": 452,
+        "startChar": 29,
+        "endLine": 452,
+        "endChar": 58
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7824e78f_96e8ce6c",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCConfiguration.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "This can be simplified. Initialize keyType to KT_ECDSA and just do this check.",
+      "range": {
+        "startLine": 461,
+        "startChar": 16,
+        "endLine": 461,
+        "endChar": 66
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b9b76f5_53c0befd",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "use `copy` for NSString properties.",
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9381b15a_ce515f83",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCCertificate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "InitWithPrivateKey:certificate:",
+      "range": {
+        "startLine": 29,
+        "startChar": 24,
+        "endLine": 29,
+        "endChar": 31
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bceee8e4_c7e6f345",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "No need to forward-declare imported class.",
+      "range": {
+        "startLine": 18,
+        "startChar": 7,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "283a3f6a_29a754a4",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCConfiguration.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "This does not need to be copy as it\u0027s properties are immutable.",
+      "range": {
+        "startLine": 79,
+        "startChar": 21,
+        "endLine": 79,
+        "endChar": 25
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42f69948_d48ac979",
+        "filename": "sdk/objc/Framework/UnitTests/RTCCertificateTest.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what this test is supposed to be testing. \n\nI want a simple test that calls `generateCertificateWithParams` and verifies that the properties are set correctly.\n\nThen I want another test that makes sure that the peerConnection is indeed using the specified certificate config.\n\nIt looks like this test does both of those things, which is good, but it should probably be broken up into two test. Also, it\u0027s not clear to me what this has to do with the objects lifecycle?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66fd1b7e_8e66979b",
+        "filename": "sdk/objc/Framework/UnitTests/RTCCertificateTest.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-23T11:12:36Z",
+      "side": 1,
+      "message": "is there a reason for this autoreleasepool?",
+      "range": {
+        "startLine": 49,
+        "startChar": 3,
+        "endLine": 49,
+        "endChar": 18
+      },
+      "revId": "e480e0a3fb89111892a0819292622e76e45ef9d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
