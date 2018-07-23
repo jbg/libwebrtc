@@ -16,6 +16,24 @@
       "revId": "683f87ff6543de1f659958bd774d02ba0e6566b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a9ab3da_7b53cbb4",
+        "filename": "api/mediaconstraintsinterface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-07-23T07:56:24Z",
+      "side": 1,
+      "message": "I\u0027ve tried to clarify.",
+      "parentUuid": "ca2e548b_9bc0dea9",
+      "revId": "683f87ff6543de1f659958bd774d02ba0e6566b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
