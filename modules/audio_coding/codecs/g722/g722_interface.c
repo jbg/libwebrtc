@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "modules/audio_coding/codecs/g722/g722_enc_dec.h"
+#include "modules/third_party/g722/g722_enc_dec.h"
 #include "modules/audio_coding/codecs/g722/g722_interface.h"
 #include "typedefs.h"  // NOLINT(build/include)
 
