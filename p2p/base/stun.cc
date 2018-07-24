@@ -144,6 +144,10 @@ const StunByteStringAttribute* StunMessage::GetByteString(int type) const {
   return static_cast<const StunByteStringAttribute*>(GetAttribute(type));
 }
 
+const StunUInt16ListAttribute* StunMessage::GetUInt16List(int type) const {
+  return static_cast<const StunUInt16ListAttribute*>(GetAttribute(type));
+}
+
 const StunErrorCodeAttribute* StunMessage::GetErrorCode() const {
   return static_cast<const StunErrorCodeAttribute*>(
       GetAttribute(STUN_ATTR_ERROR_CODE));
@@ -1101,6 +1105,8 @@ StunAttributeValueType IceMessage::GetAttributeValueType(int type) const {
       return STUN_VALUE_UINT64;
     case STUN_ATTR_ICE_CONTROLLING:
       return STUN_VALUE_UINT64;
+    case STUN_ATTR_MISC:
+      return STUN_VALUE_UINT16_LIST;
     default:
       return StunMessage::GetAttributeValueType(type);
   }

@@ -838,12 +838,18 @@ void P2PTransportChannel::OnUnknownAddress(
 
     uint16_t network_id = 0;
     uint16_t network_cost = 0;
+    uint16_t interface_id = 0;
     const StunUInt32Attribute* network_attr =
         stun_msg->GetUInt32(STUN_ATTR_NETWORK_INFO);
     if (network_attr) {
       uint32_t network_info = network_attr->value();
       network_id = static_cast<uint16_t>(network_info >> 16);
       network_cost = static_cast<uint16_t>(network_info);
+    }
+    const StunUInt16ListAttribute* misc_attr =
+        stun_msg->GetUInt16List(STUN_ATTR_MISC);
+    if (misc_attr) {
+      interface_id = misc_attr->GetType(STUN_ATTR_MISC_IFACE_ID);
     }
 
     // RFC 5245
@@ -860,6 +866,8 @@ void P2PTransportChannel::OnUnknownAddress(
     // from the foundation for all other remote candidates.
     remote_candidate.set_foundation(
         rtc::ToString<uint32_t>(rtc::ComputeCrc32(remote_candidate.id())));
+
+    remote_candidate.set_interface_id(interface_id);
   }
 
   // RFC5245, the agent constructs a pair whose local candidate is equal to

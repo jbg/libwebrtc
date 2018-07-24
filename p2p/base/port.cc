@@ -426,6 +426,7 @@ void Port::AddAddress(const rtc::SocketAddress& address,
   c.set_tcptype(tcptype);
   c.set_network_name(network_->name());
   c.set_network_type(network_->type());
+  c.set_interface_id(network_->interface_id());
   c.set_related_address(related_address);
   c.set_url(url);
   candidates_.push_back(c);
@@ -968,6 +969,12 @@ class ConnectionRequest : public StunRequest {
     network_info = (network_info << 16) | connection_->port()->network_cost();
     request->AddAttribute(absl::make_unique<StunUInt32Attribute>(
         STUN_ATTR_NETWORK_INFO, network_info));
+
+    uint16_t interface_id = connection_->port()->Network()->interface_id();
+    auto misc_info = absl::make_unique<StunUInt16ListAttribute>(
+        STUN_ATTR_MISC, 0 /* placeholder */);
+    misc_info->AddType(interface_id);
+    request->AddAttribute(std::move(misc_info));
 
     // Adding ICE_CONTROLLED or ICE_CONTROLLING attribute based on the role.
     if (connection_->port()->GetIceRole() == ICEROLE_CONTROLLING) {

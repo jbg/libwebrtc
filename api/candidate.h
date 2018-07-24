@@ -122,8 +122,19 @@ class Candidate {
   uint16_t network_cost() const { return network_cost_; }
 
   // An ID assigned to the network hosting the candidate.
+  //
+  // Each network in our implementation is identified by its network interface
+  // name and network prefix (see rtc::Network::key() in network.h), so the same
+  // network interface with multiple IPv4 and/or IPv6 addresses corresponds to
+  // multiple networks and network ids.
   uint16_t network_id() const { return network_id_; }
   void set_network_id(uint16_t network_id) { network_id_ = network_id; }
+
+  // An ID assigned to the network interface hosting the candidate.
+  //
+  // This id is uniquely assigned to each interface name.
+  uint16_t interface_id() const { return interface_id_; }
+  void set_interface_id(uint16_t interface_id) { interface_id_ = interface_id; }
 
   const std::string& foundation() const { return foundation_; }
   void set_foundation(const std::string& foundation) {
@@ -170,23 +181,24 @@ class Candidate {
   std::string ToStringInternal(bool sensitive) const;
 
   std::string id_;
-  int component_;
+  int component_ = 0;
   std::string protocol_;
   std::string relay_protocol_;
   rtc::SocketAddress address_;
-  uint32_t priority_;
+  uint32_t priority_ = 0;
   std::string username_;
   std::string password_;
   std::string type_;
   std::string network_name_;
-  rtc::AdapterType network_type_;
-  uint32_t generation_;
+  rtc::AdapterType network_type_ = rtc::ADAPTER_TYPE_UNKNOWN;
+  uint32_t generation_ = 0;
   std::string foundation_;
   rtc::SocketAddress related_address_;
   std::string tcptype_;
   std::string transport_name_;
-  uint16_t network_id_;
-  uint16_t network_cost_;
+  uint16_t network_id_ = 0;
+  uint16_t network_cost_ = 0;
+  uint16_t interface_id_ = 0;
   std::string url_;
 };
 

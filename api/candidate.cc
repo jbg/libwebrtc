@@ -12,14 +12,7 @@
 
 namespace cricket {
 
-Candidate::Candidate()
-    : id_(rtc::CreateRandomString(8)),
-      component_(0),
-      priority_(0),
-      network_type_(rtc::ADAPTER_TYPE_UNKNOWN),
-      generation_(0),
-      network_id_(0),
-      network_cost_(0) {}
+Candidate::Candidate() : id_(rtc::CreateRandomString(8)) {}
 
 Candidate::Candidate(int component,
                      const std::string& protocol,
@@ -40,7 +33,6 @@ Candidate::Candidate(int component,
       username_(username),
       password_(password),
       type_(type),
-      network_type_(rtc::ADAPTER_TYPE_UNKNOWN),
       generation_(generation),
       foundation_(foundation),
       network_id_(network_id),

@@ -153,6 +153,7 @@ class StunMessage {
   const StunUInt32Attribute* GetUInt32(int type) const;
   const StunUInt64Attribute* GetUInt64(int type) const;
   const StunByteStringAttribute* GetByteString(int type) const;
+  const StunUInt16ListAttribute* GetUInt16List(int type) const;
 
   // Gets these specific attribute values.
   const StunErrorCodeAttribute* GetErrorCode() const;
@@ -585,16 +586,38 @@ class TurnMessage : public StunMessage {
   StunMessage* CreateNew() const override;
 };
 
-// RFC 5245 ICE STUN attributes.
+// TODO(qingsi): Change the attribute type value of nomination to resolve the
+// conflict with the registered type (ENF-FLOW-DESCRIPTION) and register the
+// values of nomination and network information with IANA.
 enum IceAttributeType {
+  // RFC 5245 ICE STUN attributes.
   STUN_ATTR_PRIORITY = 0x0024,         // UInt32
   STUN_ATTR_USE_CANDIDATE = 0x0025,    // No content, Length = 0
   STUN_ATTR_ICE_CONTROLLED = 0x8029,   // UInt64
   STUN_ATTR_ICE_CONTROLLING = 0x802A,  // UInt64
-  STUN_ATTR_NOMINATION = 0xC001,       // UInt32
+  // The following attributes are in the comprehension-optional range
+  // (0xC000-0xFFFF) and are not registered with IANA. These STUN attributes are
+  // intended for ICE and should NOT be used in generic use cases of STUN
+  // messages.
+  //
+  // Note that the value 0xC001 is assigned by IANA to ENF-FLOW-DESCRIPTION
+  // (https://www.iana.org/assignments/stun-parameters/stun-parameters.xml)
+  STUN_ATTR_NOMINATION = 0xC001,  // UInt32
   // UInt32. The higher 16 bits are the network ID. The lower 16 bits are the
   // network cost.
-  STUN_ATTR_NETWORK_INFO = 0xC057
+  STUN_ATTR_NETWORK_INFO = 0xC057,
+  // UInt16List. Miscellaneous attributes for future extension.
+  // The first 16 bits are the interface id.
+  STUN_ATTR_MISC = 0xC058,
+};
+
+// When adding new attributes to STUN_ATTR_MISC (which is a list of uint16_t),
+// append the indices of these attributes below and do NOT change the exisiting
+// indices. The indices of attributes must be consistent with those used in
+// ConnectionRequest::Prepare when forming a STUN message for the ICE
+// connectivity check, and they are used when parsing a received STUN message.
+enum IceMiscellaneousAttributeIndex {
+  STUN_ATTR_MISC_IFACE_ID,
 };
 
 // RFC 5245-defined errors.
