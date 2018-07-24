@@ -1172,7 +1172,7 @@ class PeerConnectionFactoryInterface : public rtc::RefCountInterface {
  public:
   class Options {
    public:
-    Options() : crypto_options(rtc::CryptoOptions::NoGcm()) {}
+    Options() = default;
 
     // If set to true, created PeerConnections won't enforce any SRTP
     // requirement, allowing unsecured media. Should only be used for

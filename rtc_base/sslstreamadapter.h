@@ -79,8 +79,8 @@ struct CryptoOptions {
   static CryptoOptions NoGcm();
 
   // Enable GCM crypto suites from RFC 7714 for SRTP. GCM will only be used
-  // if both sides enable it.
-  bool enable_gcm_crypto_suites = false;
+  // if both sides enable it. This  is now enabled by default.
+  bool enable_gcm_crypto_suites = true;
 
   // If set to true, the (potentially insecure) crypto cipher
   // SRTP_AES128_CM_SHA1_32 will be included in the list of supported ciphers
