@@ -38,7 +38,12 @@ void setNetworkBit(webrtc::PeerConnectionFactoryInterface::Options* options,
 @synthesize enableGcmCryptoSuites = _enableGcmCryptoSuites;
 
 - (instancetype)init {
-  return [super init];
+  self = [super init];
+  if (self) {
+    // AES_GCM is enabled by default.
+    _enableGcmCryptoSuites = true;
+  }
+  return self;
 }
 
 - (webrtc::PeerConnectionFactoryInterface::Options)nativeOptions {

@@ -134,7 +134,7 @@ public class PeerConnectionFactory {
     public boolean disableEncryption;
     public boolean disableNetworkMonitor;
     public boolean enableAes128Sha1_32CryptoCipher;
-    public boolean enableGcmCryptoSuites;
+    public boolean enableGcmCryptoSuites = true;
 
     @CalledByNative("Options")
     int getNetworkIgnoreMask() {
