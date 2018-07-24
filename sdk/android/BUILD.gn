@@ -768,22 +768,7 @@ if (is_android) {
     ]
 
     # TODO(sakal): These should be moved to video_java but cannot because of dependencies.
-    java_files += [
-      "api/org/webrtc/EglBase.java",
-      "api/org/webrtc/GlShader.java",
-      "api/org/webrtc/GlTextureFrameBuffer.java",
-      "api/org/webrtc/GlUtil.java",
-      "api/org/webrtc/JavaI420Buffer.java",
-      "api/org/webrtc/RendererCommon.java",
-      "api/org/webrtc/SurfaceTextureHelper.java",
-      "api/org/webrtc/TextureBufferImpl.java",
-      "api/org/webrtc/YuvConverter.java",
-      "api/org/webrtc/VideoFrameDrawer.java",
-      "src/java/org/webrtc/GlGenericDrawer.java",
-      "api/org/webrtc/YuvHelper.java",
-      "src/java/org/webrtc/EglBase10.java",
-      "src/java/org/webrtc/EglBase14.java",
-    ]
+    java_files += [ "api/org/webrtc/JavaI420Buffer.java" ]
 
     deps = [
       ":base_java",
@@ -853,6 +838,20 @@ if (is_android) {
       "src/java/org/webrtc/WrappedNativeI420Buffer.java",
       "src/java/org/webrtc/WrappedNativeVideoDecoder.java",
       "src/java/org/webrtc/WrappedNativeVideoEncoder.java",
+      "api/org/webrtc/SurfaceTextureHelper.java",
+      "api/org/webrtc/TextureBufferImpl.java",
+      "api/org/webrtc/EglBase.java",
+      "api/org/webrtc/GlShader.java",
+      "api/org/webrtc/GlTextureFrameBuffer.java",
+      "api/org/webrtc/GlUtil.java",
+      "api/org/webrtc/RendererCommon.java",
+      "api/org/webrtc/YuvConverter.java",
+      "api/org/webrtc/VideoFrameDrawer.java",
+      "src/java/org/webrtc/GlGenericDrawer.java",
+      "api/org/webrtc/YuvHelper.java",
+      "src/java/org/webrtc/EglBase10.java",
+      "src/java/org/webrtc/EglBase14.java",
+      "api/org/webrtc/VideoCapturer.java",
     ]
 
     deps = [
@@ -1106,6 +1105,7 @@ if (is_android) {
         ":libjingle_peerconnection_java",
         ":libjingle_peerconnection_metrics_default_java",
         ":video_api_java",
+        ":video_java",
         "//base:base_java",
         "//base:base_java_test_support",
         "//rtc_base:base_java",
