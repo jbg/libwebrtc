@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dc845bf3_0c5befd9",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-25T00:51:06Z",
+      "side": 1,
+      "message": "We have no way to restrict the use of the WebRTC library. Some of it will be used in STUN towards other implementations\u0027 STUN servers.\nAs long as we\u0027re the only ones using them, all will go fine (they\u0027ll be ignored), I think, but as soon as someone uses the same name/number for something, anything can happen.\nThat\u0027s the point of registration.",
+      "parentUuid": "d72a350f_bb62df0c",
+      "revId": "ef3c22858f73fb46511bb2646e85fd6d45983dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73fdda8c_6458a2ec",
         "filename": "p2p/base/stun.h",
         "patchSetId": 6
