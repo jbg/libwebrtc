@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e44d4a0a_351061bd",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-25T14:51:04Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this comment is needed here.",
+      "revId": "fa71ca820df40a07903db924c478f78634ff0e6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

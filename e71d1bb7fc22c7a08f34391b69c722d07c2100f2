@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702f881a_fb3c7714",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-25T14:51:04Z",
+      "side": 0,
+      "message": "Don\u0027t we still need to deal with this case?",
+      "range": {
+        "startLine": 509,
+        "startChar": 3,
+        "endLine": 509,
+        "endChar": 0
+      },
+      "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
