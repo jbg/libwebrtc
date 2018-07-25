@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09acda1e_9479d6c9",
+        "filename": "modules/audio_processing/aec3/subtractor_output.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-25T13:47:01Z",
+      "side": 1,
+      "message": "Does it make sense to make this an anonymous helper in subtractor.cc?\n\nMy reasoning:\n 1. Calling ScaleOutputMainFilter on a SubtractorOutput will put it in an inconsistent state, since the errors are not updated accordingly.\n 2. This function has become fairly short now.\n 3. SubtractorOutput becomes a very simple state struct.\n\nvoid ComputeScaledFilterOutput(rtc::ArrayView\u003cconst float\u003e y,\n                               float factor,\n                               rtc::ArrayView\u003cfloat\u003e* s_main,\n                               rtc::ArrayView\u003cfloat\u003e* e_main) {\n  RTC_DCHECK_EQ(s_main.size(), y.size());\n  for (auto\u0026 s : *s_main) {\n    s *\u003d factor;\n  }\n  for (size_t k \u003d 0; k \u003c y.size(); ++k) {\n    *e_main[k] \u003d y[k] - *s_main[k];\n  }\n}",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 5
+      },
+      "revId": "d4b488ba0e2a74bb99e9f0bcd494d8bbe1bd3784",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
