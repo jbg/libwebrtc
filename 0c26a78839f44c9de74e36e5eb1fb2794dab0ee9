@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "459e44c7_f5fe3e9f",
+        "filename": "modules/rtp_rtcp/test/testAPI/test_api_audio.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-07-25T14:34:20Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me what, if any, in this tests is checking that the dtmf events are received.\n\nBefore this change, |telephone_event_forward_to_decoder_| was false, which may mean that the receiver just drops them on the floor. With this change, I had to edit VerifyingAudioReceiver above to ignore the DTMF packets.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 0
+      },
+      "revId": "0c26a78839f44c9de74e36e5eb1fb2794dab0ee9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
