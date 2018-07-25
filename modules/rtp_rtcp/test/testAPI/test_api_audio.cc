@@ -47,9 +47,9 @@ class VerifyingAudioReceiver : public RtpData {
       size_t payloadSize,
       const webrtc::WebRtcRTPHeader* rtpHeader) override {
     const uint8_t payload_type = rtpHeader->header.payloadType;
-    if (payload_type == kPcmuPayloadType || payload_type == kDtmfPayloadType) {
+    if (payload_type == kPcmuPayloadType) {
       EXPECT_EQ(sizeof(kTestPayload), payloadSize);
-      // All our test vectors for PCMU and DTMF are equal to |kTestPayload|.
+      // All our test vectors for PCMU are equal to |kTestPayload|.
       const size_t min_size = std::min(sizeof(kTestPayload), payloadSize);
       EXPECT_EQ(0, memcmp(payloadData, kTestPayload, min_size));
     }
