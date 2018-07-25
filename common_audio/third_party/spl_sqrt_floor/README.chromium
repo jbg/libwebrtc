@@ -1,0 +1,11 @@
+Name: sql sqrt floor
+Short Name: sql_sqrt_floor
+URL: http://www.pertinentdetail.org/sqrt
+Version: 0
+Date: 2018-03-22
+License: Custom license
+License File: LICENSE
+Security Critical: yes
+
+Description:
+Sqrt routine, originally posted here: https://groups.google.com/forum/#!searchin/comp.sys.arm/sqrt$20Wilco$20Dijkstra%7Csort:date/comp.sys.arm/E-FYsVPD8aA/v6g09oDEHn0J
