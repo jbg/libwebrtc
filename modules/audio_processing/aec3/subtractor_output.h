@@ -15,6 +15,7 @@
 
 #include "modules/audio_processing/aec3/aec3_common.h"
 #include "modules/audio_processing/aec3/fft_data.h"
+#include "rtc_base/checks.h"
 
 namespace webrtc {
 
@@ -35,24 +36,6 @@ struct SubtractorOutput {
     E_main.im.fill(0.f);
     E2_main.fill(0.f);
     E2_shadow.fill(0.f);
-  }
-
-  void ScaleOutputMainFilter(float factor) {
-    for (auto& s : s_main) {
-      s *= factor;
-    }
-    for (auto& e : e_main) {
-      e *= factor;
-    }
-    for (auto& E2 : E2_main) {
-      E2 *= factor * factor;
-    }
-    for (auto& re : E_main.re) {
-      re *= factor;
-    }
-    for (auto& im : E_main.im) {
-      im *= factor;
-    }
   }
 };
 
