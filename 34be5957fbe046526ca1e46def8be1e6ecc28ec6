@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "515cc7c0_6033080d",
+        "filename": "modules/audio_processing/aec3/subtractor_output.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-25T14:26:41Z",
+      "side": 1,
+      "message": "No longer necessary.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "34be5957fbe046526ca1e46def8be1e6ecc28ec6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
