@@ -157,29 +157,34 @@ void Subtractor::Process(const RenderBuffer& render_buffer,
   FftData S;
   FftData& G = S;
 
-  // Form the output of the main filter.
+  // Form the outputs of the main and shadow filters.
   main_filter_.Filter(render_buffer, &S);
   bool main_saturation = false;
   PredictionError(fft_, S, y, &e_main, &output->s_main,
                   adaptation_during_saturation_, &main_saturation);
-  fft_.ZeroPaddedFft(e_main, Aec3Fft::Window::kHanning, &E_main);
 
-  // Form the output of the shadow filter.
   shadow_filter_.Filter(render_buffer, &S);
   bool shadow_saturation = false;
   PredictionError(fft_, S, y, &e_shadow, nullptr, adaptation_during_saturation_,
                   &shadow_saturation);
-  fft_.ZeroPaddedFft(e_shadow, Aec3Fft::Window::kHanning, &E_shadow);
 
+  // Adjust the filter if needed.
+  bool main_filter_adjusted = false;
   if (enable_misadjustment_estimator_) {
     filter_misadjustment_estimator_.Update(e_main, y);
     if (filter_misadjustment_estimator_.IsAdjustmentNeeded()) {
       float scale = filter_misadjustment_estimator_.GetMisadjustment();
       main_filter_.ScaleFilter(scale);
-      output->ScaleOutputMainFilter(scale);
+      output->ScaleOutputMainFilter(y, scale);
       filter_misadjustment_estimator_.Reset();
+      main_filter_adjusted = true;
     }
   }
+
+  // Compute the FFts of the main and shadow filter outputs.
+  fft_.ZeroPaddedFft(e_main, Aec3Fft::Window::kHanning, &E_main);
+  fft_.ZeroPaddedFft(e_shadow, Aec3Fft::Window::kHanning, &E_shadow);
+
   // Compute spectra for future use.
   E_shadow.Spectrum(optimization_, output->E2_shadow);
   E_main.Spectrum(optimization_, output->E2_main);
@@ -187,8 +192,13 @@ void Subtractor::Process(const RenderBuffer& render_buffer,
   // Update the main filter.
   std::array<float, kFftLengthBy2Plus1> X2;
   render_buffer.SpectralSum(main_filter_.SizePartitions(), &X2);
-  G_main_.Compute(X2, render_signal_analyzer, *output, main_filter_,
-                  aec_state.SaturatedCapture() || main_saturation, &G);
+  if (!main_filter_adjusted) {
+    G_main_.Compute(X2, render_signal_analyzer, *output, main_filter_,
+                    aec_state.SaturatedCapture() || main_saturation, &G);
+  } else {
+    G.re.fill(0.f);
+    G.im.fill(0.f);
+  }
   main_filter_.Adapt(render_buffer, G);
   data_dumper_->DumpRaw("aec3_subtractor_G_main", G.re);
   data_dumper_->DumpRaw("aec3_subtractor_G_main", G.im);
