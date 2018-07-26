@@ -987,7 +987,6 @@ include_rules = [
 
   # These should eventually move out of here.
   "+common_types.h",
-  "+typedefs.h",
 
   "+WebRTC",
   "+api",
