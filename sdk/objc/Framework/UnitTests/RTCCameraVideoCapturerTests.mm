@@ -198,8 +198,7 @@ CMSampleBufferRef createTestSampleBufferRef() {
   UIDevice *currentDeviceMock = OCMClassMock([UIDevice class]);
   // UpsideDown -> RTCVideoRotation_270.
   OCMStub(currentDeviceMock.orientation).andReturn(UIDeviceOrientationPortraitUpsideDown);
-  id classMock = OCMClassMock([UIDevice class]);
-  OCMStub([classMock currentDevice]).andReturn(currentDeviceMock);
+  OCMStub(UIDevice.currentDevice).andReturn(currentDeviceMock);
 
   CMSampleBufferRef sampleBuffer = createTestSampleBufferRef();
 
@@ -225,8 +224,6 @@ CMSampleBufferRef createTestSampleBufferRef() {
 
   [(id)currentDeviceMock stopMocking];
   currentDeviceMock = nil;
-  [classMock stopMocking];
-  classMock = nil;
   CFRelease(sampleBuffer);
 #endif
 }
@@ -249,8 +246,7 @@ CMSampleBufferRef createTestSampleBufferRef() {
   // UpsideDown -> RTCVideoRotation_0.
   UIDevice *currentDeviceMock = OCMClassMock([UIDevice class]);
   OCMStub(currentDeviceMock.orientation).andReturn(deviceOrientation);
-  id classMock = OCMClassMock([UIDevice class]);
-  OCMStub([classMock currentDevice]).andReturn(currentDeviceMock);
+  OCMStub(UIDevice.currentDevice).andReturn(currentDeviceMock);
 
   CMSampleBufferRef sampleBuffer = createTestSampleBufferRef();
 
@@ -286,8 +282,6 @@ CMSampleBufferRef createTestSampleBufferRef() {
 
   [(id)currentDeviceMock stopMocking];
   currentDeviceMock = nil;
-  [classMock stopMocking];
-  classMock = nil;
   CFRelease(sampleBuffer);
 #endif
 }
@@ -315,8 +309,7 @@ CMSampleBufferRef createTestSampleBufferRef() {
   // UpsideDown -> RTCVideoRotation_0.
   UIDevice *currentDeviceMock = OCMClassMock([UIDevice class]);
   OCMStub(currentDeviceMock.orientation).andReturn(UIDeviceOrientationLandscapeLeft);
-  id classMock = OCMClassMock([UIDevice class]);
-  OCMStub([classMock currentDevice]).andReturn(currentDeviceMock);
+  OCMStub(UIDevice.currentDevice).andReturn(currentDeviceMock);
 
   CMSampleBufferRef sampleBuffer = createTestSampleBufferRef();
 
@@ -344,8 +337,6 @@ CMSampleBufferRef createTestSampleBufferRef() {
 
   [(id)currentDeviceMock stopMocking];
   currentDeviceMock = nil;
-  [classMock stopMocking];
-  classMock = nil;
   CFRelease(sampleBuffer);
 #endif
 }
