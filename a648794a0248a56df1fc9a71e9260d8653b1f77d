@@ -46,6 +46,30 @@
       "revId": "a648794a0248a56df1fc9a71e9260d8653b1f77d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c7e4383_cfca899d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-26T09:08:37Z",
+      "side": 1,
+      "message": "Ops :)\n\nI thought it was the TBR that wasn\u0027t working (it happened to me recently).\n\nOk, let me take a look in a few minutes.",
+      "parentUuid": "a53ca79c_5af61eeb",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "a648794a0248a56df1fc9a71e9260d8653b1f77d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
