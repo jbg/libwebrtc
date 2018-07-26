@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f77676da_f7a58fc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-26T08:59:52Z",
+      "side": 1,
+      "message": "This should be the first of the CL description tags.\n\nPlease try with:\n\nTBR: phoglund@webrtc.org\nBug: webrtc:3608, webrtc:5539\nChange-Id: I8c1883cfd3ba29b106b75605851cdfedf7c161bd",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "a648794a0248a56df1fc9a71e9260d8653b1f77d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
