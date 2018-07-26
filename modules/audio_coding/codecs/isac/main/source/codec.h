@@ -22,6 +22,7 @@
 #include <stddef.h>
 
 #include "modules/audio_coding/codecs/isac/main/source/structs.h"
+#include "modules/third_party/fft/fft_webrtc_structs.h"
 
 void WebRtcIsac_ResetBitstream(Bitstr* bit_stream);
 
