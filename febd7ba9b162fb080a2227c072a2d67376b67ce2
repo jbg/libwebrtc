@@ -22,6 +22,30 @@
       "revId": "febd7ba9b162fb080a2227c072a2d67376b67ce2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab72b5b9_4d25013d",
+        "filename": "modules/third_party/fft/fft_webrtc_structs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-07-26T11:27:16Z",
+      "side": 1,
+      "message": "If we put in fft.h, it will poison //modules/audio_processing:audio_processing:\n$ gn gen --check out/Default/\nERROR at //webrtc.gni:449:3: assert_no_deps failed.\n  static_library(target_name) {\n  ^----------------------------\n//modules/audio_processing:audio_processing has an assert_no_deps entry:\n  //.:poison_audio_codecs\nwhich fails for the dependency path:\n  //modules/audio_processing:audio_processing -\u003e\n  //modules/audio_processing/agc:agc -\u003e\n  //modules/audio_processing/agc:level_estimation -\u003e\n  //modules/audio_processing/vad:vad -\u003e\n  //modules/audio_coding:isac_vad -\u003e\n  //modules/third_party/fft:fft -\u003e\n  //:poison_audio_codecs",
+      "parentUuid": "3ed5f331_ac702fa5",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "febd7ba9b162fb080a2227c072a2d67376b67ce2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
