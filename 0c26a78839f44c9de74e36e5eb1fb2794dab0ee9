@@ -22,6 +22,30 @@
       "revId": "0c26a78839f44c9de74e36e5eb1fb2794dab0ee9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bd58e10_8fa1ed4d",
+        "filename": "modules/rtp_rtcp/test/testAPI/test_api_audio.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-26T10:01:24Z",
+      "side": 1,
+      "message": "Yeah, I can\u0027t see that anything is actually checking that either. Shouldn\u0027t the test be improved with a version of VerifyingAudioReceiver that checks that? Perhaps have a test vector in the fixture and have it default to kTestPayload but replace it for this test?",
+      "parentUuid": "459e44c7_f5fe3e9f",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 0
+      },
+      "revId": "0c26a78839f44c9de74e36e5eb1fb2794dab0ee9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
