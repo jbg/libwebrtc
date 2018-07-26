@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8f251102_66357c0b",
+        "filename": "media/base/fakevideorenderer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-26T10:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afa2de18_16f45665",
+      "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8382e1eb_f9dcf3f5",
         "filename": "media/base/fakevideorenderer.cc",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f2c16a21_a34b6d38",
+        "filename": "media/base/fakevideorenderer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-26T10:20:59Z",
+      "side": 1,
+      "message": "Not if we want to avoid errors like:\n\n../../media/base/fakevideorenderer.h:33:57: error: [chromium-style] virtual methods with non-empty bodies shouldn\u0027t be declared inline.\n  virtual void OnFrame(const webrtc::VideoFrame\u0026 frame) {",
+      "parentUuid": "8382e1eb_f9dcf3f5",
+      "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34ef4bb4_eaa62e41",
         "filename": "sdk/objc/Framework/UnitTests/RTCAudioDeviceModule_xctest.mm",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2018-07-26T09:41:54Z",
       "side": 1,
       "message": "Why? This is not acccording to C++ style guide and also differs from the AudioTransport declaration.",
+      "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb01727_02225c5b",
+        "filename": "sdk/objc/Framework/UnitTests/RTCAudioDeviceModule_xctest.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-26T10:20:59Z",
+      "side": 1,
+      "message": "Oh, this is \"git cl format\"! Thanks for catching it! I will revert.",
+      "parentUuid": "34ef4bb4_eaa62e41",
       "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
