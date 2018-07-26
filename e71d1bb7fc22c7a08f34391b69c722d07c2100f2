@@ -46,6 +46,30 @@
       "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c1746a_73638a5a",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-07-26T11:16:12Z",
+      "side": 0,
+      "message": "Will the _compressionSession actually be nil after backgrounding? I interpreted this as it\u0027s internal state just being somehow wrong and calls to VTCompressionSession failing.\n\nDid you test this on device putting app into background?",
+      "parentUuid": "ae7b2250_12d3255d",
+      "range": {
+        "startLine": 509,
+        "startChar": 3,
+        "endLine": 509,
+        "endChar": 0
+      },
+      "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
