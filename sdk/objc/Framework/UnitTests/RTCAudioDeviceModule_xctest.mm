@@ -43,7 +43,7 @@ typedef int32_t(^RecordedDataIsAvailableBlock)(const void* audioSamples,
 class MockAudioTransport : public webrtc::AudioTransport {
 public:
   MockAudioTransport() {}
-  ~MockAudioTransport() {}
+  ~MockAudioTransport() override {}
 
   void expectNeedMorePlayData(NeedMorePlayDataBlock block) {
     needMorePlayDataBlock = block;
@@ -57,10 +57,10 @@ public:
                            const size_t nBytesPerSample,
                            const size_t nChannels,
                            const uint32_t samplesPerSec,
-                           void* audioSamples,
-                           size_t& nSamplesOut,
-                           int64_t* elapsed_time_ms,
-                           int64_t* ntp_time_ms) {
+                           void *audioSamples,
+                           size_t &nSamplesOut,
+                           int64_t *elapsed_time_ms,
+                           int64_t *ntp_time_ms) override {
     return needMorePlayDataBlock(nSamples,
                                  nBytesPerSample,
                                  nChannels,
@@ -71,7 +71,7 @@ public:
                                  ntp_time_ms);
   }
 
-  int32_t RecordedDataIsAvailable(const void* audioSamples,
+  int32_t RecordedDataIsAvailable(const void *audioSamples,
                                   const size_t nSamples,
                                   const size_t nBytesPerSample,
                                   const size_t nChannels,
@@ -80,7 +80,7 @@ public:
                                   const int32_t clockDrift,
                                   const uint32_t currentMicLevel,
                                   const bool keyPressed,
-                                  uint32_t& newMicLevel) {
+                                  uint32_t &newMicLevel) override {
     return recordedDataIsAvailableBlock(audioSamples,
                                         nSamples,
                                         nBytesPerSample,
@@ -97,13 +97,11 @@ public:
                       int sample_rate,
                       size_t number_of_channels,
                       size_t number_of_frames,
-                      void* audio_data,
-                      int64_t* elapsed_time_ms,
-                      int64_t* ntp_time_ms) {
+                      void *audio_data,
+                      int64_t *elapsed_time_ms,
+                      int64_t *ntp_time_ms) override {}
 
-  }
-
-private:
+ private:
   NeedMorePlayDataBlock needMorePlayDataBlock;
   RecordedDataIsAvailableBlock recordedDataIsAvailableBlock;
 };
