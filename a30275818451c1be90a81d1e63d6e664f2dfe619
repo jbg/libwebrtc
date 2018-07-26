@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afa2de18_16f45665",
+        "filename": "media/base/fakevideorenderer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-07-26T09:41:54Z",
+      "side": 1,
+      "message": "can we use in-line member initialization instead?",
+      "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8382e1eb_f9dcf3f5",
+        "filename": "media/base/fakevideorenderer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-07-26T09:41:54Z",
+      "side": 1,
+      "message": "Could this not be kept in the .h but changing the function declaration from \u0027virtual\u0027 to \u0027override\u0027? There\u0027s so much in the .h already that moving this one method seems a bit arbitrary.",
+      "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34ef4bb4_eaa62e41",
+        "filename": "sdk/objc/Framework/UnitTests/RTCAudioDeviceModule_xctest.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-07-26T09:41:54Z",
+      "side": 1,
+      "message": "Why? This is not acccording to C++ style guide and also differs from the AudioTransport declaration.",
+      "revId": "a30275818451c1be90a81d1e63d6e664f2dfe619",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
