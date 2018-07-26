@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afbbf2ae_b5ab0b71",
+        "filename": "modules/third_party/fft/fft.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-26T12:58:58Z",
+      "side": 1,
+      "message": "Include guard is wrong. They should match the path somehow. Don\u0027t know exactly how that applies to third party code.",
+      "revId": "d01abc750dd457f076395c71fbdb3a1fa9d3367f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae796124_f08759ab",
+        "filename": "modules/third_party/fft/fft.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-07-26T12:58:58Z",
+      "side": 1,
+      "message": "I\u0027m not in love with these unprefixed macros, but I\u0027ll accept it for now, unless it\u0027s real easy to rename them something like FFT_x.",
+      "revId": "d01abc750dd457f076395c71fbdb3a1fa9d3367f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
