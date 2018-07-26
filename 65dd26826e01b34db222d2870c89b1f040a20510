@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "efb7fe11_adae1df9",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-26T13:33:13Z",
+      "side": 1,
+      "message": "Good point! \nRegarding H2_, erl_ and h_, for the shadow filter those are used.\n\nRegarding partition_to_constrain_ it does not need to be changed.\n\nThe tricky thing is that this code is actually also shared with the main filter, where all of these are used. I\u0027m hesitant, however, to add updating of those since the computation of them, and in particular H_, is very expensive.\n\nI would motivate that it is ok not to update those since:\n- For H2_ and erl_, they will be updated at the next block as part of the normal filter adaptation. \n-h_ is anyway only updated in a cyclic manner so it anyway an approximation of the true impulse response.",
+      "parentUuid": "db191af1_2c1885f1",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 0
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6888b57a_3b6aa0b3",
         "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-26T13:13:44Z",
       "side": 1,
       "message": "I find this logic somewhat confusing, but I don\u0027t see any way to make it easier.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 0
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b5facd0_71194138",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-26T13:33:13Z",
+      "side": 1,
+      "message": "Yes, this is the penalty we pay for having kill-switches for all new functionalities. We should clean those up asap.",
+      "parentUuid": "6888b57a_3b6aa0b3",
       "range": {
         "startLine": 109,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1239a771_14e6b504",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-26T13:33:13Z",
+      "side": 1,
+      "message": "I removed it instead so that it is as before.\nDone",
+      "parentUuid": "6bfd5df5_c83fecdd",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 5
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34b3eb4_9e0caca5",
         "filename": "modules/audio_processing/aec3/subtractor_output.cc",
         "patchSetId": 6
@@ -91,6 +163,30 @@
       "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7d52849_4fef3314",
+        "filename": "modules/audio_processing/aec3/subtractor_output.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-26T13:33:13Z",
+      "side": 1,
+      "message": "Good point!",
+      "parentUuid": "a34b3eb4_9e0caca5",
+      "range": {
+        "startLine": 20,
+        "startChar": 23,
+        "endLine": 20,
+        "endChar": 28
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "71dd52ef_731a9b9b",
+        "filename": "modules/audio_processing/aec3/subtractor_output.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-26T13:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f5806f_8b70931b",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 1
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf4f5182_2c4af89f",
         "filename": "modules/audio_processing/aec3/subtractor_output.h",
         "patchSetId": 6
@@ -137,6 +257,30 @@
       "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fff3f8bc_f524811f",
+        "filename": "modules/audio_processing/aec3/subtractor_output.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-07-26T13:33:13Z",
+      "side": 1,
+      "message": "Yes,\nThanks!",
+      "parentUuid": "bf4f5182_2c4af89f",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
