@@ -74,7 +74,7 @@ class Subtractor {
     FilterMisadjustmentEstimator() = default;
     ~FilterMisadjustmentEstimator() = default;
     // Update the misadjustment estimator.
-    void Update(rtc::ArrayView<const float> e, rtc::ArrayView<const float> y);
+    void Update(const SubtractorOutput& output);
     // GetMisadjustment() Returns a recommended scale for the filter so the
     // prediction error energy gets closer to the energy that is seen at the
     // microphone input.
@@ -112,6 +112,7 @@ class Subtractor {
   MainFilterUpdateGain G_main_;
   ShadowFilterUpdateGain G_shadow_;
   FilterMisadjustmentEstimator filter_misadjustment_estimator_;
+  size_t poor_shadow_filter_counter_ = 0;
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(Subtractor);
 };
 

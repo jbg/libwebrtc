@@ -21,8 +21,13 @@
 namespace webrtc {
 namespace {
 
+// 7 constexpr float kHErrorInitial = 10000.f;
+// constexpr float kHErrorInitial = 0.001f;
 constexpr float kHErrorInitial = 10000.f;
+// 8 constexpr float kHErrorGainChange = 10000.f;
+// constexpr float kHErrorGainChange = 0.001f;
 constexpr float kHErrorGainChange = 10000.f;
+
 constexpr int kPoorExcitationCounterInitial = 1000;
 
 }  // namespace
