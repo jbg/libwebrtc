@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3860fe71_a86279cc",
+        "filename": "common_audio/third_party/spl_sqrt_floor/README.chromium",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-07-26T08:43:21Z",
+      "side": 1,
+      "message": "There is a direct link to this post (https://groups.google.com/d/msg/comp.sys.arm/E-FYsVPD8aA/v6g09oDEHn0J) instead of using the search link.",
+      "range": {
+        "startLine": 11,
+        "startChar": 38,
+        "endLine": 11,
+        "endChar": 167
+      },
+      "revId": "48759318e65bcaf2d26b3c5ca521b02732f9f5ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
