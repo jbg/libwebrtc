@@ -22,6 +22,30 @@
       "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7b2250_12d3255d",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-07-26T08:39:16Z",
+      "side": 0,
+      "message": "It\u0027s covered by if(_compressionSession) { ... } else { resetCompressionSession \u003d YES; }.\nThe _pixelBufferPool will never be null unless the _compressionSession is.",
+      "parentUuid": "702f881a_fb3c7714",
+      "range": {
+        "startLine": 509,
+        "startChar": 3,
+        "endLine": 509,
+        "endChar": 0
+      },
+      "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
