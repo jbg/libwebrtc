@@ -30,7 +30,20 @@
 #ifndef MODULES_AUDIO_CODING_CODECS_ISAC_MAIN_SOURCE_FFT_H_
 #define MODULES_AUDIO_CODING_CODECS_ISAC_MAIN_SOURCE_FFT_H_
 
-#include "modules/audio_coding/codecs/isac/main/source/structs.h"
+#define MAXFFTSIZE 2048
+#define NFACTOR 11
+
+typedef struct {
+  unsigned int SpaceAlloced;
+  unsigned int MaxPermAlloced;
+  double Tmp0[MAXFFTSIZE];
+  double Tmp1[MAXFFTSIZE];
+  double Tmp2[MAXFFTSIZE];
+  double Tmp3[MAXFFTSIZE];
+  int Perm[MAXFFTSIZE];
+  int factor[NFACTOR];
+
+} FFTstr;
 
 /* double precision routine */
 
