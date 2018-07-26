@@ -23,6 +23,7 @@ namespace {
 
 constexpr float kHErrorInitial = 10000.f;
 constexpr float kHErrorGainChange = 10000.f;
+
 constexpr int kPoorExcitationCounterInitial = 1000;
 
 }  // namespace
