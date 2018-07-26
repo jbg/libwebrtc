@@ -22,6 +22,30 @@
       "revId": "a648794a0248a56df1fc9a71e9260d8653b1f77d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a53ca79c_5af61eeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-07-26T09:06:30Z",
+      "side": 1,
+      "message": "But the presubmit error doesn\u0027t mention lack of owner\u0027s review like one might expect. It\u0027s an error from src/tools_webrtc/valgrind/memcheck/PRESUBMIT.py,\n\nImportError: No module named suppressions\n\nCan you have a look? Previous change to suppressions.txt was landed last October, so maybe that presubmit script hasn\u0027t been run for a long while?",
+      "parentUuid": "f77676da_f7a58fc9",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "a648794a0248a56df1fc9a71e9260d8653b1f77d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
