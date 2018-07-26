@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db191af1_2c1885f1",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-26T13:13:44Z",
+      "side": 1,
+      "message": "Do these need to be updated when calling SetFilter? E.g., can anything happen between say a SetFilter call and a Constrain call?\n\nI\u0027ll assume the partition stuff is unchanged when swapping out coefficients like this.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 0
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6888b57a_3b6aa0b3",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-26T13:13:44Z",
+      "side": 1,
+      "message": "I find this logic somewhat confusing, but I don\u0027t see any way to make it easier.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 0
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6bfd5df5_c83fecdd",
+        "filename": "modules/audio_processing/aec3/subtractor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-26T13:13:44Z",
+      "side": 1,
+      "message": "Should be replaced with:\nRTC_DCHECK(shadow_filter_.SizePartitions() \u003d\u003d main_filter_.SizePartitions());\n\nhttps://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md#check_dcheck_and-notreached",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 5
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a34b3eb4_9e0caca5",
+        "filename": "modules/audio_processing/aec3/subtractor_output.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-26T13:13:44Z",
+      "side": 1,
+      "message": "Should this reset the powers as well?",
+      "range": {
+        "startLine": 20,
+        "startChar": 23,
+        "endLine": 20,
+        "endChar": 28
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22f5806f_8b70931b",
+        "filename": "modules/audio_processing/aec3/subtractor_output.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-26T13:13:44Z",
+      "side": 1,
+      "message": "Was this unintentionally reintroduced?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 1
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf4f5182_2c4af89f",
+        "filename": "modules/audio_processing/aec3/subtractor_output.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-26T13:13:44Z",
+      "side": 1,
+      "message": "Was this unintentionally reintroduced?",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "65dd26826e01b34db222d2870c89b1f040a20510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
