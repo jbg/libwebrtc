@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "09170a16_e78fab56",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-27T08:25:55Z",
+      "side": 1,
+      "message": "Should be fuzzed, but I think it is better to make a separate CL that collects the currently missing field trial flags.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/test/fuzzers/audio_processing_configs_fuzzer.cc?dr\u003dCSs\u0026q\u003daudio_processing_configs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d49",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93fc920e_d73d0224",
         "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
         "patchSetId": 8
@@ -370,6 +393,75 @@
     },
     {
       "key": {
+        "uuid": "aff0580e_fd535c24",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-27T08:25:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is the min number of stable regions or the minimum value in a numerically stable region. May want to avoid abbreviating \u0027num\u0027 in this particular case.",
+      "range": {
+        "startLine": 323,
+        "startChar": 8,
+        "endLine": 323,
+        "endChar": 29
+      },
+      "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f52dc0_302e7c64",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-27T08:25:55Z",
+      "side": 1,
+      "message": "const float",
+      "range": {
+        "startLine": 323,
+        "startChar": 2,
+        "endLine": 323,
+        "endChar": 7
+      },
+      "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40c6a27_06bbbfa9",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-27T08:25:55Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be \u0027er\u0027? If it\u0027s from estimating the _early_ reverb.",
+      "range": {
+        "startLine": 339,
+        "startChar": 29,
+        "endLine": 339,
+        "endChar": 31
+      },
+      "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "405a044d_03375136",
         "filename": "modules/audio_processing/aec3/reverb_decay_estimator.h",
         "patchSetId": 8
@@ -455,6 +547,29 @@
         "startChar": 27,
         "endLine": 95,
         "endChar": 29
+      },
+      "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c423ef02_ef686550",
+        "filename": "modules/audio_processing/aec3/reverb_frequency_response.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-27T08:25:55Z",
+      "side": 1,
+      "message": "Should be fuzzed, but same comment as on the other field trial flag applies.",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 53
       },
       "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
