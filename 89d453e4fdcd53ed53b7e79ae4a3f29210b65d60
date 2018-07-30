@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "f6fde359_8c082aca",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T13:52:43Z",
+      "side": 1,
+      "message": "The if-statements don\u0027t belong. DCHECK failures shouldn\u0027t be handled. The Chromium guide lays it out pretty well:\nhttps://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md#check_dcheck_and-notreached",
+      "parentUuid": "22aff6ab_7ac5b6fc",
+      "range": {
+        "startLine": 321,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 14
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "226e4577_e44018c0",
         "filename": "modules/audio_processing/aec3/reverb_decay_estimator.h",
         "patchSetId": 10
