@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f58535f_dc80620b",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "It was the late_reverb_decay_estimator that changed estimation return value, not early_reverb_estimator.\nThis exponentiation should move to line 177.",
+      "range": {
+        "startLine": 169,
+        "startChar": 6,
+        "endLine": 169,
+        "endChar": 21
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee37dd71_59be2e91",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "This is not part of the linear regression, should have been moved out together with the exponentiation (and I should have been more clear about what I meant could be moved out), but see my long comment about this class: all past and present options so far are fine.",
+      "range": {
+        "startLine": 288,
+        "startChar": 18,
+        "endLine": 288,
+        "endChar": 34
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ecba41d_ea2d82df",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "There\u0027s nothing stopping accidentally calling Accumulate too many times, causing section_ index on numerators_ to go out of bounds. DCHECK? Or silently stop collecting data?",
+      "range": {
+        "startLine": 321,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 14
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "226e4577_e44018c0",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "Good points about naming. I think it should be named whichever option you find most fitting, and I should not nit about naming details like this.\n\nRegarding the exponentiation 2^(kFfttLengthBy2 * slope), if naming reverts then feel free to keep it in this class, too.\n\nI was mainly after:\n1. clarifying that this class runs a linear regression, and\n2. clarifying, or changing, that the data is logarithm\u0027d outside of the class but the re-exponentiation is performed inside.\n\nThis is just as easily attained with a brief comment, or renaming the variables (z, nz_, nn_, N_, ...) to something more verbose but descriptive (e.g. sum_of_squared_indices_, sum_of_data_times_index, required_num_data_points, ...).",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03846c9a_a0919362",
+        "filename": "modules/audio_processing/aec3/reverb_decay_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "early",
+      "range": {
+        "startLine": 96,
+        "startChar": 29,
+        "endLine": 96,
+        "endChar": 33
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c58d3ce_1d082f18",
+        "filename": "modules/audio_processing/aec3/reverb_frequency_response.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "No longer need to check linear_filter_quality. Ensured to exist.\n\nconst float smoothing \u003d 0.2f * linear_filter_quality;",
+      "range": {
+        "startLine": 98,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 64
+      },
+      "revId": "89d453e4fdcd53ed53b7e79ae4a3f29210b65d60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

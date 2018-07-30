@@ -1177,6 +1177,30 @@
     },
     {
       "key": {
+        "uuid": "13172506_4310fdb3",
+        "filename": "modules/audio_processing/aec3/reverb_frequency_response.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-07-30T11:05:07Z",
+      "side": 1,
+      "message": "Oh, great! Thanks!",
+      "parentUuid": "22c3c685_51f65752",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "77b53f4936c408451eb27ff0b0c77469d7466463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "175d95fa_b731030e",
         "filename": "modules/audio_processing/aec3/reverb_frequency_response.cc",
         "patchSetId": 8
