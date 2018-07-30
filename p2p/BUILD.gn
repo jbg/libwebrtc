@@ -20,6 +20,8 @@ rtc_static_library("rtc_p2p") {
   sources = [
     "base/asyncstuntcpsocket.cc",
     "base/asyncstuntcpsocket.h",
+    "base/basicasyncresolverfactory.cc",
+    "base/basicasyncresolverfactory.h",
     "base/basicpacketsocketfactory.cc",
     "base/basicpacketsocketfactory.h",
     "base/candidatepairinterface.h",
