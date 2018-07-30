@@ -5957,6 +5957,7 @@ void PeerConnection::ReportUsagePattern() const {
       static_cast<int>(UsageEvent::ICE_STATE_CONNECTED);
   if ((usage_event_accumulator_ & bad_bits) == bad_bits &&
       (usage_event_accumulator_ & good_bits) == 0) {
+    RTC_CHECK(observer_);
     observer_->OnInterestingUsage(usage_event_accumulator_);
   }
 }
