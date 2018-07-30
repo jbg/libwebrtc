@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c79e945_0310c12f",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5960,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-30T20:21:31Z",
+      "side": 1,
+      "message": "THE PROBLEM\n\nI will never know third_party/webrtc\u0027s fascination with raw pointers held by reference counted objects. The caller of Initialize(), which owns the observer_, can neither reset the observer_ to tell the PC to stop using it such that it can be destroyed, or be informed when the PeerConnection is destroyed as to know that it is now safe to destroy the observer. The API is inherently unsafe unless the application has full control of of all references the the PC, but the PC and other components may post in-flight operations keeping it alive with tasks\u0027 references.\n\nobserver_ is only set in one place in the code, at Initialize(), after it has been verified that is set to a non-null value:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/peerconnection.cc?q\u003dpeerconnection.cc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d909\nIf this happens it will never again have a non-null value. And it is only in this case that MSG_REPORT_USAGE_PATTERN is PostDelayed, otherwise the only possibility of ReportUsagePattern() happening is if Close() is called.\n\nSo, ReportUsagePattern() is only problematic in two scenarios:\n\n1. PeerConnection::Initialize() was called with invalid arguments and exited early, before observer_ was set, and subsequently PeerConnection::Close() was called, which invokes ReportUsagePattern() even though observer_ was set to its default null value.\n\n2. PeerConnection outlives the observer and observer_ is a dangling pointer.\n\nI don\u0027t think 1) would be a problem for Chrome, because if Initialize() fails an exception is thrown and the RTCPeerConnection should never be in a non-closed state:\nhttps://cs.chromium.org/chromium/src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc?sq\u003dpackage:chromium\u0026dr\u0026g\u003d0\u0026l\u003d606\nMeaning the handler should never attempt to close the native PC even if GC happened, because \"if closed don\u0027t try to close\":\nhttps://cs.chromium.org/chromium/src/content/renderer/media/webrtc/rtc_peer_connection_handler.cc?sq\u003dpackage:chromium\u0026dr\u0026g\u003d0\u0026l\u003d1951\n\n2) on the other hand does look like it is a real problem. The observer is reference counted and held by the handler, which is the only reference to it other than PC\u0027s raw ptr:\nhttps://cs.chromium.org/chromium/src/content/renderer/media/webrtc/rtc_peer_connection_handler.h?sq\u003dpackage:chromium\u0026dr\u0026g\u003d0\u0026l\u003d347\nIf blink::RTCPeerConnection is garbage collected such that the handler is destroyed and the observer along with it, but the blink::RTCRtpSender is not garbage collected such that content::RTCRtpSender keeps webrtc::PeerConnection alive with a reference, then there will be references to the PC but no references to the observer other than raw pointers. Voila, the observer is destroyed and PC still exists with a dangling observer_ pointer.\n\nIf I am correct, the RTC_CHECK will not help you, because 1) is not a problem and in the case of 2) it is non-null (even though destroyed) when we attempt to use it.",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ad91534_bcfb2e66",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5961,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-30T20:21:31Z",
+      "side": 1,
+      "message": "THE SOLUTION\n\nTo address 1), only invoke OnInterestingUsage if observer_ is not null. But again, this will only fix the problem where Initialize() failed and Close() was called anyway, which probably isn\u0027t a real issue.\n\nOr to address 2) and to change the API such that it is possible to tell the PC not to use the observer anymore allowing the caller to stop referencing the observer, perform observer_ \u003d nullptr; in Close(). Though any async callback trying to use observer_ without an \"if (observer_)\" check then suddely becomes more scary.\n\nOr to address \"please stop using raw pointers when you don\u0027t control the ownership of the holder of the pointer /kind regards hbos\" change it such that webrtc::PeerConnection uses a scoped_refptr to observer_ and not a raw ptr. But this is not needed if Close() properly cleans things up.",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
