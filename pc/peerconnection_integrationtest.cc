@@ -399,6 +399,22 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     return data_observer_.get();
   }
 
+  // Returns null on failure.
+  std::unique_ptr<SessionDescriptionInterface> CreateOffer() {
+    rtc::scoped_refptr<MockCreateSessionDescriptionObserver> observer(
+        new rtc::RefCountedObject<MockCreateSessionDescriptionObserver>());
+    pc()->CreateOffer(observer, offer_answer_options_);
+    return WaitForDescriptionFromObserver(observer);
+  }
+
+  // Returns null on failure.
+  std::unique_ptr<SessionDescriptionInterface> CreateAnswer() {
+    rtc::scoped_refptr<MockCreateSessionDescriptionObserver> observer(
+        new rtc::RefCountedObject<MockCreateSessionDescriptionObserver>());
+    pc()->CreateAnswer(observer, offer_answer_options_);
+    return WaitForDescriptionFromObserver(observer);
+  }
+
   int audio_frames_received() const {
     return fake_audio_capture_module_->frames_received();
   }
@@ -711,22 +727,6 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     EXPECT_TRUE(SetRemoteDescription(std::move(desc)));
     // Set the RtpReceiverObserver after receivers are created.
     ResetRtpReceiverObservers();
-  }
-
-  // Returns null on failure.
-  std::unique_ptr<SessionDescriptionInterface> CreateOffer() {
-    rtc::scoped_refptr<MockCreateSessionDescriptionObserver> observer(
-        new rtc::RefCountedObject<MockCreateSessionDescriptionObserver>());
-    pc()->CreateOffer(observer, offer_answer_options_);
-    return WaitForDescriptionFromObserver(observer);
-  }
-
-  // Returns null on failure.
-  std::unique_ptr<SessionDescriptionInterface> CreateAnswer() {
-    rtc::scoped_refptr<MockCreateSessionDescriptionObserver> observer(
-        new rtc::RefCountedObject<MockCreateSessionDescriptionObserver>());
-    pc()->CreateAnswer(observer, offer_answer_options_);
-    return WaitForDescriptionFromObserver(observer);
   }
 
   std::unique_ptr<SessionDescriptionInterface> WaitForDescriptionFromObserver(
@@ -4477,6 +4477,24 @@ TEST_P(PeerConnectionIntegrationTest,
   EXPECT_LT(0, callee_ice_config_count);
   EXPECT_LT(0, callee_ice_event_count);
 }
+
+#ifdef HAVE_SCTP
+TEST_P(PeerConnectionIntegrationTest, AddressHarvestingWorks) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  SetSignalIceCandidates(false);
+  caller()->CreateDataChannel();
+  auto offer = caller()->CreateOffer();
+  rtc::scoped_refptr<MockSetSessionDescriptionObserver> observer(
+      new rtc::RefCountedObject<MockSetSessionDescriptionObserver>());
+  caller()->pc()->SetLocalDescription(observer, offer.release());
+  ASSERT_TRUE_WAIT(observer->called(), kDefaultTimeout);
+  ASSERT_EQ_WAIT(PeerConnectionInterface::kIceGatheringComplete,
+                 caller()->pc()->ice_gathering_state(), kDefaultTimeout);
+  caller()->pc()->Close();
+  // Expect no crash
+  // TODO(hta): Observe that interesting usage observer triggers.
+}
+#endif  // HAVE_SCTP
 
 INSTANTIATE_TEST_CASE_P(PeerConnectionIntegrationTest,
                         PeerConnectionIntegrationTest,
