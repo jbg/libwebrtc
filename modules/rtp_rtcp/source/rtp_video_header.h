@@ -12,6 +12,7 @@
 
 #include "absl/types/variant.h"
 #include "api/video/video_content_type.h"
+#include "api/video/video_frame_marking.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_timing.h"
 #include "common_types.h"  // NOLINT(build/include)
@@ -76,6 +77,7 @@ struct RTPVideoHeader {
   PlayoutDelay playout_delay;
   VideoContentType content_type;
   VideoSendTiming video_timing;
+  FrameMarking frame_marking;
   bool is_first_packet_in_frame;
   uint8_t simulcastIdx;
   VideoCodecType codec;
