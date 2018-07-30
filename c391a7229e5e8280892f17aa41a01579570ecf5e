@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26c8e6fe_4d778192",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-30T22:49:42Z",
+      "side": 1,
+      "message": "api/ isn\u0027t supposed to depend on things not in the API. Can this file be moved from rtc_base/ to api/ ?",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7354729a_4d7140b8",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-30T22:49:42Z",
+      "side": 1,
+      "message": "Use the webrtc namespace for new things.",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c84d08e7_7b390b4e",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-30T22:49:42Z",
+      "side": 1,
+      "message": "Maybe give some background here: This is used by WebRTC clients to provide DNS resolving functionality to the WebRTC implementation.",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "223f2f19_0d98503b",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-30T22:49:42Z",
+      "side": 1,
+      "message": "AsyncResolverFactoryInterface?",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d3b879f_14aa7407",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-30T22:49:42Z",
+      "side": 1,
+      "message": "Hmm, that is surprising behavior.",
+      "range": {
+        "startLine": 24,
+        "startChar": 28,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f73ae05_70886f23",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-07-30T22:49:42Z",
+      "side": 1,
+      "message": "Could add a (temporary) shim that takes a PortAllocator and exposes the CreateAsyncResolver as an implementation of AsyncResolverFactory. PeerConnectionFactory would supply that if a specific resolver factory is not specified.",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
