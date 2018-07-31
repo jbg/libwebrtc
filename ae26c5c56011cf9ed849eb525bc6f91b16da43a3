@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df643683_c4346589",
+        "filename": "pc/iceserverparsing.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-07-31T20:28:01Z",
+      "side": 1,
+      "message": "Is there a reason you took out the original string from the log?\n\": \" \u003c\u003c in_str",
+      "range": {
+        "startLine": 61,
+        "startChar": 51,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "ae26c5c56011cf9ed849eb525bc6f91b16da43a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

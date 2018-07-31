@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95bfb2bf_5a97bcbd",
+        "filename": "pc/iceserverparsing.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-07-31T20:28:01Z",
+      "side": 1,
+      "message": "Kind of a tangent here, but I was thinking...depending on the order of urls you could get different behavior. \n\nSay you have 3 stun server urls: {url_1, url_2, url_bad} (one with bad syntax). \nSituation A: {url_1, url_2, url_bad}\n  You would append 2 stun_servers before logging the error and returning. \nSituation B: {url_bad, url_1, url_2}\n  You would immediately error and return without appending any stun_servers.\n\nI know that PeerConnection doesn\u0027t do anything if an error is returned \u0026 this is the current behavior, so this doesn\u0027t matter. But from an API perspective would it make more sense to have the same behavior no matter the order? Maybe someone would want the stun_server list to be populated even if one url was poorly formatted.",
+      "range": {
+        "startLine": 308,
+        "startChar": 27,
+        "endLine": 308,
+        "endChar": 31
+      },
+      "revId": "f88fdb0ed9a217d379cbed7febaf5ab84bcc5eb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9818da4d_33d1901e",
+        "filename": "pc/iceserverparsing.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-07-31T20:28:01Z",
+      "side": 1,
+      "message": "Should this mention from \"IceServers\" index i?",
+      "range": {
+        "startLine": 341,
+        "startChar": 17,
+        "endLine": 341,
+        "endChar": 22
+      },
+      "revId": "f88fdb0ed9a217d379cbed7febaf5ab84bcc5eb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
