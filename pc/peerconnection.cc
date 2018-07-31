@@ -1130,6 +1130,7 @@ bool PeerConnection::AddStream(MediaStreamInterface* local_stream) {
   }
 
   stats_->AddStream(local_stream);
+  RTC_CHECK(observer_);
   observer_->OnRenegotiationNeeded();
   return true;
 }
@@ -1159,6 +1160,7 @@ void PeerConnection::RemoveStream(MediaStreamInterface* local_stream) {
   if (IsClosed()) {
     return;
   }
+  RTC_CHECK(observer_);
   observer_->OnRenegotiationNeeded();
 }
 
@@ -1187,6 +1189,7 @@ RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> PeerConnection::AddTrack(
       (IsUnifiedPlan() ? AddTrackUnifiedPlan(track, stream_ids)
                        : AddTrackPlanB(track, stream_ids));
   if (sender_or_error.ok()) {
+    RTC_CHECK(observer_);
     observer_->OnRenegotiationNeeded();
     stats_->AddTrack(track);
   }
@@ -1333,6 +1336,7 @@ RTCError PeerConnection::RemoveTrackNew(
           "Couldn't find sender " + sender->id() + " to remove.");
     }
   }
+  RTC_CHECK(observer_);
   observer_->OnRenegotiationNeeded();
   return RTCError::OK();
 }
@@ -1423,6 +1427,7 @@ PeerConnection::AddTransceiver(
   transceiver->internal()->set_direction(init.direction);
 
   if (fire_callback) {
+    RTC_CHECK(observer_);
     observer_->OnRenegotiationNeeded();
   }
 
@@ -1498,6 +1503,7 @@ PeerConnection::CreateAndAddTransceiver(
 void PeerConnection::OnNegotiationNeeded() {
   RTC_DCHECK_RUN_ON(signaling_thread());
   RTC_DCHECK(!IsClosed());
+  RTC_CHECK(observer_);
   observer_->OnRenegotiationNeeded();
 }
 
@@ -1723,6 +1729,7 @@ rtc::scoped_refptr<DataChannelInterface> PeerConnection::CreateDataChannel(
   // Trigger the onRenegotiationNeeded event for every new RTP DataChannel, or
   // the first SCTP DataChannel.
   if (data_channel_type() == cricket::DCT_RTP || first_datachannel) {
+    RTC_CHECK(observer_);
     observer_->OnRenegotiationNeeded();
   }
   NoteUsageEvent(UsageEvent::DATA_ADDED);
@@ -2082,6 +2089,7 @@ RTCError PeerConnection::ApplyLocalDescription(
         transceiver->internal()->set_fired_direction(media_desc->direction());
       }
     }
+    RTC_CHECK(observer_);
     for (auto transceiver : remove_list) {
       observer_->OnRemoveTrack(transceiver->receiver());
     }
@@ -2488,6 +2496,7 @@ RTCError PeerConnection::ApplyRemoteDescription(
       }
     }
     // Once all processing has finished, fire off callbacks.
+    RTC_CHECK(observer_);
     for (auto transceiver : now_receiving_transceivers) {
       stats_->AddTrack(transceiver->receiver()->track());
       observer_->OnTrack(transceiver);
@@ -2576,6 +2585,7 @@ RTCError PeerConnection::ApplyRemoteDescription(
     }
 
     // Iterate new_streams and notify the observer about new MediaStreams.
+    RTC_CHECK(observer_);
     for (size_t i = 0; i < new_streams->count(); ++i) {
       MediaStreamInterface* new_stream = new_streams->at(i);
       stats_->AddStream(new_stream);
@@ -3308,6 +3318,9 @@ void PeerConnection::Close() {
     event_log_.reset();
   });
   ReportUsagePattern();
+  // The .h file says that observer can be discarded after close() returns.
+  // Make sure this is true.
+  observer_ = nullptr;
 }
 
 void PeerConnection::OnMessage(rtc::Message* msg) {
@@ -5957,6 +5970,7 @@ void PeerConnection::ReportUsagePattern() const {
       static_cast<int>(UsageEvent::ICE_STATE_CONNECTED);
   if ((usage_event_accumulator_ & bad_bits) == bad_bits &&
       (usage_event_accumulator_ & good_bits) == 0) {
+    RTC_CHECK(observer_);
     observer_->OnInterestingUsage(usage_event_accumulator_);
   }
 }
