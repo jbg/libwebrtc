@@ -913,9 +913,9 @@ bool PeerConnection::Initialize(
   cricket::ServerAddresses stun_servers;
   std::vector<cricket::RelayServerConfig> turn_servers;
 
-  RTCErrorType parse_error =
+  RTCError parse_error =
       ParseIceServers(configuration.servers, &stun_servers, &turn_servers);
-  if (parse_error != RTCErrorType::NONE) {
+  if (!parse_error.ok()) {
     return false;
   }
 
@@ -2957,10 +2957,10 @@ bool PeerConnection::SetConfiguration(const RTCConfiguration& configuration,
   // Parse ICE servers before hopping to network thread.
   cricket::ServerAddresses stun_servers;
   std::vector<cricket::RelayServerConfig> turn_servers;
-  RTCErrorType parse_error =
+  RTCError parse_error =
       ParseIceServers(configuration.servers, &stun_servers, &turn_servers);
-  if (parse_error != RTCErrorType::NONE) {
-    return SafeSetError(parse_error, error);
+  if (!parse_error.ok()) {
+    return SafeSetError(std::move(parse_error), error);
   }
   // Note if STUN or TURN servers were supplied.
   if (!stun_servers.empty()) {

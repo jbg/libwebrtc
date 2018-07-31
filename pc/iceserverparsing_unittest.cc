@@ -58,8 +58,8 @@ class IceServerParsingTest : public testing::Test {
     server.tls_cert_policy = tls_certificate_policy;
     server.hostname = hostname;
     servers.push_back(server);
-    return webrtc::ParseIceServers(servers, &stun_servers_, &turn_servers_) ==
-           webrtc::RTCErrorType::NONE;
+    return webrtc::ParseIceServers(servers, &stun_servers_, &turn_servers_)
+        .ok();
   }
 
  protected:
@@ -227,8 +227,9 @@ TEST_F(IceServerParsingTest, ParseMultipleUrls) {
   server.username = "foo";
   server.password = "bar";
   servers.push_back(server);
-  EXPECT_EQ(webrtc::RTCErrorType::NONE,
-            webrtc::ParseIceServers(servers, &stun_servers_, &turn_servers_));
+  EXPECT_EQ(
+      webrtc::RTCErrorType::NONE,
+      webrtc::ParseIceServers(servers, &stun_servers_, &turn_servers_).type());
   EXPECT_EQ(1U, stun_servers_.size());
   EXPECT_EQ(1U, turn_servers_.size());
 }
@@ -243,8 +244,9 @@ TEST_F(IceServerParsingTest, TurnServerPrioritiesUnique) {
   server.username = "foo";
   server.password = "bar";
   servers.push_back(server);
-  EXPECT_EQ(webrtc::RTCErrorType::NONE,
-            webrtc::ParseIceServers(servers, &stun_servers_, &turn_servers_));
+  EXPECT_EQ(
+      webrtc::RTCErrorType::NONE,
+      webrtc::ParseIceServers(servers, &stun_servers_, &turn_servers_).type());
   EXPECT_EQ(2U, turn_servers_.size());
   EXPECT_NE(turn_servers_[0].priority, turn_servers_[1].priority);
 }
