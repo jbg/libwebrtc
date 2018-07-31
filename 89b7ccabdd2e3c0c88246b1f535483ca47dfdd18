@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "82b3c708_8c56732a",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5960,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T08:36:59Z",
+      "side": 1,
+      "message": "You could CHECK rtc::RefCountedObject\u0027s HasOneRef()\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/refcountedobject.h?type\u003dcs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d51\nWhen the handler is destroyed as a way to check that \"the handler\u0027s reference is the only reference\", which is a way to predict that it will be destroyed now. But I don\u0027t think you should do that because...\n\n1. With current code, this assumption is not expected to hold, so you\u0027re just going to increase crashes in a well understood scenario (PC is GC\u0027d before sender). This is currently only a problem if the PC is GC\u0027d within 1min (REPORT_USAGE_PATTERN_DELAY_MS) of creation (probably pretty rare), but if you add the CHECK it would be a problem if the PC is ever GC\u0027d before the sender (probably very likely). If we want it to hold we have to change the senders/receivers to keep the handler alive and reach the PC through it rather than a direct reference to the PC.\n\n2. If the PC stops using a raw ptr or any other part of the code wants a reference to the observer this CHECK would stop working. HasOneRef() is not future-proof and smells of not properly thought out design. Also, it would not always work today either: if there are in-flight tasks (observer posting signaling -\u003e main thread) then we would have multiple references to it.\n\n3. I don\u0027t want to enforce the design where nobody is allowed to reference the webrtc::PeerConnection. This is error prone, it is not obvious that you would not be allowed to do this and even if you try to avoid it you\u0027d probably accidentally do it somewhere if you ever PostTask between main and signaling threads.\n\nI think reference counted objects have by design shared ownership and messing around with HasOneRef() only makes sense in very limited contexts - in a multi-threaded, multi-referenced context I would prefer not to have to enforce this for the sake of simple design.",
+      "parentUuid": "ad38f391_2caee92f",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ad91534_bcfb2e66",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "resetting observer_ in Close() would destroy the usage pattern observer use case, since the event we\u0027re looking to observe happens as a result of Close().",
       "parentUuid": "9ad91534_bcfb2e66",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b180755c_39bc2fd3",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5961,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T08:36:59Z",
+      "side": 1,
+      "message": "It\u0027s OK, you can perform ReportUsagePattern() just before doing observer_ \u003d nullptr inside of Close().\n\nYou do however need to be prepared that any in-flight tasks have a null observer_, so I would either add CHECKs before use or ifs.\n\nNot being able to say \"stop using the observer\" if the usage is raw ptr is insane. Either that should be fixed or the observer\u0027s ownership should be shared with the PC.",
+      "parentUuid": "cffd4df7_d58bcc01",
       "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
