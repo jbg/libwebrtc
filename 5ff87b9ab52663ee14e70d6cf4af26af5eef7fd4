@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "485ac19b_66e7e71b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3407,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "Here too?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44f3c733_b62c79e3",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3425,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "And here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ddd056_afd3ce78",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3547,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "Here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f44d3b4_64ccb0d6",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3557,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "Here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c2ee879_a6c82855",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3571,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "Here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef99fb52_027bbdc2",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3580,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "Here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d00d0e61_5f170641",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3594,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6abaf0b3_cea9784d",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3611,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caa4cde3_98373372",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3620,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f80cb19_89e2c2b4",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3629,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e972bacc_09c5ede3",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3638,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35683411_22f0cbae",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4280,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "798622fe_a44b9774",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4293,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02b6e4fc_7b7e8a22",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4467,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5693e5a_429638a3",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4590,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b8332e8_48df0601",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 5974,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T11:54:45Z",
+      "side": 1,
+      "message": "This is still unsafe. Calling close() does not stop the in-flight PostDelay() triggered at Initialize(), so if Close() happens during that first minute observer_ is nulled and this CHECK will definitely be triggered.\n\nDo one of the following:\n1. Make ReportUsagePattern() a \"Maybe\" operation: At first line of ReportUsagePattern(), \"if (!observer_) return;\"\n2. Enforce only calling ReportUsagePattern() if observer_ is in a valid state: That is, in OnMessage(), add an \"if (observer_)\" to guard the ReportUsagePattern() call.",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
