@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e9edf643_64d83c5b",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-07-31T01:15:58Z",
+      "side": 1,
+      "message": "At first I was thinking of placing this file to p2p/base, given that portallocator.h and also packetsocketfactory.h are both there, but there seems to be other problems in either place 1) PeerConnectionDependencies will need it, 2) AsyncResolver depends on things like sigslot.\n\nMaybe forward declaration of AsyncResolver?",
+      "parentUuid": "26c8e6fe_4d778192",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7354729a_4d7140b8",
         "filename": "api/asyncresolverfactory.h",
         "patchSetId": 1
@@ -64,6 +82,30 @@
       "writtenOn": "2018-07-30T22:49:42Z",
       "side": 1,
       "message": "AsyncResolverFactoryInterface?",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92077ad4_32790168",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-07-31T01:15:58Z",
+      "side": 1,
+      "message": "I am not sure about the naming either. It seems we do not have a consistent naming convention on interfaces shared by WebRTC and Chromium, e.g. PacketSocketFactory and PortAllocator. Maybe we can come up with a consensus how we interpret https://google.github.io/styleguide/cppguide.html#Interfaces.",
+      "parentUuid": "223f2f19_0d98503b",
       "range": {
         "startLine": 19,
         "startChar": 6,
