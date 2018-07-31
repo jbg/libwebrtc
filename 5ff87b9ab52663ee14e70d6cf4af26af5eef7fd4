@@ -307,6 +307,24 @@
       "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93c8b403_91b479d9",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 5974,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T13:20:17Z",
+      "side": 1,
+      "message": "It\u0027s not necessarily a race. There is nothing about the PC interface that says \"you must free all references to the PC ASAP after Close()\" (which wouldn\u0027t even work because of in-flight stuff). It is a reference counted object, you can keep a reference to it forever if you like. The only thing you have to do is make sure it is closed before you destroy it, there\u0027s nothing in the contract about when to destroy it, and the spec is clear about that. In the case of Chrome, the PC is only freed if GC happens, which is not guaranteed to happen just because you closed the PC.",
+      "parentUuid": "4acd2989_f8fb698c",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

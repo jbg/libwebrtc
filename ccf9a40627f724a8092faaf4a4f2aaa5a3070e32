@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4586f867_05ab1bc4",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 5966,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T13:20:17Z",
+      "side": 1,
+      "message": "This comment does not have any explanatory value and sounds very unsure of itself. Remember that you are allowed to keep a closed PC around forever, which Chrome might do if GC does not happen, so it would not even be unusual for this to happen. GC happening within less than a minute of close() would probably be more uncommon than the other way around.\n\nA better comment would be something like \"This can be null if Close() was called within REPORT_USAGE_PATTERN_DELAY_MS of Initialize() and the peer connection is still alive\", or if that\u0027s too specific, \"between Initialize() and the delayed reporting of usage pattern\".",
+      "revId": "ccf9a40627f724a8092faaf4a4f2aaa5a3070e32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
