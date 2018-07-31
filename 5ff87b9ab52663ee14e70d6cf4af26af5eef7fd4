@@ -223,6 +223,24 @@
     },
     {
       "key": {
+        "uuid": "f9773ce7_a75f0f47",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4293,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-31T13:07:01Z",
+      "side": 1,
+      "message": "my search-fu failed. Will fix.",
+      "parentUuid": "798622fe_a44b9774",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "02b6e4fc_7b7e8a22",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 4
@@ -268,6 +286,24 @@
       "writtenOn": "2018-07-31T11:54:45Z",
       "side": 1,
       "message": "This is still unsafe. Calling close() does not stop the in-flight PostDelay() triggered at Initialize(), so if Close() happens during that first minute observer_ is nulled and this CHECK will definitely be triggered.\n\nDo one of the following:\n1. Make ReportUsagePattern() a \"Maybe\" operation: At first line of ReportUsagePattern(), \"if (!observer_) return;\"\n2. Enforce only calling ReportUsagePattern() if observer_ is in a valid state: That is, in OnMessage(), add an \"if (observer_)\" to guard the ReportUsagePattern() call.",
+      "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4acd2989_f8fb698c",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 5974,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-31T13:07:01Z",
+      "side": 1,
+      "message": "this crash doesn\u0027t happen when the PC is destroyed, because the message queue on which the PostDelay is done is destroyed along with the PC without being emptied. But it\u0027s racy for the case where the message queue is processed between close() and destruction (close at 59.999).\nI\u0027ll make this particular case \"if observer_ then observe else RTC_LOG(INFO)\".",
+      "parentUuid": "9b8332e8_48df0601",
       "revId": "5ff87b9ab52663ee14e70d6cf4af26af5eef7fd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
