@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ad38f391_2caee92f",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5960,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-31T06:58:00Z",
+      "side": 1,
+      "message": "I think you\u0027re correct. We can never get here, since OnInterestingUsage() will only be called after a series of calls have succeeded - which only works if initialization was successful.\nThe crashes occur on a ReportUsagePattern() that was dispatched via a message (thread-jumping, most likely because of a close() that wasn\u0027t on the signalling thread).\nSo the state we want to detect is this call being invoked where observer_ is destroyed (which should only happen if content::RTCPeerConnectionHandler is destroyed), but webrtc::PeerConnection is alive.\nComments in the content: layer seem to indicate that the author thought the webrtc::PeerConnection would be destroyed when content::RTCPeerConnectionHandler is destroyed. The lifetime of webrtc::PeerConnection changing when senders are introduced would tend to increase the chance of this happening.\n\nCan we find a way to CHECK if this has happened?",
+      "parentUuid": "0c79e945_0310c12f",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ad91534_bcfb2e66",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-07-30T20:21:31Z",
       "side": 1,
       "message": "THE SOLUTION\n\nTo address 1), only invoke OnInterestingUsage if observer_ is not null. But again, this will only fix the problem where Initialize() failed and Close() was called anyway, which probably isn\u0027t a real issue.\n\nOr to address 2) and to change the API such that it is possible to tell the PC not to use the observer anymore allowing the caller to stop referencing the observer, perform observer_ \u003d nullptr; in Close(). Though any async callback trying to use observer_ without an \"if (observer_)\" check then suddely becomes more scary.\n\nOr to address \"please stop using raw pointers when you don\u0027t control the ownership of the holder of the pointer /kind regards hbos\" change it such that webrtc::PeerConnection uses a scoped_refptr to observer_ and not a raw ptr. But this is not needed if Close() properly cleans things up.",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cffd4df7_d58bcc01",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5961,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-31T06:58:00Z",
+      "side": 1,
+      "message": "resetting observer_ in Close() would destroy the usage pattern observer use case, since the event we\u0027re looking to observe happens as a result of Close().",
+      "parentUuid": "9ad91534_bcfb2e66",
       "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
