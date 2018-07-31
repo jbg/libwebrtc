@@ -16,6 +16,23 @@
       "revId": "ccf9a40627f724a8092faaf4a4f2aaa5a3070e32",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67421e96_e316bd4a",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 5968,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-07-31T13:24:00Z",
+      "side": 1,
+      "message": "This \"if\" also prevents the same client from reporting the same usage twice (once at close() and once at MSG_REPORT_USAGE_PATTERN) as an added bonus, though maybe same client is already only counted for once?",
+      "revId": "ccf9a40627f724a8092faaf4a4f2aaa5a3070e32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
