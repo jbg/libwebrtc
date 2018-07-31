@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5e09d652_6bf3d4d4",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-31T22:39:55Z",
+      "side": 1,
+      "message": "Not sure what the best thing to do here is.\n\nasyncresolverinterface.h depends on rtc_base/socketaddress.h and rtc_base/third_party/sigslot/sigslot.h, so just moving asyncresolverinterface wouldn\u0027t do much.\n\nrtc_base shows up a lot in api/: https://cs.chromium.org/search/?q\u003df:webrtc/api+rtc_base\u0026sq\u003dpackage:chromium\u0026type\u003dcs\n\nA forward declaration just hides the dependency, so I would avoid that.\n\nI would prefer to punt on this to avoid churn unless there is a documented best practice somewhere I am missing.",
+      "parentUuid": "e9edf643_64d83c5b",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7354729a_4d7140b8",
         "filename": "api/asyncresolverfactory.h",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "f8c74752_a29cf597",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-31T22:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7354729a_4d7140b8",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c84d08e7_7b390b4e",
         "filename": "api/asyncresolverfactory.h",
         "patchSetId": 1
@@ -68,6 +104,24 @@
       "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25d5e395_06fe6591",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-31T22:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c84d08e7_7b390b4e",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +172,30 @@
     },
     {
       "key": {
+        "uuid": "9d9e2676_af67984c",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-31T22:39:55Z",
+      "side": 1,
+      "message": "We currently have pure interfaces using both styles:\n1) ortcfactoryinterface.h, callfactoryinterface.h.\n2) audio_encoder_factory.h, audio_decoder_factory.h, video_encoder_factory.h, video_decoder_factory.h\n\nI have no strong preference.",
+      "parentUuid": "92077ad4_32790168",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d3b879f_14aa7407",
         "filename": "api/asyncresolverfactory.h",
         "patchSetId": 1
@@ -129,6 +207,30 @@
       "writtenOn": "2018-07-30T22:49:42Z",
       "side": 1,
       "message": "Hmm, that is surprising behavior.",
+      "range": {
+        "startLine": 24,
+        "startChar": 28,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a9e2afa_06e7707f",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-31T22:39:55Z",
+      "side": 1,
+      "message": "I agree. I think the root surprise is \"class AsyncResolver : public SignalThread\" (https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/nethelpers.h?q\u003dasyncresolver\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d32).\n\nI think changing this is out of scope here.",
+      "parentUuid": "6d3b879f_14aa7407",
       "range": {
         "startLine": 24,
         "startChar": 28,
@@ -155,6 +257,24 @@
       "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83acfc45_fab4e641",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-07-31T22:39:55Z",
+      "side": 1,
+      "message": "This was what I was thinking for Proposal A in my doc. We could go this way, but I\u0027m not sure what the advantage would be.",
+      "parentUuid": "3f73ae05_70886f23",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
