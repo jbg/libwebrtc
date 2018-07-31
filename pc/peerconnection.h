@@ -915,6 +915,8 @@ class PeerConnection : public PeerConnectionInternal,
       RtpTransportInternal* rtp_transport,
       cricket::DtlsTransportInternal* dtls_transport) override;
 
+  PeerConnectionObserver* observer() const;
+
   sigslot::signal1<DataChannel*> SignalDataChannelCreated_;
 
   // Storing the factory as a scoped reference pointer ensures that the memory
