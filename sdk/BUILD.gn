@@ -357,7 +357,6 @@ if (is_ios || is_mac) {
             "objc/Framework/Classes/Metal/RTCMTLRGBRenderer.h",
             "objc/Framework/Classes/Metal/RTCMTLRGBRenderer.mm",
             "objc/Framework/Classes/Metal/RTCMTLVideoView.m",
-            "objc/Framework/Headers/WebRTC/RTCMTLVideoView.h",
           ]
         }
         if (is_mac) {
@@ -959,6 +958,7 @@ if (is_ios || is_mac) {
           "objc/Framework/Headers/WebRTC/RTCMediaStreamTrack.h",
           "objc/Framework/Headers/WebRTC/RTCMetrics.h",
           "objc/Framework/Headers/WebRTC/RTCMetricsSampleInfo.h",
+          "objc/Framework/Headers/WebRTC/RTCMTLVideoView.h",
           "objc/Framework/Headers/WebRTC/RTCPeerConnection.h",
           "objc/Framework/Headers/WebRTC/RTCPeerConnectionFactory.h",
           "objc/Framework/Headers/WebRTC/RTCPeerConnectionFactoryOptions.h",
@@ -994,10 +994,6 @@ if (is_ios || is_mac) {
             "objc/Framework/Headers/WebRTC/RTCCallbackLogger.h",
             "objc/Framework/Headers/WebRTC/RTCFileLogger.h",
           ]
-        }
-        if (rtc_use_metal_rendering) {
-          common_objc_headers +=
-              [ "objc/Framework/Headers/WebRTC/RTCMTLVideoView.h" ]
         }
 
         sources = common_objc_headers
