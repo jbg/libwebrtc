@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "d240e4d6_db3a60ac",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5960,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-07-31T10:32:03Z",
+      "side": 1,
+      "message": "If observer_ was a weak pointer, this would be checkable, because weak pointers are supposed to null themselves if what they point to disappear. But as far as I understand, weak pointers require the cooperation of both sides of the interface.\nAt the moment, I\u0027m thinking that the most solid fix is that the constructor should have an alternate API that takes RefCounted\u003cObserver\u003e as its argument. This would ensure that the link is valid, but it\u0027s an API change, and since this API has multiple customers, we need to support the old API too (which would mean storing two versions of the observer pointer, and having an internal getter that gets the right version).",
+      "parentUuid": "b29aaeef_c3e4391d",
+      "revId": "89b7ccabdd2e3c0c88246b1f535483ca47dfdd18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ad91534_bcfb2e66",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 2
