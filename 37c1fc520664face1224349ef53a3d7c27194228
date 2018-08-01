@@ -22,6 +22,30 @@
       "revId": "37c1fc520664face1224349ef53a3d7c27194228",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec4176da_712f80cb",
+        "filename": "sdk/objc/Framework/UnitTests/RTCCertificateTest.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7443
+      },
+      "writtenOn": "2018-08-01T13:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "988f06af_46b405dc",
+      "range": {
+        "startLine": 76,
+        "startChar": 5,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "37c1fc520664face1224349ef53a3d7c27194228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
