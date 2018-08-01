@@ -16,6 +16,52 @@
       "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a3ca7ea_875d32f2",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-08-01T01:35:43Z",
+      "side": 1,
+      "message": "Looks like it is only used in a couple of tests. If this is true, I would suggest to change the call sites in the test as well, though we cannot completely remove it at the moment because of its use in chromoting.",
+      "range": {
+        "startLine": 79,
+        "startChar": 5,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d3daf71_c45c5aee",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-08-01T01:35:43Z",
+      "side": 1,
+      "message": "This ctor is also used by chromoting (https://cs.chromium.org/chromium/src/remoting/protocol/ice_transport_channel.cc?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d93), and we need to migrate the call site to the new version later.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 21
+      },
+      "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
