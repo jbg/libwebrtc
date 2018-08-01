@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "431024dc_07f290c7",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2018-08-01T08:14:40Z",
+      "side": 1,
+      "message": "nit: use observer() for consistency with the call below. Also, omitting |this| is the way I usually see it in other places.",
+      "range": {
+        "startLine": 1133,
+        "startChar": 2,
+        "endLine": 1133,
+        "endChar": 6
+      },
+      "revId": "32f2507df3ba9e68c5e0d647d538e98b2fec45f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cad7b437_b803688e",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2018-08-01T08:14:40Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 2085,
+        "startChar": 20,
+        "endLine": 2085,
+        "endChar": 24
+      },
+      "revId": "32f2507df3ba9e68c5e0d647d538e98b2fec45f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a5efddf_7f7ab2d6",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2492,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2018-08-01T08:14:40Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 2492,
+        "startChar": 20,
+        "endLine": 2492,
+        "endChar": 24
+      },
+      "revId": "32f2507df3ba9e68c5e0d647d538e98b2fec45f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b0a8cc8_0a4cfab5",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 6292,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2018-08-01T08:14:40Z",
+      "side": 1,
+      "message": "Can we do with a DCHECK?",
+      "range": {
+        "startLine": 6292,
+        "startChar": 2,
+        "endLine": 6292,
+        "endChar": 11
+      },
+      "revId": "32f2507df3ba9e68c5e0d647d538e98b2fec45f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
