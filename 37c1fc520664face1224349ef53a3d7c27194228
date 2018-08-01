@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "988f06af_46b405dc",
+        "filename": "sdk/objc/Framework/UnitTests/RTCCertificateTest.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-01T12:23:29Z",
+      "side": 1,
+      "message": "You can\u0027t use the name of an existing class here if it\u0027s not an instance of ::testing::test.\n\nI suggest renaming this to just CertificateTest and keeping it as-is.",
+      "range": {
+        "startLine": 76,
+        "startChar": 5,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "37c1fc520664face1224349ef53a3d7c27194228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
