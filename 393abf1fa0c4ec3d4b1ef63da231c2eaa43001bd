@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "848ee80f_c82921be",
+        "filename": "modules/audio_processing/aec3/echo_remover.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-08-01T11:56:22Z",
+      "side": 1,
+      "message": "The 30*30 looks like a bound on the *mean* square signal, but subtractor_output.y2 is just the sum of squares. This will vary by block length.\n\nShould the subtractor powers be normalized by the length of |y| in SubtractorOutput::UpdatePowers? (Or, cheaper, multiply 30*30 by the length of e.g. subtractor_output.s_main).\n\nI\u0027m not sure I see the distinction between signal energy and signal power.",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 42
+      },
+      "revId": "393abf1fa0c4ec3d4b1ef63da231c2eaa43001bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
