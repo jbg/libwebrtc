@@ -1068,7 +1068,7 @@ Connection::Connection(Port* port,
   // TODO(mallinath) - Start connections from STATE_FROZEN.
   // Wire up to send stun packets
   requests_.SignalSendPacket.connect(this, &Connection::OnSendStunPacket);
-  hash_ = static_cast<uint32_t>(std::hash<std::string>{}(ToString()));
+  hash_ = rtc::CreateRandomId();
   RTC_LOG(LS_INFO) << ToString() << ": Connection created";
 }
 
