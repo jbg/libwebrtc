@@ -32,10 +32,16 @@
 #include "rtc_base/atomicops.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/logging.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
 namespace {
+
+bool UseShadowFilterOutput() {
+  return !field_trial::IsEnabled(
+      "WebRTC-Aec3UtilizeShadowFilterOutputKillSwitch");
+}
 
 void LinearEchoPower(const FftData& E,
                      const FftData& Y,
@@ -86,12 +92,32 @@ class EchoRemoverImpl final : public EchoRemover {
   }
 
  private:
+  const std::array<float, kBlockSize>& ChooseLinearFilterOutput(
+      const SubtractorOutput& subtractor_output) const {
+    if (!use_shadow_filter_output_) {
+      return subtractor_output.e_main;
+    }
+
+    if (subtractor_output.e2_shadow < 0.9f * subtractor_output.e2_main &&
+        subtractor_output.y2 > 30.f * 30.f) {
+      return subtractor_output.e_shadow;
+    }
+
+    if (subtractor_output.e2_shadow < subtractor_output.e2_main &&
+        subtractor_output.y2 < subtractor_output.e2_main) {
+      return subtractor_output.e_shadow;
+    }
+
+    return subtractor_output.e_main;
+  }
+
   static int instance_count_;
   const EchoCanceller3Config config_;
   const Aec3Fft fft_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const Aec3Optimization optimization_;
   const int sample_rate_hz_;
+  const bool use_shadow_filter_output_;
   Subtractor subtractor_;
   SuppressionGain suppression_gain_;
   ComfortNoiseGenerator cng_;
@@ -121,6 +147,7 @@ EchoRemoverImpl::EchoRemoverImpl(const EchoCanceller3Config& config,
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
       optimization_(DetectOptimization()),
       sample_rate_hz_(sample_rate_hz),
+      use_shadow_filter_output_(UseShadowFilterOutput()),
       subtractor_(config, data_dumper_.get(), optimization_),
       suppression_gain_(config_, optimization_, sample_rate_hz),
       cng_(optimization_),
@@ -222,7 +249,7 @@ void EchoRemoverImpl::ProcessCapture(
   // If the delay is known, use the echo subtractor.
   subtractor_.Process(*render_buffer, y0, render_signal_analyzer_, aec_state_,
                       &subtractor_output);
-  const auto& e = subtractor_output.e_main;
+  const auto& e = ChooseLinearFilterOutput(subtractor_output);
 
   // Compute spectra.
   WindowedPaddedFft(fft_, y0, y_old_, &Y);
