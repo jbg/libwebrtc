@@ -22,6 +22,30 @@
       "revId": "393abf1fa0c4ec3d4b1ef63da231c2eaa43001bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "425afe79_34f87136",
+        "filename": "modules/audio_processing/aec3/echo_remover.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-01T14:27:07Z",
+      "side": 1,
+      "message": "Great find!\n\nI\u0027ve updated the code accordingly, and also added some further thresholds for this.",
+      "parentUuid": "848ee80f_c82921be",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 42
+      },
+      "revId": "393abf1fa0c4ec3d4b1ef63da231c2eaa43001bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
