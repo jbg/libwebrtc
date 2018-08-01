@@ -70,6 +70,30 @@
       "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "268fc775_feaf630b",
+        "filename": "sdk/objc/Framework/Classes/VideoToolbox/RTCVideoEncoderH264.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2018-08-01T08:20:07Z",
+      "side": 0,
+      "message": "It\u0027s been tested on device. What happens is, we get the kVTInvalidSessionErr and reset the compression session.",
+      "parentUuid": "55c1746a_73638a5a",
+      "range": {
+        "startLine": 509,
+        "startChar": 3,
+        "endLine": 509,
+        "endChar": 0
+      },
+      "revId": "e71d1bb7fc22c7a08f34391b69c722d07c2100f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
