@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "838cc65d_f149df84",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-01T00:18:25Z",
+      "side": 1,
+      "message": "Ok, I think leaving it as is for now is fine.",
+      "parentUuid": "5e09d652_6bf3d4d4",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7354729a_4d7140b8",
         "filename": "api/asyncresolverfactory.h",
         "patchSetId": 1
@@ -196,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "85db7591_1442de01",
+        "filename": "api/asyncresolverfactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-01T00:18:25Z",
+      "side": 1,
+      "message": "Ah, that gives me hope. I\u0027m fine with how it is.",
+      "parentUuid": "9d9e2676_af67984c",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d3b879f_14aa7407",
         "filename": "api/asyncresolverfactory.h",
         "patchSetId": 1
@@ -272,6 +314,24 @@
       "side": 1,
       "message": "This was what I was thinking for Proposal A in my doc. We could go this way, but I\u0027m not sure what the advantage would be.",
       "parentUuid": "3f73ae05_70886f23",
+      "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71856c31_4faeabc4",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-01T00:18:25Z",
+      "side": 1,
+      "message": "The advantage is that the P2PTransportChannel can start right away assuming that the AsyncResolverFactory is provided. But if that\u0027s not so important then no need to change it.",
+      "parentUuid": "83acfc45_fab4e641",
       "revId": "c391a7229e5e8280892f17aa41a01579570ecf5e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
