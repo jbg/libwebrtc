@@ -22,6 +22,30 @@
       "revId": "803c46ddb92089b84dbfdf9005dd845b285aff72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "085adb03_702c5716",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 5887
+      },
+      "writtenOn": "2018-08-01T18:39:45Z",
+      "side": 1,
+      "message": "Done. Also did a bit more clean-up.",
+      "parentUuid": "c8d991c7_f1b9496a",
+      "range": {
+        "startLine": 1071,
+        "startChar": 2,
+        "endLine": 1071,
+        "endChar": 7
+      },
+      "revId": "803c46ddb92089b84dbfdf9005dd845b285aff72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
