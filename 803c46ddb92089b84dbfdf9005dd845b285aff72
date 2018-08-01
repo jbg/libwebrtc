@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8d991c7_f1b9496a",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-01T18:30:29Z",
+      "side": 1,
+      "message": "Can we rename it to an ID now that it\u0027s no longer a hash?",
+      "range": {
+        "startLine": 1071,
+        "startChar": 2,
+        "endLine": 1071,
+        "endChar": 7
+      },
+      "revId": "803c46ddb92089b84dbfdf9005dd845b285aff72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
