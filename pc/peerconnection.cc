@@ -910,6 +910,7 @@ bool PeerConnection::Initialize(
   }
 
   observer_ = dependencies.observer;
+  async_resolver_factory_ = std::move(dependencies.async_resolver_factory);
   port_allocator_ = std::move(dependencies.allocator);
   tls_cert_verifier_ = std::move(dependencies.tls_cert_verifier);
 
@@ -961,7 +962,8 @@ bool PeerConnection::Initialize(
 #endif
   config.active_reset_srtp_params = configuration.active_reset_srtp_params;
   transport_controller_.reset(new JsepTransportController(
-      signaling_thread(), network_thread(), port_allocator_.get(), config));
+      signaling_thread(), network_thread(), port_allocator_.get(),
+      async_resolver_factory_.get(), config));
   transport_controller_->SignalIceConnectionState.connect(
       this, &PeerConnection::OnTransportControllerConnectionState);
   transport_controller_->SignalIceGatheringState.connect(
