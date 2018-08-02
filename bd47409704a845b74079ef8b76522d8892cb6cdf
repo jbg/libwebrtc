@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5b0fc3bb_fd89a800",
+        "filename": "p2p/base/basicasyncresolverfactory_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-08-02T20:18:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ecc892_37e59f81",
+      "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a3ca7ea_875d32f2",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 3
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "b7b305ca_23575a92",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-08-02T20:18:59Z",
+      "side": 1,
+      "message": "It is used in ~10 tests like this:\n\n  P2PTransportChannel ch(\"test channel\", 1, \u0026pa);\n\nhttps://cs.chromium.org/search/?q\u003df:unittest+%22P2PTransportChannel+ch%22\u0026sq\u003dpackage:chromium\n\nI will look in to changing it after updating chromoting.",
+      "parentUuid": "1a3ca7ea_875d32f2",
+      "range": {
+        "startLine": 79,
+        "startChar": 5,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d3daf71_c45c5aee",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 3
@@ -62,6 +104,30 @@
       "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98fa7ac3_b8e3c110",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-08-02T20:18:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d3daf71_c45c5aee",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 21
+      },
+      "revId": "bd47409704a845b74079ef8b76522d8892cb6cdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
