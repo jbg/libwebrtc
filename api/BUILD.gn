@@ -469,13 +469,13 @@ if (rtc_include_tests) {
     deps = [
       ":array_view",
       ":libjingle_peerconnection_api",
-      ":libjingle_peerconnection_test_api",
       ":ortc_api",
       "../rtc_base:checks",
       "../rtc_base:rtc_base_approved",
       "../rtc_base:rtc_base_tests_utils",
       "../test:test_support",
       "units:units_unittests",
+      "//third_party/abseil-cpp/absl/types:optional",
     ]
   }
 }
