@@ -438,7 +438,10 @@ void PeerConnectionDelegateAdapter::OnAddTrack(
   rtc::scoped_refptr<webrtc::CreateSessionDescriptionObserverAdapter>
       observer(new rtc::RefCountedObject
           <webrtc::CreateSessionDescriptionObserverAdapter>(completionHandler));
-  _peerConnection->CreateOffer(observer, constraints.nativeConstraints.get());
+  webrtc::PeerConnectionInterface::RTCOfferAnswerOptions options;
+  CopyConstraintsIntoOfferAnswerOptions(constraints.nativeConstraints.get(), &options);
+
+  _peerConnection->CreateOffer(observer, options);
 }
 
 - (void)answerForConstraints:(RTCMediaConstraints *)constraints
@@ -448,7 +451,10 @@ void PeerConnectionDelegateAdapter::OnAddTrack(
   rtc::scoped_refptr<webrtc::CreateSessionDescriptionObserverAdapter>
       observer(new rtc::RefCountedObject
           <webrtc::CreateSessionDescriptionObserverAdapter>(completionHandler));
-  _peerConnection->CreateAnswer(observer, constraints.nativeConstraints.get());
+  webrtc::PeerConnectionInterface::RTCOfferAnswerOptions options;
+  CopyConstraintsIntoOfferAnswerOptions(constraints.nativeConstraints.get(), &options);
+
+  _peerConnection->CreateAnswer(observer, options);
 }
 
 - (void)setLocalDescription:(RTCSessionDescription *)sdp
