@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8657d90_7a2586da",
+        "filename": "api/peerconnectioninterface.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-08-03T10:01:06Z",
+      "side": 1,
+      "message": "As things stand, this file appears to have been deleted elsewhere, then recreated by this CL. You may want to check whether this is expected.",
+      "revId": "af4b78d20eb8023253a9d65c89cf5849829253b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fee355fa_7e6d124b",
+        "filename": "pc/peerconnection_rampup_tests.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-08-03T10:01:06Z",
+      "side": 1,
+      "message": "This file too appears to have been deleted and resurrected.",
+      "revId": "af4b78d20eb8023253a9d65c89cf5849829253b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41e1f119_f2151e98",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-08-03T10:01:06Z",
+      "side": 1,
+      "message": "the 10-\u003e15 review indicates that this has been added. Something else that rebasing didn\u0027t do properly?",
+      "revId": "af4b78d20eb8023253a9d65c89cf5849829253b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
