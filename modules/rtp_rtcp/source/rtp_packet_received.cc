@@ -17,6 +17,8 @@
 
 namespace webrtc {
 
+constexpr int RtpPacketReceived::kDefaultPayloadTypeFrequency;
+
 RtpPacketReceived::RtpPacketReceived() = default;
 RtpPacketReceived::RtpPacketReceived(const ExtensionManager* extensions)
     : RtpPacket(extensions) {}
