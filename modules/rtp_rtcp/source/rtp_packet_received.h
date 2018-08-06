@@ -20,6 +20,8 @@ namespace webrtc {
 // Class to hold rtp packet with metadata for receiver side.
 class RtpPacketReceived : public RtpPacket {
  public:
+  static constexpr int kDefaultPayloadTypeFrequency = 90000;
+
   RtpPacketReceived();
   explicit RtpPacketReceived(const ExtensionManager* extensions);
   RtpPacketReceived(const RtpPacketReceived& packet);
@@ -64,7 +66,7 @@ class RtpPacketReceived : public RtpPacket {
  private:
   NtpTime capture_time_;
   int64_t arrival_time_ms_ = 0;
-  int payload_type_frequency_ = 0;
+  int payload_type_frequency_ = kDefaultPayloadTypeFrequency;
   bool recovered_ = false;
   std::vector<uint8_t> application_data_;
 };

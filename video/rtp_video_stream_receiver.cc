@@ -245,7 +245,6 @@ void RtpVideoStreamReceiver::OnRecoveredPacket(const uint8_t* rtp_packet,
   if (!packet.Parse(rtp_packet, rtp_packet_length))
     return;
   packet.IdentifyExtensions(rtp_header_extensions_);
-  packet.set_payload_type_frequency(kVideoPayloadTypeFrequency);
 
   RTPHeader header;
   packet.GetHeader(&header);
