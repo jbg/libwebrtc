@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f193c71c_a92fec7f",
+        "filename": "pc/iceserverparsing.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-08-06T17:03:43Z",
+      "side": 1,
+      "message": "I noticed this could cause DCHECK crash if hoststring is too long to fit in the buffer, which would be a way to crash someone\u0027s tab. But the string is simply cut off in release builds and that is OK.",
+      "revId": "f88fdb0ed9a217d379cbed7febaf5ab84bcc5eb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95bfb2bf_5a97bcbd",
         "filename": "pc/iceserverparsing.cc",
         "patchSetId": 2
@@ -13,6 +30,30 @@
       "writtenOn": "2018-07-31T20:28:01Z",
       "side": 1,
       "message": "Kind of a tangent here, but I was thinking...depending on the order of urls you could get different behavior. \n\nSay you have 3 stun server urls: {url_1, url_2, url_bad} (one with bad syntax). \nSituation A: {url_1, url_2, url_bad}\n  You would append 2 stun_servers before logging the error and returning. \nSituation B: {url_bad, url_1, url_2}\n  You would immediately error and return without appending any stun_servers.\n\nI know that PeerConnection doesn\u0027t do anything if an error is returned \u0026 this is the current behavior, so this doesn\u0027t matter. But from an API perspective would it make more sense to have the same behavior no matter the order? Maybe someone would want the stun_server list to be populated even if one url was poorly formatted.",
+      "range": {
+        "startLine": 308,
+        "startChar": 27,
+        "endLine": 308,
+        "endChar": 31
+      },
+      "revId": "f88fdb0ed9a217d379cbed7febaf5ab84bcc5eb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03685082_f62d0f33",
+        "filename": "pc/iceserverparsing.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-08-06T17:03:43Z",
+      "side": 1,
+      "message": "+1 if it fails I don\u0027t think it should modify the output.",
+      "parentUuid": "95bfb2bf_5a97bcbd",
       "range": {
         "startLine": 308,
         "startChar": 27,
