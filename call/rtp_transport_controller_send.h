@@ -49,7 +49,7 @@ class RtpTransportControllerSend final
   RtpVideoSenderInterface* CreateRtpVideoSender(
       const std::vector<uint32_t>& ssrcs,
       std::map<uint32_t, RtpState> suspended_ssrcs,
-      const std::map<uint32_t, RtpPayloadState>&
+      const RtpVideoSendState&
           states,  // move states into RtpTransportControllerSend
       const RtpConfig& rtp_config,
       const RtcpConfig& rtcp_config,

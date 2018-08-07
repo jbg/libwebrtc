@@ -38,6 +38,10 @@ bool UlpfecConfig::operator==(const UlpfecConfig& other) const {
          red_rtx_payload_type == other.red_rtx_payload_type;
 }
 
+RtpVideoSendState::RtpVideoSendState() = default;
+RtpVideoSendState::RtpVideoSendState(const RtpVideoSendState&) = default;
+RtpVideoSendState::~RtpVideoSendState() = default;
+
 RtpConfig::RtpConfig() = default;
 RtpConfig::RtpConfig(const RtpConfig&) = default;
 RtpConfig::~RtpConfig() = default;

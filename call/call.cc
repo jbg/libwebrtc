@@ -328,8 +328,13 @@ class Call final : public webrtc::Call,
   RtpStateMap suspended_video_send_ssrcs_
       RTC_GUARDED_BY(configuration_sequence_checker_);
 
-  using RtpPayloadStateMap = std::map<uint32_t, RtpPayloadState>;
-  RtpPayloadStateMap suspended_video_payload_states_
+  // SSRC --> RtpPayloadState.
+  std::map<uint32_t, RtpPayloadState> rtp_payload_states_
+      RTC_GUARDED_BY(configuration_sequence_checker_);
+
+  // SSRC --> last shared frame id for the simulcast stream this SSRC
+  // was part of.
+  std::map<uint32_t, int64_t> shared_simulcast_frame_ids_
       RTC_GUARDED_BY(configuration_sequence_checker_);
 
   webrtc::RtcEventLog* event_log_;
@@ -719,6 +724,16 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
   // Copy ssrcs from |config| since |config| is moved.
   std::vector<uint32_t> ssrcs = config.rtp.ssrcs;
 
+  RtpVideoSendState video_send_state;
+  for (uint32_t ssrc : ssrcs) {
+    video_send_state.shared_simulcast_frame_id =
+        std::max(video_send_state.shared_simulcast_frame_id,
+                 shared_simulcast_frame_ids_[ssrc]);
+    auto payload_state_it = rtp_payload_states_.find(ssrc);
+    if (payload_state_it != rtp_payload_states_.end())
+      video_send_state.streams[ssrc] = payload_state_it->second;
+  }
+
   // TODO(srte): VideoSendStream should call GetWorkerQueue directly rather than
   // having it injected.
   VideoSendStream* send_stream = new VideoSendStream(
@@ -726,8 +741,8 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
       transport_send_ptr_->GetWorkerQueue(), call_stats_.get(),
       transport_send_ptr_, bitrate_allocator_.get(),
       video_send_delay_stats_.get(), event_log_, std::move(config),
-      std::move(encoder_config), suspended_video_send_ssrcs_,
-      suspended_video_payload_states_, std::move(fec_controller));
+      std::move(encoder_config), suspended_video_send_ssrcs_, video_send_state,
+      std::move(fec_controller));
 
   {
     WriteLockScoped write_lock(*send_crit_);
@@ -780,14 +795,18 @@ void Call::DestroyVideoSendStream(webrtc::VideoSendStream* send_stream) {
   RTC_CHECK(send_stream_impl != nullptr);
 
   VideoSendStream::RtpStateMap rtp_states;
-  VideoSendStream::RtpPayloadStateMap rtp_payload_states;
-  send_stream_impl->StopPermanentlyAndGetRtpStates(&rtp_states,
-                                                   &rtp_payload_states);
+  RtpVideoSendState video_send_state;
+  send_stream_impl->StopPermanentlyAndGetVideoSendState(&rtp_states,
+                                                        &video_send_state);
   for (const auto& kv : rtp_states) {
     suspended_video_send_ssrcs_[kv.first] = kv.second;
   }
-  for (const auto& kv : rtp_payload_states) {
-    suspended_video_payload_states_[kv.first] = kv.second;
+
+  for (const auto& kv : video_send_state.streams) {
+    shared_simulcast_frame_ids_[kv.first] =
+        std::max(shared_simulcast_frame_ids_[kv.first],
+                 video_send_state.shared_simulcast_frame_id);
+    rtp_payload_states_[kv.first] = kv.second;
   }
 
   UpdateAggregateNetworkState();
