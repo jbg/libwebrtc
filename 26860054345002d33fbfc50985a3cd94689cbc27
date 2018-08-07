@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0db5a1a0_1ab8a054",
+        "filename": "common_audio/third_party/spl_sqrt_floor/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-08-07T09:35:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71534dc4_09f62007",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e14d7a4_ef7ad405",
         "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor.c",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c51c791_fe948310",
+        "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-08-07T09:35:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure, that I can do it from licensing point of view. I think to be on safe side it\u0027s better to keep it.",
+      "parentUuid": "1e14d7a4_ef7ad405",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "49a919e0_dff720f6",
+        "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor_arm.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-08-07T09:35:00Z",
+      "side": 1,
+      "message": "Same here.",
+      "parentUuid": "fe1600da_e35161e7",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "455a3497_5bdc8892",
         "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor_mips.c",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5499487_c3dd382b",
+        "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor_mips.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-08-07T09:35:00Z",
+      "side": 1,
+      "message": "Same here.",
+      "parentUuid": "455a3497_5bdc8892",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
