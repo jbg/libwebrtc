@@ -38,7 +38,7 @@ class RtpVideoSenderInterface : public EncodedImageCallback {
 
   virtual void OnNetworkAvailability(bool network_available) = 0;
   virtual std::map<uint32_t, RtpState> GetRtpStates() const = 0;
-  virtual std::map<uint32_t, RtpPayloadState> GetRtpPayloadStates() const = 0;
+  virtual RtpVideoSendState GetVideoSendState() const = 0;
 
   virtual bool FecEnabled() const = 0;
 

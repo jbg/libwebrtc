@@ -94,7 +94,7 @@ class RtpTransportControllerSendInterface {
       const std::vector<uint32_t>& ssrcs,
       std::map<uint32_t, RtpState> suspended_ssrcs,
       // TODO(holmer): Move states into RtpTransportControllerSend.
-      const std::map<uint32_t, RtpPayloadState>& states,
+      const RtpVideoSendState& states,
       const RtpConfig& rtp_config,
       const RtcpConfig& rtcp_config,
       Transport* send_transport,

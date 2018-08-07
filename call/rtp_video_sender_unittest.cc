@@ -90,7 +90,8 @@ class RtpVideoSenderTestFixture {
   RtpVideoSenderTestFixture(
       const std::vector<uint32_t>& ssrcs,
       int payload_type,
-      const std::map<uint32_t, RtpPayloadState>& suspended_payload_states)
+      const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
+      int64_t shared_simulcast_frame_id)
       : clock_(0),
         config_(&transport_),
         send_delay_stats_(&clock_),
@@ -106,9 +107,12 @@ class RtpVideoSenderTestFixture {
     }
     config_.rtp.payload_type = payload_type;
     std::map<uint32_t, RtpState> suspended_ssrcs;
+    RtpVideoSendState video_send_state;
+    video_send_state.streams = suspended_payload_states;
+    video_send_state.shared_simulcast_frame_id = shared_simulcast_frame_id;
     router_ = absl::make_unique<RtpVideoSender>(
-        config_.rtp.ssrcs, suspended_ssrcs, suspended_payload_states,
-        config_.rtp, config_.rtcp, &transport_,
+        config_.rtp.ssrcs, suspended_ssrcs, video_send_state, config_.rtp,
+        config_.rtcp, &transport_,
         CreateObservers(&call_stats_, &encoder_feedback_, &stats_proxy_,
                         &stats_proxy_, &stats_proxy_, &stats_proxy_,
                         &stats_proxy_, &stats_proxy_, &send_delay_stats_,
@@ -146,7 +150,7 @@ TEST(RtpVideoSenderTest, SendOnOneModule) {
   encoded_image._buffer = &payload;
   encoded_image._length = 1;
 
-  RtpVideoSenderTestFixture test({kSsrc1}, kPayloadType, {});
+  RtpVideoSenderTestFixture test({kSsrc1}, kPayloadType, {}, 0);
   EXPECT_NE(
       EncodedImageCallback::Result::OK,
       test.router()->OnEncodedImage(encoded_image, nullptr, nullptr).error);
@@ -176,7 +180,7 @@ TEST(RtpVideoSenderTest, SendSimulcastSetActive) {
   encoded_image._buffer = &payload;
   encoded_image._length = 1;
 
-  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, {});
+  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, {}, 0);
 
   CodecSpecificInfo codec_info_1;
   memset(&codec_info_1, 0, sizeof(CodecSpecificInfo));
@@ -223,7 +227,7 @@ TEST(RtpVideoSenderTest, SendSimulcastSetActiveModules) {
   encoded_image._buffer = &payload;
   encoded_image._length = 1;
 
-  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, {});
+  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, {}, 0);
   CodecSpecificInfo codec_info_1;
   memset(&codec_info_1, 0, sizeof(CodecSpecificInfo));
   codec_info_1.codecType = kVideoCodecVP8;
@@ -259,14 +263,13 @@ TEST(RtpVideoSenderTest, SendSimulcastSetActiveModules) {
 }
 
 TEST(RtpVideoSenderTest, CreateWithNoPreviousStates) {
-  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, {});
+  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, {}, 0);
   test.router()->SetActive(true);
 
-  std::map<uint32_t, RtpPayloadState> initial_states =
-      test.router()->GetRtpPayloadStates();
-  EXPECT_EQ(2u, initial_states.size());
-  EXPECT_NE(initial_states.find(kSsrc1), initial_states.end());
-  EXPECT_NE(initial_states.find(kSsrc2), initial_states.end());
+  RtpVideoSendState initial_states = test.router()->GetVideoSendState();
+  EXPECT_EQ(2u, initial_states.streams.size());
+  EXPECT_NE(initial_states.streams.find(kSsrc1), initial_states.streams.end());
+  EXPECT_NE(initial_states.streams.find(kSsrc2), initial_states.streams.end());
 }
 
 TEST(RtpVideoSenderTest, CreateWithPreviousStates) {
@@ -279,15 +282,17 @@ TEST(RtpVideoSenderTest, CreateWithPreviousStates) {
   std::map<uint32_t, RtpPayloadState> states = {{kSsrc1, state1},
                                                 {kSsrc2, state2}};
 
-  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, states);
+  const int64_t kSharedFrameId = 123321;
+  RtpVideoSenderTestFixture test({kSsrc1, kSsrc2}, kPayloadType, states,
+                                 kSharedFrameId);
   test.router()->SetActive(true);
 
-  std::map<uint32_t, RtpPayloadState> initial_states =
-      test.router()->GetRtpPayloadStates();
-  EXPECT_EQ(2u, initial_states.size());
-  EXPECT_EQ(kInitialPictureId1, initial_states[kSsrc1].picture_id);
-  EXPECT_EQ(kInitialTl0PicIdx1, initial_states[kSsrc1].tl0_pic_idx);
-  EXPECT_EQ(kInitialPictureId2, initial_states[kSsrc2].picture_id);
-  EXPECT_EQ(kInitialTl0PicIdx2, initial_states[kSsrc2].tl0_pic_idx);
+  RtpVideoSendState initial_states = test.router()->GetVideoSendState();
+  EXPECT_EQ(2u, initial_states.streams.size());
+  EXPECT_EQ(kInitialPictureId1, initial_states.streams[kSsrc1].picture_id);
+  EXPECT_EQ(kInitialTl0PicIdx1, initial_states.streams[kSsrc1].tl0_pic_idx);
+  EXPECT_EQ(kInitialPictureId2, initial_states.streams[kSsrc2].picture_id);
+  EXPECT_EQ(kInitialTl0PicIdx2, initial_states.streams[kSsrc2].tl0_pic_idx);
+  EXPECT_EQ(kSharedFrameId, initial_states.shared_simulcast_frame_id);
 }
 }  // namespace webrtc
