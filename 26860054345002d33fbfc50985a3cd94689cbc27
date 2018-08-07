@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71534dc4_09f62007",
+        "filename": "common_audio/third_party/spl_sqrt_floor/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-07T09:08:34Z",
+      "side": 1,
+      "message": "Is it possible to do an if ... else if ... else construct in GN? If so, you would not have to repeat the conditions.",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e14d7a4_ef7ad405",
+        "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-07T09:08:34Z",
+      "side": 1,
+      "message": "Can you replace this with a pointer to the new LICENSE file, or do you need a full copy here still?",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe1600da_e35161e7",
+        "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor_arm.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-07T09:08:34Z",
+      "side": 1,
+      "message": "And here.",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "455a3497_5bdc8892",
+        "filename": "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor_mips.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-07T09:08:34Z",
+      "side": 1,
+      "message": "And here.",
+      "revId": "26860054345002d33fbfc50985a3cd94689cbc27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
