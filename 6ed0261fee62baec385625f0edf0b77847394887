@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5f5e20e_b30018a6",
+        "filename": "video/video_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-08-07T10:49:36Z",
+      "side": 1,
+      "message": "afaict |audio_send_stream_| is never used?",
+      "range": {
+        "startLine": 64,
+        "startChar": 6,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3601ccdc_2781ba79",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-08-07T10:49:36Z",
+      "side": 1,
+      "message": "nit: {} for multi-line for, same below.",
+      "range": {
+        "startLine": 763,
+        "startChar": 2,
+        "endLine": 765,
+        "endChar": 38
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
