@@ -60,6 +60,8 @@ VideoAnalyzer::VideoAnalyzer(test::LayerFilteringTransport* transport,
       call_(nullptr),
       send_stream_(nullptr),
       receive_stream_(nullptr),
+      audio_receive_stream_(nullptr),
+      audio_send_stream_(nullptr),
       captured_frame_forwarder_(this, clock),
       test_label_(test_label),
       graph_data_output_file_(graph_data_output_file),
@@ -162,6 +164,14 @@ void VideoAnalyzer::SetReceiveStream(VideoReceiveStream* stream) {
   rtc::CritScope lock(&crit_);
   RTC_DCHECK(!receive_stream_);
   receive_stream_ = stream;
+}
+
+void VideoAnalyzer::SetAudioStreams(AudioSendStream* send_stream,
+                                    AudioReceiveStream* recv_stream) {
+  rtc::CritScope lock(&crit_);
+  RTC_CHECK(!audio_receive_stream_ && !audio_send_stream_);
+  audio_receive_stream_ = recv_stream;
+  audio_send_stream_ = send_stream;
 }
 
 rtc::VideoSinkInterface<VideoFrame>* VideoAnalyzer::InputInterface() {
@@ -458,6 +468,14 @@ void VideoAnalyzer::PollStats() {
         decode_time_max_ms_.AddSample(receive_stats.max_decode_ms);
     }
 
+    if (audio_receive_stream_ != nullptr) {
+      AudioReceiveStream::Stats receive_stats =
+          audio_receive_stream_->GetStats();
+      audio_expand_rate_.AddSample(receive_stats.expand_rate);
+      audio_accelerate_rate_.AddSample(receive_stats.accelerate_rate);
+      audio_jitter_buffer_ms_.AddSample(receive_stats.jitter_buffer_ms);
+    }
+
     memory_usage_.AddSample(rtc::GetProcessResidentSizeBytes());
   }
 }
@@ -590,6 +608,12 @@ void VideoAnalyzer::PrintResults() {
     test::JpegFrameWriter frame_writer(output_path);
     RTC_CHECK(
         frame_writer.WriteFrame(worst_frame_->frame, 100 /*best quality*/));
+  }
+
+  if (audio_receive_stream_ != nullptr) {
+    PrintResult("audio_expand_rate", audio_expand_rate_, "");
+    PrintResult("audio_accelerate_rate", audio_accelerate_rate_, "");
+    PrintResult("audio_jitter_buffer", audio_jitter_buffer_ms_, " ms");
   }
 
   //  Disable quality check for quick test, as quality checks may fail
