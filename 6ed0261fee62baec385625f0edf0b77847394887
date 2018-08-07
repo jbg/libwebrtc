@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "64adff56_e8fe6851",
+        "filename": "video/video_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-08-07T13:09:39Z",
+      "side": 1,
+      "message": "Right. Was adding more functionality based on it, but that can wait.",
+      "parentUuid": "a5f5e20e_b30018a6",
+      "range": {
+        "startLine": 64,
+        "startChar": 6,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3601ccdc_2781ba79",
         "filename": "video/video_quality_test.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "6ed0261fee62baec385625f0edf0b77847394887",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c91f841a_2cf6dbcc",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-08-07T13:09:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3601ccdc_2781ba79",
+      "range": {
+        "startLine": 763,
+        "startChar": 2,
+        "endLine": 765,
+        "endChar": 38
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
