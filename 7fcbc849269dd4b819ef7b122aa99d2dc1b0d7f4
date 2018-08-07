@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7bc62bc0_bd63ff6d",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-07T11:50:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an uint32_t, corresponding to an ssrc?\n\nTo clarify, please add a comment saying what info goes into the key of the mappings.\n\nWhy is the member renamed? If it\u0027s still the case that it records the state of streams that aren\u0027t alive, i.e., to keep state between destroy and create (that\u0027s what \"suspended\" meant, right?), that should be reflected in the name.",
+      "range": {
+        "startLine": 331,
+        "startChar": 11,
+        "endLine": 331,
+        "endChar": 19
+      },
+      "revId": "7fcbc849269dd4b819ef7b122aa99d2dc1b0d7f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ed5d21e_120bdb6c",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-07T11:50:01Z",
+      "side": 1,
+      "message": "Unclear why we need another mapping?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 46
+      },
+      "revId": "7fcbc849269dd4b819ef7b122aa99d2dc1b0d7f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
