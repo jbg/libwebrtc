@@ -217,4 +217,8 @@ int64_t TimeUTCMicros() {
 #endif
 }
 
+int64_t TimeUTCMillis() {
+  return TimeUTCMicros() / kNumMicrosecsPerMillisec;
+}
+
 }  // namespace rtc
