@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e68b6ec_315e5006",
+        "filename": "common_audio/third_party/spl_sqrt_floor/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-07T09:45:26Z",
+      "side": 1,
+      "message": "Could you absorb the if on line 17 too? That way, you wouldn\u0027t have to duplicate that condition either.",
+      "revId": "f274e9f1e39b7cd1c180cff440712ad7a55c3e15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
