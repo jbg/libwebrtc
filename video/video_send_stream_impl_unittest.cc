@@ -53,8 +53,7 @@ class MockPayloadRouter : public RtpVideoSenderInterface {
   MOCK_METHOD0(IsActive, bool());
   MOCK_METHOD1(OnNetworkAvailability, void(bool));
   MOCK_CONST_METHOD0(GetRtpStates, std::map<uint32_t, RtpState>());
-  MOCK_CONST_METHOD0(GetRtpPayloadStates,
-                     std::map<uint32_t, RtpPayloadState>());
+  MOCK_CONST_METHOD0(GetVideoSendState, RtpVideoSendState());
   MOCK_CONST_METHOD0(FecEnabled, bool());
   MOCK_CONST_METHOD0(NackEnabled, bool());
   MOCK_METHOD2(DeliverRtcp, void(const uint8_t*, size_t));
@@ -111,14 +110,13 @@ class VideoSendStreamImplTest : public ::testing::Test {
     EXPECT_CALL(bitrate_allocator_, GetStartBitrate(_))
         .WillOnce(Return(123000));
     std::map<uint32_t, RtpState> suspended_ssrcs;
-    std::map<uint32_t, RtpPayloadState> suspended_payload_states;
+    RtpVideoSendState video_send_state;
     return absl::make_unique<VideoSendStreamImpl>(
         &stats_proxy_, &test_queue_, &call_stats_, &transport_controller_,
         &bitrate_allocator_, &send_delay_stats_, &video_stream_encoder_,
         &event_log_, &config_, initial_encoder_max_bitrate,
-        initial_encoder_bitrate_priority, suspended_ssrcs,
-        suspended_payload_states, content_type,
-        absl::make_unique<FecControllerDefault>(&clock_));
+        initial_encoder_bitrate_priority, suspended_ssrcs, video_send_state,
+        content_type, absl::make_unique<FecControllerDefault>(&clock_));
   }
 
  protected:

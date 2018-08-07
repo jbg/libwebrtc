@@ -11,6 +11,7 @@
 #ifndef CALL_RTP_CONFIG_H_
 #define CALL_RTP_CONFIG_H_
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -23,6 +24,16 @@ struct RtpPayloadState {
   int16_t picture_id = -1;
   uint8_t tl0_pic_idx = 0;
 };
+
+struct RtpVideoSendState {
+  RtpVideoSendState();
+  RtpVideoSendState(const RtpVideoSendState& other);
+  ~RtpVideoSendState();
+
+  int64_t shared_simulcast_frame_id = 0;
+  std::map<uint32_t, RtpPayloadState> streams;
+};
+
 // Settings for NACK, see RFC 4585 for details.
 struct NackConfig {
   NackConfig() : rtp_history_ms(0) {}
