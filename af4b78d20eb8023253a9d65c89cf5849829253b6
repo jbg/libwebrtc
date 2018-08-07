@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "cf6462c7_7969aa5e",
+        "filename": "pc/peerconnectionendtoend_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-07T08:48:43Z",
+      "side": 1,
+      "message": "Ooops. Fixed by setting  config_.enable_dtls_srtp \u003d false instead.\n\nPurpose of the test isn\u0027t crystal clear, though. Looks like \"WithLegacySdp\" means \"disable DtlsSrtp\"? Test dates from 2013. Harald, can you clarify?",
+      "parentUuid": "f5bffee8_bc4f7854",
+      "range": {
+        "startLine": 383,
+        "startChar": 18,
+        "endLine": 383,
+        "endChar": 21
+      },
+      "revId": "af4b78d20eb8023253a9d65c89cf5849829253b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e1f119_f2151e98",
         "filename": "pc/peerconnectionendtoend_unittest.cc",
         "patchSetId": 15
