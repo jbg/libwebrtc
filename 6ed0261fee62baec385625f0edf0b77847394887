@@ -93,6 +93,98 @@
       "revId": "6ed0261fee62baec385625f0edf0b77847394887",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "021bc660_0c436523",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-08-07T13:33:01Z",
+      "side": 1,
+      "message": "Example of conditional without bracket.",
+      "range": {
+        "startLine": 891,
+        "startChar": 0,
+        "endLine": 892,
+        "endChar": 58
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "084bec04_bc589277",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-08-07T13:33:01Z",
+      "side": 1,
+      "message": "nit: brackets aren\u0027t used for one-line conditionals elsewhere in this function.",
+      "range": {
+        "startLine": 915,
+        "startChar": 31,
+        "endLine": 915,
+        "endChar": 32
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5409bc76_b816c826",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-08-07T13:33:01Z",
+      "side": 1,
+      "message": "bracket",
+      "range": {
+        "startLine": 921,
+        "startChar": 31,
+        "endLine": 921,
+        "endChar": 32
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "459bcc23_a0a8281f",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-08-07T13:33:01Z",
+      "side": 1,
+      "message": "Nit: send_call_config",
+      "range": {
+        "startLine": 1012,
+        "startChar": 17,
+        "endLine": 1012,
+        "endChar": 28
+      },
+      "revId": "6ed0261fee62baec385625f0edf0b77847394887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
