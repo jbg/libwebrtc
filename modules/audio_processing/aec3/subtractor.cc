@@ -233,13 +233,13 @@ void Subtractor::Process(const RenderBuffer& render_buffer,
     G_shadow_.Compute(X2, render_signal_analyzer, E_shadow,
                       shadow_filter_.SizePartitions(),
                       aec_state.SaturatedCapture() || shadow_saturation, &G);
-    shadow_filter_.Adapt(render_buffer, G);
   } else {
     G.re.fill(0.f);
     G.im.fill(0.f);
     poor_shadow_filter_counter_ = 0;
     shadow_filter_.SetFilter(main_filter_.GetFilter());
   }
+  shadow_filter_.Adapt(render_buffer, G);
 
   data_dumper_->DumpRaw("aec3_subtractor_G_shadow", G.re);
   data_dumper_->DumpRaw("aec3_subtractor_G_shadow", G.im);
