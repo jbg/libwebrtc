@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6a3792b_153b9376",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-08T22:52:58Z",
+      "side": 1,
+      "message": "Since \n1) the first lines of MaybeWriteAecDumpInitMessage does an early return if aec_dump_ is null\n2) MaybeWriteAecDumpInitMessage is at each point used 1 line before the if-statement\nif (aec_dump_) {\n \nI\u0027d suggest to \n1) drop the early return from MaybeWriteAecDumpInitMessage\n2) Put MaybeWriteAecDumpInitMessage within the if(aec_dump_) statement\n3) Remove the \"Maybe\" prefix.",
+      "revId": "ff1604b54344c1e791ac89ae6dc952519dce147b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aad362d_3a35f2fb",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2052,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-08T22:52:58Z",
+      "side": 1,
+      "message": "This is not threadsafe since MaybeWriteAecDumpInitMessage() is called both from the render and capture sides which operate concurrently.\nTo make this threadsafe a lock is required but that would force render and capture to run in lock-step whenever aecdump recordings are activated.",
+      "revId": "ff1604b54344c1e791ac89ae6dc952519dce147b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71a91ca2_94c9bbdc",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2053,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-08T22:52:58Z",
+      "side": 1,
+      "message": "This comparison is already done for each frame, albeit in a threadsafe manner. I think it should be avoided to do the comparison a second time here.",
+      "range": {
+        "startLine": 2053,
+        "startChar": 27,
+        "endLine": 2053,
+        "endChar": 28
+      },
+      "revId": "ff1604b54344c1e791ac89ae6dc952519dce147b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07eb72ba_e84525b3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2055,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-08T22:52:58Z",
+      "side": 1,
+      "message": "This is a system call. Is it known what the complexity of this call is?",
+      "range": {
+        "startLine": 2055,
+        "startChar": 56,
+        "endLine": 2055,
+        "endChar": 69
+      },
+      "revId": "ff1604b54344c1e791ac89ae6dc952519dce147b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d121ad03_ff857def",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-08T22:52:58Z",
+      "side": 1,
+      "message": "This variable is accessed both from the render and capture sides of APM and needs to be properly protected via locks.",
+      "range": {
+        "startLine": 323,
+        "startChar": 35,
+        "endLine": 323,
+        "endChar": 59
+      },
+      "revId": "ff1604b54344c1e791ac89ae6dc952519dce147b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
