@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9e73955_e09e1184",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-08T08:35:42Z",
+      "side": 1,
+      "message": "add a TODO with date or better bug number when this hack can be removed. (e.g. in half a year when newer webrtc version propagated wide enough)",
+      "range": {
+        "startLine": 243,
+        "startChar": 5,
+        "endLine": 243,
+        "endChar": 11
+      },
+      "revId": "5405053d53709c448eec763a24d411b4c7a45a20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffb2037b_1587f5f1",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-08T08:35:42Z",
+      "side": 1,
+      "message": "reads it as unsigned.",
+      "range": {
+        "startLine": 244,
+        "startChar": 28,
+        "endLine": 244,
+        "endChar": 46
+      },
+      "revId": "5405053d53709c448eec763a24d411b4c7a45a20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
