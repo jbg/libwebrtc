@@ -10,6 +10,7 @@
 
 #include "call/rtp_video_sender.h"
 
+#include <algorithm>
 #include <memory>
 #include <string>
 #include <utility>
@@ -206,6 +207,8 @@ RtpVideoSender::RtpVideoSender(
     auto it = states.find(ssrc);
     if (it != states.end()) {
       state = &it->second;
+      shared_simulcast_frame_id_ =
+          std::max(shared_simulcast_frame_id_, state->last_shared_frame_id);
     }
     params_.push_back(RtpPayloadParams(ssrc, state));
   }
@@ -541,6 +544,8 @@ std::map<uint32_t, RtpPayloadState> RtpVideoSender::GetRtpPayloadStates()
   std::map<uint32_t, RtpPayloadState> payload_states;
   for (const auto& param : params_) {
     payload_states[param.ssrc()] = param.state();
+    payload_states[param.ssrc()].last_shared_frame_id =
+        shared_simulcast_frame_id_;
   }
   return payload_states;
 }
