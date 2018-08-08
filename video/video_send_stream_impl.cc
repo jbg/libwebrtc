@@ -197,7 +197,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
     int initial_encoder_max_bitrate,
     double initial_encoder_bitrate_priority,
     std::map<uint32_t, RtpState> suspended_ssrcs,
-    std::map<uint32_t, RtpPayloadState> suspended_payload_states,
+    const RtpVideoSendState& video_send_state,
     VideoEncoderConfig::ContentType content_type,
     std::unique_ptr<FecController> fec_controller)
     : send_side_bwe_with_overhead_(
@@ -223,7 +223,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       rtp_video_sender_(
           transport_->CreateRtpVideoSender(config_->rtp.ssrcs,
                                            suspended_ssrcs,
-                                           suspended_payload_states,
+                                           video_send_state,
                                            config_->rtp,
                                            config_->rtcp,
                                            config_->send_transport,
@@ -563,9 +563,8 @@ std::map<uint32_t, RtpState> VideoSendStreamImpl::GetRtpStates() const {
   return rtp_video_sender_->GetRtpStates();
 }
 
-std::map<uint32_t, RtpPayloadState> VideoSendStreamImpl::GetRtpPayloadStates()
-    const {
-  return rtp_video_sender_->GetRtpPayloadStates();
+RtpVideoSendState VideoSendStreamImpl::GetVideoSendState() const {
+  return rtp_video_sender_->GetVideoSendState();
 }
 
 uint32_t VideoSendStreamImpl::OnBitrateUpdated(uint32_t bitrate_bps,

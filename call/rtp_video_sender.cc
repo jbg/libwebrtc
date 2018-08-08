@@ -161,17 +161,16 @@ std::unique_ptr<FlexfecSender> MaybeCreateFlexfecSender(
 }
 }  // namespace
 
-RtpVideoSender::RtpVideoSender(
-    const std::vector<uint32_t>& ssrcs,
-    std::map<uint32_t, RtpState> suspended_ssrcs,
-    const std::map<uint32_t, RtpPayloadState>& states,
-    const RtpConfig& rtp_config,
-    const RtcpConfig& rtcp_config,
-    Transport* send_transport,
-    const RtpSenderObservers& observers,
-    RtpTransportControllerSendInterface* transport,
-    RtcEventLog* event_log,
-    RateLimiter* retransmission_limiter)
+RtpVideoSender::RtpVideoSender(const std::vector<uint32_t>& ssrcs,
+                               std::map<uint32_t, RtpState> suspended_ssrcs,
+                               const RtpVideoSendState& states,
+                               const RtpConfig& rtp_config,
+                               const RtcpConfig& rtcp_config,
+                               Transport* send_transport,
+                               const RtpSenderObservers& observers,
+                               RtpTransportControllerSendInterface* transport,
+                               RtcEventLog* event_log,
+                               RateLimiter* retransmission_limiter)
     : active_(false),
       module_process_thread_(nullptr),
       suspended_ssrcs_(std::move(suspended_ssrcs)),
@@ -199,16 +198,18 @@ RtpVideoSender::RtpVideoSender(
       transport_(transport) {
   RTC_DCHECK_EQ(ssrcs.size(), rtp_modules_.size());
   module_process_thread_checker_.DetachFromThread();
+
   // SSRCs are assumed to be sorted in the same order as |rtp_modules|.
   for (uint32_t ssrc : ssrcs) {
-    // Restore state if it previously existed.
     const RtpPayloadState* state = nullptr;
-    auto it = states.find(ssrc);
-    if (it != states.end()) {
+    auto it = states.streams.find(ssrc);
+    if (it != states.streams.end()) {
       state = &it->second;
     }
     params_.push_back(RtpPayloadParams(ssrc, state));
   }
+
+  shared_simulcast_frame_id_ = states.shared_simulcast_frame_id;
 
   // RTP/RTCP initialization.
 
@@ -535,13 +536,13 @@ std::map<uint32_t, RtpState> RtpVideoSender::GetRtpStates() const {
   return rtp_states;
 }
 
-std::map<uint32_t, RtpPayloadState> RtpVideoSender::GetRtpPayloadStates()
-    const {
+RtpVideoSendState RtpVideoSender::GetVideoSendState() const {
   rtc::CritScope lock(&crit_);
-  std::map<uint32_t, RtpPayloadState> payload_states;
+  RtpVideoSendState state;
   for (const auto& param : params_) {
-    payload_states[param.ssrc()] = param.state();
+    state.streams[param.ssrc()] = param.state();
   }
-  return payload_states;
+  state.shared_simulcast_frame_id = shared_simulcast_frame_id_;
+  return state;
 }
 }  // namespace webrtc

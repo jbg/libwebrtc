@@ -46,7 +46,7 @@ class RtpVideoSender : public RtpVideoSenderInterface {
   RtpVideoSender(
       const std::vector<uint32_t>& ssrcs,
       std::map<uint32_t, RtpState> suspended_ssrcs,
-      const std::map<uint32_t, RtpPayloadState>& states,
+      const RtpVideoSendState& states,
       const RtpConfig& rtp_config,
       const RtcpConfig& rtcp_config,
       Transport* send_transport,
@@ -74,7 +74,7 @@ class RtpVideoSender : public RtpVideoSenderInterface {
 
   void OnNetworkAvailability(bool network_available) override;
   std::map<uint32_t, RtpState> GetRtpStates() const override;
-  std::map<uint32_t, RtpPayloadState> GetRtpPayloadStates() const override;
+  RtpVideoSendState GetVideoSendState() const override;
 
   bool FecEnabled() const override;
 
@@ -118,6 +118,11 @@ class RtpVideoSender : public RtpVideoSenderInterface {
   const RtpConfig rtp_config_;
   RtpTransportControllerSendInterface* const transport_;
 
+  // When using the generic descriptor we want all simulcast streams to share
+  // one frame id space (so that the SFU can switch stream without having to
+  // rewrite the frame id), therefore |shared_simulcast_frame_id_| has to
+  // live in a place where we are aware of all the different streams.
+  int64_t shared_simulcast_frame_id_ = 0;
   std::vector<RtpPayloadParams> params_ RTC_GUARDED_BY(crit_);
 
   RTC_DISALLOW_COPY_AND_ASSIGN(RtpVideoSender);

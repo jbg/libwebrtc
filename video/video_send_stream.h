@@ -18,6 +18,7 @@
 #include "api/fec_controller.h"
 #include "api/video/video_stream_encoder_interface.h"
 #include "call/bitrate_allocator.h"
+#include "call/rtp_video_sender.h"
 #include "call/video_receive_stream.h"
 #include "call/video_send_stream.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
@@ -54,20 +55,19 @@ class VideoSendStream : public webrtc::VideoSendStream {
   using RtpStateMap = std::map<uint32_t, RtpState>;
   using RtpPayloadStateMap = std::map<uint32_t, RtpPayloadState>;
 
-  VideoSendStream(
-      int num_cpu_cores,
-      ProcessThread* module_process_thread,
-      rtc::TaskQueue* worker_queue,
-      CallStats* call_stats,
-      RtpTransportControllerSendInterface* transport,
-      BitrateAllocator* bitrate_allocator,
-      SendDelayStats* send_delay_stats,
-      RtcEventLog* event_log,
-      VideoSendStream::Config config,
-      VideoEncoderConfig encoder_config,
-      const std::map<uint32_t, RtpState>& suspended_ssrcs,
-      const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
-      std::unique_ptr<FecController> fec_controller);
+  VideoSendStream(int num_cpu_cores,
+                  ProcessThread* module_process_thread,
+                  rtc::TaskQueue* worker_queue,
+                  CallStats* call_stats,
+                  RtpTransportControllerSendInterface* transport,
+                  BitrateAllocator* bitrate_allocator,
+                  SendDelayStats* send_delay_stats,
+                  RtcEventLog* event_log,
+                  VideoSendStream::Config config,
+                  VideoEncoderConfig encoder_config,
+                  const std::map<uint32_t, RtpState>& suspended_ssrcs,
+                  const RtpVideoSendState& video_send_state,
+                  std::unique_ptr<FecController> fec_controller);
 
   ~VideoSendStream() override;
 
@@ -94,8 +94,8 @@ class VideoSendStream : public webrtc::VideoSendStream {
   void EnableEncodedFrameRecording(const std::vector<rtc::PlatformFile>& files,
                                    size_t byte_limit) override;
 
-  void StopPermanentlyAndGetRtpStates(RtpStateMap* rtp_state_map,
-                                      RtpPayloadStateMap* payload_state_map);
+  void StopPermanentlyAndGetVideoSendState(RtpStateMap* rtp_state_map,
+                                           RtpVideoSendState* video_send_state);
 
   void SetTransportOverhead(size_t transport_overhead_per_packet);
 
