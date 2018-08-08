@@ -296,6 +296,8 @@ class AudioProcessingImpl : public AudioProcessing {
   void RecordUnprocessedCaptureStream(const AudioFrame& capture_frame)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
 
+  void MaybeWriteAecDumpInitMessage();
+
   // Notifies attached AecDump of current configuration and
   // processed capture data and issues a capture stream recording
   // request.
@@ -316,6 +318,9 @@ class AudioProcessingImpl : public AudioProcessing {
   // Hold the last config written with AecDump for avoiding writing
   // the same config twice.
   InternalAPMConfig apm_config_for_aec_dump_ RTC_GUARDED_BY(crit_capture_);
+
+  // Hold the last API format written with AecDump.
+  absl::optional<ProcessingConfig> api_format_for_aec_dump_;
 
   // Critical sections.
   rtc::CriticalSection crit_render_ RTC_ACQUIRED_BEFORE(crit_capture_);

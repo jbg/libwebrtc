@@ -34,6 +34,7 @@
 #include "rtc_base/platform_file.h"
 #include "rtc_base/refcountedobject.h"
 #include "rtc_base/system/arch.h"
+#include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
 #if WEBRTC_INTELLIGIBILITY_ENHANCER
 #include "modules/audio_processing/intelligibility/intelligibility_enhancer.h"
@@ -571,9 +572,6 @@ int AudioProcessingImpl::InitializeLocked() {
   InitializePostProcessor();
   InitializePreProcessor();
 
-  if (aec_dump_) {
-    aec_dump_->WriteInitMessage(formats_.api_format);
-  }
   return kNoError;
 }
 
@@ -857,6 +855,8 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
   rtc::CritScope cs_capture(&crit_capture_);
   RTC_DCHECK_EQ(processing_config.input_stream().num_frames(),
                 formats_.api_format.input_stream().num_frames());
+
+  MaybeWriteAecDumpInitMessage();
 
   if (aec_dump_) {
     RecordUnprocessedCaptureStream(src);
@@ -1149,6 +1149,8 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
     return kBadDataLengthError;
   }
 
+  MaybeWriteAecDumpInitMessage();
+
   if (aec_dump_) {
     RecordUnprocessedCaptureStream(*frame);
   }
@@ -1417,6 +1419,7 @@ int AudioProcessingImpl::AnalyzeReverseStreamLocked(
   RTC_DCHECK_EQ(input_config.num_frames(),
                 formats_.api_format.reverse_input_stream().num_frames());
 
+  MaybeWriteAecDumpInitMessage();
   if (aec_dump_) {
     const size_t channel_size =
         formats_.api_format.reverse_input_stream().num_frames();
@@ -1463,6 +1466,8 @@ int AudioProcessingImpl::ProcessReverseStream(AudioFrame* frame) {
       formats_.api_format.reverse_input_stream().num_frames()) {
     return kBadDataLengthError;
   }
+
+  MaybeWriteAecDumpInitMessage();
 
   if (aec_dump_) {
     aec_dump_->WriteRenderStreamMessage(*frame);
@@ -1573,7 +1578,7 @@ void AudioProcessingImpl::AttachAecDump(std::unique_ptr<AecDump> aec_dump) {
   // 'aec_dump' parameter, which is after locks are released.
   aec_dump_.swap(aec_dump);
   WriteAecDumpConfigMessage(true);
-  aec_dump_->WriteInitMessage(formats_.api_format);
+  api_format_for_aec_dump_ = absl::nullopt;
 }
 
 void AudioProcessingImpl::DetachAecDump() {
@@ -2039,6 +2044,16 @@ void AudioProcessingImpl::RecordAudioProcessingState() {
   audio_proc_state.level = gain_control()->stream_analog_level();
   audio_proc_state.keypress = capture_.key_pressed;
   aec_dump_->AddAudioProcessingState(audio_proc_state);
+}
+
+void AudioProcessingImpl::MaybeWriteAecDumpInitMessage() {
+  if (!aec_dump_)
+    return;
+  if (api_format_for_aec_dump_ &&
+      formats_.api_format == *api_format_for_aec_dump_)
+    return;
+  aec_dump_->WriteInitMessage(formats_.api_format, rtc::TimeUTCMillis());
+  api_format_for_aec_dump_ = formats_.api_format;
 }
 
 AudioProcessingImpl::ApmCaptureState::ApmCaptureState(
