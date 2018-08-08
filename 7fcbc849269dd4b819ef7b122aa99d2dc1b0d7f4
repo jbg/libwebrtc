@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e7892bea_9db7c4c0",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-08T13:18:14Z",
+      "side": 1,
+      "message": "\u003e Why is the member renamed? If it\u0027s still the case that it records the state of streams that \n\u003e aren\u0027t alive, i.e., to keep state between destroy and create (that\u0027s what \"suspended\" meant, \n\u003e right?), that should be reflected in the name.\n\nAny comment on naming?",
+      "parentUuid": "b1df445c_5559e7ed",
+      "range": {
+        "startLine": 331,
+        "startChar": 11,
+        "endLine": 331,
+        "endChar": 19
+      },
+      "revId": "7fcbc849269dd4b819ef7b122aa99d2dc1b0d7f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d94189cd_d7680b4b",
         "filename": "call/rtp_config.h",
         "patchSetId": 2

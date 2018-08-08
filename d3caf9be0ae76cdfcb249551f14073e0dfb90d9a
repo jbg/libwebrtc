@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eaafed5_f681da66",
+        "filename": "call/call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-08T13:18:14Z",
+      "side": 1,
+      "message": "I still don\u0027t understand why this mapping is needed. I would suggest:\n\n1. Keep latest frame id per ssrc in the rtp_payload_states mapping, as part of RtpPayloadState (it\u0027s already there, for non-simulcast, right?)\n\n2. When creating a simulcast stream, look up latest frame id for each involved ssrc, take the maximum, and pass that to the code responsible for allocating new frame ids (VideoSendStream, if I understood you correctly). Not sure if the code to take the maximum even needs to be in Call, perhaps it can be delegated to VideoSendStream?\n\nAny reason that won\u0027t work?",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 0
+      },
+      "revId": "d3caf9be0ae76cdfcb249551f14073e0dfb90d9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
