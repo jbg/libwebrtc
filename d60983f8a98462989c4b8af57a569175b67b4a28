@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40103399_8c61fda1",
+        "filename": "modules/audio_processing/include/aec_dump.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-08-08T08:16:26Z",
+      "side": 1,
+      "message": "Can we remove the old interface method right away? I think the only AecDump implementations are our own ones in webrtc.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 16
+      },
+      "revId": "d60983f8a98462989c4b8af57a569175b67b4a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
