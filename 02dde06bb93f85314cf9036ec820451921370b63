@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "32b0307b_640e2a85",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-08T14:36:09Z",
+      "side": 1,
+      "message": "\u003e I take it we will not be using picture_id and frame_id for the same stream?\n\ncorrect\n\n\u003e Try to use consistent naming and conventions for picture_id and frame_id, i.e., drop |last_| from the name. And if picture_id is the next id to use (rather than the last use), let frame_id have the analogous meaning.\n\nChanged to |shared_frame_id|.",
+      "parentUuid": "e4804706_8cb0b386",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "02dde06bb93f85314cf9036ec820451921370b63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cd4c07f5_906b468d",
         "filename": "call/rtp_video_sender.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "02dde06bb93f85314cf9036ec820451921370b63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21b4ef36_03ddcdcd",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-08T14:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd4c07f5_906b468d",
+      "range": {
+        "startLine": 125,
+        "startChar": 10,
+        "endLine": 125,
+        "endChar": 36
+      },
+      "revId": "02dde06bb93f85314cf9036ec820451921370b63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
