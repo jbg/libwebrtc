@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b5db92aa_9349f2a1",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-08T10:04:34Z",
+      "side": 1,
+      "message": "\u003e I find the lifetime expectancy of this map a little hard to follow. Are we supposed to only populate |rtp_payload_states_| when we destroy a stream, and then read it back again if we recreate the stream?\n\nYes, exactly like that.\n\n\u003e If so, should we actually move the values? I.e. remove the entry here (if present) and then dcheck below that there is no entry present when we call DestroyVideoSendStream()?\n\nWe can\u0027t make that assumption since we store information for all VideoSendStreams this Call has.",
+      "parentUuid": "e661d590_4609d2f8",
+      "range": {
+        "startLine": 732,
+        "startChar": 4,
+        "endLine": 732,
+        "endChar": 59
+      },
+      "revId": "9e254a09a12112674844a90655b87fa905959e6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c31320e3_4b5709b3",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-07T13:46:30Z",
       "side": 1,
       "message": "ssrcs are meant to be sorted numerically? is that constraint new?",
+      "range": {
+        "startLine": 203,
+        "startChar": 56,
+        "endLine": 204,
+        "endChar": 0
+      },
+      "revId": "9e254a09a12112674844a90655b87fa905959e6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3598078_ea5dc5c6",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-08T10:04:34Z",
+      "side": 1,
+      "message": "I misunderstood the previous comment, reverted.",
+      "parentUuid": "c31320e3_4b5709b3",
       "range": {
         "startLine": 203,
         "startChar": 56,
@@ -68,6 +116,30 @@
       "revId": "9e254a09a12112674844a90655b87fa905959e6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd414d10_55e97a74",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-08T10:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d26a6b9e_b1252f1e",
+      "range": {
+        "startLine": 123,
+        "startChar": 67,
+        "endLine": 123,
+        "endChar": 71
+      },
+      "revId": "9e254a09a12112674844a90655b87fa905959e6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
