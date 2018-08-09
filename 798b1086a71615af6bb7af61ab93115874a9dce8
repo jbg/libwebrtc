@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06bb4914_56fea586",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-09T15:50:18Z",
+      "side": 1,
+      "message": "I added monostate to make sure we explicitly set the correct type.",
+      "revId": "798b1086a71615af6bb7af61ab93115874a9dce8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

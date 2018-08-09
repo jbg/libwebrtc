@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d6befec_d8a4d7fb",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-09T15:50:18Z",
+      "side": 0,
+      "message": "We always use a fake encoder, but we also packetize frames as if it were a VP8 stream. In the packetizer we just accessed the codec union as if contained VP8 related information, but it doesn\u0027t.\n\nTesting like this makes no sense.",
+      "range": {
+        "startLine": 1105,
+        "startChar": 0,
+        "endLine": 1106,
+        "endChar": 46
+      },
+      "revId": "29d8846df9bcb0b76fa6afcdb0d9c9a98af832f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41defba5_c8966c56",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-09T15:50:18Z",
+      "side": 0,
+      "message": "Ditto.",
+      "revId": "29d8846df9bcb0b76fa6afcdb0d9c9a98af832f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
