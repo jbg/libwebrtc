@@ -59,10 +59,12 @@ constexpr RtpPacketToSend::ExtensionManager* kNoExtensions = nullptr;
 //      :               :
 //      +-+-+-+-+-+-+-+-+
 void VerifyBasicHeader(RTPVideoHeader* header, bool N, bool S, int part_id) {
+  const auto& vp8_header =
+      absl::get<RTPVideoHeaderVP8>(header->video_type_header);
   ASSERT_TRUE(header != NULL);
-  EXPECT_EQ(N, header->vp8().nonReference);
-  EXPECT_EQ(S, header->vp8().beginningOfPartition);
-  EXPECT_EQ(part_id, header->vp8().partitionId);
+  EXPECT_EQ(N, vp8_header.nonReference);
+  EXPECT_EQ(S, vp8_header.beginningOfPartition);
+  EXPECT_EQ(part_id, vp8_header.partitionId);
 }
 
 void VerifyExtensions(RTPVideoHeader* header,
@@ -71,10 +73,12 @@ void VerifyExtensions(RTPVideoHeader* header,
                       uint8_t temporal_idx, /* T */
                       int key_idx /* K */) {
   ASSERT_TRUE(header != NULL);
-  EXPECT_EQ(picture_id, header->vp8().pictureId);
-  EXPECT_EQ(tl0_pic_idx, header->vp8().tl0PicIdx);
-  EXPECT_EQ(temporal_idx, header->vp8().temporalIdx);
-  EXPECT_EQ(key_idx, header->vp8().keyIdx);
+  const auto& vp8_header =
+      absl::get<RTPVideoHeaderVP8>(header->video_type_header);
+  EXPECT_EQ(picture_id, vp8_header.pictureId);
+  EXPECT_EQ(tl0_pic_idx, vp8_header.tl0PicIdx);
+  EXPECT_EQ(temporal_idx, vp8_header.temporalIdx);
+  EXPECT_EQ(key_idx, vp8_header.keyIdx);
 }
 }  // namespace
 
@@ -371,7 +375,9 @@ TEST_F(RtpDepacketizerVp8Test, TIDAndLayerSync) {
   VerifyBasicHeader(&payload.video_header(), 0, 0, 8);
   VerifyExtensions(&payload.video_header(), kNoPictureId, kNoTl0PicIdx, 2,
                    kNoKeyIdx);
-  EXPECT_FALSE(payload.video_header().vp8().layerSync);
+  EXPECT_FALSE(
+      absl::get<RTPVideoHeaderVP8>(payload.video_header().video_type_header)
+          .layerSync);
 }
 
 TEST_F(RtpDepacketizerVp8Test, KeyIdx) {
@@ -452,7 +458,10 @@ TEST_F(RtpDepacketizerVp8Test, TestWithPacketizer) {
   VerifyExtensions(&payload.video_header(), input_header.pictureId,
                    input_header.tl0PicIdx, input_header.temporalIdx,
                    input_header.keyIdx);
-  EXPECT_EQ(payload.video_header().vp8().layerSync, input_header.layerSync);
+  EXPECT_EQ(
+      absl::get<RTPVideoHeaderVP8>(payload.video_header().video_type_header)
+          .layerSync,
+      input_header.layerSync);
 }
 
 TEST_F(RtpDepacketizerVp8Test, TestEmptyPayload) {

@@ -469,7 +469,7 @@ StorageType RTPSenderVideo::GetStorageType(
 uint8_t RTPSenderVideo::GetTemporalId(const RTPVideoHeader& header) {
   switch (header.codec) {
     case kVideoCodecVP8:
-      return header.vp8().temporalIdx;
+      return absl::get<RTPVideoHeaderVP8>(header.video_type_header).temporalIdx;
     case kVideoCodecVP9:
       return absl::get<RTPVideoHeaderVP9>(header.video_type_header)
           .temporal_idx;
