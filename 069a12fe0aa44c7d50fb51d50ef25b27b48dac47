@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41a06ebf_e2b4c1cd",
+        "filename": "rtc_base/timeutils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-10T13:40:22Z",
+      "side": 1,
+      "message": "This is a tooling change to make TimeUTCMicros() testable as other non-UTC time functions.",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 204,
+        "endChar": 4
+      },
+      "revId": "069a12fe0aa44c7d50fb51d50ef25b27b48dac47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
