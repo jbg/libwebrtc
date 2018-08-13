@@ -21,6 +21,7 @@
 #include "api/audio_codecs/audio_encoder.h"
 #include "api/call/audio_sink.h"
 #include "api/call/transport.h"
+#include "api/rtpreceiverinterface.h"
 #include "audio/audio_level.h"
 #include "call/syncable.h"
 #include "common_types.h"  // NOLINT(build/include)
@@ -28,8 +29,8 @@
 #include "modules/audio_processing/rms_level.h"
 #include "modules/rtp_rtcp/include/remote_ntp_time_estimator.h"
 #include "modules/rtp_rtcp/include/rtp_header_parser.h"
-#include "modules/rtp_rtcp/include/rtp_receiver.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
+#include "modules/rtp_rtcp/source/contributing_sources.h"
 #include "rtc_base/criticalsection.h"
 #include "rtc_base/event.h"
 #include "rtc_base/task_queue.h"
@@ -301,9 +302,7 @@ class Channel
 
   void OnRecoverableUplinkPacketLossRate(float recoverable_packet_loss_rate);
 
-  std::vector<RtpSource> GetSources() const {
-    return rtp_receiver_->GetSources();
-  }
+  std::vector<RtpSource> GetSources() const;
 
  private:
   class ProcessAndEncodeAudioTask;
@@ -345,8 +344,20 @@ class Channel
 
   std::unique_ptr<RTPPayloadRegistry> rtp_payload_registry_;
   std::unique_ptr<ReceiveStatistics> rtp_receive_statistics_;
-  std::unique_ptr<RtpReceiver> rtp_receiver_;
   std::unique_ptr<RtpRtcp> _rtpRtcpModule;
+  uint32_t remote_ssrc_ = 0;
+
+  // Info for GetSources is updated on netowkr or worker thread, queried on the
+  // worker thread.
+  rtc::CriticalSection rtp_sources_lock_;
+  ContributingSources contributing_sources_ RTC_GUARDED_BY(&rtp_sources_lock_);
+  absl::optional<uint32_t> last_received_rtp_timestamp_
+      RTC_GUARDED_BY(&rtp_sources_lock_);
+  absl::optional<int64_t> last_received_rtp_system_time_ms_
+      RTC_GUARDED_BY(&rtp_sources_lock_);
+  absl::optional<uint8_t> last_received_rtp_audio_level_
+      RTC_GUARDED_BY(&rtp_sources_lock_);
+
   std::unique_ptr<AudioCodingModule> audio_coding_;
   AudioSinkInterface* audio_sink_ = nullptr;
   AudioLevel _outputAudioLevel;
