@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d41e6755_db62ccb4",
+        "filename": "audio/channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-13T15:15:15Z",
+      "side": 1,
+      "message": "I don\u0027t like adding yet another lock. Suggestions? Is one of the existing locks usable? \n\nOr can we somehow post updates of the protected variables to the worker thread, without blocking?",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 41
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
