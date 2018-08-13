@@ -34,7 +34,6 @@ class RtcpBandwidthObserver;
 class RtcpRttStats;
 class RtpPacketSender;
 class RtpPacketReceived;
-class RtpReceiver;
 class RtpRtcp;
 class RtpTransportControllerSendInterface;
 class Transport;
