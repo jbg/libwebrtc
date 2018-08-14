@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "823c525c_0e7ef118",
+        "filename": "audio/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-14T13:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58467dbf_d4cdee30",
+      "range": {
+        "startLine": 817,
+        "startChar": 43,
+        "endLine": 817,
+        "endChar": 0
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ab545ce_04adf2aa",
         "filename": "audio/channel.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6ea585e6_96477743",
+        "filename": "audio/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-14T13:42:35Z",
+      "side": 1,
+      "message": "I think extra () is motivated in this context, with assignment of a conditional expression.\n\nBut I don\u0027t quite like the formatting of this code. I\u0027ll move the comment before the assignment, and rephrase it.",
+      "parentUuid": "6ab545ce_04adf2aa",
+      "range": {
+        "startLine": 1494,
+        "startChar": 6,
+        "endLine": 1494,
+        "endChar": 33
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4f3010d_a82bbf2a",
         "filename": "audio/channel.h",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2018-08-14T12:18:21Z",
       "side": 1,
       "message": "unGUARDED_BY ?",
+      "range": {
+        "startLine": 348,
+        "startChar": 28,
+        "endLine": 348,
+        "endChar": 0
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "118af03c_3e8a4256",
+        "filename": "audio/channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-14T13:42:35Z",
+      "side": 1,
+      "message": "It is set only once, from the AudioReceiveStream constructor. So should be possible to convert to a construction time const.",
+      "parentUuid": "b4f3010d_a82bbf2a",
       "range": {
         "startLine": 348,
         "startChar": 28,
