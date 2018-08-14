@@ -20,7 +20,6 @@
 #include "audio/conversion.h"
 #include "call/rtp_stream_receiver_controller_interface.h"
 #include "modules/remote_bitrate_estimator/include/remote_bitrate_estimator.h"
-#include "modules/rtp_rtcp/include/rtp_receiver.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
