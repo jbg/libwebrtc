@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "58467dbf_d4cdee30",
+        "filename": "audio/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T12:18:21Z",
+      "side": 1,
+      "message": "may be simpler to set audio level after construction:\n\nsources.emplace_back(*last_received_rtp_system_time_ms_, remote_ssrc_, RtpSourceType::SSRC);\nsources.back().set_audio_level(last_received_rtp_audio_level_);",
+      "range": {
+        "startLine": 817,
+        "startChar": 43,
+        "endLine": 817,
+        "endChar": 0
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ab545ce_04adf2aa",
+        "filename": "audio/channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T12:18:21Z",
+      "side": 1,
+      "message": "nit: may be remove extra () around the condition",
+      "range": {
+        "startLine": 1494,
+        "startChar": 6,
+        "endLine": 1494,
+        "endChar": 33
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f3010d_a82bbf2a",
+        "filename": "audio/channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T12:18:21Z",
+      "side": 1,
+      "message": "unGUARDED_BY ?",
+      "range": {
+        "startLine": 348,
+        "startChar": 28,
+        "endLine": 348,
+        "endChar": 0
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d41e6755_db62ccb4",
         "filename": "audio/channel.h",
         "patchSetId": 3
