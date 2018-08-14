@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca55813a_6b1fadd1",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T16:01:14Z",
+      "side": 1,
+      "message": "set_audio_level takes optional as parameter, i.e. you can set it unconditionally (avoiding few unnecessary conversions)",
+      "range": {
+        "startLine": 823,
+        "startChar": 23,
+        "endLine": 823,
+        "endChar": 38
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ffe3be6_fab41d80",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T16:01:14Z",
+      "side": 1,
+      "message": "\"Don\u0027t use else after return\"\nhttps://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md",
+      "range": {
+        "startLine": 930,
+        "startChar": 10,
+        "endLine": 930,
+        "endChar": 0
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28f3d3f7_b3ed9312",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T16:01:14Z",
+      "side": 1,
+      "message": "may be keep calling it remote_ssrc",
+      "range": {
+        "startLine": 1491,
+        "startChar": 11,
+        "endLine": 1491,
+        "endChar": 15
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

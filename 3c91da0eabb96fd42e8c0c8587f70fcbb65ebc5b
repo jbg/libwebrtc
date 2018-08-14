@@ -163,6 +163,30 @@
       "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f4e7934_b06ef3bf",
+        "filename": "audio/channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-14T16:01:14Z",
+      "side": 1,
+      "message": "you are not really adding a new one, just replacing RtpReceiver::critical_Section_rtp_receiver_ lock_ with this one.\n\nWith a pointer to the worker thread it should be possible to post without blocking, but I feel it is better to do in a separate CL.",
+      "parentUuid": "d41e6755_db62ccb4",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 41
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
