@@ -187,6 +187,30 @@
       "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcbd857f_b9129e59",
+        "filename": "audio/channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-15T07:36:38Z",
+      "side": 1,
+      "message": "You\u0027re right, so no real change in locking.",
+      "parentUuid": "5f4e7934_b06ef3bf",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 41
+      },
+      "revId": "3c91da0eabb96fd42e8c0c8587f70fcbb65ebc5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

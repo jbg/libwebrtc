@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa5a6661_028bd374",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-15T07:36:38Z",
+      "side": 1,
+      "message": "Done.\n\nWould it make sense to change the RtpSource constructor to likewise take an absl::optional\u003cuint8_t\u003e audio_level?",
+      "parentUuid": "ca55813a_6b1fadd1",
+      "range": {
+        "startLine": 823,
+        "startChar": 23,
+        "endLine": 823,
+        "endChar": 38
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ffe3be6_fab41d80",
         "filename": "audio/channel.cc",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5f19551a_44a40e72",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-15T07:36:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ffe3be6_fab41d80",
+      "range": {
+        "startLine": 930,
+        "startChar": 10,
+        "endLine": 930,
+        "endChar": 0
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28f3d3f7_b3ed9312",
         "filename": "audio/channel.cc",
         "patchSetId": 5
@@ -68,6 +116,30 @@
       "revId": "370437ab49552583fa16026742c6ef94210a664b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52375e88_2e1ab8b2",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-15T07:36:38Z",
+      "side": 1,
+      "message": "Hmm. remote_ssrc is a reasonable name, but I dislike having foo and foo_ nearby and with different meaning, it\u0027s too easy to misread. Something like remote_ssrc_for_rtt would be clear enough, but maybe too verbose?",
+      "parentUuid": "28f3d3f7_b3ed9312",
+      "range": {
+        "startLine": 1491,
+        "startChar": 11,
+        "endLine": 1491,
+        "endChar": 15
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
