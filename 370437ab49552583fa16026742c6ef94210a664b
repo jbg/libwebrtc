@@ -164,6 +164,30 @@
       "revId": "370437ab49552583fa16026742c6ef94210a664b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1128aab0_9adf4bbc",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-15T11:51:16Z",
+      "side": 1,
+      "message": "I\u0027ll leave this unchanged then.",
+      "parentUuid": "96b7b6c9_9ca84c2f",
+      "range": {
+        "startLine": 1491,
+        "startChar": 11,
+        "endLine": 1491,
+        "endChar": 15
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
