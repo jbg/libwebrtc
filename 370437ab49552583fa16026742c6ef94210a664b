@@ -140,6 +140,30 @@
       "revId": "370437ab49552583fa16026742c6ef94210a664b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96b7b6c9_9ca84c2f",
+        "filename": "audio/channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-08-15T09:42:50Z",
+      "side": 1,
+      "message": "FWIW, I think it\u0027s fine. Having it as remote_ssrc would map to closely to remote_ssrc_, as you mentioned. Perhaps remote_ssrc_ is the one that\u0027s to general?",
+      "parentUuid": "52375e88_2e1ab8b2",
+      "range": {
+        "startLine": 1491,
+        "startChar": 11,
+        "endLine": 1491,
+        "endChar": 15
+      },
+      "revId": "370437ab49552583fa16026742c6ef94210a664b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
