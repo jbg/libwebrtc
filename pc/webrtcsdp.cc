@@ -1124,8 +1124,8 @@ bool ParseCandidate(const std::string& message,
   std::string username;
   std::string password;
   uint32_t generation = 0;
-  uint16_t network_id = 0;
-  uint16_t network_cost = 0;
+  uint32_t network_id = 0;
+  uint32_t network_cost = 0;
   for (size_t i = current_position; i + 1 < fields.size(); ++i) {
     // RFC 5245
     // *(SP extension-att-name SP extension-att-value)
@@ -1145,7 +1145,7 @@ bool ParseCandidate(const std::string& message,
       if (!GetValueFromString(first_line, fields[++i], &network_cost, error)) {
         return false;
       }
-      network_cost = std::min(network_cost, rtc::kNetworkCostMax);
+      network_cost = std::min<uint32_t>(network_cost, rtc::kNetworkCostMax);
     } else {
       // Skip the unknown extension.
       ++i;

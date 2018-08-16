@@ -11,12 +11,13 @@
 #ifndef RTC_BASE_STRINGENCODE_H_
 #define RTC_BASE_STRINGENCODE_H_
 
-#include <sstream>
 #include <string>
 #include <vector>
 
+#include "absl/strings/numbers.h"
+#include "absl/strings/str_cat.h"
+#include "absl/strings/str_join.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/string_to_number.h"
 
 namespace rtc {
 
@@ -100,10 +101,6 @@ inline std::string s_url_decode(const std::string& source) {
   return s_transform(source, url_decode);
 }
 
-// Joins the source vector of strings into a single string, with each
-// field in source being separated by delimiter. No trailing delimiter is added.
-std::string join(const std::vector<std::string>& source, char delimiter);
-
 // Splits the source string into multiple fields separated by delimiter,
 // with duplicates of delimiter creating empty fields.
 size_t split(const std::string& source,
@@ -149,39 +146,31 @@ bool tokenize_first(const std::string& source,
 
 // Convert arbitrary values to/from a string.
 // TODO(jonasolsson): Remove these when absl::StrCat becomes available.
-std::string ToString(bool b);
-
-std::string ToString(const char* s);
-std::string ToString(std::string t);
-
-std::string ToString(short s);
-std::string ToString(unsigned short s);
-std::string ToString(int s);
-std::string ToString(unsigned int s);
-std::string ToString(long int s);
-std::string ToString(unsigned long int s);
-std::string ToString(long long int s);
-std::string ToString(unsigned long long int s);
-
-std::string ToString(double t);
-
-std::string ToString(const void* p);
-
-template <typename T,
-          typename std::enable_if<std::is_arithmetic<T>::value &&
-                                      !std::is_same<T, bool>::value,
-                                  int>::type = 0>
-static bool FromString(const std::string& s, T* t) {
-  RTC_DCHECK(t);
-  absl::optional<T> result = StringToNumber<T>(s);
-
-  if (result)
-    *t = *result;
-
-  return result.has_value();
+template <typename T>
+inline auto ToString(T value) -> decltype(absl::StrCat(absl::AlphaNum(value))) {
+  return absl::StrCat(absl::AlphaNum(value));
 }
 
-bool FromString(const std::string& s, bool* b);
+inline std::string ToString(bool value) {
+  return value ? "true" : "false";
+}
+
+template <typename T>
+inline bool FromString(absl::string_view s, T* t) {
+  return absl::SimpleAtoi(s, t);
+}
+
+inline bool FromString(absl::string_view s, float* t) {
+  return absl::SimpleAtof(s, t);
+}
+
+inline bool FromString(absl::string_view s, double* t) {
+  return absl::SimpleAtod(s, t);
+}
+
+inline bool FromString(absl::string_view s, bool* b) {
+  return absl::SimpleAtob(s, b);
+}
 
 template <typename T>
 static inline T FromString(const std::string& str) {

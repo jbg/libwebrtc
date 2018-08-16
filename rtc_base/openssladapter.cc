@@ -382,7 +382,7 @@ int OpenSSLAdapter::BeginSSL() {
   }
 
   if (!elliptic_curves_.empty()) {
-    SSL_set1_curves_list(ssl_, rtc::join(elliptic_curves_, ':').c_str());
+    SSL_set1_curves_list(ssl_, absl::StrJoin(elliptic_curves_, ":").c_str());
   }
 
   // Now that the initial config is done, transfer ownership of |bio| to the
