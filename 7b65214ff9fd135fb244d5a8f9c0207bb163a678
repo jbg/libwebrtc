@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8449af25_5f2c4ab6",
+        "filename": "api/audio/echo_canceller3_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-08-16T15:20:05Z",
+      "side": 1,
+      "message": "Suggestion: \nshorter_initial_phase\n-\u003e\nconservative_initial_phase\n\n\nI think that is more appropriate since it describes more what this does.",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 30
+      },
+      "revId": "7b65214ff9fd135fb244d5a8f9c0207bb163a678",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
