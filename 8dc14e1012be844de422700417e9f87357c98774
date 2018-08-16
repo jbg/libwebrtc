@@ -2,6 +2,143 @@
   "comments": [
     {
       "key": {
+        "uuid": "2c0c589b_ff819cdd",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "This seems to be spelled without a dash pretty consistently on the Internet.",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 15
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24c61411_6677dc17",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "Suggestion: \"The following preprocessor macros are read (but never set) by WebRTC; they allow you to enable or disable parts of WebRTC at compile time. [blank line] Be sure to set them the same way in all translation units that include WebRTC code.\"\n\nI don\u0027t think we need to say that they\u0027re part of the API; that should follow from the fact that this file is all about the native API.",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "309cffea_87def9ff",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "Use ` quotes here to get a fixed-width font.",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bd38078_d6f69b43",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "\"certificates\" -\u003e \"SSL certificates\"\n\nAlso, I guess \"a WebRTC PeerConnection\" -\u003e \"WebRTC PeerConnections\", since it would apply to all PeerConnections?",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a5fac01_22c026f1",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "\"the default WebRTC set\" -\u003e \"WebRTC\u0027s default set\"",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38d41411_3544cefa",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "Reduce the number of n\u0027s here.",
+      "range": {
+        "startLine": 79,
+        "startChar": 24,
+        "endLine": 79,
+        "endChar": 33
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9565fcd_cd3d4ad4",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "` here too.",
+      "range": {
+        "startLine": 81,
+        "startChar": 9,
+        "endLine": 81,
+        "endChar": 42
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98437569_24402107",
         "filename": "native-api.md",
         "patchSetId": 1
@@ -22,6 +159,30 @@
       "revId": "8dc14e1012be844de422700417e9f87357c98774",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeec4942_75718f8a",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-16T11:45:15Z",
+      "side": 1,
+      "message": "Some things become very awkward to phrase if that word is to be avoided entirely (because the passive rather than the active voice has to be used). That\u0027s why the avoidance of \"you\" is usually not attempted by me; and indeed, a few instances of \"you\" can be found in the pre-existing text of this file.",
+      "parentUuid": "98437569_24402107",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 8
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
