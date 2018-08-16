@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aa4b0c3a_f2d38197",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c0c589b_ff819cdd",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 15
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24c61411_6677dc17",
         "filename": "native-api.md",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "8dc14e1012be844de422700417e9f87357c98774",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bef1df0_57822723",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24c61411_6677dc17",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "02512b24_7b143531",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309cffea_87def9ff",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bd38078_d6f69b43",
         "filename": "native-api.md",
         "patchSetId": 1
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "0cd6db3e_c6754b7b",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "\u003e Also, I guess \"a WebRTC PeerConnection\" -\u003e \"WebRTC PeerConnections\", since it would apply to all PeerConnections?\n\nYes, it is better to use the plural.",
+      "parentUuid": "4bd38078_d6f69b43",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a5fac01_22c026f1",
         "filename": "native-api.md",
         "patchSetId": 1
@@ -90,6 +168,24 @@
       "revId": "8dc14e1012be844de422700417e9f87357c98774",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9eb23701_416668b1",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a5fac01_22c026f1",
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "9d803295_d9a8ab24",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38d41411_3544cefa",
+      "range": {
+        "startLine": 79,
+        "startChar": 24,
+        "endLine": 79,
+        "endChar": 33
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9565fcd_cd3d4ad4",
         "filename": "native-api.md",
         "patchSetId": 1
@@ -136,6 +256,30 @@
       "revId": "8dc14e1012be844de422700417e9f87357c98774",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f84372a_dd217ff6",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T13:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9565fcd_cd3d4ad4",
+      "range": {
+        "startLine": 81,
+        "startChar": 9,
+        "endLine": 81,
+        "endChar": 42
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
