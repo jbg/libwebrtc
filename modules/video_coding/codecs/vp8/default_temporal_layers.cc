@@ -13,7 +13,6 @@
 #include <string.h>
 
 #include <algorithm>
-#include <array>
 #include <memory>
 #include <set>
 #include <utility>
@@ -61,9 +60,9 @@ TemporalLayers::FrameConfig::FrameConfig(TemporalLayers::BufferFlags last,
 namespace {
 static constexpr uint8_t kUninitializedPatternIndex =
     std::numeric_limits<uint8_t>::max();
-static constexpr std::array<Vp8BufferReference, 3> kAllBuffers = {
-    {Vp8BufferReference::kLast, Vp8BufferReference::kGolden,
-     Vp8BufferReference::kAltref}};
+static const std::set<Vp8BufferReference> kAllBuffers = {
+    Vp8BufferReference::kLast, Vp8BufferReference::kGolden,
+    Vp8BufferReference::kAltref};
 
 std::vector<unsigned int> GetTemporalIds(size_t num_layers) {
   switch (num_layers) {
@@ -114,8 +113,7 @@ uint8_t GetUpdatedBuffers(const TemporalLayers::FrameConfig& config) {
 // Find the set of buffers that are never updated by the given pattern.
 std::set<Vp8BufferReference> FindKfBuffers(
     const std::vector<TemporalLayers::FrameConfig>& frame_configs) {
-  std::set<Vp8BufferReference> kf_buffers(kAllBuffers.begin(),
-                                          kAllBuffers.end());
+  std::set<Vp8BufferReference> kf_buffers = kAllBuffers;
   for (TemporalLayers::FrameConfig config : frame_configs) {
     // Get bit-masked set of update buffers for this frame config.
     uint8_t updated_buffers = GetUpdatedBuffers(config);
