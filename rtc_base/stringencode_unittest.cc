@@ -370,12 +370,6 @@ TEST(ToString, SanityCheck) {
   EXPECT_EQ(ToString((long long int)-123), "-123");
   EXPECT_EQ(ToString((unsigned long long int)123), "123");
 
-  int i = 10;
-  int* p = &i;
-  std::ostringstream s;  // no-presubmit-check TODO(webrtc:8982)
-  s << p;
-  EXPECT_EQ(s.str(), ToString(p));
-
   EXPECT_EQ(ToString(0.5), "0.5");
 }
 
@@ -389,6 +383,9 @@ void ParsesTo(std::string s, T t) {
 TEST(FromString, DecodeValid) {
   ParsesTo("true", true);
   ParsesTo("false", false);
+  ParsesTo("True", true);
+  ParsesTo("0", false);
+  ParsesTo("yes", true);
 
   ParsesTo("105", 105);
   ParsesTo("0.25", 0.25);
@@ -401,10 +398,6 @@ void FailsToParse(std::string s) {
 }
 
 TEST(FromString, DecodeInvalid) {
-  FailsToParse<bool>("True");
-  FailsToParse<bool>("0");
-  FailsToParse<bool>("yes");
-
   FailsToParse<int>("0.5");
   FailsToParse<int>("XIV");
   FailsToParse<double>("");
