@@ -22,6 +22,30 @@
       "revId": "f2acce297abc377d282b21f6efd140a45bcbd875",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1a51c45_da58e87a",
+        "filename": "audio/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-08-16T12:35:23Z",
+      "side": 1,
+      "message": "It probably made sense ages ago. IIRC, it only uses the RTPHeader member. Should be fine to change the API unless someone is using the ACM directly still.",
+      "parentUuid": "1cb48c11_dd2fb533",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 337,
+        "endChar": 73
+      },
+      "revId": "f2acce297abc377d282b21f6efd140a45bcbd875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
