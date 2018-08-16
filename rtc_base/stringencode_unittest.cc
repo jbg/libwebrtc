@@ -370,12 +370,6 @@ TEST(ToString, SanityCheck) {
   EXPECT_EQ(ToString((long long int)-123), "-123");
   EXPECT_EQ(ToString((unsigned long long int)123), "123");
 
-  int i = 10;
-  int* p = &i;
-  std::ostringstream s;  // no-presubmit-check TODO(webrtc:8982)
-  s << p;
-  EXPECT_EQ(s.str(), ToString(p));
-
   EXPECT_EQ(ToString(0.5), "0.5");
 }
 

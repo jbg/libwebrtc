@@ -11,10 +11,10 @@
 #ifndef RTC_BASE_STRINGENCODE_H_
 #define RTC_BASE_STRINGENCODE_H_
 
-#include <sstream>
 #include <string>
 #include <vector>
 
+#include "absl/strings/str_cat.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/string_to_number.h"
 
@@ -149,23 +149,10 @@ bool tokenize_first(const std::string& source,
 
 // Convert arbitrary values to/from a string.
 // TODO(jonasolsson): Remove these when absl::StrCat becomes available.
-std::string ToString(bool b);
-
-std::string ToString(const char* s);
-std::string ToString(std::string t);
-
-std::string ToString(short s);
-std::string ToString(unsigned short s);
-std::string ToString(int s);
-std::string ToString(unsigned int s);
-std::string ToString(long int s);
-std::string ToString(unsigned long int s);
-std::string ToString(long long int s);
-std::string ToString(unsigned long long int s);
-
-std::string ToString(double t);
-
-std::string ToString(const void* p);
+template <typename T>
+inline auto ToString(T value) -> decltype(absl::StrCat(absl::AlphaNum(value))) {
+  return absl::StrCat(absl::AlphaNum(value));
+}
 
 template <typename T,
           typename std::enable_if<std::is_arithmetic<T>::value &&
