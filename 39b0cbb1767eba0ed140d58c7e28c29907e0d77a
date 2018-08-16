@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ff98e9b_da77e3ce",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-08-16T13:51:57Z",
+      "side": 1,
+      "message": "@kwiberg: \"StrJoin?\"\nStrJoin!",
+      "range": {
+        "startLine": 591,
+        "startChar": 4,
+        "endLine": 596,
+        "endChar": 13
+      },
+      "revId": "39b0cbb1767eba0ed140d58c7e28c29907e0d77a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

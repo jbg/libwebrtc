@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bc1b134_250808da",
+        "filename": "examples/androidnativeapi/jni/androidcallclient.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-08-16T13:51:57Z",
+      "side": 0,
+      "message": "@kwiberg: \"Why remove these?\"\nThey don\u0027t print anything interesting, since they\u0027re all pointers. I think they also caused a build error at some point, but the details are hazy.\n\nBut really, they should be in the CL that actually caused that breakage. I\u0027ve removed them, and the premature #import fixes.",
+      "range": {
+        "startLine": 163,
+        "startChar": 50,
+        "endLine": 163,
+        "endChar": 68
+      },
+      "revId": "213168f4c3cc98705345554d7348e8d31e5c71ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

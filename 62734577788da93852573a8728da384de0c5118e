@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f47b8131_d0b6bad7",
+        "filename": "api/test/videocodec_test_stats.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-08-16T13:51:57Z",
+      "side": 1,
+      "message": "@kwiberg: \"Why not fix the things in this file too?\"\n\nGenerally I\u0027ve been lazy about changing unittests and other testonly buildtargets, it\u0027s easier to simply add the required sstream import. That said, this one isn\u0027t too bad, so I\u0027ve switched it over.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "62734577788da93852573a8728da384de0c5118e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
