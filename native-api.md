@@ -65,3 +65,18 @@ types, functions, namespaces, etc. that have `impl` or `internal` in
 their names (in various styles, such as `CamelCaseImpl`,
 `snake_case_impl`). They are not part of the API, and may change
 incompatibly at any time; do not use them.
+
+# Pre-processor macros
+
+The following pre-processor macros are considered part of the WebRTC API since
+they allow to enable or disable different parts of the library.
+
+## WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS
+If you want to ship your own set of certificates and inject them into a WebRTC
+PeerConnection, you will probably want to avoid to compile and ship the default
+WebRTC set of certificates.
+
+You can achieve this by definning the preprocessor macro
+`WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS`. If you use GN, you can just set the GN
+argument rtc_builtin_ssl_root_certificates to false and GN will define the macro
+for you.
