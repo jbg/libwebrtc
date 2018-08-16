@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98437569_24402107",
+        "filename": "native-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-16T10:28:31Z",
+      "side": 1,
+      "message": "I copied part of the PSA but I am not sure we want to use words like \"you\". What do you think?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 8
+      },
+      "revId": "8dc14e1012be844de422700417e9f87357c98774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
