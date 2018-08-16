@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cb48c11_dd2fb533",
+        "filename": "audio/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-16T11:52:50Z",
+      "side": 1,
+      "message": "Why does this method need an WebRtcRTPHeader?",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 337,
+        "endChar": 73
+      },
+      "revId": "f2acce297abc377d282b21f6efd140a45bcbd875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
