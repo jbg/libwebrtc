@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "721d151e_3912544b",
+        "filename": "DEPS",
+        "patchSetId": 8
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-20T09:20:57Z",
+      "side": 1,
+      "message": "Please add only the headers you need, not the entire directory.",
+      "revId": "424445186a8d445b6b2f43058f3dd012c3815026",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2000fbb_a4e6e4c3",
+        "filename": "api/test/videocodec_test_stats.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-20T09:20:57Z",
+      "side": 1,
+      "message": "Consider formatting this manually (and protect it with `clang-format off` in that case). Your call, but I\u0027m guessing one item per line will be *much* easier to read.",
+      "revId": "424445186a8d445b6b2f43058f3dd012c3815026",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8bf4a71_95947e95",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-20T09:20:57Z",
+      "side": 1,
+      "message": "Isn\u0027t AlphaNumFormatter the default? That is, isn\u0027t this call equivalent to\n\n  absl::PairFormatter(\": \")\n\n?",
+      "range": {
+        "startLine": 595,
+        "startChar": 42,
+        "endLine": 595,
+        "endChar": 67
+      },
+      "revId": "424445186a8d445b6b2f43058f3dd012c3815026",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
