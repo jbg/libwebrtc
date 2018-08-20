@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "936af93c_fb350686",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-20T14:36:05Z",
+      "side": 1,
+      "message": "I would change this to an if statement and then drop the frame (with a warning) if no tl0picidx is set.",
+      "revId": "3d9e73e2e4583f25b45d9c6d762449eeeeb5820a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
