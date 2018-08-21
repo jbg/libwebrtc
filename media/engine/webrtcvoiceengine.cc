@@ -19,6 +19,8 @@
 #include <utility>
 #include <vector>
 
+#include "absl/strings/str_cat.h"
+#include "absl/strings/str_join.h"
 #include "api/audio_codecs/audio_codec_pair_id.h"
 #include "api/call/audio_sink.h"
 #include "media/base/audiosource.h"
@@ -103,17 +105,10 @@ bool ValidateStreamParams(const StreamParams& sp) {
 
 // Dumps an AudioCodec in RFC 2327-ish format.
 std::string ToString(const AudioCodec& codec) {
-  std::stringstream ss;
-  ss << codec.name << "/" << codec.clockrate << "/" << codec.channels;
-  if (!codec.params.empty()) {
-    ss << " {";
-    for (const auto& param : codec.params) {
-      ss << " " << param.first << "=" << param.second;
-    }
-    ss << " }";
-  }
-  ss << " (" << codec.id << ")";
-  return ss.str();
+  return absl::StrCat(
+      codec.name, "/", codec.clockrate, "/", codec.channels, "{",
+      absl::StrJoin(codec.params, " ", absl::PairFormatter("=")), "}", " (",
+      codec.id, ")");
 }
 
 bool IsCodec(const AudioCodec& codec, const char* ref_name) {
