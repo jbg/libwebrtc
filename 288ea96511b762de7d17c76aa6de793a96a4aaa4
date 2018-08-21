@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4c64e53_d8cbd73c",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-21T13:26:32Z",
+      "side": 1,
+      "message": "It\u0027s probably best to say that this currently doesn\u0027t do anything, but that it will do these things in the future. Comments that don\u0027t correspond to reality can be really confusing...",
+      "revId": "288ea96511b762de7d17c76aa6de793a96a4aaa4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
