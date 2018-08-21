@@ -315,9 +315,14 @@ bool VCMFecMethod::ProtectionFactor(const VCMProtectionParameters* parameters) {
   const uint8_t ratePar2 = 49;
 
   // Spatial resolution size, relative to a reference size.
-  float spatialSizeToRef = rtc::saturated_cast<float>(parameters->codecWidth *
-                                                      parameters->codecHeight) /
-                           (rtc::saturated_cast<float>(704 * 576));
+  float spatialSizeToRef;
+  if (parameters->codecWidth == 0 || parameters->codecHeight == 0) {
+    spatialSizeToRef = 1.0;
+  } else {
+    spatialSizeToRef = rtc::saturated_cast<float>(parameters->codecWidth *
+                                                  parameters->codecHeight) /
+                       (rtc::saturated_cast<float>(704 * 576));
+  }
   // resolnFac: This parameter will generally increase/decrease the FEC rate
   // (for fixed bitRate and packetLoss) based on system size.
   // Use a smaller exponent (< 1) to control/soften system size effect.
