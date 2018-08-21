@@ -1047,6 +1047,8 @@ include_rules = [
   "+absl/container/inlined_vector.h",
   "+absl/memory/memory.h",
   "+absl/strings/string_view.h",
+  "+absl/strings/str_cat.h",
+  "+absl/strings/str_join.h",
   "+absl/types/optional.h",
   "+absl/types/variant.h",
 ]
