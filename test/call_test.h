@@ -255,6 +255,8 @@ class BaseTest : public RtpRtcpObserver {
       VideoSendStream::Config* send_config,
       std::vector<VideoReceiveStream::Config>* receive_configs,
       VideoEncoderConfig* encoder_config);
+  virtual void ModifyFunctionVideoEncoderFactory(
+      test::FunctionVideoEncoderFactory* factory);
   virtual void ModifyVideoCaptureStartResolution(int* width,
                                                  int* heigt,
                                                  int* frame_rate);
