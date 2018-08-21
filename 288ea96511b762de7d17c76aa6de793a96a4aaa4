@@ -16,6 +16,24 @@
       "revId": "288ea96511b762de7d17c76aa6de793a96a4aaa4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12ae99ef_6356d578",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-21T13:41:50Z",
+      "side": 1,
+      "message": "I agree. Done, I added a \"warning\" section where it mention the flag has no effect until https://webrtc-review.googlesource.com/c/src/+/94766 is landed.",
+      "parentUuid": "c4c64e53_d8cbd73c",
+      "revId": "288ea96511b762de7d17c76aa6de793a96a4aaa4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
