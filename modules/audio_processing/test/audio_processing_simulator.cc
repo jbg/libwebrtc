@@ -210,6 +210,8 @@ EchoCanceller3Config ParseAec3Parameters(const std::string& filename) {
     ReadParam(section, "shadow", &cfg.filter.shadow);
     ReadParam(section, "main_initial", &cfg.filter.main_initial);
     ReadParam(section, "shadow_initial", &cfg.filter.shadow_initial);
+    ReadParam(section, "conservative_initial_phase",
+              &cfg.filter.conservative_initial_phase);
   }
 
   if (rtc::GetValueFromJsonObject(root, "erle", &section)) {
