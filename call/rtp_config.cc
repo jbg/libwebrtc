@@ -10,26 +10,25 @@
 
 #include "call/rtp_config.h"
 
+#include "absl/strings/str_format.h"
 #include "rtc_base/strings/string_builder.h"
 
 namespace webrtc {
 
 std::string NackConfig::ToString() const {
   char buf[1024];
-  rtc::SimpleStringBuilder ss(buf);
-  ss << "{rtp_history_ms: " << rtp_history_ms;
-  ss << '}';
-  return ss.str();
+  int size = absl::SNPrintF(buf, 1024, "{rtp_history_ms: %d", rtp_history_ms);
+  return std::string(buf, size);
 }
 
 std::string UlpfecConfig::ToString() const {
   char buf[1024];
-  rtc::SimpleStringBuilder ss(buf);
-  ss << "{ulpfec_payload_type: " << ulpfec_payload_type;
-  ss << ", red_payload_type: " << red_payload_type;
-  ss << ", red_rtx_payload_type: " << red_rtx_payload_type;
-  ss << '}';
-  return ss.str();
+  int size = absl::SNPrintF(buf, 1024,
+                            "{ulpfec_payload_type: %d, red_payload_type: %d, "
+                            "red_rtx_payload_type: %d}",
+                            ulpfec_payload_type, red_payload_type,
+                            red_rtx_payload_type);
+  return std::string(buf, size);
 }
 
 bool UlpfecConfig::operator==(const UlpfecConfig& other) const {
