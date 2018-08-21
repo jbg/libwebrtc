@@ -22,6 +22,30 @@
       "revId": "468e4645ff4604733e9a850d8e2052404d4ba326",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2444dfaf_198e3c78",
+        "filename": "test/video_codec_settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-21T10:55:41Z",
+      "side": 1,
+      "message": "Nope, not to my knowledge. I did this just to keep more of the old functionality. The change I\u0027m making is basically to explicitly allow kVideoCodecGeneric.\n\nPerhaps I should make a case for that that just returns and do RTC_NOTREACHED() in the default case? Or else we can just never crash. WDYT?",
+      "parentUuid": "35c8ef40_fcf31d49",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 13
+      },
+      "revId": "468e4645ff4604733e9a850d8e2052404d4ba326",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
