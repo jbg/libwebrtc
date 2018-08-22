@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d8f2a5e_38a15887",
+        "filename": "modules/video_coding/session_info.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-22T11:19:42Z",
+      "side": 1,
+      "message": "Looks similar to RTPSenderVide::GetTemporalId()\nMight be good to move TemporalId/PictureId/etc. extractors into helpers near RTPVideoHeader.\n\nmost likely better to do it in a different CL.",
+      "range": {
+        "startLine": 77,
+        "startChar": 20,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "8d70fbcbf8b24ee857d9a98a55e1262a03d8a54c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f31434a_3e370b4f",
+        "filename": "test/call_test.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-22T11:19:42Z",
+      "side": 1,
+      "message": "it is needed for this change?",
+      "revId": "8d70fbcbf8b24ee857d9a98a55e1262a03d8a54c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d575377_3654f9d3",
+        "filename": "test/function_video_encoder_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-22T11:19:42Z",
+      "side": 1,
+      "message": "assign operator normally returns reference to *this",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 6
+      },
+      "revId": "8d70fbcbf8b24ee857d9a98a55e1262a03d8a54c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84a41271_3a0779c4",
+        "filename": "test/function_video_encoder_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-22T11:19:42Z",
+      "side": 1,
+      "message": "because you\u0027ve added move assign operator, also add move constructor\nand explicitly delete copy operator \u0026 constructor\nhttps://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "8d70fbcbf8b24ee857d9a98a55e1262a03d8a54c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9876137c_d6e7dcd5",
+        "filename": "video/end_to_end_tests/extended_reports_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-22T11:19:42Z",
+      "side": 1,
+      "message": "if you like to type less, you can remove () in lambda when there are no parameters:\nauto lambda \u003d [] { return ...; };",
+      "range": {
+        "startLine": 161,
+        "startChar": 10,
+        "endLine": 161,
+        "endChar": 12
+      },
+      "revId": "8d70fbcbf8b24ee857d9a98a55e1262a03d8a54c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
