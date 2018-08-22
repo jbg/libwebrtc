@@ -35,6 +35,10 @@ class FunctionVideoEncoderFactory final : public VideoEncoderFactory {
           create)
       : create_(std::move(create)) {}
 
+  void operator=(FunctionVideoEncoderFactory&& other) {
+    create_ = std::move(other.create_);
+  }
+
   // Unused by tests.
   std::vector<SdpVideoFormat> GetSupportedFormats() const override {
     RTC_NOTREACHED();
@@ -55,8 +59,7 @@ class FunctionVideoEncoderFactory final : public VideoEncoderFactory {
   }
 
  private:
-  const std::function<std::unique_ptr<VideoEncoder>(const SdpVideoFormat&)>
-      create_;
+  std::function<std::unique_ptr<VideoEncoder>(const SdpVideoFormat&)> create_;
 };
 
 }  // namespace test

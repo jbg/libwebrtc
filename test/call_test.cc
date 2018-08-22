@@ -136,6 +136,7 @@ void CallTest::RunBaseTest(BaseTest* test) {
     if (num_video_streams_ > 0) {
       test->ModifyVideoConfigs(GetVideoSendConfig(), &video_receive_configs_,
                                GetVideoEncoderConfig());
+      test->ModifyFunctionVideoEncoderFactory(&fake_encoder_factory_);
     }
     if (num_audio_streams_ > 0) {
       test->ModifyAudioConfigs(&audio_send_config_, &audio_receive_configs_);
@@ -769,6 +770,9 @@ void BaseTest::ModifyVideoConfigs(
     VideoSendStream::Config* send_config,
     std::vector<VideoReceiveStream::Config>* receive_configs,
     VideoEncoderConfig* encoder_config) {}
+
+void BaseTest::ModifyFunctionVideoEncoderFactory(
+    test::FunctionVideoEncoderFactory* factory) {}
 
 void BaseTest::ModifyVideoCaptureStartResolution(int* width,
                                                  int* heigt,

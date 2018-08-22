@@ -10,6 +10,7 @@
 
 #include "call/fake_network_pipe.h"
 #include "call/simulated_network.h"
+#include "modules/video_coding/codecs/vp8/include/vp8.h"
 #include "test/call_test.h"
 #include "test/gtest.h"
 #include "test/rtcp_packet_parser.h"
@@ -134,10 +135,11 @@ class RtcpXrObserver : public test::EndToEndTest {
       VideoSendStream::Config* send_config,
       std::vector<VideoReceiveStream::Config>* receive_configs,
       VideoEncoderConfig* encoder_config) override {
+    // Configure VP8 to be able to use simulcast.
+    send_config->rtp.payload_name = "VP8";
+    encoder_config->codec_type = kVideoCodecVP8;
+
     if (enable_zero_target_bitrate_) {
-      // Configure VP8 to be able to use simulcast.
-      send_config->rtp.payload_name = "VP8";
-      encoder_config->codec_type = kVideoCodecVP8;
       (*receive_configs)[0].decoders.resize(1);
       (*receive_configs)[0].decoders[0].payload_type =
           send_config->rtp.payload_type;
@@ -151,6 +153,12 @@ class RtcpXrObserver : public test::EndToEndTest {
     (*receive_configs)[0].rtp.rtcp_mode = RtcpMode::kReducedSize;
     (*receive_configs)[0].rtp.rtcp_xr.receiver_reference_time_report =
         enable_rrtr_;
+  }
+
+  void ModifyFunctionVideoEncoderFactory(
+      test::FunctionVideoEncoderFactory* factory) override {
+    *factory = test::FunctionVideoEncoderFactory(
+        []() { return VP8Encoder::Create(); });
   }
 
   void PerformTest() override {
