@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4469d1c_2c125243",
+        "filename": "video/replay.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-08-22T07:34:58Z",
+      "side": 1,
+      "message": "That comment doesn\u0027t add value, either remove it or elaborate on its purpose (this config file configures the player and has the following format...)",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 24
+      },
+      "revId": "327945b896434658921fa02412574faa60707120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
