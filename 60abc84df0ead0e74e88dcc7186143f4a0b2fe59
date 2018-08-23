@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e0fffac_57c16a24",
+        "filename": "video/replay.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-23T13:17:33Z",
+      "side": 1,
+      "message": "Write to stderr instead.",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 69
+      },
+      "revId": "60abc84df0ead0e74e88dcc7186143f4a0b2fe59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d318528_21d6caf7",
+        "filename": "video/replay.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-23T13:17:33Z",
+      "side": 1,
+      "message": "Delete",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 41
+      },
+      "revId": "60abc84df0ead0e74e88dcc7186143f4a0b2fe59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70f86c8f_19068c2c",
+        "filename": "video/replay.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-08-23T13:17:33Z",
+      "side": 1,
+      "message": "This should probably have a better name :)",
+      "range": {
+        "startLine": 341,
+        "startChar": 20,
+        "endLine": 341,
+        "endChar": 23
+      },
+      "revId": "60abc84df0ead0e74e88dcc7186143f4a0b2fe59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
