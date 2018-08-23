@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a9d3738_56f40d65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-08-23T10:41:05Z",
+      "side": 1,
+      "message": "Think this is the wrong bug :)\n\n\"Rubbish Google Chrome, I will never use it again.\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "ff595f0f3be47f6edde2fc60bd76dde7eba885cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
