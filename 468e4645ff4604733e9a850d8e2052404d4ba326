@@ -46,6 +46,30 @@
       "revId": "468e4645ff4604733e9a850d8e2052404d4ba326",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18944fc3_68f8b950",
+        "filename": "test/video_codec_settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-08-23T10:49:46Z",
+      "side": 1,
+      "message": "I think never crashing sounds good. And then we hope that test writers know what they are doing when calling this helper function. Worst case, nothing is initialized in the subcodec struct.",
+      "parentUuid": "2444dfaf_198e3c78",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 13
+      },
+      "revId": "468e4645ff4604733e9a850d8e2052404d4ba326",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
