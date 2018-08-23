@@ -57,6 +57,9 @@ class NetworkControllerTester {
                      TimeDelta propagation_delay,
                      PacketProducer next_packet);
   NetworkControlUpdate GetState() { return state_; }
+  double target_rate_kbps() {
+    return state_.target_rate->target_rate.kbps<double>();
+  }
 
  private:
   std::unique_ptr<NetworkControllerInterface> controller_;
