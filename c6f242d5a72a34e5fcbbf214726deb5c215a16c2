@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5ca335a_677d3fd7",
+        "filename": "api/ortc/ortcfactoryinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-23T14:07:39Z",
+      "side": 1,
+      "message": "This was included by api/mediaconstraintsinterface.h (!)",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "c6f242d5a72a34e5fcbbf214726deb5c215a16c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
