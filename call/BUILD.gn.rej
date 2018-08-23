@@ -1,0 +1,17 @@
+diff a/call/BUILD.gn b/call/BUILD.gn	(rejected hunks)
+@@ -203,6 +203,7 @@
+     "../system_wrappers",
+     "../system_wrappers:field_trial_api",
+     "../system_wrappers:metrics_api",
++    "../test:rtp_file_reader_writer",
+     "../video",
+   ]
+ }
+@@ -228,6 +229,7 @@
+     "../modules/rtp_rtcp:rtp_rtcp_format",
+     "../rtc_base:checks",
+     "../rtc_base:rtc_base_approved",
++    "../rtc_base:rtc_json",
+   ]
+ }
+ 
