@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "bc658e2f_b99bd81e",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-24T23:44:00Z",
+      "side": 1,
+      "message": "Does it make more sense to call this the TLSConfig?",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 19
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d54a1230_246c9f2b",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 6
@@ -64,6 +87,52 @@
         "startChar": 0,
         "endLine": 261,
         "endChar": 49
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f426113a_359e503f",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-24T23:44:00Z",
+      "side": 1,
+      "message": "Is there a way we can avoid duplicating this class between api and p2p?",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e738385d_c603804c",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-24T23:44:00Z",
+      "side": 1,
+      "message": "Should this be part of the \"Config\"?",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 0
       },
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
