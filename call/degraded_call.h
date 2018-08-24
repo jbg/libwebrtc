@@ -71,9 +71,6 @@ class DegradedCall : public Call, private Transport, private PacketReceiver {
 
   void SignalChannelNetworkState(MediaType media, NetworkState state) override;
 
-  void OnTransportOverheadChanged(MediaType media,
-                                  int transport_overhead_per_packet) override;
-
   void OnSentPacket(const rtc::SentPacket& sent_packet) override;
 
  protected:
