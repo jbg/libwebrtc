@@ -33,12 +33,12 @@ std::unique_ptr<Port> TurnPortFactory::Create(
 std::unique_ptr<Port> TurnPortFactory::Create(const CreateRelayPortArgs& args,
                                               int min_port,
                                               int max_port) {
-  TurnPort* port = TurnPort::Create(
-      args.network_thread, args.socket_factory, args.network, min_port,
-      max_port, args.username, args.password, *args.server_address,
-      args.config->credentials, args.config->priority, args.origin,
-      args.config->tls_alpn_protocols, args.config->tls_elliptic_curves,
-      args.turn_customizer, args.config->tls_cert_verifier);
+  TurnPort* port =
+      TurnPort::Create(args.network_thread, args.socket_factory, args.network,
+                       min_port, max_port, args.username, args.password,
+                       *args.server_address, args.config->credentials,
+                       args.config->priority, args.origin, args.turn_customizer,
+                       args.config->ssl_config, args.config->tls_cert_verifier);
   port->SetTlsCertPolicy(args.config->tls_cert_policy);
   return std::unique_ptr<Port>(port);
 }

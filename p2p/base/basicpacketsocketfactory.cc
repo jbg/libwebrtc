@@ -161,9 +161,15 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
       ssl_adapter->SetIgnoreBadCert(true);
     }
 
+    ssl_adapter->SetCertVerifier(tcp_options.tls_cert_verifier);
+    ssl_adapter->SetEnableOcspStapling(tcp_options.enable_ocsp_stapling);
+    ssl_adapter->SetEnableSignedCertTimestamp(
+        tcp_options.enable_signed_cert_timestamp);
+    ssl_adapter->SetEnableTlsChannelId(tcp_options.enable_tls_channel_id);
+    ssl_adapter->SetEnableGrease(tcp_options.enable_grease);
+    ssl_adapter->SetMaxSslVersion(tcp_options.max_ssl_version);
     ssl_adapter->SetAlpnProtocols(tcp_options.tls_alpn_protocols);
     ssl_adapter->SetEllipticCurves(tcp_options.tls_elliptic_curves);
-    ssl_adapter->SetCertVerifier(tcp_options.tls_cert_verifier);
 
     socket = ssl_adapter;
 

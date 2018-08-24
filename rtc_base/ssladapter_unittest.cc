@@ -79,16 +79,38 @@ class SSLAdapterTestDummyClient : public sigslot::has_slots<> {
     ssl_adapter_->SetIgnoreBadCert(ignore_bad_cert);
   }
 
+  void SetEnableOcspStapling(bool enable_ocsp_stapling) {
+    ssl_adapter_->SetEnableOcspStapling(enable_ocsp_stapling);
+  }
+
+  void SetEnableSignedCertTimestamp(bool enable_signed_cert_timestamp) {
+    ssl_adapter_->SetEnableSignedCertTimestamp(enable_signed_cert_timestamp);
+  }
+
+  void SetEnableTlsChannelId(bool enable_tls_channel_id) {
+    ssl_adapter_->SetEnableTlsChannelId(enable_tls_channel_id);
+  }
+
+  void SetEnableGrease(bool enable_grease) {
+    ssl_adapter_->SetEnableGrease(enable_grease);
+  }
+
+  void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) {
+    ssl_adapter_->SetMaxSslVersion(max_ssl_version);
+  }
+
+  void SetAlpnProtocols(
+      const absl::optional<std::vector<std::string>>& tls_alpn_protocols) {
+    ssl_adapter_->SetAlpnProtocols(tls_alpn_protocols);
+  }
+
+  void SetEllipticCurves(
+      const absl::optional<std::vector<std::string>>& tls_elliptic_curves) {
+    ssl_adapter_->SetEllipticCurves(tls_elliptic_curves);
+  }
+
   void SetCertVerifier(rtc::SSLCertificateVerifier* ssl_cert_verifier) {
     ssl_adapter_->SetCertVerifier(ssl_cert_verifier);
-  }
-
-  void SetAlpnProtocols(const std::vector<std::string>& protos) {
-    ssl_adapter_->SetAlpnProtocols(protos);
-  }
-
-  void SetEllipticCurves(const std::vector<std::string>& curves) {
-    ssl_adapter_->SetEllipticCurves(curves);
   }
 
   rtc::SocketAddress GetAddress() const {
@@ -309,16 +331,38 @@ class SSLAdapterTestBase : public testing::Test, public sigslot::has_slots<> {
     client_->SetIgnoreBadCert(ignore_bad_cert);
   }
 
+  void SetEnableOcspStapling(bool enable_ocsp_stapling) {
+    client_->SetEnableOcspStapling(enable_ocsp_stapling);
+  }
+
+  void SetEnableSignedCertTimestamp(bool enable_signed_cert_timestamp) {
+    client_->SetEnableSignedCertTimestamp(enable_signed_cert_timestamp);
+  }
+
+  void SetEnableTlsChannelId(bool enable_tls_channel_id) {
+    client_->SetEnableTlsChannelId(enable_tls_channel_id);
+  }
+
+  void SetEnableGrease(bool enable_grease) {
+    client_->SetEnableGrease(enable_grease);
+  }
+
+  void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) {
+    client_->SetMaxSslVersion(max_ssl_version);
+  }
+
+  void SetAlpnProtocols(
+      const absl::optional<std::vector<std::string>>& tls_alpn_protocols) {
+    client_->SetAlpnProtocols(tls_alpn_protocols);
+  }
+
+  void SetEllipticCurves(
+      const absl::optional<std::vector<std::string>>& tls_elliptic_curves) {
+    client_->SetEllipticCurves(tls_elliptic_curves);
+  }
+
   void SetCertVerifier(rtc::SSLCertificateVerifier* ssl_cert_verifier) {
     client_->SetCertVerifier(ssl_cert_verifier);
-  }
-
-  void SetAlpnProtocols(const std::vector<std::string>& protos) {
-    client_->SetAlpnProtocols(protos);
-  }
-
-  void SetEllipticCurves(const std::vector<std::string>& curves) {
-    client_->SetEllipticCurves(curves);
   }
 
   void SetMockCertVerifier(bool return_value) {
@@ -525,10 +569,63 @@ TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSTransferCustomCertVerifier) {
   TestTransfer("Hello, world!");
 }
 
+// Test transfer with OCSP stapling enabled and disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestOcspStapling) {
+  SetEnableOcspStapling(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+  SetEnableOcspStapling(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with signed cert timestamp enabled and disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestSignedCertTimestamp) {
+  SetEnableSignedCertTimestamp(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+  SetEnableSignedCertTimestamp(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with TLS channel ID enabled and disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSChannelid) {
+  SetEnableTlsChannelId(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+  SetEnableTlsChannelId(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with GREASE enabled and disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestGrease) {
+  SetEnableGrease(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+  SetEnableGrease(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with various max SSL versions.
+TEST_F(SSLAdapterTestTLS_ECDSA, TestMaxSSLVersion) {
+  SetMaxSslVersion(absl::optional<int>(0x0304 /* TLS1_3 */));
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+  SetMaxSslVersion(absl::optional<int>(0x0303 /* TLS1_2 */));
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+  SetMaxSslVersion(absl::optional<int>(0x0301 /* TLS1 */));
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
 // Test transfer using ALPN with protos as h2 and http/1.1
 TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSALPN) {
   std::vector<std::string> alpn_protos{"h2", "http/1.1"};
-  SetAlpnProtocols(alpn_protos);
+  SetAlpnProtocols(absl::optional<std::vector<std::string>>(alpn_protos));
   TestHandshake(true);
   TestTransfer("Hello, world!");
 }
@@ -536,7 +633,7 @@ TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSALPN) {
 // Test transfer with TLS Elliptic curves set to "X25519:P-256:P-384:P-521"
 TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSEllipticCurves) {
   std::vector<std::string> elliptic_curves{"X25519", "P-256", "P-384", "P-521"};
-  SetEllipticCurves(elliptic_curves);
+  SetEllipticCurves(absl::optional<std::vector<std::string>>(elliptic_curves));
   TestHandshake(true);
   TestTransfer("Hello, world!");
 }
