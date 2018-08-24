@@ -198,6 +198,44 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     kTlsCertPolicyInsecureNoCheck,
   };
 
+  // SSL configuration options.
+  struct SSLConfig {
+    SSLConfig();
+    SSLConfig(const SSLConfig&);
+    ~SSLConfig();
+
+    // Indicates whether to enable the OCSP stapling in TLS.
+    bool enable_ocsp_stapling = true;
+    // Indicates whether to enable the signed certificate timestamp extension in
+    // TLS.
+    bool enable_signed_cert_timestamp = true;
+    // Indicates whether to enable the TLS Channel ID extension.
+    bool enable_tls_channel_id = false;
+    // Indicates whether to enable the TLS GREASE extension.
+    bool enable_grease = false;
+    // Highest supportedSL version, as defined in the supported_groups TLS
+    // extension.
+    absl::optional<int> max_ssl_version = absl::nullopt;
+    // List of protocols to be used in the TLS ALPN extension.
+    absl::optional<std::vector<std::string>> tls_alpn_protocols = absl::nullopt;
+    // List of elliptic curves to be used in the TLS elliptic curves extension.
+    // Only curve names supported by OpenSSL should be used (eg.
+    // "P-256","X25519").
+    absl::optional<std::vector<std::string>> tls_elliptic_curves =
+        absl::nullopt;
+
+    bool operator==(const SSLConfig& o) const {
+      return enable_ocsp_stapling == o.enable_ocsp_stapling &&
+             enable_signed_cert_timestamp == o.enable_signed_cert_timestamp &&
+             enable_tls_channel_id == o.enable_tls_channel_id &&
+             enable_grease == o.enable_grease &&
+             max_ssl_version == o.max_ssl_version &&
+             tls_alpn_protocols == o.tls_alpn_protocols &&
+             tls_elliptic_curves == o.tls_elliptic_curves;
+    }
+    bool operator!=(const SSLConfig& o) const { return !(*this == o); }
+  };
+
   struct IceServer {
     IceServer();
     IceServer(const IceServer&);
@@ -221,13 +259,16 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     std::vector<std::string> tls_alpn_protocols;
     // List of elliptic curves to be used in the TLS elliptic curves extension.
     std::vector<std::string> tls_elliptic_curves;
+    // SSL configuration options for any SSL/TLS connections to this IceServer.
+    SSLConfig ssl_config;
 
     bool operator==(const IceServer& o) const {
       return uri == o.uri && urls == o.urls && username == o.username &&
              password == o.password && tls_cert_policy == o.tls_cert_policy &&
              hostname == o.hostname &&
              tls_alpn_protocols == o.tls_alpn_protocols &&
-             tls_elliptic_curves == o.tls_elliptic_curves;
+             tls_elliptic_curves == o.tls_elliptic_curves &&
+             ssl_config == o.ssl_config;
     }
     bool operator!=(const IceServer& o) const { return !(*this == o); }
   };
