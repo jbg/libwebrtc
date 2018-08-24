@@ -144,6 +144,39 @@ struct RelayCredentials {
   std::string password;
 };
 
+// SSL configuration options.
+struct SSLConfig {
+  SSLConfig();
+  SSLConfig(bool enable_ocsp_stapling,
+            bool enable_signed_cert_timestamp,
+            bool enable_tls_channel_id,
+            bool enable_grease,
+            absl::optional<int> max_ssl_version,
+            absl::optional<std::vector<std::string>> tls_alpn_protocols,
+            absl::optional<std::vector<std::string>> tls_elliptic_curves);
+  SSLConfig(const SSLConfig&);
+  ~SSLConfig();
+
+  bool operator==(const SSLConfig& o) const {
+    return enable_ocsp_stapling == o.enable_ocsp_stapling &&
+           enable_signed_cert_timestamp == o.enable_signed_cert_timestamp &&
+           enable_tls_channel_id == o.enable_tls_channel_id &&
+           enable_grease == o.enable_grease &&
+           max_ssl_version == o.max_ssl_version &&
+           tls_alpn_protocols == o.tls_alpn_protocols &&
+           tls_elliptic_curves == o.tls_elliptic_curves;
+  }
+  bool operator!=(const SSLConfig& o) const { return !(*this == o); }
+
+  bool enable_ocsp_stapling;
+  bool enable_signed_cert_timestamp;
+  bool enable_tls_channel_id;
+  bool enable_grease;
+  absl::optional<int> max_ssl_version;
+  absl::optional<std::vector<std::string>> tls_alpn_protocols;
+  absl::optional<std::vector<std::string>> tls_elliptic_curves;
+};
+
 typedef std::vector<ProtocolAddress> PortList;
 // TODO(deadbeef): Rename to TurnServerConfig.
 struct RelayServerConfig {
@@ -178,8 +211,7 @@ struct RelayServerConfig {
   RelayCredentials credentials;
   int priority = 0;
   TlsCertPolicy tls_cert_policy = TlsCertPolicy::TLS_CERT_POLICY_SECURE;
-  std::vector<std::string> tls_alpn_protocols;
-  std::vector<std::string> tls_elliptic_curves;
+  SSLConfig ssl_config;
   rtc::SSLCertificateVerifier* tls_cert_verifier = nullptr;
 };
 
