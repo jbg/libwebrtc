@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09328f41_19a2f401",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-24T23:32:36Z",
+      "side": 1,
+      "message": "Final if the destructor is non virtual.",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 18
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54a1230_246c9f2b",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-24T23:32:36Z",
+      "side": 1,
+      "message": "nit: Spelling.",
+      "range": {
+        "startLine": 216,
+        "startChar": 15,
+        "endLine": 216,
+        "endChar": 26
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42d25fa8_17b95f39",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-24T23:32:36Z",
+      "side": 1,
+      "message": "Are these now duplicated in the config?",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 49
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
