@@ -157,12 +157,6 @@ void DegradedCall::SignalChannelNetworkState(MediaType media,
   call_->SignalChannelNetworkState(media, state);
 }
 
-void DegradedCall::OnTransportOverheadChanged(
-    MediaType media,
-    int transport_overhead_per_packet) {
-  call_->OnTransportOverheadChanged(media, transport_overhead_per_packet);
-}
-
 void DegradedCall::OnSentPacket(const rtc::SentPacket& sent_packet) {
   if (send_config_) {
     // If we have a degraded send-transport, we have already notified call

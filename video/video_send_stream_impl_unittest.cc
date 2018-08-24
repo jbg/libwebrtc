@@ -44,7 +44,7 @@ std::string GetAlrProbingExperimentString() {
              AlrExperimentSettings::kScreenshareProbingBweExperimentName) +
          "/1.0,2875,80,40,-60,3/";
 }
-class MockPayloadRouter : public RtpVideoSenderInterface {
+class MockRtpVideoSender : public RtpVideoSenderInterface {
  public:
   MOCK_METHOD1(RegisterProcessThread, void(ProcessThread*));
   MOCK_METHOD0(DeRegisterProcessThread, void());
@@ -55,21 +55,18 @@ class MockPayloadRouter : public RtpVideoSenderInterface {
   MOCK_CONST_METHOD0(GetRtpStates, std::map<uint32_t, RtpState>());
   MOCK_CONST_METHOD0(GetRtpPayloadStates,
                      std::map<uint32_t, RtpPayloadState>());
-  MOCK_CONST_METHOD0(FecEnabled, bool());
-  MOCK_CONST_METHOD0(NackEnabled, bool());
   MOCK_METHOD2(DeliverRtcp, void(const uint8_t*, size_t));
-  MOCK_METHOD5(ProtectionRequest,
-               void(const FecProtectionParams*,
-                    const FecProtectionParams*,
-                    uint32_t*,
-                    uint32_t*,
-                    uint32_t*));
-  MOCK_METHOD1(SetMaxRtpPacketSize, void(size_t));
   MOCK_METHOD1(OnBitrateAllocationUpdated, void(const VideoBitrateAllocation&));
   MOCK_METHOD3(OnEncodedImage,
                EncodedImageCallback::Result(const EncodedImage&,
                                             const CodecSpecificInfo*,
                                             const RTPFragmentationHeader*));
+  MOCK_METHOD1(OnTransportOverheadChanged, void(size_t));
+  MOCK_METHOD1(OnOverheadChanged, void(size_t));
+  MOCK_METHOD4(OnBitrateUpdated, void(uint32_t, uint8_t, int64_t, int));
+  MOCK_CONST_METHOD0(GetPayloadBitrateBps, uint32_t());
+  MOCK_CONST_METHOD0(GetProtectionBitrateBps, uint32_t());
+  MOCK_METHOD3(SetEncodingData, void(size_t, size_t, size_t));
 };
 }  // namespace
 
@@ -93,14 +90,14 @@ class VideoSendStreamImplTest : public ::testing::Test {
     EXPECT_CALL(transport_controller_, packet_router())
         .WillRepeatedly(Return(&packet_router_));
     EXPECT_CALL(transport_controller_,
-                CreateRtpVideoSender(_, _, _, _, _, _, _, _))
-        .WillRepeatedly(Return(&payload_router_));
-    EXPECT_CALL(payload_router_, SetActive(_))
+                CreateRtpVideoSender(_, _, _, _, _, _, _, _, _))
+        .WillRepeatedly(Return(&rtp_video_sender_));
+    EXPECT_CALL(rtp_video_sender_, SetActive(_))
         .WillRepeatedly(testing::Invoke(
-            [&](bool active) { payload_router_active_ = active; }));
-    EXPECT_CALL(payload_router_, IsActive())
+            [&](bool active) { rtp_video_sender_active_ = active; }));
+    EXPECT_CALL(rtp_video_sender_, IsActive())
         .WillRepeatedly(
-            testing::Invoke([&]() { return payload_router_active_; }));
+            testing::Invoke([&]() { return rtp_video_sender_active_; }));
   }
   ~VideoSendStreamImplTest() {}
 
@@ -126,9 +123,9 @@ class VideoSendStreamImplTest : public ::testing::Test {
   NiceMock<MockRtpTransportControllerSend> transport_controller_;
   NiceMock<MockBitrateAllocator> bitrate_allocator_;
   NiceMock<MockVideoStreamEncoder> video_stream_encoder_;
-  NiceMock<MockPayloadRouter> payload_router_;
+  NiceMock<MockRtpVideoSender> rtp_video_sender_;
 
-  bool payload_router_active_ = false;
+  bool rtp_video_sender_active_ = false;
   SimulatedClock clock_;
   RtcEventLogNullImpl event_log_;
   VideoSendStream::Config config_;

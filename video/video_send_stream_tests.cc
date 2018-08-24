@@ -1717,8 +1717,8 @@ TEST_F(VideoSendStreamTest, ChangingTransportOverhead) {
     void PerformTest() override {
       task_queue_->SendTask([this]() {
         transport_overhead_ = 100;
-        call_->OnTransportOverheadChanged(webrtc::MediaType::VIDEO,
-                                          transport_overhead_);
+        call_->GetTransportControllerSend()->OnTransportOverheadChanged(
+            transport_overhead_);
       });
 
       EXPECT_TRUE(Wait());
@@ -1730,8 +1730,8 @@ TEST_F(VideoSendStreamTest, ChangingTransportOverhead) {
 
       task_queue_->SendTask([this]() {
         transport_overhead_ = 500;
-        call_->OnTransportOverheadChanged(webrtc::MediaType::VIDEO,
-                                          transport_overhead_);
+        call_->GetTransportControllerSend()->OnTransportOverheadChanged(
+            transport_overhead_);
       });
 
       EXPECT_TRUE(Wait());
@@ -3710,7 +3710,7 @@ TEST_F(VideoSendStreamTest, RemoveOverheadFromBandwidth) {
       task_queue_->SendTask([this, &bitrate_config]() {
         call_->GetTransportControllerSend()->SetSdpBitrateParameters(
             bitrate_config);
-        call_->OnTransportOverheadChanged(webrtc::MediaType::VIDEO, 40);
+        call_->GetTransportControllerSend()->OnTransportOverheadChanged(40);
       });
 
       // At a bitrate of 60kbps with a packet size of 1200B video and an
