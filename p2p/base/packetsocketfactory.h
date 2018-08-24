@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/proxyinfo.h"
 #include "rtc_base/sslcertificate.h"
@@ -26,11 +27,18 @@ struct PacketSocketTcpOptions {
   ~PacketSocketTcpOptions();
 
   int opts = 0;
-  std::vector<std::string> tls_alpn_protocols;
-  std::vector<std::string> tls_elliptic_curves;
   // An optional custom SSL certificate verifier that an API user can provide to
   // inject their own certificate verification logic.
   SSLCertificateVerifier* tls_cert_verifier = nullptr;
+
+  // SSL configuration options.
+  bool enable_ocsp_stapling;
+  bool enable_signed_cert_timestamp;
+  bool enable_tls_channel_id;
+  bool enable_grease;
+  absl::optional<int> max_ssl_version;
+  absl::optional<std::vector<std::string>> tls_alpn_protocols;
+  absl::optional<std::vector<std::string>> tls_elliptic_curves;
 };
 
 class AsyncPacketSocket;

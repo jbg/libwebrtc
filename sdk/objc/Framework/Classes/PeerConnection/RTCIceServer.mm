@@ -9,6 +9,7 @@
  */
 
 #import "RTCIceServer+Private.h"
+#import "RTCSslConfig+Private.h"
 
 #import "NSString+StdString.h"
 
@@ -21,6 +22,7 @@
 @synthesize hostname = _hostname;
 @synthesize tlsAlpnProtocols = _tlsAlpnProtocols;
 @synthesize tlsEllipticCurves = _tlsEllipticCurves;
+@synthesize sslConfig = _sslConfig;
 
 - (instancetype)initWithURLStrings:(NSArray<NSString *> *)urlStrings {
   return [self initWithURLStrings:urlStrings
@@ -83,6 +85,24 @@
                           hostname:(NSString *)hostname
                   tlsAlpnProtocols:(NSArray<NSString *> *)tlsAlpnProtocols
                  tlsEllipticCurves:(NSArray<NSString *> *)tlsEllipticCurves {
+  return [self initWithURLStrings:urlStrings
+                         username:username
+                       credential:credential
+                    tlsCertPolicy:tlsCertPolicy
+                         hostname:hostname
+                 tlsAlpnProtocols:tlsAlpnProtocols
+                tlsEllipticCurves:[NSArray array]
+                        sslConfig:[[RTCSslConfig alloc] init]];
+}
+
+- (instancetype)initWithURLStrings:(NSArray<NSString *> *)urlStrings
+                          username:(NSString *)username
+                        credential:(NSString *)credential
+                     tlsCertPolicy:(RTCTlsCertPolicy)tlsCertPolicy
+                          hostname:(NSString *)hostname
+                  tlsAlpnProtocols:(NSArray<NSString *> *)tlsAlpnProtocols
+                 tlsEllipticCurves:(NSArray<NSString *> *)tlsEllipticCurves
+                         sslConfig:(RTCSslConfig *)sslConfig {
   NSParameterAssert(urlStrings.count);
   if (self = [super init]) {
     _urlStrings = [[NSArray alloc] initWithArray:urlStrings copyItems:YES];
@@ -92,19 +112,21 @@
     _hostname = [hostname copy];
     _tlsAlpnProtocols = [[NSArray alloc] initWithArray:tlsAlpnProtocols copyItems:YES];
     _tlsEllipticCurves = [[NSArray alloc] initWithArray:tlsEllipticCurves copyItems:YES];
+    _sslConfig = sslConfig;
   }
   return self;
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCIceServer:\n%@\n%@\n%@\n%@\n%@\n%@\n%@",
+  return [NSString stringWithFormat:@"RTCIceServer:\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@",
                                     _urlStrings,
                                     _username,
                                     _credential,
                                     [self stringForTlsCertPolicy:_tlsCertPolicy],
                                     _hostname,
                                     _tlsAlpnProtocols,
-                                    _tlsEllipticCurves];
+                                    _tlsEllipticCurves,
+                                    _sslConfig];
 }
 
 #pragma mark - Private
@@ -149,6 +171,8 @@
           webrtc::PeerConnectionInterface::kTlsCertPolicyInsecureNoCheck;
       break;
   }
+
+  iceServer.ssl_config = [_sslConfig nativeConfig];
   return iceServer;
 }
 
@@ -183,13 +207,16 @@
       break;
   }
 
+  RTCSslConfig *sslConfig = [[RTCSslConfig alloc] initWithNativeConfig:nativeServer.ssl_config];
+
   self = [self initWithURLStrings:urls
                          username:username
                        credential:credential
                     tlsCertPolicy:tlsCertPolicy
                          hostname:hostname
                  tlsAlpnProtocols:tlsAlpnProtocols
-                tlsEllipticCurves:tlsEllipticCurves];
+                tlsEllipticCurves:tlsEllipticCurves
+                        sslConfig:sslConfig];
   return self;
 }
 
