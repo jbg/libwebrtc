@@ -45,6 +45,30 @@
       "revId": "7839b0a113a5fc924eeaa1492ab4327e81a762c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "877d8b1c_556f91e9",
+        "filename": "modules/rtp_rtcp/source/rtp_payload_registry.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-24T11:07:48Z",
+      "side": 1,
+      "message": "You\u0027re right, good point. \n\nNot sure what to do about it, it feels super weird to \"downcast\" i420 and multiplex to generic here.",
+      "parentUuid": "62b7e30a_65e3c51f",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "7839b0a113a5fc924eeaa1492ab4327e81a762c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
