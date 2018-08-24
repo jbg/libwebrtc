@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ea20c44a_557db97b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-24T08:04:39Z",
+      "side": 1,
+      "message": "It\u0027s not a struct... \"type\", \"typename\", \"alias\" or possibly \"enum\".\n\nMight also make sense to link to cl https://webrtc-review.googlesource.com/79561, which changed it from a separate enum to an alias.",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "7839b0a113a5fc924eeaa1492ab4327e81a762c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62b7e30a_65e3c51f",
         "filename": "modules/rtp_rtcp/source/rtp_payload_registry.cc",
         "patchSetId": 1
