@@ -259,8 +259,24 @@ static RTCErrorType ParseIceServerUrl(
         config.tls_cert_policy =
             cricket::TlsCertPolicy::TLS_CERT_POLICY_INSECURE_NO_CHECK;
       }
-      config.tls_alpn_protocols = server.tls_alpn_protocols;
-      config.tls_elliptic_curves = server.tls_elliptic_curves;
+
+      cricket::SSLConfig sslConfig = cricket::SSLConfig(
+          server.ssl_config.enable_ocsp_stapling,
+          server.ssl_config.enable_signed_cert_timestamp,
+          server.ssl_config.enable_tls_channel_id,
+          server.ssl_config.enable_grease, server.ssl_config.max_ssl_version,
+          server.ssl_config.tls_alpn_protocols,
+          server.ssl_config.tls_elliptic_curves);
+      if (!sslConfig.tls_alpn_protocols.has_value() &&
+          !server.tls_alpn_protocols.empty()) {
+        sslConfig.tls_alpn_protocols = server.tls_alpn_protocols;
+      }
+      if (!sslConfig.tls_elliptic_curves.has_value() &&
+          !server.tls_elliptic_curves.empty()) {
+        sslConfig.tls_elliptic_curves = server.tls_elliptic_curves;
+      }
+
+      config.ssl_config = sslConfig;
 
       turn_servers->push_back(config);
       break;

@@ -58,8 +58,16 @@ class SSLAdapter : public AsyncSocketAdapter {
   // BasicPacketSocketFactory that uses this function.
   virtual void SetIgnoreBadCert(bool ignore) = 0;
 
-  virtual void SetAlpnProtocols(const std::vector<std::string>& protos) = 0;
-  virtual void SetEllipticCurves(const std::vector<std::string>& curves) = 0;
+  virtual void SetEnableOcspStapling(bool enable_ocsp_stapling) = 0;
+  virtual void SetEnableSignedCertTimestamp(
+      bool enable_signed_cert_timestamp) = 0;
+  virtual void SetEnableTlsChannelId(bool enable_tls_channel_id) = 0;
+  virtual void SetEnableGrease(bool enable_grease) = 0;
+  virtual void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) = 0;
+  virtual void SetAlpnProtocols(
+      const absl::optional<std::vector<std::string>>& tls_alpn_protocols) = 0;
+  virtual void SetEllipticCurves(
+      const absl::optional<std::vector<std::string>>& tls_elliptic_curves) = 0;
 
   // Do DTLS or TLS (default is TLS, if unspecified)
   virtual void SetMode(SSLMode mode) = 0;

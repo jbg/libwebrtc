@@ -689,6 +689,8 @@ if (is_ios || is_mac) {
         "objc/Framework/Classes/PeerConnection/RTCSSLAdapter.mm",
         "objc/Framework/Classes/PeerConnection/RTCSessionDescription+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCSessionDescription.mm",
+        "objc/Framework/Classes/PeerConnection/RTCSslConfig+Private.h",
+        "objc/Framework/Classes/PeerConnection/RTCSslConfig.mm",
         "objc/Framework/Classes/PeerConnection/RTCTracing.mm",
         "objc/Framework/Classes/PeerConnection/RTCVideoTrack+Private.h",
         "objc/Framework/Classes/PeerConnection/RTCVideoTrack.mm",
@@ -720,6 +722,7 @@ if (is_ios || is_mac) {
         "objc/Framework/Headers/WebRTC/RTCRtpTransceiver.h",
         "objc/Framework/Headers/WebRTC/RTCSSLAdapter.h",
         "objc/Framework/Headers/WebRTC/RTCSessionDescription.h",
+        "objc/Framework/Headers/WebRTC/RTCSslConfig.h",
         "objc/Framework/Headers/WebRTC/RTCTracing.h",
         "objc/Framework/Headers/WebRTC/RTCVideoTrack.h",
       ]
