@@ -46,8 +46,15 @@ class OpenSSLAdapter : public SSLAdapter, public MessageHandler {
   ~OpenSSLAdapter() override;
 
   void SetIgnoreBadCert(bool ignore) override;
-  void SetAlpnProtocols(const std::vector<std::string>& protos) override;
-  void SetEllipticCurves(const std::vector<std::string>& curves) override;
+  void SetEnableOcspStapling(bool enable_ocsp_stapling) override;
+  void SetEnableSignedCertTimestamp(bool enable_signed_cert_timestamp) override;
+  void SetEnableTlsChannelId(bool enable_tls_channel_id) override;
+  void SetEnableGrease(bool enable_grease) override;
+  void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) override;
+  void SetAlpnProtocols(const absl::optional<std::vector<std::string>>&
+                            tls_alpn_protocols) override;
+  void SetEllipticCurves(const absl::optional<std::vector<std::string>>&
+                             tls_elliptic_curves) override;
   void SetMode(SSLMode mode) override;
   void SetCertVerifier(SSLCertificateVerifier* ssl_cert_verifier) override;
   void SetIdentity(SSLIdentity* identity) override;
@@ -140,10 +147,22 @@ class OpenSSLAdapter : public SSLAdapter, public MessageHandler {
   SSLMode ssl_mode_;
   // If true, the server certificate need not match the configured hostname.
   bool ignore_bad_cert_;
-  // List of protocols to be used in the TLS ALPN extension.
-  std::vector<std::string> alpn_protocols_;
-  // List of elliptic curves to be used in the TLS elliptic curves extension.
-  std::vector<std::string> elliptic_curves_;
+  // If true, enables the (unused) OCSP stapling TLS extension.
+  bool enable_ocsp_stapling_;
+  // If true, enables the (unused) signed certificate timestamp TLS extension.
+  bool enable_signed_cert_timestamp_;
+  // If true, enables the (unused) channel ID TLS extension.
+  bool enable_tls_channel_id_;
+  // If true, enables the (unused) GREASE TLS extension.
+  bool enable_grease_;
+  // If set, indicates the highest supported SSL version.
+  absl::optional<int> max_ssl_version_;
+  // If set, indicates the list of protocols to be used in the TLS ALPN
+  // extension.
+  absl::optional<std::vector<std::string>> tls_alpn_protocols_;
+  // If set, indicates the list of curves to be used in the TLS elliptic curves
+  // extension.
+  absl::optional<std::vector<std::string>> tls_elliptic_curves_;
   // Holds the result of the call to run of the ssl_cert_verify_->Verify()
   bool custom_cert_verifier_status_;
 };

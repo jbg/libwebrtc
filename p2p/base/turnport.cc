@@ -230,9 +230,8 @@ TurnPort::TurnPort(rtc::Thread* thread,
                    const RelayCredentials& credentials,
                    int server_priority,
                    const std::string& origin,
-                   const std::vector<std::string>& tls_alpn_protocols,
-                   const std::vector<std::string>& tls_elliptic_curves,
                    webrtc::TurnCustomizer* customizer,
+                   const SSLConfig& ssl_config,
                    rtc::SSLCertificateVerifier* tls_cert_verifier)
     : Port(thread,
            RELAY_PORT_TYPE,
@@ -243,8 +242,7 @@ TurnPort::TurnPort(rtc::Thread* thread,
            username,
            password),
       server_address_(server_address),
-      tls_alpn_protocols_(tls_alpn_protocols),
-      tls_elliptic_curves_(tls_elliptic_curves),
+      ssl_config_(ssl_config),
       tls_cert_verifier_(tls_cert_verifier),
       credentials_(credentials),
       socket_(NULL),
@@ -296,12 +294,8 @@ void TurnPort::SetTlsCertPolicy(TlsCertPolicy tls_cert_policy) {
   tls_cert_policy_ = tls_cert_policy;
 }
 
-std::vector<std::string> TurnPort::GetTlsAlpnProtocols() const {
-  return tls_alpn_protocols_;
-}
-
-std::vector<std::string> TurnPort::GetTlsEllipticCurves() const {
-  return tls_elliptic_curves_;
+SSLConfig TurnPort::GetSslConfig() const {
+  return ssl_config_;
 }
 
 void TurnPort::PrepareAddress() {
@@ -371,9 +365,15 @@ bool TurnPort::CreateTurnClientSocket() {
 
     rtc::PacketSocketTcpOptions tcp_options;
     tcp_options.opts = opts;
-    tcp_options.tls_alpn_protocols = tls_alpn_protocols_;
-    tcp_options.tls_elliptic_curves = tls_elliptic_curves_;
     tcp_options.tls_cert_verifier = tls_cert_verifier_;
+    tcp_options.enable_ocsp_stapling = ssl_config_.enable_ocsp_stapling;
+    tcp_options.enable_signed_cert_timestamp =
+        ssl_config_.enable_signed_cert_timestamp;
+    tcp_options.enable_tls_channel_id = ssl_config_.enable_tls_channel_id;
+    tcp_options.enable_grease = ssl_config_.enable_grease;
+    tcp_options.max_ssl_version = ssl_config_.max_ssl_version;
+    tcp_options.tls_alpn_protocols = ssl_config_.tls_alpn_protocols;
+    tcp_options.tls_elliptic_curves = ssl_config_.tls_elliptic_curves;
     socket_ = socket_factory()->CreateClientTcpSocket(
         rtc::SocketAddress(Network()->GetBestIP(), 0), server_address_.address,
         proxy(), user_agent(), tcp_options);
