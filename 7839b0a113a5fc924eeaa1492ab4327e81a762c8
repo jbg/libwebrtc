@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62b7e30a_65e3c51f",
+        "filename": "modules/rtp_rtcp/source/rtp_payload_registry.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-24T08:01:28Z",
+      "side": 1,
+      "message": "This is a change in behavior when codecType is kVideoTypeMultiplex or kVideoCodecI420.\n\nOn the other hand, webrtc no longer uses this class at all, so you only have external usage (via   modules/rtp_rtcp/include/rtp_receiver.h) to worry about.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "7839b0a113a5fc924eeaa1492ab4327e81a762c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
