@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65ff3aa2_8db3c6e3",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-08-24T11:13:54Z",
+      "side": 0,
+      "message": "Must restore the audio portion of this.",
+      "range": {
+        "startLine": 1002,
+        "startChar": 0,
+        "endLine": 1008,
+        "endChar": 5
+      },
+      "revId": "523b4c43303951cff837bf0269bde00b7b48acbe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
