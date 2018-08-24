@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "e8e9399c_51325962",
+        "filename": "test/function_video_encoder_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-24T10:22:10Z",
+      "side": 1,
+      "message": "test code is not an excuse to violate style.\n(btw using \"\u003d default\" is probably safer in case base class get some members)\n\nActually, do you even need this operator?",
+      "parentUuid": "84a41271_3a0779c4",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "8d70fbcbf8b24ee857d9a98a55e1262a03d8a54c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9876137c_d6e7dcd5",
         "filename": "video/end_to_end_tests/extended_reports_tests.cc",
         "patchSetId": 3
