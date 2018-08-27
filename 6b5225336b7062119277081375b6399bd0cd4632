@@ -22,6 +22,30 @@
       "revId": "6b5225336b7062119277081375b6399bd0cd4632",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a79eae01_d5c2825d",
+        "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-08-27T13:07:26Z",
+      "side": 1,
+      "message": "Yep, ctor is better solution. Thanks!",
+      "parentUuid": "6dd92421_971d3ba1",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 70
+      },
+      "revId": "6b5225336b7062119277081375b6399bd0cd4632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
