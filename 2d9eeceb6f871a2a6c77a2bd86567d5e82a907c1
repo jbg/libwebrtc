@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e85b62a9_5b2082b3",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-27T08:12:35Z",
+      "side": 1,
+      "message": "Unfortunately it was necessary to keep some state inside the NetEqTestFactory class, because the NetEqTest class has raw pointers to several external objects that need to be alive when the test runs. As an alternative we could move all of these into the NetEqTest class, and change this into a stateless factory.",
+      "revId": "2d9eeceb6f871a2a6c77a2bd86567d5e82a907c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
