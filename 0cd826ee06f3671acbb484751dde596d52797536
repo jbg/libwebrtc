@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ba2d444_1a10863e",
+        "filename": "modules/audio_processing/agc2/fixed_gain_controller_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-08-27T12:25:16Z",
+      "side": 1,
+      "message": "not trivially destructible",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 34
+      },
+      "revId": "0cd826ee06f3671acbb484751dde596d52797536",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
