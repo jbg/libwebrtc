@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dd92421_971d3ba1",
+        "filename": "modules/video_coding/codecs/vp9/test/vp9_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-08-27T12:28:44Z",
+      "side": 1,
+      "message": "Could you instead use the (4) ctor?\n\nhttps://en.cppreference.com/w/cpp/container/vector/vector",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 70
+      },
+      "revId": "6b5225336b7062119277081375b6399bd0cd4632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
