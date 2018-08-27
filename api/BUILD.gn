@@ -322,6 +322,26 @@ if (rtc_include_tests) {
         "../modules/audio_processing:audioproc_f_impl",
       ]
     }
+
+    rtc_source_set("neteq_simulator_api") {
+      visibility = [ "*" ]
+      sources = [
+        "test/neteq_simulator.h",
+      ]
+    }
+
+    rtc_source_set("neteq_simulator_factory") {
+      visibility = [ "*" ]
+      testonly = true
+      sources = [
+        "test/neteq_simulator_factory.cc",
+        "test/neteq_simulator_factory.h",
+      ]
+      deps = [
+        ":neteq_simulator_api",
+        "../modules/audio_coding:neteq_test_factory",
+      ]
+    }
   }
 
   rtc_source_set("simulcast_test_fixture_api") {
