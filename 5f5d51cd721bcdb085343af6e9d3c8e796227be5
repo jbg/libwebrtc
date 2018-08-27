@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "360405f9_e6c53655",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-27T08:49:53Z",
+      "side": 1,
+      "message": "Is this the only use of kPathMTU? It\u0027s not clear to me how this check is useful; we have other limits on packet size around 1200 yes, I think. And a transport overhead of kPathMTU - 1 (1499 bytes) will not work any better than kPathMTU (1500), right?\n\nIf the intention is a basic sanity check, we should protest if the transport overhead goes above 100-200 bytes or so.",
+      "range": {
+        "startLine": 317,
+        "startChar": 62,
+        "endLine": 317,
+        "endChar": 70
+      },
+      "revId": "5f5d51cd721bcdb085343af6e9d3c8e796227be5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
