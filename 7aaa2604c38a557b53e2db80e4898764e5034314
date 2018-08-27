@@ -71,6 +71,52 @@
     },
     {
       "key": {
+        "uuid": "c4d02194_1a7475b7",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "redundant (same for 2 below)",
+      "range": {
+        "startLine": 218,
+        "startChar": 41,
+        "endLine": 218,
+        "endChar": 55
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d89f409_736e499a",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Should these be non-optional with an empty vector indicating do not turn on the extension?",
+      "range": {
+        "startLine": 219,
+        "startChar": 43,
+        "endLine": 219,
+        "endChar": 61
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42d25fa8_17b95f39",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 6
@@ -88,6 +134,47 @@
         "endLine": 261,
         "endChar": 49
       },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49b0d5b8_50cedf4a",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Mark as deprcated.",
+      "parentUuid": "42d25fa8_17b95f39",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 49
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c826a83b_2b4585a0",
+        "filename": "p2p/base/packetsocketfactory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Can we just include an SSLConfig struct?",
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -117,6 +204,30 @@
     },
     {
       "key": {
+        "uuid": "788985c1_e206a884",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "+1 It would be nice to just have one copy that\u0027s well documented.",
+      "parentUuid": "f426113a_359e503f",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e738385d_c603804c",
         "filename": "p2p/base/portallocator.h",
         "patchSetId": 6
@@ -133,6 +244,132 @@
         "startChar": 0,
         "endLine": 214,
         "endChar": 0
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6325856f_fae54445",
+        "filename": "rtc_base/openssladapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Might be a good time to move these to the header.\n\nE.g.\n\nbool enable_ocsp_stapling_ \u003d false;",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a454c0bb_f97da86f",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Please add a brief 1-2 line comment for each of these. Copy \u0026 paste from SSLConfig is valid.",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "638ad967_231a79f5",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "true?",
+      "range": {
+        "startLine": 588,
+        "startChar": 31,
+        "endLine": 588,
+        "endChar": 36
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2f7eba0_0fb55d8e",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 630,
+        "startChar": 19,
+        "endLine": 630,
+        "endChar": 38
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dea13b2c_3e21c6c8",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 637,
+        "startChar": 19,
+        "endLine": 637,
+        "endChar": 38
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dcad698_4bb402e1",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "same here and below",
+      "range": {
+        "startLine": 645,
+        "startChar": 19,
+        "endLine": 645,
+        "endChar": 59
       },
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
@@ -501,6 +738,52 @@
         "startChar": 21,
         "endLine": 402,
         "endChar": 41
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b255738_ddd70dde",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCIceServer.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the SslConfig replace these?",
+      "range": {
+        "startLine": 93,
+        "startChar": 17,
+        "endLine": 93,
+        "endChar": 33
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ac5442b_91166839",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCIceServer.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-27T19:33:32Z",
+      "side": 1,
+      "message": "Here too?",
+      "range": {
+        "startLine": 103,
+        "startChar": 18,
+        "endLine": 104,
+        "endChar": 75
       },
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
