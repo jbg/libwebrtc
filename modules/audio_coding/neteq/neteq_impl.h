@@ -131,7 +131,10 @@ class NetEqImpl : public webrtc::NetEq {
 
   void InsertEmptyPacket(const RTPHeader& rtp_header) override;
 
-  int GetAudio(AudioFrame* audio_frame, bool* muted) override;
+  int GetAudio(
+      AudioFrame* audio_frame,
+      bool* muted,
+      absl::optional<Operations> next_action_override = absl::nullopt) override;
 
   void SetCodecs(const std::map<int, SdpAudioFormat>& codecs) override;
 
@@ -238,7 +241,9 @@ class NetEqImpl : public webrtc::NetEq {
 
   // Delivers 10 ms of audio data. The data is written to |audio_frame|.
   // Returns 0 on success, otherwise an error code.
-  int GetAudioInternal(AudioFrame* audio_frame, bool* muted)
+  int GetAudioInternal(AudioFrame* audio_frame,
+                       bool* muted,
+                       absl::optional<Operations> next_action_override)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_sect_);
 
   // Provides a decision to the GetAudioInternal method. The decision what to
