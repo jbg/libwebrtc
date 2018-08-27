@@ -93,6 +93,30 @@
       "revId": "7839b0a113a5fc924eeaa1492ab4327e81a762c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7488f4e2_5b37aab1",
+        "filename": "modules/rtp_rtcp/source/rtp_payload_registry.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-27T06:36:10Z",
+      "side": 1,
+      "message": "Maybe add a default clause in RtpPacketizer::Create instead? See modules/rtp_rtcp/source/rtp_format.cc. You may want to check if we used to use RtpVideoCodecTypes enums there.\n\nI had to add an analogous default clause to RtpDepacketizer::Create in cl https://webrtc-review.googlesource.com/93261 to not break kVideoCodecMultiplex.\n\nOr do nothing now and see if anything breaks.",
+      "parentUuid": "877d8b1c_556f91e9",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "7839b0a113a5fc924eeaa1492ab4327e81a762c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
