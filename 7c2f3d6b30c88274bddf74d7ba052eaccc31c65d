@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa75792f_6ef06ba7",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-27T14:22:52Z",
+      "side": 1,
+      "message": "You\u0027re right that \u0027next\u0027 is a bit unclear here, since it is the action in this call that is being replaced by this new action. I can rename this to make that more clear.",
+      "parentUuid": "5236658a_1c513413",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 26
+      },
+      "revId": "7c2f3d6b30c88274bddf74d7ba052eaccc31c65d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba321dd5_f5be66c3",
         "filename": "modules/audio_coding/neteq/neteq_impl.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9003ec85_d3603e5e",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-27T14:22:52Z",
+      "side": 1,
+      "message": "I was hoping that GetDecision doesn\u0027t have any state or side-effects that depend on the decision. I will take a closer look at the code to investigate if that is true or not.",
+      "parentUuid": "ba321dd5_f5be66c3",
+      "range": {
+        "startLine": 863,
+        "startChar": 6,
+        "endLine": 863,
+        "endChar": 26
+      },
+      "revId": "7c2f3d6b30c88274bddf74d7ba052eaccc31c65d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e41d6e11_816b526a",
         "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2018-08-27T12:03:24Z",
       "side": 1,
       "message": "why to put printing functionalities to the stats getter? will this pollute event log visualizer?",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "7c2f3d6b30c88274bddf74d7ba052eaccc31c65d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c68ca8_d249150b",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-27T14:22:52Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure what the best place is to put this functionality. Perhaps it makes more sense to move this functionality into the DelayAnalyzer?",
+      "parentUuid": "e41d6e11_816b526a",
       "range": {
         "startLine": 59,
         "startChar": 24,
