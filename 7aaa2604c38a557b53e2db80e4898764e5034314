@@ -48,6 +48,23 @@
     },
     {
       "key": {
+        "uuid": "d6a3a855_73cfa8a6",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "We might want to define this in ssladapter.h and then use it elsewhere within WebRTC. Seems useful to be able to pass around these options as a struct instead of individual vars.",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d54a1230_246c9f2b",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 6
@@ -181,6 +198,24 @@
     },
     {
       "key": {
+        "uuid": "ef5e6453_0a02a109",
+        "filename": "p2p/base/packetsocketfactory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c826a83b_2b4585a0",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f426113a_359e503f",
         "filename": "p2p/base/portallocator.h",
         "patchSetId": 6
@@ -228,6 +263,30 @@
     },
     {
       "key": {
+        "uuid": "57f0a3f4_cef927c5",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "788985c1_e206a884",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e738385d_c603804c",
         "filename": "p2p/base/portallocator.h",
         "patchSetId": 6
@@ -245,6 +304,64 @@
         "endLine": 214,
         "endChar": 0
       },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6fa73da_ca5b4966",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "we never use INSECURE mode anymore, so we could probably remove this",
+      "parentUuid": "e738385d_c603804c",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 0
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a21f4c6_dadc582c",
+        "filename": "p2p/base/turnport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "These should be removed or included in the config",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f1d447f_270724d6",
+        "filename": "p2p/base/turnport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "Should this return a const reference?",
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -279,6 +396,23 @@
       "writtenOn": "2018-08-27T19:33:32Z",
       "side": 1,
       "message": "Please add a brief 1-2 line comment for each of these. Copy \u0026 paste from SSLConfig is valid.",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "185c6649_1243bba7",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7275
+      },
+      "writtenOn": "2018-08-28T18:53:51Z",
+      "side": 1,
+      "message": "Did you consider just having a SetConfig method here too (instead of N individual accessors?) It would make it much easier to add new things in the future.",
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
