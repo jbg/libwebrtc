@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e52ea9df_ae2ed2f4",
+        "filename": "modules/video_coding/utility/framerate_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-08-28T14:47:04Z",
+      "side": 1,
+      "message": "Couldn\u0027t this be an absl::Optional\u003cfloat\u003e then?",
+      "revId": "ea5baf927398e3a87c302daab0dffd705c380914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
