@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "66a84f05_6f3837ea",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "Done, with slight changes (comments \u0027used for\u0027 are explicitly discouraged: go/totw/138)",
+      "parentUuid": "79aa8704_533586d9",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8887c179_affde33d",
         "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ee6409f_ae8ee92e",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "Done, thank you\n(earlier version used PostDelayedTask)",
+      "parentUuid": "8887c179_affde33d",
+      "range": {
+        "startLine": 172,
+        "startChar": 2,
+        "endLine": 172,
+        "endChar": 9
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "165d7f8c_2a95cee2",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7d546b0_e6a2442c",
+      "range": {
+        "startLine": 219,
+        "startChar": 31,
+        "endLine": 219,
+        "endChar": 32
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de3c7ea4_c67b7fc0",
         "filename": "rtc_base/cancelable_task_handler.cc",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f61fe30_ad94c6f8",
+        "filename": "rtc_base/cancelable_task_handler.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "It doesn\u0027t have to - there is a default constructor.\nRestored test that calls Cancel on an empty handler.",
+      "parentUuid": "de3c7ea4_c67b7fc0",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "111cdd70_b295ffd6",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4070706_ab3d6234",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e52cffb6_8f29ba9f",
         "filename": "rtc_base/cancelable_task_handler.h",
         "patchSetId": 3
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "2c1a7c05_dd4d1eb1",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e52cffb6_8f29ba9f",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "137c7677_f63db233",
         "filename": "rtc_base/cancelable_task_handler.h",
         "patchSetId": 3
@@ -160,6 +304,30 @@
       "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf15e38b_8ec45556",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T14:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "137c7677_f63db233",
+      "range": {
+        "startLine": 32,
+        "startChar": 14,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "55608b0942e130aa13d6d8be6449d91c54f6b3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
