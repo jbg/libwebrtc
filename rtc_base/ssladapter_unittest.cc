@@ -79,16 +79,38 @@ class SSLAdapterTestDummyClient : public sigslot::has_slots<> {
     ssl_adapter_->SetIgnoreBadCert(ignore_bad_cert);
   }
 
+  void SetEnableOcspStapling(bool enable_ocsp_stapling) {
+    ssl_adapter_->SetEnableOcspStapling(enable_ocsp_stapling);
+  }
+
+  void SetEnableSignedCertTimestamp(bool enable_signed_cert_timestamp) {
+    ssl_adapter_->SetEnableSignedCertTimestamp(enable_signed_cert_timestamp);
+  }
+
+  void SetEnableTlsChannelId(bool enable_tls_channel_id) {
+    ssl_adapter_->SetEnableTlsChannelId(enable_tls_channel_id);
+  }
+
+  void SetEnableGrease(bool enable_grease) {
+    ssl_adapter_->SetEnableGrease(enable_grease);
+  }
+
+  void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) {
+    ssl_adapter_->SetMaxSslVersion(max_ssl_version);
+  }
+
+  void SetAlpnProtocols(
+      const absl::optional<std::vector<std::string>>& tls_alpn_protocols) {
+    ssl_adapter_->SetAlpnProtocols(tls_alpn_protocols);
+  }
+
+  void SetEllipticCurves(
+      const absl::optional<std::vector<std::string>>& tls_elliptic_curves) {
+    ssl_adapter_->SetEllipticCurves(tls_elliptic_curves);
+  }
+
   void SetCertVerifier(rtc::SSLCertificateVerifier* ssl_cert_verifier) {
     ssl_adapter_->SetCertVerifier(ssl_cert_verifier);
-  }
-
-  void SetAlpnProtocols(const std::vector<std::string>& protos) {
-    ssl_adapter_->SetAlpnProtocols(protos);
-  }
-
-  void SetEllipticCurves(const std::vector<std::string>& curves) {
-    ssl_adapter_->SetEllipticCurves(curves);
   }
 
   rtc::SocketAddress GetAddress() const {
@@ -309,16 +331,38 @@ class SSLAdapterTestBase : public testing::Test, public sigslot::has_slots<> {
     client_->SetIgnoreBadCert(ignore_bad_cert);
   }
 
+  void SetEnableOcspStapling(bool enable_ocsp_stapling) {
+    client_->SetEnableOcspStapling(enable_ocsp_stapling);
+  }
+
+  void SetEnableSignedCertTimestamp(bool enable_signed_cert_timestamp) {
+    client_->SetEnableSignedCertTimestamp(enable_signed_cert_timestamp);
+  }
+
+  void SetEnableTlsChannelId(bool enable_tls_channel_id) {
+    client_->SetEnableTlsChannelId(enable_tls_channel_id);
+  }
+
+  void SetEnableGrease(bool enable_grease) {
+    client_->SetEnableGrease(enable_grease);
+  }
+
+  void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) {
+    client_->SetMaxSslVersion(max_ssl_version);
+  }
+
+  void SetAlpnProtocols(
+      const absl::optional<std::vector<std::string>>& tls_alpn_protocols) {
+    client_->SetAlpnProtocols(tls_alpn_protocols);
+  }
+
+  void SetEllipticCurves(
+      const absl::optional<std::vector<std::string>>& tls_elliptic_curves) {
+    client_->SetEllipticCurves(tls_elliptic_curves);
+  }
+
   void SetCertVerifier(rtc::SSLCertificateVerifier* ssl_cert_verifier) {
     client_->SetCertVerifier(ssl_cert_verifier);
-  }
-
-  void SetAlpnProtocols(const std::vector<std::string>& protos) {
-    client_->SetAlpnProtocols(protos);
-  }
-
-  void SetEllipticCurves(const std::vector<std::string>& curves) {
-    client_->SetEllipticCurves(curves);
   }
 
   void SetMockCertVerifier(bool return_value) {
@@ -522,6 +566,76 @@ TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSTransfer) {
 TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSTransferCustomCertVerifier) {
   SetMockCertVerifier(/*return_value=*/true);
   TestHandshake(/*expect_success=*/true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with OCSP stapling enabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestOcspStaplingEnabled) {
+  SetEnableOcspStapling(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with OCSP stapling disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestOcspStaplingDisabled) {
+  SetEnableOcspStapling(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// test transfer with signed cert timestamp enabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestSignedCertTimestampEnabled) {
+  SetEnableSignedCertTimestamp(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with signed cert timestamp disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestSignedCertTimestampDisabled) {
+  SetEnableSignedCertTimestamp(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with TLS channel ID enabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSChannelIdEnabled) {
+  SetEnableTlsChannelId(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with TLS channel ID disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestTLSChannelIdDisabled) {
+  SetEnableTlsChannelId(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with GREASE enabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestGreaseEnabled) {
+  SetEnableGrease(true);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with GREASE disabled
+TEST_F(SSLAdapterTestTLS_ECDSA, TestGreaseDisabled) {
+  SetEnableGrease(false);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with TLS1_3.
+TEST_F(SSLAdapterTestTLS_ECDSA, TestMaxSSLVersionTLS1_3) {
+  SetMaxSslVersion(0x0304 /* TLS1_3 */);
+  TestHandshake(true);
+  TestTransfer("Hello, world!");
+}
+
+// Test transfer with TLS1_2.
+TEST_F(SSLAdapterTestTLS_ECDSA, TestMaxSSLVersionTLS1_2) {
+  SetMaxSslVersion(0x0303 /* TLS1_2 */);
+  TestHandshake(true);
   TestTransfer("Hello, world!");
 }
 

@@ -80,14 +80,12 @@ class TurnPort : public Port {
       const RelayCredentials& credentials,
       int server_priority,
       const std::string& origin,
-      const std::vector<std::string>& tls_alpn_protocols,
-      const std::vector<std::string>& tls_elliptic_curves,
       webrtc::TurnCustomizer* customizer,
+      const SSLConfig& ssl_config,
       rtc::SSLCertificateVerifier* tls_cert_verifier = nullptr) {
     return new TurnPort(thread, factory, network, min_port, max_port, username,
                         password, server_address, credentials, server_priority,
-                        origin, tls_alpn_protocols, tls_elliptic_curves,
-                        customizer, tls_cert_verifier);
+                        origin, customizer, ssl_config, tls_cert_verifier);
   }
 
   ~TurnPort() override;
@@ -104,11 +102,7 @@ class TurnPort : public Port {
 
   ProtocolType GetProtocol() const override;
 
-  virtual TlsCertPolicy GetTlsCertPolicy() const;
-  virtual void SetTlsCertPolicy(TlsCertPolicy tls_cert_policy);
-
-  virtual std::vector<std::string> GetTlsAlpnProtocols() const;
-  virtual std::vector<std::string> GetTlsEllipticCurves() const;
+  virtual const SSLConfig& GetSslConfig() const;
 
   // Release a TURN allocation by sending a refresh with lifetime 0.
   // Sets state to STATE_RECEIVEONLY.
@@ -215,9 +209,8 @@ class TurnPort : public Port {
            const RelayCredentials& credentials,
            int server_priority,
            const std::string& origin,
-           const std::vector<std::string>& tls_alpn_protocols,
-           const std::vector<std::string>& tls_elliptic_curves,
            webrtc::TurnCustomizer* customizer,
+           const SSLConfig& ssl_config,
            rtc::SSLCertificateVerifier* tls_cert_verifier = nullptr);
 
   // NOTE: This method needs to be accessible for StacPort
@@ -304,9 +297,7 @@ class TurnPort : public Port {
                                       size_t size, bool payload);
 
   ProtocolAddress server_address_;
-  TlsCertPolicy tls_cert_policy_ = TlsCertPolicy::TLS_CERT_POLICY_SECURE;
-  std::vector<std::string> tls_alpn_protocols_;
-  std::vector<std::string> tls_elliptic_curves_;
+  SSLConfig ssl_config_;
   rtc::SSLCertificateVerifier* tls_cert_verifier_;
   RelayCredentials credentials_;
   AttemptedServerSet attempted_server_addresses_;

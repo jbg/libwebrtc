@@ -209,7 +209,6 @@ OpenSSLAdapter::OpenSSLAdapter(AsyncSocket* socket,
       ssl_(nullptr),
       ssl_ctx_(nullptr),
       ssl_mode_(SSL_MODE_TLS),
-      ignore_bad_cert_(false),
       custom_cert_verifier_status_(false) {
   // If a factory is used, take a reference on the factory's SSL_CTX.
   // Otherwise, we'll create our own later.
@@ -230,12 +229,36 @@ void OpenSSLAdapter::SetIgnoreBadCert(bool ignore) {
   ignore_bad_cert_ = ignore;
 }
 
-void OpenSSLAdapter::SetAlpnProtocols(const std::vector<std::string>& protos) {
-  alpn_protocols_ = protos;
+void OpenSSLAdapter::SetEnableOcspStapling(bool enable_ocsp_stapling) {
+  enable_ocsp_stapling_ = enable_ocsp_stapling;
 }
 
-void OpenSSLAdapter::SetEllipticCurves(const std::vector<std::string>& curves) {
-  elliptic_curves_ = curves;
+void OpenSSLAdapter::SetEnableSignedCertTimestamp(
+    bool enable_signed_cert_timestamp) {
+  enable_signed_cert_timestamp_ = enable_signed_cert_timestamp;
+}
+
+void OpenSSLAdapter::SetEnableGrease(bool enable_grease) {
+  enable_grease_ = enable_grease;
+}
+
+void OpenSSLAdapter::SetEnableTlsChannelId(bool enable_tls_channel_id) {
+  enable_tls_channel_id_ = enable_tls_channel_id;
+}
+
+void OpenSSLAdapter::SetMaxSslVersion(
+    const absl::optional<int>& max_ssl_version) {
+  max_ssl_version_ = max_ssl_version;
+}
+
+void OpenSSLAdapter::SetAlpnProtocols(
+    const absl::optional<std::vector<std::string>>& tls_alpn_protocols) {
+  tls_alpn_protocols_ = tls_alpn_protocols;
+}
+
+void OpenSSLAdapter::SetEllipticCurves(
+    const absl::optional<std::vector<std::string>>& tls_elliptic_curves) {
+  tls_elliptic_curves_ = tls_elliptic_curves;
 }
 
 void OpenSSLAdapter::SetMode(SSLMode mode) {
@@ -367,13 +390,28 @@ int OpenSSLAdapter::BeginSSL() {
   }
 
 #ifdef OPENSSL_IS_BORINGSSL
-  // Set a couple common TLS extensions; even though we don't use them yet.
-  SSL_enable_ocsp_stapling(ssl_);
-  SSL_enable_signed_cert_timestamps(ssl_);
+  // Potentially set a couple common TLS extensions; even though we don't use
+  // them yet.
+  if (enable_ocsp_stapling_) {
+    SSL_enable_ocsp_stapling(ssl_);
+  }
+  if (enable_signed_cert_timestamp_) {
+    SSL_enable_signed_cert_timestamps(ssl_);
+  }
+  SSL_CTX_set_grease_enabled(ssl_ctx_, enable_grease_);
 #endif
 
-  if (!alpn_protocols_.empty()) {
-    std::string tls_alpn_string = TransformAlpnProtocols(alpn_protocols_);
+  if (max_ssl_version_.has_value()) {
+    SSL_set_max_proto_version(ssl_, max_ssl_version_.value());
+  }
+
+  if (enable_tls_channel_id_) {
+    SSL_enable_tls_channel_id(ssl_);
+  }
+
+  if (tls_alpn_protocols_.has_value()) {
+    std::string tls_alpn_string =
+        TransformAlpnProtocols(tls_alpn_protocols_.value());
     if (!tls_alpn_string.empty()) {
       SSL_set_alpn_protos(
           ssl_, reinterpret_cast<const unsigned char*>(tls_alpn_string.data()),
@@ -381,8 +419,9 @@ int OpenSSLAdapter::BeginSSL() {
     }
   }
 
-  if (!elliptic_curves_.empty()) {
-    SSL_set1_curves_list(ssl_, rtc::join(elliptic_curves_, ':').c_str());
+  if (tls_elliptic_curves_.has_value()) {
+    SSL_set1_curves_list(ssl_,
+                         rtc::join(tls_elliptic_curves_.value(), ':').c_str());
   }
 
   // Now that the initial config is done, transfer ownership of |bio| to the
