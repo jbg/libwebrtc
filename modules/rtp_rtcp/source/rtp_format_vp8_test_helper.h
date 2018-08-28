@@ -18,6 +18,7 @@
 #ifndef MODULES_RTP_RTCP_SOURCE_RTP_FORMAT_VP8_TEST_HELPER_H_
 #define MODULES_RTP_RTCP_SOURCE_RTP_FORMAT_VP8_TEST_HELPER_H_
 
+#include "api/array_view.h"
 #include "modules/include/module_common_types.h"
 #include "modules/rtp_rtcp/source/rtp_format_vp8.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
@@ -38,6 +39,9 @@ class RtpFormatVp8TestHelper {
                              const bool* expected_frag_start,
                              size_t expected_num_packets);
 
+  rtc::ArrayView<const uint8_t> payload() const {
+    return rtc::ArrayView<const uint8_t>(payload_data_, payload_size_);
+  }
   uint8_t* payload_data() const { return payload_data_; }
   size_t payload_size() const { return payload_size_; }
   RTPFragmentationHeader* fragmentation() const { return fragmentation_; }
