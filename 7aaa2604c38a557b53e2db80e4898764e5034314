@@ -788,6 +788,121 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "563c3796_2445e128",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCSslConfig+Private.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-28T09:32:41Z",
+      "side": 1,
+      "message": "Name this file +Native instead, that\u0027s the new convention we are going with.\n\nAlso, put Native in the brackets here.",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c6d6342_22f28055",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCIceServer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-28T09:32:41Z",
+      "side": 1,
+      "message": "Aren\u0027t these redundant when taking an SSLConfig?",
+      "range": {
+        "startLine": 127,
+        "startChar": 67,
+        "endLine": 127,
+        "endChar": 84
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70fd6aad_6c775f25",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-28T09:32:41Z",
+      "side": 1,
+      "message": "Style guide: \"Any class, category, method, function, or variable name should use all capitals for acronyms and initialisms within the name.\"\n\nHere and elsewhere.",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac2c92fd_bc741bdd",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-28T09:32:41Z",
+      "side": 1,
+      "message": "nit: no need for this here and for other properties.",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25799c7_5e424a93",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-08-28T09:32:41Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
