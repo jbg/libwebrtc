@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3414937b_eeace7fa",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "Nit: the mean is probably not very useful. Unless there is clock-drift, the mean is expected to be equal to the packet size in ms. I think you\u0027d be better off with some variation metric.",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 25
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "180a0559_4e2c7d3a",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "overwrite or override?",
+      "range": {
+        "startLine": 49,
+        "startChar": 57,
+        "endLine": 49,
+        "endChar": 66
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5adacbe8_da13b1ff",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "Still needed?",
+      "range": {
+        "startLine": 1521,
+        "startChar": 6,
+        "endLine": 1524,
+        "endChar": 7
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2d4612c_83c2548f",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "I think you will have to override the decision inside of the GetDecision function. If you override it at this point, you might have already popped a packet off the packet buffer, and if your override decision says not to use it, you\u0027ll just drop it on the floor. There are a bunch more of similar corners you can get trapped in.\n\nI suggest you override the decision soon after the call to decision_logic_-\u003eGetDecision inside NetEqImpl::GetDecision.",
+      "range": {
+        "startLine": 865,
+        "startChar": 4,
+        "endLine": 865,
+        "endChar": 33
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01768b3b_c871b016",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "Since you are switching on an enum, you don\u0027t need a default statement. The compiler will throw an error if all enum items aren\u0027t handled. (Try it...)\n\nOptional: if you reverse the check for a, you\u0027ll get early return on null, and less indentation:\n\n if (!a) {\n   return abls::nullopt;\n }\n switch (*a) {\n   case ...\n     return ...;\n }",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 25
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d6954dc_a5b87faa",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "This is confusing. It looks almost like the NetEqTest object assumes ownership of the underlying callback objects (but it doesn\u0027t). Any particular reason why you changed it?\n\nIf you don\u0027t like the copying of a struct, you could do this trick. Make the callbacks_ member variable a (non-const) reference:\n Callbacks\u0026 callbacks_;\n\nThen, pass it as a pointer to the ctor, and dereference it:\n NetEqTest::NetEqTest(...,\n                      Callbacks* callbacks)\n     : ...,\n       callbacks_(*callbacks),\n       ... {\n   RTC_DCHECK(callbacks);\n   ...\n }",
+      "range": {
+        "startLine": 59,
+        "startChar": 21,
+        "endLine": 59,
+        "endChar": 57
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc59c0d3_000988af",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "I don\u0027t understand how that will happen. I suppose SetNextAction will be called, and then you press the \"play button\" to run until the next GetAudio, which executes the chosen action. Only when that has happened you will know the result, right?",
+      "range": {
+        "startLine": 161,
+        "startChar": 2,
+        "endLine": 161,
+        "endChar": 55
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ebd61c7_149c1c9a",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "These are not the same...",
+      "range": {
+        "startLine": 169,
+        "startChar": 2,
+        "endLine": 169,
+        "endChar": 58
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e0e7b90_980e85db",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-08-28T09:25:52Z",
+      "side": 1,
+      "message": "I presume this file is more or less a straight copy of old neteq_rtpplay.cc.",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
