@@ -22,6 +22,30 @@
       "revId": "cd05fc7fa77cf038c1b8caf6e252c4454be24ed4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "046a7476_349b674d",
+        "filename": "modules/video_coding/utility/framerate_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-08-28T12:49:27Z",
+      "side": 1,
+      "message": "The name is aligned with similar function of FrameDroper (bitrate controller). I would prefer to keep it.",
+      "parentUuid": "cfece9e0_ed406d2f",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "cd05fc7fa77cf038c1b8caf6e252c4454be24ed4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
