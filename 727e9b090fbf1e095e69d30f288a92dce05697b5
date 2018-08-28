@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28dc3aca_d9a6611d",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-08-28T06:09:25Z",
+      "side": 1,
+      "message": "Can you file a bug for removing the old name at a later time, and add a comment for it here?\nNot sure how we\u0027ll ever be able to see that it\u0027s safe to remove, but we should endeavor to.",
+      "revId": "727e9b090fbf1e095e69d30f288a92dce05697b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
