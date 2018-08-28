@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e0a0def_8b5f1a49",
+        "filename": "modules/video_coding/utility/framerate_controller.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-08-28T19:34:43Z",
+      "side": 1,
+      "message": "nit: I think you can even omit .has_value() in most places. Up to you though.",
+      "range": {
+        "startLine": 23,
+        "startChar": 29,
+        "endLine": 23,
+        "endChar": 40
+      },
+      "revId": "c0cedb29e3a2f52cfcfef7730f51be1d58c7e048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
