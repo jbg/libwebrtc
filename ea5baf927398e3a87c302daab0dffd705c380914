@@ -16,6 +16,24 @@
       "revId": "ea5baf927398e3a87c302daab0dffd705c380914",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20fafd86_15a89136",
+        "filename": "modules/video_coding/utility/framerate_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-08-28T18:47:13Z",
+      "side": 1,
+      "message": "Right. I replaced target_framerate_fps_/is_target_framerate_set_ and last_timestamp_ms_/is_last_timestamp_set_ with absl::optional. Thanks.",
+      "parentUuid": "e52ea9df_ae2ed2f4",
+      "revId": "ea5baf927398e3a87c302daab0dffd705c380914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
