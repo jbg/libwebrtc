@@ -1773,7 +1773,7 @@ std::unique_ptr<test::NetEqStatsGetter> CreateNetEqTestAndRun(
   std::unique_ptr<test::NetEqDelayAnalyzer> delay_cb(
       new test::NetEqDelayAnalyzer);
   std::unique_ptr<test::NetEqStatsGetter> neteq_stats_getter(
-      new test::NetEqStatsGetter(std::move(delay_cb)));
+      new test::NetEqStatsGetter(std::move(delay_cb), false, false, false, ""));
   test::DefaultNetEqTestErrorCallback error_cb;
   test::NetEqTest::Callbacks callbacks;
   callbacks.error_callback = &error_cb;

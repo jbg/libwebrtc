@@ -21,7 +21,8 @@
 namespace webrtc {
 namespace test {
 
-class NetEqStatsGetter : public NetEqGetAudioCallback {
+class NetEqStatsGetter : public NetEqGetAudioCallback,
+                         public NetEqSimulationEndedCallback {
  public:
   // This struct is a replica of webrtc::NetEqNetworkStatistics, but with all
   // values stored in double precision.
@@ -54,7 +55,11 @@ class NetEqStatsGetter : public NetEqGetAudioCallback {
   // Takes a pointer to another callback object, which will be invoked after
   // this object finishes. This does not transfer ownership, and null is a
   // valid value.
-  explicit NetEqStatsGetter(std::unique_ptr<NetEqDelayAnalyzer> delay_analyzer);
+  NetEqStatsGetter(std::unique_ptr<NetEqDelayAnalyzer> delay_analyzer,
+                   bool make_matlab_plot,
+                   bool make_python_plot,
+                   bool show_concealment_events,
+                   std::string base_file_name);
 
   void set_stats_query_interval_ms(int64_t stats_query_interval_ms) {
     stats_query_interval_ms_ = stats_query_interval_ms;
@@ -66,6 +71,8 @@ class NetEqStatsGetter : public NetEqGetAudioCallback {
                      const AudioFrame& audio_frame,
                      bool muted,
                      NetEq* neteq) override;
+
+  void SimulationEnded(int64_t simulation_time_ms) override;
 
   double AverageSpeechExpandRate() const;
 
@@ -98,6 +105,10 @@ class NetEqStatsGetter : public NetEqGetAudioCallback {
   uint64_t voice_concealed_samples_until_last_event_ = 0;
   std::vector<ConcealmentEvent> concealment_events_;
   int64_t last_event_end_time_ms_ = 0;
+  const bool make_matlab_plot_;
+  const bool make_python_plot_;
+  const bool show_concealment_events_;
+  const std::string base_file_name_;
 };
 
 }  // namespace test

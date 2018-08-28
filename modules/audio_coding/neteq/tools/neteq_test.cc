@@ -16,6 +16,26 @@
 
 namespace webrtc {
 namespace test {
+namespace {
+
+absl::optional<Operations> ActionToOperations(
+    absl::optional<NetEqSimulator::Action> a) {
+  if (!a) {
+    return absl::nullopt;
+  }
+  switch (*a) {
+    case NetEqSimulator::Action::kAccelerate:
+      return absl::make_optional(kAccelerate);
+    case NetEqSimulator::Action::kExpand:
+      return absl::make_optional(kExpand);
+    case NetEqSimulator::Action::kNormal:
+      return absl::make_optional(kNormal);
+    case NetEqSimulator::Action::kPreemptiveExpand:
+      return absl::make_optional(kPreemptiveExpand);
+  }
+}
+
+}  // namespace
 
 void DefaultNetEqTestErrorCallback::OnInsertPacketError(
     const NetEqInput::PacketData& packet) {
@@ -34,11 +54,11 @@ NetEqTest::NetEqTest(const NetEq::Config& config,
                      const ExtDecoderMap& ext_codecs,
                      std::unique_ptr<NetEqInput> input,
                      std::unique_ptr<AudioSink> output,
-                     Callbacks callbacks)
+                     std::unique_ptr<Callbacks> callbacks)
     : neteq_(NetEq::Create(config, CreateBuiltinAudioDecoderFactory())),
       input_(std::move(input)),
       output_(std::move(output)),
-      callbacks_(callbacks),
+      callbacks_(std::move(callbacks)),
       sample_rate_hz_(config.sample_rate_hz) {
   RTC_CHECK(!config.enable_muted_state)
       << "The code does not handle enable_muted_state";
@@ -49,6 +69,20 @@ NetEqTest::NetEqTest(const NetEq::Config& config,
 NetEqTest::~NetEqTest() = default;
 
 int64_t NetEqTest::Run() {
+  int64_t simulation_time = 0;
+  SimulationStepResult step_result;
+  do {
+    step_result = RunToNextGetAudio();
+    simulation_time += step_result.simulation_step_ms;
+  } while (!step_result.is_simulation_finished);
+  if (callbacks_->simulation_ended_callback) {
+    callbacks_->simulation_ended_callback->SimulationEnded(simulation_time);
+  }
+  return simulation_time;
+}
+
+NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
+  SimulationStepResult result;
   const int64_t start_time_ms = *input_->NextEventTime();
   int64_t time_now_ms = start_time_ms;
 
@@ -64,35 +98,37 @@ int64_t NetEqTest::Run() {
           packet_data->header,
           rtc::ArrayView<const uint8_t>(packet_data->payload),
           static_cast<uint32_t>(packet_data->time_ms * sample_rate_hz_ / 1000));
-      if (error != NetEq::kOK && callbacks_.error_callback) {
-        callbacks_.error_callback->OnInsertPacketError(*packet_data);
+      if (error != NetEq::kOK && callbacks_->error_callback) {
+        callbacks_->error_callback->OnInsertPacketError(*packet_data);
       }
-      if (callbacks_.post_insert_packet) {
-        callbacks_.post_insert_packet->AfterInsertPacket(*packet_data,
-                                                         neteq_.get());
+      if (callbacks_->post_insert_packet) {
+        callbacks_->post_insert_packet->AfterInsertPacket(*packet_data,
+                                                          neteq_.get());
       }
     }
 
     // Check if it is time to get output audio.
     if (input_->NextOutputEventTime() &&
         time_now_ms >= *input_->NextOutputEventTime()) {
-      if (callbacks_.get_audio_callback) {
-        callbacks_.get_audio_callback->BeforeGetAudio(neteq_.get());
+      if (callbacks_->get_audio_callback) {
+        callbacks_->get_audio_callback->BeforeGetAudio(neteq_.get());
       }
       AudioFrame out_frame;
       bool muted;
-      int error = neteq_->GetAudio(&out_frame, &muted);
+      int error = neteq_->GetAudio(&out_frame, &muted,
+                                   ActionToOperations(next_action_));
+      next_action_ = absl::nullopt;
       RTC_CHECK(!muted) << "The code does not handle enable_muted_state";
       if (error != NetEq::kOK) {
-        if (callbacks_.error_callback) {
-          callbacks_.error_callback->OnGetAudioError();
+        if (callbacks_->error_callback) {
+          callbacks_->error_callback->OnGetAudioError();
         }
       } else {
         sample_rate_hz_ = out_frame.sample_rate_hz_;
       }
-      if (callbacks_.get_audio_callback) {
-        callbacks_.get_audio_callback->AfterGetAudio(time_now_ms, out_frame,
-                                                     muted, neteq_.get());
+      if (callbacks_->get_audio_callback) {
+        callbacks_->get_audio_callback->AfterGetAudio(time_now_ms, out_frame,
+                                                      muted, neteq_.get());
       }
 
       if (output_) {
@@ -102,9 +138,29 @@ int64_t NetEqTest::Run() {
       }
 
       input_->AdvanceOutputEvent();
+      result.simulation_step_ms = time_now_ms - start_time_ms;
+      // TODO(ivoc): Set the result.<action>_ms values correctly.
+      result.is_simulation_finished = input_->ended();
+      return result;
     }
   }
-  return time_now_ms - start_time_ms;
+  result.simulation_step_ms = time_now_ms - start_time_ms;
+  result.is_simulation_finished = true;
+  return result;
+}
+
+NetEqTest::NextActionResult NetEqTest::SetNextAction(
+    NetEqTest::Action next_operation) {
+  next_action_ = absl::optional<Action>(next_operation);
+  // TODO(ivoc): implement next action result properly.
+  return NextActionResult::kNormal;
+}
+
+NetEqTest::NetEqState NetEqTest::GetNetEqState() {
+  NetEqState state;
+  const auto network_stats = SimulationStats();
+  state.current_delay_ms_ = network_stats.current_buffer_size_ms;
+  return state;
 }
 
 NetEqNetworkStatistics NetEqTest::SimulationStats() {
