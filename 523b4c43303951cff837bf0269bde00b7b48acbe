@@ -39,6 +39,24 @@
       "revId": "523b4c43303951cff837bf0269bde00b7b48acbe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79b0d9d5_5734c141",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-28T07:30:11Z",
+      "side": 0,
+      "message": "In the current code, we may use different transports for audio and video (\"unbundled\" case), but not for different video streams. They might have different overhead, e.g., video over IPv4 and audio over IPv6.\n\nI think it makes most sense to associate the overhead with the transport. For unbundled, I would have expected Call to have two RtpTransportControllerSend, so you would write call_-\u003eGetTransportControllerSend(webrtc::MediaType::VIDEO)-\u003eOnTransportOverheadChanged(...). But it seems we don\u0027t have that, we only have that organization for receive,\n\n  RtpStreamReceiverController audio_receiver_controller_;\n  RtpStreamReceiverController video_receiver_controller_;\n\nI guess that means that unbundled case relies on some association with the right transport on in WebRtcVideoChannel and the corresponding audio class?\n\nI\u0027m not sure if support for \"fully unbundled\", with one RTP session per stream, is something we want to add. Current organization of Call can\u0027t do that.\n\nAnd as we\u0027ve discussed earlier, even in the unbundled case, we might want to let the transports share the congestion controller (under the assumption that it\u0027s likely that they share a bottleneck).",
+      "parentUuid": "da550cff_a72d3f80",
+      "revId": "523b4c43303951cff837bf0269bde00b7b48acbe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
