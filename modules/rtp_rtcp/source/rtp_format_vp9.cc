@@ -460,29 +460,25 @@ bool ParseSsData(rtc::BitBuffer* parser, RTPVideoHeaderVP9* vp9) {
 }
 }  // namespace
 
-RtpPacketizerVp9::RtpPacketizerVp9(const RTPVideoHeaderVP9& hdr,
-                                   size_t max_payload_length,
-                                   size_t last_packet_reduction_len)
+RtpPacketizerVp9::RtpPacketizerVp9(rtc::ArrayView<const uint8_t> payload,
+                                   PayloadSizeLimits options,
+                                   const RTPVideoHeaderVP9& hdr)
     : hdr_(hdr),
-      max_payload_length_(max_payload_length),
-      payload_(nullptr),
-      payload_size_(0),
-      last_packet_reduction_len_(last_packet_reduction_len) {}
+      max_payload_length_(options.max_payload_len),
+      payload_(payload.data()),
+      payload_size_(payload.size()),
+      last_packet_reduction_len_(options.last_packet_reduction_len) {
+  GeneratePackets();
+}
 
-RtpPacketizerVp9::~RtpPacketizerVp9() {}
+RtpPacketizerVp9::~RtpPacketizerVp9() = default;
+
+size_t RtpPacketizerVp9::NumPackets() const {
+  return packets_.size();
+}
 
 std::string RtpPacketizerVp9::ToString() {
   return "RtpPacketizerVp9";
-}
-
-size_t RtpPacketizerVp9::SetPayloadData(
-    const uint8_t* payload,
-    size_t payload_size,
-    const RTPFragmentationHeader* fragmentation) {
-  payload_ = payload;
-  payload_size_ = payload_size;
-  GeneratePackets();
-  return packets_.size();
 }
 
 // Splits payload in minimal number of roughly equal in size packets.
