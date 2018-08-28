@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfece9e0_ed406d2f",
+        "filename": "modules/video_coding/utility/framerate_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-08-28T09:16:02Z",
+      "side": 1,
+      "message": "nit: Maybe ShouldDropFrame to make it more explicit?",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "cd05fc7fa77cf038c1b8caf6e252c4454be24ed4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
