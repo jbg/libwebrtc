@@ -32,18 +32,16 @@ namespace webrtc {
 
 class RtpPacketizerVp9 : public RtpPacketizer {
  public:
+  // The payload data must be one encoded VP9 layer frame.
   RtpPacketizerVp9(const RTPVideoHeaderVP9& hdr,
-                   size_t max_payload_length,
-                   size_t last_packet_reduction_len);
+                   rtc::ArrayView<const uint8_t> payload,
+                   Options options);
 
   ~RtpPacketizerVp9() override;
 
   std::string ToString() override;
 
-  // The payload data must be one encoded VP9 layer frame.
-  size_t SetPayloadData(const uint8_t* payload,
-                        size_t payload_size,
-                        const RTPFragmentationHeader* fragmentation) override;
+  size_t NumPackets() const override;
 
   // Gets the next payload with VP9 payload header.
   // Write payload and set marker bit of the |packet|.

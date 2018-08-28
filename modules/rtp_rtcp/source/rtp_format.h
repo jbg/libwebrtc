@@ -11,8 +11,10 @@
 #ifndef MODULES_RTP_RTCP_SOURCE_RTP_FORMAT_H_
 #define MODULES_RTP_RTCP_SOURCE_RTP_FORMAT_H_
 
+#include <memory>
 #include <string>
 
+#include "api/array_view.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/include/module_common_types.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
@@ -23,19 +25,21 @@ class RtpPacketToSend;
 
 class RtpPacketizer {
  public:
-  static RtpPacketizer* Create(VideoCodecType type,
-                               size_t max_payload_len,
-                               size_t last_packet_reduction_len,
-                               const RTPVideoHeader* rtp_video_header,
-                               FrameType frame_type);
+  struct Options {
+    size_t max_payload_len = 1200;
+    size_t last_packet_reduction_len = 0;
+    FrameType frame_type = kVideoFrameKey;
+    const RTPFragmentationHeader* fragmentation = nullptr;
+  };
+  static std::unique_ptr<RtpPacketizer> Create(
+      const RTPVideoHeader& rtp_video_header,
+      rtc::ArrayView<const uint8_t> payload,
+      Options options);
 
-  virtual ~RtpPacketizer() {}
+  virtual ~RtpPacketizer() = default;
 
-  // Returns total number of packets which would be produced by the packetizer.
-  virtual size_t SetPayloadData(
-      const uint8_t* payload_data,
-      size_t payload_size,
-      const RTPFragmentationHeader* fragmentation) = 0;
+  // Returns number of remaining packets to produce by the packetizer.
+  virtual size_t NumPackets() const = 0;
 
   // Get the next payload with payload header.
   // Write payload and set marker bit of the |packet|.

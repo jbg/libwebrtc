@@ -347,16 +347,19 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
   size_t last_packet_reduction_len =
       last_packet->headers_size() - rtp_header->headers_size();
 
-  std::unique_ptr<RtpPacketizer> packetizer(RtpPacketizer::Create(
-      video_type, max_data_payload_length, last_packet_reduction_len,
-      video_header, frame_type));
+  RtpPacketizer::Options options;
+  options.max_payload_len = max_data_payload_length;
+  options.last_packet_reduction_len = last_packet_reduction_len;
+  options.frame_type = frame_type;
+  options.fragmentation = fragmentation;
+  std::unique_ptr<RtpPacketizer> packetizer = RtpPacketizer::Create(
+      *video_header, rtc::MakeArrayView(payload_data, payload_size), options);
 
   const uint8_t temporal_id =
       video_header ? GetTemporalId(*video_header) : kNoTemporalIdx;
   StorageType storage = GetStorageType(temporal_id, retransmission_settings,
                                        expected_retransmission_time_ms);
-  size_t num_packets =
-      packetizer->SetPayloadData(payload_data, payload_size, fragmentation);
+  size_t num_packets = packetizer->NumPackets();
 
   if (num_packets == 0)
     return false;

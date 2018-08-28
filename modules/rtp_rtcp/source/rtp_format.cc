@@ -18,34 +18,40 @@
 #include "modules/rtp_rtcp/source/rtp_format_vp9.h"
 
 namespace webrtc {
-RtpPacketizer* RtpPacketizer::Create(VideoCodecType type,
-                                     size_t max_payload_len,
-                                     size_t last_packet_reduction_len,
-                                     const RTPVideoHeader* rtp_video_header,
-                                     FrameType frame_type) {
-  RTC_CHECK(rtp_video_header);
-  switch (type) {
-    case kVideoCodecH264: {
-      const auto& h264 =
-          absl::get<RTPVideoHeaderH264>(rtp_video_header->video_type_header);
-      return new RtpPacketizerH264(max_payload_len, last_packet_reduction_len,
-                                   h264.packetization_mode);
-    }
-    case kVideoCodecVP8:
-      return new RtpPacketizerVp8(rtp_video_header->vp8(), max_payload_len,
-                                  last_packet_reduction_len);
-    case kVideoCodecVP9: {
-      const auto& vp9 =
-          absl::get<RTPVideoHeaderVP9>(rtp_video_header->video_type_header);
-      return new RtpPacketizerVp9(vp9, max_payload_len,
-                                  last_packet_reduction_len);
-    }
-    default:
-      return new RtpPacketizerGeneric(*rtp_video_header, frame_type,
-                                      max_payload_len,
-                                      last_packet_reduction_len);
+namespace {
+
+struct RtpPacketizerFactory {
+  std::unique_ptr<RtpPacketizer> operator()(const RTPVideoHeaderH264& h264) {
+    return absl::make_unique<RtpPacketizerH264>(h264.packetization_mode,
+                                                payload, options);
   }
-  return nullptr;
+
+  std::unique_ptr<RtpPacketizer> operator()(const RTPVideoHeaderVP8& vp8) {
+    return absl::make_unique<RtpPacketizerVp8>(vp8, payload, options);
+  }
+
+  std::unique_ptr<RtpPacketizer> operator()(const RTPVideoHeaderVP9& vp9) {
+    return absl::make_unique<RtpPacketizerVp9>(vp9, payload, options);
+  }
+
+  std::unique_ptr<RtpPacketizer> operator()(const absl::monostate&) {
+    return absl::make_unique<RtpPacketizerGeneric>(rtp_video_header, payload,
+                                                   options);
+  }
+
+  const RTPVideoHeader& rtp_video_header;
+  rtc::ArrayView<const uint8_t> payload;
+  const RtpPacketizer::Options& options;
+};
+
+}  // namespace
+
+std::unique_ptr<RtpPacketizer> RtpPacketizer::Create(
+    const RTPVideoHeader& rtp_video_header,
+    rtc::ArrayView<const uint8_t> payload,
+    Options options) {
+  return absl::visit(RtpPacketizerFactory{rtp_video_header, payload, options},
+                     rtp_video_header.video_type_header);
 }
 
 RtpDepacketizer* RtpDepacketizer::Create(VideoCodecType type) {
