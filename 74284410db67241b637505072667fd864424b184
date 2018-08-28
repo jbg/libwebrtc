@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e5b90fc6_3ccdd2bd",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T11:07:57Z",
+      "side": 1,
+      "message": "that what unittests are for....\nadded unittest named \u0027Example\u0027\nadded few words here too.",
+      "parentUuid": "ac7461e5_94320973",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "74284410db67241b637505072667fd864424b184",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c25dd816_be88d541",
         "filename": "rtc_base/cancelable_periodic_task.h",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "34a078ed_57c5f328",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T11:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c25dd816_be88d541",
+      "range": {
+        "startLine": 25,
+        "startChar": 5,
+        "endLine": 25,
+        "endChar": 12
+      },
+      "revId": "74284410db67241b637505072667fd864424b184",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bc005c3_606a2eca",
         "filename": "rtc_base/cancelable_periodic_task.h",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "74284410db67241b637505072667fd864424b184",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b293457e_bb6ceea4",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-28T11:07:57Z",
+      "side": 1,
+      "message": "as discussed offline, changed assumption how this CancelableTask should be used: now it demand task can only be Canceled on task queue itself.\n\n(can\u0027t use WeakPtr because they have demands about destruction that TaskQueue can\u0027t provide)",
+      "parentUuid": "2bc005c3_606a2eca",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 16
+      },
+      "revId": "74284410db67241b637505072667fd864424b184",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
