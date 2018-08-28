@@ -2,6 +2,92 @@
   "comments": [
     {
       "key": {
+        "uuid": "494d48fb_d49033f3",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-28T11:06:59Z",
+      "side": 1,
+      "message": "I don\u0027t see a need to introduce simulation_position.\n\nMaybe enough to introduce a \"bool IsSimulationFinished()\",",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b5f623_4d15d770",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-28T11:06:59Z",
+      "side": 1,
+      "message": "Please add comments to these quantities. Can they have meaningful values the same time? (I cannot judge since you have not implemented the way they obtain values.)\n\nWhat about a map(or vector)\u003cAction, int\u003e",
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db86871_883ea810",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-28T11:06:59Z",
+      "side": 1,
+      "message": "why only assign value to kNormal?",
+      "range": {
+        "startLine": 34,
+        "startChar": 30,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1ff82f3_c4b92c73",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-28T11:06:59Z",
+      "side": 1,
+      "message": "maybe better to call this NetEqState?",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 24
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3414937b_eeace7fa",
         "filename": "api/test/neteq_simulator.h",
         "patchSetId": 3
@@ -45,6 +131,29 @@
       "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38db0ec1_6ef547a3",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-28T11:06:59Z",
+      "side": 1,
+      "message": "states or stats?",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
