@@ -58,8 +58,27 @@ class SSLAdapter : public AsyncSocketAdapter {
   // BasicPacketSocketFactory that uses this function.
   virtual void SetIgnoreBadCert(bool ignore) = 0;
 
-  virtual void SetAlpnProtocols(const std::vector<std::string>& protos) = 0;
-  virtual void SetEllipticCurves(const std::vector<std::string>& curves) = 0;
+  // Indicates whether to enable OCSP stapling in TLS.
+  virtual void SetEnableOcspStapling(bool enable_ocsp_stapling) = 0;
+  // Indicates whether to enable the signed certificate timestamp extension in
+  // TLS.
+  virtual void SetEnableSignedCertTimestamp(
+      bool enable_signed_cert_timestamp) = 0;
+  // Indicates whether to enable the TLS Channel ID extension.
+  virtual void SetEnableTlsChannelId(bool enable_tls_channel_id) = 0;
+  // Indicates whether to enable the TLS GREASE extension.
+  virtual void SetEnableGrease(bool enable_grease) = 0;
+  // Highest supported SSL version, as defined in the supported_versions TLS
+  // extension.
+  virtual void SetMaxSslVersion(const absl::optional<int>& max_ssl_version) = 0;
+  // List of protocols to be used in the TLS ALPN extension.
+  virtual void SetAlpnProtocols(
+      const absl::optional<std::vector<std::string>>& tls_alpn_protocols) = 0;
+  // List of elliptic curves to be used in the TLS elliptic curves extension.
+  // Only curve names supported by OpenSSL should be used (eg.
+  // "P-256","X25519").
+  virtual void SetEllipticCurves(
+      const absl::optional<std::vector<std::string>>& tls_elliptic_curves) = 0;
 
   // Do DTLS or TLS (default is TLS, if unspecified)
   virtual void SetMode(SSLMode mode) = 0;
