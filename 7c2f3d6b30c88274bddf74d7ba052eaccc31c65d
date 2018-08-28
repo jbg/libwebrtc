@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "3f63ec8c_db7b6856",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-28T14:20:25Z",
+      "side": 1,
+      "message": "It looks like you were right, I\u0027ve updated the code.",
+      "parentUuid": "9003ec85_d3603e5e",
+      "range": {
+        "startLine": 863,
+        "startChar": 6,
+        "endLine": 863,
+        "endChar": 26
+      },
+      "revId": "7c2f3d6b30c88274bddf74d7ba052eaccc31c65d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e41d6e11_816b526a",
         "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
         "patchSetId": 2
@@ -155,6 +179,30 @@
       "side": 1,
       "message": "My understanding is\n\nNetEqTest is to handle run NetEq with NetEqInput, which contains RTP packets arrival times and GetAudio call times, as input, and run NetEq.\n\nNetEqStatsGetter is a NetEqGetAudioCallback, which is to query stats collector after NetEqTest calls to GetAudio(). It is not a necessary component to run NetEqTest.\n\nNetEqDelayAnalyzer is another stats collector/analyzer. It is inserted into NetEqStatsGetter so that NetEqStatsGetter dispatches this callback and its only operations.\n\nAs you see, NetEqStatsGetter is injected to NetEqTest and NetEqDelayAnalyzer is injected to NetEqStatsGetter and can be nullptr.\n\nSo I think it is very much up to the creator of these three (conventionally neteq_rtpplay and event_log_virtualizer) to decide what to do with the results: print/aggregate/plot.\n\nAfter writing these lengthy paragraph, I have an idea. Write a NetEqStatsPlotter as a NetEqSimulationEndedCallback. something like\n\nclass NetEqStatsPlotter() : public NetEqSimulationEndedCallback {\n public:\n   enum class PlotMethod {MATLAB, PYTHON};\n   explicit NetEqStatsPlotter(const NetEqStatsGetter*);\n   void setPlotMethod(PlotMethod);\n   void SimulationEnded() override;\n}\n\nWDYT?",
       "parentUuid": "73c68ca8_d249150b",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "7c2f3d6b30c88274bddf74d7ba052eaccc31c65d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5022375_00ded2ee",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-28T14:20:25Z",
+      "side": 1,
+      "message": "I just had another look as well, but I think it makes sense to move the functionality to NetEqDelayAnalyzer, since that class is already actually creating the plots (it has CreateMatlabScript and CreatePythonScript functions), and this is also the class that stores all the data that is needed for the plot. WDYT?",
+      "parentUuid": "fd0086ed_2233c117",
       "range": {
         "startLine": 59,
         "startChar": 24,
