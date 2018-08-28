@@ -40,22 +40,18 @@ class RtpPacketizerVp8 : public RtpPacketizer {
  public:
   // Initialize with payload from encoder.
   // The payload_data must be exactly one encoded VP8 frame.
-  RtpPacketizerVp8(const RTPVideoHeaderVP8& hdr_info,
-                   size_t max_payload_len,
-                   size_t last_packet_reduction_len);
+  RtpPacketizerVp8(rtc::ArrayView<const uint8_t> payload,
+                   PayloadSizeLimits limits,
+                   const RTPVideoHeaderVP8& hdr_info);
 
   ~RtpPacketizerVp8() override;
 
-  size_t SetPayloadData(const uint8_t* payload_data,
-                        size_t payload_size,
-                        const RTPFragmentationHeader* fragmentation) override;
+  size_t NumPackets() const override;
 
   // Get the next payload with VP8 payload header.
   // Write payload and set marker bit of the |packet|.
   // Returns true on success, false otherwise.
   bool NextPacket(RtpPacketToSend* packet) override;
-
-  std::string ToString() override;
 
  private:
   typedef struct {

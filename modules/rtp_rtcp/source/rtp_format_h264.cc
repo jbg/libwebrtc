@@ -79,38 +79,22 @@ bool ParseStapAStartOffsets(const uint8_t* nalu_ptr,
 
 }  // namespace
 
-RtpPacketizerH264::RtpPacketizerH264(size_t max_payload_len,
-                                     size_t last_packet_reduction_len,
-                                     H264PacketizationMode packetization_mode)
-    : max_payload_len_(max_payload_len),
-      last_packet_reduction_len_(last_packet_reduction_len),
+RtpPacketizerH264::RtpPacketizerH264(
+    rtc::ArrayView<const uint8_t> payload,
+    PayloadSizeLimits limits,
+    H264PacketizationMode packetization_mode,
+    const RTPFragmentationHeader* fragmentation)
+    : max_payload_len_(limits.max_payload_len),
+      last_packet_reduction_len_(limits.last_packet_reduction_len),
       num_packets_left_(0),
       packetization_mode_(packetization_mode) {
   // Guard against uninitialized memory in packetization_mode.
   RTC_CHECK(packetization_mode == H264PacketizationMode::NonInterleaved ||
             packetization_mode == H264PacketizationMode::SingleNalUnit);
-  RTC_CHECK_GT(max_payload_len, last_packet_reduction_len);
-}
-
-RtpPacketizerH264::~RtpPacketizerH264() {}
-
-RtpPacketizerH264::Fragment::~Fragment() = default;
-
-RtpPacketizerH264::Fragment::Fragment(const uint8_t* buffer, size_t length)
-    : buffer(buffer), length(length) {}
-RtpPacketizerH264::Fragment::Fragment(const Fragment& fragment)
-    : buffer(fragment.buffer), length(fragment.length) {}
-
-size_t RtpPacketizerH264::SetPayloadData(
-    const uint8_t* payload_data,
-    size_t payload_size,
-    const RTPFragmentationHeader* fragmentation) {
-  RTC_DCHECK(packets_.empty());
-  RTC_DCHECK(input_fragments_.empty());
+  RTC_CHECK_GT(limits.max_payload_len, limits.last_packet_reduction_len);
   RTC_DCHECK(fragmentation);
   for (int i = 0; i < fragmentation->fragmentationVectorSize; ++i) {
-    const uint8_t* buffer =
-        &payload_data[fragmentation->fragmentationOffset[i]];
+    const uint8_t* buffer = &payload[fragmentation->fragmentationOffset[i]];
     size_t length = fragmentation->fragmentationLength[i];
 
     bool updated_sps = false;
@@ -177,8 +161,19 @@ size_t RtpPacketizerH264::SetPayloadData(
     while (!packets_.empty()) {
       packets_.pop();
     }
-    return 0;
   }
+}
+
+RtpPacketizerH264::~RtpPacketizerH264() = default;
+
+RtpPacketizerH264::Fragment::~Fragment() = default;
+
+RtpPacketizerH264::Fragment::Fragment(const uint8_t* buffer, size_t length)
+    : buffer(buffer), length(length) {}
+RtpPacketizerH264::Fragment::Fragment(const Fragment& fragment)
+    : buffer(fragment.buffer), length(fragment.length) {}
+
+size_t RtpPacketizerH264::NumPackets() const {
   return num_packets_left_;
 }
 
@@ -406,10 +401,6 @@ void RtpPacketizerH264::NextFragmentPacket(RtpPacketToSend* rtp_packet) {
   if (packet->last_fragment)
     input_fragments_.pop_front();
   packets_.pop();
-}
-
-std::string RtpPacketizerH264::ToString() {
-  return "RtpPacketizerH264";
 }
 
 RtpDepacketizerH264::RtpDepacketizerH264() : offset_(0), length_(0) {}

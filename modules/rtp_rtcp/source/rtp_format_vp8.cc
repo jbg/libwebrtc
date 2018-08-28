@@ -158,29 +158,22 @@ bool ValidateHeader(const RTPVideoHeaderVP8& hdr_info) {
 
 }  // namespace
 
-RtpPacketizerVp8::RtpPacketizerVp8(const RTPVideoHeaderVP8& hdr_info,
-                                   size_t max_payload_len,
-                                   size_t last_packet_reduction_len)
-    : payload_data_(NULL),
-      payload_size_(0),
+RtpPacketizerVp8::RtpPacketizerVp8(rtc::ArrayView<const uint8_t> payload,
+                                   PayloadSizeLimits limits,
+                                   const RTPVideoHeaderVP8& hdr_info)
+    : payload_data_(payload.data()),
+      payload_size_(payload.size()),
       vp8_fixed_payload_descriptor_bytes_(1),
       hdr_info_(hdr_info),
-      max_payload_len_(max_payload_len),
-      last_packet_reduction_len_(last_packet_reduction_len) {
+      max_payload_len_(limits.max_payload_len),
+      last_packet_reduction_len_(limits.last_packet_reduction_len) {
   RTC_DCHECK(ValidateHeader(hdr_info));
+  GeneratePackets();
 }
 
-RtpPacketizerVp8::~RtpPacketizerVp8() {}
+RtpPacketizerVp8::~RtpPacketizerVp8() = default;
 
-size_t RtpPacketizerVp8::SetPayloadData(
-    const uint8_t* payload_data,
-    size_t payload_size,
-    const RTPFragmentationHeader* /* fragmentation */) {
-  payload_data_ = payload_data;
-  payload_size_ = payload_size;
-  if (GeneratePackets() < 0) {
-    return 0;
-  }
+size_t RtpPacketizerVp8::NumPackets() const {
   return packets_.size();
 }
 
@@ -202,10 +195,6 @@ bool RtpPacketizerVp8::NextPacket(RtpPacketToSend* packet) {
   packet->SetPayloadSize(bytes);
   packet->SetMarker(packets_.empty());
   return true;
-}
-
-std::string RtpPacketizerVp8::ToString() {
-  return "RtpPacketizerVp8";
 }
 
 int RtpPacketizerVp8::GeneratePackets() {

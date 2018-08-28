@@ -22,7 +22,6 @@ RtpFormatVp8TestHelper::RtpFormatVp8TestHelper(const RTPVideoHeaderVP8* hdr)
     : packet_(kNoExtensions),
       payload_data_(NULL),
       data_ptr_(NULL),
-      fragmentation_(NULL),
       hdr_info_(hdr),
       payload_start_(0),
       payload_size_(0),
@@ -30,7 +29,6 @@ RtpFormatVp8TestHelper::RtpFormatVp8TestHelper(const RTPVideoHeaderVP8* hdr)
       inited_(false) {}
 
 RtpFormatVp8TestHelper::~RtpFormatVp8TestHelper() {
-  delete fragmentation_;
   delete[] payload_data_;
 }
 
