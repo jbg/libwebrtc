@@ -65,6 +65,54 @@
     },
     {
       "key": {
+        "uuid": "f498f112_ab3d3d6e",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09328f41_19a2f401",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 18
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e44d293e_f2943ed1",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "I think that\u0027s a reasonable suggestion, and something I considered initially. Ultimately though, we still name our classes openssladapter and ssl_adapter.\n\nSome of these options may also be applicable if we were to just use SSL.\n\nI think SSLConfig is more consistent with naming, but I\u0027m also open to TLSConfig if you strongly feel that\u0027s better.",
+      "parentUuid": "bc658e2f_b99bd81e",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 19
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d54a1230_246c9f2b",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 6
@@ -85,6 +133,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98a40512_37b71057",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d54a1230_246c9f2b",
+      "range": {
+        "startLine": 216,
+        "startChar": 15,
+        "endLine": 216,
+        "endChar": 26
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "d5428d20_f03a4864",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4d02194_1a7475b7",
+      "range": {
+        "startLine": 218,
+        "startChar": 41,
+        "endLine": 218,
+        "endChar": 55
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d89f409_736e499a",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 6
@@ -131,6 +227,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c98381a2_7b909440",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Having parameters like these be optional seems to give greater flexibility. If we didn\u0027t use optional and added some config later where an empty vector is valid, we\u0027d probably need to use this kind of pattern.\n\nLet me know if you have a strong preference towards it though, I don\u0027t mind too much.",
+      "parentUuid": "3d89f409_736e499a",
+      "range": {
+        "startLine": 219,
+        "startChar": 43,
+        "endLine": 219,
+        "endChar": 61
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -178,6 +298,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a814099_498b0046",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Yep, they\u0027re deprecated. They should be removed in a follow-up CL.\n\nI\u0027ve added some comments to indicate ssl_config should be used instead.",
+      "parentUuid": "42d25fa8_17b95f39",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 49
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -334,6 +478,30 @@
     },
     {
       "key": {
+        "uuid": "0ee51300_32f1e431",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e738385d_c603804c",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 0
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a21f4c6_dadc582c",
         "filename": "p2p/base/turnport.h",
         "patchSetId": 6
@@ -348,6 +516,24 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af4a8baa_ce0fb6b1",
+        "filename": "p2p/base/turnport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a21f4c6_dadc582c",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -368,6 +554,24 @@
     },
     {
       "key": {
+        "uuid": "8e0c5d98_766004ce",
+        "filename": "p2p/base/turnport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f1d447f_270724d6",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6325856f_fae54445",
         "filename": "rtc_base/openssladapter.cc",
         "patchSetId": 6
@@ -382,6 +586,24 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "714e9afa_66f712bc",
+        "filename": "rtc_base/openssladapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6325856f_fae54445",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -419,6 +641,24 @@
     },
     {
       "key": {
+        "uuid": "95832e05_91052df0",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a454c0bb_f97da86f",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "638ad967_231a79f5",
         "filename": "rtc_base/ssladapter_unittest.cc",
         "patchSetId": 6
@@ -439,6 +679,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c012b9a_fec7557f",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "638ad967_231a79f5",
+      "range": {
+        "startLine": 588,
+        "startChar": 31,
+        "endLine": 588,
+        "endChar": 36
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -465,6 +729,30 @@
     },
     {
       "key": {
+        "uuid": "36ace047_2570695f",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2f7eba0_0fb55d8e",
+      "range": {
+        "startLine": 630,
+        "startChar": 19,
+        "endLine": 630,
+        "endChar": 38
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dea13b2c_3e21c6c8",
         "filename": "rtc_base/ssladapter_unittest.cc",
         "patchSetId": 6
@@ -485,6 +773,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53eaf39b_c622e49f",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dea13b2c_3e21c6c8",
+      "range": {
+        "startLine": 637,
+        "startChar": 19,
+        "endLine": 637,
+        "endChar": 38
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -511,6 +823,30 @@
     },
     {
       "key": {
+        "uuid": "8da72d09_8fca9676",
+        "filename": "rtc_base/ssladapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dcad698_4bb402e1",
+      "range": {
+        "startLine": 645,
+        "startChar": 19,
+        "endLine": 645,
+        "endChar": 59
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c10f1513_6ed29e66",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -531,6 +867,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f9a54eb_08ace6de",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c10f1513_6ed29e66",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -557,6 +917,30 @@
     },
     {
       "key": {
+        "uuid": "7335a77c_5d22a69f",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e8b9558_0914b5c2",
+      "range": {
+        "startLine": 75,
+        "startChar": 22,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37dd9d1b_dccf037c",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -577,6 +961,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40afb5f4_7cab56b5",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37dd9d1b_dccf037c",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 7
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -603,6 +1011,30 @@
     },
     {
       "key": {
+        "uuid": "3a2f8871_3f59af1c",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1190af01_8afe662b",
+      "range": {
+        "startLine": 85,
+        "startChar": 15,
+        "endLine": 85,
+        "endChar": 26
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "236f64ac_58c7b559",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -623,6 +1055,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "508f0196_de78abad",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "236f64ac_58c7b559",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 14
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -649,6 +1105,30 @@
     },
     {
       "key": {
+        "uuid": "365f9769_3af2cbd5",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b629e817_2ad9a8f6",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 14
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d3c3d0a_9241f4fc",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -669,6 +1149,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "816be931_f0c2e86b",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d3c3d0a_9241f4fc",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 14
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -695,6 +1199,30 @@
     },
     {
       "key": {
+        "uuid": "cfeee681_7278b765",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9407425b_871506b3",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 11
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ffd81ed_62446142",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -715,6 +1243,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecde74bd_5e8046cf",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ffd81ed_62446142",
+      "range": {
+        "startLine": 103,
+        "startChar": 30,
+        "endLine": 103,
+        "endChar": 46
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -741,6 +1293,30 @@
     },
     {
       "key": {
+        "uuid": "875f3a90_c4d6dde6",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d8cedc7_e7340744",
+      "range": {
+        "startLine": 104,
+        "startChar": 31,
+        "endLine": 104,
+        "endChar": 48
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd27f778_c93918cf",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -761,6 +1337,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0463cf8_4afe9ca8",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd27f778_c93918cf",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 63
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -787,6 +1387,30 @@
     },
     {
       "key": {
+        "uuid": "cb33b2ec_cc5791c5",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done. I\u0027m planning on removing these fields in a follow-up CL.",
+      "parentUuid": "26b17c48_f4faa679",
+      "range": {
+        "startLine": 273,
+        "startChar": 42,
+        "endLine": 273,
+        "endChar": 58
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbef595e_0d02e618",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -807,6 +1431,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6dc0f17_447ab13d",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbef595e_0d02e618",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 306,
+        "endChar": 11
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -833,6 +1481,30 @@
     },
     {
       "key": {
+        "uuid": "fa6de47e_97778a96",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31522fd3_d8f55f31",
+      "range": {
+        "startLine": 374,
+        "startChar": 25,
+        "endLine": 374,
+        "endChar": 63
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e144058_4c85d937",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 6
@@ -853,6 +1525,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea41b321_6b39e1bd",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e144058_4c85d937",
+      "range": {
+        "startLine": 397,
+        "startChar": 21,
+        "endLine": 397,
+        "endChar": 40
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -879,6 +1575,30 @@
     },
     {
       "key": {
+        "uuid": "b6fd3ae3_6de97a1a",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4861c526_cbfc4d32",
+      "range": {
+        "startLine": 402,
+        "startChar": 21,
+        "endLine": 402,
+        "endChar": 41
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b255738_ddd70dde",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCIceServer.mm",
         "patchSetId": 6
@@ -899,6 +1619,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "178e200d_98988f23",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCIceServer.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "This is a public initializer which may already be in use by some clients. I think we should wait until a future CL where we remove tlsAlpnProtocols/tlsEllipticCurves to have SslConfig replace them.",
+      "parentUuid": "7b255738_ddd70dde",
+      "range": {
+        "startLine": 93,
+        "startChar": 17,
+        "endLine": 93,
+        "endChar": 33
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -925,6 +1669,30 @@
     },
     {
       "key": {
+        "uuid": "9a1031c6_e7fc8ec6",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCIceServer.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ac5442b_91166839",
+      "range": {
+        "startLine": 103,
+        "startChar": 18,
+        "endLine": 104,
+        "endChar": 75
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "563c3796_2445e128",
         "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCSslConfig+Private.h",
         "patchSetId": 6
@@ -945,6 +1713,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b4deb5b_134c90a0",
+        "filename": "sdk/objc/Framework/Classes/PeerConnection/RTCSslConfig+Private.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "563c3796_2445e128",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -971,6 +1763,30 @@
     },
     {
       "key": {
+        "uuid": "591481de_d7456b02",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCIceServer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c6d6342_22f28055",
+      "range": {
+        "startLine": 127,
+        "startChar": 67,
+        "endLine": 127,
+        "endChar": 84
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70fd6aad_6c775f25",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
         "patchSetId": 6
@@ -991,6 +1807,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da139783_94978ae6",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done. Changed RTCSSLConfig, enableOCSPStapling, maxSSLVersion and tlsALPNProtocols. I\u0027ve maintained TLS names as lower case as that\u0027s how they\u0027re currently named elsewhere, but let me know if you\u0027d prefer me to change tlsALPNProtocols/tlsEllipticCurves too.",
+      "parentUuid": "70fd6aad_6c775f25",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1017,6 +1857,30 @@
     },
     {
       "key": {
+        "uuid": "be684299_ab44de3e",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac2c92fd_bc741bdd",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25799c7_5e424a93",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
         "patchSetId": 6
@@ -1037,6 +1901,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73ad544f_70ca368c",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCSslConfig.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-28T22:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25799c7_5e424a93",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
