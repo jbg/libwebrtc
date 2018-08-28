@@ -10,6 +10,7 @@
 
 #include "modules/audio_coding/neteq/tools/neteq_stats_getter.h"
 
+#include <stdio.h>
 #include <algorithm>
 #include <numeric>
 #include <utility>

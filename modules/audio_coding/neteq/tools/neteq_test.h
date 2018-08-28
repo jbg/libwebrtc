@@ -16,6 +16,8 @@
 #include <string>
 #include <utility>
 
+#include "absl/types/optional.h"
+#include "api/test/neteq_simulator.h"
 #include "modules/audio_coding/neteq/include/neteq.h"
 #include "modules/audio_coding/neteq/tools/audio_sink.h"
 #include "modules/audio_coding/neteq/tools/neteq_input.h"
@@ -52,10 +54,16 @@ class NetEqGetAudioCallback {
                              NetEq* neteq) = 0;
 };
 
+class NetEqSimulationEndedCallback {
+ public:
+  virtual ~NetEqSimulationEndedCallback() = default;
+  virtual void SimulationEnded(int64_t simulation_time_ms) = 0;
+};
+
 // Class that provides an input--output test for NetEq. The input (both packets
 // and output events) is provided by a NetEqInput object, while the output is
 // directed to an AudioSink object.
-class NetEqTest {
+class NetEqTest : NetEqSimulator {
  public:
   using DecoderMap = std::map<int, std::pair<NetEqDecoder, std::string> >;
 
@@ -71,6 +79,7 @@ class NetEqTest {
     NetEqTestErrorCallback* error_callback = nullptr;
     NetEqPostInsertPacket* post_insert_packet = nullptr;
     NetEqGetAudioCallback* get_audio_callback = nullptr;
+    NetEqSimulationEndedCallback* simulation_ended_callback = nullptr;
   };
 
   // Sets up the test with given configuration, codec mappings, input, ouput,
@@ -80,12 +89,19 @@ class NetEqTest {
             const ExtDecoderMap& ext_codecs,
             std::unique_ptr<NetEqInput> input,
             std::unique_ptr<AudioSink> output,
-            Callbacks callbacks);
+            std::unique_ptr<Callbacks> callbacks);
 
-  ~NetEqTest();
+  ~NetEqTest() override;
 
   // Runs the test. Returns the duration of the produced audio in ms.
   int64_t Run();
+  // Runs the simulation until we hit the next GetAudio event. Will return
+  // kRunning if a GetAudio event was found, or kFinished when the simulation is
+  // done and no more GetAudio event could be found.
+  SimulationStepResult RunToNextGetAudio() override;
+
+  NextActionResult SetNextAction(Action next_operation) override;
+  NetEqState GetNetEqState() override;
 
   // Returns the statistics from NetEq.
   NetEqNetworkStatistics SimulationStats();
@@ -96,11 +112,11 @@ class NetEqTest {
  private:
   void RegisterDecoders(const DecoderMap& codecs);
   void RegisterExternalDecoders(const ExtDecoderMap& codecs);
-
+  absl::optional<Action> next_action_;
   std::unique_ptr<NetEq> neteq_;
   std::unique_ptr<NetEqInput> input_;
   std::unique_ptr<AudioSink> output_;
-  Callbacks callbacks_;
+  std::unique_ptr<Callbacks> callbacks_;
   int sample_rate_hz_;
 };
 
