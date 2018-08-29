@@ -21,6 +21,7 @@ class VCMPacket {
   VCMPacket(const uint8_t* ptr,
             const size_t size,
             const WebRtcRTPHeader& rtpHeader);
+  VCMPacket(const VCMPacket&);
 
   uint8_t payloadType;
   uint32_t timestamp;

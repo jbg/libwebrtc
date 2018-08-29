@@ -29,7 +29,7 @@ class ScreenshareLayers : public TemporalLayers {
 
   ScreenshareLayers(int num_temporal_layers,
                     Clock* clock);
-  virtual ~ScreenshareLayers();
+  ~ScreenshareLayers() override;
 
   // Returns the recommended VP8 encode flags needed. May refresh the decoder
   // and/or update the reference buffers.

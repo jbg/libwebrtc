@@ -97,6 +97,9 @@ struct MultiplexImage {
                  uint8_t component_count,
                  std::unique_ptr<uint8_t[]> augmenting_data,
                  uint16_t augmenting_data_size);
+  MultiplexImage(MultiplexImage&&);
+  MultiplexImage& operator=(MultiplexImage&&);
+  ~MultiplexImage();
 };
 
 // A utility class providing conversion between two representations of a

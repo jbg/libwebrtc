@@ -21,6 +21,8 @@ AugmentedVideoFrameBuffer::AugmentedVideoFrameBuffer(
       augmenting_data_(std::move(augmenting_data)),
       video_frame_buffer_(video_frame_buffer) {}
 
+AugmentedVideoFrameBuffer::~AugmentedVideoFrameBuffer() = default;
+
 rtc::scoped_refptr<VideoFrameBuffer>
 AugmentedVideoFrameBuffer::GetVideoFrameBuffer() const {
   return video_frame_buffer_;

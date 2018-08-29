@@ -22,7 +22,7 @@ class I420Encoder : public VideoEncoder {
  public:
   I420Encoder();
 
-  virtual ~I420Encoder();
+  ~I420Encoder() override;
 
   // Initialize the encoder with the information from the VideoCodec.
   //
@@ -65,9 +65,7 @@ class I420Encoder : public VideoEncoder {
   // Return value                : WEBRTC_VIDEO_CODEC_OK if OK, < 0 otherwise.
   int Release() override;
 
-  int SetChannelParameters(uint32_t /*packetLoss*/, int64_t /*rtt*/) override {
-    return WEBRTC_VIDEO_CODEC_OK;
-  }
+  int SetChannelParameters(uint32_t /*packetLoss*/, int64_t /*rtt*/) override;
 
  private:
   static uint8_t* InsertHeader(uint8_t* buffer,
@@ -83,7 +81,7 @@ class I420Decoder : public VideoDecoder {
  public:
   I420Decoder();
 
-  virtual ~I420Decoder();
+  ~I420Decoder() override;
 
   // Initialize the decoder.
   // The user must notify the codec of width and height values.

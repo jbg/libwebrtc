@@ -42,6 +42,11 @@ int I420Encoder::Release() {
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
+int I420Encoder::SetChannelParameters(uint32_t /*packetLoss*/,
+                                      int64_t /*rtt*/) {
+  return WEBRTC_VIDEO_CODEC_OK;
+}
+
 int I420Encoder::InitEncode(const VideoCodec* codecSettings,
                             int /*numberOfCores*/,
                             size_t /*maxPayloadSize */) {

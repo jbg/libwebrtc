@@ -29,6 +29,7 @@ namespace webrtc {
 class H264EncoderImpl : public H264Encoder {
  public:
   struct LayerConfig {
+    LayerConfig();
     int simulcast_idx = 0;
     int width = -1;
     int height = -1;

@@ -26,6 +26,9 @@ bool DecodeAndConvert(const std::string& base64, std::vector<uint8_t>* binary) {
 
 namespace webrtc {
 
+H264SpropParameterSets::H264SpropParameterSets() = default;
+H264SpropParameterSets::~H264SpropParameterSets() = default;
+
 bool H264SpropParameterSets::DecodeSprop(const std::string& sprop) {
   size_t separator_pos = sprop.find(',');
   RTC_LOG(LS_INFO) << "Parsing sprop \"" << sprop << "\"";

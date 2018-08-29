@@ -30,11 +30,6 @@ rtc_static_library("encoded_frame") {
     "../../system_wrappers:system_wrappers",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
 }
 
 rtc_static_library("nack_module") {
@@ -45,11 +40,6 @@ rtc_static_library("nack_module") {
     "nack_module.cc",
     "nack_module.h",
   ]
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
 
   deps = [
     ":packet",
@@ -140,11 +130,6 @@ rtc_static_library("video_coding") {
     "video_receiver.cc",
     "video_sender.cc",
   ]
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
 
   deps += [
     ":codec_globals_headers",
@@ -250,11 +235,6 @@ rtc_source_set("video_coding_utility") {
     "utility/vp9_uncompressed_header_parser.h",
   ]
 
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
-
   deps = [
     ":video_codec_interface",
     "..:module_api",
@@ -284,11 +264,6 @@ rtc_static_library("webrtc_h264") {
     "codecs/h264/h264.cc",
     "codecs/h264/include/h264.h",
   ]
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
 
   defines = []
   deps = [
@@ -335,11 +310,6 @@ rtc_static_library("webrtc_i420") {
     "codecs/i420/include/i420.h",
   ]
 
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
-
   deps = [
     ":video_codec_interface",
     ":video_coding_utility",
@@ -364,11 +334,6 @@ rtc_static_library("webrtc_multiplex") {
     "codecs/multiplex/multiplex_encoded_image_packer.cc",
     "codecs/multiplex/multiplex_encoder_adapter.cc",
   ]
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
 
   deps = [
     ":video_codec_interface",
@@ -403,11 +368,6 @@ rtc_static_library("webrtc_vp8") {
     "codecs/vp8/temporal_layers.h",
   ]
 
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
-
   deps = [
     ":video_codec_interface",
     ":video_coding_utility",
@@ -440,11 +400,6 @@ rtc_static_library("webrtc_vp9_helpers") {
     "codecs/vp9/svc_rate_allocator.h",
   ]
 
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
-
   deps = [
     ":video_codec_interface",
     "../..:webrtc_common",
@@ -470,11 +425,6 @@ rtc_static_library("webrtc_vp9") {
     sources = [
       "codecs/vp9/vp9_noop.cc",
     ]
-  }
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
   }
 
   deps = [
@@ -541,11 +491,6 @@ if (rtc_include_tests) {
         "../../sdk:videosource_objc",
         "../../sdk:videotoolbox_objc",
       ]
-
-      if (!build_with_chromium && is_clang) {
-        # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-        suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-      }
     }
   }
 
