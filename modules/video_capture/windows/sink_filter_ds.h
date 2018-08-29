@@ -35,10 +35,10 @@ class CaptureInputPin : public CBaseInputPin {
                   IN CCritSec* pLock,
                   OUT HRESULT* pHr,
                   IN LPCWSTR pszName);
-  virtual ~CaptureInputPin();
+  ~CaptureInputPin() override;
 
-  HRESULT GetMediaType(IN int iPos, OUT CMediaType* pmt);
-  HRESULT CheckMediaType(IN const CMediaType* pmt);
+  HRESULT GetMediaType(IN int iPos, OUT CMediaType* pmt) override;
+  HRESULT CheckMediaType(IN const CMediaType* pmt) override;
   STDMETHODIMP Receive(IN IMediaSample*);
   HRESULT SetMatchingMediaType(const VideoCaptureCapability& capability);
 };
@@ -49,7 +49,7 @@ class CaptureSinkFilter : public CBaseFilter {
                     IN LPUNKNOWN punk,
                     OUT HRESULT* phr,
                     VideoCaptureExternal& captureObserver);
-  virtual ~CaptureSinkFilter();
+  ~CaptureSinkFilter() override;
 
   //  --------------------------------------------------------------------
   //  class methods
@@ -72,8 +72,8 @@ class CaptureSinkFilter : public CBaseFilter {
 
   //  --------------------------------------------------------------------
   //  CBaseFilter methods
-  int GetPinCount();
-  CBasePin* GetPin(IN int Index);
+  int GetPinCount() override;
+  CBasePin* GetPin(IN int Index) override;
   STDMETHODIMP Pause();
   STDMETHODIMP Stop();
   STDMETHODIMP GetClassID(OUT CLSID* pCLSID);
