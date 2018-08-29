@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dceef17_40d6db71",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-29T14:29:30Z",
+      "side": 1,
+      "message": "Mmmh, I am confused here too...\n\nIn file included from ../../modules/video_coding/codecs/h264/h264_encoder_impl.cc:12:\n../..\\modules/video_coding/codecs/h264/h264_encoder_impl.h(31,10):  error: [chromium-style] Complex constructor has an inlined body.\n  struct LayerConfig {\n\nThis constructor is not inlined, so I am not sure how to fix this error (on windows trybots).",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "bc39881861ebd4c93ec6f4866fd6acc3ecbb37a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
