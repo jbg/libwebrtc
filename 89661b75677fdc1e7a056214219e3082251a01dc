@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "04bbaefc_5b6000b9",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T09:33:38Z",
+      "side": 1,
+      "message": "I\u0027d then do the map\u003c\u003e to make it flexible.\n\nJust a final note: map\u003c\u003e means that same action type can only appear once. vector\u003cpair\u003c\u003e\u003e is even more flexible. But it is up to you to choose.",
+      "parentUuid": "02492fb8_a49656e8",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d822749c_0844f390",
         "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.cc",
         "patchSetId": 5
