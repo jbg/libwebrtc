@@ -113,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "7ca8b734_147ca7d5",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-29T01:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6a3a855_73cfa8a6",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d54a1230_246c9f2b",
         "filename": "api/peerconnectioninterface.h",
         "patchSetId": 6
@@ -360,6 +378,24 @@
     },
     {
       "key": {
+        "uuid": "9b760232_87586c59",
+        "filename": "p2p/base/packetsocketfactory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-29T01:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef5e6453_0a02a109",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f426113a_359e503f",
         "filename": "p2p/base/portallocator.h",
         "patchSetId": 6
@@ -428,6 +464,30 @@
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ed25b73_2467d258",
+        "filename": "p2p/base/portallocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-29T01:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57f0a3f4_cef927c5",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -653,6 +713,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "a454c0bb_f97da86f",
+      "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d73be70_c3255232",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-29T01:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "185c6649_1243bba7",
       "revId": "7aaa2604c38a557b53e2db80e4898764e5034314",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
