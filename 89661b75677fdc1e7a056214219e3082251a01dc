@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdf8d2f2_7e3a2280",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "I still have a question on this. Although I suggested map\u003cAction, int\u003e, it was based on fact that SimulationStepResult can contain multiple Actions (e.g., a step can contain more than one calls to GetAudio)\n\nIf there is always only one, we need only one Action and one int. And it can also be none, if is_simulation_finished is true.\n\nIn that case, I suggest two options\n\n1. struct SimulationStepResult {\n      Action action;\n      int time;\n   }\n   with \n   virtual absl::optional\u003cSimulationStepResult\u003e RunToNextGetAudio()\n\n2. struct SimulationStepResult {\n      bool is_simulation_finished;\n      absl::optional\u003cstd::pair\u003cAction, int\u003e\u003e action_times_ms;\n   }",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d822749c_0844f390",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 13,
+        "startChar": 10,
+        "endLine": 13,
+        "endChar": 15
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9a281f3_5f198284",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_getter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "explicit",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 18
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "963d16bc_fa2b814a",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_plotter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "in principle delay_analyzer_ and/or stats_getter_ can be nullptr.\n\nBut if you let NetEqStatsPlotter create them, the problem is gone.",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d35d4a8_1f203717",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_plotter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "let\u0027s try let NetEqStatsPlotter create and own a NetEqStatsGetter, in this way, we don\u0027t need to worry stats_getter and delay_analyzer being nullptr.",
+      "range": {
+        "startLine": 25,
+        "startChar": 20,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1140bd8_e1ad58b5",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_plotter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "This is not needed, stats_getter.delay_analyzer() returns it.",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 38
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e318f93a_59ef6233",
+        "filename": "modules/audio_coding/neteq/tools/neteq_stats_plotter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-08-29T08:27:39Z",
+      "side": 1,
+      "message": "can this be \"const NetEqStatsGetter* const\"?\n\nIf we create NetEqStatsGetter, this should be unique_ptr",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "89661b75677fdc1e7a056214219e3082251a01dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
