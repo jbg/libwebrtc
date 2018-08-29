@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "361e0b58_28d894db",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "absl::optional\u003cint\u003e?",
+      "range": {
+        "startLine": 29,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28c0566f_5c9ffeda",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "How can this possibly work? Is `this` owned by raw pointer when `Run` is called, and leaked afterwards?",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76871adf_f2a808fa",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "Put this class in an implementation namespace, e.g. rtc::cancelable_periodic_task_impl?",
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6db14c1_2831cbab",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "You don\u0027t actually check that it does nothing.",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 66
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c88f233_3703510d",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "Runs\n\nYou have several more of these below.",
+      "range": {
+        "startLine": 69,
+        "startChar": 51,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a03ca3f8_a03670da",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "It looks like this method should be named `GetCancellantionHandle`. Because it returns a new handle that can be used to cancel the task.",
+      "range": {
+        "startLine": 78,
+        "startChar": 45,
+        "endLine": 78,
+        "endChar": 63
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ad7b185_df089dcb",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "Reposts",
+      "range": {
+        "startLine": 117,
+        "startChar": 48,
+        "endLine": 117,
+        "endChar": 55
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5b9fd23_917cd7df",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "Do you mean \"handle\"?",
+      "range": {
+        "startLine": 21,
+        "startChar": 49,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "163ef89b_367ed09a",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-29T07:34:36Z",
+      "side": 1,
+      "message": "Even in US English, this word is most commonly spelled with two l\u0027s.",
+      "range": {
+        "startLine": 42,
+        "startChar": 48,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
