@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "40dd136a_af15852b",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "on a second thought... I do not need that feature for now.\nThe periodic task I plan to use it for always ask to reschedule itself.\n\nso better not to add it until it is actually needed.\n(with a bit of template magic it should be possible to support both int and optional\u003cint\u003e as return type)",
+      "parentUuid": "361e0b58_28d894db",
+      "range": {
+        "startLine": 29,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28c0566f_5c9ffeda",
         "filename": "rtc_base/cancelable_periodic_task.h",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "328be8a1_e20ce345",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "That is how reposting same task to TaskQueue works (see PostAndReuse in task_queue_unittest):\nreturning \u0027true\u0027 means TaskQueue still owns this Task and will delete it.\nreturn \u0027false\u0027 means Task took ownership of itself.",
+      "parentUuid": "28c0566f_5c9ffeda",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76871adf_f2a808fa",
         "filename": "rtc_base/cancelable_periodic_task.h",
         "patchSetId": 4
@@ -62,6 +110,24 @@
       "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee7b73b2_b9fc2747",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "Done.\n(except using suffix \u0027internal\u0027 http://go/totw/56 )",
+      "parentUuid": "76871adf_f2a808fa",
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "d9aef8e6_a2577285",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "renamed (checking it doesn\u0027t crash and documenting it is valid)",
+      "parentUuid": "f6db14c1_2831cbab",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 66
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c88f233_3703510d",
         "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
         "patchSetId": 4
@@ -108,6 +198,30 @@
       "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89a4855e_2fb6c0c6",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c88f233_3703510d",
+      "range": {
+        "startLine": 69,
+        "startChar": 51,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "668bb071_d6e26215",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a03ca3f8_a03670da",
+      "range": {
+        "startLine": 78,
+        "startChar": 45,
+        "endLine": 78,
+        "endChar": 63
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ad7b185_df089dcb",
         "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
         "patchSetId": 4
@@ -154,6 +292,30 @@
       "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c39d1e88_a35a93a7",
+        "filename": "rtc_base/cancelable_periodic_task_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad7b185_df089dcb",
+      "range": {
+        "startLine": 117,
+        "startChar": 48,
+        "endLine": 117,
+        "endChar": 55
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "8f617e26_4319b4bb",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "Done.\nI\u0027m not too sure what the difference between \u0027handle\u0027 and \u0027handler\u0027\nRenamed everywhere to \u0027handle\u0027 (at least it is shorter)",
+      "parentUuid": "f5b9fd23_917cd7df",
+      "range": {
+        "startLine": 21,
+        "startChar": 49,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "163ef89b_367ed09a",
         "filename": "rtc_base/cancelable_task_handler.h",
         "patchSetId": 4
@@ -200,6 +386,30 @@
       "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da38193_c6e6e04e",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-29T11:05:34Z",
+      "side": 1,
+      "message": "Done, thank you.\n(wouldn\u0027t guess that canellation use double \u0027l\u0027 while cancelable doesn\u0027t double it (still has two))",
+      "parentUuid": "163ef89b_367ed09a",
+      "range": {
+        "startLine": 42,
+        "startChar": 48,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
