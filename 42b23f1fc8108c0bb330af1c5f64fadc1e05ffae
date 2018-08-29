@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f377bce_e029b8d5",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-08-29T11:54:13Z",
+      "side": 1,
+      "message": "nit: It is not really clear what PeerConnection this references to. If it references to C++ PeerConnection, it should probably refer to PeerConnectionInterface::SSLConfig.",
+      "range": {
+        "startLine": 75,
+        "startChar": 5,
+        "endLine": 75,
+        "endChar": 46
+      },
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "965ff375_3c338c64",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-08-29T11:54:13Z",
+      "side": 1,
+      "message": "nit: Syntax we usually use is webrtc:9673",
+      "range": {
+        "startLine": 303,
+        "startChar": 20,
+        "endLine": 303,
+        "endChar": 26
+      },
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
