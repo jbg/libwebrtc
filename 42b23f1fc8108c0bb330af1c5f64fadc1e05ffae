@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "c17622d0_ce7f7799",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-29T18:23:29Z",
+      "side": 1,
+      "message": "This is still duplicated with PeerConnectionInterface::SSLConfig?",
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bdb7790_0a4cc7a8",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-29T18:23:29Z",
+      "side": 1,
+      "message": "I would prefer not having a constructor like this and require the client to assign fields manually.",
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f377bce_e029b8d5",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 15
