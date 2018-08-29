@@ -12,6 +12,10 @@
 
 namespace webrtc {
 
+PeerConnectionInterface::SSLConfig::SSLConfig() = default;
+PeerConnectionInterface::SSLConfig::SSLConfig(const SSLConfig& rhs) = default;
+PeerConnectionInterface::SSLConfig::~SSLConfig() = default;
+
 PeerConnectionInterface::IceServer::IceServer() = default;
 PeerConnectionInterface::IceServer::IceServer(const IceServer& rhs) = default;
 PeerConnectionInterface::IceServer::~IceServer() = default;
