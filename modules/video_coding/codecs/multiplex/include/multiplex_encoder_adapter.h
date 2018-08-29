@@ -36,7 +36,7 @@ class MultiplexEncoderAdapter : public VideoEncoder {
   MultiplexEncoderAdapter(VideoEncoderFactory* factory,
                           const SdpVideoFormat& associated_format,
                           bool supports_augmenting_data = false);
-  virtual ~MultiplexEncoderAdapter();
+  ~MultiplexEncoderAdapter() override;
 
   // Implements VideoEncoder
   int InitEncode(const VideoCodec* inst,

@@ -55,16 +55,16 @@ class EncodedImageCallbackWrapper : public EncodedImageCallback {
  public:
   EncodedImageCallbackWrapper() : callback_(nullptr) {}
 
-  virtual ~EncodedImageCallbackWrapper() {}
+  ~EncodedImageCallbackWrapper() override {}
 
   void Register(EncodedImageCallback* callback) {
     rtc::CritScope lock(&cs_);
     callback_ = callback;
   }
 
-  virtual Result OnEncodedImage(const EncodedImage& encoded_image,
-                                const CodecSpecificInfo* codec_specific_info,
-                                const RTPFragmentationHeader* fragmentation) {
+  Result OnEncodedImage(const EncodedImage& encoded_image,
+                        const CodecSpecificInfo* codec_specific_info,
+                        const RTPFragmentationHeader* fragmentation) override {
     rtc::CritScope lock(&cs_);
     if (callback_) {
       return callback_->OnEncodedImage(encoded_image, codec_specific_info,
@@ -95,7 +95,7 @@ class VideoCodingModuleImpl : public VideoCodingModule {
                   nack_sender,
                   keyframe_request_sender) {}
 
-  virtual ~VideoCodingModuleImpl() {}
+  ~VideoCodingModuleImpl() override {}
 
   int64_t TimeUntilNextProcess() override {
     int64_t receiver_time = receiver_.TimeUntilNextProcess();

@@ -58,6 +58,8 @@ TemporalLayers::FrameConfig::FrameConfig(TemporalLayers::BufferFlags last,
       first_reference(Vp8BufferReference::kNone),
       second_reference(Vp8BufferReference::kNone) {}
 
+TemporalLayers::FrameConfig::FrameConfig(const FrameConfig&) = default;
+
 namespace {
 static constexpr uint8_t kUninitializedPatternIndex =
     std::numeric_limits<uint8_t>::max();
@@ -265,6 +267,8 @@ DefaultTemporalLayers::DefaultTemporalLayers(int number_of_temporal_layers)
     frames_since_buffer_refresh_[buffer] = 0;
   }
 }
+
+DefaultTemporalLayers::~DefaultTemporalLayers() = default;
 
 void DefaultTemporalLayers::OnRatesUpdated(
     const std::vector<uint32_t>& bitrates_bps,
@@ -529,6 +533,8 @@ DefaultTemporalLayersChecker::DefaultTemporalLayersChecker(
     temporal_ids_.push_back(temporal_ids_[i++]);
   }
 }
+
+DefaultTemporalLayersChecker::~DefaultTemporalLayersChecker() = default;
 
 bool DefaultTemporalLayersChecker::CheckTemporalConfig(
     bool frame_is_keyframe,

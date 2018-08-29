@@ -55,6 +55,8 @@ NackModule::NackModule(Clock* clock,
   RTC_DCHECK(keyframe_request_sender_);
 }
 
+NackModule::~NackModule() = default;
+
 int NackModule::OnReceivedPacket(uint16_t seq_num, bool is_keyframe) {
   rtc::CritScope lock(&crit_);
   // TODO(philipel): When the packet includes information whether it is

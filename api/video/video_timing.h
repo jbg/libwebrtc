@@ -66,6 +66,7 @@ struct VideoSendTiming {
 // reported.
 struct TimingFrameInfo {
   TimingFrameInfo();
+  TimingFrameInfo(const TimingFrameInfo&);
 
   // Returns end-to-end delay of a frame, if sender and receiver timestamps are
   // synchronized, -1 otherwise.

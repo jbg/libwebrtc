@@ -24,6 +24,8 @@ Histogram::Histogram(size_t num_buckets, size_t max_num_values) {
   index_ = 0;
 }
 
+Histogram::~Histogram() = default;
+
 void Histogram::Add(size_t value) {
   value = std::min<size_t>(value, buckets_.size() - 1);
   if (index_ < values_.size()) {
