@@ -22,6 +22,7 @@ class AugmentedVideoFrameBuffer : public VideoFrameBuffer {
       const rtc::scoped_refptr<VideoFrameBuffer>& video_frame_buffer,
       std::unique_ptr<uint8_t[]> augmenting_data,
       uint16_t augmenting_data_size);
+  ~AugmentedVideoFrameBuffer() override;
 
   // Retrieves the underlying VideoFrameBuffer without the augmented data
   rtc::scoped_refptr<VideoFrameBuffer> GetVideoFrameBuffer() const;

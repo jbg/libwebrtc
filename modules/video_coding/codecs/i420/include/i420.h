@@ -22,7 +22,7 @@ class I420Encoder : public VideoEncoder {
  public:
   I420Encoder();
 
-  virtual ~I420Encoder();
+  ~I420Encoder() override;
 
   // Initialize the encoder with the information from the VideoCodec.
   //
@@ -83,7 +83,7 @@ class I420Decoder : public VideoDecoder {
  public:
   I420Decoder();
 
-  virtual ~I420Decoder();
+  ~I420Decoder() override;
 
   // Initialize the decoder.
   // The user must notify the codec of width and height values.

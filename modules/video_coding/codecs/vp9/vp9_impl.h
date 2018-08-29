@@ -32,7 +32,7 @@ class VP9EncoderImpl : public VP9Encoder {
  public:
   explicit VP9EncoderImpl(const cricket::VideoCodec& codec);
 
-  virtual ~VP9EncoderImpl();
+  ~VP9EncoderImpl() override;
 
   int Release() override;
 
@@ -149,7 +149,7 @@ class VP9DecoderImpl : public VP9Decoder {
  public:
   VP9DecoderImpl();
 
-  virtual ~VP9DecoderImpl();
+  ~VP9DecoderImpl() override;
 
   int InitDecode(const VideoCodec* inst, int number_of_cores) override;
 

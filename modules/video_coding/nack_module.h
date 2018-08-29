@@ -30,6 +30,7 @@ class NackModule : public Module {
   NackModule(Clock* clock,
              NackSender* nack_sender,
              KeyFrameRequestSender* keyframe_request_sender);
+  ~NackModule() override;
 
   int OnReceivedPacket(uint16_t seq_num, bool is_keyframe);
   void ClearUpTo(uint16_t seq_num);

@@ -103,6 +103,7 @@ class VCMEncodedFrameCallback : public EncodedImageCallback {
   };
   struct TimingFramesLayerInfo {
     TimingFramesLayerInfo();
+    TimingFramesLayerInfo(const TimingFramesLayerInfo&);
     ~TimingFramesLayerInfo();
     size_t target_bitrate_bytes_per_sec = 0;
     std::list<EncodeStartTimeRecord> encode_start_list;

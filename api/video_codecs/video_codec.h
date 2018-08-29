@@ -101,6 +101,7 @@ enum class VideoCodecMode { kRealtimeVideo, kScreensharing };
 class VideoCodec {
  public:
   VideoCodec();
+  VideoCodec(const VideoCodec&);
 
   // Public variables. TODO(hta): Make them private with accessors.
   VideoCodecType codecType;
