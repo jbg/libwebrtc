@@ -22,6 +22,30 @@
       "revId": "bc39881861ebd4c93ec6f4866fd6acc3ecbb37a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6f2e998_1f61ab79",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-30T08:27:01Z",
+      "side": 1,
+      "message": "The compiler may be talking about the implicitly-declared copy constructor: https://en.cppreference.com/w/cpp/language/copy_constructor#Implicitly-declared_copy_constructor (note that the error message points to the line that starts defining the struct, not the line where the default constructor is declared).\n\nIt may well be that this constructor is needed on Windows, but not needed elsewhere due to copy elision.",
+      "parentUuid": "2dceef17_40d6db71",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "bc39881861ebd4c93ec6f4866fd6acc3ecbb37a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
