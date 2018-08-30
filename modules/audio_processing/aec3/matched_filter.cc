@@ -441,7 +441,6 @@ void MatchedFilter::Update(const DownsampledRenderBuffer& render_buffer,
 }
 
 void MatchedFilter::LogFilterProperties(int sample_rate_hz,
-                                        size_t shift,
                                         size_t downsampling_factor) const {
   size_t alignment_shift = 0;
   const int fs_by_1000 = LowestBandRate(sample_rate_hz) / 1000;
@@ -449,10 +448,8 @@ void MatchedFilter::LogFilterProperties(int sample_rate_hz,
     int start = static_cast<int>(alignment_shift * downsampling_factor);
     int end = static_cast<int>((alignment_shift + filters_[k].size()) *
                                downsampling_factor);
-    RTC_LOG(LS_INFO) << "Filter " << k << ": start: "
-                     << (start - static_cast<int>(shift)) / fs_by_1000
-                     << " ms, end: "
-                     << (end - static_cast<int>(shift)) / fs_by_1000 << " ms.";
+    RTC_LOG(LS_INFO) << "Filter " << k << ": start: " << start / fs_by_1000
+                     << " ms, end: " << end / fs_by_1000 << " ms.";
     alignment_shift += filter_intra_lag_shift_;
   }
 }

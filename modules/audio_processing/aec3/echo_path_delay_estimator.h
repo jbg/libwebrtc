@@ -43,9 +43,8 @@ class EchoPathDelayEstimator {
       rtc::ArrayView<const float> capture);
 
   // Log delay estimator properties.
-  void LogDelayEstimationProperties(int sample_rate_hz, size_t shift) const {
-    matched_filter_.LogFilterProperties(sample_rate_hz, shift,
-                                        down_sampling_factor_);
+  void LogDelayEstimationProperties(int sample_rate_hz) const {
+    matched_filter_.LogFilterProperties(sample_rate_hz, down_sampling_factor_);
   }
 
  private:

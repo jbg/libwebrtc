@@ -131,6 +131,7 @@ void BlockProcessorImpl::ProcessCapture(
   RTC_DCHECK(RenderDelayBuffer::BufferingEvent::kRenderOverrun !=
              render_event_);
   if (render_event_ == RenderDelayBuffer::BufferingEvent::kRenderUnderrun) {
+#if 0
     if (estimated_delay_ &&
         estimated_delay_->quality == DelayEstimate::Quality::kRefined) {
       echo_path_variability.delay_change =
@@ -142,16 +143,10 @@ void BlockProcessorImpl::ProcessCapture(
       RTC_LOG(LS_WARNING) << "Reset due to render buffer underrrun at block "
                           << capture_call_counter_;
     }
-  } else if (render_event_ == RenderDelayBuffer::BufferingEvent::kApiCallSkew) {
-    // There have been too many render calls in a row. Reset to avoid noncausal
-    // echo.
-    echo_path_variability.delay_change =
-        EchoPathVariability::DelayAdjustment::kDelayReset;
-    delay_controller_->Reset();
-    capture_properly_started_ = false;
-    render_properly_started_ = false;
-    RTC_LOG(LS_WARNING) << "Reset due to render buffer api skew at block "
+#else
+    RTC_LOG(LS_WARNING) << "Render buffer underrun at block "
                         << capture_call_counter_;
+#endif
   }
 
   data_dumper_->DumpWav("aec3_processblock_capture_input2", kBlockSize,
@@ -165,28 +160,12 @@ void BlockProcessorImpl::ProcessCapture(
       echo_remover_delay_, (*capture_block)[0]);
 
   if (estimated_delay_) {
-    if (render_buffer_->CausalDelay(estimated_delay_->delay)) {
-      bool delay_change = render_buffer_->SetDelay(estimated_delay_->delay);
-      if (delay_change) {
-        RTC_LOG(LS_WARNING) << "Delay changed to " << estimated_delay_->delay
-                            << " at block " << capture_call_counter_;
-        echo_path_variability.delay_change =
-            EchoPathVariability::DelayAdjustment::kNewDetectedDelay;
-      }
-    } else {
-      // A noncausal delay has been detected. This can only happen if there is
-      // clockdrift, an audio pipeline issue has occurred, an unreliable delay
-      // estimate is used or the specified minimum delay is too short.
-      if (estimated_delay_->quality == DelayEstimate::Quality::kRefined) {
-        echo_path_variability.delay_change =
-            EchoPathVariability::DelayAdjustment::kDelayReset;
-        delay_controller_->Reset();
-        render_buffer_->Reset();
-        capture_properly_started_ = false;
-        render_properly_started_ = false;
-        RTC_LOG(LS_WARNING) << "Reset due to noncausal delay at block "
-                            << capture_call_counter_;
-      }
+    bool delay_change = render_buffer_->SetDelay(estimated_delay_->delay);
+    if (delay_change) {
+      RTC_LOG(LS_WARNING) << "Delay changed to " << estimated_delay_->delay
+                          << " at block " << capture_call_counter_;
+      echo_path_variability.delay_change =
+          EchoPathVariability::DelayAdjustment::kNewDetectedDelay;
     }
   }
 
@@ -247,9 +226,8 @@ BlockProcessor* BlockProcessor::Create(const EchoCanceller3Config& config,
   std::unique_ptr<RenderDelayBuffer> render_buffer(
       RenderDelayBuffer::Create(config, NumBandsForRate(sample_rate_hz)));
   std::unique_ptr<RenderDelayController> delay_controller(
-      RenderDelayController::Create(
-          config, RenderDelayBuffer::DelayEstimatorOffset(config),
-          sample_rate_hz));
+      RenderDelayController::Create(config, 0 /* TODO(gustaf): Clean */,
+                                    sample_rate_hz));
   std::unique_ptr<EchoRemover> echo_remover(
       EchoRemover::Create(config, sample_rate_hz));
   return Create(config, sample_rate_hz, std::move(render_buffer),
@@ -261,9 +239,8 @@ BlockProcessor* BlockProcessor::Create(
     int sample_rate_hz,
     std::unique_ptr<RenderDelayBuffer> render_buffer) {
   std::unique_ptr<RenderDelayController> delay_controller(
-      RenderDelayController::Create(
-          config, RenderDelayBuffer::DelayEstimatorOffset(config),
-          sample_rate_hz));
+      RenderDelayController::Create(config, 0 /* TODO(gustaf): Clean */,
+                                    sample_rate_hz));
   std::unique_ptr<EchoRemover> echo_remover(
       EchoRemover::Create(config, sample_rate_hz));
   return Create(config, sample_rate_hz, std::move(render_buffer),
