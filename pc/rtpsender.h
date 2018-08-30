@@ -147,6 +147,9 @@ class AudioRtpSender : public DtmfProviderInterface,
   void SetVoiceMediaChannel(
       cricket::VoiceMediaChannel* voice_media_channel) override {
     media_channel_ = voice_media_channel;
+    if (frame_encryptor_ != nullptr && media_channel_ != nullptr) {
+      media_channel_->SetFrameEncryptor(frame_encryptor_.get());
+    }
   }
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
@@ -237,9 +240,13 @@ class VideoRtpSender : public ObserverInterface,
       cricket::VoiceMediaChannel* voice_media_channel) override {
     RTC_NOTREACHED();
   }
+
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
     media_channel_ = video_media_channel;
+    if (frame_encryptor_ != nullptr && media_channel_ != nullptr) {
+      media_channel_->SetFrameEncryptor(frame_encryptor_.get());
+    }
   }
 
  private:

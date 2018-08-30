@@ -141,6 +141,16 @@ bool AudioRtpReceiver::SetParameters(const RtpParameters& parameters) {
 void AudioRtpReceiver::SetFrameDecryptor(
     rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) {
   frame_decryptor_ = std::move(frame_decryptor);
+  if (media_channel_ != nullptr) {
+    if (frame_decryptor_ != nullptr) {
+      return worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+        media_channel_->SetFrameDecryptor(frame_decryptor_.get());
+      });
+    } else {
+      return worker_thread_->Invoke<void>(
+          RTC_FROM_HERE, [&] { media_channel_->SetFrameDecryptor(nullptr); });
+    }
+  }
 }
 
 rtc::scoped_refptr<FrameDecryptorInterface>
@@ -321,6 +331,16 @@ bool VideoRtpReceiver::SetParameters(const RtpParameters& parameters) {
 void VideoRtpReceiver::SetFrameDecryptor(
     rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) {
   frame_decryptor_ = std::move(frame_decryptor);
+  if (media_channel_ != nullptr) {
+    if (frame_decryptor_ != nullptr) {
+      return worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+        media_channel_->SetFrameDecryptor(frame_decryptor_.get());
+      });
+    } else {
+      return worker_thread_->Invoke<void>(
+          RTC_FROM_HERE, [&] { media_channel_->SetFrameDecryptor(nullptr); });
+    }
+  }
 }
 
 rtc::scoped_refptr<FrameDecryptorInterface>

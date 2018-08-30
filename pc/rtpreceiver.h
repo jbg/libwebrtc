@@ -135,7 +135,11 @@ class AudioRtpReceiver : public ObserverInterface,
   void SetVoiceMediaChannel(
       cricket::VoiceMediaChannel* voice_media_channel) override {
     media_channel_ = voice_media_channel;
+    if (frame_decryptor_ != nullptr && media_channel_ != nullptr) {
+      media_channel_->SetFrameDecryptor(frame_decryptor_.get());
+    }
   }
+
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
     RTC_NOTREACHED();
@@ -227,6 +231,9 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal> {
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
     media_channel_ = video_media_channel;
+    if (frame_decryptor_ != nullptr && media_channel_ != nullptr) {
+      media_channel_->SetFrameDecryptor(frame_decryptor_.get());
+    }
   }
 
   int AttachmentId() const override { return attachment_id_; }
