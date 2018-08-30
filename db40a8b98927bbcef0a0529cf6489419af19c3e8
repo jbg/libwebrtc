@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af309833_64d9945b",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-30T22:27:31Z",
+      "side": 1,
+      "message": "Document lifetime requirements of FrameEncryptorInterface. (same for FrameDecryptor)",
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03cd6b29_e0de6871",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-30T22:27:31Z",
+      "side": 1,
+      "message": "Why split these cases?",
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "504f12eb_71d1446e",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-30T22:27:31Z",
+      "side": 1,
+      "message": "nit: here and elsewhere, drop the !\u003d nullptr",
+      "range": {
+        "startLine": 138,
+        "startChar": 25,
+        "endLine": 138,
+        "endChar": 35
+      },
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03ecc0ae_a54b9b8b",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-30T22:27:31Z",
+      "side": 1,
+      "message": "Needs to be invoked on the worker thread. Might as well factor out into a dedicated method to share with SetFrameDecryptor.",
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
