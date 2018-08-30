@@ -249,6 +249,30 @@
     },
     {
       "key": {
+        "uuid": "5cf5c8b6_fb6a83b4",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-30T12:16:52Z",
+      "side": 1,
+      "message": "I actually did now. :)",
+      "parentUuid": "3612dcb7_7656eb9c",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 25
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "180a0559_4e2c7d3a",
         "filename": "api/test/neteq_simulator.h",
         "patchSetId": 3
@@ -579,6 +603,30 @@
     },
     {
       "key": {
+        "uuid": "5d3e7236_205e084c",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-30T12:16:52Z",
+      "side": 1,
+      "message": "I\u0027ve reverted to the original code, which made me realize that actually the Factory doesn\u0027t need to own the Callbacks object anyway, because the NetEqTest is already copying the Callbacks object anyway. I guess I was too busy shooting myself in the foot to notice.",
+      "parentUuid": "2a7767e2_544fc7cb",
+      "range": {
+        "startLine": 59,
+        "startChar": 21,
+        "endLine": 59,
+        "endChar": 57
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc59c0d3_000988af",
         "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
         "patchSetId": 3
@@ -647,6 +695,30 @@
       "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4d93650_58e629ae",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-08-30T12:16:52Z",
+      "side": 1,
+      "message": "For now I\u0027ve removed NextActionResult, making this a void function. When I implement the functionality I\u0027ll either put it back here or put it elsewhere.",
+      "parentUuid": "bbab5138_78e935c5",
+      "range": {
+        "startLine": 161,
+        "startChar": 2,
+        "endLine": 161,
+        "endChar": 55
+      },
+      "revId": "357de783352b6c1d84689470b4b92572be6f22cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
