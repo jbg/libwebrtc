@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a8e217b_5d2b04f5",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-30T00:53:34Z",
+      "side": 1,
+      "message": "+1.",
+      "parentUuid": "c17622d0_ce7f7799",
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bdb7790_0a4cc7a8",
         "filename": "rtc_base/ssladapter.h",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2018-08-29T18:23:29Z",
       "side": 1,
       "message": "I would prefer not having a constructor like this and require the client to assign fields manually.",
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46c26b44_d3734afe",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-30T00:53:34Z",
+      "side": 1,
+      "message": "+1.",
+      "parentUuid": "4bdb7790_0a4cc7a8",
       "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
