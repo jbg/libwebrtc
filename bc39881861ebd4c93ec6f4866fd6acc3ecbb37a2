@@ -46,6 +46,30 @@
       "revId": "bc39881861ebd4c93ec6f4866fd6acc3ecbb37a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6eff501_0e0a5626",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-08-30T09:19:31Z",
+      "side": 1,
+      "message": "It seems it fixed. Thanks!",
+      "parentUuid": "e6f2e998_1f61ab79",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "bc39881861ebd4c93ec6f4866fd6acc3ecbb37a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
