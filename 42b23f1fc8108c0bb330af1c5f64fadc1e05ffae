@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "83ca784c_a0bed7ca",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-30T21:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a8e217b_5d2b04f5",
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bdb7790_0a4cc7a8",
         "filename": "rtc_base/ssladapter.h",
         "patchSetId": 15
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ee1a6b29_3e307d11",
+        "filename": "rtc_base/ssladapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-30T21:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46c26b44_d3734afe",
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f377bce_e029b8d5",
         "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
         "patchSetId": 15
@@ -92,6 +128,30 @@
       "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5967ff_9758377d",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-30T21:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f377bce_e029b8d5",
+      "range": {
+        "startLine": 75,
+        "startChar": 5,
+        "endLine": 75,
+        "endChar": 46
+      },
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +178,30 @@
     },
     {
       "key": {
+        "uuid": "f23eb043_6e1cd982",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-30T21:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "965ff375_3c338c64",
+      "range": {
+        "startLine": 303,
+        "startChar": 20,
+        "endLine": 303,
+        "endChar": 26
+      },
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93615824_73fa7af5",
         "filename": "sdk/objc/Framework/Headers/WebRTC/RTCIceServer.h",
         "patchSetId": 15
@@ -138,6 +222,30 @@
       "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a5b7ec0_ba068771",
+        "filename": "sdk/objc/Framework/Headers/WebRTC/RTCIceServer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7702
+      },
+      "writtenOn": "2018-08-30T21:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93615824_73fa7af5",
+      "range": {
+        "startLine": 34,
+        "startChar": 27,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "42b23f1fc8108c0bb330af1c5f64fadc1e05ffae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
