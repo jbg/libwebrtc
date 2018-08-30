@@ -19,6 +19,8 @@ FramerateController::FramerateController(float target_framerate_fps)
   SetTargetRate(target_framerate_fps);
 }
 
+FramerateController::~FramerateController() = default;
+
 void FramerateController::SetTargetRate(float target_framerate_fps) {
   if (target_framerate_fps_ != target_framerate_fps) {
     framerate_estimator_.Reset();

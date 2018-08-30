@@ -95,6 +95,8 @@ class TemporalLayers {
                 BufferFlags arf,
                 FreezeEntropy);
 
+    FrameConfig(const FrameConfig&);
+
     bool drop_frame;
     BufferFlags last_buffer_flags;
     BufferFlags golden_buffer_flags;

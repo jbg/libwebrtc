@@ -31,8 +31,12 @@ const int kMessagesThrottlingThreshold = 2;
 const int kThrottleRatio = 100000;
 }  // namespace
 
-VCMEncodedFrameCallback::TimingFramesLayerInfo::TimingFramesLayerInfo() {}
-VCMEncodedFrameCallback::TimingFramesLayerInfo::~TimingFramesLayerInfo() {}
+VCMEncodedFrameCallback::TimingFramesLayerInfo::TimingFramesLayerInfo() =
+    default;
+VCMEncodedFrameCallback::TimingFramesLayerInfo::TimingFramesLayerInfo(
+    const TimingFramesLayerInfo& rhs) = default;
+VCMEncodedFrameCallback::TimingFramesLayerInfo::~TimingFramesLayerInfo() =
+    default;
 
 VCMGenericEncoder::VCMGenericEncoder(
     VideoEncoder* encoder,
@@ -258,7 +262,7 @@ absl::optional<int64_t> VCMEncodedFrameCallback::ExtractEncodeStartTime(
   absl::optional<int64_t> result;
   size_t num_simulcast_svc_streams = timing_frames_info_.size();
   if (simulcast_svc_idx < num_simulcast_svc_streams) {
-    auto encode_start_list =
+    auto* encode_start_list =
         &timing_frames_info_[simulcast_svc_idx].encode_start_list;
     // Skip frames for which there was OnEncodeStarted but no OnEncodedImage
     // call. These are dropped by encoder internally.

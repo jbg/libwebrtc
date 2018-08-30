@@ -28,7 +28,7 @@ class MultiplexDecoderAdapter : public VideoDecoder {
   MultiplexDecoderAdapter(VideoDecoderFactory* factory,
                           const SdpVideoFormat& associated_format,
                           bool supports_augmenting_data = false);
-  virtual ~MultiplexDecoderAdapter();
+  ~MultiplexDecoderAdapter() override;
 
   // Implements VideoDecoder
   int32_t InitDecode(const VideoCodec* codec_settings,

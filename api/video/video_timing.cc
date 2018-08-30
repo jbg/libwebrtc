@@ -30,6 +30,8 @@ TimingFrameInfo::TimingFrameInfo()
       render_time_ms(-1),
       flags(VideoSendTiming::kNotTriggered) {}
 
+TimingFrameInfo::TimingFrameInfo(const TimingFrameInfo& rhs) = default;
+
 int64_t TimingFrameInfo::EndToEndDelay() const {
   return capture_time_ms >= 0 ? decode_finish_ms - capture_time_ms : -1;
 }

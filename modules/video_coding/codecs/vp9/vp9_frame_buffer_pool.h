@@ -52,6 +52,9 @@ namespace webrtc {
 //    vpx_codec_destroy(decoder_ctx);
 class Vp9FrameBufferPool {
  public:
+  Vp9FrameBufferPool();
+  ~Vp9FrameBufferPool();
+
   class Vp9FrameBuffer : public rtc::RefCountInterface {
    public:
     uint8_t* GetData();
@@ -59,6 +62,10 @@ class Vp9FrameBufferPool {
     void SetSize(size_t size);
 
     virtual bool HasOneRef() const = 0;
+
+   protected:
+    Vp9FrameBuffer();
+    ~Vp9FrameBuffer() override;
 
    private:
     // Data as an easily resizable buffer.

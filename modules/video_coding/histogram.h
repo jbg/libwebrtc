@@ -21,6 +21,7 @@ class Histogram {
   // A discrete histogram where every bucket with range [0, num_buckets).
   // Values greater or equal to num_buckets will be placed in the last bucket.
   Histogram(size_t num_buckets, size_t max_num_values);
+  ~Histogram();
 
   // Add a value to the histogram. If there already is max_num_values in the
   // histogram then the oldest value will be replaced with the new value.

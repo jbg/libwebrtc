@@ -26,7 +26,7 @@ namespace webrtc {
 class DefaultTemporalLayers : public TemporalLayers {
  public:
   explicit DefaultTemporalLayers(int number_of_temporal_layers);
-  virtual ~DefaultTemporalLayers() {}
+  ~DefaultTemporalLayers() override;
 
   // Returns the recommended VP8 encode flags needed. May refresh the decoder
   // and/or update the reference buffers.
@@ -76,6 +76,7 @@ class DefaultTemporalLayers : public TemporalLayers {
 class DefaultTemporalLayersChecker : public TemporalLayersChecker {
  public:
   explicit DefaultTemporalLayersChecker(int number_of_temporal_layers);
+  ~DefaultTemporalLayersChecker() override;
   bool CheckTemporalConfig(
       bool frame_is_keyframe,
       const TemporalLayers::FrameConfig& frame_config) override;

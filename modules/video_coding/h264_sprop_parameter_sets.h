@@ -20,7 +20,8 @@ namespace webrtc {
 
 class H264SpropParameterSets {
  public:
-  H264SpropParameterSets() {}
+  H264SpropParameterSets();
+  ~H264SpropParameterSets();
   bool DecodeSprop(const std::string& sprop);
   const std::vector<uint8_t>& sps_nalu() { return sps_; }
   const std::vector<uint8_t>& pps_nalu() { return pps_; }
