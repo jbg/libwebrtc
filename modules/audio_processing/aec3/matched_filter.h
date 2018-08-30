@@ -110,7 +110,6 @@ class MatchedFilter {
 
   // Log matched filter properties.
   void LogFilterProperties(int sample_rate_hz,
-                           size_t shift,
                            size_t downsampling_factor) const;
 
  private:
