@@ -14,6 +14,7 @@
 #include <string>
 
 #include "rtc_base/arraysize.h"
+#include "rtc_base/ssladapter.h"
 
 namespace webrtc {
 
@@ -254,13 +255,34 @@ static RTCErrorType ParseIceServerUrl(
       }
       cricket::RelayServerConfig config = cricket::RelayServerConfig(
           socket_address, username, server.password, turn_transport_type);
+
+      config.ssl_config.enable_ocsp_stapling =
+          server.ssl_config.enable_ocsp_stapling;
+      config.ssl_config.enable_signed_cert_timestamp =
+          server.ssl_config.enable_signed_cert_timestamp;
+      config.ssl_config.enable_tls_channel_id =
+          server.ssl_config.enable_tls_channel_id;
+      config.ssl_config.enable_grease = server.ssl_config.enable_grease;
+      config.ssl_config.tls_cert_policy = server.ssl_config.tls_cert_policy;
+      config.ssl_config.max_ssl_version = server.ssl_config.max_ssl_version;
+      config.ssl_config.tls_alpn_protocols =
+          server.ssl_config.tls_alpn_protocols;
+      config.ssl_config.tls_elliptic_curves =
+          server.ssl_config.tls_elliptic_curves;
+
       if (server.tls_cert_policy ==
           PeerConnectionInterface::kTlsCertPolicyInsecureNoCheck) {
-        config.tls_cert_policy =
-            cricket::TlsCertPolicy::TLS_CERT_POLICY_INSECURE_NO_CHECK;
+        config.ssl_config.tls_cert_policy =
+            rtc::TlsCertPolicy::TLS_CERT_POLICY_INSECURE_NO_CHECK;
       }
-      config.tls_alpn_protocols = server.tls_alpn_protocols;
-      config.tls_elliptic_curves = server.tls_elliptic_curves;
+      if (!server.ssl_config.tls_alpn_protocols.has_value() &&
+          !server.tls_alpn_protocols.empty()) {
+        config.ssl_config.tls_alpn_protocols = server.tls_alpn_protocols;
+      }
+      if (!server.ssl_config.tls_elliptic_curves.has_value() &&
+          !server.tls_elliptic_curves.empty()) {
+        config.ssl_config.tls_elliptic_curves = server.tls_elliptic_curves;
+      }
 
       turn_servers->push_back(config);
       break;
