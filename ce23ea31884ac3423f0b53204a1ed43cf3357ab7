@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d70e828_2bae6e53",
+        "filename": "pc/iceserverparsing.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-30T22:05:41Z",
+      "side": 1,
+      "message": "Does SSLConfig not have a copy assignment operator (or a move assignment operator)?",
+      "revId": "ce23ea31884ac3423f0b53204a1ed43cf3357ab7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
