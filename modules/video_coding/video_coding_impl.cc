@@ -86,7 +86,6 @@ class VideoCodingModuleImpl : public VideoCodingModule {
                         KeyFrameRequestSender* keyframe_request_sender,
                         EncodedImageCallback* pre_decode_image_callback)
       : VideoCodingModule(),
-        sender_(clock, &post_encode_callback_),
         timing_(new VCMTiming(clock)),
         receiver_(clock,
                   event_factory,
@@ -105,54 +104,10 @@ class VideoCodingModuleImpl : public VideoCodingModule {
 
   void Process() override { receiver_.Process(); }
 
-  int32_t RegisterSendCodec(const VideoCodec* sendCodec,
-                            uint32_t numberOfCores,
-                            uint32_t maxPayloadSize) override {
-    if (sendCodec != nullptr && ((sendCodec->codecType == kVideoCodecVP8) ||
-                                 (sendCodec->codecType == kVideoCodecH264))) {
-      // Set up a rate allocator and temporal layers factory for this codec
-      // instance. The codec impl will have a raw pointer to the TL factory,
-      // and will call it when initializing. Since this can happen
-      // asynchronously keep the instance alive until destruction or until a
-      // new send codec is registered.
-      VideoCodec codec = *sendCodec;
-      rate_allocator_ = VideoCodecInitializer::CreateBitrateAllocator(codec);
-      return sender_.RegisterSendCodec(&codec, numberOfCores, maxPayloadSize);
-    }
-    return sender_.RegisterSendCodec(sendCodec, numberOfCores, maxPayloadSize);
-  }
-
-  int32_t RegisterExternalEncoder(VideoEncoder* externalEncoder,
-                                  uint8_t /* payloadType */,
-                                  bool internalSource) override {
-    sender_.RegisterExternalEncoder(externalEncoder, internalSource);
-    return 0;
-  }
-
-  int32_t SetChannelParameters(uint32_t target_bitrate,  // bits/s.
-                               uint8_t lossRate,
-                               int64_t rtt) override {
-    return sender_.SetChannelParameters(target_bitrate, lossRate, rtt,
-                                        rate_allocator_.get(), nullptr);
-  }
-
   int32_t SetVideoProtection(VCMVideoProtection videoProtection,
                              bool enable) override {
     // TODO(pbos): Remove enable from receive-side protection modes as well.
     return receiver_.SetVideoProtection(videoProtection, enable);
-  }
-
-  int32_t AddVideoFrame(const VideoFrame& videoFrame,
-                        const CodecSpecificInfo* codecSpecificInfo) override {
-    return sender_.AddVideoFrame(videoFrame, codecSpecificInfo);
-  }
-
-  int32_t IntraFrameRequest(size_t stream_index) override {
-    return sender_.IntraFrameRequest(stream_index);
-  }
-
-  int32_t EnableFrameDropper(bool enable) override {
-    return sender_.EnableFrameDropper(enable);
   }
 
   int32_t RegisterReceiveCodec(const VideoCodec* receiveCodec,
@@ -206,15 +161,8 @@ class VideoCodingModuleImpl : public VideoCodingModule {
                                      max_incomplete_time_ms);
   }
 
-  void RegisterPostEncodeImageCallback(
-      EncodedImageCallback* observer) override {
-    post_encode_callback_.Register(observer);
-  }
-
  private:
   rtc::ThreadChecker construction_thread_;
-  EncodedImageCallbackWrapper post_encode_callback_;
-  vcm::VideoSender sender_;
   std::unique_ptr<VideoBitrateAllocator> rate_allocator_;
   std::unique_ptr<VCMTiming> timing_;
   vcm::VideoReceiver receiver_;
