@@ -21,6 +21,12 @@
 
 namespace webrtc {
 
+Vp9FrameBufferPool::Vp9FrameBufferPool() = default;
+Vp9FrameBufferPool::~Vp9FrameBufferPool() = default;
+
+Vp9FrameBufferPool::Vp9FrameBuffer::Vp9FrameBuffer() = default;
+Vp9FrameBufferPool::Vp9FrameBuffer::~Vp9FrameBuffer() = default;
+
 uint8_t* Vp9FrameBufferPool::Vp9FrameBuffer::GetData() {
   return data_.data<uint8_t>();
 }

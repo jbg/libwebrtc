@@ -81,6 +81,8 @@ VideoCodec::VideoCodec()
       timing_frame_thresholds({0, 0}),
       codec_specific_() {}
 
+VideoCodec::VideoCodec(const VideoCodec& rhs) = default;
+
 VideoCodecVP8* VideoCodec::VP8() {
   RTC_DCHECK_EQ(codecType, kVideoCodecVP8);
   return &codec_specific_.VP8;

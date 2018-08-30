@@ -635,6 +635,9 @@ VideoEncoder::ScalingSettings H264EncoderImpl::GetScalingSettings() const {
                                        kHighH264QpThreshold);
 }
 
+H264EncoderImpl::LayerConfig::LayerConfig() = default;
+H264EncoderImpl::LayerConfig::LayerConfig(const LayerConfig& rhs) = default;
+
 void H264EncoderImpl::LayerConfig::SetStreamState(bool send_stream) {
   if (send_stream && !sending) {
     // Need a key frame if we have not sent this stream before.

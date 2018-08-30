@@ -19,6 +19,7 @@ namespace webrtc {
 class FramerateController {
  public:
   explicit FramerateController(float target_framerate_fps);
+  ~FramerateController();
 
   void SetTargetRate(float target_framerate_fps);
   float GetTargetRate();

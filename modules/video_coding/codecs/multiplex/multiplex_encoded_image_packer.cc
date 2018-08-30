@@ -138,6 +138,12 @@ MultiplexImage::MultiplexImage(uint16_t picture_index,
       augmenting_data_size(augmenting_data_size),
       augmenting_data(std::move(augmenting_data)) {}
 
+MultiplexImage::MultiplexImage(MultiplexImage&& rhs) = default;
+
+MultiplexImage& MultiplexImage::operator=(MultiplexImage&& rhs) = default;
+
+MultiplexImage::~MultiplexImage() = default;
+
 EncodedImage MultiplexEncodedImagePacker::PackAndRelease(
     const MultiplexImage& multiplex_image) {
   MultiplexImageHeader header;
