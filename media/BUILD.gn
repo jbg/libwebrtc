@@ -73,6 +73,7 @@ rtc_static_library("rtc_media_base") {
   libs = []
   deps = [
     "../api:audio_options_api",
+    "../crypto:crypto",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_task_queue",
