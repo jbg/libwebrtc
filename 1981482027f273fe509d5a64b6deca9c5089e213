@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "195df84f_2cabe41d",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T09:46:09Z",
+      "side": 1,
+      "message": "Is this really a good idea? You\u0027re taking bad input and silently trying to do something reasonable with it. This isn\u0027t likely to make anyone happy now, and it\u0027s even less likely to make anyone happy if you later decide to handle the non-uint32-values differently.\n\nI would just use dchecked_cast.",
+      "revId": "1981482027f273fe509d5a64b6deca9c5089e213",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b469a190_f1344546",
+        "filename": "rtc_base/cancelable_task_handle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T09:46:09Z",
+      "side": 1,
+      "message": "ll",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 20
+      },
+      "revId": "1981482027f273fe509d5a64b6deca9c5089e213",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

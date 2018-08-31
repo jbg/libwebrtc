@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "94d2652c_d28e73a5",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T09:46:09Z",
+      "side": 1,
+      "message": "OK. Since int converts implicitly to optional\u003cint\u003e, I guess that will happen almost automatically.",
+      "parentUuid": "40dd136a_af15852b",
+      "range": {
+        "startLine": 29,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28c0566f_5c9ffeda",
         "filename": "rtc_base/cancelable_periodic_task.h",
         "patchSetId": 4
@@ -93,6 +117,30 @@
       "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93a1909a_abff262b",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T09:46:09Z",
+      "side": 1,
+      "message": "OK. Then please document this on the lines where you return. E.g.\n\n  return true;  // Caller retains ownership of `this`, and will destroy it.\n\n  return false;  // Caller will relinquish ownership of `this`.\n\nIt\u0027s still icky, because for a brief moment `this` is uniquely owned both by the caller and by the unique_ptr we send to Post(Delayed)Task.",
+      "parentUuid": "328be8a1_e20ce345",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
@@ -366,6 +414,30 @@
     },
     {
       "key": {
+        "uuid": "f751e587_7397eae8",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T09:46:09Z",
+      "side": 1,
+      "message": "\"Handle\" traditionally means something like a unique integer or something similar that you get from an API as a means to refer to something; the API promises nothing about this value except that it can be used to refer to that something when you\u0027re talking to the API. Often, handles are just pointers under the hood. Unix file handles are one example, although since their integer nature is exposed in several ways, they arguably aren\u0027t a \"clean\" example of handles.\n\nCancelableTaskHandler isn\u0027t technically just a copyable blob, but the user can treat it just as if it were (specifically, the user can copy it, and get rid of it when they no longer plan to use it), which is why I find it reasonable to call it a \"handle\".\n\nA \"handler\" on the other hand brings to mind some class that manages some resource. In particular, I would not expect a handler to be copyable.\n\nThat\u0027s my 2 cents on the matter.",
+      "parentUuid": "8f617e26_4319b4bb",
+      "range": {
+        "startLine": 21,
+        "startChar": 49,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "163ef89b_367ed09a",
         "filename": "rtc_base/cancelable_task_handler.h",
         "patchSetId": 4
@@ -401,6 +473,30 @@
       "side": 1,
       "message": "Done, thank you.\n(wouldn\u0027t guess that canellation use double \u0027l\u0027 while cancelable doesn\u0027t double it (still has two))",
       "parentUuid": "163ef89b_367ed09a",
+      "range": {
+        "startLine": 42,
+        "startChar": 48,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "860bee90_f30c70b9",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T09:46:09Z",
+      "side": 1,
+      "message": "Yeah, the only way to spell English correctly is to learn every word individually...",
+      "parentUuid": "7da38193_c6e6e04e",
       "range": {
         "startLine": 42,
         "startChar": 48,
