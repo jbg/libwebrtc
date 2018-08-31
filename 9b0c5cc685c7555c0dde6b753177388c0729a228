@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1b682cd_f9d69fb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-08-31T22:54:50Z",
+      "side": 1,
+      "message": "Just curious, how is the leak triggered?",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "9b0c5cc685c7555c0dde6b753177388c0729a228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d95d998_882ca60a",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-08-31T22:54:50Z",
+      "side": 1,
+      "message": "I have very limited understanding to the APIs of Mac OSX. Is it guaranteed that the callback handler will be executed in the same thread as it attached into CGDisplayStreamCreate?\n\nBut in theory you do not need to do thread_checker_ check here. ScreenRefresh() is guaranteed to be thread-safe.",
+      "range": {
+        "startLine": 456,
+        "startChar": 0,
+        "endLine": 456,
+        "endChar": 56
+      },
+      "revId": "9b0c5cc685c7555c0dde6b753177388c0729a228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b7368b2_35720470",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2018-08-31T22:54:50Z",
+      "side": 1,
+      "message": "I believe the downside here is that the deprecated CGDisplayStreamRef won\u0027t be released until the end of lifetime of ScreenCapturerMac. It may or may not be a problem, as I do not have enough knowledge to support an estimation of the cost (memory, OS handler, etc) of each CGDisplayStreamRef. Just want to call out my concern.",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 489,
+        "endChar": 49
+      },
+      "revId": "9b0c5cc685c7555c0dde6b753177388c0729a228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
