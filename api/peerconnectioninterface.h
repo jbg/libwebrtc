@@ -95,6 +95,10 @@
 #include "api/transport/network_control.h"
 #include "api/turncustomizer.h"
 #include "api/umametrics.h"
+#include "api/crypto/rtccertificate.h"
+#include "api/crypto/rtccertificategenerator.h"
+#include "api/crypto/sslcertificate.h"
+#include "api/crypto/sslstreamadapter.h"
 #include "logging/rtc_event_log/rtc_event_log_factory_interface.h"
 #include "media/base/mediaconfig.h"
 // TODO(bugs.webrtc.org/6353): cricket::VideoCapturer is deprecated and should
@@ -109,11 +113,7 @@
 #include "rtc_base/bitrateallocationstrategy.h"
 #include "rtc_base/network.h"
 #include "rtc_base/platform_file.h"
-#include "crypto/rtccertificate.h"
-#include "crypto/rtccertificategenerator.h"
 #include "rtc_base/socketaddress.h"
-#include "crypto/sslcertificate.h"
-#include "crypto/sslstreamadapter.h"
 
 namespace rtc {
 class SSLIdentity;
