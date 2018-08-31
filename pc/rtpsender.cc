@@ -277,6 +277,7 @@ rtc::scoped_refptr<DtmfSenderInterface> AudioRtpSender::GetDtmfSender() const {
 void AudioRtpSender::SetFrameEncryptor(
     rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) {
   frame_encryptor_ = std::move(frame_encryptor);
+  AttachFrameEncryptorToMediaChannel();
 }
 
 rtc::scoped_refptr<FrameEncryptorInterface> AudioRtpSender::GetFrameEncryptor()
@@ -325,6 +326,12 @@ void AudioRtpSender::Stop() {
   stopped_ = true;
 }
 
+void AudioRtpSender::SetVoiceMediaChannel(
+    cricket::VoiceMediaChannel* voice_media_channel) {
+  media_channel_ = voice_media_channel;
+  AttachFrameEncryptorToMediaChannel();
+}
+
 void AudioRtpSender::SetAudioSend() {
   RTC_DCHECK(!stopped_);
   RTC_DCHECK(can_send_track());
@@ -370,6 +377,15 @@ void AudioRtpSender::ClearAudioSend() {
   });
   if (!success) {
     RTC_LOG(LS_WARNING) << "ClearAudioSend: ssrc is incorrect: " << ssrc_;
+  }
+}
+
+void AudioRtpSender::AttachFrameEncryptorToMediaChannel() {
+  if (media_channel_) {
+    FrameEncryptorInterface* encryptor =
+        frame_encryptor_ ? frame_encryptor_.get() : nullptr;
+    return worker_thread_->Invoke<void>(
+        RTC_FROM_HERE, [&] { media_channel_->SetFrameEncryptor(encryptor); });
   }
 }
 
@@ -483,6 +499,7 @@ rtc::scoped_refptr<DtmfSenderInterface> VideoRtpSender::GetDtmfSender() const {
 void VideoRtpSender::SetFrameEncryptor(
     rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) {
   frame_encryptor_ = std::move(frame_encryptor);
+  AttachFrameEncryptorToMediaChannel();
 }
 
 rtc::scoped_refptr<FrameEncryptorInterface> VideoRtpSender::GetFrameEncryptor()
@@ -519,6 +536,12 @@ void VideoRtpSender::Stop() {
   }
   media_channel_ = nullptr;
   stopped_ = true;
+}
+
+void VideoRtpSender::SetVideoMediaChannel(
+    cricket::VideoMediaChannel* video_media_channel) {
+  media_channel_ = video_media_channel;
+  AttachFrameEncryptorToMediaChannel();
 }
 
 void VideoRtpSender::SetVideoSend() {
@@ -564,6 +587,15 @@ void VideoRtpSender::ClearVideoSend() {
   worker_thread_->Invoke<bool>(RTC_FROM_HERE, [&] {
     return media_channel_->SetVideoSend(ssrc_, nullptr, nullptr);
   });
+}
+
+void VideoRtpSender::AttachFrameEncryptorToMediaChannel() {
+  if (media_channel_) {
+    FrameEncryptorInterface* encryptor =
+        frame_encryptor_ ? frame_encryptor_.get() : nullptr;
+    return worker_thread_->Invoke<void>(
+        RTC_FROM_HERE, [&] { media_channel_->SetFrameEncryptor(encryptor); });
+  }
 }
 
 }  // namespace webrtc
