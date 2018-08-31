@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "02bc32cb_34f2970e",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-31T11:51:47Z",
+      "side": 1,
+      "message": "Added comments, also added helper variable.\n\nYep, that part of TaskQueue is weird.\nhopefully this class allows to create Periodic tasks without need to worry about TaskQueue::Run return value.",
+      "parentUuid": "93a1909a_abff262b",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76871adf_f2a808fa",
         "filename": "rtc_base/cancelable_periodic_task.h",
         "patchSetId": 4
@@ -426,6 +450,30 @@
       "side": 1,
       "message": "\"Handle\" traditionally means something like a unique integer or something similar that you get from an API as a means to refer to something; the API promises nothing about this value except that it can be used to refer to that something when you\u0027re talking to the API. Often, handles are just pointers under the hood. Unix file handles are one example, although since their integer nature is exposed in several ways, they arguably aren\u0027t a \"clean\" example of handles.\n\nCancelableTaskHandler isn\u0027t technically just a copyable blob, but the user can treat it just as if it were (specifically, the user can copy it, and get rid of it when they no longer plan to use it), which is why I find it reasonable to call it a \"handle\".\n\nA \"handler\" on the other hand brings to mind some class that manages some resource. In particular, I would not expect a handler to be copyable.\n\nThat\u0027s my 2 cents on the matter.",
       "parentUuid": "8f617e26_4319b4bb",
+      "range": {
+        "startLine": 21,
+        "startChar": 49,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "168f26932bc6a197a5677880d400b6f897d8eae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25c4048_f7905217",
+        "filename": "rtc_base/cancelable_task_handler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-31T11:51:47Z",
+      "side": 1,
+      "message": "Thank you,\nyep, I want CancelableTaskHandle be a Handle\n\nCancel function spoils it a bit. but looking at alternatives:\nstatic rtc::BaseCancelableTask::Cancel(const CancelableTaskHandle\u0026 handle);\nrtc::CancelTask(const CancelableTaskHandle\u0026 handle);\n\nI think it is still better to have it as member function.",
+      "parentUuid": "f751e587_7397eae8",
       "range": {
         "startLine": 21,
         "startChar": 49,

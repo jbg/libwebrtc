@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8720ab57_ab2a6717",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-31T11:51:47Z",
+      "side": 1,
+      "message": "yep, it should never happen,\n\nbut if it does happen (in prod) I prefer to recover with saturated_cast rather than static_cast.\n\nE.g. if there is problem with clock/time calculation and time until next run measured as -5ms,\nI prefer to PostTask immediately instead of delaying it indefinitely.\n\nchanged to run-time check \u0026 recover with LOG(error)",
+      "parentUuid": "195df84f_2cabe41d",
+      "revId": "1981482027f273fe509d5a64b6deca9c5089e213",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b469a190_f1344546",
         "filename": "rtc_base/cancelable_task_handle.h",
         "patchSetId": 8
@@ -39,6 +57,30 @@
       "revId": "1981482027f273fe509d5a64b6deca9c5089e213",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83c53e5c_a47fd91d",
+        "filename": "rtc_base/cancelable_task_handle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-08-31T11:51:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b469a190_f1344546",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 20
+      },
+      "revId": "1981482027f273fe509d5a64b6deca9c5089e213",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
