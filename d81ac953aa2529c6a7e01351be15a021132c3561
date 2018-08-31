@@ -22,6 +22,30 @@
       "revId": "d81ac953aa2529c6a7e01351be15a021132c3561",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26a25acc_7a29c94f",
+        "filename": "call/rampup_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-08-31T08:20:44Z",
+      "side": 0,
+      "message": "It\u0027s used in ModifySenderCallConfig. \n\nAnd I suspect it\u0027s a public or protected member of some base class, so could be used in other files as well. I\u0027ve considered trying to change all members to being private (as recommended by style guide), but it\u0027s a lot of work. See https://webrtc-review.googlesource.com/c/src/+/94140 for a start.",
+      "parentUuid": "a55d9028_b51a50b9",
+      "range": {
+        "startLine": 309,
+        "startChar": 42,
+        "endLine": 309,
+        "endChar": 60
+      },
+      "revId": "d81ac953aa2529c6a7e01351be15a021132c3561",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
