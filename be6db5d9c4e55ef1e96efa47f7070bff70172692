@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29b16426_07b7c9c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T12:45:54Z",
+      "side": 1,
+      "message": "How does this change help? It would seem to make the task *harder*, since now you have DCHECKs in there.",
+      "revId": "be6db5d9c4e55ef1e96efa47f7070bff70172692",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
