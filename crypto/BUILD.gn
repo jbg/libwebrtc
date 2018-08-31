@@ -12,6 +12,14 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
+if (!rtc_build_ssl) {
+  config("external_ssl_library") {
+    assert(rtc_ssl_root != "",
+           "You must specify rtc_ssl_root when rtc_build_ssl==0.")
+    include_dirs = [ rtc_ssl_root ]
+  }
+}
+
 rtc_static_library("crypto") {
   sources = [
     "openssl.h",
@@ -75,3 +83,69 @@ rtc_static_library("crypto") {
     configs += [ ":external_ssl_library" ]
   }
 }
+
+rtc_source_set("crypto_tests_utils") {
+  testonly = true
+  sources = [
+    "fakesslidentity.cc",
+    "fakesslidentity.h",
+    "testcertificateverifier.h",
+  ]
+  deps = [
+    "../rtc_base:checks",
+    "../rtc_base:rtc_base",
+    "../rtc_base:stringutils",
+    "../api/units:time_delta",
+    "../test:field_trial",
+    "../test:test_support",
+    "../rtc_base/third_party/sigslot",
+    "//third_party/abseil-cpp/absl/memory",
+  ]
+  public_deps = [
+    "//testing/gtest",
+  ]
+}
+
+rtc_source_set("crypto_unittests") {
+    testonly = true
+    defines = []
+
+    sources = [
+      "rtccertificate_unittest.cc",
+      "rtccertificategenerator_unittest.cc",
+    ]
+    if (is_posix || is_fuchsia) {
+      sources += [
+        "openssladapter_unittest.cc",
+        "opensslsessioncache_unittest.cc",
+        "opensslutility_unittest.cc",
+        "ssladapter_unittest.cc",
+        "sslidentity_unittest.cc",
+        "sslstreamadapter_unittest.cc",
+      ]
+    }
+    deps = [
+      "../rtc_base:checks",
+      "../rtc_base:rtc_base_tests_main",
+      "../rtc_base:rtc_base_tests_utils",
+      "../rtc_base:stringutils",
+      "../api:array_view",
+      "../test:fileutils",
+      "../test:test_support",
+      "../rtc_base/third_party/sigslot",
+      "//third_party/abseil-cpp/absl/memory",
+      "//third_party/abseil-cpp/absl/types:optional",
+    ]
+    public_deps = [
+      "../rtc_base:rtc_base",
+    ]
+    if (build_with_chromium) {
+      include_dirs = [ "../../boringssl/src/include" ]
+    }
+    if (rtc_build_ssl) {
+      deps += [ "//third_party/boringssl" ]
+    } else {
+      configs += [ ":external_ssl_library" ]
+    }
+}
+
