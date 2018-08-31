@@ -1725,9 +1725,9 @@ if (rtc_include_tests) {
       ":neteq",
       ":neteq_test_tools",
       ":pcm16b",
+      "../../crypto",
       "../../rtc_base:rtc_base_approved",
       "../../system_wrappers:system_wrappers_default",
-      "../../crypto",
       "//testing/gtest",
     ]
   }
@@ -1761,8 +1761,8 @@ if (rtc_include_tests) {
     deps = [
       ":neteq",
       ":neteq_test_support",
-      "../../crypto",
       "../..:webrtc_common",
+      "../../crypto",
       "../../rtc_base:rtc_base_approved",
       "../../system_wrappers:system_wrappers_default",
       "../../test:fileutils",
