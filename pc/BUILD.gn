@@ -319,6 +319,7 @@ if (rtc_include_tests) {
       "../api:array_view",
       "../api:libjingle_peerconnection_api",
       "../call:rtp_interfaces",
+      "../crypto:crypto",
       "../crypto:crypto_tests_utils",
       "../logging:rtc_event_log_api",
       "../media:rtc_media_base",
