@@ -48,6 +48,14 @@ class PccBitrateController {
       const std::vector<PccMonitorInterval>& block,
       DataRate bandwidth_estimate);
 
+  struct DebugState {
+    explicit DebugState(const PccBitrateController& controller);
+    DebugState(const DebugState& state);
+    double previous_function_value;
+    double previous_loss_rate;
+    PccUtilityFunctionInterface* utility_function_ptr;
+  };
+
   ~PccBitrateController();
 
  private:

@@ -44,6 +44,11 @@ PccBitrateController::PccBitrateController(double initial_conversion_factor,
                                delay_gradient_negative_bound,
                                loss_rate_threshold)) {}
 
+PccBitrateController::DebugState::DebugState(
+    const PccBitrateController& controller)
+    : previous_function_value(controller.previous_utility_.value_or(0)),
+      utility_function_ptr(controller.utility_function_.get()) {}
+
 PccBitrateController::PccBitrateController(
     double initial_conversion_factor,
     double initial_dynamic_boundary,
@@ -131,6 +136,7 @@ DataRate PccBitrateController::ComputeRateUpdateForOnlineLearningMode(
   double second_bitrate_bps = intervals[1].GetTargetSendingRate().bps();
   double gradient = (first_utility - second_utility) /
                     (first_bitrate_bps - second_bitrate_bps);
+  previous_utility_ = second_utility;
   double rate_change_bps = gradient * ComputeStepSize(gradient);  // delta_r
   rate_change_bps =
       ApplyDynamicBoundary(rate_change_bps, bandwith_estimate.bps());
