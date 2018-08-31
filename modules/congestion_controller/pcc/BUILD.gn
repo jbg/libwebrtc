@@ -88,6 +88,20 @@ rtc_static_library("bitrate_controller") {
 }
 
 if (rtc_include_tests) {
+  rtc_source_set("test_pcc_printer") {
+    testonly = true
+    sources = [
+      "test/pcc_printer.cc",
+      "test/pcc_printer.h",
+    ]
+    deps = [
+      ":pcc",
+      ":pcc_controller",
+      "..:test_controller_printer",
+      "//third_party/abseil-cpp/absl/memory:memory",
+    ]
+  }
+
   rtc_source_set("pcc_unittests") {
     testonly = true
     sources = [

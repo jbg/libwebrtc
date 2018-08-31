@@ -74,6 +74,83 @@ std::unique_ptr<PccUtilityFunctionInterface> CreateUtilityFunction(
 }
 }  // namespace
 
+PccNetworkController::DebugState::DebugState(const PccNetworkController& sender)
+    : mode(sender.mode_),
+      bandwidth_estimate(sender.bandwidth_estimate_),
+      rtt_estimate(sender.rtt_tracker_.GetRtt()),
+      actual_rate(sender.bandwidth_estimate_),
+      utility_function(0),
+      receiver_rate(DataRate::Zero()) {
+  if (sender.monitor_intervals_.empty() ||
+      (sender.monitor_intervals_.size() >=
+           sender.monitor_intervals_bitrates_.size() &&
+       sender.last_sent_packet_time_ >=
+           sender.monitor_intervals_.back().GetEndTime())) {
+    actual_rate = sender.bandwidth_estimate_;
+  } else {
+    actual_rate = sender.monitor_intervals_.back().GetTargetSendingRate();
+  }
+  // Utilitty function value, loss rate, delay gradient.
+  PccBitrateController::DebugState debug_state(sender.bitrate_controller_);
+  if (sender.mode_ == Mode::kSlowStart) {
+    utility_function = debug_state.previous_function_value;
+    delay_gradient = sender.previous_delay_gradient_.value_or(0);
+    loss_rate = debug_state.previous_loss_rate;
+  } else {
+    if (sender.monitor_intervals_.size() >= 2 &&
+        sender.monitor_intervals_[1].IsFeedbackCollectionDone()) {
+      utility_function = debug_state.utility_function_ptr->Compute(
+          sender.monitor_intervals_[1]);
+      delay_gradient = sender.monitor_intervals_[1].ComputeDelayGradient(
+          kRttGradientThreshold);
+      loss_rate = sender.monitor_intervals_[1].GetLossRate(kLossRateThreshold);
+    } else if (sender.monitor_intervals_.size() >= 1 &&
+               sender.monitor_intervals_[0].IsFeedbackCollectionDone()) {
+      utility_function = debug_state.utility_function_ptr->Compute(
+          sender.monitor_intervals_[0]);
+      delay_gradient = sender.monitor_intervals_[0].ComputeDelayGradient(
+          kRttGradientThreshold);
+      loss_rate = sender.monitor_intervals_[0].GetLossRate(kLossRateThreshold);
+    } else {
+      utility_function = debug_state.previous_function_value;
+      delay_gradient = sender.previous_delay_gradient_.value_or(0);
+      loss_rate = debug_state.previous_loss_rate;
+    }
+  }
+  // Pcc state
+  if (sender.mode_ == Mode::kSlowStart) {
+    if (!sender.monitor_intervals_.empty() &&
+        sender.monitor_intervals_[0].GetEndTime() <
+            sender.last_sent_packet_time_) {
+      state = FIRST_MONITOR_INTERVAL;
+    } else {
+      state = WAITING_FOR_FEEDBACK;
+    }
+  } else {
+    if (sender.monitor_intervals_.size() <= 1) {
+      state = FIRST_MONITOR_INTERVAL;
+    } else if (sender.monitor_intervals_[1].GetEndTime() <=
+               sender.last_sent_packet_time_) {
+      state = SECOND_MONITOR_INTERVAL;
+    } else {
+      state = WAITING_FOR_FEEDBACK;
+    }
+  }
+  // Reciver rate
+  DataSize received_size = DataSize::Zero();
+  for (size_t i = 1; i < sender.last_received_packets_.size(); ++i) {
+    received_size += sender.last_received_packets_[i].sent_packet->size;
+  }
+  TimeDelta sending_time = TimeDelta::Zero();
+  if (sender.last_received_packets_.size() > 0)
+    sending_time = sender.last_received_packets_.back().receive_time -
+                   sender.last_received_packets_.front().receive_time;
+  if (sending_time > TimeDelta::Zero())
+    receiver_rate = received_size / sending_time;
+}
+
+PccNetworkController::DebugState::DebugState(const DebugState& state) = default;
+
 PccNetworkController::PccControllerConfig::PccControllerConfig(
     std::string field_trial)
     : alpha_for_packet_interval("alpha_for_packet_interval",
@@ -174,6 +251,45 @@ PccNetworkController::PccNetworkController(NetworkControllerConfig config)
                                 config_.throughput_coefficient,
                                 config_.throughput_power,
                                 config_.rtt_gradient_threshold,
+                                config_.rtt_gradient_negative_bound,
+                                config_.loss_rate_threshold)),
+      monitor_intervals_duration_(TimeDelta::Zero()),
+      complete_feedback_monitor_interval_number_(0),
+      random_generator_(kRandomSeed) {
+  if (config.starting_bandwidth.IsFinite()) {
+    bandwidth_estimate_ = config.starting_bandwidth;
+  }
+}
+
+PccNetworkController::PccNetworkController(NetworkControllerConfig config,
+                                           // Utility function parameters
+                                           double rtt_gradient_coefficient,
+                                           double loss_coefficient,
+                                           double throughput_coefficient,
+                                           double throughput_power,
+                                           double rtt_gradient_threshold)
+    : config_(PccControllerConfig::FromTrial()),
+      start_time_(Timestamp::Infinity()),
+      last_sent_packet_time_(Timestamp::Infinity()),
+      smoothed_packets_sending_interval_(TimeDelta::Zero()),
+      mode_(Mode::kStartup),
+      bandwidth_estimate_(config_.default_bandwidth),
+      rtt_tracker_(TimeDelta::ms(static_cast<int64_t>(config_.initial_rtt_ms)),
+                   kAlphaForRtt),
+      monitor_interval_timeout_(rtt_tracker_.GetRtt() *
+                                config_.monitor_interval_timeout_ratio),
+      min_rate_have_multiplicative_rate_change_(
+          DataRate::bps(config_.min_rate_change_bps / config_.sampling_step)),
+      bitrate_controller_(
+          config_.initial_conversion_factor,
+          config_.initial_dynamic_boundary,
+          config_.dynamic_boundary_increment,
+          CreateUtilityFunction(config_.is_modified_utility_function,
+                                rtt_gradient_coefficient,
+                                loss_coefficient,
+                                throughput_coefficient,
+                                throughput_power,
+                                rtt_gradient_threshold,
                                 config_.rtt_gradient_negative_bound,
                                 config_.loss_rate_threshold)),
       monitor_intervals_duration_(TimeDelta::Zero()),
@@ -443,6 +559,10 @@ void PccNetworkController::UpdateSendingRateAndMode() {
         bitrate_controller_.ComputeRateUpdateForOnlineLearningMode(
             monitor_intervals_, bandwidth_estimate_);
   }
+  previous_delay_gradient_ =
+      monitor_intervals_.back().ComputeDelayGradient(kRttGradientThreshold);
+  previous_loss_rate_ =
+      monitor_intervals_.back().ComputeDelayGradient(kLossRateThreshold);
 }
 
 NetworkControlUpdate PccNetworkController::OnNetworkAvailability(

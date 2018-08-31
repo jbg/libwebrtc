@@ -57,6 +57,26 @@ class PccNetworkController : public NetworkControllerInterface {
     kFixed
   };
 
+  struct DebugState {
+    enum PccState {
+      FIRST_MONITOR_INTERVAL,
+      SECOND_MONITOR_INTERVAL,
+      WAITING_FOR_FEEDBACK
+    };
+    explicit DebugState(const PccNetworkController& sender);
+    DebugState(const DebugState& state);
+
+    PccState state;
+    Mode mode;
+    DataRate bandwidth_estimate;
+    TimeDelta rtt_estimate;
+    DataRate actual_rate;
+    double utility_function;
+    double delay_gradient;
+    double loss_rate;
+    DataRate receiver_rate;
+  };
+
   struct PccControllerConfig {
     FieldTrialParameter<double> alpha_for_packet_interval;
     // Default value used for initializing bandwidth.
@@ -107,6 +127,14 @@ class PccNetworkController : public NetworkControllerInterface {
   };
 
   explicit PccNetworkController(NetworkControllerConfig config);
+  PccNetworkController(NetworkControllerConfig config,
+                       // Utility function parameters
+                       double rtt_gradient_coefficient,
+                       double loss_coefficient,
+                       double throughput_coefficient,
+                       double throughput_power,
+                       double rtt_gradient_threshold);
+
   ~PccNetworkController() override;
 
   // NetworkControllerInterface
@@ -125,9 +153,10 @@ class PccNetworkController : public NetworkControllerInterface {
   NetworkControlUpdate OnRoundTripTimeUpdate(RoundTripTimeUpdate msg) override;
   NetworkControlUpdate OnTransportLossReport(TransportLossReport msg) override;
 
+  NetworkControlUpdate CreateRateUpdate(Timestamp at_time) const;
+
  private:
   void UpdateSendingRateAndMode();
-  NetworkControlUpdate CreateRateUpdate(Timestamp at_time) const;
   TimeDelta ComputeMonitorIntervalsDuration() const;
   bool NeedDoubleCheckMeasurments() const;
   bool IsTimeoutExpired(Timestamp current_time) const;
@@ -157,6 +186,9 @@ class PccNetworkController : public NetworkControllerInterface {
 
   webrtc::Random random_generator_;
   std::deque<PacketResult> last_received_packets_;
+
+  absl::optional<double> previous_delay_gradient_;
+  absl::optional<double> previous_loss_rate_;
 };
 
 }  // namespace pcc
