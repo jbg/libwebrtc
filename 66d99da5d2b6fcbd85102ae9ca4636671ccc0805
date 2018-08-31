@@ -33,6 +33,52 @@
       "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3100a885_12110751",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 6630
+      },
+      "writtenOn": "2018-08-31T17:28:07Z",
+      "side": 1,
+      "message": "These functions are identical to the one above, can you refactor it to a helper function that takes the media_channel_ and worker_thread_ objects?",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 61
+      },
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5cda463_fd315403",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 6630
+      },
+      "writtenOn": "2018-08-31T17:28:07Z",
+      "side": 1,
+      "message": "Same comment as the receiver side, use helper function instead of duplicate code",
+      "range": {
+        "startLine": 592,
+        "startChar": 21,
+        "endLine": 592,
+        "endChar": 55
+      },
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
