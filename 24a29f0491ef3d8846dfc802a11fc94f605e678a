@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3255ca2f_aea4b71e",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T11:29:38Z",
+      "side": 1,
+      "message": "Is this one the sum of all the values in the map?",
+      "revId": "24a29f0491ef3d8846dfc802a11fc94f605e678a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c8014ca_b72776cf",
+        "filename": "api/test/neteq_simulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T11:29:38Z",
+      "side": 1,
+      "message": "Remove the trailing underscore.",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "24a29f0491ef3d8846dfc802a11fc94f605e678a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "162d1fd7_a8c2b7f3",
+        "filename": "api/test/neteq_simulator_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T11:29:38Z",
+      "side": 1,
+      "message": "Use absl::make_unique instead of raw `new`.",
+      "revId": "24a29f0491ef3d8846dfc802a11fc94f605e678a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb465e6f_67f49055",
+        "filename": "api/test/neteq_simulator_factory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T11:29:38Z",
+      "side": 1,
+      "message": "You need to define the destructor in the .cc file. Otherwise, all code that calls the destructor needs to have the definition of NetEqTestFactory visible.",
+      "revId": "24a29f0491ef3d8846dfc802a11fc94f605e678a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
