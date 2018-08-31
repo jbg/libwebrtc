@@ -16,6 +16,24 @@
       "revId": "be6db5d9c4e55ef1e96efa47f7070bff70172692",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54dd8675_8fef5811",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-08-31T16:18:14Z",
+      "side": 1,
+      "message": "There were already implicit dchecks via the use of the accessor and constructor methods. So this change makes it closer to being constexpr compatible since there are fewer combinations that would fail (only the case of adding opposite infinities together). But you are right that it\u0027s not all the way there.\n\nI haven\u0027t yet decided what I think is the right thing to do when adding opposite infinities. I do think that\u0027s probably a rare error to make, so it might be acceptable to not fail and have some default behavior for it.",
+      "parentUuid": "29b16426_07b7c9c8",
+      "revId": "be6db5d9c4e55ef1e96efa47f7070bff70172692",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
