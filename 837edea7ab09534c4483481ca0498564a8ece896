@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6defcf2a_af6215df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-08-31T08:18:39Z",
+      "side": 1,
+      "message": "Presubmit fails because \"Bug entry requires issue tracker prefix, e.g. webrtc:9674\" (it\u0027s not enough to just say 9674)",
+      "revId": "837edea7ab09534c4483481ca0498564a8ece896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d111b5b_a9c2b70a",
         "filename": "api/stats/rtcstats_objects.h",
         "patchSetId": 5
