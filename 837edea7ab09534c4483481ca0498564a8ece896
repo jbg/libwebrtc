@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d111b5b_a9c2b70a",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-08-31T08:00:12Z",
+      "side": 1,
+      "message": "Don\u0027t forget to update the whitelist in chromium before you land this:\nhttps://cs.chromium.org/chromium/src/chrome/test/data/webrtc/peerconnection_getstats.js\n\nIt doesn\u0027t show on the webrtc trybots because webrtc bots only attempt to compile, not execute browser_tests.",
+      "revId": "837edea7ab09534c4483481ca0498564a8ece896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
