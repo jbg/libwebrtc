@@ -20,17 +20,20 @@ if (!rtc_build_ssl) {
   }
 }
 
-rtc_static_library("crypto") {
-  sources = [
+rtc_source_set("message_digest") {
+  sources= [
     "messagedigest.cc",
     "messagedigest.h",
+  ]
+}
+
+rtc_static_library("crypto") {
+  sources = [
     "openssl.h",
     "openssladapter.cc",
     "openssladapter.h",
     "opensslcertificate.cc",
     "opensslcertificate.h",
-    "openssldigest.cc",
-    "openssldigest.h",
     "opensslidentity.cc",
     "opensslidentity.h",
     "opensslsessioncache.cc",
@@ -39,6 +42,8 @@ rtc_static_library("crypto") {
     "opensslstreamadapter.h",
     "opensslutility.cc",
     "opensslutility.h",
+    "openssldigest.cc",
+    "openssldigest.h",
     "rtccertificate.cc",
     "rtccertificategenerator.cc",
     "rtccertificategenerator.h",
@@ -54,6 +59,10 @@ rtc_static_library("crypto") {
     "sslroots.h",
     "sslstreamadapter.cc",
     "sslstreamadapter.h",
+  ]
+
+  public_deps = [
+    ":message_digest"
   ]
 
   deps = [

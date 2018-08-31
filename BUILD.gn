@@ -40,6 +40,8 @@ if (!build_with_chromium) {
     if (rtc_include_tests) {
       deps += [
         ":rtc_unittests",
+        "crypto:crypto_unittests",
+        "crypto:crypto_tests_utils",
         ":video_engine_tests",
         ":webrtc_nonparallel_tests",
         ":webrtc_perf_tests",
@@ -563,6 +565,8 @@ if (rtc_include_tests) {
   rtc_test("webrtc_nonparallel_tests") {
     testonly = true
     deps = [
+      "crypto:crypto",
+      "crypto:crypto_tests_utils",
       "rtc_base:rtc_base_nonparallel_tests",
     ]
     if (is_android) {
