@@ -129,13 +129,10 @@ class AudioRtpReceiver : public ObserverInterface,
   void set_stream_ids(std::vector<std::string> stream_ids) override;
   void SetStreams(const std::vector<rtc::scoped_refptr<MediaStreamInterface>>&
                       streams) override;
-
   void SetObserver(RtpReceiverObserverInterface* observer) override;
-
   void SetVoiceMediaChannel(
-      cricket::VoiceMediaChannel* voice_media_channel) override {
-    media_channel_ = voice_media_channel;
-  }
+      cricket::VoiceMediaChannel* voice_media_channel) override;
+
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
     RTC_NOTREACHED();
@@ -147,6 +144,7 @@ class AudioRtpReceiver : public ObserverInterface,
  private:
   void Reconfigure();
   bool SetOutputVolume(double volume);
+  void AttachFrameDecryptorToMediaChannel();
 
   rtc::Thread* const worker_thread_;
   const std::string id_;
@@ -224,10 +222,9 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal> {
       cricket::VoiceMediaChannel* voice_media_channel) override {
     RTC_NOTREACHED();
   }
+
   void SetVideoMediaChannel(
-      cricket::VideoMediaChannel* video_media_channel) override {
-    media_channel_ = video_media_channel;
-  }
+      cricket::VideoMediaChannel* video_media_channel) override;
 
   int AttachmentId() const override { return attachment_id_; }
 
@@ -249,6 +246,7 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal> {
   };
 
   bool SetSink(rtc::VideoSinkInterface<VideoFrame>* sink);
+  void AttachFrameDecryptorToMediaChannel();
 
   rtc::Thread* const worker_thread_;
   const std::string id_;

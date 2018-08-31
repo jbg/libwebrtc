@@ -145,9 +145,8 @@ class AudioRtpSender : public DtmfProviderInterface,
   int AttachmentId() const override { return attachment_id_; }
 
   void SetVoiceMediaChannel(
-      cricket::VoiceMediaChannel* voice_media_channel) override {
-    media_channel_ = voice_media_channel;
-  }
+      cricket::VoiceMediaChannel* voice_media_channel) override;
+
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
     RTC_NOTREACHED();
@@ -162,6 +161,8 @@ class AudioRtpSender : public DtmfProviderInterface,
   void SetAudioSend();
   // Helper function to call SetAudioSend with "stop sending" parameters.
   void ClearAudioSend();
+  // Attach the frame encryptor to the media channel.
+  void AttachFrameEncryptorToMediaChannel();
 
   sigslot::signal0<> SignalDestroyed;
 
@@ -237,9 +238,13 @@ class VideoRtpSender : public ObserverInterface,
       cricket::VoiceMediaChannel* voice_media_channel) override {
     RTC_NOTREACHED();
   }
+
   void SetVideoMediaChannel(
       cricket::VideoMediaChannel* video_media_channel) override {
     media_channel_ = video_media_channel;
+    if (frame_encryptor_ != nullptr && media_channel_ != nullptr) {
+      media_channel_->SetFrameEncryptor(frame_encryptor_.get());
+    }
   }
 
  private:
@@ -249,6 +254,8 @@ class VideoRtpSender : public ObserverInterface,
   void SetVideoSend();
   // Helper function to call SetVideoSend with "stop sending" parameters.
   void ClearVideoSend();
+  // Attach the frame encryptor to the media channel.
+  void AttachFrameEncryptorToMediaChannel();
 
   rtc::Thread* worker_thread_;
   const std::string id_;

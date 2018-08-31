@@ -93,6 +93,15 @@ bool AudioRtpReceiver::SetOutputVolume(double volume) {
   });
 }
 
+void AudioRtpReceiver::AttachFrameDecryptorToMediaChannel() {
+  if (media_channel_) {
+    FrameDecryptorInterface* decryptor =
+        frame_decryptor_ ? frame_decryptor_.get() : nullptr;
+    return worker_thread_->Invoke<void>(
+        RTC_FROM_HERE, [&] { media_channel_->SetFrameDecryptor(decryptor); });
+  }
+}
+
 void AudioRtpReceiver::OnSetVolume(double volume) {
   RTC_DCHECK_GE(volume, 0);
   RTC_DCHECK_LE(volume, 10);
@@ -141,6 +150,7 @@ bool AudioRtpReceiver::SetParameters(const RtpParameters& parameters) {
 void AudioRtpReceiver::SetFrameDecryptor(
     rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) {
   frame_decryptor_ = std::move(frame_decryptor);
+  AttachFrameDecryptorToMediaChannel();
 }
 
 rtc::scoped_refptr<FrameDecryptorInterface>
@@ -243,6 +253,12 @@ void AudioRtpReceiver::SetObserver(RtpReceiverObserverInterface* observer) {
   }
 }
 
+void AudioRtpReceiver::SetVoiceMediaChannel(
+    cricket::VoiceMediaChannel* voice_media_channel) {
+  media_channel_ = voice_media_channel;
+  AttachFrameDecryptorToMediaChannel();
+}
+
 void AudioRtpReceiver::NotifyFirstPacketReceived() {
   if (observer_) {
     observer_->OnFirstPacketReceived(media_type());
@@ -299,6 +315,15 @@ bool VideoRtpReceiver::SetSink(rtc::VideoSinkInterface<VideoFrame>* sink) {
       RTC_FROM_HERE, [&] { return media_channel_->SetSink(*ssrc_, sink); });
 }
 
+void VideoRtpReceiver::AttachFrameDecryptorToMediaChannel() {
+  if (media_channel_) {
+    FrameDecryptorInterface* decryptor =
+        frame_decryptor_ ? frame_decryptor_.get() : nullptr;
+    return worker_thread_->Invoke<void>(
+        RTC_FROM_HERE, [&] { media_channel_->SetFrameDecryptor(decryptor); });
+  }
+}
+
 RtpParameters VideoRtpReceiver::GetParameters() const {
   if (!media_channel_ || !ssrc_ || stopped_) {
     return RtpParameters();
@@ -321,6 +346,7 @@ bool VideoRtpReceiver::SetParameters(const RtpParameters& parameters) {
 void VideoRtpReceiver::SetFrameDecryptor(
     rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) {
   frame_decryptor_ = std::move(frame_decryptor);
+  AttachFrameDecryptorToMediaChannel();
 }
 
 rtc::scoped_refptr<FrameDecryptorInterface>
@@ -402,6 +428,12 @@ void VideoRtpReceiver::SetObserver(RtpReceiverObserverInterface* observer) {
   if (received_first_packet_ && observer_) {
     observer_->OnFirstPacketReceived(media_type());
   }
+}
+
+void VideoRtpReceiver::SetVideoMediaChannel(
+    cricket::VideoMediaChannel* video_media_channel) {
+  media_channel_ = video_media_channel;
+  AttachFrameDecryptorToMediaChannel();
 }
 
 void VideoRtpReceiver::NotifyFirstPacketReceived() {
