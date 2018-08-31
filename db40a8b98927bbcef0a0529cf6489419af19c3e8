@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7022e9f2_9f95a872",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-31T17:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af309833_64d9945b",
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03cd6b29_e0de6871",
         "filename": "pc/rtpreceiver.cc",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f961ac1_8467c5f3",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-31T17:09:21Z",
+      "side": 1,
+      "message": "Refactored this entire block to be more readable.",
+      "parentUuid": "03cd6b29_e0de6871",
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "376ceeca_c84d3dc8",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-31T17:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "504f12eb_71d1446e",
+      "range": {
+        "startLine": 138,
+        "startChar": 25,
+        "endLine": 138,
+        "endChar": 35
+      },
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03ecc0ae_a54b9b8b",
         "filename": "pc/rtpreceiver.h",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c559c32f_a5faf43d",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-08-31T17:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03ecc0ae_a54b9b8b",
+      "revId": "db40a8b98927bbcef0a0529cf6489419af19c3e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
