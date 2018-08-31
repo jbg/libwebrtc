@@ -881,6 +881,7 @@ if (!build_with_chromium) {
     }
 
     deps = [
+      "../crypto:crypto",
       "../p2p:libstunprober",
       "../p2p:rtc_p2p",
       "../rtc_base:checks",

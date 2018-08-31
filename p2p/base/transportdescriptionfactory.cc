@@ -16,7 +16,7 @@
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/messagedigest.h"
-#include "rtc_base/sslfingerprint.h"
+#include "crypto/sslfingerprint.h"
 
 namespace cricket {
 

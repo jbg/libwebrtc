@@ -342,6 +342,7 @@ if (!build_with_chromium) {
       "api:transport_api",
       "audio",
       "call",
+      "crypto",
       "common_audio",
       "common_video",
       "media",

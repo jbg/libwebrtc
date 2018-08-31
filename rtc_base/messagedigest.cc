@@ -14,7 +14,7 @@
 
 #include <string.h>
 
-#include "rtc_base/openssldigest.h"
+#include "crypto/openssldigest.h"
 #include "rtc_base/stringencode.h"
 
 namespace rtc {

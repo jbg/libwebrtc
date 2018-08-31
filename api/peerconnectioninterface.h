@@ -109,11 +109,11 @@
 #include "rtc_base/bitrateallocationstrategy.h"
 #include "rtc_base/network.h"
 #include "rtc_base/platform_file.h"
-#include "rtc_base/rtccertificate.h"
-#include "rtc_base/rtccertificategenerator.h"
+#include "crypto/rtccertificate.h"
+#include "crypto/rtccertificategenerator.h"
 #include "rtc_base/socketaddress.h"
-#include "rtc_base/sslcertificate.h"
-#include "rtc_base/sslstreamadapter.h"
+#include "crypto/sslcertificate.h"
+#include "crypto/sslstreamadapter.h"
 
 namespace rtc {
 class SSLIdentity;

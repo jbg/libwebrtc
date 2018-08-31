@@ -1,0 +1,77 @@
+# Copyright (c) 2018 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../webrtc.gni")
+if (is_android) {
+  import("//build/config/android/config.gni")
+  import("//build/config/android/rules.gni")
+}
+
+rtc_static_library("crypto") {
+  sources = [
+    "openssl.h",
+    "openssladapter.cc",
+    "openssladapter.h",
+    "opensslcertificate.cc",
+    "opensslcertificate.h",
+    "openssldigest.cc",
+    "openssldigest.h",
+    "opensslidentity.cc",
+    "opensslidentity.h",
+    "opensslsessioncache.cc",
+    "opensslsessioncache.h",
+    "opensslstreamadapter.cc",
+    "opensslstreamadapter.h",
+    "opensslutility.cc",
+    "opensslutility.h",
+    "rtccertificate.cc",
+    "rtccertificategenerator.cc",
+    "rtccertificategenerator.h",
+    "rtccertificate.h",
+    "ssladapter.cc",
+    "ssladapter.h",
+    "sslcertificate.cc",
+    "sslcertificate.h",
+    "sslfingerprint.cc",
+    "sslfingerprint.h",
+    "sslidentity.cc",
+    "sslidentity.h",
+    "sslroots.h",
+    "sslstreamadapter.cc",
+    "sslstreamadapter.h",
+  ]
+
+  deps = [
+    "..:webrtc_common",
+    "../api:array_view",
+    "../api:call_api",
+    "../logging:rtc_event_log_api",
+    "../rtc_base:checks",
+    "../rtc_base:rtc_base",
+    "../rtc_base:rtc_task_queue",
+    "../rtc_base:stringutils",
+    "../rtc_base/third_party/base64",
+    "../rtc_base/third_party/sigslot",
+    "../system_wrappers:metrics_api",
+    "//third_party/abseil-cpp/absl/memory",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+
+  if (build_with_chromium) {
+    include_dirs = [ "../../boringssl/src/include" ]
+  } else {
+    sources += [
+      "sslroots.h",
+    ]
+  }
+  if (rtc_build_ssl) {
+    deps += [ "//third_party/boringssl" ]
+  } else {
+    configs += [ ":external_ssl_library" ]
+  }
+}
