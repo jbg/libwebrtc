@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "091a6c6f_5492c971",
+        "filename": "rtc_base/cancelable_periodic_task.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-08-31T12:15:59Z",
+      "side": 1,
+      "message": "If you insist, but I don\u0027t really think this sort of defensive programming is a net win. It would be much simpler with dchecked_cast (or, if you were inclined to worrying, checked_cast). Returning an erroneous delay is a serious bug, and it would be preferable if we just exploded noisily whenever that happens.",
+      "revId": "a4c5ed67b93eb2d3daefb3279508e6cbb9931af4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
