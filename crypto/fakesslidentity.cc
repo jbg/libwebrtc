@@ -16,7 +16,7 @@
 
 #include "absl/memory/memory.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/messagedigest.h"
+#include "crypto/messagedigest.h"
 
 namespace rtc {
 

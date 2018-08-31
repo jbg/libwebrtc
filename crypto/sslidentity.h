@@ -20,7 +20,7 @@
 
 #include "rtc_base/buffer.h"
 #include "rtc_base/constructormagic.h"
-#include "rtc_base/messagedigest.h"
+#include "crypto/messagedigest.h"
 #include "crypto/sslcertificate.h"
 #include "rtc_base/timeutils.h"
 

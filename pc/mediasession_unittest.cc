@@ -23,7 +23,7 @@
 #include "rtc_base/checks.h"
 #include "crypto/fakesslidentity.h"
 #include "rtc_base/gunit.h"
-#include "rtc_base/messagedigest.h"
+#include "crypto/messagedigest.h"
 #include "crypto/ssladapter.h"
 
 #define ASSERT_CRYPTO(cd, s, cs)      \

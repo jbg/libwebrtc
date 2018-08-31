@@ -22,6 +22,8 @@ if (!rtc_build_ssl) {
 
 rtc_static_library("crypto") {
   sources = [
+    "messagedigest.cc",
+    "messagedigest.h",
     "openssl.h",
     "openssladapter.cc",
     "openssladapter.h",
@@ -111,6 +113,7 @@ rtc_source_set("crypto_unittests") {
     defines = []
 
     sources = [
+      "messagedigest_unittest.cc",
       "rtccertificate_unittest.cc",
       "rtccertificategenerator_unittest.cc",
     ]
