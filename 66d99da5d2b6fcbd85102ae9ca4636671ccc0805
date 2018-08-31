@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b728d7df_93dc742a",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-31T17:17:03Z",
+      "side": 1,
+      "message": "Actually, I forgot that these are reference counted. Why not pass them as rtc::scoped_refptr, then it\u0027s clear what the lifetime requirements are?",
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17301244_c0502d0a",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-08-31T17:17:03Z",
+      "side": 1,
+      "message": "Can just do frame_decyrptor_.get()",
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
