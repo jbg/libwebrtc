@@ -40,6 +40,7 @@
 #include "media/engine/webrtcvoiceengine.h"
 #include "modules/rtp_rtcp/include/rtp_header_parser.h"
 #include "rtc_base/arraysize.h"
+#include "rtc_base/fakeclock.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/stringutils.h"
@@ -2269,6 +2270,9 @@ class WebRtcVideoChannelTest : public WebRtcVideoEngineTest {
     return layers;
   }
 
+  // Has to be the first one, so it is initialized before the call or there is a
+  // race condition in the clock access.
+  rtc::ScopedFakeClock fake_clock_;
   std::unique_ptr<FakeCall> fake_call_;
   std::unique_ptr<VideoMediaChannel> channel_;
   cricket::VideoSendParameters send_parameters_;
@@ -3480,6 +3484,7 @@ TEST_F(WebRtcVideoChannelTest, EstimatesNtpStartTimeCorrectly) {
   // This timestamp is kInitialTimestamp (-1) + kFrameOffsetMs * 90, which
   // triggers a constant-overflow warning, hence we're calculating it explicitly
   // here.
+  fake_clock_.AdvanceTimeMicros(kFrameOffsetMs * rtc::kNumMicrosecsPerMillisec);
   video_frame.set_timestamp(kFrameOffsetMs * 90 - 1);
   video_frame.set_ntp_time_ms(kInitialNtpTimeMs + kFrameOffsetMs);
   stream->InjectFrame(video_frame);
