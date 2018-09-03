@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc5457e1_6abe1ce9",
+        "filename": "modules/audio_coding/test/iSACTest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-03T14:13:32Z",
+      "side": 1,
+      "message": "Using rtc::Thread::SleepMs might be preferable, but rtc_base/thread.h isn\u0027t listed in rtc_base_approved.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "511fdbd095c6df37747909d426aa8a2afa26b64a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
