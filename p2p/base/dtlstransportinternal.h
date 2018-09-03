@@ -97,7 +97,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
   virtual bool SetSslMaxProtocolVersion(rtc::SSLProtocolVersion version) = 0;
 
   // Expose the underneath IceTransport.
-  virtual IceTransportInternal* ice_transport() = 0;
+  virtual IceTransportInternal* ice_transport() const = 0;
 
   sigslot::signal2<DtlsTransportInternal*, DtlsTransportState> SignalDtlsState;
 

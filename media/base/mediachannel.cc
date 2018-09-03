@@ -57,6 +57,7 @@ DataMediaInfo::DataMediaInfo() = default;
 DataMediaInfo::~DataMediaInfo() = default;
 
 AudioSendParameters::AudioSendParameters() = default;
+AudioSendParameters::AudioSendParameters(const AudioSendParameters&) = default;
 AudioSendParameters::~AudioSendParameters() = default;
 
 std::map<std::string, std::string> AudioSendParameters::ToStringMap() const {
@@ -66,6 +67,7 @@ std::map<std::string, std::string> AudioSendParameters::ToStringMap() const {
 }
 
 VideoSendParameters::VideoSendParameters() = default;
+VideoSendParameters::VideoSendParameters(const VideoSendParameters&) = default;
 VideoSendParameters::~VideoSendParameters() = default;
 
 std::map<std::string, std::string> VideoSendParameters::ToStringMap() const {

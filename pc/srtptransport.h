@@ -33,7 +33,7 @@ class SrtpTransport : public RtpTransport {
  public:
   explicit SrtpTransport(bool rtcp_mux_enabled);
 
-  virtual ~SrtpTransport() = default;
+  ~SrtpTransport() override;
 
   // SrtpTransportInterface specific implementation.
   RTCError SetSrtpSendKey(const cricket::CryptoParams& params) override;

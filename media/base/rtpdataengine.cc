@@ -40,8 +40,14 @@ RtpDataEngine::RtpDataEngine() {
       DataCodec(kGoogleRtpDataCodecPlType, kGoogleRtpDataCodecName));
 }
 
+RtpDataEngine::~RtpDataEngine() = default;
+
 DataMediaChannel* RtpDataEngine::CreateChannel(const MediaConfig& config) {
   return new RtpDataMediaChannel(config);
+}
+
+const std::vector<DataCodec>& RtpDataEngine::data_codecs() {
+  return data_codecs_;
 }
 
 static const DataCodec* FindCodecByName(const std::vector<DataCodec>& codecs,
@@ -190,6 +196,16 @@ bool RtpDataMediaChannel::AddRecvStream(const StreamParams& stream) {
 
 bool RtpDataMediaChannel::RemoveRecvStream(uint32_t ssrc) {
   RemoveStreamBySsrc(&recv_streams_, ssrc);
+  return true;
+}
+
+bool RtpDataMediaChannel::SetSend(bool send) {
+  sending_ = send;
+  return true;
+}
+
+bool RtpDataMediaChannel::SetReceive(bool receive) {
+  receiving_ = receive;
   return true;
 }
 

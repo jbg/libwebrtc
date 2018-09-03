@@ -163,7 +163,7 @@ class DtlsTransport : public DtlsTransportInternal {
                             uint8_t* result,
                             size_t result_len) override;
 
-  IceTransportInternal* ice_transport() override;
+  IceTransportInternal* ice_transport() const override;
 
   // For informational purposes. Tells if the DTLS handshake has finished.
   // This may be true even if writable() is false, if the remote fingerprint

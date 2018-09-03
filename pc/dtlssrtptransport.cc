@@ -27,6 +27,8 @@ namespace webrtc {
 DtlsSrtpTransport::DtlsSrtpTransport(bool rtcp_mux_enabled)
     : SrtpTransport(rtcp_mux_enabled) {}
 
+DtlsSrtpTransport::~DtlsSrtpTransport() = default;
+
 void DtlsSrtpTransport::SetDtlsTransports(
     cricket::DtlsTransportInternal* rtp_dtls_transport,
     cricket::DtlsTransportInternal* rtcp_dtls_transport) {
@@ -101,15 +103,27 @@ void DtlsSrtpTransport::UpdateRecvEncryptedHeaderExtensionIds(
   }
 }
 
+RTCError DtlsSrtpTransport::SetSrtpSendKey(
+    const cricket::CryptoParams& params) {
+  return RTCError(RTCErrorType::UNSUPPORTED_OPERATION,
+                  "Set SRTP keys for DTLS-SRTP is not supported.");
+}
+
+RTCError DtlsSrtpTransport::SetSrtpReceiveKey(
+    const cricket::CryptoParams& params) {
+  return RTCError(RTCErrorType::UNSUPPORTED_OPERATION,
+                  "Set SRTP keys for DTLS-SRTP is not supported.");
+}
+
 bool DtlsSrtpTransport::IsDtlsActive() {
-  auto rtcp_dtls_transport =
+  auto* rtcp_dtls_transport =
       rtcp_mux_enabled() ? nullptr : rtcp_dtls_transport_;
   return (rtp_dtls_transport_ && rtp_dtls_transport_->IsDtlsActive() &&
           (!rtcp_dtls_transport || rtcp_dtls_transport->IsDtlsActive()));
 }
 
 bool DtlsSrtpTransport::IsDtlsConnected() {
-  auto rtcp_dtls_transport =
+  auto* rtcp_dtls_transport =
       rtcp_mux_enabled() ? nullptr : rtcp_dtls_transport_;
   return (rtp_dtls_transport_ &&
           rtp_dtls_transport_->dtls_state() ==
@@ -119,7 +133,7 @@ bool DtlsSrtpTransport::IsDtlsConnected() {
 }
 
 bool DtlsSrtpTransport::IsDtlsWritable() {
-  auto rtcp_packet_transport =
+  auto* rtcp_packet_transport =
       rtcp_mux_enabled() ? nullptr : rtcp_dtls_transport_;
   return rtp_dtls_transport_ && rtp_dtls_transport_->writable() &&
          (!rtcp_packet_transport || rtcp_packet_transport->writable());

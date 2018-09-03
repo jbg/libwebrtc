@@ -31,10 +31,11 @@ struct DataCodec;
 class RtpDataEngine : public DataEngineInterface {
  public:
   RtpDataEngine();
+  ~RtpDataEngine() override;
 
-  virtual DataMediaChannel* CreateChannel(const MediaConfig& config);
+  DataMediaChannel* CreateChannel(const MediaConfig& config) override;
 
-  virtual const std::vector<DataCodec>& data_codecs() { return data_codecs_; }
+  const std::vector<DataCodec>& data_codecs() override;
 
  private:
   std::vector<DataCodec> data_codecs_;
@@ -65,31 +66,25 @@ class RtpClock {
 class RtpDataMediaChannel : public DataMediaChannel {
  public:
   explicit RtpDataMediaChannel(const MediaConfig& config);
-  virtual ~RtpDataMediaChannel();
+  ~RtpDataMediaChannel() override;
 
-  virtual bool SetSendParameters(const DataSendParameters& params);
-  virtual bool SetRecvParameters(const DataRecvParameters& params);
-  virtual bool AddSendStream(const StreamParams& sp);
-  virtual bool RemoveSendStream(uint32_t ssrc);
-  virtual bool AddRecvStream(const StreamParams& sp);
-  virtual bool RemoveRecvStream(uint32_t ssrc);
-  virtual bool SetSend(bool send) {
-    sending_ = send;
-    return true;
-  }
-  virtual bool SetReceive(bool receive) {
-    receiving_ = receive;
-    return true;
-  }
-  virtual void OnPacketReceived(rtc::CopyOnWriteBuffer* packet,
-                                const rtc::PacketTime& packet_time);
-  virtual void OnRtcpReceived(rtc::CopyOnWriteBuffer* packet,
-                              const rtc::PacketTime& packet_time) {}
-  virtual void OnReadyToSend(bool ready) {}
-  virtual bool SendData(const SendDataParams& params,
-                        const rtc::CopyOnWriteBuffer& payload,
-                        SendDataResult* result);
-  virtual rtc::DiffServCodePoint PreferredDscp() const;
+  bool SetSendParameters(const DataSendParameters& params) override;
+  bool SetRecvParameters(const DataRecvParameters& params) override;
+  bool AddSendStream(const StreamParams& sp) override;
+  bool RemoveSendStream(uint32_t ssrc) override;
+  bool AddRecvStream(const StreamParams& sp) override;
+  bool RemoveRecvStream(uint32_t ssrc) override;
+  bool SetSend(bool send) override;
+  bool SetReceive(bool receive) override;
+  void OnPacketReceived(rtc::CopyOnWriteBuffer* packet,
+                        const rtc::PacketTime& packet_time) override;
+  void OnRtcpReceived(rtc::CopyOnWriteBuffer* packet,
+                      const rtc::PacketTime& packet_time) override {}
+  void OnReadyToSend(bool ready) override {}
+  bool SendData(const SendDataParams& params,
+                const rtc::CopyOnWriteBuffer& payload,
+                SendDataResult* result) override;
+  rtc::DiffServCodePoint PreferredDscp() const override;
 
  private:
   void Construct();

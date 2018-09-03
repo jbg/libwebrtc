@@ -60,6 +60,9 @@ class JsepTransportController : public sigslot::has_slots<> {
   };
 
   struct Config {
+    Config();
+    Config(const Config&);
+
     // If |redetermine_role_on_ice_restart| is true, ICE role is redetermined
     // upon setting a local transport description that indicates an ICE
     // restart.
@@ -88,7 +91,7 @@ class JsepTransportController : public sigslot::has_slots<> {
                           cricket::PortAllocator* port_allocator,
                           AsyncResolverFactory* async_resolver_factory,
                           Config config);
-  virtual ~JsepTransportController();
+  ~JsepTransportController() override;
 
   // The main method to be called; applies a description at the transport
   // level, creating/destroying transport objects as needed and updating their

@@ -22,9 +22,20 @@
 
 namespace webrtc {
 
+RtpTransport::RtpTransport(bool rtcp_mux_enabled)
+    : rtcp_mux_enabled_(rtcp_mux_enabled) {}
+
+bool RtpTransport::rtcp_mux_enabled() const {
+  return rtcp_mux_enabled_;
+}
+
 void RtpTransport::SetRtcpMuxEnabled(bool enable) {
   rtcp_mux_enabled_ = enable;
   MaybeSignalReadyToSend();
+}
+
+rtc::PacketTransportInternal* RtpTransport::rtp_packet_transport() const {
+  return rtp_packet_transport_;
 }
 
 void RtpTransport::SetRtpPacketTransport(
@@ -63,6 +74,10 @@ void RtpTransport::SetRtpPacketTransport(
                  rtp_packet_transport_ && rtp_packet_transport_->writable());
 }
 
+rtc::PacketTransportInternal* RtpTransport::rtcp_packet_transport() const {
+  return rtcp_packet_transport_;
+}
+
 void RtpTransport::SetRtcpPacketTransport(
     rtc::PacketTransportInternal* new_packet_transport) {
   if (new_packet_transport == rtcp_packet_transport_) {
@@ -99,6 +114,14 @@ void RtpTransport::SetRtcpPacketTransport(
                  rtcp_packet_transport_ && rtcp_packet_transport_->writable());
 }
 
+PacketTransportInterface* RtpTransport::GetRtpPacketTransport() const {
+  return rtp_packet_transport_;
+}
+
+PacketTransportInterface* RtpTransport::GetRtcpPacketTransport() const {
+  return rtcp_packet_transport_;
+}
+
 bool RtpTransport::IsWritable(bool rtcp) const {
   rtc::PacketTransportInternal* transport = rtcp && !rtcp_mux_enabled_
                                                 ? rtcp_packet_transport_
@@ -116,6 +139,10 @@ bool RtpTransport::SendRtcpPacket(rtc::CopyOnWriteBuffer* packet,
                                   const rtc::PacketOptions& options,
                                   int flags) {
   return SendPacket(true, packet, options, flags);
+}
+
+bool RtpTransport::IsSrtpActive() const {
+  return false;
 }
 
 bool RtpTransport::SendPacket(bool rtcp,
@@ -186,6 +213,10 @@ RtpTransportParameters RtpTransport::GetParameters() const {
   return parameters_;
 }
 
+bool RtpTransport::IsReadyToSend() const {
+  return ready_to_send_;
+}
+
 void RtpTransport::DemuxPacket(rtc::CopyOnWriteBuffer* packet,
                                const rtc::PacketTime& time) {
   webrtc::RtpPacketReceived parsed_packet(&header_extension_map_);
@@ -206,10 +237,20 @@ RtpTransportAdapter* RtpTransport::GetInternal() {
 }
 
 bool RtpTransport::IsTransportWritable() {
-  auto rtcp_packet_transport =
+  auto* rtcp_packet_transport =
       rtcp_mux_enabled_ ? nullptr : rtcp_packet_transport_;
   return rtp_packet_transport_ && rtp_packet_transport_->writable() &&
          (!rtcp_packet_transport || rtcp_packet_transport->writable());
+}
+
+RTCError RtpTransport::SetSrtpSendKey(const cricket::CryptoParams& params) {
+  RTC_NOTREACHED();
+  return RTCError::OK();
+}
+
+RTCError RtpTransport::SetSrtpReceiveKey(const cricket::CryptoParams& params) {
+  RTC_NOTREACHED();
+  return RTCError::OK();
 }
 
 void RtpTransport::OnReadyToSend(rtc::PacketTransportInternal* transport) {

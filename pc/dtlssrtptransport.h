@@ -27,6 +27,7 @@ namespace webrtc {
 class DtlsSrtpTransport : public SrtpTransport {
  public:
   explicit DtlsSrtpTransport(bool rtcp_mux_enabled);
+  ~DtlsSrtpTransport() override;
 
   // Set P2P layer RTP/RTCP DtlsTransports. When using RTCP-muxing,
   // |rtcp_dtls_transport| is null.
@@ -44,14 +45,9 @@ class DtlsSrtpTransport : public SrtpTransport {
 
   sigslot::signal2<DtlsSrtpTransport*, bool> SignalDtlsSrtpSetupFailure;
 
-  RTCError SetSrtpSendKey(const cricket::CryptoParams& params) override {
-    return RTCError(RTCErrorType::UNSUPPORTED_OPERATION,
-                    "Set SRTP keys for DTLS-SRTP is not supported.");
-  }
-  RTCError SetSrtpReceiveKey(const cricket::CryptoParams& params) override {
-    return RTCError(RTCErrorType::UNSUPPORTED_OPERATION,
-                    "Set SRTP keys for DTLS-SRTP is not supported.");
-  }
+  RTCError SetSrtpSendKey(const cricket::CryptoParams& params) override;
+
+  RTCError SetSrtpReceiveKey(const cricket::CryptoParams& params) override;
 
   // If |active_reset_srtp_params_| is set to be true, the SRTP parameters will
   // be reset whenever the DtlsTransports are reset.

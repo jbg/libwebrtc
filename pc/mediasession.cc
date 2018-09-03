@@ -1183,6 +1183,28 @@ static bool IsDtlsActive(const ContentInfo* content,
       .description.secure();
 }
 
+SenderOptions::SenderOptions() = default;
+
+SenderOptions::SenderOptions(std::string track_id,
+                             std::vector<std::string> stream_ids,
+                             int num_sim_layers)
+    : track_id(track_id),
+      stream_ids(stream_ids),
+      num_sim_layers(num_sim_layers) {}
+
+SenderOptions::SenderOptions(const SenderOptions&) = default;
+
+SenderOptions::~SenderOptions() = default;
+
+MediaDescriptionOptions::MediaDescriptionOptions(
+    MediaType type,
+    const std::string& mid,
+    webrtc::RtpTransceiverDirection direction,
+    bool stopped)
+    : type(type), mid(mid), direction(direction), stopped(stopped) {}
+
+MediaDescriptionOptions::~MediaDescriptionOptions() = default;
+
 void MediaDescriptionOptions::AddAudioSender(
     const std::string& track_id,
     const std::vector<std::string>& stream_ids) {
@@ -1215,6 +1237,10 @@ void MediaDescriptionOptions::AddSenderInternal(
   sender_options.push_back(SenderOptions{track_id, stream_ids, num_sim_layers});
 }
 
+MediaSessionOptions::MediaSessionOptions() = default;
+
+MediaSessionOptions::~MediaSessionOptions() = default;
+
 bool MediaSessionOptions::HasMediaDescription(MediaType type) const {
   return std::find_if(media_description_options.begin(),
                       media_description_options.end(),
@@ -1239,6 +1265,8 @@ MediaSessionDescriptionFactory::MediaSessionDescriptionFactory(
   channel_manager->GetSupportedDataCodecs(&data_codecs_);
   ComputeAudioCodecsIntersectionAndUnion();
 }
+
+MediaSessionDescriptionFactory::~MediaSessionDescriptionFactory() = default;
 
 const AudioCodecs& MediaSessionDescriptionFactory::audio_sendrecv_codecs()
     const {

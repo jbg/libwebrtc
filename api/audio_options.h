@@ -23,6 +23,7 @@ namespace cricket {
 // but some things currently still use flags.
 struct AudioOptions {
   AudioOptions();
+  AudioOptions(const AudioOptions&);
   ~AudioOptions();
   void SetAll(const AudioOptions& change);
 

@@ -29,7 +29,7 @@ namespace webrtc {
 // https://msdn.microsoft.com/en-us/library/mt502527(v=vs.85).aspx
 class SrtpTransportInterface : public RtpTransportInterface {
  public:
-  virtual ~SrtpTransportInterface() {}
+  ~SrtpTransportInterface() override {}
 
   // There are some limitations of the current implementation:
   //  1. Send and receive keys must use the same crypto suite.

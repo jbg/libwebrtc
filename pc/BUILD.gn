@@ -49,6 +49,7 @@ rtc_static_library("rtc_pc_base") {
     "rtpmediautils.h",
     "rtptransport.cc",
     "rtptransport.h",
+    "rtptransportinternal.cc",
     "rtptransportinternal.h",
     "rtptransportinternaladapter.h",
     "sessiondescription.cc",
@@ -95,11 +96,6 @@ rtc_static_library("rtc_pc_base") {
   }
 
   public_configs = [ ":rtc_pc_config" ]
-
-  if (!build_with_chromium && is_clang) {
-    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-    suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-  }
 }
 
 rtc_source_set("rtc_pc") {
@@ -301,11 +297,6 @@ if (rtc_include_tests) {
 
     include_dirs = [ "//third_party/libsrtp/srtp" ]
 
-    if (!build_with_chromium && is_clang) {
-      # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-      suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-    }
-
     if (is_win) {
       libs = [ "strmiids.lib" ]
     }
@@ -371,10 +362,6 @@ if (rtc_include_tests) {
       "../test:test_support",
       "//third_party/abseil-cpp/absl/memory",
     ]
-    if (!build_with_chromium && is_clang) {
-      # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-      suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-    }
   }
 
   rtc_source_set("pc_test_utils") {
@@ -432,11 +419,6 @@ if (rtc_include_tests) {
       "../test:video_test_common",
       "//third_party/abseil-cpp/absl/memory",
     ]
-
-    if (!build_with_chromium && is_clang) {
-      # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-      suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
-    }
   }
 
   rtc_test("peerconnection_unittests") {
@@ -483,11 +465,6 @@ if (rtc_include_tests) {
 
     if (rtc_enable_sctp) {
       defines = [ "HAVE_SCTP" ]
-    }
-
-    if (!build_with_chromium && is_clang) {
-      # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
-      suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
     }
 
     deps = [

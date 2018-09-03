@@ -34,6 +34,13 @@ const char kDefaultRtcpCname[] = "DefaultRtcpCname";
 
 // Options for an RtpSender contained with an media description/"m=" section.
 struct SenderOptions {
+  SenderOptions();
+  explicit SenderOptions(std::string track_id,
+                         std::vector<std::string> stream_ids,
+                         int num_sim_layers);
+  SenderOptions(const SenderOptions&);
+  ~SenderOptions();
+
   std::string track_id;
   std::vector<std::string> stream_ids;
   int num_sim_layers;
@@ -44,8 +51,9 @@ struct MediaDescriptionOptions {
   MediaDescriptionOptions(MediaType type,
                           const std::string& mid,
                           webrtc::RtpTransceiverDirection direction,
-                          bool stopped)
-      : type(type), mid(mid), direction(direction), stopped(stopped) {}
+                          bool stopped);
+
+  ~MediaDescriptionOptions();
 
   // TODO(deadbeef): When we don't support Plan B, there will only be one
   // sender per media description and this can be simplified.
@@ -80,7 +88,8 @@ struct MediaDescriptionOptions {
 // must be an option for each existing section if creating an answer, or a
 // subsequent offer.
 struct MediaSessionOptions {
-  MediaSessionOptions() {}
+  MediaSessionOptions();
+  ~MediaSessionOptions();
 
   bool has_audio() const { return HasMediaDescription(MEDIA_TYPE_AUDIO); }
   bool has_video() const { return HasMediaDescription(MEDIA_TYPE_VIDEO); }
@@ -115,6 +124,8 @@ class MediaSessionDescriptionFactory {
   // from the specified ChannelManager.
   MediaSessionDescriptionFactory(ChannelManager* cmanager,
                                  const TransportDescriptionFactory* factory);
+
+  ~MediaSessionDescriptionFactory();
 
   const AudioCodecs& audio_sendrecv_codecs() const;
   const AudioCodecs& audio_send_codecs() const;

@@ -336,6 +336,7 @@ rtc_static_library("rtc_data") {
     sources = [
       "sctp/sctptransport.cc",
       "sctp/sctptransport.h",
+      "sctp/sctptransportinternal.cc",
       "sctp/sctptransportinternal.h",
     ]
   } else {

@@ -17,12 +17,12 @@ namespace cricket {
 
 // Parameters for SRTP negotiation, as described in RFC 4568.
 struct CryptoParams {
-  CryptoParams() : tag(0) {}
+  CryptoParams();
   CryptoParams(int t,
                const std::string& cs,
                const std::string& kp,
-               const std::string& sp)
-      : tag(t), cipher_suite(cs), key_params(kp), session_params(sp) {}
+               const std::string& sp);
+  CryptoParams(const CryptoParams&);
 
   bool Matches(const CryptoParams& params) const {
     return (tag == params.tag && cipher_suite == params.cipher_suite);

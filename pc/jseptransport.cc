@@ -263,7 +263,7 @@ webrtc::RTCError JsepTransport::AddRemoteCandidates(
   }
 
   for (const cricket::Candidate& candidate : candidates) {
-    auto transport =
+    auto* transport =
         candidate.component() == cricket::ICE_CANDIDATE_COMPONENT_RTP
             ? rtp_dtls_transport_.get()
             : rtcp_dtls_transport_.get();
@@ -405,7 +405,7 @@ bool JsepTransport::SetRtcpMux(bool enable,
     return false;
   }
 
-  auto transport = rtp_transport();
+  auto* transport = rtp_transport();
   transport->SetRtcpMuxEnabled(rtcp_mux_negotiator_.IsActive());
   return ret;
 }

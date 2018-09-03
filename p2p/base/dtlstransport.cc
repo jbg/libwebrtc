@@ -430,7 +430,7 @@ int DtlsTransport::SendPacket(const char* data,
   }
 }
 
-IceTransportInternal* DtlsTransport::ice_transport() {
+IceTransportInternal* DtlsTransport::ice_transport() const {
   return ice_transport_;
 }
 

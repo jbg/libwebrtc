@@ -13,6 +13,91 @@
 #include <utility>
 
 namespace cricket {
+
+MediaContentDescription::MediaContentDescription() = default;
+
+MediaContentDescription::MediaContentDescription(
+    const MediaContentDescription&) = default;
+
+MediaContentDescription::~MediaContentDescription() = default;
+
+AudioContentDescription* MediaContentDescription::as_audio() {
+  return nullptr;
+}
+
+const AudioContentDescription* MediaContentDescription::as_audio() const {
+  return nullptr;
+}
+
+VideoContentDescription* MediaContentDescription::as_video() {
+  return nullptr;
+}
+
+const VideoContentDescription* MediaContentDescription::as_video() const {
+  return nullptr;
+}
+
+DataContentDescription* MediaContentDescription::as_data() {
+  return nullptr;
+}
+
+const DataContentDescription* MediaContentDescription::as_data() const {
+  return nullptr;
+}
+
+AudioContentDescription* AudioContentDescription::Copy() const {
+  return new AudioContentDescription(*this);
+}
+
+MediaType AudioContentDescription::type() const {
+  return MEDIA_TYPE_AUDIO;
+}
+
+AudioContentDescription* AudioContentDescription::as_audio() {
+  return this;
+}
+
+const AudioContentDescription* AudioContentDescription::as_audio() const {
+  return this;
+}
+
+VideoContentDescription* VideoContentDescription::Copy() const {
+  return new VideoContentDescription(*this);
+}
+
+MediaType VideoContentDescription::type() const {
+  return MEDIA_TYPE_VIDEO;
+}
+
+VideoContentDescription* VideoContentDescription::as_video() {
+  return this;
+}
+
+const VideoContentDescription* VideoContentDescription::as_video() const {
+  return this;
+}
+
+DataContentDescription::DataContentDescription() = default;
+
+DataContentDescription::DataContentDescription(const DataContentDescription&) =
+    default;
+
+DataContentDescription* DataContentDescription::Copy() const {
+  return new DataContentDescription(*this);
+}
+
+MediaType DataContentDescription::type() const {
+  return MEDIA_TYPE_DATA;
+}
+
+DataContentDescription* DataContentDescription::as_data() {
+  return this;
+}
+
+const DataContentDescription* DataContentDescription::as_data() const {
+  return this;
+}
+
 namespace {
 
 ContentInfo* FindContentInfoByName(ContentInfos* contents,

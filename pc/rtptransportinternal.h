@@ -36,6 +36,9 @@ namespace webrtc {
 class RtpTransportInternal : public SrtpTransportInterface,
                              public sigslot::has_slots<> {
  public:
+  RtpTransportInternal();
+  ~RtpTransportInternal() override;
+
   virtual void SetRtcpMuxEnabled(bool enable) = 0;
 
   // TODO(zstein): Remove PacketTransport setters. Clients should pass these

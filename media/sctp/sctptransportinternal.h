@@ -52,7 +52,8 @@ const int kSctpDefaultPort = 5000;
 // Exists to allow mock/fake SctpTransports to be created.
 class SctpTransportInternal {
  public:
-  virtual ~SctpTransportInternal() {}
+  SctpTransportInternal();
+  virtual ~SctpTransportInternal();
 
   // Changes what underlying DTLS transport is uses. Used when switching which
   // bundled transport the SctpTransport uses.

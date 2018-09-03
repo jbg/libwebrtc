@@ -2226,6 +2226,21 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
   it->second->SetRawAudioSink(std::move(sink));
 }
 
+bool WebRtcVoiceMediaChannel::SendRtp(const uint8_t* data,
+                                      size_t len,
+                                      const webrtc::PacketOptions& options) {
+  rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
+  rtc::PacketOptions rtc_options;
+  rtc_options.packet_id = options.packet_id;
+  return VoiceMediaChannel::SendPacket(&packet, rtc_options);
+}
+
+bool WebRtcVoiceMediaChannel::SendRtcp(const uint8_t* data, size_t len) {
+  rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
+  rtc::PacketOptions rtc_options;
+  return VoiceMediaChannel::SendRtcp(&packet, rtc_options);
+}
+
 std::vector<webrtc::RtpSource> WebRtcVoiceMediaChannel::GetSources(
     uint32_t ssrc) const {
   auto it = recv_streams_.find(ssrc);

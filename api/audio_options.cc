@@ -34,6 +34,7 @@ void SetFrom(absl::optional<T>* s, const absl::optional<T>& o) {
 }  // namespace
 
 AudioOptions::AudioOptions() = default;
+AudioOptions::AudioOptions(const AudioOptions&) = default;
 AudioOptions::~AudioOptions() = default;
 
 void AudioOptions::SetAll(const AudioOptions& change) {

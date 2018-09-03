@@ -640,6 +640,7 @@ struct RtpSendParameters : RtpParameters<Codec> {
 
 struct AudioSendParameters : RtpSendParameters<AudioCodec> {
   AudioSendParameters();
+  AudioSendParameters(const AudioSendParameters&);
   ~AudioSendParameters() override;
   AudioOptions options;
 
@@ -703,6 +704,7 @@ class VoiceMediaChannel : public MediaChannel {
 // encapsulate all the parameters needed for a video RtpSender.
 struct VideoSendParameters : RtpSendParameters<VideoCodec> {
   VideoSendParameters();
+  VideoSendParameters(const VideoSendParameters&);
   ~VideoSendParameters() override;
   // Use conference mode? This flag comes from the remote
   // description's SDP line 'a=x-google-flag:conference', copied over

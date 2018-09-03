@@ -447,6 +447,10 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
   OnPacketReceived(/*rtcp=*/false, parsed_packet.Buffer(), packet_time);
 }
 
+MediaChannel* BaseChannel::media_channel() const {
+  return media_channel_.get();
+}
+
 void BaseChannel::UpdateRtpHeaderExtensionMap(
     const RtpHeaderExtensions& header_extensions) {
   RTC_DCHECK(rtp_transport_);
@@ -757,6 +761,10 @@ VoiceChannel::~VoiceChannel() {
   Deinit();
 }
 
+VoiceMediaChannel* VoiceChannel::media_channel() const {
+  return static_cast<VoiceMediaChannel*>(BaseChannel::media_channel());
+}
+
 void BaseChannel::UpdateMediaSendRecvState() {
   RTC_DCHECK(network_thread_->IsCurrent());
   invoker_.AsyncInvoke<void>(
@@ -874,6 +882,10 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
   return true;
 }
 
+cricket::MediaType VoiceChannel::media_type() {
+  return cricket::MEDIA_TYPE_AUDIO;
+}
+
 VideoChannel::VideoChannel(rtc::Thread* worker_thread,
                            rtc::Thread* network_thread,
                            rtc::Thread* signaling_thread,
@@ -908,9 +920,17 @@ void VideoChannel::UpdateMediaSendRecvState_w() {
   RTC_LOG(LS_INFO) << "Changing video state, send=" << send;
 }
 
+VideoMediaChannel* VideoChannel::media_channel() const {
+  return static_cast<VideoMediaChannel*>(BaseChannel::media_channel());
+}
+
 void VideoChannel::FillBitrateInfo(BandwidthEstimationInfo* bwe_info) {
   InvokeOnWorker<void>(RTC_FROM_HERE, Bind(&VideoMediaChannel::FillBitrateInfo,
                                            media_channel(), bwe_info));
+}
+
+cricket::MediaType VideoChannel::media_type() {
+  return cricket::MEDIA_TYPE_VIDEO;
 }
 
 bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
@@ -1048,6 +1068,14 @@ bool RtpDataChannel::SendData(const SendDataParams& params,
   return InvokeOnWorker<bool>(
       RTC_FROM_HERE, Bind(&DataMediaChannel::SendData, media_channel(), params,
                           payload, result));
+}
+
+cricket::MediaType RtpDataChannel::media_type() {
+  return cricket::MEDIA_TYPE_DATA;
+}
+
+DataMediaChannel* RtpDataChannel::media_channel() const {
+  return static_cast<DataMediaChannel*>(BaseChannel::media_channel());
 }
 
 bool RtpDataChannel::CheckDataChannelTypeFromContent(

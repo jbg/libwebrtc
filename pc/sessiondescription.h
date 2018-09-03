@@ -56,25 +56,26 @@ class DataContentDescription;
 // media type (audio, video, data) that will have additional information.
 class MediaContentDescription {
  public:
-  MediaContentDescription() = default;
-  virtual ~MediaContentDescription() = default;
+  MediaContentDescription();
+  MediaContentDescription(const MediaContentDescription&);
+  virtual ~MediaContentDescription();
 
   virtual MediaType type() const = 0;
 
   // Try to cast this media description to an AudioContentDescription. Returns
   // nullptr if the cast fails.
-  virtual AudioContentDescription* as_audio() { return nullptr; }
-  virtual const AudioContentDescription* as_audio() const { return nullptr; }
+  virtual AudioContentDescription* as_audio();
+  virtual const AudioContentDescription* as_audio() const;
 
   // Try to cast this media description to a VideoContentDescription. Returns
   // nullptr if the cast fails.
-  virtual VideoContentDescription* as_video() { return nullptr; }
-  virtual const VideoContentDescription* as_video() const { return nullptr; }
+  virtual VideoContentDescription* as_video();
+  virtual const VideoContentDescription* as_video() const;
 
   // Try to cast this media description to a DataContentDescription. Returns
   // nullptr if the cast fails.
-  virtual DataContentDescription* as_data() { return nullptr; }
-  virtual const DataContentDescription* as_data() const { return nullptr; }
+  virtual DataContentDescription* as_data();
+  virtual const DataContentDescription* as_data() const;
 
   virtual bool has_codecs() const = 0;
 
@@ -248,34 +249,29 @@ class AudioContentDescription : public MediaContentDescriptionImpl<AudioCodec> {
  public:
   AudioContentDescription() {}
 
-  virtual AudioContentDescription* Copy() const {
-    return new AudioContentDescription(*this);
-  }
-  virtual MediaType type() const { return MEDIA_TYPE_AUDIO; }
-  virtual AudioContentDescription* as_audio() { return this; }
-  virtual const AudioContentDescription* as_audio() const { return this; }
+  AudioContentDescription* Copy() const override;
+  MediaType type() const override;
+  AudioContentDescription* as_audio() override;
+  const AudioContentDescription* as_audio() const override;
 };
 
 class VideoContentDescription : public MediaContentDescriptionImpl<VideoCodec> {
  public:
-  virtual VideoContentDescription* Copy() const {
-    return new VideoContentDescription(*this);
-  }
-  virtual MediaType type() const { return MEDIA_TYPE_VIDEO; }
-  virtual VideoContentDescription* as_video() { return this; }
-  virtual const VideoContentDescription* as_video() const { return this; }
+  VideoContentDescription* Copy() const override;
+  MediaType type() const override;
+  VideoContentDescription* as_video() override;
+  const VideoContentDescription* as_video() const override;
 };
 
 class DataContentDescription : public MediaContentDescriptionImpl<DataCodec> {
  public:
-  DataContentDescription() {}
+  DataContentDescription();
+  DataContentDescription(const DataContentDescription&);
 
-  virtual DataContentDescription* Copy() const {
-    return new DataContentDescription(*this);
-  }
-  virtual MediaType type() const { return MEDIA_TYPE_DATA; }
-  virtual DataContentDescription* as_data() { return this; }
-  virtual const DataContentDescription* as_data() const { return this; }
+  DataContentDescription* Copy() const override;
+  MediaType type() const override;
+  DataContentDescription* as_data() override;
+  const DataContentDescription* as_data() const override;
 
   bool use_sctpmap() const { return use_sctpmap_; }
   void set_use_sctpmap(bool enable) { use_sctpmap_ = enable; }

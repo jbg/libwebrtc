@@ -29,6 +29,8 @@ namespace webrtc {
 SrtpTransport::SrtpTransport(bool rtcp_mux_enabled)
     : RtpTransport(rtcp_mux_enabled) {}
 
+SrtpTransport::~SrtpTransport() = default;
+
 RTCError SrtpTransport::SetSrtpSendKey(const cricket::CryptoParams& params) {
   if (send_params_) {
     LOG_AND_RETURN_ERROR(
