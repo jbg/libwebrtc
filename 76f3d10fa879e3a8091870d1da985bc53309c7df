@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa2bf64d_4aad78a5",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-09-04T16:35:33Z",
+      "side": 1,
+      "message": "nit: update |time_ms| in the if block above and then remove this line.",
+      "revId": "76f3d10fa879e3a8091870d1da985bc53309c7df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
