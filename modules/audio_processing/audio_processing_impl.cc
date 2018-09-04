@@ -1311,7 +1311,8 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
         capture_buffer->num_frames_per_band(), capture_nonlocked_.split_rate);
   }
   RETURN_ON_ERR(public_submodules_->gain_control->ProcessCaptureAudio(
-      capture_buffer, echo_cancellation()->stream_has_echo()));
+      capture_buffer,
+      public_submodules_->echo_cancellation->stream_has_echo()));
 
   if (submodule_states_.CaptureMultiBandProcessingActive() &&
       SampleRateSupportsMultiBand(
@@ -1865,15 +1866,15 @@ void AudioProcessingImpl::InitializePreProcessor() {
 void AudioProcessingImpl::MaybeUpdateHistograms() {
   static const int kMinDiffDelayMs = 60;
 
-  if (echo_cancellation()->is_enabled()) {
+  if (public_submodules_->echo_cancellation->is_enabled()) {
     // Activate delay_jumps_ counters if we know echo_cancellation is running.
     // If a stream has echo we know that the echo_cancellation is in process.
     if (capture_.stream_delay_jumps == -1 &&
-        echo_cancellation()->stream_has_echo()) {
+        public_submodules_->echo_cancellation->stream_has_echo()) {
       capture_.stream_delay_jumps = 0;
     }
     if (capture_.aec_system_delay_jumps == -1 &&
-        echo_cancellation()->stream_has_echo()) {
+        public_submodules_->echo_cancellation->stream_has_echo()) {
       capture_.aec_system_delay_jumps = 0;
     }
 

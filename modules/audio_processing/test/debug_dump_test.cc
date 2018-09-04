@@ -349,12 +349,14 @@ TEST_F(DebugDumpTest, ChangeOutputFormat) {
 
 TEST_F(DebugDumpTest, ToggleAec) {
   Config config;
-  DebugDumpGenerator generator(config, AudioProcessing::Config());
+  AudioProcessing::Config apm_config;
+  DebugDumpGenerator generator(config, apm_config);
   generator.StartRecording();
   generator.Process(100);
 
-  EchoCancellation* aec = generator.apm()->echo_cancellation();
-  EXPECT_EQ(AudioProcessing::kNoError, aec->Enable(!aec->is_enabled()));
+  apm_config.echo_canceller.enabled = true;
+  apm_config.echo_canceller.enabled = false;
+  generator.apm()->ApplyConfig(apm_config);
 
   generator.Process(100);
   generator.StopRecording();
@@ -364,12 +366,14 @@ TEST_F(DebugDumpTest, ToggleAec) {
 TEST_F(DebugDumpTest, ToggleDelayAgnosticAec) {
   Config config;
   config.Set<DelayAgnostic>(new DelayAgnostic(true));
-  DebugDumpGenerator generator(config, AudioProcessing::Config());
+  AudioProcessing::Config apm_config;
+  DebugDumpGenerator generator(config, apm_config);
   generator.StartRecording();
   generator.Process(100);
 
-  EchoCancellation* aec = generator.apm()->echo_cancellation();
-  EXPECT_EQ(AudioProcessing::kNoError, aec->Enable(!aec->is_enabled()));
+  apm_config.echo_canceller.enabled = true;
+  apm_config.echo_canceller.enabled = false;
+  generator.apm()->ApplyConfig(apm_config);
 
   generator.Process(100);
   generator.StopRecording();
@@ -533,16 +537,16 @@ TEST_F(DebugDumpTest, VerifyEmptyExperimentalString) {
 
 TEST_F(DebugDumpTest, ToggleAecLevel) {
   Config config;
-  DebugDumpGenerator generator(config, AudioProcessing::Config());
-  EchoCancellation* aec = generator.apm()->echo_cancellation();
-  EXPECT_EQ(AudioProcessing::kNoError, aec->Enable(true));
-  EXPECT_EQ(AudioProcessing::kNoError,
-            aec->set_suppression_level(EchoCancellation::kLowSuppression));
+  AudioProcessing::Config apm_config;
+  apm_config.echo_canceller.enabled = true;
+  apm_config.echo_canceller.mobile_mode = false;
+  apm_config.echo_canceller.legacy_moderate_suppression_level = true;
+  DebugDumpGenerator generator(config, apm_config);
   generator.StartRecording();
   generator.Process(100);
 
-  EXPECT_EQ(AudioProcessing::kNoError,
-            aec->set_suppression_level(EchoCancellation::kHighSuppression));
+  apm_config.echo_canceller.legacy_moderate_suppression_level = false;
+  generator.apm()->ApplyConfig(apm_config);
   generator.Process(100);
   generator.StopRecording();
   VerifyDebugDump(generator.dump_file_name());
