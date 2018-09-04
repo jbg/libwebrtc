@@ -16,6 +16,24 @@
       "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4390b3fe_7498ed13",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-09-04T08:45:37Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be a problem, because the sender RTP clock is derived from the sender wall clock. \nThis means that different clocks are already mixed even before the call here.\n\nOn the other hand, the JS client reading GetStats doesn\u0027t have a direct access to the RTP clock. I\u0027ve already seen it and I think most of the clients are using local time to calculate end-to-end delay. This means that if we use the local time, it will be added here and subtracted by the client and the result will be correct. On the other hand, if RTP timestamps are not well-behaving (there are jumps in them), the result on the client will always have that jump offsetting the result. After this change, the result will be correct eventually.",
+      "parentUuid": "1437265f_f33d5070",
+      "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
