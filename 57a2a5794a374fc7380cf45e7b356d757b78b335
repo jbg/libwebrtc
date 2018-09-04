@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1437265f_f33d5070",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-04T08:07:58Z",
+      "side": 1,
+      "message": "IIUC, with this change, the above calculation now mixes different clocks: local clock and the sender\u0027s. If the clocks are not exactly the same rate (likely), estimated_remote_start_ntp_time_ms_ will be less and less accurate over time.",
+      "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
