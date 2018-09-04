@@ -416,7 +416,26 @@ NetworkControlUpdate GoogCcNetworkController::OnTransportPacketsFeedback(
     update.probe_cluster_configs.insert(update.probe_cluster_configs.end(),
                                         probes.begin(), probes.end());
   }
-  update.congestion_window = MaybeUpdateCongestionWindow();
+
+  // No valid RTT could be because send-side BWE isn't used, in which case
+  // we don't try to limit the outstanding packets.
+  if (in_cwnd_experiment_ && min_feedback_max_rtt_ms_) {
+    const DataSize kMinCwnd = DataSize::bytes(2 * 1500);
+    TimeDelta time_window =
+        TimeDelta::ms(*min_feedback_max_rtt_ms_ + accepted_queue_ms_);
+    DataSize data_window = last_bandwidth_ * time_window;
+    if (current_data_window_) {
+      data_window =
+          std::max(kMinCwnd, (data_window + current_data_window_.value()) / 2);
+    } else {
+      data_window = std::max(kMinCwnd, data_window);
+    }
+    current_data_window_ = data_window;
+    update.congestion_window = current_data_window_;
+    RTC_LOG(LS_INFO) << "Feedback rtt: " << *min_feedback_max_rtt_ms_
+                     << " Bitrate: " << last_bandwidth_.bps();
+  }
+
   return update;
 }
 
@@ -440,30 +459,6 @@ NetworkControlUpdate GoogCcNetworkController::GetNetworkState(
   return update;
 }
 
-absl::optional<DataSize>
-GoogCcNetworkController::MaybeUpdateCongestionWindow() {
-  if (!in_cwnd_experiment_)
-    return absl::nullopt;
-  // No valid RTT. Could be because send-side BWE isn't used, in which case
-  // we don't try to limit the outstanding packets.
-  if (!min_feedback_max_rtt_ms_)
-    return absl::nullopt;
-
-  const DataSize kMinCwnd = DataSize::bytes(2 * 1500);
-  TimeDelta time_window =
-      TimeDelta::ms(*min_feedback_max_rtt_ms_ + accepted_queue_ms_);
-  DataSize data_window = last_bandwidth_ * time_window;
-  if (current_data_window_) {
-    data_window =
-        std::max(kMinCwnd, (data_window + current_data_window_.value()) / 2);
-  } else {
-    data_window = std::max(kMinCwnd, data_window);
-  }
-  current_data_window_ = data_window;
-  RTC_LOG(LS_INFO) << "Feedback rtt: " << *min_feedback_max_rtt_ms_
-                   << " Bitrate: " << last_bandwidth_.bps();
-  return data_window;
-}
 
 void GoogCcNetworkController::MaybeTriggerOnNetworkChanged(
     NetworkControlUpdate* update,
@@ -471,10 +466,25 @@ void GoogCcNetworkController::MaybeTriggerOnNetworkChanged(
   int32_t estimated_bitrate_bps;
   uint8_t fraction_loss;
   int64_t rtt_ms;
+  bandwidth_estimation_->CurrentEstimate(&estimated_bitrate_bps, &fraction_loss,
+                                         &rtt_ms);
 
-  bool estimate_changed = GetNetworkParameters(
-      &estimated_bitrate_bps, &fraction_loss, &rtt_ms, at_time);
-  if (estimate_changed) {
+  estimated_bitrate_bps = std::max<int32_t>(
+      estimated_bitrate_bps, bandwidth_estimation_->GetMinBitrate());
+
+  BWE_TEST_LOGGING_PLOT(1, "fraction_loss_%", at_time.ms(),
+                        (fraction_loss * 100) / 256);
+  BWE_TEST_LOGGING_PLOT(1, "rtt_ms", at_time.ms(), rtt_ms);
+  BWE_TEST_LOGGING_PLOT(1, "Target_bitrate_kbps", at_time.ms(),
+                        estimated_bitrate_bps / 1000);
+
+  if ((estimated_bitrate_bps != last_estimated_bitrate_bps_) ||
+      (fraction_loss != last_estimated_fraction_loss_) ||
+      (rtt_ms != last_estimated_rtt_ms_)) {
+    last_estimated_bitrate_bps_ = estimated_bitrate_bps;
+    last_estimated_fraction_loss_ = fraction_loss;
+    last_estimated_rtt_ms_ = rtt_ms;
+
     alr_detector_->SetEstimatedBitrate(estimated_bitrate_bps);
 
     DataRate bandwidth = DataRate::bps(estimated_bitrate_bps);
@@ -502,35 +512,6 @@ void GoogCcNetworkController::MaybeTriggerOnNetworkChanged(
                                          probes.begin(), probes.end());
     update->pacer_config = GetPacingRates(at_time);
   }
-}
-
-bool GoogCcNetworkController::GetNetworkParameters(
-    int32_t* estimated_bitrate_bps,
-    uint8_t* fraction_loss,
-    int64_t* rtt_ms,
-    Timestamp at_time) {
-  bandwidth_estimation_->CurrentEstimate(estimated_bitrate_bps, fraction_loss,
-                                         rtt_ms);
-  *estimated_bitrate_bps = std::max<int32_t>(
-      *estimated_bitrate_bps, bandwidth_estimation_->GetMinBitrate());
-
-  bool estimate_changed = false;
-  if ((*estimated_bitrate_bps != last_estimated_bitrate_bps_) ||
-      (*fraction_loss != last_estimated_fraction_loss_) ||
-      (*rtt_ms != last_estimated_rtt_ms_)) {
-    last_estimated_bitrate_bps_ = *estimated_bitrate_bps;
-    last_estimated_fraction_loss_ = *fraction_loss;
-    last_estimated_rtt_ms_ = *rtt_ms;
-    estimate_changed = true;
-  }
-
-  BWE_TEST_LOGGING_PLOT(1, "fraction_loss_%", at_time.ms(),
-                        (*fraction_loss * 100) / 256);
-  BWE_TEST_LOGGING_PLOT(1, "rtt_ms", at_time.ms(), *rtt_ms);
-  BWE_TEST_LOGGING_PLOT(1, "Target_bitrate_kbps", at_time.ms(),
-                        *estimated_bitrate_bps / 1000);
-
-  return estimate_changed;
 }
 
 PacerConfig GoogCcNetworkController::GetPacingRates(Timestamp at_time) const {
