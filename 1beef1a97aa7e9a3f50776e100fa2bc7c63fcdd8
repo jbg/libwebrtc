@@ -16,6 +16,24 @@
       "revId": "1beef1a97aa7e9a3f50776e100fa2bc7c63fcdd8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "238e8308_3f716512",
+        "filename": "media/engine/convert_legacy_video_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-04T10:56:44Z",
+      "side": 0,
+      "message": "Yes exactly. You added them for the old Android codecs, but I later changed the behavior that you get SW codecs automatically, so I removed the usage again.",
+      "parentUuid": "22f08718_a66751b4",
+      "revId": "1beef1a97aa7e9a3f50776e100fa2bc7c63fcdd8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
