@@ -110,6 +110,14 @@ SOURCES_RE = re.compile(r'sources \+?= \[(?P<sources>.*?)\]',
 FILE_PATH_RE = re.compile(r'"(?P<file_path>(\w|\/)+)(?P<extension>\.\w+)"')
 
 
+def FindSrcDirPath(starting_dir):
+  """Returns the abs path to the src/ dir of the project."""
+  src_dir = starting_dir
+  while os.path.basename(src_dir) != 'src':
+    src_dir = os.path.normpath(os.path.join(src_dir, os.pardir))
+  return src_dir
+
+
 @contextmanager
 def _AddToPath(*paths):
   original_sys_path = sys.path
@@ -573,8 +581,9 @@ def CheckUnwantedDependencies(input_api, output_api, source_file_filter):
   # We need to wait until we have an input_api object and use this
   # roundabout construct to import checkdeps because this file is
   # eval-ed and thus doesn't have __file__.
-  checkdeps_path = input_api.os_path.join(input_api.PresubmitLocalPath(),
-                                          'buildtools', 'checkdeps')
+  checkdeps_path = input_api.os_path.join(
+      FindSrcDirPath(input_api.PresubmitLocalPath()), 'buildtools',
+      'checkdeps')
   if not os.path.exists(checkdeps_path):
     return [output_api.PresubmitError(
         'Cannot find checkdeps at %s\nHave you run "gclient sync" to '
@@ -857,7 +866,8 @@ def CommonChecks(input_api, output_api):
 def CheckChangeOnUpload(input_api, output_api):
   results = []
   results.extend(CommonChecks(input_api, output_api))
-  results.extend(CheckGnGen(input_api, output_api))
+  # TODO(mbonadei)
+  #results.extend(CheckGnGen(input_api, output_api))
   results.extend(
       input_api.canned_checks.CheckGNFormatted(input_api, output_api))
   return results
