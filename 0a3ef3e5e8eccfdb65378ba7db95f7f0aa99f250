@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41f503c5_0a7b3449",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "nit: \u003e\u003d, or are you running a secret, new Windows version? :)",
+      "range": {
+        "startLine": 394,
+        "startChar": 22,
+        "endLine": 394,
+        "endChar": 23
+      },
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a328781d_d99d6a83",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "nit: -s",
+      "range": {
+        "startLine": 484,
+        "startChar": 30,
+        "endLine": 484,
+        "endChar": 31
+      },
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09664f98_4a2eed0c",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this always reset? If restarting failed, we\u0027re still not restarting.",
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c66b5764_5b04a07e",
+        "filename": "modules/audio_device/win/core_audio_input_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Can\u0027t you just return is_restarting_ directly, or is it hidden?",
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67a1f763_b8b95f63",
+        "filename": "modules/audio_device/win/core_audio_output_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Can\u0027t this just be audio_client_ (without the Get())?",
+      "range": {
+        "startLine": 273,
+        "startChar": 21,
+        "endLine": 273,
+        "endChar": 40
+      },
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "accbd6c3_ee23552a",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Don\u0027t think you need this check now that we enforce IAudioClient3 in the interface.",
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16466709_c46412c5",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Same as above. The interface requires it - if the user casts something invalid, that\u0027s their fault.",
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a920b376_32a32554",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Should these really be commented out?",
+      "range": {
+        "startLine": 1021,
+        "startChar": 0,
+        "endLine": 1022,
+        "endChar": 63
+      },
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d13cc36_d65aeb3a",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-04T17:39:01Z",
+      "side": 1,
+      "message": "Does this make sense if GetStreamLatency fails? Guess it\u0027s just a DLOG, so it\u0027s not imperative that it does.",
+      "revId": "0a3ef3e5e8eccfdb65378ba7db95f7f0aa99f250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
