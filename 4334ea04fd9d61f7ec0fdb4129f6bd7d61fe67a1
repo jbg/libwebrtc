@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "148f266e_2987ea2d",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-04T09:27:16Z",
+      "side": 1,
+      "message": "I\u0027d extract a local variable to make this easier to read\n\nsrc_path \u003d FindSrcDirPath(...)\ncheckdeps_path \u003d ...",
+      "range": {
+        "startLine": 585,
+        "startChar": 6,
+        "endLine": 585,
+        "endChar": 53
+      },
+      "revId": "4334ea04fd9d61f7ec0fdb4129f6bd7d61fe67a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

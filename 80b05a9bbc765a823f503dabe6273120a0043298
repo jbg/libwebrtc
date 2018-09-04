@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6a31013a_4f6ebbd9",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-04T09:27:16Z",
+      "side": 1,
+      "message": "It\u0027s not a lot of duplication so I can live with it. Your call.",
+      "parentUuid": "b1449a40_ce8cf29e",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 16
+      },
+      "revId": "80b05a9bbc765a823f503dabe6273120a0043298",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be44ed9c_1233376d",
         "filename": "PRESUBMIT.py",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-09-04T08:29:54Z",
       "side": 1,
       "message": "This triggers errors (we need to fix https://bugs.chromium.org/p/chromium/issues/detail?id\u003d824831 in order to have a clean run). I am on it.",
+      "range": {
+        "startLine": 565,
+        "startChar": 2,
+        "endLine": 565,
+        "endChar": 73
+      },
+      "revId": "80b05a9bbc765a823f503dabe6273120a0043298",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "903cfa63_0146605a",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-04T09:27:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "be44ed9c_1233376d",
       "range": {
         "startLine": 565,
         "startChar": 2,
