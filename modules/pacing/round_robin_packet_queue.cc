@@ -17,12 +17,12 @@
 
 namespace webrtc {
 
-RoundRobinPacketQueue::Stream::Stream() : bytes(0) {}
+RoundRobinPacketQueue::Stream::Stream() : bytes(0), ssrc(0) {}
 RoundRobinPacketQueue::Stream::Stream(const Stream& stream) = default;
 RoundRobinPacketQueue::Stream::~Stream() {}
 
-RoundRobinPacketQueue::RoundRobinPacketQueue(const Clock* clock)
-    : clock_(clock), time_last_updated_(clock_->TimeInMilliseconds()) {}
+RoundRobinPacketQueue::RoundRobinPacketQueue(int64_t time_ms)
+    : time_last_updated_(time_ms) {}
 
 RoundRobinPacketQueue::~RoundRobinPacketQueue() {}
 
