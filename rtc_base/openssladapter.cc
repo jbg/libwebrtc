@@ -292,6 +292,14 @@ int OpenSSLAdapter::BeginSSL() {
 
   int err = 0;
   BIO* bio = nullptr;
+  bssl::UniquePtr<EVP_PKEY> tls_channel_id_pkey(EVP_PKEY_new());
+  if (ssl_config_.enable_tls_channel_id) {
+    // Create the TLS channel ID key. It must be on P256.
+    EC_KEY* channel_id_ec_key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+    RTC_DCHECK(EC_KEY_generate_key(channel_id_ec_key) == 1);
+    EVP_PKEY_set1_EC_KEY(tls_channel_id_pkey.get(), channel_id_ec_key);
+    EC_KEY_free(channel_id_ec_key);
+  }
 
   // First set up the context. We should either have a factory, with its own
   // pre-existing context, or be running standalone, in which case we will
@@ -374,7 +382,7 @@ int OpenSSLAdapter::BeginSSL() {
   }
 
   if (ssl_config_.enable_tls_channel_id) {
-    SSL_enable_tls_channel_id(ssl_);
+    SSL_set1_tls_channel_id(ssl_, tls_channel_id_pkey.get());
   }
 
   if (ssl_config_.tls_alpn_protocols.has_value()) {
