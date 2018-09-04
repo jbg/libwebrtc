@@ -48,6 +48,45 @@ if (!rtc_build_ssl) {
   }
 }
 
+rtc_source_set("rtc_export") {
+  sources = [
+    "rtc_export.h",
+  ]
+}
+
+config("rtc_export_internal") {
+  if (is_component_build) {
+    defines = [ "BUILDING_WEBRTC_SHARED" ]
+  }
+}
+
+config("rtc_export_external") {
+  if (is_component_build) {
+    defines = [ "USING_WEBRTC_SHARED" ]
+  }
+}
+
+component("twenty") {
+  sources = [
+    "twenty.cc",
+    "twenty.h",
+  ]
+  deps = [
+    ":rtc_export",
+  ]
+  configs += [ ":rtc_export_internal" ]
+  public_configs = [ ":rtc_export_external" ]
+}
+
+executable("fourty") {
+  sources = [
+    "fourty.cc",
+  ]
+  deps = [
+    ":twenty",
+  ]
+}
+
 rtc_source_set("protobuf_utils") {
   visibility = [ "*" ]
   sources = [
