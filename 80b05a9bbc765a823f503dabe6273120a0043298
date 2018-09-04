@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1449a40_ce8cf29e",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-04T08:29:54Z",
+      "side": 1,
+      "message": "This is a little bit duplicated now.\n\nShould I move it in a util package or it doesn\u0027t matter? (in general I think presubmit code needs to be cleaned up a bit).",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 16
+      },
+      "revId": "80b05a9bbc765a823f503dabe6273120a0043298",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be44ed9c_1233376d",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-04T08:29:54Z",
+      "side": 1,
+      "message": "This triggers errors (we need to fix https://bugs.chromium.org/p/chromium/issues/detail?id\u003d824831 in order to have a clean run). I am on it.",
+      "range": {
+        "startLine": 565,
+        "startChar": 2,
+        "endLine": 565,
+        "endChar": 73
+      },
+      "revId": "80b05a9bbc765a823f503dabe6273120a0043298",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
