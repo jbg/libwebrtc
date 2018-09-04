@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4b318f9_d1a3cab6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-04T16:56:18Z",
+      "side": 1,
+      "message": "Don\u0027t call it \"static initializer\"---that\u0027s the term generally used for static initialization of nonlocal variables, which is problematic in general and forbidden by the Chromium style guide in particular. See https://en.cppreference.com/w/cpp/language/initialization#Static_initialization.\n\nConsider replacing with something like \"Keep the MessageQueueManager pointer in a function-local static variable\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "6adbcdebe86fb07e027bb156bf30c5d802467a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
