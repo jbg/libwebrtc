@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ef9ed3b_eb6196ac",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-05T19:54:23Z",
+      "side": 1,
+      "message": "Based on offline discussion:\n1. The RtpReceiver/RtpSender will always outlive the designated Media Channel.\n2. The MediaChannel is not an owner.",
+      "parentUuid": "b728d7df_93dc742a",
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17301244_c0502d0a",
         "filename": "pc/rtpreceiver.cc",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63a0a7ec_04db3cee",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-05T19:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17301244_c0502d0a",
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "3474255d_03ed1d8d",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-05T19:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3100a885_12110751",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 61
+      },
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5cda463_fd315403",
         "filename": "pc/rtpsender.cc",
         "patchSetId": 3
@@ -79,6 +139,30 @@
       "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2333fc70_7452ba67",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-05T19:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5cda463_fd315403",
+      "range": {
+        "startLine": 592,
+        "startChar": 21,
+        "endLine": 592,
+        "endChar": 55
+      },
+      "revId": "66d99da5d2b6fcbd85102ae9ca4636671ccc0805",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
