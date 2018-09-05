@@ -46,6 +46,30 @@
       "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20593e25_43d2813e",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-09-05T09:35:26Z",
+      "side": 1,
+      "message": "Are we going to remove spatial_idx but keep temporal_idx in CodecSpecificInfo? What is the motivation for this change?",
+      "parentUuid": "5bd68ee4_b321b0e6",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 25
+      },
+      "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
