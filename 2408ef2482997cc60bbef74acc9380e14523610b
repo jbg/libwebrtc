@@ -70,6 +70,30 @@
       "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15e3b7e1_3e42422a",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-09-05T10:13:57Z",
+      "side": 1,
+      "message": "I reverted changes in vp9_impl.cc/h and updated unit tests to read spatial index from EncodedImage.",
+      "parentUuid": "20593e25_43d2813e",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 25
+      },
+      "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
