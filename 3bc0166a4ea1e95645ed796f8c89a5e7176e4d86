@@ -16,6 +16,24 @@
       "revId": "3bc0166a4ea1e95645ed796f8c89a5e7176e4d86",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b189b88a_a50182e5",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-09-05T10:05:10Z",
+      "side": 0,
+      "message": "I wanted to avoid duplication, and figured it was fine if the binary expands for a day until I reland the follow-up CL. If you\u0027d prefer that, I could instead keep RTC_LOG_V separate for now and merge them in a later CL.\n\nNow that I think about it more, this will cause rebase errors for that CL, so maybe it\u0027s easier to add RTC_LOG_FILE_LINE as a copy of RTC_LOG and consolidate them later after all.",
+      "parentUuid": "f7fed009_9d3525bb",
+      "revId": "3bc0166a4ea1e95645ed796f8c89a5e7176e4d86",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
