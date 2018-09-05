@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c28997e1_caf0dbe3",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-05T14:48:16Z",
+      "side": 1,
+      "message": "Prefer to remove blocking,\nbut that would break assumption callbacks are not used after destructor.\n\nAdded a TODO giving a bit of time to callers to make use of Stop function or ensure callbacks are invalidated after task queue is destroyed.",
+      "parentUuid": "9341e6c1_b7c66dd7",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 11
+      },
+      "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b789eba_2ff34ee9",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e5fe1ce0_8c025657",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-05T14:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b789eba_2ff34ee9",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 49
+      },
+      "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b215400_47cb988b",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_unittest.cc",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f42416ef_1b4893c5",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-05T14:48:16Z",
+      "side": 1,
+      "message": "replaced Asynchroniously with \u0027WithoutBlocking\u0027 since that better match the what test validates.\n(and easier to spell)",
+      "parentUuid": "2b215400_47cb988b",
+      "range": {
+        "startLine": 99,
+        "startChar": 26,
+        "endLine": 99,
+        "endChar": 62
+      },
+      "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
