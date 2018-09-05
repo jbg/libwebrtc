@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7659e76_4c89c811",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-05T08:04:49Z",
+      "side": 1,
+      "message": "Long term, we should consider printing this in GoogCCPrinter instead.",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 476,
+        "endChar": 59
+      },
+      "revId": "8f2eb763cf4759a2a8d5fa48a4dc32611ff9c2ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
