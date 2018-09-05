@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d28d2bd6_8fedd61d",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-05T09:21:26Z",
+      "side": 1,
+      "message": "Hi, my intention is to delete this field in CodecSpecificInfo is a followup cl, and only have the EncodedImage field. See https://webrtc-review.googlesource.com/c/src/+/97021.\n\nSo if possible, I would prefer to fix this by updating any code depending on vp9_info-\u003espatial_idx to use EncodedImage::SpatialIndex() instead.",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 25
+      },
+      "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
