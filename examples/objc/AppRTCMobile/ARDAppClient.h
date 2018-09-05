@@ -9,8 +9,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <WebRTC/RTCPeerConnection.h>
-#import <WebRTC/RTCVideoTrack.h>
+#import <WebRTC/WebRTC.h>
 
 typedef NS_ENUM(NSInteger, ARDAppClientState) {
   // Disconnected from servers.
@@ -50,7 +49,7 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 
 @optional
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalFileCapturer:(RTCFileVideoCapturer *)fileCapturer;
+    didCreateLocalFileCapturer:(RTCFileVideoCapturer *)fileCapturer NS_AVAILABLE_IOS(10);
 
 - (void)appClient:(ARDAppClient *)client
     didCreateLocalExternalSampleCapturer:(ARDExternalSampleCapturer *)externalSampleCapturer;

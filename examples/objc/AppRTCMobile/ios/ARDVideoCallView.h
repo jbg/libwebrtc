@@ -9,9 +9,7 @@
  */
 
 #import <UIKit/UIKit.h>
-
-#import <WebRTC/RTCCameraPreviewView.h>
-#import <WebRTC/RTCVideoRenderer.h>
+#import <WebRTC/WebRTC.h>
 
 #import "ARDStatsView.h"
 

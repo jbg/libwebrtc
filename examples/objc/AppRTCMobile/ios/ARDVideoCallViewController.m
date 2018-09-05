@@ -10,11 +10,7 @@
 
 #import "ARDVideoCallViewController.h"
 
-#import <WebRTC/RTCAudioSession.h>
-#import <WebRTC/RTCCameraVideoCapturer.h>
-#import <WebRTC/RTCDispatcher.h>
-#import <WebRTC/RTCLogging.h>
-#import <WebRTC/RTCMediaConstraints.h>
+#import <WebRTC/WebRTC.h>
 
 #import "ARDAppClient.h"
 #import "ARDCaptureController.h"
@@ -108,7 +104,7 @@
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalFileCapturer:(RTCFileVideoCapturer *)fileCapturer {
+    didCreateLocalFileCapturer:(RTCFileVideoCapturer *)fileCapturer NS_AVAILABLE_IOS(10) {
 #if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
   if (@available(iOS 10, *)) {
     _fileCaptureController = [[ARDFileCaptureController alloc] initWithCapturer:fileCapturer];

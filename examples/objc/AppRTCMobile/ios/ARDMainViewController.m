@@ -11,11 +11,7 @@
 #import "ARDMainViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
-
-#import <WebRTC/RTCAudioSession.h>
-#import <WebRTC/RTCAudioSessionConfiguration.h>
-#import <WebRTC/RTCDispatcher.h>
-#import <WebRTC/RTCLogging.h>
+#import <WebRTC/WebRTC.h>
 
 #import "ARDAppClient.h"
 #import "ARDMainView.h"

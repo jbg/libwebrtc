@@ -10,10 +10,7 @@
 
 #import "ARDAppDelegate.h"
 
-#import <WebRTC/RTCFieldTrials.h>
-#import <WebRTC/RTCLogging.h>
-#import <WebRTC/RTCSSLAdapter.h>
-#import <WebRTC/RTCTracing.h>
+#import <WebRTC/WebRTC.h>
 
 #import "ARDMainViewController.h"
 

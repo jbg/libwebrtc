@@ -12,9 +12,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import <WebRTC/RTCEAGLVideoView.h>
-#import <WebRTC/RTCMTLVideoView.h>
-
 #import "UIImage+ARDUtilities.h"
 
 static CGFloat const kButtonPadding = 16;

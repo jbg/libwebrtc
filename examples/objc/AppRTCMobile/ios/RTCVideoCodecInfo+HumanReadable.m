@@ -10,8 +10,6 @@
 
 #import "RTCVideoCodecInfo+HumanReadable.h"
 
-#import <WebRTC/RTCH264ProfileLevelId.h>
-
 @implementation RTCVideoCodecInfo (HumanReadable)
 
 - (NSString *)humanReadableDescription {

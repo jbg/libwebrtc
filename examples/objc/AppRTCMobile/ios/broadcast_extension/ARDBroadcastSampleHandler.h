@@ -9,8 +9,7 @@
  */
 
 #import <ReplayKit/ReplayKit.h>
-
-#import <WebRTC/RTCLogging.h>
+#import <WebRTC/WebRTC.h>
 
 #import "ARDAppClient.h"
 

@@ -9,8 +9,7 @@
  */
 
 #import <Foundation/Foundation.h>
-
-#import <WebRTC/RTCVideoCodecInfo.h>
+#import <WebRTC/WebRTC.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -10,13 +10,11 @@
 
 #import <Foundation/Foundation.h>
 #import <OCMock/OCMock.h>
+#import <WebRTC/WebRTC.h>
 #import <XCTest/XCTest.h>
-
-#import <WebRTC/RTCMediaConstraints.h>
 
 #import "ARDSettingsModel+Private.h"
 #import "ARDSettingsStore.h"
-
 
 @interface ARDSettingsModelTests : XCTestCase {
   ARDSettingsModel *_model;

@@ -10,8 +10,6 @@
 
 #import "ARDCaptureController.h"
 
-#import <WebRTC/RTCLogging.h>
-
 #import "ARDSettingsModel.h"
 
 const Float64 kFramerateLimit = 30.0;

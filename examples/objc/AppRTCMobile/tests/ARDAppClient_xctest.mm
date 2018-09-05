@@ -11,12 +11,10 @@
 #import <Foundation/Foundation.h>
 #import <OCMock/OCMock.h>
 #import <QuartzCore/CoreAnimation.h>
+#import <WebRTC/WebRTC.h>
 #import <XCTest/XCTest.h>
 
 #include "rtc_base/ssladapter.h"
-
-#import <WebRTC/RTCMediaConstraints.h>
-#import <WebRTC/RTCPeerConnectionFactory.h>
 
 #import "ARDAppClient+Internal.h"
 #import "ARDJoinResponse+Internal.h"

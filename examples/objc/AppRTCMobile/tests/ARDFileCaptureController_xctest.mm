@@ -10,11 +10,10 @@
 
 #import <Foundation/Foundation.h>
 #import <OCMock/OCMock.h>
+#import <WebRTC/WebRTC.h>
 #import <XCTest/XCTest.h>
 
 #import "ARDFileCaptureController.h"
-
-#import <WebRTC/RTCFileVideoCapturer.h>
 
 NS_CLASS_AVAILABLE_IOS(10)
 @interface ARDFileCaptureControllerTests : XCTestCase

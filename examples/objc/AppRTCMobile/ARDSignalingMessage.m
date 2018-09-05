@@ -10,8 +10,6 @@
 
 #import "ARDSignalingMessage.h"
 
-#import <WebRTC/RTCLogging.h>
-
 #import "ARDUtilities.h"
 #import "RTCIceCandidate+JSON.h"
 #import "RTCSessionDescription+JSON.h"
