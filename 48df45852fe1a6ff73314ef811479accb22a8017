@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4282cbb0_0e300770",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-09-05T13:53:52Z",
+      "side": 1,
+      "message": "The previous convention was to not include \"webrtc\" in the console page name\ne.g. \"webrtc/g/ci\"\nso maybe \"webrtc/g/chromium.fyi\" would fit better.",
+      "range": {
+        "startLine": 393,
+        "startChar": 28,
+        "endLine": 393,
+        "endChar": 56
+      },
+      "revId": "48df45852fe1a6ff73314ef811479accb22a8017",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3428aec7_856bdf28",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-09-05T13:53:52Z",
+      "side": 1,
+      "message": "Other names start with uppercase. Maybe \"Chromium FYI\"?",
+      "range": {
+        "startLine": 397,
+        "startChar": 9,
+        "endLine": 397,
+        "endChar": 28
+      },
+      "revId": "48df45852fe1a6ff73314ef811479accb22a8017",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
