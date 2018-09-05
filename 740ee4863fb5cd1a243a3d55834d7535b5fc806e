@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb1b0d11_4284889d",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5015
+      },
+      "writtenOn": "2018-09-05T16:39:07Z",
+      "side": 1,
+      "message": "i don\u0027t think it is ok to reuse a service account from a different bucket.\n+Vadim\n\nwe are considering creating per-bucket service accounts automatically in the future",
+      "revId": "740ee4863fb5cd1a243a3d55834d7535b5fc806e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
