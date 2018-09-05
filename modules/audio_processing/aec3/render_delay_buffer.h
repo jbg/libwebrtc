@@ -39,6 +39,8 @@ class RenderDelayBuffer {
 
   static RenderDelayBuffer* Create(const EchoCanceller3Config& config,
                                    size_t num_bands);
+  static RenderDelayBuffer* Create2(const EchoCanceller3Config& config,
+                                    size_t num_bands);
   virtual ~RenderDelayBuffer() = default;
 
   // Resets the buffer alignment.
