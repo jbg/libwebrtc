@@ -25,12 +25,24 @@ class BlockProcessor {
  public:
   static BlockProcessor* Create(const EchoCanceller3Config& config,
                                 int sample_rate_hz);
+  static BlockProcessor* Create2(const EchoCanceller3Config& config,
+                                 int sample_rate_hz);
   // Only used for testing purposes.
   static BlockProcessor* Create(
       const EchoCanceller3Config& config,
       int sample_rate_hz,
       std::unique_ptr<RenderDelayBuffer> render_buffer);
+  static BlockProcessor* Create2(
+      const EchoCanceller3Config& config,
+      int sample_rate_hz,
+      std::unique_ptr<RenderDelayBuffer> render_buffer);
   static BlockProcessor* Create(
+      const EchoCanceller3Config& config,
+      int sample_rate_hz,
+      std::unique_ptr<RenderDelayBuffer> render_buffer,
+      std::unique_ptr<RenderDelayController> delay_controller,
+      std::unique_ptr<EchoRemover> echo_remover);
+  static BlockProcessor* Create2(
       const EchoCanceller3Config& config,
       int sample_rate_hz,
       std::unique_ptr<RenderDelayBuffer> render_buffer,
