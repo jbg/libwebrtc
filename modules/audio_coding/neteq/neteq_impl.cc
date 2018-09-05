@@ -1121,7 +1121,7 @@ int NetEqImpl::GetDecision(Operations* operation,
     return 0;
   }
 
-  decision_logic_->ExpandDecision(*operation);
+  decision_logic_->ReportBackDecision(*operation);
 
   // Check conditions for reset.
   if (new_codec_ || *operation == kUndefined) {

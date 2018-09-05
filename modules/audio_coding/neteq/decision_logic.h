@@ -43,6 +43,7 @@ class DecisionLogic final {
 
   static const int kReinitAfterExpands = 100;
   static const int kMaxWaitForPacket = 10;
+  static const int kMinConsecutiveNormals = 3;
 
   // Constructor.
   DecisionLogic(int fs_hz,
@@ -95,7 +96,7 @@ class DecisionLogic final {
   // not. Note that this is necessary, since an expand decision can be changed
   // to kNormal in NetEqImpl::GetDecision if there is still enough data in the
   // sync buffer.
-  void ExpandDecision(Operations operation);
+  void ReportBackDecision(Operations operation);
 
   // Adds |value| to |sample_memory_|.
   void AddSampleMemory(int32_t value) { sample_memory_ += value; }
@@ -181,6 +182,8 @@ class DecisionLogic final {
   bool disallow_time_stretching_;
   std::unique_ptr<TickTimer::Countdown> timescale_countdown_;
   int num_consecutive_expands_;
+  size_t num_consecutive_normals_;
+  bool detected_toggling_;
   const bool postpone_decoding_after_expand_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DecisionLogic);
