@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9341e6c1_b7c66dd7",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-09-05T14:29:05Z",
+      "side": 1,
+      "message": "Maybe explain how it blocks if you intend to keep this behavior. \nShould there be a todo instead to check that that Stop has been called?",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 11
+      },
+      "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b789eba_2ff34ee9",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-09-05T14:29:05Z",
+      "side": 1,
+      "message": "nit |on_destroyed|",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 49
+      },
+      "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b215400_47cb988b",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-09-05T14:29:05Z",
+      "side": 1,
+      "message": "/s CanBeDestroyedAsynchronouslyAfterStop but maybe better CanBeDestroyedAfterStop",
+      "range": {
+        "startLine": 99,
+        "startChar": 26,
+        "endLine": 99,
+        "endChar": 62
+      },
+      "revId": "2a052504e9c711fcbb72bad80bfb661fb0e99cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
