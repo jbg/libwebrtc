@@ -94,6 +94,30 @@
       "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "318e8b42_8bd6988f",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-05T11:25:03Z",
+      "side": 1,
+      "message": "Moving simulcast index/spatial index is a first step. Temporal index should be moved too. See https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d9378 for context.",
+      "parentUuid": "15e3b7e1_3e42422a",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 25
+      },
+      "revId": "2408ef2482997cc60bbef74acc9380e14523610b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
