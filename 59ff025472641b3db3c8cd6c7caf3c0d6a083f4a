@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23a25a39_67855c3d",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-09-05T14:12:49Z",
+      "side": 1,
+      "message": "1. Typo\n2. I\u0027d just like to point out that this would be by far the longest name compared to others in https://ci.chromium.org/p/webrtc - maybe worth dropping \"WebRTC\" as well, or maybe it\u0027s worth clarifying other entries (in a followup) instead.",
+      "range": {
+        "startLine": 397,
+        "startChar": 9,
+        "endLine": 397,
+        "endChar": 16
+      },
+      "revId": "59ff025472641b3db3c8cd6c7caf3c0d6a083f4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
