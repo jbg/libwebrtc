@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19788b1c_3936197b",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-09-05T21:25:22Z",
+      "side": 1,
+      "message": "Should we include any other decisions in this bucket? I\u0027m thinking of those that are akin to Normal in the sense that packets did arrive and were decoded as expected; e.g., accelerate, pre-emptive expand, CNG operations.",
+      "range": {
+        "startLine": 209,
+        "startChar": 6,
+        "endLine": 209,
+        "endChar": 26
+      },
+      "revId": "3697ca3052ab4a87cc2cbf992f237f437c40ff0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
