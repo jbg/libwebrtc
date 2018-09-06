@@ -23,12 +23,6 @@
 namespace webrtc {
 namespace test {
 namespace {
-std::string kArrivalDelayX = "arrival_delay_x";
-std::string kArrivalDelayY = "arrival_delay_y";
-std::string kTargetDelayX = "target_delay_x";
-std::string kTargetDelayY = "target_delay_y";
-std::string kPlayoutDelayX = "playout_delay_x";
-std::string kPlayoutDelayY = "playout_delay_y";
 
 // Helper function for NetEqDelayAnalyzer::CreateGraphs. Returns the
 // interpolated value of a function at the point x. Vector x_vec contains the
@@ -203,21 +197,21 @@ void NetEqDelayAnalyzer::CreateMatlabScript(
   // Create an output file stream to Matlab script file.
   std::ofstream output(script_name);
 
-  PrintDelays(corrected_arrival_delay_ms, ref_time_ms, kArrivalDelayX,
-              kArrivalDelayY, output, ";");
+  PrintDelays(corrected_arrival_delay_ms, ref_time_ms, kArrivalDelayX_,
+              kArrivalDelayY_, output, ";");
 
   // PrintDelays(corrected_arrival_delay_x, kCorrectedArrivalDelayX,
   // kCorrectedArrivalDelayY, output);
 
-  PrintDelays(playout_delay_ms, ref_time_ms, kPlayoutDelayX, kPlayoutDelayY,
+  PrintDelays(playout_delay_ms, ref_time_ms, kPlayoutDelayX_, kPlayoutDelayY_,
               output, ";");
 
-  PrintDelays(target_delay_ms, ref_time_ms, kTargetDelayX, kTargetDelayY,
+  PrintDelays(target_delay_ms, ref_time_ms, kTargetDelayX_, kTargetDelayY_,
               output, ";");
 
-  output << "h=plot(" << kArrivalDelayX << ", " << kArrivalDelayY << ", "
-         << kTargetDelayX << ", " << kTargetDelayY << ", 'g.', "
-         << kPlayoutDelayX << ", " << kPlayoutDelayY << ");" << std::endl;
+  output << "h=plot(" << kArrivalDelayX_ << ", " << kArrivalDelayY_ << ", "
+         << kTargetDelayX_ << ", " << kTargetDelayY_ << ", 'g.', "
+         << kPlayoutDelayX_ << ", " << kPlayoutDelayY_ << ");" << std::endl;
   output << "set(h(1),'color',0.75*[1 1 1]);" << std::endl;
   output << "set(h(2),'markersize',6);" << std::endl;
   output << "set(h(3),'linew',1.5);" << std::endl;
@@ -263,22 +257,22 @@ void NetEqDelayAnalyzer::CreatePythonScript(
   output << "import numpy as np" << std::endl;
   output << "import matplotlib.pyplot as plt" << std::endl;
 
-  PrintDelays(corrected_arrival_delay_ms, ref_time_ms, kArrivalDelayX,
-              kArrivalDelayY, output);
+  PrintDelays(corrected_arrival_delay_ms, ref_time_ms, kArrivalDelayX_,
+              kArrivalDelayY_, output);
 
   // PrintDelays(corrected_arrival_delay_x, kCorrectedArrivalDelayX,
   // kCorrectedArrivalDelayY, output);
 
-  PrintDelays(playout_delay_ms, ref_time_ms, kPlayoutDelayX, kPlayoutDelayY,
+  PrintDelays(playout_delay_ms, ref_time_ms, kPlayoutDelayX_, kPlayoutDelayY_,
               output);
 
-  PrintDelays(target_delay_ms, ref_time_ms, kTargetDelayX, kTargetDelayY,
+  PrintDelays(target_delay_ms, ref_time_ms, kTargetDelayX_, kTargetDelayY_,
               output);
 
   output << "if __name__ == '__main__':" << std::endl;
-  output << "  h=plt.plot(" << kArrivalDelayX << ", " << kArrivalDelayY << ", "
-         << kTargetDelayX << ", " << kTargetDelayY << ", 'g.', "
-         << kPlayoutDelayX << ", " << kPlayoutDelayY << ")" << std::endl;
+  output << "  h=plt.plot(" << kArrivalDelayX_ << ", " << kArrivalDelayY_
+         << ", " << kTargetDelayX_ << ", " << kTargetDelayY_ << ", 'g.', "
+         << kPlayoutDelayX_ << ", " << kPlayoutDelayY_ << ")" << std::endl;
   output << "  plt.setp(h[0],'color',[.75, .75, .75])" << std::endl;
   output << "  plt.setp(h[1],'markersize',6)" << std::endl;
   output << "  plt.setp(h[2],'linewidth',1.5)" << std::endl;

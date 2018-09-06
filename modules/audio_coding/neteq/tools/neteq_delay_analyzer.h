@@ -68,6 +68,12 @@ class NetEqDelayAnalyzer : public test::NetEqPostInsertPacket,
   int last_sample_rate_hz_ = 0;
   std::set<uint32_t> ssrcs_;
   std::set<int> payload_types_;
+  std::string kArrivalDelayX_ = "arrival_delay_x";
+  std::string kArrivalDelayY_ = "arrival_delay_y";
+  std::string kTargetDelayX_ = "target_delay_x";
+  std::string kTargetDelayY_ = "target_delay_y";
+  std::string kPlayoutDelayX_ = "playout_delay_x";
+  std::string kPlayoutDelayY_ = "playout_delay_y";
 };
 
 }  // namespace test
