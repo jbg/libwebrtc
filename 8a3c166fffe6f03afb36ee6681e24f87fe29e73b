@@ -46,6 +46,30 @@
       "revId": "8a3c166fffe6f03afb36ee6681e24f87fe29e73b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "417e9083_69efda34",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-09-06T11:20:48Z",
+      "side": 0,
+      "message": "This was a lazy change that made the tests pass (apparently they don\u0027t check which packetization format that is used). I Updated ConfigurableFrameSizeEncoder with a SetCodecType so that the encoder can match the sent format.",
+      "parentUuid": "d457724e_20c40b11",
+      "range": {
+        "startLine": 1128,
+        "startChar": 1,
+        "endLine": 1129,
+        "endChar": 46
+      },
+      "revId": "8a3c166fffe6f03afb36ee6681e24f87fe29e73b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
