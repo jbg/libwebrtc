@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2cf0471f_34fbab3e",
+        "filename": "system_wrappers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-06T11:00:21Z",
+      "side": 1,
+      "message": "stops",
+      "range": {
+        "startLine": 163,
+        "startChar": 62,
+        "endLine": 163,
+        "endChar": 66
+      },
+      "revId": "af3c49e756a2958c7e855cd7fa03d24a15cbdce7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
