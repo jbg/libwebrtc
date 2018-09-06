@@ -362,7 +362,25 @@ bool CoreAudioBase::Init() {
   // Define the output WAVEFORMATEXTENSIBLE format in |format_|.
   WAVEFORMATEX* format = &format_.Format;
   format->wFormatTag = WAVE_FORMAT_EXTENSIBLE;
+  // Check the preferred channel configuration and request implicit channel
+  // upmixing (audio engine extends from 2 to N channels internally), i.e.,
+  // initialize the stream in stereo even if the preferred configuration is
+  // multi-channel.
+  /*
+  if (params.channels() <= 2) {
+    format->nChannels = rtc::dchecked_cast<WORD>(params.channels());
+  } else {
+    // TODO(henrika): ensure that this approach works on different multi-channel
+    // devices. Verified on:
+    // - Corsair VOID PRO Surround USB Adapter (supports 7.1)
+    RTC_LOG(LS_WARNING) << "Using channel upmixing in WASAPI audio engine ("
+                        << params.channels() << "=>2)";
+    format->nChannels = 2;
+  }
+  */
+
   format->nChannels = rtc::dchecked_cast<WORD>(params.channels());
+
   format->nSamplesPerSec = params.sample_rate();
   format->wBitsPerSample = rtc::dchecked_cast<WORD>(params.bits_per_sample());
   format->nBlockAlign = (format->wBitsPerSample / 8) * format->nChannels;
@@ -372,9 +390,11 @@ bool CoreAudioBase::Init() {
   format_.Samples.wValidBitsPerSample =
       rtc::dchecked_cast<WORD>(params.bits_per_sample());
   // TODO(henrika): improve (common for input and output?)
-  format_.dwChannelMask = params.channels() == 1
-                              ? SPEAKER_FRONT_CENTER
-                              : SPEAKER_FRONT_LEFT | SPEAKER_FRONT_RIGHT;
+  /*
+  format_.dwChannelMask =
+      params.channels() == 1 ? KSAUDIO_SPEAKER_MONO : KSAUDIO_SPEAKER_STEREO;
+  */
+  format_.dwChannelMask = KSAUDIO_SPEAKER_7POINT1_SURROUND;
   format_.SubFormat = KSDATAFORMAT_SUBTYPE_PCM;
   RTC_DLOG(INFO) << core_audio_utility::WaveFormatExToString(&format_);
 
@@ -481,10 +501,8 @@ bool CoreAudioBase::Init() {
     return false;
   }
 
-  // Store valid COM interface.
-  if (audio_client) {
-    audio_client_ = audio_client;
-  }
+  // Store valid COM interfaces.
+  audio_client_ = audio_client;
   audio_session_control_ = audio_session_control;
 
   return true;

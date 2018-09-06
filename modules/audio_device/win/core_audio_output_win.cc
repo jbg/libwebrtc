@@ -111,7 +111,8 @@ int CoreAudioOutput::InitPlayout() {
   WAVEFORMATEX* format = &format_.Format;
   RTC_DCHECK_EQ(format->wFormatTag, WAVE_FORMAT_EXTENSIBLE);
   audio_device_buffer_->SetPlayoutSampleRate(format->nSamplesPerSec);
-  audio_device_buffer_->SetPlayoutChannels(format->nChannels);
+  // audio_device_buffer_->SetPlayoutChannels(format->nChannels);
+  audio_device_buffer_->SetPlayoutChannels(2);
 
   // Create a modified audio buffer class which allows us to ask for any number
   // of samples (and not only multiple of 10ms) to match the optimal
@@ -317,12 +318,29 @@ bool CoreAudioOutput::OnDataCallback(uint64_t device_frequency) {
     }
   }
 
+  int size = format_.Format.nAvgBytesPerSec / 100;
+  // Create temporary array for upmixing procedure
+  std::unique_ptr<BYTE> temp_data(new BYTE[size]);
+  // RTC_DLOG(INFO) << "size: " << size;
+  // RTC_DLOG(INFO) << "num_requested_frames: " << num_requested_frames;
+
+  // Get audio data from WebRTC in stereo PCM format.
+  fine_audio_buffer_->GetPlayoutData(
+      rtc::MakeArrayView(reinterpret_cast<int16_t*>(temp_data.get()),
+                         num_requested_frames * 2),
+      latency_ms_);
+
+  Upmix(reinterpret_cast<int16_t*>(temp_data.get()), num_requested_frames,
+        reinterpret_cast<int16_t*>(audio_data), 2, format_.Format.nChannels);
+
   // Get audio data from WebRTC and write it to the allocated buffer in
   // |audio_data|. The playout latency is not updated for each callback.
+  /*
   fine_audio_buffer_->GetPlayoutData(
       rtc::MakeArrayView(reinterpret_cast<int16_t*>(audio_data),
                          num_requested_frames * format_.Format.nChannels),
       latency_ms_);
+  */
 
   // Release the buffer space acquired in IAudioRenderClient::GetBuffer.
   error = audio_render_client_->ReleaseBuffer(num_requested_frames, 0);
@@ -397,6 +415,46 @@ bool CoreAudioOutput::HandleStreamDisconnected() {
 
   RTC_DLOG(INFO) << __FUNCTION__ << " --->>>";
   return true;
+}
+
+// Reference upmixer application found on:
+// https://hg.mozilla.org/releases/mozilla-aurora/file/tip/media/libcubeb/src/cubeb_wasapi.cpp
+void CoreAudioOutput::Upmix(int16_t* in_samples,
+                            uint32_t number_of_frames,
+                            int16_t* out_samples_real,
+                            uint32_t in_channels,
+                            uint32_t out_channels) {
+  // Create temporary array into which we do the upmix.
+  std::unique_ptr<int16_t> out_samples(
+      new int16_t[number_of_frames * out_channels]);
+
+  // Copy over input channels.
+  for (uint32_t i = 0, o = 0; i < number_of_frames * in_channels;
+       i += in_channels, o += out_channels) {
+    if (in_channels <= out_channels) {
+      for (uint32_t j = 0; j < in_channels; ++j) {
+        out_samples.get()[o + j] = in_samples[i + j];
+      }
+    } else {
+      for (uint32_t j = 0; j < out_channels; ++j) {
+        out_samples.get()[o + j] =
+            (in_samples[i + j] + in_samples[i + j + 1]) / 2;
+      }
+    }
+  }
+
+  if (in_channels < out_channels) {
+    // Add 0 to other channels.
+    for (uint32_t i = 0, o = 0; i < number_of_frames; ++i, o += out_channels) {
+      for (uint32_t j = in_channels; j < out_channels; ++j) {
+        out_samples.get()[o + j] = 0;
+      }
+    }
+  }
+
+  // Copy over memory to be delivered to the IAudioRenderClient.
+  memcpy(out_samples_real, out_samples.get(),
+         number_of_frames * out_channels * sizeof(int16_t));
 }
 
 }  // namespace webrtc_win

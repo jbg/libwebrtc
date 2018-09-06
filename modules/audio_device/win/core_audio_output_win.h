@@ -60,6 +60,11 @@ class CoreAudioOutput final : public CoreAudioBase, public AudioOutput {
   bool OnErrorCallback(ErrorType error);
   int EstimateOutputLatencyMillis(uint64_t device_frequency);
   bool HandleStreamDisconnected();
+  void Upmix(int16_t* inSamples,
+             uint32_t numberOfFrames,
+             int16_t* outSamplesReal,
+             uint32_t inChannels,
+             uint32_t outChannels);
 
   std::unique_ptr<FineAudioBuffer> fine_audio_buffer_;
   Microsoft::WRL::ComPtr<IAudioRenderClient> audio_render_client_;
