@@ -24,10 +24,9 @@ namespace webrtc {
 
 class MultiplexDecoderAdapter : public VideoDecoder {
  public:
-  // |factory| is not owned and expected to outlive this class' lifetime.
+  // |factory| is not owned and expected to outlive this class.
   MultiplexDecoderAdapter(VideoDecoderFactory* factory,
-                          const SdpVideoFormat& associated_format,
-                          bool supports_augmenting_data = false);
+                          const SdpVideoFormat& associated_format);
   virtual ~MultiplexDecoderAdapter();
 
   // Implements VideoDecoder
@@ -74,7 +73,6 @@ class MultiplexDecoderAdapter : public VideoDecoder {
   // Holds YUV or AXX decode output of a frame that is identified by timestamp.
   std::map<uint32_t /* timestamp */, DecodedImageData> decoded_data_;
   std::map<uint32_t /* timestamp */, AugmentingData> decoded_augmenting_data_;
-  const bool supports_augmenting_data_;
 };
 
 }  // namespace webrtc
