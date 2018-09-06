@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9350b446_ed45e7e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 7617
+      },
+      "writtenOn": "2018-09-06T20:16:57Z",
+      "side": 1,
+      "message": "the return type of the video frame buffer would be different based on the scenario. This helps sets clear expectations from the sender",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 14
+      },
+      "revId": "ac6dd301e3e800cf9d93890d7543e9ed1dec06dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e469e25_8538fe3a",
+        "filename": "modules/video_coding/codecs/multiplex/multiplex_decoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 7617
+      },
+      "writtenOn": "2018-09-06T20:16:57Z",
+      "side": 1,
+      "message": "It is possible to have an AugmentedVideoFrameBuffer with augmenting data of size 0 (think of a scenario where you are sending augmenting data with every frame and one frame doesn\u0027t have data). That\u0027s why the decoder needs to be initialized whether it supports augmentingdata or not as it defines what type of VideoFrameBuffer to expect as a result",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 206,
+        "endChar": 27
+      },
+      "revId": "ac6dd301e3e800cf9d93890d7543e9ed1dec06dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e8e0e22_d20d9d10",
+        "filename": "modules/video_coding/codecs/multiplex/multiplex_encoded_image_packer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 7617
+      },
+      "writtenOn": "2018-09-06T20:16:57Z",
+      "side": 1,
+      "message": "needed?",
+      "revId": "ac6dd301e3e800cf9d93890d7543e9ed1dec06dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
