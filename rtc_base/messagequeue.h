@@ -43,12 +43,6 @@ class MessageQueueManager {
   static void Remove(MessageQueue* message_queue);
   static void Clear(MessageHandler* handler);
 
-  // For testing purposes, we expose whether or not the MessageQueueManager
-  // instance has been initialized. It has no other use relative to the rest of
-  // the functions of this class, which auto-initialize the underlying
-  // MessageQueueManager instance when necessary.
-  static bool IsInitialized();
-
   // TODO(nisse): Delete alias, as soon as downstream code is updated.
   static void ProcessAllMessageQueues() { ProcessAllMessageQueuesForTesting(); }
 
@@ -68,7 +62,6 @@ class MessageQueueManager {
   void ClearInternal(MessageHandler* handler);
   void ProcessAllMessageQueuesInternal();
 
-  static MessageQueueManager* instance_;
   // This list contains all live MessageQueues.
   std::vector<MessageQueue*> message_queues_ RTC_GUARDED_BY(crit_);
 
