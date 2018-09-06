@@ -34,6 +34,24 @@
       "revId": "3bc0166a4ea1e95645ed796f8c89a5e7176e4d86",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dedb38e0_77af0281",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-09-06T08:11:58Z",
+      "side": 0,
+      "message": "RTC_LOG_V is now left untouched, and the size changes are gone.",
+      "parentUuid": "b189b88a_a50182e5",
+      "revId": "3bc0166a4ea1e95645ed796f8c89a5e7176e4d86",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
