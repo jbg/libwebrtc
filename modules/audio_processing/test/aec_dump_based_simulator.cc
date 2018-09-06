@@ -145,15 +145,6 @@ void AecDumpBasedSimulator::PrepareProcessStreamCall(
     }
   }
 
-  if (!settings_.stream_drift_samples) {
-    if (msg.has_drift()) {
-      ap_->echo_cancellation()->set_stream_drift_samples(msg.drift());
-    }
-  } else {
-    ap_->echo_cancellation()->set_stream_drift_samples(
-        *settings_.stream_drift_samples);
-  }
-
   if (!settings_.use_ts) {
     if (msg.has_keypress()) {
       ap_->set_stream_key_pressed(msg.keypress());
@@ -301,14 +292,10 @@ void AecDumpBasedSimulator::HandleMessage(
 
     if (msg.has_aec_drift_compensation_enabled() ||
         settings_.use_drift_compensation) {
-      bool enable = settings_.use_drift_compensation
-                        ? *settings_.use_drift_compensation
-                        : msg.aec_drift_compensation_enabled();
-      RTC_CHECK_EQ(AudioProcessing::kNoError,
-                   ap_->echo_cancellation()->enable_drift_compensation(enable));
-      if (settings_.use_verbose_logging) {
-        std::cout << " aec_drift_compensation_enabled: "
-                  << (enable ? "true" : "false") << std::endl;
+      if (settings_.use_drift_compensation
+              ? *settings_.use_drift_compensation
+              : msg.aec_drift_compensation_enabled()) {
+        std::cout << " Unsupported mode: AEC2 drift compensation." << std::endl;
       }
     }
 
@@ -325,13 +312,17 @@ void AecDumpBasedSimulator::HandleMessage(
     }
 
     if (msg.has_aec_suppression_level() || settings_.aec_suppression_level) {
-      int level = settings_.aec_suppression_level
-                      ? *settings_.aec_suppression_level
-                      : msg.aec_suppression_level();
-      RTC_CHECK_EQ(
-          AudioProcessing::kNoError,
-          ap_->echo_cancellation()->set_suppression_level(
-              static_cast<webrtc::EchoCancellation::SuppressionLevel>(level)));
+      auto level = static_cast<webrtc::EchoCancellation::SuppressionLevel>(
+          settings_.aec_suppression_level ? *settings_.aec_suppression_level
+                                          : msg.aec_suppression_level());
+      if (level ==
+          webrtc::EchoCancellation::SuppressionLevel::kLowSuppression) {
+        std::cout << " Unsupported mode: AEC2 low suppression." << std::endl;
+      } else {
+        apm_config.echo_canceller.legacy_moderate_suppression_level =
+            (level ==
+             webrtc::EchoCancellation::SuppressionLevel::kModerateSuppression);
+      }
       if (settings_.use_verbose_logging) {
         std::cout << " aec_suppression_level: " << level << std::endl;
       }

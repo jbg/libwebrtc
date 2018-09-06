@@ -14,7 +14,7 @@ namespace webrtc {
 
 EchoCancellationProxy::EchoCancellationProxy(
     AudioProcessing* audio_processing,
-    EchoCancellation* echo_cancellation)
+    EchoCancellationImpl* echo_cancellation)
     : audio_processing_(audio_processing),
       echo_cancellation_(echo_cancellation) {}
 
@@ -22,7 +22,7 @@ EchoCancellationProxy::~EchoCancellationProxy() = default;
 
 int EchoCancellationProxy::Enable(bool enable) {
   // Change the config in APM to mirror the applied settings.
-  // TODO(bugs.webrtc.org/9535): Remove the call to EchoCancellation::Enable
+  // TODO(bugs.webrtc.org/9535): Remove the call to EchoCancellationImpl::Enable
   // when APM starts taking the config into account.
   AudioProcessing::Config apm_config = audio_processing_->GetConfig();
   bool aec2_enabled = apm_config.echo_canceller.enabled &&
