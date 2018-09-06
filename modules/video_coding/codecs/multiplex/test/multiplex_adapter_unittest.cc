@@ -17,8 +17,8 @@
 #include "media/base/mediaconstants.h"
 #include "modules/video_coding/codecs/multiplex/include/augmented_video_frame_buffer.h"
 #include "modules/video_coding/codecs/multiplex/include/multiplex_decoder_adapter.h"
-#include "modules/video_coding/codecs/multiplex/include/multiplex_encoded_image_packer.h"
 #include "modules/video_coding/codecs/multiplex/include/multiplex_encoder_adapter.h"
+#include "modules/video_coding/codecs/multiplex/multiplex_encoded_image_packer.h"
 #include "modules/video_coding/codecs/test/video_codec_unittest.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "rtc_base/keep_ref_until_done.h"
@@ -45,8 +45,7 @@ class TestMultiplexAdapter
  protected:
   std::unique_ptr<VideoDecoder> CreateDecoder() override {
     return absl::make_unique<MultiplexDecoderAdapter>(
-        decoder_factory_.get(), SdpVideoFormat(kMultiplexAssociatedCodecName),
-        supports_augmenting_data_);
+        decoder_factory_.get(), SdpVideoFormat(kMultiplexAssociatedCodecName));
   }
 
   std::unique_ptr<VideoEncoder> CreateEncoder() override {

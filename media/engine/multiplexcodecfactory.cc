@@ -79,10 +79,8 @@ std::unique_ptr<VideoEncoder> MultiplexEncoderFactory::CreateVideoEncoder(
 }
 
 MultiplexDecoderFactory::MultiplexDecoderFactory(
-    std::unique_ptr<VideoDecoderFactory> factory,
-    bool supports_augmenting_data)
-    : factory_(std::move(factory)),
-      supports_augmenting_data_(supports_augmenting_data) {}
+    std::unique_ptr<VideoDecoderFactory> factory)
+    : factory_(std::move(factory)) {}
 
 std::vector<SdpVideoFormat> MultiplexDecoderFactory::GetSupportedFormats()
     const {
@@ -111,8 +109,8 @@ std::unique_ptr<VideoDecoder> MultiplexDecoderFactory::CreateVideoDecoder(
   }
   SdpVideoFormat associated_format = format;
   associated_format.name = it->second;
-  return std::unique_ptr<VideoDecoder>(new MultiplexDecoderAdapter(
-      factory_.get(), associated_format, supports_augmenting_data_));
+  return std::unique_ptr<VideoDecoder>(
+      new MultiplexDecoderAdapter(factory_.get(), associated_format));
 }
 
 }  // namespace webrtc
