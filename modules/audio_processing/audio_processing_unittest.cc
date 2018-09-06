@@ -923,69 +923,6 @@ TEST_F(ApmTest, SampleRatesInt) {
   }
 }
 
-TEST_F(ApmTest, EchoCancellation) {
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_drift_compensation(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_drift_compensation_enabled());
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_drift_compensation(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_drift_compensation_enabled());
-
-  EchoCancellation::SuppressionLevel level[] = {
-    EchoCancellation::kLowSuppression,
-    EchoCancellation::kModerateSuppression,
-    EchoCancellation::kHighSuppression,
-  };
-  for (size_t i = 0; i < arraysize(level); i++) {
-    EXPECT_EQ(apm_->kNoError,
-        apm_->echo_cancellation()->set_suppression_level(level[i]));
-    EXPECT_EQ(level[i],
-        apm_->echo_cancellation()->suppression_level());
-  }
-
-  EchoCancellation::Metrics metrics;
-  EXPECT_EQ(apm_->kNotEnabledError,
-            apm_->echo_cancellation()->GetMetrics(&metrics));
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_enabled());
-
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_metrics(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->are_metrics_enabled());
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_metrics(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->are_metrics_enabled());
-
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_delay_logging(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_delay_logging_enabled());
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_delay_logging(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_delay_logging_enabled());
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-
-  int median = 0;
-  int std = 0;
-  float poor_fraction = 0;
-  EXPECT_EQ(apm_->kNotEnabledError, apm_->echo_cancellation()->GetDelayMetrics(
-                                        &median, &std, &poor_fraction));
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_TRUE(apm_->echo_cancellation()->aec_core() != NULL);
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_FALSE(apm_->echo_cancellation()->aec_core() != NULL);
-}
-
 TEST_F(ApmTest, DISABLED_EchoCancellationReportsCorrectDelays) {
   // TODO(bjornv): Fix this test to work with DA-AEC.
   // Enable AEC only.
