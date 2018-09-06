@@ -32,6 +32,11 @@
 namespace webrtc {
 namespace webrtc_win {
 
+// Represents audio channel configuration constants as understood by Windows.
+// E.g. KSAUDIO_SPEAKER_MONO.  For a list of possible values see:
+// https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/ksmedia/ns-ksmedia-ksaudio_channel_config
+typedef uint32_t ChannelConfig;
+
 static const int64_t kNumMicrosecsPerSec = webrtc::TimeDelta::seconds(1).us();
 static const int64_t kNumMillisecsPerSec = webrtc::TimeDelta::seconds(1).ms();
 
