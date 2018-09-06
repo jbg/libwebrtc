@@ -188,10 +188,7 @@ void EnableAllAPComponents(AudioProcessing* ap) {
 #elif defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
   apm_config.echo_canceller.mobile_mode = false;
   EXPECT_NOERR(ap->echo_cancellation()->enable_drift_compensation(true));
-  EXPECT_NOERR(ap->echo_cancellation()->enable_metrics(true));
-  EXPECT_NOERR(ap->echo_cancellation()->enable_delay_logging(true));
-  EXPECT_NOERR(ap->echo_cancellation()->set_suppression_level(
-      EchoCancellation::SuppressionLevel::kModerateSuppression));
+  apm_config.echo_canceller.legacy_moderate_suppression_level = true;
 
   EXPECT_NOERR(ap->gain_control()->set_mode(GainControl::kAdaptiveAnalog));
   EXPECT_NOERR(ap->gain_control()->set_analog_level_limits(0, 255));
@@ -923,69 +920,6 @@ TEST_F(ApmTest, SampleRatesInt) {
   }
 }
 
-TEST_F(ApmTest, EchoCancellation) {
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_drift_compensation(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_drift_compensation_enabled());
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_drift_compensation(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_drift_compensation_enabled());
-
-  EchoCancellation::SuppressionLevel level[] = {
-    EchoCancellation::kLowSuppression,
-    EchoCancellation::kModerateSuppression,
-    EchoCancellation::kHighSuppression,
-  };
-  for (size_t i = 0; i < arraysize(level); i++) {
-    EXPECT_EQ(apm_->kNoError,
-        apm_->echo_cancellation()->set_suppression_level(level[i]));
-    EXPECT_EQ(level[i],
-        apm_->echo_cancellation()->suppression_level());
-  }
-
-  EchoCancellation::Metrics metrics;
-  EXPECT_EQ(apm_->kNotEnabledError,
-            apm_->echo_cancellation()->GetMetrics(&metrics));
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_enabled());
-
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_metrics(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->are_metrics_enabled());
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_metrics(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->are_metrics_enabled());
-
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_delay_logging(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_delay_logging_enabled());
-  EXPECT_EQ(apm_->kNoError,
-            apm_->echo_cancellation()->enable_delay_logging(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_delay_logging_enabled());
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-
-  int median = 0;
-  int std = 0;
-  float poor_fraction = 0;
-  EXPECT_EQ(apm_->kNotEnabledError, apm_->echo_cancellation()->GetDelayMetrics(
-                                        &median, &std, &poor_fraction));
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
-  EXPECT_TRUE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_TRUE(apm_->echo_cancellation()->aec_core() != NULL);
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(false));
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_FALSE(apm_->echo_cancellation()->aec_core() != NULL);
-}
-
 TEST_F(ApmTest, DISABLED_EchoCancellationReportsCorrectDelays) {
   // TODO(bjornv): Fix this test to work with DA-AEC.
   // Enable AEC only.
@@ -1463,8 +1397,9 @@ TEST_F(ApmTest, VoiceDetection) {
 }
 
 TEST_F(ApmTest, AllProcessingDisabledByDefault) {
-  EXPECT_FALSE(apm_->echo_cancellation()->is_enabled());
-  EXPECT_FALSE(apm_->echo_control_mobile()->is_enabled());
+  AudioProcessing::Config config = apm_->GetConfig();
+  EXPECT_FALSE(config.echo_canceller.enabled);
+  EXPECT_FALSE(config.high_pass_filter.enabled);
   EXPECT_FALSE(apm_->gain_control()->is_enabled());
   EXPECT_FALSE(apm_->high_pass_filter()->is_enabled());
   EXPECT_FALSE(apm_->level_estimator()->is_enabled());
@@ -1607,7 +1542,9 @@ TEST_F(ApmTest, SplittingFilter) {
   // first few frames of data being unaffected by the AEC.
   // TODO(andrew): This test, and the one below, rely rather tenuously on the
   // behavior of the AEC. Think of something more robust.
-  EXPECT_EQ(apm_->kNoError, apm_->echo_cancellation()->Enable(true));
+  AudioProcessing::Config apm_config = apm_->GetConfig();
+  apm_config.echo_canceller.enabled = true;
+  apm_->ApplyConfig(apm_config);
   // Make sure we have extended filter enabled. This makes sure nothing is
   // touched until we have a farend frame.
   Config config;
@@ -2893,25 +2830,17 @@ std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
   }
 
   // Disable all components except for an AEC and the residual echo detector.
-  AudioProcessing::Config config;
-  config.residual_echo_detector.enabled = true;
-  config.high_pass_filter.enabled = false;
-  config.gain_controller2.enabled = false;
-  apm->ApplyConfig(config);
+  AudioProcessing::Config apm_config;
+  apm_config.residual_echo_detector.enabled = true;
+  apm_config.high_pass_filter.enabled = false;
+  apm_config.gain_controller2.enabled = false;
+  apm_config.echo_canceller.enabled = true;
+  apm_config.echo_canceller.mobile_mode = !use_AEC2;
+  apm->ApplyConfig(apm_config);
   EXPECT_EQ(apm->gain_control()->Enable(false), 0);
   EXPECT_EQ(apm->level_estimator()->Enable(false), 0);
   EXPECT_EQ(apm->noise_suppression()->Enable(false), 0);
   EXPECT_EQ(apm->voice_detection()->Enable(false), 0);
-
-  if (use_AEC2) {
-    EXPECT_EQ(apm->echo_control_mobile()->Enable(false), 0);
-    EXPECT_EQ(apm->echo_cancellation()->enable_metrics(true), 0);
-    EXPECT_EQ(apm->echo_cancellation()->enable_delay_logging(true), 0);
-    EXPECT_EQ(apm->echo_cancellation()->Enable(true), 0);
-  } else {
-    EXPECT_EQ(apm->echo_cancellation()->Enable(false), 0);
-    EXPECT_EQ(apm->echo_control_mobile()->Enable(true), 0);
-  }
   return apm;
 }
 
