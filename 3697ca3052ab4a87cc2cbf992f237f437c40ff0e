@@ -22,6 +22,29 @@
       "revId": "3697ca3052ab4a87cc2cbf992f237f437c40ff0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae5e8c47_683271ac",
+        "filename": "modules/audio_coding/neteq/decision_logic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-09-06T12:53:16Z",
+      "side": 1,
+      "message": "A value of 3 seems low to me, it means that we only trigger the postpone decoding if num_consecutive_normals_ is 1 or 2. \nPerhaps this should be related to the size of packets somehow, since if the packet size is 60ms, num_consecutive_normals_ should go up to 6 when a single packet is received. WDYT?",
+      "range": {
+        "startLine": 46,
+        "startChar": 44,
+        "endLine": 46,
+        "endChar": 45
+      },
+      "revId": "3697ca3052ab4a87cc2cbf992f237f437c40ff0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
