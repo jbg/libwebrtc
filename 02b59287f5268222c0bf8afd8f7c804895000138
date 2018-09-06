@@ -45,6 +45,30 @@
       "revId": "02b59287f5268222c0bf8afd8f7c804895000138",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce9d6c10_8a48969e",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-09-06T11:52:28Z",
+      "side": 1,
+      "message": "Consider it a style improvement :)",
+      "parentUuid": "d04bd69b_0931e68c",
+      "range": {
+        "startLine": 1132,
+        "startChar": 0,
+        "endLine": 1133,
+        "endChar": 0
+      },
+      "revId": "02b59287f5268222c0bf8afd8f7c804895000138",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

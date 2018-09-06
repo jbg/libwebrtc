@@ -22,6 +22,30 @@
       "revId": "88c1a9ecbc52f60b8f79a0111c54b9c9600c1c5a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "134ade29_b2e7ffea",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2179,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-09-06T11:52:28Z",
+      "side": 0,
+      "message": "It is intended. We set the payload name to VP8 without having a VP8 encoder, so it fails int he packetization step, but for this test we don\u0027t need to use VP8.",
+      "parentUuid": "ca1f83da_bfa31602",
+      "range": {
+        "startLine": 2179,
+        "startChar": 0,
+        "endLine": 2179,
+        "endChar": 51
+      },
+      "revId": "88c1a9ecbc52f60b8f79a0111c54b9c9600c1c5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
