@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "efc2b2a9_5b2d6352",
+        "filename": "modules/video_coding/codecs/multiplex/multiplex_decoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-09-06T21:10:32Z",
+      "side": 1,
+      "message": "I see. Would you prefer signaling it with a bool in MultiplexImage then? Right now, a user can have a MultiplexDecoderFactory() where augmenting data is supported and MultiplexEncoderFactory where it is not, or vice versa. I am thinking ahead about adding different multiplex-sdp entries  that can eb negotiated and realized it when thinking about this asymmetry.",
+      "parentUuid": "2e469e25_8538fe3a",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 206,
+        "endChar": 27
+      },
+      "revId": "ac6dd301e3e800cf9d93890d7543e9ed1dec06dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e8e0e22_d20d9d10",
         "filename": "modules/video_coding/codecs/multiplex/multiplex_encoded_image_packer.cc",
         "patchSetId": 2
@@ -59,6 +83,24 @@
       "writtenOn": "2018-09-06T20:16:57Z",
       "side": 1,
       "message": "needed?",
+      "revId": "ac6dd301e3e800cf9d93890d7543e9ed1dec06dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6200dbbd_326d8993",
+        "filename": "modules/video_coding/codecs/multiplex/multiplex_encoded_image_packer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5682
+      },
+      "writtenOn": "2018-09-06T21:10:32Z",
+      "side": 1,
+      "message": "\"git cl lint\" suggests adding.",
+      "parentUuid": "7e8e0e22_d20d9d10",
       "revId": "ac6dd301e3e800cf9d93890d7543e9ed1dec06dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
