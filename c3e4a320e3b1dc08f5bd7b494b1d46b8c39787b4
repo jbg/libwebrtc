@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c32bcda8_08974d76",
+        "filename": "audio/test/audio_bwe_integration_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T13:29:05Z",
+      "side": 1,
+      "message": "OnAudioTransportOverhead...?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 78
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b73ff875_5054a20d",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T13:29:05Z",
+      "side": 1,
+      "message": "It would be nice with a TODO here indicating that audio senders should be called when they are moved to RtpTransportControllerSend as well.",
+      "range": {
+        "startLine": 323,
+        "startChar": 2,
+        "endLine": 323,
+        "endChar": 53
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19947619_fb5b06b6",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T13:29:05Z",
+      "side": 1,
+      "message": "We are already in webrtc namespace, so webrtc:: can be removed.",
+      "range": {
+        "startLine": 46,
+        "startChar": 30,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "936dd6b9_cab4c154",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T13:29:05Z",
+      "side": 1,
+      "message": "Why do we add the audio notification that was not there before?",
+      "range": {
+        "startLine": 1510,
+        "startChar": 0,
+        "endLine": 1510,
+        "endChar": 72
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d300616d_39add0e9",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2056,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T13:29:05Z",
+      "side": 1,
+      "message": "Why do we add the video notification that was not here before?",
+      "range": {
+        "startLine": 2055,
+        "startChar": 2,
+        "endLine": 2056,
+        "endChar": 37
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2334171_aaf507c3",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T13:29:05Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it make sense that the rtp_video_sender calls VideoSendStream with the calculated values rather than the opposite like now?",
+      "range": {
+        "startLine": 520,
+        "startChar": 21,
+        "endLine": 520,
+        "endChar": 37
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
