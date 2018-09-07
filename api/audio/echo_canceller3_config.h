@@ -32,6 +32,7 @@ struct EchoCanceller3Config {
     size_t hysteresis_limit_2_blocks = 1;
     size_t skew_hysteresis_blocks = 3;
     size_t fixed_capture_delay_samples = 0;
+    bool use_new_render_buffering = true;
   } delay;
 
   struct Filter {
