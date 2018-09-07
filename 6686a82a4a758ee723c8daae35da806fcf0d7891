@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "137c70d1_37d53d0c",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-07T20:42:46Z",
+      "side": 1,
+      "message": "Do the encryptor/decryptor need to be configurable during object lifetime, or can this be an argument to the c-tor instead? That would make the lifetime easier to reason about.",
+      "revId": "6686a82a4a758ee723c8daae35da806fcf0d7891",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55b3db39_b41ce60c",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-07T20:42:46Z",
+      "side": 1,
+      "message": "Returning a non-const pointer from a const object violates the const-ness of the object, as well as the style guide (https://google.github.io/styleguide/cppguide.html#Use_of_const).\n\nIs a Get... function really necessary? if used by sub class, can it at least be protected, not public?",
+      "revId": "6686a82a4a758ee723c8daae35da806fcf0d7891",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
