@@ -311,6 +311,30 @@
     },
     {
       "key": {
+        "uuid": "55aacba3_57ef4efa",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-07T07:59:43Z",
+      "side": 1,
+      "message": "\u003e No, extracting a non-public target will work---you just have to move enough stuff into it. Something like\n[...]\n\n\u003e where foo_internal.h/.cc contains only nonpublic functions, foo.h/.cc contains only public functions, and the latter may call the former but not the other way around (which may mean that some public functions are thin wrappers around some nonpublic functions).\n\u003e \n\u003e If there is some type that both foo and foo_internal needs to use, it has to go in a separate public target. I\u0027ve encountered exactly this situation with Opus: public functions, a large body of nonpublic functions, and a config struct that both need to use.\n\nCould work, but seems a bit awkward.\n\nFor example, say that the main purpose of foo.h, from an applications point of view, is to declare an interface and a few static create methods (I think it\u0027s a common pattern in our code to attach static Create methods to an otherwise abstract interface, but I might be wrong). And foo_internal.* provides some implementation of that interface.\n\nThen we\u0027d have to move the interface declaration to a separate target, and header file, say foo_interface and foo_interface.h, which both foo and foo_internal can depend on. But the implementation of the Create methods would need to depend on foo or foo_internal, so it can\u0027t be moved into the foo_interface target since that would introduce a circular dependency. So then we\u0027d either have to stop using the pattern of Create methods on an interface, or bend the rule that declaration and implementation should go in the same target. \n\nIf you\u0027re confident those things can be worked out, I\u0027m ok with aiming for a structure like\n\nfoo:          depends foo_internal, foo_interface\nfoo_internal: depends foo_interface\nfoo_tests:    depends foo, foo_internal, foo_interface\n\nIf we to it this way, the main purpose of the foo target would be to define the public surface to the foo* targets. \n\nWhen you say foo_interface should be a public target, do you mean that it should be a public dependency of foo, or that applications are expected to depend on it directly? I.e., are applications expected to only directly depend on foo, and include foo.h, or are they expected to directly include also foo_interface.h and/or directly depend on the foo_interface target?\n\nAnd it\u0027s also unclear to me which of these things can go together inside the api/ folder.",
+      "parentUuid": "c34200b0_c72d1c9e",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b32bb098_a5cbdf0c",
         "filename": "style-guide.md",
         "patchSetId": 1
