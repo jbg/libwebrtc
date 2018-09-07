@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ec8bf44_030704be",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-09-07T09:46:08Z",
+      "side": 1,
+      "message": "The reason this isn\u0027t a proper re-land is a merge conflict here.\n\nNow that the Loggable\u003csev\u003e optimization is gone, the LOG and LOG_V implementations can be merged cost-free.",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 530,
+        "endChar": 65
+      },
+      "revId": "46c9450a07a7b889696d87d220a10b7d0d466a0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
