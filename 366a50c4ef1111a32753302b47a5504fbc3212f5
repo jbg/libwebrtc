@@ -22,6 +22,30 @@
       "revId": "366a50c4ef1111a32753302b47a5504fbc3212f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2ac323a_2664d970",
+        "filename": "modules/audio_coding/neteq/tools/neteq_delay_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-07T12:54:30Z",
+      "side": 0,
+      "message": "That would be much better. Something like this: https://godbolt.org/z/0IAjhw",
+      "parentUuid": "2d28f58b_de6a050e",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 11
+      },
+      "revId": "366a50c4ef1111a32753302b47a5504fbc3212f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
