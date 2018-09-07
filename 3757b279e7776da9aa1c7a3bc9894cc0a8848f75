@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0922c59_745c2cde",
+        "filename": "api/rtpparameters.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-09-07T10:48:04Z",
+      "side": 1,
+      "message": "add the version number as well, otherwise we won\u0027t be able to update it.",
+      "range": {
+        "startLine": 133,
+        "startChar": 50,
+        "endLine": 133,
+        "endChar": 62
+      },
+      "revId": "3757b279e7776da9aa1c7a3bc9894cc0a8848f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
