@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8dcec85b_f71a63a8",
+        "filename": "modules/rtp_rtcp/source/rtp_format.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-07T08:59:14Z",
+      "side": 1,
+      "message": "Updated comment.\nThis check imported from vp9 checks. (so that I will be able to remove it there)\nI find it is easier to write it with simple compare that explaining why this corner case matter \ninstead of complicated compare explaining when it can happen.",
+      "parentUuid": "62003aa6_c840b3ad",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "af2e96cc5ea6782e6e5b9294b63b11465003a305",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97224e2e_bda9ad50",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2018-09-07T08:15:09Z",
       "side": 1,
       "message": "Nit: Don\u0027t forget to add here DCHECK for the first packet when first_packet_reduction_len is set to something in the future. I think it won\u0027t hurt to add it right now.",
+      "range": {
+        "startLine": 369,
+        "startChar": 4,
+        "endLine": 369,
+        "endChar": 17
+      },
+      "revId": "af2e96cc5ea6782e6e5b9294b63b11465003a305",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba720da6_9df73964",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-07T08:59:14Z",
+      "side": 1,
+      "message": "Ack,\nThis code fully controls what is set in the PayloadSizeLimits, so will add that check\nwhen will start seting first_packet_reduction_len in this function.\n\nWill have to change code around here anyway (because this function also have to make sure that packet passed to NextPacket has promised capacity)",
+      "parentUuid": "97224e2e_bda9ad50",
       "range": {
         "startLine": 369,
         "startChar": 4,
