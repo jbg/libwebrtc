@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f598288c_a842d58e",
+        "filename": "modules/audio_processing/aec3/block_processor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18cc6ad_a9f87141",
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c46ac14f_60663021",
         "filename": "modules/audio_processing/aec3/block_processor2.cc",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a342eb13_41e1e5d0",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c46ac14f_60663021",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "349494d9_478820c1",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Actually, I do not need to return anything from the PrepareCaptureProcessing call. Cleaning up.",
+      "parentUuid": "ab0b71a8_8bd1cc82",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 19
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5b938f1_4c3e82cb",
         "filename": "modules/audio_processing/aec3/block_processor2.cc",
         "patchSetId": 5
@@ -85,6 +151,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1bb4675_9e8f8355",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "This is handled by the DetectLostCaptureFrames logic. It makes sure that the read index of the down-sampled buffer does not wander off, causing a \"noncausal\" delay from the delay estimators point of view.",
+      "parentUuid": "a5b938f1_4c3e82cb",
+      "range": {
+        "startLine": 159,
+        "startChar": 3,
+        "endLine": 159,
+        "endChar": 0
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "8a85fa99_b786a2aa",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fc0eb30_920bfdbc",
+      "range": {
+        "startLine": 341,
+        "startChar": 25,
+        "endLine": 341,
+        "endChar": 49
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66765fd9_d641a529",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 5
@@ -131,6 +245,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c9b1d2_00ebfe92",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66765fd9_d641a529",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "ebfe9e27_e1d390e9",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Renaming to DetectExcessRenderBlocks.",
+      "parentUuid": "fb61140a_14ecc599",
+      "range": {
+        "startLine": 302,
+        "startChar": 29,
+        "endLine": 302,
+        "endChar": 52
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a07fcae_1c1245ac",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 5
@@ -177,6 +339,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76f0d9b6_db414ae5",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Removing this.",
+      "parentUuid": "2a07fcae_1c1245ac",
+      "range": {
+        "startLine": 308,
+        "startChar": 28,
+        "endLine": 308,
+        "endChar": 40
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -332,6 +518,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "637dc851_d1112840",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-07T14:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eebdf23_329e729d",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
