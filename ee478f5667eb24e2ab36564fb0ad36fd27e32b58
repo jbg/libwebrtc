@@ -16,6 +16,24 @@
       "revId": "ee478f5667eb24e2ab36564fb0ad36fd27e32b58",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a14fe61b_21d587f1",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2018-09-07T09:50:11Z",
+      "side": 1,
+      "message": "Changed back to const.",
+      "parentUuid": "3d469511_f53050d8",
+      "revId": "ee478f5667eb24e2ab36564fb0ad36fd27e32b58",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
