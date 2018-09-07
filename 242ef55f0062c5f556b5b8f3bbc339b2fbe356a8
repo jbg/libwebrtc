@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5946fd96_93804d7e",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T12:51:31Z",
+      "side": 1,
+      "message": "I guess this is a later part of a series, but shouldn\u0027t the name be either timestamp() or GetTimestamp()? (And possibly with a unit since we often use ms or us for timestamps.\n\nWhat timestamp is it describing, capture time? I\u0027d suggest:\nSetCaptureTimeTicks(...)\nGetCaptureTimeTicks()\n\nGuess that would be for another CL though...",
+      "range": {
+        "startLine": 46,
+        "startChar": 11,
+        "endLine": 46,
+        "endChar": 20
+      },
+      "revId": "242ef55f0062c5f556b5b8f3bbc339b2fbe356a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4b5fb91_8e028881",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T12:51:31Z",
+      "side": 1,
+      "message": "Remove todo?",
+      "range": {
+        "startLine": 63,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "242ef55f0062c5f556b5b8f3bbc339b2fbe356a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b55124a_7916aa81",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-07T12:51:31Z",
+      "side": 1,
+      "message": "rtp_timestamp_ticks_?",
+      "range": {
+        "startLine": 95,
+        "startChar": 11,
+        "endLine": 95,
+        "endChar": 25
+      },
+      "revId": "242ef55f0062c5f556b5b8f3bbc339b2fbe356a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
