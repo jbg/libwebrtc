@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62003aa6_c840b3ad",
+        "filename": "modules/rtp_rtcp/source/rtp_format.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-09-07T08:15:09Z",
+      "side": 1,
+      "message": "Nit: This is a very strange and improbably corner case. Probably you should add some log message in here.\n\nEither way, you should change the comment, because this can only happen if the payload is exactly 1 byte long (the proof is simple: if there are at least 3 packets, we could avoid sending one middle packet and still fit into the capacity, because last and first extensions fit into packet and leave some space thanks to check at L70-71. This leaves 2 packets and 1 byte of payload).",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "af2e96cc5ea6782e6e5b9294b63b11465003a305",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97224e2e_bda9ad50",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-09-07T08:15:09Z",
+      "side": 1,
+      "message": "Nit: Don\u0027t forget to add here DCHECK for the first packet when first_packet_reduction_len is set to something in the future. I think it won\u0027t hurt to add it right now.",
+      "range": {
+        "startLine": 369,
+        "startChar": 4,
+        "endLine": 369,
+        "endChar": 17
+      },
+      "revId": "af2e96cc5ea6782e6e5b9294b63b11465003a305",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
