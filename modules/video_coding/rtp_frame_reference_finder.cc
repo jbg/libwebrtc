@@ -398,7 +398,7 @@ RtpFrameReferenceFinder::FrameDecision RtpFrameReferenceFinder::ManageFrameVp9(
   }
   RTPVideoTypeHeader rtp_codec_header = video_header->video_type_header;
 
-  const RTPVideoHeaderVP9& codec_header =
+  RTPVideoHeaderVP9& codec_header =
       absl::get<RTPVideoHeaderVP9>(rtp_codec_header);
 
   if (codec_header.picture_id == kNoPictureId ||
@@ -440,12 +440,17 @@ RtpFrameReferenceFinder::FrameDecision RtpFrameReferenceFinder::ManageFrameVp9(
       RTC_LOG(LS_WARNING) << "Received scalability structure on a non base "
                              "layer frame. Scalability structure ignored.";
     } else {
-      current_ss_idx_ = Add<kMaxGofSaved>(current_ss_idx_, 1);
-      if (codec_header.gof.num_frames_in_gof == 0 ||
-          codec_header.gof.num_frames_in_gof > kMaxVp9FramesInGof) {
+      if (codec_header.gof.num_frames_in_gof > kMaxVp9FramesInGof) {
         return kDrop;
       }
 
+      if (codec_header.gof.num_frames_in_gof == 0) {
+        RTC_LOG(LS_WARNING) << "Number of frames in GOF is zero. Assume "
+                               "that stream has only one temporal layer.";
+        codec_header.gof.SetGofInfoVP9(kTemporalStructureMode1);
+      }
+
+      current_ss_idx_ = Add<kMaxGofSaved>(current_ss_idx_, 1);
       scalability_structures_[current_ss_idx_] = codec_header.gof;
       scalability_structures_[current_ss_idx_].pid_start = frame->id.picture_id;
       gof_info_.emplace(unwrapped_tl0,
