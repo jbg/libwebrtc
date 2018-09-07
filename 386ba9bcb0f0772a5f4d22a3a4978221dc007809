@@ -1,0 +1,377 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a18cc6ad_a9f87141",
+        "filename": "modules/audio_processing/aec3/block_processor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Since there are now 2 Create methods, I think comments are needed to describe that.",
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c46ac14f_60663021",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab0b71a8_8bd1cc82",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "I think it is a bit confusing how the render_event_ is used. \nIt is both used to propagate information from the last BufferRender call as well as to handle the output of the PrepareCaptureProcessing() call.\n\nI would suggest to limit the usage of render_event_ to only handle the BufferRender call output, and instead use a local variable to handle the output of output of the PrepareCaptureProcessing() call.\n\n\nThen the reset of the render_event_ variable (flag) at line 173 could be moved to line 125 and the usage of render_even_ would be more clear.",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 19
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b938f1_4c3e82cb",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "The handling of noncausal delay in BlockProcessor is not present here. I guess that this is instead handled by the minimum buffer latency code in RenderDelayBuffer2? In that case, has it been verified that the AEC cannot end up (and then also get stuck) in a noncausal state?",
+      "range": {
+        "startLine": 159,
+        "startChar": 3,
+        "endLine": 159,
+        "endChar": 0
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fc0eb30_920bfdbc",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "I think we should also have a variable in the config for this.",
+      "range": {
+        "startLine": 341,
+        "startChar": 25,
+        "endLine": 341,
+        "endChar": 49
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66765fd9_d641a529",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb61140a_14ecc599",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Is it for certain that it is capture frames that are lost? The effect should be the same if frames are lost on the render side after the render reference signal has been passed to APM.",
+      "range": {
+        "startLine": 302,
+        "startChar": 29,
+        "endLine": 302,
+        "endChar": 52
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a07fcae_1c1245ac",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Is this event name still relevant after this CL?",
+      "range": {
+        "startLine": 308,
+        "startChar": 28,
+        "endLine": 308,
+        "endChar": 40
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adebac3f_22186f03",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Maybe instead DetectLostCaptureBlocks, or DetectLostCaptureData?",
+      "range": {
+        "startLine": 433,
+        "startChar": 29,
+        "endLine": 433,
+        "endChar": 52
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2eb42ea_73242408",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Change to right shift?",
+      "range": {
+        "startLine": 436,
+        "startChar": 56,
+        "endLine": 436,
+        "endChar": 71
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98c46c17_2680e993",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "This statement is a bit strange. Since min_latency_blocks_ is initialized to 0, and latency_blocks is positive, this would always be 0, apart from the assignment on 440.\n\nThat implementation does, however, not really match a min and I think another name than min_latency_blocks_ should be used.",
+      "range": {
+        "startLine": 437,
+        "startChar": 33,
+        "endLine": 437,
+        "endChar": 52
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35bc21ae_5eaf245d",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "I don\u0027t follow the role of lost_capture_counter_. Here it seems that it is increased at each call to DetectLostCaptureFrames(), but then the name of the counter seems weird since DetectLostCaptureFrames() is called regardless of the block being lost or not.\n\nIt seems to me that this if-statement will periodically be true every config_.delay.api_call_jitter_blocks block.",
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cddb35c_91d1e9a8",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "I don\u0027t really see why a buffer latency greater than the threshold should map to a lost capture detection. Could you please add a comment that explains that.",
+      "range": {
+        "startLine": 439,
+        "startChar": 41,
+        "endLine": 439,
+        "endChar": 55
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1aa8705_a3fa5212",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Is there a mechanism for recovering after a lost capture? \nSince \n1) min_latency_blocks_ \u003d std::min(min_latency_blocks_, latency_blocks);\n\nand then periodically the check and reset are done\n2) lost_capture \u003d min_latency_blocks_ \u003e kMaxLostFrames;\n3) min_latency_blocks_ \u003d latency_blocks;\n\nIt seems like once we have reached min_latency_blocks_ \u003e kMaxLostFrames step 1) ensures that then also latency_blocks \u003e kMaxLostFrames holds. Step 3) will then set min_latency_blocks_ \u003d latency_blocks; and the result in 2) will keep being true.\n\nIs it so, that a call to Reset() is always the effect of lost_capture being true? In that case, it would be good to comment on that.\nAlso, in that case the reset  min_latency_blocks_ \u003d latency_blocks; should probably instead be  min_latency_blocks_ \u003d 0; as it is set in the Reset().",
+      "range": {
+        "startLine": 440,
+        "startChar": 26,
+        "endLine": 440,
+        "endChar": 40
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eebdf23_329e729d",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44343e55_f4cd256a",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "The skew estimation in RenderDelayController has been removed here, and replaced by the lost_capture functionality in the RenderDelayBuffer2. Those are fairly different though, in that the former detects single-digit number of blocks lost, while the latter kicks in when the number if blocks list exceed a threshold.\n\nDoes the new approach sufficiently well handle cases such as when a few frames are lost during silence?",
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "accd710a_d80f8bf7",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-07T05:27:45Z",
+      "side": 1,
+      "message": "Please be more verbose in the comment on what to do. Is it a parameter or the whole method that should be removed.",
+      "range": {
+        "startLine": 176,
+        "startChar": 40,
+        "endLine": 176,
+        "endChar": 64
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
