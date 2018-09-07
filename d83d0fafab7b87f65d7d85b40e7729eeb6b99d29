@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9c327859_a4fd3f96",
+        "filename": "rtc_base/messagequeue.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-07T09:44:35Z",
+      "side": 1,
+      "message": "Is it in fact only called from the destructor? IIRC the thread analysis doesn\u0027t enforce anything there, so you should be able to tag it with RTC_EXCLUSIVE_LOCKS_REQUIRED(\u0026crit_).",
+      "parentUuid": "064bd4cd_8e863178",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 29
+      },
+      "revId": "d83d0fafab7b87f65d7d85b40e7729eeb6b99d29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a6398ac_f8d8c5fd",
         "filename": "rtc_base/messagequeue.cc",
         "patchSetId": 4
@@ -42,6 +66,47 @@
         "endLine": 459,
         "endChar": 54
       },
+      "revId": "d83d0fafab7b87f65d7d85b40e7729eeb6b99d29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da5c04d5_94bc58ed",
+        "filename": "rtc_base/messagequeue.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-07T09:44:35Z",
+      "side": 1,
+      "message": "That sounds like it makes sense.",
+      "parentUuid": "7a6398ac_f8d8c5fd",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 54
+      },
+      "revId": "d83d0fafab7b87f65d7d85b40e7729eeb6b99d29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d1e2fd0_1b63b17e",
+        "filename": "rtc_base/messagequeue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-07T09:44:35Z",
+      "side": 1,
+      "message": "This is exactly what RTC_EXCLUSIVE_LOCKS_REQUIRED(\u0026crit_) means. Not sure you need a comment for it too.",
       "revId": "d83d0fafab7b87f65d7d85b40e7729eeb6b99d29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
