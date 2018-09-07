@@ -34,6 +34,24 @@
       "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f437089_906965c7",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-07T12:22:27Z",
+      "side": 0,
+      "message": "\u003e We\u0027ll move audio into the rtp transport controller send too soon. I can add a TODO on that if you prefer.\n\nIt would be nice with some details on the direction in TODO item and/or commit message. From looking at this cl, it seems overhead info for video is routed to the fec controller which is being moved, and currently used for video only. Is that right? It\u0027s not at all clear to me what happens on the OnAudioTransportOverhead path.\n\n\u003e Do you feel strongly about moving the OnTransportOverheadChanged into Call? It would be temporary anyway.\n\nI think it would be better to not expose this temporary audio/video split to users of Call. But I don\u0027t feel strongly about it.",
+      "parentUuid": "aaf3abab_ca2a153c",
+      "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
