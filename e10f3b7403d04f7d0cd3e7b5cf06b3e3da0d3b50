@@ -16,6 +16,24 @@
       "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf3abab_ca2a153c",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-09-07T11:57:57Z",
+      "side": 0,
+      "message": "We\u0027ll move audio into the rtp transport controller send too soon. I can add a TODO on that if you prefer.\n\nDo you feel strongly about moving the OnTransportOverheadChanged into Call? It would be temporary anyway.",
+      "parentUuid": "7607df38_f4a9c7a7",
+      "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
