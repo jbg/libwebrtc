@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09156824_db4396e3",
+        "filename": "rtc_base/messagequeue.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-07T10:30:09Z",
+      "side": 1,
+      "message": ";",
+      "range": {
+        "startLine": 307,
+        "startChar": 20,
+        "endLine": 307,
+        "endChar": 21
+      },
+      "revId": "ad61c4158a6e289e1d03eab1ad5a2b4e2af5a1bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
