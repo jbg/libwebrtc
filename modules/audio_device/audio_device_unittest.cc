@@ -1060,10 +1060,10 @@ TEST_P(AudioDeviceTest, DISABLED_MeasureLoopbackLatency) {
       std::max(kTestTimeOutInMilliseconds, 1000 * kMeasureLatencyTimeInSec)));
   StopRecording();
   StopPlayout();
-  // Verify that the correct number of transmitted impulses are detected.
-  EXPECT_EQ(audio_stream.num_latency_values(),
+  // Verify that a sufficient number of transmitted impulses are detected.
+  EXPECT_GE(audio_stream.num_latency_values(),
             static_cast<size_t>(
-                kImpulseFrequencyInHz * kMeasureLatencyTimeInSec - 1));
+                kImpulseFrequencyInHz * kMeasureLatencyTimeInSec - 2));
   // Print out min, max and average delay values for debugging purposes.
   audio_stream.PrintResults();
 }
