@@ -99,6 +99,24 @@
       "revId": "523b4c43303951cff837bf0269bde00b7b48acbe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "867ce833_71b6312e",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-07T11:26:32Z",
+      "side": 0,
+      "message": "I think it\u0027s ok as is for now. We can consider adding a mediatype argument to GetTransportControllerSend later.",
+      "parentUuid": "c7a79b1f_d87de56a",
+      "revId": "523b4c43303951cff837bf0269bde00b7b48acbe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

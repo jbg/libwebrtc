@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7607df38_f4a9c7a7",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-07T11:26:32Z",
+      "side": 0,
+      "message": "If all callers need to do this, I think it would look better to keep Call::OnTransportOverheadChanged for now, but delete te mediatype argument if it isn\u0027t needed. And let that delegate the video work to RtpTransportControllerSend.\n\nI take it OnAudioTransportOverheadChanged is a temporary thing? What\u0027s the next step for audio?",
+      "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
