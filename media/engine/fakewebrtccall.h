@@ -316,8 +316,8 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
 
   void SignalChannelNetworkState(webrtc::MediaType media,
                                  webrtc::NetworkState state) override;
-  void OnTransportOverheadChanged(webrtc::MediaType media,
-                                  int transport_overhead_per_packet) override;
+  void OnAudioTransportOverheadChanged(
+      int transport_overhead_per_packet) override;
   void OnSentPacket(const rtc::SentPacket& sent_packet) override;
 
   testing::NiceMock<webrtc::MockRtpTransportControllerSend>
@@ -337,9 +337,6 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
 
   int num_created_send_streams_;
   int num_created_receive_streams_;
-
-  int audio_transport_overhead_;
-  int video_transport_overhead_;
 };
 
 }  // namespace cricket
