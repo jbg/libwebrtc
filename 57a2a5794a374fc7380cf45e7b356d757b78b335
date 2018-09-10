@@ -52,6 +52,24 @@
       "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2eb8db8_4ac479dd",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-09-10T13:01:56Z",
+      "side": 1,
+      "message": "I think it\u0027s otherwise, ntp_time_ms() is in the receiver clock after all the adjustments are done. So it\u0027s not skewed. \n\nImagine the situation where sender clock ticks at the slower rate, than the receiver and e2e delay is fixed at X ms. The rtp clock now ticks slower than 90khz. It will result in the increasing clock skew, which estimation will compensate for. So ntp_timestamp_ms() will be always X ms in the past (in fact, a bit more because RTT will be overestimated with skewed clocks). Once you apply RTP delay as done currently, the capture start time will drift forward (in the receiver clock).\n\nOn the other hand, after this change the capture start time will be always fixed at |first_frame_timestamp - X|",
+      "parentUuid": "ac142bf2_a190abde",
+      "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
