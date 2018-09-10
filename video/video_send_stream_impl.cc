@@ -215,6 +215,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       encoder_target_rate_bps_(0),
       encoder_bitrate_priority_(initial_encoder_bitrate_priority),
       has_packet_feedback_(false),
+      has_alr_probing_(false),
       video_stream_encoder_(video_stream_encoder),
       encoder_feedback_(Clock::GetRealTimeClock(),
                         config_->rtp.ssrcs,
@@ -278,11 +279,13 @@ VideoSendStreamImpl::VideoSendStreamImpl(
     }
     if (alr_settings) {
       transport->EnablePeriodicAlrProbing(true);
+      has_alr_probing_ = true;
       transport->SetPacingFactor(alr_settings->pacing_factor);
       configured_pacing_factor_ = alr_settings->pacing_factor;
       transport->SetQueueTimeLimit(alr_settings->max_paced_queue_time);
     } else {
       transport->EnablePeriodicAlrProbing(false);
+      has_alr_probing_ = false;
       transport->SetPacingFactor(PacedSender::kDefaultPaceMultiplier);
       configured_pacing_factor_ = PacedSender::kDefaultPaceMultiplier;
       transport->SetQueueTimeLimit(PacedSender::kMaxQueueLengthMs);
@@ -291,6 +294,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
 
   if (config_->periodic_alr_bandwidth_probing) {
     transport->EnablePeriodicAlrProbing(true);
+    has_alr_probing_ = true;
   }
 
   // Currently, both ULPFEC and FlexFEC use the same FEC rate calculation logic,
@@ -384,7 +388,7 @@ void VideoSendStreamImpl::StartupVideoSendStream() {
           static_cast<uint32_t>(encoder_min_bitrate_bps_),
           encoder_max_bitrate_bps_, static_cast<uint32_t>(max_padding_bitrate_),
           !config_->suspend_below_min_bitrate, config_->track_id,
-          encoder_bitrate_priority_, has_packet_feedback_});
+          encoder_bitrate_priority_, has_packet_feedback_, has_alr_probing_});
   // Start monitoring encoder activity.
   {
     rtc::CritScope lock(&encoder_activity_crit_sect_);
@@ -444,7 +448,7 @@ void VideoSendStreamImpl::SignalEncoderActive() {
           static_cast<uint32_t>(encoder_min_bitrate_bps_),
           encoder_max_bitrate_bps_, static_cast<uint32_t>(max_padding_bitrate_),
           !config_->suspend_below_min_bitrate, config_->track_id,
-          encoder_bitrate_priority_, has_packet_feedback_});
+          encoder_bitrate_priority_, has_packet_feedback_, has_alr_probing_});
 }
 
 void VideoSendStreamImpl::OnEncoderConfigurationChanged(
@@ -506,12 +510,13 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
     // The send stream is started already. Update the allocator with new bitrate
     // limits.
     bitrate_allocator_->AddObserver(
-        this, MediaStreamAllocationConfig{
-                  static_cast<uint32_t>(encoder_min_bitrate_bps_),
-                  encoder_max_bitrate_bps_,
-                  static_cast<uint32_t>(max_padding_bitrate_),
-                  !config_->suspend_below_min_bitrate, config_->track_id,
-                  encoder_bitrate_priority_, has_packet_feedback_});
+        this,
+        MediaStreamAllocationConfig{
+            static_cast<uint32_t>(encoder_min_bitrate_bps_),
+            encoder_max_bitrate_bps_,
+            static_cast<uint32_t>(max_padding_bitrate_),
+            !config_->suspend_below_min_bitrate, config_->track_id,
+            encoder_bitrate_priority_, has_packet_feedback_, has_alr_probing_});
   }
 }
 

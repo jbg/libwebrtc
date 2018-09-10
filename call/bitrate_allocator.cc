@@ -48,6 +48,33 @@ double MediaRatio(uint32_t allocated_bitrate, uint32_t protection_bitrate) {
 }
 }  // namespace
 
+MediaStreamAllocationConfig::MediaStreamAllocationConfig()
+    : min_bitrate_bps(0),
+      max_bitrate_bps(0),
+      pad_up_bitrate_bps(0),
+      enforce_min_bitrate(0),
+      bitrate_priority(0),
+      has_packet_feedback(false),
+      has_alr_probing(false) {}
+
+MediaStreamAllocationConfig::MediaStreamAllocationConfig(
+    uint32_t min_bitrate_bps,
+    uint32_t max_bitrate_bps,
+    uint32_t pad_up_bitrate_bps,
+    bool enforce_min_bitrate,
+    std::string track_id,
+    double bitrate_priority,
+    bool has_packet_feedback,
+    bool has_alr_probing)
+    : min_bitrate_bps(min_bitrate_bps),
+      max_bitrate_bps(max_bitrate_bps),
+      pad_up_bitrate_bps(pad_up_bitrate_bps),
+      enforce_min_bitrate(enforce_min_bitrate),
+      track_id(track_id),
+      bitrate_priority(bitrate_priority),
+      has_packet_feedback(has_packet_feedback),
+      has_alr_probing(has_alr_probing) {}
+
 BitrateAllocator::BitrateAllocator(LimitObserver* limit_observer)
     : limit_observer_(limit_observer),
       last_bitrate_bps_(0),
@@ -156,10 +183,11 @@ void BitrateAllocator::AddObserver(BitrateAllocatorObserver* observer,
     it->enforce_min_bitrate = config.enforce_min_bitrate;
     it->bitrate_priority = config.bitrate_priority;
   } else {
-    bitrate_observer_configs_.push_back(ObserverConfig(
-        observer, config.min_bitrate_bps, config.max_bitrate_bps,
-        config.pad_up_bitrate_bps, config.enforce_min_bitrate, config.track_id,
-        config.bitrate_priority, config.has_packet_feedback));
+    bitrate_observer_configs_.push_back(
+        ObserverConfig(observer, config.min_bitrate_bps, config.max_bitrate_bps,
+                       config.pad_up_bitrate_bps, config.enforce_min_bitrate,
+                       config.track_id, config.bitrate_priority,
+                       config.has_packet_feedback, config.has_alr_probing));
   }
 
   ObserverAllocation allocation;
@@ -195,7 +223,8 @@ void BitrateAllocator::UpdateAllocationLimits() {
     uint32_t stream_padding = config.pad_up_bitrate_bps;
     if (config.enforce_min_bitrate) {
       total_requested_min_bitrate += config.min_bitrate_bps;
-    } else if (config.allocated_bitrate_bps == 0) {
+    } else if (config.allocated_bitrate_bps == 0 && !config.has_alr_probing) {
+      // Pad up to min bitrate iff stream is not enabled and ALR probing is off.
       stream_padding =
           std::max(config.MinBitrateWithHysteresis(), stream_padding);
     }

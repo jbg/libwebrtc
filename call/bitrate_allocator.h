@@ -58,6 +58,15 @@ class BitrateAllocatorObserver {
 // available bitrate and that the bitrate in OnBitrateUpdated will be zero if
 // the |observer| is currently not allowed to send data.
 struct MediaStreamAllocationConfig {
+  MediaStreamAllocationConfig();
+  MediaStreamAllocationConfig(uint32_t min_bitrate_bps,
+                              uint32_t max_bitrate_bps,
+                              uint32_t pad_up_bitrate_bps,
+                              bool enforce_min_bitrate,
+                              std::string track_id,
+                              double bitrate_priority,
+                              bool has_packet_feedback,
+                              bool has_alr_probing);
   uint32_t min_bitrate_bps;
   uint32_t max_bitrate_bps;
   uint32_t pad_up_bitrate_bps;
@@ -65,6 +74,7 @@ struct MediaStreamAllocationConfig {
   std::string track_id;
   double bitrate_priority;
   bool has_packet_feedback;
+  bool has_alr_probing;
 };
 
 // Interface used for mocking
@@ -136,7 +146,8 @@ class BitrateAllocator : public BitrateAllocatorInterface {
                    bool enforce_min_bitrate,
                    std::string track_id,
                    double bitrate_priority,
-                   bool has_packet_feedback)
+                   bool has_packet_feedback,
+                   bool has_alr_probing)
         : TrackConfig(min_bitrate_bps,
                       max_bitrate_bps,
                       enforce_min_bitrate,
@@ -146,7 +157,8 @@ class BitrateAllocator : public BitrateAllocatorInterface {
           allocated_bitrate_bps(-1),
           media_ratio(1.0),
           bitrate_priority(bitrate_priority),
-          has_packet_feedback(has_packet_feedback) {}
+          has_packet_feedback(has_packet_feedback),
+          has_alr_probing(has_alr_probing) {}
 
     BitrateAllocatorObserver* observer;
     uint32_t pad_up_bitrate_bps;
@@ -157,6 +169,7 @@ class BitrateAllocator : public BitrateAllocatorInterface {
     // observers, it should be allocated twice the bitrate above its min.
     double bitrate_priority;
     bool has_packet_feedback;
+    bool has_alr_probing;
 
     uint32_t LastAllocatedBitrate() const;
     // The minimum bitrate required by this observer, including
