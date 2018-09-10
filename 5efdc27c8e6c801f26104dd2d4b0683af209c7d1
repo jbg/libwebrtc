@@ -70,6 +70,30 @@
       "revId": "5efdc27c8e6c801f26104dd2d4b0683af209c7d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d693aba_7debe46c",
+        "filename": "call/bitrate_allocator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-10T13:10:01Z",
+      "side": 1,
+      "message": "Hm, it\u0027s also that I\u0027m full of shit.\nI only intended to change how padding is allocated, not touch the min bitrate. New patch set uploaded.\nFor RTP I think padding will have to stay for now. It is more reliable that probing at low bitrates and we still want |config.pad_up_bitrate_bps| to bite even if ALR is on.\nFor context, this should only affect simulcast screenshare and I would like merge it to the 70 branch, so it\u0027s a minimum effort/risk approach right now.",
+      "parentUuid": "d872766c_a1f59fa7",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 39
+      },
+      "revId": "5efdc27c8e6c801f26104dd2d4b0683af209c7d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
