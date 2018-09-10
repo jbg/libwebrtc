@@ -159,6 +159,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   uint32_t encoder_target_rate_bps_;
   double encoder_bitrate_priority_;
   bool has_packet_feedback_;
+  bool has_alr_probing_;
 
   VideoStreamEncoderInterface* const video_stream_encoder_;
   EncoderRtcpFeedback encoder_feedback_;
