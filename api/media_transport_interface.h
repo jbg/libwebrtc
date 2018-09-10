@@ -98,7 +98,7 @@ class MediaTransportEncodedAudioFrame {
  private:
   int sampling_rate_hz_;
   int starting_sample_index_;
-  int samples_per_channel_;
+  int sample_count_;
 
   // TODO(sukhanov): Refactor NetEq so we don't need sequence number.
   // Having sample_index and sample_count should be enough.
@@ -124,6 +124,66 @@ class MediaTransportAudioSinkInterface {
                       MediaTransportEncodedAudioFrame frame) = 0;
 };
 
+// Represents encoded video frame, along with the codec information.
+class MediaTransportEncodedVideoFrame {
+ public:
+  MediaTransportEncodedVideoFrame(int frame_id,
+                                  std::vector<int> referenced_frame_ids,
+                                  VideoCodecType codec_type,
+                                  const webrtc::EncodedImage& encoded_image)
+      : codec_type_(codec_type),
+        encoded_image_(encoded_image),
+        frame_id_(frame_id),
+        referenced_frame_ids_(std::move(referenced_frame_ids)) {}
+
+  VideoCodecType codec_type() const { return codec_type_; }
+  const webrtc::EncodedImage& encoded_image() const { return encoded_image_; }
+
+  int frame_id() const { return frame_id_; }
+  const std::vector<int>& referenced_frame_ids() const {
+    return referenced_frame_ids_;
+  }
+
+ private:
+  VideoCodecType codec_type_;
+
+  webrtc::EncodedImage encoded_image_;
+
+  // Frame id uniquely identifies a frame in a stream.
+  // It is required by a remote jitter buffer.
+  int frame_id_;
+
+  // A single frame might depend on other frames. This is set of identifiers on
+  // which the current frame depends.
+  std::vector<int> referenced_frame_ids_;
+};
+
+// Interface for receiving encoded video frames from MediaTransportInterface
+// implementations.
+class MediaTransportVideoSinkInterface {
+ public:
+  virtual ~MediaTransportVideoSinkInterface() = default;
+
+  // Called when new encoded video frame is received.
+  virtual void OnData(uint64_t channel_id,
+                      MediaTransportEncodedVideoFrame frame) = 0;
+
+  // Called when the request for keyframe is received.
+  virtual void OnKeyFrameRequested(uint64_t channel_id) = 0;
+};
+
+// Callbacks related to the state of the entire Media Transport, and not related
+// to the individual stream types (video/audio).
+class MediaTransportStateSinkInterface {
+ public:
+  virtual ~MediaTransportStateSinkInterface() = default;
+
+  // Each time writable state is changed, the |OnWritableChanged| is invoked.
+  // The |OnWritableChanged| will be invoked immediately when setting the
+  // callback, if the media transport is writable to begin with.
+  virtual void OnWritableChanged(bool is_writable) = 0;
+};
+
 // Media transport interface for sending / receiving encoded audio/video frames
 // and receiving bandwidth estimate update from congestion control.
 class MediaTransportInterface {
@@ -134,13 +194,27 @@ class MediaTransportInterface {
   virtual RTCError SendAudioFrame(uint64_t channel_id,
                                   MediaTransportEncodedAudioFrame frame) = 0;
 
-  // Sets audio sink. Sink should be unset by calling
-  // SetReceiveAudioSink(nullptr) before the media transport is destroyed or
-  // before new sink is set.
+  // Start asynchronous send of video frame.
+  virtual RTCError SendVideoFrame(
+      uint64_t channel_id,
+      const MediaTransportEncodedVideoFrame& frame) = 0;
+
+  // Requests the keyframe for the particular channel (stream).
+  virtual RTCError RequestKeyFrame(uint64_t channel_id) = 0;
+
+  // Sets audio sink. Sink must be unset by calling SetAudioSink(nullptr)
+  // before the media transport is destroyed or before new sink is set.
   virtual void SetReceiveAudioSink(MediaTransportAudioSinkInterface* sink) = 0;
 
+  // Registers a video sink. Before destruction of media transport, you must
+  // pass a nullptr.
+  virtual void SetReceiveVideoSink(MediaTransportVideoSinkInterface* sink) = 0;
+
+  // Registers callbacks related to the media transport interface itself (e.g.
+  // whether it's writable).
+  virtual void SetStateSink(MediaTransportStateSinkInterface* callbacks) = 0;
+
   // TODO(sukhanov): RtcEventLogs.
-  // TODO(sukhanov): Video interfaces.
   // TODO(sukhanov): Bandwidth updates.
 };
 
@@ -166,5 +240,4 @@ class MediaTransportFactory {
 };
 
 }  // namespace webrtc
-
 #endif  // API_MEDIA_TRANSPORT_INTERFACE_H_
