@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d20086f3_e7dfb1e0",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-10T15:01:20Z",
+      "side": 1,
+      "message": "Please note that the config must be added to the build target that *defines* the symbol while the RTC_EXPORT needs to be added where the symbol is *declared*. This could be painful to maintain.\n\nIt is probably possible to add \u0027configs +\u003d [ \"..:internal_symbols_config\" ]\u0027 to WebRTC\u0027s GN templates since the \u0027configs +\u003d [ \"..:external_symbols_config\" ]\u0027 is used by the shared library. This should not be a problem since we don\u0027t plan to support sub-libraries and when !is_component_build the macro expands to nothing.",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 45
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
