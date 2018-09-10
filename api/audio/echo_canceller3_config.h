@@ -19,6 +19,11 @@ namespace webrtc {
 struct EchoCanceller3Config {
   EchoCanceller3Config();
   EchoCanceller3Config(const EchoCanceller3Config& e);
+  struct Buffering {
+    bool use_new_render_buffering = true;
+    size_t excess_render_detection_interval_blocks = 50;
+    int max_allowed_excess_render_blocks = 5;
+  } buffering;
   struct Delay {
     Delay();
     Delay(const Delay& e);

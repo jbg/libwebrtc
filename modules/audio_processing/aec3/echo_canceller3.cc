@@ -62,6 +62,10 @@ bool EnableUnityNonZeroRampupGain() {
   return field_trial::IsEnabled("WebRTC-Aec3EnableUnityNonZeroRampupGain");
 }
 
+bool EnableNewRenderBuffering() {
+  return !field_trial::IsEnabled("WebRTC-Aec3NewRenderBufferingKillSwitch");
+}
+
 // Method for adjusting config parameter dependencies..
 EchoCanceller3Config AdjustConfig(const EchoCanceller3Config& config) {
   EchoCanceller3Config adjusted_cfg = config;
@@ -330,12 +334,16 @@ int EchoCanceller3::instance_count_ = 0;
 EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
                                int sample_rate_hz,
                                bool use_highpass_filter)
-    : EchoCanceller3(
-          AdjustConfig(config),
-          sample_rate_hz,
-          use_highpass_filter,
-          std::unique_ptr<BlockProcessor>(
-              BlockProcessor::Create(AdjustConfig(config), sample_rate_hz))) {}
+    : EchoCanceller3(AdjustConfig(config),
+                     sample_rate_hz,
+                     use_highpass_filter,
+                     std::unique_ptr<BlockProcessor>(
+                         EnableNewRenderBuffering() &&
+                                 config.buffering.use_new_render_buffering
+                             ? BlockProcessor::Create2(AdjustConfig(config),
+                                                       sample_rate_hz)
+                             : BlockProcessor::Create(AdjustConfig(config),
+                                                      sample_rate_hz))) {}
 EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
                                int sample_rate_hz,
                                bool use_highpass_filter,
