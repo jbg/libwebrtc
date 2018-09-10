@@ -38,6 +38,7 @@ struct EchoCanceller3Config {
       int initial;
       int converged;
     } delay_selection_thresholds = {25, 25};
+    bool use_new_render_buffering = true;
   } delay;
 
   struct Filter {
