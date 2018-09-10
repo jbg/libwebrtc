@@ -117,7 +117,10 @@ rtc_source_set("rtc_pc") {
 rtc_static_library("peerconnection") {
   visibility = [ "*" ]
   cflags = []
-  configs += [ "..:no_exit_time_destructors" ]
+  configs += [
+    "..:internal_symbols_config",
+    "..:no_exit_time_destructors",
+  ]
   sources = [
     "audiotrack.cc",
     "audiotrack.h",
@@ -203,6 +206,7 @@ rtc_static_library("peerconnection") {
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:stringutils",
+    "../rtc_base/build:rtc_export",
     "../rtc_base/experiments:congestion_controller_experiment",
     "../rtc_base/third_party/base64",
     "../rtc_base/third_party/sigslot",
@@ -239,6 +243,7 @@ rtc_static_library("builtin_video_bitrate_allocator_factory") {
 # "peerconnection" build target and other targets specific to their
 # requrements. See comment in peerconnectionfactoryinterface.h.
 rtc_static_library("create_pc_factory") {
+  configs += [ "..:internal_symbols_config" ]
   sources = [
     "createpeerconnectionfactory.cc",
   ]

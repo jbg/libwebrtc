@@ -86,8 +86,8 @@ struct VideoCodecH264 {
 };
 
 // Translates from name of codec to codec type and vice versa.
-const char* CodecTypeToPayloadString(VideoCodecType type);
-VideoCodecType PayloadStringToCodecType(const std::string& name);
+const char* RTC_EXPORT CodecTypeToPayloadString(VideoCodecType type);
+VideoCodecType RTC_EXPORT PayloadStringToCodecType(const std::string& name);
 
 union VideoCodecUnion {
   VideoCodecVP8 VP8;

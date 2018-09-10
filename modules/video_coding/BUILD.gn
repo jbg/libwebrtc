@@ -282,6 +282,7 @@ rtc_source_set("video_coding_utility") {
 
 rtc_static_library("webrtc_h264") {
   visibility = [ "*" ]
+  configs += [ "../..:internal_symbols_config" ]
   sources = [
     "codecs/h264/h264.cc",
     "codecs/h264/include/h264.h",
@@ -303,6 +304,7 @@ rtc_static_library("webrtc_h264") {
     "../../media:rtc_media_base",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base",
+    "../../rtc_base/build:rtc_export",
     "../../system_wrappers:metrics_api",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/libyuv",

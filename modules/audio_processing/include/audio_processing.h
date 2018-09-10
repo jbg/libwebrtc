@@ -30,6 +30,7 @@
 #include "modules/audio_processing/include/config.h"
 #include "modules/audio_processing/include/gain_control.h"
 #include "rtc_base/arraysize.h"
+#include "rtc_base/build/rtc_export.h"
 #include "rtc_base/deprecation.h"
 #include "rtc_base/platform_file.h"
 #include "rtc_base/refcount.h"
@@ -550,7 +551,7 @@ class AudioProcessing : public rtc::RefCountInterface {
     float minimum_ = 0.0f;  // Long-term minimum.
   };
 
-  struct AudioProcessingStatistics {
+  struct RTC_EXPORT AudioProcessingStatistics {
     AudioProcessingStatistics();
     AudioProcessingStatistics(const AudioProcessingStatistics& other);
     ~AudioProcessingStatistics();
@@ -649,7 +650,7 @@ class AudioProcessing : public rtc::RefCountInterface {
   static const int kChunkSizeMs = 10;
 };
 
-class AudioProcessingBuilder {
+class RTC_EXPORT AudioProcessingBuilder {
  public:
   AudioProcessingBuilder();
   ~AudioProcessingBuilder();

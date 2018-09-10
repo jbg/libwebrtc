@@ -28,6 +28,7 @@
 
 #include "absl/types/optional.h"
 #include "api/rtcerror.h"
+#include "rtc_base/build/rtc_export.h"
 #include "rtc_base/refcount.h"
 
 namespace cricket {
@@ -73,16 +74,16 @@ class IceCandidateInterface {
 // Creates a IceCandidateInterface based on SDP string.
 // Returns null if the sdp string can't be parsed.
 // |error| may be null.
-IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
-                                          int sdp_mline_index,
-                                          const std::string& sdp,
-                                          SdpParseError* error);
+IceCandidateInterface* RTC_EXPORT CreateIceCandidate(const std::string& sdp_mid,
+                                                     int sdp_mline_index,
+                                                     const std::string& sdp,
+                                                     SdpParseError* error);
 
 // Creates an IceCandidateInterface based on a parsed candidate structure.
-std::unique_ptr<IceCandidateInterface> CreateIceCandidate(
-    const std::string& sdp_mid,
-    int sdp_mline_index,
-    const cricket::Candidate& candidate);
+std::unique_ptr<IceCandidateInterface> RTC_EXPORT
+CreateIceCandidate(const std::string& sdp_mid,
+                   int sdp_mline_index,
+                   const cricket::Candidate& candidate);
 
 // This class represents a collection of candidates for a specific m= section.
 // Used in SessionDescriptionInterface.
@@ -181,25 +182,26 @@ class SessionDescriptionInterface {
 // |error| may be null.
 // TODO(steveanton): This function is deprecated. Please use the functions below
 // which take an SdpType enum instead. Remove this once it is no longer used.
-SessionDescriptionInterface* CreateSessionDescription(const std::string& type,
-                                                      const std::string& sdp,
-                                                      SdpParseError* error);
+SessionDescriptionInterface* RTC_EXPORT
+CreateSessionDescription(const std::string& type,
+                         const std::string& sdp,
+                         SdpParseError* error);
 
 // Creates a SessionDescriptionInterface based on the SDP string and the type.
 // Returns null if the SDP string cannot be parsed.
 // If using the signature with |error_out|, details of the parsing error may be
 // written to |error_out| if it is not null.
-std::unique_ptr<SessionDescriptionInterface> CreateSessionDescription(
-    SdpType type,
-    const std::string& sdp);
-std::unique_ptr<SessionDescriptionInterface> CreateSessionDescription(
-    SdpType type,
-    const std::string& sdp,
-    SdpParseError* error_out);
+std::unique_ptr<SessionDescriptionInterface> RTC_EXPORT
+CreateSessionDescription(SdpType type, const std::string& sdp);
+std::unique_ptr<SessionDescriptionInterface> RTC_EXPORT
+CreateSessionDescription(SdpType type,
+                         const std::string& sdp,
+                         SdpParseError* error_out);
 
 // Creates a SessionDescriptionInterface based on a parsed SDP structure and the
 // given type, ID and version.
-std::unique_ptr<SessionDescriptionInterface> CreateSessionDescription(
+std::unique_ptr<SessionDescriptionInterface> RTC_EXPORT
+CreateSessionDescription(
     SdpType type,
     const std::string& session_id,
     const std::string& session_version,

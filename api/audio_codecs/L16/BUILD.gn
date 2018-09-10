@@ -15,6 +15,7 @@ if (is_android) {
 rtc_static_library("audio_encoder_L16") {
   visibility = [ "*" ]
   poisonous = [ "audio_codecs" ]
+  configs += [ "../../..:internal_symbols_config" ]
   sources = [
     "audio_encoder_L16.cc",
     "audio_encoder_L16.h",
@@ -25,6 +26,7 @@ rtc_static_library("audio_encoder_L16") {
     "../../../modules/audio_coding:pcm16b",
     "../../../rtc_base:rtc_base_approved",
     "../../../rtc_base:safe_minmax",
+    "../../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
@@ -33,6 +35,7 @@ rtc_static_library("audio_encoder_L16") {
 rtc_static_library("audio_decoder_L16") {
   visibility = [ "*" ]
   poisonous = [ "audio_codecs" ]
+  configs += [ "../../..:internal_symbols_config" ]
   sources = [
     "audio_decoder_L16.cc",
     "audio_decoder_L16.h",
@@ -42,6 +45,7 @@ rtc_static_library("audio_decoder_L16") {
     "../../..:webrtc_common",
     "../../../modules/audio_coding:pcm16b",
     "../../../rtc_base:rtc_base_approved",
+    "../../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/types:optional",
   ]

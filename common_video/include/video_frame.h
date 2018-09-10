@@ -21,11 +21,12 @@
 #include "api/video/video_rotation.h"
 #include "api/video/video_timing.h"
 #include "common_types.h"  // NOLINT(build/include)
+#include "rtc_base/build/rtc_export.h"
 
 namespace webrtc {
 
 // TODO(pbos): Rename EncodedFrame and reformat this class' members.
-class EncodedImage {
+class RTC_EXPORT EncodedImage {
  public:
   static const size_t kBufferPaddingBytesH264;
 

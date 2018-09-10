@@ -17,6 +17,7 @@ group("stats") {
 rtc_static_library("rtc_stats") {
   visibility = [ "*" ]
   cflags = []
+  configs += [ "..:internal_symbols_config" ]
   sources = [
     "rtcstats.cc",
     "rtcstats_objects.cc",

@@ -16,6 +16,7 @@
 
 #include "absl/types/optional.h"
 #include "common_types.h"  // NOLINT(build/include)
+#include "rtc_base/build/rtc_export.h"
 
 namespace webrtc {
 namespace H264 {
@@ -68,12 +69,13 @@ absl::optional<ProfileLevelId> ParseSdpProfileLevelId(
 // given number of frames per second, return the highest H.264 level where it
 // can guarantee that it will be able to support all valid encoded streams that
 // are within that level.
-absl::optional<Level> SupportedLevel(int max_frame_pixel_count, float max_fps);
+absl::optional<Level> RTC_EXPORT SupportedLevel(int max_frame_pixel_count,
+                                                float max_fps);
 
 // Returns canonical string representation as three hex bytes of the profile
 // level id, or returns nothing for invalid profile level ids.
-absl::optional<std::string> ProfileLevelIdToString(
-    const ProfileLevelId& profile_level_id);
+absl::optional<std::string> RTC_EXPORT
+ProfileLevelIdToString(const ProfileLevelId& profile_level_id);
 
 // Generate codec parameters that will be used as answer in an SDP negotiation
 // based on local supported parameters and remote offered parameters. Both

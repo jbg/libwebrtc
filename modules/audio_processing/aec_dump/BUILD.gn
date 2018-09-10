@@ -17,6 +17,7 @@ rtc_source_set("aec_dump") {
   deps = [
     "../",
     "../../../rtc_base:rtc_base_approved",
+    "../../../rtc_base/build:rtc_export",
   ]
 }
 
@@ -51,6 +52,7 @@ rtc_source_set("mock_aec_dump_unittests") {
 
 if (rtc_enable_protobuf) {
   rtc_source_set("aec_dump_impl") {
+    configs += [ "../../..:internal_symbols_config" ]
     sources = [
       "aec_dump_impl.cc",
       "aec_dump_impl.h",
@@ -97,6 +99,7 @@ if (rtc_enable_protobuf) {
 
 rtc_source_set("null_aec_dump_factory") {
   assert_no_deps = [ ":aec_dump_impl" ]
+  configs += [ "../../..:internal_symbols_config" ]
   sources = [
     "null_aec_dump_factory.cc",
   ]

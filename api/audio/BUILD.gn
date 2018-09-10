@@ -35,15 +35,22 @@ rtc_source_set("audio_mixer_api") {
 
 rtc_source_set("aec3_config") {
   visibility = [ "*" ]
+  configs += [ "../..:internal_symbols_config" ]
   sources = [
     "echo_canceller3_config.cc",
     "echo_canceller3_config.h",
+  ]
+  deps = [
+    "../../rtc_base/build:rtc_export",
   ]
 }
 
 rtc_source_set("aec3_factory") {
   visibility = [ "*" ]
-  configs += [ "../../modules/audio_processing:apm_debug_dump" ]
+  configs += [
+    "../../modules/audio_processing:apm_debug_dump",
+    "../..:internal_symbols_config",
+  ]
   sources = [
     "echo_canceller3_factory.cc",
     "echo_canceller3_factory.h",
@@ -54,6 +61,7 @@ rtc_source_set("aec3_factory") {
     ":echo_control",
     "../../modules/audio_processing/aec3",
     "../../rtc_base:rtc_base_approved",
+    "../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
   ]
 }

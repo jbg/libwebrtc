@@ -525,9 +525,11 @@ rtc_source_set("rtc_task_queue_api") {
   sources = [
     "task_queue.h",
   ]
+  configs += [ "..:internal_symbols_config" ]
   deps = [
     ":macromagic",
     ":ptr_util",
+    "../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
   ]
 }

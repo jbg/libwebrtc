@@ -28,6 +28,7 @@ config("rtc_media_defines_config") {
 
 rtc_source_set("rtc_h264_profile_id") {
   visibility = [ "*" ]
+  configs += [ "..:internal_symbols_config" ]
   sources = [
     "base/h264_profile_level_id.cc",
     "base/h264_profile_level_id.h",
@@ -42,6 +43,7 @@ rtc_source_set("rtc_h264_profile_id") {
     "..:webrtc_common",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
@@ -80,6 +82,7 @@ rtc_static_library("rtc_media_base") {
     "../rtc_base:sequenced_task_checker",
     "../rtc_base:stringutils",
   ]
+  configs += [ "..:internal_symbols_config" ]
   sources = [
     "base/adaptedvideotracksource.cc",
     "base/adaptedvideotracksource.h",
@@ -135,6 +138,7 @@ rtc_static_library("rtc_media_base") {
     "../modules/audio_processing:audio_processing_statistics",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base/build:rtc_export",
     "../rtc_base/third_party/sigslot",
     "../system_wrappers:field_trial_api",
     "//third_party/abseil-cpp/absl/types:optional",
@@ -162,11 +166,13 @@ rtc_static_library("rtc_constants") {
 rtc_static_library("rtc_internal_video_codecs") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
+  configs += [ "..:internal_symbols_config" ]
   defines = []
   libs = []
   deps = [
     ":rtc_h264_profile_id",
     "../modules/video_coding:video_codec_interface",
+    "../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
   ]
   sources = [

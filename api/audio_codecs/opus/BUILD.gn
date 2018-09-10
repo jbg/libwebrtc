@@ -14,12 +14,14 @@ if (is_android) {
 
 rtc_static_library("audio_encoder_opus_config") {
   visibility = [ "*" ]
+  configs += [ "../../..:internal_symbols_config" ]
   sources = [
     "audio_encoder_opus_config.cc",
     "audio_encoder_opus_config.h",
   ]
   deps = [
     "../../../rtc_base:rtc_base_approved",
+    "../../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
   defines = []
@@ -33,6 +35,7 @@ rtc_static_library("audio_encoder_opus_config") {
 rtc_source_set("audio_encoder_opus") {
   visibility = [ "*" ]
   poisonous = [ "audio_codecs" ]
+  configs += [ "../../..:internal_symbols_config" ]
   public = [
     "audio_encoder_opus.h",
   ]
@@ -44,6 +47,7 @@ rtc_source_set("audio_encoder_opus") {
     "..:audio_codecs_api",
     "../../../modules/audio_coding:webrtc_opus",
     "../../../rtc_base:rtc_base_approved",
+    "../../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
@@ -51,6 +55,7 @@ rtc_source_set("audio_encoder_opus") {
 rtc_static_library("audio_decoder_opus") {
   visibility = [ "*" ]
   poisonous = [ "audio_codecs" ]
+  configs += [ "../../..:internal_symbols_config" ]
   sources = [
     "audio_decoder_opus.cc",
     "audio_decoder_opus.h",
@@ -60,6 +65,7 @@ rtc_static_library("audio_decoder_opus") {
     "../../..:webrtc_common",
     "../../../modules/audio_coding:webrtc_opus",
     "../../../rtc_base:rtc_base_approved",
+    "../../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/types:optional",
   ]

@@ -83,6 +83,18 @@ if (!build_with_chromium) {
   }
 }
 
+config("internal_symbols_config") {
+  if (is_component_build) {
+    defines = [ "BUILDING_WEBRTC_SHARED" ]
+  }
+}
+
+config("external_symbols_config") {
+  if (is_component_build) {
+    defines = [ "USING_WEBRTC_SHARED" ]
+  }
+}
+
 # Contains the defines and includes in common.gypi that are duplicated both as
 # target_defaults and direct_dependent_settings.
 config("common_inherited_config") {

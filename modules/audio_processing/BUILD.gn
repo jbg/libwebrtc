@@ -28,7 +28,10 @@ config("apm_debug_dump") {
 
 rtc_static_library("audio_processing") {
   visibility = [ "*" ]
-  configs += [ ":apm_debug_dump" ]
+  configs += [
+    ":apm_debug_dump",
+    "../..:internal_symbols_config",
+  ]
   sources = [
     "audio_buffer.cc",
     "audio_buffer.h",
@@ -118,6 +121,7 @@ rtc_static_library("audio_processing") {
     "../../rtc_base:gtest_prod",
     "../../rtc_base:safe_minmax",
     "../../rtc_base:sanitizer",
+    "../../rtc_base/build:rtc_export",
     "../../rtc_base/system:arch",
     "../../system_wrappers:cpu_features_api",
     "../../system_wrappers:field_trial_api",
@@ -161,11 +165,13 @@ rtc_source_set("gain_control_interface") {
 
 rtc_source_set("audio_processing_statistics") {
   visibility = [ "*" ]
+  configs += [ "../..:internal_symbols_config" ]
   sources = [
     "include/audio_processing_statistics.cc",
     "include/audio_processing_statistics.h",
   ]
   deps = [
+    "../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }

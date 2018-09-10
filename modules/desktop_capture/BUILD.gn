@@ -13,6 +13,7 @@ use_desktop_capture_differ_sse2 = current_cpu == "x86" || current_cpu == "x64"
 
 rtc_static_library("primitives") {
   visibility = [ "*" ]
+  configs += [ "../..:internal_symbols_config" ]
   sources = [
     "desktop_capture_types.h",
     "desktop_frame.cc",
@@ -30,6 +31,7 @@ rtc_static_library("primitives") {
   deps = [
     "../..:webrtc_common",
     "../../rtc_base:checks",
+    "../../rtc_base/build:rtc_export",
     "//third_party/abseil-cpp/absl/memory",
   ]
 
@@ -216,6 +218,7 @@ rtc_static_library("desktop_capture_generic") {
     ":desktop_capture",
     ":desktop_capture_objc",
   ]
+  configs += [ "../..:internal_symbols_config" ]
   sources = [
     "blank_detector_desktop_capturer_wrapper.cc",
     "blank_detector_desktop_capturer_wrapper.h",
@@ -374,6 +377,7 @@ rtc_static_library("desktop_capture_generic") {
     "../../api:refcountedbase",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base",  # TODO(kjellander): Cleanup in bugs.webrtc.org/3806.
+    "../../rtc_base/build:rtc_export",
     "../../rtc_base/synchronization:rw_lock_wrapper",
     "../../rtc_base/system:arch",
     "../../system_wrappers",
