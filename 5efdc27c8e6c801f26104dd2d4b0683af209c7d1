@@ -46,6 +46,30 @@
       "revId": "5efdc27c8e6c801f26104dd2d4b0683af209c7d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d872766c_a1f59fa7",
+        "filename": "call/bitrate_allocator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-10T09:44:05Z",
+      "side": 1,
+      "message": "Questions is, does this class need to make a distinction between ALR and NONE?\n\nIt adds a fair amount of complexity if one of the places checking config.enforce_min_bitrate takes config.has_alr_probing into account and others (e.g., in LowRateAllocation, doesn\u0027t).\n\nEven better would be to delete the enforce_min_bitrate flag too and just set min_bitrate_bps \u003d 0 when we don\u0027t want any low limit. But I imagine there\u0027s some reason that\u0027s not so easy.",
+      "parentUuid": "2cdac184_a09a6644",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 39
+      },
+      "revId": "5efdc27c8e6c801f26104dd2d4b0683af209c7d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
