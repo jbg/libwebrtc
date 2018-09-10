@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15a9028e_3a844ef4",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-09-10T22:44:52Z",
+      "side": 1,
+      "message": "I think we agreed on samples_per_channel_ in previous CL which created media_transport_interface?",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af551c40_50969d85",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-09-10T22:44:52Z",
+      "side": 1,
+      "message": "Should we do state change as a separate CL?\n\nAnother option is to have explicit Connect() method on MediaTransportInterface with a sink / callback. \n\nI also want to understand what happens on close, should we have explcit Close() or have destructor to close connection?",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
