@@ -34,6 +34,24 @@
       "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac142bf2_a190abde",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-09-10T12:39:19Z",
+      "side": 1,
+      "message": "\u003e This shouldn\u0027t be a problem, because the sender RTP clock is derived from the sender wall clock. \n\u003e This means that different clocks are already mixed even before the call here.\n\nIs this really true though? ntp_time_ms() and timestamp() are both derived from the sender wall clock AFAIK, which means they will be skewed the same way. Now the skew will be different.",
+      "parentUuid": "4390b3fe_7498ed13",
+      "revId": "57a2a5794a374fc7380cf45e7b356d757b78b335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
