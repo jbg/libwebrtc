@@ -1,0 +1,720 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "623bfb8f_0bd36961",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "IMHO, this is too long. (A pre-existing issue made about 20% worse by this CL; it was genuinely difficult to review in part due to the length.)",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b11444a_0f63c1c1",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "That\u0027s a long lambda. It\u0027s also a bit problematic to follow because it captures some elements by reference, meaning it could have not-immediately-apparent side-effects on the scope from which it is called (contrast with the explicitness of passing a pointer to the affected variable). Could you please make it into a base::OnceCallback bound to a helper function? Hopefully the helper function can be further broken down into more than one function? For example, the \"set extensions\" block seems like it could live on its own.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdfeddea_b4d89d06",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "intermediary_rtp_packet, maybe?\nBy itself, \"intermediary\" is akin to \"temp\".\nPlease note that this is a long main() function, and non-trivial (two lambdas with side-effects on captured-by-reference variables; lifetime assumptions on lambdas and vectors). It\u0027s not easy to read in one go. One forgets what \"intermediary\" refers to.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a16be4b7_4adafa72",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "It is eyebrow-raising to see x::test::y code in non-test code. Is there a way around this? (If not, maybe a comment?)",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8e9e4e6_06c7d752",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "0x20?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "259fb129_32970270",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Same suggestions.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81dfab43_eab104a5",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Same concern.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bad1f97_9a23b60f",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Perhaps:\nif (ShouldSkipRtpPacket(...)) {\n  continue;\n}",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 15
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b1def84_e59c5cf9",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Beg pardon, but I found this name to be confusing. Wdyt about |incoming_rtp_events|?",
+      "range": {
+        "startLine": 216,
+        "startChar": 9,
+        "endLine": 216,
+        "endChar": 17
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ad6ba1f_90d58474",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "A kind soul might in the future introduce inheritance to get rid of the code duplication around log_time_us() and log_time_ms(). You could prevent that by adding a static_assert that this is POD, with the error perhaps elaborating why we wish to avoid it having a vptr.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46792348_fb36275b",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Could you please add a short documentation of the class and its methods?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f2420c_b8bf07fe",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "const?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06fe05ec_42d78df3",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "1. const?\n2. (Not sure about the merits of the following suggestion; treat it as a thought.) I see that you\u0027ve changed the type in some other files to fit this. Perhaps a typedef for WebRtcLogTimeType, or webrtc::event_log::timestamp_t, or something similar, would help keep everything consistent?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a0d6845_f53b25cd",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Put this first?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a945257_7c36126b",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Perhaps mention that the items between |begin| and |end| must also outlive the object, and that the underlying vector is assumed not to be modified (even in ways that would not invalidate the iterators).",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2761f7a1_b07bf88e",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/First/Next?\n(One expects the \"next\" element to change, but not the \"first\" element.)",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75d43034_19ef64ea",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "1. const?\n2. Could you please space things out a bit with empty lines between the methods?\n3. Do you think \u003e\u003d would be appropriate? On the one hand, it might give the false impression that \u003e is possible. On the other, it is more robust.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e696f00_542e7b7c",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "1. const?\n2. IMHO, the name should be changed; lists don\u0027t normally have times, but their elements might.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95ef6c54_c80dbdac",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Maybe rename f_ to something mentioning what it does? Maybe \"processing_func_\" or something? Not sure.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e34c0ef1_5a954025",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "The explanations you have provided offline (about the design constraints and the rationale for them) were very valuable. Could you repeat some in comment form?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f34419f6_0eed5023",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "I can see where you copy/pasted to change the phrasing. :-)",
+      "range": {
+        "startLine": 59,
+        "startChar": 51,
+        "endLine": 59,
+        "endChar": 62
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab65dfc8_d3fe6963",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/,/.",
+      "range": {
+        "startLine": 60,
+        "startChar": 33,
+        "endLine": 60,
+        "endChar": 34
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31709ce6_e9607cac",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Digression: Any idea why std::make_unique is still not supported?",
+      "range": {
+        "startLine": 66,
+        "startChar": 7,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "790039c2_939a3ad0",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Suggested:\ns/begin/cbegin\ns/end/cend\n(Throughout CL.)",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af3c3ef2_556771da",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "I would suggest:\n1. Commenting that |events| is expected to be sorted.\n2. DCHECKing that it is sorted.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ba4e383_ce8c2b3b",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "1.\nSuggest:\ns/a/lhs\ns/b/rhs\n\n2:\nWdyt about:\nconst decltype(event_lists)::value_type\u0026\nI am not sure if this might be too obfuscated, and/or better than a const-ref-to-unique-ptr, since it is, under the hood, still a const-ref-to-unique-ptr.\nIt is shorter, though. :-)",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "650cc0ce_6eafab82",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "https://en.cppreference.com/w/cpp/algorithm/push_heap\nThe above claims that |comp| is expected to be operator\u003c, not operator\u003e.\nCould you add a comment to draw the reader\u0027s attention to operator\u003e being used so as to get a min-heap?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35483314_8aed643a",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Please consider adding a comment here; the behavior of std::pop_heap is surprising (that it preserves the element it pops).",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "143d5d99_1d86ac17",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/event_lists/event_lists_",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40114e3d_fd5fd74f",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "* Shouldn\u0027t it take int64_t?\n* LoggedStartEvent is an arbitrarily chosen event type, hard-coded to be used in all of the tests in this suite. Could you typedef it to Event, LoggedEvent, or something similar, to make it clearer the tests do not single this type of event out for some special reason?\n* It might be nice to have two event types in at least one test.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "969ff054_11090e0c",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/v/event_list or something?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70c092e5_5ee348ee",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/elem/timestamp_ms?\nIt would also be nice of |list| were called |timestamps_ms| or something.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c00f360_075547e9",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "1. The unit-test suite never has two events that happen at supposedly the same time.\n2. The unit-test suite would overlook a bug where the UUT only considers millisecond resolution, ignoring sub-millisecond time differences.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b5ec9c_f3d9accc",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "RTC_NOTREACHED() crashes, but it\u0027s probably better to fail the test softly?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "578484e5_83868976",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Could you please give |v| a name?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f672bc6_fd653c20",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Using cbegin() and cend() would make it clearer that my later suggestions to compare to |v|, not to hard-coded values, are valid.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "023099a8_6403a28b",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/4u/v.size()",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8771c2cd_3a4e9d56",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "1. s/4u/v.size()\n2. Minyue has in the past told me that the style-guide mandates using size_t for loop indices (so long as there is no good reason against it, such as avoiding conversions).",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e15c7e26_b5cffa91",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "s/i+1/v[i].log_time_ms()",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "287eda7c_7ebc5572",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-10T18:36:45Z",
+      "side": 1,
+      "message": "Similar comment (see above), with the suggestion of doing the following:\n\nstd::vector\u003cint64_t\u003e timestamps1 {1, 2, 4, 7, 8, 9};\nstd::vector\u003cLoggedEvent events1(timestamps1);\n\nstd::vector\u003cint64_t\u003e timestamps2 {3, 5, 6, 10};\nstd::vector\u003cLoggedEvent events2(timestamps2);\n\nThen you can combine and sort timestamps1 and timestamps2, and EXPECT_EQ to the values there.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
