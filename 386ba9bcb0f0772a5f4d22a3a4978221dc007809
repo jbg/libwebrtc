@@ -389,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "84be2f11_648c84fa",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "Renaming to DetectExcessRenderBlocks.",
+      "parentUuid": "adebac3f_22186f03",
+      "range": {
+        "startLine": 433,
+        "startChar": 29,
+        "endLine": 433,
+        "endChar": 52
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2eb42ea_73242408",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 5
@@ -400,6 +424,30 @@
       "writtenOn": "2018-09-07T05:27:45Z",
       "side": 1,
       "message": "Change to right shift?",
+      "range": {
+        "startLine": 436,
+        "startChar": 56,
+        "endLine": 436,
+        "endChar": 71
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a306fecd_75d38821",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "I could if you think it is worth it. This is how we do it in MapInternalDelayToExternalDelay() though.",
+      "parentUuid": "c2eb42ea_73242408",
       "range": {
         "startLine": 436,
         "startChar": 56,
@@ -435,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "4734aae3_6e4bdbdd",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "Renaming and clarifying with comments.",
+      "parentUuid": "98c46c17_2680e993",
+      "range": {
+        "startLine": 437,
+        "startChar": 33,
+        "endLine": 437,
+        "endChar": 52
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35bc21ae_5eaf245d",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 5
@@ -449,6 +521,24 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2819620a_eb53d370",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "35bc21ae_5eaf245d",
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -475,6 +565,30 @@
     },
     {
       "key": {
+        "uuid": "e078767c_ad5dabd4",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "2cddb35c_91d1e9a8",
+      "range": {
+        "startLine": 439,
+        "startChar": 41,
+        "endLine": 439,
+        "endChar": 55
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1aa8705_a3fa5212",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 5
@@ -495,6 +609,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14aa5d28_deb4dc7d",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "b1aa8705_a3fa5212",
+      "range": {
+        "startLine": 440,
+        "startChar": 26,
+        "endLine": 440,
+        "endChar": 40
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -562,6 +700,24 @@
     },
     {
       "key": {
+        "uuid": "b49974d3_6ffe3459",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this one offline.",
+      "parentUuid": "44343e55_f4cd256a",
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "accd710a_d80f8bf7",
         "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
         "patchSetId": 5
@@ -582,6 +738,30 @@
       "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "923508ed_5903e00c",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-09-10T08:10:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "accd710a_d80f8bf7",
+      "range": {
+        "startLine": 176,
+        "startChar": 40,
+        "endLine": 176,
+        "endChar": 64
+      },
+      "revId": "386ba9bcb0f0772a5f4d22a3a4978221dc007809",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
