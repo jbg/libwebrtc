@@ -22,6 +22,30 @@
       "revId": "5efdc27c8e6c801f26104dd2d4b0683af209c7d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cdac184_a09a6644",
+        "filename": "call/bitrate_allocator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-10T09:27:31Z",
+      "side": 1,
+      "message": "There\u0027s essentially three modes for ensuring that we measure the min bitrate for the stream if it\u0027s available, ALR, PAD, NONE. We could use an enum for this. I\u0027m not sure it would make things easier though. I imagine that we will want to move way from padding mode in the future.",
+      "parentUuid": "5fadb2d8_1ca1d74d",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 39
+      },
+      "revId": "5efdc27c8e6c801f26104dd2d4b0683af209c7d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
