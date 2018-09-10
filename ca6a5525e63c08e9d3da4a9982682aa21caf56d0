@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4d87abd_d79d5fcd",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-10T13:31:21Z",
+      "side": 1,
+      "message": "Add /* foo \u003d */ comments for these arguments?",
+      "range": {
+        "startLine": 99,
+        "startChar": 58,
+        "endLine": 99,
+        "endChar": 70
+      },
+      "revId": "ca6a5525e63c08e9d3da4a9982682aa21caf56d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43ca3635_67b63df5",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-10T13:31:21Z",
+      "side": 1,
+      "message": "So this implies that has_alr_probing_ \u003d\u003d alr_settings || config_-\u003eperiodic_alr_bandwidth_probing, and in the latter case, with some default values for pacing_factor and max_paced_queue_time?\n\nConsider rearranging to assign only once.",
+      "range": {
+        "startLine": 297,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 20
+      },
+      "revId": "ca6a5525e63c08e9d3da4a9982682aa21caf56d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
