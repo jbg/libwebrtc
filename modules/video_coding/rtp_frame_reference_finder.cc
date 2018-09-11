@@ -84,6 +84,13 @@ void RtpFrameReferenceFinder::RetryStashedFrames() {
 
 RtpFrameReferenceFinder::FrameDecision
 RtpFrameReferenceFinder::ManageFrameInternal(RtpFrameObject* frame) {
+  absl::optional<RTPVideoHeader> video_header = frame->GetRtpVideoHeader();
+  absl::optional<RTPVideoHeader::GenericDescriptorInfo> generic_descriptor =
+      video_header ? video_header->generic : absl::nullopt;
+
+  if (generic_descriptor)
+    return ManageFrameGeneric(frame, *generic_descriptor);
+
   switch (frame->codec_type()) {
     case kVideoCodecVP8:
       return ManageFrameVp8(frame);
@@ -91,11 +98,9 @@ RtpFrameReferenceFinder::ManageFrameInternal(RtpFrameObject* frame) {
       return ManageFrameVp9(frame);
     default: {
       // Use 15 first bits of frame ID as picture ID if available.
-      absl::optional<RTPVideoHeader> video_header = frame->GetRtpVideoHeader();
-      absl::optional<RTPVideoHeader::GenericDescriptorInfo> generic_info =
-          video_header ? video_header->generic : absl::nullopt;
-      return ManageFrameGeneric(
-          frame, generic_info ? generic_info->frame_id & 0x7fff : kNoPictureId);
+      return ManageFramePidOrSeqNum(
+          frame, generic_descriptor ? generic_descriptor->frame_id & 0x7fff
+                                    : kNoPictureId);
     }
   }
 }
@@ -161,8 +166,32 @@ void RtpFrameReferenceFinder::UpdateLastPictureIdWithPadding(uint16_t seq_num) {
 }
 
 RtpFrameReferenceFinder::FrameDecision
-RtpFrameReferenceFinder::ManageFrameGeneric(RtpFrameObject* frame,
-                                            int picture_id) {
+RtpFrameReferenceFinder::ManageFrameGeneric(
+    RtpFrameObject* frame,
+    const RTPVideoHeader::GenericDescriptorInfo& descriptor) {
+  if (EncodedFrame::kMaxFrameReferences < descriptor.dependencies.size()) {
+    RTC_LOG(LS_WARNING) << "Too many dependencies in generic descriptor.";
+    return kDrop;
+  }
+
+  int64_t frame_id = generic_unwrapper_.Unwrap(descriptor.frame_id);
+
+  // Using the frame id as a picture id works for VP8, but won't work for codecs
+  // using SVC. The fix is to update the FrameBuffer to operate on frame ids
+  // instead of VideoLayerFrameId.
+  frame->id.picture_id = frame_id;
+  frame->id.spatial_layer = descriptor.spatial_index;
+
+  frame->num_references = descriptor.dependencies.size();
+  for (size_t i = 0; i < descriptor.dependencies.size(); ++i)
+    frame->references[i] = frame_id - descriptor.dependencies[i];
+
+  return kHandOff;
+}
+
+RtpFrameReferenceFinder::FrameDecision
+RtpFrameReferenceFinder::ManageFramePidOrSeqNum(RtpFrameObject* frame,
+                                                int picture_id) {
   // If |picture_id| is specified then we use that to set the frame references,
   // otherwise we use sequence number.
   if (picture_id != kNoPictureId) {
@@ -219,7 +248,7 @@ RtpFrameReferenceFinder::ManageFrameGeneric(RtpFrameObject* frame,
   // picture id according to some incrementing counter.
   frame->id.picture_id = frame->last_seq_num();
   frame->num_references = frame->frame_type() == kVideoFrameDelta;
-  frame->references[0] = generic_unwrapper_.Unwrap(last_picture_id_gop);
+  frame->references[0] = rtp_seq_num_unwrapper_.Unwrap(last_picture_id_gop);
   if (AheadOf<uint16_t>(frame->id.picture_id, last_picture_id_gop)) {
     seq_num_it->second.first = frame->id.picture_id;
     seq_num_it->second.second = frame->id.picture_id;
@@ -227,7 +256,7 @@ RtpFrameReferenceFinder::ManageFrameGeneric(RtpFrameObject* frame,
 
   last_picture_id_ = frame->id.picture_id;
   UpdateLastPictureIdWithPadding(frame->id.picture_id);
-  frame->id.picture_id = generic_unwrapper_.Unwrap(frame->id.picture_id);
+  frame->id.picture_id = rtp_seq_num_unwrapper_.Unwrap(frame->id.picture_id);
   return kHandOff;
 }
 
@@ -247,7 +276,7 @@ RtpFrameReferenceFinder::FrameDecision RtpFrameReferenceFinder::ManageFrameVp8(
   if (codec_header.pictureId == kNoPictureId ||
       codec_header.temporalIdx == kNoTemporalIdx ||
       codec_header.tl0PicIdx == kNoTl0PicIdx) {
-    return ManageFrameGeneric(std::move(frame), codec_header.pictureId);
+    return ManageFramePidOrSeqNum(std::move(frame), codec_header.pictureId);
   }
 
   frame->id.picture_id = codec_header.pictureId % kPicIdLength;
@@ -396,7 +425,7 @@ RtpFrameReferenceFinder::FrameDecision RtpFrameReferenceFinder::ManageFrameVp9(
 
   if (codec_header.picture_id == kNoPictureId ||
       codec_header.temporal_idx == kNoTemporalIdx) {
-    return ManageFrameGeneric(std::move(frame), codec_header.picture_id);
+    return ManageFramePidOrSeqNum(std::move(frame), codec_header.picture_id);
   }
 
   frame->id.spatial_layer = codec_header.spatial_idx;
