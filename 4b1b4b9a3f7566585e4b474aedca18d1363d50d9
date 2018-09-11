@@ -36,6 +36,29 @@
     },
     {
       "key": {
+        "uuid": "22c73418_266674b1",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T06:51:05Z",
+      "side": 1,
+      "message": "Is this a required order? I\u0027d prefer\n\nRTC_EXPORT\nclass EncodedImage { ... };\n\nI.e., similar placement as RTC_DEPRECATED.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d20086f3_e7dfb1e0",
         "filename": "pc/BUILD.gn",
         "patchSetId": 1
@@ -83,6 +106,52 @@
     },
     {
       "key": {
+        "uuid": "daeb4d36_fb7b4921",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T06:51:05Z",
+      "side": 1,
+      "message": "The wording is a bit awkward and not quite accurate (since it\u0027s not limited to windows).",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2d9b96_7b3ab4ab",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T06:51:05Z",
+      "side": 1,
+      "message": "#if, not #ifdef.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "613a8973_f7c65c22",
         "filename": "rtc_base/build/rtc_export.h",
         "patchSetId": 1
@@ -111,6 +180,24 @@
       "writtenOn": "2018-09-11T00:18:57Z",
       "side": 1,
       "message": "Hmm. I think it would be simpler for users (and just as simple for us) if the preprocessor symbols were named something like WEBRTC_SHARED_LIBRARY (the old USING_) and WEBRTC_IMPL_SHARED_LIBRARY (the old BUILDING_). That way, the naming of the public symbol doesn\u0027t have to give away the fact that there is also a nonpublic symbol.\n\n(Also note that WEBRTC_ should be a prefix.)",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0397c129_81997312",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T06:51:05Z",
+      "side": 1,
+      "message": "On naming, I\u0027d prefer that the symbols are named based on intrinsic action or meaning, rather than describing their use case.\n\nMaybe\n\n  RTC_EXPORT  --\u003e   RTC_PUBLIC\n  BUILDING_WEBRTC_SHARED --\u003e  WEBRTC_EXPORT_SYMBOLS\n  USING_WEBRTC_SHARED --\u003e WEBRTC_IMPORT_SYMBOLS\n\nNot sure I like \"import\" that much, but since it is relevant only for windows dlls, it makes some sense to follow the windows terminology.",
+      "parentUuid": "c59d8d72_e52311bf",
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
