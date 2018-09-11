@@ -33,6 +33,8 @@ rtc_static_library("audio") {
     "null_audio_poller.h",
     "remix_resample.cc",
     "remix_resample.h",
+    "rtp_audio_stream_receiver.cc",
+    "rtp_audio_stream_receiver.h",
     "time_interval.cc",
     "time_interval.h",
     "transport_feedback_packet_loss_tracker.cc",

@@ -269,6 +269,7 @@ class Channel
   bool Playing() const { return channel_state_.Get().playing; }
   bool Sending() const { return channel_state_.Get().sending; }
   RtpRtcp* RtpRtcpModulePtr() const { return _rtpRtcpModule.get(); }
+  int64_t GetRTT(bool allow_associate_channel) const;
 
   // ProcessAndEncodeAudio() posts a task on the shared encoder task queue,
   // which in turn calls (on the queue) ProcessAndEncodeAudioOnTaskQueue() where
@@ -324,7 +325,6 @@ class Channel
       RTC_EXCLUSIVE_LOCKS_REQUIRED(overhead_per_packet_lock_);
 
   int GetRtpTimestampRateHz() const;
-  int64_t GetRTT(bool allow_associate_channel) const;
 
   // Called on the encoder task queue when a new input audio frame is ready
   // for encoding.

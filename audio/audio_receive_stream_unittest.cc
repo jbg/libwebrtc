@@ -108,11 +108,9 @@ struct ConfigHelper {
   }
 
   std::unique_ptr<internal::AudioReceiveStream> CreateAudioReceiveStream() {
-    return std::unique_ptr<internal::AudioReceiveStream>(
-        new internal::AudioReceiveStream(
-            &rtp_stream_receiver_controller_, &packet_router_, stream_config_,
-            audio_state_, &event_log_,
-            std::unique_ptr<voe::ChannelProxy>(channel_proxy_)));
+    return absl::make_unique<internal::AudioReceiveStream>(
+        &rtp_stream_receiver_controller_, &packet_router_, stream_config_,
+        audio_state_, &event_log_);
   }
 
   AudioReceiveStream::Config& config() { return stream_config_; }
@@ -148,6 +146,7 @@ struct ConfigHelper {
   rtc::scoped_refptr<AudioState> audio_state_;
   rtc::scoped_refptr<MockAudioMixer> audio_mixer_;
   AudioReceiveStream::Config stream_config_;
+  // TODO(nisse): XXX Unused. Substiture a mock RtpAudioStreamReceiver
   testing::StrictMock<MockVoEChannelProxy>* channel_proxy_ = nullptr;
   RtpStreamReceiverController rtp_stream_receiver_controller_;
 };

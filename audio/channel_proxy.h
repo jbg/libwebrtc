@@ -106,6 +106,7 @@ class ChannelProxy : public RtpPacketSinkInterface {
   virtual void AssociateSendChannel(const ChannelProxy& send_channel_proxy);
   virtual void DisassociateSendChannel();
   virtual RtpRtcp* GetRtpRtcp() const;
+  virtual int64_t GetRTT() const;
 
   // Produces the transport-related timestamps; current_delay_ms is left unset.
   absl::optional<Syncable::Info> GetSyncInfo() const;

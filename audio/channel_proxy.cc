@@ -260,6 +260,11 @@ RtpRtcp* ChannelProxy::GetRtpRtcp() const {
   return channel_->GetRtpRtcp();
 }
 
+int64_t ChannelProxy::GetRTT() const {
+  RTC_DCHECK(module_process_thread_checker_.CalledOnValidThread());
+  return channel_->GetRTT(/* allow_associate_channel = */ false);
+}
+
 absl::optional<Syncable::Info> ChannelProxy::GetSyncInfo() const {
   RTC_DCHECK(module_process_thread_checker_.CalledOnValidThread());
   return channel_->GetSyncInfo();
