@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a9045528_429f10b9",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T09:22:53Z",
+      "side": 1,
+      "message": "Regarding dependencies, it would be nice if the target with the rtc_export.h header could depend/include some config which ensures that the defines it uses get valid values, but I guess that\u0027s tricky since we want different values for the webrtc build and application using webrtc?",
+      "parentUuid": "fe843a2c_877aa61f",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b74c1fa_9b94f10b",
         "filename": "BUILD.gn",
         "patchSetId": 1
