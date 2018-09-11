@@ -282,5 +282,41 @@ rtc::scoped_refptr<Video> OpenYuvOrY4mFile(const std::string& file_name,
   return nullptr;
 }
 
+void WriteVideoToFile(const rtc::scoped_refptr<Video>& video,
+                      const std::string& file_name,
+                      const float fps) {
+  FILE* output_file = fopen(file_name.c_str(), "wb");
+  if (output_file == nullptr) {
+    RTC_LOG(LS_ERROR) << "Could not open file for writing: " << file_name;
+    return;
+  }
+
+  bool isY4m = file_name.find("y4m") != std::string::npos;
+  rtc::scoped_refptr<I420BufferInterface> check_buffer = video->GetFrame(0);
+  int width = check_buffer->width();
+  int height = check_buffer->height();
+  if (isY4m) {
+    char buf[50];
+    int len = snprintf(buf, sizeof(buf), "YUV4MPEG2 W%d H%d F%g:1 C420 \n",
+                       width, height, fps);
+    fwrite(buf, 1, len, output_file);
+  }
+  for (size_t i = 0; i < video->number_of_frames(); ++i) {
+    if (isY4m) {
+      std::string frame = "FRAME\n";
+      fwrite(frame.c_str(), 1, 6, output_file);
+    }
+    rtc::scoped_refptr<I420BufferInterface> buffer = video->GetFrame(i);
+    fwrite(buffer->DataY(), /* size= */ 1, width * height, output_file);
+    fwrite(buffer->DataU(), /* size= */ 1,
+           buffer->ChromaWidth() * buffer->ChromaHeight(), output_file);
+    fwrite(buffer->DataV(), /* size= */ 1,
+           buffer->ChromaWidth() * buffer->ChromaHeight(), output_file);
+  }
+  if (ferror(output_file) != 0) {
+    RTC_LOG(LS_ERROR) << "Error writing to file " << file_name;
+  }
+}
+
 }  // namespace test
 }  // namespace webrtc

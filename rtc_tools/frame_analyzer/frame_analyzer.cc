@@ -56,6 +56,9 @@ int main(int argc, char* argv[]) {
       " Default: test_file.yuv\n"
       "  - chartjson_result_file: Where to store perf result in chartjson"
       " format. If not present, no perf result will be stored."
+      " Default: None\n"
+      "  - aligned_output_file: Where to write aligned YUV/Y4M output file."
+      " If not present, no file will be written."
       " Default: None\n";
 
   webrtc::test::CommandLineParser parser;
@@ -69,6 +72,7 @@ int main(int argc, char* argv[]) {
   parser.SetFlag("label", "MY_TEST");
   parser.SetFlag("reference_file", "ref.yuv");
   parser.SetFlag("test_file", "test.yuv");
+  parser.SetFlag("aligned_output_file", "");
   parser.SetFlag("chartjson_result_file", "");
   parser.SetFlag("help", "false");
 
@@ -127,6 +131,14 @@ int main(int argc, char* argv[]) {
   std::string chartjson_result_file = parser.GetFlag("chartjson_result_file");
   if (!chartjson_result_file.empty()) {
     webrtc::test::WritePerfResults(chartjson_result_file);
+  }
+  std::string aligned_output_file = parser.GetFlag("aligned_output_file");
+  if (!aligned_output_file.empty()) {
+    rtc::scoped_refptr<webrtc::test::Video> reordered_video =
+        webrtc::test::GenerateAlignedReferenceVideo(reference_video, test_video,
+                                                    matching_indices);
+    webrtc::test::WriteVideoToFile(reordered_video, aligned_output_file,
+                                   /*fps=*/30);
   }
 
   return 0;

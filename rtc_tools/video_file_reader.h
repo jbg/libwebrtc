@@ -74,6 +74,11 @@ rtc::scoped_refptr<Video> OpenYuvOrY4mFile(const std::string& file_name,
                                            int width,
                                            int height);
 
+// Writes video to file, determining YUV or Y4M format from the file extension.
+void WriteVideoToFile(const rtc::scoped_refptr<Video>& video,
+                      const std::string& file_name,
+                      const float fps);
+
 }  // namespace test
 }  // namespace webrtc
 
