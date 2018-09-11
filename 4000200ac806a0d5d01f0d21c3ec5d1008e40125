@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "9f969b73_da912e7a",
+        "filename": "rtc_tools/compare_videos.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "This is the aligned test video? I would name it aligned_test_file, because I think we will have to output an aligned_reference_file soon as well, because the cropping alignment will be done on the reference video.",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 39,
+        "endChar": 42
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e008b94_6197a78f",
+        "filename": "rtc_tools/frame_analyzer/video_temporal_aligner.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "The test_video argument is unnecessary. Also, add a comment saying that this function does the same as the function above, but with pre-calculated indices.",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a017a3f5_9f142d91",
         "filename": "rtc_tools/video_file_reader.cc",
         "patchSetId": 1
@@ -48,6 +94,75 @@
     },
     {
       "key": {
+        "uuid": "e49f58b9_400d2bbf",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "nit: I guess it\u0027s unlikely, but if the file name itself contain \u0027y4m\u0027 this will return true. Maybe rtc::ends_with(file_name.c_str(), \".y4m\") is better?",
+      "range": {
+        "startLine": 294,
+        "startChar": 15,
+        "endLine": 294,
+        "endChar": 57
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a18f95ea_f768f4a5",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "The video now has a width/height function directly.",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 38
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab313b55_1e8225dc",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "Hmm, can\u0027t you fprintf directly? Otherwise, I think rtc::StringBuilder is the preferred way.",
+      "range": {
+        "startLine": 299,
+        "startChar": 3,
+        "endLine": 301,
+        "endChar": 43
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6973ab8_43239564",
         "filename": "rtc_tools/video_file_reader.cc",
         "patchSetId": 1
@@ -64,6 +179,29 @@
         "startChar": 0,
         "endLine": 302,
         "endChar": 37
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beae5fa2_98b42086",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "This code currently assumes that stride\u003d\u003dwidth so that the buffer is tightly packed. I would prefer handling when we have padding, i.e. stride\u003ewidth, so we would have to loop over the rows.",
+      "range": {
+        "startLine": 310,
+        "startChar": 5,
+        "endLine": 310,
+        "endChar": 72
       },
       "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
@@ -110,6 +248,29 @@
         "startChar": 5,
         "endLine": 78,
         "endChar": 21
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b18688b5_40c3b7c9",
+        "filename": "rtc_tools/video_file_reader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-09-11T11:08:44Z",
+      "side": 1,
+      "message": "nit: We don\u0027t use const for arguments sent by value.",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 37
       },
       "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
