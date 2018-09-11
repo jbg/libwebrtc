@@ -273,6 +273,30 @@
     },
     {
       "key": {
+        "uuid": "a1d7369c_e77720ef",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T15:00:25Z",
+      "side": 1,
+      "message": "Addressed on https://webrtc-review.googlesource.com/c/src/+/97960 (let\u0027s talk about this on that CL).",
+      "parentUuid": "daeb4d36_fb7b4921",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf2d9b96_7b3ab4ab",
         "filename": "rtc_base/build/rtc_export.h",
         "patchSetId": 1
@@ -296,6 +320,30 @@
     },
     {
       "key": {
+        "uuid": "688871d5_e2c94cb1",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T15:00:25Z",
+      "side": 1,
+      "message": "Fixed on https://webrtc-review.googlesource.com/c/src/+/97960 (I also added a check to avoid that both WEBRTC_EXPORT_SYMBOLS and WEBRTC_IMPORT_SYMBOLS are set to 1).",
+      "parentUuid": "cf2d9b96_7b3ab4ab",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "613a8973_f7c65c22",
         "filename": "rtc_base/build/rtc_export.h",
         "patchSetId": 1
@@ -310,6 +358,24 @@
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9542ad53_0bfdfdfb",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T15:00:25Z",
+      "side": 1,
+      "message": "Implemented on https://webrtc-review.googlesource.com/c/src/+/97960, thanks!",
+      "parentUuid": "613a8973_f7c65c22",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -363,6 +429,24 @@
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db0cade_4cd0cfff",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T15:00:25Z",
+      "side": 1,
+      "message": "Implemented on https://webrtc-review.googlesource.com/c/src/+/97960.",
+      "parentUuid": "f8336183_1ba7c1dc",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
