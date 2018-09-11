@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "05cf4d75_f72e4502",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-11T00:18:57Z",
+      "side": 1,
+      "message": "Is this one used by all targets that are part of the shared library?",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b74c1fa_9b94f10b",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-11T00:18:57Z",
+      "side": 1,
+      "message": "...and this one used by all targets that use the shared library?",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d20086f3_e7dfb1e0",
         "filename": "pc/BUILD.gn",
         "patchSetId": 1
@@ -19,6 +53,64 @@
         "endLine": 246,
         "endChar": 45
       },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae52bb6a_e039c95c",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-11T00:18:57Z",
+      "side": 1,
+      "message": "It shouldn\u0027t be too much of a problem, since we try reasonably hard to always declare and define in the same target.\n\nAnd yes, adding it to our templates sounds like the right thing to do. (Would that mean we get two flavors of each template, inside and outside the shared library?)",
+      "parentUuid": "d20086f3_e7dfb1e0",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 45
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "613a8973_f7c65c22",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-11T00:18:57Z",
+      "side": 1,
+      "message": "You can simplify these two by not having else clauses, and then at the end a single\n\n  #ifndef RTC_EXPORT\n  #define RTC_EXPORT\n  #endif",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c59d8d72_e52311bf",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-11T00:18:57Z",
+      "side": 1,
+      "message": "Hmm. I think it would be simpler for users (and just as simple for us) if the preprocessor symbols were named something like WEBRTC_SHARED_LIBRARY (the old USING_) and WEBRTC_IMPL_SHARED_LIBRARY (the old BUILDING_). That way, the naming of the public symbol doesn\u0027t have to give away the fact that there is also a nonpublic symbol.\n\n(Also note that WEBRTC_ should be a prefix.)",
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
