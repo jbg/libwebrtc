@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4145be00_6b126b92",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T13:28:18Z",
+      "side": 1,
+      "message": "kwiberg@: correct.\n\nphoglund@: V8 calls them internal_config and external_config but they have more things in them (https://cs.chromium.org/chromium/src/v8/BUILD.gn?rcl\u003d8da9dbbb54b4e5afaf58924121f7308b4a0517c2\u0026l\u003d208-221 and https://cs.chromium.org/chromium/src/v8/BUILD.gn?rcl\u003d8da9dbbb54b4e5afaf58924121f7308b4a0517c2\u0026l\u003d256-276).\n\nShould we rename to \"symbol_visibility_internal\" and \"symbol_visibility_external\"?\n\nIn theory \"symbol_visibility_external\" will only be used by the Chromium build target and a shared library target (if we will ever create that).\n\nnisse@: It is tricky because sometimes the symbol is declared in a target and defined in another. The declaration depends on rtc_export.h but the definition doesn\u0027t.",
+      "parentUuid": "a9045528_429f10b9",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b74c1fa_9b94f10b",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64a92a16_701f36e0",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T13:28:18Z",
+      "side": 1,
+      "message": "Yes, in theory the shared library will list this config in its public_configs so dependents automatically get this one.",
+      "parentUuid": "0b74c1fa_9b94f10b",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -107,6 +143,30 @@
       "side": 1,
       "message": "I\u0027d say do whatever chrome/v8 does, if they do the same thing at least.",
       "parentUuid": "22c73418_266674b1",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0ac34d8_24ba6ee4",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T13:28:18Z",
+      "side": 1,
+      "message": "It seems attributes must be placed after struct/class:\n\n error: attribute \u0027visibility\u0027 is ignored, place it after \"struct\" to apply attribute to type declaration [-Werror,-Wignored-attributes]",
+      "parentUuid": "2cc24877_6c67bc6f",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -163,6 +223,30 @@
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f6dbde8_37bd8c4d",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T13:28:18Z",
+      "side": 1,
+      "message": "\u003e And yes, adding it to our templates sounds like the right thing to do. (Would that mean we get two flavors of each template, inside and outside the shared library?)\n\nNo, because templates would be identical. Since internal_symbols_config is listed in configs it is only applied to the current build target, so when the header is included by another target, RTC_EXPORT will expand to nothing or to the __declspec(dllimport) (if that build target defined the right macro).",
+      "parentUuid": "ae52bb6a_e039c95c",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 45
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -258,6 +342,24 @@
       "side": 1,
       "message": "On naming, I\u0027d prefer that the symbols are named based on intrinsic action or meaning, rather than describing their use case.\n\nMaybe\n\n  RTC_EXPORT  --\u003e   RTC_PUBLIC\n  BUILDING_WEBRTC_SHARED --\u003e  WEBRTC_EXPORT_SYMBOLS\n  USING_WEBRTC_SHARED --\u003e WEBRTC_IMPORT_SYMBOLS\n\nNot sure I like \"import\" that much, but since it is relevant only for windows dlls, it makes some sense to follow the windows terminology.",
       "parentUuid": "c59d8d72_e52311bf",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8336183_1ba7c1dc",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-11T13:28:18Z",
+      "side": 1,
+      "message": "Correct, WEBRTC_ is a prefix. Thanks for spotting that out.\n\nI like nisse@\u0027s proposal, let me update the other CL.",
+      "parentUuid": "0397c129_81997312",
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
