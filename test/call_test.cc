@@ -21,6 +21,7 @@
 #include "call/simulated_network.h"
 #include "modules/audio_mixer/audio_mixer_impl.h"
 #include "modules/congestion_controller/bbr/bbr_factory.h"
+#include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor_extension.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
 #include "rtc_base/experiments/congestion_controller_experiment.h"
@@ -238,6 +239,9 @@ void CallTest::CreateVideoSendConfig(VideoSendStream::Config* video_config,
                    kTransportSequenceNumberExtensionId));
   video_config->rtp.extensions.push_back(RtpExtension(
       RtpExtension::kVideoContentTypeUri, kVideoContentTypeExtensionId));
+  video_config->rtp.extensions.push_back(
+      RtpExtension(RtpGenericFrameDescriptorExtension::kUri,
+                   kRtpExtensionGenericFrameDescriptor));
   if (video_encoder_configs_.empty()) {
     video_encoder_configs_.emplace_back();
     FillEncoderConfiguration(kVideoCodecGeneric, num_video_streams,
