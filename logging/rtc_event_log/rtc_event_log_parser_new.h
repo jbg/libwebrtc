@@ -243,7 +243,7 @@ struct LoggedRtcpPacketTransportFeedback {
 };
 
 struct LoggedStartEvent {
-  explicit LoggedStartEvent(uint64_t timestamp_us)
+  explicit LoggedStartEvent(int64_t timestamp_us)
       : timestamp_us(timestamp_us) {}
   int64_t timestamp_us;
   int64_t log_time_us() const { return timestamp_us; }
@@ -251,8 +251,7 @@ struct LoggedStartEvent {
 };
 
 struct LoggedStopEvent {
-  explicit LoggedStopEvent(uint64_t timestamp_us)
-      : timestamp_us(timestamp_us) {}
+  explicit LoggedStopEvent(int64_t timestamp_us) : timestamp_us(timestamp_us) {}
   int64_t timestamp_us;
   int64_t log_time_us() const { return timestamp_us; }
   int64_t log_time_ms() const { return timestamp_us / 1000; }
@@ -529,6 +528,8 @@ class ParsedRtcEventLogNew {
     uint32_t ssrc;
     PacketView<const LoggedRtpPacket> packet_view;
   };
+
+  static webrtc::RtpHeaderExtensionMap GetDefaultHeaderExtensionMap();
 
   explicit ParsedRtcEventLogNew(
       UnconfiguredHeaderExtensions parse_unconfigured_header_extensions =
