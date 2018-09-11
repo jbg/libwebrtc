@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4890ee2_e418a7a0",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-11T16:39:56Z",
+      "side": 1,
+      "message": "How come this is only checked in the one active stream case?",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 58
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "635b3eaa_deaf1d50",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-11T16:39:56Z",
+      "side": 1,
+      "message": "This changes the behaviour compared to before in the case when we have one stream that is not currently active. Is this intended?",
+      "range": {
+        "startLine": 106,
+        "startChar": 13,
+        "endLine": 106,
+        "endChar": 36
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a1289bb_e1ef3b36",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-11T16:39:56Z",
+      "side": 1,
+      "message": "what if this is set on another stream?",
+      "range": {
+        "startLine": 233,
+        "startChar": 31,
+        "endLine": 233,
+        "endChar": 61
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
