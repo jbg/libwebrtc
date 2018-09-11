@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6acf4fbc_45276d54",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-11T14:54:53Z",
+      "side": 1,
+      "message": "Why is this functionality not required for the new send side congestion controller but the old one? It seems to me that this means that the trial will behave differently using the old vs new SSCC if we do it like this?",
+      "range": {
+        "startLine": 776,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 28
+      },
+      "revId": "bcf91808a2205e72e9a669ff80f6fe9c15f6d349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
