@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5d0d0745_bdf376b6",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-11T14:44:08Z",
+      "side": 1,
+      "message": "Yes. Done. Accidentally changed to previous version.",
+      "parentUuid": "15a9028e_3a844ef4",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "133055a6_b2e588cb",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f031f17_12959035",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-11T14:44:08Z",
+      "side": 1,
+      "message": "Fairly confident. We will need to add things for SVC and Simulcast (spatial index for example) later. Also, \u0027CodecSpecificInfo\u0027 itself is not sufficient: we need frame_id and referenced_frame_ids (which are assigned in the rtp path for some codecs), in order to have the right ordering in the jitter buffer. Hence these two are explicitly mentioned here.\n\nIn the last meeting (the one where it was kicking you out of the call) we decided that\n1) we need to be able to make rapid changes, so if this turns out to be missing something, we will change it\n2) we will start with a separate class, because non of the existing classes fits right away. Later on, if you will be able to create an EncodedFrame in the sender, we can change this interface to get EncodedFrame and return EncodedFrame.",
+      "parentUuid": "133055a6_b2e588cb",
+      "range": {
+        "startLine": 128,
+        "startChar": 6,
+        "endLine": 128,
+        "endChar": 37
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "e59f8e04_d80807ab",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-11T14:44:08Z",
+      "side": 1,
+      "message": "On receiver, we can create a SelfDisposingEncodedImage, move the buffer and avoid extra copies, but in general you are right.\n\nGet in touch with me for more details.",
+      "parentUuid": "71ff484f_f402d2f1",
+      "range": {
+        "startLine": 150,
+        "startChar": 23,
+        "endLine": 150,
+        "endChar": 37
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b336461c_deb90b44",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -85,6 +151,30 @@
       "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0946ba7f_9b3ae713",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-11T14:44:08Z",
+      "side": 1,
+      "message": "We got feedback earlier to not use uint32_t and prefer int, see https://webrtc-review.googlesource.com/c/src/+/95960/8/api/media_transport_interface.h#64\n\nAs to frame_id, I was hoping you will give me a better guidance of what it should be, because it\u0027s a concept already present in WebRTC -- EncodedFrame::id. As far as I understand jitter buffer needs frame_ids and dependencies. In our prototype integration, frame ids were increasing by 1 for every frame.\n\nAs far as I can tell, jitter buffer (modules/video_coding/frame_buffer2.cc) requires\n1) rtp timestamps (monotonic) to determine ordering\n2) frame ids and dependencies to make sure where the frame should be released, and what dependencies does it have\n\nbut it does not require frame_id to be monotonic or in any particular order.\n\nUnforuntately, EncodedFrame::id does not have any comments, and neither has VideoLayerFrameId::picture_id; could you add them there?\n\nFor now I am just stating that it\u0027s the same as EncodedFrame::id::picture_id\n\nComment improved.",
+      "parentUuid": "b336461c_deb90b44",
+      "range": {
+        "startLine": 154,
+        "startChar": 6,
+        "endLine": 154,
+        "endChar": 15
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -123,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "24357577_9ed2c606",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-11T14:44:08Z",
+      "side": 1,
+      "message": "Removed, but it\u0027s needed. let\u0027s discuss on the next syncup. MediaTransport may establish its own security, and you should know when you can give the first keyframe (when the connection is established).",
+      "parentUuid": "37e75843_e53b2f7c",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32462913_e4f81c78",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -143,6 +251,30 @@
       "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3117ca3_00f61edc",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-11T14:44:08Z",
+      "side": 1,
+      "message": "Yes -- you may want to do packetization in a synchronous manner (or serialization and packetization), but put it on the wire asynchronously. In such case we can report serialization issues right away.\n\nModified comment.",
+      "parentUuid": "32462913_e4f81c78",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 18
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
