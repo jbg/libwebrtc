@@ -19,6 +19,75 @@
     },
     {
       "key": {
+        "uuid": "133055a6_b2e588cb",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T08:46:14Z",
+      "side": 1,
+      "message": "It\u0027s unfortunate to have yet another class for this. But I can understand that you want to use the same for send and receive. Are you confident you can create one from the information available on the send side (EncodedImage + CodecSpecificInfo), and create a EncodedVideoFrame to pass to the jitterbuffer on the receive side?",
+      "range": {
+        "startLine": 128,
+        "startChar": 6,
+        "endLine": 128,
+        "endChar": 37
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71ff484f_f402d2f1",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T08:46:14Z",
+      "side": 1,
+      "message": "Using EncodedImage implies that this class doesn\u0027t own the buffer with the actual bits. I think that\u0027s worth a comment. And it will likely require an extra copy on the receive side, when creating an EncodedFrame.",
+      "range": {
+        "startLine": 150,
+        "startChar": 23,
+        "endLine": 150,
+        "endChar": 37
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b336461c_deb90b44",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T08:46:14Z",
+      "side": 1,
+      "message": "Not sure what the expectations are for this one. Will it increase by one for each frame? Are there any cases where it may jump? Do you expect it to ever wrap around (if so, it should be an unsigned type)? For 100 fps stream a 32-bit signed int overflows in 248 days, if I get the numbers right.\n\nIn practice, I would expect that a *unique* identifier isn\u0027t needed, it\u0027s sufficient if it takes a minimum of a minutes or two until an id is reused.",
+      "range": {
+        "startLine": 154,
+        "startChar": 6,
+        "endLine": 154,
+        "endChar": 15
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af551c40_50969d85",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -30,6 +99,47 @@
       "writtenOn": "2018-09-10T22:44:52Z",
       "side": 1,
       "message": "Should we do state change as a separate CL?\n\nAnother option is to have explicit Connect() method on MediaTransportInterface with a sink / callback. \n\nI also want to understand what happens on close, should we have explcit Close() or have destructor to close connection?",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37e75843_e53b2f7c",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T08:46:14Z",
+      "side": 1,
+      "message": "I\u0027d prefer a separate cl. I don\u0027t understand the usecase for this one, and I suspect this isn\u0027t the right place.\n\nI\u0027m thinking of the MediaTransportInterface as an interface belonging to the media pipeline or \"data plane\", providing service for send and receive streams. While reporting connection events belongs to the \"signalling plane\".",
+      "parentUuid": "af551c40_50969d85",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32462913_e4f81c78",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-11T08:46:14Z",
+      "side": 1,
+      "message": "If it\u0027s asynchronous, is there any good reason to have a return value? Same applies to SendAudioFrame and RequestKeyFrame.",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 18
+      },
       "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
