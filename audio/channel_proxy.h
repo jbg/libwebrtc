@@ -18,9 +18,7 @@
 
 #include "api/audio/audio_mixer.h"
 #include "api/audio_codecs/audio_encoder.h"
-#include "api/rtpreceiverinterface.h"
 #include "audio/channel.h"
-#include "call/rtp_packet_sink_interface.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/thread_checker.h"
@@ -48,7 +46,7 @@ namespace voe {
 //     voe::Channel class.
 //  2. Provide a refined interface for the stream classes, including assumptions
 //     on return values and input adaptation.
-class ChannelProxy : public RtpPacketSinkInterface {
+class ChannelProxy {
  public:
   ChannelProxy();
   explicit ChannelProxy(std::unique_ptr<Channel> channel);
@@ -69,10 +67,7 @@ class ChannelProxy : public RtpPacketSinkInterface {
   virtual void RegisterSenderCongestionControlObjects(
       RtpTransportControllerSendInterface* transport,
       RtcpBandwidthObserver* bandwidth_observer);
-  virtual void RegisterReceiverCongestionControlObjects(
-      PacketRouter* packet_router);
   virtual void ResetSenderCongestionControlObjects();
-  virtual void ResetReceiverCongestionControlObjects();
   virtual CallStatistics GetRTCPStatistics() const;
   virtual std::vector<ReportBlock> GetRemoteRTCPReportBlocks() const;
   virtual NetworkStatistics GetNetworkStatistics() const;
@@ -88,34 +83,22 @@ class ChannelProxy : public RtpPacketSinkInterface {
                                                 int payload_frequency);
   virtual bool SendTelephoneEventOutband(int event, int duration_ms);
   virtual void SetBitrate(int bitrate_bps, int64_t probing_interval_ms);
-  virtual void SetReceiveCodecs(const std::map<int, SdpAudioFormat>& codecs);
-  virtual void SetSink(AudioSinkInterface* sink);
   virtual void SetInputMute(bool muted);
   virtual void RegisterTransport(Transport* transport);
 
-  // Implements RtpPacketSinkInterface
-  void OnRtpPacket(const RtpPacketReceived& packet) override;
   virtual bool ReceivedRTCPPacket(const uint8_t* packet, size_t length);
-  virtual void SetChannelOutputVolumeScaling(float scaling);
-  virtual AudioMixer::Source::AudioFrameInfo GetAudioFrameWithInfo(
-      int sample_rate_hz,
-      AudioFrame* audio_frame);
   virtual int PreferredSampleRate() const;
   virtual void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame);
   virtual void SetTransportOverhead(int transport_overhead_per_packet);
-  virtual void AssociateSendChannel(const ChannelProxy& send_channel_proxy);
-  virtual void DisassociateSendChannel();
   virtual RtpRtcp* GetRtpRtcp() const;
+  virtual int64_t GetRTT() const;
 
-  // Produces the transport-related timestamps; current_delay_ms is left unset.
-  absl::optional<Syncable::Info> GetSyncInfo() const;
   virtual uint32_t GetPlayoutTimestamp() const;
   virtual void SetMinimumPlayoutDelay(int delay_ms);
   virtual bool GetRecCodec(CodecInst* codec_inst) const;
   virtual void OnTwccBasedUplinkPacketLossRate(float packet_loss_rate);
   virtual void OnRecoverableUplinkPacketLossRate(
       float recoverable_packet_loss_rate);
-  virtual std::vector<webrtc::RtpSource> GetSources() const;
   virtual void StartSend();
   virtual void StopSend();
   virtual void StartPlayout();
