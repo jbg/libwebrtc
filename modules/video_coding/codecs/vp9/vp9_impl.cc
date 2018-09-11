@@ -228,7 +228,8 @@ bool VP9EncoderImpl::SetSvcRates(
       }
 
       framerate_controller_[sl_idx].SetTargetRate(
-          codec_.spatialLayers[sl_idx].maxFramerate);
+          std::min(static_cast<float>(codec_.maxFramerate),
+                   codec_.spatialLayers[sl_idx].maxFramerate));
     }
   } else {
     float rate_ratio[VPX_MAX_LAYERS] = {0};
