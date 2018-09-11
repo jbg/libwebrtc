@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe843a2c_877aa61f",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-11T09:17:29Z",
+      "side": 1,
+      "message": "I\u0027m fine with the concept, but I think the name is confusing. What\u0027s a better name, maybe_export_symbols? What does V8 call it?",
+      "parentUuid": "05cf4d75_f72e4502",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b74c1fa_9b94f10b",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -47,6 +65,30 @@
       "writtenOn": "2018-09-11T06:51:05Z",
       "side": 1,
       "message": "Is this a required order? I\u0027d prefer\n\nRTC_EXPORT\nclass EncodedImage { ... };\n\nI.e., similar placement as RTC_DEPRECATED.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cc24877_6c67bc6f",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-11T09:17:29Z",
+      "side": 1,
+      "message": "I\u0027d say do whatever chrome/v8 does, if they do the same thing at least.",
+      "parentUuid": "22c73418_266674b1",
       "range": {
         "startLine": 29,
         "startChar": 0,
