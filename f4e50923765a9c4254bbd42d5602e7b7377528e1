@@ -335,6 +335,30 @@
     },
     {
       "key": {
+        "uuid": "7108cdb9_fb5745ff",
+        "filename": "style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-11T02:43:20Z",
+      "side": 1,
+      "message": "Yes, in the general case, the interface and the Create function have to be in separate targets. Which implies that Create has to be a free function, not a static member.\n\nOne the one hand this leads to more awkward names (CreateFoo vs Foo::Create), but on the other hand it allows users to use just the interface and not the Create function.",
+      "parentUuid": "55aacba3_57ef4efa",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 70
+      },
+      "revId": "f4e50923765a9c4254bbd42d5602e7b7377528e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b32bb098_a5cbdf0c",
         "filename": "style-guide.md",
         "patchSetId": 1
