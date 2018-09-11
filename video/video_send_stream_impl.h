@@ -139,6 +139,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
 
   SendStatisticsProxy* const stats_proxy_;
   const VideoSendStream::Config* const config_;
+  const bool has_alr_probing_;
 
   std::unique_ptr<FecController> fec_controller_;
   rtc::TaskQueue* const worker_queue_;
