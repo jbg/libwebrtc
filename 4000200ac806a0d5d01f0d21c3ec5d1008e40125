@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a017a3f5_9f142d91",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-11T11:02:39Z",
+      "side": 1,
+      "message": "Don\u0027t we have to close the file?",
+      "range": {
+        "startLine": 288,
+        "startChar": 22,
+        "endLine": 288,
+        "endChar": 27
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d8e4dc0_f6dd2995",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-11T11:02:39Z",
+      "side": 1,
+      "message": "This would classify y4m.yuv as y4m file. Seems a little brittle. Maybe just check the last four characters of the filename for \".y4m\"?",
+      "range": {
+        "startLine": 294,
+        "startChar": 15,
+        "endLine": 294,
+        "endChar": 57
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6973ab8_43239564",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-11T11:02:39Z",
+      "side": 1,
+      "message": "nit: Couldn\u0027t you just directly use fprintf?",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 37
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30200bba_5200eb94",
+        "filename": "rtc_tools/video_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-11T11:02:39Z",
+      "side": 1,
+      "message": "This assumes stride \u003d\u003d width, I think we need to write row by row",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 72
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c52a7a_04f0c674",
+        "filename": "rtc_tools/video_file_reader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-11T11:02:39Z",
+      "side": 1,
+      "message": "nit: Feels very weird that WriteVideoToFile would be inside video_file_reader.",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 21
+      },
+      "revId": "4000200ac806a0d5d01f0d21c3ec5d1008e40125",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
