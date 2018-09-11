@@ -17,6 +17,7 @@
 #include <string>
 
 #include "api/rtpparameters.h"
+#include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor_extension.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 
@@ -52,6 +53,8 @@ RTPExtensionType StringToRtpExtensionType(const std::string& extension) {
     return kRtpExtensionVideoTiming;
   if (extension == RtpExtension::kMidUri)
     return kRtpExtensionMid;
+  if (extension == RtpGenericFrameDescriptorExtension::kUri)
+    return kRtpExtensionGenericFrameDescriptor;
   RTC_NOTREACHED() << "Looking up unsupported RTP extension.";
   return kRtpExtensionNone;
 }
