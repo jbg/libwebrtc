@@ -15,6 +15,7 @@
 
 #include "api/mediastreaminterface.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/thread_checker.h"
 
 namespace webrtc {
 
@@ -23,14 +24,16 @@ namespace webrtc {
 template <class T>
 class Notifier : public T {
  public:
-  Notifier() {}
+  Notifier() { thread_checker_.DetachFromThread(); }
 
   virtual void RegisterObserver(ObserverInterface* observer) {
+    RTC_DCHECK(thread_checker_.CalledOnValidThread());
     RTC_DCHECK(observer != nullptr);
     observers_.push_back(observer);
   }
 
   virtual void UnregisterObserver(ObserverInterface* observer) {
+    RTC_DCHECK(thread_checker_.CalledOnValidThread());
     for (std::list<ObserverInterface*>::iterator it = observers_.begin();
          it != observers_.end(); it++) {
       if (*it == observer) {
@@ -41,9 +44,12 @@ class Notifier : public T {
   }
 
   void FireOnChanged() {
+    RTC_DCHECK(thread_checker_.CalledOnValidThread());
     // Copy the list of observers to avoid a crash if the observer object
     // unregisters as a result of the OnChanged() call. If the same list is used
     // UnregisterObserver will affect the list make the iterator invalid.
+    // It will still crash in case OnChanged on one observer unregisters and
+    // destroys some other observer on the list. So don't do that.
     std::list<ObserverInterface*> observers = observers_;
     for (std::list<ObserverInterface*>::iterator it = observers.begin();
          it != observers.end(); ++it) {
@@ -53,6 +59,11 @@ class Notifier : public T {
 
  protected:
   std::list<ObserverInterface*> observers_;
+
+ private:
+  // No locking, so must run on a single thread, typically the signalling
+  // thread.
+  rtc::ThreadChecker thread_checker_;
 };
 
 }  // namespace webrtc
