@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d70094d_eccbc84f",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-12T14:33:35Z",
+      "side": 1,
+      "message": "nit: This can\u0027t happen now right?",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 33
+      },
+      "revId": "d14921bc2ee62d857aa58491964e15fb5ee327e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
