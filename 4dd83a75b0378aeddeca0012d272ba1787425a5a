@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4d23d24c_1d5472f0",
+        "filename": "api/crypto/framedecryptorinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-12T20:23:21Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "9870f81e_7eb809ad",
+      "revId": "4dd83a75b0378aeddeca0012d272ba1787425a5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a21bb2c_4f883a4d",
         "filename": "api/crypto/framedecryptorinterface.h",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-12T20:19:21Z",
       "side": 1,
       "message": "Can we just represent nullopt by an ArrayView of size 0?",
+      "revId": "4dd83a75b0378aeddeca0012d272ba1787425a5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a4ade4f_9c34f267",
+        "filename": "api/crypto/framedecryptorinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-12T20:23:21Z",
+      "side": 1,
+      "message": "I prefer optional because it clearly documents it as optional and instead of passing in a zero array each time users can just write absl::nullopt.",
+      "parentUuid": "8a21bb2c_4f883a4d",
       "revId": "4dd83a75b0378aeddeca0012d272ba1787425a5a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
