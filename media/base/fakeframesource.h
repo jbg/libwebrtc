@@ -20,6 +20,10 @@ namespace cricket {
 class FakeFrameSource {
  public:
   FakeFrameSource(int width, int height, int interval_us);
+  FakeFrameSource(int width,
+                  int height,
+                  int interval_us,
+                  int64_t timestamp_offset_us);
 
   webrtc::VideoRotation GetRotation() const;
   void SetRotation(webrtc::VideoRotation rotation);
@@ -37,9 +41,10 @@ class FakeFrameSource {
   const int width_;
   const int height_;
   const int interval_us_;
+  const int64_t timestamp_offset_us_;
 
   webrtc::VideoRotation rotation_ = webrtc::kVideoRotation_0;
-  int64_t next_timestamp_us_ = rtc::kNumMicrosecsPerMillisec;
+  int64_t next_timestamp_us_ = 0;
 };
 
 }  // namespace cricket
