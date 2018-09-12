@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b67125ef_09eaa615",
+        "filename": "media/base/fakeframesource.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-12T11:42:53Z",
+      "side": 1,
+      "message": "Is this needed? Why not initialize next_timestamp_us_ to timestamp_offset_us instead?",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "c0a8561da134e4ca56d97b7f5676d74033626af0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9c03f23_96c970d1",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-12T11:42:53Z",
+      "side": 1,
+      "message": "I would guess that the send time (like most times in webrtc) comes from rtc::TimeMicros(). We should use the same imo. I don\u0027t think we should use system time.",
+      "range": {
+        "startLine": 353,
+        "startChar": 38,
+        "endLine": 353,
+        "endChar": 54
+      },
+      "revId": "c0a8561da134e4ca56d97b7f5676d74033626af0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
