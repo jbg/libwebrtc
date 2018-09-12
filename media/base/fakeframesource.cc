@@ -15,12 +15,22 @@
 
 namespace cricket {
 
-FakeFrameSource::FakeFrameSource(int width, int height, int interval_us)
-    : width_(width), height_(height), interval_us_(interval_us) {
+FakeFrameSource::FakeFrameSource(int width,
+                                 int height,
+                                 int interval_us,
+                                 int64_t timestamp_offset_us)
+    : width_(width),
+      height_(height),
+      interval_us_(interval_us),
+      timestamp_offset_us_(timestamp_offset_us) {
   RTC_CHECK_GT(width_, 0);
   RTC_CHECK_GT(height_, 0);
   RTC_CHECK_GT(interval_us_, 0);
+  RTC_CHECK_GE(timestamp_offset_us, 0);
 }
+
+FakeFrameSource::FakeFrameSource(int width, int height, int interval_us)
+    : FakeFrameSource(width, height, interval_us, rtc::kNumMicrosecsPerMillisec) {}
 
 webrtc::VideoRotation FakeFrameSource::GetRotation() const {
   return rotation_;
@@ -61,8 +71,8 @@ webrtc::VideoFrame FakeFrameSource::GetFrame(int width,
       webrtc::I420Buffer::Create(width, height));
 
   buffer->InitializeData();
-  webrtc::VideoFrame frame =
-      webrtc::VideoFrame(buffer, rotation, next_timestamp_us_);
+  webrtc::VideoFrame frame = webrtc::VideoFrame(
+      buffer, rotation, timestamp_offset_us_ + next_timestamp_us_);
 
   next_timestamp_us_ += interval_us;
   return frame;
