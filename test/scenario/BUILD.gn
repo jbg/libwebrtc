@@ -20,6 +20,8 @@ if (rtc_include_tests) {
       "column_printer.h",
       "hardware_codecs.cc",
       "hardware_codecs.h",
+      "instant_client.cc",
+      "instant_client.h",
       "network_node.cc",
       "network_node.h",
       "scenario.cc",

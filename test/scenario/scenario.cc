@@ -122,6 +122,31 @@ CallClient* Scenario::CreateClient(
   return CreateClient(name, config);
 }
 
+InstantClient* Scenario::CreateInstantController(
+    std::string name,
+    InstantClientconfig config,
+    std::vector<PacketStreamConfig> stream_configs,
+    std::vector<NetworkNode*> send_link,
+    std::vector<NetworkNode*> return_link) {
+  uint64_t send_id = next_receiver_id_++;
+  uint64_t return_id = next_receiver_id_++;
+  InstantClient* client =
+      new InstantClient(GetFullPathOrEmpty(name), config, stream_configs,
+                        send_link, return_link, send_id, return_id, Now());
+  if (!base_filename_.empty() && !name.empty() &&
+      config.transport.state_log_interval.IsFinite()) {
+    Every(config.transport.state_log_interval, [this, client]() {
+      client->network_controller_factory_.LogCongestionControllerStats(Now());
+    });
+  }
+
+  Every(client->GetCongestionProcessInterval(),
+        [this, client] { client->CongestionProcess(Now()); });
+  Every(TimeDelta::ms(5), [this, client] { client->PacerProcess(Now()); });
+  instant_clients_.emplace_back(client);
+  return client;
+}
+
 SimulationNode* Scenario::CreateSimulationNode(
     std::function<void(NetworkNodeConfig*)> config_modifier) {
   NetworkNodeConfig config;
