@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c75a18c_0de36bf6",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-12T14:56:46Z",
+      "side": 1,
+      "message": "No, you\u0027ll have to add and divide, or something. This doesn\u0027t make sense. :)",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 45
+      },
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc672046_db387783",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-12T14:56:46Z",
+      "side": 1,
+      "message": "Why is this changed?",
+      "range": {
+        "startLine": 1082,
+        "startChar": 0,
+        "endLine": 1083,
+        "endChar": 46
+      },
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e0d8e63_9b8184b5",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-12T14:56:46Z",
+      "side": 1,
+      "message": "Is this TODO still applicable after this change?",
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "091705fc_afd861e3",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-12T14:56:46Z",
+      "side": 1,
+      "message": "nit: what if the channel mask is empty? Then ss is empty and ss.end() - 3 is something very bad.",
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
