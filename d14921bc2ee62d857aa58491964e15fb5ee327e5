@@ -22,6 +22,30 @@
       "revId": "d14921bc2ee62d857aa58491964e15fb5ee327e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b2324bb_7cf66589",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-12T14:48:51Z",
+      "side": 1,
+      "message": "yep, it couldn\u0027t happen before either (DCHECK is for that kind of conditions).\n\nit is mostly a documentation protecting against refactorings that might accidentally change so that it will happen.",
+      "parentUuid": "0d70094d_eccbc84f",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 33
+      },
+      "revId": "d14921bc2ee62d857aa58491964e15fb5ee327e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
