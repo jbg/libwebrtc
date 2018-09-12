@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ddfcfbc_e54c1d67",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-12T16:07:37Z",
+      "side": 1,
+      "message": "They are ordered from \"low\" to \"high\" according to how the particular instance of VideoStreamFactoryInterface used sees them. I don\u0027t think it\u0027s well documented beyond that.",
+      "parentUuid": "297a9bbb_fda78b0f",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4890ee2_e418a7a0",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 3
@@ -95,6 +119,54 @@
     },
     {
       "key": {
+        "uuid": "bb79c1fe_d612ff65",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-12T16:07:37Z",
+      "side": 1,
+      "message": "Yes. If the application has explicitly disabled that one stream, I don\u0027t see why we would want to pad up to it. Ability to disable a stream is a much more recent addition than pad_to_min_bitrate, I think it was just missed.\nI can remove this if you wish.",
+      "parentUuid": "635b3eaa_deaf1d50",
+      "range": {
+        "startLine": 106,
+        "startChar": 13,
+        "endLine": 106,
+        "endChar": 36
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "917cb215_e90a636e",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-12T16:07:37Z",
+      "side": 1,
+      "message": "It seems that pad_to_min_bitrate is directly tied to suspend_below_min_bitrate. That is, with the flag true the encoder will stop if the available bandwidth falls below the min_bitrate. In that case we need to make sure we send padding so that the bwe can ramp up again.\n\nWe probably don\u0027t want to force-enable that behavior for simulcast users.\nThe naming and api here could do with a bit of love. But no love in this cl please!",
+      "parentUuid": "f0a78214_41e6bc24",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 58
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a1289bb_e1ef3b36",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 3
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "99335c79_6e451732",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-12T16:07:37Z",
+      "side": 1,
+      "message": "If we have two VideoSendStreams of which only one uses alr? I guess the one without will request the padding it wants and gets probing as a bonus, and the one alr gets some unexpected padding in addition to the probing. Sounds like that\u0027s a reasonable thing to do?",
+      "parentUuid": "9a1289bb_e1ef3b36",
+      "range": {
+        "startLine": 233,
+        "startChar": 31,
+        "endLine": 233,
+        "endChar": 61
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3c089d5_84158b47",
         "filename": "video/video_send_stream_impl.h",
         "patchSetId": 3
@@ -138,6 +234,30 @@
       "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "750436e7_f16d92df",
+        "filename": "video/video_send_stream_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-12T16:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3c089d5_84158b47",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 0
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
