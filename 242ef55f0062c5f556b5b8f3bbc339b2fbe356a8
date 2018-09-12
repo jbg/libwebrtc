@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c614655c_440b6ac0",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-12T08:10:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a658e62_d21eb018",
+      "range": {
+        "startLine": 46,
+        "startChar": 11,
+        "endLine": 46,
+        "endChar": 20
+      },
+      "revId": "242ef55f0062c5f556b5b8f3bbc339b2fbe356a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d4b5fb91_8e028881",
         "filename": "common_video/include/video_frame.h",
         "patchSetId": 2
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "80d0ee26_20fd6794",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-12T08:10:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a727a20_01d12a8d",
+      "range": {
+        "startLine": 63,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "242ef55f0062c5f556b5b8f3bbc339b2fbe356a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b55124a_7916aa81",
         "filename": "common_video/include/video_frame.h",
         "patchSetId": 2
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "Hmm, I\u0027ll rename to timestamp_rtp_, for consistency with the VideoFrame class. I think of the \"_rtp\" as a unit suffix.",
       "parentUuid": "6b55124a_7916aa81",
+      "range": {
+        "startLine": 95,
+        "startChar": 11,
+        "endLine": 95,
+        "endChar": 25
+      },
+      "revId": "242ef55f0062c5f556b5b8f3bbc339b2fbe356a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06c9015a_4f46b0e3",
+        "filename": "common_video/include/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-12T08:10:06Z",
+      "side": 1,
+      "message": "Do we know what it is a timestamp of? It would be nice if we could name it base on that. (eg. capture_time_rtp_, encode_time_rtp_ or send_time_rtp_)",
+      "parentUuid": "081e07ae_5dc37400",
       "range": {
         "startLine": 95,
         "startChar": 11,
