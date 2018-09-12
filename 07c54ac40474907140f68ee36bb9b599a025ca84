@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "297a9bbb_fda78b0f",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-12T06:43:52Z",
+      "side": 1,
+      "message": "General question: Is the order of the streams documented somewhere? And are they ordered by min_bitrate, target_bitrate, pixels / second, or some more fluffy notion of high/low?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4890ee2_e418a7a0",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 3
@@ -48,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "f0a78214_41e6bc24",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-12T06:43:52Z",
+      "side": 1,
+      "message": "If it should be applied in all cases, code would be clearer with an outer\n\nif (pad_to_min_bitrate) { ... }\n\nor an early\n\nif (!pad_to_min_bitrate) return 0;\n\nAnd if the latter is the intended behavior, it might be even clearer to move that check to the caller and delete the |pad_to_min_bitrate| argument, like\n\n  if (codec_type \u003d\u003d kVideoCodecVP9) {\n    max_padding_bitrate_ \u003d streams[0].target_bitrate_bps;\n  } else if (config_-\u003esuspend_below_min_bitrate) {\n    max_padding_bitrate_ \u003d CalculateMaxPadBitrateBps(\n        streams, min_transmit_bitrate_bps, ... new alr flag...);\n  } else {\n    max_padding_bitrate \u003d 0;\n  }\n\n(and then the connection between suspend_below_min_bitrate and padding isn\u0027t obvious to me; might deserve a comment).",
+      "parentUuid": "c4890ee2_e418a7a0",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 58
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a1289bb_e1ef3b36",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 3
@@ -64,6 +111,29 @@
         "startChar": 31,
         "endLine": 233,
         "endChar": 61
+      },
+      "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3c089d5_84158b47",
+        "filename": "video/video_send_stream_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-12T06:43:52Z",
+      "side": 1,
+      "message": "Minor nit: Move next to |const bool send_side_bwe_with_overhead_;| above, to group config flags together.",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 0
       },
       "revId": "07c54ac40474907140f68ee36bb9b599a025ca84",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
