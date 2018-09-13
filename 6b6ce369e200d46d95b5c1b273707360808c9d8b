@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f2339721_a9081edc",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-09-13T11:31:45Z",
+      "side": 1,
+      "message": "Nice catch. Very silly mistake. Actually works as is but it was pure luck.",
+      "parentUuid": "8c75a18c_0de36bf6",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 45
+      },
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc672046_db387783",
         "filename": "modules/audio_device/audio_device_unittest.cc",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5c68e402_35eeaa3f",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-09-13T11:31:45Z",
+      "side": 1,
+      "message": "Before: all transmitted pulses must be detected to say OK.\nAfter: one or two impulses can be missed and we are still OK.\n\nThis test is often done by placing a mic close to a speaker and some impulses can be spread out (and not detected). Also, note that it is a manual test.",
+      "parentUuid": "dc672046_db387783",
+      "range": {
+        "startLine": 1082,
+        "startChar": 0,
+        "endLine": 1083,
+        "endChar": 46
+      },
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e0d8e63_9b8184b5",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 6
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "6d852349_c2806b7d",
+        "filename": "modules/audio_device/win/core_audio_base_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-09-13T11:31:45Z",
+      "side": 1,
+      "message": "Now removed. Thanks.",
+      "parentUuid": "6e0d8e63_9b8184b5",
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "091705fc_afd861e3",
         "filename": "modules/audio_device/win/core_audio_utility_win.cc",
         "patchSetId": 6
@@ -79,6 +145,24 @@
       "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53b73f94_1fca1765",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2018-09-13T11:31:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "091705fc_afd861e3",
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
