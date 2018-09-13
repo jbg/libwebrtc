@@ -34,6 +34,24 @@
       "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9695bb4f_d50cc050",
+        "filename": "logging/rtc_event_log/delta_encoding_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-13T19:29:24Z",
+      "side": 1,
+      "message": "\u003e Oh, stupid me... It doesn\u0027t accept uint64_t, it accepts uint32_t. It\u0027s annoying that the compiler did not complain...\n\nYes, this is annoying. I cannot give you an exact date but we are trying to enable -Wconversion (bugs.webrtc.org/9451), in this case -Wshorten-64-to-32 would have probably been enough.",
+      "parentUuid": "f3ee71c2_940bb0cf",
+      "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
