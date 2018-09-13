@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fe41aeb_30156fa4",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Nice!",
+      "range": {
+        "startLine": 263,
+        "startChar": 27,
+        "endLine": 263,
+        "endChar": 52
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51e7c65e_05dd4f25",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Importing classes or functions like this is actually prohibited by the style guide, but you don\u0027t need to fix that now :)",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb5bc722_310d53e1",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Nit: punctuation\n\nI think this should be split into several tests. In general, a test should only verify one thing at a time (search moma for unit test best practices). So: make one test that verifies the command line (self.fake.AddExpectation above) and perhaps three more tests that verify add, remove, and change respectively. You can make a helper function that reads up the two files and returns webrtc_deps, new_cr_deps. Don\u0027t worry about the few lines of duplication: simplicity is more important than avoiding duplication in tests.\n\nFor the UpdateDepsFile call, you can create a helper that sets a default value for ChromiumRevisionUpdate and calls UpdateDepsFile. It\u0027s not important for this test so it shouldn\u0027t be in the test.",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 30
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bf0c76a_42f8e6c9",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Nit: indent",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 78
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9b58da7_aa3693fb",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Nit: indent",
+      "range": {
+        "startLine": 210,
+        "startChar": 13,
+        "endLine": 210,
+        "endChar": 78
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45a8faf2_579aae55",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "This is good: tests should be on the form arrange-act-assert. You are asserting many things here but they are related so it\u0027s fine.",
+      "range": {
+        "startLine": 203,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 71
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35502ff3_38199d54",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Nit: You have to move added_android_paths down a line. I wonder if we can just run pyformat on these files?",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 219,
+        "endChar": 6
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1885123_a934206c",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Nyeh, not necessary.",
+      "range": {
+        "startLine": 236,
+        "startChar": 69,
+        "endLine": 238,
+        "endChar": 77
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dacc4bb_efa07208",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "I think this is a real email address so use something else.",
+      "range": {
+        "startLine": 260,
+        "startChar": 40,
+        "endLine": 260,
+        "endChar": 57
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37d2fe53_b4b13006",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T11:47:11Z",
+      "side": 1,
+      "message": "Split these too",
+      "range": {
+        "startLine": 270,
+        "startChar": 3,
+        "endLine": 289,
+        "endChar": 62
+      },
+      "revId": "09f5de6c19a1cef3a2f9c26040f6a0e0bf0568ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
