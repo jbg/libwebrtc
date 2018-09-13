@@ -15,6 +15,8 @@
 #include "common_video/h264/h264_common.h"
 #include "media/base/mediaconstants.h"
 #include "modules/pacing/packet_router.h"
+#include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h"
+#include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor_extension.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/utility/include/process_thread.h"
 #include "modules/video_coding/frame_object.h"
@@ -23,6 +25,7 @@
 #include "modules/video_coding/rtp_frame_reference_finder.h"
 #include "rtc_base/bytebuffer.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/sequence_number_util.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial_default.h"
 #include "test/field_trial.h"
@@ -496,6 +499,59 @@ TEST_F(RtpVideoStreamReceiverTest,
 
   // Test tear-down.
   rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink);
+}
+
+TEST_F(RtpVideoStreamReceiverTest, ParseGenericDescriptor) {
+  const std::vector<uint8_t> data({0, 1, 2, 3, 4});
+  const int kPayloadType = 123;
+
+  VideoCodec codec;
+  codec.plType = kPayloadType;
+  rtp_video_stream_receiver_->AddReceiveCodec(codec, {});
+  rtp_video_stream_receiver_->StartReceive();
+
+  auto rtp_packet = CreateRtpPacketReceived();
+
+  RtpHeaderExtensionMap extension_map;
+  extension_map.Register<RtpGenericFrameDescriptorExtension>(5);
+  rtp_packet->IdentifyExtensions(extension_map);
+
+  RtpGenericFrameDescriptor generic_descriptor;
+  generic_descriptor.SetFirstPacketInSubFrame(true);
+  generic_descriptor.SetLastPacketInSubFrame(true);
+  generic_descriptor.SetFirstSubFrameInFrame(true);
+  generic_descriptor.SetLastSubFrameInFrame(true);
+  generic_descriptor.SetFrameId(100);
+  generic_descriptor.SetTemporalLayer(1);
+  generic_descriptor.SetSpatialLayersBitmask(2);
+  generic_descriptor.AddFrameDependencyDiff(90);
+  generic_descriptor.AddFrameDependencyDiff(80);
+  EXPECT_TRUE(rtp_packet->SetExtension<RtpGenericFrameDescriptorExtension>(
+      generic_descriptor));
+
+  uint8_t* payload = rtp_packet->SetPayloadSize(data.size());
+  memcpy(payload, data.data(), data.size());
+  // The first byte is the header, so we ignore the first byte of |data|.
+  mock_on_complete_frame_callback_.AppendExpectedBitstream(data.data() + 1,
+                                                           data.size() - 1);
+
+  rtp_packet->SetMarker(true);
+  rtp_packet->SetPayloadType(kPayloadType);
+
+  using ::testing::Invoke;
+
+  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame(_))
+      .WillOnce(Invoke([](video_coding::EncodedFrame* frame) {
+        // The RtpFrameReferenceFinder use a SeqNumUnwrapper to unwrap picture
+        // ids, so we have to offset the references with its start value;
+        const uint64_t offset = 1000000000000000000UL;
+        EXPECT_EQ(frame->num_references, 2U);
+        EXPECT_EQ(frame->references[0], static_cast<int64_t>(offset - 90));
+        EXPECT_EQ(frame->references[1], static_cast<int64_t>(offset - 80));
+        EXPECT_EQ(frame->id.spatial_layer, 1);
+      }));
+
+  rtp_video_stream_receiver_->OnRtpPacket(*rtp_packet);
 }
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
