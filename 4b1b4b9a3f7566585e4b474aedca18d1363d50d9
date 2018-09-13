@@ -447,6 +447,24 @@
       "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2285e486_e965a527",
+        "filename": "rtc_base/build/rtc_export.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T13:33:49Z",
+      "side": 1,
+      "message": "I\u0027m late to the party and don\u0027t want to bikeshed, just pointing out that PROJECTWHATEVER_EXPORT is quite idiomatic.\nOn chromium:\n% ag -U \"define.*_EXPORT.*dllimport\" --stats    # 239 matches\n% ag -U \"define.*_PUBLIC.*dllimport\" --stats    #  14 matches",
+      "parentUuid": "1db0cade_4cd0cfff",
+      "revId": "4b1b4b9a3f7566585e4b474aedca18d1363d50d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
