@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e872b97_39a33b99",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "may be avoid this copy by beeing a bit more wordy, i.e..\n\nif (video_header \u0026\u0026 video_header-\u003egeneric)\n  return ManageFrameGeneric(frame, *video_header-\u003egeneric);",
+      "range": {
+        "startLine": 88,
+        "startChar": 74,
+        "endLine": 88,
+        "endChar": 76
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8ab34df_f33e761d",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "this check looks unreachable (if generic_descriptor, you already returned)",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 35
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "855e4317_ffeadcf2",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "malformed packet can cause frame to depend on itself (i.e. dependencies[x] \u003d\u003d 0)\nCan reference finder handle that?",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 65
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f514c00_a7724a8b",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "may be be more specific what does it unwraps.\ngeneric_frame_id_unwrapper_ ? (or frame_id_unwrapper_ ?)",
+      "range": {
+        "startLine": 200,
+        "startChar": 28,
+        "endLine": 200,
+        "endChar": 36
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dad955a2_74e01f6c",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "may be \n... data \u003d {0, 1, 2, 3, 4};\nis easier to read (less (brackets))",
+      "range": {
+        "startLine": 504,
+        "startChar": 29,
+        "endLine": 504,
+        "endChar": 51
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce63a6eb_b3350bfc",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "alternatively you may create it without factory:\n\nRtpPacketReceived rtp_packet(\u0026extension_map);  // instead of extra call to IdentifyExtensions\nrtp_packet.SetSsrc(kSsrc); // If you care about ssrc",
+      "range": {
+        "startLine": 512,
+        "startChar": 46,
+        "endLine": 512,
+        "endChar": 0
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a2a5287_cc1c54d2",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "may be write it as \n1 \u003c\u003c 1\n(or even better as 1 \u003c\u003c kSpatialLayer)\nto explain how Bitmask 2 turned into expecting spatial_layer 1",
+      "range": {
+        "startLine": 525,
+        "startChar": 45,
+        "endLine": 525,
+        "endChar": 46
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77dcb2a7_927630cd",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "when all parameters are wildcards (_) - you do not have to write them now, i.e.\nEXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame)\n.WillOnce(...",
+      "range": {
+        "startLine": 542,
+        "startChar": 65,
+        "endLine": 542,
+        "endChar": 68
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ac73a53_160a8496",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "may be int64_t \u003d ... 000LL;\n(then there is no need to static_cast it)",
+      "range": {
+        "startLine": 546,
+        "startChar": 14,
+        "endLine": 546,
+        "endChar": 22
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adbe184d_d78ff533",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T14:56:24Z",
+      "side": 1,
+      "message": "may it would be clearer to expect EQ(frame-\u003ereference[0], frame-\u003epicture_id - 90);\nto avoid dependin on SeqNumUnwrapper internal constant.",
+      "range": {
+        "startLine": 548,
+        "startChar": 76,
+        "endLine": 548,
+        "endChar": 0
+      },
+      "revId": "e7f7714507c41a43ae56c6851bc3444927e32ff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
