@@ -201,6 +201,10 @@ rtc_source_set("rtc_event_log_impl_output") {
 rtc_static_library("rtc_event_log_impl_base") {
   visibility = [ "*" ]
   sources = [
+    # TODO(eladalon): !!! Discuss with reviewers - where would be a good place
+    # to add these file? (To be resolved before landing.)
+    "rtc_event_log/delta_encoding.cc",
+    "rtc_event_log/delta_encoding.h",
     "rtc_event_log/rtc_event_log_factory.cc",
     "rtc_event_log/rtc_event_log_factory.h",
     "rtc_event_log/rtc_event_log_impl.cc",
@@ -295,6 +299,9 @@ if (rtc_enable_protobuf) {
       assert(rtc_enable_protobuf)
       defines = [ "ENABLE_RTC_EVENT_LOG" ]
       sources = [
+        # TODO(eladalon): !!! Discuss with reviewers - where would be a good
+        # place to add this file? (To be resolved before landing.)
+        "rtc_event_log/delta_encoding_unittest.cc",
         "rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
         "rtc_event_log/output/rtc_event_log_output_file_unittest.cc",
         "rtc_event_log/rtc_event_log_unittest.cc",
