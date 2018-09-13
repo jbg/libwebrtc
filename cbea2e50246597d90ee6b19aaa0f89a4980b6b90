@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23cc9064_869a6147",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T10:36:20Z",
+      "side": 1,
+      "message": "may be use RTC_DEPRECATED macro (to be sure it is not used in webrtc and warn users outsdie)",
+      "range": {
+        "startLine": 60,
+        "startChar": 33,
+        "endLine": 60,
+        "endChar": 43
+      },
+      "revId": "cbea2e50246597d90ee6b19aaa0f89a4980b6b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ee12e87_2627fc51",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T10:36:20Z",
+      "side": 1,
+      "message": "since csrcs values doesn\u0027t matter, may be do not generate them:\nstd::vector\u003cuint32_t\u003e csrcs(num_csrcs);\npacket.SetCsrcs(csrcs);",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 19
+      },
+      "revId": "cbea2e50246597d90ee6b19aaa0f89a4980b6b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b088b725_b974c0b5",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T10:36:20Z",
+      "side": 1,
+      "message": "SetPayloadSize would look more meaningful (result is the same)",
+      "range": {
+        "startLine": 53,
+        "startChar": 9,
+        "endLine": 53,
+        "endChar": 24
+      },
+      "revId": "cbea2e50246597d90ee6b19aaa0f89a4980b6b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5e5628e_045a9656",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-13T10:36:20Z",
+      "side": 1,
+      "message": "may be SetPayloadSize",
+      "range": {
+        "startLine": 101,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 26
+      },
+      "revId": "cbea2e50246597d90ee6b19aaa0f89a4980b6b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
