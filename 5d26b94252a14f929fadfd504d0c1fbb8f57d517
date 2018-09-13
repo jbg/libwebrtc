@@ -140,6 +140,29 @@
     },
     {
       "key": {
+        "uuid": "6455262b_75b63af1",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-09-13T09:08:25Z",
+      "side": 1,
+      "message": "Also please describe parameters and what they are and same for doc strings below",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 5
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e2d3869_d14be601",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
