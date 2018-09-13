@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89862134_e09ad114",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "Nit: punctuation",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 77
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e22f8123_ba815d67",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "_FindNewDeps? _FindAddedDeps? That it\u0027s generating rather than returning, say, a list isn\u0027t interesting to put in the function name.",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 259,
+        "endChar": 26
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2f2ed99_71dbf027",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "It\u0027s fine to have one-line docstrings for internal functions. I\u0027d do that here. Otherwise you should make a proper full docstring with Args: as well.",
+      "range": {
+        "startLine": 260,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 5
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00a1232c_4003f462",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "Style guide says: don\u0027t use \\, instead do\n\nif (path not in ... and\n    path not in ...)",
+      "range": {
+        "startLine": 268,
+        "startChar": 7,
+        "endLine": 269,
+        "endChar": 30
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53cb442f_3cc3d3d6",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "A somewhat more pythonic implementation would be\n\nnew_entries \u003d set(new).difference(old)\nreturn [path for path in new_entries if path not in DONT_AUTOROLL_THESE]",
+      "range": {
+        "startLine": 265,
+        "startChar": 2,
+        "endLine": 269,
+        "endChar": 31
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43012de2_72228026",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "FindNewGeneratedAndroidDeps? Like I write below, we need to make clear that we\u0027re only actually looking at auto-generated Android deps here.",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 21
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e2d3869_d14be601",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "This function is a bit awkward because it does two things: find generated android deps and verify we\u0027re not missing deps. I can see a couple ways we can make that better.\n\n1) When this function is called, do\n\nremoved_generated_android_deps, other_deps \u003d FindRemovedDeps(webrtc_deps, new_cr_deps)\nif other_deps:\n  raise RollError(\u0027These WebRTC DEPS entries are missing from chromium: %s. \u0027\n                  \u0027Remove them or add to DONT_AUTOROLL_THESE\u0027 % other_deps)\n\nIt also has the upside it reports ALL missing deps rather than the first one it finds, like today.\n\nThe implementation will be simple:\nall_added_deps \u003d _FindNewDeps(...)\ngenerated_android_deps \u003d [path for path in all_added_deps \n                          if path.startswith(ANDROID_DEPS_PATH)]\nother_deps \u003d [path for path in all_added_deps if path not in generated_android_deps]\nreturn generated_android_deps, other_deps\n\nIn that case you can name the add function FindAddedDeps and also make it separate generated deps and other deps (it\u0027s nice to be symmetrical). In that case, the caller just ignores other_deps:\n\nnew_generated_android_deps, _ \u003d FindAddedDeps(...)",
+      "range": {
+        "startLine": 293,
+        "startChar": 4,
+        "endLine": 293,
+        "endChar": 23
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa6cafe7_cec1f049",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "I think the key thing here is that we can\u0027t find a change in the dep because it was removed in Chromium. I think you\u0027re doing the right thing here, but the comment could be clearer. What about\n\n# The dependency has been removed from chromium. This is handled later by FindRemovedDeps.",
+      "range": {
+        "startLine": 363,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 40
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b95e4e51_239e9c9f",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "Ok, I think you\u0027ve written the functions GenerateAddedDeps so they sound general, but they\u0027re actually only looking at a narrow subset of all dependencies. We need to make it clearer in the code that we\u0027re only looking at auto-generated android deps.\n\nOne step is added_path -\u003e added_autogenerated_android_paths and similar for removed_paths. See comments above about clarifying the functions.",
+      "range": {
+        "startLine": 470,
+        "startChar": 4,
+        "endLine": 471,
+        "endChar": 70
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8075ff65_3d34b7cd",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-13T07:47:44Z",
+      "side": 1,
+      "message": "Oh, so here you end up doing a basic text replace of the generated Android section. Is added_paths and removed_paths only used to generate the commit message then?\n\nI\u0027m uneasy with taking all this time to build a detailed model of what we\u0027re adding and removing and not using for anything else than generating the commit message. How would it look like if you used the information in added_paths and removed_paths to copy over the new deps?",
+      "range": {
+        "startLine": 474,
+        "startChar": 4,
+        "endLine": 484,
+        "endChar": 63
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
