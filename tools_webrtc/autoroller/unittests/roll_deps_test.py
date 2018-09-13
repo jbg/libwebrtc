@@ -19,7 +19,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.join(SCRIPT_DIR, os.pardir)
 sys.path.append(PARENT_DIR)
 import roll_deps
-from roll_deps import CalculateChangedDeps, ChooseCQMode, \
+from roll_deps import CalculateChangedDeps, FindAddedDeps, \
+  FindRemovedDeps, ChooseCQMode, GenerateCommitMessage, \
   GetMatchingDepsEntries, ParseDepsDict, ParseLocalDepsFile, UpdateDepsFile, \
   ChromiumRevisionUpdate
 
@@ -52,12 +53,15 @@ class FakeCmd(object):
 
   def AddExpectation(self, *args, **kwargs):
     returns = kwargs.pop('_returns', None)
-    self.expectations.append((args, kwargs, returns))
+    ignores = kwargs.pop('_ignores', [])
+    self.expectations.append((args, kwargs, returns, ignores))
 
   def __call__(self, *args, **kwargs):
     if not self.expectations:
       raise TestError('Got unexpected\n%s\n%s' % (args, kwargs))
-    exp_args, exp_kwargs, exp_returns = self.expectations.pop(0)
+    exp_args, exp_kwargs, exp_returns, ignores = self.expectations.pop(0)
+    for item in ignores:
+      kwargs.pop(item, None)
     if args != exp_args or kwargs != exp_kwargs:
       message = 'Expected:\n  args: %s\n  kwargs: %s\n' % (exp_args, exp_kwargs)
       message += 'Got:\n  args: %s\n  kwargs: %s\n' % (args, kwargs)
@@ -71,8 +75,11 @@ class TestRollChromiumRevision(unittest.TestCase):
     test_data_dir = os.path.join(SCRIPT_DIR, 'testdata', 'roll_deps')
     for test_file in glob.glob(os.path.join(test_data_dir, '*')):
       shutil.copy(test_file, self._output_dir)
-    self._webrtc_depsfile = os.path.join(self._output_dir, 'DEPS')
-    self._new_cr_depsfile = os.path.join(self._output_dir, 'DEPS.chromium.new')
+    join = lambda f: os.path.join(self._output_dir, f)
+    self._webrtc_depsfile = join('DEPS')
+    self._new_cr_depsfile = join('DEPS.chromium.new')
+    self._webrtc_depsfile_android = join('DEPS.with_android_deps')
+    self._new_cr_depsfile_android = join('DEPS.chromium.with_android_deps')
 
     self.fake = FakeCmd()
     self.old_run_command = getattr(roll_deps, '_RunCommand')
@@ -90,15 +97,59 @@ class TestRollChromiumRevision(unittest.TestCase):
 
   def testUpdateDepsFile(self):
     new_rev = 'aaaaabbbbbcccccdddddeeeeefffff0000011111'
-
     current_rev = TEST_DATA_VARS['chromium_revision']
+
+    with open(self._new_cr_depsfile_android) as deps_file:
+      new_cr_contents = deps_file.read()
+
     UpdateDepsFile(self._webrtc_depsfile,
                    ChromiumRevisionUpdate(current_rev, new_rev),
-                   [])
+                   [],
+                   new_cr_contents)
     with open(self._webrtc_depsfile) as deps_file:
       deps_contents = deps_file.read()
       self.assertTrue(new_rev in deps_contents,
                       'Failed to find %s in\n%s' % (new_rev, deps_contents))
+
+  def testUpdateDepsFileWithAdditionAndRemoval(self):
+    changed = 'third_party/android_deps/libs/android_arch_core_common'
+    changed_version = '1.0.0-cr0'
+    added = 'third_party/android_deps/libs/android_arch_lifecycle_common'
+    removed = 'third_party/android_deps/libs/android_arch_lifecycle_runtime'
+
+    with open(self._webrtc_depsfile_android) as deps_file:
+      webrtc_contents = deps_file.read()
+    with open(self._new_cr_depsfile_android) as deps_file:
+      new_cr_contents = deps_file.read()
+    webrtc_deps = ParseDepsDict(webrtc_contents)
+    new_cr_deps = ParseDepsDict(new_cr_contents)
+
+    changed_deps = CalculateChangedDeps(webrtc_deps, new_cr_deps)
+
+    self.fake.AddExpectation(['gclient', 'setdep', '--revision',
+                              'src/%s:chromium/%s@version:%s' %
+                              (changed, changed, changed_version)],
+                             _ignores=['working_dir'])
+
+    UpdateDepsFile(self._webrtc_depsfile_android,
+                   ChromiumRevisionUpdate('cafe', 'cafe'),
+                   changed_deps,
+                   new_cr_contents)
+
+    with open(self._webrtc_depsfile_android) as deps_file:
+      updated_contents = deps_file.read()
+
+    # Check changed dependency
+    self.assertTrue(changed in updated_contents)
+    self.assertTrue(changed_version in updated_contents)
+
+    # Check added dependency
+    self.assertFalse(added in webrtc_contents)
+    self.assertTrue(added in updated_contents)
+
+    # Check removed dependency
+    self.assertTrue(removed in webrtc_contents)
+    self.assertFalse(removed in updated_contents)
 
   def testParseDepsDict(self):
     with open(self._webrtc_depsfile) as deps_file:
@@ -125,7 +176,7 @@ class TestRollChromiumRevision(unittest.TestCase):
   def testGetMatchingDepsEntriesHandlesTwoPathsWithIdenticalFirstParts(self):
     entries = GetMatchingDepsEntries(DEPS_ENTRIES, 'src/build')
     self.assertEquals(len(entries), 1)
-    self.assertEquals(entries[0], DEPS_ENTRIES['src/build'])
+
 
   def testCalculateChangedDeps(self):
     _SetupGitLsRemoteCall(self.fake,
@@ -146,6 +197,96 @@ class TestRollChromiumRevision(unittest.TestCase):
     self.assertEquals(changed_deps[2].package, 'chromium/third_party/xstream')
     self.assertEquals(changed_deps[2].current_version, 'version:1.4.8-cr0')
     self.assertEquals(changed_deps[2].new_version, 'version:1.10.0-cr0')
+
+  def testWithDistinctDeps(self):
+    """ Check CalculateChangedDeps still works when deps are added/removed. """
+    webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile_android)
+    new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
+    changed_deps = CalculateChangedDeps(webrtc_deps, new_cr_deps)
+    self.assertEquals(len(changed_deps), 1)
+    self.assertEquals(changed_deps[0].path,
+                  'src/third_party/android_deps/libs/android_arch_core_common')
+    self.assertEquals(changed_deps[0].package,
+             'chromium/third_party/android_deps/libs/android_arch_core_common')
+    self.assertEquals(changed_deps[0].current_version, 'version:0.9.0')
+    self.assertEquals(changed_deps[0].new_version, 'version:1.0.0-cr0')
+
+  def testFindAddedDeps(self):
+    webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile_android)
+    new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
+    added_android_paths, other_paths = FindAddedDeps(webrtc_deps, new_cr_deps)
+    self.assertEquals(added_android_paths,
+      ['src/third_party/android_deps/libs/android_arch_lifecycle_common'])
+    self.assertEquals(other_paths, [])
+
+  def testFindRemovedDeps(self):
+    webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile_android)
+    new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
+    removed_android_paths, other_paths = FindRemovedDeps(webrtc_deps,
+                                                         new_cr_deps)
+    self.assertEquals(removed_android_paths,
+      ['src/third_party/android_deps/libs/android_arch_lifecycle_runtime'])
+    self.assertEquals(other_paths, [])
+
+  def testMissingDepsIsDetected(self):
+    """ Check an error is reported when deps cannot be automatically removed."""
+
+    # The situation at test is the following:
+    #   * A WebRTC DEPS entry is missing from Chromium.
+    #   * The dependency isn't an android_deps (those are supported).
+    #
+    # TODO(yves) [Integration test] Check that main() is reporting the error.
+    webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile)
+    new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
+    _, other_paths = FindRemovedDeps(webrtc_deps, new_cr_deps)
+    self.assertEquals(other_paths, ['src/build',
+                                    'src/third_party/xstream',
+                                    'src/buildtools'])
+
+  def testCommitMessage(self):
+    rev = 'aaaa'
+    rev_update = ChromiumRevisionUpdate(rev, rev) # No update
+    current_commit_pos = 'cafe'
+    new_commit_pos = 'f00d'
+
+    new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
+    webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile_android)
+
+    changed_deps = CalculateChangedDeps(webrtc_deps, new_cr_deps)
+    added_paths, _ = FindAddedDeps(webrtc_deps, new_cr_deps)
+    removed_paths, _ = FindRemovedDeps(webrtc_deps, new_cr_deps)
+
+    self.fake.AddExpectation(['git', 'config', 'user.email'],
+                             _returns=('sergey@google.com', None),
+                             _ignores=['working_dir'])
+
+    commit_msg = GenerateCommitMessage(rev_update,
+                                       current_commit_pos, new_commit_pos,
+                                       changed_deps, None,
+                                       added_paths, removed_paths)
+
+    commit_lines = [l.strip() for l in commit_msg.split('\n')]
+
+    # Check changed dependency in adequate section
+    changed = '* src/third_party/android_deps/libs/' \
+              'android_arch_core_common: version:0.9.0..version:1.0.0-cr0'
+    self.assertTrue(changed in commit_lines)
+    changed_line = commit_lines.index(changed)
+    self.assertTrue('Changed' in commit_lines[changed_line-1])
+
+    # Check added dependency in adequate section
+    added = '* src/third_party/android_deps/libs/' \
+            'android_arch_lifecycle_common'
+    self.assertTrue(added in commit_lines)
+    added_line = commit_lines.index(added)
+    self.assertTrue('Added' in commit_lines[added_line-1])
+
+    # Check removed dependency in adequate section
+    removed = '* src/third_party/android_deps/libs/' \
+              'android_arch_lifecycle_runtime'
+    self.assertTrue(removed in commit_lines)
+    removed_line = commit_lines.index(removed)
+    self.assertTrue('Removed' in commit_lines[removed_line-1])
 
 
 class TestChooseCQMode(unittest.TestCase):
