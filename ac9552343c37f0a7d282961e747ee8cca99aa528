@@ -231,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "4a13a62c_eea49874",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-09-13T01:19:46Z",
+      "side": 1,
+      "message": "Did you upload changes? State sink and SetStateSink are still here.",
+      "parentUuid": "24357577_9ed2c606",
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32462913_e4f81c78",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -266,6 +284,30 @@
       "side": 1,
       "message": "Yes -- you may want to do packetization in a synchronous manner (or serialization and packetization), but put it on the wire asynchronously. In such case we can report serialization issues right away.\n\nModified comment.",
       "parentUuid": "32462913_e4f81c78",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 18
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0b99004_4d14cb4f",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-09-13T01:19:46Z",
+      "side": 1,
+      "message": "Yep at least basic error checking will be done synchronously. \n\nWe also consider doing serialization on the caller thread, because it\u0027s cheap.\n\nIf we need status from network / packetization stack we can add status callback, but I do not think it\u0027s necessary at this point.",
+      "parentUuid": "b3117ca3_00f61edc",
       "range": {
         "startLine": 198,
         "startChar": 10,
