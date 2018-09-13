@@ -16,6 +16,24 @@
       "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ee71c2_940bb0cf",
+        "filename": "logging/rtc_event_log/delta_encoding_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-13T18:42:53Z",
+      "side": 1,
+      "message": "Oh, stupid me... It doesn\u0027t accept uint64_t, it accepts uint32_t. It\u0027s annoying that the compiler did not complain...",
+      "parentUuid": "e1661531_ed7494c8",
+      "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
