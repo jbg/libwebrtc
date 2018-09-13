@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "494dcd4c_365959f3",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89862134_e09ad114",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 77
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e22f8123_ba815d67",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "71866ece_124823e7",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done\nI thought it was mandated by coding style, but I\u0027m glad it isn\u0027t!",
+      "parentUuid": "e22f8123_ba815d67",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 259,
+        "endChar": 26
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2f2ed99_71dbf027",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3236f2c6_acb0b4e3",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2f2ed99_71dbf027",
+      "range": {
+        "startLine": 260,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 5
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,54 @@
     },
     {
       "key": {
+        "uuid": "b8f7ecd7_eb6b5260",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "53cb442f_3cc3d3d6",
+      "range": {
+        "startLine": 265,
+        "startChar": 2,
+        "endLine": 269,
+        "endChar": 31
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61cca405_a90751c6",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done\nThat\u0027s something we just add in the linter!",
+      "parentUuid": "00a1232c_4003f462",
+      "range": {
+        "startLine": 268,
+        "startChar": 7,
+        "endLine": 269,
+        "endChar": 30
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43012de2_72228026",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd99ab02_80b4930c",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43012de2_72228026",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 21
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "4e7f76b6_f757935e",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6455262b_75b63af1",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 5
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e2d3869_d14be601",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "c3fd30a3_fd32b788",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done\nI like that!",
+      "parentUuid": "5e2d3869_d14be601",
+      "range": {
+        "startLine": 293,
+        "startChar": 4,
+        "endLine": 293,
+        "endChar": 23
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa6cafe7_cec1f049",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -206,6 +398,30 @@
       "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "236ea477_7ca66484",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa6cafe7_cec1f049",
+      "range": {
+        "startLine": 363,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 40
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -252,6 +468,30 @@
       "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c835bb21_8664cac4",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-13T09:49:11Z",
+      "side": 1,
+      "message": "\u003e For anything else than generating the commit message\nIt think the message itself is worth the effort. Detailed and consistent reports really add value for the users.\n\nThat being said, I\u0027ve simplified this part by systematically copying, as discussed.",
+      "parentUuid": "8075ff65_3d34b7cd",
+      "range": {
+        "startLine": 474,
+        "startChar": 4,
+        "endLine": 484,
+        "endChar": 63
+      },
+      "revId": "5d26b94252a14f929fadfd504d0c1fbb8f57d517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
