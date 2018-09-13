@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1661531_ed7494c8",
+        "filename": "logging/rtc_event_log/delta_encoding_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-13T18:37:38Z",
+      "side": 1,
+      "message": "Guess what? I seem to have managed to smoke out a bug in Random. If you comment out anything related to the delta compression, and just run this test and let it produce random numbers, it will eventually crash (on parameterization #14) with the following error:\n\n[ RUN      ] DeltaMaxBitWidthAndNumberOfValuesInSequence/DeltaEncodingFuzzerLikeTest.Test/14\n#\n# Fatal error in: ../../rtc_base/random.cc, line 43\n# last system error: 0\n# Check failed: low \u003c\u003d high\n# Aborted",
+      "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
