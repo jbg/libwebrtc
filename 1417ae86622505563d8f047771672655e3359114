@@ -22,6 +22,30 @@
       "revId": "1417ae86622505563d8f047771672655e3359114",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3e4270_d7057384",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-14T15:58:27Z",
+      "side": 0,
+      "message": "Right? I don\u0027t know what we really tested before. I fixed one test case where actually enabling simulcast caused it to fail because it assumed one simulcast stream even though it set |use_simulcast| to true....",
+      "parentUuid": "abeb5dca_804bb5da",
+      "range": {
+        "startLine": 475,
+        "startChar": 4,
+        "endLine": 476,
+        "endChar": 42
+      },
+      "revId": "1417ae86622505563d8f047771672655e3359114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
