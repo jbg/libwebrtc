@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87bfd002_3858eac5",
+        "filename": "modules/audio_device/linux/audio_device_pulse_linux.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-14T08:05:31Z",
+      "side": 1,
+      "message": "Also interesting to double check for both alsa and pulse. Should we move these functions into the webrtc namespace?",
+      "range": {
+        "startLine": 96,
+        "startChar": 24,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "5fff8a5480307e01067920803bba873b52d3c898",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

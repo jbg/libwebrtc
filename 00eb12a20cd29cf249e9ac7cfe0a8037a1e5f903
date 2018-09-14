@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88d0828d_d62634a4",
+        "filename": "modules/audio_device/linux/audio_device_alsa_linux.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-14T08:05:31Z",
+      "side": 0,
+      "message": "henrika@: I had to move LATE back to .cc files to avoid a clash between the alsa and pulse version.\n\nIt was already duplicated so I assume this is not a problem.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 18
+      },
+      "revId": "00eb12a20cd29cf249e9ac7cfe0a8037a1e5f903",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
