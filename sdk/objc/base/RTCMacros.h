@@ -11,12 +11,13 @@
 #ifndef SDK_OBJC_BASE_RTCMACROS_H_
 #define SDK_OBJC_BASE_RTCMACROS_H_
 
-#define RTC_EXPORT __attribute__((visibility("default")))
+#define RTC_OBJC_EXPORT __attribute__((visibility("default")))
+#define RTC_EXPORT RTC_OBJC_EXPORT
 
 #if defined(__cplusplus)
-#define RTC_EXTERN extern "C" RTC_EXPORT
+#define RTC_EXTERN extern "C" RTC_OBJC_EXPORT
 #else
-#define RTC_EXTERN extern RTC_EXPORT
+#define RTC_EXTERN extern RTC_OBJC_EXPORT
 #endif
 
 #ifdef __OBJC__
