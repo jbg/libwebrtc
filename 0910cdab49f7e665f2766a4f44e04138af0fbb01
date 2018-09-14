@@ -52,6 +52,24 @@
       "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96006cd0_73d4c894",
+        "filename": "logging/rtc_event_log/delta_encoding_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T09:41:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9695bb4f_d50cc050",
+      "revId": "0910cdab49f7e665f2766a4f44e04138af0fbb01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
