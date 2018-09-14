@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "7fcf3e00_1aacb3c6",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-14T13:31:23Z",
+      "side": 1,
+      "message": "Oh, right, it\u0027s a manual test. Well, makes sense, I guess.",
+      "parentUuid": "5c68e402_35eeaa3f",
+      "range": {
+        "startLine": 1082,
+        "startChar": 0,
+        "endLine": 1083,
+        "endChar": 46
+      },
+      "revId": "6b6ce369e200d46d95b5c1b273707360808c9d8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e0d8e63_9b8184b5",
         "filename": "modules/audio_device/win/core_audio_base_win.cc",
         "patchSetId": 6

@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ee6adca_6a091f2a",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-14T13:31:23Z",
+      "side": 1,
+      "message": "If I remember (and am reading stackoverflow) correctly, then shifting a signed value to the right is implementation-defined, so I\u0027d keep this as a division by two and let the compiler sort out implementing it efficiently.",
+      "range": {
+        "startLine": 171,
+        "startChar": 72,
+        "endLine": 171,
+        "endChar": 76
+      },
+      "revId": "f5861e95013c44b0a3f776c6d1afcbaa1387da1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b76474f_680ad8de",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-09-14T13:31:23Z",
+      "side": 1,
+      "message": "super-nit (since it shouldn\u0027t happen): only put the erase() call within the if-statement, so we\u0027ll log (0) if called with an empty channel mask.",
+      "revId": "f5861e95013c44b0a3f776c6d1afcbaa1387da1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
