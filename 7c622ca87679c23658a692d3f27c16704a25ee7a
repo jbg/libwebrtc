@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55a4a812_e57063b0",
+        "filename": "rtc_tools/frame_analyzer/video_temporal_aligner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-14T08:50:26Z",
+      "side": 1,
+      "message": "nit: indices",
+      "range": {
+        "startLine": 53,
+        "startChar": 31,
+        "endLine": 53,
+        "endChar": 39
+      },
+      "revId": "7c622ca87679c23658a692d3f27c16704a25ee7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b799a9b3_89cb1fb2",
+        "filename": "rtc_tools/video_file_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-14T08:50:26Z",
+      "side": 1,
+      "message": "nit: I would prefer to just limit to integer framerates or simply pass the nominator and denominator in separate arguments.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 5
+      },
+      "revId": "7c622ca87679c23658a692d3f27c16704a25ee7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "866a071e_b6cf826c",
+        "filename": "rtc_tools/video_file_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-09-14T08:50:26Z",
+      "side": 1,
+      "message": "nit: unused",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 32
+      },
+      "revId": "7c622ca87679c23658a692d3f27c16704a25ee7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
