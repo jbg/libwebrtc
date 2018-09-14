@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d6cee112_31477073",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-09-14T16:09:02Z",
+      "side": 1,
+      "message": "Yes, no point blocking this for such a thing.",
+      "parentUuid": "87d2f4e6_b925f14f",
+      "range": {
+        "startLine": 61,
+        "startChar": 29,
+        "endLine": 61,
+        "endChar": 76
+      },
+      "revId": "bf3ef658c3c66eec322e1c2b78ebb541d74aae08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78c906ac_5a3ace95",
         "filename": "modules/video_coding/utility/simulcast_rate_allocator_unittest.cc",
         "patchSetId": 1
