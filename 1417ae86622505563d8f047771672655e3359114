@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abeb5dca_804bb5da",
+        "filename": "modules/video_coding/utility/simulcast_rate_allocator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-09-14T14:54:51Z",
+      "side": 0,
+      "message": "Huh, this looks weird?",
+      "range": {
+        "startLine": 475,
+        "startChar": 4,
+        "endLine": 476,
+        "endChar": 42
+      },
+      "revId": "1417ae86622505563d8f047771672655e3359114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
