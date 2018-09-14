@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2c331bc4_f2c59dbd",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done. The main function is now ~25% shorter than what was previously checked in.",
+      "parentUuid": "623bfb8f_0bd36961",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b11444a_0f63c1c1",
         "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f32ec61_0943d39b",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "No base::OnceCallback in WebRTC repo. (The lambda is also called repeatedly, so OnceCallback would not be appropriate.)\n\nBroke out most of the logic into a helper function.",
+      "parentUuid": "4b11444a_0f63c1c1",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d3b7708c_d547e456",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done. I actually meant to rename \"intermediary\" to reconstructed_packet, but I forgot.",
+      "parentUuid": "bdfeddea_b4d89d06",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a16be4b7_4adafa72",
         "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed098787_104c1c98",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "I think this qualifies as test (i.e. non-production) code. See also testonly\u003dtrue in build file.\n\nBesides, RtpWriter expects a packet of type webrtc::test::RtpPacket. I don\u0027t want to try to change this.",
+      "parentUuid": "a16be4b7_4adafa72",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "a7904c3b_ed24448d",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Sets the padding bit.",
+      "parentUuid": "c8e9e4e6_06c7d752",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "259fb129_32970270",
         "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "502909f0_40422a55",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Same response.",
+      "parentUuid": "259fb129_32970270",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81dfab43_eab104a5",
         "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
         "patchSetId": 2
@@ -118,6 +226,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9da2fa2_987d5a80",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Same response.",
+      "parentUuid": "81dfab43_eab104a5",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +267,30 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcf44c06_2e7586ce",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bad1f97_9a23b60f",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 15
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -184,6 +334,48 @@
     },
     {
       "key": {
+        "uuid": "bbf05983_e0b2e119",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "I think \"_view\" is appropriate to draw attention to the fact that this variable doesn\u0027t own the resources.",
+      "parentUuid": "1b1def84_e59c5cf9",
+      "range": {
+        "startLine": 216,
+        "startChar": 9,
+        "endLine": 216,
+        "endChar": 17
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9104d8f1_5b3fa3c4",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25de9157_6bb8b000",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ad6ba1f_90d58474",
         "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
         "patchSetId": 2
@@ -195,6 +387,24 @@
       "writtenOn": "2018-09-10T18:36:45Z",
       "side": 1,
       "message": "A kind soul might in the future introduce inheritance to get rid of the code duplication around log_time_us() and log_time_ms(). You could prevent that by adding a static_assert that this is POD, with the error perhaps elaborating why we wish to avoid it having a vptr.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66821c40_e82f6d59",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "We have those static asserts in the PacketView already. Added a comment.",
+      "parentUuid": "1ad6ba1f_90d58474",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -218,6 +428,24 @@
     },
     {
       "key": {
+        "uuid": "f75e2b71_f21578cc",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46792348_fb36275b",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38f2420c_b8bf07fe",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -232,6 +460,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3ba3a0f_64086aa7",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38f2420c_b8bf07fe",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -252,6 +498,24 @@
     },
     {
       "key": {
+        "uuid": "4e96e83a_745e8f40",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "1. Done\n2. That\u0027s a massive change. Long term, we should try to use the Timestamp class for all times in WebRTC.",
+      "parentUuid": "06fe05ec_42d78df3",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a0d6845_f53b25cd",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -266,6 +530,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f72560b2_59c01d52",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a0d6845_f53b25cd",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -286,6 +568,24 @@
     },
     {
       "key": {
+        "uuid": "c999fe35_a30ea9a0",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a945257_7c36126b",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2761f7a1_b07bf88e",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -300,6 +600,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfb294ed_9248a1d5",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2761f7a1_b07bf88e",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -320,6 +638,24 @@
     },
     {
       "key": {
+        "uuid": "dd559a82_1c9bd5b0",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "1. Done\n2. Done\n3. No, I think \u003e is more appropriate.",
+      "parentUuid": "75d43034_19ef64ea",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e696f00_542e7b7c",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -334,6 +670,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abe4c648_83fd077c",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e696f00_542e7b7c",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -354,6 +708,24 @@
     },
     {
       "key": {
+        "uuid": "315b0e26_f23b5ed0",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "I don\u0027t think that would help. There is only a single function, entire class is about \"processing\" elements.",
+      "parentUuid": "95ef6c54_c80dbdac",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e34c0ef1_5a954025",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -368,6 +740,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca570cb_d178ccfc",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e34c0ef1_5a954025",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -394,6 +784,30 @@
     },
     {
       "key": {
+        "uuid": "5e669dc6_4ad5569b",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Actually not copy pasted, but the second sentenced should be finished.",
+      "parentUuid": "f34419f6_0eed5023",
+      "range": {
+        "startLine": 59,
+        "startChar": 51,
+        "endLine": 59,
+        "endChar": 62
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab65dfc8_d3fe6963",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -414,6 +828,30 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54f45266_81a51a5b",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab65dfc8_d3fe6963",
+      "range": {
+        "startLine": 60,
+        "startChar": 33,
+        "endLine": 60,
+        "endChar": 34
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -440,6 +878,30 @@
     },
     {
       "key": {
+        "uuid": "e8bf549f_ade458ec",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Don\u0027t know.",
+      "parentUuid": "31709ce6_e9607cac",
+      "range": {
+        "startLine": 66,
+        "startChar": 7,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "790039c2_939a3ad0",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -451,6 +913,30 @@
       "writtenOn": "2018-09-10T18:36:45Z",
       "side": 1,
       "message": "Suggested:\ns/begin/cbegin\ns/end/cend\n(Throughout CL.)",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35946970_c375be1c",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Thought about it, but prefer not to. Nothing would fundamentally break if the processing function modified the elements (and one could imagine applications where that would be useful). In the case of parsed events, the elements are guaranteed to be const by the parser interface so it is still protected against accidental mistakes.",
+      "parentUuid": "790039c2_939a3ad0",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -480,6 +966,24 @@
     },
     {
       "key": {
+        "uuid": "883d0c42_5247debf",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Added comment, no DCHECK.",
+      "parentUuid": "af3c3ef2_556771da",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ba4e383_ce8c2b3b",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -491,6 +995,24 @@
       "writtenOn": "2018-09-10T18:36:45Z",
       "side": 1,
       "message": "1.\nSuggest:\ns/a/lhs\ns/b/rhs\n\n2:\nWdyt about:\nconst decltype(event_lists)::value_type\u0026\nI am not sure if this might be too obfuscated, and/or better than a const-ref-to-unique-ptr, since it is, under the hood, still a const-ref-to-unique-ptr.\nIt is shorter, though. :-)",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8159414e_9f87d2a2",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "1. a,b seems to be a more common naming convention in short functions like these.\n2. Either is fine by me. I added a using declaration to not have to repeat the long type so many times.",
+      "parentUuid": "0ba4e383_ce8c2b3b",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -514,6 +1036,24 @@
     },
     {
       "key": {
+        "uuid": "843b49a1_670873ec",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650cc0ce_6eafab82",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35483314_8aed643a",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -528,6 +1068,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18baa23c_75490bbf",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35483314_8aed643a",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -548,6 +1106,24 @@
     },
     {
       "key": {
+        "uuid": "7804da98_b3b7da64",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "143d5d99_1d86ac17",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40114e3d_fd5fd74f",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -559,6 +1135,24 @@
       "writtenOn": "2018-09-10T18:36:45Z",
       "side": 1,
       "message": "* Shouldn\u0027t it take int64_t?\n* LoggedStartEvent is an arbitrarily chosen event type, hard-coded to be used in all of the tests in this suite. Could you typedef it to Event, LoggedEvent, or something similar, to make it clearer the tests do not single this type of event out for some special reason?\n* It might be nice to have two event types in at least one test.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff40b95e_f5a1633f",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "1. Done\n2. I wanted to run the tests with a primitive type like int. However, the current ProcessableEventList specialization access the timestamp via log_time_us. Using LoggedStartEvent is a hack to avoid having to reimplement the ProcessableEventList. However, I don\u0027t think a typedef indicates that test would work for any other type.\n3. Done, but this doesn\u0027t seem important to me.",
+      "parentUuid": "40114e3d_fd5fd74f",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -582,6 +1176,24 @@
     },
     {
       "key": {
+        "uuid": "b0b4806e_38ba5b0b",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "I don\u0027t think event_list is clearer than v.",
+      "parentUuid": "969ff054_11090e0c",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70c092e5_5ee348ee",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -596,6 +1208,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "804b3a83_e9b92759",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70c092e5_5ee348ee",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -616,6 +1246,24 @@
     },
     {
       "key": {
+        "uuid": "64a2d0c0_ff5e6a51",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "1. Done\n2. This is intentional. We intend to stop supporting sub-millisecond resolution in the log.",
+      "parentUuid": "2c00f360_075547e9",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3b5ec9c_f3d9accc",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -627,6 +1275,24 @@
       "writtenOn": "2018-09-10T18:36:45Z",
       "side": 1,
       "message": "RTC_NOTREACHED() crashes, but it\u0027s probably better to fail the test softly?",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09571e48_edd3143f",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "A soft failure would require some extra code which makes the intention less clear. I don\u0027t see what benefit it would bring.",
+      "parentUuid": "b3b5ec9c_f3d9accc",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -650,6 +1316,24 @@
     },
     {
       "key": {
+        "uuid": "46a274d4_44a9be0d",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Done. However, I think v is an excellent name for a vector containing data which has no particular interpretation. Imo, \"events\" adds nothing except an indication about the element type, which is incidental and less important than the fact that it is a vector.",
+      "parentUuid": "578484e5_83868976",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f672bc6_fd653c20",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -661,6 +1345,24 @@
       "writtenOn": "2018-09-10T18:36:45Z",
       "side": 1,
       "message": "Using cbegin() and cend() would make it clearer that my later suggestions to compare to |v|, not to hard-coded values, are valid.",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c3d7156_e38470bc",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "I\u0027m not so fond of comparing to v; even if we guarantee that nothing is modified there would still be some risk that v isn\u0027t constructed correctly. Added an explicit |expected_results| vector instead.",
+      "parentUuid": "6f672bc6_fd653c20",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -684,6 +1386,24 @@
     },
     {
       "key": {
+        "uuid": "d0362d78_274622be",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Added an explicit |expected_results| instead.",
+      "parentUuid": "023099a8_6403a28b",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8771c2cd_3a4e9d56",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -698,6 +1418,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b9be075_20794a04",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "This was specifically to avoid having to do a static_cast. Added an explicit |expected_results| instead.",
+      "parentUuid": "8771c2cd_3a4e9d56",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -718,6 +1456,24 @@
     },
     {
       "key": {
+        "uuid": "fe47c8cb_faad4487",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Added an explicit |expected_results| instead.",
+      "parentUuid": "e15c7e26_b5cffa91",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "287eda7c_7ebc5572",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -732,6 +1488,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51eedc38_dbb75da4",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-14T15:04:35Z",
+      "side": 1,
+      "message": "Added an explicit |expected_results| instead.",
+      "parentUuid": "287eda7c_7ebc5572",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
