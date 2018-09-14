@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1f254c7e_407beae5",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "2c331bc4_f2c59dbd",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b11444a_0f63c1c1",
         "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
         "patchSetId": 2
@@ -69,6 +87,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81b33f42_b4556d84",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Sorry, old habits die hard - when I said base::OnceCallback (where I actually meant RepeatingCallbac), I meant the similar code in rtc_base/bind.h, resulting from Bind().",
+      "parentUuid": "0f32ec61_0943d39b",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "32411643_1532177a",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d3b7708c_d547e456",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a16be4b7_4adafa72",
         "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
         "patchSetId": 2
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "I think this qualifies as test (i.e. non-production) code. See also testonly\u003dtrue in build file.\n\nBesides, RtpWriter expects a packet of type webrtc::test::RtpPacket. I don\u0027t want to try to change this.",
       "parentUuid": "a16be4b7_4adafa72",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30ba3f3f_58874737",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ed098787_104c1c98",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -376,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "16b0c6aa_79ff8f19",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Yeah, that is indeed an important thing to draw attention to.\n(Perhaps |incoming_rtp_events_view|?)",
+      "parentUuid": "bbf05983_e0b2e119",
+      "range": {
+        "startLine": 216,
+        "startChar": 9,
+        "endLine": 216,
+        "endChar": 17
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ad6ba1f_90d58474",
         "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
         "patchSetId": 2
@@ -405,6 +501,24 @@
       "side": 1,
       "message": "We have those static asserts in the PacketView already. Added a comment.",
       "parentUuid": "1ad6ba1f_90d58474",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7ac2280_4634375c",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack\nFYI, if I had seen this comment, I would have assumed it\u0027s associated with the struct immediately below it. A different placement might have indicated to me this comment refers to the entire file.",
+      "parentUuid": "66821c40_e82f6d59",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -510,6 +624,24 @@
       "side": 1,
       "message": "1. Done\n2. That\u0027s a massive change. Long term, we should try to use the Timestamp class for all times in WebRTC.",
       "parentUuid": "06fe05ec_42d78df3",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0353432f_814a5dc9",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4e96e83a_745e8f40",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -656,6 +788,24 @@
     },
     {
       "key": {
+        "uuid": "6ca32bc8_47b069e5",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dd559a82_1c9bd5b0",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e696f00_542e7b7c",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -723,6 +873,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90153b12_03f68163",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "315b0e26_f23b5ed0",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -949,6 +1117,30 @@
     },
     {
       "key": {
+        "uuid": "364431e6_79da989d",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "35946970_c375be1c",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af3c3ef2_556771da",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -984,6 +1176,24 @@
     },
     {
       "key": {
+        "uuid": "7b24c918_a4ccac4f",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "883d0c42_5247debf",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ba4e383_ce8c2b3b",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -1016,6 +1226,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab143b67_0e675e12",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8159414e_9f87d2a2",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1159,6 +1387,24 @@
     },
     {
       "key": {
+        "uuid": "e8fe4561_a63c39c7",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ff40b95e_f5a1633f",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "969ff054_11090e0c",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -1264,6 +1510,24 @@
     },
     {
       "key": {
+        "uuid": "5d3f17c9_e06bb8f2",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Ack, though I\u0027d suggest checking with us-resolution until that change, in case it only materializes later than expected; it\u0027s a small change between ms and us. (Just need to avoid multiplying by 1000, and s/ms/us, right?)",
+      "parentUuid": "64a2d0c0_ff5e6a51",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3b5ec9c_f3d9accc",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -1299,6 +1563,24 @@
     },
     {
       "key": {
+        "uuid": "56aa68ef_fbf5203e",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Extra code? Wouldn\u0027t EXPECT_TRUE(false) suffice?",
+      "parentUuid": "09571e48_edd3143f",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "578484e5_83868976",
         "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
         "patchSetId": 2
@@ -1328,6 +1610,24 @@
       "side": 1,
       "message": "Done. However, I think v is an excellent name for a vector containing data which has no particular interpretation. Imo, \"events\" adds nothing except an indication about the element type, which is incidental and less important than the fact that it is a vector.",
       "parentUuid": "578484e5_83868976",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef44b62a_76e907c4",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Gottcha. If you disagree with a suggestion, and therefore avoid taking it, I will certainly not be offended. It is not likely we can ever reach full consensus on all stylistic matters.",
+      "parentUuid": "46a274d4_44a9be0d",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -1503,6 +1803,24 @@
       "side": 1,
       "message": "Added an explicit |expected_results| instead.",
       "parentUuid": "287eda7c_7ebc5572",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91c18575_efc4f566",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "It\u0027s not immediately clear that the long list of ten elements is the sorted concatenation of the two above. I\u0027d suggest:\nSuggest:\ntimestamps1 and timestamps2, then:\n  auto timestamps \u003d timestamps1;\n  timestamps.insert(timestamps.end(), timestamps2.begin(), timestamps2.end());\n  std::sort(timestamps.begin(), timestamps.end());\nJust a suggestion.",
+      "parentUuid": "51eedc38_dbb75da4",
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd72b5a4_f54ed19f",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Was a const-ref intended?",
+      "revId": "bdb182abea790edd3f26feab5568d2eedf63ab13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf1b5bc3_c688060a",
+        "filename": "logging/rtc_event_log/rtc_event_log2rtp_dump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "My personal preference would have been:\n  if (incoming.rtp.header.paddingLength \u003e 0) {\n    constexpr uint8_t kPadding \u003d 0x20;\n    packet-\u003edata[0] \u003d packet-\u003edata[0] | kPadding;\n  }\n(With s/kPadding/something-slightly-more-informative.)\nJust a suggestion; we can\u0027t all have the same preferences and style.\nRationale - this approach is clearer with lines that have multiple constants.",
+      "revId": "bdb182abea790edd3f26feab5568d2eedf63ab13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c695edf0_2edb0e28",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "IMHO, this using-statement make the case for decltype(x)::value_type a bit more compelling. Still just a suggestion.",
+      "revId": "bdb182abea790edd3f26feab5568d2eedf63ab13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "797d70c0_39a8e706",
+        "filename": "logging/rtc_event_log/rtc_event_processor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "Suggest putting functions before variables, but after using-statements.",
+      "revId": "bdb182abea790edd3f26feab5568d2eedf63ab13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "408ee6ee_52d6a8de",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-09-14T15:57:57Z",
+      "side": 1,
+      "message": "1. Suggested const; saves the reader time on checking if this is ever changed.\n2. There is duplication between the 1-2-3-4 here, and that fed into CreateEventList(). Perhaps move this to before the CreateEventList and feed it into it? (You\u0027d want to s/initializer_list/vector, perhaps.)\n3. Fitting in with #2, I would call this something along the lines of \"timestamps\". It is not clear the \"result\" of what operation this is, otherwise.",
+      "revId": "bdb182abea790edd3f26feab5568d2eedf63ab13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
