@@ -30,6 +30,7 @@ class SuppressionGain {
                   int sample_rate_hz);
   ~SuppressionGain();
   void GetGain(
+      const std::array<float, kFftLengthBy2Plus1>& mic_spectrum,
       const std::array<float, kFftLengthBy2Plus1>& nearend_spectrum,
       const std::array<float, kFftLengthBy2Plus1>& echo_spectrum,
       const std::array<float, kFftLengthBy2Plus1>& residual_echo_spectrum,
@@ -63,12 +64,14 @@ class SuppressionGain {
       const std::array<float, kFftLengthBy2Plus1>& max_gain,
       std::array<float, kFftLengthBy2Plus1>* gain) const;
 
-  void LowerBandGain(bool stationary_with_low_power,
-                     const AecState& aec_state,
-                     const std::array<float, kFftLengthBy2Plus1>& nearend,
-                     const std::array<float, kFftLengthBy2Plus1>& echo,
-                     const std::array<float, kFftLengthBy2Plus1>& comfort_noise,
-                     std::array<float, kFftLengthBy2Plus1>* gain);
+  void LowerBandGain(
+      bool stationary_with_low_power,
+      const AecState& aec_state,
+      const std::array<float, kFftLengthBy2Plus1>& nearend,
+      const std::array<float, kFftLengthBy2Plus1>& nearend_no_constraint,
+      const std::array<float, kFftLengthBy2Plus1>& echo,
+      const std::array<float, kFftLengthBy2Plus1>& comfort_noise,
+      std::array<float, kFftLengthBy2Plus1>* gain);
 
   class LowNoiseRenderDetector {
    public:
@@ -127,6 +130,7 @@ class SuppressionGain {
   bool initial_state_ = true;
   int initial_state_change_counter_ = 0;
   const bool enable_new_suppression_;
+  const bool enable_bounded_nearend_;
   aec3::MovingAverage moving_average_;
   const GainParameters nearend_params_;
   const GainParameters normal_params_;
