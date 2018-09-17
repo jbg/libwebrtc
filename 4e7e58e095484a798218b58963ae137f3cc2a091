@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3502134_c824e041",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-17T06:55:44Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 206,
+        "startChar": 14,
+        "endLine": 206,
+        "endChar": 17
+      },
+      "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

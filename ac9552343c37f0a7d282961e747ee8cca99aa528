@@ -353,6 +353,30 @@
       "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb54a1f6_1b7b8e94",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-17T06:55:44Z",
+      "side": 1,
+      "message": "\u003e Yep at least basic error checking will be done synchronously. \n\nWhat error handling do you expect callers to do, in case the method returns failure?",
+      "parentUuid": "a0b99004_4d14cb4f",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 18
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
