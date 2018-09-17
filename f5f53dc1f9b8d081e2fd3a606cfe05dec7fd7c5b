@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "602418db_6885aa5f",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-17T10:57:03Z",
+      "side": 1,
+      "message": "You don\u0027t want std::swap, so this line is mostly just confusing.",
+      "revId": "f5f53dc1f9b8d081e2fd3a606cfe05dec7fd7c5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22af1110_750278ba",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-17T10:57:03Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "f5f53dc1f9b8d081e2fd3a606cfe05dec7fd7c5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e3b3057_970fee3e",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-17T10:57:03Z",
+      "side": 1,
+      "message": "Note for future: You can simplify the implementation massively by replacing these with four std::vectors. Or even a single std::vector\u003cS\u003e for a new struct type S.",
+      "revId": "f5f53dc1f9b8d081e2fd3a606cfe05dec7fd7c5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
