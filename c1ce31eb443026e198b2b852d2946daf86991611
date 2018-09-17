@@ -46,6 +46,30 @@
       "revId": "c1ce31eb443026e198b2b852d2946daf86991611",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dce086f_5722dc4b",
+        "filename": "sdk/objc/base/RTCMacros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-17T08:23:22Z",
+      "side": 1,
+      "message": "(added a comment about that)",
+      "parentUuid": "da807980_c5e34e2e",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 34
+      },
+      "revId": "c1ce31eb443026e198b2b852d2946daf86991611",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
