@@ -22,6 +22,30 @@
       "revId": "c1ce31eb443026e198b2b852d2946daf86991611",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da807980_c5e34e2e",
+        "filename": "sdk/objc/base/RTCMacros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-09-17T08:19:11Z",
+      "side": 1,
+      "message": "Yes and I have to remove it before landing https://webrtc-review.googlesource.com/c/src/+/97960.",
+      "parentUuid": "32a3c796_865ee20c",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 34
+      },
+      "revId": "c1ce31eb443026e198b2b852d2946daf86991611",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
