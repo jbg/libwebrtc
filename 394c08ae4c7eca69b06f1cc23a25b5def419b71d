@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e47b7552_bc9261ee",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-18T14:16:29Z",
+      "side": 1,
+      "message": "mustn\u0027t",
+      "range": {
+        "startLine": 75,
+        "startChar": 29,
+        "endLine": 75,
+        "endChar": 35
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8593059c_fc429cfd",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-18T14:16:29Z",
+      "side": 1,
+      "message": "Nit: remove extra spaces",
+      "range": {
+        "startLine": 75,
+        "startChar": 5,
+        "endLine": 75,
+        "endChar": 7
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9eb82881_4692a58e",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-18T14:16:29Z",
+      "side": 1,
+      "message": "We should not use power features like setattr. Look into the mock module instead. Perhaps you need mock.patch here?",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "775391cf_490bb5e3",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-18T14:16:29Z",
+      "side": 1,
+      "message": "Nit: remove empty lines",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 59
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
