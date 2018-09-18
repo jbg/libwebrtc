@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "58d02f25_8dcd095b",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-18T14:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e47b7552_bc9261ee",
+      "range": {
+        "startLine": 75,
+        "startChar": 29,
+        "endLine": 75,
+        "endChar": 35
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83498d9d_ec0b5f08",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-18T14:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8593059c_fc429cfd",
+      "range": {
+        "startLine": 75,
+        "startChar": 5,
+        "endLine": 75,
+        "endChar": 7
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eb82881_4692a58e",
         "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
         "patchSetId": 4
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9131271d_7c0a65a1",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-18T14:55:42Z",
+      "side": 1,
+      "message": "I use the exact same existing mechanism than in setUp/tearDown.\nIf this must be changed, I would rather do that in an independent CL.",
+      "parentUuid": "9eb82881_4692a58e",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "775391cf_490bb5e3",
         "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8622630_ad9081d9",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-18T14:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "775391cf_490bb5e3",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 59
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
