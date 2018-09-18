@@ -377,6 +377,30 @@
       "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ecce2d2_0ebbf0a5",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-18T08:45:59Z",
+      "side": 1,
+      "message": "good point, this should be better documented when we know exactly what sorts of errors we expect. It feels to me that right now the caller should probably close the connection when this happens. I\u0027d say we should improve this when we know exactly what types of errors will be there.  Right now we are looking at errors from serializer (e.g. enums not matching or undefined) or conversion (mediatransportframe to the wire format). If either of those 2 errors happen, the caller can\u0027t do much.",
+      "parentUuid": "eb54a1f6_1b7b8e94",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 18
+      },
+      "revId": "ac9552343c37f0a7d282961e747ee8cca99aa528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

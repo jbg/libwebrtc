@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "aab38254_aba4e68c",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-18T08:45:59Z",
+      "side": 1,
+      "message": "I thought we don\u0027t need that - all you need is to have a list of your dependencies; right? if you don\u0027t have dependencies, you are a keyframe; if you have dependencies, you are not. Is such logic not sufficient?",
+      "parentUuid": "98ef8b80_59cb8bdf",
+      "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be90a593_3415e033",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2
@@ -84,6 +102,30 @@
     },
     {
       "key": {
+        "uuid": "450205da_14038877",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-18T08:45:59Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a fair point, I double checked EncodedFrame::Id::picture_id and it\u0027s int64. Changed.",
+      "parentUuid": "c1e99c84_f4ade36f",
+      "range": {
+        "startLine": 165,
+        "startChar": 2,
+        "endLine": 165,
+        "endChar": 5
+      },
+      "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3502134_c824e041",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2
@@ -104,6 +146,30 @@
       "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b999f8d1_220f37a6",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-18T08:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3502134_c824e041",
+      "range": {
+        "startLine": 206,
+        "startChar": 14,
+        "endLine": 206,
+        "endChar": 17
+      },
+      "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
