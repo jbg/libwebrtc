@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84830e99_2c4b0006",
+        "filename": "native-api.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-18T11:20:16Z",
+      "side": 1,
+      "message": "backquotes",
+      "range": {
+        "startLine": 88,
+        "startChar": 50,
+        "endLine": 88,
+        "endChar": 69
+      },
+      "revId": "306339da709db06f7fd100232d9446504cb6b66b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14a75a7b_a37bbdfb",
+        "filename": "native-api.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-18T11:20:16Z",
+      "side": 1,
+      "message": "This is already stated above.",
+      "range": {
+        "startLine": 93,
+        "startChar": 37,
+        "endLine": 94,
+        "endChar": 11
+      },
+      "revId": "306339da709db06f7fd100232d9446504cb6b66b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc566723_71e09886",
+        "filename": "native-api.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-18T11:20:16Z",
+      "side": 1,
+      "message": "backquotes",
+      "range": {
+        "startLine": 101,
+        "startChar": 50,
+        "endLine": 101,
+        "endChar": 65
+      },
+      "revId": "306339da709db06f7fd100232d9446504cb6b66b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e8dd1ae_b18a6c05",
+        "filename": "native-api.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-09-18T11:20:16Z",
+      "side": 1,
+      "message": "Already stated above.",
+      "range": {
+        "startLine": 106,
+        "startChar": 33,
+        "endLine": 107,
+        "endChar": 11
+      },
+      "revId": "306339da709db06f7fd100232d9446504cb6b66b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
