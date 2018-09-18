@@ -29,6 +29,10 @@ bool EnableNewSuppression() {
   return !field_trial::IsEnabled("WebRTC-Aec3NewSuppressionKillSwitch");
 }
 
+bool EnableBoundedNearend() {
+  return !field_trial::IsEnabled("WebRTC-Aec3BoundedNearendKillSwitch");
+}
+
 // Adjust the gains according to the presence of known external filters.
 void AdjustForExternalFilters(std::array<float, kFftLengthBy2Plus1>* gain) {
   // Limit the low frequency gains to avoid the impact of the high-pass filter
@@ -261,6 +265,7 @@ void SuppressionGain::LowerBandGain(
     bool low_noise_render,
     const AecState& aec_state,
     const std::array<float, kFftLengthBy2Plus1>& nearend,
+    const std::array<float, kFftLengthBy2Plus1>& unbounded_nearend,
     const std::array<float, kFftLengthBy2Plus1>& echo,
     const std::array<float, kFftLengthBy2Plus1>& comfort_noise,
     std::array<float, kFftLengthBy2Plus1>* gain) {
@@ -284,7 +289,10 @@ void SuppressionGain::LowerBandGain(
                        : config_.echo_audibility.normal_render_limit;
   if (!saturated_echo) {
     for (size_t k = 0; k < nearend.size(); ++k) {
-      const float denom = std::min(nearend[k], weighted_echo[k]);
+      const float nearend_band =
+          enable_bounded_nearend_ ? std::max(nearend[k], unbounded_nearend[k])
+                                  : nearend[k];
+      const float denom = std::min(nearend_band, weighted_echo[k]);
       min_gain[k] = denom > 0.f ? min_echo_power / denom : 1.f;
       min_gain[k] = std::min(min_gain[k], 1.f);
     }
@@ -300,7 +308,6 @@ void SuppressionGain::LowerBandGain(
   } else {
     min_gain.fill(0.f);
   }
-
   // Compute the maximum gain by limiting the gain increase from the previous
   // gain.
   std::array<float, kFftLengthBy2Plus1> max_gain;
@@ -342,6 +349,8 @@ void SuppressionGain::LowerBandGain(
   data_dumper_->DumpRaw("aec3_suppressor_min_gain", min_gain);
   data_dumper_->DumpRaw("aec3_suppressor_max_gain", max_gain);
   data_dumper_->DumpRaw("aec3_suppressor_masker", masker);
+  data_dumper_->DumpRaw("aec3_dominant_nearend",
+                        dominant_nearend_detector_.IsNearendState());
 }
 
 SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
@@ -354,6 +363,7 @@ SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
       state_change_duration_blocks_(
           static_cast<int>(config_.filter.config_change_duration_blocks)),
       enable_new_suppression_(EnableNewSuppression()),
+      enable_bounded_nearend_(EnableBoundedNearend()),
       moving_average_(kFftLengthBy2Plus1,
                       config.suppressor.nearend_average_blocks),
       nearend_params_(config_.suppressor.nearend_tuning),
@@ -370,6 +380,7 @@ SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
 SuppressionGain::~SuppressionGain() = default;
 
 void SuppressionGain::GetGain(
+    const std::array<float, kFftLengthBy2Plus1>& mic_spectrum,
     const std::array<float, kFftLengthBy2Plus1>& nearend_spectrum,
     const std::array<float, kFftLengthBy2Plus1>& echo_spectrum,
     const std::array<float, kFftLengthBy2Plus1>& residual_echo_spectrum,
@@ -390,19 +401,28 @@ void SuppressionGain::GetGain(
     *high_bands_gain = cfg.enforce_empty_higher_bands ? 0.f : 1.f;
     return;
   }
+  std::array<float, kFftLengthBy2Plus1> bounded_nearend;
+  if (enable_bounded_nearend_) {
+    std::transform(nearend_spectrum.begin(), nearend_spectrum.end(),
+                   mic_spectrum.begin(), bounded_nearend.begin(),
+                   [](float a, float b) { return std::min(a, b); });
+  } else {
+    std::copy(nearend_spectrum.begin(), nearend_spectrum.end(),
+              bounded_nearend.begin());
+  }
 
   std::array<float, kFftLengthBy2Plus1> nearend_average;
-  moving_average_.Average(nearend_spectrum, nearend_average);
+  moving_average_.Average(bounded_nearend, nearend_average);
 
   // Update the state selection.
-  dominant_nearend_detector_.Update(nearend_spectrum, residual_echo_spectrum,
+  dominant_nearend_detector_.Update(bounded_nearend, residual_echo_spectrum,
                                     comfort_noise_spectrum);
 
   // Compute gain for the lower band.
   bool low_noise_render = low_render_detector_.Detect(render);
   const absl::optional<int> narrow_peak_band =
       render_signal_analyzer.NarrowPeakBand();
-  LowerBandGain(low_noise_render, aec_state, nearend_average,
+  LowerBandGain(low_noise_render, aec_state, nearend_average, nearend_spectrum,
                 residual_echo_spectrum, comfort_noise_spectrum, low_band_gain);
 
   // Limit the gain of the lower bands during start up and after resets.
