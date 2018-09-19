@@ -293,6 +293,7 @@ void AudioSendStream::Start() {
       FindExtensionIds(config_.rtp.extensions).transport_sequence_number != 0 &&
       !webrtc::field_trial::IsEnabled("WebRTC-Audio-ForceNoTWCC");
   if (config_.min_bitrate_bps != -1 && config_.max_bitrate_bps != -1 &&
+      !config_.dscp_enabled &&
       (has_transport_sequence_number ||
        !webrtc::field_trial::IsEnabled("WebRTC-Audio-SendSideBwe") ||
        webrtc::field_trial::IsEnabled("WebRTC-Audio-ABWENoTWCC"))) {
