@@ -47,7 +47,7 @@ class NetEqStatsGetter : public NetEqGetAudioCallback {
   struct ConcealmentEvent {
     uint64_t duration_ms;
     size_t concealment_event_number;
-    int64_t time_from_previous_event_end_ms;
+    int64_t time_until_next_event_ms;
     std::string ToString() const;
   };
 
@@ -97,7 +97,7 @@ class NetEqStatsGetter : public NetEqGetAudioCallback {
   size_t current_concealment_event_ = 1;
   uint64_t voice_concealed_samples_until_last_event_ = 0;
   std::vector<ConcealmentEvent> concealment_events_;
-  int64_t last_event_end_time_ms_ = 0;
+  uint32_t last_event_start_timestamp_ = 0;
 };
 
 }  // namespace test
