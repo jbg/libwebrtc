@@ -258,8 +258,7 @@ class TestRollChromiumRevision(unittest.TestCase):
     webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile)
     new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
     _, other_paths = FindRemovedDeps(webrtc_deps, new_cr_deps)
-    self.assertEquals(other_paths, ['src/build',
-                                    'src/third_party/xstream',
+    self.assertEquals(other_paths, ['src/third_party/xstream',
                                     'src/buildtools'])
 
   def _CommitMessageSetup(self):

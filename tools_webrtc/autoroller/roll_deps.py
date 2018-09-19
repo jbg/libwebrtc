@@ -32,6 +32,22 @@ DONT_AUTOROLL_THESE = [
   'src/third_party/ffmpeg',
 ]
 
+# These dependencies are missing in chromium/src/DEPS,
+# either unused or already in-tree.
+DONT_AUTOROLL_MISSING = [
+  'src/base',
+  'src/build',
+  'src/ios'
+  'src/testing',
+  'src/third_party',
+  'src/third_party/findbugs',
+  'src/third_party/gtest-parallel',
+  'src/third_party/winsdk_samples',
+  'src/third_party/yasm/binaries',
+  'src/tools',
+]
+
+
 # Run these CQ trybots in addition to the default ones in infra/config/cq.cfg.
 EXTRA_TRYBOTS = (
   'master.internal.tryserver.corp.webrtc:linux_internal'
@@ -260,8 +276,8 @@ def _FindNewDeps(old, new):
   """ Gather dependencies only in |new| and return corresponding paths. """
   old_entries = set(BuildDepsentryDict(old))
   new_entries = set(BuildDepsentryDict(new))
-  return [path for path in new_entries - old_entries
-          if path not in DONT_AUTOROLL_THESE]
+  skip = set(DONT_AUTOROLL_THESE + DONT_AUTOROLL_MISSING)
+  return [path for path in new_entries - old_entries if path not in skip]
 
 
 def FindAddedDeps(webrtc_deps, new_cr_deps):
