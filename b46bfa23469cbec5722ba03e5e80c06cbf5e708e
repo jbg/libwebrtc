@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f7af9fa_c3e68bed",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-09-19T10:19:57Z",
+      "side": 1,
+      "message": "But we need to roll these to HEAD, won\u0027t they be skipped entirely now?",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "b46bfa23469cbec5722ba03e5e80c06cbf5e708e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
