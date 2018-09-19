@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff190ca0_bab709e6",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-19T11:37:47Z",
+      "side": 1,
+      "message": "Add: \"for instance, src/base is a part of the Chromium source git repo, but we pull it through a subtree mirror, so therefore it isn\u0027t listed in Chromium\u0027s deps but it is in ours.\"",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "0c210a5f9a20ec12e13e64f30b28016aacc477b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "369d5179_a5a7e535",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-19T11:37:47Z",
+      "side": 1,
+      "message": "Nit: remove this space (apply throughout)",
+      "range": {
+        "startLine": 265,
+        "startChar": 7,
+        "endLine": 265,
+        "endChar": 8
+      },
+      "revId": "0c210a5f9a20ec12e13e64f30b28016aacc477b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
