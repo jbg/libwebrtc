@@ -69,6 +69,30 @@
       "revId": "b46bfa23469cbec5722ba03e5e80c06cbf5e708e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b78881e_0cc9b0cc",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-19T10:31:57Z",
+      "side": 1,
+      "message": "No, that\u0027s why I created a new list, and used it only for addition/removal detection.\nMaybe I should rename this list DONT_CHECK_THESE?",
+      "parentUuid": "2f7af9fa_c3e68bed",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "b46bfa23469cbec5722ba03e5e80c06cbf5e708e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
