@@ -258,9 +258,17 @@ class TestRollChromiumRevision(unittest.TestCase):
     webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile)
     new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
     _, other_paths = FindRemovedDeps(webrtc_deps, new_cr_deps)
-    self.assertEquals(other_paths, ['src/build',
-                                    'src/third_party/xstream',
+    self.assertEquals(other_paths, ['src/third_party/xstream',
                                     'src/buildtools'])
+
+  def testExpectedDepsIsNot(self):
+    """ Some deps musn't be seen as missing, even if absent from Chromium."""
+    webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile)
+    new_cr_deps = ParseLocalDepsFile(self._new_cr_depsfile_android)
+    removed_android_paths, other_paths = FindRemovedDeps(webrtc_deps,
+                                                         new_cr_deps)
+    self.assertTrue('src/build' not in removed_android_paths)
+    self.assertTrue('src/build' not in other_paths)
 
   def _CommitMessageSetup(self):
     webrtc_deps = ParseLocalDepsFile(self._webrtc_depsfile_android)
