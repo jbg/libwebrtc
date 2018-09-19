@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "b76c70d5_acf03b65",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-09-19T08:21:33Z",
+      "side": 1,
+      "message": "As mentioned offline, there\u0027s a difference between not referring to anything and not referring to anything and updating all reference buffers. The latter is a key frame, so we\u0027ll need a bit to indicate that.",
+      "parentUuid": "aab38254_aba4e68c",
+      "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be90a593_3415e033",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2
