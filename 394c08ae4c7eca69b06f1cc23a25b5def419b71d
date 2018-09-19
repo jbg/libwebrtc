@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "1e47161f_dcc5df98",
+        "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-19T06:49:37Z",
+      "side": 1,
+      "message": "Yes, it must be changed. Ok, fix that in the next CL then.",
+      "parentUuid": "9131271d_7c0a65a1",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "394c08ae4c7eca69b06f1cc23a25b5def419b71d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "775391cf_490bb5e3",
         "filename": "tools_webrtc/autoroller/unittests/roll_deps_test.py",
         "patchSetId": 4
