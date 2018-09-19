@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "273c0d9d_1643d0e3",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-19T10:31:49Z",
+      "side": 1,
+      "message": "A better name here is WEBRTC_ONLY_DEPS. These are autorolled so the name is misleading.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "b46bfa23469cbec5722ba03e5e80c06cbf5e708e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2f7af9fa_c3e68bed",
         "filename": "tools_webrtc/autoroller/roll_deps.py",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2018-09-19T10:19:57Z",
       "side": 1,
       "message": "But we need to roll these to HEAD, won\u0027t they be skipped entirely now?",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "b46bfa23469cbec5722ba03e5e80c06cbf5e708e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39cdddf5_985acbcc",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-19T10:31:49Z",
+      "side": 1,
+      "message": "No, they will be, it\u0027s just we will not fail if one of these go missing.",
+      "parentUuid": "2f7af9fa_c3e68bed",
       "range": {
         "startLine": 39,
         "startChar": 3,
