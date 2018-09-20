@@ -15,6 +15,7 @@
 #include <math.h>
 
 #include "modules/audio_coding/neteq/mock/mock_delay_peak_detector.h"
+#include "test/field_trial.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 
@@ -326,6 +327,45 @@ TEST_F(DelayManagerTest, Failures) {
   EXPECT_FALSE(dm_->SetMaximumDelay(60));
 }
 
+TEST(DelayManager, ForcedTargetDelayPercentile) {
+  TickTimer tick_timer;
+  MockDelayPeakDetector peak_detector(&tick_timer);
+  EXPECT_CALL(peak_detector, Reset()).WillRepeatedly(Return());
+  {
+    test::ScopedFieldTrials field_trial(
+        "WebRTC-Audio-NetEqForceTargetDelayPercentile/Enabled-95/");
+    DelayManager dm(50, &peak_detector, &tick_timer);
+    EXPECT_EQ(absl::make_optional<int>(53687091),
+              dm.forced_limit_probability_for_test());  // 1/20 in Q30
+  }
+  {
+    test::ScopedFieldTrials field_trial(
+        "WebRTC-Audio-NetEqForceTargetDelayPercentile/Enabled-99.95/");
+    DelayManager dm(50, &peak_detector, &tick_timer);
+    EXPECT_EQ(absl::make_optional<int>(536871),
+              dm.forced_limit_probability_for_test());  // 1/2000 in Q30
+  }
+  {
+    test::ScopedFieldTrials field_trial(
+        "WebRTC-Audio-NetEqForceTargetDelayPercentile/Disabled/");
+    DelayManager dm(50, &peak_detector, &tick_timer);
+    EXPECT_EQ(absl::nullopt, dm.forced_limit_probability_for_test());
+  }
+  {
+    test::ScopedFieldTrials field_trial(
+        "WebRTC-Audio-NetEqForceTargetDelayPercentile/Enabled--1/");
+    DelayManager dm(50, &peak_detector, &tick_timer);
+    EXPECT_EQ(absl::nullopt, dm.forced_limit_probability_for_test());
+  }
+  {
+    test::ScopedFieldTrials field_trial(
+        "WebRTC-Audio-NetEqForceTargetDelayPercentile/Enabled-100.1/");
+    DelayManager dm(50, &peak_detector, &tick_timer);
+    EXPECT_EQ(absl::nullopt, dm.forced_limit_probability_for_test());
+  }
+  EXPECT_CALL(peak_detector, Die());
+}
+
 // Test if the histogram is stretched correctly if the packet size is decreased.
 TEST(DelayManagerIATScalingTest, StretchTest) {
   using IATVector = DelayManager::IATVector;
@@ -437,4 +477,5 @@ TEST(DelayManagerIATScalingTest, OverflowTest) {
   scaled_iat = DelayManager::ScaleHistogram(iat, 20, 60);
   EXPECT_EQ(scaled_iat, expected_result);
 }
+
 }  // namespace webrtc

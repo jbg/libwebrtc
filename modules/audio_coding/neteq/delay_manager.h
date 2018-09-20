@@ -16,6 +16,7 @@
 #include <memory>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "modules/audio_coding/neteq/tick_timer.h"
 #include "rtc_base/constructormagic.h"
 
@@ -114,8 +115,13 @@ class DelayManager {
   virtual int last_pack_cng_or_dtmf() const;
   virtual void set_last_pack_cng_or_dtmf(int value);
 
+  // This accessor is only intended for testing purposes.
+  const absl::optional<int>& forced_limit_probability_for_test() const {
+    return forced_limit_probability_;
+  }
+
  private:
-  static const int kLimitProbability = 53687091;         // 1/20 in Q30.
+  static constexpr int kLimitProbability = 53687091;     // 1/20 in Q30.
   static const int kLimitProbabilityStreaming = 536871;  // 1/2000 in Q30.
   static const int kMaxStreamingPeakPeriodMs = 600000;   // 10 minutes in ms.
   static const int kCumulativeSumDrift = 2;  // Drift term for cumulative sum
@@ -168,6 +174,7 @@ class DelayManager {
   DelayPeakDetector& peak_detector_;
   int last_pack_cng_or_dtmf_;
   const bool frame_length_change_experiment_;
+  const absl::optional<int> forced_limit_probability_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DelayManager);
 };
