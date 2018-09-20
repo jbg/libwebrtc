@@ -26,7 +26,7 @@ std::string NetEqStatsGetter::ConcealmentEvent::ToString() const {
   rtc::SimpleStringBuilder ss(ss_buf);
   ss << "ConcealmentEvent duration_ms:" << duration_ms
      << " event_number:" << concealment_event_number
-     << " time_from_previous_event_end_ms:" << time_from_previous_event_end_ms;
+     << " time_until_next_event_ms:" << time_until_next_event_ms;
   return ss.str();
 }
 
@@ -60,26 +60,36 @@ void NetEqStatsGetter::AfterGetAudio(int64_t time_now_ms,
   if (current_concealment_event_ != lifetime_stat.concealment_events &&
       voice_concealed_samples_until_last_event_ <
           lifetime_stat.voice_concealed_samples) {
-    if (last_event_end_time_ms_ > 0) {
+    if (total_samples_until_last_event_ > 0) {
       // Do not account for the first event to avoid start of the call
       // skewing.
-      ConcealmentEvent concealment_event;
+      ConcealmentEvent last_concealment_event;
       uint64_t last_event_voice_concealed_samples =
           lifetime_stat.voice_concealed_samples -
           voice_concealed_samples_until_last_event_;
       RTC_CHECK_GT(last_event_voice_concealed_samples, 0);
-      concealment_event.duration_ms = last_event_voice_concealed_samples /
-                                      (audio_frame.sample_rate_hz_ / 1000);
-      concealment_event.concealment_event_number = current_concealment_event_;
-      concealment_event.time_from_previous_event_end_ms =
-          time_now_ms - last_event_end_time_ms_;
-      concealment_events_.emplace_back(concealment_event);
-      voice_concealed_samples_until_last_event_ =
-          lifetime_stat.voice_concealed_samples;
+      last_concealment_event.duration_ms = last_event_voice_concealed_samples /
+                                           (audio_frame.sample_rate_hz_ / 1000);
+      last_concealment_event.concealment_event_number =
+          current_concealment_event_;
+      const int64_t total_samples_since_last_event_start =
+          lifetime_stat.total_samples_received -
+          total_samples_until_last_event_;
+      const int64_t concealed_samples_since_last_event_start =
+          lifetime_stat.concealed_samples - concealed_samples_until_last_event_;
+      RTC_CHECK_GT(concealed_samples_since_last_event_start, 0);
+      RTC_CHECK_GE(total_samples_since_last_event_start,
+                   concealed_samples_since_last_event_start);
+      last_concealment_event.time_until_next_event_ms =
+          (total_samples_since_last_event_start -
+           concealed_samples_since_last_event_start) /
+          (audio_frame.sample_rate_hz_ / 1000);
+      concealment_events_.emplace_back(last_concealment_event);
     }
-    last_event_end_time_ms_ = time_now_ms;
+    total_samples_until_last_event_ = lifetime_stat.total_samples_received;
     voice_concealed_samples_until_last_event_ =
         lifetime_stat.voice_concealed_samples;
+    concealed_samples_until_last_event_ = lifetime_stat.concealed_samples;
     current_concealment_event_ = lifetime_stat.concealment_events;
   }
 
