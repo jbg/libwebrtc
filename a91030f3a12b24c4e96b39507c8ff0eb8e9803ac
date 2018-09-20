@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b684e837_f5074dac",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-20T21:59:12Z",
+      "side": 1,
+      "message": "I don\u0027t follow the reason for this code construct.\n\nnearend is computed based on the min of the nearend_spectrum and the mic spectrum.\n\nWhat is then the reason of taking the min of the unbounded_nearend (which is the \n nearend_spectrum) and the nearend? I seems that we\u0027ve already done that.",
+      "revId": "a91030f3a12b24c4e96b39507c8ff0eb8e9803ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ee9a73e_77aad006",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-20T21:59:12Z",
+      "side": 1,
+      "message": "I\u0027d prefer moving that to echo_remover (or another separate class) as it is part of the nearend estimation rather than a detail of the gain computation.",
+      "range": {
+        "startLine": 406,
+        "startChar": 45,
+        "endLine": 406,
+        "endChar": 61
+      },
+      "revId": "a91030f3a12b24c4e96b39507c8ff0eb8e9803ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
