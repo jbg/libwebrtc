@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1647ae8e_e18d4801",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-09-21T13:07:21Z",
+      "side": 1,
+      "message": "I think only DEPS roll is blocked.\n\nAnd what if the failure is real? It\u0027s better to have old clang rather than broken webrtc",
+      "range": {
+        "startLine": 12,
+        "startChar": 27,
+        "endLine": 12,
+        "endChar": 51
+      },
+      "revId": "2b462d06facce91ed1db0a0ec6bf01cb56170ffc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
