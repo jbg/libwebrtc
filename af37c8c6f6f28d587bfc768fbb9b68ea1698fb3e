@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b48ee39d_20a73b1e",
+        "filename": "test/testsupport/perf_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-09-21T14:03:22Z",
+      "side": 1,
+      "message": "This triggers msan use-of-uninitialized-value by e.g. VideoQualityAnalysisTest.PrintAnalysisResultsEmpty\n\nWe should fix that, because the check could fail in random instances.\n\nNB: For some reason the \u0027value_stream \u003c\u003c value\u0027 was ok (suppression by msan?).",
+      "revId": "af37c8c6f6f28d587bfc768fbb9b68ea1698fb3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
