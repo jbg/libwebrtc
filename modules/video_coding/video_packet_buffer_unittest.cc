@@ -112,7 +112,7 @@ TEST_F(TestPacketBuffer, InsertDuplicatePacket) {
   EXPECT_TRUE(Insert(seq_num, kKeyFrame, kFirst, kLast));
 }
 
-TEST_F(TestPacketBuffer, SeqNumWrapOneFrame) {
+TEST_F(TestPacketBuffer, DISABLED_SeqNumWrapOneFrame) {
   EXPECT_TRUE(Insert(0xFFFF, kKeyFrame, kFirst, kNotLast));
   EXPECT_TRUE(Insert(0x0, kKeyFrame, kNotFirst, kLast));
 
