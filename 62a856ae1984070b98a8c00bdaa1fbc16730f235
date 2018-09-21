@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88ef2a98_f3beb8ee",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Please move this to before the method (line 253) as a method comment.",
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "616fd83b_2973e8b3",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Since code this is anyway changed, it would be great if the line 263 is moved to line 267 (within the if-statement).",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 263,
+        "endChar": 13
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "861408f1_b446e9ac",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Please move this to before the method (line 286) as a method comment.",
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90da0ebe_74d18b0e",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Suggestion:\nThis expression could be made more compact as:\nconst auto\u0026 inc \u003d max_inc_factor;\nconst auto\u0026 floor \u003d config_.suppressor.floor_first_increase;\nfor (size_t k \u003d 0; k \u003c max_gain.size(); ++k) {\n    max_gain[k] \u003d std::min(std::max(last_gain_[k] * inc, floor), 1.f);\n  }",
+      "range": {
+        "startLine": 291,
+        "startChar": 2,
+        "endLine": 295,
+        "endChar": 3
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06a41dcc_0bddc85f",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Nice!",
+      "range": {
+        "startLine": 304,
+        "startChar": 49,
+        "endLine": 304,
+        "endChar": 62
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "434e8e3e_0edb8672",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Since the params value is read from the state, and so cheap to obtain (line 308), I\u0027d prefer to obtain it locally within the GetMinGain and GetMaxGain methods as that will make them more self-contained (and save one parameter to each of the methods).",
+      "range": {
+        "startLine": 319,
+        "startChar": 28,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fbca9a9_119d1b07",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "This is only run as the fallback when a killswitch has been set, and I like moving the computation of one_by_weighted_echo to only be used when the killswitch is active.\n\nHowever, the current way it is moved has a double complexity compared to the old code and uses 65 extra divisions (due to the for loop).\n\nCould you move the pre-computation of one_by_weighted_echo to line 334 instead. In that way, it would only be computed when the killswitch is set, and furthermore 65 divisions would be saved.",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 337,
+        "endChar": 33
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22638819_a5a01bc8",
+        "filename": "modules/audio_processing/aec3/suppression_gain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "I think the _spectrum suffix should be dropped to match the naming of nearend, residual_echo and comfort_noise which also contain spectra.",
+      "range": {
+        "startLine": 70,
+        "startChar": 51,
+        "endLine": 70,
+        "endChar": 76
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2a40471_6915fcdb",
+        "filename": "modules/audio_processing/aec3/suppression_gain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-09-21T14:17:08Z",
+      "side": 1,
+      "message": "Since the GetMaxGain() method also introduced in this CL uses rtc::ArrayView\u003c\u003e as input/output (which I think it is great), I think it would make sense for GetMinGain() to as well use that. This also makes the previous code compliant with the style guide (https://webrtc.googlesource.com/src/+/master/style-guide.md).",
+      "range": {
+        "startLine": 77,
+        "startChar": 51,
+        "endLine": 77,
+        "endChar": 67
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
