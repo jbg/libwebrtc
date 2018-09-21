@@ -175,12 +175,16 @@ TEST(TaskQueueTest, PostMultipleDelayed) {
 
 TEST(TaskQueueTest, PostDelayedAfterDestruct) {
   static const char kQueueName[] = "PostDelayedAfterDestruct";
-  Event event(false, false);
+  Event run(false, false);
+  Event deleted(false, false);
   {
     TaskQueue queue(kQueueName);
-    queue.PostDelayedTask(Bind(&CheckCurrent, &event, &queue), 100);
+    queue.PostDelayedTask(
+        rtc::NewClosure([&run] { run.Set(); }, [&deleted] { deleted.Set(); }),
+        100);
   }
-  EXPECT_FALSE(event.Wait(200));  // Task should not run.
+  EXPECT_TRUE(deleted.Wait(0));
+  EXPECT_FALSE(run.Wait(200));  // Task should not run.
 }
 
 TEST(TaskQueueTest, PostAndReply) {
