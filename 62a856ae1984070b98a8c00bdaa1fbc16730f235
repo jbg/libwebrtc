@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "081ec26b_9866260f",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "88ef2a98_f3beb8ee",
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "616fd83b_2973e8b3",
         "filename": "modules/audio_processing/aec3/suppression_gain.cc",
         "patchSetId": 7
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "fbd3397d_45135c22",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "616fd83b_2973e8b3",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 263,
+        "endChar": 13
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "861408f1_b446e9ac",
         "filename": "modules/audio_processing/aec3/suppression_gain.cc",
         "patchSetId": 7
@@ -56,6 +98,24 @@
       "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72afc2ec_26ed1da9",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "861408f1_b446e9ac",
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "189f699a_720024d3",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90da0ebe_74d18b0e",
+      "range": {
+        "startLine": 291,
+        "startChar": 2,
+        "endLine": 295,
+        "endChar": 3
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06a41dcc_0bddc85f",
         "filename": "modules/audio_processing/aec3/suppression_gain.cc",
         "patchSetId": 7
@@ -102,6 +186,30 @@
       "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bb5d59a_e09ebd45",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "06a41dcc_0bddc85f",
+      "range": {
+        "startLine": 304,
+        "startChar": 49,
+        "endLine": 304,
+        "endChar": 62
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "a0300644_34a7bc01",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "434e8e3e_0edb8672",
+      "range": {
+        "startLine": 319,
+        "startChar": 28,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fbca9a9_119d1b07",
         "filename": "modules/audio_processing/aec3/suppression_gain.cc",
         "patchSetId": 7
@@ -148,6 +280,30 @@
       "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "531a768d_51b2bc67",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0fbca9a9_119d1b07",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 337,
+        "endChar": 33
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -174,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "8a8576d7_7ee17f2f",
+        "filename": "modules/audio_processing/aec3/suppression_gain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "22638819_a5a01bc8",
+      "range": {
+        "startLine": 70,
+        "startChar": 51,
+        "endLine": 70,
+        "endChar": 76
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2a40471_6915fcdb",
         "filename": "modules/audio_processing/aec3/suppression_gain.h",
         "patchSetId": 7
@@ -194,6 +374,30 @@
       "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e2fbf51_fecb8a17",
+        "filename": "modules/audio_processing/aec3/suppression_gain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T15:28:45Z",
+      "side": 1,
+      "message": "Thanks, I didn\u0027t use it because I needed the .fill method but you just suggested offline to use std::fill so I will happily  go for that one.",
+      "parentUuid": "e2a40471_6915fcdb",
+      "range": {
+        "startLine": 77,
+        "startChar": 51,
+        "endLine": 77,
+        "endChar": 67
+      },
+      "revId": "62a856ae1984070b98a8c00bdaa1fbc16730f235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
