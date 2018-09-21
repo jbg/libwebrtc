@@ -93,6 +93,19 @@ class TestPacketBuffer : public ::testing::Test,
   std::map<uint16_t, std::unique_ptr<RtpFrameObject>> frames_from_callback_;
 };
 
+uint16_t a = 0xFFFF;
+uint16_t b = 0;
+
+TEST_F(TestPacketBuffer, UInt16SanityCheck) {
+  if ( a != static_cast<uint16_t>(b-1) ) {
+    // Huge fail, shouldn't reach this point.
+    EXPECT_TRUE(0);
+  } else {
+    EXPECT_TRUE(1);
+  }
+}
+
+
 TEST_F(TestPacketBuffer, InsertOnePacket) {
   const uint16_t seq_num = Rand();
   EXPECT_TRUE(Insert(seq_num, kKeyFrame, kFirst, kLast));
