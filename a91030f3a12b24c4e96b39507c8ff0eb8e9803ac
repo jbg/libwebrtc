@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "270163b2_3b047085",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T13:13:40Z",
+      "side": 1,
+      "message": "The reason was that after the first minimum we did an average of one of the spectra. However, I agree that it creates confusion and it does not give much benefits. I have removed that min.",
+      "parentUuid": "b684e837_f5074dac",
+      "revId": "a91030f3a12b24c4e96b39507c8ff0eb8e9803ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2ee9a73e_77aad006",
         "filename": "modules/audio_processing/aec3/suppression_gain.cc",
         "patchSetId": 5
@@ -30,6 +48,30 @@
       "writtenOn": "2018-09-20T21:59:12Z",
       "side": 1,
       "message": "I\u0027d prefer moving that to echo_remover (or another separate class) as it is part of the nearend estimation rather than a detail of the gain computation.",
+      "range": {
+        "startLine": 406,
+        "startChar": 45,
+        "endLine": 406,
+        "endChar": 61
+      },
+      "revId": "a91030f3a12b24c4e96b39507c8ff0eb8e9803ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e66cdd7_e6bd518f",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-21T13:13:40Z",
+      "side": 1,
+      "message": "As discussed offline, we need both signals in the gain computation. One for computing the minimum gain and the other for computing the gain. However, I agree that the code is becoming messy. I have cleaned a bit.",
+      "parentUuid": "2ee9a73e_77aad006",
       "range": {
         "startLine": 406,
         "startChar": 45,
