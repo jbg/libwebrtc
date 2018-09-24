@@ -93,6 +93,30 @@
       "revId": "5d8df98b79490357263d44236331afbb4757f7c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a7ad194_e5c786b5",
+        "filename": "pc/rtpreceiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-24T13:31:58Z",
+      "side": 1,
+      "message": "I see. The comment on that method seems incorrect then, since the method wasn\u0027t implemented for VideoRtpReceiver.\n\nIt would be nice (but best as a followup cl) to try deleting the TODO item and the default implementation RtpReceiverInterface::GetSources(). The chromium class FakeRtpReceiver seems to have a GetSources override now.\n\n(Btw, please link via the public code search on cs.chromium.org).",
+      "parentUuid": "d948291a_9dbd7294",
+      "range": {
+        "startLine": 230,
+        "startChar": 2,
+        "endLine": 230,
+        "endChar": 53
+      },
+      "revId": "5d8df98b79490357263d44236331afbb4757f7c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

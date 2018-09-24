@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd03aefa_27b570d7",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4333,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-24T13:31:58Z",
+      "side": 1,
+      "message": "Maybe this part (and the below expectations on |audio_receiver| and |video_receiver|) could be written more clearly with std::any_of.",
+      "range": {
+        "startLine": 4320,
+        "startChar": 0,
+        "endLine": 4333,
+        "endChar": 5
+      },
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
