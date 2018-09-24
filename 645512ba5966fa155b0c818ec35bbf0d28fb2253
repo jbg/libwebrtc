@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8d67055_ea389bc7",
+        "filename": "audio/audio_transport_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-24T15:36:36Z",
+      "side": 0,
+      "message": "Drift compensation is now always disabled.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 79
+      },
+      "revId": "645512ba5966fa155b0c818ec35bbf0d28fb2253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "303c6cd1_53b50c1c",
+        "filename": "media/engine/apm_helpers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-24T15:36:36Z",
+      "side": 0,
+      "message": "These settings are now either\n1. permanently configured to be as below,\n2. accessible through AudioProcessing::Config as this CL does, or\n3. AECM comfort noise, which will always be off, but the setting itself will need a PSA for removing from the API so as not to break any builds. It\u0027s been implicitly announced in another PSA, but it wasn\u0027t the main subject of the PSA.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 54
+      },
+      "revId": "645512ba5966fa155b0c818ec35bbf0d28fb2253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d48693e3_3f495e90",
+        "filename": "media/engine/apm_helpers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-24T15:36:36Z",
+      "side": 0,
+      "message": "Always enabled, metrics are now acquired through AudioProcessing::GetStatistics API.",
+      "range": {
+        "startLine": 117,
+        "startChar": 5,
+        "endLine": 117,
+        "endChar": 23
+      },
+      "revId": "645512ba5966fa155b0c818ec35bbf0d28fb2253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
