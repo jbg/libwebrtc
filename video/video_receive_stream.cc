@@ -458,5 +458,10 @@ bool VideoReceiveStream::Decode() {
   }
   return true;
 }
+
+std::vector<webrtc::RtpSource> VideoReceiveStream::GetSources() const {
+  return rtp_video_stream_receiver_.GetSources();
+}
+
 }  // namespace internal
 }  // namespace webrtc

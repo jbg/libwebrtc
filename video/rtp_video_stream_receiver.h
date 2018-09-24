@@ -29,6 +29,7 @@
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/source/contributing_sources.h"
 #include "modules/video_coding/h264_sps_pps_tracker.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/packet_buffer.h"
@@ -134,6 +135,8 @@ class RtpVideoStreamReceiver : public RtpData,
   void AddSecondarySink(RtpPacketSinkInterface* sink);
   void RemoveSecondarySink(const RtpPacketSinkInterface* sink);
 
+  std::vector<webrtc::RtpSource> GetSources() const;
+
  private:
   // Entry point doing non-stats work for a received packet. Called
   // for the same packet both before and after RED decapsulation.
@@ -191,6 +194,11 @@ class RtpVideoStreamReceiver : public RtpData,
 
   std::vector<RtpPacketSinkInterface*> secondary_sinks_
       RTC_GUARDED_BY(worker_task_checker_);
+
+  // Info for GetSources and GetSyncInfo is updated on network or worker thread,
+  // queried on the worker thread.
+  rtc::CriticalSection rtp_sources_lock_;
+  ContributingSources contributing_sources_ RTC_GUARDED_BY(&rtp_sources_lock_);
 };
 
 }  // namespace webrtc
