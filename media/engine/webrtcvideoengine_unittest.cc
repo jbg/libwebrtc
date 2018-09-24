@@ -965,6 +965,25 @@ TEST_F(WebRtcVideoEngineTest, RegisterH264DecoderIfSupported) {
   ASSERT_EQ(1u, decoder_factory_->decoders().size());
 }
 
+// Tests when GetSources is called with non-existing ssrc, it will return an
+// empty list of RtpSource without crashing.
+TEST_F(WebRtcVideoEngineTest, GetSourcesWithNonExistingSsrc) {
+  // Setup an recv stream with |kSsrc|.
+  encoder_factory_->AddSupportedVideoCodecType("VP8");
+  decoder_factory_->AddSupportedVideoCodecType(webrtc::SdpVideoFormat("VP8"));
+  cricket::VideoRecvParameters parameters;
+  parameters.codecs.push_back(GetEngineCodec("VP8"));
+  std::unique_ptr<VideoMediaChannel> channel(
+      SetRecvParamsWithSupportedCodecs(parameters.codecs));
+
+  EXPECT_TRUE(
+      channel->AddRecvStream(cricket::StreamParams::CreateLegacy(kSsrc)));
+
+  // Call GetSources with |kSsrc + 1| which doesn't exist.
+  std::vector<webrtc::RtpSource> sources = channel->GetSources(kSsrc + 1);
+  EXPECT_EQ(0u, sources.size());
+}
+
 TEST(WebRtcVideoEngineNewVideoCodecFactoryTest, NullFactories) {
   std::unique_ptr<webrtc::VideoEncoderFactory> encoder_factory;
   std::unique_ptr<webrtc::VideoDecoderFactory> decoder_factory;
