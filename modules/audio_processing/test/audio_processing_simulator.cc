@@ -21,6 +21,7 @@
 #include "api/audio/echo_canceller3_factory.h"
 #include "common_audio/include/audio_util.h"
 #include "modules/audio_processing/aec_dump/aec_dump_factory.h"
+#include "modules/audio_processing/echo_control_mobile_impl.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/test/fake_recording_device.h"
 #include "rtc_base/checks.h"
@@ -1035,16 +1036,16 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
   }
 
   if (settings_.aecm_routing_mode) {
-    RTC_CHECK_EQ(AudioProcessing::kNoError,
-                 ap_->echo_control_mobile()->set_routing_mode(
-                     static_cast<webrtc::EchoControlMobile::RoutingMode>(
-                         *settings_.aecm_routing_mode)));
+    auto routing_mode = static_cast<webrtc::EchoControlMobileImpl::RoutingMode>(
+        *settings_.aecm_routing_mode != EchoControlMobileImpl::kSpeakerphone);
+    if (routing_mode != webrtc::EchoControlMobileImpl::kSpeakerphone) {
+      RTC_LOG(LS_ERROR) << "Ignoring deprecated setting: AECM routing mode: "
+                        << routing_mode;
+    }
   }
 
-  if (settings_.use_aecm_comfort_noise) {
-    RTC_CHECK_EQ(AudioProcessing::kNoError,
-                 ap_->echo_control_mobile()->enable_comfort_noise(
-                     *settings_.use_aecm_comfort_noise));
+  if (settings_.use_aecm_comfort_noise && *settings_.use_aecm_comfort_noise) {
+    RTC_LOG(LS_ERROR) << "Ignoring deprecated setting: AECM comfort noise";
   }
 
   if (settings_.vad_likelihood) {
