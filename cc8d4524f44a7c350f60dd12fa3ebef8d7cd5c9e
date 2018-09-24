@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "4fae81e6_00941130",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-24T15:10:15Z",
+      "side": 1,
+      "message": "This spec says \"The browser MUST keep information from RTP packets received in the previous 10 seconds.\" Is there any way that receive_streams_ may be modified such that history is erased? If so, when?",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1081f4c2_a1155271",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-24T15:10:15Z",
+      "side": 1,
+      "message": "nit: Should we use rtc::SetClockForTesting() to ensure the source is not removed even if the bot freezes for 10s?",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bf0e502_2c061062",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-24T15:10:15Z",
+      "side": 1,
+      "message": "Can we add a test on this layer that tests the case where the SSRC does exist?\n\nRegardless of layers, the following behaviors would be nice to test:\n- Injecting an RTP packet should add a source.\n- Injecting another RTP packet should update the timestamp.\n- Advancing time by 10s should remove the source.\n- Is SSRC switching a valid use case that should be tested? See other comment.",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b7ee532_ae16dcd7",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4322,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-24T15:10:15Z",
+      "side": 1,
+      "message": "Nitty but: What do you think about splitting this up into two tests? Avoiding loops and testing audio and video behaviors separately makes test failures more explicit (which media type failed, which actual line). Code reusibility is a lesser concern inside of tests, but you do end up with two almost identical tests.",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd03aefa_27b570d7",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 3
@@ -19,6 +87,23 @@
         "endLine": 4333,
         "endChar": 5
       },
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77b303ee_637f4b87",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-24T15:10:15Z",
+      "side": 1,
+      "message": "This assumes we only ever have one SSRC per receiver. Is this correct? I thought it was possible for multiple SSRCs to go to the same receiver, like special codecs or multiple layers or other magic? +hta\n\nIf so I\u0027m wondering if we need ContributingSources to be a helper class for both SSRCs and CSRCs (renaming it RtpSourcesRecord or something) so that we can do this above where we now only update contributing_sources_:\nsynchronization_sources_.Update(now_ms, {packet.Ssrc()});",
       "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
