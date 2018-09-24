@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44b404bf_d2845ca5",
+        "filename": "api/test/test_dependency_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-09-24T11:20:47Z",
+      "side": 1,
+      "message": "I guess I should make this thread safe?",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "150e13f3d94d2d6d9d2d9f0dc1b67fdb1edd4570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
