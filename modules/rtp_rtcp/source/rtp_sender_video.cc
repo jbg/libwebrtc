@@ -327,7 +327,8 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
                                size_t payload_size,
                                const RTPFragmentationHeader* fragmentation,
                                const RTPVideoHeader* video_header,
-                               int64_t expected_retransmission_time_ms) {
+                               int64_t expected_retransmission_time_ms,
+                               FrameEncryptorInterface* frame_encryptor) {
   if (payload_size == 0)
     return false;
   RTC_CHECK(video_header);
@@ -415,6 +416,11 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
   const uint8_t temporal_id = GetTemporalId(*video_header);
   StorageType storage = GetStorageType(temporal_id, retransmission_settings,
                                        expected_retransmission_time_ms);
+
+  if (frame_encryptor != nullptr) {
+    // TODO(benwright) Encrypt the outgoing payload.
+  }
+
   size_t num_packets = packetizer->NumPackets();
 
   if (num_packets == 0)

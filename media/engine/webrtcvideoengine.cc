@@ -1057,6 +1057,7 @@ bool WebRtcVideoChannel::AddSendStream(const StreamParams& sp) {
   config.encoder_settings.experiment_cpu_load_estimator =
       video_config_.experiment_cpu_load_estimator;
   config.encoder_settings.encoder_factory = encoder_factory_;
+  config.frame_encryptor = frame_encryptor_;
 
   WebRtcVideoSendStream* stream = new WebRtcVideoSendStream(
       call_, sp, std::move(config), default_send_options_,
@@ -1179,6 +1180,7 @@ bool WebRtcVideoChannel::AddRecvStream(const StreamParams& sp,
   if (!sp.stream_ids().empty()) {
     config.sync_group = sp.stream_ids()[0];
   }
+  config.frame_decryptor = frame_decryptor_;
 
   receive_streams_[ssrc] = new WebRtcVideoReceiveStream(
       call_, sp, std::move(config), decoder_factory_, default_stream,
@@ -1466,6 +1468,15 @@ void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
   // ideal value should be.
   MediaChannel::SetOption(NetworkInterface::ST_RTP, rtc::Socket::OPT_SNDBUF,
                           kVideoRtpBufferSize);
+}
+
+void WebRtcVideoChannel::SetFrameDecryptor(
+    webrtc::FrameDecryptorInterface* frame_decryptor) {
+  frame_decryptor_ = frame_decryptor;
+  rtc::CritScope stream_lock(&stream_crit_);
+  for (auto it = receive_streams_.begin(); it != receive_streams_.end(); ++it) {
+    it->second->SetFrameDecryptor(frame_decryptor);
+  }
 }
 
 absl::optional<uint32_t> WebRtcVideoChannel::GetDefaultReceiveStreamSsrc() {
@@ -2446,6 +2457,12 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::OnFrame(
 
 bool WebRtcVideoChannel::WebRtcVideoReceiveStream::IsDefaultStream() const {
   return default_stream_;
+}
+
+void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFrameDecryptor(
+    webrtc::FrameDecryptorInterface* frame_decryptor) {
+  config_.frame_decryptor = frame_decryptor;
+  stream_->SetFrameDecryptor(frame_decryptor);
 }
 
 void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetSink(

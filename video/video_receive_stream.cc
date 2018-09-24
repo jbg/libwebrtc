@@ -116,6 +116,7 @@ VideoReceiveStream::VideoReceiveStream(
   RTC_DCHECK(process_thread_);
   RTC_DCHECK(call_stats_);
 
+  frame_decryptor_ = config_.frame_decryptor;
   module_process_sequence_checker_.Detach();
 
   RTC_DCHECK(!config_.decoders.empty());
@@ -459,5 +460,11 @@ bool VideoReceiveStream::Decode() {
   }
   return true;
 }
+
+void VideoReceiveStream::SetFrameDecryptor(
+    FrameDecryptorInterface* frame_decryptor) {
+  frame_decryptor_ = frame_decryptor;
+}
+
 }  // namespace internal
 }  // namespace webrtc

@@ -111,6 +111,7 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   absl::optional<Syncable::Info> GetInfo() const override;
   uint32_t GetPlayoutTimestamp() const override;
   void SetMinimumPlayoutDelay(int delay_ms) override;
+  void SetFrameDecryptor(FrameDecryptorInterface* frame_decryptor) override;
 
  private:
   static void DecodeThreadFunction(void* ptr);
@@ -160,6 +161,8 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   bool frame_decoded_ = false;
 
   int64_t last_keyframe_request_ms_ = 0;
+
+  FrameDecryptorInterface* frame_decryptor_ = nullptr;
 };
 }  // namespace internal
 }  // namespace webrtc

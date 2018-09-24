@@ -402,7 +402,8 @@ bool ModuleRtpRtcpImpl::SendOutgoingData(
     size_t payload_size,
     const RTPFragmentationHeader* fragmentation,
     const RTPVideoHeader* rtp_video_header,
-    uint32_t* transport_frame_id_out) {
+    uint32_t* transport_frame_id_out,
+    FrameEncryptorInterface* frame_encryptor) {
   rtcp_sender_.SetLastRtpTime(time_stamp, capture_time_ms);
   // Make sure an RTCP report isn't queued behind a key frame.
   if (rtcp_sender_.TimeToSendRTCPReport(kVideoFrameKey == frame_type)) {
@@ -421,7 +422,7 @@ bool ModuleRtpRtcpImpl::SendOutgoingData(
   return rtp_sender_->SendOutgoingData(
       frame_type, payload_type, time_stamp, capture_time_ms, payload_data,
       payload_size, fragmentation, rtp_video_header, transport_frame_id_out,
-      expected_retransmission_time_ms);
+      expected_retransmission_time_ms, frame_encryptor);
 }
 
 bool ModuleRtpRtcpImpl::TimeToSendPacket(uint32_t ssrc,
