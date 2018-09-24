@@ -22,6 +22,30 @@
       "revId": "8c7ff47a4f240ba8bca93c3234e4451316b675f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7b9be47_9be49f78",
+        "filename": "modules/audio_processing/aec3/suppression_gain.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-09-24T07:20:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "10611621_4e8d1d47",
+      "range": {
+        "startLine": 77,
+        "startChar": 23,
+        "endLine": 77,
+        "endChar": 28
+      },
+      "revId": "8c7ff47a4f240ba8bca93c3234e4451316b675f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
