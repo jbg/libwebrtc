@@ -525,6 +525,24 @@
     },
     {
       "key": {
+        "uuid": "49d7ce17_a50e574d",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-24T15:26:11Z",
+      "side": 1,
+      "message": "Feel free to suggest another placement.",
+      "parentUuid": "f7ac2280_4634375c",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46792348_fb36275b",
         "filename": "logging/rtc_event_log/rtc_event_processor.h",
         "patchSetId": 2
@@ -1578,6 +1596,24 @@
       "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed16cb20_548a8d18",
+        "filename": "logging/rtc_event_log/rtc_event_processor_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-24T15:26:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56aa68ef_fbf5203e",
+      "revId": "e194bf3bdccfd0737904e7348b633b6093a4983b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
