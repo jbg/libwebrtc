@@ -16,6 +16,24 @@
       "revId": "84df1c724e91af36569e6cf9aa9e6a4345746c2b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "430cf22a_4c14261e",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-24T12:25:17Z",
+      "side": 0,
+      "message": "I added an empty line between last include and the namespace.\nNot sure if that counts as \"whitespace change\".\nI think the empty line is according to style guide.\nDone",
+      "parentUuid": "4fdcaf25_e606a78a",
+      "revId": "84df1c724e91af36569e6cf9aa9e6a4345746c2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
