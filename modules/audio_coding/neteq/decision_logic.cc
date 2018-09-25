@@ -59,6 +59,8 @@ DecisionLogic::DecisionLogic(int fs_hz,
       timescale_countdown_(
           tick_timer_->GetNewCountdown(kMinTimescaleInterval + 1)),
       num_consecutive_expands_(0),
+      num_consecutive_non_expands_(0),
+      detected_toggling_(false),
       postpone_decoding_after_expand_(field_trial::IsEnabled(
           "WebRTC-Audio-NetEqPostponeDecodingAfterExpand")) {
   delay_manager_->set_streaming_mode(false);
@@ -75,6 +77,7 @@ void DecisionLogic::Reset() {
   prev_time_scale_ = false;
   timescale_countdown_.reset();
   num_consecutive_expands_ = 0;
+  num_consecutive_non_expands_ = 0;
 }
 
 void DecisionLogic::SoftReset() {
@@ -164,10 +167,12 @@ Operations DecisionLogic::GetDecision(const SyncBuffer& sync_buffer,
   // if the mute factor is low enough (otherwise the expansion was short enough
   // to not be noticable).
   // Note that the MuteFactor is in Q14, so a value of 16384 corresponds to 1.
-  if (postpone_decoding_after_expand_ && prev_mode == kModeExpand &&
+  if (postpone_decoding_after_expand_ &&
+      prev_mode == kModeExpand &&
+      detected_toggling_ &&
       !packet_buffer_.ContainsDtxOrCngPacket(decoder_database_) &&
-      cur_size_samples<static_cast<size_t>(delay_manager_->TargetLevel() *
-                                           packet_length_samples_)>> 8 &&
+      cur_size_samples < static_cast<size_t>(delay_manager_->TargetLevel() *
+                                             packet_length_samples_) >> 8 &&
       expand.MuteFactor(0) < 16384 / 2) {
     return kExpand;
   }
@@ -191,9 +196,17 @@ Operations DecisionLogic::GetDecision(const SyncBuffer& sync_buffer,
 
 void DecisionLogic::ExpandDecision(Operations operation) {
   if (operation == kExpand) {
+    if (num_consecutive_non_expands_ != 0 &&
+        num_consecutive_non_expands_ < kMinConsecutiveNonExpands) {
+      // There were normal operations before this expansion, but not many.
+      detected_toggling_ = true;
+    }
+    num_consecutive_non_expands_ = 0;
     num_consecutive_expands_++;
   } else {
     num_consecutive_expands_ = 0;
+    num_consecutive_non_expands_++;
+    detected_toggling_ = false;
   }
 }
 

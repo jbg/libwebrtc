@@ -43,6 +43,7 @@ class DecisionLogic final {
 
   static const int kReinitAfterExpands = 100;
   static const int kMaxWaitForPacket = 10;
+  static const int kMinConsecutiveNonExpands = 7;
 
   // Constructor.
   DecisionLogic(int fs_hz,
@@ -181,6 +182,8 @@ class DecisionLogic final {
   bool disallow_time_stretching_;
   std::unique_ptr<TickTimer::Countdown> timescale_countdown_;
   int num_consecutive_expands_;
+  size_t num_consecutive_non_expands_;
+  bool detected_toggling_;
   const bool postpone_decoding_after_expand_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DecisionLogic);
