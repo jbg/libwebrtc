@@ -78,6 +78,48 @@
     },
     {
       "key": {
+        "uuid": "80a558f5_46d20718",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "This code is *identical* to that of audio handling.\nSo if that is OK, then this is ok.\nIf that is not ok, I think it should be a separate bug, not strictly related to this.\n\nWDYT?",
+      "parentUuid": "4fae81e6_00941130",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fcb8557_e94adae2",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2811e38_3568cd31",
+      "range": {
+        "startLine": 1490,
+        "startChar": 11,
+        "endLine": 1490,
+        "endChar": 43
+      },
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1081f4c2_a1155271",
         "filename": "media/engine/webrtcvideoengine_unittest.cc",
         "patchSetId": 3
@@ -92,6 +134,24 @@
       "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66b5785f_a8f5f6d6",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "done in newly added test.",
+      "parentUuid": "1081f4c2_a1155271",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -112,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "1cdbc3c4_1d6c3979",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf0e502_2c061062",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b7ee532_ae16dcd7",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 3
@@ -126,6 +204,24 @@
       "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbce20b9_2d7dbaee",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4322,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b7ee532_ae16dcd7",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -152,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "f936b0dc_56e45207",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4333,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "split the test instead.\nDone",
+      "parentUuid": "dd03aefa_27b570d7",
+      "range": {
+        "startLine": 4320,
+        "startChar": 0,
+        "endLine": 4333,
+        "endChar": 5
+      },
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77b303ee_637f4b87",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 3
@@ -163,6 +283,24 @@
       "writtenOn": "2018-09-24T15:10:15Z",
       "side": 1,
       "message": "This assumes we only ever have one SSRC per receiver. Is this correct? I thought it was possible for multiple SSRCs to go to the same receiver, like special codecs or multiple layers or other magic? +hta\n\nIf so I\u0027m wondering if we need ContributingSources to be a helper class for both SSRCs and CSRCs (renaming it RtpSourcesRecord or something) so that we can do this above where we now only update contributing_sources_:\nsynchronization_sources_.Update(now_ms, {packet.Ssrc()});",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c88b1e1_95cf7fac",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2018-09-25T09:04:13Z",
+      "side": 1,
+      "message": "I think it\u0027s safe.\n\n1) multiple layers: In that case the same SSRC is used (which is in fact quite confusing!)\nI\u0027m not sure if vice sets the CSRC either in that case :(\n\n2) special codecs: checked with brandtr@\nflex-fec uses different SSRC. But does not really need to be shown here.\nMaybe one might argue that these should be show in contributing sources??\nBut that also feels like a different discussion.\n\n3) Other magic: checked with Magica de Hex, but she was busy with potions right now,\nand promised to get back after perf.\n\nWDYT?",
+      "parentUuid": "77b303ee_637f4b87",
       "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
