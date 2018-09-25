@@ -304,6 +304,24 @@
       "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b91076e_1d20626a",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-25T09:27:45Z",
+      "side": 1,
+      "message": "\u003e 2) special codecs: checked with brandtr@\n\u003e flex-fec uses different SSRC. But does not really need to be shown here.\n\u003e Maybe one might argue that these should be show in contributing sources??\n\u003e But that also feels like a different discussion.\n\nPackets on the flexfec ssrc should be demuxed to FlexfecReceiver::OnRtpPacket. Packets *recovered* by flexfec will enter OnRtpPacket here (if and only if they have our ssrc), and hence be accounted for. Which sounds reasonable to me.\n\nNot sure how things will change with MID demuxing, but I hope we can\u0027t have mid-stream ssrc changes.",
+      "parentUuid": "9c88b1e1_95cf7fac",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
