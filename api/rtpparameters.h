@@ -303,6 +303,9 @@ struct RtpExtension {
   // https://tools.ietf.org/html/rfc6904
   static const char kEncryptHeaderExtensionsUri[];
 
+  static const char kGenericDescriptorExtensionUri[];
+  static const int kGenericDescriptorExtensionId;
+
   // Inclusive min and max IDs for one-byte header extensions, per RFC5285.
   static const int kMinId;
   static const int kMaxId;
