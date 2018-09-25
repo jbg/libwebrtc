@@ -136,6 +136,11 @@ const int RtpExtension::kFrameMarkingDefaultId = 10;
 const char RtpExtension::kEncryptHeaderExtensionsUri[] =
     "urn:ietf:params:rtp-hdrext:encrypt";
 
+const char RtpExtension::kGenericDescriptorExtensionUri[] =
+    "http://www.webrtc.org/experiments/rtp-hdrext/"
+    "generic-frame-descriptor-v00";
+const int RtpExtension::kGenericDescriptorExtensionId = 10;
+
 const int RtpExtension::kMinId = 1;
 const int RtpExtension::kMaxId = 14;
 
@@ -154,7 +159,8 @@ bool RtpExtension::IsSupportedForVideo(const std::string& uri) {
          uri == webrtc::RtpExtension::kVideoContentTypeUri ||
          uri == webrtc::RtpExtension::kVideoTimingUri ||
          uri == webrtc::RtpExtension::kMidUri ||
-         uri == webrtc::RtpExtension::kFrameMarkingUri;
+         uri == webrtc::RtpExtension::kFrameMarkingUri ||
+         uri == webrtc::RtpExtension::kGenericDescriptorExtensionUri;
 }
 
 bool RtpExtension::IsEncryptionSupported(const std::string& uri) {
