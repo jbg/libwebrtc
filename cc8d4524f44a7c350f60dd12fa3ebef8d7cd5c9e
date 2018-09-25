@@ -19,6 +19,47 @@
     },
     {
       "key": {
+        "uuid": "ea957b86_641a13f8",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-25T08:35:32Z",
+      "side": 1,
+      "message": "After a quick search, it seems streams can be destroyed on call to PeerConnection::SetRemoteDescription, and from the logic for unsignalled streams (which I don\u0027t quite understand).\n\nI guess there are a couple of cases:\n\n1. A stream is destroyed and recreated with the same ssrc. In this case, history is lost. Maybe it should be retained in some way, but I wouldn\u0027t expect much of practical problems?\n\n2. Asking for GetSources() on an ssrc that has no associated stream object, but might have had one less than 10s ago. Do the web apis provide a way to do that? Can we have a w3c RtpReceiver without a corresponding stream in webrtcvideoengine?\n\nOr generally, keeping stats for *all* received rtp packets, even if we discard them without passing them on to any stream. We could do that somewhere close to the RTP demuxer, but we\u0027d need some limits to not exhaust memory if we receive evil packets using a huge number of distinct ssrcs.",
+      "parentUuid": "4fae81e6_00941130",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2811e38_3568cd31",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-25T08:35:32Z",
+      "side": 1,
+      "message": "This could also be \"return {}\", right?",
+      "range": {
+        "startLine": 1490,
+        "startChar": 11,
+        "endLine": 1490,
+        "endChar": 43
+      },
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1081f4c2_a1155271",
         "filename": "media/engine/webrtcvideoengine_unittest.cc",
         "patchSetId": 3
