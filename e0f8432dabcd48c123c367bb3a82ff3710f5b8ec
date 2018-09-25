@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f872403e_bcaf9f05",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-09-25T07:52:42Z",
+      "side": 1,
+      "message": "I\u0027d prefer if this only deactivated audio BWE if audio has a different DSCP level compared to video.",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 30
+      },
+      "revId": "e0f8432dabcd48c123c367bb3a82ff3710f5b8ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
