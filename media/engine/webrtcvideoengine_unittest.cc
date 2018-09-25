@@ -17,6 +17,7 @@
 #include "api/rtpparameters.h"
 #include "api/test/mock_video_decoder_factory.h"
 #include "api/test/mock_video_encoder_factory.h"
+#include "api/units/time_delta.h"
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "api/video_codecs/sdp_video_format.h"
@@ -963,6 +964,25 @@ TEST_F(WebRtcVideoEngineTest, RegisterH264DecoderIfSupported) {
   EXPECT_TRUE(
       channel->AddRecvStream(cricket::StreamParams::CreateLegacy(kSsrc)));
   ASSERT_EQ(1u, decoder_factory_->decoders().size());
+}
+
+// Tests when GetSources is called with non-existing ssrc, it will return an
+// empty list of RtpSource without crashing.
+TEST_F(WebRtcVideoEngineTest, GetSourcesWithNonExistingSsrc) {
+  // Setup an recv stream with |kSsrc|.
+  encoder_factory_->AddSupportedVideoCodecType("VP8");
+  decoder_factory_->AddSupportedVideoCodecType(webrtc::SdpVideoFormat("VP8"));
+  cricket::VideoRecvParameters parameters;
+  parameters.codecs.push_back(GetEngineCodec("VP8"));
+  std::unique_ptr<VideoMediaChannel> channel(
+      SetRecvParamsWithSupportedCodecs(parameters.codecs));
+
+  EXPECT_TRUE(
+      channel->AddRecvStream(cricket::StreamParams::CreateLegacy(kSsrc)));
+
+  // Call GetSources with |kSsrc + 1| which doesn't exist.
+  std::vector<webrtc::RtpSource> sources = channel->GetSources(kSsrc + 1);
+  EXPECT_EQ(0u, sources.size());
 }
 
 TEST(WebRtcVideoEngineNewVideoCodecFactoryTest, NullFactories) {
@@ -6698,6 +6718,38 @@ TEST_F(WebRtcVideoChannelSimulcastTest,
        NoSimulcastScreenshareWithoutConference) {
   VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 1, true,
                           false);
+}
+
+// Test GetSources.
+TEST_F(WebRtcVideoChannelBaseTest, GetSources) {
+  uint8_t data1[] = {0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+  int64_t now = rtc::TimeMillis();
+  rtc::ScopedFakeClock fake_clock_;
+  fake_clock_.AdvanceTime(webrtc::TimeDelta::ms(now));
+
+  rtc::CopyOnWriteBuffer packet1(data1, sizeof(data1));
+  rtc::SetBE32(packet1.data() + 8, kSsrc);
+  channel_->SetSink(kDefaultReceiveSsrc, NULL);
+  EXPECT_TRUE(SetDefaultCodec());
+  EXPECT_TRUE(SetSend(true));
+  EXPECT_EQ(0, renderer_.num_rendered_frames());
+  channel_->OnPacketReceived(&packet1, rtc::PacketTime());
+
+  std::vector<webrtc::RtpSource> sources = channel_->GetSources(kSsrc);
+  EXPECT_EQ(1u, sources.size());
+  int64_t timestamp1 = sources[0].timestamp_ms();
+
+  // a new packet.
+  fake_clock_.AdvanceTime(webrtc::TimeDelta::ms(1));
+  channel_->OnPacketReceived(&packet1, rtc::PacketTime());
+  int64_t timestamp2 = channel_->GetSources(kSsrc)[0].timestamp_ms();
+  EXPECT_GT(timestamp2, timestamp1);
+
+  // It only keeps 10s of history.
+  fake_clock_.AdvanceTime(webrtc::TimeDelta::seconds(10));
+  fake_clock_.AdvanceTime(webrtc::TimeDelta::ms(1));
+  EXPECT_EQ(0u, channel_->GetSources(kSsrc).size());
 }
 
 }  // namespace cricket

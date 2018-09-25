@@ -4304,20 +4304,38 @@ TEST_P(PeerConnectionIntegrationTest, CodecNamesAreCaseInsensitive) {
   ASSERT_TRUE(ExpectNewFrames(media_expectations));
 }
 
-TEST_P(PeerConnectionIntegrationTest, GetSources) {
+TEST_P(PeerConnectionIntegrationTest, GetSourcesAudio) {
   ASSERT_TRUE(CreatePeerConnectionWrappers());
   ConnectFakeSignaling();
   caller()->AddAudioTrack();
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
-  // Wait for one audio frame to be received by the callee.
+  // Wait for one audio frame and one video frame to be received by the callee.
   MediaExpectations media_expectations;
   media_expectations.CalleeExpectsSomeAudio(1);
   ASSERT_TRUE(ExpectNewFrames(media_expectations));
-  ASSERT_GT(callee()->pc()->GetReceivers().size(), 0u);
+  ASSERT_EQ(callee()->pc()->GetReceivers().size(), 1u);
   auto receiver = callee()->pc()->GetReceivers()[0];
   ASSERT_EQ(receiver->media_type(), cricket::MEDIA_TYPE_AUDIO);
+  auto contributing_sources = receiver->GetSources();
+  ASSERT_GT(receiver->GetParameters().encodings.size(), 0u);
+  EXPECT_EQ(receiver->GetParameters().encodings[0].ssrc,
+            contributing_sources[0].source_id());
+}
 
+TEST_P(PeerConnectionIntegrationTest, GetSourcesVideo) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+  caller()->AddVideoTrack();
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  // Wait for one audio frame and one video frame to be received by the callee.
+  MediaExpectations media_expectations;
+  media_expectations.CalleeExpectsSomeVideo(1);
+  ASSERT_TRUE(ExpectNewFrames(media_expectations));
+  ASSERT_EQ(callee()->pc()->GetReceivers().size(), 1u);
+  auto receiver = callee()->pc()->GetReceivers()[0];
+  ASSERT_EQ(receiver->media_type(), cricket::MEDIA_TYPE_VIDEO);
   auto contributing_sources = receiver->GetSources();
   ASSERT_GT(receiver->GetParameters().encodings.size(), 0u);
   EXPECT_EQ(receiver->GetParameters().encodings[0].ssrc,
