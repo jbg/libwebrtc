@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d401e636_f5c52075",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-25T14:29:49Z",
+      "side": 1,
+      "message": "this constant deserve an explanation.\n(it should be maximum size extension may use)",
+      "range": {
+        "startLine": 78,
+        "startChar": 46,
+        "endLine": 78,
+        "endChar": 48
+      },
+      "revId": "748eee360ec3a90f8b2fe2a28771770d073ceea7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5abd674b_47a2605b",
+        "filename": "test/call_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-09-25T14:29:49Z",
+      "side": 1,
+      "message": "you might use Uri from the RtpExtension itself, like previous two extensions do.\nNo need for extra include then.",
+      "range": {
+        "startLine": 243,
+        "startChar": 19,
+        "endLine": 243,
+        "endChar": 59
+      },
+      "revId": "748eee360ec3a90f8b2fe2a28771770d073ceea7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
