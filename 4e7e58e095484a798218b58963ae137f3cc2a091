@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "b472c6b3_121dddd8",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-25T14:31:21Z",
+      "side": 1,
+      "message": "Ah, I remember now, Anton is right: webrtc::EncodedImage contains a frame type, therefore, we  don\u0027t need another one here.\n\nhttps://webrtc.googlesource.com/src/+/master/common_video/include/video_frame.h#66",
+      "parentUuid": "b76c70d5_acf03b65",
+      "revId": "4e7e58e095484a798218b58963ae137f3cc2a091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be90a593_3415e033",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2
