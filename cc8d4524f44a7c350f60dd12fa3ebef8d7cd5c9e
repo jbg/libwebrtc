@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "1c427d90_1ae66701",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-25T08:50:48Z",
+      "side": 1,
+      "message": "As the spec is written today, if setRemoteDescription() repurposes  the receiver to be used with different SSRCs, and history is cleared as a side-effect, that would be a bug because the spec says \"any RTP packets that have been received to this receiver the last 10s\". But I\u0027m not sure it should be a bug, it might not be bad idea to do so in that case? Not sure if code or spec should be updated, that type of bug that only happens on renegotiation I would be less concerned about.\n\nIf however SSRCs can be switched out on the fly while a receiver is active and we lose history even in cases where we are actively using a receiver we may have a significant problem.",
+      "parentUuid": "ea957b86_641a13f8",
+      "revId": "cc8d4524f44a7c350f60dd12fa3ebef8d7cd5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1081f4c2_a1155271",
         "filename": "media/engine/webrtcvideoengine_unittest.cc",
         "patchSetId": 3
