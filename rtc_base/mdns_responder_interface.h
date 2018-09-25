@@ -24,14 +24,14 @@ namespace webrtc {
 
 // Defines an mDNS responder that can be used in ICE candidate gathering, where
 // the local IP addresses of host candidates are obfuscated by mDNS hostnames.
-class MDnsResponderInterface {
+class MdnsResponderInterface {
  public:
   using NameCreatedCallback =
       std::function<void(const rtc::IPAddress&, const std::string&)>;
   using NameRemovedCallback = std::function<void(bool)>;
 
-  MDnsResponderInterface() = default;
-  virtual ~MDnsResponderInterface() = default;
+  MdnsResponderInterface() = default;
+  virtual ~MdnsResponderInterface() = default;
 
   // Asynchronously creates a type-4 UUID hostname for an IP address. The
   // created name should be given to |callback| with the address that it
