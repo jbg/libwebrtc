@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "abb2c887_183c73ce",
+        "filename": "modules/congestion_controller/goog_cc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Because it\u0027s required for some dependencies to the scenario target.",
+      "parentUuid": "cc9d7543_4083cc80",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 5
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09b8f363_78e63534",
         "filename": "test/scenario/instant_client.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c62e167_9021136f",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09b8f363_78e63534",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "322a172e_110abea3",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Yes, but rewrote this function to make it easier to follow.",
+      "parentUuid": "396deaed_ef2c9fb5",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 77
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e664114_e53d46e6",
         "filename": "test/scenario/instant_client.cc",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cba40d4_89bcbe4c",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5e664114_e53d46e6",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 54
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "b846fd62_de0bc480",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5ca885_05b4b9f2",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "375ce35e_2383fd61",
         "filename": "test/scenario/instant_client.cc",
         "patchSetId": 1
@@ -131,6 +251,24 @@
       "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b5c8ca1_9fa595a6",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Updated the code including a comment on lost packets.",
+      "parentUuid": "375ce35e_2383fd61",
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "8786701b_ae05e8f7",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f14ae1d1_9dfc52f6",
+      "range": {
+        "startLine": 116,
+        "startChar": 71,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "273aab81_f5bd32ea",
         "filename": "test/scenario/instant_client.cc",
         "patchSetId": 1
@@ -168,6 +330,24 @@
       "writtenOn": "2018-09-26T08:25:27Z",
       "side": 1,
       "message": "This function basically emulates pacing buffer and congestion window. I propose naming accordingly, or adding a comment that is what it does.\n\nAlso: why is this emulated? I see PB and CWIN as integral parts of rate control. If we emulate it wrongly or too simplified, we may make wrong conclusions. That is, why is prod code not used here?",
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47c24118_81117c9e",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Renamed the function to include that it does pacing.\n\nIt is emulated since PacedSender currently requires running in real time on a process thread. It would be nice to refactor this behavior to a shared component that is thread and time agnostic, but I think that might be a larger project.\n\nThe implementation should be identical to the pacer implementation for the currently supported use case (not separate treatment of audio and video etc.) from the perspective of what the congestion controller should expect.",
+      "parentUuid": "273aab81_f5bd32ea",
       "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -197,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "130f8232_6445d55d",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26e230f7_67a3a879",
+      "range": {
+        "startLine": 178,
+        "startChar": 24,
+        "endLine": 178,
+        "endChar": 40
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1b1d528_f797374f",
         "filename": "test/scenario/instant_client.cc",
         "patchSetId": 1
@@ -214,6 +418,24 @@
     },
     {
       "key": {
+        "uuid": "e2f20cda_4bc0b9d4",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b1d528_f797374f",
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7166a3a0_11e3ac83",
         "filename": "test/scenario/instant_client.cc",
         "patchSetId": 1
@@ -225,6 +447,30 @@
       "writtenOn": "2018-09-26T08:25:27Z",
       "side": 1,
       "message": "This does even distribution of bandwidth between all streams which is not really realistic. Should be pointed out as a limitation/approximation in a comment.\n\nGiven that, is there actually any point in having the testbed support multiple streams?",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 1
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba908010_9526f8f3",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "I think it could be useful to simulate having streams with different packet size distribution. (eg. a video stream at low fps combined with audio at high fps)\n\nI\u0027m thinking of this code mostly as a way to enable functional testing of the congestion controllers rather than as a completely realistic simulation. For the full simulation, the full scenario client is more useful.\n\nBut in units tests we want to ensure that we don\u0027t fail on acceptable inputs (such as having streams with two different packets sizes)\n\nAdded a TODO about using the actual bitrate allocator code for this.",
+      "parentUuid": "7166a3a0_11e3ac83",
       "range": {
         "startLine": 265,
         "startChar": 0,
@@ -260,6 +506,30 @@
     },
     {
       "key": {
+        "uuid": "452af2f6_bf4ab949",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Replaced with GetNetworkControllerProcessInterval",
+      "parentUuid": "146135f2_c5891a27",
+      "range": {
+        "startLine": 301,
+        "startChar": 28,
+        "endLine": 301,
+        "endChar": 38
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea015283_4df0d052",
         "filename": "test/scenario/scenario_config.h",
         "patchSetId": 1
@@ -283,6 +553,30 @@
     },
     {
       "key": {
+        "uuid": "3bd1d160_316021d2",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea015283_4df0d052",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6cbf0c4d_5a20ec40",
         "filename": "test/scenario/scenario_config.h",
         "patchSetId": 1
@@ -303,6 +597,30 @@
       "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "983bcf88_1b8824d2",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-09-26T12:45:06Z",
+      "side": 1,
+      "message": "Replaced with keyframe_multiplier.",
+      "parentUuid": "6cbf0c4d_5a20ec40",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 44
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
