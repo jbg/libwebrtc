@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c6b65d20_9e8f4a93",
+        "filename": "media/engine/webrtcvideoengine.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-09-26T13:22:51Z",
+      "side": 1,
+      "message": "I think inlining in the class definition is discouraged. Please move to implementation file.",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 366,
+        "endChar": 0
+      },
+      "revId": "7b6bfb4167a1d8771fed64b5ad9f7834a6338447",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45a056e3_7c2ffba4",
         "filename": "media/engine/webrtcvideoengine_unittest.cc",
         "patchSetId": 9
