@@ -22,6 +22,30 @@
       "revId": "150e13f3d94d2d6d9d2d9f0dc1b67fdb1edd4570",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85bd5ff_18a5ad36",
+        "filename": "api/test/test_dependency_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-09-26T07:43:16Z",
+      "side": 1,
+      "message": "Hm, or can we at least add a thread checker somehow?",
+      "parentUuid": "44b404bf_d2845ca5",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "150e13f3d94d2d6d9d2d9f0dc1b67fdb1edd4570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
