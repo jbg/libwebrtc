@@ -1,0 +1,308 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc9d7543_4083cc80",
+        "filename": "modules/congestion_controller/goog_cc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 5
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09b8f363_78e63534",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "Is \"simulated_time_client\" a better name?",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "396deaed_ef2c9fb5",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "Looks like frame_budget is actually the budget for two frame intervals? Intentional?",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 77
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e664114_e53d46e6",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "max_packet_size",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 54
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5ca885_05b4b9f2",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "Think by style guide, such functionality actually makes SimpleFeedbackReportPacket a class rather than a struct.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "375ce35e_2383fd61",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "This functionality is not straight forward. Suggest adding a comment like \"Look up sender side information for each received packet feedback, matched by sequence numbers\". \n\nAlso, I cannot work out how lost packets are handled here?",
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f14ae1d1_9dfc52f6",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "++it",
+      "range": {
+        "startLine": 116,
+        "startChar": 71,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273aab81_f5bd32ea",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "This function basically emulates pacing buffer and congestion window. I propose naming accordingly, or adding a comment that is what it does.\n\nAlso: why is this emulated? I see PB and CWIN as integral parts of rate control. If we emulate it wrongly or too simplified, we may make wrong conclusions. That is, why is prod code not used here?",
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26e230f7_67a3a879",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "This function actually polls receiver side for a feedback report and forwards it to return_node_, which is not reflected by name, but name is dictated as an overload. Suggest adding a comment telling what function actually does.",
+      "range": {
+        "startLine": 178,
+        "startChar": 24,
+        "endLine": 178,
+        "endChar": 40
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b1d528_f797374f",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "Suggestion: add comment what function actually does as not reflected by name. \"Pull feedback reports from sender side and update CC with it\".",
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7166a3a0_11e3ac83",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "This does even distribution of bandwidth between all streams which is not really realistic. Should be pointed out as a limitation/approximation in a comment.\n\nGiven that, is there actually any point in having the testbed support multiple streams?",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 1
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "146135f2_c5891a27",
+        "filename": "test/scenario/instant_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "I do not understand what \"Congestion\" reflects in this name.",
+      "range": {
+        "startLine": 301,
+        "startChar": 28,
+        "endLine": 301,
+        "endChar": 38
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea015283_4df0d052",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "InstantClientConfig\n\n(c -\u003e C)",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cbf0c4d_5a20ec40",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-09-26T08:25:27Z",
+      "side": 1,
+      "message": "nit: not obvious what this is/why it is there, would like a comment.",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 44
+      },
+      "revId": "1462e24e162583efadf07d263771b2bbd5a8e486",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
