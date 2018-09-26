@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "api/video/i420_buffer.h"
+#include "api/video/video_bitrate_allocation.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "api/video_codecs/video_decoder.h"
 #include "api/video_codecs/video_decoder_factory.h"
@@ -178,6 +179,30 @@ int GetMaxFramerate(const webrtc::VideoEncoderConfig& encoder_config,
     max_fps = std::max(fps, max_fps);
   }
   return max_fps;
+}
+
+bool IsTemporalLayersSupported(const std::string& codec_name) {
+  return CodecNamesEq(codec_name, kVp8CodecName) ||
+         CodecNamesEq(codec_name, kVp9CodecName);
+}
+
+absl::optional<size_t> GetMaxNumTemporalLayers(
+    const webrtc::VideoEncoderConfig& encoder_config,
+    const std::vector<webrtc::VideoStream>& layers) {
+  absl::optional<size_t> max_num;
+  for (size_t i = 0; i < layers.size(); ++i) {
+    // Use configured value if set.
+    absl::optional<size_t> num =
+        encoder_config.simulcast_layers[i].num_temporal_layers
+            ? encoder_config.simulcast_layers[i].num_temporal_layers
+            : layers[i].num_temporal_layers;
+
+    if (num) {
+      if (!max_num || (*num > *max_num))
+        max_num = num;
+    }
+  }
+  return max_num;
 }
 
 static std::string CodecVectorToString(const std::vector<VideoCodec>& codecs) {
@@ -1754,7 +1779,9 @@ webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
         (new_parameters.encodings[i].max_bitrate_bps !=
          rtp_parameters_.encodings[i].max_bitrate_bps) ||
         (new_parameters.encodings[i].max_framerate !=
-         rtp_parameters_.encodings[i].max_framerate)) {
+         rtp_parameters_.encodings[i].max_framerate) ||
+        (new_parameters.encodings[i].num_temporal_layers !=
+         rtp_parameters_.encodings[i].num_temporal_layers)) {
       new_param = true;
       break;
     }
@@ -1841,6 +1868,15 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ValidateRtpParameters(
         LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_RANGE,
                              "Attempted to set RtpParameters min bitrate "
                              "larger than max bitrate.");
+      }
+    }
+    if (rtp_parameters.encodings[i].num_temporal_layers) {
+      if (*rtp_parameters.encodings[i].num_temporal_layers < 1 ||
+          *rtp_parameters.encodings[i].num_temporal_layers >
+              webrtc::kMaxTemporalStreams) {
+        LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_RANGE,
+                             "Attempted to set RtpParameters "
+                             "num_temporal_layers to an invalid number.");
       }
     }
   }
@@ -1955,6 +1991,10 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
     if (rtp_parameters_.encodings[i].max_framerate) {
       encoder_config.simulcast_layers[i].max_framerate =
           *rtp_parameters_.encodings[i].max_framerate;
+    }
+    if (rtp_parameters_.encodings[i].num_temporal_layers) {
+      encoder_config.simulcast_layers[i].num_temporal_layers =
+          *rtp_parameters_.encodings[i].num_temporal_layers;
     }
   }
 
@@ -2691,8 +2731,10 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
                                 0 /*not used*/, encoder_config.bitrate_priority,
                                 max_qp_, 0 /*not_used*/, is_screenshare_,
                                 temporal_layers_supported);
-    // The maximum |max_framerate| is currently used for video.
+    // The maximum |max_framerate| and |num_temporal_layers| are currently used.
     int max_framerate = GetMaxFramerate(encoder_config, layers.size());
+    absl::optional<size_t> max_num_temporal_layers =
+        GetMaxNumTemporalLayers(encoder_config, layers);
     // Update the active simulcast layers and configured bitrates.
     bool is_highest_layer_max_bitrate_configured = false;
     for (size_t i = 0; i < layers.size(); ++i) {
@@ -2700,6 +2742,9 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
       if (!is_screenshare_) {
         // Update simulcast framerates with max configured max framerate.
         layers[i].max_framerate = max_framerate;
+        // Update with max configured num temporal layers if supported by codec.
+        if (IsTemporalLayersSupported(codec_name_))
+          layers[i].num_temporal_layers = max_num_temporal_layers;
       }
       // Update simulcast bitrates with configured min and max bitrate.
       if (encoder_config.simulcast_layers[i].min_bitrate_bps > 0) {
@@ -2780,6 +2825,14 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
     webrtc::VideoCodecVP9 vp9_settings;
     encoder_config.encoder_specific_settings->FillVideoCodecVp9(&vp9_settings);
     layer.num_temporal_layers = vp9_settings.numberOfTemporalLayers;
+  }
+
+  if (!is_screenshare_ && IsTemporalLayersSupported(codec_name_)) {
+    // Use configured number of temporal layers if set.
+    if (encoder_config.simulcast_layers[0].num_temporal_layers) {
+      layer.num_temporal_layers =
+          *encoder_config.simulcast_layers[0].num_temporal_layers;
+    }
   }
 
   layers.push_back(layer);
