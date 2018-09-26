@@ -87,6 +87,7 @@ class AudioCodingModule {
   // Return value:
   //   number of supported codecs.
   ///
+  // XXX Test only
   static int NumberOfCodecs();
 
   ///////////////////////////////////////////////////////////////////////////
@@ -104,6 +105,7 @@ class AudioCodingModule {
   //   -1 if the list number (list_id) is invalid.
   //    0 if succeeded.
   //
+  // Test XXX only
   static int Codec(int list_id, CodecInst* codec);
 
   ///////////////////////////////////////////////////////////////////////////
@@ -146,6 +148,7 @@ class AudioCodingModule {
   //   if the codec is found, the index of the codec in the list,
   //   -1 if the codec is not found.
   //
+  // Test XXX only
   static int Codec(const char* payload_name,
                    int sampling_freq_hz,
                    size_t channels);
@@ -210,6 +213,7 @@ class AudioCodingModule {
   // Return value:
   //   The send codec, or nothing if we don't have one
   //
+  // XXX Test only
   virtual absl::optional<CodecInst> SendCodec() const = 0;
 
   ///////////////////////////////////////////////////////////////////////////
@@ -281,6 +285,7 @@ class AudioCodingModule {
   //   -1 if failed to set RED status,
   //    0 if succeeded.
   //
+  // XXX Tested, otherwise unused
   virtual int32_t SetREDStatus(bool enable_red) = 0;
 
   ///////////////////////////////////////////////////////////////////////////
@@ -320,6 +325,7 @@ class AudioCodingModule {
   //   true if FEC is enabled,
   //   false if FEC is disabled.
   //
+  // XXX Unused
   virtual bool CodecFEC() const = 0;
 
   ///////////////////////////////////////////////////////////////////////////
@@ -337,6 +343,7 @@ class AudioCodingModule {
   //
   // This is only used in test code that rely on old ACM APIs.
   // TODO(minyue): Remove it when possible.
+  // XXX Unused
   virtual int SetPacketLossRate(int packet_loss_rate) = 0;
 
   ///////////////////////////////////////////////////////////////////////////
@@ -406,6 +413,7 @@ class AudioCodingModule {
   //   -1 if failed to register the callback function.
   //    0 if the callback function is registered successfully.
   //
+  // XXX Unsued
   virtual int32_t RegisterVADCallback(ACMVADCallback* vad_callback) = 0;
 
   ///////////////////////////////////////////////////////////////////////////
@@ -571,6 +579,7 @@ class AudioCodingModule {
   //   -1 if failed to set the delay,
   //    0 if the maximum delay is set.
   //
+  // XXX Test only
   virtual int SetMaximumPlayoutDelay(int time_ms) = 0;
 
   ///////////////////////////////////////////////////////////////////////////
@@ -639,6 +648,7 @@ class AudioCodingModule {
   //      Opus application mode.
   //    0 if the Opus application mode is successfully set.
   //
+  // XXX Unused
   virtual int SetOpusApplication(OpusApplicationMode application) = 0;
 
   ///////////////////////////////////////////////////////////////////////////

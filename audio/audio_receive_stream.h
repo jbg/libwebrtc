@@ -18,22 +18,20 @@
 #include "api/rtp_headers.h"
 #include "audio/audio_state.h"
 #include "call/audio_receive_stream.h"
-#include "call/rtp_packet_sink_interface.h"
 #include "call/syncable.h"
+#include "modules/rtp_rtcp/include/remote_ntp_time_estimator.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/thread_checker.h"
 
 namespace webrtc {
+class AudioCodingModule;
 class PacketRouter;
 class ProcessThread;
+class RtpAudioStreamReceiver;
 class RtcEventLog;
 class RtpPacketReceived;
 class RtpStreamReceiverControllerInterface;
 class RtpStreamReceiverInterface;
-
-namespace voe {
-class ChannelProxy;
-}  // namespace voe
 
 namespace internal {
 class AudioSendStream;
@@ -44,10 +42,10 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
  public:
   AudioReceiveStream(RtpStreamReceiverControllerInterface* receiver_controller,
                      PacketRouter* packet_router,
-                     ProcessThread* module_process_thread,
                      const webrtc::AudioReceiveStream::Config& config,
                      const rtc::scoped_refptr<webrtc::AudioState>& audio_state,
                      webrtc::RtcEventLog* event_log);
+#if 0
   // For unit tests, which need to supply a mock channel proxy.
   AudioReceiveStream(RtpStreamReceiverControllerInterface* receiver_controller,
                      PacketRouter* packet_router,
@@ -55,6 +53,7 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
                      const rtc::scoped_refptr<webrtc::AudioState>& audio_state,
                      webrtc::RtcEventLog* event_log,
                      std::unique_ptr<voe::ChannelProxy> channel_proxy);
+#endif
   ~AudioReceiveStream() override;
 
   // webrtc::AudioReceiveStream implementation.
@@ -101,8 +100,27 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
   rtc::ThreadChecker module_process_thread_checker_;
   webrtc::AudioReceiveStream::Config config_;
   rtc::scoped_refptr<webrtc::AudioState> audio_state_;
-  std::unique_ptr<voe::ChannelProxy> channel_proxy_;
+  RtcEventLog* const event_log_;
+  const std::unique_ptr<AudioCodingModule> audio_coding_;
+  const std::unique_ptr<webrtc::RtpAudioStreamReceiver>
+      rtp_audio_stream_receiver_;
   AudioSendStream* associated_send_stream_ = nullptr;
+  // Additional RTP state. TODO(nisse): Move to RtpAudioStreamReceiver.
+  RemoteNtpTimeEstimator ntp_estimator_;  // XXX RTC_GUARDED_BY(ts_stats_lock_);
+  rtc::TimestampWrapAroundHandler rtp_ts_wraparound_handler_;
+  // The rtp timestamp of the first played out audio frame.
+  int64_t capture_start_rtp_time_stamp_;
+  // The capture ntp time (in local timebase) of the first played out audio
+  // frame.
+  int64_t capture_start_ntp_time_ms_;  // XXX RTC_GUARDED_BY(ts_stats_lock_);
+
+  AudioSinkInterface* raw_audio_sink_ = nullptr;
+
+  // TODO(nisse): voe::Channel had this. Still needed?
+  // rtc::CriticalSection volume_settings_critsect_;
+
+  float output_gain_ = 1.0;  // XXX RTC_GUARDED_BY(volume_settings_critsect_);
+  voe::AudioLevel output_audio_level;
 
   bool playing_ RTC_GUARDED_BY(worker_thread_checker_) = false;
 
