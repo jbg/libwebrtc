@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "01b10eca_688a287e",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6770,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-09-26T09:42:02Z",
+      "side": 1,
+      "message": "This CL contains code for keeping track of contributing_sources_ (and other variables with \"contributing\" rather than \"synchronization\" in their names).\n\nAre you saying this is a dead code path? If a server supports CSRCs for video or not is one discussion, but on this layer we should either support it and exercise that codepath or not include that code. Test the CSRC code or remove it.",
+      "parentUuid": "5eaafbd5_ab8f7c88",
+      "revId": "21a29cdf93b76b77690264aa2c88226793b5ac9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a4a0612_e40e14a5",
         "filename": "pc/peerconnection_integrationtest.cc",
         "patchSetId": 5
