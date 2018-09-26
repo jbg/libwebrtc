@@ -129,8 +129,10 @@ TEST(CallTest, CreateDestroy_AudioReceiveStreams) {
 TEST(CallTest, CreateDestroy_AssociateAudioSendReceiveStreams_RecvFirst) {
   CallHelper call;
   AudioReceiveStream::Config recv_config;
+  MockTransport rtcp_send_transport;
   recv_config.rtp.remote_ssrc = 42;
   recv_config.rtp.local_ssrc = 777;
+  recv_config.rtcp_send_transport = &rtcp_send_transport;
   recv_config.decoder_factory =
       new rtc::RefCountedObject<webrtc::MockAudioDecoderFactory>();
   AudioReceiveStream* recv_stream = call->CreateAudioReceiveStream(recv_config);
