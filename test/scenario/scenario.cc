@@ -122,6 +122,31 @@ CallClient* Scenario::CreateClient(
   return CreateClient(name, config);
 }
 
+SimulatedTimeClient* Scenario::CreateInstantController(
+    std::string name,
+    SimulatedTimeClientConfig config,
+    std::vector<PacketStreamConfig> stream_configs,
+    std::vector<NetworkNode*> send_link,
+    std::vector<NetworkNode*> return_link) {
+  uint64_t send_id = next_receiver_id_++;
+  uint64_t return_id = next_receiver_id_++;
+  SimulatedTimeClient* client = new SimulatedTimeClient(
+      GetFullPathOrEmpty(name), config, stream_configs, send_link, return_link,
+      send_id, return_id, Now());
+  if (!base_filename_.empty() && !name.empty() &&
+      config.transport.state_log_interval.IsFinite()) {
+    Every(config.transport.state_log_interval, [this, client]() {
+      client->network_controller_factory_.LogCongestionControllerStats(Now());
+    });
+  }
+
+  Every(client->GetNetworkControllerProcessInterval(),
+        [this, client] { client->CongestionProcess(Now()); });
+  Every(TimeDelta::ms(5), [this, client] { client->PacerProcess(Now()); });
+  instant_clients_.emplace_back(client);
+  return client;
+}
+
 SimulationNode* Scenario::CreateSimulationNode(
     std::function<void(NetworkNodeConfig*)> config_modifier) {
   NetworkNodeConfig config;
@@ -313,8 +338,11 @@ void Scenario::RunUntil(TimeDelta max_duration,
       done_.Wait(wait_time.ms<int>());
     } else {
       sim_clock_.AdvanceTimeMicroseconds(wait_time.us());
-      event_log_fake_clock_.SetTimeNanos(sim_clock_.TimeInMicroseconds() *
-                                         1000);
+      // The fake clock is quite slow to update, we only update it if logging is
+      // turned on to save time.
+      if (!base_filename_.empty())
+        event_log_fake_clock_.SetTimeNanos(sim_clock_.TimeInMicroseconds() *
+                                           1000);
     }
   }
   for (auto& stream_pair : video_streams_) {
