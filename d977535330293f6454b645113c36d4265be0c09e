@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7647ab9c_3192f2aa",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-27T11:14:54Z",
+      "side": 1,
+      "message": "I think absl::optional has overrides for operator\u003e() etc, so maybe this could just be\nmax_num \u003d\u003d std::max(num, max_num);\n?",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 5
+      },
+      "revId": "d977535330293f6454b645113c36d4265be0c09e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d54a4ac9_b2d9805d",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 2
@@ -13,6 +36,24 @@
       "writtenOn": "2018-09-27T10:28:28Z",
       "side": 1,
       "message": "What about setting https://cs.chromium.org/chromium/src/third_party/webrtc/api/video_codecs/video_codec.h?l\u003d38\u0026rcl\u003dd8f3c17e8da2679a74e4433d49c0c4a832743ea\n?\n\nOr can we get rid of that field in a followup?",
+      "revId": "d977535330293f6454b645113c36d4265be0c09e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b82c6923_644dc90d",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2833,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-09-27T11:14:54Z",
+      "side": 1,
+      "message": "There was something tricky around that, but forget what exactly.\nI would prefer to remove the global setting (not necessarily now) and make sure we just set number of temporal layers per simulcast stream in all cases instead.",
+      "parentUuid": "d54a4ac9_b2d9805d",
       "revId": "d977535330293f6454b645113c36d4265be0c09e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
