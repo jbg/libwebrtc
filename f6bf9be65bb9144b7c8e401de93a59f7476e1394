@@ -16,6 +16,24 @@
       "revId": "f6bf9be65bb9144b7c8e401de93a59f7476e1394",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc5d09ee_58d67b3a",
+        "filename": "media/engine/apm_helpers.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-27T11:52:17Z",
+      "side": 1,
+      "message": "Thanks for noting!\n\nThe line could be omitted entirely also for kEcConference, because the default value is \u0027false\u0027, but I thought it best to be explicit about it.",
+      "parentUuid": "514d90fa_024d6774",
+      "revId": "f6bf9be65bb9144b7c8e401de93a59f7476e1394",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
