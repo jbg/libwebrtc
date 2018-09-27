@@ -271,6 +271,34 @@ int32_t Channel::SendData(FrameType frameType,
     _rtpRtcpModule->SetAudioLevel(rms_level_.Average());
   }
 
+  // Keep this buffer around for the lifetime of the send call.
+  rtc::Buffer encrypted_audio_payload;
+  if (frame_encryptor_ != nullptr) {
+    // TODO(benwright@webrtc.org) - Allocate enough to always encrypt inline.
+    // Allocate a buffer to hold the maximum possible encrypted payload.
+    size_t max_ciphertext_size = frame_encryptor_->GetMaxCiphertextByteSize(
+        cricket::MEDIA_TYPE_AUDIO, payloadSize);
+    encrypted_audio_payload.SetSize(max_ciphertext_size);
+
+    // Encrypt the audio payload into the buffer.
+    size_t bytes_written = 0;
+    int encrypt_status = frame_encryptor_->Encrypt(
+        cricket::MEDIA_TYPE_AUDIO, _rtpRtcpModule->SSRC(),
+        /*additional_data=*/nullptr,
+        rtc::ArrayView<const uint8_t>(payloadData, payloadSize),
+        encrypted_audio_payload, &bytes_written);
+    if (encrypt_status != 0) {
+      RTC_DLOG(LS_ERROR) << "Channel::SendData() failed encrypt audio payload: "
+                         << encrypt_status;
+      return encrypt_status;
+    }
+    // Resize the buffer to the exact number of bytes actually used.
+    encrypted_audio_payload.SetSize(bytes_written);
+    // Rewrite the payloadData and size to the new encrypted payload.
+    payloadData = encrypted_audio_payload.data();
+    payloadSize = encrypted_audio_payload.size();
+  }
+
   // Push data from ACM to RTP/RTCP-module to deliver audio frame for
   // packetization.
   // This call will trigger Transport::SendPacket() from the RTP/RTCP module.
@@ -470,7 +498,8 @@ Channel::Channel(rtc::TaskQueue* encoder_queue,
                  ProcessThread* module_process_thread,
                  AudioDeviceModule* audio_device_module,
                  RtcpRttStats* rtcp_rtt_stats,
-                 RtcEventLog* rtc_event_log)
+                 RtcEventLog* rtc_event_log,
+                 FrameEncryptorInterface* frame_encryptor)
     : Channel(module_process_thread,
               audio_device_module,
               rtcp_rtt_stats,
@@ -479,9 +508,11 @@ Channel::Channel(rtc::TaskQueue* encoder_queue,
               0,
               false,
               rtc::scoped_refptr<AudioDecoderFactory>(),
-              absl::nullopt) {
+              absl::nullopt,
+              nullptr) {
   RTC_DCHECK(encoder_queue);
   encoder_queue_ = encoder_queue;
+  frame_encryptor_ = frame_encryptor;
 }
 
 Channel::Channel(ProcessThread* module_process_thread,
@@ -492,7 +523,8 @@ Channel::Channel(ProcessThread* module_process_thread,
                  size_t jitter_buffer_max_packets,
                  bool jitter_buffer_fast_playout,
                  rtc::scoped_refptr<AudioDecoderFactory> decoder_factory,
-                 absl::optional<AudioCodecPairId> codec_pair_id)
+                 absl::optional<AudioCodecPairId> codec_pair_id,
+                 FrameDecryptorInterface* frame_decryptor)
     : event_log_(rtc_event_log),
       rtp_receive_statistics_(
           ReceiveStatistics::Create(Clock::GetRealTimeClock())),
@@ -524,7 +556,8 @@ Channel::Channel(ProcessThread* module_process_thread,
       retransmission_rate_limiter_(new RateLimiter(Clock::GetRealTimeClock(),
                                                    kMaxRetransmissionWindowMs)),
       use_twcc_plr_for_ana_(
-          webrtc::field_trial::FindFullName("UseTwccPlrForAna") == "Enabled") {
+          webrtc::field_trial::FindFullName("UseTwccPlrForAna") == "Enabled"),
+      frame_decryptor_(frame_decryptor) {
   RTC_DCHECK(module_process_thread);
   RTC_DCHECK(audio_device_module);
   AudioCodingModule::Config acm_config;
@@ -892,6 +925,33 @@ bool Channel::ReceivePacket(const uint8_t* packet,
   webrtc_rtp_header.header = header;
 
   const size_t payload_data_length = payload_length - header.paddingLength;
+
+  rtc::Buffer decrypted_audio_payload;
+  if (frame_decryptor_ != nullptr) {
+    size_t max_plaintext_size = frame_decryptor_->GetMaxPlaintextByteSize(
+        cricket::MEDIA_TYPE_AUDIO, packet_length);
+    decrypted_audio_payload.SetSize(max_plaintext_size);
+
+    size_t bytes_written = 0;
+    std::vector<uint32_t> csrcs(header.arrOfCSRCs,
+                                header.arrOfCSRCs + header.numCSRCs);
+    int decrypt_status = frame_decryptor_->Decrypt(
+        cricket::MEDIA_TYPE_AUDIO, std::move(csrcs),
+        /*additional_data=*/nullptr,
+        rtc::ArrayView<const uint8_t>(payload, payload_length),
+        decrypted_audio_payload, &bytes_written);
+    if (decrypt_status != 0) {
+      return decrypt_status;
+    }
+
+    // Resize the decrypted audio payload to the number of bytes actually
+    // written.
+    decrypted_audio_payload.SetSize(bytes_written);
+    // Update the final payload.
+    packet = decrypted_audio_payload.data();
+    packet_length = decrypted_audio_payload.size();
+  }
+
   if (payload_data_length == 0) {
     webrtc_rtp_header.frameType = kEmptyFrame;
     return OnReceivedPayloadData(nullptr, 0, &webrtc_rtp_header);

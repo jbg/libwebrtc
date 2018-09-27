@@ -20,6 +20,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/call/transport.h"
+#include "api/crypto/frameencryptorinterface.h"
 #include "api/video/video_content_type.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/rtp_rtcp/include/flexfec_sender.h"
@@ -112,7 +113,8 @@ class RTPSender {
                         const RTPFragmentationHeader* fragmentation,
                         const RTPVideoHeader* rtp_header,
                         uint32_t* transport_frame_id_out,
-                        int64_t expected_retransmission_time_ms);
+                        int64_t expected_retransmission_time_ms,
+                        FrameEncryptorInterface* frame_encryptor = nullptr);
 
   // RTP header extension
   int32_t RegisterRtpHeaderExtension(RTPExtensionType type, uint8_t id);

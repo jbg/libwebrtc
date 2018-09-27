@@ -15,6 +15,7 @@
 #include <memory>
 
 #include "absl/types/optional.h"
+#include "api/crypto/frameencryptorinterface.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/rtp_rtcp/include/flexfec_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
@@ -56,7 +57,8 @@ class RTPSenderVideo {
                  size_t payload_size,
                  const RTPFragmentationHeader* fragmentation,
                  const RTPVideoHeader* video_header,
-                 int64_t expected_retransmission_time_ms);
+                 int64_t expected_retransmission_time_ms,
+                 FrameEncryptorInterface* frame_encryptor);
 
   void SetVideoCodecType(enum VideoCodecType type);
 

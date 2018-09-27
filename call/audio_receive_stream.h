@@ -19,6 +19,7 @@
 #include "absl/types/optional.h"
 #include "api/audio_codecs/audio_decoder_factory.h"
 #include "api/call/transport.h"
+#include "api/crypto/framedecryptorinterface.h"
 #include "api/rtpparameters.h"
 #include "api/rtpreceiverinterface.h"
 #include "call/rtp_config.h"
@@ -120,6 +121,11 @@ class AudioReceiveStream {
     rtc::scoped_refptr<AudioDecoderFactory> decoder_factory;
 
     absl::optional<AudioCodecPairId> codec_pair_id;
+
+    // An optional custom frame decryptor that allows the entire frame to be
+    // decrypted in whatever way the caller choses. This is not required by
+    // default.
+    webrtc::FrameDecryptorInterface* frame_decryptor = nullptr;
   };
 
   // Reconfigure the stream according to the Configuration.
