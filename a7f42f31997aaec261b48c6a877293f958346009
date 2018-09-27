@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2da9ee9_c1b172e6",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-27T11:00:33Z",
+      "side": 1,
+      "message": "rtp_packet.rtp.log_time_ms()",
+      "range": {
+        "startLine": 1443,
+        "startChar": 12,
+        "endLine": 1443,
+        "endChar": 47
+      },
+      "revId": "a7f42f31997aaec261b48c6a877293f958346009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "190da29c_687f10aa",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-27T11:00:33Z",
+      "side": 1,
+      "message": "If this is only used internally, then I don\u0027t think we need to declare it in the header file.",
+      "revId": "a7f42f31997aaec261b48c6a877293f958346009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "217fe085_dfb4ade8",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-27T11:00:33Z",
+      "side": 1,
+      "message": "How are lost packets signaled in this data structure?\nDoes it contain the information that Sebastian needs?",
+      "range": {
+        "startLine": 990,
+        "startChar": 7,
+        "endLine": 990,
+        "endChar": 30
+      },
+      "revId": "a7f42f31997aaec261b48c6a877293f958346009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c58a8d5c_cc045203",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-27T11:00:33Z",
+      "side": 1,
+      "message": "I think this should be ms too. Microsecond precision is not supported on all platforms, so we can\u0027t rely on it. We\u0027re therefore planning to only store millisecond timestamps in future versions of the log.",
+      "range": {
+        "startLine": 992,
+        "startChar": 8,
+        "endLine": 992,
+        "endChar": 20
+      },
+      "revId": "a7f42f31997aaec261b48c6a877293f958346009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd0abb3b_2d9a0600",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-27T11:00:33Z",
+      "side": 1,
+      "message": "Could the name be clarified to obviate the need for comments? E.g. rtcp_arrival_time_ms/feedback_arrival_time_ms?",
+      "range": {
+        "startLine": 997,
+        "startChar": 10,
+        "endLine": 997,
+        "endChar": 22
+      },
+      "revId": "a7f42f31997aaec261b48c6a877293f958346009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
