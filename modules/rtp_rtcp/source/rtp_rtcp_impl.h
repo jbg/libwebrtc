@@ -125,7 +125,8 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
                         size_t payload_size,
                         const RTPFragmentationHeader* fragmentation,
                         const RTPVideoHeader* rtp_video_header,
-                        uint32_t* transport_frame_id_out) override;
+                        uint32_t* transport_frame_id_out,
+                        FrameEncryptorInterface* frame_encryptor) override;
 
   bool TimeToSendPacket(uint32_t ssrc,
                         uint16_t sequence_number,
