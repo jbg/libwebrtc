@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "117a365d_7325f64b",
+        "filename": "audio/audio_receive_stream.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "can you comment what\u0027s the purpose of #if 0? should we simply remove this constructor?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 5
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a98d6c87_8f1c9c95",
+        "filename": "audio/audio_receive_stream.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "can you please add a unit of the timestamp to the field name?",
+      "range": {
+        "startLine": 109,
+        "startChar": 33,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86e0bbab_58c70f31",
+        "filename": "audio/channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "is this the place where we eventually want to hook up the media transport?",
+      "range": {
+        "startLine": 275,
+        "startChar": 23,
+        "endLine": 275,
+        "endChar": 39
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74fbcb20_a455d56b",
+        "filename": "audio/channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "we might need\nMediaTransportInterface::GetRtt()\n\nand probably\nMediaTransportInterface::GetBandwidthEstimaate() \n\nbut we also want callbacks from the MediaTransportInterface whenever the estimate changes.\nWe should decide which one is the preferred way. (we probably would like to have callbacks when the rtt/BWE change, and not have polling for RTT). But for simplicity, we might want to allow both.",
+      "range": {
+        "startLine": 1036,
+        "startChar": 17,
+        "endLine": 1036,
+        "endChar": 23
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "716e59a8_728038b4",
+        "filename": "audio/channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "is RTT per SSRC? Why? (I thought RTT is per connection?)",
+      "range": {
+        "startLine": 1052,
+        "startChar": 43,
+        "endLine": 1052,
+        "endChar": 54
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5ffda67_5731f78f",
+        "filename": "audio/rtp_audio_stream_receiver.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "could you document what does \u0027enable\u0027 do?",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 32
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52b81eaa_de589324",
+        "filename": "audio/rtp_audio_stream_receiver.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "looks weird, can you document or remove code below?",
+      "range": {
+        "startLine": 114,
+        "startChar": 1,
+        "endLine": 114,
+        "endChar": 5
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19817deb_26b13bbf",
+        "filename": "audio/rtp_audio_stream_receiver.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-09-27T16:36:00Z",
+      "side": 1,
+      "message": "what\u0027s the unit? (or is \u0027rtp_timestamp\u0027 always in the same unit?)",
+      "range": {
+        "startLine": 117,
+        "startChar": 35,
+        "endLine": 117,
+        "endChar": 40
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
