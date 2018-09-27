@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "api/call/transport.h"
+#include "api/crypto/frameencryptorinterface.h"
 #include "api/video/video_sink_interface.h"
 #include "api/video/video_source_interface.h"
 #include "api/video/video_stream_encoder_settings.h"
@@ -143,6 +144,11 @@ class VideoSendStream {
 
     // Track ID as specified during track creation.
     std::string track_id;
+
+    // An optional custom frame encryptor that allows the entire frame to be
+    // encrypted in whatever way the caller choses. This is not required by
+    // default.
+    webrtc::FrameEncryptorInterface* frame_encryptor = nullptr;
 
    private:
     // Access to the copy constructor is private to force use of the Copy()
