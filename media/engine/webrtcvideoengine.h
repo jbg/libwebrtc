@@ -154,6 +154,8 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   void OnNetworkRouteChanged(const std::string& transport_name,
                              const rtc::NetworkRoute& network_route) override;
   void SetInterface(NetworkInterface* iface) override;
+  void SetFrameDecryptor(
+      webrtc::FrameDecryptorInterface* frame_decryptor) override;
 
   // Implemented for VideoMediaChannelTest.
   bool sending() const { return sending_; }
@@ -372,6 +374,7 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
 
     void OnFrame(const webrtc::VideoFrame& frame) override;
     bool IsDefaultStream() const;
+    void SetFrameDecryptor(webrtc::FrameDecryptorInterface* frame_decryptor);
 
     void SetSink(rtc::VideoSinkInterface<webrtc::VideoFrame>* sink);
 

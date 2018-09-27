@@ -1,5 +1,4 @@
-/*
- *  Copyright (c) 2013 The WebRTC project authors. All Rights Reserved.
+/* *  Copyright (c) 2013 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -17,6 +16,7 @@
 #include <vector>
 
 #include "api/call/transport.h"
+#include "api/crypto/framedecryptorinterface.h"
 #include "api/rtp_headers.h"
 #include "api/rtpparameters.h"
 #include "api/rtpreceiverinterface.h"
@@ -216,6 +216,10 @@ class VideoReceiveStream {
     // TODO(nisse): Used with VideoDecoderFactory::LegacyCreateVideoDecoder.
     // Delete when that method is retired.
     std::string stream_id;
+    // An optional custom frame decryptor that allows the entire frame to be
+    // decrypted in whatever way the caller choses. This is not required by
+    // default.
+    webrtc::FrameDecryptorInterface* frame_decryptor = nullptr;
   };
 
   // Starts stream activity.
@@ -245,6 +249,7 @@ class VideoReceiveStream {
   // themselves as secondary sinks.
   virtual void AddSecondarySink(RtpPacketSinkInterface* sink) = 0;
   virtual void RemoveSecondarySink(const RtpPacketSinkInterface* sink) = 0;
+  virtual void SetFrameDecryptor(FrameDecryptorInterface* frame_decryptor) = 0;
 
   virtual std::vector<RtpSource> GetSources() const = 0;
 

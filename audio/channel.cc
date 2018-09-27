@@ -271,6 +271,10 @@ int32_t Channel::SendData(FrameType frameType,
     _rtpRtcpModule->SetAudioLevel(rms_level_.Average());
   }
 
+  if (frame_encryptor_ != nullptr) {
+    // TODO(benwright) Encrypt the outgoing frame.
+  }
+
   // Push data from ACM to RTP/RTCP-module to deliver audio frame for
   // packetization.
   // This call will trigger Transport::SendPacket() from the RTP/RTCP module.
@@ -470,7 +474,8 @@ Channel::Channel(rtc::TaskQueue* encoder_queue,
                  ProcessThread* module_process_thread,
                  AudioDeviceModule* audio_device_module,
                  RtcpRttStats* rtcp_rtt_stats,
-                 RtcEventLog* rtc_event_log)
+                 RtcEventLog* rtc_event_log,
+                 FrameEncryptorInterface* frame_encryptor)
     : Channel(module_process_thread,
               audio_device_module,
               rtcp_rtt_stats,
@@ -479,9 +484,11 @@ Channel::Channel(rtc::TaskQueue* encoder_queue,
               0,
               false,
               rtc::scoped_refptr<AudioDecoderFactory>(),
-              absl::nullopt) {
+              absl::nullopt,
+              nullptr) {
   RTC_DCHECK(encoder_queue);
   encoder_queue_ = encoder_queue;
+  frame_encryptor_ = frame_encryptor;
 }
 
 Channel::Channel(ProcessThread* module_process_thread,
@@ -492,7 +499,8 @@ Channel::Channel(ProcessThread* module_process_thread,
                  size_t jitter_buffer_max_packets,
                  bool jitter_buffer_fast_playout,
                  rtc::scoped_refptr<AudioDecoderFactory> decoder_factory,
-                 absl::optional<AudioCodecPairId> codec_pair_id)
+                 absl::optional<AudioCodecPairId> codec_pair_id,
+                 FrameDecryptorInterface* frame_decryptor)
     : event_log_(rtc_event_log),
       rtp_receive_statistics_(
           ReceiveStatistics::Create(Clock::GetRealTimeClock())),
@@ -524,7 +532,8 @@ Channel::Channel(ProcessThread* module_process_thread,
       retransmission_rate_limiter_(new RateLimiter(Clock::GetRealTimeClock(),
                                                    kMaxRetransmissionWindowMs)),
       use_twcc_plr_for_ana_(
-          webrtc::field_trial::FindFullName("UseTwccPlrForAna") == "Enabled") {
+          webrtc::field_trial::FindFullName("UseTwccPlrForAna") == "Enabled"),
+      frame_decryptor_(frame_decryptor) {
   RTC_DCHECK(module_process_thread);
   RTC_DCHECK(audio_device_module);
   AudioCodingModule::Config acm_config;
@@ -892,6 +901,11 @@ bool Channel::ReceivePacket(const uint8_t* packet,
   webrtc_rtp_header.header = header;
 
   const size_t payload_data_length = payload_length - header.paddingLength;
+
+  if (frame_decryptor_ != nullptr) {
+    // TODO(benwright) Decrypt the incoming frame.
+  }
+
   if (payload_data_length == 0) {
     webrtc_rtp_header.frameType = kEmptyFrame;
     return OnReceivedPayloadData(nullptr, 0, &webrtc_rtp_header);
