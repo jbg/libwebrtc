@@ -985,6 +985,23 @@ class ParsedRtcEventLogNew {
       outgoing_rtp_extensions_maps_;
 };
 
+void SortPacketFeedbackVector(std::vector<PacketFeedback>* vec);
+
+struct MatchedSendArrivalTimes {
+  MatchedSendArrivalTimes(int64_t ts, int64_t tx, int64_t rx, int64_t ps)
+      : timestamp_us(ts),
+        send_time_ms(tx),
+        arrival_time_ms(rx),
+        payload_size(ps) {}
+
+  int64_t timestamp_us;  // The RTCP feedback arrival timestamp.
+  int64_t send_time_ms;
+  int64_t arrival_time_ms;
+  int64_t payload_size;
+};
+const std::vector<MatchedSendArrivalTimes> GetNetworkTrace(
+    const ParsedRtcEventLogNew& parsed_log);
+
 }  // namespace webrtc
 
 #endif  // LOGGING_RTC_EVENT_LOG_RTC_EVENT_LOG_PARSER_NEW_H_

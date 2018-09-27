@@ -25,6 +25,7 @@
 #include "api/rtpparameters.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/audio_coding/audio_network_adaptor/include/audio_network_adaptor.h"
+#include "modules/congestion_controller/transport_feedback_adapter.h"
 #include "modules/remote_bitrate_estimator/include/bwe_defines.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
@@ -1368,6 +1369,84 @@ ParsedRtcEventLogNew::MediaType ParsedRtcEventLogNew::GetMediaType(
     }
   }
   return MediaType::ANY;
+}
+
+void SortPacketFeedbackVector(std::vector<PacketFeedback>* vec) {
+  auto pred = [](const PacketFeedback& packet_feedback) {
+    return packet_feedback.arrival_time_ms == PacketFeedback::kNotReceived;
+  };
+  vec->erase(std::remove_if(vec->begin(), vec->end(), pred), vec->end());
+  std::sort(vec->begin(), vec->end(), PacketFeedbackComparator());
+}
+
+const std::vector<MatchedSendArrivalTimes> GetNetworkTrace(
+    const ParsedRtcEventLogNew& parsed_log) {
+  using RtpPacketType = LoggedRtpPacketOutgoing;
+  using TransportFeedbackType = LoggedRtcpPacketTransportFeedback;
+
+  std::multimap<int64_t, const RtpPacketType*> outgoing_rtp;
+  for (const auto& stream : parsed_log.outgoing_rtp_packets_by_ssrc()) {
+    for (const RtpPacketType& rtp_packet : stream.outgoing_packets)
+      outgoing_rtp.insert(
+          std::make_pair(rtp_packet.rtp.log_time_us(), &rtp_packet));
+  }
+
+  const std::vector<TransportFeedbackType>& incoming_rtcp =
+      parsed_log.transport_feedbacks(kIncomingPacket);
+
+  SimulatedClock clock(0);
+  TransportFeedbackAdapter feedback_adapter(&clock);
+
+  auto rtp_iterator = outgoing_rtp.begin();
+  auto rtcp_iterator = incoming_rtcp.begin();
+
+  auto NextRtpTime = [&]() {
+    if (rtp_iterator != outgoing_rtp.end())
+      return static_cast<int64_t>(rtp_iterator->first);
+    return std::numeric_limits<int64_t>::max();
+  };
+
+  auto NextRtcpTime = [&]() {
+    if (rtcp_iterator != incoming_rtcp.end())
+      return static_cast<int64_t>(rtcp_iterator->log_time_us());
+    return std::numeric_limits<int64_t>::max();
+  };
+
+  int64_t time_us = std::min(NextRtpTime(), NextRtcpTime());
+
+  std::vector<MatchedSendArrivalTimes> rtp_rtcp_matched;
+  while (time_us != std::numeric_limits<int64_t>::max()) {
+    clock.AdvanceTimeMicroseconds(time_us - clock.TimeInMicroseconds());
+    if (clock.TimeInMicroseconds() >= NextRtcpTime()) {
+      RTC_DCHECK_EQ(clock.TimeInMicroseconds(), NextRtcpTime());
+      feedback_adapter.OnTransportFeedback(rtcp_iterator->transport_feedback);
+      std::vector<PacketFeedback> feedback =
+          feedback_adapter.GetTransportFeedbackVector();
+      SortPacketFeedbackVector(&feedback);
+      for (const PacketFeedback& packet : feedback) {
+        rtp_rtcp_matched.emplace_back(
+            clock.TimeInMicroseconds(), packet.send_time_ms,
+            packet.arrival_time_ms, packet.payload_size);
+      }
+      ++rtcp_iterator;
+    }
+    if (clock.TimeInMicroseconds() >= NextRtpTime()) {
+      RTC_DCHECK_EQ(clock.TimeInMicroseconds(), NextRtpTime());
+      const RtpPacketType& rtp_packet = *rtp_iterator->second;
+      if (rtp_packet.rtp.header.extension.hasTransportSequenceNumber) {
+        feedback_adapter.AddPacket(
+            rtp_packet.rtp.header.ssrc,
+            rtp_packet.rtp.header.extension.transportSequenceNumber,
+            rtp_packet.rtp.total_length, PacedPacketInfo());
+        feedback_adapter.OnSentPacket(
+            rtp_packet.rtp.header.extension.transportSequenceNumber,
+            rtp_packet.rtp.log_time_us() / 1000);
+      }
+      ++rtp_iterator;
+    }
+    time_us = std::min(NextRtpTime(), NextRtcpTime());
+  }
+  return rtp_rtcp_matched;
 }
 
 }  // namespace webrtc
