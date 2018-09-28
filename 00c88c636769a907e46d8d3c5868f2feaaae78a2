@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c224c0ce_7a490aa6",
+        "filename": "modules/audio_processing/echo_control_mobile_bit_exact_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Good point, fixed.",
+      "parentUuid": "74e3d638_67ee041b",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "071c29d5_c98711cc",
         "filename": "modules/audio_processing/echo_control_mobile_impl.h",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9f9ac2f_6f456501",
+        "filename": "modules/audio_processing/echo_control_mobile_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "It will be removed altogether, together with EchoCancellation.",
+      "parentUuid": "071c29d5_c98711cc",
+      "range": {
+        "startLine": 34,
+        "startChar": 5,
+        "endLine": 72,
+        "endChar": 20
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ea86dbc1_b8529d92",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae0e773_ea3ac90c",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "896a9382_88cbf64c",
         "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "187ef5c0_66793489",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896a9382_88cbf64c",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 17
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "05e8b477_1caa9d8f",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Neat, thanks!",
+      "parentUuid": "ab9c432a_a5e4de55",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "234a5d81_da52f35b",
         "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
         "patchSetId": 3
@@ -137,6 +257,30 @@
       "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a65e0e18_e166a4c0",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "234a5d81_da52f35b",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "e93c47c9_5fa9ce12",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Cool, thanks. Done!",
+      "parentUuid": "a3c68a3a_d4b3e2e4",
+      "range": {
+        "startLine": 55,
+        "startChar": 29,
+        "endLine": 55,
+        "endChar": 33
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fc62f28_443b8d26",
         "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
         "patchSetId": 3
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "8920f0a8_0b644920",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Wow, this piece of code got real messed up. Thanks for catching it. Here\u0027s how it should have looked:\n\n  if (settings_.aecm_routing_mode\n      \u0026\u0026 *settings_.aecm_routing_mode !\u003d EchoControlMobileImpl::kSpeakerphone) {\n    auto routing_mode \u003d static_cast\u003cwebrtc::EchoControlMobileImpl::RoutingMode\u003e(\n        *settings_.aecm_routing_mode);\n\n(Still a bit weird, with one implicit cast to EchoControlMobileImpl::RoutingMode, and one explicit.)",
+      "parentUuid": "0fc62f28_443b8d26",
+      "range": {
+        "startLine": 1040,
+        "startChar": 8,
+        "endLine": 1040,
+        "endChar": 76
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a6b8dbf_8e8e136a",
         "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
         "patchSetId": 3
@@ -206,6 +398,30 @@
       "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "789fbd4c_35e4bfb8",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 1,
+      "message": "Good point.\n\nI removed the flags, but will keep reporting an error if an aecdump contains the deprecated settings.",
+      "parentUuid": "2a6b8dbf_8e8e136a",
+      "range": {
+        "startLine": 1047,
+        "startChar": 6,
+        "endLine": 1047,
+        "endChar": 75
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

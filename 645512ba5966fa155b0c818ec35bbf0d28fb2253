@@ -22,6 +22,30 @@
       "revId": "645512ba5966fa155b0c818ec35bbf0d28fb2253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "447a761e_77a96a8a",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T10:42:46Z",
+      "side": 0,
+      "message": "Good point. I marked it as deprecated and left it in, so that we can parse and flag when old aecdumps will not be replayed correctly.",
+      "parentUuid": "7c0f0fd6_aec55ae4",
+      "range": {
+        "startLine": 221,
+        "startChar": 12,
+        "endLine": 221,
+        "endChar": 15
+      },
+      "revId": "645512ba5966fa155b0c818ec35bbf0d28fb2253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
