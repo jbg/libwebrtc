@@ -22,6 +22,30 @@
       "revId": "bc952597b972e3c9b59c85372bde14f28fc6837f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd101577_34256964",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-28T16:00:13Z",
+      "side": 1,
+      "message": "Based on offline sync ideally we would move this higher once the RTPSender doesn\u0027t inspect the encoded packet information from the point you mentioned through to sending out of the network.",
+      "parentUuid": "c93ce6a6_545f62ec",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 443,
+        "endChar": 3
+      },
+      "revId": "bc952597b972e3c9b59c85372bde14f28fc6837f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
