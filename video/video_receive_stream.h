@@ -32,6 +32,7 @@
 namespace webrtc {
 
 class CallStats;
+class FrameDecryptorInterface;
 class IvfFileWriter;
 class ProcessThread;
 class RTPFragmentationHeader;
@@ -112,6 +113,10 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   uint32_t GetPlayoutTimestamp() const override;
   void SetMinimumPlayoutDelay(int delay_ms) override;
 
+  // Set a custom FrameDecryptor which will decrypt each incoming payload. This
+  // is optional and separate from SRTP.
+  void SetFrameDecryptor(FrameDecryptorInterface* frame_decryptor) override;
+
   std::vector<webrtc::RtpSource> GetSources() const override;
 
  private:
@@ -166,6 +171,8 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   bool frame_decoded_ = false;
 
   int64_t last_keyframe_request_ms_ = 0;
+
+  FrameDecryptorInterface* frame_decryptor_ = nullptr;
 };
 }  // namespace internal
 }  // namespace webrtc
