@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74e3d638_67ee041b",
+        "filename": "modules/audio_processing/echo_control_mobile_bit_exact_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "The file content is not new, but the file is new. Therefore I think the year should be 2018.",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "071c29d5_c98711cc",
+        "filename": "modules/audio_processing/echo_control_mobile_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "What will happen to the EchoControlMobile interface in audio_processing.h? As it\u0027s contents are moved to the Impl class",
+      "range": {
+        "startLine": 34,
+        "startChar": 5,
+        "endLine": 72,
+        "endChar": 20
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae0e773_ea3ac90c",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896a9382_88cbf64c",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "Not used",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 17
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab9c432a_a5e4de55",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "Please make it a for-each loop",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "234a5d81_da52f35b",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "uint8_t makes the intention clearer",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3c68a3a_d4b3e2e4",
+        "filename": "modules/audio_processing/echo_control_mobile_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "Use nullptr. It has better type safety https://stackoverflow.com/questions/20509734/null-vs-nullptr-why-was-it-replaced",
+      "range": {
+        "startLine": 55,
+        "startChar": 29,
+        "endLine": 55,
+        "endChar": 33
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fc62f28_443b8d26",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "Looks fishy. You are casting a comparison to a routing mode. I think the next \u0027if\u0027 will always be false.",
+      "range": {
+        "startLine": 1040,
+        "startChar": 8,
+        "endLine": 1040,
+        "endChar": 76
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a6b8dbf_8e8e136a",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 1,
+      "message": "I think we should just remove the deprecated settings. Then audioproc_f will fail with \u0027unrecognized flag\u0027.\n\nOr print an error message closer to where the settings are parsed. With this CL, deprecated settings are detected a few layers in.",
+      "range": {
+        "startLine": 1047,
+        "startChar": 6,
+        "endLine": 1047,
+        "endChar": 75
+      },
+      "revId": "00c88c636769a907e46d8d3c5868f2feaaae78a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

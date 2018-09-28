@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c0f0fd6_aec55ae4",
+        "filename": "modules/audio_processing/test/debug_dump_replayer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-09-28T09:12:08Z",
+      "side": 0,
+      "message": "Does \u0027audioproc::Config\u0027 still have fields \u0027aecm_comfort_noise_enabled\u0027 and \u0027aecm_routing_mode\u0027? Are they deprecated now and can be removed?",
+      "range": {
+        "startLine": 221,
+        "startChar": 12,
+        "endLine": 221,
+        "endChar": 15
+      },
+      "revId": "645512ba5966fa155b0c818ec35bbf0d28fb2253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
