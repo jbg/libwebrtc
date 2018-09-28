@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7578826d_204e05e4",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-09-28T14:34:57Z",
+      "side": 1,
+      "message": "After some thinking, I feel that we may need to add more info about last-played-timestamp and next available timestamp(s).\n\nHow about timestamp leap as https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d305\n\nnote that it can be negative.\n\nFeel free to consider anything else.",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 28
+      },
+      "revId": "0b06ca63554085f674a2fdecbd181f213263a691",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
