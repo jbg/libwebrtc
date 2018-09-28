@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "b24a98e1_b1c352a8",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2788,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-09-28T14:27:40Z",
+      "side": 1,
+      "message": "We should really split this function in two, to make it clear that the code below only affects single-layer encodings. Later :)",
+      "range": {
+        "startLine": 2788,
+        "startChar": 4,
+        "endLine": 2788,
+        "endChar": 18
+      },
+      "revId": "d977535330293f6454b645113c36d4265be0c09e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d54a4ac9_b2d9805d",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 2
@@ -99,6 +122,24 @@
       "revId": "d977535330293f6454b645113c36d4265be0c09e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f19b54e8_9b3af945",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2833,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-09-28T14:27:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c8390d98_9e55d0f1",
+      "revId": "d977535330293f6454b645113c36d4265be0c09e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
