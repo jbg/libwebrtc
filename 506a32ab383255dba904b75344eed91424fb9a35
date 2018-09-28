@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56c86b8e_fa882701",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-09-28T16:49:22Z",
+      "side": 1,
+      "message": "This could introduce a bug where num_temporal_layers is set at index 0, but for no other layers.  It could end up setting the num_temporal_layers for index 0 from the application, but the other layers would be the defaults, ending up in a different number between simulcast layers.\n\nTo get rid of this you could loop through twice. The first time get the value if any of them are set. The second time making sure that all layers are set to that value.",
+      "range": {
+        "startLine": 1843,
+        "startChar": 7,
+        "endLine": 1843,
+        "endChar": 16
+      },
+      "revId": "506a32ab383255dba904b75344eed91424fb9a35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9baee7d2_5d3d2633",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-09-28T16:49:22Z",
+      "side": 1,
+      "message": "nit: Could you specify the layer that is different here?\n\nAttempted to set RtpParameters num_temporal_layers to a different value\n---\u003e\nAttempted to set RtpParameters num_temporal_layers at encoding layer i to a different value than other encoding layers.",
+      "range": {
+        "startLine": 1846,
+        "startChar": 28,
+        "endLine": 1847,
+        "endChar": 68
+      },
+      "revId": "506a32ab383255dba904b75344eed91424fb9a35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
