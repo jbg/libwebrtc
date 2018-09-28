@@ -417,6 +417,24 @@
     },
     {
       "key": {
+        "uuid": "b60d9de5_54243fee",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-09-28T15:38:35Z",
+      "side": 1,
+      "message": "The decryptor will be alive as long as it is attached to at least one RtpReceiver.",
+      "parentUuid": "7e6b84e0_eaf5bd69",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19e42f71_c2fb6671",
         "filename": "call/audio_send_stream.h",
         "patchSetId": 6
