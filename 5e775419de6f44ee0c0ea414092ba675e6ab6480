@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "187e9ef7_7e199429",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-28T12:44:38Z",
+      "side": 1,
+      "message": "Why is Encrypt() returning an error code? What can the client be expected to do with it? The only reason I can think of is to not push packet to network?",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b005322_0ea0f79a",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-28T12:44:38Z",
+      "side": 1,
+      "message": "1. The only place which calls SendData() ignores the result (https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_coding/acm2/audio_coding_module.cc?type\u003dcs\u0026g\u003d0\u0026l\u003d526)\n2. Returning encrypt_status directly seems odd since there\u0027s no reason to believe the set of return codes for FrameEncryptorInterface is identical to that of AudioPacketizationCallback.",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bcb637f0_af313594",
         "filename": "audio/channel.cc",
         "patchSetId": 6
@@ -30,6 +64,40 @@
       "writtenOn": "2018-09-28T02:11:54Z",
       "side": 1,
       "message": "Initializer like frame_decryptor?",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be10ae12_584f183e",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-28T12:44:38Z",
+      "side": 1,
+      "message": "I think the decryptor should be responsible for logging errors. The only reason to return (a bool) from this interface is to avoid trying to decode the packet, right?",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c67797c_638beaac",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-28T12:44:38Z",
+      "side": 1,
+      "message": "Implicit conversion to bool? Don\u0027t we have a compiler warning against this?",
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -128,6 +196,23 @@
     },
     {
       "key": {
+        "uuid": "7e6b84e0_eaf5bd69",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-28T12:44:38Z",
+      "side": 1,
+      "message": "What\u0027s the lifetime contract for the decryptor? Should ownership be transferred to the stream, or is it shared?",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19e42f71_c2fb6671",
         "filename": "call/audio_send_stream.h",
         "patchSetId": 6
@@ -145,6 +230,23 @@
         "endLine": 24,
         "endChar": 44
       },
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fdd7046_a1264542",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-09-28T12:44:38Z",
+      "side": 1,
+      "message": "Life time contract? Shared or transferred? unique_ptr or scoped_refptr? Looks like the interface is already ref counted.",
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
