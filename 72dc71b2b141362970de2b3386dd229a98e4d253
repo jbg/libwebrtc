@@ -22,6 +22,30 @@
       "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba8a068b_9a5e25d4",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-09-28T14:30:09Z",
+      "side": 1,
+      "message": "The main point of the CL is to get rid of the deprecated parsing functions, i.e.  GetNumberOfEvents(), GetEventType(index), GetTimestamp(index), GetRtpHeader(index, ...) and GetAudioPlayout(index). This is urgent as it is blocking other work. Just using the new Packet constructor would not solve the issue.\n\nI agree that it would be nice to merge this with NetEqStreamInput. I don\u0027t know whether support for multiple SSRCs is needed, but when I asked in the past, people thought it would be safer to keep it. I decided to minimize functional changes at the cost of the slightly larger code changes below.",
+      "parentUuid": "ac1be005_b1d65ea5",
+      "range": {
+        "startLine": 67,
+        "startChar": 24,
+        "endLine": 67,
+        "endChar": 32
+      },
+      "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
