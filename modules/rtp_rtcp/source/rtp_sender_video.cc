@@ -422,16 +422,20 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
   limits.last_packet_reduction_len =
       last_packet->headers_size() - middle_packet->headers_size();
 
+  RtpGenericFrameDescriptor generic_descriptor_wire;
   RTPVideoHeader minimized_video_header;
-  const RTPVideoHeader* packetize_video_header = video_header;
-  if (first_packet->HasExtension<RtpGenericFrameDescriptorExtension>() &&
-      MinimizeDescriptor(*video_header, &minimized_video_header)) {
-    packetize_video_header = &minimized_video_header;
+  if (first_packet->GetExtension<RtpGenericFrameDescriptorExtension>(
+          &generic_descriptor_wire)) {
+    // TODO(philipel): Add a byte representation for RtpGenericFrameDescriptor
+    //                 so that it can be used in the MAC calculation.
+
+    if (MinimizeDescriptor(*video_header, &minimized_video_header))
+      video_header = &minimized_video_header;
   }
 
   std::unique_ptr<RtpPacketizer> packetizer = RtpPacketizer::Create(
       video_type, rtc::MakeArrayView(payload_data, payload_size), limits,
-      *packetize_video_header, frame_type, fragmentation);
+      *video_header, frame_type, fragmentation);
 
   const uint8_t temporal_id = GetTemporalId(*video_header);
   StorageType storage = GetStorageType(temporal_id, retransmission_settings,
