@@ -504,7 +504,7 @@ std::vector<std::set<uint8_t>> GetTemporalDependencies(
     case 1:
       return {{0}};
     case 2:
-      return {{6}, {0}, {0}, {1, 2}, {2}, {3, 4}, {4}, {5, 6}};
+      return {{2}, {0}, {0}, {1, 2}};
     case 3:
       if (field_trial::IsEnabled("WebRTC-UseShortVP8TL3Pattern")) {
         return {{0}, {0}, {0}, {0, 1, 2}};
