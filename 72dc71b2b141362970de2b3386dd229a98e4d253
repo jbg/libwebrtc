@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac1be005_b1d65ea5",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-09-28T13:56:36Z",
+      "side": 1,
+      "message": "I am not denying the elegancy of these new codes. But how functionally different is it from just replacing old line 59 with the new Packet constructor?\n\nIMO, this should eventually be merged with https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_tools/event_log_visualizer/analyzer.cc?sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026q\u003danalyzer.cc\u0026g\u003d0\u0026l\u003d1601\n\nso the effort of refactoring it should be inline with \n\nI think the only functional difference between this and NetEqStreamInput in analyzer.cc is that this one allows multiple SSRC as input, which may be invalidated by itself.\n\nIf you think these new codes will help in\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/rtc_tools/event_log_visualizer/analyzer.cc?sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026q\u003danalyzer.cc\u0026g\u003d0\u0026l\u003d1601\n\nlet\u0027s do it. Otherwise I would like to change this as minimal as possible.",
+      "range": {
+        "startLine": 67,
+        "startChar": 24,
+        "endLine": 67,
+        "endChar": 32
+      },
+      "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
