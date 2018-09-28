@@ -672,6 +672,9 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
   rtc::CritScope cs_render(&crit_render_);
   rtc::CritScope cs_capture(&crit_capture_);
 
+  // Echo cancellation requires high pass filtering.
+  config_.high_pass_filter.enabled |= config_.echo_canceller.enabled;
+
   public_submodules_->echo_cancellation->Enable(
       config_.echo_canceller.enabled && !config_.echo_canceller.mobile_mode);
   static_cast<EchoControlMobile*>(public_submodules_->echo_control_mobile.get())
@@ -1187,6 +1190,13 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   // are moved to APM.
   RTC_DCHECK(!(public_submodules_->echo_cancellation->is_enabled() &&
                public_submodules_->echo_control_mobile->is_enabled()));
+
+  // Ensure noise suppression is not run without high pass filtering.
+  // TODO(saza): Move into ApplyConfig when AudioProcessing::noise_suppression()
+  // is removed from the API.
+  config_.high_pass_filter.enabled |=
+      public_submodules_->noise_suppression->is_enabled();
+  InitializeLowCutFilter();
 
   MaybeUpdateHistograms();
 
