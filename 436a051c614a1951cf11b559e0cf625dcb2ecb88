@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f03a50c_63ebe959",
+        "filename": "modules/audio_processing/echo_control_mobile_bit_exact_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-09-28T07:08:18Z",
+      "side": 1,
+      "message": "This file has been renamed from echo_control_mobile_unittest, but also edited. I suggest manually diffing.",
+      "range": {
+        "startLine": 19,
+        "startChar": 17,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "436a051c614a1951cf11b559e0cf625dcb2ecb88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
