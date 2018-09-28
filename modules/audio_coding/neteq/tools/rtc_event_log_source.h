@@ -13,6 +13,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "logging/rtc_event_log/rtc_event_log_parser_new.h"
 #include "modules/audio_coding/neteq/tools/packet_source.h"
@@ -35,9 +36,6 @@ class RtcEventLogSource : public PacketSource {
 
   virtual ~RtcEventLogSource();
 
-  // Registers an RTP header extension and binds it to |id|.
-  virtual bool RegisterRtpHeaderExtension(RTPExtensionType type, uint8_t id);
-
   std::unique_ptr<Packet> NextPacket() override;
 
   // Returns the timestamp of the next audio output event, in milliseconds. The
@@ -50,11 +48,10 @@ class RtcEventLogSource : public PacketSource {
 
   bool OpenFile(const std::string& file_name);
 
+  std::vector<std::unique_ptr<Packet>> rtp_packets_;
   size_t rtp_packet_index_ = 0;
+  std::vector<int64_t> audio_outputs_;
   size_t audio_output_index_ = 0;
-
-  ParsedRtcEventLogNew parsed_stream_;
-  std::unique_ptr<RtpHeaderParser> parser_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(RtcEventLogSource);
 };

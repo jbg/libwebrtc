@@ -314,7 +314,7 @@ std::unique_ptr<NetEqTest> NetEqTestFactory::InitializeTest(
       RtpFileSource::ValidPcap(input_file_name)) {
     input.reset(new NetEqRtpDumpInput(input_file_name, rtp_ext_map));
   } else {
-    input.reset(new NetEqEventLogInput(input_file_name, rtp_ext_map));
+    input.reset(new NetEqEventLogInput(input_file_name));
   }
 
   std::cout << "Input file: " << input_file_name << std::endl;
