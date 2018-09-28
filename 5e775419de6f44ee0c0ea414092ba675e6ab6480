@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "df0e03dc_7083806a",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "Maybe repeat this comment for the decryption case too.",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcb637f0_af313594",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "Initializer like frame_decryptor?",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f86484b8_d94b5bee",
         "filename": "audio/channel.cc",
         "patchSetId": 6
@@ -94,6 +128,23 @@
     },
     {
       "key": {
+        "uuid": "1d90b79f_168f60a7",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "don\u0027t change",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b336748c_ae850f98",
         "filename": "call/video_receive_stream.h",
         "patchSetId": 6
@@ -111,6 +162,40 @@
         "endLine": 19,
         "endChar": 44
       },
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1534754a_bf666c9e",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "newline",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "211f4ffc_26e5dc3c",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "Comment?",
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -157,6 +242,57 @@
         "endLine": 232,
         "endChar": 33
       },
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c49fc52a_eed53131",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "ahhhh so old school\n\nfor (auto\u0026 entry : receive_streams_) {\n  entry.second-\u003eSetFrameDecryptor(frame_decryptor);\n}",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac27ad80_2b2b81e9",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "use new-style for loop",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c239b385_5c7ef160",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "add comment for frame_encryptor?",
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -229,6 +365,23 @@
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dda7fcd_acf4da89",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-09-28T02:11:54Z",
+      "side": 1,
+      "message": "I\u0027m surprised git cl format does that.",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
