@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "96b9c35a_88d053a9",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-01T17:07:06Z",
+      "side": 1,
+      "message": "Ah right. Sorry, I saw this code as inside the check for |num_temporal_layers| having a value. Thanks for adding the test to verify.",
+      "parentUuid": "d0bef2e5_e9e82d50",
+      "range": {
+        "startLine": 1843,
+        "startChar": 7,
+        "endLine": 1843,
+        "endChar": 16
+      },
+      "revId": "506a32ab383255dba904b75344eed91424fb9a35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9baee7d2_5d3d2633",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 5
