@@ -31,7 +31,7 @@ constexpr float kAttackFilterConstant = 0.f;
 constexpr float kMaxGainChangePerSecondDb = 3.f;
 constexpr float kMaxGainChangePerFrameDb =
     kMaxGainChangePerSecondDb * kFrameDurationMs / 1000.f;
-constexpr float kHeadroomDbfs = 1.f;
+constexpr float kHeadroomDbfs = 2.f;
 constexpr float kMaxGainDb = 30.f;
 constexpr float kInitialAdaptiveDigitalGainDb = 8.f;
 
@@ -50,7 +50,7 @@ constexpr float kFullBufferLeakFactor = 1.f - 1.f / kFullBufferSizeMs;
 constexpr float kInitialSpeechLevelEstimateDbfs = -30.f;
 
 // Saturation Protector settings.
-constexpr float kInitialSaturationMarginDb = 17.f;
+constexpr float kInitialSaturationMarginDb = 20.f;
 
 constexpr size_t kPeakEnveloperSuperFrameLengthMs = 400;
 static_assert(kFullBufferSizeMs % kPeakEnveloperSuperFrameLengthMs == 0,
