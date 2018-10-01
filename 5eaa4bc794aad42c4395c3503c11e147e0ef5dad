@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2768ba0_a0be8720",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T16:39:59Z",
+      "side": 1,
+      "message": "may be do not check this in every loop",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 29
+      },
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1173b72_412e53c4",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T16:39:59Z",
+      "side": 1,
+      "message": "byte_representation_.assign(byte_representation.begin(), byte_representation.end());",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 56
+      },
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a36cf6a_48c2a0f2",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T16:39:59Z",
+      "side": 1,
+      "message": "I wouldn\u0027t mind if you inline these new two functions.\nThe main reason I didn\u0027t inlined others is because I do not like to expose RTC_DCHECK in the header.",
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7855f9e_3e486a6a",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T16:39:59Z",
+      "side": 1,
+      "message": "you plan to use this function in this or in next CL?",
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94d2f235_87d5a7ef",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T16:39:59Z",
+      "side": 1,
+      "message": "used?",
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52488f93_dd255d77",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T16:39:59Z",
+      "side": 1,
+      "message": "looking how it is used, it might be cleaner to pass \nconst RtpGenericFrameDescriptor*",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
