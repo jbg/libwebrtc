@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "acf53ba5_036640dd",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-01T16:05:38Z",
+      "side": 1,
+      "message": "Looking at this again this can fail and I believe it is correctly doing what is asked. If encryption fails the packet will not be forwarded out of the network. This is expected to be extremely rare but it can happen. This is an implementation detail of how API consumers implement their encryptor.",
+      "parentUuid": "1c5db87e_6b3ac118",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b005322_0ea0f79a",
         "filename": "audio/channel.cc",
         "patchSetId": 6
@@ -104,6 +122,24 @@
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20d11a8c_8d5df0a5",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-01T16:05:38Z",
+      "side": 1,
+      "message": "I have addressed this by returning -1 to indicate failure. In this case it will not send the data so it is safe to ignore the error code. Logging the internal error code seems useful for debugging so I have left that in.",
+      "parentUuid": "b1193236_e34b1e61",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -353,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "092b7692_d6e3b7a2",
+        "filename": "audio/channel.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-01T16:05:38Z",
+      "side": 1,
+      "message": "The only issue with making this const is I would have to pass the FrameEncryptor* into the constructor for the \"Receiver\" side when it is almost always set to nullptr which might complicate the construction logic. So for now I think I will avoid this change just to keep construction as straight forward as possible.",
+      "parentUuid": "9224ea0e_f7477b2f",
+      "range": {
+        "startLine": 422,
+        "startChar": 25,
+        "endLine": 422,
+        "endChar": 27
+      },
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60ccfd5f_2f6e917b",
         "filename": "call/audio_receive_stream.h",
         "patchSetId": 6
@@ -514,6 +574,24 @@
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "def69a27_93626792",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-01T16:05:38Z",
+      "side": 1,
+      "message": "Considering this done as this send stream will not outlive the parent RtpSender.",
+      "parentUuid": "54cf5522_6464f18f",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -912,6 +990,30 @@
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ccc3c49_67dbd046",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-01T16:05:38Z",
+      "side": 1,
+      "message": "After thinking about it. You may attach the FrameEncryptor after construction so it might not fit nicely with this model of passing it in the constructor.",
+      "parentUuid": "cad2ac47_a0285e20",
+      "range": {
+        "startLine": 244,
+        "startChar": 6,
+        "endLine": 244,
+        "endChar": 56
+      },
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
