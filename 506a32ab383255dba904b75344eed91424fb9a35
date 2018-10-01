@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0bef2e5_e9e82d50",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-10-01T10:18:53Z",
+      "side": 1,
+      "message": "If one optional contains a value and the other not, they will not be equal I think. \nI added a test for this case.",
+      "parentUuid": "56c86b8e_fa882701",
+      "range": {
+        "startLine": 1843,
+        "startChar": 7,
+        "endLine": 1843,
+        "endChar": 16
+      },
+      "revId": "506a32ab383255dba904b75344eed91424fb9a35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9baee7d2_5d3d2633",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "506a32ab383255dba904b75344eed91424fb9a35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c00bf9f_9d64a9c0",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-10-01T10:18:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9baee7d2_5d3d2633",
+      "range": {
+        "startLine": 1846,
+        "startChar": 28,
+        "endLine": 1847,
+        "endChar": 68
+      },
+      "revId": "506a32ab383255dba904b75344eed91424fb9a35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
