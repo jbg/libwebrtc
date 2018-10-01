@@ -422,8 +422,9 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
   limits.last_packet_reduction_len =
       last_packet->headers_size() - middle_packet->headers_size();
 
-  RTPVideoHeader minimized_video_header;
   const RTPVideoHeader* packetize_video_header = video_header;
+  RtpGenericFrameDescriptor generic_descriptor_wire;
+  RTPVideoHeader minimized_video_header;
   if (first_packet->HasExtension<RtpGenericFrameDescriptorExtension>() &&
       MinimizeDescriptor(*video_header, &minimized_video_header)) {
     packetize_video_header = &minimized_video_header;
