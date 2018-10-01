@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "4a67a882_141ecac2",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T13:03:41Z",
+      "side": 1,
+      "message": "Making the RtpGenericFrameDescriptor is the purpose of this CL.\n\nThe way it will be used is something like:\nstd::vector\u003cuint8_t\u003e descriptor_byte_representation \u003d generic_descriptor_wire.ByteRepresentation();\n\nThe descriptor_byte_representation will then be used for the MAC calculation.",
+      "parentUuid": "9462e6c1_5daa229a",
+      "range": {
+        "startLine": 427,
+        "startChar": 2,
+        "endLine": 428,
+        "endChar": 36
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43b7095b_e040e242",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
         "patchSetId": 2
@@ -131,6 +155,30 @@
       "writtenOn": "2018-10-01T12:26:40Z",
       "side": 1,
       "message": "there is a reason why extra packetize_video_header variable was added:\ne.g. there is GetTemporalId function below that takes video_header or AddRtpHeaderExtensions when payload can be put into single packet.\nThose expect full header, not the minimized version (that has no temporal id and lot\u0027s of other details skipped)",
+      "range": {
+        "startLine": 433,
+        "startChar": 6,
+        "endLine": 433,
+        "endChar": 18
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31911597_56f030ea",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T13:03:41Z",
+      "side": 1,
+      "message": "Reverted this change.",
+      "parentUuid": "43b7095b_e040e242",
       "range": {
         "startLine": 433,
         "startChar": 6,
@@ -189,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "75b73c81_9c363111",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T13:03:41Z",
+      "side": 1,
+      "message": "Added SpatialLayer() to RtpGenericFrameDescriptor.",
+      "parentUuid": "b5b700cd_84235c7c",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 3
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f69b6097_9bdd27a5",
         "filename": "video/rtp_video_stream_receiver.h",
         "patchSetId": 2
@@ -200,6 +272,30 @@
       "writtenOn": "2018-10-01T12:26:40Z",
       "side": 1,
       "message": "do you mind improving signature of the function?\nreturn bool on error instead of undesribed status code represented with int32\ncollaps payload_data and payload_size into single parameter rtc::ArrayView\u003cconst uint8_t\u003e\nchange const WebrtcRTPHeader* to const WebrtcRTPHeader\u0026 as indication it is not expected to be nullptr\n\nWouldn\u0027t mind if you find it better to postpone interface change",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 75
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "447c37ad_ef4fe190",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T13:03:41Z",
+      "side": 1,
+      "message": "This function can be merged with ReceivePacket, but that will be done in another CL.",
+      "parentUuid": "f69b6097_9bdd27a5",
       "range": {
         "startLine": 101,
         "startChar": 2,
