@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2e718d4_30afd384",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T09:52:23Z",
+      "side": 1,
+      "message": "note that first_packet will have different bytes for this extension compared to middle or last packet. Does it make sense to authenticate just the one in the 1st packet?",
+      "range": {
+        "startLine": 427,
+        "startChar": 6,
+        "endLine": 427,
+        "endChar": 18
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62e16414_73ec5d85",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-01T09:52:23Z",
+      "side": 1,
+      "message": "it might be better to (re)add rtc::ArrayView\u003cconst uint8_\u003e GetRawExtension function to the RtpPacket.\nwant me to do it?\nthis code parses extension that was just written with intend to write it again.",
+      "range": {
+        "startLine": 427,
+        "startChar": 2,
+        "endLine": 428,
+        "endChar": 36
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
