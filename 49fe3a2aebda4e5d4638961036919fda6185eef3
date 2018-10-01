@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8acb1aa1_1e29eb11",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T11:26:37Z",
+      "side": 1,
+      "message": "The receiver only use information from the first packet (except the end bit, but if that was changed the payload would change as well).",
+      "parentUuid": "b2e718d4_30afd384",
+      "range": {
+        "startLine": 427,
+        "startChar": 6,
+        "endLine": 427,
+        "endChar": 18
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62e16414_73ec5d85",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-01T09:52:23Z",
       "side": 1,
       "message": "it might be better to (re)add rtc::ArrayView\u003cconst uint8_\u003e GetRawExtension function to the RtpPacket.\nwant me to do it?\nthis code parses extension that was just written with intend to write it again.",
+      "range": {
+        "startLine": 427,
+        "startChar": 2,
+        "endLine": 428,
+        "endChar": 36
+      },
+      "revId": "49fe3a2aebda4e5d4638961036919fda6185eef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31a7a5cc_cc2c71a9",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T11:26:37Z",
+      "side": 1,
+      "message": "I want to have the RtpGenericFrameDescriptor, not its bit representation on the wire. I can\u0027t find a clean solution for that.",
+      "parentUuid": "62e16414_73ec5d85",
       "range": {
         "startLine": 427,
         "startChar": 2,

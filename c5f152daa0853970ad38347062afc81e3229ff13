@@ -16,6 +16,24 @@
       "revId": "c5f152daa0853970ad38347062afc81e3229ff13",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1165032_407d6d82",
+        "filename": "modules/rtp_rtcp/source/rtp_format_video_generic.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-01T11:26:37Z",
+      "side": 0,
+      "message": "I did not remove the old format, but this hack is not necessary anymore so I removed it along with its related comment.",
+      "parentUuid": "afcd68e8_a4be3091",
+      "revId": "c5f152daa0853970ad38347062afc81e3229ff13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
