@@ -16,6 +16,7 @@
 #include <string>
 #include <utility>
 
+#include "api/video/video_bitrate_allocation.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder.h"
@@ -30,6 +31,7 @@
 #include "media/engine/webrtcvoiceengine.h"
 #include "rtc_base/copyonwritebuffer.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/stringencode.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/stringutils.h"
 #include "rtc_base/timeutils.h"
@@ -144,6 +146,11 @@ int GetMaxFramerate(const webrtc::VideoEncoderConfig& encoder_config,
     max_fps = std::max(fps, max_fps);
   }
   return max_fps;
+}
+
+bool IsTemporalLayersSupported(const std::string& codec_name) {
+  return CodecNamesEq(codec_name, kVp8CodecName) ||
+         CodecNamesEq(codec_name, kVp9CodecName);
 }
 
 static std::string CodecVectorToString(const std::vector<VideoCodec>& codecs) {
@@ -1734,7 +1741,9 @@ webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
         (new_parameters.encodings[i].max_bitrate_bps !=
          rtp_parameters_.encodings[i].max_bitrate_bps) ||
         (new_parameters.encodings[i].max_framerate !=
-         rtp_parameters_.encodings[i].max_framerate)) {
+         rtp_parameters_.encodings[i].max_framerate) ||
+        (new_parameters.encodings[i].num_temporal_layers !=
+         rtp_parameters_.encodings[i].num_temporal_layers)) {
       new_param = true;
       break;
     }
@@ -1822,6 +1831,24 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ValidateRtpParameters(
                              "Attempted to set RtpParameters min bitrate "
                              "larger than max bitrate.");
       }
+    }
+    if (rtp_parameters.encodings[i].num_temporal_layers) {
+      if (*rtp_parameters.encodings[i].num_temporal_layers < 1 ||
+          *rtp_parameters.encodings[i].num_temporal_layers >
+              webrtc::kMaxTemporalStreams) {
+        LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_RANGE,
+                             "Attempted to set RtpParameters "
+                             "num_temporal_layers to an invalid number.");
+      }
+    }
+    if (i > 0 && (rtp_parameters.encodings[i].num_temporal_layers !=
+                  rtp_parameters.encodings[i - 1].num_temporal_layers)) {
+      LOG_AND_RETURN_ERROR(
+          RTCErrorType::INVALID_MODIFICATION,
+          "Attempted to set RtpParameters num_temporal_layers "
+          "at encoding layer i: " +
+              rtc::ToString(i) +
+              " to a different value than other encoding layers.");
     }
   }
   return webrtc::RTCError::OK();
@@ -1935,6 +1962,10 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
     if (rtp_parameters_.encodings[i].max_framerate) {
       encoder_config.simulcast_layers[i].max_framerate =
           *rtp_parameters_.encodings[i].max_framerate;
+    }
+    if (rtp_parameters_.encodings[i].num_temporal_layers) {
+      encoder_config.simulcast_layers[i].num_temporal_layers =
+          *rtp_parameters_.encodings[i].num_temporal_layers;
     }
   }
 
@@ -2648,6 +2679,12 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
       if (!is_screenshare_) {
         // Update simulcast framerates with max configured max framerate.
         layers[i].max_framerate = max_framerate;
+        // Update with configured num temporal layers if supported by codec.
+        if (encoder_config.simulcast_layers[i].num_temporal_layers &&
+            IsTemporalLayersSupported(codec_name_)) {
+          layers[i].num_temporal_layers =
+              *encoder_config.simulcast_layers[i].num_temporal_layers;
+        }
       }
       // Update simulcast bitrates with configured min and max bitrate.
       if (encoder_config.simulcast_layers[i].min_bitrate_bps > 0) {
@@ -2728,6 +2765,14 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
     webrtc::VideoCodecVP9 vp9_settings;
     encoder_config.encoder_specific_settings->FillVideoCodecVp9(&vp9_settings);
     layer.num_temporal_layers = vp9_settings.numberOfTemporalLayers;
+  }
+
+  if (!is_screenshare_ && IsTemporalLayersSupported(codec_name_)) {
+    // Use configured number of temporal layers if set.
+    if (encoder_config.simulcast_layers[0].num_temporal_layers) {
+      layer.num_temporal_layers =
+          *encoder_config.simulcast_layers[0].num_temporal_layers;
+    }
   }
 
   layers.push_back(layer);
