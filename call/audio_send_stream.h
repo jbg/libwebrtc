@@ -29,6 +29,7 @@
 namespace webrtc {
 
 class AudioFrame;
+class FrameEncryptorInterface;
 
 class AudioSendStream {
  public:
@@ -128,6 +129,11 @@ class AudioSendStream {
 
     // Track ID as specified during track creation.
     std::string track_id;
+
+    // An optional custom frame encryptor that allows the entire frame to be
+    // encryptor in whatever way the caller choses. This is not required by
+    // default.
+    webrtc::FrameEncryptorInterface* frame_encryptor = nullptr;
   };
 
   virtual ~AudioSendStream() = default;

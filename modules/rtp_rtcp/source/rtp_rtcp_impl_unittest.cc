@@ -241,9 +241,10 @@ class RtpRtcpImplTest : public ::testing::Test {
     rtp_video_header.video_timing = {0u, 0u, 0u, 0u, 0u, 0u, false};
 
     const uint8_t payload[100] = {0};
-    EXPECT_EQ(true, module->impl_->SendOutgoingData(
-                        kVideoFrameKey, codec_.plType, 0, 0, payload,
-                        sizeof(payload), nullptr, &rtp_video_header, nullptr));
+    EXPECT_EQ(true,
+              module->impl_->SendOutgoingData(
+                  kVideoFrameKey, codec_.plType, 0, 0, payload, sizeof(payload),
+                  nullptr, &rtp_video_header, nullptr, nullptr));
   }
 
   void IncomingRtcpNack(const RtpRtcpModule* module, uint16_t sequence_number) {
