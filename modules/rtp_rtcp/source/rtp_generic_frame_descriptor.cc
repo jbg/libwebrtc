@@ -31,6 +31,17 @@ void RtpGenericFrameDescriptor::SetTemporalLayer(int temporal_layer) {
   temporal_layer_ = temporal_layer;
 }
 
+int RtpGenericFrameDescriptor::SpatialLayer() const {
+  RTC_DCHECK(FirstPacketInSubFrame());
+  int layer = 0;
+  uint8_t spatial_layers = spatial_layers_;
+  while (spatial_layers_ != 0 && !(spatial_layers & 1)) {
+    spatial_layers >>= 1;
+    layer++;
+  }
+  return layer;
+}
+
 uint8_t RtpGenericFrameDescriptor::SpatialLayersBitmask() const {
   RTC_DCHECK(FirstPacketInSubFrame());
   return spatial_layers_;

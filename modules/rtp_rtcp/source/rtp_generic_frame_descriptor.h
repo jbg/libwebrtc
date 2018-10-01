@@ -41,8 +41,9 @@ class RtpGenericFrameDescriptor {
   int TemporalLayer() const;
   void SetTemporalLayer(int temporal_layer);
 
-  // Frame might by used, possible indrectly, for spatial layer sid iff
+  // Frame might by used, possible indirectly, for spatial layer sid iff
   // (bitmask & (1 << sid)) != 0
+  int SpatialLayer() const;
   uint8_t SpatialLayersBitmask() const;
   void SetSpatialLayersBitmask(uint8_t spatial_layers);
 
