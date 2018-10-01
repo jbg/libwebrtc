@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b2a0fe12_17e5181d",
+        "filename": "audio/audio_receive_stream.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-01T07:43:28Z",
+      "side": 1,
+      "message": "Depends on how the AudioReceiveStream tests are updated. Maybe it needs a constructor where the test can inject mock objects. (All #if 0 in the cl are for unfinished things, mostly for tests and synchronization. Which have to be dealt with before landing).",
+      "parentUuid": "117a365d_7325f64b",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 5
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a98d6c87_8f1c9c95",
         "filename": "audio/audio_receive_stream.h",
         "patchSetId": 8
@@ -59,6 +83,30 @@
       "writtenOn": "2018-09-27T16:36:00Z",
       "side": 1,
       "message": "is this the place where we eventually want to hook up the media transport?",
+      "range": {
+        "startLine": 275,
+        "startChar": 23,
+        "endLine": 275,
+        "endChar": 39
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abacb7cc_682be546",
+        "filename": "audio/channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-01T07:43:28Z",
+      "side": 1,
+      "message": "I haven\u0027t look much into audio send code yet. Ideally, it should be hooked into AudioSendStream. We have\n\nvoid AudioSendStream::SendAudioData(std::unique_ptr\u003cAudioFrame\u003e audio_frame) {\n  RTC_CHECK_RUNS_SERIALIZED(\u0026audio_capture_race_checker_);\n  channel_proxy_-\u003eProcessAndEncodeAudio(std::move(audio_frame));\n}\n\nWe should do \"process and encode\" in a media-independent way, and then send the encoded frame to the media transport for packetization and transmission. But currently, it looks like almost everything is done by voe::Channel and AudioCodingModule. So we may need to take apart AudioCodingModule and use the relevant subcomponents of it.",
+      "parentUuid": "86e0bbab_58c70f31",
       "range": {
         "startLine": 275,
         "startChar": 23,
@@ -117,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "8cc653be_263bd3e1",
+        "filename": "audio/channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-01T07:43:28Z",
+      "side": 1,
+      "message": "I think it\u0027s per ssrc in the RTCP signalling, and I think this is the RTT reported by the remote end. But I\u0027m not really familiar with how it\u0027s measured and used.",
+      "parentUuid": "716e59a8_728038b4",
+      "range": {
+        "startLine": 1052,
+        "startChar": 43,
+        "endLine": 1052,
+        "endChar": 54
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5ffda67_5731f78f",
         "filename": "audio/rtp_audio_stream_receiver.h",
         "patchSetId": 8
@@ -128,6 +200,30 @@
       "writtenOn": "2018-09-27T16:36:00Z",
       "side": 1,
       "message": "could you document what does \u0027enable\u0027 do?",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 32
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a08b8bc5_4e7c90d3",
+        "filename": "audio/rtp_audio_stream_receiver.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-01T07:43:28Z",
+      "side": 1,
+      "message": "Looks like enable is redundant here, caller passes true when maxNumberOfPackets is non-zero.",
+      "parentUuid": "e5ffda67_5731f78f",
       "range": {
         "startLine": 66,
         "startChar": 26,
@@ -174,6 +270,30 @@
       "writtenOn": "2018-09-27T16:36:00Z",
       "side": 1,
       "message": "what\u0027s the unit? (or is \u0027rtp_timestamp\u0027 always in the same unit?)",
+      "range": {
+        "startLine": 117,
+        "startChar": 35,
+        "endLine": 117,
+        "endChar": 40
+      },
+      "revId": "07b3f0a9a0dc497e86790f0cf7cb0c5910c9f4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81ed0dae_aebab268",
+        "filename": "audio/rtp_audio_stream_receiver.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-01T07:43:28Z",
+      "side": 1,
+      "message": "We usually have uint32_t rtp_timestamp. For video, unit is always 90 kHz, but for audio the unit varies, and I think it usually is tied to the audio sampling rate. And here it\u0027s a larger type than uint32_t, which I guess means that we try to track when it wraps around.",
+      "parentUuid": "19817deb_26b13bbf",
       "range": {
         "startLine": 117,
         "startChar": 35,
