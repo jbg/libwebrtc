@@ -139,15 +139,17 @@ VideoReceiveStream::VideoReceiveStream(
                                  rtp_receive_statistics_.get(),
                                  &stats_proxy_,
                                  process_thread_,
-                                 this,   // NackSender
-                                 this,   // KeyFrameRequestSender
-                                 this),  // OnCompleteFrameCallback
+                                 this,  // NackSender
+                                 this,  // KeyFrameRequestSender
+                                 this,  // OnCompleteFrameCallback
+                                 config_.frame_decryptor),
       rtp_stream_sync_(this) {
   RTC_LOG(LS_INFO) << "VideoReceiveStream: " << config_.ToString();
 
   RTC_DCHECK(process_thread_);
   RTC_DCHECK(call_stats_);
 
+  frame_decryptor_ = config_.frame_decryptor;
   module_process_sequence_checker_.Detach();
 
   RTC_DCHECK(!config_.decoders.empty());
@@ -478,6 +480,11 @@ bool VideoReceiveStream::Decode() {
 
 std::vector<webrtc::RtpSource> VideoReceiveStream::GetSources() const {
   return rtp_video_stream_receiver_.GetSources();
+}
+
+void VideoReceiveStream::SetFrameDecryptor(
+    FrameDecryptorInterface* frame_decryptor) {
+  frame_decryptor_ = frame_decryptor;
 }
 
 }  // namespace internal

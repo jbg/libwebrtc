@@ -41,6 +41,7 @@
 
 namespace webrtc {
 
+class FrameDecryptorInterface;
 class NackModule;
 class PacketRouter;
 class ProcessThread;
@@ -68,7 +69,8 @@ class RtpVideoStreamReceiver : public RecoveredPacketReceiver,
       ProcessThread* process_thread,
       NackSender* nack_sender,
       KeyFrameRequestSender* keyframe_request_sender,
-      video_coding::OnCompleteFrameCallback* complete_frame_callback);
+      video_coding::OnCompleteFrameCallback* complete_frame_callback,
+      FrameDecryptorInterface* frame_decryptor);
   ~RtpVideoStreamReceiver() override;
 
   void AddReceiveCodec(const VideoCodec& video_codec,
@@ -204,6 +206,9 @@ class RtpVideoStreamReceiver : public RecoveredPacketReceiver,
       RTC_GUARDED_BY(rtp_sources_lock_);
   absl::optional<int64_t> last_received_rtp_system_time_ms_
       RTC_GUARDED_BY(rtp_sources_lock_);
+
+  // Holds an optional FrameDecryptor used to decrypt incoming video frames.
+  FrameDecryptorInterface* frame_decryptor_ = nullptr;
 };
 
 }  // namespace webrtc
