@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd4b079d_0fa24ee9",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-02T09:12:21Z",
+      "side": 1,
+      "message": "Is it really necessary to add this restriction to only VP8 and VP9? Can\u0027t we trust the configuration to be correct? I think we should move to a direction where the codec is transparent to WebRTC. This will make it easier to add new codecs in the future.",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 1
+      },
+      "revId": "59e2314c4d27a973ad49cf14f81d209b3d0bc6f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
