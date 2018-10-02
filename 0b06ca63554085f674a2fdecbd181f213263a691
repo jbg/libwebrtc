@@ -22,6 +22,30 @@
       "revId": "0b06ca63554085f674a2fdecbd181f213263a691",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b525dce7_b3752231",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-10-02T13:17:34Z",
+      "side": 1,
+      "message": "As we discussed offline, I think a bool would be sufficient for now. We can consider expanding this later if necessary.",
+      "parentUuid": "7578826d_204e05e4",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 28
+      },
+      "revId": "0b06ca63554085f674a2fdecbd181f213263a691",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
