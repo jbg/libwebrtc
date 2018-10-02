@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c26def5b_0fde100e",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-02T09:33:41Z",
+      "side": 1,
+      "message": "ctx.now_ and last_frame_capture_time_ms_\nare taken using different clocks. 1st one is realtime clock (with well-defined offset)\n2nd one uses monotonoic clock with different offset.\ntaking diff doesn\u0027t produce good offset.",
+      "range": {
+        "startLine": 417,
+        "startChar": 25,
+        "endLine": 417,
+        "endChar": 52
+      },
+      "revId": "a949802d773caae2e48234a5a2ad4b61b5544b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
