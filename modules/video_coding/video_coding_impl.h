@@ -130,7 +130,6 @@ class VideoReceiver : public Module {
  public:
   VideoReceiver(Clock* clock,
                 EventFactory* event_factory,
-                EncodedImageCallback* pre_decode_image_callback,
                 VCMTiming* timing,
                 NackSender* nack_sender = nullptr,
                 KeyFrameRequestSender* keyframe_request_sender = nullptr);
@@ -225,7 +224,6 @@ class VideoReceiver : public Module {
   // Once the decoder thread has been started, usage of |_codecDataBase| moves
   // over to the decoder thread.
   VCMDecoderDataBase _codecDataBase;
-  EncodedImageCallback* const pre_decode_image_callback_;
 
   VCMProcessTimer _receiveStatsTimer RTC_GUARDED_BY(module_thread_checker_);
   VCMProcessTimer _retransmissionTimer RTC_GUARDED_BY(module_thread_checker_);
