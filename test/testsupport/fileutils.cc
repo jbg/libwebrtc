@@ -12,11 +12,16 @@
 
 #include <assert.h>
 
+#ifdef WEBRTC_POSIX
+#include <unistd.h>
+#endif
+
 #ifdef WIN32
 #include <direct.h>
 #include <tchar.h>
 #include <windows.h>
 #include <algorithm>
+#include <locale>
 
 #include "Shlwapi.h"
 #include "WinDef.h"
@@ -42,6 +47,7 @@
 #include <memory>
 #include <utility>
 
+#include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/stringutils.h"
 
@@ -59,8 +65,17 @@ namespace {
 
 #ifdef WIN32
 const char* kPathDelimiter = "\\";
+const wchar_t* kPathDelimiterW = L"\\";
+
+std::string WideStringToString(const std::wstring& wstr) {
+  using convert_type = std::codecvt_utf8<wchar_t>;
+  std::wstring_convert<convert_type, wchar_t> converter;
+
+  return converter.to_bytes(wstr);
+}
 #else
 const char* kPathDelimiter = "/";
+const wchar_t* kPathDelimiterW = L"/";
 #endif
 
 #ifdef WEBRTC_ANDROID
@@ -83,6 +98,14 @@ bool relative_dir_path_set = false;
 
 const char* kCannotFindProjectRootDir = "ERROR_CANNOT_FIND_PROJECT_ROOT_DIR";
 
+std::string DirName(const std::string path) {
+  return path.substr(0, path.find_last_of(kPathDelimiter));
+}
+
+std::wstring DirName(const std::wstring path) {
+  return path.substr(0, path.find_last_of(kPathDelimiterW));
+}
+
 void SetExecutablePath(const std::string& path) {
   std::string working_dir = WorkingDir();
   std::string temp_path = path;
@@ -99,7 +122,7 @@ void SetExecutablePath(const std::string& path) {
 #endif
 
   // Trim away the executable name; only store the relative dir path.
-  temp_path = temp_path.substr(0, temp_path.find_last_of(kPathDelimiter));
+  temp_path = DirName(temp_path);
   strncpy(relative_dir_path, temp_path.c_str(), FILENAME_MAX);
   relative_dir_path_set = true;
 }
@@ -132,30 +155,28 @@ std::string WorkingDir() {
 #else  // WEBRTC_ANDROID
 
 std::string ProjectRootPath() {
-#if defined(WEBRTC_IOS)
+#if defined WEBRTC_LINUX
+  char buf[PATH_MAX];
+  ssize_t count = ::readlink("/proc/self/exe", buf, arraysize(buf));
+  if (count <= 0) {
+    RTC_NOTREACHED() << "Unable to resolve /proc/self/exe.";
+    return kCannotFindProjectRootDir;
+  }
+  // On POSIX, tests execute in out/Whatever, so src is two levels up.
+  std::string exe_dir = DirName(std::string(buf, count));
+  return DirName(DirName(exe_dir)) + kPathDelimiter;
+#elif defined WIN32
+  wchar_t buf[MAX_PATH];
+  buf[0] = 0;
+  if (GetModuleFileName(NULL, buf, MAX_PATH) == 0)
+    return kCannotFindProjectRootDir;
+  std::wstring exe_dir = DirName(std::wstring(buf, count));
+  std::wstring src_dir = DirName(DirName(exe_dir)) + kPathDelimiterW;
+  return WideStringToString(src_dir);
+#elif defined WEBRTC_ANDROID
+  return "/sdcard/chromium_tests_root/";
+#elif defined WEBRTC_IOS
   return IOSRootPath();
-#else
-  std::string path = WorkingDir();
-  if (path == kFallbackPath) {
-    return kCannotFindProjectRootDir;
-  }
-  if (relative_dir_path_set) {
-    path = path + kPathDelimiter + relative_dir_path;
-  }
-  path = path + kPathDelimiter + ".." + kPathDelimiter + "..";
-  char canonical_path[FILENAME_MAX];
-#ifdef WIN32
-  BOOL succeeded = PathCanonicalizeA(canonical_path, path.c_str());
-#else
-  bool succeeded = realpath(path.c_str(), canonical_path) != NULL;
-#endif
-  if (succeeded) {
-    path = std::string(canonical_path) + kPathDelimiter;
-    return path;
-  } else {
-    fprintf(stderr, "Cannot find project root directory!\n");
-    return kCannotFindProjectRootDir;
-  }
 #endif
 }
 
