@@ -129,6 +129,7 @@ bool PortAllocator::SetConfiguration(
     webrtc::TurnCustomizer* turn_customizer,
     const absl::optional<int>& stun_candidate_keepalive_interval) {
   CheckRunOnValidThreadIfInitialized();
+  RTC_DCHECK(candidate_pool_size == 0 || thread_checker_.CalledOnValidThread());
   bool ice_servers_changed =
       (stun_servers != stun_servers_ || turn_servers != turn_servers_);
   stun_servers_ = stun_servers;
