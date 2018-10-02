@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4fbc62_58c0bf94",
+        "filename": "p2p/base/portallocator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-02T21:50:40Z",
+      "side": 1,
+      "message": "Add a comment about this.",
+      "revId": "fff02beb95d9d1f9cb09dcb49860fe6c8a644c00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
