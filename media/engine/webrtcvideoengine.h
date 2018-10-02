@@ -154,6 +154,12 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   void OnNetworkRouteChanged(const std::string& transport_name,
                              const rtc::NetworkRoute& network_route) override;
   void SetInterface(NetworkInterface* iface) override;
+  void SetFrameDecryptor(
+      uint32_t ssrc,
+      webrtc::FrameDecryptorInterface* frame_decryptor) override;
+  void SetFrameEncryptor(
+      uint32_t ssrc,
+      webrtc::FrameEncryptorInterface* frame_encryptor) override;
 
   // Implemented for VideoMediaChannelTest.
   bool sending() const { return sending_; }
@@ -256,6 +262,9 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
     void SetSendParameters(const ChangedSendParameters& send_params);
     webrtc::RTCError SetRtpParameters(const webrtc::RtpParameters& parameters);
     webrtc::RtpParameters GetRtpParameters() const;
+
+    // Set a specific frame encryptor on this video sender.
+    void SetFrameEncryptor(webrtc::FrameEncryptorInterface* frame_encryptor);
 
     // Implements rtc::VideoSourceInterface<webrtc::VideoFrame>.
     // WebRtcVideoSendStream acts as a source to the webrtc::VideoSendStream
@@ -372,6 +381,7 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
 
     void OnFrame(const webrtc::VideoFrame& frame) override;
     bool IsDefaultStream() const;
+    void SetFrameDecryptor(webrtc::FrameDecryptorInterface* frame_decryptor);
 
     void SetSink(rtc::VideoSinkInterface<webrtc::VideoFrame>* sink);
 
@@ -485,6 +495,8 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   // before the unsignaled receive stream is created when the first packet is
   // received.
   StreamParams unsignaled_stream_params_;
+  // A FrameDecryptor can be set for unsignaled streams.
+  webrtc::FrameDecryptorInterface* unsignaled_frame_decryptor_ = nullptr;
 };
 
 class EncoderStreamFactory

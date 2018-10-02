@@ -74,7 +74,7 @@ std::unique_ptr<voe::ChannelProxy> CreateChannelAndProxy(
       module_process_thread, internal_audio_state->audio_device_module(),
       nullptr /* RtcpRttStats */, event_log, config.rtp.remote_ssrc,
       config.jitter_buffer_max_packets, config.jitter_buffer_fast_accelerate,
-      config.decoder_factory, config.codec_pair_id));
+      config.decoder_factory, config.codec_pair_id, config.frame_decryptor));
 }
 }  // namespace
 
