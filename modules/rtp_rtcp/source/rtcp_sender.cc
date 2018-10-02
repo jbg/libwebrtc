@@ -414,7 +414,7 @@ std::unique_ptr<rtcp::RtcpPacket> RTCPSender::BuildSR(const RtcpContext& ctx) {
       (audio_ ? kBogusRtpRateForAudioRtcp : kVideoPayloadTypeFrequency) / 1000;
   uint32_t rtp_timestamp =
       timestamp_offset_ + last_rtp_timestamp_ +
-      (clock_->TimeInMilliseconds() - last_frame_capture_time_ms_) * rtp_rate;
+      (ctx.now_.ToMs() - last_frame_capture_time_ms_) * rtp_rate;
 
   rtcp::SenderReport* report = new rtcp::SenderReport();
   report->SetSenderSsrc(ssrc_);
