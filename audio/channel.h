@@ -47,6 +47,8 @@ class TimestampWrapAroundHandler;
 namespace webrtc {
 
 class AudioDeviceModule;
+class FrameDecryptorInterface;
+class FrameEncryptorInterface;
 class PacketRouter;
 class ProcessThread;
 class RateLimiter;
@@ -149,7 +151,8 @@ class Channel
           ProcessThread* module_process_thread,
           AudioDeviceModule* audio_device_module,
           RtcpRttStats* rtcp_rtt_stats,
-          RtcEventLog* rtc_event_log);
+          RtcEventLog* rtc_event_log,
+          FrameEncryptorInterface* frame_encryptor);
   // Used for receive streams.
   Channel(ProcessThread* module_process_thread,
           AudioDeviceModule* audio_device_module,
@@ -159,7 +162,8 @@ class Channel
           size_t jitter_buffer_max_packets,
           bool jitter_buffer_fast_playout,
           rtc::scoped_refptr<AudioDecoderFactory> decoder_factory,
-          absl::optional<AudioCodecPairId> codec_pair_id);
+          absl::optional<AudioCodecPairId> codec_pair_id,
+          FrameDecryptorInterface* frame_decryptor);
   virtual ~Channel();
 
   void SetSink(AudioSinkInterface* sink);
@@ -300,6 +304,9 @@ class Channel
 
   std::vector<RtpSource> GetSources() const;
 
+  // Frame Encryptor API
+  void SetFrameEncryptor(FrameEncryptorInterface* frame_encryptor);
+
  private:
   class ProcessAndEncodeAudioTask;
 
@@ -414,6 +421,9 @@ class Channel
   rtc::CriticalSection encoder_queue_lock_;
   bool encoder_queue_is_active_ RTC_GUARDED_BY(encoder_queue_lock_) = false;
   rtc::TaskQueue* encoder_queue_ = nullptr;
+
+  FrameEncryptorInterface* frame_encryptor_ = nullptr;
+  FrameDecryptorInterface* frame_decryptor_ = nullptr;
 };
 
 }  // namespace voe

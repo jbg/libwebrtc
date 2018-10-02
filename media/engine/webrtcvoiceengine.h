@@ -130,6 +130,7 @@ class WebRtcVoiceEngine final {
   // Jitter buffer settings for new streams.
   size_t audio_jitter_buffer_max_packets_ = 50;
   bool audio_jitter_buffer_fast_accelerate_ = false;
+  webrtc::FrameEncryptorInterface* frame_encryptor_ = nullptr;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WebRtcVoiceEngine);
 };
@@ -170,6 +171,12 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   bool RemoveSendStream(uint32_t ssrc) override;
   bool AddRecvStream(const StreamParams& sp) override;
   bool RemoveRecvStream(uint32_t ssrc) override;
+  void SetFrameDecryptor(
+      uint32_t ssrc,
+      webrtc::FrameDecryptorInterface* frame_decryptor) override;
+  void SetFrameEncryptor(
+      uint32_t ssrc,
+      webrtc::FrameEncryptorInterface* frame_encryptor) override;
   // SSRC=0 will apply the new volume to current and future unsignaled streams.
   bool SetOutputVolume(uint32_t ssrc, double volume) override;
 
@@ -280,6 +287,9 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   // TODO(kwiberg): Per-SSRC codec pair IDs?
   const webrtc::AudioCodecPairId codec_pair_id_ =
       webrtc::AudioCodecPairId::Create();
+
+  // Unsignaled streams have an option to have a frame decryptor set on them.
+  webrtc::FrameDecryptorInterface* unsignaled_frame_decryptor_ = nullptr;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WebRtcVoiceMediaChannel);
 };

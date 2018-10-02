@@ -121,6 +121,9 @@ class ChannelProxy : public RtpPacketSinkInterface {
   virtual void StartPlayout();
   virtual void StopPlayout();
 
+  // Frame Encryption API
+  virtual void SetFrameEncryptor(FrameEncryptorInterface* frame_encryptor);
+
  private:
   // Thread checkers document and lock usage of some methods on voe::Channel to
   // specific threads we know about. The goal is to eventually split up

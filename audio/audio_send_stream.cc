@@ -51,13 +51,15 @@ std::unique_ptr<voe::ChannelProxy> CreateChannelAndProxy(
     rtc::TaskQueue* worker_queue,
     ProcessThread* module_process_thread,
     RtcpRttStats* rtcp_rtt_stats,
-    RtcEventLog* event_log) {
+    RtcEventLog* event_log,
+    FrameEncryptorInterface* frame_encryptor) {
   RTC_DCHECK(audio_state);
   internal::AudioState* internal_audio_state =
       static_cast<internal::AudioState*>(audio_state);
   return absl::make_unique<voe::ChannelProxy>(absl::make_unique<voe::Channel>(
       worker_queue, module_process_thread,
-      internal_audio_state->audio_device_module(), rtcp_rtt_stats, event_log));
+      internal_audio_state->audio_device_module(), rtcp_rtt_stats, event_log,
+      frame_encryptor));
 }
 }  // namespace
 
@@ -108,7 +110,8 @@ AudioSendStream::AudioSendStream(
                                             worker_queue,
                                             module_process_thread,
                                             rtcp_rtt_stats,
-                                            event_log)) {}
+                                            event_log,
+                                            config.frame_encryptor)) {}
 
 AudioSendStream::AudioSendStream(
     const webrtc::AudioSendStream::Config& config,
@@ -230,6 +233,11 @@ void AudioSendStream::ConfigureStream(
     }
     channel_proxy->RegisterTransport(
         stream->timed_send_transport_adapter_.get());
+  }
+
+  // Enable the frame encryptor if a new frame encryptor has been provided.
+  if (first_time || new_config.frame_encryptor != old_config.frame_encryptor) {
+    channel_proxy->SetFrameEncryptor(new_config.frame_encryptor);
   }
 
   const ExtensionIds old_ids = FindExtensionIds(old_config.rtp.extensions);
