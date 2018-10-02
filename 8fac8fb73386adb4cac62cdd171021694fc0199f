@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e21e3f3d_68d61ea9",
+        "filename": "common_audio/resampler/include/push_resampler.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-02T09:31:03Z",
+      "side": 1,
+      "message": "Consider using something like std::vector\u003cT\u003e or rtc::BufferT\u003cT\u003e instead. Arrays that don\u0027t know their own size aren\u0027t fun to debug.",
+      "revId": "8fac8fb73386adb4cac62cdd171021694fc0199f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29ac2344_14777b80",
+        "filename": "common_audio/resampler/include/push_resampler.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-02T09:31:03Z",
+      "side": 1,
+      "message": "Consider recreating these on the stack when you need them instead; more state -\u003e more things to keep in mind and more things that can go wrong. It should be cheap, since the number of channels is almost always very small. (Suggestion: Use absl::FixedArray or absl::InlinedVector on the stack; both can store a small number of elements inline (i.e. on the stack), and will spill to the heap if necessary.)",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "8fac8fb73386adb4cac62cdd171021694fc0199f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63ae21c3_99a5e7a2",
+        "filename": "common_audio/resampler/push_resampler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-02T09:31:03Z",
+      "side": 1,
+      "message": "Consider using absl::make_unique instead of raw `new`.",
+      "revId": "8fac8fb73386adb4cac62cdd171021694fc0199f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
