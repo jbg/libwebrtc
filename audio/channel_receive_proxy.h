@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef AUDIO_CHANNEL_PROXY_H_
-#define AUDIO_CHANNEL_PROXY_H_
+#ifndef AUDIO_CHANNEL_RECEIVE_PROXY_H_
+#define AUDIO_CHANNEL_RECEIVE_PROXY_H_
 
 #include <map>
 #include <memory>
@@ -41,18 +41,19 @@ class TransportFeedbackObserver;
 
 namespace voe {
 
+class ChannelSendProxy;
+
 // This class provides the "view" of a voe::Channel that we need to implement
-// webrtc::AudioSendStream and webrtc::AudioReceiveStream. It serves two
-// purposes:
+// webrtc::AudioReceiveStream. It serves two purposes:
 //  1. Allow mocking just the interfaces used, instead of the entire
 //     voe::Channel class.
 //  2. Provide a refined interface for the stream classes, including assumptions
 //     on return values and input adaptation.
-class ChannelProxy : public RtpPacketSinkInterface {
+class ChannelReceiveProxy : public RtpPacketSinkInterface {
  public:
-  ChannelProxy();
-  explicit ChannelProxy(std::unique_ptr<Channel> channel);
-  virtual ~ChannelProxy();
+  ChannelReceiveProxy();
+  explicit ChannelReceiveProxy(std::unique_ptr<Channel> channel);
+  virtual ~ChannelReceiveProxy();
 
   virtual bool SetEncoder(int payload_type,
                           std::unique_ptr<AudioEncoder> encoder);
@@ -103,7 +104,7 @@ class ChannelProxy : public RtpPacketSinkInterface {
   virtual int PreferredSampleRate() const;
   virtual void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame);
   virtual void SetTransportOverhead(int transport_overhead_per_packet);
-  virtual void AssociateSendChannel(const ChannelProxy& send_channel_proxy);
+  virtual void AssociateSendChannel(const ChannelSendProxy& send_channel_proxy);
   virtual void DisassociateSendChannel();
   virtual RtpRtcp* GetRtpRtcp() const;
 
@@ -136,9 +137,9 @@ class ChannelProxy : public RtpPacketSinkInterface {
   rtc::RaceChecker video_capture_thread_race_checker_;
   std::unique_ptr<Channel> channel_;
 
-  RTC_DISALLOW_COPY_AND_ASSIGN(ChannelProxy);
+  RTC_DISALLOW_COPY_AND_ASSIGN(ChannelReceiveProxy);
 };
 }  // namespace voe
 }  // namespace webrtc
 
-#endif  // AUDIO_CHANNEL_PROXY_H_
+#endif  // AUDIO_CHANNEL_RECEIVE_PROXY_H_
