@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "94193386_7287df92",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-02T10:44:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d2768ba0_a0be8720",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 29
+      },
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1173b72_412e53c4",
         "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96e6240c_1a6156db",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-02T10:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1173b72_412e53c4",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 56
+      },
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "ef2e2ca2_70fb0949",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-02T10:44:08Z",
+      "side": 1,
+      "message": "Using it now that GetRawExtension has been added.",
+      "parentUuid": "d7855f9e_3e486a6a",
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94d2f235_87d5a7ef",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
         "patchSetId": 4
@@ -99,6 +165,24 @@
     },
     {
       "key": {
+        "uuid": "af326886_a9fad875",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-02T10:44:08Z",
+      "side": 1,
+      "message": "Reverted this file.",
+      "parentUuid": "94d2f235_87d5a7ef",
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52488f93_dd255d77",
         "filename": "video/rtp_video_stream_receiver.h",
         "patchSetId": 4
@@ -110,6 +194,30 @@
       "writtenOn": "2018-10-01T16:39:59Z",
       "side": 1,
       "message": "looking how it is used, it might be cleaner to pass \nconst RtpGenericFrameDescriptor*",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "5eaa4bc794aad42c4395c3503c11e147e0ef5dad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "884dbfaa_a9bc5d43",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-10-02T10:44:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52488f93_dd255d77",
       "range": {
         "startLine": 106,
         "startChar": 6,
