@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11e8e20f_219d1fdf",
+        "filename": "modules/video_coding/frame_object.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-02T14:25:02Z",
+      "side": 1,
+      "message": "btw, parent class already has\nVCMEncodedFrame::\nVerifyAndAllocate function",
+      "revId": "f218cae40e46986ea8abe051efd6dae9dd57b5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
