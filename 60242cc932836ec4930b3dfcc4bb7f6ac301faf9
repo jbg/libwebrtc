@@ -16,6 +16,24 @@
       "revId": "60242cc932836ec4930b3dfcc4bb7f6ac301faf9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60de81c7_841424c2",
+        "filename": "audio/channel.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-02T19:40:23Z",
+      "side": 1,
+      "message": "In this case we set bytes_written to 0 to indicate the payload is of 0 size and this then forces OnReceivedPayloadData to pass through a nullptr with size 0.",
+      "parentUuid": "afd924fd_c80d16eb",
+      "revId": "60242cc932836ec4930b3dfcc4bb7f6ac301faf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
