@@ -90,16 +90,17 @@ class MockRtpRtcp : public RtpRtcp {
                           uint32_t* nack_rate));
   MOCK_CONST_METHOD1(EstimatedReceiveBandwidth,
                      int(uint32_t* available_bandwidth));
-  MOCK_METHOD9(SendOutgoingData,
-               bool(FrameType frame_type,
-                    int8_t payload_type,
-                    uint32_t timestamp,
-                    int64_t capture_time_ms,
-                    const uint8_t* payload_data,
-                    size_t payload_size,
-                    const RTPFragmentationHeader* fragmentation,
-                    const RTPVideoHeader* rtp_video_header,
-                    uint32_t* frame_id_out));
+  MOCK_METHOD10(SendOutgoingData,
+                bool(FrameType frame_type,
+                     int8_t payload_type,
+                     uint32_t timestamp,
+                     int64_t capture_time_ms,
+                     const uint8_t* payload_data,
+                     size_t payload_size,
+                     const RTPFragmentationHeader* fragmentation,
+                     const RTPVideoHeader* rtp_video_header,
+                     uint32_t* frame_id_out,
+                     FrameEncryptorInterface* frame_encryptor));
   MOCK_METHOD5(TimeToSendPacket,
                bool(uint32_t ssrc,
                     uint16_t sequence_number,

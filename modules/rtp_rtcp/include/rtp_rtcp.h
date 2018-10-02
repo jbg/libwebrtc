@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/crypto/frameencryptorinterface.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/include/module.h"
@@ -229,16 +230,19 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // |fragmentation| - fragmentation offset data for fragmented frames such
   //                   as layers or RED
   // |transport_frame_id_out| - set to RTP timestamp.
+  // |frame_encryptor| - optional frame encryptor to set for outgoing data.
   // Returns true on success.
-  virtual bool SendOutgoingData(FrameType frame_type,
-                                int8_t payload_type,
-                                uint32_t timestamp,
-                                int64_t capture_time_ms,
-                                const uint8_t* payload_data,
-                                size_t payload_size,
-                                const RTPFragmentationHeader* fragmentation,
-                                const RTPVideoHeader* rtp_video_header,
-                                uint32_t* transport_frame_id_out) = 0;
+  virtual bool SendOutgoingData(
+      FrameType frame_type,
+      int8_t payload_type,
+      uint32_t timestamp,
+      int64_t capture_time_ms,
+      const uint8_t* payload_data,
+      size_t payload_size,
+      const RTPFragmentationHeader* fragmentation,
+      const RTPVideoHeader* rtp_video_header,
+      uint32_t* transport_frame_id_out,
+      FrameEncryptorInterface* frame_encryptor = nullptr) = 0;
 
   virtual bool TimeToSendPacket(uint32_t ssrc,
                                 uint16_t sequence_number,

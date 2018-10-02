@@ -318,7 +318,8 @@ FakeVideoReceiveStream::FakeVideoReceiveStream(
     : config_(std::move(config)),
       receiving_(false),
       num_added_secondary_sinks_(0),
-      num_removed_secondary_sinks_(0) {}
+      num_removed_secondary_sinks_(0),
+      num_frame_decryptors_added_(0) {}
 
 const webrtc::VideoReceiveStream::Config& FakeVideoReceiveStream::GetConfig()
     const {
@@ -358,6 +359,11 @@ void FakeVideoReceiveStream::AddSecondarySink(
 void FakeVideoReceiveStream::RemoveSecondarySink(
     const webrtc::RtpPacketSinkInterface* sink) {
   ++num_removed_secondary_sinks_;
+}
+
+void FakeVideoReceiveStream::SetFrameDecryptor(
+    webrtc::FrameDecryptorInterface* frame_decryptor) {
+  num_frame_decryptors_added_++;
 }
 
 int FakeVideoReceiveStream::GetNumAddedSecondarySinks() const {

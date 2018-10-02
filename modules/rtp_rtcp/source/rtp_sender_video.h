@@ -29,6 +29,8 @@
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
+
+class FrameEncryptorInterface;
 class RtpPacketizer;
 class RtpPacketToSend;
 
@@ -56,7 +58,8 @@ class RTPSenderVideo {
                  size_t payload_size,
                  const RTPFragmentationHeader* fragmentation,
                  const RTPVideoHeader* video_header,
-                 int64_t expected_retransmission_time_ms);
+                 int64_t expected_retransmission_time_ms,
+                 FrameEncryptorInterface* frame_encryptor);
 
   void SetVideoCodecType(enum VideoCodecType type);
 
