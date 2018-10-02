@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9dc8a1_9f61f0a7",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpReceiver+Native.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2018-10-02T09:11:11Z",
+      "side": 1,
+      "message": "Is this a typo? Since we don\u0027t sent over the network when receiving I guess.",
+      "range": {
+        "startLine": 22,
+        "startChar": 50,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "aa6438efe74864232b71ff767cbcafc852c426b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
