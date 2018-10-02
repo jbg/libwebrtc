@@ -91,6 +91,8 @@ class P2PTransportChannel : public IceTransportInternal {
 
   // From TransportChannelImpl:
   IceTransportState GetState() const override;
+  StandardsCompliantIceTransportState GetNewState() const override;
+
   const std::string& transport_name() const override;
   int component() const override;
   bool writable() const override;
@@ -244,6 +246,7 @@ class P2PTransportChannel : public IceTransportInternal {
   void HandleAllTimedOut();
   void MaybeStopPortAllocatorSessions();
   IceTransportState ComputeState() const;
+  StandardsCompliantIceTransportState ComputeNewState() const;
 
   Connection* GetBestConnectionOnNetwork(rtc::Network* network) const;
   bool CreateConnections(const Candidate& remote_candidate,
@@ -408,6 +411,8 @@ class P2PTransportChannel : public IceTransportInternal {
   int64_t last_ping_sent_ms_ = 0;
   int weak_ping_interval_ = WEAK_PING_INTERVAL;
   IceTransportState state_ = IceTransportState::STATE_INIT;
+  StandardsCompliantIceTransportState standards_state_ =
+      StandardsCompliantIceTransportState::kIceTransportNew;
   IceConfig config_;
   int last_sent_packet_id_ = -1;  // -1 indicates no packet was sent before.
   bool started_pinging_ = false;

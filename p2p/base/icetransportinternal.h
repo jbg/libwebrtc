@@ -173,6 +173,16 @@ enum class IceTransportState {
   STATE_FAILED
 };
 
+enum class StandardsCompliantIceTransportState {
+  kIceTransportNew,
+  kIceTransportChecking,
+  kIceTransportConnected,
+  kIceTransportCompleted,
+  kIceTransportFailed,
+  kIceTransportDisconnected,
+  kIceTransportClosed,
+};
+
 // TODO(zhihuang): Remove this once it's no longer used in
 // remoting/protocol/libjingle_transport_factory.cc
 enum IceProtocolType {
@@ -189,6 +199,7 @@ class IceTransportInternal : public rtc::PacketTransportInternal {
   ~IceTransportInternal() override;
 
   virtual IceTransportState GetState() const = 0;
+  virtual StandardsCompliantIceTransportState GetNewState() const = 0;
 
   virtual int component() const = 0;
 
@@ -259,6 +270,9 @@ class IceTransportInternal : public rtc::PacketTransportInternal {
 
   // Emitted whenever the transport state changed.
   sigslot::signal1<IceTransportInternal*> SignalStateChanged;
+
+  // Emitted whenever the new standards-compliant transport state changed.
+  sigslot::signal1<IceTransportInternal*> SignalNewStateChanged;
 
   // Invoked when the transport is being destroyed.
   sigslot::signal1<IceTransportInternal*> SignalDestroyed;
