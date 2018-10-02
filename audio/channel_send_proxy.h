@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef AUDIO_CHANNEL_PROXY_H_
-#define AUDIO_CHANNEL_PROXY_H_
+#ifndef AUDIO_CHANNEL_SEND_PROXY_H_
+#define AUDIO_CHANNEL_SEND_PROXY_H_
 
 #include <map>
 #include <memory>
@@ -48,11 +48,11 @@ namespace voe {
 //     voe::Channel class.
 //  2. Provide a refined interface for the stream classes, including assumptions
 //     on return values and input adaptation.
-class ChannelProxy : public RtpPacketSinkInterface {
+class ChannelSendProxy {
  public:
-  ChannelProxy();
-  explicit ChannelProxy(std::unique_ptr<Channel> channel);
-  virtual ~ChannelProxy();
+  ChannelSendProxy();
+  explicit ChannelSendProxy(std::unique_ptr<Channel> channel);
+  virtual ~ChannelSendProxy();
 
   virtual bool SetEncoder(int payload_type,
                           std::unique_ptr<AudioEncoder> encoder);
@@ -69,57 +69,30 @@ class ChannelProxy : public RtpPacketSinkInterface {
   virtual void RegisterSenderCongestionControlObjects(
       RtpTransportControllerSendInterface* transport,
       RtcpBandwidthObserver* bandwidth_observer);
-  virtual void RegisterReceiverCongestionControlObjects(
-      PacketRouter* packet_router);
   virtual void ResetSenderCongestionControlObjects();
-  virtual void ResetReceiverCongestionControlObjects();
   virtual CallStatistics GetRTCPStatistics() const;
   virtual std::vector<ReportBlock> GetRemoteRTCPReportBlocks() const;
-  virtual NetworkStatistics GetNetworkStatistics() const;
-  virtual AudioDecodingCallStats GetDecodingCallStatistics() const;
   virtual ANAStats GetANAStatistics() const;
-  virtual int GetSpeechOutputLevelFullRange() const;
-  // See description of "totalAudioEnergy" in the WebRTC stats spec:
-  // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
-  virtual double GetTotalOutputEnergy() const;
-  virtual double GetTotalOutputDuration() const;
-  virtual uint32_t GetDelayEstimate() const;
   virtual bool SetSendTelephoneEventPayloadType(int payload_type,
                                                 int payload_frequency);
   virtual bool SendTelephoneEventOutband(int event, int duration_ms);
   virtual void SetBitrate(int bitrate_bps, int64_t probing_interval_ms);
-  virtual void SetReceiveCodecs(const std::map<int, SdpAudioFormat>& codecs);
-  virtual void SetSink(AudioSinkInterface* sink);
   virtual void SetInputMute(bool muted);
   virtual void RegisterTransport(Transport* transport);
 
-  // Implements RtpPacketSinkInterface
-  void OnRtpPacket(const RtpPacketReceived& packet) override;
   virtual bool ReceivedRTCPPacket(const uint8_t* packet, size_t length);
-  virtual void SetChannelOutputVolumeScaling(float scaling);
-  virtual AudioMixer::Source::AudioFrameInfo GetAudioFrameWithInfo(
-      int sample_rate_hz,
-      AudioFrame* audio_frame);
-  virtual int PreferredSampleRate() const;
   virtual void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame);
   virtual void SetTransportOverhead(int transport_overhead_per_packet);
-  virtual void AssociateSendChannel(const ChannelProxy& send_channel_proxy);
-  virtual void DisassociateSendChannel();
   virtual RtpRtcp* GetRtpRtcp() const;
 
-  // Produces the transport-related timestamps; current_delay_ms is left unset.
-  absl::optional<Syncable::Info> GetSyncInfo() const;
-  virtual uint32_t GetPlayoutTimestamp() const;
-  virtual void SetMinimumPlayoutDelay(int delay_ms);
-  virtual bool GetRecCodec(CodecInst* codec_inst) const;
   virtual void OnTwccBasedUplinkPacketLossRate(float packet_loss_rate);
   virtual void OnRecoverableUplinkPacketLossRate(
       float recoverable_packet_loss_rate);
-  virtual std::vector<webrtc::RtpSource> GetSources() const;
   virtual void StartSend();
   virtual void StopSend();
-  virtual void StartPlayout();
-  virtual void StopPlayout();
+
+  // Needed by ChannelReceiveProxy::AssociateSendChannel.
+  virtual Channel* GetChannel() const;
 
  private:
   // Thread checkers document and lock usage of some methods on voe::Channel to
@@ -136,9 +109,9 @@ class ChannelProxy : public RtpPacketSinkInterface {
   rtc::RaceChecker video_capture_thread_race_checker_;
   std::unique_ptr<Channel> channel_;
 
-  RTC_DISALLOW_COPY_AND_ASSIGN(ChannelProxy);
+  RTC_DISALLOW_COPY_AND_ASSIGN(ChannelSendProxy);
 };
 }  // namespace voe
 }  // namespace webrtc
 
-#endif  // AUDIO_CHANNEL_PROXY_H_
+#endif  // AUDIO_CHANNEL_SEND_PROXY_H_
