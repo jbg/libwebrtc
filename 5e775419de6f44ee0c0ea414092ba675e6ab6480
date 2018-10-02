@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "e71af0a1_4027e27c",
+        "filename": "audio/channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-02T07:47:32Z",
+      "side": 1,
+      "message": "Thanks for fixing. I disagree that the caller of SendData() should be fixed though. I\u0027d rather get rid of the return value from SendData().",
+      "parentUuid": "20d11a8c_8d5df0a5",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcb637f0_af313594",
         "filename": "audio/channel.cc",
         "patchSetId": 6
@@ -495,6 +513,24 @@
     },
     {
       "key": {
+        "uuid": "7335e37b_9f234fb1",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-02T07:47:32Z",
+      "side": 1,
+      "message": "So we\u0027re increasing the refcount in RtpReceiver? I think it\u0027d be clearer if we passed a scoped_refptr here then.",
+      "parentUuid": "b60d9de5_54243fee",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19e42f71_c2fb6671",
         "filename": "call/audio_send_stream.h",
         "patchSetId": 6
@@ -589,6 +625,24 @@
       "side": 1,
       "message": "Considering this done as this send stream will not outlive the parent RtpSender.",
       "parentUuid": "54cf5522_6464f18f",
+      "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85988758_ff3c0350",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-02T07:47:32Z",
+      "side": 1,
+      "message": "Like for the receive stream, if we\u0027re storing it in a scoped_refptr in RtpSender, I think we should pass as one here.",
+      "parentUuid": "def69a27_93626792",
       "revId": "5e775419de6f44ee0c0ea414092ba675e6ab6480",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false

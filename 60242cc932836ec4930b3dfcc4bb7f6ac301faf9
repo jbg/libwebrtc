@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afd924fd_c80d16eb",
+        "filename": "audio/channel.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-02T07:47:32Z",
+      "side": 1,
+      "message": "IMO this should be a DCHECK and the decryptor should be responsible for not touching bytes_written if it fails.",
+      "revId": "60242cc932836ec4930b3dfcc4bb7f6ac301faf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
