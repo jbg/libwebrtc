@@ -1145,6 +1145,7 @@ bool WebRtcVideoChannel::AddRecvStream(const StreamParams& sp,
   if (!sp.stream_ids().empty()) {
     config.sync_group = sp.stream_ids()[0];
   }
+  config.frame_decryptor = unsignaled_frame_decryptor_;
 
   receive_streams_[ssrc] = new WebRtcVideoReceiveStream(
       call_, sp, std::move(config), decoder_factory_, default_stream,
@@ -1432,6 +1433,30 @@ void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
   // ideal value should be.
   MediaChannel::SetOption(NetworkInterface::ST_RTP, rtc::Socket::OPT_SNDBUF,
                           kVideoRtpBufferSize);
+}
+
+void WebRtcVideoChannel::SetFrameDecryptor(
+    uint32_t ssrc,
+    webrtc::FrameDecryptorInterface* frame_decryptor) {
+  rtc::CritScope stream_lock(&stream_crit_);
+  auto matching_stream = receive_streams_.find(ssrc);
+  if (matching_stream != receive_streams_.end()) {
+    matching_stream->second->SetFrameDecryptor(frame_decryptor);
+  }
+  // Handle unsignaled frame decryptors.
+  if (ssrc == 0) {
+    unsignaled_frame_decryptor_ = frame_decryptor;
+  }
+}
+
+void WebRtcVideoChannel::SetFrameEncryptor(
+    uint32_t ssrc,
+    webrtc::FrameEncryptorInterface* frame_encryptor) {
+  rtc::CritScope stream_lock(&stream_crit_);
+  auto matching_stream = send_streams_.find(ssrc);
+  if (matching_stream != send_streams_.end()) {
+    matching_stream->second->SetFrameEncryptor(frame_encryptor);
+  }
 }
 
 absl::optional<uint32_t> WebRtcVideoChannel::GetDefaultReceiveStreamSsrc() {
@@ -1783,6 +1808,14 @@ webrtc::RtpParameters
 WebRtcVideoChannel::WebRtcVideoSendStream::GetRtpParameters() const {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   return rtp_parameters_;
+}
+
+// Set a specific frame encryptor on this video sender.
+void WebRtcVideoChannel::WebRtcVideoSendStream::SetFrameEncryptor(
+    webrtc::FrameEncryptorInterface* frame_encryptor) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  parameters_.config.frame_encryptor = frame_encryptor;
+  RecreateWebRtcStream();
 }
 
 void WebRtcVideoChannel::WebRtcVideoSendStream::UpdateSendState() {
@@ -2352,6 +2385,12 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::OnFrame(
 
 bool WebRtcVideoChannel::WebRtcVideoReceiveStream::IsDefaultStream() const {
   return default_stream_;
+}
+
+void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFrameDecryptor(
+    webrtc::FrameDecryptorInterface* frame_decryptor) {
+  config_.frame_decryptor = frame_decryptor;
+  stream_->SetFrameDecryptor(frame_decryptor);
 }
 
 void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetSink(

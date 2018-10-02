@@ -31,6 +31,7 @@
 
 namespace webrtc {
 
+class FrameDecryptorInterface;
 class RtpPacketSinkInterface;
 class VideoDecoderFactory;
 
@@ -215,6 +216,11 @@ class VideoReceiveStream {
     // TODO(nisse): Used with VideoDecoderFactory::LegacyCreateVideoDecoder.
     // Delete when that method is retired.
     std::string stream_id;
+
+    // An optional custom frame decryptor that allows the entire frame to be
+    // decrypted in whatever way the caller choses. This is not required by
+    // default.
+    webrtc::FrameDecryptorInterface* frame_decryptor = nullptr;
   };
 
   // Starts stream activity.
@@ -233,6 +239,11 @@ class VideoReceiveStream {
   // themselves as secondary sinks.
   virtual void AddSecondarySink(RtpPacketSinkInterface* sink) = 0;
   virtual void RemoveSecondarySink(const RtpPacketSinkInterface* sink) = 0;
+
+  // Optionally set a FrameDecryptor that will attempt to decrypt each incoming
+  // video frame. This decryption is not related to SRTP and will only apply to
+  // the raw frame.
+  virtual void SetFrameDecryptor(FrameDecryptorInterface* frame_decryptor) = 0;
 
   virtual std::vector<RtpSource> GetSources() const = 0;
 
