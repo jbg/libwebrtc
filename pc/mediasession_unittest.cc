@@ -1581,6 +1581,26 @@ TEST_F(MediaSessionDescriptionFactoryTest,
   EXPECT_TRUE(dc->rejected);
 }
 
+TEST_F(MediaSessionDescriptionFactoryTest,
+       CreateAnswerSupportsMixedOneAndTwoByteHeaderExtensions) {
+  MediaSessionOptions opts;
+  std::unique_ptr<SessionDescription> offer(f1_.CreateOffer(opts, NULL));
+  // Offer without request of mixed one- and two-byte header extensions.
+  offer->set_mixed_one_two_byte_header_extensions_supported(false);
+  ASSERT_TRUE(offer.get() != NULL);
+  std::unique_ptr<SessionDescription> answer_no_support(
+      f2_.CreateAnswer(offer.get(), opts, NULL));
+  EXPECT_FALSE(
+      answer_no_support->mixed_one_two_byte_header_extensions_supported());
+
+  // Offer with request of mixed one- and two-byte header extensions.
+  offer->set_mixed_one_two_byte_header_extensions_supported(true);
+  ASSERT_TRUE(offer.get() != NULL);
+  std::unique_ptr<SessionDescription> answer_support(
+      f2_.CreateAnswer(offer.get(), opts, NULL));
+  EXPECT_TRUE(answer_support->mixed_one_two_byte_header_extensions_supported());
+}
+
 // Create an audio and video offer with:
 // - one video track
 // - two audio tracks

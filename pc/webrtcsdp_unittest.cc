@@ -89,6 +89,7 @@ static const char kAttributeCryptoVideo[] =
 static const char kFingerprint[] =
     "a=fingerprint:sha-1 "
     "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\r\n";
+static const char kExtmapAllowMixed[] = "a=extmap-allow-mixed\r\n";
 static const int kExtmapId = 1;
 static const char kExtmapUri[] = "http://example.com/082005/ext.htm#ttime";
 static const char kExtmap[] =
@@ -1398,6 +1399,8 @@ class WebRtcSdpTest : public testing::Test {
 
     // global attributes
     EXPECT_EQ(desc1.msid_supported(), desc2.msid_supported());
+    EXPECT_EQ(desc1.mixed_one_two_byte_header_extensions_supported(),
+              desc2.mixed_one_two_byte_header_extensions_supported());
   }
 
   bool CompareSessionDescription(const JsepSessionDescription& desc1,
@@ -2094,6 +2097,13 @@ TEST_F(WebRtcSdpTest, SerializeSessionDescriptionWithDataChannelAndBandwidth) {
   EXPECT_EQ(expected_sdp, message);
 }
 
+TEST_F(WebRtcSdpTest, SerializeSessionDescriptionWithExtmapAllowMixed) {
+  JsepSessionDescription desc(kDummyType);
+  MakeDescriptionWithoutCandidates(&desc);
+  desc.description()->set_mixed_one_two_byte_header_extensions_supported(true);
+  TestSerialize(desc);
+}
+
 TEST_F(WebRtcSdpTest, SerializeSessionDescriptionWithExtmap) {
   bool encrypted = false;
   AddExtmap(encrypted);
@@ -2429,6 +2439,30 @@ TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithoutMsid) {
   EXPECT_TRUE(SdpDeserialize(sdp_without_msid, &jdesc));
   // Verify
   EXPECT_TRUE(CompareSessionDescription(jdesc_, jdesc));
+}
+
+TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithExtmapAllowMixed) {
+  jdesc_.description()->set_mixed_one_two_byte_header_extensions_supported(
+      true);
+  JsepSessionDescription jdesc_deserialized(kDummyType);
+  std::string sdp_with_extmap_allow_mixed = kSdpFullString;
+  InjectAfter("t=0 0\r\n", kExtmapAllowMixed, &sdp_with_extmap_allow_mixed);
+  // Deserialize
+  EXPECT_TRUE(SdpDeserialize(sdp_with_extmap_allow_mixed, &jdesc_deserialized));
+  // Verify
+  EXPECT_TRUE(CompareSessionDescription(jdesc_, jdesc_deserialized));
+}
+
+TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithoutExtmapAllowMixed) {
+  jdesc_.description()->set_mixed_one_two_byte_header_extensions_supported(
+      false);
+  JsepSessionDescription jdesc_deserialized(kDummyType);
+  std::string sdp_without_extmap_allow_mixed = kSdpFullString;
+  // Deserialize
+  EXPECT_TRUE(
+      SdpDeserialize(sdp_without_extmap_allow_mixed, &jdesc_deserialized));
+  // Verify
+  EXPECT_TRUE(CompareSessionDescription(jdesc_, jdesc_deserialized));
 }
 
 TEST_F(WebRtcSdpTest, DeserializeCandidate) {
