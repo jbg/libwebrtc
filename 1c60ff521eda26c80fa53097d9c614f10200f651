@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4250da92_b3e45531",
+        "filename": "api/audio_codecs/audio_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-03T13:49:02Z",
+      "side": 0,
+      "message": "This one trigger a false positive from cpplint.py: \nAdd #include \u003cutility\u003e for swap  [build/include_what_you_use]\n\nThe function is neither used in WebRTC codebase nor google3. May we remove it altogether?",
+      "revId": "1c60ff521eda26c80fa53097d9c614f10200f651",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
