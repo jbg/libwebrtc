@@ -143,6 +143,12 @@ class RtpPacket {
   // Returns empty arrayview on failure.
   rtc::ArrayView<uint8_t> AllocateRawExtension(int id, size_t length);
 
+  // Promotes existing one-byte header extensions to two-byte header extensions
+  // by rewriting the data and updates the corresponding extension offsets.
+  void PromoteToTwoByteHeaderExtension();
+
+  uint16_t SetExtensionLengthMaybeAddZeroPadding(size_t extensions_offset);
+
   // Find or allocate an extension |type|. Returns view of size |length|
   // to write raw extension to or an empty view on failure.
   rtc::ArrayView<uint8_t> AllocateExtension(ExtensionType type, size_t length);
@@ -187,7 +193,9 @@ rtc::ArrayView<const uint8_t> RtpPacket::GetRawExtension() const {
 template <typename Extension, typename... Values>
 bool RtpPacket::SetExtension(Values... values) {
   const size_t value_size = Extension::ValueSize(values...);
-  if (value_size == 0 || value_size > 16)
+  // TODO(webrtc:7990) Max size should depend on the current mode to be added to
+  // session description, support for mixed one- and two-byte header extensions.
+  if (value_size > RtpExtension::kMaxValueSize)
     return false;
   auto buffer = AllocateExtension(Extension::kId, value_size);
   if (buffer.empty())
