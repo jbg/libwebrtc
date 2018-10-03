@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc672fb9_296e7a98",
+        "filename": "audio/channel_receive_proxy.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-03T14:35:41Z",
+      "side": 1,
+      "message": "Could you group the methods which are common to send+receive so they\u0027re easy to see? (not creating a base class!)",
+      "revId": "b4884f0642391ad9f3adc09ad528e658097d885c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
