@@ -65,6 +65,15 @@ class MouseCursorMonitorX11 : public MouseCursorMonitor,
   MouseCursorMonitorX11(const DesktopCaptureOptions& options, Window window);
   ~MouseCursorMonitorX11() override;
 
+  static MouseCursorMonitor* CreateForWindow(
+      const DesktopCaptureOptions& options,
+      WindowId window);
+  static MouseCursorMonitor* CreateForScreen(
+      const DesktopCaptureOptions& options,
+      ScreenId screen);
+  static std::unique_ptr<MouseCursorMonitor> Create(
+      const DesktopCaptureOptions& options);
+
   void Init(Callback* callback, Mode mode) override;
   void Capture() override;
 
@@ -248,7 +257,7 @@ void MouseCursorMonitorX11::CaptureCursor() {
 }
 
 // static
-MouseCursorMonitor* MouseCursorMonitor::CreateForWindow(
+MouseCursorMonitor* MouseCursorMonitorX11::CreateForWindow(
     const DesktopCaptureOptions& options,
     WindowId window) {
   if (!options.x_display())
@@ -259,7 +268,7 @@ MouseCursorMonitor* MouseCursorMonitor::CreateForWindow(
   return new MouseCursorMonitorX11(options, window);
 }
 
-MouseCursorMonitor* MouseCursorMonitor::CreateForScreen(
+MouseCursorMonitor* MouseCursorMonitorX11::CreateForScreen(
     const DesktopCaptureOptions& options,
     ScreenId screen) {
   if (!options.x_display())
@@ -268,7 +277,7 @@ MouseCursorMonitor* MouseCursorMonitor::CreateForScreen(
       options, DefaultRootWindow(options.x_display()->display()));
 }
 
-std::unique_ptr<MouseCursorMonitor> MouseCursorMonitor::Create(
+std::unique_ptr<MouseCursorMonitor> MouseCursorMonitorX11::Create(
     const DesktopCaptureOptions& options) {
   return std::unique_ptr<MouseCursorMonitor>(
       CreateForScreen(options, kFullDesktopScreenId));

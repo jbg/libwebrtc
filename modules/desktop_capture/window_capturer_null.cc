@@ -10,6 +10,7 @@
 
 #include <assert.h>
 
+#include "modules/desktop_capture/desktop_capture_buildflags.h"
 #include "modules/desktop_capture/desktop_capturer.h"
 #include "modules/desktop_capture/desktop_frame.h"
 #include "rtc_base/constructormagic.h"
@@ -62,10 +63,12 @@ void WindowCapturerNull::CaptureFrame() {
 
 }  // namespace
 
+#if not BUILDFLAG(USE_PIPEWIRE)
 // static
 std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateRawWindowCapturer(
     const DesktopCaptureOptions& options) {
   return std::unique_ptr<DesktopCapturer>(new WindowCapturerNull());
 }
+#endif  // not BUILDFLAG(USE_PIPEWIRE)
 
 }  // namespace webrtc
