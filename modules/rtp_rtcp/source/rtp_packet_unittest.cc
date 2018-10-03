@@ -64,6 +64,27 @@ constexpr uint8_t kPacketWithTOAndAL[] = {
     0x12, 0x00, 0x56, 0xce,
     0x90, 0x80|kAudioLevel, 0x00, 0x00};
 
+constexpr uint8_t kPacketWithTwoByteExtensionIdLast[] = {
+    0x90, kPayloadType, kSeqNumFirstByte, kSeqNumSecondByte,
+    0x65, 0x43, 0x12, 0x78,
+    0x12, 0x34, 0x56, 0x78,
+    0x10, 0x00, 0x00, 0x04,
+    0x01, 0x03, 0x00, 0x56,
+    0xce, 0x09, 0x01, 0x80|kAudioLevel,
+    kTwoByteExtensionId, 0x03, 0x00, 0x30,  // => 0x00 0x30 0x22
+    0x22, 0x00, 0x00, 0x00};                // => Playout delay.min_ms = 3*10
+                                            // => Playout delay.max_ms = 34*10
+
+constexpr uint8_t kPacketWithTwoByteExtensionIdFirst[] = {
+    0x90, kPayloadType, kSeqNumFirstByte, kSeqNumSecondByte,
+    0x65, 0x43, 0x12, 0x78,
+    0x12, 0x34, 0x56, 0x78,
+    0x10, 0x00, 0x00, 0x04,
+    kTwoByteExtensionId, 0x03, 0x00, 0x30,  // => 0x00 0x30 0x22
+    0x22, 0x01, 0x03, 0x00,                 // => Playout delay.min_ms = 3*10
+    0x56, 0xce, 0x09, 0x01,                 // => Playout delay.max_ms = 34*10
+    0x80|kAudioLevel, 0x00, 0x00, 0x00};
+
 constexpr uint8_t kPacketWithTOAndALInvalidPadding[] = {
     0x90, kPayloadType, kSeqNumFirstByte, kSeqNumSecondByte,
     0x65, 0x43, 0x12, 0x78,
@@ -200,6 +221,49 @@ TEST(RtpPacketTest, CreateWith2Extensions) {
   packet.SetExtension<TransmissionOffset>(kTimeOffset);
   packet.SetExtension<AudioLevel>(kVoiceActive, kAudioLevel);
   EXPECT_THAT(kPacketWithTOAndAL,
+              ElementsAreArray(packet.data(), packet.size()));
+}
+
+TEST(RtpPacketTest, CreateWithTwoByteHeaderExtensionFirst) {
+  RtpPacketToSend::ExtensionManager extensions;
+  extensions.Register(kRtpExtensionTransmissionTimeOffset,
+                      kTransmissionOffsetExtensionId);
+  extensions.Register(kRtpExtensionAudioLevel, kAudioLevelExtensionId);
+  extensions.Register(kRtpExtensionPlayoutDelay, kTwoByteExtensionId);
+  RtpPacketToSend packet(&extensions);
+  packet.SetPayloadType(kPayloadType);
+  packet.SetSequenceNumber(kSeqNum);
+  packet.SetTimestamp(kTimestamp);
+  packet.SetSsrc(kSsrc);
+  // Set extension that requires two-byte header.
+  PlayoutDelay playoutDelay = {.min_ms = 30, .max_ms = 340};
+  packet.SetExtension<PlayoutDelayLimits>(playoutDelay);
+  packet.SetExtension<TransmissionOffset>(kTimeOffset);
+  packet.SetExtension<AudioLevel>(kVoiceActive, kAudioLevel);
+  EXPECT_THAT(kPacketWithTwoByteExtensionIdFirst,
+              ElementsAreArray(packet.data(), packet.size()));
+}
+
+TEST(RtpPacketTest, CreateWithTwoByteHeaderExtensionLast) {
+  // This test will trigger RtpPacket::PromoteToTwoByteHeaderExtension().
+  RtpPacketToSend::ExtensionManager extensions;
+  extensions.Register(kRtpExtensionTransmissionTimeOffset,
+                      kTransmissionOffsetExtensionId);
+  extensions.Register(kRtpExtensionAudioLevel, kAudioLevelExtensionId);
+  extensions.Register(kRtpExtensionPlayoutDelay, kTwoByteExtensionId);
+  RtpPacketToSend packet(&extensions);
+  packet.SetPayloadType(kPayloadType);
+  packet.SetSequenceNumber(kSeqNum);
+  packet.SetTimestamp(kTimestamp);
+  packet.SetSsrc(kSsrc);
+  packet.SetExtension<TransmissionOffset>(kTimeOffset);
+  packet.SetExtension<AudioLevel>(kVoiceActive, kAudioLevel);
+  EXPECT_THAT(kPacketWithTOAndAL,
+              ElementsAreArray(packet.data(), packet.size()));
+  // Set extension that requires two-byte header.
+  PlayoutDelay playoutDelay = {.min_ms = 30, .max_ms = 340};
+  packet.SetExtension<PlayoutDelayLimits>(playoutDelay);
+  EXPECT_THAT(kPacketWithTwoByteExtensionIdLast,
               ElementsAreArray(packet.data(), packet.size()));
 }
 
