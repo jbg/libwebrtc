@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e2916fa_04276e9e",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extension_size.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T07:44:43Z",
+      "side": 1,
+      "message": "Add a comment that this means that two-byte header extension is needed.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 69
+      },
+      "revId": "58d56439cea64baae46b861f02c14e0d6bfa98b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddf22588_c7b14621",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extension_size_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T07:44:43Z",
+      "side": 1,
+      "message": "nit: spelling of extension and individual. Spelling of extension copied to other tests.",
+      "revId": "58d56439cea64baae46b861f02c14e0d6bfa98b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
