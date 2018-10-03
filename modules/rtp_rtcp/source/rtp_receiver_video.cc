@@ -10,7 +10,6 @@
 
 #include "modules/rtp_rtcp/source/rtp_receiver_video.h"
 
-#include <assert.h>
 #include <string.h>
 
 #include <memory>

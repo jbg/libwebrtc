@@ -10,7 +10,6 @@
 
 #include "modules/rtp_rtcp/source/rtp_receiver_audio.h"
 
-#include <assert.h>  // assert
 #include <math.h>    // pow()
 #include <string.h>  // memcpy()
 
