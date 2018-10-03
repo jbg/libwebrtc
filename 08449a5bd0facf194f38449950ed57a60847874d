@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c0ddbe1_edeace69",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T14:21:41Z",
+      "side": 1,
+      "message": "why?\ndata.size() should match str.size()\nThen it doesn\u0027t matter if str.size() \u003e kMaxSize.\n\nI wouldn\u0027t mind if you update kMaxSize to 255 instead",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82f531b4_d15e3fdb",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T14:21:41Z",
+      "side": 1,
+      "message": "please use data() for reading\n(or cache profile_id in the RtpPacket as bool use_two_byte_header_for_extensions \u003d false; )",
+      "range": {
+        "startLine": 217,
+        "startChar": 44,
+        "endLine": 217,
+        "endChar": 51
+      },
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "436044c2_87ec9daa",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T14:21:41Z",
+      "side": 1,
+      "message": ".size(), id and length are still valid in the entries, only offset need update.\nalso order of the extensions in this variable match order of the extensions in the buffer after your decopled index from id (though not sure it matters).\n\nCan it be simpler to just update the offset?\n\nfor (int i \u003d 0; i \u003c extension_entries_.size(); i++) {\n  // do the memcpy\n  extension_entries_[i].offset +\u003d i;\n}",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "719cccf3_29cb7e6f",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T14:21:41Z",
+      "side": 1,
+      "message": "can id be 0?",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce96d575_33b4e726",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T14:21:41Z",
+      "side": 1,
+      "message": "if code is submitted now, will it allow to send two-byte header right away, without negotiation?\nSafer not.",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d44df607_d2b92471",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T14:21:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure this syntax is available in c++11 (otherwise I would use it myself, a lot)\nbots are better judges here though.",
+      "range": {
+        "startLine": 239,
+        "startChar": 31,
+        "endLine": 239,
+        "endChar": 38
+      },
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
