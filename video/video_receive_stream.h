@@ -32,6 +32,7 @@
 namespace webrtc {
 
 class CallStats;
+class FrameDecryptorInterface;
 class ProcessThread;
 class RTPFragmentationHeader;
 class RtpStreamReceiverInterface;
@@ -148,6 +149,7 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
 
   int64_t last_keyframe_request_ms_ = 0;
 };
+
 }  // namespace internal
 }  // namespace webrtc
 

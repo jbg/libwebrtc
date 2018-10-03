@@ -38,6 +38,7 @@
 
 namespace webrtc {
 
+class FrameEncryptorInterface;
 class OverheadObserver;
 class RateLimiter;
 class RtcEventLog;
@@ -112,7 +113,8 @@ class RTPSender {
                         const RTPFragmentationHeader* fragmentation,
                         const RTPVideoHeader* rtp_header,
                         uint32_t* transport_frame_id_out,
-                        int64_t expected_retransmission_time_ms);
+                        int64_t expected_retransmission_time_ms,
+                        FrameEncryptorInterface* frame_encryptor = nullptr);
 
   // RTP header extension
   int32_t RegisterRtpHeaderExtension(RTPExtensionType type, uint8_t id);

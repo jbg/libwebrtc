@@ -16,6 +16,7 @@
 
 #include "absl/memory/memory.h"
 
+#include "api/crypto/framedecryptorinterface.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "media/base/mediaconstants.h"
 #include "modules/pacing/packet_router.h"
@@ -95,7 +96,8 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
     ProcessThread* process_thread,
     NackSender* nack_sender,
     KeyFrameRequestSender* keyframe_request_sender,
-    video_coding::OnCompleteFrameCallback* complete_frame_callback)
+    video_coding::OnCompleteFrameCallback* complete_frame_callback,
+    rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor)
     : clock_(Clock::GetRealTimeClock()),
       config_(*config),
       packet_router_(packet_router),
@@ -113,7 +115,8 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
                                     packet_router)),
       complete_frame_callback_(complete_frame_callback),
       keyframe_request_sender_(keyframe_request_sender),
-      has_received_frame_(false) {
+      has_received_frame_(false),
+      frame_decryptor_(frame_decryptor) {
   constexpr bool remb_candidate = true;
   packet_router_->AddReceiveRtpModule(rtp_rtcp_.get(), remb_candidate);
   rtp_receive_statistics_->RegisterRtpStatisticsCallback(receive_stats_proxy);
@@ -369,6 +372,9 @@ void RtpVideoStreamReceiver::OnReceivedFrame(
       keyframe_request_sender_->RequestKeyFrame();
   }
 
+  if (frame_decryptor_ != nullptr) {
+    // TODO(webrtc:9795) - Decrypt incoming frames here.
+  }
   reference_finder_->ManageFrame(std::move(frame));
 }
 
