@@ -34,6 +34,24 @@
       "revId": "4a330a5b4c90bee33dbb244b27d567bcca843cd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41ffa5bf_2b59bc4f",
+        "filename": "test/testsupport/perf_test_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-10-03T11:48:21Z",
+      "side": 1,
+      "message": "Hm, I can\u0027t actually change it to `TEST_F(PerfDeathTest)` because `PerfTest` is the name of the class. I changed the name of the test case instead.",
+      "parentUuid": "86c82012_38b112a9",
+      "revId": "4a330a5b4c90bee33dbb244b27d567bcca843cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
