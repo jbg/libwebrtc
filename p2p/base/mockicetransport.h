@@ -47,6 +47,10 @@ class MockIceTransport : public IceTransportInternal {
   IceTransportState GetState() const override {
     return IceTransportState::STATE_INIT;
   }
+  StandardsCompliantIceTransportState GetNewState() const override {
+    return StandardsCompliantIceTransportState::kIceTransportNew;
+  }
+
   const std::string& transport_name() const override { return transport_name_; }
   int component() const override { return 0; }
   void SetIceRole(IceRole role) override {}
