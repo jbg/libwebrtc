@@ -7,7 +7,6 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 
 #include "modules/rtp_rtcp/include/rtp_cvo.h"
@@ -462,9 +461,11 @@ bool BaseRtpStringExtension::Parse(rtc::ArrayView<const uint8_t> data,
 
 bool BaseRtpStringExtension::Write(rtc::ArrayView<uint8_t> data,
                                    const std::string& str) {
+  if (str.size() > StringRtpHeaderExtension::kMaxSize) {
+    return false;
+  }
   RTC_DCHECK_EQ(data.size(), str.size());
   RTC_DCHECK_GE(str.size(), 1);
-  RTC_DCHECK_LE(str.size(), StringRtpHeaderExtension::kMaxSize);
   memcpy(data.data(), str.data(), str.size());
   return true;
 }
