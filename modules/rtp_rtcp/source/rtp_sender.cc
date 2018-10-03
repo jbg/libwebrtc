@@ -410,7 +410,8 @@ bool RTPSender::SendOutgoingData(FrameType frame_type,
                                  const RTPFragmentationHeader* fragmentation,
                                  const RTPVideoHeader* rtp_header,
                                  uint32_t* transport_frame_id_out,
-                                 int64_t expected_retransmission_time_ms) {
+                                 int64_t expected_retransmission_time_ms,
+                                 FrameEncryptorInterface* frame_encryptor) {
   uint32_t ssrc;
   uint16_t sequence_number;
   uint32_t rtp_timestamp;
@@ -472,10 +473,10 @@ bool RTPSender::SendOutgoingData(FrameType frame_type,
                                           sequence_number);
     }
 
-    result = video_->SendVideo(video_type, frame_type, payload_type,
-                               rtp_timestamp, capture_time_ms, payload_data,
-                               payload_size, fragmentation, rtp_header,
-                               expected_retransmission_time_ms);
+    result = video_->SendVideo(
+        video_type, frame_type, payload_type, rtp_timestamp, capture_time_ms,
+        payload_data, payload_size, fragmentation, rtp_header,
+        expected_retransmission_time_ms, frame_encryptor);
   }
 
   rtc::CritScope cs(&statistics_crit_);

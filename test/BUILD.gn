@@ -104,6 +104,23 @@ rtc_source_set("rtp_test_utils") {
   ]
 }
 
+rtc_source_set("crypto_test_utils") {
+  testonly = true
+  sources = [
+    "fake_frame_decryptor.cc",
+    "fake_frame_decryptor.h",
+    "fake_frame_encryptor.cc",
+    "fake_frame_encryptor.h",
+  ]
+  deps = [
+    "..:webrtc_common",
+    "../api:array_view",
+    "../api:libjingle_peerconnection_api",
+    "../rtc_base:checks",
+    "../rtc_base:rtc_base_approved",
+  ]
+}
+
 rtc_source_set("field_trial") {
   visibility = [ "*" ]
   testonly = true
@@ -295,6 +312,7 @@ if (rtc_include_tests) {
 
   rtc_test("test_support_unittests") {
     deps = [
+      ":crypto_test_utils",
       ":direct_transport",
       ":fake_video_codecs",
       ":fileutils",
@@ -571,6 +589,7 @@ rtc_source_set("test_common") {
   }
 
   deps = [
+    ":crypto_test_utils",
     ":direct_transport",
     ":fake_video_codecs",
     ":fileutils",
