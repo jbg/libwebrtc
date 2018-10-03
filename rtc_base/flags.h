@@ -23,7 +23,6 @@
 #define RTC_BASE_FLAGS_H_
 
 #include "rtc_base/checks.h"
-#include "rtc_base/constructormagic.h"
 
 namespace rtc {
 
