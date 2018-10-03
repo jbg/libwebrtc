@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d179e1c_2ccaf5b7",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T17:54:59Z",
+      "side": 1,
+      "message": "The answer always supports the mixed one and two byte header extension if the offer supports it. Is there ever a case where an answer would want to decline this if the offer supports it?",
+      "range": {
+        "startLine": 1399,
+        "startChar": 2,
+        "endLine": 1400,
+        "endChar": 63
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8c2f157_736408ea",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T17:54:59Z",
+      "side": 1,
+      "message": "nit: \"header extensions\" -\u003e \"rtp header extensions\", or \"within the same stream\" -\u003e \"within the same rtp stream\"",
+      "range": {
+        "startLine": 458,
+        "startChar": 57,
+        "endLine": 458,
+        "endChar": 74
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "600db410_7a47f75a",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T17:54:59Z",
+      "side": 1,
+      "message": "Looks like this attribute can be supported at the media level as well (in an m\u003d section scope). You don\u0027t plan to add it there do you?",
+      "range": {
+        "startLine": 857,
+        "startChar": 6,
+        "endLine": 857,
+        "endChar": 58
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c91c4e23_481b77fe",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2100,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T17:54:59Z",
+      "side": 1,
+      "message": "If you want you can simplify this test by using the TestSerialize() helper. Other tests use this. You could update your test to:\n  JsepSessionDescription desc(kDummyType);\n  MakeDescriptionWithoutCandidates(\u0026desc);\n  desc.description()-\u003eset_mixed_one_two_byte_header_extensions_supported(true);\n  TestSerialize(desc);\n\nEither way though, your call :).",
+      "range": {
+        "startLine": 2100,
+        "startChar": 22,
+        "endLine": 2100,
+        "endChar": 69
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e539d6b_4daadc3e",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2454,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T17:54:59Z",
+      "side": 1,
+      "message": "nit: Since these are both jdes, it could be more clear to rename this one to deserialized_jdesc.",
+      "range": {
+        "startLine": 2454,
+        "startChar": 59,
+        "endLine": 2454,
+        "endChar": 64
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
