@@ -327,5 +327,11 @@ void ChannelProxy::StopPlayout() {
   int error = channel_->StopPlayout();
   RTC_DCHECK_EQ(0, error);
 }
+
+void ChannelProxy::SetFrameEncryptor(FrameEncryptorInterface* frame_encryptor) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+  channel_->SetFrameEncryptor(frame_encryptor);
+}
+
 }  // namespace voe
 }  // namespace webrtc
