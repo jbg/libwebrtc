@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dcfbdb31_ae87aeb4",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-03T12:10:39Z",
+      "side": 1,
+      "message": "I think you are worried about 0 (note that 95 equals the current setting).\n\nWe have at line 303 to make sure that target level is always greater than 1.\n\nI added a test, which would fail if we change the do-while to while at line 303.",
+      "parentUuid": "1f85df82_d53c8f58",
+      "range": {
+        "startLine": 38,
+        "startChar": 27,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "4f09e916fc58080880e715534cb3f5d35509b0b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ddf4b12_1ac0e63b",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-09-25T07:33:11Z",
       "side": 1,
       "message": "Suggest:\n const int limit_probability \u003d forced_limit_probability_.value_or(kLimitProbability);",
+      "range": {
+        "startLine": 284,
+        "startChar": 2,
+        "endLine": 285,
+        "endChar": 72
+      },
+      "revId": "4f09e916fc58080880e715534cb3f5d35509b0b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be63319f_d8c3d5f2",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-03T12:10:39Z",
+      "side": 1,
+      "message": "That was my first attempt also. Unfortunately, value_or ended up with a link-error with kLimitProbability.\n\nThe reason is that it does not allow private static const, now I removed static qualifier on kLimitProbability",
+      "parentUuid": "4ddf4b12_1ac0e63b",
       "range": {
         "startLine": 284,
         "startChar": 2,
