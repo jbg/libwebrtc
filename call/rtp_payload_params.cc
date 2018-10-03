@@ -115,8 +115,6 @@ void SetVideoTiming(const EncodedImage& image, VideoSendTiming* timing) {
 RtpPayloadParams::RtpPayloadParams(const uint32_t ssrc,
                                    const RtpPayloadState* state)
     : ssrc_(ssrc),
-      generic_picture_id_experiment_(
-          field_trial::IsEnabled("WebRTC-GenericPictureId")),
       generic_descriptor_experiment_(
           field_trial::IsEnabled("WebRTC-GenericDescriptor")) {
   for (auto& spatial_layer : last_shared_frame_id_)
@@ -205,28 +203,44 @@ void RtpPayloadParams::SetCodecSpecific(RTPVideoHeader* rtp_video_header,
       vp9_header.tl0_pic_idx = state_.tl0_pic_idx;
     }
   }
-  // There are currently two generic descriptors in WebRTC. The old descriptor
-  // can not share a picture id space between simulcast streams, so we use the
-  // |picture_id| in this case. We let the |picture_id| tag along in |frame_id|
-  // until the old generic format can be removed.
-  // TODO(philipel): Remove this when the new generic format has been fully
-  //                 implemented.
-  if (generic_picture_id_experiment_ &&
-      rtp_video_header->codec == kVideoCodecGeneric) {
-    rtp_video_header->generic.emplace().frame_id = state_.picture_id;
-  }
 }
 
 void RtpPayloadParams::SetGeneric(int64_t frame_id,
                                   bool is_keyframe,
                                   RTPVideoHeader* rtp_video_header) {
-  if (rtp_video_header->codec == kVideoCodecVP8) {
+  if (rtp_video_header->codec == kVideoCodecGeneric) {
+    GenericToGeneric(frame_id, is_keyframe, rtp_video_header);
+  } else if (rtp_video_header->codec == kVideoCodecVP8) {
     Vp8ToGeneric(frame_id, is_keyframe, rtp_video_header);
   }
 
   // TODO(philipel): Implement VP9 to new generic descriptor.
   // TODO(philipel): Implement H264 to new generic descriptor.
-  // TODO(philipel): Implement generic codec to new generic descriptor.
+}
+
+void RtpPayloadParams::GenericToGeneric(int64_t shared_frame_id,
+                                        bool is_keyframe,
+                                        RTPVideoHeader* rtp_video_header) {
+  const int spatial_index = 0;
+  const int temporal_index = 0;
+
+  RTPVideoHeader::GenericDescriptorInfo& generic =
+      rtp_video_header->generic.emplace();
+
+  generic.frame_id = shared_frame_id;
+  generic.spatial_index = spatial_index;
+  generic.temporal_index = temporal_index;
+
+  if (is_keyframe) {
+    last_shared_frame_id_[spatial_index].fill(-1);
+  } else {
+    int64_t frame_id = last_shared_frame_id_[spatial_index][temporal_index];
+    RTC_DCHECK_NE(frame_id, -1);
+    RTC_DCHECK_LT(frame_id, shared_frame_id);
+    generic.dependencies.push_back(frame_id);
+  }
+
+  last_shared_frame_id_[spatial_index][temporal_index] = shared_frame_id;
 }
 
 void RtpPayloadParams::Vp8ToGeneric(int64_t shared_frame_id,
