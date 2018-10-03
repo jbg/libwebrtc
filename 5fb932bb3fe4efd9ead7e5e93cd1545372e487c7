@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "912850c7_6fa5facf",
+        "filename": "pc/rtpreceiver.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-03T18:28:36Z",
+      "side": 1,
+      "message": "After discussing you mean SetMediaChannels version should be removed. Done.",
+      "parentUuid": "fce5cf45_06030ff0",
+      "revId": "5fb932bb3fe4efd9ead7e5e93cd1545372e487c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03ca4cd4_a5d37822",
         "filename": "pc/rtpsender.cc",
         "patchSetId": 16
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "bb213e78_554135fa",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-03T18:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03ca4cd4_a5d37822",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 39
+      },
+      "revId": "5fb932bb3fe4efd9ead7e5e93cd1545372e487c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "344730d2_21ca1b7a",
         "filename": "pc/rtpsender.cc",
         "patchSetId": 16
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "e2430f6f_60029450",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-03T18:28:36Z",
+      "side": 1,
+      "message": "Implemented the maybe instead.",
+      "parentUuid": "344730d2_21ca1b7a",
+      "revId": "5fb932bb3fe4efd9ead7e5e93cd1545372e487c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d22b8fe6_7ac75e37",
         "filename": "pc/rtpsender.cc",
         "patchSetId": 16
@@ -73,6 +133,24 @@
       "revId": "5fb932bb3fe4efd9ead7e5e93cd1545372e487c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e82ca3ee_a645d00c",
+        "filename": "pc/rtpsender.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-03T18:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d22b8fe6_7ac75e37",
+      "revId": "5fb932bb3fe4efd9ead7e5e93cd1545372e487c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
