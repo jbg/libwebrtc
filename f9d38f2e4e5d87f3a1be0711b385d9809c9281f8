@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0927470_dcdacbf9",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-03T16:56:01Z",
+      "side": 0,
+      "message": "Is there a use case to send extensions with value_size \u003d\u003d 0?\nThere is some code that assume extension can\u0027t use zero bytes,\ne.g. Mid \u0026 RtpStreamId extensions treat \u0027empty value\u0027 same as \u0027no value\u0027.\n\nSo more changes are required to support empty values, e.g. below there is check if (buffer.empty()) which would be true (and thus return false) when value_size \u003d\u003d 0\n\nOn the other side it might be better to add this use case sooner than later (afaik mid \u0026 rsid are the only extensions that may try to write empty strings)",
+      "range": {
+        "startLine": 190,
+        "startChar": 6,
+        "endLine": 190,
+        "endChar": 21
+      },
+      "revId": "f9d38f2e4e5d87f3a1be0711b385d9809c9281f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
