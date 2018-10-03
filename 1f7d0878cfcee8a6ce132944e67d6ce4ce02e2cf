@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "379d9384_e5ad2b3a",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-03T18:00:39Z",
+      "side": 1,
+      "message": "If we wanted to offer it, then it could be set here.",
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d179e1c_2ccaf5b7",
         "filename": "pc/mediasession.cc",
         "patchSetId": 1
