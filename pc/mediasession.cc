@@ -1396,6 +1396,9 @@ SessionDescription* MediaSessionDescriptionFactory::CreateAnswer(
   // Transport info shared by the bundle group.
   std::unique_ptr<TransportInfo> bundle_transport;
 
+  answer->set_mixed_one_two_byte_header_extensions_supported(
+      offer->mixed_one_two_byte_header_extensions_supported());
+
   // Get list of all possible codecs that respects existing payload type
   // mappings and uses a single payload type space.
   //

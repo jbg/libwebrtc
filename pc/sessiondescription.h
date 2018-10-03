@@ -455,6 +455,15 @@ class SessionDescription {
   }
   int msid_signaling() const { return msid_signaling_; }
 
+  // Determines if it's allowed to mix one- and two-byte header extensions
+  // within the same stream.
+  void set_mixed_one_two_byte_header_extensions_supported(bool supported) {
+    mixed_one_two_byte_header_extensions_supported_ = supported;
+  }
+  bool mixed_one_two_byte_header_extensions_supported() const {
+    return mixed_one_two_byte_header_extensions_supported_;
+  }
+
  private:
   SessionDescription(const SessionDescription&);
 
@@ -465,6 +474,9 @@ class SessionDescription {
   // Default to what Plan B would do.
   // TODO(bugs.webrtc.org/8530): Change default to kMsidSignalingMediaSection.
   int msid_signaling_ = kMsidSignalingSsrcAttribute;
+  // Mixed one- and two-byte header not included in offer by default because
+  // clients prior to https://bugs.webrtc.org/9712 cannot parse this correctly.
+  bool mixed_one_two_byte_header_extensions_supported_ = false;
 };
 
 // Indicates whether a session description was sent by the local client or
