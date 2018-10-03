@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "75a0d517_0b793773",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T20:25:05Z",
+      "side": 1,
+      "message": "I cannot think of such case. It will be up to the sender to decide what to do with this information.",
+      "parentUuid": "3d179e1c_2ccaf5b7",
+      "range": {
+        "startLine": 1399,
+        "startChar": 2,
+        "endLine": 1400,
+        "endChar": 63
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8c2f157_736408ea",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 1
@@ -62,6 +86,30 @@
       "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1133d65c_21e2a016",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T20:25:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8c2f157_736408ea",
+      "range": {
+        "startLine": 458,
+        "startChar": 57,
+        "endLine": 458,
+        "endChar": 74
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "b89ba09b_aae42748",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T20:25:05Z",
+      "side": 1,
+      "message": "Thanks! I had missed that this could also be specified at the media level.\nI think it should be enough to support it on a session level, I cannot see the case where we would only like to support it for a specific media.\nWhat do you think?",
+      "parentUuid": "600db410_7a47f75a",
+      "range": {
+        "startLine": 857,
+        "startChar": 6,
+        "endLine": 857,
+        "endChar": 58
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c91c4e23_481b77fe",
         "filename": "pc/webrtcsdp_unittest.cc",
         "patchSetId": 1
@@ -111,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "833c6920_3e2d4115",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2100,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T20:25:05Z",
+      "side": 1,
+      "message": "I agree, that\u0027s better.",
+      "parentUuid": "c91c4e23_481b77fe",
+      "range": {
+        "startLine": 2100,
+        "startChar": 22,
+        "endLine": 2100,
+        "endChar": 69
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e539d6b_4daadc3e",
         "filename": "pc/webrtcsdp_unittest.cc",
         "patchSetId": 1
@@ -131,6 +227,30 @@
       "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d412d1_a76eb2bf",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2454,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-03T20:25:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e539d6b_4daadc3e",
+      "range": {
+        "startLine": 2454,
+        "startChar": 59,
+        "endLine": 2454,
+        "endChar": 64
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
