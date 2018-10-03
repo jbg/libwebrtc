@@ -10,6 +10,7 @@
 
 #include "test/testsupport/perf_test.h"
 
+#include <limits>
 #include <string>
 
 #include "test/gtest.h"
@@ -102,6 +103,22 @@ TEST_F(PerfTest, TestClearPerfResults) {
   PrintResult("measurement", "modifier", "trace", 42, "units", false);
   ClearPerfResults();
   EXPECT_EQ(R"({"format_version":"1.0","charts":{}})", GetPerfResultsJSON());
+}
+
+constexpr double NAN = std::numeric_limits<double>::quiet_NaN();
+constexpr double INF = std::numeric_limits<double>::infinity();
+
+TEST_F(PerfTest, TestFiniteResultError) {
+  EXPECT_DEATH(PrintResult("a", "b", "c", NAN, "d", false), "finit");
+  EXPECT_DEATH(PrintResult("a", "b", "c", INF, "d", false), "finit");
+
+  EXPECT_DEATH(PrintResultMeanAndError("a", "b", "c", NAN, 1, "d", false), "");
+  EXPECT_DEATH(PrintResultMeanAndError("a", "b", "c", 1, INF, "d", false), "");
+
+  const double kNanList[] = {NAN, NAN};
+  EXPECT_DEATH(PrintResultList("a", "b", "c", kNanList, "d", false), "");
+  const double kInfList[] = {0, INF};
+  EXPECT_DEATH(PrintResultList("a", "b", "c", kInfList, "d", false), "");
 }
 
 }  // namespace test
