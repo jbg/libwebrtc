@@ -52,6 +52,24 @@
       "revId": "4a330a5b4c90bee33dbb244b27d567bcca843cd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8816671e_d5d65e64",
+        "filename": "test/testsupport/perf_test_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-03T11:51:12Z",
+      "side": 1,
+      "message": "The entire TestCase must follow this naming. One solution is:\nusing PerfDeathTest \u003d PerfTest;\n\nRef: https://g3doc.corp.google.com/third_party/googletest/googletest/g3doc/faq.md#why-does-googletest-require-the-entire-test-case-instead-of-individual-tests-to-be-named-deathtest-when-it-uses-assert-death",
+      "parentUuid": "41ffa5bf_2b59bc4f",
+      "revId": "4a330a5b4c90bee33dbb244b27d567bcca843cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
