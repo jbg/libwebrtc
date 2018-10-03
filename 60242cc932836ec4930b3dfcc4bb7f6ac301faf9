@@ -34,6 +34,24 @@
       "revId": "60242cc932836ec4930b3dfcc4bb7f6ac301faf9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "021652ec_c5b077d8",
+        "filename": "audio/channel.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-03T12:44:09Z",
+      "side": 1,
+      "message": "yes, so if Decrypt() returns !\u003d0, bytes_written will already \u003d\u003d0, if Decrypt() doesn\u0027t touch it, so we don\u0027t need the special handling, but can have a DCHECK if we\u0027re paranoid. :)",
+      "parentUuid": "60de81c7_841424c2",
+      "revId": "60242cc932836ec4930b3dfcc4bb7f6ac301faf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
