@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "e1d87520_18583b58",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T22:25:23Z",
+      "side": 1,
+      "message": "sgtm",
+      "parentUuid": "75a0d517_0b793773",
+      "range": {
+        "startLine": 1399,
+        "startChar": 2,
+        "endLine": 1400,
+        "endChar": 63
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8c2f157_736408ea",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 1
@@ -148,6 +172,30 @@
       "side": 1,
       "message": "Thanks! I had missed that this could also be specified at the media level.\nI think it should be enough to support it on a session level, I cannot see the case where we would only like to support it for a specific media.\nWhat do you think?",
       "parentUuid": "600db410_7a47f75a",
+      "range": {
+        "startLine": 857,
+        "startChar": 6,
+        "endLine": 857,
+        "endChar": 58
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36b701f_8361603b",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-03T22:25:23Z",
+      "side": 1,
+      "message": "Okay I talked to Steve offline about this and came to the conclusion that it\u0027s best to support responding with an answer at the media level as well right now. Otherwise down the road it\u0027s going to come up that this is not supported, when it\u0027s a much easier fix to make right now.\n\nI think what this means is:\n-Adding a mixed_one_two_byte_header_extensions_supported to the MediaContentDescription\n-Updating CreateAnswer() so that each MediaContentDescription sets this boolean if the offer\u0027s MediaContentDescription has it set (I think this would be inside CreateMediaContentAnswer())\n-Serializing/Deserializing the SDP.\n-Tests for all of this.",
+      "parentUuid": "b89ba09b_aae42748",
       "range": {
         "startLine": 857,
         "startChar": 6,
