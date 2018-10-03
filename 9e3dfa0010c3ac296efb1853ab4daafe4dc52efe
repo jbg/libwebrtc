@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba04b91f_25c174c3",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-03T20:29:34Z",
+      "side": 1,
+      "message": "Add a spec reference here, so that it\u0027s easy to check that the spec hasn\u0027t changed from under us.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "257ed5e5_6e64cb76",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-03T20:29:34Z",
+      "side": 1,
+      "message": "current_standardized_state is better than standards_state; having a local variable and a class variable that differ by the underscore only makes for confused reading.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2a30813_be2878b7",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-03T20:29:34Z",
+      "side": 1,
+      "message": "this dependency seems weird to introduce. Is it possible to find some other api/ file that the enum iceTransportState can live in?\n\npreferably one that\u0027s already referenced by peerconnectioninterface.h?\n\nthe reason I worry is that I fear future developments will have us using the transport interface without a PeerConnection, but I can\u0027t quite imagine using PeerConnections without transports.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8f97918_8fc163c0",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-03T20:29:34Z",
+      "side": 1,
+      "message": "Is it \"new\" because it might have changed, or \"new\" because it\u0027s a new definition?\nIf the former, call it ComputeCurrentState.\nIf the latter, call it ComputeStandardizedState.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96b7e576_c348e770",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-03T20:29:34Z",
+      "side": 1,
+      "message": "Nit: standards_state_ is bad grammar. standardized_state_ would be better.\nLong term, I\u0027d want to rename state_ to internal_state_ and have the standardized state exposed as state_ (and have internal_state_ go away once we don\u0027t need it any more).\nI suspect you can\u0027t do that now, but a TODO to remove the duplication would be nice.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
