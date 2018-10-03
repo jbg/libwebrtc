@@ -323,6 +323,11 @@ IceTransportState P2PTransportChannel::GetState() const {
   return state_;
 }
 
+webrtc::PeerConnectionInterface::IceTransportState
+P2PTransportChannel::GetNewState() const {
+  return standards_state_;
+}
+
 const std::string& P2PTransportChannel::transport_name() const {
   return transport_name_;
 }
@@ -385,6 +390,41 @@ IceTransportState P2PTransportChannel::ComputeState() const {
 
   ice_event_log_.DumpCandidatePairDescriptionToMemoryAsConfigEvents();
   return IceTransportState::STATE_COMPLETED;
+}
+
+webrtc::PeerConnectionInterface::IceTransportState
+P2PTransportChannel::ComputeNewState() const {
+  bool has_connection = false;
+  for (Connection* connection : connections_) {
+    if (connection->active()) {
+      has_connection = true;
+      break;
+    }
+  }
+
+  switch (gathering_state_) {
+    case kIceGatheringComplete:
+      if (has_connection)
+        return webrtc::PeerConnectionInterface::IceTransportState::
+            kIceTransportCompleted;
+      else
+        return webrtc::PeerConnectionInterface::IceTransportState::
+            kIceTransportFailed;
+    case kIceGatheringNew:
+      return webrtc::PeerConnectionInterface::IceTransportState::
+          kIceTransportNew;
+    case kIceGatheringGathering:
+      if (has_connection)
+        return webrtc::PeerConnectionInterface::IceTransportState::
+            kIceTransportConnected;
+      else
+        return webrtc::PeerConnectionInterface::IceTransportState::
+            kIceTransportChecking;
+    default:
+      RTC_NOTREACHED();
+      return webrtc::PeerConnectionInterface::IceTransportState::
+          kIceTransportFailed;
+  }
 }
 
 void P2PTransportChannel::SetIceParameters(const IceParameters& ice_params) {
@@ -1827,6 +1867,9 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
 // example, we call this at the end of SortConnectionsAndUpdateState.
 void P2PTransportChannel::UpdateState() {
   IceTransportState state = ComputeState();
+  webrtc::PeerConnectionInterface::IceTransportState standards_state =
+      ComputeNewState();
+
   if (state_ != state) {
     RTC_LOG(LS_INFO) << ToString()
                      << ": Transport channel state changed from "
@@ -1868,6 +1911,10 @@ void P2PTransportChannel::UpdateState() {
     SignalStateChanged(this);
   }
 
+  if (standards_state_ != standards_state) {
+    standards_state_ = standards_state;
+    SignalNewStateChanged(this);
+  }
   // If our selected connection is "presumed writable" (TURN-TURN with no
   // CreatePermission required), act like we're already writable to the upper
   // layers, so they can start media quicker.
