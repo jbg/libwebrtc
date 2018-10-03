@@ -95,6 +95,8 @@ class MockVoEChannelProxy : public voe::ChannelProxy {
   MOCK_METHOD0(StopSend, void());
   MOCK_METHOD0(StartPlayout, void());
   MOCK_METHOD0(StopPlayout, void());
+
+  void SetFrameEncryptor(FrameEncryptorInterface* frame_encryptor) override {}
 };
 }  // namespace test
 }  // namespace webrtc
