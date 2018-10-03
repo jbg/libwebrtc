@@ -35,18 +35,21 @@
 namespace webrtc {
 namespace {
 
-// A class to perform video frame capturing for Linux.
+// A class to perform video frame capturing for Linux on X11.
 //
 // If XDamage is used, this class sets DesktopFrame::updated_region() according
 // to the areas reported by XDamage. Otherwise this class does not detect
 // DesktopFrame::updated_region(), the field is always set to the entire frame
 // rectangle. ScreenCapturerDifferWrapper should be used if that functionality
 // is necessary.
-class ScreenCapturerLinux : public DesktopCapturer,
-                            public SharedXDisplay::XEventHandler {
+class ScreenCapturerX11 : public DesktopCapturer,
+                          public SharedXDisplay::XEventHandler {
  public:
-  ScreenCapturerLinux();
-  ~ScreenCapturerLinux() override;
+  ScreenCapturerX11();
+  ~ScreenCapturerX11() override;
+
+  static std::unique_ptr<DesktopCapturer> CreateRawScreenCapturer(
+      const DesktopCaptureOptions& options);
 
   // TODO(ajwong): Do we really want this to be synchronous?
   bool Init(const DesktopCaptureOptions& options);
@@ -118,14 +121,14 @@ class ScreenCapturerLinux : public DesktopCapturer,
   // current with the last buffer used.
   DesktopRegion last_invalid_region_;
 
-  RTC_DISALLOW_COPY_AND_ASSIGN(ScreenCapturerLinux);
+  RTC_DISALLOW_COPY_AND_ASSIGN(ScreenCapturerX11);
 };
 
-ScreenCapturerLinux::ScreenCapturerLinux() {
+ScreenCapturerX11::ScreenCapturerX11() {
   helper_.SetLogGridSize(4);
 }
 
-ScreenCapturerLinux::~ScreenCapturerLinux() {
+ScreenCapturerX11::~ScreenCapturerX11() {
   options_.x_display()->RemoveEventHandler(ConfigureNotify, this);
   if (use_damage_) {
     options_.x_display()->RemoveEventHandler(damage_event_base_ + XDamageNotify,
@@ -134,8 +137,8 @@ ScreenCapturerLinux::~ScreenCapturerLinux() {
   DeinitXlib();
 }
 
-bool ScreenCapturerLinux::Init(const DesktopCaptureOptions& options) {
-  TRACE_EVENT0("webrtc", "ScreenCapturerLinux::Init");
+bool ScreenCapturerX11::Init(const DesktopCaptureOptions& options) {
+  TRACE_EVENT0("webrtc", "ScreenCapturerX11::Init");
   options_ = options;
 
   root_window_ = RootWindow(display(), DefaultScreen(display()));
@@ -178,7 +181,7 @@ bool ScreenCapturerLinux::Init(const DesktopCaptureOptions& options) {
   return true;
 }
 
-void ScreenCapturerLinux::InitXDamage() {
+void ScreenCapturerX11::InitXDamage() {
   // Our use of XDamage requires XFixes.
   if (!has_xfixes_) {
     return;
@@ -219,15 +222,15 @@ void ScreenCapturerLinux::InitXDamage() {
   RTC_LOG(LS_INFO) << "Using XDamage extension.";
 }
 
-void ScreenCapturerLinux::Start(Callback* callback) {
+void ScreenCapturerX11::Start(Callback* callback) {
   RTC_DCHECK(!callback_);
   RTC_DCHECK(callback);
 
   callback_ = callback;
 }
 
-void ScreenCapturerLinux::CaptureFrame() {
-  TRACE_EVENT0("webrtc", "ScreenCapturerLinux::CaptureFrame");
+void ScreenCapturerX11::CaptureFrame() {
+  TRACE_EVENT0("webrtc", "ScreenCapturerX11::CaptureFrame");
   int64_t capture_start_time_nanos = rtc::TimeNanos();
 
   queue_.MoveToNextFrame();
@@ -268,19 +271,19 @@ void ScreenCapturerLinux::CaptureFrame() {
   callback_->OnCaptureResult(Result::SUCCESS, std::move(result));
 }
 
-bool ScreenCapturerLinux::GetSourceList(SourceList* sources) {
+bool ScreenCapturerX11::GetSourceList(SourceList* sources) {
   RTC_DCHECK(sources->size() == 0);
   // TODO(jiayl): implement screen enumeration.
   sources->push_back({0});
   return true;
 }
 
-bool ScreenCapturerLinux::SelectSource(SourceId id) {
+bool ScreenCapturerX11::SelectSource(SourceId id) {
   // TODO(jiayl): implement screen selection.
   return true;
 }
 
-bool ScreenCapturerLinux::HandleXEvent(const XEvent& event) {
+bool ScreenCapturerX11::HandleXEvent(const XEvent& event) {
   if (use_damage_ && (event.type == damage_event_base_ + XDamageNotify)) {
     const XDamageNotifyEvent* damage_event =
         reinterpret_cast<const XDamageNotifyEvent*>(&event);
@@ -295,7 +298,7 @@ bool ScreenCapturerLinux::HandleXEvent(const XEvent& event) {
   return false;
 }
 
-std::unique_ptr<DesktopFrame> ScreenCapturerLinux::CaptureScreen() {
+std::unique_ptr<DesktopFrame> ScreenCapturerX11::CaptureScreen() {
   std::unique_ptr<SharedDesktopFrame> frame = queue_.current_frame()->Share();
   RTC_DCHECK(x_server_pixel_buffer_.window_size().equals(frame->size()));
 
@@ -353,8 +356,8 @@ std::unique_ptr<DesktopFrame> ScreenCapturerLinux::CaptureScreen() {
   return std::move(frame);
 }
 
-void ScreenCapturerLinux::ScreenConfigurationChanged() {
-  TRACE_EVENT0("webrtc", "ScreenCapturerLinux::ScreenConfigurationChanged");
+void ScreenCapturerX11::ScreenConfigurationChanged() {
+  TRACE_EVENT0("webrtc", "ScreenCapturerX11::ScreenConfigurationChanged");
   // Make sure the frame buffers will be reallocated.
   queue_.Reset();
 
@@ -365,7 +368,7 @@ void ScreenCapturerLinux::ScreenConfigurationChanged() {
   }
 }
 
-void ScreenCapturerLinux::SynchronizeFrame() {
+void ScreenCapturerX11::SynchronizeFrame() {
   // Synchronize the current buffer with the previous one since we do not
   // capture the entire desktop. Note that encoder may be reading from the
   // previous buffer at this time so thread access complaints are false
@@ -385,7 +388,7 @@ void ScreenCapturerLinux::SynchronizeFrame() {
   }
 }
 
-void ScreenCapturerLinux::DeinitXlib() {
+void ScreenCapturerX11::DeinitXlib() {
   if (gc_) {
     XFreeGC(display(), gc_);
     gc_ = nullptr;
@@ -409,12 +412,12 @@ void ScreenCapturerLinux::DeinitXlib() {
 }  // namespace
 
 // static
-std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateRawScreenCapturer(
+std::unique_ptr<DesktopCapturer> ScreenCapturerX11::CreateRawScreenCapturer(
     const DesktopCaptureOptions& options) {
   if (!options.x_display())
     return nullptr;
 
-  std::unique_ptr<ScreenCapturerLinux> capturer(new ScreenCapturerLinux());
+  std::unique_ptr<ScreenCapturerX11> capturer(new ScreenCapturerX11());
   if (!capturer.get()->Init(options)) {
     return nullptr;
   }
