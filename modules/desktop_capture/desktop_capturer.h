@@ -19,6 +19,7 @@
 #include <type_traits>
 #include <vector>
 
+#include "modules/desktop_capture/desktop_capture_buildflags.h"
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_frame.h"
 #include "modules/desktop_capture/shared_memory.h"
@@ -133,6 +134,10 @@ class DesktopCapturer {
   // Creates a DesktopCapturer instance which targets to capture screens.
   static std::unique_ptr<DesktopCapturer> CreateScreenCapturer(
       const DesktopCaptureOptions& options);
+
+#if BUILDFLAG(USE_PIPEWIRE) || defined(USE_X11)
+  static bool IsRunningUnderWayland();
+#endif  // BUILDFLAG(USE_PIPEWIRE) || defined(USE_X11)
 
  protected:
   // CroppingWindowCapturer needs to create raw capturers without wrappers, so

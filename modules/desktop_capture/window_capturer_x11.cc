@@ -34,11 +34,14 @@ namespace webrtc {
 
 namespace {
 
-class WindowCapturerLinux : public DesktopCapturer,
-                            public SharedXDisplay::XEventHandler {
+class WindowCapturerX11 : public DesktopCapturer,
+                          public SharedXDisplay::XEventHandler {
  public:
-  WindowCapturerLinux(const DesktopCaptureOptions& options);
-  ~WindowCapturerLinux() override;
+  WindowCapturerX11(const DesktopCaptureOptions& options);
+  ~WindowCapturerX11() override;
+
+  static std::unique_ptr<DesktopCapturer> CreateRawWindowCapturer(
+      const DesktopCaptureOptions& options);
 
   // DesktopCapturer interface.
   void Start(Callback* callback) override;
@@ -68,10 +71,10 @@ class WindowCapturerLinux : public DesktopCapturer,
   XAtomCache atom_cache_;
   WindowFinderX11 window_finder_;
 
-  RTC_DISALLOW_COPY_AND_ASSIGN(WindowCapturerLinux);
+  RTC_DISALLOW_COPY_AND_ASSIGN(WindowCapturerX11);
 };
 
-WindowCapturerLinux::WindowCapturerLinux(const DesktopCaptureOptions& options)
+WindowCapturerX11::WindowCapturerX11(const DesktopCaptureOptions& options)
     : x_display_(options.x_display()),
       atom_cache_(display()),
       window_finder_(&atom_cache_) {
@@ -88,11 +91,11 @@ WindowCapturerLinux::WindowCapturerLinux(const DesktopCaptureOptions& options)
   x_display_->AddEventHandler(ConfigureNotify, this);
 }
 
-WindowCapturerLinux::~WindowCapturerLinux() {
+WindowCapturerX11::~WindowCapturerX11() {
   x_display_->RemoveEventHandler(ConfigureNotify, this);
 }
 
-bool WindowCapturerLinux::GetSourceList(SourceList* sources) {
+bool WindowCapturerX11::GetSourceList(SourceList* sources) {
   return GetWindowList(&atom_cache_, [this, sources](::Window window) {
     Source w;
     w.id = window;
@@ -103,7 +106,7 @@ bool WindowCapturerLinux::GetSourceList(SourceList* sources) {
   });
 }
 
-bool WindowCapturerLinux::SelectSource(SourceId id) {
+bool WindowCapturerX11::SelectSource(SourceId id) {
   if (!x_server_pixel_buffer_.Init(display(), id))
     return false;
 
@@ -124,7 +127,7 @@ bool WindowCapturerLinux::SelectSource(SourceId id) {
   return true;
 }
 
-bool WindowCapturerLinux::FocusOnSelectedSource() {
+bool WindowCapturerX11::FocusOnSelectedSource() {
   if (!selected_window_)
     return false;
 
@@ -170,15 +173,15 @@ bool WindowCapturerLinux::FocusOnSelectedSource() {
   return true;
 }
 
-void WindowCapturerLinux::Start(Callback* callback) {
+void WindowCapturerX11::Start(Callback* callback) {
   RTC_DCHECK(!callback_);
   RTC_DCHECK(callback);
 
   callback_ = callback;
 }
 
-void WindowCapturerLinux::CaptureFrame() {
-  TRACE_EVENT0("webrtc", "WindowCapturerLinux::CaptureFrame");
+void WindowCapturerX11::CaptureFrame() {
+  TRACE_EVENT0("webrtc", "WindowCapturerX11::CaptureFrame");
 
   if (!x_server_pixel_buffer_.IsWindowValid()) {
     RTC_LOG(LS_ERROR) << "The window is no longer valid.";
@@ -223,12 +226,12 @@ void WindowCapturerLinux::CaptureFrame() {
   callback_->OnCaptureResult(Result::SUCCESS, std::move(frame));
 }
 
-bool WindowCapturerLinux::IsOccluded(const DesktopVector& pos) {
+bool WindowCapturerX11::IsOccluded(const DesktopVector& pos) {
   return window_finder_.GetWindowUnderPoint(pos) !=
          static_cast<WindowId>(selected_window_);
 }
 
-bool WindowCapturerLinux::HandleXEvent(const XEvent& event) {
+bool WindowCapturerX11::HandleXEvent(const XEvent& event) {
   if (event.type == ConfigureNotify) {
     XConfigureEvent xce = event.xconfigure;
     if (xce.window == selected_window_) {
@@ -246,7 +249,7 @@ bool WindowCapturerLinux::HandleXEvent(const XEvent& event) {
   return false;
 }
 
-bool WindowCapturerLinux::GetWindowTitle(::Window window, std::string* title) {
+bool WindowCapturerX11::GetWindowTitle(::Window window, std::string* title) {
   int status;
   bool result = false;
   XTextProperty window_name;
@@ -278,11 +281,11 @@ bool WindowCapturerLinux::GetWindowTitle(::Window window, std::string* title) {
 }  // namespace
 
 // static
-std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateRawWindowCapturer(
+std::unique_ptr<DesktopCapturer> WindowCapturerX11::CreateRawWindowCapturer(
     const DesktopCaptureOptions& options) {
   if (!options.x_display())
     return nullptr;
-  return std::unique_ptr<DesktopCapturer>(new WindowCapturerLinux(options));
+  return std::unique_ptr<DesktopCapturer>(new WindowCapturerX11(options));
 }
 
 }  // namespace webrtc
