@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "501d4c6b_e87991a5",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-10-03T15:50:56Z",
+      "side": 1,
+      "message": "Is there a reason we have 100 as default when the field trial isn\u0027t enabled, and 50 if it is enabled but with a invalid value?\n\nEDIT: Maybe it should in fact be 0? That\u0027s what the unit test says.",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 14
+      },
+      "revId": "b9055e01a5dc019951c429cb9bdedc23b72c76dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4abc20a6_0e454e31",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-10-03T15:50:56Z",
+      "side": 1,
+      "message": "Spaces around \u003c",
+      "range": {
+        "startLine": 198,
+        "startChar": 22,
+        "endLine": 198,
+        "endChar": 23
+      },
+      "revId": "b9055e01a5dc019951c429cb9bdedc23b72c76dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beb38368_5d0dca53",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-10-03T15:50:56Z",
+      "side": 1,
+      "message": "The DCHECK is good, but I still don\u0027t understand how the value 100 leads to the feature being turned off. Clearly I need education...",
+      "range": {
+        "startLine": 202,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 76
+      },
+      "revId": "b9055e01a5dc019951c429cb9bdedc23b72c76dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e94bf92_bfb92b69",
+        "filename": "modules/audio_coding/neteq/decision_logic_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-10-03T15:50:56Z",
+      "side": 1,
+      "message": "This test fails, because your value for disabled is 100. :)",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "b9055e01a5dc019951c429cb9bdedc23b72c76dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
