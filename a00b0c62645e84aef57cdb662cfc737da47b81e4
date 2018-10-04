@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08757aa1_9d0624f0",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-04T13:09:06Z",
+      "side": 1,
+      "message": "I think it would make sense to just drop these methods completely.\n\nI don\u0027t think:\nif (WebRtcAudioUtils.runningOnApi17OrHigher())\n\nis cleaner than:\nif (Build.VERSION.SDK_INT \u003e\u003d 17)\n\n\nAdditionally by dropping these, we could get rid of the TargetApi annotations almost completely.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "a00b0c62645e84aef57cdb662cfc737da47b81e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
