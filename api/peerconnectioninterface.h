@@ -187,6 +187,16 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     kIceConnectionMax,
   };
 
+  enum IceTransportState {
+    kIceTransportNew,
+    kIceTransportChecking,
+    kIceTransportConnected,
+    kIceTransportCompleted,
+    kIceTransportFailed,
+    kIceTransportDisconnected,
+    kIceTransportClosed,
+  };
+
   // TLS certificate policy.
   enum TlsCertPolicy {
     // For TLS based protocols, ensure the connection is secure by not

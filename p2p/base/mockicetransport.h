@@ -47,6 +47,11 @@ class MockIceTransport : public IceTransportInternal {
   IceTransportState GetState() const override {
     return IceTransportState::STATE_INIT;
   }
+  webrtc::PeerConnectionInterface::IceTransportState GetNewState()
+      const override {
+    return webrtc::PeerConnectionInterface::IceTransportState::kIceTransportNew;
+  }
+
   const std::string& transport_name() const override { return transport_name_; }
   int component() const override { return 0; }
   void SetIceRole(IceRole role) override {}
