@@ -34,6 +34,23 @@
       "revId": "1e6285267c97182bf61320ec3f131b24ec26c038",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "285427e6_52fac188",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-04T14:57:58Z",
+      "side": 1,
+      "message": "nit: forward declare and drop include, now that we don\u0027t implement it.",
+      "revId": "1e6285267c97182bf61320ec3f131b24ec26c038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
