@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b6f3942_24f3d27e",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-04T14:49:38Z",
+      "side": 1,
+      "message": "This disables creating of RtpSender in the layer below.",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 37
+      },
+      "revId": "b44c67e4d7ab3d31d14352170a0b4d6e8cb6711b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
