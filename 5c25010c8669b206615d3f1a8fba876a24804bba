@@ -34,6 +34,24 @@
       "revId": "5c25010c8669b206615d3f1a8fba876a24804bba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c584f242_6a7b0331",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T20:51:21Z",
+      "side": 0,
+      "message": "Just including from cc files isn\u0027t a common practice in webrtc/chromium. So it\u0027s better to have them all in the gn file if there isn\u0027t any special concern.",
+      "parentUuid": "4fd0b3bb_8f6eb245",
+      "revId": "5c25010c8669b206615d3f1a8fba876a24804bba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

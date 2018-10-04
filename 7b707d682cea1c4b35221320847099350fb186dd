@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "be131d34_25a7be3e",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T20:51:21Z",
+      "side": 1,
+      "message": "OK. Then we have to wait for it to satisfy the bot. Otherwise the cl can\u0027t be landed :)",
+      "parentUuid": "488f34c9_c5b8878c",
+      "range": {
+        "startLine": 176,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 14
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd68acd1_867693ee",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 3
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "That\u0027s how the generated _buildflags.h files are used in the Chromium. I don\u0027t have anything against using defined(), but I thought that it should be consistent.",
       "parentUuid": "dd68acd1_867693ee",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 13
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "071c5112_4d912a96",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T20:51:21Z",
+      "side": 1,
+      "message": "In WebRTC, BUILDFLAG is not used. Also in Chromium there is less usage of it too. So I guess it\u0027s not encouraged any more.",
+      "parentUuid": "80086df1_94c83da7",
       "range": {
         "startLine": 138,
         "startChar": 4,
@@ -313,6 +361,24 @@
     },
     {
       "key": {
+        "uuid": "8c503a7d_140fcdfb",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T20:51:21Z",
+      "side": 1,
+      "message": "Yes leaving screen_capturer_linux.cc under desktop_capture folder. If you don\u0027t mind, it\u0027s better to move x11/ into the proposed linux/ too. It can be either whole folder or contents only, up to you. Thanks!",
+      "parentUuid": "22a9ecfc_87e1939a",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ba822b0_0786bdb1",
         "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
         "patchSetId": 3
@@ -357,6 +423,30 @@
       "revId": "7b707d682cea1c4b35221320847099350fb186dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ea6a1aa_453a55a9",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T20:51:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4f71506b_4a1610f1",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -442,6 +532,30 @@
       "side": 1,
       "message": "Right now not, but hopefully it should be soon available (we already talked about that with Wayland developers).",
       "parentUuid": "1b93d686_8d239c6d",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8560d5bb_fda9e8da",
+        "filename": "modules/desktop_capture/window_capturer_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T20:51:21Z",
+      "side": 1,
+      "message": "OK. Then maybe adding a null WindowCapturePipewire as a placeholder is better.",
+      "parentUuid": "cea7f095_37db0a4e",
       "range": {
         "startLine": 30,
         "startChar": 44,
