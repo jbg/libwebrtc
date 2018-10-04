@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8cc66509_a262e7e3",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-04T08:57:50Z",
+      "side": 1,
+      "message": "Good idea, will do.",
+      "parentUuid": "ba04b91f_25c174c3",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "257ed5e5_6e64cb76",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e83248d7_f758d48c",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-04T08:57:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "257ed5e5_6e64cb76",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2a30813_be2878b7",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2018-10-03T20:29:34Z",
       "side": 1,
       "message": "this dependency seems weird to introduce. Is it possible to find some other api/ file that the enum iceTransportState can live in?\n\npreferably one that\u0027s already referenced by peerconnectioninterface.h?\n\nthe reason I worry is that I fear future developments will have us using the transport interface without a PeerConnection, but I can\u0027t quite imagine using PeerConnections without transports.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df60e70c_f05bb766",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-04T08:57:50Z",
+      "side": 1,
+      "message": "I originally put it there because thats where RTCIceConnectionState lives. api/candidate.h seems wrong, and I don\u0027t see anything else that makes much more sense. I guess we could add a new file, like api/transport/enums.h?",
+      "parentUuid": "d2a30813_be2878b7",
       "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "d29794f6_44081f2b",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-04T08:57:50Z",
+      "side": 1,
+      "message": "The latter. That name sounds much better, I\u0027ll change it.",
+      "parentUuid": "b8f97918_8fc163c0",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96b7e576_c348e770",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2018-10-03T20:29:34Z",
       "side": 1,
       "message": "Nit: standards_state_ is bad grammar. standardized_state_ would be better.\nLong term, I\u0027d want to rename state_ to internal_state_ and have the standardized state exposed as state_ (and have internal_state_ go away once we don\u0027t need it any more).\nI suspect you can\u0027t do that now, but a TODO to remove the duplication would be nice.",
+      "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2adb9704_ee3134a0",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-04T08:57:50Z",
+      "side": 1,
+      "message": "I renamed it, will add the TODO. state_ is used to compute the thing we currently expose as RTCIceConnectionState, the plan is to get rid of it.",
+      "parentUuid": "96b7e576_c348e770",
       "revId": "9e3dfa0010c3ac296efb1853ab4daafe4dc52efe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
