@@ -58,12 +58,16 @@ class WebRtcAudioEffects {
   // fulfilled.
   @TargetApi(18)
   public static boolean isAcousticEchoCancelerSupported() {
+    if (!WebRtcAudioUtils.runningOnApi18OrHigher())
+      return false;
     return isEffectTypeAvailable(AudioEffect.EFFECT_TYPE_AEC, AOSP_ACOUSTIC_ECHO_CANCELER);
   }
 
   // Returns true if all conditions for supporting HW Noise Suppression (NS) are fulfilled.
   @TargetApi(18)
   public static boolean isNoiseSuppressorSupported() {
+    if (!WebRtcAudioUtils.runningOnApi18OrHigher())
+      return false;
     return isEffectTypeAvailable(AudioEffect.EFFECT_TYPE_NS, AOSP_NOISE_SUPPRESSOR);
   }
 
@@ -190,7 +194,7 @@ class WebRtcAudioEffects {
   // AutomaticGainControl.isAvailable() returns false.
   @TargetApi(18)
   private boolean effectTypeIsVoIP(UUID type) {
-    if (!WebRtcAudioUtils.runningOnJellyBeanMR2OrHigher())
+    if (!WebRtcAudioUtils.runningOnApi18OrHigher())
       return false;
 
     return (AudioEffect.EFFECT_TYPE_AEC.equals(type) && isAcousticEchoCancelerSupported())
@@ -221,7 +225,6 @@ class WebRtcAudioEffects {
   // Returns true if an effect of the specified type is available. Functionally
   // equivalent to (NoiseSuppressor|AutomaticGainControl|...).isAvailable(), but
   // faster as it avoids the expensive OS call to enumerate effects.
-  @TargetApi(18)
   private static boolean isEffectTypeAvailable(UUID effectType, UUID blackListedUuid) {
     Descriptor[] effects = getAvailableEffects();
     if (effects == null) {

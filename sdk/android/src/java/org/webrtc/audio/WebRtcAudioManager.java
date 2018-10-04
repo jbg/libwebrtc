@@ -64,7 +64,7 @@ class WebRtcAudioManager {
     // as well. The NDK doc states that: "As of API level 21, lower latency
     // audio input is supported on select devices. To take advantage of this
     // feature, first confirm that lower latency output is available".
-    return WebRtcAudioUtils.runningOnLollipopOrHigher() && isLowLatencyOutputSupported(context);
+    return WebRtcAudioUtils.runningOnApi21OrHigher() && isLowLatencyOutputSupported(context);
   }
 
   /**
@@ -79,15 +79,16 @@ class WebRtcAudioManager {
       return 8000;
     }
     // Deliver best possible estimate based on default Android AudioManager APIs.
-    final int sampleRateHz = WebRtcAudioUtils.runningOnJellyBeanMR1OrHigher()
-        ? getSampleRateOnJellyBeanMR10OrHigher(audioManager)
-        : DEFAULT_SAMPLE_RATE_HZ;
+    final int sampleRateHz = getSampleRateForApiLevel(audioManager);
     Logging.d(TAG, "Sample rate is set to " + sampleRateHz + " Hz");
     return sampleRateHz;
   }
 
   @TargetApi(17)
-  private static int getSampleRateOnJellyBeanMR10OrHigher(AudioManager audioManager) {
+  private static int getSampleRateForApiLevel(AudioManager audioManager) {
+    if (!WebRtcAudioUtils.runningOnApi17OrHigher()) {
+      return DEFAULT_SAMPLE_RATE_HZ;
+    }
     String sampleRateString = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
     return (sampleRateString == null) ? DEFAULT_SAMPLE_RATE_HZ : Integer.parseInt(sampleRateString);
   }
@@ -95,7 +96,7 @@ class WebRtcAudioManager {
   // Returns the native output buffer size for low-latency output streams.
   @TargetApi(17)
   private static int getLowLatencyFramesPerBuffer(AudioManager audioManager) {
-    if (!WebRtcAudioUtils.runningOnJellyBeanMR1OrHigher()) {
+    if (!WebRtcAudioUtils.runningOnApi17OrHigher()) {
       return DEFAULT_FRAME_PER_BUFFER;
     }
     String framesPerBuffer =

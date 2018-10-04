@@ -301,7 +301,7 @@ class WebRtcAudioRecord {
 
   @TargetApi(23)
   private void logMainParametersExtended() {
-    if (WebRtcAudioUtils.runningOnMarshmallowOrHigher()) {
+    if (WebRtcAudioUtils.runningOnApi23OrHigher()) {
       Logging.d(TAG,
           "AudioRecord: "
               // The frame count of the native AudioRecord buffer.
