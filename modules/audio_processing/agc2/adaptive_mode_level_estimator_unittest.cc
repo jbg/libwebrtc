@@ -43,7 +43,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator, LevelShouldStabilize) {
   RunOnConstantLevel(
       100,
       VadWithLevel::LevelAndProbability(
-          1.f, kSpeechRmsDbfs - kInitialSaturationMarginDb, kSpeechRmsDbfs),
+          1.f, kSpeechRmsDbfs - GetInitialSaturationMarginDb(), kSpeechRmsDbfs),
       &level_estimator);
 
   EXPECT_NEAR(level_estimator.LatestLevelEstimate(), kSpeechRmsDbfs, 0.1f);
@@ -59,7 +59,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator,
   RunOnConstantLevel(
       100,
       VadWithLevel::LevelAndProbability(
-          1.f, kSpeechRmsDbfs - kInitialSaturationMarginDb, kSpeechRmsDbfs),
+          1.f, kSpeechRmsDbfs - GetInitialSaturationMarginDb(), kSpeechRmsDbfs),
       &level_estimator);
 
   // Run for one more second, but mark as not speech.
@@ -81,7 +81,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator, TimeToAdapt) {
   RunOnConstantLevel(
       kFullBufferSizeMs / kFrameDurationMs,
       VadWithLevel::LevelAndProbability(
-          1.f, kInitialSpeechRmsDbfs - kInitialSaturationMarginDb,
+          1.f, kInitialSpeechRmsDbfs - GetInitialSaturationMarginDb(),
           kInitialSpeechRmsDbfs),
       &level_estimator);
 
@@ -94,7 +94,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator, TimeToAdapt) {
   RunOnConstantLevel(
       static_cast<int>(kFullBufferSizeMs / kFrameDurationMs / 2),
       VadWithLevel::LevelAndProbability(
-          1.f, kDifferentSpeechRmsDbfs - kInitialSaturationMarginDb,
+          1.f, kDifferentSpeechRmsDbfs - GetInitialSaturationMarginDb(),
           kDifferentSpeechRmsDbfs),
       &level_estimator);
   EXPECT_GT(
@@ -105,7 +105,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator, TimeToAdapt) {
   RunOnConstantLevel(
       static_cast<int>(3 * kFullBufferSizeMs / kFrameDurationMs),
       VadWithLevel::LevelAndProbability(
-          1.f, kDifferentSpeechRmsDbfs - kInitialSaturationMarginDb,
+          1.f, kDifferentSpeechRmsDbfs - GetInitialSaturationMarginDb(),
           kDifferentSpeechRmsDbfs),
       &level_estimator);
   EXPECT_NEAR(level_estimator.LatestLevelEstimate(), kDifferentSpeechRmsDbfs,
@@ -123,7 +123,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator,
   RunOnConstantLevel(
       kFullBufferSizeMs / kFrameDurationMs,
       VadWithLevel::LevelAndProbability(
-          1.f, kInitialSpeechRmsDbfs - kInitialSaturationMarginDb,
+          1.f, kInitialSpeechRmsDbfs - GetInitialSaturationMarginDb(),
           kInitialSpeechRmsDbfs),
       &level_estimator);
 
@@ -134,7 +134,7 @@ TEST(AutomaticGainController2AdaptiveModeLevelEstimator,
   RunOnConstantLevel(
       kFullBufferSizeMs / kFrameDurationMs / 2,
       VadWithLevel::LevelAndProbability(
-          1.f, kDifferentSpeechRmsDbfs - kInitialSaturationMarginDb,
+          1.f, kDifferentSpeechRmsDbfs - GetInitialSaturationMarginDb(),
           kDifferentSpeechRmsDbfs),
       &level_estimator);
 
