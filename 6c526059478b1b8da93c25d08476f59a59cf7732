@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d05462d_860fc640",
+        "filename": "modules/rtp_rtcp/include/rtp_header_extension_map.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-04T14:53:56Z",
+      "side": 1,
+      "message": "nit: Initialize in the ctor initializer list instead.",
+      "range": {
+        "startLine": 67,
+        "startChar": 46,
+        "endLine": 67,
+        "endChar": 51
+      },
+      "revId": "6c526059478b1b8da93c25d08476f59a59cf7732",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
