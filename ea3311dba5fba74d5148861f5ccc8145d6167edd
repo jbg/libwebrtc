@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0acb3a55_b178a8b4",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-04T20:12:16Z",
+      "side": 1,
+      "message": "encoder_queue_lock_ is only taken while posting tasks on the queue. It does not protect shared data accessed while the tasks are executing.\n\nIn what circumstances can the encryptor be set after the stream has been created?",
+      "revId": "ea3311dba5fba74d5148861f5ccc8145d6167edd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dcf4b6bb_baf2281d",
         "filename": "media/engine/webrtcvoiceengine.cc",
         "patchSetId": 21
