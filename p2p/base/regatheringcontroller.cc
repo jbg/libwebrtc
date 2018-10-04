@@ -12,23 +12,24 @@
 
 namespace webrtc {
 
-using Config = BasicRegatheringController::Config;
-
-Config::Config(const absl::optional<rtc::IntervalRange>&
-                   regather_on_all_networks_interval_range,
-               int regather_on_failed_networks_interval)
+BasicRegatheringController::Config::Config(
+    const absl::optional<rtc::IntervalRange>&
+        regather_on_all_networks_interval_range,
+    int regather_on_failed_networks_interval)
     : regather_on_all_networks_interval_range(
           regather_on_all_networks_interval_range),
       regather_on_failed_networks_interval(
           regather_on_failed_networks_interval) {}
 
-Config::Config(const Config& other) = default;
+BasicRegatheringController::Config::Config(
+    const BasicRegatheringController::Config& other) = default;
 
-Config::~Config() = default;
-Config& Config::operator=(const Config& other) = default;
+BasicRegatheringController::Config::~Config() = default;
+BasicRegatheringController::Config& BasicRegatheringController::Config::
+operator=(const BasicRegatheringController::Config& other) = default;
 
 BasicRegatheringController::BasicRegatheringController(
-    const Config& config,
+    const BasicRegatheringController::Config& config,
     cricket::IceTransportInternal* ice_transport,
     rtc::Thread* thread)
     : config_(config),
@@ -56,7 +57,8 @@ void BasicRegatheringController::Start() {
   }
 }
 
-void BasicRegatheringController::SetConfig(const Config& config) {
+void BasicRegatheringController::SetConfig(
+    const BasicRegatheringController::Config& config) {
   bool need_cancel_on_all_networks =
       has_recurring_schedule_on_all_networks_ &&
       (config_.regather_on_all_networks_interval_range !=
