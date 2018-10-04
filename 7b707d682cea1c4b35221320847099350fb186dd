@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4351364_e37f8863",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "Does this cl rely on https://chromium-review.googlesource.com/c/chromium/src/+/1258174? Since there is generate_build_files failure on bots.",
+      "range": {
+        "startLine": 176,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 14
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd68acd1_867693ee",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "What\u0027s the purpose to use BUILDFLAG? Defining a USE_PIPEWIRE should do the same work.",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 13
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b570024_5469f6c6",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "no (c) for the new files.",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "184e3644_3ea964f9",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "Why to include the null.cc file?",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b80c48e_78278675",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "How\u0027s the mouse capture under wayland? It will get the cursor in the screen capture result?",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdf9956a_1c36ea85",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_null.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "Why to check USE_PIPEWIRE?",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f986bc4_8a87b064",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "I think it\u0027s a great opportunity to move screen_capturer_pipewire.cc and screen_capturer_x11.cc into a linux/ foler and move the pipewire specific stuffs into some utility files.",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ba822b0_0786bdb1",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "what\u0027s this define for?",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1db1a84_f3561198",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "prefer use of std::make_unique over raw new",
+      "range": {
+        "startLine": 962,
+        "startChar": 7,
+        "endLine": 962,
+        "endChar": 17
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b93d686_8d239c6d",
+        "filename": "modules/desktop_capture/window_capturer_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 1,
+      "message": "So there is not window capture available on wayland? Any plan for the future?",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

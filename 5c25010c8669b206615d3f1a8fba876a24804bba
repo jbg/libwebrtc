@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d795bb73_a2f71c55",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-04T18:35:24Z",
+      "side": 0,
+      "message": "Is it OK to keep these files here? And the new *_pipewire.* files?",
+      "revId": "5c25010c8669b206615d3f1a8fba876a24804bba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
