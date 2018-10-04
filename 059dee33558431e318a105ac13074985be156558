@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb27082_4325ad11",
+        "filename": "test/testsupport/fileutils.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-04T14:26:10Z",
+      "side": 1,
+      "message": "If it is not documented in the header file (I didn\u0027t find it), I think it will be good to add here, that the returned path MUST ends with trailing path separator.",
+      "range": {
+        "startLine": 153,
+        "startChar": 12,
+        "endLine": 153,
+        "endChar": 29
+      },
+      "revId": "059dee33558431e318a105ac13074985be156558",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4103a166_f1a47cac",
+        "filename": "test/testsupport/fileutils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-04T14:26:10Z",
+      "side": 1,
+      "message": "It is specified in the doc, but I can\u0027t find its declaration in the header file.",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "059dee33558431e318a105ac13074985be156558",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faf34649_d49ae73c",
+        "filename": "test/testsupport/fileutils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-04T14:26:10Z",
+      "side": 1,
+      "message": "Do we need this method as part of public API for utils? Because there are no any other methods for wstrings.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 47
+      },
+      "revId": "059dee33558431e318a105ac13074985be156558",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

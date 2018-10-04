@@ -22,6 +22,29 @@
       "revId": "f3f538670e3c3896b0229280a6ef53cebcf6c284",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ba11d50_3cb3ae43",
+        "filename": "test/testsupport/fileutils_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-04T14:26:10Z",
+      "side": 1,
+      "message": "What will happen if \"/\" will be passed? (Maybe it\u0027s not a real usecase, but... Maybe it will be good to describe behavior for such case at least)",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 1
+      },
+      "revId": "f3f538670e3c3896b0229280a6ef53cebcf6c284",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
