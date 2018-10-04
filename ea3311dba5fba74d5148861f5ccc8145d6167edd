@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dcb16836_5be8f729",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-04T20:37:00Z",
+      "side": 1,
+      "message": "After offline discussion talked about moving this onto the queue since AudioSendStream typically Reconfigure instead of Reset.",
+      "parentUuid": "0acb3a55_b178a8b4",
+      "revId": "ea3311dba5fba74d5148861f5ccc8145d6167edd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcf4b6bb_baf2281d",
         "filename": "media/engine/webrtcvoiceengine.cc",
         "patchSetId": 21
@@ -33,6 +51,24 @@
       "revId": "ea3311dba5fba74d5148861f5ccc8145d6167edd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0181606d_e8e0374d",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-04T20:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcf4b6bb_baf2281d",
+      "revId": "ea3311dba5fba74d5148861f5ccc8145d6167edd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
