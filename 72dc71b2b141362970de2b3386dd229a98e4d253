@@ -46,6 +46,29 @@
       "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e29c03a_a8c70a47",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-04T20:35:01Z",
+      "side": 1,
+      "message": "I think the problem is that audio_outputs_ and rtp_packets_ are no longer ordered in time.",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
