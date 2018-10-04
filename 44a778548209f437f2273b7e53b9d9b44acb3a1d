@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2436dd8_ffe0b2f2",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-04T13:11:49Z",
+      "side": 1,
+      "message": "if (!last_video_bitrate_allocation_) it might be good to send new allocation asap too.",
+      "range": {
+        "startLine": 909,
+        "startChar": 2,
+        "endLine": 909,
+        "endChar": 39
+      },
+      "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a524c426_a264bbc2",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-04T13:11:49Z",
+      "side": 1,
+      "message": "this breaks just inner loop, you likely want to break both.\nMay be add helper\nbool SameNonEmptyLayers(const VideoBitrateAllocation\u0026 lhs, const VideoBitrateAllocation\u0026 rhs);",
+      "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36060f73_99527ceb",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-04T13:11:49Z",
+      "side": 1,
+      "message": "when would last_video_bitrate_allocation_ and video_bitrate_allocation_ be ever different?\ndo you need two members?",
+      "range": {
+        "startLine": 924,
+        "startChar": 2,
+        "endLine": 924,
+        "endChar": 32
+      },
+      "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
