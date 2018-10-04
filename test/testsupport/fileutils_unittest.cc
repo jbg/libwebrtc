@@ -19,6 +19,7 @@
 
 #include "absl/types/optional.h"
 #include "rtc_base/checks.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 
 #ifdef WIN32
@@ -111,9 +112,16 @@ TEST_F(FileUtilsTest, MAYBE_OutputPathFromUnchangedWorkingDir) {
 #else
 #define MAYBE_OutputPathFromRootWorkingDir OutputPathFromRootWorkingDir
 #endif
+using ::testing::EndsWith;
 TEST_F(FileUtilsTest, MAYBE_OutputPathFromRootWorkingDir) {
   ASSERT_EQ(0, chdir(kPathDelimiter));
-  ASSERT_EQ("./", webrtc::test::OutputPath());
+
+  // The location will vary depending on where the webrtc checkout is on the
+  // system, but it should contain out and be an absolute path.
+  std::string result = webrtc::test::OutputPath();
+  std::string out_dir = std::string("out") + kPathDelimiter;
+  ASSERT_THAT(result, EndsWith(out_dir));
+  ASSERT_THAT(result[0], *kPathDelimiter) << "Expected path to be absolute.";
 }
 
 TEST_F(FileUtilsTest, TempFilename) {
@@ -244,6 +252,18 @@ TEST_F(FileUtilsTest, WriteReadDeleteFilesAndDirs) {
   EXPECT_EQ(2u, num_deleted_entries);
   EXPECT_TRUE(RemoveDir(temp_directory));
   EXPECT_FALSE(DirExists(temp_directory));
+}
+
+TEST_F(FileUtilsTest, DirNameStripsFilename) {
+  EXPECT_EQ("/some/path", DirName("/some/path/file.txt"));
+}
+
+TEST_F(FileUtilsTest, DirNameKeepsStrippingRightmostPathComponent) {
+  EXPECT_EQ("/some", DirName(DirName("/some/path/file.txt")));
+}
+
+TEST_F(FileUtilsTest, DirNameDoesntCareIfAPathEndsInPathSeparator) {
+  EXPECT_EQ("/some", DirName("/some/path/"));
 }
 
 }  // namespace test
