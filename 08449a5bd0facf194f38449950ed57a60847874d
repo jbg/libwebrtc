@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7a5985d5_a38dc76e",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T11:06:46Z",
+      "side": 1,
+      "message": "There\u0027s a test that previously relied on SetExtension to return false. Since 16 is not the general limit anymore it came here and crashed on the RTC_DCHECK instead. So changing to return false maintains the previous behavior when trying to send a string object \u003e16.",
+      "parentUuid": "a6295f01_ede8577b",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82f531b4_d15e3fdb",
         "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
         "patchSetId": 3
