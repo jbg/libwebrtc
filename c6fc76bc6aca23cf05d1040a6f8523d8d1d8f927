@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef1064e4_823bdd97",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-04T10:43:06Z",
+      "side": 1,
+      "message": "(feel free to reject this minor suggestion)\nmay be slightly cleaner to use this variable directly instead of profile_id:\nIt then might be even reasonable then to use constants 1 and 2 directly instead of kOneByteExtensionHeaderLength and kTwoByteExtensionHeaderLength constants.\n\nsize_t extension_header_size;\nif (extension_size_ \u003e 0) {\n  uint16_t profile \u003d ByteReader\u003c...\u003e\n  extension_header_size \u003d profile_id \u003d\u003d ... ? 1 : 2;\n  if (extension_header_size \u003d\u003d 1 \u0026\u0026 two_byte_header_required)\n     ...\n} else {\n   extension_header_size \u003d two_byte_header_required ? 2 : 1;\n}",
+      "range": {
+        "startLine": 243,
+        "startChar": 15,
+        "endLine": 243,
+        "endChar": 36
+      },
+      "revId": "c6fc76bc6aca23cf05d1040a6f8523d8d1d8f927",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a6295f01_ede8577b",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-04T10:43:06Z",
+      "side": 1,
+      "message": "You right, extending to 255 seems a bad/unsafe idea.\n\nBut back to original question: what is the reason for changing DCHECK to run-time check?",
+      "parentUuid": "f43220d8_5df683b9",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82f531b4_d15e3fdb",
         "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
         "patchSetId": 3
