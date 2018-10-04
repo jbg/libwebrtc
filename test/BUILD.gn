@@ -363,6 +363,7 @@ if (is_ios) {
     visibility = [ ":fileutils" ]
     sources = [
       "testsupport/iosfileutils.mm",
+      "testsupport/macfileutils.mm",
     ]
     deps = [
       "..:webrtc_common",
