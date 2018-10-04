@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "66367477_b303c008",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-04T13:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2436dd8_ffe0b2f2",
+      "range": {
+        "startLine": 909,
+        "startChar": 2,
+        "endLine": 909,
+        "endChar": 39
+      },
+      "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a524c426_a264bbc2",
         "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdf7ed51_2385116a",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-04T13:36:42Z",
+      "side": 1,
+      "message": "Yes, good catch. Done.",
+      "parentUuid": "a524c426_a264bbc2",
+      "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -62,6 +104,30 @@
       "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f98dc703_75419cd8",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-04T13:36:42Z",
+      "side": 1,
+      "message": "|video_bitrate_allocation_| is reset after it has been sent.\nI changed this to a plain VideoBitrateAllocation member plus a boolean instead, probably makes more sense that way now.",
+      "parentUuid": "36060f73_99527ceb",
+      "range": {
+        "startLine": 924,
+        "startChar": 2,
+        "endLine": 924,
+        "endChar": 32
+      },
+      "revId": "44a778548209f437f2273b7e53b9d9b44acb3a1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
