@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "488f34c9_c5b8878c",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "Yes, it relies on that as stated in the CL description.",
+      "parentUuid": "e4351364_e37f8863",
+      "range": {
+        "startLine": 176,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 14
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd68acd1_867693ee",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-04T18:35:24Z",
       "side": 1,
       "message": "What\u0027s the purpose to use BUILDFLAG? Defining a USE_PIPEWIRE should do the same work.",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 13
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80086df1_94c83da7",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "That\u0027s how the generated _buildflags.h files are used in the Chromium. I don\u0027t have anything against using defined(), but I thought that it should be consistent.",
+      "parentUuid": "dd68acd1_867693ee",
       "range": {
         "startLine": 138,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "baca1c3c_81215e39",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b570024_5469f6c6",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "184e3644_3ea964f9",
         "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
         "patchSetId": 3
@@ -82,6 +154,24 @@
       "writtenOn": "2018-10-04T18:35:24Z",
       "side": 1,
       "message": "Why to include the null.cc file?",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b27e84f9_e838721d",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "True, this is not used here.",
+      "parentUuid": "184e3644_3ea964f9",
       "revId": "7b707d682cea1c4b35221320847099350fb186dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "5924b05c_cb604e99",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "Yes, it\u0027s part of the screen capture.",
+      "parentUuid": "4b80c48e_78278675",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdf9956a_1c36ea85",
         "filename": "modules/desktop_capture/mouse_cursor_monitor_null.cc",
         "patchSetId": 3
@@ -125,6 +239,24 @@
       "revId": "7b707d682cea1c4b35221320847099350fb186dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa064034_1c6d6447",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_null.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cdf9956a_1c36ea85",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "d13cfb00_0367c1ee",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "And leaving the screen_capturer_linux.cc under desktop_capture folder? Yes, that sounds good.",
+      "parentUuid": "5f986bc4_8a87b064",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ba822b0_0786bdb1",
         "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
         "patchSetId": 3
@@ -156,6 +306,30 @@
       "writtenOn": "2018-10-04T18:35:24Z",
       "side": 1,
       "message": "what\u0027s this define for?",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f71506b_4a1610f1",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "It\u0027s because of https://github.com/PipeWire/pipewire/commit/f58f63ae64b98bb5c0d6cd6d0729ce57c54fdf3e (clang build failure). It waits for new PipeWire release.",
+      "parentUuid": "5ba822b0_0786bdb1",
       "range": {
         "startLine": 16,
         "startChar": 1,
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "dff7c848_2199bacf",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c1db1a84_f3561198",
+      "range": {
+        "startLine": 962,
+        "startChar": 7,
+        "endLine": 962,
+        "endChar": 17
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b93d686_8d239c6d",
         "filename": "modules/desktop_capture/window_capturer_linux.cc",
         "patchSetId": 3
@@ -202,6 +400,30 @@
       "writtenOn": "2018-10-04T18:35:24Z",
       "side": 1,
       "message": "So there is not window capture available on wayland? Any plan for the future?",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea7f095_37db0a4e",
+        "filename": "modules/desktop_capture/window_capturer_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T19:31:10Z",
+      "side": 1,
+      "message": "Right now not, but hopefully it should be soon available (we already talked about that with Wayland developers).",
+      "parentUuid": "1b93d686_8d239c6d",
       "range": {
         "startLine": 30,
         "startChar": 44,
