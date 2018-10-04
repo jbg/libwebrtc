@@ -54,8 +54,26 @@ rtc_static_library("common_video") {
     "../rtc_base:safe_minmax",
     "//third_party/abseil-cpp/absl/types:optional",
     "//third_party/libyuv",
+    ":common_video_api",
   ]
 }
+
+rtc_static_library("common_video_api") {
+  visibility = [ "*" ]
+
+  sources = [
+    "include/video_frame.h",
+  ]
+
+  deps = [
+    "..:webrtc_common",
+    "../api/video:video_frame",
+    "../rtc_base:checks",
+    "../rtc_base:rtc_base",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
 
 if (rtc_include_tests) {
   common_video_resources = [ "../resources/foreman_cif.yuv" ]
