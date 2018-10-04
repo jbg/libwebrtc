@@ -98,6 +98,8 @@ public class WebRtcAudioEffects {
   // AudioEffect.queryEffects() can throw IllegalStateException.
   @TargetApi(18)
   private static boolean isAcousticEchoCancelerExcludedByUUID() {
+    if (Build.VERSION.SDK_INT < 18)
+      return false;
     for (Descriptor d : getAvailableEffects()) {
       if (d.type.equals(AudioEffect.EFFECT_TYPE_AEC)
           && d.uuid.equals(AOSP_ACOUSTIC_ECHO_CANCELER)) {
@@ -111,6 +113,8 @@ public class WebRtcAudioEffects {
   // AudioEffect.queryEffects() can throw IllegalStateException.
   @TargetApi(18)
   private static boolean isNoiseSuppressorExcludedByUUID() {
+    if (Build.VERSION.SDK_INT < 18)
+      return false;
     for (Descriptor d : getAvailableEffects()) {
       if (d.type.equals(AudioEffect.EFFECT_TYPE_NS) && d.uuid.equals(AOSP_NOISE_SUPPRESSOR)) {
         return true;
@@ -122,12 +126,16 @@ public class WebRtcAudioEffects {
   // Returns true if the device supports Acoustic Echo Cancellation (AEC).
   @TargetApi(18)
   private static boolean isAcousticEchoCancelerEffectAvailable() {
+    if (Build.VERSION.SDK_INT < 18)
+      return false;
     return isEffectTypeAvailable(AudioEffect.EFFECT_TYPE_AEC);
   }
 
   // Returns true if the device supports Noise Suppression (NS).
   @TargetApi(18)
   private static boolean isNoiseSuppressorEffectAvailable() {
+    if (Build.VERSION.SDK_INT < 18)
+      return false;
     return isEffectTypeAvailable(AudioEffect.EFFECT_TYPE_NS);
   }
 
@@ -276,7 +284,7 @@ public class WebRtcAudioEffects {
   // AutomaticGainControl.isAvailable() returns false.
   @TargetApi(18)
   private boolean effectTypeIsVoIP(UUID type) {
-    if (!WebRtcAudioUtils.runningOnJellyBeanMR2OrHigher())
+    if (Build.VERSION.SDK_INT < 18)
       return false;
 
     return (AudioEffect.EFFECT_TYPE_AEC.equals(type) && isAcousticEchoCancelerSupported())

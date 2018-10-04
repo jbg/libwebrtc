@@ -10,13 +10,13 @@
 
 package org.webrtc.audio;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.Build;
 import android.os.Process;
 import java.lang.Thread;
 import java.nio.ByteBuffer;
@@ -49,7 +49,7 @@ class WebRtcAudioTrack {
   private static final int DEFAULT_USAGE = getDefaultUsageAttribute();
 
   private static int getDefaultUsageAttribute() {
-    if (WebRtcAudioUtils.runningOnLollipopOrHigher()) {
+    if (Build.VERSION.SDK_INT >= 21) {
       return getDefaultUsageAttributeOnLollipopOrHigher();
     } else {
       // Not used on SDKs lower than L.
@@ -118,7 +118,7 @@ class WebRtcAudioTrack {
           byteBuffer.position(0);
         }
         int bytesWritten = 0;
-        if (WebRtcAudioUtils.runningOnLollipopOrHigher()) {
+        if (Build.VERSION.SDK_INT >= 21) {
           bytesWritten = writeOnLollipop(audioTrack, byteBuffer, sizeInBytes);
         } else {
           bytesWritten = writePreLollipop(audioTrack, byteBuffer, sizeInBytes);
@@ -233,7 +233,7 @@ class WebRtcAudioTrack {
       // Create an AudioTrack object and initialize its associated audio buffer.
       // The size of this buffer determines how long an AudioTrack can play
       // before running out of data.
-      if (WebRtcAudioUtils.runningOnLollipopOrHigher()) {
+      if (Build.VERSION.SDK_INT >= 21) {
         // If we are on API level 21 or higher, it is possible to use a special AudioTrack
         // constructor that uses AudioAttributes and AudioFormat as input. It allows us to
         // supersede the notion of stream types for defining the behavior of audio playback,
@@ -339,11 +339,9 @@ class WebRtcAudioTrack {
     return true;
   }
 
-  // TODO(bugs.webrtc.org/8580): Call requires API level 21 (current min is 16):
-  // `android.media.AudioManager#isVolumeFixed`: NewApi [warning]
-  @SuppressLint("NewApi")
+  @TargetApi(21)
   private boolean isVolumeFixed() {
-    if (!WebRtcAudioUtils.runningOnLollipopOrHigher())
+    if (Build.VERSION.SDK_INT < 21)
       return false;
     return audioManager.isVolumeFixed();
   }
@@ -402,20 +400,29 @@ class WebRtcAudioTrack {
         AudioFormat.ENCODING_PCM_16BIT, bufferSizeInBytes, AudioTrack.MODE_STREAM);
   }
 
-  @TargetApi(24)
-  private void logMainParametersExtended() {
-    if (WebRtcAudioUtils.runningOnMarshmallowOrHigher()) {
+  @TargetApi(23)
+  private void logBufferSizeInFrames() {
+    if (Build.VERSION.SDK_INT >= 23) {
       Logging.d(TAG,
           "AudioTrack: "
               // The effective size of the AudioTrack buffer that the app writes to.
               + "buffer size in frames: " + audioTrack.getBufferSizeInFrames());
     }
-    if (WebRtcAudioUtils.runningOnNougatOrHigher()) {
+  }
+
+  @TargetApi(24)
+  private void logBufferCapacityInFrames() {
+    if (Build.VERSION.SDK_INT >= 24) {
       Logging.d(TAG,
           "AudioTrack: "
               // Maximum size of the AudioTrack buffer in frames.
               + "buffer capacity in frames: " + audioTrack.getBufferCapacityInFrames());
     }
+  }
+
+  private void logMainParametersExtended() {
+    logBufferSizeInFrames();
+    logBufferCapacityInFrames();
   }
 
   // Prints the number of underrun occurrences in the application-level write
@@ -426,7 +433,7 @@ class WebRtcAudioTrack {
   // UMA stat if needed.
   @TargetApi(24)
   private void logUnderrunCount() {
-    if (WebRtcAudioUtils.runningOnNougatOrHigher()) {
+    if (Build.VERSION.SDK_INT >= 24) {
       Logging.d(TAG, "underrun count: " + audioTrack.getUnderrunCount());
     }
   }
