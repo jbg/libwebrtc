@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2ddf46f_6d6e8a96",
+        "filename": "test/testsupport/fileutils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-04T13:55:29Z",
+      "side": 1,
+      "message": "Actually, this is quite ridiculous. I\u0027ll get rid of it and add proper .h files.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 75
+      },
+      "revId": "f3f538670e3c3896b0229280a6ef53cebcf6c284",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
