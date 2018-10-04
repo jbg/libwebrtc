@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a156ca70_8b1e41ee",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-04T14:40:02Z",
+      "side": 0,
+      "message": ":D",
+      "revId": "530ead49744204cb758c4345ab9d07c49f269b32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

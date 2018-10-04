@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "715ee276_7726ed99",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-10-04T14:40:02Z",
+      "side": 1,
+      "message": "Add\n\nRTC_DCHECK(config.rtcp_send_transport);\n\nsince that appears to be required at the lower layers (it is then implicitly part of Config\u0027s invariant). Correct me if I\u0027m wrong, but then it appears some of the tests wouldn\u0027t need to pass in a NullTransport?",
+      "revId": "1e6285267c97182bf61320ec3f131b24ec26c038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
