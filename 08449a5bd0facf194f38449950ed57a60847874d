@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f43220d8_5df683b9",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T08:35:08Z",
+      "side": 1,
+      "message": "Yes, I see your point.\n\nMy concerns for not extending the string length to max 255 bytes are\n* The StringRtpHeaderExtension defined in api/rtp_headers.h. That one uses a char array set to the max length. \n* Also the sizes for (previously named) GetTotalLength() uses the kMaxValueSizeBytes as default size. I\u0027m thinking that there\u0027s a risk that the output of that function becomes completely wrong if it reports all strings as 255 bytes.",
+      "parentUuid": "7c0ddbe1_edeace69",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82f531b4_d15e3fdb",
         "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
         "patchSetId": 3
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "e7400953_0fe32c48",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T08:35:08Z",
+      "side": 1,
+      "message": "Thanks for spotting this, I thought I had fixed all cases with Read(WriteAt).",
+      "parentUuid": "82f531b4_d15e3fdb",
+      "range": {
+        "startLine": 217,
+        "startChar": 44,
+        "endLine": 217,
+        "endChar": 51
+      },
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "436044c2_87ec9daa",
         "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
         "patchSetId": 3
@@ -56,6 +98,24 @@
       "revId": "08449a5bd0facf194f38449950ed57a60847874d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb585c8c_b6011feb",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T08:35:08Z",
+      "side": 1,
+      "message": "I was thinking about that but decided not to. \nAnyway, I have rewritten the code to only update offset and agree that it\u0027s better.",
+      "parentUuid": "436044c2_87ec9daa",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "328fbce5_bc5e4fbb",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T08:35:08Z",
+      "side": 1,
+      "message": "In practice no. I\u0027ll remove the check.",
+      "parentUuid": "719cccf3_29cb7e6f",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce96d575_33b4e726",
         "filename": "modules/rtp_rtcp/source/rtp_packet.h",
         "patchSetId": 3
@@ -87,6 +165,24 @@
       "writtenOn": "2018-10-03T14:21:41Z",
       "side": 1,
       "message": "if code is submitted now, will it allow to send two-byte header right away, without negotiation?\nSafer not.",
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12ef8d13_03cb7791",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T08:35:08Z",
+      "side": 1,
+      "message": "The SDP negotiation is in review, my idea was to first merge these two CLs and then add a CL that ties them together.\nI will look into doing this in a safer way. One suggestion is to add a boolean flag to the constructor of RtpPacket which is false in production for now but true in the unit tests.",
+      "parentUuid": "ce96d575_33b4e726",
       "revId": "08449a5bd0facf194f38449950ed57a60847874d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -113,6 +209,30 @@
       "revId": "08449a5bd0facf194f38449950ed57a60847874d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96b8a50a_7221573d",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-04T08:35:08Z",
+      "side": 1,
+      "message": "I see now that I was looking at the C specification. Will come back to C++ in C++20 :-)",
+      "parentUuid": "d44df607_d2b92471",
+      "range": {
+        "startLine": 239,
+        "startChar": 31,
+        "endLine": 239,
+        "endChar": 38
+      },
+      "revId": "08449a5bd0facf194f38449950ed57a60847874d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
