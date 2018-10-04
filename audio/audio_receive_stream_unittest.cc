@@ -89,7 +89,6 @@ struct ConfigHelper {
         .Times(1);
     EXPECT_CALL(*channel_proxy_, ResetReceiverCongestionControlObjects())
         .Times(1);
-    EXPECT_CALL(*channel_proxy_, RegisterTransport(nullptr)).Times(2);
     EXPECT_CALL(*channel_proxy_, DisassociateSendChannel()).Times(1);
     EXPECT_CALL(*channel_proxy_, SetReceiveCodecs(_))
         .WillRepeatedly(Invoke([](const std::map<int, SdpAudioFormat>& codecs) {
