@@ -51,6 +51,24 @@
       "revId": "1e6285267c97182bf61320ec3f131b24ec26c038",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b966c0b4_d0a4c806",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-04T15:06:10Z",
+      "side": 1,
+      "message": "Current webrtc style-guide.md prefers real includes, and refers to https://google.github.io/styleguide/cppguide.html#Forward_Declarations (and hence differs from the chromium style guide).",
+      "parentUuid": "285427e6_52fac188",
+      "revId": "1e6285267c97182bf61320ec3f131b24ec26c038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
