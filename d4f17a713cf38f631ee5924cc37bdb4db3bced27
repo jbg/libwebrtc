@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "365f405d_0a877b5f",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-04T13:21:42Z",
+      "side": 1,
+      "message": "can be simplified a bit:\nRTC_CHECK(!two_byte_header_required ||\n          extensions_.IsMixedOneTwoByteHeaderSupported());",
+      "range": {
+        "startLine": 215,
+        "startChar": 2,
+        "endLine": 217,
+        "endChar": 62
+      },
+      "revId": "d4f17a713cf38f631ee5924cc37bdb4db3bced27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
