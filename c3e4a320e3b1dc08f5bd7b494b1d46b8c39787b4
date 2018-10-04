@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c495d924_3f032a0d",
+        "filename": "audio/test/audio_bwe_integration_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c32bcda8_08974d76",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 78
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b73ff875_5054a20d",
         "filename": "call/rtp_transport_controller_send.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c420c79_88acbc56",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b73ff875_5054a20d",
+      "range": {
+        "startLine": 323,
+        "startChar": 2,
+        "endLine": 323,
+        "endChar": 53
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ca7ac2d3_dc8b5a53",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19947619_fb5b06b6",
+      "range": {
+        "startLine": 46,
+        "startChar": 30,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "936dd6b9_cab4c154",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2018-09-07T13:29:05Z",
       "side": 1,
       "message": "Why do we add the audio notification that was not there before?",
+      "range": {
+        "startLine": 1510,
+        "startChar": 0,
+        "endLine": 1510,
+        "endChar": 72
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d683e93_882377fc",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 1,
+      "message": "Thanks, fixed.",
+      "parentUuid": "936dd6b9_cab4c154",
       "range": {
         "startLine": 1510,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "255baddd_ebce4867",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2056,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d300616d_39add0e9",
+      "range": {
+        "startLine": 2055,
+        "startChar": 2,
+        "endLine": 2056,
+        "endChar": 37
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2334171_aaf507c3",
         "filename": "video/video_send_stream_impl.cc",
         "patchSetId": 5
@@ -128,6 +248,30 @@
       "writtenOn": "2018-09-07T13:29:05Z",
       "side": 1,
       "message": "Wouldn\u0027t it make sense that the rtp_video_sender calls VideoSendStream with the calculated values rather than the opposite like now?",
+      "range": {
+        "startLine": 520,
+        "startChar": 21,
+        "endLine": 520,
+        "endChar": 37
+      },
+      "revId": "c3e4a320e3b1dc08f5bd7b494b1d46b8c39787b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "389a7df6_f9aa1954",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 1,
+      "message": "Yes, agree. But let\u0027s do that later, OK?",
+      "parentUuid": "e2334171_aaf507c3",
       "range": {
         "startLine": 520,
         "startChar": 21,

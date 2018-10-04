@@ -52,6 +52,24 @@
       "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "514e4afd_4b7c6864",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-04T13:20:51Z",
+      "side": 0,
+      "message": "I will add a TODO to clarify.\n\nRegarding exposing the temporary API, it\u0027s only there because audio hasn\u0027t yet been moved into TransportControllerSend. Call is really as much of a private API as WebRtcVideoChannel, so I don\u0027t think it matters too much where we draw the line.",
+      "parentUuid": "2f437089_906965c7",
+      "revId": "e10f3b7403d04f7d0cd3e7b5cf06b3e3da0d3b50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
