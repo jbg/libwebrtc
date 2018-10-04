@@ -110,6 +110,7 @@ size_t GetFileSize(const std::string& filename);
 // the argv[0] being sent into the main function to make it possible for
 // fileutils.h to find the correct project paths even when the working directory
 // is outside the project tree (which happens in some cases).
+// TODO(bugs.webrtc.org/9792): Deprecated - going away soon.
 void SetExecutablePath(const std::string& path_to_executable);
 
 }  // namespace test
