@@ -295,6 +295,24 @@
     },
     {
       "key": {
+        "uuid": "22a9ecfc_87e1939a",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-04T20:08:24Z",
+      "side": 1,
+      "message": "And what about the desktop_capture/x11 folder? Shouldn\u0027t it be moved to under the linux folder as well (whole folder or just its content?)?",
+      "parentUuid": "d13cfb00_0367c1ee",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ba822b0_0786bdb1",
         "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
         "patchSetId": 3
