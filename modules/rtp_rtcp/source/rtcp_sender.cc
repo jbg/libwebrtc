@@ -904,7 +904,24 @@ bool RTCPSender::AllVolatileFlagsConsumed() const {
 void RTCPSender::SetVideoBitrateAllocation(
     const VideoBitrateAllocation& bitrate) {
   rtc::CritScope lock(&critical_section_rtcp_sender_);
+  // Check if this allocation has the same spatial/temporal layers signaled and
+  // enabled, if so trigger an immediate send.
+  if (last_video_bitrate_allocation_) {
+    for (size_t si = 0; si < kMaxSpatialLayers; ++si) {
+      for (size_t ti = 0; ti < kMaxTemporalStreams; ++ti) {
+        if (bitrate.HasBitrate(si, ti) !=
+                last_video_bitrate_allocation_->HasBitrate(si, ti) ||
+            (bitrate.GetBitrate(si, ti) == 0) !=
+                (last_video_bitrate_allocation_->GetBitrate(si, ti) == 0)) {
+          next_time_to_send_rtcp_ = clock_->TimeInMilliseconds();
+          break;
+        }
+      }
+    }
+  }
+
   video_bitrate_allocation_.emplace(bitrate);
+  last_video_bitrate_allocation_ = video_bitrate_allocation_;
   SetFlag(kRtcpAnyExtendedReports, true);
 }
 

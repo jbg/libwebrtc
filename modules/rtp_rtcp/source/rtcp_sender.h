@@ -247,6 +247,8 @@ class RTCPSender {
 
   absl::optional<VideoBitrateAllocation> video_bitrate_allocation_
       RTC_GUARDED_BY(critical_section_rtcp_sender_);
+  absl::optional<VideoBitrateAllocation> last_video_bitrate_allocation_
+      RTC_GUARDED_BY(critical_section_rtcp_sender_);
 
   void SetFlag(uint32_t type, bool is_volatile)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critical_section_rtcp_sender_);
