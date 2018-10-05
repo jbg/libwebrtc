@@ -46,6 +46,30 @@
       "revId": "297fd42616982a1aa211d7eb14c26bf6ba2a0e8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b002888e_cddf66d1",
+        "filename": "modules/bitrate_controller/send_side_bandwidth_estimation_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-05T17:41:28Z",
+      "side": 1,
+      "message": "Thanks for the explanation.",
+      "parentUuid": "14224bc8_538ad954",
+      "range": {
+        "startLine": 92,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 14
+      },
+      "revId": "297fd42616982a1aa211d7eb14c26bf6ba2a0e8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
