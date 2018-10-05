@@ -101,12 +101,12 @@ class ChannelReceiveState {
   State state_;
 };
 
-class ChannelReceive : public RtpData, public Transport {
+class ChannelReceive : public RtpData {
  public:
   // Used for receive streams.
   ChannelReceive(ProcessThread* module_process_thread,
                  AudioDeviceModule* audio_device_module,
-                 RtcpRttStats* rtcp_rtt_stats,
+                 Transport* rtcp_send_transport,
                  RtcEventLog* rtc_event_log,
                  uint32_t remote_ssrc,
                  size_t jitter_buffer_max_packets,
@@ -128,8 +128,6 @@ class ChannelReceive : public RtpData, public Transport {
   // Codecs
   int32_t GetRecCodec(CodecInst& codec);  // NOLINT
 
-  // Network
-  void RegisterTransport(Transport* transport);
   // TODO(nisse, solenberg): Delete when VoENetwork is deleted.
   int32_t ReceivedRTCPPacket(const uint8_t* data, size_t length);
   void OnRtpPacket(const RtpPacketReceived& packet);
@@ -167,12 +165,6 @@ class ChannelReceive : public RtpData, public Transport {
   int32_t OnReceivedPayloadData(const uint8_t* payloadData,
                                 size_t payloadSize,
                                 const WebRtcRTPHeader* rtpHeader) override;
-
-  // From Transport (called by the RTP/RTCP module)
-  bool SendRtp(const uint8_t* data,
-               size_t len,
-               const PacketOptions& packet_options) override;
-  bool SendRtcp(const uint8_t* data, size_t len) override;
 
   // From AudioMixer::Source.
   AudioMixer::Source::AudioFrameInfo GetAudioFrameWithInfo(
@@ -252,7 +244,6 @@ class ChannelReceive : public RtpData, public Transport {
   // uses
   ProcessThread* _moduleProcessThreadPtr;
   AudioDeviceModule* _audioDeviceModulePtr;
-  Transport* _transportPtr;  // WebRtc socket or external transport
   float _outputGain RTC_GUARDED_BY(volume_settings_critsect_);
 
   // An associated send channel.
