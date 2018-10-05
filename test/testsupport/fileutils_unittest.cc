@@ -19,6 +19,7 @@
 
 #include "absl/types/optional.h"
 #include "rtc_base/checks.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 
 #ifdef WIN32
@@ -27,6 +28,8 @@ static const char* kPathDelimiter = "\\";
 #else
 static const char* kPathDelimiter = "/";
 #endif
+
+using ::testing::EndsWith;
 
 static const char kTestName[] = "fileutils_unittest";
 static const char kExtension[] = "tmp";
@@ -86,34 +89,36 @@ class FileUtilsTest : public testing::Test {
 
 std::string FileUtilsTest::original_working_dir_ = "";
 
-// Tests that the project output dir path is returned for the default working
-// directory that is automatically set when the test executable is launched.
-// The test is not fully testing the implementation, since we cannot be sure
-// of where the executable was launched from.
-#if defined(WEBRTC_ANDROID) || defined(WEBRTC_IOS)
-#define MAYBE_OutputPathFromUnchangedWorkingDir \
-  DISABLED_OutputPathFromUnchangedWorkingDir
+// The location will vary depending on where the webrtc checkout is on the
+// system, but it should end as described above and be an absolute path.
+std::string ExpectedRootDirByPlatform() {
+#if defined(WEBRTC_ANDROID)
+  return "chromium_tests_root/";
+#elif defined(WEBRTC_IOS)
+  return "chromium_tests_root/";
 #else
-#define MAYBE_OutputPathFromUnchangedWorkingDir \
-  OutputPathFromUnchangedWorkingDir
+  return std::string("out") + kPathDelimiter;
 #endif
-TEST_F(FileUtilsTest, MAYBE_OutputPathFromUnchangedWorkingDir) {
-  std::string path = webrtc::test::OutputPath();
-  std::string expected_end = "out";
-  expected_end = kPathDelimiter + expected_end + kPathDelimiter;
-  ASSERT_EQ(path.length() - expected_end.length(), path.find(expected_end));
+}
+
+TEST_F(FileUtilsTest, OutputPathFromUnchangedWorkingDir) {
+  std::string expected_end = ExpectedRootDirByPlatform();
+  std::string result = webrtc::test::OutputPath();
+
+  ASSERT_THAT(result, EndsWith(expected_end));
+  ASSERT_THAT(result[0], *kPathDelimiter) << "Expected path to be absolute.";
 }
 
 // Tests with current working directory set to a directory higher up in the
 // directory tree than the project root dir.
-#if defined(WEBRTC_ANDROID) || defined(WIN32) || defined(WEBRTC_IOS)
-#define MAYBE_OutputPathFromRootWorkingDir DISABLED_OutputPathFromRootWorkingDir
-#else
-#define MAYBE_OutputPathFromRootWorkingDir OutputPathFromRootWorkingDir
-#endif
-TEST_F(FileUtilsTest, MAYBE_OutputPathFromRootWorkingDir) {
+TEST_F(FileUtilsTest, OutputPathFromRootWorkingDir) {
   ASSERT_EQ(0, chdir(kPathDelimiter));
-  ASSERT_EQ("./", webrtc::test::OutputPath());
+
+  std::string expected_end = ExpectedRootDirByPlatform();
+  std::string result = webrtc::test::OutputPath();
+
+  ASSERT_THAT(result, EndsWith(expected_end));
+  ASSERT_THAT(result[0], *kPathDelimiter) << "Expected path to be absolute.";
 }
 
 TEST_F(FileUtilsTest, TempFilename) {
@@ -244,6 +249,18 @@ TEST_F(FileUtilsTest, WriteReadDeleteFilesAndDirs) {
   EXPECT_EQ(2u, num_deleted_entries);
   EXPECT_TRUE(RemoveDir(temp_directory));
   EXPECT_FALSE(DirExists(temp_directory));
+}
+
+TEST_F(FileUtilsTest, DirNameStripsFilename) {
+  EXPECT_EQ("/some/path", DirName("/some/path/file.txt"));
+}
+
+TEST_F(FileUtilsTest, DirNameKeepsStrippingRightmostPathComponent) {
+  EXPECT_EQ("/some", DirName(DirName("/some/path/file.txt")));
+}
+
+TEST_F(FileUtilsTest, DirNameDoesntCareIfAPathEndsInPathSeparator) {
+  EXPECT_EQ("/some", DirName("/some/path/"));
 }
 
 }  // namespace test
