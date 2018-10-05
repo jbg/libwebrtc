@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "378f8920_0c15f423",
+        "filename": "modules/bitrate_controller/send_side_bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-05T14:55:16Z",
+      "side": 1,
+      "message": "Well, that is actually a bit unclear. We really ought to find a better term for what we call the start bitrate, as it can be set mid call as well... I\u0027d rather keep it for now. But I updated the corresponding use in BitrateControllerImpl to better reflect this.",
+      "parentUuid": "271cd7aa_c26f0d27",
+      "range": {
+        "startLine": 58,
+        "startChar": 44,
+        "endLine": 58,
+        "endChar": 56
+      },
+      "revId": "92a182ed11e1019fbf7704d98966e9411a6a42f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17f8e4b0_f9999865",
         "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "92a182ed11e1019fbf7704d98966e9411a6a42f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30b5b573_adc70a70",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-05T14:55:16Z",
+      "side": 1,
+      "message": "In ClampBitrates it\u0027s clamped to the default min rate (10/5 kbps depending on a trial). So -1 or 0 doesn\u0027t actually matter, just changed this to be consistent with UpdateBitrateConstraints.",
+      "parentUuid": "17f8e4b0_f9999865",
+      "range": {
+        "startLine": 171,
+        "startChar": 75,
+        "endLine": 171,
+        "endChar": 76
+      },
+      "revId": "92a182ed11e1019fbf7704d98966e9411a6a42f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
