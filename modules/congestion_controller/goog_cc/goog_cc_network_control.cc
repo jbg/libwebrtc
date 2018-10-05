@@ -249,6 +249,7 @@ NetworkControlUpdate GoogCcNetworkController::OnSentPacket(
     SentPacket sent_packet) {
   alr_detector_->OnBytesSent(sent_packet.size.bytes(),
                              sent_packet.send_time.ms());
+  bandwidth_estimation_->OnSentPacket(sent_packet);
   return NetworkControlUpdate();
 }
 
@@ -346,6 +347,8 @@ NetworkControlUpdate GoogCcNetworkController::OnTransportPacketsFeedback(
       feedback_max_rtts_.pop_front();
     min_feedback_max_rtt_ms.emplace(*std::min_element(
         feedback_max_rtts_.begin(), feedback_max_rtts_.end()));
+    bandwidth_estimation_->UpdateFeedbackRtt(report.feedback_time,
+                                             feedback_max_rtt);
   }
   if (packet_feedback_only_) {
     if (!feedback_max_rtts_.empty()) {

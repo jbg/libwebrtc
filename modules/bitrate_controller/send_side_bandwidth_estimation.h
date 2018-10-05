@@ -18,10 +18,22 @@
 #include <vector>
 
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "rtc_base/experiments/field_trial_parser.h"
+#include "rtc_base/experiments/field_trial_units.h"
 
 namespace webrtc {
 
 class RtcEventLog;
+
+struct RttBasedBackoffConfig {
+  RttBasedBackoffConfig();
+  RttBasedBackoffConfig(const RttBasedBackoffConfig&);
+  RttBasedBackoffConfig& operator=(const RttBasedBackoffConfig&) = default;
+  ~RttBasedBackoffConfig();
+  FieldTrialParameter<TimeDelta> rtt_limit;
+  FieldTrialParameter<double> drop_fraction;
+  FieldTrialParameter<TimeDelta> drop_interval;
+};
 
 class SendSideBandwidthEstimation {
  public:
@@ -33,6 +45,18 @@ class SendSideBandwidthEstimation {
 
   // Call periodically to update estimate.
   void UpdateEstimate(int64_t now_ms);
+  void OnSentPacket(SentPacket sent_packet) {
+    // Initialize feedback time to send time to allow estimation of RTT until
+    // first feedback is received.
+    if (last_feedback_rtt_update_.IsInfinite()) {
+      last_feedback_rtt_update_ = sent_packet.send_time;
+      last_feedback_rtt_ = TimeDelta::Zero();
+    }
+  }
+  void UpdateFeedbackRtt(Timestamp at_time, TimeDelta feedback_rtt) {
+    last_feedback_rtt_update_ = at_time;
+    last_feedback_rtt_ = feedback_rtt;
+  }
 
   // Call when we receive a RTCP message with TMMBR or REMB.
   void UpdateReceiverEstimate(int64_t now_ms, uint32_t bandwidth);
@@ -75,6 +99,8 @@ class SendSideBandwidthEstimation {
   // set |current_bitrate_bps_| to the capped value and updates the event log.
   void CapBitrateToThresholds(int64_t now_ms, uint32_t bitrate_bps);
 
+  RttBasedBackoffConfig rtt_backoff_config_;
+
   std::deque<std::pair<int64_t, uint32_t> > min_bitrate_history_;
 
   // incoming filters
@@ -93,6 +119,9 @@ class SendSideBandwidthEstimation {
   uint8_t last_fraction_loss_;
   uint8_t last_logged_fraction_loss_;
   int64_t last_round_trip_time_ms_;
+
+  Timestamp last_feedback_rtt_update_ = Timestamp::MinusInfinity();
+  TimeDelta last_feedback_rtt_ = TimeDelta::Zero();
 
   uint32_t bwe_incoming_;
   uint32_t delay_based_bitrate_bps_;
