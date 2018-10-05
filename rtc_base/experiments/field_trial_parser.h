@@ -35,6 +35,9 @@ namespace webrtc {
 class FieldTrialParameterInterface {
  public:
   virtual ~FieldTrialParameterInterface();
+  FieldTrialParameterInterface(const FieldTrialParameterInterface&) = default;
+  FieldTrialParameterInterface& operator=(FieldTrialParameterInterface&) =
+      default;
 
  protected:
   explicit FieldTrialParameterInterface(std::string key);
@@ -46,7 +49,7 @@ class FieldTrialParameterInterface {
   std::string Key() const;
 
  private:
-  const std::string key_;
+  std::string key_;
   bool used_ = false;
 };
 
