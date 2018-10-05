@@ -42,11 +42,11 @@ struct PacketDeliveryInfo {
   uint64_t packet_id;
 };
 
-// DefaultNetworkSimulationConfig is a default network behavior configuration
+// BuiltInNetworkBehaviorConfig is a default network behavior configuration
 // for default network behavior that will be used by WebRTC if no custom
 // NetworkBehaviorInterface is provided.
-struct DefaultNetworkSimulationConfig {
-  DefaultNetworkSimulationConfig() {}
+struct BuiltInNetworkBehaviorConfig {
+  BuiltInNetworkBehaviorConfig() {}
   // Queue length in number of packets.
   size_t queue_length_packets = 0;
   // Delay in addition to capacity induced delay.
@@ -62,6 +62,9 @@ struct DefaultNetworkSimulationConfig {
   // The average length of a burst of lost packets.
   int avg_burst_loss_length = -1;
 };
+
+// Deprecated. DO NOT USE. Use BuiltInNetworkBehaviorConfig instead.
+typedef BuiltInNetworkBehaviorConfig DefaultNetworkSimulationConfig;
 
 class NetworkBehaviorInterface {
  public:
