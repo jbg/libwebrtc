@@ -46,6 +46,29 @@
       "revId": "b44c67e4d7ab3d31d14352170a0b4d6e8cb6711b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db6672dd_dd03a738",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-05T08:29:40Z",
+      "side": 1,
+      "message": "I\u0027ve tried to debug the failure of PeerConnectionIntegrationTest/PeerConnectionIntegrationTest.GetCaptureStartNtpTimeWithOldStatsApi/0\n\nand it seems GetRTT always returns zero here.\n\nThe rtcp_receiver sees RTCP packets of types 202 (sdes), 200 (sender report) and 201 (receiver report).",
+      "range": {
+        "startLine": 414,
+        "startChar": 1,
+        "endLine": 414,
+        "endChar": 25
+      },
+      "revId": "b44c67e4d7ab3d31d14352170a0b4d6e8cb6711b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
