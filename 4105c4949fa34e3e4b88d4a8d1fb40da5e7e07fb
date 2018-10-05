@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4a89d77_d9adb185",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-05T22:28:41Z",
+      "side": 1,
+      "message": "Drive-by",
+      "revId": "4105c4949fa34e3e4b88d4a8d1fb40da5e7e07fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
