@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a019034_298e0226",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "nit: Spaces!\n\n#ifndef API_TRANSPORT_ENUMS_H_\n#define API_TRANSPORT_ENUMS_H_\n\nnamespace webrtc {\n\nenum IceTransportState {",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41a6c379_7917092f",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "I think we prefer the more strongly typed \"enum class\" nowadays.\nUnlike normal enum you have to use the enum name as a prefix, so you don\u0027t have to include \"..IceTransport..\" as part of the enum value names.\n\nE.g. IceTransportState::kNew",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f49dad7a_938e73e5",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "};\n\n}  // namespace webrtc",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffc32b5c_d9c1a0eb",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "Add a TODO with a reference to your bug or a new bug saying this should be deprecated and removed.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f0c9b21_492dc487",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "I would prefer a name that doesn\u0027t have to be cleaned up later, e.g. GetIceTransportState() or State().\n\nYou still have to cleanup the deprecated old GetStats(), but renaming requires more steps when Chromium or other projects begin depending on the temporary name.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a91ec01_1eaa3d6f",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "TODO here too documenting this will go away",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1972c88_b8320ce6",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "When you update the name above, update this signal\u0027s name to match.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "302831f4_1c9fd8ad",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "TODOs should have crbug references.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "877094d3_9a617dc7",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "Do you know if this is this different from the spec in any regard other than not supporting \"disconnected\"? For example, here we look at if a connection is \"active\"... the spec talks about whether or not we\u0027ve received consent checks, but looking at active() it is implemented as \"not having had a large number of ping failures\", meaning a connection is said to be active() even if \"we have yet to receive a ping response\". This might be the difference between \"checking\" and \"connected\", maybe...\n\nAlso as-is I don\u0027t think UpdateState() is invoked when active() (the write state) changes, so it probably is broken for consent ping etc.\n\nI don\u0027t think fixing all the edge cases is blocking for this CL but I would like a bug filed if the behavior is incorrect.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77a4c59c_43e9b721",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "Same as earlier, I would go with ComputeIceTransportState() or the like. The fact that it is standardized I think belongs to a comment rather than the method name.\nFeel free to link to the spec in comments https://w3c.github.io/webrtc-pc/#dom-rtcicetransportstate.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea17b783_a3560fea",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4144,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "nit: Comments should always be sentences with Upper case and period.",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb5121ef_f6181c10",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this still be \"new\"?\n\nnew: \"The RTCIceTransport is gathering candidates and/or waiting for remote candidates to be supplied, and has not yet started checking\"",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5d3b63c_d65d4527",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4150,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-05T09:54:26Z",
+      "side": 1,
+      "message": "This happens before \"WaitForConnectionTo\"; any risk of flakes?\n\nAlso - would it be possible to test \"checking\" and \"connected\" states before reaching \"complete\"? May require fakes/mocks?",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
