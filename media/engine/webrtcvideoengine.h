@@ -155,6 +155,20 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
                              const rtc::NetworkRoute& network_route) override;
   void SetInterface(NetworkInterface* iface) override;
 
+  // E2E Encrypted Video Frame API
+  // Set a frame decryptor to a particular ssrc that will intercept all
+  // incoming video frames and attempt to decrypt them before forwarding the
+  // result.
+  void SetFrameDecryptor(uint32_t ssrc,
+                         rtc::scoped_refptr<webrtc::FrameDecryptorInterface>
+                             frame_decryptor) override;
+  // Set a frame encryptor to a particular ssrc that will intercept all
+  // outgoing video frames and attempt to encrypt them and forward the result
+  // to the packetizer.
+  void SetFrameEncryptor(uint32_t ssrc,
+                         rtc::scoped_refptr<webrtc::FrameEncryptorInterface>
+                             frame_encryptor) override;
+
   // Implemented for VideoMediaChannelTest.
   bool sending() const { return sending_; }
 
@@ -256,6 +270,9 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
     void SetSendParameters(const ChangedSendParameters& send_params);
     webrtc::RTCError SetRtpParameters(const webrtc::RtpParameters& parameters);
     webrtc::RtpParameters GetRtpParameters() const;
+
+    void SetFrameEncryptor(
+        rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor);
 
     // Implements rtc::VideoSourceInterface<webrtc::VideoFrame>.
     // WebRtcVideoSendStream acts as a source to the webrtc::VideoSendStream
@@ -371,6 +388,9 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
     void OnFrame(const webrtc::VideoFrame& frame) override;
     bool IsDefaultStream() const;
 
+    void SetFrameDecryptor(
+        rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor);
+
     void SetSink(rtc::VideoSinkInterface<webrtc::VideoFrame>* sink);
 
     VideoReceiverInfo GetVideoReceiverInfo(bool log_stats);
@@ -483,6 +503,10 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   // before the unsignaled receive stream is created when the first packet is
   // received.
   StreamParams unsignaled_stream_params_;
+  // A Default FrameDecryptor that will be set on unsignaled streams. This can
+  // be set by creating an RTPReceiver for SSRC=0.
+  rtc::scoped_refptr<webrtc::FrameDecryptorInterface>
+      unsignaled_frame_decryptor_;
 };
 
 class EncoderStreamFactory

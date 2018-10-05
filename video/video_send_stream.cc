@@ -69,7 +69,8 @@ VideoSendStream::VideoSendStream(
     VideoEncoderConfig encoder_config,
     const std::map<uint32_t, RtpState>& suspended_ssrcs,
     const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
-    std::unique_ptr<FecController> fec_controller)
+    std::unique_ptr<FecController> fec_controller,
+    FrameEncryptorInterface* frame_encryptor)
     : worker_queue_(worker_queue),
       thread_sync_event_(false /* manual_reset */, false),
       stats_proxy_(Clock::GetRealTimeClock(),
@@ -87,15 +88,15 @@ VideoSendStream::VideoSendStream(
   // references local variables.
   worker_queue_->PostTask(rtc::NewClosure(
       [this, call_stats, transport, bitrate_allocator, send_delay_stats,
-       event_log, &suspended_ssrcs, &encoder_config, &suspended_payload_states,
-       &fec_controller]() {
+       event_log, frame_encryptor, &suspended_ssrcs, &encoder_config,
+       &suspended_payload_states, &fec_controller]() {
         send_stream_.reset(new VideoSendStreamImpl(
             &stats_proxy_, worker_queue_, call_stats, transport,
             bitrate_allocator, send_delay_stats, video_stream_encoder_.get(),
             event_log, &config_, encoder_config.max_bitrate_bps,
             encoder_config.bitrate_priority, suspended_ssrcs,
             suspended_payload_states, encoder_config.content_type,
-            std::move(fec_controller)));
+            std::move(fec_controller), frame_encryptor));
       },
       [this]() { thread_sync_event_.Set(); }));
 

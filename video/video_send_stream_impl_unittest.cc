@@ -94,7 +94,7 @@ class VideoSendStreamImplTest : public ::testing::Test {
     EXPECT_CALL(transport_controller_, packet_router())
         .WillRepeatedly(Return(&packet_router_));
     EXPECT_CALL(transport_controller_,
-                CreateRtpVideoSender(_, _, _, _, _, _, _, _))
+                CreateRtpVideoSender(_, _, _, _, _, _, _, _, _))
         .WillRepeatedly(Return(&payload_router_));
     EXPECT_CALL(payload_router_, SetActive(_))
         .WillRepeatedly(testing::Invoke(
@@ -119,7 +119,7 @@ class VideoSendStreamImplTest : public ::testing::Test {
         &event_log_, &config_, initial_encoder_max_bitrate,
         initial_encoder_bitrate_priority, suspended_ssrcs,
         suspended_payload_states, content_type,
-        absl::make_unique<FecControllerDefault>(&clock_));
+        absl::make_unique<FecControllerDefault>(&clock_), nullptr);
   }
 
  protected:
