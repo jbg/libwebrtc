@@ -117,6 +117,30 @@
       "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a559a17b_3e499ac2",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-05T11:36:08Z",
+      "side": 1,
+      "message": "Correct, we iterate over each SSRC and insert those events in the event_processor grouped by SSRC (not by timestamp). The ProcessEventsInOrder call will then go over all of the events in timestamp order (regardless of SSRC or even  event type) and insert them into rtp_packets_ and audio_outputs_ respectively sorted by timestamp.\n\nIn fact, the whole purpose of the EventProcessor class is to merge several lists that are individually sorted by timestamps into a single \"virtual\" list containing all the events sorted by timestamp.",
+      "parentUuid": "72b33239_4e81a4c3",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
