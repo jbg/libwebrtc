@@ -69,6 +69,30 @@
       "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80413b1b_9f60e1ac",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-05T08:33:36Z",
+      "side": 1,
+      "message": "The event_processor should go through the events in timestamp order, and repeatedly call |handle_audio| or |handle_rtp| for the earliest remaining event. Please let me know if this doesn\u0027t happen; it would be a bug.",
+      "parentUuid": "9e29c03a_a8c70a47",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
