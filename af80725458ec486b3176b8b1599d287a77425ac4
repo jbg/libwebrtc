@@ -34,6 +34,24 @@
       "revId": "af80725458ec486b3176b8b1599d287a77425ac4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6460cfc8_ff770a60",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-05T13:53:55Z",
+      "side": 1,
+      "message": "Yes, that sounds like it should provide sufficient guard rails. (But making them protected is not a common thing to do, so be sure to explain in a comment that the intended use case is for subclasses to be able to implement their own, public, copy construction/assignment.)\n\n(This is one of the reasons why one should avoid superclasses with state...)",
+      "parentUuid": "cf7e3827_2c66e407",
+      "revId": "af80725458ec486b3176b8b1599d287a77425ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
