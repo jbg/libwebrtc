@@ -22,6 +22,30 @@
       "revId": "d4584b5ffe08a1f1d6e7d9e852edb63724233b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14721d95_8a79e46b",
+        "filename": "test/testsupport/fileutils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-05T12:52:20Z",
+      "side": 1,
+      "message": "Ok. My solution won\u0027t work on Windows but I think we can live with that.",
+      "parentUuid": "5b969583_6a6a634d",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 19
+      },
+      "revId": "d4584b5ffe08a1f1d6e7d9e852edb63724233b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
