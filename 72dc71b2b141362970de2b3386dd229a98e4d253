@@ -93,6 +93,30 @@
       "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72b33239_4e81a4c3",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-05T11:24:12Z",
+      "side": 1,
+      "message": "I mean it looks like we first iterate on ssrc then on events.\n\nBut audio_outputs_ and rtp_packets_ want to have ssrc interleaved (and time must be monotonic)",
+      "parentUuid": "80413b1b_9f60e1ac",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "72dc71b2b141362970de2b3386dd229a98e4d253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
