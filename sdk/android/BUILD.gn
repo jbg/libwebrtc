@@ -511,8 +511,9 @@ if (is_android) {
 
     deps = [
       ":base_jni",
-      "../../api/audio_codecs:builtin_audio_decoder_factory",
-      "../../api/audio_codecs:builtin_audio_encoder_factory",
+      "../../api/audio_codecs:audio_codecs_api",
+      "../../api/audio_codecs/opus:audio_decoder_opus",
+      "../../api/audio_codecs/opus:audio_encoder_opus",
       "../../modules/audio_processing:audio_processing",
       "../../rtc_base:rtc_base_approved",
     ]

@@ -10,19 +10,21 @@
 
 #include "sdk/android/src/jni/pc/audio.h"
 
-#include "api/audio_codecs/builtin_audio_decoder_factory.h"
-#include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/audio_codecs/audio_decoder_factory_template.h"
+#include "api/audio_codecs/audio_encoder_factory_template.h"
+#include "api/audio_codecs/opus/audio_decoder_opus.h"
+#include "api/audio_codecs/opus/audio_encoder_opus.h"
 #include "modules/audio_processing/include/audio_processing.h"
 
 namespace webrtc {
 namespace jni {
 
 rtc::scoped_refptr<AudioDecoderFactory> CreateAudioDecoderFactory() {
-  return CreateBuiltinAudioDecoderFactory();
+  return webrtc::CreateAudioDecoderFactory<AudioDecoderOpus>();
 }
 
 rtc::scoped_refptr<AudioEncoderFactory> CreateAudioEncoderFactory() {
-  return CreateBuiltinAudioEncoderFactory();
+  return webrtc::CreateAudioEncoderFactory<AudioEncoderOpus>();
 }
 
 rtc::scoped_refptr<AudioProcessing> CreateAudioProcessing() {
