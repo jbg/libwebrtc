@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "271cd7aa_c26f0d27",
+        "filename": "modules/bitrate_controller/send_side_bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-05T13:39:21Z",
+      "side": 1,
+      "message": "If this is only used for starting bitrate, then please rename,",
+      "range": {
+        "startLine": 58,
+        "startChar": 44,
+        "endLine": 58,
+        "endChar": 56
+      },
+      "revId": "92a182ed11e1019fbf7704d98966e9411a6a42f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17f8e4b0_f9999865",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-05T13:39:21Z",
+      "side": 1,
+      "message": "Is 0 handled the same as -1 for min_bitrate_bps? I would have thought that -1 meant unconfigured but 0 meant no lower limit.",
+      "range": {
+        "startLine": 171,
+        "startChar": 75,
+        "endLine": 171,
+        "endChar": 76
+      },
+      "revId": "92a182ed11e1019fbf7704d98966e9411a6a42f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
