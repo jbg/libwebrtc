@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "cfde11b8_47dc19e8",
+        "filename": "test/testsupport/fileutils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-05T08:02:51Z",
+      "side": 1,
+      "message": "Right, that\u0027s confusing. I\u0027ll rephrase.",
+      "parentUuid": "4103a166_f1a47cac",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "059dee33558431e318a105ac13074985be156558",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "faf34649_d49ae73c",
         "filename": "test/testsupport/fileutils.h",
         "patchSetId": 10
@@ -68,6 +92,30 @@
       "revId": "059dee33558431e318a105ac13074985be156558",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce2b34f0_391c7564",
+        "filename": "test/testsupport/fileutils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-05T08:02:51Z",
+      "side": 1,
+      "message": "I put these here mostly because I wanted to unit test them. I think it makes sense to put them here. I realize I can actually get rid of the wstring version of DirName by converting to std::string earlier in the win branch, PTAL.",
+      "parentUuid": "faf34649_d49ae73c",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 47
+      },
+      "revId": "059dee33558431e318a105ac13074985be156558",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
