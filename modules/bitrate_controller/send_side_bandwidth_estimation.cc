@@ -36,7 +36,7 @@ const int kDefaultMaxBitrateBps = 1000000000;
 const int64_t kLowBitrateLogPeriodMs = 10000;
 const int64_t kRtcEventLogPeriodMs = 5000;
 // Expecting that RTCP feedback is sent uniformly within [0.5, 1.5]s intervals.
-const int64_t kFeedbackIntervalMs = 5000;
+const int64_t kMaxRtcpFeedbackIntervalMs = 5000;
 const int64_t kFeedbackTimeoutIntervals = 3;
 const int64_t kTimeoutIntervalMs = 1000;
 
@@ -112,8 +112,8 @@ SendSideBandwidthEstimation::SendSideBandwidthEstimation(RtcEventLog* event_log)
       max_bitrate_configured_(kDefaultMaxBitrateBps),
       last_low_bitrate_log_ms_(-1),
       has_decreased_since_last_fraction_loss_(false),
-      last_feedback_ms_(-1),
-      last_packet_report_ms_(-1),
+      last_loss_feedback_ms_(-1),
+      last_loss_packet_report_ms_(-1),
       last_timeout_ms_(-1),
       last_fraction_loss_(0),
       last_logged_fraction_loss_(0),
@@ -221,7 +221,7 @@ void SendSideBandwidthEstimation::UpdateReceiverBlock(uint8_t fraction_loss,
 void SendSideBandwidthEstimation::UpdatePacketsLost(int packets_lost,
                                                     int number_of_packets,
                                                     int64_t now_ms) {
-  last_feedback_ms_ = now_ms;
+  last_loss_feedback_ms_ = now_ms;
   if (first_report_time_ms_ == -1)
     first_report_time_ms_ = now_ms;
 
@@ -244,7 +244,7 @@ void SendSideBandwidthEstimation::UpdatePacketsLost(int packets_lost,
 
     lost_packets_since_last_loss_update_ = 0;
     expected_packets_since_last_loss_update_ = 0;
-    last_packet_report_ms_ = now_ms;
+    last_loss_packet_report_ms_ = now_ms;
     UpdateEstimate(now_ms);
   }
   UpdateUmaStatsPacketsLost(now_ms, packets_lost);
@@ -310,14 +310,15 @@ void SendSideBandwidthEstimation::UpdateEstimate(int64_t now_ms) {
     }
   }
   UpdateMinHistory(now_ms);
-  if (last_packet_report_ms_ == -1) {
+  if (last_loss_packet_report_ms_ == -1) {
     // No feedback received.
     CapBitrateToThresholds(now_ms, current_bitrate_bps_);
     return;
   }
-  int64_t time_since_packet_report_ms = now_ms - last_packet_report_ms_;
-  int64_t time_since_feedback_ms = now_ms - last_feedback_ms_;
-  if (time_since_packet_report_ms < 1.2 * kFeedbackIntervalMs) {
+  int64_t time_since_loss_packet_report_ms =
+      now_ms - last_loss_packet_report_ms_;
+  int64_t time_since_loss_feedback_ms = now_ms - last_loss_feedback_ms_;
+  if (time_since_loss_packet_report_ms < 1.2 * kMaxRtcpFeedbackIntervalMs) {
     // We only care about loss above a given bitrate threshold.
     float loss = last_fraction_loss_ / 256.0f;
     // We only make decisions based on loss when the bitrate is above a
@@ -364,12 +365,13 @@ void SendSideBandwidthEstimation::UpdateEstimate(int64_t now_ms) {
         }
       }
     }
-  } else if (time_since_feedback_ms >
-                 kFeedbackTimeoutIntervals * kFeedbackIntervalMs &&
+  } else if (time_since_loss_feedback_ms >
+                 kFeedbackTimeoutIntervals * kMaxRtcpFeedbackIntervalMs &&
              (last_timeout_ms_ == -1 ||
               now_ms - last_timeout_ms_ > kTimeoutIntervalMs)) {
     if (in_timeout_experiment_) {
-      RTC_LOG(LS_WARNING) << "Feedback timed out (" << time_since_feedback_ms
+      RTC_LOG(LS_WARNING) << "Feedback timed out ("
+                          << time_since_loss_feedback_ms
                           << " ms), reducing bitrate.";
       new_bitrate *= 0.8;
       // Reset accumulators since we've already acted on missing feedback and

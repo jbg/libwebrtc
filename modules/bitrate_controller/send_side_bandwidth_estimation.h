@@ -87,8 +87,8 @@ class SendSideBandwidthEstimation {
   int64_t last_low_bitrate_log_ms_;
 
   bool has_decreased_since_last_fraction_loss_;
-  int64_t last_feedback_ms_;
-  int64_t last_packet_report_ms_;
+  int64_t last_loss_feedback_ms_;
+  int64_t last_loss_packet_report_ms_;
   int64_t last_timeout_ms_;
   uint8_t last_fraction_loss_;
   uint8_t last_logged_fraction_loss_;
