@@ -37,6 +37,10 @@ class FieldTrialParameterInterface {
   virtual ~FieldTrialParameterInterface();
 
  protected:
+  // Protected to allow implementations to provide assignment and copy.
+  FieldTrialParameterInterface(const FieldTrialParameterInterface&) = default;
+  FieldTrialParameterInterface& operator=(const FieldTrialParameterInterface&) =
+      default;
   explicit FieldTrialParameterInterface(std::string key);
   friend void ParseFieldTrial(
       std::initializer_list<FieldTrialParameterInterface*> fields,
@@ -46,7 +50,7 @@ class FieldTrialParameterInterface {
   std::string Key() const;
 
  private:
-  const std::string key_;
+  std::string key_;
   bool used_ = false;
 };
 
@@ -68,6 +72,8 @@ class FieldTrialParameter : public FieldTrialParameterInterface {
  public:
   FieldTrialParameter(std::string key, T default_value)
       : FieldTrialParameterInterface(key), value_(default_value) {}
+  FieldTrialParameter(const FieldTrialParameter&) = default;
+  FieldTrialParameter& operator=(const FieldTrialParameter&) = default;
   T Get() const { return value_; }
   operator T() const { return Get(); }
   const T* operator->() const { return &value_; }
@@ -117,6 +123,7 @@ class FieldTrialEnum : public AbstractFieldTrialEnum {
       : AbstractFieldTrialEnum(key,
                                static_cast<int>(default_value),
                                ToIntMap(mapping)) {}
+  FieldTrialEnum& operator=(const FieldTrialEnum&) = default;
   T Get() const { return static_cast<T>(value_); }
   operator T() const { return Get(); }
 
@@ -138,6 +145,10 @@ class FieldTrialOptional : public FieldTrialParameterInterface {
       : FieldTrialParameterInterface(key) {}
   FieldTrialOptional(std::string key, absl::optional<T> default_value)
       : FieldTrialParameterInterface(key), value_(default_value) {}
+
+  FieldTrialOptional(const FieldTrialOptional&) = default;
+  FieldTrialOptional& operator=(const FieldTrialOptional&) = default;
+
   absl::optional<T> GetOptional() const { return value_; }
   const T& Value() const { return value_.value(); }
   const T& operator*() const { return value_.value(); }
@@ -168,6 +179,8 @@ class FieldTrialFlag : public FieldTrialParameterInterface {
  public:
   explicit FieldTrialFlag(std::string key);
   FieldTrialFlag(std::string key, bool default_value);
+  FieldTrialFlag(const FieldTrialFlag&) = default;
+  FieldTrialFlag& operator=(const FieldTrialFlag&) = default;
   bool Get() const;
   operator bool() const;
 
