@@ -277,7 +277,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
                                                            stats_proxy_,
                                                            send_delay_stats,
                                                            this),
-                                           event_log)),
+                                           event_log,
+                                           config_->frame_encryptor)),
       weak_ptr_factory_(this),
       overhead_bytes_per_packet_(0),
       transport_overhead_bytes_per_packet_(0) {

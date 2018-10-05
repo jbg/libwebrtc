@@ -50,7 +50,8 @@ std::vector<std::unique_ptr<RtpRtcp>> CreateRtpRtcpModules(
     RtcEventLog* event_log,
     RateLimiter* retransmission_rate_limiter,
     OverheadObserver* overhead_observer,
-    RtpKeepAliveConfig keepalive_config) {
+    RtpKeepAliveConfig keepalive_config,
+    FrameEncryptorInterface* frame_encryptor) {
   RTC_DCHECK_GT(ssrcs.size(), 0);
   RtpRtcp::Configuration configuration;
   configuration.audio = false;
@@ -77,6 +78,7 @@ std::vector<std::unique_ptr<RtpRtcp>> CreateRtpRtcpModules(
       rtcp_config.video_report_interval_ms;
   configuration.rtcp_interval_config.audio_interval_ms =
       rtcp_config.audio_report_interval_ms;
+  configuration.frame_encryptor = frame_encryptor;
   std::vector<std::unique_ptr<RtpRtcp>> modules;
   const std::vector<uint32_t>& flexfec_protected_ssrcs = protected_media_ssrcs;
   for (uint32_t ssrc : ssrcs) {
@@ -161,7 +163,8 @@ RtpVideoSender::RtpVideoSender(
     const RtpSenderObservers& observers,
     RtpTransportControllerSendInterface* transport,
     RtcEventLog* event_log,
-    RateLimiter* retransmission_limiter)
+    RateLimiter* retransmission_limiter,
+    FrameEncryptorInterface* frame_encryptor)
     : active_(false),
       module_process_thread_(nullptr),
       suspended_ssrcs_(std::move(suspended_ssrcs)),
@@ -184,7 +187,8 @@ RtpVideoSender::RtpVideoSender(
                                event_log,
                                retransmission_limiter,
                                observers.overhead_observer,
-                               transport->keepalive_config())),
+                               transport->keepalive_config(),
+                               frame_encryptor)),
       rtp_config_(rtp_config),
       transport_(transport) {
   RTC_DCHECK_EQ(ssrcs.size(), rtp_modules_.size());

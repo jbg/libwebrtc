@@ -94,7 +94,7 @@ class VideoSendStreamImplTest : public ::testing::Test {
     EXPECT_CALL(transport_controller_, packet_router())
         .WillRepeatedly(Return(&packet_router_));
     EXPECT_CALL(transport_controller_,
-                CreateRtpVideoSender(_, _, _, _, _, _, _, _))
+                CreateRtpVideoSender(_, _, _, _, _, _, _, _, _))
         .WillRepeatedly(Return(&payload_router_));
     EXPECT_CALL(payload_router_, SetActive(_))
         .WillRepeatedly(testing::Invoke(

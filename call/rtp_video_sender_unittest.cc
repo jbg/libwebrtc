@@ -113,7 +113,8 @@ class RtpVideoSenderTestFixture {
                         &stats_proxy_, &stats_proxy_, &stats_proxy_,
                         &stats_proxy_, &stats_proxy_, &send_delay_stats_,
                         &overhead_observer_),
-        &transport_controller_, &event_log_, &retransmission_rate_limiter_);
+        &transport_controller_, &event_log_, &retransmission_rate_limiter_,
+        nullptr);
   }
 
   RtpVideoSender* router() { return router_.get(); }
