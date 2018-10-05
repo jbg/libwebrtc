@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "847f074f_a478e667",
+        "filename": "test/testsupport/fileutils.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-05T08:54:42Z",
+      "side": 1,
+      "message": "Maybe it will be better to rename to GetParent. Because DirName a bit confusing when passed path is directory and when it is file. By name user can assume, that for file it will return its dir name and for directory - itself. Also GetParent will show, that \"/\" is exceptional, because there is no parent in such case.",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 19
+      },
+      "revId": "76936cd7f7c3ac1947c8ebeadd2610901aadbc9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6510717c_2ea339eb",
+        "filename": "test/testsupport/fileutils_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-05T08:54:42Z",
+      "side": 1,
+      "message": "Will it work on WIN? Possible disk name will be required.",
+      "range": {
+        "startLine": 118,
+        "startChar": 15,
+        "endLine": 118,
+        "endChar": 36
+      },
+      "revId": "76936cd7f7c3ac1947c8ebeadd2610901aadbc9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47a04c5e_5e744541",
+        "filename": "test/testsupport/fileutils_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-05T08:54:42Z",
+      "side": 1,
+      "message": "Maybe we can have special resource for this test, so if it will be moved, this test won\u0027t fail. Otherwise it will be a bit confusing.",
+      "range": {
+        "startLine": 170,
+        "startChar": 51,
+        "endLine": 170,
+        "endChar": 63
+      },
+      "revId": "76936cd7f7c3ac1947c8ebeadd2610901aadbc9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
