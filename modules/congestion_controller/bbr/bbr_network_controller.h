@@ -115,9 +115,8 @@ class BbrNetworkController : public NetworkControllerInterface {
     FieldTrialParameter<bool> probe_rtt_disabled_if_app_limited;
 
     explicit BbrControllerConfig(std::string field_trial);
+    BbrControllerConfig(const BbrControllerConfig&) = delete;
     ~BbrControllerConfig();
-    BbrControllerConfig(const BbrControllerConfig&);
-    static BbrControllerConfig FromTrial();
   };
 
   // Debug state can be exported in order to troubleshoot potential congestion

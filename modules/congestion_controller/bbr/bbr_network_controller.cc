@@ -147,13 +147,6 @@ BbrNetworkController::BbrControllerConfig::BbrControllerConfig(
       field_trial);
 }
 BbrNetworkController::BbrControllerConfig::~BbrControllerConfig() = default;
-BbrNetworkController::BbrControllerConfig::BbrControllerConfig(
-    const BbrControllerConfig&) = default;
-BbrNetworkController::BbrControllerConfig
-BbrNetworkController::BbrControllerConfig::FromTrial() {
-  return BbrControllerConfig(
-      webrtc::field_trial::FindFullName(kBbrConfigTrial));
-}
 
 BbrNetworkController::DebugState::DebugState(const BbrNetworkController& sender)
     : mode(sender.mode_),
@@ -174,7 +167,7 @@ BbrNetworkController::DebugState::DebugState(const BbrNetworkController& sender)
 BbrNetworkController::DebugState::DebugState(const DebugState& state) = default;
 
 BbrNetworkController::BbrNetworkController(NetworkControllerConfig config)
-    : config_(BbrControllerConfig::FromTrial()),
+    : config_(field_trial::FindFullName(kBbrConfigTrial)),
       rtt_stats_(),
       random_(10),
       loss_rate_(),
