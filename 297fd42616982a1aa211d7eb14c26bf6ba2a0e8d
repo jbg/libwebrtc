@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb3cbbc0_f3ca0907",
+        "filename": "modules/bitrate_controller/send_side_bandwidth_estimation_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-05T16:30:08Z",
+      "side": 1,
+      "message": "Why does the number of backoffs change?",
+      "range": {
+        "startLine": 92,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 14
+      },
+      "revId": "297fd42616982a1aa211d7eb14c26bf6ba2a0e8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
