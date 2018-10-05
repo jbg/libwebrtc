@@ -22,6 +22,30 @@
       "revId": "db77a975e1ec48038714bc9c033327c05c5c3a15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eab4bd9_c58f839c",
+        "filename": "luci-scheduler.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-10-05T11:28:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f88ac4df_a31b370e",
+      "range": {
+        "startLine": 620,
+        "startChar": 28,
+        "endLine": 620,
+        "endChar": 46
+      },
+      "revId": "db77a975e1ec48038714bc9c033327c05c5c3a15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
