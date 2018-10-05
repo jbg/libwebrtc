@@ -13,10 +13,8 @@
 
 #include <map>
 #include <string>
-#include <utility>
 
 #include "absl/strings/string_view.h"
-#include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
