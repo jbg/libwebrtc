@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "142eaf08_0d69a15b",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-05T04:17:47Z",
+      "side": 1,
+      "message": "I think that it\u0027s still encouraged in Chromium - based on https://cs.chromium.org/chromium/src/build/config/features.gni?rcl\u003d365d0384cd2d0819b281acc862ebd7a0beb9e32c\u0026l\u003d9 . I\u0027m now a little bit confused. So should I remove all the desktop_capture_buildflags.h code or just replace the BUILDFLAG() with defined()?",
+      "parentUuid": "071c5112_4d912a96",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 13
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4b570024_5469f6c6",
         "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
         "patchSetId": 3
@@ -379,6 +403,24 @@
     },
     {
       "key": {
+        "uuid": "4b83a3f2_7ef822bf",
+        "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-05T04:17:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c503a7d_140fcdfb",
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ba822b0_0786bdb1",
         "filename": "modules/desktop_capture/screen_capturer_pipewire.cc",
         "patchSetId": 3
@@ -565,6 +607,30 @@
       "revId": "7b707d682cea1c4b35221320847099350fb186dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62c4c0cc_2b0e3a83",
+        "filename": "modules/desktop_capture/window_capturer_linux.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-05T04:17:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8560d5bb_fda9e8da",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
