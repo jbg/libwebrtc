@@ -250,7 +250,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
                                                            stats_proxy_,
                                                            send_delay_stats),
                                            event_log,
-                                           std::move(fec_controller))),
+                                           std::move(fec_controller),
+                                           config_->frame_encryptor)),
       weak_ptr_factory_(this) {
   RTC_DCHECK_RUN_ON(worker_queue_);
   RTC_LOG(LS_INFO) << "VideoSendStreamInternal: " << config_->ToString();

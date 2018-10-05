@@ -36,6 +36,7 @@
 
 namespace webrtc {
 
+class FrameEncryptorInterface;
 class RTPFragmentationHeader;
 class RtpRtcp;
 class RtpTransportControllerSendInterface;
@@ -59,7 +60,8 @@ class RtpVideoSender : public RtpVideoSenderInterface,
       RtpTransportControllerSendInterface* transport,
       RtcEventLog* event_log,
       RateLimiter* retransmission_limiter,  // move inside RtpTransport
-      std::unique_ptr<FecController> fec_controller);
+      std::unique_ptr<FecController> fec_controller,
+      FrameEncryptorInterface* frame_encryptor);  // move inside RtpTransport
   ~RtpVideoSender() override;
 
   // RegisterProcessThread register |module_process_thread| with those objects
