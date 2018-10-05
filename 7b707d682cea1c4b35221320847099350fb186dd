@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "11b96ccb_f9fbc49f",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-05T17:08:27Z",
+      "side": 1,
+      "message": "For this feature, it seems that a defined is quite enough. I think you can remove all the desktop_capture_buildflags.h code and use #ifdef, unless you see any issue in developing.(I don\u0027t have a wayland environment for any test here.)",
+      "parentUuid": "142eaf08_0d69a15b",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 13
+      },
+      "revId": "7b707d682cea1c4b35221320847099350fb186dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4b570024_5469f6c6",
         "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
         "patchSetId": 3
