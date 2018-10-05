@@ -29,6 +29,9 @@
 #include "video/video_send_stream.h"
 
 namespace webrtc {
+
+class FrameEncryptorInterface;
+
 namespace internal {
 
 // VideoSendStreamImpl implements internal::VideoSendStream.
@@ -60,7 +63,8 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
       std::map<uint32_t, RtpState> suspended_ssrcs,
       std::map<uint32_t, RtpPayloadState> suspended_payload_states,
       VideoEncoderConfig::ContentType content_type,
-      std::unique_ptr<FecController> fec_controller);
+      std::unique_ptr<FecController> fec_controller,
+      FrameEncryptorInterface* frame_encryptor);
   ~VideoSendStreamImpl() override;
 
   // RegisterProcessThread register |module_process_thread| with those objects

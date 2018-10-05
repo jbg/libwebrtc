@@ -242,7 +242,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
     std::map<uint32_t, RtpState> suspended_ssrcs,
     std::map<uint32_t, RtpPayloadState> suspended_payload_states,
     VideoEncoderConfig::ContentType content_type,
-    std::unique_ptr<FecController> fec_controller)
+    std::unique_ptr<FecController> fec_controller,
+    FrameEncryptorInterface* frame_encryptor)
     : send_side_bwe_with_overhead_(
           webrtc::field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
       has_alr_probing_(config->periodic_alr_bandwidth_probing ||
@@ -277,7 +278,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
                                                            stats_proxy_,
                                                            send_delay_stats,
                                                            this),
-                                           event_log)),
+                                           event_log,
+                                           frame_encryptor)),
       weak_ptr_factory_(this),
       overhead_bytes_per_packet_(0),
       transport_overhead_bytes_per_packet_(0) {

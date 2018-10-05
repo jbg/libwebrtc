@@ -92,13 +92,14 @@ RtpVideoSenderInterface* RtpTransportControllerSend::CreateRtpVideoSender(
     const RtcpConfig& rtcp_config,
     Transport* send_transport,
     const RtpSenderObservers& observers,
-    RtcEventLog* event_log) {
+    RtcEventLog* event_log,
+    FrameEncryptorInterface* frame_encryptor) {
   video_rtp_senders_.push_back(absl::make_unique<RtpVideoSender>(
       ssrcs, suspended_ssrcs, states, rtp_config, rtcp_config, send_transport,
       observers,
       // TODO(holmer): Remove this circular dependency by injecting
       // the parts of RtpTransportControllerSendInterface that are really used.
-      this, event_log, &retransmission_rate_limiter_));
+      this, event_log, &retransmission_rate_limiter_, frame_encryptor));
   return video_rtp_senders_.back().get();
 }
 
