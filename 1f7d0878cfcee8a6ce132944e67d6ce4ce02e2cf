@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae5ae279_2552dfff",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-05T11:35:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "379d9384_e5ad2b3a",
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d179e1c_2ccaf5b7",
         "filename": "pc/mediasession.cc",
         "patchSetId": 1
@@ -205,6 +223,30 @@
       "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a01e86eb_a99258d7",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-05T11:35:09Z",
+      "side": 1,
+      "message": "After giving it some thought, I think that\u0027s the best thing to do as well.\n\nIn short, we will only announce this on SessionLevel but respond also on MediaLevel.",
+      "parentUuid": "c36b701f_8361603b",
+      "range": {
+        "startLine": 857,
+        "startChar": 6,
+        "endLine": 857,
+        "endChar": 58
+      },
+      "revId": "1f7d0878cfcee8a6ce132944e67d6ce4ce02e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
