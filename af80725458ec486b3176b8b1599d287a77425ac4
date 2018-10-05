@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0cb993e_072253f4",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-05T13:38:50Z",
+      "side": 1,
+      "message": "Allowing copy construction and assignment for a class that\u0027s intended to be subclassed seems like a bad idea.\n\n\"Due to the risk of slicing, prefer to avoid providing a public assignment operator or copy/move constructor for a class that\u0027s intended to be derived from\"\n    -- https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types\n\nWhat\u0027s the use case?",
+      "revId": "af80725458ec486b3176b8b1599d287a77425ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
