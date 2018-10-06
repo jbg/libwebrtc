@@ -70,6 +70,24 @@
       "revId": "af80725458ec486b3176b8b1599d287a77425ac4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "361eac9e_89788287",
+        "filename": "rtc_base/experiments/field_trial_parser.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-06T14:39:57Z",
+      "side": 1,
+      "message": "Copy constructor and copy assignment are implicitly declared unless something prevents that (user-declared move constructor, for example). Example: https://godbolt.org/z/8qIb_f\n\nSo for a stateless superclass, you don\u0027t have to do anything, since you won\u0027t be doing any of the things that would prevent copy constructor and copy assignment from being implicitly declared.",
+      "parentUuid": "54915968_4a5ffd20",
+      "revId": "af80725458ec486b3176b8b1599d287a77425ac4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
