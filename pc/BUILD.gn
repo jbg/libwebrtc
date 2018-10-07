@@ -321,6 +321,7 @@ if (rtc_include_tests) {
       "../logging:rtc_event_log_api",
       "../media:rtc_media_base",
       "../media:rtc_media_tests_utils",
+      "../media_transport:fake_media_transport",
       "../modules/rtp_rtcp:rtp_rtcp_format",
       "../p2p:p2p_test_utils",
       "../p2p:rtc_p2p",
