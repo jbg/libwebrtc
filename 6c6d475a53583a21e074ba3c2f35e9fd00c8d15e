@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "474fb359_b48bd90e",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-08T08:49:26Z",
+      "side": 1,
+      "message": "Nit, At this point, you could just declare a CritScope here and not add a new scope for it. The only thing not in there are some local variables and on small loop above.",
+      "range": {
+        "startLine": 154,
+        "startChar": 1,
+        "endLine": 154,
+        "endChar": 3
+      },
+      "revId": "6c6d475a53583a21e074ba3c2f35e9fd00c8d15e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
