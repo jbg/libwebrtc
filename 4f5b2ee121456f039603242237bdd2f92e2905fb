@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a576b9bb_b8ea2e9c",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-08T09:00:06Z",
+      "side": 1,
+      "message": "nit: Upper-case first letter (Remove), same for all your TODO comments.",
+      "revId": "4f5b2ee121456f039603242237bdd2f92e2905fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

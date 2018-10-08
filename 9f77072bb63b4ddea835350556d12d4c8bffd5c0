@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "51cad22f_5b886a6c",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-08T09:00:06Z",
+      "side": 1,
+      "message": "Please do :)",
+      "parentUuid": "9f207e8e_de83c93d",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f49dad7a_938e73e5",
         "filename": "api/transport/enums.h",
         "patchSetId": 7
@@ -299,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "1d40f624_31cd7c6a",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-08T09:00:06Z",
+      "side": 1,
+      "message": "OK, I think this is follow-up work that fits under bugs.webrtc.org/9308. When we get everything right we should have test coverage for all the edge-cases too, but I don\u0027t expect that from this CL.",
+      "parentUuid": "d8299b3e_55a72956",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77a4c59c_43e9b721",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 7
@@ -398,6 +434,24 @@
       "side": 1,
       "message": "Things get a bit confusing because of the FakePortAllocator. It has a \"pooled session\" and we end up in this branch, which marks gathering as complete: https://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/p2ptransportchannel.cc?rcl\u003d343f4144bee5ddde5efec1e1217403b444386cb4\u0026l\u003d715 . I\u0027d like to write some dedicated tests, but am unsure about the correct set of things to mock.",
       "parentUuid": "eb5121ef_f6181c10",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab70ecda_8195563f",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-08T09:00:06Z",
+      "side": 1,
+      "message": "Let\u0027s revisit in follow-up CLs :) This CL is in the right direction regardless.",
+      "parentUuid": "e211f3ae_1c4b5c55",
       "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
