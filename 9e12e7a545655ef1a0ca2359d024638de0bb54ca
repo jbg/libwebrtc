@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36bc7a03_73c27df8",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-08T00:45:41Z",
+      "side": 1,
+      "message": "this makes people unhappy :-) (rightfully so). I moved EncodedImage to separate target, and then Niels moved it entirely to api/.\nYou need to wait for this CL: https://webrtc-review.googlesource.com/c/src/+/104002 to land",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 35
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
