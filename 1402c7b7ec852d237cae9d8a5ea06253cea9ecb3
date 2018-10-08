@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05ca7af0_3d5f7cab",
+        "filename": "api/test/simulated_network.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-08T08:30:09Z",
+      "side": 1,
+      "message": "Add a TODO(bugs.webrtc.org/9630) about removing the alias?",
+      "revId": "1402c7b7ec852d237cae9d8a5ea06253cea9ecb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33670bde_36738c2b",
+        "filename": "api/test/simulated_network.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-08T08:30:09Z",
+      "side": 1,
+      "message": "Please use `using` in new code:\n\n  using DefaultNetworkSimulationConfig \u003d BuiltInNetworkBehaviorConfig;\n\nThe style guide says\n\n  \"In new code, `using` is preferable to `typedef`, because it provides a more consistent syntax with the rest of C++ and works with templates.\"\n  --https://google.github.io/styleguide/cppguide.html#Aliases\n\nTip of the Week #81 has more details if you\u0027re interested.",
+      "revId": "1402c7b7ec852d237cae9d8a5ea06253cea9ecb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
