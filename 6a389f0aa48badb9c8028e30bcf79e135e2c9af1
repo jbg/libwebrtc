@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4b6a4825_d14ab15e",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T08:43:37Z",
+      "side": 1,
+      "message": "Done. Good catch, thanks!",
+      "parentUuid": "17701170_ab60b4d4",
+      "range": {
+        "startLine": 198,
+        "startChar": 2,
+        "endLine": 198,
+        "endChar": 3
+      },
+      "revId": "6a389f0aa48badb9c8028e30bcf79e135e2c9af1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f10a7b02_9d29afdd",
         "filename": "test/fake_encoder.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-08T08:24:40Z",
       "side": 1,
       "message": "Nit: I think it\u0027s safe to use already defined crit_sect_.",
+      "range": {
+        "startLine": 75,
+        "startChar": 23,
+        "endLine": 75,
+        "endChar": 39
+      },
+      "revId": "6a389f0aa48badb9c8028e30bcf79e135e2c9af1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7dba79c_c34e2c49",
+        "filename": "test/fake_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T08:43:37Z",
+      "side": 1,
+      "message": "It is safe but less efficient: we end up waiting even for non-overlapping access.\nI don\u0027t know if it\u0027s noticeable, though.",
+      "parentUuid": "f10a7b02_9d29afdd",
       "range": {
         "startLine": 75,
         "startChar": 23,
