@@ -16,6 +16,24 @@
       "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b4ef516_9f921e83",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-08T14:51:20Z",
+      "side": 1,
+      "message": "It is already transmitted by different means. Putting it inside of the encoded blob would be redundant, wasteful, and, worst of all, redundant.",
+      "parentUuid": "c3147f99_a825e107",
+      "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
