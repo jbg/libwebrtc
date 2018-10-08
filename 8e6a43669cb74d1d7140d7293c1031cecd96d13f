@@ -34,6 +34,24 @@
       "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a77841ce_b522ddcb",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T15:02:26Z",
+      "side": 1,
+      "message": "Thanks for the answer! So I guess:\n* It would not significantly simplify the code to remove the parallel transmission of this number.\n* There is no use-case when we would have to analyze a lost binary.\n\nNB: All your answers should be added in some way in the documentation. Often, the \u0027why\u0027 is missing!",
+      "parentUuid": "6b4ef516_9f921e83",
+      "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
