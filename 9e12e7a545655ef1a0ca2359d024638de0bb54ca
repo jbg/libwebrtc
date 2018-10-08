@@ -319,6 +319,30 @@
     },
     {
       "key": {
+        "uuid": "0ec8b380_4243580e",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-08T18:40:43Z",
+      "side": 1,
+      "message": "I would have liked it if all work inside MediaTransport could be done on its own task queue, and the hop over to network_thread_ happened outside. WDYT?",
+      "parentUuid": "1550a3b9_54a3036f",
+      "range": {
+        "startLine": 936,
+        "startChar": 49,
+        "endLine": 936,
+        "endChar": 64
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ab5c24b_fc0e02fc",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 14
