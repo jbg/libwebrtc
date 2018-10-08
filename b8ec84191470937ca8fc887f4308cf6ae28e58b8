@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c1f74de_38030af2",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T12:04:01Z",
+      "side": 1,
+      "message": "[cosmetic] Why not append or +\u003d ?",
+      "revId": "b8ec84191470937ca8fc887f4308cf6ae28e58b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

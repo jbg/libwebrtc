@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c957bc8_4b717b5a",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T12:04:01Z",
+      "side": 1,
+      "message": "[question] Why this cast?",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0053739_81fdbea1",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T12:04:01Z",
+      "side": 1,
+      "message": "[cosmetic] What about \"for (const auto\u0026 blob: blobs)\"?",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a41e31b_b3b2f98b",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T12:04:01Z",
+      "side": 1,
+      "message": "Idem, why not append?",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3358ffb_a67232a2",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T12:04:01Z",
+      "side": 1,
+      "message": "max_size_varint +\u003d 0xff; is fine in my book, and should please MSVC compiler.",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
