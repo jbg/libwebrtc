@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06ade5e4_c5924be4",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:50:26Z",
+      "side": 1,
+      "message": "Please add link to WebRTC-PC where this is defined.",
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
