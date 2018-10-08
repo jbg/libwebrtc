@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "67c07447_4f5998e3",
+        "filename": "api/audio/echo_canceller3_config.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fcac41e_8b2bc0ea",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49e5abde_c8b87208",
         "filename": "modules/audio_processing/aec3/block_processor2.cc",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c06245fd_ccf85bca",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49e5abde_c8b87208",
+      "range": {
+        "startLine": 18,
+        "startChar": 19,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3ed6a90e_d69f6c1b",
+        "filename": "modules/audio_processing/aec3/block_processor2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bc7b3d7_b12f76b1",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 36
+      },
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04f5097f_580e9f96",
         "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
         "patchSetId": 9
@@ -82,6 +154,24 @@
       "writtenOn": "2018-09-24T05:29:21Z",
       "side": 1,
       "message": "Maybe move this into a method to simplify the initializer list?",
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18429069_b517dbbb",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "If you don\u0027t mind, I think I\u0027m going to leave it as is. Then clean it up when the old render buffering is removed.",
+      "parentUuid": "04f5097f_580e9f96",
       "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "17e2878f_67567562",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "671d1fbe_b168613f",
+      "range": {
+        "startLine": 26,
+        "startChar": 19,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f75cc318_64bd313d",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 9
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "52c3510e_37ce92ac",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f75cc318_64bd313d",
+      "range": {
+        "startLine": 103,
+        "startChar": 26,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3d68101_2583e397",
         "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
         "patchSetId": 9
@@ -148,6 +286,24 @@
       "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6de0f24_f4ba173a",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-08T11:12:13Z",
+      "side": 1,
+      "message": "Good point. Thanks.",
+      "parentUuid": "a3d68101_2583e397",
+      "revId": "184ed4a765ecb58e2d47ff33d9ae887c802e0972",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
