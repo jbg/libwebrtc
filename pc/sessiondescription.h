@@ -118,13 +118,6 @@ class MediaContentDescription {
     rtp_header_extensions_.push_back(ext);
     rtp_header_extensions_set_ = true;
   }
-  void AddRtpHeaderExtension(const cricket::RtpHeaderExtension& ext) {
-    webrtc::RtpExtension webrtc_extension;
-    webrtc_extension.uri = ext.uri;
-    webrtc_extension.id = ext.id;
-    rtp_header_extensions_.push_back(webrtc_extension);
-    rtp_header_extensions_set_ = true;
-  }
   void ClearRtpHeaderExtensions() {
     rtp_header_extensions_.clear();
     rtp_header_extensions_set_ = true;

@@ -745,16 +745,6 @@ class FakeBaseEngine {
     capabilities_.header_extensions = extensions;
   }
 
-  void set_rtp_header_extensions(
-      const std::vector<cricket::RtpHeaderExtension>& extensions) {
-    for (const cricket::RtpHeaderExtension& ext : extensions) {
-      RtpExtension webrtc_ext;
-      webrtc_ext.uri = ext.uri;
-      webrtc_ext.id = ext.id;
-      capabilities_.header_extensions.push_back(webrtc_ext);
-    }
-  }
-
  protected:
   // Flag used by optionsmessagehandler_unittest for checking whether any
   // relevant setting has been updated.
@@ -898,15 +888,6 @@ class FakeMediaEngine
   }
   void SetVideoRtpHeaderExtensions(
       const std::vector<RtpExtension>& extensions) {
-    video().set_rtp_header_extensions(extensions);
-  }
-
-  void SetAudioRtpHeaderExtensions(
-      const std::vector<cricket::RtpHeaderExtension>& extensions) {
-    voice().set_rtp_header_extensions(extensions);
-  }
-  void SetVideoRtpHeaderExtensions(
-      const std::vector<cricket::RtpHeaderExtension>& extensions) {
     video().set_rtp_header_extensions(extensions);
   }
 
