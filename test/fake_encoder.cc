@@ -51,12 +51,17 @@ void FakeEncoder::SetMaxBitrate(int max_kbps) {
 int32_t FakeEncoder::InitEncode(const VideoCodec* config,
                                 int32_t number_of_cores,
                                 size_t max_payload_size) {
-  rtc::CritScope cs(&crit_sect_);
-  config_ = *config;
-  target_bitrate_.SetBitrate(0, 0, config_.startBitrate * 1000);
-  configured_input_framerate_ = config_.maxFramerate;
-  pending_keyframe_ = true;
-  last_frame_info_ = FrameInfo();
+  {
+    rtc::CritScope cs(&crit_sect_);
+    config_ = *config;
+    target_bitrate_.SetBitrate(0, 0, config_.startBitrate * 1000);
+    configured_input_framerate_ = config_.maxFramerate;
+    pending_keyframe_ = true;
+  }
+  {
+    rtc::CritScope cs(&frame_crit_sect_);
+    last_frame_info_ = FrameInfo();
+  }
   return 0;
 }
 
@@ -146,19 +151,23 @@ FakeEncoder::FrameInfo FakeEncoder::NextFrame(
     }
   }
 
-  for (uint8_t i = 0; i < num_simulcast_streams; ++i) {
-    if (target_bitrate.GetBitrate(i, 0) > 0) {
-      int temporal_id = last_frame_info_.layers.size() > i
-                            ? ++last_frame_info_.layers[i].temporal_id %
-                                  simulcast_streams[i].numberOfTemporalLayers
-                            : 0;
-      frame_info.layers.emplace_back(0, temporal_id);
+  {
+    // TODO(yvesg) Use a shared lock instead
+    rtc::CritScope cs(&frame_crit_sect_);
+    for (uint8_t i = 0; i < num_simulcast_streams; ++i) {
+      if (target_bitrate.GetBitrate(i, 0) > 0) {
+        int temporal_id = last_frame_info_.layers.size() > i
+                              ? ++last_frame_info_.layers[i].temporal_id %
+                                    simulcast_streams[i].numberOfTemporalLayers
+                              : 0;
+        frame_info.layers.emplace_back(0, temporal_id);
+      }
     }
-  }
 
-  if (last_frame_info_.layers.size() < frame_info.layers.size()) {
-    // A new keyframe is needed since a new layer will be added.
-    frame_info.keyframe = true;
+      if (last_frame_info_.layers.size() < frame_info.layers.size()) {
+      // A new keyframe is needed since a new layer will be added.
+      frame_info.keyframe = true;
+    }
   }
 
   for (uint8_t i = 0; i < frame_info.layers.size(); ++i) {
@@ -186,7 +195,10 @@ FakeEncoder::FrameInfo FakeEncoder::NextFrame(
       }
     }
   }
-  last_frame_info_ = frame_info;
+  {
+    rtc::CritScope cs(&frame_crit_sect_);
+    last_frame_info_ = frame_info;
+  }
   return frame_info;
 }
 
