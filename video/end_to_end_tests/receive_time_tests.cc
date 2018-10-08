@@ -136,12 +136,12 @@ TEST_F(ReceiveTimeEndToEndTest, ReceiveTimeJumpsWithoutFieldTrial) {
   EXPECT_TRUE(test.JumpInReportedTimes());
 }
 
-TEST_F(ReceiveTimeEndToEndTest, ReceiveTimeSteadyWithFieldTrial) {
+TEST_F(ReceiveTimeEndToEndTest, DISABLED_ReceiveTimeSteadyWithFieldTrial) {
   // Since all the added jumps by the tester are outside the interval of -100 ms
   // to 1000 ms, they should all be filtered by the field trial below, and no
   // jumps should be detected.
   test::ScopedFieldTrials field_trial(
-      "WebRTC-BweReceiveTimeCorrection/Enabled,-100,1000/");
+      "WebRTC-Bwe-ReceiveTimeFix/Enabled,maxrep:100ms,istall:1ms/");
   ReportedReceiveTimeTester test;
   RunBaseTest(&test);
   EXPECT_FALSE(test.JumpInReportedTimes());
