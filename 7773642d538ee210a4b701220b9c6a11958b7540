@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b280283d_b4ef4d02",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-10-08T09:44:53Z",
+      "side": 1,
+      "message": "Should this really be the max? It adds any delay introduced by the receiver which we are not really after here.",
+      "range": {
+        "startLine": 360,
+        "startChar": 45,
+        "endLine": 360,
+        "endChar": 62
+      },
+      "revId": "7773642d538ee210a4b701220b9c6a11958b7540",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
