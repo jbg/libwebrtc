@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b474acb3_9bfc824a",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T14:44:07Z",
+      "side": 1,
+      "message": "Why not use the real time clock as reference here? Seems like it would be more reliable. Also, you\u0027d only have to save the first_safe_time_us_ value, and can later safely use safe_time_us-first_safe_time_us_ rather than having to increment.",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 32
+      },
+      "revId": "15757006c3849a76fce559ffd46b1891be054c7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddabfe24_4e26aa53",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T14:44:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow the naming, maybe it could be named after what it does rather than where it comes from? just something like static_clock_offset_us_?\n\nAlso, shouldn\u0027t the offset be applied here as well?",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "15757006c3849a76fce559ffd46b1891be054c7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5057a112_31baf1e2",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T14:44:07Z",
+      "side": 1,
+      "message": "It\u0027s not very easy to follow this since the corrected_time is based on three underlying variables and a conditional. Would it be possible to rewrite this to something similar to:\n\"system_delta_us \u003e safe_delta_us  + packet_time_delta_us\"? (which I think is equivalent except for the max::)",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "15757006c3849a76fce559ffd46b1891be054c7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "173c3b4a_aa6b73c4",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T14:44:07Z",
+      "side": 1,
+      "message": "We codify this value in several places. Is there a way to simplify to avoid having to consider all possible combinations? For instance by using else if?",
+      "range": {
+        "startLine": 83,
+        "startChar": 6,
+        "endLine": 83,
+        "endChar": 23
+      },
+      "revId": "15757006c3849a76fce559ffd46b1891be054c7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99154619_871f152b",
+        "filename": "call/receive_time_calculator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T14:44:07Z",
+      "side": 1,
+      "message": "initial_stall_threshold",
+      "range": {
+        "startLine": 26,
+        "startChar": 33,
+        "endLine": 26,
+        "endChar": 53
+      },
+      "revId": "15757006c3849a76fce559ffd46b1891be054c7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
