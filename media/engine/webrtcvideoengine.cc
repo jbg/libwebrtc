@@ -1439,6 +1439,32 @@ void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
                           kVideoRtpBufferSize);
 }
 
+void WebRtcVideoChannel::SetFrameDecryptor(
+    uint32_t ssrc,
+    rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
+  rtc::CritScope stream_lock(&stream_crit_);
+  auto matching_stream = receive_streams_.find(ssrc);
+  if (matching_stream != receive_streams_.end()) {
+    matching_stream->second->SetFrameDecryptor(frame_decryptor);
+  }
+  // Handle attaching a frame decryptor to unsignaled streams.
+  if (ssrc == 0) {
+    unsignaled_frame_decryptor_ = frame_decryptor;
+  }
+}
+
+void WebRtcVideoChannel::SetFrameEncryptor(
+    uint32_t ssrc,
+    rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor) {
+  rtc::CritScope stream_lock(&stream_crit_);
+  auto matching_stream = send_streams_.find(ssrc);
+  if (matching_stream != send_streams_.end()) {
+    matching_stream->second->SetFrameEncryptor(frame_encryptor);
+  } else {
+    RTC_LOG(LS_ERROR) << "No stream found to attach frame encryptor";
+  }
+}
+
 absl::optional<uint32_t> WebRtcVideoChannel::GetDefaultReceiveStreamSsrc() {
   rtc::CritScope stream_lock(&stream_crit_);
   absl::optional<uint32_t> ssrc;
@@ -1797,6 +1823,15 @@ webrtc::RtpParameters
 WebRtcVideoChannel::WebRtcVideoSendStream::GetRtpParameters() const {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   return rtp_parameters_;
+}
+
+void WebRtcVideoChannel::WebRtcVideoSendStream::SetFrameEncryptor(
+    rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  parameters_.config.frame_encryptor = frame_encryptor;
+  if (stream_) {
+    RecreateWebRtcStream();
+  }
 }
 
 void WebRtcVideoChannel::WebRtcVideoSendStream::UpdateSendState() {
@@ -2370,6 +2405,14 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::OnFrame(
 
 bool WebRtcVideoChannel::WebRtcVideoReceiveStream::IsDefaultStream() const {
   return default_stream_;
+}
+
+void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFrameDecryptor(
+    rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
+  config_.frame_decryptor = frame_decryptor;
+  if (stream_) {
+    RecreateWebRtcVideoStream();
+  }
 }
 
 void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetSink(

@@ -35,6 +35,7 @@ namespace webrtc {
 
 class CallStats;
 class CallStatsObserver;
+class FrameEncryptorInterface;
 class TargetTransferRateObserver;
 class Transport;
 class Module;
@@ -101,7 +102,8 @@ class RtpTransportControllerSendInterface {
       Transport* send_transport,
       const RtpSenderObservers& observers,
       RtcEventLog* event_log,
-      std::unique_ptr<FecController> fec_controller) = 0;
+      std::unique_ptr<FecController> fec_controller,
+      FrameEncryptorInterface* frame_encryptor) = 0;
   virtual void DestroyRtpVideoSender(
       RtpVideoSenderInterface* rtp_video_sender) = 0;
 

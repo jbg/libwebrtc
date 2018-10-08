@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/crypto/frameencryptorinterface.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
 #include "modules/rtp_rtcp/source/rtp_format_video_generic.h"
@@ -115,7 +116,8 @@ bool MinimizeDescriptor(const RTPVideoHeader& full, RTPVideoHeader* minimized) {
 
 RTPSenderVideo::RTPSenderVideo(Clock* clock,
                                RTPSender* rtp_sender,
-                               FlexfecSender* flexfec_sender)
+                               FlexfecSender* flexfec_sender,
+                               FrameEncryptorInterface* frame_encryptor)
     : rtp_sender_(rtp_sender),
       clock_(clock),
       video_type_(kVideoCodecGeneric),
@@ -128,7 +130,8 @@ RTPSenderVideo::RTPSenderVideo(Clock* clock,
       delta_fec_params_{0, 1, kFecMaskRandom},
       key_fec_params_{0, 1, kFecMaskRandom},
       fec_bitrate_(1000, RateStatistics::kBpsScale),
-      video_bitrate_(1000, RateStatistics::kBpsScale) {}
+      video_bitrate_(1000, RateStatistics::kBpsScale),
+      frame_encryptor_(frame_encryptor) {}
 
 RTPSenderVideo::~RTPSenderVideo() {}
 
@@ -424,9 +427,38 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
 
   RTPVideoHeader minimized_video_header;
   const RTPVideoHeader* packetize_video_header = video_header;
-  if (first_packet->HasExtension<RtpGenericFrameDescriptorExtension>() &&
-      MinimizeDescriptor(*video_header, &minimized_video_header)) {
-    packetize_video_header = &minimized_video_header;
+  rtc::ArrayView<const uint8_t> generic_descriptor_raw =
+      first_packet->GetRawExtension<RtpGenericFrameDescriptorExtension>();
+  if (!generic_descriptor_raw.empty()) {
+    if (MinimizeDescriptor(*video_header, &minimized_video_header)) {
+      packetize_video_header = &minimized_video_header;
+    }
+  }
+
+  // TODO(benwright@webrtc.org) - Allocate enough to always encrypt inline.
+  rtc::Buffer encrypted_video_payload;
+  if (frame_encryptor_ != nullptr) {
+    if (generic_descriptor_raw.empty()) {
+      return false;
+    }
+
+    const size_t max_ciphertext_size =
+        frame_encryptor_->GetMaxCiphertextByteSize(cricket::MEDIA_TYPE_VIDEO,
+                                                   payload_size);
+    encrypted_video_payload.SetSize(max_ciphertext_size);
+
+    size_t bytes_written = 0;
+    if (frame_encryptor_->Encrypt(
+            cricket::MEDIA_TYPE_VIDEO, first_packet->Ssrc(),
+            generic_descriptor_raw,
+            rtc::MakeArrayView(payload_data, payload_size),
+            encrypted_video_payload, &bytes_written) != 0) {
+      return false;
+    }
+
+    encrypted_video_payload.SetSize(bytes_written);
+    payload_data = encrypted_video_payload.data();
+    payload_size = encrypted_video_payload.size();
   }
 
   std::unique_ptr<RtpPacketizer> packetizer = RtpPacketizer::Create(

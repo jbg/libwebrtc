@@ -29,6 +29,8 @@
 
 namespace webrtc {
 
+class FrameEncryptorInterface;
+
 class VideoSendStream {
  public:
   struct StreamStats {
@@ -142,6 +144,11 @@ class VideoSendStream {
 
     // Track ID as specified during track creation.
     std::string track_id;
+
+    // An optional custom frame encryptor that allows the entire frame to be
+    // encrypted in whatever way the caller choses. This is not required by
+    // default.
+    rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor;
 
    private:
     // Access to the copy constructor is private to force use of the Copy()
