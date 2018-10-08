@@ -93,6 +93,30 @@
       "revId": "6a389f0aa48badb9c8028e30bcf79e135e2c9af1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5df655f7_01746bd4",
+        "filename": "test/fake_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T09:35:14Z",
+      "side": 1,
+      "message": "Done.\nCrude profiling (this test only) shows no difference.",
+      "parentUuid": "f7dba79c_c34e2c49",
+      "range": {
+        "startLine": 75,
+        "startChar": 23,
+        "endLine": 75,
+        "endChar": 39
+      },
+      "revId": "6a389f0aa48badb9c8028e30bcf79e135e2c9af1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
