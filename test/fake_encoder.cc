@@ -51,12 +51,17 @@ void FakeEncoder::SetMaxBitrate(int max_kbps) {
 int32_t FakeEncoder::InitEncode(const VideoCodec* config,
                                 int32_t number_of_cores,
                                 size_t max_payload_size) {
-  rtc::CritScope cs(&crit_sect_);
-  config_ = *config;
-  target_bitrate_.SetBitrate(0, 0, config_.startBitrate * 1000);
-  configured_input_framerate_ = config_.maxFramerate;
-  pending_keyframe_ = true;
-  last_frame_info_ = FrameInfo();
+  {
+    rtc::CritScope cs(&crit_sect_);
+    config_ = *config;
+    target_bitrate_.SetBitrate(0, 0, config_.startBitrate * 1000);
+    configured_input_framerate_ = config_.maxFramerate;
+    pending_keyframe_ = true;
+  }
+  {
+    rtc::CritScope cs(&frame_crit_sect_);
+    last_frame_info_ = FrameInfo();
+  }
   return 0;
 }
 
@@ -146,6 +151,7 @@ FakeEncoder::FrameInfo FakeEncoder::NextFrame(
     }
   }
 
+  rtc::CritScope cs(&frame_crit_sect_);
   for (uint8_t i = 0; i < num_simulcast_streams; ++i) {
     if (target_bitrate.GetBitrate(i, 0) > 0) {
       int temporal_id = last_frame_info_.layers.size() > i
