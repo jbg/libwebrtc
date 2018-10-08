@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b1824cb_82ffdf50",
+        "filename": "api/test/simulated_network.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T09:29:07Z",
+      "side": 1,
+      "message": "You might want to revisit the wording in this comment to reflect the new naming.",
+      "range": {
+        "startLine": 45,
+        "startChar": 37,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "6f47544ceb55e9559b655d3ef11e294f23d88216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
