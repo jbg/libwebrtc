@@ -1238,6 +1238,7 @@ if (rtc_enable_protobuf) {
       "../../rtc_base:rtc_base_approved",
       "../rtp_rtcp",
       "../rtp_rtcp:rtp_rtcp_format",
+      "//third_party/abseil-cpp/absl/types:optional",
     ]
     public_deps = [
       "../../logging:rtc_event_log_proto",

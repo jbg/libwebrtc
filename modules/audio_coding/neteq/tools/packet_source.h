@@ -32,8 +32,6 @@ class PacketSource {
 
   virtual void FilterOutPayloadType(uint8_t payload_type);
 
-  virtual void SelectSsrc(uint32_t ssrc);
-
  protected:
   std::bitset<128> filter_;  // Payload type is 7 bits in the RFC.
   // If SSRC filtering discards all packet that do not match the SSRC.

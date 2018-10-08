@@ -13,94 +13,107 @@
 #include <string.h>
 #include <iostream>
 #include <limits>
+#include <utility>
 
+#include "logging/rtc_event_log/rtc_event_processor.h"
 #include "modules/audio_coding/neteq/tools/packet.h"
-#include "modules/rtp_rtcp/include/rtp_header_parser.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
 namespace test {
 
-RtcEventLogSource* RtcEventLogSource::Create(const std::string& file_name) {
+namespace {
+bool ShouldSkipStream(ParsedRtcEventLogNew::MediaType media_type,
+                      uint32_t ssrc,
+                      absl::optional<uint32_t> ssrc_filter) {
+  if (media_type != ParsedRtcEventLogNew::MediaType::AUDIO)
+    return true;
+  if (ssrc_filter.has_value() && ssrc != *ssrc_filter)
+    return true;
+  return false;
+}
+}  // namespace
+
+RtcEventLogSource* RtcEventLogSource::Create(
+    const std::string& file_name,
+    absl::optional<uint32_t> ssrc_filter) {
   RtcEventLogSource* source = new RtcEventLogSource();
-  RTC_CHECK(source->OpenFile(file_name));
+  RTC_CHECK(source->OpenFile(file_name, ssrc_filter));
   return source;
 }
 
 RtcEventLogSource::~RtcEventLogSource() {}
 
-bool RtcEventLogSource::RegisterRtpHeaderExtension(RTPExtensionType type,
-                                                   uint8_t id) {
-  RTC_CHECK(parser_.get());
-  return parser_->RegisterRtpHeaderExtension(type, id);
-}
-
 std::unique_ptr<Packet> RtcEventLogSource::NextPacket() {
-  for (; rtp_packet_index_ < parsed_stream_.GetNumberOfEvents();
-       rtp_packet_index_++) {
-    if (parsed_stream_.GetEventType(rtp_packet_index_) ==
-        ParsedRtcEventLogNew::EventType::RTP_EVENT) {
-      PacketDirection direction;
-      size_t header_length;
-      size_t packet_length;
-      uint64_t timestamp_us = parsed_stream_.GetTimestamp(rtp_packet_index_);
-      parsed_stream_.GetRtpHeader(rtp_packet_index_, &direction, nullptr,
-                                  &header_length, &packet_length, nullptr);
+  if (rtp_packet_index_ >= rtp_packets_.size())
+    return nullptr;
 
-      if (direction != kIncomingPacket) {
-        continue;
-      }
-
-      uint8_t* packet_header = new uint8_t[header_length];
-      parsed_stream_.GetRtpHeader(rtp_packet_index_, nullptr, packet_header,
-                                  nullptr, nullptr, nullptr);
-      std::unique_ptr<Packet> packet(
-          new Packet(packet_header, header_length, packet_length,
-                     static_cast<double>(timestamp_us) / 1000, *parser_.get()));
-
-      if (!packet->valid_header()) {
-        std::cout << "Warning: Packet with index " << rtp_packet_index_
-                  << " has an invalid header and will be ignored." << std::endl;
-        continue;
-      }
-
-      if (parsed_stream_.GetMediaType(packet->header().ssrc, direction) !=
-          ParsedRtcEventLogNew::MediaType::AUDIO) {
-        continue;
-      }
-
-      // Check if the packet should not be filtered out.
-      if (!filter_.test(packet->header().payloadType) &&
-          !(use_ssrc_filter_ && packet->header().ssrc != ssrc_)) {
-        ++rtp_packet_index_;
-        return packet;
-      }
-    }
-  }
-  return nullptr;
+  std::unique_ptr<Packet> packet = std::move(rtp_packets_[rtp_packet_index_]);
+  RTC_DCHECK(!rtp_packets_[rtp_packet_index_]);
+  ++rtp_packet_index_;
+  return packet;
 }
 
 int64_t RtcEventLogSource::NextAudioOutputEventMs() {
-  while (audio_output_index_ < parsed_stream_.GetNumberOfEvents()) {
-    if (parsed_stream_.GetEventType(audio_output_index_) ==
-        ParsedRtcEventLogNew::EventType::AUDIO_PLAYOUT_EVENT) {
-      LoggedAudioPlayoutEvent playout_event =
-          parsed_stream_.GetAudioPlayout(audio_output_index_);
-      if (!(use_ssrc_filter_ && playout_event.ssrc != ssrc_)) {
-        audio_output_index_++;
-        return playout_event.timestamp_us / 1000;
-      }
-    }
-    audio_output_index_++;
-  }
-  return std::numeric_limits<int64_t>::max();
+  if (audio_output_index_ >= audio_outputs_.size())
+    return std::numeric_limits<int64_t>::max();
+
+  int64_t output_time_ms = audio_outputs_[audio_output_index_];
+  ++audio_output_index_;
+  return output_time_ms;
 }
 
-RtcEventLogSource::RtcEventLogSource()
-    : PacketSource(), parser_(RtpHeaderParser::Create()) {}
+RtcEventLogSource::RtcEventLogSource() : PacketSource() {}
 
-bool RtcEventLogSource::OpenFile(const std::string& file_name) {
-  return parsed_stream_.ParseFile(file_name);
+bool RtcEventLogSource::OpenFile(const std::string& file_name,
+                                 absl::optional<uint32_t> ssrc_filter) {
+  ParsedRtcEventLogNew parsed_stream;
+  if (!parsed_stream.ParseFile(file_name))
+    return false;
+
+  auto handle_rtp = [this](const webrtc::LoggedRtpPacketIncoming& incoming) {
+    if (!filter_.test(incoming.rtp.header.payloadType)) {
+      rtp_packets_.emplace_back(absl::make_unique<Packet>(
+          incoming.rtp.header, incoming.rtp.total_length,
+          incoming.rtp.total_length - incoming.rtp.header_length,
+          incoming.log_time_ms()));
+    }
+  };
+
+  auto handle_audio =
+      [this](const webrtc::LoggedAudioPlayoutEvent& audio_playout) {
+        audio_outputs_.emplace_back(audio_playout.log_time_ms());
+      };
+
+  // This wouldn't be needed if we knew that there was at most one audio stream.
+  webrtc::RtcEventProcessor event_processor;
+  for (const auto& stream : parsed_stream.incoming_rtp_packets_by_ssrc()) {
+    ParsedRtcEventLogNew::MediaType media_type =
+        parsed_stream.GetMediaType(stream.ssrc, webrtc::kIncomingPacket);
+    if (ShouldSkipStream(media_type, stream.ssrc, ssrc_filter)) {
+      continue;
+    }
+    auto rtp_view = absl::make_unique<
+        webrtc::ProcessableEventList<webrtc::LoggedRtpPacketIncoming>>(
+        stream.incoming_packets.begin(), stream.incoming_packets.end(),
+        handle_rtp);
+    event_processor.AddEvents(std::move(rtp_view));
+  }
+
+  for (const auto& audio_stream : parsed_stream.audio_playout_events()) {
+    if (ShouldSkipStream(ParsedRtcEventLogNew::MediaType::AUDIO,
+                         audio_stream.first, ssrc_filter))
+      continue;
+    auto audio_view = absl::make_unique<
+        webrtc::ProcessableEventList<webrtc::LoggedAudioPlayoutEvent>>(
+        audio_stream.second.begin(), audio_stream.second.end(), handle_audio);
+    event_processor.AddEvents(std::move(audio_view));
+  }
+
+  // Fills in rtp_packets_ and audio_outputs_.
+  event_processor.ProcessEventsInOrder();
+
+  return true;
 }
 
 }  // namespace test
