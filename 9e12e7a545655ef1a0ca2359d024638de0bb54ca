@@ -68,6 +68,115 @@
       "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5446f052_e094d3d5",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-08T14:28:18Z",
+      "side": 1,
+      "message": "This empty line should be removed. Or was there supposed to be some code here?",
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29a61b09_abbda6c6",
+        "filename": "pc/jseptransport_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-08T14:28:18Z",
+      "side": 1,
+      "message": "JsepTransport or jseptransport?",
+      "range": {
+        "startLine": 102,
+        "startChar": 34,
+        "endLine": 102,
+        "endChar": 48
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21e4fcf4_b748351c",
+        "filename": "pc/jseptransport_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-08T14:28:18Z",
+      "side": 1,
+      "message": "jseptransportcontroller_unittest",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 54
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13cde7a2_d836a5f8",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-08T14:28:18Z",
+      "side": 1,
+      "message": "Hm, did we discuss somewhere how threading is to be dealt with in the MediaTransport? I think it\u0027s a bit unclear right now. Is it expected that the thread passed to CreateMediaTransport is the one that the MediaTransport should do all work on, or what\u0027s are the expectations?",
+      "range": {
+        "startLine": 936,
+        "startChar": 49,
+        "endLine": 936,
+        "endChar": 64
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ab5c24b_fc0e02fc",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-08T14:28:18Z",
+      "side": 1,
+      "message": "\"is used.\"",
+      "range": {
+        "startLine": 945,
+        "startChar": 73,
+        "endLine": 945,
+        "endChar": 74
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
