@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6065c95b_3d4ba1d6",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Ack. Will wait for your CL.",
+      "parentUuid": "36bc7a03_73c27df8",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 35
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3161267_b4cacc98",
         "filename": "media_transport/BUILD.gn",
         "patchSetId": 14
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2fcc08cf_fb4a15f1",
+        "filename": "media_transport/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "I was wondering myself, but I found this pattern in webrtc\n\napi/test\nmodules/audio_coding/test\n\nEtc.",
+      "parentUuid": "b3161267_b4cacc98",
+      "range": {
+        "startLine": 17,
+        "startChar": 18,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd881546_6b845d60",
         "filename": "media_transport/BUILD.gn",
         "patchSetId": 14
@@ -59,6 +107,30 @@
       "writtenOn": "2018-10-08T01:50:42Z",
       "side": 1,
       "message": "this is being fixed as part of my cl (complex construct body).\n\nhttps://webrtc-review.googlesource.com/c/src/+/103860/19/api/media_transport_interface.cc\n\nI can move it out to a separate change and we can get it checked in quickly.",
+      "range": {
+        "startLine": 25,
+        "startChar": 58,
+        "endLine": 25,
+        "endChar": 77
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "143f074d_9dfe4bd0",
+        "filename": "media_transport/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Ack. Will wait for your CL.",
+      "parentUuid": "cd881546_6b845d60",
       "range": {
         "startLine": 25,
         "startChar": 58,
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "019e5879_2bbbe2bf",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Oops removed.",
+      "parentUuid": "5446f052_e094d3d5",
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29a61b09_abbda6c6",
         "filename": "pc/jseptransport_unittest.cc",
         "patchSetId": 14
@@ -108,6 +198,30 @@
       "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e506ea01_7ba3179c",
+        "filename": "pc/jseptransport_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29a61b09_abbda6c6",
+      "range": {
+        "startLine": 102,
+        "startChar": 34,
+        "endLine": 102,
+        "endChar": 48
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "e59ec927_a0b8f3c1",
+        "filename": "pc/jseptransport_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e4fcf4_b748351c",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 54
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13cde7a2_d836a5f8",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 14
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "1550a3b9_54a3036f",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Good question. network thread is required because ICE calls (i.e. SendPacket) must be on network thread. There is no assumption that other work or any or the media transport callbacks are done on network thread. Yes, we should document all assumptions in media_transport_interface.h (will send out a separate change).",
+      "parentUuid": "13cde7a2_d836a5f8",
+      "range": {
+        "startLine": 936,
+        "startChar": 49,
+        "endLine": 936,
+        "endChar": 64
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ab5c24b_fc0e02fc",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 14
@@ -177,6 +339,30 @@
       "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "756b6fe3_5a19fbf5",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-08T17:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ab5c24b_fc0e02fc",
+      "range": {
+        "startLine": 945,
+        "startChar": 73,
+        "endLine": 945,
+        "endChar": 74
+      },
+      "revId": "9e12e7a545655ef1a0ca2359d024638de0bb54ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
