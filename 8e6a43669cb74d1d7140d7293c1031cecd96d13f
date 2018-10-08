@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3147f99_a825e107",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-08T14:49:37Z",
+      "side": 1,
+      "message": "[question] So, is there a rational for this parameter, as opposed to storing it in encoded binary?",
+      "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
