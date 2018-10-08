@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed77062d_f246b6c5",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "Add spec link.",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b8c77e1_ec54b259",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "Comments",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c934d88_678ab303",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "Comments",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dd5eb5c_3b4400a8",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "Need tests for this",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41ea53e1_a009895b",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3521,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "Need tests for these observer callbacks too.",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "035c9aa4_5f13edf6",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 5324,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "If this is the only caller why not just inline the method?",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68b478c9_c63d3546",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 5328,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-08T20:54:15Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "2c89c71450658e18fd1f91c7e5a89b8b38589032",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
