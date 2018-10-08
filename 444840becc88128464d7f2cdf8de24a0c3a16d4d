@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4a872f7_5358727f",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "It would be nice if we could avoid this dependency to discourage using any direct clock access functions in this file.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c674081_bcad5e18",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "estimated stall time",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f741ba_b429517d",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "[estimated_]stall_time_us?",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 20
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b583c8ff_3c66be26",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "Is this always 64 bit, even on all 32 bit platforms? If not, I suggest:\nstd::max\u003cint64_t\u003e(0, system_time_us - packet_time_us);",
+      "range": {
+        "startLine": 41,
+        "startChar": 36,
+        "endLine": 41,
+        "endChar": 37
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ef7b33a_6f3df16e",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "I\u0027d prefer to s/skip/delta/",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 67
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bcb6599_6e739a5d",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "This constant seems a bit arbitrary, can it be motivated better? Should it be made a constant or even field trial parameter?",
+      "range": {
+        "startLine": 53,
+        "startChar": 39,
+        "endLine": 53,
+        "endChar": 73
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41e2c6c7_4702097d",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "Suggestion:\nrtc::SafeClamp(packet_time_skip_us, 0, 100 * rtc::kNumMicrosecsPerMillisec)",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 35
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d2ba26c_4d8575a9",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "Save as above.",
+      "range": {
+        "startLine": 61,
+        "startChar": 10,
+        "endLine": 61,
+        "endChar": 12
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49cd68b3_594b239b",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-08T10:28:57Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 62,
+        "startChar": 19,
+        "endLine": 62,
+        "endChar": 54
+      },
+      "revId": "444840becc88128464d7f2cdf8de24a0c3a16d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
