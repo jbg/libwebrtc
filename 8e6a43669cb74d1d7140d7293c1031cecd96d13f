@@ -52,6 +52,24 @@
       "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed090ae_1efc7ff6",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-08T15:05:48Z",
+      "side": 1,
+      "message": "The point is that we\u0027re going to have several lists of deltas/blobs but the number of elements is the same in all of them. We only want to send the number once.",
+      "parentUuid": "a77841ce_b522ddcb",
+      "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
