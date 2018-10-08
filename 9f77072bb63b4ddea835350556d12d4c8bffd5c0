@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d889b3a9_3e4289e8",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2a019034_298e0226",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41a6c379_7917092f",
         "filename": "api/transport/enums.h",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-05T09:54:26Z",
       "side": 1,
       "message": "I think we prefer the more strongly typed \"enum class\" nowadays.\nUnlike normal enum you have to use the enum name as a prefix, so you don\u0027t have to include \"..IceTransport..\" as part of the enum value names.\n\nE.g. IceTransportState::kNew",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f207e8e_de83c93d",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "I went with this to be consistent with the peerconnectioninterface.h enums, but I\u0027d be up for changing it.",
+      "parentUuid": "41a6c379_7917092f",
       "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "660c8e7e_ce536ef8",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f49dad7a_938e73e5",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffc32b5c_d9c1a0eb",
         "filename": "p2p/base/icetransportinternal.h",
         "patchSetId": 7
@@ -67,6 +121,24 @@
       "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3e01aec_17023c7b",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ffc32b5c_d9c1a0eb",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "31030150_4825b925",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f0c9b21_492dc487",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a91ec01_1eaa3d6f",
         "filename": "p2p/base/icetransportinternal.h",
         "patchSetId": 7
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "5b234c5c_9a79993c",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a91ec01_1eaa3d6f",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1972c88_b8320ce6",
         "filename": "p2p/base/icetransportinternal.h",
         "patchSetId": 7
@@ -118,6 +226,24 @@
       "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08bf00de_bd8cce58",
+        "filename": "p2p/base/icetransportinternal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1972c88_b8320ce6",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "d8299b3e_55a72956",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m unsure of what a truly correct \"connection is usable\" implementation should look like. active() is used for computing cricket::IceTransportState, and I haven\u0027t been able to figure out how the consent checks currently work.\n\nApart from that the only issue I know of is the disconnect thing.",
+      "parentUuid": "877094d3_9a617dc7",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77a4c59c_43e9b721",
         "filename": "p2p/base/p2ptransportchannel.h",
         "patchSetId": 7
@@ -169,6 +313,24 @@
       "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aad0f42_e63aa1dc",
+        "filename": "p2p/base/p2ptransportchannel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77a4c59c_43e9b721",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "ed441c36_3319ce24",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4144,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ea17b783_a3560fea",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb5121ef_f6181c10",
         "filename": "p2p/base/p2ptransportchannel_unittest.cc",
         "patchSetId": 7
@@ -206,6 +386,24 @@
     },
     {
       "key": {
+        "uuid": "e211f3ae_1c4b5c55",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Things get a bit confusing because of the FakePortAllocator. It has a \"pooled session\" and we end up in this branch, which marks gathering as complete: https://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/p2ptransportchannel.cc?rcl\u003d343f4144bee5ddde5efec1e1217403b444386cb4\u0026l\u003d715 . I\u0027d like to write some dedicated tests, but am unsure about the correct set of things to mock.",
+      "parentUuid": "eb5121ef_f6181c10",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5d3b63c_d65d4527",
         "filename": "p2p/base/p2ptransportchannel_unittest.cc",
         "patchSetId": 7
@@ -217,6 +415,24 @@
       "writtenOn": "2018-10-05T09:54:26Z",
       "side": 1,
       "message": "This happens before \"WaitForConnectionTo\"; any risk of flakes?\n\nAlso - would it be possible to test \"checking\" and \"connected\" states before reaching \"complete\"? May require fakes/mocks?",
+      "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab9ec72d_21ecae6b",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 4150,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-08T08:43:56Z",
+      "side": 1,
+      "message": "Maybe, I\u0027ll move it down.",
+      "parentUuid": "c5d3b63c_d65d4527",
       "revId": "9f77072bb63b4ddea835350556d12d4c8bffd5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
