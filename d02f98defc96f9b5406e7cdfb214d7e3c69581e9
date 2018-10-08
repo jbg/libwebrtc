@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9af72751_25640dff",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-08T12:26:12Z",
+      "side": 1,
+      "message": "The first cast (line #60) is necessary, or else (input[i] \u0026 0x7f) might be less than 64 bits wide. If it ends up 32 bits wide, than shifting by 33 or more is an error.\n\nThe second cast (line #61) is for good measure. I think the MSVC compiler might have complained about it on a previous CL, but I am not sure. Either way, I find it nicer to have both operands of the same type.",
+      "parentUuid": "9c957bc8_4b717b5a",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0053739_81fdbea1",
         "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51b2657f_8f2d117b",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-08T12:26:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0053739_81fdbea1",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3182a722_0be34609",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-08T12:26:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a41e31b_b3b2f98b",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3358ffb_a67232a2",
         "filename": "logging/rtc_event_log/encoder/blob_encoding_unittest.cc",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfa80fe9_a434b809",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-08T12:26:12Z",
+      "side": 1,
+      "message": "Hope you\u0027re right. I\u0027ve uploaded it with this change; let\u0027s see.",
+      "parentUuid": "f3358ffb_a67232a2",
+      "revId": "d02f98defc96f9b5406e7cdfb214d7e3c69581e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
