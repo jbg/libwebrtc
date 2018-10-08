@@ -70,6 +70,24 @@
       "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f76c367a_7cda522e",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-08T16:06:57Z",
+      "side": 1,
+      "message": "I\u0027ve updated the comment.",
+      "parentUuid": "5ed090ae_1efc7ff6",
+      "revId": "8e6a43669cb74d1d7140d7293c1031cecd96d13f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
