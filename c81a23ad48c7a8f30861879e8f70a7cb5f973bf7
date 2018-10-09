@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f56e3c8_dbe58602",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-09T22:05:02Z",
+      "side": 1,
+      "message": "Maybe move up to line 388?",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 24
+      },
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d8087ec_b403ec7c",
+        "filename": "modules/desktop_capture/linux/screen_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-09T22:05:02Z",
+      "side": 1,
+      "message": "How does xdg-desktop-portal handle screen enumeration and selection? When this is built in chromium and there are multiple monitors connected, what would the chromium picker show, a combined desktop as X11 does or multiple screens that user can select from? Here it sounds like xdg-desktop-portal has its own picker? Please help to explain a bit in details.",
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4770d8a_f4114a24",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-09T22:05:02Z",
+      "side": 1,
+      "message": "Sorry for forgetting one question: is there any way to config mouse cursor capturing with pipewire? Chromium/Remoting needs only screen capture, without cursor. So I\u0027d like to know the impact to them.\n\njamiewalch@, please chime in.",
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
