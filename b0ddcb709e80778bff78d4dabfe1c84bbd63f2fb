@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bc5aa9e_cdfd5207",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-10-09T13:01:07Z",
+      "side": 1,
+      "message": "That lacks symmetry! What about the other members?",
+      "revId": "b0ddcb709e80778bff78d4dabfe1c84bbd63f2fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
