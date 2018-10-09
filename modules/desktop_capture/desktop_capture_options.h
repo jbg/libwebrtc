@@ -14,7 +14,7 @@
 #include "rtc_base/scoped_ref_ptr.h"
 
 #if defined(USE_X11)
-#include "modules/desktop_capture/x11/shared_x_display.h"
+#include "modules/desktop_capture/linux/shared_x_display.h"
 #endif
 
 #if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

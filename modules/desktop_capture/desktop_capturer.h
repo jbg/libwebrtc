@@ -134,6 +134,10 @@ class DesktopCapturer {
   static std::unique_ptr<DesktopCapturer> CreateScreenCapturer(
       const DesktopCaptureOptions& options);
 
+#if defined(USE_PIPEWIRE) || defined(USE_X11)
+  static bool IsRunningUnderWayland();
+#endif  // defined(USE_PIPEWIRE) || defined(USE_X11)
+
  protected:
   // CroppingWindowCapturer needs to create raw capturers without wrappers, so
   // the following two functions are protected.
