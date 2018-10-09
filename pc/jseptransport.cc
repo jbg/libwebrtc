@@ -13,7 +13,6 @@
 #include <memory>
 #include <utility>  // for std::pair
 
-#include "absl/memory/memory.h"
 #include "api/candidate.h"
 #include "p2p/base/p2pconstants.h"
 #include "p2p/base/p2ptransportchannel.h"
@@ -94,11 +93,13 @@ JsepTransport::JsepTransport(
     std::unique_ptr<webrtc::SrtpTransport> sdes_transport,
     std::unique_ptr<webrtc::DtlsSrtpTransport> dtls_srtp_transport,
     std::unique_ptr<DtlsTransportInternal> rtp_dtls_transport,
-    std::unique_ptr<DtlsTransportInternal> rtcp_dtls_transport)
+    std::unique_ptr<DtlsTransportInternal> rtcp_dtls_transport,
+    std::unique_ptr<webrtc::MediaTransportInterface> media_transport)
     : mid_(mid),
       local_certificate_(local_certificate),
       rtp_dtls_transport_(std::move(rtp_dtls_transport)),
-      rtcp_dtls_transport_(std::move(rtcp_dtls_transport)) {
+      rtcp_dtls_transport_(std::move(rtcp_dtls_transport)),
+      media_transport_(std::move(media_transport)) {
   RTC_DCHECK(rtp_dtls_transport_);
   if (unencrypted_rtp_transport) {
     RTC_DCHECK(!sdes_transport);
@@ -407,6 +408,7 @@ bool JsepTransport::SetRtcpMux(bool enable,
 
   auto transport = rtp_transport();
   transport->SetRtcpMuxEnabled(rtcp_mux_negotiator_.IsActive());
+
   return ret;
 }
 
@@ -419,14 +421,16 @@ void JsepTransport::ActivateRtcpMux() {
     RTC_DCHECK(!unencrypted_rtp_transport_);
     RTC_DCHECK(!dtls_srtp_transport_);
     sdes_transport_->SetRtcpPacketTransport(nullptr);
-  } else {
+  } else if (dtls_srtp_transport_) {
     RTC_DCHECK(dtls_srtp_transport_);
     RTC_DCHECK(!unencrypted_rtp_transport_);
     RTC_DCHECK(!sdes_transport_);
     dtls_srtp_transport_->SetDtlsTransports(rtp_dtls_transport(),
                                             /*rtcp_dtls_transport=*/nullptr);
   }
+
   rtcp_dtls_transport_.reset();
+
   // Notify the JsepTransportController to update the aggregate states.
   SignalRtcpMuxActive();
 }
