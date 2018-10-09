@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36222d7e_fb3a64ad",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-09T12:09:40Z",
+      "side": 1,
+      "message": "clock_backwards_between_packets_or_stall?",
+      "range": {
+        "startLine": 80,
+        "startChar": 9,
+        "endLine": 80,
+        "endChar": 31
+      },
+      "revId": "03b8400e0740d63d9baa1584c4119f155ff2f17d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7336503e_2e6480d5",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-09T12:09:40Z",
+      "side": 1,
+      "message": "Equivalent to packet_time_delta \u003c safe_time_delta, right? (if safe_time_delta is added)",
+      "range": {
+        "startLine": 81,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 74
+      },
+      "revId": "03b8400e0740d63d9baa1584c4119f155ff2f17d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85ce5de_c876d624",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-09T12:09:40Z",
+      "side": 1,
+      "message": "clock_reset_after_packets_or_stall?",
+      "range": {
+        "startLine": 82,
+        "startChar": 9,
+        "endLine": 82,
+        "endChar": 28
+      },
+      "revId": "03b8400e0740d63d9baa1584c4119f155ff2f17d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679e324a_6692e021",
+        "filename": "call/receive_time_calculator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-09T12:09:40Z",
+      "side": 1,
+      "message": "To me, this reads simpler as: (given above modifications)\n    if(!clock_backwards_between_packets_or_stall){\n      small_reset_during_stall_ \u003d false;      \n    } else if (clock_reset_after_packets_or_stall) {\n      small_reset_during_stall_ \u003d true;\n    } else if (system_time_delta_us \u003e config_.system_stall_threshold-\u003eus()) {\n      small_reset_during_stall_ \u003d false;\n    }",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "03b8400e0740d63d9baa1584c4119f155ff2f17d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
