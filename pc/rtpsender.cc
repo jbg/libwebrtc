@@ -70,11 +70,12 @@ bool PerSenderRtpEncodingParameterHasValue(
 void MaybeAttachFrameEncryptorToMediaChannel(
     const absl::optional<uint32_t> ssrc,
     rtc::Thread* worker_thread,
-    rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor,
+    absl::optional<rtc::scoped_refptr<webrtc::FrameEncryptorInterface>>
+        frame_encryptor,
     cricket::MediaChannel* media_channel) {
-  if (media_channel && ssrc.has_value()) {
-    return worker_thread->Invoke<void>(RTC_FROM_HERE, [&] {
-      media_channel->SetFrameEncryptor(*ssrc, frame_encryptor);
+  if (media_channel && ssrc.has_value() && frame_encryptor.has_value()) {
+    worker_thread->Invoke<void>(RTC_FROM_HERE, [&] {
+      media_channel->SetFrameEncryptor(*ssrc, *frame_encryptor);
     });
   }
 }
@@ -311,7 +312,10 @@ void AudioRtpSender::SetFrameEncryptor(
 
 rtc::scoped_refptr<FrameEncryptorInterface> AudioRtpSender::GetFrameEncryptor()
     const {
-  return frame_encryptor_;
+  if (frame_encryptor_.has_value()) {
+    return *frame_encryptor_;
+  }
+  return nullptr;
 }
 
 void AudioRtpSender::SetSsrc(uint32_t ssrc) {
@@ -563,7 +567,10 @@ void VideoRtpSender::SetFrameEncryptor(
 
 rtc::scoped_refptr<FrameEncryptorInterface> VideoRtpSender::GetFrameEncryptor()
     const {
-  return frame_encryptor_;
+  if (frame_encryptor_.has_value()) {
+    return *frame_encryptor_;
+  }
+  return nullptr;
 }
 
 void VideoRtpSender::SetSsrc(uint32_t ssrc) {

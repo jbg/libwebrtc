@@ -49,11 +49,12 @@ std::vector<rtc::scoped_refptr<MediaStreamInterface>> CreateStreamsFromIds(
 void MaybeAttachFrameDecryptorToMediaChannel(
     const absl::optional<uint32_t>& ssrc,
     rtc::Thread* worker_thread,
-    rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor,
+    absl::optional<rtc::scoped_refptr<webrtc::FrameDecryptorInterface>>
+        frame_decryptor,
     cricket::MediaChannel* media_channel) {
-  if (media_channel && ssrc.has_value()) {
-    return worker_thread->Invoke<void>(RTC_FROM_HERE, [&] {
-      media_channel->SetFrameDecryptor(*ssrc, frame_decryptor);
+  if (media_channel && ssrc.has_value() && frame_decryptor.has_value()) {
+    worker_thread->Invoke<void>(RTC_FROM_HERE, [&] {
+      media_channel->SetFrameDecryptor(*ssrc, *frame_decryptor);
     });
   }
 }
@@ -163,7 +164,10 @@ void AudioRtpReceiver::SetFrameDecryptor(
 
 rtc::scoped_refptr<FrameDecryptorInterface>
 AudioRtpReceiver::GetFrameDecryptor() const {
-  return frame_decryptor_;
+  if (frame_decryptor_.has_value()) {
+    return *frame_decryptor_;
+  }
+  return nullptr;
 }
 
 void AudioRtpReceiver::Stop() {
@@ -354,7 +358,10 @@ void VideoRtpReceiver::SetFrameDecryptor(
 
 rtc::scoped_refptr<FrameDecryptorInterface>
 VideoRtpReceiver::GetFrameDecryptor() const {
-  return frame_decryptor_;
+  if (frame_decryptor_.has_value()) {
+    return *frame_decryptor_;
+  }
+  return nullptr;
 }
 
 void VideoRtpReceiver::Stop() {

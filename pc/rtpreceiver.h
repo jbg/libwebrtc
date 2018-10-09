@@ -158,7 +158,7 @@ class AudioRtpReceiver : public ObserverInterface,
   RtpReceiverObserverInterface* observer_ = nullptr;
   bool received_first_packet_ = false;
   int attachment_id_ = 0;
-  rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor_;
+  absl::optional<rtc::scoped_refptr<FrameDecryptorInterface>> frame_decryptor_;
 };
 
 class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal> {
@@ -261,7 +261,7 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal> {
   RtpReceiverObserverInterface* observer_ = nullptr;
   bool received_first_packet_ = false;
   int attachment_id_ = 0;
-  rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor_;
+  absl::optional<rtc::scoped_refptr<FrameDecryptorInterface>> frame_decryptor_;
 };
 
 }  // namespace webrtc

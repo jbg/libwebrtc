@@ -193,7 +193,7 @@ class AudioRtpSender : public DtmfProviderInterface,
   // cricket::AudioSource.
   std::unique_ptr<LocalAudioSinkAdapter> sink_adapter_;
   int attachment_id_ = 0;
-  rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor_;
+  absl::optional<rtc::scoped_refptr<FrameEncryptorInterface>> frame_encryptor_;
 };
 
 class VideoRtpSender : public ObserverInterface,
@@ -281,7 +281,7 @@ class VideoRtpSender : public ObserverInterface,
       VideoTrackInterface::ContentHint::kNone;
   bool stopped_ = false;
   int attachment_id_ = 0;
-  rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor_;
+  absl::optional<rtc::scoped_refptr<FrameEncryptorInterface>> frame_encryptor_;
 };
 
 }  // namespace webrtc
