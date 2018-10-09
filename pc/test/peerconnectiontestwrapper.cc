@@ -66,7 +66,11 @@ PeerConnectionTestWrapper::PeerConnectionTestWrapper(
       network_thread_(network_thread),
       worker_thread_(worker_thread) {}
 
-PeerConnectionTestWrapper::~PeerConnectionTestWrapper() {}
+PeerConnectionTestWrapper::~PeerConnectionTestWrapper() {
+  if (pc()) {
+    pc()->Close();
+  }
+}
 
 bool PeerConnectionTestWrapper::CreatePc(
     const webrtc::PeerConnectionInterface::RTCConfiguration& config,
