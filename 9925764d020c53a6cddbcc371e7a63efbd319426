@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f8a0cbc2_e1e99284",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-10-09T18:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "409d12c5_26e25c4d",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd545263_bf448299",
         "filename": "pc/jseptransport.cc",
         "patchSetId": 21
@@ -59,6 +83,30 @@
       "writtenOn": "2018-10-09T07:21:55Z",
       "side": 1,
       "message": "It\u0027s not obvious to me that one party gets is_local \u003d\u003d true and the other is_local \u003d\u003d false. Are there any guarantees for that? \n\nWould it make sense to tie the caller/callee distinction to the ice role instead?",
+      "range": {
+        "startLine": 937,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 36
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0d435ee_894731fd",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-10-09T18:40:04Z",
+      "side": 1,
+      "message": "I tried to use ice role and there was a subtle case why it did not work -- Steve, we discussed it, do you remember?",
+      "parentUuid": "3f4934d9_4da150c3",
       "range": {
         "startLine": 937,
         "startChar": 0,
