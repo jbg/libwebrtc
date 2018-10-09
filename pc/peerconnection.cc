@@ -941,6 +941,10 @@ bool PeerConnection::Initialize(
       async_resolver_factory_.get(), config));
   transport_controller_->SignalIceConnectionState.connect(
       this, &PeerConnection::OnTransportControllerConnectionState);
+  transport_controller_->SignalStandardizedIceConnectionState.connect(
+      this, &PeerConnection::SetStandardizedIceConnectionState);
+  transport_controller_->SignalConnectionState.connect(
+      this, &PeerConnection::SetCombinedConnectionState);
   transport_controller_->SignalIceGatheringState.connect(
       this, &PeerConnection::OnTransportControllerGatheringState);
   transport_controller_->SignalIceCandidatesGathered.connect(
@@ -1690,6 +1694,16 @@ PeerConnectionInterface::SignalingState PeerConnection::signaling_state() {
 PeerConnectionInterface::IceConnectionState
 PeerConnection::ice_connection_state() {
   return ice_connection_state_;
+}
+
+PeerConnectionInterface::IceConnectionState
+PeerConnection::standardized_ice_connection_state() {
+  return standardized_ice_connection_state_;
+}
+
+PeerConnectionInterface::PeerConnectionState
+PeerConnection::peer_connection_state() {
+  return connection_state_;
 }
 
 PeerConnectionInterface::IceGatheringState
@@ -3495,6 +3509,28 @@ void PeerConnection::SetIceConnectionState(IceConnectionState new_state) {
   Observer()->OnIceConnectionChange(ice_connection_state_);
 }
 
+void PeerConnection::SetStandardizedIceConnectionState(
+    PeerConnectionInterface::IceConnectionState new_state) {
+  RTC_DCHECK(signaling_thread()->IsCurrent());
+  if (standardized_ice_connection_state_ == new_state)
+    return;
+  if (IsClosed())
+    return;
+  standardized_ice_connection_state_ = new_state;
+  Observer()->OnStandardizedIceConnectionChange(new_state);
+}
+
+void PeerConnection::SetCombinedConnectionState(
+    PeerConnectionInterface::PeerConnectionState new_state) {
+  RTC_DCHECK(signaling_thread()->IsCurrent());
+  if (connection_state_ == new_state)
+    return;
+  if (IsClosed())
+    return;
+  connection_state_ = new_state;
+  Observer()->OnConnectionChange(new_state);
+}
+
 void PeerConnection::OnIceGatheringChange(
     PeerConnectionInterface::IceGatheringState new_state) {
   RTC_DCHECK(signaling_thread()->IsCurrent());
@@ -3542,6 +3578,13 @@ void PeerConnection::ChangeSignalingState(
   if (signaling_state == kClosed) {
     ice_connection_state_ = kIceConnectionClosed;
     Observer()->OnIceConnectionChange(ice_connection_state_);
+    standardized_ice_connection_state_ =
+        PeerConnectionInterface::IceConnectionState::kIceConnectionClosed;
+    Observer()->OnStandardizedIceConnectionChange(
+        standardized_ice_connection_state_);
+    connection_state_ =
+        PeerConnectionInterface::PeerConnectionState::kPeerConnectionClosed;
+    Observer()->OnConnectionChange(connection_state_);
     if (ice_gathering_state_ != kIceGatheringComplete) {
       ice_gathering_state_ = kIceGatheringComplete;
       Observer()->OnIceGatheringChange(ice_gathering_state_);
