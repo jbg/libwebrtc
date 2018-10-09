@@ -289,6 +289,30 @@
     },
     {
       "key": {
+        "uuid": "8d9fe1c7_56bd56fd",
+        "filename": "pc/jseptransportcontroller.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-09T15:13:05Z",
+      "side": 1,
+      "message": "\u003e if you know, can you document what \u0027mid\u0027 is? (m* id?) Media id?\n\nI don\u0027t know the fine details, but I think its related to the sdp \"m-line\". Maybe check with Steve Anton?\n\n\u003e \"If bundling is enabled,\" -- is bundling going to be enabled for our new media transport implementation? (What does it bundle?)\n\nFor RTP, \"bundled\" means that both audio and video share the same RTP session and underlying sockets and port numbers. Only use case for the opposite that I\u0027m aware of is corporate networks with special QoS settings for VoIP, and then it\u0027s desirable to have audio traffic on separate ports.\n\nFor new transports, I think always bundle (all media streams for the same PeerConnection always share the same socket/ice/transport state) makes the most sense.",
+      "parentUuid": "13d3e480_9c517efc",
+      "range": {
+        "startLine": 119,
+        "startChar": 64,
+        "endLine": 119,
+        "endChar": 67
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8a06ea0_b07d964c",
         "filename": "pc/jseptransportcontroller.h",
         "patchSetId": 22
@@ -478,6 +502,30 @@
       "writtenOn": "2018-10-09T14:57:32Z",
       "side": 1,
       "message": "instead of using TestOnly, mellem@ suggested a pattern of making the test class a \u0027friend\u0027 class, which would get access to private members. (forward declare it in the class being tested).\n\nWhat do you think?",
+      "range": {
+        "startLine": 385,
+        "startChar": 32,
+        "endLine": 385,
+        "endChar": 50
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e2ba224_00765752",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-09T15:13:05Z",
+      "side": 1,
+      "message": "For this test, I think it\u0027s ok with the above static_cast + call of a method only available on the test class.\n\nUsing friend declarations is discouraged, but sometimes a reasonable tool. But I think it\u0027s preferable to attach test methods only on a subclass used for testing. And as I said in a previous comment, where the method is defined now, I think the Test_Only_-prefix is unnecessary.\n\nA related pattern that is sometimes useful is to add a protected (and usually inline) accessor method to the production class, and let a test subclass promote the method to public with a using-declaration. I prefer that over friend, but neither is that pretty.",
+      "parentUuid": "5d5fab11_325c892c",
       "range": {
         "startLine": 385,
         "startChar": 32,
