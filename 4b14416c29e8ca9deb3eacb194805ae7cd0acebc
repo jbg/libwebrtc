@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c59a72e_4a19b370",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 0,
+      "message": "nit: \"absl::optional\" is used below. please revert removal.",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "4b14416c29e8ca9deb3eacb194805ae7cd0acebc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

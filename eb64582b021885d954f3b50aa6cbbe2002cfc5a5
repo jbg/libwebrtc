@@ -1,0 +1,492 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47d704dd_76e24cf0",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "unrelated: we should change this to not be const MTEVF\u0026, but rather just MTEVF to allow move semantics.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d7f8c82_572d7935",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "return absl::make_unique;\n\nassigning it to a temporary and then moving temporary feels unnecessary.",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 25
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13b9809f_cdaeb8d4",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "is this check going to be valid for media_transport?",
+      "range": {
+        "startLine": 103,
+        "startChar": 13,
+        "endLine": 103,
+        "endChar": 32
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c0c98d7_faa53e0b",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: churn, please revert.",
+      "range": {
+        "startLine": 410,
+        "startChar": 64,
+        "endLine": 411,
+        "endChar": 0
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1da1380_146108a3",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: blank lines churn, please revert.",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 0
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43c1faef_3f193d6b",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: |media_transport|",
+      "range": {
+        "startLine": 81,
+        "startChar": 14,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f731f23_2f41213d",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "please document that the ptr returned here becomes invalid upon the destruction of JsepTransport.",
+      "range": {
+        "startLine": 166,
+        "startChar": 35,
+        "endLine": 166,
+        "endChar": 50
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed39fbb0_54672ebc",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "what\u0027s the take on repeated comments in constructor and fields? Can constructor refer to the documentation of the field, or can the field can refer to the documentation of the constructor?",
+      "range": {
+        "startLine": 253,
+        "startChar": 45,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fdec3f8_e83e08d9",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: you called it \u0027local\u0027 in the header. I prefer is_local, but either way, let\u0027s just be consistent.",
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eebf0bc_8e2d197d",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: I would keep them in original place, without moving before 925 (so consider keeping them after the \n  if (config_.rtcp_mux_policy !\u003d)",
+      "range": {
+        "startLine": 920,
+        "startChar": 2,
+        "endLine": 922,
+        "endChar": 57
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "735fae4a_77dcbd96",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "what kind of flag? we have RTCCOnfiguration in peer connection, i.e.\nPeerConnectionInterface::RTCConfiguration PeerConnection::GetConfiguration()",
+      "range": {
+        "startLine": 932,
+        "startChar": 20,
+        "endLine": 932,
+        "endChar": 78
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e5457e7_fdba92ca",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "consider:\nstd::move(media_transport_result).value();\n\nThe std::move on |media_transport_result| instead of on the whole expression enables \u0027use after move\u0027 warnings.",
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13d3e480_9c517efc",
+        "filename": "pc/jseptransportcontroller.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "if you know, can you document what \u0027mid\u0027 is? (m* id?) Media id?\n\"If bundling is enabled,\" -- is bundling going to be enabled for our new media transport implementation? (What does it bundle?)\n\nnisse@? anyone?",
+      "range": {
+        "startLine": 119,
+        "startChar": 64,
+        "endLine": 119,
+        "endChar": 67
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8a06ea0_b07d964c",
+        "filename": "pc/jseptransportcontroller.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "pls comment that it allows to differentiate initiator (caller) from answerer (callee).",
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b0e8ea1_6214c26c",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "how about TestMediaTransportCallerSetting ?",
+      "range": {
+        "startLine": 347,
+        "startChar": 36,
+        "endLine": 347,
+        "endChar": 58
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ed4d274_e929e294",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "Does this:\nEXPECT_THAT(media_transport, testing::IsNotNull());\nwork in webrtc\u0027s gtest? :-)\n\nIf yes, consider using it.",
+      "range": {
+        "startLine": 362,
+        "startChar": 2,
+        "endLine": 362,
+        "endChar": 11
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f42850ea_a9430e04",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: ones? (or is onces a thing?)",
+      "range": {
+        "startLine": 365,
+        "startChar": 37,
+        "endLine": 365,
+        "endChar": 42
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00fe638a_dd87b28e",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 366,
+        "startChar": 2,
+        "endLine": 366,
+        "endChar": 11
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d4bd95a_60429339",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "How about TestMediaTransportCalleeSetting ?",
+      "range": {
+        "startLine": 369,
+        "startChar": 36,
+        "endLine": 369,
+        "endChar": 59
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7702f5f4_b54980ef",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "nit: swap the order of the two please. You are passing a reference of fake_media_transport_factory to the config, so the config should be destroyed first.",
+      "range": {
+        "startLine": 370,
+        "startChar": 1,
+        "endLine": 372,
+        "endChar": 0
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08af7e21_a1d0cf68",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 384,
+        "endChar": 11
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d5fab11_325c892c",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-09T14:57:32Z",
+      "side": 1,
+      "message": "instead of using TestOnly, mellem@ suggested a pattern of making the test class a \u0027friend\u0027 class, which would get access to private members. (forward declare it in the class being tested).\n\nWhat do you think?",
+      "range": {
+        "startLine": 385,
+        "startChar": 32,
+        "endLine": 385,
+        "endChar": 50
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
