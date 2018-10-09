@@ -13,6 +13,10 @@
 
 namespace webrtc {
 
+// See https://w3c.github.io/webrtc-pc/#rtcicetransportstate
+// Note that kFailed is currently not a terminal state, and a transport might
+// incorrectly be marked as failed while gathering candidates, see
+// bugs.webrtc.org/8833
 enum class IceTransportState {
   kNew,
   kChecking,

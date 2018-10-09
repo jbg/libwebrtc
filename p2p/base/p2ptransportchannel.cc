@@ -395,6 +395,8 @@ IceTransportState P2PTransportChannel::ComputeState() const {
 // https://www.w3.org/TR/webrtc/#dom-rtcicetransportstate
 // TODO(bugs.webrtc.org/9308): Return IceTransportState::kDisconnected when it
 // makes sense.
+// TODO(bugs.webrtc.org/9218): Avoid prematurely signalling kFailed once we have
+// implemented end-of-candidates signalling.
 webrtc::IceTransportState P2PTransportChannel::ComputeIceTransportState()
     const {
   bool has_connection = false;

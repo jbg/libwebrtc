@@ -176,6 +176,15 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
     kIceGatheringComplete
   };
 
+  enum PeerConnectionState {
+    kPeerConnectionNew,
+    kPeerConnectionConnecting,
+    kPeerConnectionConnected,
+    kPeerConnectionDisconnected,
+    kPeerConnectionFailed,
+    kPeerConnectionClosed,
+  };
+
   enum IceConnectionState {
     kIceConnectionNew,
     kIceConnectionChecking,
@@ -977,6 +986,9 @@ class PeerConnectionInterface : public rtc::RefCountInterface {
   // be just the ICE layer. See: crbug.com/webrtc/6145
   virtual IceConnectionState ice_connection_state() = 0;
 
+  virtual IceConnectionState standardized_ice_connection_state();
+  virtual PeerConnectionState peer_connection_state();
+
   virtual IceGatheringState ice_gathering_state() = 0;
 
   // Starts RtcEventLog using existing file. Takes ownership of |file| and
@@ -1044,6 +1056,12 @@ class PeerConnectionObserver {
   // state, so it may be "failed" if DTLS fails while ICE succeeds.
   virtual void OnIceConnectionChange(
       PeerConnectionInterface::IceConnectionState new_state) = 0;
+
+  virtual void OnStandardizedIceConnectionChange(
+      PeerConnectionInterface::IceConnectionState new_state) {}
+
+  virtual void OnConnectionChange(
+      PeerConnectionInterface::PeerConnectionState new_state) {}
 
   // Called any time the IceGatheringState changes.
   virtual void OnIceGatheringChange(

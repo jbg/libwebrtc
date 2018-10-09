@@ -4141,8 +4141,6 @@ TEST_F(P2PTransportChannelPingTest, TestGetState) {
   PrepareChannel(&ch);
   ch.MaybeStartGathering();
   EXPECT_EQ(IceTransportState::STATE_INIT, ch.GetState());
-  // Gathering complete with no candidates.
-  EXPECT_EQ(webrtc::IceTransportState::kFailed, ch.GetIceTransportState());
   ch.AddRemoteCandidate(CreateUdpCandidate(LOCAL_PORT_TYPE, "1.1.1.1", 1, 100));
   ch.AddRemoteCandidate(CreateUdpCandidate(LOCAL_PORT_TYPE, "2.2.2.2", 2, 1));
   Connection* conn1 = WaitForConnectionTo(&ch, "1.1.1.1", 1, &clock);
