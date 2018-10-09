@@ -214,6 +214,24 @@ int GetBitrateBps(const AudioEncoderOpusConfig& config) {
   return *config.bitrate_bps;
 }
 
+float GetMinPacketLossRate() {
+  constexpr char kPacketLossFieldTrial[] = "WebRTC-Audio-OpusMinPacketLossRate";
+  const bool use_opus_min_packet_loss_rate =
+      webrtc::field_trial::IsEnabled(kPacketLossFieldTrial);
+  if (use_opus_min_packet_loss_rate) {
+    const std::string field_trial_string =
+        webrtc::field_trial::FindFullName(kPacketLossFieldTrial);
+    float value = 0;
+    if (sscanf(field_trial_string.c_str(), "Enabled-%f", &value) == 1) {
+      return value;
+    } else {
+      RTC_LOG(LS_WARNING) << "Invalid parameter for " << kPacketLossFieldTrial
+                          << ", ignored.";
+    }
+  }
+  return 0.0;
+}
+
 }  // namespace
 
 void AudioEncoderOpusImpl::AppendSupportedEncoders(
@@ -401,7 +419,8 @@ AudioEncoderOpusImpl::AudioEncoderOpusImpl(
       adjust_bandwidth_(
           webrtc::field_trial::IsEnabled("WebRTC-AdjustOpusBandwidth")),
       bitrate_changed_(true),
-      packet_loss_rate_(0.0),
+      min_packet_loss_rate_(GetMinPacketLossRate()),
+      packet_loss_rate_(min_packet_loss_rate_),
       inst_(nullptr),
       packet_loss_fraction_smoother_(new PacketLossFractionSmoother()),
       audio_network_adaptor_creator_(audio_network_adaptor_creator),
@@ -740,7 +759,7 @@ void AudioEncoderOpusImpl::SetNumChannelsToEncode(
 void AudioEncoderOpusImpl::SetProjectedPacketLossRate(float fraction) {
   float opt_loss_rate = OptimizePacketLossRate(fraction, packet_loss_rate_);
   if (packet_loss_rate_ != opt_loss_rate) {
-    packet_loss_rate_ = opt_loss_rate;
+    packet_loss_rate_ = std::max(packet_loss_rate_, min_packet_loss_rate_);
     RTC_CHECK_EQ(
         0, WebRtcOpus_SetPacketLossRate(
                inst_, static_cast<int32_t>(packet_loss_rate_ * 100 + .5)));

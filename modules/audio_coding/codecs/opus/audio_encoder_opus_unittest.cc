@@ -446,6 +446,14 @@ TEST(AudioEncoderOpusTest, BitrateBounded) {
   EXPECT_EQ(kMaxBitrateBps, states->encoder->GetTargetBitrate());
 }
 
+TEST(AudioEncoderOpusTest, MinPacketLossRate) {
+  test::ScopedFieldTrials override_field_trails(
+      "WebRTC-Audio-OpusMinPacketLossRate/Enabled-0.5/");
+  constexpr float kMinPacketLossRate = 0.5;
+  auto states = CreateCodec(2);
+  EXPECT_EQ(kMinPacketLossRate, states->encoder->packet_loss_rate());
+}
+
 // Verifies that the complexity adaptation in the config works as intended.
 TEST(AudioEncoderOpusTest, ConfigComplexityAdaptation) {
   AudioEncoderOpusConfig config;
