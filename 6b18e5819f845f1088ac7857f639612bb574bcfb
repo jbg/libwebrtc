@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3202e03_35ee573c",
+        "filename": "p2p/base/relayserver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-09T22:59:33Z",
+      "side": 1,
+      "message": "const auto\u0026? The same below.",
+      "range": {
+        "startLine": 163,
+        "startChar": 7,
+        "endLine": 163,
+        "endChar": 11
+      },
+      "revId": "6b18e5819f845f1088ac7857f639612bb574bcfb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
