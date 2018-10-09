@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d2c20e4_f7b86b8a",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-09T18:26:12Z",
+      "side": 1,
+      "message": "I suggest %d here, and check value range (0, 100) (according to http://opus-codec.org/docs/opus_api-1.2/group__opus__encoderctls.html#gafda1c951dea919ba54432cd03827f1a9), since other values are not meaningful.\n\nIn addition, I would like to let Enabled be always effective, meaning\n\n\"Enabled-%d\" outputs %d (if in range) or default min value (if out of range)\n\"Enabled\" outputs default min value (1 e.g.)\n\"Disabled\" outputs 0\n\nReason for this is that we try to use \"Enabled\" and \"Disabled\" only, and only use \"Enabled-%d\" when necessary.",
+      "range": {
+        "startLine": 225,
+        "startChar": 53,
+        "endLine": 225,
+        "endChar": 54
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d6ff554_7f5a96d4",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-09T18:26:12Z",
+      "side": 1,
+      "message": "packet_loss_rate_ reflects the \"initial\" packet loss rate that opus encoder uses, which is by default 0.\n\nTo mitigate the discrepancy between packet_loss_rate_ and the opus encoder, we can either\n1. let this be 0.0, and allow it being smaller than min_packet_loss_rate_ until it gets updated.\n2. (preferred), call SetProjectedPacketLossRate(0.0) to force a sync, after line 435.",
+      "range": {
+        "startLine": 423,
+        "startChar": 24,
+        "endLine": 423,
+        "endChar": 45
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a50e8b42_ae6ded12",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-09T18:26:12Z",
+      "side": 1,
+      "message": "I think we ought to add \n\nopt_loss_rate \u003d std::max(opt_loss_rate, min_packet_loss_rate_);\n\nafter line 760. In this way, we don\u0027t call WebRtcOpus_SetPacketLossRate if opt_loss_rate \u003d\u003d packet_loss_rate_, as the if statement in line 761 tends to achieve.",
+      "range": {
+        "startLine": 760,
+        "startChar": 8,
+        "endLine": 760,
+        "endChar": 21
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea91ea64_931cef03",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-09T18:26:12Z",
+      "side": 1,
+      "message": "to make the test more interesting, can we add a sibling test of this, and name it\n\nPacketLossRateLowerBounded",
+      "range": {
+        "startLine": 253,
+        "startChar": 27,
+        "endLine": 253,
+        "endChar": 50
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
