@@ -157,6 +157,7 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   const bool send_side_bwe_with_overhead_;
   const bool adjust_bandwidth_;
   bool bitrate_changed_;
+  const float min_packet_loss_rate_;
   float packet_loss_rate_;
   std::vector<int16_t> input_buffer_;
   OpusEncInst* inst_;
