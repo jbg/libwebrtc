@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ebe979b1_128c0ce0",
+        "filename": "api/transport/enums.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-09T08:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ade5e4_c5924be4",
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0b36f27_15d8952b",
         "filename": "p2p/base/p2ptransportchannel.cc",
         "patchSetId": 10
@@ -30,6 +48,30 @@
       "writtenOn": "2018-10-09T03:14:37Z",
       "side": 1,
       "message": "We could have a premature kFailed because we haven\u0027t received any remote candidate yet. Please also see my comment there.\n\nWe currently have an open bug (webrtc:9218) that end-of-candidates signaling is not implemented, so that kFailed could be a confusing false alarm before receiving signaled remote candidates. This bug also makes it not a terminal state in the current implementation (which it should be in the spec). This gives the expectation you set in the p2ptransportchannel_unittest. I don\u0027t see a better way to solve this problem though, before we close that bug. I suggest adding a comment in the definition of these states to let API users know the caveat, and leave a TODO here to fix the state transition once we close the bug.\n\nFYI, there is a similar comment in P2PTransportChannel::UpdateState.",
+      "range": {
+        "startLine": 401,
+        "startChar": 32,
+        "endLine": 401,
+        "endChar": 44
+      },
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57cda9a3_6c74f1b1",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-09T08:55:31Z",
+      "side": 1,
+      "message": "Sounds good, I\u0027ve added a TODO here and a note in api/transports/enums.h",
+      "parentUuid": "a0b36f27_15d8952b",
       "range": {
         "startLine": 401,
         "startChar": 32,
@@ -85,6 +127,30 @@
       "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fffdb72_e7b56f08",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-09T08:55:31Z",
+      "side": 1,
+      "message": "Sounds good, I removed it.",
+      "parentUuid": "cfd24192_1cb4e958",
+      "range": {
+        "startLine": 4145,
+        "startChar": 39,
+        "endLine": 4145,
+        "endChar": 46
+      },
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
