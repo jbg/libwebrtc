@@ -16,6 +16,75 @@
       "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0b36f27_15d8952b",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-09T03:14:37Z",
+      "side": 1,
+      "message": "We could have a premature kFailed because we haven\u0027t received any remote candidate yet. Please also see my comment there.\n\nWe currently have an open bug (webrtc:9218) that end-of-candidates signaling is not implemented, so that kFailed could be a confusing false alarm before receiving signaled remote candidates. This bug also makes it not a terminal state in the current implementation (which it should be in the spec). This gives the expectation you set in the p2ptransportchannel_unittest. I don\u0027t see a better way to solve this problem though, before we close that bug. I suggest adding a comment in the definition of these states to let API users know the caveat, and leave a TODO here to fix the state transition once we close the bug.\n\nFYI, there is a similar comment in P2PTransportChannel::UpdateState.",
+      "range": {
+        "startLine": 401,
+        "startChar": 32,
+        "endLine": 401,
+        "endChar": 44
+      },
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99c5e11d_16faa984",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 4144,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-09T03:14:37Z",
+      "side": 1,
+      "message": "We do have a candidate. The TestUDPPort created by the FakePortAllocatorSesssion gathered one candidate, and P2PTransportChannel::OnCandidatesReady is invoked.",
+      "range": {
+        "startLine": 4144,
+        "startChar": 29,
+        "endLine": 4144,
+        "endChar": 42
+      },
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfd24192_1cb4e958",
+        "filename": "p2p/base/p2ptransportchannel_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-09T03:14:37Z",
+      "side": 1,
+      "message": "As mentioned in my other comment, this is an artifact that this is called before AddRemoteCandidate below. I kind of feel this expectation is confusing, though it would be the intended behavior in the current implementation. Could just remove it since you have an expectation below for the \"intended\" definition of kFailed (where connections_ are all gone because they get pruned for not working).",
+      "range": {
+        "startLine": 4145,
+        "startChar": 39,
+        "endLine": 4145,
+        "endChar": 46
+      },
+      "revId": "585532385d809a49720ebb7ecdd72fe216f85a85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
