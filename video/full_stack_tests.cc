@@ -642,6 +642,8 @@ TEST(FullStackTest, ScreenshareSlidesVP8_2TL) {
   fixture->RunWithAnalyzer(screenshare);
 }
 
+// TODO(bugs.webrtc.org/9840): Investigate why is this test flaky on MAC.
+#if !defined(WEBRTC_MAC)
 TEST(FullStackTest, ScreenshareSlidesVP8_3TL_Simulcast) {
   auto fixture = CreateVideoQualityTestFixture();
   test::ScopedFieldTrials field_trial(kScreenshareSimulcastExperiment);
@@ -670,6 +672,7 @@ TEST(FullStackTest, ScreenshareSlidesVP8_3TL_Simulcast) {
       false};
   fixture->RunWithAnalyzer(screenshare);
 }
+#endif  // !defined(WEBRTC_MAC)
 
 TEST(FullStackTest, ScreenshareSlidesVP8_2TL_Scroll) {
   auto fixture = CreateVideoQualityTestFixture();
@@ -1104,7 +1107,8 @@ INSTANTIATE_TEST_CASE_P(FullStackTest,
 class DualStreamsTest : public ::testing::TestWithParam<int> {};
 
 // Disable dual video test on mobile device becuase it's too heavy.
-#if !defined(WEBRTC_ANDROID) && !defined(WEBRTC_IOS)
+// TODO(bugs.webrtc.org/9840): Investigate why is this test flaky on MAC.
+#if !defined(WEBRTC_ANDROID) && !defined(WEBRTC_IOS) && !defined(WEBRTC_MAC)
 TEST_P(DualStreamsTest,
        ModeratelyRestricted_SlidesVp8_3TL_Simulcast_Video_Simulcast_High) {
   test::ScopedFieldTrials field_trial(
@@ -1168,7 +1172,8 @@ TEST_P(DualStreamsTest,
   auto fixture = CreateVideoQualityTestFixture();
   fixture->RunWithAnalyzer(dual_streams);
 }
-#endif  // !defined(WEBRTC_ANDROID) && !defined(WEBRTC_IOS)
+#endif  // !defined(WEBRTC_ANDROID) && !defined(WEBRTC_IOS) &&
+        // !defined(WEBRTC_MAC)
 
 TEST_P(DualStreamsTest, Conference_Restricted) {
   test::ScopedFieldTrials field_trial(
