@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "409d12c5_26e25c4d",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-09T07:21:55Z",
+      "side": 1,
+      "message": "Since the entire class is for tests only, I don\u0027t think you need to add a test prefix to the method name. And for test methods that have to be attached to non-test classes, the convention seems to be a suffix ForTest or ForTesting.\n\nAlso, if the point of the current tests is only to check the is_caller argument to CreateMediaTransport, it might be more appropriate to use a MockMediaTransportFactory. And create FakeMediaTransport later, when we write tests that need more state and logic.",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd545263_bf448299",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-09T07:21:55Z",
+      "side": 1,
+      "message": "Looks redundant.",
+      "range": {
+        "startLine": 425,
+        "startChar": 4,
+        "endLine": 425,
+        "endChar": 37
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f4934d9_4da150c3",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-09T07:21:55Z",
+      "side": 1,
+      "message": "It\u0027s not obvious to me that one party gets is_local \u003d\u003d true and the other is_local \u003d\u003d false. Are there any guarantees for that? \n\nWould it make sense to tie the caller/callee distinction to the ice role instead?",
+      "range": {
+        "startLine": 937,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 36
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90832fa6_b731ae62",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-09T07:21:55Z",
+      "side": 1,
+      "message": "Use ASSERT rather than EXPECT, to terminate test immediately if media_transport is null.",
+      "range": {
+        "startLine": 362,
+        "startChar": 2,
+        "endLine": 362,
+        "endChar": 11
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
