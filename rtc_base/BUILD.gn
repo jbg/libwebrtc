@@ -85,9 +85,6 @@ rtc_source_set("rtc_base_approved") {
     ":thread_checker",
     ":timeutils",
   ]
-  if (is_mac && !build_with_chromium) {
-    public_deps += [ ":rtc_base_approved_objc" ]
-  }
 }
 
 rtc_source_set("macromagic") {
@@ -200,6 +197,10 @@ rtc_source_set("logging") {
     ":timeutils",
     "//third_party/abseil-cpp/absl/strings",
   ]
+
+  if (is_mac && !build_with_chromium) {
+    deps += [ ":logging_mac" ]
+  }
 
   if (build_with_chromium) {
     # Dependency on chromium's logging (in //base).
@@ -479,19 +480,12 @@ rtc_source_set("rtc_base_approved_generic") {
 }
 
 if (is_mac && !build_with_chromium) {
-  config("rtc_base_approved_objc_all_dependent_config") {
-    visibility = [ ":rtc_base_approved_objc" ]
-    libs = [ "Foundation.framework" ]  # needed for logging_mac.mm
-  }
-
-  rtc_source_set("rtc_base_approved_objc") {
-    visibility = [ ":rtc_base_approved" ]
-    all_dependent_configs = [ ":rtc_base_approved_objc_all_dependent_config" ]
+  rtc_source_set("logging_mac") {
+    visibility = [ ":logging" ]
+    libs = [ "Foundation.framework" ]
     sources = [
+      "logging_mac.h",
       "logging_mac.mm",
-    ]
-    deps = [
-      ":logging",
     ]
   }
 }
