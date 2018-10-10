@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b2683a5_8a643ccd",
+        "filename": "rtc_tools/compare_videos.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-10T13:19:49Z",
+      "side": 1,
+      "message": "I think this is more commonly expressed as _, vmaf_logfile \u003d tempfile.mkstemp(), but this is fine too.",
+      "range": {
+        "startLine": 242,
+        "startChar": 6,
+        "endLine": 242,
+        "endChar": 42
+      },
+      "revId": "7dec0c069ec657c4f768b4c8564dc18a04b6dc9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
