@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a4e4009e_8942bb80",
+        "filename": "rtc_base/logging_mac.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-10T07:37:38Z",
+      "side": 1,
+      "message": "To be honest I haven\u0027t checked but this is the same behavior we have today (https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/logging.h?l\u003d72-75\u0026rcl\u003d2e00abc98e599c6a4e23da0b8d64017ce2eebe7f).\n\nSee also: https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/logging.cc?l\u003d150-156\u0026rcl\u003d2e00abc98e599c6a4e23da0b8d64017ce2eebe7f",
+      "parentUuid": "4d56893a_e0173d9f",
+      "range": {
+        "startLine": 13,
+        "startChar": 36,
+        "endLine": 13,
+        "endChar": 46
+      },
+      "revId": "3d838cde15e47d251fd8dd955adf435ce2d723ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "151d4e4a_358875fc",
         "filename": "rtc_base/logging_mac.h",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-10T07:16:36Z",
       "side": 1,
       "message": "Including CoreServices.h seems weird, this should probably just be Foundation.h",
+      "range": {
+        "startLine": 17,
+        "startChar": 22,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "3d838cde15e47d251fd8dd955adf435ce2d723ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "752528bc_dc289a07",
+        "filename": "rtc_base/logging_mac.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-10T07:37:38Z",
+      "side": 1,
+      "message": "It seems needed to get OSStatus. Is there a more focused header to include to get it?\n\nUsing Foundation.h here gives me some errors:\n\nHeaders/NSObject.h:10:1: error: expected unqualified-id\n@class NSInvocation, NSMethodSignature, NSCoder, NSString, NSEnumerator;",
+      "parentUuid": "151d4e4a_358875fc",
       "range": {
         "startLine": 17,
         "startChar": 22,
