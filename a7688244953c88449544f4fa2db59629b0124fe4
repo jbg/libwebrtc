@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "b0ed7e00_3df6d116",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-10T16:18:53Z",
+      "side": 1,
+      "message": "I\u0027ve updated the text a bit, ptal",
+      "parentUuid": "77b8548b_5d3843fd",
+      "range": {
+        "startLine": 207,
+        "startChar": 5,
+        "endLine": 207,
+        "endChar": 14
+      },
+      "revId": "a7688244953c88449544f4fa2db59629b0124fe4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dab78c8_6cc50e09",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 10
@@ -115,6 +139,30 @@
       "revId": "a7688244953c88449544f4fa2db59629b0124fe4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d78aa7ac_082fe7d4",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-10T16:18:53Z",
+      "side": 1,
+      "message": "Hard to define what working would mean in HasWorkingRateController, and DisableFrameDropper could easily be interpreted as is disabling the encoder internal one.\nI like Trusted though, so have renamed everywhere.",
+      "parentUuid": "0dab78c8_6cc50e09",
+      "range": {
+        "startLine": 214,
+        "startChar": 15,
+        "endLine": 214,
+        "endChar": 43
+      },
+      "revId": "a7688244953c88449544f4fa2db59629b0124fe4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
