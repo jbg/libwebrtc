@@ -242,6 +242,8 @@ class MockVideoEncoder : public VideoEncoder {
 
   MOCK_CONST_METHOD0(ImplementationName, const char*());
 
+  MOCK_CONST_METHOD0(HasWhitelistedRateController, bool(void));
+
  private:
   MockVideoEncoderFactory* const factory_;
   bool supports_native_handle_ = false;
@@ -954,5 +956,58 @@ TEST_F(TestSimulcastEncoderAdapterFake, ActivatesCorrectStreamsInInitEncode) {
   frame_types.resize(3, kVideoFrameKey);
   EXPECT_EQ(0, adapter_->Encode(input_frame, nullptr, &frame_types));
 }
+
+TEST_F(TestSimulcastEncoderAdapterFake, WhitelistedRateControl) {
+  // Set up common settings for three streams.
+  SimulcastTestFixtureImpl::DefaultSettings(
+      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
+      kVideoCodecVP8);
+  rate_allocator_.reset(new SimulcastRateAllocator(codec_));
+  adapter_->RegisterEncodeCompleteCallback(this);
+
+  // Only enough start bitrate for the lowest stream.
+  ASSERT_EQ(3u, codec_.numberOfSimulcastStreams);
+  codec_.startBitrate = codec_.simulcastStream[0].targetBitrate +
+                        codec_.simulcastStream[1].minBitrate - 1;
+
+  // Input data.
+  rtc::scoped_refptr<VideoFrameBuffer> buffer(I420Buffer::Create(1280, 720));
+  VideoFrame input_frame(buffer, 100, 1000, kVideoRotation_180);
+
+  // No encoder whitelisted, so simulcast adapter should not be either.
+  EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
+  EXPECT_FALSE(adapter_->HasWhitelistedRateController());
+
+  // Encode with three streams.
+  std::vector<MockVideoEncoder*> original_encoders =
+      helper_->factory()->encoders();
+
+  {
+    // All encoders are whitelisted, so simulcast adapter should be too.
+    EXPECT_CALL(*original_encoders[0], HasWhitelistedRateController())
+        .WillRepeatedly(Return(true));
+    EXPECT_CALL(*original_encoders[1], HasWhitelistedRateController())
+        .WillRepeatedly(Return(true));
+    EXPECT_CALL(*original_encoders[2], HasWhitelistedRateController())
+        .WillRepeatedly(Return(true));
+
+    EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
+    EXPECT_TRUE(adapter_->HasWhitelistedRateController());
+  }
+
+  {
+    // One encoder not whitelisted, so simulcast adapter should not be either.
+    EXPECT_CALL(*original_encoders[0], HasWhitelistedRateController())
+        .WillRepeatedly(Return(true));
+    EXPECT_CALL(*original_encoders[1], HasWhitelistedRateController())
+        .WillRepeatedly(Return(true));
+    EXPECT_CALL(*original_encoders[2], HasWhitelistedRateController())
+        .WillRepeatedly(Return(false));
+
+    EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
+    EXPECT_FALSE(adapter_->HasWhitelistedRateController());
+  }
+}
+
 }  // namespace test
 }  // namespace webrtc
