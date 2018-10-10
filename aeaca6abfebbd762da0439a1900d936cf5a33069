@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "57411c12_16cc3072",
+        "filename": "modules/audio_coding/neteq/tools/packet_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Oops :)\nDone",
+      "parentUuid": "eb9b82f8_7e630ef5",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 23
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13a54622_b7fe0615",
         "filename": "modules/audio_coding/neteq/tools/packet_source.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff3c11e2_4fb08296",
+        "filename": "modules/audio_coding/neteq/tools/packet_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13a54622_b7fe0615",
+      "range": {
+        "startLine": 39,
+        "startChar": 11,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "400e6643_bc163baf",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65f0f98e_03aba533",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34684084_231eecdd",
         "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5c22201_5835091d",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34684084_231eecdd",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 21
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ffadbae7_21d2e5b0",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab0e5c0f_aa3bbdc7",
+      "range": {
+        "startLine": 61,
+        "startChar": 42,
+        "endLine": 61,
+        "endChar": 61
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c48bf37_ace183b7",
         "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b2aedbe_13e5166a",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Added the static_cast.\n\nThe microsecond resolution isn\u0027t reliable, and hasn\u0027t been critical in analysis anyway. Even though log_time_ms() currently just does a division, we\u0027re trying to save space in the log by only storing millisecond timestamps. I\u0027d like to keep that part to future proof for when we don\u0027t have microsecond resolution.",
+      "parentUuid": "8c48bf37_ace183b7",
+      "range": {
+        "startLine": 79,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "5dea3478_40f59de1",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Any suggestions?",
+      "parentUuid": "53161ae8_55db853e",
+      "range": {
+        "startLine": 83,
+        "startChar": 7,
+        "endLine": 83,
+        "endChar": 19
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92d60427_5b573deb",
         "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
         "patchSetId": 2
@@ -174,6 +342,30 @@
       "writtenOn": "2018-10-10T09:39:48Z",
       "side": 1,
       "message": "can have a better naming, I think",
+      "range": {
+        "startLine": 90,
+        "startChar": 19,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a9b7b84_568789f2",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "I think stream is pretty good. We have VideoSendStream and AudioReceiveStream and so on in the code. Those streams are identified by an SSRC and a media type and are responsible for packetizing the media. In this case we have a stream of packets identified by an SSRC and a media type, and which contains the packets sent on that SSRC.\n\nIf you have a better suggestion, I\u0027m all ears.",
+      "parentUuid": "92d60427_5b573deb",
       "range": {
         "startLine": 90,
         "startChar": 19,
@@ -226,6 +418,24 @@
     },
     {
       "key": {
+        "uuid": "f0732f76_ce7e4075",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "ShouldSkipStream is needed to filter by SSRC. You\u0027re right that the first argument is redundant, but it seems better to have a single filtering function rather than two.",
+      "parentUuid": "81b907ef_0533094a",
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a001c6a_81a29f7a",
         "filename": "modules/audio_coding/neteq/tools/rtp_file_source.h",
         "patchSetId": 2
@@ -246,6 +456,30 @@
       "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd1eedb3_5a6484b7",
+        "filename": "modules/audio_coding/neteq/tools/rtp_file_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-10T12:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a001c6a_81a29f7a",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 6
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
