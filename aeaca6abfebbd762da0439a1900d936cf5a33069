@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb9b82f8_7e630ef5",
+        "filename": "modules/audio_coding/neteq/tools/packet_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "? remove",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 23
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13a54622_b7fe0615",
+        "filename": "modules/audio_coding/neteq/tools/packet_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 39,
+        "startChar": 11,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65f0f98e_03aba533",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "no need to check std::move, IMO",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34684084_231eecdd",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "then you can add ++ to line 51",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 21
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab0e5c0f_aa3bbdc7",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "audio_output_index_++, and remove 62",
+      "range": {
+        "startLine": 61,
+        "startChar": 42,
+        "endLine": 61,
+        "endChar": 61
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c48bf37_ace183b7",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "The Packet ctor wants a double. Please consider static_cast\u003cdouble\u003e(incoming.log_time_us()) / 1000, as the old code.\n\nI thought low precision would affect the result, but actually not, since the value is truncated later anyway.",
+      "range": {
+        "startLine": 79,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53161ae8_55db853e",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "can have a better naming, I think",
+      "range": {
+        "startLine": 83,
+        "startChar": 7,
+        "endLine": 83,
+        "endChar": 19
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92d60427_5b573deb",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "can have a better naming, I think",
+      "range": {
+        "startLine": 90,
+        "startChar": 19,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bd34f65_203167ba",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "can have a better naming, I think",
+      "range": {
+        "startLine": 103,
+        "startChar": 19,
+        "endLine": 103,
+        "endChar": 31
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81b907ef_0533094a",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "looking inelegant to me force ParsedRtcEventLogNew::MediaType::AUDIO on the first arg.\n\nIt may mean that ShouldSkipStream is overkilling. try removing it.",
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a001c6a_81a29f7a",
+        "filename": "modules/audio_coding/neteq/tools/rtp_file_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T09:39:48Z",
+      "side": 1,
+      "message": "please add const",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 6
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
