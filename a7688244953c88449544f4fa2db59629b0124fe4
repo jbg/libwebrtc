@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "77b8548b_5d3843fd",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-10T15:08:15Z",
+      "side": 1,
+      "message": "What we need to convey (both in comments and name), is whether or not we pass on full responsibility for the bitrate to the encoder, or if we want to babysit it and apply workarounds when it appears to get things wrong.",
+      "parentUuid": "b0b40982_d3371b70",
+      "range": {
+        "startLine": 207,
+        "startChar": 5,
+        "endLine": 207,
+        "endChar": 14
+      },
+      "revId": "a7688244953c88449544f4fa2db59629b0124fe4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0dab78c8_6cc50e09",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 10
