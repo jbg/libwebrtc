@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d56893a_e0173d9f",
+        "filename": "rtc_base/logging_mac.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-10-10T07:16:36Z",
+      "side": 1,
+      "message": "Why is this not included on iOS? What do we use there instead?",
+      "range": {
+        "startLine": 13,
+        "startChar": 36,
+        "endLine": 13,
+        "endChar": 46
+      },
+      "revId": "3d838cde15e47d251fd8dd955adf435ce2d723ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "151d4e4a_358875fc",
+        "filename": "rtc_base/logging_mac.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-10-10T07:16:36Z",
+      "side": 1,
+      "message": "Including CoreServices.h seems weird, this should probably just be Foundation.h",
+      "range": {
+        "startLine": 17,
+        "startChar": 22,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "3d838cde15e47d251fd8dd955adf435ce2d723ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
