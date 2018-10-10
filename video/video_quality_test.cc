@@ -172,6 +172,9 @@ class FrameDumpingEncoder : public VideoEncoder, private EncodedImageCallback {
   const char* ImplementationName() const override {
     return encoder_->ImplementationName();
   }
+  bool HasWhitelistedRateController() const override {
+    return encoder_->HasWhitelistedRateController();
+  }
 
  private:
   // Implement EncodedImageCallback

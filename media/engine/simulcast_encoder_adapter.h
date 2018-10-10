@@ -65,6 +65,7 @@ class SimulcastEncoderAdapter : public VideoEncoder {
 
   bool SupportsNativeHandle() const override;
   const char* ImplementationName() const override;
+  bool HasWhitelistedRateController() const override;
 
  private:
   struct StreamInfo {
@@ -114,6 +115,7 @@ class SimulcastEncoderAdapter : public VideoEncoder {
   std::stack<std::unique_ptr<VideoEncoder>> stored_encoders_;
 
   const absl::optional<unsigned int> experimental_boosted_screenshare_qp_;
+  bool whitelisted_rate_controller_;
 };
 
 }  // namespace webrtc
