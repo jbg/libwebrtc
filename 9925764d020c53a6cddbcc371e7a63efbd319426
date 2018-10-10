@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "9af89ab0_0fa23161",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-10-10T16:42:51Z",
+      "side": 1,
+      "message": "Thanks! I think using hint from SetLocalDescription or SetRemoteDescription is a good workaround for now. When we get back to SDP later, we can revisit.",
+      "parentUuid": "577e4101_981329a0",
+      "range": {
+        "startLine": 937,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 36
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90832fa6_b731ae62",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 21
