@@ -116,6 +116,24 @@
       "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bc0c20c_02938518",
+        "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-10-10T21:53:02Z",
+      "side": 1,
+      "message": "I don\u0027t anything to add beyond what Brave has already said. We strongly prefer that the mouse cursor not be included in the screen capture, because we render it client-side.",
+      "parentUuid": "a4770d8a_f4114a24",
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
