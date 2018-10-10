@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "56bec612_79c9ad39",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-10T09:06:18Z",
+      "side": 1,
+      "message": "True, I didn\u0027t moved it after I removed the buildflags thing (that needed the deps declaration)",
+      "parentUuid": "7f56e3c8_dbe58602",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 24
+      },
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d8087ec_b403ec7c",
         "filename": "modules/desktop_capture/linux/screen_capturer_pipewire.cc",
         "patchSetId": 5
@@ -36,6 +60,24 @@
       "writtenOn": "2018-10-09T22:05:02Z",
       "side": 1,
       "message": "How does xdg-desktop-portal handle screen enumeration and selection? When this is built in chromium and there are multiple monitors connected, what would the chromium picker show, a combined desktop as X11 does or multiple screens that user can select from? Here it sounds like xdg-desktop-portal has its own picker? Please help to explain a bit in details.",
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68bd1b41_80999845",
+        "filename": "modules/desktop_capture/linux/screen_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-10T09:06:18Z",
+      "side": 1,
+      "message": "Yes, the xdg-desktop-portal shows its own dialog for picking the screen. In that case it would show only the screen that is picked up in the xdg-desktop-portal dialog. You can see it on https://tpopela.fedorapeople.org/webrtc_portals.webm . The only downside right now is that the dialog is shown twice. First time for the preview and the second time for the screen cast itself.",
+      "parentUuid": "9d8087ec_b403ec7c",
       "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
