@@ -29,6 +29,8 @@
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
+
+class FrameEncryptorInterface;
 class RtpPacketizer;
 class RtpPacketToSend;
 
@@ -38,7 +40,8 @@ class RTPSenderVideo {
 
   RTPSenderVideo(Clock* clock,
                  RTPSender* rtpSender,
-                 FlexfecSender* flexfec_sender);
+                 FlexfecSender* flexfec_sender,
+                 FrameEncryptorInterface* frame_encryptor);
   virtual ~RTPSenderVideo();
 
   virtual enum VideoCodecType VideoCodecType() const;
@@ -158,6 +161,9 @@ class RTPSenderVideo {
       RTC_GUARDED_BY(stats_crit_);
 
   OneTimeEvent first_frame_sent_;
+
+  // E2EE Custom Video Frame Encryptor (optional)
+  FrameEncryptorInterface* const frame_encryptor_ = nullptr;
 };
 
 }  // namespace webrtc
