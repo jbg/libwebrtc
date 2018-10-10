@@ -567,6 +567,30 @@
     },
     {
       "key": {
+        "uuid": "5b946293_c02234cd",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-10T17:08:39Z",
+      "side": 1,
+      "message": "I was concerned about redundancy -- it will be easy to update one comment and forget to update the other.",
+      "parentUuid": "129257aa_eb2de8d3",
+      "range": {
+        "startLine": 253,
+        "startChar": 45,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4fdec3f8_e83e08d9",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 22
