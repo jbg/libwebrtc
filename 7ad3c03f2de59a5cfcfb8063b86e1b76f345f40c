@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "272e1ce1_6515a89a",
+        "filename": "call/video_send_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-10T17:37:43Z",
+      "side": 1,
+      "message": "chooses",
+      "range": {
+        "startLine": 149,
+        "startChar": 44,
+        "endLine": 149,
+        "endChar": 50
+      },
+      "revId": "7ad3c03f2de59a5cfcfb8063b86e1b76f345f40c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
