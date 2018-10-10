@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a60ba22f_9d9bc8e2",
+        "filename": "api/video_codecs/test/video_encoder_software_fallback_wrapper_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-10-10T16:31:07Z",
+      "side": 1,
+      "message": "maybe name the test to clarify that it is the rate controller that is not trusted.",
+      "range": {
+        "startLine": 536,
+        "startChar": 34,
+        "endLine": 536,
+        "endChar": 54
+      },
+      "revId": "ed9963a5dcb03644c1b008a1aaafcbd38841b84e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c5c96bb_5f2133ee",
+        "filename": "modules/video_coding/video_sender.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-10-10T16:31:07Z",
+      "side": 1,
+      "message": "update comment.",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 29
+      },
+      "revId": "ed9963a5dcb03644c1b008a1aaafcbd38841b84e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
