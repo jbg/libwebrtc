@@ -77,6 +77,12 @@ std::unique_ptr<Packet> RtcEventLogSource::NextPacket() {
         return packet;
       }
     }
+    // Stop returning packets if we encounter a LOG_END event, even if it's not
+    // the final event.
+    if (parsed_stream_.GetEventType(rtp_packet_index_) ==
+        ParsedRtcEventLogNew::EventType::LOG_END) {
+      return nullptr;
+    }
   }
   return nullptr;
 }
