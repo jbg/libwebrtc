@@ -22,22 +22,25 @@ namespace rtc {
 class SSLCertificate;
 
 struct SSLFingerprint {
-  static SSLFingerprint* Create(const std::string& algorithm,
-                                const rtc::SSLIdentity* identity);
+  static std::unique_ptr<SSLFingerprint> Create(
+      const std::string& algorithm,
+      const rtc::SSLIdentity& identity);
 
-  static SSLFingerprint* Create(const std::string& algorithm,
-                                const rtc::SSLCertificate* cert);
+  static std::unique_ptr<SSLFingerprint> Create(
+      const std::string& algorithm,
+      const rtc::SSLCertificate& cert);
 
-  static SSLFingerprint* CreateFromRfc4572(const std::string& algorithm,
-                                           const std::string& fingerprint);
+  static std::unique_ptr<SSLFingerprint> CreateFromRfc4572(
+      const std::string& algorithm,
+      const std::string& fingerprint);
 
   // Creates a fingerprint from a certificate, using the same digest algorithm
   // as the certificate's signature.
-  static SSLFingerprint* CreateFromCertificate(const RTCCertificate* cert);
+  static std::unique_ptr<SSLFingerprint> CreateFromCertificate(
+      const RTCCertificate& cert);
 
   SSLFingerprint(const std::string& algorithm,
-                 const uint8_t* digest_in,
-                 size_t digest_len);
+                 ArrayView<const uint8_t> digest_view);
 
   SSLFingerprint(const SSLFingerprint& from);
 
