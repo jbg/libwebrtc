@@ -146,6 +146,8 @@ class PeerConnection : public PeerConnectionInternal,
   SignalingState signaling_state() override;
 
   IceConnectionState ice_connection_state() override;
+  IceConnectionState standardized_ice_connection_state() override;
+  PeerConnectionState peer_connection_state() override;
   IceGatheringState ice_gathering_state() override;
 
   const SessionDescriptionInterface* local_description() const override;
@@ -373,6 +375,11 @@ class PeerConnection : public PeerConnectionInternal,
           receiver);
 
   void SetIceConnectionState(IceConnectionState new_state);
+  void SetStandardizedIceConnectionState(
+      PeerConnectionInterface::IceConnectionState new_state);
+  void SetCombinedConnectionState(
+      PeerConnectionInterface::PeerConnectionState new_state);
+
   // Called any time the IceGatheringState changes
   void OnIceGatheringChange(IceGatheringState new_state);
   // New ICE candidate has been gathered.
@@ -931,6 +938,11 @@ class PeerConnection : public PeerConnectionInternal,
 
   SignalingState signaling_state_ = kStable;
   IceConnectionState ice_connection_state_ = kIceConnectionNew;
+  PeerConnectionInterface::IceConnectionState
+      standardized_ice_connection_state_ = kIceConnectionNew;
+  PeerConnectionInterface::PeerConnectionState connection_state_ =
+      kPeerConnectionNew;
+
   IceGatheringState ice_gathering_state_ = kIceGatheringNew;
   PeerConnectionInterface::RTCConfiguration configuration_;
 
