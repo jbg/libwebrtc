@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b77c395a_778fbdb4",
+        "filename": "pc/mediasession_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-10T18:38:49Z",
+      "side": 1,
+      "message": "Doesn\u0027t this return a ExtmapAllowMixed? Shouldn\u0027t we be checking EXPECT_EQ(ExtmapAllowMixed::kNo, ...)?\n\nSame below for kMedia?",
+      "range": {
+        "startLine": 1629,
+        "startChar": 2,
+        "endLine": 1629,
+        "endChar": 14
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "83b627bc_864835a1",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 4
@@ -22,6 +45,98 @@
       "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f496b7ac_6ab187bf",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-10T18:38:49Z",
+      "side": 1,
+      "message": "I don\u0027t exactly understand a couple parts of this comment:\n\n\"not included in offer on media level\" - Isn\u0027t it true that it\u0027s not included in the offer on media AND session level?\n\n\"use flag on session level in our offer\" - I didn\u0027t think this is currently done.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 79
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "500f8452_0c414d11",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-10T18:38:49Z",
+      "side": 1,
+      "message": "Isn\u0027t this currently not true?",
+      "range": {
+        "startLine": 1495,
+        "startChar": 39,
+        "endLine": 1495,
+        "endChar": 73
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea16596_7aa09f8b",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-10T18:38:49Z",
+      "side": 1,
+      "message": "Is this necessary? ParseSessionDescription() already calls SessionDescription::set_mixed_one_two_byte_header_extensions_supported() at the session level, which sets it appropriately at the MediaContentDescription level.\n\nI guess the redundancy is fine to ensure that the session level overrides the media, but in our code it isn\u0027t necessary. I\u0027ll let you decide.",
+      "range": {
+        "startLine": 2525,
+        "startChar": 0,
+        "endLine": 2528,
+        "endChar": 7
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e6a55a3_adcc3729",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2750,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-10T18:38:49Z",
+      "side": 1,
+      "message": "Is this necessary?",
+      "range": {
+        "startLine": 2749,
+        "startChar": 0,
+        "endLine": 2750,
+        "endChar": 36
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
