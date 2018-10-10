@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5d71d496_c245881b",
+        "filename": "pc/mediasession_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-10T20:25:04Z",
+      "side": 1,
+      "message": "You\u0027re correct. Well spotted!",
+      "parentUuid": "b77c395a_778fbdb4",
+      "range": {
+        "startLine": 1629,
+        "startChar": 2,
+        "endLine": 1629,
+        "endChar": 14
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83b627bc_864835a1",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 4
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "d0849e8d_bf4c74d4",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-10T20:25:04Z",
+      "side": 1,
+      "message": "You\u0027re right, the comment was describing the future plan. I have clarified the comment here and in SessionDescription.",
+      "parentUuid": "f496b7ac_6ab187bf",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 79
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "500f8452_0c414d11",
         "filename": "pc/webrtcsdp.cc",
         "patchSetId": 4
@@ -91,6 +139,30 @@
       "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f59aeae_60daafbf",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-10T20:25:04Z",
+      "side": 1,
+      "message": "Again, same problem. I was describing the future :-)\nI updated the comment and removed the part about our offer.",
+      "parentUuid": "500f8452_0c414d11",
+      "range": {
+        "startLine": 1495,
+        "startChar": 39,
+        "endLine": 1495,
+        "endChar": 73
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "a7115bd6_4ccce1b0",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-10T20:25:04Z",
+      "side": 1,
+      "message": "I was hoping so as well and tried that, but it turns out that the MediaContentDescription is created in ParseContentDescription() which happens after the SessionDescription is set.\nTherefore it\u0027s unfortunately not updated by the call in SessionDescription.",
+      "parentUuid": "2ea16596_7aa09f8b",
+      "range": {
+        "startLine": 2525,
+        "startChar": 0,
+        "endLine": 2528,
+        "endChar": 7
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e6a55a3_adcc3729",
         "filename": "pc/webrtcsdp.cc",
         "patchSetId": 4
@@ -137,6 +233,30 @@
       "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88e016fa_71a48ee1",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2750,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-10T20:25:04Z",
+      "side": 1,
+      "message": "No, since it\u0027s created just before coming here, the default value will do.\nI will remove this.",
+      "parentUuid": "9e6a55a3_adcc3729",
+      "range": {
+        "startLine": 2749,
+        "startChar": 0,
+        "endLine": 2750,
+        "endChar": 36
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
