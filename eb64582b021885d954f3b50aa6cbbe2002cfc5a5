@@ -1027,6 +1027,30 @@
     },
     {
       "key": {
+        "uuid": "1910afdd_f9221fd9",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-10T17:17:04Z",
+      "side": 1,
+      "message": "correction:\n ASSERT_THAT(media_transport, testing::NotNull());\n\nYou can add \u0027using testing::NotNull\u0027 and have\nASSERT_THAT(media_transport, NotNull());\n\nwhich reads IMO better than \nEXPECT_NE(nullptr, media_transport);",
+      "parentUuid": "345c26be_5f71cada",
+      "range": {
+        "startLine": 362,
+        "startChar": 2,
+        "endLine": 362,
+        "endChar": 11
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f42850ea_a9430e04",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 22
