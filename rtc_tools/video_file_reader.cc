@@ -21,7 +21,6 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/refcountedobject.h"
 #include "rtc_base/string_to_number.h"
-#include "rtc_base/stringencode.h"
 #include "rtc_base/stringutils.h"
 
 namespace webrtc {

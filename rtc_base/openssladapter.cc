@@ -28,7 +28,6 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/opensslutility.h"
-#include "rtc_base/stringencode.h"
 #include "rtc_base/stringutils.h"
 #include "rtc_base/thread.h"
 
