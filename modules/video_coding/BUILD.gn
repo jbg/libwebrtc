@@ -723,6 +723,7 @@ if (rtc_include_tests) {
     }
 
     deps = [
+      ":mock_headers",
       ":video_codecs_test_framework",
       ":video_coding_utility",
       ":videocodec_test_impl",
