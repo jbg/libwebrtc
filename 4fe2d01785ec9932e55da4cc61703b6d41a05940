@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b740df9_5bf4efc7",
+        "filename": "modules/video_coding/codecs/vp8/test/vp8_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-10-10T08:01:57Z",
+      "side": 1,
+      "message": "/*pts\u003d*/0 would make this clearer",
+      "range": {
+        "startLine": 420,
+        "startChar": 39,
+        "endLine": 420,
+        "endChar": 40
+      },
+      "revId": "4fe2d01785ec9932e55da4cc61703b6d41a05940",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
