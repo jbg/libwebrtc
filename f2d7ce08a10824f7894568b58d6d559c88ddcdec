@@ -213,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6c026c29_1e51f2be",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-10T21:56:27Z",
+      "side": 1,
+      "message": "Ah, right. It seems to me that this shouldn\u0027t be something allowed - adding a MediaContentDescription to a SessionDescription and having an illegitimate state between the two. This could be enforced by the API. Inside SessionDescription::AddContent we you could execute this code, instead of doing it here. I\u0027ll leave it up to you in a follow up CL if you\u0027d like.",
+      "parentUuid": "a7115bd6_4ccce1b0",
+      "range": {
+        "startLine": 2525,
+        "startChar": 0,
+        "endLine": 2528,
+        "endChar": 7
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e6a55a3_adcc3729",
         "filename": "pc/webrtcsdp.cc",
         "patchSetId": 4
