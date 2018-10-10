@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83b627bc_864835a1",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-10T14:05:46Z",
+      "side": 1,
+      "message": "When this setting will be propagated to RtpPacket (via RtpHeaderExtensionMap), it is the setting at media level that will be used.\n\nI have therefore made some changes so that the media level will be know if this is supported on session level.",
+      "range": {
+        "startLine": 188,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 50
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
