@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24a2edd9_78364754",
+        "filename": "video/full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-10T12:44:35Z",
+      "side": 1,
+      "message": "missing \"/Enabled/\"?",
+      "range": {
+        "startLine": 55,
+        "startChar": 40,
+        "endLine": 55,
+        "endChar": 41
+      },
+      "revId": "6ed7af6bb7e2e452e000474c8aff4783f96841fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
