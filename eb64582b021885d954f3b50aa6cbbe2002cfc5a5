@@ -1003,6 +1003,30 @@
     },
     {
       "key": {
+        "uuid": "345c26be_5f71cada",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-10T17:15:43Z",
+      "side": 1,
+      "message": "you can ASSERT_THAT though.\nASSERT_THAT(media_transport, testing::IsNotNull());",
+      "parentUuid": "a2888ed7_0a154a01",
+      "range": {
+        "startLine": 362,
+        "startChar": 2,
+        "endLine": 362,
+        "endChar": 11
+      },
+      "revId": "eb64582b021885d954f3b50aa6cbbe2002cfc5a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f42850ea_a9430e04",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 22
