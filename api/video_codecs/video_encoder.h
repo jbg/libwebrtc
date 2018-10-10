@@ -202,6 +202,16 @@ class VideoEncoder {
 
   virtual bool SupportsNativeHandle() const;
   virtual const char* ImplementationName() const;
+
+  // If this method returns true, we the encoder rate controller must behave
+  // correctly even in difficult situations, and produce close to the specified
+  // target bitrate seen over a reasonable time window, dropping frames if
+  // necessary in order to keep rate correct, and reacting quickly to changing
+  // bitrate targets.
+  // Iff method returns true, we disable the frame dropper in the media
+  // optimization module.
+  // Default implementation returns false.
+  virtual bool HasWhitelistedRateController() const;
 };
 }  // namespace webrtc
 #endif  // API_VIDEO_CODECS_VIDEO_ENCODER_H_

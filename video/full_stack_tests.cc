@@ -51,6 +51,8 @@ const char kScreenshareSimulcastExperiment[] =
     "WebRTC-SimulcastScreenshare/Enabled/";
 const char kPacerPushBackExperiment[] =
     "WebRTC-PacerPushbackExperiment/Enabled/";
+const char kVp8WhitelistedRateControllerFieldTrial[] =
+    "WebRTC-Vp8WhitelistedRateController";
 
 struct ParamsWithLogging : public VideoQualityTest::Params {
  public:
@@ -230,6 +232,24 @@ TEST_P(GenericDescriptorTest, ForemanCif30kbpsWithoutPacketLoss) {
                           0,     0,     false, false, false, "foreman_cif"};
   foreman_cif.analyzer = {GetTestName("foreman_cif_30kbps_net_delay_0_0_plr_0"),
                           0.0, 0.0, kFullStackTestDurationSecs};
+  foreman_cif.call.generic_descriptor = GenericDescriptorEnabled();
+  fixture->RunWithAnalyzer(foreman_cif);
+}
+
+// TODO(webrtc:9722): Remove when experiment is cleaned up.
+TEST_P(GenericDescriptorTest, ForemanCif30kbpsWithoutPacketLossWhitelistVp8) {
+  auto fixture = CreateVideoQualityTestFixture();
+  test::ScopedFieldTrials override_field_trials(
+      AppendFieldTrials(kVp8WhitelistedRateControllerFieldTrial));
+
+  ParamsWithLogging foreman_cif;
+  foreman_cif.call.send_side_bwe = true;
+  foreman_cif.video[0] = {true,  352,          288, 10, 30000, 30000, 30000,
+                          false, "VP8",        1,   0,  0,     false, false,
+                          false, "foreman_cif"};
+  foreman_cif.analyzer = {
+      GetTestName("foreman_cif_30kbps_net_delay_0_0_plr_0_whitelistvp8"), 0.0,
+      0.0, kFullStackTestDurationSecs};
   foreman_cif.call.generic_descriptor = GenericDescriptorEnabled();
   fixture->RunWithAnalyzer(foreman_cif);
 }
@@ -521,7 +541,12 @@ TEST(FullStackTest, ConferenceMotionHd2000kbps100msLimitedQueue) {
   fixture->RunWithAnalyzer(conf_motion_hd);
 }
 
-TEST(FullStackTest, ConferenceMotionHd1TLModerateLimits) {
+// TODO(webrtc:9722): Remove when experiment is cleaned up.
+TEST(FullStackTest, ConferenceMotionHd1TLModerateLimitsWhitelistVp8) {
+  auto fixture = CreateVideoQualityTestFixture();
+  test::ScopedFieldTrials override_field_trials(
+      AppendFieldTrials(kVp8WhitelistedRateControllerFieldTrial));
+
   auto fixture = CreateVideoQualityTestFixture();
   ParamsWithLogging conf_motion_hd;
   conf_motion_hd.call.send_side_bwe = true;
@@ -529,8 +554,9 @@ TEST(FullStackTest, ConferenceMotionHd1TLModerateLimits) {
       true,    1280,    720,   50,    30000,
       3000000, 3000000, false, "VP8", 1,
       -1,      0,       false, false, false, "ConferenceMotion_1280_720_50"};
-  conf_motion_hd.analyzer = {"conference_motion_hd_1tl_moderate_limits", 0.0,
-                             0.0, kFullStackTestDurationSecs};
+  conf_motion_hd.analyzer = {
+      "conference_motion_hd_1tl_moderate_limits_whitelistvp8", 0.0, 0.0,
+      kFullStackTestDurationSecs};
   conf_motion_hd.config->queue_length_packets = 50;
   conf_motion_hd.config->loss_percent = 3;
   conf_motion_hd.config->queue_delay_ms = 100;
@@ -644,7 +670,8 @@ TEST(FullStackTest, ScreenshareSlidesVP8_2TL) {
 
 TEST(FullStackTest, ScreenshareSlidesVP8_3TL_Simulcast) {
   auto fixture = CreateVideoQualityTestFixture();
-  test::ScopedFieldTrials field_trial(kScreenshareSimulcastExperiment);
+  test::ScopedFieldTrials field_trial(
+      AppendFieldTrials(kScreenshareSimulcastExperiment));
   ParamsWithLogging screenshare;
   screenshare.call.send_side_bwe = true;
   screenshare.screenshare[0] = {true, false, 10};
