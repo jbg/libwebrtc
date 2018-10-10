@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "08a7ce9c_5c7d664b",
+        "filename": "modules/desktop_capture/linux/screen_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-10T17:30:41Z",
+      "side": 1,
+      "message": "Thanks for the recording. I talked with my manager that this UI change will go through Chromium UI review before it can be enabled in chromium, if it can only be done in this way. So at present, please add a flag and set it to false by default.\nA recent example is \"allow_iosurface_\"(https://cs.chromium.org/chromium/src/third_party/webrtc/modules/desktop_capture/desktop_capture_options.h?l\u003d126), as in cl https://webrtc-review.googlesource.com/c/src/+/33014.",
+      "parentUuid": "68bd1b41_80999845",
+      "revId": "c81a23ad48c7a8f30861879e8f70a7cb5f973bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4770d8a_f4114a24",
         "filename": "modules/desktop_capture/mouse_cursor_monitor_linux.cc",
         "patchSetId": 5
