@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "3024637f_71c01be8",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T12:52:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2b2aedbe_13e5166a",
+      "range": {
+        "startLine": 79,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53161ae8_55db853e",
         "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
         "patchSetId": 2
@@ -319,6 +343,30 @@
       "side": 1,
       "message": "Any suggestions?",
       "parentUuid": "53161ae8_55db853e",
+      "range": {
+        "startLine": 83,
+        "startChar": 7,
+        "endLine": 83,
+        "endChar": 19
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d51b714_14d574f3",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T12:52:01Z",
+      "side": 1,
+      "message": "handle_audio_playout can be fine",
+      "parentUuid": "5dea3478_40f59de1",
       "range": {
         "startLine": 83,
         "startChar": 7,
@@ -378,6 +426,30 @@
     },
     {
       "key": {
+        "uuid": "466cf9b4_9bbfd7c6",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T12:52:01Z",
+      "side": 1,
+      "message": "Yes, it is a stream but I think stream is too broad, and it was confused with \"parsed_stream\", now you changed the latter, which is good.\n\nIt is still advisable to change \"stream\" to \"rtp_stream\" or \"rtp_packets\".",
+      "parentUuid": "6a9b7b84_568789f2",
+      "range": {
+        "startLine": 90,
+        "startChar": 19,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bd34f65_203167ba",
         "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
         "patchSetId": 2
@@ -389,6 +461,30 @@
       "writtenOn": "2018-10-10T09:39:48Z",
       "side": 1,
       "message": "can have a better naming, I think",
+      "range": {
+        "startLine": 103,
+        "startChar": 19,
+        "endLine": 103,
+        "endChar": 31
+      },
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a73f9db2_d667513d",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T12:52:01Z",
+      "side": 1,
+      "message": "also too broad, IMO. audio_playout_events would be clearer.",
+      "parentUuid": "4bd34f65_203167ba",
       "range": {
         "startLine": 103,
         "startChar": 19,
@@ -430,6 +526,24 @@
       "side": 1,
       "message": "ShouldSkipStream is needed to filter by SSRC. You\u0027re right that the first argument is redundant, but it seems better to have a single filtering function rather than two.",
       "parentUuid": "81b907ef_0533094a",
+      "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d051280_020e16f2",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-10T12:52:01Z",
+      "side": 1,
+      "message": "how much does it hurt to simply put if statement here?",
+      "parentUuid": "f0732f76_ce7e4075",
       "revId": "aeaca6abfebbd762da0439a1900d936cf5a33069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
