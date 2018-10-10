@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e263b4c1_6a945501",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-10T07:43:46Z",
+      "side": 1,
+      "message": "Changed to taking an integer as input. However, still converting it to a float since we want to compare it to opt_loss_rate later.",
+      "parentUuid": "1d2c20e4_f7b86b8a",
+      "range": {
+        "startLine": 225,
+        "startChar": 53,
+        "endLine": 225,
+        "endChar": 54
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d6ff554_7f5a96d4",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "4bd45245963237222e0faf49dde3751fc522743b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9269545f_d593b7ef",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-10T07:43:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d6ff554_7f5a96d4",
+      "range": {
+        "startLine": 423,
+        "startChar": 24,
+        "endLine": 423,
+        "endChar": 45
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "90086b99_a2f3794d",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-10T07:43:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a50e8b42_ae6ded12",
+      "range": {
+        "startLine": 760,
+        "startChar": 8,
+        "endLine": 760,
+        "endChar": 21
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea91ea64_931cef03",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "4bd45245963237222e0faf49dde3751fc522743b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff0bb27d_ec040d30",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-10T07:43:46Z",
+      "side": 1,
+      "message": "Made a copy of this tests with a minimum packet loss rate set and changed the expected values.",
+      "parentUuid": "ea91ea64_931cef03",
+      "range": {
+        "startLine": 253,
+        "startChar": 27,
+        "endLine": 253,
+        "endChar": 50
+      },
+      "revId": "4bd45245963237222e0faf49dde3751fc522743b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
