@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3a112f0_6da957b7",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-10T03:09:34Z",
+      "side": 1,
+      "message": "Could also do |media_transport_result.MoveValue()| I think.",
+      "range": {
+        "startLine": 941,
+        "startChar": 22,
+        "endLine": 941,
+        "endChar": 63
+      },
+      "revId": "074afd2729a20c050b45987366a760566bb46c73",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

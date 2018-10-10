@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "577e4101_981329a0",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-10T03:09:34Z",
+      "side": 1,
+      "message": "The ICE role is not necessarily unique on both sides. It can get negotiated in band later. Tracking which side calls SLD/SRD first is a pretty reliable way to select perspective for QUIC.",
+      "parentUuid": "a0d435ee_894731fd",
+      "range": {
+        "startLine": 937,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 36
+      },
+      "revId": "9925764d020c53a6cddbcc371e7a63efbd319426",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "90832fa6_b731ae62",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 21
