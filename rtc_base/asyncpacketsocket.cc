@@ -33,10 +33,6 @@ void CopySocketInformationToPacketInfo(size_t packet_size_bytes,
                                        bool is_connectionless,
                                        rtc::PacketInfo* info) {
   info->packet_size_bytes = packet_size_bytes;
-  info->local_socket_address = socket_from.GetLocalAddress();
-  if (!is_connectionless) {
-    info->remote_socket_address = socket_from.GetRemoteAddress();
-  }
 }
 
 };  // namespace rtc
