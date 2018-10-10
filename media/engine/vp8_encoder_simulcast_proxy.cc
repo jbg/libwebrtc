@@ -81,4 +81,8 @@ const char* VP8EncoderSimulcastProxy::ImplementationName() const {
   return encoder_->ImplementationName();
 }
 
+bool VP8EncoderSimulcastProxy::HasWhitelistedRateController() const {
+  return encoder_->HasWhitelistedRateController();
+}
+
 }  // namespace webrtc
