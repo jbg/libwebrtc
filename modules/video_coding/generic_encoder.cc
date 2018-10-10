@@ -169,6 +169,11 @@ bool VCMGenericEncoder::SupportsNativeHandle() const {
   return encoder_->SupportsNativeHandle();
 }
 
+bool VCMGenericEncoder::HasWhitelistedRateController() const {
+  RTC_DCHECK_RUNS_SERIALIZED(&race_checker_);
+  return encoder_->HasWhitelistedRateController();
+}
+
 VCMEncodedFrameCallback::VCMEncodedFrameCallback(
     EncodedImageCallback* post_encode_callback,
     media_optimization::MediaOptimization* media_opt)

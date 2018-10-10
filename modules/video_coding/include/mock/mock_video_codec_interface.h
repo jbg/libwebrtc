@@ -47,6 +47,7 @@ class MockVideoEncoder : public VideoEncoder {
   MOCK_METHOD2(SetRateAllocation,
                int32_t(const VideoBitrateAllocation& newBitRate,
                        uint32_t frameRate));
+  MOCK_CONST_METHOD0(HasWhitelistedRateController, bool(void));
 };
 
 class MockDecodedImageCallback : public DecodedImageCallback {
