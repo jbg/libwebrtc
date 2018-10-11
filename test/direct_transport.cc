@@ -70,12 +70,14 @@ bool DirectTransport::SendRtp(const uint8_t* data,
                               size_t length,
                               const PacketOptions& options) {
   if (send_call_) {
-    rtc::SentPacket sent_packet(options.packet_id,
-                                clock_->TimeInMilliseconds());
-    sent_packet.info.included_in_feedback = options.included_in_feedback;
-    sent_packet.info.included_in_allocation = options.included_in_allocation;
-    sent_packet.info.packet_size_bytes = length;
-    sent_packet.info.packet_type = rtc::PacketType::kData;
+    rtc::PacketInfo packet_info;
+    packet_info.included_in_feedback = options.included_in_feedback;
+    packet_info.included_in_allocation = options.included_in_allocation;
+    packet_info.packet_size_bytes = length;
+    packet_info.packet_type = rtc::PacketType::kData;
+    rtc::SentPacket sent_packet(options.packet_id, clock_->TimeInMilliseconds(),
+                                packet_info);
+
     send_call_->OnSentPacket(sent_packet);
   }
   SendPacket(data, length);

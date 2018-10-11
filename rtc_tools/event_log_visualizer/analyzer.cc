@@ -1164,9 +1164,12 @@ void EventLogAnalyzer::CreateSendSideBweSimulationGraph(Plot* plot) {
         cc.AddPacket(rtp_packet.rtp.header.ssrc,
                      rtp_packet.rtp.header.extension.transportSequenceNumber,
                      rtp_packet.rtp.total_length, PacedPacketInfo());
+        rtc::PacketInfo packet_info;
+        packet_info.included_in_feedback = true;
+        packet_info.included_in_allocation = true;
         rtc::SentPacket sent_packet(
             rtp_packet.rtp.header.extension.transportSequenceNumber,
-            rtp_packet.rtp.log_time_us() / 1000);
+            rtp_packet.rtp.log_time_us() / 1000, packet_info);
         cc.OnSentPacket(sent_packet);
       }
       ++rtp_iterator;

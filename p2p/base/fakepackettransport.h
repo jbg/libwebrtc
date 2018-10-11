@@ -78,7 +78,8 @@ class FakePacketTransport : public PacketTransportInternal {
     } else {
       SendPacketInternal(packet);
     }
-    SentPacket sent_packet(options.packet_id, TimeMillis());
+    SentPacket sent_packet(options.packet_id, TimeMillis(),
+                           options.info_signaled_after_sent);
     SignalSentPacket(this, sent_packet);
     return static_cast<int>(len);
   }

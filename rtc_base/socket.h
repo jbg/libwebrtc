@@ -159,6 +159,8 @@ struct PacketInfo {
 
 struct SentPacket {
   SentPacket();
+  // TODO(srte): consider removing this constructor to avoid forgetting to
+  // provide PacketInfo if it's available..
   SentPacket(int64_t packet_id, int64_t send_time_ms);
   SentPacket(int64_t packet_id,
              int64_t send_time_ms,

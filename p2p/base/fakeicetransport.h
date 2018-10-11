@@ -202,7 +202,8 @@ class FakeIceTransport : public IceTransportInternal {
         SendPacketInternal(packet);
       }
     }
-    rtc::SentPacket sent_packet(options.packet_id, rtc::TimeMillis());
+    rtc::SentPacket sent_packet(options.packet_id, rtc::TimeMillis(),
+                                options.info_signaled_after_sent);
     SignalSentPacket(this, sent_packet);
     return static_cast<int>(len);
   }
