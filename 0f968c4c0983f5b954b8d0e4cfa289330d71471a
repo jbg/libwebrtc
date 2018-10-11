@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b49b9e8_34bdea2c",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-11T14:49:29Z",
+      "side": 1,
+      "message": "Although this is functionally correct, I would like to let it read easily too, say\n\npacket_loss_rate_slope_, max_packet_loss_rate_, min_packet_loss_rate_ should better be wrapped into a new_packet_loss_optimizer, and not be used if use_new_packet_loss_optimization_ is false.\n\nOtherwise, it feels to me that the old optimizer and new optimizer are too much coupled.",
+      "range": {
+        "startLine": 818,
+        "startChar": 0,
+        "endLine": 823,
+        "endChar": 55
+      },
+      "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
