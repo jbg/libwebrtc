@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "74e7f48a_3a21ebaf",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-10-11T10:38:03Z",
+      "side": 1,
+      "message": "I think this is pretty unlikely to change any time soon. Will definitely add a link to the docs.",
+      "parentUuid": "8ff85a3d_4770d0c5",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "a71a25a4d9061f319f768d5751b797972f4a77ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2bc71fc_a9ef415b",
         "filename": "rtc_base/thread.cc",
         "patchSetId": 2

@@ -22,6 +22,30 @@
       "revId": "040f87f934f5e1d2ecd12436b984479e3c2dac71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f247d82c_8267c6d7",
+        "filename": "rtc_base/thread_darwin.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-10-11T10:38:03Z",
+      "side": 0,
+      "message": "Sorry, I thought it was unnecessary as everything seems to work without it (and it\u0027s really old code) but from the documentation there is no guarantee things will work properly without this code. Will fix.",
+      "parentUuid": "82c60aa3_d90a61db",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 28
+      },
+      "revId": "040f87f934f5e1d2ecd12436b984479e3c2dac71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
