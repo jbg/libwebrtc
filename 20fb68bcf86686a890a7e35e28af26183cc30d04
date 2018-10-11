@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18322d03_9b478606",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-11T09:34:53Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4457e48b_1c806456",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-11T09:34:53Z",
+      "side": 1,
+      "message": "Is the max needed if the initial value is takes from the clock and it is later incremented?\nI suggest DCHECKing instead.",
+      "range": {
+        "startLine": 1121,
+        "startChar": 18,
+        "endLine": 1121,
+        "endChar": 21
+      },
+      "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb75427c_c2b71976",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-11T09:34:53Z",
+      "side": 1,
+      "message": "Hm, this looks like a bug. Presumably, Process should be called every process_interval.us(), but if there is a large gap in RTP packets, then Process will only be called once. Maybe it should be min(NextRtpTime(), NextRtcpTime(), NextProcessTime())?",
+      "range": {
+        "startLine": 1138,
+        "startChar": 0,
+        "endLine": 1138,
+        "endChar": 60
+      },
+      "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
