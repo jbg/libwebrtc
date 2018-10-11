@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82c60aa3_d90a61db",
+        "filename": "rtc_base/thread_darwin.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-11T08:02:30Z",
+      "side": 0,
+      "message": "This hasn\u0027t been ported to the new implementation. Is it unneeded?",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 28
+      },
+      "revId": "040f87f934f5e1d2ecd12436b984479e3c2dac71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

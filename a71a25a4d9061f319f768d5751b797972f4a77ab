@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ff85a3d_4770d0c5",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-11T08:02:30Z",
+      "side": 1,
+      "message": "Maybe we can add a link to the documentation (https://clang.llvm.org/docs/AutomaticReferenceCounting.html#runtime-support) or to objc-internal.h?\n\nThis is really elegant. It sounds scary at first sight but maybe it isn\u0027t. What can go wrong here?\nIf the @autorelease behavior changes we will continue to use the old behavior which is probably not a big problem. If objc_autoreleasePoolPush/objc_autoreleasePoolPop gets deprecated or removed we will get a build error on trybots and we will be forced to find another solution but that seems unlikely to happen soon.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "a71a25a4d9061f319f768d5751b797972f4a77ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
