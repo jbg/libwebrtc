@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e212637f_213638d4",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-11T08:54:39Z",
+      "side": 1,
+      "message": "Yes, thread_darwin.mm was the last blocker to get back to a unique rtc_base build target and avoid some annoying problems with the build system. :)",
+      "parentUuid": "95b50e7a_b07872f7",
+      "revId": "a71a25a4d9061f319f768d5751b797972f4a77ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ff85a3d_4770d0c5",
         "filename": "rtc_base/thread.cc",
         "patchSetId": 2
