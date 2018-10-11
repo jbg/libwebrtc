@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c82b3d9a_f6f949c4",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-11T11:26:18Z",
+      "side": 0,
+      "message": "Can these be removed?\nThey are not used anywhere what I can see. If they should be kept, I have to add code to update the content that is added in the constructor. So if they are not used I think it\u0027s better to removed them to avoid complicated code.",
+      "range": {
+        "startLine": 401,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 50
+      },
+      "revId": "703259c6e987b3f61e4e4cfd3572df173a8c667a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3995777c_98393ff5",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2502,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-11T11:26:18Z",
+      "side": 0,
+      "message": "This test is moved to a new file.",
+      "range": {
+        "startLine": 2463,
+        "startChar": 67,
+        "endLine": 2502,
+        "endChar": 12
+      },
+      "revId": "703259c6e987b3f61e4e4cfd3572df173a8c667a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
