@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b034b3d_c0a188de",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-11T11:14:36Z",
+      "side": 1,
+      "message": "It seems strange that when everything is closed, the state is \"new\", but that\u0027s commentary on the spec, not commmentary on the implementation....",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
