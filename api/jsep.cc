@@ -10,6 +10,9 @@
 
 #include "api/jsep.h"
 
+#include "absl/memory/memory.h"
+#include "api/jsepicecandidate.h"
+
 namespace webrtc {
 
 std::string IceCandidateInterface::server_url() const {
@@ -36,6 +39,26 @@ void SetSessionDescriptionObserver::OnFailure(RTCError error) {
 
 void SetSessionDescriptionObserver::OnFailure(const std::string& error) {
   OnFailure(RTCError(RTCErrorType::INTERNAL_ERROR, std::string(error)));
+}
+
+IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
+                                          int sdp_mline_index,
+                                          const std::string& sdp,
+                                          SdpParseError* error) {
+  JsepIceCandidate* jsep_ice = new JsepIceCandidate(sdp_mid, sdp_mline_index);
+  if (!jsep_ice->Initialize(sdp, error)) {
+    delete jsep_ice;
+    return NULL;
+  }
+  return jsep_ice;
+}
+
+std::unique_ptr<IceCandidateInterface> CreateIceCandidate(
+    const std::string& sdp_mid,
+    int sdp_mline_index,
+    const cricket::Candidate& candidate) {
+  return absl::make_unique<JsepIceCandidate>(sdp_mid, sdp_mline_index,
+                                             candidate);
 }
 
 }  // namespace webrtc

@@ -12,31 +12,10 @@
 
 #include <vector>
 
-#include "absl/memory/memory.h"
 #include "pc/webrtcsdp.h"
 #include "rtc_base/stringencode.h"
 
 namespace webrtc {
-
-IceCandidateInterface* CreateIceCandidate(const std::string& sdp_mid,
-                                          int sdp_mline_index,
-                                          const std::string& sdp,
-                                          SdpParseError* error) {
-  JsepIceCandidate* jsep_ice = new JsepIceCandidate(sdp_mid, sdp_mline_index);
-  if (!jsep_ice->Initialize(sdp, error)) {
-    delete jsep_ice;
-    return NULL;
-  }
-  return jsep_ice;
-}
-
-std::unique_ptr<IceCandidateInterface> CreateIceCandidate(
-    const std::string& sdp_mid,
-    int sdp_mline_index,
-    const cricket::Candidate& candidate) {
-  return absl::make_unique<JsepIceCandidate>(sdp_mid, sdp_mline_index,
-                                             candidate);
-}
 
 JsepIceCandidate::JsepIceCandidate(const std::string& sdp_mid,
                                    int sdp_mline_index)
