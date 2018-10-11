@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "228e1e34_c0bebdbf",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-11T19:58:41Z",
+      "side": 1,
+      "message": "nit: to me, it it clearer to use std::min(std::max(v, min), max) to show that it is bounding on both ends.",
+      "range": {
+        "startLine": 835,
+        "startChar": 13,
+        "endLine": 835,
+        "endChar": 14
+      },
+      "revId": "7b9fb990a9f0d18d39aad47a87eb5dd3b3d6550a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19107875_36bf91e9",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-11T19:58:41Z",
+      "side": 1,
+      "message": "I\u0027d like to give all of these a const qualifier, then you need to write good helper functions to assign them values in the initializer list.\n\nAnd as suggested in another comment, I would like to have two min_packet_loss_rates, one as it was, the other be wrapped into a struct NewPacketLossRateOptimizerConfig.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 41
+      },
+      "revId": "7b9fb990a9f0d18d39aad47a87eb5dd3b3d6550a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

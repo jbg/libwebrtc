@@ -46,6 +46,30 @@
       "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d263737e_cffdddae",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-11T19:58:41Z",
+      "side": 1,
+      "message": "I think we\u0027d better let min_packet_loss_rate_ be lower bound on the current algorithm,\n\nthen introduce\nstruct NewPacketLossRateOptimizerConfig which contains another min_packet_loss_rate.\n\nsame as struct PacketLossConfig you introduced, but we can make it a public struct of the class.",
+      "parentUuid": "49fec1cf_53b0dd69",
+      "range": {
+        "startLine": 818,
+        "startChar": 0,
+        "endLine": 823,
+        "endChar": 55
+      },
+      "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
