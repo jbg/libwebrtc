@@ -124,21 +124,6 @@ absl::optional<SdpType> SdpTypeFromString(const std::string& type_str) {
   }
 }
 
-// TODO(steveanton): Remove this default implementation once Chromium has been
-// updated.
-SdpType SessionDescriptionInterface::GetType() const {
-  absl::optional<SdpType> maybe_type = SdpTypeFromString(type());
-  if (maybe_type) {
-    return *maybe_type;
-  } else {
-    RTC_LOG(LS_WARNING) << "Default implementation of "
-                           "SessionDescriptionInterface::GetType does not "
-                           "recognize the result from type(), returning "
-                           "kOffer.";
-    return SdpType::kOffer;
-  }
-}
-
 SessionDescriptionInterface* CreateSessionDescription(const std::string& type,
                                                       const std::string& sdp,
                                                       SdpParseError* error) {

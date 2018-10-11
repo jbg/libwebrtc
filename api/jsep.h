@@ -143,7 +143,7 @@ class SessionDescriptionInterface {
   // the various types are found in the SdpType documentation.
   // TODO(steveanton): Remove default implementation once Chromium has been
   // updated.
-  virtual SdpType GetType() const;
+  virtual SdpType GetType() const = 0;
 
   // kOffer/kPrAnswer/kAnswer
   // TODO(steveanton): Remove this in favor of |GetType| that returns SdpType.
