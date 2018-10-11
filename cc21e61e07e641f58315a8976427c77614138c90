@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "485ee8f3_53ebaaa6",
+        "filename": "p2p/base/fakedtlstransport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-11T09:14:37Z",
+      "side": 1,
+      "message": "`nullptr` will convert to a zero-size ArrayView\u003cT\u003e for any T. You may still want to do what you do here if you want to make it easy to see that it\u0027s an ArrayView with const uint8_t elements, though.",
+      "range": {
+        "startLine": 35,
+        "startChar": 30,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "cc21e61e07e641f58315a8976427c77614138c90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d02640b_f45b301d",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-11T09:14:37Z",
+      "side": 1,
+      "message": "For next time: You should be able to replace this entire expression with just `kIdentityRequest`, because of this non-explicit constructor: https://cs.chromium.org/chromium/src/third_party/webrtc/api/array_view.h?rcl\u003de8d2b1be1a7c39fd405a9f8061467008869f24bd\u0026l\u003d173\n\n(See the docs near the top of that file for examples.)",
+      "range": {
+        "startLine": 1508,
+        "startChar": 8,
+        "endLine": 1508,
+        "endChar": 67
+      },
+      "revId": "cc21e61e07e641f58315a8976427c77614138c90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed51078f_502dd953",
+        "filename": "rtc_base/sslfingerprint.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-11T09:14:37Z",
+      "side": 1,
+      "message": "If you used MakeArrayView here, you wouldn\u0027t have had to state the element type.",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 94,
+        "endChar": 30
+      },
+      "revId": "cc21e61e07e641f58315a8976427c77614138c90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
