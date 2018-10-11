@@ -110,6 +110,7 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
 
   // Getters for testing.
   float packet_loss_rate() const { return packet_loss_rate_; }
+  float max_packet_loss_rate() const { return max_packet_loss_rate_; }
   AudioEncoderOpusConfig::ApplicationMode application() const {
     return config_.application;
   }
@@ -159,6 +160,7 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   bool bitrate_changed_;
   float packet_loss_rate_;
   const float min_packet_loss_rate_;
+  const float max_packet_loss_rate_;
   std::vector<int16_t> input_buffer_;
   OpusEncInst* inst_;
   uint32_t first_timestamp_in_buffer_;
@@ -172,6 +174,8 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   const std::unique_ptr<SmoothingFilter> bitrate_smoother_;
   absl::optional<int64_t> bitrate_smoother_last_update_time_;
   int consecutive_dtx_frames_;
+  const bool use_optimized_packet_loss_;
+  const float packet_loss_rate_coefficient_;
 
   friend struct AudioEncoderOpus;
   RTC_DISALLOW_COPY_AND_ASSIGN(AudioEncoderOpusImpl);

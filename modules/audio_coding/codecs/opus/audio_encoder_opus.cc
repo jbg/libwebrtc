@@ -214,25 +214,52 @@ int GetBitrateBps(const AudioEncoderOpusConfig& config) {
   return *config.bitrate_bps;
 }
 
-float GetMinPacketLossRate() {
-  constexpr char kPacketLossFieldTrial[] = "WebRTC-Audio-OpusMinPacketLossRate";
-  const bool use_opus_min_packet_loss_rate =
-      webrtc::field_trial::IsEnabled(kPacketLossFieldTrial);
-  if (use_opus_min_packet_loss_rate) {
+absl::optional<float> GetFieldTrialPercentValue(const char* name,
+                                                int default_if_enabled) {
+  if (webrtc::field_trial::IsEnabled(name)) {
     const std::string field_trial_string =
-        webrtc::field_trial::FindFullName(kPacketLossFieldTrial);
-    constexpr int kDefaultMinPacketLossRate = 1;
-    int value = kDefaultMinPacketLossRate;
+        webrtc::field_trial::FindFullName(name);
+    int value = default_if_enabled;
     if (sscanf(field_trial_string.c_str(), "Enabled-%d", &value) == 1 &&
         (value < 0 || value > 100)) {
-      RTC_LOG(LS_WARNING) << "Invalid parameter for " << kPacketLossFieldTrial
-                          << ", using default value: "
-                          << kDefaultMinPacketLossRate;
-      value = kDefaultMinPacketLossRate;
+      RTC_LOG(LS_WARNING) << "Invalid parameter for " << name
+                          << ", using default value: " << default_if_enabled;
+      value = default_if_enabled;
     }
-    return static_cast<float>(value) / 100;
+    return absl::make_optional(static_cast<float>(value) / 100);
   }
-  return 0.0;
+  return absl::nullopt;
+}
+
+float GetMinPacketLossRate() {
+  return GetFieldTrialPercentValue("WebRTC-Audio-OpusMinPacketLossRate", 1)
+      .value_or(0.0);
+}
+
+float GetMaxPacketLossRate() {
+  return GetFieldTrialPercentValue("WebRTC-Audio-OpusMaxPacketLossRate", 20)
+      .value_or(1.0);
+}
+
+bool UseOptimizedPacketLoss() {
+  return !webrtc::field_trial::IsDisabled(
+      "WebRTC-Audio-OpusUseOptimizedPacketLoss");
+}
+
+float GetPacketLossRateCoefficient() {
+  constexpr char kPacketLossRateCoefficientName[] =
+      "WebRTC-Audio-OpusPacketLossRateCoefficient";
+  if (webrtc::field_trial::IsEnabled(kPacketLossRateCoefficientName)) {
+    const std::string field_trial_string =
+        webrtc::field_trial::FindFullName(kPacketLossRateCoefficientName);
+    float value;
+    if (sscanf(field_trial_string.c_str(), "Enabled-%f", &value) == 1) {
+      return value;
+    }
+    RTC_LOG(LS_WARNING) << "Invalid parameter for "
+                        << kPacketLossRateCoefficientName << ", ignoring.";
+  }
+  return 1.0;
 }
 
 }  // namespace
@@ -424,11 +451,14 @@ AudioEncoderOpusImpl::AudioEncoderOpusImpl(
       bitrate_changed_(true),
       packet_loss_rate_(0.0),
       min_packet_loss_rate_(GetMinPacketLossRate()),
+      max_packet_loss_rate_(GetMaxPacketLossRate()),
       inst_(nullptr),
       packet_loss_fraction_smoother_(new PacketLossFractionSmoother()),
       audio_network_adaptor_creator_(audio_network_adaptor_creator),
       bitrate_smoother_(std::move(bitrate_smoother)),
-      consecutive_dtx_frames_(0) {
+      consecutive_dtx_frames_(0),
+      use_optimized_packet_loss_(UseOptimizedPacketLoss()),
+      packet_loss_rate_coefficient_(GetPacketLossRateCoefficient()) {
   RTC_DCHECK(0 <= payload_type && payload_type <= 127);
 
   // Sanity check of the redundant payload type field that we want to get rid
@@ -761,10 +791,14 @@ void AudioEncoderOpusImpl::SetNumChannelsToEncode(
 }
 
 void AudioEncoderOpusImpl::SetProjectedPacketLossRate(float fraction) {
-  float opt_loss_rate = OptimizePacketLossRate(fraction, packet_loss_rate_);
-  opt_loss_rate = std::max(opt_loss_rate, min_packet_loss_rate_);
-  if (packet_loss_rate_ != opt_loss_rate) {
-    packet_loss_rate_ = opt_loss_rate;
+  fraction = packet_loss_rate_coefficient_ * fraction;
+  if (use_optimized_packet_loss_) {
+    fraction = OptimizePacketLossRate(fraction, packet_loss_rate_);
+  }
+  fraction = std::max(fraction, min_packet_loss_rate_);
+  fraction = std::min(fraction, max_packet_loss_rate_);
+  if (packet_loss_rate_ != fraction) {
+    packet_loss_rate_ = fraction;
     RTC_CHECK_EQ(
         0, WebRtcOpus_SetPacketLossRate(
                inst_, static_cast<int32_t>(packet_loss_rate_ * 100 + .5)));
