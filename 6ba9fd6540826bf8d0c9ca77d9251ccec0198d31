@@ -22,6 +22,144 @@
       "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06d75106_c4cc17fd",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-11T17:32:39Z",
+      "side": 1,
+      "message": "This got me thinking. This means that if we call set_extmap_allow_mixed(false) at the session level it will override at the media level to \"kNo\". This seems fine, but...\n\nExample:\nIf an SDP signals \"I support mixed header extensions at the media level but not at the session level\" it is signaled by the line not existing at the session level. This means if we called set_extmap_allow_mixed(false) (which seems appropriate in this case) after calling set_extmap_allow_mixed(kMedia) at the media level, it would override everything at the media level. This means order matters in this case for setting things appropriately (need to do session and then media).\n\nDo you think it would be more appropriate to only override at the media level if it is set to true at the session level?",
+      "range": {
+        "startLine": 480,
+        "startChar": 20,
+        "endLine": 480,
+        "endChar": 48
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45697e6f_0d4d449a",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-11T17:32:39Z",
+      "side": 1,
+      "message": "nit: what do you think of renaming this (and in MediaContentDescription) to extmap_allow_mixed_headers_? It would make the variable more clear (especially in places like webrtcsdp.cc where we are setting/getting it). Just saying mixed is a bit confusing - \"do we mean that we are allowing mixing rtp header extensions?\" \"Isn\u0027t that the default to mix one byte header extensions?\"\n\nIt\u0027s a nit, I\u0027ll let you make the call.",
+      "range": {
+        "startLine": 501,
+        "startChar": 7,
+        "endLine": 501,
+        "endChar": 26
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98bbae15_82af02e7",
+        "filename": "pc/sessiondescription_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-11T17:32:39Z",
+      "side": 1,
+      "message": "You could test that it\u0027s set to false after the object creation. Same for the VideoContentDescription. I think the code you wrote depends on this for the MediaContentDescription.",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 33
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb730a5c_5a5a0ea1",
+        "filename": "pc/sessiondescription_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-11T17:32:39Z",
+      "side": 1,
+      "message": "I left a comment about this in pc/sessiondescription.h.",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 62
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237b88b5_6b420ab0",
+        "filename": "pc/sessiondescription_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-11T17:32:39Z",
+      "side": 1,
+      "message": "Nice test for what you added!",
+      "range": {
+        "startLine": 79,
+        "startChar": 29,
+        "endLine": 79,
+        "endChar": 71
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2dfe83e_72553084",
+        "filename": "pc/sessiondescription_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-11T17:32:39Z",
+      "side": 1,
+      "message": "If you wanted you could also test that this occurs when media level is set to kMedia.",
+      "range": {
+        "startLine": 94,
+        "startChar": 5,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
