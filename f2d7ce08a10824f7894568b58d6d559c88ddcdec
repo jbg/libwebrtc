@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "32532da4_5c8a3af9",
+        "filename": "pc/webrtcsdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-11T11:10:25Z",
+      "side": 1,
+      "message": "You\u0027re right, it\u0027s better to set it there. I have created a new CL where I fix this and a few other minor things.",
+      "parentUuid": "6c026c29_1e51f2be",
+      "range": {
+        "startLine": 2525,
+        "startChar": 0,
+        "endLine": 2528,
+        "endChar": 7
+      },
+      "revId": "f2d7ce08a10824f7894568b58d6d559c88ddcdec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e6a55a3_adcc3729",
         "filename": "pc/webrtcsdp.cc",
         "patchSetId": 4
