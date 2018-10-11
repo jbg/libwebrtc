@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "024e7cc9_18c081d7",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-11T13:14:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18322d03_9b478606",
+      "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4457e48b_1c806456",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "944603b4_9b3f634d",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-11T13:14:20Z",
+      "side": 1,
+      "message": "Yeah, there is actually such a DCHECK already, removing this.",
+      "parentUuid": "4457e48b_1c806456",
+      "range": {
+        "startLine": 1121,
+        "startChar": 18,
+        "endLine": 1121,
+        "endChar": 21
+      },
+      "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb75427c_c2b71976",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 1
@@ -62,6 +104,30 @@
       "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1d94ebe_d1bdfd23",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-11T13:14:20Z",
+      "side": 1,
+      "message": "Yes, I think this wrong, I fixed it per your suggestion.",
+      "parentUuid": "eb75427c_c2b71976",
+      "range": {
+        "startLine": 1138,
+        "startChar": 0,
+        "endLine": 1138,
+        "endChar": 60
+      },
+      "revId": "20fb68bcf86686a890a7e35e28af26183cc30d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
