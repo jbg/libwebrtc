@@ -158,7 +158,10 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   const bool adjust_bandwidth_;
   bool bitrate_changed_;
   float packet_loss_rate_;
-  const float min_packet_loss_rate_;
+  float min_packet_loss_rate_;
+  float max_packet_loss_rate_;
+  float packet_loss_rate_slope_;
+  bool use_new_packet_loss_optimization_;
   std::vector<int16_t> input_buffer_;
   OpusEncInst* inst_;
   uint32_t first_timestamp_in_buffer_;
