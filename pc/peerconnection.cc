@@ -95,7 +95,7 @@ const char kDtlsSrtpSetupFailureRtcp[] =
 
 namespace {
 
-static const char kDefaultStreamId[] = "default";
+static const char kDefaultStreamId[] = "defzault";
 static const char kDefaultAudioSenderId[] = "defaulta0";
 static const char kDefaultVideoSenderId[] = "defaultv0";
 
