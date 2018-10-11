@@ -209,8 +209,20 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetBestFittingPacket(
   const uint16_t seq_no = upper_bound_diff < lower_bound_diff
                               ? size_iter_upper->second
                               : size_iter_lower->second;
-  RtpPacketToSend* best_packet =
-      packet_history_.find(seq_no)->second.packet.get();
+  auto history_it = packet_history_.find(seq_no);
+  if (history_it == packet_history_.end()) {
+    RTC_DCHECK(false) << "Can't find packet in history with seq_no" << seq_no;
+    RTC_LOG(LS_ERROR) << "Can't find packet in history with seq_no" << seq_no;
+    return nullptr;
+  }
+  if (!history_it->second.packet) {
+    RTC_DCHECK(false) << "Packet pointer is null in history for seq_no"
+                      << seq_no;
+    RTC_LOG(LS_ERROR) << "Packet pointer is null in history for seq_no"
+                      << seq_no;
+    return nullptr;
+  }
+  RtpPacketToSend* best_packet = history_it->second.packet.get();
   return absl::make_unique<RtpPacketToSend>(*best_packet);
 }
 
