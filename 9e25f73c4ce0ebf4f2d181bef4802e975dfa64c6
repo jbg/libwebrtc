@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37778ff9_030630c4",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-11T13:31:34Z",
+      "side": 1,
+      "message": "In the interest of keeping build targets small and focused, maybe call this one \"cocoa_threading\" or something like that instead?",
+      "range": {
+        "startLine": 977,
+        "startChar": 22,
+        "endLine": 977,
+        "endChar": 36
+      },
+      "revId": "9e25f73c4ce0ebf4f2d181bef4802e975dfa64c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
