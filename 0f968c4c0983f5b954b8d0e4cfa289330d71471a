@@ -22,6 +22,30 @@
       "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49fec1cf_53b0dd69",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-11T15:22:56Z",
+      "side": 1,
+      "message": "I agree. Refactored new logic to separate function. However, I still need to use min_packet_loss_rate after old optimization since it is also set in another field trial.",
+      "parentUuid": "7b49b9e8_34bdea2c",
+      "range": {
+        "startLine": 818,
+        "startChar": 0,
+        "endLine": 823,
+        "endChar": 55
+      },
+      "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
