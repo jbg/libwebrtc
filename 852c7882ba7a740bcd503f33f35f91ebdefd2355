@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "462a70c9_e744137f",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T13:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e74b8fc9_aec3a2f6",
+      "range": {
+        "startLine": 217,
+        "startChar": 5,
+        "endLine": 217,
+        "endChar": 14
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83a5abee_a94c8d12",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "694fd45f_53d3fc71",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T13:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83a5abee_a94c8d12",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 30
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9d86cd85_d488fb11",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T13:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52f75ded_2f4801a2",
+      "range": {
+        "startLine": 51,
+        "startChar": 3,
+        "endLine": 51,
+        "endChar": 4
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0eaf0c2_e7123f72",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 6
@@ -91,6 +163,30 @@
       "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec158338_a760dcbc",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T13:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0eaf0c2_e7123f72",
+      "range": {
+        "startLine": 177,
+        "startChar": 2,
+        "endLine": 177,
+        "endChar": 7
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "8d72a89d_608c9c52",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T13:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27a0f66_64830e10",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "836cbd92_68a3886e",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 6
@@ -137,6 +257,30 @@
       "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43eb9c14_50d752d0",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T13:58:23Z",
+      "side": 1,
+      "message": "Added test. Also needed to add getters for accessing members in the test.",
+      "parentUuid": "836cbd92_68a3886e",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 517,
+        "endChar": 0
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
