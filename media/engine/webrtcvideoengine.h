@@ -50,33 +50,6 @@ namespace cricket {
 
 class WebRtcVideoChannel;
 
-class UnsignalledSsrcHandler {
- public:
-  enum Action {
-    kDropPacket,
-    kDeliverPacket,
-  };
-  virtual Action OnUnsignalledSsrc(WebRtcVideoChannel* channel,
-                                   uint32_t ssrc) = 0;
-  virtual ~UnsignalledSsrcHandler() = default;
-};
-
-// TODO(pbos): Remove, use external handlers only.
-class DefaultUnsignalledSsrcHandler : public UnsignalledSsrcHandler {
- public:
-  DefaultUnsignalledSsrcHandler();
-  Action OnUnsignalledSsrc(WebRtcVideoChannel* channel, uint32_t ssrc) override;
-
-  rtc::VideoSinkInterface<webrtc::VideoFrame>* GetDefaultSink() const;
-  void SetDefaultSink(WebRtcVideoChannel* channel,
-                      rtc::VideoSinkInterface<webrtc::VideoFrame>* sink);
-
-  virtual ~DefaultUnsignalledSsrcHandler() = default;
-
- private:
-  rtc::VideoSinkInterface<webrtc::VideoFrame>* default_sink_;
-};
-
 // WebRtcVideoEngine is used for the new native WebRTC Video API (webrtc:1667).
 class WebRtcVideoEngine {
  public:
@@ -446,9 +419,6 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   uint32_t rtcp_receiver_report_ssrc_;
   bool sending_;
   webrtc::Call* const call_;
-
-  DefaultUnsignalledSsrcHandler default_unsignalled_ssrc_handler_;
-  UnsignalledSsrcHandler* const unsignalled_ssrc_handler_;
 
   const MediaConfig::Video video_config_;
 
