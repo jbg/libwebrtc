@@ -16,6 +16,23 @@
       "revId": "b0ddcb709e80778bff78d4dabfe1c84bbd63f2fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ad8d61f_2daf7e10",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T13:12:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is the right thing to do, it seems like a workaround hiding the actual problem.\n\nIn the GetsStatsWhileDestroyingPeerConnections test we are testing that a PC can be destroyed while a request is pending. If a PC has to be closed in order to be destroyed, then perhaps that should be a requirement of the PeerConnection destructor (DCHECK is closed) or something the PC destructor does for us (Closes itself), but this is currently not a requirement and I\u0027m not sure it should have to be.\n\nIf the PC has to be closed in order for said test to pass, then maybe the test should explicitly close the PC. But this might get around what the test is in fact set up to test. We don\u0027t want to lose test coverage for what happens if the PC is destroyed (or closed) while a stats request is pending.\n\nAlso, how does closing the PC fix the race? Both the Close() method and the ~PeerConnection() attempts to get around races by performing \"stats_collector_-\u003eWaitForPendingRequest();\"\nIf this is not a valid thing to do then we have to update the code, not the test.\n\nDo you have more information about what is racing?",
+      "revId": "b0ddcb709e80778bff78d4dabfe1c84bbd63f2fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
