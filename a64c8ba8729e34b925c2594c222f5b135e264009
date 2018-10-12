@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d24a4dfb_0a75538f",
+        "filename": "rtc_base/system/cocoa_threading.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-12T09:40:45Z",
+      "side": 1,
+      "message": "This variable doesn\u0027t really say if we\u0027re multithreaded, it says whether we\u0027ve initialized the Cocoa multithreading whatever. So maybe `initialized` or `cocoa_multithreading_initialized` instead?",
+      "range": {
+        "startLine": 17,
+        "startChar": 14,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "a64c8ba8729e34b925c2594c222f5b135e264009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f2f47c4_953ea706",
+        "filename": "rtc_base/system/cocoa_threading.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-12T09:40:45Z",
+      "side": 1,
+      "message": "By the way, I take it this function doesn\u0027t need to be thread safe? (If it did, you could put all the code in the initialization of the static variable---provided ObjC++ has the same guarantees about atomic initialization of function statics that C++ has.)",
+      "revId": "a64c8ba8729e34b925c2594c222f5b135e264009",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
