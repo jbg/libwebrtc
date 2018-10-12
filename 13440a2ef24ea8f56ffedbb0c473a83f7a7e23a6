@@ -22,6 +22,30 @@
       "revId": "13440a2ef24ea8f56ffedbb0c473a83f7a7e23a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b822825_c35522b9",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-12T05:38:04Z",
+      "side": 1,
+      "message": "No we will always have this mapping. My other CL introduces webrtc::CryptoOptions::Frame with a new optional field: crypto_options.frame.require_frame_encryption which will largely solve any issue with unsignaled streams so that is something I hope to integrate into this change once it gets sign off.\n\nThat will let API users force webrtc to drop all incoming packets if a frame decryptor has not been attached. This does raise some more complex issues related to how we deal with those dropped frames when a frame decryptor is eventually attached.",
+      "parentUuid": "be6d5bc3_51012c8d",
+      "range": {
+        "startLine": 1457,
+        "startChar": 4,
+        "endLine": 1457,
+        "endChar": 31
+      },
+      "revId": "13440a2ef24ea8f56ffedbb0c473a83f7a7e23a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
