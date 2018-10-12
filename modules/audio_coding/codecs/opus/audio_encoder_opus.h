@@ -34,6 +34,22 @@ struct CodecInst;
 
 class AudioEncoderOpusImpl final : public AudioEncoder {
  public:
+  class NewPacketLossRateOptimizer {
+   public:
+    NewPacketLossRateOptimizer();
+
+    NewPacketLossRateOptimizer(float min_packet_loss_rate,
+                               float max_packet_loss_rate,
+                               float slope);
+
+    float OptimizePacketLossRate(float packet_loss_rate) const;
+
+   private:
+    const float min_packet_loss_rate_;
+    const float max_packet_loss_rate_;
+    const float slope_;
+  };
+
   static AudioEncoderOpusConfig CreateConfig(const CodecInst& codec_inst);
 
   // Returns empty if the current bitrate falls within the hysteresis window,
@@ -158,7 +174,8 @@ class AudioEncoderOpusImpl final : public AudioEncoder {
   const bool adjust_bandwidth_;
   bool bitrate_changed_;
   float packet_loss_rate_;
-  const float min_packet_loss_rate_;
+  float min_packet_loss_rate_;
+  std::unique_ptr<NewPacketLossRateOptimizer> new_packet_loss_optimizer_;
   std::vector<int16_t> input_buffer_;
   OpusEncInst* inst_;
   uint32_t first_timestamp_in_buffer_;
