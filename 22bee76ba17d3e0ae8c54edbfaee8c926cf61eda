@@ -22,6 +22,30 @@
       "revId": "22bee76ba17d3e0ae8c54edbfaee8c926cf61eda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb9657a_79985af6",
+        "filename": "api/jsep.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-12T17:57:42Z",
+      "side": 1,
+      "message": "Yeah, those methods look pretty harmless. +1 to moving webrtcsdp.h to the api/ directory. api/sdp_serialization.h sgtm",
+      "parentUuid": "7d9225e5_5e2430e2",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 1
+      },
+      "revId": "22bee76ba17d3e0ae8c54edbfaee8c926cf61eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
