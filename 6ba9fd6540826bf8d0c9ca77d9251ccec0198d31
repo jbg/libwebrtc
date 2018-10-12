@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "db6783fc_c8e2e06f",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-12T08:54:17Z",
+      "side": 1,
+      "message": "Good point. I agree that this can be improved. I have changed it now so that it will change at media level for the following cases:\nsupported\u003d\u003dtrue, media\u003d\u003dkNo or kMedia \u003d\u003e kSession\nsupported\u003d\u003dfalse, media\u003dkSession \u003d\u003e kNo",
+      "parentUuid": "06d75106_c4cc17fd",
+      "range": {
+        "startLine": 480,
+        "startChar": 20,
+        "endLine": 480,
+        "endChar": 48
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45697e6f_0d4d449a",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 1
@@ -68,6 +92,30 @@
       "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896524fe_3d70de6f",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-12T08:54:17Z",
+      "side": 1,
+      "message": "Sounds good! I\u0027ll make the change.",
+      "parentUuid": "45697e6f_0d4d449a",
+      "range": {
+        "startLine": 501,
+        "startChar": 7,
+        "endLine": 501,
+        "endChar": 26
+      },
+      "revId": "6ba9fd6540826bf8d0c9ca77d9251ccec0198d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
