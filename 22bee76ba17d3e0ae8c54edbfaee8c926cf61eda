@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d9225e5_5e2430e2",
+        "filename": "api/jsep.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-12T14:13:05Z",
+      "side": 1,
+      "message": "Serialization and deserialization is defined here: https://cs.chromium.org/chromium/src/third_party/webrtc/pc/webrtcsdp.h.\n\nSince pc/webrtcsdp.h doesn\u0027t include anything from non-API directories, I am tempted to move it to api/sdp_serialization.h (or a better name, suggestions are welcome). The .cc file depends on internal stuff but that is not a problem since it will not leak via recursive header inclusion.\n\nCan we consider the following functions part of the API?\n* webrtc::SdpSerialize\n* webrtc::SdpSerializeCandidate\n* webrtc::SdpDeserialize\n* webrtc::SdpDeserializeCandidate",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 1
+      },
+      "revId": "22bee76ba17d3e0ae8c54edbfaee8c926cf61eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
