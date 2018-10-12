@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "66446fe4_34480553",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "I know the surrounding enums are normal enums but I still prefer enum class",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ada1c347_3223a284",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "Add a TODO to remove the default implementation once upstream projects are updated.",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f84bcb3_b2c36b36",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "nit: Remove space between link and .",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d11abdb2_7b661219",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1187,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "Nice! I like how the code maps really neatly to the spec, easy to see that the logic is the same.",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d572c1a8_9a2063b4",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "Do we want to DCHECK this?\n\nThere\u0027s also the kClosed state, but I guess that\u0027s a special case. Does this layer know whether the peer connection is closed?",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b034b3d_c0a188de",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 11
@@ -31,6 +116,125 @@
       "side": 1,
       "message": "I guess it\u0027s \"new\" in the same sense that a freshly wiped blackboard is? I do agree it feels weird though.",
       "parentUuid": "9b034b3d_c0a188de",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80e8f5e2_77793cc9",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "nit: Remove space between link and .",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c6d5337_8820957b",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "Is this always true?\nEarlier we are iterating all DTLS transports; all of them have an ICE transport.\n...But does every ICE transport have a DTLS transport?",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15ed815b_c6f710d5",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "nit: you can DCHECK that total_failed \u003d\u003d 0 since it is part of the definition of \"connecting\" but superfluous to test due to earlier ifs (in case anything is ever moved around or whatnot).",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93713133_22bb0613",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "nit: DCHECK the conditions?",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0125aaa_3673ca96",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "There may be possible races between in-flight tasks and the JsepTransportController destructor. In-flight tasks will be cancelled when the AsyncInvoker is destroyed. But I guess destruction only happens at PC destruction, which is after it has already been closed, and closing probably closes all the states anyway. This is no different than the existing code but always good to think about this stuff.",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11579628_748dacc6",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "Should this be called Set(Peer)ConnectionState?",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b852e96_1ca5d004",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 3596,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-12T12:44:41Z",
+      "side": 1,
+      "message": "After \"new\", is it expected to go \"new\" -\u003e \"connected\" and not \"new\" -\u003e \"connecting\" -\u003e \"connected\"? My thinking is that the DTLS connecting should be reflected in the PC connecting?",
       "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
