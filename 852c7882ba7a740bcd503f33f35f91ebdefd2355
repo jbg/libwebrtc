@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e74b8fc9_aec3a2f6",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-12T12:37:57Z",
+      "side": 1,
+      "message": "Conceptually wrong, since without context, may percent, e.g, 1200%, is a valid percent. So we may use IsValidPacketLossRate",
+      "range": {
+        "startLine": 217,
+        "startChar": 5,
+        "endLine": 217,
+        "endChar": 14
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83a5abee_a94c8d12",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-12T12:37:57Z",
+      "side": 1,
+      "message": "This is ctor is not needed, add default values to the other ctor.",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 30
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52f75ded_2f4801a2",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-12T12:37:57Z",
+      "side": 1,
+      "message": "add RTC_DISALLOW_COPY_AND_ASSIGN(NewPacketLossRateOptimizer);",
+      "range": {
+        "startLine": 51,
+        "startChar": 3,
+        "endLine": 51,
+        "endChar": 4
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0eaf0c2_e7123f72",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-12T12:37:57Z",
+      "side": 1,
+      "message": "please add const",
+      "range": {
+        "startLine": 177,
+        "startChar": 2,
+        "endLine": 177,
+        "endChar": 7
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b27a0f66_64830e10",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-12T12:37:57Z",
+      "side": 1,
+      "message": "add const to this as well.",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "836cbd92_68a3886e",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-12T12:37:57Z",
+      "side": 1,
+      "message": "may you add a test on the parser for the new optimizer",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 517,
+        "endChar": 0
+      },
+      "revId": "852c7882ba7a740bcd503f33f35f91ebdefd2355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
