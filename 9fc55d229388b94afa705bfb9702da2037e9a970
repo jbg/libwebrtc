@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90ce34d4_81fde9cf",
+        "filename": "modules/desktop_capture/window_capturer_linux.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-12T17:04:21Z",
+      "side": 1,
+      "message": "nits: use make_unique instead of new.",
+      "range": {
+        "startLine": 29,
+        "startChar": 44,
+        "endLine": 29,
+        "endChar": 47
+      },
+      "revId": "9fc55d229388b94afa705bfb9702da2037e9a970",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

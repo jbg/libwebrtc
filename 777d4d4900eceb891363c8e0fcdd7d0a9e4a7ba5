@@ -93,6 +93,30 @@
       "revId": "777d4d4900eceb891363c8e0fcdd7d0a9e4a7ba5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7a7b45e_f5bb9dc7",
+        "filename": "modules/desktop_capture/window_capturer_linux.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-10-12T17:04:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a4b3fbf2_56ff919c",
+      "range": {
+        "startLine": 29,
+        "startChar": 48,
+        "endLine": 29,
+        "endChar": 70
+      },
+      "revId": "777d4d4900eceb891363c8e0fcdd7d0a9e4a7ba5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
