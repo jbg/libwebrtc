@@ -22,6 +22,30 @@
       "revId": "8dcd0d258b288ddf86e4428f363874180c4bb9d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ac2f72f_a09521dd",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-12T11:10:07Z",
+      "side": 1,
+      "message": "sure I plan to fix it, I do not like hacks.\nbut because of the way code is organized, it is not trivial,\nso prefer to do that carefully (i.e. slowly).",
+      "parentUuid": "917d3b52_5e74138c",
+      "range": {
+        "startLine": 1153,
+        "startChar": 34,
+        "endLine": 1153,
+        "endChar": 57
+      },
+      "revId": "8dcd0d258b288ddf86e4428f363874180c4bb9d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
