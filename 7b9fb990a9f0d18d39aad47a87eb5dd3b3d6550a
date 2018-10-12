@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd7aaaeb_89595443",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T12:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "228e1e34_c0bebdbf",
+      "range": {
+        "startLine": 835,
+        "startChar": 13,
+        "endLine": 835,
+        "endChar": 14
+      },
+      "revId": "7b9fb990a9f0d18d39aad47a87eb5dd3b3d6550a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19107875_36bf91e9",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "7b9fb990a9f0d18d39aad47a87eb5dd3b3d6550a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e142af42_72a5107f",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T12:07:18Z",
+      "side": 1,
+      "message": "Wrapped data in class NewPacketLossRateOptimizer.",
+      "parentUuid": "19107875_36bf91e9",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 41
+      },
+      "revId": "7b9fb990a9f0d18d39aad47a87eb5dd3b3d6550a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
