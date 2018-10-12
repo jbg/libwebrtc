@@ -70,6 +70,30 @@
       "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ad6beb8_b53b517d",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-10-12T10:36:33Z",
+      "side": 1,
+      "message": "Do you think it would be even better to define a class NewPacketLossRateOptimizer that also contains the optimization logic?",
+      "parentUuid": "d263737e_cffdddae",
+      "range": {
+        "startLine": 818,
+        "startChar": 0,
+        "endLine": 823,
+        "endChar": 55
+      },
+      "revId": "0f968c4c0983f5b954b8d0e4cfa289330d71471a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
