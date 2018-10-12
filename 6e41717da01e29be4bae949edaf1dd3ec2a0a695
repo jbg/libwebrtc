@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "279d458a_a550f868",
+        "filename": "api/audio/echo_canceller3_config.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-12T14:02:12Z",
+      "side": 1,
+      "message": "Would it be possible to put this as size_t? That would simplify the upcoming validation as it ensures that nonzero values cannot be entered.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "6e41717da01e29be4bae949edaf1dd3ec2a0a695",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

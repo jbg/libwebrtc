@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f066153f_06166ad8",
+        "filename": "modules/audio_processing/aec3/render_delay_buffer2.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-12T14:02:12Z",
+      "side": 1,
+      "message": "Please check, and then also correct, so that this\n-Does not become negative\n-Does not end up in an unsigned wrap\n-Does properly wrap in the circular buffers.\n-Does not end up in a delay that goes past the write pointer.",
+      "range": {
+        "startLine": 316,
+        "startChar": 22,
+        "endLine": 316,
+        "endChar": 23
+      },
+      "revId": "1feb47e5f72f9560bd24791ccfbb05305390b07a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
