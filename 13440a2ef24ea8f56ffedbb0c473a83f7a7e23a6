@@ -46,6 +46,30 @@
       "revId": "13440a2ef24ea8f56ffedbb0c473a83f7a7e23a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ed5b4e2_3464dfb3",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-12T06:58:37Z",
+      "side": 1,
+      "message": "We\u0027ve just been discussing unsignalled ssrcs with some of our downstream users, and it seems this features is unused and in some cases even causing problems. So I\u0027m considering making a cl to delete all support for unsignalled video. (Audio might follow later, but usage is a bit different).",
+      "parentUuid": "8b822825_c35522b9",
+      "range": {
+        "startLine": 1457,
+        "startChar": 4,
+        "endLine": 1457,
+        "endChar": 31
+      },
+      "revId": "13440a2ef24ea8f56ffedbb0c473a83f7a7e23a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
