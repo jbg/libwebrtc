@@ -57,8 +57,6 @@ using testing::Field;
 namespace {
 static const int kDefaultQpMax = 56;
 
-static const uint8_t kRedRtxPayloadType = 125;
-
 static const uint32_t kTimeout = 5000U;
 static const uint32_t kDefaultReceiveSsrc = 0;
 static const uint32_t kSsrc = 1234u;
@@ -72,7 +70,6 @@ static const uint32_t kSsrcs3[] = {1, 2, 3};
 static const uint32_t kRtxSsrcs1[] = {4};
 static const uint32_t kFlexfecSsrc = 5;
 static const uint32_t kIncomingUnsignalledSsrc = 0xC0FFEE;
-static const uint32_t kDefaultRecvSsrc = 0;
 
 static const char kUnsupportedExtensionName[] =
     "urn:ietf:params:rtp-hdrext:unsupported";
@@ -1541,7 +1538,7 @@ TEST_F(WebRtcVideoChannelBaseTest, InvalidRecvBufferSize) {
 }
 
 // Test that stats work properly for a 1-1 call.
-TEST_F(WebRtcVideoChannelBaseTest, GetStats) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_GetStats) {
   const int kDurationSec = 3;
   const int kFps = 10;
   SendReceiveManyAndGetStats(DefaultCodec(), kDurationSec, kFps);
@@ -1766,7 +1763,7 @@ TEST_F(WebRtcVideoChannelBaseTest, SetSendSsrcAfterSetCodecs) {
 
 // Test that we can set the default video renderer before and after
 // media is received.
-TEST_F(WebRtcVideoChannelBaseTest, SetSink) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_SetSink) {
   uint8_t data1[] = {0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -1783,7 +1780,7 @@ TEST_F(WebRtcVideoChannelBaseTest, SetSink) {
 }
 
 // Tests setting up and configuring a send stream.
-TEST_F(WebRtcVideoChannelBaseTest, AddRemoveSendStreams) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_AddRemoveSendStreams) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
   EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
@@ -1924,7 +1921,7 @@ TEST_F(WebRtcVideoChannelBaseTest, DISABLED_AddRemoveCapturer) {
 // Tests that if SetVideoSend is called with a NULL capturer after the
 // capturer was already removed, the application doesn't crash (and no black
 // frame is sent).
-TEST_F(WebRtcVideoChannelBaseTest, RemoveCapturerWithoutAdd) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_RemoveCapturerWithoutAdd) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
   EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
@@ -2029,19 +2026,19 @@ TEST_F(WebRtcVideoChannelBaseTest, MultipleSendStreams) {
   EXPECT_FALSE(channel_->RemoveSendStream(kSsrcs4[kSsrcsSize - 1]));
 }
 
-TEST_F(WebRtcVideoChannelBaseTest, SendAndReceiveVp8Vga) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_SendAndReceiveVp8Vga) {
   SendAndReceive(GetEngineCodec("VP8"));
 }
 
-TEST_F(WebRtcVideoChannelBaseTest, SendAndReceiveVp8Qvga) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_SendAndReceiveVp8Qvga) {
   SendAndReceive(GetEngineCodec("VP8"));
 }
 
-TEST_F(WebRtcVideoChannelBaseTest, SendAndReceiveVp8SvcQqvga) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_SendAndReceiveVp8SvcQqvga) {
   SendAndReceive(GetEngineCodec("VP8"));
 }
 
-TEST_F(WebRtcVideoChannelBaseTest, TwoStreamsSendAndReceive) {
+TEST_F(WebRtcVideoChannelBaseTest, DISABLED_TwoStreamsSendAndReceive) {
   // Set a high bitrate to not be downscaled by VP8 due to low initial start
   // bitrates. This currently happens at <250k, and two streams sharing 300k
   // initially will use QVGA instead of VGA.
@@ -2241,8 +2238,6 @@ class WebRtcVideoChannelTest : public WebRtcVideoEngineTest {
 
   void TestCpuAdaptation(bool enable_overuse, bool is_screenshare);
   void TestReceiverLocalSsrcConfiguration(bool receiver_first);
-  void TestReceiveUnsignaledSsrcPacket(uint8_t payload_type,
-                                       bool expect_created_receive_stream);
 
   FakeVideoSendStream* SetDenoisingOption(
       uint32_t ssrc,
@@ -4964,42 +4959,6 @@ TEST_F(WebRtcVideoChannelTest, TranslatesSenderBitrateStatsCorrectly) {
       << "Bandwidth stats should take all streams into account.";
 }
 
-TEST_F(WebRtcVideoChannelTest, DefaultReceiveStreamReconfiguresToUseRtx) {
-  EXPECT_TRUE(channel_->SetSendParameters(send_parameters_));
-
-  const std::vector<uint32_t> ssrcs = MAKE_VECTOR(kSsrcs1);
-  const std::vector<uint32_t> rtx_ssrcs = MAKE_VECTOR(kRtxSsrcs1);
-
-  ASSERT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
-  const size_t kDataLength = 12;
-  uint8_t data[kDataLength];
-  memset(data, 0, sizeof(data));
-  rtc::SetBE32(&data[8], ssrcs[0]);
-  rtc::CopyOnWriteBuffer packet(data, kDataLength);
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
-
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size())
-      << "No default receive stream created.";
-  FakeVideoReceiveStream* recv_stream = fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_EQ(0u, recv_stream->GetConfig().rtp.rtx_ssrc)
-      << "Default receive stream should not have configured RTX";
-
-  EXPECT_TRUE(channel_->AddRecvStream(
-      cricket::CreateSimWithRtxStreamParams("cname", ssrcs, rtx_ssrcs)));
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size())
-      << "AddRecvStream should have reconfigured, not added a new receiver.";
-  recv_stream = fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_FALSE(
-      recv_stream->GetConfig().rtp.rtx_associated_payload_types.empty());
-  EXPECT_TRUE(VerifyRtxReceiveAssociations(recv_stream->GetConfig()))
-      << "RTX should be mapped for all decoders/payload types.";
-  EXPECT_TRUE(HasRtxReceiveAssociation(recv_stream->GetConfig(),
-                                       GetEngineCodec("red").id))
-      << "RTX should be mapped also for the RED payload type";
-  EXPECT_EQ(rtx_ssrcs[0], recv_stream->GetConfig().rtp.rtx_ssrc);
-}
-
 TEST_F(WebRtcVideoChannelTest, RejectsAddingStreamsWithMissingSsrcsForRtx) {
   EXPECT_TRUE(channel_->SetSendParameters(send_parameters_));
 
@@ -5120,7 +5079,8 @@ TEST_F(WebRtcVideoChannelTest, MapsReceivedPayloadTypeToCodecName) {
 // Tests that when we add a stream without SSRCs, but contains a stream_id
 // that it is stored and its stream id is later used when the first packet
 // arrives to properly create a receive stream with a sync label.
-TEST_F(WebRtcVideoChannelTest, RecvUnsignaledSsrcWithSignaledStreamId) {
+TEST_F(WebRtcVideoChannelTest,
+       DISABLED_RecvUnsignaledSsrcWithSignaledStreamId) {
   const char kSyncLabel[] = "sync_label";
   cricket::StreamParams unsignaled_stream;
   unsignaled_stream.set_stream_ids({kSyncLabel});
@@ -5153,198 +5113,6 @@ TEST_F(WebRtcVideoChannelTest, RecvUnsignaledSsrcWithSignaledStreamId) {
   EXPECT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   EXPECT_TRUE(
       fake_call_->GetVideoReceiveStreams()[0]->GetConfig().sync_group.empty());
-}
-
-void WebRtcVideoChannelTest::TestReceiveUnsignaledSsrcPacket(
-    uint8_t payload_type,
-    bool expect_created_receive_stream) {
-  // kRedRtxPayloadType must currently be unused.
-  EXPECT_FALSE(FindCodecById(engine_.codecs(), kRedRtxPayloadType));
-
-  // Add a RED RTX codec.
-  VideoCodec red_rtx_codec =
-      VideoCodec::CreateRtxCodec(kRedRtxPayloadType, GetEngineCodec("red").id);
-  recv_parameters_.codecs.push_back(red_rtx_codec);
-  EXPECT_TRUE(channel_->SetRecvParameters(recv_parameters_));
-
-  ASSERT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
-  const size_t kDataLength = 12;
-  uint8_t data[kDataLength];
-  memset(data, 0, sizeof(data));
-
-  rtc::Set8(data, 1, payload_type);
-  rtc::SetBE32(&data[8], kIncomingUnsignalledSsrc);
-  rtc::CopyOnWriteBuffer packet(data, kDataLength);
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
-
-  if (expect_created_receive_stream) {
-    EXPECT_EQ(1u, fake_call_->GetVideoReceiveStreams().size())
-        << "Should have created a receive stream for payload type: "
-        << payload_type;
-  } else {
-    EXPECT_EQ(0u, fake_call_->GetVideoReceiveStreams().size())
-        << "Shouldn't have created a receive stream for payload type: "
-        << payload_type;
-  }
-}
-
-TEST_F(WebRtcVideoChannelTest, Vp8PacketCreatesUnsignalledStream) {
-  TestReceiveUnsignaledSsrcPacket(GetEngineCodec("VP8").id,
-                                  true /* expect_created_receive_stream */);
-}
-
-TEST_F(WebRtcVideoChannelTest, Vp9PacketCreatesUnsignalledStream) {
-  TestReceiveUnsignaledSsrcPacket(GetEngineCodec("VP9").id,
-                                  true /* expect_created_receive_stream */);
-}
-
-TEST_F(WebRtcVideoChannelTest, RtxPacketDoesntCreateUnsignalledStream) {
-  AssignDefaultAptRtxTypes();
-  const cricket::VideoCodec vp8 = GetEngineCodec("VP8");
-  const int rtx_vp8_payload_type = default_apt_rtx_types_[vp8.id];
-  TestReceiveUnsignaledSsrcPacket(rtx_vp8_payload_type,
-                                  false /* expect_created_receive_stream */);
-}
-
-TEST_F(WebRtcVideoChannelTest, UlpfecPacketDoesntCreateUnsignalledStream) {
-  TestReceiveUnsignaledSsrcPacket(GetEngineCodec("ulpfec").id,
-                                  false /* expect_created_receive_stream */);
-}
-
-TEST_F(WebRtcVideoChannelFlexfecRecvTest,
-       FlexfecPacketDoesntCreateUnsignalledStream) {
-  TestReceiveUnsignaledSsrcPacket(GetEngineCodec("flexfec-03").id,
-                                  false /* expect_created_receive_stream */);
-}
-
-TEST_F(WebRtcVideoChannelTest, RedRtxPacketDoesntCreateUnsignalledStream) {
-  TestReceiveUnsignaledSsrcPacket(kRedRtxPayloadType,
-                                  false /* expect_created_receive_stream */);
-}
-
-// Test that receiving any unsignalled SSRC works even if it changes.
-// The first unsignalled SSRC received will create a default receive stream.
-// Any different unsignalled SSRC received will replace the default.
-TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
-  // Allow receiving VP8, VP9, H264 (if enabled).
-  cricket::VideoRecvParameters parameters;
-  parameters.codecs.push_back(GetEngineCodec("VP8"));
-  parameters.codecs.push_back(GetEngineCodec("VP9"));
-
-#if defined(WEBRTC_USE_H264)
-  cricket::VideoCodec H264codec(126, "H264");
-  parameters.codecs.push_back(H264codec);
-#endif
-
-  EXPECT_TRUE(channel_->SetRecvParameters(parameters));
-  // No receive streams yet.
-  ASSERT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
-  cricket::FakeVideoRenderer renderer;
-  EXPECT_TRUE(channel_->SetSink(kDefaultRecvSsrc, &renderer));
-
-  // Receive VP8 packet on first SSRC.
-  uint8_t data[kMinRtpPacketLen];
-  cricket::RtpHeader rtpHeader;
-  rtpHeader.payload_type = GetEngineCodec("VP8").id;
-  rtpHeader.seq_num = rtpHeader.timestamp = 0;
-  rtpHeader.ssrc = kIncomingUnsignalledSsrc + 1;
-  cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
-  rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
-  // VP8 packet should create default receive stream.
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
-  FakeVideoReceiveStream* recv_stream = fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_EQ(rtpHeader.ssrc, recv_stream->GetConfig().rtp.remote_ssrc);
-  // Verify that the receive stream sinks to a renderer.
-  webrtc::VideoFrame video_frame(CreateBlackFrameBuffer(4, 4), 100, 0,
-                                 webrtc::kVideoRotation_0);
-  recv_stream->InjectFrame(video_frame);
-  EXPECT_EQ(1, renderer.num_rendered_frames());
-
-  // Receive VP9 packet on second SSRC.
-  rtpHeader.payload_type = GetEngineCodec("VP9").id;
-  rtpHeader.ssrc = kIncomingUnsignalledSsrc + 2;
-  cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
-  rtc::CopyOnWriteBuffer packet2(data, sizeof(data));
-  channel_->OnPacketReceived(&packet2, packet_time);
-  // VP9 packet should replace the default receive SSRC.
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
-  recv_stream = fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_EQ(rtpHeader.ssrc, recv_stream->GetConfig().rtp.remote_ssrc);
-  // Verify that the receive stream sinks to a renderer.
-  webrtc::VideoFrame video_frame2(CreateBlackFrameBuffer(4, 4), 200, 0,
-                                  webrtc::kVideoRotation_0);
-  recv_stream->InjectFrame(video_frame2);
-  EXPECT_EQ(2, renderer.num_rendered_frames());
-
-#if defined(WEBRTC_USE_H264)
-  // Receive H264 packet on third SSRC.
-  rtpHeader.payload_type = 126;
-  rtpHeader.ssrc = kIncomingUnsignalledSsrc + 3;
-  cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
-  rtc::CopyOnWriteBuffer packet3(data, sizeof(data));
-  channel_->OnPacketReceived(&packet3, packet_time);
-  // H264 packet should replace the default receive SSRC.
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
-  recv_stream = fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_EQ(rtpHeader.ssrc, recv_stream->GetConfig().rtp.remote_ssrc);
-  // Verify that the receive stream sinks to a renderer.
-  webrtc::VideoFrame video_frame3(CreateBlackFrameBuffer(4, 4), 300, 0,
-                                  webrtc::kVideoRotation_0);
-  recv_stream->InjectFrame(video_frame3);
-  EXPECT_EQ(3, renderer.num_rendered_frames());
-#endif
-}
-
-// This test verifies that when a new default stream is created for a new
-// unsignaled SSRC, the new stream does not overwrite any old stream that had
-// been the default receive stream before being properly signaled.
-TEST_F(WebRtcVideoChannelTest,
-       NewUnsignaledStreamDoesNotDestroyPreviouslyUnsignaledStream) {
-  cricket::VideoRecvParameters parameters;
-  parameters.codecs.push_back(GetEngineCodec("VP8"));
-  ASSERT_TRUE(channel_->SetRecvParameters(parameters));
-
-  // No streams signaled and no packets received, so we should not have any
-  // stream objects created yet.
-  EXPECT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
-
-  // Receive packet on an unsignaled SSRC.
-  uint8_t data[kMinRtpPacketLen];
-  cricket::RtpHeader rtp_header;
-  rtp_header.payload_type = GetEngineCodec("VP8").id;
-  rtp_header.seq_num = rtp_header.timestamp = 0;
-  rtp_header.ssrc = kSsrcs3[0];
-  cricket::SetRtpHeader(data, sizeof(data), rtp_header);
-  rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
-  // Default receive stream should be created.
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
-  FakeVideoReceiveStream* recv_stream0 =
-      fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_EQ(kSsrcs3[0], recv_stream0->GetConfig().rtp.remote_ssrc);
-
-  // Signal the SSRC.
-  EXPECT_TRUE(
-      channel_->AddRecvStream(cricket::StreamParams::CreateLegacy(kSsrcs3[0])));
-  ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
-  recv_stream0 = fake_call_->GetVideoReceiveStreams()[0];
-  EXPECT_EQ(kSsrcs3[0], recv_stream0->GetConfig().rtp.remote_ssrc);
-
-  // Receive packet on a different unsignaled SSRC.
-  rtp_header.ssrc = kSsrcs3[1];
-  cricket::SetRtpHeader(data, sizeof(data), rtp_header);
-  packet.SetData(data, sizeof(data));
-  channel_->OnPacketReceived(&packet, packet_time);
-  // New default receive stream should be created, but old stream should remain.
-  ASSERT_EQ(2u, fake_call_->GetVideoReceiveStreams().size());
-  EXPECT_EQ(recv_stream0, fake_call_->GetVideoReceiveStreams()[0]);
-  FakeVideoReceiveStream* recv_stream1 =
-      fake_call_->GetVideoReceiveStreams()[1];
-  EXPECT_EQ(kSsrcs3[1], recv_stream1->GetConfig().rtp.remote_ssrc);
 }
 
 TEST_F(WebRtcVideoChannelTest, CanSetMaxBitrateForExistingStream) {
@@ -6619,49 +6387,6 @@ TEST_F(WebRtcVideoChannelTest, SetAndGetRtpReceiveParameters) {
   EXPECT_EQ(initial_params, channel_->GetRtpReceiveParameters(last_ssrc_));
 }
 
-// Test that GetRtpReceiveParameters returns parameters correctly when SSRCs
-// aren't signaled. It should always return an empty "RtpEncodingParameters",
-// even after a packet is received and the unsignaled SSRC is known.
-TEST_F(WebRtcVideoChannelTest, GetRtpReceiveParametersWithUnsignaledSsrc) {
-  // Call necessary methods to configure receiving a default stream as
-  // soon as it arrives.
-  cricket::VideoRecvParameters parameters;
-  parameters.codecs.push_back(GetEngineCodec("VP8"));
-  parameters.codecs.push_back(GetEngineCodec("VP9"));
-  EXPECT_TRUE(channel_->SetRecvParameters(parameters));
-
-  // Call GetRtpReceiveParameters before configured to receive an unsignaled
-  // stream. Should return nothing.
-  EXPECT_EQ(webrtc::RtpParameters(), channel_->GetRtpReceiveParameters(0));
-
-  // Set a sink for an unsignaled stream.
-  cricket::FakeVideoRenderer renderer;
-  // Value of "0" means "unsignaled stream".
-  EXPECT_TRUE(channel_->SetSink(0, &renderer));
-
-  // Call GetRtpReceiveParameters before the SSRC is known. Value of "0"
-  // in this method means "unsignaled stream".
-  webrtc::RtpParameters rtp_parameters = channel_->GetRtpReceiveParameters(0);
-  ASSERT_EQ(1u, rtp_parameters.encodings.size());
-  EXPECT_FALSE(rtp_parameters.encodings[0].ssrc);
-
-  // Receive VP8 packet.
-  uint8_t data[kMinRtpPacketLen];
-  cricket::RtpHeader rtpHeader;
-  rtpHeader.payload_type = GetEngineCodec("VP8").id;
-  rtpHeader.seq_num = rtpHeader.timestamp = 0;
-  rtpHeader.ssrc = kIncomingUnsignalledSsrc;
-  cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
-  rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  rtc::PacketTime packet_time;
-  channel_->OnPacketReceived(&packet, packet_time);
-
-  // The |ssrc| member should still be unset.
-  rtp_parameters = channel_->GetRtpReceiveParameters(0);
-  ASSERT_EQ(1u, rtp_parameters.encodings.size());
-  EXPECT_FALSE(rtp_parameters.encodings[0].ssrc);
-}
-
 void WebRtcVideoChannelTest::TestReceiverLocalSsrcConfiguration(
     bool receiver_first) {
   EXPECT_TRUE(channel_->SetSendParameters(send_parameters_));
@@ -6938,7 +6663,7 @@ class WebRtcVideoFakeClock {
 class WebRtcVideoChannelTestWithClock : public WebRtcVideoFakeClock,
                                         public WebRtcVideoChannelBaseTest {};
 
-TEST_F(WebRtcVideoChannelTestWithClock, GetSources) {
+TEST_F(WebRtcVideoChannelTestWithClock, DISABLED_GetSources) {
   uint8_t data1[] = {0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -6970,7 +6695,7 @@ TEST_F(WebRtcVideoChannelTestWithClock, GetSources) {
   EXPECT_EQ(0u, channel_->GetSources(kSsrc).size());
 }
 
-TEST_F(WebRtcVideoChannelTestWithClock, GetContributingSources) {
+TEST_F(WebRtcVideoChannelTestWithClock, DISABLED_GetContributingSources) {
   uint8_t data1[] = {0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
