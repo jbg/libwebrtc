@@ -26,13 +26,12 @@ constexpr int kPoorExcitationCounterInitial = 1000;
 
 }  // namespace
 
-int MainFilterUpdateGain::instance_count_ = 0;
+std::atomic<int> MainFilterUpdateGain::instance_count_(0);
 
 MainFilterUpdateGain::MainFilterUpdateGain(
     const EchoCanceller3Config::Filter::MainConfiguration& config,
     size_t config_change_duration_blocks)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       config_change_duration_blocks_(
           static_cast<int>(config_change_duration_blocks)),
       poor_excitation_counter_(kPoorExcitationCounterInitial) {

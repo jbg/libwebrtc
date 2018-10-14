@@ -49,7 +49,8 @@ PacketBuffer::PacketBuffer(Clock* clock,
       received_frame_callback_(received_frame_callback),
       unique_frames_seen_(0),
       sps_pps_idr_is_h264_keyframe_(
-          field_trial::IsEnabled("WebRTC-SpsPpsIdrIsH264Keyframe")) {
+          field_trial::IsEnabled("WebRTC-SpsPpsIdrIsH264Keyframe")),
+      ref_count_(0) {
   RTC_DCHECK_LE(start_buffer_size, max_buffer_size);
   // Buffer size must always be a power of 2.
   RTC_DCHECK((start_buffer_size & (start_buffer_size - 1)) == 0);
@@ -462,11 +463,11 @@ VCMPacket* PacketBuffer::GetPacket(uint16_t seq_num) {
 }
 
 int PacketBuffer::AddRef() const {
-  return rtc::AtomicOps::Increment(&ref_count_);
+  return ++ref_count_;
 }
 
 int PacketBuffer::Release() const {
-  int count = rtc::AtomicOps::Decrement(&ref_count_);
+  int count = --ref_count_;
   if (!count) {
     delete this;
   }

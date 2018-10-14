@@ -12,6 +12,7 @@
 #define MODULES_AUDIO_PROCESSING_AEC3_STATIONARITY_ESTIMATOR_H_
 
 #include <array>
+#include <atomic>
 #include <memory>
 #include <vector>
 
@@ -106,7 +107,7 @@ class StationarityEstimator {
     size_t block_counter_;
   };
 
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   NoiseSpectrum noise_;
   std::array<int, kFftLengthBy2Plus1> hangovers_;

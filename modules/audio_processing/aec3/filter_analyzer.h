@@ -12,6 +12,7 @@
 #define MODULES_AUDIO_PROCESSING_AEC3_FILTER_ANALYZER_H_
 
 #include <array>
+#include <atomic>
 #include <vector>
 
 #include "absl/types/optional.h"
@@ -62,7 +63,7 @@ class FilterAnalyzer {
                         size_t max_index);
   void PreProcessFilter(rtc::ArrayView<const float> filter_time_domain);
 
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const bool use_preprocessed_filter_;
   const bool bounded_erl_;

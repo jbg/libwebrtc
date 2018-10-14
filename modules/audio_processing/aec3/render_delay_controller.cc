@@ -10,6 +10,7 @@
 #include "modules/audio_processing/aec3/render_delay_controller.h"
 
 #include <algorithm>
+#include <atomic>
 #include <memory>
 #include <numeric>
 #include <string>
@@ -61,7 +62,7 @@ class RenderDelayControllerImpl final : public RenderDelayController {
       rtc::ArrayView<const float> capture) override;
 
  private:
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const int delay_headroom_blocks_;
   const int hysteresis_limit_1_blocks_;
@@ -121,14 +122,13 @@ DelayEstimate ComputeBufferDelay(
   return new_delay;
 }
 
-int RenderDelayControllerImpl::instance_count_ = 0;
+std::atomic<int> RenderDelayControllerImpl::instance_count_(0);
 
 RenderDelayControllerImpl::RenderDelayControllerImpl(
     const EchoCanceller3Config& config,
     int non_causal_offset,
     int sample_rate_hz)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       delay_headroom_blocks_(
           static_cast<int>(config.delay.delay_headroom_blocks)),
       hysteresis_limit_1_blocks_(
