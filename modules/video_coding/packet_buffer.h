@@ -11,6 +11,7 @@
 #ifndef MODULES_VIDEO_CODING_PACKET_BUFFER_H_
 #define MODULES_VIDEO_CODING_PACKET_BUFFER_H_
 
+#include <atomic>
 #include <memory>
 #include <queue>
 #include <set>
@@ -178,7 +179,7 @@ class PacketBuffer {
   // Stores the same unique timestamps in the order of insertion.
   std::queue<uint32_t> rtp_timestamps_history_queue_ RTC_GUARDED_BY(crit_);
 
-  mutable volatile int ref_count_ = 0;
+  mutable std::atomic<int> ref_count_;
 };
 
 }  // namespace video_coding

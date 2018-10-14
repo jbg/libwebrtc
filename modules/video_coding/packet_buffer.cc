@@ -462,11 +462,11 @@ VCMPacket* PacketBuffer::GetPacket(uint16_t seq_num) {
 }
 
 int PacketBuffer::AddRef() const {
-  return rtc::AtomicOps::Increment(&ref_count_);
+  return ++ref_count_;
 }
 
 int PacketBuffer::Release() const {
-  int count = rtc::AtomicOps::Decrement(&ref_count_);
+  int count = --ref_count_;
   if (!count) {
     delete this;
   }
