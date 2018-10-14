@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6df7ff5_8abee468",
+        "filename": "rtc_base/network/sent_packet.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-14T11:06:49Z",
+      "side": 1,
+      "message": "These need to be defined in a .cc file in the same build target. Otherwise the build system can\u0027t ensure you won\u0027t get linker errors.",
+      "revId": "7ba5248ecd6138619285b740133d4a746b51e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd357ca4_94e5661b",
+        "filename": "rtc_base/network/sent_packet.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-14T11:06:49Z",
+      "side": 1,
+      "message": "And these.",
+      "revId": "7ba5248ecd6138619285b740133d4a746b51e2cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
