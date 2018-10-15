@@ -11,6 +11,7 @@
 #ifndef AUDIO_AUDIO_STATE_H_
 #define AUDIO_AUDIO_STATE_H_
 
+#include <atomic>
 #include <map>
 #include <memory>
 #include <unordered_set>
@@ -74,7 +75,7 @@ class AudioState final : public webrtc::AudioState {
 
   // Reference count; implementation copied from rtc::RefCountedObject.
   // TODO(nisse): Use RefCountedObject or RefCountedBase instead.
-  mutable volatile int ref_count_ = 0;
+  mutable std::atomic<int> ref_count_;
 
   // Transports mixed audio from the mixer to the audio device and
   // recorded audio to the sending streams.

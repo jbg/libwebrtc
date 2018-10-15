@@ -11,6 +11,8 @@
 #ifndef MODULES_AUDIO_CODING_CODECS_ISAC_LOCKED_BANDWIDTH_INFO_H_
 #define MODULES_AUDIO_CODING_CODECS_ISAC_LOCKED_BANDWIDTH_INFO_H_
 
+#include <atomic>
+
 #include "modules/audio_coding/codecs/isac/bandwidth_info.h"
 #include "rtc_base/atomicops.h"
 #include "rtc_base/criticalsection.h"
@@ -35,10 +37,10 @@ class LockedIsacBandwidthInfo final {
     bwinfo_ = bwinfo;
   }
 
-  int AddRef() const { return rtc::AtomicOps::Increment(&ref_count_); }
+  int AddRef() const { return ++ref_count_; }
 
   int Release() const {
-    const int count = rtc::AtomicOps::Decrement(&ref_count_);
+    const int count = --ref_count_;
     if (count == 0) {
       delete this;
     }
@@ -46,7 +48,7 @@ class LockedIsacBandwidthInfo final {
   }
 
  private:
-  mutable volatile int ref_count_;
+  mutable std::atomic<int> ref_count_;
   rtc::CriticalSection lock_;
   IsacBandwidthInfo bwinfo_ RTC_GUARDED_BY(lock_);
 };

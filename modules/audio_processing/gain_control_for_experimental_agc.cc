@@ -18,13 +18,12 @@
 
 namespace webrtc {
 
-int GainControlForExperimentalAgc::instance_counter_ = 0;
+std::atomic<int> GainControlForExperimentalAgc::instance_counter_(0);
 
 GainControlForExperimentalAgc::GainControlForExperimentalAgc(
     GainControl* gain_control,
     rtc::CriticalSection* crit_capture)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_counter_))),
+    : data_dumper_(new ApmDataDumper(++instance_counter_)),
       real_gain_control_(gain_control),
       volume_(0),
       crit_capture_(crit_capture) {}

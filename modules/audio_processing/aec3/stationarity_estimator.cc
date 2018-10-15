@@ -29,8 +29,7 @@ constexpr int kNBlocksInitialPhase = kNumBlocksPerSecond * 2.;
 }  // namespace
 
 StationarityEstimator::StationarityEstimator()
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))) {
+    : data_dumper_(new ApmDataDumper(++instance_count_)) {
   Reset();
 }
 
@@ -152,7 +151,7 @@ void StationarityEstimator::SmoothStationaryPerFreq() {
   stationarity_flags_ = all_ahead_stationary_smooth;
 }
 
-int StationarityEstimator::instance_count_ = 0;
+std::atomic<int> StationarityEstimator::instance_count_(0);
 
 StationarityEstimator::NoiseSpectrum::NoiseSpectrum() {
   Reset();

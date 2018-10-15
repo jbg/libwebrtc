@@ -19,11 +19,10 @@
 
 namespace webrtc {
 
-int GainController2::instance_count_ = 0;
+std::atomic<int> GainController2::instance_count_(0);
 
 GainController2::GainController2()
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       fixed_gain_controller_(data_dumper_.get()),
       adaptive_agc_(data_dumper_.get()) {}
 

@@ -11,7 +11,9 @@
 #include "modules/audio_processing/aec3/render_delay_buffer.h"
 
 #include <string.h>
+
 #include <algorithm>
+#include <atomic>
 #include <numeric>
 
 #include "modules/audio_processing/aec3/aec3_common.h"
@@ -59,7 +61,7 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
   void SetAudioBufferDelay(size_t delay_ms) override;
 
  private:
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const Aec3Optimization optimization_;
   const EchoCanceller3Config config_;
@@ -161,12 +163,11 @@ bool ApiCallSkew(const DownsampledRenderBuffer& low_rate_buffer,
   return skew >= skew_limit;
 }
 
-int RenderDelayBufferImpl::instance_count_ = 0;
+std::atomic<int> RenderDelayBufferImpl::instance_count_(0);
 
 RenderDelayBufferImpl::RenderDelayBufferImpl(const EchoCanceller3Config& config,
                                              size_t num_bands)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       optimization_(DetectOptimization()),
       config_(config),
       down_sampling_factor_(config.delay.down_sampling_factor),
