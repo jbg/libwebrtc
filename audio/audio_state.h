@@ -21,6 +21,7 @@
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/criticalsection.h"
 #include "rtc_base/refcount.h"
+#include "rtc_base/refcounter.h"
 #include "rtc_base/thread_checker.h"
 
 namespace webrtc {
@@ -72,9 +73,7 @@ class AudioState final : public webrtc::AudioState {
   bool recording_enabled_ = true;
   bool playout_enabled_ = true;
 
-  // Reference count; implementation copied from rtc::RefCountedObject.
-  // TODO(nisse): Use RefCountedObject or RefCountedBase instead.
-  mutable volatile int ref_count_ = 0;
+  mutable webrtc::webrtc_impl::RefCounter ref_count_;
 
   // Transports mixed audio from the mixer to the audio device and
   // recorded audio to the sending streams.

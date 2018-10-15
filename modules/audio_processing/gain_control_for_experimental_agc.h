@@ -11,6 +11,8 @@
 #ifndef MODULES_AUDIO_PROCESSING_GAIN_CONTROL_FOR_EXPERIMENTAL_AGC_H_
 #define MODULES_AUDIO_PROCESSING_GAIN_CONTROL_FOR_EXPERIMENTAL_AGC_H_
 
+#include <atomic>
+
 #include "modules/audio_processing/agc/agc_manager_direct.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "rtc_base/constructormagic.h"
@@ -69,7 +71,7 @@ class GainControlForExperimentalAgc : public GainControl,
   int volume_;
   rtc::CriticalSection* crit_capture_;
   bool do_log_level_ = true;
-  static int instance_counter_;
+  static std::atomic<int> instance_counter_;
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(GainControlForExperimentalAgc);
 };
 

@@ -27,6 +27,7 @@ namespace internal {
 
 AudioState::AudioState(const AudioState::Config& config)
     : config_(config),
+      ref_count_(0),
       audio_transport_(config_.audio_mixer, config_.audio_processing.get()) {
   process_thread_checker_.DetachFromThread();
   RTC_DCHECK(config_.audio_mixer);
@@ -170,16 +171,16 @@ void AudioState::SetStereoChannelSwapping(bool enable) {
 
 // Reference count; implementation copied from rtc::RefCountedObject.
 void AudioState::AddRef() const {
-  rtc::AtomicOps::Increment(&ref_count_);
+  ref_count_.IncRef();
 }
 
 // Reference count; implementation copied from rtc::RefCountedObject.
 rtc::RefCountReleaseStatus AudioState::Release() const {
-  if (rtc::AtomicOps::Decrement(&ref_count_) == 0) {
+  rtc::RefCountReleaseStatus release_status = ref_count_.DecRef();
+  if (release_status == rtc::RefCountReleaseStatus::kDroppedLastRef) {
     delete this;
-    return rtc::RefCountReleaseStatus::kDroppedLastRef;
   }
-  return rtc::RefCountReleaseStatus::kOtherRefsRemained;
+  return release_status;
 }
 
 void AudioState::UpdateAudioTransportWithSendingStreams() {
