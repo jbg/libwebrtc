@@ -22,6 +22,30 @@
       "revId": "f0ba1b3cfcd4503da98e2790e2f1337c1571969b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "375214a2_d1cf2629",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2018-10-15T12:41:10Z",
+      "side": 1,
+      "message": "Yes, you are completely right. Thanks!",
+      "parentUuid": "3ccafe63_cc06c2f3",
+      "range": {
+        "startLine": 177,
+        "startChar": 23,
+        "endLine": 177,
+        "endChar": 24
+      },
+      "revId": "f0ba1b3cfcd4503da98e2790e2f1337c1571969b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
