@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "8ae675aa_d2cfdfc3",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-15T13:21:18Z",
+      "side": 1,
+      "message": "Discussed by person. Ok to keep \"*\".",
+      "parentUuid": "c402c057_0d0cd77e",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 24
+      },
+      "revId": "aed39e99afd6f11687932b3e10b05e910ab72030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad93f359_09b594aa",
         "filename": "test/BUILD.gn",
         "patchSetId": 5
@@ -64,6 +88,52 @@
         "startChar": 4,
         "endLine": 233,
         "endChar": 5
+      },
+      "revId": "aed39e99afd6f11687932b3e10b05e910ab72030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7855406_6f0360e7",
+        "filename": "test/test_main_lib.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-15T13:21:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the constructor be declared protected?",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "aed39e99afd6f11687932b3e10b05e910ab72030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a51bd980_e45910a8",
+        "filename": "test/test_main_lib.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-15T13:21:18Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 24,
+        "startChar": 50,
+        "endLine": 24,
+        "endChar": 54
       },
       "revId": "aed39e99afd6f11687932b3e10b05e910ab72030",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
