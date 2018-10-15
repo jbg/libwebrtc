@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "deb71df8_10021903",
+        "filename": "test/test_main_lib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-15T13:54:36Z",
+      "side": 1,
+      "message": "Well, now that I think about it. It is here that we should make the constructor protected. :)",
+      "range": {
+        "startLine": 80,
+        "startChar": 6,
+        "endLine": 80,
+        "endChar": 18
+      },
+      "revId": "05f18927ffa4a5c9b717f71d2187b8db8217ffe9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
