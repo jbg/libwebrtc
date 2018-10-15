@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "32b1d994_49c25c26",
+        "filename": "modules/congestion_controller/rtp/control_handler.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-15T12:32:06Z",
+      "side": 1,
+      "message": "The accessors calculate the same values. So, no.",
+      "parentUuid": "b62a7e1b_085586c5",
+      "range": {
+        "startLine": 51,
+        "startChar": 34,
+        "endLine": 51,
+        "endChar": 46
+      },
+      "revId": "d522d3047c44b26645b9a5746d3f17fe3c5e8b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eacaef54_8ac70a0f",
         "filename": "modules/congestion_controller/rtp/control_handler.h",
         "patchSetId": 3
@@ -62,6 +86,24 @@
       "revId": "d522d3047c44b26645b9a5746d3f17fe3c5e8b0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83aa626b_b62eeee6",
+        "filename": "modules/congestion_controller/rtp/control_handler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-15T12:32:06Z",
+      "side": 1,
+      "message": "Yes, that was from a followup CL, removing it for now.",
+      "parentUuid": "eacaef54_8ac70a0f",
+      "revId": "d522d3047c44b26645b9a5746d3f17fe3c5e8b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
