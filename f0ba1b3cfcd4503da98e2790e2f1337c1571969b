@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ccafe63_cc06c2f3",
+        "filename": "modules/audio_processing/aec3/render_delay_controller2.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-15T06:39:22Z",
+      "side": 1,
+      "message": "This should be possible to do right away, right?\n\nBut let\u0027s do that in separate CL.",
+      "range": {
+        "startLine": 177,
+        "startChar": 23,
+        "endLine": 177,
+        "endChar": 24
+      },
+      "revId": "f0ba1b3cfcd4503da98e2790e2f1337c1571969b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
