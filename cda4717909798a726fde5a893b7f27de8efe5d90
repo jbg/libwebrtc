@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3dfc5fc_3c36aabe",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-15T10:26:40Z",
+      "side": 1,
+      "message": "This way, the fact that these operations are atomic is rather hidden. I would prefer that we use the std::atomic member functions; in this case,\n\n  ref_count_.fetch_add(1);\n\nDoes that seem sensible?\n\nIf we want to go the extra mile, there\u0027s also non-member functions that have \"atomic\" in their names:\n\n  std::atomic_fetch_add(\u0026ref_count_, 1);\n\nEither one would be fine by me.",
+      "revId": "cda4717909798a726fde5a893b7f27de8efe5d90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25daeb89_466b713b",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-15T10:26:40Z",
+      "side": 1,
+      "message": "This would be\n\n  if (ref_count_.fetch_sub(1) \u003d\u003d 1) {",
+      "revId": "cda4717909798a726fde5a893b7f27de8efe5d90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
