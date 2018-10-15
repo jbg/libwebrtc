@@ -22,6 +22,30 @@
       "revId": "05f18927ffa4a5c9b717f71d2187b8db8217ffe9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ce836ff_4b790e6e",
+        "filename": "test/test_main_lib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-15T14:07:25Z",
+      "side": 1,
+      "message": "It is in private namesapce, so no one can extend it.",
+      "parentUuid": "deb71df8_10021903",
+      "range": {
+        "startLine": 80,
+        "startChar": 6,
+        "endLine": 80,
+        "endChar": 18
+      },
+      "revId": "05f18927ffa4a5c9b717f71d2187b8db8217ffe9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
