@@ -337,7 +337,7 @@ AudioProcessingImpl::AudioProcessingImpl(const webrtc::Config& config)
     : AudioProcessingImpl(config, nullptr, nullptr, nullptr, nullptr, nullptr) {
 }
 
-int AudioProcessingImpl::instance_count_ = 0;
+std::atomic<int> AudioProcessingImpl::instance_count_(0);
 
 AudioProcessingImpl::AudioProcessingImpl(
     const webrtc::Config& config,
@@ -346,8 +346,7 @@ AudioProcessingImpl::AudioProcessingImpl(
     std::unique_ptr<EchoControlFactory> echo_control_factory,
     rtc::scoped_refptr<EchoDetector> echo_detector,
     std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       capture_runtime_settings_(kRuntimeSettingQueueSize),
       render_runtime_settings_(kRuntimeSettingQueueSize),
       capture_runtime_settings_enqueuer_(&capture_runtime_settings_),

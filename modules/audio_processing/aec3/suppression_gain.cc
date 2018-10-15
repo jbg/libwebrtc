@@ -101,7 +101,7 @@ void AdjustNonConvergedFrequencies(
 
 }  // namespace
 
-int SuppressionGain::instance_count_ = 0;
+std::atomic<int> SuppressionGain::instance_count_(0);
 
 float SuppressionGain::UpperBandsGain(
     const std::array<float, kFftLengthBy2Plus1>& echo_spectrum,
@@ -290,8 +290,7 @@ void SuppressionGain::LowerBandGain(
 SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
                                  Aec3Optimization optimization,
                                  int sample_rate_hz)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       optimization_(optimization),
       config_(config),
       state_change_duration_blocks_(

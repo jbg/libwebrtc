@@ -11,6 +11,7 @@
 #ifndef MODULES_AUDIO_PROCESSING_AUDIO_PROCESSING_IMPL_H_
 #define MODULES_AUDIO_PROCESSING_AUDIO_PROCESSING_IMPL_H_
 
+#include <atomic>
 #include <list>
 #include <memory>
 #include <vector>
@@ -156,7 +157,7 @@ class AudioProcessingImpl : public AudioProcessing {
   struct ApmPrivateSubmodules;
 
   std::unique_ptr<ApmDataDumper> data_dumper_;
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
 
   SwapQueue<RuntimeSetting> capture_runtime_settings_;
   SwapQueue<RuntimeSetting> render_runtime_settings_;

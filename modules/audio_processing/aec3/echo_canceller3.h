@@ -11,6 +11,8 @@
 #ifndef MODULES_AUDIO_PROCESSING_AEC3_ECHO_CANCELLER3_H_
 #define MODULES_AUDIO_PROCESSING_AEC3_ECHO_CANCELLER3_H_
 
+#include <atomic>
+
 #include "api/audio/echo_canceller3_config.h"
 #include "modules/audio_processing/aec3/block_delay_buffer.h"
 #include "modules/audio_processing/aec3/block_framer.h"
@@ -109,7 +111,7 @@ class EchoCanceller3 : public EchoControl {
       RTC_GUARDED_BY(render_race_checker_);
 
   // State that may be accessed by the capture thread.
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const EchoCanceller3Config config_;
   const int sample_rate_hz_;

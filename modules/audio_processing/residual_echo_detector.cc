@@ -40,11 +40,10 @@ constexpr size_t kAggregationBufferSize = 10 * 100;
 
 namespace webrtc {
 
-int ResidualEchoDetector::instance_count_ = 0;
+std::atomic<int> ResidualEchoDetector::instance_count_(0);
 
 ResidualEchoDetector::ResidualEchoDetector()
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       render_buffer_(kRenderBufferSize),
       render_power_(kLookbackFrames),
       render_power_mean_(kLookbackFrames),

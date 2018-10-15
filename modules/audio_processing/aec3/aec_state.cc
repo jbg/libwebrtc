@@ -35,7 +35,7 @@ constexpr size_t kBlocksSinceConsistentEstimateInit = 10000;
 
 }  // namespace
 
-int AecState::instance_count_ = 0;
+std::atomic<int> AecState::instance_count_(0);
 
 void AecState::GetResidualEchoScaling(
     rtc::ArrayView<float> residual_scaling) const {
@@ -68,8 +68,7 @@ absl::optional<float> AecState::ErleUncertainty() const {
 }
 
 AecState::AecState(const EchoCanceller3Config& config)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       config_(config),
       initial_state_(config_),
       delay_state_(config_),

@@ -11,6 +11,7 @@
 #ifndef MODULES_AUDIO_PROCESSING_GAIN_CONTROLLER2_H_
 #define MODULES_AUDIO_PROCESSING_GAIN_CONTROLLER2_H_
 
+#include <atomic>
 #include <memory>
 #include <string>
 
@@ -41,7 +42,7 @@ class GainController2 {
       const AudioProcessing::Config::GainController2& config);
 
  private:
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   FixedGainController fixed_gain_controller_;
   AudioProcessing::Config::GainController2 config_;

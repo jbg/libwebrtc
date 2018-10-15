@@ -14,6 +14,7 @@
 #include <math.h>
 
 #include <algorithm>
+#include <atomic>
 #include <memory>
 #include <vector>
 
@@ -157,7 +158,7 @@ class AecState {
   bool DetectEchoSaturation(rtc::ArrayView<const float> x,
                             float echo_path_gain);
 
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const EchoCanceller3Config config_;
 

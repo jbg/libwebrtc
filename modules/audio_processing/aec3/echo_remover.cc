@@ -10,7 +10,9 @@
 #include "modules/audio_processing/aec3/echo_remover.h"
 
 #include <math.h>
+
 #include <algorithm>
+#include <atomic>
 #include <memory>
 #include <numeric>
 #include <string>
@@ -128,7 +130,7 @@ class EchoRemoverImpl final : public EchoRemover {
                               const SubtractorOutput& subtractor_output,
                               rtc::ArrayView<float> output);
 
-  static int instance_count_;
+  static std::atomic<int> instance_count_;
   const EchoCanceller3Config config_;
   const Aec3Fft fft_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
@@ -157,14 +159,13 @@ class EchoRemoverImpl final : public EchoRemover {
   RTC_DISALLOW_COPY_AND_ASSIGN(EchoRemoverImpl);
 };
 
-int EchoRemoverImpl::instance_count_ = 0;
+std::atomic<int> EchoRemoverImpl::instance_count_(1);
 
 EchoRemoverImpl::EchoRemoverImpl(const EchoCanceller3Config& config,
                                  int sample_rate_hz)
     : config_(config),
       fft_(),
-      data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+      data_dumper_(new ApmDataDumper(++instance_count_)),
       optimization_(DetectOptimization()),
       sample_rate_hz_(sample_rate_hz),
       use_shadow_filter_output_(

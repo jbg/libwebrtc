@@ -325,7 +325,7 @@ void EchoCanceller3::RenderWriter::Insert(AudioBuffer* input) {
   static_cast<void>(render_transfer_queue_->Insert(&render_queue_input_frame_));
 }
 
-int EchoCanceller3::instance_count_ = 0;
+std::atomic<int> EchoCanceller3::instance_count_(0);
 
 EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
                                int sample_rate_hz,
@@ -340,8 +340,7 @@ EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
                                int sample_rate_hz,
                                bool use_highpass_filter,
                                std::unique_ptr<BlockProcessor> block_processor)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       config_(config),
       sample_rate_hz_(sample_rate_hz),
       num_bands_(NumBandsForRate(sample_rate_hz_)),

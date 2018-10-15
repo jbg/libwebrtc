@@ -45,11 +45,10 @@ bool EnableFilterPreprocessing() {
 
 }  // namespace
 
-int FilterAnalyzer::instance_count_ = 0;
+std::atomic<int> FilterAnalyzer::instance_count_(1);
 
 FilterAnalyzer::FilterAnalyzer(const EchoCanceller3Config& config)
-    : data_dumper_(
-          new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+    : data_dumper_(new ApmDataDumper(++instance_count_)),
       use_preprocessed_filter_(EnableFilterPreprocessing()),
       bounded_erl_(config.ep_strength.bounded_erl),
       default_gain_(config.ep_strength.lf),
