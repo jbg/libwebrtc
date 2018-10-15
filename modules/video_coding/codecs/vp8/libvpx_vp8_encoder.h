@@ -55,6 +55,8 @@ class LibvpxVp8Encoder : public VideoEncoder {
 
   const char* ImplementationName() const override;
 
+  bool HasTrustedRateController() const override;
+
   static vpx_enc_frame_flags_t EncodeFlags(
       const Vp8TemporalLayers::FrameConfig& references);
 
@@ -87,6 +89,7 @@ class LibvpxVp8Encoder : public VideoEncoder {
 
   const std::unique_ptr<LibvpxInterface> libvpx_;
   const bool use_gf_boost_;
+  const bool trusted_rate_controller_;
 
   EncodedImageCallback* encoded_complete_callback_;
   VideoCodec codec_;

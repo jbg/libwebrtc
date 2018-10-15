@@ -12,6 +12,7 @@
 
 #include <memory>
 
+#include "api/test/mock_video_encoder.h"
 #include "api/video_codecs/vp8_temporal_layers.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "modules/video_coding/codecs/test/video_codec_unittest.h"
