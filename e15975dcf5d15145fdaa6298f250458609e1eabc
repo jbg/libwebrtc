@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3653f55b_fd77c12a",
+        "filename": "rtc_base/refcounter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-15T17:00:00Z",
+      "side": 1,
+      "message": "You use a weaker-than-default memory ordering here. Please add a comment explaining why it is sufficient. :-)\n\nE.g.,\n\n  The caller used to own at least one reference to the resource being tracked, and now owns one more. Reads and writes to the resource can be safely reordered past this increment in either direction.",
+      "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c71470a4_6c16e710",
+        "filename": "rtc_base/refcounter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-15T17:00:00Z",
+      "side": 1,
+      "message": "Comment here too. E.g.,\n\n  The caller used to own at least one reference to the resource being tracked, and now owns one less. The acquire-release memory ordering prevents normal accesses to the tracked resource from being reordered after the decrement (would be illegal because one must own a reference to be allowed to access the resource), and prevents accesses made in the process of destroying the tracked resource from being reordered before the decrement (would be illegal because one must not destroy the resource while someone may still be using it).",
+      "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68b56101_6a64132d",
+        "filename": "rtc_base/refcounter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-15T17:00:00Z",
+      "side": 1,
+      "message": "Comment here too. E.g.,\n\n  The caller owns at least one reference to the tracked object; if the comparison is successful, we are assured that as of the atomic instruction and until the caller creates a new reference, the caller is the sole owner of the tracked resource. The acquire memory ordering prevents accesses made after the comparison from being reordered before the decrement (would be illegal because those accesses may assume that the caller is the sole owner of the resource), but does not prevent accesses to the tracked resource from being reordered after the comparison (legal because the caller still owns a reference to the object).\n\nOh, and that implies that it should be memory_order_acquire.\n\nHowever, there\u0027s a problem: In order to support HasOneRef safely, it seems like we\u0027d need to use memory_order_release in IncRef, to prevent exclusive-access accesses from being reordered after the increment. This makes IncRef more expensive, and I doubt HasOneRef is used often enough to make that a good trade-off. See also https://en.cppreference.com/w/cpp/memory/shared_ptr/use_count, where they decided to use relaxed ordering to eliminate that extra cost, but as a consequence can\u0027t really use the returned number meaningfully.\n\nCan we eliminate HasOneRef?",
+      "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
