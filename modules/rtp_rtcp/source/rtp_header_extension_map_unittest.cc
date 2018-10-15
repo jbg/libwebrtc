@@ -57,6 +57,16 @@ TEST(RtpHeaderExtensionTest, RegisterDuringContruction) {
   EXPECT_EQ(3, map.GetId(AbsoluteSendTime::kId));
 }
 
+TEST(RtpHeaderExtensionTest, RegisterDuringContructionTwoByteHeaderSupport) {
+  const std::vector<RtpExtension> config;
+  const RtpHeaderExtensionMap map_default(config);
+  EXPECT_FALSE(map_default.IsMixedOneTwoByteHeaderSupported());
+  const RtpHeaderExtensionMap map_not_supported(config, false);
+  EXPECT_FALSE(map_not_supported.IsMixedOneTwoByteHeaderSupported());
+  const RtpHeaderExtensionMap map_supported(config, true);
+  EXPECT_TRUE(map_supported.IsMixedOneTwoByteHeaderSupported());
+}
+
 TEST(RtpHeaderExtensionTest, RegisterTwoByteHeaderExtensions) {
   RtpHeaderExtensionMap map;
   // Two-byte header extension needed for id: [15-255].

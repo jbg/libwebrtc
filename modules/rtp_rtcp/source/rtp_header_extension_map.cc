@@ -58,16 +58,22 @@ constexpr int RtpHeaderExtensionMap::kInvalidId;
 
 RtpHeaderExtensionMap::RtpHeaderExtensionMap()
     : mixed_one_two_byte_header_supported_(false) {
-  for (auto& id : ids_)
-    id = kInvalidId;
+  ClearIds();
+}
+
+RtpHeaderExtensionMap::RtpHeaderExtensionMap(
+    rtc::ArrayView<const RtpExtension> extensions,
+    bool mixed_one_two_byte_header_supported)
+    : mixed_one_two_byte_header_supported_(
+          mixed_one_two_byte_header_supported) {
+  ClearIds();
+  for (const RtpExtension& extension : extensions)
+    RegisterByUri(extension.id, extension.uri);
 }
 
 RtpHeaderExtensionMap::RtpHeaderExtensionMap(
     rtc::ArrayView<const RtpExtension> extensions)
-    : RtpHeaderExtensionMap() {
-  for (const RtpExtension& extension : extensions)
-    RegisterByUri(extension.id, extension.uri);
-}
+    : RtpHeaderExtensionMap(extensions, false) {}
 
 bool RtpHeaderExtensionMap::RegisterByType(int id, RTPExtensionType type) {
   for (const ExtensionInfo& extension : kExtensions)
@@ -103,6 +109,11 @@ int32_t RtpHeaderExtensionMap::Deregister(RTPExtensionType type) {
     ids_[type] = kInvalidId;
   }
   return 0;
+}
+
+void RtpHeaderExtensionMap::ClearIds() {
+  for (auto& id : ids_)
+    id = kInvalidId;
 }
 
 bool RtpHeaderExtensionMap::Register(int id,

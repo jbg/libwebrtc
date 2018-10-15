@@ -27,6 +27,8 @@ class RtpHeaderExtensionMap {
 
   RtpHeaderExtensionMap();
   explicit RtpHeaderExtensionMap(rtc::ArrayView<const RtpExtension> extensions);
+  RtpHeaderExtensionMap(rtc::ArrayView<const RtpExtension> extensions,
+                        bool mixed_one_two_byte_header_supported);
 
   template <typename Extension>
   bool Register(int id) {
@@ -61,6 +63,7 @@ class RtpHeaderExtensionMap {
   }
 
  private:
+  void ClearIds();
   bool Register(int id, RTPExtensionType type, const char* uri);
 
   uint8_t ids_[kRtpExtensionNumberOfExtensions];
