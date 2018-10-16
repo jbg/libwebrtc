@@ -449,7 +449,8 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
 }
 
 void BaseChannel::UpdateRtpHeaderExtensionMap(
-    const RtpHeaderExtensions& header_extensions) {
+    const RtpHeaderExtensions& header_extensions,
+    bool mixed_one_two_byte_header_supported) {
   RTC_DCHECK(rtp_transport_);
   // Update the header extension map on network thread in case there is data
   // race.
@@ -459,9 +460,12 @@ void BaseChannel::UpdateRtpHeaderExtensionMap(
   // NOTE: This doesn't take the BUNDLE case in account meaning the RTP header
   // extension maps are not merged when BUNDLE is enabled. This is fine because
   // the ID for MID should be consistent among all the RTP transports.
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [this, &header_extensions] {
-    rtp_transport_->UpdateRtpHeaderExtensionMap(header_extensions);
-  });
+  network_thread_->Invoke<void>(
+      RTC_FROM_HERE,
+      [this, &header_extensions, mixed_one_two_byte_header_supported] {
+        rtp_transport_->UpdateRtpHeaderExtensionMap(
+            header_extensions, mixed_one_two_byte_header_supported);
+      });
 }
 
 bool BaseChannel::RegisterRtpDemuxerSink() {
@@ -796,7 +800,9 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
 
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(audio->rtp_header_extensions());
-  UpdateRtpHeaderExtensionMap(rtp_header_extensions);
+  UpdateRtpHeaderExtensionMap(
+      rtp_header_extensions,
+      content->mixed_one_two_byte_header_extensions_supported());
 
   AudioRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(audio, rtp_header_extensions, &recv_params);
@@ -931,7 +937,9 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
 
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(video->rtp_header_extensions());
-  UpdateRtpHeaderExtensionMap(rtp_header_extensions);
+  UpdateRtpHeaderExtensionMap(
+      rtp_header_extensions,
+      content->mixed_one_two_byte_header_extensions_supported());
 
   VideoRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(video, rtp_header_extensions, &recv_params);
