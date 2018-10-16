@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83131819_66a99261",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-16T17:52:31Z",
+      "side": 1,
+      "message": "Suggest event.packet_length() or event.total_packet_length() or something.",
+      "revId": "bc5422a1830412f6fd206dfd4d04ccf5b0fe9141",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
