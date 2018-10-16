@@ -50,6 +50,24 @@
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10eeff4d_9a557219",
+        "filename": "rtc_base/refcounter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-16T09:17:39Z",
+      "side": 1,
+      "message": "\u003e Can we eliminate HasOneRef?\n\nIt\u0027s used in CopyOnWriteBuffer and I420BufferPool. I\u0027d guess that\u0027s pretty important.\n\nOn the other hand, I don\u0027t see how HasOneRef and the code that relies on it returning true could race with (correct use of) IncRef by other threads. Am I missing somthing subtle?\n\nI take it the issue you see with HasOneRef is the sequence\n\n  HasOneRef returns true\n  Some modification requiring exclusive access\n  Incrementing refcount and passing it out to some other thread(s) \n    (expecting only read access to the now shared object)\n  Other thread accessing object before all of the modifications are visible.\n\nBut to me, that scenario isn\u0027t unique to HasOneRef, we also have the more common pattern\n\n  Create brand new object.\n  Write to it.\n  Pass it on to some other thread for reading.\n\nI hope this does work, but refcount logic can\u0027t be responsible for making it work, since I think \"pass on to other thread\" can be done with move semantics all the way, leaving the refcount unchanged at one all the way. And we have the same pattern also with unique_ptr rather than scoped_refptr.",
+      "parentUuid": "68b56101_6a64132d",
+      "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
