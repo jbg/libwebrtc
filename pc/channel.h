@@ -284,8 +284,8 @@ class BaseChannel : public rtc::MessageHandler,
 
   void AddHandledPayloadType(int payload_type);
 
-  void UpdateRtpHeaderExtensionMap(
-      const RtpHeaderExtensions& header_extensions);
+  void UpdateRtpHeaderExtensionMap(const RtpHeaderExtensions& header_extensions,
+                                   bool mixed_one_two_byte_header_supported);
 
   bool RegisterRtpDemuxerSink();
 

@@ -138,8 +138,11 @@ bool RtpTransport::SendPacket(bool rtcp,
 }
 
 void RtpTransport::UpdateRtpHeaderExtensionMap(
-    const cricket::RtpHeaderExtensions& header_extensions) {
+    const cricket::RtpHeaderExtensions& header_extensions,
+    bool mixed_one_two_byte_header_supported) {
   header_extension_map_ = RtpHeaderExtensionMap(header_extensions);
+  header_extension_map_.SetMixedOneTwoByteHeaderSupported(
+      mixed_one_two_byte_header_supported);
 }
 
 bool RtpTransport::RegisterRtpDemuxerSink(const RtpDemuxerCriteria& criteria,
