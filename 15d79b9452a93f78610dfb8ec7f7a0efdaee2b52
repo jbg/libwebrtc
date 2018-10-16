@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c2f0eeba_cd46dce2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-16T15:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0856eb45_8466fc98",
+      "range": {
+        "startLine": 9,
+        "startChar": 29,
+        "endLine": 9,
+        "endChar": 31
+      },
+      "revId": "15d79b9452a93f78610dfb8ec7f7a0efdaee2b52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0907686f_cdbd1c50",
         "filename": "logging/rtc_event_log/events/rtc_event_rtp_packet_incoming.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-16T11:20:18Z",
       "side": 1,
       "message": "1. Suggest suffixing the unit. (_bytes, I assume.)\n2. If the three parts you have are header, body and padding, I would suggest keeping each explicitly, and in a form where no value is also implicitly counting another. (I.e. no packet_length_; instead, use body_length_ + padding_length_.)",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 58
+      },
+      "revId": "15d79b9452a93f78610dfb8ec7f7a0efdaee2b52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ea9cee9_31aec3a8",
+        "filename": "logging/rtc_event_log/events/rtc_event_rtp_packet_incoming.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-16T15:27:42Z",
+      "side": 1,
+      "message": "1. The values come from RtpPacket::headers_size() and RtpPacket::padding_size() which are not suffixed.\n2. Done.",
+      "parentUuid": "0907686f_cdbd1c50",
       "range": {
         "startLine": 35,
         "startChar": 0,
