@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "797087a0_b733bd4e",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-16T11:20:47Z",
+      "side": 1,
+      "message": "This fixes a bug. The compiler warned about passing size_t / unsigned long with a %i specifier, once the wrapper (which wasn\u0027t declared with __attribute((__format__(...))) was eliminated.",
+      "range": {
+        "startLine": 160,
+        "startChar": 28,
+        "endLine": 160,
+        "endChar": 31
+      },
+      "revId": "4e12542d8a9510a7d6f4b1efecdabc8ad9927376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
