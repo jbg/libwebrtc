@@ -1628,7 +1628,9 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
         // Since a=ssrc msid signaling is used in Plan B SDP semantics, and
         // multiple stream ids are not supported for Plan B, we are only adding
         // a line for the first media stream id here.
-        const std::string& stream_id = track.first_stream_id();
+        const std::string& track_stream_id = track.first_stream_id();
+        const std::string& stream_id =
+            track_stream_id.empty() ? "-" : track_stream_id;
         InitAttrLine(kAttributeSsrc, &os);
         os << kSdpDelimiterColon << ssrc << kSdpDelimiterSpace
            << kSsrcAttributeMsid << kSdpDelimiterColon << stream_id
