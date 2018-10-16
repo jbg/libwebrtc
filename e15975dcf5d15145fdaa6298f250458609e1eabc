@@ -68,6 +68,24 @@
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09b55857_8d052df3",
+        "filename": "rtc_base/refcounter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-16T10:17:03Z",
+      "side": 1,
+      "message": "Mirko and I talked about this, and arrived at this conclusion too. It works because the problematic transition isn\u0027t going from one to more-than-one reference, but going from one to more-than-one thread owning references---and you can\u0027t send a reference to another thread without doing some synchronization.",
+      "parentUuid": "10eeff4d_9a557219",
+      "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
