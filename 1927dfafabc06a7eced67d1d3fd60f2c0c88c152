@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c863be6_3f722f44",
+        "filename": "logging/rtc_event_log/events/rtc_event_rtp_packet_incoming.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-16T11:20:18Z",
+      "side": 0,
+      "message": "1. This comment is a bit unclear. Not ambiguous, mind you; just a bit confusing. Maybe \"Length excluding header, but including padding\"?\n2. Would payload_length_ fit better, perhaps?",
+      "range": {
+        "startLine": 35,
+        "startChar": 35,
+        "endLine": 35,
+        "endChar": 79
+      },
+      "revId": "1927dfafabc06a7eced67d1d3fd60f2c0c88c152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
