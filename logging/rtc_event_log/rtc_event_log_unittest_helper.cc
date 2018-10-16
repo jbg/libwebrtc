@@ -647,17 +647,15 @@ void VerifyLoggedRtpPacketIncoming(
   EXPECT_EQ(original_event.header_.headers_size(),
             logged_event.rtp.header_length);
 
-  EXPECT_EQ(original_event.packet_length_, logged_event.rtp.total_length);
+  size_t original_packet_length = original_event.payload_length_ +
+                                  original_event.header_length_ +
+                                  original_event.padding_length_;
+  EXPECT_EQ(original_packet_length, logged_event.rtp.total_length);
 
-  if ((original_event.header_.data()[0] & 0x20) != 0) {  // has padding
-    // Currently, RTC eventlog encoder-parser can only maintain padding length
-    // if packet is full padding.
-    // TODO(webrtc:9730): Change the condition to something like
-    // original_event.padding_length_ != logged_event.rtp.header.paddingLength.
-    EXPECT_EQ(
-        original_event.packet_length_ - original_event.header_.headers_size(),
-        logged_event.rtp.header.paddingLength);
-  }
+  // Currently, RTC eventlog encoder-parser can only maintain padding length
+  // if packet is full padding.
+  EXPECT_EQ(original_event.padding_length_,
+            logged_event.rtp.header.paddingLength);
 
   VerifyLoggedRtpHeader(original_event.header_, logged_event.rtp.header);
 }
@@ -670,17 +668,15 @@ void VerifyLoggedRtpPacketOutgoing(
   EXPECT_EQ(original_event.header_.headers_size(),
             logged_event.rtp.header_length);
 
-  EXPECT_EQ(original_event.packet_length_, logged_event.rtp.total_length);
+  size_t original_packet_length = original_event.payload_length_ +
+                                  original_event.header_length_ +
+                                  original_event.padding_length_;
+  EXPECT_EQ(original_packet_length, logged_event.rtp.total_length);
 
-  if ((original_event.header_.data()[0] & 0x20) != 0) {  // has padding
-    // Currently, RTC eventlog encoder-parser can only maintain padding length
-    // if packet is full padding.
-    // TODO(webrtc:9730): Change the condition to something like
-    // original_event.padding_length_ != logged_event.rtp.header.paddingLength.
-    EXPECT_EQ(
-        original_event.packet_length_ - original_event.header_.headers_size(),
-        logged_event.rtp.header.paddingLength);
-  }
+  // Currently, RTC eventlog encoder-parser can only maintain padding length
+  // if packet is full padding.
+  EXPECT_EQ(original_event.padding_length_,
+            logged_event.rtp.header.paddingLength);
 
   // TODO(terelius): Probe cluster ID isn't parsed, used or tested. Unless
   // someone has a strong reason to keep it, it'll be removed.

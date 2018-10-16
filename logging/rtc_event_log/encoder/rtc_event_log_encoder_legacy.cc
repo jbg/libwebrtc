@@ -570,15 +570,18 @@ std::string RtcEventLogEncoderLegacy::EncodeRtcpPacketOutgoing(
 
 std::string RtcEventLogEncoderLegacy::EncodeRtpPacketIncoming(
     const RtcEventRtpPacketIncoming& event) {
-  return EncodeRtpPacket(event.timestamp_us_, event.header_,
-                         event.packet_length_, PacedPacketInfo::kNotAProbe,
-                         true);
+  size_t packet_length =
+      event.payload_length_ + event.header_length_ + event.padding_length_;
+  return EncodeRtpPacket(event.timestamp_us_, event.header_, packet_length,
+                         PacedPacketInfo::kNotAProbe, true);
 }
 
 std::string RtcEventLogEncoderLegacy::EncodeRtpPacketOutgoing(
     const RtcEventRtpPacketOutgoing& event) {
-  return EncodeRtpPacket(event.timestamp_us_, event.header_,
-                         event.packet_length_, event.probe_cluster_id_, false);
+  size_t packet_length =
+      event.payload_length_ + event.header_length_ + event.padding_length_;
+  return EncodeRtpPacket(event.timestamp_us_, event.header_, packet_length,
+                         event.probe_cluster_id_, false);
 }
 
 std::string RtcEventLogEncoderLegacy::EncodeVideoReceiveStreamConfig(

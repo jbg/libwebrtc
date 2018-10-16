@@ -33,7 +33,10 @@ class RtcEventRtpPacketOutgoing final : public RtcEvent {
   std::unique_ptr<RtcEvent> Copy() const override;
 
   RtpPacket header_;            // Only the packet's header will be stored here.
-  const size_t packet_length_;  // Length before stripping away all but header.
+  const size_t
+      payload_length_;  // Length of media, excluding header and padding.
+  const size_t header_length_;   // Length of the header.
+  const size_t padding_length_;  // Length of the padding.
   const int probe_cluster_id_;
 
  private:
