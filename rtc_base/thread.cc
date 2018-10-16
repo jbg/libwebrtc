@@ -29,7 +29,6 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/nullsocketserver.h"
-#include "rtc_base/stringutils.h"
 #include "rtc_base/timeutils.h"
 #include "rtc_base/trace_event.h"
 
@@ -222,7 +221,7 @@ bool Thread::SetName(const std::string& name, const void* obj) {
   name_ = name;
   if (obj) {
     char buf[16];
-    sprintfn(buf, sizeof(buf), " 0x%p", obj);
+    snprintf(buf, sizeof(buf), " 0x%p", obj);
     name_ += buf;
   }
   return true;
