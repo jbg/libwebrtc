@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c25c21ea_64d0c06e",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-10-16T14:59:48Z",
+      "side": 1,
+      "message": "I think what is missing is how we correlates this to buffer level. But may be good enough for understanding current situation and guide possible improvements.\n\nAnother alternative is to count \"# of packets flushed per minute\".\n\nWDYT?",
+      "range": {
+        "startLine": 202,
+        "startChar": 19,
+        "endLine": 202,
+        "endChar": 39
+      },
+      "revId": "5d76a2ab3e8acf97bd06aa16a4b02885d9592b8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
