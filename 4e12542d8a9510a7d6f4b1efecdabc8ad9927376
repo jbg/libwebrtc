@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f505c43d_e01142da",
+        "filename": "examples/peerconnection/client/linux/main_wnd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-16T12:52:37Z",
+      "side": 1,
+      "message": "port is at most 5 digits, \"65535\", so I think it\u0027s ok as is.",
+      "parentUuid": "8fe87b2a_2626648a",
+      "range": {
+        "startLine": 149,
+        "startChar": 14,
+        "endLine": 149,
+        "endChar": 16
+      },
+      "revId": "4e12542d8a9510a7d6f4b1efecdabc8ad9927376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41fe2b7b_75c5fd00",
         "filename": "examples/peerconnection/client/main_wnd.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "4e12542d8a9510a7d6f4b1efecdabc8ad9927376",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03dafca1_2becea28",
+        "filename": "examples/peerconnection/client/main_wnd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-16T12:52:37Z",
+      "side": 1,
+      "message": "No, deleting.",
+      "parentUuid": "41fe2b7b_75c5fd00",
+      "range": {
+        "startLine": 86,
+        "startChar": 14,
+        "endLine": 86,
+        "endChar": 16
+      },
+      "revId": "4e12542d8a9510a7d6f4b1efecdabc8ad9927376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +154,30 @@
       "writtenOn": "2018-10-16T12:21:45Z",
       "side": 1,
       "message": "For a 64-bit pointer, we should need 16 (the digits) + 2 (0x) + 1 (null), right?",
+      "range": {
+        "startLine": 223,
+        "startChar": 13,
+        "endLine": 223,
+        "endChar": 15
+      },
+      "revId": "4e12542d8a9510a7d6f4b1efecdabc8ad9927376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf0b9b17_51f127db",
+        "filename": "rtc_base/thread.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-16T12:52:37Z",
+      "side": 1,
+      "message": "I think format is implementation defined. With glibc, it seems %p includes a 0x prefix, so we\u0027d get double 0x here. Increasing buffer size to 30, which should be sufficient (and if it isn\u0027t truncation should be fairly harmless).",
+      "parentUuid": "0bd6db44_df061d15",
       "range": {
         "startLine": 223,
         "startChar": 13,
