@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d92bbc9c_d638b372",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "I know that efficiency can be improved. I had left this TODO in place so we could do that separately; I foresee a possibility of discussions over what approach would be most efficient in practice.",
+      "parentUuid": "759a59be_fffdbb3a",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7da39c57_bd221d81",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "20de28ff_2659a684",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Specifically, if you\u0027re trying to encode false/true, it still takes one bit, even if you\u0027re encoding false (0).",
+      "parentUuid": "7da39c57_bd221d81",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6568c885_88700bf9",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -59,6 +107,30 @@
       "writtenOn": "2018-10-17T12:22:22Z",
       "side": 1,
       "message": "ComputeUnsignedDelta? Or will this function be augmented for signed deltas?",
+      "range": {
+        "startLine": 59,
+        "startChar": 9,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8058f92c_d8301d3e",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Please see the subsequent CL, which renames this to UnsignedDelta.\nhttps://webrtc-review.googlesource.com/c/src/+/100423/5/logging/rtc_event_log/encoder/delta_encoding.cc#86\nI\u0027d like to keep it as-is in this CL, to avoid rebasing, etc., which will end up with the same code in the end.",
+      "parentUuid": "6568c885_88700bf9",
       "range": {
         "startLine": 59,
         "startChar": 9,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "ff5111df_e90239cd",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "kFixedSizeUnsignedDeltasNoWrapNoOpt, perhaps?",
+      "parentUuid": "be1c8c2b_55ea8b49",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f2b7a2de_195e9bfc",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -105,6 +201,30 @@
       "writtenOn": "2018-10-17T12:22:22Z",
       "side": 1,
       "message": "There will presumably be more options behind the reserved encoding types.\nkFixedSizeTwoByteHeader or kFixedSizeWithWrapSignAndOptional",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7f013b_fef1bd7c",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Renaming this will depend on your response to my comment above, so I\u0027m holding off on that.\nIt should be mentioned that this is internal code, so I think it would still make sense to name it according to what it does now, and rename later. That is, if now we only support all-mandatory-fields on the one hand, and all-optional-fields on the other hand, I think those names are the best, for now. Otherwise, we\u0027d be making some assumptions about how kReserved1 and kReserved2 will be used.",
+      "parentUuid": "f2b7a2de_195e9bfc",
       "range": {
         "startLine": 78,
         "startChar": 2,
@@ -134,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "1a26f7b9_c1d44734",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "I partially followed that logic, but still wanted to have:\n1. Delta-related parts clumped together.\n2. Width of original values precede the width of the derivative values, as the former appears to me to logically precede the latter.\nWdyt?",
+      "parentUuid": "34a74bfb_01f8b417",
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cae7b3b2_c80bf477",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -145,6 +283,30 @@
       "writtenOn": "2018-10-17T12:22:22Z",
       "side": 1,
       "message": "Any reason for not return std::move(buffer_)?",
+      "range": {
+        "startLine": 131,
+        "startChar": 11,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "220739e9_c1d64064",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Answer #1:\n\n\u003e Objects of types defined in the C++ standard library may be moved from (12.8). Move operations may be explicitly specified or implicitly generated. Unless otherwise specified, such moved-from objects shall be placed in a valid but unspecified state.\n\nSo even if std::string happens to be one of those types for which it is guaranteed that the left-behind object is an empty string, I\u0027d feel uncomfortable relying on it. I have a mental note to not leave behind anything that I had std::move()ed away from.\n\nAnswer #2:\nNRVO could not actually be used here (we\u0027re moving away from a member variable, not a local variable), but I see it as good practice to write the code in a way that would, if |buffer_| ever is exchanged for a local variable, would not inhibit NRVO.",
+      "parentUuid": "cae7b3b2_c80bf477",
       "range": {
         "startLine": 131,
         "startChar": 11,
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "98d3ebf8_cfeedff9",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47dcb530_5264e221",
+      "range": {
+        "startLine": 138,
+        "startChar": 53,
+        "endLine": 138,
+        "endChar": 57
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c5a3dbe_0e28017c",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -191,6 +377,30 @@
       "writtenOn": "2018-10-17T12:22:22Z",
       "side": 1,
       "message": "nit: the values might not exist?",
+      "range": {
+        "startLine": 177,
+        "startChar": 18,
+        "endLine": 178,
+        "endChar": 12
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e01f5350_b6416a06",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Edited to:\n  // Whether the values of the sequence are optional. That is, it may be\n  // that some of them do not have a value (not even a sentinel value indicating\n  // invalidity).\nWdyt?",
+      "parentUuid": "9c5a3dbe_0e28017c",
       "range": {
         "startLine": 177,
         "startChar": 18,
@@ -226,6 +436,30 @@
     },
     {
       "key": {
+        "uuid": "91594781_1954b12b",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep as is. I can\u0027t think of a sufficiently brief explanation. The only reason this is here, is to avoid making an inaccurate statement (all deltas encoded using the same number of bits). When someone is concerned with the implementation of optional-encoding, they can refer to that part. Wdyt? Perhaps you have a suggestion of how this could be formulated better?",
+      "parentUuid": "0afd6910_457a3d7a",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 26
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4e723f56_189851f7",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -249,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "2e2090bc_8aabb7cf",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Yes. Thanks.",
+      "parentUuid": "4e723f56_189851f7",
+      "range": {
+        "startLine": 190,
+        "startChar": 36,
+        "endLine": 190,
+        "endChar": 42
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f6e4ce1_12b4b946",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -260,6 +518,30 @@
       "writtenOn": "2018-10-17T12:22:22Z",
       "side": 1,
       "message": "Would it simplify the case with optional values if FixedLengthDeltaEncoder owned |previous| and EncodeDelta only took |current|?",
+      "range": {
+        "startLine": 222,
+        "startChar": 7,
+        "endLine": 222,
+        "endChar": 18
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecab635a_2b2cac7f",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Could you indicate how this would be done on the CL that introduces optional encoding?",
+      "parentUuid": "3f6e4ce1_12b4b946",
       "range": {
         "startLine": 222,
         "startChar": 7,
@@ -295,6 +577,30 @@
     },
     {
       "key": {
+        "uuid": "ee1c7df5_ea7c5f30",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "It is necessary to iterate over the |values_| to determine |num_set_values|. That\u0027s what I do in the CL that introduces optional encoding, where this TODO is removed.",
+      "parentUuid": "47e7920f_08c1c70f",
+      "range": {
+        "startLine": 343,
+        "startChar": 21,
+        "endLine": 344,
+        "endChar": 43
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f5607f6_c26b5d6a",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
         "patchSetId": 11
@@ -318,6 +624,30 @@
     },
     {
       "key": {
+        "uuid": "aa330165_cb2da071",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f5607f6_c26b5d6a",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6e11668_89e57e2d",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
         "patchSetId": 11
@@ -332,6 +662,24 @@
       "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e334fdc_735b1ef9",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6e11668_89e57e2d",
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

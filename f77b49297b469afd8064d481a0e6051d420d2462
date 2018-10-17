@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fca629aa_7f447ac1",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Though shorter and more efficient, your suggestion is technically less correct, because +7 may cause |bits| to overflow and wrap around. This scenario will never be encountered, but I\u0027d feel better going with the more correct version, when efficiency is not a concern. Wdys?",
+      "parentUuid": "9239d88d_2d34c4e0",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bea9d9a_d44c0482",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c2de251_5f47664e",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "In a subsequent CL, which also removes the TODO.",
+      "parentUuid": "5bea9d9a_d44c0482",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 51
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "36cd95f5_80f71e6e",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea976509_8291e20a",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a20dfcd_6215e558",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb8d2ae8_353ee8df",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-17T13:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a20dfcd_6215e558",
+      "range": {
+        "startLine": 31,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
