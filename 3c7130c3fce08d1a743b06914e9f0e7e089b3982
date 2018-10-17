@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa3a939e_6e3d5a28",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3481,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-17T14:47:30Z",
+      "side": 1,
+      "message": "nit: \"and\" ;)",
+      "revId": "3c7130c3fce08d1a743b06914e9f0e7e089b3982",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd189caa_93092608",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3497,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-10-17T14:47:30Z",
+      "side": 1,
+      "message": "\"SpecialMsid\" makes it sound like its testing when stream is \"-\", but this is testing with the \"a\u003dssrc msid\" lines are missing? Should the test name change?\n\nJust making sure, we\u0027re testing...\n1. a\u003dssrc msid with \"-\"\n2. a\u003dssrc msid missing\nFor both serializing and deserializing?",
+      "revId": "3c7130c3fce08d1a743b06914e9f0e7e089b3982",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
