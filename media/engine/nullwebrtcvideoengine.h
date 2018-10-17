@@ -30,15 +30,17 @@ class WebRtcVideoEncoderFactory;
 
 // Video engine implementation that does nothing and can be used in
 // CompositeMediaEngine.
-class NullWebRtcVideoEngine {
+class NullWebRtcVideoEngine : public VideoEngineInterface {
  public:
-  std::vector<VideoCodec> codecs() const { return std::vector<VideoCodec>(); }
+  std::vector<VideoCodec> codecs() const override {
+    return std::vector<VideoCodec>();
+  }
 
-  RtpCapabilities GetCapabilities() const { return RtpCapabilities(); }
+  RtpCapabilities GetCapabilities() const override { return RtpCapabilities(); }
 
   VideoMediaChannel* CreateChannel(webrtc::Call* call,
                                    const MediaConfig& config,
-                                   const VideoOptions& options) {
+                                   const VideoOptions& options) override {
     return nullptr;
   }
 };

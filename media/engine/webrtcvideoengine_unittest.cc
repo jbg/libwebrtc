@@ -1255,8 +1255,8 @@ class WebRtcVideoChannelBaseTest : public testing::Test {
     // needs to be disabled, otherwise, tests which check the size of received
     // frames become flaky.
     media_config.video.enable_cpu_adaptation = false;
-    channel_.reset(engine_.CreateChannel(call_.get(), media_config,
-                                         cricket::VideoOptions()));
+    channel_.reset(engine_.CreateWebRtcChannel(call_.get(), media_config,
+                                               cricket::VideoOptions()));
     channel_->OnReadyToSend(true);
     EXPECT_TRUE(channel_.get() != NULL);
     network_interface_.SetDestination(channel_.get());
