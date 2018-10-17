@@ -760,6 +760,12 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
     ReconfigureAudioSendStream();
   }
 
+  void SetMixedOneTwoByteHeaderExtensionsSupported(bool supported) {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    config_.rtp.mixed_one_two_byte_header_extensions_supported = supported;
+    ReconfigureAudioSendStream();
+  }
+
   void SetRtpExtensions(const std::vector<webrtc::RtpExtension>& extensions) {
     RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
     config_.rtp.extensions = extensions;
@@ -1277,6 +1283,11 @@ bool WebRtcVoiceMediaChannel::SetSendParameters(
 
   if (!SetSendCodecs(params.codecs)) {
     return false;
+  }
+
+  for (auto& it : send_streams_) {
+    it.second->SetMixedOneTwoByteHeaderExtensionsSupported(
+        params.mixed_one_two_byte_header_extension_supported);
   }
 
   if (!ValidateRtpExtensions(params.extensions)) {

@@ -241,6 +241,8 @@ RtpVideoSender::RtpVideoSender(
     constexpr bool remb_candidate = true;
     transport->packet_router()->AddSendRtpModule(rtp_rtcp.get(),
                                                  remb_candidate);
+    rtp_rtcp->SetMixedOneTwoByteHeaderExtensionsSupported(
+        rtp_config_.mixed_one_two_byte_header_extensions_supported);
   }
 
   for (size_t i = 0; i < rtp_config_.extensions.size(); ++i) {

@@ -116,6 +116,7 @@ class RTPSender {
                         int64_t expected_retransmission_time_ms);
 
   // RTP header extension
+  void SetMixedOneTwoByteHeaderExtensionsSupported(bool supported);
   int32_t RegisterRtpHeaderExtension(RTPExtensionType type, uint8_t id);
   bool RegisterRtpHeaderExtension(const std::string& uri, int id);
   bool IsRtpHeaderExtensionRegistered(RTPExtensionType type) const;

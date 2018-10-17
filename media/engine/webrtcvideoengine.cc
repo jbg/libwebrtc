@@ -619,6 +619,11 @@ bool WebRtcVideoChannel::GetChangedSendParameters(
     changed_params->codec = selected_send_codec;
 
   // Handle RTP header extensions.
+  if (params.mixed_one_two_byte_header_extension_supported !=
+      send_params_.mixed_one_two_byte_header_extension_supported) {
+    changed_params->mixed_one_two_byte_header_supported =
+        params.mixed_one_two_byte_header_extension_supported;
+  }
   std::vector<webrtc::RtpExtension> filtered_extensions = FilterRtpExtensions(
       params.extensions, webrtc::RtpExtension::IsSupportedForVideo, true);
   if (!send_rtp_extensions_ || (*send_rtp_extensions_ != filtered_extensions)) {
@@ -671,6 +676,11 @@ bool WebRtcVideoChannel::SetSendParameters(const VideoSendParameters& params) {
     const VideoCodecSettings& codec_settings = *changed_params.codec;
     send_codec_ = codec_settings;
     RTC_LOG(LS_INFO) << "Using codec: " << codec_settings.codec.ToString();
+  }
+
+  if (changed_params.mixed_one_two_byte_header_supported) {
+    send_params_.mixed_one_two_byte_header_extension_supported =
+        *changed_params.mixed_one_two_byte_header_supported;
   }
 
   if (changed_params.rtp_header_extensions) {
@@ -880,6 +890,11 @@ bool WebRtcVideoChannel::GetChangedRecvParameters(
   }
 
   // Handle RTP header extensions.
+  if (params.mixed_one_two_byte_header_extension_supported !=
+      recv_params_.mixed_one_two_byte_header_extension_supported) {
+    changed_params->mixed_one_two_byte_header_supported =
+        params.mixed_one_two_byte_header_extension_supported;
+  }
   std::vector<webrtc::RtpExtension> filtered_extensions = FilterRtpExtensions(
       params.extensions, webrtc::RtpExtension::IsSupportedForVideo, false);
   if (filtered_extensions != recv_rtp_extensions_) {
@@ -1712,6 +1727,11 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
     parameters_.config.rtp.rtcp_mode = *params.rtcp_mode;
     rtp_parameters_.rtcp.reduced_size =
         parameters_.config.rtp.rtcp_mode == webrtc::RtcpMode::kReducedSize;
+    recreate_stream = true;
+  }
+  if (params.mixed_one_two_byte_header_supported) {
+    parameters_.config.rtp.mixed_one_two_byte_header_extensions_supported =
+        *params.mixed_one_two_byte_header_supported;
     recreate_stream = true;
   }
   if (params.rtp_header_extensions) {
