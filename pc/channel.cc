@@ -93,6 +93,8 @@ void RtpSendParametersFromMediaDescription(
     RtpSendParameters<Codec>* send_params) {
   RtpParametersFromMediaDescription(desc, extensions, send_params);
   send_params->max_bandwidth_bps = desc->bandwidth();
+  send_params->mixed_one_two_byte_header_extension_supported =
+      desc->mixed_one_two_byte_header_extensions_supported();
 }
 
 BaseChannel::BaseChannel(rtc::Thread* worker_thread,

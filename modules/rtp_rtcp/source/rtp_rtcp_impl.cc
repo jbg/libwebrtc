@@ -609,6 +609,11 @@ void ModuleRtpRtcpImpl::UnsetRemb() {
   rtcp_sender_.UnsetRemb();
 }
 
+void ModuleRtpRtcpImpl::SetMixedOneTwoByteHeaderExtensionsSupported(
+    bool supported) {
+  rtp_sender_->SetMixedOneTwoByteHeaderExtensionsSupported(supported);
+}
+
 int32_t ModuleRtpRtcpImpl::RegisterSendRtpHeaderExtension(
     const RTPExtensionType type,
     const uint8_t id) {
