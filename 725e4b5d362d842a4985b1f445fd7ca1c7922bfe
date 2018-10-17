@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4026c596_1f8d54ba",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-17T13:17:18Z",
+      "side": 1,
+      "message": "This is getting too subtle for me... So swap(a,b) can resolve to either std:swap or something completely different that is visible in the current scope, and that ambiguitty is intentional?\n\nIf that\u0027s the C++ convention, I guess this is in order.",
+      "parentUuid": "b8f0a458_a6b23784",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3507ef31_0e11259a",
         "filename": "rtc_base/buffer.h",
         "patchSetId": 1
@@ -163,6 +187,30 @@
       "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76562116_2c433300",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-17T13:17:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e0a62b2b_7d4fff2d",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 65
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
