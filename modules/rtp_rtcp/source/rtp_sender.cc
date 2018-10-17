@@ -238,6 +238,11 @@ uint32_t RTPSender::NackOverheadRate() const {
   return nack_bitrate_sent_.Rate(clock_->TimeInMilliseconds()).value_or(0);
 }
 
+void RTPSender::SetMixedOneTwoByteHeaderExtensionsSupported(bool supported) {
+  rtc::CritScope lock(&send_critsect_);
+  rtp_header_extension_map_.SetMixedOneTwoByteHeaderSupported(supported);
+}
+
 int32_t RTPSender::RegisterRtpHeaderExtension(RTPExtensionType type,
                                               uint8_t id) {
   rtc::CritScope lock(&send_critsect_);
