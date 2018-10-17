@@ -52,7 +52,7 @@ class RenderDelayControllerImpl final : public RenderDelayController {
                             int non_causal_offset,
                             int sample_rate_hz);
   ~RenderDelayControllerImpl() override;
-  void Reset() override;
+  void Reset(bool reset_delay_statistics) override;
   void LogRenderCall() override;
   absl::optional<DelayEstimate> GetDelay(
       const DownsampledRenderBuffer& render_buffer,
@@ -147,13 +147,13 @@ RenderDelayControllerImpl::RenderDelayControllerImpl(
 
 RenderDelayControllerImpl::~RenderDelayControllerImpl() = default;
 
-void RenderDelayControllerImpl::Reset() {
+void RenderDelayControllerImpl::Reset(bool reset_delay_statistics) {
   delay_ = absl::nullopt;
   delay_samples_ = absl::nullopt;
   skew_ = absl::nullopt;
   previous_offset_blocks_ = 0;
   std::fill(delay_buf_.begin(), delay_buf_.end(), 0.f);
-  delay_estimator_.Reset(false);
+  delay_estimator_.Reset(!reset_delay_statistics);
   skew_estimator_.Reset();
   delay_change_counter_ = 0;
   soft_reset_counter_ = 0;

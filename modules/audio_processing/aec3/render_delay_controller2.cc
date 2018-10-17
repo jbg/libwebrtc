@@ -33,7 +33,7 @@ class RenderDelayControllerImpl2 final : public RenderDelayController {
   RenderDelayControllerImpl2(const EchoCanceller3Config& config,
                              int sample_rate_hz);
   ~RenderDelayControllerImpl2() override;
-  void Reset() override;
+  void Reset(bool reset_delay_statistics) override;
   void LogRenderCall() override;
   absl::optional<DelayEstimate> GetDelay(
       const DownsampledRenderBuffer& render_buffer,
@@ -112,10 +112,10 @@ RenderDelayControllerImpl2::RenderDelayControllerImpl2(
 
 RenderDelayControllerImpl2::~RenderDelayControllerImpl2() = default;
 
-void RenderDelayControllerImpl2::Reset() {
+void RenderDelayControllerImpl2::Reset(bool reset_delay_statistics) {
   delay_ = absl::nullopt;
   delay_samples_ = absl::nullopt;
-  delay_estimator_.Reset(false);
+  delay_estimator_.Reset(!reset_delay_statistics);
   delay_change_counter_ = 0;
 }
 
@@ -140,9 +140,6 @@ absl::optional<DelayEstimate> RenderDelayControllerImpl2::GetDelay(
   }
 
   if (delay_samples) {
-    // TODO(peah): Refactor the rest of the code to assume a kRefined estimate
-    // quality.
-    RTC_DCHECK(DelayEstimate::Quality::kRefined == delay_samples->quality);
     if (!delay_samples_ || delay_samples->delay != delay_samples_->delay) {
       delay_change_counter_ = 0;
     }
@@ -170,9 +167,15 @@ absl::optional<DelayEstimate> RenderDelayControllerImpl2::GetDelay(
 
   if (delay_samples_) {
     // Compute the render delay buffer delay.
-    delay_ = ComputeBufferDelay(delay_, delay_headroom_blocks_,
-                                hysteresis_limit_1_blocks_,
-                                hysteresis_limit_2_blocks_, *delay_samples_);
+    delay_ = ComputeBufferDelay(
+        delay_, delay_headroom_blocks_,
+        delay_samples->quality == DelayEstimate::Quality::kRefined
+            ? hysteresis_limit_1_blocks_
+            : 0,
+        delay_samples->quality == DelayEstimate::Quality::kRefined
+            ? hysteresis_limit_2_blocks_
+            : 0,
+        *delay_samples_);
   }
 
   metrics_.Update(delay_samples_ ? absl::optional<size_t>(delay_samples_->delay)

@@ -22,6 +22,8 @@ MatchedFilterLagAggregator::MatchedFilterLagAggregator(
       thresholds_(thresholds) {
   RTC_DCHECK(data_dumper);
   RTC_DCHECK_LE(thresholds_.initial, thresholds_.converged);
+  thresholds_.initial = 5;
+  thresholds_.converged = 20;
   histogram_data_.fill(0);
 }
 
@@ -77,9 +79,13 @@ absl::optional<DelayEstimate> MatchedFilterLagAggregator::Aggregate(
     if (histogram_[candidate] > thresholds_.converged ||
         (histogram_[candidate] > thresholds_.initial &&
          !significant_candidate_found_)) {
-      return DelayEstimate(DelayEstimate::Quality::kRefined, candidate);
+      return DelayEstimate(significant_candidate_found_
+                               ? DelayEstimate::Quality::kRefined
+                               : DelayEstimate::Quality::kCoarse,
+                           candidate);
     }
   }
+
   return absl::nullopt;
 }
 

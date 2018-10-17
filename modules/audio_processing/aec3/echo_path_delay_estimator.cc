@@ -40,7 +40,8 @@ EchoPathDelayEstimator::EchoPathDelayEstimator(
               ? config.render_levels.poor_excitation_render_limit_ds8
               : config.render_levels.poor_excitation_render_limit,
           config.delay.delay_estimate_smoothing,
-          config.delay.delay_candidate_detection_threshold),
+          0.2),
+      //      config.delay.delay_candidate_detection_threshold),
       matched_filter_lag_aggregator_(data_dumper_,
                                      matched_filter_.GetMaxFilterLag(),
                                      config.delay.delay_selection_thresholds) {

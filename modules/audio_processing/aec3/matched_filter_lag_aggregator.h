@@ -46,7 +46,7 @@ class MatchedFilterLagAggregator {
   std::array<int, 250> histogram_data_;
   int histogram_data_index_ = 0;
   bool significant_candidate_found_ = false;
-  const EchoCanceller3Config::Delay::DelaySelectionThresholds thresholds_;
+  EchoCanceller3Config::Delay::DelaySelectionThresholds thresholds_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(MatchedFilterLagAggregator);
 };
