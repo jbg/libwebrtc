@@ -36,8 +36,7 @@ using absl::make_unique;
 namespace webrtc {
 namespace webrtc_cc {
 namespace {
-using send_side_cc_internal::PeriodicTask;
-const int64_t PacerQueueUpdateIntervalMs = 25;
+constexpr TimeDelta kPacerQueueUpdateInterval = TimeDelta::Millis<25>();
 
 TargetRateConstraints ConvertConstraints(int min_bitrate_bps,
                                          int max_bitrate_bps,
@@ -52,54 +51,6 @@ TargetRateConstraints ConvertConstraints(int min_bitrate_bps,
   if (start_bitrate_bps > 0)
     msg.starting_rate = DataRate::bps(start_bitrate_bps);
   return msg;
-}
-
-// The template closure pattern is based on rtc::ClosureTask.
-template <class Closure>
-class PeriodicTaskImpl final : public PeriodicTask {
- public:
-  PeriodicTaskImpl(rtc::TaskQueue* task_queue,
-                   int64_t period_ms,
-                   Closure&& closure)
-      : task_queue_(task_queue),
-        period_ms_(period_ms),
-        closure_(std::forward<Closure>(closure)) {}
-  bool Run() override {
-    if (!running_)
-      return true;
-    closure_();
-    // absl::WrapUnique lets us repost this task on the TaskQueue.
-    task_queue_->PostDelayedTask(absl::WrapUnique(this), period_ms_);
-    // Return false to tell TaskQueue to not destruct this object, since we have
-    // taken ownership with absl::WrapUnique.
-    return false;
-  }
-  void Stop() override {
-    if (task_queue_->IsCurrent()) {
-      RTC_DCHECK(running_);
-      running_ = false;
-    } else {
-      task_queue_->PostTask([this] { Stop(); });
-    }
-  }
-
- private:
-  rtc::TaskQueue* const task_queue_;
-  const int64_t period_ms_;
-  typename std::remove_const<
-      typename std::remove_reference<Closure>::type>::type closure_;
-  bool running_ = true;
-};
-
-template <class Closure>
-static PeriodicTask* StartPeriodicTask(rtc::TaskQueue* task_queue,
-                                       int64_t period_ms,
-                                       Closure&& closure) {
-  auto periodic_task = absl::make_unique<PeriodicTaskImpl<Closure>>(
-      task_queue, period_ms, std::forward<Closure>(closure));
-  PeriodicTask* periodic_task_ptr = periodic_task.get();
-  task_queue->PostDelayedTask(std::move(periodic_task), period_ms);
-  return periodic_task_ptr;
 }
 
 }  // namespace
@@ -386,10 +337,11 @@ void SendSideCongestionController::StartProcessPeriodicTasks() {
   if (!periodic_tasks_enabled_)
     return;
   if (!pacer_queue_update_task_) {
-    pacer_queue_update_task_ =
-        StartPeriodicTask(task_queue_, PacerQueueUpdateIntervalMs, [this]() {
+    pacer_queue_update_task_ = StartPeriodicTask(
+        task_queue_, kPacerQueueUpdateInterval, false, [this]() {
           RTC_DCHECK_RUN_ON(task_queue_);
           UpdatePacerQueue();
+          return kPacerQueueUpdateInterval;
         });
   }
   if (controller_task_) {
@@ -403,9 +355,10 @@ void SendSideCongestionController::StartProcessPeriodicTasks() {
     // queue is destroyed or some time after Stop() is called, whichever comes
     // first.
     controller_task_ =
-        StartPeriodicTask(task_queue_, process_interval_.ms(), [this]() {
+        StartPeriodicTask(task_queue_, process_interval_, false, [this]() {
           RTC_DCHECK_RUN_ON(task_queue_);
           UpdateControllerWithTimeInterval();
+          return process_interval_;
         });
   }
 }
