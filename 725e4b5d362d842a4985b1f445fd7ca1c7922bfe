@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "99797baa_fe9cd038",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-17T12:03:02Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be clearer to write \n\n  std::wrap(data_, buf.data_), \n\nwithout the using declaration?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3507ef31_0e11259a",
         "filename": "rtc_base/buffer.h",
         "patchSetId": 1
@@ -19,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "3f7fc79a_e7b42ca5",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-17T12:03:02Z",
+      "side": 1,
+      "message": "What\u0027s the effect of self-swap on a std::unique_ptr, it\u0027s a nop?",
+      "parentUuid": "3507ef31_0e11259a",
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ef663e7_aaa4d4e0",
         "filename": "rtc_base/buffer.h",
         "patchSetId": 1
@@ -30,6 +71,52 @@
       "writtenOn": "2018-10-17T11:39:49Z",
       "side": 1,
       "message": "This catches the leak that move self-assignment was causing before the fix.",
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e88a9b78_dce722ee",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-17T12:03:02Z",
+      "side": 1,
+      "message": "Is the only operation allowed on a moved from rtc::Buffer the move-assignment operator? Is that the standard convetion for moved-from objects, or does it need documentation somewhere?",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 65
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf53e8e2_a87931e3",
+        "filename": "rtc_base/buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-17T12:03:02Z",
+      "side": 1,
+      "message": "I think it would make sense to test the result of self-move. If I understood this change correctly, the intention is that self-move has (about) the same effect as Clear()? It would be nice with an expectation to check that, and also reflect that in the test name.\n\nNot sure how to do that without hitting one of the RTC_DCHECK(IsConsistent()), though.",
+      "range": {
+        "startLine": 188,
+        "startChar": 17,
+        "endLine": 188,
+        "endChar": 35
+      },
       "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
