@@ -281,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "163da7cb_a1dbc36a",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-10-17T12:31:15Z",
+      "side": 1,
+      "message": "I think of DCHECK as \"trust but verify\" - it\u0027s free in release builds, and catches mistakes done during refactoring.",
+      "parentUuid": "28c81c0f_1d52e82d",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93713133_22bb0613",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 11
