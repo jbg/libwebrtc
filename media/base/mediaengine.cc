@@ -104,4 +104,68 @@ webrtc::RTCError ValidateRtpParameters(
   return webrtc::RTCError::OK();
 }
 
+CompositeMediaEngine::CompositeMediaEngine(
+    std::unique_ptr<AudioEngineInterface> audio_engine,
+    std::unique_ptr<VideoEngineInterface> video_engine)
+    : engines_(std::move(audio_engine), std::move(video_engine)) {}
+CompositeMediaEngine::~CompositeMediaEngine() = default;
+bool CompositeMediaEngine::Init() {
+  voice().Init();
+  return true;
+}
+rtc::scoped_refptr<webrtc::AudioState> CompositeMediaEngine::GetAudioState()
+    const {
+  return voice().GetAudioState();
+}
+VoiceMediaChannel* CompositeMediaEngine::CreateChannel(
+    webrtc::Call* call,
+    const MediaConfig& config,
+    const AudioOptions& options) {
+  return voice().CreateChannel(call, config, options);
+}
+VideoMediaChannel* CompositeMediaEngine::CreateVideoChannel(
+    webrtc::Call* call,
+    const MediaConfig& config,
+    const VideoOptions& options) {
+  return video().CreateChannel(call, config, options);
+}
+const std::vector<AudioCodec>& CompositeMediaEngine::audio_send_codecs() {
+  return voice().send_codecs();
+}
+const std::vector<AudioCodec>& CompositeMediaEngine::audio_recv_codecs() {
+  return voice().recv_codecs();
+}
+RtpCapabilities CompositeMediaEngine::GetAudioCapabilities() {
+  return voice().GetCapabilities();
+}
+std::vector<VideoCodec> CompositeMediaEngine::video_codecs() {
+  return video().codecs();
+}
+RtpCapabilities CompositeMediaEngine::GetVideoCapabilities() {
+  return video().GetCapabilities();
+}
+bool CompositeMediaEngine::StartAecDump(rtc::PlatformFile file,
+                                        int64_t max_size_bytes) {
+  return voice().StartAecDump(file, max_size_bytes);
+}
+void CompositeMediaEngine::StopAecDump() {
+  voice().StopAecDump();
+}
+
+AudioEngineInterface& CompositeMediaEngine::voice() {
+  return *engines_.first.get();
+}
+
+VideoEngineInterface& CompositeMediaEngine::video() {
+  return *engines_.second.get();
+}
+
+const AudioEngineInterface& CompositeMediaEngine::voice() const {
+  return *engines_.first.get();
+}
+
+const VideoEngineInterface& CompositeMediaEngine::video() const {
+  return *engines_.second.get();
+}
+
 };  // namespace cricket
