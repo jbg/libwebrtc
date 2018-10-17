@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91371dee_eda20089",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "As for the enum, I prefer to rename this function.",
+      "range": {
+        "startLine": 354,
+        "startChar": 4,
+        "endLine": 354,
+        "endChar": 39
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10fee224_ed1b6bf7",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "As for the enum, I prefer to rename this function.",
+      "range": {
+        "startLine": 356,
+        "startChar": 4,
+        "endLine": 356,
+        "endChar": 37
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b29ca164_b02b4405",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "The way this was solved in the design doc was to map 64 to 0. This has the advantage of making 0 the most common case, but I\u0027m not sure how important this is when not using varints.",
+      "range": {
+        "startLine": 369,
+        "startChar": 29,
+        "endLine": 369,
+        "endChar": 49
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b77866c2_f42dfb38",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "This would not be needed if merging ParseWithOnlyMandatoryFields and ParseWithAllOptionalFields as discussed below.",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 3
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f66aa33_90b5a7d4",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "I don\u0027t like changing the meaning of the first byte depending on the whether there are 1 or 2 bytes of header.\n\nThe 1 byte header should be a strict subset of the two byte case. This will also let you merge ParseWithOnlyMandatoryFields and ParseWithAllOptionalFields to a single\n\nbool ParseEncodingParameters() {\n  // Read encoding type\n  if (not (1Byte or 2Byte)) return false;\n  // Read delta width\n  if (2Byte) {\n    // Read original width\n    // Read sign bit\n    // Read optional bit\n  }\n  return true;\n}",
+      "range": {
+        "startLine": 597,
+        "startChar": 38,
+        "endLine": 597,
+        "endChar": 71
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f6dcb46_ba6886e0",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "I suspect that the compiler won\u0027t be able to optimize this remainder calculation. Better to precompute a bitmask and bitwise-and. (Also avoids extra branching in the inner loop.)",
+      "range": {
+        "startLine": 715,
+        "startChar": 15,
+        "endLine": 715,
+        "endChar": 70
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b38cba0e_e2481b69",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "In what sense is the delta \"min\"?",
+      "range": {
+        "startLine": 145,
+        "startChar": 26,
+        "endLine": 145,
+        "endChar": 48
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c372653_885dc6d3",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "Isn\u0027t the idea to test what happens if there is a wrap in the sequence of values? It seems this test starts on a low value.",
+      "range": {
+        "startLine": 148,
+        "startChar": 22,
+        "endLine": 148,
+        "endChar": 44
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f7371d_dd7c6ffd",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "Isn\u0027t the idea to test what happens if there is a wrap in the sequence of values? It seems this test already starts on a low value.",
+      "range": {
+        "startLine": 163,
+        "startChar": 49,
+        "endLine": 163,
+        "endChar": 65
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36dc556_0fcbbd81",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "Could we also test that the encoding uses at most delta_max_bit_width_ * num_of_values_ + header_size bits?",
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896cc2bd_24fa816b",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T18:12:24Z",
+      "side": 1,
+      "message": "Good vintage. :)",
+      "range": {
+        "startLine": 275,
+        "startChar": 14,
+        "endLine": 275,
+        "endChar": 18
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
