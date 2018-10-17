@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0736d4e8_6bece05a",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-17T15:40:10Z",
+      "side": 1,
+      "message": "How does this get deleted? Is it via Stop() or closure_ returning infinite?",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3e4422f_e6cb7fc5",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-17T15:40:10Z",
+      "side": 1,
+      "message": "Would it be possible to add a test for this?",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34999e1a_6fd90d19",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-17T15:40:10Z",
+      "side": 1,
+      "message": "Please add documentation.",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db9737ba_b5f695d7",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-10-17T15:40:10Z",
+      "side": 1,
+      "message": "Can we name this with an enum instead?",
+      "range": {
+        "startLine": 83,
+        "startChar": 39,
+        "endLine": 83,
+        "endChar": 63
+      },
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
