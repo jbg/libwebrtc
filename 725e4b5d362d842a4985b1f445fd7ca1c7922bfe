@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b8f0a458_a6b23784",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-17T13:06:35Z",
+      "side": 1,
+      "message": "Possibly. But the advantage with this idiom is that it always works, no matter if std::swap is the right swap for your type. See https://en.cppreference.com/w/cpp/named_req/Swappable. If I did it your way, readers would have to know that std::swap was the right swap for unique_ptr.",
+      "parentUuid": "99797baa_fe9cd038",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3507ef31_0e11259a",
         "filename": "rtc_base/buffer.h",
         "patchSetId": 1
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "b02aedff_fc320f91",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-17T13:06:35Z",
+      "side": 1,
+      "message": "tl;dr: Yes.\n\nThe standard just says that swap \"exchanges values stored in two locations\". The canonical implementation is something like\n\n  template \u003ctypename T\u003e\n  void swap(T\u0026 a, T\u0026 b) {\n    T tmp(std::move(a));\n    a \u003d std::move(b);\n    b \u003d std::move(tmp);\n  }\n\nI feel safe assuming that it\u0027s a no-op, especially in this particular case, where all you need to do is swap the value of two pointers.",
+      "parentUuid": "3f7fc79a_e7b42ca5",
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ef663e7_aaa4d4e0",
         "filename": "rtc_base/buffer.h",
         "patchSetId": 1
@@ -88,6 +130,30 @@
       "writtenOn": "2018-10-17T12:03:02Z",
       "side": 1,
       "message": "Is the only operation allowed on a moved from rtc::Buffer the move-assignment operator? Is that the standard convetion for moved-from objects, or does it need documentation somewhere?",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 65
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0a62b2b_7d4fff2d",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-17T13:06:35Z",
+      "side": 1,
+      "message": "See line 393. It\u0027s common to promise very little about the moved-from state, other than that it can be destroyed (necessary) and completely overwritten (not necessary, but often costs ~nothing to provide).\n\n  \"Unless otherwise specified, all standard library objects that have been moved from are placed in a valid but unspecified state. That is, only the functions without preconditions, such as the assignment operator, can be safely used on the object after it was moved from\"\n    -- https://en.cppreference.com/w/cpp/utility/move\n\nAlso:\n\n  \"the standard library functions called with xvalue arguments may assume the argument is the only reference to the object; if it was constructed from an lvalue with std::move, no aliasing checks are made. In particular, this means that standard library move assignment operators do not have to perform self-assignment checks:\n\n  std::vector\u003cint\u003e v \u003d {2, 3, 3};\n  v \u003d std::move(v); // the value of v is unspecified\"",
+      "parentUuid": "e88a9b78_dce722ee",
       "range": {
         "startLine": 406,
         "startChar": 0,
