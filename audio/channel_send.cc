@@ -719,6 +719,10 @@ void ChannelSend::SetMid(const std::string& mid, int extension_id) {
   _rtpRtcpModule->SetMid(mid);
 }
 
+void ChannelSend::SetMixedOneTwoByteHeaderExtensionsSupported(bool supported) {
+  _rtpRtcpModule->SetMixedOneTwoByteHeaderExtensionsSupported(supported);
+}
+
 int ChannelSend::SetSendAudioLevelIndicationStatus(bool enable,
                                                    unsigned char id) {
   _includeAudioLevelIndication = enable;

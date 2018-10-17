@@ -617,6 +617,7 @@ struct RtpParameters {
 
   std::vector<Codec> codecs;
   std::vector<webrtc::RtpExtension> extensions;
+  bool mixed_one_two_byte_header_extension_supported;
   // TODO(pthatcher): Add streams.
   RtcpParameters rtcp;
 

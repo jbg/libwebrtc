@@ -83,6 +83,8 @@ void RtpParametersFromMediaDescription(
   if (desc->rtp_header_extensions_set()) {
     params->extensions = extensions;
   }
+  params->mixed_one_two_byte_header_extension_supported =
+      desc->mixed_one_two_byte_header_extensions_supported();
   params->rtcp.reduced_size = desc->rtcp_reduced_size();
 }
 

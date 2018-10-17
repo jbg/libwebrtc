@@ -136,6 +136,9 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // Returns -1 on failure else 0.
   virtual int32_t DeRegisterSendPayload(int8_t payload_type) = 0;
 
+  // Mixed one- and two byte RTP headers in a stream supported.
+  virtual void SetMixedOneTwoByteHeaderExtensionsSupported(bool supported) = 0;
+
   // (De)registers RTP header extension type and id.
   // Returns -1 on failure else 0.
   virtual int32_t RegisterSendRtpHeaderExtension(RTPExtensionType type,
