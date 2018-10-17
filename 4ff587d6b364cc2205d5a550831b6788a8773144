@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f86127c3_4b7943f3",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-17T12:05:51Z",
+      "side": 1,
+      "message": "do not leave uninitialized, set default value",
+      "range": {
+        "startLine": 82,
+        "startChar": 11,
+        "endLine": 82,
+        "endChar": 57
+      },
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbfe7cb9_d592bd39",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-17T12:05:51Z",
+      "side": 1,
+      "message": "if reasonable, prefer the new flag propagated into RtpRtcp through this Configuration structure instead of with an extra method.\n\nSeems possible for video, not sure about audio.",
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
