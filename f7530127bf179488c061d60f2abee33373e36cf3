@@ -1,0 +1,337 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "759a59be_fffdbb3a",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "I like to binary search for the highest set bit. I.e. check if one of the top 32 bits are set, shift it down 32 bits and check if one of the top 16 bits are set and so on.\n\nE.g. https://graphics.stanford.edu/~seander/bithacks.html#IntegerLog",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da39c57_bd221d81",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "Is this what we want? Wouldn\u0027t it be more natural if input \u003d\u003d 0 gives width \u003d\u003d 0?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6568c885_88700bf9",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "ComputeUnsignedDelta? Or will this function be augmented for signed deltas?",
+      "range": {
+        "startLine": 59,
+        "startChar": 9,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be1c8c2b_55ea8b49",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "kFixedSizeOneByteHeader or kFixedSizeUnsignedDeltasNoWrap",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2b7a2de_195e9bfc",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "There will presumably be more options behind the reserved encoding types.\nkFixedSizeTwoByteHeader or kFixedSizeWithWrapSignAndOptional",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34a74bfb_01f8b417",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "Prefer ordering these in the order they will be appear in the header.",
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae7b3b2_c80bf477",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "Any reason for not return std::move(buffer_)?",
+      "range": {
+        "startLine": 131,
+        "startChar": 11,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47dcb530_5264e221",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "nit: could",
+      "range": {
+        "startLine": 138,
+        "startChar": 53,
+        "endLine": 138,
+        "endChar": 57
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c5a3dbe_0e28017c",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "nit: the values might not exist?",
+      "range": {
+        "startLine": 177,
+        "startChar": 18,
+        "endLine": 178,
+        "endChar": 12
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0afd6910_457a3d7a",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "Could you clarify? (Possibly defer to the CL that actually adds optional fields.)",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 26
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e723f56_189851f7",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "left over from previous version?",
+      "range": {
+        "startLine": 190,
+        "startChar": 36,
+        "endLine": 190,
+        "endChar": 42
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f6e4ce1_12b4b946",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "Would it simplify the case with optional values if FixedLengthDeltaEncoder owned |previous| and EncodeDelta only took |current|?",
+      "range": {
+        "startLine": 222,
+        "startChar": 7,
+        "endLine": 222,
+        "endChar": 18
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47e7920f_08c1c70f",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "It would be values.size() + num_set_values * params_.delta_width_bits, no?\nNo iteration required. If we want to support varint or other variable length encoding it would be different.",
+      "range": {
+        "startLine": 343,
+        "startChar": 21,
+        "endLine": 344,
+        "endChar": 43
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f5607f6_c26b5d6a",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "returns it?",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6e11668_89e57e2d",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "I think this comments adds more confusion than it clarifies. If there are no restrictions on inputs and there is no return code, then I would assume that the function never fails.\n\nIf you want to keep it then I would suggest a formulation like \"This function never fails\".",
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9239d88d_2d34c4e0",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "(bits + 7) / 8 ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bea9d9a_d44c0482",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "This is done, right?",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 51
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea976509_8291e20a",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "I think this comment could be omitted, or reformulated as \"This function never fails.\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a20dfcd_6215e558",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-17T12:22:22Z",
+      "side": 1,
+      "message": "If input is not a valid encoding of |num_of_deltas| elements based on |base|, the function returns a empty vector which signals an error?",
+      "range": {
+        "startLine": 31,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
