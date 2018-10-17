@@ -19,6 +19,58 @@
     },
     {
       "key": {
+        "uuid": "bf40d93b_cb6dd404",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "same question from me - I guess the code can answer it but having a clear comment that documents the behavioral expectations of the class, how it should be used and how it should not be used. Especially how things work wrt lifetime.",
+      "parentUuid": "0736d4e8_6bece05a",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "686a0c65_f4a22a7c",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "add a dtor to make sure we get destructed on the TQ?",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8234069_0a7e473e",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "it\u0027s not immediately clear what |compensate_interval| means, so that seems like a good thing to document and have a test for.",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3e4422f_e6cb7fc5",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 3
@@ -30,6 +82,91 @@
       "writtenOn": "2018-10-17T15:40:10Z",
       "side": 1,
       "message": "Would it be possible to add a test for this?",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "815f325b_26236341",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "this seems to indicate a special contract of the closure that is different than for other TQ closures. Is that a good thing or confusing? In any case, it needs to be documented (especially the magical \"infinite\" return value).",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "237a8c7e_9e285da8",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "this only compensates for the current run, but over time, I think that it\u0027s still possible to drift. Perhaps that intentional.",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21d9865a_840da4e3",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "document that this function must be called exactly once.",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82d29201_29f41175",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "can we add a guard to make sure this value is only modified on the task queue?",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bcf4bf0_f1bfd6f4",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-17T16:55:56Z",
+      "side": 1,
+      "message": "same for this variable.",
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
