@@ -273,6 +273,8 @@ void EchoRemoverImpl::ProcessCapture(
                       &subtractor_output);
   std::array<float, kBlockSize> e;
   FormLinearFilterOutput(use_smooth_signal_transitions_, subtractor_output, e);
+  data_dumper_->DumpRaw("aec3_shadow_filter_usage",
+                        !main_filter_output_last_selected_);
 
   // Compute spectra.
   WindowedPaddedFft(fft_, y0, y_old_, &Y);
@@ -374,18 +376,12 @@ void EchoRemoverImpl::FormLinearFilterOutput(
     // As the output of the main adaptive filter generally should be better
     // than the shadow filter output, add a margin and threshold for when
     // choosing the shadow filter output.
-    if (subtractor_output.e2_shadow < 0.9f * subtractor_output.e2_main &&
-        subtractor_output.y2 > 30.f * 30.f * kBlockSize &&
-        (subtractor_output.s2_main > 60.f * 60.f * kBlockSize ||
-         subtractor_output.s2_shadow > 60.f * 60.f * kBlockSize)) {
+    if (subtractor_output.e2_shadow < 0.75f * subtractor_output.e2_main &&
+        subtractor_output.y2 > 500.f * 500.f * kBlockSize &&
+        (subtractor_output.s2_main > 300.f * 300.f * kBlockSize ||
+         subtractor_output.s2_shadow > 300.f * 300.f * kBlockSize) &&
+        subtractor_output.e2_shadow < subtractor_output.s2_shadow) {
       use_main_output = false;
-    } else {
-      // If the main filter is diverged, choose the filter output that has the
-      // lowest power.
-      if (subtractor_output.e2_shadow < subtractor_output.e2_main &&
-          subtractor_output.y2 < subtractor_output.e2_main) {
-        use_main_output = false;
-      }
     }
   }
 
