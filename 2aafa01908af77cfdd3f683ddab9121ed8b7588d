@@ -299,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4d17eda0_456dc8be",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-17T13:07:41Z",
+      "side": 1,
+      "message": "True, but if we\u0027re afraid of the \"careless refactor\" scenario, shouldn\u0027t we prefer the solution that remains correct after reordering over the one that\u0027s simply a run-time crash in debug builds? I also find it easier to understand e.g. this:\n\nif (a) {\n} else if (!a \u0026\u0026 b) {\n} else ...\n\nas opposed to\n\nif (a) {\n} else if (b) {\n  RTC_DCHECK(!a);\n} else ...\n\nRegarding inefficiencies in release builds, this seems like the type of problem that should be easy for compilers to optimize away. I did some experiments(https://godbolt.org/z/eYMu9l), and that does indeed seem to be the case.",
+      "parentUuid": "163da7cb_a1dbc36a",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93713133_22bb0613",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 11
