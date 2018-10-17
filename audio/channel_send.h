@@ -166,6 +166,7 @@ class ChannelSend
   int SetLocalSSRC(unsigned int ssrc);
 
   void SetMid(const std::string& mid, int extension_id);
+  void SetMixedOneTwoByteHeaderExtensionsSupported(bool supported);
   int SetSendAudioLevelIndicationStatus(bool enable, unsigned char id);
   void EnableSendTransportSequenceNumber(int id);
 

@@ -52,6 +52,8 @@ class MockRtpRtcp : public RtpRtcp {
   MOCK_METHOD2(RegisterVideoSendPayload,
                void(int payload_type, const char* payload_name));
   MOCK_METHOD1(DeRegisterSendPayload, int32_t(int8_t payload_type));
+  MOCK_METHOD1(SetMixedOneTwoByteHeaderExtensionsSupported,
+               void(bool supported));
   MOCK_METHOD2(RegisterSendRtpHeaderExtension,
                int32_t(RTPExtensionType type, uint8_t id));
   MOCK_METHOD2(RegisterRtpHeaderExtension,

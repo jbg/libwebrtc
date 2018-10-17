@@ -644,6 +644,7 @@ struct RtpParameters {
 template <class Codec>
 struct RtpSendParameters : RtpParameters<Codec> {
   int max_bandwidth_bps = -1;
+  bool mixed_one_two_byte_header_extension_supported;
   // This is the value to be sent in the MID RTP header extension (if the header
   // extension in included in the list of extensions).
   std::string mid;

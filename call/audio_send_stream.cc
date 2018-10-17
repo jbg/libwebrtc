@@ -44,6 +44,8 @@ std::string AudioSendStream::Config::Rtp::ToString() const {
   char buf[1024];
   rtc::SimpleStringBuilder ss(buf);
   ss << "{ssrc: " << ssrc;
+  ss << ", extmap-allow-mixed: "
+     << mixed_one_two_byte_header_extensions_supported;
   ss << ", extensions: [";
   for (size_t i = 0; i < extensions.size(); ++i) {
     ss << extensions[i].ToString();
