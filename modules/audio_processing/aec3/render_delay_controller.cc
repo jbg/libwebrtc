@@ -44,6 +44,10 @@ bool UseOffsetBlocks() {
   return field_trial::IsEnabled("WebRTC-Aec3UseOffsetBlocks");
 }
 
+bool UseEarlyDelayDetection() {
+  return !field_trial::IsEnabled("WebRTC-Aec3EarlyDelayDetectionKillSwitch");
+}
+
 constexpr int kSkewHistorySizeLog2 = 8;
 
 class RenderDelayControllerImpl final : public RenderDelayController {
@@ -52,7 +56,7 @@ class RenderDelayControllerImpl final : public RenderDelayController {
                             int non_causal_offset,
                             int sample_rate_hz);
   ~RenderDelayControllerImpl() override;
-  void Reset() override;
+  void Reset(bool reset_delay_statistics) override;
   void LogRenderCall() override;
   absl::optional<DelayEstimate> GetDelay(
       const DownsampledRenderBuffer& render_buffer,
@@ -63,6 +67,7 @@ class RenderDelayControllerImpl final : public RenderDelayController {
  private:
   static int instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
+  const bool use_early_delay_detection_;
   const int delay_headroom_blocks_;
   const int hysteresis_limit_1_blocks_;
   const int hysteresis_limit_2_blocks_;
@@ -129,6 +134,7 @@ RenderDelayControllerImpl::RenderDelayControllerImpl(
     int sample_rate_hz)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+      use_early_delay_detection_(UseEarlyDelayDetection()),
       delay_headroom_blocks_(
           static_cast<int>(config.delay.delay_headroom_blocks)),
       hysteresis_limit_1_blocks_(
@@ -147,13 +153,15 @@ RenderDelayControllerImpl::RenderDelayControllerImpl(
 
 RenderDelayControllerImpl::~RenderDelayControllerImpl() = default;
 
-void RenderDelayControllerImpl::Reset() {
+void RenderDelayControllerImpl::Reset(bool reset_delay_statistics) {
   delay_ = absl::nullopt;
   delay_samples_ = absl::nullopt;
   skew_ = absl::nullopt;
   previous_offset_blocks_ = 0;
   std::fill(delay_buf_.begin(), delay_buf_.end(), 0.f);
-  delay_estimator_.Reset(false);
+  bool soft_delay_estimator_reset =
+      use_early_delay_detection_ ? false : !reset_delay_statistics;
+  delay_estimator_.Reset(soft_delay_estimator_reset);
   skew_estimator_.Reset();
   delay_change_counter_ = 0;
   soft_reset_counter_ = 0;
@@ -194,9 +202,6 @@ absl::optional<DelayEstimate> RenderDelayControllerImpl::GetDelay(
   absl::optional<int> skew = skew_estimator_.GetSkewFromCapture();
 
   if (delay_samples) {
-    // TODO(peah): Refactor the rest of the code to assume a kRefined estimate
-    // quality.
-    RTC_DCHECK(DelayEstimate::Quality::kRefined == delay_samples->quality);
     if (!delay_samples_ || delay_samples->delay != delay_samples_->delay) {
       delay_change_counter_ = 0;
     }
@@ -264,9 +269,19 @@ absl::optional<DelayEstimate> RenderDelayControllerImpl::GetDelay(
 
   if (delay_samples_) {
     // Compute the render delay buffer delay.
+    auto hysteresis = [](DelayEstimate::Quality quality,
+                         int hysteresis_parameter) {
+      if (quality == DelayEstimate::Quality::kRefined) {
+        return hysteresis_parameter;
+      }
+      return 0;
+    };
+
     delay_ = ComputeBufferDelay(
-        delay_, delay_headroom_blocks_, hysteresis_limit_1_blocks_,
-        hysteresis_limit_2_blocks_, offset_blocks, *delay_samples_);
+        delay_, delay_headroom_blocks_,
+        hysteresis(delay_samples_->quality, hysteresis_limit_1_blocks_),
+        hysteresis(delay_samples_->quality, hysteresis_limit_2_blocks_),
+        offset_blocks, *delay_samples_);
   }
 
   metrics_.Update(delay_samples_ ? absl::optional<size_t>(delay_samples_->delay)

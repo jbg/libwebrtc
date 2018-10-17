@@ -32,7 +32,7 @@ class RenderDelayController {
   virtual ~RenderDelayController() = default;
 
   // Resets the delay controller.
-  virtual void Reset() = 0;
+  virtual void Reset(bool reset_delay_statistics) = 0;
 
   // Logs a render call.
   virtual void LogRenderCall() = 0;
