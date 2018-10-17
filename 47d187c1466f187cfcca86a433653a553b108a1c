@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a77fbfd0_483b3539",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1853,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-17T23:07:42Z",
+      "side": 1,
+      "message": "network_type is not signaled in the standard for candidates, and I believe it is only meaningful for local candidates and in our implementation. You can find the network_type field in a Candidate is only altered via the setter set_network_type, which is only used for local candidates. If you rely on this flag for adjusting the congestion controls, it would be problematic.",
+      "range": {
+        "startLine": 1853,
+        "startChar": 22,
+        "endLine": 1853,
+        "endChar": 49
+      },
+      "revId": "47d187c1466f187cfcca86a433653a553b108a1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
