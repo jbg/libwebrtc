@@ -1845,6 +1845,15 @@ void P2PTransportChannel::SwitchSelectedConnection(Connection* conn) {
         selected_connection_->local_candidate().network_id();
     network_route_->remote_network_id =
         selected_connection_->remote_candidate().network_id();
+
+    if (old_selected_connection) {
+      network_route_->local_network_type_changed =
+          old_selected_connection->local_candidate().network_type() !=
+          selected_connection_->local_candidate().network_type();
+      network_route_->remote_network_type_changed =
+          old_selected_connection->remote_candidate().network_type() !=
+          selected_connection_->remote_candidate().network_type();
+    }
     network_route_->last_sent_packet_id = last_sent_packet_id_;
     network_route_->packet_overhead =
         GetIpOverhead(

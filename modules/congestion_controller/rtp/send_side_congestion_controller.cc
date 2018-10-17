@@ -123,7 +123,9 @@ SendSideCongestionController::SendSideCongestionController(
       last_report_block_time_(Timestamp::ms(clock_->TimeInMilliseconds())),
       observer_(nullptr),
       send_side_bwe_with_overhead_(
-          webrtc::field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
+          field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
+      only_reset_for_new_network_types_(
+          field_trial::IsEnabled("WebRTC-Bwe-ResetOnNetworkType")),
       transport_overhead_bytes_per_packet_(0),
       network_available_(false),
       periodic_tasks_enabled_(true),
@@ -255,9 +257,14 @@ void SendSideCongestionController::OnNetworkRouteChanged(
     int start_bitrate_bps,
     int min_bitrate_bps,
     int max_bitrate_bps) {
+  transport_overhead_bytes_per_packet_ = network_route.packet_overhead;
+  if (only_reset_for_new_network_types_ &&
+      !(network_route.local_network_type_changed ||
+        network_route.remote_network_type_changed))
+    return;
+
   transport_feedback_adapter_.SetNetworkIds(network_route.local_network_id,
                                             network_route.remote_network_id);
-  transport_overhead_bytes_per_packet_ = network_route.packet_overhead;
 
   NetworkRouteChange msg;
   msg.at_time = Timestamp::ms(clock_->TimeInMilliseconds());

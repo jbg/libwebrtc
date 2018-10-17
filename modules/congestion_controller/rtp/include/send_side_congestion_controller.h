@@ -192,6 +192,7 @@ class SendSideCongestionController
   StreamsConfig streams_config_ RTC_GUARDED_BY(task_queue_);
 
   const bool send_side_bwe_with_overhead_;
+  const bool only_reset_for_new_network_types_;
   // Transport overhead is written by OnNetworkRouteChanged and read by
   // AddPacket.
   // TODO(srte): Remove atomic when feedback adapter runs on task queue.

@@ -23,6 +23,9 @@ struct NetworkRoute {
   bool connected = false;
   uint16_t local_network_id = 0;
   uint16_t remote_network_id = 0;
+
+  bool remote_network_type_changed = true;
+  bool local_network_type_changed = true;
   // Last packet id sent on the PREVIOUS route.
   int last_sent_packet_id = -1;
   // The overhead in bytes from IP layer and above.
