@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8dbe73d3_984b9dc5",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3481,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-17T17:26:00Z",
+      "side": 1,
+      "message": "Haha good catch, thanks. I gotta kick the habit. Done.",
+      "parentUuid": "aa3a939e_6e3d5a28",
+      "revId": "3c7130c3fce08d1a743b06914e9f0e7e089b3982",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd189caa_93092608",
         "filename": "pc/webrtcsdp_unittest.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "3c7130c3fce08d1a743b06914e9f0e7e089b3982",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff300219_20586157",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3497,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-17T17:26:00Z",
+      "side": 1,
+      "message": "\"SpecialMsid\" means that it is testing the case for both multiple and no media stream IDs attached to a track. This is always in the SDP (and tested) with \"a\u003dmsid\" lines, and in half of the tests it also is tested with \"a\u003dssrc msid\" lines. This is because both of these can be the case for Unified Plan SDP (depending who the endpoint it we\u0027re communicating with). I\u0027ll try and clarify what\u0027s being tested:\n\nDeserializeSessionDescriptionSpecialMsid()\n-Deserializing a Unified Plan style SDP with both \"a\u003dmsid\" and \"a\u003dssrc msid\" lines. Tests empty stream with \"-\" and multiple streams. \n\nSerializeSessionDescriptionSpecialMsid()\n-Serializing a Unified Plan style SDP with both \"a\u003dmsid\" and \"a\u003dssrc msid\" lines. Tests empty stream with \"-\" and multiple streams. Must be equal to kUnifiedPlanSdpFullStringWithSpecialMsid.\n\nUnifiedPlanDeserializeSessionDescriptionSpecialMsid()\n-Deserializing a Unified Plan style SDP with both \"a\u003dmsid\" lines. \"a\u003dssrc msid\" lines are missing. Tests empty stream with \"-\" and multiple streams.\n\nUnifiedPlanSerializeSessionDescriptionSpecialMsid()\n-Serializing a Unified Plan style SDP with both \"a\u003dmsid\" lines. \"a\u003dssrc msid\" lines are missing.Tests empty stream with \"-\" and multiple streams.\n\nI made some small updates to the comments to clarify this. Hope that helps.",
+      "parentUuid": "cd189caa_93092608",
+      "revId": "3c7130c3fce08d1a743b06914e9f0e7e089b3982",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
