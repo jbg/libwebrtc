@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4f71f100_00a4323a",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-17T13:38:38Z",
+      "side": 1,
+      "message": "Yes. Just `swap(x, y);` will try to look up a function named `swap` both in the current namespace and its parents, but also in the namespaces where the types of x and y live---it\u0027s called argument-dependent lookup (ADL).\n\nIt\u0027s useful in precisely cases like this, where you want to let types provide some operation that some function need, but don\u0027t want to require it to be a member function.\n\nIt can also cause bugs if it happens by mistake. :-)",
+      "parentUuid": "4026c596_1f8d54ba",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3507ef31_0e11259a",
         "filename": "rtc_base/buffer.h",
         "patchSetId": 1
