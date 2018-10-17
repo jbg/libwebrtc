@@ -104,4 +104,32 @@ webrtc::RTCError ValidateRtpParameters(
   return webrtc::RTCError::OK();
 }
 
+CompositeMediaEngine::CompositeMediaEngine(
+    std::unique_ptr<AudioEngineInterface> audio_engine,
+    std::unique_ptr<VideoEngineInterface> video_engine)
+    : engines_(std::move(audio_engine), std::move(video_engine)) {}
+
+CompositeMediaEngine::~CompositeMediaEngine() = default;
+
+bool CompositeMediaEngine::Init() {
+  voice().Init();
+  return true;
+}
+
+AudioEngineInterface& CompositeMediaEngine::voice() {
+  return *engines_.first.get();
+}
+
+VideoEngineInterface& CompositeMediaEngine::video() {
+  return *engines_.second.get();
+}
+
+const AudioEngineInterface& CompositeMediaEngine::voice() const {
+  return *engines_.first.get();
+}
+
+const VideoEngineInterface& CompositeMediaEngine::video() const {
+  return *engines_.second.get();
+}
+
 };  // namespace cricket

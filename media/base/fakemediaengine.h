@@ -737,23 +737,11 @@ class FakeDataMediaChannel : public RtpHelper<DataMediaChannel> {
 // and FakeVideoEngine.
 class FakeBaseEngine {
  public:
-  FakeBaseEngine() : options_changed_(false), fail_create_channel_(false) {}
-  void set_fail_create_channel(bool fail) { fail_create_channel_ = fail; }
-
-  RtpCapabilities GetCapabilities() const { return capabilities_; }
-  void set_rtp_header_extensions(const std::vector<RtpExtension>& extensions) {
-    capabilities_.header_extensions = extensions;
-  }
-
+  FakeBaseEngine();
+  void set_fail_create_channel(bool fail);
+  void set_rtp_header_extensions(const std::vector<RtpExtension>& extensions);
   void set_rtp_header_extensions(
-      const std::vector<cricket::RtpHeaderExtension>& extensions) {
-    for (const cricket::RtpHeaderExtension& ext : extensions) {
-      RtpExtension webrtc_ext;
-      webrtc_ext.uri = ext.uri;
-      webrtc_ext.id = ext.id;
-      capabilities_.header_extensions.push_back(webrtc_ext);
-    }
-  }
+      const std::vector<cricket::RtpHeaderExtension>& extensions);
 
  protected:
   // Flag used by optionsmessagehandler_unittest for checking whether any
@@ -764,55 +752,29 @@ class FakeBaseEngine {
   RtpCapabilities capabilities_;
 };
 
-class FakeVoiceEngine : public FakeBaseEngine {
+class FakeVoiceEngine : public FakeBaseEngine, public AudioEngineInterface {
  public:
-  FakeVoiceEngine() {
-    // Add a fake audio codec. Note that the name must not be "" as there are
-    // sanity checks against that.
-    codecs_.push_back(AudioCodec(101, "fake_audio_codec", 0, 0, 1));
-  }
-  void Init() {}
-  rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const {
-    return rtc::scoped_refptr<webrtc::AudioState>();
-  }
+  FakeVoiceEngine();
+  RtpCapabilities GetCapabilities() const override;
+  void Init() override;
+  rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
 
   VoiceMediaChannel* CreateChannel(webrtc::Call* call,
                                    const MediaConfig& config,
-                                   const AudioOptions& options) {
-    if (fail_create_channel_) {
-      return nullptr;
-    }
-
-    FakeVoiceMediaChannel* ch = new FakeVoiceMediaChannel(this, options);
-    channels_.push_back(ch);
-    return ch;
-  }
-  FakeVoiceMediaChannel* GetChannel(size_t index) {
-    return (channels_.size() > index) ? channels_[index] : NULL;
-  }
-  void UnregisterChannel(VoiceMediaChannel* channel) {
-    channels_.erase(std::find(channels_.begin(), channels_.end(), channel));
-  }
+                                   const AudioOptions& options) override;
+  FakeVoiceMediaChannel* GetChannel(size_t index);
+  void UnregisterChannel(VoiceMediaChannel* channel);
 
   // TODO(ossu): For proper testing, These should either individually settable
   //             or the voice engine should reference mockable factories.
-  const std::vector<AudioCodec>& send_codecs() { return codecs_; }
-  const std::vector<AudioCodec>& recv_codecs() { return codecs_; }
-  void SetCodecs(const std::vector<AudioCodec>& codecs) { codecs_ = codecs; }
-
-  int GetInputLevel() { return 0; }
-
-  bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes) {
-    return false;
-  }
-
-  void StopAecDump() {}
-
-  bool StartRtcEventLog(rtc::PlatformFile file, int64_t max_size_bytes) {
-    return false;
-  }
-
-  void StopRtcEventLog() {}
+  const std::vector<AudioCodec>& send_codecs() const override;
+  const std::vector<AudioCodec>& recv_codecs() const override;
+  void SetCodecs(const std::vector<AudioCodec>& codecs);
+  int GetInputLevel();
+  bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes) override;
+  void StopAecDump() override;
+  bool StartRtcEventLog(rtc::PlatformFile file, int64_t max_size_bytes);
+  void StopRtcEventLog();
 
  private:
   std::vector<FakeVoiceMediaChannel*> channels_;
@@ -821,50 +783,19 @@ class FakeVoiceEngine : public FakeBaseEngine {
   friend class FakeMediaEngine;
 };
 
-class FakeVideoEngine : public FakeBaseEngine {
+class FakeVideoEngine : public FakeBaseEngine, public VideoEngineInterface {
  public:
-  FakeVideoEngine() : capture_(false) {
-    // Add a fake video codec. Note that the name must not be "" as there are
-    // sanity checks against that.
-    codecs_.push_back(VideoCodec(0, "fake_video_codec"));
-  }
-
-  bool SetOptions(const VideoOptions& options) {
-    options_ = options;
-    options_changed_ = true;
-    return true;
-  }
-
+  FakeVideoEngine();
+  RtpCapabilities GetCapabilities() const override;
+  bool SetOptions(const VideoOptions& options);
   VideoMediaChannel* CreateChannel(webrtc::Call* call,
                                    const MediaConfig& config,
-                                   const VideoOptions& options) {
-    if (fail_create_channel_) {
-      return nullptr;
-    }
-
-    FakeVideoMediaChannel* ch = new FakeVideoMediaChannel(this, options);
-    channels_.emplace_back(ch);
-    return ch;
-  }
-
-  FakeVideoMediaChannel* GetChannel(size_t index) {
-    return (channels_.size() > index) ? channels_[index] : nullptr;
-  }
-
-  void UnregisterChannel(VideoMediaChannel* channel) {
-    auto it = std::find(channels_.begin(), channels_.end(), channel);
-    RTC_DCHECK(it != channels_.end());
-    channels_.erase(it);
-  }
-
-  const std::vector<VideoCodec>& codecs() const { return codecs_; }
-
-  void SetCodecs(const std::vector<VideoCodec> codecs) { codecs_ = codecs; }
-
-  bool SetCapture(bool capture) {
-    capture_ = capture;
-    return true;
-  }
+                                   const VideoOptions& options) override;
+  FakeVideoMediaChannel* GetChannel(size_t index);
+  void UnregisterChannel(VideoMediaChannel* channel);
+  std::vector<VideoCodec> codecs() const override;
+  void SetCodecs(const std::vector<VideoCodec> codecs);
+  bool SetCapture(bool capture);
 
  private:
   std::vector<FakeVideoMediaChannel*> channels_;
@@ -875,55 +806,34 @@ class FakeVideoEngine : public FakeBaseEngine {
   friend class FakeMediaEngine;
 };
 
-class FakeMediaEngine
-    : public CompositeMediaEngine<FakeVoiceEngine, FakeVideoEngine> {
+class FakeMediaEngine : public CompositeMediaEngine {
  public:
-  FakeMediaEngine()
-      : CompositeMediaEngine<FakeVoiceEngine, FakeVideoEngine>(std::tuple<>(),
-                                                               std::tuple<>()) {
-  }
+  FakeMediaEngine();
 
-  virtual ~FakeMediaEngine() {}
+  virtual ~FakeMediaEngine();
 
-  void SetAudioCodecs(const std::vector<AudioCodec>& codecs) {
-    voice().SetCodecs(codecs);
-  }
-  void SetVideoCodecs(const std::vector<VideoCodec>& codecs) {
-    video().SetCodecs(codecs);
-  }
+  void SetAudioCodecs(const std::vector<AudioCodec>& codecs);
+  void SetVideoCodecs(const std::vector<VideoCodec>& codecs);
+
+  void SetAudioRtpHeaderExtensions(const std::vector<RtpExtension>& extensions);
+  void SetVideoRtpHeaderExtensions(const std::vector<RtpExtension>& extensions);
 
   void SetAudioRtpHeaderExtensions(
-      const std::vector<RtpExtension>& extensions) {
-    voice().set_rtp_header_extensions(extensions);
-  }
+      const std::vector<cricket::RtpHeaderExtension>& extensions);
   void SetVideoRtpHeaderExtensions(
-      const std::vector<RtpExtension>& extensions) {
-    video().set_rtp_header_extensions(extensions);
-  }
+      const std::vector<cricket::RtpHeaderExtension>& extensions);
 
-  void SetAudioRtpHeaderExtensions(
-      const std::vector<cricket::RtpHeaderExtension>& extensions) {
-    voice().set_rtp_header_extensions(extensions);
-  }
-  void SetVideoRtpHeaderExtensions(
-      const std::vector<cricket::RtpHeaderExtension>& extensions) {
-    video().set_rtp_header_extensions(extensions);
-  }
+  FakeVoiceMediaChannel* GetVoiceChannel(size_t index);
+  FakeVideoMediaChannel* GetVideoChannel(size_t index);
 
-  FakeVoiceMediaChannel* GetVoiceChannel(size_t index) {
-    return voice().GetChannel(index);
-  }
-  FakeVideoMediaChannel* GetVideoChannel(size_t index) {
-    return video().GetChannel(index);
-  }
+  bool capture() const;
+  bool options_changed() const;
+  void clear_options_changed();
+  void set_fail_create_channel(bool fail);
 
-  bool capture() const { return video().capture_; }
-  bool options_changed() const { return video().options_changed_; }
-  void clear_options_changed() { video().options_changed_ = false; }
-  void set_fail_create_channel(bool fail) {
-    voice().set_fail_create_channel(fail);
-    video().set_fail_create_channel(fail);
-  }
+ private:
+  FakeVoiceEngine* const voice_;
+  FakeVideoEngine* const video_;
 };
 
 // Have to come afterwards due to declaration order
@@ -941,25 +851,15 @@ inline FakeVideoMediaChannel::~FakeVideoMediaChannel() {
 
 class FakeDataEngine : public DataEngineInterface {
  public:
-  virtual DataMediaChannel* CreateChannel(const MediaConfig& config) {
-    FakeDataMediaChannel* ch = new FakeDataMediaChannel(this, DataOptions());
-    channels_.push_back(ch);
-    return ch;
-  }
+  virtual DataMediaChannel* CreateChannel(const MediaConfig& config);
 
-  FakeDataMediaChannel* GetChannel(size_t index) {
-    return (channels_.size() > index) ? channels_[index] : NULL;
-  }
+  FakeDataMediaChannel* GetChannel(size_t index);
 
-  void UnregisterChannel(DataMediaChannel* channel) {
-    channels_.erase(std::find(channels_.begin(), channels_.end(), channel));
-  }
+  void UnregisterChannel(DataMediaChannel* channel);
 
-  virtual void SetDataCodecs(const std::vector<DataCodec>& data_codecs) {
-    data_codecs_ = data_codecs;
-  }
+  virtual void SetDataCodecs(const std::vector<DataCodec>& data_codecs);
 
-  virtual const std::vector<DataCodec>& data_codecs() { return data_codecs_; }
+  virtual const std::vector<DataCodec>& data_codecs();
 
  private:
   std::vector<FakeDataMediaChannel*> channels_;
