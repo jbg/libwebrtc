@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3507ef31_0e11259a",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-17T11:39:49Z",
+      "side": 1,
+      "message": "This is the actual fix. It\u0027s a no-op change except in the case of self-assignment.",
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ef663e7_aaa4d4e0",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-17T11:39:49Z",
+      "side": 1,
+      "message": "This catches the leak that move self-assignment was causing before the fix.",
+      "revId": "725e4b5d362d842a4985b1f445fd7ca1c7922bfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
