@@ -40,21 +40,19 @@ MediaEngineInterface* CreateWebRtcMediaEngine(
     WebRtcVideoDecoderFactory* video_decoder_factory,
     rtc::scoped_refptr<webrtc::AudioMixer> audio_mixer,
     rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing) {
+  std::unique_ptr<VideoEngineInterface> video_engine;
 #ifdef HAVE_WEBRTC_VIDEO
-  typedef WebRtcVideoEngine VideoEngine;
-  std::tuple<std::unique_ptr<WebRtcVideoEncoderFactory>,
-             std::unique_ptr<WebRtcVideoDecoderFactory>>
-      video_args(
-          (std::unique_ptr<WebRtcVideoEncoderFactory>(video_encoder_factory)),
-          (std::unique_ptr<WebRtcVideoDecoderFactory>(video_decoder_factory)));
+  video_engine = absl::make_unique<WebRtcVideoEngine>(
+      std::unique_ptr<WebRtcVideoEncoderFactory>(video_encoder_factory),
+      std::unique_ptr<WebRtcVideoDecoderFactory>(video_decoder_factory));
 #else
-  typedef NullWebRtcVideoEngine VideoEngine;
-  std::tuple<> video_args;
+  video_engine = absl::make_unique<NullWebRtcVideoEngine>();
 #endif
-  return new CompositeMediaEngine<WebRtcVoiceEngine, VideoEngine>(
-      std::forward_as_tuple(adm, audio_encoder_factory, audio_decoder_factory,
-                            audio_mixer, audio_processing),
-      std::move(video_args));
+  return new CompositeMediaEngine(
+      absl::make_unique<WebRtcVoiceEngine>(adm, audio_encoder_factory,
+                                           audio_decoder_factory, audio_mixer,
+                                           audio_processing),
+      std::move(video_engine));
 }
 
 }  // namespace
@@ -97,22 +95,18 @@ std::unique_ptr<MediaEngineInterface> WebRtcMediaEngineFactory::Create(
     std::unique_ptr<webrtc::VideoDecoderFactory> video_decoder_factory,
     rtc::scoped_refptr<webrtc::AudioMixer> audio_mixer,
     rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing) {
+  std::unique_ptr<VideoEngineInterface> video_engine;
 #ifdef HAVE_WEBRTC_VIDEO
-  typedef WebRtcVideoEngine VideoEngine;
-  std::tuple<std::unique_ptr<webrtc::VideoEncoderFactory>,
-             std::unique_ptr<webrtc::VideoDecoderFactory>>
-      video_args(std::move(video_encoder_factory),
-                 std::move(video_decoder_factory));
+  video_engine = absl::make_unique<WebRtcVideoEngine>(
+      std::move(video_encoder_factory), std::move(video_decoder_factory));
 #else
-  typedef NullWebRtcVideoEngine VideoEngine;
-  std::tuple<> video_args;
+  video_engine = absl::make_unique<NullWebRtcVideoEngine>();
 #endif
-  return std::unique_ptr<MediaEngineInterface>(
-      new CompositeMediaEngine<WebRtcVoiceEngine, VideoEngine>(
-          std::forward_as_tuple(adm, audio_encoder_factory,
-                                audio_decoder_factory, audio_mixer,
-                                audio_processing),
-          std::move(video_args)));
+  return std::unique_ptr<MediaEngineInterface>(new CompositeMediaEngine(
+      absl::make_unique<WebRtcVoiceEngine>(adm, audio_encoder_factory,
+                                           audio_decoder_factory, audio_mixer,
+                                           audio_processing),
+      std::move(video_engine)));
 }
 
 namespace {
