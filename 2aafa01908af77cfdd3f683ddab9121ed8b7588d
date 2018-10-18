@@ -418,6 +418,24 @@
       "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3365a151_5e159eec",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 3596,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-18T14:00:50Z",
+      "side": 1,
+      "message": "It wasn\u0027t that hard to fix after all, so I\u0027ve added the signalling. The PeerConnection state now passes \"connecting\" twice, as expected.",
+      "parentUuid": "2e61dfab_3778fbeb",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
