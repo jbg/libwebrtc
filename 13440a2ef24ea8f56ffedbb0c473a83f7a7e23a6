@@ -70,6 +70,30 @@
       "revId": "13440a2ef24ea8f56ffedbb0c473a83f7a7e23a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74d72102_6ac2c184",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-18T00:30:19Z",
+      "side": 1,
+      "message": "Removed the unsignaled flow we don\u0027t need to handle this case with the new configuration.",
+      "parentUuid": "7ed5b4e2_3464dfb3",
+      "range": {
+        "startLine": 1457,
+        "startChar": 4,
+        "endLine": 1457,
+        "endChar": 31
+      },
+      "revId": "13440a2ef24ea8f56ffedbb0c473a83f7a7e23a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
