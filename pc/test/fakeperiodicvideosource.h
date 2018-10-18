@@ -18,6 +18,7 @@
 #include "media/base/fakeframesource.h"
 #include "media/base/videobroadcaster.h"
 #include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/repeated_task.h"
 
 namespace webrtc {
 
@@ -41,7 +42,22 @@ class FakePeriodicVideoSource final
       : task_queue_(
             absl::make_unique<rtc::TaskQueue>("FakePeriodicVideoTrackSource")) {
     thread_checker_.DetachFromThread();
-    task_queue_->PostTask(absl::make_unique<FrameTask>(config, &broadcaster_));
+
+    StartRepeatedTask(
+        task_queue_.get(), TimeDelta::Zero(),
+        RepeatingTaskIntervalMode::kIncludingExecution, [config, this] {
+          cricket::FakeFrameSource frame_source(
+              config.width, config.height,
+              config.frame_interval_ms * rtc::kNumMicrosecsPerMillisec,
+              config.timestamp_offset_ms * rtc::kNumMicrosecsPerMillisec);
+
+          if (broadcaster_.wants().rotation_applied) {
+            broadcaster_.OnFrame(frame_source.GetFrameRotationApplied());
+          } else {
+            broadcaster_.OnFrame(frame_source.GetFrame());
+          }
+          return TimeDelta::ms(config.frame_interval_ms);
+        });
   }
 
   void RemoveSink(rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) override {
@@ -61,35 +77,6 @@ class FakePeriodicVideoSource final
   }
 
  private:
-  class FrameTask : public rtc::QueuedTask {
-   public:
-    FrameTask(Config config, rtc::VideoBroadcaster* broadcaster)
-        : frame_interval_ms_(config.frame_interval_ms),
-          frame_source_(
-              config.width,
-              config.height,
-              config.frame_interval_ms * rtc::kNumMicrosecsPerMillisec,
-              config.timestamp_offset_ms * rtc::kNumMicrosecsPerMillisec),
-          broadcaster_(broadcaster) {
-      frame_source_.SetRotation(config.rotation);
-    }
-
-    bool Run() override {
-      if (broadcaster_->wants().rotation_applied) {
-        broadcaster_->OnFrame(frame_source_.GetFrameRotationApplied());
-      } else {
-        broadcaster_->OnFrame(frame_source_.GetFrame());
-      }
-
-      rtc::TaskQueue::Current()->PostDelayedTask(absl::WrapUnique(this),
-                                                 frame_interval_ms_);
-      return false;
-    }
-    int frame_interval_ms_;
-    cricket::FakeFrameSource frame_source_;
-    rtc::VideoBroadcaster* broadcaster_;
-  };
-
   rtc::ThreadChecker thread_checker_;
 
   rtc::VideoBroadcaster broadcaster_;
