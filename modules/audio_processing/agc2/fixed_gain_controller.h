@@ -25,10 +25,13 @@ class FixedGainController {
 
   void Process(AudioFrameView<float> signal);
 
-  // Rate and gain may be changed at any time (but not concurrently
-  // with any other method call).
+  // Gain, sample rate and limiter enabled may be changed at any time (but not
+  // concurrently with any other method call).
   void SetGain(float gain_to_apply_db);
   void SetSampleRate(size_t sample_rate_hz);
+  // Enable or disable the limiter. When enabled, soft-clipping will be used
+  // instead of hard-clipping.
+  void SetLimiterEnabled(bool enabled);
 
  private:
   float gain_to_apply_ = 1.f;
