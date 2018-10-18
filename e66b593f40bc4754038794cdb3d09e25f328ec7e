@@ -46,6 +46,30 @@
       "revId": "e66b593f40bc4754038794cdb3d09e25f328ec7e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb25e29a_a14ac043",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-18T12:10:14Z",
+      "side": 1,
+      "message": "Thanks!\n\nYou need also to change the \u0027defines\u0027 line in this BUILD.gn file (line 173), I still see USE_PIPEWIRE there.",
+      "parentUuid": "d10916df_f2c3a24c",
+      "range": {
+        "startLine": 173,
+        "startChar": 19,
+        "endLine": 173,
+        "endChar": 31
+      },
+      "revId": "e66b593f40bc4754038794cdb3d09e25f328ec7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
