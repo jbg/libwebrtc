@@ -117,6 +117,26 @@ class RTC_EXPORT VideoEncoder {
     ScalingSettings();
   };
 
+  // Struct containing metadata about the encoder implementing this interface.
+  struct EncoderInfo {
+    EncoderInfo();
+    EncoderInfo(const ScalingSettings& scaling_settings,
+                bool supports_native_handle,
+                const char* implementation_name);
+    ~EncoderInfo();
+
+    // Any encoder implementation wishing to use the WebRTC provided
+    // quality scaler must populate this field.
+    ScalingSettings scaling_settings;
+
+    // If true, encoder supports working with a native handle (e.g. texture
+    // handle for hw codecs) rather than requiring a raw I420 buffer.
+    bool supports_native_handle;
+
+    // The name of this particular encoder implementation, e.g. "libvpx".
+    const char* implementation_name;
+  };
+
   static VideoCodecVP8 GetDefaultVp8Settings();
   static VideoCodecVP9 GetDefaultVp9Settings();
   static VideoCodecH264 GetDefaultH264Settings();
@@ -197,12 +217,12 @@ class RTC_EXPORT VideoEncoder {
   virtual int32_t SetRateAllocation(const VideoBitrateAllocation& allocation,
                                     uint32_t framerate);
 
-  // Any encoder implementation wishing to use the WebRTC provided
-  // quality scaler must implement this method.
+  // These methods are deprecated, use GetEncoderInfo() instead.
   virtual ScalingSettings GetScalingSettings() const;
-
   virtual bool SupportsNativeHandle() const;
   virtual const char* ImplementationName() const;
+
+  virtual EncoderInfo GetEncoderInfo() const;
 };
 }  // namespace webrtc
 #endif  // API_VIDEO_CODECS_VIDEO_ENCODER_H_
