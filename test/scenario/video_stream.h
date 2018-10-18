@@ -34,6 +34,7 @@ class SendVideoStream : public NetworkReceiverInterface {
   VideoSendStream::Stats GetStats() const;
   ColumnPrinter StatsPrinter();
   void Start();
+  void TriggerFakeReroute();
 
  private:
   friend class Scenario;
@@ -55,6 +56,8 @@ class SendVideoStream : public NetworkReceiverInterface {
   std::unique_ptr<VideoEncoderFactory> encoder_factory_;
   std::unique_ptr<TestVideoCapturer> video_capturer_;
   FrameGeneratorCapturer* frame_generator_ = nullptr;
+  int next_local_network_id_ = 0;
+  int next_remote_network_id_ = 0;
 };
 
 // ReceiveVideoStream represents a video receiver. It can't be used directly.

@@ -136,6 +136,8 @@ GoogCcNetworkController::GoogCcNetworkController(RtcEventLog* event_log,
                                                  bool feedback_only)
     : event_log_(event_log),
       packet_feedback_only_(feedback_only),
+      safe_reset_on_route_change_(
+          field_trial::IsEnabled("WebRTC-Bwe-SafeResetOnRouteChange")),
       probe_controller_(new ProbeController()),
       congestion_window_pushback_controller_(
           MaybeInitalizeCongestionWindowPushbackController()),
@@ -182,6 +184,22 @@ NetworkControlUpdate GoogCcNetworkController::OnNetworkRouteChange(
       GetBpsOrDefault(msg.constraints.starting_rate, -1);
 
   ClampBitrates(&start_bitrate_bps, &min_bitrate_bps, &max_bitrate_bps);
+
+  if (safe_reset_on_route_change_) {
+    int32_t estimated_bitrate_bps;
+    uint8_t fraction_loss;
+    int64_t rtt_ms;
+    bandwidth_estimation_->CurrentEstimate(&estimated_bitrate_bps,
+                                           &fraction_loss, &rtt_ms);
+    if (!msg.constraints.starting_rate ||
+        estimated_bitrate_bps <= start_bitrate_bps) {
+      NetworkControlUpdate update;
+      update.probe_cluster_configs = probe_controller_->InitiateCapacityProbing(
+          estimated_bitrate_bps, msg.at_time.ms());
+      MaybeTriggerOnNetworkChanged(&update, msg.at_time);
+      return update;
+    }
+  }
 
   bandwidth_estimation_ =
       absl::make_unique<SendSideBandwidthEstimation>(event_log_);

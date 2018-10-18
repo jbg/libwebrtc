@@ -234,6 +234,16 @@ void SendVideoStream::Start() {
   video_capturer_->Start();
 }
 
+void SendVideoStream::TriggerFakeReroute() {
+  std::string transport_name = "dummy";
+  rtc::NetworkRoute route;
+  route.connected = true;
+  route.local_network_id = next_local_network_id_++;
+  route.remote_network_id = next_remote_network_id_++;
+  sender_->call_->GetTransportControllerSend()->OnNetworkRouteChanged(
+      transport_name, route);
+}
+
 bool SendVideoStream::TryDeliverPacket(rtc::CopyOnWriteBuffer packet,
                                        uint64_t receiver,
                                        Timestamp at_time) {

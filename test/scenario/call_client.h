@@ -56,6 +56,9 @@ class CallClient {
   ~CallClient();
   ColumnPrinter StatsPrinter();
   Call::Stats GetStats();
+  DataRate send_bandwidth() {
+    return DataRate::bps(GetStats().send_bandwidth_bps);
+  }
 
  private:
   friend class Scenario;

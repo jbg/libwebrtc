@@ -402,5 +402,101 @@ TEST_F(GoogCcNetworkControllerTest, UpdatesTargetRateBasedOnLinkCapacity) {
   EXPECT_NEAR(client->target_rate_kbps(), 90, 20);
 }
 
+TEST_F(GoogCcNetworkControllerTest, MaintainsLowRateInSafeResetTrial) {
+  const DataRate kLinkCapacity = DataRate::kbps(200);
+  const DataRate kStartRate = DataRate::kbps(300);
+
+  ScopedFieldTrials trial("WebRTC-Bwe-SafeResetOnRouteChange/Enabled/");
+  Scenario s("googcc_unit/safe_reset_low", true);
+  auto* send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = kLinkCapacity;
+    c->simulation.delay = TimeDelta::ms(10);
+  });
+  // TODO(srte): replace with SimulatedTimeClient when it supports probing.
+  auto* client = s.CreateClient("send", [&](CallClientConfig* c) {
+    c->transport.cc = TransportControllerConfig::CongestionController::kGoogCc;
+    c->transport.rates.start_rate = kStartRate;
+  });
+  auto* video = s.CreateVideoStream(
+      client, {send_net}, s.CreateClient("return", CallClientConfig()),
+      {s.CreateSimulationNode(NetworkNodeConfig())}, VideoStreamConfig());
+  video->send()->TriggerFakeReroute();
+
+  // Allow the controller to stabilize.
+  s.RunFor(TimeDelta::ms(500));
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kLinkCapacity.kbps(), 50);
+  video->send()->TriggerFakeReroute();
+  // Allow new settings to propagate.
+  s.RunFor(TimeDelta::ms(100));
+  // Under the trial, the target should be unchanged for low rates.
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kLinkCapacity.kbps(), 50);
+}
+
+TEST_F(GoogCcNetworkControllerTest, CutsHighRateInSafeResetTrial) {
+  const DataRate kLinkCapacity = DataRate::kbps(1000);
+  const DataRate kStartRate = DataRate::kbps(300);
+
+  ScopedFieldTrials trial("WebRTC-Bwe-SafeResetOnRouteChange/Enabled/");
+  Scenario s("googcc_unit/safe_reset_high_cut", true);
+  auto send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = kLinkCapacity;
+    c->simulation.delay = TimeDelta::ms(50);
+  });
+  // TODO(srte): replace with SimulatedTimeClient when it supports probing.
+  auto* client = s.CreateClient("send", [&](CallClientConfig* c) {
+    c->transport.cc = TransportControllerConfig::CongestionController::kGoogCc;
+    c->transport.rates.start_rate = kStartRate;
+  });
+  auto* video = s.CreateVideoStream(
+      client, {send_net}, s.CreateClient("return", CallClientConfig()),
+      {s.CreateSimulationNode(NetworkNodeConfig())}, VideoStreamConfig());
+
+  video->send()->TriggerFakeReroute();
+  // Allow the controller to stabilize.
+  s.RunFor(TimeDelta::ms(500));
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kLinkCapacity.kbps(), 300);
+  video->send()->TriggerFakeReroute();
+  // Allow new settings to propagate.
+  s.RunFor(TimeDelta::ms(50));
+  // Under the trial, the target should be reset from high values.
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kStartRate.kbps(), 30);
+}
+
+TEST_F(GoogCcNetworkControllerTest, DetectsHighRateInSafeResetTrial) {
+  ScopedFieldTrials trial("WebRTC-Bwe-SafeResetOnRouteChange/Enabled/");
+  const DataRate kInitialLinkCapacity = DataRate::kbps(200);
+  const DataRate kNewLinkCapacity = DataRate::kbps(800);
+  const DataRate kStartRate = DataRate::kbps(300);
+
+  Scenario s("googcc_unit/safe_reset_high_detect", true);
+  auto* send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = kInitialLinkCapacity;
+    c->simulation.delay = TimeDelta::ms(50);
+  });
+  // TODO(srte): replace with SimulatedTimeClient when it supports probing.
+  auto* client = s.CreateClient("send", [&](CallClientConfig* c) {
+    c->transport.cc = TransportControllerConfig::CongestionController::kGoogCc;
+    c->transport.rates.start_rate = kStartRate;
+  });
+  auto* video = s.CreateVideoStream(
+      client, {send_net}, s.CreateClient("return", CallClientConfig()),
+      {s.CreateSimulationNode(NetworkNodeConfig())}, VideoStreamConfig());
+  video->send()->TriggerFakeReroute();
+  // Allow the controller to stabilize.
+  s.RunFor(TimeDelta::ms(1000));
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kInitialLinkCapacity.kbps(), 50);
+  send_net->UpdateConfig([&](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = kNewLinkCapacity;
+  });
+  video->send()->TriggerFakeReroute();
+  // Allow new settings to propagate.
+  s.RunFor(TimeDelta::ms(100));
+  // Under the field trial, the target rate should be unchanged.
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kInitialLinkCapacity.kbps(), 50);
+  // However, probing should have made us detect the higher rate.
+  s.RunFor(TimeDelta::ms(500));
+  EXPECT_NEAR(client->send_bandwidth().kbps(), kNewLinkCapacity.kbps(), 200);
+}
+
 }  // namespace test
 }  // namespace webrtc
