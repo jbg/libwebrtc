@@ -1,0 +1,560 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa5d7e1f_24c47e60",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "1. Is there a way to move this to the BUILD.gn files?\n2. If not, wdyt about moving it to before the #include statements?",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "720f110d_dd4b6758",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Could the names of these functions explain what we convert from/to? Maybe ConvertToProtoFormat?",
+      "range": {
+        "startLine": 69,
+        "startChar": 45,
+        "endLine": 69,
+        "endChar": 65
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "342f1eb7_fabf899e",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "UNKNOWN",
+      "range": {
+        "startLine": 82,
+        "startChar": 40,
+        "endLine": 82,
+        "endChar": 50
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54228d3e_9b786646",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "s/care about/track, maybe? Or \"log\"?",
+      "range": {
+        "startLine": 102,
+        "startChar": 71,
+        "endLine": 103,
+        "endChar": 13
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e48d7089_acd850a8",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "nit: ++unknown_extensions;",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a025f58_2a5e592c",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "The LT-operator would make this code clearer.",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33602358_bc902501",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "UNKNOWN",
+      "range": {
+        "startLine": 142,
+        "startChar": 42,
+        "endLine": 142,
+        "endChar": 47
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1b36434_27148dcd",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "UNKNOWN",
+      "range": {
+        "startLine": 239,
+        "startChar": 41,
+        "endLine": 239,
+        "endChar": 51
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffadbb19_a0186551",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "nit: s/Sdes/SDES? And possibly also APP?",
+      "range": {
+        "startLine": 242,
+        "startChar": 33,
+        "endLine": 242,
+        "endChar": 42
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdf58c38_431d4dd9",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "to?",
+      "range": {
+        "startLine": 242,
+        "startChar": 67,
+        "endLine": 242,
+        "endChar": 70
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4edddc5c_968e4312",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Maybe RemoveUntrackedRtcpBlocks()?",
+      "range": {
+        "startLine": 245,
+        "startChar": 7,
+        "endLine": 245,
+        "endChar": 40
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c430b84_e4fa775f",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Could you also DCHECK the pre-condition for |buffer|?",
+      "range": {
+        "startLine": 247,
+        "startChar": 2,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac263526_e794a601",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Does this need to be repeated for every iteration? The name of CommonHeader::NextPacket indicates that more than one could be available after CommonHeader is initialized.\n\nAlso, since CommonHeader::Parse does not have any documentation that indicates what should be expected if it\u0027s called multiple times, I would prefer at least having a fresh CommonHeader object each time Parse is called.",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 5
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e6a9a80_712f3ed9",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Wdyt about DCHECKing that (next_block \u003e block_begin)?",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eceeb30a_d361f4d9",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Do we want to repeat all cases in the comment? Perhaps \"We log these RTCP messages, and only them\", or something similar?",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 41
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88410cde_994e6ee5",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "+1\nBut please s/good/supported or something?",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcda8a58_706381ef",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Same reservation.",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6032f5ec_33b7e94e",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "nit: Empty line between these two.",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 56
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a93826_c3ff3d21",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "nit: Empty line after the end of the switch block, please.",
+      "range": {
+        "startLine": 441,
+        "startChar": 1,
+        "endLine": 441,
+        "endChar": 3
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c83d109_b5a41d50",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "You could instantly release the memory held by all of these vectors immediately, by placing the code in a block. I don\u0027t know if that\u0027s worth the effort, but it probably won\u0027t be much effort.",
+      "range": {
+        "startLine": 442,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 0
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02dbdcac_fd64212b",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "rm",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 11
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "832f9d49_d346bf6e",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "I think these should be removed.",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d986b35_c241afd6",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "rm",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 482,
+        "endChar": 11
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67930c8d_2b6b1c79",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "nit: I would prefer using optionals with .has_value() and .value().",
+      "range": {
+        "startLine": 496,
+        "startChar": 8,
+        "endLine": 496,
+        "endChar": 39
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc69ce64_bf4fb283",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Please use .empty() instead.\nI would like it even more, btw, if you compare to an empty std::string, thereby making the type even clearer.\n(Elsewhere too.)",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "095ef996_ddfdc915",
+        "filename": "logging/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:56:07Z",
+      "side": 1,
+      "message": "Modify this TODO accordingly?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 76
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
