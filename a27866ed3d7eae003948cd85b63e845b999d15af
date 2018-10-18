@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7c1a031_e92c61d2",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "This potentially casts back to signed. Probably not worth doing anything about though.",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 18
+      },
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55ae1f5b_1db2a6b8",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "This seems like an unnecessary reallocation.",
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc673e0b_9a171fc3",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "This should include the cost of the lengths too, right?",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "540ff967_fdc74dda",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "How much space do we expect to save by reallocating?",
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f362b3c_baebd173",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "nit: way",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 12
+      },
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73f44a71_7a831c63",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "nit: an empty",
+      "range": {
+        "startLine": 35,
+        "startChar": 28,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6caa3bb3_ce219053",
+        "filename": "logging/rtc_event_log/encoder/blob_encoding_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T11:38:41Z",
+      "side": 1,
+      "message": "Does this value have some special significance?",
+      "range": {
+        "startLine": 66,
+        "startChar": 27,
+        "endLine": 66,
+        "endChar": 34
+      },
+      "revId": "a27866ed3d7eae003948cd85b63e845b999d15af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
