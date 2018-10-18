@@ -1,11 +1,21 @@
 include_rules = [
-  "+third_party/libyuv",
-  "+media",
-  "+p2p",
-  "+pc",
-  "+logging/rtc_event_log/rtc_event_log_factory_interface.h",
-  "+modules/audio_processing/include",
-  "+system_wrappers/include",
+  "-audio",
+  "-call",
+  "-common_audio",
+  "-examples",
+  "-logging",
+  "-media",
+  "-modules",
+  "-p2p",
+  "-pc",
+  "-rtc_base",
+  "-rtc_tools",
+  "-sdk",
+  "-stats",
+  "-system_wrappers",
+  "-test",
+  "-tools_webrtc",
+  "-video",
 ]
 
 specific_include_rules = {
