@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b868cebd_77fe866f",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-18T16:40:43Z",
+      "side": 1,
+      "message": "I will clarify this comment a bit. It pertains to \n  virtual ScalingSettings GetScalingSettings() const;\n  virtual bool SupportsNativeHandle() const;\n  virtual const char* ImplementationName() const;",
+      "range": {
+        "startLine": 220,
+        "startChar": 5,
+        "endLine": 220,
+        "endChar": 64
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d8757ee_5b0a26ae",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-18T16:40:43Z",
+      "side": 1,
+      "message": "This is the place where the scaling settings being const adds most complexity",
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
