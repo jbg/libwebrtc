@@ -22,6 +22,64 @@
       "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "777cf47a_b80ba6a1",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-18T12:54:51Z",
+      "side": 1,
+      "message": "And no wildcards? That *is* annoying.\n\nIs it possible to define variables? In that case, we could put the Abseil whitelist in a variable and use that both in //DEPS and //api/DEPS---and then //api/DEPS could use `noparent`.",
+      "parentUuid": "481c528c_d4539b0c",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad80b120_bd4ddd10",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-18T12:54:51Z",
+      "side": 1,
+      "message": "It looks like there are a few files that would really benefit from moving to api/ (e.g. scoped_ref_ptr.h), and some that really ought to move to api/internal/ or something like it (e.g. safe_conversions.h, refcount.h).",
+      "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "285409eb_073a4b09",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-18T12:54:51Z",
+      "side": 1,
+      "message": "Is there a nice way to blanket allow everything, so that we don\u0027t have to list it? Or I guess not everything, just the stuff that the parent dir allowed...\n\nHmm. Maybe we ought to switch things around, and have *no* `include_rules`, and then restrict the headers with a *.h entry in specific_include_rules? Do we have headers that aren\u0027t named *.h?",
+      "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
