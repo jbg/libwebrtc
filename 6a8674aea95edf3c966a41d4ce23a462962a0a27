@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "061f6c5a_07d9385c",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-18T12:32:24Z",
+      "side": 1,
+      "message": "Do you intend to make this method pure virtual once interface implementations have had time to react?",
+      "revId": "6a8674aea95edf3c966a41d4ce23a462962a0a27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77ffc7ef_9de855b2",
+        "filename": "api/peerconnectioninterface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-18T12:32:24Z",
+      "side": 1,
+      "message": "Same question.",
+      "revId": "6a8674aea95edf3c966a41d4ce23a462962a0a27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
