@@ -400,6 +400,24 @@
       "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e61dfab_3778fbeb",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 3596,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-10-18T13:02:58Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s a bit odd, I think it\u0027s caused by the DTLS transports not signalling their state changes properly. I\u0027d like to fix that, but it\u0027s probably worth its own follow-up CL.",
+      "parentUuid": "3b852e96_1ca5d004",
+      "revId": "2aafa01908af77cfdd3f683ddab9121ed8b7588d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
