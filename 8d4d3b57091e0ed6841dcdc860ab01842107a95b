@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "481c528c_d4539b0c",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-18T11:59:19Z",
+      "side": 1,
+      "message": "It is annoying that we need to explicitly mark all the internal folders with \"-\". I tried to use noparent [1] but then we lose the rules for Abseil (which we want to keep there). Well, or maybe not, maybe we want to carefully decide which part of Abseil is allowed in API headers. WDYT?\n\n[1] - https://cs.chromium.org/chromium/src/buildtools/checkdeps/README.md?l\u003d62\u0026rcl\u003d2888931260f2a32bc583f005bd807a561b2fa6af",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
