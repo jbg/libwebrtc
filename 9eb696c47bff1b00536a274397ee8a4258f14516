@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1fb70c6_9ca4f572",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-10-18T19:34:52Z",
+      "side": 1,
+      "message": "This looks like a work-around to avoid some work done by SetNetworkIds? Would it be better to parse a \"no work\" flag?",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 262,
+        "endChar": 79
+      },
+      "revId": "9eb696c47bff1b00536a274397ee8a4258f14516",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
