@@ -22,6 +22,30 @@
       "revId": "e66b593f40bc4754038794cdb3d09e25f328ec7e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d10916df_f2c3a24c",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2018-10-18T10:15:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6c05a2b1_23a73bd3",
+      "range": {
+        "startLine": 173,
+        "startChar": 19,
+        "endLine": 173,
+        "endChar": 31
+      },
+      "revId": "e66b593f40bc4754038794cdb3d09e25f328ec7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
