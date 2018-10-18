@@ -25,8 +25,8 @@ class FixedGainController {
 
   void Process(AudioFrameView<float> signal);
 
-  // Rate and gain may be changed at any time (but not concurrently
-  // with any other method call).
+  // Gain, sample rate and limiter enabled may be changed at any time (but not
+  // concurrently with any other method call).
   void SetGain(float gain_to_apply_db);
   void SetSampleRate(size_t sample_rate_hz);
   float LastAudioLevel() const;
