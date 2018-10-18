@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f62d9dc8_1e3268af",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T12:17:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fca629aa_7f447ac1",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "f77b49297b469afd8064d481a0e6051d420d2462",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bea9d9a_d44c0482",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 8

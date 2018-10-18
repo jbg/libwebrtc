@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6948912_59398b73",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T12:17:02Z",
+      "side": 1,
+      "message": "Could you call IsSuitableDecoderFor() instead?",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 71
+      },
+      "revId": "ee267d170cf9692ab41431c13402d69f2b8153d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

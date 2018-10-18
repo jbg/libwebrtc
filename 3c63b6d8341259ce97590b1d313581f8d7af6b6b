@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "454ec114_691e2024",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T12:17:02Z",
+      "side": 1,
+      "message": "This is only done once per batch though, not once per delta. If there are encoding gains from making the most common value zero, then I think we should use it. If we don\u0027t think it\u0027ll matter, then I\u0027m fine with leaving as-is.",
+      "parentUuid": "36901bd9_10f4afc0",
+      "range": {
+        "startLine": 369,
+        "startChar": 29,
+        "endLine": 369,
+        "endChar": 49
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b77866c2_f42dfb38",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 12
@@ -201,6 +225,30 @@
       "side": 1,
       "message": "Changed, though I prefer the previous way.",
       "parentUuid": "0f66aa33_90b5a7d4",
+      "range": {
+        "startLine": 597,
+        "startChar": 38,
+        "endLine": 597,
+        "endChar": 71
+      },
+      "revId": "3c63b6d8341259ce97590b1d313581f8d7af6b6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c85ee9da_9bccd2d8",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-18T12:17:02Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "7d8b4080_3bb4cc50",
       "range": {
         "startLine": 597,
         "startChar": 38,
