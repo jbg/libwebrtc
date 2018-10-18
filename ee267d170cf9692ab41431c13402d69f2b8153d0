@@ -22,6 +22,30 @@
       "revId": "ee267d170cf9692ab41431c13402d69f2b8153d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20d818da_6af4b9a4",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T13:36:10Z",
+      "side": 1,
+      "message": "I would rather not. That would make the code less obvious, and more brittle.",
+      "parentUuid": "f6948912_59398b73",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 71
+      },
+      "revId": "ee267d170cf9692ab41431c13402d69f2b8153d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
