@@ -16,6 +16,7 @@
 
 #include "modules/audio_processing/agc2/adaptive_agc.h"
 #include "modules/audio_processing/agc2/fixed_gain_controller.h"
+#include "modules/audio_processing/agc2/limiter.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "rtc_base/constructormagic.h"
 
@@ -46,6 +47,7 @@ class GainController2 {
   FixedGainController fixed_gain_controller_;
   AudioProcessing::Config::GainController2 config_;
   AdaptiveAgc adaptive_agc_;
+  Limiter limiter_;
   int analog_level_ = -1;
   bool adaptive_digital_mode_ = true;
 
