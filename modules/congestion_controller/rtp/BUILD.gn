@@ -44,6 +44,7 @@ rtc_static_library("congestion_controller") {
     "../../../rtc_base:sequenced_task_checker",
     "../../../rtc_base/experiments:congestion_controller_experiment",
     "../../../rtc_base/network:sent_packet",
+    "../../../rtc_base/task_utils:repeated_task",
     "../../../system_wrappers",
     "../../../system_wrappers:field_trial",
     "../../pacing",

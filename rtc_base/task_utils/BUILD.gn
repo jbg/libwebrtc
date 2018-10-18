@@ -1,0 +1,41 @@
+# Copyright (c) 2018 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../webrtc.gni")
+
+rtc_source_set("repeated_task") {
+  sources = [
+    "repeated_task.cc",
+    "repeated_task.h",
+  ]
+  deps = [
+    "..:rtc_task_queue_api",
+    "..:thread_checker",
+    "..:timeutils",
+    "../../api/units:time_delta",
+    "../../api/units:timestamp",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
+if (rtc_include_tests) {
+  # These are in a separate test executable since they rely on
+  # TaskQueue  behavior, making them flaky on loaded systems.
+  rtc_test("repeated_task_unittests") {
+    testonly = true
+    sources = [
+      "repeated_task_unittest.cc",
+    ]
+    deps = [
+      ":repeated_task",
+      "..:rtc_base_approved",
+      "..:rtc_base_tests_main",
+      "../../test:test_support",
+    ]
+  }
+}
