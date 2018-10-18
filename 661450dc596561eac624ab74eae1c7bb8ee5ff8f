@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "63064a8a_7729c1bb",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Both, or by the TaskQueue being destroyed. But I see now that there\u0027s a risk that we invalidate the pointer in the current version. Fixed!",
+      "parentUuid": "0736d4e8_6bece05a",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "686a0c65_f4a22a7c",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 3
@@ -51,6 +69,24 @@
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9de9d78_aeeab47b",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "686a0c65_f4a22a7c",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "dc50218e_8a00c8f2",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Yes, I agree, I made it an enum based on Steve Antons suggestion and added tests for it.",
+      "parentUuid": "c8234069_0a7e473e",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3e4422f_e6cb7fc5",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 3
@@ -85,6 +139,24 @@
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a87166b_7a04f3d3",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Added unit tests. Since they are run time sensitive I added as a separate executable to avoid causing flaky behavior. The option would be to make them really slow to allow plenty of margin, but that seems wasteful? Is there a way to fake a TaskQueue?",
+      "parentUuid": "c3e4422f_e6cb7fc5",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "22528b4b_9c29ae4f",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "I added comments better describing the behavior. I think it\u0027s useful. For instance it will be useful for the PacedSender as it will allow calculating when to sent the next packet in situations when it\u0027s not fixed and if it\u0027s fixed it\u0027s trivial to just return a constant.",
+      "parentUuid": "815f325b_26236341",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "237a8c7e_9e285da8",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 3
@@ -119,6 +209,24 @@
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e7f3ccc_eec2b7da",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "I updated it to account for drift. I agree that that makes more sense.",
+      "parentUuid": "237a8c7e_9e285da8",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "f5abfd00_1fdfa4e4",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "I replaced it with a Stop(std::unique_ptr\u003cRepeatedTaskHandle\u003e) function to makes this both clearer and enforced.",
+      "parentUuid": "21d9865a_840da4e3",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82d29201_29f41175",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 3
@@ -153,6 +279,24 @@
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e1448e8_9eccb649",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82d29201_29f41175",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "15651510_a8847731",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bcf4bf0_f1bfd6f4",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34999e1a_6fd90d19",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 3
@@ -187,6 +349,24 @@
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fd74f31_cba0a2c4",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34999e1a_6fd90d19",
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -210,6 +390,30 @@
       "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d3a9905_ffe12709",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-18T08:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db9737ba_b5f695d7",
+      "range": {
+        "startLine": 83,
+        "startChar": 39,
+        "endLine": 83,
+        "endChar": 63
+      },
+      "revId": "661450dc596561eac624ab74eae1c7bb8ee5ff8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
