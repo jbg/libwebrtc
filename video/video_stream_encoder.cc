@@ -629,7 +629,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
 void VideoStreamEncoder::ConfigureQualityScaler() {
   RTC_DCHECK_RUN_ON(&encoder_queue_);
-  const auto scaling_settings = encoder_->GetScalingSettings();
+  const auto scaling_settings = encoder_->GetEncoderInfo().scaling_settings;
   const bool quality_scaling_allowed =
       IsResolutionScalingEnabled(degradation_preference_) &&
       scaling_settings.thresholds;
@@ -1085,7 +1085,7 @@ void VideoStreamEncoder::AdaptDown(AdaptReason reason) {
       bool min_pixels_reached = false;
       if (!source_proxy_->RequestResolutionLowerThan(
               adaptation_request.input_pixel_count_,
-              encoder_->GetScalingSettings().min_pixels_per_frame,
+              encoder_->GetEncoderInfo().scaling_settings.min_pixels_per_frame,
               &min_pixels_reached)) {
         if (min_pixels_reached)
           encoder_stats_observer_->OnMinPixelLimitReached();

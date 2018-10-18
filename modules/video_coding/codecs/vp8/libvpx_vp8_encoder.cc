@@ -278,10 +278,6 @@ int LibvpxVp8Encoder::SetRateAllocation(const VideoBitrateAllocation& bitrate,
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
-const char* LibvpxVp8Encoder::ImplementationName() const {
-  return "libvpx";
-}
-
 void LibvpxVp8Encoder::SetStreamState(bool send_stream, int stream_idx) {
   if (send_stream && !send_stream_[stream_idx]) {
     // Need a key frame if we have not sent this stream before.
@@ -843,7 +839,7 @@ void LibvpxVp8Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
                                              uint32_t timestamp) {
   assert(codec_specific != NULL);
   codec_specific->codecType = kVideoCodecVP8;
-  codec_specific->codec_name = ImplementationName();
+  codec_specific->codec_name = GetEncoderInfo().implementation_name;
   CodecSpecificInfoVP8* vp8Info = &(codec_specific->codecSpecific.VP8);
   vp8Info->keyIdx = kNoKeyIdx;  // TODO(hlundin) populate this
   vp8Info->nonReference = (pkt.data.frame.flags & VPX_FRAME_IS_DROPPABLE) != 0;
@@ -948,13 +944,14 @@ int LibvpxVp8Encoder::GetEncodedPartitions(const VideoFrame& input_image) {
   return result;
 }
 
-VideoEncoder::ScalingSettings LibvpxVp8Encoder::GetScalingSettings() const {
-  const bool enable_scaling = encoders_.size() == 1 &&
-                              configurations_[0].rc_dropframe_thresh > 0 &&
-                              codec_.VP8().automaticResizeOn;
-  return enable_scaling ? VideoEncoder::ScalingSettings(kLowVp8QpThreshold,
-                                                        kHighVp8QpThreshold)
-                        : VideoEncoder::ScalingSettings::kOff;
+VideoEncoder::EncoderInfo LibvpxVp8Encoder::GetEncoderInfo() const {
+  if (encoders_.size() == 1 && configurations_[0].rc_dropframe_thresh > 0 &&
+      codec_.VP8().automaticResizeOn) {
+    // Enable scaling.
+    return EncoderInfo(ScalingSettings(kLowVp8QpThreshold, kHighVp8QpThreshold),
+                       false, "libvpx");
+  }
+  return EncoderInfo(ScalingSettings::kOff, false, "libvpx");
 }
 
 int LibvpxVp8Encoder::SetChannelParameters(uint32_t packetLoss, int64_t rtt) {

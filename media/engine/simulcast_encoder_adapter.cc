@@ -257,7 +257,8 @@ int SimulcastEncoderAdapter::InitEncode(const VideoCodec* inst,
     if (i != 0) {
       implementation_name += ", ";
     }
-    implementation_name += streaminfos_[i].encoder->ImplementationName();
+    implementation_name +=
+        streaminfos_[i].encoder->GetEncoderInfo().implementation_name;
   }
 
   if (doing_simulcast) {
@@ -517,32 +518,27 @@ void SimulcastEncoderAdapter::DestroyStoredEncoders() {
   }
 }
 
-bool SimulcastEncoderAdapter::SupportsNativeHandle() const {
-  RTC_DCHECK_CALLED_SEQUENTIALLY(&encoder_queue_);
-  // We should not be calling this method before streaminfos_ are configured.
-  RTC_DCHECK(!streaminfos_.empty());
-  for (const auto& streaminfo : streaminfos_) {
-    if (!streaminfo.encoder->SupportsNativeHandle()) {
-      return false;
-    }
-  }
-  return true;
-}
-
-VideoEncoder::ScalingSettings SimulcastEncoderAdapter::GetScalingSettings()
-    const {
+VideoEncoder::EncoderInfo SimulcastEncoderAdapter::GetEncoderInfo() const {
   // TODO(brandtr): Investigate why the sequence checker below fails on mac.
   // RTC_DCHECK_CALLED_SEQUENTIALLY(&encoder_queue_);
+
+  // We should not be calling this method before streaminfos_ are configured.
+  RTC_DCHECK(!streaminfos_.empty());
+  bool supports_native_handle = true;
+  for (const auto& streaminfo : streaminfos_) {
+    if (!streaminfo.encoder->GetEncoderInfo().supports_native_handle) {
+      supports_native_handle = false;
+      break;
+    }
+  }
+
   // Turn off quality scaling for simulcast.
   if (!Initialized() || NumberOfStreams(codec_) != 1) {
-    return VideoEncoder::ScalingSettings::kOff;
+    return EncoderInfo(VideoEncoder::ScalingSettings::kOff,
+                       supports_native_handle, implementation_name_.c_str());
   }
-  return streaminfos_[0].encoder->GetScalingSettings();
-}
-
-const char* SimulcastEncoderAdapter::ImplementationName() const {
-  RTC_DCHECK_CALLED_SEQUENTIALLY(&encoder_queue_);
-  return implementation_name_.c_str();
+  return EncoderInfo(streaminfos_[0].encoder->GetEncoderInfo().scaling_settings,
+                     supports_native_handle, implementation_name_.c_str());
 }
 
 }  // namespace webrtc

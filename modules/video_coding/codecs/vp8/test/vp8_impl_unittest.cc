@@ -334,7 +334,8 @@ TEST_F(TestVp8Impl, ScalingDisabledIfAutomaticResizeOff) {
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             encoder_->InitEncode(&codec_settings_, kNumCores, kMaxPayloadSize));
 
-  VideoEncoder::ScalingSettings settings = encoder_->GetScalingSettings();
+  VideoEncoder::ScalingSettings settings =
+      encoder_->GetEncoderInfo().scaling_settings;
   EXPECT_FALSE(settings.thresholds.has_value());
 }
 
@@ -344,7 +345,8 @@ TEST_F(TestVp8Impl, ScalingEnabledIfAutomaticResizeOn) {
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             encoder_->InitEncode(&codec_settings_, kNumCores, kMaxPayloadSize));
 
-  VideoEncoder::ScalingSettings settings = encoder_->GetScalingSettings();
+  VideoEncoder::ScalingSettings settings =
+      encoder_->GetEncoderInfo().scaling_settings;
   EXPECT_TRUE(settings.thresholds.has_value());
   EXPECT_EQ(kDefaultMinPixelsPerFrame, settings.min_pixels_per_frame);
 }

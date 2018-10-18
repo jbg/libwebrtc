@@ -90,9 +90,7 @@ class VideoEncoderSoftwareFallbackWrapper final : public VideoEncoder {
   int32_t SetChannelParameters(uint32_t packet_loss, int64_t rtt) override;
   int32_t SetRateAllocation(const VideoBitrateAllocation& bitrate_allocation,
                             uint32_t framerate) override;
-  bool SupportsNativeHandle() const override;
-  ScalingSettings GetScalingSettings() const override;
-  const char* ImplementationName() const override;
+  EncoderInfo GetEncoderInfo() const override;
 
  private:
   bool InitFallbackEncoder();
@@ -162,7 +160,7 @@ VideoEncoderSoftwareFallbackWrapper::VideoEncoderSoftwareFallbackWrapper(
   if (forced_fallback_possible_) {
     GetForcedFallbackParamsFromFieldTrialGroup(
         &forced_fallback_.min_pixels_, &forced_fallback_.max_pixels_,
-        encoder_->GetScalingSettings().min_pixels_per_frame -
+        encoder_->GetEncoderInfo().scaling_settings.min_pixels_per_frame -
             1);  // No HW below.
   }
 }
@@ -294,29 +292,25 @@ int32_t VideoEncoderSoftwareFallbackWrapper::SetRateAllocation(
   return ret;
 }
 
-bool VideoEncoderSoftwareFallbackWrapper::SupportsNativeHandle() const {
-  return use_fallback_encoder_ ? fallback_encoder_->SupportsNativeHandle()
-                               : encoder_->SupportsNativeHandle();
-}
-
-VideoEncoder::ScalingSettings
-VideoEncoderSoftwareFallbackWrapper::GetScalingSettings() const {
+VideoEncoder::EncoderInfo VideoEncoderSoftwareFallbackWrapper::GetEncoderInfo()
+    const {
   if (forced_fallback_possible_) {
-    const auto settings = forced_fallback_.active_
-                              ? fallback_encoder_->GetScalingSettings()
-                              : encoder_->GetScalingSettings();
-    return settings.thresholds
-               ? VideoEncoder::ScalingSettings(settings.thresholds->low,
-                                               settings.thresholds->high,
-                                               forced_fallback_.min_pixels_)
-               : VideoEncoder::ScalingSettings::kOff;
+    const EncoderInfo info = forced_fallback_.active_
+                                 ? fallback_encoder_->GetEncoderInfo()
+                                 : encoder_->GetEncoderInfo();
+    if (info.scaling_settings.thresholds) {
+      return EncoderInfo(ScalingSettings(info.scaling_settings.thresholds->low,
+                                         info.scaling_settings.thresholds->high,
+                                         forced_fallback_.min_pixels_),
+                         info.supports_native_handle, info.implementation_name);
+    } else {
+      return EncoderInfo(ScalingSettings::kOff, info.supports_native_handle,
+                         info.implementation_name);
+    }
   }
-  return encoder_->GetScalingSettings();
-}
 
-const char* VideoEncoderSoftwareFallbackWrapper::ImplementationName() const {
-  return use_fallback_encoder_ ? fallback_encoder_->ImplementationName()
-                               : encoder_->ImplementationName();
+  return use_fallback_encoder_ ? fallback_encoder_->GetEncoderInfo()
+                               : encoder_->GetEncoderInfo();
 }
 
 bool VideoEncoderSoftwareFallbackWrapper::IsForcedFallbackActive() const {
