@@ -262,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "bbd1001e_118f0eed",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T11:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bb59f7d_8aa32574",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b7a2de_195e9bfc",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -330,6 +354,30 @@
       "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "513f0afb_8fa5d488",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T11:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9845e13f_5352d5fe",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -454,6 +502,30 @@
       "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61f2ad76_3af07b44",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T11:44:15Z",
+      "side": 1,
+      "message": "Discussed offline.",
+      "parentUuid": "091f0c2d_6f4be990",
+      "range": {
+        "startLine": 131,
+        "startChar": 11,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -646,6 +718,30 @@
     },
     {
       "key": {
+        "uuid": "a7f281d2_6a520676",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T11:44:15Z",
+      "side": 1,
+      "message": "Went with a derivative of that.",
+      "parentUuid": "e20fb909_c89eca49",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 26
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e723f56_189851f7",
         "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
         "patchSetId": 11
@@ -823,6 +919,30 @@
       "side": 1,
       "message": "It seems like that would be more convenient to do while you\u0027re checking encoding parameters like max_value, etc",
       "parentUuid": "ee1c7df5_ea7c5f30",
+      "range": {
+        "startLine": 343,
+        "startChar": 21,
+        "endLine": 344,
+        "endChar": 43
+      },
+      "revId": "f7530127bf179488c061d60f2abee33373e36cf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cc7a92b_7316e3f4",
+        "filename": "logging/rtc_event_log/encoder/delta_encoding.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-18T11:44:15Z",
+      "side": 1,
+      "message": "It would be more efficient, but the code wouldn\u0027t look as nice. I\u0027ll think about it. We can discuss the trade-off further on the relevant CL.",
+      "parentUuid": "a3f4ad5e_ad7ca293",
       "range": {
         "startLine": 343,
         "startChar": 21,
