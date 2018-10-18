@@ -15,6 +15,7 @@
 #include <CoreAudio/CoreAudio.h>
 #endif
 
+#include <memory>
 #include <string>
 #include <tuple>
 #include <utility>
@@ -47,6 +48,58 @@ struct RtpCapabilities {
   RtpCapabilities();
   ~RtpCapabilities();
   std::vector<webrtc::RtpExtension> header_extensions;
+};
+
+class VoiceEngineInterface {
+ public:
+  VoiceEngineInterface() = default;
+  virtual ~VoiceEngineInterface() = default;
+  RTC_DISALLOW_COPY_AND_ASSIGN(VoiceEngineInterface);
+
+  // Initialization
+  // Starts the engine.
+  virtual void Init() = 0;
+
+  // TODO(solenberg): Remove once VoE API refactoring is done.
+  virtual rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const = 0;
+
+  // MediaChannel creation
+  // Creates a voice media channel. Returns NULL on failure.
+  virtual VoiceMediaChannel* CreateChannel(
+      webrtc::Call* call,
+      const MediaConfig& config,
+      const AudioOptions& options,
+      const webrtc::CryptoOptions& crypto_options) = 0;
+
+  virtual const std::vector<AudioCodec>& send_codecs() const = 0;
+  virtual const std::vector<AudioCodec>& recv_codecs() const = 0;
+  virtual RtpCapabilities GetCapabilities() const = 0;
+
+  // Starts AEC dump using existing file, a maximum file size in bytes can be
+  // specified. Logging is stopped just before the size limit is exceeded.
+  // If max_size_bytes is set to a value <= 0, no limit will be used.
+  virtual bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes) = 0;
+
+  // Stops recording AEC dump.
+  virtual void StopAecDump() = 0;
+};
+
+class VideoEngineInterface {
+ public:
+  VideoEngineInterface() = default;
+  virtual ~VideoEngineInterface() = default;
+  RTC_DISALLOW_COPY_AND_ASSIGN(VideoEngineInterface);
+
+  // Creates a video media channel, paired with the specified voice channel.
+  // Returns NULL on failure.
+  virtual VideoMediaChannel* CreateChannel(
+      webrtc::Call* call,
+      const MediaConfig& config,
+      const VideoOptions& options,
+      const webrtc::CryptoOptions& crypto_options) = 0;
+
+  virtual std::vector<VideoCodec> codecs() const = 0;
+  virtual RtpCapabilities GetCapabilities() const = 0;
 };
 
 // MediaEngineInterface is an abstraction of a media engine which can be
@@ -95,68 +148,46 @@ class MediaEngineInterface {
 
 // CompositeMediaEngine constructs a MediaEngine from separate
 // voice and video engine classes.
-template <class VOICE, class VIDEO>
 class CompositeMediaEngine : public MediaEngineInterface {
  public:
-  template <class... Args1, class... Args2>
-  CompositeMediaEngine(std::tuple<Args1...> first_args,
-                       std::tuple<Args2...> second_args)
-      : engines_(std::piecewise_construct,
-                 std::move(first_args),
-                 std::move(second_args)) {}
+  CompositeMediaEngine(std::unique_ptr<VoiceEngineInterface> audio_engine,
+                       std::unique_ptr<VideoEngineInterface> video_engine);
+  ~CompositeMediaEngine() override;
 
-  virtual ~CompositeMediaEngine() {}
-  virtual bool Init() {
-    voice().Init();
-    return true;
-  }
+  bool Init() override;
 
-  virtual rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const {
-    return voice().GetAudioState();
-  }
-  virtual VoiceMediaChannel* CreateChannel(
+  rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
+  VoiceMediaChannel* CreateChannel(
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
-      const webrtc::CryptoOptions& crypto_options) {
-    return voice().CreateChannel(call, config, options, crypto_options);
-  }
-  virtual VideoMediaChannel* CreateVideoChannel(
+      const webrtc::CryptoOptions& crypto_options) override;
+  VideoMediaChannel* CreateVideoChannel(
       webrtc::Call* call,
       const MediaConfig& config,
       const VideoOptions& options,
-      const webrtc::CryptoOptions& crypto_options) {
-    return video().CreateChannel(call, config, options, crypto_options);
-  }
+      const webrtc::CryptoOptions& crypto_options) override;
 
-  virtual const std::vector<AudioCodec>& audio_send_codecs() {
-    return voice().send_codecs();
-  }
-  virtual const std::vector<AudioCodec>& audio_recv_codecs() {
-    return voice().recv_codecs();
-  }
-  virtual RtpCapabilities GetAudioCapabilities() {
-    return voice().GetCapabilities();
-  }
-  virtual std::vector<VideoCodec> video_codecs() { return video().codecs(); }
-  virtual RtpCapabilities GetVideoCapabilities() {
-    return video().GetCapabilities();
-  }
+  const std::vector<AudioCodec>& audio_send_codecs() override;
+  const std::vector<AudioCodec>& audio_recv_codecs() override;
+  RtpCapabilities GetAudioCapabilities() override;
+  std::vector<VideoCodec> video_codecs() override;
+  RtpCapabilities GetVideoCapabilities() override;
 
-  virtual bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes) {
-    return voice().StartAecDump(file, max_size_bytes);
-  }
+  bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes) override;
 
-  virtual void StopAecDump() { voice().StopAecDump(); }
+  void StopAecDump() override;
 
  protected:
-  VOICE& voice() { return engines_.first; }
-  VIDEO& video() { return engines_.second; }
-  const VOICE& voice() const { return engines_.first; }
-  const VIDEO& video() const { return engines_.second; }
+  VoiceEngineInterface& voice();
+  VideoEngineInterface& video();
+  const VoiceEngineInterface& voice() const;
+  const VideoEngineInterface& video() const;
 
  private:
-  std::pair<VOICE, VIDEO> engines_;
+  std::pair<std::unique_ptr<VoiceEngineInterface>,
+            std::unique_ptr<VideoEngineInterface>>
+      engines_;
 };
 
 enum DataChannelType { DCT_NONE = 0, DCT_RTP = 1, DCT_SCTP = 2 };
