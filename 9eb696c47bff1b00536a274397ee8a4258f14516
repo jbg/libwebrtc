@@ -46,6 +46,30 @@
       "revId": "9eb696c47bff1b00536a274397ee8a4258f14516",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8802b85a_1e41fa2c",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-10-19T08:11:01Z",
+      "side": 1,
+      "message": "Hmm... I think transport_feedback_adapter is used to track the one-way delays, and thus the slope? If the network change is e.g. STUN-\u003eTURN, the delay pattern may easily exhibit a step-like pattern, in which case dropping history sounds like a good idea?\n\nI guess you could actually simulate it by changing propagation delays in the new unittests.",
+      "parentUuid": "35bfc2a2_d937cec0",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 262,
+        "endChar": 79
+      },
+      "revId": "9eb696c47bff1b00536a274397ee8a4258f14516",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
