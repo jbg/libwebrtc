@@ -191,6 +191,24 @@
       "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "652217e4_56912b89",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-19T13:24:31Z",
+      "side": 1,
+      "message": "\u003e My question is, is it worth requiring ScalingSettings to be set at construction time? Or could we at least allow a copy assignment operator?\n\nOk, I see the const members of ScalingSettings are inconvenient when the struct is a member of a larger struct/class. I have no strong opinion against copy assignment (or general mutating operations, which we\u0027ll allow if we make its member non-const without making them private).",
+      "parentUuid": "bd533c1c_3d96e2ce",
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
