@@ -616,6 +616,7 @@ struct RtpParameters {
   virtual ~RtpParameters() = default;
 
   std::vector<Codec> codecs;
+  bool mixed_one_two_byte_header_extension_supported = false;
   std::vector<webrtc::RtpExtension> extensions;
   // TODO(pthatcher): Add streams.
   RtcpParameters rtcp;
@@ -644,6 +645,7 @@ struct RtpParameters {
 template <class Codec>
 struct RtpSendParameters : RtpParameters<Codec> {
   int max_bandwidth_bps = -1;
+  bool mixed_one_two_byte_header_extension_supported = false;
   // This is the value to be sent in the MID RTP header extension (if the header
   // extension in included in the list of extensions).
   std::string mid;

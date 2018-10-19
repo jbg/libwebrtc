@@ -578,6 +578,7 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
     const webrtc::AudioSendStream::Config& config) {
   TRACE_EVENT0("webrtc", "Call::CreateAudioSendStream");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
+
   event_log_->Log(absl::make_unique<RtcEventAudioSendStreamConfig>(
       CreateRtcLogStreamConfig(config)));
 

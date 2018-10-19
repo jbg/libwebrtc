@@ -56,7 +56,8 @@ std::vector<std::unique_ptr<RtpRtcp>> CreateRtpRtcpModules(
     RtcEventLog* event_log,
     RateLimiter* retransmission_rate_limiter,
     OverheadObserver* overhead_observer,
-    RtpKeepAliveConfig keepalive_config) {
+    RtpKeepAliveConfig keepalive_config,
+    bool mixed_one_two_byte_header_extensions_supported) {
   RTC_DCHECK_GT(ssrcs.size(), 0);
   RtpRtcp::Configuration configuration;
   configuration.audio = false;
@@ -83,6 +84,8 @@ std::vector<std::unique_ptr<RtpRtcp>> CreateRtpRtcpModules(
       rtcp_config.video_report_interval_ms;
   configuration.rtcp_interval_config.audio_interval_ms =
       rtcp_config.audio_report_interval_ms;
+  configuration.mixed_one_two_byte_header_extensions_supported =
+      mixed_one_two_byte_header_extensions_supported;
   std::vector<std::unique_ptr<RtpRtcp>> modules;
   const std::vector<uint32_t>& flexfec_protected_ssrcs = protected_media_ssrcs;
   for (uint32_t ssrc : ssrcs) {
@@ -191,25 +194,26 @@ RtpVideoSender::RtpVideoSender(
       suspended_ssrcs_(std::move(suspended_ssrcs)),
       flexfec_sender_(MaybeCreateFlexfecSender(rtp_config, suspended_ssrcs_)),
       fec_controller_(std::move(fec_controller)),
-      rtp_modules_(
-          CreateRtpRtcpModules(ssrcs,
-                               rtp_config.flexfec.protected_media_ssrcs,
-                               rtcp_config,
-                               send_transport,
-                               observers.intra_frame_callback,
-                               transport->GetBandwidthObserver(),
-                               transport,
-                               observers.rtcp_rtt_stats,
-                               flexfec_sender_.get(),
-                               observers.bitrate_observer,
-                               observers.frame_count_observer,
-                               observers.rtcp_type_observer,
-                               observers.send_delay_observer,
-                               observers.send_packet_observer,
-                               event_log,
-                               retransmission_limiter,
-                               this,
-                               transport->keepalive_config())),
+      rtp_modules_(CreateRtpRtcpModules(
+          ssrcs,
+          rtp_config.flexfec.protected_media_ssrcs,
+          rtcp_config,
+          send_transport,
+          observers.intra_frame_callback,
+          transport->GetBandwidthObserver(),
+          transport,
+          observers.rtcp_rtt_stats,
+          flexfec_sender_.get(),
+          observers.bitrate_observer,
+          observers.frame_count_observer,
+          observers.rtcp_type_observer,
+          observers.send_delay_observer,
+          observers.send_packet_observer,
+          event_log,
+          retransmission_limiter,
+          this,
+          transport->keepalive_config(),
+          rtp_config.mixed_one_two_byte_header_extensions_supported)),
       rtp_config_(rtp_config),
       transport_(transport),
       transport_overhead_bytes_per_packet_(0),
@@ -241,6 +245,8 @@ RtpVideoSender::RtpVideoSender(
     constexpr bool remb_candidate = true;
     transport->packet_router()->AddSendRtpModule(rtp_rtcp.get(),
                                                  remb_candidate);
+    rtp_rtcp->SetMixedOneTwoByteHeaderExtensionsSupported(
+        rtp_config_.mixed_one_two_byte_header_extensions_supported);
   }
 
   for (size_t i = 0; i < rtp_config_.extensions.size(); ++i) {

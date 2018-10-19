@@ -62,7 +62,8 @@ class RTPSender {
             SendPacketObserver* send_packet_observer,
             RateLimiter* nack_rate_limiter,
             OverheadObserver* overhead_observer,
-            bool populate_network2_timestamp);
+            bool populate_network2_timestamp,
+            bool mixed_one_two_byte_header_extensions_supported);
 
   ~RTPSender();
 
@@ -116,6 +117,7 @@ class RTPSender {
                         int64_t expected_retransmission_time_ms);
 
   // RTP header extension
+  void SetMixedOneTwoByteHeaderExtensionsSupported(bool supported);
   int32_t RegisterRtpHeaderExtension(RTPExtensionType type, uint8_t id);
   bool RegisterRtpHeaderExtension(const std::string& uri, int id);
   bool IsRtpHeaderExtensionRegistered(RTPExtensionType type) const;
