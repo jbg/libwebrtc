@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "47f98da7_3ffdac55",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-19T08:19:54Z",
+      "side": 1,
+      "message": "Does this compile? Unless I\u0027m confused, |info| is not in scope here.",
+      "range": {
+        "startLine": 307,
+        "startChar": 48,
+        "endLine": 307,
+        "endChar": 52
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d8757ee_5b0a26ae",
         "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
         "patchSetId": 2
@@ -36,6 +59,24 @@
       "writtenOn": "2018-10-18T16:40:43Z",
       "side": 1,
       "message": "This is the place where the scaling settings being const adds most complexity",
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725f3040_23830b73",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-19T08:19:54Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand this comment.",
+      "parentUuid": "4d8757ee_5b0a26ae",
       "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
