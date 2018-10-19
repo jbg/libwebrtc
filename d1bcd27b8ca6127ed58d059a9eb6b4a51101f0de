@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "958982bd_3ad003a3",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa5d7e1f_24c47e60",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "720f110d_dd4b6758",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28c6d1e4_0a85a4b4",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "720f110d_dd4b6758",
+      "range": {
+        "startLine": 69,
+        "startChar": 45,
+        "endLine": 69,
+        "endChar": 65
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "bca959c5_bcf9d9f7",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "342f1eb7_fabf899e",
+      "range": {
+        "startLine": 82,
+        "startChar": 40,
+        "endLine": 82,
+        "endChar": 50
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54228d3e_9b786646",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "336be43a_d414fe3a",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54228d3e_9b786646",
+      "range": {
+        "startLine": 102,
+        "startChar": 71,
+        "endLine": 103,
+        "endChar": 13
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e48d7089_acd850a8",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "0c5fa8d3_6e8ea31d",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e48d7089_acd850a8",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a025f58_2a5e592c",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -119,6 +227,24 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74c23d81_d08fb623",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "I don\u0027t think it is clearer, but done.",
+      "parentUuid": "2a025f58_2a5e592c",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "315fdbe1_2d05cc60",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33602358_bc902501",
+      "range": {
+        "startLine": 142,
+        "startChar": 42,
+        "endLine": 142,
+        "endChar": 47
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1b36434_27148dcd",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -165,6 +315,30 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dac78ab_5a8f6651",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1b36434_27148dcd",
+      "range": {
+        "startLine": 239,
+        "startChar": 41,
+        "endLine": 239,
+        "endChar": 51
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -214,6 +388,54 @@
     },
     {
       "key": {
+        "uuid": "3a8e8804_12d80cbe",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdf58c38_431d4dd9",
+      "range": {
+        "startLine": 242,
+        "startChar": 67,
+        "endLine": 242,
+        "endChar": 70
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3ca3512_a3fc4515",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffadbb19_a0186551",
+      "range": {
+        "startLine": 242,
+        "startChar": 33,
+        "endLine": 242,
+        "endChar": 42
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4edddc5c_968e4312",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -237,6 +459,30 @@
     },
     {
       "key": {
+        "uuid": "3c6acda1_ced3cfbe",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4edddc5c_968e4312",
+      "range": {
+        "startLine": 245,
+        "startChar": 7,
+        "endLine": 245,
+        "endChar": 40
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c430b84_e4fa775f",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -248,6 +494,30 @@
       "writtenOn": "2018-10-18T13:56:07Z",
       "side": 1,
       "message": "Could you also DCHECK the pre-condition for |buffer|?",
+      "range": {
+        "startLine": 247,
+        "startChar": 2,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "429625a2_fd07d9db",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "DCHECKed that it isn\u0027t null. I can\u0027t check the size of the allocated buffer.",
+      "parentUuid": "7c430b84_e4fa775f",
       "range": {
         "startLine": 247,
         "startChar": 2,
@@ -283,6 +553,30 @@
     },
     {
       "key": {
+        "uuid": "36749758_b72283bc",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "This mirrors the code in the RtcpReceiver https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtcp_receiver.cc?l\u003d312\u0026rcl\u003d2461c319ed087e7dcac636feb61cd9343d1b6c1b\nI think it is fine as-is.",
+      "parentUuid": "ac263526_e794a601",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 5
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e6a9a80_712f3ed9",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -300,6 +594,24 @@
     },
     {
       "key": {
+        "uuid": "430ebda2_320b7aab",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6a9a80_712f3ed9",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eceeb30a_d361f4d9",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -311,6 +623,30 @@
       "writtenOn": "2018-10-18T13:56:07Z",
       "side": 1,
       "message": "Do we want to repeat all cases in the comment? Perhaps \"We log these RTCP messages, and only them\", or something similar?",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 41
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d01670e_b550e336",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "I think it is beneficial to expand the abbreviations (especially the more obscure ones like PSFB and SDES).",
+      "parentUuid": "eceeb30a_d361f4d9",
       "range": {
         "startLine": 266,
         "startChar": 0,
@@ -340,6 +676,24 @@
     },
     {
       "key": {
+        "uuid": "44700d7a_732f7be7",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88410cde_994e6ee5",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcda8a58_706381ef",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -351,6 +705,30 @@
       "writtenOn": "2018-10-18T13:56:07Z",
       "side": 1,
       "message": "Same reservation.",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0583b77d_49368717",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "As above; I think it is useful to explain the abbreviations.",
+      "parentUuid": "bcda8a58_706381ef",
       "range": {
         "startLine": 277,
         "startChar": 0,
@@ -386,6 +764,30 @@
     },
     {
       "key": {
+        "uuid": "82e4eac7_9e281043",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6032f5ec_33b7e94e",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 56
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3a93826_c3ff3d21",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -406,6 +808,30 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39156aed_9c8c1583",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3a93826_c3ff3d21",
+      "range": {
+        "startLine": 441,
+        "startChar": 1,
+        "endLine": 441,
+        "endChar": 3
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -432,6 +858,30 @@
     },
     {
       "key": {
+        "uuid": "12c1ea66_19a8c5dd",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c83d109_b5a41d50",
+      "range": {
+        "startLine": 442,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 0
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02dbdcac_fd64212b",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -443,6 +893,30 @@
       "writtenOn": "2018-10-18T13:56:07Z",
       "side": 1,
       "message": "rm",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 11
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4292aeb6_23e13243",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "This will be needed in a follow-up CL anyway. I prefer to keep (in most places).",
+      "parentUuid": "02dbdcac_fd64212b",
       "range": {
         "startLine": 467,
         "startChar": 0,
@@ -472,6 +946,24 @@
     },
     {
       "key": {
+        "uuid": "b2c2ee93_81bf6820",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "832f9d49_d346bf6e",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d986b35_c241afd6",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -483,6 +975,30 @@
       "writtenOn": "2018-10-18T13:56:07Z",
       "side": 1,
       "message": "rm",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 482,
+        "endChar": 11
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43e1a6c0_d094b00b",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Kept in most places. Removed where it is not clear that we will delta compress initially.",
+      "parentUuid": "0d986b35_c241afd6",
       "range": {
         "startLine": 481,
         "startChar": 0,
@@ -518,6 +1034,30 @@
     },
     {
       "key": {
+        "uuid": "b6dc2c85_30fec284",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done. A lot of reviewers have the opposite opinion though.",
+      "parentUuid": "67930c8d_2b6b1c79",
+      "range": {
+        "startLine": 496,
+        "startChar": 8,
+        "endLine": 496,
+        "endChar": 39
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc69ce64_bf4fb283",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -532,6 +1072,24 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68a1fc1d_fe85cd2a",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc69ce64_bf4fb283",
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -555,6 +1113,30 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a8c7d63_9a091c09",
+        "filename": "logging/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-19T10:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "095ef996_ddfdc915",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 76
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
