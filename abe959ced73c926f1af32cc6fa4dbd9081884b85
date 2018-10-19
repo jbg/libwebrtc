@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "077ced1a_112493c7",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-19T15:01:51Z",
+      "side": 1,
+      "message": "is it thread-safe?",
+      "range": {
+        "startLine": 266,
+        "startChar": 51,
+        "endLine": 266,
+        "endChar": 54
+      },
+      "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ac39d50_49872794",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-19T15:01:51Z",
+      "side": 1,
+      "message": "may be do not add \u0027const\u0027\nhttps://abseil.io/tips/109\nit makes it harder to see which parameters passed by value and which are by const reference.",
+      "range": {
+        "startLine": 712,
+        "startChar": 6,
+        "endLine": 712,
+        "endChar": 12
+      },
+      "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
