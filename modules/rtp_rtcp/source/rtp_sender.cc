@@ -121,7 +121,8 @@ RTPSender::RTPSender(
     OverheadObserver* overhead_observer,
     bool populate_network2_timestamp,
     FrameEncryptorInterface* frame_encryptor,
-    bool require_frame_encryption)
+    bool require_frame_encryption,
+    bool mixed_one_two_byte_header_extensions_supported)
     : clock_(clock),
       // TODO(holmer): Remove this conversion?
       clock_delta_ms_(clock_->TimeInMilliseconds() - rtc::TimeMillis()),
@@ -144,7 +145,7 @@ RTPSender::RTPSender(
       max_packet_size_(IP_PACKET_SIZE - 28),  // Default is IP-v4/UDP.
       last_payload_type_(-1),
       payload_type_map_(),
-      rtp_header_extension_map_(),
+      rtp_header_extension_map_(mixed_one_two_byte_header_extensions_supported),
       packet_history_(clock),
       flexfec_packet_history_(clock),
       // Statistics
