@@ -22,6 +22,30 @@
       "revId": "9eb696c47bff1b00536a274397ee8a4258f14516",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35bfc2a2_d937cec0",
+        "filename": "modules/congestion_controller/rtp/send_side_congestion_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-19T06:45:50Z",
+      "side": 1,
+      "message": "transport feedback adapter uses this to change how it accounts for historical packets, this avoids losing the packet history. Since we aren\u0027t resetting other components, dropping the history doesn\u0027t make mush sense to me.",
+      "parentUuid": "b1fb70c6_9ca4f572",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 262,
+        "endChar": 79
+      },
+      "revId": "9eb696c47bff1b00536a274397ee8a4258f14516",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
