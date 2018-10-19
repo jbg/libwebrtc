@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "406f4267_757feeac",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-19T14:45:35Z",
+      "side": 1,
+      "message": "Is this comment relevant after the restructuring? Not sure I understand it.\n\nRtpConfig is sent to the constructor of RtpVideoSender. The parameter need to be set and cannot be const.",
+      "parentUuid": "628843a5_fe53db5c",
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd85c80f_cafe8c62",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 7
@@ -86,6 +104,30 @@
       "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "318ead65_6d71f657",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-19T14:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd85c80f_cafe8c62",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 68
+      },
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -136,6 +178,30 @@
     },
     {
       "key": {
+        "uuid": "6ec21f90_e83bf69a",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-19T14:45:35Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "228e74cc_822e6ff0",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 0
+      },
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbfe7cb9_d592bd39",
         "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
         "patchSetId": 7
@@ -183,6 +249,24 @@
       "side": 1,
       "message": "Agree that construction time setting is preferable to setter method, if possible.",
       "parentUuid": "cbfe7cb9_d592bd39",
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "331fbe85_4f33ed7c",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-19T14:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fadcbfce_04d5170b",
       "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
