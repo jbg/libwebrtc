@@ -28,7 +28,9 @@ struct PacketOverhead {
   static constexpr size_t kIpv6 = 40;
   static constexpr size_t kUdp = 8;
   static constexpr size_t kSrtp = 10;
-  static constexpr size_t kTurn = 4;
+  static constexpr size_t kStun = 4;
+  static constexpr size_t kTurnChannel = 4;
+  static constexpr size_t kTurnMessage = 36;
   static constexpr size_t kDefault = kIpv4 + kUdp + kSrtp;
 };
 struct TransportControllerConfig {
@@ -117,7 +119,6 @@ struct VideoStreamConfig {
     TimeDelta nack_history_time = TimeDelta::ms(1000);
     bool use_flexfec = false;
     bool use_ulpfec = false;
-    DataSize packet_overhead = DataSize::bytes(PacketOverhead::kDefault);
   } stream;
   struct Renderer {
     enum Type { kFake } type = kFake;
@@ -159,7 +160,6 @@ struct AudioStreamConfig {
     ~Stream();
     bool in_bandwidth_estimation = false;
     bool rate_allocation_priority = false;
-    DataSize packet_overhead = DataSize::bytes(PacketOverhead::kDefault);
   } stream;
   struct Render {
     std::string sync_group;
