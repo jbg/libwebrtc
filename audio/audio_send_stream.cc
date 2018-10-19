@@ -51,11 +51,12 @@ std::unique_ptr<voe::ChannelSendProxy> CreateChannelAndProxy(
     ProcessThread* module_process_thread,
     RtcpRttStats* rtcp_rtt_stats,
     RtcEventLog* event_log,
-    FrameEncryptorInterface* frame_encryptor) {
+    FrameEncryptorInterface* frame_encryptor,
+    bool mixed_one_two_byte_header_extensions_supported) {
   return absl::make_unique<voe::ChannelSendProxy>(
-      absl::make_unique<voe::ChannelSend>(worker_queue, module_process_thread,
-                                          rtcp_rtt_stats, event_log,
-                                          frame_encryptor));
+      absl::make_unique<voe::ChannelSend>(
+          worker_queue, module_process_thread, rtcp_rtt_stats, event_log,
+          frame_encryptor, mixed_one_two_byte_header_extensions_supported));
 }
 }  // namespace
 
@@ -93,20 +94,23 @@ AudioSendStream::AudioSendStream(
     RtcpRttStats* rtcp_rtt_stats,
     const absl::optional<RtpState>& suspended_rtp_state,
     TimeInterval* overall_call_lifetime)
-    : AudioSendStream(config,
-                      audio_state,
-                      worker_queue,
-                      transport,
-                      bitrate_allocator,
-                      event_log,
-                      rtcp_rtt_stats,
-                      suspended_rtp_state,
-                      overall_call_lifetime,
-                      CreateChannelAndProxy(worker_queue,
-                                            module_process_thread,
-                                            rtcp_rtt_stats,
-                                            event_log,
-                                            config.frame_encryptor)) {}
+    : AudioSendStream(
+          config,
+          audio_state,
+          worker_queue,
+          transport,
+          bitrate_allocator,
+          event_log,
+          rtcp_rtt_stats,
+          suspended_rtp_state,
+          overall_call_lifetime,
+          CreateChannelAndProxy(
+              worker_queue,
+              module_process_thread,
+              rtcp_rtt_stats,
+              event_log,
+              config.frame_encryptor,
+              config.rtp.mixed_one_two_byte_header_extensions_supported)) {}
 
 AudioSendStream::AudioSendStream(
     const webrtc::AudioSendStream::Config& config,

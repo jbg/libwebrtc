@@ -712,6 +712,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
       const std::string track_id,
       const absl::optional<webrtc::AudioSendStream::Config::SendCodecSpec>&
           send_codec_spec,
+      const bool mixed_one_two_byte_header_extensions_supported,
       const std::vector<webrtc::RtpExtension>& extensions,
       int max_send_bitrate_bps,
       const absl::optional<std::string>& audio_network_adaptor_config,
@@ -731,6 +732,8 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
     config_.rtp.ssrc = ssrc;
     config_.rtp.mid = mid;
     config_.rtp.c_name = c_name;
+    config_.rtp.mixed_one_two_byte_header_extensions_supported =
+        mixed_one_two_byte_header_extensions_supported;
     config_.rtp.extensions = extensions;
     config_.audio_network_adaptor_config = audio_network_adaptor_config;
     config_.encoder_factory = encoder_factory;
@@ -1760,7 +1763,8 @@ bool WebRtcVoiceMediaChannel::AddSendStream(const StreamParams& sp) {
   absl::optional<std::string> audio_network_adaptor_config =
       GetAudioNetworkAdaptorConfig(options_);
   WebRtcAudioSendStream* stream = new WebRtcAudioSendStream(
-      ssrc, mid_, sp.cname, sp.id, send_codec_spec_, send_rtp_extensions_,
+      ssrc, mid_, sp.cname, sp.id, send_codec_spec_,
+      MixedOneTwoByteHeaderExtensionsSupported(), send_rtp_extensions_,
       max_send_bitrate_bps_, audio_network_adaptor_config, call_, this,
       engine()->encoder_factory_, codec_pair_id_, nullptr);
   send_streams_.insert(std::make_pair(ssrc, stream));

@@ -120,7 +120,8 @@ class ChannelSend
               ProcessThread* module_process_thread,
               RtcpRttStats* rtcp_rtt_stats,
               RtcEventLog* rtc_event_log,
-              FrameEncryptorInterface* frame_encryptor);
+              FrameEncryptorInterface* frame_encryptor,
+              bool mixed_one_two_byte_header_extensions_supported);
 
   virtual ~ChannelSend();
 
