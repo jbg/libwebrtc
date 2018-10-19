@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "e88b6743_dfcf5586",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-10-19T09:45:12Z",
+      "side": 1,
+      "message": "This is outside this CL, but I think we should move to the VideoEncoder being responsible itself to do the ToI420() call, if needed. Then we can get rid of this.",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 32
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fa25874_28374d12",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-10-19T09:45:12Z",
+      "side": 1,
+      "message": "Would it make sense to change this to a std::string now?",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 15
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2a28041_ded9471b",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-10-19T09:45:12Z",
+      "side": 1,
+      "message": "... and we should probably remove implementation_name from the CodecSpecificInfo callback and only use this one.",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b868cebd_77fe866f",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 2
