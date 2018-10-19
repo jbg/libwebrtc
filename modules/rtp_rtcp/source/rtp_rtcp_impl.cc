@@ -100,7 +100,8 @@ ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
         configuration.retransmission_rate_limiter,
         configuration.overhead_observer,
         configuration.populate_network2_timestamp,
-        configuration.frame_encryptor, configuration.require_frame_encryption));
+        configuration.frame_encryptor, configuration.require_frame_encryption,
+        configuration.mixed_one_two_byte_header_extensions_supported));
     // Make sure rtcp sender use same timestamp offset as rtp sender.
     rtcp_sender_.SetTimestampOffset(rtp_sender_->TimestampOffset());
 

@@ -65,7 +65,8 @@ class RTPSender {
             OverheadObserver* overhead_observer,
             bool populate_network2_timestamp,
             FrameEncryptorInterface* frame_encryptor,
-            bool require_frame_encryption);
+            bool require_frame_encryption,
+            bool mixed_one_two_byte_header_extensions_supported);
 
   ~RTPSender();
 
