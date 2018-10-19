@@ -619,6 +619,11 @@ bool WebRtcVideoChannel::GetChangedSendParameters(
     changed_params->codec = selected_send_codec;
 
   // Handle RTP header extensions.
+  if (params.mixed_one_two_byte_header_extensions_supported !=
+      send_params_.mixed_one_two_byte_header_extensions_supported) {
+    changed_params->mixed_one_two_byte_header_extensions_supported =
+        params.mixed_one_two_byte_header_extensions_supported;
+  }
   std::vector<webrtc::RtpExtension> filtered_extensions = FilterRtpExtensions(
       params.extensions, webrtc::RtpExtension::IsSupportedForVideo, true);
   if (!send_rtp_extensions_ || (*send_rtp_extensions_ != filtered_extensions)) {
@@ -671,6 +676,13 @@ bool WebRtcVideoChannel::SetSendParameters(const VideoSendParameters& params) {
     const VideoCodecSettings& codec_settings = *changed_params.codec;
     send_codec_ = codec_settings;
     RTC_LOG(LS_INFO) << "Using codec: " << codec_settings.codec.ToString();
+  }
+
+  if (changed_params.mixed_one_two_byte_header_extensions_supported) {
+    mixed_one_two_byte_header_extensions_supported_ =
+        *changed_params.mixed_one_two_byte_header_extensions_supported;
+    send_params_.mixed_one_two_byte_header_extensions_supported =
+        *changed_params.mixed_one_two_byte_header_extensions_supported;
   }
 
   if (changed_params.rtp_header_extensions) {
@@ -898,6 +910,10 @@ bool WebRtcVideoChannel::GetChangedRecvParameters(
 bool WebRtcVideoChannel::SetRecvParameters(const VideoRecvParameters& params) {
   TRACE_EVENT0("webrtc", "WebRtcVideoChannel::SetRecvParameters");
   RTC_LOG(LS_INFO) << "SetRecvParameters: " << params.ToString();
+
+  mixed_one_two_byte_header_extensions_supported_ =
+      params.mixed_one_two_byte_header_extensions_supported;
+
   ChangedRecvParameters changed_params;
   if (!GetChangedRecvParameters(params, &changed_params)) {
     return false;
@@ -1035,6 +1051,8 @@ bool WebRtcVideoChannel::AddSendStream(const StreamParams& sp) {
   config.encoder_settings.experiment_cpu_load_estimator =
       video_config_.experiment_cpu_load_estimator;
   config.encoder_settings.encoder_factory = encoder_factory_;
+  config.rtp.mixed_one_two_byte_header_extensions_supported =
+      mixed_one_two_byte_header_extensions_supported_;
 
   WebRtcVideoSendStream* stream = new WebRtcVideoSendStream(
       call_, sp, std::move(config), default_send_options_,
@@ -1712,6 +1730,11 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
     parameters_.config.rtp.rtcp_mode = *params.rtcp_mode;
     rtp_parameters_.rtcp.reduced_size =
         parameters_.config.rtp.rtcp_mode == webrtc::RtcpMode::kReducedSize;
+    recreate_stream = true;
+  }
+  if (params.mixed_one_two_byte_header_extensions_supported) {
+    parameters_.config.rtp.mixed_one_two_byte_header_extensions_supported =
+        *params.mixed_one_two_byte_header_extensions_supported;
     recreate_stream = true;
   }
   if (params.rtp_header_extensions) {

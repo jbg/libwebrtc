@@ -292,6 +292,7 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
 
   class WebRtcAudioSendStream;
   std::map<uint32_t, WebRtcAudioSendStream*> send_streams_;
+  bool mixed_one_two_byte_header_extensions_supported_ = false;
   std::vector<webrtc::RtpExtension> send_rtp_extensions_;
   std::string mid_;
 

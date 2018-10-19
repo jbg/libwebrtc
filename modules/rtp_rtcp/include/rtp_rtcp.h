@@ -97,6 +97,9 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     // Update network2 instead of pacer_exit field of video timing extension.
     bool populate_network2_timestamp = false;
 
+    // Corresponds to extmap-allow-mixed in SDP negotiation.
+    bool mixed_one_two_byte_header_extensions_supported = false;
+
    private:
     RTC_DISALLOW_COPY_AND_ASSIGN(Configuration);
   };

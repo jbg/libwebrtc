@@ -199,6 +199,7 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   struct ChangedSendParameters {
     // These optionals are unset if not changed.
     absl::optional<VideoCodecSettings> codec;
+    absl::optional<bool> mixed_one_two_byte_header_extensions_supported;
     absl::optional<std::vector<webrtc::RtpExtension>> rtp_header_extensions;
     absl::optional<std::string> mid;
     absl::optional<int> max_bandwidth_bps;
@@ -462,6 +463,7 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   std::set<uint32_t> receive_ssrcs_ RTC_GUARDED_BY(stream_crit_);
 
   absl::optional<VideoCodecSettings> send_codec_;
+  bool mixed_one_two_byte_header_extensions_supported_ = false;
   absl::optional<std::vector<webrtc::RtpExtension>> send_rtp_extensions_;
 
   webrtc::VideoEncoderFactory* const encoder_factory_;
