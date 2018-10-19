@@ -837,6 +837,30 @@
     },
     {
       "key": {
+        "uuid": "f4e5d26b_6548ac5f",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T16:24:51Z",
+      "side": 1,
+      "message": "You\u0027re already LGTM-ed and good to go. :-)",
+      "parentUuid": "b852761d_4e23101a",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6032f5ec_33b7e94e",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
