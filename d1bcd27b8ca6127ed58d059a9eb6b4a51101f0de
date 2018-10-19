@@ -530,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "5d6393d9_31c8e0b9",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "Right you are.",
+      "parentUuid": "429625a2_fd07d9db",
+      "range": {
+        "startLine": 247,
+        "startChar": 2,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac263526_e794a601",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -574,6 +598,30 @@
       "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c96b901f_cd519546",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36749758_b72283bc",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 5
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -729,6 +777,30 @@
       "side": 1,
       "message": "As above; I think it is useful to explain the abbreviations.",
       "parentUuid": "bcda8a58_706381ef",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 45
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b936088_ffa5cc1a",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "rtcp::App::kPacketType is a constant belonging to the rtcp::App is a class. If someone is unsure of the abbreviation, IMHO, he can just check rtcp::App. (Admittedly, there\u0027s no documentation there, but that\u0027s a separate issue.)",
+      "parentUuid": "0583b77d_49368717",
       "range": {
         "startLine": 277,
         "startChar": 0,
@@ -929,6 +1001,30 @@
     },
     {
       "key": {
+        "uuid": "e7edba7c_0b8d5722",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4292aeb6_23e13243",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 11
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "832f9d49_d346bf6e",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -1011,6 +1107,30 @@
     },
     {
       "key": {
+        "uuid": "c4959784_edc6defd",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "43e1a6c0_d094b00b",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 482,
+        "endChar": 11
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67930c8d_2b6b1c79",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
         "patchSetId": 1
@@ -1046,6 +1166,30 @@
       "side": 1,
       "message": "Done. A lot of reviewers have the opposite opinion though.",
       "parentUuid": "67930c8d_2b6b1c79",
+      "range": {
+        "startLine": 496,
+        "startChar": 8,
+        "endLine": 496,
+        "endChar": 39
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c5c3d5a_7410028b",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "Other reviewers have opinions; my preferences are objective truths.",
+      "parentUuid": "b6dc2c85_30fec284",
       "range": {
         "startLine": 496,
         "startChar": 8,
@@ -1128,6 +1272,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "095ef996_ddfdc915",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 76
+      },
+      "revId": "d1bcd27b8ca6127ed58d059a9eb6b4a51101f0de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "058c9357_b5e8ee59",
+        "filename": "logging/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-19T11:23:17Z",
+      "side": 1,
+      "message": "You even nailed my accent.",
+      "parentUuid": "7a8c7d63_9a091c09",
       "range": {
         "startLine": 30,
         "startChar": 0,
