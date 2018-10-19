@@ -74,6 +74,9 @@ struct RtpConfig {
   // Max RTP packet size delivered to send transport from VideoEngine.
   size_t max_packet_size = kDefaultMaxPacketSize;
 
+  // Corresponds to the SDP attribute extmap-allow-mixed.
+  bool mixed_one_two_byte_header_extensions_supported = false;
+
   // RTP header extensions to use for this send stream.
   std::vector<RtpExtension> extensions;
 

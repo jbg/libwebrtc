@@ -78,6 +78,8 @@ void RtpParametersFromMediaDescription(
   if (desc->has_codecs()) {
     params->codecs = desc->codecs();
   }
+  params->mixed_one_two_byte_header_extension_supported =
+      desc->mixed_one_two_byte_header_extensions_supported();
   // TODO(pthatcher): See if we really need
   // rtp_header_extensions_set() and remove it if we don't.
   if (desc->rtp_header_extensions_set()) {
