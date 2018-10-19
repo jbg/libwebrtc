@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71be95c9_3ab640d6",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-19T08:27:56Z",
+      "side": 1,
+      "message": "Does inheritance order matter? One of the base classes is an interface, the other is a concrete class with no virtual methods and no vtable.",
+      "range": {
+        "startLine": 510,
+        "startChar": 31,
+        "endLine": 510,
+        "endChar": 74
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d68d34af_4f860e89",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-19T08:27:56Z",
+      "side": 1,
+      "message": "We have factories now, right?",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 73
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
