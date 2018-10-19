@@ -117,7 +117,6 @@ struct VideoStreamConfig {
     TimeDelta nack_history_time = TimeDelta::ms(1000);
     bool use_flexfec = false;
     bool use_ulpfec = false;
-    DataSize packet_overhead = DataSize::bytes(PacketOverhead::kDefault);
   } stream;
   struct Renderer {
     enum Type { kFake } type = kFake;
@@ -159,7 +158,6 @@ struct AudioStreamConfig {
     ~Stream();
     bool in_bandwidth_estimation = false;
     bool rate_allocation_priority = false;
-    DataSize packet_overhead = DataSize::bytes(PacketOverhead::kDefault);
   } stream;
   struct Render {
     std::string sync_group;
