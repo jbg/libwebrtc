@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "5d68ad6a_c25dd3b6",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-19T08:52:21Z",
+      "side": 1,
+      "message": "It is, the else matches the if-statement on line 301, not the one on 297.",
+      "parentUuid": "47f98da7_3ffdac55",
+      "range": {
+        "startLine": 307,
+        "startChar": 48,
+        "endLine": 307,
+        "endChar": 52
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d8757ee_5b0a26ae",
         "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
         "patchSetId": 2
@@ -77,6 +101,24 @@
       "side": 1,
       "message": "I don\u0027t quite understand this comment.",
       "parentUuid": "4d8757ee_5b0a26ae",
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd533c1c_3d96e2ce",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-19T08:52:21Z",
+      "side": 1,
+      "message": "Since ScalingSettings need to be set at construction time, it means EncoderInfo needs to have all values set at construction time too. If we could instead do:\n\nEncoderInfo info;\n\n[logic related to scaling settings here]\ninfo.scaling_settings ...;\n\ninfo.supports_native_handle \u003d bar;\n\netc\n\nThen we don\u0027t need to mix a bunch of different things into the constructors arguments. This is one the places where the refactoring becomes non-trivial, there are a few others.\nMy question is, is it worth requiring ScalingSettings to be set at construction time? Or could we at least allow a copy assignment operator?",
+      "parentUuid": "725f3040_23830b73",
       "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
