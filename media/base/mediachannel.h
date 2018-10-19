@@ -251,6 +251,13 @@ class MediaChannel : public sigslot::has_slots<> {
     return network_interface_->SetOption(type, opt, option);
   }
 
+  void SetMixedOneTwoByteHeaderExtensionsSupported(bool supported) {
+    mixed_one_two_byte_header_extensions_supported_ = supported;
+  }
+  bool MixedOneTwoByteHeaderExtensionsSupported() {
+    return mixed_one_two_byte_header_extensions_supported_;
+  }
+
  protected:
   virtual rtc::DiffServCodePoint PreferredDscp() const;
 
@@ -284,6 +291,7 @@ class MediaChannel : public sigslot::has_slots<> {
   // of network_interface_ object.
   rtc::CriticalSection network_interface_crit_;
   NetworkInterface* network_interface_;
+  bool mixed_one_two_byte_header_extensions_supported_ = false;
 };
 
 // The stats information is structured as follows:

@@ -62,7 +62,8 @@ class RTPSender {
             SendPacketObserver* send_packet_observer,
             RateLimiter* nack_rate_limiter,
             OverheadObserver* overhead_observer,
-            bool populate_network2_timestamp);
+            bool populate_network2_timestamp,
+            bool mixed_one_two_byte_header_extensions_supported);
 
   ~RTPSender();
 
