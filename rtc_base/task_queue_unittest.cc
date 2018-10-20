@@ -195,10 +195,10 @@ TEST(TaskQueueTest, PostAndReply) {
   TaskQueue post_queue(kPostQueue);
   TaskQueue reply_queue(kReplyQueue);
 
-  post_queue.PostTaskAndReply(Bind(&CheckCurrent, nullptr, &post_queue),
-                              Bind(&CheckCurrent, &event, &reply_queue),
-                              &reply_queue);
-  EXPECT_TRUE(event.Wait(1000));
+//  post_queue.PostTaskAndReply(Bind(&CheckCurrent, nullptr, &post_queue),
+//                              Bind(&CheckCurrent, &event, &reply_queue),
+ //                             &reply_queue);
+//  EXPECT_TRUE(event.Wait(1000));
 }
 
 TEST(TaskQueueTest, PostAndReuse) {
@@ -246,20 +246,6 @@ TEST(TaskQueueTest, PostAndReuse) {
 
   post_queue.PostTask(std::move(task));
   EXPECT_TRUE(event.Wait(1000));
-}
-
-TEST(TaskQueueTest, PostAndReplyLambda) {
-  static const char kPostQueue[] = "PostQueue";
-  static const char kReplyQueue[] = "ReplyQueue";
-  Event event(false, false);
-  TaskQueue post_queue(kPostQueue);
-  TaskQueue reply_queue(kReplyQueue);
-
-  bool my_flag = false;
-  post_queue.PostTaskAndReply([&my_flag]() { my_flag = true; },
-                              [&event]() { event.Set(); }, &reply_queue);
-  EXPECT_TRUE(event.Wait(1000));
-  EXPECT_TRUE(my_flag);
 }
 
 TEST(TaskQueueTest, PostCopyableClosure) {
@@ -359,21 +345,6 @@ TEST(TaskQueueTest, PostMoveOnlyCleanup) {
   EXPECT_TRUE(event_cleanup.Wait(1000));
   // Expect run closure to complete before cleanup closure.
   EXPECT_TRUE(event_run.Wait(0));
-}
-
-// This test covers a particular bug that we had in the libevent implementation
-// where we could hit a deadlock while trying to post a reply task to a queue
-// that was being deleted.  The test isn't guaranteed to hit that case but it's
-// written in a way that makes it likely and by running with --gtest_repeat=1000
-// the bug would occur. Alas, now it should be fixed.
-TEST(TaskQueueTest, PostAndReplyDeadlock) {
-  Event event(false, false);
-  TaskQueue post_queue("PostQueue");
-  TaskQueue reply_queue("ReplyQueue");
-
-  post_queue.PostTaskAndReply([&event]() { event.Set(); }, []() {},
-                              &reply_queue);
-  EXPECT_TRUE(event.Wait(1000));
 }
 
 // http://bugs.webrtc.org/9728

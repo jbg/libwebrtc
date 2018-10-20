@@ -174,9 +174,13 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
 
   // Ownership of the task is passed to PostTask.
   void PostTask(std::unique_ptr<QueuedTask> task);
+
+ private:
   void PostTaskAndReply(std::unique_ptr<QueuedTask> task,
                         std::unique_ptr<QueuedTask> reply,
                         TaskQueue* reply_queue);
+
+ public:
   void PostTaskAndReply(std::unique_ptr<QueuedTask> task,
                         std::unique_ptr<QueuedTask> reply);
 
@@ -207,6 +211,7 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
     PostDelayedTask(NewClosure(std::forward<Closure>(closure)), milliseconds);
   }
 
+ private:
   template <class Closure1, class Closure2>
   void PostTaskAndReply(Closure1&& task,
                         Closure2&& reply,
@@ -220,6 +225,7 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
     PostTaskAndReply(std::move(task), NewClosure(std::forward<Closure>(reply)));
   }
 
+ public:
   template <class Closure>
   void PostTaskAndReply(Closure&& task, std::unique_ptr<QueuedTask> reply) {
     PostTaskAndReply(NewClosure(std::forward<Closure>(task)), std::move(reply));
