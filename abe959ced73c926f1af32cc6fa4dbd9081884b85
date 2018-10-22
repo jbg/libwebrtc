@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d2c4ed27_590b02f4",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-22T08:35:14Z",
+      "side": 1,
+      "message": "I\u0027ll have to double check, but I think it\u0027s accessed from the same thread.\n\nYes, have checked now, it\u0027s only accessed on the worker thread so there should be no problems. Perhaps I should add a RTC_DCHECK(worker_thread..) ?\n\nI don\u0027t have too much experience of multi-threaded programming, is there any other risk than getting a slightly outdated value?",
+      "parentUuid": "077ced1a_112493c7",
+      "range": {
+        "startLine": 266,
+        "startChar": 51,
+        "endLine": 266,
+        "endChar": 54
+      },
+      "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ac39d50_49872794",
         "filename": "media/engine/webrtcvoiceengine.cc",
         "patchSetId": 16
@@ -45,6 +69,30 @@
       "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e206ffa_97680206",
+        "filename": "media/engine/webrtcvoiceengine.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-22T08:35:14Z",
+      "side": 1,
+      "message": "I\u0027ll try to adapt to that notion :)\nI have the habit of putting const before everything that can be const.",
+      "parentUuid": "7ac39d50_49872794",
+      "range": {
+        "startLine": 712,
+        "startChar": 6,
+        "endLine": 712,
+        "endChar": 12
+      },
+      "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
