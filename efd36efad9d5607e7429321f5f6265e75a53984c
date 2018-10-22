@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d01e2d2c_ff996e7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-22T12:32:37Z",
+      "side": 1,
+      "message": "The recommended format is max 73 characters per line and max 55 chars for the title (55 chars is usually hard to achieve, but making then short within reason makes it quicker to browse the logs.)\n\nIt would be nice with a short explanation on why VideoStreamFactoryTest is no longer needed.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "efd36efad9d5607e7429321f5f6265e75a53984c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be8de5ec_cda16d95",
+        "filename": "video/end_to_end_tests/multi_codec_receive_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-22T12:32:37Z",
+      "side": 1,
+      "message": "Why do we only need to set num_temporal_layers on the first simulcast layer? Shouldn\u0027t this be a loop like above? Maybe add a comment?",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 33
+      },
+      "revId": "efd36efad9d5607e7429321f5f6265e75a53984c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
