@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "f093677a_a612d51b",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-22T09:17:18Z",
+      "side": 1,
+      "message": "You\u0027re right that it can\u0027t be const here. Let me rephrase: This struct is passed to the constructor of various objects and their members. In all those objects, this should correspond to a construction time const setting. It looks like it is ultimately passed to RtpHeaderExtensionMap (via RtpVideoSender, RtpRtcp, and RtpSender).\n\nSo, can the member RtpHeaderExtensionMap::mixed_one_two_byte_header_supported_ be made const (and the setter method RtpHeaderExtensionMap::SetMixedOneTwoByteHeaderSupported deleted)?\n\nI\u0027m probably lacking some context. It looks like RtpHeaderExtensionsMap provides the getter method IsMixedOneTwoByteHeaderSupported, which is the only direct use of the flag. And that getter method is called only from RtpPacket. I would have expected RtpPacket to call methods on RtpHeaderExtensionsMap to register or set extensions, and let the latter return failure if the extension requested isn\u0027t consistent with the setting of mixed_one_two_byte_header_supported_. Then no getter method would be needed either.",
+      "parentUuid": "406f4267_757feeac",
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd85c80f_cafe8c62",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 7
