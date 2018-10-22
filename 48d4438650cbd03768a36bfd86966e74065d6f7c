@@ -93,6 +93,30 @@
       "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "018b4d1b_19357c07",
+        "filename": "pc/channel.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-22T11:49:46Z",
+      "side": 1,
+      "message": "Seth, what do you say? Is this okay or do you think I should set this parameter in the constructor of each channel?\n\nI think the change that could be done in that case is to add this bool to cricket::MediaConfig and set it to the same value for all channels (\u003dSessionDescription::extmap_allow_mixed())",
+      "parentUuid": "f9426423_c311a618",
+      "range": {
+        "startLine": 802,
+        "startChar": 2,
+        "endLine": 803,
+        "endChar": 63
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
