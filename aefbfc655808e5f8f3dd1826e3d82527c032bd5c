@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e8b4633_bea6fcc4",
+        "filename": "test/scenario/call_client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-22T09:29:20Z",
+      "side": 1,
+      "message": "Explain route ID.",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 100,
+        "endChar": 19
+      },
+      "revId": "aefbfc655808e5f8f3dd1826e3d82527c032bd5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc713646_91b6685f",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-22T09:29:20Z",
+      "side": 1,
+      "message": "Comment",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "aefbfc655808e5f8f3dd1826e3d82527c032bd5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
