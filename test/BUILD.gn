@@ -411,6 +411,39 @@ rtc_source_set("fileutils") {
     "testsupport/fileutils.h",
   ]
   deps = [
+    ":fileutils_override",
+    ":fileutils_override_api",
+    "..:webrtc_common",
+    "../rtc_base:checks",
+    "../rtc_base:rtc_base_approved",
+    "../rtc_base/system:arch",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+  if (is_ios) {
+    deps += [ ":fileutils_ios_objc" ]
+  }
+  if (is_mac) {
+    deps += [ ":fileutils_mac_objc" ]
+  }
+  if (is_win) {
+    deps += [ "../rtc_base:rtc_base" ]
+  }
+}
+
+rtc_source_set("fileutils_override_api") {
+  testonly = true
+  sources = [
+    "testsupport/fileutils_override.h",
+  ]
+}
+
+rtc_source_set("fileutils_override") {
+  testonly = true
+  sources = [
+    "testsupport/fileutils_override.cc",
+  ]
+  deps = [
+    ":fileutils_override_api",
     "..:webrtc_common",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
