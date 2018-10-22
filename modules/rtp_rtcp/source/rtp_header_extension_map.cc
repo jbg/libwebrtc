@@ -56,15 +56,19 @@ static_assert(arraysize(kExtensions) ==
 constexpr RTPExtensionType RtpHeaderExtensionMap::kInvalidType;
 constexpr int RtpHeaderExtensionMap::kInvalidId;
 
-RtpHeaderExtensionMap::RtpHeaderExtensionMap()
-    : mixed_one_two_byte_header_supported_(false) {
+RtpHeaderExtensionMap::RtpHeaderExtensionMap() : RtpHeaderExtensionMap(false) {}
+
+RtpHeaderExtensionMap::RtpHeaderExtensionMap(
+    bool mixed_one_two_byte_header_supported)
+    : mixed_one_two_byte_header_supported_(
+          mixed_one_two_byte_header_supported) {
   for (auto& id : ids_)
     id = kInvalidId;
 }
 
 RtpHeaderExtensionMap::RtpHeaderExtensionMap(
     rtc::ArrayView<const RtpExtension> extensions)
-    : RtpHeaderExtensionMap() {
+    : RtpHeaderExtensionMap(false) {
   for (const RtpExtension& extension : extensions)
     RegisterByUri(extension.id, extension.uri);
 }

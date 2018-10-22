@@ -799,6 +799,8 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(audio->rtp_header_extensions());
   UpdateRtpHeaderExtensionMap(rtp_header_extensions);
+  media_channel()->SetMixedOneTwoByteHeaderExtensionsSupported(
+      audio->mixed_one_two_byte_header_extensions_supported());
 
   AudioRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(audio, rtp_header_extensions, &recv_params);
@@ -934,6 +936,8 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(video->rtp_header_extensions());
   UpdateRtpHeaderExtensionMap(rtp_header_extensions);
+  media_channel()->SetMixedOneTwoByteHeaderExtensionsSupported(
+      video->mixed_one_two_byte_header_extensions_supported());
 
   VideoRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(video, rtp_header_extensions, &recv_params);
@@ -1088,6 +1092,8 @@ bool RtpDataChannel::SetLocalContent_w(const MediaContentDescription* content,
 
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(data->rtp_header_extensions());
+  media_channel()->SetMixedOneTwoByteHeaderExtensionsSupported(
+      data->mixed_one_two_byte_header_extensions_supported());
 
   DataRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(data, rtp_header_extensions, &recv_params);

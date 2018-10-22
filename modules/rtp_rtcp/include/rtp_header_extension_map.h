@@ -26,6 +26,7 @@ class RtpHeaderExtensionMap {
   static constexpr int kInvalidId = 0;
 
   RtpHeaderExtensionMap();
+  explicit RtpHeaderExtensionMap(bool mixed_one_two_byte_header_supported);
   explicit RtpHeaderExtensionMap(rtc::ArrayView<const RtpExtension> extensions);
 
   template <typename Extension>

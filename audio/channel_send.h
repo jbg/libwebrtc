@@ -122,7 +122,8 @@ class ChannelSend
               RtcpRttStats* rtcp_rtt_stats,
               RtcEventLog* rtc_event_log,
               FrameEncryptorInterface* frame_encryptor,
-              const webrtc::CryptoOptions& crypto_options);
+              const webrtc::CryptoOptions& crypto_options,
+              bool mixed_one_two_byte_header_extensions_supported);
 
   virtual ~ChannelSend();
 

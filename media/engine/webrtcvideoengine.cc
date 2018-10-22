@@ -1039,6 +1039,8 @@ bool WebRtcVideoChannel::AddSendStream(const StreamParams& sp) {
       video_config_.experiment_cpu_load_estimator;
   config.encoder_settings.encoder_factory = encoder_factory_;
   config.crypto_options = crypto_options_;
+  config.rtp.mixed_one_two_byte_header_extensions_supported =
+      MixedOneTwoByteHeaderExtensionsSupported();
 
   WebRtcVideoSendStream* stream = new WebRtcVideoSendStream(
       call_, sp, std::move(config), default_send_options_,
