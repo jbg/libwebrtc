@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7018252d_e609ceb2",
+        "filename": "webrtc.gni",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-22T10:24:09Z",
+      "side": 1,
+      "message": "I don\u0027t see anything that prevents use_sysroot \u003d true on other platforms (sysroot.gni only looks at arch), so I\u0027d do\n\nrtc_use_pipewire \u003d is_linux \u0026\u0026 use_sysroot\n\nto be sure. It\u0027s good documentation anyway.",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 32
+      },
+      "revId": "74248dbdc8e27ed37488b84939a59f0673b420ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb937e44_1822a96d",
+        "filename": "webrtc.gni",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-22T10:24:09Z",
+      "side": 1,
+      "message": "Add a comment (like: # Set to true to use pipewire on the Wayland display server.)",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 18
+      },
+      "revId": "74248dbdc8e27ed37488b84939a59f0673b420ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
