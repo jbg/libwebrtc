@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "4f4bacd1_4bc170f6",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-22T09:36:26Z",
+      "side": 1,
+      "message": "The getter is needed in RtpHeaderExtensionsMap because there are different limitations on the sizes of the header extensions depending on this setting. This could perhaps be refactored by adding a function to RtpHeaderExtensionsMap that validates the extensions before they are allocated. I\u0027ll leave the getter as it is for now.\n\nThe setter could be removed, currently it\u0027s only used in unit tests that were written before the actual use case was figured out.",
+      "parentUuid": "f093677a_a612d51b",
+      "revId": "4ff587d6b364cc2205d5a550831b6788a8773144",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd85c80f_cafe8c62",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 7

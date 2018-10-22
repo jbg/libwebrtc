@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "daac2174_42f8a69e",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-22T09:36:26Z",
+      "side": 1,
+      "message": "Will look into that, see response to your other comment.",
+      "parentUuid": "ff480c62_0c200046",
+      "range": {
+        "startLine": 265,
+        "startChar": 7,
+        "endLine": 265,
+        "endChar": 50
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a03a834c_10f4c7f0",
         "filename": "pc/channel.cc",
         "patchSetId": 17
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-22T08:57:53Z",
       "side": 1,
       "message": "So this is why it cant\u0027 be construction-time const in MediaChannel?",
+      "range": {
+        "startLine": 802,
+        "startChar": 2,
+        "endLine": 803,
+        "endChar": 63
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9426423_c311a618",
+        "filename": "pc/channel.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-22T09:36:26Z",
+      "side": 1,
+      "message": "You might be right. I may be able to set this at the construction of the channel. I\u0027ll do the change if it seems reasonable.",
+      "parentUuid": "a03a834c_10f4c7f0",
       "range": {
         "startLine": 802,
         "startChar": 2,
