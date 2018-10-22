@@ -79,6 +79,25 @@ VideoEncoder::ScalingSettings::~ScalingSettings() {}
 constexpr VideoEncoder::ScalingSettings::KOff
     VideoEncoder::ScalingSettings::kOff;
 
+VideoEncoder::EncoderInfo::EncoderInfo()
+    : scaling_settings(VideoEncoder::ScalingSettings::kOff),
+      supports_native_handle(false),
+      implementation_name("unknown") {}
+
+VideoEncoder::EncoderInfo::EncoderInfo(const ScalingSettings& scaling_settings,
+                                       bool supports_native_handle,
+                                       const char* implementation_name)
+    : scaling_settings(scaling_settings),
+      supports_native_handle(supports_native_handle),
+      implementation_name(implementation_name) {}
+
+// VideoEncoder::EncoderInfo::EncoderInfo(const EncoderInfo& rhs) = default;
+
+// VideoEncoder::EncoderInfo::EncoderInfo& operator=(const
+// VideoEncoder::EncoderInfo& rhs) = default;
+
+VideoEncoder::EncoderInfo::~EncoderInfo() = default;
+
 int32_t VideoEncoder::SetRates(uint32_t bitrate, uint32_t framerate) {
   RTC_NOTREACHED() << "SetRate(uint32_t, uint32_t) is deprecated.";
   return -1;
@@ -100,5 +119,10 @@ bool VideoEncoder::SupportsNativeHandle() const {
 
 const char* VideoEncoder::ImplementationName() const {
   return "unknown";
+}
+
+VideoEncoder::EncoderInfo VideoEncoder::GetEncoderInfo() const {
+  return EncoderInfo(GetScalingSettings(), SupportsNativeHandle(),
+                     ImplementationName());
 }
 }  // namespace webrtc

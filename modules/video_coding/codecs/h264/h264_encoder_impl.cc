@@ -534,10 +534,6 @@ int32_t H264EncoderImpl::Encode(const VideoFrame& input_frame,
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
-const char* H264EncoderImpl::ImplementationName() const {
-  return "OpenH264";
-}
-
 // Initialization parameters.
 // There are two ways to initialize. There is SEncParamBase (cleared with
 // memset(&p, 0, sizeof(SEncParamBase)) used in Initialize, and SEncParamExt
@@ -629,9 +625,9 @@ int32_t H264EncoderImpl::SetChannelParameters(uint32_t packet_loss,
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
-VideoEncoder::ScalingSettings H264EncoderImpl::GetScalingSettings() const {
-  return VideoEncoder::ScalingSettings(kLowH264QpThreshold,
-                                       kHighH264QpThreshold);
+VideoEncoder::EncoderInfo H264EncoderImpl::GetEncoderInfo() const {
+  return EncoderInfo(ScalingSettings(kLowH264QpThreshold, kHighH264QpThreshold),
+                     false, "OpenH264");
 }
 
 void H264EncoderImpl::LayerConfig::SetStreamState(bool send_stream) {
