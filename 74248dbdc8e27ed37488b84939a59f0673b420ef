@@ -45,6 +45,30 @@
       "revId": "74248dbdc8e27ed37488b84939a59f0673b420ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c194cb2e_4cf352fe",
+        "filename": "webrtc.gni",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-22T11:27:45Z",
+      "side": 1,
+      "message": "Yeah, appears the bots say you need is_linux.",
+      "parentUuid": "7018252d_e609ceb2",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 32
+      },
+      "revId": "74248dbdc8e27ed37488b84939a59f0673b420ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
