@@ -22,6 +22,30 @@
       "revId": "680b1767321deb064a9721f9d2f7523da8dbb8e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "742ff783_0586644e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-22T16:49:06Z",
+      "side": 1,
+      "message": "Expanded the comment, does clarify improved?",
+      "parentUuid": "e421fc53_117e6279",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "680b1767321deb064a9721f9d2f7523da8dbb8e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
