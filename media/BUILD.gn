@@ -222,6 +222,7 @@ rtc_static_library("rtc_internal_video_codecs") {
     "../rtc_base:sequenced_task_checker",
     "../rtc_base/system:rtc_export",
     "../system_wrappers",
+    "//third_party/abseil-cpp/absl/strings",
     "//third_party/abseil-cpp/absl/types:optional",
     "//third_party/libyuv",
   ]
