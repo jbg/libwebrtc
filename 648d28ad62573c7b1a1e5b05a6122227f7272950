@@ -33,6 +33,24 @@
       "revId": "648d28ad62573c7b1a1e5b05a6122227f7272950",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ba24ae5_cb7d1a63",
+        "filename": "common_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-22T09:20:21Z",
+      "side": 0,
+      "message": "I\u0027ll try this way first. I\u0027ve discovered one external user so far.",
+      "parentUuid": "8e31843a_aa9a82cf",
+      "revId": "648d28ad62573c7b1a1e5b05a6122227f7272950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
