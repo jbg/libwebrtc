@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3d075acb_bbfe4910",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-22T11:14:09Z",
+      "side": 1,
+      "message": "Absolutely. A plain encoder that wants only I420 should always call ToI420 to get the pixels. And will then handle native as well as the other formats currently available (besides kNative and kI420, we now have kI420A, kI444, kI010). \n\nSo this should be fairly easy to delete. Any encoders currently using GetI420() have to be changed to ToI420().",
+      "parentUuid": "e88b6743_dfcf5586",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 32
+      },
+      "revId": "c5bee91fdc4b30e02d28433dda2ddf2f8383f85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fa25874_28374d12",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 2
