@@ -22,6 +22,30 @@
       "revId": "65faede3b0ff0bc4c95959eacfa5b03d218bc4ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c60b392d_e229e660",
+        "filename": "modules/video_coding/frame_buffer2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2018-10-22T12:22:50Z",
+      "side": 0,
+      "message": "Hmm, I guess we are OK with increasing timestamps between spatial layers here?",
+      "parentUuid": "c1a4052e_3660b94b",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 190,
+        "endChar": 64
+      },
+      "revId": "65faede3b0ff0bc4c95959eacfa5b03d218bc4ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
