@@ -187,6 +187,30 @@
       "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a49ef63a_6b144c0e",
+        "filename": "pc/channel.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-22T13:13:15Z",
+      "side": 1,
+      "message": "Note on MediaConfig: Adding fields there makes sense if and only if the media streams still get an unmodified reference to RTCConfiguration::media_config. In that case, also add accessor methods to the RTCConfiguration class; applications should *not* access RTCConfiguration::media_config directly.",
+      "parentUuid": "018b4d1b_19357c07",
+      "range": {
+        "startLine": 802,
+        "startChar": 2,
+        "endLine": 803,
+        "endChar": 63
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
