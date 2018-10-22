@@ -1,0 +1,256 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f63f0ea_02868384",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "Remove this line?",
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d719f532_57a09567",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "IIRC about the style guide, it\u0027s preferable to use \u003d absl::make_unique\u003c\u003e().",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc46f0a_9b4433ad",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "I have my usual reservation about crashing on bad input coming from outside of the program.\nThis is not specific to this CL, so you may ignore this.",
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c144c79_ac8ea00e",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "Is this value arbitrary, or...?",
+      "range": {
+        "startLine": 654,
+        "startChar": 27,
+        "endLine": 654,
+        "endChar": 33
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84f6f8cf_8ea44224",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "(You don\u0027t have to delay this CL over this if you don\u0027t want to.)\nMessage tag, tag number, field number, wire type - some different things with different names. Do you see a way to make this comment a bit clearer?",
+      "range": {
+        "startLine": 665,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 76
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054f9c2e_a69078e8",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "nit: This is defined far from where it\u0027s used.",
+      "range": {
+        "startLine": 668,
+        "startChar": 19,
+        "endLine": 668,
+        "endChar": 33
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd13a29f_bd554025",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "1. Is there a constant somewhere for the 0x07?\n2. const uint64_t",
+      "range": {
+        "startLine": 677,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 37
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "895b9d79_50419a23",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "Different iterations may encounter different versions? Do we want to error if that happens?",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 727,
+        "endChar": 3
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28b4b5a1_76a5f5cb",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1676,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "Error if \u003e 1?",
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba364647_ab5f884e",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1778,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "s/CHECK/DCHECK?",
+      "range": {
+        "startLine": 1777,
+        "startChar": 0,
+        "endLine": 1778,
+        "endChar": 32
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98025b2d_b8d63356",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0b67160_94dc3ffa",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-22T09:11:42Z",
+      "side": 1,
+      "message": "const",
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
