@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "277a30b2_dc3757ff",
+        "filename": "api/audio_codecs/isac/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-22T09:08:07Z",
+      "side": 0,
+      "message": "It\u0027s fabulous that you\u0027re able to eliminate this many deps on webrtc_common.",
+      "revId": "648d28ad62573c7b1a1e5b05a6122227f7272950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e31843a_aa9a82cf",
+        "filename": "common_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-22T09:08:07Z",
+      "side": 0,
+      "message": "It may be easier to do this removal in a separate CL, if we risk having to revert because of external callers. But I\u0027ll leave it to you to decide.",
+      "revId": "648d28ad62573c7b1a1e5b05a6122227f7272950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

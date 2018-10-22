@@ -22,6 +22,30 @@
       "revId": "af48b564a95fef31647d1a3279b592d26788649d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f52acee_64bcbd2a",
+        "filename": "api/audio_codecs/g722/audio_encoder_g722.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-22T09:08:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e0795b2_4e087c54",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "af48b564a95fef31647d1a3279b592d26788649d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
