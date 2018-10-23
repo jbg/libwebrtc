@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "848db3d4_e6e0d646",
+        "filename": "api/audio/echo_canceller3_config_json.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-23T08:32:19Z",
+      "side": 1,
+      "message": "RTC_DCHECK -\u003e RTC_DCHECK_GE",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0783c2b_8c749a64",
+        "filename": "api/audio/test/echo_canceller3_config_json_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-23T08:32:19Z",
+      "side": 1,
+      "message": "Will this work in general? It seems like random data could end up with really huge floating point numbers, and for those maybe the epsilon of 1e-4 is too small?",
+      "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
