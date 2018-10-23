@@ -45,6 +45,30 @@
       "revId": "efd36efad9d5607e7429321f5f6265e75a53984c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fb830d0_6548c79f",
+        "filename": "video/end_to_end_tests/multi_codec_receive_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2018-10-23T08:29:35Z",
+      "side": 1,
+      "message": "Number of simulcast layers should be one, added a check for this.",
+      "parentUuid": "be8de5ec_cda16d95",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 33
+      },
+      "revId": "efd36efad9d5607e7429321f5f6265e75a53984c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
