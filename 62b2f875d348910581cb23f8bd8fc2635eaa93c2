@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8013ddf7_e3269708",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-23T12:32:33Z",
+      "side": 1,
+      "message": "Nice to have the base class deleted.",
+      "parentUuid": "9de98df6_c86f91f2",
+      "range": {
+        "startLine": 510,
+        "startChar": 31,
+        "endLine": 510,
+        "endChar": 74
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d68d34af_4f860e89",
         "filename": "media/base/fakemediaengine.h",
         "patchSetId": 7
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Since we a working with an interface, we should be able to mock this now if required. We should be able to completely replace the fakes with mocks in the future.",
       "parentUuid": "d68d34af_4f860e89",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 73
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0966f7e_10ace06c",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-23T12:32:33Z",
+      "side": 1,
+      "message": "Let me rephrase: From the TODO item, it sounds like these methods should no longer be needed. So what\u0027s needed to be able to delete them from both(?) interface and implementation?\n\nOr does \"factories\" here refer to something different than Audio{En,De}coderFactory?",
+      "parentUuid": "bc23987e_53915020",
       "range": {
         "startLine": 525,
         "startChar": 0,
