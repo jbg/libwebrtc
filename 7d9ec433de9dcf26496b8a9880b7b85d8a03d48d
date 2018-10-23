@@ -282,6 +282,30 @@
       "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9017990_36fbd1b7",
+        "filename": "test/testsupport/fileutils_override.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-23T13:52:16Z",
+      "side": 1,
+      "message": "FTR I agree with Mirko - returning this is pretty ridiculous, but not high priority to fix.",
+      "parentUuid": "a47c1cdf_ed0087ed",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 77
+      },
+      "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
