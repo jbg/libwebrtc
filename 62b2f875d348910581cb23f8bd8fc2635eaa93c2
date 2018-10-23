@@ -141,6 +141,30 @@
       "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfe25f02_2e29490d",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-23T12:52:00Z",
+      "side": 1,
+      "message": "As it is, the fake engine does not reference factories for this, it just implements some dummy behavior. But I\u0027d say that the best long term approach would probably be to completely remove the fakes and replace them with mocks.",
+      "parentUuid": "c0966f7e_10ace06c",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 73
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
