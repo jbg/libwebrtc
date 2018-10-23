@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9de98df6_c86f91f2",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-23T12:13:05Z",
+      "side": 1,
+      "message": "In general, this should be no problem, since the pointer address would be adjusted to account for the offset of the Interface object. Either way, the base was removed in setup cl.",
+      "parentUuid": "71be95c9_3ab640d6",
+      "range": {
+        "startLine": 510,
+        "startChar": 31,
+        "endLine": 510,
+        "endChar": 74
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d68d34af_4f860e89",
         "filename": "media/base/fakemediaengine.h",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc23987e_53915020",
+        "filename": "media/base/fakemediaengine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-23T12:13:05Z",
+      "side": 1,
+      "message": "Since we a working with an interface, we should be able to mock this now if required. We should be able to completely replace the fakes with mocks in the future.",
+      "parentUuid": "d68d34af_4f860e89",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 73
+      },
+      "revId": "62b2f875d348910581cb23f8bd8fc2635eaa93c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
