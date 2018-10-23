@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71fa191a_b146da17",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-23T10:10:20Z",
+      "side": 1,
+      "message": "Is this needed? From the code I cannot see that.",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 436,
+        "endChar": 3
+      },
+      "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2596a13_0537590f",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-23T10:10:20Z",
+      "side": 1,
+      "message": ".h and .cc files should come in pairs (see: https://webrtc.googlesource.com/src/+/HEAD/style-guide.md#h-cc-pairs).\n\nWhy do we need the fileutils_override_api?",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 1
+      },
+      "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
