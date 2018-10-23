@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "81f03e48_b0637e35",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-23T11:51:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "17d266e1_f11e7deb",
+      "range": {
+        "startLine": 654,
+        "startChar": 27,
+        "endLine": 654,
+        "endChar": 33
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84f6f8cf_8ea44224",
         "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
         "patchSetId": 2
@@ -248,6 +272,30 @@
       "side": 1,
       "message": "Yes, but it is defined close to where it is explained. Wdyt?",
       "parentUuid": "054f9c2e_a69078e8",
+      "range": {
+        "startLine": 668,
+        "startChar": 19,
+        "endLine": 668,
+        "endChar": 33
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c27e05c_0e0b5b62",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-23T11:51:25Z",
+      "side": 1,
+      "message": "Optimally, there would have been a (constexpr) function that takes some arguments, whose names were illustrative, and composed this tag. Then, the comment could have been attached to the function. Or what do you think?",
+      "parentUuid": "0bc504f5_536cc633",
       "range": {
         "startLine": 668,
         "startChar": 19,
@@ -351,6 +399,30 @@
       "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c070100_bc5d0563",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-10-23T11:51:25Z",
+      "side": 1,
+      "message": "I do see some reasons, but the limitations were explained to me offline.",
+      "parentUuid": "83f4c9d7_0e134f88",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 727,
+        "endChar": 3
+      },
+      "revId": "1a389206dbe73f1c6b69e1d6091e1d6ec8f7224a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
