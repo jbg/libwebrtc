@@ -257,7 +257,8 @@ int SimulcastEncoderAdapter::InitEncode(const VideoCodec* inst,
     if (i != 0) {
       implementation_name += ", ";
     }
-    implementation_name += streaminfos_[i].encoder->ImplementationName();
+    implementation_name +=
+        streaminfos_[i].encoder->GetEncoderInfo().implementation_name;
   }
 
   if (doing_simulcast) {
@@ -452,7 +453,6 @@ EncodedImageCallback::Result SimulcastEncoderAdapter::OnEncodedImage(
     const RTPFragmentationHeader* fragmentation) {
   EncodedImage stream_image(encodedImage);
   CodecSpecificInfo stream_codec_specific = *codecSpecificInfo;
-  stream_codec_specific.codec_name = implementation_name_.c_str();
 
   stream_image.SetSpatialIndex(stream_idx);
 
