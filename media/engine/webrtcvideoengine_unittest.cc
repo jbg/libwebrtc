@@ -1485,7 +1485,7 @@ TEST_F(WebRtcVideoChannelBaseTest, SetSendSetsTransportBufferSizes) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
   EXPECT_EQ(64 * 1024, network_interface_.sendbuf_size());
-  EXPECT_EQ(64 * 1024, network_interface_.recvbuf_size());
+  EXPECT_EQ(256 * 1024, network_interface_.recvbuf_size());
 }
 
 // Test that we properly set the send and recv buffer sizes when overriding
