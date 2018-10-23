@@ -22,6 +22,30 @@
       "revId": "beba052dc9eb5b78adabc26e89685190ef83f0b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26bce5f7_fa78a7ff",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2018-10-23T13:50:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31254231_0a369f3d",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 439,
+        "endChar": 42
+      },
+      "revId": "beba052dc9eb5b78adabc26e89685190ef83f0b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
