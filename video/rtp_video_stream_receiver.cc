@@ -162,7 +162,8 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
   int packet_buffer_max_size = kPacketBufferMaxSize;
   if (!group_name.empty() &&
       (sscanf(group_name.c_str(), "%d", &packet_buffer_max_size) != 1 ||
-       packet_buffer_max_size <= 0)) {
+       packet_buffer_max_size <= 0 ||
+       (packet_buffer_max_size & (packet_buffer_max_size - 1)) != 0)) {
     RTC_LOG(LS_WARNING) << "Invalid packet buffer max size: " << group_name;
     packet_buffer_max_size = kPacketBufferMaxSize;
   }

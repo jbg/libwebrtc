@@ -626,4 +626,18 @@ TEST_F(RtpVideoStreamReceiverTest, RepeatedSecondarySinkDisallowed) {
 }
 #endif
 
+// Test that the default value is used if we set an invalid number. If this was
+// not the case the test would hit an RTC_DCHECK.
+TEST_F(RtpVideoStreamReceiverTest, InvalidPacketBufferMaxSize) {
+  // Set bogus field trial values to override the default packet buffer max
+  // size, then re-run setup where the video stream receiver is created.
+  for (std::string group : {" ", "NotANumber", "-1", "0", "1234"}) {
+    std::string field_trial_string = "WebRTC-PacketBufferMaxSize/";
+    field_trial_string += group;
+    field_trial_string += "/";
+    webrtc::test::ScopedFieldTrials field_trial(field_trial_string);
+    SetUp();
+  }
+}
+
 }  // namespace webrtc
