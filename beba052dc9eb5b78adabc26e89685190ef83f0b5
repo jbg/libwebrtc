@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31254231_0a369f3d",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-23T13:45:07Z",
+      "side": 1,
+      "message": "Add a comment why you\u0027re breaking the .h/.cc rule in this particular case.",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 439,
+        "endChar": 42
+      },
+      "revId": "beba052dc9eb5b78adabc26e89685190ef83f0b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
