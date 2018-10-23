@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db659f8c_5d84b900",
+        "filename": "modules/audio_processing/agc2/fixed_gain_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-10-23T13:19:15Z",
+      "side": 1,
+      "message": "We never change \u0027use_limiter\u0027. Maybe it should be const and a c-tor argument instead?",
+      "range": {
+        "startLine": 28,
+        "startChar": 39,
+        "endLine": 28,
+        "endChar": 58
+      },
+      "revId": "5a8e5e5e9206a9e6c3121169e4bae6f7af6c0bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cf244e2_46a12986",
+        "filename": "modules/audio_processing/agc2/fixed_gain_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-10-23T13:19:15Z",
+      "side": 1,
+      "message": "Please clarify it\u0027s a parameter. Quotes, underscore or smth else. \u0027use limiter\u0027 or use_limiter or \"Parameters rate, gain and use limiter\".",
+      "range": {
+        "startLine": 28,
+        "startChar": 20,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "5a8e5e5e9206a9e6c3121169e4bae6f7af6c0bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e4f7b4d_4fa38538",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-10-23T13:19:15Z",
+      "side": 1,
+      "message": "Does this have to be a FixedGainController? It only applies a fixed gain. The code grows more complex with two limiter instances where one is deactivated. Maybe we should remove FixedGainController and use GainApplier and Limiter? In the PreAmplifier, we use GainApplier already: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_processing/audio_processing_impl.cc?q\u003dpre_amplifier.reset\u0026g\u003d0\u0026l\u003d1813",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "5a8e5e5e9206a9e6c3121169e4bae6f7af6c0bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "986baad9_03a8f7ab",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-10-23T13:19:15Z",
+      "side": 1,
+      "message": "This one has to come from the Limiter. Please replace with limiter_.LastAudioLevel().",
+      "range": {
+        "startLine": 51,
+        "startChar": 39,
+        "endLine": 51,
+        "endChar": 76
+      },
+      "revId": "5a8e5e5e9206a9e6c3121169e4bae6f7af6c0bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
