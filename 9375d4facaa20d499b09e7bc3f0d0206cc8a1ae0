@@ -81,6 +81,24 @@
       "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8f8d435_b7aca9f6",
+        "filename": "api/audio/test/echo_canceller3_config_json_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-23T09:20:11Z",
+      "side": 1,
+      "message": "Yes, it is too large at least for some parameters. But I don\u0027t have a good suggestion for a workaround for that.",
+      "parentUuid": "d063e462_f07e616a",
+      "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
