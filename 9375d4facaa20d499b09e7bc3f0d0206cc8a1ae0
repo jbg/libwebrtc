@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7d811ec3_ee3a1acf",
+        "filename": "api/audio/echo_canceller3_config_json.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-23T09:11:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "848db3d4_e6e0d646",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0783c2b_8c749a64",
         "filename": "api/audio/test/echo_canceller3_config_json_unittest.cc",
         "patchSetId": 9
@@ -39,6 +63,24 @@
       "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d063e462_f07e616a",
+        "filename": "api/audio/test/echo_canceller3_config_json_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-23T09:11:19Z",
+      "side": 1,
+      "message": "The config is validated by GenerateRandomConfig(), so the input values here are capped to \"reasonable\" values. [0.0f, 1000.0f] or narrower. [1]\n\nUnder the hood, our float-to-string conversion under test delegates to snprintf [2] with no precision specified. It seems to mean 6 digits after the decimal point, so this epsilon should be enough as far as I can tell.\n\nAnother question is if the epsilon is too _large_, for example if error_floor is set to tiny values like 1e-36 yes the config might spit out anything less than 1e-4. A workaround is to use EXPECT_FLOAT_EQ, but it is too precise for the precision loss of the snprintf writing of the json string.\n\n[1] https://cs.chromium.org/chromium/src/third_party/webrtc/api/audio/echo_canceller3_config.cc?q\u003decho_canceller3_config.cc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d115\n[2] https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/stringencode.cc?sq\u003dpackage:chromium\u0026dr\u0026g\u003d0\u0026l\u003d410",
+      "parentUuid": "a0783c2b_8c749a64",
+      "revId": "9375d4facaa20d499b09e7bc3f0d0206cc8a1ae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
