@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3bcf348_32437b28",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-23T11:37:11Z",
+      "side": 1,
+      "message": "So this tests that size is a power of two? An explicit comment would be nice :)",
+      "revId": "7a480f070166594b9712679090fb6400ce1419ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
