@@ -22,6 +22,30 @@
       "revId": "4b4ecfac03a37fc85928748e5fd4eebb32698ba0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "076ae376_61a5dd1c",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-23T10:44:42Z",
+      "side": 1,
+      "message": "I couldn\u0027t find a good way of testing the actual value that is set without exposing the internals of PacketBuffer.\n\nThe test will hit a RTC_DCHECK and crash if the code I added to rtp_video_stream_receiver is removed. I can remove the test if you think it\u0027s not needed.",
+      "parentUuid": "68d6b925_c70a474f",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 3
+      },
+      "revId": "4b4ecfac03a37fc85928748e5fd4eebb32698ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
