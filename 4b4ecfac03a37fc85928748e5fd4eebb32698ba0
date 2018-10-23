@@ -70,6 +70,30 @@
       "revId": "4b4ecfac03a37fc85928748e5fd4eebb32698ba0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f166b4d7_28d87950",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-23T10:57:51Z",
+      "side": 1,
+      "message": "I\u0027ll remove it then.",
+      "parentUuid": "4ff3e22c_fb1b2782",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 3
+      },
+      "revId": "4b4ecfac03a37fc85928748e5fd4eebb32698ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
