@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "844f1162_cf824369",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-23T11:57:47Z",
+      "side": 1,
+      "message": "IIRC this line should be at most 72 characters long.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 81
+      },
+      "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71fa191a_b146da17",
         "filename": "test/BUILD.gn",
         "patchSetId": 4
@@ -112,6 +135,29 @@
         "startChar": 26,
         "endLine": 446,
         "endChar": 34
+      },
+      "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adbe890a_faeba5b4",
+        "filename": "test/testsupport/fileutils_override.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-23T11:57:47Z",
+      "side": 1,
+      "message": "In general, I think that returning true/false and using an output parameter is a better interface for a function.\n\nFor example, it will be easier to think at false as something wrong. While in this case there is a magic value (kCannotFindProjectRootDir) that will tell us if the value is good or not.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 77
       },
       "revId": "7d9ec433de9dcf26496b8a9880b7b85d8a03d48d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
