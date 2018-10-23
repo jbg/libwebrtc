@@ -503,8 +503,6 @@ class FakeVoiceEngine : public VoiceEngineInterface {
   FakeVoiceMediaChannel* GetChannel(size_t index);
   void UnregisterChannel(VoiceMediaChannel* channel);
 
-  // TODO(ossu): For proper testing, These should either individually settable
-  //             or the voice engine should reference mockable factories.
   const std::vector<AudioCodec>& send_codecs() const override;
   const std::vector<AudioCodec>& recv_codecs() const override;
   void SetCodecs(const std::vector<AudioCodec>& codecs);
@@ -548,8 +546,7 @@ class FakeVideoEngine : public VideoEngineInterface {
   friend class FakeMediaEngine;
 };
 
-class FakeMediaEngine
-    : public CompositeMediaEngine<FakeVoiceEngine, FakeVideoEngine> {
+class FakeMediaEngine : public CompositeMediaEngine {
  public:
   FakeMediaEngine();
 

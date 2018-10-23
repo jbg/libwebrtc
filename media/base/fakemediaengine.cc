@@ -549,10 +549,10 @@ bool FakeVideoEngine::SetCapture(bool capture) {
 }
 
 FakeMediaEngine::FakeMediaEngine()
-    : CompositeMediaEngine<FakeVoiceEngine, FakeVideoEngine>(std::tuple<>(),
-                                                             std::tuple<>()),
-      voice_(&voice()),
-      video_(&video()) {}
+    : CompositeMediaEngine(absl::make_unique<FakeVoiceEngine>(),
+                           absl::make_unique<FakeVideoEngine>()),
+      voice_(reinterpret_cast<FakeVoiceEngine*>(&voice())),
+      video_(reinterpret_cast<FakeVideoEngine*>(&video())) {}
 FakeMediaEngine::~FakeMediaEngine() {}
 void FakeMediaEngine::SetAudioCodecs(const std::vector<AudioCodec>& codecs) {
   voice_->SetCodecs(codecs);
