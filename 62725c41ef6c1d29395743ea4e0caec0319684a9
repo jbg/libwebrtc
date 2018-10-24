@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50e72549_2b3182a7",
+        "filename": "test/function_video_decoder_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-24T14:56:40Z",
+      "side": 1,
+      "message": "Please either update all users so this file can be deleted right away, or add a TODO for a followup cl. And similarly for the other file being moved.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "62725c41ef6c1d29395743ea4e0caec0319684a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
