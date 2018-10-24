@@ -22,6 +22,30 @@
       "revId": "47984f69bd37efbbfecf8dc483fcc83c9cd10267",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d209ca6a_f0f8e9e5",
+        "filename": "api/video_codecs/video_encoder_software_fallback_wrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-24T08:28:25Z",
+      "side": 1,
+      "message": "I removed most places using it from this cl. This class is a trial that was left. Updated to be more clear now.\nIt is also used indirectly in VideoStreamEncoder:\n  encoder_info_ \u003d info;\nThis would be a lot more cumbersome otherwise.",
+      "parentUuid": "4b67ae8c_24ed2dcf",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 60
+      },
+      "revId": "47984f69bd37efbbfecf8dc483fcc83c9cd10267",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
