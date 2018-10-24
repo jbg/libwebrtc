@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b84f6b22_1856808b",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-24T12:09:12Z",
+      "side": 1,
+      "message": "Yes, good catch. I fixed in the next PS.",
+      "parentUuid": "e079b1b9_6a94d90a",
+      "range": {
+        "startLine": 881,
+        "startChar": 7,
+        "endLine": 881,
+        "endChar": 23
+      },
+      "revId": "604e85d70d9e8693673f549ba7e54e3e7400fcda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8c945f1_b4983701",
         "filename": "api/DEPS",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "604e85d70d9e8693673f549ba7e54e3e7400fcda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcd855df_764c0de0",
+        "filename": "api/DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-24T12:09:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8c945f1_b4983701",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "604e85d70d9e8693673f549ba7e54e3e7400fcda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
