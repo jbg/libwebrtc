@@ -66,34 +66,6 @@ class QualityScaler::QpSmoother {
   rtc::ExpFilter smoother_;
 };
 
-class QualityScaler::CheckQpTask : public rtc::QueuedTask {
- public:
-  explicit CheckQpTask(QualityScaler* scaler) : scaler_(scaler) {
-    RTC_LOG(LS_INFO) << "Created CheckQpTask. Scheduling on queue...";
-    rtc::TaskQueue::Current()->PostDelayedTask(
-        std::unique_ptr<rtc::QueuedTask>(this), scaler_->GetSamplingPeriodMs());
-  }
-  void Stop() {
-    RTC_DCHECK_CALLED_SEQUENTIALLY(&task_checker_);
-    RTC_LOG(LS_INFO) << "Stopping QP Check task.";
-    stop_ = true;
-  }
-
- private:
-  bool Run() override {
-    RTC_DCHECK_CALLED_SEQUENTIALLY(&task_checker_);
-    if (stop_)
-      return true;  // TaskQueue will free this task.
-    scaler_->CheckQp();
-    rtc::TaskQueue::Current()->PostDelayedTask(
-        std::unique_ptr<rtc::QueuedTask>(this), scaler_->GetSamplingPeriodMs());
-    return false;  // Retain the task in order to reuse it.
-  }
-
-  QualityScaler* const scaler_;
-  bool stop_ = false;
-  rtc::SequencedTaskChecker task_checker_;
-};
 
 QualityScaler::QualityScaler(AdaptationObserverInterface* observer,
                              VideoEncoder::QpThresholds thresholds)
@@ -121,14 +93,18 @@ QualityScaler::QualityScaler(AdaptationObserverInterface* observer,
     qp_smoother_low_.reset(new QpSmoother(config_.alpha_low));
   }
   RTC_DCHECK(observer_ != nullptr);
-  check_qp_task_ = new CheckQpTask(this);
+  check_qp_task_ =
+      RepeatedTaskHandle::Start(TimeDelta::ms(GetSamplingPeriodMs()), [this]() {
+        CheckQp();
+        return TimeDelta::ms(GetSamplingPeriodMs());
+      });
   RTC_LOG(LS_INFO) << "QP thresholds: low: " << thresholds_.low
                    << ", high: " << thresholds_.high;
 }
 
 QualityScaler::~QualityScaler() {
   RTC_DCHECK_CALLED_SEQUENTIALLY(&task_checker_);
-  check_qp_task_->Stop();
+  RepeatedTaskHandle::Stop(std::move(check_qp_task_));
 }
 
 int64_t QualityScaler::GetSamplingPeriodMs() const {
