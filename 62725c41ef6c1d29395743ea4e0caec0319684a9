@@ -22,6 +22,30 @@
       "revId": "62725c41ef6c1d29395743ea4e0caec0319684a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d7b798f_41baac53",
+        "filename": "test/function_video_decoder_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-10-24T15:06:19Z",
+      "side": 1,
+      "message": "Added TODO since there are user(s) outside webrtc that manage to include this file even though it is private.",
+      "parentUuid": "50e72549_2b3182a7",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "62725c41ef6c1d29395743ea4e0caec0319684a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
