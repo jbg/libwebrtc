@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "226b0e4a_6cdca7b1",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-24T14:55:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66645e68_f0a14d7f",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853ed904_6746a244",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 12
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "37805cf3_752000f7",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-24T14:55:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853ed904_6746a244",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1211e157_c29bbd9e",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 12
@@ -47,6 +83,24 @@
       "writtenOn": "2018-10-24T13:58:01Z",
       "side": 1,
       "message": "friend class RepeatedTask? (we\u0027re in the webrtc namespace)",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f424823_ad59b502",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-24T14:55:54Z",
+      "side": 1,
+      "message": "RepeatedTaskBase is in the webrtc_repeated_task_impl namespace. I could remove that if you\u0027d prefer?",
+      "parentUuid": "1211e157_c29bbd9e",
       "revId": "d14c536f7f85738a329090f6487eb0323631360a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2c246b56_37907ab6",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-24T14:55:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b32751b_d0fc23be",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4111376c_5c1c7828",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 12
@@ -81,6 +153,24 @@
       "writtenOn": "2018-10-24T13:58:01Z",
       "side": 1,
       "message": "If I\u0027m understanding correctly, the only reason for this class, is to be able to stop a repeating task. If so, should the Stop() method be here?\n\nActually, the implementation of Stop() now passes through RepeatedTask\u0027s static methods, over to RepeatedTaskHandle and then back over to a non-static method in RepeatedTaskBase.\n\nRepeatedTask is furthermore not an interface but actually a namespace disguised as a class.\nThis seems like a lot of complexity for what we\u0027re trying to solve. Does this need to be this complex?",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0723aef6_526c8466",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-24T14:55:54Z",
+      "side": 1,
+      "message": "I\u0027d like to keep the RepeatedTaskBase and RepeatedTaskImpl structure, since that allows us to keep most of the functionality in the cc file. I agree that the RepeatedTaskHandle/RepeatedTask distinction was overly convoluted. Merged those two.",
+      "parentUuid": "4111376c_5c1c7828",
       "revId": "d14c536f7f85738a329090f6487eb0323631360a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
