@@ -508,11 +508,16 @@ if (is_android) {
 
   rtc_static_library("audio_jni") {
     sources = [
+      "src/jni/builtinaudiodecoderfactoryfactory.cc",
+      "src/jni/builtinaudiodecoderfactoryfactory.h",
+      "src/jni/builtinaudioencoderfactoryfactory.cc",
+      "src/jni/builtinaudioencoderfactoryfactory.h",
       "src/jni/pc/audio.cc",
     ]
 
     deps = [
       ":base_jni",
+      ":generated_java_audio_jni",
       "../../api/audio_codecs:builtin_audio_decoder_factory",
       "../../api/audio_codecs:builtin_audio_encoder_factory",
       "../../modules/audio_processing:audio_processing",
@@ -1204,6 +1209,8 @@ if (is_android) {
 
   generate_jni("generated_java_audio_jni") {
     sources = [
+      "api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
+      "api/org/webrtc/BuiltinAudioEncoderFactoryFactory.java",
       "api/org/webrtc/audio/JavaAudioDeviceModule.java",
     ]
     jni_package = ""
