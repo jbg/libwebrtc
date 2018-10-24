@@ -3963,6 +3963,16 @@ class PeerConnectionMediaConfigTest : public testing::Test {
   MockPeerConnectionObserver observer_;
 };
 
+// This sanity check validates the test infrastructure itself.
+TEST_F(PeerConnectionMediaConfigTest, TestCreateAndClose) {
+  PeerConnectionInterface::RTCConfiguration config;
+  rtc::scoped_refptr<PeerConnectionInterface> pc(
+      pcf_->CreatePeerConnection(config, nullptr, nullptr, &observer_));
+  EXPECT_TRUE(pc.get());
+  pc->Close();  // No abort -> ok.
+  SUCCEED();
+}
+
 // This test verifies the default behaviour with no constraints and a
 // default RTCConfiguration.
 TEST_F(PeerConnectionMediaConfigTest, TestDefaults) {
