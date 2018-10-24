@@ -262,6 +262,14 @@ class MediaChannel : public sigslot::has_slots<> {
     return media_transport_;
   }
 
+  // Corresponds to the SDP attribute extmap-allow-mixed, see RFC8285.
+  // Set to true if it's allowed to mix one- and two-byte RTP header extensions
+  // in the same stream.
+  void SetExtmapAllowMixed(bool extmap_allow_mixed) {
+    extmap_allow_mixed_ = extmap_allow_mixed;
+  }
+  bool ExtmapAllowMixed() { return extmap_allow_mixed_; }
+
  protected:
   virtual rtc::DiffServCodePoint PreferredDscp() const;
 
@@ -298,6 +306,7 @@ class MediaChannel : public sigslot::has_slots<> {
   rtc::CriticalSection network_interface_crit_;
   NetworkInterface* network_interface_ = nullptr;
   webrtc::MediaTransportInterface* media_transport_ = nullptr;
+  bool extmap_allow_mixed_ = false;
 };
 
 // The stats information is structured as follows:

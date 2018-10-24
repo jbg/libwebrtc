@@ -103,6 +103,9 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     // Require all outgoing frames to be encrypted with a FrameEncryptor.
     bool require_frame_encryption = false;
 
+    // Corresponds to extmap-allow-mixed in SDP negotiation.
+    bool extmap_allow_mixed = false;
+
    private:
     RTC_DISALLOW_COPY_AND_ASSIGN(Configuration);
   };
