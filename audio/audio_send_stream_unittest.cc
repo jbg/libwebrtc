@@ -327,10 +327,11 @@ TEST(AudioSendStreamTest, ConfigToString) {
   config.send_codec_spec->transport_cc_enabled = false;
   config.send_codec_spec->cng_payload_type = 42;
   config.encoder_factory = MockAudioEncoderFactory::CreateUnusedFactory();
+  config.rtp.extmap_allow_mixed = true;
   config.rtp.extensions.push_back(
       RtpExtension(RtpExtension::kAudioLevelUri, kAudioLevelId));
   EXPECT_EQ(
-      "{rtp: {ssrc: 1234, extensions: [{uri: "
+      "{rtp: {ssrc: 1234, extmap-allow-mixed: true, extensions: [{uri: "
       "urn:ietf:params:rtp-hdrext:ssrc-audio-level, id: 2}], nack: "
       "{rtp_history_ms: 0}, c_name: foo_name}, send_transport: null, "
       "min_bitrate_bps: 12000, max_bitrate_bps: 34000, "

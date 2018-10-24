@@ -61,11 +61,12 @@ std::unique_ptr<voe::ChannelSendProxy> CreateChannelAndProxy(
     RtcpRttStats* rtcp_rtt_stats,
     RtcEventLog* event_log,
     FrameEncryptorInterface* frame_encryptor,
-    const webrtc::CryptoOptions& crypto_options) {
+    const webrtc::CryptoOptions& crypto_options,
+    bool extmap_allow_mixed) {
   return absl::make_unique<voe::ChannelSendProxy>(
-      absl::make_unique<voe::ChannelSend>(worker_queue, module_process_thread,
-                                          rtcp_rtt_stats, event_log,
-                                          frame_encryptor, crypto_options));
+      absl::make_unique<voe::ChannelSend>(
+          worker_queue, module_process_thread, rtcp_rtt_stats, event_log,
+          frame_encryptor, crypto_options, extmap_allow_mixed));
 }
 }  // namespace
 
@@ -117,7 +118,8 @@ AudioSendStream::AudioSendStream(
                                             rtcp_rtt_stats,
                                             event_log,
                                             config.frame_encryptor,
-                                            config.crypto_options)) {}
+                                            config.crypto_options,
+                                            config.rtp.extmap_allow_mixed)) {}
 
 AudioSendStream::AudioSendStream(
     const webrtc::AudioSendStream::Config& config,
@@ -244,6 +246,10 @@ void AudioSendStream::ConfigureStream(
   // Enable the frame encryptor if a new frame encryptor has been provided.
   if (first_time || new_config.frame_encryptor != old_config.frame_encryptor) {
     channel_proxy->SetFrameEncryptor(new_config.frame_encryptor);
+  }
+
+  if (new_config.rtp.extmap_allow_mixed != old_config.rtp.extmap_allow_mixed) {
+    channel_proxy->SetExtmapAllowMixed(new_config.rtp.extmap_allow_mixed);
   }
 
   const ExtensionIds old_ids = FindExtensionIds(old_config.rtp.extensions);
