@@ -410,6 +410,9 @@ void AudioRtpSender::SetAudioSend() {
   }
 #endif
 
+  static_cast<LocalAudioSource*>(track_->GetSource())
+      ->Start(media_channel_, ssrc_);
+
   // |track_->enabled()| hops to the signaling thread, so call it before we hop
   // to the worker thread or else it will deadlock.
   bool track_enabled = track_->enabled();
@@ -429,6 +432,10 @@ void AudioRtpSender::ClearAudioSend() {
     RTC_LOG(LS_WARNING) << "ClearAudioSend: No audio channel exists.";
     return;
   }
+
+  static_cast<LocalAudioSource*>(track_->GetSource())
+      ->Stop(media_channel_, ssrc_);
+
   cricket::AudioOptions options;
   bool success = worker_thread_->Invoke<bool>(RTC_FROM_HERE, [&] {
     return media_channel_->SetAudioSend(ssrc_, false, &options, nullptr);

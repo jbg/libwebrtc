@@ -18,6 +18,7 @@
 
 #include "api/audio/audio_frame.h"
 #include "api/audio_codecs/audio_encoder.h"
+#include "api/call/audio_sink.h"
 #include "api/call/transport.h"
 #include "api/crypto/cryptooptions.h"
 #include "common_types.h"  // NOLINT(build/include)
@@ -125,6 +126,8 @@ class ChannelSend
               const webrtc::CryptoOptions& crypto_options);
 
   virtual ~ChannelSend();
+
+  void SetSink(AudioSinkInterface* sink);
 
   // Send using this encoder, with this payload type.
   bool SetEncoder(int payload_type, std::unique_ptr<AudioEncoder> encoder);
@@ -263,6 +266,7 @@ class ChannelSend
   std::unique_ptr<RtpRtcp> _rtpRtcpModule;
 
   std::unique_ptr<AudioCodingModule> audio_coding_;
+  AudioSinkInterface* audio_sink_ = nullptr;
   uint32_t _timeStamp RTC_GUARDED_BY(encoder_queue_);
 
   uint16_t send_sequence_number_;

@@ -785,6 +785,7 @@ if (is_ios || is_mac) {
         "..:no_global_constructors",
       ]
       sources = [
+        "objc/api/peerconnection/RTCAudioSink.h",
         "objc/api/peerconnection/RTCAudioSource+Private.h",
         "objc/api/peerconnection/RTCAudioSource.h",
         "objc/api/peerconnection/RTCAudioSource.mm",
@@ -947,6 +948,7 @@ if (is_ios || is_mac) {
         "objc/Framework/Classes/VideoToolbox/nalu_rewriter.h",
         "objc/Framework/Headers/WebRTC/RTCAudioSession.h",
         "objc/Framework/Headers/WebRTC/RTCAudioSessionConfiguration.h",
+        "objc/Framework/Headers/WebRTC/RTCAudioSink.h",
         "objc/Framework/Headers/WebRTC/RTCAudioSource.h",
         "objc/Framework/Headers/WebRTC/RTCAudioTrack.h",
         "objc/Framework/Headers/WebRTC/RTCCVPixelBuffer.h",
@@ -1244,6 +1246,7 @@ if (is_ios || is_mac) {
           "objc/helpers/UIDevice+RTCDevice.h",
           "objc/api/peerconnection/RTCAudioSource.h",
           "objc/api/peerconnection/RTCAudioTrack.h",
+          "objc/api/peerconnection/RTCAudioSink.h",
           "objc/api/peerconnection/RTCConfiguration.h",
           "objc/api/peerconnection/RTCDataChannel.h",
           "objc/api/peerconnection/RTCDataChannelConfiguration.h",
@@ -1358,6 +1361,7 @@ if (is_ios || is_mac) {
         output_name = "WebRTC"
 
         sources = [
+          "objc/api/peerconnection/RTCAudioSink.h",
           "objc/api/peerconnection/RTCAudioSource.h",
           "objc/api/peerconnection/RTCAudioTrack.h",
           "objc/api/peerconnection/RTCCertificate.h",

@@ -152,6 +152,11 @@ void ChannelSendProxy::SetInputMute(bool muted) {
   channel_->SetInputMute(muted);
 }
 
+void ChannelSendProxy::SetSink(AudioSinkInterface* sink) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+  channel_->SetSink(sink);
+}
+
 void ChannelSendProxy::ProcessAndEncodeAudio(
     std::unique_ptr<AudioFrame> audio_frame) {
   RTC_DCHECK_RUNS_SERIALIZED(&audio_thread_race_checker_);
