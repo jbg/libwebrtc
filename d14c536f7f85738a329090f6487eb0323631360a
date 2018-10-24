@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66645e68_f0a14d7f",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-24T13:58:01Z",
+      "side": 1,
+      "message": "since this is the implementation of the QueuedTask interface, make it private and final?",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "853ed904_6746a244",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-24T13:58:01Z",
+      "side": 1,
+      "message": "nit: keep dtor and ctor together",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1211e157_c29bbd9e",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-24T13:58:01Z",
+      "side": 1,
+      "message": "friend class RepeatedTask? (we\u0027re in the webrtc namespace)",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b32751b_d0fc23be",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-24T13:58:01Z",
+      "side": 1,
+      "message": "nit: space between members and methods",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4111376c_5c1c7828",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-24T13:58:01Z",
+      "side": 1,
+      "message": "If I\u0027m understanding correctly, the only reason for this class, is to be able to stop a repeating task. If so, should the Stop() method be here?\n\nActually, the implementation of Stop() now passes through RepeatedTask\u0027s static methods, over to RepeatedTaskHandle and then back over to a non-static method in RepeatedTaskBase.\n\nRepeatedTask is furthermore not an interface but actually a namespace disguised as a class.\nThis seems like a lot of complexity for what we\u0027re trying to solve. Does this need to be this complex?",
+      "revId": "d14c536f7f85738a329090f6487eb0323631360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
