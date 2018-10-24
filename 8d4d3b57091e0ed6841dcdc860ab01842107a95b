@@ -194,6 +194,24 @@
       "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "221049b1_cdcfe8dd",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-24T09:39:31Z",
+      "side": 1,
+      "message": "PTAL PS#4.",
+      "parentUuid": "9d37461c_7f03922f",
+      "revId": "8d4d3b57091e0ed6841dcdc860ab01842107a95b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
