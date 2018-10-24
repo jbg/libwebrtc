@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10cbf27f_cb02c123",
+        "filename": "stats/test/rtcteststats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-10-24T14:23:35Z",
+      "side": 1,
+      "message": "This one is the one that sounds wrong. I haven\u0027t checked it but it seems like some Chromium tests use this symbol.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 49
+      },
+      "revId": "4ec64269df07aaf8dc934f9f103b8e43b39138b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
