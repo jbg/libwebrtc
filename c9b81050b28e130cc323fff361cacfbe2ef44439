@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8222a8a7_9443b633",
+        "filename": "pc/peerconnectioninterface_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3959,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2018-10-24T14:28:02Z",
+      "side": 1,
+      "message": "NB: Calling pc-\u003eClose() here (after having copied the config) would trigger the same issue.",
+      "revId": "c9b81050b28e130cc323fff361cacfbe2ef44439",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
