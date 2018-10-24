@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "29a7094c_24a83812",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-24T14:41:13Z",
+      "side": 1,
+      "message": "No worries, I should have changed the name sooner.",
+      "parentUuid": "e6cfbe83_31606e7c",
+      "range": {
+        "startLine": 83,
+        "startChar": 11,
+        "endLine": 83,
+        "endChar": 57
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b37185b_c73041f9",
         "filename": "call/rtp_config.h",
         "patchSetId": 17
@@ -164,6 +188,30 @@
       "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "134d7adc_8bbcecd8",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-24T14:41:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daac2174_42f8a69e",
+      "range": {
+        "startLine": 265,
+        "startChar": 7,
+        "endLine": 265,
+        "endChar": 50
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -307,6 +355,30 @@
       "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3157eb1d_4772c5bb",
+        "filename": "pc/channel.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-24T14:41:13Z",
+      "side": 1,
+      "message": "You were right Seth. I had a flaw in my testing of the code, which made me believe that the code was working. There were some situations that did not work properly. I have reworked the code so that what\u0027s negotiated via SDP is respected. A lot of the code from the initial CL is now back with getters and setters.\n\nI have tried to imitate the existing design, which means that I don\u0027t check SdpType but forwards the setting for both Offer and Answer.",
+      "parentUuid": "6813969c_682ff431",
+      "range": {
+        "startLine": 802,
+        "startChar": 2,
+        "endLine": 803,
+        "endChar": 63
+      },
+      "revId": "48d4438650cbd03768a36bfd86966e74065d6f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
