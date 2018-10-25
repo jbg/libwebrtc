@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "9f774a9b_c117dd0e",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T09:19:08Z",
+      "side": 1,
+      "message": "It\u0027s just that this is the first and only mention of this unit in the webrtc tree. I have no idea what it is. So some brief comment would be helpful, e.g., valid range, meaning of the minimum and maximum value, spec reference, derivation from if it\u0027s an abbreviation of something expand that, ...\n\nAfter a quick look at wikipedia, it seems to be candela per square meter, and I guess it applies to the physical display where the video is shown? If that\u0027s right, \"(candela per m^2)\" would also be a brief and useful explanation.",
+      "parentUuid": "a59d1794_fdf619b2",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef081ae6_c4b4968f",
         "filename": "api/video/hdr_metadata.h",
         "patchSetId": 1
