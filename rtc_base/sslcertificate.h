@@ -90,7 +90,7 @@ class SSLCertificate {
 // SSLCertChain is a simple wrapper for a vector of SSLCertificates. It serves
 // primarily to ensure proper memory management (especially deletion) of the
 // SSLCertificate pointers.
-class SSLCertChain {
+class SSLCertChain final {
  public:
   explicit SSLCertChain(std::unique_ptr<SSLCertificate> single_cert);
   explicit SSLCertChain(std::vector<std::unique_ptr<SSLCertificate>> certs);
@@ -101,10 +101,10 @@ class SSLCertChain {
   ~SSLCertChain();
 
   // Vector access methods.
-  size_t GetSize() const { return certs_.size(); }
+  size_t GetSize() const;
 
   // Returns a temporary reference, only valid until the chain is destroyed.
-  const SSLCertificate& Get(size_t pos) const { return *(certs_[pos]); }
+  const SSLCertificate& Get(size_t pos) const;
 
   // Returns a new SSLCertChain object instance wrapping the same underlying
   // certificate chain.

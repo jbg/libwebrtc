@@ -87,6 +87,14 @@ SSLCertChain& SSLCertChain::operator=(SSLCertChain&&) = default;
 
 SSLCertChain::~SSLCertChain() = default;
 
+size_t SSLCertChain::GetSize() const {
+  return certs_.size();
+}
+
+const SSLCertificate& SSLCertChain::Get(size_t pos) const {
+  return *(certs_[pos]);
+}
+
 std::unique_ptr<SSLCertChain> SSLCertChain::Clone() const {
   std::vector<std::unique_ptr<SSLCertificate>> new_certs(certs_.size());
   std::transform(
