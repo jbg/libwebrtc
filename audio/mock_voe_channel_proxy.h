@@ -17,7 +17,7 @@
 #include <vector>
 
 #include "audio/channel_receive_proxy.h"
-#include "audio/channel_send_proxy.h"
+#include "audio/channel_send_interface.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "test/gmock.h"
 
@@ -47,7 +47,7 @@ class MockChannelReceiveProxy : public voe::ChannelReceiveProxy {
                                                   AudioFrame* audio_frame));
   MOCK_CONST_METHOD0(PreferredSampleRate, int());
   MOCK_METHOD1(AssociateSendChannel,
-               void(const voe::ChannelSendProxy& send_channel_proxy));
+               void(const voe::ChannelSendInterface* send_channel_proxy));
   MOCK_METHOD0(DisassociateSendChannel, void());
   MOCK_CONST_METHOD0(GetPlayoutTimestamp, uint32_t());
   MOCK_METHOD1(SetMinimumPlayoutDelay, void(int delay_ms));
@@ -59,7 +59,7 @@ class MockChannelReceiveProxy : public voe::ChannelReceiveProxy {
   MOCK_METHOD0(StopPlayout, void());
 };
 
-class MockChannelSendProxy : public voe::ChannelSendProxy {
+class MockChannelSend : public voe::ChannelSendInterface {
  public:
   // GMock doesn't like move-only types, like std::unique_ptr.
   virtual bool SetEncoder(int payload_type,
@@ -76,6 +76,7 @@ class MockChannelSendProxy : public voe::ChannelSendProxy {
   MOCK_METHOD1(SetRTCP_CNAME, void(const std::string& c_name));
   MOCK_METHOD2(SetNACKStatus, void(bool enable, int max_packets));
   MOCK_METHOD2(SetSendAudioLevelIndicationStatus, void(bool enable, int id));
+  MOCK_METHOD2(SetMid, void(const std::string& mid, int extension_id));
   MOCK_METHOD1(EnableSendTransportSequenceNumber, void(int id));
   MOCK_METHOD2(RegisterSenderCongestionControlObjects,
                void(RtpTransportControllerSendInterface* transport,
@@ -106,6 +107,7 @@ class MockChannelSendProxy : public voe::ChannelSendProxy {
   MOCK_METHOD0(StopSend, void());
   MOCK_METHOD1(SetFrameEncryptor,
                void(FrameEncryptorInterface* frame_encryptor));
+  MOCK_CONST_METHOD0(GetRTT, int64_t());
 };
 }  // namespace test
 }  // namespace webrtc

@@ -13,7 +13,7 @@
 #include <utility>
 
 #include "api/call/audio_sink.h"
-#include "audio/channel_send_proxy.h"
+#include "audio/channel_send_interface.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_minmax.h"
@@ -137,9 +137,9 @@ int ChannelReceiveProxy::PreferredSampleRate() const {
 }
 
 void ChannelReceiveProxy::AssociateSendChannel(
-    const ChannelSendProxy& send_channel_proxy) {
+    const ChannelSendInterface* send_channel) {
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
-  channel_->SetAssociatedSendChannel(send_channel_proxy.GetChannel());
+  channel_->SetAssociatedSendChannel(send_channel);
 }
 
 void ChannelReceiveProxy::DisassociateSendChannel() {

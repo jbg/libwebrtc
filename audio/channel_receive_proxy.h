@@ -32,7 +32,7 @@ class Transport;
 
 namespace voe {
 
-class ChannelSendProxy;
+class ChannelSendInterface;
 
 // This class provides the "view" of a voe::Channel that we need to implement
 // webrtc::AudioReceiveStream. It serves two purposes:
@@ -46,7 +46,7 @@ class ChannelReceiveProxy : public RtpPacketSinkInterface {
   explicit ChannelReceiveProxy(std::unique_ptr<ChannelReceive> channel);
   virtual ~ChannelReceiveProxy();
 
-  // Shared with ChannelSendProxy
+  // Shared with ChannelSend
   virtual void SetLocalSSRC(uint32_t ssrc);
   virtual void SetNACKStatus(bool enable, int max_packets);
   virtual CallReceiveStatistics GetRTCPStatistics() const;
@@ -74,7 +74,7 @@ class ChannelReceiveProxy : public RtpPacketSinkInterface {
       int sample_rate_hz,
       AudioFrame* audio_frame);
   virtual int PreferredSampleRate() const;
-  virtual void AssociateSendChannel(const ChannelSendProxy& send_channel_proxy);
+  virtual void AssociateSendChannel(const ChannelSendInterface* send_channel);
   virtual void DisassociateSendChannel();
 
   // Produces the transport-related timestamps; current_delay_ms is left unset.

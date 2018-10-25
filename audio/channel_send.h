@@ -20,11 +20,13 @@
 #include "api/audio_codecs/audio_encoder.h"
 #include "api/call/transport.h"
 #include "api/crypto/cryptooptions.h"
+#include "audio/channel_send_interface.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/audio_coding/include/audio_coding_module.h"
 #include "modules/audio_processing/rms_level.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/race_checker.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread_checker.h"
 
@@ -48,23 +50,6 @@ class RtpTransportControllerSendInterface;
 
 struct SenderInfo;
 
-struct CallSendStatistics {
-  int64_t rttMs;
-  size_t bytesSent;
-  int packetsSent;
-};
-
-// See section 6.4.2 in http://www.ietf.org/rfc/rfc3550.txt for details.
-struct ReportBlock {
-  uint32_t sender_SSRC;  // SSRC of sender
-  uint32_t source_SSRC;
-  uint8_t fraction_lost;
-  int32_t cumulative_num_packets_lost;
-  uint32_t extended_highest_sequence_number;
-  uint32_t interarrival_jitter;
-  uint32_t last_SR_timestamp;
-  uint32_t delay_since_last_SR;
-};
 
 namespace voe {
 
@@ -111,7 +96,8 @@ class ChannelSend
     : public Transport,
       public AudioPacketizationCallback,  // receive encoded packets from the
                                           // ACM
-      public OverheadObserver {
+      public OverheadObserver,
+      public ChannelSendInterface {
  public:
   // TODO(nisse): Make OnUplinkPacketLossRate public, and delete friend
   // declaration.
@@ -127,18 +113,19 @@ class ChannelSend
   virtual ~ChannelSend();
 
   // Send using this encoder, with this payload type.
-  bool SetEncoder(int payload_type, std::unique_ptr<AudioEncoder> encoder);
-  void ModifyEncoder(
-      rtc::FunctionView<void(std::unique_ptr<AudioEncoder>*)> modifier);
+  bool SetEncoder(int payload_type,
+                  std::unique_ptr<AudioEncoder> encoder) override;
+  void ModifyEncoder(rtc::FunctionView<void(std::unique_ptr<AudioEncoder>*)>
+                         modifier) override;
 
   // API methods
 
   // VoEBase
-  int32_t StartSend();
-  void StopSend();
+  void StartSend() override;
+  void StopSend() override;
 
   // Codecs
-  void SetBitRate(int bitrate_bps, int64_t probing_interval_ms);
+  void SetBitrate(int bitrate_bps, int64_t probing_interval_ms) override;
   bool EnableAudioNetworkAdaptor(const std::string& config_string);
   void DisableAudioNetworkAdaptor();
 
@@ -147,39 +134,43 @@ class ChannelSend
                                    int max_frame_length_ms);
 
   // Network
-  void RegisterTransport(Transport* transport);
+  void RegisterTransport(Transport* transport) override;
   // TODO(nisse, solenberg): Delete when VoENetwork is deleted.
-  int32_t ReceivedRTCPPacket(const uint8_t* data, size_t length);
+  bool ReceivedRTCPPacket(const uint8_t* data, size_t length) override;
 
   // Muting, Volume and Level.
-  void SetInputMute(bool enable);
+  void SetInputMute(bool enable) override;
 
   // Stats.
-  ANAStats GetANAStatistics() const;
+  ANAStats GetANAStatistics() const override;
 
   // Used by AudioSendStream.
-  RtpRtcp* GetRtpRtcp() const;
+  RtpRtcp* GetRtpRtcp() const override;
 
   // DTMF.
-  int SendTelephoneEventOutband(int event, int duration_ms);
-  int SetSendTelephoneEventPayloadType(int payload_type, int payload_frequency);
+  bool SendTelephoneEventOutband(int event, int duration_ms) override;
+  bool SetSendTelephoneEventPayloadType(int payload_type,
+                                        int payload_frequency) override;
 
   // RTP+RTCP
-  int SetLocalSSRC(unsigned int ssrc);
+  void SetLocalSSRC(uint32_t ssrc) override;
 
-  void SetMid(const std::string& mid, int extension_id);
-  int SetSendAudioLevelIndicationStatus(bool enable, unsigned char id);
-  void EnableSendTransportSequenceNumber(int id);
+  void SetMid(const std::string& mid, int extension_id) override;
+  void SetSendAudioLevelIndicationStatus(bool enable, int id) override;
+  void EnableSendTransportSequenceNumber(int id) override;
 
   void RegisterSenderCongestionControlObjects(
       RtpTransportControllerSendInterface* transport,
-      RtcpBandwidthObserver* bandwidth_observer);
-  void ResetSenderCongestionControlObjects();
-  void SetRTCPStatus(bool enable);
-  int SetRTCP_CNAME(const char cName[256]);
-  int GetRemoteRTCPReportBlocks(std::vector<ReportBlock>* report_blocks);
-  int GetRTPStatistics(CallSendStatistics& stats);  // NOLINT
-  void SetNACKStatus(bool enable, int maxNumberOfPackets);
+      RtcpBandwidthObserver* bandwidth_observer) override;
+  void ResetSenderCongestionControlObjects() override;
+  void SetRTCPStatus(bool enable) override;
+  void SetRTCP_CNAME(const std::string& c_name) override;
+  int FillRemoteRTCPReportBlocks(std::vector<ReportBlock>* report_blocks) const;
+  std::vector<ReportBlock> GetRemoteRTCPReportBlocks() const override;
+  int GetRTPStatistics(CallSendStatistics& stats) const;  // NOLINT
+  CallSendStatistics GetRTCPStatistics() const override;
+
+  void SetNACKStatus(bool enable, int maxNumberOfPackets) override;
 
   // From AudioPacketizationCallback in the ACM
   int32_t SendData(FrameType frameType,
@@ -209,9 +200,9 @@ class ChannelSend
   // OS-specific, audio capture thread as soon as possible to ensure that it
   // can go back to sleep and be prepared to deliver an new captured audio
   // packet.
-  void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame);
+  void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame) override;
 
-  void SetTransportOverhead(size_t transport_overhead_per_packet);
+  void SetTransportOverhead(int transport_overhead_per_packet) override;
 
   // From OverheadObserver in the RTP/RTCP module
   void OnOverheadChanged(size_t overhead_bytes_per_packet) override;
@@ -220,14 +211,15 @@ class ChannelSend
   // a compromise. We want the encoder to be agnostic of the PLR source, but
   // we also don't want it to receive conflicting information from TWCC and
   // from RTCP-XR.
-  void OnTwccBasedUplinkPacketLossRate(float packet_loss_rate);
+  void OnTwccBasedUplinkPacketLossRate(float packet_loss_rate) override;
 
-  void OnRecoverableUplinkPacketLossRate(float recoverable_packet_loss_rate);
+  void OnRecoverableUplinkPacketLossRate(
+      float recoverable_packet_loss_rate) override;
 
-  int64_t GetRTT() const;
+  int64_t GetRTT() const override;
 
   // E2EE Custom Audio Frame Encryption
-  void SetFrameEncryptor(FrameEncryptorInterface* frame_encryptor);
+  void SetFrameEncryptor(FrameEncryptorInterface* frame_encryptor) override;
 
  private:
   class ProcessAndEncodeAudioTask;
@@ -252,6 +244,19 @@ class ChannelSend
   // Called on the encoder task queue when a new input audio frame is ready
   // for encoding.
   void ProcessAndEncodeAudioOnTaskQueue(AudioFrame* audio_input);
+
+  // Thread checkers document and lock usage of some methods on voe::Channel to
+  // specific threads we know about. The goal is to eventually split up
+  // voe::Channel into parts with single-threaded semantics, and thereby reduce
+  // the need for locks.
+  rtc::ThreadChecker worker_thread_checker_;
+  rtc::ThreadChecker module_process_thread_checker_;
+  // Methods accessed from audio and video threads are checked for sequential-
+  // only access. We don't necessarily own and control these threads, so thread
+  // checkers cannot be used. E.g. Chromium may transfer "ownership" from one
+  // audio thread to another, but access is still sequential.
+  rtc::RaceChecker audio_thread_race_checker_;
+  rtc::RaceChecker video_capture_thread_race_checker_;
 
   rtc::CriticalSection _callbackCritSect;
   rtc::CriticalSection volume_settings_critsect_;

@@ -67,7 +67,7 @@ struct CallReceiveStatistics {
 
 namespace voe {
 
-class ChannelSend;
+class ChannelSendInterface;
 
 // Helper class to simplify locking scheme for members that are accessed from
 // multiple threads.
@@ -179,7 +179,7 @@ class ChannelReceive : public RtpData {
 
   // Associate to a send channel.
   // Used for obtaining RTT for a receive-only channel.
-  void SetAssociatedSendChannel(ChannelSend* channel);
+  void SetAssociatedSendChannel(const ChannelSendInterface* channel);
 
   std::vector<RtpSource> GetSources() const;
 
@@ -252,7 +252,7 @@ class ChannelReceive : public RtpData {
 
   // An associated send channel.
   rtc::CriticalSection assoc_send_channel_lock_;
-  ChannelSend* associated_send_channel_
+  const ChannelSendInterface* associated_send_channel_
       RTC_GUARDED_BY(assoc_send_channel_lock_);
 
   PacketRouter* packet_router_ = nullptr;

@@ -18,7 +18,7 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
-#include "audio/channel_send.h"
+#include "audio/channel_send_interface.h"
 #include "audio/utility/audio_frame_operations.h"
 #include "logging/rtc_event_log/events/rtc_event_audio_playout.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
@@ -581,7 +581,8 @@ int ChannelReceive::ResendPackets(const uint16_t* sequence_numbers,
   return _rtpRtcpModule->SendNACK(sequence_numbers, length);
 }
 
-void ChannelReceive::SetAssociatedSendChannel(ChannelSend* channel) {
+void ChannelReceive::SetAssociatedSendChannel(
+    const ChannelSendInterface* channel) {
   rtc::CritScope lock(&assoc_send_channel_lock_);
   associated_send_channel_ = channel;
 }
