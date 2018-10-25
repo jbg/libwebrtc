@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ec8bc715_881de294",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-25T15:45:49Z",
+      "side": 1,
+      "message": "I named it builtin_audio_codecs_jni.",
+      "parentUuid": "78aef58e_8fbfd45e",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 52
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4f01dfb_16357636",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-25T08:58:46Z",
       "side": 1,
       "message": "You will need to add these to a _java target for this to compile? Please create a new one sw_audio_codecs_java or something similar",
+      "range": {
+        "startLine": 1212,
+        "startChar": 0,
+        "endLine": 1213,
+        "endChar": 62
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62a1e53b_892cf77c",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-25T15:45:49Z",
+      "side": 1,
+      "message": "Not sure how my java build did compile, but it somehow worked.\nI\u0027ve added the java files to two targets, one for the Audio(Encoder|Decoder)Factory interfaces, and one for the BuiltinAudio(Encoder|Decoder)Factory classes. Does it make sense to have them split? Thought it could somehow be easier later to make a peerconnection that doesn\u0027t have audio.",
+      "parentUuid": "b4f01dfb_16357636",
       "range": {
         "startLine": 1212,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9a6f2236_13df720b",
+        "filename": "sdk/android/api/org/webrtc/AudioDecoderFactoryFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-25T15:45:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd49a2fe_12979137",
+      "range": {
+        "startLine": 20,
+        "startChar": 7,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c41221c9_22aa7f04",
         "filename": "sdk/android/api/org/webrtc/AudioEncoderFactoryFactory.java",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "b0d23061_357314f2",
+        "filename": "sdk/android/api/org/webrtc/AudioEncoderFactoryFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-25T15:45:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c41221c9_22aa7f04",
+      "range": {
+        "startLine": 20,
+        "startChar": 7,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f1caa75_0dbbf564",
         "filename": "sdk/android/api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2018-10-25T09:22:55Z",
       "side": 1,
       "message": "Can you also add simple tests for these Builtin codec classes",
+      "range": {
+        "startLine": 16,
+        "startChar": 13,
+        "endLine": 16,
+        "endChar": 46
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d447cccf_73fdc712",
+        "filename": "sdk/android/api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-25T15:45:49Z",
+      "side": 1,
+      "message": "Sure thing. What did you have in mind?\nCalling the createNativeAudioDecoderFactory() and making sure it returns non zero?\nThey are already used in PeerConnectionFactor.Builder as the default factory.",
+      "parentUuid": "7f1caa75_0dbbf564",
       "range": {
         "startLine": 16,
         "startChar": 13,
