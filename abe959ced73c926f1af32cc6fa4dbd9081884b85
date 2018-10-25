@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bae241c1_234fbaf5",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T10:49:32Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t have too much experience of multi-threaded programming, is there any other risk than getting a slightly outdated value?\n\nI\u0027m fairly sure it\u0027s undefined behavior, so might happen is platform dependent. In practice, for a small type like bool, a read access racing with a write would get either the old and the new value (most cpu architecture have atomic writes of small types). But for larger types the read could produce a value which is a mix of the old and the new.\n\nAnd the tsan (thread sanitizer) bot tries to detect and complain about data races.",
+      "parentUuid": "d2c4ed27_590b02f4",
+      "range": {
+        "startLine": 266,
+        "startChar": 51,
+        "endLine": 266,
+        "endChar": 54
+      },
+      "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ac39d50_49872794",
         "filename": "media/engine/webrtcvoiceengine.cc",
         "patchSetId": 16

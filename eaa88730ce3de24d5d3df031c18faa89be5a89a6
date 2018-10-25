@@ -16,6 +16,29 @@
       "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1e7f340_17de3c71",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T10:49:32Z",
+      "side": 1,
+      "message": "So it\u0027s possible to renegotiate extmap_allow_mixed midcall?",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 3
+      },
+      "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
