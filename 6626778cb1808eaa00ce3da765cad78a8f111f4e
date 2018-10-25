@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0de4c29_85e2273f",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T09:50:14Z",
+      "side": 1,
+      "message": "nit: stdint.h is much more common than cstdint (334 vs 66 matches in webrtc).",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "6626778cb1808eaa00ce3da765cad78a8f111f4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efae86a4_1179a8b6",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T09:50:14Z",
+      "side": 1,
+      "message": "Nit: Spaces instead of dashes",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 21
+      },
+      "revId": "6626778cb1808eaa00ce3da765cad78a8f111f4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0966932_a5292b25",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T09:50:14Z",
+      "side": 1,
+      "message": "Thanks. Consider writing out \"candela\" instead of \"cd\".",
+      "range": {
+        "startLine": 71,
+        "startChar": 32,
+        "endLine": 71,
+        "endChar": 34
+      },
+      "revId": "6626778cb1808eaa00ce3da765cad78a8f111f4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
