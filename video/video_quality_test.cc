@@ -2212,7 +2212,7 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
     }
   });
 
-  test::PressEnterToContinue();
+  test::PressEnterToContinue(task_queue_);
 
   task_queue_.SendTask([&]() {
     if (params_.audio.enabled) {
