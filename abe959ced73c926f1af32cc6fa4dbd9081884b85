@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "2bc5ff1b_28909423",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T12:14:57Z",
+      "side": 1,
+      "message": "I added a comment now that this function must only be called from worker_thread. This is also the case currently. I couldn\u0027t find a good way of checking the thread here.",
+      "parentUuid": "bae241c1_234fbaf5",
+      "range": {
+        "startLine": 266,
+        "startChar": 51,
+        "endLine": 266,
+        "endChar": 54
+      },
+      "revId": "abe959ced73c926f1af32cc6fa4dbd9081884b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ac39d50_49872794",
         "filename": "media/engine/webrtcvoiceengine.cc",
         "patchSetId": 16

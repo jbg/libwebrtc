@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a4653c6_acdbea4b",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T12:14:57Z",
+      "side": 1,
+      "message": "Okay, I\u0027ve added it for consistency.",
+      "parentUuid": "c88cdd05_37501762",
+      "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1e7f340_17de3c71",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 20
@@ -39,6 +57,30 @@
       "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a146a136_0bef3703",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T12:14:57Z",
+      "side": 1,
+      "message": "No, I don\u0027t think that will ever happen.\n\nBut, the audio stream is sometimes created before the negotiation is complete. There are two scenarios\n\n1. We initialize the SDP negotiation, in this case we call:\nSetLocalDescription (with offer) -\u003e RTPSender(audio) created.\nSetRemoteDescription (with answer) -\u003e RTPSender(video) created.\n\n2. Remote client initialize SDP negotiation, in this case we call:\nSetRemoteDescription (with offer) \nSetLocalDescription (with answer) -\u003e RTPSender(audio) and RTPSender(video) created.\n\nSo in the first scenario it\u0027s set to a default value that must be changed once the negotiation is complete and we have the answer.",
+      "parentUuid": "a1e7f340_17de3c71",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 3
+      },
+      "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
