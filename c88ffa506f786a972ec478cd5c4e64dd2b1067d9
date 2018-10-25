@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a65cf0f1_1fb6e430",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T08:13:15Z",
+      "side": 1,
+      "message": "This struct needs an explanation. \n\nIf it\u0027s used only in MasteringMetadata, consider moving it to be MasteringMetadata::Chromaticity. If in the top-level webrtc namesapce, should probably be HDRChromaticity.",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 19
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a4bf11d_a814322b",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T08:13:15Z",
+      "side": 1,
+      "message": "Should be HDRMasteringMetadata. If the struct is needed at all yet (members could be put directly in HDRMetadata).",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f2c5d0e_59b33716",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T08:13:15Z",
+      "side": 1,
+      "message": "Explain this unit?",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
