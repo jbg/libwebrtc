@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c88cdd05_37501762",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-10-25T10:40:04Z",
+      "side": 1,
+      "message": "I think you want \u0027first_time ||\u0027 here as well, if only for consistency with the other blocks.",
+      "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
