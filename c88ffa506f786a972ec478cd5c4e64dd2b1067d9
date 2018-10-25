@@ -48,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "f50758d7_6ba8ac99",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T08:14:12Z",
+      "side": 1,
+      "message": "Ah, one more thing: Links to relevant specs would be helpful.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 64
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f2c5d0e_59b33716",
         "filename": "api/video/hdr_metadata.h",
         "patchSetId": 1
