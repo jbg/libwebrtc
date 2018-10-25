@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24c0a7e0_f6b17b89",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T09:32:53Z",
+      "side": 1,
+      "message": "I have moved it into HdrMasteringMetadata and added a link to the SMTPE ST 2086 specification. I also added some comments from the specification.",
+      "parentUuid": "a65cf0f1_1fb6e430",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 19
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4bf11d_a814322b",
         "filename": "api/video/hdr_metadata.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04e8195c_fa6e7c5d",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T09:32:53Z",
+      "side": 1,
+      "message": "Done!\n\nI don\u0027t understand exactly how this is used, but I think that this is per frame or (short time intervall), whereas the values directly in HdrMetadata are long term settings, per stream.",
+      "parentUuid": "3a4bf11d_a814322b",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -92,6 +140,30 @@
       "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cda96e49_9bbf81ea",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T09:32:53Z",
+      "side": 1,
+      "message": "I\u0027ve added a link to the MasteringMetadata spec above. Will add more information gradually as all pieces fall into place.",
+      "parentUuid": "f50758d7_6ba8ac99",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 64
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -166,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "e3c79820_665b0092",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T09:32:53Z",
+      "side": 1,
+      "message": "I added the relation 1 nit \u003d 1 cd/m2.",
+      "parentUuid": "1f2c5d0e_59b33716",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef081ae6_c4b4968f",
         "filename": "api/video/hdr_metadata.h",
         "patchSetId": 1
@@ -186,6 +282,30 @@
       "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80d0dcea_60256166",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T09:32:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef081ae6_c4b4968f",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 10
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
