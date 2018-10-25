@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "d1da4a09_0869e7b3",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-25T08:58:33Z",
+      "side": 1,
+      "message": "+1 this would be nice, if the specs are public, and they should be right?",
+      "parentUuid": "f50758d7_6ba8ac99",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 64
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f2c5d0e_59b33716",
         "filename": "api/video/hdr_metadata.h",
         "patchSetId": 1
@@ -87,6 +111,53 @@
         "startChar": 17,
         "endLine": 51,
         "endChar": 21
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a59d1794_fdf619b2",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-25T08:58:33Z",
+      "side": 1,
+      "message": "I don\u0027t think we need a link to explain this unit, it should follow from context.\nA link to a wikipedia article about unit of measurement would just seem off imo.",
+      "parentUuid": "1f2c5d0e_59b33716",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef081ae6_c4b4968f",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-10-25T08:58:33Z",
+      "side": 1,
+      "message": "nit (not the unit): use the precise types instead, e.g. uint32_t.",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 10
       },
       "revId": "c88ffa506f786a972ec478cd5c4e64dd2b1067d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
