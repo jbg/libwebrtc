@@ -16,6 +16,24 @@
       "revId": "7a480f070166594b9712679090fb6400ce1419ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc9fa675_fcd7d5e9",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-25T09:37:44Z",
+      "side": 1,
+      "message": "Fixed as you\u0027ve already seen. I got the clever way of testing from Philip.",
+      "parentUuid": "a3bcf348_32437b28",
+      "revId": "7a480f070166594b9712679090fb6400ce1419ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
