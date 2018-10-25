@@ -16,6 +16,24 @@
       "revId": "9ecb9318f0c572718d93eef0854e49ff0233b129",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afd27f77_d9f5ace7",
+        "filename": "pc/test/mockpeerconnectionobservers.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-25T08:00:28Z",
+      "side": 1,
+      "message": "Agreed. (Before this change, there is a difference: null pointer crash vs DCHECK failure).",
+      "parentUuid": "e779d083_29d6f3f5",
+      "revId": "9ecb9318f0c572718d93eef0854e49ff0233b129",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
