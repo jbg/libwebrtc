@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5afd1377_a48969e7",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-25T16:13:09Z",
+      "side": 1,
+      "message": "You\u0027re treating send_params_.extmap_allow_mixed as your source of truth instead of ExtmapAllowMixed(), like you do in the voice channel. This is a potential problem, because later when you update the changed params by calling SetExtmapAllowMixed(), it doesn\u0027t update send_params_.ext_map_allow_mixed().",
+      "range": {
+        "startLine": 626,
+        "startChar": 35,
+        "endLine": 626,
+        "endChar": 66
+      },
+      "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b11d96c8_387b29c0",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-25T16:13:09Z",
+      "side": 1,
+      "message": "This seems weird to me that this is passed here, but I\u0027m sure there are reasons. Aren\u0027t these params taken from setting the remote description only? Now we are using them here when setting the local description (AddSendStream comes from calling SLD).\n\nSo there\u0027s a case when these are default values (setting the local description first), and a case where these values have been updated based upon the remote description (setting local description second after calling SetSendParameters w/ SRD). This isn\u0027t done in the audio send stream.\n\nThe other thing is now you\u0027re storing the extmap_allow_mixed in two places in the video channel.",
+      "range": {
+        "startLine": 1077,
+        "startChar": 41,
+        "endLine": 1077,
+        "endChar": 53
+      },
+      "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

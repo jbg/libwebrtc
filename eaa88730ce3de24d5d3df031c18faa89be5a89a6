@@ -81,6 +81,30 @@
       "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "770da9e7_2f00290c",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-25T16:13:09Z",
+      "side": 1,
+      "message": "This stuff can get pretty confusing when you think of SLD/SRD, offer/answer, when video and voice channels are created, and then also add in Unified Plan vs. Plan B.\n\nI looked at the code and (it looks like*) Plan B creates the video/voice channels only with offers (there is only one video and one voice channel with Plan B). While with Unified Plan it can happen with answers and offers. Steve is more of an expert on this stuff considering he rewrote PeerConnection to support Unified Plan.",
+      "parentUuid": "a146a136_0bef3703",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 3
+      },
+      "revId": "eaa88730ce3de24d5d3df031c18faa89be5a89a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
