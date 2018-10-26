@@ -14,6 +14,23 @@
 #include <list>
 #include <memory>
 #include <vector>
+#include "modules/audio_processing/agc/agc_manager_direct.h"
+#include "modules/audio_processing/agc2/gain_applier.h"
+#include "modules/audio_processing/audio_buffer.h"
+#include "modules/audio_processing/common.h"
+#include "modules/audio_processing/echo_cancellation_impl.h"
+#include "modules/audio_processing/echo_control_mobile_impl.h"
+#include "modules/audio_processing/gain_control_for_experimental_agc.h"
+#include "modules/audio_processing/gain_control_impl.h"
+#include "modules/audio_processing/gain_controller2.h"
+#include "modules/audio_processing/include/audio_frame_view.h"
+#include "modules/audio_processing/level_estimator_impl.h"
+#include "modules/audio_processing/logging/apm_data_dumper.h"
+#include "modules/audio_processing/low_cut_filter.h"
+#include "modules/audio_processing/noise_suppression_impl.h"
+#include "modules/audio_processing/residual_echo_detector.h"
+#include "modules/audio_processing/transient/transient_suppressor.h"
+#include "modules/audio_processing/voice_detection_impl.h"
 
 #include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/include/aec_dump.h"
@@ -274,6 +291,12 @@ class AudioProcessingImpl : public AudioProcessing {
                                  const StreamConfig& input_config,
                                  const StreamConfig& output_config)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
+
+  // Allows APM to guard the EchoControl with crit_capture_ but still call
+  // EchoControl::AnalyzeRender concurrently.
+  void AnalyzeRenderStreamWithEchoControllerUnderCritRenderLock(
+      AudioBuffer* render_buffer) RTC_NO_THREAD_SAFETY_ANALYSIS;
+
   int ProcessRenderStreamLocked() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
 
   // Collects configuration settings from public and private
@@ -324,7 +347,30 @@ class AudioProcessingImpl : public AudioProcessing {
 
   // Structs containing the pointers to the submodules.
   std::unique_ptr<ApmPublicSubmodules> public_submodules_;
-  std::unique_ptr<ApmPrivateSubmodules> private_submodules_;
+
+  // Submodules accessed from capture or during initialization.
+  struct ApmPrivateCaptureSubmodules {
+    ApmPrivateCaptureSubmodules();
+    ~ApmPrivateCaptureSubmodules();
+    std::unique_ptr<AgcManagerDirect> agc_manager;
+    std::unique_ptr<GainController2> gain_controller2;
+    std::unique_ptr<LowCutFilter> low_cut_filter;
+    rtc::scoped_refptr<EchoDetector> echo_detector;
+    std::unique_ptr<CustomProcessing> capture_post_processor;
+    std::unique_ptr<CustomProcessing> render_pre_processor;
+    std::unique_ptr<GainApplier> pre_amplifier;
+    std::unique_ptr<CustomAudioAnalyzer> capture_analyzer;
+    // EchoControl is concurrently accessed from render. Resets must be guarded
+    // by crit_render_.
+    std::unique_ptr<EchoControl> echo_controller;
+  } private_capture_submodules_ RTC_GUARDED_BY(crit_capture_);
+
+  // Submodules accessed from render or during initialization.
+  struct ApmPrivateRenderSubmodules {
+    ApmPrivateRenderSubmodules();
+    ~ApmPrivateRenderSubmodules();
+    std::unique_ptr<CustomProcessing> render_pre_processor;
+  } private_render_submodules_ RTC_GUARDED_BY(crit_render_);
 
   // State that is written to while holding both the render and capture locks
   // but can be read without any lock being held.
