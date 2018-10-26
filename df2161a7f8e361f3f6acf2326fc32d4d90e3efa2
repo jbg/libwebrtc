@@ -93,6 +93,30 @@
       "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0373ca84_d38e61cd",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-26T17:09:39Z",
+      "side": 1,
+      "message": "Yeah it would be nice to fix this in a follow up CL, but I\u0027ll leave that for you to decide. In a beautiful future I\u0027d like to nuke the unnecessary layers here, but it isn\u0027t a simple task, could introduce potential bugs, and all it gives us is reduced technical debt. Maybe some day :).",
+      "parentUuid": "efa0b233_c27b36e0",
+      "range": {
+        "startLine": 1077,
+        "startChar": 41,
+        "endLine": 1077,
+        "endChar": 53
+      },
+      "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

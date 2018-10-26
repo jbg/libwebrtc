@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "789d64bd_eb944eb5",
+        "filename": "media/engine/webrtcvideoengine_unittest.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-26T17:09:39Z",
+      "side": 1,
+      "message": "I don\u0027t know if this is an appropriate test here. You\u0027re already testing the behavior of an answer offer exchange in the channel_unittests.cc. Also setting the kExtmapAllowMixedDefault as false (simulating an offer), then later overriding this to true should never happen given that the answer only supports mixed header extensions if the offer does.\n\nI think at the voice/video engine test level you just need simple unit level tests. How about more simple cases for each? Making sure that the setters propagate to the send streams. For example:\nOne test:\nchannel_-\u003eSetExtmapAllowMixed(true);\nchannel_-\u003eAddSendStream()\n--\u003e verify config for send stream is set to true\n\nAnother case:\nchannel_-\u003eSetSendParameters(/*true*/ send_parameters_);\nchannel_-\u003eAddSendStream()\n--\u003e verify config for send stream is set to true\n\nWhat do you think? If you think something else is more appropriate that\u0027s fine too.",
+      "range": {
+        "startLine": 2093,
+        "startChar": 7,
+        "endLine": 2093,
+        "endChar": 27
+      },
+      "revId": "08ac28b7579f94372dd639c76c1d7a5523f97753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "886dd58a_635a9897",
+        "filename": "pc/channel_unittest.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-26T17:09:39Z",
+      "side": 1,
+      "message": "Awesome tests, glad you found a place to test this behavior :).",
+      "range": {
+        "startLine": 579,
+        "startChar": 7,
+        "endLine": 579,
+        "endChar": 38
+      },
+      "revId": "08ac28b7579f94372dd639c76c1d7a5523f97753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e21dd060_5d094e05",
+        "filename": "pc/channel_unittest.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-26T17:09:39Z",
+      "side": 1,
+      "message": "I think comments for these functions would be nice. For example here it\u0027s unclear why you have reverse order. Specifying that this is to simulate an answer/offer exchange from the callee\u0027s point of view would be helpful.",
+      "range": {
+        "startLine": 592,
+        "startChar": 7,
+        "endLine": 592,
+        "endChar": 50
+      },
+      "revId": "08ac28b7579f94372dd639c76c1d7a5523f97753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb81dedb_61627572",
+        "filename": "pc/channel_unittest.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-26T17:09:39Z",
+      "side": 1,
+      "message": "You could add a small comment in these tests as well. For example this is simulating where an answer rejects supporting mixed header extensions.",
+      "range": {
+        "startLine": 1648,
+        "startChar": 3,
+        "endLine": 1648,
+        "endChar": 53
+      },
+      "revId": "08ac28b7579f94372dd639c76c1d7a5523f97753",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
