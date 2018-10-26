@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae1d46a6_bda0777d",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "Please add new java targets here.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 8
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df632a52_04a2f90b",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "These interfaces are cheap, you can just place them directly to audio_api_java.",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 0
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2433d593_fc565830",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "We should probably add this as a dependency to audio_jni to prevent breaking clients that are not using libjingle_peerconnection_jni. It is messy, I know...",
+      "range": {
+        "startLine": 545,
+        "startChar": 22,
+        "endLine": 545,
+        "endChar": 46
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3c1bec_39be0e93",
+        "filename": "sdk/android/api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "nit: Empty constructor can be skipped",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a02f45c_0f23f40b",
+        "filename": "sdk/android/api/org/webrtc/BuiltinAudioEncoderFactoryFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "nit: Empty constructor can be skipped",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

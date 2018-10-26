@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "c7fb8791_d325394d",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "Otherwise good but we don\u0027t need a new target for the interfaces, they are simple enough to be included in audio_api_java :)",
+      "parentUuid": "62a1e53b_892cf77c",
+      "range": {
+        "startLine": 1212,
+        "startChar": 0,
+        "endLine": 1213,
+        "endChar": 62
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd49a2fe_12979137",
         "filename": "sdk/android/api/org/webrtc/AudioDecoderFactoryFactory.java",
         "patchSetId": 1
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "Sure thing. What did you have in mind?\nCalling the createNativeAudioDecoderFactory() and making sure it returns non zero?\nThey are already used in PeerConnectionFactor.Builder as the default factory.",
       "parentUuid": "7f1caa75_0dbbf564",
+      "range": {
+        "startLine": 16,
+        "startChar": 13,
+        "endLine": 16,
+        "endChar": 46
+      },
+      "revId": "39d346bf7a9f2f9ab39682517d0e5bb36d9a83da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80298594_2eaac28a",
+        "filename": "sdk/android/api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-26T14:02:15Z",
+      "side": 1,
+      "message": "Yep, that was the idea. You can use JniCommon#nativeReleaseRef to release the pointer.",
+      "parentUuid": "d447cccf_73fdc712",
       "range": {
         "startLine": 16,
         "startChar": 13,
