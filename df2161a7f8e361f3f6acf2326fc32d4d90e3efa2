@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f5fc1986_c27e499d",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-26T15:52:05Z",
+      "side": 1,
+      "message": "You\u0027re right I should keep it the same way here as in the voice channel.",
+      "parentUuid": "5afd1377_a48969e7",
+      "range": {
+        "startLine": 626,
+        "startChar": 35,
+        "endLine": 626,
+        "endChar": 66
+      },
+      "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b11d96c8_387b29c0",
         "filename": "media/engine/webrtcvideoengine.cc",
         "patchSetId": 21
@@ -45,6 +69,30 @@
       "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efa0b233_c27b36e0",
+        "filename": "media/engine/webrtcvideoengine.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-10-26T15:52:05Z",
+      "side": 1,
+      "message": "Fixed, the source of truth for extmap_allow_mixed is ExtmapAllowMixed().\n\nI agree, send_params_ should probably not be here. There are actually three copies of rtp_extensions going into this constructor, in config, send_rtp_extensions_, and in send_params_. That should probably be fixed in a separate CL.\n\nI changed now so that extmap_allow_mixed is conveyed to WebRtcVideoSendStream through the config variable. I think that should be okay given the existing code.",
+      "parentUuid": "b11d96c8_387b29c0",
+      "range": {
+        "startLine": 1077,
+        "startChar": 41,
+        "endLine": 1077,
+        "endChar": 53
+      },
+      "revId": "df2161a7f8e361f3f6acf2326fc32d4d90e3efa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
