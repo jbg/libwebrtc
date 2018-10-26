@@ -174,18 +174,6 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
 
   // Ownership of the task is passed to PostTask.
   void PostTask(std::unique_ptr<QueuedTask> task);
-  void PostTaskAndReply(std::unique_ptr<QueuedTask> task,
-                        std::unique_ptr<QueuedTask> reply,
-                        TaskQueue* reply_queue);
-  void PostTaskAndReply(std::unique_ptr<QueuedTask> task,
-                        std::unique_ptr<QueuedTask> reply);
-
-  // Schedules a task to execute a specified number of milliseconds from when
-  // the call is made. The precision should be considered as "best effort"
-  // and in some cases, such as on Windows when all high precision timers have
-  // been used up, can be off by as much as 15 millseconds (although 8 would be
-  // more likely). This can be mitigated by limiting the use of delayed tasks.
-  void PostDelayedTask(std::unique_ptr<QueuedTask> task, uint32_t milliseconds);
 
   // std::enable_if is used here to make sure that calls to PostTask() with
   // std::unique_ptr<SomeClassDerivedFromQueuedTask> would not end up being
@@ -207,31 +195,21 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
     PostDelayedTask(NewClosure(std::forward<Closure>(closure)), milliseconds);
   }
 
-  template <class Closure1, class Closure2>
-  void PostTaskAndReply(Closure1&& task,
-                        Closure2&& reply,
-                        TaskQueue* reply_queue) {
-    PostTaskAndReply(NewClosure(std::forward<Closure1>(task)),
-                     NewClosure(std::forward<Closure2>(reply)), reply_queue);
-  }
-
-  template <class Closure>
-  void PostTaskAndReply(std::unique_ptr<QueuedTask> task, Closure&& reply) {
-    PostTaskAndReply(std::move(task), NewClosure(std::forward<Closure>(reply)));
-  }
-
-  template <class Closure>
-  void PostTaskAndReply(Closure&& task, std::unique_ptr<QueuedTask> reply) {
-    PostTaskAndReply(NewClosure(std::forward<Closure>(task)), std::move(reply));
-  }
-
-  template <class Closure1, class Closure2>
-  void PostTaskAndReply(Closure1&& task, Closure2&& reply) {
-    PostTaskAndReply(NewClosure(std::forward(task)),
-                     NewClosure(std::forward(reply)));
-  }
+  // Schedules a task to execute a specified number of milliseconds from when
+  // the call is made. The precision should be considered as "best effort"
+  // and in some cases, such as on Windows when all high precision timers have
+  // been used up, can be off by as much as 15 millseconds (although 8 would be
+  // more likely). This can be mitigated by limiting the use of delayed tasks.
+  void PostDelayedTask(std::unique_ptr<QueuedTask> task, uint32_t milliseconds);
 
  private:
+  void PostTaskAndReply(std::unique_ptr<QueuedTask> task,
+                        std::unique_ptr<QueuedTask> reply,
+                        TaskQueue* reply_queue);
+
+  void PostTaskAndReply(std::unique_ptr<QueuedTask> task,
+                        std::unique_ptr<QueuedTask> reply);
+
   class Impl;
   const scoped_refptr<Impl> impl_;
 
