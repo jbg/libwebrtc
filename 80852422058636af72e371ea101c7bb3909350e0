@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8466e9bd_c0841636",
+        "filename": "api/test/fake_frame_decryptor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-26T10:41:27Z",
+      "side": 1,
+      "message": "Name these error codes?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "80852422058636af72e371ea101c7bb3909350e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec0ab3a6_ba14bd1e",
+        "filename": "api/test/fake_frame_encryptor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-10-26T10:41:27Z",
+      "side": 1,
+      "message": "Seems like this error code should be named?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "80852422058636af72e371ea101c7bb3909350e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
