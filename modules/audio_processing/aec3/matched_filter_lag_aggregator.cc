@@ -81,9 +81,13 @@ absl::optional<DelayEstimate> MatchedFilterLagAggregator::Aggregate(
     if (histogram_[candidate] > thresholds_.converged ||
         (histogram_[candidate] > thresholds_.initial &&
          !significant_candidate_found_)) {
-      return DelayEstimate(DelayEstimate::Quality::kRefined, candidate);
+      DelayEstimate::Quality quality = significant_candidate_found_
+                                           ? DelayEstimate::Quality::kRefined
+                                           : DelayEstimate::Quality::kCoarse;
+      return DelayEstimate(quality, candidate);
     }
   }
+
   return absl::nullopt;
 }
 
