@@ -2090,6 +2090,38 @@ class WebRtcVideoChannelTest : public WebRtcVideoEngineTest {
                     &BitrateConstraints::max_bitrate_bps, max_bitrate_bps)));
   }
 
+  void TestExtmapAllowMixed(bool caller, bool extmap_allow_mixed) {
+    const bool kExtmapAllowMixedDefault = false;
+    if (caller) {
+      // If this is a caller, local description will be applied and add the
+      // send stream.
+      channel_->SetExtmapAllowMixed(kExtmapAllowMixedDefault);
+      EXPECT_TRUE(
+          channel_->AddSendStream(cricket::StreamParams::CreateLegacy(kSsrc)));
+    } else {
+      // If this is a callee, remote description will be applied where
+      // SetSendParameters is called.
+      send_parameters_.extmap_allow_mixed = kExtmapAllowMixedDefault;
+      channel_->SetSendParameters(send_parameters_);
+    }
+
+    if (caller) {
+      // If this is caller, remote description will be applied where
+      // SetSendParameters is called.
+      send_parameters_.extmap_allow_mixed = extmap_allow_mixed;
+      channel_->SetSendParameters(send_parameters_);
+    } else {
+      // If this is callee, there's no active send channel yet.
+      channel_->SetExtmapAllowMixed(extmap_allow_mixed);
+      EXPECT_TRUE(
+          channel_->AddSendStream(cricket::StreamParams::CreateLegacy(kSsrc)));
+    }
+
+    const webrtc::VideoSendStream::Config& config =
+        fake_call_->GetVideoSendStreams()[0]->GetConfig();
+    EXPECT_EQ(extmap_allow_mixed, config.rtp.extmap_allow_mixed);
+  }
+
   void TestSetSendRtpHeaderExtensions(const std::string& ext_uri) {
     // Enable extension.
     const int id = 1;
@@ -2344,6 +2376,20 @@ TEST_F(WebRtcVideoChannelTest, RecvStreamNoRtx) {
       cricket::StreamParams::CreateLegacy(kSsrcs1[0]);
   FakeVideoReceiveStream* recv_stream = AddRecvStream(params);
   ASSERT_EQ(0U, recv_stream->GetConfig().rtp.rtx_ssrc);
+}
+
+// Test propagation of extmap allow mixed setting.
+TEST_F(WebRtcVideoChannelTest, SetExtmapAllowMixedAsCaller) {
+  TestExtmapAllowMixed(/*caller=*/true, /*extmap_allow_mixed=*/true);
+}
+TEST_F(WebRtcVideoChannelTest, SetExtmapAllowMixedDisabledAsCaller) {
+  TestExtmapAllowMixed(/*caller=*/true, /*extmap_allow_mixed=*/false);
+}
+TEST_F(WebRtcVideoChannelTest, SetExtmapAllowMixedAsCallee) {
+  TestExtmapAllowMixed(/*caller=*/false, /*extmap_allow_mixed=*/true);
+}
+TEST_F(WebRtcVideoChannelTest, SetExtmapAllowMixedDisabledAsCallee) {
+  TestExtmapAllowMixed(/*caller=*/false, /*extmap_allow_mixed=*/false);
 }
 
 TEST_F(WebRtcVideoChannelTest, NoHeaderExtesionsByDefault) {

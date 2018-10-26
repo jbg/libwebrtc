@@ -351,6 +351,38 @@ class WebRtcVoiceEngineTestFake : public testing::Test {
     EXPECT_EQ(123, telephone_event.duration_ms);
   }
 
+  void TestExtmapAllowMixed(bool caller, bool extmap_allow_mixed) {
+    const bool kExtmapAllowMixedDefault = false;
+    EXPECT_TRUE(SetupChannel());
+    if (caller) {
+      // If this is a caller, local description will be applied and add the
+      // send stream.
+      channel_->SetExtmapAllowMixed(kExtmapAllowMixedDefault);
+      EXPECT_TRUE(
+          channel_->AddSendStream(cricket::StreamParams::CreateLegacy(kSsrcX)));
+    } else {
+      // If this is a callee, remote description will be applied where
+      // SetSendParameters is called.
+      send_parameters_.extmap_allow_mixed = kExtmapAllowMixedDefault;
+      SetSendParameters(send_parameters_);
+    }
+
+    if (caller) {
+      // If this is caller, remote description will be applied where
+      // SetSendParameters is called.
+      send_parameters_.extmap_allow_mixed = extmap_allow_mixed;
+      SetSendParameters(send_parameters_);
+    } else {
+      // If this is callee, there's no active send channel yet.
+      channel_->SetExtmapAllowMixed(extmap_allow_mixed);
+      EXPECT_TRUE(
+          channel_->AddSendStream(cricket::StreamParams::CreateLegacy(kSsrcX)));
+    }
+
+    const webrtc::AudioSendStream::Config& config = GetSendStreamConfig(kSsrcX);
+    EXPECT_EQ(extmap_allow_mixed, config.rtp.extmap_allow_mixed);
+  }
+
   // Test that send bandwidth is set correctly.
   // |codec| is the codec under test.
   // |max_bitrate| is a parameter to set to SetMaxSendBandwidth().
@@ -2821,6 +2853,20 @@ TEST_F(WebRtcVoiceEngineTestFake, InsertDtmfOnSendStreamAsCaller) {
 // Test the InsertDtmf on specified send stream as callee.
 TEST_F(WebRtcVoiceEngineTestFake, InsertDtmfOnSendStreamAsCallee) {
   TestInsertDtmf(kSsrcX, false, kTelephoneEventCodec1);
+}
+
+// Test propagation of extmap allow mixed setting.
+TEST_F(WebRtcVoiceEngineTestFake, SetExtmapAllowMixedAsCaller) {
+  TestExtmapAllowMixed(/*caller=*/true, /*extmap_allow_mixed=*/true);
+}
+TEST_F(WebRtcVoiceEngineTestFake, SetExtmapAllowMixedDisabledAsCaller) {
+  TestExtmapAllowMixed(/*caller=*/true, /*extmap_allow_mixed=*/false);
+}
+TEST_F(WebRtcVoiceEngineTestFake, SetExtmapAllowMixedAsCallee) {
+  TestExtmapAllowMixed(/*caller=*/false, /*extmap_allow_mixed=*/true);
+}
+TEST_F(WebRtcVoiceEngineTestFake, SetExtmapAllowMixedDisabledAsCallee) {
+  TestExtmapAllowMixed(/*caller=*/false, /*extmap_allow_mixed=*/false);
 }
 
 TEST_F(WebRtcVoiceEngineTestFake, SetAudioOptions) {
