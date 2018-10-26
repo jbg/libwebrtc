@@ -8,12 +8,14 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <iostream>  // NOLINT
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <string>
 
 #include "p2p/base/basicpacketsocketfactory.h"
 #include "p2p/base/turnserver.h"
 #include "rtc_base/asyncudpsocket.h"
-#include "rtc_base/optionsfile.h"
 #include "rtc_base/stringencode.h"
 #include "rtc_base/thread.h"
 
@@ -21,24 +23,35 @@ static const char kSoftware[] = "libjingle TurnServer";
 
 class TurnFileAuth : public cricket::TurnAuthInterface {
  public:
-  explicit TurnFileAuth(const std::string& path) : file_(path) { file_.Load(); }
+  explicit TurnFileAuth(const std::string& path) {
+    std::fstream s(path, s.in);
+    if (!s.is_open())
+      return;
+    for (std::string line; std::getline(s, line);) {
+      const size_t sep = line.find('=');
+      if (sep == std::string::npos)
+        continue;
+      char buf[32];
+      size_t len = rtc::hex_decode(buf, sizeof(buf), line.data() + sep + 1,
+                                   line.size() - sep - 1);
+      name_to_key_.emplace(line.substr(0, sep), std::string(buf, len));
+    }
+  }
+
   virtual bool GetKey(const std::string& username,
                       const std::string& realm,
                       std::string* key) {
     // File is stored as lines of <username>=<HA1>.
     // Generate HA1 via "echo -n "<username>:<realm>:<password>" | md5sum"
-    std::string hex;
-    bool ret = file_.GetStringValue(username, &hex);
-    if (ret) {
-      char buf[32];
-      size_t len = rtc::hex_decode(buf, sizeof(buf), hex);
-      *key = std::string(buf, len);
-    }
-    return ret;
+    auto it = name_to_key_.find(username);
+    if (it == name_to_key_.end())
+      return false;
+    *key = it->second;
+    return true;
   }
 
  private:
-  rtc::OptionsFile file_;
+  std::map<std::string, std::string> name_to_key_;
 };
 
 int main(int argc, char* argv[]) {
