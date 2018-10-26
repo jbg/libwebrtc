@@ -16,6 +16,24 @@
       "revId": "4ed7943f74ccc023e43350b459daa21ff8cf2e4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73b884cb_5c8a2ca4",
+        "filename": "examples/turnserver/turnserver_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-26T12:54:48Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer std::map, since this is labeled as example code.\n\nAnd changing it to const won\u0027t work, the compiler complains on the emplace call in the constructor body. Would probably work if the code to read the file is taken out to a helper function returning a std::map.",
+      "parentUuid": "d8e6189d_2cb74b15",
+      "revId": "4ed7943f74ccc023e43350b459daa21ff8cf2e4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
