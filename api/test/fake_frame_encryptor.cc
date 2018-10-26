@@ -22,15 +22,15 @@ int FakeFrameEncryptor::Encrypt(cricket::MediaType media_type,
                                 rtc::ArrayView<const uint8_t> frame,
                                 rtc::ArrayView<uint8_t> encrypted_frame,
                                 size_t* bytes_written) {
-  // Useful if you want to test failure cases.
   if (fail_encryption_) {
     return 1;
   }
 
   RTC_CHECK_EQ(frame.size() + 1, encrypted_frame.size());
   for (size_t i = 0; i < frame.size(); i++) {
-    encrypted_frame[i] ^= fake_key_;
+    encrypted_frame[i] = frame[i] ^ fake_key_;
   }
+
   encrypted_frame[frame.size()] = postfix_byte_;
   *bytes_written = encrypted_frame.size();
   return 0;
