@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c25cfce2_9d953d24",
+        "filename": "examples/turnserver/turnserver_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-26T13:05:33Z",
+      "side": 1,
+      "message": "Windows compiler thinks |s| in |s.in| is undefined here. How should this be written?\n\nThe definition and use of |s| here is identical to the example on https://en.cppreference.com/w/cpp/io/basic_fstream",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 31
+      },
+      "revId": "4ed7943f74ccc023e43350b459daa21ff8cf2e4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d8e6189d_2cb74b15",
         "filename": "examples/turnserver/turnserver_main.cc",
         "patchSetId": 1
