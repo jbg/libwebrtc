@@ -576,6 +576,32 @@ class ChannelTest : public testing::Test, public sigslot::has_slots<> {
         CodecMatches(content.codecs()[0], media_channel1_->codecs()[0]));
   }
 
+  void TestSetContentsExtmapAllowMixed(bool offer, bool answer) {
+    CreateChannels(0, 0);
+    typename T::Content content;
+    CreateContent(0, kPcmuCodec, kH264Codec, &content);
+    auto offer_enum = offer ? (T::Content::kSession) : (T::Content::kNo);
+    auto answer_enum = answer ? (T::Content::kSession) : (T::Content::kNo);
+    content.set_extmap_allow_mixed_enum(offer_enum);
+    EXPECT_TRUE(channel1_->SetLocalContent(&content, SdpType::kOffer, NULL));
+    content.set_extmap_allow_mixed_enum(answer_enum);
+    EXPECT_TRUE(channel1_->SetRemoteContent(&content, SdpType::kAnswer, NULL));
+    EXPECT_EQ(answer, media_channel1_->ExtmapAllowMixed());
+  }
+
+  void TestSetContentsExtmapAllowMixedReverseOrder(bool offer, bool answer) {
+    CreateChannels(0, 0);
+    typename T::Content content;
+    CreateContent(0, kPcmuCodec, kH264Codec, &content);
+    auto offer_enum = offer ? (T::Content::kSession) : (T::Content::kNo);
+    auto answer_enum = answer ? (T::Content::kSession) : (T::Content::kNo);
+    content.set_extmap_allow_mixed_enum(offer_enum);
+    EXPECT_TRUE(channel1_->SetRemoteContent(&content, SdpType::kOffer, NULL));
+    content.set_extmap_allow_mixed_enum(answer_enum);
+    EXPECT_TRUE(channel1_->SetLocalContent(&content, SdpType::kAnswer, NULL));
+    EXPECT_EQ(answer, media_channel1_->ExtmapAllowMixed());
+  }
+
   // Test that SetLocalContent and SetRemoteContent properly deals
   // with an empty offer.
   void TestSetContentsNullOffer() {
@@ -1614,6 +1640,24 @@ TEST_F(VoiceChannelSingleThreadTest, TestSetContents) {
   Base::TestSetContents();
 }
 
+TEST_F(VoiceChannelSingleThreadTest, TestSetContentsExtmapAllowMixed) {
+  Base::TestSetContentsExtmapAllowMixed(true, true);
+}
+
+TEST_F(VoiceChannelSingleThreadTest, TestSetContentsExtmapAllowMixedDisable) {
+  Base::TestSetContentsExtmapAllowMixed(true, false);
+}
+
+TEST_F(VoiceChannelSingleThreadTest,
+       TestSetContentsExtmapAllowMixedReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, false);
+}
+
+TEST_F(VoiceChannelSingleThreadTest,
+       TestSetContentsExtmapAllowMixedDisableReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, true);
+}
+
 TEST_F(VoiceChannelSingleThreadTest, TestSetContentsNullOffer) {
   Base::TestSetContentsNullOffer();
 }
@@ -1749,6 +1793,24 @@ TEST_F(VoiceChannelDoubleThreadTest, TestSetContents) {
   Base::TestSetContents();
 }
 
+TEST_F(VoiceChannelDoubleThreadTest, TestSetContentsExtmapAllowMixed) {
+  Base::TestSetContentsExtmapAllowMixed(true, true);
+}
+
+TEST_F(VoiceChannelDoubleThreadTest, TestSetContentsExtmapAllowMixedDisable) {
+  Base::TestSetContentsExtmapAllowMixed(true, false);
+}
+
+TEST_F(VoiceChannelDoubleThreadTest,
+       TestSetContentsExtmapAllowMixedReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, false);
+}
+
+TEST_F(VoiceChannelDoubleThreadTest,
+       TestSetContentsExtmapAllowMixedDisableReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, true);
+}
+
 TEST_F(VoiceChannelDoubleThreadTest, TestSetContentsNullOffer) {
   Base::TestSetContentsNullOffer();
 }
@@ -1882,6 +1944,24 @@ TEST_F(VideoChannelSingleThreadTest, TestSetContents) {
   Base::TestSetContents();
 }
 
+TEST_F(VideoChannelSingleThreadTest, TestSetContentsExtmapAllowMixed) {
+  Base::TestSetContentsExtmapAllowMixed(true, true);
+}
+
+TEST_F(VideoChannelSingleThreadTest, TestSetContentsExtmapAllowMixedDisable) {
+  Base::TestSetContentsExtmapAllowMixed(true, false);
+}
+
+TEST_F(VideoChannelSingleThreadTest,
+       TestSetContentsExtmapAllowMixedReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, false);
+}
+
+TEST_F(VideoChannelSingleThreadTest,
+       TestSetContentsExtmapAllowMixedDisableReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, true);
+}
+
 TEST_F(VideoChannelSingleThreadTest, TestSetContentsNullOffer) {
   Base::TestSetContentsNullOffer();
 }
@@ -2013,6 +2093,24 @@ TEST_F(VideoChannelDoubleThreadTest, TestDeinit) {
 
 TEST_F(VideoChannelDoubleThreadTest, TestSetContents) {
   Base::TestSetContents();
+}
+
+TEST_F(VideoChannelDoubleThreadTest, TestSetContentsExtmapAllowMixed) {
+  Base::TestSetContentsExtmapAllowMixed(true, true);
+}
+
+TEST_F(VideoChannelDoubleThreadTest, TestSetContentsExtmapAllowMixedDisable) {
+  Base::TestSetContentsExtmapAllowMixed(true, false);
+}
+
+TEST_F(VideoChannelDoubleThreadTest,
+       TestSetContentsExtmapAllowMixedReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, false);
+}
+
+TEST_F(VideoChannelDoubleThreadTest,
+       TestSetContentsExtmapAllowMixedDisableReverseOrder) {
+  Base::TestSetContentsExtmapAllowMixedReverseOrder(true, true);
 }
 
 TEST_F(VideoChannelDoubleThreadTest, TestSetContentsNullOffer) {
