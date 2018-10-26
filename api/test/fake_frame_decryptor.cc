@@ -30,13 +30,14 @@ int FakeFrameDecryptor::Decrypt(cricket::MediaType media_type,
 
   RTC_CHECK_EQ(frame.size() + 1, encrypted_frame.size());
   for (size_t i = 0; i < frame.size(); i++) {
-    frame[i] ^= fake_key_;
+    frame[i] = encrypted_frame[i] ^ fake_key_;
   }
 
   if (encrypted_frame[frame.size()] != expected_postfix_byte_) {
     return 1;
   }
 
+  *bytes_written = frame.size();
   return 0;
 }
 

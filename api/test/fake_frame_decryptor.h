@@ -27,7 +27,7 @@ class FakeFrameDecryptor
  public:
   // Provide a key (0,255) and some postfix byte (0,255) this should match the
   // byte you expect from the FakeFrameEncryptor.
-  explicit FakeFrameDecryptor(uint8_t fake_key = 1,
+  explicit FakeFrameDecryptor(uint8_t fake_key = 0xAA,
                               uint8_t expected_postfix_byte = 255);
 
   // FrameDecryptorInterface implementation

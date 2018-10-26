@@ -24,7 +24,8 @@ class FakeFrameEncryptor
     : public rtc::RefCountedObject<FrameEncryptorInterface> {
  public:
   // Provide a key (0,255) and some postfix byte (0,255).
-  explicit FakeFrameEncryptor(uint8_t fake_key = 1, uint8_t postfix_byte = 255);
+  explicit FakeFrameEncryptor(uint8_t fake_key = 0xAA,
+                              uint8_t postfix_byte = 255);
 
   // FrameEncryptorInterface implementation
   int Encrypt(cricket::MediaType media_type,
