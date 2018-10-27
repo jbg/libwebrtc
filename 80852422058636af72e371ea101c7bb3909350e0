@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9e5e8273_c1ce1ff2",
+        "filename": "api/test/fake_frame_decryptor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-27T00:10:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8466e9bd_c0841636",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "80852422058636af72e371ea101c7bb3909350e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec0ab3a6_ba14bd1e",
         "filename": "api/test/fake_frame_encryptor.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "80852422058636af72e371ea101c7bb3909350e0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "696ec591_ecb5367a",
+        "filename": "api/test/fake_frame_encryptor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-27T00:10:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec0ab3a6_ba14bd1e",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "80852422058636af72e371ea101c7bb3909350e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "8484afde_0221b7d8",
+        "filename": "video/end_to_end_tests/frame_encryption_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-27T00:10:38Z",
+      "side": 1,
+      "message": "I am going to scope this CL to just ensuring that if require_frame_encryption is set to true then you must have an encryptor / decryptor attached. These changes will require a lot more work. I will put them in another CL.",
+      "parentUuid": "918f6acb_767edc02",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "revId": "80852422058636af72e371ea101c7bb3909350e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d274885_4693da99",
         "filename": "video/end_to_end_tests/frame_encryption_tests.cc",
         "patchSetId": 2
@@ -115,6 +187,30 @@
       "revId": "80852422058636af72e371ea101c7bb3909350e0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef711ccb_bfee9bd9",
+        "filename": "video/end_to_end_tests/frame_encryption_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-27T00:10:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d274885_4693da99",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 60
+      },
+      "revId": "80852422058636af72e371ea101c7bb3909350e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
