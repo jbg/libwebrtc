@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0ae3a18_5e9fbe6d",
+        "filename": "rtc_base/opensslcertificate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-28T12:08:06Z",
+      "side": 1,
+      "message": "Can you use unique_ptr or something to hold the pointer? Having to free it manually will lead to bugs.",
+      "revId": "83c080de0f2649d8897b03476c35c276eab5d4c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2ffba66_e1ed7743",
+        "filename": "rtc_base/opensslcertificate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-28T12:08:06Z",
+      "side": 1,
+      "message": "Is this assignment necessary?",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 24
+      },
+      "revId": "83c080de0f2649d8897b03476c35c276eab5d4c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
