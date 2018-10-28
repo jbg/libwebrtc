@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c3d9d52_d3c2fd46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-28T12:21:27Z",
+      "side": 1,
+      "message": "Grammar.",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "b657810f22dc1f5dd4603866895e63880ba06162",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94e64ae2_ab2fcaed",
+        "filename": "rtc_base/sslidentity.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-28T12:21:27Z",
+      "side": 1,
+      "message": "You don\u0027t need `static` since this is in an unnamed namespace.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "b657810f22dc1f5dd4603866895e63880ba06162",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f7b25be_7ee2af0b",
+        "filename": "rtc_base/sslidentity.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-28T12:21:27Z",
+      "side": 1,
+      "message": "Consider using the format \"bugs.webrtc.org/9860\" instead, since that\u0027s both slightly easier to recognize as a bug number for the uninitiated, and can be pasted as-is into a web browser.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 19
+      },
+      "revId": "b657810f22dc1f5dd4603866895e63880ba06162",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb4b87eb_f221046b",
+        "filename": "rtc_base/sslidentity.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-28T12:21:27Z",
+      "side": 1,
+      "message": "Did you intend to move thhese two? They seem like part of the class implementation rather than helper functions to me.",
+      "revId": "b657810f22dc1f5dd4603866895e63880ba06162",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
