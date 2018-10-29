@@ -460,7 +460,7 @@ if (rtc_include_tests) {
 
   rtc_source_set("audio_processing_perf_tests") {
     testonly = true
-
+    configs += [ ":apm_debug_dump" ]
     sources = [
       "audio_processing_performance_unittest.cc",
     ]

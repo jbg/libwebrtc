@@ -20,19 +20,15 @@
 #include "api/array_view.h"
 #include "common_audio/audio_converter.h"
 #include "common_audio/include/audio_util.h"
-#include "modules/audio_processing/agc/agc_manager_direct.h"
-#include "modules/audio_processing/agc2/gain_applier.h"
 #include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/common.h"
 #include "modules/audio_processing/echo_cancellation_impl.h"
 #include "modules/audio_processing/echo_control_mobile_impl.h"
 #include "modules/audio_processing/gain_control_for_experimental_agc.h"
 #include "modules/audio_processing/gain_control_impl.h"
-#include "modules/audio_processing/gain_controller2.h"
 #include "modules/audio_processing/include/audio_frame_view.h"
 #include "modules/audio_processing/level_estimator_impl.h"
 #include "modules/audio_processing/logging/apm_data_dumper.h"
-#include "modules/audio_processing/low_cut_filter.h"
 #include "modules/audio_processing/noise_suppression_impl.h"
 #include "modules/audio_processing/residual_echo_detector.h"
 #include "modules/audio_processing/transient/transient_suppressor.h"
@@ -240,26 +236,15 @@ struct AudioProcessingImpl::ApmPublicSubmodules {
   std::unique_ptr<TransientSuppressor> transient_suppressor;
 };
 
-struct AudioProcessingImpl::ApmPrivateSubmodules {
-  ApmPrivateSubmodules(std::unique_ptr<CustomProcessing> capture_post_processor,
-                       std::unique_ptr<CustomProcessing> render_pre_processor,
-                       rtc::scoped_refptr<EchoDetector> echo_detector,
-                       std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
-      : echo_detector(std::move(echo_detector)),
-        capture_post_processor(std::move(capture_post_processor)),
-        render_pre_processor(std::move(render_pre_processor)),
-        capture_analyzer(std::move(capture_analyzer)) {}
-  // Accessed internally from capture or during initialization
-  std::unique_ptr<AgcManagerDirect> agc_manager;
-  std::unique_ptr<GainController2> gain_controller2;
-  std::unique_ptr<LowCutFilter> low_cut_filter;
-  rtc::scoped_refptr<EchoDetector> echo_detector;
-  std::unique_ptr<EchoControl> echo_controller;
-  std::unique_ptr<CustomProcessing> capture_post_processor;
-  std::unique_ptr<CustomProcessing> render_pre_processor;
-  std::unique_ptr<GainApplier> pre_amplifier;
-  std::unique_ptr<CustomAudioAnalyzer> capture_analyzer;
-};
+AudioProcessingImpl::ApmPrivateCaptureSubmodules::
+    ApmPrivateCaptureSubmodules() = default;
+AudioProcessingImpl::ApmPrivateCaptureSubmodules::
+    ~ApmPrivateCaptureSubmodules() = default;
+
+AudioProcessingImpl::ApmPrivateRenderSubmodules::ApmPrivateRenderSubmodules() =
+    default;
+AudioProcessingImpl::ApmPrivateRenderSubmodules::~ApmPrivateRenderSubmodules() =
+    default;
 
 AudioProcessingBuilder::AudioProcessingBuilder() = default;
 AudioProcessingBuilder::~AudioProcessingBuilder() = default;
@@ -335,11 +320,6 @@ AudioProcessingImpl::AudioProcessingImpl(
                         !!render_pre_processor,
                         !!capture_analyzer),
       public_submodules_(new ApmPublicSubmodules()),
-      private_submodules_(
-          new ApmPrivateSubmodules(std::move(capture_post_processor),
-                                   std::move(render_pre_processor),
-                                   std::move(echo_detector),
-                                   std::move(capture_analyzer))),
       constants_(config.Get<ExperimentalAgc>().startup_min_volume,
                  config.Get<ExperimentalAgc>().clipped_level_min,
 #if defined(WEBRTC_ANDROID) || defined(WEBRTC_IOS)
@@ -383,22 +363,26 @@ AudioProcessingImpl::AudioProcessingImpl(
         new GainControlForExperimentalAgc(
             public_submodules_->gain_control.get(), &crit_capture_));
 
-    // If no echo detector is injected, use the ResidualEchoDetector.
-    if (!private_submodules_->echo_detector) {
-      private_submodules_->echo_detector =
+    capture_submodules_.capture_post_processor =
+        std::move(capture_post_processor);
+    render_submodules_.render_pre_processor = std::move(render_pre_processor);
+    capture_submodules_.capture_analyzer = std::move(capture_analyzer);
+    if (echo_detector) {
+      capture_submodules_.echo_detector = echo_detector;
+    } else {
+      capture_submodules_.echo_detector =
           new rtc::RefCountedObject<ResidualEchoDetector>();
     }
-
     // TODO(alessiob): Move the injected gain controller once injection is
     // implemented.
-    private_submodules_->gain_controller2.reset(new GainController2());
+    capture_submodules_.gain_controller2.reset(new GainController2());
 
     RTC_LOG(LS_INFO) << "Capture analyzer activated: "
-                     << !!private_submodules_->capture_analyzer
+                     << !!capture_submodules_.capture_analyzer
                      << "\nCapture post processor activated: "
-                     << !!private_submodules_->capture_post_processor
+                     << !!capture_submodules_.capture_post_processor
                      << "\nRender pre processor activated: "
-                     << !!private_submodules_->render_pre_processor;
+                     << !!render_submodules_.render_pre_processor;
   }
 
   SetExtraOptions(config);
@@ -407,7 +391,7 @@ AudioProcessingImpl::AudioProcessingImpl(
 AudioProcessingImpl::~AudioProcessingImpl() {
   // Depends on gain_control_ and
   // public_submodules_->gain_control_for_experimental_agc.
-  private_submodules_->agc_manager.reset();
+  capture_submodules_.agc_manager.reset();
   // Depends on gain_control_.
   public_submodules_->gain_control_for_experimental_agc.reset();
 }
@@ -523,16 +507,16 @@ int AudioProcessingImpl::InitializeLocked() {
   public_submodules_->gain_control->Initialize(num_proc_channels(),
                                                proc_sample_rate_hz());
   if (constants_.use_experimental_agc) {
-    if (!private_submodules_->agc_manager.get()) {
-      private_submodules_->agc_manager.reset(new AgcManagerDirect(
+    if (!capture_submodules_.agc_manager.get()) {
+      capture_submodules_.agc_manager.reset(new AgcManagerDirect(
           public_submodules_->gain_control.get(),
           public_submodules_->gain_control_for_experimental_agc.get(),
           constants_.agc_startup_min_volume, constants_.agc_clipped_level_min,
           constants_.use_experimental_agc_agc2_level_estimation,
           constants_.use_experimental_agc_agc2_digital_adaptive));
     }
-    private_submodules_->agc_manager->Initialize();
-    private_submodules_->agc_manager->SetCaptureMuted(
+    capture_submodules_.agc_manager->Initialize();
+    capture_submodules_.agc_manager->SetCaptureMuted(
         capture_.output_will_be_muted);
     public_submodules_->gain_control_for_experimental_agc->Initialize();
   }
@@ -670,7 +654,7 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
   }
   InitializeGainController2();
   InitializePreAmplifier();
-  private_submodules_->gain_controller2->ApplyConfig(config_.gain_controller2);
+  capture_submodules_.gain_controller2->ApplyConfig(config_.gain_controller2);
   RTC_LOG(LS_INFO) << "Gain Controller 2 activated: "
                    << config_.gain_controller2.enabled;
   RTC_LOG(LS_INFO) << "Pre-amplifier activated: "
@@ -725,8 +709,8 @@ size_t AudioProcessingImpl::num_output_channels() const {
 void AudioProcessingImpl::set_output_will_be_muted(bool muted) {
   rtc::CritScope cs(&crit_capture_);
   capture_.output_will_be_muted = muted;
-  if (private_submodules_->agc_manager.get()) {
-    private_submodules_->agc_manager->SetCaptureMuted(
+  if (capture_submodules_.agc_manager.get()) {
+    capture_submodules_.agc_manager->SetCaptureMuted(
         capture_.output_will_be_muted);
   }
 }
@@ -862,7 +846,7 @@ void AudioProcessingImpl::HandleCaptureRuntimeSettings() {
         if (config_.pre_amplifier.enabled) {
           float value;
           setting.GetFloat(&value);
-          private_submodules_->pre_amplifier->SetGainFactor(value);
+          capture_submodules_.pre_amplifier->SetGainFactor(value);
         }
         // TODO(bugs.chromium.org/9138): Log setting handling by Aec Dump.
         break;
@@ -884,8 +868,8 @@ void AudioProcessingImpl::HandleRenderRuntimeSettings() {
     }
     switch (setting.type()) {
       case RuntimeSetting::Type::kCustomRenderProcessingRuntimeSetting:
-        if (private_submodules_->render_pre_processor) {
-          private_submodules_->render_pre_processor->SetRuntimeSetting(setting);
+        if (render_submodules_.render_pre_processor) {
+          render_submodules_.render_pre_processor->SetRuntimeSetting(setting);
         }
         break;
       case RuntimeSetting::Type::kCapturePreGain:
@@ -1074,8 +1058,8 @@ void AudioProcessingImpl::EmptyQueuedRenderAudio() {
   }
 
   while (red_render_signal_queue_->Remove(&red_capture_queue_buffer_)) {
-    RTC_DCHECK(private_submodules_->echo_detector);
-    private_submodules_->echo_detector->AnalyzeRenderAudio(
+    RTC_DCHECK(capture_submodules_.echo_detector);
+    capture_submodules_.echo_detector->AnalyzeRenderAudio(
         red_capture_queue_buffer_);
   }
 }
@@ -1164,8 +1148,8 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
 
   AudioBuffer* capture_buffer = capture_.capture_audio.get();  // For brevity.
 
-  if (private_submodules_->pre_amplifier) {
-    private_submodules_->pre_amplifier->ApplyGain(AudioFrameView<float>(
+  if (capture_submodules_.pre_amplifier) {
+    capture_submodules_.pre_amplifier->ApplyGain(AudioFrameView<float>(
         capture_buffer->channels_f(), capture_buffer->num_channels(),
         capture_buffer->num_frames()));
   }
@@ -1183,7 +1167,7 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
                                 levels.peak, 1, RmsLevel::kMinLevelDb, 64);
   }
 
-  if (private_submodules_->echo_controller) {
+  if (capture_submodules_.echo_controller) {
     // Detect and flag any change in the analog gain.
     int analog_mic_level = gain_control()->stream_analog_level();
     capture_.echo_path_gain_change =
@@ -1192,25 +1176,25 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     capture_.prev_analog_mic_level = analog_mic_level;
 
     // Detect and flag any change in the pre-amplifier gain.
-    if (private_submodules_->pre_amplifier) {
-      float pre_amp_gain = private_submodules_->pre_amplifier->GetGainFactor();
+    if (capture_submodules_.pre_amplifier) {
+      float pre_amp_gain = capture_submodules_.pre_amplifier->GetGainFactor();
       capture_.echo_path_gain_change =
           capture_.echo_path_gain_change ||
           (capture_.prev_pre_amp_gain != pre_amp_gain &&
            capture_.prev_pre_amp_gain >= 0.f);
       capture_.prev_pre_amp_gain = pre_amp_gain;
     }
-    private_submodules_->echo_controller->AnalyzeCapture(capture_buffer);
+    capture_submodules_.echo_controller->AnalyzeCapture(capture_buffer);
   }
 
   if (constants_.use_experimental_agc &&
       public_submodules_->gain_control->is_enabled()) {
-    private_submodules_->agc_manager->AnalyzePreProcess(
+    capture_submodules_.agc_manager->AnalyzePreProcess(
         capture_buffer->channels()[0], capture_buffer->num_channels(),
         capture_nonlocked_.capture_processing_format.num_frames());
 
     if (constants_.use_experimental_agc_process_before_aec) {
-      private_submodules_->agc_manager->Process(
+      capture_submodules_.agc_manager->Process(
           capture_buffer->channels()[0],
           capture_nonlocked_.capture_processing_format.num_frames(),
           capture_nonlocked_.capture_processing_format.sample_rate_hz());
@@ -1223,7 +1207,7 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     capture_buffer->SplitIntoFrequencyBands();
   }
 
-  if (private_submodules_->echo_controller) {
+  if (capture_submodules_.echo_controller) {
     // Force down-mixing of the number of channels after the detection of
     // capture signal saturation.
     // TODO(peah): Look into ensuring that this kind of tampering with the
@@ -1232,9 +1216,9 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   }
 
   // TODO(peah): Move the AEC3 low-cut filter to this place.
-  if (private_submodules_->low_cut_filter &&
-      !private_submodules_->echo_controller) {
-    private_submodules_->low_cut_filter->Process(capture_buffer);
+  if (capture_submodules_.low_cut_filter &&
+      !capture_submodules_.echo_controller) {
+    capture_submodules_.low_cut_filter->Process(capture_buffer);
   }
   RETURN_ON_ERR(
       public_submodules_->gain_control->AnalyzeCaptureAudio(capture_buffer));
@@ -1243,19 +1227,19 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   // Ensure that the stream delay was set before the call to the
   // AEC ProcessCaptureAudio function.
   if (public_submodules_->echo_cancellation->is_enabled() &&
-      !private_submodules_->echo_controller && !was_stream_delay_set()) {
+      !capture_submodules_.echo_controller && !was_stream_delay_set()) {
     return AudioProcessing::kStreamParameterNotSetError;
   }
 
-  if (private_submodules_->echo_controller) {
+  if (capture_submodules_.echo_controller) {
     data_dumper_->DumpRaw("stream_delay", stream_delay_ms());
 
     if (was_stream_delay_set()) {
-      private_submodules_->echo_controller->SetAudioBufferDelay(
+      capture_submodules_.echo_controller->SetAudioBufferDelay(
           stream_delay_ms());
     }
 
-    private_submodules_->echo_controller->ProcessCapture(
+    capture_submodules_.echo_controller->ProcessCapture(
         capture_buffer, capture_.echo_path_gain_change);
   } else {
     RETURN_ON_ERR(public_submodules_->echo_cancellation->ProcessCaptureAudio(
@@ -1275,7 +1259,7 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     return AudioProcessing::kStreamParameterNotSetError;
   }
 
-  if (!(private_submodules_->echo_controller ||
+  if (!(capture_submodules_.echo_controller ||
         public_submodules_->echo_cancellation->is_enabled())) {
     RETURN_ON_ERR(public_submodules_->echo_control_mobile->ProcessCaptureAudio(
         capture_buffer, stream_delay_ms()));
@@ -1286,7 +1270,7 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   if (constants_.use_experimental_agc &&
       public_submodules_->gain_control->is_enabled() &&
       !constants_.use_experimental_agc_process_before_aec) {
-    private_submodules_->agc_manager->Process(
+    capture_submodules_.agc_manager->Process(
         capture_buffer->split_bands_const(0)[kBand0To8kHz],
         capture_buffer->num_frames_per_band(), capture_nonlocked_.split_rate);
   }
@@ -1301,8 +1285,8 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   }
 
   if (config_.residual_echo_detector.enabled) {
-    RTC_DCHECK(private_submodules_->echo_detector);
-    private_submodules_->echo_detector->AnalyzeCaptureAudio(
+    RTC_DCHECK(capture_submodules_.echo_detector);
+    capture_submodules_.echo_detector->AnalyzeCaptureAudio(
         rtc::ArrayView<const float>(capture_buffer->channels_f()[0],
                                     capture_buffer->num_frames()));
   }
@@ -1311,8 +1295,8 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   // before or after the AGC.
   if (capture_.transient_suppressor_enabled) {
     float voice_probability =
-        private_submodules_->agc_manager.get()
-            ? private_submodules_->agc_manager->voice_probability()
+        capture_submodules_.agc_manager.get()
+            ? capture_submodules_.agc_manager->voice_probability()
             : 1.f;
 
     public_submodules_->transient_suppressor->Suppress(
@@ -1325,18 +1309,18 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   }
 
   // Experimental APM sub-module that analyzes |capture_buffer|.
-  if (private_submodules_->capture_analyzer) {
-    private_submodules_->capture_analyzer->Analyze(capture_buffer);
+  if (capture_submodules_.capture_analyzer) {
+    capture_submodules_.capture_analyzer->Analyze(capture_buffer);
   }
 
   if (config_.gain_controller2.enabled) {
-    private_submodules_->gain_controller2->NotifyAnalogLevel(
+    capture_submodules_.gain_controller2->NotifyAnalogLevel(
         gain_control()->stream_analog_level());
-    private_submodules_->gain_controller2->Process(capture_buffer);
+    capture_submodules_.gain_controller2->Process(capture_buffer);
   }
 
-  if (private_submodules_->capture_post_processor) {
-    private_submodules_->capture_post_processor->Process(capture_buffer);
+  if (capture_submodules_.capture_post_processor) {
+    capture_submodules_.capture_post_processor->Process(capture_buffer);
   }
 
   // The level estimator operates on the recombined data.
@@ -1474,13 +1458,20 @@ int AudioProcessingImpl::ProcessReverseStream(AudioFrame* frame) {
   return kNoError;
 }
 
+void AudioProcessingImpl::AnalyzeRenderStreamWithEchoController(
+    AudioBuffer* render_buffer) {
+  if (capture_submodules_.echo_controller) {
+    capture_submodules_.echo_controller->AnalyzeRender(render_buffer);
+  }
+}
+
 int AudioProcessingImpl::ProcessRenderStreamLocked() {
   AudioBuffer* render_buffer = render_.render_audio.get();  // For brevity.
 
   HandleRenderRuntimeSettings();
 
-  if (private_submodules_->render_pre_processor) {
-    private_submodules_->render_pre_processor->Process(render_buffer);
+  if (render_submodules_.render_pre_processor) {
+    render_submodules_.render_pre_processor->Process(render_buffer);
   }
 
   QueueNonbandedRenderAudio(render_buffer);
@@ -1496,9 +1487,7 @@ int AudioProcessingImpl::ProcessRenderStreamLocked() {
   }
 
   // TODO(peah): Perform the queuing inside QueueRenderAudiuo().
-  if (private_submodules_->echo_controller) {
-    private_submodules_->echo_controller->AnalyzeRender(render_buffer);
-  }
+  AnalyzeRenderStreamWithEchoController(render_buffer);
 
   if (submodule_states_.RenderMultiBandProcessingActive() &&
       SampleRateSupportsMultiBand(
@@ -1620,8 +1609,8 @@ AudioProcessing::AudioProcessingStatistics AudioProcessingImpl::GetStatistics()
   AudioProcessingStatistics stats;
   EchoCancellationImpl::Metrics metrics;
   rtc::CritScope cs_capture(&crit_capture_);
-  if (private_submodules_->echo_controller) {
-    auto ec_metrics = private_submodules_->echo_controller->GetMetrics();
+  if (capture_submodules_.echo_controller) {
+    auto ec_metrics = capture_submodules_.echo_controller->GetMetrics();
     float erl = static_cast<float>(ec_metrics.echo_return_loss);
     float erle = static_cast<float>(ec_metrics.echo_return_loss_enhancement);
     // Instant value will also be used for min, max and average.
@@ -1636,8 +1625,8 @@ AudioProcessing::AudioProcessingStatistics AudioProcessingImpl::GetStatistics()
         metrics.echo_return_loss_enhancement);
     stats.residual_echo_return_loss.Set(metrics.residual_echo_return_loss);
   }
-  RTC_DCHECK(private_submodules_->echo_detector);
-  auto ed_metrics = private_submodules_->echo_detector->GetMetrics();
+  RTC_DCHECK(capture_submodules_.echo_detector);
+  auto ed_metrics = capture_submodules_.echo_detector->GetMetrics();
   stats.residual_echo_likelihood = ed_metrics.echo_likelihood;
   stats.residual_echo_likelihood_recent_max =
       ed_metrics.echo_likelihood_recent_max;
@@ -1653,8 +1642,8 @@ AudioProcessingStats AudioProcessingImpl::GetStatistics(
   if (has_remote_tracks) {
     EchoCancellationImpl::Metrics metrics;
     rtc::CritScope cs_capture(&crit_capture_);
-    if (private_submodules_->echo_controller) {
-      auto ec_metrics = private_submodules_->echo_controller->GetMetrics();
+    if (capture_submodules_.echo_controller) {
+      auto ec_metrics = capture_submodules_.echo_controller->GetMetrics();
       stats.echo_return_loss = ec_metrics.echo_return_loss;
       stats.echo_return_loss_enhancement =
           ec_metrics.echo_return_loss_enhancement;
@@ -1675,8 +1664,8 @@ AudioProcessingStats AudioProcessingImpl::GetStatistics(
       }
     }
     if (config_.residual_echo_detector.enabled) {
-      RTC_DCHECK(private_submodules_->echo_detector);
-      auto ed_metrics = private_submodules_->echo_detector->GetMetrics();
+      RTC_DCHECK(capture_submodules_.echo_detector);
+      auto ed_metrics = capture_submodules_.echo_detector->GetMetrics();
       stats.residual_echo_likelihood = ed_metrics.echo_likelihood;
       stats.residual_echo_likelihood_recent_max =
           ed_metrics.echo_likelihood_recent_max;
@@ -1758,61 +1747,61 @@ void AudioProcessingImpl::InitializeTransient() {
 
 void AudioProcessingImpl::InitializeLowCutFilter() {
   if (submodule_states_.LowCutFilteringRequired()) {
-    private_submodules_->low_cut_filter.reset(
+    capture_submodules_.low_cut_filter.reset(
         new LowCutFilter(num_proc_channels(), proc_sample_rate_hz()));
   } else {
-    private_submodules_->low_cut_filter.reset();
+    capture_submodules_.low_cut_filter.reset();
   }
 }
 
 void AudioProcessingImpl::InitializeEchoController() {
   if (echo_control_factory_) {
-    private_submodules_->echo_controller =
+    capture_submodules_.echo_controller =
         echo_control_factory_->Create(proc_sample_rate_hz());
   } else {
-    private_submodules_->echo_controller.reset();
+    capture_submodules_.echo_controller.reset();
   }
 }
 
 void AudioProcessingImpl::InitializeGainController2() {
   if (config_.gain_controller2.enabled) {
-    private_submodules_->gain_controller2->Initialize(proc_sample_rate_hz());
+    capture_submodules_.gain_controller2->Initialize(proc_sample_rate_hz());
   }
 }
 
 void AudioProcessingImpl::InitializePreAmplifier() {
   if (config_.pre_amplifier.enabled) {
-    private_submodules_->pre_amplifier.reset(
+    capture_submodules_.pre_amplifier.reset(
         new GainApplier(true, config_.pre_amplifier.fixed_gain_factor));
   } else {
-    private_submodules_->pre_amplifier.reset();
+    capture_submodules_.pre_amplifier.reset();
   }
 }
 
 void AudioProcessingImpl::InitializeResidualEchoDetector() {
-  RTC_DCHECK(private_submodules_->echo_detector);
-  private_submodules_->echo_detector->Initialize(
+  RTC_DCHECK(capture_submodules_.echo_detector);
+  capture_submodules_.echo_detector->Initialize(
       proc_sample_rate_hz(), 1,
       formats_.render_processing_format.sample_rate_hz(), 1);
 }
 
 void AudioProcessingImpl::InitializeAnalyzer() {
-  if (private_submodules_->capture_analyzer) {
-    private_submodules_->capture_analyzer->Initialize(proc_sample_rate_hz(),
-                                                      num_proc_channels());
+  if (capture_submodules_.capture_analyzer) {
+    capture_submodules_.capture_analyzer->Initialize(proc_sample_rate_hz(),
+                                                     num_proc_channels());
   }
 }
 
 void AudioProcessingImpl::InitializePostProcessor() {
-  if (private_submodules_->capture_post_processor) {
-    private_submodules_->capture_post_processor->Initialize(
+  if (capture_submodules_.capture_post_processor) {
+    capture_submodules_.capture_post_processor->Initialize(
         proc_sample_rate_hz(), num_proc_channels());
   }
 }
 
 void AudioProcessingImpl::InitializePreProcessor() {
-  if (private_submodules_->render_pre_processor) {
-    private_submodules_->render_pre_processor->Initialize(
+  if (render_submodules_.render_pre_processor) {
+    render_submodules_.render_pre_processor->Initialize(
         formats_.render_processing_format.sample_rate_hz(),
         formats_.render_processing_format.num_channels());
   }
