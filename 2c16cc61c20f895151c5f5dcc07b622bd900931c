@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed0e4d6d_c4b2ab4f",
+        "filename": "rtc_base/stringencode_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-29T12:01:42Z",
+      "side": 0,
+      "message": "Doesn\u0027t test the right failure mode; decoding fails in the same check as the TestDecodeOddHexDigits below.",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 80
+      },
+      "revId": "2c16cc61c20f895151c5f5dcc07b622bd900931c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
