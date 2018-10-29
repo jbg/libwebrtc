@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "373ac760_0f16e593",
+        "filename": "rtc_base/opensslcertificate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-29T01:23:20Z",
+      "side": 1,
+      "message": "Yes this is planned I am going to build a new openssl_scoped_types.h file and make a bunch of unique_ptr aliases with custom deleters in a future CL. I wanted to sync with one of the boringssl owners first to get some tips on how to manage that correctly. So this will be in a future CL.",
+      "parentUuid": "d0ae3a18_5e9fbe6d",
+      "revId": "83c080de0f2649d8897b03476c35c276eab5d4c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2ffba66_e1ed7743",
         "filename": "rtc_base/opensslcertificate.cc",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "83c080de0f2649d8897b03476c35c276eab5d4c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb06b8ba_b14f72ea",
+        "filename": "rtc_base/opensslcertificate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-29T01:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2ffba66_e1ed7743",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 24
+      },
+      "revId": "83c080de0f2649d8897b03476c35c276eab5d4c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
