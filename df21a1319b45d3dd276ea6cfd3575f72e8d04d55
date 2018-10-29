@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a478649f_12e0e9af",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-29T11:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae1d46a6_bda0777d",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 8
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df632a52_04a2f90b",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c91cfa92_d170466c",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-29T11:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df632a52_04a2f90b",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 0
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "08c9ac68_1d0e96f7",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-29T11:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2433d593_fc565830",
+      "range": {
+        "startLine": 545,
+        "startChar": 22,
+        "endLine": 545,
+        "endChar": 46
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c3c1bec_39be0e93",
         "filename": "sdk/android/api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "566db729_ca2272d8",
+        "filename": "sdk/android/api/org/webrtc/BuiltinAudioDecoderFactoryFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-29T11:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c3c1bec_39be0e93",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a02f45c_0f23f40b",
         "filename": "sdk/android/api/org/webrtc/BuiltinAudioEncoderFactoryFactory.java",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "688895a3_a0d42452",
+        "filename": "sdk/android/api/org/webrtc/BuiltinAudioEncoderFactoryFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-29T11:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a02f45c_0f23f40b",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "df21a1319b45d3dd276ea6cfd3575f72e8d04d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
