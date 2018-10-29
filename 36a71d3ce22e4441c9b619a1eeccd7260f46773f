@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ae22e1c9_b18abf5e",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-10-29T22:21:58Z",
+      "side": 1,
+      "message": "All of our other pure virtual interfaces have it.  I think it depends on how many fields and what type they are.  In this case there are no fields.",
+      "parentUuid": "3e0469b7_e225363b",
+      "range": {
+        "startLine": 223,
+        "startChar": 40,
+        "endLine": 223,
+        "endChar": 51
+      },
+      "revId": "36a71d3ce22e4441c9b619a1eeccd7260f46773f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a3199b9_7d139d39",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "b9438739_c427b126",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-10-29T22:21:58Z",
+      "side": 1,
+      "message": "I think we can easily guarantee we won\u0027t make concurrent callbacks.  We don\u0027t need to specify a thread.  If the callback points to code that needs to run on a particular thread, it will have to post it to that thread anyway.  Similarly, if the callback mutates state under some mutex, it will have to take that mutex itself.  I don\u0027t think we really want to tie media transport to running on the network thread, even if that\u0027s what we do today.",
+      "parentUuid": "5a3199b9_7d139d39",
+      "range": {
+        "startLine": 272,
+        "startChar": 57,
+        "endLine": 272,
+        "endChar": 71
+      },
+      "revId": "36a71d3ce22e4441c9b619a1eeccd7260f46773f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ad2b448_df85588e",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2
@@ -86,6 +134,24 @@
       "revId": "36a71d3ce22e4441c9b619a1eeccd7260f46773f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dc19084_b91f45db",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-10-29T22:21:58Z",
+      "side": 1,
+      "message": "Seems like overkill for a TODO that needs no extra context and should only last a couple days, but I can if you really want it.",
+      "parentUuid": "8ad2b448_df85588e",
+      "revId": "36a71d3ce22e4441c9b619a1eeccd7260f46773f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
