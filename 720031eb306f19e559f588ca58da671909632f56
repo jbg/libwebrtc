@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "361321db_e55f7abc",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-29T13:37:31Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this annotation for a test binary. Patrik?",
+      "revId": "720031eb306f19e559f588ca58da671909632f56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad3b75bd_3aa16458",
         "filename": "examples/turnserver/read_auth_file.h",
         "patchSetId": 2
@@ -22,6 +39,30 @@
       "revId": "720031eb306f19e559f588ca58da671909632f56",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d68a196_7d650f2b",
+        "filename": "examples/turnserver/read_auth_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-29T13:37:31Z",
+      "side": 1,
+      "message": "It\u0027s probably better to invent a namespace. E.g. \"::webrtc_example\" if you can\u0027t think of anything better.\n\nBut on the other hand, the existing code appears to be in the global namespace, so it might not be worth it.",
+      "parentUuid": "ad3b75bd_3aa16458",
+      "range": {
+        "startLine": 18,
+        "startChar": 35,
+        "endLine": 18,
+        "endChar": 47
+      },
+      "revId": "720031eb306f19e559f588ca58da671909632f56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
