@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e489929_f309ad14",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-29T14:47:15Z",
+      "side": 1,
+      "message": "At least it\u0027s fairly common, according to git grep -C1 rtc_test",
+      "parentUuid": "361321db_e55f7abc",
+      "revId": "720031eb306f19e559f588ca58da671909632f56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad3b75bd_3aa16458",
         "filename": "examples/turnserver/read_auth_file.h",
         "patchSetId": 2
@@ -102,6 +120,30 @@
       "side": 1,
       "message": "The risk is probably small. But by all means, please use a namespace---it *is* the hygienic thing to do.",
       "parentUuid": "347e015d_6847302b",
+      "range": {
+        "startLine": 18,
+        "startChar": 35,
+        "endLine": 18,
+        "endChar": 47
+      },
+      "revId": "720031eb306f19e559f588ca58da671909632f56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe5f1f10_d0b78c85",
+        "filename": "examples/turnserver/read_auth_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-29T14:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a551cb68_50d01d69",
       "range": {
         "startLine": 18,
         "startChar": 35,
