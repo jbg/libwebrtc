@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2fbcbbcf_1e303689",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-29T15:35:59Z",
+      "side": 1,
+      "message": "(This is intentional: Some #includes requiring APM_DEBUG_DUMP to be defined are moved into audio_processing_impl.h from .cc, causing this test to require the definition as well.)",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 36
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7dfbc487_9a507ef8",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 6
@@ -22,6 +45,30 @@
       "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fc7a008_d32cdd59",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-29T15:35:59Z",
+      "side": 1,
+      "message": "The RTC_GUARDED_BY(crit_capture_) annotation on capture_submodules_ requires that whenever e.g. echo_controller is accessed, the crit_capture_ lock must be held.\n\nAs you point out, this is actually not necessary for thread safety when it comes to EchoControl::AnalyzeRender. It can safely be called without the crit_capture lock (as long as we don\u0027t reset the echo_controller unique_ptr, but that can\u0027t happen since we hold crit_render_).\n\nIf we want to use the annotation, and call EchoControl::AnalyzeRender without holding the lock, then we must make an exception to the annotations. The only tool we have to do that is to apply NO_THREAD_SAFETY_ANALYSIS to the function that calls EchoControl::AnalyzeRender. That is the purpose of the new function AnalyzeRenderStreamWithEchoController: To ignore the annotations for echo_controller, because we know better than the lock annotations in this case.\n\nI don\u0027t want to add the exception directly to ProcessRenderStreamLocked, because then it would also ignore the RTC_REQUIRES_EXCLUSIVE_LOCKS(crit_render_) on the function. The scope of NO_THREAD_SAFETY_ANALYSIS should be kept as small as possible.",
+      "parentUuid": "7dfbc487_9a507ef8",
+      "range": {
+        "startLine": 1495,
+        "startChar": 2,
+        "endLine": 1495,
+        "endChar": 58
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -48,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "e5e7a632_8f618e02",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-29T15:35:59Z",
+      "side": 1,
+      "message": "Sure! --\u003e AnalyzeRenderStreamWithEchoController.",
+      "parentUuid": "840e2a5a_6227c0ad",
+      "range": {
+        "startLine": 285,
+        "startChar": 7,
+        "endLine": 285,
+        "endChar": 63
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44dd5b04_f3d0956f",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 6
@@ -71,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "3f950fbe_715edb16",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-29T15:35:59Z",
+      "side": 1,
+      "message": "Done! Note that this makes public_submodules_ less clear - those modules are also capture or render submodules.",
+      "parentUuid": "44dd5b04_f3d0956f",
+      "range": {
+        "startLine": 354,
+        "startChar": 4,
+        "endLine": 354,
+        "endChar": 31
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cb7ba45_b725d3fb",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 6
@@ -91,6 +186,30 @@
       "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "371e2f1b_5cdd16d4",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-10-29T15:35:59Z",
+      "side": 1,
+      "message": "Done! Note, as above.",
+      "parentUuid": "8cb7ba45_b725d3fb",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 361,
+        "endChar": 30
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
