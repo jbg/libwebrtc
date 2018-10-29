@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7dfbc487_9a507ef8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-29T14:56:25Z",
+      "side": 1,
+      "message": "Why is the abstraction of this functionality into a separate function needed? It only contains three lines and separating it into a separate function requires more code.",
+      "range": {
+        "startLine": 1495,
+        "startChar": 2,
+        "endLine": 1495,
+        "endChar": 58
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "840e2a5a_6227c0ad",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-29T14:56:25Z",
+      "side": 1,
+      "message": "This name is very long. Please change it to a shorter name.",
+      "range": {
+        "startLine": 285,
+        "startChar": 7,
+        "endLine": 285,
+        "endChar": 63
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44dd5b04_f3d0956f",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-29T14:56:25Z",
+      "side": 1,
+      "message": "I think that the code would benefit from this name being shorter.\nWhat about\ncapture_submodules_\n?",
+      "range": {
+        "startLine": 354,
+        "startChar": 4,
+        "endLine": 354,
+        "endChar": 31
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cb7ba45_b725d3fb",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-29T14:56:25Z",
+      "side": 1,
+      "message": "as above\n\nWhat about\nrender_submodules_\n?",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 361,
+        "endChar": 30
+      },
+      "revId": "8a8b75058a331795f75d7cf58739e5079a6feca6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
