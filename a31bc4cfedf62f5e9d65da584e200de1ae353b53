@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fe98c071_69b2be83",
+        "filename": "pc/test/fakeperiodicvideosource.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "When the task queue is destroyed. (it\u0027s declared at the end of the class, unchanged behavior)",
+      "parentUuid": "d9e920d1_5641bfb9",
+      "range": {
+        "startLine": 62,
+        "startChar": 17,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1432516_bf0c3a62",
         "filename": "rtc_base/task_utils/repeated_task.h",
         "patchSetId": 13
@@ -36,6 +60,24 @@
       "writtenOn": "2018-10-29T07:36:46Z",
       "side": 1,
       "message": "is there no RepeatedTask class anymore or should this class be it?",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e57533a_536fb500",
+        "filename": "rtc_base/task_utils/repeated_task.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "I think this could be named either way. The advantage of naming it RepeatedTask is that it looks nice in the code and is shorter to write etc. The disadvantage is that the actual repeated task is owned by the TaskQueue - meaning that what this class actually is not the repeated task itself.\n\nSo currently we have:\n1. RepeatedTaskBase - common implementation for repeated tasks, owned by the TaskQueue it\u0027s repeated on.\n2. RepeatedTaskImpl - templated child class of RepeatedTaskBase to capture the Closure.\n3. RepeatedTaskHandle - a class that owns the one and only outside borrowed pointer to the RepeatedTask running on the TaskQueue. Moving this to RepeatedTaskHandle::Stop() is the only way to stop a task other than destroying the TaskQueue.\n\n\nWe could consider naming 1 \"RepeatedTask\", but it\u0027s not that useful since it\u0027s never referenced, but might make the code here more clear.\n\nDo you have any preferences or suggestions?",
+      "parentUuid": "d1432516_bf0c3a62",
       "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "c48d0ed7_c2175f92",
+        "filename": "rtc_base/task_utils/repeated_task_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "For a unit test it should be fine?",
+      "parentUuid": "65b7d081_1069df04",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a44c47e9_01997a2b",
         "filename": "rtc_base/task_utils/repeated_task_unittest.cc",
         "patchSetId": 13
@@ -70,6 +130,24 @@
       "writtenOn": "2018-10-29T07:36:46Z",
       "side": 1,
       "message": "what does this map to and why is it needed?\nare we using std::this_thread somewhere else or are we using another sleep method?\n\nA thing to watch out for when adding new dependencies that they may come with a lot of code that you might not be aware of. If there has been a discussion around this, can you point me to it offline?",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77f610ef_278f9d9d",
+        "filename": "rtc_base/task_utils/repeated_task_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "My thinking is that\u0027s it should be a problem for unit tests?",
+      "parentUuid": "a44c47e9_01997a2b",
       "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "a64c8e0b_e5d2d9a6",
+        "filename": "rtc_base/task_utils/repeated_task_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "Me neither. But in this case we want to test the actual time behavior wight? We can\u0027t fake time passing for the TaskQueue implementation used by default. Is there another way to test this without adding extra indirection to the production code?",
+      "parentUuid": "85dcd52d_fc748b70",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "699bce62_5760c890",
         "filename": "rtc_base/task_utils/repeated_task_unittest.cc",
         "patchSetId": 13
@@ -110,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "bfc54757_a4e70c0d",
+        "filename": "rtc_base/task_utils/repeated_task_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "699bce62_5760c890",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b219521e_cfaf2f93",
         "filename": "video/video_send_stream_impl.h",
         "patchSetId": 13
@@ -121,6 +235,24 @@
       "writtenOn": "2018-10-29T07:36:46Z",
       "side": 1,
       "message": "are we using \u003catomic\u003e generally, or do we still use our own atomic classes? If we\u0027re still using our own, please check with the core team before adding new dependencies",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1954445_49226fa6",
+        "filename": "video/video_send_stream_impl.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-10-29T08:03:48Z",
+      "side": 1,
+      "message": "We do seem to use \u003catomic\u003e in a few places already, but I\u0027ll ask in the core group about the plan for the future.",
+      "parentUuid": "b219521e_cfaf2f93",
       "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
