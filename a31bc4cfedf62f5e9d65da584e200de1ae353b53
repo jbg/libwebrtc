@@ -256,6 +256,24 @@
       "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f80a3a7c_c548fbc8",
+        "filename": "video/video_send_stream_impl.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-29T09:25:43Z",
+      "side": 1,
+      "message": "We\u0027re in the process of switching to the std:: atomics (following Chromium\u0027s lead---see https://chromium-cpp.appspot.com/#library-whitelist). It\u0027s been on the back burner for a while, but Mirko recently picked up the work again in this CL: https://webrtc-review.googlesource.com/c/src/+/105601",
+      "parentUuid": "d1954445_49226fa6",
+      "revId": "a31bc4cfedf62f5e9d65da584e200de1ae353b53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
