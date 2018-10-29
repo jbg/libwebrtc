@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a39ec77d_8f864847",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-10-29T11:38:27Z",
+      "side": 1,
+      "message": "nit: I now remember we decided to use IllegalArgumentException in WebRTC for these cases, can you please use that one?",
+      "range": {
+        "startLine": 211,
+        "startChar": 18,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "c6d98c494e40c372a0c3438ad5a55b4c4637c90a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
