@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad3b75bd_3aa16458",
+        "filename": "examples/turnserver/read_auth_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-29T13:24:36Z",
+      "side": 1,
+      "message": "This goes into the top-level namespace, since it doesn\u0027t seem appropriate to use webrtc:: for example code. Ok?",
+      "range": {
+        "startLine": 18,
+        "startChar": 35,
+        "endLine": 18,
+        "endChar": 47
+      },
+      "revId": "720031eb306f19e559f588ca58da671909632f56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
