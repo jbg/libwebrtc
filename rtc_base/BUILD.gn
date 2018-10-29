@@ -586,9 +586,15 @@ if (is_mac || is_ios) {
 if (is_win) {
   rtc_source_set("rtc_task_queue_win") {
     visibility = [ ":rtc_task_queue_impl" ]
-    sources = [
-      "task_queue_win.cc",
-    ]
+    if (current_os == "winuwp") {
+      sources = [
+        "task_queue_stdlib.cc",
+      ]
+    } else {
+      sources = [
+        "task_queue_win.cc",
+      ]
+    }
     deps = [
       ":checks",
       ":criticalsection",
