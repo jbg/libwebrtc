@@ -10,6 +10,7 @@
 #ifndef VIDEO_VIDEO_SEND_STREAM_IMPL_H_
 #define VIDEO_VIDEO_SEND_STREAM_IMPL_H_
 
+#include <atomic>
 #include <map>
 #include <memory>
 #include <vector>
@@ -20,6 +21,7 @@
 #include "call/rtp_video_sender_interface.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/utility/include/process_thread.h"
+#include "rtc_base/task_utils/repeated_task.h"
 #include "rtc_base/weak_ptr.h"
 #include "video/call_stats.h"
 #include "video/encoder_rtcp_feedback.h"
@@ -80,8 +82,6 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   absl::optional<float> configured_pacing_factor_;
 
  private:
-  class CheckEncoderActivityTask;
-
   // Implements BitrateAllocatorObserver.
   uint32_t OnBitrateUpdated(BitrateAllocationUpdate update) override;
 
@@ -119,8 +119,11 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   rtc::TaskQueue* const worker_queue_;
 
   rtc::CriticalSection encoder_activity_crit_sect_;
-  CheckEncoderActivityTask* check_encoder_activity_task_
+  std::unique_ptr<RepeatedTaskHandle> check_encoder_activity_task_
       RTC_GUARDED_BY(encoder_activity_crit_sect_);
+
+  std::atomic_bool activity_;
+  bool timed_out_ RTC_GUARDED_BY(worker_queue_);
 
   CallStats* const call_stats_;
   RtpTransportControllerSendInterface* const transport_;

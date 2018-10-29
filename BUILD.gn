@@ -57,6 +57,7 @@ if (!build_with_chromium) {
         "pc:peerconnection_unittests",
         "pc:rtc_pc_unittests",
         "rtc_base:rtc_base_tests_utils",
+        "rtc_base/task_utils:repeated_task_unittests",
         "stats:rtc_stats_unittests",
         "system_wrappers:system_wrappers_unittests",
         "test",

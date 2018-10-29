@@ -32,6 +32,7 @@
 #include "rtc_base/networkroute.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/repeated_task.h"
 
 namespace rtc {
 struct SentPacket;
@@ -43,16 +44,6 @@ class Clock;
 class RtcEventLog;
 
 namespace webrtc_cc {
-
-namespace send_side_cc_internal {
-
-// TODO(srte): Make sure the PeriodicTask implementation is reusable and move it
-// to task_queue.h.
-class PeriodicTask : public rtc::QueuedTask {
- public:
-  virtual void Stop() = 0;
-};
-}  // namespace send_side_cc_internal
 
 class SendSideCongestionController
     : public SendSideCongestionControllerInterface,
@@ -200,9 +191,9 @@ class SendSideCongestionController
   bool network_available_ RTC_GUARDED_BY(task_queue_);
   bool periodic_tasks_enabled_ RTC_GUARDED_BY(task_queue_);
   bool packet_feedback_available_ RTC_GUARDED_BY(task_queue_);
-  send_side_cc_internal::PeriodicTask* pacer_queue_update_task_
+  std::unique_ptr<RepeatedTaskHandle> pacer_queue_update_task_
       RTC_GUARDED_BY(task_queue_);
-  send_side_cc_internal::PeriodicTask* controller_task_
+  std::unique_ptr<RepeatedTaskHandle> controller_task_
       RTC_GUARDED_BY(task_queue_);
 
   // Protects access to last_packet_feedback_vector_ in feedback adapter.
