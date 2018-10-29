@@ -11,7 +11,6 @@
 #include "rtc_base/fileutils.h"
 
 #include "rtc_base/checks.h"
-#include "rtc_base/pathutils.h"
 
 #if defined(WEBRTC_WIN)
 #include "rtc_base/stringutils.h"  // for ToUtf16
@@ -58,12 +57,12 @@ DirectoryIterator::~DirectoryIterator() {
 // Starts traversing a directory.
 // dir is the directory to traverse
 // returns true if the directory exists and is valid
-bool DirectoryIterator::Iterate(const Pathname& dir) {
-  directory_ = dir.pathname();
+bool DirectoryIterator::Iterate(const std::string& dir) {
+  directory_ = dir;
 #if defined(WEBRTC_WIN)
   if (handle_ != INVALID_HANDLE_VALUE)
     ::FindClose(handle_);
-  std::string d = dir.pathname() + '*';
+  std::string d = dir + '*';
   handle_ = ::FindFirstFile(ToUtf16(d).c_str(), &data_);
   if (handle_ == INVALID_HANDLE_VALUE)
     return false;
