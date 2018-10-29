@@ -63,6 +63,30 @@
       "revId": "720031eb306f19e559f588ca58da671909632f56",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "347e015d_6847302b",
+        "filename": "examples/turnserver/read_auth_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-29T14:12:30Z",
+      "side": 1,
+      "message": "\u003e It\u0027s probably better to invent a namespace. E.g. \"::webrtc_example\" if you can\u0027t think of anything better.\n\u003e \n\u003e But on the other hand, the existing code appears to be in the global namespace, so it might not be worth it.\n\nThing is, the existing code only goes into the turnserver executable. Then I think top-level namespace is perfectly fine. But this new code is used both there and in the test executable, and the latter could in theory be linked with unrelated top-level code and possibly collide.",
+      "parentUuid": "7d68a196_7d650f2b",
+      "range": {
+        "startLine": 18,
+        "startChar": 35,
+        "endLine": 18,
+        "endChar": 47
+      },
+      "revId": "720031eb306f19e559f588ca58da671909632f56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
