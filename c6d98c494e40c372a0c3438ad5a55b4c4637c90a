@@ -22,6 +22,30 @@
       "revId": "c6d98c494e40c372a0c3438ad5a55b4c4637c90a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9353f828_f070f19c",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-10-29T16:08:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a39ec77d_8f864847",
+      "range": {
+        "startLine": 211,
+        "startChar": 18,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "c6d98c494e40c372a0c3438ad5a55b4c4637c90a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
