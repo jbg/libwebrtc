@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2b7216d_d938807b",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-30T20:04:01Z",
+      "side": 1,
+      "message": "nit: label is the more official name.",
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b26fcc4_03358645",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-30T20:04:01Z",
+      "side": 1,
+      "message": "I think you need to retrieve and decode the key first: See  SrtpFilter::ParseKeyParams",
+      "range": {
+        "startLine": 983,
+        "startChar": 32,
+        "endLine": 983,
+        "endChar": 33
+      },
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b14364a6_e9a40b9c",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-30T20:04:01Z",
+      "side": 1,
+      "message": "nit: Can you use nullptr here instead?",
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2255608_4dc4f11d",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-30T20:04:01Z",
+      "side": 1,
+      "message": "Use an rtc::ZeroBuffer if possible, if you can\u0027t ideally don\u0027t re cast to a string type.",
+      "range": {
+        "startLine": 998,
+        "startChar": 0,
+        "endLine": 998,
+        "endChar": 31
+      },
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
