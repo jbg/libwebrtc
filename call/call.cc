@@ -1219,7 +1219,7 @@ PacketReceiver::DeliveryStatus Call::DeliverRtp(MediaType media_type,
       int64_t system_time_us =
           rtc::SystemTimeNanos() / rtc::kNumNanosecsPerMicrosec;
       packet_time_us = receive_time_calculator_->ReconcileReceiveTimes(
-          packet_time_us, system_time_us, clock_->TimeInMicroseconds());
+          packet_time_us, rtc::TimeUTCMicros(), clock_->TimeInMicroseconds());
     }
     parsed_packet.set_arrival_time_ms((packet_time_us + 500) / 1000);
   } else {
