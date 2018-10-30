@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "modules/audio_processing/audio_buffer.h"
+#include "modules/audio_processing/echo_cancellation_impl.h"
 #include "modules/audio_processing/include/aec_dump.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/render_queue_item_verifier.h"
@@ -325,6 +326,8 @@ class AudioProcessingImpl : public AudioProcessing {
   // Structs containing the pointers to the submodules.
   std::unique_ptr<ApmPublicSubmodules> public_submodules_;
   std::unique_ptr<ApmPrivateSubmodules> private_submodules_;
+  // Submodules not managed by a struct.
+  EchoCancellationImpl echo_cancellation_ RTC_GUARDED_BY(crit_capture_);
 
   // State that is written to while holding both the render and capture locks
   // but can be read without any lock being held.

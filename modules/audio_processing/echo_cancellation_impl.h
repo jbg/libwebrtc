@@ -30,10 +30,11 @@ class AudioBuffer;
 // than AECM but also requires more processing power and is dependent on delay
 // stability and reporting accuracy. As such it is well-suited and recommended
 // for PC and IP phone applications.
+// The class is not thread-safe. It must be operated on in a single-threaded
+// fashion.
 class EchoCancellationImpl {
  public:
-  EchoCancellationImpl(rtc::CriticalSection* crit_render,
-                       rtc::CriticalSection* crit_capture);
+  EchoCancellationImpl();
   ~EchoCancellationImpl();
 
   void ProcessRenderAudio(rtc::ArrayView<const float> packed_render_audio);
@@ -102,7 +103,7 @@ class EchoCancellationImpl {
   };
 
   // Provides various statistics about the AEC.
-  int GetMetrics(Metrics* metrics);
+  int GetMetrics(Metrics* metrics) const;
 
   // Enables computation and logging of delay values. Statistics are obtained
   // through |GetDelayMetrics()|.
@@ -118,8 +119,8 @@ class EchoCancellationImpl {
   // Note that if there are several clients pulling metrics from
   // |GetDelayMetrics()| during a session the first call from any of them will
   // change to one second aggregation window for all.
-  int GetDelayMetrics(int* median, int* std);
-  int GetDelayMetrics(int* median, int* std, float* fraction_poor_delays);
+  int GetDelayMetrics(int* median, int* std) const;
+  int GetDelayMetrics(int* median, int* std, float* fraction_poor_delays) const;
 
   // Returns a pointer to the low level AEC component.  In case of multiple
   // channels, the pointer to the first one is returned.  A NULL pointer is
@@ -154,28 +155,23 @@ class EchoCancellationImpl {
   void AllocateRenderQueue();
   int Configure();
 
-  rtc::CriticalSection* const crit_render_ RTC_ACQUIRED_BEFORE(crit_capture_);
-  rtc::CriticalSection* const crit_capture_;
-
   bool enabled_ = false;
-  bool drift_compensation_enabled_ RTC_GUARDED_BY(crit_capture_);
-  bool metrics_enabled_ RTC_GUARDED_BY(crit_capture_);
-  SuppressionLevel suppression_level_ RTC_GUARDED_BY(crit_capture_);
-  int stream_drift_samples_ RTC_GUARDED_BY(crit_capture_);
-  bool was_stream_drift_set_ RTC_GUARDED_BY(crit_capture_);
-  bool stream_has_echo_ RTC_GUARDED_BY(crit_capture_);
-  bool delay_logging_enabled_ RTC_GUARDED_BY(crit_capture_);
-  bool extended_filter_enabled_ RTC_GUARDED_BY(crit_capture_);
-  bool delay_agnostic_enabled_ RTC_GUARDED_BY(crit_capture_);
-  bool refined_adaptive_filter_enabled_ RTC_GUARDED_BY(crit_capture_) = false;
+  bool drift_compensation_enabled_;
+  bool metrics_enabled_;
+  SuppressionLevel suppression_level_;
+  int stream_drift_samples_;
+  bool was_stream_drift_set_;
+  bool stream_has_echo_;
+  bool delay_logging_enabled_;
+  bool extended_filter_enabled_;
+  bool delay_agnostic_enabled_;
+  bool refined_adaptive_filter_enabled_;
 
   // Only active on Chrome OS devices.
-  const bool enforce_zero_stream_delay_ RTC_GUARDED_BY(crit_capture_);
+  const bool enforce_zero_stream_delay_;
 
   std::vector<std::unique_ptr<Canceller>> cancellers_;
   std::unique_ptr<StreamProperties> stream_properties_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(EchoCancellationImpl);
 };
 
 }  // namespace webrtc
