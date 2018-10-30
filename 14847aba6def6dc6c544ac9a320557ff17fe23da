@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "038b2a03_6140cc4a",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-30T20:42:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2b7216d_d938807b",
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b26fcc4_03358645",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 5
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "50686069_795e4337",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-30T20:42:08Z",
+      "side": 1,
+      "message": "\"      // We also ignore the fact that key is a key that is base64 encoded of \n  // (SrtpTransport::ParseKeyParams takes care of parsing if you need it).\".\n\ntechnically the base64 should still have the same entropy as the original text.\n\nAnyway, I refactored srtpfilter and reused.",
+      "parentUuid": "8b26fcc4_03358645",
+      "range": {
+        "startLine": 983,
+        "startChar": 32,
+        "endLine": 983,
+        "endChar": 33
+      },
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b14364a6_e9a40b9c",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 5
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "34390727_f0a92083",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-30T20:42:08Z",
+      "side": 1,
+      "message": "didn\u0027t know I can ;)",
+      "parentUuid": "b14364a6_e9a40b9c",
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2255608_4dc4f11d",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 5
@@ -70,6 +130,30 @@
       "writtenOn": "2018-10-30T20:04:01Z",
       "side": 1,
       "message": "Use an rtc::ZeroBuffer if possible, if you can\u0027t ideally don\u0027t re cast to a string type.",
+      "range": {
+        "startLine": 998,
+        "startChar": 0,
+        "endLine": 998,
+        "endChar": 31
+      },
+      "revId": "14847aba6def6dc6c544ac9a320557ff17fe23da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b3a78f4_42043580",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-30T20:42:08Z",
+      "side": 1,
+      "message": "You are asking for a lot here. (this type is already used in downstream projects). Downstream projects will store it in a string anyway at this point, so there is no immediate benefit for quite a bit of effort. Won\u0027t fix ;)",
+      "parentUuid": "e2255608_4dc4f11d",
       "range": {
         "startLine": 998,
         "startChar": 0,
