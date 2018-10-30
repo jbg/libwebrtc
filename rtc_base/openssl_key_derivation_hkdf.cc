@@ -29,7 +29,7 @@ OpenSSLKeyDerivationHKDF::~OpenSSLKeyDerivationHKDF() = default;
 const size_t OpenSSLKeyDerivationHKDF::kMinKeyByteSize = 16;
 const size_t OpenSSLKeyDerivationHKDF::kMaxKeyByteSize =
     255 * SHA256_DIGEST_LENGTH;
-const size_t OpenSSLKeyDerivationHKDF::kMinSecretByteSize = 32;
+const size_t OpenSSLKeyDerivationHKDF::kMinSecretByteSize = 16;
 
 absl::optional<ZeroOnFreeBuffer<uint8_t>> OpenSSLKeyDerivationHKDF::DeriveKey(
     rtc::ArrayView<const uint8_t> secret,
