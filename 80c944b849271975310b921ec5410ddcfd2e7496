@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6cb83e6e_264262d5",
+        "filename": "examples/turnserver/turnserver_main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-30T10:34:58Z",
+      "side": 1,
+      "message": "I would argue that it\u0027s better to just qualify the name when you use it down on line 79.\n\nAlternatively, put everything in this file in ::webrtc_examples, except a tiny ::main that just calls ::webrtc_examples::main. It\u0027s nice to not put stuff in the global namespace...",
+      "revId": "80c944b849271975310b921ec5410ddcfd2e7496",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "860a1cb4_0e990d07",
+        "filename": "examples/turnserver/turnserver_main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-10-30T10:34:58Z",
+      "side": 1,
+      "message": "Everything above this point could be in an unnamed namespace, right?",
+      "revId": "80c944b849271975310b921ec5410ddcfd2e7496",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
