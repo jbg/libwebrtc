@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bb2e5ed_5a169da4",
+        "filename": "call/call.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-30T10:16:20Z",
+      "side": 1,
+      "message": "Why not rtc::TimeMicros? SystemTimeNanos is intended for tests where for some reason the reading should not be affected by use of rtc::ScopedFakeClock. If that\u0027s really appropriate here, I think it deserves a comment.",
+      "range": {
+        "startLine": 1220,
+        "startChar": 10,
+        "endLine": 1220,
+        "endChar": 64
+      },
+      "revId": "76ad154eef63552e2bf570eedc39966d1f38a8b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
