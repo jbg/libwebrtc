@@ -46,6 +46,30 @@
       "revId": "b26cf2f130d304d8ec5a8ef2a9298f9e471ce73b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dce7473_a2ee412a",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-30T15:18:16Z",
+      "side": 0,
+      "message": "I don\u0027t think there was any deep reason for logging it in Call; it was just the most convenient.\n\n- All streams are created by Call, so the logging code could be in one place.\n- Call had a pointer to the log, but it was not obvious whether the streams would have one.",
+      "parentUuid": "7943f074_d7135353",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 582,
+        "endChar": 12
+      },
+      "revId": "b26cf2f130d304d8ec5a8ef2a9298f9e471ce73b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
