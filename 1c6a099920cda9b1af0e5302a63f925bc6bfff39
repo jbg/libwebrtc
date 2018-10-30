@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3117d318_3f6b982d",
+        "filename": "luci-notify.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2018-10-30T11:30:17Z",
+      "side": 1,
+      "message": "Remove this change.",
+      "range": {
+        "startLine": 14,
+        "startChar": 19,
+        "endLine": 14,
+        "endChar": 42
+      },
+      "revId": "1c6a099920cda9b1af0e5302a63f925bc6bfff39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
