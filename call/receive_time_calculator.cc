@@ -45,8 +45,8 @@ ReceiveTimeCalculator::ReceiveTimeCalculator()
 
 std::unique_ptr<ReceiveTimeCalculator>
 ReceiveTimeCalculator::CreateFromFieldTrial() {
-  if (!IsEnabled(kBweReceiveTimeCorrection))
-    return nullptr;
+  /* if (!IsEnabled(kBweReceiveTimeCorrection))
+     return nullptr;*/
   return absl::make_unique<ReceiveTimeCalculator>();
 }
 
