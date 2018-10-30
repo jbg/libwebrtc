@@ -28,6 +28,9 @@
 #include "call/rtp_transport_controller_send_interface.h"
 #include "common_audio/vad/include/vad.h"
 #include "common_types.h"  // NOLINT(build/include)
+#include "logging/rtc_event_log/events/rtc_event_audio_send_stream_config.h"
+#include "logging/rtc_event_log/rtc_event_log.h"
+#include "logging/rtc_event_log/rtc_stream_config.h"
 #include "modules/audio_coding/codecs/cng/audio_encoder_cng.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "rtc_base/checks.h"
@@ -69,6 +72,19 @@ std::unique_ptr<voe::ChannelSendProxy> CreateChannelAndProxy(
           worker_queue, module_process_thread, media_transport, rtcp_rtt_stats,
           event_log, frame_encryptor, crypto_options, extmap_allow_mixed));
 }
+
+std::unique_ptr<rtclog::StreamConfig> CreateRtcLogStreamConfig(
+    const AudioSendStream::Config& config) {
+  auto rtclog_config = absl::make_unique<rtclog::StreamConfig>();
+  rtclog_config->local_ssrc = config.rtp.ssrc;
+  rtclog_config->rtp_extensions = config.rtp.extensions;
+  if (config.send_codec_spec) {
+    rtclog_config->codecs.emplace_back(config.send_codec_spec->format.name,
+                                       config.send_codec_spec->payload_type, 0);
+  }
+  return rtclog_config;
+}
+
 }  // namespace
 
 // Helper class to track the actively sending lifetime of this stream.
@@ -221,6 +237,9 @@ void AudioSendStream::ConfigureStream(
     bool first_time) {
   RTC_LOG(LS_INFO) << "AudioSendStream::ConfigureStream: "
                    << new_config.ToString();
+  stream->event_log_->Log(absl::make_unique<RtcEventAudioSendStreamConfig>(
+      CreateRtcLogStreamConfig(new_config)));
+
   const auto& channel_proxy = stream->channel_proxy_;
   const auto& old_config = stream->config_;
 
