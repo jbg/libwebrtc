@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "189aaf0a_8e8b61eb",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-10-30T22:07:54Z",
+      "side": 1,
+      "message": "Use the salt field for the salt.",
+      "revId": "5b6775585220cba2c97c28f8ef038d6debd9b7db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
