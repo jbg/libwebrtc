@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0748148_c594d9d8",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-30T13:03:26Z",
+      "side": 1,
+      "message": "Please add a comment saying why wall-clock time is the right choice.\n\n(I guess it\u0027s because kernel socket timestamps use this clock, \nsee https://www.kernel.org/doc/Documentation/networking/timestamping.txt; ideally, we should try to get those timestamps in monotonic clock, with kernel patches if needed).",
+      "range": {
+        "startLine": 1220,
+        "startChar": 26,
+        "endLine": 1220,
+        "endChar": 46
+      },
+      "revId": "fb27494dd7c72840a6f0b317e900247a8a028bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
