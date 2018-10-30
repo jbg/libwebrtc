@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "001f004e_bc0b9c00",
+        "filename": "rtc_base/memory_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-30T15:11:25Z",
+      "side": 1,
+      "message": "Making this a unique_ptr would make sense, but for current cl, code is just moved around, not cleaned up.",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 15
+      },
+      "revId": "483c012c6ede14330481c07792481f107c2e37d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
