@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c56a2e04_3d667d9e",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-30T23:45:51Z",
+      "side": 1,
+      "message": "validate this pointer?",
+      "range": {
+        "startLine": 946,
+        "startChar": 20,
+        "endLine": 946,
+        "endChar": 39
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f7e6da_022625ea",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-30T23:45:51Z",
+      "side": 1,
+      "message": "Preferably we have a ref for this claim linked.",
+      "range": {
+        "startLine": 948,
+        "startChar": 12,
+        "endLine": 948,
+        "endChar": 58
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0caf722_4cb2520a",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-30T23:45:51Z",
+      "side": 1,
+      "message": "nit: the current",
+      "range": {
+        "startLine": 972,
+        "startChar": 20,
+        "endLine": 972,
+        "endChar": 27
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb58fb10_65eee41d",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-30T23:45:51Z",
+      "side": 1,
+      "message": "here and below: the expected is usually placed as the first argument in the codebase.",
+      "range": {
+        "startLine": 455,
+        "startChar": 2,
+        "endLine": 455,
+        "endChar": 11
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd96d837_8e4e5a42",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-10-30T23:45:51Z",
+      "side": 1,
+      "message": "The test itself is small enough but it looks like two tests. Breaking it up does have some overhead, and it\u0027s up to you.",
+      "range": {
+        "startLine": 460,
+        "startChar": 2,
+        "endLine": 460,
+        "endChar": 13
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
