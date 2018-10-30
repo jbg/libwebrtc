@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58815dd0_5a489ee4",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-10-30T14:32:25Z",
+      "side": 0,
+      "message": "Since all of the other configs are logged in CreateX, maybe a comment that the logging has moved?",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 582,
+        "endChar": 12
+      },
+      "revId": "b26cf2f130d304d8ec5a8ef2a9298f9e471ce73b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
