@@ -22,6 +22,30 @@
       "revId": "4203d3ab96041fb263f2fd0e4d4234be9dc642bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40d6da23_8f47ce49",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-10-30T15:11:32Z",
+      "side": 1,
+      "message": "It seems wrong to rely on that. I\u0027ve reworked the code to only log if necessary.",
+      "parentUuid": "db273e53_1131f7e5",
+      "range": {
+        "startLine": 234,
+        "startChar": 22,
+        "endLine": 234,
+        "endChar": 37
+      },
+      "revId": "4203d3ab96041fb263f2fd0e4d4234be9dc642bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

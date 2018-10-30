@@ -22,6 +22,30 @@
       "revId": "b26cf2f130d304d8ec5a8ef2a9298f9e471ce73b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7943f074_d7135353",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-10-30T15:11:32Z",
+      "side": 0,
+      "message": "Yes, that makes sense.\nstefan@ What\u0027s the rationale behind Call logging this, rather than the streams themselves?",
+      "parentUuid": "58815dd0_5a489ee4",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 582,
+        "endChar": 12
+      },
+      "revId": "b26cf2f130d304d8ec5a8ef2a9298f9e471ce73b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
