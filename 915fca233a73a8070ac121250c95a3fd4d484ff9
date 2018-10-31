@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de067b71_4b5f0a7b",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-31T21:42:36Z",
+      "side": 1,
+      "message": "There is race if media_transport_state is updated in sepTransport::OnStateChanged.",
+      "revId": "915fca233a73a8070ac121250c95a3fd4d484ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
