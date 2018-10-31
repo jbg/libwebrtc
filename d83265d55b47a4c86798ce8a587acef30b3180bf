@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bbf30a75_5eef7a02",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T22:34:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "74db9fcf_44c187db",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 52
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26e4bc57_9b134e80",
         "filename": "pc/jseptransport.cc",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Removed the if entirely. Invoking the callback always.",
       "parentUuid": "26e4bc57_9b134e80",
+      "range": {
+        "startLine": 649,
+        "startChar": 0,
+        "endLine": 651,
+        "endChar": 3
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cb8cb89_4b2ceeb6",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T22:34:35Z",
+      "side": 1,
+      "message": "You could still test the behavior isolated to the state change firing SignalMediaTransportStateChanged. It would be a simple test, but it would test the specific behavior instead of the entire UpdateAggregateState function in the JsepTransportController. I\u0027ll let you decide.",
+      "parentUuid": "b0827055_90efd03e",
       "range": {
         "startLine": 649,
         "startChar": 0,
@@ -237,6 +285,30 @@
     },
     {
       "key": {
+        "uuid": "ec63ff4c_45e74b78",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T22:34:35Z",
+      "side": 1,
+      "message": "sgtm.",
+      "parentUuid": "3bbfe071_0f0be3eb",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 52
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3850e4dc_8c8dd1b4",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 2
@@ -281,6 +353,30 @@
       "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4b5775d_79bc6ffa",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T22:34:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3c4715a_af00fa52",
+      "range": {
+        "startLine": 1281,
+        "startChar": 4,
+        "endLine": 1281,
+        "endChar": 17
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {

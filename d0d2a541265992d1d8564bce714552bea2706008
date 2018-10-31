@@ -382,6 +382,24 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8ef892f_9eaa87f1",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T22:34:35Z",
+      "side": 1,
+      "message": "Yup the test looks good :). What about (1) - the case that it goes back to pending?",
+      "parentUuid": "eb471e8f_d53b32ee",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
