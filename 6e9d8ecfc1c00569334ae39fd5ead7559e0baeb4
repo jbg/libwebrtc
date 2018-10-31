@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7569999b_63072ac9",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "nit: Not part of your Cl, but this is misspelled.\ntrasport --\u003e transport",
+      "range": {
+        "startLine": 51,
+        "startChar": 32,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53a60946_e956f61d",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "nit: If you\u0027d like you could replace these lines with CreateMediaTransport(packet_transport, network_thread, settings). \n\nI\u0027ve seen this pattern in other places, but your call if you want to or not.",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 38
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "161481be_d2f6b5b7",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "\"crypto flags\" is a bit confusing to me here when referring to the offer. When I think of crypto flags I think of the the CryptoOptions set to the RTCConfiguration for a PeerConnection.\n\nDo you mean the \"a\u003dcrypto\" SDP line was not set at the media-level in the offer? Or do you mean no CryptoParams were added to the MediaContentDescription (done here - https://cs.chromium.org/chromium/src/third_party/webrtc/pc/mediasession.cc?dr\u003dCSs\u0026g\u003d0\u0026l\u003d705)?\n\nI just want to make sure this log is clear. Maybe the most appropriate thing to say is SDES is not enabled in the offer?",
+      "range": {
+        "startLine": 959,
+        "startChar": 18,
+        "endLine": 959,
+        "endChar": 30
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39022782_a66626b8",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "The difference being that your answer does not include the key? Or the difference being that the key you derive for the media transport is different than the one signaled in the SDP?",
+      "range": {
+        "startLine": 972,
+        "startChar": 9,
+        "endLine": 972,
+        "endChar": 51
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1405ef77_b478b49e",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "Are you missing an expectation here for the pre_shared_key?\n\nEXPECT_TRUE(media_transport-\u003epre_shared_key().has_value());",
+      "range": {
+        "startLine": 437,
+        "startChar": 2,
+        "endLine": 438,
+        "endChar": 0
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8723efc0_b42b21f6",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "This test is for the callee (SRD with an offer w/o an offer, then add crypto and SLD with an answer).\n\nWhat about doing the same test for a caller (SLD with an offer w/o crypto, then add crypto and SRD with the answer).",
+      "range": {
+        "startLine": 443,
+        "startChar": 36,
+        "endLine": 443,
+        "endChar": 69
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88e994df_6f2e88f6",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "Should this be description2?",
+      "range": {
+        "startLine": 461,
+        "startChar": 58,
+        "endLine": 461,
+        "endChar": 69
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d321030_0cbc5418",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T14:49:08Z",
+      "side": 1,
+      "message": "Don\u0027t you want to have this line above SetLocalDescription?",
+      "range": {
+        "startLine": 464,
+        "startChar": 2,
+        "endLine": 464,
+        "endChar": 40
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
