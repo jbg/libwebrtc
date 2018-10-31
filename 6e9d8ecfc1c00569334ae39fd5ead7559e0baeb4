@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e4901c2_8ae1254e",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7569999b_63072ac9",
+      "range": {
+        "startLine": 51,
+        "startChar": 32,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53a60946_e956f61d",
         "filename": "api/test/fake_media_transport.h",
         "patchSetId": 11
@@ -45,6 +69,30 @@
       "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "585cc245_d82ef17c",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "yep, I think that\u0027s reasonable.",
+      "parentUuid": "53a60946_e956f61d",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 38
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "97c0218e_a6e0d6a1",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "Done. Comment reworked.",
+      "parentUuid": "161481be_d2f6b5b7",
+      "range": {
+        "startLine": 959,
+        "startChar": 18,
+        "endLine": 959,
+        "endChar": 30
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39022782_a66626b8",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 11
@@ -91,6 +163,30 @@
       "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca345222_103a76b0",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "Clarified in the comment.",
+      "parentUuid": "39022782_a66626b8",
+      "range": {
+        "startLine": 972,
+        "startChar": 9,
+        "endLine": 972,
+        "endChar": 51
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "71a06648_6c64e124",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "1405ef77_b478b49e",
+      "range": {
+        "startLine": 437,
+        "startChar": 2,
+        "endLine": 438,
+        "endChar": 0
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8723efc0_b42b21f6",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 11
@@ -128,6 +248,30 @@
       "writtenOn": "2018-10-31T14:49:08Z",
       "side": 1,
       "message": "This test is for the callee (SRD with an offer w/o an offer, then add crypto and SLD with an answer).\n\nWhat about doing the same test for a caller (SLD with an offer w/o crypto, then add crypto and SRD with the answer).",
+      "range": {
+        "startLine": 443,
+        "startChar": 36,
+        "endLine": 443,
+        "endChar": 69
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38c103e7_9b328968",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "The logic removing the factory is the same no matter if it\u0027s a callee or a caller (if you look at the code there is no distinction between callee\u0027s and caller\u0027s scenarios -- there is no branching based on caller/calle). \n\nSo I\u0027d argue that the current test is sufficient, and it would be better not to duplicate the test ;)",
+      "parentUuid": "8723efc0_b42b21f6",
       "range": {
         "startLine": 443,
         "startChar": 36,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "ddc7dbb2_ac493ef4",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "yep, I noticed this too. Fixed.",
+      "parentUuid": "88e994df_6f2e88f6",
+      "range": {
+        "startLine": 461,
+        "startChar": 58,
+        "endLine": 461,
+        "endChar": 69
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d321030_0cbc5418",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 11
@@ -183,6 +351,30 @@
       "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c98699a9_89da3498",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T15:25:49Z",
+      "side": 1,
+      "message": "Yep ;)",
+      "parentUuid": "6d321030_0cbc5418",
+      "range": {
+        "startLine": 464,
+        "startChar": 2,
+        "endLine": 464,
+        "endChar": 40
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
