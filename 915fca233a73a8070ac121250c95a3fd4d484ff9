@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "99a58d85_08b54197",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-10-31T21:46:16Z",
+      "side": 1,
+      "message": "Related to my other comment about race condition: what is the point of returning state if it can change any time?",
+      "revId": "915fca233a73a8070ac121250c95a3fd4d484ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de067b71_4b5f0a7b",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 3
