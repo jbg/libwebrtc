@@ -132,6 +132,8 @@ RTCPSender::RTCPSender(
       timestamp_offset_(0),
       last_rtp_timestamp_(0),
       last_frame_capture_time_ms_(-1),
+      last_rtp_timestamp_sample_time_ms_(-1),
+      capture_timestamps_jump_estimator_(121),
       ssrc_(0),
       remote_ssrc_(0),
       receive_statistics_(receive_statistics),
@@ -258,18 +260,42 @@ void RTCPSender::SetLastRtpTime(uint32_t rtp_timestamp,
                                 int64_t capture_time_ms,
                                 int8_t payload_type) {
   rtc::CritScope lock(&critical_section_rtcp_sender_);
+  // Workaround for https://bugs.webrtc.org/9905
+  // If no capture timestamp is present, try to guess one so that it increases
+  // at about the same rate as this method is called, but consecutive jumps
+  // as equal as possible, e.g. if this method is called every 10ms with +-1ms
+  // of delay, resulting guessed timestamps should always increase by 10ms.
+  int64_t time_now_ms = clock_->TimeInMilliseconds();
+  if (capture_time_ms < 0) {
+    // if payload changed or it's not known we can't maintain smooth timestamps
+    // jumps as rtp rate might have changed between calls.
+    if (last_rtp_timestamp_sample_time_ms_ == -1 || payload_type == -1 ||
+        last_payload_type_ != payload_type) {
+      capture_time_ms = time_now_ms;
+      capture_timestamps_jump_estimator_.Reset();
+    } else {
+      int64_t time_between_calls_ms =
+          time_now_ms - last_rtp_timestamp_sample_time_ms_;
+      capture_timestamps_jump_estimator_.Insert(time_between_calls_ms);
+      capture_time_ms = last_frame_capture_time_ms_ +
+                        capture_timestamps_jump_estimator_.GetFilteredValue();
+    }
+  }
+
+  // To avoid drift of guessed value.
+  if (abs(capture_time_ms - time_now_ms) > 1)
+    capture_time_ms = time_now_ms;
+
+  last_rtp_timestamp_sample_time_ms_ = time_now_ms;
+
   // For compatibility with clients who don't set payload type correctly on all
   // calls.
   if (payload_type != -1) {
     last_payload_type_ = payload_type;
   }
+
   last_rtp_timestamp_ = rtp_timestamp;
-  if (capture_time_ms < 0) {
-    // We don't currently get a capture time from VoiceEngine.
-    last_frame_capture_time_ms_ = clock_->TimeInMilliseconds();
-  } else {
-    last_frame_capture_time_ms_ = capture_time_ms;
-  }
+  last_frame_capture_time_ms_ = capture_time_ms;
 }
 
 void RTCPSender::SetRtpClockRate(int8_t payload_type, int rtp_clock_rate_hz) {
