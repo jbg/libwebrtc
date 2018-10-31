@@ -364,6 +364,24 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb471e8f_d53b32ee",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Yep, I did (2) and I added a test too :)",
+      "parentUuid": "0dd7ae2d_f92e651a",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

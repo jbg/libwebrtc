@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "74db9fcf_44c187db",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Yes, technically it can. You will get a callback if that\u0027s the case (MediaTransportInterface guarantees a callback with the current state when you register)",
+      "parentUuid": "2bf1fd39_eec02528",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 52
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26e4bc57_9b134e80",
         "filename": "pc/jseptransport.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0827055_90efd03e",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Removed the if entirely. Invoking the callback always.",
+      "parentUuid": "26e4bc57_9b134e80",
+      "range": {
+        "startLine": 649,
+        "startChar": 0,
+        "endLine": 651,
+        "endChar": 3
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1d99f044_32747e01",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Ah, this comment isn\u0027t true now. I will just say that it signals changes to the state. + i changed the implementation.",
+      "parentUuid": "c5ebde87_b1338bfd",
+      "range": {
+        "startLine": 185,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 66
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e4102b8_d587bbea",
         "filename": "pc/jseptransport.h",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "3540cd38_fc107934",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "renamed SignalMediaTransportStateChanged",
+      "parentUuid": "9e4102b8_d587bbea",
+      "range": {
+        "startLine": 186,
+        "startChar": 20,
+        "endLine": 186,
+        "endChar": 46
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6abdd61f_0e5792a2",
         "filename": "pc/jseptransport.h",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2018-10-31T21:35:57Z",
       "side": 1,
       "message": "If you wanted you could make it an optional, that is only set if the media_transport_ is provided.",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 52
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bbfe071_0f0be3eb",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "I could I guess. Done.\n\nEdit: not done: even if I made it optional, it needs to be initialized to something. Given that it\u0027s only accessed in the codepath where media transport is set, I am not sure if the current solution is really ambiguous.",
+      "parentUuid": "6abdd61f_0e5792a2",
       "range": {
         "startLine": 274,
         "startChar": 2,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "b3c4715a_af00fa52",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Not in the near future. Once we get rid of RTP, this is when we should do that.\nRight now there is no way to write a test that would test such a thing, because DTLS transport is always present (as far as I can test), so I couldn\u0027t test this scenario and therefore I didn\u0027t implement it.",
+      "parentUuid": "3850e4dc_8c8dd1b4",
+      "range": {
+        "startLine": 1281,
+        "startChar": 4,
+        "endLine": 1281,
+        "endChar": 17
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5067ee9_507c142c",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 2
@@ -160,6 +304,30 @@
       "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d24221b6_a6f1785c",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5067ee9_507c142c",
+      "range": {
+        "startLine": 819,
+        "startChar": 5,
+        "endLine": 819,
+        "endChar": 10
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

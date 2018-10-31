@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7146230a_bec242ca",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "That\u0027s why I wanted to have the getter on the interface itself ;-) But really, it\u0027s modified and acccessed on the netowrk thread.\n\nCan\u0027t add a check, because network thread is not exposed to jseptransport.h",
+      "parentUuid": "99a58d85_08b54197",
+      "revId": "915fca233a73a8070ac121250c95a3fd4d484ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de067b71_4b5f0a7b",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "915fca233a73a8070ac121250c95a3fd4d484ff9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0e913ff_129f32dc",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T21:53:47Z",
+      "side": 1,
+      "message": "Both are happening on network thread.\nthe first line of this method:\nRTC_DCHECK(network_thread_-\u003eIsCurrent()); \n\nand I think we should add it to the public interface that the callback must happen on network thread. Added to the interface. (it was already happening on the network thread in the implementation)",
+      "parentUuid": "de067b71_4b5f0a7b",
+      "revId": "915fca233a73a8070ac121250c95a3fd4d484ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
