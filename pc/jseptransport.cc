@@ -115,9 +115,17 @@ JsepTransport::JsepTransport(
     RTC_DCHECK(!sdes_transport);
     dtls_srtp_transport_ = std::move(dtls_srtp_transport);
   }
+
+  if (media_transport_) {
+    media_transport_->SetMediaTransportStateCallback(this);
+  }
 }
 
-JsepTransport::~JsepTransport() {}
+JsepTransport::~JsepTransport() {
+  if (media_transport_) {
+    media_transport_->SetMediaTransportStateCallback(nullptr);
+  }
+}
 
 webrtc::RTCError JsepTransport::SetLocalJsepTransportDescription(
     const JsepTransportDescription& jsep_description,
@@ -634,6 +642,11 @@ bool JsepTransport::GetTransportStats(DtlsTransportInternal* dtls_transport,
   }
   stats->channel_stats.push_back(substats);
   return true;
+}
+
+void JsepTransport::OnStateChanged(webrtc::MediaTransportState state) {
+  media_transport_state_ = state;
+  SignalMediaTransportActiveOrClosed();
 }
 
 }  // namespace cricket

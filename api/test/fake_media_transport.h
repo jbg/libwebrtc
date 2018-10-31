@@ -57,8 +57,20 @@ class FakeMediaTransport : public MediaTransportInterface {
   void SetTargetTransferRateObserver(
       webrtc::TargetTransferRateObserver* observer) override {}
 
+  virtual void SetMediaTransportStateCallback(
+      MediaTransportStateCallback* callback) override {
+    state_callback_ = callback;
+  }
+
+  void SetState(webrtc::MediaTransportState state) {
+    if (state_callback_) {
+      state_callback_->OnStateChanged(state);
+    }
+  }
+
  private:
   const MediaTransportSettings settings_;
+  MediaTransportStateCallback* state_callback_;
 };
 
 // Fake media transport factory creates fake media transport.
