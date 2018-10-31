@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "648bd1c0_f68bab74",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-10-31T15:14:49Z",
+      "side": 1,
+      "message": "Well, it should be true provided there are no gaps in the audio capture. I hope there are gaps in the rtp_timestamps when that happens.",
+      "parentUuid": "f8a8e088_f93672fd",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9cc8610_1ed529a0",
         "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
         "patchSetId": 3
@@ -187,6 +211,30 @@
       "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2830b692_fad8caad",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-10-31T15:14:49Z",
+      "side": 1,
+      "message": "I don\u0027t doubt that this removes the issue reported, but isn\u0027t is just papering over the issue? I mean, we want the timestamps to increase monotonically and we fix that by just adjusting them to be monotonically increasing. Isn\u0027t there an easier way to lie about this, if that\u0027s the route we\u0027re going down? :)",
+      "parentUuid": "f887c612_16b4e870",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 20
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
