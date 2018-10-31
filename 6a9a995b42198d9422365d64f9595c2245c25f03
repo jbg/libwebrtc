@@ -16,6 +16,24 @@
       "revId": "6a9a995b42198d9422365d64f9595c2245c25f03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a9f5fd5_78f7f465",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T23:03:17Z",
+      "side": 1,
+      "message": "I am not using this in the test, so the answer is \u0027no\u0027.\nWe will need to add implementation when we remove the default \u0027SetMediaTransportStateCallback\u0027 callback implementation, but it\u0027s orthogonal.",
+      "parentUuid": "ebcac787_817bf2f5",
+      "revId": "6a9a995b42198d9422365d64f9595c2245c25f03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
