@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "70ad08f1_772d5252",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-31T14:39:32Z",
+      "side": 1,
+      "message": "Some arbitrary large window size. It\u0027s a named constant now.",
+      "parentUuid": "fc903176_c3897def",
+      "range": {
+        "startLine": 136,
+        "startChar": 41,
+        "endLine": 136,
+        "endChar": 44
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67d4d2a0_79d7cf63",
         "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-31T13:31:55Z",
       "side": 1,
       "message": "i.e. you assume that rtp_timestamp increased by same value on each call of SetLastRtpTime.\nthat is not true for Video (but video do set capture_time_ms).\nMay be true for audio. (any easy way to validate the assumption?)",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8a8e088_f93672fd",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-31T14:39:32Z",
+      "side": 1,
+      "message": "It\u0027s always true for audio. Tested that in Chrome, in video_loopback and in 1st party loopback tests. \n\nOssu@ Can you comment on that?",
+      "parentUuid": "67d4d2a0_79d7cf63",
       "range": {
         "startLine": 266,
         "startChar": 5,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "85db1e11_661d291a",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-31T14:39:32Z",
+      "side": 1,
+      "message": "Nice catch!",
+      "parentUuid": "b9cc8610_1ed529a0",
+      "range": {
+        "startLine": 285,
+        "startChar": 23,
+        "endLine": 285,
+        "endChar": 30
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f887c612_16b4e870",
         "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2018-10-31T13:31:55Z",
       "side": 1,
       "message": "look like complicated and brittle workaround.\nHow much work to actually fix the bug instead?",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 20
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05407cf5_67fe51ac",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-31T14:39:32Z",
+      "side": 1,
+      "message": "I have no idea.\nOssu@, can you answer that question?\n\nI too would prefer to just fix https://bugs.webrtc.org/9905 instead, but it looks to be non-trivial. Yet workaround is needed ASAP.",
+      "parentUuid": "f887c612_16b4e870",
       "range": {
         "startLine": 208,
         "startChar": 2,
