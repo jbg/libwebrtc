@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "12cab182_970a1dee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-31T09:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44f2d6da_e9ec8ab2",
+      "revId": "476b74416e5e1dbc3a1576dad7de22956f085ad6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87a5e39f_620cb3e4",
         "filename": "rtc_base/stream.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-31T01:12:44Z",
       "side": 1,
       "message": "Do these still need to be virtual? (And if not, can the entire class be final?)",
+      "revId": "476b74416e5e1dbc3a1576dad7de22956f085ad6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe40aee0_9aa05178",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-10-31T09:26:07Z",
+      "side": 1,
+      "message": "They no longer need to be virtual. Dropped virtual, and mark class final.\n\nIt would probably make sense to make FifoBuffer not even inherit the StreamInterface, but that\u0027s for some other cl.",
+      "parentUuid": "87a5e39f_620cb3e4",
       "revId": "476b74416e5e1dbc3a1576dad7de22956f085ad6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
