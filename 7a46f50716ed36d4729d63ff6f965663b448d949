@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bad1c0e_41650588",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-31T17:20:21Z",
+      "side": 1,
+      "message": "if there\u0027s shared code between this option and the other for windows, that would go into a separate file and avoid duplication.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9624035_e4399eae",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-31T17:20:21Z",
+      "side": 1,
+      "message": "can we avoid using a condition variable? It pulls in some dependencies from stl that we don\u0027t use.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "226a0706_2cdbc75e",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-31T17:20:21Z",
+      "side": 1,
+      "message": "we don\u0027t use gotos (sorry)",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a6a1930_ea4ab090",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-31T17:20:21Z",
+      "side": 1,
+      "message": "we don\u0027t use std::mutex or related classes",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bcbe5f3_aa863da0",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2018-10-31T17:20:21Z",
+      "side": 1,
+      "message": "this would be NotifyWake if following the coding style",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
