@@ -98,14 +98,6 @@ void StreamInterface::PostEvent(int events, int err) {
   PostEvent(Thread::Current(), events, err);
 }
 
-const void* StreamInterface::GetReadData(size_t* data_len) {
-  return nullptr;
-}
-
-void* StreamInterface::GetWriteBuffer(size_t* buf_len) {
-  return nullptr;
-}
-
 bool StreamInterface::SetPosition(size_t position) {
   return false;
 }
@@ -115,10 +107,6 @@ bool StreamInterface::GetPosition(size_t* position) const {
 }
 
 bool StreamInterface::GetSize(size_t* size) const {
-  return false;
-}
-
-bool StreamInterface::GetWriteRemaining(size_t* size) const {
   return false;
 }
 
@@ -180,10 +168,6 @@ bool StreamAdapterInterface::GetPosition(size_t* position) const {
 
 bool StreamAdapterInterface::GetSize(size_t* size) const {
   return stream_->GetSize(size);
-}
-
-bool StreamAdapterInterface::GetWriteRemaining(size_t* size) const {
-  return stream_->GetWriteRemaining(size);
 }
 
 bool StreamAdapterInterface::ReserveSize(size_t size) {
