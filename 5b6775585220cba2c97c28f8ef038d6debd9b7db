@@ -16,6 +16,24 @@
       "revId": "5b6775585220cba2c97c28f8ef038d6debd9b7db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f97988b1_fcb1c428",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T00:20:44Z",
+      "side": 1,
+      "message": "DIscussed offline. Salt is a cryptographically random number and can be ignored; instead I am using it as part of secret.",
+      "parentUuid": "189aaf0a_8e8b61eb",
+      "revId": "5b6775585220cba2c97c28f8ef038d6debd9b7db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

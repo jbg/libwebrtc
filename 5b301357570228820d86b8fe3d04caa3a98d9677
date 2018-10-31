@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "511b5067_6ea02b4e",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T00:20:44Z",
+      "side": 1,
+      "message": "ah, I assumed it\u0027s always present. done.",
+      "parentUuid": "c56a2e04_3d667d9e",
+      "range": {
+        "startLine": 946,
+        "startChar": 20,
+        "endLine": 946,
+        "endChar": 39
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49f7e6da_022625ea",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81a87528_085c330c",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T00:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f7e6da_022625ea",
+      "range": {
+        "startLine": 948,
+        "startChar": 12,
+        "endLine": 948,
+        "endChar": 58
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "868e8967_4145e1a7",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T00:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0caf722_4cb2520a",
+      "range": {
+        "startLine": 972,
+        "startChar": 20,
+        "endLine": 972,
+        "endChar": 27
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb58fb10_65eee41d",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 10
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "293cbc0d_5519c0f3",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T00:20:44Z",
+      "side": 1,
+      "message": "I used to do that and then mellem@ told me that it\u0027s not a practice :D \n\nBut it looks like the macros defined here are different than downstream.",
+      "parentUuid": "bb58fb10_65eee41d",
+      "range": {
+        "startLine": 455,
+        "startChar": 2,
+        "endLine": 455,
+        "endChar": 11
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd96d837_8e4e5a42",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 10
@@ -114,6 +210,30 @@
       "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45caeba2_5cd42efb",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T00:20:44Z",
+      "side": 1,
+      "message": "It\u0027s actually one test.\nI verify that after first set it\u0027s null, and that after second set it is still null. I need those two calls in a single test, one after another.\n\nEdited the comment above.",
+      "parentUuid": "dd96d837_8e4e5a42",
+      "range": {
+        "startLine": 460,
+        "startChar": 2,
+        "endLine": 460,
+        "endChar": 13
+      },
+      "revId": "5b301357570228820d86b8fe3d04caa3a98d9677",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
