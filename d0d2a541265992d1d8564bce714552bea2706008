@@ -346,6 +346,24 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dd7ae2d_f92e651a",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:38:04Z",
+      "side": 1,
+      "message": "Race condition - Looks like you did (2) already :p.",
+      "parentUuid": "52877cac_9cae797a",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
