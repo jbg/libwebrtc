@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b52c6acb_06269ee0",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-10-31T22:36:05Z",
+      "side": 1,
+      "message": "I think maybe we need to decide on the threading model for media transport before we call this out in the interface.  Do we actually require media transport to use the network thread?  While I think this makes sense, holmer@ has expressed a desire not to specify that media transport must operate on the network thread.",
+      "revId": "52c37738fe9da989108f84bc8f31a2b455bdf1e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
