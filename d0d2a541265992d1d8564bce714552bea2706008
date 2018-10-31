@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "78b01fad_9c937260",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:48:45Z",
+      "side": 1,
+      "message": "Not when pending, because we don\u0027t allow going from \u0027writable\u0027 to \u0027pending\u0027. Removed callback when it\u0027s closed for now.",
+      "parentUuid": "4d1be2b3_457ce58a",
+      "range": {
+        "startLine": 650,
+        "startChar": 6,
+        "endLine": 650,
+        "endChar": 51
+      },
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c60e165d_61193d08",
         "filename": "pc/jseptransport.h",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5ceb0e2_94a57c6c",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:48:45Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the intention.",
+      "parentUuid": "c60e165d_61193d08",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "a4b97b18_d3ea91eb",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:48:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18dda190_21b2f69f",
+      "range": {
+        "startLine": 272,
+        "startChar": 45,
+        "endLine": 272,
+        "endChar": 52
+      },
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ebc9fe5_d4249cc9",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 1
@@ -85,6 +151,30 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b34a8862_44c462ed",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:48:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ebc9fe5_d4249cc9",
+      "range": {
+        "startLine": 1241,
+        "startChar": 31,
+        "endLine": 1241,
+        "endChar": 34
+      },
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "aa2b4cd1_0b67af25",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:48:45Z",
+      "side": 1,
+      "message": "It\u0027s definitely like \"use positive booleans\". Followed suggestion.",
+      "parentUuid": "32dc3659_b3398fcc",
+      "range": {
+        "startLine": 1242,
+        "startChar": 23,
+        "endLine": 1242,
+        "endChar": 58
+      },
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6276128_98428ee8",
         "filename": "pc/jseptransportcontroller.cc",
         "patchSetId": 1
@@ -122,6 +236,24 @@
       "writtenOn": "2018-10-31T18:40:17Z",
       "side": 1,
       "message": "Should we handle kClosed by ORing it with any_failed?  Closed does\u0027t necessarily mean failed, it could just mean we\u0027re wrapping up the call and disconnected.  However, since we currently don\u0027t close deliberately until the media transport is deleted, it seems reasonable to interpret closed as failed.",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3776a203_c5043b91",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:48:45Z",
+      "side": 1,
+      "message": "Good question - I\u0027ve been wondering the same thing. If media transport gets closed by the remote party and we get the \u0027close\u0027 packet sooner than signaling delivers information about closure (not sure how ICE detects disconnects), should we put the connection state in failed state?",
+      "parentUuid": "d6276128_98428ee8",
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
