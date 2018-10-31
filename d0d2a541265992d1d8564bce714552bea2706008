@@ -274,6 +274,24 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fb27ab3_5014931f",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T18:52:12Z",
+      "side": 1,
+      "message": "What do you think should happen?\n\n1) DTLS doesn\u0027t allow to flip\u0026flop. In fact, there is no event for going to non-writable\n\n2) should we expose the event on every state change? right now, we only recompute global state when the event is triggered in jsep transport.\n\nI think, if we can agree on following assumptions, I can change the implementation:\n\n1) JsepTransport::MediaTransportState should only go from pending-\u003ewritable-\u003eclosed\n\nalternatively, if it goes back to pending, we should have ice state _checking_.\n\n2) if media transport is closed, we will treat it as failed (we expect media transport to only be closed during destruction).",
+      "parentUuid": "a855fcdb_5902afa8",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
