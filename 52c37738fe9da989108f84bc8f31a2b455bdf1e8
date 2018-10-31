@@ -16,6 +16,24 @@
       "revId": "52c37738fe9da989108f84bc8f31a2b455bdf1e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40caf86e_e278dada",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-10-31T22:51:56Z",
+      "side": 1,
+      "message": "Discussed offline. Adding todo, in the next CL I\u0027ll add a thread-safe wrapper on the callback.",
+      "parentUuid": "b52c6acb_06269ee0",
+      "revId": "52c37738fe9da989108f84bc8f31a2b455bdf1e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
