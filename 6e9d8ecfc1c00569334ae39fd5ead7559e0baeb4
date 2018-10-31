@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "3e3e384b_de2f56d2",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T17:31:56Z",
+      "side": 1,
+      "message": "I agree that currently there is no branching for caller/callee (both SetLocalDescription and SetRemoteDescription call ApplyDescription, which calls MaybeCreateJsepTransport). \n\nBut in your test you are calling SetRemoteDescription(offer), then SetLocalDescription(answer), which mimicks a callee\u0027s perspective. If logic changed for SetRemoteDescription/SetLocalDescription then this test would only be testing one scenario, even though we are dependent on the caller scenario as well (which is SetLocalDescription(offer), followed by SetRemoteDescription(answer)). \n\nYou don\u0027t have to update this test (like you said it\u0027s currently testing both scenarios because there isn\u0027t branching), but I think what you\u0027re really trying to test is the specific behavior of MaybeCreateJseptTransport. Maybe replacing the SRD/SLD calls with MaybeCreateJsepTransport would be the best thing to do here.",
+      "parentUuid": "38c103e7_9b328968",
+      "range": {
+        "startLine": 443,
+        "startChar": 36,
+        "endLine": 443,
+        "endChar": 69
+      },
+      "revId": "6e9d8ecfc1c00569334ae39fd5ead7559e0baeb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88e994df_6f2e88f6",
         "filename": "pc/jseptransportcontroller_unittest.cc",
         "patchSetId": 11
