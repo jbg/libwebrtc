@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "9369020e_53d31660",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-31T15:38:11Z",
+      "side": 1,
+      "message": "And that case should be processed correctly by the workaround, because it changes timestamps from that we would have otherwise by at most 1ms.",
+      "parentUuid": "648bd1c0_f68bab74",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9cc8610_1ed529a0",
         "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
         "patchSetId": 3
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "I don\u0027t doubt that this removes the issue reported, but isn\u0027t is just papering over the issue? I mean, we want the timestamps to increase monotonically and we fix that by just adjusting them to be monotonically increasing. Isn\u0027t there an easier way to lie about this, if that\u0027s the route we\u0027re going down? :)",
       "parentUuid": "f887c612_16b4e870",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 20
+      },
+      "revId": "e35b177c8bee8e79e1a0c9d6034be999a7981962",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f5baba0_b7397660",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-10-31T15:38:11Z",
+      "side": 1,
+      "message": "I couldn\u0027t find a better way to make them increase monotonically at a pace corresponding to the actual increase rate.\n\nCalculate and smooth the call rate and fix the timestamps to grow exactly that fast. That\u0027s the only idea I had. We have to estimate the grow rate because we don\u0027t know it (stupid, stupid av-sync tests. I still doubt they are realistic).\n\nOf course, the cleanest solution would be to plumb the actual capture timestamps to RTCP module and not guess them.",
+      "parentUuid": "2830b692_fad8caad",
       "range": {
         "startLine": 208,
         "startChar": 2,
