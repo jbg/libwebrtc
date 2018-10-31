@@ -31,6 +31,7 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/tmmb_item.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/numerics/moving_median_filter.h"
 #include "rtc_base/random.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -202,6 +203,11 @@ class RTCPSender {
   uint32_t last_rtp_timestamp_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
   int64_t last_frame_capture_time_ms_
       RTC_GUARDED_BY(critical_section_rtcp_sender_);
+  int64_t last_rtp_timestamp_sample_time_ms_
+      RTC_GUARDED_BY(critical_section_rtcp_sender_);
+  MovingMedianFilter<int64_t> capture_timestamps_jump_estimator_
+      RTC_GUARDED_BY(critical_section_rtcp_sender_);
+
   uint32_t ssrc_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
   // SSRC that we receive on our RTP channel
   uint32_t remote_ssrc_ RTC_GUARDED_BY(critical_section_rtcp_sender_);
