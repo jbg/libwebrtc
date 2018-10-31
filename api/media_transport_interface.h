@@ -276,6 +276,7 @@ class MediaTransportInterface {
   // A newly registered callback will be called with the current state.
   // Media transport does not invoke this callback concurrently.
   // TODO(mellem): Make this pure virtual once all implementations support it.
+  // This callback must happen on a network thread.
   virtual void SetMediaTransportStateCallback(
       MediaTransportStateCallback* callback) {}
 
