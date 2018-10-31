@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70e39b51_b3810679",
+        "filename": "modules/audio_processing/echo_cancellation_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-31T20:42:15Z",
+      "side": 1,
+      "message": "Please correct the indentation.",
+      "range": {
+        "startLine": 224,
+        "startChar": 8,
+        "endLine": 224,
+        "endChar": 18
+      },
+      "revId": "d644e491bf3daac2738fa129eeb76ab6e331eba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4460be7_8ba01110",
+        "filename": "modules/audio_processing/echo_cancellation_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-31T20:42:15Z",
+      "side": 1,
+      "message": "Please correct the indentation.",
+      "range": {
+        "startLine": 237,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 31
+      },
+      "revId": "d644e491bf3daac2738fa129eeb76ab6e331eba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1039266_796e4e8e",
+        "filename": "modules/audio_processing/echo_cancellation_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-31T20:42:15Z",
+      "side": 1,
+      "message": "Please remove the curly braces",
+      "revId": "d644e491bf3daac2738fa129eeb76ab6e331eba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a0c734c_4b15a540",
+        "filename": "modules/audio_processing/echo_cancellation_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-10-31T20:42:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure on the need to comment this. It is rather the rule than the exception for most classes.",
+      "revId": "d644e491bf3daac2738fa129eeb76ab6e331eba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
