@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bf1fd39_eec02528",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "Could this happen after the media transport state is already writable? If not I wonder if this should be documented somewhere.",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 52
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26e4bc57_9b134e80",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "Should we add a unit test to jseptransport_unittest.cc that tests this behavior?",
+      "range": {
+        "startLine": 649,
+        "startChar": 0,
+        "endLine": 651,
+        "endChar": 3
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ebde87_b1338bfd",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "This comment isn\u0027t true. It\u0027s only signaled when the media_transport_state_ changes to kWritable.",
+      "range": {
+        "startLine": 185,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 66
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4102b8_d587bbea",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "Should this be called SignalMediaTransportWritable? It would be more consistent with the actual state. I think the reason \"SignalRtcpMuxActive\" is called \"Active\" is because it\u0027s based upon a function \"ActivateRtcpMux()\"",
+      "range": {
+        "startLine": 186,
+        "startChar": 20,
+        "endLine": 186,
+        "endChar": 46
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6abdd61f_0e5792a2",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "If you wanted you could make it an optional, that is only set if the media_transport_ is provided.",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 52
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3850e4dc_8c8dd1b4",
+        "filename": "pc/jseptransportcontroller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "So the next change will include incorporating the ice_transport state in the case where the dtls transports are empty?",
+      "range": {
+        "startLine": 1281,
+        "startChar": 4,
+        "endLine": 1281,
+        "endChar": 17
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5067ee9_507c142c",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "nit: still-\u003eStill and period at the end.",
+      "range": {
+        "startLine": 819,
+        "startChar": 5,
+        "endLine": 819,
+        "endChar": 10
+      },
+      "revId": "d83265d55b47a4c86798ce8a587acef30b3180bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

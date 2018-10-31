@@ -328,6 +328,24 @@
       "revId": "d0d2a541265992d1d8564bce714552bea2706008",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52877cac_9cae797a",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-10-31T21:35:57Z",
+      "side": 1,
+      "message": "Do you want the state change to kIceConnectionConnecting due to going back to pending? Maybe it\u0027s worth asking Qingsi because he understands the ICE states well. But I don\u0027t know if the ICE state should change to \"checking\" because QUIC connection is blocked. This also depends on when the media transport can go back to a \"pending\" state, which I don\u0027t understand.\n\nIt looks like you\u0027re correct about the media transport state changing to closed, the IceConnectionState should go to failed:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/jseptransportcontroller.h?q\u003dpc/jseptransportcontroller.h+package:%5Echromium$\u0026dr\u0026l\u003d178\n\nPerhaps you should add this as well and test it?",
+      "parentUuid": "6fb27ab3_5014931f",
+      "revId": "d0d2a541265992d1d8564bce714552bea2706008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
