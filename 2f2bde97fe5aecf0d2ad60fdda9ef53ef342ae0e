@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b8d4aa6_3b596811",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-11-01T11:35:09Z",
+      "side": 1,
+      "message": "Why 3.0? It seems arbitrary. Does it make sense to EXPECT_GE something instead?",
+      "range": {
+        "startLine": 149,
+        "startChar": 58,
+        "endLine": 149,
+        "endChar": 61
+      },
+      "revId": "2f2bde97fe5aecf0d2ad60fdda9ef53ef342ae0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f855eeb_38fa92ad",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-11-01T11:35:09Z",
+      "side": 1,
+      "message": "Write 2.f directly, it is clear that it is the default value.",
+      "range": {
+        "startLine": 277,
+        "startChar": 41,
+        "endLine": 277,
+        "endChar": 72
+      },
+      "revId": "2f2bde97fe5aecf0d2ad60fdda9ef53ef342ae0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
