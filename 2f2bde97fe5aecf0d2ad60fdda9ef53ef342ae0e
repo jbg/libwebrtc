@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "975ba3a8_1e90678a",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-11-01T13:29:51Z",
+      "side": 1,
+      "message": "Changed to \u003e 2. With current GC2, the actual value happens to be ~2.99",
+      "parentUuid": "7b8d4aa6_3b596811",
+      "range": {
+        "startLine": 149,
+        "startChar": 58,
+        "endLine": 149,
+        "endChar": 61
+      },
+      "revId": "2f2bde97fe5aecf0d2ad60fdda9ef53ef342ae0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f855eeb_38fa92ad",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-01T11:35:09Z",
       "side": 1,
       "message": "Write 2.f directly, it is clear that it is the default value.",
+      "range": {
+        "startLine": 277,
+        "startChar": 41,
+        "endLine": 277,
+        "endChar": 72
+      },
+      "revId": "2f2bde97fe5aecf0d2ad60fdda9ef53ef342ae0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14a9ce4e_cadf5f67",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-11-01T13:29:51Z",
+      "side": 1,
+      "message": "It\u0027s not clear 2.f is the default value. It\u0027s a magic number that \u0027works\u0027 in some cases. Can I leave the named constant to serve as documentation for what it is?",
+      "parentUuid": "0f855eeb_38fa92ad",
       "range": {
         "startLine": 277,
         "startChar": 41,
