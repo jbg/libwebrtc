@@ -119,6 +119,7 @@ class VP9EncoderImpl : public VP9Encoder {
   bool is_svc_;
   InterLayerPredMode inter_layer_pred_;
   bool external_ref_control_;
+  bool full_superframe_drop_;
 
   std::vector<FramerateController> framerate_controller_;
 

@@ -168,6 +168,7 @@ VP9EncoderImpl::VP9EncoderImpl(const cricket::VideoCodec& codec)
       inter_layer_pred_(InterLayerPredMode::kOn),
       external_ref_control_(
           webrtc::field_trial::IsEnabled("WebRTC-Vp9ExternalRefCtrl")),
+      full_superframe_drop_(true),
       is_flexible_mode_(false) {
   memset(&codec_, 0, sizeof(codec_));
   memset(&svc_params_, 0, sizeof(vpx_svc_extra_cfg_t));
@@ -629,7 +630,8 @@ int VP9EncoderImpl::InitAndSetControlSettings(const VideoCodec* inst) {
     // quality flickering and is not compatible with RTP non-flexible mode.
     vpx_svc_frame_drop_t svc_drop_frame;
     memset(&svc_drop_frame, 0, sizeof(svc_drop_frame));
-    svc_drop_frame.framedrop_mode = FULL_SUPERFRAME_DROP;
+    svc_drop_frame.framedrop_mode =
+        full_superframe_drop_ ? FULL_SUPERFRAME_DROP : CONSTRAINED_LAYER_DROP;
     svc_drop_frame.max_consec_drop = std::numeric_limits<int>::max();
     for (size_t i = 0; i < num_spatial_layers_; ++i) {
       svc_drop_frame.framedrop_thresh[i] = config_->rc_dropframe_thresh;
@@ -824,8 +826,10 @@ int VP9EncoderImpl::Encode(const VideoFrame& input_image,
   }
   timestamp_ += duration;
 
-  const bool end_of_picture = true;
-  DeliverBufferedFrame(end_of_picture);
+  if (!full_superframe_drop_) {
+    const bool end_of_picture = true;
+    DeliverBufferedFrame(end_of_picture);
+  }
 
   return WEBRTC_VIDEO_CODEC_OK;
 }
@@ -1160,8 +1164,11 @@ int VP9EncoderImpl::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
   // Ensure we don't buffer layers of previous picture (superframe).
   RTC_DCHECK(first_frame_in_picture || layer_id.spatial_layer_id > 0);
 
-  const bool end_of_picture = false;
-  DeliverBufferedFrame(end_of_picture);
+  if (!full_superframe_drop_) {
+    // Deliver buffered low spatial layer frame.
+    const bool end_of_picture = false;
+    DeliverBufferedFrame(end_of_picture);
+  }
 
   if (pkt->data.frame.sz > encoded_image_._size) {
     delete[] encoded_image_._buffer;
@@ -1209,6 +1216,12 @@ int VP9EncoderImpl::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
   int qp = -1;
   vpx_codec_control(encoder_, VP8E_GET_LAST_QUANTIZER, &qp);
   encoded_image_.qp_ = qp;
+
+  if (full_superframe_drop_) {
+    const bool end_of_picture = encoded_image_.SpatialIndex().value_or(0) + 1 ==
+                                num_active_spatial_layers_;
+    DeliverBufferedFrame(end_of_picture);
+  }
 
   return WEBRTC_VIDEO_CODEC_OK;
 }
