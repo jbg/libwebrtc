@@ -25,10 +25,10 @@
 namespace webrtc {
 
 struct PacketInFlightInfo {
-  PacketInFlightInfo(size_t size, int64_t send_time_us, uint64_t packet_id)
+  PacketInFlightInfo(int64_t size, int64_t send_time_us, uint64_t packet_id)
       : size(size), send_time_us(send_time_us), packet_id(packet_id) {}
 
-  size_t size;
+  int64_t size;
   int64_t send_time_us;
   // Unique identifier for the packet in relation to other packets in flight.
   uint64_t packet_id;
