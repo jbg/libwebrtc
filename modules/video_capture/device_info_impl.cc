@@ -42,15 +42,15 @@ int32_t DeviceInfoImpl::NumberOfCapabilities(const char* deviceUniqueIdUTF8) {
 
   _apiLock.AcquireLockShared();
 
-  if (_lastUsedDeviceNameLength == strlen((char*)deviceUniqueIdUTF8)) {
-    // Is it the same device that is asked for again.
-    if (_strnicmp((char*)_lastUsedDeviceName, (char*)deviceUniqueIdUTF8,
-                  _lastUsedDeviceNameLength) == 0) {
-      // yes
-      _apiLock.ReleaseLockShared();
-      return static_cast<int32_t>(_captureCapabilities.size());
-    }
+  // Is it the same device that is asked for again.
+  if (absl::EqualsIgnoreCase(
+          deviceUniqueIdUTF8,
+          absl::string_view(_lastUsedDeviceName, _lastUsedDeviceNameLength))) {
+    // yes
+    _apiLock.ReleaseLockShared();
+    return static_cast<int32_t>(_captureCapabilities.size());
   }
+
   // Need to get exclusive rights to create the new capability map.
   _apiLock.ReleaseLockShared();
   WriteLockScoped cs2(_apiLock);
@@ -66,9 +66,9 @@ int32_t DeviceInfoImpl::GetCapability(const char* deviceUniqueIdUTF8,
 
   ReadLockScoped cs(_apiLock);
 
-  if ((_lastUsedDeviceNameLength != strlen((char*)deviceUniqueIdUTF8)) ||
-      (_strnicmp((char*)_lastUsedDeviceName, (char*)deviceUniqueIdUTF8,
-                 _lastUsedDeviceNameLength) != 0)) {
+  if (!absl::EqualsIgnoreCase(
+          deviceUniqueIdUTF8,
+          absl::string_view(_lastUsedDeviceName, _lastUsedDeviceNameLength))) {
     _apiLock.ReleaseLockShared();
     _apiLock.AcquireLockExclusive();
     if (-1 == CreateCapabilityMap(deviceUniqueIdUTF8)) {
@@ -100,9 +100,9 @@ int32_t DeviceInfoImpl::GetBestMatchedCapability(
     return -1;
 
   ReadLockScoped cs(_apiLock);
-  if ((_lastUsedDeviceNameLength != strlen((char*)deviceUniqueIdUTF8)) ||
-      (_strnicmp((char*)_lastUsedDeviceName, (char*)deviceUniqueIdUTF8,
-                 _lastUsedDeviceNameLength) != 0)) {
+  if (!absl::EqualsIgnoreCase(
+          deviceUniqueIdUTF8,
+          absl::string_view(_lastUsedDeviceName, _lastUsedDeviceNameLength))) {
     _apiLock.ReleaseLockShared();
     _apiLock.AcquireLockExclusive();
     if (-1 == CreateCapabilityMap(deviceUniqueIdUTF8)) {
