@@ -93,6 +93,30 @@
       "revId": "2f2bde97fe5aecf0d2ad60fdda9ef53ef342ae0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52ee88bc_e4998670",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2018-11-01T14:01:01Z",
+      "side": 1,
+      "message": "Discussed offline. Much like most of EchoCanceller3Config, it is OK if the default tuning is filled with magic constants, if that\u0027s the way they were determined.\n\nIt does look strange since the other settings in AudioProcessing::Config are more user-friendly, interpretable parameters (the name \u0027fixed_gain_factor\u0027 makes it pretty clear what it does). We have discussed moving such tuning elsewhere - e.g. AudioProcessingBuilder setter + RuntimeParameters - but we\u0027re not there yet.",
+      "parentUuid": "14a9ce4e_cadf5f67",
+      "range": {
+        "startLine": 277,
+        "startChar": 41,
+        "endLine": 277,
+        "endChar": 72
+      },
+      "revId": "2f2bde97fe5aecf0d2ad60fdda9ef53ef342ae0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
