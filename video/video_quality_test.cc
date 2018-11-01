@@ -168,14 +168,8 @@ class QualityTestVideoEncoder : public VideoEncoder,
                             uint32_t framerate) override {
     return encoder_->SetRateAllocation(allocation, framerate);
   }
-  ScalingSettings GetScalingSettings() const override {
-    return encoder_->GetScalingSettings();
-  }
-  bool SupportsNativeHandle() const override {
-    return encoder_->SupportsNativeHandle();
-  }
-  const char* ImplementationName() const override {
-    return encoder_->ImplementationName();
+  EncoderInfo GetEncoderInfo() const override {
+    return encoder_->GetEncoderInfo();
   }
 
  private:
@@ -285,7 +279,8 @@ VideoQualityTest::VideoQualityTest(
           }),
       receive_logs_(0),
       send_logs_(0),
-      injection_components_(std::move(injection_components)) {
+      injection_components_(std::move(injection_components)),
+      num_video_streams_(0) {
   if (injection_components_ == nullptr) {
     injection_components_ = absl::make_unique<InjectionComponents>();
   }
