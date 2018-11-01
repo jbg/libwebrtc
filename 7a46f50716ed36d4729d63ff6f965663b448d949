@@ -77,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "91492812_787c1485",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2018-11-01T23:15:53Z",
+      "side": 1,
+      "message": "I removed a lot of this code except the routine to convert from queue priority to thread priority. I don\u0027t know where would be appropriate to shove this kind of helper conversion method. Do you have a recommendation where I should put that?",
+      "parentUuid": "3bad1c0e_41650588",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71e4d662_5be79c70",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
