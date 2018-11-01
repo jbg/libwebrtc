@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6eef2a6_6379ebc5",
+        "filename": "sdk/android/api/org/webrtc/AudioDecoderFactoryFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T12:32:22Z",
+      "side": 1,
+      "message": "Does this mean that the object as returned has already had its reference count incremented by the callee?",
+      "revId": "7df5d455dd4d67b764c7c46c29c7b070efca2570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
