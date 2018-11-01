@@ -180,6 +180,8 @@ public class PeerConnectionTest {
         return;
       }
 
+      System.out.println(name + "saw ICE state " + newState);
+
       if (expectedIceConnectionChanges.isEmpty()) {
         System.out.println(name + "Got an unexpected ICE connection change " + newState);
         return;
