@@ -16,6 +16,24 @@
       "revId": "7df5d455dd4d67b764c7c46c29c7b070efca2570",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17c6f2c3_dd792f85",
+        "filename": "sdk/android/api/org/webrtc/AudioDecoderFactoryFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-11-01T13:10:12Z",
+      "side": 1,
+      "message": "The returned object has a reference count of 1. The caller, or who the caller delegates to, must release the object. I can add that to the comment, if it\u0027s helpful.",
+      "parentUuid": "a6eef2a6_6379ebc5",
+      "revId": "7df5d455dd4d67b764c7c46c29c7b070efca2570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
