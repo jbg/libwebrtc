@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7b5a01a3_c5db6d41",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T10:12:14Z",
+      "side": 1,
+      "message": "Fine.",
+      "parentUuid": "1abc14f4_62bcf128",
+      "revId": "483c012c6ede14330481c07792481f107c2e37d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c712e8b1_0d5c2d1f",
         "filename": "rtc_base/memory_stream.h",
         "patchSetId": 1
@@ -92,6 +110,30 @@
       "revId": "483c012c6ede14330481c07792481f107c2e37d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1634c8a0_8b38965d",
+        "filename": "rtc_base/memory_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T10:12:14Z",
+      "side": 1,
+      "message": "Yes. In fact, I\u0027d say that the buffer_ + buffer_length_ pair should probably be replaced by e.g. a std::vector. But it\u0027s OK to leave that for later, as you say.",
+      "parentUuid": "001f004e_bc0b9c00",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 15
+      },
+      "revId": "483c012c6ede14330481c07792481f107c2e37d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
