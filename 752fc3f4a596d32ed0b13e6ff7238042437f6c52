@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96d0e40f_aff1872a",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-01T12:33:35Z",
+      "side": 1,
+      "message": "Is there any particular reason for writing the output immediately? When we move to the new format, you\u0027ll get much better compression by batching the events. On the other hand, it doesn\u0027t matter much while using the legacy encoding. It\u0027s up to you.",
+      "range": {
+        "startLine": 1312,
+        "startChar": 51,
+        "endLine": 1312,
+        "endChar": 67
+      },
+      "revId": "752fc3f4a596d32ed0b13e6ff7238042437f6c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a05be364_0e5cb25a",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-01T12:33:35Z",
+      "side": 1,
+      "message": "I think it would be cleaner to write these as two separate statements.",
+      "range": {
+        "startLine": 1311,
+        "startChar": 8,
+        "endLine": 1314,
+        "endChar": 69
+      },
+      "revId": "752fc3f4a596d32ed0b13e6ff7238042437f6c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
