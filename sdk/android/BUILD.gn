@@ -1362,11 +1362,6 @@ if (is_android) {
       "native_unittests/video/videosource_unittest.cc",
     ]
 
-    data = [
-      "../../resources/audio_device/audio_short44.pcm",
-      "../../resources/audio_device/audio_short48.pcm",
-    ]
-
     if (is_clang) {
       # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
       suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
