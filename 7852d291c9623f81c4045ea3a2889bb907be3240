@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c2a82_bd7407e9",
+        "filename": "p2p/base/mdns_message_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6254
+      },
+      "writtenOn": "2018-11-01T17:12:58Z",
+      "side": 1,
+      "message": "nit: these look like they can be template functions instead of macros",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 57
+      },
+      "revId": "7852d291c9623f81c4045ea3a2889bb907be3240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
