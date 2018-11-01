@@ -70,6 +70,30 @@
       "revId": "c6d98c494e40c372a0c3438ad5a55b4c4637c90a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97028cc7_429dad99",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-11-01T14:57:37Z",
+      "side": 1,
+      "message": "Ah, it was fixed in another repo but not synced to this client. Now fixed.",
+      "parentUuid": "53dbfe73_ab443ff7",
+      "range": {
+        "startLine": 211,
+        "startChar": 18,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "c6d98c494e40c372a0c3438ad5a55b4c4637c90a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
