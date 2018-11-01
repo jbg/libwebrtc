@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "b7deec70_c7553ec5",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-01T13:56:55Z",
+      "side": 1,
+      "message": "Avoid convenience aliases. OrderId is possibly motivated, but not the others.\n\nAlso, we don\u0027t use std::chrono anywhere else in webrtc. I\u0027d recommend using plain int64_t, with unit suffix (_ms or _us) on related variables. Or possibly webrtc::TimeDelta.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 26
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9624035_e4399eae",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
@@ -30,6 +53,52 @@
       "writtenOn": "2018-10-31T17:20:21Z",
       "side": 1,
       "message": "can we avoid using a condition variable? It pulls in some dependencies from stl that we don\u0027t use.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "637b024b_1f82c3aa",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-01T13:56:55Z",
+      "side": 1,
+      "message": "We\u0027re considering deleting the PostTaskAndReply method. Without it, all task queue implementations should be simplified a bit.",
+      "range": {
+        "startLine": 226,
+        "startChar": 22,
+        "endLine": 226,
+        "endChar": 38
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc227d45_46ef4f29",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-01T13:56:55Z",
+      "side": 1,
+      "message": "rtc::TimeMillis or rtc::TimeMicros, depending on needed accuracy.",
+      "range": {
+        "startLine": 247,
+        "startChar": 1,
+        "endLine": 247,
+        "endChar": 49
+      },
       "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
