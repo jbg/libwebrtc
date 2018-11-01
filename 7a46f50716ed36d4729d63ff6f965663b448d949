@@ -150,6 +150,24 @@
     },
     {
       "key": {
+        "uuid": "a480741a_d442f15b",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2018-11-01T17:09:10Z",
+      "side": 1,
+      "message": "Yes, good catch. I\u0027ll be able to remove the SHOUTY_CASE stuff once I figure out why QueueAPC was used instead of just initializing the variables at the start of the run thread. That\u0027s a complete mystery to me. The code was originally copied from the _win implementation and I didn\u0027t modify what wasn\u0027t needing to be changed.",
+      "parentUuid": "ce8e0a12_1f2c7c83",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac9a5d89_5147b9cb",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
