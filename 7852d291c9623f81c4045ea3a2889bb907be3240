@@ -22,6 +22,30 @@
       "revId": "7852d291c9623f81c4045ea3a2889bb907be3240",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30c780b5_55c5c14a",
+        "filename": "p2p/base/mdns_message_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-11-01T17:24:36Z",
+      "side": 1,
+      "message": "Ah, you are right. I agree they can be converted to templates. I was following the pattern here (https://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/stun_unittest.cc?l\u003d519), and I will follow up with a CL to clean up these patterns. Thanks for the suggestion.",
+      "parentUuid": "da5c2a82_bd7407e9",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 57
+      },
+      "revId": "7852d291c9623f81c4045ea3a2889bb907be3240",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
