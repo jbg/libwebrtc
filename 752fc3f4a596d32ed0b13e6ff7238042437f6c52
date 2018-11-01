@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c94517ab_c74418a0",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-01T12:59:53Z",
+      "side": 1,
+      "message": "You could pass in e.g. 5000 instead of RtcEventLog::kImmediateOutput to output data every 5000 ms.",
+      "parentUuid": "21d9f0b6_9b58709d",
+      "range": {
+        "startLine": 1312,
+        "startChar": 51,
+        "endLine": 1312,
+        "endChar": 67
+      },
+      "revId": "752fc3f4a596d32ed0b13e6ff7238042437f6c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a05be364_0e5cb25a",
         "filename": "video/video_quality_test.cc",
         "patchSetId": 1
