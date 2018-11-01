@@ -51,6 +51,9 @@ class RtpPayloadParams final {
   void Vp8ToGeneric(int64_t shared_frame_id,
                     bool is_keyframe,
                     RTPVideoHeader* rtp_video_header);
+  void GenericToGeneric(int64_t shared_frame_id,
+                        bool is_keyframe,
+                        RTPVideoHeader* rtp_video_header);
 
   // Holds the last shared frame id for a given (spatial, temporal) layer.
   std::array<std::array<int64_t, RtpGenericFrameDescriptor::kMaxTemporalLayers>,

@@ -14,7 +14,11 @@
 #include "call/rtp_payload_params.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "test/field_trial.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
+
+using ::testing::IsEmpty;
+using ::testing::ElementsAre;
 
 namespace webrtc {
 namespace {
@@ -274,26 +278,30 @@ TEST(RtpPayloadParamsTest, Tl0PicIdxUpdatedForVp9) {
   EXPECT_EQ(kInitialTl0PicIdx1 + 1, params.state().tl0_pic_idx);
 }
 
-TEST(RtpPayloadParamsTest, PictureIdForOldGenericFormat) {
+TEST(RtpPayloadParamsTest, GenericDescriptorForGenericCodec) {
   test::ScopedFieldTrials generic_picture_id(
       "WebRTC-GenericPictureId/Enabled/");
   RtpPayloadState state{};
 
   EncodedImage encoded_image;
+  encoded_image._frameType = kVideoFrameKey;
   CodecSpecificInfo codec_info{};
   codec_info.codecType = kVideoCodecGeneric;
 
   RtpPayloadParams params(kSsrc1, &state);
   RTPVideoHeader header =
-      params.GetRtpVideoHeader(encoded_image, &codec_info, kDontCare);
+      params.GetRtpVideoHeader(encoded_image, &codec_info, 0);
 
   EXPECT_EQ(kVideoCodecGeneric, header.codec);
   ASSERT_TRUE(header.generic);
   EXPECT_EQ(0, header.generic->frame_id);
+  EXPECT_THAT(header.generic->dependencies, IsEmpty());
 
-  header = params.GetRtpVideoHeader(encoded_image, &codec_info, kDontCare);
+  encoded_image._frameType = kVideoFrameDelta;
+  header = params.GetRtpVideoHeader(encoded_image, &codec_info, 1);
   ASSERT_TRUE(header.generic);
   EXPECT_EQ(1, header.generic->frame_id);
+  EXPECT_THAT(header.generic->dependencies, ElementsAre(0));
 }
 
 class RtpPayloadParamsVp8ToGenericTest : public ::testing::Test {
