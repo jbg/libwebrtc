@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "d5d39062_27392708",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Could you put this logic down on line ~626 instead, and make a new build target for the stdlib task queue implementation?",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6605799_52699047",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bad1c0e_41650588",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
@@ -13,6 +53,131 @@
       "writtenOn": "2018-10-31T17:20:21Z",
       "side": 1,
       "message": "if there\u0027s shared code between this option and the other for windows, that would go into a separate file and avoid duplication.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71e4d662_5be79c70",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Please add comments to this struct---both for the whole thing, and for the members.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "961fb0a7_03c49a88",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Please add comments to this one.\n\nAnd \"\u003d nullptr\" is probably easier to read than \"{}\".\n\nAnd `static` shouldn\u0027t be necessary, since this is in an unnamed namespace.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e8cf842_acbf9119",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "No need to make the function static *and* put it in an unnamed namespace. (And of the two alternatives, prefer the latter.)",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ed4ff16_cc22e245",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Why do we need these trivial accessors? If they\u0027re useful for some reason, consider letting them (and g_thread_context) be static members of a class, so that you can ensure that no one bypasses the accessors.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce8e0a12_1f2c7c83",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "The things in SHOUTY_CASE are Windows specific, but you don\u0027t #include any Windows header.\n\n(Is this code intended to be Windows only? For testing purposes, it would probably be very useful to be able to run it---or at least compile it---on other platforms.)",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac9a5d89_5147b9cb",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Replace the `break` with this line?",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1216dcc_2941cbb7",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "The std::chrono stuff is banned by the style guide. [https://chromium-cpp.appspot.com/#library-blacklist]",
       "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -42,6 +207,63 @@
     },
     {
       "key": {
+        "uuid": "4794e1f8_96868ca5",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Use `using` instead of `typedef`, please. And try not to use `using` either unless it\u0027s a big win---the new names might be shorter, but they also make the code less readable for anyone who isn\u0027t familiar with them, which is going to be most readers.\n\nI\u0027ll let you winnow these yourself first, and then I\u0027ll take a closer look at the ones you decide are worth keeping. :-)",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "665f481b_a4b88d80",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "N",
+      "range": {
+        "startLine": 134,
+        "startChar": 7,
+        "endLine": 134,
+        "endChar": 8
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4bd812f_03317cf0",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "No public data members, please.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9624035_e4399eae",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
@@ -56,6 +278,137 @@
       "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a93c9ec4_aada5a97",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Prefer `\u003d false`",
+      "range": {
+        "startLine": 142,
+        "startChar": 39,
+        "endLine": 142,
+        "endChar": 41
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "618248c7_bb21ac57",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Event event(/*manual_reset\u003d*/ false, /*initially_signaled\u003d*/ false);",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e9805d7_221993c5",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "When writing to an atomic variable, please make that fact clear using e.g.\n\n  thread_should_quit_.Store(true);",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f22af75f_e34db425",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "And here. But rather than and atomic flag and sleep, consider using something like rtc::Event when you want to wait for something to happen.",
+      "range": {
+        "startLine": 176,
+        "startChar": 10,
+        "endLine": 176,
+        "endChar": 26
+      },
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e74e08b0_4ceb06cf",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "webrtc::SleepMs?",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3126e2c2_e503c469",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Can you let GetQueuePtrTls() return a pointer of the desired type directly, so that you don\u0027t have to cast? (Basically, I\u0027m asking if the type of that thread local variable at the top of the file can be TaskQueue::Impl* instead of void*.)",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "573cdbef_293b1627",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Why pre- instead of post-increment? You\u0027re wasting one ID. :-)",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +458,23 @@
     },
     {
       "key": {
+        "uuid": "f71276a9_f023c873",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "`delayed_entry-\u003efirst` ?\n\nAlso, use `const` whenever possible for variables that live this long.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "226a0706_2cdbc75e",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
@@ -133,6 +503,40 @@
       "writtenOn": "2018-10-31T17:20:21Z",
       "side": 1,
       "message": "we don\u0027t use std::mutex or related classes",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6ba0e17_534b6802",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "Prefer `while(true)` or `for(;;)` for your infinite loops---that way, the reader doesn\u0027t have to wait until the end to find out.",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdf88ece_48d2227b",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:08:40Z",
+      "side": 1,
+      "message": "This function is long, and the control flow is a wee bit complex. Can you split it apart?",
       "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
