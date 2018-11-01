@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "645e82a8_a6bec60a",
+        "filename": "modules/audio_processing/test/conversational_speech/mock_wavreader_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:37:13Z",
+      "side": 1,
+      "message": "string_view?",
+      "revId": "80ad9b3807acf13fb3314718ac78c26563e78567",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7d9cebe_b87e5a8c",
+        "filename": "rtc_base/fileutils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:37:13Z",
+      "side": 1,
+      "message": "string_view for all the arguments? Or will the implementations be unhappy with non-null-terminated strings?",
+      "revId": "80ad9b3807acf13fb3314718ac78c26563e78567",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ed1019f_aa2ab9c8",
+        "filename": "rtc_base/fileutils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-01T14:37:13Z",
+      "side": 1,
+      "message": "R",
+      "range": {
+        "startLine": 61,
+        "startChar": 5,
+        "endLine": 61,
+        "endChar": 6
+      },
+      "revId": "80ad9b3807acf13fb3314718ac78c26563e78567",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
