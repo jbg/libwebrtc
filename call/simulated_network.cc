@@ -26,6 +26,9 @@ SimulatedNetwork::~SimulatedNetwork() = default;
 
 void SimulatedNetwork::SetConfig(const SimulatedNetwork::Config& config) {
   rtc::CritScope crit(&config_lock_);
+  if (config_.link_capacity_kbps != config.link_capacity_kbps) {
+    reset_capacity_delay_error_ = true;
+  }
   config_ = config;  // Shallow copy of the struct.
   double prob_loss = config.loss_percent / 100.0;
   if (config_.avg_burst_loss_length == -1) {
@@ -64,6 +67,19 @@ bool SimulatedNetwork::EnqueuePacket(PacketInFlightInfo packet) {
     // Too many packet on the link, drop this one.
     return false;
   }
+  int64_t network_start_time_us = packet.send_time_us;
+  {
+    rtc::CritScope crit(&config_lock_);
+    if (reset_capacity_delay_error_) {
+      capacity_delay_error_bytes_ = 0;
+      reset_capacity_delay_error_ = false;
+    }
+    if (pause_transmission_until_us_) {
+      network_start_time_us =
+          std::max(network_start_time_us, *pause_transmission_until_us_);
+      pause_transmission_until_us_.reset();
+    }
+  }
 
   // Delay introduced by the link capacity.
   int64_t capacity_delay_ms = 0;
@@ -75,19 +91,12 @@ bool SimulatedNetwork::EnqueuePacket(PacketInFlightInfo packet) {
     capacity_delay_ms = (packet.size + capacity_delay_error_bytes_ +
                          bytes_per_millisecond / 2) /
                         bytes_per_millisecond;
+    RTC_CHECK_GT(static_cast<int64_t>(packet.size),
+                 capacity_delay_error_bytes_);
     capacity_delay_error_bytes_ +=
         packet.size - capacity_delay_ms * bytes_per_millisecond;
   }
-  int64_t network_start_time_us = packet.send_time_us;
 
-  {
-    rtc::CritScope crit(&config_lock_);
-    if (pause_transmission_until_us_) {
-      network_start_time_us =
-          std::max(network_start_time_us, *pause_transmission_until_us_);
-      pause_transmission_until_us_.reset();
-    }
-  }
   // Check if there already are packets on the link and change network start
   // time forward if there is.
   if (!capacity_link_.empty() &&
@@ -100,6 +109,7 @@ bool SimulatedNetwork::EnqueuePacket(PacketInFlightInfo packet) {
 }
 
 absl::optional<int64_t> SimulatedNetwork::NextDeliveryTimeUs() const {
+  rtc::CritScope crit(&process_lock_);
   if (!delay_link_.empty())
     return delay_link_.begin()->arrival_time_us;
   return absl::nullopt;
