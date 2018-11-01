@@ -34,6 +34,24 @@
       "revId": "7df5d455dd4d67b764c7c46c29c7b070efca2570",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecf6c3ba_192c9651",
+        "filename": "sdk/android/api/org/webrtc/AudioDecoderFactoryFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 7791
+      },
+      "writtenOn": "2018-11-01T13:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c6f2c3_dd792f85",
+      "revId": "7df5d455dd4d67b764c7c46c29c7b070efca2570",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
