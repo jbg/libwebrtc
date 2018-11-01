@@ -739,8 +739,6 @@ rtc_static_library("rtc_base") {
     "dscp.h",
     "filerotatingstream.cc",
     "filerotatingstream.h",
-    "fileutils.cc",
-    "fileutils.h",
     "gunit_prod.h",
     "helpers.cc",
     "helpers.h",
@@ -892,18 +890,12 @@ rtc_static_library("rtc_base") {
       "macutils.cc",
       "macutils.h",
     ]
-    libs += [
-      # For ProcessInformationCopyDictionary in unixfilesystem.cc.
-      "ApplicationServices.framework",
-    ]
   }
 
   if (is_win) {
     sources += [
       "win32.cc",
       "win32.h",
-      "win32filesystem.cc",
-      "win32filesystem.h",
       "win32window.cc",
       "win32window.h",
     ]
@@ -921,8 +913,6 @@ rtc_static_library("rtc_base") {
     sources += [
       "ifaddrs_converter.cc",
       "ifaddrs_converter.h",
-      "unixfilesystem.cc",
-      "unixfilesystem.h",
     ]
   }
 
