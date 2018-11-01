@@ -180,6 +180,8 @@ public class PeerConnectionTest {
         return;
       }
 
+      System.out.println(name + "saw ICE state " + newState);
+
       if (expectedIceConnectionChanges.isEmpty()) {
         System.out.println(name + "Got an unexpected ICE connection change " + newState);
         return;
@@ -784,7 +786,6 @@ public class PeerConnectionTest {
 
     sdpLatch = new SdpObserverLatch();
     offeringExpectations.expectSignalingChange(SignalingState.HAVE_LOCAL_OFFER);
-    offeringPC.setLocalDescription(sdpLatch, offerSdp);
     assertTrue(sdpLatch.await());
     assertNull(sdpLatch.getSdp());
     sdpLatch = new SdpObserverLatch();
@@ -801,6 +802,7 @@ public class PeerConnectionTest {
     answeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
     answeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
 
+    offeringPC.setLocalDescription(sdpLatch, offerSdp);
     offeringPC.setRemoteDescription(sdpLatch, answerSdp);
     assertTrue(sdpLatch.await());
     assertNull(sdpLatch.getSdp());
