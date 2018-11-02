@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "08ea0b18_1d8ef27e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_audio.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-02T10:10:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c986c3e_14013ff7",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "36333801279c8347f0e43d47a7906db90e03115f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea735655_d08f0c40",
         "filename": "modules/rtp_rtcp/source/rtp_sender_audio.cc",
         "patchSetId": 1
@@ -79,6 +103,24 @@
       "revId": "36333801279c8347f0e43d47a7906db90e03115f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71ef767d_8d7e7e65",
+        "filename": "modules/video_capture/device_info_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-02T10:10:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d5deb10_7d24bfac",
+      "revId": "36333801279c8347f0e43d47a7906db90e03115f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
