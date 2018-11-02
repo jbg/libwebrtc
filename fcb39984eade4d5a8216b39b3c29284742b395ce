@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a51d76a_d16e47f2",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-02T10:52:44Z",
+      "side": 1,
+      "message": "with std::strncpy removed this header probably unused.",
+      "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25d0ec86_dd040833",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-02T10:52:44Z",
+      "side": 1,
+      "message": "remove this empty line, sort in \u003calgorithm\u003e header",
+      "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
