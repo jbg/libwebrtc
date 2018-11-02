@@ -33,6 +33,46 @@
       "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be542e95_4b580e59",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-02T13:03:28Z",
+      "side": 1,
+      "message": "min, right? But see next comment.",
+      "range": {
+        "startLine": 33,
+        "startChar": 28,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3705924e_464d1f97",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-02T13:03:28Z",
+      "side": 1,
+      "message": "It looks like absl::string_view::copy is less efficient than memcpy: https://godbolt.org/z/g9-7OT. Particularly since the std::copy call that it makes will use memmove instead of memcpy.\n\nIf you decide to use absl::string_view::copy anyway, make use of the fact that it automatically clips the source interval. Ooohh, but you can\u0027t, because then you don\u0027t know where to put the \\0. Then memcpy seems like a better choice.",
+      "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
