@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5ace3f8_25544b42",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-02T08:12:32Z",
+      "side": 0,
+      "message": "As far as I can tell, callers pass a NUL-terminated string, so we need not worry about the arcane strn* convention where strings of maximum length lack NUL-terminator.",
+      "range": {
+        "startLine": 276,
+        "startChar": 27,
+        "endLine": 276,
+        "endChar": 50
+      },
+      "revId": "be837ac3bc79400c0cfa6fcefddb4864d47512bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
