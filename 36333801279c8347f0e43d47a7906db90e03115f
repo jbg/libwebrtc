@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1c11d21b_16c369c0",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-02T09:20:54Z",
+      "side": 1,
+      "message": "BTW, is there any good reason we need name comparison at all here? Can we ever change the mapping from numeric payload_type to payload_name  mid-call?\n\nI had a quick look at CreateVideoPayload. It seems this method looks like it\u0027s updating a mapping from numeric payload type to payload name, but what\u0027s really needed is a mapping from numeric payload type to the enum VidoCodecType.",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 3
+      },
+      "revId": "36333801279c8347f0e43d47a7906db90e03115f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6c986c3e_14013ff7",
         "filename": "modules/rtp_rtcp/source/rtp_sender_audio.cc",
         "patchSetId": 1
