@@ -94,6 +94,30 @@
       "revId": "be837ac3bc79400c0cfa6fcefddb4864d47512bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cf74458_e8f1e187",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-02T09:28:47Z",
+      "side": 0,
+      "message": "+1 for string_view everywhere we can. Since it\u0027s cheap to convert std::string and const char* to string_view, but expensive in the other direction, the transition to string_view needs to start at the leaves of the call tree---i.e., exactly the sort of code touched by this CL. It might be nice to take the opportunity to change easy cases as you come across them, but it\u0027s completely optional.",
+      "parentUuid": "da178a74_034d34f7",
+      "range": {
+        "startLine": 276,
+        "startChar": 27,
+        "endLine": 276,
+        "endChar": 50
+      },
+      "revId": "be837ac3bc79400c0cfa6fcefddb4864d47512bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

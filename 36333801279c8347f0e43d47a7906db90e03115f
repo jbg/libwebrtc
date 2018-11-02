@@ -45,6 +45,40 @@
       "revId": "36333801279c8347f0e43d47a7906db90e03115f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea735655_d08f0c40",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_audio.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-02T09:28:47Z",
+      "side": 1,
+      "message": "Technically, you\u0027ve changed this from a prefix comparison to a full-string comparison. As far as I can tell it\u0027s a correct change, though, so I won\u0027t complain. :-)\n\n(More cases below.)",
+      "revId": "36333801279c8347f0e43d47a7906db90e03115f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d5deb10_7d24bfac",
+        "filename": "modules/video_capture/device_info_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-02T09:28:47Z",
+      "side": 1,
+      "message": "Consider dropping this comment.",
+      "revId": "36333801279c8347f0e43d47a7906db90e03115f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
