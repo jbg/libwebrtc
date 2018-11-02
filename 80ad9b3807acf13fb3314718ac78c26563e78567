@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "fa1c5ce1_024880d8",
+        "filename": "rtc_base/fileutils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-02T07:51:02Z",
+      "side": 1,
+      "message": "It needs NUL-termination. On posix, it boils down to ::opendir(path.c_str())",
+      "parentUuid": "f7d9cebe_b87e5a8c",
+      "revId": "80ad9b3807acf13fb3314718ac78c26563e78567",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed1019f_aa2ab9c8",
         "filename": "rtc_base/fileutils.h",
         "patchSetId": 4
@@ -56,6 +74,30 @@
       "revId": "80ad9b3807acf13fb3314718ac78c26563e78567",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa25382e_c7c86149",
+        "filename": "rtc_base/fileutils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-02T07:51:02Z",
+      "side": 1,
+      "message": "Done.\n\nBTW, I\u0027m considering deleting this file too, and move the needed features to the only user, filerotatingstream.cc.",
+      "parentUuid": "8ed1019f_aa2ab9c8",
+      "range": {
+        "startLine": 61,
+        "startChar": 5,
+        "endLine": 61,
+        "endChar": 6
+      },
+      "revId": "80ad9b3807acf13fb3314718ac78c26563e78567",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
