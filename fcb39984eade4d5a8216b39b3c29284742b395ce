@@ -133,6 +133,24 @@
       "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f181da1f_92184226",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-05T10:13:17Z",
+      "side": 1,
+      "message": "Here: https://en.cppreference.com/w/cpp/string/basic_string_view/copy\n\nBut as I said, you have to do your own clipping, in order to know where to put the trailing \\0. So yes, substr is probably better:\n\n  const absl::string_view clipped_name \u003d name.substr(0, sizeof(this-\u003ename) - 1);\n  std::memcpy(this-\u003ename, clipped_name.data(), clipped_name.size());\n  this-\u003ename[clipped_name.size()] \u003d \u0027\\0\u0027;\n\nIt\u0027s about as easy on the eyes as you\u0027re going to get without a special method for copying out a null-terminated substring, and it appears to compile exactly the same as if you do it manually: https://godbolt.org/z/dpQoJj\n\n(As an aside, I just noticed that string_view::copy returns the number of characters copied; my personal preference is still substr+memcpy, but you do have the option.)",
+      "parentUuid": "36aeed64_d97dad02",
+      "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
