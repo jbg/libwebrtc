@@ -20,10 +20,18 @@ namespace webrtc {
 ErleEstimator::ErleEstimator(size_t startup_phase_length_blocks_,
                              float min_erle,
                              float max_erle_lf,
-                             float max_erle_hf)
+                             float max_erle_hf,
+                             size_t num_estimators,
+                             size_t main_filter_length_blocks,
+                             size_t delay_headroom_blocks)
     : startup_phase_length_blocks__(startup_phase_length_blocks_),
       fullband_erle_estimator_(min_erle, max_erle_lf),
-      subband_erle_estimator_(min_erle, max_erle_lf, max_erle_hf) {
+      subband_erle_estimator_(min_erle,
+                              max_erle_lf,
+                              max_erle_hf,
+                              num_estimators,
+                              main_filter_length_blocks,
+                              delay_headroom_blocks) {
   Reset(true);
 }
 
@@ -37,11 +45,15 @@ void ErleEstimator::Reset(bool delay_change) {
   }
 }
 
-void ErleEstimator::Update(rtc::ArrayView<const float> reverb_render_spectrum,
-                           rtc::ArrayView<const float> capture_spectrum,
-                           rtc::ArrayView<const float> subtractor_spectrum,
-                           bool converged_filter,
-                           bool onset_detection) {
+void ErleEstimator::Update(
+    const RenderBuffer& render_buffer,
+    const std::vector<std::array<float, kFftLengthBy2Plus1>>&
+        filter_frequency_response,
+    rtc::ArrayView<const float> reverb_render_spectrum,
+    rtc::ArrayView<const float> capture_spectrum,
+    rtc::ArrayView<const float> subtractor_spectrum,
+    bool converged_filter,
+    bool onset_detection) {
   RTC_DCHECK_EQ(kFftLengthBy2Plus1, reverb_render_spectrum.size());
   RTC_DCHECK_EQ(kFftLengthBy2Plus1, capture_spectrum.size());
   RTC_DCHECK_EQ(kFftLengthBy2Plus1, subtractor_spectrum.size());
@@ -53,7 +65,8 @@ void ErleEstimator::Update(rtc::ArrayView<const float> reverb_render_spectrum,
     return;
   }
 
-  subband_erle_estimator_.Update(X2_reverb, Y2, E2, converged_filter,
+  subband_erle_estimator_.Update(render_buffer, filter_frequency_response,
+                                 X2_reverb, Y2, E2, converged_filter,
                                  onset_detection);
   fullband_erle_estimator_.Update(X2_reverb, Y2, E2, converged_filter);
 }
