@@ -803,15 +803,6 @@ public class PeerConnectionTest {
     assertTrue(sdpLatch.await());
     assertNull(sdpLatch.getSdp());
 
-    sdpLatch = new SdpObserverLatch();
-    offeringExpectations.expectSignalingChange(SignalingState.HAVE_LOCAL_OFFER);
-    offeringPC.setLocalDescription(sdpLatch, offerSdp);
-    assertTrue(sdpLatch.await());
-    assertNull(sdpLatch.getSdp());
-    sdpLatch = new SdpObserverLatch();
-    offeringExpectations.expectSignalingChange(SignalingState.STABLE);
-    offeringExpectations.expectAddStream("answeredMediaStream");
-
     offeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
     offeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
     // TODO(bemasc): uncomment once delivery of ICECompleted is reliable
@@ -821,6 +812,15 @@ public class PeerConnectionTest {
     //     IceConnectionState.COMPLETED);
     answeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
     answeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
+
+    sdpLatch = new SdpObserverLatch();
+    offeringExpectations.expectSignalingChange(SignalingState.HAVE_LOCAL_OFFER);
+    offeringPC.setLocalDescription(sdpLatch, offerSdp);
+    assertTrue(sdpLatch.await());
+    assertNull(sdpLatch.getSdp());
+    sdpLatch = new SdpObserverLatch();
+    offeringExpectations.expectSignalingChange(SignalingState.STABLE);
+    offeringExpectations.expectAddStream("answeredMediaStream");
 
     offeringPC.setRemoteDescription(sdpLatch, answerSdp);
     assertTrue(sdpLatch.await());
@@ -1033,6 +1033,13 @@ public class PeerConnectionTest {
     assertTrue(sdpLatch.await());
     assertNull(sdpLatch.getSdp());
 
+    offeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
+    offeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
+    // TODO(bemasc): uncomment once delivery of ICECompleted is reliable
+    // (https://code.google.com/p/webrtc/issues/detail?id=3021).
+    answeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
+    answeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
+
     sdpLatch = new SdpObserverLatch();
     offeringExpectations.expectSignalingChange(SignalingState.HAVE_LOCAL_OFFER);
     offeringPC.setLocalDescription(sdpLatch, offerSdp);
@@ -1040,13 +1047,6 @@ public class PeerConnectionTest {
     assertNull(sdpLatch.getSdp());
     sdpLatch = new SdpObserverLatch();
     offeringExpectations.expectSignalingChange(SignalingState.STABLE);
-
-    offeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
-    offeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
-    // TODO(bemasc): uncomment once delivery of ICECompleted is reliable
-    // (https://code.google.com/p/webrtc/issues/detail?id=3021).
-    answeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
-    answeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
 
     offeringPC.setRemoteDescription(sdpLatch, answerSdp);
     assertTrue(sdpLatch.await());
@@ -1179,6 +1179,7 @@ public class PeerConnectionTest {
     offeringExpectations.expectSignalingChange(SignalingState.HAVE_LOCAL_OFFER);
     offeringExpectations.expectIceCandidates(2);
     offeringExpectations.expectIceGatheringChange(IceGatheringState.COMPLETE);
+    offeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
     offeringPC.setLocalDescription(sdpLatch, offerSdp);
     assertTrue(sdpLatch.await());
     assertNull(sdpLatch.getSdp());
@@ -1205,6 +1206,15 @@ public class PeerConnectionTest {
     assertEquals(answerSdp.type, SessionDescription.Type.ANSWER);
     assertFalse(answerSdp.description.isEmpty());
 
+    offeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
+    // TODO(bemasc): uncomment once delivery of ICECompleted is reliable
+    // (https://code.google.com/p/webrtc/issues/detail?id=3021).
+    //
+    // offeringExpectations.expectIceConnectionChange(
+    //     IceConnectionState.COMPLETED);
+    answeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
+    answeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
+
     // Set local description for answerer.
     sdpLatch = new SdpObserverLatch();
     answeringExpectations.expectSignalingChange(SignalingState.STABLE);
@@ -1218,16 +1228,6 @@ public class PeerConnectionTest {
     sdpLatch = new SdpObserverLatch();
     offeringExpectations.expectSignalingChange(SignalingState.STABLE);
     offeringExpectations.expectAddStream("answeredMediaStream");
-
-    offeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
-    offeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
-    // TODO(bemasc): uncomment once delivery of ICECompleted is reliable
-    // (https://code.google.com/p/webrtc/issues/detail?id=3021).
-    //
-    // offeringExpectations.expectIceConnectionChange(
-    //     IceConnectionState.COMPLETED);
-    answeringExpectations.expectIceConnectionChange(IceConnectionState.CHECKING);
-    answeringExpectations.expectIceConnectionChange(IceConnectionState.CONNECTED);
 
     offeringPC.setRemoteDescription(sdpLatch, answerSdp);
     assertTrue(sdpLatch.await());
