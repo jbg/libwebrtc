@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89d62938_a57af3fe",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-11-05T16:11:50Z",
+      "side": 1,
+      "message": "Niels:\nRegarding memory concerns, should I change this to std::unique_ptr\u003cHdrMetadata\u003e (or rtc_scoped_refptr?) and allocate memory only if it\u0027s set in set_hdr_metadata?\n\nOr is there another way of getting move operations to work?",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 46
+      },
+      "revId": "70ca91c626f661f1b8dddaf4310796a78bc903b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
