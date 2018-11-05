@@ -151,6 +151,24 @@
       "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fe9c88f_7f9750b8",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-05T11:37:02Z",
+      "side": 1,
+      "message": "Changed to use copy return value. I think it looks nice and concise. Also renamed the argument, to eliminate the explicit this-\u003e.",
+      "parentUuid": "f181da1f_92184226",
+      "revId": "fcb39984eade4d5a8216b39b3c29284742b395ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
