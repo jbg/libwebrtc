@@ -91,8 +91,7 @@ VideoAnalyzer::VideoAnalyzer(test::LayerFilteringTransport* transport,
       avg_ssim_threshold_(avg_ssim_threshold),
       is_quick_test_enabled_(is_quick_test_enabled),
       stats_polling_thread_(&PollStatsThread, this, "StatsPoller"),
-      comparison_available_event_(false, false),
-      done_(true, false),
+      done_() /* XXX (true, false) */,
       clock_(clock),
       start_ms_(clock->TimeInMilliseconds()) {
   // Create thread pool for CPU-expensive PSNR/SSIM calculations.

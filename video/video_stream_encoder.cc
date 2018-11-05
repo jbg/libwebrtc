@@ -347,7 +347,7 @@ VideoStreamEncoder::VideoStreamEncoder(
     const VideoStreamEncoderSettings& settings,
     rtc::VideoSinkInterface<VideoFrame>* pre_encode_callback,
     std::unique_ptr<OveruseFrameDetector> overuse_detector)
-    : shutdown_event_(true /* manual_reset */, false),
+    : shutdown_event_() /* (true, false) */,
       number_of_cores_(number_of_cores),
       initial_framedrop_(0),
       initial_framedrop_on_bwe_enabled_(
