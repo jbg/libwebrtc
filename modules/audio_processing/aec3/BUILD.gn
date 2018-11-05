@@ -52,6 +52,8 @@ rtc_static_library("aec3") {
     "echo_remover_metrics.h",
     "erl_estimator.cc",
     "erl_estimator.h",
+    "erle_correction_factor.cc",
+    "erle_correction_factor.h",
     "erle_estimator.cc",
     "erle_estimator.h",
     "fft_buffer.cc",
