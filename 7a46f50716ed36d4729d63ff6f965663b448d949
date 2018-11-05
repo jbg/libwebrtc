@@ -687,6 +687,24 @@
     },
     {
       "key": {
+        "uuid": "872be167_80dc0117",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-05T08:13:32Z",
+      "side": 1,
+      "message": "Not for this cl, but shouldn\u0027t we have a default constructor for Event, so we don\u0027t have to write (false, false) everywhere? Using anything but (false, false) is unusual and somewhat obscure.",
+      "parentUuid": "618248c7_bb21ac57",
+      "revId": "7a46f50716ed36d4729d63ff6f965663b448d949",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e9805d7_221993c5",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 1
