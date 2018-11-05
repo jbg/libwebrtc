@@ -24,11 +24,15 @@
 
 namespace rtc {
 
+Event::Event() : Event(std::pair<bool, bool>(false, false)) {}
+Event::Event(bool manual_reset, bool initially_signaled)
+    : Event(std::pair<bool, bool>(manual_reset, initially_signaled)) {}
+
 #if defined(WEBRTC_WIN)
 
-Event::Event(bool manual_reset, bool initially_signaled) {
+Event::Event(std::pair<bool, bool> opts) {
   event_handle_ = ::CreateEvent(nullptr,  // Security attributes.
-                                manual_reset, initially_signaled,
+                                opts.first, opts.second,
                                 nullptr);  // Name.
   RTC_CHECK(event_handle_);
 }
@@ -69,8 +73,8 @@ bool Event::Wait(int milliseconds) {
 #define USE_PTHREAD_COND_TIMEDWAIT_MONOTONIC_NP 0
 #endif
 
-Event::Event(bool manual_reset, bool initially_signaled)
-    : is_manual_reset_(manual_reset), event_status_(initially_signaled) {
+Event::Event(std::pair<bool, bool> opts)
+    : is_manual_reset_(opts.first), event_status_(opts.second) {
   RTC_CHECK(pthread_mutex_init(&event_mutex_, nullptr) == 0);
   pthread_condattr_t cond_attr;
   RTC_CHECK(pthread_condattr_init(&cond_attr) == 0);

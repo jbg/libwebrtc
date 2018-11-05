@@ -11,7 +11,9 @@
 #ifndef RTC_BASE_EVENT_H_
 #define RTC_BASE_EVENT_H_
 
+#include <utility>
 #include "rtc_base/constructormagic.h"
+#include "rtc_base/deprecation.h"
 #if defined(WEBRTC_WIN)
 #include <windows.h>
 #elif defined(WEBRTC_POSIX)
@@ -26,6 +28,9 @@ class Event {
  public:
   static const int kForever = -1;
 
+  Event();
+
+  RTC_DEPRECATED
   Event(bool manual_reset, bool initially_signaled);
   ~Event();
 
@@ -37,6 +42,8 @@ class Event {
   bool Wait(int milliseconds);
 
  private:
+  Event(std::pair<bool, bool> opts);
+
 #if defined(WEBRTC_WIN)
   HANDLE event_handle_;
 #elif defined(WEBRTC_POSIX)
@@ -45,8 +52,6 @@ class Event {
   const bool is_manual_reset_;
   bool event_status_;
 #endif
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(Event);
 };
 
 // This class is provided for compatibility with Chromium.

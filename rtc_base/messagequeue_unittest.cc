@@ -138,7 +138,7 @@ struct UnwrapMainThreadScope {
 // all messages (both delayed and non delayed) up until the current time, on
 // all registered message queues.
 TEST(MessageQueueManager, ProcessAllMessageQueues) {
-  Event entered_process_all_message_queues(true, false);
+  Event entered_process_all_message_queues; /* XXX (true, false); */
   auto a = Thread::CreateWithSocketServer();
   auto b = Thread::CreateWithSocketServer();
   a->Start();
@@ -181,7 +181,7 @@ TEST(MessageQueueManager, ProcessAllMessageQueuesWithQuittingThread) {
 // Test that ProcessAllMessageQueues doesn't hang if a queue clears its
 // messages.
 TEST(MessageQueueManager, ProcessAllMessageQueuesWithClearedQueue) {
-  Event entered_process_all_message_queues(true, false);
+  Event entered_process_all_message_queues; /* XXX (true, false); */
   auto t = Thread::CreateWithSocketServer();
   t->Start();
 
