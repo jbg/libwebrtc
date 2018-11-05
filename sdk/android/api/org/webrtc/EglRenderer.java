@@ -125,6 +125,7 @@ public class EglRenderer implements VideoSink {
   @Nullable private EglBase eglBase;
   private final VideoFrameDrawer frameDrawer = new VideoFrameDrawer();
   @Nullable private RendererCommon.GlDrawer drawer;
+  private boolean usePresentationTimeStamp;
   private final Matrix drawMatrix = new Matrix();
 
   // Pending frame to render. Serves as a queue with size 1. Synchronized on |frameLock|.
@@ -188,13 +189,14 @@ public class EglRenderer implements VideoSink {
    * init()/release() cycle.
    */
   public void init(@Nullable final EglBase.Context sharedContext, final int[] configAttributes,
-      RendererCommon.GlDrawer drawer) {
+      RendererCommon.GlDrawer drawer, boolean usePresentationTimeStamp) {
     synchronized (handlerLock) {
       if (renderThreadHandler != null) {
         throw new IllegalStateException(name + "Already initialized");
       }
       logD("Initializing EglRenderer");
       this.drawer = drawer;
+      this.usePresentationTimeStamp = usePresentationTimeStamp;
 
       final HandlerThread renderThread = new HandlerThread(name + "EglRenderer");
       renderThread.start();
@@ -228,6 +230,12 @@ public class EglRenderer implements VideoSink {
       renderThreadHandler.postDelayed(
           logStatisticsRunnable, TimeUnit.SECONDS.toMillis(LOG_INTERVAL_SEC));
     }
+  }
+
+  /** Same as above with usePresentationTimeStamp set to false. */
+  public void init(@Nullable final EglBase.Context sharedContext, final int[] configAttributes,
+      RendererCommon.GlDrawer drawer) {
+    init(sharedContext, configAttributes, drawer, /* usePresentationTimeStamp= */ false);
   }
 
   public void createEglSurface(Surface surface) {
@@ -617,7 +625,11 @@ public class EglRenderer implements VideoSink {
           eglBase.surfaceWidth(), eglBase.surfaceHeight());
 
       final long swapBuffersStartTimeNs = System.nanoTime();
-      eglBase.swapBuffers();
+      if (usePresentationTimeStamp) {
+        eglBase.swapBuffers(frame.getTimestampNs());
+      } else {
+        eglBase.swapBuffers();
+      }
 
       final long currentTimeNs = System.nanoTime();
       synchronized (statisticsLock) {
