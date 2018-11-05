@@ -14,6 +14,9 @@
 #include <stdint.h>
 #include <cstring>
 
+#include <algorithm>
+
+#include "absl/strings/string_view.h"
 #include "api/rtp_headers.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
@@ -26,9 +29,10 @@ const uint8_t kRtpMarkerBitMask = 0x80;
 namespace RtpUtility {
 
 struct Payload {
-  Payload(const char* name, const PayloadUnion& pu) : typeSpecific(pu) {
-    std::strncpy(this->name, name, sizeof(this->name) - 1);
-    this->name[sizeof(this->name) - 1] = '\0';
+  Payload(absl::string_view name, const PayloadUnion& pu) : typeSpecific(pu) {
+    size_t name_size = std::max(name.size(), sizeof(this->name) - 1);
+    name.copy(this->name, 0, name_size);
+    this->name[name_size] = '\0';
   }
   char name[RTP_PAYLOAD_NAME_SIZE];
   PayloadUnion typeSpecific;
