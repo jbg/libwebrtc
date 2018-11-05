@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f45299b_fd9f0557",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-05T15:26:01Z",
+      "side": 1,
+      "message": "There are a few cases like this where there\u0027s nothing left of the constructor. What\u0027s best, to delete mention of the constructor, or keep an \u003d default?",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 32
+      },
+      "revId": "cf5c23c4dac1e7fc135698c38742b2de63df5fac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a2f7865_fa9aedca",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-05T15:26:01Z",
+      "side": 1,
+      "message": "This is intended only as a trick to be able to deprecated the old constructor for experimental purposes. This construtor should either be deleted, or changed to take a private option struct or an enum as argument.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "cf5c23c4dac1e7fc135698c38742b2de63df5fac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
