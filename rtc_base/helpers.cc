@@ -160,6 +160,10 @@ bool CreateRandomData(size_t length, std::string* data) {
   return Rng().Generate(&data->at(0), length);
 }
 
+bool CreateRandomData(size_t length, uint8_t* data) {
+  return Rng().Generate(data, length);
+}
+
 // Version 4 UUID is of the form:
 // xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
 // Where 'x' is a hex digit, and 'y' is 8, 9, a or b.

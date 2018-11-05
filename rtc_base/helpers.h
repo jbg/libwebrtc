@@ -45,6 +45,7 @@ bool CreateRandomString(size_t length,
 // Generates (cryptographically) random data of the given length.
 // Return false if the random number generator failed.
 bool CreateRandomData(size_t length, std::string* data);
+bool CreateRandomData(size_t length, uint8_t* data);
 
 // Generates a (cryptographically) random UUID version 4 string.
 std::string CreateRandomUuid();
