@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cefd7f2c_af341e51",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-06T09:32:28Z",
+      "side": 1,
+      "message": "I think a min-heap is the natural data structure for the list of pending tasks. Is that easily accessible in the C++ standard library? If not, std::map is likely good enough, since we don\u0027t expect a very large number of delayed task.",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "130a32a4_662f3b16",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-06T09:32:28Z",
+      "side": 1,
+      "message": "I take it this initialization applies to random threads not related to any TaskQueue? So that CurrentQueue reliably returns nullptr when called from unrelated threads.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 73
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
