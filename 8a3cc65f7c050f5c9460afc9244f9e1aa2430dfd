@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab512455_efc83c91",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "There should be default_video_codec_factory_jni target that includes all the necessary code.",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 59
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adb9451a_257be713",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "PlatformSoftwareVideoDecoderFactory shouldn\u0027t require SW codecs. It is based on MediaCodec.",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 32
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "314348b1_9643d9dc",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "If clients should be able to depend on separate targets, this should be split to sw_vp8_java and sw_vp9_java. These should have separate JNI targets.",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 13
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d05bb9c_6ecf2390",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to discontinue these. It is good to have a default implementation for people that want the library to \"just work\".",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 574,
+        "endChar": 61
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cda79f97_02985395",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "Why would this dependency be required?",
+      "range": {
+        "startLine": 860,
+        "startChar": 6,
+        "endLine": 860,
+        "endChar": 70
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eab154a6_008d5d71",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "I hope this is not necessary",
+      "range": {
+        "startLine": 901,
+        "startChar": 6,
+        "endLine": 901,
+        "endChar": 70
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "953da000_a600512f",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "I also hope this is not needed.",
+      "range": {
+        "startLine": 1464,
+        "startChar": 5,
+        "endLine": 1464,
+        "endChar": 70
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f51042d_84dc298d",
+        "filename": "sdk/android/api/org/webrtc/VP8Decoder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:35:48Z",
+      "side": 1,
+      "message": "Simply moving to API is not enough. You have to also make the classes public. If we make these public API, I would like to also name them better. Probably SoftwareVp8Decoder or LibvpxVp8Decoder",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 5
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
