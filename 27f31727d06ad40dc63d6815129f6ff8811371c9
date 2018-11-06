@@ -22,6 +22,30 @@
       "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd0eb609_1314823d",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-06T13:49:47Z",
+      "side": 0,
+      "message": "We currently have both versions in the code.\n\nI\u0027m not sure about why we have that macro, it mostly saves some LOC. The advantage is that is more readable to someone not familiar with C++. OTH it\u0027s less readable to anyone not familiar with WebRTC (who would have to double check that it only does the expected thing, nothing else)\n\nSeeing as we have that macro, it might make most sense to use it. And the we might consider if really want to have it separately.",
+      "parentUuid": "e29b7326_65e3e8e7",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
