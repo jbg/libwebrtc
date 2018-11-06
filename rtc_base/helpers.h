@@ -15,6 +15,8 @@
 #include <stdint.h>
 #include <string>
 
+#include "api/array_view.h"
+
 namespace rtc {
 
 // For testing, we can return predictable data.
@@ -45,6 +47,7 @@ bool CreateRandomString(size_t length,
 // Generates (cryptographically) random data of the given length.
 // Return false if the random number generator failed.
 bool CreateRandomData(size_t length, std::string* data);
+bool CreateRandomData(rtc::ArrayView<uint8_t> data);
 
 // Generates a (cryptographically) random UUID version 4 string.
 std::string CreateRandomUuid();

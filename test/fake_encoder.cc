@@ -19,6 +19,7 @@
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/helpers.h"
 #include "system_wrappers/include/sleep.h"
 
 namespace webrtc {
@@ -42,10 +43,6 @@ FakeEncoder::FakeEncoder(Clock* clock)
       max_target_bitrate_kbps_(-1),
       pending_keyframe_(true),
       debt_bytes_(0) {
-  // Generate some arbitrary not-all-zero data
-  for (size_t i = 0; i < sizeof(encoded_buffer_); ++i) {
-    encoded_buffer_[i] = static_cast<uint8_t>(i);
-  }
   for (bool& used : used_layers_) {
     used = false;
   }
@@ -114,9 +111,10 @@ int32_t FakeEncoder::Encode(const VideoFrame& input_image,
     specifics.codecType = kVideoCodecGeneric;
     std::unique_ptr<uint8_t[]> encoded_buffer(
         new uint8_t[frame_info.layers[i].size]);
-    memcpy(encoded_buffer.get(), encoded_buffer_, frame_info.layers[i].size);
+    rtc::CreateRandomData(rtc::ArrayView<uint8_t>(encoded_buffer.get(),
+                                                  frame_info.layers[i].size));
     EncodedImage encoded(encoded_buffer.get(), frame_info.layers[i].size,
-                         sizeof(encoded_buffer_));
+                         frame_info.layers[i].size);
     encoded.SetTimestamp(input_image.timestamp());
     encoded.capture_time_ms_ = input_image.render_time_ms();
     encoded._frameType =
