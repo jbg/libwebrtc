@@ -70,6 +70,30 @@
       "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0bb70e7_c4ae8636",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-06T13:59:07Z",
+      "side": 0,
+      "message": "It\u0027s a pre-C++11 thing; disabling copying and assignment used to be much more of a hack than it is today, so it made sense to encapsulate it in a macro. IIUC, we got the macro from Chromium, who got it from the Google code base.\n\nThe Google style guide no longer recommends its use [https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types]; my opinion is that we should get rid of it. But a simple search indicates that we use these macros in almost 500 classes, so it\u0027s going to be a bit of a chore.",
+      "parentUuid": "dd0eb609_1314823d",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
