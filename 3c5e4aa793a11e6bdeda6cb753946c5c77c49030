@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "baf222ba_4ce106f9",
+        "filename": "sdk/android/api/org/webrtc/EglRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-11-06T10:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d25b62ba_9d527c6a",
+      "range": {
+        "startLine": 189,
+        "startChar": 5,
+        "endLine": 189,
+        "endChar": 28
+      },
+      "revId": "3c5e4aa793a11e6bdeda6cb753946c5c77c49030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "353fe7fd_8c75d197",
         "filename": "sdk/android/api/org/webrtc/EglRenderer.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "3c5e4aa793a11e6bdeda6cb753946c5c77c49030",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dbf5f04_4631e7ba",
+        "filename": "sdk/android/api/org/webrtc/EglRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-11-06T10:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "353fe7fd_8c75d197",
+      "range": {
+        "startLine": 235,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 10
+      },
+      "revId": "3c5e4aa793a11e6bdeda6cb753946c5c77c49030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
