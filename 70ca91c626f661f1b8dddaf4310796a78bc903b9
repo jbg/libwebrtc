@@ -22,6 +22,30 @@
       "revId": "70ca91c626f661f1b8dddaf4310796a78bc903b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02a6a6d4_7a2cbcb1",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-06T09:04:39Z",
+      "side": 1,
+      "message": "Roughly how large is a HdrMetadata? Are there any parts of it where move is more efficient than copy?\n\nFor now, I don\u0027t think we should do separate allocation.",
+      "parentUuid": "89d62938_a57af3fe",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 46
+      },
+      "revId": "70ca91c626f661f1b8dddaf4310796a78bc903b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
