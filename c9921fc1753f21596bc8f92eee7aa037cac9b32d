@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "034bc96b_da874b11",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2018-11-06T21:18:35Z",
+      "side": 1,
+      "message": "Will do. I can use std::priority_queue in combination with std::greater\u003cT\u003e to ensure the smallest next element is in the queue.",
+      "parentUuid": "c20ecae5_3d203644",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "130a32a4_662f3b16",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 7
@@ -60,6 +84,30 @@
       "writtenOn": "2018-11-06T09:32:28Z",
       "side": 1,
       "message": "I take it this initialization applies to random threads not related to any TaskQueue? So that CurrentQueue reliably returns nullptr when called from unrelated threads.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 73
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e2ce4d7_bdc76aa5",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2018-11-06T21:18:35Z",
+      "side": 1,
+      "message": "Correct. https://en.cppreference.com/w/cpp/language/storage_duration -- it uses \"thread\" storage duration.",
+      "parentUuid": "130a32a4_662f3b16",
       "range": {
         "startLine": 159,
         "startChar": 0,
