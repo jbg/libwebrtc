@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8f7e000b_a0c62e36",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:58:42Z",
+      "side": 1,
+      "message": "Done on https://webrtc-review.googlesource.com/c/src/+/109529",
+      "parentUuid": "ab512455_efc83c91",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 59
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "adb9451a_257be713",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 10
