@@ -94,7 +94,10 @@ AecState::AecState(const EchoCanceller3Config& config)
       erle_estimator_(2 * kNumBlocksPerSecond,
                       config_.erle.min,
                       config_.erle.max_l,
-                      config_.erle.max_h),
+                      config_.erle.max_h,
+                      config_.erle.num_estimators,
+                      config_.filter.main.length_blocks,
+                      config_.delay.delay_headroom_blocks),
       suppression_gain_limiter_(config_),
       filter_analyzer_(config_),
       echo_audibility_(
@@ -210,7 +213,8 @@ void AecState::Update(
   const auto& X2_input_erle =
       enable_erle_updates_during_reverb_ ? X2_reverb : X2;
 
-  erle_estimator_.Update(X2_input_erle, Y2, E2_main,
+  erle_estimator_.Update(render_buffer, adaptive_filter_frequency_response,
+                         X2_input_erle, Y2, E2_main,
                          subtractor_output_analyzer_.ConvergedFilter(),
                          config_.erle.onset_detection);
 

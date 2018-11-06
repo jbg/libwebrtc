@@ -19,6 +19,7 @@
 #include "api/array_view.h"
 #include "modules/audio_processing/aec3/aec3_common.h"
 #include "modules/audio_processing/aec3/fullband_erle_estimator.h"
+#include "modules/audio_processing/aec3/render_buffer.h"
 #include "modules/audio_processing/aec3/subband_erle_estimator.h"
 #include "modules/audio_processing/logging/apm_data_dumper.h"
 
@@ -31,14 +32,20 @@ class ErleEstimator {
   ErleEstimator(size_t startup_phase_length_blocks_,
                 float min_erle,
                 float max_erle_lf,
-                float max_erle_hf);
+                float max_erle_hf,
+                size_t num_estimators,
+                size_t main_filter_length_blocks,
+                size_t delay_headroom_blocks);
   ~ErleEstimator();
 
   // Resets the fullband ERLE estimator and the subbands ERLE estimators.
   void Reset(bool delay_change);
 
   // Updates the ERLE estimates.
-  void Update(rtc::ArrayView<const float> reverb_render_spectrum,
+  void Update(const RenderBuffer& render_buffer,
+              const std::vector<std::array<float, kFftLengthBy2Plus1> >&
+                  filter_frequency_response,
+              rtc::ArrayView<const float> reverb_render_spectrum,
               rtc::ArrayView<const float> capture_spectrum,
               rtc::ArrayView<const float> subtractor_spectrum,
               bool converged_filter,
