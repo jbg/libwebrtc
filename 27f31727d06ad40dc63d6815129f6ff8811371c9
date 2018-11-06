@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e29b7326_65e3e8e7",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-06T13:25:49Z",
+      "side": 0,
+      "message": "Hmm. This macro disables not only default construction, but also copying. And that should probably stay disabled.\n\nShould this be replaced by RTC_DISALLOW_COPY_AND_ASSIGN, or is explicit delete the recommended way? Adding\n\n Event(const Event\u0026) \u003d delete;\n Event\u0026 operator\u003d(const Event\u0026) \u003d delete;\n\nat the end of the list of constructors?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
