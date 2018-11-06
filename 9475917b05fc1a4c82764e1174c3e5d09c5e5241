@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36521090_dedbfdf6",
+        "filename": "modules/audio_device/include/test_audio_device.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-06T10:09:18Z",
+      "side": 1,
+      "message": "I\u0027ll make a separate cl to try to change this from (true, true) to (false, false).",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 49
+      },
+      "revId": "9475917b05fc1a4c82764e1174c3e5d09c5e5241",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
