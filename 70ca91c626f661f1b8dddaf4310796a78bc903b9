@@ -70,6 +70,30 @@
       "revId": "70ca91c626f661f1b8dddaf4310796a78bc903b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c86ab9e_46330e07",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-11-06T09:12:36Z",
+      "side": 1,
+      "message": "All members of HdrMetadata are primitives so move does not give any gain compared to copy.",
+      "parentUuid": "46a8195b_2bec3ac1",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 46
+      },
+      "revId": "70ca91c626f661f1b8dddaf4310796a78bc903b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
