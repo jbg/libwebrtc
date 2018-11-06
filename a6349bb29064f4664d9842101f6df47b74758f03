@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c49a495_f4967092",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-06T16:32:32Z",
+      "side": 1,
+      "message": "Should be `const Event\u0026` if you mean the copy assignment operator (which you should), or `Event\u0026\u0026` if you mean the move assignment operator.\n\nAlso, if I were to be pedantic, this goes before the destructor: https://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "range": {
+        "startLine": 33,
+        "startChar": 19,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "a6349bb29064f4664d9842101f6df47b74758f03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
