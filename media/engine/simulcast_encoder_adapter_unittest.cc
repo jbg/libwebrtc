@@ -722,8 +722,10 @@ TEST_F(TestSimulcastEncoderAdapterFake, SupportsNativeHandleForSingleStreams) {
   adapter_->RegisterEncodeCompleteCallback(this);
   ASSERT_EQ(1u, helper_->factory()->encoders().size());
   helper_->factory()->encoders()[0]->set_supports_native_handle(true);
+  EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   EXPECT_TRUE(adapter_->GetEncoderInfo().supports_native_handle);
   helper_->factory()->encoders()[0]->set_supports_native_handle(false);
+  EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   EXPECT_FALSE(adapter_->GetEncoderInfo().supports_native_handle);
 }
 
@@ -796,6 +798,7 @@ TEST_F(TestSimulcastEncoderAdapterFake,
   EXPECT_FALSE(adapter_->GetEncoderInfo().supports_native_handle);
   // Once all do, then the adapter claims support.
   helper_->factory()->encoders()[0]->set_supports_native_handle(true);
+  EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   EXPECT_TRUE(adapter_->GetEncoderInfo().supports_native_handle);
 }
 
@@ -832,6 +835,7 @@ TEST_F(TestSimulcastEncoderAdapterFake,
   ASSERT_EQ(3u, helper_->factory()->encoders().size());
   for (MockVideoEncoder* encoder : helper_->factory()->encoders())
     encoder->set_supports_native_handle(true);
+  EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   EXPECT_TRUE(adapter_->GetEncoderInfo().supports_native_handle);
 
   rtc::scoped_refptr<VideoFrameBuffer> buffer(
