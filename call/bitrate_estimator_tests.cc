@@ -46,7 +46,7 @@ class LogObserver {
  private:
   class Callback : public rtc::LogSink {
    public:
-    Callback() : done_(false, false) {}
+    Callback() {}
 
     void OnLogMessage(const std::string& message) override {
       rtc::CritScope lock(&crit_sect_);

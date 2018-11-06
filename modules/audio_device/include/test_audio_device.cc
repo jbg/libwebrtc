@@ -62,8 +62,8 @@ class TestAudioDeviceModuleImpl
         audio_callback_(nullptr),
         rendering_(false),
         capturing_(false),
-        done_rendering_(true, true),
-        done_capturing_(true, true),
+        done_rendering_() /* XXX (true, true) */,
+        done_capturing_() /* XXX (true, true) */,
         stop_thread_(false) {
     auto good_sample_rate = [](int sr) {
       return sr == 8000 || sr == 16000 || sr == 32000 || sr == 44100 ||
