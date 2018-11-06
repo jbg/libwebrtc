@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6d887846_4db73a11",
+        "filename": "rtc_base/helpers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-11-06T07:43:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b521ea0_58b4dae2",
+      "range": {
+        "startLine": 48,
+        "startChar": 22,
+        "endLine": 48,
+        "endChar": 50
+      },
+      "revId": "7856543400d1f420d87565a276a76906560a79c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ae3508b_d4057b42",
         "filename": "test/fake_encoder.cc",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2018-11-05T16:47:42Z",
       "side": 1,
       "message": "Won\u0027t this make a number of currently deterministic tests nondeterministic?",
+      "revId": "7856543400d1f420d87565a276a76906560a79c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e15df805_7d76bc37",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2018-11-06T07:43:48Z",
+      "side": 1,
+      "message": "Tests using a fake encoder should normally not depend on the content of the payload. I do this in order to be able to fingerprint the payload and be able to compare send and received payloads.",
+      "parentUuid": "8ae3508b_d4057b42",
       "revId": "7856543400d1f420d87565a276a76906560a79c4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
