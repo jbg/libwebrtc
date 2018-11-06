@@ -46,6 +46,30 @@
       "revId": "a1ead6f2ab755e13c97db05134b150771c48bb2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6407fcdb_34fd2086",
+        "filename": "test/single_threaded_task_queue_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-06T11:40:13Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "386c79ff_2eea933a",
+      "range": {
+        "startLine": 70,
+        "startChar": 24,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "a1ead6f2ab755e13c97db05134b150771c48bb2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
