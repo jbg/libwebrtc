@@ -46,6 +46,30 @@
       "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69bc5232_09bfd786",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-06T13:57:03Z",
+      "side": 0,
+      "message": "yes,\nI think using macro to disable copying is deprecated [Can\u0027t find that written down though].\nSince you\u0027ll need to update it anyway, update with explicitly deleted copy constructor/assignment operator.\n(macro exists from before c++11 times)",
+      "parentUuid": "e29b7326_65e3e8e7",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "27f31727d06ad40dc63d6815129f6ff8811371c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
