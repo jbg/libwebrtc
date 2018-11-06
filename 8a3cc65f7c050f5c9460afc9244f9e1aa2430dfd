@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "51558c48_b15c145a",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "MediaCodecVideoEncoderFactory relies on InternalEncoderFactory, so I assumed MediaCodec decoders did the same. They don\u0027t though :)",
+      "parentUuid": "adb9451a_257be713",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 32
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "314348b1_9643d9dc",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 10
@@ -68,6 +92,30 @@
       "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e37337ef_1ba59ab3",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "Done on https://webrtc-review.googlesource.com/c/src/+/109529.",
+      "parentUuid": "314348b1_9643d9dc",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 13
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "c64e1487_30507c2f",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "I overly documented because it wasn\u0027t very obvious to a reader which java targets required which JNI targets. On https://webrtc-review.googlesource.com/c/src/+/109529 I instead followed your convention of creating a corresponding _jni target for each _java target that needed one. Removed this comment.",
+      "parentUuid": "1d05bb9c_6ecf2390",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 574,
+        "endChar": 61
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cda79f97_02985395",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 10
@@ -114,6 +186,30 @@
       "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a0ddfdf_05fe22eb",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "There was a downstream client that was getting its codecs indirectly via this target, but I updated it to include its own codecs explicitly. Removed.",
+      "parentUuid": "cda79f97_02985395",
+      "range": {
+        "startLine": 860,
+        "startChar": 6,
+        "endLine": 860,
+        "endChar": 70
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "9973f5d2_e2e93748",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "Same here as for :native_api_codecs. Removed.",
+      "parentUuid": "eab154a6_008d5d71",
+      "range": {
+        "startLine": 901,
+        "startChar": 6,
+        "endLine": 901,
+        "endChar": 70
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "953da000_a600512f",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 10
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "6bbc3d3c_e7651141",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "Removed. My original approach was for this to be a pure refactor CL, so I added this alongside every usage of :video_jni.",
+      "parentUuid": "953da000_a600512f",
+      "range": {
+        "startLine": 1464,
+        "startChar": 5,
+        "endLine": 1464,
+        "endChar": 70
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f51042d_84dc298d",
         "filename": "sdk/android/api/org/webrtc/VP8Decoder.java",
         "patchSetId": 10
@@ -183,6 +327,30 @@
       "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3abdaba_9b01b007",
+        "filename": "sdk/android/api/org/webrtc/VP8Decoder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6013
+      },
+      "writtenOn": "2018-11-06T23:57:33Z",
+      "side": 1,
+      "message": "This is now being done on https://webrtc-review.googlesource.com/c/src/+/109529",
+      "parentUuid": "5f51042d_84dc298d",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 5
+      },
+      "revId": "8a3cc65f7c050f5c9460afc9244f9e1aa2430dfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
