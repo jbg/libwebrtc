@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c20ecae5_3d203644",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-06T10:53:26Z",
+      "side": 1,
+      "message": "Oh, right, there\u0027s std::priority_queue: https://en.cppreference.com/w/cpp/container/priority_queue\n\nIt\u0027ll use a std::vector for backing storage by default, so it should avoid a bunch of heap allocations compared to std::map.",
+      "parentUuid": "cefd7f2c_af341e51",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "130a32a4_662f3b16",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 7
