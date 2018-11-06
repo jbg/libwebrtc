@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d25b62ba_9d527c6a",
+        "filename": "sdk/android/api/org/webrtc/EglRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:45:35Z",
+      "side": 1,
+      "message": "nit: Add documentation here what \"usePresentationTimeStamp\" does.",
+      "range": {
+        "startLine": 189,
+        "startChar": 5,
+        "endLine": 189,
+        "endChar": 28
+      },
+      "revId": "3c5e4aa793a11e6bdeda6cb753946c5c77c49030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "353fe7fd_8c75d197",
+        "filename": "sdk/android/api/org/webrtc/EglRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-11-06T08:45:35Z",
+      "side": 1,
+      "message": "nit: It might be helpful to at a @see link to the method referenced.",
+      "range": {
+        "startLine": 235,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 10
+      },
+      "revId": "3c5e4aa793a11e6bdeda6cb753946c5c77c49030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
