@@ -22,6 +22,70 @@
       "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18df2b62_8e9a1591",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-07T13:29:54Z",
+      "side": 1,
+      "message": "Does absl::string_view::compare do what you want? Alternatively,\n\n  name.substr(0, prefix.size()) \u003d\u003d prefix\n\nor\n\n  absl::StartsWith(name, prefix)\n\nFor concatenation, I guess you\u0027d want\n\n  absl::StrCat(directory, name);\n\nbut we don\u0027t allow that...",
+      "parentUuid": "5e996f74_e51dada9",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 15
+      },
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b564b59_e3bd7b1d",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-07T13:29:54Z",
+      "side": 1,
+      "message": "Or just\n\n  total_size +\u003d GetFileSize(file_name).value_or(0);",
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05968304_9ba2a5fa",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-07T13:29:54Z",
+      "side": 1,
+      "message": "`const auto\u0026`? Otherwise, we\u0027ll end up copying the string.",
+      "range": {
+        "startLine": 352,
+        "startChar": 11,
+        "endLine": 352,
+        "endChar": 15
+      },
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
