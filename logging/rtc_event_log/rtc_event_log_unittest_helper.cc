@@ -199,7 +199,7 @@ EventGenerator::NewIceCandidatePair() {
           static_cast<uint32_t>(IceCandidatePairEventType::kNumValues) - 1));
   uint32_t pair_id = prng_.Rand<uint32_t>();
 
-  return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id);
+  return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id, "");
 }
 
 rtcp::ReportBlock EventGenerator::NewReportBlock() {
