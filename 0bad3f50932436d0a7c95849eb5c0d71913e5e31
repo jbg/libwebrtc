@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "08af9e73_1fe65b31",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-07T14:08:56Z",
+      "side": 1,
+      "message": "And I\u0027d need *both* compare and concat-as-string. Leaving as is for now.",
+      "parentUuid": "18df2b62_8e9a1591",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 15
+      },
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b564b59_e3bd7b1d",
         "filename": "rtc_base/filerotatingstream.cc",
         "patchSetId": 6
@@ -63,6 +87,24 @@
       "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13a3eba8_c5d60c3c",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-07T14:08:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b564b59_e3bd7b1d",
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -86,6 +128,30 @@
       "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bd92bb1_b252e218",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-07T14:08:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05968304_9ba2a5fa",
+      "range": {
+        "startLine": 352,
+        "startChar": 11,
+        "endLine": 352,
+        "endChar": 15
+      },
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
