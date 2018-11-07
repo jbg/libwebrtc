@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e996f74_e51dada9",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-07T12:08:54Z",
+      "side": 1,
+      "message": "Making a copy here makes comparison and concatenation below more convenient. I\u0027d change to absl::string_view if I knew how to do that without making the code more verbose.",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 15
+      },
+      "revId": "0bad3f50932436d0a7c95849eb5c0d71913e5e31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
