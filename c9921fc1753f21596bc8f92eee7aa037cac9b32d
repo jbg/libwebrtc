@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "de26a5de_ddb5e57b",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2018-11-08T03:16:34Z",
+      "side": 1,
+      "message": "Ok, std::priority_queue is not very friendly with std::unique_ptr because once an item is put into the queue it cannot be modified (due to inherent ordering of the queue). For example top() can only returns a const reference. I don\u0027t use the unique_ptr for any ordering but it doesn\u0027t matter because just being present in the queue\u0027s entry is enough to stop the extraction of the unique_ptr later. I can do some kind of hack to work around (stripping const, inheriting and overriding std::priority_queue, custom container wrapping std::vector etc) this but I assume that\u0027s not desirable. Any recommendation in this case?",
+      "parentUuid": "034bc96b_da874b11",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "130a32a4_662f3b16",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 7
