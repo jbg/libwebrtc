@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d3c7d303_df76394d",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-08T22:32:35Z",
+      "side": 1,
+      "message": "The transaction_id here is the existing StunMessage::transaction_id (it is passed in to this constructor in port.cc), which is a random string of length 12. Generated here:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/stunrequest.cc?l\u003d173\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/stunrequest.cc?l\u003d178\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/turnport.cc?l\u003d1709\n\nI assume this isn\u0027t a privacy issue, but it definitely won\u0027t compress well. I\u0027ll check what it does to log size.",
+      "parentUuid": "05c4e55a_ef8b8ad0",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 21
+      },
+      "revId": "026e73dcdfa148ab972af0f94cc99d7b29ec85c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c3fa2fa_9bb17641",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "026e73dcdfa148ab972af0f94cc99d7b29ec85c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb543b64_d750f0dd",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-08T22:32:35Z",
+      "side": 1,
+      "message": "That is better, thanks!",
+      "parentUuid": "4c3fa2fa_9bb17641",
+      "range": {
+        "startLine": 202,
+        "startChar": 7,
+        "endLine": 202,
+        "endChar": 26
+      },
+      "revId": "026e73dcdfa148ab972af0f94cc99d7b29ec85c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
