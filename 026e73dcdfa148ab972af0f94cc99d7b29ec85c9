@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "05c4e55a_ef8b8ad0",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-08T12:08:59Z",
+      "side": 1,
+      "message": "As part of making the logs fully structured, we\u0027re trying to get rid of all strings from the proto. Not using strings will improve compression and make the privacy more transparent.\n\nBtw, how do you intend to generate the transaction ID? Keep in mind that we don\u0027t put IP addresses or other stable identifiers in the log.",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 21
+      },
+      "revId": "026e73dcdfa148ab972af0f94cc99d7b29ec85c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c3fa2fa_9bb17641",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
         "patchSetId": 3
