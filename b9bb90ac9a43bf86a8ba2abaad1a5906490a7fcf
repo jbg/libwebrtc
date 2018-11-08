@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c274ebb2_fe66b4bb",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2018-11-08T00:30:06Z",
+      "side": 1,
+      "message": "This transaction_id won\u0027t be picked up by the code that will actually log. Is that going to be a different CL?",
+      "revId": "b9bb90ac9a43bf86a8ba2abaad1a5906490a7fcf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
