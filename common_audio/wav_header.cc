@@ -56,6 +56,23 @@ struct WavHeader {
 };
 static_assert(sizeof(WavHeader) == kWavHeaderSize, "no padding in header");
 
+// Check that WavHeader is trivially copyable.
+// TODO(bugs.webrtc.org/8762): Remove IsTriviallyCopyable() when
+// std::is_trivially_copyable becomes available in downstream projects.
+template <typename T>
+constexpr bool IsTriviallyCopyable() {
+  return static_cast<bool>(std::is_trivially_copy_constructible<T>::value &&
+                           (std::is_trivially_copy_assignable<T>::value ||
+                            !std::is_copy_assignable<T>::value) &&
+                           std::is_trivially_destructible<T>::value);
+}
+
+static_assert(std::is_trivially_copy_constructible<WavHeader>::value, "");
+static_assert(std::is_trivially_copy_assignable<WavHeader>::value, "");
+static_assert(std::is_copy_assignable<WavHeader>::value, "");
+static_assert(std::is_trivially_destructible<WavHeader>::value, "");
+static_assert(IsTriviallyCopyable<WavHeader>(), "");
+
 }  // namespace
 
 bool CheckWavParameters(size_t num_channels,
