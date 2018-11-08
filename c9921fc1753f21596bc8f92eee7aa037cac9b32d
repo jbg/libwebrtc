@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "0f1ae889_22d7bb63",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-08T08:24:38Z",
+      "side": 1,
+      "message": "Then I think it\u0027s best to keep things simple and stick to std::map for now, with a brief comment on why std::priority_queue is too awkward. I\u0027m not aware of any evidence that using priority_queue (or some other min-heap) would improve performance in a noticeable way, for our use cases.",
+      "parentUuid": "174cc00e_87f414ea",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "130a32a4_662f3b16",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 7
@@ -165,6 +189,30 @@
       "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "316edd41_6ccaa65a",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-08T08:24:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e2ce4d7_bdc76aa5",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 73
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
