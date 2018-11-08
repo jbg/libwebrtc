@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20a71bb8_f0bb67af",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-08T21:36:05Z",
+      "side": 1,
+      "message": "std::to_string(prng_Rand\u003cuint32_t\u003e())",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 31
+      },
+      "revId": "f4f60d0e0d6f0fd83c8c5477edd929d410d6375e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
