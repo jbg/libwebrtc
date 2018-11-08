@@ -198,8 +198,13 @@ EventGenerator::NewIceCandidatePair() {
       static_cast<IceCandidatePairEventType>(prng_.Rand(
           static_cast<uint32_t>(IceCandidatePairEventType::kNumValues) - 1));
   uint32_t pair_id = prng_.Rand<uint32_t>();
+  char buffer[12];
+  rtc::SimpleStringBuilder sb(buffer);
+  sb << prng_.Rand<uint32_t>();
+  std::string transaction_id = sb.str();
 
-  return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id);
+  return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id,
+                                                     transaction_id);
 }
 
 rtcp::ReportBlock EventGenerator::NewReportBlock() {
