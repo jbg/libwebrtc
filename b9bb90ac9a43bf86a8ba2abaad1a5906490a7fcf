@@ -34,6 +34,24 @@
       "revId": "b9bb90ac9a43bf86a8ba2abaad1a5906490a7fcf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca306000_9313fb33",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-08T06:44:48Z",
+      "side": 1,
+      "message": "I just tried adding transaction_id to the parser/encoder in this CL (which depends on this one): https://webrtc-review.googlesource.com/c/src/+/110103, but it is breaking an EncoderTest right now. I will come back to this tomorrow, but I would rather submit this CL first if possible to keep things more manageable.",
+      "parentUuid": "a0499063_f79210f7",
+      "revId": "b9bb90ac9a43bf86a8ba2abaad1a5906490a7fcf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
