@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "174cc00e_87f414ea",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-08T04:13:49Z",
+      "side": 1,
+      "message": "Ach---I\u0027d completely forgotten that they still (as of C++17) haven\u0027t made std::priority_queue work well with move-only types. It should have a pop() method that *returns* the evicted element...\n\nThe best workaround I can come up with is to use `mutable`: https://godbolt.org/z/e2HLgk\nIf you go that route, don\u0027t forget to add a comment explaining why that `mutable` is there...",
+      "parentUuid": "de26a5de_ddb5e57b",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "c9921fc1753f21596bc8f92eee7aa037cac9b32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "130a32a4_662f3b16",
         "filename": "rtc_base/task_queue_stdlib.cc",
         "patchSetId": 7
