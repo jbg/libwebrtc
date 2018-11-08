@@ -16,6 +16,24 @@
       "revId": "b9bb90ac9a43bf86a8ba2abaad1a5906490a7fcf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0499063_f79210f7",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-11-08T02:18:26Z",
+      "side": 1,
+      "message": "+1. There is also an encoding step in logging, and particularly for ICE event, it happens here, https://cs.chromium.org/chromium/src/third_party/webrtc/logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc?g\u003d0\u0026l\u003d860. The second half of the code path would require the change of the rtc_event_log protobuf schema, and the encoding of a user-defined event like RtcEventIceCandidatePair to a generated class from the protobuf.",
+      "parentUuid": "c274ebb2_fe66b4bb",
+      "revId": "b9bb90ac9a43bf86a8ba2abaad1a5906490a7fcf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
