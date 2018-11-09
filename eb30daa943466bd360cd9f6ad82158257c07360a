@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b0b3e19e_457e6d2c",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-09T15:42:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcd841cd_3d33ed8a",
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0711879a_8396e061",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "8718f6c0_22a413e1",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-09T15:42:16Z",
+      "side": 1,
+      "message": "I don\u0027t want to introduce a whole new struct to pass the data to this function. I tried to make it so it can be moved to base/ and reused somewhere else, so passing measurements here is not a good solution either.\n\nDo you prefer it as it\u0027s now or if i used an ArrayView\u003cPair\u003cdouble, double\u003e\u003e ?",
+      "parentUuid": "0711879a_8396e061",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c9906bf_1f39e19e",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2018-11-09T14:39:21Z",
       "side": 1,
       "message": "normalization might look a bit better in the LinearRegression itself.",
+      "range": {
+        "startLine": 106,
+        "startChar": 44,
+        "endLine": 106,
+        "endChar": 57
+      },
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b18cd8c_2ee4c9a0",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-09T15:42:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c9906bf_1f39e19e",
       "range": {
         "startLine": 106,
         "startChar": 44,
