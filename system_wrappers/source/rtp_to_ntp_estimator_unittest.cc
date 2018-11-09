@@ -14,6 +14,7 @@
 namespace webrtc {
 namespace {
 const uint32_t kOneMsInNtpFrac = 4294967;
+const uint64_t kOneHourInNtpFrac = kOneMsInNtpFrac * 1000 * 60 * 60;
 const uint32_t kTimestampTicksPerMs = 90;
 }  // namespace
 
@@ -220,6 +221,22 @@ TEST(UpdateRtcpMeasurementTests, FailsForOldNtp) {
   // Old ntp time, list not updated.
   ntp_frac -= kOneMsInNtpFrac;
   timestamp += kTimestampTicksPerMs;
+  EXPECT_FALSE(
+      estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
+}
+
+TEST(UpdateRtcpMeasurementTests, FailsForTooNewNtp) {
+  RtpToNtpEstimator estimator;
+  uint32_t ntp_sec = 1;
+  uint32_t ntp_frac = 699925050;
+  uint32_t timestamp = 0x12345678;
+  bool new_sr;
+  EXPECT_TRUE(
+      estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
+  EXPECT_TRUE(new_sr);
+  // Old ntp time, list not updated.
+  ntp_frac += kOneHourInNtpFrac * 2;
+  timestamp += kTimestampTicksPerMs * 1000 * 60 * 60 * 2;
   EXPECT_FALSE(
       estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
 }
