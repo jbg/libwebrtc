@@ -649,6 +649,12 @@ class PeerConnection : public PeerConnectionInternal,
     return configuration_.sdp_semantics == SdpSemantics::kUnifiedPlan;
   }
 
+  // Returns true if the SDP attribute extmap-allow-mixed should be included
+  // in our offer.
+  bool OfferExtmapAllowMixed() const {
+    return configuration_.offer_extmap_allow_mixed;
+  }
+
   // Is there an RtpSender of the given type?
   bool HasRtpSender(cricket::MediaType type) const;
 
