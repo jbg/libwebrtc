@@ -182,6 +182,14 @@ void PeerConnectionDelegateAdapter::OnIceConnectionChange(
                didChangeIceConnectionState:state];
 }
 
+void PeerConnectionDelegateAdapter::OnConnectionChange(
+    PeerConnectionInterface::PeerConnectionState new_state) {
+  RTCPeerConnectionState state =
+      [[RTCPeerConnection class] connectionStateForNativeState:new_state];
+  RTCPeerConnection *peer_connection = peer_connection_;
+  [peer_connection.delegate peerConnection:peer_connection didChangeConnectionState:state];
+}
+
 void PeerConnectionDelegateAdapter::OnIceGatheringChange(
     PeerConnectionInterface::IceGatheringState new_state) {
   RTCIceGatheringState state =
@@ -320,6 +328,10 @@ void PeerConnectionDelegateAdapter::OnRemoveTrack(
 - (RTCIceConnectionState)iceConnectionState {
   return [[self class] iceConnectionStateForNativeState:
       _peerConnection->ice_connection_state()];
+}
+
+- (RTCPeerConnectionState)connectionState {
+  return [[self class] connectionStateForNativeState:_peerConnection->peer_connection_state()];
 }
 
 - (RTCIceGatheringState)iceGatheringState {
@@ -628,6 +640,59 @@ void PeerConnectionDelegateAdapter::OnRemoveTrack(
     case RTCSignalingStateHaveRemotePrAnswer:
       return @"HAVE_REMOTE_PRANSWER";
     case RTCSignalingStateClosed:
+      return @"CLOSED";
+  }
+}
+
++ (webrtc::PeerConnectionInterface::PeerConnectionState)nativeConnectionStateForState:
+        (RTCPeerConnectionState)state {
+  switch (state) {
+    case RTCPeerConnectionStateNew:
+      return webrtc::PeerConnectionInterface::PeerConnectionState::kNew;
+    case RTCPeerConnectionStateConnecting:
+      return webrtc::PeerConnectionInterface::PeerConnectionState::kConnecting;
+    case RTCPeerConnectionStateConnected:
+      return webrtc::PeerConnectionInterface::PeerConnectionState::kConnected;
+    case RTCPeerConnectionStateFailed:
+      return webrtc::PeerConnectionInterface::PeerConnectionState::kFailed;
+    case RTCPeerConnectionStateDisconnected:
+      return webrtc::PeerConnectionInterface::PeerConnectionState::kDisconnected;
+    case RTCPeerConnectionStateClosed:
+      return webrtc::PeerConnectionInterface::PeerConnectionState::kClosed;
+  }
+}
+
++ (RTCPeerConnectionState)connectionStateForNativeState:
+        (webrtc::PeerConnectionInterface::PeerConnectionState)nativeState {
+  switch (nativeState) {
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kNew:
+      return RTCPeerConnectionStateNew;
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kConnecting:
+      return RTCPeerConnectionStateConnecting;
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kConnected:
+      return RTCPeerConnectionStateConnected;
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kFailed:
+      return RTCPeerConnectionStateFailed;
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kDisconnected:
+      return RTCPeerConnectionStateDisconnected;
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kClosed:
+      return RTCPeerConnectionStateClosed;
+  }
+}
+
++ (NSString *)stringForConnectionState:(RTCPeerConnectionState)state {
+  switch (state) {
+    case RTCPeerConnectionStateNew:
+      return @"NEW";
+    case RTCPeerConnectionStateConnecting:
+      return @"CONNECTING";
+    case RTCPeerConnectionStateConnected:
+      return @"CONNECTED";
+    case RTCPeerConnectionStateFailed:
+      return @"FAILED";
+    case RTCPeerConnectionStateDisconnected:
+      return @"DISCONNECTED";
+    case RTCPeerConnectionStateClosed:
       return @"CLOSED";
   }
 }
