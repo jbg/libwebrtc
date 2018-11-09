@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5acc020_f5d5e903",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-09T08:26:31Z",
+      "side": 1,
+      "message": "Not sure if that belongs in this cl, but do we really need separate audio_interval_ms and video_interval_ms in this config struct? Each RtpRtcp instance is used for a single stream which is either audio or video, and shouldn\u0027t need to care about config for any other type of media.\n\n(Related, I\u0027d like to also eliminate the audio flag too, but it\u0027s used for a few other things than selecting which member of rtcp_interval_config to use).",
+      "range": {
+        "startLine": 502,
+        "startChar": 16,
+        "endLine": 502,
+        "endChar": 54
+      },
+      "revId": "1dbfc65e08f96038237aa93e214943045aff401a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
