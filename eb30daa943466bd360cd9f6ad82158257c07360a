@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "95066c58_ba8d110e",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T16:07:55Z",
+      "side": 1,
+      "message": "I think now is better than using std::pair",
+      "parentUuid": "8718f6c0_22a413e1",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c9906bf_1f39e19e",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 2

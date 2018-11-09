@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de0327c4_50f986ac",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T16:07:55Z",
+      "side": 1,
+      "message": "just x:\nLinearRegression(x, y, \u0026slope, \u0026offset)\n(if that doesn\u0027t work, there is something very wrong with ArrayView)",
+      "range": {
+        "startLine": 117,
+        "startChar": 24,
+        "endLine": 117,
+        "endChar": 68
+      },
+      "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68737892_648c14f1",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T16:07:55Z",
+      "side": 1,
+      "message": "or params_.emplace(1 / slope, offste);",
+      "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
