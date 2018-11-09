@@ -22,6 +22,30 @@
       "revId": "1dbfc65e08f96038237aa93e214943045aff401a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bd7cbdd_9022cdb3",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 6278
+      },
+      "writtenOn": "2018-11-09T18:58:55Z",
+      "side": 1,
+      "message": "I agree. I want to do separate them too. I can send out another CL after this one is submitted.",
+      "parentUuid": "b5acc020_f5d5e903",
+      "range": {
+        "startLine": 502,
+        "startChar": 16,
+        "endLine": 502,
+        "endChar": 54
+      },
+      "revId": "1dbfc65e08f96038237aa93e214943045aff401a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
