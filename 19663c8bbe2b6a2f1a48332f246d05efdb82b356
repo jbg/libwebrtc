@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d267ba4d_7464bc0e",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-11-09T15:43:59Z",
+      "side": 1,
+      "message": "Remove the getter and just set it directly to configuration_.offer_extmap_allow_mixed on line 3813?",
+      "revId": "19663c8bbe2b6a2f1a48332f246d05efdb82b356",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
