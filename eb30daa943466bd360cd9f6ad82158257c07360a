@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcd841cd_3d33ed8a",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T14:39:21Z",
+      "side": 1,
+      "message": "no empty line between c++ headers\n(no empty line between c and c++ headers either)",
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0711879a_8396e061",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T14:39:21Z",
+      "side": 1,
+      "message": "const vector\u0026\n(or better rtc::ArrayView\u003cconst double\u003e)\n\n[or may use a bit more structure:\nstruct Point { double x; double y; };\nstruct LinearFunction {\n  double offset; double slope; \n  double operator()(double x) const { return offset + slope * x; }\n}\nabsl::optional\u003cLinearFunction\u003e LinearRegression(rtc::ArrayView\u003cconst Point\u003e points);\n]",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c9906bf_1f39e19e",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T14:39:21Z",
+      "side": 1,
+      "message": "normalization might look a bit better in the LinearRegression itself.",
+      "range": {
+        "startLine": 106,
+        "startChar": 44,
+        "endLine": 106,
+        "endChar": 57
+      },
+      "revId": "eb30daa943466bd360cd9f6ad82158257c07360a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
