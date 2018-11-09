@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a041b4dd_06246b15",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-09T17:56:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f29615f3_e54c649d",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 27
+      },
+      "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de0327c4_50f986ac",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3f2e5f64_b2988c09",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-09T17:56:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de0327c4_50f986ac",
+      "range": {
+        "startLine": 117,
+        "startChar": 24,
+        "endLine": 117,
+        "endChar": 68
+      },
+      "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68737892_648c14f1",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 5
@@ -59,6 +107,24 @@
       "writtenOn": "2018-11-09T16:07:55Z",
       "side": 1,
       "message": "or params_.emplace(1 / slope, offste);",
+      "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "503f9242_adb80b2e",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-09T17:56:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68737892_648c14f1",
       "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
