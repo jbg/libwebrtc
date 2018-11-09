@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f29615f3_e54c649d",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-11-09T16:10:15Z",
+      "side": 1,
+      "message": "remove 1st const: just\n(rtc::ArrayView\u003cconst double\u003e x, rtc::ArrayView\u003cconst double\u003e y, ...\nhttps://abseil.io/tips/109",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 27
+      },
+      "revId": "c37c721a2012120edec82ccc11e1dce8ba84eb2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de0327c4_50f986ac",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 5
