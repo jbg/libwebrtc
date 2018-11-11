@@ -1,0 +1,1489 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20bacfbd_be301314",
+        "filename": "api/audio/echo_canceller3_config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Would it be possible to change this to something more descriptive, such as num_regions, num_sections,...?",
+      "range": {
+        "startLine": 90,
+        "startChar": 11,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdf696fd_feec27f0",
+        "filename": "api/audio/echo_canceller3_config_json.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "(config.erle.num_estimators) -\u003e config.erle.num_estimators",
+      "range": {
+        "startLine": 430,
+        "startChar": 35,
+        "endLine": 430,
+        "endChar": 63
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d48b6f7a_0b5eb963",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please move this closer to where it is used (line 213).",
+      "range": {
+        "startLine": 193,
+        "startChar": 40,
+        "endLine": 193,
+        "endChar": 49
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d8ef445_61c86bb3",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "The input to erle_estimator_.Update(.) is a bit ambiguous with this CL.\nBoth render_bufferm as well as the reverb computed from the render_buffer is now passed to the erle estimator.\n\nSince render_reverb_ is only used by the erle_estimator, I would prefer to have that within the erle estimator. Furthermore, doing so would make the role of the render_buffer more straighforward in the input to Update(.)",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4855deeb_3b72ad28",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Since this constant is only used in one place, I think it should instead be moved to where it is used.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88d79dbc_1d716375",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "(remaining_estimators \u003e 1) -\u003e remaining_estimators \u003e 1",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ad0dadd_0d03ef37",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "(remaining_blocks / remaining_estimators \u003e estimator_size)\n-\u003e\nremaining_blocks \u003e estimator_size * remaining_estimators",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 67
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "389cc99f_8fd3eabf",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please add code that ensures that estimator_sizes is not accessed beyond the array length.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcc4bb26_24f439a0",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Is this guaranteed not to wrap? I don\u0027t think it is obvious from the code that it cannot. Please add a DCHECK to ensure that it doesn\u0027t happen.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 20
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d553272_542dc897",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please add comments explaining what this code does.",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 35
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eff1b861_52297a60",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please change \nfor (size_t k \u003d 0; k \u003c num_blocks; ++k) {\n    if (k \u003e\u003d delay_headroom_blocks) {\n  }\n}\nto\nfor (size_t k \u003d delay_headroom_blocks; k \u003c num_blocks; ++k) {\n    }",
+      "range": {
+        "startLine": 66,
+        "startChar": 13,
+        "endLine": 66,
+        "endChar": 34
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aff56594_98e1c8c5",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be described as a downsampling. I would rather describe it as a summation.",
+      "range": {
+        "startLine": 80,
+        "startChar": 5,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e827c333_b817c3e6",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please use std::accumulate for this instead of a for-loop.",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 7
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1af666bc_784ae0a7",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This method has 7 parameters and returns one value. I\u0027d suggest put this as an inline into the code as that will likely take as many lines as the method call does.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1660c8e1_3d959322",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "The below\n if (new_erle \u003c erle_band \u0026\u0026 low_render_energy) {\n    // Decreases are not allowed if low render energy signals were used for\n    // the erle computation.\n    return erle_band;\n  }\n  float alpha \u003d new_erle \u003e erle_band ? alpha_inc : alpha_dec;\n  float erle_band_out \u003d erle_band;\n  erle_band_out \u003d erle_band + alpha * (new_erle - erle_band);\n  erle_band_out \u003d rtc::SafeClamp(erle_band_out, min_erle, max_erle);\n  return erle_band_out;\n\ncan be rewritten as follows\n  float erle_diff \u003d new_erle - erle_band;\n  float alpha \u003d alpha_dec;\n  if (erle_diff \u003e 0) { alpha \u003d low_render_energy ? 0 : alpha_inc; }\n  return rtc::SafeClamp(erle_band + alpha * erle_diff, min_erle, max_erle);\n}",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 4
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41657220_acafdb18",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This initialization seems redundant.",
+      "range": {
+        "startLine": 119,
+        "startChar": 24,
+        "endLine": 119,
+        "endChar": 33
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a193c08_3a40e184",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Put this as an anonymous constant instead.",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c0c0301_bff00acc",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This is the main method for the correction factor functionality. Please comment what is done in each of the steps.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6dc06ba_a2377247",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please add comments.",
+      "range": {
+        "startLine": 188,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 27
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "067f3b19_016e6533",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I think it would be better to put this in the update method since it is only used once. With 8 parameters, the declaration and definition overhead of this methods adds more code than it would take to put it inline.",
+      "range": {
+        "startLine": 203,
+        "startChar": 27,
+        "endLine": 203,
+        "endChar": 50
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ed3731_7d7e5c1d",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "The method name is very vague, but still quite long.",
+      "range": {
+        "startLine": 203,
+        "startChar": 5,
+        "endLine": 203,
+        "endChar": 25
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c0a20e5_cc7c46df",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Move init_band into the for-loop",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 20
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3bcc6f8_f21463fc",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This is an if-statement which is known to be false only at the last iteration of the loop. Please eliminate the if -statement, either by setting end_value by assignment via looping backwards or by unwrapping the last loop iteration.",
+      "range": {
+        "startLine": 219,
+        "startChar": 42,
+        "endLine": 219,
+        "endChar": 43
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fce38ea7_f4739386",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Use std::accumulate for these.",
+      "range": {
+        "startLine": 221,
+        "startChar": 34,
+        "endLine": 221,
+        "endChar": 35
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896084bc_7f8d12f6",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "The use of n_groups is not that clear. The name is quite anonymous and from the computation herein is not that clear what it means either. Could you please comment this more, or make that code more descriptive.",
+      "range": {
+        "startLine": 224,
+        "startChar": 36,
+        "endLine": 225,
+        "endChar": 23
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5455de8_16481975",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "As commented elsewhere, please remove this method call since it only returns the input.",
+      "range": {
+        "startLine": 244,
+        "startChar": 19,
+        "endLine": 244,
+        "endChar": 36
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ffd8e7b_9fb1caaf",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This check should be an identity since the previous line prevents the threshold to be exceeded.\nif (num_updates_[subband] \u003e\u003d kNumUpdateThr) {\n\n\nI\u0027d suggest to instead put the update of num_updates_ as an else statement to this.",
+      "range": {
+        "startLine": 255,
+        "startChar": 6,
+        "endLine": 255,
+        "endChar": 51
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8f31b84_d19469b5",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I don\u0027t think abstracting correction_factor_ into an arrayview adds to the readability. Please instead use the two-dimensional vector notation below.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b281f0a_d95e1edc",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I don\u0027t think it is clear from the code that erle_ref_[] cannot be zero. Please DCHECK and comment on that",
+      "range": {
+        "startLine": 259,
+        "startChar": 38,
+        "endLine": 259,
+        "endChar": 47
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaaf16ee_d9900a0c",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This warrants a comment. Why is this updated like this.",
+      "range": {
+        "startLine": 261,
+        "startChar": 8,
+        "endLine": 261,
+        "endChar": 35
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ff8aa8_76f3e5a8",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This is only used in the constructor and consists only of 2 statements. Please remove this method and move the statements to the constructor.",
+      "range": {
+        "startLine": 269,
+        "startChar": 27,
+        "endLine": 269,
+        "endChar": 52
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6a25b2_28ddfc91",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Since this method only sums the ingoing vectors, please put the content of that inline here, as that both will make it clear what is done, and will make the complexity more clear.",
+      "range": {
+        "startLine": 299,
+        "startChar": 4,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8c170e1_730c8708",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This is an if-statement nested within a loop where the if-statement outcome is known beforehand. Please remove the if-statement from within the loop.",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 13
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "295870a2_8f27e8b1",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I don\u0027t think the pre-computations on lines 318-322 adds anything, as the following nested loop structure is so complex.",
+      "range": {
+        "startLine": 318,
+        "startChar": 43,
+        "endLine": 318,
+        "endChar": 44
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47e45a04_4c6937b6",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "if (!target_found[k]) {\n        if (S2_block_acum_[group][k] \u003e\u003d energy_targets[k]) {\n\n-\u003e\n if (!target_found[k] \u0026\u0026 S2_block_acum_[group][k] \u003e\u003d energy_targets[k]) {",
+      "range": {
+        "startLine": 327,
+        "startChar": 5,
+        "endLine": 328,
+        "endChar": 60
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae207a5b_c2c924fe",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "These are now an aec3 global constants which are shared between several compilation units. If that is necessary it should go into aec3_common.h.\nHowever, my feeling is that this is not really a universal constant and that the need to share this is mainly due to the separation of functionality into this class. Since these constants break that separation I think we should go at lengths to avoid that.",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baf0b0f9_ef88e73d",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I think \"Estimates a correction factor for the Erle estimation.\" probably could be removed. The next sentence kind of repeats that.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12ce1e99_f5fdd0b6",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I have a feeling this class should be named differently since. \n-it is an estimator rather than a factor\n-it returns a number of factors (one for each estimator)\n-it does more than that (via the GetNumberOfActiveFilterGroups method).",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75669aef_764bc74b",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "size_t BandToSubband(size_t band) \n-\u003e\nsize_t BandToSubband(size_t band) const",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2e32f63_b225d4fe",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I think the definition of this should be moved to the .cc file since there is no gain in having it in the header file. Having it in the cc file does, however, make the header smaller and the .cc file more self-contained.",
+      "range": {
+        "startLine": 84,
+        "startChar": 9,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "835f63ca_d131aa41",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "(kSubbands - 1) \n-\u003e\n kSubbands - 1",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4f0ff82_9dbd9d8e",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This is a very confusing method. All it does is to return the input value and do a DCHECK. Please remove it.",
+      "range": {
+        "startLine": 121,
+        "startChar": 9,
+        "endLine": 121,
+        "endChar": 26
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91cd235a_2de579cd",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Since idx is size_t it is always nonnegative",
+      "range": {
+        "startLine": 123,
+        "startChar": 15,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c561fddf_0569ba53",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I don\u0027t think there is a any reason for putting this constant in the state as a static. If BandToSubband is moved to the .cc file this constant could be placed in the anonymous namespace instead.",
+      "range": {
+        "startLine": 127,
+        "startChar": 22,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e2c0312_d31787bb",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "acum -\u003e accum ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 53,
+        "endLine": 131,
+        "endChar": 67
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab3c6ea0_8d9fe3fa",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "correction_factor_ -\u003e correction_factors_",
+      "range": {
+        "startLine": 134,
+        "startChar": 44,
+        "endLine": 134,
+        "endChar": 62
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be5ae0bd_1c987414",
+        "filename": "modules/audio_processing/aec3/erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Since this constructor now takes so many parameters which in practice always are taken from the config struct, I think it would make sense to just pass it the config struct and let the constructor initializer pick the parameters from the config struct.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcdd6122_e0b982ce",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Considering how much more now is done in this class I think the UpdateBands method need to be renamed.",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fcd5bab_ce4e6980",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I think the calling of this method warrants a comment. The rest of the code in this method clearly updates the erle estimation, but it is not obvious why a correction factor is to be estimated.",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "550142b2_cb5d579a",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This code also should have a comment.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2828b836_c1c1360c",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "this contains an implicit conversion of a float to a bool for the purpose of avoiding a division by zero. While handy, this is quite non-obvious and I\u0027d prefer an explicit check that E2_ is positive,",
+      "range": {
+        "startLine": 120,
+        "startChar": 41,
+        "endLine": 120,
+        "endChar": 54
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46d9325e_b54a2075",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "The behavior becomes quite different from the onset detection. With the current code, the ERLE onset detection is delayed until a sufficient number of points is present in accum_spectra (and the spectrum is nonzero.\nThat, in combination with that the coming_onset flag is sticky will cause the onset detection to no longer occur on onsets, which is very different from how it was before, and also seems wrong from the way that the erle_onsets is specified to work.",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 25
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9e45c4a_1132128f",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This should probably instead be moved to the DecreaseErlePerBandForLowRenderSignals method. The reason for that is that now the writing of the coming_onset_ detection is distributed between two methods which makes it hard to follow the logic of that.",
+      "range": {
+        "startLine": 124,
+        "startChar": 29,
+        "endLine": 124,
+        "endChar": 34
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "181c44fd_a66a5660",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Probably this computation should be moved to the method DecreaseErlePerBandForLowRenderSignals.",
+      "range": {
+        "startLine": 125,
+        "startChar": 10,
+        "endLine": 125,
+        "endChar": 22
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c75773dd_e928eb85",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This method is now in the erle_correction_factor.*. I don\u0027t really see why it should be placed there.",
+      "range": {
+        "startLine": 131,
+        "startChar": 23,
+        "endLine": 131,
+        "endChar": 37
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa09c950_bc2917cb",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please change the method of this name. It is already now very long, but I still don\u0027t think it describes what it does. I think a shorter name and a comment probably is needed but if it is possible to make the name more descriptive without making it longer that would be great",
+      "range": {
+        "startLine": 155,
+        "startChar": 27,
+        "endLine": 155,
+        "endChar": 64
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "794a3b9f_506fa447",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This code is not that descriptive. Please either change methods/variable names to make it more clear what it does, or add comments that explain that.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17b526f8_d65577b7",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This is a fairly complicated loop, with 3 if-statement. Since what is done is quite simple, I think it would make sense to split the loop, to make it more readable as well as to improve performance.\n\nOne clear thing to optimize is the \nif (update_on_low_render which is nested within the loop. and where update_on_low_render is a constant.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e26e8988_4b018264",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "This condition is very strange if we would assume that update_on_low_render is false. It will only be true if, and exactly if, X2[k] \u003c aec3::kX2BandEnergyThreshold.\n\nThat would in turn mean that anything that uses low_render_energy_ will basically always get low_render_energy false, regardless of whether the energy is low. Is this intended?",
+      "range": {
+        "startLine": 192,
+        "startChar": 6,
+        "endLine": 192,
+        "endChar": 24
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f20c6a3_16d8a48d",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "As for erle_estimator, I think it would make sense to pass the config struct to the constructor.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "651f54b9_92ecd6e4",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "AccumulativeSpectra -\u003e AccumulatedSpectra",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a226400_715334b9",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please put this into the .cc files as a constant in the anonymous section.",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 37
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5874c389_4ab3e7bd",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "The style guideline states that class data-members should be private (https://google.github.io/styleguide/cppguide.html#Access_Control).\n\nIt can be circumvented by making this a struct, but I only think that is ok if the struct have very little logic. In this case my advice is to make\nAccumulatedSpectra a struct that only contains the data members, and put the reset and update logic in the class using this class.",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02b47160_94090f29",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please change according to below naming",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9f40831_a065a841",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "What does start/stop mean? If the naming is changed to something like start_band, stop_band, or first_bin, last_bin the usage would be more clear",
+      "range": {
+        "startLine": 91,
+        "startChar": 15,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b54b9232_35e5f82f",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "According to https://google.github.io/styleguide/cppguide.html#General_Naming_Rules abbreviatoins should be avoided. \n\nEven though the abbreviation n maybe is a bordercase, I think the name n_active_groups does not properly explain the content of the variable so please look into changing it to be more descriptive.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2b12548_d1c5c13e",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "I think the name erle_for_echo_estimate_ is a bit confusing since the distinction to erle_ is unclear. I.e.,, it would not make sense to have an erle which did not apply for echoes which means that I cannot see what erle without the suffix _for_echo means.",
+      "range": {
+        "startLine": 102,
+        "startChar": 40,
+        "endLine": 102,
+        "endChar": 63
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1628e691_c0101fbc",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "Please put this constant together with the other constants.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc605d2a_0367a303",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-11T20:40:54Z",
+      "side": 1,
+      "message": "unintentional change?",
+      "range": {
+        "startLine": 268,
+        "startChar": 70,
+        "endLine": 268,
+        "endChar": 78
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
