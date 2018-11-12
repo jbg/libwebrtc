@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9e29409_40421d96",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T16:35:46Z",
+      "side": 1,
+      "message": "Since we have a pointer to the thread anyway, we could use that with RTC_DCHECK_RUN_ON instead, right?",
+      "range": {
+        "startLine": 291,
+        "startChar": 2,
+        "endLine": 291,
+        "endChar": 52
+      },
+      "revId": "be3d1a93b32c488317975fd08e58540251d7c7b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae5ff9a4_b5eeac58",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T16:35:46Z",
+      "side": 1,
+      "message": "Only use of this race checker. Not sure if it really adds any value.",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 732,
+        "endChar": 66
+      },
+      "revId": "be3d1a93b32c488317975fd08e58540251d7c7b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d13b267_35eabf67",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T16:35:46Z",
+      "side": 1,
+      "message": "I don\u0027t like this. Is there any better way, except introducing an new interface?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "be3d1a93b32c488317975fd08e58540251d7c7b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
