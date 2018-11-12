@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee837ee4_8bcd53b8",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-11-12T19:24:39Z",
+      "side": 1,
+      "message": "Update ToString() too.",
+      "revId": "aab35f4d3e303030a311f557f2635c81e77e3709",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7c4ec87_f0687e38",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-11-12T19:24:39Z",
+      "side": 1,
+      "message": "Comment + update ToString()",
+      "revId": "aab35f4d3e303030a311f557f2635c81e77e3709",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
