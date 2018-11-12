@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79b198e1_c0a0ce04",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T13:21:37Z",
+      "side": 1,
+      "message": "You can use webrtc::Random (rtc_base/random.h), and get numbers in the needed interval directly, without any additional scaling.",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 38
+      },
+      "revId": "c1c989d24edd059cfe1e04eef6a501a4a2689e9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
