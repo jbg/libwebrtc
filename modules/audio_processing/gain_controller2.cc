@@ -63,12 +63,13 @@ void GainController2::NotifyAnalogLevel(int level) {
 void GainController2::ApplyConfig(
     const AudioProcessing::Config::GainController2& config) {
   RTC_DCHECK(Validate(config));
-  config_ = config;
-  if (gain_applier_.GetGainFactor() != config_.fixed_gain_db) {
+
+  if (config.fixed_gain_db != config_.fixed_gain_db) {
     // Reset the limiter to quickly react on abrupt level changes caused by
     // large changes of the fixed gain.
     limiter_.Reset();
   }
+  config_ = config;
   gain_applier_.SetGainFactor(DbToRatio(config_.fixed_gain_db));
   adaptive_digital_mode_ = config_.adaptive_digital_mode;
   adaptive_agc_.reset(
