@@ -46,6 +46,30 @@
       "revId": "9f6cee7dd09f18fe2a780be9ffa1ea37619c6541",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc812ee6_ac73ccb2",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-11-12T15:53:08Z",
+      "side": 1,
+      "message": "Fair enough!",
+      "parentUuid": "5dfb74a5_326748af",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 41
+      },
+      "revId": "9f6cee7dd09f18fe2a780be9ffa1ea37619c6541",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
