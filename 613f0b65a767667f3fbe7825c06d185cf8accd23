@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b718f7f_a6941742",
+        "filename": "test/scenario/video_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-11-12T15:43:39Z",
+      "side": 1,
+      "message": "Why only the first simulcast stream?\n\nalso, nit: add {}",
+      "revId": "613f0b65a767667f3fbe7825c06d185cf8accd23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
