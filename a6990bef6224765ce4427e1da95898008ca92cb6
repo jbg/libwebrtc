@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2c1b7e7c_489ea331",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-12T12:34:31Z",
+      "side": 1,
+      "message": "We calculate sum of squares for rtp differences. The allowed difference between two consecutive rtp timestamps is 2^25. For 20 samples the maximum value is 19*2^25. We sum squares of that and multiply it by extra n. If my calculations are correct the maximum value is 20*19*20*39*2^50, which is more than 2^69. So if we were to use double, there would some loss of precision.\n\nWe don\u0027t need it everywhere, however, so I removed all the uses except for the variance calculation.",
+      "parentUuid": "ca8400e1_1aaf3fae",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "a6990bef6224765ce4427e1da95898008ca92cb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cee2798_d706c05d",
         "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "a6990bef6224765ce4427e1da95898008ca92cb6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a1470b3_ec280961",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-11-12T12:34:31Z",
+      "side": 1,
+      "message": "I don\u0027t find it necessary, as the main source of inaccuracy is sum_xx and sum_xy. \n\nThe idea is to avoid squaring the number of milliseconds since the epoch start. Mainly normalization of y is required, but to make this function more generic, I also decided to normalize x.",
+      "parentUuid": "7cee2798_d706c05d",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 47
+      },
+      "revId": "a6990bef6224765ce4427e1da95898008ca92cb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
