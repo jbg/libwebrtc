@@ -14,6 +14,7 @@
 namespace webrtc {
 namespace {
 const uint32_t kOneMsInNtpFrac = 4294967;
+const uint32_t kOneHourInNtpSec = 60 * 60;
 const uint32_t kTimestampTicksPerMs = 90;
 }  // namespace
 
@@ -224,6 +225,22 @@ TEST(UpdateRtcpMeasurementTests, FailsForOldNtp) {
       estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
 }
 
+TEST(UpdateRtcpMeasurementTests, FailsForTooNewNtp) {
+  RtpToNtpEstimator estimator;
+  uint32_t ntp_sec = 1;
+  uint32_t ntp_frac = 699925050;
+  uint32_t timestamp = 0x12345678;
+  bool new_sr;
+  EXPECT_TRUE(
+      estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
+  EXPECT_TRUE(new_sr);
+  // Old ntp time, list not updated.
+  ntp_sec += kOneHourInNtpSec * 2;
+  timestamp += kTimestampTicksPerMs * 10;
+  EXPECT_FALSE(
+      estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
+}
+
 TEST(UpdateRtcpMeasurementTests, FailsForEqualTimestamp) {
   RtpToNtpEstimator estimator;
   uint32_t ntp_sec = 0;
@@ -290,6 +307,41 @@ TEST(RtpToNtpTests, FailsForNoParameters) {
   EXPECT_FALSE(estimator.params());
   int64_t timestamp_ms = -1;
   EXPECT_FALSE(estimator.Estimate(timestamp, &timestamp_ms));
+}
+
+TEST(RtpToNtpTests, AveragesErrorOut) {
+  RtpToNtpEstimator estimator;
+  uint32_t ntp_sec = 1;
+  uint32_t ntp_frac = 90000000;  // More than 1 ms.
+  uint32_t timestamp = 0x12345678;
+  const int kNtpSecStep = 1;  // 1 second.
+  const int kRtpTicksPerMs = 90;
+  const int kRtpStep = kRtpTicksPerMs * 1000;
+  bool new_sr;
+  EXPECT_TRUE(
+      estimator.UpdateMeasurements(ntp_sec, ntp_frac, timestamp, &new_sr));
+  EXPECT_TRUE(new_sr);
+  uint32_t ntp_error = 1;
+  uint32_t rtp_error = 33;
+
+  for (size_t i = 0; i < 1000; i++) {
+    // Advance both timestamps by exactly 1 second.
+    ntp_sec += kNtpSecStep;
+    timestamp += kRtpStep;
+    // Pseudorandomly generate errors.
+    ntp_error = (ntp_error * 3) % 239;
+    rtp_error = (rtp_error * 5) % 137;
+    // Add -1..+1 ms of errors to NTP and RTP timestamps passed to estimator.
+    EXPECT_TRUE(estimator.UpdateMeasurements(
+        ntp_sec, ntp_frac + (ntp_error % 3 - 2) * kOneMsInNtpFrac,
+        timestamp + (rtp_error % 3 - 2) * kRtpTicksPerMs, &new_sr));
+    EXPECT_TRUE(new_sr);
+
+    int64_t estimated_ntp_ms;
+    EXPECT_TRUE(estimator.Estimate(timestamp, &estimated_ntp_ms));
+    // Allow upto 2 ms of error.
+    EXPECT_NEAR(NtpTime(ntp_sec, ntp_frac).ToMs(), estimated_ntp_ms, 2);
+  }
 }
 
 };  // namespace webrtc
