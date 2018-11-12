@@ -87,17 +87,10 @@ class ChannelReceiveProxy : public RtpPacketSinkInterface {
   virtual void StopPlayout();
 
  private:
-  // Thread checkers document and lock usage of some methods on voe::Channel to
-  // specific threads we know about. The goal is to eventually split up
-  // voe::Channel into parts with single-threaded semantics, and thereby reduce
-  // the need for locks.
-  rtc::ThreadChecker worker_thread_checker_;
-  rtc::ThreadChecker module_process_thread_checker_;
   // Methods accessed from audio and video threads are checked for sequential-
   // only access. We don't necessarily own and control these threads, so thread
   // checkers cannot be used. E.g. Chromium may transfer "ownership" from one
   // audio thread to another, but access is still sequential.
-  rtc::RaceChecker audio_thread_race_checker_;
   rtc::RaceChecker video_capture_thread_race_checker_;
   std::unique_ptr<ChannelReceive> channel_;
 

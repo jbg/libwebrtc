@@ -34,6 +34,7 @@
 #include "rtc_base/format_macros.h"
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/safe_minmax.h"
 #include "rtc_base/thread_checker.h"
 #include "rtc_base/timeutils.h"
 #include "system_wrappers/include/metrics.h"
@@ -142,6 +143,7 @@ void ChannelReceive::OnData(uint64_t channel_id,
 AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
     int sample_rate_hz,
     AudioFrame* audio_frame) {
+  RTC_DCHECK_RUNS_SERIALIZED(&audio_thread_race_checker_);
   audio_frame->sample_rate_hz_ = sample_rate_hz;
 
   unsigned int ssrc;
@@ -248,6 +250,7 @@ AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
 }
 
 int ChannelReceive::PreferredSampleRate() const {
+  RTC_DCHECK_RUNS_SERIALIZED(&audio_thread_race_checker_);
   // Return the bigger of playout and receive frequency in the ACM.
   return std::max(audio_coding_->ReceiveFrequency(),
                   audio_coding_->PlayoutFrequency());
@@ -284,6 +287,8 @@ ChannelReceive::ChannelReceive(
       media_transport_(media_transport),
       frame_decryptor_(frame_decryptor),
       crypto_options_(crypto_options) {
+  module_process_thread_checker_.DetachFromThread();  // XXX
+
   RTC_DCHECK(module_process_thread);
   RTC_DCHECK(audio_device_module);
   AudioCodingModule::Config acm_config;
@@ -368,11 +373,13 @@ void ChannelReceive::Terminate() {
 }
 
 void ChannelReceive::SetSink(AudioSinkInterface* sink) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   rtc::CritScope cs(&_callbackCritSect);
   audio_sink_ = sink;
 }
 
 void ChannelReceive::StartPlayout() {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   if (channel_state_.Get().playing) {
     return;
   }
@@ -381,6 +388,7 @@ void ChannelReceive::StartPlayout() {
 }
 
 void ChannelReceive::StopPlayout() {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   if (!channel_state_.Get().playing) {
     return;
   }
@@ -390,10 +398,12 @@ void ChannelReceive::StopPlayout() {
 }
 
 bool ChannelReceive::GetRecCodec(CodecInst* codec) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   return (audio_coding_->ReceiveCodec(codec) == 0);
 }
 
 std::vector<webrtc::RtpSource> ChannelReceive::GetSources() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   int64_t now_ms = rtc::TimeMillis();
   std::vector<RtpSource> sources;
   {
@@ -411,6 +421,7 @@ std::vector<webrtc::RtpSource> ChannelReceive::GetSources() const {
 
 void ChannelReceive::SetReceiveCodecs(
     const std::map<int, SdpAudioFormat>& codecs) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   for (const auto& kv : codecs) {
     RTC_DCHECK_GE(kv.second.clockrate_hz, 1000);
     payload_type_frequencies_[kv.first] = kv.second.clockrate_hz;
@@ -418,7 +429,7 @@ void ChannelReceive::SetReceiveCodecs(
   audio_coding_->SetReceiveCodecs(codecs);
 }
 
-// TODO(nisse): Move receive logic up to AudioReceiveStream.
+// May be called on either worker thread or network thread.
 void ChannelReceive::OnRtpPacket(const RtpPacketReceived& packet) {
   int64_t now_ms = rtc::TimeMillis();
   uint8_t audio_level;
@@ -509,6 +520,7 @@ bool ChannelReceive::ReceivePacket(const uint8_t* packet,
                                &webrtc_rtp_header);
 }
 
+// May be called on either worker thread or network thread.
 // TODO(nisse): Drop always-true return value.
 bool ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
   // Store playout timestamp for the received RTCP packet
@@ -547,23 +559,28 @@ bool ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
 }
 
 int ChannelReceive::GetSpeechOutputLevelFullRange() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   return _outputAudioLevel.LevelFullRange();
 }
 
 double ChannelReceive::GetTotalOutputEnergy() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   return _outputAudioLevel.TotalEnergy();
 }
 
 double ChannelReceive::GetTotalOutputDuration() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   return _outputAudioLevel.TotalDuration();
 }
 
 void ChannelReceive::SetChannelOutputVolumeScaling(float scaling) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   rtc::CritScope cs(&volume_settings_critsect_);
   _outputGain = scaling;
 }
 
 void ChannelReceive::SetLocalSSRC(unsigned int ssrc) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   _rtpRtcpModule->SetSSRC(ssrc);
 }
 
@@ -575,6 +592,7 @@ int ChannelReceive::GetRemoteSSRC(unsigned int& ssrc) {
 
 void ChannelReceive::RegisterReceiverCongestionControlObjects(
     PacketRouter* packet_router) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   RTC_DCHECK(packet_router);
   RTC_DCHECK(!packet_router_);
   constexpr bool remb_candidate = false;
@@ -583,12 +601,14 @@ void ChannelReceive::RegisterReceiverCongestionControlObjects(
 }
 
 void ChannelReceive::ResetReceiverCongestionControlObjects() {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   RTC_DCHECK(packet_router_);
   packet_router_->RemoveReceiveRtpModule(_rtpRtcpModule.get());
   packet_router_ = nullptr;
 }
 
 CallReceiveStatistics ChannelReceive::GetRTCPStatistics() {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   // --- RtcpStatistics
   CallReceiveStatistics stats;
 
@@ -631,6 +651,7 @@ CallReceiveStatistics ChannelReceive::GetRTCPStatistics() {
 }
 
 void ChannelReceive::SetNACKStatus(bool enable, int maxNumberOfPackets) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   // None of these functions can fail.
   rtp_receive_statistics_->SetMaxReorderingThreshold(maxNumberOfPackets);
   if (enable)
@@ -646,11 +667,13 @@ int ChannelReceive::ResendPackets(const uint16_t* sequence_numbers,
 }
 
 void ChannelReceive::SetAssociatedSendChannel(ChannelSend* channel) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   rtc::CritScope lock(&assoc_send_channel_lock_);
   associated_send_channel_ = channel;
 }
 
 NetworkStatistics ChannelReceive::GetNetworkStatistics() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   NetworkStatistics stats;
   int error = audio_coding_->GetNetworkStatistics(&stats);
   RTC_DCHECK_EQ(0, error);
@@ -658,23 +681,30 @@ NetworkStatistics ChannelReceive::GetNetworkStatistics() const {
 }
 
 AudioDecodingCallStats ChannelReceive::GetDecodingCallStatistics() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
   AudioDecodingCallStats stats;
   audio_coding_->GetDecodingCallStatistics(&stats);
   return stats;
 }
 
 uint32_t ChannelReceive::GetDelayEstimate() const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread() ||
+             module_process_thread_checker_.CalledOnValidThread());
   rtc::CritScope lock(&video_sync_lock_);
   return audio_coding_->FilteredCurrentDelayMs() + playout_delay_ms_;
 }
 
-void ChannelReceive::SetMinimumPlayoutDelay(int delayMs) {
-  if ((delayMs < kVoiceEngineMinMinPlayoutDelayMs) ||
-      (delayMs > kVoiceEngineMaxMinPlayoutDelayMs)) {
+void ChannelReceive::SetMinimumPlayoutDelay(int delay_ms) {
+  RTC_DCHECK(module_process_thread_checker_.CalledOnValidThread());
+  // Limit to range accepted by both VoE and ACM, so we're at least getting as
+  // close as possible, instead of failing.
+  delay_ms = rtc::SafeClamp(delay_ms, 0, 10000);
+  if ((delay_ms < kVoiceEngineMinMinPlayoutDelayMs) ||
+      (delay_ms > kVoiceEngineMaxMinPlayoutDelayMs)) {
     RTC_DLOG(LS_ERROR) << "SetMinimumPlayoutDelay() invalid min delay";
     return;
   }
-  if (audio_coding_->SetMinimumPlayoutDelay(delayMs) != 0) {
+  if (audio_coding_->SetMinimumPlayoutDelay(delay_ms) != 0) {
     RTC_DLOG(LS_ERROR)
         << "SetMinimumPlayoutDelay() failed to set min playout delay";
   }
@@ -688,6 +718,7 @@ uint32_t ChannelReceive::GetPlayoutTimestamp() {
 }
 
 absl::optional<Syncable::Info> ChannelReceive::GetSyncInfo() const {
+  RTC_DCHECK(module_process_thread_checker_.CalledOnValidThread());
   Syncable::Info info;
   if (_rtpRtcpModule->RemoteNTP(&info.capture_time_ntp_secs,
                                 &info.capture_time_ntp_frac, nullptr, nullptr,
