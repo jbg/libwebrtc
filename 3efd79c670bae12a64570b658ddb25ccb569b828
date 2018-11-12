@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05b28cc8_c5e37359",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-12T11:47:25Z",
+      "side": 1,
+      "message": "Does the code below fail to fill in all fields?",
+      "revId": "3efd79c670bae12a64570b658ddb25ccb569b828",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c4d0f15_adac9226",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-12T11:47:25Z",
+      "side": 1,
+      "message": "This looks like it\u0027s unnecessary. The call on the next line is filling in `stats`.",
+      "range": {
+        "startLine": 654,
+        "startChar": 26,
+        "endLine": 654,
+        "endChar": 31
+      },
+      "revId": "3efd79c670bae12a64570b658ddb25ccb569b828",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
