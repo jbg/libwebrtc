@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bdbb11e1_69c694b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-12T17:08:52Z",
+      "side": 1,
+      "message": "git cl upload didn\u0027t complain...",
+      "parentUuid": "f6050b36_ce478adc",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 79
+      },
+      "revId": "a84f1aee3f1b423ad36e7d771bf485873a5a17d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e265adfc_0783c27d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -62,6 +86,30 @@
       "revId": "a84f1aee3f1b423ad36e7d771bf485873a5a17d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03496dca_1bff52d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-12T17:08:52Z",
+      "side": 1,
+      "message": "It\u0027s correct. It\u0027s needed for the pluggable media transport interface.",
+      "parentUuid": "0b5bc883_58b87a4f",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "a84f1aee3f1b423ad36e7d771bf485873a5a17d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
