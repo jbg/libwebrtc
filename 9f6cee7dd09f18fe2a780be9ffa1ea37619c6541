@@ -22,6 +22,30 @@
       "revId": "9f6cee7dd09f18fe2a780be9ffa1ea37619c6541",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dfb74a5_326748af",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-12T15:51:38Z",
+      "side": 1,
+      "message": "I prefer to not reuse structs here, since it creates extra coupling which makes it harder to refactor the internal values later on. Also it avoids having to expose those structs if this is moved to api in the future.\n\nI can re-use if you still prefer that.",
+      "parentUuid": "029ff484_c95cbb97",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 41
+      },
+      "revId": "9f6cee7dd09f18fe2a780be9ffa1ea37619c6541",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
