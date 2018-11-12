@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e14da97_c019eca6",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T13:49:11Z",
+      "side": 1,
+      "message": "I\u0027d try to not have any divsions in an inner loops, since divisions are usually a bit expensive. But I can\u0027t say if it really matters in this case.",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 21
+      },
+      "revId": "af6ba7da0f1f7f0c7bd7db7289f5d3da9a5ed134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ab5da86_8342fa97",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T13:49:11Z",
+      "side": 1,
+      "message": "The two comments here aren\u0027t so useful. Consider rephrase or delete.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "af6ba7da0f1f7f0c7bd7db7289f5d3da9a5ed134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e59bd2b4_e85af57e",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T13:49:11Z",
+      "side": 1,
+      "message": "Why not rand.Rand(-kOneMsInNtFrac, kOneMsInNtpFrac) and similarly on the line below?",
+      "range": {
+        "startLine": 333,
+        "startChar": 28,
+        "endLine": 333,
+        "endChar": 62
+      },
+      "revId": "af6ba7da0f1f7f0c7bd7db7289f5d3da9a5ed134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
