@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6050b36_ce478adc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-12T17:01:11Z",
+      "side": 1,
+      "message": "Should be shorter than 55 chars according to commit guidelines (using git CL upload should allow you to see the line length limits for a commit message)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 79
+      },
+      "revId": "a84f1aee3f1b423ad36e7d771bf485873a5a17d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e265adfc_0783c27d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-12T17:01:11Z",
+      "side": 1,
+      "message": "Please add an explanation of why this is necessary.",
+      "revId": "a84f1aee3f1b423ad36e7d771bf485873a5a17d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b5bc883_58b87a4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-12T17:01:11Z",
+      "side": 1,
+      "message": "Incorrect bug reference.",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "a84f1aee3f1b423ad36e7d771bf485873a5a17d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
