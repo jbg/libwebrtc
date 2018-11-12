@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d780bf3_feed2636",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2018-11-12T09:48:10Z",
+      "side": 1,
+      "message": "you could improve this a bit:\n\nRTC_DCHECK(Validate(config)) \u003c\u003c \" the invalid config was \" \u003c\u003c ToString(config);\n\nThat way when we crash we get some info on why.",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "a147eb56330a6ae78b688871c02bbe57b86c5c82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
