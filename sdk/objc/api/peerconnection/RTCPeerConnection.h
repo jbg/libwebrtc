@@ -57,6 +57,16 @@ typedef NS_ENUM(NSInteger, RTCIceConnectionState) {
   RTCIceConnectionStateCount,
 };
 
+/** Represents the combined ice+dtls connection state of the peer connection. */
+typedef NS_ENUM(NSInteger, RTCPeerConnectionState) {
+  RTCPeerConnectionStateNew,
+  RTCPeerConnectionStateConnecting,
+  RTCPeerConnectionStateConnected,
+  RTCPeerConnectionStateDisconnected,
+  RTCPeerConnectionStateFailed,
+  RTCPeerConnectionStateClosed,
+};
+
 /** Represents the ice gathering state of the peer connection. */
 typedef NS_ENUM(NSInteger, RTCIceGatheringState) {
   RTCIceGatheringStateNew,
@@ -94,6 +104,12 @@ RTC_OBJC_EXPORT
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeIceConnectionState:(RTCIceConnectionState)newState;
 
+@optional
+/** Called any time the PeerConnectionState changes. */
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+    didChangeConnectionState:(RTCPeerConnectionState)newState;
+
+@required
 /** Called any time the IceGatheringState changes. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeIceGatheringState:(RTCIceGatheringState)newState;
@@ -145,6 +161,7 @@ RTC_OBJC_EXPORT
 @property(nonatomic, readonly, nullable) RTCSessionDescription *remoteDescription;
 @property(nonatomic, readonly) RTCSignalingState signalingState;
 @property(nonatomic, readonly) RTCIceConnectionState iceConnectionState;
+@property(nonatomic, readonly) RTCPeerConnectionState connectionState;
 @property(nonatomic, readonly) RTCIceGatheringState iceGatheringState;
 @property(nonatomic, readonly, copy) RTCConfiguration *configuration;
 
