@@ -140,6 +140,7 @@ class VideoReceiveStream {
 
       // See RtcpMode for description.
       RtcpMode rtcp_mode = RtcpMode::kCompound;
+      std::string c_name;
 
       // Extended RTCP settings.
       struct RtcpXr {

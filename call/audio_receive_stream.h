@@ -104,6 +104,9 @@ class AudioReceiveStream {
 
       // RTP header extensions used for the received stream.
       std::vector<RtpExtension> extensions;
+
+      // RTCP CNAME, see RFC 3550.
+      std::string c_name;
     } rtp;
 
     Transport* rtcp_send_transport = nullptr;

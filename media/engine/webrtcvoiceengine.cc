@@ -1079,6 +1079,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
   WebRtcAudioReceiveStream(
       uint32_t remote_ssrc,
       uint32_t local_ssrc,
+      const std::string& c_name,
       bool use_transport_cc,
       bool use_nack,
       const std::vector<std::string>& stream_ids,
@@ -1100,6 +1101,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     config_.rtp.transport_cc = use_transport_cc;
     config_.rtp.nack.rtp_history_ms = use_nack ? kNackRtpHistoryMs : 0;
     config_.rtp.extensions = extensions;
+    config_.rtp.c_name = c_name;
     config_.rtcp_send_transport = rtcp_send_transport;
     config_.media_transport = media_transport;
     config_.jitter_buffer_max_packets = jitter_buffer_max_packets;
@@ -1213,6 +1215,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     rtp_parameters.encodings.emplace_back();
     rtp_parameters.encodings[0].ssrc = config_.rtp.remote_ssrc;
     rtp_parameters.header_extensions = config_.rtp.extensions;
+    rtp_parameters.rtcp.cname = config_.rtp.c_name;
 
     return rtp_parameters;
   }
@@ -1895,7 +1898,7 @@ bool WebRtcVoiceMediaChannel::AddRecvStream(const StreamParams& sp) {
   recv_streams_.insert(std::make_pair(
       ssrc,
       new WebRtcAudioReceiveStream(
-          ssrc, receiver_reports_ssrc_, recv_transport_cc_enabled_,
+          ssrc, receiver_reports_ssrc_, sp.cname, recv_transport_cc_enabled_,
           recv_nack_enabled_, sp.stream_ids(), recv_rtp_extensions_, call_,
           this, media_transport(), engine()->decoder_factory_, decoder_map_,
           codec_pair_id_, engine()->audio_jitter_buffer_max_packets_,
