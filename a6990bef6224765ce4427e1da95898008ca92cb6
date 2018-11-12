@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca8400e1_1aaf3fae",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T11:47:23Z",
+      "side": 1,
+      "message": "Using long double seems excessive to me.",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "a6990bef6224765ce4427e1da95898008ca92cb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cee2798_d706c05d",
+        "filename": "system_wrappers/source/rtp_to_ntp_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-12T11:47:23Z",
+      "side": 1,
+      "message": "One could normalize to make sum_x and sum_y always zero, by computing mean_x and mean_y. Can be done either up front (since all data is available), or incrementally, but with a bit more complex updates for sum_xx and sum_xy. Will matter numerically only if sum_x grows large.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 47
+      },
+      "revId": "a6990bef6224765ce4427e1da95898008ca92cb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
