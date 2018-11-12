@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "029ff484_c95cbb97",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-11-12T15:46:36Z",
+      "side": 1,
+      "message": "Could we re-use VideoEncoderConfig::ContentType or VideoCodecMode ?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 41
+      },
+      "revId": "9f6cee7dd09f18fe2a780be9ffa1ea37619c6541",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
