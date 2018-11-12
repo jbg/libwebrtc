@@ -16,6 +16,24 @@
       "revId": "19663c8bbe2b6a2f1a48332f246d05efdb82b356",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "098585d6_446dd221",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-11-12T09:27:25Z",
+      "side": 1,
+      "message": "I agree, that\u0027s better. Fixed!",
+      "parentUuid": "d267ba4d_7464bc0e",
+      "revId": "19663c8bbe2b6a2f1a48332f246d05efdb82b356",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
