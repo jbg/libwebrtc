@@ -17,7 +17,7 @@
 #include <vector>
 
 #include "api/test/mock_frame_encryptor.h"
-#include "audio/channel_receive_proxy.h"
+#include "audio/channel_receive.h"
 #include "audio/channel_send_proxy.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "test/gmock.h"
@@ -25,7 +25,7 @@
 namespace webrtc {
 namespace test {
 
-class MockChannelReceiveProxy : public voe::ChannelReceiveProxy {
+class MockChannelReceive : public voe::ChannelReceive {
  public:
   MOCK_METHOD1(SetLocalSSRC, void(uint32_t ssrc));
   MOCK_METHOD2(SetNACKStatus, void(bool enable, int max_packets));

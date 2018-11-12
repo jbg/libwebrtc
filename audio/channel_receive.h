@@ -23,6 +23,7 @@
 #include "api/media_transport_interface.h"
 #include "api/rtpreceiverinterface.h"
 #include "audio/audio_level.h"
+#include "call/rtp_packet_sink_interface.h"
 #include "call/syncable.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/audio_coding/include/audio_coding_module.h"
@@ -31,6 +32,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/source/contributing_sources.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/race_checker.h"
 #include "rtc_base/thread_checker.h"
 
 // TODO(solenberg, nisse): This file contains a few NOLINT marks, to silence
@@ -104,7 +106,9 @@ class ChannelReceiveState {
   State state_;
 };
 
-class ChannelReceive : public RtpData, public MediaTransportAudioSinkInterface {
+class ChannelReceive : public RtpData,
+                       public RtpPacketSinkInterface,
+                       public MediaTransportAudioSinkInterface {
  public:
   // Used for receive streams.
   ChannelReceive(ProcessThread* module_process_thread,
@@ -135,7 +139,9 @@ class ChannelReceive : public RtpData, public MediaTransportAudioSinkInterface {
 
   // TODO(nisse, solenberg): Delete when VoENetwork is deleted.
   bool ReceivedRTCPPacket(const uint8_t* data, size_t length);
-  void OnRtpPacket(const RtpPacketReceived& packet);
+
+  // RtpPacketSinkInterface.
+  void OnRtpPacket(const RtpPacketReceived& packet) override;
 
   // Muting, Volume and Level.
   void SetChannelOutputVolumeScaling(float scaling);
@@ -175,9 +181,13 @@ class ChannelReceive : public RtpData, public MediaTransportAudioSinkInterface {
 
   // Associate to a send channel.
   // Used for obtaining RTT for a receive-only channel.
-  void SetAssociatedSendChannel(ChannelSend* channel);
+  void SetAssociatedSendChannel(const ChannelSend* channel);
 
   std::vector<RtpSource> GetSources() const;
+
+ protected:
+  // Intended for mock class only.
+  ChannelReceive();
 
  private:
   void Init();
@@ -203,6 +213,18 @@ class ChannelReceive : public RtpData, public MediaTransportAudioSinkInterface {
                                 size_t payloadSize,
                                 const WebRtcRTPHeader* rtpHeader) override;
 
+  // Thread checkers document and lock usage of some methods to specific threads
+  // we know about. The goal is to eventually split up voe::ChannelReceive into
+  // parts with single-threaded semantics, and thereby reduce the need for
+  // locks.
+  rtc::ThreadChecker worker_thread_checker_;
+  rtc::ThreadChecker module_process_thread_checker_;
+  // Methods accessed from audio and video threads are checked for sequential-
+  // only access. We don't necessarily own and control these threads, so thread
+  // checkers cannot be used. E.g. Chromium may transfer "ownership" from one
+  // audio thread to another, but access is still sequential.
+  rtc::RaceChecker audio_thread_race_checker_;
+  rtc::RaceChecker video_capture_thread_race_checker_;
   rtc::CriticalSection _callbackCritSect;
   rtc::CriticalSection volume_settings_critsect_;
 
@@ -257,7 +279,7 @@ class ChannelReceive : public RtpData, public MediaTransportAudioSinkInterface {
 
   // An associated send channel.
   rtc::CriticalSection assoc_send_channel_lock_;
-  ChannelSend* associated_send_channel_
+  const ChannelSend* associated_send_channel_
       RTC_GUARDED_BY(assoc_send_channel_lock_);
 
   PacketRouter* packet_router_ = nullptr;
