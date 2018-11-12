@@ -31,6 +31,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/source/contributing_sources.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/race_checker.h"
 #include "rtc_base/thread_checker.h"
 
 // TODO(solenberg, nisse): This file contains a few NOLINT marks, to silence
@@ -203,6 +204,18 @@ class ChannelReceive : public RtpData, public MediaTransportAudioSinkInterface {
                                 size_t payloadSize,
                                 const WebRtcRTPHeader* rtpHeader) override;
 
+  // Thread checkers document and lock usage of some methods to specific threads
+  // we know about. The goal is to eventually split up voe::ChannelReceive into
+  // parts with single-threaded semantics, and thereby reduce the need for
+  // locks.
+  rtc::ThreadChecker worker_thread_checker_;
+  rtc::ThreadChecker module_process_thread_checker_;
+  // Methods accessed from audio and video threads are checked for sequential-
+  // only access. We don't necessarily own and control these threads, so thread
+  // checkers cannot be used. E.g. Chromium may transfer "ownership" from one
+  // audio thread to another, but access is still sequential.
+  rtc::RaceChecker audio_thread_race_checker_;
+  rtc::RaceChecker video_capture_thread_race_checker_;
   rtc::CriticalSection _callbackCritSect;
   rtc::CriticalSection volume_settings_critsect_;
 
