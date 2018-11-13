@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69b776bf_fbd77d1e",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-13T10:35:29Z",
+      "side": 0,
+      "message": "This can\u0027t happen since there is no start event so it is not part of any batch. The protobuf event is written when the StartLogging is called.",
+      "range": {
+        "startLine": 506,
+        "startChar": 0,
+        "endLine": 506,
+        "endChar": 78
+      },
+      "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
