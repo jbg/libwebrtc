@@ -16,6 +16,24 @@
       "revId": "91fa3745b7190b810faf0a267dd489eea8381fce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52e625c7_209b3870",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-13T14:12:43Z",
+      "side": 1,
+      "message": "Moved \u003d default here. I\u0027m still a bit confused about when an apparently trivial method should be inlined in the class declarations.",
+      "parentUuid": "73bad77d_706ac838",
+      "revId": "91fa3745b7190b810faf0a267dd489eea8381fce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
