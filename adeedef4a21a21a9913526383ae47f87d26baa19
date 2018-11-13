@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "f7f36a19_70592ce8",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-13T22:52:21Z",
+      "side": 1,
+      "message": "Discussed offline. You didn\u0027t see my \"MaybeRegisterObserver\" method, but after offline discussion, I further refactored it.",
+      "parentUuid": "bec352ec_723fa425",
+      "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7af99e2_52d5964d",
         "filename": "call/call.cc",
         "patchSetId": 5
@@ -105,6 +123,24 @@
       "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9547efb6_203cdac1",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-13T22:52:21Z",
+      "side": 1,
+      "message": "We can get callbacks from media transport before we create streams... but then what would we do with those? :) Done.",
+      "parentUuid": "3e46f2ce_6b5a153a",
+      "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
