@@ -68,6 +68,30 @@
       "revId": "be3d1a93b32c488317975fd08e58540251d7c7b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83fbfcb5_17e56a3c",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-13T11:41:20Z",
+      "side": 1,
+      "message": "Added an interface.",
+      "parentUuid": "6d13b267_35eabf67",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "be3d1a93b32c488317975fd08e58540251d7c7b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
