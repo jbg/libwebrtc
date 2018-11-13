@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d010f847_e4d9ce94",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-13T18:38:18Z",
+      "side": 1,
+      "message": "I think you can do just\n\n  const std::string c_name_limited(c_name.substr(0, 255));\n\nThere is a conversion from string_view to string, but it\u0027s explicit.",
+      "revId": "a4e2c4249272226f3000682092dbf0de14ccf3f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
