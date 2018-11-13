@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36664880_f25901d8",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-13T11:45:35Z",
+      "side": 1,
+      "message": "Unlike this, LoggedStartEvent\u0027s ctor accepts ms for utc_time. I think it\u0027s a potential source of errors.",
+      "range": {
+        "startLine": 618,
+        "startChar": 56,
+        "endLine": 619,
+        "endChar": 75
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6560ab8b_09a7950d",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-13T11:45:35Z",
+      "side": 1,
+      "message": "Perhaps make both use the same units, so as to avoid potential confusion?",
+      "range": {
+        "startLine": 374,
+        "startChar": 19,
+        "endLine": 374,
+        "endChar": 66
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f21a5086_cc626435",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-13T11:45:35Z",
+      "side": 1,
+      "message": "Suggest accessors for utc_start_time_ms/us, too.",
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9c8a1ef_20e7c66f",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-13T11:45:35Z",
+      "side": 1,
+      "message": "Would |const| work here? (Same questions for all events. Not intended to delay *this* CL.)",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 28
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

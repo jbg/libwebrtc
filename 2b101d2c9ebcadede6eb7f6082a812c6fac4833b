@@ -22,6 +22,30 @@
       "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dba7aaf_51294eaa",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-13T11:45:35Z",
+      "side": 0,
+      "message": "As a nit, I think it would be useful to make sure that EncodeLogStart returns false (and logs nothing) if called twice in a row, without EncodeLogStopped being called in between, but I\u0027d understand if you don\u0027t think that\u0027s worth your time.",
+      "parentUuid": "69b776bf_fbd77d1e",
+      "range": {
+        "startLine": 506,
+        "startChar": 0,
+        "endLine": 506,
+        "endChar": 78
+      },
+      "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
