@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "bec352ec_723fa425",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-11-13T22:23:25Z",
+      "side": 1,
+      "message": "Understood, so it\u0027s set just Set(media_transport) when it\u0027s created then Set(nullptr) when it\u0027s destroyed. \n\nShould we call it SetMediaTransport and DCHECK that it\u0027s either null \u003d\u003e media_transport or media_transport \u003d\u003e null?",
+      "parentUuid": "87bfbf95_3dc0c380",
+      "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a7af99e2_52d5964d",
         "filename": "call/call.cc",
         "patchSetId": 5
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "This is a good idea, but I can only do it for media transport if I am to use it on \u0027MediaTransportChange\u0027 (where I really want to do it for media transport).\n\nRealistically, when you \u0027CreateAudioSendStream\u0027, media transport should have already been set.",
       "parentUuid": "a7af99e2_52d5964d",
+      "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e46f2ce_6b5a153a",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-11-13T22:23:25Z",
+      "side": 1,
+      "message": "Got it. From what you are saying AddTargetTransferRateObserver should never be execute here for media transport, because it\u0027s already registered in Call::MediaTransportChange?\n\nCan you always register media transport in create stream as in RTP? Having registration code in both MediaTransportChange and here is confusing.",
+      "parentUuid": "48a5e76f_8a65c072",
       "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
