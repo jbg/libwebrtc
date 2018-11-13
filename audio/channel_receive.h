@@ -23,6 +23,7 @@
 #include "api/media_transport_interface.h"
 #include "api/rtpreceiverinterface.h"
 #include "audio/audio_level.h"
+#include "call/rtp_packet_sink_interface.h"
 #include "call/syncable.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/audio_coding/include/audio_coding_module.h"
@@ -31,6 +32,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/source/contributing_sources.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/race_checker.h"
 #include "rtc_base/thread_checker.h"
 
 // TODO(solenberg, nisse): This file contains a few NOLINT marks, to silence
@@ -70,6 +72,69 @@ namespace voe {
 
 class ChannelSend;
 
+// Interface class needed for AudioReceiveStream tests that use a
+// MockChannelReceive.
+
+class ChannelReceiveInterface : public RtpPacketSinkInterface,
+                                public MediaTransportAudioSinkInterface {
+ public:
+  virtual ~ChannelReceiveInterface();
+
+  virtual void SetSink(AudioSinkInterface* sink) = 0;
+
+  virtual void SetReceiveCodecs(
+      const std::map<int, SdpAudioFormat>& codecs) = 0;
+
+  virtual void StartPlayout() = 0;
+  virtual void StopPlayout() = 0;
+
+  virtual bool GetRecCodec(CodecInst* codec) const = 0;
+
+  virtual bool ReceivedRTCPPacket(const uint8_t* data, size_t length) = 0;
+
+  virtual void SetChannelOutputVolumeScaling(float scaling) = 0;
+  virtual int GetSpeechOutputLevelFullRange() const = 0;
+  // See description of "totalAudioEnergy" in the WebRTC stats spec:
+  // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
+  virtual double GetTotalOutputEnergy() const = 0;
+  virtual double GetTotalOutputDuration() const = 0;
+
+  // Stats.
+  virtual NetworkStatistics GetNetworkStatistics() const = 0;
+  virtual AudioDecodingCallStats GetDecodingCallStatistics() const = 0;
+
+  // Audio+Video Sync.
+  virtual uint32_t GetDelayEstimate() const = 0;
+  virtual void SetMinimumPlayoutDelay(int delayMs) = 0;
+  virtual uint32_t GetPlayoutTimestamp() const = 0;
+
+  // Produces the transport-related timestamps; current_delay_ms is left unset.
+  virtual absl::optional<Syncable::Info> GetSyncInfo() const = 0;
+
+  // RTP+RTCP
+  virtual void SetLocalSSRC(unsigned int ssrc) = 0;
+
+  virtual void RegisterReceiverCongestionControlObjects(
+      PacketRouter* packet_router) = 0;
+  virtual void ResetReceiverCongestionControlObjects() = 0;
+
+  virtual CallReceiveStatistics GetRTCPStatistics() const = 0;
+  virtual void SetNACKStatus(bool enable, int maxNumberOfPackets) = 0;
+
+  // From AudioMixer::Source.
+  virtual AudioMixer::Source::AudioFrameInfo GetAudioFrameWithInfo(
+      int sample_rate_hz,
+      AudioFrame* audio_frame) = 0;
+
+  virtual int PreferredSampleRate() const = 0;
+
+  // Associate to a send channel.
+  // Used for obtaining RTT for a receive-only channel.
+  virtual void SetAssociatedSendChannel(const ChannelSend* channel) = 0;
+
+  virtual std::vector<RtpSource> GetSources() const = 0;
+};
+
 // Helper class to simplify locking scheme for members that are accessed from
 // multiple threads.
 // Example: a member can be set on thread T1 and read by an internal audio
@@ -104,7 +169,7 @@ class ChannelReceiveState {
   State state_;
 };
 
-class ChannelReceive : public MediaTransportAudioSinkInterface {
+class ChannelReceive : public ChannelReceiveInterface {
  public:
   // Used for receive streams.
   ChannelReceive(ProcessThread* module_process_thread,
@@ -119,69 +184,74 @@ class ChannelReceive : public MediaTransportAudioSinkInterface {
                  absl::optional<AudioCodecPairId> codec_pair_id,
                  rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor,
                  const webrtc::CryptoOptions& crypto_options);
-  virtual ~ChannelReceive();
+  ~ChannelReceive() override;
 
-  void SetSink(AudioSinkInterface* sink);
+  void SetSink(AudioSinkInterface* sink) override;
 
-  void SetReceiveCodecs(const std::map<int, SdpAudioFormat>& codecs);
+  void SetReceiveCodecs(const std::map<int, SdpAudioFormat>& codecs) override;
 
   // API methods
 
-  void StartPlayout();
-  void StopPlayout();
+  void StartPlayout() override;
+  void StopPlayout() override;
 
   // Codecs
-  bool GetRecCodec(CodecInst* codec);
+  bool GetRecCodec(CodecInst* codec) const override;
 
   // TODO(nisse, solenberg): Delete when VoENetwork is deleted.
-  bool ReceivedRTCPPacket(const uint8_t* data, size_t length);
-  void OnRtpPacket(const RtpPacketReceived& packet);
+  bool ReceivedRTCPPacket(const uint8_t* data, size_t length) override;
+
+  // RtpPacketSinkInterface.
+  void OnRtpPacket(const RtpPacketReceived& packet) override;
 
   // Muting, Volume and Level.
-  void SetChannelOutputVolumeScaling(float scaling);
-  int GetSpeechOutputLevelFullRange() const;
+  void SetChannelOutputVolumeScaling(float scaling) override;
+  int GetSpeechOutputLevelFullRange() const override;
   // See description of "totalAudioEnergy" in the WebRTC stats spec:
   // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
-  double GetTotalOutputEnergy() const;
-  double GetTotalOutputDuration() const;
+  double GetTotalOutputEnergy() const override;
+  double GetTotalOutputDuration() const override;
 
   // Stats.
-  NetworkStatistics GetNetworkStatistics() const;
-  AudioDecodingCallStats GetDecodingCallStatistics() const;
+  NetworkStatistics GetNetworkStatistics() const override;
+  AudioDecodingCallStats GetDecodingCallStatistics() const override;
 
   // Audio+Video Sync.
-  uint32_t GetDelayEstimate() const;
-  void SetMinimumPlayoutDelay(int delayMs);
-  uint32_t GetPlayoutTimestamp();
+  uint32_t GetDelayEstimate() const override;
+  void SetMinimumPlayoutDelay(int delayMs) override;
+  uint32_t GetPlayoutTimestamp() const override;
 
   // Produces the transport-related timestamps; current_delay_ms is left unset.
-  absl::optional<Syncable::Info> GetSyncInfo() const;
+  absl::optional<Syncable::Info> GetSyncInfo() const override;
 
   // RTP+RTCP
-  void SetLocalSSRC(unsigned int ssrc);
+  void SetLocalSSRC(unsigned int ssrc) override;
 
-  void RegisterReceiverCongestionControlObjects(PacketRouter* packet_router);
-  void ResetReceiverCongestionControlObjects();
+  void RegisterReceiverCongestionControlObjects(
+      PacketRouter* packet_router) override;
+  void ResetReceiverCongestionControlObjects() override;
 
-  CallReceiveStatistics GetRTCPStatistics();
-  void SetNACKStatus(bool enable, int maxNumberOfPackets);
+  CallReceiveStatistics GetRTCPStatistics() const override;
+  void SetNACKStatus(bool enable, int maxNumberOfPackets) override;
 
   // From AudioMixer::Source.
   AudioMixer::Source::AudioFrameInfo GetAudioFrameWithInfo(
       int sample_rate_hz,
-      AudioFrame* audio_frame);
+      AudioFrame* audio_frame) override;
 
-  int PreferredSampleRate() const;
+  int PreferredSampleRate() const override;
 
   // Associate to a send channel.
   // Used for obtaining RTT for a receive-only channel.
-  void SetAssociatedSendChannel(ChannelSend* channel);
+  void SetAssociatedSendChannel(const ChannelSend* channel) override;
 
-  std::vector<RtpSource> GetSources() const;
+  std::vector<RtpSource> GetSources() const override;
+
+ protected:
+  void Terminate();
 
  private:
   void Init();
-  void Terminate();
 
   int GetRemoteSSRC(unsigned int& ssrc);  // NOLINT
 
@@ -201,6 +271,19 @@ class ChannelReceive : public MediaTransportAudioSinkInterface {
   int32_t OnReceivedPayloadData(const uint8_t* payloadData,
                                 size_t payloadSize,
                                 const WebRtcRTPHeader* rtpHeader);
+
+  // Thread checkers document and lock usage of some methods to specific threads
+  // we know about. The goal is to eventually split up voe::ChannelReceive into
+  // parts with single-threaded semantics, and thereby reduce the need for
+  // locks.
+  rtc::ThreadChecker worker_thread_checker_;
+  rtc::ThreadChecker module_process_thread_checker_;
+  // Methods accessed from audio and video threads are checked for sequential-
+  // only access. We don't necessarily own and control these threads, so thread
+  // checkers cannot be used. E.g. Chromium may transfer "ownership" from one
+  // audio thread to another, but access is still sequential.
+  rtc::RaceChecker audio_thread_race_checker_;
+  rtc::RaceChecker video_capture_thread_race_checker_;
   rtc::CriticalSection _callbackCritSect;
   rtc::CriticalSection volume_settings_critsect_;
 
@@ -255,7 +338,7 @@ class ChannelReceive : public MediaTransportAudioSinkInterface {
 
   // An associated send channel.
   rtc::CriticalSection assoc_send_channel_lock_;
-  ChannelSend* associated_send_channel_
+  const ChannelSend* associated_send_channel_
       RTC_GUARDED_BY(assoc_send_channel_lock_);
 
   PacketRouter* packet_router_ = nullptr;
