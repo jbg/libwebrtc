@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f4d05da_c55d7881",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-11-13T20:32:02Z",
+      "side": 1,
+      "message": "What is scenario when media transport changes? \n\nIs there similar RTP path?",
+      "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7af99e2_52d5964d",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-11-13T20:32:02Z",
+      "side": 1,
+      "message": "Do you want to move this code to separate function\n\nMaybeRegisterTargetRateObserver\n\nand call it from both video and audio stream creation?\n\nCurrent we do not create video streams if media transport is provided (maybe we can DCHECK there) but eventually we will and it would be nice to have common registration code.\n\nAlso if you pass media_transport to MaybeRegisterTargetRateObserver, maybe you can reuse the same code from MediaTransport change as well?",
+      "revId": "adeedef4a21a21a9913526383ae47f87d26baa19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
