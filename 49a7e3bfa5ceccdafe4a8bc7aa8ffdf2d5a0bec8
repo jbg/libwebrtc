@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f5e5ce7_b34100fd",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-13T09:18:46Z",
+      "side": 1,
+      "message": "This is currently used as an internal helper method. And WebRtcRTPHeader is passed on to the AudioCodingModule.",
+      "range": {
+        "startLine": 201,
+        "startChar": 10,
+        "endLine": 201,
+        "endChar": 31
+      },
+      "revId": "49a7e3bfa5ceccdafe4a8bc7aa8ffdf2d5a0bec8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
