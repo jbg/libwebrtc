@@ -224,6 +224,11 @@ class Call final : public webrtc::Call,
                                  uint32_t allocated_without_feedback_bps,
                                  bool has_packet_feedback) override;
 
+  // This method is invoked when the media transport is created and when the
+  // media transport is being destructed.
+  // We only allow one media transport per connection.
+  void MediaTransportChange(MediaTransportInterface* media_transport) override;
+
  private:
   DeliveryStatus DeliverRtcp(MediaType media_type,
                              const uint8_t* packet,
@@ -362,6 +367,10 @@ class Call final : public webrtc::Call,
   // Declared last since it will issue callbacks from a task queue. Declaring it
   // last ensures that it is destroyed first and any running tasks are finished.
   std::unique_ptr<RtpTransportControllerSendInterface> transport_send_;
+
+  bool registered_target_rate_observer = false;
+  MediaTransportInterface* media_transport_ = nullptr;
+
   RTC_DISALLOW_COPY_AND_ASSIGN(Call);
 };
 }  // namespace internal
@@ -432,7 +441,6 @@ Call::Call(const Call::Config& config,
       video_send_delay_stats_(new SendDelayStats(clock_)),
       start_ms_(clock_->TimeInMilliseconds()) {
   RTC_DCHECK(config.event_log != nullptr);
-  transport_send->RegisterTargetTransferRateObserver(this);
   transport_send_ = std::move(transport_send);
   transport_send_ptr_ = transport_send_.get();
 
@@ -472,6 +480,15 @@ Call::~Call() {
   }
   UpdateReceiveHistograms();
   UpdateHistograms();
+}
+
+void Call::MediaTransportChange(MediaTransportInterface* media_transport) {
+  // Ignoring mid, we are assuming there is only one media_transport.
+  if (!media_transport && media_transport_ && registered_target_rate_observer) {
+    media_transport_->RemoveTargetTransferRateObserver(this);
+    media_transport_ = nullptr;
+    registered_target_rate_observer = false;
+  }
 }
 
 void Call::UpdateHistograms() {
@@ -566,6 +583,16 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
     const webrtc::AudioSendStream::Config& config) {
   TRACE_EVENT0("webrtc", "Call::CreateAudioSendStream");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
+
+  if (!registered_target_rate_observer) {
+    registered_target_rate_observer = true;
+    if (config.media_transport) {
+      media_transport_ = config.media_transport;
+      media_transport_->AddTargetTransferRateObserver(this);
+    } else {
+      transport_send_ptr_->RegisterTargetTransferRateObserver(this);
+    }
+  }
   // Stream config is logged in AudioSendStream::ConfigureStream, as it may
   // change during the stream's lifetime.
   absl::optional<RtpState> suspended_rtp_state;
@@ -694,6 +721,11 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
     std::unique_ptr<FecController> fec_controller) {
   TRACE_EVENT0("webrtc", "Call::CreateVideoSendStream");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
+
+  if (!registered_target_rate_observer) {
+    registered_target_rate_observer = true;
+    transport_send_ptr_->RegisterTargetTransferRateObserver(this);
+  }
 
   video_send_delay_stats_->AddSsrcs(config);
   for (size_t ssrc_index = 0; ssrc_index < config.rtp.ssrcs.size();
@@ -1031,6 +1063,15 @@ void Call::OnSentPacket(const rtc::SentPacket& sent_packet) {
 }
 
 void Call::OnTargetTransferRate(TargetTransferRate msg) {
+  // Call::OnTargetTransferRate requires that on target transfer rate is invoked
+  // from the worker queue. Media transport does not guarantee the callback on
+  // the worker queue, so we dispatch the callback on the network queue.
+  if (!transport_send_ptr_->GetWorkerQueue()->IsCurrent()) {
+    transport_send_ptr_->GetWorkerQueue()->PostTask(
+        [this, msg] { this->OnTargetTransferRate(msg); });
+    return;
+  }
+
   uint32_t target_bitrate_bps = msg.target_rate.bps();
   int loss_ratio_255 = msg.network_estimate.loss_rate_ratio * 255;
   uint8_t fraction_loss =
