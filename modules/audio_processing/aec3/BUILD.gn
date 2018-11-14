@@ -101,6 +101,8 @@ rtc_static_library("aec3") {
     "reverb_model_fallback.h",
     "shadow_filter_update_gain.cc",
     "shadow_filter_update_gain.h",
+    "signal_dependent_erle_estimator.cc",
+    "signal_dependent_erle_estimator.h",
     "skew_estimator.cc",
     "skew_estimator.h",
     "stationarity_estimator.cc",
