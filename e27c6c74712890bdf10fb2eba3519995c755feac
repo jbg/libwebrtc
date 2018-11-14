@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "88d6c6cd_517aac6c",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "We can\u0027t do it in construction. We don\u0027t know if MediaTransport will be used until SetLocal/Remote description is called.\n\nI was asked by other reviewers to move it out from the \u0027MediaTransportChange\u0027 to a separate method, and I think that\u0027s fine (it reads nicer when it\u0027s a separate method).",
+      "parentUuid": "dec21b59_e0a84b27",
+      "range": {
+        "startLine": 258,
+        "startChar": 7,
+        "endLine": 258,
+        "endChar": 27
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af66edf6_99a7642a",
         "filename": "call/call.cc",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "35e03899_e77c9a03",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af66edf6_99a7642a",
+      "range": {
+        "startLine": 382,
+        "startChar": 23,
+        "endLine": 382,
+        "endChar": 62
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7186be55_3a4e5dc8",
         "filename": "call/call.cc",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c6e43d_54e2ac08",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "renamed to:\nis_target_rate_observer_registered_",
+      "parentUuid": "7186be55_3a4e5dc8",
+      "range": {
+        "startLine": 383,
+        "startChar": 7,
+        "endLine": 383,
+        "endChar": 39
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -153,6 +225,30 @@
       "side": 1,
       "message": "It\u0027s a callback passed from JsepTransportController:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/jseptransportcontroller.cc?l\u003d780\u0026rcl\u003d76f9954b17a47623af6c1e5a538ff9bc31bbf96f\n\nI don\u0027t want to redesign the entire JsepTransportController, and I don\u0027t want to put more complexity into peerconnection (which merely passes that callback here). Someone somewhere needs to maintain the state, and right now it feels like Call is the best place to do so.",
       "parentUuid": "5159879f_27fd2131",
+      "range": {
+        "startLine": 518,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 47
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e4d374e_f53f1f86",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "This is a callback from jseptransport controller, with semantics defined today as:\n* when a transport for Mid is created, it gets called with such transport\n* when that transport is destroyed, it\u0027s called with nullptr.\n\nWhile I could translate it to \"set\"/\"Reset\", it\u0027s not clear who should do it (peerconnection or call object?). I think the way it is now makes most sense.\n\nBut, I also think we can remove the entire if/else statement and have the registration happen in CreateAudio/VideoStream (which is what I had previously).\n\nThere are many people with different preferences here.",
+      "parentUuid": "23ee2113_2273fde0",
       "range": {
         "startLine": 518,
         "startChar": 0,
@@ -271,6 +367,30 @@
     },
     {
       "key": {
+        "uuid": "ca67fa42_8f593e68",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "I changed it to if(media_transport_) and added a todo.\n\nBtw, SetBitrateAllocationStrategy also does this:\ntransport_send_ptr_-\u003eGetWorkerQueue()-\u003ePostTask(Functor{\n      bitrate_allocator_.get(), std::move(bitrate_allocation_strategy)});",
+      "parentUuid": "0a2f2fa5_0cf01023",
+      "range": {
+        "startLine": 1107,
+        "startChar": 0,
+        "endLine": 1111,
+        "endChar": 3
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed3229d_eed65f40",
         "filename": "call/call.h",
         "patchSetId": 8
@@ -294,6 +414,30 @@
     },
     {
       "key": {
+        "uuid": "cd35bce7_b9f20d71",
+        "filename": "call/call.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "New comment\n// This method is invoked when the media transport is created and when the\n  // media transport is being destructed.\n  // We only allow one media transport per connection.\n  //\n  // It should be called with non-null argument at most once, and if it was\n  // called with non-null argument, it has to be called with a null argument\n  // at least once after that.",
+      "parentUuid": "1ed3229d_eed65f40",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 35
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2616a0b1_788b2dd2",
         "filename": "call/degraded_call.cc",
         "patchSetId": 8
@@ -314,6 +458,30 @@
       "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6cd11e8_153a00d7",
+        "filename": "call/degraded_call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T19:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2616a0b1_788b2dd2",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 71
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
