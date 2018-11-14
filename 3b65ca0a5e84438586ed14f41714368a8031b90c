@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7b21db2_31903ee1",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-11-14T18:16:03Z",
+      "side": 1,
+      "message": "nit: maybe add this at the bottom with the other optional methods?",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 28
+      },
+      "revId": "3b65ca0a5e84438586ed14f41714368a8031b90c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad272f50_fe02395f",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-11-14T18:16:03Z",
+      "side": 1,
+      "message": "This is redundant. Use [self class] to make this overridable in a subclass or just RTCPeerConnection.",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 25
+      },
+      "revId": "3b65ca0a5e84438586ed14f41714368a8031b90c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bdfc2c3_50ca7a08",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2018-11-14T18:16:03Z",
+      "side": 1,
+      "message": "nit: this variable is unnecessary.",
+      "range": {
+        "startLine": 189,
+        "startChar": 2,
+        "endLine": 189,
+        "endChar": 19
+      },
+      "revId": "3b65ca0a5e84438586ed14f41714368a8031b90c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
