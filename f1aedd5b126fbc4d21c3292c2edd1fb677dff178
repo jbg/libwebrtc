@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "4bf89814_ace21f87",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T12:48:25Z",
+      "side": 1,
+      "message": "Would be nice to keep this consistent with RtpTransportControllerSendInterface::RegisterTargetTransferRateObserver, since that should eventually be a shared interface.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 3
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b245c2a5_0917dbf0",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T12:48:25Z",
+      "side": 1,
+      "message": "I think this should be a private method.",
+      "range": {
+        "startLine": 229,
+        "startChar": 7,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfc96e2f_36a09f8e",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T12:48:25Z",
+      "side": 1,
+      "message": "So it\u0027s expected to be called with a non-null argument at most once, over the life time of a call?",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 54
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7fa9f98_f74b97e7",
         "filename": "call/call.cc",
         "patchSetId": 7
@@ -13,6 +82,24 @@
       "writtenOn": "2018-11-14T00:14:21Z",
       "side": 1,
       "message": "Instead of passing media_transport and setting media_transport_ here, can you set media_transport_ in MediaTransportChange and check media_transport_ here:\n\nif (media_transport_) {\n   // Register media transport\n\n} else {\n   // Register RTP\n\n\n}",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5643d7b_fc77a97a",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T12:48:25Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c7fa9f98_f74b97e7",
       "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -64,6 +151,52 @@
       "writtenOn": "2018-11-14T00:14:21Z",
       "side": 1,
       "message": "DCHECK(media_transport_ \u003d\u003d nullptr)",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf9ed744_8eca3795",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T12:48:25Z",
+      "side": 1,
+      "message": "Is is the call to bitrate_allocator_-\u003eOnNetworkChanged that requires this?\n\nI think we\u0027re planning to move BitrateAllocator to the transport, since it needs to be aware of things like packet overhead and FEC configuration. The RTP code and other media transports should still be able to share the implementation of the BitrateAllocator class.",
+      "range": {
+        "startLine": 1090,
+        "startChar": 1,
+        "endLine": 1092,
+        "endChar": 72
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7188f8b9_1e2035f7",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 6576,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T12:48:25Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment.\n\nAnd what in PeerConnection guarantees that media_transport passed here doesn\u0027t change?",
+      "range": {
+        "startLine": 6576,
+        "startChar": 2,
+        "endLine": 6576,
+        "endChar": 68
+      },
       "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
