@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7353f4c0_96545fe9",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-14T17:13:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccf3c46f_601719d9",
+      "range": {
+        "startLine": 36,
+        "startChar": 20,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb3575e5_2ec584e8",
         "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd150846_82681395",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-14T17:13:40Z",
+      "side": 1,
+      "message": "This is for safety because it catches runtime errors in case the pointer becomes dangling.",
+      "parentUuid": "cb3575e5_2ec584e8",
+      "range": {
+        "startLine": 37,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 34
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9683a62f_d66d2cbf",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-14T17:13:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b1caeda_1afd6f25",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 14
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5264865c_10e5a995",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "e92ce831_e770f2e0",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-14T17:13:40Z",
+      "side": 1,
+      "message": "What is not allowed is having output_dir_ as static and non trivially destructible. More details in the answer to the next comment.",
+      "parentUuid": "5264865c_10e5a995",
+      "range": {
+        "startLine": 61,
+        "startChar": 39,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932be16_fd57b71e",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 2
@@ -105,6 +201,24 @@
       "writtenOn": "2018-11-14T15:14:11Z",
       "side": 1,
       "message": "This is quite error prone, since it imposes the implicit assumption that the caller does not destruct the string passed to the method. \nPlease allocate a local copy of the string instead.",
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51f3ea10_2945ce37",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-14T17:13:40Z",
+      "side": 1,
+      "message": "True. I don\u0027t like it either and the correct way would be refactoring ApmAudioDump. As it is now, I don\u0027t see other options if we want a simple way to use ApmAudioDump.\n\nTo possibly make the solution of this CL acceptable without refactoring, I added the output directory string size member and in the .cc file there\u0027s a check that is likely to fail at runtime if the string pointer is not valid anymore and new data is written.\n\n[alternative option] We should refactor ApmAudioDump by instancing an ApmAudioDumpFactory in APM that is passed to its submodules. The factory knows whether dumps are active and the output directory - i.e., no need to have static fields and explicitly pass the params to each sub-module.\n\nSince (i) ApmAudioDump is not part of the APM API, (ii) no data dump code ends up in production and (iii) audioproc_f is a tool, I would tolerate this CL and avoid additional refactoring work for now. This would allow this CL to land and make audioproc_f compatible with downstream projects.",
+      "parentUuid": "9932be16_fd57b71e",
       "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
