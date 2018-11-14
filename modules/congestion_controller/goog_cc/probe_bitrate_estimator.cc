@@ -177,6 +177,14 @@ ProbeBitrateEstimator::FetchAndResetLastEstimatedBitrateBps() {
   return estimated_bitrate_bps;
 }
 
+absl::optional<DataRate>
+ProbeBitrateEstimator::FetchAndResetLastEstimatedBitrate() {
+  auto bitrate_bps = FetchAndResetLastEstimatedBitrateBps();
+  if (bitrate_bps)
+    return DataRate::bps(*bitrate_bps);
+  return absl::nullopt;
+}
+
 void ProbeBitrateEstimator::EraseOldClusters(int64_t timestamp_ms) {
   for (auto it = clusters_.begin(); it != clusters_.end();) {
     if (it->second.last_receive_ms < timestamp_ms) {

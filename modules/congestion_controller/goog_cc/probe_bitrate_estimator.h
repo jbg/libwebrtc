@@ -29,6 +29,7 @@ class ProbeBitrateEstimator {
   int HandleProbeAndEstimateBitrate(const PacketFeedback& packet_feedback);
 
   absl::optional<int> FetchAndResetLastEstimatedBitrateBps();
+  absl::optional<DataRate> FetchAndResetLastEstimatedBitrate();
 
  private:
   struct AggregatedCluster {
