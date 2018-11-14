@@ -16,6 +16,24 @@
       "revId": "a4e2c4249272226f3000682092dbf0de14ccf3f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdebbce7_43e93533",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T09:16:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d010f847_e4d9ce94",
+      "revId": "a4e2c4249272226f3000682092dbf0de14ccf3f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
