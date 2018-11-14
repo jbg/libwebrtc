@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ccf3c46f_601719d9",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T15:14:11Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the if-statement checks on output_dir_size\u003e0 since that more explicitly shows what is intended with the check.",
+      "range": {
+        "startLine": 36,
+        "startChar": 20,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb3575e5_2ec584e8",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T15:14:11Z",
+      "side": 1,
+      "message": "If the only reason fur using output_dir_size is to do this check, I think it should be removed.\n\nIt does not add any safety to the code but causes the code to be harder to read.",
+      "range": {
+        "startLine": 37,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 34
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b1caeda_1afd6f25",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T15:14:11Z",
+      "side": 1,
+      "message": "Does this work systems with other path separators such as Windows?",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 14
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5264865c_10e5a995",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T15:14:11Z",
+      "side": 1,
+      "message": "I guess the reason for using char* is that std::string is not allowed?\n\nI\u0027d instead prefer std::ArrayView\u003cchar\u003e since that would be easier to use.",
+      "range": {
+        "startLine": 61,
+        "startChar": 39,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9932be16_fd57b71e",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T15:14:11Z",
+      "side": 1,
+      "message": "This is quite error prone, since it imposes the implicit assumption that the caller does not destruct the string passed to the method. \nPlease allocate a local copy of the string instead.",
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
