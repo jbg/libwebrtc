@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7fa9f98_f74b97e7",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-11-14T00:14:21Z",
+      "side": 1,
+      "message": "Instead of passing media_transport and setting media_transport_ here, can you set media_transport_ in MediaTransportChange and check media_transport_ here:\n\nif (media_transport_) {\n   // Register media transport\n\n} else {\n   // Register RTP\n\n\n}",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a20d3c3f_57087daf",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-11-14T00:14:21Z",
+      "side": 1,
+      "message": "I suggest to set media_transport_ here instead of passing it to RegisterRateObserver if it\u0027s possible. See also my other comment.",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2203de6_e91c42c1",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-11-14T00:14:21Z",
+      "side": 1,
+      "message": "Can you DCHECK(media_transport_ \u003d\u003d config.media_transport)?",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae4d64ed_b11e3ad5",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2018-11-14T00:14:21Z",
+      "side": 1,
+      "message": "DCHECK(media_transport_ \u003d\u003d nullptr)",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
