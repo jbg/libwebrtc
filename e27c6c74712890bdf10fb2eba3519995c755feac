@@ -157,6 +157,30 @@
     },
     {
       "key": {
+        "uuid": "0cbb0100_a98a22bd",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-11-14T16:45:29Z",
+      "side": 1,
+      "message": "I agree, to avoid confusion it may be worth having a separate function for media transport callback and always reschedule.",
+      "parentUuid": "e0a14d07_c6daef87",
+      "range": {
+        "startLine": 1107,
+        "startChar": 0,
+        "endLine": 1111,
+        "endChar": 3
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ed3229d_eed65f40",
         "filename": "call/call.h",
         "patchSetId": 8
