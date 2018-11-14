@@ -57,6 +57,15 @@ class ApmDataDumper {
 #endif
   }
 
+  // Set an optional output directory.
+  static void SetOutputDirectory(const char* output_dir,
+                                 size_t output_dir_size) {
+#if WEBRTC_APM_DEBUG_DUMP == 1
+    output_dir_ = output_dir;
+    output_dir_size_ = output_dir_size;
+#endif
+  }
+
   // Reinitializes the data dumping such that new versions
   // of all files being dumped to are created.
   void InitiateNewSetOfRecordings() {
@@ -244,6 +253,8 @@ class ApmDataDumper {
  private:
 #if WEBRTC_APM_DEBUG_DUMP == 1
   static bool recording_activated_;
+  static const char* output_dir_;
+  static size_t output_dir_size_;
   const int instance_index_;
   int recording_set_index_ = 0;
   std::unordered_map<std::string, std::unique_ptr<FILE, RawFileCloseFunctor>>

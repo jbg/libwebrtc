@@ -203,6 +203,9 @@ WEBRTC_DEFINE_string(aec3_settings,
 WEBRTC_DEFINE_bool(dump_data,
                    false,
                    "Dump internal data during the call (requires build flag)");
+WEBRTC_DEFINE_string(dump_data_output_dir,
+                     "",
+                     "Internal data dump output directory");
 WEBRTC_DEFINE_bool(help, false, "Print this message");
 
 void SetSettingIfSpecified(const std::string& value,
@@ -315,6 +318,7 @@ SimulationSettings CreateSettings() {
   settings.store_intermediate_output = FLAG_store_intermediate_output;
   settings.print_aec3_parameter_values = FLAG_print_aec3_parameter_values;
   settings.dump_internal_data = FLAG_dump_data;
+  settings.dump_internal_data_output_dir = FLAG_dump_data_output_dir;
 
   return settings;
 }
@@ -469,6 +473,12 @@ void PerformBasicParameterSanityChecks(const SimulationSettings& settings) {
   ReportConditionalErrorAndExit(
       WEBRTC_APM_DEBUG_DUMP == 0 && settings.dump_internal_data,
       "Error: --dump_data cannot be set without proper build support.\n");
+
+  ReportConditionalErrorAndExit(
+      !settings.dump_internal_data &&
+          settings.dump_internal_data_output_dir.has_value() &&
+          !settings.dump_internal_data_output_dir->empty(),
+      "Error: --dump_data_output_dir cannot be set without --dump_data.\n");
 }
 
 }  // namespace
