@@ -46,6 +46,30 @@
       "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea53dd34_6a95aecf",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-14T13:24:33Z",
+      "side": 0,
+      "message": "It\u0027s not clear how the \"false\" should be communicated to the application and how the application should be able to distinguish \"false because already logging\" from \"false because file not writable\". Figuring this out and updating APIs seems like a larger project.",
+      "parentUuid": "9dba7aaf_51294eaa",
+      "range": {
+        "startLine": 506,
+        "startChar": 0,
+        "endLine": 506,
+        "endChar": 78
+      },
+      "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

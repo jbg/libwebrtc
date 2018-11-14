@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a0a666f2_4fac34d3",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-14T13:24:33Z",
+      "side": 1,
+      "message": "Do you think I should change this to utc_time_ms?",
+      "parentUuid": "36664880_f25901d8",
+      "range": {
+        "startLine": 618,
+        "startChar": 56,
+        "endLine": 619,
+        "endChar": 75
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6560ab8b_09a7950d",
         "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "040950e2_a3cb8dfb",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-14T13:24:33Z",
+      "side": 1,
+      "message": "The plan is to move the timestamp to ms (as it is in the new proto). This seems better to do as a separate CL.",
+      "parentUuid": "6560ab8b_09a7950d",
+      "range": {
+        "startLine": 374,
+        "startChar": 19,
+        "endLine": 374,
+        "endChar": 66
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f21a5086_cc626435",
         "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
         "patchSetId": 1
@@ -62,6 +110,24 @@
       "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b07318fd_c9f13429",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-14T13:24:33Z",
+      "side": 1,
+      "message": "The only reason for introducing log_time_xx accessors is because we\u0027re moving from microsecond to millisecond resolution. Once the migration is done, we\u0027ll remove those accessors.",
+      "parentUuid": "f21a5086_cc626435",
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -85,6 +151,30 @@
       "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c06e494_d86b5013",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-14T13:24:33Z",
+      "side": 1,
+      "message": "It would work in some, but not all, cases. The IceCandidatePairConfig doesn\u0027t have a constructor, for example.\n\nI don\u0027t see the benefit of making these things const. The parser returns const events anyway, so there is no risk that a programmer inadvertently modifies the contents of the log.",
+      "parentUuid": "f9c8a1ef_20e7c66f",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 28
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
