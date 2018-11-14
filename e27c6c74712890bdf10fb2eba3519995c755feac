@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dec21b59_e0a84b27",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "I suggest removing this and doing the registration either on construction, if RtpTRansportControllerSend is injected. Or when MediaTransport is injected.",
+      "range": {
+        "startLine": 258,
+        "startChar": 7,
+        "endLine": 258,
+        "endChar": 27
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af66edf6_99a7642a",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "This name is a bit overkill in length.\n\nMaybe target_observer_crit_?",
+      "range": {
+        "startLine": 382,
+        "startChar": 23,
+        "endLine": 382,
+        "endChar": 62
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7186be55_3a4e5dc8",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "The registered_ part doesn\u0027t add much value here. Please remove.",
+      "range": {
+        "startLine": 383,
+        "startChar": 7,
+        "endLine": 383,
+        "endChar": 39
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eddd128_3f3cb0af",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "This should probably have a DCHECK to avoid calling this function twice.",
+      "range": {
+        "startLine": 502,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 3
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5159879f_27fd2131",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "Seems like this function is called in several different situations to achieve different things. Please split it into different implementations depending on the state (that should be known by the caller) and DCHECK that the state is correct.\n\nThis avoids hidden bugs (where it\u0027s called in an unexpected state and does something unexpected).",
+      "range": {
+        "startLine": 518,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 47
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e56361e6_256a7c00",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "No DCHECK here? Maybe add a TODO?",
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0a14d07_c6daef87",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "This should not be required and makes it unclear from where this comes from.\n\nPlease instead make sure to call this on the right thread from the call site. If not possible, add a separate function that always posts on the task queue and use that where it\u0027s needed.",
+      "range": {
+        "startLine": 1107,
+        "startChar": 0,
+        "endLine": 1111,
+        "endChar": 3
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ed3229d_eed65f40",
+        "filename": "call/call.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "SetMediaTransport?\n\nMaybe document that it shouldn\u0027t be called more than once?",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 35
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2616a0b1_788b2dd2",
+        "filename": "call/degraded_call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-14T16:21:33Z",
+      "side": 1,
+      "message": "It\u0027s just a wrapper for Call that adds latency and bandwidth limits. It\u0027s used for manual testing with Chromium.\n\nMaybe add a TODO or note about adding support for media transports here?",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 71
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
