@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a1d2e2fa_4260718f",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:49:17Z",
+      "side": 1,
+      "message": "I don\u0027t think strongly about the naming, but if we want to rename it it should be in a separate CL (there already is an implementation that\u0027s using \u0027AddTargetRateObserver\u0027 in downstream projects).\n\nIt may be reasonable to reuse parts of MTI by RTCS, agreed.",
+      "parentUuid": "fc9e2878_61836594",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 3
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b245c2a5_0917dbf0",
         "filename": "call/call.cc",
         "patchSetId": 7
