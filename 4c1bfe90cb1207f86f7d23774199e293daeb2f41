@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf654a14_b77be686",
+        "filename": "modules/congestion_controller/goog_cc/probe_bitrate_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-11-14T15:35:39Z",
+      "side": 1,
+      "message": "nit: A TODO for removing this?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 61
+      },
+      "revId": "4c1bfe90cb1207f86f7d23774199e293daeb2f41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
