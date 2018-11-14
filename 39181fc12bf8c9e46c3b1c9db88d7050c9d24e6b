@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "200ae55b_3b02c6c1",
+        "filename": "api/audio/echo_canceller3_config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "num_sections sounds good.",
+      "parentUuid": "20bacfbd_be301314",
+      "range": {
+        "startLine": 90,
+        "startChar": 11,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdf696fd_feec27f0",
         "filename": "api/audio/echo_canceller3_config_json.cc",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b0d849bc_4d365806",
+        "filename": "api/audio/echo_canceller3_config_json.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cdf696fd_feec27f0",
+      "range": {
+        "startLine": 430,
+        "startChar": 35,
+        "endLine": 430,
+        "endChar": 63
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d48b6f7a_0b5eb963",
         "filename": "modules/audio_processing/aec3/aec_state.cc",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "Please move this closer to where it is used (line 213).",
+      "range": {
+        "startLine": 193,
+        "startChar": 40,
+        "endLine": 193,
+        "endChar": 49
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3adadb26_0d952525",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "In the next line a method for render_reverb_ is called that returns X2_reverb. That render_reverb_ is used in the echo_audibility_.Update method.",
+      "parentUuid": "d48b6f7a_0b5eb963",
       "range": {
         "startLine": 193,
         "startChar": 40,
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "c74e364f_2dbc3d26",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "render_reverb is also used in the echo_audibility_.Update method.",
+      "parentUuid": "5d8ef445_61c86bb3",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4855deeb_3b72ad28",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "2da88976_01a72dbc",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4855deeb_3b72ad28",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88d79dbc_1d716375",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -119,6 +227,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bc3c9bb_3ead346a",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "88d79dbc_1d716375",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "c13e465a_802cdaf7",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ad0dadd_0d03ef37",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 67
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "389cc99f_8fd3eabf",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -156,6 +306,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "Please add code that ensures that estimator_sizes is not accessed beyond the array length.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd705692_577538a2",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "That should not happen as estimator_sizes is a vector of length num_estimators but I have added a DCHECK to make it more clear.",
+      "parentUuid": "389cc99f_8fd3eabf",
       "range": {
         "startLine": 37,
         "startChar": 4,
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "ed9ee4d8_91423768",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "the while condition is \n(remaining_estimators \u003e 1 \u0026\u0026\n         remaining_blocks / remaining_estimators \u003e estimator_size)\n\nand that implies that remaining_blocks is larger than estimator_size.",
+      "parentUuid": "bcc4bb26_24f439a0",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 20
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d553272_542dc897",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -211,6 +409,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ae5cc02_f7c3576c",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "I have added comments for clarifying what is the purpose of this function.",
+      "parentUuid": "7d553272_542dc897",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 35
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -237,6 +459,30 @@
     },
     {
       "key": {
+        "uuid": "4754aa90_48dfe362",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eff1b861_52297a60",
+      "range": {
+        "startLine": 66,
+        "startChar": 13,
+        "endLine": 66,
+        "endChar": 34
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aff56594_98e1c8c5",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -248,6 +494,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "I don\u0027t think this should be described as a downsampling. I would rather describe it as a summation.",
+      "range": {
+        "startLine": 80,
+        "startChar": 5,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ed8a11a_293416f8",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "I have removed that function that move the code inline to where it was called. I have also avoid the use of the term downsample as I agree that it is confusing.",
+      "parentUuid": "aff56594_98e1c8c5",
       "range": {
         "startLine": 80,
         "startChar": 5,
@@ -283,6 +553,30 @@
     },
     {
       "key": {
+        "uuid": "6a585e14_9847b3ce",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "I do not think that we can easily do that as we are not accumulating over a consecutive part of the memory.",
+      "parentUuid": "e827c333_b817c3e6",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 7
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1af666bc_784ae0a7",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -297,6 +591,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecddcde3_51d71a24",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1af666bc_784ae0a7",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -323,6 +635,30 @@
     },
     {
       "key": {
+        "uuid": "8e30af08_b29d2797",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1660c8e1_3d959322",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 4
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41657220_acafdb18",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -343,6 +679,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb41632f_d90b1333",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "41657220_acafdb18",
+      "range": {
+        "startLine": 119,
+        "startChar": 24,
+        "endLine": 119,
+        "endChar": 33
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -369,6 +729,30 @@
     },
     {
       "key": {
+        "uuid": "bb8e8b73_dfabed88",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7a193c08_3a40e184",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c0c0301_bff00acc",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -383,6 +767,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "945361e4_6c8f2d1d",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4c0c0301_bff00acc",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -406,6 +808,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ab32e7c_2ef0e9a7",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6dc06ba_a2377247",
+      "range": {
+        "startLine": 188,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 27
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -455,6 +881,54 @@
     },
     {
       "key": {
+        "uuid": "e2c7e7ba_d79057f9",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92ed3731_7d7e5c1d",
+      "range": {
+        "startLine": 203,
+        "startChar": 5,
+        "endLine": 203,
+        "endChar": 25
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aa6cb5f_02e1e7d9",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "067f3b19_016e6533",
+      "range": {
+        "startLine": 203,
+        "startChar": 27,
+        "endLine": 203,
+        "endChar": 50
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c0a20e5_cc7c46df",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -475,6 +949,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "909ed669_5ca45e5b",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9c0a20e5_cc7c46df",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 20
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -501,6 +999,30 @@
     },
     {
       "key": {
+        "uuid": "7cb05dcf_cab80f79",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e3bcc6f8_f21463fc",
+      "range": {
+        "startLine": 219,
+        "startChar": 42,
+        "endLine": 219,
+        "endChar": 43
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fce38ea7_f4739386",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -521,6 +1043,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2255df4_1983f010",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fce38ea7_f4739386",
+      "range": {
+        "startLine": 221,
+        "startChar": 34,
+        "endLine": 221,
+        "endChar": 35
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -547,6 +1093,30 @@
     },
     {
       "key": {
+        "uuid": "b29a47ae_1e7d9857",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "896084bc_7f8d12f6",
+      "range": {
+        "startLine": 224,
+        "startChar": 36,
+        "endLine": 225,
+        "endChar": 23
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5455de8_16481975",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -570,6 +1140,30 @@
     },
     {
       "key": {
+        "uuid": "fc8c1172_9844e0ee",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5455de8_16481975",
+      "range": {
+        "startLine": 244,
+        "startChar": 19,
+        "endLine": 244,
+        "endChar": 36
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ffd8e7b_9fb1caaf",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -590,6 +1184,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3c8daa8_d7dd6aa4",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0ffd8e7b_9fb1caaf",
+      "range": {
+        "startLine": 255,
+        "startChar": 6,
+        "endLine": 255,
+        "endChar": 51
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -633,6 +1251,30 @@
     },
     {
       "key": {
+        "uuid": "d19d16f6_f22c5350",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "after the refactoring of this part of the code, it is much clearer that erle_ref_ is bounded by min_erle_",
+      "parentUuid": "6b281f0a_d95e1edc",
+      "range": {
+        "startLine": 259,
+        "startChar": 38,
+        "endLine": 259,
+        "endChar": 47
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aaaf16ee_d9900a0c",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -644,6 +1286,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "This warrants a comment. Why is this updated like this.",
+      "range": {
+        "startLine": 261,
+        "startChar": 8,
+        "endLine": 261,
+        "endChar": 35
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b7b05f5_f752d905",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "I have added some clarifications about how this value is computed.",
+      "parentUuid": "aaaf16ee_d9900a0c",
       "range": {
         "startLine": 261,
         "startChar": 8,
@@ -679,6 +1345,30 @@
     },
     {
       "key": {
+        "uuid": "217a6050_7b1317ac",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a2ff8aa8_76f3e5a8",
+      "range": {
+        "startLine": 269,
+        "startChar": 27,
+        "endLine": 269,
+        "endChar": 52
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc6a25b2_28ddfc91",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -699,6 +1389,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28bf42df_babfc1f9",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dc6a25b2_28ddfc91",
+      "range": {
+        "startLine": 299,
+        "startChar": 4,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -725,6 +1439,30 @@
     },
     {
       "key": {
+        "uuid": "8bb5d9b7_1f26cea1",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c8c170e1_730c8708",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 13
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "295870a2_8f27e8b1",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
         "patchSetId": 5
@@ -736,6 +1474,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "I don\u0027t think the pre-computations on lines 318-322 adds anything, as the following nested loop structure is so complex.",
+      "range": {
+        "startLine": 318,
+        "startChar": 43,
+        "endLine": 318,
+        "endChar": 44
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2088b04b_5307bd42",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Without those lines we would add (num_estimators_ - 1)*kFftLengthBy2Plus1 additional multiplications. I also think the code is clearer with those lines.",
+      "parentUuid": "295870a2_8f27e8b1",
       "range": {
         "startLine": 318,
         "startChar": 43,
@@ -771,6 +1533,30 @@
     },
     {
       "key": {
+        "uuid": "ca0de5ed_f1b628d9",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47e45a04_4c6937b6",
+      "range": {
+        "startLine": 327,
+        "startChar": 5,
+        "endLine": 328,
+        "endChar": 60
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae207a5b_c2c924fe",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
         "patchSetId": 5
@@ -794,6 +1580,30 @@
     },
     {
       "key": {
+        "uuid": "3a07229d_9ee12586",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "As discussed offline, those constants are moved now to the anonymous namespace.",
+      "parentUuid": "ae207a5b_c2c924fe",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baf0b0f9_ef88e73d",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
         "patchSetId": 5
@@ -808,6 +1618,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da75c3f3_689cde89",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "baf0b0f9_ef88e73d",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -831,6 +1659,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06bd12a3_ae3a9281",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "True, I have changed the name to SignalDependentErleEstimator.",
+      "parentUuid": "12ce1e99_f5fdd0b6",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -874,6 +1726,48 @@
     },
     {
       "key": {
+        "uuid": "b11498ab_41e9a6cb",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c2e32f63_b225d4fe",
+      "range": {
+        "startLine": 84,
+        "startChar": 9,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "288f0fd3_7177b89c",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "75669aef_764bc74b",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "835f63ca_d131aa41",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
         "patchSetId": 5
@@ -888,6 +1782,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "850da655_96b2711a",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "835f63ca_d131aa41",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -914,6 +1826,30 @@
     },
     {
       "key": {
+        "uuid": "097b8d37_c9065aba",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e4f0ff82_9dbd9d8e",
+      "range": {
+        "startLine": 121,
+        "startChar": 9,
+        "endLine": 121,
+        "endChar": 26
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91cd235a_2de579cd",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
         "patchSetId": 5
@@ -934,6 +1870,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51b9126b_adb2aa01",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "91cd235a_2de579cd",
+      "range": {
+        "startLine": 123,
+        "startChar": 15,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -960,6 +1920,30 @@
     },
     {
       "key": {
+        "uuid": "45fada0d_245df343",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "c561fddf_0569ba53",
+      "range": {
+        "startLine": 127,
+        "startChar": 22,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e2c0312_d31787bb",
         "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
         "patchSetId": 5
@@ -980,6 +1964,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4169a0da_f6b4b24c",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e2c0312_d31787bb",
+      "range": {
+        "startLine": 131,
+        "startChar": 53,
+        "endLine": 131,
+        "endChar": 67
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1006,6 +2014,30 @@
     },
     {
       "key": {
+        "uuid": "36b2537b_09bbfdd5",
+        "filename": "modules/audio_processing/aec3/erle_correction_factor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab3c6ea0_8d9fe3fa",
+      "range": {
+        "startLine": 134,
+        "startChar": 44,
+        "endLine": 134,
+        "endChar": 62
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be5ae0bd_1c987414",
         "filename": "modules/audio_processing/aec3/erle_estimator.h",
         "patchSetId": 5
@@ -1023,6 +2055,24 @@
     },
     {
       "key": {
+        "uuid": "9d33a199_faba2100",
+        "filename": "modules/audio_processing/aec3/erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "be5ae0bd_1c987414",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcdd6122_e0b982ce",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1034,6 +2084,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "Considering how much more now is done in this class I think the UpdateBands method need to be renamed.",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75e6e68e_a5c49a77",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "I have now simplified this class by moving the correction factor functionality away. That means that this class now behaves exactly as it did before this CL. I think that helps the naming issues as well.",
+      "parentUuid": "dcdd6122_e0b982ce",
       "range": {
         "startLine": 84,
         "startChar": 4,
@@ -1069,6 +2143,30 @@
     },
     {
       "key": {
+        "uuid": "ec29ff98_042e3da7",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "the new code also improves in relation to that.",
+      "parentUuid": "9fcd5bab_ce4e6980",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "550142b2_cb5d579a",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1083,6 +2181,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf7fbe1f_9c7eecc1",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "550142b2_cb5d579a",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1109,6 +2225,30 @@
     },
     {
       "key": {
+        "uuid": "ca20f2a6_c0ec104e",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2828b836_c1c1360c",
+      "range": {
+        "startLine": 120,
+        "startChar": 41,
+        "endLine": 120,
+        "endChar": 54
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46d9325e_b54a2075",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1120,6 +2260,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "The behavior becomes quite different from the onset detection. With the current code, the ERLE onset detection is delayed until a sufficient number of points is present in accum_spectra (and the spectrum is nonzero.\nThat, in combination with that the coming_onset flag is sticky will cause the onset detection to no longer occur on onsets, which is very different from how it was before, and also seems wrong from the way that the erle_onsets is specified to work.",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 25
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "624eeff0_546f2faf",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "as we discuss offline, this is not changing in this CL.",
+      "parentUuid": "46d9325e_b54a2075",
       "range": {
         "startLine": 123,
         "startChar": 12,
@@ -1155,6 +2319,30 @@
     },
     {
       "key": {
+        "uuid": "cb56fe82_9912a7f9",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "discussed offline.",
+      "parentUuid": "a9e45c4a_1132128f",
+      "range": {
+        "startLine": 124,
+        "startChar": 29,
+        "endLine": 124,
+        "endChar": 34
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "181c44fd_a66a5660",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1166,6 +2354,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "Probably this computation should be moved to the method DecreaseErlePerBandForLowRenderSignals.",
+      "range": {
+        "startLine": 125,
+        "startChar": 10,
+        "endLine": 125,
+        "endChar": 22
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d12ce93e_0c69c343",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "as discussed offline we might leave this refactoring for a different moment as it is not fully clear what would it be the best approach.",
+      "parentUuid": "181c44fd_a66a5660",
       "range": {
         "startLine": 125,
         "startChar": 10,
@@ -1201,6 +2413,30 @@
     },
     {
       "key": {
+        "uuid": "2e4ebfb2_1f914846",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c75773dd_e928eb85",
+      "range": {
+        "startLine": 131,
+        "startChar": 23,
+        "endLine": 131,
+        "endChar": 37
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa09c950_bc2917cb",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1224,6 +2460,30 @@
     },
     {
       "key": {
+        "uuid": "5e9b1c5a_1858d00a",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fa09c950_bc2917cb",
+      "range": {
+        "startLine": 155,
+        "startChar": 27,
+        "endLine": 155,
+        "endChar": 64
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "794a3b9f_506fa447",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1238,6 +2498,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "670b4f3f_cba54541",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "794a3b9f_506fa447",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1258,6 +2536,24 @@
     },
     {
       "key": {
+        "uuid": "8b18ae62_f0e83b75",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "17b526f8_d65577b7",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e26e8988_4b018264",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
         "patchSetId": 5
@@ -1269,6 +2565,30 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "This condition is very strange if we would assume that update_on_low_render is false. It will only be true if, and exactly if, X2[k] \u003c aec3::kX2BandEnergyThreshold.\n\nThat would in turn mean that anything that uses low_render_energy_ will basically always get low_render_energy false, regardless of whether the energy is low. Is this intended?",
+      "range": {
+        "startLine": 192,
+        "startChar": 6,
+        "endLine": 192,
+        "endChar": 24
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24fa4123_1abdf63d",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "yes, it is intended. I have modified the code and added a comment to make it clearer.",
+      "parentUuid": "e26e8988_4b018264",
       "range": {
         "startLine": 192,
         "startChar": 6,
@@ -1298,6 +2618,24 @@
     },
     {
       "key": {
+        "uuid": "f8320ca5_3b17e7f2",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9f20c6a3_16d8a48d",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "651f54b9_92ecd6e4",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
         "patchSetId": 5
@@ -1318,6 +2656,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1454adba_1d8e67df",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "651f54b9_92ecd6e4",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1344,6 +2706,30 @@
     },
     {
       "key": {
+        "uuid": "69cfe224_8c557ce9",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a226400_715334b9",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 37
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5874c389_4ab3e7bd",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
         "patchSetId": 5
@@ -1364,6 +2750,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d384328d_fea9692e",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5874c389_4ab3e7bd",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1407,6 +2817,30 @@
     },
     {
       "key": {
+        "uuid": "ce21b4e2_3fd81683",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "as discussed offline, this method has been removed.",
+      "parentUuid": "a9f40831_a065a841",
+      "range": {
+        "startLine": 91,
+        "startChar": 15,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b54b9232_35e5f82f",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
         "patchSetId": 5
@@ -1418,6 +2852,24 @@
       "writtenOn": "2018-11-11T20:40:54Z",
       "side": 1,
       "message": "According to https://google.github.io/styleguide/cppguide.html#General_Naming_Rules abbreviatoins should be avoided. \n\nEven though the abbreviation n maybe is a bordercase, I think the name n_active_groups does not properly explain the content of the variable so please look into changing it to be more descriptive.",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eda0ca5_a8a52664",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "these variables are now moved to a place where their meaning is more easily deducted from their surrounded context.",
+      "parentUuid": "b54b9232_35e5f82f",
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -1447,6 +2899,30 @@
     },
     {
       "key": {
+        "uuid": "25937f7b_e35dbad0",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f2b12548_d1c5c13e",
+      "range": {
+        "startLine": 102,
+        "startChar": 40,
+        "endLine": 102,
+        "endChar": 63
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1628e691_c0101fbc",
         "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
         "patchSetId": 5
@@ -1461,6 +2937,24 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0832ac6b_9fb91f74",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1628e691_c0101fbc",
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1484,6 +2978,30 @@
       "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e474239_06fb9498",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-14T14:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bc605d2a_0367a303",
+      "range": {
+        "startLine": 268,
+        "startChar": 70,
+        "endLine": 268,
+        "endChar": 78
+      },
+      "revId": "39181fc12bf8c9e46c3b1c9db88d7050c9d24e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
