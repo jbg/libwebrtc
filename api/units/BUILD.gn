@@ -8,6 +8,18 @@
 
 import("../../webrtc.gni")
 
+rtc_source_set("unit_base") {
+  visibility = [ ":*" ]
+  sources = [
+    "unit_base.h",
+  ]
+
+  deps = [
+    "../../rtc_base:checks",
+    "../../rtc_base:safe_conversions",
+  ]
+}
+
 rtc_source_set("data_rate") {
   visibility = [ "*" ]
   sources = [
@@ -18,8 +30,8 @@ rtc_source_set("data_rate") {
   deps = [
     ":data_size",
     ":time_delta",
+    ":unit_base",
     "../../rtc_base:checks",
-    "../../rtc_base:safe_conversions",
     "../../rtc_base:stringutils",
   ]
 }
@@ -32,8 +44,8 @@ rtc_source_set("data_size") {
   ]
 
   deps = [
+    ":unit_base",
     "../../rtc_base:checks",
-    "../../rtc_base:safe_conversions",
     "../../rtc_base:stringutils",
   ]
 }
@@ -46,8 +58,8 @@ rtc_source_set("time_delta") {
   ]
 
   deps = [
+    ":unit_base",
     "../../rtc_base:checks",
-    "../../rtc_base:safe_conversions",
     "../../rtc_base:stringutils",
   ]
 }
@@ -61,8 +73,8 @@ rtc_source_set("timestamp") {
 
   deps = [
     ":time_delta",
+    ":unit_base",
     "../../rtc_base:checks",
-    "../../rtc_base:safe_conversions",
     "../../rtc_base:stringutils",
   ]
 }
@@ -75,12 +87,14 @@ if (rtc_include_tests) {
       "data_size_unittest.cc",
       "time_delta_unittest.cc",
       "timestamp_unittest.cc",
+      "unit_base_unittest.cc",
     ]
     deps = [
       ":data_rate",
       ":data_size",
       ":time_delta",
       ":timestamp",
+      ":unit_base",
       "../../test:test_support",
     ]
   }

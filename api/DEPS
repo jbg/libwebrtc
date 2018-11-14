@@ -252,19 +252,7 @@ specific_include_rules = {
     "+modules/video_coding/include/video_codec_interface.h"
   ],
 
-  "data_rate\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
-  ],
-
-  "data_size\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
-  ],
-
-  "time_delta\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
-  ],
-
-  "timestamp\.h": [
+  "unit_base\.h": [
     "+rtc_base/numerics/safe_conversions.h",
   ],
 
