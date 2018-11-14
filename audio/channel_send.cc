@@ -554,10 +554,8 @@ void ChannelSend::Terminate() {
   // End of modules shutdown
 }
 
-int32_t ChannelSend::StartSend() {
-  if (channel_state_.Get().sending) {
-    return 0;
-  }
+void ChannelSend::StartSend() {
+  RTC_DCHECK(!channel_state_.Get().sending);
   channel_state_.SetSending(true);
 
   // Resume the previous sequence number which was reset by StopSend(). This
@@ -566,19 +564,12 @@ int32_t ChannelSend::StartSend() {
     _rtpRtcpModule->SetSequenceNumber(send_sequence_number_);
   }
   _rtpRtcpModule->SetSendingMediaStatus(true);
-  if (_rtpRtcpModule->SetSendingStatus(true) != 0) {
-    RTC_DLOG(LS_ERROR) << "StartSend() RTP/RTCP failed to start sending";
-    _rtpRtcpModule->SetSendingMediaStatus(false);
-    rtc::CritScope cs(&_callbackCritSect);
-    channel_state_.SetSending(false);
-    return -1;
-  }
+  RTC_CHECK(_rtpRtcpModule->SetSendingStatus(true) == 0);
   {
     // It is now OK to start posting tasks to the encoder task queue.
     rtc::CritScope cs(&encoder_queue_lock_);
     encoder_queue_is_active_ = true;
   }
-  return 0;
 }
 
 void ChannelSend::StopSend() {
@@ -713,47 +704,20 @@ void ChannelSend::OnUplinkPacketLossRate(float packet_loss_rate) {
   });
 }
 
-bool ChannelSend::EnableAudioNetworkAdaptor(const std::string& config_string) {
-  bool success = false;
-  audio_coding_->ModifyEncoder([&](std::unique_ptr<AudioEncoder>* encoder) {
-    if (*encoder) {
-      success =
-          (*encoder)->EnableAudioNetworkAdaptor(config_string, event_log_);
-    }
-  });
-  return success;
-}
-
-void ChannelSend::DisableAudioNetworkAdaptor() {
-  audio_coding_->ModifyEncoder([&](std::unique_ptr<AudioEncoder>* encoder) {
-    if (*encoder)
-      (*encoder)->DisableAudioNetworkAdaptor();
-  });
-}
-
-void ChannelSend::SetReceiverFrameLengthRange(int min_frame_length_ms,
-                                              int max_frame_length_ms) {
-  audio_coding_->ModifyEncoder([&](std::unique_ptr<AudioEncoder>* encoder) {
-    if (*encoder) {
-      (*encoder)->SetReceiverFrameLengthRange(min_frame_length_ms,
-                                              max_frame_length_ms);
-    }
-  });
-}
-
 void ChannelSend::RegisterTransport(Transport* transport) {
   rtc::CritScope cs(&_callbackCritSect);
   _transportPtr = transport;
 }
 
-int32_t ChannelSend::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
+// TODO(nisse): Delete always-true return value.
+bool ChannelSend::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
   // Deliver RTCP packet to RTP/RTCP module for parsing
   _rtpRtcpModule->IncomingRtcpPacket(data, length);
 
   int64_t rtt = GetRTT();
   if (rtt == 0) {
     // Waiting for valid RTT.
-    return 0;
+    return true;
   }
 
   int64_t nack_window_ms = rtt;
@@ -769,8 +733,7 @@ int32_t ChannelSend::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
     if (*encoder)
       (*encoder)->OnReceivedRtt(rtt);
   });
-
-  return 0;
+  return true;
 }
 
 void ChannelSend::SetInputMute(bool enable) {
@@ -783,24 +746,24 @@ bool ChannelSend::InputMute() const {
   return input_mute_;
 }
 
-int ChannelSend::SendTelephoneEventOutband(int event, int duration_ms) {
+bool ChannelSend::SendTelephoneEventOutband(int event, int duration_ms) {
   RTC_DCHECK_LE(0, event);
   RTC_DCHECK_GE(255, event);
   RTC_DCHECK_LE(0, duration_ms);
   RTC_DCHECK_GE(65535, duration_ms);
   if (!Sending()) {
-    return -1;
+    return false;
   }
   if (_rtpRtcpModule->SendTelephoneEventOutband(
           event, duration_ms, kTelephoneEventAttenuationdB) != 0) {
     RTC_DLOG(LS_ERROR) << "SendTelephoneEventOutband() failed to send event";
-    return -1;
+    return false;
   }
-  return 0;
+  return true;
 }
 
-int ChannelSend::SetSendTelephoneEventPayloadType(int payload_type,
-                                                  int payload_frequency) {
+bool ChannelSend::SetSendTelephoneEventPayloadType(int payload_type,
+                                                   int payload_frequency) {
   RTC_DCHECK_LE(0, payload_type);
   RTC_DCHECK_GE(127, payload_type);
   CodecInst codec = {0};
@@ -813,23 +776,20 @@ int ChannelSend::SetSendTelephoneEventPayloadType(int payload_type,
       RTC_DLOG(LS_ERROR)
           << "SetSendTelephoneEventPayloadType() failed to register "
              "send payload type";
-      return -1;
+      return false;
     }
   }
-  return 0;
+  return true;
 }
 
-int ChannelSend::SetLocalSSRC(unsigned int ssrc) {
-  if (channel_state_.Get().sending) {
-    RTC_DLOG(LS_ERROR) << "SetLocalSSRC() already sending";
-    return -1;
-  }
+void ChannelSend::SetLocalSSRC(unsigned int ssrc) {
+  RTC_DCHECK(!channel_state_.Get().sending);
+
   if (media_transport_) {
     rtc::CritScope cs(&media_transport_lock_);
     media_transport_channel_id_ = ssrc;
   }
   _rtpRtcpModule->SetSSRC(ssrc);
-  return 0;
 }
 
 void ChannelSend::SetMid(const std::string& mid, int extension_id) {
@@ -842,10 +802,10 @@ void ChannelSend::SetExtmapAllowMixed(bool extmap_allow_mixed) {
   _rtpRtcpModule->SetExtmapAllowMixed(extmap_allow_mixed);
 }
 
-int ChannelSend::SetSendAudioLevelIndicationStatus(bool enable,
-                                                   unsigned char id) {
+void ChannelSend::SetSendAudioLevelIndicationStatus(bool enable,
+                                                    unsigned char id) {
   _includeAudioLevelIndication = enable;
-  return SetSendRtpHeaderExtension(enable, kRtpExtensionAudioLevel, id);
+  SetSendRtpHeaderExtension(enable, kRtpExtensionAudioLevel, id);
 }
 
 void ChannelSend::EnableSendTransportSequenceNumber(int id) {
@@ -892,31 +852,26 @@ void ChannelSend::SetRTCPStatus(bool enable) {
   _rtpRtcpModule->SetRTCPStatus(enable ? RtcpMode::kCompound : RtcpMode::kOff);
 }
 
-int ChannelSend::SetRTCP_CNAME(const char cName[256]) {
-  if (_rtpRtcpModule->SetCNAME(cName) != 0) {
+void ChannelSend::SetRTCP_CNAME(absl::string_view c_name) {
+  // Note: SetCNAME() accepts a c string of length at most 255.
+  const std::string c_name_limited(c_name.substr(0, 255));
+  if (_rtpRtcpModule->SetCNAME(c_name_limited.c_str()) != 0) {
     RTC_DLOG(LS_ERROR) << "SetRTCP_CNAME() failed to set RTCP CNAME";
-    return -1;
   }
-  return 0;
 }
 
-int ChannelSend::GetRemoteRTCPReportBlocks(
-    std::vector<ReportBlock>* report_blocks) {
-  if (report_blocks == NULL) {
-    RTC_DLOG(LS_ERROR) << "GetRemoteRTCPReportBlock()s invalid report_blocks.";
-    return -1;
-  }
+std::vector<ReportBlock> ChannelSend::GetRemoteRTCPReportBlocks() {
+  std::vector<ReportBlock> report_blocks;
 
   // Get the report blocks from the latest received RTCP Sender or Receiver
   // Report. Each element in the vector contains the sender's SSRC and a
   // report block according to RFC 3550.
   std::vector<RTCPReportBlock> rtcp_report_blocks;
-  if (_rtpRtcpModule->RemoteRTCPStat(&rtcp_report_blocks) != 0) {
-    return -1;
-  }
+
+  _rtpRtcpModule->RemoteRTCPStat(&rtcp_report_blocks);
 
   if (rtcp_report_blocks.empty())
-    return 0;
+    return {};
 
   std::vector<RTCPReportBlock>::const_iterator it = rtcp_report_blocks.begin();
   for (; it != rtcp_report_blocks.end(); ++it) {
@@ -930,14 +885,14 @@ int ChannelSend::GetRemoteRTCPReportBlocks(
     report_block.interarrival_jitter = it->jitter;
     report_block.last_SR_timestamp = it->last_sender_report_timestamp;
     report_block.delay_since_last_SR = it->delay_since_last_sender_report;
-    report_blocks->push_back(report_block);
+    report_blocks.push_back(report_block);
   }
-  return 0;
+  return report_blocks;
 }
 
-int ChannelSend::GetRTPStatistics(CallSendStatistics& stats) {
+CallSendStatistics ChannelSend::GetRTCPStatistics() const {
   // --- RtcpStatistics
-
+  CallSendStatistics stats = {0};
   // --- RTT
   stats.rttMs = GetRTT();
 
@@ -955,7 +910,7 @@ int ChannelSend::GetRTPStatistics(CallSendStatistics& stats) {
   stats.bytesSent = bytesSent;
   stats.packetsSent = packetsSent;
 
-  return 0;
+  return stats;
 }
 
 void ChannelSend::SetNACKStatus(bool enable, int maxNumberOfPackets) {
