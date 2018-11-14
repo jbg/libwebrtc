@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "276a48c5_288a9a2a",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "Why is logging added?",
+      "range": {
+        "startLine": 13,
+        "startChar": 19,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "6b6d8d319f18cdbe87baa03cd216b98f72b96741",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

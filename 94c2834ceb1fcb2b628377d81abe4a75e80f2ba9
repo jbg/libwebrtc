@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6f9e1267_137ddce9",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "Why is this include added?",
+      "range": {
+        "startLine": 13,
+        "startChar": 26,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ccf3c46f_601719d9",
         "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
         "patchSetId": 2
@@ -190,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "e72cb5bd_5203ca36",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "I see.\nWhat about statically allocating the output_dir_ variable as\n\n#if WEBRTC_APM_DEBUG_DUMP \u003d\u003d 1\nconst char ApmDataDumper::output_dir_[SUFFICIENTLY_LARGE_LENGTH];\n#else\nconst char ApmDataDumper::output_dir_[1];\n#endif\n\nAnd use a bool to specify whether the output_dir_ has been set or not?\nThen you don\u0027t need to bother about the destruction. The maximum limit of the dir is not that nice but it will have close to zero cost in production, and during testing that size won\u0027t manner. Furthermore, a CHECK could ensure that no paths longer than that are passed.",
+      "parentUuid": "e92ce831_e770f2e0",
+      "range": {
+        "startLine": 61,
+        "startChar": 39,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932be16_fd57b71e",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 2
@@ -219,6 +266,93 @@
       "side": 1,
       "message": "True. I don\u0027t like it either and the correct way would be refactoring ApmAudioDump. As it is now, I don\u0027t see other options if we want a simple way to use ApmAudioDump.\n\nTo possibly make the solution of this CL acceptable without refactoring, I added the output directory string size member and in the .cc file there\u0027s a check that is likely to fail at runtime if the string pointer is not valid anymore and new data is written.\n\n[alternative option] We should refactor ApmAudioDump by instancing an ApmAudioDumpFactory in APM that is passed to its submodules. The factory knows whether dumps are active and the output directory - i.e., no need to have static fields and explicitly pass the params to each sub-module.\n\nSince (i) ApmAudioDump is not part of the APM API, (ii) no data dump code ends up in production and (iii) audioproc_f is a tool, I would tolerate this CL and avoid additional refactoring work for now. This would allow this CL to land and make audioproc_f compatible with downstream projects.",
       "parentUuid": "9932be16_fd57b71e",
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1812cd12_761a3cf9",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "I really think we should go at lengths to avoid something that could go wrong like that.\n \nEven though this won\u0027t go in production we rely on this tool for development and a dangling pointer is an unnecessary uncertainty.\n\nI don\u0027t like the check for the string size, as it does not at all prevent memory to be read that should not be read, and isn\u0027t really foolproof. \nFurthermore, in theory that could cause things to be written to unintended folders. With random memory access, that may happen, even though very unlikely. Another example is if the string passed in would be reused.\n\nI instead propose the above approach with a fix sized local copy. WDYT?",
+      "parentUuid": "51f3ea10_2945ce37",
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c9931e_f00b246d",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "What does this comment add that the code doesn\u0027t say? Please either remove it or, if needed, add a more descriptive comment text.",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 129,
+        "endChar": 30
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5e6375a_2259eaf3",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "Why this check?\nIf a folder is provided, but set as empty, it sounds like a mistake in the usage. I think then it would be better to CHECK on that.",
+      "range": {
+        "startLine": 132,
+        "startChar": 7,
+        "endLine": 132,
+        "endChar": 55
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dda1b988_0e6f7957",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-14T17:53:48Z",
+      "side": 1,
+      "message": "Is it even possible that settings.dump_internal_data_output_dir.has_value() and settings.dump_internal_data_output_dir-\u003eempty()?\n\nI think it would be better to add a separate check for settings.dump_internal_data_output_dir-\u003eempty() (but please check that it can even happen) and remove it from this check.",
+      "range": {
+        "startLine": 481,
+        "startChar": 20,
+        "endLine": 481,
+        "endChar": 49
+      },
       "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
