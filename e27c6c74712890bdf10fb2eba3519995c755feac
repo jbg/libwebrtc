@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "e499143c_a964d37a",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T17:29:01Z",
+      "side": 1,
+      "message": "It is going to be called twice: for every source (video/audio).",
+      "parentUuid": "1eddd128_3f3cb0af",
+      "range": {
+        "startLine": 502,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 3
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5159879f_27fd2131",
         "filename": "call/call.cc",
         "patchSetId": 8
@@ -117,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "23ee2113_2273fde0",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T17:29:01Z",
+      "side": 1,
+      "message": "It\u0027s a callback passed from JsepTransportController:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/jseptransportcontroller.cc?l\u003d780\u0026rcl\u003d76f9954b17a47623af6c1e5a538ff9bc31bbf96f\n\nI don\u0027t want to redesign the entire JsepTransportController, and I don\u0027t want to put more complexity into peerconnection (which merely passes that callback here). Someone somewhere needs to maintain the state, and right now it feels like Call is the best place to do so.",
+      "parentUuid": "5159879f_27fd2131",
+      "range": {
+        "startLine": 518,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 47
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e56361e6_256a7c00",
         "filename": "call/call.cc",
         "patchSetId": 8
@@ -128,6 +176,24 @@
       "writtenOn": "2018-11-14T16:21:33Z",
       "side": 1,
       "message": "No DCHECK here? Maybe add a TODO?",
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eb2dbcd_0408d9e1",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T17:29:01Z",
+      "side": 1,
+      "message": "No DCHECK, as there shouldn\u0027t be one. VideoConfig does not contain media transport at this point; so no todo at this point either. Anything video related will have to be done when video is integrated and video is generally todo (we don\u0027t leave \u0027todo: media transport video\u0027 whenever there is something that will be done in the video integration)",
+      "parentUuid": "e56361e6_256a7c00",
       "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -169,6 +235,30 @@
       "side": 1,
       "message": "I agree, to avoid confusion it may be worth having a separate function for media transport callback and always reschedule.",
       "parentUuid": "e0a14d07_c6daef87",
+      "range": {
+        "startLine": 1107,
+        "startChar": 0,
+        "endLine": 1111,
+        "endChar": 3
+      },
+      "revId": "e27c6c74712890bdf10fb2eba3519995c755feac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a2f2fa5_0cf01023",
+        "filename": "call/call.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T17:29:01Z",
+      "side": 1,
+      "message": "\u003e This should not be required and makes it unclear from where this comes from.\n\nThe fact it\u0027s unclear speaks to\n1) lack of comments\n2) lack of tests\n\nIt looks like when when we create the stream (add bitrate allocator observer) we verify that it happens on the same thread as the target rate observer (don\u0027t know much about sequence checker, this is my best guess). \n\nI added a comment stating that bitrate_allocator_ requires it. Maybe only call to bitrate allocator should be invoked on the worker queue, and not the entire callback -- but doing an entire callback is safer.\n\nI agree it\u0027s not clear why is it needed (it\u0027s not documented). It should be, and the interface should document if it requires callbacks to happen on specific thread (which it doesn\u0027t look like there is such a requirement). To me it looks like a bug that this callback requires a specific thread, but doesn\u0027t verify it.\n\n#\n# Fatal error in: third_party/webrtc/files/stable/webrtc/rtc_base/sequenced_task_checker_impl.cc, line 57\n# last system error: 1\n# Check failed: checker-\u003eCalledSequentially()\n...\n# *** SIGABRT received by PID 3695 (TID 3731) from PID 3695; stack trace: ***\n    @     0x7f9ec3721339        112  rtc::internal::SequencedTaskCheckerScope::SequencedTaskCheckerScope()\n    @     0x7f9ec478f7a6        992  webrtc::BitrateAllocator::AddObserver()\n\n\n\nAnton: I completely disagree: MediaTransportInterface uses the existing interface for TargetRateObsever (as we decided earlier in design discussions), and that interface does not specify the thread on which the callback should happen. It\u0027s callee responsibility to delegate it to the right thread, if it has any requirements.\n\nWe keep going back and forth whether we should redefine the TargetTransferRate callback and use a different one in WebRTC. I think the callback should specify a thread if one is required, if it doesn\u0027t specify it, then there is no requirement and callee should handle it. I also think we should not redefine the callback unless there is a really good reason to do so.\n\nWhat we can do is create a wrapper around the callback (ThreadSafeCallback), but that feels overly excessive for 3 lines of code which follow the pattern established in webrtc anyway (checking and delegating to the right thread).",
+      "parentUuid": "0cbb0100_a98a22bd",
       "range": {
         "startLine": 1107,
         "startChar": 0,
