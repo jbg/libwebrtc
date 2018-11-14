@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "fc9e2878_61836594",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-14T15:41:26Z",
+      "side": 1,
+      "message": "I was thinking, this single method is a small part of the MediaTransportInterface that happens to be implemented also by RtpTransportControllerSend. But with a different name. And it would be nice with same name and signature.\n\nI\u0027m also considering if we at some not too distant point should define some work-in-progress MediaTransportInterfacePartial that is inherited by both MediaTransportInterface and RtpTransportControllerSend, and which can be used for the coding wiring up this callback (in Call or in Call\u0027s owner).\n\nBut not essential in this cl.",
+      "parentUuid": "7cb88b72_0e4b5c75",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 3
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b245c2a5_0917dbf0",
         "filename": "call/call.cc",
         "patchSetId": 7
