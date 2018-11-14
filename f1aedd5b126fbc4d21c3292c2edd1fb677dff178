@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7cb88b72_0e4b5c75",
+        "filename": "api/test/fake_media_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "I don\u0027t know which part of that method you are referring to: Interface is abstract; and the implementation\n\n{\n    rtc::CritScope cs(\u0026observer_crit_);\n    RTC_DCHECK(observer_ \u003d\u003d nullptr);\n    observer_ \u003d observer;\n  }\n  send_side_cc_-\u003eRegisterNetworkObserver(this);\n\nIs completely different than what we have here:\n1) we don\u0027t delegate it further down to another observer\n2) we don\u0027t need to have it thread safe (do we? if we do we should add it).\n3) most importantly: we want to check some invariants (i.e. that you won\u0027t subscribe the same delegate twice) in tests.\n\nSo the only thing I can think of is to make it thread safe?",
+      "parentUuid": "4bf89814_ace21f87",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 3
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b245c2a5_0917dbf0",
         "filename": "call/call.cc",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "234712bd_973f939d",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "It should, my mistake.",
+      "parentUuid": "b245c2a5_0917dbf0",
+      "range": {
+        "startLine": 229,
+        "startChar": 7,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfc96e2f_36a09f8e",
         "filename": "call/call.cc",
         "patchSetId": 7
@@ -68,6 +116,30 @@
       "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "921a3c7b_72cef493",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "This is where we enter muddy waters:\n* Currently we only allow one media transport for the entire peer connection\n* So we require bundling\n* The behavior is undefined when we have more than one transport.\n\nIt should be called with non-null argument at most once, and if it was called with non-null argument, it has to be called with a null argument once.\n\nAdded this comment.",
+      "parentUuid": "bfc96e2f_36a09f8e",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 54
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "0857a727_44caa89d",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "SGTM! It will require to acquire the same lock twice, but I guess that\u0027s ok.",
+      "parentUuid": "e5643d7b_fc77a97a",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a20d3c3f_57087daf",
         "filename": "call/call.cc",
         "patchSetId": 7
@@ -120,6 +210,24 @@
       "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d187ac6_0f926595",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "Ok. But then if we set it here, why wouldn\u0027t we just subscribe to rate observer here (as I had it when we were discussing it)? We would need RegisterRateObserver here (and keep it in CreateAudioStream)",
+      "parentUuid": "a20d3c3f_57087daf",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "b96e1eb8_f26593e1",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "e2203de6_e91c42c1",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae4d64ed_b11e3ad5",
         "filename": "call/call.cc",
         "patchSetId": 7
@@ -154,6 +280,24 @@
       "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbfed4f7_7fe9fda2",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "No media transport in videosendstream config yet.",
+      "parentUuid": "ae4d64ed_b11e3ad5",
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "806b4f2d_1265d3ab",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "it is, but it makes the call::OnTargetTransferRate require it, because it invokes bitrate allocator. Updated comment.",
+      "parentUuid": "bf9ed744_8eca3795",
+      "range": {
+        "startLine": 1090,
+        "startChar": 1,
+        "endLine": 1092,
+        "endChar": 72
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7188f8b9_1e2035f7",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 7
@@ -200,6 +368,30 @@
       "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "399cc1ce_de431d15",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 6576,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-14T15:31:36Z",
+      "side": 1,
+      "message": "Removed. Remnants of some extra checks that I removed.\n\nRe guarantees: we put DCHECKS all over the place ;) But realistically, if there is only one mid, there is only one media transport. \n\nIf bundling was disabled there would be more, and DCHECKs would fire.",
+      "parentUuid": "7188f8b9_1e2035f7",
+      "range": {
+        "startLine": 6576,
+        "startChar": 2,
+        "endLine": 6576,
+        "endChar": 68
+      },
+      "revId": "f1aedd5b126fbc4d21c3292c2edd1fb677dff178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
