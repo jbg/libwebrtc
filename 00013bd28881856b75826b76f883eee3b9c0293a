@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "feb1ce6a_b5a1a897",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "auto* ?",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ca5f05a_e17375fe",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "max_packets",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2d48588_0cc67117",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "Does client of ChannelReceiveInterface need to know about the implementation also being a  MediaTransportAudioSinkInterface? That was not the case with the proxy.",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d22179_4137baa5",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "nit: no line break needed",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a682c96_40449604",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "delay_ms",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d10803e_0be44b4d",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "Use uint32_t",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "177e0699_09809e44",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "nit: no line break needed",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a7acea6_ce9bbb63",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "max_packets",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "111e0226_eef6f7d3",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "comment is wrong, this does not implement an interface",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c8615ac_7fbfdd8a",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "Now that we have the interface, could you also move this class definition into the .cc and hide the details behind a create method?",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47108209_92d02525",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "can we remove comment? VoENetwork is long gone",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e902dbb3_d70408c0",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "Which sub class of ChannelReceive needs to call Terminate()?",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1556724b_4479aecc",
+        "filename": "audio/mock_voe_channel_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T09:23:28Z",
+      "side": 1,
+      "message": "I don\u0027t see where this is needed?",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
