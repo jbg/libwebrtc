@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93b6d8fb_4d440183",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-11-15T13:23:44Z",
+      "side": 1,
+      "message": "string.h is for memcpy and strcat. std::string is in \u003cstring\u003e. I think you need both.",
+      "range": {
+        "startLine": 16,
+        "startChar": 10,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f1bbe99_2cba2fb5",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-11-15T13:23:44Z",
+      "side": 1,
+      "message": "Why static? Should all debug dumps dump to a single directory?",
+      "range": {
+        "startLine": 265,
+        "startChar": 2,
+        "endLine": 265,
+        "endChar": 25
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
