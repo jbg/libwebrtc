@@ -14,7 +14,7 @@
 
 namespace webrtc {
 
-std::string ToString(const DataSize& value) {
+std::string ToString(const DataSize value) {
   char buf[64];
   rtc::SimpleStringBuilder sb(buf);
   if (value.IsInfinite()) {

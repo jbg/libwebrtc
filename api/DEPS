@@ -253,19 +253,19 @@ specific_include_rules = {
   ],
 
   "data_rate\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
+    "+rtc_base/units/unit_base.h",
   ],
 
   "data_size\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
+    "+rtc_base/units/unit_base.h",
   ],
 
   "time_delta\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
+    "+rtc_base/units/unit_base.h",
   ],
 
   "timestamp\.h": [
-    "+rtc_base/numerics/safe_conversions.h",
+    "+rtc_base/units/unit_base.h",
   ],
 
   "i010_buffer\.h": [
