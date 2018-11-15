@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "a04e54e0_dc3715e0",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:46:22Z",
+      "side": 1,
+      "message": "A DCHECK in SetSendRtpHeaderExtension() could be the right thing, or convert to an appropriate type throughout the call chain. However, I\u0027d keep it as an int since the range is 0-15, not 0-255, and making it an int here at least makes it similar to the other header extension setters.",
+      "parentUuid": "7dacb550_efa7a1fd",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bdc080e7_51fcfde8",
         "filename": "audio/channel_send.cc",
         "patchSetId": 5
@@ -428,6 +446,24 @@
       "side": 1,
       "message": "Not done yet, see comment on .cc file.",
       "parentUuid": "503aa88d_4d7725f4",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab9d9e59_91db7278",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:46:22Z",
+      "side": 1,
+      "message": "Use int to make the code consistent. The 8-bit range implied here is no more correct anyway. The ID need to be checked against the 0-15 range of 1-byte header extensions but I think it is better to do that on parsing, or in the map where we store them (or rather, change that map to use int as well).",
+      "parentUuid": "e4f23e9e_dcfc4768",
       "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true

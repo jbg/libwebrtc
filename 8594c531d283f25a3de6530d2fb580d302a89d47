@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df2346f0_2249f25f",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:46:22Z",
+      "side": 1,
+      "message": "But now this is stripped from release builds...",
+      "revId": "8594c531d283f25a3de6530d2fb580d302a89d47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
