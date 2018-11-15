@@ -13,14 +13,17 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 #if WEBRTC_APM_DEBUG_DUMP == 1
 #include <unordered_map>
 #endif
 
+#include "absl/types/optional.h"
 #include "api/array_view.h"
 #if WEBRTC_APM_DEBUG_DUMP == 1
 #include "common_audio/wav_file.h"
+#include "rtc_base/checks.h"
 #endif
 #include "rtc_base/constructormagic.h"
 
@@ -31,6 +34,9 @@
 #endif
 
 namespace webrtc {
+namespace internal {
+constexpr size_t kOutputDirMaxLength = 1024;
+}  // namespace internal
 
 #if WEBRTC_APM_DEBUG_DUMP == 1
 // Functor used to use as a custom deleter in the map of file pointers to raw
@@ -54,6 +60,18 @@ class ApmDataDumper {
   static void SetActivated(bool activated) {
 #if WEBRTC_APM_DEBUG_DUMP == 1
     recording_activated_ = activated;
+#endif
+  }
+
+  // Set an optional output directory.
+  static void SetOutputDirectory(
+      const absl::optional<std::string>& output_dir) {
+#if WEBRTC_APM_DEBUG_DUMP == 1
+    if (output_dir.has_value() && !output_dir->empty()) {
+      output_dir_size_ = output_dir->size();
+      RTC_CHECK_LT(output_dir_size_, internal::kOutputDirMaxLength);
+      strncpy(output_dir_, output_dir->c_str(), output_dir_size_);
+    }
 #endif
   }
 
@@ -244,6 +262,8 @@ class ApmDataDumper {
  private:
 #if WEBRTC_APM_DEBUG_DUMP == 1
   static bool recording_activated_;
+  static char output_dir_[internal::kOutputDirMaxLength];
+  static size_t output_dir_size_;
   const int instance_index_;
   int recording_set_index_ = 0;
   std::unordered_map<std::string, std::unique_ptr<FILE, RawFileCloseFunctor>>
