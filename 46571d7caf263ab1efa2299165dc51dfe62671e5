@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8930df4_54d17b23",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T07:49:13Z",
+      "side": 1,
+      "message": "I\u0027d prefer rtc::TimeMillis, and please int64_t for all absolute timestamps. I\u0027m not familiar with what backs rtc_base/timeutils on windows (looks like it\u0027s timeGetTime returning a 32-bit DWORD, plus some logic to deal with wraparound). On posix systems, it\u0027s backed by clock_gettime(CLOCK_MONOTONIC, ...), which typically measures time since boot.\n\nWhich means that the comparison operator of DelayedEntryTimeout will get unreliable due to wraparound after an uptime of about 49 days, if I get the numbers right.",
+      "range": {
+        "startLine": 219,
+        "startChar": 17,
+        "endLine": 219,
+        "endChar": 30
+      },
+      "revId": "46571d7caf263ab1efa2299165dc51dfe62671e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0885802c_bad5d8a4",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T07:49:13Z",
+      "side": 1,
+      "message": "Might be clearer to have this function only call\n\n  me-\u003eProcessTasks()\n\nwhere ProcessTasks is a normal (private) method that has a this pointer.",
+      "range": {
+        "startLine": 287,
+        "startChar": 1,
+        "endLine": 288,
+        "endChar": 63
+      },
+      "revId": "46571d7caf263ab1efa2299165dc51dfe62671e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b49e18a8_9d1a8179",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T07:49:13Z",
+      "side": 1,
+      "message": "Add an explicit .load().\n\nBut since we call GetNextTask anyway, which acquires a lock, maybe let this flag be protected by the same lock, instead of using an std::atomic. And let GetNextTask examine the flag and return something special when it\u0027s time to shutdown. (Yet another alternative is to delete the flag and instead add a magic value at the front of the pending_queue_, but a separate flag might be clearer).",
+      "range": {
+        "startLine": 306,
+        "startChar": 12,
+        "endLine": 306,
+        "endChar": 31
+      },
+      "revId": "46571d7caf263ab1efa2299165dc51dfe62671e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8597f68a_19556cc6",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T07:49:13Z",
+      "side": 1,
+      "message": "It always makes my head spin when thinking about the possible sequences of events. If there\u0027s some easy explanation on how NotifyWake is used and why it reliable wakes the thread up in all cases, it would be helpful to document it here.",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 36
+      },
+      "revId": "46571d7caf263ab1efa2299165dc51dfe62671e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
