@@ -1,0 +1,1043 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da0691f4_aef17b5b",
+        "filename": "modules/audio_processing/aec3/erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Would it make sense to only make this call if use_signal_dependent_erle_\u003d\u003dtrue?",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7e6cd31_27ad49ba",
+        "filename": "modules/audio_processing/aec3/erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Extra space beetween \"\u003e \u003e\"?",
+      "range": {
+        "startLine": 43,
+        "startChar": 69,
+        "endLine": 43,
+        "endChar": 70
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49bb5f4d_c104dcb9",
+        "filename": "modules/audio_processing/aec3/erle_estimator_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This will cause the test to be dependent on randomized data which in turn could cause it to be flaky. Please instead see if the same test can be accomplished with non-random data.",
+      "range": {
+        "startLine": 48,
+        "startChar": 5,
+        "endLine": 48,
+        "endChar": 24
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe4ffce_63d8c44f",
+        "filename": "modules/audio_processing/aec3/erle_estimator_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "A test needs to be added for testing the new functionality added in this CL. As it is now, num_sections is by default 1 which means that it is deactivated and not at all tested by this test.\n\nAt the least, a crash test is needed I think, i.e., a test that runs the code for a while using different combinations of filter_length and num_sections to ensure that nothing crashes and that the memory and address sanitizers are properly testing the code.",
+      "range": {
+        "startLine": 95,
+        "startChar": 5,
+        "endLine": 95,
+        "endChar": 18
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b590d1d0_31940c9b",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This constant is only used on line 239. Please move it there, as having the constant closer to where it is use will improve the code locality and readability since\n1. It will clearly show that it only is used there.\n2. It will be easy to check what the actual value of the constant is when reading the code.",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f63de14d_a639dad7",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "These two constants are only used in the method UpdateCorrectionFactors. Please move them into that.",
+      "range": {
+        "startLine": 30,
+        "startChar": 16,
+        "endLine": 30,
+        "endChar": 38
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a70ad70_933c5196",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Please rename it with the constant naming format, and remove the trailing_",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 21
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65e9d2b3_4fdb0d34",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "DefineFilterSectionSizes defines\n-\u003e\nDefines",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5761e48_39c9cd7e",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "splitted -\u003e split",
+      "range": {
+        "startLine": 37,
+        "startChar": 57,
+        "endLine": 37,
+        "endChar": 65
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dfeeec8_5d4fcc23",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "non\nlinear\n-\u003e non-linear",
+      "range": {
+        "startLine": 37,
+        "startChar": 71,
+        "endLine": 37,
+        "endChar": 74
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d4c8145_4d81fb46",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "so lower -\u003e so that lower",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 24
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10837cca_c32f49cf",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Since this refer to the estimated filter, the low and high description is a bit nonintuitive (low and high frequencies are clear but I don\u0027t think there is nothing high with the later part of the filter)\n\nWhat about early and late, or first and last, or beginning and end?",
+      "range": {
+        "startLine": 39,
+        "startChar": 35,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7128bdc_72c6dd45",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This method is only used in the constructor in the manner\n\nstd::vector\u003csize_t\u003e section_sizes(num_sections_);\nDefineFilterSectionSizes(...,section_sizes);\n\nPlease instead change it to return a vector\u003csize_t\u003e as \nstd::vector\u003csize_t\u003e section_sizes \u003d DefineFilterSectionSizes(...,section_sizes);\n\nThat will require less code, have the same complexity, and would avoid any uncertainties that estimator_sizes_blocks has the correct length (which otherwise would need to be checked).",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 29
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c7c25b8_22498c97",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "The output name does not match the function name (the method states that filter sections sizes are defined but what is output is estimator_sizes). It would be good to have a uniform naming. \n\nMy guess is that the right choice would be to change estimators to section_sizes?",
+      "range": {
+        "startLine": 43,
+        "startChar": 53,
+        "endLine": 43,
+        "endChar": 75
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eade4fa_4659aa4c",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "remaining_blocks / remaining_estimators \u003e estimator_size\nshould be identical to\nremaining_blocks  \u003e estimator_size * remaining_estimators\n\nwhich would eliminate divisions and the risk of division by zero.",
+      "range": {
+        "startLine": 49,
+        "startChar": 9,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b7d1f6_e809e411",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Sufficient checks for the size of estimator_sizes_blocks are missing,  if you choose the suggested approach above, \nWith the current checks, there is nothing preventing the assignments at lines 60 and 62 to write outside of the array.",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd0a15b_08a431c6",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Are you sure that this won\u0027t wrap (since the variables all are unsigned). If ok, please add a DCHECK.\n\n(what I mean is whether the value remaining_blocks - last_groups_size * remaining_estimators is guaranteed not to be negative and wrap)",
+      "range": {
+        "startLine": 63,
+        "startChar": 25,
+        "endLine": 63,
+        "endChar": 41
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f1d7482_2ba79dcf",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "The method name is already stated below, and there is only one output, so there is no need to state it in the comment.\n\nWhat about\n// SetSectonsBoundaries writes the block number limits for each filter section                                                                           \n// in the ArrayView estimator_boundaries_blocks.\n-\u003e\n// Forms the limits in blocks for each filter section.",
+      "range": {
+        "startLine": 66,
+        "startChar": 3,
+        "endLine": 66,
+        "endChar": 23
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7d39376_b7e30531",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Since this is used in the constructor, let this return a vector, instead of pre-allocating the vector and then passing it as an output variable via an array-view.",
+      "range": {
+        "startLine": 68,
+        "startChar": 5,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc4498ee_4687ed5a",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This code will crash for certain combinations of num_blocks and sizes of estimator_boundaries_blocks (for instance num_blocks\u003d2 and estimator_boundaries_blocks.size()\u003d1)\n\nI think you can avoid the complicated handling of ensuring that incorrect combinations of these are handled correctly by moving the call to DefineFilterSectionSizes into this method.\n\nAlso, I have a feeling that the information in estimator_sizes_blocks is very redundant. The behavior of that is quite hardcoded to powers of 2 apart from the last elements, and below estimator_sizes_blocks is indexed in a linear manner.",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5d7cd0a_5c33dd52",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "contributes -\u003e contribute",
+      "range": {
+        "startLine": 115,
+        "startChar": 28,
+        "endLine": 115,
+        "endChar": 39
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15dae39f_0f66368d",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Since section_sizes is only used as an input to SetSectionsBoundaries form the boundaries I think it is better to put it inside the SetSectionsBoundaries method. That would also make it more clear how the inputs to DefineFilterSectionSizes and SetSectionsBoundaries should be matched for this to work.",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 26
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e1f7305_f25d4dfc",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "// The method GetNumberOfActiveFilterSections estimates which region of the\n// linear filter is responsible for getting the majority of the echo estimate\n// energy. That estimation is returned as the number of filter sections that are\n// used for reaching such energy target.\n\n-\u003e?\n// Estimates for each band the smallest number of sections in the filter that together constitute 90% of the estimated echo energy.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 40
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "575aaf16_a961a96f",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Is this needed? On line 147 there is an early return if num_sections_ \u003d\u003d 1.\n\nPlease instead DCHECK on num_sections \u003e 1",
+      "range": {
+        "startLine": 194,
+        "startChar": 6,
+        "endLine": 194,
+        "endChar": 19
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e109f0fc_2de28d9e",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "of the echo estimate energy\n-\u003e\nenergy in the echo estimate.",
+      "range": {
+        "startLine": 203,
+        "startChar": 24,
+        "endLine": 203,
+        "endChar": 51
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a148153_705d30d3",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This method is basically a one-liner. Please move it to line 167 and change that to\nfloat correction_factor \u003d correction_factors_[n_active_sections[k]][k];",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62ebe18d_82fea9e7",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This is called in GetCorrectionFactor which in turn is called within a loop. That means that nested loops are used for the mapping of band to subband.\nIt feels overly complex to re-do the same mapping for all incoming blocks when that mapping is known at design time, as bands_boundaries_ is a predefined constant.\n\nI\u0027d suggest changing this with a tabularized mapping such as\nkBandToSubband[65] \u003d [ 1,1,1,1,2,2,2,2, ....]",
+      "range": {
+        "startLine": 215,
+        "startChar": 37,
+        "endLine": 215,
+        "endChar": 50
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b5a61b_119dba30",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "What about moving the banding to a separate loop. That is quite expensive, and furthermore very simple to optimize using SIMD, so it is good to prepare the code for that.\n\nauto band \u003d [](rtc::ArrayView\u003cconst size_t\u003e bands_boundaries,\n               rtc::ArrayView\u003cconst float\u003e X2,\n               rtc::ArrayView\u003cfloat\u003e X2_banded) {\n     X2.fill(0.f);\n     size_t start \u003d bands_boundaries[0];\n     size_t stop \u003d bands_boundaries[1];\n     for (size_t subband \u003d 0; subband \u003c kSubbands; ++subband) {\n       X2[subband] \u003d std::accumulate(X2.begin() + start,\n                                     X2.begin() + stop, 0.f);\n       start \u003d stop;\n       stop \u003d bands_boundaries_[subband + 1];\n     }\n};\n \nstd::array\u003cfloat, kSubbands\u003e X2_subbands \u003d band(bands_boundaries_, X2, X2_subbands);\nstd::array\u003cfloat, kSubbands\u003e E2_subbands \u003d band(bands_boundaries_, E2, E2_subbands);\nstd::array\u003cfloat, kSubbands\u003e Y2_subbands \u003d band(bands_boundaries_, Y2, Y2_subbands);",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 74
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0df01fdd_65546589",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Move \nfloat new_erle \u003d Y2_subband / E2_subband;\nto outside of the for-loop and do it on all subbands in a vectorized manner. That is an operation that can be done using SIMD.",
+      "range": {
+        "startLine": 243,
+        "startChar": 23,
+        "endLine": 243,
+        "endChar": 33
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e98a6ba4_4b9b4367",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This is a min-operation, right? In that case, use min_element instead.\nAlso, since that is parallelizable, and has the same scheme as the computation of X2_subbands, it would be nice to move it there and compute all indices at once.",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b24e9ace_5afa4db8",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "The computation of erle_ref and erle_estimators seems independent. I think moving them to separate loops would simplify the code flow and also give more optimized code.",
+      "range": {
+        "startLine": 267,
+        "startChar": 6,
+        "endLine": 271,
+        "endChar": 66
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "159deaab_1e0b6a80",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "If you move this to a separate loop, the large loop will be shorter and likely simpler to optimize",
+      "range": {
+        "startLine": 274,
+        "startChar": 6,
+        "endLine": 285,
+        "endChar": 7
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7e9da8d_b28632b0",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This is a triple-nested loop which means that it is highly complex and should be optimized as far as possible.\nI think this could be more efficient and easier to optimize if done like this\n\nsize_t start_block \u003d section_boundaries_blocks_[0];\nsize_t end_block \u003d section_boundaries_blocks_[1];\nfor (size_t section \u003d 0; section \u003c num_sections_; ++section) {\n    std::array\u003cfloat, kFftLengthBy2Plus1\u003e X2_section;\n    std::array\u003cfloat, kFftLengthBy2Plus1\u003e H2_section;\n    X2_section.fill(0.f);\n    H2_section.fill(0.f);\n    for (size_t block \u003d start_block; block\u003c end_block; ++block) {\n      std::transform(X2_section.begin(),\n                     X2_section.end(),\n                     spectrum_render_buffer.buffer[idx_render].begin(),\n                     X2_section.begin(), std::add);               \n      std::transform(H2_section.begin(),\n                     H2_section.end(),\n                     filter_frequency_response[block].begin(),\n                     H2_section.begin(), std::add);         \n      idx_render \u003d spectrum_render_buffer.IncIndex(idx_render);\n    }\n    std::transform(X2_section[section].begin(), X2_section[section].end(),\n                   H2_section[section].begin(),\n                   S2_section_accum_[section].begin(), std::multiply);\n \n     end_block \u003d section_boundaries_blocks_[section+ 2];    \n     start_block \u003d end_block;\n}",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7ff6f40_4247cd32",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This can be done using std::accumulate.",
+      "range": {
+        "startLine": 325,
+        "startChar": 4,
+        "endLine": 327,
+        "endChar": 5
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6743133b_eac5a5f6",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This is probably less complex\n for (size_t k \u003d 0; k \u003c kFftLengthBy2Plus1; ++k) {\n    int section \u003d static_cast\u003cint\u003e(num_sections_);\n    float target \u003d 0.9f * S2_section_accum_[num_sections_ - 1][k];\n    while (section \u003e 1 \u0026\u0026 S2_section_accum_[section-1][k]\u003e target) {\n      number_active_filter_sections[k] \u003d --section;\n    }\n  }",
+      "range": {
+        "startLine": 333,
+        "startChar": 18,
+        "endLine": 333,
+        "endChar": 24
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d35f1b34_66e86686",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "I think the description could be a bit more detailed. For instance, I think the input signal in this case is only the render signal, right? And since a more refined estimate is mentioned, it would also make sense to state what it is that it compared to is more refined.",
+      "range": {
+        "startLine": 25,
+        "startChar": 58,
+        "endLine": 25,
+        "endChar": 63
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6797ba6_90a83222",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Would it be possible to add a unittest for this class?\nAt the least, it would be good to have a crash-test that iterates through the allowed parameter ranges for the relevant parameters in the config.",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dc62b1b_c776dba8",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "gets -\u003e returns ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 5,
+        "endLine": 35,
+        "endChar": 9
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85d94959_d51cb8c1",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Could you rename erle_in to something which describes what it is. erle_in is weird because there is no erle_out, and the declaration already states that it is an input.\nWhat about average_erle, or steady_state_erle?",
+      "range": {
+        "startLine": 52,
+        "startChar": 42,
+        "endLine": 52,
+        "endChar": 49
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99284149_ca34c3a8",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Please make this private since this is not used outside of the class.",
+      "range": {
+        "startLine": 57,
+        "startChar": 26,
+        "endLine": 57,
+        "endChar": 35
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7b36631_5cacde76",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This has a side effect, right? Maybe not pre-fix it with Get since it is not a classic getter?",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 38
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55f58f4e_864b7dce",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "As above, this has a side-effect, right?",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 27
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f87fcd2e_3fa75ff8",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Is this blocks?",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 29,
+        "endChar": 23
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb6cf29a_869634b0",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Since onset_detection is true or false for all loop elements the complexity is quite a lot lower if onset_detection\u003d\u003dfalse is treated separately",
+      "range": {
+        "startLine": 94,
+        "startChar": 10,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "788732a8_c35ae7d6",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "This can be made slightly more efficient\n  auto\u0026 st \u003d accum_spectra_;\n\n  if (adapt_on_low_render_) {\n    if (st.num_points_[0] \u003d\u003d kPointsToAccumulate) {\n      st.num_points_[0] \u003d 0;\n\t st.Y2_.fill(0.f);\n      st.E2_.fill(0.f);\n      st.low_render_energy_.fill(false);\n    }\n    std::transform(Y2.begin(), Y2.end(), st.Y2_.begin(), st.Y2_.begin(), std::add);\n    std::transform(E2.begin(), E2.end(), st.E2_.begin(), st.E2_.begin(), std::add);\n\n    for (size_t k \u003d 0; k \u003c X2.size(); ++k) {\n      st.low_render_energy_[k] \u003d\n          st.low_render_energy_[k] ||\n          X2[k] \u003c kX2BandEnergyThreshold;\n    }\n    st.num_points_[0]++;\n  } else {\n    // The update is always done using high render energy signals and therefore                                                                                                                 \n    // the field st.low_render_energy_ does not need to be modified.                                                                                                                            \n    for (size_t k \u003d 0; k \u003c X2.size(); ++k) {\n      if (X2[k] \u003e kX2BandEnergyThreshold \u0026\u0026 ) {\n        if (st.num_points_[k] \u003d\u003d kPointsToAccumulate) {\n          st.Y2_[k] \u003d 0.f;\n          st.E2_[k] \u003d 0.f;\n          st.num_points_[k] \u003d 0;\n        }\n        st.Y2_[k] +\u003d Y2[k];\n        st.E2_[k] +\u003d E2[k];\n        st.num_points_[k]++;\n      }\n      RTC_DCHECK_EQ(st.low_render_energy_[k], false);\n    }\n  }",
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "927d7daf_ca357a9e",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "Would it be possible to add a unittest for this class?\nAt the least, it would be good to have a crash-test that iterates through the allowed parameter ranges for the relevant parameters in the config.",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a5de243_d3936431",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T12:30:17Z",
+      "side": 1,
+      "message": "explicit",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "e67d9620cf6410ffdebc2557677b171685abb9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
