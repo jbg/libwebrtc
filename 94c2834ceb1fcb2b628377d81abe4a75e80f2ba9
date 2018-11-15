@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0d5a1a2f_ef76722b",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T08:31:21Z",
+      "side": 1,
+      "message": "Thanks, it was the wrong one, I wanted checks.h :)",
+      "parentUuid": "6f9e1267_137ddce9",
+      "range": {
+        "startLine": 13,
+        "startChar": 26,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccf3c46f_601719d9",
         "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
         "patchSetId": 2
@@ -237,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "281ddfd2_8c7077d1",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T08:31:21Z",
+      "side": 1,
+      "message": "Thanks! Your solution is a good trade off, no need to refactor ApmDataDumper. A char[N] type (with N constexpr) is trivially destructible, so it\u0027s suitable.\n\nNo need to add the else statement to define the output_dir_ member thanks to WEBRTC_APM_DEBUG_DUMP and how it\u0027s used.",
+      "parentUuid": "e72cb5bd_5203ca36",
+      "range": {
+        "startLine": 61,
+        "startChar": 39,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932be16_fd57b71e",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 2
@@ -290,6 +338,24 @@
     },
     {
       "key": {
+        "uuid": "05e0f753_edda2eea",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T08:31:21Z",
+      "side": 1,
+      "message": "Suggestion in the previous comment accepted.",
+      "parentUuid": "1812cd12_761a3cf9",
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96c9931e_f00b246d",
         "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
         "patchSetId": 2
@@ -310,6 +376,30 @@
       "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f592bdc3_c73fb43e",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T08:31:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96c9931e_f00b246d",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 129,
+        "endChar": 30
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -336,6 +426,30 @@
     },
     {
       "key": {
+        "uuid": "8589be25_f7a2e808",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T08:31:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5e6375a_2259eaf3",
+      "range": {
+        "startLine": 132,
+        "startChar": 7,
+        "endLine": 132,
+        "endChar": 55
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dda1b988_0e6f7957",
         "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
         "patchSetId": 2
@@ -356,6 +470,30 @@
       "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8db5fbbf_382d6ea9",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T08:31:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dda1b988_0e6f7957",
+      "range": {
+        "startLine": 481,
+        "startChar": 20,
+        "endLine": 481,
+        "endChar": 49
+      },
+      "revId": "94c2834ceb1fcb2b628377d81abe4a75e80f2ba9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
