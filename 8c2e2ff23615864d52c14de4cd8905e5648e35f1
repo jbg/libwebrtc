@@ -1,0 +1,231 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a26c80b_a02ac385",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "RTC_CHECK_EQ(0, ... ?",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "464288c9_a3315d82",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "unsigned char -\u003e int",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdc080e7_51fcfde8",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "DCHECK result like below, in EnableSendTransportSequenceNumber()",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6fe9f04_73fc448d",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "Please DCHECK the result from SetCNAME() instead",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc961d08_ad5d0817",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "move this...",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6f11b01_99ce40ef",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "DCHECK result \u003d\u003d 0",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c888edfa_6db83339",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "Remove this check, the resulting array will be empty anyway.",
+      "range": {
+        "startLine": 873,
+        "startChar": 23,
+        "endLine": 873,
+        "endChar": 24
+      },
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbb26ef6_7ae7b821",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "...down here",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70a16d21_e8b1812a",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "remove these comments",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d09eea0f_ebd47031",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "comment can be removed?",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a772bb9_6d5d4bdb",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "use uint32_t",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "503aa88d_4d7725f4",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "unsigned char -\u003e int",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e8500f6_38e75b09",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T10:13:21Z",
+      "side": 1,
+      "message": "const",
+      "revId": "8c2e2ff23615864d52c14de4cd8905e5648e35f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
