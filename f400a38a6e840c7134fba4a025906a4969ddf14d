@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "1306d9c3_ac0c1f3e",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-15T14:38:36Z",
+      "side": 1,
+      "message": "It\u0027s up to you; us/ms here (difference between the two arguments) is also a potential source of errors, I concede.",
+      "parentUuid": "72b017bf_190fcfdd",
+      "range": {
+        "startLine": 618,
+        "startChar": 56,
+        "endLine": 619,
+        "endChar": 75
+      },
+      "revId": "f400a38a6e840c7134fba4a025906a4969ddf14d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6560ab8b_09a7950d",
         "filename": "logging/rtc_event_log/rtc_event_log_parser_new.h",
         "patchSetId": 1

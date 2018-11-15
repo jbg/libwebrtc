@@ -70,6 +70,30 @@
       "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfcd6bce_d52dde5b",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-15T14:38:36Z",
+      "side": 0,
+      "message": "That much is true.\nHow about DCHECKing that it\u0027s not done, then?",
+      "parentUuid": "ea53dd34_6a95aecf",
+      "range": {
+        "startLine": 506,
+        "startChar": 0,
+        "endLine": 506,
+        "endChar": 78
+      },
+      "revId": "2b101d2c9ebcadede6eb7f6082a812c6fac4833b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
