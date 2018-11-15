@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6b27a53_5ffa7086",
+        "filename": "api/units/unit_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-15T10:32:57Z",
+      "side": 1,
+      "message": "Very nice that you put it in an impl namespace.\n\nCan we move this entire file out of api/, since no user should #include it? I\u0027m thinking rtc_base/somethingorother/, but I\u0027m not picky.",
+      "revId": "06e9df99dfc6c20b8c932b9a14b1e7e5e70ab118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6820468a_3deef903",
+        "filename": "api/units/unit_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-15T10:32:57Z",
+      "side": 1,
+      "message": "Hmmm.... won\u0027t this cause ODR violations? Every translation units will get its own copy of these.\n\nUntil we can use `inline constexpr`, your best bet is probably the enum hack\n\n  enum : int64_t { kPlusInfinityVal \u003d std::numeric_limits\u003cint64_t\u003e::max() };\n\nor constexpr functions.",
+      "revId": "06e9df99dfc6c20b8c932b9a14b1e7e5e70ab118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb741634_6bfaeeb1",
+        "filename": "api/units/unit_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-15T10:32:57Z",
+      "side": 1,
+      "message": "A comment about what this class does, and what Unit_T is.",
+      "revId": "06e9df99dfc6c20b8c932b9a14b1e7e5e70ab118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3879dfa_5788d339",
+        "filename": "api/units/unit_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-15T10:32:57Z",
+      "side": 1,
+      "message": "You don\u0027t DCHECK that the value doesn\u0027t end up being infinite here, like you do in the integer case.",
+      "revId": "06e9df99dfc6c20b8c932b9a14b1e7e5e70ab118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd68fa3a_5a39eafd",
+        "filename": "api/units/unit_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-15T10:32:57Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be easier to read the calls if you defined a function such as `DivRoundToNearest(n, d)` instead?",
+      "revId": "06e9df99dfc6c20b8c932b9a14b1e7e5e70ab118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea02d143_e04f3c1a",
+        "filename": "api/units/unit_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-15T10:32:57Z",
+      "side": 1,
+      "message": "Isn\u0027t this class small+cheap enough that it makes more sense to pass by value almost everywhere?",
+      "range": {
+        "startLine": 211,
+        "startChar": 19,
+        "endLine": 211,
+        "endChar": 32
+      },
+      "revId": "06e9df99dfc6c20b8c932b9a14b1e7e5e70ab118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
