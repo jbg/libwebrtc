@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "31ce6f6a_fbd89d63",
+        "filename": "media/base/fakemediaengine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-15T17:39:56Z",
+      "side": 1,
+      "message": "No, there\u0027s no way to convert a generic VoiceEngineInterface implementation to a FakeVoiceEngine. The reason we can do the conversion here is that we know (from the lines directly above, why I argue that it\u0027s safe enough) that it really _is_ a FakeVoiceEngine.\n\nIt\u0027s possible to achieve the same thing with more boiler plate and without reinterpret_cast by retrieving the raw pointer first, but it\u0027s a bit complex since we can\u0027t initialize any members before initializing the base class. So I don\u0027t think it\u0027s worth it. \n\n(I agree that reinterpret_cast should be avoided in general)",
+      "parentUuid": "e1c10a1a_96f9a356",
+      "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b813b867_21c27284",
         "filename": "media/base/mediaengine.cc",
         "patchSetId": 10
@@ -33,6 +51,24 @@
       "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ae45529_f8f25ba3",
+        "filename": "media/base/mediaengine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-15T17:39:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b813b867_21c27284",
+      "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7127990b_e36ef0e3",
+        "filename": "media/base/mediaengine.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-15T17:39:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "facf38d2_196aefd2",
+      "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a42d31b6_b7d4903c",
         "filename": "media/base/mediaengine.h",
         "patchSetId": 10
@@ -67,6 +121,24 @@
       "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04bc0335_d754e668",
+        "filename": "media/base/mediaengine.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-15T17:39:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a42d31b6_b7d4903c",
+      "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
