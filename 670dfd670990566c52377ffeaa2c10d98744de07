@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "fd6fe87c_8db1d55c",
+        "filename": "media/base/fakemediaengine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T20:58:28Z",
+      "side": 1,
+      "message": "Unless I misinterpret, the downcast situation you describe is one which is indeed supported by static_cast, and used in multiple places throughout the code base. For example, here: https://cs.chromium.org/chromium/src/third_party/webrtc/call/call.cc?type\u003dcs\u0026g\u003d0\u0026l\u003d824",
+      "parentUuid": "31ce6f6a_fbd89d63",
+      "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b813b867_21c27284",
         "filename": "media/base/mediaengine.cc",
         "patchSetId": 10
