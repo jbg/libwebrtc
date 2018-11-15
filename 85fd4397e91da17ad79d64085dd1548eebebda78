@@ -49,6 +49,52 @@
     },
     {
       "key": {
+        "uuid": "a85fa077_4225c7bf",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T15:22:55Z",
+      "side": 1,
+      "message": "I think it would be prefferaable to move this to be a private member of the ApmDataDumper instead.\n\nThat will prevent it to be picked up by any other code, and will also ensure that there can be no name-clash in the internal:: name space",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c98147_8889af38",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T15:22:55Z",
+      "side": 1,
+      "message": "Please pass a std::string instead of an optional here. This code does not in any way benefit from receiving an optional, and there is no point in calling the method if it is unknown whether the output dir should be passed.",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f1bbe99_2cba2fb5",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 5

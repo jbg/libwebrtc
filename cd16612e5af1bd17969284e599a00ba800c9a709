@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0a0cf33_5984f520",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T15:22:55Z",
+      "side": 1,
+      "message": "I think you can check this via strlen? So the output_dir_size should not be needed I think.",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "cd16612e5af1bd17969284e599a00ba800c9a709",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaac5b93_8257e23e",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T15:22:55Z",
+      "side": 1,
+      "message": "With the initialization on 64, the output_dir_size_ is already known from strlen(), right? Then it could be removed.",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 38
+      },
+      "revId": "cd16612e5af1bd17969284e599a00ba800c9a709",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8178811e_61c8d21a",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-15T15:22:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed any longer, as the size of the string is known.",
+      "range": {
+        "startLine": 267,
+        "startChar": 16,
+        "endLine": 267,
+        "endChar": 32
+      },
+      "revId": "cd16612e5af1bd17969284e599a00ba800c9a709",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
