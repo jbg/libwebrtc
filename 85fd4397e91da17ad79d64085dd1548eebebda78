@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e8b75fed_3f02efe2",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T14:03:56Z",
+      "side": 1,
+      "message": "I need it for strncpy (see https://en.cppreference.com/w/c/string/byte/strncpy)",
+      "parentUuid": "93b6d8fb_4d440183",
+      "range": {
+        "startLine": 16,
+        "startChar": 10,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f1bbe99_2cba2fb5",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e4ed247_10f12700",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-15T14:03:56Z",
+      "side": 1,
+      "message": "The goal of this CL is adding a common optional output directory for the data dump files. Currently, all files are written to the same directory (the current one). Plus, at this moment there\u0027s no need for different directories - and it would also required multiple audioproc_f flags and passing each flag to each distinct APM sub-module.",
+      "parentUuid": "1f1bbe99_2cba2fb5",
+      "range": {
+        "startLine": 265,
+        "startChar": 2,
+        "endLine": 265,
+        "endChar": 25
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
