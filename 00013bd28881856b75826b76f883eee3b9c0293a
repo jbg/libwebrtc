@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9905c969_4c65992e",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:59:41Z",
+      "side": 1,
+      "message": "never mind, leave as is",
+      "parentUuid": "50e3e43f_4d0e941d",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ca5f05a_e17375fe",
         "filename": "audio/channel_receive.cc",
         "patchSetId": 7
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "dac4f1a6_19023621",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:59:41Z",
+      "side": 1,
+      "message": "Agree, let\u0027s not use private inheritance.",
+      "parentUuid": "15675b89_bc6e3793",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5d22179_4137baa5",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -121,6 +157,24 @@
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96fad5e3_f1b91756",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:59:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "39e86621_02724549",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -229,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "91f6b557_bb2c219f",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:59:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8e530ae7_0df42824",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a7acea6_ce9bbb63",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -299,6 +371,24 @@
     },
     {
       "key": {
+        "uuid": "6cce7130_fd1379d4",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:59:41Z",
+      "side": 1,
+      "message": "Just delete it.",
+      "parentUuid": "adbc966d_d79441ac",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c8615ac_7fbfdd8a",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -328,6 +418,24 @@
       "side": 1,
       "message": "I think that\u0027s possible. Not sure what the benefits are, given that the only reason we have the interface is to make the mock work.\n\nIf I do it, I think the create method should be just webrtc::voe:CreateChannelReceive, since the style of having a create method on an interface, like ChannelReceiveInterface::Create, is out of fashion. ChannelReceiveInterface::Create would work fine in this case, but in the general case for interfaces that we want to be injectable, it causes undesirable linker dependencies).",
       "parentUuid": "4c8615ac_7fbfdd8a",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5239a9d_856875a5",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-15T13:59:41Z",
+      "side": 1,
+      "message": "A simple function like webrtc::voe::CreateChannelReceive() sgtm. The benefit would be less dependencies inflicted on users of the mock. But it\u0027s up to you...",
+      "parentUuid": "2ae6da75_2d660734",
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
