@@ -329,8 +329,10 @@ rtc_source_set("apm_logging") {
   deps = [
     "../../api:array_view",
     "../../common_audio:common_audio",
+    "../../rtc_base:checks",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:stringutils",
+    "//third_party/abseil-cpp/absl/types:optional",
   ]
   defines = []
 }
