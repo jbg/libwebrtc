@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "50e3e43f_4d0e941d",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "stream-\u003echannel_receive_ is a unique_ptr. So then it would be\n\n  auto* channel_receive \u003d stream-\u003echannel_receive_.get();\n\nIs that what you prefer? One could also delete this alias altogether, there are only 3 uses.\n\nThe old_config alias below also seems a bit pointless, introducing a new name to saving 4 characters in a few places. But I\u0027d prefer not to touch that in this cl.",
+      "parentUuid": "feb1ce6a_b5a1a897",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ca5f05a_e17375fe",
         "filename": "audio/channel_receive.cc",
         "patchSetId": 7
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "15675b89_bc6e3793",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Moved inheritance to ChannelReceive. Should I make it private to? (private inheritance is discouraged in the style guide, see https://google.github.io/styleguide/cppguide.html#Inheritance, but fits this useage pattern).\n\nI\u0027m also dropping the corresponding mock methods. If we\u0027ll be writing any tests that need them, inheritance will have to be moved back.\n\nLonger term, we should have some MediaTransport-related interface with separate implementation for Rtp.",
+      "parentUuid": "f2d48588_0cc67117",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5d22179_4137baa5",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -64,6 +100,24 @@
       "writtenOn": "2018-11-15T09:23:28Z",
       "side": 1,
       "message": "nit: no line break needed",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39e86621_02724549",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "For some reason, git cl format disagrees.",
+      "parentUuid": "d5d22179_4137baa5",
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "fa8d807f_cad6e23f",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a682c96_40449604",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d10803e_0be44b4d",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "c3bb71d9_20aee6ca",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d10803e_0be44b4d",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "177e0699_09809e44",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -115,6 +205,24 @@
       "writtenOn": "2018-11-15T09:23:28Z",
       "side": 1,
       "message": "nit: no line break needed",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e530ae7_0df42824",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Ditto, git cl format wants it.",
+      "parentUuid": "177e0699_09809e44",
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "24ec9bb4_44bc1f17",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a7acea6_ce9bbb63",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "111e0226_eef6f7d3",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -149,6 +275,24 @@
       "writtenOn": "2018-11-15T09:23:28Z",
       "side": 1,
       "message": "comment is wrong, this does not implement an interface",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adbc966d_d79441ac",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "If I\u0027ve understood it correctly, AudioReceiveStream implements an interface, and delegates to this metod, which has the same name and signature.\n\nShould I delete the comment, or can you suggest a way to rephrase it?",
+      "parentUuid": "111e0226_eef6f7d3",
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "2ae6da75_2d660734",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "I think that\u0027s possible. Not sure what the benefits are, given that the only reason we have the interface is to make the mock work.\n\nIf I do it, I think the create method should be just webrtc::voe:CreateChannelReceive, since the style of having a create method on an interface, like ChannelReceiveInterface::Create, is out of fashion. ChannelReceiveInterface::Create would work fine in this case, but in the general case for interfaces that we want to be injectable, it causes undesirable linker dependencies).",
+      "parentUuid": "4c8615ac_7fbfdd8a",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47108209_92d02525",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -186,6 +348,24 @@
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eec57f1_54d27c20",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47108209_92d02525",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -206,6 +386,24 @@
     },
     {
       "key": {
+        "uuid": "0174365b_531835fd",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "I attempted to override it in the mock class (before introducing the interface). But that was useless, since it\u0027s called from the destructor.\n\nMoved back to private.",
+      "parentUuid": "e902dbb3_d70408c0",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1556724b_4479aecc",
         "filename": "audio/mock_voe_channel_proxy.h",
         "patchSetId": 7
@@ -220,6 +418,24 @@
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4105bfd_05f831ff",
+        "filename": "audio/mock_voe_channel_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-15T13:43:15Z",
+      "side": 1,
+      "message": "Deleted, it\u0027s not used now.",
+      "parentUuid": "1556724b_4479aecc",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
