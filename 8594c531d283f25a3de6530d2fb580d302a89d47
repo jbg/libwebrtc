@@ -52,6 +52,24 @@
       "revId": "8594c531d283f25a3de6530d2fb580d302a89d47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4479487e_393e0f45",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:37:19Z",
+      "side": 1,
+      "message": "Done. A bit worrying the release try bots didn\u0027t fail on this.",
+      "parentUuid": "a2cddcd3_ffeaca87",
+      "revId": "8594c531d283f25a3de6530d2fb580d302a89d47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
