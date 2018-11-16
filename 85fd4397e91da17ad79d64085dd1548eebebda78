@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8d0b7f79_b3bed5d8",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-16T09:56:15Z",
+      "side": 1,
+      "message": "I suggest to rename the namespace to sth more specific (e.g., apm_data_dumper_internal) because we need this constant defined here to declare the size of output_dir_.",
+      "parentUuid": "a85fa077_4225c7bf",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10c98147_8889af38",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 5
@@ -92,6 +116,30 @@
       "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "154d4f53_1778a29b",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2018-11-16T09:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10c98147_8889af38",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
