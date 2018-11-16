@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5fca4c5_db6123be",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-16T11:33:12Z",
+      "side": 1,
+      "message": "Why do we need both string and string.h?",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "18e8b76297f5c73c427839cc95737c4c3acc77e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "9f3d680e_3d3dca48",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-16T11:33:12Z",
+      "side": 1,
+      "message": "It should still be possible to place it as a member of the class. \n\nWhat about\nclass ApmDataDumper {\n public:\n...\n\n#if WEBRTC_APM_DEBUG_DUMP \u003d\u003d 1\n  constexpr size_t kOutputDirMaxLength \u003d 1024;\n#endif\n...\n};\n\nThat requires\n-less code lines\n-no extra namespace\n-ties the constant to the class\n-Does not increase the size of the binary when WEBRTC_APM_DEBUG_DUMP \u003d\u003d 0",
+      "parentUuid": "8d0b7f79_b3bed5d8",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "85fd4397e91da17ad79d64085dd1548eebebda78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10c98147_8889af38",
         "filename": "modules/audio_processing/logging/apm_data_dumper.h",
         "patchSetId": 5
