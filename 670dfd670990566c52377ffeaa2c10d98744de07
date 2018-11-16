@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "efe4e726_fba3e61c",
+        "filename": "media/base/fakemediaengine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-16T08:58:34Z",
+      "side": 1,
+      "message": "Ah, I mixed things up, since we are working with a pointer we can static_cast it as long it\u0027s a subclass. (A bit weird, since there really is no guarantee that it\u0027s correct, but I guess it guarantees that the super class behavior is preserved at least)\n\nFixed.",
+      "parentUuid": "fd6fe87c_8db1d55c",
+      "revId": "670dfd670990566c52377ffeaa2c10d98744de07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b813b867_21c27284",
         "filename": "media/base/mediaengine.cc",
         "patchSetId": 10
