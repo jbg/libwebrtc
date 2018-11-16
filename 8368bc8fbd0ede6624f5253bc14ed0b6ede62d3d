@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "855d9231_0c828c2c",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:51:19Z",
+      "side": 1,
+      "message": "Needed for return value of GetSources.",
+      "parentUuid": "556e3738_3c32a890",
+      "revId": "8368bc8fbd0ede6624f5253bc14ed0b6ede62d3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be820d03_b64ce4bb",
         "filename": "audio/channel_receive.h",
         "patchSetId": 9
@@ -67,6 +85,24 @@
       "revId": "8368bc8fbd0ede6624f5253bc14ed0b6ede62d3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cac3d6cc_6f31f8e1",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:51:19Z",
+      "side": 1,
+      "message": "Moved to .cc file.",
+      "parentUuid": "be820d03_b64ce4bb",
+      "revId": "8368bc8fbd0ede6624f5253bc14ed0b6ede62d3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "9b49557e_7818c215",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:51:19Z",
+      "side": 1,
+      "message": "Moved to .cc file. This file needed api/audio_codecs/audio_decoder_factory.h instead.",
+      "parentUuid": "cce89ded_9f8fedc9",
+      "revId": "8368bc8fbd0ede6624f5253bc14ed0b6ede62d3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2adca040_4e8106e1",
         "filename": "audio/channel_receive.h",
         "patchSetId": 9
@@ -101,6 +155,24 @@
       "revId": "8368bc8fbd0ede6624f5253bc14ed0b6ede62d3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2325257e_ff0ea667",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:51:19Z",
+      "side": 1,
+      "message": "Moved to .cc file.",
+      "parentUuid": "2adca040_4e8106e1",
+      "revId": "8368bc8fbd0ede6624f5253bc14ed0b6ede62d3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
