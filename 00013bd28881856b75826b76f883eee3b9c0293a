@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "c733b2d3_b3269078",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:26:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dac4f1a6_19023621",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5d22179_4137baa5",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -389,6 +407,24 @@
     },
     {
       "key": {
+        "uuid": "4c1c0703_8b01cc39",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cce7130_fd1379d4",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c8615ac_7fbfdd8a",
         "filename": "audio/channel_receive.h",
         "patchSetId": 7
@@ -439,6 +475,24 @@
       "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbcc3232_33bebead",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:26:45Z",
+      "side": 1,
+      "message": "Done. Moved to .cc file, and everything in that file but the create function goes into the anonymous namespace.",
+      "parentUuid": "f5239a9d_856875a5",
+      "revId": "00013bd28881856b75826b76f883eee3b9c0293a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
