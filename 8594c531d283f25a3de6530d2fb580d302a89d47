@@ -16,6 +16,24 @@
       "revId": "8594c531d283f25a3de6530d2fb580d302a89d47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "132922ed_f0e68bed",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-16T08:05:36Z",
+      "side": 1,
+      "message": "Given that current implementation of the SetSendingStatus method unconditionally returns 0 (and the most reasonable change to that is to delete the return value), I don\u0027t think a check in release builds is motivated.",
+      "parentUuid": "df2346f0_2249f25f",
+      "revId": "8594c531d283f25a3de6530d2fb580d302a89d47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
