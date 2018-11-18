@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03fa35ef_e104195c",
+        "filename": "api/DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-18T12:08:31Z",
+      "side": 1,
+      "message": "Alternatively, whitelist it for *.h. Your choice.",
+      "revId": "e3a313f35c3d593454f1af00cf7a73d793b8f7f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ada65561_f2267689",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-18T12:08:31Z",
+      "side": 1,
+      "message": "Top-level `const` is useless for arguments in a function declaration. (More instances of this below.)",
+      "range": {
+        "startLine": 98,
+        "startChar": 21,
+        "endLine": 98,
+        "endChar": 26
+      },
+      "revId": "e3a313f35c3d593454f1af00cf7a73d793b8f7f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e46af77_68acbc36",
+        "filename": "rtc_base/units/unit_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-18T12:08:31Z",
+      "side": 1,
+      "message": "Document that d \u003e 0, and n \u003e\u003d 0 for the first function? (I was going to ask for a DCHECK, but constexpr.)",
+      "revId": "e3a313f35c3d593454f1af00cf7a73d793b8f7f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b428e31_1dc03263",
+        "filename": "rtc_base/units/unit_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-18T12:08:31Z",
+      "side": 1,
+      "message": "Multiplication and division is sensible for absolute units too. The additional thing that relative units support is addition and subtraction. (You can add/subtract two relative or one relative and one absolute unit of the same type, but not two absolute units.)",
+      "range": {
+        "startLine": 215,
+        "startChar": 60,
+        "endLine": 215,
+        "endChar": 63
+      },
+      "revId": "e3a313f35c3d593454f1af00cf7a73d793b8f7f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
