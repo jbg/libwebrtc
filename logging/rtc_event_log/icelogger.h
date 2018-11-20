@@ -11,6 +11,7 @@
 #ifndef LOGGING_RTC_EVENT_LOG_ICELOGGER_H_
 #define LOGGING_RTC_EVENT_LOG_ICELOGGER_H_
 
+#include <string>
 #include <unordered_map>
 
 #include "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h"
