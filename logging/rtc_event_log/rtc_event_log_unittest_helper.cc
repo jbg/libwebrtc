@@ -12,7 +12,6 @@
 
 #include <string.h>  // memcmp
 
-#include <algorithm>
 #include <limits>
 #include <memory>
 #include <numeric>
@@ -20,6 +19,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/memory/memory.h"
 #include "absl/types/optional.h"
 #include "modules/audio_coding/audio_network_adaptor/include/audio_network_adaptor.h"
 #include "modules/remote_bitrate_estimator/include/bwe_defines.h"
@@ -199,8 +199,10 @@ EventGenerator::NewIceCandidatePair() {
       static_cast<IceCandidatePairEventType>(prng_.Rand(
           static_cast<uint32_t>(IceCandidatePairEventType::kNumValues) - 1));
   uint32_t pair_id = prng_.Rand<uint32_t>();
+  uint32_t transaction_id = prng_.Rand<uint32_t>();
 
-  return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id);
+  return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id,
+                                                     transaction_id);
 }
 
 rtcp::ReportBlock EventGenerator::NewReportBlock() {
