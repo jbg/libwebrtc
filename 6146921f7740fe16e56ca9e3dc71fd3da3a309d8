@@ -16,6 +16,24 @@
       "revId": "6146921f7740fe16e56ca9e3dc71fd3da3a309d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f0da833_93c0c578",
+        "filename": "pc/rtpsenderreceiver_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2018-11-20T13:48:17Z",
+      "side": 1,
+      "message": "It is a low-level detail not part of the spec API that shouldn\u0027t be checked here. Note that other tests aren\u0027t doing it either.",
+      "parentUuid": "b1a68fe2_5ad1f7dc",
+      "revId": "6146921f7740fe16e56ca9e3dc71fd3da3a309d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
