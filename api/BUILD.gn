@@ -274,6 +274,14 @@ rtc_source_set("transport_api") {
   ]
 }
 
+rtc_source_set("bitrate_allocation") {
+  visibility = [ "*" ]
+  sources = [
+    "call/bitrate_allocation.cc",
+    "call/bitrate_allocation.h",
+  ]
+}
+
 rtc_source_set("simulated_network_api") {
   visibility = [ "*" ]
   sources = [

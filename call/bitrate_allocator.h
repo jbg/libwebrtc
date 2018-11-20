@@ -19,6 +19,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/call/bitrate_allocation.h"
 #include "rtc_base/bitrateallocationstrategy.h"
 #include "rtc_base/sequenced_task_checker.h"
 
@@ -26,13 +27,6 @@ namespace webrtc {
 
 class Clock;
 
-struct BitrateAllocationUpdate {
-  uint32_t target_bitrate_bps;
-  uint32_t link_capacity_bps;
-  uint8_t fraction_loss;
-  int64_t rtt;
-  int64_t bwe_period_ms;
-};
 // Used by all send streams with adaptive bitrate, to get the currently
 // allocated bitrate for the send stream. The current network properties are
 // given at the same time, to let the send stream decide about possible loss
