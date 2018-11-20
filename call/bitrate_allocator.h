@@ -27,11 +27,10 @@ namespace webrtc {
 class Clock;
 
 struct BitrateAllocationUpdate {
-  // TODO(srte): Rename to target_bitrate.
-  uint32_t bitrate_bps;
+  uint32_t target_bitrate_bps;
   uint32_t link_capacity_bps;
   uint8_t fraction_loss;
-  int64_t rtt;
+  int64_t rtt_ms;
   int64_t bwe_period_ms;
 };
 // Used by all send streams with adaptive bitrate, to get the currently
