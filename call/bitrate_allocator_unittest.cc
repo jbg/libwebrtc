@@ -60,11 +60,11 @@ class TestBitrateObserver : public BitrateAllocatorObserver {
   }
 
   uint32_t OnBitrateUpdated(BitrateAllocationUpdate update) override {
-    last_bitrate_bps_ = update.bitrate_bps;
+    last_bitrate_bps_ = update.target_bitrate_bps;
     last_fraction_loss_ = update.fraction_loss;
     last_rtt_ms_ = update.rtt;
     last_probing_interval_ms_ = update.bwe_period_ms;
-    return update.bitrate_bps * protection_ratio_;
+    return update.target_bitrate_bps * protection_ratio_;
   }
   uint32_t last_bitrate_bps_;
   uint8_t last_fraction_loss_;

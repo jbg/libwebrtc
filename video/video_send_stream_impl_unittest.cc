@@ -72,7 +72,7 @@ class MockRtpVideoSender : public RtpVideoSenderInterface {
 
 BitrateAllocationUpdate CreateAllocation(int bitrate_bps) {
   BitrateAllocationUpdate update;
-  update.bitrate_bps = bitrate_bps;
+  update.target_bitrate_bps = bitrate_bps;
   update.fraction_loss = 0;
   update.rtt = 0;
   return update;
