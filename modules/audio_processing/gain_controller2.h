@@ -26,14 +26,26 @@ class ApmDataDumper;
 class AudioBuffer;
 
 // Gain Controller 2 aims to automatically adjust levels by acting on the
-// microphone gain and/or applying digital gain.
+// microphone gain and/or applying digital gains.
 class GainController2 {
  public:
   GainController2();
   ~GainController2();
 
   void Initialize(int sample_rate_hz);
-  void Process(AudioBuffer* audio);
+
+  float GetPreFixedDigitalGainFactor() const;
+  // Changes the pre fixed digital gain factor (in-call safe).
+  void SetPreFixedDigitalGainFactor(float value);
+
+  // Performs the pre-processing. This method should be called at the beginning
+  // of the audio processing pipeline, in particular before any software echo
+  // removal step and before Process() is called.
+  void PreProcess(AudioBuffer* audio);
+  // Post-processing. Call this method at the end of the audio processing
+  // pipeline, in particular after the software echo removal and noise
+  // suppressor steps and after PreProcess() is called.
+  void PostProcess(AudioBuffer* audio);
   void NotifyAnalogLevel(int level);
 
   void ApplyConfig(const AudioProcessing::Config::GainController2& config);
@@ -45,11 +57,13 @@ class GainController2 {
   static int instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   AudioProcessing::Config::GainController2 config_;
-  GainApplier gain_applier_;
-  std::unique_ptr<AdaptiveAgc> adaptive_agc_;
+  // Pre-processing components.
+  GainApplier pre_fixed_digital_gain_applier_;
+  // Post-processing components.
+  GainApplier fixed_digital_gain_applier_;
+  std::unique_ptr<AdaptiveAgc> adaptive_digital_controller_;
   Limiter limiter_;
   int analog_level_ = -1;
-  bool adaptive_digital_mode_ = true;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(GainController2);
 };
