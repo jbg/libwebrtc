@@ -115,10 +115,13 @@ void BitrateAllocator::OnNetworkChanged(uint32_t target_bitrate_bps,
   for (auto& config : bitrate_observer_configs_) {
     uint32_t allocated_bitrate = allocation[config.observer];
     uint32_t allocated_bandwidth = bandwidth_allocation[config.observer];
-    uint32_t protection_bitrate =
-        config.observer->OnBitrateUpdated(BitrateAllocationUpdate{
-            allocated_bitrate, allocated_bandwidth, last_fraction_loss_,
-            last_rtt_, last_bwe_period_ms_});
+    BitrateAllocationUpdate update;
+    update.target_bitrate = DataRate::bps(allocated_bitrate);
+    update.link_capacity = DataRate::bps(allocated_bandwidth);
+    update.packet_loss_ratio = last_fraction_loss_ / 256.0;
+    update.round_trip_time = TimeDelta::ms(last_rtt_);
+    update.bwe_period = TimeDelta::ms(last_bwe_period_ms_);
+    uint32_t protection_bitrate = config.observer->OnBitrateUpdated(update);
 
     if (allocated_bitrate == 0 && config.allocated_bitrate_bps > 0) {
       if (target_bitrate_bps > 0)
@@ -179,10 +182,13 @@ void BitrateAllocator::AddObserver(BitrateAllocatorObserver* observer,
     for (auto& config : bitrate_observer_configs_) {
       uint32_t allocated_bitrate = allocation[config.observer];
       uint32_t bandwidth = bandwidth_allocation[config.observer];
-      uint32_t protection_bitrate =
-          config.observer->OnBitrateUpdated(BitrateAllocationUpdate{
-              allocated_bitrate, bandwidth, last_fraction_loss_, last_rtt_,
-              last_bwe_period_ms_});
+      BitrateAllocationUpdate update;
+      update.target_bitrate = DataRate::bps(allocated_bitrate);
+      update.link_capacity = DataRate::bps(bandwidth);
+      update.packet_loss_ratio = last_fraction_loss_ / 256.0;
+      update.round_trip_time = TimeDelta::ms(last_rtt_);
+      update.bwe_period = TimeDelta::ms(last_bwe_period_ms_);
+      uint32_t protection_bitrate = config.observer->OnBitrateUpdated(update);
       config.allocated_bitrate_bps = allocated_bitrate;
       if (allocated_bitrate > 0)
         config.media_ratio = MediaRatio(allocated_bitrate, protection_bitrate);
@@ -191,8 +197,14 @@ void BitrateAllocator::AddObserver(BitrateAllocatorObserver* observer,
     // Currently, an encoder is not allowed to produce frames.
     // But we still have to return the initial config bitrate + let the
     // observer know that it can not produce frames.
-    observer->OnBitrateUpdated(BitrateAllocationUpdate{
-        0, 0, last_fraction_loss_, last_rtt_, last_bwe_period_ms_});
+
+    BitrateAllocationUpdate update;
+    update.target_bitrate = DataRate::Zero();
+    update.link_capacity = DataRate::Zero();
+    update.packet_loss_ratio = last_fraction_loss_ / 256.0;
+    update.round_trip_time = TimeDelta::ms(last_rtt_);
+    update.bwe_period = TimeDelta::ms(last_bwe_period_ms_);
+    observer->OnBitrateUpdated(update);
   }
   UpdateAllocationLimits();
 }
