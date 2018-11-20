@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "835f78cf_af70c72d",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-11-20T15:55:23Z",
+      "side": 1,
+      "message": "1) is the simulation still running? Where does the audio stop being sent?\n2) should we also remove the stream/disconnect and assert that no new audio frames are sent, or that the media transport is destroyed? (if we remove the stream, probably just the former).",
+      "range": {
+        "startLine": 3525,
+        "startChar": 0,
+        "endLine": 3527,
+        "endChar": 34
+      },
+      "revId": "ed2b902042e7c5117636148a85e5718a84ff9f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
