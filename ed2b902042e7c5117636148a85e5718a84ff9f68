@@ -22,6 +22,30 @@
       "revId": "ed2b902042e7c5117636148a85e5718a84ff9f68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1be026b5_c3884e96",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-20T16:25:55Z",
+      "side": 1,
+      "message": "\u003e 1) is the simulation still running? Where does the audio stop being sent?\n\nI think it\u0027s running until the PeerConnections are destroyed at the end of the test.\n\nI\u0027m afraid I don\u0027t understand where the audio actually originates. AddAudioTrack calls peer_connection_factory_-\u003eCreateAudioSource, which creates LocalAudioSource, but I don\u0027t see how that produces audio.\n\nMaybe Steve can clarify how this works? I\u0027m a bit lost, since I\u0027m not that familiar with any of the general audio pipeline, the peerconnection level api, or the framework used in these integration tests.\n\n\u003e 2) should we also remove the stream/disconnect and assert that no new audio frames are sent, or that the media transport is destroyed? (if we remove the stream, probably just the former).\n\nIf that\u0027s useful, it should probably be a separate test.",
+      "parentUuid": "835f78cf_af70c72d",
+      "range": {
+        "startLine": 3525,
+        "startChar": 0,
+        "endLine": 3527,
+        "endChar": 34
+      },
+      "revId": "ed2b902042e7c5117636148a85e5718a84ff9f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
