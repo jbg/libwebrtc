@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a9e3f46_6e183448",
+        "filename": "api/call/bitrate_allocation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-20T16:50:44Z",
+      "side": 1,
+      "message": "A blank line between 15 and 16?",
+      "revId": "41ba6490be79cd000f2a3b044b8a248131e4c079",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05d3f4e6_b3cc70ae",
+        "filename": "api/call/bitrate_allocation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-20T16:50:44Z",
+      "side": 1,
+      "message": "Are these the 1/256ths of packets that are lost and the estimated round trip time in ms?",
+      "revId": "41ba6490be79cd000f2a3b044b8a248131e4c079",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86938664_95593285",
+        "filename": "api/call/bitrate_allocation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-20T16:50:44Z",
+      "side": 1,
+      "message": "Blank line between 33 and 34, and between 34 and 35?",
+      "revId": "41ba6490be79cd000f2a3b044b8a248131e4c079",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
