@@ -1,0 +1,543 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd071ca8_cf468b38",
+        "filename": "api/audio/echo_canceller3_config.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "Why was this moved?",
+      "range": {
+        "startLine": 120,
+        "startChar": 15,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a8a2ebb_3bae9bb2",
+        "filename": "modules/audio_processing/aec3/erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "This include is already included in the header. No need to also include it here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 14,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0672cadc_fed89e51",
+        "filename": "modules/audio_processing/aec3/erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "This include is already included in the header. No need to also include it here.",
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25a765da_07591c48",
+        "filename": "modules/audio_processing/aec3/erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "These includes are already included in the header. No need to also include them here.",
+      "range": {
+        "startLine": 16,
+        "startChar": 40,
+        "endLine": 16,
+        "endChar": 63
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d811eea5_5fb46acc",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "\u003cmemory\u003e and \u003cvector\u003e are already included in the header file and should be removed from here.",
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65ffd088_6ae6acff",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "The first 5 of these are already included in the header file and should be removed from here.",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 24
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43215928_99fe5c95",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "This naming of this is strange, in particular when seeing it applied. What about\nFormSubbandMap()\n?",
+      "range": {
+        "startLine": 33,
+        "startChar": 39,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c1a580_69cc164e",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "Not needed",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7de9383_a71ddb74",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "RTC_DCHECK_LT(subband, SignalDependentErleEstimator::kSubbands + 1);\n-\u003e\nRTC_DCHECK_LE(subband, SignalDependentErleEstimator::kSubbands);\n\nHowever, what I think you should actually test against is kBandBoundaries.size(),\nie.\nRTC_DCHECK_LT(subband, kBandBoundaries.size());\n?",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 72
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4b15a4e_7bb53051",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 94,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 5
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d725470e_3f23865e",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "dd",
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb387a99_2600493f",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "the 90 % -\u003e 90 %",
+      "range": {
+        "startLine": 175,
+        "startChar": 70,
+        "endLine": 175,
+        "endChar": 78
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04f90b6f_14faaa07",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "refine -\u003e refined",
+      "range": {
+        "startLine": 187,
+        "startChar": 72,
+        "endLine": 187,
+        "endChar": 78
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae019ac8_034be27d",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "This does not compute the subbands, but rather the subband powers\nWhat about\ncompute_subbbands\n-\u003e\nsubband_powers?, or compute_subband_powers",
+      "range": {
+        "startLine": 233,
+        "startChar": 7,
+        "endLine": 233,
+        "endChar": 24
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f08008a6_611d70a9",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "Vs -\u003e and",
+      "range": {
+        "startLine": 305,
+        "startChar": 16,
+        "endLine": 305,
+        "endChar": 18
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb846189_3c59eb1f",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "mayority -\u003e majority",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f4a2b45_da4d8378",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "echo estimate energy -\u003e energy in the echo estimate",
+      "range": {
+        "startLine": 44,
+        "startChar": 37,
+        "endLine": 44,
+        "endChar": 57
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df92c782_8ce611ff",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "I really like this comment, as it clearly describes what is done. However, as mentioned in https://google.github.io/styleguide/cppguide.html#Function_Comments, the details about how the method performs it\u0027s task should go into the function definition. \n\nIf some of this is moved to the function definition, that would be perfect.",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1da3282_88395d44",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "Y2_[k] \u003d X2[k] + 0.01f * X2_prev[k];\nE2_[k] \u003d 0.01f * X2_prev[k]\n-\u003e\nE2_[k] \u003d 0.01f * X2_prev[k]\nY2_[k] \u003d X2[k] + E2_[k];\n?",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 31
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46f595c9_fac96115",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "Pleas insert empty line on line 107",
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b878d2c6_f45b8419",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "\u003cmemory\u003e is already included in the header and can be removed",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab548a96_239314f3",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "already included in the header and can be removed",
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2628d546_e0091d87",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "already included in the header and can be removed",
+      "range": {
+        "startLine": 18,
+        "startChar": 35,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1183531d_62f995ef",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "already included in the header and can be removed",
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05472ce5_25f6725a",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T08:45:43Z",
+      "side": 1,
+      "message": "already included in the header and can be removed",
+      "range": {
+        "startLine": 20,
+        "startChar": 43,
+        "endLine": 20,
+        "endChar": 58
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
