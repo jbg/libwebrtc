@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82b82f9b_77c914d4",
+        "filename": "api/call/bitrate_allocation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-20T16:34:56Z",
+      "side": 1,
+      "message": "This .cc file appears unnecessary.",
+      "revId": "819b9e41c36f3467ee516f90db8390a21c2e720a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99e3597b_dd939030",
+        "filename": "api/call/bitrate_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-20T16:34:56Z",
+      "side": 1,
+      "message": "Now that you\u0027ve moved this struct to a more obviously public place, and away from where it\u0027s used, please document it.",
+      "revId": "819b9e41c36f3467ee516f90db8390a21c2e720a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
