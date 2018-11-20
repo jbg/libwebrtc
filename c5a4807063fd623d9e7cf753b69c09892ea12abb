@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a596ae1e_ed6a888a",
+        "filename": "api/audio/echo_canceller3_config.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-20T11:07:53Z",
+      "side": 1,
+      "message": "That also makes sense, but organization the former code matched the order of the config struct which is laid out as\nstruct Delay {\n} delay;\n  \nstruct Filter {\n} filter;\n  \nstruct Erle {\n} erle;\n\nand now the layout of this code is  \n\nFilter;\nDelay;\nErle;\n\nwhich does not match the config struct.\n\nBoth are fine but as there are no compile time checks, or unittests available, for verifying that all fields are checked it would be good to have the structure of this code match to how the config struct is laid out.\nAnother argument for having it like that is that there likely will be more examples were we\u0027d need to do checks between parameters of different parts of the config structs, and when that happens it would not be possible to order to the code so that all checks that relate to a single parameter are done at the same place.\n\nWhat about having the checks that only relate to one single value arranged according to the struct, and move the checks which relate to cross-dependencies between different parameters to a location below that?",
+      "parentUuid": "c5309603_70843cfc",
+      "range": {
+        "startLine": 120,
+        "startChar": 15,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3a8a2ebb_3bae9bb2",
         "filename": "modules/audio_processing/aec3/erle_estimator.cc",
         "patchSetId": 13
