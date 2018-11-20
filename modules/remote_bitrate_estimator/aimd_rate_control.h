@@ -18,6 +18,8 @@
 
 #include "api/units/data_rate.h"
 #include "api/units/timestamp.h"
+#include "rtc_base/experiments/field_trial_parser.h"
+#include "rtc_base/experiments/field_trial_units.h"
 
 namespace webrtc {
 
@@ -82,6 +84,11 @@ class AimdRateControl {
   void UpdateChangePeriod(Timestamp at_time);
   void UpdateMaxThroughputEstimate(float estimated_throughput_kbps);
   void ChangeState(const RateControlInput& input, Timestamp at_time);
+
+  FieldTrialParameter<DataRate> min_linear_increase_rate_per_second_;
+  FieldTrialParameter<DataRate> min_exponential_increase_;
+  FieldTrialParameter<double> exponential_increase_rate_;
+  FieldTrialOptional<double> fixed_linear_increase_rate_per_second_;
 
   DataRate min_configured_bitrate_;
   DataRate max_configured_bitrate_;

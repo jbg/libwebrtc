@@ -74,7 +74,11 @@ TimeDelta ReadInitialBackoffInterval() {
 }
 
 AimdRateControl::AimdRateControl()
-    : min_configured_bitrate_(congestion_controller::GetMinBitrate()),
+    : min_linear_increase_rate_per_second_("lin_min", DataRate::kbps(4)),
+      min_exponential_increase_("lin_offs", DataRate::kbps(1)),
+      exponential_increase_rate_("exp_rate", 0.08),
+      fixed_linear_increase_rate_per_second_("lin_rate"),
+      min_configured_bitrate_(congestion_controller::GetMinBitrate()),
       max_configured_bitrate_(DataRate::kbps(30000)),
       current_bitrate_(max_configured_bitrate_),
       latest_estimated_throughput_(current_bitrate_),
@@ -102,6 +106,10 @@ AimdRateControl::AimdRateControl()
                      << " " << ToString(initial_backoff_interval_) << ".";
   }
   RTC_LOG(LS_INFO) << "Using aimd rate control with back off factor " << beta_;
+  ParseFieldTrial(
+      {&min_linear_increase_rate_per_second_, &min_exponential_increase_,
+       &exponential_increase_rate_, &fixed_linear_increase_rate_per_second_},
+      field_trial::FindFullName("WebRTC-Bwe-RateControl"));
 }
 
 AimdRateControl::~AimdRateControl() {}
@@ -208,6 +216,11 @@ void AimdRateControl::SetEstimate(DataRate bitrate, Timestamp at_time) {
 
 double AimdRateControl::GetNearMaxIncreaseRateBpsPerSecond() const {
   RTC_DCHECK(!current_bitrate_.IsZero());
+  if (fixed_linear_increase_rate_per_second_) {
+    return current_bitrate_.bps<double>() *
+           fixed_linear_increase_rate_per_second_.Value();
+  }
+
   const TimeDelta kFrameInterval = TimeDelta::seconds(1) / 30;
   DataSize frame_size = current_bitrate_ * kFrameInterval;
   const DataSize kPacketSize = DataSize::bytes(1200);
@@ -220,8 +233,8 @@ double AimdRateControl::GetNearMaxIncreaseRateBpsPerSecond() const {
     response_time = response_time * 2;
   double increase_rate_bps_per_second =
       (avg_packet_size / response_time).bps<double>();
-  double kMinIncreaseRateBpsPerSecond = 4000;
-  return std::max(kMinIncreaseRateBpsPerSecond, increase_rate_bps_per_second);
+  return std::max(min_linear_increase_rate_per_second_->bps<double>(),
+                  increase_rate_bps_per_second);
 }
 
 TimeDelta AimdRateControl::GetExpectedBandwidthPeriod() const {
@@ -347,13 +360,13 @@ DataRate AimdRateControl::MultiplicativeRateIncrease(
     Timestamp at_time,
     Timestamp last_time,
     DataRate current_bitrate) const {
-  double alpha = 1.08;
+  double alpha = 1.0 + exponential_increase_rate_.Get();
   if (last_time.IsFinite()) {
     auto time_since_last_update = at_time - last_time;
     alpha = pow(alpha, std::min(time_since_last_update.seconds<double>(), 1.0));
   }
-  DataRate multiplicative_increase =
-      std::max(current_bitrate * (alpha - 1.0), DataRate::bps(1000));
+  DataRate multiplicative_increase = std::max(current_bitrate * (alpha - 1.0),
+                                              min_exponential_increase_.Get());
   return multiplicative_increase;
 }
 
