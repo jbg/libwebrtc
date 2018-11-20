@@ -155,8 +155,8 @@ TEST(AudioProcessingImplTest, AudioParameterChangeTriggersInit) {
 TEST(AudioProcessingImplTest, UpdateCapturePreGainRuntimeSetting) {
   std::unique_ptr<AudioProcessing> apm(AudioProcessingBuilder().Create());
   webrtc::AudioProcessing::Config apm_config;
-  apm_config.pre_amplifier.enabled = true;
-  apm_config.pre_amplifier.fixed_gain_factor = 1.f;
+  apm_config.gain_controller2.pre_fixed_digital.enabled = true;
+  apm_config.gain_controller2.pre_fixed_digital.gain_factor = 1.f;
   apm->ApplyConfig(apm_config);
 
   AudioFrame frame;
@@ -182,6 +182,80 @@ TEST(AudioProcessingImplTest, UpdateCapturePreGainRuntimeSetting) {
   EXPECT_EQ(frame.data()[100], kGainFactor * kAudioLevel)
       << "Frame should be amplified.";
 }
+
+// TODO(webrtc:7494): Remove once AudioProcessing::Config::PreAmplifier removed.
+TEST(AudioProcessingImplTest, GainController2PreFixedDigitalConfig) {
+  // Checks that AudioProcessing::Config::PreAmplifier (deprecated) can still be
+  // used and also that AudioProcessing::Config::GainController2 can already be
+  // used (even if is PreAmplifier has not been removed yet).
+  constexpr int16_t kAudioLevel = 10000;
+  constexpr float kGainFactor = 2.f;
+
+  // Creates an APM instance applying the given config, processes a frame twice
+  // and returns a sample from the last processed frame.
+  auto run_apm = [](const webrtc::AudioProcessing::Config& config,
+                    float audio_level) -> float {
+    std::unique_ptr<AudioProcessing> apm(AudioProcessingBuilder().Create());
+    apm->ApplyConfig(config);
+    AudioFrame frame;
+    InitializeAudioFrame(static_cast<size_t>(48000), static_cast<size_t>(2),
+                         &frame);
+    for (size_t i = 0; i < 2; ++i) {
+      FillFixedFrame(audio_level, &frame);
+      apm->ProcessStream(&frame);
+    }
+    return frame.data()[100];
+  };
+
+  // PreAmplifier overrides GainController2::pre_fixed_digital when
+  // GainController2 is disabled.
+  // Case 1: PreAmplifier enabled.
+  {
+    webrtc::AudioProcessing::Config apm_config;
+    apm_config.pre_amplifier.enabled = true;
+    apm_config.pre_amplifier.fixed_gain_factor = kGainFactor;
+    apm_config.gain_controller2.enabled = false;
+    EXPECT_EQ(run_apm(apm_config, kAudioLevel), kGainFactor * kAudioLevel);
+  }
+  // Case 2: PreAmplifier disabled.
+  {
+    webrtc::AudioProcessing::Config apm_config;
+    apm_config.pre_amplifier.enabled = false;
+    apm_config.gain_controller2.enabled = false;
+    EXPECT_EQ(run_apm(apm_config, kAudioLevel), kAudioLevel);
+  }
+
+  // GainController2::pre_fixed_digital overrides PreAmplifier when the
+  // GainController2 is enabled and PreAmplifier is disabled.
+  {
+    webrtc::AudioProcessing::Config apm_config;
+    apm_config.pre_amplifier.enabled = false;
+    apm_config.gain_controller2.enabled = true;
+    apm_config.gain_controller2.pre_fixed_digital.enabled = true;
+    apm_config.gain_controller2.pre_fixed_digital.gain_factor = kGainFactor;
+    EXPECT_EQ(run_apm(apm_config, kAudioLevel), kGainFactor * kAudioLevel);
+  }
+}
+
+// Death tests must be disabled on Android because they misbehave, see
+// base/test/gtest_util.h.
+#if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
+// TODO(webrtc:7494): Remove once AudioProcessing::Config::PreAmplifier removed.
+TEST(AudioProcessingImplTest, GainController2PreFixedDigitalMutualExclusive) {
+  // Enabling the pre-processing fixed digital gain in both ways (i.e., through
+  // PreAmplifier and GainController2) is not allowed even if the gain factor is
+  // the same.
+  constexpr float kGainFactor = 2.f;
+  webrtc::AudioProcessing::Config apm_config;
+  apm_config.pre_amplifier.enabled = true;
+  apm_config.pre_amplifier.fixed_gain_factor = kGainFactor;
+  apm_config.gain_controller2.enabled = true;
+  apm_config.gain_controller2.pre_fixed_digital.enabled = true;
+  apm_config.gain_controller2.pre_fixed_digital.gain_factor = kGainFactor;
+  std::unique_ptr<AudioProcessing> apm(AudioProcessingBuilder().Create());
+  EXPECT_DEATH(apm->ApplyConfig(apm_config), "");
+}
+#endif
 
 TEST(AudioProcessingImplTest, RenderPreProcessorBeforeEchoDetector) {
   // Make sure that signal changes caused by a render pre-processing sub-module
