@@ -42,7 +42,7 @@ float RunAgc2WithConstantInput(GainController2* agc2,
   // Give time to the level estimator to converge.
   for (size_t i = 0; i < num_frames + 1; ++i) {
     SetAudioBufferSamples(input_level, &ab);
-    agc2->Process(&ab);
+    agc2->PostProcess(&ab);
   }
 
   // Return the last sample from the last processed frame.
@@ -90,14 +90,14 @@ float GainAfterProcessingFile(GainController2* gain_controller) {
                                    capture_input);
 
     test::CopyVectorToAudioBuffer(capture_config, capture_input, &ab);
-    gain_controller->Process(&ab);
+    gain_controller->PostProcess(&ab);
   }
 
   // Send in a last frame with values constant 1 (It's low enough to detect high
   // gain, and for ease of computation). The applied gain is the result.
   constexpr float sample_value = 1.f;
   SetAudioBufferSamples(sample_value, &ab);
-  gain_controller->Process(&ab);
+  gain_controller->PostProcess(&ab);
   return ab.channels_f()[0][0];
 }
 
@@ -261,6 +261,7 @@ TEST(GainController2, UsageSaturationMargin) {
   // high. They should not be amplified at all, but only after convergence. GC2
   // starts with a gain, and it takes time until it's down to 0 dB.
   config.fixed_digital.gain_db = 0.f;
+  config.adaptive_digital.enabled = true;
   config.adaptive_digital.extra_saturation_margin_db = 50.f;
   gain_controller2.ApplyConfig(config);
 
@@ -274,6 +275,7 @@ TEST(GainController2, UsageNoSaturationMargin) {
   AudioProcessing::Config::GainController2 config;
   // Check that some gain is applied if there is no margin.
   config.fixed_digital.gain_db = 0.f;
+  config.adaptive_digital.enabled = true;
   config.adaptive_digital.extra_saturation_margin_db = 0.f;
   gain_controller2.ApplyConfig(config);
 
