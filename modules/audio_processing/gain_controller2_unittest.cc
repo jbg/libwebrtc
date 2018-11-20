@@ -42,7 +42,7 @@ float RunAgc2WithConstantInput(GainController2* agc2,
   // Give time to the level estimator to converge.
   for (size_t i = 0; i < num_frames + 1; ++i) {
     SetAudioBufferSamples(input_level, &ab);
-    agc2->Process(&ab);
+    agc2->PostProcess(&ab);
   }
 
   // Return the last sample from the last processed frame.
@@ -90,14 +90,14 @@ float GainAfterProcessingFile(GainController2* gain_controller) {
                                    capture_input);
 
     test::CopyVectorToAudioBuffer(capture_config, capture_input, &ab);
-    gain_controller->Process(&ab);
+    gain_controller->PostProcess(&ab);
   }
 
   // Send in a last frame with values constant 1 (It's low enough to detect high
   // gain, and for ease of computation). The applied gain is the result.
   constexpr float sample_value = 1.f;
   SetAudioBufferSamples(sample_value, &ab);
-  gain_controller->Process(&ab);
+  gain_controller->PostProcess(&ab);
   return ab.channels_f()[0][0];
 }
 
