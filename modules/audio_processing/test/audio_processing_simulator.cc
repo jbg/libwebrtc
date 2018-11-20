@@ -354,21 +354,28 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
   if (settings_.use_ts) {
     config.Set<ExperimentalNs>(new ExperimentalNs(*settings_.use_ts));
   }
-  if (settings_.use_agc2) {
-    apm_config.gain_controller2.enabled = *settings_.use_agc2;
-    apm_config.gain_controller2.fixed_digital.gain_db =
-        settings_.agc2_fixed_gain_db;
-    if (settings_.agc2_use_adaptive_gain) {
-      apm_config.gain_controller2.adaptive_digital.enabled =
-          *settings_.agc2_use_adaptive_gain;
-      apm_config.gain_controller2.adaptive_digital.level_estimator =
-          settings_.agc2_adaptive_level_estimator;
+
+  // AGC2.
+  if (settings_.use_agc2.has_value()) {
+    apm_config.gain_controller2.enabled = settings_.use_agc2.value();
+    if (apm_config.gain_controller2.enabled) {
+      // Pre-processing.
+      if (settings_.agc2_use_pre_fixed_digital.has_value()) {
+        apm_config.gain_controller2.pre_fixed_digital.enabled =
+            settings_.agc2_use_pre_fixed_digital.value();
+        apm_config.gain_controller2.pre_fixed_digital.gain_factor =
+            settings_.agc2_pre_fixed_gain_factor;
+      }
+      // Post-processing.
+      apm_config.gain_controller2.fixed_digital.gain_db =
+          settings_.agc2_fixed_gain_db;
+      if (settings_.agc2_use_adaptive_gain.has_value()) {
+        apm_config.gain_controller2.adaptive_digital.enabled =
+            settings_.agc2_use_adaptive_gain.value();
+        apm_config.gain_controller2.adaptive_digital.level_estimator =
+            settings_.agc2_adaptive_level_estimator;
+      }
     }
-  }
-  if (settings_.use_pre_amplifier) {
-    apm_config.pre_amplifier.enabled = *settings_.use_pre_amplifier;
-    apm_config.pre_amplifier.fixed_gain_factor =
-        settings_.pre_amplifier_gain_factor;
   }
 
   bool use_aec2 = settings_.use_aec && *settings_.use_aec;
