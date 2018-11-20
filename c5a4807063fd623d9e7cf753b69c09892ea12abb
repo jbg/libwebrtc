@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "85badb20_b2430f20",
+        "filename": "api/audio/echo_canceller3_config.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-20T11:56:07Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "a596ae1e_ed6a888a",
+      "range": {
+        "startLine": 120,
+        "startChar": 15,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "c5a4807063fd623d9e7cf753b69c09892ea12abb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a8a2ebb_3bae9bb2",
         "filename": "modules/audio_processing/aec3/erle_estimator.cc",
         "patchSetId": 13
