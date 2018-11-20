@@ -319,7 +319,7 @@ absl::optional<SdpAudioFormat> AcmReceiver::LastAudioFormat() const {
   return last_audio_format_;
 }
 
-void AcmReceiver::GetNetworkStatistics(NetworkStatistics* acm_stat) {
+void AcmReceiver::GetNetworkStatistics(NetworkStatistics* acm_stat) const {
   NetEqNetworkStatistics neteq_stat;
   // NetEq function always returns zero, so we don't check the return value.
   neteq_->NetworkStatistics(&neteq_stat);
