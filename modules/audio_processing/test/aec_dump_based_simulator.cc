@@ -442,13 +442,14 @@ void AecDumpBasedSimulator::HandleMessage(
       }
     }
 
-    if (msg.has_pre_amplifier_enabled() || settings_.use_pre_amplifier) {
-      const bool enable = settings_.use_pre_amplifier
-                              ? *settings_.use_pre_amplifier
+    if (msg.has_pre_amplifier_enabled() ||
+        settings_.agc2_use_pre_fixed_digital.has_value()) {
+      const bool enable = settings_.agc2_use_pre_fixed_digital.has_value()
+                              ? settings_.agc2_use_pre_fixed_digital.value()
                               : msg.pre_amplifier_enabled();
-      apm_config.pre_amplifier.enabled = enable;
-      apm_config.pre_amplifier.fixed_gain_factor =
-          settings_.pre_amplifier_gain_factor;
+      apm_config.gain_controller2.pre_fixed_digital.enabled = enable;
+      apm_config.gain_controller2.pre_fixed_digital.gain_factor =
+          settings_.agc2_pre_fixed_gain_factor;
     }
 
     if (settings_.use_verbose_logging && msg.has_experiments_description() &&
