@@ -10,32 +10,26 @@
 #ifndef API_CALL_BITRATE_ALLOCATION_H_
 #define API_CALL_BITRATE_ALLOCATION_H_
 
-#include "api/units/data_rate.h"
-#include "api/units/time_delta.h"
+#include <stdint.h>
 
 namespace webrtc {
-
 // BitrateAllocationUpdate provides information to allocated streams about their
 // bitrate allocation. It originates from the BitrateAllocater class and is
 // propagated from there.
 struct BitrateAllocationUpdate {
   // The allocated target bitrate. Media streams should produce this amount of
   // data. (Note that this may include packet overhead depending on
-  // configuration.)
-  DataRate target_bitrate = DataRate::Zero();
+  // configuration.
+  uint32_t target_bitrate_bps;
   // The allocated part of the estimated link capacity. This is more stable than
-  // the target as it is based on the underlying link capacity estimate. This
+  // the target as it's based on the underlying link capacity estimate. This
   // should be used to change encoder configuration when the cost of change is
   // high.
-  DataRate link_capacity = DataRate::Zero();
-  // Predicted packet loss ratio.
-  double packet_loss_ratio = 0;
-  // Predicted round trip time.
-  TimeDelta round_trip_time = TimeDelta::PlusInfinity();
-  // |bwe_period| is deprecated, use the link capacity allocation instead.
-  TimeDelta bwe_period = TimeDelta::PlusInfinity();
+  uint32_t link_capacity_bps;
+  uint8_t fraction_loss;
+  int64_t rtt;
+  // |bwe_period_ms| is deprecated, use the link capacity allocation instead.
+  int64_t bwe_period_ms;
 };
-
 }  // namespace webrtc
-
 #endif  // API_CALL_BITRATE_ALLOCATION_H_

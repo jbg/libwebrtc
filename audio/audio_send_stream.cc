@@ -473,18 +473,18 @@ uint32_t AudioSendStream::OnBitrateUpdated(BitrateAllocationUpdate update) {
   // A send stream may be allocated a bitrate of zero if the allocator decides
   // to disable it. For now we ignore this decision and keep sending on min
   // bitrate.
-  if (update.target_bitrate.IsZero()) {
-    update.target_bitrate = DataRate::bps(config_.min_bitrate_bps);
+  if (update.target_bitrate_bps == 0) {
+    update.target_bitrate_bps = config_.min_bitrate_bps;
   }
-  RTC_DCHECK_GE(update.target_bitrate.bps<int>(), config_.min_bitrate_bps);
+  RTC_DCHECK_GE(update.target_bitrate_bps,
+                static_cast<uint32_t>(config_.min_bitrate_bps));
   // The bitrate allocator might allocate an higher than max configured bitrate
   // if there is room, to allow for, as example, extra FEC. Ignore that for now.
-  const DataRate max_bitrate = DataRate::bps(config_.max_bitrate_bps);
-  if (update.target_bitrate > max_bitrate)
-    update.target_bitrate = max_bitrate;
+  const uint32_t max_bitrate_bps = config_.max_bitrate_bps;
+  if (update.target_bitrate_bps > max_bitrate_bps)
+    update.target_bitrate_bps = max_bitrate_bps;
 
-  channel_send_->SetBitrate(update.target_bitrate.bps(),
-                            update.bwe_period.ms());
+  channel_send_->OnBitrateAllocation(update);
 
   // The amount of audio protection is not exposed by the encoder, hence
   // always returning 0.

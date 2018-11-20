@@ -42,6 +42,7 @@ namespace {
 using testing::_;
 using testing::Eq;
 using testing::Ne;
+using testing::Field;
 using testing::Invoke;
 using testing::Return;
 using testing::StrEq;
@@ -473,25 +474,30 @@ TEST(AudioSendStreamTest, SendCodecCanApplyVad) {
 TEST(AudioSendStreamTest, DoesNotPassHigherBitrateThanMaxBitrate) {
   ConfigHelper helper(false, true);
   auto send_stream = helper.CreateAudioSendStream();
-  EXPECT_CALL(*helper.channel_send(),
-              SetBitrate(helper.config().max_bitrate_bps, _));
+  EXPECT_CALL(*helper.channel_proxy(),
+              OnBitrateAllocation(Field(
+                  &BitrateAllocationUpdate::target_bitrate_bps,
+                  Eq(static_cast<uint32_t>(helper.config().max_bitrate_bps)))));
   BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::bps(helper.config().max_bitrate_bps + 5000);
-  update.packet_loss_ratio = 0;
-  update.round_trip_time = TimeDelta::ms(50);
-  update.bwe_period = TimeDelta::ms(6000);
+  update.target_bitrate_bps = helper.config().max_bitrate_bps + 5000;
+  update.fraction_loss = 0;
+  update.rtt = 50;
+  update.bwe_period_ms = 6000;
   send_stream->OnBitrateUpdated(update);
 }
 
 TEST(AudioSendStreamTest, ProbingIntervalOnBitrateUpdated) {
   ConfigHelper helper(false, true);
   auto send_stream = helper.CreateAudioSendStream();
-  EXPECT_CALL(*helper.channel_send(), SetBitrate(_, 5000));
+
+  EXPECT_CALL(*helper.channel_proxy(),
+              OnBitrateAllocation(Field(
+                  &BitrateAllocationUpdate::target_bitrate_bps, Eq(5000u))));
   BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::bps(helper.config().max_bitrate_bps + 5000);
-  update.packet_loss_ratio = 0;
-  update.round_trip_time = TimeDelta::ms(50);
-  update.bwe_period = TimeDelta::ms(5000);
+  update.target_bitrate_bps = helper.config().max_bitrate_bps + 5000;
+  update.fraction_loss = 0;
+  update.rtt = 50;
+  update.bwe_period_ms = 5000;
   send_stream->OnBitrateUpdated(update);
 }
 
