@@ -82,30 +82,6 @@ bool EchoCanceller3Config::Validate(EchoCanceller3Config* config) {
   EchoCanceller3Config* c = config;
   bool res = true;
 
-  if (c->delay.down_sampling_factor != 4 &&
-      c->delay.down_sampling_factor != 8) {
-    c->delay.down_sampling_factor = 4;
-    res = false;
-  }
-  if (c->delay.delay_headroom_blocks <= 1 &&
-      c->delay.hysteresis_limit_1_blocks == 1) {
-    c->delay.hysteresis_limit_1_blocks = 0;
-    res = false;
-  }
-  res = res & Limit(&c->delay.default_delay, 0, 5000);
-  res = res & Limit(&c->delay.num_filters, 0, 5000);
-  res = res & Limit(&c->delay.api_call_jitter_blocks, 1, 5000);
-  res = res & Limit(&c->delay.min_echo_path_delay_blocks, 0, 5000);
-  res = res & Limit(&c->delay.delay_headroom_blocks, 0, 5000);
-  res = res & Limit(&c->delay.hysteresis_limit_1_blocks, 0, 5000);
-  res = res & Limit(&c->delay.hysteresis_limit_2_blocks, 0, 5000);
-  res = res & Limit(&c->delay.skew_hysteresis_blocks, 0, 5000);
-  res = res & Limit(&c->delay.fixed_capture_delay_samples, 0, 5000);
-  res = res & Limit(&c->delay.delay_estimate_smoothing, 0.f, 1.f);
-  res = res & Limit(&c->delay.delay_candidate_detection_threshold, 0.f, 1.f);
-  res = res & Limit(&c->delay.delay_selection_thresholds.initial, 1, 250);
-  res = res & Limit(&c->delay.delay_selection_thresholds.converged, 1, 250);
-
   res = res & Limit(&c->filter.main.length_blocks, 1, 50);
   res = res & Limit(&c->filter.main.leakage_converged, 0.f, 1000.f);
   res = res & Limit(&c->filter.main.leakage_diverged, 0.f, 1000.f);
@@ -141,6 +117,31 @@ bool EchoCanceller3Config::Validate(EchoCanceller3Config* config) {
   res = res & Limit(&c->filter.config_change_duration_blocks, 0, 100000);
   res = res & Limit(&c->filter.initial_state_seconds, 0.f, 100.f);
 
+  if (c->delay.down_sampling_factor != 4 &&
+      c->delay.down_sampling_factor != 8) {
+    c->delay.down_sampling_factor = 4;
+    res = false;
+  }
+  if (c->delay.delay_headroom_blocks <= 1 &&
+      c->delay.hysteresis_limit_1_blocks == 1) {
+    c->delay.hysteresis_limit_1_blocks = 0;
+    res = false;
+  }
+  res = res & Limit(&c->delay.default_delay, 0, 5000);
+  res = res & Limit(&c->delay.num_filters, 0, 5000);
+  res = res & Limit(&c->delay.api_call_jitter_blocks, 1, 5000);
+  res = res & Limit(&c->delay.min_echo_path_delay_blocks, 0, 5000);
+  res = res & Limit(&c->delay.delay_headroom_blocks, 0,
+                    c->filter.main_initial.length_blocks);
+  res = res & Limit(&c->delay.hysteresis_limit_1_blocks, 0, 5000);
+  res = res & Limit(&c->delay.hysteresis_limit_2_blocks, 0, 5000);
+  res = res & Limit(&c->delay.skew_hysteresis_blocks, 0, 5000);
+  res = res & Limit(&c->delay.fixed_capture_delay_samples, 0, 5000);
+  res = res & Limit(&c->delay.delay_estimate_smoothing, 0.f, 1.f);
+  res = res & Limit(&c->delay.delay_candidate_detection_threshold, 0.f, 1.f);
+  res = res & Limit(&c->delay.delay_selection_thresholds.initial, 1, 250);
+  res = res & Limit(&c->delay.delay_selection_thresholds.converged, 1, 250);
+
   res = res & Limit(&c->erle.min, 1.f, 100000.f);
   res = res & Limit(&c->erle.max_l, 1.f, 100000.f);
   res = res & Limit(&c->erle.max_h, 1.f, 100000.f);
@@ -148,11 +149,12 @@ bool EchoCanceller3Config::Validate(EchoCanceller3Config* config) {
     c->erle.min = std::min(c->erle.max_l, c->erle.max_h);
     res = false;
   }
+  res = res & Limit(&c->erle.num_sections, 1, c->filter.main.length_blocks);
 
   res = res & Limit(&c->ep_strength.lf, 0.f, 1000000.f);
   res = res & Limit(&c->ep_strength.mf, 0.f, 1000000.f);
   res = res & Limit(&c->ep_strength.hf, 0.f, 1000000.f);
-  res = res & Limit(&c->ep_strength.default_len, 0.f, 1.f);
+  res = res & Limit(&c->ep_strength.default_len, -1.f, 1.f);
 
   res =
       res & Limit(&c->echo_audibility.low_render_limit, 0.f, 32768.f * 32768.f);
