@@ -200,7 +200,6 @@ EventGenerator::NewIceCandidatePair() {
           static_cast<uint32_t>(IceCandidatePairEventType::kNumValues) - 1));
   uint32_t pair_id = prng_.Rand<uint32_t>();
   uint32_t transaction_id = prng_.Rand<uint32_t>();
-
   return absl::make_unique<RtcEventIceCandidatePair>(type, pair_id,
                                                      transaction_id);
 }
@@ -617,6 +616,7 @@ void EventVerifier::VerifyLoggedIceCandidatePairEvent(
 
   EXPECT_EQ(original_event.type(), logged_event.type);
   EXPECT_EQ(original_event.candidate_pair_id(), logged_event.candidate_pair_id);
+  EXPECT_EQ(original_event.transaction_id(), logged_event.transaction_id);
 }
 
 void VerifyLoggedRtpHeader(const RtpPacket& original_header,
