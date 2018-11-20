@@ -77,9 +77,6 @@ WEBRTC_DEFINE_int(agc,
 WEBRTC_DEFINE_int(agc2,
                   kParameterNotSpecifiedValue,
                   "Activate (1) or deactivate(0) the AGC2");
-WEBRTC_DEFINE_int(pre_amplifier,
-                  kParameterNotSpecifiedValue,
-                  "Activate (1) or deactivate(0) the pre amplifier");
 WEBRTC_DEFINE_int(hpf,
                   kParameterNotSpecifiedValue,
                   "Activate (1) or deactivate(0) the high-pass filter");
@@ -146,13 +143,19 @@ WEBRTC_DEFINE_int(agc_limiter,
 WEBRTC_DEFINE_int(agc_compression_gain,
                   kParameterNotSpecifiedValue,
                   "Specify the AGC compression gain (0-90)");
-WEBRTC_DEFINE_float(agc2_enable_adaptive_gain,
-                    kParameterNotSpecifiedValue,
-                    "Activate (1) or deactivate(0) the AGC2 adaptive gain");
+WEBRTC_DEFINE_int(
+    agc2_use_pre_fixed_digital,
+    kParameterNotSpecifiedValue,
+    "Activate (1) or deactivate(0) the AGC2 pre-processing fixed digital gain");
+WEBRTC_DEFINE_float(
+    agc2_pre_fixed_gain_factor,
+    1.f,
+    "Specify the pre-processing fixed digital (linear) gain factor to apply");
 WEBRTC_DEFINE_float(agc2_fixed_gain_db, 0.f, "AGC2 fixed gain (dB) to apply");
-WEBRTC_DEFINE_float(pre_amplifier_gain_factor,
-                    1.f,
-                    "Pre-amplifier gain factor (linear) to apply");
+WEBRTC_DEFINE_int(
+    agc2_use_adaptive_gain,
+    kParameterNotSpecifiedValue,
+    "Activate (1) or deactivate(0) the AGC2 adaptive digital gain");
 WEBRTC_DEFINE_int(vad_likelihood,
                   kParameterNotSpecifiedValue,
                   "Specify the VAD likelihood (0-3)");
@@ -237,7 +240,6 @@ SimulationSettings CreateSettings() {
     settings.use_hpf = true;
     settings.use_agc = true;
     settings.use_agc2 = false;
-    settings.use_pre_amplifier = false;
     settings.use_aec = true;
     settings.use_aecm = false;
     settings.use_ed = false;
@@ -264,7 +266,6 @@ SimulationSettings CreateSettings() {
   SetSettingIfSpecified(FLAG_ed_graph, &settings.ed_graph_output_filename);
   SetSettingIfFlagSet(FLAG_agc, &settings.use_agc);
   SetSettingIfFlagSet(FLAG_agc2, &settings.use_agc2);
-  SetSettingIfFlagSet(FLAG_pre_amplifier, &settings.use_pre_amplifier);
   SetSettingIfFlagSet(FLAG_hpf, &settings.use_hpf);
   SetSettingIfFlagSet(FLAG_ns, &settings.use_ns);
   SetSettingIfFlagSet(FLAG_ts, &settings.use_ts);
@@ -290,10 +291,12 @@ SimulationSettings CreateSettings() {
   SetSettingIfFlagSet(FLAG_agc_limiter, &settings.use_agc_limiter);
   SetSettingIfSpecified(FLAG_agc_compression_gain,
                         &settings.agc_compression_gain);
-  SetSettingIfFlagSet(FLAG_agc2_enable_adaptive_gain,
-                      &settings.agc2_use_adaptive_gain);
+  SetSettingIfFlagSet(FLAG_agc2_use_pre_fixed_digital,
+                      &settings.agc2_use_pre_fixed_digital);
+  settings.agc2_pre_fixed_gain_factor = FLAG_agc2_pre_fixed_gain_factor;
   settings.agc2_fixed_gain_db = FLAG_agc2_fixed_gain_db;
-  settings.pre_amplifier_gain_factor = FLAG_pre_amplifier_gain_factor;
+  SetSettingIfFlagSet(FLAG_agc2_use_adaptive_gain,
+                      &settings.agc2_use_adaptive_gain);
   SetSettingIfSpecified(FLAG_vad_likelihood, &settings.vad_likelihood);
   SetSettingIfSpecified(FLAG_ns_level, &settings.ns_level);
   SetSettingIfSpecified(FLAG_stream_delay, &settings.stream_delay);
@@ -392,11 +395,23 @@ void PerformBasicParameterSanityChecks(const SimulationSettings& settings) {
                                         (*settings.agc_compression_gain) > 90),
       "Error: --agc_compression_gain must be specified between 0 and 90.\n");
 
+  // AGC2 params.
+  const bool agc2_unspecified_or_disabled =
+      !settings.use_agc2.has_value() || !settings.use_agc2.value();
   ReportConditionalErrorAndExit(
-      settings.use_agc2 && *settings.use_agc2 &&
-          ((settings.agc2_fixed_gain_db) < 0 ||
-           (settings.agc2_fixed_gain_db) > 90),
+      agc2_unspecified_or_disabled &&
+          settings.agc2_use_pre_fixed_digital.has_value(),
+      "Error: --agc2_use_pre_fixed_digital requires '--use_agc2 1'.\n");
+  ReportConditionalErrorAndExit(
+      settings.agc2_pre_fixed_gain_factor <= 0.f,
+      "Error: --agc2_pre_fixed_gain_factor must be positive.\n");
+  ReportConditionalErrorAndExit(
+      settings.agc2_fixed_gain_db < 0 || settings.agc2_fixed_gain_db > 90,
       "Error: --agc2_fixed_gain_db must be specified between 0 and 90.\n");
+  ReportConditionalErrorAndExit(
+      agc2_unspecified_or_disabled &&
+          settings.agc2_use_adaptive_gain.has_value(),
+      "Error: --agc2_use_adaptive_gain requires '--use_agc2 1'.\n");
 
   ReportConditionalErrorAndExit(
       settings.vad_likelihood &&

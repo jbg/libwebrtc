@@ -52,7 +52,6 @@ struct SimulationSettings {
   absl::optional<std::string> ed_graph_output_filename;
   absl::optional<bool> use_agc;
   absl::optional<bool> use_agc2;
-  absl::optional<bool> use_pre_amplifier;
   absl::optional<bool> use_hpf;
   absl::optional<bool> use_ns;
   absl::optional<bool> use_ts;
@@ -73,9 +72,10 @@ struct SimulationSettings {
   absl::optional<int> agc_target_level;
   absl::optional<bool> use_agc_limiter;
   absl::optional<int> agc_compression_gain;
+  absl::optional<bool> agc2_use_pre_fixed_digital;
+  float agc2_pre_fixed_gain_factor = 1.f;
+  float agc2_fixed_gain_db = 0.f;
   absl::optional<bool> agc2_use_adaptive_gain;
-  float agc2_fixed_gain_db;
-  float pre_amplifier_gain_factor;
   absl::optional<int> vad_likelihood;
   absl::optional<int> ns_level;
   absl::optional<bool> use_refined_adaptive_filter;
