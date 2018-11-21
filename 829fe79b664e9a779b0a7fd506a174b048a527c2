@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d77214f_92e941db",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-11-21T09:18:10Z",
+      "side": 1,
+      "message": "I think we may just change OnReceivedUplinkBandwidth to OnReceivedUplinkBandwidth(BitrateAllocationUpdate update) (and same argument all the way up to audiosendstream)\n\nBut the value comes from there anyway, if I am not mistaken. Then the field trial is only to by-pass the smoother. In this regards, we don\u0027t even need any API changes to do so.\n\nI might be wrong. If you think adding the API is needed, please draft follow-up CLs and show where it goes.",
+      "range": {
+        "startLine": 122,
+        "startChar": 34,
+        "endLine": 122,
+        "endChar": 57
+      },
+      "revId": "829fe79b664e9a779b0a7fd506a174b048a527c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
