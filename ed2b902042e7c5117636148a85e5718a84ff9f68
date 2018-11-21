@@ -94,6 +94,30 @@
       "revId": "ed2b902042e7c5117636148a85e5718a84ff9f68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84350a01_8ba48b3d",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-21T07:51:38Z",
+      "side": 1,
+      "message": "Ah, that\u0027s it. The audio pipeline is a bit different from the video pipeline, which I\u0027m more familiar with.",
+      "parentUuid": "b5a259cb_01c3e0f3",
+      "range": {
+        "startLine": 3525,
+        "startChar": 0,
+        "endLine": 3527,
+        "endChar": 34
+      },
+      "revId": "ed2b902042e7c5117636148a85e5718a84ff9f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
