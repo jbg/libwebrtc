@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "db32bf92_fe8708c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-11-21T15:12:30Z",
+      "side": 1,
+      "message": "nit: I don\u0027t understand this sentence. :(",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "c1770eac4915d4182ef5cdebc5dba4d02e4ffad4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e7ea316_93491fe5",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-11-21T15:12:30Z",
+      "side": 1,
+      "message": "nit: Shouldn\u0027t the conversion be the other way around, turning config_.min_bitrate_bps into a DataRate?",
+      "range": {
+        "startLine": 479,
+        "startChar": 2,
+        "endLine": 479,
+        "endChar": 74
+      },
+      "revId": "c1770eac4915d4182ef5cdebc5dba4d02e4ffad4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf01a60d_6b1ee361",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2018-11-21T15:12:30Z",
+      "side": 1,
+      "message": "Will you be updating ChannelSend::SetBitrate to take a DataRate as well?",
+      "range": {
+        "startLine": 486,
+        "startChar": 17,
+        "endLine": 486,
+        "endChar": 27
+      },
+      "revId": "c1770eac4915d4182ef5cdebc5dba4d02e4ffad4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3cc4277d_30403283",
         "filename": "call/bitrate_allocator_unittest.cc",
         "patchSetId": 7
