@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "105c038d_42c1f763",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-11-21T15:26:47Z",
+      "side": 1,
+      "message": "It is still good to handle or DCHECK misconfigured situation.\n\nOh, a related question is MaybeUpdateUplinkBandwidth can be called before link_capacity_allocation_bps_ gets its value, and I don\u0027t think link_capacity_allocation_bps_ is (and can be) properly initialized.\n\nI think it should be an absl:optional and action only when it gets values.",
+      "parentUuid": "de96e015_cb20f067",
+      "range": {
+        "startLine": 897,
+        "startChar": 49,
+        "endLine": 897,
+        "endChar": 78
+      },
+      "revId": "829fe79b664e9a779b0a7fd506a174b048a527c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d77214f_92e941db",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 2
