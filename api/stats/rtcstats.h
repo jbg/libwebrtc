@@ -348,6 +348,15 @@ class RTCNonStandardStatsMember : public RTCStatsMember<T> {
       : RTCStatsMember<T>(std::move(other)) {}
 
   bool is_standardized() const override { return false; }
+
+  T& operator=(const T& value) { return RTCStatsMember<T>::operator=(value); }
+  T& operator=(const T&& value) {
+    return RTCStatsMember<T>::operator=(std::move(value));
+  }
+  T& operator=(const RTCNonStandardStatsMember<T>& other) {
+    // passing by reference - slicing shouldn't be an issue
+    return RTCNonStandardStatsMember<T>::operator=(other);
+  }
 };
 }  // namespace webrtc
 
