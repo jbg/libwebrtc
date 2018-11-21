@@ -16,6 +16,24 @@
       "revId": "7e031b51c2293497a1bb7f77962cf2619acc4b77",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae8979ad_8a74b7d2",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-21T08:10:08Z",
+      "side": 1,
+      "message": "Maybe wording was poor. Thing is, if we\u0027re no longer using the top-level acm, it seems wrong to include audio_coding_module.h. Here, we only need the stats structs, which are defined in audio_coding_module_typedefs.h. But I can\u0027t include that one, without tweaking gn visibility.",
+      "parentUuid": "bb1b9f54_3b1e992f",
+      "revId": "7e031b51c2293497a1bb7f77962cf2619acc4b77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
