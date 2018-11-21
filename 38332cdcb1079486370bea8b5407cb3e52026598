@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e53c2b92_44fd50be",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-11-21T12:20:19Z",
+      "side": 0,
+      "message": "Ah, now I see that we had the same behavior before. I still think this \u0027if\u0027 is unnecessary. But no strong opinions.",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 4
+      },
+      "revId": "38332cdcb1079486370bea8b5407cb3e52026598",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

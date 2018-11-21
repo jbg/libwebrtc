@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29ca7ffe_ec3deca4",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2018-11-21T12:20:19Z",
+      "side": 1,
+      "message": "I think it\u0027s unnecessary. ApplyConfig should be called seldom enough that extra \u0027limiter.Reset()\u0027 calls are not a problem.",
+      "range": {
+        "startLine": 98,
+        "startChar": 13,
+        "endLine": 98,
+        "endChar": 35
+      },
+      "revId": "00c50b6199291158b71fd193e934d0eae6acdeab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
