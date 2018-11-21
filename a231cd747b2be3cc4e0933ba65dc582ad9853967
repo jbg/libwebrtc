@@ -1,0 +1,227 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4122af1_c451d341",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "There are very few good reasons to have a CHECK in realtime code, and I don\u0027t think this is a good one. Please try to find an approach which does not require a CHECK",
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2745a9f5_5e4d7c75",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "This works now, but I\u0027m not that sure this is what we want to do in the future.",
+      "range": {
+        "startLine": 1205,
+        "startChar": 49,
+        "endLine": 1205,
+        "endChar": 77
+      },
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37d3e183_5562e5a9",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "Please make the three cases here into 3 separate unittests. That will make the purpose of them clearer, and there is no drawbacks at all with separating them. run_apm can be made a method inside the anonymous namespace",
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b4da446_cdb02d5b",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "I\u0027m missing a test for the case when both \napm_config.pre_amplifier.enabled \u003d true;\napm_config.gain_controller2.enabled \u003d true;\n\nAs we should never crash, I don\u0027t think it should be handled by a death test.",
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01c5535e_8c588ca1",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "I think these comments should follow the rule about line comments in https://google.github.io/styleguide/cppguide.html#Implementation_Comments.\n\nAlso, for consistency (https://google.github.io/styleguide/cppguide.html#Comment_Style) I think the \"//\" style should be used.\n\nI don\u0027t think, however, that these comments are needed.",
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9992f2c_12b11579",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "I think this comment can be either removed, or made less vague. As it is now, it does not say anything beyond what the code says.",
+      "range": {
+        "startLine": 97,
+        "startChar": 5,
+        "endLine": 97,
+        "endChar": 28
+      },
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e421dee_cd242fa5",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "My feeling here is that the interesting thing is not to report the actual fixed factor, but rather the pre-digital gain applied. They now coincide but I guess the plan is that they shouldn\u0027t.\n\nIt would be good to have the API designed to handle the upcoming changes.",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 36
+      },
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61492863_17e124df",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "What does in-call safe mean?\n\nI\u0027d suggest creating the API such that no settings that should not changing during the call, can be changed during the call. It should be possible and will reduce the risk of erroneous usage of the API.",
+      "range": {
+        "startLine": 38,
+        "startChar": 48,
+        "endLine": 38,
+        "endChar": 60
+      },
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "752007d8_7bfa4910",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "The usage of the Pre abbreviation/prefix does not do that well for the readability.\nI guess that is now relate to PreProcess? Would it somehow be possible to make that better?\n\nWould it be possible to rephrase this as a runtime setting? Are there any further such in the plans?",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b02a7ebe_c876c508",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "Please specify how the mapping is done. Does the value of fixed_gain_factor here overwrite the other?",
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8c4433e_373365d3",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-21T06:30:41Z",
+      "side": 1,
+      "message": "replaces -\u003e replace",
+      "range": {
+        "startLine": 268,
+        "startChar": 34,
+        "endLine": 268,
+        "endChar": 42
+      },
+      "revId": "a231cd747b2be3cc4e0933ba65dc582ad9853967",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
