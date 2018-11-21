@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "e473cb8b_3773c599",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-21T09:38:23Z",
+      "side": 1,
+      "message": "Using target bitrate.",
+      "range": {
+        "startLine": 627,
+        "startChar": 33,
+        "endLine": 627,
+        "endChar": 57
+      },
+      "revId": "829fe79b664e9a779b0a7fd506a174b048a527c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2771b54b_6bed08ee",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-21T09:38:23Z",
+      "side": 1,
+      "message": "Note that we use link capacity instead of target bitrate.",
+      "range": {
+        "startLine": 897,
+        "startChar": 49,
+        "endLine": 897,
+        "endChar": 78
+      },
+      "revId": "829fe79b664e9a779b0a7fd506a174b048a527c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d77214f_92e941db",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 2
@@ -13,6 +59,30 @@
       "writtenOn": "2018-11-21T09:18:10Z",
       "side": 1,
       "message": "I think we may just change OnReceivedUplinkBandwidth to OnReceivedUplinkBandwidth(BitrateAllocationUpdate update) (and same argument all the way up to audiosendstream)\n\nBut the value comes from there anyway, if I am not mistaken. Then the field trial is only to by-pass the smoother. In this regards, we don\u0027t even need any API changes to do so.\n\nI might be wrong. If you think adding the API is needed, please draft follow-up CLs and show where it goes.",
+      "range": {
+        "startLine": 122,
+        "startChar": 34,
+        "endLine": 122,
+        "endChar": 57
+      },
+      "revId": "829fe79b664e9a779b0a7fd506a174b048a527c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9a2aa8f_a7636c5c",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-21T09:38:23Z",
+      "side": 1,
+      "message": "OnReceivedUplinkBandwidth is used in many places and is part of the public API. I think removing that should be a separate CL.\n\nThe field trial uses link_capacity instead of the smoothed target bitrate for the ANA decisions, so we need the new value for that to work.",
+      "parentUuid": "8d77214f_92e941db",
       "range": {
         "startLine": 122,
         "startChar": 34,
