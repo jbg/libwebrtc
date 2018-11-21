@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76d3526a_84e72156",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2018-11-21T08:26:46Z",
+      "side": 1,
+      "message": "It seems this now extends the runtime, instead of setting it. Should it be named accordingly?",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 1
+      },
+      "revId": "0773b12a1e2f5138399ac48f374ecc87a2c9eb53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
