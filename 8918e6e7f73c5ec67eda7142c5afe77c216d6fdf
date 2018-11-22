@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75c75c9d_4b1a0454",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-11-22T15:27:32Z",
+      "side": 1,
+      "message": "Since this is not actually testing what it is supposed to anymore, and getStats while closing is already covered below, can you leave this DISABLED to make it clear that this is not actually giving us any test coverage, and link to a new bug filed that is dedicated to making sure getStats while destroying the PC is safe. I imagine the TSAN bug will be fixed when we no longer have TSAN issues and I want to make sure we don\u0027t hide this issue since that is still a problem that requires engineering efforts.",
+      "revId": "8918e6e7f73c5ec67eda7142c5afe77c216d6fdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
