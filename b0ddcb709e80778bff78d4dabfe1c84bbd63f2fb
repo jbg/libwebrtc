@@ -33,6 +33,24 @@
       "revId": "b0ddcb709e80778bff78d4dabfe1c84bbd63f2fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6de936d_95117756",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-22T14:54:46Z",
+      "side": 1,
+      "message": "NB: Must of this has been discussed in the bug entry.\nWhether closing the PC is the right thing to do or not, for now it is better than muting concerned tests or living with noise and flakiness.",
+      "parentUuid": "7ad8d61f_2daf7e10",
+      "revId": "b0ddcb709e80778bff78d4dabfe1c84bbd63f2fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
