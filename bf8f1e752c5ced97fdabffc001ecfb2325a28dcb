@@ -22,6 +22,29 @@
       "revId": "bf8f1e752c5ced97fdabffc001ecfb2325a28dcb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e25c3d6c_a3a6f0e5",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-22T09:19:30Z",
+      "side": 1,
+      "message": "I don\u0027t see any value in reporting this value. This is just the start bitrate sent to the congestion controller. This is neither the actual bandwidth capacity of the link, nor, at this stage, the link capacity estimate/target bitrate set by the congestion controller and used by media streams.\n\nReporting it as zero at least shows that we haven\u0027t yet received any update which is useful for debugging (if we have 0 for a long time, something has gone wrong with the congestion controller)\n\nNote that there are conditions under which, the firsth reported bandwidth might not be this start_bitrate, conceptually, it\u0027s up for the congestion controller to decide.",
+      "range": {
+        "startLine": 447,
+        "startChar": 26,
+        "endLine": 447,
+        "endChar": 65
+      },
+      "revId": "bf8f1e752c5ced97fdabffc001ecfb2325a28dcb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
