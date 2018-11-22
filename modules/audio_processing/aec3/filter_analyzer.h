@@ -37,8 +37,6 @@ class FilterAnalyzer {
 
   // Updates the estimates with new input data.
   void Update(rtc::ArrayView<const float> filter_time_domain,
-              const std::vector<std::array<float, kFftLengthBy2Plus1>>&
-                  filter_freq_response,
               const RenderBuffer& render_buffer);
 
   // Returns the delay of the filter in terms of blocks.
@@ -58,9 +56,38 @@ class FilterAnalyzer {
   rtc::ArrayView<const float> GetAdjustedFilter() const { return h_highpass_; }
 
  private:
+  void AnalyzeRegion(rtc::ArrayView<const float> filter_time_domain,
+                     const RenderBuffer& render_buffer);
+
   void UpdateFilterGain(rtc::ArrayView<const float> filter_time_domain,
                         size_t max_index);
   void PreProcessFilter(rtc::ArrayView<const float> filter_time_domain);
+
+  void ResetRegion();
+
+  void SetRegionToAnalyze(rtc::ArrayView<const float> filter_time_domain);
+
+  struct FilterRegion {
+    size_t start_sample_;
+    size_t end_sample_;
+    bool last_region_;
+  };
+
+  class PeakDetector {
+   public:
+    void Reset();
+    void Update(rtc::ArrayView<const float> filter_to_analyze,
+                const FilterRegion& r,
+                size_t peak_index);
+    bool SignificantPeak() { return significant_peak_; }
+
+   private:
+    bool significant_peak_;
+    float filter_floor_accum_;
+    float filter_secondary_peak_;
+    size_t limit1_;
+    size_t limit2_;
+  };
 
   static int instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
@@ -68,6 +95,7 @@ class FilterAnalyzer {
   const bool bounded_erl_;
   const float default_gain_;
   const float active_render_threshold_;
+  const bool use_incremental_analysis_;
   std::vector<float> h_highpass_;
   int delay_blocks_ = 0;
   size_t blocks_since_reset_ = 0;
@@ -75,7 +103,11 @@ class FilterAnalyzer {
   size_t consistent_estimate_counter_ = 0;
   int consistent_delay_reference_ = -10;
   float gain_;
+  size_t peak_index_;
   int filter_length_blocks_;
+  FilterRegion region_;
+  PeakDetector peak_detector_;
+
   RTC_DISALLOW_COPY_AND_ASSIGN(FilterAnalyzer);
 };
 
