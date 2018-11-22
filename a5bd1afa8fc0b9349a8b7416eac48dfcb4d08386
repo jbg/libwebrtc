@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75cfed28_0afe2f68",
+        "filename": "tools_webrtc/gn_check_autofix.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-11-22T08:21:36Z",
+      "side": 1,
+      "message": "I think spaces before/after \"\"\" are not needed:\n\n  \"\"\"Return first item which evaluates to True, or fallback to None.\"\"\"",
+      "range": {
+        "startLine": 95,
+        "startChar": 2,
+        "endLine": 95,
+        "endChar": 73
+      },
+      "revId": "a5bd1afa8fc0b9349a8b7416eac48dfcb4d08386",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "348be842_d97a98db",
+        "filename": "tools_webrtc/gn_check_autofix.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-11-22T08:21:36Z",
+      "side": 1,
+      "message": "Since we are starting to improve and refactor this useful tool, I think we can start writing docs to the various functions (not all together, but a doc-block here would be nice).",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 51
+      },
+      "revId": "a5bd1afa8fc0b9349a8b7416eac48dfcb4d08386",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
