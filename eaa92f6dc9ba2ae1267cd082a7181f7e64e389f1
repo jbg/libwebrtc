@@ -22,6 +22,30 @@
       "revId": "eaa92f6dc9ba2ae1267cd082a7181f7e64e389f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7e6d129_5cd4602f",
+        "filename": "api/stats/rtcstats.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2018-11-22T14:19:19Z",
+      "side": 1,
+      "message": "Ok, you are right. However, after discussion with hbos@ we decided that we can delete these assignments for RTCNonStandardStatsMember and RTCStatsMember as well since they are never really  used.",
+      "parentUuid": "43f4a367_8b719277",
+      "range": {
+        "startLine": 357,
+        "startChar": 4,
+        "endLine": 357,
+        "endChar": 14
+      },
+      "revId": "eaa92f6dc9ba2ae1267cd082a7181f7e64e389f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
