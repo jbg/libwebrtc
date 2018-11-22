@@ -16,6 +16,24 @@
       "revId": "8918e6e7f73c5ec67eda7142c5afe77c216d6fdf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b75786fe_b864b7a7",
+        "filename": "pc/rtcstats_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-22T16:19:39Z",
+      "side": 1,
+      "message": "Done.\nI don\u0027t think it\u0027s two different issues. For now it\u0027s not 100% safe to GetStatsWhileDestroying,  and the sanitizer is just evidencing this fact!",
+      "parentUuid": "75c75c9d_4b1a0454",
+      "revId": "8918e6e7f73c5ec67eda7142c5afe77c216d6fdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
