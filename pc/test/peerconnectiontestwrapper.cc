@@ -67,7 +67,15 @@ PeerConnectionTestWrapper::PeerConnectionTestWrapper(
       network_thread_(network_thread),
       worker_thread_(worker_thread) {}
 
-PeerConnectionTestWrapper::~PeerConnectionTestWrapper() {}
+PeerConnectionTestWrapper::~PeerConnectionTestWrapper() {
+  // Either network_thread or worker_thread might be active at this point.
+  // Relying on ~PeerConnection to properly wait for them doesn't work,
+  // as a vptr race might occur (before we enter the destruction body).
+  // See: crbug.com/9847
+  if (pc()) {
+    pc()->Close();
+  }
+}
 
 bool PeerConnectionTestWrapper::CreatePc(
     const webrtc::PeerConnectionInterface::RTCConfiguration& config,
