@@ -16,6 +16,24 @@
       "revId": "9256d941bfd9fdb8123fcf5fd2aeb2346610925c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76c047bc_5f7ab453",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-22T18:08:39Z",
+      "side": 1,
+      "message": "That can be yet another thread than {network, worker, signaling}?\nThat would mean we have to track it.\n\n\u003e  with other issues\nI\u0027m not sure to see which ones. Is Close() particular in this regard?",
+      "parentUuid": "c72c4faa_04fe50fd",
+      "revId": "9256d941bfd9fdb8123fcf5fd2aeb2346610925c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
