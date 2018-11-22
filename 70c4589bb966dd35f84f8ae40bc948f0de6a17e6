@@ -16,6 +16,24 @@
       "revId": "70c4589bb966dd35f84f8ae40bc948f0de6a17e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dc2545e_f97d62a2",
+        "filename": "api/stats/rtcstats.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2018-11-22T12:43:34Z",
+      "side": 1,
+      "message": "You are right slicing is an issue here only potentially as you are right - there are no new data members, so incomplete data members copy (slicing) is not possible right now.\nBut if there were new members then I guess slicing still wouldn\u0027t be a problem because here other is passed by reference and it will be fine.\n\nShould I remove the comment?\n\nUPDATE:\nremoved comment and check size of objects to hint that you can\u0027t assign RTCNonStandardStatsMember to RTCStatsMember and vice verca.",
+      "parentUuid": "c4e54b66_5a4c9173",
+      "revId": "70c4589bb966dd35f84f8ae40bc948f0de6a17e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
