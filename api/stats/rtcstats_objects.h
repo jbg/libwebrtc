@@ -308,6 +308,8 @@ class RTC_EXPORT RTCMediaStreamTrackStats final : public RTCStats {
   RTCStatsMember<double> total_samples_duration;
   RTCStatsMember<uint64_t> concealed_samples;
   RTCStatsMember<uint64_t> concealment_events;
+
+  RTCNonStandardStatsMember<uint64_t> jitter_buffer_flushes;
 };
 
 // https://w3c.github.io/webrtc-stats/#pcstats-dict*
