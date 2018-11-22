@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4e54b66_5a4c9173",
+        "filename": "api/stats/rtcstats.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-22T10:54:32Z",
+      "side": 1,
+      "message": "Hmm. What\u0027s preventing problems is that this class adds no new data members, and no new constraints.",
+      "revId": "70c4589bb966dd35f84f8ae40bc948f0de6a17e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
