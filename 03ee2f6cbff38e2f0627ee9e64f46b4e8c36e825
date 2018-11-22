@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ef56e9_9ace28c3",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-11-22T15:43:00Z",
+      "side": 1,
+      "message": "nit: This is, at least as currently implemented, audio-only. Remove the empty line or add another comment, as-is it\u0027s not clear that it is audio-only from looking at the definition.\n\nAlso can you add a TODO(bug link) to a bug that will cover defining what this metric does? Even if it does not make the main spec, we can add a definition of it to https://github.com/henbos/webrtc-provisional-stats.",
+      "revId": "03ee2f6cbff38e2f0627ee9e64f46b4e8c36e825",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59b90e6c_20a33daa",
+        "filename": "pc/rtcstatscollector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-11-22T15:43:00Z",
+      "side": 1,
+      "message": "Prefer a number other than 0 since an implementation returning the default value could pass this test.",
+      "revId": "03ee2f6cbff38e2f0627ee9e64f46b4e8c36e825",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
