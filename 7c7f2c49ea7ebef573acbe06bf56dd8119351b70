@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "259c84fc_cd22931a",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-11-22T16:35:43Z",
+      "side": 1,
+      "message": "I had to turn off this one because it is not configurable (it doesn\u0027t even enforce the header guard pattern).",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94d1354d_d3ebf5b2",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-11-22T16:35:43Z",
+      "side": 1,
+      "message": "Some CLs to fix the current status are needed.\n\nHere are some wrong patterns:\n  ** Presubmit ERRORS **\n  Some source files are not using an include guard (or a wrong one is in place).\n  More info about header guards can be found at the link: \n  https://google.github.io/styleguide/cppguide.html#The__define_Guard\n  Please fix the following files:\n  File: examples/objcnativeapi/objc/objccallclient.h [use header guard: \n  WEBRTC_EXAMPLES_OBJCNATIVEAPI_OBJC_OBJCCALLCLIENT_H_]\n  File: modules/audio_coding/codecs/ilbc/abs_quant.h [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_ILBC_ABS_QUANT_H_]\n  File: modules/audio_coding/codecs/ilbc/abs_quant_loop.h [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_ILBC_ABS_QUANT_LOOP_H_]\n  File: modules/audio_coding/codecs/ilbc/augmented_cb_corr.h [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_ILBC_AUGMENTED_CB_CORR_H_]\n  [...]\n\nAnd here some #endif to check (they overlap with the previous list, but here is the warning message:\n  ** Presubmit Warnings **\n  Some source files are missing the include guard comment next to the #endif. Here is how it \n  should look like:\n  #endif  // \u003cINCLUDE_GUARD\u003e\n  Please fix the following files:\n  File: examples/objcnativeapi/objc/objccallclient.h (line: 83) [use header guard: \n  WEBRTC_EXAMPLES_OBJCNATIVEAPI_OBJC_OBJCCALLCLIENT_H_]\n  File: modules/audio_coding/codecs/g722/g722_interface.h (line: 172) [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_G722_G722_INTERFACE_H_]\n  File: modules/audio_coding/codecs/ilbc/abs_quant.h (line: 38) [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_ILBC_ABS_QUANT_H_]\n  File: modules/audio_coding/codecs/ilbc/abs_quant_loop.h (line: 34) [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_ILBC_ABS_QUANT_LOOP_H_]\n  File: modules/audio_coding/codecs/ilbc/augmented_cb_corr.h (line: 40) [use header guard: \n  WEBRTC_MODULES_AUDIO_CODING_CODECS_ILBC_AUGMENTED_CB_CORR_H_]",
+      "range": {
+        "startLine": 878,
+        "startChar": 0,
+        "endLine": 878,
+        "endChar": 46
+      },
+      "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d81db4c_872dc9af",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-11-22T16:35:43Z",
+      "side": 1,
+      "message": "TODO: line_number + 1",
+      "range": {
+        "startLine": 903,
+        "startChar": 28,
+        "endLine": 903,
+        "endChar": 39
+      },
+      "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
