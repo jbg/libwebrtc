@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63e28bab_a6ef39bd",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-11-23T08:07:59Z",
+      "side": 0,
+      "message": "Does CNameChange belong at all in the RtcpStatisticsCallback interface? It seems it is generated directly from RtcpReceiver.",
+      "range": {
+        "startLine": 126,
+        "startChar": 2,
+        "endLine": 126,
+        "endChar": 63
+      },
+      "revId": "3955a5022cb5457f87bc8caa4dbd3c8f4f26f506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
