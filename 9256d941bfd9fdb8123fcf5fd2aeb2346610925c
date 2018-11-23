@@ -34,6 +34,24 @@
       "revId": "9256d941bfd9fdb8123fcf5fd2aeb2346610925c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e202d6f_cf4e402c",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-23T14:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76c047bc_5f7ab453",
+      "revId": "9256d941bfd9fdb8123fcf5fd2aeb2346610925c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
