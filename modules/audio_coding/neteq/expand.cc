@@ -324,6 +324,7 @@ void Expand::SetParametersForNormalAfterExpand() {
   lag_index_direction_ = 0;
   stop_muting_ = true;  // Do not mute signal any more.
   statistics_->LogDelayedPacketOutageEvent(
+      expand_duration_samples_,
       rtc::dchecked_cast<int>(expand_duration_samples_) / (fs_hz_ / 1000));
 }
 
