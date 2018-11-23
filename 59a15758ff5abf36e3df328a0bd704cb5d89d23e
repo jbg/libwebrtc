@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e87286a_7fedbbc7",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-23T15:43:22Z",
+      "side": 1,
+      "message": "For some reason the PeerConnectionInterface doesn\u0027t have signaling_thread()  :(",
+      "parentUuid": "0a7ef9a8_6048db64",
+      "revId": "59a15758ff5abf36e3df328a0bd704cb5d89d23e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fa66d39_e7ab2d5d",
         "filename": "pc/test/peerconnectiontestwrapper.cc",
         "patchSetId": 5
