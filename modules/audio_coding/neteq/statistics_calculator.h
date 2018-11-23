@@ -86,10 +86,11 @@ class StatisticsCalculator {
   // Rerport that the packet buffer was flushed.
   void FlushedPacketBuffer();
 
-  // Logs a delayed packet outage event of |outage_duration_ms|. A delayed
-  // packet outage event is defined as an expand period caused not by an actual
-  // packet loss, but by a delayed packet.
-  virtual void LogDelayedPacketOutageEvent(int outage_duration_ms);
+  // Logs a delayed packet outage event of |num_samples| expanded and
+  // |outage_duration_ms|. A delayed packet outage event is defined as an expand
+  // period caused not by an actual packet loss, but by a delayed packet.
+  virtual void LogDelayedPacketOutageEvent(size_t num_samples,
+                                           int outage_duration_ms);
 
   // Returns the current network statistics in |stats|. The current sample rate
   // is |fs_hz|, the total number of samples in packet buffer and sync buffer

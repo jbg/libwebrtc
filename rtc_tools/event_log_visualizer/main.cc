@@ -450,6 +450,12 @@ int main(int argc, char* argv[]) {
           return static_cast<float>(stats.concealment_events);
         },
         "Concealment events", collection->AppendNewPlot());
+    analyzer.CreateNetEqLifetimeStatsGraph(
+        neteq_stats,
+        [](const webrtc::NetEqLifetimeStatistics& stats) {
+          return static_cast<float>(stats.delayed_packet_outage_samples);
+        },
+        "Delayed packet outage samples", collection->AppendNewPlot());
   }
 
   if (FLAG_plot_ice_candidate_pair_config) {
