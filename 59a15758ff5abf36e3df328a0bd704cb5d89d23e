@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a7ef9a8_6048db64",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-11-23T15:14:28Z",
+      "side": 1,
+      "message": "I think we should make this DCHECK unconditional. I don\u0027t think we should make the requirements for which thread an object is destroyed on based on internal states unless we have a good reason to.\n\nHowever, if we get rid of the thread checker an instead rely on the \"signaling thread\", I think it\u0027s OK to have it conditional:\nRTC_DCHECK_RUN_ON(pc()-\u003esignaling_thread());",
+      "revId": "59a15758ff5abf36e3df328a0bd704cb5d89d23e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fa66d39_e7ab2d5d",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-11-23T15:14:28Z",
+      "side": 1,
+      "message": "Why are you detaching on CreatePc()? The current code has no way of not passing. If you didn\u0027t create a PC, you don\u0027t DCHECK, and if you did create a PC, you\u0027ve got an un-attached checker, so the DCHECK in destructor is guaranteed to pass.\n\nYou probably should have Detached at construction, and performed RTC_CHECK(thread_checker_.CalledOnValidThread()); here, ensuring that rtc::Thread::Current() becomes the thread checker\u0027s thread, which is good because that is what is used as the PC\u0027s signaling thread below.",
+      "revId": "59a15758ff5abf36e3df328a0bd704cb5d89d23e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
