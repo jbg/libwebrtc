@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "34017b64_7daac0a9",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-11-23T15:46:15Z",
+      "side": 1,
+      "message": "In that case thread_checker_ is fine, just make sure to detach in constructor and DCHECK CalledOnValidThread in both CreatePc and destructor.",
+      "parentUuid": "2e87286a_7fedbbc7",
+      "revId": "59a15758ff5abf36e3df328a0bd704cb5d89d23e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fa66d39_e7ab2d5d",
         "filename": "pc/test/peerconnectiontestwrapper.cc",
         "patchSetId": 5
