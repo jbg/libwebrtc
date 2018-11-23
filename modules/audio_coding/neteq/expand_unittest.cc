@@ -51,7 +51,8 @@ TEST(Expand, CreateUsingFactory) {
 namespace {
 class FakeStatisticsCalculator : public StatisticsCalculator {
  public:
-  void LogDelayedPacketOutageEvent(int outage_duration_ms) override {
+  void LogDelayedPacketOutageEvent(size_t num_samples,
+                                   int outage_duration_ms) override {
     last_outage_duration_ms_ = outage_duration_ms;
   }
 
