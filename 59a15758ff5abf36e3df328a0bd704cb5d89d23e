@@ -33,6 +33,24 @@
       "revId": "59a15758ff5abf36e3df328a0bd704cb5d89d23e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d7e7dc2_83c3a83c",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-23T15:29:06Z",
+      "side": 1,
+      "message": "\u003e Why are you detaching on CreatePc()\n\nShort answer: I misunderstood the API! https://cs.chromium.org/chromium/src/base/threading/thread_checker_impl.h?rcl\u003dffbda13600d8da0e03349f66998be84c5e70da90\u0026l\u003d29",
+      "parentUuid": "9fa66d39_e7ab2d5d",
+      "revId": "59a15758ff5abf36e3df328a0bd704cb5d89d23e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
