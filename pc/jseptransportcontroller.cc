@@ -170,6 +170,16 @@ cricket::DtlsTransportInternal* JsepTransportController::GetRtcpDtlsTransport(
   return jsep_transport->rtcp_dtls_transport();
 }
 
+rtc::scoped_refptr<webrtc::DtlsTransportInterface>
+JsepTransportController::LookupDtlsTransportByMid(
+    const std::string& mid) const {
+  auto jsep_transport = GetJsepTransportForMid(mid);
+  if (!jsep_transport) {
+    return nullptr;
+  }
+  return jsep_transport->RtpDtlsTransport();
+}
+
 void JsepTransportController::SetIceConfig(const cricket::IceConfig& config) {
   if (!network_thread_->IsCurrent()) {
     network_thread_->Invoke<void>(RTC_FROM_HERE, [&] { SetIceConfig(config); });
