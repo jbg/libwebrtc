@@ -264,6 +264,7 @@ class SsrcSwitchDetector : public NetEqPostInsertPacket {
                 << " (payload type "
                 << static_cast<int>(packet.header.payloadType) << ")"
                 << std::endl;
+      RTC_CHECK(false) << "ssrc changing mid stream";
     }
     last_ssrc_ = packet.header.ssrc;
     if (other_callback_) {
