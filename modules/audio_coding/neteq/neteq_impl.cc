@@ -121,6 +121,7 @@ NetEqImpl::NetEqImpl(const NetEq::Config& config,
     fs = 8000;
   }
   delay_manager_->SetMaximumDelay(config.max_delay_ms);
+  delay_manager_->SetMinimumDelay(config.min_delay_ms);
   fs_hz_ = fs;
   fs_mult_ = fs / 8000;
   last_output_sample_rate_hz_ = fs;
