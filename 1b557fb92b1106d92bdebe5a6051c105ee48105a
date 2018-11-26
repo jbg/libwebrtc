@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb18e6d9_adab5d7a",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2018-11-26T13:26:57Z",
+      "side": 1,
+      "message": "I feel that the arguments are not orthogonal, can we do fs_hz, like\n void IncreaseCounter(size_t num_samples, int fs_hz);",
+      "range": {
+        "startLine": 92,
+        "startChar": 43,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "1b557fb92b1106d92bdebe5a6051c105ee48105a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
