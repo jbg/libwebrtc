@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f4606d1_4946b422",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "My comment in another file suggests passing a const-ref to a string here, then reducing inside of this module. This way, the STUN module wouldn\u0027t care about the particular concerns we have when logging.",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3472289b_e0d5c4fa",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "s/transaction_id/reduced_transaction_id ?",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44823694_e458dc5d",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "Would a unit test about two different transaction IDs that map to the same reduced transaction ID make sense?",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "729fd717_36eba565",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "Would it perhaps make more sense to move this into the log module? I don\u0027t think StunMessage is really concerned with this trick that we employ to reduce the size of our logs.",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65077863_49513121",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "s/transactionid/transaction_id",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 24
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ee5e582_df3b9606",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "Your RTC_DCHECK above allows this to be 16, but |transactionid_as_ints| is only 12 bytes.",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e924724_99513d5a",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "Replace with arraysize(transactionid_as_ints)?",
+      "range": {
+        "startLine": 40,
+        "startChar": 25,
+        "endLine": 40,
+        "endChar": 52
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3880fe2_1d1b05d8",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "See comment elsewhere about getting rid of this.",
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b093dd3_e7afe03e",
+        "filename": "p2p/base/stunrequest.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 1,
+      "message": "1. Beg pardon - is there a reason why it\u0027s called reduced_id() here, but reduced_transaction_id() elsewhere?\n2. const?\n3. Actually, remove altogether?",
+      "range": {
+        "startLine": 99,
+        "startChar": 11,
+        "endLine": 99,
+        "endChar": 21
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

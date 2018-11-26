@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e21cd2b1_c0c95d4f",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-26T22:16:55Z",
+      "side": 0,
+      "message": "There\u0027s a nice article about explicitly including \u003calgorithm\u003e in situations similar to the one we have in this file - https://bit.ly/IqT6zt",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "25a3a97f591a6b6184b8a17826228830ff246980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
