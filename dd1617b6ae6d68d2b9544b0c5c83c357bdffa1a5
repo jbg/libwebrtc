@@ -69,6 +69,24 @@
       "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0ae0719_4b2cb61f",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-26T13:29:56Z",
+      "side": 1,
+      "message": "Thread checkers already work like that: after you have detached them, the first check will always succeed, and will imprint the current thread on the checker.",
+      "parentUuid": "4bfcb117_8fdd0a26",
+      "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
