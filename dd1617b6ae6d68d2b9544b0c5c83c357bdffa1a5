@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d22525b_1d4949b1",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-26T10:43:31Z",
+      "side": 1,
+      "message": "RTC_DCHECK_RUN_ON(pc_thread_checker_);\n\n(It boils down to the same thing, but the syntax is nicer and also works for threads. See examples at the end of rtc_base/thread_checker.h.)",
+      "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c049822_e05921ad",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-26T10:43:31Z",
+      "side": 1,
+      "message": "You don\u0027t check the result here.",
+      "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
