@@ -1,0 +1,308 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ab84ee0_e653f8f4",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Please move this closer to where it is used. Since it is used only in one method, readability benefits from having the declaration closer to where it is used.",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bf50bb0_399f5b66",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "peak_index_in -\u003e peak_index\nWhile convenient for the naming in the  implementation, using the _in suffix in the header is confusing for the reader since there is no clear _out counterpart. Then it is better to handle this in the implementation instead by using something like\n size_t new_peak_index \u003d peak_index;",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90a41bc4_ab0a68ec",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Instead of using peak_detector_ as\npeak_detector_.Update()\npeak_detector_.SignificantPeak()\n\nit would make sense to make Update() produce an output as\nconst significant_peak_ \u003d peak_detector_.Detect();\n \nThat requires less code.",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62662231_c981b49c",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "I definitely think that\n(peak_detector_.SignificantPeak())\n-\u003e\npeak_detector_.SignificantPeak()\nsince those parentheses only contains a single method call.",
+      "range": {
+        "startLine": 124,
+        "startChar": 5,
+        "endLine": 125,
+        "endChar": 41
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66950c86_5b64fa70",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "I think this behavior is a bit unclear since peak_detector_.SignificantPeak() is only updated once for the whole filter, while delay_blocks_ is not. Since the peak detector class is only used here (and for this purpose), would it not make sense to put the logic of the consistent_estimate_counter_ into that to make it more clear how the delay_blocks_ and significant peak values are related and updated?",
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18d1a820_1a056f34",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Since now the FilterAnalyzer::Update(...) is a two-line method and this method can be written in 2-3 lines (see comments below), I\u0027d suggest the content of SetRegionToAnalyze there.\n\nAlternatively, I think SetRegionToAnalyze should be made a pure function as it does not really need the state of the class (it only mutates region_ so it could instead do that mutation via an input/output variable which would make the method stateless.",
+      "range": {
+        "startLine": 179,
+        "startChar": 21,
+        "endLine": 179,
+        "endChar": 39
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d406194_37a08c17",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "With this definition of end_sample_ it is actually not the end_sample to analyze but rather the end_sample_to_analyze +1.\nPlease change either the name, or the for-loops ( using \u003c\u003d instead of \u003c) to handle this in a way that matches the naming.",
+      "range": {
+        "startLine": 183,
+        "startChar": 45,
+        "endLine": 183,
+        "endChar": 56
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63776070_3f102863",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Id suggest doing this in the constructor instead to avoid having to have this code here. That would also be slightly less complex.",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 26
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0977af6_a92d5749",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "last_region_ is only used in this place and is redundant since end_sample as well as filter_to_analyze.size() is known this method. Therefore, there is no need to store last_region_ on the state.\n\nFurthermore, not using the last_region will also allow this method to act on both the first and last regions as\n\nif (r.start_sample_\u003d\u003d0) {\n limit_1\u003d...\n ... \n}\n\n...\nif (r.end_sample_\u003d\u003dfilter_to_analyze.size()) {\n}",
+      "range": {
+        "startLine": 220,
+        "startChar": 8,
+        "endLine": 220,
+        "endChar": 20
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fda51692_46b8c43a",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Please make a comment about why limit1_ and limit2_ needs to be fixed while doing these computations for the whole filter. Also, please make a comment on the choice of setting limit_1 and limit2 at the last region rather than the first region.\n\nI think the code would be easier to follow and more intuitive if limit1_ and limit2_ were set for the first block rather than the last block but I see that the choice of using last_region_ region requires that.",
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "073ac7d0_e0e9b149",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Nit: consider\nsignificant_peak_ \u003d abs_peak \u003e 10.f * filter_floor \u0026\u0026\n                    abs_peak \u003e 2.f * filter_secondary_peak_;",
+      "range": {
+        "startLine": 225,
+        "startChar": 3,
+        "endLine": 226,
+        "endChar": 66
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ee5344d_9354a63d",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "A comment about what the class does is needed I think. Also, I doubt that the name PeakDetector is the best choice as it doesn\u0027t detect any peaks but rather whether a pre-detected peak is significant.",
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e76f806_f3337ef9",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Please use a more descriptive parameter name (https://google.github.io/styleguide/cppguide.html#General_Naming_Rules)",
+      "range": {
+        "startLine": 80,
+        "startChar": 36,
+        "endLine": 80,
+        "endChar": 37
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7d373ea_c4665b9c",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2018-11-26T07:19:34Z",
+      "side": 1,
+      "message": "Please change the names of limit1_ and limit2_ to something more descriptive.",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 18
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
