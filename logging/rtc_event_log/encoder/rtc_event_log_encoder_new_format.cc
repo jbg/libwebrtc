@@ -848,6 +848,7 @@ void RtcEventLogEncoderNewFormat::EncodeAudioNetworkAdaptation(
     proto_batch->set_enable_fec(base_event->config().enable_fec.value());
   if (base_event->config().enable_dtx.has_value())
     proto_batch->set_enable_dtx(base_event->config().enable_dtx.value());
+
   // Note that |num_channels_deltas| encodes N as N-1, to keep deltas smaller,
   // but there's no reason to do the same for the base event's value, since
   // no bits will be spared.
@@ -1337,6 +1338,7 @@ void RtcEventLogEncoderNewFormat::EncodeIceCandidatePairEvent(
 
     proto_batch->set_event_type(ConvertToProtoFormat(base_event->type()));
     proto_batch->set_candidate_pair_id(base_event->candidate_pair_id());
+    proto_batch->set_transaction_id(base_event->transaction_id());
   }
   // TODO(terelius): Should we delta-compress this event type?
 }

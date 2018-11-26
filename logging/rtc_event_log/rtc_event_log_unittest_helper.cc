@@ -617,6 +617,7 @@ void EventVerifier::VerifyLoggedIceCandidatePairEvent(
 
   EXPECT_EQ(original_event.type(), logged_event.type);
   EXPECT_EQ(original_event.candidate_pair_id(), logged_event.candidate_pair_id);
+  EXPECT_EQ(original_event.transaction_id(), logged_event.transaction_id);
 }
 
 void VerifyLoggedRtpHeader(const RtpPacket& original_header,
