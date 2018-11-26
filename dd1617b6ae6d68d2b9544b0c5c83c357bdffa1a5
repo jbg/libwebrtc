@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e790d71_3fc9c6ff",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-26T10:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d22525b_1d4949b1",
+      "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c049822_e05921ad",
         "filename": "pc/test/peerconnectiontestwrapper.cc",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2018-11-26T10:43:31Z",
       "side": 1,
       "message": "You don\u0027t check the result here.",
+      "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bfcb117_8fdd0a26",
+        "filename": "pc/test/peerconnectiontestwrapper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2018-11-26T10:57:30Z",
+      "side": 1,
+      "message": "This one is just to save the thread for later check.\n\nThe idea is to have: \n* TestWrapper construction: Detach, since we want to track PC\u0027s thread and don\u0027t care on which one the wrapper was created.\n* CreatePC: We don\u0027t want to check anything, but just \"save\" the current thread.\n* TestWrapper destruction: Check Close() is called on the thread the PC was created on.",
+      "parentUuid": "8c049822_e05921ad",
       "revId": "dd1617b6ae6d68d2b9544b0c5c83c357bdffa1a5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
