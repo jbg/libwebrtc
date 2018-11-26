@@ -65,6 +65,15 @@ class FakeNetworkManager : public NetworkManagerBase, public MessageHandler {
     DoUpdateNetworks();
   }
 
+  void GetAnyAddressNetworks(NetworkList* networks) override {
+    // This function allocates networks that are owned by the
+    // NetworkManager. But some tests assume that they can release
+    // all networks independent of the network manager.
+    // In order to prevent use-after-free issues, don't allow this
+    // function to have any effect when run in tests.
+    RTC_LOG(LS_ERROR) << "FakeNetworkManager::GetAnyAddressNetworks called";
+  }
+
   virtual void StartUpdating() {
     ++start_count_;
     if (start_count_ == 1) {
@@ -128,9 +137,6 @@ class FakeNetworkManager : public NetworkManagerBase, public MessageHandler {
   int next_index_ = 0;
   int start_count_ = 0;
   bool sent_first_update_ = false;
-
-  IPAddress default_local_ipv4_address_;
-  IPAddress default_local_ipv6_address_;
 
   std::unique_ptr<webrtc::FakeMdnsResponder> mdns_responder_;
 };
