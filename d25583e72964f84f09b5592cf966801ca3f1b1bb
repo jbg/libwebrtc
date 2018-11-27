@@ -96,6 +96,53 @@
     },
     {
       "key": {
+        "uuid": "28ccfa9e_d92d235b",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T12:31:26Z",
+      "side": 1,
+      "message": "Whichever we choose, I think we should be consistent throughout the code.",
+      "parentUuid": "2b977d2a_7159d054",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58706882_ed819678",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T12:31:26Z",
+      "side": 1,
+      "message": "I\u0027ve talked to Björn offline, and the change that would make me happy, while keeping him also happy, would be to pass everything up to here as std::string, then perform the reduction inside of this function, right before invoking event_log_-\u003eLog().",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44823694_e458dc5d",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
         "patchSetId": 8
@@ -131,6 +178,30 @@
       "side": 1,
       "message": "I don\u0027t see what that test would actually check. That both are written to the log?",
       "parentUuid": "44823694_e458dc5d",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b921e4_6121472c",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T12:31:26Z",
+      "side": 1,
+      "message": "That things don\u0027t crash and burn.",
+      "parentUuid": "01070465_1e43612b",
       "range": {
         "startLine": 202,
         "startChar": 0,
