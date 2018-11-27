@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26c58407_de2ca0fe",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T09:52:25Z",
+      "side": 1,
+      "message": "Why not int64_t?\n\n  \"You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N. In particular, do not use unsigned types to say a number will never be negative. Instead, use assertions for this.\"\n  -- https://google.github.io/styleguide/cppguide.html#Integer_Types\n\nGenerally, for a counter, the recommended type is int, or int64_t if int is too small.\n\n(This comment applies to more places in this CL.)",
+      "range": {
+        "startLine": 314,
+        "startChar": 28,
+        "endLine": 314,
+        "endChar": 36
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca1a2ca1_74143faf",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T09:52:25Z",
+      "side": 1,
+      "message": "Why size_t?",
+      "range": {
+        "startLine": 92,
+        "startChar": 43,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
