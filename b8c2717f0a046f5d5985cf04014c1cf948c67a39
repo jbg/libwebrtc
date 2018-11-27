@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "f5a9196d_f214333a",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-11-27T11:41:38Z",
+      "side": 1,
+      "message": "Part of the story here is that the several of the standardized stats are specified to be \"unsigned long long\": see https://www.w3.org/TR/webrtc-stats/#raststats-dict*.",
+      "parentUuid": "fc270272_d9b1c0ad",
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "097881e1_37cc8f83",
         "filename": "media/base/mediachannel.h",
         "patchSetId": 8
