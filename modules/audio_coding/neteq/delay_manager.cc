@@ -62,6 +62,7 @@ absl::optional<int> GetForcedLimitProbability() {
 namespace webrtc {
 
 DelayManager::DelayManager(size_t max_packets_in_buffer,
+                           int min_target_delay_ms,
                            DelayPeakDetector* peak_detector,
                            const TickTimer* tick_timer)
     : first_packet_received_(false),
@@ -69,6 +70,7 @@ DelayManager::DelayManager(size_t max_packets_in_buffer,
       iat_vector_(kMaxIat + 1, 0),
       iat_factor_(0),
       tick_timer_(tick_timer),
+      min_target_delay_ms_(min_target_delay_ms),
       base_target_level_(4),                   // In Q0 domain.
       target_level_(base_target_level_ << 8),  // In Q8 domain.
       packet_len_ms_(0),
@@ -267,12 +269,14 @@ void DelayManager::UpdateHistogram(size_t iat_packets) {
 // |maximum_delay_ms_| in packets. Note that in practice, if no
 // |maximum_delay_ms_| is specified, this does not have any impact, since the
 // target level is far below the buffer capacity in all reasonable cases.
-// The lower limit is equivalent of |minimum_delay_ms_| in packets. We update
-// |least_required_level_| while the above limits are applied.
+// The lower limit is the maximum of |minimum_delay_ms_| and
+// |min_target_delay_ms_| in packets. We update |least_required_level_| while
+// the above limits are applied.
 // TODO(hlundin): Move this check to the buffer logistics class.
 void DelayManager::LimitTargetLevel() {
-  if (packet_len_ms_ > 0 && minimum_delay_ms_ > 0) {
-    int minimum_delay_packet_q8 = (minimum_delay_ms_ << 8) / packet_len_ms_;
+  if (packet_len_ms_ > 0) {
+    int min_delay_ms = std::max(minimum_delay_ms_, min_target_delay_ms_);
+    int minimum_delay_packet_q8 = (min_delay_ms << 8) / packet_len_ms_;
     target_level_ = std::max(target_level_, minimum_delay_packet_q8);
   }
 
