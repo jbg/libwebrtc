@@ -32,6 +32,7 @@
 
 namespace webrtc {
 
+class DtlsTransport;
 class MediaStreamObserver;
 class VideoRtpReceiver;
 class RtcEventLog;
@@ -193,6 +194,9 @@ class PeerConnection : public PeerConnectionInternal,
 
   void SetAudioPlayout(bool playout) override;
   void SetAudioRecording(bool recording) override;
+
+  rtc::scoped_refptr<DtlsTransportInterface> LookupDtlsTransportByMid(
+      const std::string& mid) override;
 
   RTC_DEPRECATED bool StartRtcEventLog(rtc::PlatformFile file,
                                        int64_t max_size_bytes) override;
