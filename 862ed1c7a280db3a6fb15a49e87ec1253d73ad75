@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2353b470_465e89a2",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-11-27T23:07:22Z",
+      "side": 1,
+      "message": "the same as transaction_id_as_ints?",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "862ed1c7a280db3a6fb15a49e87ec1253d73ad75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
