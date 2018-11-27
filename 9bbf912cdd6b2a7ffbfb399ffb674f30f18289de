@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70866725_0fa958cd",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T09:24:36Z",
+      "side": 1,
+      "message": "Undo?",
+      "revId": "9bbf912cdd6b2a7ffbfb399ffb674f30f18289de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
