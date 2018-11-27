@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8125af7_27dd60f0",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T14:26:05Z",
+      "side": 1,
+      "message": "DCHECK that min \u003c\u003d max here?",
+      "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0e29220_9d0c9503",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T14:26:05Z",
+      "side": 1,
+      "message": "Document the new argument?",
+      "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c992d0da_537783ce",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T14:26:05Z",
+      "side": 1,
+      "message": "Comment this one? In particular, how is it different from minimum_delay_ms_?",
+      "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
