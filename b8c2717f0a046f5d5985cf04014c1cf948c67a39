@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "938f1bb3_f0687dd5",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T13:05:42Z",
+      "side": 1,
+      "message": "OK. Then it would seem to make sense to use uint64_t for those, in the API layer at least.",
+      "parentUuid": "f5a9196d_f214333a",
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "097881e1_37cc8f83",
         "filename": "media/base/mediachannel.h",
         "patchSetId": 8
