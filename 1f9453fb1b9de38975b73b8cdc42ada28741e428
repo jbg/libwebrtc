@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "79606ecb_7080c743",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ab84ee0_e653f8f4",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bf50bb0_399f5b66",
         "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b35edad_460a9012",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "I changed the name of the returned variable to peak_index_out to make it clearer.",
+      "parentUuid": "6bf50bb0_399f5b66",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "944cf97f_a3aec2a7",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90a41bc4_ab0a68ec",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62662231_c981b49c",
         "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4e66d441_64437c0c",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "62662231_c981b49c",
+      "range": {
+        "startLine": 124,
+        "startChar": 5,
+        "endLine": 125,
+        "endChar": 41
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66950c86_5b64fa70",
         "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
         "patchSetId": 8
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "45cae545_1af0690b",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66950c86_5b64fa70",
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18d1a820_1a056f34",
         "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
         "patchSetId": 8
@@ -122,6 +236,30 @@
       "writtenOn": "2018-11-26T07:19:34Z",
       "side": 1,
       "message": "Since now the FilterAnalyzer::Update(...) is a two-line method and this method can be written in 2-3 lines (see comments below), I\u0027d suggest the content of SetRegionToAnalyze there.\n\nAlternatively, I think SetRegionToAnalyze should be made a pure function as it does not really need the state of the class (it only mutates region_ so it could instead do that mutation via an input/output variable which would make the method stateless.",
+      "range": {
+        "startLine": 179,
+        "startChar": 21,
+        "endLine": 179,
+        "endChar": 39
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7b6ec57_bffe127e",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "As the length of the filter changes over time we need to keep checking the condition use_incremental_analysis_ in this method so it is probably good to keep it as a separate method.\n\nI also think that the Update method is quite clear now with those 2 lines. The first line sets the region, the second line analyze that region.",
+      "parentUuid": "18d1a820_1a056f34",
       "range": {
         "startLine": 179,
         "startChar": 21,
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "441cc944_7646ff84",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4d406194_37a08c17",
+      "range": {
+        "startLine": 183,
+        "startChar": 45,
+        "endLine": 183,
+        "endChar": 56
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63776070_3f102863",
         "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
         "patchSetId": 8
@@ -168,6 +330,30 @@
       "writtenOn": "2018-11-26T07:19:34Z",
       "side": 1,
       "message": "Id suggest doing this in the constructor instead to avoid having to have this code here. That would also be slightly less complex.",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 26
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "753547b7_62036b04",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "the length of the filter changes during the call as we start with some initial length and we transition to longer filter lengths.",
+      "parentUuid": "63776070_3f102863",
       "range": {
         "startLine": 190,
         "startChar": 4,
@@ -203,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "6aeafefc_5c0b902d",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f0977af6_a92d5749",
+      "range": {
+        "startLine": 220,
+        "startChar": 8,
+        "endLine": 220,
+        "endChar": 20
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fda51692_46b8c43a",
         "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
         "patchSetId": 8
@@ -217,6 +427,24 @@
       "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c77b41ba_844fe1cc",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fda51692_46b8c43a",
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -243,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "c523ba92_08f18185",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "073ac7d0_e0e9b149",
+      "range": {
+        "startLine": 225,
+        "startChar": 3,
+        "endLine": 226,
+        "endChar": 66
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ee5344d_9354a63d",
         "filename": "modules/audio_processing/aec3/filter_analyzer.h",
         "patchSetId": 8
@@ -254,6 +506,24 @@
       "writtenOn": "2018-11-26T07:19:34Z",
       "side": 1,
       "message": "A comment about what the class does is needed I think. Also, I doubt that the name PeakDetector is the best choice as it doesn\u0027t detect any peaks but rather whether a pre-detected peak is significant.",
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84dca79c_7cf5b852",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "I have changed this class in this CL following some of the other comments in this CL.",
+      "parentUuid": "3ee5344d_9354a63d",
       "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -283,6 +553,30 @@
     },
     {
       "key": {
+        "uuid": "99f1d185_1d126a45",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e76f806_f3337ef9",
+      "range": {
+        "startLine": 80,
+        "startChar": 36,
+        "endLine": 80,
+        "endChar": 37
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7d373ea_c4665b9c",
         "filename": "modules/audio_processing/aec3/filter_analyzer.h",
         "patchSetId": 8
@@ -303,6 +597,30 @@
       "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b6b19ac_a5c2f254",
+        "filename": "modules/audio_processing/aec3/filter_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2018-11-27T08:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7d373ea_c4665b9c",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 18
+      },
+      "revId": "1f9453fb1b9de38975b73b8cdc42ada28741e428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
