@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aaadd_5f4d3405",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-11-27T14:47:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8125af7_27dd60f0",
+      "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0e29220_9d0c9503",
         "filename": "modules/audio_coding/neteq/delay_manager.h",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "69e6d737_9790b15a",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-11-27T14:47:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0e29220_9d0c9503",
+      "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c992d0da_537783ce",
         "filename": "modules/audio_coding/neteq/delay_manager.h",
         "patchSetId": 7
@@ -50,6 +86,24 @@
       "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07238db0_9d5c5948",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-11-27T14:47:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c992d0da_537783ce",
+      "revId": "8fab8ef536550f0489ea736a57aabc1c5ed37556",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
