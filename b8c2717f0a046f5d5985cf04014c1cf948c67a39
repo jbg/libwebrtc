@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6130990b_9b2b1c4b",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-11-27T10:06:35Z",
+      "side": 1,
+      "message": "Interesting, did not know. However, this follows the pattern of all the other counters which are also uint64_t. I think it makes sense to keep them the same?",
+      "parentUuid": "26c58407_de2ca0fe",
+      "range": {
+        "startLine": 314,
+        "startChar": 28,
+        "endLine": 314,
+        "endChar": 36
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca1a2ca1_74143faf",
         "filename": "modules/audio_coding/neteq/statistics_calculator.h",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-27T09:52:25Z",
       "side": 1,
       "message": "Why size_t?",
+      "range": {
+        "startLine": 92,
+        "startChar": 43,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb9ce88c_78e4db0b",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-11-27T10:06:35Z",
+      "side": 1,
+      "message": "This file has a wonderful mix of representing samples in both size_t and integers. I mainly followed one of the other signatures in the file that take the same parameters:\nvoid IncreaseCounter(size_t num_samples, int fs_hz);",
+      "parentUuid": "ca1a2ca1_74143faf",
       "range": {
         "startLine": 92,
         "startChar": 43,
