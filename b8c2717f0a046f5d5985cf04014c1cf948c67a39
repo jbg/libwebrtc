@@ -49,6 +49,127 @@
     },
     {
       "key": {
+        "uuid": "ee542c39_d1b87b12",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "Hmm. Yes, there\u0027s value in conforming to local conventions, and there\u0027s a strong local convention here. So OK, let this one stay unsigned then.",
+      "parentUuid": "6130990b_9b2b1c4b",
+      "range": {
+        "startLine": 314,
+        "startChar": 28,
+        "endLine": 314,
+        "endChar": 36
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fc5c989_7298a32b",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "int64_t?",
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "097881e1_37cc8f83",
+        "filename": "media/base/mediachannel.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "int64_t?",
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3702c302_2a24c73d",
+        "filename": "modules/audio_coding/include/audio_coding_module_typedefs.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "int64_t?",
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcecaed3_a529f1b6",
+        "filename": "modules/audio_coding/neteq/expand_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "int64_t?",
+      "range": {
+        "startLine": 54,
+        "startChar": 35,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7257a5e0_14086f55",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "int? (The cast on line 263 implies that int is sufficiently large.)",
+      "range": {
+        "startLine": 260,
+        "startChar": 55,
+        "endLine": 260,
+        "endChar": 61
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca1a2ca1_74143faf",
         "filename": "modules/audio_coding/neteq/statistics_calculator.h",
         "patchSetId": 8
@@ -84,6 +205,30 @@
       "side": 1,
       "message": "This file has a wonderful mix of representing samples in both size_t and integers. I mainly followed one of the other signatures in the file that take the same parameters:\nvoid IncreaseCounter(size_t num_samples, int fs_hz);",
       "parentUuid": "ca1a2ca1_74143faf",
+      "range": {
+        "startLine": 92,
+        "startChar": 43,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "b8c2717f0a046f5d5985cf04014c1cf948c67a39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61be04ad_a0babf05",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-27T10:20:56Z",
+      "side": 1,
+      "message": "I would suggest that you pick a signed example and follow that instead. ;-)",
+      "parentUuid": "cb9ce88c_78e4db0b",
       "range": {
         "startLine": 92,
         "startChar": 43,
