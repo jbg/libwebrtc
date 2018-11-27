@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "87b3ff2b_42e271ef",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-27T10:38:26Z",
+      "side": 1,
+      "message": "However, by passing a string, it\u0027ll be less obvious what we actually log in the calling code. It would also further separate the pre-encoding structures from the post-parsing structures.\n\nIf we want to hide the string-\u003euint32 conversion, I\u0027d propose doing it in the icelogger.* files. Not here.",
+      "parentUuid": "3f4606d1_4946b422",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3472289b_e0d5c4fa",
         "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-26T22:16:55Z",
       "side": 1,
       "message": "s/transaction_id/reduced_transaction_id ?",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b977d2a_7159d054",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-27T10:38:26Z",
+      "side": 1,
+      "message": "I think transaction_id is fine.",
+      "parentUuid": "3472289b_e0d5c4fa",
       "range": {
         "startLine": 44,
         "startChar": 11,
@@ -64,6 +112,53 @@
         "startChar": 0,
         "endLine": 202,
         "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01070465_1e43612b",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-27T10:38:26Z",
+      "side": 1,
+      "message": "I don\u0027t see what that test would actually check. That both are written to the log?",
+      "parentUuid": "44823694_e458dc5d",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b4db645_61c24d9e",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-27T10:38:26Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer to have the same accessor name in the request and the response, e.g. reduced_transaction_id.",
+      "range": {
+        "startLine": 1754,
+        "startChar": 33,
+        "endLine": 1754,
+        "endChar": 43
       },
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
