@@ -28,6 +28,7 @@
 #include "p2p/base/transportfactoryinterface.h"
 #include "pc/channel.h"
 #include "pc/dtlssrtptransport.h"
+#include "pc/dtlstransport.h"
 #include "pc/jseptransport.h"
 #include "pc/rtptransport.h"
 #include "pc/srtptransport.h"
@@ -115,6 +116,9 @@ class JsepTransportController : public sigslot::has_slots<> {
   cricket::DtlsTransportInternal* GetDtlsTransport(
       const std::string& mid) const;
   cricket::DtlsTransportInternal* GetRtcpDtlsTransport(
+      const std::string& mid) const;
+  // Gets the externally sharable version of the DtlsTransport.
+  rtc::scoped_refptr<webrtc::DtlsTransportInterface> LookupDtlsTransportByMid(
       const std::string& mid) const;
 
   MediaTransportInterface* GetMediaTransport(const std::string& mid) const;
