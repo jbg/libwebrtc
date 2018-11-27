@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "824a0cc5_ff194265",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T21:02:59Z",
+      "side": 1,
+      "message": "If multiple times means \"normally twice\", I think the trade-off between efficiency and clarity, is such that clarity should win.",
+      "parentUuid": "d27668df_956504b8",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44823694_e458dc5d",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
         "patchSetId": 8
@@ -307,6 +331,30 @@
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "205ae2f8_ca5172ad",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T21:02:59Z",
+      "side": 1,
+      "message": "You\u0027re assuming the code is written in a way that would not panic if there are two events with the a different pair_id but the same transaction_id. Is that because this is always theoretically possible for ICE candidate pairs, or because you are familiar with the implementation, and know it to be robust to that? If the latter, IMHO, one should attempt to forget what one knows about the implementation, when one writes unit tests. But feel free to ignore my purism; I don\u0027t always have the patience to follow through on it myself.",
+      "parentUuid": "e4418aa8_ffbdc82e",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
@@ -404,6 +452,30 @@
     },
     {
       "key": {
+        "uuid": "5cafcec7_431dfd2b",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T21:02:59Z",
+      "side": 1,
+      "message": "IMHO, reducing twice is cheap enough, but having a \"reduced transaction ID\" is something that could waste some developer over head-scratching time in the future.",
+      "parentUuid": "1fc326ee_afec2263",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65077863_49513121",
         "filename": "p2p/base/stun.cc",
         "patchSetId": 8
@@ -439,6 +511,30 @@
       "side": 1,
       "message": "Done, but https://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/stun.cc?q\u003dstun.cc+f:webrtc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d664",
       "parentUuid": "65077863_49513121",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 24
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a62d984d_d3973544",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T21:02:59Z",
+      "side": 1,
+      "message": "Up to you. My vote is for transaction_id.",
+      "parentUuid": "91fa84e6_fee8c152",
       "range": {
         "startLine": 35,
         "startChar": 11,
@@ -615,6 +711,30 @@
       "side": 1,
       "message": "This was done to be consistent with the above method but I will change it.\nI don\u0027t want to change the above method in this CL but I can in a follow up if others think it is worth doing.",
       "parentUuid": "4b093dd3_e7afe03e",
+      "range": {
+        "startLine": 99,
+        "startChar": 11,
+        "endLine": 99,
+        "endChar": 21
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1753e85c_726c0cf9",
+        "filename": "p2p/base/stunrequest.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T21:02:59Z",
+      "side": 1,
+      "message": "Let\u0027s say I prefer consistency with the method below, than with the method above. :-)",
+      "parentUuid": "7a4fc56c_e9e9e71a",
       "range": {
         "startLine": 99,
         "startChar": 11,
