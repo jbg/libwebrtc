@@ -140,6 +140,30 @@
     },
     {
       "key": {
+        "uuid": "b72c23d2_0f43e039",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T10:37:40Z",
+      "side": 1,
+      "message": "Oops! 4*4\u003d16, not 12. Sorry.",
+      "parentUuid": "0ee5e582_df3b9606",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e924724_99513d5a",
         "filename": "p2p/base/stun.cc",
         "patchSetId": 8
@@ -160,6 +184,30 @@
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d21b5f41_ae737aeb",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-11-27T10:37:40Z",
+      "side": 1,
+      "message": "In light of the correction above, please ignore.",
+      "parentUuid": "9e924724_99513d5a",
+      "range": {
+        "startLine": 40,
+        "startChar": 25,
+        "endLine": 40,
+        "endChar": 52
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
