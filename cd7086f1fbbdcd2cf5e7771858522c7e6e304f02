@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3b5e9fe_df8ee94e",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-11-27T12:37:20Z",
+      "side": 1,
+      "message": "I think it would make sense to add a DCHECK_GE to make sure that base_min_target_delay_ms is \u003e\u003d 0",
+      "revId": "cd7086f1fbbdcd2cf5e7771858522c7e6e304f02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1320af36_13e2c848",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-11-27T12:37:20Z",
+      "side": 1,
+      "message": "How about setting minimum_delay_ms_ to std::max(delay_ms, base_min_target_delay_ms_)? That way you wouldn\u0027t have to change the LimitTargetLevel function at all.",
+      "revId": "cd7086f1fbbdcd2cf5e7771858522c7e6e304f02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
