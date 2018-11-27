@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "210da9af_d7fde95c",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T22:50:02Z",
+      "side": 1,
+      "message": "Need to set reduced_transaction_id_ here too (unless we move the reduction to icelogger).",
+      "revId": "3c0c4d40b6ecb91d3101c73c31cad6731474c762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
