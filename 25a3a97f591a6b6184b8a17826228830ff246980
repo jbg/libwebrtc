@@ -22,6 +22,30 @@
       "revId": "25a3a97f591a6b6184b8a17826228830ff246980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7af71e73_80604468",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "e21cd2b1_c0c95d4f",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "25a3a97f591a6b6184b8a17826228830ff246980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8022a46a_109b7d0c",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "Ack. I prefer keeping the RtcEventIceCandidatePair interface aligned with the protos.\nWe would also do the translation from string to uint32 twice if we took a string here, because we log an event when we receive a message and send the response.",
+      "parentUuid": "87b3ff2b_42e271ef",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3472289b_e0d5c4fa",
         "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h",
         "patchSetId": 8
@@ -120,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "edb9da23_b15ad124",
+        "filename": "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "28ccfa9e_d92d235b",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58706882_ed819678",
         "filename": "logging/rtc_event_log/icelogger.cc",
         "patchSetId": 8
@@ -131,6 +179,30 @@
       "writtenOn": "2018-11-27T12:31:26Z",
       "side": 1,
       "message": "I\u0027ve talked to Björn offline, and the change that would make me happy, while keeping him also happy, would be to pass everything up to here as std::string, then perform the reduction inside of this function, right before invoking event_log_-\u003eLog().",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d27668df_956504b8",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "I can do this, but it means we will be reducing the same id multiple times when we receive and send a message. Do you two still prefer that approach?",
+      "parentUuid": "58706882_ed819678",
       "range": {
         "startLine": 35,
         "startChar": 40,
@@ -214,6 +286,30 @@
     },
     {
       "key": {
+        "uuid": "e4418aa8_ffbdc82e",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "I don\u0027t see what would this would check either. The client will have to keep in mind that collisions are possible (though very unlikely).",
+      "parentUuid": "a5b921e4_6121472c",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b4db645_61c24d9e",
         "filename": "p2p/base/port.cc",
         "patchSetId": 8
@@ -234,6 +330,30 @@
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "387226a3_7f886e01",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b4db645_61c24d9e",
+      "range": {
+        "startLine": 1754,
+        "startChar": 33,
+        "endLine": 1754,
+        "endChar": 43
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -260,6 +380,30 @@
     },
     {
       "key": {
+        "uuid": "1fc326ee_afec2263",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "I put it here instead of in the log module to avoid reducing the same id twice (for a linked message received and message sent event). StunMessage is not in api, so I think it\u0027s fine to expand its interface a little bit.",
+      "parentUuid": "729fd717_36eba565",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65077863_49513121",
         "filename": "p2p/base/stun.cc",
         "patchSetId": 8
@@ -280,6 +424,30 @@
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91fa84e6_fee8c152",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "Done, but https://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/stun.cc?q\u003dstun.cc+f:webrtc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d664",
+      "parentUuid": "65077863_49513121",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 24
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -394,6 +562,24 @@
     },
     {
       "key": {
+        "uuid": "f45d8cfa_8b2865a4",
+        "filename": "p2p/base/stun.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3880fe2_1d1b05d8",
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b093dd3_e7afe03e",
         "filename": "p2p/base/stunrequest.h",
         "patchSetId": 8
@@ -414,6 +600,30 @@
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a4fc56c_e9e9e71a",
+        "filename": "p2p/base/stunrequest.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-27T20:36:11Z",
+      "side": 1,
+      "message": "This was done to be consistent with the above method but I will change it.\nI don\u0027t want to change the above method in this CL but I can in a follow up if others think it is worth doing.",
+      "parentUuid": "4b093dd3_e7afe03e",
+      "range": {
+        "startLine": 99,
+        "startChar": 11,
+        "endLine": 99,
+        "endChar": 21
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
