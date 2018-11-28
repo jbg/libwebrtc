@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "52e83cf1_45479651",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-11-28T21:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "310f057f_87070e9e",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f2e25e_74fb0035",
         "filename": "video/encrypted_frame_receiver.cc",
         "patchSetId": 4
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "72205ce6_9f117a42",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-11-28T21:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75f2e25e_74fb0035",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73a9b86f_d7e7bbfa",
         "filename": "video/encrypted_frame_receiver.cc",
         "patchSetId": 4
@@ -107,6 +155,30 @@
       "writtenOn": "2018-11-28T11:45:08Z",
       "side": 1,
       "message": "Please add a:\n\n  class OnDecryptedFrameCallback {\n   public:\n    virtual ~OnDecryptedFrameCallback() {}\n    virtual void OnDecryptedFrame(std::unique_ptr\u003cEncodedFrame\u003e frame) \u003d 0;\n  };\n\nto the interface and then glue everything together in the RtpVideoStreamReceiver. We don\u0027t want this class to depend on the RtpFrameReferenceFinder.",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7786e27_949be434",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-11-28T21:35:16Z",
+      "side": 1,
+      "message": "Is there a reason adding an interface is preferred over moving a std::function that captures this into the function? This seems more generic and flexible than forcing an interface implementation.",
+      "parentUuid": "73a9b86f_d7e7bbfa",
       "range": {
         "startLine": 54,
         "startChar": 6,
@@ -139,6 +211,30 @@
       "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d1f7ef6_cbeecc00",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2018-11-28T21:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e432ae91_eba007bf",
+      "range": {
+        "startLine": 389,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 35
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
