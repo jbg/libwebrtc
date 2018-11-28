@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4f22f82_30633117",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-28T11:45:08Z",
+      "side": 1,
+      "message": "WDYT about RtpFrameDecryptor or BufferedRtpFrameDecryptor?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f2e25e_74fb0035",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-28T11:45:08Z",
+      "side": 1,
+      "message": "In the RtpFrameReferenceFinder we use a lock to synchronize between the decoder thread calling ClearTo and the network thread calling ManageFrame. Do you expect this class to be used by multiple thread? AFAICT it should only be used by the network thread, right?\n\nThe RtpFrameReferenceFinder is hardly the golden standard in terms of design :D Even for that class the lock should be removed and synchronization should be enforced by the glue-class (RtpVideoStreamReceiver) instead.\n\nIn the RtpVideoStreamReceiver you can do something like this:\n\n  #include \"rtc_base/thread_checker.h\"\n\n  rtc::ThreadChecker network_tc_;\n  std::unique_ptr\u003cEncryptedFrameReceiver\u003e frame_decryptor_ RTC_PT_GUARDED_BY(network_tc_);\n\nThen in every function that use the frame_decryptor_ you would add this line:\n\n  RTC_DCHECK_RUN_ON(\u0026network_tc_);",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73a9b86f_d7e7bbfa",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-28T11:45:08Z",
+      "side": 1,
+      "message": "Please add a:\n\n  class OnDecryptedFrameCallback {\n   public:\n    virtual ~OnDecryptedFrameCallback() {}\n    virtual void OnDecryptedFrame(std::unique_ptr\u003cEncodedFrame\u003e frame) \u003d 0;\n  };\n\nto the interface and then glue everything together in the RtpVideoStreamReceiver. We don\u0027t want this class to depend on the RtpFrameReferenceFinder.",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e432ae91_eba007bf",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-28T11:45:08Z",
+      "side": 1,
+      "message": "Why is this logic replicated in the EncryptedFrameReceiver?",
+      "range": {
+        "startLine": 389,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 35
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
