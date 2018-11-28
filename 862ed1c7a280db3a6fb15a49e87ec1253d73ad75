@@ -46,6 +46,30 @@
       "revId": "862ed1c7a280db3a6fb15a49e87ec1253d73ad75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6912d2f7_9ab27103",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-28T21:55:07Z",
+      "side": 1,
+      "message": "s/\u0026transaction_id_as_ints[0]/transaction_id_as_ints/\nNot getting rid of the copy now.",
+      "parentUuid": "3c333590_c32a161a",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "862ed1c7a280db3a6fb15a49e87ec1253d73ad75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

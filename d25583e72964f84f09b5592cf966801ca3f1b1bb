@@ -239,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "93703052_76d2d410",
+        "filename": "logging/rtc_event_log/icelogger.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-28T21:55:07Z",
+      "side": 1,
+      "message": "Qingsi and I are okay with the p2p code doing the translation for now.",
+      "parentUuid": "824a0cc5_ff194265",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44823694_e458dc5d",
         "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
         "patchSetId": 8
@@ -358,6 +382,30 @@
     },
     {
       "key": {
+        "uuid": "8db94951_835d337d",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-28T21:55:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the right time or place to test for these kinds of issues. I will revisit with future work.",
+      "parentUuid": "205ae2f8_ca5172ad",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b4db645_61c24d9e",
         "filename": "p2p/base/port.cc",
         "patchSetId": 8
@@ -473,6 +521,30 @@
       "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2a1df3b_eb8c01f7",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-11-28T21:55:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5cafcec7_431dfd2b",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "d25583e72964f84f09b5592cf966801ca3f1b1bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
