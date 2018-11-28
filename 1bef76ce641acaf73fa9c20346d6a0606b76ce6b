@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "310f057f_87070e9e",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-28T11:54:51Z",
+      "side": 1,
+      "message": "That\u0027s true, FrameDecryptor or BufferedFrameDecryptor is a better name in that case. I also believe that every instance of video_coding::RtpFrameObject can be replaced by video_coding::EncodedFrame instead.",
+      "parentUuid": "b082ce79_1fe44725",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "75f2e25e_74fb0035",
         "filename": "video/encrypted_frame_receiver.cc",
         "patchSetId": 4
