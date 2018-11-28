@@ -14,6 +14,8 @@ rtc_static_library("video") {
     "call_stats.h",
     "encoder_rtcp_feedback.cc",
     "encoder_rtcp_feedback.h",
+    "encrypted_frame_receiver.cc",
+    "encrypted_frame_receiver.h",
     "quality_threshold.cc",
     "quality_threshold.h",
     "receive_statistics_proxy.cc",
