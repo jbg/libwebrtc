@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f51c5141_078c9010",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6630
+      },
+      "writtenOn": "2018-11-28T01:13:52Z",
+      "side": 1,
+      "message": "We need to add some metrics to this class, like how many frames dropped, stashed, tried etc, please add TODOs to add them later",
+      "range": {
+        "startLine": 20,
+        "startChar": 24,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "e278559a18ef5d2f8fd04ea8a386bd907c3c96d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f5ef297_fd61f2c6",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 6630
+      },
+      "writtenOn": "2018-11-28T01:13:52Z",
+      "side": 1,
+      "message": "Why do you do the same check again here? It is already done in the function above before decrypting!",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 51
+      },
+      "revId": "e278559a18ef5d2f8fd04ea8a386bd907c3c96d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
