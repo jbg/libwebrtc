@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b785455_b2abecc5",
+        "filename": "pc/dtlstransport.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "2018",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edf80e17_10b65dfe",
+        "filename": "pc/dtlstransport.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "RTC_DCHECK(internal.get());\n\n(code calling internal() relies on pointer being non-null)",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "516c5c92_17185675",
+        "filename": "pc/dtlstransport.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "2018",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8e45134_e47dd8f6",
+        "filename": "pc/dtlstransport.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "Not needed? If this compiles, we\u0027re already getting DtlsTransportInternal from somewhere else?",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "558c5164_90f51bb0",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer if these initializations had the same layout, despite clang format...",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29036b95_eb9eb5a3",
+        "filename": "pc/jseptransport.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "const methods returning non const pointers to members is bad and, I believe, contrary to the coding standard.",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "974fa241_4e7c9e51",
+        "filename": "pc/peerconnection.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-11-28T14:01:09Z",
+      "side": 1,
+      "message": "DtlsTransportInterface?",
+      "revId": "edf27efebe82d4e7c4e078b079bfb9bf410e22ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
