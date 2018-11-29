@@ -10,6 +10,8 @@ import("../webrtc.gni")
 
 rtc_static_library("video") {
   sources = [
+    "buffered_frame_decryptor.cc",
+    "buffered_frame_decryptor.h",
     "call_stats.cc",
     "call_stats.h",
     "encoder_rtcp_feedback.cc",
