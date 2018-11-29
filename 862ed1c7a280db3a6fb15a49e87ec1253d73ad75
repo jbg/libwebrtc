@@ -70,6 +70,30 @@
       "revId": "862ed1c7a280db3a6fb15a49e87ec1253d73ad75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7a8f502_6f95ccd2",
+        "filename": "p2p/base/stun.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2018-11-29T10:28:19Z",
+      "side": 1,
+      "message": "This is not independent of the machine byte order, is it? Assuming that the transaction_id is the same string (regardless of byte order), then you\u0027ll get different results when you interpret it as ints.",
+      "parentUuid": "6912d2f7_9ab27103",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "862ed1c7a280db3a6fb15a49e87ec1253d73ad75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
