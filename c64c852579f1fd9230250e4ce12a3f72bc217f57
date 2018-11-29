@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3cf63636_573f116b",
+        "filename": "modules/congestion_controller/goog_cc/link_capacity_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-29T17:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d4f2594_3d1a3b43",
+      "range": {
+        "startLine": 68,
+        "startChar": 21,
+        "endLine": 68,
+        "endChar": 35
+      },
+      "revId": "c64c852579f1fd9230250e4ce12a3f72bc217f57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "854f3b22_42d4876d",
         "filename": "modules/congestion_controller/goog_cc/link_capacity_estimator.cc",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "writtenOn": "2018-11-29T17:26:52Z",
       "side": 1,
       "message": "Could we RTC_DCHECK(estimate_kbps_.has_value())?",
+      "range": {
+        "startLine": 69,
+        "startChar": 32,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "c64c852579f1fd9230250e4ce12a3f72bc217f57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79b580df_1cb08023",
+        "filename": "modules/congestion_controller/goog_cc/link_capacity_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-11-29T17:37:12Z",
+      "side": 1,
+      "message": "Seems redundant since optional checks that for us already?",
+      "parentUuid": "854f3b22_42d4876d",
       "range": {
         "startLine": 69,
         "startChar": 32,
