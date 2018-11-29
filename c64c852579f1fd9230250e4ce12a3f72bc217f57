@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52e5cdd7_9d88c411",
+        "filename": "modules/congestion_controller/goog_cc/link_capacity_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-29T16:24:21Z",
+      "side": 1,
+      "message": "This isn\u0027t really a variance now, but a standard deviation, right?",
+      "range": {
+        "startLine": 65,
+        "startChar": 30,
+        "endLine": 65,
+        "endChar": 52
+      },
+      "revId": "c64c852579f1fd9230250e4ce12a3f72bc217f57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a6da573_4147dee7",
+        "filename": "modules/remote_bitrate_estimator/aimd_rate_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-29T16:24:21Z",
+      "side": 1,
+      "message": "a fast",
+      "range": {
+        "startLine": 308,
+        "startChar": 33,
+        "endLine": 308,
+        "endChar": 35
+      },
+      "revId": "c64c852579f1fd9230250e4ce12a3f72bc217f57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
