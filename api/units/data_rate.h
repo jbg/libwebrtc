@@ -50,11 +50,15 @@ class DataRate final : public rtc_units_impl::RelativeUnit<DataRate> {
   static constexpr DataRate KilobitsPerSec() {
     return FromStaticFraction<kbps, 1000>();
   }
-  template <typename T>
+  template <
+      typename T,
+      typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
   static constexpr DataRate bps(T bits_per_second) {
     return FromValue(bits_per_second);
   }
-  template <typename T>
+  template <
+      typename T,
+      typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
   static constexpr DataRate kbps(T kilobits_per_sec) {
     return FromFraction<1000>(kilobits_per_sec);
   }

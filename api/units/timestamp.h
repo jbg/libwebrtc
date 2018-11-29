@@ -43,15 +43,21 @@ class Timestamp final : public rtc_units_impl::UnitBase<Timestamp> {
     return FromStaticValue<us>();
   }
 
-  template <typename T>
+  template <
+      typename T,
+      typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
   static Timestamp seconds(T seconds) {
     return FromFraction<1000000>(seconds);
   }
-  template <typename T>
+  template <
+      typename T,
+      typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
   static Timestamp ms(T milliseconds) {
     return FromFraction<1000>(milliseconds);
   }
-  template <typename T>
+  template <
+      typename T,
+      typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
   static Timestamp us(T microseconds) {
     return FromValue(microseconds);
   }
