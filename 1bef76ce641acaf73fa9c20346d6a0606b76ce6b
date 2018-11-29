@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "c2b1629f_bc6f2eb7",
+        "filename": "video/encrypted_frame_receiver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-29T12:22:59Z",
+      "side": 1,
+      "message": "std::function is currently blacklisted in WebRTC: https://chromium-cpp.appspot.com/#library-blacklist",
+      "parentUuid": "a7786e27_949be434",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "1bef76ce641acaf73fa9c20346d6a0606b76ce6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e432ae91_eba007bf",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 4

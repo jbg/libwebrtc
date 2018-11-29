@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e312e01_8bb030f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-29T12:22:59Z",
+      "side": 1,
+      "message": "Please update to BufferedFrameDecryptor",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "30c8c34caaa5b33622870eb870500a5df740a71f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "193976c5_d7b8477a",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-29T12:22:59Z",
+      "side": 1,
+      "message": "Sorry, I was a bit unclear about this. The thread checker should live in RtpVideoStreamReceiver.",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 62,
+        "endChar": 33
+      },
+      "revId": "30c8c34caaa5b33622870eb870500a5df740a71f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c4d6dd6_3f6f4aa3",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-29T12:22:59Z",
+      "side": 1,
+      "message": "rtc::ThreadChecker network_tc_;\nstd::unique_ptr\u003cBufferedFrameDecryptor\u003e buffered_frame_decryptor_ RTC_PT_GUARDED_BY(network_tc_);",
+      "revId": "30c8c34caaa5b33622870eb870500a5df740a71f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
