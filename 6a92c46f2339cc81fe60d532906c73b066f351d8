@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fbca346_2215b021",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-30T10:06:48Z",
+      "side": 1,
+      "message": "Please update this comment to describe the class more generally, avoid mentioning the RtpFrameReferenceFinder.",
+      "range": {
+        "startLine": 36,
+        "startChar": 38,
+        "endLine": 36,
+        "endChar": 61
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6e7b5f5_730e15a8",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-30T10:06:48Z",
+      "side": 1,
+      "message": "Please add unittests for this class.",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 28
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c17d0e00_5a12d81c",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-30T10:06:48Z",
+      "side": 1,
+      "message": "OnDecryptedFrameCallback?",
+      "range": {
+        "startLine": 55,
+        "startChar": 9,
+        "endLine": 55,
+        "endChar": 32
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
