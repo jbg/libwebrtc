@@ -585,6 +585,8 @@ class Connection : public CandidatePairInterface,
   void set_unwritable_min_checks(const absl::optional<int>& value) {
     unwritable_min_checks_ = value;
   }
+  int timeout() const;
+  void set_timeout(const absl::optional<int>& value) { timeout_ = value; }
 
   // Gets the |ConnectionInfo| stats, where |best_connection| has not been
   // populated (default value false).
@@ -835,6 +837,7 @@ class Connection : public CandidatePairInterface,
 
   absl::optional<int> unwritable_timeout_;
   absl::optional<int> unwritable_min_checks_;
+  absl::optional<int> timeout_;
 
   bool reported_;
   IceCandidatePairState state_;
