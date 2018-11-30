@@ -229,6 +229,30 @@
       "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e3c5040_ee4b3c19",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-11-30T10:24:27Z",
+      "side": 1,
+      "message": "I would say this is clearer than having a null frame decryptor.",
+      "parentUuid": "e09c8814_5ff7b791",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 402,
+        "endChar": 3
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
