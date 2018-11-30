@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "436ae3d5_a1341b17",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-11-30T01:37:25Z",
+      "side": 1,
+      "message": "An alternative is to use a static_assert in the function body; this will use less hard-to-read template metaprogramming. The error messages appear to be about equally readable.\n\nI\u0027m leaving the choice to you.",
+      "revId": "2eb9901491745630002a45d796c024eaadfd22a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
