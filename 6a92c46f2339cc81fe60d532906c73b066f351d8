@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8785c254_cc242c7c",
+        "filename": "video/buffered_frame_decryptor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "Never used",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cc487c1_436fdfba",
+        "filename": "video/buffered_frame_decryptor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "RTC_CHECK_LE here and in other places",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 11
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2fbca346_2215b021",
         "filename": "video/buffered_frame_decryptor.h",
         "patchSetId": 8
@@ -64,6 +110,121 @@
         "startChar": 9,
         "endLine": 55,
         "endChar": 32
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f27eea58_7e97a657",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 32
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dacfc7f5_18d3be16",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 63
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b32aa103_21cd4f10",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "Should also be const AFAICT (if you remove \u003d nullptr here).",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e00a0af_d8282d46",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "Methods before members.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 28
+      },
+      "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e09c8814_5ff7b791",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2018-11-30T10:19:18Z",
+      "side": 1,
+      "message": "Instead of this, I wonder if it would be nicer to have a null frame decryptor that simply just calls OnDecryptedFrame() and avoid the nullptr check?",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 402,
+        "endChar": 3
       },
       "revId": "6a92c46f2339cc81fe60d532906c73b066f351d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
