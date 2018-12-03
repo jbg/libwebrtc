@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "71b917f8_4a2133ee",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-03T18:29:22Z",
+      "side": 1,
+      "message": "He wants to make a forwarding wrapper, and with the current state of the interface, his DecodeInternal has to call the wrapee\u0027s Decode, which is nontrivial because it has to reconstruct implicit parameters.",
+      "parentUuid": "0ff22d61_3f996c8e",
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b562fbee_fdad1c5b",
         "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
         "patchSetId": 2
