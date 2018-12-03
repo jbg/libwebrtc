@@ -319,6 +319,8 @@ void Aec3ConfigFromJsonString(absl::string_view json_string,
       ReadParam(
           subsection, "use_during_initial_phase",
           &cfg.suppressor.dominant_nearend_detection.use_during_initial_phase);
+      ReadParam(subsection, "use_hmm",
+                &cfg.suppressor.dominant_nearend_detection.use_hmm);
     }
 
     if (rtc::GetValueFromJsonObject(section, "high_bands_suppression",
@@ -563,6 +565,8 @@ std::string Aec3ConfigToJsonString(const EchoCanceller3Config& config) {
       << config.suppressor.dominant_nearend_detection.trigger_threshold << ",";
   ost << "\"use_during_initial_phase\": "
       << config.suppressor.dominant_nearend_detection.use_during_initial_phase;
+  ost << "\"use_hmm\": "
+      << config.suppressor.dominant_nearend_detection.use_hmm;
   ost << "},";
   ost << "\"high_bands_suppression\": {";
   ost << "\"enr_threshold\": "

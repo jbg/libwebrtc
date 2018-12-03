@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <numeric>
 
+#include "modules/audio_processing/aec3/dominant_nearend_detector.h"
 #include "modules/audio_processing/aec3/moving_average.h"
 #include "modules/audio_processing/aec3/vector_math.h"
 #include "modules/audio_processing/logging/apm_data_dumper.h"
@@ -163,7 +164,7 @@ float SuppressionGain::UpperBandsGain(
   const auto& cfg = config_.suppressor.high_bands_suppression;
   float gain_bound = 1.f;
   if (echo_sum > cfg.enr_threshold * noise_sum &&
-      !dominant_nearend_detector_.IsNearendState()) {
+      !dominant_nearend_detector_->IsNearendState()) {
     gain_bound = cfg.max_gain_during_echo;
   }
 
@@ -179,8 +180,8 @@ void SuppressionGain::GainToNoAudibleEcho(
     const std::array<float, kFftLengthBy2Plus1>& min_gain,
     const std::array<float, kFftLengthBy2Plus1>& max_gain,
     std::array<float, kFftLengthBy2Plus1>* gain) const {
-  const auto& p = dominant_nearend_detector_.IsNearendState() ? nearend_params_
-                                                              : normal_params_;
+  const auto& p = dominant_nearend_detector_->IsNearendState() ? nearend_params_
+                                                               : normal_params_;
   for (size_t k = 0; k < gain->size(); ++k) {
     float enr = echo[k] / (nearend[k] + 1.f);  // Echo-to-nearend ratio.
     float emr = echo[k] / (masker[k] + 1.f);   // Echo-to-masker (noise) ratio.
@@ -214,7 +215,7 @@ void SuppressionGain::GetMinGain(
       min_gain[k] = std::min(min_gain[k], 1.f);
     }
     for (size_t k = 0; k < 6; ++k) {
-      const auto& dec = dominant_nearend_detector_.IsNearendState()
+      const auto& dec = dominant_nearend_detector_->IsNearendState()
                             ? nearend_params_.max_dec_factor_lf
                             : normal_params_.max_dec_factor_lf;
 
@@ -233,7 +234,7 @@ void SuppressionGain::GetMinGain(
 // Compute the maximum gain by limiting the gain increase from the previous
 // gain.
 void SuppressionGain::GetMaxGain(rtc::ArrayView<float> max_gain) const {
-  const auto& inc = dominant_nearend_detector_.IsNearendState()
+  const auto& inc = dominant_nearend_detector_->IsNearendState()
                         ? nearend_params_.max_inc_factor
                         : normal_params_.max_inc_factor;
   const auto& floor = config_.suppressor.floor_first_increase;
@@ -283,7 +284,7 @@ void SuppressionGain::LowerBandGain(
   data_dumper_->DumpRaw("aec3_suppressor_min_gain", min_gain);
   data_dumper_->DumpRaw("aec3_suppressor_max_gain", max_gain);
   data_dumper_->DumpRaw("aec3_dominant_nearend",
-                        dominant_nearend_detector_.IsNearendState());
+                        dominant_nearend_detector_->IsNearendState());
 }
 
 SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
@@ -299,8 +300,8 @@ SuppressionGain::SuppressionGain(const EchoCanceller3Config& config,
                       config.suppressor.nearend_average_blocks),
       nearend_params_(config_.suppressor.nearend_tuning),
       normal_params_(config_.suppressor.normal_tuning),
-      dominant_nearend_detector_(
-          config_.suppressor.dominant_nearend_detection) {
+      dominant_nearend_detector_(DominantNearendDetector::Create(
+          config_.suppressor.dominant_nearend_detection)) {
   RTC_DCHECK_LT(0, state_change_duration_blocks_);
   one_by_state_change_duration_blocks_ = 1.f / state_change_duration_blocks_;
   last_gain_.fill(1.f);
@@ -337,8 +338,8 @@ void SuppressionGain::GetGain(
   moving_average_.Average(nearend_spectrum, nearend_average);
 
   // Update the state selection.
-  dominant_nearend_detector_.Update(nearend_spectrum, residual_echo_spectrum,
-                                    comfort_noise_spectrum, initial_state_);
+  dominant_nearend_detector_->Update(nearend_spectrum, residual_echo_spectrum,
+                                     comfort_noise_spectrum, initial_state_);
 
   // Compute gain for the lower band.
   bool low_noise_render = low_render_detector_.Detect(render);
@@ -392,54 +393,6 @@ bool SuppressionGain::LowNoiseRenderDetector::Detect(
       average_power_ < kThreshold && x2_max < 3 * average_power_;
   average_power_ = average_power_ * 0.9f + x2_sum * 0.1f;
   return low_noise_render;
-}
-
-SuppressionGain::DominantNearendDetector::DominantNearendDetector(
-    const EchoCanceller3Config::Suppressor::DominantNearendDetection config)
-    : enr_threshold_(config.enr_threshold),
-      enr_exit_threshold_(config.enr_exit_threshold),
-      snr_threshold_(config.snr_threshold),
-      hold_duration_(config.hold_duration),
-      trigger_threshold_(config.trigger_threshold),
-      use_during_initial_phase_(config.use_during_initial_phase) {}
-
-void SuppressionGain::DominantNearendDetector::Update(
-    rtc::ArrayView<const float> nearend_spectrum,
-    rtc::ArrayView<const float> residual_echo_spectrum,
-    rtc::ArrayView<const float> comfort_noise_spectrum,
-    bool initial_state) {
-  auto low_frequency_energy = [](rtc::ArrayView<const float> spectrum) {
-    RTC_DCHECK_LE(16, spectrum.size());
-    return std::accumulate(spectrum.begin() + 1, spectrum.begin() + 16, 0.f);
-  };
-  const float ne_sum = low_frequency_energy(nearend_spectrum);
-  const float echo_sum = low_frequency_energy(residual_echo_spectrum);
-  const float noise_sum = low_frequency_energy(comfort_noise_spectrum);
-
-  // Detect strong active nearend if the nearend is sufficiently stronger than
-  // the echo and the nearend noise.
-  if ((!initial_state || use_during_initial_phase_) &&
-      echo_sum < enr_threshold_ * ne_sum &&
-      ne_sum > snr_threshold_ * noise_sum) {
-    if (++trigger_counter_ >= trigger_threshold_) {
-      // After a period of strong active nearend activity, flag nearend mode.
-      hold_counter_ = hold_duration_;
-      trigger_counter_ = trigger_threshold_;
-    }
-  } else {
-    // Forget previously detected strong active nearend activity.
-    trigger_counter_ = std::max(0, trigger_counter_ - 1);
-  }
-
-  // Exit nearend-state early at strong echo.
-  if (echo_sum > enr_exit_threshold_ * ne_sum &&
-      echo_sum > snr_threshold_ * noise_sum) {
-    hold_counter_ = 0;
-  }
-
-  // Remain in any nearend mode for a certain duration.
-  hold_counter_ = std::max(0, hold_counter_ - 1);
-  nearend_state_ = hold_counter_ > 0;
 }
 
 SuppressionGain::GainParameters::GainParameters(
