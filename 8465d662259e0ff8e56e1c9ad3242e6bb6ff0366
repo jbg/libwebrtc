@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7fc33453_486a5179",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-03T16:28:50Z",
+      "side": 1,
+      "message": "Actually, it looks like what we should do is override ParsePayload instead. These two are legacy methods that someone should clean away at some point. (The basic idea there is that NetEQ wants to parse packets immediately and put them in a queue, and then decode them on-demand. In order to make this type safe and nice, we represent the parsed-but-not-yet-decoded packets as instances of EncodedAudioFrame.)\n\n+CC Henrik and Oskar, to verify I\u0027m not making this up. I haven\u0027t touched this code in a while...",
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b562fbee_fdad1c5b",
         "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
         "patchSetId": 2
