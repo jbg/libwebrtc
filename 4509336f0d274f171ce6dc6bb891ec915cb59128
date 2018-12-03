@@ -16,6 +16,70 @@
       "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4681ab8a_7d333425",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-03T22:10:46Z",
+      "side": 1,
+      "message": "oops!",
+      "parentUuid": "dae3637e_0d5a747f",
+      "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6798b023_2bc79bdd",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2454,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-03T22:10:46Z",
+      "side": 1,
+      "message": "Should this be called \"MsidLine\"? Same in the test below",
+      "range": {
+        "startLine": 2454,
+        "startChar": 49,
+        "endLine": 2454,
+        "endChar": 69
+      },
+      "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c360cff4_8a778158",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-03T22:10:46Z",
+      "side": 1,
+      "message": "What do you think of using  SessionDescription::msid_signaling_?\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/sessiondescription.h?type\u003dcs\u0026g\u003d0\u0026l\u003d506\n\nIt is whether the session description as a whole uses \"a\u003dmsid\" signaling or not.  I guess it could break if one m\u003dsection used \"a\u003dmsid\" while another used didn\u0027t have any a\u003dmsid line and expected a stream to be created. But would this ever be the case?",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 24
+      },
+      "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
