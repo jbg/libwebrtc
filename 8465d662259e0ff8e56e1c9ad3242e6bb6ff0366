@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b562fbee_fdad1c5b",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-03T14:20:16Z",
+      "side": 1,
+      "message": "This is where the test fails.",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 37
+      },
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
