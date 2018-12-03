@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dae3637e_0d5a747f",
+        "filename": "api/rtpreceiverinterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-12-03T12:43:28Z",
+      "side": 1,
+      "message": "The proxy was previously relying on the interface default implementation \"return {}\" which had me scratch my head why the tests weren\u0027t passing for quite some time :)",
+      "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
