@@ -2954,6 +2954,7 @@ bool ParseContent(const std::string& message,
           return false;
         }
         *msid_signaling |= cricket::kMsidSignalingMediaSection;
+        media_desc->set_has_msid_attribute(true);
       }
     } else {
       // Only parse lines that we are interested of.

@@ -148,6 +148,7 @@ PeerConnectionInterface::RTCOfferAnswerOptions IceRestartOfferAnswerOptions() {
 void RemoveSsrcsAndMsids(cricket::SessionDescription* desc) {
   for (ContentInfo& content : desc->contents()) {
     content.media_description()->mutable_streams().clear();
+    content.media_description()->set_has_msid_attribute(false);
   }
   desc->set_msid_supported(false);
 }
@@ -2448,6 +2449,37 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   MediaExpectations media_expectations;
   media_expectations.ExpectBidirectionalVideo();
   EXPECT_TRUE(ExpectNewFrames(media_expectations));
+}
+
+TEST_F(PeerConnectionIntegrationTestUnifiedPlan, NoStreamsMsidPresent) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+  caller()->AddAudioTrack();
+  caller()->AddVideoTrack();
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  auto callee_receivers = callee()->pc()->GetReceivers();
+  ASSERT_EQ(2u, callee_receivers.size());
+  EXPECT_TRUE(callee_receivers[0]->stream_ids().empty());
+  EXPECT_TRUE(callee_receivers[1]->stream_ids().empty());
+}
+
+TEST_F(PeerConnectionIntegrationTestUnifiedPlan, NoStreamsMsidMissing) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+  caller()->AddAudioTrack();
+  caller()->AddVideoTrack();
+  callee()->SetReceivedSdpMunger(RemoveSsrcsAndMsids);
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  auto callee_receivers = callee()->pc()->GetReceivers();
+  ASSERT_EQ(2u, callee_receivers.size());
+  ASSERT_EQ(1u, callee_receivers[0]->stream_ids().size());
+  ASSERT_EQ(1u, callee_receivers[1]->stream_ids().size());
+  EXPECT_EQ(callee_receivers[0]->stream_ids()[0],
+            callee_receivers[1]->stream_ids()[0]);
+  EXPECT_EQ(callee_receivers[0]->streams()[0],
+            callee_receivers[1]->streams()[0]);
 }
 
 // Test that if two video tracks are sent (from caller to callee, in this test),
