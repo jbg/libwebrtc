@@ -153,6 +153,12 @@ class MediaContentDescription {
     sp.AddFidSsrc(ssrc, fid_ssrc);
     streams_.push_back(sp);
   }
+  // Reflects if "a=msid" was present when the SDP was deserialized. Does not
+  // affect serializing.
+  bool has_msid_attribute() const { return has_msid_attribute_; }
+  void set_has_msid_attribute(bool has_msid_attribute) {
+    has_msid_attribute_ = has_msid_attribute;
+  }
   // Sets the CNAME of all StreamParams if it have not been set.
   void SetCnameIfEmpty(const std::string& cname) {
     for (cricket::StreamParamsVec::iterator it = streams_.begin();
@@ -212,6 +218,7 @@ class MediaContentDescription {
   std::vector<webrtc::RtpExtension> rtp_header_extensions_;
   bool rtp_header_extensions_set_ = false;
   StreamParamsVec streams_;
+  bool has_msid_attribute_ = false;
   bool conference_mode_ = false;
   webrtc::RtpTransceiverDirection direction_ =
       webrtc::RtpTransceiverDirection::kSendRecv;

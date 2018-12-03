@@ -2468,6 +2468,24 @@ RTCError PeerConnection::ApplyRemoteDescription(
           }
           media_streams.push_back(stream);
         }
+        printf("printf has_msid_attribute: %s\n",
+               media_desc->has_msid_attribute() ? "true" : "false");
+        for (const auto& stream_id : stream_ids) {
+          printf("printf   stream_id: %s\n", stream_id.c_str());
+        }
+        // Special case: "a=msid" missing, use random stream ID.
+        if (media_streams.empty() && !media_desc->has_msid_attribute()) {
+          printf("printf SPECIAL CASE!\n");
+          if (!missing_msid_default_stream_) {
+            missing_msid_default_stream_ = MediaStreamProxy::Create(
+                rtc::Thread::Current(),
+                MediaStream::Create(rtc::CreateRandomUuid()));
+            added_streams.push_back(missing_msid_default_stream_);
+            printf("printf CREATED DEFAULT STREAM %s!\n",
+                   missing_msid_default_stream_->id().c_str());
+          }
+          media_streams.push_back(missing_msid_default_stream_);
+        }
         // This will add the remote track to the streams.
         // TODO(hbos): When we remove remote_streams(), use set_stream_ids()
         // instead. https://crbug.com/webrtc/9480
@@ -2518,8 +2536,13 @@ RTCError PeerConnection::ApplyRemoteDescription(
       observer->OnTrack(transceiver);
       observer->OnAddTrack(transceiver->receiver(),
                            transceiver->receiver()->streams());
+      printf("printf OnAddTrack %s\n",
+             !transceiver->receiver()->streams().empty()
+                 ? transceiver->receiver()->streams()[0]->id().c_str()
+                 : "<no stream>");
     }
     for (auto stream : added_streams) {
+      printf("printf OnAddStream\n");
       observer->OnAddStream(stream);
     }
     for (auto transceiver : remove_list) {

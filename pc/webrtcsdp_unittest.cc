@@ -2488,6 +2488,8 @@ TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithoutMsid) {
   EXPECT_TRUE(SdpDeserialize(sdp_without_msid, &jdesc));
   // Verify
   EXPECT_TRUE(CompareSessionDescription(jdesc_, jdesc));
+  EXPECT_FALSE(cricket::GetFirstAudioContentDescription(jdesc.description())
+                   ->has_msid_attribute());
 }
 
 TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithExtmapAllowMixed) {
@@ -3484,6 +3486,9 @@ TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionSpecialMsid) {
                              &deserialized_description));
 
   EXPECT_TRUE(CompareSessionDescription(jdesc_, deserialized_description));
+  EXPECT_TRUE(cricket::GetFirstAudioContentDescription(
+                  deserialized_description.description())
+                  ->has_msid_attribute());
 }
 
 // Tests the serialization of a Unified Plan SDP that is compatible for both
@@ -3576,6 +3581,8 @@ TEST_F(WebRtcSdpTest, PlanBHasSsrcAttributeMsidSignaling) {
   ASSERT_TRUE(SdpDeserialize(kPlanBSdpFullString, &jsep_desc));
   EXPECT_EQ(cricket::kMsidSignalingSsrcAttribute,
             jsep_desc.description()->msid_signaling());
+  EXPECT_FALSE(cricket::GetFirstAudioContentDescription(jsep_desc.description())
+                   ->has_msid_attribute());
 }
 
 TEST_F(WebRtcSdpTest, UnifiedPlanHasMediaSectionMsidSignaling) {
@@ -3583,6 +3590,8 @@ TEST_F(WebRtcSdpTest, UnifiedPlanHasMediaSectionMsidSignaling) {
   ASSERT_TRUE(SdpDeserialize(kUnifiedPlanSdpFullString, &jsep_desc));
   EXPECT_EQ(cricket::kMsidSignalingMediaSection,
             jsep_desc.description()->msid_signaling());
+  EXPECT_TRUE(cricket::GetFirstAudioContentDescription(jsep_desc.description())
+                  ->has_msid_attribute());
 }
 
 const char kMediaSectionMsidLine[] = "a=msid:local_stream_1 audio_track_id_1";
