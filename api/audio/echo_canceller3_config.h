@@ -188,6 +188,7 @@ struct RTC_EXPORT EchoCanceller3Config {
       int hold_duration = 50;
       int trigger_threshold = 12;
       bool use_during_initial_phase = true;
+      bool use_hmm = true;
     } dominant_nearend_detection;
 
     struct HighBandsSuppression {
