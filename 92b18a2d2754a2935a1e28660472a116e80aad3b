@@ -45,6 +45,30 @@
       "revId": "92b18a2d2754a2935a1e28660472a116e80aad3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "300657d3_f4a8b8f8",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2018-12-03T17:03:47Z",
+      "side": 1,
+      "message": "If the max configured bitrate is 2Mbps, we don\u0027t want to probe at that rate because we\u0027ll\noften then have a BWE 5-10% below that, preventing the encoder from reaching the max rate.\n\nAdditionally, if there is an encoder overshoot we will likely be able to ramp up the BWE to\nsay 3Mbps if the network is not restricted. What I saw was probes arriving at 1.9Mbps in the\nmiddle of this, causing needlessly long pacer queues and more dropped frames due to pushback.\n\nIf we have ramped up the bitrate to 3Mbps, I think it\u0027s fine to keep probing at that rate.\nLikely the probes will be a little lower and we will slowly decay to \nmax_total_allocated_bitrate_ (x2) over time.",
+      "parentUuid": "11b9e8e9_30b62335",
+      "range": {
+        "startLine": 347,
+        "startChar": 5,
+        "endLine": 349,
+        "endChar": 80
+      },
+      "revId": "92b18a2d2754a2935a1e28660472a116e80aad3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
