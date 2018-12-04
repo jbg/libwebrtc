@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa8fe9f1_0d2b60a4",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-04T17:04:18Z",
+      "side": 1,
+      "message": "I see that in Plan B the same \"default\" stream ID is used for default stream creation. Do we want to do that for this case as well? I trust your judgement here.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/peerconnection.cc?type\u003dcs\u0026g\u003d0\u0026l\u003d4334",
+      "range": {
+        "startLine": 2478,
+        "startChar": 36,
+        "endLine": 2478,
+        "endChar": 59
+      },
+      "revId": "6b09fbae3dccc4964d08eb478ba9b473f6d7b012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
