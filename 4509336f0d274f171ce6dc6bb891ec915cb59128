@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "6dc55205_0a52a168",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2454,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-12-04T09:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6798b023_2bc79bdd",
+      "range": {
+        "startLine": 2454,
+        "startChar": 49,
+        "endLine": 2454,
+        "endChar": 69
+      },
+      "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c360cff4_8a778158",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 2
@@ -80,6 +104,30 @@
       "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25acef4_f90e01a0",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-12-04T09:38:14Z",
+      "side": 1,
+      "message": "This is why I added the has_msid_attribute(), but I guess if any of the lines contains a\u003dmsid you\u0027ve shown that you are aware of this attribute, I\u0027m not sure we have to care about mixed uses.\n\nUpdated the code to use msid_signaling() instead.",
+      "parentUuid": "c360cff4_8a778158",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 24
+      },
+      "revId": "4509336f0d274f171ce6dc6bb891ec915cb59128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
