@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd23e2a4_b6767282",
+        "filename": "rtc_base/nethelpers_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2018-12-04T19:00:03Z",
+      "side": 1,
+      "message": "Constant might be getting propogated here.",
+      "revId": "7bd254531bed4112a6ba9b7a489848856c35c202",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
