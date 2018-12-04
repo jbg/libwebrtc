@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c916accf_dc6fbb94",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-04T10:29:45Z",
+      "side": 1,
+      "message": "Lets do this for this version of the descriptor, but for the next version I think we should avoid using GetRawExtension and only use GetByteRepresentation on both the sender and receiver side.",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 35
+      },
+      "revId": "e81c33737d401bca0ab90840fc7dbda1252ca68b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
