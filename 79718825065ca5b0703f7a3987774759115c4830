@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35269577_cf620dca",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-12-05T19:22:17Z",
+      "side": 1,
+      "message": "Do we think it\u0027s actually performance-sensitive enough to warrant double-checked locking?\n\nMy bias is toward keeping things simple unless a benchmark or profile demonstrates an issue.",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b446ba51_9b7717cf",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-12-05T19:22:17Z",
+      "side": 1,
+      "message": "Please note that this must only transition from true to false, and if it ever does the opposite, OnTargetTransferRate needs to be rewritten to avoid dropping notifications.",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 40
+      },
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e02a76_08f78224",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-12-05T19:22:17Z",
+      "side": 1,
+      "message": "Since it\u0027s only a bool and we don\u0027t need to check anything else, would an atomic\u003cbool\u003e make sense?  It can be used with memory_order_relaxed to check without synchronization, then memory_order_acquire to check with synchronization, and use memory_order_release to store the value.",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65accef1_0a703613",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2018-12-05T19:22:17Z",
+      "side": 1,
+      "message": "Should the else branch simply be deleted?  Is it worth keeping it just for a comment?  (The comment could stay, maybe just after the \"if\".)",
+      "range": {
+        "startLine": 557,
+        "startChar": 3,
+        "endLine": 559,
+        "endChar": 3
+      },
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
