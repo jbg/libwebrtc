@@ -22,6 +22,30 @@
       "revId": "6b09fbae3dccc4964d08eb478ba9b473f6d7b012",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93af1921_b3bdb199",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2018-12-05T09:49:36Z",
+      "side": 1,
+      "message": "The spec says random, and I think this is what Firefox does, https://github.com/rtcweb-wg/jsep/pull/859/files",
+      "parentUuid": "aa8fe9f1_0d2b60a4",
+      "range": {
+        "startLine": 2478,
+        "startChar": 36,
+        "endLine": 2478,
+        "endChar": 59
+      },
+      "revId": "6b09fbae3dccc4964d08eb478ba9b473f6d7b012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
