@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5d334241_dff917c9",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:32:48Z",
+      "side": 1,
+      "message": "There are 4 designs to address existing problem that I can think of\n1) Add \u0027RemoveTargetRateObserver\u0027 on the RtpTransportControllerSendInterface. This approach was disliked before, and in general we don\u0027t want to give a way to unregister the observer from transport.\n2) create a wrapper that allows you to stop listening, and hook up it to the RtpTransportControllerSendInterface, and disable when needed. This is the current approach.\n3) create new callback interface to identify the source, and ignore the rate callbacks from RtpTransportControllerSendInterface when media transport is used (but still subscribe to it)\n4) Instead of creating a new callback, add a \u0027caller\u0027 parameter to the callback (void OnTargetTransferRate(void* sender, TargetTransferRate msg) and use that to disambiguate caller.\n\nI think 3 and 4 are almost equivalent. I am not a huge fan of 3, because we would introduce a new interface just for the sake of identifying the caller. It sounds like a wrong abstraction. (4) may look a bit weird in c++ (but is a frequently used pattern in other languages).\n\nI decided to go with (2) because it\u0027s\n1) simple\n2) safe\n3) doesn\u0027t modify existing RtpTransportControllerSendInterface \n4) it can be done in one commit :-)",
+      "parentUuid": "18fe65ad_6ec476f5",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35269577_cf620dca",
         "filename": "call/call.cc",
         "patchSetId": 3
