@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "5af7b509_41e5d42c",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-12-05T20:43:16Z",
+      "side": 1,
+      "message": "Now it\u0027s a race, because you do not take lock. Please annotate is_enabled_ as protected by is_enabled_crit_ if you are not using atomics.",
+      "parentUuid": "e4119ea6_1e5c5d15",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b446ba51_9b7717cf",
         "filename": "call/call.cc",
         "patchSetId": 3
