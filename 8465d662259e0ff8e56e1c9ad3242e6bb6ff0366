@@ -122,6 +122,30 @@
       "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75c64c3f_2b31846f",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-05T14:47:57Z",
+      "side": 1,
+      "message": "I\u0027m running the failing test as \n\n$ ./out/Debug/modules_unittests --logs --gtest_filter\u003dNetEqImplTest.VerifyTimestampPropagation\n\nI\u0027ve added a debug printout in CountingSamplesDecoder::DecodeInternal, and both before and after my cl I see a single call, and at entry, I have next_value_ \u003d\u003d 1 and encoded_len_ \u003d\u003d 80.",
+      "parentUuid": "45d7e9c3_0955d3ad",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 37
+      },
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
