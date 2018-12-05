@@ -146,6 +146,30 @@
       "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8ec7baa_2133792a",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-05T15:42:40Z",
+      "side": 1,
+      "message": "This is what |output| looks like in the debugger before my cl:\n\n {timestamp_ \u003d 305419891, elapsed_time_ms_ \u003d -1, \n  ntp_time_ms_ \u003d -1, samples_per_channel_ \u003d 80, \n  sample_rate_hz_ \u003d 8000, num_channels_ \u003d 1, \n  speech_type_ \u003d webrtc::AudioFrame::kNormalSpeech, \n  vad_activity_ \u003d webrtc::AudioFrame::kVadUnknown, \n  profile_timestamp_ms_ \u003d 0, data_ \u003d {0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, \n    7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, \n    24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, \n    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, \n    56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, \n    72, 73, 74, 75, 0 \u003crepeats 7600 times\u003e}, muted_ \u003d false}\n\nAnd after:\n\n {timestamp_ \u003d 305419966, elapsed_time_ms_ \u003d -1, \n  ntp_time_ms_ \u003d -1, samples_per_channel_ \u003d 80, \n  sample_rate_hz_ \u003d 8000, num_channels_ \u003d 1, \n  speech_type_ \u003d webrtc::AudioFrame::kUndefined, \n  vad_activity_ \u003d webrtc::AudioFrame::kVadUnknown, \n  profile_timestamp_ms_ \u003d 0, data_ \u003d {0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, \n    7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, \n    24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, \n    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, \n    56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, \n    72, 73, 74, 75, 0 \u003crepeats 7600 times\u003e}, muted_ \u003d false}\n\nA few things to note: \n\n1. The data isn\u0027t {1,2,3, ..., 80}, as is produced by the decoder; we get 5 initial zero samples. No idea why, but that\u0027s the same before and after.\n\n2. The timestamp differs, larger by 75 units after the cl.\n\n3. The cl changes |speech_type_| from kNormalSpeech to kUndefined. It\u0027s not clear to me how the setting of that attribute works. The decoder sets |*speech_type \u003d kSpeech;|, but that\u0027s a different enum. As far as I see, neteq_impl.cc assigns speech_type_ only in SetAudioFrameActivityAndType(), and never to kUndefined, which is the default value on construction of AudioFrame. Which seems to imply that SetAudioFrameActivityAndType never is called after the cl.\n\nI\u0027m a bit lost.",
+      "parentUuid": "75c64c3f_2b31846f",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 37
+      },
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
