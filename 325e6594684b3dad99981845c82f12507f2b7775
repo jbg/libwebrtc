@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bba3cc7_082a3dd5",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-12-05T16:34:48Z",
+      "side": 1,
+      "message": "Here\u0027s one problem. kDecoderPCM16B is an 8 kHz codec (\u002716\u0027 refers to bits, not kHz). This should be 8000.",
+      "range": {
+        "startLine": 508,
+        "startChar": 64,
+        "endLine": 508,
+        "endChar": 69
+      },
+      "revId": "325e6594684b3dad99981845c82f12507f2b7775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
