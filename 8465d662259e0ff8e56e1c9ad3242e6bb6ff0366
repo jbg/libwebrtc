@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d4c1704f_adcc07c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-12-05T08:39:50Z",
+      "side": 1,
+      "message": "Slightly wonky format for this comment.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7fc33453_486a5179",
         "filename": "api/audio_codecs/audio_decoder.h",
         "patchSetId": 2
@@ -66,6 +89,30 @@
       "writtenOn": "2018-12-03T14:20:16Z",
       "side": 1,
       "message": "This is where the test fails.",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 37
+      },
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45d7e9c3_0955d3ad",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-12-05T08:39:50Z",
+      "side": 1,
+      "message": "Does your new decoder produce the same number of samples in each decode call as the old code did?",
+      "parentUuid": "b562fbee_fdad1c5b",
       "range": {
         "startLine": 532,
         "startChar": 0,
