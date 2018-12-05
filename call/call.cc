@@ -233,6 +233,45 @@ class Call final : public webrtc::Call,
   void MediaTransportChange(MediaTransportInterface* media_transport) override;
 
  private:
+  // transport_send_ can report TargetRate even before it knows BWE, based on
+  // initial values. Existing clients depend on this initial BWE. Therefore, we
+  // will subscribe in constructor to RTP transport rate publisher, and if media
+  // transport is used, we will (thread-safely), unsubscribe from those
+  // callbacks, and switch over to the media transport callbacks. This way
+  // existing clients behavior won't change.
+  class DisableableTargetRateObserver : public TargetTransferRateObserver {
+   public:
+    explicit DisableableTargetRateObserver(TargetTransferRateObserver* wrapped)
+        : wrapped_(wrapped) {}
+
+    void Disable() {
+      rtc::CritScope cs(&is_enabled_crit_);
+      is_enabled_ = false;
+    }
+
+   private:
+    void OnTargetTransferRate(TargetTransferRate msg) override {
+      // Double-checked locking pattern. Can be used as long as we don't have
+      // "Enable()" method on the interface. Once "Enable()" is needed, this
+      // implementation has to be changed.
+      if (!is_enabled_) {
+        return;
+      }
+
+      rtc::CritScope cs(&is_enabled_crit_);
+      if (is_enabled_) {
+        wrapped_->OnTargetTransferRate(std::move(msg));
+      }
+    }
+
+    TargetTransferRateObserver* const wrapped_;
+    rtc::CriticalSection is_enabled_crit_;
+
+    // is_enabled is guarded by the double-checked locking pattern and therefore
+    // it doesn't have RTC_GUARDED_BY().
+    bool is_enabled_ = true;
+  };
+
   DeliveryStatus DeliverRtcp(MediaType media_type,
                              const uint8_t* packet,
                              size_t length);
@@ -365,6 +404,11 @@ class Call final : public webrtc::Call,
   const std::unique_ptr<SendDelayStats> video_send_delay_stats_;
   const int64_t start_ms_;
 
+  // Must be destroyed after transport_send_. Listens to the transport send
+  // events and forwards them to the Call::OnTargetBitrate, as long as media
+  // transport is not used.
+  DisableableTargetRateObserver rtp_rate_observer_;
+
   // Caches transport_send_.get(), to avoid racing with destructor.
   // Note that this is declared before transport_send_ to ensure that it is not
   // invalidated until no more tasks can be running on the transport_send_ task
@@ -450,8 +494,10 @@ Call::Call(const Call::Config& config,
       receive_side_cc_(clock_, transport_send->packet_router()),
       receive_time_calculator_(ReceiveTimeCalculator::CreateFromFieldTrial()),
       video_send_delay_stats_(new SendDelayStats(clock_)),
-      start_ms_(clock_->TimeInMilliseconds()) {
+      start_ms_(clock_->TimeInMilliseconds()),
+      rtp_rate_observer_(this) {
   RTC_DCHECK(config.event_log != nullptr);
+  transport_send->RegisterTargetTransferRateObserver(&rtp_rate_observer_);
   transport_send_ = std::move(transport_send);
   transport_send_ptr_ = transport_send_.get();
 
@@ -503,9 +549,13 @@ void Call::RegisterRateObserver() {
   is_target_rate_observer_registered_ = true;
 
   if (media_transport_) {
+    // Replace the RTP observer with media_transport observer.
+    // Existing clients already depend on the initial rate to be reported
+    // to the target rate observer even before the first stream is created.
+    rtp_rate_observer_.Disable();
     media_transport_->AddTargetTransferRateObserver(this);
   } else {
-    transport_send_ptr_->RegisterTargetTransferRateObserver(this);
+    // Do nothing, we are already registered.
   }
 }
 
