@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "18fe65ad_6ec476f5",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-12-05T20:23:53Z",
+      "side": 1,
+      "message": "Do you need a wrapper only because you use the same TargetTransferRateObserver interface for media transport and internal WebRTC? Maybe it\u0027s time to separate them and fold this code into call.cc?",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35269577_cf620dca",
         "filename": "call/call.cc",
         "patchSetId": 3
@@ -13,6 +30,24 @@
       "writtenOn": "2018-12-05T19:22:17Z",
       "side": 1,
       "message": "Do we think it\u0027s actually performance-sensitive enough to warrant double-checked locking?\n\nMy bias is toward keeping things simple unless a benchmark or profile demonstrates an issue.",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "213c6c57_70f91ffe",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-12-05T20:23:53Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "35269577_cf620dca",
       "revId": "79718825065ca5b0703f7a3987774759115c4830",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
