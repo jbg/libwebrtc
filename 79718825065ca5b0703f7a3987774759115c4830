@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "619d2990_5b59c004",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2018-12-05T20:53:22Z",
+      "side": 1,
+      "message": "Remember that we also reschedule Call::OnTargetTransferRate from media transport because media transport does not call OnTargetTransferRate on required thread.\n\nSo we have 2 major differences in how OnTargetTransferRate handled from RTP and media transport:\n\n- When we start listening.\n- Threading model\n\nAnd we solve them in completely difference places. It works, but I think this code maybe be harder to understand / refactor later compared to options (3) and (4) that you mentioned above.\n\nYes, adding new interface may not be optimal, but as we see these two callbacks have somewhat different protocols. In this case I think separate name is not as bad.",
+      "parentUuid": "5d334241_dff917c9",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35269577_cf620dca",
         "filename": "call/call.cc",
         "patchSetId": 3
