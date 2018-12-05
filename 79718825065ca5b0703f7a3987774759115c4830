@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e4119ea6_1e5c5d15",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:26:59Z",
+      "side": 1,
+      "message": "No, it\u0027s just a habit -- why locking when you don\u0027t need to. Removed double-checked locking then.",
+      "parentUuid": "35269577_cf620dca",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b446ba51_9b7717cf",
         "filename": "call/call.cc",
         "patchSetId": 3
@@ -77,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "18682e33_175ef189",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:26:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b446ba51_9b7717cf",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 40
+      },
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34e02a76_08f78224",
         "filename": "call/call.cc",
         "patchSetId": 3
@@ -88,6 +130,24 @@
       "writtenOn": "2018-12-05T19:22:17Z",
       "side": 1,
       "message": "Since it\u0027s only a bool and we don\u0027t need to check anything else, would an atomic\u003cbool\u003e make sense?  It can be used with memory_order_relaxed to check without synchronization, then memory_order_acquire to check with synchronization, and use memory_order_release to store the value.",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab56cf41_f04e2885",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:26:59Z",
+      "side": 1,
+      "message": "I thought of using atomic initially, but atomic bool would mean that \"Disable()\" can finish before callback finishes, and I wanted to guarantee that if there is a callback ongoing, it completes before \"Disable\" completes.",
+      "parentUuid": "34e02a76_08f78224",
       "revId": "79718825065ca5b0703f7a3987774759115c4830",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -114,6 +174,30 @@
       "revId": "79718825065ca5b0703f7a3987774759115c4830",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22d507bc_2ca9e10e",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:26:59Z",
+      "side": 1,
+      "message": "I liked else, because it removed the cognitive burden of understanding that \u0027rtp\u0027 is an \u0027else not media transport\u0027. But followed the suggestion.",
+      "parentUuid": "65accef1_0a703613",
+      "range": {
+        "startLine": 557,
+        "startChar": 3,
+        "endLine": 559,
+        "endChar": 3
+      },
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
