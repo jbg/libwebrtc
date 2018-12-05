@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "38625009_568b1558",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:53:23Z",
+      "side": 1,
+      "message": "It is annotated, isn\u0027t it? Are you looking at the patchset 4?\n\n    bool is_enabled_ RTC_GUARDED_BY(is_enabled_crit_) \u003d true;",
+      "parentUuid": "5af7b509_41e5d42c",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b446ba51_9b7717cf",
         "filename": "call/call.cc",
         "patchSetId": 3
