@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "839074ce_232d6dde",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-05T20:57:42Z",
+      "side": 1,
+      "message": "\u003e It works, but I think this code maybe be harder to understand / refactor later compared to options (3) and (4) that you mentioned above.\nI would imagine that once RTP moves to MediaTransport, this problem will go away (because we will only have one listener).\n\nIf you feel strongly about new type, I can introduce it. I agree with you with the slight (undocumented) differences in how the interface is called.\nBut I don\u0027t agree with you that having a second callback would make it simpler. We still would have to have checks of which callback is used, and we would have to call one callback from the other (or introduce a 3rd method that both callbacks would call on the right thread). Arguably, it would end up with similar amount of (or more) code than now.",
+      "parentUuid": "619d2990_5b59c004",
+      "revId": "79718825065ca5b0703f7a3987774759115c4830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35269577_cf620dca",
         "filename": "call/call.cc",
         "patchSetId": 3
