@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6e080a9_3fc877c8",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-06T09:37:02Z",
+      "side": 1,
+      "message": "nit: please be consistent with whether {} are used for single statement conditionals.\nhint: I prefer to have them.",
+      "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f87e0432_6910a69d",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-06T09:37:02Z",
+      "side": 1,
+      "message": "clear() is called in the dtor, and we always init the internal object, right? do we then need all these conditionals? can we just add DCHECKs to make sure programming error does not make itself in?",
+      "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
