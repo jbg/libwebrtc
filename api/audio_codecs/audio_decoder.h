@@ -97,21 +97,21 @@ class AudioDecoder {
   // is set to kComfortNoise, otherwise it is kSpeech. The desired output
   // sample rate is provided in |sample_rate_hz|, which must be valid for the
   // codec at hand.
-  int Decode(const uint8_t* encoded,
-             size_t encoded_len,
-             int sample_rate_hz,
-             size_t max_decoded_bytes,
-             int16_t* decoded,
-             SpeechType* speech_type);
+  virtual int Decode(const uint8_t* encoded,
+                     size_t encoded_len,
+                     int sample_rate_hz,
+                     size_t max_decoded_bytes,
+                     int16_t* decoded,
+                     SpeechType* speech_type);
 
   // Same as Decode(), but interfaces to the decoders redundant decode function.
   // The default implementation simply calls the regular Decode() method.
-  int DecodeRedundant(const uint8_t* encoded,
-                      size_t encoded_len,
-                      int sample_rate_hz,
-                      size_t max_decoded_bytes,
-                      int16_t* decoded,
-                      SpeechType* speech_type);
+  virtual int DecodeRedundant(const uint8_t* encoded,
+                              size_t encoded_len,
+                              int sample_rate_hz,
+                              size_t max_decoded_bytes,
+                              int16_t* decoded,
+                              SpeechType* speech_type);
 
   // Indicates if the decoder implements the DecodePlc method.
   virtual bool HasDecodePlc() const;
