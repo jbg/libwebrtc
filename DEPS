@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': 'd6dec3971cf136c5f6bfd2fcb197b0da132d12fa',
+  'chromium_revision': '2b2cd20b5972267a83ede700e622f7d2392a3474',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -54,7 +54,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '11779ae7d11a24293db26b31fedf62923eda201b',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '6e75feb0f99e5457c8111a449015dab0d8f7ca18',
     'condition': 'checkout_ios',
   },
   'src/testing':
