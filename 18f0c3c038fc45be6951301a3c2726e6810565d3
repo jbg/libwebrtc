@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5d61e94_4054d32f",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-06T12:57:22Z",
+      "side": 1,
+      "message": "Do we intend to support mixing payload types using different rtp frequency? If so, this looks brittle.",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 56
+      },
+      "revId": "18f0c3c038fc45be6951301a3c2726e6810565d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
