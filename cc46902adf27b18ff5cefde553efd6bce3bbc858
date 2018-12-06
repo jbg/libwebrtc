@@ -69,6 +69,24 @@
       "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fef0ad44_6eb8dbd3",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-06T11:55:50Z",
+      "side": 1,
+      "message": "Yes, and this is exactly why RAII is a good idea. Without the clear() method and the additional state it introduces, the code would be simpler. :)",
+      "parentUuid": "a3c6c4ab_5d941c30",
+      "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
