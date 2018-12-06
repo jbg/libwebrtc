@@ -96,6 +96,24 @@
     },
     {
       "key": {
+        "uuid": "9e5f3675_c07d0a8c",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-06T10:31:15Z",
+      "side": 1,
+      "message": "Undoing the overrides of Decode and DecodeInternal (and hence no longer virtual), and it seems to still work\u0027",
+      "parentUuid": "94cd8772_6927b75a",
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b562fbee_fdad1c5b",
         "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
         "patchSetId": 2
