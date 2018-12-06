@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "95f0244a_ec5be71b",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-12-06T09:55:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6e080a9_3fc877c8",
+      "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f87e0432_6910a69d",
         "filename": "pc/jseptransport.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3c6c4ab_5d941c30",
+        "filename": "pc/jseptransport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-12-06T09:55:58Z",
+      "side": 1,
+      "message": "Done. I started out with ifs, then swithced to DCHECKs. Since the class no longer guarantees that \"internal\" resolves forever, I felt I had to add the DCHECKs.",
+      "parentUuid": "f87e0432_6910a69d",
+      "revId": "cc46902adf27b18ff5cefde553efd6bce3bbc858",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
