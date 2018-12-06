@@ -22,6 +22,30 @@
       "revId": "325e6594684b3dad99981845c82f12507f2b7775",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17b8238a_4e2f666e",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-06T07:51:39Z",
+      "side": 1,
+      "message": "Thanks, that seems to heal the test. I copied the SdpAudioFormat from neteq_decoder_enum.cc, but it seems I copied the wrong line.",
+      "parentUuid": "2bba3cc7_082a3dd5",
+      "range": {
+        "startLine": 508,
+        "startChar": 64,
+        "endLine": 508,
+        "endChar": 69
+      },
+      "revId": "325e6594684b3dad99981845c82f12507f2b7775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
