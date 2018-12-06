@@ -22,6 +22,30 @@
       "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28acf258_d0e495e0",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-12-06T23:06:16Z",
+      "side": 1,
+      "message": "I see your point. But I\u0027m afraid that it will bring less benefit, but much complexity.\nEven if I stop copy from previous frame totally(yes there will be flicking), the performance change:\n - CGI method, 1-2 fps up, e.g.from 10 to 12 fps on my MBP.\n - IOSurface method, since its performance is better than 30fps, so not readable :)\nAlso it needs extra complexity for multiple-monitor case to copy the non-dirty region.\nI suppose the performance bottleneck is not in copying between inner buffers, but from OS display buffer to our buffer.\n\nAlso copy non-dirty region instead of my change in line 229 won\u0027t solve the zooming case, given how OSX reports dirty region(we need to copy all screen, no matter dirty or not). \n\nSo my opinion is it\u0027s more reasonable to copy the previous frame than non-dirty region here.\nWDYT?",
+      "parentUuid": "1b6472f2_43ae4393",
+      "range": {
+        "startLine": 302,
+        "startChar": 52,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
