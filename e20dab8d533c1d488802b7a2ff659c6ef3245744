@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b6472f2_43ae4393",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-12-06T20:29:33Z",
+      "side": 1,
+      "message": "I don\u0027t like tying this to UAZoomEnabled. It seems that what we really want to do is copy everything outside the dirty region; by your change at line 229 this should be equivalent, but is more readable and works in more scenarios. Can you update this to copy the non-dirty regions (or perhaps just special-case the all-dirty case) instead?",
+      "range": {
+        "startLine": 302,
+        "startChar": 52,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
