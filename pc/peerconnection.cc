@@ -277,16 +277,36 @@ IceCandidatePairType GetIceCandidatePairCounter(
   const auto& relay = RELAY_PORT_TYPE;
   const auto& prflx = PRFLX_PORT_TYPE;
   if (l == host && r == host) {
+    bool local_hostname =
+        !local.address().hostname().empty() && local.address().IsUnresolvedIP();
+    bool remote_hostname = !remote.address().hostname().empty() &&
+                           remote.address().IsUnresolvedIP();
     bool local_private = IPIsPrivate(local.address().ipaddr());
     bool remote_private = IPIsPrivate(remote.address().ipaddr());
-    if (local_private) {
-      if (remote_private) {
+    RTC_LOG(LS_ERROR) << local.ToString() << " -- " << remote.ToString();
+    RTC_LOG(LS_ERROR) << local.address().hostname() << " -- "
+                      << remote.address().hostname();
+    RTC_LOG(LS_ERROR) << local_hostname << " -- " << remote_hostname;
+    if (local_hostname) {
+      if (remote_hostname) {
+        return kIceCandidatePairHostNameHostName;
+      } else if (remote_private) {
+        return kIceCandidatePairHostNameHostPrivate;
+      } else {
+        return kIceCandidatePairHostNameHostPublic;
+      }
+    } else if (local_private) {
+      if (remote_hostname) {
+        return kIceCandidatePairHostPrivateHostName;
+      } else if (remote_private) {
         return kIceCandidatePairHostPrivateHostPrivate;
       } else {
         return kIceCandidatePairHostPrivateHostPublic;
       }
     } else {
-      if (remote_private) {
+      if (remote_hostname) {
+        return kIceCandidatePairHostPublicHostName;
+      } else if (remote_private) {
         return kIceCandidatePairHostPublicHostPrivate;
       } else {
         return kIceCandidatePairHostPublicHostPublic;
