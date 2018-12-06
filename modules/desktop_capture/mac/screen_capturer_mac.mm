@@ -218,6 +218,17 @@ void ScreenCapturerMac::CaptureFrame() {
     ScreenConfigurationChanged();
   }
 
+  // When screen is zoomed in/out, OSX only updates the part of Rects currently
+  // displayed on screen, with relative location to current top-left on screen.
+  // This will cause problems when we copy the dirty regions to the captured
+  // image. So we invalidate the whole screen to copy all the screen contents.
+  // With CGI method, the zooming will be ignored and the whole screen contents
+  // will be captured as before.
+  // With IOSurface method, the zoomed screen contents will be captured.
+  if (UAZoomEnabled()) {
+    helper_.InvalidateScreen(screen_pixel_bounds_.size());
+  }
+
   DesktopRegion region;
   helper_.TakeInvalidRegion(&region);
 
@@ -286,9 +297,9 @@ bool ScreenCapturerMac::SelectSource(SourceId id) {
 
 bool ScreenCapturerMac::CgBlit(const DesktopFrame& frame, const DesktopRegion& region) {
   // Copy the entire contents of the previous capture buffer, to capture over.
-  // TODO(wez): Get rid of this as per crbug.com/145064, or implement
-  // crbug.com/92354.
-  if (queue_.previous_frame()) {
+  // When screen is zoomed, we'll invalidate the whole screen region so there is
+  // no need to copy the previous capture buffer for performance purpose.
+  if (queue_.previous_frame() && !UAZoomEnabled()) {
     memcpy(frame.data(), queue_.previous_frame()->data(), frame.stride() * frame.size().height());
   }
 
