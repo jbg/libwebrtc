@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "94cd8772_6927b75a",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-06T08:02:42Z",
+      "side": 1,
+      "message": "Niels, does your wrapper still work if you assume that all calls go through ParsePayload, and you implement DecodeInternal as RTC_NOTREACHED()?",
+      "parentUuid": "71b917f8_4a2133ee",
+      "revId": "8465d662259e0ff8e56e1c9ad3242e6bb6ff0366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b562fbee_fdad1c5b",
         "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
         "patchSetId": 2
