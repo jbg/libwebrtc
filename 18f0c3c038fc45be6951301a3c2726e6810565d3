@@ -22,6 +22,30 @@
       "revId": "18f0c3c038fc45be6951301a3c2726e6810565d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6393eee_31c10ee1",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-06T13:20:23Z",
+      "side": 1,
+      "message": "To my knowledge, no.\n\nThis CL only adds another call to config the RtpRtcp module - the above RegisterSendPayload() will be removed in an upcoming change.",
+      "parentUuid": "a5d61e94_4054d32f",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 56
+      },
+      "revId": "18f0c3c038fc45be6951301a3c2726e6810565d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
