@@ -46,6 +46,30 @@
       "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b0b1c48_cfd0ac06",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2018-12-06T23:28:09Z",
+      "side": 1,
+      "message": "I was less concerned about efficiency; more about readability. My suggestion is to leave your line 229 change as it is now, but instead of repeating the call to UAZoomEnabled() here, you simply check to see if the non-dirty region is empty. If it is (and it will be if UAZoomEnabled() is true), then there\u0027s no need to copy anything, because the whole desktop is dirty and will be updated by the blt anyway. The logic is clearer because you\u0027re no longer special-casing a specific *cause* of the whole desktop being dirty, you\u0027re just optimizing away a memcpy if it would be redundant.\n\nAn extension of that is to copy only the non-dirty regions, but I think you\u0027re probably right that it isn\u0027t worth the added complexity.\n\nOne way to think of it is that needing to do something special if the screen is zoomed is a weird quirk of the OS; you should limit the amount of code that needs to know about that weirdness.",
+      "parentUuid": "28acf258_d0e495e0",
+      "range": {
+        "startLine": 302,
+        "startChar": 52,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
