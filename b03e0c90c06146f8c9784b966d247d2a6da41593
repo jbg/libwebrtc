@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef28211_8366f976",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-12-07T07:47:33Z",
+      "side": 1,
+      "message": "Well, it doesn\u0027t help:\n\nERROR Unresolved dependencies.\n//media:rtc_media_unittests_apk__build_config_crbug_908819(//build/toolchain/android:android_clang_x86)\n  needs //modules/video_capture:video_capture_module__build_config_crbug_908819(//build/toolchain/android:android_clang_x86)",
+      "range": {
+        "startLine": 590,
+        "startChar": 6,
+        "endLine": 590,
+        "endChar": 54
+      },
+      "revId": "b03e0c90c06146f8c9784b966d247d2a6da41593",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
