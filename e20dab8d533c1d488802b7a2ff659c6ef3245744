@@ -70,6 +70,30 @@
       "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aabe4c2_b284ab0e",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-12-07T00:59:56Z",
+      "side": 1,
+      "message": "Gotcha. Done",
+      "parentUuid": "1b0b1c48_cfd0ac06",
+      "range": {
+        "startLine": 302,
+        "startChar": 52,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "e20dab8d533c1d488802b7a2ff659c6ef3245744",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
