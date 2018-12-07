@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97bc9714_080bb87e",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-07T12:55:02Z",
+      "side": 1,
+      "message": "\"L16\" should work too, and is much more readable.",
+      "range": {
+        "startLine": 590,
+        "startChar": 58,
+        "endLine": 590,
+        "endChar": 61
+      },
+      "revId": "266c56e791f147bb408c27563b363668bff9ea1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edbce97a_f8e03c02",
+        "filename": "test/audio_decoder_proxy_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-07T12:55:02Z",
+      "side": 1,
+      "message": "override?",
+      "revId": "266c56e791f147bb408c27563b363668bff9ea1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
