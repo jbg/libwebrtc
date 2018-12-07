@@ -22,6 +22,30 @@
       "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bebdaafe_5345c915",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-07T10:39:18Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure the right thing to do (if we can\u0027t avoid keeping the code) would be to change it to not call Decode() directly. But if it\u0027s only used in a test, maybe it can be removed. Henrik?",
+      "parentUuid": "b0610a8c_494f500c",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 41
+      },
+      "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
