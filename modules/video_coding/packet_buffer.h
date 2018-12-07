@@ -61,6 +61,14 @@ class PacketBuffer {
   absl::optional<int64_t> LastReceivedPacketMs() const;
   absl::optional<int64_t> LastReceivedKeyframePacketMs() const;
 
+  // Fills in minimum and maximum received time for all packets in a range.
+  // Returns true if all packets in a range received and belong to the same
+  // frame.
+  bool GetReceiveTimestamps(uint16_t first_seq_num,
+                            uint16_t last_seq_num,
+                            int64_t* first_received_timestamp_ms,
+                            int64_t* last_received_timestamp_ms);
+
   // Returns number of different frames seen in the packet buffer
   int GetUniqueFramesSeen() const;
 

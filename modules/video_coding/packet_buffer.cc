@@ -459,6 +459,44 @@ bool PacketBuffer::GetBitstream(const RtpFrameObject& frame,
   return true;
 }
 
+bool PacketBuffer::GetReceiveTimestamps(uint16_t first_seq_num,
+                                        uint16_t last_seq_num,
+                                        int64_t* first_received_timestamp_ms,
+                                        int64_t* last_received_timestamp_ms) {
+  rtc::CritScope lock(&crit_);
+
+  if (size_ == 0)
+    return false;
+
+  size_t index = first_seq_num % size_;
+  size_t end = (last_seq_num + 1) % size_;
+  uint16_t seq_num = first_seq_num;
+  uint32_t timestamp = data_buffer_[index].timestamp;
+
+  *first_received_timestamp_ms = data_buffer_[index].receive_time_ms;
+  *last_received_timestamp_ms = data_buffer_[index].receive_time_ms;
+  do {
+    // Check both seq_num and timestamp to handle the case when seq_num wraps
+    // around too quickly for high packet rates.
+    if (!sequence_buffer_[index].used ||
+        sequence_buffer_[index].seq_num != seq_num ||
+        data_buffer_[index].timestamp != timestamp) {
+      return false;
+    }
+    RTC_DCHECK_EQ(data_buffer_[index].seqNum, sequence_buffer_[index].seq_num);
+
+    *first_received_timestamp_ms = std::min(data_buffer_[index].receive_time_ms,
+                                            *first_received_timestamp_ms);
+    *last_received_timestamp_ms = std::max(data_buffer_[index].receive_time_ms,
+                                           *last_received_timestamp_ms);
+
+    index = (index + 1) % size_;
+    ++seq_num;
+  } while (index != end);
+
+  return true;
+}
+
 VCMPacket* PacketBuffer::GetPacket(uint16_t seq_num) {
   size_t index = seq_num % size_;
   if (!sequence_buffer_[index].used ||
