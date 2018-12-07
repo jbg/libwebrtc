@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2069d19f_14983e81",
+        "filename": "modules/video_coding/frame_object.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T13:25:21Z",
+      "side": 1,
+      "message": "Here you could add a |first_packet_received_time| and also rename |received_time| to |last_packet_received_time|.",
+      "range": {
+        "startLine": 30,
+        "startChar": 31,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "ab01cdeafd0e5609de22f9c241d873223b9bf26c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc189cfe_ae12e31a",
+        "filename": "modules/video_coding/packet_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T13:25:21Z",
+      "side": 1,
+      "message": "Here we loop over all packets in the frame. I think it would be cleaner if you calculate the first/last receive timestamp of the packets here and then update the RtpFrameObject ctor to pass that information to the frame.",
+      "revId": "ab01cdeafd0e5609de22f9c241d873223b9bf26c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
