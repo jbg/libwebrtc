@@ -22,6 +22,30 @@
       "revId": "c69870186ab32b26108736d7fc1eab0aa6c1f02b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a582a556_b31cef5c",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2018-12-07T14:49:54Z",
+      "side": 1,
+      "message": "Deps autoroller requires all packages to be present here (isolate+isolated+swarming), that is why we need variable here.",
+      "parentUuid": "0f05c0a8_04fe787f",
+      "range": {
+        "startLine": 427,
+        "startChar": 21,
+        "endLine": 427,
+        "endChar": 35
+      },
+      "revId": "c69870186ab32b26108736d7fc1eab0aa6c1f02b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
