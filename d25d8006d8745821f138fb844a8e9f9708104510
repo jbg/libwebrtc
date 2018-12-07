@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24afd509_41a5a1d3",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T13:33:42Z",
+      "side": 1,
+      "message": "If possible, could you also rename relevant variables?",
+      "range": {
+        "startLine": 102,
+        "startChar": 9,
+        "endLine": 102,
+        "endChar": 22
+      },
+      "revId": "d25d8006d8745821f138fb844a8e9f9708104510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
