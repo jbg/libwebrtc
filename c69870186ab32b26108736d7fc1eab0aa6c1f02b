@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f05c0a8_04fe787f",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-12-07T13:22:43Z",
+      "side": 1,
+      "message": "Sorry to bother you again.\nPlease remove this var and use the direct value, like in v8",
+      "range": {
+        "startLine": 427,
+        "startChar": 21,
+        "endLine": 427,
+        "endChar": 35
+      },
+      "revId": "c69870186ab32b26108736d7fc1eab0aa6c1f02b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
