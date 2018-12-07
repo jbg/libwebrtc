@@ -46,6 +46,30 @@
       "revId": "a7afa882ddc309f5f8bed2ddbc253d773b624790",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de41ccd6_ddd8c4a7",
+        "filename": "p2p/base/p2ptransportchannel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2018-12-07T18:23:11Z",
+      "side": 1,
+      "message": "yeah, sorry for the typo.",
+      "parentUuid": "facc29af_198cb590",
+      "range": {
+        "startLine": 616,
+        "startChar": 29,
+        "endLine": 616,
+        "endChar": 36
+      },
+      "revId": "a7afa882ddc309f5f8bed2ddbc253d773b624790",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
