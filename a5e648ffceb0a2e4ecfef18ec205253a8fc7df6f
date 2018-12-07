@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72476240_8460f7b8",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-12-07T11:17:45Z",
+      "side": 1,
+      "message": "This seems like an odd place to put this. It doesn\u0027t conform to an alphabetic sort order, and is not grouped with most other CIPD packages.",
+      "revId": "a5e648ffceb0a2e4ecfef18ec205253a8fc7df6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37176876_2814a799",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-12-07T11:17:45Z",
+      "side": 1,
+      "message": "Seems like v8 uses only /isolate/, not others. I wonder if that would work for us.\nhttps://cs.chromium.org/chromium/src/v8/DEPS?l\u003d85\u0026rcl\u003dcf47678b17c2d3436705135288cf5164d0b67b7b",
+      "revId": "a5e648ffceb0a2e4ecfef18ec205253a8fc7df6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
