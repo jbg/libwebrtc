@@ -22,6 +22,30 @@
       "revId": "d25d8006d8745821f138fb844a8e9f9708104510",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1910d4c_048c8d82",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T14:08:35Z",
+      "side": 1,
+      "message": "Done. This one renamed to required_capacity, and new_size --\u003e new_capacity.",
+      "parentUuid": "24afd509_41a5a1d3",
+      "range": {
+        "startLine": 102,
+        "startChar": 9,
+        "endLine": 102,
+        "endChar": 22
+      },
+      "revId": "d25d8006d8745821f138fb844a8e9f9708104510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
