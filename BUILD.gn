@@ -509,7 +509,7 @@ if (rtc_include_tests) {
   # This runs tests that must run in real time and therefore can take some
   # time to execute. They are in a separate executable to avoid making the
   # regular unittest suite too slow to run frequently.
-  rtc_test("slow_tests") {
+  rtc_executable("slow_tests") {
     testonly = true
     deps = [
       "modules/congestion_controller/goog_cc:goog_cc_slow_tests",

@@ -113,19 +113,23 @@ std::vector<ProbeClusterConfig> ProbeController::SetBitrates(
 
   switch (state_) {
     case State::kInit:
+      printf("INIT! N:%i\n", network_available_);
       if (network_available_)
         return InitiateExponentialProbing(at_time_ms);
       break;
 
     case State::kWaitingForProbingResult:
+      printf("WAITING!\n");
       break;
 
     case State::kProbingComplete:
+      printf("COMPLETE!");
       // If the new max bitrate is higher than the old max bitrate and the
       // estimate is lower than the new max bitrate then initiate probing.
       if (estimated_bitrate_bps_ != 0 &&
           old_max_bitrate_bps < max_bitrate_bps_ &&
           estimated_bitrate_bps_ < max_bitrate_bps_) {
+        printf(" CONTINUE!\n");
         // The assumption is that if we jump more than 20% in the bandwidth
         // estimate or if the bandwidth estimate is within 90% of the new
         // max bitrate then the probing attempt was successful.
@@ -139,6 +143,7 @@ std::vector<ProbeClusterConfig> ProbeController::SetBitrates(
 
         return InitiateProbing(at_time_ms, {max_bitrate_bps}, false);
       }
+      printf(" DONE!\n");
       break;
   }
   return std::vector<ProbeClusterConfig>();
