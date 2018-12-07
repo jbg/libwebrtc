@@ -131,7 +131,7 @@ RtpTransportControllerSend::RtpTransportControllerSend(
       send_side_bwe_with_overhead_(
           webrtc::field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")),
       transport_overhead_bytes_per_packet_(0),
-      network_available_(false),
+      network_available_(true),
       periodic_tasks_enabled_(true),
       packet_feedback_available_(false),
       pacer_queue_update_task_(nullptr),
