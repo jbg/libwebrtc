@@ -203,6 +203,7 @@ if (is_android) {
 
     deps = [
       "//rtc_base:base_java",
+      "//third_party/android_deps:android_support_annotations_java",
     ]
   }
 
@@ -435,6 +436,7 @@ if (is_android) {
       ":audio_api_java",
       ":base_java",
       "//rtc_base:base_java",
+      "//third_party/android_deps:android_support_annotations_java",
     ]
   }
 

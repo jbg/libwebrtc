@@ -153,7 +153,6 @@ if (is_android) {
       "../sdk/android:video_api_java",
       "../sdk/android:video_java",
       "androidapp/third_party/autobanh:autobanh_java",
-      "//third_party/jsr-305:jsr_305_javalib",
     ]
   }
 
