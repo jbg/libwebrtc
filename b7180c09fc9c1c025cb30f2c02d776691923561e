@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0610a8c_494f500c",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T10:32:14Z",
+      "side": 1,
+      "message": "Hi,\n\ntrying to convert more NetEq tests, it turns out this isn\u0027t entirely true.\n\nThe method NetEqImpl::DecodeCng, used in the test NetEqImplTest.CodecInternalCng, calls decoder-\u003eDecode() directly. If this code is still relevant, it seems the proxy object needs to forward calls to DecodeInternal (the test fails in the RTC_NOTREACHED) there. And to do that, DecodeInternal probably needs to be public, not protected. Alternatively, Decode could be made virtual, and forwarded instead.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 41
+      },
+      "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
