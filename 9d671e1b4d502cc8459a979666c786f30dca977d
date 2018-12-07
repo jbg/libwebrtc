@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bca81b1_ab8c4730",
+        "filename": "modules/video_coding/codecs/i420/i420.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T14:39:26Z",
+      "side": 1,
+      "message": "newCapacity",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcaff48e_c1cde195",
+        "filename": "modules/video_coding/codecs/i420/i420.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T14:39:26Z",
+      "side": 1,
+      "message": "req_capacity",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 19
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39915cbd_608c45fc",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T14:39:26Z",
+      "side": 1,
+      "message": "frame_capacity",
+      "range": {
+        "startLine": 382,
+        "startChar": 11,
+        "endLine": 382,
+        "endChar": 21
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fa3ee88_95b6a5ea",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T14:39:26Z",
+      "side": 1,
+      "message": "frame_capacity",
+      "range": {
+        "startLine": 398,
+        "startChar": 9,
+        "endLine": 398,
+        "endChar": 19
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25c55d2c_31f13ae8",
+        "filename": "modules/video_coding/frame_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2018-12-07T14:39:26Z",
+      "side": 1,
+      "message": "newCapacity?",
+      "range": {
+        "startLine": 113,
+        "startChar": 19,
+        "endLine": 113,
+        "endChar": 26
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
