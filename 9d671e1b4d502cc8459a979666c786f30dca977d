@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0f41e805_4257beac",
+        "filename": "modules/video_coding/codecs/i420/i420.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T15:24:09Z",
+      "side": 1,
+      "message": "I think allocation logic in this file is broken, and I have a cl up for deleting it. https://webrtc-review.googlesource.com/c/src/+/112596\n\nRenamed variables, anyway.",
+      "parentUuid": "9bca81b1_ab8c4730",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcaff48e_c1cde195",
         "filename": "modules/video_coding/codecs/i420/i420.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3688afaa_321c4b44",
+        "filename": "modules/video_coding/codecs/i420/i420.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T15:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcaff48e_c1cde195",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 19
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d7c02286_c796e037",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T15:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39915cbd_608c45fc",
+      "range": {
+        "startLine": 382,
+        "startChar": 11,
+        "endLine": 382,
+        "endChar": 21
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fa3ee88_95b6a5ea",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "7fa0d7eb_4c0cbc76",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T15:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fa3ee88_95b6a5ea",
+      "range": {
+        "startLine": 398,
+        "startChar": 9,
+        "endLine": 398,
+        "endChar": 19
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25c55d2c_31f13ae8",
         "filename": "modules/video_coding/frame_buffer.cc",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2018-12-07T14:39:26Z",
       "side": 1,
       "message": "newCapacity?",
+      "range": {
+        "startLine": 113,
+        "startChar": 19,
+        "endLine": 113,
+        "endChar": 26
+      },
+      "revId": "9d671e1b4d502cc8459a979666c786f30dca977d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47d7c931_783aa997",
+        "filename": "modules/video_coding/frame_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-07T15:24:09Z",
+      "side": 1,
+      "message": "I think size is ok here. Argument name for VerifyAndAllocate is |minimumSize|.",
+      "parentUuid": "25c55d2c_31f13ae8",
       "range": {
         "startLine": 113,
         "startChar": 19,
