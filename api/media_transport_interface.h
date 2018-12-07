@@ -28,7 +28,6 @@
 #include "api/rtcerror.h"
 #include "api/video/encoded_image.h"
 #include "rtc_base/copyonwritebuffer.h"
-#include "rtc_base/deprecation.h"
 #include "rtc_base/networkroute.h"
 
 namespace rtc {
@@ -162,12 +161,6 @@ class MediaTransportAudioSinkInterface {
 // Represents encoded video frame, along with the codec information.
 class MediaTransportEncodedVideoFrame final {
  public:
-  // TODO(bugs.webrtc.org/9719): Switch to payload_type
-  RTC_DEPRECATED MediaTransportEncodedVideoFrame(
-      int64_t frame_id,
-      std::vector<int64_t> referenced_frame_ids,
-      VideoCodecType codec_type,
-      const webrtc::EncodedImage& encoded_image);
   MediaTransportEncodedVideoFrame(int64_t frame_id,
                                   std::vector<int64_t> referenced_frame_ids,
                                   int payload_type,
@@ -180,8 +173,6 @@ class MediaTransportEncodedVideoFrame final {
       MediaTransportEncodedVideoFrame&& other);
   MediaTransportEncodedVideoFrame(MediaTransportEncodedVideoFrame&&);
 
-  // TODO(bugs.webrtc.org/9719): Switch to payload_type
-  RTC_DEPRECATED VideoCodecType codec_type() const { return codec_type_; }
   int payload_type() const { return payload_type_; }
   const webrtc::EncodedImage& encoded_image() const { return encoded_image_; }
 
@@ -197,7 +188,6 @@ class MediaTransportEncodedVideoFrame final {
  private:
   MediaTransportEncodedVideoFrame();
 
-  VideoCodecType codec_type_;
   int payload_type_;
 
   // The buffer is not owned by the encoded image. On the sender it means that
@@ -234,9 +224,6 @@ class MediaTransportVideoSinkInterface {
   // Called when new encoded video frame is received.
   virtual void OnData(uint64_t channel_id,
                       MediaTransportEncodedVideoFrame frame) = 0;
-
-  // TODO(bugs.webrtc.org/9719): Belongs on send side, not receive side.
-  RTC_DEPRECATED virtual void OnKeyFrameRequested(uint64_t channel_id) {}
 };
 
 // State of the media transport.  Media transport begins in the pending state.
