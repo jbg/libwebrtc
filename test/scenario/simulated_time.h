@@ -139,6 +139,7 @@ class SimulatedTimeClient : NetworkReceiverInterface {
   TimeDelta GetNetworkControllerProcessInterval() const;
   double target_rate_kbps() const;
   DataRate link_capacity() const;
+  const PacerConfig& GetPacerConfig() const;
 
   bool TryDeliverPacket(rtc::CopyOnWriteBuffer packet,
                         uint64_t receiver,

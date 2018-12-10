@@ -357,6 +357,49 @@ TEST_F(GoogCcNetworkControllerTest,
               20);
 }
 
+TEST_F(GoogCcNetworkControllerTest,
+       PaddingRateLimitedByCongestionWindowInTrial) {
+  ScopedFieldTrials trial(
+      "WebRTC-CongestionWindowPushback/Enabled/WebRTC-CwndExperiment/"
+      "Enabled-200/");
+
+  Scenario s("googcc_unit/padding_limited", false);
+  NetworkNodeConfig net_conf;
+  auto send_net = s.CreateSimulationNode([=](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = DataRate::kbps(1000);
+    c->simulation.delay = TimeDelta::ms(100);
+    c->update_frequency = TimeDelta::ms(5);
+  });
+  auto ret_net = s.CreateSimulationNode([](NetworkNodeConfig* c) {
+    c->simulation.delay = TimeDelta::ms(100);
+    c->update_frequency = TimeDelta::ms(5);
+  });
+  SimulatedTimeClientConfig config;
+  config.transport.cc =
+      TransportControllerConfig::CongestionController::kGoogCc;
+  // Start high so bandwidth drop has max effect.
+  config.transport.rates.start_rate = DataRate::kbps(1000);
+  config.transport.rates.max_padding_rate = DataRate::kbps(1000);
+  SimulatedTimeClient* client = s.CreateSimulatedTimeClient(
+      "send", config, {PacketStreamConfig()}, {send_net}, {ret_net});
+  // Run for a few seconds to allow the controller to stabilize.
+  s.RunFor(TimeDelta::seconds(10));
+
+  // With no congestion pushback, padding rate should match base data rate.
+  EXPECT_NEAR(client->GetPacerConfig().pad_rate().kbps(),
+              client->GetPacerConfig().data_rate().kbps() / kDefaultPacingRate,
+              1);
+
+  // Now drop the bandwidth suddenly so congestion pushback kicks in.
+  send_net->UpdateConfig([](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = DataRate::kbps(100);
+  });
+  s.RunFor(TimeDelta::seconds(1));
+  // Padding rate should now be well below the base data rate.
+  EXPECT_LT(client->GetPacerConfig().pad_rate().kbps() + 50,
+            client->GetPacerConfig().data_rate().kbps() / kDefaultPacingRate);
+}
+
 TEST_F(GoogCcNetworkControllerTest, LimitsToMinRateIfRttIsHighInTrial) {
   // The field trial limits maximum RTT to 2 seconds, higher RTT means that the
   // controller backs off until it reaches the minimum configured bitrate. This
