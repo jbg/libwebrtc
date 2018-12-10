@@ -444,30 +444,30 @@ bool FrameMarkingExtension::Write(rtc::ArrayView<uint8_t> data,
 //    0                   1                   2                   3
 //    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |       ID      |   length=30   |   Primaries   |    Transfer   |
+//   |      ID       |   length=28   |   primaries   |   transfer    |
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |    Matrix     |     Range     |                luminance_max  |
+//   |    matrix     |range+chr.sit. |         luminance_max         |
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |               |                 luminance_min                 |
+//   |         luminance_min         |            mastering_metadata.|
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |             mastering_metadata.primary_r.x and .y             |
+//   |primary_r.x and .y             |            mastering_metadata.|
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |             mastering_metadata.primary_g.x and .y             |
+//   |primary_g.x and .y             |            mastering_metadata.|
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |             mastering_metadata.primary_b.x and .y             |
+//   |primary_b.x and .y             |            mastering_metadata.|
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |               mastering_metadata.white.x and .y               |
+//   |white.x and .y                 |    max_content_light_level    |
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |    max_content_light_level    | max_frame_average_light_level |
-//   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//   | max_frame_average_light_level |
+//   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //
 // Data layout of color space w/o HDR metadata (one-byte RTP header extension)
 //    0                   1                   2                   3
 //    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |  ID   | L = 3 |   Primaries   |   Transfer    |    Matrix     |
+//   |  ID   | L = 3 |   primaries   |   transfer    |    matrix     |
 //   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//   |     Range     |
+//   |range+chr.sit. |
 //   +-+-+-+-+-+-+-+-+
 
 constexpr RTPExtensionType ColorSpaceExtension::kId;
@@ -489,7 +489,15 @@ bool ColorSpaceExtension::Parse(rtc::ArrayView<const uint8_t> data,
     return false;
   if (!color_space->set_matrix_from_uint8(data.data()[offset++]))
     return false;
-  if (!color_space->set_range_from_uint8(data.data()[offset++]))
+
+  uint8_t range_and_chroma_siting = data.data()[offset++];
+  if (!color_space->set_range_from_uint8((range_and_chroma_siting >> 4) & 0x03))
+    return false;
+  if (!color_space->set_chroma_siting_horizontal_from_uint8(
+          (range_and_chroma_siting >> 2) & 0x03))
+    return false;
+  if (!color_space->set_chroma_siting_vertical_from_uint8(
+          range_and_chroma_siting & 0x03))
     return false;
 
   // Read HDR metadata if it exists, otherwise clear it.
@@ -531,7 +539,9 @@ bool ColorSpaceExtension::Write(rtc::ArrayView<uint8_t> data,
   data.data()[offset++] = static_cast<uint8_t>(color_space.primaries());
   data.data()[offset++] = static_cast<uint8_t>(color_space.transfer());
   data.data()[offset++] = static_cast<uint8_t>(color_space.matrix());
-  data.data()[offset++] = static_cast<uint8_t>(color_space.range());
+  data.data()[offset++] = JoinRangeAndChromaSiting(
+      color_space.range(), color_space.chroma_siting_horizontal(),
+      color_space.chroma_siting_vertical());
 
   // Write HDR metadata if it exists.
   if (color_space.hdr_metadata()) {
@@ -562,6 +572,18 @@ bool ColorSpaceExtension::Write(rtc::ArrayView<uint8_t> data,
   return true;
 }
 
+uint8_t ColorSpaceExtension::JoinRangeAndChromaSiting(
+    ColorSpace::RangeID range,
+    ColorSpace::ChromaSiting chroma_siting_horizontal,
+    ColorSpace::ChromaSiting chroma_siting_vertical) {
+  RTC_DCHECK_LE(static_cast<uint8_t>(range), 3);
+  RTC_DCHECK_LE(static_cast<uint8_t>(chroma_siting_horizontal), 3);
+  RTC_DCHECK_LE(static_cast<uint8_t>(chroma_siting_vertical), 3);
+  return (static_cast<uint8_t>(range) << 4) +
+         (static_cast<uint8_t>(chroma_siting_horizontal) << 2) +
+         static_cast<uint8_t>(chroma_siting_vertical);
+}
+
 size_t ColorSpaceExtension::ParseChromaticity(
     const uint8_t* data,
     HdrMasteringMetadata::Chromaticity* p) {
@@ -576,9 +598,9 @@ size_t ColorSpaceExtension::ParseChromaticity(
 size_t ColorSpaceExtension::ParseLuminance(const uint8_t* data,
                                            float* f,
                                            int denominator) {
-  uint32_t luminance_scaled = ByteReader<uint32_t, 3>::ReadBigEndian(data);
+  uint16_t luminance_scaled = ByteReader<uint16_t>::ReadBigEndian(data);
   *f = static_cast<float>(luminance_scaled) / denominator;
-  return 3;  // Return number of bytes read.
+  return 2;  // Return number of bytes read.
 }
 
 size_t ColorSpaceExtension::WriteChromaticity(
@@ -597,8 +619,8 @@ size_t ColorSpaceExtension::WriteLuminance(uint8_t* data,
                                            float f,
                                            int denominator) {
   RTC_DCHECK_GE(f, 0.0f);
-  ByteWriter<uint32_t, 3>::WriteBigEndian(data, std::round(f * denominator));
-  return 3;  // Return number of bytes written.
+  ByteWriter<uint16_t>::WriteBigEndian(data, std::round(f * denominator));
+  return 2;  // Return number of bytes written.
 }
 
 bool BaseRtpStringExtension::Parse(rtc::ArrayView<const uint8_t> data,

@@ -186,7 +186,7 @@ class ColorSpaceExtension {
  public:
   using value_type = ColorSpace;
   static constexpr RTPExtensionType kId = kRtpExtensionColorSpace;
-  static constexpr uint8_t kValueSizeBytes = 30;
+  static constexpr uint8_t kValueSizeBytes = 28;
   static constexpr uint8_t kValueSizeBytesWithoutHdrMetadata = 4;
   static constexpr const char kUri[] =
       "http://www.webrtc.org/experiments/rtp-hdrext/color-space";
@@ -201,9 +201,14 @@ class ColorSpaceExtension {
                     const ColorSpace& color_space);
 
  private:
-  static constexpr int kChromaticityDenominator = 10000;  // 0.0001 resolution.
-  static constexpr int kLuminanceMaxDenominator = 100;    // 0.01 resolution.
+  static constexpr int kChromaticityDenominator = 50000;  // 0.00002 resolution.
+  static constexpr int kLuminanceMaxDenominator = 1;      // 1 resolution.
   static constexpr int kLuminanceMinDenominator = 10000;  // 0.0001 resolution.
+
+  static uint8_t JoinRangeAndChromaSiting(
+      ColorSpace::RangeID range,
+      ColorSpace::ChromaSiting chroma_siting_horizontal,
+      ColorSpace::ChromaSiting chroma_siting_vertical);
   static size_t ParseChromaticity(const uint8_t* data,
                                   HdrMasteringMetadata::Chromaticity* p);
   static size_t ParseLuminance(const uint8_t* data, float* f, int denominator);
