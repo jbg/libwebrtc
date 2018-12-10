@@ -77,6 +77,11 @@ BitrateAllocator::~BitrateAllocator() {
                            num_pause_events_);
 }
 
+void BitrateAllocator::OnStartingRate(uint32_t starting_rate_bps) {
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
+  last_non_zero_bitrate_bps_ = starting_rate_bps;
+}
+
 // static
 uint8_t BitrateAllocator::GetTransmissionMaxBitrateMultiplier() {
   uint64_t multiplier = strtoul(webrtc::field_trial::FindFullName(

@@ -100,6 +100,8 @@ class BitrateAllocator : public BitrateAllocatorInterface {
   explicit BitrateAllocator(LimitObserver* limit_observer);
   ~BitrateAllocator() override;
 
+  void OnStartingRate(uint32_t starting_rate_bps);
+
   // Allocate target_bitrate across the registered BitrateAllocatorObservers.
   void OnNetworkChanged(uint32_t target_bitrate_bps,
                         uint32_t link_capacity_bps,
