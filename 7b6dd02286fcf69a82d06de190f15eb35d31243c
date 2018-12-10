@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "0ad6ac03_af8627ba",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2018-12-10T14:59:34Z",
+      "side": 1,
+      "message": "Created bug for that: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d10114",
+      "parentUuid": "fea3b7bb_d6354271",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 72
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "342e8dd1_97f5f1e1",
         "filename": "tools_webrtc/libs/generate_licenses.py",
         "patchSetId": 3
@@ -108,6 +132,30 @@
       "writtenOn": "2018-12-10T14:23:01Z",
       "side": 1,
       "message": "Perhaps adding `(android_deps/libs/)` will make it just work?",
+      "range": {
+        "startLine": 78,
+        "startChar": 42,
+        "endLine": 78,
+        "endChar": 43
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "225991a6_ea295e19",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2018-12-10T14:59:34Z",
+      "side": 1,
+      "message": "No, unfortunately it is not that simple enough.\nOriginal libraries list looks like this:\n\n```\n\"//third_party/android_deps:android_support_annotations_java\"\n\"//third_party/android_deps:android_support_annotations_java__build_config_crbug_908819\"\n\"//third_party/android_deps:com_android_support_support_annotations_java\"\n\"//third_party/android_deps:com_android_support_support_annotations_java__build_config_crbug_908819\"\n\"//third_party/android_deps:com_android_support_support_annotations_java__dex\"\n\"//third_party/android_deps:com_android_support_support_annotations_java__process_prebuilt\"\n\"//third_party/android_deps:com_android_support_support_annotations_java__process_prebuilt__bytecode_rewrite\"\n\"//third_party/android_deps:com_android_support_support_annotations_java__process_prebuilt__copy\"\n\"//third_party/android_deps:com_android_support_support_annotations_java__process_prebuilt__desugar\",\n```",
+      "parentUuid": "342e8dd1_97f5f1e1",
       "range": {
         "startLine": 78,
         "startChar": 42,
