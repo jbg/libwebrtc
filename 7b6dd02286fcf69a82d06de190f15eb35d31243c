@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "fea3b7bb_d6354271",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-12-10T14:25:10Z",
+      "side": 1,
+      "message": "Yes, I think it is okay to land this but I would like a P1 bug to resolve this issue.",
+      "parentUuid": "27ec974a_6537cf50",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 72
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "342e8dd1_97f5f1e1",
         "filename": "tools_webrtc/libs/generate_licenses.py",
         "patchSetId": 3
