@@ -46,6 +46,53 @@
       "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27ec974a_6537cf50",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-12-10T14:23:01Z",
+      "side": 1,
+      "message": "Good assessment. Yes, this is not good. But I think it\u0027s OK to land as is and then immediately start investigating a permanent solution.",
+      "parentUuid": "8e4ff26e_ae9d5730",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 72
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "342e8dd1_97f5f1e1",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2018-12-10T14:23:01Z",
+      "side": 1,
+      "message": "Perhaps adding `(android_deps/libs/)` will make it just work?",
+      "range": {
+        "startLine": 78,
+        "startChar": 42,
+        "endLine": 78,
+        "endChar": 43
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
