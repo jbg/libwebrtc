@@ -22,6 +22,30 @@
       "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e4ff26e_ae9d5730",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2018-12-10T14:17:19Z",
+      "side": 1,
+      "message": "I think the problem here is that the script only looks at the first part after third_party. This has worked so far but looks like this is an edge case. We might need to add a special case here... I think the correct value to lookup here would be \"android_deps/libs/com_android_support_support_annotations\".",
+      "parentUuid": "ca869a94_d16ff117",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 72
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
