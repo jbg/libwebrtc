@@ -179,7 +179,8 @@ std::string GetPerfResultsJSON() {
 
 void WritePerfResults(const std::string& output_path) {
   std::string json_results = GetPerfResultsJSON();
-  std::fstream json_file(output_path, std::fstream::out);
+  std::fstream json_file(output_path, std::fstream::app);
+  json_file << "\n";
   json_file << json_results;
   json_file.close();
 }
