@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b8faa2e2_5cfedd37",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T10:23:14Z",
+      "side": 1,
+      "message": "Yep that\u0027s an assumption, I think it is reasonable as I\u0027d say that any fusion of measures belongs outside the probe bitrate estimator.",
+      "parentUuid": "af155a7b_8530cd76",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 502,
+        "endChar": 62
+      },
+      "revId": "f58d8056042f07fcff38498df9e2a79ac69b21d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c57b952_17c27398",
         "filename": "modules/congestion_controller/goog_cc/probe_bitrate_estimator.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "f58d8056042f07fcff38498df9e2a79ac69b21d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf0bed9f_e151b8e8",
+        "filename": "modules/congestion_controller/goog_cc/probe_bitrate_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T10:23:14Z",
+      "side": 1,
+      "message": "It\u0027s not really needed, it would be better to move that logic to the call site. But that would require some refactoring, so that would be part of separate CL/work.",
+      "parentUuid": "2c57b952_17c27398",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 60
+      },
+      "revId": "f58d8056042f07fcff38498df9e2a79ac69b21d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
