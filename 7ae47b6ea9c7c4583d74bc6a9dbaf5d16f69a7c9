@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6d91196_9ebae216",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T12:58:14Z",
+      "side": 1,
+      "message": "Please say what problem this solves. If it\u0027s complicated, consider filing a separate bug for it, the current tracking bug doesn\u0027t explain it.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 62
+      },
+      "revId": "7ae47b6ea9c7c4583d74bc6a9dbaf5d16f69a7c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b4256d7_04f65562",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T12:58:14Z",
+      "side": 1,
+      "message": "This disables callbacks on any initial network up message?",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 13
+      },
+      "revId": "7ae47b6ea9c7c4583d74bc6a9dbaf5d16f69a7c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
