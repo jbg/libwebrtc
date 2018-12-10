@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3b197e5a_8ee4d119",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-10T21:12:53Z",
+      "side": 1,
+      "message": "The reason was to force the data to be within what\u0027s acceptable to transmit in the RTP header extension, but I guess it\u0027s better to use a plain int as you suggest and add a check before transmitting.",
+      "parentUuid": "42ec8c42_f4eb0e15",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a1aeea3_f97b4b2d",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7af707_b3b91f5f",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-10T21:12:53Z",
+      "side": 1,
+      "message": "I have changed to Combine, I was choosing between join and combine.",
+      "parentUuid": "8a1aeea3_f97b4b2d",
+      "range": {
+        "startLine": 576,
+        "startChar": 29,
+        "endLine": 576,
+        "endChar": 53
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "40f8d6cc_c6f7ff9d",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-10T21:12:53Z",
+      "side": 1,
+      "message": "I prefer that as well, I had that on my list of things to change but forgot about it.\nFixed now!",
+      "parentUuid": "965169b0_9861e2b4",
+      "range": {
+        "startLine": 583,
+        "startChar": 44,
+        "endLine": 583,
+        "endChar": 45
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffa00f0e_9b883f43",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
@@ -124,6 +196,24 @@
       "side": 1,
       "message": "And preferably check the int values before operating on them. I.e.,\n\nif (chromaticity_x_scaled \u003e kChromaticityDenominator) { ... fail ... }\n\n(assuming equality, and ratio 1.0, is valid).",
       "parentUuid": "ffa00f0e_9b883f43",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed13da5c_7c3b9712",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-10T21:12:53Z",
+      "side": 1,
+      "message": "Yes, of course. Adding that check was not well thought out\nWhat do you think about having a SanityCheck function after the data has been decoded? I see the point of checking before operating on the values, but I think the design will be more clear if the sanity check does not have to care about how the data is encoded in the bitstream.",
+      "parentUuid": "b8942620_3c8d1bf0",
       "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
