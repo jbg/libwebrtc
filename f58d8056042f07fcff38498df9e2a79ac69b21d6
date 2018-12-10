@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af155a7b_8530cd76",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T08:19:01Z",
+      "side": 1,
+      "message": "Looks reasonable to me, under the assumption that probe_bitrate_estimator_-\u003elast_estimate(); always produces an estimate of receive rate, not the send rate (e.g., if doing something Bayesian, it can\u0027t use the send rate as a prior).",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 502,
+        "endChar": 62
+      },
+      "revId": "f58d8056042f07fcff38498df9e2a79ac69b21d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c57b952_17c27398",
+        "filename": "modules/congestion_controller/goog_cc/probe_bitrate_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T08:19:01Z",
+      "side": 1,
+      "message": "Is a FetchAndReset-method really needed? I\u0027m not really familier with this estimator, but I\u0027d imagine reset is needed when a new probe is started. And in that case, a separate Reset method (or just destroying the object and creating a new one) seems more natural than bundling it with a getter.",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 60
+      },
+      "revId": "f58d8056042f07fcff38498df9e2a79ac69b21d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
