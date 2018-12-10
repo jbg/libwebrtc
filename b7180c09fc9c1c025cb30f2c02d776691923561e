@@ -46,6 +46,30 @@
       "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab7ff296_6cf5a451",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2018-12-10T13:27:49Z",
+      "side": 1,
+      "message": "This code is very much production code. It is used to make the decoder instance generate comfort-noise data. If we think it is a better option, we can create a new API method for this use case, say AudioDecoder::GenerateCng (similar to the GeneratePlc method).",
+      "parentUuid": "bebdaafe_5345c915",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 41
+      },
+      "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
