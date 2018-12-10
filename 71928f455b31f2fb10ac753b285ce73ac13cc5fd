@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "42ec8c42_f4eb0e15",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T15:19:47Z",
+      "side": 1,
+      "message": "Why not plain int?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a1aeea3_f97b4b2d",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T15:19:47Z",
+      "side": 1,
+      "message": "I don\u0027t think \"join\" is the right verb. Maybe format, combine, make...byte?\n\nIt would also be good with a comment with the bit layout (upper two bits always zero?).",
+      "range": {
+        "startLine": 576,
+        "startChar": 29,
+        "endLine": 576,
+        "endChar": 53
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28ccb3d5_60cc791b",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
@@ -25,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "965169b0_9861e2b4",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T15:19:47Z",
+      "side": 1,
+      "message": "Me too. (Using + might make it easier on x86 to make use of the lea instruction, but that type of optimization doesn\u0027t seem relevant here).",
+      "parentUuid": "28ccb3d5_60cc791b",
+      "range": {
+        "startLine": 583,
+        "startChar": 44,
+        "endLine": 583,
+        "endChar": 45
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffa00f0e_9b883f43",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
@@ -36,6 +106,24 @@
       "writtenOn": "2018-12-10T15:05:46Z",
       "side": 1,
       "message": "do not (D)CHECK data coming from network.\nIf I read code correctly, incoming packet may be structured so that p-\u003ex \u003e 1.0\nIn that case I guess you should fail the parse rather than return incorrect values or crash the program.",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8942620_3c8d1bf0",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-10T15:19:47Z",
+      "side": 1,
+      "message": "And preferably check the int values before operating on them. I.e.,\n\nif (chromaticity_x_scaled \u003e kChromaticityDenominator) { ... fail ... }\n\n(assuming equality, and ratio 1.0, is valid).",
+      "parentUuid": "ffa00f0e_9b883f43",
       "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
