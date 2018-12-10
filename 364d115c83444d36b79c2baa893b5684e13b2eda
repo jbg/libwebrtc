@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4a937c5_e67c92fb",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser_new.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2018-12-10T16:33:19Z",
+      "side": 1,
+      "message": "Maybe an error message that could explain why this is failing, if someone tries to run this over a very old log?",
+      "revId": "364d115c83444d36b79c2baa893b5684e13b2eda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
