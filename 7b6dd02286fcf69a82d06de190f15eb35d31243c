@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca869a94_d16ff117",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2018-12-10T13:11:38Z",
+      "side": 1,
+      "message": "oprypin@,\n\nI had to add this, otherwise \"build android archive\" step was failing:\nhttps://logs.chromium.org/logs/webrtc/buildbucket/cr-buildbucket.appspot.com/8927797163385988656/+/steps/build_android_archive/0/stdout\n\nBut I am unsure what license to pick, because there are a lot of different licenses in adroid_deps.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 72
+      },
+      "revId": "7b6dd02286fcf69a82d06de190f15eb35d31243c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
