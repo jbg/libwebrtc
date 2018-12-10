@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3af2b987_e74fc8e0",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T14:09:37Z",
+      "side": 1,
+      "message": "You can keep it, but I wonder if this comment is required for future readers, as IMO the new behavior is actually more intuitive.",
+      "range": {
+        "startLine": 644,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 79
+      },
+      "revId": "fcc354259c178c613fb6f6cd5c8a196d5391ccb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1b9595_b90c4edf",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T14:09:37Z",
+      "side": 1,
+      "message": "Maybe set max_rate to equal this value? So we always pad to the target rate.",
+      "range": {
+        "startLine": 382,
+        "startChar": 25,
+        "endLine": 382,
+        "endChar": 41
+      },
+      "revId": "fcc354259c178c613fb6f6cd5c8a196d5391ccb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45c6b9e9_2c44b7fe",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T14:09:37Z",
+      "side": 1,
+      "message": "I think it\u0027d be preferable to avoid depending on the exact pacing factor here (since it\u0027s not really relevant for this particular test), maybe use target rate here, since that\u0027s really what we want it to track (we should never pad more than the target rate, and we should pad up to the target rate as long as max_padding_rate is higher.",
+      "range": {
+        "startLine": 390,
+        "startChar": 14,
+        "endLine": 390,
+        "endChar": 78
+      },
+      "revId": "fcc354259c178c613fb6f6cd5c8a196d5391ccb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c32887d6_39b160dd",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T14:09:37Z",
+      "side": 1,
+      "message": "You could also force a large latency spike:\nsend_net-\u003ePauseTransmissionUntil(s.Now()+TimeDelta::seconds(1))",
+      "range": {
+        "startLine": 394,
+        "startChar": 2,
+        "endLine": 396,
+        "endChar": 5
+      },
+      "revId": "fcc354259c178c613fb6f6cd5c8a196d5391ccb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c221a8c1_c4e71309",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T14:09:37Z",
+      "side": 1,
+      "message": "Same as above, also makes sense to compare to target rate here, as this is what we want to track. The pacing rate is only relevant in the sense that the previous behavior was to use that value, but with this trial I think it is less relevant.",
+      "range": {
+        "startLine": 400,
+        "startChar": 58,
+        "endLine": 400,
+        "endChar": 76
+      },
+      "revId": "fcc354259c178c613fb6f6cd5c8a196d5391ccb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1310ad4e_2496c31e",
+        "filename": "test/scenario/simulated_time.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-10T14:09:37Z",
+      "side": 1,
+      "message": "I suggest adding a \"DataRate padding_rate()\" here instead. That way we don\u0027t build dependencies on the underlying structs in our tests, making refactoring easier in the future. (see above regarding the pacing rate)",
+      "range": {
+        "startLine": 142,
+        "startChar": 21,
+        "endLine": 142,
+        "endChar": 35
+      },
+      "revId": "fcc354259c178c613fb6f6cd5c8a196d5391ccb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
