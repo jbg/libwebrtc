@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28ccb3d5_60cc791b",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-10T15:05:46Z",
+      "side": 1,
+      "message": "personally prefer to join different bits with operator \u0027|\u0027 rather than +",
+      "range": {
+        "startLine": 583,
+        "startChar": 44,
+        "endLine": 583,
+        "endChar": 45
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa00f0e_9b883f43",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-10T15:05:46Z",
+      "side": 1,
+      "message": "do not (D)CHECK data coming from network.\nIf I read code correctly, incoming packet may be structured so that p-\u003ex \u003e 1.0\nIn that case I guess you should fail the parse rather than return incorrect values or crash the program.",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ab08d9f_0f05dc42",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-10T15:05:46Z",
+      "side": 1,
+      "message": "DCHECKing data coming from the application is usually ok",
+      "range": {
+        "startLine": 613,
+        "startChar": 27,
+        "endLine": 614,
+        "endChar": 0
+      },
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
