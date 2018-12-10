@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d779cdd_52d84ffb",
+        "filename": "rtc_tools/event_log_visualizer/proto/chart.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2018-12-10T21:16:19Z",
+      "side": 0,
+      "message": "Why are we moving this in another .proto file?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "b47ccc38e771ecb37002c82e6b4d4129603ca3be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
