@@ -70,6 +70,30 @@
       "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfde15b4_6dc777cb",
+        "filename": "api/audio_codecs/audio_decoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-11T11:19:57Z",
+      "side": 1,
+      "message": "Yes---if the only remaining caller always gives this method an empty array of encoded bytes to decode, the right thin to do would be to make a new method for that, I\u0027d say.\n\nWhat\u0027s the difference between comfort noise and packet loss concealment here? Anything besides packets being lost accidentally vs. on purpose? Also, as I recall we designed the signature for GeneratePlc quite recently and were pleased with the result, so would it be reasonable to reuse that signature for GenerateCn?",
+      "parentUuid": "ab7ff296_6cf5a451",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 41
+      },
+      "revId": "b7180c09fc9c1c025cb30f2c02d776691923561e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
