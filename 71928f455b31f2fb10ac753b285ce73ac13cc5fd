@@ -238,6 +238,24 @@
     },
     {
       "key": {
+        "uuid": "eef54583_fd46de25",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-11T12:10:25Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer to have validation of the parsed data close to the wire format.\n\nIf relevant, you could have additional checks or dchecks where the numbers are used (with the intention that failures should catch implementation errors, not a peer sending evil data).",
+      "parentUuid": "ed13da5c_7c3b9712",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ab08d9f_0f05dc42",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
