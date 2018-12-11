@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0898fc2b_7d8a9ec0",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-11T12:31:35Z",
+      "side": 1,
+      "message": "All valid ranges might be tighten after discussion with the feature requester. The chosen ranges should be wide enough to not cause any problems.",
+      "range": {
+        "startLine": 25,
+        "startChar": 59,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "947726df210a6d943b432976fa7e0fb0b125a8dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
