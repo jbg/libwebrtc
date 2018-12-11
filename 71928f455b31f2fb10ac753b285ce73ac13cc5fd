@@ -310,6 +310,24 @@
     },
     {
       "key": {
+        "uuid": "da0d8eea_103e576c",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-11T14:42:50Z",
+      "side": 1,
+      "message": "I did an attempt to use ByteBufferReader but I would prefer to keep the current implementation. There were a couple of things that made the code less clear using ByteBufferReader:\n* reinterpret_cast\u003cconst char*\u003e needed when constructing buffer.\n* Temporary objects needed at some places when reading, uint8_t value; buffer.GetUint8(\u0026value); ...set(value).\n* Extra checks of size even though we know what the size is. For each read there would be a if(!buffer.Get...) return false;\n\nSo unless someone complains, I\u0027ll keep the current implementation. I have refactored so that HdrMetadata is parsed/written in a separate function.",
+      "parentUuid": "edbf75b1_300af9e5",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ab08d9f_0f05dc42",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
