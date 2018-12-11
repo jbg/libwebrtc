@@ -26,8 +26,7 @@ static const int kDefaultHistoryLengthMs = 1000;
 
 class SendTimeHistoryTest : public ::testing::Test {
  protected:
-  SendTimeHistoryTest()
-      : clock_(0), history_(&clock_, kDefaultHistoryLengthMs) {}
+  SendTimeHistoryTest() : clock_(0), history_(kDefaultHistoryLengthMs) {}
   ~SendTimeHistoryTest() {}
 
   virtual void SetUp() {}

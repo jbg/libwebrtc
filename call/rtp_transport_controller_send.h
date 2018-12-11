@@ -150,8 +150,8 @@ class RtpTransportControllerSend final
 
   TargetTransferRateObserver* observer_ RTC_GUARDED_BY(task_queue_);
 
-  // TODO(srte): Move all access to feedback adapter to task queue.
-  TransportFeedbackAdapter transport_feedback_adapter_;
+  TransportFeedbackAdapter transport_feedback_adapter_
+      RTC_GUARDED_BY(task_queue_);
 
   NetworkControllerFactoryInterface* const controller_factory_override_
       RTC_PT_GUARDED_BY(task_queue_);
@@ -177,17 +177,13 @@ class RtpTransportControllerSend final
   const bool send_side_bwe_with_overhead_;
   // Transport overhead is written by OnNetworkRouteChanged and read by
   // AddPacket.
-  // TODO(srte): Remove atomic when feedback adapter runs on task queue.
-  std::atomic<size_t> transport_overhead_bytes_per_packet_;
+  size_t transport_overhead_bytes_per_packet_ RTC_GUARDED_BY(task_queue_);
   bool network_available_ RTC_GUARDED_BY(task_queue_);
   bool packet_feedback_available_ RTC_GUARDED_BY(task_queue_);
   PeriodicTask* pacer_queue_update_task_ RTC_GUARDED_BY(task_queue_)
       RTC_PT_GUARDED_BY(task_queue_);
   PeriodicTask* controller_task_ RTC_GUARDED_BY(task_queue_)
       RTC_PT_GUARDED_BY(task_queue_);
-  // Protects access to last_packet_feedback_vector_ in feedback adapter.
-  // TODO(srte): Remove this checker when feedback adapter runs on task queue.
-  rtc::RaceChecker worker_race_;
 
   RateLimiter retransmission_rate_limiter_;
 

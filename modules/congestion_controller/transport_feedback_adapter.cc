@@ -31,7 +31,7 @@ const int64_t kBaseTimestampRangeSizeUs = kBaseTimestampScaleFactor * (1 << 24);
 
 LegacyTransportFeedbackAdapter::LegacyTransportFeedbackAdapter(
     const Clock* clock)
-    : send_time_history_(clock, kSendTimeHistoryWindowMs),
+    : send_time_history_(kSendTimeHistoryWindowMs),
       clock_(clock),
       current_offset_ms_(kNoTimestamp),
       last_timestamp_us_(kNoTimestamp),

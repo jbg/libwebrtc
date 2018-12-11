@@ -923,7 +923,6 @@ int ChannelSend::GetBitrate() const {
 }
 
 void ChannelSend::OnTwccBasedUplinkPacketLossRate(float packet_loss_rate) {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   if (!use_twcc_plr_for_ana_)
     return;
   audio_coding_->ModifyEncoder([&](std::unique_ptr<AudioEncoder>* encoder) {
@@ -935,7 +934,6 @@ void ChannelSend::OnTwccBasedUplinkPacketLossRate(float packet_loss_rate) {
 
 void ChannelSend::OnRecoverableUplinkPacketLossRate(
     float recoverable_packet_loss_rate) {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   audio_coding_->ModifyEncoder([&](std::unique_ptr<AudioEncoder>* encoder) {
     if (*encoder) {
       (*encoder)->OnReceivedUplinkRecoverablePacketLossFraction(

@@ -19,12 +19,11 @@
 #include "rtc_base/constructormagic.h"
 
 namespace webrtc {
-class Clock;
 struct PacketFeedback;
 
 class SendTimeHistory {
  public:
-  SendTimeHistory(const Clock* clock, int64_t packet_age_limit_ms);
+  explicit SendTimeHistory(int64_t packet_age_limit_ms);
   ~SendTimeHistory();
 
   // Cleanup old entries, then add new packet info with provided parameters.
@@ -53,7 +52,6 @@ class SendTimeHistory {
   void AddPacketBytes(const PacketFeedback& packet);
   void RemovePacketBytes(const PacketFeedback& packet);
   void UpdateAckedSeqNum(int64_t acked_seq_num);
-  const Clock* const clock_;
   const int64_t packet_age_limit_ms_;
   size_t pending_untracked_size_ = 0;
   int64_t last_send_time_ms_ = -1;

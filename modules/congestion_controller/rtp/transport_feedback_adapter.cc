@@ -14,9 +14,6 @@
 #include <algorithm>
 #include <cmath>
 
-#include "api/units/timestamp.h"
-#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
-#include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 
@@ -49,13 +46,14 @@ const int64_t kBaseTimestampScaleFactor =
     rtcp::TransportFeedback::kDeltaScaleFactor * (1 << 8);
 const int64_t kBaseTimestampRangeSizeUs = kBaseTimestampScaleFactor * (1 << 24);
 
-TransportFeedbackAdapter::TransportFeedbackAdapter(const Clock* clock)
-    : send_time_history_(clock, kSendTimeHistoryWindowMs),
-      clock_(clock),
+TransportFeedbackAdapter::TransportFeedbackAdapter()
+    : send_time_history_(kSendTimeHistoryWindowMs),
       current_offset_ms_(kNoTimestamp),
       last_timestamp_us_(kNoTimestamp),
       local_net_id_(0),
-      remote_net_id_(0) {}
+      remote_net_id_(0) {
+  sequenced_checker_.Detach();
+}
 
 TransportFeedbackAdapter::~TransportFeedbackAdapter() {
   RTC_DCHECK(observers_.empty());
@@ -63,7 +61,7 @@ TransportFeedbackAdapter::~TransportFeedbackAdapter() {
 
 void TransportFeedbackAdapter::RegisterPacketFeedbackObserver(
     PacketFeedbackObserver* observer) {
-  rtc::CritScope cs(&observers_lock_);
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   RTC_DCHECK(observer);
   RTC_DCHECK(std::find(observers_.begin(), observers_.end(), observer) ==
              observers_.end());
@@ -72,7 +70,7 @@ void TransportFeedbackAdapter::RegisterPacketFeedbackObserver(
 
 void TransportFeedbackAdapter::DeRegisterPacketFeedbackObserver(
     PacketFeedbackObserver* observer) {
-  rtc::CritScope cs(&observers_lock_);
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   RTC_DCHECK(observer);
   const auto it = std::find(observers_.begin(), observers_.end(), observer);
   RTC_DCHECK(it != observers_.end());
@@ -82,26 +80,21 @@ void TransportFeedbackAdapter::DeRegisterPacketFeedbackObserver(
 void TransportFeedbackAdapter::AddPacket(uint32_t ssrc,
                                          uint16_t sequence_number,
                                          size_t length,
-                                         const PacedPacketInfo& pacing_info) {
-  {
-    rtc::CritScope cs(&lock_);
-    const int64_t creation_time_ms = clock_->TimeInMilliseconds();
-    send_time_history_.AddAndRemoveOld(
-        PacketFeedback(creation_time_ms, sequence_number, length, local_net_id_,
-                       remote_net_id_, pacing_info));
-  }
-
-  {
-    rtc::CritScope cs(&observers_lock_);
-    for (auto* observer : observers_) {
-      observer->OnPacketAdded(ssrc, sequence_number);
-    }
+                                         const PacedPacketInfo& pacing_info,
+                                         Timestamp at_time) {
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
+  const int64_t creation_time_ms = at_time.ms();
+  send_time_history_.AddAndRemoveOld(
+      PacketFeedback(creation_time_ms, sequence_number, length, local_net_id_,
+                     remote_net_id_, pacing_info));
+  for (auto* observer : observers_) {
+    observer->OnPacketAdded(ssrc, sequence_number);
   }
 }
 
 absl::optional<SentPacket> TransportFeedbackAdapter::ProcessSentPacket(
     const rtc::SentPacket& sent_packet) {
-  rtc::CritScope cs(&lock_);
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   // TODO(srte): Only use one way to indicate that packet feedback is used.
   if (sent_packet.info.included_in_feedback || sent_packet.packet_id != -1) {
     send_time_history_.OnSentPacket(sent_packet.packet_id,
@@ -127,10 +120,17 @@ absl::optional<SentPacket> TransportFeedbackAdapter::ProcessSentPacket(
 
 absl::optional<TransportPacketsFeedback>
 TransportFeedbackAdapter::ProcessTransportFeedback(
-    const rtcp::TransportFeedback& feedback) {
-  int64_t feedback_time_ms = clock_->TimeInMilliseconds();
+    const rtcp::TransportFeedback& feedback,
+    Timestamp feedback_time) {
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   DataSize prior_in_flight = GetOutstandingData();
-  OnTransportFeedback(feedback);
+  last_packet_feedback_vector_ =
+      GetPacketFeedbackVector(feedback, feedback_time);
+
+  for (auto* observer : observers_) {
+    observer->OnPacketFeedbackVector(last_packet_feedback_vector_);
+  }
+
   std::vector<PacketFeedback> feedback_vector = last_packet_feedback_vector_;
   if (feedback_vector.empty())
     return absl::nullopt;
@@ -148,7 +148,7 @@ TransportFeedbackAdapter::ProcessTransportFeedback(
           Timestamp::ms(rtp_feedback.arrival_time_ms));
     }
   }
-  msg.feedback_time = Timestamp::ms(feedback_time_ms);
+  msg.feedback_time = feedback_time;
   msg.prior_in_flight = prior_in_flight;
   msg.data_in_flight = GetOutstandingData();
   return msg;
@@ -156,25 +156,26 @@ TransportFeedbackAdapter::ProcessTransportFeedback(
 
 void TransportFeedbackAdapter::SetNetworkIds(uint16_t local_id,
                                              uint16_t remote_id) {
-  rtc::CritScope cs(&lock_);
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   local_net_id_ = local_id;
   remote_net_id_ = remote_id;
 }
 
 DataSize TransportFeedbackAdapter::GetOutstandingData() const {
-  rtc::CritScope cs(&lock_);
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   return send_time_history_.GetOutstandingData(local_net_id_, remote_net_id_);
 }
 
 std::vector<PacketFeedback> TransportFeedbackAdapter::GetPacketFeedbackVector(
-    const rtcp::TransportFeedback& feedback) {
+    const rtcp::TransportFeedback& feedback,
+    Timestamp at_time) {
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   int64_t timestamp_us = feedback.GetBaseTimeUs();
-  int64_t now_ms = clock_->TimeInMilliseconds();
   // Add timestamp deltas to a local time base selected on first packet arrival.
   // This won't be the true time base, but makes it easier to manually inspect
   // time stamps.
   if (last_timestamp_us_ == kNoTimestamp) {
-    current_offset_ms_ = now_ms;
+    current_offset_ms_ = at_time.ms();
   } else {
     int64_t delta = timestamp_us - last_timestamp_us_;
 
@@ -195,8 +196,6 @@ std::vector<PacketFeedback> TransportFeedbackAdapter::GetPacketFeedbackVector(
     return packet_feedback_vector;
   }
   packet_feedback_vector.reserve(feedback.GetPacketStatusCount());
-  {
-    rtc::CritScope cs(&lock_);
     size_t failed_lookups = 0;
     int64_t offset_us = 0;
     int64_t timestamp_ms = 0;
@@ -235,23 +234,13 @@ std::vector<PacketFeedback> TransportFeedbackAdapter::GetPacketFeedbackVector(
                           << " packet" << (failed_lookups > 1 ? "s" : "")
                           << ". Send time history too small?";
     }
-  }
-  return packet_feedback_vector;
-}
 
-void TransportFeedbackAdapter::OnTransportFeedback(
-    const rtcp::TransportFeedback& feedback) {
-  last_packet_feedback_vector_ = GetPacketFeedbackVector(feedback);
-  {
-    rtc::CritScope cs(&observers_lock_);
-    for (auto* observer : observers_) {
-      observer->OnPacketFeedbackVector(last_packet_feedback_vector_);
-    }
-  }
+    return packet_feedback_vector;
 }
 
 std::vector<PacketFeedback>
 TransportFeedbackAdapter::GetTransportFeedbackVector() const {
+  RTC_DCHECK_CALLED_SEQUENTIALLY(&sequenced_checker_);
   return last_packet_feedback_vector_;
 }
 }  // namespace webrtc

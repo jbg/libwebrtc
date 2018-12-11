@@ -40,7 +40,7 @@ SendSideBweSender::SendSideBweSender(int kbps,
       bwe_(new DelayBasedBwe(nullptr)),
       feedback_observer_(bitrate_controller_.get()),
       clock_(clock),
-      send_time_history_(clock_, 10000),
+      send_time_history_(10000),
       has_received_ack_(false),
       last_acked_seq_num_(0),
       last_log_time_ms_(0) {

@@ -52,9 +52,7 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
 
   virtual ~TransportFeedbackAdapterTest() {}
 
-  virtual void SetUp() {
-    adapter_.reset(new TransportFeedbackAdapter(&clock_));
-  }
+  virtual void SetUp() { adapter_.reset(new TransportFeedbackAdapter()); }
 
   virtual void TearDown() { adapter_.reset(); }
 
@@ -68,11 +66,12 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
   void OnSentPacket(const PacketFeedback& packet_feedback) {
     adapter_->AddPacket(kSsrc, packet_feedback.sequence_number,
                         packet_feedback.payload_size,
-                        packet_feedback.pacing_info);
+                        packet_feedback.pacing_info, Now());
     adapter_->ProcessSentPacket(rtc::SentPacket(packet_feedback.sequence_number,
                                                 packet_feedback.send_time_ms,
                                                 rtc::PacketInfo()));
   }
+  Timestamp Now() const { return Timestamp::ms(clock_.TimeInMilliseconds()); }
 
   static constexpr uint32_t kSsrc = 8492;
 
@@ -101,7 +100,7 @@ TEST_F(TransportFeedbackAdapterTest, ObserverSanity) {
   }
 
   EXPECT_CALL(mock, OnPacketFeedbackVector(_)).Times(1);
-  adapter_->ProcessTransportFeedback(feedback);
+  adapter_->ProcessTransportFeedback(feedback, Now());
 
   adapter_->DeRegisterPacketFeedbackObserver(&mock);
 
@@ -116,7 +115,7 @@ TEST_F(TransportFeedbackAdapterTest, ObserverSanity) {
   EXPECT_TRUE(feedback.AddReceivedPacket(new_packet.sequence_number,
                                          new_packet.arrival_time_ms * 1000));
   EXPECT_CALL(mock, OnPacketFeedbackVector(_)).Times(0);
-  adapter_->ProcessTransportFeedback(second_feedback);
+  adapter_->ProcessTransportFeedback(second_feedback, Now());
 }
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
@@ -157,7 +156,7 @@ TEST_F(TransportFeedbackAdapterTest, AdaptsFeedbackAndPopulatesSendTimes) {
 
   feedback.Build();
 
-  adapter_->ProcessTransportFeedback(feedback);
+  adapter_->ProcessTransportFeedback(feedback, Now());
   ComparePacketFeedbackVectors(packets, adapter_->GetTransportFeedbackVector());
 }
 
@@ -190,7 +189,7 @@ TEST_F(TransportFeedbackAdapterTest, FeedbackVectorReportsUnreceived) {
 
   feedback.Build();
 
-  adapter_->ProcessTransportFeedback(feedback);
+  adapter_->ProcessTransportFeedback(feedback, Now());
   ComparePacketFeedbackVectors(sent_packets,
                                adapter_->GetTransportFeedbackVector());
 }
@@ -234,7 +233,7 @@ TEST_F(TransportFeedbackAdapterTest, HandlesDroppedPackets) {
     expected_packets[i].pacing_info = PacedPacketInfo();
   }
 
-  adapter_->ProcessTransportFeedback(feedback);
+  adapter_->ProcessTransportFeedback(feedback, Now());
   ComparePacketFeedbackVectors(expected_packets,
                                adapter_->GetTransportFeedbackVector());
 }
@@ -270,7 +269,7 @@ TEST_F(TransportFeedbackAdapterTest, SendTimeWrapsBothWays) {
     std::vector<PacketFeedback> expected_packets;
     expected_packets.push_back(packets[i]);
 
-    adapter_->ProcessTransportFeedback(*feedback.get());
+    adapter_->ProcessTransportFeedback(*feedback.get(), Now());
     ComparePacketFeedbackVectors(expected_packets,
                                  adapter_->GetTransportFeedbackVector());
   }
@@ -299,7 +298,7 @@ TEST_F(TransportFeedbackAdapterTest, HandlesArrivalReordering) {
   // Adapter keeps the packets ordered by sequence number (which is itself
   // assigned by the order of transmission). Reordering by some other criteria,
   // eg. arrival time, is up to the observers.
-  adapter_->ProcessTransportFeedback(feedback);
+  adapter_->ProcessTransportFeedback(feedback, Now());
   ComparePacketFeedbackVectors(packets, adapter_->GetTransportFeedbackVector());
 }
 
@@ -363,7 +362,7 @@ TEST_F(TransportFeedbackAdapterTest, TimestampDeltas) {
   std::vector<PacketFeedback> received_feedback;
 
   EXPECT_TRUE(feedback.get() != nullptr);
-  adapter_->ProcessTransportFeedback(*feedback.get());
+  adapter_->ProcessTransportFeedback(*feedback.get(), Now());
   ComparePacketFeedbackVectors(sent_packets,
                                adapter_->GetTransportFeedbackVector());
 
@@ -378,7 +377,7 @@ TEST_F(TransportFeedbackAdapterTest, TimestampDeltas) {
       rtcp::TransportFeedback::ParseFrom(raw_packet.data(), raw_packet.size());
 
   EXPECT_TRUE(feedback.get() != nullptr);
-  adapter_->ProcessTransportFeedback(*feedback.get());
+  adapter_->ProcessTransportFeedback(*feedback.get(), Now());
   {
     std::vector<PacketFeedback> expected_packets;
     expected_packets.push_back(packet_feedback);
