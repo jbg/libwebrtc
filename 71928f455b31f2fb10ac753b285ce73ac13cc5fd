@@ -292,6 +292,24 @@
     },
     {
       "key": {
+        "uuid": "edbf75b1_300af9e5",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-11T14:08:51Z",
+      "side": 1,
+      "message": "I didn\u0027t know about the ByteBufferReader. Will refactor to use that one. Since this extension uses more data than the other extensions I think it make sense to use it here.\nI see your point regarding invalid data. At least HdrMetadata will never be assigned to ColorSpace in the case it\u0027s valid. While doing the refactor I will see if I can also do the validation even earlier.",
+      "parentUuid": "b869779b_cbe4ace4",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ab08d9f_0f05dc42",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
