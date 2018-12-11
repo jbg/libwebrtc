@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2eca9236_95d4668b",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-11T11:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94e387e1_c91460a8",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fdef36ec_b9d5cf0b",
         "filename": "modules/audio_coding/acm2/acm_receiver.h",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ac4d50d_8df0d2f2",
+        "filename": "modules/audio_coding/acm2/acm_receiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-11T11:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdef36ec_b9d5cf0b",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4d8d9e3d_7a3289d1",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-11T11:22:43Z",
+      "side": 1,
+      "message": "I\u0027d rather keep the current DCHECK against -1.",
+      "parentUuid": "aa3039a1_aa57e2a4",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3db165d5_2aaaf88c",
         "filename": "modules/audio_coding/neteq/neteq_impl.cc",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99fad137_dc0a065c",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-11T11:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3db165d5_2aaaf88c",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
