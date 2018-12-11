@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2804b38b_fe07c36c",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-11T23:17:33Z",
+      "side": 1,
+      "message": "Thanks! That\u0027s a mistake. In practice it should be fine, since the values are expected to be \u003c\u003d 0.84.\nFixed!",
+      "parentUuid": "34cbdcb1_0a97f3c7",
+      "range": {
+        "startLine": 34,
+        "startChar": 49,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "c92c811e97bfe9512d818470c31f9e00c29c2f0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89db5c79_d2f25792",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "c92c811e97bfe9512d818470c31f9e00c29c2f0c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48c86da3_35efb7fc",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-11T23:17:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89db5c79_d2f25792",
+      "range": {
+        "startLine": 509,
+        "startChar": 31,
+        "endLine": 509,
+        "endChar": 51
+      },
+      "revId": "c92c811e97bfe9512d818470c31f9e00c29c2f0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
