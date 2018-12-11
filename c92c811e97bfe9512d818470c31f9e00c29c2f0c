@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34cbdcb1_0a97f3c7",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-11T14:56:02Z",
+      "side": 1,
+      "message": "Intentionally not y \u003c\u003d 1.0 (allowing equality)?",
+      "range": {
+        "startLine": 34,
+        "startChar": 49,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "c92c811e97bfe9512d818470c31f9e00c29c2f0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89db5c79_d2f25792",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-11T14:56:02Z",
+      "side": 1,
+      "message": "Can you pass an ArrayView as argument, data.subview(offset)? Then you can also add a DCHECK in ParseHdrMetadata that input size is as expected.",
+      "range": {
+        "startLine": 509,
+        "startChar": 31,
+        "endLine": 509,
+        "endChar": 51
+      },
+      "revId": "c92c811e97bfe9512d818470c31f9e00c29c2f0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
