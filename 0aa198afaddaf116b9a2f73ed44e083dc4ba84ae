@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94e387e1_c91460a8",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-11T11:09:07Z",
+      "side": 1,
+      "message": "Document what the return value means?",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdef36ec_b9d5cf0b",
+        "filename": "modules/audio_coding/acm2/acm_receiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-11T11:09:07Z",
+      "side": 1,
+      "message": "Also document what the first member of the pair is?",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3039a1_aa57e2a4",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-11T11:09:07Z",
+      "side": 1,
+      "message": "Do you have to initialize this? (If you don\u0027t MSan will flag any use of the uninitialized bits. Alternatively, make it optional and CHECK that it has a value when you need it.)",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db165d5_2aaaf88c",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-11T11:09:07Z",
+      "side": 1,
+      "message": "Can this be a const pointer?",
+      "revId": "0aa198afaddaf116b9a2f73ed44e083dc4ba84ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
