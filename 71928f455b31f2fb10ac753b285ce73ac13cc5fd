@@ -256,6 +256,24 @@
     },
     {
       "key": {
+        "uuid": "869ce375_635a4e27",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-11T12:29:19Z",
+      "side": 1,
+      "message": "I have done the following now:\n1. Added a Validate() function to the HdrMetadata struct. I think that\u0027s where the knowledge of valid values should be.\n2. The assumption is then that the RTP header extension is designed to handle all valid HdrMetadata structs.\n3. Parse() will return false if hdr_metadata.Validate() \u003d\u003d false.\n4. Write() will fail in debug if hdr_metadata.Validate() \u003d\u003d false.\n\nWhat do you think about that?",
+      "parentUuid": "eef54583_fd46de25",
+      "revId": "71928f455b31f2fb10ac753b285ce73ac13cc5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ab08d9f_0f05dc42",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 4
