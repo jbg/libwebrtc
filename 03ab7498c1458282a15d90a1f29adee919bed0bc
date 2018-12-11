@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "556554d4_e185cc43",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-11T12:01:42Z",
+      "side": 1,
+      "message": "ArrayView (same like std::span) can be accessed as an array:\n\ndata[offset++]",
+      "range": {
+        "startLine": 494,
+        "startChar": 36,
+        "endLine": 494,
+        "endChar": 57
+      },
+      "revId": "03ab7498c1458282a15d90a1f29adee919bed0bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee66ccc5_9fce469e",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-11T12:01:42Z",
+      "side": 1,
+      "message": "ditto: \ndata[offset++] \u003d ...",
+      "range": {
+        "startLine": 543,
+        "startChar": 7,
+        "endLine": 543,
+        "endChar": 13
+      },
+      "revId": "03ab7498c1458282a15d90a1f29adee919bed0bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
