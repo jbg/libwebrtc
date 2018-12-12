@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf54c619_7004a9b4",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-12T12:49:53Z",
+      "side": 1,
+      "message": "put members after all functions\ndeclare contructor before other functions\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n\n(may be for local consistency keep as is and fix in another, dedicated CL)",
+      "range": {
+        "startLine": 27,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "1818d43686c82e3e6d1cb9f12480d4f0a0c2bd28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
