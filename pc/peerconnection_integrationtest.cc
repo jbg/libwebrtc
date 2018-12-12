@@ -68,53 +68,19 @@
 #include "system_wrappers/include/metrics.h"
 #include "test/gmock.h"
 
-using cricket::ContentInfo;
-using cricket::FakeWebRtcVideoDecoder;
-using cricket::FakeWebRtcVideoDecoderFactory;
-using cricket::FakeWebRtcVideoEncoder;
-using cricket::FakeWebRtcVideoEncoderFactory;
-using cricket::MediaContentDescription;
-using cricket::StreamParams;
-using rtc::SocketAddress;
+namespace webrtc {
+
+using ::cricket::ContentInfo;
+using ::cricket::StreamParams;
+using ::rtc::SocketAddress;
+using ::testing::_;
 using ::testing::Combine;
 using ::testing::ElementsAre;
-using ::testing::UnorderedElementsAreArray;
 using ::testing::Return;
 using ::testing::SetArgPointee;
-using ::testing::Values;
 using ::testing::UnorderedElementsAreArray;
-using ::testing::_;
-using webrtc::DataBuffer;
-using webrtc::DataChannelInterface;
-using webrtc::DtmfSender;
-using webrtc::DtmfSenderInterface;
-using webrtc::DtmfSenderObserverInterface;
-using webrtc::FakeVideoTrackRenderer;
-using webrtc::MediaStreamInterface;
-using webrtc::MediaStreamTrackInterface;
-using webrtc::MockCreateSessionDescriptionObserver;
-using webrtc::MockDataChannelObserver;
-using webrtc::MockSetSessionDescriptionObserver;
-using webrtc::MockStatsObserver;
-using webrtc::ObserverInterface;
-using webrtc::PeerConnection;
-using webrtc::PeerConnectionInterface;
+using ::testing::Values;
 using RTCConfiguration = PeerConnectionInterface::RTCConfiguration;
-using webrtc::PeerConnectionFactory;
-using webrtc::PeerConnectionProxy;
-using webrtc::RTCErrorType;
-using webrtc::RTCTransportStats;
-using webrtc::RtpSenderInterface;
-using webrtc::RtpReceiverInterface;
-using webrtc::RtpSenderInterface;
-using webrtc::RtpTransceiverDirection;
-using webrtc::RtpTransceiverInit;
-using webrtc::RtpTransceiverInterface;
-using webrtc::SdpSemantics;
-using webrtc::SdpType;
-using webrtc::SessionDescriptionInterface;
-using webrtc::StreamCollectionInterface;
-using webrtc::VideoTrackInterface;
 
 namespace {
 
@@ -5090,5 +5056,6 @@ TEST_F(PeerConnectionIntegrationTestPlanB, TwoVideoUnifiedPlanToNoMediaPlanB) {
 }
 
 }  // namespace
+}  // namespace webrtc
 
 #endif  // if !defined(THREAD_SANITIZER)
