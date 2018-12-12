@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37c3d5dd_1c4dab49",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-12T09:15:14Z",
+      "side": 1,
+      "message": "Do callers expect this to be synchronous? After this change, it seems unsafe to do\n\ntransport-\u003eDeRegisterPacketFeedbackObserver(observer); delete observer;",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 66
+      },
+      "revId": "600693ee00a90d1d0eb4267658cd1a12b5fe489b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec515659_dc04c237",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-12T09:15:14Z",
+      "side": 1,
+      "message": "Would it help to pass by value, and ensure that the TransportFeedback type is movable?",
+      "range": {
+        "startLine": 514,
+        "startChar": 3,
+        "endLine": 514,
+        "endChar": 43
+      },
+      "revId": "600693ee00a90d1d0eb4267658cd1a12b5fe489b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
