@@ -22,6 +22,30 @@
       "revId": "1818d43686c82e3e6d1cb9f12480d4f0a0c2bd28",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2391ba8c_5aa9c549",
+        "filename": "api/video/hdr_metadata.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2018-12-12T13:03:38Z",
+      "side": 1,
+      "message": "Thanks! Will fix this in a separate CL.",
+      "parentUuid": "cf54c619_7004a9b4",
+      "range": {
+        "startLine": 27,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "1818d43686c82e3e6d1cb9f12480d4f0a0c2bd28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
