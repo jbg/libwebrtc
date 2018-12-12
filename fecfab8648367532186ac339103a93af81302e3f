@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a74a1f9_a328f3d3",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-12T10:58:49Z",
+      "side": 1,
+      "message": "Move this to before the using-declarations? That\u0027s what the tip says...",
+      "revId": "fecfab8648367532186ac339103a93af81302e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88973803_31b1c9d0",
+        "filename": "pc/peerconnectioninterface_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-12T10:58:49Z",
+      "side": 1,
+      "message": "Here too. I guess you could move it all the way up to line 98.",
+      "revId": "fecfab8648367532186ac339103a93af81302e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
