@@ -12,8 +12,6 @@
 
 #include <iostream>
 
-#include "api/audio_codecs/builtin_audio_decoder_factory.h"
-
 namespace webrtc {
 namespace test {
 namespace {
@@ -50,12 +48,13 @@ void DefaultNetEqTestErrorCallback::OnGetAudioError() {
 }
 
 NetEqTest::NetEqTest(const NetEq::Config& config,
+                     rtc::scoped_refptr<AudioDecoderFactory> decoder_factory,
                      const DecoderMap& codecs,
                      const ExtDecoderMap& ext_codecs,
                      std::unique_ptr<NetEqInput> input,
                      std::unique_ptr<AudioSink> output,
                      Callbacks callbacks)
-    : neteq_(NetEq::Create(config, CreateBuiltinAudioDecoderFactory())),
+    : neteq_(NetEq::Create(config, decoder_factory)),
       input_(std::move(input)),
       output_(std::move(output)),
       callbacks_(callbacks),
