@@ -13,6 +13,7 @@
 #include <string.h>
 #include <iostream>
 #include <limits>
+#include <set>
 #include <utility>
 
 #include "logging/rtc_event_log/rtc_event_processor.h"
@@ -73,22 +74,25 @@ bool RtcEventLogSource::OpenFile(const std::string& file_name,
           ? std::numeric_limits<int64_t>::max()
           : parsed_log.stop_log_events().front().log_time_us();
 
+  std::set<uint32_t> packet_ssrcs;
   auto handle_rtp_packet =
-      [this,
-       first_log_end_time_us](const webrtc::LoggedRtpPacketIncoming& incoming) {
+      [this, first_log_end_time_us,
+       &packet_ssrcs](const webrtc::LoggedRtpPacketIncoming& incoming) {
         if (!filter_.test(incoming.rtp.header.payloadType) &&
             incoming.log_time_us() < first_log_end_time_us) {
           rtp_packets_.emplace_back(absl::make_unique<Packet>(
               incoming.rtp.header, incoming.rtp.total_length,
               incoming.rtp.total_length - incoming.rtp.header_length,
               static_cast<double>(incoming.log_time_ms())));
+          packet_ssrcs.insert(rtp_packets_.back()->header().ssrc);
         }
       };
 
   auto handle_audio_playout =
-      [this, first_log_end_time_us](
-          const webrtc::LoggedAudioPlayoutEvent& audio_playout) {
-        if (audio_playout.log_time_us() < first_log_end_time_us) {
+      [this, first_log_end_time_us,
+       &packet_ssrcs](const webrtc::LoggedAudioPlayoutEvent& audio_playout) {
+        if (audio_playout.log_time_us() < first_log_end_time_us &&
+            packet_ssrcs.count(audio_playout.ssrc) > 0) {
           audio_outputs_.emplace_back(audio_playout.log_time_ms());
         }
       };
