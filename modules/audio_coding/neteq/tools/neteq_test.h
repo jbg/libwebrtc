@@ -85,6 +85,7 @@ class NetEqTest : public NetEqSimulator {
   // Sets up the test with given configuration, codec mappings, input, ouput,
   // and callback objects for error reporting.
   NetEqTest(const NetEq::Config& config,
+            rtc::scoped_refptr<AudioDecoderFactory> decoder_factory,
             const DecoderMap& codecs,
             const ExtDecoderMap& ext_codecs,
             std::unique_ptr<NetEqInput> input,
