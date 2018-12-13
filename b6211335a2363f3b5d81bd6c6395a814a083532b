@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63781d0d_4d2fa2d7",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-13T14:26:48Z",
+      "side": 1,
+      "message": "Plan is to replace these two arguments with a map pt -\u003e SdpAudioFormat, once all users of this class are updated to pass a suitable factory.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 53
+      },
+      "revId": "b6211335a2363f3b5d81bd6c6395a814a083532b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
