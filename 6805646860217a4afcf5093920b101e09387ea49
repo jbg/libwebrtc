@@ -22,6 +22,30 @@
       "revId": "6805646860217a4afcf5093920b101e09387ea49",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a070d2e_d0cc9cc3",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-13T17:08:43Z",
+      "side": 1,
+      "message": "In this cl, replacement_decoder is still injected via ext_codecs_, factory not involved.\n\nWhen we get to delete ext_codecs_ (hopefully in a cl or two after this), we\u0027d need a factory that can create the replacement decoder.",
+      "parentUuid": "a1e29c7d_acdc5cd8",
+      "range": {
+        "startLine": 454,
+        "startChar": 4,
+        "endLine": 454,
+        "endChar": 24
+      },
+      "revId": "6805646860217a4afcf5093920b101e09387ea49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
