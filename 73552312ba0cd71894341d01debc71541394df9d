@@ -46,6 +46,30 @@
       "revId": "73552312ba0cd71894341d01debc71541394df9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb216f0_48b36105",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-12-14T13:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56cc9274_eac51426",
+      "range": {
+        "startLine": 133,
+        "startChar": 18,
+        "endLine": 133,
+        "endChar": 26
+      },
+      "revId": "73552312ba0cd71894341d01debc71541394df9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
