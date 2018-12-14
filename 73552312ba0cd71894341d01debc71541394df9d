@@ -22,6 +22,30 @@
       "revId": "73552312ba0cd71894341d01debc71541394df9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56cc9274_eac51426",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-12-14T13:40:06Z",
+      "side": 1,
+      "message": "I chose to use hex mainly for consistency with existing debug messages in neteq_test_factory.cc, although I don\u0027t know if there is any advantage.",
+      "parentUuid": "2a748092_ab4aadc7",
+      "range": {
+        "startLine": 133,
+        "startChar": 18,
+        "endLine": 133,
+        "endChar": 26
+      },
+      "revId": "73552312ba0cd71894341d01debc71541394df9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
