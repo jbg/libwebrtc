@@ -182,8 +182,11 @@ void VideoEncoderSoftwareFallbackWrapperTest::EncodeFrame(int expected_ret) {
   I420Buffer::SetBlack(buffer);
   std::vector<FrameType> types(1, kVideoFrameKey);
 
-  frame_.reset(
-      new VideoFrame(buffer, webrtc::kVideoRotation_0, 0 /* timestamp_us */));
+  frame_ = VideoFrame::Builder()
+               .set_video_frame_buffer(buffer)
+               .set_rotation(webrtc::kVideoRotation_0)
+               .set_timestamp_us(0)
+               .buildUnique();
   EXPECT_EQ(expected_ret, fallback_wrapper_->Encode(*frame_, nullptr, &types));
 }
 
