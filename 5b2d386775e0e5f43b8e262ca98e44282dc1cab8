@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8d3fde2_5f4f38d9",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2018-12-14T14:16:39Z",
+      "side": 1,
+      "message": "Is there a bug we can use instead here?",
+      "range": {
+        "startLine": 259,
+        "startChar": 15,
+        "endLine": 259,
+        "endChar": 22
+      },
+      "revId": "5b2d386775e0e5f43b8e262ca98e44282dc1cab8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
