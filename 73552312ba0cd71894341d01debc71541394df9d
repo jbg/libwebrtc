@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a748092_ab4aadc7",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2018-12-14T12:30:52Z",
+      "side": 1,
+      "message": "Is hex the most useful representation of the SSRC?",
+      "range": {
+        "startLine": 133,
+        "startChar": 18,
+        "endLine": 133,
+        "endChar": 26
+      },
+      "revId": "73552312ba0cd71894341d01debc71541394df9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
