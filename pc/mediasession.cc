@@ -1916,7 +1916,7 @@ bool MediaSessionDescriptionFactory::AddAudioContentForOffer(
   audio->set_direction(media_description_options.direction);
 
   desc->AddContent(media_description_options.mid, MediaProtocolType::kRtp,
-                   media_description_options.stopped, audio.release());
+                   media_description_options.stopped, std::move(audio));
   if (!AddTransportOffer(media_description_options.mid,
                          media_description_options.transport_options,
                          current_description, desc, ice_credentials)) {
@@ -1988,7 +1988,7 @@ bool MediaSessionDescriptionFactory::AddVideoContentForOffer(
   video->set_direction(media_description_options.direction);
 
   desc->AddContent(media_description_options.mid, MediaProtocolType::kRtp,
-                   media_description_options.stopped, video.release());
+                   media_description_options.stopped, std::move(video));
   if (!AddTransportOffer(media_description_options.mid,
                          media_description_options.transport_options,
                          current_description, desc, ice_credentials)) {
@@ -2050,12 +2050,12 @@ bool MediaSessionDescriptionFactory::AddDataContentForOffer(
 
   if (is_sctp) {
     desc->AddContent(media_description_options.mid, MediaProtocolType::kSctp,
-                     data.release());
+                     std::move(data));
   } else {
     data->set_bandwidth(kDataMaxBandwidth);
     SetMediaProtocol(secure_transport, data.get());
     desc->AddContent(media_description_options.mid, MediaProtocolType::kRtp,
-                     media_description_options.stopped, data.release());
+                     media_description_options.stopped, std::move(data));
   }
   if (!AddTransportOffer(media_description_options.mid,
                          media_description_options.transport_options,
@@ -2170,7 +2170,7 @@ bool MediaSessionDescriptionFactory::AddAudioContentForAnswer(
   }
 
   answer->AddContent(media_description_options.mid, offer_content->type,
-                     rejected, audio_answer.release());
+                     rejected, std::move(audio_answer));
   return true;
 }
 
@@ -2259,7 +2259,7 @@ bool MediaSessionDescriptionFactory::AddVideoContentForAnswer(
                      << "' being rejected in answer.";
   }
   answer->AddContent(media_description_options.mid, offer_content->type,
-                     rejected, video_answer.release());
+                     rejected, std::move(video_answer));
   return true;
 }
 
@@ -2326,7 +2326,7 @@ bool MediaSessionDescriptionFactory::AddDataContentForAnswer(
     RTC_LOG(LS_INFO) << "Data is not supported in the answer.";
   }
   answer->AddContent(media_description_options.mid, offer_content->type,
-                     rejected, data_answer.release());
+                     rejected, std::move(data_answer));
   return true;
 }
 

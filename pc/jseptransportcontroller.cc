@@ -808,21 +808,18 @@ void JsepTransportController::RemoveTransportForMid(const std::string& mid) {
 
 cricket::JsepTransportDescription
 JsepTransportController::CreateJsepTransportDescription(
-    cricket::ContentInfo content_info,
+    const cricket::ContentInfo& content_info,
     cricket::TransportInfo transport_info,
     const std::vector<int>& encrypted_extension_ids,
     int rtp_abs_sendtime_extn_id) {
-  const cricket::MediaContentDescription* content_desc =
-      static_cast<const cricket::MediaContentDescription*>(
-          content_info.description);
-  RTC_DCHECK(content_desc);
   bool rtcp_mux_enabled = content_info.type == cricket::MediaProtocolType::kSctp
                               ? true
-                              : content_desc->rtcp_mux();
+                              : content_info.description->rtcp_mux();
 
   return cricket::JsepTransportDescription(
-      rtcp_mux_enabled, content_desc->cryptos(), encrypted_extension_ids,
-      rtp_abs_sendtime_extn_id, transport_info.description);
+      rtcp_mux_enabled, content_info.description->cryptos(),
+      encrypted_extension_ids, rtp_abs_sendtime_extn_id,
+      transport_info.description);
 }
 
 bool JsepTransportController::ShouldUpdateBundleGroup(
@@ -847,16 +844,12 @@ bool JsepTransportController::ShouldUpdateBundleGroup(
 
 std::vector<int> JsepTransportController::GetEncryptedHeaderExtensionIds(
     const cricket::ContentInfo& content_info) {
-  const cricket::MediaContentDescription* content_desc =
-      static_cast<const cricket::MediaContentDescription*>(
-          content_info.description);
-
   if (!config_.crypto_options.srtp.enable_encrypted_rtp_header_extensions) {
     return std::vector<int>();
   }
 
   std::vector<int> encrypted_header_extension_ids;
-  for (auto extension : content_desc->rtp_header_extensions()) {
+  for (auto extension : content_info.description->rtp_header_extensions()) {
     if (!extension.encrypt) {
       continue;
     }
@@ -898,13 +891,9 @@ int JsepTransportController::GetRtpAbsSendTimeHeaderExtensionId(
     return -1;
   }
 
-  const cricket::MediaContentDescription* content_desc =
-      static_cast<const cricket::MediaContentDescription*>(
-          content_info.description);
-
   const webrtc::RtpExtension* send_time_extension =
       webrtc::RtpExtension::FindHeaderExtensionByUri(
-          content_desc->rtp_header_extensions(),
+          content_info.description->rtp_header_extensions(),
           webrtc::RtpExtension::kAbsSendTimeUri);
   return send_time_extension ? send_time_extension->id : -1;
 }
@@ -1028,10 +1017,7 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
     return RTCError::OK();
   }
 
-  const cricket::MediaContentDescription* content_desc =
-      static_cast<const cricket::MediaContentDescription*>(
-          content_info.description);
-  if (certificate_ && !content_desc->cryptos().empty()) {
+  if (certificate_ && !content_info.description->cryptos().empty()) {
     return RTCError(RTCErrorType::INVALID_PARAMETER,
                     "SDES and DTLS-SRTP cannot be enabled at the same time.");
   }
@@ -1059,7 +1045,7 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
   if (config_.disable_encryption) {
     unencrypted_rtp_transport = CreateUnencryptedRtpTransport(
         content_info.name, rtp_dtls_transport.get(), rtcp_dtls_transport.get());
-  } else if (!content_desc->cryptos().empty()) {
+  } else if (!content_info.description->cryptos().empty()) {
     sdes_transport = CreateSdesTransport(
         content_info.name, rtp_dtls_transport.get(), rtcp_dtls_transport.get());
   } else {

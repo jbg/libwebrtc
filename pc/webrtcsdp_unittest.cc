@@ -1268,8 +1268,9 @@ class WebRtcSdpTest : public testing::Test {
 
   // Creates an audio content description with no streams, and some default
   // configuration.
-  AudioContentDescription* CreateAudioContentDescription() {
-    AudioContentDescription* audio = new AudioContentDescription();
+  std::unique_ptr<AudioContentDescription> CreateAudioContentDescription() {
+    std::unique_ptr<AudioContentDescription> audio(
+        new AudioContentDescription());
     audio->set_rtcp_mux(true);
     audio->set_rtcp_reduced_size(true);
     audio->AddCrypto(CryptoParams(
@@ -1294,26 +1295,30 @@ class WebRtcSdpTest : public testing::Test {
     RemoveVideoCandidates();
 
     // Audio track 2 has 2 media stream ids.
-    AudioContentDescription* audio_desc_2 = CreateAudioContentDescription();
+    std::unique_ptr<AudioContentDescription> audio_desc_2 =
+        CreateAudioContentDescription();
     StreamParams audio_track_2;
     audio_track_2.id = kAudioTrackId2;
     audio_track_2.cname = kStream1Cname;
     audio_track_2.set_stream_ids({kStreamId1, kStreamId2});
     audio_track_2.ssrcs.push_back(kAudioTrack2Ssrc);
     audio_desc_2->AddStream(audio_track_2);
-    desc_.AddContent(kAudioContentName2, MediaProtocolType::kRtp, audio_desc_2);
+    desc_.AddContent(kAudioContentName2, MediaProtocolType::kRtp,
+                     std::move(audio_desc_2));
     EXPECT_TRUE(desc_.AddTransportInfo(TransportInfo(
         kAudioContentName2, TransportDescription(kUfragVoice2, kPwdVoice2))));
 
     // Audio track 3 has no stream ids.
-    AudioContentDescription* audio_desc_3 = CreateAudioContentDescription();
+    std::unique_ptr<AudioContentDescription> audio_desc_3 =
+        CreateAudioContentDescription();
     StreamParams audio_track_3;
     audio_track_3.id = kAudioTrackId3;
     audio_track_3.cname = kStream2Cname;
     audio_track_3.set_stream_ids({});
     audio_track_3.ssrcs.push_back(kAudioTrack3Ssrc);
     audio_desc_3->AddStream(audio_track_3);
-    desc_.AddContent(kAudioContentName3, MediaProtocolType::kRtp, audio_desc_3);
+    desc_.AddContent(kAudioContentName3, MediaProtocolType::kRtp,
+                     std::move(audio_desc_3));
     EXPECT_TRUE(desc_.AddTransportInfo(TransportInfo(
         kAudioContentName3, TransportDescription(kUfragVoice3, kPwdVoice3))));
     desc_.set_msid_signaling(msid_signaling);
@@ -1330,12 +1335,14 @@ class WebRtcSdpTest : public testing::Test {
     desc_.RemoveTransportInfoByName(kVideoContentName);
     RemoveVideoCandidates();
 
-    AudioContentDescription* audio_desc = CreateAudioContentDescription();
+    std::unique_ptr<AudioContentDescription> audio_desc =
+        CreateAudioContentDescription();
     StreamParams audio_track;
     audio_track.id = kAudioTrackId1;
     audio_track.set_stream_ids({kStreamId1});
     audio_desc->AddStream(audio_track);
-    desc_.AddContent(kAudioContentName, MediaProtocolType::kRtp, audio_desc);
+    desc_.AddContent(kAudioContentName, MediaProtocolType::kRtp,
+                     std::move(audio_desc));
 
     // Enable signaling a=msid lines.
     desc_.set_msid_signaling(cricket::kMsidSignalingMediaSection);

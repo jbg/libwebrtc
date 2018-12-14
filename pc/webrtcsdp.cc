@@ -2747,7 +2747,7 @@ bool ParseMediaDescription(const std::string& message,
     desc->AddContent(content_name,
                      IsDtlsSctp(protocol) ? MediaProtocolType::kSctp
                                           : MediaProtocolType::kRtp,
-                     content_rejected, bundle_only, content.release());
+                     content_rejected, bundle_only, std::move(content));
     // Create TransportInfo with the media level "ice-pwd" and "ice-ufrag".
     TransportInfo transport_info(content_name, transport);
 

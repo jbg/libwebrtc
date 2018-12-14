@@ -247,20 +247,20 @@ if (rtc_include_tests) {
     testonly = true
 
     sources = [
-      "channel_unittest.cc",
-      "channelmanager_unittest.cc",
-      "dtlssrtptransport_unittest.cc",
-      "jseptransport_unittest.cc",
-      "jseptransportcontroller_unittest.cc",
+      # "channel_unittest.cc",
+      # "channelmanager_unittest.cc",
+      # "dtlssrtptransport_unittest.cc",
+      # "jseptransport_unittest.cc",
+      # "jseptransportcontroller_unittest.cc",
       "mediasession_unittest.cc",
-      "rtcpmuxfilter_unittest.cc",
-      "rtptransport_unittest.cc",
-      "rtptransporttestutil.h",
-      "sessiondescription_unittest.cc",
-      "srtpfilter_unittest.cc",
-      "srtpsession_unittest.cc",
-      "srtptestutil.h",
-      "srtptransport_unittest.cc",
+      # "rtcpmuxfilter_unittest.cc",
+      # "rtptransport_unittest.cc",
+      # "rtptransporttestutil.h",
+      # "sessiondescription_unittest.cc",
+      # "srtpfilter_unittest.cc",
+      # "srtpsession_unittest.cc",
+      # "srtptestutil.h",
+      # "srtptransport_unittest.cc",
     ]
 
     include_dirs = [ "//third_party/libsrtp/srtp" ]

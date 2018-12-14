@@ -5713,7 +5713,7 @@ bool PeerConnection::UseCandidate(const IceCandidateInterface* candidate) {
     return false;
   }
 
-  cricket::ContentInfo content =
+  const cricket::ContentInfo& content =
       remote_description()->description()->contents()[mediacontent_index];
   std::vector<cricket::Candidate> candidates;
   candidates.push_back(candidate->candidate());
@@ -6352,7 +6352,7 @@ bool PeerConnection::ReadyToUseRemoteCandidate(
     return false;
   }
 
-  cricket::ContentInfo content =
+  const cricket::ContentInfo& content =
       current_remote_desc->description()->contents()[mediacontent_index];
 
   const std::string transport_name = GetTransportName(content.name);

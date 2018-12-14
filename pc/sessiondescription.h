@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <iosfwd>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -359,18 +360,16 @@ struct ContentInfo {
   friend class SessionDescription;
 
   explicit ContentInfo(MediaProtocolType type) : type(type) {}
+  ContentInfo(const ContentInfo&) = delete;
 
   // Alias for |name|.
   std::string mid() const { return name; }
   void set_mid(const std::string& mid) { this->name = mid; }
 
   // Alias for |description|.
-  MediaContentDescription* media_description() { return description; }
+  MediaContentDescription* media_description() { return description.get(); }
   const MediaContentDescription* media_description() const {
-    return description;
-  }
-  void set_media_description(MediaContentDescription* desc) {
-    description = desc;
+    return description.get();
   }
 
   // TODO(bugs.webrtc.org/8620): Rename this to mid.
@@ -380,7 +379,7 @@ struct ContentInfo {
   bool bundle_only = false;
   // TODO(bugs.webrtc.org/8620): Switch to the getter and setter, and make this
   // private.
-  MediaContentDescription* description = nullptr;
+  std::unique_ptr<MediaContentDescription> description;
 };
 
 typedef std::vector<std::string> ContentNames;
@@ -453,16 +452,16 @@ class SessionDescription {
   // Adds a content to this description. Takes ownership of ContentDescription*.
   void AddContent(const std::string& name,
                   MediaProtocolType type,
-                  MediaContentDescription* description);
+                  std::unique_ptr<MediaContentDescription> description);
   void AddContent(const std::string& name,
                   MediaProtocolType type,
                   bool rejected,
-                  MediaContentDescription* description);
+                  std::unique_ptr<MediaContentDescription> description);
   void AddContent(const std::string& name,
                   MediaProtocolType type,
                   bool rejected,
                   bool bundle_only,
-                  MediaContentDescription* description);
+                  std::unique_ptr<MediaContentDescription> description);
   void AddContent(ContentInfo* content);
 
   bool RemoveContentByName(const std::string& name);
@@ -527,7 +526,7 @@ class SessionDescription {
   bool extmap_allow_mixed() const { return extmap_allow_mixed_; }
 
  private:
-  SessionDescription(const SessionDescription&);
+  SessionDescription(const SessionDescription&) = delete;
 
   ContentInfos contents_;
   TransportInfos transport_infos_;

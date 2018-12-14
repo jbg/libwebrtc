@@ -11,6 +11,7 @@
 #include "pc/sessiondescription.h"
 
 #include <algorithm>
+#include <memory>
 #include <utility>
 
 #include "rtc_base/checks.h"
@@ -87,22 +88,20 @@ bool ContentGroup::RemoveContentName(const std::string& content_name) {
 }
 
 SessionDescription::SessionDescription() = default;
-SessionDescription::SessionDescription(const SessionDescription&) = default;
-
-SessionDescription::~SessionDescription() {
-  for (ContentInfos::iterator content = contents_.begin();
-       content != contents_.end(); ++content) {
-    delete content->description;
-  }
-}
+// SessionDescription::SessionDescription(const SessionDescription&) = default;
 
 SessionDescription* SessionDescription::Copy() const {
-  SessionDescription* copy = new SessionDescription(*this);
-  // Copy all ContentDescriptions.
-  for (ContentInfos::iterator content = copy->contents_.begin();
-       content != copy->contents().end(); ++content) {
-    content->description = content->description->Copy();
-  }
+  // SessionDescription* copy = new SessionDescription(*this);
+  // // Copy all ContentDescriptions.
+  // for (ContentInfos::iterator content = copy->contents_.begin();
+  //      content != copy->contents().end(); ++content) {
+  //   content->description = content->description->Copy();
+  // }
+  // return copy;
+
+  // TODO(mbonadei): Finish to fix copy.
+  SessionDescription* copy = new SessionDescription();
+  copy->msid_supported_ = msid_supported_;
   return copy;
 }
 
@@ -144,36 +143,39 @@ const ContentInfo* SessionDescription::FirstContent() const {
   return (contents_.empty()) ? NULL : &(*contents_.begin());
 }
 
-void SessionDescription::AddContent(const std::string& name,
-                                    MediaProtocolType type,
-                                    MediaContentDescription* description) {
+void SessionDescription::AddContent(
+    const std::string& name,
+    MediaProtocolType type,
+    std::unique_ptr<MediaContentDescription> description) {
   ContentInfo content(type);
   content.name = name;
-  content.description = description;
+  content.description = std::move(description);
   AddContent(&content);
 }
 
-void SessionDescription::AddContent(const std::string& name,
-                                    MediaProtocolType type,
-                                    bool rejected,
-                                    MediaContentDescription* description) {
+void SessionDescription::AddContent(
+    const std::string& name,
+    MediaProtocolType type,
+    bool rejected,
+    std::unique_ptr<MediaContentDescription> description) {
   ContentInfo content(type);
   content.name = name;
   content.rejected = rejected;
-  content.description = description;
+  content.description = std::move(description);
   AddContent(&content);
 }
 
-void SessionDescription::AddContent(const std::string& name,
-                                    MediaProtocolType type,
-                                    bool rejected,
-                                    bool bundle_only,
-                                    MediaContentDescription* description) {
+void SessionDescription::AddContent(
+    const std::string& name,
+    MediaProtocolType type,
+    bool rejected,
+    bool bundle_only,
+    std::unique_ptr<MediaContentDescription> description) {
   ContentInfo content(type);
   content.name = name;
   content.rejected = rejected;
   content.bundle_only = bundle_only;
-  content.description = description;
+  content.description = std::move(description);
   AddContent(&content);
 }
 
@@ -190,7 +192,6 @@ bool SessionDescription::RemoveContentByName(const std::string& name) {
   for (ContentInfos::iterator content = contents_.begin();
        content != contents_.end(); ++content) {
     if (content->name == name) {
-      delete content->description;
       contents_.erase(content);
       return true;
     }

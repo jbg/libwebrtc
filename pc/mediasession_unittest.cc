@@ -2735,14 +2735,14 @@ TEST(MediaSessionDescription, CopySessionDescription) {
   SessionDescription source;
   cricket::ContentGroup group(cricket::CN_AUDIO);
   source.AddGroup(group);
-  AudioContentDescription* acd(new AudioContentDescription());
+  std::unique_ptr<AudioContentDescription> acd(new AudioContentDescription());
   acd->set_codecs(MAKE_VECTOR(kAudioCodecs1));
   acd->AddLegacyStream(1);
-  source.AddContent(cricket::CN_AUDIO, MediaProtocolType::kRtp, acd);
-  VideoContentDescription* vcd(new VideoContentDescription());
+  source.AddContent(cricket::CN_AUDIO, MediaProtocolType::kRtp, std::move(acd));
+  std::unique_ptr<VideoContentDescription> vcd(new VideoContentDescription());
   vcd->set_codecs(MAKE_VECTOR(kVideoCodecs1));
   vcd->AddLegacyStream(2);
-  source.AddContent(cricket::CN_VIDEO, MediaProtocolType::kRtp, vcd);
+  source.AddContent(cricket::CN_VIDEO, MediaProtocolType::kRtp, std::move(vcd));
 
   std::unique_ptr<SessionDescription> copy(source.Copy());
   ASSERT_TRUE(copy.get() != NULL);
@@ -3610,7 +3610,7 @@ TEST_P(MediaProtocolTest, TestAudioVideoAcceptance) {
   std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
   ASSERT_TRUE(offer.get() != nullptr);
   // Set the protocol for all the contents.
-  for (auto content : offer.get()->contents()) {
+  for (auto& content : offer.get()->contents()) {
     content.media_description()->set_protocol(GetParam());
   }
   std::unique_ptr<SessionDescription> answer =
