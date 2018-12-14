@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6cc9cc5f_eb29089d",
+        "filename": "modules/desktop_capture/cropping_window_capturer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 8391
+      },
+      "writtenOn": "2018-12-14T19:37:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75e45c00_a7ca68da",
+      "range": {
+        "startLine": 107,
+        "startChar": 20,
+        "endLine": 107,
+        "endChar": 45
+      },
+      "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae2c4269_0d8dc0b4",
         "filename": "modules/desktop_capture/cropping_window_capturer.h",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2018-12-14T19:10:36Z",
       "side": 1,
       "message": "Why window capture also needs this callback?",
+      "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6364df6b_5b5fc7d8",
+        "filename": "modules/desktop_capture/cropping_window_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8391
+      },
+      "writtenOn": "2018-12-14T19:37:46Z",
+      "side": 1,
+      "message": "It doesn\u0027t now, but I\u0027m planning on making OnDisplayChanged pure virtual, so it would need it then.\n\n(and I can\u0027t make it pure virtual until this rolls into Chromium and I land a fix there for this new method.)",
+      "parentUuid": "ae2c4269_0d8dc0b4",
       "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -62,6 +104,30 @@
       "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c039321d_b8f9d1bb",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_gdi.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 8391
+      },
+      "writtenOn": "2018-12-14T19:37:46Z",
+      "side": 1,
+      "message": "Yes. I forgot to add the directx file. Thanks!",
+      "parentUuid": "2e09a6a4_736b2e68",
+      "range": {
+        "startLine": 124,
+        "startChar": 5,
+        "endLine": 124,
+        "endChar": 41
+      },
+      "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
