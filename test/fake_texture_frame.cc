@@ -12,6 +12,7 @@
 
 #include "api/video/i420_buffer.h"
 #include "rtc_base/refcountedobject.h"
+#include "rtc_base/timeutils.h"
 
 namespace webrtc {
 namespace test {
@@ -21,8 +22,13 @@ VideoFrame FakeNativeBuffer::CreateFrame(int width,
                                          uint32_t timestamp,
                                          int64_t render_time_ms,
                                          VideoRotation rotation) {
-  return VideoFrame(new rtc::RefCountedObject<FakeNativeBuffer>(width, height),
-                    timestamp, render_time_ms, rotation);
+  return VideoFrame::Builder()
+      .set_video_frame_buffer(
+          new rtc::RefCountedObject<FakeNativeBuffer>(width, height))
+      .set_timestamp_rtp(timestamp)
+      .set_timestamp_us(render_time_ms * rtc::kNumMicrosecsPerMillisec)
+      .set_rotation(rotation)
+      .build();
 }
 
 VideoFrameBuffer::Type FakeNativeBuffer::type() const {

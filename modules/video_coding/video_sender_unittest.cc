@@ -76,8 +76,11 @@ class EmptyFrameGenerator : public FrameGenerator {
  public:
   EmptyFrameGenerator(int width, int height) : width_(width), height_(height) {}
   VideoFrame* NextFrame() override {
-    frame_.reset(new VideoFrame(I420Buffer::Create(width_, height_),
-                                webrtc::kVideoRotation_0, 0));
+    frame_ = VideoFrame::Builder()
+                 .set_video_frame_buffer(I420Buffer::Create(width_, height_))
+                 .set_rotation(webrtc::kVideoRotation_0)
+                 .set_timestamp_us(0)
+                 .buildUnique();
     return frame_.get();
   }
 
