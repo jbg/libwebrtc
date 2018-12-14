@@ -197,8 +197,12 @@ int I420Decoder::Decode(const EncodedImage& inputImage,
     return WEBRTC_VIDEO_CODEC_MEMORY;
   }
 
-  VideoFrame decoded_image(frame_buffer, inputImage.Timestamp(), 0,
-                           webrtc::kVideoRotation_0);
+  VideoFrame decoded_image =
+                 VideoFrame::Builder().set_video_frame_buffer(frame_buffer),
+             .set_timestamp_rtp(inputImage.Timestamp())
+                 .set_timestamp_us(0)
+                 .set_rotation(webrtc::kVideoRotation_0)
+                 .build();
   _decodeCompleteCallback->Decoded(decoded_image);
   return WEBRTC_VIDEO_CODEC_OK;
 }
