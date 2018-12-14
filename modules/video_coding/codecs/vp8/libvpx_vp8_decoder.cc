@@ -317,7 +317,12 @@ int LibvpxVp8Decoder::ReturnFrame(const vpx_image_t* img,
                    buffer->MutableDataV(), buffer->StrideV(), img->d_w,
                    img->d_h);
 
-  VideoFrame decoded_image(buffer, timestamp, 0, kVideoRotation_0);
+  VideoFrame decoded_image = VideoFrame::Builder()
+                                 .set_video_frame_buffer(buffer)
+                                 .set_timestamp_rtp(timestamp)
+                                 .set_timestamp_us(0)
+                                 .set_rotation(kVideoRotation_0)
+                                 .build();
   decoded_image.set_ntp_time_ms(ntp_time_ms);
   decode_complete_callback_->Decoded(decoded_image, absl::nullopt, qp);
 
