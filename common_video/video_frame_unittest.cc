@@ -229,9 +229,12 @@ void CheckRotate(int width,
 }  // namespace
 
 TEST(TestVideoFrame, WidthHeightValues) {
-  VideoFrame frame(I420Buffer::Create(10, 10, 10, 14, 90),
-                   webrtc::kVideoRotation_0,
-                   789 * rtc::kNumMicrosecsPerMillisec);
+  VideoFrame frame =
+      VideoFrame::Builder()
+          .set_video_frame_buffer(I420Buffer::Create(10, 10, 10, 14, 90))
+          .set_rotation(webrtc::kVideoRotation_0)
+          .set_timestamp_us(789 * rtc::kNumMicrosecsPerMillisec)
+          .build();
   const int valid_value = 10;
   EXPECT_EQ(valid_value, frame.width());
   EXPECT_EQ(valid_value, frame.height());
@@ -263,9 +266,13 @@ TEST(TestVideoFrame, ShallowCopy) {
   memset(buffer_u, 8, kSizeU);
   memset(buffer_v, 4, kSizeV);
 
-  VideoFrame frame1(I420Buffer::Copy(width, height, buffer_y, stride_y,
-                                     buffer_u, stride_u, buffer_v, stride_v),
-                    kRotation, 0);
+  VideoFrame frame1 = VideoFrame::Builder()
+                          .set_video_frame_buffer(I420Buffer::Copy(
+                              width, height, buffer_y, stride_y, buffer_u,
+                              stride_u, buffer_v, stride_v))
+                          .set_rotation(kRotation)
+                          .set_timestamp_us(0)
+                          .build();
   frame1.set_timestamp(timestamp);
   frame1.set_ntp_time_ms(ntp_time_ms);
   frame1.set_timestamp_us(timestamp_us);
