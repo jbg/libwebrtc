@@ -37,6 +37,7 @@ class FlexfecSender {
   FlexfecSender(int payload_type,
                 uint32_t ssrc,
                 uint32_t protected_media_ssrc,
+                const std::string& rid,
                 const std::string& mid,
                 const std::vector<RtpExtension>& rtp_header_extensions,
                 rtc::ArrayView<const RtpExtensionSize> extension_sizes,
@@ -79,6 +80,8 @@ class FlexfecSender {
   const uint32_t timestamp_offset_;
   const uint32_t ssrc_;
   const uint32_t protected_media_ssrc_;
+  // RID value to send in the Repaired RID header extension
+  const std::string rid_;
   // MID value to send in the MID header extension.
   const std::string mid_;
   // Sequence number of next packet to generate.

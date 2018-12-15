@@ -54,6 +54,8 @@ RtpHeaderExtensionMap RegisterSupportedExtensions(
       map.Register<TransmissionOffset>(extension.id);
     } else if (extension.uri == RtpMid::kUri) {
       map.Register<RtpMid>(extension.id);
+    } else if (extension.uri == RepairedRtpStreamId::kUri) {
+      map.Register<RepairedRtpStreamId>(extension.id);
     } else {
       RTC_LOG(LS_INFO)
           << "FlexfecSender only supports RTP header extensions for "
@@ -70,6 +72,7 @@ FlexfecSender::FlexfecSender(
     int payload_type,
     uint32_t ssrc,
     uint32_t protected_media_ssrc,
+    const std::string& rid,
     const std::string& mid,
     const std::vector<RtpExtension>& rtp_header_extensions,
     rtc::ArrayView<const RtpExtensionSize> extension_sizes,
@@ -86,6 +89,7 @@ FlexfecSender::FlexfecSender(
                                   : random_.Rand<uint32_t>()),
       ssrc_(ssrc),
       protected_media_ssrc_(protected_media_ssrc),
+      rid_(rid),
       mid_(mid),
       seq_num_(rtp_state ? rtp_state->sequence_number
                          : random_.Rand(1, kMaxInitRtpSeqNumber)),
@@ -147,6 +151,10 @@ std::vector<std::unique_ptr<RtpPacketToSend>> FlexfecSender::GetFecPackets() {
     if (!mid_.empty()) {
       // This is a no-op if the MID header extension is not registered.
       fec_packet_to_send->SetExtension<RtpMid>(mid_);
+    }
+    // Possibly include the Repaired Stream Id (RID) header extension.
+    if (!rid_.empty()) {
+      fec_packet_to_send->SetExtension<RepairedRtpStreamId>(rid_);
     }
 
     // RTP payload.

@@ -148,6 +148,7 @@ class AudioSendStream final : public webrtc::AudioSendStream,
     int audio_level = 0;
     int transport_sequence_number = 0;
     int mid = 0;
+    int rid = 0;
   };
   static ExtensionIds FindExtensionIds(
       const std::vector<RtpExtension>& extensions);

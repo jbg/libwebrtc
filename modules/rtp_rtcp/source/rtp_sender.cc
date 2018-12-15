@@ -63,6 +63,7 @@ constexpr RtpExtensionSize kFecOrPaddingExtensionSizes[] = {
     CreateExtensionSize<TransmissionOffset>(),
     CreateExtensionSize<TransportSequenceNumber>(),
     CreateExtensionSize<PlayoutDelayLimits>(),
+    CreateExtensionSize<RepairedRtpStreamId>(),
     {RtpMid::kId, RtpMid::kMaxValueSizeBytes},
 };
 
@@ -75,6 +76,8 @@ constexpr RtpExtensionSize kVideoExtensionSizes[] = {
     CreateExtensionSize<VideoOrientation>(),
     CreateExtensionSize<VideoContentTypeExtension>(),
     CreateExtensionSize<VideoTimingExtension>(),
+    CreateExtensionSize<RtpStreamId>(),
+    CreateExtensionSize<RepairedRtpStreamId>(),
     {RtpMid::kId, RtpMid::kMaxValueSizeBytes},
     {RtpGenericFrameDescriptorExtension::kId,
      RtpGenericFrameDescriptorExtension::kMaxSizeBytes},
@@ -1174,6 +1177,10 @@ std::unique_ptr<RtpPacketToSend> RTPSender::AllocatePacket() const {
     // This is a no-op if the MID header extension is not registered.
     packet->SetExtension<RtpMid>(mid_);
   }
+  if (!rid_.empty()) {
+    // This is a no-op if the RID header extension is not registered.
+    packet->SetExtension<RtpStreamId>(rid_);
+  }
   return packet;
 }
 
@@ -1256,6 +1263,14 @@ uint32_t RTPSender::SSRC() const {
   rtc::CritScope lock(&send_critsect_);
   RTC_DCHECK(ssrc_);
   return *ssrc_;
+}
+
+void RTPSender::SetRid(const std::string& rid) {
+  // RID is used in simulcast scenario when multiple layers share the same mid.
+  rtc::CritScope lock(&send_critsect_);
+  // Make sure that the RID size is no more than |RtpStreamId::kValueSizeBytes|.
+  RTC_DCHECK(rid.length() <= RtpStreamId::kValueSizeBytes);
+  rid_ = rid.substr(0, RtpStreamId::kValueSizeBytes);
 }
 
 void RTPSender::SetMid(const std::string& mid) {
@@ -1347,6 +1362,13 @@ std::unique_ptr<RtpPacketToSend> RTPSender::BuildRtxPacket(
     if (!mid_.empty()) {
       // This is a no-op if the MID header extension is not registered.
       rtx_packet->SetExtension<RtpMid>(mid_);
+    }
+    // Note: The RTX packet might already have an RtpStreamId header that comes
+    // from the original packet and is copied in |CopyHeaderFrom(packet)|.
+    // This should be fine, because the rid values will match.
+    if (!rid_.empty()) {
+      // This is a no-op if the Repaired-RID header extension is not registered.
+      rtx_packet->SetExtension<RepairedRtpStreamId>(rid_);
     }
   }
 
