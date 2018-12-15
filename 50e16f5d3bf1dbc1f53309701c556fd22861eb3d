@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "8748e854_38010374",
+        "filename": "modules/desktop_capture/cropping_window_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8391
+      },
+      "writtenOn": "2018-12-15T01:40:43Z",
+      "side": 1,
+      "message": "Since DesktopCapturer::Callback is an interface, and all the current methods (only 1) are pure virtual, it seems cleaner to maintain this purity.\n\nIt\u0027s more work (since I have to coordinate the changes with downstream projects), but it feels like the right way to do this.  It\u0027s possible something will block me from making this pure virtual, but I think it\u0027s worthwhile to try.",
+      "parentUuid": "8fe237b3_a2b21450",
+      "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e09a6a4_736b2e68",
         "filename": "modules/desktop_capture/win/screen_capturer_win_gdi.cc",
         "patchSetId": 3
