@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ea58e4e_1583740a",
+        "filename": "api/rtpparameters.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-16T21:29:16Z",
+      "side": 1,
+      "message": "Wrong CL?",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb2064d2_6905a850",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-16T21:29:16Z",
+      "side": 1,
+      "message": "(whole statement above) \u0026\u0026 !new_config.rtp.rid.empty()\n\n?",
+      "range": {
+        "startLine": 291,
+        "startChar": 44,
+        "endLine": 291,
+        "endChar": 47
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92b9de1e_3308dfec",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-16T21:29:16Z",
+      "side": 1,
+      "message": "Can we use RTC_DLOG instead? Is it hugely beneficial to have this in the release build? Looks more like a debug hint to me. Could it even be a DCHECK?",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "782c31e9_222d395e",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-16T21:29:16Z",
+      "side": 1,
+      "message": "RTC_DCHECK_EQ",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b3ff37_5a4be5ee",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-16T21:29:16Z",
+      "side": 1,
+      "message": "Why? Would be nice to verify the below assumptions even in this case, and the loop won\u0027t ececute if empty.",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
