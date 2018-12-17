@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a5ba286_d79b0f58",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-17T23:45:16Z",
+      "side": 1,
+      "message": "I realize this would be more refactoring, but would it be worth adding a struct that combines ssrc and rid?",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e20f773_0f6d0797",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-17T23:45:16Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1e9df86_e70e3180",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-17T23:45:16Z",
+      "side": 1,
+      "message": "Is this needed? (MID doesn\u0027t have it)",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
