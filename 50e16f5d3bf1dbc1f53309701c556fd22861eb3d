@@ -120,6 +120,24 @@
     },
     {
       "key": {
+        "uuid": "28104435_b9b13b25",
+        "filename": "modules/desktop_capture/cropping_window_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2018-12-17T21:55:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8748e854_38010374",
+      "revId": "50e16f5d3bf1dbc1f53309701c556fd22861eb3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e09a6a4_736b2e68",
         "filename": "modules/desktop_capture/win/screen_capturer_win_gdi.cc",
         "patchSetId": 3
