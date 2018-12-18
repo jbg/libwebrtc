@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04ac36a4_a55e1540",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:31:04Z",
+      "side": 1,
+      "message": "handling",
+      "range": {
+        "startLine": 2238,
+        "startChar": 19,
+        "endLine": 2238,
+        "endChar": 26
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9748b9f7_1b9544bf",
+        "filename": "pc/peerconnection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1613,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:31:04Z",
+      "side": 1,
+      "message": "Would this be a good place to use remove_if()?",
+      "range": {
+        "startLine": 1613,
+        "startChar": 2,
+        "endLine": 1613,
+        "endChar": 36
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b50e891_44a11eb5",
+        "filename": "pc/peerconnection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1658,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:31:04Z",
+      "side": 1,
+      "message": "new lines between tests, or was this on purpose?",
+      "range": {
+        "startLine": 1658,
+        "startChar": 0,
+        "endLine": 1658,
+        "endChar": 6
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b4cbaba_97ee8592",
+        "filename": "pc/peerconnection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:31:04Z",
+      "side": 1,
+      "message": "What do you think of testing the new error conditions that you incorporated as well?\n-Bundle with no a\u003dmid\n-One section has a\u003dmid while another doesn\u0027t\n-More than one video/audio section w/o a\u003dmid",
+      "range": {
+        "startLine": 1700,
+        "startChar": 0,
+        "endLine": 1701,
+        "endChar": 0
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d987f2f9_fed9c57a",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:31:04Z",
+      "side": 1,
+      "message": "It\u0027s confusing that mid() can return a value but has_mid() would return false. Could you add a comment in here, possibly with a bug reference?",
+      "range": {
+        "startLine": 389,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 15
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f12a5c14_ea0f86a1",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4343,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:31:04Z",
+      "side": 1,
+      "message": "Is it worth adding a test as well that checks has_mid is true in the case that the a\u003dmid line does exist?",
+      "range": {
+        "startLine": 4343,
+        "startChar": 36,
+        "endLine": 4343,
+        "endChar": 73
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
