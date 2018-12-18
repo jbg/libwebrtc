@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b2523538_26208989",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-18T23:55:45Z",
+      "side": 1,
+      "message": "AddTransportOffer can still fail if CreateOffer fails. Keeping AddTransportAnswer the same to maintain symmetry.",
+      "parentUuid": "6c682b2c_c5cfdfb3",
+      "range": {
+        "startLine": 1806,
+        "startChar": 2,
+        "endLine": 1806,
+        "endChar": 14
+      },
+      "revId": "7f87814c7f7d1a93876b6009bbd358ede7d0eba3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "812b3d02_7cf071de",
         "filename": "pc/webrtcsdp_unittest.cc",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "7f87814c7f7d1a93876b6009bbd358ede7d0eba3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d4d58c2_40fda22a",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 4314,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-18T23:55:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "812b3d02_7cf071de",
+      "range": {
+        "startLine": 4313,
+        "startChar": 0,
+        "endLine": 4314,
+        "endChar": 52
+      },
+      "revId": "7f87814c7f7d1a93876b6009bbd358ede7d0eba3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

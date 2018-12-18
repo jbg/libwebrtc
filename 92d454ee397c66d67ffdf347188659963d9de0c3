@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9f35122b_86cc04cf",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-18T23:55:45Z",
+      "side": 1,
+      "message": "1. Getting under 3 bytes is \"best effort\" -- if we\u0027re in a situation where we have that many m\u003d sections then we probably don\u0027t care about effeciency.\n\n2. MIDs aren\u0027t guaranteed to be numbers, but we could do something like recording the previous \u0027i\u0027 value to avoid constantly checking the same ones. In general I expect we won\u0027t have that many m\u003d sections so performance shouldn\u0027t be a big deal here.",
+      "parentUuid": "1f445809_c4357ca2",
+      "range": {
+        "startLine": 658,
+        "startChar": 1,
+        "endLine": 659,
+        "endChar": 0
+      },
+      "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e66940f_138d9605",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2beef12f_f8f85dfc",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-18T23:55:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e66940f_138d9605",
+      "range": {
+        "startLine": 2280,
+        "startChar": 8,
+        "endLine": 2280,
+        "endChar": 28
+      },
+      "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7abb95b_241a49bf",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 9
@@ -68,6 +116,30 @@
       "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed091605_fab7b939",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-18T23:55:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d7abb95b_241a49bf",
+      "range": {
+        "startLine": 2283,
+        "startChar": 0,
+        "endLine": 2294,
+        "endChar": 7
+      },
+      "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
