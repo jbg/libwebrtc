@@ -248,6 +248,8 @@ class RtpStreamId : public BaseRtpStringExtension {
   static constexpr RTPExtensionType kId = kRtpExtensionRtpStreamId;
   static constexpr const char kUri[] =
       "urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id";
+  static constexpr uint8_t kValueSizeBytes =
+      BaseRtpStringExtension::kMaxValueSizeBytes;
 };
 
 class RepairedRtpStreamId : public BaseRtpStringExtension {
@@ -255,6 +257,8 @@ class RepairedRtpStreamId : public BaseRtpStringExtension {
   static constexpr RTPExtensionType kId = kRtpExtensionRepairedRtpStreamId;
   static constexpr const char kUri[] =
       "urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id";
+  // Repaired Stream Id is the same size as Stream Id.
+  static constexpr uint8_t kValueSizeBytes = RtpStreamId::kValueSizeBytes;
 };
 
 class RtpMid : public BaseRtpStringExtension {

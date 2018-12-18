@@ -149,6 +149,10 @@ std::unique_ptr<FlexfecSender> MaybeCreateFlexfecSender(
     return nullptr;
   }
 
+  RTC_DCHECK(rtp.flexfec.protected_rids.size() <= 1)
+      << "Multiple RIDs are specified in the RtpConfig but FlexFEC currently "
+         "only supports a single media stream.";
+
   const RtpState* rtp_state = nullptr;
   auto it = suspended_ssrcs.find(rtp.flexfec.ssrc);
   if (it != suspended_ssrcs.end()) {
@@ -156,9 +160,12 @@ std::unique_ptr<FlexfecSender> MaybeCreateFlexfecSender(
   }
 
   RTC_DCHECK_EQ(1U, rtp.flexfec.protected_media_ssrcs.size());
+  std::string rid =
+      rtp.flexfec.protected_rids.empty() ? "" : rtp.flexfec.protected_rids[0];
+
   return absl::make_unique<FlexfecSender>(
       rtp.flexfec.payload_type, rtp.flexfec.ssrc,
-      rtp.flexfec.protected_media_ssrcs[0], rtp.mid, rtp.extensions,
+      rtp.flexfec.protected_media_ssrcs[0], rid, rtp.mid, rtp.extensions,
       RTPSender::FecExtensionSizes(), rtp_state, Clock::GetRealTimeClock());
 }
 
@@ -225,6 +232,9 @@ RtpVideoSender::RtpVideoSender(
       overhead_bytes_per_packet_(0),
       encoder_target_rate_bps_(0) {
   RTC_DCHECK_EQ(ssrcs.size(), rtp_modules_.size());
+  // The same argument for SSRCs is given to this method twice.
+  // The SSRCs are also accessed in this method through both variables.
+  RTC_DCHECK(ssrcs == rtp_config.ssrcs);
   module_process_thread_checker_.DetachFromThread();
   // SSRCs are assumed to be sorted in the same order as |rtp_modules|.
   for (uint32_t ssrc : ssrcs) {
@@ -263,6 +273,7 @@ RtpVideoSender::RtpVideoSender(
 
   ConfigureProtection(rtp_config);
   ConfigureSsrcs(rtp_config);
+  ConfigureRids(rtp_config);
 
   if (!rtp_config.mid.empty()) {
     for (auto& rtp_rtcp : rtp_modules_) {
@@ -529,6 +540,18 @@ void RtpVideoSender::ConfigureSsrcs(const RtpConfig& rtp_config) {
       rtp_rtcp->SetRtxSendPayloadType(rtp_config.ulpfec.red_rtx_payload_type,
                                       rtp_config.ulpfec.red_payload_type);
     }
+  }
+}
+
+void RtpVideoSender::ConfigureRids(const RtpConfig& rtp_config) {
+  RTC_DCHECK(rtp_config.rids.empty() ||
+             rtp_config.rids.size() == rtp_config.ssrcs.size());
+  RTC_DCHECK(rtp_config.rids.empty() ||
+             rtp_config.rids.size() == rtp_modules_.size());
+  for (size_t i = 0; i < rtp_config.rids.size(); ++i) {
+    const std::string& rid = rtp_config.rids[i];
+    RtpRtcp* const rtp_rtcp = rtp_modules_[i].get();
+    rtp_rtcp->SetRid(rid);
   }
 }
 
