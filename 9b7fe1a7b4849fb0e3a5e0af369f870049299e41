@@ -36,6 +36,29 @@
     },
     {
       "key": {
+        "uuid": "bf71ab42_66a0d441",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T02:04:02Z",
+      "side": 1,
+      "message": "This is called when creating a RtpVideoSender (with SetLocalDescription). Will these get updated when setting the remote description?",
+      "range": {
+        "startLine": 276,
+        "startChar": 2,
+        "endLine": 276,
+        "endChar": 15
+      },
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a1e9df86_e70e3180",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
         "patchSetId": 3
@@ -47,6 +70,29 @@
       "writtenOn": "2018-12-17T23:45:16Z",
       "side": 1,
       "message": "Is this needed? (MID doesn\u0027t have it)",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3cef925_6badaf17",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T02:04:02Z",
+      "side": 1,
+      "message": "Should we have a test for this - specifically the addition of the rid header extensions?",
+      "range": {
+        "startLine": 1278,
+        "startChar": 12,
+        "endLine": 1278,
+        "endChar": 36
+      },
       "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
