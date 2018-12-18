@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93ada482_84738ea6",
+        "filename": "common_video/incoming_video_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2018-12-18T09:30:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the latest style guide for Structs vs. Classes and Operator Overloading says about this, but I don\u0027t feel strongly about it. Ask kwiberg@ for a review if you want anything else than a RS on this.",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 21
+      },
+      "revId": "22a1c7f9050a909860f54016db512dda0f8e23f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
