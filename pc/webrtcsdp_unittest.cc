@@ -38,6 +38,7 @@
 #include "rtc_base/sslfingerprint.h"
 #include "rtc_base/stringencode.h"
 #include "rtc_base/stringutils.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 
 #ifdef WEBRTC_ANDROID
@@ -48,20 +49,20 @@
 using cricket::AudioCodec;
 using cricket::AudioContentDescription;
 using cricket::Candidate;
+using cricket::ContentGroup;
 using cricket::ContentInfo;
 using cricket::CryptoParams;
-using cricket::ContentGroup;
 using cricket::DataCodec;
 using cricket::DataContentDescription;
 using cricket::ICE_CANDIDATE_COMPONENT_RTCP;
 using cricket::ICE_CANDIDATE_COMPONENT_RTP;
 using cricket::kFecSsrcGroupSemantics;
 using cricket::LOCAL_PORT_TYPE;
-using cricket::RELAY_PORT_TYPE;
-using cricket::SessionDescription;
 using cricket::MediaProtocolType;
+using cricket::RELAY_PORT_TYPE;
 using cricket::RidDescription;
 using cricket::RidDirection;
+using cricket::SessionDescription;
 using cricket::SimulcastDescription;
 using cricket::SimulcastLayer;
 using cricket::StreamParams;
@@ -70,6 +71,10 @@ using cricket::TransportDescription;
 using cricket::TransportInfo;
 using cricket::VideoCodec;
 using cricket::VideoContentDescription;
+using ::testing::AllOf;
+using ::testing::ElementsAre;
+using ::testing::Field;
+using ::testing::Property;
 using webrtc::IceCandidateCollection;
 using webrtc::IceCandidateInterface;
 using webrtc::JsepIceCandidate;
@@ -4317,4 +4322,24 @@ TEST_F(WebRtcSdpTest, SerializeSimulcast_ComplexSerialization) {
        SimulcastLayer("11", false)});
 
   TestSerialize(jdesc_);
+}
+
+// Test that the content name is filled in and the |has_mid()| property is false
+// if the media section does not have an a=mid line.
+TEST_F(WebRtcSdpTest, ParseNoMid) {
+  std::string sdp = kSdpString;
+  Replace("a=mid:audio_content_name\r\n", "", &sdp);
+  Replace("a=mid:video_content_name\r\n", "", &sdp);
+
+  JsepSessionDescription output(kDummyType);
+  SdpParseError error;
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error));
+
+  EXPECT_THAT(
+      output.description()->contents(),
+      ElementsAre(
+          AllOf(Field("name", &cricket::ContentInfo::name, "audio"),
+                Property("has_mid", &cricket::ContentInfo::has_mid, false)),
+          AllOf(Field("name", &cricket::ContentInfo::name, "video"),
+                Property("has_mid", &cricket::ContentInfo::has_mid, false))));
 }
