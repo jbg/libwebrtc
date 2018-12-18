@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "877f34a3_5ec6dd37",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-18T18:09:42Z",
+      "side": 1,
+      "message": "Wouldn\u0027t the registration of the receive side cc be lost for one way calls? (where we have no send streams)",
+      "range": {
+        "startLine": 508,
+        "startChar": 40,
+        "endLine": 508,
+        "endChar": 56
+      },
+      "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
