@@ -22,6 +22,30 @@
       "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "859133b0_0ca17d10",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-18T18:14:51Z",
+      "side": 1,
+      "message": "Maybe you just need to make sure that this part is done on Create*ReceiveStream if that\u0027s called first?",
+      "parentUuid": "877f34a3_5ec6dd37",
+      "range": {
+        "startLine": 508,
+        "startChar": 40,
+        "endLine": 508,
+        "endChar": 56
+      },
+      "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
