@@ -2233,6 +2233,61 @@ RTCError PeerConnection::ApplyLocalDescription(
   return RTCError::OK();
 }
 
+// Add valid MIDs from the local description if the remote description is
+// missing a=mid lines for one or more media sections. This is necessary since
+// much of the SDP handing code assumes that MIDs are valid and unique, but some
+// legacy clients do not support a=mid.
+static RTCError AdjustMidForUnifiedPlanRemoteDescription(
+    cricket::SessionDescription* remote_description,
+    const cricket::SessionDescription* local_description) {
+  RTC_DCHECK(remote_description);
+  const cricket::ContentInfos& local_contents =
+      (local_description ? local_description->contents()
+                         : cricket::ContentInfos());
+  bool any_mid = false;
+  int num_audio_no_mid = 0;
+  int num_video_no_mid = 0;
+  int num_data_no_mid = 0;
+  for (size_t i = 0; i < remote_description->contents().size(); ++i) {
+    cricket::ContentInfo& content = remote_description->contents()[i];
+    if (content.has_mid()) {
+      any_mid = true;
+      continue;
+    }
+    if (content.media_description()->type() == cricket::MEDIA_TYPE_AUDIO) {
+      ++num_audio_no_mid;
+    } else if (content.media_description()->type() ==
+               cricket::MEDIA_TYPE_VIDEO) {
+      ++num_video_no_mid;
+    } else {
+      ++num_data_no_mid;
+    }
+    if (i < local_contents.size()) {
+      content.name = local_contents[i].name;
+      remote_description->transport_infos()[i].content_name = content.name;
+    }
+  }
+  if (num_audio_no_mid > 0 || num_video_no_mid > 0 || num_data_no_mid > 0) {
+    if (remote_description->GetGroupByName(cricket::GROUP_TYPE_BUNDLE)) {
+      LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
+                           "BUNDLE is not supported if a=mid line is missing "
+                           "from any m= section.");
+    }
+    if (num_audio_no_mid > 1 || num_video_no_mid > 1 || num_data_no_mid > 1) {
+      LOG_AND_RETURN_ERROR(
+          RTCErrorType::INVALID_PARAMETER,
+          "m= sections without a=mid lines are only supported for at most 1 "
+          "audio, at most 1 video section and at most 1 data section.");
+    }
+    if (any_mid) {
+      LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_PARAMETER,
+                           "m= sections without a=mid lines cannot be mixed "
+                           "with m= sections with a=mid lines.");
+    }
+  }
+  return RTCError::OK();
+}
+
 void PeerConnection::SetRemoteDescription(
     SetSessionDescriptionObserver* observer,
     SessionDescriptionInterface* desc) {
@@ -2271,6 +2326,19 @@ void PeerConnection::SetRemoteDescription(
   if (desc->GetType() == SdpType::kOffer) {
     // Report to UMA the format of the received offer.
     ReportSdpFormatReceived(*desc);
+  }
+
+  // Handle remote descriptions missing a=mid lines for interop with legacy end
+  // points.
+  if (IsUnifiedPlan()) {
+    RTCError error = AdjustMidForUnifiedPlanRemoteDescription(
+        desc->description(),
+        local_description() ? local_description()->description() : nullptr);
+    if (!error.ok()) {
+      RTC_LOG(LS_ERROR) << "SetRemoteDescription: " << error.message();
+      observer->OnSetRemoteDescriptionComplete(std::move(error));
+      return;
+    }
   }
 
   RTCError error = ValidateSessionDescription(desc.get(), cricket::CS_REMOTE);
