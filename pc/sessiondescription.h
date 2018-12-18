@@ -364,6 +364,9 @@ struct ContentInfo {
   std::string mid() const { return name; }
   void set_mid(const std::string& mid) { this->name = mid; }
 
+  bool has_mid() const { return has_mid_; }
+  void set_has_mid(bool has_mid) { has_mid_ = has_mid; }
+
   // Alias for |description|.
   MediaContentDescription* media_description() { return description; }
   const MediaContentDescription* media_description() const {
@@ -381,6 +384,9 @@ struct ContentInfo {
   // TODO(bugs.webrtc.org/8620): Switch to the getter and setter, and make this
   // private.
   MediaContentDescription* description = nullptr;
+
+ private:
+  bool has_mid_ = true;
 };
 
 typedef std::vector<std::string> ContentNames;
@@ -459,6 +465,12 @@ class SessionDescription {
                   bool rejected,
                   MediaContentDescription* description);
   void AddContent(const std::string& name,
+                  MediaProtocolType type,
+                  bool rejected,
+                  bool bundle_only,
+                  MediaContentDescription* description);
+  void AddContent(const std::string& name,
+                  bool has_mid,
                   MediaProtocolType type,
                   bool rejected,
                   bool bundle_only,
