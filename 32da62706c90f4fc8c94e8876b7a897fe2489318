@@ -184,6 +184,30 @@
     },
     {
       "key": {
+        "uuid": "68ba102d_35603b0f",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "i was looking at this as well because i thought it might be unsafe and found this:\n\"A temporary created to hold a reference initializer persists until the end of its reference’s scope.\"\nwhich indicated that it should be ok.\nnevertheless, i agree that if both of us had doubts, that it is better for readablity to make a copy.",
+      "parentUuid": "ec329090_ae64db46",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 45
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "782c31e9_222d395e",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 2
@@ -231,6 +255,24 @@
       "side": 1,
       "message": "The first derived type is unexpected. However, now I see the comment you put in - could you consider changing the function to not take the same info twice, and we can remove this check?",
       "parentUuid": "c4035624_d99437ed",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "479333dd_b477d4a2",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "i will do this in a separate CL and send to you.",
+      "parentUuid": "1c61f728_4ced773d",
       "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -295,6 +337,30 @@
     },
     {
       "key": {
+        "uuid": "919c174a_0f2c2310",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fac4abdf_687f5c54",
+      "range": {
+        "startLine": 1272,
+        "startChar": 2,
+        "endLine": 1272,
+        "endChar": 12
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b23298_9718394c",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 2
@@ -315,6 +381,30 @@
       "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fc36721_633d5f1e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "in general i agree, but rid can originate from the user, so a DCHECK is not really sufficient for that. I added the DCHECK to alert developers/unit tests, but i have no guarantee that this won\u0027t really happen in release build.\ni do agree that sending half a rid is not a good solution. so i will remove the substring and make sure to also verify that rid length is validated when being input by the user.",
+      "parentUuid": "90b23298_9718394c",
+      "range": {
+        "startLine": 1273,
+        "startChar": 9,
+        "endLine": 1273,
+        "endChar": 19
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {

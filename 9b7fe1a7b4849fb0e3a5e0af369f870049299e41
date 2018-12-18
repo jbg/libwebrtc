@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5bbc9b79_dedc136a",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "Discussed F2F. ssrcs and rids are not really interchangeable. ssrcs are more rooted in the protocol (being an explicit part of the packet) vs. rids which are an extension and are more \u0027temporary\u0027 until a different identification mechanism is standardized.\nThe usage of ssrc is also not consistent with rids - rids will not always be there, and for the rtx scenario, the ssrc of the repair stream doesn\u0027t really have a rid equivalent (the protected ssrcs may have rid equivalents).",
+      "parentUuid": "1a5ba286_d79b0f58",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e20f773_0f6d0797",
         "filename": "call/rtp_config.h",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c584afd5_2f40159a",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "see other comment.",
+      "parentUuid": "7e20f773_0f6d0797",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "c5dfedde_dec20fe1",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "This happens on a call to SetSendParameters which is also called in SetRemoteContent on BaseChannel, so the same codepath will be called in SetLocalDescription.\nthe way Steve explained it to me yesterday is that you can\u0027t change anything in the video engine, and a new engine (/sender) gets recreated any time something changes. so it adds up that the ctor is called on SetRemoteDescription as well.",
+      "parentUuid": "bf71ab42_66a0d441",
+      "range": {
+        "startLine": 276,
+        "startChar": 2,
+        "endLine": 276,
+        "endChar": 15
+      },
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1e9df86_e70e3180",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
         "patchSetId": 3
@@ -73,6 +133,24 @@
       "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "910c3529_7c493a8e",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "it\u0027s part of the contract which makes it easy to define the header using the template syntax.\nMID uses a different syntax that forces the caller to know that the value size is BaseRtpStringExtension::kMaxValueSizeBytes\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?q\u003drtp_sender.cc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d78\n{RtpMid::kId, RtpMid::kMaxValueSizeBytes}.\n\nIt is also better to explicitly specify it here. For example, if we want to limit the size of rids to 3 bytes (i\u0027m not doing that now) then we just change this to 3, and:\n1. the code that validates IsRsidLegal (or similarly named) references this constant\n2. The code that allocates memory for header references this constant",
+      "parentUuid": "a1e9df86_e70e3180",
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "508d90be_74bd0b5e",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "Added a test to verify that these extensions are added.\nThe test made me question some of the implementation details in this class.\nspecifically, that if i call:\n1. set_video_rtp_header_extensions(extensions);\n2. x \u003d video_rtp_header_extensions();\nthen:\nextensions !\u003d x because this class adds extensions in the getter method.\nseems like the setter method is entirely for unit tests.",
+      "parentUuid": "c3cef925_6badaf17",
+      "range": {
+        "startLine": 1278,
+        "startChar": 12,
+        "endLine": 1278,
+        "endChar": 36
+      },
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d7cd756_9c01a266",
         "filename": "test/fuzzers/flexfec_sender_fuzzer.cc",
         "patchSetId": 3
@@ -119,6 +221,30 @@
       "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e0c9df1_67ece095",
+        "filename": "test/fuzzers/flexfec_sender_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T18:32:51Z",
+      "side": 1,
+      "message": "wow, good catch. Fixed.",
+      "parentUuid": "2d7cd756_9c01a266",
+      "range": {
+        "startLine": 39,
+        "startChar": 70,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
