@@ -305,6 +305,7 @@ static bool ParseContent(const std::string& message,
                          const std::vector<int>& payload_types,
                          size_t* pos,
                          std::string* content_name,
+                         bool* has_mid,
                          bool* bundle_only,
                          int* msid_signaling,
                          MediaContentDescription* media_desc,
@@ -2547,6 +2548,7 @@ static C* ParseContentDescription(const std::string& message,
                                   const std::vector<int>& payload_types,
                                   size_t* pos,
                                   std::string* content_name,
+                                  bool* has_mid,
                                   bool* bundle_only,
                                   int* msid_signaling,
                                   TransportDescription* transport,
@@ -2568,8 +2570,8 @@ static C* ParseContentDescription(const std::string& message,
       break;
   }
   if (!ParseContent(message, media_type, mline_index, protocol, payload_types,
-                    pos, content_name, bundle_only, msid_signaling, media_desc,
-                    transport, candidates, error)) {
+                    pos, content_name, has_mid, bundle_only, msid_signaling,
+                    media_desc, transport, candidates, error)) {
     delete media_desc;
     return nullptr;
   }
@@ -2660,23 +2662,24 @@ bool ParseMediaDescription(const std::string& message,
 
     std::unique_ptr<MediaContentDescription> content;
     std::string content_name;
+    bool has_mid = false;
     bool bundle_only = false;
     int section_msid_signaling = 0;
     if (HasAttribute(line, kMediaTypeVideo)) {
       content.reset(ParseContentDescription<VideoContentDescription>(
           message, cricket::MEDIA_TYPE_VIDEO, mline_index, protocol,
-          payload_types, pos, &content_name, &bundle_only,
+          payload_types, pos, &content_name, &has_mid, &bundle_only,
           &section_msid_signaling, &transport, candidates, error));
     } else if (HasAttribute(line, kMediaTypeAudio)) {
       content.reset(ParseContentDescription<AudioContentDescription>(
           message, cricket::MEDIA_TYPE_AUDIO, mline_index, protocol,
-          payload_types, pos, &content_name, &bundle_only,
+          payload_types, pos, &content_name, &has_mid, &bundle_only,
           &section_msid_signaling, &transport, candidates, error));
     } else if (HasAttribute(line, kMediaTypeData)) {
       DataContentDescription* data_desc =
           ParseContentDescription<DataContentDescription>(
               message, cricket::MEDIA_TYPE_DATA, mline_index, protocol,
-              payload_types, pos, &content_name, &bundle_only,
+              payload_types, pos, &content_name, &has_mid, &bundle_only,
               &section_msid_signaling, &transport, candidates, error);
       content.reset(data_desc);
 
@@ -2913,6 +2916,7 @@ bool ParseContent(const std::string& message,
                   const std::vector<int>& payload_types,
                   size_t* pos,
                   std::string* content_name,
+                  bool* has_mid,
                   bool* bundle_only,
                   int* msid_signaling,
                   MediaContentDescription* media_desc,
@@ -2921,6 +2925,7 @@ bool ParseContent(const std::string& message,
                   SdpParseError* error) {
   RTC_DCHECK(media_desc != NULL);
   RTC_DCHECK(content_name != NULL);
+  RTC_DCHECK(has_mid != NULL);
   RTC_DCHECK(transport != NULL);
 
   if (media_type == cricket::MEDIA_TYPE_AUDIO) {
@@ -3025,6 +3030,7 @@ bool ParseContent(const std::string& message,
         return false;
       }
       *content_name = mline_id;
+      *has_mid = true;
     } else if (HasAttribute(line, kAttributeBundleOnly)) {
       *bundle_only = true;
     } else if (HasAttribute(line, kAttributeCandidate)) {

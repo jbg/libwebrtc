@@ -1604,4 +1604,35 @@ TEST_F(PeerConnectionJsepTest, OneVideoUnifiedPlanToTwoVideoPlanBFails) {
   EXPECT_EQ(RTCErrorType::INVALID_PARAMETER, error.type());
 }
 
+static void ClearMids(SessionDescriptionInterface* sdesc) {
+  cricket::SessionDescription* desc = sdesc->description();
+  desc->RemoveGroupByName(cricket::GROUP_TYPE_BUNDLE);
+  cricket::ContentInfo* audio_content = cricket::GetFirstAudioContent(desc);
+  if (audio_content) {
+    desc->GetTransportInfoByName(audio_content->name)->content_name = "audio";
+    audio_content->name = "audio";
+    audio_content->set_has_mid(false);
+  }
+  cricket::ContentInfo* video_content = cricket::GetFirstVideoContent(desc);
+  if (video_content) {
+    desc->GetTransportInfoByName(video_content->name)->content_name = "video";
+    video_content->name = "video";
+    video_content->set_has_mid(false);
+  }
+}
+
+TEST_F(PeerConnectionJsepTest, LegacyAudioOnlyNoMidAnswer) {
+  auto caller = CreatePeerConnection();
+  caller->AddAudioTrack("audio");
+  auto callee = CreatePeerConnection();
+  caller->AddAudioTrack("audio");
+
+  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
+
+  auto answer = callee->CreateAnswer();
+  ClearMids(answer.get());
+
+  ASSERT_TRUE(caller->SetRemoteDescription(std::move(answer)));
+}
+
 }  // namespace webrtc

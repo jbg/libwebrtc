@@ -177,6 +177,21 @@ void SessionDescription::AddContent(const std::string& name,
   AddContent(&content);
 }
 
+void SessionDescription::AddContent(const std::string& name,
+                                    bool has_mid,
+                                    MediaProtocolType type,
+                                    bool rejected,
+                                    bool bundle_only,
+                                    MediaContentDescription* description) {
+  ContentInfo content(type);
+  content.name = name;
+  content.set_has_mid(has_mid);
+  content.rejected = rejected;
+  content.bundle_only = bundle_only;
+  content.description = description;
+  AddContent(&content);
+}
+
 void SessionDescription::AddContent(ContentInfo* content) {
   if (extmap_allow_mixed()) {
     // Mixed support on session level overrides setting on media level.
