@@ -46,6 +46,30 @@
       "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f315692_57d08f6e",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-18T18:24:59Z",
+      "side": 1,
+      "message": "fair point - in such scenario call object doesn\u0027t know if media transport is used. \n\nI\u0027ll revisit if I can let \u0027Call\u0027 know from peer connection when we know for sure whether media transport is used or not.",
+      "parentUuid": "877f34a3_5ec6dd37",
+      "range": {
+        "startLine": 508,
+        "startChar": 40,
+        "endLine": 508,
+        "endChar": 56
+      },
+      "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
