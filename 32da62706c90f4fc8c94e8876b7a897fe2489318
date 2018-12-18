@@ -161,6 +161,29 @@
     },
     {
       "key": {
+        "uuid": "ec329090_ae64db46",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-18T09:16:56Z",
+      "side": 1,
+      "message": "That looks unsafe when protected_rids.empty()\ngo/totw/157\nconsider copy or if else block together with changing rid type to absl::string_view",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 45
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "782c31e9_222d395e",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 2
@@ -243,6 +266,75 @@
       "side": 1,
       "message": "rids do not necessarily need to be specified, but ssrcs do. so the conditions that should be verified are:\nrids.empty() || rids.size() \u003d\u003d ssrcs.size()\nrids.empty() || rids.size() \u003d\u003d modules.size()\n\nand then we can get rid of the if statement. i felt that early termination was more clear. i will change to remove the if statement.",
       "parentUuid": "c1b3ff37_5a4be5ee",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fac4abdf_687f5c54",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-18T09:16:56Z",
+      "side": 1,
+      "message": "RTC_DCHECK_LE",
+      "range": {
+        "startLine": 1272,
+        "startChar": 2,
+        "endLine": 1272,
+        "endChar": 12
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90b23298_9718394c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-18T09:16:56Z",
+      "side": 1,
+      "message": "DCHECK means it should never happen, you do not need to recover from it.\n\nbesides, sending half of rid is probably worse than not sending it at all (or sending over-large rsid)",
+      "range": {
+        "startLine": 1273,
+        "startChar": 9,
+        "endLine": 1273,
+        "endChar": 19
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db11770_872aa226",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1427,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-18T09:16:56Z",
+      "side": 1,
+      "message": "suggestion:\ntry\nEXPECT_EQ(rtx_packet.GetExtension\u003cRepairedRtpStreamId\u003e(), kRid)",
+      "range": {
+        "startLine": 1426,
+        "startChar": 2,
+        "endLine": 1427,
+        "endChar": 23
+      },
       "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
