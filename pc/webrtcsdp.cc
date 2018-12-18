@@ -2550,20 +2550,6 @@ static std::unique_ptr<C> ParseContentDescription(
     std::vector<std::unique_ptr<JsepIceCandidate>>* candidates,
     webrtc::SdpParseError* error) {
   auto media_desc = absl::make_unique<C>();
-  switch (media_type) {
-    case cricket::MEDIA_TYPE_AUDIO:
-      *content_name = cricket::CN_AUDIO;
-      break;
-    case cricket::MEDIA_TYPE_VIDEO:
-      *content_name = cricket::CN_VIDEO;
-      break;
-    case cricket::MEDIA_TYPE_DATA:
-      *content_name = cricket::CN_DATA;
-      break;
-    default:
-      RTC_NOTREACHED();
-      break;
-  }
   if (!ParseContent(message, media_type, mline_index, protocol, payload_types,
                     pos, content_name, bundle_only, msid_signaling,
                     media_desc.get(), transport, candidates, error)) {

@@ -200,7 +200,8 @@ bool SessionDescription::RemoveContentByName(const std::string& name) {
 }
 
 bool SessionDescription::AddTransportInfo(const TransportInfo& transport_info) {
-  if (GetTransportInfoByName(transport_info.content_name) != NULL) {
+  if (!transport_info.content_name.empty() &&
+      GetTransportInfoByName(transport_info.content_name) != NULL) {
     return false;
   }
   transport_infos_.push_back(transport_info);

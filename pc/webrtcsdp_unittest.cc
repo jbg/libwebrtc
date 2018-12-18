@@ -38,6 +38,7 @@
 #include "rtc_base/sslfingerprint.h"
 #include "rtc_base/stringencode.h"
 #include "rtc_base/stringutils.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 
 #ifdef WEBRTC_ANDROID
@@ -48,20 +49,20 @@
 using cricket::AudioCodec;
 using cricket::AudioContentDescription;
 using cricket::Candidate;
+using cricket::ContentGroup;
 using cricket::ContentInfo;
 using cricket::CryptoParams;
-using cricket::ContentGroup;
 using cricket::DataCodec;
 using cricket::DataContentDescription;
 using cricket::ICE_CANDIDATE_COMPONENT_RTCP;
 using cricket::ICE_CANDIDATE_COMPONENT_RTP;
 using cricket::kFecSsrcGroupSemantics;
 using cricket::LOCAL_PORT_TYPE;
-using cricket::RELAY_PORT_TYPE;
-using cricket::SessionDescription;
 using cricket::MediaProtocolType;
+using cricket::RELAY_PORT_TYPE;
 using cricket::RidDescription;
 using cricket::RidDirection;
+using cricket::SessionDescription;
 using cricket::SimulcastDescription;
 using cricket::SimulcastLayer;
 using cricket::StreamParams;
@@ -70,6 +71,8 @@ using cricket::TransportDescription;
 using cricket::TransportInfo;
 using cricket::VideoCodec;
 using cricket::VideoContentDescription;
+using ::testing::ElementsAre;
+using ::testing::Field;
 using webrtc::IceCandidateCollection;
 using webrtc::IceCandidateInterface;
 using webrtc::JsepIceCandidate;
@@ -2450,9 +2453,7 @@ TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithoutRtpmap) {
   JsepSessionDescription jdesc(kDummyType);
   EXPECT_TRUE(SdpDeserialize(kSdpNoRtpmapString, &jdesc));
   cricket::AudioContentDescription* audio =
-      jdesc.description()
-          ->GetContentDescriptionByName(cricket::CN_AUDIO)
-          ->as_audio();
+      cricket::GetFirstAudioContentDescription(jdesc.description());
   AudioCodecs ref_codecs;
   // The codecs in the AudioContentDescription should be in the same order as
   // the payload types (<fmt>s) on the m= line.
@@ -2475,9 +2476,7 @@ TEST_F(WebRtcSdpTest, DeserializeSessionDescriptionWithoutRtpmapButWithFmtp) {
   JsepSessionDescription jdesc(kDummyType);
   EXPECT_TRUE(SdpDeserialize(kSdpNoRtpmapString, &jdesc));
   cricket::AudioContentDescription* audio =
-      jdesc.description()
-          ->GetContentDescriptionByName(cricket::CN_AUDIO)
-          ->as_audio();
+      cricket::GetFirstAudioContentDescription(jdesc.description());
 
   cricket::AudioCodec g729 = audio->codecs()[0];
   EXPECT_EQ("G729", g729.name);
@@ -3074,15 +3073,11 @@ TEST_F(WebRtcSdpTest, DeserializeSdpWithConferenceFlag) {
 
   // Verify
   cricket::AudioContentDescription* audio =
-      jdesc.description()
-          ->GetContentDescriptionByName(cricket::CN_AUDIO)
-          ->as_audio();
+      cricket::GetFirstAudioContentDescription(jdesc.description());
   EXPECT_TRUE(audio->conference_mode());
 
   cricket::VideoContentDescription* video =
-      jdesc.description()
-          ->GetContentDescriptionByName(cricket::CN_VIDEO)
-          ->as_video();
+      cricket::GetFirstVideoContentDescription(jdesc.description());
   EXPECT_TRUE(video->conference_mode());
 }
 
@@ -3097,15 +3092,11 @@ TEST_F(WebRtcSdpTest, SerializeSdpWithConferenceFlag) {
 
   // Verify.
   cricket::AudioContentDescription* audio =
-      jdesc.description()
-          ->GetContentDescriptionByName(cricket::CN_AUDIO)
-          ->as_audio();
+      cricket::GetFirstAudioContentDescription(jdesc.description());
   EXPECT_TRUE(audio->conference_mode());
 
   cricket::VideoContentDescription* video =
-      jdesc.description()
-          ->GetContentDescriptionByName(cricket::CN_VIDEO)
-          ->as_video();
+      cricket::GetFirstVideoContentDescription(jdesc.description());
   EXPECT_TRUE(video->conference_mode());
 }
 
@@ -4317,4 +4308,20 @@ TEST_F(WebRtcSdpTest, SerializeSimulcast_ComplexSerialization) {
        SimulcastLayer("11", false)});
 
   TestSerialize(jdesc_);
+}
+
+// Test that the content name is filled in and the |has_mid()| property is false
+// if the media section does not have an a=mid line.
+TEST_F(WebRtcSdpTest, ParseNoMid) {
+  std::string sdp = kSdpString;
+  Replace("a=mid:audio_content_name\r\n", "", &sdp);
+  Replace("a=mid:video_content_name\r\n", "", &sdp);
+
+  JsepSessionDescription output(kDummyType);
+  SdpParseError error;
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error));
+
+  EXPECT_THAT(output.description()->contents(),
+              ElementsAre(Field("name", &cricket::ContentInfo::name, ""),
+                          Field("name", &cricket::ContentInfo::name, "")));
 }
