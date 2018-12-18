@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f445809_c4357ca2",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T23:36:47Z",
+      "side": 1,
+      "message": "couple of things i notice here:\n1. There is no code enforcing that mid will not be more than 3 bytes long.\n2. might be able to reduce complexity from n*logn (n \u003d |used_mids|) to n by looking for Max mid and incrementing that, rather than starting from 0. (logn actually depends on implementation of set, it could be 1 in a hashset)\nThis might not be very relevant if the number of media sections is relatively small.\notherwise, assuming that mids are either always set or never set, then in the latter case, when you have to set n mids, the complexity will be n^2*log(n) because each insert is n*log(n) and there are n inserts.",
+      "range": {
+        "startLine": 658,
+        "startChar": 1,
+        "endLine": 659,
+        "endChar": 0
+      },
+      "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e66940f_138d9605",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T23:36:47Z",
+      "side": 1,
+      "message": "general tip. reduce nesting by inverting if statements such as these.\nif (!content.name.empty()) continue;",
+      "range": {
+        "startLine": 2280,
+        "startChar": 8,
+        "endLine": 2280,
+        "endChar": 28
+      },
+      "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7abb95b_241a49bf",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T23:36:47Z",
+      "side": 1,
+      "message": "No change required for this review, but start thinking in terms of strategies, even if they are local to this class. example:\ncreate two functor objects for creating new mids. one for UnifiedPlan one for Plan-B\nuse a factory method to return one of two functors depending on the sdp-semantics.\ncall the functor object.\nnew_mid \u003d mid_creator();\n\nThe mid_creator can be a closure holding the allocated mids, etc. depending on the used semantics, so you don\u0027t need to keep passing them in.\nthe mid_creator can also log that a mid was created along with the explanation.\n\nthis will greatly simplify this method which will no longer need heavily nested logic, and tracing for which codepath was used.\n\nfeel free to mark as resolved after reading (no change required).",
+      "range": {
+        "startLine": 2283,
+        "startChar": 0,
+        "endLine": 2294,
+        "endChar": 7
+      },
+      "revId": "92d454ee397c66d67ffdf347188659963d9de0c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
