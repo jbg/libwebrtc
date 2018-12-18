@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4643392d_2a9e76d4",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:09:26Z",
+      "side": 1,
+      "message": "Ah that\u0027s right, I should probably document how SLD/SRD affects the media channel parameters \u0026 recreation.",
+      "parentUuid": "c5dfedde_dec20fe1",
+      "range": {
+        "startLine": 276,
+        "startChar": 2,
+        "endLine": 276,
+        "endChar": 15
+      },
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1e9df86_e70e3180",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
         "patchSetId": 3
@@ -189,6 +213,30 @@
       "side": 1,
       "message": "Added a test to verify that these extensions are added.\nThe test made me question some of the implementation details in this class.\nspecifically, that if i call:\n1. set_video_rtp_header_extensions(extensions);\n2. x \u003d video_rtp_header_extensions();\nthen:\nextensions !\u003d x because this class adds extensions in the getter method.\nseems like the setter method is entirely for unit tests.",
       "parentUuid": "c3cef925_6badaf17",
+      "range": {
+        "startLine": 1278,
+        "startChar": 12,
+        "endLine": 1278,
+        "endChar": 36
+      },
+      "revId": "9b7fe1a7b4849fb0e3a5e0af369f870049299e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a524d8f7_cdb96c0a",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T19:09:26Z",
+      "side": 1,
+      "message": "Code smell 💩",
+      "parentUuid": "508d90be_74bd0b5e",
       "range": {
         "startLine": 1278,
         "startChar": 12,
