@@ -25,6 +25,75 @@
     },
     {
       "key": {
+        "uuid": "62cc139c_2743b200",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T20:44:09Z",
+      "side": 1,
+      "message": "worthwhile adding RTC_DCHECK(is_unified_plan_)",
+      "range": {
+        "startLine": 2243,
+        "startChar": 2,
+        "endLine": 2243,
+        "endChar": 12
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87ac8e56_b1cdcb20",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T20:44:09Z",
+      "side": 1,
+      "message": "this is somewhat leaking / breaking encapsulation.\nyou are aware of how the remote description\u0027s transport_infos use the content name.\nsomewhat better is: content-\u003eSetName() but i am aware that transport infos are stored next to it.\nso, perhaps, remote_description-\u003eSetMid(index, mid) can:\n1. set the name of the content at the index.\n2. set the content_name of the transport at the index.",
+      "range": {
+        "startLine": 2267,
+        "startChar": 24,
+        "endLine": 2267,
+        "endChar": 46
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45c37d14_2be492b9",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T20:44:09Z",
+      "side": 1,
+      "message": "Can you please explain why this is a restriction? multiple sections without mid can still work if the remote can resolve the RtpStream ssrc to the correct media section.\nIf you accept this comment, you can significantly reduce the complexity of the code above to stop distinguishing between the different types of media sections.",
+      "range": {
+        "startLine": 2279,
+        "startChar": 10,
+        "endLine": 2280,
+        "endChar": 72
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9748b9f7_1b9544bf",
         "filename": "pc/peerconnection_jsep_unittest.cc",
         "patchSetId": 5
@@ -110,6 +179,53 @@
         "startChar": 2,
         "endLine": 389,
         "endChar": 15
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28a95fdf_bf48c28d",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T20:44:09Z",
+      "side": 1,
+      "message": "I thought we wanted to remove the default mid assignment in the parser and that has_mid is true iff mid is not empty.",
+      "parentUuid": "d987f2f9_fed9c57a",
+      "range": {
+        "startLine": 389,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 15
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f569632_d0e7a7a5",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-18T20:44:09Z",
+      "side": 1,
+      "message": "you are trying to confuse me here, but i remember that name is an alias for mid ;)\nDoes it make sense to have a method that accepts a mid and also a boolean indicating if the mid is there or not?\nreasonable compromise - when adding content, name should be either empty or a valid value. if name is empty, then this method can set a default name based on the content type and store the has_mid value as false.",
+      "range": {
+        "startLine": 472,
+        "startChar": 18,
+        "endLine": 473,
+        "endChar": 30
       },
       "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
