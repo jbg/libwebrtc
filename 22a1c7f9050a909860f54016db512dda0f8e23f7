@@ -22,6 +22,30 @@
       "revId": "22a1c7f9050a909860f54016db512dda0f8e23f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65741750_da4b9fb6",
+        "filename": "common_video/incoming_video_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-18T10:06:10Z",
+      "side": 1,
+      "message": "Following the style used in other places for this, (which was per his suggestion, IIRC)",
+      "parentUuid": "93ada482_84738ea6",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 21
+      },
+      "revId": "22a1c7f9050a909860f54016db512dda0f8e23f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
