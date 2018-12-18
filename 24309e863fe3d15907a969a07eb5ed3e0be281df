@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "9d076313_d8701d4c",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-12-18T22:58:02Z",
+      "side": 1,
+      "message": "If we don\u0027t have mid, we know these sections are not bundled (because bundle depends on mid), so we know that each media section has its streams on a separate RTP transport. I don\u0027t know if we can use that to our advantage here.",
+      "parentUuid": "45c37d14_2be492b9",
+      "range": {
+        "startLine": 2279,
+        "startChar": 10,
+        "endLine": 2280,
+        "endChar": 72
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9748b9f7_1b9544bf",
         "filename": "pc/peerconnection_jsep_unittest.cc",
         "patchSetId": 5
@@ -205,6 +229,40 @@
         "endLine": 1701,
         "endChar": 0
       },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdab5380_56f8edf2",
+        "filename": "pc/sessiondescription.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-12-18T22:58:02Z",
+      "side": 1,
+      "message": "you could use rtc::optional\u003cstd::string\u003e for the mid....",
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f41d25e_36766d23",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2018-12-18T22:58:02Z",
+      "side": 1,
+      "message": "is there a reason why this writer can\u0027t set has_mid_ to true?\nit would seem to remove a source of inconsistency.",
       "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
