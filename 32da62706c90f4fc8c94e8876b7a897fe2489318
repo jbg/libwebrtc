@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9d0e6d02_8d8aa015",
+        "filename": "api/rtpparameters.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-18T08:04:26Z",
+      "side": 1,
+      "message": "Sorry, didn\u0027t notice it was moved.",
+      "parentUuid": "66a8130e_c0c6b2ce",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb2064d2_6905a850",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 2
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "There is some information leaking here, regarding the interaction between audio_send_stream and ChannelSendInterface. what this class is supposed to do is:\n1. unregister anything currently associated with new_ids.rid (and new_ids.repaired_rid).\n2. register new_ids.rid (and repaired) with the rid extensions.\n3. Set the value of the rid.\n4. unregister old_ids.rid if it is registered to the rid extension.\n\nwhat this class actually accomplishes is 1-3. 4 is either assumed to not matter anymore (if it is no longer used), or it is assumed that registering a new extension with the same id will unregister the current value as in step 1.\n\nthese steps are accomplished in channel_send_interface, so we want to forward a call if anything has changed, regardless of if the rid is empty or not, because performing these steps is still relevant (ex: unregistering previous extensions, removing the rid if it became empty).",
       "parentUuid": "bb2064d2_6905a850",
+      "range": {
+        "startLine": 291,
+        "startChar": 44,
+        "endLine": 291,
+        "endChar": 47
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c5349eb_fd4809d1",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-18T08:04:26Z",
+      "side": 1,
+      "message": "OK, sgtm.\n\nNote that the goal is to move the ChannelSend functionality into AudioSendStream so we don\u0027t have two classes and somewhat strange interactions.",
+      "parentUuid": "c63515d5_98515fd5",
       "range": {
         "startLine": 291,
         "startChar": 44,
@@ -148,6 +190,24 @@
       "side": 1,
       "message": "unfortunately, that didn\u0027t compile/work when i tried it. I suspect it has to do with the vector container, although i don\u0027t fully understand why that doesn\u0027t work when \u003d\u003d does.\n\nerror: invalid operands to binary expression (\u0027rtc::webrtc_checks_impl::LogStreamer\u003c\u003e\u0027 and \u0027const std::vector\u003cuint32_t\u003e\u0027 (aka \u0027const vector\u003cunsigned int\u003e\u0027))\n  RTC_DCHECK_EQ(ssrcs, rtp_config.ssrcs);",
       "parentUuid": "782c31e9_222d395e",
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c61f728_4ced773d",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2018-12-18T08:04:26Z",
+      "side": 1,
+      "message": "The first derived type is unexpected. However, now I see the comment you put in - could you consider changing the function to not take the same info twice, and we can remove this check?",
+      "parentUuid": "c4035624_d99437ed",
       "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
