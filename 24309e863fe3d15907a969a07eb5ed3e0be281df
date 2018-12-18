@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "147b238b_c06be7e4",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T23:44:26Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "04ac36a4_a55e1540",
+      "range": {
+        "startLine": 2238,
+        "startChar": 19,
+        "endLine": 2238,
+        "endChar": 26
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62cc139c_2743b200",
         "filename": "pc/peerconnection.cc",
         "patchSetId": 5
@@ -316,6 +340,30 @@
     },
     {
       "key": {
+        "uuid": "e25ad6eb_18b6c0ce",
+        "filename": "pc/sessiondescription.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T23:44:26Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "28a95fdf_bf48c28d",
+      "range": {
+        "startLine": 389,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 15
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f569632_d0e7a7a5",
         "filename": "pc/sessiondescription.h",
         "patchSetId": 5
@@ -359,6 +407,30 @@
       "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4854d7f9_db313e7c",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4343,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T23:44:26Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "f12a5c14_ea0f86a1",
+      "range": {
+        "startLine": 4343,
+        "startChar": 36,
+        "endLine": 4343,
+        "endChar": 73
+      },
+      "revId": "24309e863fe3d15907a969a07eb5ed3e0be281df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

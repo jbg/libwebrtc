@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c682b2c_c5cfdfb3",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T23:44:26Z",
+      "side": 1,
+      "message": "Should we update AddTransportOffer/Answer to return void?",
+      "range": {
+        "startLine": 1806,
+        "startChar": 2,
+        "endLine": 1806,
+        "endChar": 14
+      },
+      "revId": "7f87814c7f7d1a93876b6009bbd358ede7d0eba3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "812b3d02_7cf071de",
+        "filename": "pc/webrtcsdp_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 4314,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2018-12-18T23:44:26Z",
+      "side": 1,
+      "message": "Comment needs to be updated.",
+      "range": {
+        "startLine": 4313,
+        "startChar": 0,
+        "endLine": 4314,
+        "endChar": 52
+      },
+      "revId": "7f87814c7f7d1a93876b6009bbd358ede7d0eba3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
