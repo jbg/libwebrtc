@@ -208,6 +208,30 @@
     },
     {
       "key": {
+        "uuid": "ea9ca698_c9903a50",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "The note you found applies to this case:\nconst string\u0026 temp \u003d \"\";\n\nbut because of ?: operator scope for the temporary is much shorter than it seems.\n\ncopy is good and most safe.\n\nanother alternative is to explicitly increase scope for the temporary:\nconst std::string empty_string;\nconst std::string\u0026 rid \u003d ...empty() ? empty_string : rtp.flecfec.protected_rids[0];",
+      "parentUuid": "68ba102d_35603b0f",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 45
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "782c31e9_222d395e",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 2
@@ -396,6 +420,30 @@
       "side": 1,
       "message": "in general i agree, but rid can originate from the user, so a DCHECK is not really sufficient for that. I added the DCHECK to alert developers/unit tests, but i have no guarantee that this won\u0027t really happen in release build.\ni do agree that sending half a rid is not a good solution. so i will remove the substring and make sure to also verify that rid length is validated when being input by the user.",
       "parentUuid": "90b23298_9718394c",
+      "range": {
+        "startLine": 1273,
+        "startChar": 9,
+        "endLine": 1273,
+        "endChar": 19
+      },
+      "revId": "32da62706c90f4fc8c94e8876b7a897fe2489318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4045ad9f_d2ba3541",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "https://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md#check_dcheck_and-notreached\n\n\"A consequence of this is that you should not handle DCHECK() failures, even if failure would result in a crash.\"",
+      "parentUuid": "6fc36721_633d5f1e",
       "range": {
         "startLine": 1273,
         "startChar": 9,

@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "606919e1_36c14066",
+        "filename": "modules/rtp_rtcp/include/flexfec_sender.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "May be rid should be logically placed after mid\nsince rtp stream first identified by mid (if any), then, within that mid - by rid",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3aad5f56_d89f204e",
+        "filename": "modules/rtp_rtcp/source/flexfec_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "for current implementation of the flexfec (that protect only single ssrc) that make sense,\nbut what value would repared rtp stream id take when flexfec is expanded to mix packets from different ssrcs, different rtp streams?",
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a578ab3_b9eb5976",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "kValueSizeBytes defined for extensions that always use same size (few years ago there were no other extensions, so back then it seemed like a good idea)\nPlease prefer different name (e.g. kMaxValueSizeBytes, like Mid uses)\n\nhaving this constants defined enables functionality that shouldn\u0027t be enabled for dynamic size extensions. (e.g. RtpPacket::ReserveExtension)",
+      "range": {
+        "startLine": 251,
+        "startChar": 27,
+        "endLine": 251,
+        "endChar": 42
+      },
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf32a5e6_554ab052",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1271,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "\"avoid comments that just repeat what the code does\"\nhttps://testing.googleblog.com/2017/07/code-health-to-comment-or-not-to-comment.html",
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "492bc891_ef5670ef",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "rid points to the rtx stream (not to the original media stream)\nrepaired rid describes what media stream current packet repairs.\n\nSo my understanding is that rid shouldn\u0027t be copied into into rtx packets as rid extension, but as repaired rid. In additional a different rid value might be used just for the rid extension in an rtx packet.",
+      "range": {
+        "startLine": 1368,
+        "startChar": 4,
+        "endLine": 1368,
+        "endChar": 62
+      },
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85ac8ab0_4eb27b0d",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "avoid for loops in tests. (if an expect below fails, how would you know if it is 1st packet or 2nd one?)\n\nIn this test I\u0027m not sure why is it helpful to check two packets. one probably is enough.\n\n(I see Mid test above uses same loop, but I find it a bad example, against http://go/unit-test-practices#control-structures)",
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e02130ea_ccb8081c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1426,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "as mentioned in one of previous comments,\n\nI would also \nEXPECT_FALSE(rtx_packet.HasExtension\u003cRtpStreamId\u003e());\n\n(or rtp_sender should be configured with an extra rid for the rtx stream)",
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a55e749_fd01b001",
+        "filename": "pc/mediasession.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "while moving it out may be also simplify this code, instead of push_back(T(a, b)) use emplace_back(a, b):\n\nextensions-\u003eemplace_back(\n      webrtc::RtpExtension::kMidUri, webrtc::RtpExtension::kMidDefaultId);",
+      "range": {
+        "startLine": 1281,
+        "startChar": 2,
+        "endLine": 1282,
+        "endChar": 75
+      },
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "780e1ba2_1b837361",
+        "filename": "pc/mediasession_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3719,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-19T10:01:49Z",
+      "side": 1,
+      "message": "just curious, what is use case of rid for audio?\n(I understand rid for video is used for simulcast)",
+      "range": {
+        "startLine": 3719,
+        "startChar": 43,
+        "endLine": 3719,
+        "endChar": 77
+      },
+      "revId": "868d0e5a42f4805138747407eafca7c7579f1114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
