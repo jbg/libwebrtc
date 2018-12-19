@@ -273,6 +273,7 @@ if (is_android) {
     java_files = [
       "api/org/webrtc/audio/LegacyAudioDeviceModule.java",
       "api/org/webrtc/AudioProcessingFactory.java",
+      "api/org/webrtc/AudioSink.java",
       "api/org/webrtc/AudioSource.java",
       "api/org/webrtc/AudioTrack.java",
       "api/org/webrtc/CallSessionFileRotatingLogSink.java",
@@ -532,6 +533,8 @@ if (is_android) {
       "src/jni/androidmediaencoder.cc",
       "src/jni/androidvideotracksource.cc",
       "src/jni/androidvideotracksource.h",
+      "src/jni/audiosink.cc",
+      "src/jni/audiosink.h",
       "src/jni/encodedimage.cc",
       "src/jni/encodedimage.h",
       "src/jni/h264utils.cc",
@@ -1117,6 +1120,7 @@ if (is_android) {
 
   generate_jni("generated_video_jni") {
     sources = [
+      "api/org/webrtc/AudioSink.java",
       "api/org/webrtc/EncodedImage.java",
       "api/org/webrtc/JavaI420Buffer.java",
       "api/org/webrtc/MediaCodecVideoDecoder.java",
@@ -1171,6 +1175,7 @@ if (is_android) {
 
   generate_jni("generated_peerconnection_jni") {
     sources = [
+      "api/org/webrtc/AudioSink.java",
       "api/org/webrtc/AudioTrack.java",
       "api/org/webrtc/CallSessionFileRotatingLogSink.java",
       "api/org/webrtc/DataChannel.java",

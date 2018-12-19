@@ -457,6 +457,11 @@ void ChannelSend::Terminate() {
   // End of modules shutdown
 }
 
+void ChannelSend::SetSink(AudioSinkInterface* sink) {
+  rtc::CritScope cs(&_callbackCritSect);
+  audio_sink_ = sink;
+}
+
 int32_t ChannelSend::StartSend() {
   if (channel_state_.Get().sending) {
     return 0;
@@ -905,6 +910,17 @@ void ChannelSend::ProcessAndEncodeAudioOnTaskQueue(AudioFrame* audio_input) {
   if (audio_coding_->Add10MsData(*audio_input) < 0) {
     RTC_DLOG(LS_ERROR) << "ACM::Add10MsData() failed.";
     return;
+  }
+
+  {
+    rtc::CritScope cs(&_callbackCritSect);
+    if (audio_sink_) {
+      AudioSinkInterface::Data data(
+          audio_input->data(), audio_input->samples_per_channel_,
+          audio_input->sample_rate_hz_, audio_input->num_channels_,
+          audio_input->timestamp_);
+      audio_sink_->OnData(data);
+    }
   }
 
   _timeStamp += static_cast<uint32_t>(audio_input->samples_per_channel_);

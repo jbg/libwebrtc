@@ -855,9 +855,16 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
       RTC_DCHECK(source_ == source);
       return;
     }
-    source->SetSink(this);
     source_ = source;
     UpdateSendState();
+  }
+
+  void SetRawAudioSink(std::unique_ptr<webrtc::AudioSinkInterface> sink) {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    // Need to update the stream's sink first; once raw_audio_sink_ is
+    // reassigned, whatever was in there before is destroyed.
+    stream_->SetSink(sink.get());
+    raw_audio_sink_ = std::move(sink);
   }
 
   // Stops sending by setting the sink of the AudioSource to nullptr. No data
@@ -1061,6 +1068,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
   int max_send_bitrate_bps_;
   webrtc::RtpParameters rtp_parameters_;
   absl::optional<webrtc::AudioCodecSpec> audio_codec_spec_;
+  std::unique_ptr<webrtc::AudioSinkInterface> raw_audio_sink_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WebRtcAudioSendStream);
 };
@@ -2252,6 +2260,14 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
     }
     default_sink_ = std::move(sink);
     return;
+  }
+
+  {
+    const auto it = send_streams_.find(ssrc);
+    if (it != send_streams_.end()) {
+      it->second->SetRawAudioSink(std::move(sink));
+      return;
+    }
   }
   const auto it = recv_streams_.find(ssrc);
   if (it == recv_streams_.end()) {

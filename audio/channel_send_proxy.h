@@ -23,6 +23,7 @@
 
 namespace webrtc {
 
+class AudioSinkInterface;
 class FrameEncryptorInterface;
 class RtcpBandwidthObserver;
 class RtpRtcp;
@@ -71,6 +72,7 @@ class ChannelSendProxy {
   virtual bool SendTelephoneEventOutband(int event, int duration_ms);
   virtual void SetBitrate(int bitrate_bps, int64_t probing_interval_ms);
   virtual void SetInputMute(bool muted);
+  virtual void SetSink(AudioSinkInterface* sink);
 
   virtual void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame);
   virtual void SetTransportOverhead(int transport_overhead_per_packet);
