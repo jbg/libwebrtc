@@ -70,6 +70,30 @@
       "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af59709d_3f61223a",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2018-12-19T15:32:21Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the simplest solution. I looked at alternatives, and they would be fairly large and would have to touch peerconnection too.",
+      "parentUuid": "8f315692_57d08f6e",
+      "range": {
+        "startLine": 508,
+        "startChar": 40,
+        "endLine": 508,
+        "endChar": 56
+      },
+      "revId": "4ea8c7f4d54ae027bebcd1d3615ad29056897e5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
