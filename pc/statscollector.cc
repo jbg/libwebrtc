@@ -1117,7 +1117,7 @@ absl::string_view StatsCollector::GetTrackIdBySsrc(
     RTC_LOG(LS_WARNING) << "The SSRC " << ssrc << " is not associated with a "
                         << (direction == StatsReport::kSend ? "sending"
                                                             : "receiving")
-                        << " track";
+                        << " track ID";
   }
   return track_id;
 }
