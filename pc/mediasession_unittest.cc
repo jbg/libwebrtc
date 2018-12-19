@@ -856,6 +856,67 @@ TEST_F(MediaSessionDescriptionFactoryTest, TestCreateImplicitSctpDataOffer) {
   EXPECT_EQ(cricket::kMediaProtocolSctp, data->media_description()->protocol());
 }
 
+// Test that if BUNDLE is enabled and all media sections are rejected then the
+// BUNDLE group is not present in the re-offer.
+TEST_F(MediaSessionDescriptionFactoryTest, ReOfferNoBundleGroupIfAllRejected) {
+  MediaSessionOptions opts;
+  opts.bundle_enabled = true;
+  AddMediaSection(MEDIA_TYPE_AUDIO, "audio", RtpTransceiverDirection::kSendRecv,
+                  kActive, &opts);
+  std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
+
+  opts.media_description_options[0].stopped = true;
+  std::unique_ptr<SessionDescription> reoffer =
+      f1_.CreateOffer(opts, offer.get());
+
+  EXPECT_FALSE(reoffer->GetGroupByName(cricket::GROUP_TYPE_BUNDLE));
+}
+
+// Test that if BUNDLE is enabled and the remote re-offer does not include a
+// BUNDLE group since all media sections are rejected, then the re-answer also
+// does not include a BUNDLE group.
+TEST_F(MediaSessionDescriptionFactoryTest, ReAnswerNoBundleGroupIfAllRejected) {
+  MediaSessionOptions opts;
+  opts.bundle_enabled = true;
+  AddMediaSection(MEDIA_TYPE_AUDIO, "audio", RtpTransceiverDirection::kSendRecv,
+                  kActive, &opts);
+  std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
+  std::unique_ptr<SessionDescription> answer =
+      f2_.CreateAnswer(offer.get(), opts, nullptr);
+
+  opts.media_description_options[0].stopped = true;
+  std::unique_ptr<SessionDescription> reoffer =
+      f1_.CreateOffer(opts, offer.get());
+  std::unique_ptr<SessionDescription> reanswer =
+      f2_.CreateAnswer(reoffer.get(), opts, answer.get());
+
+  EXPECT_FALSE(reanswer->GetGroupByName(cricket::GROUP_TYPE_BUNDLE));
+}
+
+// Test that if BUNDLE is enabled and the previous offerer-tagged media section
+// was rejected then the new offerer-tagged media section is the non-rejected
+// media section.
+TEST_F(MediaSessionDescriptionFactoryTest, ReOfferChangeBundleOffererTagged) {
+  MediaSessionOptions opts;
+  opts.bundle_enabled = true;
+  AddMediaSection(MEDIA_TYPE_AUDIO, "audio", RtpTransceiverDirection::kSendRecv,
+                  kActive, &opts);
+  std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
+
+  // Reject the audio m= section and add a video m= section.
+  opts.media_description_options[0].stopped = true;
+  AddMediaSection(MEDIA_TYPE_VIDEO, "video", RtpTransceiverDirection::kSendRecv,
+                  kActive, &opts);
+  std::unique_ptr<SessionDescription> reoffer =
+      f1_.CreateOffer(opts, offer.get());
+
+  const cricket::ContentGroup* bundle_group =
+      reoffer->GetGroupByName(cricket::GROUP_TYPE_BUNDLE);
+  ASSERT_TRUE(bundle_group);
+  EXPECT_FALSE(bundle_group->HasContentName("audio"));
+  EXPECT_TRUE(bundle_group->HasContentName("video"));
+}
+
 // Create an audio, video offer without legacy StreamParams.
 TEST_F(MediaSessionDescriptionFactoryTest,
        TestCreateOfferWithoutLegacyStreams) {

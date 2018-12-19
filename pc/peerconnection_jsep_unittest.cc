@@ -1604,4 +1604,17 @@ TEST_F(PeerConnectionJsepTest, OneVideoUnifiedPlanToTwoVideoPlanBFails) {
   EXPECT_EQ(RTCErrorType::INVALID_PARAMETER, error.type());
 }
 
+TEST_F(PeerConnectionJsepTest, Blah) {
+  auto caller = CreatePeerConnection();
+  auto callee = CreatePeerConnection();
+  auto audio_transceiver = caller->AddTransceiver(cricket::MEDIA_TYPE_AUDIO);
+  auto video_transceiver = caller->AddTransceiver(cricket::MEDIA_TYPE_VIDEO);
+
+  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
+
+  audio_transceiver->Stop();
+
+  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
+}
+
 }  // namespace webrtc

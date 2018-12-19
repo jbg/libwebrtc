@@ -691,12 +691,14 @@ RTCError JsepTransportController::ValidateAndMaybeUpdateBundleGroup(
   }
 
   if (ShouldUpdateBundleGroup(type, description)) {
-    const std::string* new_bundled_mid = new_bundle_group->FirstContentName();
-    if (bundled_mid() && new_bundled_mid &&
-        *bundled_mid() != *new_bundled_mid) {
-      return RTCError(RTCErrorType::UNSUPPORTED_OPERATION,
-                      "Changing the negotiated BUNDLE-tag is not supported.");
-    }
+    // const std::string* new_bundled_mid =
+    // new_bundle_group->FirstContentName(); if (bundled_mid() &&
+    // new_bundled_mid
+    // &&
+    //    *bundled_mid() != *new_bundled_mid) {
+    //  return RTCError(RTCErrorType::UNSUPPORTED_OPERATION,
+    //                  "Changing the negotiated BUNDLE-tag is not supported.");
+    //}
 
     bundle_group_ = *new_bundle_group;
   }
@@ -833,11 +835,13 @@ bool JsepTransportController::ShouldUpdateBundleGroup(
     return true;
   }
 
-  if (type != SdpType::kAnswer) {
+  // if (type != SdpType::kAnswer) {
+  //   return false;
+  // }
+  if (!local_desc_ || !remote_desc_) {
     return false;
   }
 
-  RTC_DCHECK(local_desc_ && remote_desc_);
   const cricket::ContentGroup* local_bundle =
       local_desc_->GetGroupByName(cricket::GROUP_TYPE_BUNDLE);
   const cricket::ContentGroup* remote_bundle =
