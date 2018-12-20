@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "75a70a91_177a1a2a",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T13:35:50Z",
+      "side": 1,
+      "message": "Seems to pass tests after this change. I\u0027m not sure for which tests FrameGeneratorCapturer is used. There\u0027s some potential for flakiness since frames with bad timing might get dropped, but I\u0027d consider the change to be fine until proven otherwise.",
+      "parentUuid": "299a7423_9d631634",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 60
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89ae1473_079d7158",
         "filename": "test/test_video_capturer.cc",
         "patchSetId": 1
