@@ -14,6 +14,7 @@
 #include <utility>
 
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/refcountedobject.h"
 #include "third_party/libyuv/include/libyuv/convert.h"
 #include "third_party/libyuv/include/libyuv/planar_functions.h"
@@ -224,6 +225,44 @@ void I420Buffer::CropAndScaleFrom(const I420BufferInterface& src) {
 
 void I420Buffer::ScaleFrom(const I420BufferInterface& src) {
   CropAndScaleFrom(src, 0, 0, src.width(), src.height());
+}
+
+bool I420Buffer::PasteIntoBuffer(const I420BufferInterface& picture,
+                                 int offset_col,
+                                 int offset_row) {
+  if (picture.width() + offset_col > width() ||
+      picture.height() + offset_row > height() || offset_col < 0 ||
+      offset_row < 0) {
+    RTC_LOG(LS_ERROR) << "No space in the canvas to paste the picture to";
+    return false;
+  }
+
+  if (offset_col % 2 != 0 || offset_row % 2 != 0 || picture.width() % 2 != 0 ||
+      picture.height() % 2 != 0) {
+    RTC_LOG(LS_ERROR) << "Can't paste unaligned picture to I420 buffer.";
+    return false;
+  }
+  for (int row = 0; row < picture.height(); ++row) {
+    uint8_t* canvas_y =
+        MutableDataY() + StrideY() * (offset_row + row) + offset_col;
+    const uint8_t* picture_y = picture.DataY() + picture.StrideY() * row;
+    memcpy(canvas_y, picture_y, picture.width() * sizeof(uint8_t));
+  }
+  // UV plane is scaled down by the factor of 2.
+  offset_row /= 2;
+  offset_col /= 2;
+  for (int row = 0; row < picture.ChromaHeight(); ++row) {
+    uint8_t* canvas_v =
+        MutableDataV() + StrideV() * (offset_row + row) + offset_col;
+    uint8_t* canvas_u =
+        MutableDataU() + StrideU() * (offset_row + row) + offset_col;
+    const uint8_t* picture_v = picture.DataV() + picture.StrideV() * row;
+    const uint8_t* picture_u = picture.DataU() + picture.StrideU() * row;
+    memcpy(canvas_u, picture_u, picture.ChromaWidth() * sizeof(uint8_t));
+    memcpy(canvas_v, picture_v, picture.ChromaWidth() * sizeof(uint8_t));
+  }
+
+  return true;
 }
 
 }  // namespace webrtc
