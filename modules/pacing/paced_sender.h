@@ -24,6 +24,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/utility/include/process_thread.h"
 #include "rtc_base/criticalsection.h"
+#include "rtc_base/experiments/field_trial_parser.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -198,6 +199,7 @@ class PacedSender : public Pacer {
   int64_t time_last_process_us_ RTC_GUARDED_BY(critsect_);
   int64_t last_send_time_us_ RTC_GUARDED_BY(critsect_);
   int64_t first_sent_packet_ms_ RTC_GUARDED_BY(critsect_);
+  FieldTrialParameter<int> min_packet_limit_ms_ RTC_GUARDED_BY(critsect_);
 
   RoundRobinPacketQueue packets_ RTC_GUARDED_BY(critsect_);
   uint64_t packet_counter_ RTC_GUARDED_BY(critsect_);
