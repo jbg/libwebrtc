@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7ce96fa_314ac21c",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-20T14:40:03Z",
+      "side": 1,
+      "message": "Nit: Put this along with the const parameters above, it shouldn\u0027t really be changed at runtime so it\u0027s basically const-ish.",
+      "range": {
+        "startLine": 202,
+        "startChar": 2,
+        "endLine": 202,
+        "endChar": 21
+      },
+      "revId": "065baa8c67f4586e4c8e9b135e4584010c5bcf23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
