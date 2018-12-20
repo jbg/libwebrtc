@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e42a4741_c4b86a3c",
+        "filename": "api/scoped_refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2018-12-20T10:41:18Z",
+      "side": 1,
+      "message": "using element_type \u003d T;\n\n?",
+      "revId": "eb6d80cd3329326a68ff0999037addbb0662def6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
