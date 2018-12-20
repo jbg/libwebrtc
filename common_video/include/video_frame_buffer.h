@@ -78,6 +78,15 @@ rtc::scoped_refptr<I010BufferInterface> WrapI010Buffer(
     int v_stride,
     const rtc::Callback0<void>& no_longer_used);
 
+// Pastes whole picture to canvas at (offset_row, offset_col).
+// Buffers must be the same type, kNative is not supported. For buffer types
+// with sub-sampled UV planes offsets and picture dimensions must be even.
+// Returns true on success.
+bool PasteIntoBuffer(VideoFrameBuffer* canvas,
+                     const VideoFrameBuffer& picture,
+                     int offset_col,
+                     int offset_row);
+
 }  // namespace webrtc
 
 #endif  // COMMON_VIDEO_INCLUDE_VIDEO_FRAME_BUFFER_H_

@@ -14,6 +14,7 @@
 #include "api/video/i010_buffer.h"
 #include "api/video/i420_buffer.h"
 #include "api/video/video_frame.h"
+#include "common_video/include/video_frame_buffer.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/timeutils.h"
 #include "test/fake_texture_frame.h"
@@ -226,6 +227,34 @@ void CheckRotate(int width,
   }
 }
 
+int GetU(rtc::scoped_refptr<PlanarYuvBuffer> buf, int col, int row) {
+  if (buf->type() == VideoFrameBuffer::Type::kI420) {
+    return buf->GetI420()
+        ->DataU()[row / 2 * buf->GetI420()->StrideU() + col / 2];
+  } else {
+    return buf->GetI010()
+        ->DataU()[row / 2 * buf->GetI010()->StrideU() + col / 2];
+  }
+}
+
+int GetV(rtc::scoped_refptr<PlanarYuvBuffer> buf, int col, int row) {
+  if (buf->type() == VideoFrameBuffer::Type::kI420) {
+    return buf->GetI420()
+        ->DataV()[row / 2 * buf->GetI420()->StrideV() + col / 2];
+  } else {
+    return buf->GetI010()
+        ->DataV()[row / 2 * buf->GetI010()->StrideV() + col / 2];
+  }
+}
+
+int GetY(rtc::scoped_refptr<PlanarYuvBuffer> buf, int col, int row) {
+  if (buf->type() == VideoFrameBuffer::Type::kI420) {
+    return buf->GetI420()->DataY()[row * buf->GetI420()->StrideY() + col];
+  } else {
+    return buf->GetI010()->DataY()[row * buf->GetI010()->StrideY() + col];
+  }
+}
+
 }  // namespace
 
 TEST(TestVideoFrame, WidthHeightValues) {
@@ -402,6 +431,49 @@ TEST_P(TestPlanarYuvBuffer, CropAndScale16x9) {
   rtc::scoped_refptr<PlanarYuvBuffer> scaled_buffer =
       PlanarYuvBufferFactory::CropAndScaleFrom(*buf, 320, 180);
   CheckCrop(*scaled_buffer->ToI420(), 0.0, 0.125, 1.0, 0.75);
+}
+
+TEST_P(TestPlanarYuvBuffer, PastesIntoBuffer) {
+  const int kOffset = 20;
+  const int kPicSize = 20;
+  const int kWidth = 160;
+  const int kHeight = 80;
+  rtc::scoped_refptr<PlanarYuvBuffer> buf =
+      CreateGradient(GetParam(), kWidth, kHeight);
+
+  rtc::scoped_refptr<PlanarYuvBuffer> original =
+      CreateGradient(GetParam(), kWidth, kHeight);
+
+  rtc::scoped_refptr<PlanarYuvBuffer> picture =
+      CreateGradient(GetParam(), kPicSize, kPicSize);
+
+  rtc::scoped_refptr<PlanarYuvBuffer> odd_picture =
+      CreateGradient(GetParam(), kPicSize + 1, kPicSize - 1);
+
+  // Odd dimensions are unaligned in UV plane.
+  EXPECT_FALSE(PasteIntoBuffer(buf.get(), *odd_picture, 0, 0));
+  // Can't paste with odd offset.
+  EXPECT_FALSE(PasteIntoBuffer(buf.get(), *picture, 1, 0));
+  // Can't paste Outside of the buffer.
+  EXPECT_FALSE(PasteIntoBuffer(buf.get(), *picture, kWidth - 1, kOffset));
+
+  EXPECT_TRUE(PasteIntoBuffer(buf.get(), *picture, kOffset, kOffset));
+
+  for (int i = 0; i < kWidth; ++i) {
+    for (int j = 0; j < kHeight; ++j) {
+      bool is_inside = i >= kOffset && i < kOffset + kPicSize && j >= kOffset &&
+                       j < kOffset + kPicSize;
+      if (!is_inside) {
+        EXPECT_EQ(GetU(original, i, j), GetU(buf, i, j));
+        EXPECT_EQ(GetV(original, i, j), GetV(buf, i, j));
+        EXPECT_EQ(GetY(original, i, j), GetY(buf, i, j));
+      } else {
+        EXPECT_EQ(GetU(picture, i - kOffset, j - kOffset), GetU(buf, i, j));
+        EXPECT_EQ(GetV(picture, i - kOffset, j - kOffset), GetV(buf, i, j));
+        EXPECT_EQ(GetY(picture, i - kOffset, j - kOffset), GetY(buf, i, j));
+      }
+    }
+  }
 }
 
 INSTANTIATE_TEST_CASE_P(,

@@ -102,6 +102,7 @@ class PlanarYuvBuffer : public VideoFrameBuffer {
 // Type::kI420A and Type::kI444.
 class PlanarYuv8Buffer : public PlanarYuvBuffer {
  public:
+  typedef uint8_t DataType;
   // Returns pointer to the pixel data for a given plane. The memory is owned by
   // the VideoFrameBuffer object and must not be freed by the caller.
   virtual const uint8_t* DataY() const = 0;
@@ -149,6 +150,7 @@ class I444BufferInterface : public PlanarYuv8Buffer {
 // This interface represents 8-bit to 16-bit color depth formats: Type::kI010.
 class PlanarYuv16BBuffer : public PlanarYuvBuffer {
  public:
+  typedef uint16_t DataType;
   // Returns pointer to the pixel data for a given plane. The memory is owned by
   // the VideoFrameBuffer object and must not be freed by the caller.
   virtual const uint16_t* DataY() const = 0;

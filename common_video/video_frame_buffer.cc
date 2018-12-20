@@ -11,6 +11,7 @@
 
 #include "api/video/i420_buffer.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/refcountedobject.h"
 #include "third_party/libyuv/include/libyuv/convert.h"
 
@@ -195,6 +196,37 @@ rtc::scoped_refptr<I420BufferInterface> I010BufferBase::ToI420() {
   return i420_buffer;
 }
 
+template <typename PlanarBufferType>
+void CopyYUV(PlanarBufferType* canvas,
+             const PlanarBufferType* picture,
+             int offset_row,
+             int offset_col) {
+  const int chroma_scale = picture->ChromaWidth() == picture->width() ? 1 : 2;
+  RTC_DCHECK_EQ(picture->width() + picture->width() % chroma_scale,
+                picture->ChromaWidth() * chroma_scale);
+
+  typedef typename PlanarBufferType::DataType DataType;
+
+  for (int row = 0; row < picture->height(); ++row) {
+    DataType* canvas_y = const_cast<DataType*>(canvas->DataY()) +
+                         canvas->StrideY() * (offset_row + row) + offset_col;
+    const DataType* picture_y = picture->DataY() + picture->StrideY() * row;
+    memcpy(canvas_y, picture_y, picture->width() * sizeof(DataType));
+  }
+  offset_row /= chroma_scale;
+  offset_col /= chroma_scale;
+  for (int row = 0; row < picture->ChromaHeight(); ++row) {
+    DataType* canvas_v = const_cast<DataType*>(canvas->DataV()) +
+                         canvas->StrideV() * (offset_row + row) + offset_col;
+    const DataType* picture_v = picture->DataV() + picture->StrideV() * row;
+    DataType* canvas_u = const_cast<DataType*>(canvas->DataU()) +
+                         canvas->StrideU() * (offset_row + row) + offset_col;
+    const DataType* picture_u = picture->DataU() + picture->StrideU() * row;
+    memcpy(canvas_u, picture_u, picture->ChromaWidth() * sizeof(DataType));
+    memcpy(canvas_v, picture_v, picture->ChromaWidth() * sizeof(DataType));
+  }
+}
+
 }  // namespace
 
 rtc::scoped_refptr<I420BufferInterface> WrapI420Buffer(
@@ -285,6 +317,70 @@ rtc::scoped_refptr<I010BufferInterface> WrapI010Buffer(
       new rtc::RefCountedObject<WrappedYuv16BBuffer<I010BufferBase>>(
           width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
           v_stride, no_longer_used));
+}
+
+bool PasteIntoBuffer(VideoFrameBuffer* canvas,
+                     const VideoFrameBuffer& picture,
+                     int offset_col,
+                     int offset_row) {
+  if (canvas->type() != picture.type()) {
+    RTC_LOG(LS_ERROR) << "Can't paste into a buffer of different type.";
+    return false;
+  }
+  if (picture.type() == VideoFrameBuffer::Type::kNative) {
+    RTC_LOG(LS_ERROR) << "Can't paste into a Native buffer.";
+    return false;
+  }
+
+  if (picture.width() + offset_col > canvas->width() ||
+      picture.height() + offset_row > canvas->height() || offset_col < 0 ||
+      offset_row < 0) {
+    RTC_LOG(LS_ERROR) << "No space in the canvas to paste the picture to";
+    return false;
+  }
+
+  if ((picture.type() == VideoFrameBuffer::Type::kI420 ||
+       picture.type() == VideoFrameBuffer::Type::kI420A ||
+       picture.type() == VideoFrameBuffer::Type::kI010) &&
+      (offset_col % 2 != 0 || offset_row % 2 != 0 || picture.width() % 2 != 0 ||
+       picture.height() % 2 != 0)) {
+    RTC_LOG(LS_ERROR) << "Can't paste unaligned picture to I420 buffer.";
+    return false;
+  }
+
+  switch (picture.type()) {
+    case VideoFrameBuffer::Type::kNative:
+      break;
+    case VideoFrameBuffer::Type::kI420: {
+      CopyYUV<PlanarYuv8Buffer>(canvas->GetI420(), picture.GetI420(),
+                                offset_row, offset_col);
+    } break;
+    case VideoFrameBuffer::Type::kI420A: {
+      I420ABufferInterface* canvas_ptr = canvas->GetI420A();
+      const I420ABufferInterface* picture_ptr = picture.GetI420A();
+
+      for (int row = 0; row < picture_ptr->height(); ++row) {
+        uint8_t* canvas_a = const_cast<uint8_t*>(canvas_ptr->DataA()) +
+                            canvas_ptr->StrideA() * (offset_row + row) +
+                            offset_col;
+        const uint8_t* picture_a =
+            picture_ptr->DataA() + picture_ptr->StrideA() * row;
+        memcpy(canvas_a, picture_a, picture_ptr->width());
+      }
+
+      CopyYUV<PlanarYuv8Buffer>(canvas_ptr, picture_ptr, offset_row,
+                                offset_col);
+    } break;
+    case VideoFrameBuffer::Type::kI444: {
+      CopyYUV<PlanarYuv8Buffer>(canvas->GetI444(), picture.GetI444(),
+                                offset_row, offset_col);
+    } break;
+    case VideoFrameBuffer::Type::kI010: {
+      CopyYUV<PlanarYuv16BBuffer>(canvas->GetI010(), picture.GetI010(),
+                                  offset_row, offset_col);
+    } break;
+  }
+  return true;
 }
 
 }  // namespace webrtc
