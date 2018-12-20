@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84188caf_39bcffff",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T12:02:11Z",
+      "side": 1,
+      "message": "Redundant qualification, but to clarify that it\u0027s the base class\u0027 method.",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 23
+      },
+      "revId": "3bf3cf23d5bd4923e9cfbce678db297288c69ba3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

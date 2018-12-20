@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "263fe3b6_3ebab452",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T12:02:11Z",
+      "side": 1,
+      "message": "To improve this, one would either need to have a mapping sink -\u003e max_fps in this class, or pass max fps on to TestVideoCapturer but somehow arrange the call to OnResolutionFrameRateRequest (currently in TestVideoCapturer::UpdateVideoAdapter) to never restrict frame rate. Hmm, maybe one could do it by overriding GetSinkWants, but I\u0027m not sure it\u0027s worth the effort in this cl.\n\nIn offline discussion, you suggested deleting the inherit of TestVideoCapturer; if we do, it also affects how to address this TODO item.",
+      "parentUuid": "64f29248_69411a2b",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 60
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89ae1473_079d7158",
         "filename": "test/test_video_capturer.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "873e320a_b86e6627",
+        "filename": "test/test_video_capturer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T12:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89ae1473_079d7158",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 1
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0b42ecc_fc7680ff",
         "filename": "test/test_video_capturer.h",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-12-20T10:34:39Z",
       "side": 1,
       "message": "Since this no longer just adapts the frame i suggest renaming it to something like OnFrame, HandleFrame or DispatchFrame.",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c0365fe_0e09fd6d",
+        "filename": "test/test_video_capturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T12:02:11Z",
+      "side": 1,
+      "message": "Renamed to OnFrame (and deleted the old method with that name, as suggested).",
+      "parentUuid": "c0b42ecc_fc7680ff",
       "range": {
         "startLine": 35,
         "startChar": 7,
