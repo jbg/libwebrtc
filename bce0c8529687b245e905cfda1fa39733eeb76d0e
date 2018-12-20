@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "70ea08ca_2a75b007",
+        "filename": "common_video/video_frame_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T15:08:56Z",
+      "side": 1,
+      "message": "I really don\u0027t think it\u0027s appropriate. The same VideoFrameBuffer may be passed to several users (that\u0027s why it\u0027s reference counted). You must know you\u0027re the exclusive owner of the frame buffer before you modify it, and the easy way to be sure of that is to create a fresh I420Buffer.\n\nSo the component that wants to do this copying must own the canvas it is drawing to, and if it uses a I420Buffer to represent the canvas, the MutableData* methods are available.\n\nI can see some possible optimizations, but for a start, I would recommend to keep an I420Buffer as a canvas that is exclusively owned and drawn into. And to minimize surprises downstream the pipeline, make a copy (I420Buffer::Copy) when passing it downstream as an immutable frame buffer.",
+      "parentUuid": "004e7be5_62388899",
+      "range": {
+        "startLine": 219,
+        "startChar": 25,
+        "endLine": 219,
+        "endChar": 63
+      },
+      "revId": "bce0c8529687b245e905cfda1fa39733eeb76d0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "390d5108_c906f89c",
         "filename": "common_video/video_frame_buffer.cc",
         "patchSetId": 1
