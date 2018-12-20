@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "299a7423_9d631634",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T12:47:00Z",
+      "side": 1,
+      "message": "Attempting to delete special handling; telling the VideoAdapter the intended frame rate shouldn\u0027t cause it to drop any frames.",
+      "parentUuid": "263fe3b6_3ebab452",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 60
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89ae1473_079d7158",
         "filename": "test/test_video_capturer.cc",
         "patchSetId": 1
