@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64f29248_69411a2b",
+        "filename": "test/frame_generator_capturer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-20T10:34:39Z",
+      "side": 1,
+      "message": "Maybe we should CHECK that the other winks doesn\u0027t have any wants? I\u0027m thinking it can be quite confusing otherwise?",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 60
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89ae1473_079d7158",
+        "filename": "test/test_video_capturer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-20T10:34:39Z",
+      "side": 1,
+      "message": "I suggest removing this method and in-lining this instead.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 1
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0b42ecc_fc7680ff",
+        "filename": "test/test_video_capturer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2018-12-20T10:34:39Z",
+      "side": 1,
+      "message": "Since this no longer just adapts the frame i suggest renaming it to something like OnFrame, HandleFrame or DispatchFrame.",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "987c08cee2f3cffe45d77735e0ff82792f9a9f5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
