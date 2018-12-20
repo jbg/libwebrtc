@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b194262f_e60e8968",
+        "filename": "common_video/video_frame_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T14:17:37Z",
+      "side": 1,
+      "message": "Please don\u0027t; the MutableDataV() accessor should be available on the types intended to be mutable.",
+      "range": {
+        "startLine": 219,
+        "startChar": 25,
+        "endLine": 219,
+        "endChar": 63
+      },
+      "revId": "bce0c8529687b245e905cfda1fa39733eeb76d0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "390d5108_c906f89c",
+        "filename": "common_video/video_frame_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-20T14:17:37Z",
+      "side": 1,
+      "message": "Prefer libyuv copying functions, and destination frame buffers with plain layout. E.g., the clever uv interleaving layout produced when converting android textures to I420 works fine to read from, but will likely break when written to.",
+      "range": {
+        "startLine": 225,
+        "startChar": 4,
+        "endLine": 225,
+        "endChar": 10
+      },
+      "revId": "bce0c8529687b245e905cfda1fa39733eeb76d0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
