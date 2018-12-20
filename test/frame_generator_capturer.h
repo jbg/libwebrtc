@@ -70,7 +70,6 @@ class FrameGeneratorCapturer : public TestVideoCapturer {
 
   void AddOrUpdateSink(rtc::VideoSinkInterface<VideoFrame>* sink,
                        const rtc::VideoSinkWants& wants) override;
-  void RemoveSink(rtc::VideoSinkInterface<VideoFrame>* sink) override;
 
   void ForceFrame();
   void SetFakeRotation(VideoRotation rotation);
@@ -92,7 +91,6 @@ class FrameGeneratorCapturer : public TestVideoCapturer {
 
   Clock* const clock_;
   bool sending_;
-  rtc::VideoSinkInterface<VideoFrame>* sink_ RTC_GUARDED_BY(&lock_);
   SinkWantsObserver* sink_wants_observer_ RTC_GUARDED_BY(&lock_);
 
   rtc::CriticalSection lock_;
