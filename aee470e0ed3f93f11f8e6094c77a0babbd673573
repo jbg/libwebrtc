@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e12dc7f2_fcafa97a",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-12-21T12:17:36Z",
+      "side": 1,
+      "message": "Not needed because this code is removed now.",
+      "parentUuid": "22454dc3_3f648591",
+      "range": {
+        "startLine": 400,
+        "startChar": 12,
+        "endLine": 400,
+        "endChar": 20
+      },
+      "revId": "aee470e0ed3f93f11f8e6094c77a0babbd673573",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "719e05d4_151ac84a",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-12-21T11:23:18Z",
       "side": 1,
       "message": "I find these expectations overfitting: may be check less:\n  ASSERT_THAT(packets, SizeIs(3));\n  // Expect first 3 fragments to be aggregated.\n  EXPECT_EQ(packets[0].payload()[0], kStapA);\n  // And last fragment to be fragmented into two.\n  EXPECT_EQ(packets[1].payload()[0], kFuA);\n  EXPECT_EQ(packets[2].payload()[0], kFuA);\n\n  EXPECT_LE(static_cast\u003cint\u003e(packets[0].payload_size()),\n            limits.max_payload_len - limits.first_packet_reduction_len);\n  EXPECT_LE(static_cast\u003cint\u003e(packets[1].payload_size()),\n            limits.max_payload_len);\n  EXPECT_LE(static_cast\u003cint\u003e(packets[2].payload_size()),\n            limits.max_payload_len - limits.last_packet_reduction_len);\n\n\nOr even reduce to the one expectation to stress point of the test:\n\n  EXPECT_LE(static_cast\u003cint\u003e(packets.back().payload_size()),\n            limits.max_payload_len - limits.last_packet_reduction_len);",
+      "range": {
+        "startLine": 397,
+        "startChar": 0,
+        "endLine": 412,
+        "endChar": 71
+      },
+      "revId": "aee470e0ed3f93f11f8e6094c77a0babbd673573",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b5b49f9_c0bf4bba",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-12-21T12:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "719e05d4_151ac84a",
       "range": {
         "startLine": 397,
         "startChar": 0,
