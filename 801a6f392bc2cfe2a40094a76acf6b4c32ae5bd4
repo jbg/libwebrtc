@@ -22,6 +22,30 @@
       "revId": "801a6f392bc2cfe2a40094a76acf6b4c32ae5bd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddaabcf4_99557c54",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2018-12-21T10:21:31Z",
+      "side": 1,
+      "message": "GetI010 in all the \u0027else\u0027 parts of the new code already has a RTC_CHECK on that.",
+      "parentUuid": "92ea7d64_b8a39645",
+      "range": {
+        "startLine": 264,
+        "startChar": 4,
+        "endLine": 264,
+        "endChar": 10
+      },
+      "revId": "801a6f392bc2cfe2a40094a76acf6b4c32ae5bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
