@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "31df02ac_4558f5d2",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-21T17:24:43Z",
+      "side": 1,
+      "message": "it didn\u0027t work for me at first, but i guess that was before i declared the vector as const.\nFixed.",
+      "parentUuid": "53d1182d_a5304288",
+      "range": {
+        "startLine": 1359,
+        "startChar": 2,
+        "endLine": 1359,
+        "endChar": 71
+      },
+      "revId": "659844420a4b4b545aebff8d4519587aa5dd7c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b8d95db_141e2326",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "659844420a4b4b545aebff8d4519587aa5dd7c35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46b03872_3c9f14ce",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2018-12-21T17:24:43Z",
+      "side": 1,
+      "message": "Yes. There is a comment explaining why both the MID and RID headers are still set here just above both if blocks.",
+      "parentUuid": "3b8d95db_141e2326",
+      "revId": "659844420a4b4b545aebff8d4519587aa5dd7c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
