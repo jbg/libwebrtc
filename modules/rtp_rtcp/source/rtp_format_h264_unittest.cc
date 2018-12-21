@@ -379,6 +379,39 @@ TEST(RtpPacketizerH264Test, MixedStapAFUA) {
               ElementsAreArray(next_fragment, kStapANaluSize));
 }
 
+TEST(RtpPacketizerH264Test, LastFragmentFitsInSingleButNotLastPacket) {
+  RtpPacketizer::PayloadSizeLimits limits;
+  limits.max_payload_len = 1178;
+  limits.first_packet_reduction_len = 0;
+  limits.last_packet_reduction_len = 20;
+  limits.single_packet_reduction_len = 20;
+  // Actual sizes, which triggered this bug.
+  size_t fragments[] = {20, 8, 18, 1161};
+  RTPFragmentationHeader fragmentation = CreateFragmentation(fragments);
+  rtc::Buffer frame = CreateFrame(fragmentation);
+
+  RtpPacketizerH264 packetizer(
+      frame, limits, H264PacketizationMode::NonInterleaved, fragmentation);
+  std::vector<RtpPacketToSend> packets = FetchAllPackets(&packetizer);
+
+  ASSERT_THAT(packets, SizeIs(3));
+  // First expect one STAP-A packet.
+  EXPECT_THAT(packets[0].payload()[0], kStapA);
+  EXPECT_LE((signed)packets[0].payload_size(), limits.max_payload_len);
+
+  // Then expect two FU-A packets.
+  EXPECT_THAT(
+      packets[1].payload().subview(0, kFuAHeaderSize),
+      ElementsAre(kFuA, FuDefs::kSBit | frame[fragmentation.Offset(3)]));
+  EXPECT_LE((signed)packets[1].payload_size(), limits.max_payload_len);
+
+  EXPECT_THAT(
+      packets[2].payload().subview(0, kFuAHeaderSize),
+      ElementsAre(kFuA, FuDefs::kEBit | frame[fragmentation.Offset(3)]));
+  EXPECT_LE((signed)packets[2].payload_size(),
+            limits.max_payload_len - limits.last_packet_reduction_len);
+}
+
 // Splits frame with payload size |frame_payload_size| without fragmentation,
 // Returns sizes of the payloads excluding fua headers.
 std::vector<int> TestFua(size_t frame_payload_size,
