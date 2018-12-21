@@ -22,7 +22,7 @@ namespace webrtc {
 
 namespace {
 const int kMinFrameSamplesToDetectFreeze = 5;
-const int kMinCallDurationMs = 3000;
+const int kMinVideoDurationMs = 3000;
 const int kMinRequiredSamples = 1;
 const int kMinIncreaseForFreezeMs = 150;
 const int kPixelsInHighResolution = 960 * 540;  // CPU-adapted HD still counts.
@@ -37,7 +37,7 @@ VideoQualityObserver::VideoQualityObserver(VideoContentType content_type)
       last_frame_rendered_ms_(-1),
       num_frames_decoded_(0),
       num_frames_rendered_(0),
-      first_frame_decoded_ms_(-1),
+      first_frame_rendered_ms_(-1),
       last_frame_pixels_(0),
       last_frame_qp_(0),
       last_unfreeze_time_(0),
@@ -61,8 +61,8 @@ void VideoQualityObserver::UpdateHistograms() {
   char log_stream_buf[2 * 1024];
   rtc::SimpleStringBuilder log_stream(log_stream_buf);
 
-  if (last_frame_decoded_ms_ > last_unfreeze_time_) {
-    smooth_playback_durations_.Add(last_frame_decoded_ms_ -
+  if (last_frame_rendered_ms_ > last_unfreeze_time_) {
+    smooth_playback_durations_.Add(last_frame_rendered_ms_ -
                                    last_unfreeze_time_);
   }
 
@@ -86,25 +86,26 @@ void VideoQualityObserver::UpdateHistograms() {
                << "\n";
   }
 
-  int64_t call_duration_ms = last_frame_decoded_ms_ - first_frame_decoded_ms_;
+  int64_t video_duration_ms =
+      last_frame_rendered_ms_ - first_frame_rendered_ms_;
 
-  if (call_duration_ms >= kMinCallDurationMs) {
+  if (video_duration_ms >= kMinVideoDurationMs) {
     int time_spent_in_hd_percentage = static_cast<int>(
-        time_in_resolution_ms_[Resolution::High] * 100 / call_duration_ms);
+        time_in_resolution_ms_[Resolution::High] * 100 / video_duration_ms);
     RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".TimeInHdPercentage",
                                     time_spent_in_hd_percentage);
     log_stream << uma_prefix << ".TimeInHdPercentage "
                << time_spent_in_hd_percentage << "\n";
 
     int time_with_blocky_video_percentage =
-        static_cast<int>(time_in_blocky_video_ms_ * 100 / call_duration_ms);
+        static_cast<int>(time_in_blocky_video_ms_ * 100 / video_duration_ms);
     RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".TimeInBlockyVideoPercentage",
                                     time_with_blocky_video_percentage);
     log_stream << uma_prefix << ".TimeInBlockyVideoPercentage "
                << time_with_blocky_video_percentage << "\n";
 
     int num_resolution_downgrades_per_minute =
-        num_resolution_downgrades_ * 60000 / call_duration_ms;
+        num_resolution_downgrades_ * 60000 / video_duration_ms;
     RTC_HISTOGRAM_COUNTS_SPARSE_100(
         uma_prefix + ".NumberResolutionDownswitchesPerMinute",
         num_resolution_downgrades_per_minute);
@@ -112,7 +113,7 @@ void VideoQualityObserver::UpdateHistograms() {
                << num_resolution_downgrades_per_minute << "\n";
 
     int num_freezes_per_minute =
-        freezes_durations_.NumSamples() * 60000 / call_duration_ms;
+        freezes_durations_.NumSamples() * 60000 / video_duration_ms;
     RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".NumberFreezesPerMinute",
                                     num_freezes_per_minute);
     log_stream << uma_prefix << ".NumberFreezesPerMinute "
@@ -123,7 +124,7 @@ void VideoQualityObserver::UpdateHistograms() {
 
 void VideoQualityObserver::OnRenderedFrame(int64_t now_ms) {
   if (num_frames_rendered_ == 0) {
-    last_unfreeze_time_ = now_ms;
+    first_frame_rendered_ms_ = last_unfreeze_time_ = now_ms;
   }
 
   ++num_frames_rendered_;
@@ -166,10 +167,6 @@ void VideoQualityObserver::OnDecodedFrame(absl::optional<uint8_t> qp,
                                           int height,
                                           int64_t now_ms,
                                           VideoCodecType codec) {
-  if (num_frames_decoded_ == 0) {
-    first_frame_decoded_ms_ = now_ms;
-  }
-
   ++num_frames_decoded_;
 
   if (!is_paused_ && num_frames_decoded_ > 1) {

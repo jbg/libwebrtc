@@ -52,7 +52,7 @@ class VideoQualityObserver {
   int64_t last_frame_rendered_ms_;
   int64_t num_frames_decoded_;
   int64_t num_frames_rendered_;
-  int64_t first_frame_decoded_ms_;
+  int64_t first_frame_rendered_ms_;
   int64_t last_frame_pixels_;
   uint8_t last_frame_qp_;
   // Decoded timestamp of the last delayed frame.
