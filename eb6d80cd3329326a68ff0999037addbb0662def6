@@ -16,6 +16,24 @@
       "revId": "eb6d80cd3329326a68ff0999037addbb0662def6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "027fa904_05477cd3",
+        "filename": "api/scoped_refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2018-12-21T23:37:15Z",
+      "side": 1,
+      "message": "I\u0027m guessing it works either way, but both the libc++ smart pointers and Chrome scoped_refptr use typedef, so I\u0027ll leave it as-is to be consistent with them.",
+      "parentUuid": "e42a4741_c4b86a3c",
+      "revId": "eb6d80cd3329326a68ff0999037addbb0662def6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
