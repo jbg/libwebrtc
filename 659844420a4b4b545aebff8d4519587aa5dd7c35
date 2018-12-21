@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53d1182d_a5304288",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-21T12:34:23Z",
+      "side": 1,
+      "message": "ArrayView has implicit conversion from containers like std::vector (one of the main points of it), so you can write just\nrtx_packet-\u003eSetCsrcs(csrcs);",
+      "range": {
+        "startLine": 1359,
+        "startChar": 2,
+        "endLine": 1359,
+        "endChar": 71
+      },
+      "revId": "659844420a4b4b545aebff8d4519587aa5dd7c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b8d95db_141e2326",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-21T12:34:23Z",
+      "side": 1,
+      "message": "still need this block?",
+      "revId": "659844420a4b4b545aebff8d4519587aa5dd7c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
