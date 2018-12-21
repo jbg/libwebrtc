@@ -84,8 +84,6 @@ class FrameGeneratorCapturer : public TestVideoCapturer {
   bool Init();
 
  private:
-  class InsertFrameTask;
-
   void InsertFrame();
   static bool Run(void* obj);
   int GetCurrentConfiguredFramerate();
@@ -105,6 +103,7 @@ class FrameGeneratorCapturer : public TestVideoCapturer {
   absl::optional<ColorSpace> fake_color_space_ RTC_GUARDED_BY(&lock_);
 
   int64_t first_frame_capture_time_;
+
   // Must be the last field, so it will be deconstructed first as tasks
   // in the TaskQueue access other fields of the instance of this class.
   rtc::TaskQueue task_queue_;
