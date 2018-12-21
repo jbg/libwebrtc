@@ -820,6 +820,10 @@ void ModuleRtpRtcpImpl::BitrateSent(uint32_t* total_rate,
   *nack_rate = rtp_sender_->NackOverheadRate();
 }
 
+uint32_t ModuleRtpRtcpImpl::PacketizationOverheadBps() const {
+  return rtp_sender_->PacketizationOverheadBps();
+}
+
 void ModuleRtpRtcpImpl::OnRequestSendReport() {
   SendRTCP(kRtcpSr);
 }

@@ -482,6 +482,16 @@ bool RtpVideoSender::NackEnabled() const {
   return nack_enabled;
 }
 
+uint32_t RtpVideoSender::GetPacketizationOverheadRate() const {
+  uint32_t packetization_overhead_bps = 0;
+  for (auto& rtp_rtcp : rtp_modules_) {
+    if (rtp_rtcp->SendingMedia()) {
+      packetization_overhead_bps += rtp_rtcp->PacketizationOverheadBps();
+    }
+  }
+  return packetization_overhead_bps;
+}
+
 void RtpVideoSender::DeliverRtcp(const uint8_t* packet, size_t length) {
   // Runs on a network thread.
   for (auto& rtp_rtcp : rtp_modules_)
@@ -612,6 +622,14 @@ void RtpVideoSender::OnBitrateUpdated(uint32_t bitrate_bps,
   // protection overhead.
   encoder_target_rate_bps_ = fec_controller_->UpdateFecRates(
       payload_bitrate_bps, framerate, fraction_loss, loss_mask_vector_, rtt);
+
+  // Subtract packetization overhead from the encoder target. If rate is really
+  // low, cap the overhead at 50%.
+  uint32_t packetization_rate_bps = GetPacketizationOverheadRate();
+  encoder_target_rate_bps_ =
+      std::max(encoder_target_rate_bps_ - packetization_rate_bps,
+               encoder_target_rate_bps_ / 2);
+
   loss_mask_vector_.clear();
 
   uint32_t encoder_overhead_rate_bps =
