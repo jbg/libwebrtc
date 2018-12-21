@@ -59,6 +59,11 @@ int32_t RtpRtcp::SetFecParameters(const FecProtectionParams* delta_params,
   return SetFecParameters(*delta_params, *key_params) ? 0 : -1;
 }
 
+// TODO(webrtc:10155): Remove when downstream project has updated.
+uint32_t RtpRtcp::PacketizationOverheadBps() const {
+  return 0;
+}
+
 ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
     : rtcp_sender_(configuration.audio,
                    configuration.clock,
@@ -818,6 +823,10 @@ void ModuleRtpRtcpImpl::BitrateSent(uint32_t* total_rate,
   *video_rate = rtp_sender_->VideoBitrateSent();
   *fec_rate = rtp_sender_->FecOverheadRate();
   *nack_rate = rtp_sender_->NackOverheadRate();
+}
+
+uint32_t ModuleRtpRtcpImpl::PacketizationOverheadBps() const {
+  return rtp_sender_->PacketizationOverheadBps();
 }
 
 void ModuleRtpRtcpImpl::OnRequestSendReport() {
