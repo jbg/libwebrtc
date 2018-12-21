@@ -234,8 +234,12 @@ uint32_t RTPSender::FecOverheadRate() const {
 }
 
 uint32_t RTPSender::NackOverheadRate() const {
-  rtc::CritScope cs(&statistics_crit_);
+  rtc::CritScope lock(&statistics_crit_);
   return nack_bitrate_sent_.Rate(clock_->TimeInMilliseconds()).value_or(0);
+}
+
+uint32_t RTPSender::PacketizationOverheadBps() const {
+  return video_ ? video_->PacketizationOverheadBps() : 0;
 }
 
 void RTPSender::SetExtmapAllowMixed(bool extmap_allow_mixed) {
